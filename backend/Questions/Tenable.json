@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Tenable", 
+  "questions": [
+    {
+    "question": "What is the primary function of Tenable Nessus?",
+    "options": {
+      "A": "To act as a physical firewall for home offices.",
+      "B": "To perform vulnerability scanning and identify security weaknesses in assets.",
+      "C": "To automatically generate marketing copy for software companies.",
+      "D": "To replace the need for physical server backups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Tenable.io is a cloud-native vulnerability management platform, while Tenable.sc is typically managed on-premises.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Tenable, what does 'VPR' stand for?",
+    "options": {
+      "A": "Virtual Private Routing",
+      "B": "Vulnerability Priority Rating",
+      "C": "Verified Plugin Repository",
+      "D": "Visual Packet Recorder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Tenable tool is used to perform high-speed asset discovery and vulnerability assessment without needing credentials?",
+    "options": {
+      "A": "Nessus Network Monitor (NNM)",
+      "B": "Nessus Professional (Basic Scan)",
+      "C": "A specialized software for architects to design offices.",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Severity Levels' in Tenable reports? (Select all that apply)",
+    "options": {
+      "A": "Critical",
+      "B": "High",
+      "C": "Medium",
+      "D": "Extreme"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a Tenable 'Plugin'?",
+    "options": {
+      "A": "A physical power adapter for a scanner appliance.",
+      "B": "A technical script used to identify a specific vulnerability or gather asset data.",
+      "C": "A specialized tool for measuring light levels in data centers.",
+      "D": "A SQL query used to delete old scan results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Authenticated Scan' (Credentialed Scan) provides more accurate results than an 'Unauthenticated Scan'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Tenable terminology, what is an 'Asset'?",
+    "options": {
+      "A": "Any IP-addressable device (server, laptop, IoT) being monitored for vulnerabilities.",
+      "B": "A physical desk or chair in the office.",
+      "C": "A specialized software for poets.",
+      "D": "A way to increase the frame rate of a video call."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Nessus Agent'?",
+    "options": {
+      "A": "To physically guard the server room door.",
+      "B": "Software installed on an asset that performs local scans and sends results to a central manager.",
+      "C": "A specialized tool for measuring distance between scanners.",
+      "D": "To manage the company's social media accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Blackout Window' is a scheduled time when scanning is strictly prohibited to prevent performance impact on production systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'CVSS' score used in Tenable?",
+    "options": {
+      "A": "A measure of the physical weight of a server rack.",
+      "B": "A standard technical framework for rating the severity of software vulnerabilities.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Recast Rule' in Tenable? (Select all that apply)",
+    "options": {
+      "A": "Manually changing the severity of a specific vulnerability for reporting purposes",
+      "B": "A report on the physical paint color of the appliance",
+      "C": "Used to reflect compensating controls that lower real-world risk",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Discovery' scanning?",
+    "options": {
+      "A": "The initial technical phase of identifying which IP addresses are active on a network.",
+      "B": "Discovering a new physical office location.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Tenable.io can technically track assets using their 'MAC Address' or 'BIOS UUID' rather than just an IP address.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tenable Lumin' used for?",
+    "options": {
+      "A": "Visualizing and benchmarking cyber risk across the entire organization.",
+      "B": "A physical lightbulb for the server room.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Plugin ID'?",
+    "options": {
+      "A": "A unique numerical identifier assigned to a specific vulnerability check in Nessus.",
+      "B": "A physical ID card for a Nessus engineer.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Nessus is a 'Passive' scanner by default, meaning it only listens to traffic without sending any packets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Remediation' in the Tenable workflow?",
+    "options": {
+      "A": "Sewing physical patches onto the IT team's uniforms.",
+      "B": "The process of fixing or mitigating identified vulnerabilities (e.g., applying a patch).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Vulnerability Summary'?",
+    "options": {
+      "A": "A high-level view of all security risks found during a scan, grouped by severity.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Port Scanning' is the technical process of identifying which services (like Web or SSH) are running on an asset.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Scan Templates' in Tenable? (Select all that apply)",
+    "options": {
+      "A": "Basic Network Scan",
+      "B": "Advanced Network Scan",
+      "C": "Buying physical snacks for the SOC team",
+      "D": "Web Application Tests"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is an 'Accept Rule' (Risk Acceptance)?",
+    "options": {
+      "A": "A technical setting to acknowledge a vulnerability and hide it from future reports without fixing it.",
+      "B": "Accepting a person's job application.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Asset Tagging'?",
+    "options": {
+      "A": "Using labels (like 'Production' or 'Linux') to logically group and manage assets for scanning and reporting.",
+      "B": "Physically tagging a computer with a sticker.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The Nessus 'Scanner' must be physically located in the same building as the assets it is scanning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' Scan Scheduling benefits? (Select all that apply)",
+    "options": {
+      "A": "Regular assessments without manual intervention",
+      "B": "Ensuring scans run during low-traffic off-hours",
+      "C": "Guaranteed to fix all vulnerabilities instantly",
+      "D": "Consistent visibility into security posture changes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'CVE' technically defined as?",
+    "options": {
+      "A": "A physical door that is stuck shut.",
+      "B": "Common Vulnerabilities and Exposures: a list of publicly disclosed cybersecurity vulnerabilities.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediate' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a vulnerability being detected until it is verified as fixed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in VMDR occurs when a company expects Severity 5 patches in 24 hours but only scans assets once a month.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid Tenable 'Deployment' types? (Select all that apply)",
+    "options": {
+      "A": "SaaS (Tenable.io)",
+      "B": "On-Premises (Tenable.sc)",
+      "C": "The SQL query parser",
+      "D": "Hybrid (Managing cloud and local assets together)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Asset Criticality' (ACR)?",
+    "options": {
+      "A": "Building a physical bridge for a social event.",
+      "B": "A rating that represents how important a specific asset is to the business (e.g., High for a Web Server, Low for a printer).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Vulnerability Overlap'?",
+    "options": {
+      "A": "When the same vulnerability is identified by multiple scan engines (e.g., Agent and Network Scanner).",
+      "B": "Hiring a person named Overlap.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Dashboard' in Tenable is a real-time visual representation of scan results and risk levels.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Tenable.io' Asset Management? (Select all that apply)",
+    "options": {
+      "A": "Automatically merging duplicate asset records",
+      "B": "Tracking cloud instances in AWS/Azure/GCP",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Identifying 'Rogue' devices on the network"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'WASM' in the Tenable portfolio?",
+    "options": {
+      "A": "Web Application Scanning - a specialized module for detecting vulnerabilities in web-based code.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Top 10 Most Vulnerable Assets'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A common dashboard widget that highlights the devices with the highest aggregate risk scores.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an IT admin expects scan results to update 1 second after fixing a patch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Tenable integrations? (Select all that apply)",
+    "options": {
+      "A": "ServiceNow (Ticketing)",
+      "B": "Splunk (SIEM)",
+      "C": "CyberArk (Vault)",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Container Security' in Tenable?",
+    "options": {
+      "A": "Scanning physical shipping containers.",
+      "B": "The technical practice of scanning Docker/Kubernetes images for vulnerabilities during the development process.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD) a vulnerability?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when a vulnerability is released until Tenable identifies it in your environment.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a scanner is configured to scan the internal network but is physically blocked by an external firewall.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Tenable' Administrator training? (Select all that apply)",
+    "options": {
+      "A": "Learning how to configure Scan Zones",
+      "B": "Simulating large-scale enterprise deployments",
+      "C": "Identifying program satisfaction trends",
+      "D": "Understanding Plugin update logic"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Credentialed' Scanning?",
+    "options": {
+      "A": "Watching a physical wall on fire.",
+      "B": "Allowing the scanner to login to the target OS to perform a deeper, more accurate assessment of software and settings.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Plugin' update frequency?",
+    "options": {
+      "A": "A metric showing how often Nessus downloads the latest vulnerability signatures from Tenable.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead uses a Nessus scanner from 2010 to scan a 2026 server OS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Tenable stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Vulnerability Manager",
+      "B": "IT Operations Lead (Patching)",
+      "C": "Compliance Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Policy Compliance' scanning?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "Technical audits that check if system configurations match security benchmarks like CIS or NIST.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' Score in Tenable.io?",
+    "options": {
+      "A": "A numerical value (0-10) assigned to an asset reflecting its overall security posture and risk to the company.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an IT director expects a report for 50,000 servers to generate in exactly 1 second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Remediation Tracking benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant identification of 'Fixed' vs 'Still Open' issues",
+      "B": "Consistency in audit logs for regulators",
+      "C": "Guaranteed to replace all human IT staff",
+      "D": "Reduction in manual spreadsheet tracking"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'VPR' logic?",
+    "options": {
+      "A": "An algorithm that combines technical severity with real-world threat intelligence to prioritize vulnerabilities that are actually being exploited.",
+      "B": "Digging up a physical root in the office garden.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' Maturity?",
+    "options": {
+      "A": "A measure of how well an asset is managed, including scan frequency and patch history.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Credentials' occur when a scanner attempts to login with a Windows password that has already expired.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Vulnerability Management roles? (Select all that apply)",
+    "options": {
+      "A": "Security Analyst (Triage)",
+      "B": "Scan Architect",
+      "C": "Remediation Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'External' Surface Discovery?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The automated process of finding all internet-facing assets that belong to your organization.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Re-scan'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between when a fix is applied and when Tenable verifies the fix via a scan.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in Tenable refers to trying to run a cloud-scale scan using a single underpowered physical laptop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' VM planning? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all application owners understand the scan schedule",
+      "B": "Conducting 'blind' risk reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a 'No-Blame' culture for reporting found vulnerabilities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Passive' Monitoring?",
+    "options": {
+      "A": "Analyzing network traffic in real-time to identify vulnerabilities without actively 'probing' the systems.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' Age?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking how many days a vulnerability has remained 'Open' on a system.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an IT lead expects a vulnerability to disappear from the dashboard before the scanner has finished its job.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Remediation Validation benefits? (Select all that apply)",
+    "options": {
+      "A": "Reducing manual 'Checking' work for security staff",
+      "B": "Predicting future 'Vulnerability' clusters based on current code",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Real-time updates to 'Risk' dashboards after a patch"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Audit' Trail in Tenable?",
+    "options": {
+      "A": "A record of who created, modified, or launched a scan or policy.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' Health Score?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A real-time overview of an asset's security status based on its vulnerability and compliance findings.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an external vendor fails to patch a critical bug within the time defined in the contract.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Tenable Governance modules? (Select all that apply)",
+    "options": {
+      "A": "Asset Criticality (ACR)",
+      "B": "Vulnerability Priority (VPR)",
+      "C": "Risk-based Vulnerability Management (RBVM)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cyber' Exposure management?",
+    "options": {
+      "A": "The comprehensive technical process of identifying and managing all potential entry points an attacker could use.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Tenable.sc, what is the primary technical purpose of a 'Scan Zone'?",
+    "options": {
+      "A": "To define a physical break area for IT staff.",
+      "B": "To logically group Nessus scanners and assign them to specific IP ranges, optimizing network bandwidth and scanner performance.",
+      "C": "To create a specialized sandbox for malware detonation.",
+      "D": "To manage the font size of the SQL query results in the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Nessus Agent' can technically scan an asset even when it is not connected to the corporate network, uploading results once a connection is established.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic' rating in Tenable.io uses data from the 'Threat Landscape' to determine if a vulnerability is currently being exploited in the wild?",
+    "options": {
+      "A": "CVSS Base Score",
+      "B": "VPR (Vulnerability Priority Rating)",
+      "C": "Asset Criticality Rating (ACR)",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Asset Merging' in Tenable.io?",
+    "options": {
+      "A": "To combine physical servers into a single rack.",
+      "B": "To prevent duplicate asset entries by using unique identifiers like BIOS UUID, MAC address, and Tenable UUID to track the same device over time.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Tenable.io', what is a 'Scan Freeze Window' technically used for?",
+    "options": {
+      "A": "A specialized security scan for hardware blueprints.",
+      "B": "A scheduled period where all active and scheduled scans are suspended to protect critical systems during high-load business events.",
+      "C": "To physically lower the temperature of the server room.",
+      "D": "Increasing the size of the font on the privacy notice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Asset Tags' in Tenable.io use 'Rules' (e.g., OS matches 'Windows') to automatically group assets as they are discovered.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Expert' check allows an admin to verify if a Nessus scanner can technically reach a target port across a firewall?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Running a 'Service Detection' scan and checking Plugin 10335 (TCP/IP Enumeration).",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Audit' 'File' logic in Tenable.io compliance scanning?",
+    "options": {
+      "A": "A physical file stored in a cabinet.",
+      "B": "A technical script (e.g., .audit) used to check if a system's configuration matches specific security benchmarks like CIS or DISA STIG.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' configurations for a Nessus 'Scan Policy'? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Safe Checks' to prevent crashing fragile services",
+      "B": "Configuring 'Max simultaneous hosts per scan'",
+      "C": "Setting 'Port scan range' (e.g., default vs all 65535)",
+      "D": "Changing the color of the physical scanner appliance LEDs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Tenable occur when the vulnerability policy requires a 48-hour fix for Critical bugs, but the 'Nessus Agent' is configured to sync every 72 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of the 'Nessus Plugin 19506'?",
+    "options": {
+      "A": "Hiring a person named Plugin to scan files.",
+      "B": "It provides essential 'Scan Information' metadata, including whether the scan was credentialed, the duration, and which scanner was used.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font in the final report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Dead' 'Asset' 'Logic'?",
+    "options": {
+      "A": "When a scanner correctly identifies a bug that exists.",
+      "B": "The process of identifying and removing assets from the active dashboard that have not been seen by a scanner for a set period (e.g., 30 days).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategic' check allows an admin to verify if an authenticated scan actually succeeded or if the credentials were rejected?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Checking Plugin 21745 (Authentication Failed) or 110723 (Success).",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in Tenable occur when the security team runs aggressive 'Full Port' scans that cause legacy production PLCs to crash in an industrial environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Remediation' 'Workflow' benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically creating Jira tickets based on high-severity scan results",
+      "B": "Syncing 'Ticket Status' in ServiceNow back to the Tenable dashboard",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Assigning owners to vulnerabilities based on Asset Tags"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Tenable' 'Network' 'Passive' 'Sensor' (NNM)?",
+    "options": {
+      "A": "A physical person who stands in a dark room and listens.",
+      "B": "A tool that monitors network traffic in real-time to discover assets and vulnerabilities that might be missed by active scanning.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a patch in Tenable?",
+    "options": {
+      "A": "The average duration from the moment a patch is applied until the next scan confirms the vulnerability is 'Closed'.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Tenable Cloud Connector' can technically pull asset metadata directly from AWS, Azure, and GCP without requiring a scanner to ping the IP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' Tenable framework handles 'Web' 'Application' 'Security'?",
+    "options": {
+      "A": "Tenable WAS",
+      "B": "The initial Nmap scan strictly",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Credential' 'Storage' logic and how does it relate to CyberArk?",
+    "options": {
+      "A": "Storing credentials in a physical cloth patch.",
+      "B": "Tenable can technically integrate with vaults like CyberArk to retrieve scan passwords dynamically rather than storing them in the Tenable platform.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Asset' 'Inventory' 'Drift'?",
+    "options": {
+      "A": "The discrepancy between the known IT inventory and the 'Unknown' assets discovered by Nessus on the network.",
+      "B": "Hiring a person named Drift.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects an 'Authenticated' report for 10,000 servers 10 minutes after adding the credentials to the vault.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Tenable' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of IT Operations (Patching)",
+      "B": "CISO (Risk Reporting)",
+      "C": "Cloud Architect (Asset Tags)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'IT' discovery in a Tenable context?",
+    "options": {
+      "A": "Discovering IT equipment in a dark room.",
+      "B": "Finding unauthorized servers or cloud instances that were stood up by business units without the knowledge of the central IT or Security team.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Burn-down' 'Velocity'?",
+    "options": {
+      "A": "Analytics of a person named Velocity.",
+      "B": "A metric tracking how quickly the IT team is closing vulnerabilities compared to the rate at which new ones (plugins) are being released.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Tenable scanner is configured with 'Read-Only' rights but the specific Plugin technically requires 'Registry Write' access to verify a patch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Vulnerability' 'Management'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring the 'Application Owners' are included in the triage process",
+      "B": "Conducting 'blind' reporting reviews to reduce investigator bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a 'No-Blame' culture when a Critical vulnerability is found"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Asset' 'Resilience' for a Tenable asset?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'VPR counts', 'Days since last scan', and 'Criticality of the Asset Tag'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Detect' (MTTD) a 'Zero-Day' in Tenable?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when a new CVE is announced until Tenable publishes a Plugin and your environment is scanned for that Plugin.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a security lead enforces 2010 'Password Complexity' while the Tenable Policy Compliance module mandates 2026 'Passphrase' standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Compliance' benefits? (Select all that apply)",
+    "options": {
+      "A": "Generating immutable audit logs for PCI-DSS compliance",
+      "B": "Verifying that 'Auth tokens' are redacted in all Tenable reports",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring all 'Severity 5' issues have a linked remediation ticket"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Tenable pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Remediation Workflows' where each department follows the same independently verifiable patching lifecycle.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Debt' in Vulnerability Management?",
+    "options": {
+      "A": "The cumulative future cost of 'Deferred' vulnerabilities that are not fixed today, increasing the organization's 'Breach Risk' over time.",
+      "B": "A physical debt owed to a computer store.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Nessus Agent' to report a reboot instantly, but the agent only check-ins every 4 hours by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Tenable' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Regulatory Compliance (SOC2/GDPR)",
+      "B": "Reduction of 'Mean Time to Remediation'",
+      "C": "Protecting Brand Reputation",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Security' logic in a patching squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The security team provides the automated reports and tools so that the IT team can fix bugs easily without being 'policed'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The number of identified vulnerabilities per asset; high density identifies a 'Fragile' or unmanaged system.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in Tenable refers to trying to run a massive enterprise-wide internal scan using a single low-power scanner appliance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Asset' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which OS versions are reaching 'End of Life' (EOL)",
+      "B": "Predicting future server crashes based on patch levels",
+      "C": "Guaranteed to replace all human security analysts",
+      "D": "Analyzing trends in remediation performance across global squads"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Tenable reporting?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful 'Dashboard configuration' or 'Scan Policy' from one business unit and apply it to another to ensure global consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Global' 'Scans' (MTBGS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking the duration of organizational safety between complete environment-wide scans.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Lead assigns 'Scanning' tasks to a user but does not provide them with 'Write' access to the required Scan Policy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Tenable' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Security Engineering",
+      "B": "Lead Vulnerability Analyst",
+      "C": "Principal Infrastructure Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed Tenable squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The process of quickly establishing standard Asset Tags, Scan Policies, and scheduled scans for a new business acquisition.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Verification' 'Scans'?",
+    "options": {
+      "A": "The percentage of vulnerabilities that are successfully confirmed as 'Fixed' in the first scan after a patch was claimed to be applied.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects '100% Remediation Confirmation' for a zero-day bug exactly 5 minutes after the patch was released.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for Tenable leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Patching Teams' in IT",
+      "B": "Predicting future breach probability based on vulnerability debt levels",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing system sentiment to identify 'Patching Fatigue'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in a Tenable Multi-tenant environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' scan results technically cannot be accessed by 'Business Unit B' through restricted user roles and Asset Group scope.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Policy' 'Violations' (MTBPV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a system remains compliant with a 'Policy Compliance' benchmark before a configuration change breaks the standard.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker bug' is based on 'Fixed Dates' rather than 'Current System Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Governance' standards",
+      "B": "Keeping records updated with rapidly changing global 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Safety' if scans are only performed on a subset of assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a vulnerability scanner?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'How' of a scan (the packet probes) is isolated from the 'What' (the risk score), allowing for engine updates without changing the risk model.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an 'Unmanaged' 'Asset'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a new device connecting to the network until the 'Tenable Passive Sensor' flags it as a new, unmanaged asset.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a scan lead uses 2010 'Signature' logic for a 2026 'Fileless' malware threat.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Tenable' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Principal Cloud Security Architect",
+      "C": "Corporate Legal / Risk Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Tenable' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Scanners, Agents, Passive Sensors, and Ticketing integrations to ensure a seamless security view.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Posture' (MTRSP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant security control failure until the organization's 'Vulnerability Baseline' is restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after performing exactly one vulnerability scan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Global Risk' heatmaps for the Board",
+      "B": "Reduction in manual spreadsheet work for security leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a patching pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Remediation Sprints' where each phase results in a specific, independently verifiable compliance score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in VMDR?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical vulnerability analyst seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority vulnerability audits to a single Architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Vulnerability' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Breach Probability' scores",
+      "B": "Predicting future market 'Security' needs based on user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Patch Training' spend with 'Vulnerability Reduction' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Tenable?",
+    "options": {
+      "A": "A rating of how well a specific asset is hardened, based on its vulnerability history, patch level, and compliance benchmark score.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major vulnerability strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in vulnerability leadership occur when the remediation timeline for a 'zero-day exploit' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global Tenable.io environment, how should a Security Architect technically model the 'Cumulative Exposure' of a legacy business unit compared to a modern cloud-native unit using 'Lumin' metrics?",
+    "options": {
+      "A": "By counting the total number of patches applied in the last 12 months only.",
+      "B": "By calculating the 'Cyber Exposure Score' (CES), which weights Asset Criticality (ACR) against the current Vulnerability Priority Rating (VPR) to identify systemic risk density.",
+      "C": "By monitoring the physical power draw of the on-premises scanner appliances.",
+      "D": "By requiring a manual board-level signature for every 'Severity 4' vulnerability found."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Vulnerability' 'Contagion' in Tenable refers to a scenario where a failure in 'Credential Management' (e.g. an expired vault token) causes all authenticated scans to fail globally, creating an enterprise-wide visibility blindspot.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a Director to predict the impact of 'Zero-Day' threats on the organization's 'Breach Probability' based on the current 'Mean Time to Remediation' (MTTR)?",
+    "options": {
+      "A": "Monte Carlo Simulation using VPR data and exploit availability timelines",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Asset Identification Arbitrage' during an international M&A merger of two separate Tenable.io containers?",
+    "options": {
+      "A": "To ensure both companies use the same brand of mechanical keyboard.",
+      "B": "To resolve conflicting 'UUIDs' and 'FQDNs' into a unified global asset inventory to prevent 'Orphaned' vulnerabilities in the newly acquired network.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive compliance dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Nessus' 'Safe' 'Check' logic and how does it technically protect 'Fragile' industrial assets?",
+    "options": {
+      "A": "When an employee physically stands near the machine with a fire extinguisher.",
+      "B": "A mechanism that skips intrusive plugins (like DoS tests) and relies on version-based detection to prevent mechanical failure in OT/ICS environments.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the scan report summary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Compliance' 'Archetypes' occur when a 'Risk-Based' vulnerability team is forced to follow 'Rigid Date' patching cycles required by a legacy audit framework, leading to 'Patching Fatigue'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a VM Lead deliberately implementing 'Chaos Vulnerability Injection' (simulating a high-VPR bug) to verify if the 'Remediation Pipeline' correctly triggers a ticket within 30 minutes?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Synthetic Risk Injection)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Asset' 'Contagion' and its relation to 'Shared OS Templates' in a virtualized environment?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a single vulnerability in a 'Gold Image' (cause) is technically replicated across 1,000 spun-up instances (effect), causing a global spike in critical findings.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Resilience' ROI calculations for a strategic Tenable shift? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Remediation' (MTTR) for high-VPR assets",
+      "B": "Financial savings from lower 'Cyber Insurance' premiums due to verified 'Exposure' reduction",
+      "C": "The cost of 'Breach Recovery' avoided through behavioral detection of unknown C2 channels",
+      "D": "The number of security cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the VM Leadership level ensures that 'IT Admins' can flag 'Legacy Infrastructure' that is physically unpatchable without fear of disciplinary action.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead VM Architect's decision-making?",
+    "options": {
+      "A": "The physical weight of the scanner appliance.",
+      "B": "The ability to integrate contradictory risk signals (e.g. high-severity CVE vs low-VPR threat intensity) into a cohesive 'Patching Roadmap'.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Asset' 'Sharding' for cloud scanning?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of isolating 'Ephemeral' dev-ops assets from 'Persistent' production assets into separate Tenable containers to prevent 'License Exhaustion'.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Containment' during a suspected global '0-day' exploit event?",
+    "options": {
+      "A": "Waiting for the Tenable Plugin to be released.",
+      "B": "Immediately triggering an 'External Surface' scan and isolating assets running the affected software version based on 'VPR' threat forecasting.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a VM acquisition often result in 'Inventory Rejection', where the acquired firm's IT staff finds ways to 'Un-tag' assets to hide technical debt from the parent firm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Vulnerability' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Code' vulnerability competencies within the engineering team",
+      "B": "Standardizing 'Remediation Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential VM Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Vulnerability Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Procurement Strategy' itself (e.g. why we buy insecure IoT) is the cause of systemic risk, rather than just fixing the single device.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Tenable?",
+    "options": {
+      "A": "The cumulative risk of having all 'High Criticality' (ACR 10) assets residing on a single, unpatched VLAN segment.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Tenable occurs when a firm continues to rely on 'Monthly Full Scans' in 2026, while modern threats utilize 'Instant Exploit' payloads that trigger within minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'VM' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Security Capital (RAROSC)",
+      "B": "Percentage of 'Business Critical' assets with zero 'Critical' findings",
+      "C": "Velocity of 'Risk Remediation' across the top 10% of high-VPR threats",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Exposure' 'Entrenchment' risk during a 'VPR-based' transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured sysadmins will block 'Risk-Based' patching to protect their legacy 'Static Maintenance' windows.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally exceed the board-mandated 'Cyber Risk Appetite' limits.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a Director demands 'Zero Vulnerability Debt' while the Board only rewards the IT team for '100% System Uptime'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Attacker Sentiment' with internal VPR priorities",
+      "B": "Automatically identifying 'Asset Owner' gaps in real-time as new devices join the mesh",
+      "C": "Guaranteed to replace all human Directors",
+      "D": "Analyzing global exposure data to predict 'Ransomware Outbreak' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Exposure' 'Ecosystem' 'Architecture' (EEA) in Tenable?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of WAS, OT, Cloud, and Active Directory modules into a single 'Unified Exposure View'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Risk' 'Calibration' in VM M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Patch Hygiene' matches the parent company's 'Risk Threshold' before technical integration.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Risk Reduction' from a newly hired VM team that requires 18 months of 'Asset Discovery' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of scan history for GDPR auditors",
+      "B": "Automatically calculating 'Fair-Risk' scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules for scan data are enforced by automated cloud policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Tenable Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Systemic Risk Policies' are isolated from 'Local Remediation Tactics', allowing for local speed while remaining within corporate safety guardrails.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a major global '0-day' release and the VM Director officially flagging the total internal exposure count.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports 'Low Risk' to the board while the internal team is suppressing 5,000 'Fragile' assets from the scan scope.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'VM' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Asset Trust scores' directly to 'Resource Access' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Scan' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Risk Reporting' data with 'Legal Case Management' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new Tenable region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Scanners, Tags, and VPR-SLAs to stabilize a new offshore office in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Scanning Coverage' as complex new cloud flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Compliance' with a 500-page new policy after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Liability' heatmaps for the CEO",
+      "B": "Reduction in manual 'Deck-building' labor for the VM Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Tenable Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Sensitive Vulnerability data' from the EU region technically cannot be accessed by Admins in regions with different privacy laws.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Trust' (MTRST)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile scan failure (e.g. crashing production) and the point at which 'Business Confidence' return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in VM strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'Low-Budget' annual scan model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'VM' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Vulnerability Management",
+      "B": "Chief Resilience Architect",
+      "C": "Director of Asset Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Scan Health', 'MTTI', 'Control Redundancy', and 'Incident Response Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Administrator' (Single Point of Failure) in the Tenable team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Network-only' scanning models to manage a 2026 'Container/Serverless' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Attacker Motivation' analysis",
+      "B": "Keeping plugins updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade scanners"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in VM?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Patching Pipeline' can sustain major technological shifts without a systemic loss of release velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect presenting an 'Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in VM auditing occurs when 'Scan Data' is stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'VM' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Business Unit Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Asset Intelligence' tools and 'Maturity Scoring' to a newly acquired network within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'VM' 'Strategy' 'Refreshes' (MTBVSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Security Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a University Intern after exactly 48 hours of Tenable training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Scan Policy' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human VM Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global vulnerability talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in VM Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Remediation Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Cloud App).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'VM' 'ROI' (MTR-VROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated scanner becoming 'Inactive' and the point where its 'Reliability' is restored to provide organizational value again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero VM Budget Increase' while the Architect is enforcing a 'Global Zero Trust' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'VM' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Exposure ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for VM Directors",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Instant generation of 'Profit-per-Security-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit VM Pipelines' that are independently verifiable, preventing a 'Systemic Scan Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in VM?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new network threat vector is identified until the Architect specifies the necessary Tenable modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'System Plugins' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'VM' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate VM Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' complexity for a 'Turnaround' VM Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' VM culture into a 'Modern and Data-Driven' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'VM' 'Lead' 'Exits' (MTB-VLE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic shifts in the Tenable team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'VM' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Threat' mapping across global subsidiaries",
+      "B": "Reducing the 'Exposure Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated scanners"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'VM' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name VM.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-VM-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'VM' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic scan grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on scan history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Security Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'VM' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic VM Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,1889 +1,2015 @@
-{ 
-  "skill": "Spring", 
+{
+  "skill": "Spring",
   "questions": [
     {
-    "question": "Which core concept of Spring allows objects to define their dependencies without creating them?",
-    "options": {
-      "A": "Aspect Oriented Programming",
-      "B": "Dependency Injection (DI)",
-      "C": "Model View Controller",
-      "D": "Data Access Object"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot requires an external web server like Apache Tomcat to be installed manually.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which annotation is used to mark a class as a Spring-managed bean?",
-    "options": {
-      "A": " @Service",
-      "B": "@Component",
-      "C": "@Repository",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO files commonly used for Spring Boot configuration.",
-    "options": {
-      "A": "application.properties",
-      "B": "application.yml",
-      "C": "spring.xml",
-      "D": "boot.config"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is the primary entry point for a Spring Boot application?",
-    "options": {
-      "A": "@SpringApplication",
-      "B": "@SpringBootApplication",
-      "C": "@EnableAutoConfiguration",
-      "D": "@BootConfiguration"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The @Autowired annotation can be used on constructors, fields, and setter methods.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Spring Boot starter dependency is needed to build web applications, including RESTful services?",
-    "options": {
-      "A": "spring-boot-starter-api",
-      "B": "spring-boot-starter-web",
-      "C": "spring-boot-starter-rest",
-      "D": "spring-boot-starter-http"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO scopes available for a Spring Bean by default.",
-    "options": {
-      "A": "singleton",
-      "B": "prototype",
-      "C": "global",
-      "D": "thread"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the default scope of a Spring bean?",
-    "options": {
-      "A": "request",
-      "B": "prototype",
-      "C": "singleton",
-      "D": "session"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: Spring Initializr (start.spring.io) is a web-based tool used to bootstrap Spring Boot projects.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to map an HTTP GET request to a specific handler method?",
-    "options": {
-      "A": "@PostMapping",
-      "B": "@GetMapping",
-      "C": "@RequestMapping(method=GET)",
-      "D": "Both B and C"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO ways to enable Hot Swapping in Spring Boot.",
-    "options": {
-      "A": "Spring Loaded",
-      "B": "Spring Boot DevTools",
-      "C": "Spring HotSwap Plugin",
-      "D": "Spring Restart Tool"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to inject values from the application.properties file into a field?",
-    "options": {
-      "A": "@Property",
-      "B": "@Value",
-      "C": "@Inject",
-      "D": "@ConfigValue"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot uses 'Opinionated' defaults to reduce the amount of manual configuration.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to define a configuration class that provides bean definitions?",
-    "options": {
-      "A": "@BeanConfig",
-      "B": "@Configuration",
-      "C": "@Setup",
-      "D": "@AppConfig"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotation that are part of the @SpringBootApplication 'meta-annotation'.",
-    "options": {
-      "A": "@ComponentScan",
-      "B": "@EnableAutoConfiguration",
-      "C": "@EnableMvc",
-      "D": "@Service"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Spring Framework can only be used for building Java applications.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does IoC stand for?",
-    "options": {
-      "A": "Internal of Control",
-      "B": "Inversion of Control",
-      "C": "Integration of Components",
-      "D": "Interface of Classes"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which annotation is used at the method level to define a bean in a configuration class?",
-    "options": {
-      "A": "@Component",
-      "B": "@Service",
-      "C": "@Bean",
-      "D": "@Instance"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: Spring Boot Actuator provides endpoints to monitor and manage your application.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to mark a class as a REST controller in Spring?",
-    "options": {
-      "A": "@Controller",
-      "B": "@RestController",
-      "C": "@WebController",
-      "D": "@ApiController"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: In Spring, a Singleton bean is created once per Spring IoC container.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common relational database drivers supported by Spring Boot Starters.",
-    "options": {
-      "A": "H2",
-      "B": "MySQL",
-      "C": "Redis",
-      "D": "MongoDB"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to tell Spring to scan for components in a specific package?",
-    "options": {
-      "A": "@PackageScan",
-      "B": "@ComponentScan",
-      "C": "@SearchComponent",
-      "D": "@FindBeans"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the default port of a Spring Boot application?",
-    "options": {
-      "A": "8081",
-      "B": "443",
-      "C": "8080",
-      "D": "3000"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: @Data is a Spring annotation used for dependency injection.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which annotation is used to inject a mock bean into your Spring Boot test?",
-    "options": {
-      "A": "@Mock",
-      "B": "@MockBean",
-      "C": "@FakeBean",
-      "D": "@SpyBean"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO HTTP methods commonly handled by @RequestMapping.",
-    "options": {
-      "A": "GET",
-      "B": "POST",
-      "C": "FETCH",
-      "D": "SEND"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'Spring Boot Starter' provide?",
-    "options": {
-      "A": "A set of convenient dependency descriptors for your application",
-      "B": "A template for the UI",
-      "C": "The JDK installation",
-      "D": "A database server"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Constructor injection is generally recommended over field injection for mandatory dependencies.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to define the primary implementation when multiple beans of the same type exist?",
-    "options": {
-      "A": "@Default",
-      "B": "@Primary",
-      "C": "@First",
-      "D": "@Main"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO build tools that are compatible with Spring Boot.",
-    "options": {
-      "A": "Maven",
-      "B": "Gradle",
-      "C": "Ant",
-      "D": "Webpack"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to map a path variable from a URI to a method parameter?",
-    "options": {
-      "A": "@QueryParam",
-      "B": "@PathVariable",
-      "C": "@UrlParam",
-      "D": "@Path"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: @SpringBootTest is used to launch the full application context for integration testing.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to handle exceptions globally across all controllers?",
-    "options": {
-      "A": "@ErrorHandler",
-      "B": "@ControllerAdvice",
-      "C": "@ExceptionManager",
-      "D": "@GlobalError"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotations used to set the lifecycle of a Spring bean.",
-    "options": {
-      "A": "@PostConstruct",
-      "B": "@PreDestroy",
-      "C": "@AfterStart",
-      "D": "@BeforeEnd"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The @Qualifier annotation is used to resolve ambiguity when multiple beans of the same type exist.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property in application.properties is used to change the server port?",
-    "options": {
-      "A": "server.port",
-      "B": "app.port",
-      "C": "spring.port",
-      "D": "http.port"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the 'pom.xml' file in a Spring project?",
-    "options": {
-      "A": "To configure the database",
-      "B": "To manage project dependencies and build configuration",
-      "C": "To store CSS styles",
-      "D": "To define REST endpoints"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot Auto-configuration attempts to automatically configure your Spring application based on the jar dependencies you added.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to read data from the body of an HTTP request?",
-    "options": {
-      "A": "@Payload",
-      "B": "@RequestBody",
-      "C": "@HttpData",
-      "D": "@MessageBody"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO types of Dependency Injection in Spring.",
-    "options": {
-      "A": "Constructor Injection",
-      "B": "Setter Injection",
-      "C": "Method Injection",
-      "D": "Context Injection"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the @Repository annotation?",
-    "options": {
-      "A": "To mark the class as a Data Access Object (DAO)",
-      "B": "To store files on the server",
-      "C": "To create a version control system",
-      "D": "To handle user logins"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: You can use YAML instead of Properties files for Spring Boot configuration.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to map a request parameter from a URL (e.g., ?id=1) to a method parameter?",
-    "options": {
-      "A": "@UrlParam",
-      "B": "@RequestParam",
-      "C": "@QueryValue",
-      "D": "@Input"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO starter dependencies related to security and data.",
-    "options": {
-      "A": "spring-boot-starter-security",
-      "B": "spring-boot-starter-data-jpa",
-      "C": "spring-boot-starter-login",
-      "D": "spring-boot-starter-table"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the @Scope annotation do?",
-    "options": {
-      "A": "It defines the visibility of a variable",
-      "B": "It defines the lifecycle and creation strategy of a bean",
-      "C": "It limits the number of classes in a project",
-      "D": "It calculates the size of the application"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: @Service is functionally the same as @Component but serves as a more specific label for business logic.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which tool provides a GUI to visualize and interact with Spring Boot Actuator endpoints?",
-    "options": {
-      "A": "Spring Boot Dashboard",
-      "B": "Spring Boot Admin",
-      "C": "Spring Actuator Panel",
-      "D": "Spring Control Center"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO common HTTP status codes returned by a Spring REST controller by default on success.",
-    "options": {
-      "A": "200 OK",
-      "B": "201 Created",
-      "C": "404 Not Found",
-      "D": "500 Error"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: @Value can be used to inject static arrays from a configuration file.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to define a custom response status for a method?",
-    "options": {
-      "A": "@Status",
-      "B": "@ResponseStatus",
-      "C": "@HttpCode",
-      "D": "@ReturnStatus"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the role of the 'Spring Container'?",
-    "options": {
-      "A": "To store the database records",
-      "B": "To manage the lifecycle and configuration of application beans",
-      "C": "To compile Java code to bytecode",
-      "D": "To host the web server files"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Field injection using @Autowired is considered bad practice because it makes unit testing harder.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows Spring Boot to automatically find and configure data sources?",
-    "options": {
-      "A": "@AutoData",
-      "B": "@EnableAutoConfiguration",
-      "C": "@ConfigData",
-      "D": "@LinkDatabase"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotations for creating a RESTful POST endpoint.",
-    "options": {
-      "A": "@PostMapping",
-      "B": "@RequestMapping(method=POST)",
-      "C": "@CreateMapping",
-      "D": "@SendMapping"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of @Profile in Spring?",
-    "options": {
-      "A": "To store user social media info",
-      "B": "To conditionally activate beans based on the environment (dev, prod, etc.)",
-      "C": "To track the performance of a method",
-      "D": "To define the user role"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot Actuator's '/health' endpoint is enabled by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to mark a method as a transaction?",
-    "options": {
-      "A": "@Commit",
-      "B": "@Transactional",
-      "C": "@Atomic",
-      "D": "@Secure"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotations used in Spring MVC to send data to a view.",
-    "options": {
-      "A": "@ModelAttribute",
-      "B": "@ResponseBody",
-      "C": "@SendView",
-      "D": "@PushData"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: A prototype bean is created every time it is requested from the container.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to link a Spring Boot class to a specific properties prefix?",
-    "options": {
-      "A": "@PropertySource",
-      "B": "@ConfigurationProperties",
-      "C": "@PropertyLink",
-      "D": "@ValuePrefix"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the @Lazy annotation do?",
-    "options": {
-      "A": "It stops the bean from working",
-      "B": "It delays the initialization of a bean until it is first used",
-      "C": "It reduces the memory usage of the bean",
-      "D": "It marks a test as skipped"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot can be used to create stand-alone console applications.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to inject an 'Environment' object to access properties programmatically?",
-    "options": {
-      "A": "@Context",
-      "B": "@Autowired",
-      "C": "@Env",
-      "D": "@Inject"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO common logging frameworks used by Spring Boot.",
-    "options": {
-      "A": "Logback",
-      "B": "Log4j2",
-      "C": "LogSimple",
-      "D": "JavaLog"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which interface in Spring Data JPA is used to provide CRUD operations and pagination/sorting out of the box?",
-    "options": {
-      "A": "JpaRepository",
-      "B": "CrudRepository",
-      "C": "PagingAndSortingRepository",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: In Spring Security, 'Authentication' is the process of verifying who a user is, while 'Authorization' is verifying what they can do.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to handle exceptions in a Spring Boot application.",
-    "options": {
-      "A": "@ExceptionHandler inside a Controller",
-      "B": "@ControllerAdvice with @ExceptionHandler",
-      "C": "@ErrorMapping in application.properties",
-      "D": "Implementing the ErrorListener interface"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the @Query annotation in Spring Data JPA?",
-    "options": {
-      "A": "To create a cache for the query results",
-      "B": "To define a custom JPQL or Native SQL query for a repository method",
-      "C": "To specify the database table name",
-      "D": "To refresh the entity from the database"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which annotation is used to enable Method Level Security (e.g., @PreAuthorize)?",
-    "options": {
-      "A": "@EnableGlobalMethodSecurity",
-      "B": "@EnableMethodSecurity",
-      "C": "@SecureMethods",
-      "D": "Both A and B (A is deprecated in newer versions)"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: The @Transient annotation in a JPA Entity ensures that the field is NOT persisted to the database.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for securing a Spring Boot REST API.",
-    "options": {
-      "A": "JSON Web Tokens (JWT)",
-      "B": "OAuth2 / OpenID Connect",
-      "C": "FTP Authentication",
-      "D": "Spring Cookie Manager"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the @JoinColumn annotation specify in a One-to-Many relationship?",
-    "options": {
-      "A": "The name of the primary key in the parent table",
-      "B": "The foreign key column in the destination table",
-      "C": "The name of the mapping class",
-      "D": "The index of the column"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot DevTools' automatic restart is the same as a full 'Cold Start' of the JVM.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which class is the central entry point for customizing Spring Security's filter chain in modern Spring Boot (v3+)?",
-    "options": {
-      "A": "WebSecurityConfigurerAdapter",
-      "B": "SecurityFilterChain (via a @Bean)",
-      "C": "HttpSecurityManager",
-      "D": "AuthenticationFilter"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the role of the 'Persistence Context' in JPA?",
-    "options": {
-      "A": "To store the database connection string",
-      "B": "To manage the lifecycle of entity instances and their synchronization with the database",
-      "C": "To encrypt the data before saving",
-      "D": "To handle user session timeouts"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotations used to perform validation on request bodies.",
-    "options": {
-      "A": "@Valid",
-      "B": "@NotNull",
-      "C": "@Check",
-      "D": "@Validate"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: @EntityGraph is used in Spring Data JPA to solve the 'N+1 Select' problem by eagerly fetching associations.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to map a Java enum to a database string or integer value in JPA?",
-    "options": {
-      "A": "@EnumMapping",
-      "B": "@Enumerated",
-      "C": "@MapEnum",
-      "D": "@EnumType"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How do you provide a custom login page in Spring Security?",
-    "options": {
-      "A": "By setting 'login.page' in application.properties",
-      "B": "By configuring '.formLogin(form -> form.loginPage(\"/login\"))' in the security config",
-      "C": "By naming your HTML file 'login.html' in the root folder",
-      "D": "Spring Security does not allow custom login pages"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO common types of inheritance strategies in JPA.",
-    "options": {
-      "A": "SINGLE_TABLE",
-      "B": "JOINED",
-      "C": "MULTIPLE_FILE",
-      "D": "LINKED_LIST"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: By default, Spring Data JPA methods like 'findByEmail' are automatically translated into queries using Method Name Derivation.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to mark a method to be executed on a fixed schedule?",
-    "options": {
-      "A": "@Timed",
-      "B": "@Scheduled",
-      "C": "@CronJob",
-      "D": "@Repeat"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the function of the @Transactional(readOnly = true) attribute?",
-    "options": {
-      "A": "It prevents any database connection from being opened",
-      "B": "It acts as a hint to the provider to optimize for read-only operations (like skipping dirty checking)",
-      "C": "It hides the data from other users",
-      "D": "It deletes the data after reading it"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The 'CascadeType.REMOVE' in JPA ensures that when a parent is deleted, its associated children are also deleted.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to indicate that a method should be executed asynchronously in a separate thread?",
-    "options": {
-      "A": "@Threaded",
-      "B": "@Async",
-      "C": "@Parallel",
-      "D": "@Future"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO features of Spring Boot Actuator.",
-    "options": {
-      "A": "Health Monitoring",
-      "B": "Metrics Collection",
-      "C": "Automatic Code Refactoring",
-      "D": "SQL Injection Prevention"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In Spring Security, the 'SecurityContextHolder' is used to access the details of the currently authenticated user.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the @Modifying annotation do in Spring Data JPA?",
-    "options": {
-      "A": "It allows a repository method to change the database schema",
-      "B": "It is required for repository methods that perform INSERT, UPDATE, or DELETE queries",
-      "C": "It renames the columns in the entity",
-      "D": "It enables caching for the method"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which annotation is used to define a custom bean name for an @Autowired dependency when multiple candidates exist?",
-    "options": {
-      "A": "@Name",
-      "B": "@Qualifier",
-      "C": "@Alias",
-      "D": "@Identity"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO annotations used to map JSON fields to Java fields using Jackson (Spring's default JSON provider).",
-    "options": {
-      "A": "@JsonProperty",
-      "B": "@JsonIgnore",
-      "C": "@JsonMap",
-      "D": "@JsonData"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'Pessimistic Locking' in JPA involves locking the database record at the database level to prevent concurrent access.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property allows you to see the SQL queries generated by Hibernate in the console?",
-    "options": {
-      "A": "spring.jpa.show-sql=true",
-      "B": "hibernate.log.sql=true",
-      "C": "jpa.debug=true",
-      "D": "spring.sql.print=true"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Constructor Injection' in Spring?",
-    "options": {
-      "A": "Using a constructor to create a new database",
-      "B": "Providing dependencies to a class via its constructor",
-      "C": "Automatically building the UI components",
-      "D": "A way to compile Java classes faster"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Spring Boot Profiles can be activated via the command line using '--spring.profiles.active=dev'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to perform content negotiation in a REST controller to return either XML or JSON?",
-    "options": {
-      "A": "@RequestMapping(produces = { \"application/json\", \"application/xml\" })",
-      "B": "@ContentNegotiation",
-      "C": "@MediaType",
-      "D": "@XmlAndJson"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @EnableCaching annotation is required to activate Spring's caching infrastructure.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO attributes of the @Transactional annotation used to control transaction behavior.",
-    "options": {
-      "A": "propagation",
-      "B": "isolation",
-      "C": "duration",
-      "D": "security"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the primary difference between @ControllerAdvice and @RestControllerAdvice?",
-    "options": {
-      "A": "@RestControllerAdvice includes @ResponseBody, making it suitable for REST APIs.",
-      "B": "@ControllerAdvice is only for XML, @RestControllerAdvice is for JSON.",
-      "C": "@RestControllerAdvice is faster in performance.",
-      "D": "There is no functional difference."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface should you implement to create a custom UserDetailsService for Spring Security?",
-    "options": {
-      "A": "UserDetailsService",
-      "B": "UserAuthenticationService",
-      "C": "SecurityUserProvider",
-      "D": "PrincipalLoader"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In Spring Data JPA, 'Eager' fetching loads the associated data immediately, while 'Lazy' fetching loads it only when accessed.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to bind a method parameter to a cookie value?",
-    "options": {
-      "A": "@CookieValue",
-      "B": "@CookieParam",
-      "C": "@RequestCookie",
-      "D": "@ValueCookie"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common transaction propagation levels in Spring.",
-    "options": {
-      "A": "REQUIRED",
-      "B": "REQUIRES_NEW",
-      "C": "ALWAYS_COMMIT",
-      "D": "ONLY_ONE"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the @PreAuthorize(\"hasRole('ADMIN')\") annotation do?",
-    "options": {
-      "A": "It checks if the user has the 'ADMIN' role before allowing method execution.",
-      "B": "It automatically assigns the 'ADMIN' role to the user.",
-      "C": "It redirects the user to the admin dashboard.",
-      "D": "It logs all admin activity to the database."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Dirty Checking' in Hibernate/JPA means that the provider automatically detects changes to an entity and syncs them with the DB.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to ignore certain fields during JSON serialization and deserialization?",
-    "options": {
-      "A": "@JsonIgnore",
-      "B": "@NoJson",
-      "C": "@HideField",
-      "D": "@TransientJSON"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO starters that help with connecting to NoSQL databases.",
-    "options": {
-      "A": "spring-boot-starter-data-mongodb",
-      "B": "spring-boot-starter-data-redis",
-      "C": "spring-boot-starter-sql-server",
-      "D": "spring-boot-starter-oracle"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'spring-boot-maven-plugin'?",
-    "options": {
-      "A": "To package the application into an executable 'fat' jar or war file.",
-      "B": "To write unit tests automatically.",
-      "C": "To deploy the app to AWS.",
-      "D": "To manage the Java version."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A Spring Bean's lifecycle can be managed using @PostConstruct and @PreDestroy.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which JPA annotation is used to define a 'one-to-many' relationship?",
-    "options": {
-      "A": "@OneToMany",
-      "B": "@ManyToOne",
-      "C": "@Relationship",
-      "D": "@ListMapping"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to pass parameters to a @Query method.",
-    "options": {
-      "A": "Indexed parameters (?1, ?2)",
-      "B": "Named parameters (:name)",
-      "C": "Dynamic parameters ($1, $2)",
-      "D": "Context parameters (#name)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the 'N+1 Problem' in JPA?",
-    "options": {
-      "A": "When one query for a parent results in N additional queries for each child record.",
-      "B": "When a database table has too many columns.",
-      "C": "When the server runs out of memory.",
-      "D": "When a primary key is not auto-incremented."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @CacheEvict annotation is used to remove entries from the cache.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface in Spring Security represents an authenticated user's principal and authorities?",
-    "options": {
-      "A": "Authentication",
-      "B": "UserContext",
-      "C": "SecureUser",
-      "D": "LoginToken"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common HTTP headers used for Content Negotiation.",
-    "options": {
-      "A": "Accept",
-      "B": "Content-Type",
-      "C": "Authorization",
-      "D": "User-Agent"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'OAuth2ResourceServer' is used when your Spring Boot app is the one validating tokens from an external issuer.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to bind properties from a YAML file to a Java object with a specific prefix?",
-    "options": {
-      "A": "@ConfigurationProperties",
-      "B": "@Value",
-      "C": "@PropertySource",
-      "D": "@BindingProperties"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'Dependency Ambiguity' mean in Spring?",
-    "options": {
-      "A": "When the container finds two or more beans of the same type for injection.",
-      "B": "When the database connection fails.",
-      "C": "When the JDK version is wrong.",
-      "D": "When a bean is defined as private."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO annotations related to Spring Data JPA auditing.",
-    "options": {
-      "A": "@CreatedDate",
-      "B": "@LastModifiedBy",
-      "C": "@AuditTime",
-      "D": "@TrackUser"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: By default, Spring Boot uses 'Camel Case' for database column names when using Hibernate.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface allows you to define a set of methods that are called at various points in a bean's lifecycle?",
-    "options": {
-      "A": "BeanPostProcessor",
-      "B": "LifecycleManager",
-      "C": "BeanStartListener",
-      "D": "ApplicationContext"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the @RequestBody annotation?",
-    "options": {
-      "A": "To deserialize the incoming JSON/XML request body into a Java object.",
-      "B": "To send the response body to the client.",
-      "C": "To define the size of the request.",
-      "D": "To encrypt the request data."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'CSRF' (Cross-Site Request Forgery) protection is enabled by default in Spring Security.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which JPA annotation is used to specify that a field should be a 'Large Object' (BLOB/CLOB)?",
-    "options": {
-      "A": "@Lob",
-      "B": "@Blob",
-      "C": "@Large",
-      "D": "@BigData"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to enable Spring Profiles.",
-    "options": {
-      "A": "spring.profiles.active property",
-      "B": "-Dspring.profiles.active command line argument",
-      "C": "@ActiveProfiles annotation",
-      "D": "Setting the profile in the pom.xml file"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In Spring Boot, the '/actuator/info' endpoint is always hidden for security.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'DispatcherServlet' in Spring MVC?",
-    "options": {
-      "A": "The Front Controller that coordinates the entire request processing flow.",
-      "B": "A database connection pool.",
-      "C": "A tool to send emails.",
-      "D": "The main entry point of the JVM."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to mark a method that should handle a specific type of exception?",
-    "options": {
-      "A": "@ExceptionHandler",
-      "B": "@CatchError",
-      "C": "@ErrorMessage",
-      "D": "@HandleException"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of using Spring Boot's 'Fat Jar' approach.",
-    "options": {
-      "A": "Includes all dependencies and the embedded server in one file.",
-      "B": "Simplifies deployment to cloud environments.",
-      "C": "Makes the file size smaller than a standard jar.",
-      "D": "Prevents the need for a JVM on the server."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: @JsonInclude(Include.NON_NULL) ensures that null fields are excluded from the JSON output.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'propagation' level in Spring transactions will always start a new transaction, suspending any existing one?",
-    "options": {
-      "A": "REQUIRES_NEW",
-      "B": "REQUIRED",
-      "C": "SUPPORTS",
-      "D": "NEVER"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which specific proxy mechanism does Spring use by default for a class that does NOT implement any interface?",
-    "options": {
-      "A": "JDK Dynamic Proxy",
-      "B": "CGLIB Proxy",
-      "C": "AspectJ Weaver",
-      "D": "JVM Native Proxy"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: In a Spring transaction, 'Dirty Reads' are allowed when the isolation level is set to READ_COMMITTED.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO types of 'Advice' available in Spring AOP.",
-    "options": {
-      "A": "@Around",
-      "B": "@AfterThrowing",
-      "C": "@BeforeCommit",
-      "D": "@AfterInitialize"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In Spring WebFlux, which type represents a sequence of 0 to N items produced asynchronously?",
-    "options": {
-      "A": "Mono",
-      "B": "Flux",
-      "C": "Observable",
-      "D": "Flowable"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of calling a @Transactional method from another method within the same class (Self-Invocation)?",
-    "options": {
-      "A": "The transaction starts normally.",
-      "B": "The transaction is ignored because the call bypasses the proxy.",
-      "C": "An IllegalStateException is thrown.",
-      "D": "The transaction is managed by the JVM instead of Spring."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The @Order annotation can be used to define the execution sequence of multiple Spring AOP Aspects.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which component in Spring Cloud is primarily used as a Dynamic Service Discovery server?",
-    "options": {
-      "A": "Spring Cloud Gateway",
-      "B": "Netflix Eureka",
-      "C": "Config Server",
-      "D": "Hystrix"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO strategies for handling 'Livelocks' in a high-concurrency Spring application.",
-    "options": {
-      "A": "Optimistic Locking (@Version)",
-      "B": "Pessimistic Locking (LockModeType.PESSIMISTIC_WRITE)",
-      "C": "Increasing the connection pool size",
-      "D": "Disabling the Persistence Context"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'JoinPoint' object in an AOP Aspect method?",
-    "options": {
-      "A": "To access the metadata of the method being intercepted (arguments, name, etc.).",
-      "B": "To merge two different Spring beans.",
-      "C": "To join the database tables automatically.",
-      "D": "To manage the HTTP session."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Spring WebFlux uses the Project Reactor library and a non-blocking event loop (Netty) by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'propagation' level should be used to ensure a method runs in its own transaction, but does NOT fail if no transaction exists?",
-    "options": {
-      "A": "MANDATORY",
-      "B": "REQUIRES_NEW",
-      "C": "SUPPORTS",
-      "D": "NOT_SUPPORTED"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO common patterns for implementing Distributed Transactions in a Spring Microservices environment.",
-    "options": {
-      "A": "Saga Pattern (Choreography/Orchestration)",
-      "B": "Two-Phase Commit (2PC)",
-      "C": "Singleton Pattern",
-      "D": "Observer Pattern"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'ProceedingJoinPoint.proceed()' method do in an @Around advice?",
-    "options": {
-      "A": "It continues to the next advice.",
-      "B": "It executes the actual target method being intercepted.",
-      "C": "It rolls back the transaction.",
-      "D": "It stops the execution of the thread."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: By default, Spring only rolls back a transaction for Unchecked Exceptions (RuntimeException).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows you to refresh the configuration of a @Bean without restarting the entire Microservice?",
-    "options": {
-      "A": "@RefreshScope",
-      "B": "@Reloadable",
-      "C": "@ConfigRefresh",
-      "D": "@DynamicUpdate"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO key differences between JDK Dynamic Proxies and CGLIB.",
-    "options": {
-      "A": "JDK Proxies require an interface; CGLIB works with classes.",
-      "B": "JDK Proxies are part of the standard Java API; CGLIB is an external library.",
-      "C": "CGLIB is faster at startup; JDK Proxies are faster at runtime.",
-      "D": "JDK Proxies can mock private methods; CGLIB cannot."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In Spring Security, the 'FilterChainProxy' is a single filter that delegates to a list of other filters.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'Circuit Breaker' pattern used for in Spring Cloud?",
-    "options": {
-      "A": "To prevent a failure in one service from cascading to other services.",
-      "B": "To encrypt the communication between services.",
-      "C": "To load balance the traffic.",
-      "D": "To speed up the database queries."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to create a custom 'Pointcut' expression that can be reused across multiple Advice methods?",
-    "options": {
-      "A": "@Pointcut",
-      "B": "@Expression",
-      "C": "@AopTarget",
-      "D": "@Hook"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Spring WebClient is the modern, non-blocking replacement for the deprecated RestTemplate.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "In JPA, what is the consequence of using 'FetchType.EAGER' on a large collection of child entities?",
-    "options": {
-      "A": "It significantly improves performance.",
-      "B": "It can lead to massive memory consumption and slow performance due to the N+1 problem.",
-      "C": "It prevents the entity from being updated.",
-      "D": "It forces the use of a native SQL query."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO strategies provided by Spring Cloud Config to secure sensitive configuration data.",
-    "options": {
-      "A": "Symmetric Encryption ({cipher})",
-      "B": "Asymmetric Encryption (RSA keys)",
-      "C": "Base64 Encoding",
-      "D": "HTML Masking"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is 'Backpressure' in the context of Spring WebFlux?",
-    "options": {
-      "A": "The ability of a subscriber to signal the producer about how much data it can handle.",
-      "B": "A security attack on the network.",
-      "C": "The delay caused by the database.",
-      "D": "The pressure on developers to finish the project."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @Cachable(sync = true) can be used to ensure that only one thread is populating the cache for a specific key.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Spring component is responsible for converting a java.util.Optional return type from a Repository into a 404 response in a Controller?",
-    "options": {
-      "A": "There is no automatic conversion; it must be handled manually (e.g., .orElseThrow()).",
-      "B": "The DispatcherServlet",
-      "C": "The JacksonMessageConverter",
-      "D": "The JpaRepository interface"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to prevent 'Session Fixation' attacks in Spring Security.",
-    "options": {
-      "A": "Changing the session ID upon authentication (migrateSession).",
-      "B": "Disabling sessions entirely (Stateless).",
-      "C": "Using only HTTP cookies.",
-      "D": "Increasing the session timeout."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Spring's @Transactional isolation level 'SERIALIZABLE' is the most secure but also the slowest due to high locking overhead.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'execution(* com.service.*.*(..))' aspectj expression match?",
-    "options": {
-      "A": "Any method in any class within the com.service package.",
-      "B": "Only private methods in the com.service package.",
-      "C": "Only methods that return a String.",
-      "D": "Any class that has the @Service annotation."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Spring Cloud tool is used to implement 'Sidecar' patterns for non-JVM applications?",
-    "options": {
-      "A": "Spring Cloud Netflix Sidecar",
-      "B": "Spring Cloud Gateway",
-      "C": "Eureka Client",
-      "D": "Config Client"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Spring Cloud Sleeper is used to add latency to services during Chaos Engineering tests.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows an Aspect to access the return value of a method after it successfully completes?",
-    "options": {
-      "A": "@AfterReturning",
-      "B": "@After",
-      "C": "@Around",
-      "D": "@AfterSuccess"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a reactive stream (WebFlux), data is pushed to the subscriber as soon as the publisher is created, regardless of demand.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO isolation levels that prevent 'Non-repeatable Reads'.",
-    "options": {
-      "A": "REPEATABLE_READ",
-      "B": "SERIALIZABLE",
-      "C": "READ_COMMITTED",
-      "D": "READ_UNCOMMITTED"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'spring.main.allow-circular-references' property in Spring Boot 2.6+?",
-    "options": {
-      "A": "To re-enable circular dependency support which is disabled by default.",
-      "B": "To increase the speed of bean creation.",
-      "C": "To allow the same bean to have multiple names.",
-      "D": "To enable recursive method calls."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface is used to create a custom 'SecurityExpressionHandler' for complex SpEL-based authorization?",
-    "options": {
-      "A": "SecurityExpressionHandler",
-      "B": "AuthorizationManager",
-      "C": "AccessDecisionVoter",
-      "D": "PermissionEvaluator"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @Async annotation requires a proxy, and therefore won't work if the method is called from within the same class.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "In Spring Cloud, which component is used to manage and rotate secrets across an entire cluster?",
-    "options": {
-      "A": "Spring Cloud Vault",
-      "B": "Config Server",
-      "C": "Eureka",
-      "D": "Bus"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to handle 'N+1 queries' in Spring Data JPA.",
-    "options": {
-      "A": "Using @EntityGraph",
-      "B": "Using JOIN FETCH in JPQL",
-      "C": "Setting FetchType to LAZY",
-      "D": "Increasing the database buffer size"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the 'Two-Phase Commit' (2PC) protocol used for?",
-    "options": {
-      "A": "To ensure atomicity in distributed transactions across multiple resources.",
-      "B": "To speed up the login process.",
-      "C": "To backup the database twice.",
-      "D": "To compile Java and Kotlin code together."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @Transactional(propagation = Propagation.MANDATORY) requires an existing transaction or it will throw an exception.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which operator in Project Reactor (WebFlux) is used to switch the execution to a different thread pool (Scheduler)?",
-    "options": {
-      "A": "publishOn",
-      "B": "subscribeOn",
-      "C": "threadOn",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO benefits of using Spring Cloud Gateway over Netflix Zuul.",
-    "options": {
-      "A": "Built-in support for non-blocking Netty server.",
-      "B": "First-class support for WebSockets.",
-      "C": "Faster startup time in all environments.",
-      "D": "Elimination of the need for Eureka."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'Weaving' mean in Aspect-Oriented Programming?",
-    "options": {
-      "A": "The process of linking aspects with other application types or objects to create an advised object.",
-      "B": "Connecting the frontend to the backend.",
-      "C": "Generating documentation from code comments.",
-      "D": "A specific way to organize the folder structure."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @Scheduled methods in Spring Boot are executed in a single-threaded executor by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to create a 'Composite' primary key in JPA using a separate class?",
-    "options": {
-      "A": "@IdClass",
-      "B": "@EmbeddedId",
-      "C": "@CompositeId",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO common Circuit Breaker libraries used with Spring Cloud.",
-    "options": {
-      "A": "Resilience4j",
-      "B": "Netflix Hystrix",
-      "C": "Apache Camel",
-      "D": "Spring Retry"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the role of 'BeanFactoryPostProcessor' in Spring?",
-    "options": {
-      "A": "It allows for modification of the application's bean definitions before any beans are instantiated.",
-      "B": "It clears the memory after a bean is destroyed.",
-      "C": "It sends a report to the developer about bean performance.",
-      "D": "It compiles the XML config into Java."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: When using @Cacheable, the return value of the method is what gets stored in the cache.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Spring component allows for 'Polyglot' persistence by supporting both SQL and NoSQL in the same project?",
-    "options": {
-      "A": "Spring Data",
-      "B": "Spring Boot Starter Parent",
-      "C": "Spring Context",
-      "D": "Spring Expression Language"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to implement 'Client-Side Load Balancing' in Spring Cloud.",
-    "options": {
-      "A": "Spring Cloud LoadBalancer",
-      "B": "Netflix Ribbon",
-      "C": "Nginx",
-      "D": "F5 Big-IP"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: An Aspect can be applied to a final class when using CGLIB proxies.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of the 'within()' designator in a Pointcut expression?",
-    "options": {
-      "A": "It limits matching to join points within certain types (classes/packages).",
-      "B": "It checks the time within which a method must finish.",
-      "C": "It finds methods within a specific thread.",
-      "D": "It checks if a variable is within a specific range."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to provide the 'Metadata' for a custom Spring Boot Starter to appear in IDE autocompletion?",
-    "options": {
-      "A": "No annotation; it requires a 'spring-configuration-metadata.json' file.",
-      "B": "@StarterMetadata",
-      "C": "@AutoConfigure",
-      "D": "@IDEHint"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a Microservices architecture, the 'Saga' pattern uses local transactions in each service to ensure eventual consistency.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface represents the 'Event Loop' in Spring WebFlux's underlying Netty server?",
-    "options": {
-      "A": "EventLoopGroup",
-      "B": "ThreadPoolExecutor",
-      "C": "ReactiveLoop",
-      "D": "FluxEngine"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for securing a 'Service-to-Service' call in a Microservice cluster.",
-    "options": {
-      "A": "mTLS (Mutual TLS)",
-      "B": "JWT Relay",
-      "C": "Basic Auth",
-      "D": "IP Whitelisting"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Hibernate's 'Second Level Cache' is shared across all sessions within the same SessionFactory.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What happens if a @Transactional method calls another @Transactional method with propagation 'REQUIRES_NEW'?",
-    "options": {
-      "A": "The current transaction is suspended, and a new one is started.",
-      "B": "The second method joins the first transaction.",
-      "C": "The first transaction is committed immediately.",
-      "D": "An error occurs."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to define a custom 'HandlerMethodArgumentResolver'?",
-    "options": {
-      "A": "No annotation; you must register it in a WebMvcConfigurer class.",
-      "B": "@ArgumentResolver",
-      "C": "@CustomInput",
-      "D": "@ParamMapper"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Spring Cloud Sleuth' is used to provide distributed tracing by adding 'Trace IDs' to every log and request.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which operator in Reactor is used to retry a failed operation with 'Exponential Backoff'?",
-    "options": {
-      "A": "retryWhen",
-      "B": "backoffRetry",
-      "C": "repeatWithDelay",
-      "D": "retryExponential"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of using 'Immutability' for Spring Beans.",
-    "options": {
-      "A": "Thread safety by design.",
-      "B": "Easier to reason about and debug.",
-      "C": "Faster garbage collection.",
-      "D": "Reduced file size of the jar."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The @Lock(LockModeType.OPTIMISTIC) annotation requires a @Version field in the entity class.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'Semantic Versioning' rule often used for Spring Boot Starters?",
-    "options": {
-      "A": "Major.Minor.Patch",
-      "B": "Year.Month.Day",
-      "C": "Release.Candidate.Build",
-      "D": "Version.Suffix"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface allows you to programmatically register beans at runtime?",
-    "options": {
-      "A": "BeanDefinitionRegistryPostProcessor",
-      "B": "BeanFactory",
-      "C": "RuntimeBeanRegister",
-      "D": "ApplicationContext"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In Spring Cloud Gateway, 'Predicates' are used to determine if a request matches a specific route.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which component manages the 'Transaction Metadata' and coordinates with the underlying platform (JDBC/JPA) to manage transactions?",
-    "options": {
-      "A": "PlatformTransactionManager",
-      "B": "JdbcTemplate",
-      "C": "EntityManagerFactory",
-      "D": "TransactionProxy"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to implement 'Asynchronous Request Processing' in Spring MVC (not WebFlux).",
-    "options": {
-      "A": "Callable<T> return type",
-      "B": "DeferredResult<T> return type",
-      "C": "@Async on the controller method",
-      "D": "CompletableFuture with @RestController"
-    },
-    "answer": "A, B"
-  }
+      "question": "Which core concept of Spring allows objects to define their dependencies without creating them?",
+      "options": {
+        "A": "Aspect Oriented Programming",
+        "B": "Dependency Injection (DI)",
+        "C": "Model View Controller",
+        "D": "Data Access Object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot requires an external web server like Apache Tomcat to be installed manually.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to mark a class as a Spring-managed bean?",
+      "options": {
+        "A": " @Service",
+        "B": "@Component",
+        "C": "@Repository",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO files commonly used for Spring Boot configuration.",
+      "options": {
+        "A": "application.properties",
+        "B": "application.yml",
+        "C": "spring.xml",
+        "D": "boot.config"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is the primary entry point for a Spring Boot application?",
+      "options": {
+        "A": "@SpringApplication",
+        "B": "@SpringBootApplication",
+        "C": "@EnableAutoConfiguration",
+        "D": "@BootConfiguration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The @Autowired annotation can be used on constructors, fields, and setter methods.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Spring Boot starter dependency is needed to build web applications, including RESTful services?",
+      "options": {
+        "A": "spring-boot-starter-api",
+        "B": "spring-boot-starter-web",
+        "C": "spring-boot-starter-rest",
+        "D": "spring-boot-starter-http"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO scopes available for a Spring Bean by default.",
+      "options": {
+        "A": "singleton",
+        "B": "prototype",
+        "C": "global",
+        "D": "thread"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the default scope of a Spring bean?",
+      "options": {
+        "A": "request",
+        "B": "prototype",
+        "C": "singleton",
+        "D": "session"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Spring Initializr (start.spring.io) is a web-based tool used to bootstrap Spring Boot projects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to map an HTTP GET request to a specific handler method?",
+      "options": {
+        "A": "@PostMapping",
+        "B": "@GetMapping",
+        "C": "@RequestMapping(method=GET)",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO ways to enable Hot Swapping in Spring Boot.",
+      "options": {
+        "A": "Spring Loaded",
+        "B": "Spring Boot DevTools",
+        "C": "Spring HotSwap Plugin",
+        "D": "Spring Restart Tool"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to inject values from the application.properties file into a field?",
+      "options": {
+        "A": "@Property",
+        "B": "@Value",
+        "C": "@Inject",
+        "D": "@ConfigValue"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot uses 'Opinionated' defaults to reduce the amount of manual configuration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to define a configuration class that provides bean definitions?",
+      "options": {
+        "A": "@BeanConfig",
+        "B": "@Configuration",
+        "C": "@Setup",
+        "D": "@AppConfig"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotation that are part of the @SpringBootApplication 'meta-annotation'.",
+      "options": {
+        "A": "@ComponentScan",
+        "B": "@EnableAutoConfiguration",
+        "C": "@EnableMvc",
+        "D": "@Service"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Spring Framework can only be used for building Java applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does IoC stand for?",
+      "options": {
+        "A": "Internal of Control",
+        "B": "Inversion of Control",
+        "C": "Integration of Components",
+        "D": "Interface of Classes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used at the method level to define a bean in a configuration class?",
+      "options": {
+        "A": "@Component",
+        "B": "@Service",
+        "C": "@Bean",
+        "D": "@Instance"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Spring Boot Actuator provides endpoints to monitor and manage your application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to mark a class as a REST controller in Spring?",
+      "options": {
+        "A": "@Controller",
+        "B": "@RestController",
+        "C": "@WebController",
+        "D": "@ApiController"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Spring, a Singleton bean is created once per Spring IoC container.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common relational database drivers supported by Spring Boot Starters.",
+      "options": {
+        "A": "H2",
+        "B": "MySQL",
+        "C": "Redis",
+        "D": "MongoDB"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to tell Spring to scan for components in a specific package?",
+      "options": {
+        "A": "@PackageScan",
+        "B": "@ComponentScan",
+        "C": "@SearchComponent",
+        "D": "@FindBeans"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default port of a Spring Boot application?",
+      "options": {
+        "A": "8081",
+        "B": "443",
+        "C": "8080",
+        "D": "3000"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: @Data is a Spring annotation used for dependency injection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to inject a mock bean into your Spring Boot test?",
+      "options": {
+        "A": "@Mock",
+        "B": "@MockBean",
+        "C": "@FakeBean",
+        "D": "@SpyBean"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO HTTP methods commonly handled by @RequestMapping.",
+      "options": {
+        "A": "GET",
+        "B": "POST",
+        "C": "FETCH",
+        "D": "SEND"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'Spring Boot Starter' provide?",
+      "options": {
+        "A": "A set of convenient dependency descriptors for your application",
+        "B": "A template for the UI",
+        "C": "The JDK installation",
+        "D": "A database server"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Constructor injection is generally recommended over field injection for mandatory dependencies.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to define the primary implementation when multiple beans of the same type exist?",
+      "options": {
+        "A": "@Default",
+        "B": "@Primary",
+        "C": "@First",
+        "D": "@Main"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO build tools that are compatible with Spring Boot.",
+      "options": {
+        "A": "Maven",
+        "B": "Gradle",
+        "C": "Ant",
+        "D": "Webpack"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to map a path variable from a URI to a method parameter?",
+      "options": {
+        "A": "@QueryParam",
+        "B": "@PathVariable",
+        "C": "@UrlParam",
+        "D": "@Path"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: @SpringBootTest is used to launch the full application context for integration testing.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to handle exceptions globally across all controllers?",
+      "options": {
+        "A": "@ErrorHandler",
+        "B": "@ControllerAdvice",
+        "C": "@ExceptionManager",
+        "D": "@GlobalError"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotations used to set the lifecycle of a Spring bean.",
+      "options": {
+        "A": "@PostConstruct",
+        "B": "@PreDestroy",
+        "C": "@AfterStart",
+        "D": "@BeforeEnd"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The @Qualifier annotation is used to resolve ambiguity when multiple beans of the same type exist.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in application.properties is used to change the server port?",
+      "options": {
+        "A": "server.port",
+        "B": "app.port",
+        "C": "spring.port",
+        "D": "http.port"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'pom.xml' file in a Spring project?",
+      "options": {
+        "A": "To configure the database",
+        "B": "To manage project dependencies and build configuration",
+        "C": "To store CSS styles",
+        "D": "To define REST endpoints"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot Auto-configuration attempts to automatically configure your Spring application based on the jar dependencies you added.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to read data from the body of an HTTP request?",
+      "options": {
+        "A": "@Payload",
+        "B": "@RequestBody",
+        "C": "@HttpData",
+        "D": "@MessageBody"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO types of Dependency Injection in Spring.",
+      "options": {
+        "A": "Constructor Injection",
+        "B": "Setter Injection",
+        "C": "Method Injection",
+        "D": "Context Injection"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the @Repository annotation?",
+      "options": {
+        "A": "To mark the class as a Data Access Object (DAO)",
+        "B": "To store files on the server",
+        "C": "To create a version control system",
+        "D": "To handle user logins"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use YAML instead of Properties files for Spring Boot configuration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to map a request parameter from a URL (e.g., ?id=1) to a method parameter?",
+      "options": {
+        "A": "@UrlParam",
+        "B": "@RequestParam",
+        "C": "@QueryValue",
+        "D": "@Input"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO starter dependencies related to security and data.",
+      "options": {
+        "A": "spring-boot-starter-security",
+        "B": "spring-boot-starter-data-jpa",
+        "C": "spring-boot-starter-login",
+        "D": "spring-boot-starter-table"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the @Scope annotation do?",
+      "options": {
+        "A": "It defines the visibility of a variable",
+        "B": "It defines the lifecycle and creation strategy of a bean",
+        "C": "It limits the number of classes in a project",
+        "D": "It calculates the size of the application"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: @Service is functionally the same as @Component but serves as a more specific label for business logic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool provides a GUI to visualize and interact with Spring Boot Actuator endpoints?",
+      "options": {
+        "A": "Spring Boot Dashboard",
+        "B": "Spring Boot Admin",
+        "C": "Spring Actuator Panel",
+        "D": "Spring Control Center"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common HTTP status codes returned by a Spring REST controller by default on success.",
+      "options": {
+        "A": "200 OK",
+        "B": "201 Created",
+        "C": "404 Not Found",
+        "D": "500 Error"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: @Value can be used to inject static arrays from a configuration file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to define a custom response status for a method?",
+      "options": {
+        "A": "@Status",
+        "B": "@ResponseStatus",
+        "C": "@HttpCode",
+        "D": "@ReturnStatus"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'Spring Container'?",
+      "options": {
+        "A": "To store the database records",
+        "B": "To manage the lifecycle and configuration of application beans",
+        "C": "To compile Java code to bytecode",
+        "D": "To host the web server files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Field injection using @Autowired is considered bad practice because it makes unit testing harder.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows Spring Boot to automatically find and configure data sources?",
+      "options": {
+        "A": "@AutoData",
+        "B": "@EnableAutoConfiguration",
+        "C": "@ConfigData",
+        "D": "@LinkDatabase"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotations for creating a RESTful POST endpoint.",
+      "options": {
+        "A": "@PostMapping",
+        "B": "@RequestMapping(method=POST)",
+        "C": "@CreateMapping",
+        "D": "@SendMapping"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of @Profile in Spring?",
+      "options": {
+        "A": "To store user social media info",
+        "B": "To conditionally activate beans based on the environment (dev, prod, etc.)",
+        "C": "To track the performance of a method",
+        "D": "To define the user role"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot Actuator's '/health' endpoint is enabled by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to mark a method as a transaction?",
+      "options": {
+        "A": "@Commit",
+        "B": "@Transactional",
+        "C": "@Atomic",
+        "D": "@Secure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotations used in Spring MVC to send data to a view.",
+      "options": {
+        "A": "@ModelAttribute",
+        "B": "@ResponseBody",
+        "C": "@SendView",
+        "D": "@PushData"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: A prototype bean is created every time it is requested from the container.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to link a Spring Boot class to a specific properties prefix?",
+      "options": {
+        "A": "@PropertySource",
+        "B": "@ConfigurationProperties",
+        "C": "@PropertyLink",
+        "D": "@ValuePrefix"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the @Lazy annotation do?",
+      "options": {
+        "A": "It stops the bean from working",
+        "B": "It delays the initialization of a bean until it is first used",
+        "C": "It reduces the memory usage of the bean",
+        "D": "It marks a test as skipped"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot can be used to create stand-alone console applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to inject an 'Environment' object to access properties programmatically?",
+      "options": {
+        "A": "@Context",
+        "B": "@Autowired",
+        "C": "@Env",
+        "D": "@Inject"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common logging frameworks used by Spring Boot.",
+      "options": {
+        "A": "Logback",
+        "B": "Log4j2",
+        "C": "LogSimple",
+        "D": "JavaLog"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which interface in Spring Data JPA is used to provide CRUD operations and pagination/sorting out of the box?",
+      "options": {
+        "A": "JpaRepository",
+        "B": "CrudRepository",
+        "C": "PagingAndSortingRepository",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: In Spring Security, 'Authentication' is the process of verifying who a user is, while 'Authorization' is verifying what they can do.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle exceptions in a Spring Boot application.",
+      "options": {
+        "A": "@ExceptionHandler inside a Controller",
+        "B": "@ControllerAdvice with @ExceptionHandler",
+        "C": "@ErrorMapping in application.properties",
+        "D": "Implementing the ErrorListener interface"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the @Query annotation in Spring Data JPA?",
+      "options": {
+        "A": "To create a cache for the query results",
+        "B": "To define a custom JPQL or Native SQL query for a repository method",
+        "C": "To specify the database table name",
+        "D": "To refresh the entity from the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to enable Method Level Security (e.g., @PreAuthorize)?",
+      "options": {
+        "A": "@EnableGlobalMethodSecurity",
+        "B": "@EnableMethodSecurity",
+        "C": "@SecureMethods",
+        "D": "Both A and B (A is deprecated in newer versions)"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: The @Transient annotation in a JPA Entity ensures that the field is NOT persisted to the database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for securing a Spring Boot REST API.",
+      "options": {
+        "A": "JSON Web Tokens (JWT)",
+        "B": "OAuth2 / OpenID Connect",
+        "C": "FTP Authentication",
+        "D": "Spring Cookie Manager"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the @JoinColumn annotation specify in a One-to-Many relationship?",
+      "options": {
+        "A": "The name of the primary key in the parent table",
+        "B": "The foreign key column in the destination table",
+        "C": "The name of the mapping class",
+        "D": "The index of the column"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot DevTools' automatic restart is the same as a full 'Cold Start' of the JVM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is the central entry point for customizing Spring Security's filter chain in modern Spring Boot (v3+)?",
+      "options": {
+        "A": "WebSecurityConfigurerAdapter",
+        "B": "SecurityFilterChain (via a @Bean)",
+        "C": "HttpSecurityManager",
+        "D": "AuthenticationFilter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'Persistence Context' in JPA?",
+      "options": {
+        "A": "To store the database connection string",
+        "B": "To manage the lifecycle of entity instances and their synchronization with the database",
+        "C": "To encrypt the data before saving",
+        "D": "To handle user session timeouts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotations used to perform validation on request bodies.",
+      "options": {
+        "A": "@Valid",
+        "B": "@NotNull",
+        "C": "@Check",
+        "D": "@Validate"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: @EntityGraph is used in Spring Data JPA to solve the 'N+1 Select' problem by eagerly fetching associations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to map a Java enum to a database string or integer value in JPA?",
+      "options": {
+        "A": "@EnumMapping",
+        "B": "@Enumerated",
+        "C": "@MapEnum",
+        "D": "@EnumType"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you provide a custom login page in Spring Security?",
+      "options": {
+        "A": "By setting 'login.page' in application.properties",
+        "B": "By configuring '.formLogin(form -> form.loginPage(\"/login\"))' in the security config",
+        "C": "By naming your HTML file 'login.html' in the root folder",
+        "D": "Spring Security does not allow custom login pages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common types of inheritance strategies in JPA.",
+      "options": {
+        "A": "SINGLE_TABLE",
+        "B": "JOINED",
+        "C": "MULTIPLE_FILE",
+        "D": "LINKED_LIST"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: By default, Spring Data JPA methods like 'findByEmail' are automatically translated into queries using Method Name Derivation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to mark a method to be executed on a fixed schedule?",
+      "options": {
+        "A": "@Timed",
+        "B": "@Scheduled",
+        "C": "@CronJob",
+        "D": "@Repeat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of the @Transactional(readOnly = true) attribute?",
+      "options": {
+        "A": "It prevents any database connection from being opened",
+        "B": "It acts as a hint to the provider to optimize for read-only operations (like skipping dirty checking)",
+        "C": "It hides the data from other users",
+        "D": "It deletes the data after reading it"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'CascadeType.REMOVE' in JPA ensures that when a parent is deleted, its associated children are also deleted.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to indicate that a method should be executed asynchronously in a separate thread?",
+      "options": {
+        "A": "@Threaded",
+        "B": "@Async",
+        "C": "@Parallel",
+        "D": "@Future"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO features of Spring Boot Actuator.",
+      "options": {
+        "A": "Health Monitoring",
+        "B": "Metrics Collection",
+        "C": "Automatic Code Refactoring",
+        "D": "SQL Injection Prevention"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In Spring Security, the 'SecurityContextHolder' is used to access the details of the currently authenticated user.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the @Modifying annotation do in Spring Data JPA?",
+      "options": {
+        "A": "It allows a repository method to change the database schema",
+        "B": "It is required for repository methods that perform INSERT, UPDATE, or DELETE queries",
+        "C": "It renames the columns in the entity",
+        "D": "It enables caching for the method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to define a custom bean name for an @Autowired dependency when multiple candidates exist?",
+      "options": {
+        "A": "@Name",
+        "B": "@Qualifier",
+        "C": "@Alias",
+        "D": "@Identity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO annotations used to map JSON fields to Java fields using Jackson (Spring's default JSON provider).",
+      "options": {
+        "A": "@JsonProperty",
+        "B": "@JsonIgnore",
+        "C": "@JsonMap",
+        "D": "@JsonData"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Pessimistic Locking' in JPA involves locking the database record at the database level to prevent concurrent access.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to see the SQL queries generated by Hibernate in the console?",
+      "options": {
+        "A": "spring.jpa.show-sql=true",
+        "B": "hibernate.log.sql=true",
+        "C": "jpa.debug=true",
+        "D": "spring.sql.print=true"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Constructor Injection' in Spring?",
+      "options": {
+        "A": "Using a constructor to create a new database",
+        "B": "Providing dependencies to a class via its constructor",
+        "C": "Automatically building the UI components",
+        "D": "A way to compile Java classes faster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Spring Boot Profiles can be activated via the command line using '--spring.profiles.active=dev'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to perform content negotiation in a REST controller to return either XML or JSON?",
+      "options": {
+        "A": "@RequestMapping(produces = { \"application/json\", \"application/xml\" })",
+        "B": "@ContentNegotiation",
+        "C": "@MediaType",
+        "D": "@XmlAndJson"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @EnableCaching annotation is required to activate Spring's caching infrastructure.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO attributes of the @Transactional annotation used to control transaction behavior.",
+      "options": {
+        "A": "propagation",
+        "B": "isolation",
+        "C": "duration",
+        "D": "security"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary difference between @ControllerAdvice and @RestControllerAdvice?",
+      "options": {
+        "A": "@RestControllerAdvice includes @ResponseBody, making it suitable for REST APIs.",
+        "B": "@ControllerAdvice is only for XML, @RestControllerAdvice is for JSON.",
+        "C": "@RestControllerAdvice is faster in performance.",
+        "D": "There is no functional difference."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface should you implement to create a custom UserDetailsService for Spring Security?",
+      "options": {
+        "A": "UserDetailsService",
+        "B": "UserAuthenticationService",
+        "C": "SecurityUserProvider",
+        "D": "PrincipalLoader"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In Spring Data JPA, 'Eager' fetching loads the associated data immediately, while 'Lazy' fetching loads it only when accessed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to bind a method parameter to a cookie value?",
+      "options": {
+        "A": "@CookieValue",
+        "B": "@CookieParam",
+        "C": "@RequestCookie",
+        "D": "@ValueCookie"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common transaction propagation levels in Spring.",
+      "options": {
+        "A": "REQUIRED",
+        "B": "REQUIRES_NEW",
+        "C": "ALWAYS_COMMIT",
+        "D": "ONLY_ONE"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the @PreAuthorize(\"hasRole('ADMIN')\") annotation do?",
+      "options": {
+        "A": "It checks if the user has the 'ADMIN' role before allowing method execution.",
+        "B": "It automatically assigns the 'ADMIN' role to the user.",
+        "C": "It redirects the user to the admin dashboard.",
+        "D": "It logs all admin activity to the database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dirty Checking' in Hibernate/JPA means that the provider automatically detects changes to an entity and syncs them with the DB.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to ignore certain fields during JSON serialization and deserialization?",
+      "options": {
+        "A": "@JsonIgnore",
+        "B": "@NoJson",
+        "C": "@HideField",
+        "D": "@TransientJSON"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO starters that help with connecting to NoSQL databases.",
+      "options": {
+        "A": "spring-boot-starter-data-mongodb",
+        "B": "spring-boot-starter-data-redis",
+        "C": "spring-boot-starter-sql-server",
+        "D": "spring-boot-starter-oracle"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'spring-boot-maven-plugin'?",
+      "options": {
+        "A": "To package the application into an executable 'fat' jar or war file.",
+        "B": "To write unit tests automatically.",
+        "C": "To deploy the app to AWS.",
+        "D": "To manage the Java version."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A Spring Bean's lifecycle can be managed using @PostConstruct and @PreDestroy.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which JPA annotation is used to define a 'one-to-many' relationship?",
+      "options": {
+        "A": "@OneToMany",
+        "B": "@ManyToOne",
+        "C": "@Relationship",
+        "D": "@ListMapping"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to pass parameters to a @Query method.",
+      "options": {
+        "A": "Indexed parameters (?1, ?2)",
+        "B": "Named parameters (:name)",
+        "C": "Dynamic parameters ($1, $2)",
+        "D": "Context parameters (#name)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'N+1 Problem' in JPA?",
+      "options": {
+        "A": "When one query for a parent results in N additional queries for each child record.",
+        "B": "When a database table has too many columns.",
+        "C": "When the server runs out of memory.",
+        "D": "When a primary key is not auto-incremented."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @CacheEvict annotation is used to remove entries from the cache.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface in Spring Security represents an authenticated user's principal and authorities?",
+      "options": {
+        "A": "Authentication",
+        "B": "UserContext",
+        "C": "SecureUser",
+        "D": "LoginToken"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common HTTP headers used for Content Negotiation.",
+      "options": {
+        "A": "Accept",
+        "B": "Content-Type",
+        "C": "Authorization",
+        "D": "User-Agent"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'OAuth2ResourceServer' is used when your Spring Boot app is the one validating tokens from an external issuer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to bind properties from a YAML file to a Java object with a specific prefix?",
+      "options": {
+        "A": "@ConfigurationProperties",
+        "B": "@Value",
+        "C": "@PropertySource",
+        "D": "@BindingProperties"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Dependency Ambiguity' mean in Spring?",
+      "options": {
+        "A": "When the container finds two or more beans of the same type for injection.",
+        "B": "When the database connection fails.",
+        "C": "When the JDK version is wrong.",
+        "D": "When a bean is defined as private."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO annotations related to Spring Data JPA auditing.",
+      "options": {
+        "A": "@CreatedDate",
+        "B": "@LastModifiedBy",
+        "C": "@AuditTime",
+        "D": "@TrackUser"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: By default, Spring Boot uses 'Camel Case' for database column names when using Hibernate.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface allows you to define a set of methods that are called at various points in a bean's lifecycle?",
+      "options": {
+        "A": "BeanPostProcessor",
+        "B": "LifecycleManager",
+        "C": "BeanStartListener",
+        "D": "ApplicationContext"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the @RequestBody annotation?",
+      "options": {
+        "A": "To deserialize the incoming JSON/XML request body into a Java object.",
+        "B": "To send the response body to the client.",
+        "C": "To define the size of the request.",
+        "D": "To encrypt the request data."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'CSRF' (Cross-Site Request Forgery) protection is enabled by default in Spring Security.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which JPA annotation is used to specify that a field should be a 'Large Object' (BLOB/CLOB)?",
+      "options": {
+        "A": "@Lob",
+        "B": "@Blob",
+        "C": "@Large",
+        "D": "@BigData"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to enable Spring Profiles.",
+      "options": {
+        "A": "spring.profiles.active property",
+        "B": "-Dspring.profiles.active command line argument",
+        "C": "@ActiveProfiles annotation",
+        "D": "Setting the profile in the pom.xml file"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In Spring Boot, the '/actuator/info' endpoint is always hidden for security.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'DispatcherServlet' in Spring MVC?",
+      "options": {
+        "A": "The Front Controller that coordinates the entire request processing flow.",
+        "B": "A database connection pool.",
+        "C": "A tool to send emails.",
+        "D": "The main entry point of the JVM."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to mark a method that should handle a specific type of exception?",
+      "options": {
+        "A": "@ExceptionHandler",
+        "B": "@CatchError",
+        "C": "@ErrorMessage",
+        "D": "@HandleException"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using Spring Boot's 'Fat Jar' approach.",
+      "options": {
+        "A": "Includes all dependencies and the embedded server in one file.",
+        "B": "Simplifies deployment to cloud environments.",
+        "C": "Makes the file size smaller than a standard jar.",
+        "D": "Prevents the need for a JVM on the server."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: @JsonInclude(Include.NON_NULL) ensures that null fields are excluded from the JSON output.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'propagation' level in Spring transactions will always start a new transaction, suspending any existing one?",
+      "options": {
+        "A": "REQUIRES_NEW",
+        "B": "REQUIRED",
+        "C": "SUPPORTS",
+        "D": "NEVER"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific proxy mechanism does Spring use by default for a class that does NOT implement any interface?",
+      "options": {
+        "A": "JDK Dynamic Proxy",
+        "B": "CGLIB Proxy",
+        "C": "AspectJ Weaver",
+        "D": "JVM Native Proxy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a Spring transaction, 'Dirty Reads' are allowed when the isolation level is set to READ_COMMITTED.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO types of 'Advice' available in Spring AOP.",
+      "options": {
+        "A": "@Around",
+        "B": "@AfterThrowing",
+        "C": "@BeforeCommit",
+        "D": "@AfterInitialize"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In Spring WebFlux, which type represents a sequence of 0 to N items produced asynchronously?",
+      "options": {
+        "A": "Mono",
+        "B": "Flux",
+        "C": "Observable",
+        "D": "Flowable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of calling a @Transactional method from another method within the same class (Self-Invocation)?",
+      "options": {
+        "A": "The transaction starts normally.",
+        "B": "The transaction is ignored because the call bypasses the proxy.",
+        "C": "An IllegalStateException is thrown.",
+        "D": "The transaction is managed by the JVM instead of Spring."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The @Order annotation can be used to define the execution sequence of multiple Spring AOP Aspects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component in Spring Cloud is primarily used as a Dynamic Service Discovery server?",
+      "options": {
+        "A": "Spring Cloud Gateway",
+        "B": "Netflix Eureka",
+        "C": "Config Server",
+        "D": "Hystrix"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO strategies for handling 'Livelocks' in a high-concurrency Spring application.",
+      "options": {
+        "A": "Optimistic Locking (@Version)",
+        "B": "Pessimistic Locking (LockModeType.PESSIMISTIC_WRITE)",
+        "C": "Increasing the connection pool size",
+        "D": "Disabling the Persistence Context"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'JoinPoint' object in an AOP Aspect method?",
+      "options": {
+        "A": "To access the metadata of the method being intercepted (arguments, name, etc.).",
+        "B": "To merge two different Spring beans.",
+        "C": "To join the database tables automatically.",
+        "D": "To manage the HTTP session."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Spring WebFlux uses the Project Reactor library and a non-blocking event loop (Netty) by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'propagation' level should be used to ensure a method runs in its own transaction, but does NOT fail if no transaction exists?",
+      "options": {
+        "A": "MANDATORY",
+        "B": "REQUIRES_NEW",
+        "C": "SUPPORTS",
+        "D": "NOT_SUPPORTED"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common patterns for implementing Distributed Transactions in a Spring Microservices environment.",
+      "options": {
+        "A": "Saga Pattern (Choreography/Orchestration)",
+        "B": "Two-Phase Commit (2PC)",
+        "C": "Singleton Pattern",
+        "D": "Observer Pattern"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'ProceedingJoinPoint.proceed()' method do in an @Around advice?",
+      "options": {
+        "A": "It continues to the next advice.",
+        "B": "It executes the actual target method being intercepted.",
+        "C": "It rolls back the transaction.",
+        "D": "It stops the execution of the thread."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: By default, Spring only rolls back a transaction for Unchecked Exceptions (RuntimeException).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows you to refresh the configuration of a @Bean without restarting the entire Microservice?",
+      "options": {
+        "A": "@RefreshScope",
+        "B": "@Reloadable",
+        "C": "@ConfigRefresh",
+        "D": "@DynamicUpdate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key differences between JDK Dynamic Proxies and CGLIB.",
+      "options": {
+        "A": "JDK Proxies require an interface; CGLIB works with classes.",
+        "B": "JDK Proxies are part of the standard Java API; CGLIB is an external library.",
+        "C": "CGLIB is faster at startup; JDK Proxies are faster at runtime.",
+        "D": "JDK Proxies can mock private methods; CGLIB cannot."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In Spring Security, the 'FilterChainProxy' is a single filter that delegates to a list of other filters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Circuit Breaker' pattern used for in Spring Cloud?",
+      "options": {
+        "A": "To prevent a failure in one service from cascading to other services.",
+        "B": "To encrypt the communication between services.",
+        "C": "To load balance the traffic.",
+        "D": "To speed up the database queries."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to create a custom 'Pointcut' expression that can be reused across multiple Advice methods?",
+      "options": {
+        "A": "@Pointcut",
+        "B": "@Expression",
+        "C": "@AopTarget",
+        "D": "@Hook"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Spring WebClient is the modern, non-blocking replacement for the deprecated RestTemplate.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In JPA, what is the consequence of using 'FetchType.EAGER' on a large collection of child entities?",
+      "options": {
+        "A": "It significantly improves performance.",
+        "B": "It can lead to massive memory consumption and slow performance due to the N+1 problem.",
+        "C": "It prevents the entity from being updated.",
+        "D": "It forces the use of a native SQL query."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO strategies provided by Spring Cloud Config to secure sensitive configuration data.",
+      "options": {
+        "A": "Symmetric Encryption ({cipher})",
+        "B": "Asymmetric Encryption (RSA keys)",
+        "C": "Base64 Encoding",
+        "D": "HTML Masking"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Backpressure' in the context of Spring WebFlux?",
+      "options": {
+        "A": "The ability of a subscriber to signal the producer about how much data it can handle.",
+        "B": "A security attack on the network.",
+        "C": "The delay caused by the database.",
+        "D": "The pressure on developers to finish the project."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @Cachable(sync = true) can be used to ensure that only one thread is populating the cache for a specific key.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Spring component is responsible for converting a java.util.Optional return type from a Repository into a 404 response in a Controller?",
+      "options": {
+        "A": "There is no automatic conversion; it must be handled manually (e.g., .orElseThrow()).",
+        "B": "The DispatcherServlet",
+        "C": "The JacksonMessageConverter",
+        "D": "The JpaRepository interface"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to prevent 'Session Fixation' attacks in Spring Security.",
+      "options": {
+        "A": "Changing the session ID upon authentication (migrateSession).",
+        "B": "Disabling sessions entirely (Stateless).",
+        "C": "Using only HTTP cookies.",
+        "D": "Increasing the session timeout."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Spring's @Transactional isolation level 'SERIALIZABLE' is the most secure but also the slowest due to high locking overhead.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'execution(* com.service.*.*(..))' aspectj expression match?",
+      "options": {
+        "A": "Any method in any class within the com.service package.",
+        "B": "Only private methods in the com.service package.",
+        "C": "Only methods that return a String.",
+        "D": "Any class that has the @Service annotation."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Spring Cloud tool is used to implement 'Sidecar' patterns for non-JVM applications?",
+      "options": {
+        "A": "Spring Cloud Netflix Sidecar",
+        "B": "Spring Cloud Gateway",
+        "C": "Eureka Client",
+        "D": "Config Client"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Spring Cloud Sleeper is used to add latency to services during Chaos Engineering tests.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows an Aspect to access the return value of a method after it successfully completes?",
+      "options": {
+        "A": "@AfterReturning",
+        "B": "@After",
+        "C": "@Around",
+        "D": "@AfterSuccess"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a reactive stream (WebFlux), data is pushed to the subscriber as soon as the publisher is created, regardless of demand.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO isolation levels that prevent 'Non-repeatable Reads'.",
+      "options": {
+        "A": "REPEATABLE_READ",
+        "B": "SERIALIZABLE",
+        "C": "READ_COMMITTED",
+        "D": "READ_UNCOMMITTED"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'spring.main.allow-circular-references' property in Spring Boot 2.6+?",
+      "options": {
+        "A": "To re-enable circular dependency support which is disabled by default.",
+        "B": "To increase the speed of bean creation.",
+        "C": "To allow the same bean to have multiple names.",
+        "D": "To enable recursive method calls."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface is used to create a custom 'SecurityExpressionHandler' for complex SpEL-based authorization?",
+      "options": {
+        "A": "SecurityExpressionHandler",
+        "B": "AuthorizationManager",
+        "C": "AccessDecisionVoter",
+        "D": "PermissionEvaluator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @Async annotation requires a proxy, and therefore won't work if the method is called from within the same class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Spring Cloud, which component is used to manage and rotate secrets across an entire cluster?",
+      "options": {
+        "A": "Spring Cloud Vault",
+        "B": "Config Server",
+        "C": "Eureka",
+        "D": "Bus"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to handle 'N+1 queries' in Spring Data JPA.",
+      "options": {
+        "A": "Using @EntityGraph",
+        "B": "Using JOIN FETCH in JPQL",
+        "C": "Setting FetchType to LAZY",
+        "D": "Increasing the database buffer size"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Two-Phase Commit' (2PC) protocol used for?",
+      "options": {
+        "A": "To ensure atomicity in distributed transactions across multiple resources.",
+        "B": "To speed up the login process.",
+        "C": "To backup the database twice.",
+        "D": "To compile Java and Kotlin code together."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @Transactional(propagation = Propagation.MANDATORY) requires an existing transaction or it will throw an exception.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator in Project Reactor (WebFlux) is used to switch the execution to a different thread pool (Scheduler)?",
+      "options": {
+        "A": "publishOn",
+        "B": "subscribeOn",
+        "C": "threadOn",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO benefits of using Spring Cloud Gateway over Netflix Zuul.",
+      "options": {
+        "A": "Built-in support for non-blocking Netty server.",
+        "B": "First-class support for WebSockets.",
+        "C": "Faster startup time in all environments.",
+        "D": "Elimination of the need for Eureka."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Weaving' mean in Aspect-Oriented Programming?",
+      "options": {
+        "A": "The process of linking aspects with other application types or objects to create an advised object.",
+        "B": "Connecting the frontend to the backend.",
+        "C": "Generating documentation from code comments.",
+        "D": "A specific way to organize the folder structure."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @Scheduled methods in Spring Boot are executed in a single-threaded executor by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to create a 'Composite' primary key in JPA using a separate class?",
+      "options": {
+        "A": "@IdClass",
+        "B": "@EmbeddedId",
+        "C": "@CompositeId",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO common Circuit Breaker libraries used with Spring Cloud.",
+      "options": {
+        "A": "Resilience4j",
+        "B": "Netflix Hystrix",
+        "C": "Apache Camel",
+        "D": "Spring Retry"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the role of 'BeanFactoryPostProcessor' in Spring?",
+      "options": {
+        "A": "It allows for modification of the application's bean definitions before any beans are instantiated.",
+        "B": "It clears the memory after a bean is destroyed.",
+        "C": "It sends a report to the developer about bean performance.",
+        "D": "It compiles the XML config into Java."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: When using @Cacheable, the return value of the method is what gets stored in the cache.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Spring component allows for 'Polyglot' persistence by supporting both SQL and NoSQL in the same project?",
+      "options": {
+        "A": "Spring Data",
+        "B": "Spring Boot Starter Parent",
+        "C": "Spring Context",
+        "D": "Spring Expression Language"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to implement 'Client-Side Load Balancing' in Spring Cloud.",
+      "options": {
+        "A": "Spring Cloud LoadBalancer",
+        "B": "Netflix Ribbon",
+        "C": "Nginx",
+        "D": "F5 Big-IP"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: An Aspect can be applied to a final class when using CGLIB proxies.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'within()' designator in a Pointcut expression?",
+      "options": {
+        "A": "It limits matching to join points within certain types (classes/packages).",
+        "B": "It checks the time within which a method must finish.",
+        "C": "It finds methods within a specific thread.",
+        "D": "It checks if a variable is within a specific range."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to provide the 'Metadata' for a custom Spring Boot Starter to appear in IDE autocompletion?",
+      "options": {
+        "A": "No annotation; it requires a 'spring-configuration-metadata.json' file.",
+        "B": "@StarterMetadata",
+        "C": "@AutoConfigure",
+        "D": "@IDEHint"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a Microservices architecture, the 'Saga' pattern uses local transactions in each service to ensure eventual consistency.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface represents the 'Event Loop' in Spring WebFlux's underlying Netty server?",
+      "options": {
+        "A": "EventLoopGroup",
+        "B": "ThreadPoolExecutor",
+        "C": "ReactiveLoop",
+        "D": "FluxEngine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for securing a 'Service-to-Service' call in a Microservice cluster.",
+      "options": {
+        "A": "mTLS (Mutual TLS)",
+        "B": "JWT Relay",
+        "C": "Basic Auth",
+        "D": "IP Whitelisting"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Hibernate's 'Second Level Cache' is shared across all sessions within the same SessionFactory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if a @Transactional method calls another @Transactional method with propagation 'REQUIRES_NEW'?",
+      "options": {
+        "A": "The current transaction is suspended, and a new one is started.",
+        "B": "The second method joins the first transaction.",
+        "C": "The first transaction is committed immediately.",
+        "D": "An error occurs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to define a custom 'HandlerMethodArgumentResolver'?",
+      "options": {
+        "A": "No annotation; you must register it in a WebMvcConfigurer class.",
+        "B": "@ArgumentResolver",
+        "C": "@CustomInput",
+        "D": "@ParamMapper"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Spring Cloud Sleuth' is used to provide distributed tracing by adding 'Trace IDs' to every log and request.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator in Reactor is used to retry a failed operation with 'Exponential Backoff'?",
+      "options": {
+        "A": "retryWhen",
+        "B": "backoffRetry",
+        "C": "repeatWithDelay",
+        "D": "retryExponential"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using 'Immutability' for Spring Beans.",
+      "options": {
+        "A": "Thread safety by design.",
+        "B": "Easier to reason about and debug.",
+        "C": "Faster garbage collection.",
+        "D": "Reduced file size of the jar."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The @Lock(LockModeType.OPTIMISTIC) annotation requires a @Version field in the entity class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Semantic Versioning' rule often used for Spring Boot Starters?",
+      "options": {
+        "A": "Major.Minor.Patch",
+        "B": "Year.Month.Day",
+        "C": "Release.Candidate.Build",
+        "D": "Version.Suffix"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface allows you to programmatically register beans at runtime?",
+      "options": {
+        "A": "BeanDefinitionRegistryPostProcessor",
+        "B": "BeanFactory",
+        "C": "RuntimeBeanRegister",
+        "D": "ApplicationContext"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In Spring Cloud Gateway, 'Predicates' are used to determine if a request matches a specific route.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component manages the 'Transaction Metadata' and coordinates with the underlying platform (JDBC/JPA) to manage transactions?",
+      "options": {
+        "A": "PlatformTransactionManager",
+        "B": "JdbcTemplate",
+        "C": "EntityManagerFactory",
+        "D": "TransactionProxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to implement 'Asynchronous Request Processing' in Spring MVC (not WebFlux).",
+      "options": {
+        "A": "Callable<T> return type",
+        "B": "DeferredResult<T> return type",
+        "C": "@Async on the controller method",
+        "D": "CompletableFuture with @RestController"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
   ]
 }

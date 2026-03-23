@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Crisis Management", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of Crisis Management in a corporate environment?",
+    "options": {
+      "A": "To physically move the office furniture to a new location.",
+      "B": "To minimize the negative impact of a high-consequence event on the organization's people, assets, and reputation.",
+      "C": "To automatically write and publish social media posts for the CEO.",
+      "D": "To eliminate the need for any insurance policies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Crisis' is technically different from a standard 'Incident' because a crisis poses an existential threat to the organization's survival or reputation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In crisis management, what is a 'Communication Plan'?",
+    "options": {
+      "A": "A physical megaphone kept in the lobby.",
+      "B": "A pre-defined technical and strategic framework for sharing information with stakeholders (employees, media, investors) during a crisis.",
+      "C": "A specialized software for poets to communicate.",
+      "D": "The SQL query used to delete old employee phone numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CMT' stand for in a crisis response organization?",
+    "options": {
+      "A": "Central Monitoring Tool",
+      "B": "Crisis Management Team",
+      "C": "Corporate Message Transfer",
+      "D": "Core Mitigation Technology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common types of corporate crises? (Select all that apply)",
+    "options": {
+      "A": "Massive data breaches",
+      "B": "Natural disasters affecting headquarters",
+      "C": "Severe financial fraud",
+      "D": "A staff member taking a long lunch"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Escalation' in the context of crisis management?",
+    "options": {
+      "A": "The process of moving a person to a higher floor in a physical building.",
+      "B": "The technical and administrative process of passing an issue from operational staff to executive leadership when it exceeds certain thresholds.",
+      "C": "A specialized software for architects to design elevators.",
+      "D": "Increasing the frame rate of a video call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Golden Hour' in crisis management refers to the critical first hour after a crisis occurs when effective communication is most vital.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific document technically defines the roles, responsibilities, and protocols for managing a major organizational disruption?",
+    "options": {
+      "A": "The Crisis Management Plan (CMP)",
+      "B": "The company's holiday calendar",
+      "C": "A specialized tool for measuring light levels",
+      "D": "The office floor plan"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of a 'Tabletop Exercise'?",
+    "options": {
+      "A": "To physically clean the office tables.",
+      "B": "A discussion-based simulation where team members walk through their roles in a specific crisis scenario to identify gaps in the plan.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the speed of the office Wi-Fi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Crisis management only involves the IT department and does not require input from Legal, HR, or PR.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Business Continuity'?",
+    "options": {
+      "A": "Closing the business permanently after a disaster.",
+      "B": "The capability of an organization to technically continue the delivery of products or services at acceptable predefined levels following a disruption.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Post-Incident Review' (PIR) technically defined as? (Select all that apply)",
+    "options": {
+      "A": "A formal meeting and report to analyze what happened and how to prevent it in the future",
+      "B": "A physical review of the office furniture",
+      "C": "A critical step in the 'Recovery' phase of crisis management",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Stakeholder' mapping?",
+    "options": {
+      "A": "Identifying all individuals or groups technically or financially affected by the crisis and determining how to communicate with them.",
+      "B": "Hiding a code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Crisis Preparedness' involves technical training and the procurement of emergency resources before a crisis occurs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Succession Planning' in a crisis management context?",
+    "options": {
+      "A": "Identifying and technically preparing backup leaders to take over if key executives are unavailable during a crisis.",
+      "B": "Planning a physical party for the successor.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common 'Crisis' communication channel?",
+    "options": {
+      "A": "Using a physical key to open a drawer.",
+      "B": "Mass notification systems (SMS, email alerts, sirens).",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An organization should always wait for 100% of the facts to be known before issuing its first public statement during a crisis.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resilience' technically defined as in management?",
+    "options": {
+      "A": "Sewing physical patches onto IT uniforms.",
+      "B": "The technical and cultural ability of an organization to absorb, adapt, and grow from disruptions.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Impact Assessment'?",
+    "options": {
+      "A": "The technical process of evaluating the physical, financial, and reputational damage caused by a crisis.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Spokesperson' is the individual technically designated to provide official statements to the media and public during a crisis.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Crisis Management' roles? (Select all that apply)",
+    "options": {
+      "A": "Crisis Lead (Decision Maker)",
+      "B": "Communications Lead",
+      "C": "Buying physical snacks for the IT team",
+      "D": "Scribe (Recorder of actions and decisions)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is an 'Assembly Point'?",
+    "options": {
+      "A": "A designated physical location where people meet during an evacuation for safety and accountability.",
+      "B": "A strategy for developers to use less memory.",
+      "C": "A specialized tool for measuring light.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Resource Management' during a crisis?",
+    "options": {
+      "A": "The process of technically identifying and allocating the people, equipment, and funds needed to resolve the crisis.",
+      "B": "Physically tagging a server with a sticker.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Crisis management is a static plan that is technically written once and never updated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Recovery' phase activities? (Select all that apply)",
+    "options": {
+      "A": "Restoring systems from technical backups",
+      "B": "Conducting psychological support for affected employees",
+      "C": "Guaranteed to replace all human IT staff",
+      "D": "Analyzing the effectiveness of the initial response"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mitigation' in crisis management?",
+    "options": {
+      "A": "A physical door that is stuck shut.",
+      "B": "Taking technical or administrative actions to reduce the likelihood or impact of a crisis *before* it occurs.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Incident Severity' ranking?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A scale (e.g., Level 1-5) used to technically determine the appropriate level of management response based on potential impact.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The primary goal of crisis communication is to hide the facts to protect the organization's reputation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Administrative' crisis controls? (Select all that apply)",
+    "options": {
+      "A": "Employee emergency contact databases",
+      "B": "Documented escalation workflows",
+      "C": "The SQL query parser",
+      "D": "Mutual aid agreements with other firms"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Situation Awareness'?",
+    "options": {
+      "A": "Building a physical bridge for a social event.",
+      "B": "The technical and cognitive ability to perceive, comprehend, and project the status of a crisis as it unfolds.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Logistics' support in a crisis?",
+    "options": {
+      "A": "Ensuring the technical supply of food, water, transportation, and equipment for the response team.",
+      "B": "Hiring a person named Logistics.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Crisis management plans should technically be tested at least once per year.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Operational Continuity'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring critical business processes remain functional during a crisis",
+      "B": "Scanning physical shipping containers",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Using redundant technical sites for data processing"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is an 'Internal' crisis?",
+    "options": {
+      "A": "A crisis technically originating from within the organization, such as a major server failure or employee misconduct.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis Duration'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical measurement of time from the initial recognition of the crisis until the 'Recovery' phase is complete.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Crisis management technically includes the 'After-Action' report which analyzes the performance of the team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' crisis management platforms? (Select all that apply)",
+    "options": {
+      "A": "Everbridge",
+      "B": "PagerDuty",
+      "C": "ServiceNow Crisis Management",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gap Analysis' in crisis preparedness?",
+    "options": {
+      "A": "Scanning physical shipping containers.",
+      "B": "The process of identifying the difference between the organization's current technical capabilities and what is required by the Crisis Management Plan.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Crisis Dashboard'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A visual technical interface showing real-time metrics on the crisis status, resource allocation, and communication reach.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when a crisis management team is expected to respond in 30 minutes but their contact details are technically 2 years out of date.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Crisis' Auditor training? (Select all that apply)",
+    "options": {
+      "A": "Understanding international standards like ISO 22301",
+      "B": "Learning how to verify technical backup logs",
+      "C": "Identifying program satisfaction trends",
+      "D": "Understanding the principles of organizational resilience"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Social Media' monitoring in a crisis?",
+    "options": {
+      "A": "Watching a physical wall on fire.",
+      "B": "The technical process of tracking public sentiment and rumors across social platforms to inform the communication response.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Respond' (MTTR) during a crisis?",
+    "options": {
+      "A": "The average duration from when the Crisis Management Team is activated until the first containment action is technically taken.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Crisis management technically providing 'Reasonable Assurance' rather than 'Absolute Assurance' that an organization will survive any event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Crisis stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CEO / Board members",
+      "B": "Government Regulatory bodies",
+      "C": "The media",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Incident Command System' (ICS)?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "A standardized technical framework for the command, control, and coordination of emergency response.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis Communications Performance'?",
+    "options": {
+      "A": "Metrics tracking how quickly and effectively the organization's technical messages reached the intended audience.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Recovery' report for a 10TB system masterfully delivered in exactly 1 minute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Communication benefits? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all employees receive emergency alerts simultaneously",
+      "B": "Consistency in result presentation across global business units",
+      "C": "Guaranteed to replace all human IT staff",
+      "D": "Instant tracking of message 'Delivery' and 'Read' status"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Scenario' planning?",
+    "options": {
+      "A": "Developing technical and strategic response plans for specific, high-likelihood crisis events (e.g., cyberattack vs. earthquake).",
+      "B": "Digging up a physical root in the office garden.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis Maturity' score?",
+    "options": {
+      "A": "A measure of how technically and strategically advanced an organization's crisis response capabilities are.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scopes' occur when an organization plans for a local crisis but fails to technically plan for a crisis affecting its global supply chain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Crisis roles? (Select all that apply)",
+    "options": {
+      "A": "Incident Commander",
+      "B": "Liaison Officer",
+      "C": "Safety Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Alternate' Site management?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical process of maintaining a secondary location (Hot, Warm, or Cold) where business can be conducted during a crisis.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Recovery' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average duration from when a crisis disrupts business operations until those technical systems are fully restored to normal.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in crisis leadership refers to promising customers 'Immediate Recovery' while technically only performing daily backups.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' crisis planning? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all departments understand their role in the response",
+      "B": "Conducting 'blind' risk assessments to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where security and safety are shared responsibilities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Critical' Dependency mapping?",
+    "options": {
+      "A": "The technical process of identifying which external vendors or systems are mandatory for the organization to function during a crisis.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Triage'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a potential crisis signal being detected until the Crisis Management Team formally assesses it.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Complete Crisis Resolution' report in exactly 1 minute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Alerting benefits? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all stakeholders receive accurate information instantly",
+      "B": "Predicting future 'Risk' trends based on alert volume",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Real-time tracking of team 'Availability' and 'Response' status"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Risk Assessment' in crisis management?",
+    "options": {
+      "A": "The technical process of identifying and evaluating threats that could lead to an organizational crisis.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis Team' Utilization?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how much of the team's capacity is technically assigned to active crisis resolution vs. preparedness.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the Crisis Team uses data from 5 years ago technically to make a decision today.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Crisis Standards besides ISO 22301? (Select all that apply)",
+    "options": {
+      "A": "NFPA 1600",
+      "B": "ASIS SPC.1",
+      "C": "NIST SP 800-34",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Crisis' Analysis?",
+    "options": {
+      "A": "The comprehensive technical and analytical process of evaluating an event to determine if it meets the criteria of a crisis.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific metric in a Business Impact Analysis (BIA) defines the maximum allowable technical delay between a disruption and the restoration of a system?",
+    "options": {
+      "A": "Recovery Point Objective (RPO)",
+      "B": "Recovery Time Objective (RTO)",
+      "C": "Maximum Tolerable Downtime (MTD)",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under the Incident Command System (ICS), the 'Span of Control' principle technically recommends that one supervisor should oversee between 3 and 7 subordinates to maintain effective crisis coordination.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of a 'Business Impact Analysis' (BIA) during the crisis preparedness phase?",
+    "options": {
+      "A": "To physically repair broken server racks.",
+      "B": "To identify and prioritize critical business functions and their technical dependencies to determine recovery order.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Communication' strategy involves the use of 'Dark Sites' (pre-built, unpublished websites) during a crisis?",
+    "options": {
+      "A": "Hiring a person named Dark to watch the servers.",
+      "B": "Having a technical site ready to go live instantly with pre-approved messaging once a specific crisis threshold is reached.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the public privacy notice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Interoperability' in a crisis management context?",
+    "options": {
+      "A": "The technical ability of different teams (e.g., IT, HR, and External Agencies) to communicate and share data using common protocols and equipment.",
+      "B": "Hiring a professional actor to represent the company.",
+      "C": "To physically connect two routers with a serial cable.",
+      "D": "Increasing the frame rate of the automation UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'RTO' vs 'RPO' occurs when a business requires 4 hours to recover (RTO) but the technical backup system only saves data once every 24 hours (RPO).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves verifying if an employee's 'Emergency Contact' data is technically synced and reachable through a mass notification platform?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Contact Reconciliation / Reachability Testing",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of a 'Secondary Command Center' in a large-scale crisis?",
+    "options": {
+      "A": "A fully redundant technical facility equipped with backup power and data links, used if the primary center is physically inaccessible.",
+      "B": "A room for people to have lunch.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Crisis' notification methods for global teams? (Select all that apply)",
+    "options": {
+      "A": "IP-based Push Notifications",
+      "B": "Automated Voice Calls (Robocalls)",
+      "C": "Buying physical snacks for the response team",
+      "D": "Desktop 'Pop-up' Alerts on managed workstations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Crisis' 'Fatigue' technically refers to the cognitive decline and increased error rate of response team members after working excessive consecutive hours during an outage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chain' 'of' 'Command' in the Incident Command System (ICS)?",
+    "options": {
+      "A": "A physical chain used to lock the server room.",
+      "B": "The technical and administrative hierarchy that ensures every individual has one designated supervisor to prevent conflicting orders.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font in the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Activate' (MTTA) the Crisis Management Team?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The duration from a triggering event reaching a threshold until the formal CMT alert is sent and acknowledged.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Geographic' 'Redundancy' to mitigate the risk of a regional natural disaster?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Multi-Region Failover Architecture",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when a crisis occurs on a holiday but the 'On-Call' rotation list was technically not updated to reflect staff availability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' 'Crisis' 'Dependency'? (Select all that apply)",
+    "options": {
+      "A": "Reliance on a public utility (Power/Water) to keep the data center running",
+      "B": "Reliance on a third-party SaaS provider for customer authentication",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "A shared 'Mutual Aid' agreement with a neighboring organization"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Succession' 'Trigger' logic in a Crisis Management Plan?",
+    "options": {
+      "A": "Building a physical warehouse for servers.",
+      "B": "Pre-defined technical conditions (e.g., 'CEO unreachable for 2 hours') that automatically transfer authority to a backup decision-maker.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis' 'Resource' 'Burn' 'Rate'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how quickly the crisis budget or physical resources (e.g., fuel for generators) are being consumed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Communications' occur when a CMT issues an 'Internal' update to employees that technically contradicts the 'Public' statement issued by the PR firm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' crisis framework handles 'Resource' 'Tracking' for decentralized teams?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "The Logistics Section / Inventory Management System",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Escalation' 'Threshold' logic?",
+    "options": {
+      "A": "Measuring the physical height of a staircase.",
+      "B": "The specific technical data points (e.g., '100% server loss' or '$1M/hour loss') that mandate moving a crisis from local management to the Executive level.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Mutual' 'Aid' coordination?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical and legal process of sharing specialized personnel or equipment between organizations during an emergency.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a customer expects '24/7 Phone Support' during a crisis that has technically destroyed the local cellular network.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Crisis' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Continuity Planning",
+      "B": "Chief Risk Officer (CRO)",
+      "C": "Principal Legal Counsel",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Media' 'Monitoring' in a crisis context?",
+    "options": {
+      "A": "Watching a physical TV in the lobby.",
+      "B": "The technical process of tracking news and social media sentiment to identify misinformation that requires immediate 'Correction' messaging.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) a reputational crisis?",
+    "options": {
+      "A": "Analytics of a person named Contain.",
+      "B": "The duration from the first negative public mention until the organization's official corrective statement achieves 'Viral' saturation.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Indentation' in a YAML-based notification script can technically cause the emergency alert to be sent to 'Marketing' instead of 'Engineering'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Recovery' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Infrastructure as Code' to rebuild a data center in a new cloud region instantly",
+      "B": "Automatically notifying insurance adjusters when a claim threshold is met",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Real-time replication of critical data across 3 global continents"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Resilience' 'Maturity' score?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'BIA completion %', 'Exercise frequency', and 'Mean Time to Recover' data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Crisis' 'Drills'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization validates its plans, identifying 'Capability Decay' if drills are too infrequent.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Auditor expects a 'Lessons Learned' report masterfully delivered 24 hours before the crisis has technically ended.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Continuity' 'Monitoring' benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Business Critical' system loses its redundant power supply",
+      "B": "Ensuring 'Incident Command' contact lists are updated from HR systems every hour",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Real-time updates to 'Recovery Status' dashboards for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Dependency' 'Encapsulation' in a resilience pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Service Units' that can function independently for 24 hours even if their primary technical dependencies (e.g. DNS) are unavailable.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Recovery' 'Debt'?",
+    "options": {
+      "A": "The cumulative future cost of 'Temporary' fixes (e.g. unpatched servers) used to restore business speed that must be technically 'cleaned up' later.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Crisis Lead is assigned to 'Activate the DR site' but does not technically have 'Admin' access to the cloud console.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Crisis' 'Governance' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "ISO 22301 Certification requirements",
+      "B": "Minimizing 'Shareholder Value' drop during an outage",
+      "C": "Avoiding 'Contractual Penalties' through verified SLAs",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' logic in a crisis squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The Incident Commander focuses on providing the 'Execution' squads with the best technical tools and removing administrative hurdles so they can focus on containment.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Crisis' 'Sentiment' 'Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing which 10% of your business units are responsible for 90% of the 'Misinformation' volume during a crisis.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Crisis Coordinator' a computer that is too slow to run modern GIS mapping or mass-notification dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Incident Commanders' in the team",
+      "B": "Predicting future 'Resource' bottlenecks based on current crisis trends",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Analyzing global metadata to predict 'Supply Chain' disruptions in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Crisis automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful recovery script from one data center and apply it to a global infrastructure to ensure systemic restoration.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a fix?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a technical remediation being completed until the Crisis Lead verifies the business service is 'Ready' for customers.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in continuity refers to an organization promising 'Immediate Remediation' for a bug while only performing technical reviews once per month.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Crisis' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Infrastructure",
+      "B": "Head of Technical Enablement",
+      "C": "Principal IT Risk Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Crisis' 'Bootstrap' in a newly acquired office?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The process of establishing standard 'Continuity Protocols' (Redundant Internet, Sat-phones, CMT contact lists) for a new site within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Business' 'Resumption' 'Tests'?",
+    "options": {
+      "A": "The percentage of departments that successfully performed their critical tasks within the RTO during a simulated exercise.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Audit' for a global firm that has only been operating for exactly 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for crisis leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Scribes' in the response team",
+      "B": "Predicting future 'Recovery' lag based on upcoming IT maintenance",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing team sentiment to identify 'Response Fatigue'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a Hot-Site failover?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Production' data failure technically cannot replicate to the 'DR' site by using 'Air-Gapped' or 'Delayed' sync logic.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational stability by measuring how long the Continuity Plan remains valid before a business shift renders it obsolete.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in crisis leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Human Compassion' standards",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Digital' and ignores 'Physical' crisis triggers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a continuity pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'How' of a recovery (the script) is isolated from the 'What' (the RTO), allowing tools to be swapped without changing the policy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in crisis management?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new business threat is identified until the Lead specifies the necessary technical tools to mitigate it.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead enforces 2010 'Paper-based' protocols for a 2026 'Cloud-Serverless' crisis era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Crisis' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Principal Cloud Security Architect",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Crisis' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of SIEM, IAM, Mass-Notification, and BCP platforms to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant continuity failure until the organization's 'Safety Baseline' is restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one crisis simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for continuity leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Readiness Sprints' where each phase results in a specific, independently verifiable continuity score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in continuity?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical continuity expert seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority crisis audits to a single Architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Continuity' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Manual Labor' costs",
+      "B": "Predicting future market 'Tooling' needs based on user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Continuity Training' spend with 'Mean Time to Recover' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Continuity' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific system is developed, based on its reliability, recovery efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Continuity' 'Failures' (MTBSCF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major continuity strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in continuity leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-stakes global crisis, how should a Lead Architect technically model 'Systemic Dependency Risk' using a graph-theoretic approach to identify Single Points of Failure (SPOF)?",
+    "options": {
+      "A": "By counting the total number of vendors and assuming a 1:1 risk ratio.",
+      "B": "By mapping 'Directed Acyclic Graphs' (DAGs) of service dependencies and calculating 'Centrality Scores' to identify technical nodes that, if disrupted, trigger a cascade failure across 80% of business units.",
+      "C": "By monitoring the physical electricity usage of the secondary data center strictly.",
+      "D": "By requiring a manual board-level signature for every new API integration created."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Decoupling' refers to the technical practice of designing business units so that they can operate in 'Autonomous Mode' for 72 hours without access to centralized corporate identity or financial systems during a total network blackout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Executive to predict the 'Reputational Decay' rate following a data breach based on social media sentiment entropy?",
+    "options": {
+      "A": "Stochastic Modeling of Brand Sentiment Diffusion",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Business Impact Arbitrage' during an international M&A involving the merger of two firms with conflicting Recovery Time Objectives (RTO)?",
+    "options": {
+      "A": "To ensure both teams use the same physical brand of monitor.",
+      "B": "To normalize disparate 'Criticality Ratings' into a unified global 'Resilience Schema' that technically satisfies the most stringent regulatory requirements of both jurisdictions.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live crisis dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Dark' 'Site' 'Orchestration' and how does it technically differ from a standard 'Hot Site'?",
+    "options": {
+      "A": "When an employee physically works in a dark room.",
+      "B": "A 'Dark Site' is a pre-staged, unpublished web infrastructure with pre-approved crisis messaging that technically remains 'Dormant' until a DNS switch is triggered during a reputational crisis.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the public-facing apology letter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Cloud-Native' recovery plan is technically applied to a 'Legacy Mainframe' environment, leading to systemic 'Restoration Failure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Crisis Lead deliberately implementing 'Chaos' 'Drills' (simulated unexpected failure of the backup communications channel) to verify if the 'Out-of-Band' response logic is resilient?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Drills)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Decision' 'Contagion' and its relation to 'Groupthink' in a Crisis Management Team (CMT)?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a single incorrect strategic assumption by the Incident Commander (cause) technically propagates through the team, resulting in 100% of sub-teams pursuing a flawed recovery path (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Resilience' ROI calculations for a strategic shift to 'Active-Active' multi-region architecture? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Restore' (MTTR) for Tier-0 services to near-zero",
+      "B": "Financial savings from 'Operational Downtime' avoidance during a regional blackout",
+      "C": "The value of 'Contractual Compliance' preserved through 100% verified uptime SLAs",
+      "D": "The number of security cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Crisis Leadership level ensures that 'Incident Responders' can flag 'Technical Unreadiness' to the Board without fear of termination, allowing for transparent 'Management Assertion'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Incident Commander's decision logic?",
+    "options": {
+      "A": "The physical weight of the printed 'Crisis Plan'.",
+      "B": "The ability to synthesize contradictory situational data (e.g. valid 'Safe' signal vs. anomalous 'Active' sensor) into a cohesive 'Containment' hypothesis.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Resource' 'Sharding' during a multi-site disaster?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of logically and physically dividing 'Response Assets' (people/equipment) to ensure that a second, concurrent crisis technically cannot exhaust 100% of the organization's recovery capacity.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Service Suspension' during a suspected systemic 'Supply Chain' breach?",
+    "options": {
+      "A": "Waiting for the software vendor to confirm the exploit.",
+      "B": "Immediately taking critical systems offline and revoking all 'Service Principal' tokens before an exploit is observed within the organization to technically prevent data loss.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a crisis merger often result in 'Protocol Rejection', where the acquired firm's staff finds ways to bypass the parent firm's 'Standardized' Incident Command System.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Resilience' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Assisted Crisis Management' competencies within the team",
+      "B": "Standardizing 'Crisis Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the response team",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Crisis Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Crisis Management After-Action Report (AAR)?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Resilience Strategy' itself (e.g. why we rely on a single cloud region) is the cause of systemic failure, rather than just fixing a single 'Timeout' variable.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Crisis Management?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'OOB' (Out-of-Band) communication tool that is technically un-managed.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Crisis Management occurs when a firm continues to rely on 'Paper-Based' call trees in 2026, despite modern risks requiring 'Real-Time' automated mass-notification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Crisis' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Resilience Spend (RARORS)",
+      "B": "Percentage of 'Business Critical' functions with 100% automated failover validation",
+      "C": "Velocity of 'Finding Remediation' across the top 10% of high-risk BIA gaps",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Resilience' transformation project?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured managers will block 'Automated Crisis Decisions' to protect their manual 'Gatekeeper' power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Resilience Risk Appetite' limits.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a Director demands 'Zero System Downtime' while the Board only rewards the team for '100% Feature Delivery Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'External Threat News' with internal 'Dependency' maps",
+      "B": "Automatically identifying 'BIA Data Owner' gaps in real-time as a system is deployed",
+      "C": "Guaranteed to replace all human Incident Commanders",
+      "D": "Analyzing global metadata to predict 'Regional Utility' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Crisis' 'Ecosystem' 'Architecture' (CEA) for an Architect?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of GRC, Mass-Notification, SIEM, and HRIS into a single 'Unified Response Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Resilience' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Recovery Capability' matches the parent company's 'Time-to-Recover' standard before technical merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Business Resumption' from a newly hired team that requires 12 months of 'Historic Audit Cleanup' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Crisis' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of incident command actions for ISO auditors",
+      "B": "Automatically calculating 'Fair-Response' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Sovereignty' rules are enforced during a cross-region failover"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Resilience Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Policy' (the What) is isolated from 'Local Departmental Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in GRC?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a major external 'Critical Infrastructure' vulnerability release and the Lead officially flagging the internal impact.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Resilience' to the board while the internal team is aware that 'Legacy' backups are technically un-recoverable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Crisis' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Employee Training scores' directly to 'Resource Access' eligibility",
+      "B": "Connecting 'Real-time Natural Disaster' feeds to 'Automated Facility Shutdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Resilience Reporting' data with 'Corporate Legal' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard BIA, OOB-Comm, and BCP protocols to stabilize a new offshore office in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Crisis Management?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Plan Effectiveness' as complex new cloud architectures outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Recovery' of a 10PB searchable filesystem after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Crisis' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Continuity Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Crisis Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Sensitive PII' from the EU region technically cannot be accessed by response teams in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile crisis failure (e.g. data leak from crisis war room) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Resilience strategy refers to an organization promising 'Zero Financial Loss' while utilizing a 'Low-Budget' manual sampling model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Crisis' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Resilience Engineering",
+      "B": "Chief Crisis Officer (CCO)",
+      "C": "Director of Business Continuity Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Backup Uptime', 'MTTI for findings', 'Plan Redundancy', and 'Exercise Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the crisis team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Phone-tree' models to manage a 2026 'Cloud-Edge' crisis environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Confidence' analysis",
+      "B": "Keeping recovery scripts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade network topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Continuity?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Resilience Pipeline' can sustain major technological shifts without a systemic loss of restoration velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Geopolitical' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external geopolitical signal (e.g. sudden war in supply region) and the Director officially presenting an 'Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in resilience auditing occurs when 'Crisis Plans' are stored on a server that only the 'Marketing' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Crisis' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Continuity Management Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Continuity Intelligence' tools and 'Maturity Scoring' to a newly acquired network within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Resilience' 'Strategy' 'Refreshes' (MTBSRSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Resilience Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Continuity Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Crisis' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Continuity Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Director role requirements",
+      "C": "Guaranteed to replace all human Resilience Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global crisis talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Crisis Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Resilience Model' can be 'Lifted' from one product line (e.g. Corporate IT) and applied to another (e.g. Industrial Supply Chain).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Resilience' 'ROI' (MTR-RROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated recovery rule becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Resilience Budget Increase' while the Architect is enforcing a 'Global Multi-Cloud' redundancy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Crisis' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Infrastructure ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Resilience Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Resilience-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Resilience Pipelines' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in continuity?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new network disruption vector is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Disruption Schemas' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Crisis' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Backbone' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' resilience culture into a 'Modern and Proactive' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Management Burnout' is causing frequent strategic shifts in the resilience team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Resilience' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Disruption' mapping across global subsidiaries",
+      "B": "Reducing the 'Continuity Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resilience' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Resilience.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-crisis-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic commit grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Safety' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on exercise history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Continuity Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Resilience' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Resilience Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

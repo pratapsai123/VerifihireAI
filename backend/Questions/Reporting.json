@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Reporting", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a 'Business Intelligence' (BI) report?",
+    "options": {
+      "A": "To store raw data in a long-term physical archive.",
+      "B": "To transform data into actionable insights for decision-making.",
+      "C": "To encrypt user data for security purposes.",
+      "D": "To replace all human managers with automated scripts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bar Chart' is generally more effective than a 'Pie Chart' for comparing more than 10 different categories.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are considered 'Key Performance Indicators' (KPIs) in a sales report? (Select all that apply)",
+    "options": {
+      "A": "Total Revenue",
+      "B": "Number of New Leads",
+      "C": "Sales Growth Percentage",
+      "D": "The font size used in the report"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'ETL' stand for in the context of data reporting?",
+    "options": {
+      "A": "Estimate, Transfer, Locate",
+      "B": "Extract, Transform, Load",
+      "C": "External Table Link",
+      "D": "Electronic Tracking Log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart type is best suited for showing a trend over time?",
+    "options": {
+      "A": "Scatter Plot",
+      "B": "Line Chart",
+      "C": "Heat Map",
+      "D": "Histogram"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Visualization' is only meant to make a report look pretty, not to aid in understanding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are popular 'Data Visualization' tools used in reporting? (Select all that apply)",
+    "options": {
+      "A": "Tableau",
+      "B": "Power BI",
+      "C": "Google Looker Studio",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Dashboard' in business reporting?",
+    "options": {
+      "A": "The physical panel in a company car.",
+      "B": "A visual display of the most important information needed to achieve specific objectives.",
+      "C": "A database where old reports are deleted.",
+      "D": "A meeting room where analysts sit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a report, what is 'Drill-down' capability?",
+    "options": {
+      "A": "Using a physical drill to fix the server.",
+      "B": "The ability to move from a high-level summary to more granular data detail.",
+      "C": "Deleting data until only the most important parts remain.",
+      "D": "Sorting data in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Reports' are updated in real-time as new data enters the system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which elements are typically found in a 'Data Dictionary'? (Select all that apply)",
+    "options": {
+      "A": "Column names",
+      "B": "Data types (e.g., Integer, String)",
+      "C": "Descriptions of what each field represents",
+      "D": "The home address of the database owner"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Slicer' used for in a Power BI or Excel report?",
+    "options": {
+      "A": "To cut a physical piece of paper.",
+      "B": "To filter the data displayed in charts and tables interactively.",
+      "C": "To divide the budget between departments.",
+      "D": "To increase the speed of data calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes data that is organized in rows and columns, like a spreadsheet?",
+    "options": {
+      "A": "Unstructured Data",
+      "B": "Structured Data",
+      "C": "Visual Data",
+      "D": "Binary Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Automated Report' is one that is generated and sent according to a predefined schedule.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Data Granularity' levels? (Select all that apply)",
+    "options": {
+      "A": "Daily",
+      "B": "Monthly",
+      "C": "Transaction-level",
+      "D": "Alphabetical-level"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Scrubbing' (or Data Cleansing)?",
+    "options": {
+      "A": "Physically cleaning the computer monitors.",
+      "B": "The process of detecting and correcting or removing corrupt or inaccurate records.",
+      "C": "Deleting all data at the end of the year.",
+      "D": "Translating a report into another language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SaaS' reporting refer to?",
+    "options": {
+      "A": "Reporting on 'Software as a Service' platforms.",
+      "B": "Statistical and Analytical Sales Systems.",
+      "C": "Reports that are printed on special 'SaaS' paper.",
+      "D": "Reporting that only uses open-source code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Qualitative reporting focuses on numerical measurements and statistics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart type is best for showing the relationship between two numerical variables?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Scatter Plot",
+      "C": "Bar Chart",
+      "D": "Tree Map"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Conditional Formatting' in a report?",
+    "options": {
+      "A": "To change the format of the file from PDF to Excel.",
+      "B": "To change the appearance of cells based on specific criteria (e.g., highlighting negative values).",
+      "C": "To set the conditions for who is allowed to view the report.",
+      "D": "To ensure the report only prints on one page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Metric' in reporting?",
+    "options": {
+      "A": "A unit of measurement in the metric system only.",
+      "B": "A quantifiable measure used to track and assess a specific business process.",
+      "C": "The name of the database server.",
+      "D": "A specialized software for drawing graphs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using too many colors in a single report can distract the viewer and hide important information.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of 'Data Sources' for a report? (Select all that apply)",
+    "options": {
+      "A": "SQL Databases",
+      "B": "Excel Spreadsheets",
+      "C": "Cloud APIs",
+      "D": "Physical Filing Cabinets"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Ad-hoc Reporting'?",
+    "options": {
+      "A": "A report that is only about advertising.",
+      "B": "A one-time report created for a specific, unplanned business need.",
+      "C": "A report that is generated every morning at 9 AM.",
+      "D": "A report that uses only artificial data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'UI' stand for in dashboard design?",
+    "options": {
+      "A": "Universal Information",
+      "B": "User Interface",
+      "C": "Unique Identifier",
+      "D": "Unified Integration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Histogram' is the same as a 'Bar Chart'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Best Practices' for dashboard design? (Select all that apply)",
+    "options": {
+      "A": "Knowing your target audience",
+      "B": "Keeping it simple and uncluttered",
+      "C": "Using consistent naming conventions",
+      "D": "Using as many different fonts as possible"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Sampling'?",
+    "options": {
+      "A": "Giving away free samples of data to customers.",
+      "B": "Selecting a representative subset of data for analysis rather than the whole dataset.",
+      "C": "The process of deleting duplicate data.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Service BI'?",
+    "options": {
+      "A": "A system where users must write their own SQL code from scratch.",
+      "B": "Tools that allow non-technical business users to create their own reports and queries.",
+      "C": "A cafeteria-style office for data scientists.",
+      "D": "Hiring a consultant to build a one-time dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Big Data' refers to datasets that are too large or complex for traditional data-processing software.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which chart type is most effective for showing a 'Part-to-Whole' relationship? (Select all that apply)",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Donut Chart",
+      "C": "Stacked Bar Chart",
+      "D": "Line Chart"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Real-time Reporting'?",
+    "options": {
+      "A": "Reporting on events that happened exactly one year ago.",
+      "B": "The immediate delivery of data as it is gathered and processed.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a person to type data as it happens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In reporting, what is a 'Tooltip'?",
+    "options": {
+      "A": "A physical tool used to fix a computer.",
+      "B": "A small informational box that appears when a user hovers over a data point.",
+      "C": "The secret password for the report.",
+      "D": "A list of tips for writing better code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Governance' is the set of rules and processes that ensure data is accurate, accessible, and secure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Exploratory Data Analysis' (EDA)? (Select all that apply)",
+    "options": {
+      "A": "Visualizing distributions",
+      "B": "Identifying outliers",
+      "C": "Searching for patterns or correlations",
+      "D": "Writing the final annual budget"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Pivot Table' used for?",
+    "options": {
+      "A": "To pivot a physical table in a room.",
+      "B": "To summarize, analyze, explore, and present summary data in a flexible table format.",
+      "C": "A specialized software for accountants.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Refresh Rate' mean in a dashboard?",
+    "options": {
+      "A": "How often the user drinks water while viewing.",
+      "B": "How frequently the dashboard updates its data from the source.",
+      "C": "The speed at which the monitor flickers.",
+      "D": "The number of new employees hired per year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Funnel Chart' is often used to visualize stages in a sales or recruitment process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which items are typically found in a 'Report Header'? (Select all that apply)",
+    "options": {
+      "A": "Report Title",
+      "B": "Date of Generation",
+      "C": "Company Logo",
+      "D": "The raw SQL source code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Storytelling with Data'?",
+    "options": {
+      "A": "Reading a fictional story to employees.",
+      "B": "The practice of building a narrative around a set of data to make insights more understandable.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Row-level Security'?",
+    "options": {
+      "A": "Putting a physical lock on a server rack.",
+      "B": "Restricting data access so that users only see rows relevant to them (e.g., their own sales).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-filtering' allows a selection in one chart to filter all other charts on the same dashboard page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' storage providers for data reporting? (Select all that apply)",
+    "options": {
+      "A": "Amazon AWS (S3)",
+      "B": "Google Cloud Storage",
+      "C": "Microsoft Azure",
+      "D": "A local physical hard drive"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Descriptive Analytics'?",
+    "options": {
+      "A": "Predicting what will happen in the future.",
+      "B": "Summarizing historical data to understand what has already happened.",
+      "C": "A specialized software for architects.",
+      "D": "Deleting data to save memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel/Power BI, what is a 'Measure'?",
+    "options": {
+      "A": "The physical length of a report page.",
+      "B": "A calculation (like SUM or average) that is performed on data columns.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'PDF' is the best format for an interactive report.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are types of 'Data Joins'? (Select all that apply)",
+    "options": {
+      "A": "Inner Join",
+      "B": "Left Join",
+      "C": "Outer Join",
+      "D": "Glue Join"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Benchmarking' in a business report?",
+    "options": {
+      "A": "Comparing internal performance against industry standards or competitors.",
+      "B": "Setting a heavy bench in the office for analysts.",
+      "C": "Measuring the weight of the data servers.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'White Label' reporting?",
+    "options": {
+      "A": "Reporting that uses only white paper.",
+      "B": "Reporting software that allows you to remove the developer's branding and add your own.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Heat Map' uses colors to represent values in a matrix or geographical area.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Chart Junk' examples? (Select all that apply)",
+    "options": {
+      "A": "Excessive gridlines",
+      "B": "Unnecessary 3D effects",
+      "C": "Distracting background images",
+      "D": "A clear, descriptive title"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Aggregation'?",
+    "options": {
+      "A": "Hiring a person who is very aggressive about data.",
+      "B": "Summarizing granular data into a higher-level view (e.g., total sales by month).",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata'?",
+    "options": {
+      "A": "Data that only exists in the 'Metaverse'.",
+      "B": "Data that provides information about other data.",
+      "C": "A security scan for database viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'CSV' stands for Comma Separated Values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Categorical' variables? (Select all that apply)",
+    "options": {
+      "A": "Product Category",
+      "B": "Region",
+      "C": "Employee Level",
+      "D": "Annual Revenue"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Profiling'?",
+    "options": {
+      "A": "Hiring a person to look at user profiles.",
+      "B": "Checking data for quality, patterns, and anomalies before analysis.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a psychic for the marketing team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exporting' a report?",
+    "options": {
+      "A": "Sending a physical report to a different country.",
+      "B": "Converting a report into a file format like Excel or PDF for sharing.",
+      "C": "A way to speed up the network.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' should ideally fit on a single screen without scrolling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Time' dimensions? (Select all that apply)",
+    "options": {
+      "A": "Quarter",
+      "B": "Week",
+      "C": "Fiscal Year",
+      "D": "Physical Clock weight"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Modeling' for BI?",
+    "options": {
+      "A": "Modeling data in clay.",
+      "B": "Structuring data and defining relationships between tables for reporting efficiency.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a report, what is an 'Outlier'?",
+    "options": {
+      "A": "A person who works outside the office.",
+      "B": "A data point that differs significantly from other observations in a dataset.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Visual Consistency' means using the same colors for the same metrics across different reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Report Distribution' methods? (Select all that apply)",
+    "options": {
+      "A": "Email subscriptions",
+      "B": "Direct links to web portal",
+      "C": "Shared folders",
+      "D": "Faxing every employee"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Narrative Reporting'?",
+    "options": {
+      "A": "Reporting on the plot of a book.",
+      "B": "Combining data with commentary and explanations to provide context.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Historical' data?",
+    "options": {
+      "A": "Data about the history of the world.",
+      "B": "Data that has been collected from past events or activities.",
+      "C": "A specialized tool for measuring time.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bullet Graph' is a variation of a bar chart used to show performance against a target.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary architectural difference between a 'Star Schema' and a 'Snowflake Schema'?",
+    "options": {
+      "A": "Star schemas use only binary data; Snowflake schemas use text.",
+      "B": "In a Star schema, dimensions are denormalized; in a Snowflake schema, dimensions are normalized into multiple related tables.",
+      "C": "Star schemas are designed for mobile devices, whereas Snowflake is for desktop.",
+      "D": "Snowflake schemas are 100x faster than Star schemas for all query types."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Fact Table' typically contains quantitative measures (metrics) and foreign keys to dimension tables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Data Normalization' benefits in a reporting database? (Select all that apply)",
+    "options": {
+      "A": "Reduced data redundancy",
+      "B": "Improved data integrity",
+      "C": "Faster read performance for complex JOIN-heavy queries",
+      "D": "Smaller disk storage footprint"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "In Power BI (DAX), what is the difference between a 'Calculated Column' and a 'Measure'?",
+    "options": {
+      "A": "Calculated columns are for text; Measures are for numbers.",
+      "B": "Calculated columns are evaluated at data load; Measures are evaluated at query time based on report filters.",
+      "C": "Measures increase the file size significantly more than columns.",
+      "D": "Calculated columns cannot be used in charts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart type is best suited for identifying 'Outliers' and the 'Distribution' of a dataset across four quartiles?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Box and Whisker Plot (Boxplot)",
+      "C": "Area Chart",
+      "D": "Waterfall Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cardinality' in a data model refers to the uniqueness of data values in a column.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Additive' measures? (Select all that apply)",
+    "options": {
+      "A": "Temperature",
+      "B": "Profit Margin Percentage",
+      "C": "Distinct Count of Customers",
+      "D": "Total Sales Revenue"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a 'Date Dimension' (Calendar Table) in BI reporting?",
+    "options": {
+      "A": "To keep track of the developer's vacation days.",
+      "B": "To allow for complex time-intelligence calculations like Year-to-Date (YTD) and Same-Period-Last-Year.",
+      "C": "To set the expiration date of the database password.",
+      "D": "To ensure the report only runs on weekdays."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which concept describes the 'Smallest Unit of Data' stored in a table?",
+    "options": {
+      "A": "Metadata",
+      "B": "Grain (Granularity)",
+      "C": "Silo",
+      "D": "Schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a dashboard, 'Contextual Cues' like arrows or color changes (Red/Green) help users interpret if a KPI is moving in the right direction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which factors can significantly slow down dashboard performance? (Select all that apply)",
+    "options": {
+      "A": "Excessive use of 'Bi-directional' cross-filtering in the data model",
+      "B": "Using too many high-cardinality visuals on a single page",
+      "C": "Complex DAX measures with nested iterators (e.g., SUMX inside SUMX)",
+      "D": "Using a clear and concise report title"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Row-Level Security' (RLS) primarily used for?",
+    "options": {
+      "A": "To prevent rows from being deleted by accident.",
+      "B": "To ensure users only see data they are authorized to view (e.g., a regional manager only sees their region).",
+      "C": "To encrypt the physical rows on the hard drive.",
+      "D": "To sort the rows in a specific security-cleared order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Tufte' philosophy of data visualization, what is 'Data-Ink Ratio'?",
+    "options": {
+      "A": "The amount of physical ink used to print a report.",
+      "B": "The proportion of ink/pixels used to present actual information versus non-information (decorative elements).",
+      "C": "The ratio of text to images in a dashboard.",
+      "D": "The speed at which an ink-jet printer finishes a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Left Join' in a SQL-based report will return all records from the right table, and the matched records from the left table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Semi-Additive' measures? (Select all that apply)",
+    "options": {
+      "A": "Inventory levels (can be added across products, but not across time)",
+      "B": "Bank account balances",
+      "C": "Daily temperature readings",
+      "D": "Total units sold"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Data Lineage'?",
+    "options": {
+      "A": "The family tree of the database administrator.",
+      "B": "The path that data takes from its source to its final destination in a report, including transformations.",
+      "C": "The history of data stored in an ancient archive.",
+      "D": "A specialized software for measuring DNA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In reporting, what does 'Cross-tabulation' (Crosstab) refer to?",
+    "options": {
+      "A": "Crossing out incorrect data in a table.",
+      "B": "A table that shows the relationship between two or more variables in a matrix format.",
+      "C": "Merging data from two different continents.",
+      "D": "A security scan of the database tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Exploratory' dashboards are meant for finding unknown patterns, while 'Explanatory' dashboards are meant for communicating known insights.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Slowly Changing Dimension' (SCD) types? (Select all that apply)",
+    "options": {
+      "A": "Type 0 (Fixed)",
+      "B": "Type 1 (Overwrite)",
+      "C": "Type 2 (Add New Row/History)",
+      "D": "Type 10 (AI-Generated)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Long Tail' in a sales report distribution?",
+    "options": {
+      "A": "When a report takes too long to load.",
+      "B": "A large number of products or customers that each contribute a small amount of revenue individually.",
+      "C": "The physical length of the server's power cable.",
+      "D": "A bug that causes the last row of a report to repeat."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Treemap' use to represent data values?",
+    "options": {
+      "A": "The height of the bars.",
+      "B": "The area (size) and color of nested rectangles.",
+      "C": "Coordinates on a 3D map.",
+      "D": "Lines connecting different nodes in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'DirectQuery' connection in BI tools retrieves data from the source in real-time, rather than importing it into memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Dimensionality Reduction' in reporting? (Select all that apply)",
+    "options": {
+      "A": "Grouping small categories into 'Other'",
+      "B": "Using Principal Component Analysis (PCA)",
+      "C": "Deleting the entire database",
+      "D": "Filtering out irrelevant columns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Pareto Analysis' (80/20 Rule) used for in BI?",
+    "options": {
+      "A": "To ensure every employee works 80 hours a week.",
+      "B": "To identify the 'vital few' factors (e.g., top 20% of customers) that drive 80% of the results.",
+      "C": "To calculate the 80% tax rate on data imports.",
+      "D": "To divide the report into exactly 20 pages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SQL reporting, what is the purpose of a 'Common Table Expression' (CTE)?",
+    "options": {
+      "A": "To define the company's legal name in the report.",
+      "B": "To create a temporary, named result set that can be referenced within a single query for better readability.",
+      "C": "To encrypt the SQL source code.",
+      "D": "To increase the size of the font in the database console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Z-Score' in a report helps identify how many standard deviations a data point is from the mean.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Table Joins'? (Select all that apply)",
+    "options": {
+      "A": "Self Join",
+      "B": "Cross Join (Cartesian Product)",
+      "C": "Anti Join",
+      "D": "Parallel Join"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Blending'?",
+    "options": {
+      "A": "Mixing physical pieces of paper from different reports.",
+      "B": "Combining data from multiple sources on a single worksheet or visual without a formal join in the database.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager to blend the teams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Waterfall' chart, what do the floating bars typically represent?",
+    "options": {
+      "A": "Total values at the end of the year.",
+      "B": "The cumulative effect of sequential positive and negative changes to a starting value.",
+      "C": "The speed of water in a factory.",
+      "D": "The number of hours employees were on break."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Logarithmic Scale' on a chart is useful when data spans several orders of magnitude.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'ETL' versus 'ELT'? (Select all that apply)",
+    "options": {
+      "A": "ELT performs transformations inside the target data warehouse.",
+      "B": "ETL transforms data on a separate staging server before loading.",
+      "C": "ELT is generally more modern and scalable for cloud data warehouses.",
+      "D": "ETL stands for 'Every Level Transforms'."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Measure of Central Tendency'?",
+    "options": {
+      "A": "The tendency of the CEO to sit in the center of the room.",
+      "B": "A single value that attempts to describe a set of data by identifying the central position (Mean, Median, Mode).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BI, what is 'Schema on Read'?",
+    "options": {
+      "A": "Reading a book about schemas.",
+      "B": "A data handling method where data is structured only when it is queried, common in Big Data/NoSQL systems.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bullet Graph' is more space-efficient than a standard 'Gauge' chart for dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data Quality' dimensions? (Select all that apply)",
+    "options": {
+      "A": "Completeness",
+      "B": "Accuracy",
+      "C": "Timeliness",
+      "D": "File Color"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Window Function' in SQL reporting?",
+    "options": {
+      "A": "A function that cleans the office windows.",
+      "B": "A function that performs a calculation across a set of table rows related to the current row.",
+      "C": "A security bridge for data transfers.",
+      "D": "The process of looking out of a window while coding."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Storytelling' 'Call to Action' (CTA)?",
+    "options": {
+      "A": "Calling the developer to fix a bug.",
+      "B": "A clear direction provided to the user on what to do next based on the report's insights.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Denormalization' is the process of combining tables to improve read performance at the expense of storage efficiency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Metadata Management'? (Select all that apply)",
+    "options": {
+      "A": "Business Glossary",
+      "B": "Technical Metadata",
+      "C": "Data Provenance",
+      "D": "The CEO's email signature"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Semantic Layer' in BI architecture?",
+    "options": {
+      "A": "A layer of dust on the server.",
+      "B": "A business-friendly representation of data that maps complex database structures to common business terms.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Power BI, what does the 'CALCULATE' function do?",
+    "options": {
+      "A": "It performs a basic addition.",
+      "B": "It evaluates an expression in a context that is modified by specific filters.",
+      "C": "It sends a calculation request to the cloud.",
+      "D": "It deletes zero-value rows from the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched Granularity' occurs when you try to join two tables that represent different levels of detail (e.g., daily sales and monthly targets).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' visualization types? (Select all that apply)",
+    "options": {
+      "A": "Sankey Diagram",
+      "B": "Chord Diagram",
+      "C": "Sunburst Chart",
+      "D": "Standard Table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Governance' 'Stewardship'?",
+    "options": {
+      "A": "Hiring a steward to serve drinks in the office.",
+      "B": "The operational role responsible for managing data quality and policy compliance within a specific domain.",
+      "C": "A security firewall.",
+      "D": "The number of hours a team was online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Service BI' 'Data Silo' risk?",
+    "options": {
+      "A": "Users accidentally deleting the main server.",
+      "B": "The risk that different users create conflicting versions of the 'truth' using independent data extracts.",
+      "C": "A specialized software for psychologists.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DAX' (Data Analysis Expressions) is the formula language used primarily in Tableau.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Master Data Management' (MDM) domains? (Select all that apply)",
+    "options": {
+      "A": "Customer",
+      "B": "Product",
+      "C": "Location",
+      "D": "Employee lunch orders"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Lake' vs 'Data Warehouse'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "A Data Lake stores raw, unstructured data; a Data Warehouse stores structured, processed data.",
+      "C": "Data Warehouses are 10x smaller.",
+      "D": "Data Lake is for text; Warehouse for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Trend' 'Smoothing' (Moving Average)?",
+    "options": {
+      "A": "Smoothing the physical surface of a report.",
+      "B": "A technique used to filter out short-term noise and highlight longer-term data patterns.",
+      "C": "A way to backup data in the sky.",
+      "D": "Hiring a professional actor to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dimensional Modeling' involves organizing data into 'Fact' and 'Dimension' tables to support high-performance analytical queries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Analytical' 'Intelligence' 'Augmentation' (AI)? (Select all that apply)",
+    "options": {
+      "A": "Automated anomaly detection",
+      "B": "Natural Language Generation (NLG) for insights",
+      "C": "Predictive forecasting features",
+      "D": "Hiring 100 extra analysts"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Architecture'?",
+    "options": {
+      "A": "Designing the blueprint of the company office.",
+      "B": "The models, policies, and rules that govern how data is collected, stored, and integrated into an organization.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Query' 'Folding'?",
+    "options": {
+      "A": "Folding the paper report into an airplane.",
+      "B": "The process of a BI tool pushing the heavy data transformation logic back to the source database to run as SQL.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional to fold data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MOLAP' (Multidimensional OLAP) stores data in indexed multidimensional arrays (cubes) for rapid retrieval.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data Visualization' 'Gestalt' principles? (Select all that apply)",
+    "options": {
+      "A": "Proximity",
+      "B": "Similarity",
+      "C": "Enclosure",
+      "D": "Randomness"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Pivot' vs 'Unpivot'?",
+    "options": {
+      "A": "They are exactly the same.",
+      "B": "Pivot turns rows into columns; Unpivot turns columns into rows.",
+      "C": "Pivot is for beginners; Unpivot for experts.",
+      "D": "Unpivot is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Latency'?",
+    "options": {
+      "A": "The age of the developer.",
+      "B": "The time delay between data creation at the source and its availability in the report.",
+      "C": "A specialized software for poets.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Virtualization' allows for querying across multiple sources without physically moving or copying the data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Embedded Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Inserting charts directly into external business applications",
+      "B": "Providing BI features to customers inside your own software",
+      "C": "Storing data inside a physical safe",
+      "D": "Utilizing APIs to fetch and display visuals"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Dimensional' 'Modeling' 'Bus' 'Matrix'?",
+    "options": {
+      "A": "A matrix for tracking the company bus schedule.",
+      "B": "A technical blueprint used to plan and document shared dimensions across different business processes.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'User' 'Adoption' metric?",
+    "options": {
+      "A": "Adopting a pet for the office.",
+      "B": "The percentage of intended users who actually use the reporting tool regularly.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SQL' (Structured Query Language) is the most common language used to interact with relational reporting databases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'BI' 'Tool' 'Governance' areas? (Select all that apply)",
+    "options": {
+      "A": "User permissions and access",
+      "B": "Version control of reports",
+      "C": "Certification of data sources",
+      "D": "The brand of coffee in the breakroom"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dashboard' 'Interactivity' 'Drill-through'?",
+    "options": {
+      "A": "A drill that goes through the server case.",
+      "B": "The ability to click on a data point and be navigated to a different, related report page for more details.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Metric' 'Canonical' definition?",
+    "options": {
+      "A": "A definition that uses a physical canon.",
+      "B": "A single, standardized, and globally accepted definition of a KPI across the entire organization.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'No-Code' BI platforms allow users to build complete dashboards using drag-and-drop interfaces without writing SQL or Python.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific data modeling technique is used to handle 'Many-to-Many' relationships between a fact table and a dimension table without causing double-counting?",
+    "options": {
+      "A": "Snowflaking the dimension",
+      "B": "Bridge Table (Associative Entity)",
+      "C": "Cross-filtering the Fact table",
+      "D": "Implementing a Type 1 SCD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Type 2' Slowly Changing Dimension (SCD), historical data is preserved by creating a new record for every change, typically tracked with Start and End dates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'In-Memory' BI engines like Power BI's VertiPaq? (Select all that apply)",
+    "options": {
+      "A": "Uses columnar storage to maximize compression ratios",
+      "B": "Performs best when data is highly normalized in a Snowflake schema",
+      "C": "Utilizes dictionary encoding to represent unique values as integers",
+      "D": "Requires data to be loaded into RAM for query execution"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is the primary technical purpose of 'Aggregations' (Aggr tables) in a large-scale BI architecture?",
+    "options": {
+      "A": "To ensure that raw data is never seen by the end user for security reasons.",
+      "B": "To improve query performance by storing pre-calculated totals at a higher granularity than the base fact table.",
+      "C": "To automatically delete old data that is no longer needed for reporting.",
+      "D": "To convert currency values in real-time using live API calls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Vault' modeling, what is the specific role of a 'Satellite' table?",
+    "options": {
+      "A": "To store the business keys of core entities.",
+      "B": "To store descriptive attributes and historical context for a Hub or a Link.",
+      "C": "To provide a physical link between two different data warehouses.",
+      "D": "To act as a temporary staging area for flat files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Late-Arriving Dimensions' occur when a fact record is processed before its corresponding dimension record is available in the data warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these factors contributes most to 'DAX Query Plan' inefficiency in Power BI? (Select all that apply)",
+    "options": {
+      "A": "Using 'CALLBACKDATAID' which forces the Formula Engine to call the Storage Engine row-by-row",
+      "B": "Filtering entire tables instead of specific columns inside CALCULATE",
+      "C": "Using many-to-many relationships with high-cardinality keys",
+      "D": "Using a well-defined Star Schema with one-to-many relationships"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Kimball' definition of a 'Conformed Dimension'?",
+    "options": {
+      "A": "A dimension that is only used by a single department to ensure data silos.",
+      "B": "A dimension that has exactly the same meaning and content when referred to from different fact tables.",
+      "C": "A dimension that is automatically generated by an AI script.",
+      "D": "A dimension that is stored in a separate cloud environment for backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Snowflake' schema, what is the main performance trade-off compared to a 'Star' schema?",
+    "options": {
+      "A": "Snowflake schemas use more disk space.",
+      "B": "The increased number of JOINs required at query time can lead to slower retrieval speeds.",
+      "C": "It is impossible to create a date dimension in a Snowflake schema.",
+      "D": "Data integrity is generally lower in a Snowflake schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Degenerate Dimension' is a dimension attribute that is stored directly in the fact table because it has no associated descriptive attributes (e.g., Invoice Number).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' DAX iterators? (Select all that apply)",
+    "options": {
+      "A": "SUMX",
+      "B": "AVERAGEX",
+      "C": "RANKX",
+      "D": "TOTALYTD"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Columnar Compression' logic in modern BI tools?",
+    "options": {
+      "A": "Deleting all columns that are not used in the last 30 days.",
+      "B": "Compressing data by storing repeated values in a column once and using a dictionary of pointers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Multidimensional Modeling', what is a 'Junk Dimension'?",
+    "options": {
+      "A": "A dimension that contains incorrect or trash data.",
+      "B": "A single dimension table used to store a collection of low-cardinality flags and indicators to avoid cluttering the fact table.",
+      "C": "A way to backup data in a temporary folder.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Active' vs 'Inactive' relationships in Power BI allow for multiple paths between tables, but only one can be used for automatic filtering at a time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these characterize 'SCD Type 4'? (Select all that apply)",
+    "options": {
+      "A": "The use of a separate 'History' table to track changes",
+      "B": "The base table only contains the current value",
+      "C": "It is optimized for dimensions where attributes change very frequently",
+      "D": "It overwrites existing data without keeping any history"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Row Level Security' (RLS) 'Dynamic' filtering?",
+    "options": {
+      "A": "Filtering based on the user's physical movement.",
+      "B": "Using the USERPRINCIPALNAME() function to filter data based on the logged-in user's identity.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new security guard for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'SQL' performance tuning for reporting, what does 'SARGability' refer to?",
+    "options": {
+      "A": "The ability of a query to be parsed by an AI.",
+      "B": "Whether a query predicate is written in a way that allows the engine to use an index efficiently (Search ARGumentable).",
+      "C": "A security scan for database viruses.",
+      "D": "The number of rows in the final result set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M-Query' in Power BI is the functional language used by the Power Query engine for data transformation, distinct from DAX.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are part of a 'Semantic Model' in an enterprise BI environment? (Select all that apply)",
+    "options": {
+      "A": "Relationship definitions",
+      "B": "Calculated measures",
+      "C": "Display folders and formatting",
+      "D": "The raw source code of the ERP system"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Governance' 'Master Data Management' (MDM) 'Golden Record'?",
+    "options": {
+      "A": "A record made of actual physical gold.",
+      "B": "The single, high-quality, and authoritative version of a data entity (like Customer or Product) shared across the enterprise.",
+      "C": "A security bridge for data transfers.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the difference between 'SUM' and 'SUMX'?",
+    "options": {
+      "A": "SUM is for columns; SUMX is for rows.",
+      "B": "SUM is an aggregator; SUMX is an iterator that evaluates an expression for every row in a table.",
+      "C": "SUMX is always 100x faster than SUM.",
+      "D": "SUM is only for integers; SUMX for decimals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Circular Dependencies' in a BI model are usually caused by two calculated columns that refer to each other's values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Fact Table' types? (Select all that apply)",
+    "options": {
+      "A": "Transaction Fact Table",
+      "B": "Periodic Snapshot Fact Table",
+      "C": "Accumulating Snapshot Fact Table",
+      "D": "Standard Dimension Table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'OLAP' 'Drill-Across'?",
+    "options": {
+      "A": "Drilling across the office floor.",
+      "B": "Querying data across two or more fact tables that share conformed dimensions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Visual' 'Hierarchy' 'Design'?",
+    "options": {
+      "A": "Designing the hierarchy of the company's management.",
+      "B": "The arrangement of visual elements on a dashboard to guide the viewer's eye to the most important information first.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DirectQuery' completely eliminates the need for any data modeling because it uses the source schema as-is.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Referential Integrity' in a BI model? (Select all that apply)",
+    "options": {
+      "A": "Ensuring every foreign key in a fact table has a matching primary key in a dimension",
+      "B": "Preventing 'orphan' records in the data model",
+      "C": "Automatically deleting data when it is 1 year old",
+      "D": "Using surrogate keys to manage integrity"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Dimensional' 'Modeling' 'Grain' 'Mismatch'?",
+    "options": {
+      "A": "When the grain of sand is too small.",
+      "B": "An error that occurs when trying to perform calculations between tables at different levels of detail (e.g., daily sales vs. annual target).",
+      "C": "A specialized software for psychologists.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power BI', what is 'Incremental' 'Refresh' logic?",
+    "options": {
+      "A": "Refreshing the report every 1 second.",
+      "B": "Defining policies to only refresh new or changed data rather than the entire dataset to improve performance.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pareto' 'Principle' (80/20) can be implemented in BI using 'Top N' filtering combined with cumulative percentage calculations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Metadata' 'Standards'? (Select all that apply)",
+    "options": {
+      "A": "Dublin Core",
+      "B": "ISO 11179",
+      "C": "Common Warehouse Metamodel (CWM)",
+      "D": "The CEO's personal notes"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'ETL' 'Orchestration'?",
+    "options": {
+      "A": "Hiring a band to play during the data load.",
+      "B": "The automated management, coordination, and scheduling of complex data pipelines and dependencies.",
+      "C": "A security scan for database viruses.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Context' 'Transition'?",
+    "options": {
+      "A": "Transitioning from a dark mode to a light mode UI.",
+      "B": "The process where a row context is transformed into a filter context, typically triggered by the CALCULATE function.",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snowflaking' a dimension is always recommended for maximum reporting speed in an in-memory database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'BI' 'Maturity' 'Model' levels? (Select all that apply)",
+    "options": {
+      "A": "Descriptive (What happened?)",
+      "B": "Diagnostic (Why did it happen?)",
+      "C": "Predictive (What will happen?)",
+      "D": "Prescriptive (How can we make it happen?)"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Dimensional' 'Modeling' 'Surrogate' 'Key' significance?",
+    "options": {
+      "A": "Using a fake key to open the server door.",
+      "B": "An internally generated, meaningless integer used as a primary key to protect the data warehouse from changes in source system business keys.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a person named Surrogate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data' 'Architecture', what is 'Lambda' 'Architecture'?",
+    "options": {
+      "A": "A model that only uses the Greek letter Lambda.",
+      "B": "A data-processing architecture designed to handle massive quantities of data by taking advantage of both batch and stream-processing methods.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cardinality' (Many-to-Many) in a model can lead to ambiguous filter paths and incorrect results if not handled via a bridge table or relationship settings.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Self-Service' 'BI' 'Governance' strategies? (Select all that apply)",
+    "options": {
+      "A": "Certifying specific 'Gold' datasets for user consumption",
+      "B": "Allowing every user full 'Admin' rights to the SQL server",
+      "C": "Providing sandboxed environments for experimentation",
+      "D": "Implementing naming standards for measures and columns"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Multi-tenant' 'Reporting'?",
+    "options": {
+      "A": "Reporting on the number of tenants in a building.",
+      "B": "A software architecture where a single instance of a reporting application serves multiple independent customers (tenants), keeping data isolated.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Latency' 'vs' 'Freshness'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Latency is the delay in processing; Freshness is how recently the data was captured from the source.",
+      "C": "Latency is for beginners; Freshness for experts.",
+      "D": "Freshness is 100x faster to compute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Big' 'Data' 'Reporting' often requires a 'NoSQL' database to handle the variety and velocity of incoming data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data' 'Warehouse' 'Automation' (DWA) benefits? (Select all that apply)",
+    "options": {
+      "A": "Reduced manual SQL coding",
+      "B": "Automatically generated documentation",
+      "C": "Consistent application of modeling patterns",
+      "D": "Reduced number of coffee breaks for developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dashboard' 'Information' 'Density'?",
+    "options": {
+      "A": "The physical weight of the monitor.",
+      "B": "The amount of information provided per unit of screen area.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Drill-through' 'vs' 'Drill-down'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Drill-down changes the granularity on the same page; Drill-through navigates to a detailed report on a different page.",
+      "C": "Drill-through is for beginners; Drill-down for experts.",
+      "D": "Drill-down is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SCD' 'Type' '6' (Hybrid) combines Type 1, 2, and 3 to track both current and historical values in the same record.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'BI' 'Cloud' 'Migration' challenges? (Select all that apply)",
+    "options": {
+      "A": "Data sovereignty and residency laws",
+      "B": "Egress costs for large data volumes",
+      "C": "Integrating with on-premise legacy systems",
+      "D": "The color of the cloud logo"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Natural' 'Language' 'Query' (NLQ) in BI?",
+    "options": {
+      "A": "Hiring a person who speaks many languages.",
+      "B": "The ability for users to ask data questions in plain English (e.g., 'What were sales last month?') and receive a visual answer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'User' 'Persona' 'Mapping'?",
+    "options": {
+      "A": "Drawing a physical map of where users live.",
+      "B": "Designing different report layouts and metrics specifically tailored to the roles and needs of different user groups (e.g., CEO vs. Sales Rep).",
+      "C": "A specialized software for historians.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MOLAP' is generally more scalable than 'ROLAP' (Relational OLAP) for extremely large, high-cardinality datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Data' 'Storytelling' 'Components'? (Select all that apply)",
+    "options": {
+      "A": "The Data",
+      "B": "The Visuals",
+      "C": "The Narrative",
+      "D": "The Budget"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Pivot' 'Table' 'Cache'?",
+    "options": {
+      "A": "Storing physical cash in a table.",
+      "B": "An internal data structure that stores a copy of the source data to enable fast multi-dimensional analysis without re-querying the source.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Data' 'Democratization'?",
+    "options": {
+      "A": "Voting for the best data scientist.",
+      "B": "The process of making data accessible to non-technical users throughout an organization to encourage data-driven decision-making.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Star' 'Schema' is the foundation of Dimensional Modeling and is optimized for efficient analytical querying.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Dashboard' 'Accessibility'? (Select all that apply)",
+    "options": {
+      "A": "Using high-contrast colors for color-blind users",
+      "B": "Providing alt-text for screen readers",
+      "C": "Designing for keyboard-only navigation",
+      "D": "Using as many small fonts as possible"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'ETL' 'Idempotency'?",
+    "options": {
+      "A": "Hiring a person named Idempotent.",
+      "B": "The property where a data load process can be run multiple times with the same input and produce the same result without duplicate records.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Predictive' 'Maintenance' 'Reporting'?",
+    "options": {
+      "A": "Predicting when a manager will take a vacation.",
+      "B": "Using sensor data and machine learning to forecast when industrial equipment is likely to fail.",
+      "C": "A security scan for database viruses.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'In-Memory' 'BI' databases are limited by the physical RAM available on the server or workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data' 'Catalog' 'Features'? (Select all that apply)",
+    "options": {
+      "A": "Searchability of datasets",
+      "B": "User-generated tags and ratings",
+      "C": "Data lineage visualization",
+      "D": "The physical location of the server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Reporting' 'Bursting'?",
+    "options": {
+      "A": "When a report physically explodes.",
+      "B": "The automated process of generating multiple personalized versions of a single report and distributing them to a large list of recipients.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Self-Service' 'Analytics' 'Shadow' 'IT'?",
+    "options": {
+      "A": "Analysts working in the dark.",
+      "B": "The risk of users building and using their own unmanaged BI solutions outside of the official IT infrastructure.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Relational' 'OLAP' (ROLAP) accesses data directly from a relational database, providing high scalability for very large datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Visualization' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Avoiding 'Spaghetti' line charts with too many series",
+      "B": "Using small multiples for comparing categories",
+      "C": "Selecting appropriate scales (Zero-baseline for bars)",
+      "D": "Using 3D pie charts for better perspective"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Orchestration' 'DAG'?",
+    "options": {
+      "A": "A physical tag placed on a server.",
+      "B": "Directed Acyclic Graph: a mathematical representation of the dependencies and flow of a data pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'User' 'Engagement' 'Telemetry'?",
+    "options": {
+      "A": "The physical distance between a user and their screen.",
+      "B": "The collection of data on how users interact with a dashboard (e.g., which filters they use most) to improve the design.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Semantic' 'Search' in BI uses the meaning of words to find data, rather than just matching keywords.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'BI' 'Governance' 'Framework' 'Pillars'? (Select all that apply)",
+    "options": {
+      "A": "People and Roles",
+      "B": "Processes and Policies",
+      "C": "Technology and Tools",
+      "D": "The company's social media strategy"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Automated' 'Insights' in BI tools?",
+    "options": {
+      "A": "Hiring a person who is very insightful.",
+      "B": "Features that use machine learning to automatically identify trends, outliers, and key drivers in a dataset without user intervention.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  }
+  ]
+}

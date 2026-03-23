@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Hypothesis testing", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of the 'Null Hypothesis' ($H_0$)?",
+    "options": {
+      "A": "To prove that the researcher's theory is 100% correct.",
+      "B": "To represent a statement of no effect or no difference.",
+      "C": "To act as a backup hypothesis if the main one fails.",
+      "D": "To determine the required sample size for the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which symbol is commonly used to represent the 'Alternative Hypothesis'?",
+    "options": {
+      "A": "$H_0$",
+      "B": "$alpha$",
+      "C": "$H_1$ or $H_a$",
+      "D": "$\beta$"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a 'p-value' represent in a hypothesis test?",
+    "options": {
+      "A": "The probability that the null hypothesis is true.",
+      "B": "The probability of observing the data if the null hypothesis is true.",
+      "C": "The percentage of outliers in the dataset.",
+      "D": "The absolute difference between two sample means."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If a p-value is 0.03 and the significance level ($alpha$) is 0.05, what is the correct decision?",
+    "options": {
+      "A": "Reject the null hypothesis.",
+      "B": "Fail to reject the null hypothesis.",
+      "C": "Accept the null hypothesis as true.",
+      "D": "Discard the data and restart the test."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Level of Significance' ($alpha$)?",
+    "options": {
+      "A": "The probability of making a Type II error.",
+      "B": "The probability of making a Type I error.",
+      "C": "The total number of participants in the study.",
+      "D": "The maximum value of the independent variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Type I Error'?",
+    "options": {
+      "A": "Accepting the null hypothesis when it is false.",
+      "B": "Rejecting the null hypothesis when it is actually true.",
+      "C": "Failing to collect enough data points.",
+      "D": "Using the wrong statistical software for analysis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'One-tailed test' is used when the researcher is interested in:",
+    "options": {
+      "A": "Any difference between two groups regardless of direction.",
+      "B": "A difference in one specific direction (e.g., greater than).",
+      "C": "The difference between the median and the mode.",
+      "D": "The total volume of the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the standard value usually used for the significance level ($alpha$) in many fields?",
+    "options": {
+      "A": "0.50",
+      "B": "0.10",
+      "C": "0.05",
+      "D": "1.00"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which test is most appropriate for comparing the means of two independent groups?",
+    "options": {
+      "A": "Chi-Square Test",
+      "B": "Independent Samples T-test",
+      "C": "ANOVA",
+      "D": "Pearson Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does it mean if we 'Fail to Reject' the null hypothesis?",
+    "options": {
+      "A": "We have proven the null hypothesis is true.",
+      "B": "There is not enough evidence to support the alternative hypothesis.",
+      "C": "The experiment was a complete failure.",
+      "D": "The alternative hypothesis has been proven false."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Two-tailed test', where are the rejection regions located?",
+    "options": {
+      "A": "Only in the right tail of the distribution.",
+      "B": "Only in the left tail of the distribution.",
+      "C": "In both the upper and lower tails of the distribution.",
+      "D": "Exactly at the center of the mean."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Critical Value'?",
+    "options": {
+      "A": "The average value of all data points.",
+      "B": "The threshold that divides the rejection region from the non-rejection region.",
+      "C": "The percentage of error in the calculation.",
+      "D": "The name of the lead researcher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-parametric' version of the T-test?",
+    "options": {
+      "A": "Z-test",
+      "B": "Mann-Whitney U Test",
+      "C": "F-test",
+      "D": "Linear Regression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical Power'?",
+    "options": {
+      "A": "The physical speed of the CPU during testing.",
+      "B": "The probability of correctly rejecting a false null hypothesis.",
+      "C": "The total number of variables in the model.",
+      "D": "The significance level multiplied by the sample size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the p-value as the test statistic (like T or Z) moves further from zero?",
+    "options": {
+      "A": "It stays the same.",
+      "B": "It increases.",
+      "C": "It decreases.",
+      "D": "It becomes exactly 1.0."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "A 'Type II Error' occurs when:",
+    "options": {
+      "A": "The null hypothesis is rejected but it was true.",
+      "B": "The null hypothesis is not rejected but it was false.",
+      "C": "The alternative hypothesis is proven true.",
+      "D": "The p-value is exactly 0.05."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Significance Level' of 0.01 imply?",
+    "options": {
+      "A": "There is a 1% chance the alternative hypothesis is true.",
+      "B": "We are willing to accept a 1% risk of a Type I error.",
+      "C": "The test is 1% accurate.",
+      "D": "The p-value must be greater than 0.99 to be significant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which distribution is typically used for a T-test?",
+    "options": {
+      "A": "Normal Distribution",
+      "B": "Student's t-distribution",
+      "C": "Poisson Distribution",
+      "D": "Binomial Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Degrees of Freedom' ($df$) primarily based on in a T-test?",
+    "options": {
+      "A": "The number of categories in the data.",
+      "B": "The sample size ($n$).",
+      "C": "The value of the mean.",
+      "D": "The alpha level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If you are testing if a new medicine is 'different' than an old one, which test is appropriate?",
+    "options": {
+      "A": "One-tailed test.",
+      "B": "Two-tailed test.",
+      "C": "No-tailed test.",
+      "D": "Standard deviation test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents a 'Null Hypothesis' for comparing two means ($mu_1$ and $mu_2$)?",
+    "options": {
+      "A": "$mu_1 > mu_2$",
+      "B": "$mu_1 = mu_2$",
+      "C": "$mu_1 != mu_2$",
+      "D": "$mu_1 < mu_2$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of a 'Statistically Significant' test?",
+    "options": {
+      "A": "The null hypothesis is accepted.",
+      "B": "The p-value is less than the alpha level.",
+      "C": "The sample size was too small.",
+      "D": "The data follows a uniform distribution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In hypothesis testing, what is the 'Rejection Region'?",
+    "options": {
+      "A": "The set of values for the test statistic that lead to rejecting $H_0$.",
+      "B": "The part of the dataset that was deleted for being incorrect.",
+      "C": "The group of participants who refused to answer.",
+      "D": "The area where the p-value is exactly 1.0."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Test Statistic'?",
+    "options": {
+      "A": "The final conclusion written by the researcher.",
+      "B": "A numerical value calculated from sample data used to make a decision about $H_0$.",
+      "C": "The number of times the test was repeated.",
+      "D": "A specialized software for drawing histograms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is used to determine if there is a significant association between two categorical variables?",
+    "options": {
+      "A": "T-test",
+      "B": "Chi-Square Test of Independence",
+      "C": "Z-test",
+      "D": "F-test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does $\beta$ (Beta) represent in hypothesis testing?",
+    "options": {
+      "A": "The probability of a Type I error.",
+      "B": "The probability of a Type II error.",
+      "C": "The slope of a regression line.",
+      "D": "The significance level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these increases the 'Power' of a test?",
+    "options": {
+      "A": "Decreasing the sample size.",
+      "B": "Increasing the sample size.",
+      "C": "Increasing the number of Type I errors.",
+      "D": "Decreasing the significance level ($alpha$)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling Error'?",
+    "options": {
+      "A": "A mistake made by the person entering data.",
+      "B": "The natural discrepancy between a sample statistic and a population parameter.",
+      "C": "A software bug in the statistics program.",
+      "D": "A Type I error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a T-test, if the calculated T-value is greater than the critical T-value, we:",
+    "options": {
+      "A": "Reject the null hypothesis.",
+      "B": "Fail to reject the null hypothesis.",
+      "C": "Accept the alternative hypothesis as a fact.",
+      "D": "Calculate the p-value again."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Paired Samples T-test' used for?",
+    "options": {
+      "A": "Comparing two independent groups of different people.",
+      "B": "Comparing means from the same group at two different times.",
+      "C": "Comparing the variance of three groups.",
+      "D": "Analyzing the relationship between two categorical variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which value is determined 'before' the data is collected and analyzed?",
+    "options": {
+      "A": "p-value",
+      "B": "Test statistic",
+      "C": "Significance level ($alpha$)",
+      "D": "The mean of the sample"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a 'Parametric Test'?",
+    "options": {
+      "A": "Mann-Whitney U Test",
+      "B": "ANOVA",
+      "C": "Kruskal-Wallis Test",
+      "D": "Wilcoxon Signed-Rank Test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'large' p-value (e.g., 0.85) suggest?",
+    "options": {
+      "A": "The alternative hypothesis is definitely true.",
+      "B": "The observed data is very consistent with the null hypothesis.",
+      "C": "The sample size was too large.",
+      "D": "A Type I error has occurred."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Effect Size'?",
+    "options": {
+      "A": "The speed of the computer processing the data.",
+      "B": "A measure of the magnitude of the difference or relationship found.",
+      "C": "The total number of outliers.",
+      "D": "The physical dimensions of the printed report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is typically used when the population standard deviation is 'known'?",
+    "options": {
+      "A": "T-test",
+      "B": "Z-test",
+      "C": "Chi-Square test",
+      "D": "Mann-Whitney test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hypothesis Testing' essentially about?",
+    "options": {
+      "A": "Finding the exact value of a population parameter.",
+      "B": "Making an inference about a population based on sample data.",
+      "C": "Creating a new dataset from scratch.",
+      "D": "Deleting data that doesn't fit a theory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If $alpha = 0.05$, what is the confidence level?",
+    "options": {
+      "A": "5%",
+      "B": "95%",
+      "C": "50%",
+      "D": "100%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test compares the variances of two populations?",
+    "options": {
+      "A": "T-test",
+      "B": "F-test",
+      "C": "Z-test",
+      "D": "Chi-Square test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Alternative Hypothesis' also known as?",
+    "options": {
+      "A": "The status quo.",
+      "B": "The research hypothesis.",
+      "C": "The error hypothesis.",
+      "D": "The negative hypothesis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Central Limit Theorem' (CLT) important for?",
+    "options": {
+      "A": "Determining the mode of a dataset.",
+      "B": "Justifying the use of the normal distribution for sample means.",
+      "C": "Calculating the range of a sample.",
+      "D": "Identifying outliers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Point Estimate'?",
+    "options": {
+      "A": "A range of possible values.",
+      "B": "A single value used to estimate a population parameter.",
+      "C": "The number of decimal places in a result.",
+      "D": "A data point that is exactly zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is 'not' an assumption for a T-test?",
+    "options": {
+      "A": "Random sampling.",
+      "B": "The data must be categorical.",
+      "C": "Normal distribution of the population.",
+      "D": "Independence of observations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Confidence Interval' provide?",
+    "options": {
+      "A": "The exact value of the population mean.",
+      "B": "A range of values likely to contain the population parameter.",
+      "C": "The percentage of correct predictions.",
+      "D": "A list of all participants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Significance' of a test result?",
+    "options": {
+      "A": "How important it is to the company.",
+      "B": "How likely the result occurred by something other than chance.",
+      "C": "The number of pages in the report.",
+      "D": "The total cost of the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Test of Homogeneity' used for?",
+    "options": {
+      "A": "To check if the data is all the same color.",
+      "B": "To see if different populations have the same distribution of a categorical variable.",
+      "C": "To find the mean of a normal distribution.",
+      "D": "To count the number of variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If we reject the null hypothesis at $alpha = 0.01$, will we also reject it at $alpha = 0.05$?",
+    "options": {
+      "A": "No, never.",
+      "B": "Yes, always.",
+      "C": "Only if the sample size is large.",
+      "D": "It depends on the test statistic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the relationship between 'Type I Error' and 'Significance Level'?",
+    "options": {
+      "A": "They are unrelated.",
+      "B": "They are the same thing.",
+      "C": "Significance level is the square root of Type I error.",
+      "D": "They move in opposite directions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Non-parametric' test, we usually use:",
+    "options": {
+      "A": "Means and Standard Deviations.",
+      "B": "Medians and Ranks.",
+      "C": "Integrals and Derivatives.",
+      "D": "Percentages and Ratios."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Robustness' in a statistical test?",
+    "options": {
+      "A": "The physical strength of the computer.",
+      "B": "The ability of a test to remain accurate even if assumptions are violated.",
+      "C": "The size of the rejection region.",
+      "D": "The number of hours the researcher worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which value represents the 'probability of correctly failing to reject' a true null hypothesis?",
+    "options": {
+      "A": "$alpha$",
+      "B": "$1 - alpha$",
+      "C": "$beta$",
+      "D": "p-value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pooled Variance'?",
+    "options": {
+      "A": "The variance of a single sample.",
+      "B": "A weighted average of variances from two or more samples.",
+      "C": "The total variance of the whole population.",
+      "D": "A way to backup variance data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'directional' hypothesis?",
+    "options": {
+      "A": "$H_1: mu_1 \neq mu_2$",
+      "B": "$H_1: mu_1 > mu_2$",
+      "C": "$H_0: mu_1 = mu_2$",
+      "D": "$H_1: mu_1 \text{ is related to } mu_2$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Goodness-of-Fit' test used for?",
+    "options": {
+      "A": "To see if a piece of clothing fits.",
+      "B": "To see if sample data fits a distribution from a certain population.",
+      "C": "To calculate the slope of a line.",
+      "D": "To find the median of a group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an ANOVA, what does a significant result tell you?",
+    "options": {
+      "A": "Exactly which groups are different from each other.",
+      "B": "That at least one group mean is different from the others.",
+      "C": "That all group means are different from each other.",
+      "D": "That the null hypothesis is true."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type II Error' also known as?",
+    "options": {
+      "A": "False Positive.",
+      "B": "False Negative.",
+      "C": "Correct Rejection.",
+      "D": "Power of the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the 'Standard Error' as the sample size increases?",
+    "options": {
+      "A": "It increases.",
+      "B": "It decreases.",
+      "C": "It remains constant.",
+      "D": "It becomes zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If your T-statistic is 0.00, your p-value will be:",
+    "options": {
+      "A": "0.00",
+      "B": "1.00",
+      "C": "0.05",
+      "D": "Indeterminate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test would you use to compare frequencies of eye color (Blue, Brown, Green) between two cities?",
+    "options": {
+      "A": "T-test",
+      "B": "Chi-Square Test",
+      "C": "Z-test",
+      "D": "Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Alternative Hypothesis' regarding a coin flip being fair?",
+    "options": {
+      "A": "The coin is fair ($P = 0.5$).",
+      "B": "The coin is not fair ($P \neq 0.5$).",
+      "C": "The coin will always land on heads.",
+      "D": "The coin has zero probability."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alpha' usually called in research papers?",
+    "options": {
+      "A": "Power level.",
+      "B": "p-threshold or p-crit.",
+      "C": "Standard deviation.",
+      "D": "The result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is 'not' a step in hypothesis testing?",
+    "options": {
+      "A": "State the hypotheses.",
+      "B": "Prove the alternative hypothesis is 100% true.",
+      "C": "Calculate the test statistic.",
+      "D": "Make a decision about the null hypothesis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heterogeneity'?",
+    "options": {
+      "A": "When all data is identical.",
+      "B": "When data points or groups are diverse and different from each other.",
+      "C": "A way to name a database.",
+      "D": "The result of a T-test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Z-score' of 1.96 associated with for a two-tailed test?",
+    "options": {
+      "A": "90% confidence.",
+      "B": "95% confidence.",
+      "C": "99% confidence.",
+      "D": "50% confidence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symmetry' in a distribution important for?",
+    "options": {
+      "A": "Determining the file size.",
+      "B": "Checking if parametric assumptions are met.",
+      "C": "Choosing a color for a graph.",
+      "D": "Identifying the researcher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is used for 'Proportions' rather than means?",
+    "options": {
+      "A": "T-test",
+      "B": "Z-test for Proportions",
+      "C": "ANOVA",
+      "D": "Pearson Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Independence' in a statistical sense?",
+    "options": {
+      "A": "The researcher works alone.",
+      "B": "The occurrence of one event does not affect the occurrence of another.",
+      "C": "The data is stored on an independent drive.",
+      "D": "The p-value is exactly 0.5."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If you decrease the significance level (alpha) from 0.05 to 0.01, what is the most likely effect on the statistical power of the test?",
+    "options": {
+      "A": "The power will increase because the test is more rigorous.",
+      "B": "The power will decrease because you are making it harder to reject the null hypothesis.",
+      "C": "The power will remain unchanged as it only depends on sample size.",
+      "D": "The power will double to compensate for the stricter alpha."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a fundamental assumption for the 'Independent Samples T-test' regarding the spread of data?",
+    "options": {
+      "A": "The data must be perfectly linear.",
+      "B": "The samples must have unequal sizes.",
+      "C": "The variances of the two populations must be approximately equal (Homogeneity of Variance).",
+      "D": "The mean of the combined samples must be zero."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a 'Chi-Square Goodness-of-Fit' test actually compare?",
+    "options": {
+      "A": "The means of two categorical populations.",
+      "B": "The observed frequencies in categories against the expected frequencies.",
+      "C": "The variance of a sample against a known population mean.",
+      "D": "The correlation between two continuous variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of ANOVA, what does the 'F-ratio' represent?",
+    "options": {
+      "A": "The ratio of the sample size to the number of groups.",
+      "B": "The ratio of variance between groups to the variance within groups.",
+      "C": "The difference between the highest and lowest group means.",
+      "D": "The probability that the Type I error is zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary consequence of a 'Type II Error' in a clinical trial for a new drug?",
+    "options": {
+      "A": "Concluding the drug is effective when it actually is not.",
+      "B": "Concluding the drug is not effective when it actually is.",
+      "C": "Charging the patients too much for a drug that works.",
+      "D": "Allowing too many people to join the trial."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is used when you want to compare the means of more than two groups simultaneously?",
+    "options": {
+      "A": "Multiple T-tests",
+      "B": "Linear Regression",
+      "C": "One-Way ANOVA",
+      "D": "Chi-Square Test of Independence"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When performing a 'Two-Sample Z-test for Proportions', what must be true about the sample sizes ($n_1$ and $n_2$)?",
+    "options": {
+      "A": "They must be smaller than 30.",
+      "B": "They must be large enough so that the number of successes and failures in both groups is at least 5 or 10.",
+      "C": "They must be exactly equal to each other.",
+      "D": "They must represent at least 50% of the total population."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Mann-Whitney U Test', how is the test statistic calculated?",
+    "options": {
+      "A": "By averaging the raw values of both groups.",
+      "B": "By ranking all the observations from both groups together.",
+      "C": "By finding the difference between group variances.",
+      "D": "By squaring the p-values of multiple T-tests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Levene's Test' used for in the preparation for a T-test or ANOVA?",
+    "options": {
+      "A": "To check if the data is normally distributed.",
+      "B": "To test the assumption of equality of variances.",
+      "C": "To identify outliers in the dependent variable.",
+      "D": "To determine the optimal significance level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Welch's T-test', which standard assumption of the Student's T-test is relaxed?",
+    "options": {
+      "A": "The assumption of normality.",
+      "B": "The assumption of independent observations.",
+      "C": "The assumption of equal population variances.",
+      "D": "The assumption of random sampling."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the relationship between the 'Confidence Interval' and the 'Rejection Region' of a two-tailed test?",
+    "options": {
+      "A": "If the null hypothesis value falls outside the 95% confidence interval, we reject the null at alpha = 0.05.",
+      "B": "The confidence interval and rejection region are the same thing.",
+      "C": "If the null hypothesis value is inside the interval, we always reject it.",
+      "D": "There is no mathematical relationship between the two."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific error is the 'Bonferroni Correction' designed to mitigate?",
+    "options": {
+      "A": "Type II Errors in small samples.",
+      "B": "The inflation of Type I Error rates when performing multiple comparisons.",
+      "C": "Errors caused by non-random sampling.",
+      "D": "Measurement errors in the dependent variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Standardized Effect Size' like Cohen’s d allow researchers to do?",
+    "options": {
+      "A": "Eliminate the need for a p-value entirely.",
+      "B": "Compare the magnitude of effects across different studies using different scales.",
+      "C": "Calculate the exact probability that the null hypothesis is true.",
+      "D": "Force the data into a normal distribution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Paired T-test', the 'Degrees of Freedom' ($df$) is calculated as:",
+    "options": {
+      "A": "The total number of observations minus 2 ($N-2$).",
+      "B": "The number of pairs minus 1 ($n-1$).",
+      "C": "The total number of groups minus 1 ($k-1$).",
+      "D": "The square root of the total sample size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Post-Hoc Test' (like Tukey’s HSD) after an ANOVA?",
+    "options": {
+      "A": "To check if the ANOVA was performed correctly.",
+      "B": "To determine which specific group means differ significantly from one another.",
+      "C": "To increase the p-value of the original F-test.",
+      "D": "To calculate the power of the ANOVA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-parametric' alternative to the One-Way ANOVA?",
+    "options": {
+      "A": "Friedman Test",
+      "B": "Kruskal-Wallis Test",
+      "C": "Wilcoxon Signed-Rank Test",
+      "D": "Spearman Rank Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In hypothesis testing, what is the 'Effect of Sample Size' on the p-value, assuming the effect exists?",
+    "options": {
+      "A": "Larger samples lead to larger p-values.",
+      "B": "Larger samples lead to smaller p-values, making it easier to detect small effects.",
+      "C": "Sample size has no effect on the p-value.",
+      "D": "Larger samples make the p-value stay exactly at 0.05."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Confidence Level' of 99% mean compared to 95%?",
+    "options": {
+      "A": "The 99% interval will be narrower.",
+      "B": "The 99% interval will be wider.",
+      "C": "The 99% interval is more likely to result in a Type I error.",
+      "D": "The 99% interval uses a smaller critical value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Central Limit Theorem' primary use in testing?",
+    "options": {
+      "A": "It ensures all population data is normal.",
+      "B": "It allows us to assume the sampling distribution of the mean is normal for large $n$.",
+      "C": "It calculates the exact standard deviation of the population.",
+      "D": "It identifies the mode of the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is best for checking if the 'variance' of a single population equals a specific value?",
+    "options": {
+      "A": "T-test",
+      "B": "Chi-Square Test for Variance",
+      "C": "F-test",
+      "D": "Z-test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Degrees of Freedom' for a 'Chi-Square Test of Independence' with a 3x3 contingency table?",
+    "options": {
+      "A": "9",
+      "B": "4",
+      "C": "6",
+      "D": "2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Two-Way ANOVA', how many null hypotheses are typically tested?",
+    "options": {
+      "A": "1",
+      "B": "3 (Two main effects and one interaction effect)",
+      "C": "2",
+      "D": "4"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Robustness' specifically referring to in a T-test?",
+    "options": {
+      "A": "The test's ability to handle large sample sizes.",
+      "B": "The test's ability to provide accurate results even when the assumption of normality is violated.",
+      "C": "The physical durability of the data collection devices.",
+      "D": "The speed of the statistical calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Standard Error of the Difference'?",
+    "options": {
+      "A": "The average value of the difference between two means.",
+      "B": "The estimated standard deviation of the difference between two sample means.",
+      "C": "The error made by a researcher when subtracting two numbers.",
+      "D": "The maximum possible difference between two groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Wilcoxon Signed-Rank Test', what is the null hypothesis?",
+    "options": {
+      "A": "The means of the two groups are equal.",
+      "B": "The median difference between pairs is zero.",
+      "C": "The variances of the two groups are equal.",
+      "D": "The data follows a normal distribution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pooled Estimate of the Proportion' used for?",
+    "options": {
+      "A": "A Z-test for a single proportion.",
+      "B": "A Z-test for the difference between two proportions when $H_0$ assumes they are equal.",
+      "C": "A Chi-square test with more than 10 categories.",
+      "D": "Calculating the confidence interval for a median."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If you reject a null hypothesis at the 5% level, what can you say about the 1% level?",
+    "options": {
+      "A": "You will definitely reject it at the 1% level too.",
+      "B": "You might or might not reject it at the 1% level; it depends on the p-value.",
+      "C": "You will never reject it at the 1% level.",
+      "D": "The p-value must be greater than 0.05."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Directional' Alternative Hypothesis?",
+    "options": {
+      "A": "$H_a: mu \neq 50$",
+      "B": "$H_a: mu > 50$",
+      "C": "$H_0: mu = 50$",
+      "D": "$H_a: mu \text{ is not equal to } 50$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Statistically Significant' result NOT mean?",
+    "options": {
+      "A": "The result is unlikely to be due to chance.",
+      "B": "The result is practically or clinically important.",
+      "C": "The p-value is less than alpha.",
+      "D": "The null hypothesis was rejected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Rejection Region' for a left-tailed Z-test at alpha = 0.05?",
+    "options": {
+      "A": "Any Z-score greater than 1.645.",
+      "B": "Any Z-score less than -1.645.",
+      "C": "Any Z-score between -1.96 and 1.96.",
+      "D": "Any Z-score greater than 1.96."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is most appropriate for a sample size of 15 where the population standard deviation is unknown?",
+    "options": {
+      "A": "Z-test",
+      "B": "T-test",
+      "C": "Chi-Square test",
+      "D": "F-test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Grand Mean' in the context of ANOVA?",
+    "options": {
+      "A": "The mean of the largest group.",
+      "B": "The mean of all observations across all groups combined.",
+      "C": "The difference between the group means.",
+      "D": "The most important mean in the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Two-Way ANOVA', what is an 'Interaction Effect'?",
+    "options": {
+      "A": "When the researcher interacts with the participants.",
+      "B": "When the effect of one independent variable changes depending on the level of the other independent variable.",
+      "C": "When the two independent variables are correlated.",
+      "D": "When the sample sizes are unequal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Decision Rule' in hypothesis testing?",
+    "options": {
+      "A": "The law that requires researchers to publish results.",
+      "B": "The statement that specifies the conditions under which the null hypothesis is rejected.",
+      "C": "The process of choosing a research topic.",
+      "D": "The rule for choosing a sample size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Goodness-of-Fit' test application?",
+    "options": {
+      "A": "Comparing the heights of men and women.",
+      "B": "Testing if a die is fair by comparing observed rolls to a uniform distribution.",
+      "C": "Finding the correlation between age and income.",
+      "D": "Testing if a new drug works better than a placebo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the 'Critical Value' as the degrees of freedom increase in a T-distribution?",
+    "options": {
+      "A": "It increases.",
+      "B": "It decreases and approaches the Z-critical value.",
+      "C": "It remains constant.",
+      "D": "It becomes zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which value is used to determine if a result is 'Highly Significant' (e.g., p < 0.001)?",
+    "options": {
+      "A": "Alpha level.",
+      "B": "p-value.",
+      "C": "T-statistic.",
+      "D": "Confidence interval."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the assumption of 'Normality'?",
+    "options": {
+      "A": "The participants must behave normally.",
+      "B": "The population from which the sample is drawn must follow a normal distribution.",
+      "C": "The sample size must be exactly 100.",
+      "D": "The p-value must be exactly 0.5."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an 'F-test', what is being compared?",
+    "options": {
+      "A": "Two means.",
+      "B": "Two variances.",
+      "C": "Two medians.",
+      "D": "Two proportions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical Power' (1 - beta)?",
+    "options": {
+      "A": "The probability of a Type I error.",
+      "B": "The probability of correctly rejecting a false null hypothesis.",
+      "C": "The speed of the CPU.",
+      "D": "The number of groups in an ANOVA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standard Z-score' for a 90% confidence level (two-tailed)?",
+    "options": {
+      "A": "1.96",
+      "B": "1.645",
+      "C": "2.575",
+      "D": "1.28"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standard Error' a measure of?",
+    "options": {
+      "A": "Population variability.",
+      "B": "Sample-to-sample variability of a statistic.",
+      "C": "Measurement error of a scale.",
+      "D": "Data entry errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Null Hypothesis' for a 'Chi-Square Test of Independence'?",
+    "options": {
+      "A": "The two variables are related.",
+      "B": "The two variables are independent (not related).",
+      "C": "The means of the variables are equal.",
+      "D": "The proportions are 50/50."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type I Error' also called?",
+    "options": {
+      "A": "False Negative.",
+      "B": "False Positive.",
+      "C": "Correct Decision.",
+      "D": "Power."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these factors 'decreases' the width of a confidence interval?",
+    "options": {
+      "A": "Increasing the confidence level.",
+      "B": "Increasing the sample size.",
+      "C": "Increasing the standard deviation.",
+      "D": "Decreasing the sample size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'T-score of 0' indicate in a one-sample T-test?",
+    "options": {
+      "A": "The sample size is too small.",
+      "B": "The sample mean is exactly equal to the hypothesized population mean.",
+      "C": "The test is invalid.",
+      "D": "The p-value is zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Alternative Hypothesis' for a right-tailed test?",
+    "options": {
+      "A": "$H_a: mu < mu_0$",
+      "B": "$H_a: mu > mu_0$",
+      "C": "$H_a: mu \neq mu_0$",
+      "D": "$H_a: mu = mu_0$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symmetry' in a distribution important for?",
+    "options": {
+      "A": "Calculating the range.",
+      "B": "Meeting the assumptions of parametric tests.",
+      "C": "Visualizing the mode.",
+      "D": "Naming the variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which test is used for 'Proportions' between two independent groups?",
+    "options": {
+      "A": "T-test",
+      "B": "Two-Proportion Z-test",
+      "C": "ANOVA",
+      "D": "Paired T-test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standard Error of the Proportion' calculated from?",
+    "options": {
+      "A": "The mean and standard deviation.",
+      "B": "The sample proportion and sample size.",
+      "C": "The p-value and alpha.",
+      "D": "The degrees of freedom."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is 'not' a nonparametric test?",
+    "options": {
+      "A": "Sign Test",
+      "B": "T-test",
+      "C": "Median Test",
+      "D": "Runs Test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Significance Level' denoted by?",
+    "options": {
+      "A": "Beta",
+      "B": "Alpha",
+      "C": "Sigma",
+      "D": "Mu"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-value < 0.05' mean?",
+    "options": {
+      "A": "There is a 5% chance the null hypothesis is true.",
+      "B": "We reject the null hypothesis at the 5% significance level.",
+      "C": "The data is 95% accurate.",
+      "D": "The alternative hypothesis is 5% likely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample' vs 'Population'?",
+    "options": {
+      "A": "Sample is the whole; Population is a part.",
+      "B": "Population is the whole; Sample is a part.",
+      "C": "They are the same.",
+      "D": "Sample is only for qualitative data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Independent' vs 'Dependent' variable?",
+    "options": {
+      "A": "Dependent is manipulated; Independent is measured.",
+      "B": "Independent is manipulated; Dependent is measured.",
+      "C": "They are unrelated.",
+      "D": "Both are measured."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type II' Error probability denoted by?",
+    "options": {
+      "A": "Alpha",
+      "B": "Beta",
+      "C": "Power",
+      "D": "Confidence"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Test Statistic' for an ANOVA?",
+    "options": {
+      "A": "T",
+      "B": "F",
+      "C": "Z",
+      "D": "Chi-Square"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standard Error' used to build?",
+    "options": {
+      "A": "Histograms.",
+      "B": "Confidence Intervals.",
+      "C": "Pie Charts.",
+      "D": "Raw data tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Expected' Frequency?",
+    "options": {
+      "A": "The frequency observed in the sample.",
+      "B": "The frequency that would be expected if the null hypothesis were true.",
+      "C": "The highest frequency in the data.",
+      "D": "The average frequency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Degrees of Freedom' for a 'One-Sample T-test'?",
+    "options": {
+      "A": "$N$",
+      "B": "$N-1$",
+      "C": "$N-2$",
+      "D": "$N/2$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alpha' also known as?",
+    "options": {
+      "A": "Confidence level.",
+      "B": "Level of significance.",
+      "C": "Power level.",
+      "D": "Margin of error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical' inference?",
+    "options": {
+      "A": "Summarizing data.",
+      "B": "Drawing conclusions about a population from a sample.",
+      "C": "Deleting outliers.",
+      "D": "Plotting a graph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard' deviation of a sampling distribution?",
+    "options": {
+      "A": "Variance.",
+      "B": "Standard Error.",
+      "C": "Range.",
+      "D": "Z-score."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pooled' variance used in?",
+    "options": {
+      "A": "Paired T-test.",
+      "B": "Independent T-test.",
+      "C": "Z-test.",
+      "D": "Chi-Square test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Null' hypothesis for a T-test?",
+    "options": {
+      "A": "Means are different.",
+      "B": "Means are equal.",
+      "C": "Variances are equal.",
+      "D": "Sample is normal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Critical' region also called?",
+    "options": {
+      "A": "Acceptance region.",
+      "B": "Rejection region.",
+      "C": "Confidence interval.",
+      "D": "Sample space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of the Neyman-Pearson Lemma, what is the primary objective when defining the 'Likelihood Ratio Test'?",
+    "options": {
+      "A": "To maximize the probability of a Type I error for a fixed sample size.",
+      "B": "To ensure the test is unbiased and consistent across all possible distributions.",
+      "C": "To find the most powerful test for a given significance level (alpha).",
+      "D": "To minimize the computational complexity of the p-value calculation."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When performing a 'MANOVA' (Multivariate Analysis of Variance), which of the following is true regarding the dependent variables?",
+    "options": {
+      "A": "They must be completely independent of one another.",
+      "B": "They should be correlated to some degree to justify the multivariate approach.",
+      "C": "They must be categorical variables with at least three levels.",
+      "D": "They are automatically transformed into a single principal component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Multiple Comparison Problem' and how does it affect the Family-Wise Error Rate (FWER)?",
+    "options": {
+      "A": "It decreases the FWER by increasing the sample size for each comparison.",
+      "B": "It results in an inflated FWER, making it more likely to find at least one false significant result.",
+      "C": "It requires the use of one-tailed tests to maintain a constant alpha.",
+      "D": "It only occurs when the null hypothesis is actually false."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Bayesian hypothesis testing, what does the 'Bayes Factor' ($BF_{10}$) directly measure?",
+    "options": {
+      "A": "The probability that the alternative hypothesis is true given the data.",
+      "B": "The ratio of the likelihood of the data under the alternative hypothesis to the likelihood under the null.",
+      "C": "The posterior probability of the null hypothesis being false.",
+      "D": "The percentage of outliers removed from the Bayesian prior."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequential Analysis' in the context of clinical trials and hypothesis testing?",
+    "options": {
+      "A": "Analyzing data one participant at a time and stopping as soon as a significant p-value is reached.",
+      "B": "A method where the sample size is not fixed in advance, and the test is evaluated at multiple interim stages.",
+      "C": "Running the same test multiple times in a specific sequence to find the lowest p-value.",
+      "D": "A way to sort the results alphabetically before publishing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'Fisher's Exact Test'?",
+    "options": {
+      "A": "Large sample sizes ($n > 1000$).",
+      "B": "A 2x2 contingency table where row and column totals (marginals) are fixed.",
+      "C": "The data must follow a normal distribution with equal variances.",
+      "D": "The variables must be continuous and measured on an interval scale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Non-centrality Parameter' ($delta$) used for in power calculations?",
+    "options": {
+      "A": "To shift the mean of the null distribution to zero.",
+      "B": "To quantify the degree to which the alternative distribution differs from the null distribution.",
+      "C": "To calculate the exact p-value for a non-parametric test.",
+      "D": "To adjust the degrees of freedom for Welch's T-test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Permutation Testing', how is the p-value determined?",
+    "options": {
+      "A": "By looking up the value in a standard T-table.",
+      "B": "By calculating the proportion of all possible re-orderings of the data that result in a test statistic as extreme as the observed one.",
+      "C": "By assuming the data follows a specific parametric distribution.",
+      "D": "By multiplying the significance level by the number of permutations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Mauchly's Test' specifically used to evaluate in repeated measures designs?",
+    "options": {
+      "A": "The normality of the differences between pairs.",
+      "B": "The assumption of sphericity.",
+      "C": "The homogeneity of variances between independent groups.",
+      "D": "The linearity of the relationship between time and the dependent variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'False Discovery Rate' (FDR) control for in high-throughput data analysis?",
+    "options": {
+      "A": "The probability of making any Type I error across all tests.",
+      "B": "The expected proportion of rejected null hypotheses that are actually false discoveries.",
+      "C": "The probability that the alternative hypothesis is proven true in at least 50% of cases.",
+      "D": "The rate at which data is lost during the ingestion process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Hartley's $F_{max}$ Test', what is being assessed?",
+    "options": {
+      "A": "The difference between the maximum and minimum group means.",
+      "B": "The ratio of the largest group variance to the smallest group variance to check for homogeneity.",
+      "C": "The total sum of squares in a three-way ANOVA.",
+      "D": "The probability that the test statistic is greater than 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens in a 'G-test' (likelihood ratio test for goodness of fit) compared to a standard Pearson Chi-square test?",
+    "options": {
+      "A": "The G-test is always more accurate regardless of sample size.",
+      "B": "The G-test is based on the log-likelihood and is generally preferred for theoretical reasons in complex models.",
+      "C": "The G-test requires the data to be normally distributed.",
+      "D": "The G-test does not use degrees of freedom."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Uniformly Most Powerful' (UMP) test?",
+    "options": {
+      "A": "A test that has the same power for every possible effect size.",
+      "B": "A test that has the greatest power among all possible tests for all values of the parameter under the alternative hypothesis.",
+      "C": "A test that works on any distribution regardless of its shape.",
+      "D": "A test that uses the least amount of computational power."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Greenhouse-Geisser Correction' used for?",
+    "options": {
+      "A": "To correct for environmental factors in field research.",
+      "B": "To adjust the degrees of freedom in repeated measures ANOVA when sphericity is violated.",
+      "C": "To backup the statistical code in a green-colored cloud folder.",
+      "D": "To increase the p-value when the sample size is smaller than 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Exact Tests', why is the term 'Exact' used?",
+    "options": {
+      "A": "Because the researcher is exactly 100% sure of the result.",
+      "B": "Because the p-value is calculated from the true distribution of the test statistic rather than an asymptotic approximation.",
+      "C": "Because the data points must be exact integers with no decimals.",
+      "D": "Because the test requires an exact match between two different datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ancova' (Analysis of Covariance) primarily designed to do?",
+    "options": {
+      "A": "To combine two different ANOVAs into one.",
+      "B": "To increase the power of the test by removing the variance explained by a continuous covariate.",
+      "C": "To find the correlation between two categorical variables.",
+      "D": "To manage the metadata of a statistical model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Dunnett's Test' compare?",
+    "options": {
+      "A": "All possible pairs of group means.",
+      "B": "Several treatment groups against a single control group mean.",
+      "C": "Two independent groups based on their medians.",
+      "D": "The variance of the sample against a known constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Equivalence Testing' (TOST), what is the goal?",
+    "options": {
+      "A": "To prove that two groups are significantly different.",
+      "B": "To statistically demonstrate that the difference between two groups falls within a predefined 'equivalence margin'.",
+      "C": "To ensure that all groups have exactly the same number of participants.",
+      "D": "To find the average value of all groups combined."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Partial Eta-squared' ($eta_p^2$)?",
+    "options": {
+      "A": "The percentage of the dataset that was removed during cleaning.",
+      "B": "An effect size measure representing the proportion of variance explained by a factor, excluding other factors.",
+      "C": "The square root of the p-value.",
+      "D": "The time it takes for a model to finish half of its training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bootstrap Hypothesis Testing'?",
+    "options": {
+      "A": "A test for the quality of physical footwear.",
+      "B": "A method that uses resampling to estimate the null distribution of a test statistic.",
+      "C": "A way to backup the SQL schema as an image.",
+      "D": "A test performed at the start of a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Likelihood Ratio' testing, what does the 'Wilks' Theorem' provide?",
+    "options": {
+      "A": "A way to calculate the mean of a Poisson distribution.",
+      "B": "An asymptotic distribution (Chi-square) for the likelihood ratio statistic as sample size increases.",
+      "C": "A specialized software for architects.",
+      "D": "The name of the researcher who found the outlier."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cochran’s Q Test' used for?",
+    "options": {
+      "A": "Comparing three or more independent groups with continuous data.",
+      "B": "Determining if there are differences between three or more matched sets of binary outcomes.",
+      "C": "Calculating the volume of a sphere using probability.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Structural Equation Modeling' (SEM), what is the 'Chi-Square' statistic measuring relative to model fit?",
+    "options": {
+      "A": "The difference between the observed and the model-implied covariance matrices.",
+      "B": "The total number of parameters in the model.",
+      "C": "The probability that the sample size is too large.",
+      "D": "The speed of light in a network cable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Effect Size' 'Omega-squared' ($omega^2$) preferred over Eta-squared?",
+    "options": {
+      "A": "Because it is easier to spell.",
+      "B": "Because it provides a less biased estimate of the proportion of variance explained in the population.",
+      "C": "Because it is 100x faster to compute.",
+      "D": "Because it only works for binary data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Mixed-effects' model feature?",
+    "options": {
+      "A": "Mixing two different programming languages.",
+      "B": "The presence of both fixed effects (constant across groups) and random effects (varying across groups).",
+      "C": "Hiring researchers from mixed backgrounds.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bartlett’s Test' used for and what is its main limitation?",
+    "options": {
+      "A": "Testing for normality; it fails with small samples.",
+      "B": "Testing for homogeneity of variances; it is highly sensitive to departures from normality.",
+      "C": "Testing for correlation; it only works on winter data.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Statistical' 'Power', what is the 'Minimum' 'Detectable' 'Effect' (MDE)?",
+    "options": {
+      "A": "The smallest effect size that would be practically significant to a CEO.",
+      "B": "The smallest effect size that a study is likely to detect at given alpha and power levels.",
+      "C": "A bug in the statistical software.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hotelling’s T-squared' test?",
+    "options": {
+      "A": "A T-test performed in a very warm room.",
+      "B": "The multivariate version of the Student’s T-test used for comparing vector means of two groups.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Profile' 'Analysis' in MANOVA?",
+    "options": {
+      "A": "Checking the LinkedIn profile of participants.",
+      "B": "A specialized MANOVA application used to see if groups have similar patterns across multiple dependent variables.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequential' 'Probability' 'Ratio' 'Test' (SPRT)?",
+    "options": {
+      "A": "A ratio of probability to internet speed.",
+      "B": "A specific hypothesis test for choosing between two hypotheses after each successive observation.",
+      "C": "A specialized software for accountants.",
+      "D": "Hiring multiple people to enter data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bayesian' 'Testing', what is a 'Credible' 'Interval'?",
+    "options": {
+      "A": "An interval that the developer believes in.",
+      "B": "The range of values that holds a certain percentage of the posterior probability.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-inferiority' 'Testing'?",
+    "options": {
+      "A": "Proving that a new product is much better than the old one.",
+      "B": "A test to show that a new treatment is not significantly worse than an existing one by more than a margin.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Homoscedasticity' vs 'Heteroscedasticity' 'Robust' 'Estimators'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Homoscedastic assumes constant variance; Robust estimators (like Sandwich) adjust for non-constant variance.",
+      "C": "Robust estimators are 100x slower.",
+      "D": "Heteroscedasticity is only for text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Sphericity' violation consequence?",
+    "options": {
+      "A": "The data points turn into cubes.",
+      "B": "Inflated Type I error rates in repeated measures ANOVA.",
+      "C": "A security scan of the trash directory.",
+      "D": "A specialized software for gardeners."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Likelihood' 'Profile' 'Confidence' 'Interval'?",
+    "options": {
+      "A": "A profile of a person's internet history.",
+      "B": "An interval derived from the inversion of the likelihood ratio test.",
+      "C": "A way to rotate the token vectors.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Wald' 'vs' 'Score' 'vs' 'Likelihood' 'Ratio' tests?",
+    "options": {
+      "A": "They are identical in small samples.",
+      "B": "Three related methods for testing hypotheses, where LR is generally considered the most accurate.",
+      "C": "One is for beginners; two for experts.",
+      "D": "Score tests are 10x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multiple' 'Hypothesis' 'Testing' 'Holm-Bonferroni' method?",
+    "options": {
+      "A": "Hiring two different people named Holm and Bonferroni.",
+      "B": "A stepwise procedure to control the family-wise error rate that is less conservative than the original Bonferroni.",
+      "C": "A security scan for computer viruses.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Consistency' of an estimator?",
+    "options": {
+      "A": "How often the researcher arrives on time.",
+      "B": "The property that as sample size increases, the estimator converges to the true population value.",
+      "C": "The physical layout of a server room.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Goodness-of-Fit' 'Kolmogorov-Smirnov' (K-S) test?",
+    "options": {
+      "A": "Testing the fit of a new suit.",
+      "B": "A nonparametric test of the equality of continuous, one-dimensional probability distributions.",
+      "C": "A specialized software for architects.",
+      "D": "Deleting data from the future."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anderson-Darling' 'Test'?",
+    "options": {
+      "A": "A test performed by a person named Anderson.",
+      "B": "A statistical test of whether a given sample of data is drawn from a given probability distribution (more sensitive than K-S).",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Internal' 'Consistency' 'McDonald’s Omega'?",
+    "options": {
+      "A": "The consistency of a fast food order.",
+      "B": "A reliability coefficient considered a superior alternative to Cronbach’s alpha for scale internal consistency.",
+      "C": "A specialized tool for measuring heat.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structural' 'Breaks' 'Chow' 'Test'?",
+    "options": {
+      "A": "Testing if the computer case is broken.",
+      "B": "A statistical test of whether the coefficients in two linear regressions on different data sets are equal.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical' 'Significance' 'vs' 'Practical' 'Significance'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Statistical means the result is likely not due to chance; Practical means the effect is large enough to be meaningful.",
+      "C": "Practical is for beginners; Statistical for experts.",
+      "D": "Statistical is 100x faster than Practical."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'ANOVA', what is 'Assumed' 'Sphericity' vs 'Box's M'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Sphericity is for repeated measures; Box's M tests the equality of covariance matrices across groups.",
+      "C": "Box's M is much faster.",
+      "D": "Sphericity is only for text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resampling' 'Jackknife' 'Hypothesis' 'Test'?",
+    "options": {
+      "A": "A test using a physical knife.",
+      "B": "Estimating the distribution of a statistic by systematically leaving out one observation from the sample set.",
+      "C": "A way to count the number of characters.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log-rank' 'Test' in survival analysis?",
+    "options": {
+      "A": "Counting logs in a rank.",
+      "B": "A hypothesis test to compare the survival distributions of two samples.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Experimental' 'Design', what is 'Latin' 'Square' 'Design'?",
+    "options": {
+      "A": "A research study performed in Italy.",
+      "B": "An experimental design used to control for two sources of nuisance variation among experimental units.",
+      "C": "A specialized software for designers.",
+      "D": "Recording the sound of the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exact' 'Binomial' 'Test'?",
+    "options": {
+      "A": "Testing a person's name with zero error.",
+      "B": "A test of the statistical significance of deviations from a theoretically expected distribution of observations into two categories.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Type' 'M' 'Error'?",
+    "options": {
+      "A": "A mistake made in May.",
+      "B": "A Magnitude error, occurring when the effect size is significantly over- or under-estimated.",
+      "C": "A security certificate for a database.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Type' 'S' 'Error'?",
+    "options": {
+      "A": "A mistake made in Summer.",
+      "B": "A Sign error, occurring when the estimated direction of an effect is opposite to the true direction.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for chefs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meta-analysis' 'Publication' 'Bias'?",
+    "options": {
+      "A": "When the researcher is biased against the publisher.",
+      "B": "When the results of published studies are not representative of all studies conducted (the 'File Drawer' problem).",
+      "C": "A list of all the employees.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'ANOVA', what is 'Post-hoc' 'Games-Howell' test?",
+    "options": {
+      "A": "A test performed while playing games.",
+      "B": "A post-hoc comparison that does not assume equal variances or equal sample sizes.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate' 'Normality'?",
+    "options": {
+      "A": "When everything is normal in several countries.",
+      "B": "The assumption that each individual variable and all linear combinations of variables follow a normal distribution.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Effect' 'Size' 'Cohen’s f'?",
+    "options": {
+      "A": "A mistake made by a person named Cohen.",
+      "B": "An effect size measure used specifically for ANOVA to indicate the ratio of between-groups variance to within-groups variance.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Analysis' 'of' 'Covariance' 'Parallelism' 'Assumption'?",
+    "options": {
+      "A": "Drawing two lines on the screen.",
+      "B": "The assumption that the slopes of the regression lines for each group are equal.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Sequential' 'Analysis', what is 'Boundary' 'Crossing'?",
+    "options": {
+      "A": "Crossing the border of a country.",
+      "B": "When the cumulative test statistic exceeds a pre-defined threshold, leading to early termination of the test.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Likelihood' 'Inference' 'Profile'?",
+    "options": {
+      "A": "A profile used to find people who like data.",
+      "B": "An approach that treats the likelihood function as a primary source of information about the parameter.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Asymptotic' 'Consistency'?",
+    "options": {
+      "A": "Consistency that only happens in a lab.",
+      "B": "The property that as the sample size approaches infinity, the test correctly identifies the true hypothesis with probability 1.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Wald' 'vs' 'Score' 'Efficiency'?",
+    "options": {
+      "A": "Calculating the efficiency of a physical score.",
+      "B": "The relative power of these tests, where the Score test is often preferred when parameters are on the boundary.",
+      "C": "A way to backup the SQL code.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fisher's' 'Exact' 'Test' 'Hypergeometric' 'Distribution'?",
+    "options": {
+      "A": "A distribution of geometric shapes.",
+      "B": "The underlying probability distribution used to calculate the exact p-value in Fisher’s test.",
+      "C": "A specialized software for accountants.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Interim' 'Analysis'?",
+    "options": {
+      "A": "Analysis performed in the middle of a project.",
+      "B": "A planned check of the data before the trial has completed to ensure safety or efficacy.",
+      "C": "A specialized software for architects.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'False' 'Discovery' 'Rate' 'Benjamini-Hochberg'?",
+    "options": {
+      "A": "A rate of discovery in a lab.",
+      "B": "A popular procedure used to control the false discovery rate in multiple testing situations.",
+      "C": "A security firewall.",
+      "D": "Hiring a person named Benjamini."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Statistical' 'Inference', what is 'Sufficiency'?",
+    "options": {
+      "A": "Having enough money for research.",
+      "B": "A statistic is sufficient if it contains all the information about the parameter contained in the sample.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ancova' 'Homogeneity' 'of' 'Regression'?",
+    "options": {
+      "A": "Hiring multiple people to do one regression.",
+      "B": "The assumption that the relationship between the covariate and the dependent variable is constant across all treatment groups.",
+      "C": "A security scan for computer viruses.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MANOVA', what is 'Wilks’' 'Lambda'?",
+    "options": {
+      "A": "The first letter of the Greek alphabet.",
+      "B": "A test statistic used to assess whether there are statistically significant differences between group means on multiple dependent variables.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian' 'Inference' 'Posterior' 'Mode'?",
+    "options": {
+      "A": "The mode of a statistical distribution.",
+      "B": "The value of the parameter that maximizes the posterior density.",
+      "C": "A specialized tool for measuring heat.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis' 'Testing', what is 'Standard' 'Error' 'Inflation' 'Factor' (SEIF)?",
+    "options": {
+      "A": "Measuring the influence of a famous person.",
+      "B": "The increase in standard error due to dependence or other violations of assumptions.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical' 'Power' 'Sensitivity' 'Analysis'?",
+    "options": {
+      "A": "Analysis performed after a power outage.",
+      "B": "The process of assessing how different assumptions about effect size and variance impact the calculated power.",
+      "C": "The physical durability of a computer.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  }
+  ]
+}

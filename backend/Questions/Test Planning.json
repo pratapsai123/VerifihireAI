@@ -1,0 +1,1911 @@
+{ 
+  "skill": "Test planning", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a 'Test Plan' document?",
+    "options": {
+      "A": "To provide a detailed script for the developers to write code.",
+      "B": "To outline the scope, approach, resources, and schedule of intended testing activities.",
+      "C": "To act as a legal contract between the company and the customer.",
+      "D": "To list the personal home addresses of all the QA engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Plan is a static document that should never be changed once the project begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are standard components of a Test Plan? (Select all that apply)",
+    "options": {
+      "A": "Test Scope",
+      "B": "Test Deliverables",
+      "C": "Suspension and Resumption Criteria",
+      "D": "Office snacks budget"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In test planning, what does 'Scope' define?",
+    "options": {
+      "A": "The brand of computers used for testing.",
+      "B": "What features will be tested and which features will not be tested.",
+      "C": "The total number of bugs expected to be found.",
+      "D": "The salary of the project manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entry Criteria' in a Test Plan?",
+    "options": {
+      "A": "The security code for the office front door.",
+      "B": "The set of conditions that must be met before formal testing can begin.",
+      "C": "The list of employees who are allowed to enter the QA lab.",
+      "D": "The time at which the testing team arrives at work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Test Strategy' is usually a high-level document, while a 'Test Plan' is more specific to a particular project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of a Test Plan identifies the specific hardware and software needed for testing?",
+    "options": {
+      "A": "Test Summary",
+      "B": "Environment Requirements",
+      "C": "Staffing and Training",
+      "D": "Glossary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exit Criteria' (or Completion Criteria)?",
+    "options": {
+      "A": "The time the testing team goes home for the day.",
+      "B": "The specific conditions or requirements that must be met to conclude a testing phase.",
+      "C": "The procedure for deleting old test data.",
+      "D": "The list of people who have left the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical 'Test Deliverables'? (Select all that apply)",
+    "options": {
+      "A": "Test Plan",
+      "B": "Test Cases",
+      "C": "Test Summary Report",
+      "D": "The software source code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Test Planning should ideally begin as soon as the project requirements are defined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Risk Analysis' in a Test Plan involve?",
+    "options": {
+      "A": "Predicting the stock market prices.",
+      "B": "Identifying potential problems that could delay or impact the quality of testing.",
+      "C": "Calculating the insurance premium for the office.",
+      "D": "Ensuring the fire extinguishers are working."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Who is primarily responsible for creating and maintaining the Test Plan?",
+    "options": {
+      "A": "Lead Developer",
+      "B": "Test Manager (or QA Lead)",
+      "C": "Marketing Manager",
+      "D": "Customer Support Representative"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Suspension Criteria'?",
+    "options": {
+      "A": "To fire employees who make mistakes.",
+      "B": "To define the conditions under which testing activities must temporarily stop.",
+      "C": "To pause the computer during a software update.",
+      "D": "To cancel the project if the budget runs out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Agile planning, the 'Sprint Test Plan' is usually a very long, 50-page document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which field in a Test Plan outlines the specific tools to be used (e.g., Jira, Selenium)?",
+    "options": {
+      "A": "Resource Plan",
+      "B": "Test Tools",
+      "C": "Introduction",
+      "D": "Schedule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression Testing' planning?",
+    "options": {
+      "A": "Planning how to delete old code.",
+      "B": "Determining which existing tests need to be rerun to ensure new changes didn't break functionality.",
+      "C": "Planning the retirement party for a senior tester.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Test Levels' often planned for? (Select all that apply)",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Integration Testing",
+      "C": "System Testing",
+      "D": "Keyboard Stress Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Unit Testing' planning is usually performed by the development team rather than the QA team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Milestone' in a test schedule?",
+    "options": {
+      "A": "A physical stone placed in the office garden.",
+      "B": "A significant point or event in the project timeline, such as 'Test Plan Approval'.",
+      "C": "A measure of how many miles the server traveled.",
+      "D": "The number of lines in a test script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Feature to be Tested' represent?",
+    "options": {
+      "A": "The list of people who worked on the feature.",
+      "B": "The specific functional areas or requirements that the testing team will focus on.",
+      "C": "The color of the buttons in the software.",
+      "D": "The price of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Plan should include a section for 'Assumptions' to clarify conditions taken for granted (e.g., stable environment).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role provides information regarding project timelines and budget during test planning?",
+    "options": {
+      "A": "Junior Tester",
+      "B": "Project Manager",
+      "C": "Database Administrator",
+      "D": "Graphic Designer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Training Needs' in a Test Plan?",
+    "options": {
+      "A": "To plan for the physical fitness of the team.",
+      "B": "To identify any specific skills or tool knowledge the team needs to acquire before testing starts.",
+      "C": "To teach the developers how to type faster.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Testing only the 'Happy Path' is sufficient for a comprehensive Test Plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section of a Test Plan describes how to handle bugs found during testing?",
+    "options": {
+      "A": "Risk Management",
+      "B": "Defect Management (or Bug Tracking)",
+      "C": "Environmental Needs",
+      "D": "Introduction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Acceptance Testing' planning?",
+    "options": {
+      "A": "Planning how to accept compliments from the boss.",
+      "B": "Defining the tests that must pass for the end-user or client to sign off on the product.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are types of 'Test Approaches'? (Select all that apply)",
+    "options": {
+      "A": "Manual Testing",
+      "B": "Automated Testing",
+      "C": "Exploratory Testing",
+      "D": "Random Guessing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'Master Test Plan' coordinates multiple individual test plans for a large system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Test Coverage' measurement?",
+    "options": {
+      "A": "The amount of insurance the testing team has.",
+      "B": "The degree to which the requirements or code are exercised by the test cases.",
+      "C": "The total number of desks in the QA room.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Planning', what is a 'Buffer' in the test schedule?",
+    "options": {
+      "A": "A physical cloth used to clean the screen.",
+      "B": "Extra time added to the schedule to account for unexpected delays or complex bugs.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Test planning should ignore 'Negative Testing' scenarios to save time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which document is the primary input used to create a Test Plan?",
+    "options": {
+      "A": "Employee Handbook",
+      "B": "Software Requirements Specification (SRS)",
+      "C": "The CEO's daily blog",
+      "D": "A list of old bugs from a different project"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Approvals' section of a Test Plan used for?",
+    "options": {
+      "A": "To get permission to go on vacation.",
+      "B": "To record the signatures of stakeholders who agree with the planned testing approach.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Test environment setup must be completed *after* all test cases have been executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Testing' planning?",
+    "options": {
+      "A": "Planning the weight of the physical server.",
+      "B": "Defining how the system's performance will be measured under expected user traffic.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Test Deliverables' at the end of the project? (Select all that apply)",
+    "options": {
+      "A": "Test Closure Report",
+      "B": "Defect Log",
+      "C": "Final Test Metrics",
+      "D": "The developer's keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Suspension' and 'Resumption' criteria help prevent?",
+    "options": {
+      "A": "Wasting time testing a build that is fundamentally broken.",
+      "B": "Employees from talking to each other.",
+      "C": "The server from running out of electricity.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Every Test Plan must follow the exact same IEEE 829 standard format regardless of project size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scope Creep' in the context of test planning?",
+    "options": {
+      "A": "A bug that physically creeps across the screen.",
+      "B": "The uncontrolled growth of testing requirements without corresponding increases in time or resources.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Status Report'?",
+    "options": {
+      "A": "A report on the marital status of the team.",
+      "B": "A periodic update on testing progress against the plan (e.g., % of tests passed).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Project Manager' usually approves the final Test Plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are types of 'Resource' planned for in testing? (Select all that apply)",
+    "options": {
+      "A": "Human Resources (Testers)",
+      "B": "System Resources (Servers)",
+      "C": "Software Resources (Automation tools)",
+      "D": "Natural Resources (Oil and Gas)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Test Log'?",
+    "options": {
+      "A": "A physical piece of wood for a bonfire.",
+      "B": "A chronological record of the execution of test cases and their results.",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Deployment' plan?",
+    "options": {
+      "A": "A plan to move the office to a new city.",
+      "B": "The set of activities required to move the software from testing into the production environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Plan should explicitly mention who is responsible for providing the 'Test Data'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Black Box Testing' planning? (Select all that apply)",
+    "options": {
+      "A": "Testing based on requirements without knowing internal code",
+      "B": "Focusing on user inputs and outputs",
+      "C": "Testing the physical durability of a black box",
+      "D": "Often used for System Testing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Workaround' in the context of a blocked test?",
+    "options": {
+      "A": "Walking around the office building.",
+      "B": "A temporary method to continue testing despite a bug in a specific feature.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is a 'Test Pass'?",
+    "options": {
+      "A": "A ticket to enter a sports event.",
+      "B": "A successful execution of a test where the actual result matches the expected result.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Exploratory Testing' does not require a formal, predefined Test Plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'White Box Testing' planning? (Select all that apply)",
+    "options": {
+      "A": "Testing with knowledge of the internal code structure",
+      "B": "Usually involves Unit Testing",
+      "C": "Testing the physical transparency of a box",
+      "D": "Often involves code coverage analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test Estimation'?",
+    "options": {
+      "A": "Guessing the salary of the testing team.",
+      "B": "Predicting the time, effort, and resources needed to complete the planned testing activities.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Summary Report'?",
+    "options": {
+      "A": "A report on the weather in the summer.",
+      "B": "A high-level overview of testing results, risks, and conclusions at the end of a phase.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Plan must include a 'Revision History' to track changes to the document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Environmental' risks? (Select all that apply)",
+    "options": {
+      "A": "Test server downtime",
+      "B": "Lack of available licenses for testing tools",
+      "C": "Network instability",
+      "D": "The office coffee machine breaking"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Traceability Matrix' planning?",
+    "options": {
+      "A": "Planning how to trace a drawing on paper.",
+      "B": "Defining how requirements will be mapped to test cases to ensure full coverage.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Build Verification'?",
+    "options": {
+      "A": "Verifying the physical building is safe.",
+      "B": "A quick check to ensure a new software build is stable enough for formal testing.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Approver' of a Test Plan is the person who actually wrote it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Test Cycle' identifiers? (Select all that apply)",
+    "options": {
+      "A": "Build ID",
+      "B": "Release Number",
+      "C": "Sprint Number",
+      "D": "Employee ID"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Resource Leveling' in a test plan?",
+    "options": {
+      "A": "Leveling the physical office floor.",
+      "B": "Adjusting the schedule or tasks so that no tester is overworked while others are idle.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass Rate'?",
+    "options": {
+      "A": "The rate at which people pass the office hallway.",
+      "B": "The percentage of executed test cases that were successful.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Plan should mention the 'Communication Plan' for how defects will be reported.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Risk Mitigation' strategies? (Select all that apply)",
+    "options": {
+      "A": "Increasing the testing time for critical features",
+      "B": "Having a backup test environment",
+      "C": "Cross-training testers on different modules",
+      "D": "Ignoring the risk and hoping it goes away"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test Data' management?",
+    "options": {
+      "A": "Managing a list of the tester's favorite data.",
+      "B": "Planning how to create, use, and clean up the information used during testing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Management', what is a 'Dependencies' list?",
+    "options": {
+      "A": "A list of people who are dependent on the project manager.",
+      "B": "A list of tasks or conditions that must be completed before a testing activity can start.",
+      "C": "A security scan for database viruses.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Introduction' section of a Test Plan usually explains the project background.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Suspension' triggers? (Select all that apply)",
+    "options": {
+      "A": "Critical hardware failure",
+      "B": "Blocked 'Happy Path' functionality",
+      "C": "Test data corruption",
+      "D": "The office cat going missing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Which of the following describes the 'Top-Down' approach to test estimation?",
+    "options": {
+      "A": "Estimating individual tasks and summing them up to get the total project time.",
+      "B": "Taking the total project budget/timeline and allocating percentages to various testing phases.",
+      "C": "Hiring the most senior manager to decide the timeline without consulting the team.",
+      "D": "Using a random number generator to determine the testing window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Test Strategy' is a project-specific document that defines the exact dates and names of testers for each task.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific metric helps in determining if the 'Exit Criteria' for a test cycle has been met? (Select all that apply)",
+    "options": {
+      "A": "Defect Density",
+      "B": "Percentage of test cases executed",
+      "C": "Pass/Fail ratio of critical test cases",
+      "D": "The number of emails sent by the QA lead"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary role of a 'Risk-Based Testing' strategy in a test plan?",
+    "options": {
+      "A": "To ensure every single feature is tested with equal intensity regardless of importance.",
+      "B": "To prioritize testing efforts on features with the highest probability of failure and highest business impact.",
+      "C": "To calculate the insurance premium for the data center.",
+      "D": "To eliminate the need for any manual testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Contamination' in the context of test planning?",
+    "options": {
+      "A": "When the physical office air quality is poor.",
+      "B": "When multiple teams use the same test environment simultaneously, leading to inconsistent data or results.",
+      "C": "When a developer accidentally deletes the production database.",
+      "D": "When the computer monitor becomes dusty."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect Triage' is a process used to decide which bugs will be fixed and in what order.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Suspension Criteria' for a testing phase?",
+    "options": {
+      "A": "The number of open critical bugs exceeds a predefined threshold.",
+      "B": "The test environment becomes unstable or unavailable.",
+      "C": "A key tester goes on a scheduled 1-day vacation.",
+      "D": "The office coffee machine is broken."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In test planning, what is the 'Staffing and Training' section used for?",
+    "options": {
+      "A": "To list the salaries of every team member.",
+      "B": "To identify the required skills and any training gaps for the team to execute the plan.",
+      "C": "To plan the company's annual holiday party.",
+      "D": "To hire new developers for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which estimation technique involves multiple experts providing anonymous estimates followed by group discussion to reach consensus?",
+    "options": {
+      "A": "Bottom-Up Estimation",
+      "B": "Wideband Delphi (or Planning Poker)",
+      "C": "Three-Point Estimation",
+      "D": "Critical Path Method"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Regression Test Selection' is the process of choosing a subset of existing tests to run after a change, rather than running the entire suite.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Resumption Criteria' in a Test Plan?",
+    "options": {
+      "A": "To decide when to restart the entire project from scratch.",
+      "B": "To define the conditions that must be met to continue testing after it was suspended.",
+      "C": "To restart the computer after a blue screen error.",
+      "D": "To hire a new QA manager after a resignation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Exploratory Testing' in a formal test plan? (Select all that apply)",
+    "options": {
+      "A": "It is unplanned and has no documentation.",
+      "B": "It is a structured approach to finding defects without predefined test cases.",
+      "C": "It is often used as a supplement to scripted testing.",
+      "D": "It requires the software to be 100% bug-free before starting."
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What is 'Test Data Management' (TDM) within a test plan?",
+    "options": {
+      "A": "Managing the personal data of the testing team.",
+      "B": "The process of planning, creating, and maintaining the data needed to execute test cases.",
+      "C": "Deleting all old test results to save disk space.",
+      "D": "Hiring a professional data entry clerk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Workbreakdown Structure' (WBS) in testing involves breaking down the total testing effort into smaller, manageable tasks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role is typically responsible for setting the 'Business Priority' of a feature in a risk assessment?",
+    "options": {
+      "A": "Automation Engineer",
+      "B": "Product Owner (or Business Analyst)",
+      "C": "Junior QA Tester",
+      "D": "Systems Administrator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Test Harness'?",
+    "options": {
+      "A": "A physical safety belt for testers working at heights.",
+      "B": "A collection of software and test data configured to test a program unit by running it under varying conditions.",
+      "C": "A specialized tool for measuring keyboard speed.",
+      "D": "The final report sent to the client."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Agile' environments, how often is the test plan typically updated?",
+    "options": {
+      "A": "Once per year.",
+      "B": "Continuously or at the start of every Sprint/Iteration.",
+      "C": "Only if a major bug is found in production.",
+      "D": "Never; it is written once at the start of the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Testing' (like code reviews and inspections) should be included in a comprehensive Test Plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Test Deliverable' provides a mapping between requirements and the test cases that verify them?",
+    "options": {
+      "A": "Bug Report",
+      "B": "Requirements Traceability Matrix (RTM)",
+      "C": "Test Log",
+      "D": "User Manual"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Profile' in a performance test plan?",
+    "options": {
+      "A": "A description of the physical weight of the server.",
+      "B": "A definition of the number of concurrent users and types of transactions expected over a period of time.",
+      "C": "The LinkedIn profile of the performance tester.",
+      "D": "The power consumption of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Planning', what is 'Resource Leveling'?",
+    "options": {
+      "A": "Ensuring all office desks are the same height.",
+      "B": "Balancing the workload of the testing team to prevent burnout and ensure consistent progress.",
+      "C": "A security scan of the office network.",
+      "D": "Decreasing the number of testers to save money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Positive Testing' verifies that the system does what it is supposed to do, while 'Negative Testing' verifies it doesn't do what it shouldn't.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Environmental' requirements for a mobile app test plan? (Select all that apply)",
+    "options": {
+      "A": "Specific OS versions (iOS 17, Android 14)",
+      "B": "Physical device models (iPhone 15, Pixel 8)",
+      "C": "Network conditions (3G, 5G, Wi-Fi)",
+      "D": "The color of the app's loading screen"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary risk of 'Inadequate Test Data' in a project?",
+    "options": {
+      "A": "The database will run out of space.",
+      "B": "Critical functional paths or edge cases may not be exercised, leading to hidden bugs.",
+      "C": "The testing team will finish their work too early.",
+      "D": "The code will automatically delete itself."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Impact Analysis' assist in test planning for a software update?",
+    "options": {
+      "A": "It measures the physical impact of a computer falling over.",
+      "B": "It identifies which parts of the existing system are likely to be affected by the changes, helping to scope regression testing.",
+      "C": "It calculates the financial impact of a server upgrade.",
+      "D": "It predicts the mood of the end-users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Test Automation' strategy should be defined within the Test Plan, including which tests to automate and which tools to use.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of the Test Plan addresses how the team will communicate progress and issues?",
+    "options": {
+      "A": "Glossary",
+      "B": "Communication Plan (or Reporting)",
+      "C": "Staffing Plan",
+      "D": "Test Summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Defect Density' used to predict?",
+    "options": {
+      "A": "The weight of the bug report.",
+      "B": "The relative quality of different software modules to guide further testing efforts.",
+      "C": "The number of hours a developer needs to sleep.",
+      "D": "The total number of users who will buy the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is a 'Workaround'?",
+    "options": {
+      "A": "Walking around the office to find a developer.",
+      "B": "A temporary method for bypassing a functional defect so that other testing activities can proceed.",
+      "C": "A specialized security scan.",
+      "D": "A way to delete old code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Equivalence Partitioning' is a technique used to reduce the number of test cases by grouping similar inputs together.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test Deliverables' associated with test closure? (Select all that apply)",
+    "options": {
+      "A": "Test Closure Report",
+      "B": "Final Defect Log",
+      "C": "User Feedback Surveys",
+      "D": "The physical server hardware"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Golden Path' in a test plan?",
+    "options": {
+      "A": "A road made of actual gold for the CEO.",
+      "B": "The most common and critical sequence of user actions that must work perfectly for the software to be considered functional.",
+      "C": "A specialized software for architects.",
+      "D": "The path to the nearest exit in a fire."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Defect Leakage' metric?",
+    "options": {
+      "A": "The amount of liquid spilling from a server.",
+      "B": "The number of defects found by end-users in production that should have been caught during internal testing.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Boundary Value Analysis' (BVA) is a black-box test design technique in which test cases are designed based on boundary values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Sanity Testing' in a plan? (Select all that apply)",
+    "options": {
+      "A": "Testing the mental health of the team.",
+      "B": "A narrow, deep check to verify that a specific bug fix or change works as expected.",
+      "C": "A broad, shallow check to ensure the system is stable.",
+      "D": "It is a subset of regression testing."
+    },
+    "answer": ["B", "D"]
+  },
+  {
+    "question": "What is 'Acceptance Criteria' in an Agile User Story?",
+    "options": {
+      "A": "The criteria for accepting a new job offer.",
+      "B": "A set of specific requirements that must be met for a story to be considered complete and 'Ready' for the customer.",
+      "C": "The physical dimensions of the software box.",
+      "D": "The color of the developer's office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Hotfix' release plan?",
+    "options": {
+      "A": "Planning a release on a physically hot day.",
+      "B": "A plan to release a critical fix to production immediately outside the normal release cycle.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environment' occurs when the test database version is different from the production database version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test Design' techniques? (Select all that apply)",
+    "options": {
+      "A": "Decision Table Testing",
+      "B": "State Transition Testing",
+      "C": "Error Guessing",
+      "D": "Random Mouse Clicking"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect Spoilage' rate?",
+    "options": {
+      "A": "The cost of food that spoiled in the office fridge.",
+      "B": "The measure of how many defects were found in a stage later than the one in which they were introduced.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Management', what is a 'Gantt Chart' used for in testing?",
+    "options": {
+      "A": "To measure the height of the team members.",
+      "B": "A visual timeline showing the start and end dates of various testing tasks and their dependencies.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'White Box Testing' involves testing the internal structure or working of an application, as opposed to its functionality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Suites' in a test plan? (Select all that apply)",
+    "options": {
+      "A": "They reduce the time needed for repetitive testing.",
+      "B": "They should include the most critical business paths.",
+      "C": "They are only useful for testing the UI.",
+      "D": "They require periodic maintenance as the software evolves."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement Churn'?",
+    "options": {
+      "A": "The process of making actual butter in the office.",
+      "B": "The rate at which requirements are changed or added during the development cycle, affecting the test plan.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to repair a developer's chair.",
+      "B": "The average time it takes for the development team to fix a reported bug.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Test Level' refers to the group of testing activities that are organized and managed together (e.g., Component, System).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test Cycle' phases? (Select all that apply)",
+    "options": {
+      "A": "Test Execution",
+      "B": "Defect Logging",
+      "C": "Test Closure",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gray Box Testing'?",
+    "options": {
+      "A": "Testing only the gray-colored parts of the UI.",
+      "B": "A combination of white box and black box testing, where the tester has partial knowledge of the internal code.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Disaster Recovery' testing planning?",
+    "options": {
+      "A": "Planning how to recover from a spilled coffee.",
+      "B": "Defining the procedures for testing the system's ability to restore data and functionality after a catastrophic failure.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Test Oracle' is a source to determine expected results to compare with the actual results of the software under test.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Risk' 'Aggregation' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Prioritizing testing of high-risk modules",
+      "B": "Increasing automation for stable, low-risk features",
+      "C": "Having a contingency plan for environment failures",
+      "D": "Deleting the risk log if it gets too long"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Defect Masking' in a test plan?",
+    "options": {
+      "A": "Putting a physical mask on a bug.",
+      "B": "A situation where an existing defect prevents another defect from being discovered or reproduced.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Traceability'?",
+    "options": {
+      "A": "The ability to trace a drawing on a window.",
+      "B": "The ability to track a requirement from its origin through the design, code, and final test results.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the QA team interprets a requirement differently than the development team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant feedback on build status",
+      "B": "Consistency in data presentation",
+      "C": "Guaranteed to find all logical bugs",
+      "D": "Reduced manual effort for status updates"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test Bed'?",
+    "options": {
+      "A": "A physical bed for tired testers.",
+      "B": "The execution environment configured for testing, including the hardware, software, and network.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Smoke' testing significance?",
+    "options": {
+      "A": "Checking if the server room is literally smoking.",
+      "B": "A quick set of tests to ensure the build is 'stable' enough to proceed with further, more detailed testing.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Tools' occur when an automation framework is not compatible with the software's technology stack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test' 'Estimation' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Including time for bug fixing and retesting",
+      "B": "Using historical data from previous projects",
+      "C": "Assuming all testers work 24 hours a day",
+      "D": "Consulting with the actual team members"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Regression' 'Testing' 'ROI' (Return on Investment)?",
+    "options": {
+      "A": "The amount of money earned by testing.",
+      "B": "The value gained from automation (time saved, bugs caught) versus the cost of creating and maintaining the scripts.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Efficiency' metric?",
+    "options": {
+      "A": "Hiring a person named Efficiency.",
+      "B": "The measure of resources used (time, personnel, cost) to find and fix a defect.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Exploratory Testing' should be strictly time-boxed in a test plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test' 'Planning' 'Tool' 'Features'? (Select all that apply)",
+    "options": {
+      "A": "Schedule Management",
+      "B": "Resource Allocation",
+      "C": "Risk Tracking",
+      "D": "Graphic Design Studio"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Critical Path' in a test schedule?",
+    "options": {
+      "A": "A path made of physical stones.",
+      "B": "The sequence of testing tasks that must be completed on time for the entire project to finish as scheduled.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Aging' significance?",
+    "options": {
+      "A": "Calculating the age of the developer.",
+      "B": "Tracking how long bugs remain in various statuses to identify delays in the fix or retest cycle.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the testing timeline in the plan is shorter than the minimum time required to fulfill quality guarantees.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In strategic test planning, which mathematical model is used to predict the 'Time to Next Failure' based on historical defect discovery rates and cumulative execution time?",
+    "options": {
+      "A": "Linear Regression Forecast",
+      "B": "Software Reliability Growth Model (SRGM)",
+      "C": "Monte Carlo Simulation",
+      "D": "Critical Path Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero-Trust' testing environment, every internal service interaction must be validated as if it were an external third-party call, necessitating a robust Contract Testing plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Strategic' risks often omitted in tactical test plans but critical for QA Governance? (Select all that apply)",
+    "options": {
+      "A": "Vendor Lock-in for automation frameworks",
+      "B": "Regulatory non-compliance (e.g., GDPR, HIPAA) in test data",
+      "C": "Technological obsolescence of the test infrastructure",
+      "D": "The physical speed of the office internet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical challenge when planning 'Shift-Left' performance testing in a Microservices architecture?",
+    "options": {
+      "A": "Developers refusing to write test scripts.",
+      "B": "Isolation of individual services from downstream dependencies while maintaining realistic network latency simulations.",
+      "C": "The physical size of the JSON payloads being too small.",
+      "D": "Hiring enough mathematicians to calculate the response times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Ortho-Defect Classification' (ODC) and how does it impact high-level test planning?",
+    "options": {
+      "A": "It is a way to sort bugs alphabetically.",
+      "B": "It is a taxonomy that categorizes defects by 'Trigger' and 'Type' to identify systemic failures in the development lifecycle.",
+      "C": "A specialized software for measuring light in the server room.",
+      "D": "A legal framework for suing software vendors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Persistence' refers to a scenario where a test plan fails to account for stateful data changes across asynchronous microservices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Exit Criteria' factor is most indicative of a product's readiness for 'Continuous Deployment'?",
+    "options": {
+      "A": "100% of all manual test cases have been executed.",
+      "B": "Mean Time to Detect (MTTD) and Mean Time to Repair (MTTR) are below specific automated thresholds.",
+      "C": "The CEO has personally signed the test report.",
+      "D": "All developers have finished their Jira tasks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Chaos Engineering' planning within a resilience test plan?",
+    "options": {
+      "A": "Planning for a chaotic office party.",
+      "B": "Intentionally injecting infrastructure-level failures (e.g., killing pods, latency injection) to verify system self-healing.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a new manager to fire half the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Resource' planning for 'Service Virtualization', what is the primary objective? (Select all that apply)",
+    "options": {
+      "A": "Removing dependencies on unavailable third-party APIs",
+      "B": "Simulating high-cost mainframe environments",
+      "C": "Deleting the real database for security",
+      "D": "Enabling parallel testing across geographically distributed teams"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Pareto Analysis' in test planning suggests that focus should be placed on 20% of the modules that typically contain 80% of the defects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Governance' metric measures the effectiveness of the testing process in finding defects before they reach production?",
+    "options": {
+      "A": "Test Case Pass Rate",
+      "B": "Defect Removal Efficiency (DRE)",
+      "C": "Lines of Code (LOC)",
+      "D": "Velocity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical risk of 'Environmental Drift' in long-running projects?",
+    "options": {
+      "A": "The server room physically moving locations.",
+      "B": "The configuration of the test environment gradually diverging from production, leading to false positives or missed bugs.",
+      "C": "A specialized software for historians.",
+      "D": "The frame rate of the UI decreasing over time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic' planning, what is the 'Quality Cost' model components? (Select all that apply)",
+    "options": {
+      "A": "Prevention Costs (Training, Design reviews)",
+      "B": "Appraisal Costs (Testing, Audits)",
+      "C": "Failure Costs (Bug fixing, Support, Brand damage)",
+      "D": "Utility Costs (Electricity, Water)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cyclomatic Complexity' analysis is a white-box technique used during test planning to identify complex code paths that require more intensive testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Negative' 'Test' 'Path' 'Saturation'?",
+    "options": {
+      "A": "A test that is very pessimistic.",
+      "B": "The point where adding more negative test scenarios provides diminishing returns in terms of risk mitigation.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Orchestration' in a test environment? (Select all that apply)",
+    "options": {
+      "A": "Infrastructure as Code (Terraform) for environment spin-up",
+      "B": "Container orchestration (Kubernetes) for scaling test nodes",
+      "C": "Automatically deleting the code if it fails a test",
+      "D": "Dynamic configuration management"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Defect' 'Spoilage' 'Matrix' significance?",
+    "options": {
+      "A": "The price of food in the office fridge.",
+      "B": "An analysis showing the delay between when a bug was introduced and when it was found, used to optimize 'Shift-Left' strategies.",
+      "C": "A specialized software for architects.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Aggregation' 'Heatmap'?",
+    "options": {
+      "A": "A physical map of the server room temperature.",
+      "B": "A visual representation of requirements where color intensity represents the combination of failure probability and business impact.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when the 'Definition of Done' for development is reached before the 'Entry Criteria' for System Testing are ready.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Test' 'Design' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Orthogonal Array Testing",
+      "B": "Combinatorial testing (All-Pairs)",
+      "C": "Model-Based Testing",
+      "D": "Random Mouse Movement"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test' 'Data' 'Masking' 'Complexity'?",
+    "options": {
+      "A": "Putting a physical mask on the database.",
+      "B": "The technical difficulty of obfuscating PII while maintaining the referential integrity of data across multiple relational databases.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Canary' deployment testing planning?",
+    "options": {
+      "A": "Planning for a physical bird in the office.",
+      "B": "A strategy where a new version is released to a tiny subset of users to verify stability before a full-scale rollout.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a test plan refer to the friction between 'Traditional QA' and 'DevOps' teams regarding the ownership of automation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Gateways' in a Waterfall Test Plan? (Select all that apply)",
+    "options": {
+      "A": "Requirements Sign-off",
+      "B": "Design Review Approval",
+      "C": "UAT Completion",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Latent' 'Defect' 'Cost' 'Escalation'?",
+    "options": {
+      "A": "The cost of being late to a meeting.",
+      "B": "The mathematical principle that the cost of fixing a bug increases by 10x-100x for every stage of the SDLC it passes undetected.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Failure' (MTTF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric representing the average time a system operates before a non-repairable failure occurs.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'API' 'Versions' in a test plan refer to testing a consumer against a producer version that has already been deprecated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Contract' 'Testing' architecture? (Select all that apply)",
+    "options": {
+      "A": "Consumer-driven pacts",
+      "B": "Provider verification scripts",
+      "C": "Deleting the API if it fails",
+      "D": "Shared broker for contract storage"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Software' 'Reliability' 'Growth' 'Modeling' (SRGM) 'Convergence'?",
+    "options": {
+      "A": "When two models merge into one.",
+      "B": "The statistical point where the failure rate drops below a required threshold, signaling readiness for release.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Disaster' 'Recovery' 'Point' 'Objective' (RPO) in a plan?",
+    "options": {
+      "A": "The objective to point at the disaster.",
+      "B": "The maximum age of files that must be recovered from backup storage for normal operations to resume after a failure.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browser' 'Engines' occur when a test plan focuses only on Chromium-based browsers while ignoring WebKit or Gecko-based engines used by users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Staffing' 'Models' for QA? (Select all that apply)",
+    "options": {
+      "A": "Centralized TCoE (Testing Center of Excellence)",
+      "B": "Embedded QA in Squads",
+      "C": "Crowdsourced Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test' 'Debt' 'Interest' 'Accumulation'?",
+    "options": {
+      "A": "The money earned from testing.",
+      "B": "The compounded increase in future development time caused by carrying forward unaddressed bugs or missing test coverage.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cycle' 'Time' 'Variation'?",
+    "options": {
+      "A": "The physical variation of the bike cycle.",
+      "B": "The degree of inconsistency in how long it takes for a feature to move from 'In Dev' to 'In Test', indicating process instability.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' in a test plan refers to the QA team having administrative access in production which they do not have in the test environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Visual' 'Regression' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Dynamic content (e.g., ad banners) causing false failures",
+      "B": "Different rendering on different OS/Browser combinations",
+      "C": "Guaranteed to stop all database bugs",
+      "D": "High maintenance for frequently changing UIs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Service' 'Mesh' 'Testing' 'Strategy'?",
+    "options": {
+      "A": "Testing a physical mesh in the server room.",
+      "B": "Focusing on the sidecar proxy communication, load balancing, and mTLS security between microservices.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Green-Blue' deployment 'Rollback' speed?",
+    "options": {
+      "A": "The speed of a rolling ball.",
+      "B": "The near-instant ability to switch traffic back to the 'Green' (stable) environment if the 'Blue' (new) environment fails testing.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Concurrency' occurs when the performance test plan uses fewer concurrent connections than the server's real-world database pool limit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Test' 'Infrastructure' 'Tools'? (Select all that apply)",
+    "options": {
+      "A": "Selenium Grid / Zalenium",
+      "B": "BrowserStack / Sauce Labs",
+      "C": "Docker Swarm",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Combinatorial' 'Testing' 'Explosion'?",
+    "options": {
+      "A": "A physical explosion in the lab.",
+      "B": "The unmanageable growth in the number of test cases required to test every possible combination of inputs (solved by All-Pairs).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Efficiency' vs 'Test' 'Effectiveness'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Efficiency is doing things 'right' (Speed/Cost); Effectiveness is doing the 'right' things (Bug discovery/Coverage).",
+      "C": "Effectiveness is for beginners; Efficiency for experts.",
+      "D": "Efficiency is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Volume' occurs when the test plan uses 1,000 records while the production database contains 1,000,000,000 records.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Root' 'Cause' 'Analysis' (ARCA) limitations? (Select all that apply)",
+    "options": {
+      "A": "Heavy reliance on the quality and volume of log data",
+      "B": "Difficulty in identifying subtle logical bugs",
+      "C": "Replacing the need for human judgment entirely",
+      "D": "Potential for false correlations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test' 'Asset' 'Inventory'?",
+    "options": {
+      "A": "An inventory of physical office furniture.",
+      "B": "The structured management of reusable test artifacts like scripts, data generators, and environment configurations.",
+      "C": "A specialized software for architects.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Site' 'Reliability' 'Engineering' (SRE) impact on QA?",
+    "options": {
+      "A": "Hiring a person named SRE.",
+      "B": "The integration of software engineering practices into IT operations to build highly scalable and reliable systems, often shifting QA toward Error Budgets.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' 'Abstractions' occur when testing on high-powered servers while users are on low-powered mobile devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Risk' 'Prioritization' 'Frameworks'? (Select all that apply)",
+    "options": {
+      "A": "FMEA (Failure Mode and Effects Analysis)",
+      "B": "TMMi (Test Maturity Model integration)",
+      "C": "Six Sigma",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Binary' 'Search' 'Troubleshooting' in test plans?",
+    "options": {
+      "A": "Searching for binary stars.",
+      "B": "A methodical approach to narrowing down the source of a defect by repeatedly halving the potential range of code changes.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Remediations' (MTBR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a system remains 'clean' or stable after a critical fix is applied.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Compliance' 'Frameworks' occur when a test plan for a US-based product is applied to a China-based deployment without localization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Stress' 'Testing' 'Objectives'? (Select all that apply)",
+    "options": {
+      "A": "Finding the breaking point of the application",
+      "B": "Verifying graceful recovery after a system crash",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Identifying resource leaks under extreme load"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Predictive' 'Defect' 'Clustering'?",
+    "options": {
+      "A": "Predicting where physical clusters of grapes will grow.",
+      "B": "Using machine learning to predict which modules will have the most bugs based on code change frequency and complexity.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Zero' 'Downtime' 'Deployment' 'Verification'?",
+    "options": {
+      "A": "Verifying the server never stops spinning.",
+      "B": "Testing the deployment process itself to ensure users do not experience any loss of service during the update.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'User' 'Expectations' occur when the 'Acceptance Criteria' in the plan do not align with the actual user workflows discovered in production.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Testing' 'Scanners' (DAST)? (Select all that apply)",
+    "options": {
+      "A": "Finding vulnerabilities in running applications",
+      "B": "Simulating common attacks like SQLi/XSS",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Identifying configuration errors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Orthogonal' 'Array' 'Testing' 'Efficiency'?",
+    "options": {
+      "A": "The speed of a person name Orthogonal.",
+      "B": "A mathematical method to reduce the number of test cases while maintaining high combinatorial coverage.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC)?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average duration from the discovery of a critical defect until a temporary workaround or isolation is achieved.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Observability' occurs when the test plan includes assertions but the system lacks the logging required to debug a failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Release' 'Control' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Feature Toggling",
+      "B": "Dark Launching",
+      "C": "Canary Analysis",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test' 'Environment' 'Fidelity'?",
+    "options": {
+      "A": "The physical loyalty of the server.",
+      "B": "The degree of accuracy with which the test environment mirrors the production environment (Architecture, OS, Data, Traffic).",
+      "C": "A specialized software for poets.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Resolution' 'Efficiency' (DRE)?",
+    "options": {
+      "A": "The speed at which a bug is fixed.",
+      "B": "The ratio of defects found in a phase compared to the total defects (found in that phase plus missed to later phases).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' occurs when a test plan validates a service for 1,000 users when the cloud infrastructure is configured for 1,000,000 auto-scaled users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Technology Officer (CTO)",
+      "B": "Product Management",
+      "C": "External Auditors",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mutation' 'Testing' 'Effectiveness'?",
+    "options": {
+      "A": "The effectiveness of biological mutations.",
+      "B": "Using automated tools to change small parts of the source code and verifying that existing tests fail (proving test quality).",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Service' (MTRS)?",
+    "options": {
+      "A": "The time it takes to clean the office.",
+      "B": "The average time between the detection of a service-impacting defect and the full restoration of service to all users.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Risk' 'Appetite' occurs when the testing team is ultra-conservative (blocking for minor UI bugs) while the business wants to release fast.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Maintenance' 'Costs'? (Select all that apply)",
+    "options": {
+      "A": "Updating scripts for UI changes",
+      "B": "Fixing brittle tests due to test data changes",
+      "C": "Guaranteed to be zero in a good framework",
+      "D": "Managing cloud infrastructure costs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test' 'Case' 'Redundancy' 'Optimization'?",
+    "options": {
+      "A": "The process of making tests redundant.",
+      "B": "Identifying and removing test cases that overlap in coverage to improve efficiency without increasing risk.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  }
+  ]
+}

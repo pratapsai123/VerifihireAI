@@ -1,5 +1,5 @@
-from ._imports import *
-from ._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
+from .._imports import *
+from .._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
 
 
 @api_view(['GET'])

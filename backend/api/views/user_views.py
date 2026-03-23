@@ -1,5 +1,5 @@
-from ._imports import *
-from ._imports import _email_domain, _free_email_domains, _generate_temp_password, _normalize_email, _is_application_admin_email
+from .._imports import *
+from .._imports import _email_domain, _free_email_domains, _generate_temp_password, _normalize_email, _is_application_admin_email
 
 
 @csrf_exempt
@@ -430,8 +430,8 @@ def team_members_view(request):
             )
             if not requester_profile or not requester_profile.company:
                 return Response({'error': 'Your account has no company assigned.'}, status=status.HTTP_403_FORBIDDEN)
-            if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
-                return Response({'error': 'Forbidden. Only Company Admins and HR Managers can view team members.'}, status=status.HTTP_403_FORBIDDEN)
+            if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+                return Response({'error': 'Forbidden. Only Company Admins, HR Managers, HRs, and Interviewers can view team members.'}, status=status.HTTP_403_FORBIDDEN)
 
         if is_app_admin:
             members_qs = UserProfile.objects.select_related('company').order_by('company__name', 'email')
@@ -444,9 +444,15 @@ def team_members_view(request):
                 # HR Manager: sees only members they directly invited
                 # + invitations they personally sent
                 scoped_ids = get_scoped_user_ids(requester_profile)  # [self + their HRs]
+                
+                # NEW: Add all interviewers from the same Admin's tree
+                from .._imports import get_admin_tree_interviewer_ids
+                interviewer_ids = get_admin_tree_interviewer_ids(requester_profile)
+                all_member_ids = list(set(scoped_ids + interviewer_ids))
+
                 members_qs = (
                     UserProfile.objects.filter(
-                        id__in=scoped_ids,
+                        id__in=all_member_ids,
                         company=company,
                     )
                     .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
@@ -461,6 +467,23 @@ def team_members_view(request):
                     .select_related('company', 'invited_by')
                     .order_by('-created_at')
                 )
+            elif role in {UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+                # HR/Interviewer: sees themselves + all interviewers in the same admin tree
+                scoped_ids = get_scoped_user_ids(requester_profile)
+                from .._imports import get_admin_tree_interviewer_ids
+                interviewer_ids = get_admin_tree_interviewer_ids(requester_profile)
+                all_member_ids = list(set(scoped_ids + interviewer_ids))
+
+                members_qs = (
+                    UserProfile.objects.filter(
+                        id__in=all_member_ids,
+                        company=company,
+                    )
+                    .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
+                    .select_related('company')
+                    .order_by('email')
+                )
+                invites_qs = UserInvitation.objects.none()
             else:
                 # Company Admin: sees their own HR Managers + those HRMs' HRs
                 # (not other Company Admins' sub-trees)

@@ -427,10 +427,42 @@ def _get_email_from_request(request) -> str | None:
 def coding_questions_view(request):
     if request.method == "GET":
         try:
-            org_name = _get_org_from_request(request)
+            # RBAC: Scope Coding Questions to the requester's invite TREE
+            # CodingQuestion stores `created_by_email` instead of a user FK to remain isolated.
+            user_profile = getattr(request.user, 'profile', None) if getattr(request.user, 'is_authenticated', False) else None
+            
             qs = CodingQuestion.objects.all()
-            if org_name:
-                qs = qs.filter(organization_name_snapshot__iexact=org_name)
+            
+            if user_profile:
+                from api._imports import get_scoped_user_ids
+                scoped_ids = get_scoped_user_ids(user_profile)
+                
+                if scoped_ids is not None:
+                    # Map the scoped profile IDs to their corresponding user emails
+                    from api.models import UserProfile
+                    scoped_emails = list(
+                        UserProfile.objects.filter(id__in=scoped_ids)
+                        .select_related('user')
+                        .values_list('user__email', flat=True)
+                    )
+                    # Include the requester's own email just in case the profile link is weird
+                    if request.user.email and request.user.email not in scoped_emails:
+                        scoped_emails.append(request.user.email)
+                    
+                    qs = qs.filter(created_by_email__in=scoped_emails)
+                else:
+                    # Platform Superadmin: Filter by requested org if provided
+                    org_name = _get_org_from_request(request)
+                    if org_name:
+                        qs = qs.filter(organization_name_snapshot__iexact=org_name)
+            else:
+                # Unauthenticated or no profile: fallback to strict org match if provided, else empty
+                org_name = _get_org_from_request(request)
+                if org_name:
+                    qs = qs.filter(organization_name_snapshot__iexact=org_name)
+                else:
+                    qs = qs.none() 
+
             qs = qs.order_by("-created_at")[:500]
             results = []
             for q in qs:
@@ -509,17 +541,56 @@ def coding_questions_view(request):
     return Response({"id": q.id}, status=status.HTTP_201_CREATED)
 
 
+def _get_coding_question_or_error(request, question_id: int):
+    """
+    Helper to fetch a CodingQuestion by ID and enforce tree-based RBAC.
+    Returns (question_object, None) if successful.
+    Returns (None, Response) if not found or unauthorized.
+    """
+    q = CodingQuestion.objects.filter(id=question_id).first()
+    if not q:
+        return None, Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    # RBAC: Verify ownership via the invite tree.
+    user_profile = getattr(request.user, 'profile', None) if getattr(request.user, 'is_authenticated', False) else None
+    
+    if user_profile:
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+        
+        if scoped_ids is not None:
+            from .models import UserProfile
+            scoped_emails = list(
+                UserProfile.objects.filter(id__in=scoped_ids)
+                .select_related('user')
+                .values_list('user__email', flat=True)
+            )
+            if request.user.email and request.user.email not in scoped_emails:
+                scoped_emails.append(request.user.email)
+            
+            # If the question's creator is not in this user's tree, deny access.
+            if q.created_by_email not in scoped_emails:
+                return None, Response({"error": "Coding question not found or unauthorized"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            # Platform Superadmin: fallback to org match if requested
+            requested_org = _get_org_from_request(request)
+            if requested_org and q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
+                return None, Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        # Unauthenticated: fallback to strict org match if requested
+        requested_org = _get_org_from_request(request)
+        if requested_org and q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
+            return None, Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+            
+    return q, None
+
+
 @api_view(["GET", "PUT", "PATCH", "DELETE"])
 @permission_classes([AllowAny])
 def coding_question_detail_view(request, question_id: int):
-    q = CodingQuestion.objects.filter(id=question_id).first()
-    if not q:
-        return Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
-
-    # Optional tenant guard: if a caller provides organization/company, ensure it matches
-    requested_org = _get_org_from_request(request)
-    if requested_org and q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
-        return Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+    q, error_response = _get_coding_question_or_error(request, question_id)
+    if error_response:
+        return error_response
 
     if request.method == "GET":
         return Response(
@@ -597,9 +668,9 @@ def coding_question_detail_view(request, question_id: int):
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def coding_testcases_view(request, question_id: int):
-    q = CodingQuestion.objects.filter(id=question_id).first()
-    if not q:
-        return Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+    q, error_response = _get_coding_question_or_error(request, question_id)
+    if error_response:
+        return error_response
 
     if request.method == "GET":
         tcs = CodingTestCase.objects.filter(question_id=question_id).order_by("id")
@@ -634,6 +705,11 @@ def coding_testcase_delete_view(request, testcase_id: int):
     tc = CodingTestCase.objects.filter(id=testcase_id).first()
     if not tc:
         return Response({"error": "Testcase not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+    q, error_response = _get_coding_question_or_error(request, tc.question_id)
+    if error_response:
+        return error_response
+        
     tc.delete()
     return Response({"ok": True}, status=status.HTTP_200_OK)
 
@@ -1058,9 +1134,9 @@ def _evaluate_question(*, q: CodingQuestion, user_code: str, include_hidden: boo
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def coding_run_view(request, question_id: int):
-    q = CodingQuestion.objects.filter(id=question_id).first()
-    if not q:
-        return Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+    q, error_response = _get_coding_question_or_error(request, question_id)
+    if error_response:
+        return error_response
 
     data = request.data or {}
     code = data.get("code")
@@ -1096,9 +1172,9 @@ def coding_run_view(request, question_id: int):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def coding_submit_view(request, question_id: int):
-    q = CodingQuestion.objects.filter(id=question_id).first()
-    if not q:
-        return Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
+    q, error_response = _get_coding_question_or_error(request, question_id)
+    if error_response:
+        return error_response
 
     data = request.data or {}
     code = data.get("code")
@@ -1130,6 +1206,10 @@ def coding_submit_view(request, question_id: int):
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def coding_submissions_view(request, question_id: int):
+    q, error_response = _get_coding_question_or_error(request, question_id)
+    if error_response:
+        return error_response
+
     qs = CodingSubmission.objects.filter(question_id=question_id).order_by("-created_at")[:200]
     results = []
     for s in qs:

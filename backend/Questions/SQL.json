@@ -585,9 +585,9 @@
       "question": "What is the purpose of the 'DROP' command?",
       "options": {
         "A": "To delete a specific row",
-        "/B": "To delete a database or a table",
         "C": "To empty a table but keep the structure",
-        "D": "To remove a column's data"
+        "D": "To remove a column's data",
+        "B": "To delete a database or a table"
       },
       "answer": "B"
     },

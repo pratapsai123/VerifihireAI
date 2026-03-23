@@ -1,0 +1,1869 @@
+{ 
+  "skill": "S3", 
+  "questions": [
+    {
+"question":"What does Amazon S3 stand for?",
+"options":{
+"A":"Simple Storage Service",
+"B":"Secure Storage System",
+"C":"Scalable Storage Server",
+"D":"Storage Service Solution"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features are provided by Amazon S3? (Select all that apply)",
+"options":{
+"A":"Object storage",
+"B":"High durability",
+"C":"Scalable storage",
+"D":"File system hosting"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Amazon S3 is primarily used for object storage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is the basic container for storing objects in S3?",
+"options":{
+"A":"Bucket",
+"B":"Instance",
+"C":"Volume",
+"D":"Container"
+},
+"answer":"A"
+},
+
+{
+"question":"Which components make up an S3 object? (Select all that apply)",
+"options":{
+"A":"Key",
+"B":"Value (data)",
+"C":"Metadata",
+"D":"Version ID"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Each S3 bucket name must be globally unique.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 storage class is designed for frequently accessed data?",
+"options":{
+"A":"S3 Standard",
+"B":"S3 Glacier",
+"C":"S3 One Zone-IA",
+"D":"S3 Deep Archive"
+},
+"answer":"A"
+},
+
+{
+"question":"Which S3 storage classes exist? (Select all that apply)",
+"options":{
+"A":"S3 Standard",
+"B":"S3 Intelligent-Tiering",
+"C":"S3 Glacier",
+"D":"S3 One Zone-IA"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 Standard provides high availability and durability.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature protects S3 data from accidental deletion?",
+"options":{
+"A":"Versioning",
+"B":"Replication",
+"C":"Encryption",
+"D":"Logging"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does versioning provide? (Select all that apply)",
+"options":{
+"A":"Recover deleted objects",
+"B":"Track object changes",
+"C":"Maintain object history",
+"D":"Prevent accidental overwrite"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Versioning stores multiple versions of the same object.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature automatically moves objects between storage classes?",
+"options":{
+"A":"Lifecycle Policy",
+"B":"Replication Rule",
+"C":"Transfer Manager",
+"D":"Migration Service"
+},
+"answer":"A"
+},
+
+{
+"question":"Which lifecycle actions exist in S3? (Select all that apply)",
+"options":{
+"A":"Transition objects",
+"B":"Expire objects",
+"C":"Delete old versions",
+"D":"Archive objects"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lifecycle policies help optimize storage costs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature replicates objects automatically to another bucket?",
+"options":{
+"A":"Cross-Region Replication",
+"B":"Bucket Sync",
+"C":"Storage Replication",
+"D":"Auto Backup"
+},
+"answer":"A"
+},
+
+{
+"question":"Which replication types exist in S3? (Select all that apply)",
+"options":{
+"A":"Cross-Region Replication",
+"B":"Same-Region Replication",
+"C":"Multi-Region Replication",
+"D":"Bucket Replication"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Replication requires versioning to be enabled.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature restricts access to objects?",
+"options":{
+"A":"Bucket Policy",
+"B":"Instance Role",
+"C":"Access Gateway",
+"D":"Security Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which mechanisms control access to S3? (Select all that apply)",
+"options":{
+"A":"Bucket Policies",
+"B":"IAM Policies",
+"C":"Access Control Lists",
+"D":"Block Public Access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Bucket policies define permissions for S3 resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature encrypts data at rest?",
+"options":{
+"A":"Server-Side Encryption",
+"B":"Object Lock",
+"C":"Versioning",
+"D":"Replication"
+},
+"answer":"A"
+},
+
+{
+"question":"Which server-side encryption types exist in S3? (Select all that apply)",
+"options":{
+"A":"SSE-S3",
+"B":"SSE-KMS",
+"C":"SSE-C",
+"D":"Client-Side Encryption"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: SSE-KMS uses AWS Key Management Service for encryption.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature logs API activity for auditing?",
+"options":{
+"A":"CloudTrail",
+"B":"CloudWatch",
+"C":"S3 Monitor",
+"D":"AWS Config"
+},
+"answer":"A"
+},
+
+{
+"question":"Which logging features exist for S3? (Select all that apply)",
+"options":{
+"A":"Server Access Logging",
+"B":"CloudTrail Logging",
+"C":"CloudWatch Logs",
+"D":"Audit Logging"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Server Access Logging records requests made to an S3 bucket.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows hosting static websites in S3?",
+"options":{
+"A":"Static Website Hosting",
+"B":"Cloud Hosting",
+"C":"S3 Web Mode",
+"D":"Web Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which content types can be hosted on S3 static websites? (Select all that apply)",
+"options":{
+"A":"HTML",
+"B":"CSS",
+"C":"JavaScript",
+"D":"Images"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 static hosting supports dynamic server-side scripts.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+{
+"question":"Which S3 feature ensures objects cannot be deleted for a defined period?",
+"options":{
+"A":"Object Lock",
+"B":"Bucket Lock",
+"C":"Version Lock",
+"D":"Retention Mode"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Object Lock modes exist in S3? (Select all that apply)",
+"options":{
+"A":"Governance Mode",
+"B":"Compliance Mode",
+"C":"Strict Mode",
+"D":"Archive Mode"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Object Lock helps enforce data retention policies.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature automatically selects the most cost-effective storage tier?",
+"options":{
+"A":"S3 Intelligent-Tiering",
+"B":"S3 Standard",
+"C":"S3 Glacier",
+"D":"S3 Lifecycle"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Intelligent-Tiering provide? (Select all that apply)",
+"options":{
+"A":"Automatic tiering",
+"B":"Cost optimization",
+"C":"Performance optimization",
+"D":"Manual storage management"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Intelligent-Tiering moves objects automatically based on access patterns.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 storage class is designed for archival storage?",
+"options":{
+"A":"S3 Glacier",
+"B":"S3 Standard",
+"C":"S3 One Zone-IA",
+"D":"S3 Intelligent-Tiering"
+},
+"answer":"A"
+},
+
+{
+"question":"Which archival storage classes exist in S3? (Select all that apply)",
+"options":{
+"A":"S3 Glacier Instant Retrieval",
+"B":"S3 Glacier Flexible Retrieval",
+"C":"S3 Glacier Deep Archive",
+"D":"S3 Archive Standard"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Glacier storage classes are designed for long-term archival.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows uploading large files in parts?",
+"options":{
+"A":"Multipart Upload",
+"B":"Chunk Upload",
+"C":"Segment Upload",
+"D":"Split Upload"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does multipart upload provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Parallel uploads",
+"C":"Improved reliability",
+"D":"Resume failed uploads"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Multipart upload improves performance for large file uploads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature provides temporary secure access to S3 objects?",
+"options":{
+"A":"Pre-signed URL",
+"B":"Access Key",
+"C":"Bucket Policy",
+"D":"Object Token"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can pre-signed URLs allow? (Select all that apply)",
+"options":{
+"A":"Download objects",
+"B":"Upload objects",
+"C":"Temporary access",
+"D":"Limited-time sharing"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pre-signed URLs expire after a specified time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature blocks public access to buckets?",
+"options":{
+"A":"Block Public Access",
+"B":"Private Mode",
+"C":"Secure Bucket",
+"D":"Access Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which settings are included in Block Public Access? (Select all that apply)",
+"options":{
+"A":"Block public ACLs",
+"B":"Ignore public ACLs",
+"C":"Block public policies",
+"D":"Restrict public buckets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Block Public Access prevents unintended public exposure of data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature monitors bucket-level metrics?",
+"options":{
+"A":"S3 Storage Lens",
+"B":"CloudWatch Metrics",
+"C":"Bucket Monitor",
+"D":"Storage Dashboard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which insights does S3 Storage Lens provide? (Select all that apply)",
+"options":{
+"A":"Usage metrics",
+"B":"Activity metrics",
+"C":"Cost insights",
+"D":"Data protection insights"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Storage Lens helps optimize storage usage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows event notifications when objects change?",
+"options":{
+"A":"S3 Event Notifications",
+"B":"Bucket Alerts",
+"C":"Object Monitor",
+"D":"Event Tracking"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can receive S3 event notifications? (Select all that apply)",
+"options":{
+"A":"AWS Lambda",
+"B":"SNS",
+"C":"SQS",
+"D":"EventBridge"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Event notifications trigger automated workflows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides highly scalable DNS-based access to buckets?",
+"options":{
+"A":"Virtual Hosted-Style URL",
+"B":"Static URL",
+"C":"Bucket Endpoint",
+"D":"DNS Bucket Access"
+},
+"answer":"A"
+},
+
+{
+"question":"Which S3 URL styles exist? (Select all that apply)",
+"options":{
+"A":"Path-style URLs",
+"B":"Virtual-hosted URLs",
+"C":"Regional endpoints",
+"D":"Access point URLs"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Virtual-hosted-style URLs include the bucket name in the hostname.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature simplifies managing access for applications?",
+"options":{
+"A":"S3 Access Points",
+"B":"Bucket Policies",
+"C":"IAM Roles",
+"D":"Storage Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do S3 Access Points provide? (Select all that apply)",
+"options":{
+"A":"Simplified access management",
+"B":"Separate access policies",
+"C":"Large-scale data sharing",
+"D":"Application-specific permissions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Access Points help manage access for large shared datasets.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which S3 feature allows secure access to buckets from a VPC?",
+"options":{
+"A":"VPC Endpoint",
+"B":"Internet Gateway",
+"C":"NAT Gateway",
+"D":"Private Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do S3 VPC Endpoints provide? (Select all that apply)",
+"options":{
+"A":"Private connectivity",
+"B":"Improved security",
+"C":"No internet gateway required",
+"D":"Lower latency"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: VPC endpoints allow access to S3 without using the public internet.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides detailed cost analysis for storage usage?",
+"options":{
+"A":"S3 Storage Lens",
+"B":"CloudWatch Logs",
+"C":"AWS Config",
+"D":"S3 Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data protection features are available in S3? (Select all that apply)",
+"options":{
+"A":"Versioning",
+"B":"Replication",
+"C":"Object Lock",
+"D":"Encryption"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 provides 11 nines (99.999999999%) durability.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature enables automatic copying of objects between buckets?",
+"options":{
+"A":"Replication",
+"B":"Transfer Manager",
+"C":"Object Copy",
+"D":"Migration Tool"
+},
+"answer":"A"
+},
+
+{
+"question":"Which replication configurations are supported? (Select all that apply)",
+"options":{
+"A":"Cross-Region Replication",
+"B":"Same-Region Replication",
+"C":"Multi-Region Replication",
+"D":"Selective Replication"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Replication requires versioning to be enabled on the bucket.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows objects to be automatically deleted after a time period?",
+"options":{
+"A":"Lifecycle Expiration",
+"B":"Retention Policy",
+"C":"Archive Manager",
+"D":"Delete Policy"
+},
+"answer":"A"
+},
+
+{
+"question":"Which lifecycle transitions are supported? (Select all that apply)",
+"options":{
+"A":"Standard to IA",
+"B":"Standard to Glacier",
+"C":"IA to Glacier",
+"D":"Glacier to Deep Archive"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lifecycle rules help reduce storage costs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides object-level access control?",
+"options":{
+"A":"Access Control List (ACL)",
+"B":"IAM Role",
+"C":"Security Group",
+"D":"Bucket Encryption"
+},
+"answer":"A"
+},
+
+{
+"question":"Which permissions can ACLs grant? (Select all that apply)",
+"options":{
+"A":"Read",
+"B":"Write",
+"C":"Read ACL",
+"D":"Write ACL"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ACLs can control access at both bucket and object level.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature encrypts objects before uploading from client?",
+"options":{
+"A":"Client-Side Encryption",
+"B":"Server-Side Encryption",
+"C":"Data Lock",
+"D":"Bucket Encryption"
+},
+"answer":"A"
+},
+
+{
+"question":"Which encryption methods are supported in S3? (Select all that apply)",
+"options":{
+"A":"SSE-S3",
+"B":"SSE-KMS",
+"C":"SSE-C",
+"D":"Client-side encryption"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: SSE-S3 uses Amazon-managed encryption keys.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows tracking bucket activity for auditing?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"CloudWatch",
+"C":"S3 Logs",
+"D":"Event Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can CloudTrail track in S3? (Select all that apply)",
+"options":{
+"A":"Object uploads",
+"B":"Object deletions",
+"C":"Bucket configuration changes",
+"D":"API calls"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail logs S3 API activity for auditing purposes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows large datasets to be transferred offline to AWS?",
+"options":{
+"A":"AWS Snowball",
+"B":"AWS Transfer",
+"C":"AWS DataSync",
+"D":"AWS Migration Hub"
+},
+"answer":"A"
+},
+
+{
+"question":"Which AWS services help transfer data to S3? (Select all that apply)",
+"options":{
+"A":"AWS Snowball",
+"B":"AWS DataSync",
+"C":"AWS Transfer Family",
+"D":"AWS Storage Gateway"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Snowball is used for transferring petabytes of data into AWS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature improves performance for large datasets with many requests?",
+"options":{
+"A":"S3 Transfer Acceleration",
+"B":"CloudFront",
+"C":"Global Access",
+"D":"Fast Transfer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Transfer Acceleration provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Optimized global network routes",
+"C":"Reduced latency",
+"D":"Improved transfer reliability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Transfer Acceleration uses AWS edge locations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides faster content delivery globally?",
+"options":{
+"A":"Amazon CloudFront",
+"B":"Elastic Load Balancer",
+"C":"Route 53",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does CloudFront provide for S3 content? (Select all that apply)",
+"options":{
+"A":"Content caching",
+"B":"Lower latency",
+"C":"Improved performance",
+"D":"DDoS protection"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFront can distribute S3 content globally using edge locations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which S3 feature allows centralized management of multiple buckets and access points?",
+"options":{
+"A":"S3 Access Points",
+"B":"Bucket Policies",
+"C":"IAM Roles",
+"D":"Storage Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do S3 Access Points provide? (Select all that apply)",
+"options":{
+"A":"Simplified permission management",
+"B":"Application-specific access policies",
+"C":"Large-scale data sharing",
+"D":"Separate network controls"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Access Points allow multiple applications to access the same S3 bucket with different permissions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows creating temporary URLs for uploading or downloading objects?",
+"options":{
+"A":"Pre-signed URL",
+"B":"Access Token",
+"C":"Object URL",
+"D":"Temporary Endpoint"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operations can pre-signed URLs allow? (Select all that apply)",
+"options":{
+"A":"Upload objects",
+"B":"Download objects",
+"C":"Temporary sharing",
+"D":"Time-limited access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pre-signed URLs automatically expire after the configured duration.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature prevents objects from being deleted for a defined retention period?",
+"options":{
+"A":"Object Lock",
+"B":"Version Control",
+"C":"Data Guard",
+"D":"Retention Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Object Lock modes exist in Amazon S3? (Select all that apply)",
+"options":{
+"A":"Governance mode",
+"B":"Compliance mode",
+"C":"Protected mode",
+"D":"Archive mode"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Compliance mode prevents even the root user from deleting protected objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature monitors storage usage and provides analytics dashboards?",
+"options":{
+"A":"S3 Storage Lens",
+"B":"CloudWatch",
+"C":"Storage Monitor",
+"D":"S3 Analyzer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which insights does S3 Storage Lens provide? (Select all that apply)",
+"options":{
+"A":"Usage metrics",
+"B":"Activity metrics",
+"C":"Cost efficiency insights",
+"D":"Data protection insights"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Storage Lens can analyze storage across multiple AWS accounts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows querying data stored in objects using SQL?",
+"options":{
+"A":"S3 Select",
+"B":"Athena Query",
+"C":"Object Query",
+"D":"Data Query"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Select provide? (Select all that apply)",
+"options":{
+"A":"Query partial object data",
+"B":"Reduce data transfer",
+"C":"Improve query performance",
+"D":"Lower processing cost"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 Select retrieves only the required subset of object data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows querying S3 data using standard SQL without servers?",
+"options":{
+"A":"Amazon Athena",
+"B":"Amazon Redshift",
+"C":"AWS Glue",
+"D":"AWS EMR"
+},
+"answer":"A"
+},
+
+{
+"question":"Which capabilities does Amazon Athena provide with S3? (Select all that apply)",
+"options":{
+"A":"Serverless querying",
+"B":"SQL support",
+"C":"Data analysis",
+"D":"Integration with BI tools"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Athena queries data stored directly in S3 without loading it into databases.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature enables monitoring request metrics for buckets?",
+"options":{
+"A":"CloudWatch Request Metrics",
+"B":"S3 Monitor",
+"C":"Bucket Tracker",
+"D":"Activity Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which metrics can be monitored for S3 buckets? (Select all that apply)",
+"options":{
+"A":"Request count",
+"B":"Error rate",
+"C":"Data transfer",
+"D":"Latency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch can trigger alarms based on S3 metrics.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides faster uploads using optimized global routes?",
+"options":{
+"A":"Transfer Acceleration",
+"B":"CloudFront",
+"C":"Global Access",
+"D":"Speed Transfer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Transfer Acceleration provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Lower latency",
+"C":"Optimized global network routing",
+"D":"Improved transfer reliability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Transfer Acceleration uses AWS edge locations to speed up uploads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which service distributes S3 content globally through caching?",
+"options":{
+"A":"Amazon CloudFront",
+"B":"Elastic Load Balancer",
+"C":"AWS Shield",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does CloudFront provide for S3-hosted content? (Select all that apply)",
+"options":{
+"A":"Content caching",
+"B":"Reduced latency",
+"C":"Improved performance",
+"D":"Global distribution"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFront caches S3 content at edge locations worldwide.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature enables secure data transfer using HTTPS?",
+"options":{
+"A":"SSL/TLS encryption",
+"B":"S3 Secure Mode",
+"C":"HTTPS Gateway",
+"D":"Secure Bucket"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods ensure secure data transfer to S3? (Select all that apply)",
+"options":{
+"A":"HTTPS",
+"B":"TLS encryption",
+"C":"Signed requests",
+"D":"Pre-signed URLs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Amazon S3 supports secure data transfer using HTTPS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which S3 feature allows objects to be automatically moved between storage classes?",
+"options":{
+"A":"Lifecycle Rules",
+"B":"Replication",
+"C":"Object Lock",
+"D":"Bucket Policy"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can lifecycle rules perform? (Select all that apply)",
+"options":{
+"A":"Transition objects",
+"B":"Expire objects",
+"C":"Delete previous versions",
+"D":"Archive objects"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lifecycle rules help reduce storage costs automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows data replication between buckets in different regions?",
+"options":{
+"A":"Cross-Region Replication",
+"B":"Bucket Sync",
+"C":"Object Migration",
+"D":"Global Replication"
+},
+"answer":"A"
+},
+
+{
+"question":"Which replication configurations exist in S3? (Select all that apply)",
+"options":{
+"A":"Cross-Region Replication",
+"B":"Same-Region Replication",
+"C":"Selective Replication",
+"D":"Batch Replication"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Replication requires versioning to be enabled on the source bucket.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows querying object data using SQL expressions?",
+"options":{
+"A":"S3 Select",
+"B":"Athena",
+"C":"Redshift",
+"D":"Glue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Select provide? (Select all that apply)",
+"options":{
+"A":"Query subset of data",
+"B":"Reduce data transfer",
+"C":"Improve performance",
+"D":"Lower query cost"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 Select retrieves only the required portion of an object.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows SQL queries directly on S3 data without servers?",
+"options":{
+"A":"Amazon Athena",
+"B":"Amazon Redshift",
+"C":"AWS Glue",
+"D":"Amazon EMR"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Athena capabilities work with S3? (Select all that apply)",
+"options":{
+"A":"Serverless querying",
+"B":"SQL support",
+"C":"Data analysis",
+"D":"Integration with BI tools"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Athena queries data stored directly in S3.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows event notifications when objects are created or deleted?",
+"options":{
+"A":"S3 Event Notifications",
+"B":"CloudTrail",
+"C":"CloudWatch",
+"D":"Event Logs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can receive S3 event notifications? (Select all that apply)",
+"options":{
+"A":"AWS Lambda",
+"B":"SNS",
+"C":"SQS",
+"D":"EventBridge"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Event notifications allow automation workflows triggered by object changes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature blocks unintended public access to buckets?",
+"options":{
+"A":"Block Public Access",
+"B":"Secure Bucket",
+"C":"Private Bucket",
+"D":"Access Lock"
+},
+"answer":"A"
+},
+
+{
+"question":"Which settings are included in Block Public Access? (Select all that apply)",
+"options":{
+"A":"Block public ACLs",
+"B":"Ignore public ACLs",
+"C":"Block public policies",
+"D":"Restrict public buckets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Block Public Access helps prevent accidental public exposure of S3 data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature enables secure access from a VPC?",
+"options":{
+"A":"VPC Endpoint",
+"B":"Internet Gateway",
+"C":"Route Table",
+"D":"Subnet Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do VPC endpoints provide? (Select all that apply)",
+"options":{
+"A":"Private connectivity",
+"B":"Improved security",
+"C":"No internet gateway needed",
+"D":"Direct access from VPC"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: VPC endpoints allow S3 access without using the public internet.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature monitors storage usage across accounts?",
+"options":{
+"A":"S3 Storage Lens",
+"B":"CloudWatch",
+"C":"AWS Config",
+"D":"S3 Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which insights does Storage Lens provide? (Select all that apply)",
+"options":{
+"A":"Usage metrics",
+"B":"Activity metrics",
+"C":"Cost efficiency",
+"D":"Data protection insights"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Storage Lens helps optimize storage and access patterns.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides temporary secure access to objects?",
+"options":{
+"A":"Pre-signed URLs",
+"B":"Public URL",
+"C":"Access Token",
+"D":"Temporary Bucket"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can pre-signed URLs allow? (Select all that apply)",
+"options":{
+"A":"Upload objects",
+"B":"Download objects",
+"C":"Temporary sharing",
+"D":"Time-limited access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pre-signed URLs expire after the configured duration.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows uploading large files in parts?",
+"options":{
+"A":"Multipart Upload",
+"B":"Chunk Upload",
+"C":"Segment Upload",
+"D":"Parallel Upload"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does multipart upload provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Parallel upload",
+"C":"Resume interrupted uploads",
+"D":"Improved reliability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Multipart upload is recommended for files larger than 100 MB.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature accelerates uploads using AWS edge locations?",
+"options":{
+"A":"Transfer Acceleration",
+"B":"CloudFront",
+"C":"Global Access",
+"D":"Edge Upload"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Transfer Acceleration provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Reduced latency",
+"C":"Optimized network routing",
+"D":"Better global performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Transfer Acceleration uses AWS edge locations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service distributes S3 content globally through caching?",
+"options":{
+"A":"Amazon CloudFront",
+"B":"Elastic Load Balancer",
+"C":"Route 53",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does CloudFront provide with S3? (Select all that apply)",
+"options":{
+"A":"Content caching",
+"B":"Reduced latency",
+"C":"Global distribution",
+"D":"Improved performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFront caches S3 content at edge locations worldwide.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which S3 feature allows protecting objects from deletion for a defined period?",
+"options":{
+"A":"Object Lock",
+"B":"Versioning",
+"C":"Lifecycle Policy",
+"D":"Retention Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which modes are available in S3 Object Lock? (Select all that apply)",
+"options":{
+"A":"Governance Mode",
+"B":"Compliance Mode",
+"C":"Strict Mode",
+"D":"Archive Mode"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Compliance mode prevents even root users from deleting protected objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature stores multiple versions of an object?",
+"options":{
+"A":"Versioning",
+"B":"Replication",
+"C":"Object Lock",
+"D":"Access Control"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Versioning provide? (Select all that apply)",
+"options":{
+"A":"Recover deleted files",
+"B":"Track object changes",
+"C":"Prevent accidental overwrite",
+"D":"Maintain object history"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Versioning must be enabled before configuring replication.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature automatically transitions objects to lower-cost storage?",
+"options":{
+"A":"Lifecycle Policy",
+"B":"Storage Lens",
+"C":"Object Lock",
+"D":"Replication"
+},
+"answer":"A"
+},
+
+{
+"question":"Which lifecycle actions are supported in S3? (Select all that apply)",
+"options":{
+"A":"Transition storage class",
+"B":"Expire objects",
+"C":"Delete previous versions",
+"D":"Archive objects"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lifecycle policies help manage storage costs automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature provides encryption for objects stored in buckets?",
+"options":{
+"A":"Server-Side Encryption",
+"B":"Bucket Security",
+"C":"Secure Storage",
+"D":"Data Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which server-side encryption types are supported in S3? (Select all that apply)",
+"options":{
+"A":"SSE-S3",
+"B":"SSE-KMS",
+"C":"SSE-C",
+"D":"Client-Side Encryption"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: SSE-KMS uses AWS Key Management Service.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature records requests made to a bucket?",
+"options":{
+"A":"Server Access Logging",
+"B":"Activity Monitor",
+"C":"Request Tracker",
+"D":"Log Storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which logs can track S3 activity? (Select all that apply)",
+"options":{
+"A":"Server Access Logs",
+"B":"CloudTrail Logs",
+"C":"CloudWatch Logs",
+"D":"Audit Logs"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Server access logging records requests made to S3 buckets.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows hosting static websites?",
+"options":{
+"A":"Static Website Hosting",
+"B":"Web Hosting Mode",
+"C":"Bucket Hosting",
+"D":"S3 Web Service"
+},
+"answer":"A"
+},
+
+{
+"question":"Which files are commonly used for S3 static websites? (Select all that apply)",
+"options":{
+"A":"HTML",
+"B":"CSS",
+"C":"JavaScript",
+"D":"Images"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 static websites support server-side scripting like PHP.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which S3 feature provides analytics on storage usage across accounts?",
+"options":{
+"A":"S3 Storage Lens",
+"B":"CloudWatch",
+"C":"AWS Config",
+"D":"Bucket Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which insights does Storage Lens provide? (Select all that apply)",
+"options":{
+"A":"Usage metrics",
+"B":"Activity metrics",
+"C":"Cost insights",
+"D":"Data protection insights"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Storage Lens can analyze storage across multiple AWS accounts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows generating temporary secure links to objects?",
+"options":{
+"A":"Pre-signed URLs",
+"B":"Temporary URLs",
+"C":"Secure Links",
+"D":"Access Links"
+},
+"answer":"A"
+},
+
+{
+"question":"Which capabilities do pre-signed URLs provide? (Select all that apply)",
+"options":{
+"A":"Temporary access",
+"B":"Upload objects",
+"C":"Download objects",
+"D":"Time-limited sharing"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pre-signed URLs automatically expire after a defined time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature speeds up uploads using AWS edge locations?",
+"options":{
+"A":"Transfer Acceleration",
+"B":"Global Transfer",
+"C":"Edge Upload",
+"D":"Fast Upload"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Transfer Acceleration provide? (Select all that apply)",
+"options":{
+"A":"Faster uploads",
+"B":"Lower latency",
+"C":"Optimized global routing",
+"D":"Improved transfer performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Transfer Acceleration uses AWS edge locations to speed up uploads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service distributes S3 content globally with caching?",
+"options":{
+"A":"Amazon CloudFront",
+"B":"Elastic Load Balancer",
+"C":"Route 53",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does CloudFront provide with S3? (Select all that apply)",
+"options":{
+"A":"Content caching",
+"B":"Reduced latency",
+"C":"Global distribution",
+"D":"Improved performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFront uses edge locations to cache S3 content.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which S3 feature enables centralized access management for large shared datasets?",
+"options":{
+"A":"S3 Access Points",
+"B":"Bucket Policies",
+"C":"IAM Roles",
+"D":"Storage Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do S3 Access Points provide? (Select all that apply)",
+"options":{
+"A":"Simplified access control",
+"B":"Application-specific permissions",
+"C":"Separate access policies",
+"D":"Scalable data sharing"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 Access Points simplify managing access for multiple applications using the same bucket.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature allows querying object data using SQL expressions without retrieving the full object?",
+"options":{
+"A":"S3 Select",
+"B":"Athena",
+"C":"Redshift",
+"D":"Glue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does S3 Select provide? (Select all that apply)",
+"options":{
+"A":"Query subset of data",
+"B":"Reduce data transfer",
+"C":"Improve performance",
+"D":"Lower processing cost"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: S3 Select retrieves only the required subset of object data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows serverless SQL queries on S3 data?",
+"options":{
+"A":"Amazon Athena",
+"B":"Amazon Redshift",
+"C":"AWS Glue",
+"D":"AWS EMR"
+},
+"answer":"A"
+},
+
+{
+"question":"Which capabilities does Amazon Athena provide with S3? (Select all that apply)",
+"options":{
+"A":"Serverless querying",
+"B":"SQL support",
+"C":"Data analysis",
+"D":"Integration with BI tools"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Athena queries data stored directly in S3 without loading it into databases.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature monitors request metrics for buckets?",
+"options":{
+"A":"CloudWatch Request Metrics",
+"B":"S3 Monitor",
+"C":"Bucket Tracker",
+"D":"Storage Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which metrics can CloudWatch monitor for S3? (Select all that apply)",
+"options":{
+"A":"Request count",
+"B":"Error rates",
+"C":"Data transfer",
+"D":"Latency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms can trigger actions based on S3 metrics.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which S3 feature ensures secure data transfer using HTTPS?",
+"options":{
+"A":"SSL/TLS Encryption",
+"B":"Secure Mode",
+"C":"HTTPS Gateway",
+"D":"Data Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods help secure S3 data in transit? (Select all that apply)",
+"options":{
+"A":"HTTPS",
+"B":"TLS encryption",
+"C":"Signed requests",
+"D":"Pre-signed URLs"
+},
+"answer":["A","B","C","D"]
+}
+
+  ]
+}

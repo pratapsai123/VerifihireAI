@@ -1,0 +1,2028 @@
+{
+  "skill": "JMeter",
+  "questions": [
+    {
+      "question": "What is the primary use of Apache JMeter?",
+      "options": {
+        "A": "To compile Java source code into bytecode.",
+        "B": "To perform load testing and measure performance of web applications.",
+        "C": "To create 3D architectural models.",
+        "D": "To act as a primary firewall for network security."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter is a browser-based tool and executes JavaScript just like Chrome or Firefox.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are core components of a JMeter Test Plan? (Select all that apply)",
+      "options": {
+        "A": "Thread Groups",
+        "B": "Samplers",
+        "C": "Listeners",
+        "D": "Visual Studio Code"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "In JMeter, what does a 'Thread Group' represent?",
+      "options": {
+        "A": "A group of developers working on the same script.",
+        "B": "A pool of virtual users that will execute the test scenario.",
+        "C": "A collection of physical servers in a cluster.",
+        "D": "A list of email addresses for reporting."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to send a specific type of request (like HTTP, FTP, or JDBC) to a server?",
+      "options": {
+        "A": "Listener",
+        "B": "Sampler",
+        "C": "Assertion",
+        "D": "Configuration Element"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Listeners' are used to view, save, and analyze the results of a performance test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Listener is most commonly used during script debugging to see the details of request and response data?",
+      "options": {
+        "A": "Summary Report",
+        "B": "View Results Tree",
+        "C": "Aggregate Graph",
+        "D": "Backend Listener"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Ramp-Up Period' setting in a Thread Group define?",
+      "options": {
+        "A": "The time it takes to delete the test results.",
+        "B": "The amount of time JMeter takes to get all specified threads active.",
+        "C": "The speed of the network connection.",
+        "D": "The delay between the test end and the report generation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Assertions' in JMeter? (Select all that apply)",
+      "options": {
+        "A": "Response Assertion",
+        "B": "Duration Assertion",
+        "C": "Size Assertion",
+        "D": "Password Assertion"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: JMeter can only be used to test web applications using the HTTP protocol.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Configuration Element' like 'HTTP Cookie Manager'?",
+      "options": {
+        "A": "To bake physical cookies for the office.",
+        "B": "To store and send cookies automatically, simulating browser behavior.",
+        "C": "To delete temporary files from the hard drive.",
+        "D": "To increase the font size of the JMeter GUI."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In JMeter, what does 'Loop Count' specify?",
+      "options": {
+        "A": "The number of times the test script repeats for each user.",
+        "B": "The number of times the computer restarts during a test.",
+        "C": "The number of CPUs used by JMeter.",
+        "D": "The number of lines in the log file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component allows you to add a delay between two requests to simulate human 'think time'?",
+      "options": {
+        "A": "Sampler",
+        "B": "Timer",
+        "C": "Logic Controller",
+        "D": "Post-Processor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter requires the Java Runtime Environment (JRE) or Java Development Kit (JDK) to run.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes a 'Post-Processor'? (Select all that apply)",
+      "options": {
+        "A": "It executes after a sampler request is finished.",
+        "B": "It is often used to extract data (like IDs) from a response.",
+        "C": "It is used to set up the server before the test starts.",
+        "D": "Examples include JSON Extractor and Regular Expression Extractor."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the file extension for a saved JMeter test plan?",
+      "options": {
+        "A": ".exe",
+        "B": ".jmx",
+        "C": ".java",
+        "D": ".xml"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Where can you change the global settings and properties for JMeter performance?",
+      "options": {
+        "A": "Inside the bin/jmeter.properties file.",
+        "B": "In the Windows Registry.",
+        "C": "On the official JMeter website only.",
+        "D": "By calling Atlassian support."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Performance testing should ideally be performed in the GUI mode for high-load production tests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'Logic Controller' is used to run child elements only if a specific condition is met?",
+      "options": {
+        "A": "Loop Controller",
+        "B": "If Controller",
+        "C": "Once Only Controller",
+        "D": "Random Controller"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Throughput' measure in a JMeter report?",
+      "options": {
+        "A": "The physical weight of the server.",
+        "B": "The number of requests the server can handle per unit of time (e.g., requests per second).",
+        "C": "The total number of users who logged in.",
+        "D": "The length of the test script in lines."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of a 'Pre-Processor'?",
+      "options": {
+        "A": "To format the final HTML report.",
+        "B": "To perform actions or modify a sampler before the request is actually sent.",
+        "C": "To delete the test plan after execution.",
+        "D": "To increase the internet upload speed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'User Defined Variables' element allows you to centralize values like 'Server Name' or 'Port Number' for easy maintenance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid JMeter 'Samplers'? (Select all that apply)",
+      "options": {
+        "A": "HTTP Request",
+        "B": "JDBC Request",
+        "C": "Debug Sampler",
+        "D": "Power Sampler"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Correlation' in the context of JMeter scripting?",
+      "options": {
+        "A": "Connecting two physical computers with a cable.",
+        "B": "Capturing a dynamic value from one response and using it in a subsequent request.",
+        "C": "Calculating the average response time.",
+        "D": "Synchronizing the clocks of the test machines."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to read data from an external file (like a .csv) to provide unique login credentials for each thread?",
+      "options": {
+        "A": "HTTP Header Manager",
+        "B": "CSV Data Set Config",
+        "C": "JSON Extractor",
+        "D": "Constant Timer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter threads are independent, meaning one thread's failure does not automatically stop other threads.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'View Results in Table' listener primarily used for?",
+      "options": {
+        "A": "To see a summary of the entire test.",
+        "B": "To see each individual sample's result, status, and time in a row-by-row format.",
+        "C": "To draw a 3D bar chart.",
+        "D": "To edit the raw XML of the test plan."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which part of the JMeter interface allows you to start and stop the test execution?",
+      "options": {
+        "A": "The Sidebar",
+        "B": "The Toolbar",
+        "C": "The Log Viewer",
+        "D": "The Status Bar"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Think Time' meant to simulate?",
+      "options": {
+        "A": "The time the CPU spends calculating a response.",
+        "B": "The time a real user takes to read a page or enter data before clicking the next button.",
+        "C": "The time the database takes to index records.",
+        "D": "The time a developer spends thinking about the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using a 'Random Timer' is better than a 'Constant Timer' for making load tests feel more like realistic user behavior.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Parameterization'? (Select all that apply)",
+      "options": {
+        "A": "Replacing hardcoded values with variables",
+        "B": "Using a CSV file to drive multiple test scenarios",
+        "C": "Changing the color of the JMeter background",
+        "D": "Making a script dynamic so it can handle different inputs"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What does a 'Response Assertion' check?",
+      "options": {
+        "A": "The speed of the keyboard.",
+        "B": "Whether the response from the server contains expected text, patterns, or codes (e.g., 200 OK).",
+        "C": "A specialized software for architects.",
+        "D": "The physical location of the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In JMeter, what is the 'Workbench' (in older versions) or the area used for non-test elements called?",
+      "options": {
+        "A": "Tool Box",
+        "B": "Non-Test Elements",
+        "C": "Archive",
+        "D": "Trash"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use 'HTTP Header Manager' to add specific headers like 'Content-Type' or 'Authorization' to your requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Aggregate Report' used for?",
+      "options": {
+        "A": "To list every single error message.",
+        "B": "To provide statistical summaries like Average, Median, 90% Line, and Error percentage for each sampler.",
+        "C": "To backup the test data to the cloud.",
+        "D": "To show the code of the web application."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you add a new element to a Test Plan in the JMeter GUI?",
+      "options": {
+        "A": "By double-clicking the mouse on the screen.",
+        "B": "By right-clicking an existing element and selecting 'Add'.",
+        "C": "By typing a command in the console.",
+        "D": "By restarting JMeter."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter test scripts can be version-controlled using systems like Git.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is responsible for extracting data from a response using 'Regular Expressions'?",
+      "options": {
+        "A": "BeanShell Sampler",
+        "B": "Regular Expression Extractor",
+        "C": "HTTP Link Checker",
+        "D": "Constant Throughput Timer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Testing' in JMeter?",
+      "options": {
+        "A": "Testing a server in a different country.",
+        "B": "Using multiple machines (slaves) to generate a larger load than a single machine could handle.",
+        "C": "Distributing the test report via email.",
+        "D": "Dividing the test into 10 different projects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Aggregate Graph' listener can show performance trends visually using bar charts.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'Logical Controllers'? (Select all that apply)",
+      "options": {
+        "A": "Transaction Controller",
+        "B": "Throughput Controller",
+        "C": "Switch Controller",
+        "D": "Network Controller"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does the 'Debug Sampler' show?",
+      "options": {
+        "A": "The physical bugs found in the server hardware.",
+        "B": "The values of all JMeter variables and properties at a specific point in the test.",
+        "C": "A specialized software for architects.",
+        "D": "The source code of the JMeter application."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is a 'Thread' in JMeter?",
+      "options": {
+        "A": "A piece of string for tying cables.",
+        "B": "An independent execution path representing a single virtual user.",
+        "C": "A security certificate.",
+        "D": "A way to count the number of characters in a query."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can save the output of a Listener to a .csv or .jtl file for later processing.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which menu allows you to open the 'Function Helper' dialog?",
+      "options": {
+        "A": "Edit",
+        "B": "Tools",
+        "C": "Search",
+        "D": "Help"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Transaction Controller' used for?",
+      "options": {
+        "A": "To process credit card payments.",
+        "B": "To group multiple samplers together so they are reported as a single unit of work (e.g., 'User Login').",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Test Plan' must have at least one 'Thread Group' to run any samplers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Configuration Elements'? (Select all that apply)",
+      "options": {
+        "A": "HTTP Request Defaults",
+        "B": "JDBC Connection Configuration",
+        "C": "Java Request Defaults",
+        "D": "HTML Visualization Component"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Ramping Down' threads?",
+      "options": {
+        "A": "Increasing the number of threads at the end of the test.",
+        "B": "The process of gradually stopping virtual users to see how the system recovers from load.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is a '.jtl' file?",
+      "options": {
+        "A": "A file for Java Team Logs.",
+        "B": "A standard format for saving JMeter test results.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can copy and paste elements between different JMeter windows.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe the 'Once Only Controller'?",
+      "options": {
+        "A": "It executes its children only once per thread, even if the Thread Group loops.",
+        "B": "It executes its children only once for the entire test.",
+        "C": "It is used for tasks like 'Logout'.",
+        "D": "It is used for tasks like 'Login'."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dynamic Data' in load testing?",
+      "options": {
+        "A": "Data that physically moves on the screen.",
+        "B": "Data that changes for every request or session, such as Session IDs, tokens, or timestamps.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is a 'User Parameter'?",
+      "options": {
+        "A": "A physical measurement of the person using JMeter.",
+        "B": "A way to define variables that can have different values for different threads.",
+        "C": "A security scan for database viruses.",
+        "D": "The frame rate of the visual."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Summary Report' uses less memory than the 'View Results Tree' during a load test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component allows you to record HTTP traffic from a browser to create a JMeter script automatically?",
+      "options": {
+        "A": "HTTP Mirror Server",
+        "B": "HTTP(S) Test Script Recorder",
+        "C": "Web Page Parser",
+        "D": "Network Sniffer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the '90th Percentile' (90% Line) in a JMeter report?",
+      "options": {
+        "A": "The average response time multiplied by 0.9.",
+        "B": "The response time value for which 90% of the samples were faster.",
+        "C": "The score a developer gets on a test.",
+        "D": "The number of users who stayed on the site for 90 minutes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter scripts are saved as XML-based files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Timer' types in JMeter? (Select all that apply)",
+      "options": {
+        "A": "Uniform Random Timer",
+        "B": "Gaussian Random Timer",
+        "C": "Poisson Random Timer",
+        "D": "Network Latency Timer"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Warm-up' time for a server during a load test?",
+      "options": {
+        "A": "Turning on the physical heater.",
+        "B": "A period at the start of a test allowing the application's caches and JIT compilers to reach a stable state.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Latency' vs 'Response Time' in JMeter?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Latency is the time to receive the first byte; Response Time is the time to receive the full response.",
+        "C": "Latency is for beginners; Response Time for experts.",
+        "D": "Response time is 100x faster to compute."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'HTTP Request Defaults' element can be used to set a common domain and port for all HTTP samplers in a group.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Assertions' status? (Select all that apply)",
+      "options": {
+        "A": "An assertion failure makes the sample result 'failed' (red)",
+        "B": "Assertions can be applied to all samplers in a scope",
+        "C": "Assertions automatically fix the bugs in the code",
+        "D": "Multiple assertions can be added to a single sampler"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'JMeter Variable' syntax?",
+      "options": {
+        "A": "[[variable]]",
+        "B": "${variable}",
+        "C": "#variable",
+        "D": "@variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Loop Controller' used for?",
+      "options": {
+        "A": "To restart the computer in a loop.",
+        "B": "To repeat a set of samplers a specific number of times within a single thread iteration.",
+        "C": "A specialized software for musicians.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You must provide a 'Name' for every element in a Test Plan.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In JMeter, how does 'Scoping' work for a Configuration Element like 'HTTP Header Manager'?",
+      "options": {
+        "A": "It only applies to the sampler immediately following it in the tree.",
+        "B": "It applies to all samplers at the same level and all child samplers of its parent.",
+        "C": "It applies globally to the entire test plan regardless of its position.",
+        "D": "It only applies to samplers that have the same name as the manager."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Regular Expression Extractor' uses the '-1' match number to capture all occurrences of a pattern into a list of variables.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are valid 'Post-Processor' elements used for data correlation? (Select all that apply)",
+      "options": {
+        "A": "JSON JMESPath Extractor",
+        "B": "XPath2 Extractor",
+        "C": "Boundary Extractor",
+        "D": "JDBC Connection Configuration"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the primary technical difference between 'Variables' and 'Properties' in JMeter?",
+      "options": {
+        "A": "Variables are global to all threads; Properties are local to a single thread.",
+        "B": "Variables are local to a specific thread; Properties are global to the entire JMeter instance.",
+        "C": "Variables can only store numbers; Properties store text strings.",
+        "D": "Properties are deleted after the first loop, while variables persist."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component would you use to ensure that the total number of requests per minute across all threads does not exceed a specific limit?",
+      "options": {
+        "A": "Constant Timer",
+        "B": "Constant Throughput Timer",
+        "C": "Precise Throughput Timer",
+        "D": "Synchronizing Timer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'BeanShell' elements are recommended over 'JSR223' with Groovy for high-performance scripting in modern JMeter versions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'JSON Extractor', what does the JSON Path expression '$.items[0].id' do?",
+      "options": {
+        "A": "Extracts the IDs of all items in the array.",
+        "B": "Extracts the ID of the first item in the 'items' array.",
+        "C": "Calculates the sum of all IDs.",
+        "D": "Deletes the first item from the response."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Synchronizing Timer'?",
+      "options": {
+        "A": "To synchronize the JMeter clock with a global NTP server.",
+        "B": "To pause threads until a specific number have arrived, then release them all at once to create a 'spike' of traffic.",
+        "C": "To ensure that all threads start at exactly 00:00:00 AM.",
+        "D": "To synchronize data between a CSV file and a SQL database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'Logic Controller' allows you to run only one of its child elements per iteration based on a selection index or value? (Select all that apply)",
+      "options": {
+        "A": "Switch Controller",
+        "B": "Interleave Controller",
+        "C": "Random Order Controller",
+        "D": "Module Controller"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In distributed testing, the 'JMeter Client' (Master) sends the full JMX test plan to each 'JMeter Server' (Slave) for execution.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the '95th Percentile' in a performance report?",
+      "options": {
+        "A": "The average response time of the top 5% of users.",
+        "B": "The value below which 95% of the observed response times fall.",
+        "C": "A score indicating the server is 95% healthy.",
+        "D": "The number of users who successfully completed the test."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When configuring a 'JDBC Request' sampler, which element must also be present to define the database connection details?",
+      "options": {
+        "A": "User Defined Variables",
+        "B": "JDBC Connection Configuration",
+        "C": "HTTP Request Defaults",
+        "D": "Keystore Configuration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to convert a string to uppercase in a JMeter variable?",
+      "options": {
+        "A": "${__toUpper(var)}",
+        "B": "${__uppercase(var)}",
+        "C": "${__javaScript(\"${var}\".toUpperCase())}",
+        "D": "${__groovy(\"${var}\".toUpperCase())}"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Using 'Functional Test Mode' in the Test Plan settings will save the full response data for every sampler to the results file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'HTTP Implementation' options in the HTTP Request sampler? (Select all that apply)",
+      "options": {
+        "A": "HttpClient4",
+        "B": "Java",
+        "C": "WinHTTP",
+        "D": "ChromeEngine"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'Runtime Controller' do?",
+      "options": {
+        "A": "Measures the time it takes for a script to run.",
+        "B": "Controls how long (in seconds) its children are allowed to run.",
+        "C": "Restarts the server if the runtime exceeds 10 minutes.",
+        "D": "Displays the current time in the log file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Regular Expression Extractor', what does the template '$1$' signify?",
+      "options": {
+        "A": "The first match of the entire regex string.",
+        "B": "The value of the first capturing group (the first set of parentheses).",
+        "C": "A dollar sign character at the end of the match.",
+        "D": "A random selection between the first and last match."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Module Controller' is used to call a specific 'Test Fragment' or 'Controller' from another part of the test plan.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes 'Cookie' handling in JMeter? (Select all that apply)",
+      "options": {
+        "A": "HTTP Cookie Manager can clear cookies each iteration",
+        "B": "Cookies can be manually added as user-defined cookies",
+        "C": "Cookies are shared across all threads in a thread group by default",
+        "D": "JMeter can store cookies from a response into variables"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'Duration Assertion'?",
+      "options": {
+        "A": "To measure the total length of the test in hours.",
+        "B": "To fail a sampler if its response time exceeds a specified number of milliseconds.",
+        "C": "To ensure the server has been running for at least 24 hours.",
+        "D": "To calculate the time between two different samplers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Distributed Testing', which port does the JMeter server (Slave) typically use by default for RMI?",
+      "options": {
+        "A": "8080",
+        "B": "1099",
+        "C": "443",
+        "D": "3306"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'If Controller' should always have 'Interpret Condition as Variable Expression?' checked for better performance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is used to simulate a 'Headless' browser and automatically download embedded resources like images and CSS?",
+      "options": {
+        "A": "HTTP Header Manager",
+        "B": "HTTP Request (Advanced tab > Retrieve All Embedded Resources)",
+        "C": "Cache Manager",
+        "D": "Cookie Manager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What occurs when the 'Stop Thread' action is selected in an Assertion?",
+      "options": {
+        "A": "The entire load test stops immediately.",
+        "B": "Only the current thread that failed the assertion is terminated.",
+        "C": "The thread pauses for 10 seconds and then restarts.",
+        "D": "A notification is sent to the server administrator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JSR223 Groovy' scripting, how do you access a JMeter variable named 'myID'?",
+      "options": {
+        "A": "vars.get(\"myID\")",
+        "B": "props.get(\"myID\")",
+        "C": "ctx.get(\"myID\")",
+        "D": "log.info(\"myID\")"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Transaction Controller' can be configured to include the duration of timers and pre/post-processors in the total time reported.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Non-Test Elements' used to aid in script development? (Select all that apply)",
+      "options": {
+        "A": "HTTP Mirror Server",
+        "B": "Property Display",
+        "C": "HTTP(S) Test Script Recorder",
+        "D": "TCP Sampler"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Response Header' extraction?",
+      "options": {
+        "A": "Deleting the top part of a web page.",
+        "B": "Using an extractor to capture metadata (like 'Set-Cookie' or 'Location') from the server's HTTP response headers.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a new manager for the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which timer is used to generate requests at a 'Constant' delay regardless of the response time of the previous request?",
+      "options": {
+        "A": "Constant Timer",
+        "B": "Constant Throughput Timer",
+        "C": "Precise Throughput Timer",
+        "D": "Gaussian Random Timer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter can record traffic from a mobile device by setting the device to use the JMeter machine as a proxy.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe the 'Switch Controller'?",
+      "options": {
+        "A": "It switches between a GET and a POST request randomly.",
+        "B": "It evaluates a value (index or name) and executes the corresponding child element.",
+        "C": "It switches the server IP address mid-test.",
+        "D": "It alternates between two different thread groups."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Default Value' field used for in a Post-Processor Extractor?",
+      "options": {
+        "A": "The value used if the regular expression or JSON path does not find a match.",
+        "B": "The value used for every thread regardless of the response.",
+        "C": "The value that clears the variable at the end of the test.",
+        "D": "A hidden password for the extractor."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'JMeter', what is 'User Defined Variables' (UDV) vs 'User Parameters'?",
+      "options": {
+        "A": "They are exactly the same.",
+        "B": "UDV is evaluated once at the start; User Parameters can be evaluated for each thread or iteration.",
+        "C": "User Parameters are only for numbers; UDV for text.",
+        "D": "UDV is 100x faster than User Parameters."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Size Assertion' can check if a response body is exactly 0 bytes to detect empty responses.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'Function' generates a random number between a specified minimum and maximum?",
+      "options": {
+        "A": "${__Random(1,100)}",
+        "B": "${__generate(1,100)}",
+        "C": "${__Number(1,100)}",
+        "D": "${__Integer(1,100)}"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Interleave Controller' used for?",
+      "options": {
+        "A": "To mix two different CSV files together.",
+        "B": "To execute one child sampler per loop, alternating through the list of children.",
+        "C": "A specialized software for architects.",
+        "D": "To increase the frame rate of the report."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter can send binary data (like images or PDF files) in an HTTP POST request using the 'File Upload' tab.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Thread Group' types available in JMeter or via plugins? (Select all that apply)",
+      "options": {
+        "A": "Standard Thread Group",
+        "B": "Ultimate Thread Group",
+        "C": "Concurrency Thread Group",
+        "D": "Hyper-V Thread Group"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does 'Heap Size' in JMeter's jmeter.bat/sh file control?",
+      "options": {
+        "A": "The physical weight of the JMeter installation.",
+        "B": "The amount of RAM memory allocated to the Java Virtual Machine for JMeter to run.",
+        "C": "A security certificate for a database.",
+        "D": "The number of threads that can run in parallel."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is the 'Latency' metric technically measuring?",
+      "options": {
+        "A": "The time spent waiting for the developer to fix a bug.",
+        "B": "The time from just before sending the request to just after receiving the first part of the response.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'HTTP Cache Manager' simulates browser caching by storing elements and not re-requesting them within the same thread.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Pre-Processor' elements? (Select all that apply)",
+      "options": {
+        "A": "User Parameters",
+        "B": "HTML Link Parser",
+        "C": "HTTP URL Re-writing Modifier",
+        "D": "JSON Extractor"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JMeter Property' syntax for use in a script?",
+      "options": {
+        "A": "${__property(propName)}",
+        "B": "${__P(propName)}",
+        "C": "#propName",
+        "D": "A and B are both correct"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Once Only Controller' limitation?",
+      "options": {
+        "A": "It can only be used once in the entire test plan.",
+        "B": "It only executes its children once per thread, no matter how many times the outer loop runs.",
+        "C": "A specialized software for musicians.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Test Fragment' is a special type of controller that is only executed if referenced by a Module Controller or Include Controller.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is used to extract a specific part of a URL (like a query parameter) from the previous sampler's response?",
+      "options": {
+        "A": "HTTP URL Re-writing Modifier",
+        "B": "Regular Expression Extractor",
+        "C": "HTTP Header Manager",
+        "D": "Constant Timer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Random Order Controller'?",
+      "options": {
+        "A": "A controller that randomly deletes samplers.",
+        "B": "A controller that executes its child samplers in a random order for each iteration.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter functions (e.g., ${__time()}) can be used in almost any field of a sampler or configuration element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Assertion' scope options? (Select all that apply)",
+      "options": {
+        "A": "Main sample only",
+        "B": "Sub-samples only",
+        "C": "JMeter Variable",
+        "D": "Physical hard drive"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'CLI' Mode (Non-GUI Mode) command to run a test?",
+      "options": {
+        "A": "jmeter -r test.jmx",
+        "B": "jmeter -n -t test.jmx -l results.jtl",
+        "C": "jmeter run test.jmx",
+        "D": "jmeter execute -f test.jmx"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Distributed Testing', how do you start the server agent on a slave machine?",
+      "options": {
+        "A": "jmeter.exe",
+        "B": "jmeter-server.bat (or jmeter-server on Linux)",
+        "C": "jmeter-slave.exe",
+        "D": "java -jar jmeter.jar"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Throughput Controller' can be used to execute its children based on a percentage of the total executions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'JMeter Post-Processor' extraction targets? (Select all that apply)",
+      "options": {
+        "A": "Response Body",
+        "B": "Response Headers",
+        "C": "Response Code",
+        "D": "The physical temperature of the server"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'CSV Data Set Config' 'Recycle on EOF' setting?",
+      "options": {
+        "A": "Deletes the CSV file at the end of the test.",
+        "B": "Starts reading from the first line of the file again when the end of the file is reached.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Hiring a professional actor to read the file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Error %' calculated as?",
+      "options": {
+        "A": "The number of lines of code with bugs.",
+        "B": "The percentage of failed requests out of the total number of requests sent.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Gaussian Random Timer' uses a normal distribution to calculate the delay time between requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Correlation' logic correctly? (Select all that apply)",
+      "options": {
+        "A": "Step 1: Extract dynamic value from Response A",
+        "B": "Step 2: Store value in a variable",
+        "C": "Step 3: Replace hardcoded value in Request B with the variable",
+        "D": "Step 4: Delete the variable after use"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'HTTP Request Defaults' inheritance?",
+      "options": {
+        "A": "Inheriting money from a default request.",
+        "B": "Child samplers inherit the protocol, server name, and port defined in the defaults element if their own fields are left empty.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Precise Throughput Timer' used for?",
+      "options": {
+        "A": "To measure the exact time a user clicks.",
+        "B": "To produce a highly accurate constant throughput, even with irregular response times, by adjusting the distribution of delays.",
+        "C": "A specialized software for poets.",
+        "D": "A way to count users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Aggregate Report' allows you to see the individual data points for every single request in the test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'BeanShell' or 'JSR223' built-in variables? (Select all that apply)",
+      "options": {
+        "A": "vars (JMeterVariables)",
+        "B": "props (JMeterProperties)",
+        "C": "sampler (The current sampler)",
+        "D": "coffee (Office break time)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'HTML Link Parser' used for?",
+      "options": {
+        "A": "To translate a website into HTML.",
+        "B": "To automatically find and follow links on a page to simulate random user navigation.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Connect Time' in JMeter?",
+      "options": {
+        "A": "The time it takes to plug in the computer.",
+        "B": "The time it takes to establish a TCP connection with the server (including SSL handshake).",
+        "C": "A specialized tool for measuring light.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can disable a component in a JMeter Test Plan without deleting it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Sampler' types? (Select all that apply)",
+      "options": {
+        "A": "FTP Request",
+        "B": "SMTP Sampler",
+        "D": "Graphic Visualizer",
+        "C": "JUnit Request"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which specific JSR223 Groovy command is used to share a piece of data between different Thread Groups in the same JMeter instance?",
+      "options": {
+        "A": "vars.putObject(\"key\", value)",
+        "B": "props.put(\"key\", value)",
+        "C": "ctx.getThread().put(\"key\", value)",
+        "D": "data.share(\"key\", value)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Precise Throughput Timer' uses a Poisson arrival process to model request distributions, making it superior to the Constant Throughput Timer for simulating bursty web traffic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are valid reasons to use the 'Backend Listener' in a high-scale load test? (Select all that apply)",
+      "options": {
+        "A": "To stream real-time metrics to InfluxDB or Graphite.",
+        "B": "To reduce the memory overhead of the JMeter controller during long-duration tests.",
+        "C": "To visualize live graphs in Grafana instead of the JMeter GUI.",
+        "D": "To automatically modify the server-side Java code for better throughput."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "In a 'Regular Expression Extractor', what is the technical effect of setting the 'Match No.' to '0'?",
+      "options": {
+        "A": "It extracts all matching results as a list.",
+        "B": "It extracts a random match from the list of all successful matches.",
+        "C": "It returns an error if more than one match is found.",
+        "D": "It extracts only the metadata of the match, not the value."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary technical limitation of 'BeanShell' compared to 'JSR223' with Groovy in JMeter 5.x?",
+      "options": {
+        "A": "BeanShell cannot handle HTTP requests.",
+        "B": "BeanShell scripts are interpreted every time they run, while JSR223 Groovy scripts can be pre-compiled and cached for much higher performance.",
+        "C": "BeanShell does not support multi-threading.",
+        "D": "BeanShell is only available on Linux operating systems."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Distributed Testing, if the 'jmeter.properties' file on the Master node is modified, it will automatically override the properties on the Slave nodes at runtime.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which JVM argument is essential to adjust when JMeter throws an 'OutOfMemoryError: Java heap space' during a massive load test?",
+      "options": {
+        "A": "-Duser.dir",
+        "B": "-Xmx",
+        "C": "-XX:PermSize",
+        "D": "-verbose:gc"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the specific purpose of the 'Critical Section Controller' in a multi-threaded test plan?",
+      "options": {
+        "A": "To fail the test if the server response time is critical.",
+        "B": "To ensure that only one thread at a time can execute the child elements (mutex), preventing race conditions on shared resources.",
+        "C": "To bypass the ramp-up period for a specific set of users.",
+        "D": "To delete all local variables after execution."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'Post-Processor' is best suited for extracting values from a response where the data structure is nested and inconsistent (e.g., recursive JSON)? (Select all that apply)",
+      "options": {
+        "A": "JSON JMESPath Extractor",
+        "B": "Boundary Extractor",
+        "C": "JSR223 PostProcessor with a custom script",
+        "D": "XPath Extractor (Standard)"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Client-side SSL' authentication in JMeter requires providing a valid Keystore file and the corresponding password in the system.properties file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which JMeter property must be set to 'true' to allow the use of dynamic variables inside an 'If Controller' without the need for the __jexl3 function?",
+      "options": {
+        "A": "javascript.enabled",
+        "B": "jmeter.ui.ifcontroller.evaluate_all",
+        "C": "ifcontroller.use_expression",
+        "D": "There is no such property; expressions or functions are always required for performance."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does the 'Parallel Controller' (via plugins) allow you to do that a standard Thread Group cannot?",
+      "options": {
+        "A": "Run multiple JMeter instances on one machine.",
+        "B": "Execute multiple requests concurrently within a single thread to simulate browser behavior (e.g., downloading static assets).",
+        "C": "Merge two different JMX files at runtime.",
+        "D": "Calculate the average response time across different servers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Distributed' testing, what is the role of the 'Server-port' property (default 1099)?",
+      "options": {
+        "A": "It is the port used for web traffic (HTTP).",
+        "B": "It is the RMI registry port used by the Master to establish the initial connection with the Slave nodes.",
+        "C": "It is the port used to send results to InfluxDB.",
+        "D": "It is a security token for SSH access."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Save Responses to a file' listener can be used to store binary files (like downloaded PDFs) for offline validation after a load test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'JSR223' Groovy shorthand variables for logging? (Select all that apply)",
+      "options": {
+        "A": "log.info()",
+        "B": "log.error()",
+        "C": "log.warn()",
+        "D": "log.debug()"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Heap Dump' and why would a performance engineer use it in JMeter?",
+      "options": {
+        "A": "Deleting old results files.",
+        "B": "A snapshot of the JVM memory used to diagnose memory leaks within a JMeter custom plugin or script.",
+        "C": "A specialized software for drawing graphs.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter CLI', what does the '-e -o' flag combination do?",
+      "options": {
+        "A": "Encrypts the output file.",
+        "B": "Generates a Dashboard Report in HTML format automatically after the test ends.",
+        "C": "Exits the program if an error occurs.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'XPath2 Extractor' is generally slower than 'Regular Expression Extractor' for simple text searches because it requires parsing the entire DOM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which elements are required to perform 'Database Load Testing' with JDBC? (Select all that apply)",
+      "options": {
+        "A": "JDBC Connection Configuration",
+        "B": "JDBC Request Sampler",
+        "C": "The specific JDBC driver JAR file in the /lib folder",
+        "D": "HTTP Header Manager"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Distributed' 'RMI' 'SSL' configuration?",
+      "options": {
+        "A": "Setting the UI to look like a console.",
+        "B": "Ensuring communication between JMeter Master and Slaves is encrypted using a self-generated certificate (rmi_keystore.jks).",
+        "C": "A security scan of the database.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JSR223 Groovy', what is the purpose of 'SampleResult.setSuccessful(false)'?",
+      "options": {
+        "A": "To delete the current sample from the report.",
+        "B": "To manually force a sampler to be marked as 'Failed' based on custom logic in the script.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "To restart the loop."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Throughput Shaping Timer' (via plugins) allows you to define a variable load pattern (RPS) over time using a graphical interface.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Groovy' specific variables available in JMeter? (Select all that apply)",
+      "options": {
+        "A": "OUT (PrintStream)",
+        "B": "SampleResult",
+        "C": "prev (Previous result)",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JMeter' 'Property' 'Passing' via command line (-J)?",
+      "options": {
+        "A": "Giving a computer a physical property.",
+        "B": "Using the -J flag (e.g., -Jthreads=50) to dynamically set JMeter properties without opening the JMX file.",
+        "C": "A security scan for database viruses.",
+        "D": "Increasing the speed of the light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'APDEX' (Application Performance Index) score?",
+      "options": {
+        "A": "A measure of the user's physical height.",
+        "B": "An open standard that measures user satisfaction with the response time of software applications.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Inter-Thread Communication' using the 'Fifo' function (via plugins) allows one Thread Group to consume data produced by another in real-time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Correlation' features in modern JMeter plugins? (Select all that apply)",
+      "options": {
+        "A": "Automatically detecting and extracting dynamic tokens",
+        "B": "Replaying recorded scripts without manual editing",
+        "C": "Suggesting regular expressions for variable extraction",
+        "D": "Deleting all cookies automatically"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JSR223' 'Caching' significance?",
+      "options": {
+        "A": "Caching the user's browser data.",
+        "B": "The ability of JMeter to compile a script once and reuse the binary code for all threads, significantly reducing CPU usage.",
+        "C": "A specialized software for architects.",
+        "D": "A way to count users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Summary Report' vs 'Aggregate Report' memory consumption?",
+      "options": {
+        "A": "They are exactly the same.",
+        "B": "The Summary report consumes significantly less memory because it does not maintain all samples in RAM for calculation.",
+        "C": "Aggregate report is for beginners; Summary for experts.",
+        "D": "Aggregate report is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use the 'JUnit Request' sampler to execute existing Java-based unit tests as a load test scenario.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Advanced' 'JMeter' 'Plugin' categories? (Select all that apply)",
+      "options": {
+        "A": "Custom Thread Groups",
+        "B": "Additional Samplers (UDP, WebSocket)",
+        "C": "Reporting & Analysis tools",
+        "D": "Microsoft Paint extensions"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Distributed' 'JMeter' 'Firewall' 'Complexity'?",
+      "options": {
+        "A": "Building a physical wall around the server.",
+        "B": "The difficulty of configuring multiple RMI and local ports through corporate firewalls for Master-Slave communication.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Weighted Switch Controller' used for?",
+      "options": {
+        "A": "To measure the physical weight of a switch.",
+        "B": "To distribute traffic between different child elements based on a specified probability or weight (e.g., 80% to page A, 20% to page B).",
+        "C": "A specialized software for historians.",
+        "D": "A way to count the number of characters."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Boundary Extractor' is generally faster and easier to configure than the 'Regular Expression Extractor' when extracting simple text between two static strings.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'System' 'Performance' 'Monitoring' tools that can integrate with JMeter? (Select all that apply)",
+      "options": {
+        "A": "PerfMon (via JMeter plugin)",
+        "B": "Prometheus",
+        "C": "AppDynamics",
+        "D": "Instagram Feed"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'BeanShell' 'vs' 'Groovy' in JMeter?",
+      "options": {
+        "A": "They are identical languages.",
+        "B": "BeanShell is older and slower; Groovy is modern, faster, and the recommended standard for scripting.",
+        "C": "Groovy is only for Linux; BeanShell for Windows.",
+        "D": "BeanShell is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JSR223 Groovy', what does 'ctx' represent?",
+      "options": {
+        "A": "The company's tax ID.",
+        "B": "The JMeter Context, providing access to the current thread's state and internal engine data.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: JMeter can perform 'Stress Testing' by increasing the number of virtual users until the system under test crashes or stops responding.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'JMeter' 'Log' 'Levels'? (Select all that apply)",
+      "options": {
+        "A": "FATAL",
+        "B": "ERROR",
+        "C": "INFO",
+        "D": "SARCASM"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Stepping Thread Group' significance?",
+      "options": {
+        "A": "Hiring a person named Stepping.",
+        "B": "A specialized thread group (via plugins) that allows you to increase load in stair-like increments to identify performance thresholds.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Response' 'Time' 'Over' 'Time' graph used for?",
+      "options": {
+        "A": "To see if the developer is getting older.",
+        "B": "To identify performance degradation or memory leaks by tracking how response times change throughout the duration of a test.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Cookie Manager' should be placed at the Test Plan level to ensure cookies are shared across all Thread Groups.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Assertion' types for XML/JSON? (Select all that apply)",
+      "options": {
+        "A": "JSON Assertion",
+        "B": "XML Assertion",
+        "C": "XPath2 Assertion",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JMeter' 'Non-GUI' 'Mode' 'Resource' 'Efficiency'?",
+      "options": {
+        "A": "Hiring a person name Efficiency.",
+        "B": "The fact that running JMeter via command line uses significantly less CPU and RAM, allowing for much higher load generation from a single machine.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'User Experience' 'Simulation' limitation?",
+      "options": {
+        "A": "JMeter does not render HTML or execute JavaScript, meaning it cannot simulate client-side browser processing time.",
+        "B": "JMeter cannot click on buttons.",
+        "C": "JMeter is too slow for real users.",
+        "D": "JMeter only works with text data."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use the 'Include Controller' to run an external .jmx file as part of your current test plan.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'JMeter' 'Reporting' in Jenkins? (Select all that apply)",
+      "options": {
+        "A": "Using the Performance Plugin to visualize results",
+        "B": "Failing the build if error rates exceed a threshold",
+        "C": "Archiving the HTML dashboard report",
+        "D": "Manually printing the results on paper"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'RMI' 'Keystore' 'Generation'?",
+      "options": {
+        "A": "Making a physical key for the office.",
+        "B": "The process of creating a security certificate to allow encrypted communication between Master and Slave nodes.",
+        "C": "A specialized software for historians.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Pre-Processor' 'HTML' 'Link' 'Parser' logic?",
+      "options": {
+        "A": "Parsing the physical paper with a laser.",
+        "B": "Automatically scanning the response of a previous request and populating the next request with a random link found on that page.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Ultimate Thread Group' allows for complex, multi-stage load scenarios including multiple ramp-ups and plateaus in a single visual chart.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'JMeter' 'Variable' 'Concatenation' syntax?",
+      "options": {
+        "A": "${var1}${var2}",
+        "B": "var1 + var2",
+        "C": "concat(var1, var2)",
+        "D": "var1 & var2"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed' 'Testing' 'Result' 'Collection'?",
+      "options": {
+        "A": "Collecting physical papers from the slaves.",
+        "B": "The process where each Slave node sends its individual sample results back to the Master node for centralized aggregation and reporting.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is '90% Line' vs '99% Line' significance?",
+      "options": {
+        "A": "99% line is for experts; 90% for beginners.",
+        "B": "The 99% line captures extreme tail latency (the slowest 1% of users), which is critical for identifying rare but severe performance issues.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'JDBC Request' sampler supports 'Prepared Select Statement' which allows for parameterized SQL queries.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Post-Processor' 'Regex' 'Flags'? (Select all that apply)",
+      "options": {
+        "A": "IgnoreCase",
+        "B": "Multiline",
+        "C": "SingleLine",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JMeter' 'Plugin' 'Manager'?",
+      "options": {
+        "A": "Hiring a person to manage the office.",
+        "B": "A central utility that allows you to easily install, update, and manage additional JMeter features from the plugin community.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is the 'Constant' 'Throughput' 'Timer' 'Limitation'?",
+      "options": {
+        "A": "It only works with numbers.",
+        "B": "It is less accurate if the server response time is longer than the desired interval between requests.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Distributed' testing requires all machines (Master and Slaves) to be running the exact same version of JMeter and Java.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'JSR223' 'Groovy' 'Script' 'File' benefits? (Select all that apply)",
+      "options": {
+        "A": "Easier to maintain in version control",
+        "B": "Allows for script reuse across different test plans",
+        "C": "Automatically compiled and cached by JMeter",
+        "D": "Deleting the database automatically"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JMeter' 'Engine' 'Thread' 'Interrupt'?",
+      "options": {
+        "A": "Interrupting a person while they are speaking.",
+        "B": "A command that signals a thread to stop gracefully at the end of its current sampler.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Throughput' vs 'Bandwidth' in JMeter?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Throughput is requests per second; Bandwidth is bytes per second.",
+        "C": "Bandwidth is for experts; Throughput for beginners.",
+        "D": "Throughput is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'While Controller' executes its children as long as the specified condition evaluates to 'true'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'JMeter' 'Global' 'Configuration' files? (Select all that apply)",
+      "options": {
+        "A": "jmeter.properties",
+        "B": "user.properties",
+        "C": "system.properties",
+        "D": "The company's social media strategy"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'JSR223' 'Assertion'?",
+      "options": {
+        "A": "Asserting your dominance in the office.",
+        "B": "Using a custom script (Groovy) to perform complex validation logic that standard assertions cannot handle.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'JMeter', what is 'User' 'Parameter' 'Iteration' 'Logic'?",
+      "options": {
+        "A": "How often the user drinks water.",
+        "B": "Whether a parameter is updated for every iteration of the thread or shared across the whole thread group.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Non-GUI' mode is the only way to generate the automated HTML dashboard report in modern JMeter.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'JMeter' 'Distributed' 'RMI' 'Registry'?",
+      "options": {
+        "A": "A registry of physical servers in a room.",
+        "B": "The service that allows the Master machine to find and register the available Slave machines.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Hiring a mathematician to count tickets."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'JMeter' 'Script' 'Modularization'?",
+      "options": {
+        "A": "Building a script using actual LEGO bricks.",
+        "B": "Using Test Fragments and Module Controllers to break a large test plan into smaller, reusable components.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    }
+  ]
+}

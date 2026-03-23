@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Penetration Testing", 
+  "questions": [
+    {
+    "question": "What is the primary difference between a 'White Hat' and a 'Black Hat' hacker?",
+    "options": {
+      "A": "White Hats only use Windows; Black Hats only use Linux.",
+      "B": "White Hats have permission and follow ethical guidelines; Black Hats act maliciously without authorization.",
+      "C": "White Hats are always older than Black Hats.",
+      "D": "There is no difference; they are just different names for the same role."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The first phase of a penetration test is typically 'Reconnaissance' (Information Gathering).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is an example of 'Passive Reconnaissance'?",
+    "options": {
+      "A": "Running an aggressive Nmap port scan on the target server.",
+      "B": "Searching for an organization's public information on LinkedIn or Google.",
+      "C": "Attempting to brute-force a login page.",
+      "D": "Sending a phishing email to a high-level executive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Nmap' primarily do in a penetration test?",
+    "options": {
+      "A": "It automatically fixes security bugs in the code.",
+      "B": "It scans networks to discover hosts, open ports, and services.",
+      "C": "It acts as a firewall to block attackers.",
+      "D": "It encrypts the communication between the tester and the target."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common stages of a Penetration Test? (Select all that apply)",
+    "options": {
+      "A": "Reconnaissance",
+      "B": "Exploitation",
+      "C": "Reporting",
+      "D": "Hiring new developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Social Engineering' in the context of pen testing?",
+    "options": {
+      "A": "Coding a social media platform.",
+      "B": "Manipulating individuals into divulging confidential information.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the server's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Grey Box' test is where the tester has partial knowledge of the internal system, such as a set of user credentials.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of test provides the tester with zero prior knowledge of the target's environment or source code?",
+    "options": {
+      "A": "White Box",
+      "B": "Black Box",
+      "C": "Clear Box",
+      "D": "Internal Box"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main goal of the 'Reporting' phase in a professional penetration test?",
+    "options": {
+      "A": "To show off the hacker's skills to the public.",
+      "B": "To provide the client with a detailed list of vulnerabilities and actionable remediation steps.",
+      "C": "To delete all the logs created during the test.",
+      "D": "To increase the total cost of the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Penetration testing is exactly the same as a 'Vulnerability Assessment'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is often used as a 'Proxy' to intercept and modify HTTP requests during a web application pen test?",
+    "options": {
+      "A": "Wireshark",
+      "B": "Burp Suite",
+      "C": "Excel",
+      "D": "PowerPoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Reverse Shell'?",
+    "options": {
+      "A": "A shell that physically turns inside out.",
+      "B": "A connection initiated from a compromised target back to the attacker's machine to provide command-line access.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to backup the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Port' numbers and their services? (Select all that apply)",
+    "options": {
+      "A": "Port 80: HTTP",
+      "B": "Port 443: HTTPS",
+      "C": "Port 22: SSH",
+      "D": "Port 100: Google Chrome"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Lateral Movement' refer to in a network penetration test?",
+    "options": {
+      "A": "Walking sideways in the office.",
+      "B": "The process of an attacker moving from one compromised system to another within the same internal network.",
+      "C": "A security scan that checks for circular dependencies.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Footprinting' is the process of creating a blueprint or map of an organization's network and systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is most likely to be seen if an attacker attempts to access an unauthorized administrative page?",
+    "options": {
+      "A": "200 OK",
+      "B": "403 Forbidden",
+      "C": "404 Not Found",
+      "D": "500 Internal Server Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SQL Injection' (SQLi)?",
+    "options": {
+      "A": "Injecting more RAM into a SQL server.",
+      "B": "A vulnerability where malicious SQL statements are inserted into entry fields for execution.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ethical hacking requires a formal contract and 'Rules of Engagement' (RoE) before any testing begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which term describes the practice of searching for sensitive information in physical trash bins?",
+    "options": {
+      "A": "Phishing",
+      "B": "Dumpster Diving",
+      "C": "Vulnerability Scanning",
+      "D": "Brute Forcing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brute Force' in the context of password cracking?",
+    "options": {
+      "A": "Using physical force to open a laptop.",
+      "B": "Trying every possible combination of characters until the correct password is found.",
+      "C": "Hiring a weightlifter to move servers.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Exploitation' frameworks? (Select all that apply)",
+    "options": {
+      "A": "Metasploit",
+      "B": "BeEF (Browser Exploitation Framework)",
+      "C": "Canvas",
+      "D": "Microsoft Word"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cross-Site Scripting' (XSS) is a type of attack where malicious scripts are injected into trusted websites.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Post-Exploitation'?",
+    "options": {
+      "A": "To fix the bug that was found.",
+      "B": "To determine the value of the compromised machine and maintain control for further testing.",
+      "C": "To apologize to the developer for breaking their code.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CVSS' stand for in vulnerability management?",
+    "options": {
+      "A": "Cloud Virtual Security System",
+      "B": "Common Vulnerability Scoring System",
+      "C": "Central Verified Scanner Standard",
+      "D": "Corporate Variable Security Score"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blue Teaming' refers to the defensive security team that protects an organization from attacks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used for 'Network Sniffing' to capture and analyze packet data?",
+    "options": {
+      "A": "Nmap",
+      "B": "Wireshark",
+      "C": "Nikto",
+      "D": "Hydra"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'OSINT'?",
+    "options": {
+      "A": "Operating System Internal Network Tool.",
+      "B": "Open Source Intelligence—gathering data from publicly available sources.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Payload' is the part of the exploit code that performs the malicious action (like opening a shell).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Web Vulnerabilities' found in the OWASP Top 10? (Select all that apply)",
+    "options": {
+      "A": "Broken Access Control",
+      "B": "Cryptographic Failures",
+      "C": "Injection",
+      "D": "Low Battery Voltage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Rootkit'?",
+    "options": {
+      "A": "A kit for gardening roots in the office.",
+      "B": "A type of malware designed to hide its presence and provide privileged access to a computer.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Pen Testing', what is a 'Bug Bounty'?",
+    "options": {
+      "A": "Hiring a person to kill actual bugs.",
+      "B": "A program where individuals are rewarded for finding and reporting security vulnerabilities.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Privilege Escalation' is the process of moving from a low-level user account to a high-level (Admin/Root) account.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes 'Google Dorking'?",
+    "options": {
+      "A": "Insulting someone on a Google forum.",
+      "B": "Using advanced Google search operators to find sensitive information not intended for the public.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Banner Grabbing'?",
+    "options": {
+      "A": "Grabbing a physical banner from a wall.",
+      "B": "A technique used to gain information about a computer system on a network and the services running on its open ports.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Active Reconnaissance' involves directly interacting with the target system, which carries a higher risk of detection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used for performing 'Web Vulnerability Scanning'?",
+    "options": {
+      "A": "Nikto",
+      "B": "Notepad",
+      "C": "Excel",
+      "D": "Calculator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DNS Enumeration'?",
+    "options": {
+      "A": "Counting the number of DNS servers in the world.",
+      "B": "The process of locating all the DNS servers and their corresponding records for an organization.",
+      "C": "A security scan of the office network.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phishing' is a form of technical exploitation that targets the software's source code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Types' of Penetration Tests? (Select all that apply)",
+    "options": {
+      "A": "Network Pen Test",
+      "B": "Web Application Pen Test",
+      "C": "Physical Pen Test",
+      "D": "Keyboard Latency Test"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is an 'Evil Twin' attack?",
+    "options": {
+      "A": "Fighting your own reflection in a mirror.",
+      "B": "A fraudulent Wi-Fi access point that appears to be legitimate but is set up to eavesdrop on wireless communications.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'VPC'?",
+    "options": {
+      "A": "Virtual Private Cloud.",
+      "B": "Verified Password Creator.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Steganography' is the practice of hiding a secret message within another non-secret message or physical object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Password Cracking' tool? (Select all that apply)",
+    "options": {
+      "A": "John the Ripper",
+      "B": "Hashcat",
+      "C": "Hydra",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Vulnerability Mapping'?",
+    "options": {
+      "A": "Drawing a physical map of the office.",
+      "B": "The process of identifying which vulnerabilities exist on a specific system or network after scanning.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Severity'?",
+    "options": {
+      "A": "The score of the office environment temperature.",
+      "B": "The combination of the likelihood of an exploit and the impact it would have on the business.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Enumeration' is the stage where the tester attempts to find user accounts, network shares, and other resources on a target system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Compliance' in pen testing? (Select all that apply)",
+    "options": {
+      "A": "Meeting requirements for standards like PCI-DSS",
+      "B": "Following HIPAA regulations for healthcare data",
+      "C": "Ensuring all developers wear uniforms",
+      "D": "Validating adherence to SOC2"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cleartext'?",
+    "options": {
+      "A": "Text written in clear ink.",
+      "B": "Unencrypted data that can be read by anyone if intercepted.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Executive Summary'?",
+    "options": {
+      "A": "A report on the CEO's favorite food.",
+      "B": "A high-level, non-technical overview of the test results for management.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'HSTS' is a security mechanism that helps protect websites against man-in-the-middle attacks by forcing HTTPS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Reconnaissance' tools? (Select all that apply)",
+    "options": {
+      "A": "Shodan",
+      "B": "theHarvester",
+      "C": "Maltego",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'War Driving'?",
+    "options": {
+      "A": "Driving a tank into a physical data center.",
+      "B": "Searching for Wi-Fi wireless networks by a person in a moving vehicle.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Air Gapping'?",
+    "options": {
+      "A": "Leaving a gap in the physical air conditioning unit.",
+      "B": "A security measure that ensures a secure computer network is physically isolated from unsecured networks, such as the public internet.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environment' occurs when a pen test is performed on a 'Staging' environment that does not accurately reflect 'Production'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Pen Testing' tools? (Select all that apply)",
+    "options": {
+      "A": "Core Impact",
+      "B": "Canvas",
+      "C": "Metasploit Pro",
+      "D": "A physical robot typing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Brute Force' protection mechanism 'Account Lockout'?",
+    "options": {
+      "A": "Locking the physical office door.",
+      "B": "A security feature that disables a user account after a certain number of failed login attempts.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediation' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to fix a security vulnerability after it is reported.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Social Engineering' pen tests often involve physical attempts to enter a building by tailgating.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Network' security layers? (Select all that apply)",
+    "options": {
+      "A": "Firewall",
+      "B": "IDS/IPS",
+      "C": "VPN",
+      "D": "SQL query font"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Encryption in Transit'?",
+    "options": {
+      "A": "Encrypting data while a person is driving.",
+      "B": "Protecting data as it moves between a client and a server, usually using TLS/SSL.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Remediation Plan'?",
+    "options": {
+      "A": "A plan to move the office to a new city.",
+      "B": "A roadmap for fixing the security issues identified during the penetration test.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when two systems cannot communicate because they do not support the same encryption protocols.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Reconnaissance' techniques? (Select all that apply)",
+    "options": {
+      "A": "Analyzing DNS cache snooping",
+      "B": "Identifying server versions via SSL/TLS handshake",
+      "C": "Searching for leaked credentials on the Dark Web",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Session Management' testing?",
+    "options": {
+      "A": "Testing a person's management skills.",
+      "B": "Verifying that the application properly handles user sessions, including secure cookies and timeouts.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Exposure'?",
+    "options": {
+      "A": "Exposing a person's physical skin to the sun.",
+      "B": "The degree to which an organization is susceptible to potential security threats.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every penetration test should end with a formal 'Debrief' session with the client's technical team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Nmap scan type is known as a 'Half-Open' scan because it never completes the full TCP three-way handshake?",
+    "options": {
+      "A": "TCP Connect Scan (-sT)",
+      "B": "SYN Scan (-sS)",
+      "C": "UDP Scan (-sU)",
+      "D": "FIN Scan (-sF)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Blind SQL Injection' attack, the absence of error messages means that data exfiltration is technically impossible.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are primary functions of the 'Intruder' tool in Burp Suite? (Select all that apply)",
+    "options": {
+      "A": "Automated brute-forcing of login forms",
+      "B": "Fuzzing for hidden parameters and directories",
+      "C": "Scanning for 'SQL Injection' vulnerabilities",
+      "D": "Comparing two physical computer monitors"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Privilege Escalation' via a 'Setuid' (SUID) executable in a Linux environment?",
+    "options": {
+      "A": "Hiring a user to become an administrator.",
+      "B": "Exploiting a file that runs with the permissions of the file owner (often root) rather than the user running it.",
+      "C": "A specialized software for architects.",
+      "D": "Changing the color of the terminal text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In web penetration testing, what does 'IDOR' (Insecure Direct Object Reference) typically allow an attacker to do?",
+    "options": {
+      "A": "Crash the entire web server with one request.",
+      "B": "Access or modify resources (like other users' profiles) by simply changing an identifier in a URL or request parameter.",
+      "C": "Encrypt the database using a secret key.",
+      "D": "Increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Reverse Shell' is generally more effective at bypassing strict inbound firewall rules than a 'Bind Shell'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Burp Suite' tool is used to manually modify and resend individual HTTP requests to test server behavior?",
+    "options": {
+      "A": "Decoder",
+      "B": "Repeater",
+      "C": "Comparer",
+      "D": "Sequencer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical purpose of 'Salt' in the context of password storage?",
+    "options": {
+      "A": "To make the physical server room smell better.",
+      "B": "A unique value added to a password before hashing to prevent 'Rainbow Table' and pre-computation attacks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to backup the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods for 'Data Exfiltration' during a pen test? (Select all that apply)",
+    "options": {
+      "A": "DNS Tunneling",
+      "B": "ICMP (Ping) requests",
+      "C": "HTTP/HTTPS POST requests",
+      "D": "Using a physical vacuum cleaner"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cross-Site Request Forgery' (CSRF) exploits the trust a website has in a user's browser (usually via cookies).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Enumeration' in a network penetration test?",
+    "options": {
+      "A": "Deleting all the user accounts found on a machine.",
+      "B": "The process of extracting detailed information about users, groups, shares, and services from a target system.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to perform 'Directory Brute Forcing' to find hidden files on a web server?",
+    "options": {
+      "A": "Wireshark",
+      "B": "Gobuster (or Dirbuster)",
+      "C": "Nmap",
+      "D": "Photoshop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Server-Side Request Forgery' (SSRF)?",
+    "options": {
+      "A": "Forging a physical signature on a server contract.",
+      "B": "An attack that tricks a server into making requests to an internal or external resource that the attacker cannot reach directly.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'CORS' (Cross-Origin Resource Sharing) configurations can allow an attacker-controlled site to read sensitive data from a vulnerable API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are standard 'Metasploit' modules? (Select all that apply)",
+    "options": {
+      "A": "Exploits",
+      "B": "Payloads",
+      "C": "Post (Post-exploitation)",
+      "D": "Office Furniture"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the role of a 'Meterpreter' shell in a penetration test?",
+    "options": {
+      "A": "To measure the height of the server rack.",
+      "B": "An advanced, dynamically extensible payload that provides complex post-exploitation features like keylogging and file system manipulation.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what does the 'HttpOnly' flag on a cookie prevent?",
+    "options": {
+      "A": "Prevents the cookie from being sent over HTTPS.",
+      "B": "Prevents client-side scripts (like JavaScript) from accessing the cookie, mitigating some XSS risks.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' (DAST) can find vulnerabilities in code that is not currently being executed by the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of 'OS Command Injection'? (Select all that apply)",
+    "options": {
+      "A": "Malicious commands are executed on the server's operating system",
+      "B": "Occurs when an application passes unsafe user input to a system shell",
+      "C": "Can lead to full server compromise",
+      "D": "Only affects Windows computers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Information Leakage' through technical error messages?",
+    "options": {
+      "A": "Leaking physical water on a document.",
+      "B": "When an application returns detailed stack traces or database versions to the end-user, helping an attacker map the environment.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Severity' vs 'Priority'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Severity is the technical impact of a vulnerability; Priority is how quickly the business needs to fix it.",
+      "C": "Severity is for beginners; Priority for experts.",
+      "D": "Priority is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Local File Inclusion' (LFI) allows an attacker to include files from an external server into the local application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Burp Suite' tool is used to analyze the randomness of application session tokens?",
+    "options": {
+      "A": "Repeater",
+      "B": "Sequencer",
+      "C": "Decoder",
+      "D": "Comparer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pass-the-Hash' (PtH) in Windows network security?",
+    "options": {
+      "A": "Passing a physical hash of paper to a developer.",
+      "B": "A technique where an attacker uses a captured password hash to authenticate to a remote server without knowing the plain-text password.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'WAF' bypass testing?",
+    "options": {
+      "A": "Testing if you can walk around a physical wall.",
+      "B": "Attempting to use encoding or specific payloads to sneak malicious requests past a Web Application Firewall.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a server only supports modern TLS 1.3 but the pen tester is using an outdated tool that only supports SSLv3.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Indicator of Compromise' (IoC)? (Select all that apply)",
+    "options": {
+      "A": "Unusual outbound network traffic",
+      "B": "New, unauthorized user accounts",
+      "C": "Unexpected changes in system file checksums",
+      "D": "The office coffee machine running out of milk"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'XXE' (XML External Entity) injection?",
+    "options": {
+      "A": "An extra large XML file.",
+      "B": "A vulnerability where an application's XML parser improperly processes external entities, potentially leading to LFI or SSRF.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Root Cause Analysis' (RCA)?",
+    "options": {
+      "A": "Analyzing the roots of a tree near the office.",
+      "B": "Investigating why a vulnerability exists (e.g., lack of developer training) rather than just what the vulnerability is.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stored XSS' is generally considered more dangerous than 'Reflected XSS' because it does not require a victim to click a specific link.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Management'? (Select all that apply)",
+    "options": {
+      "A": "Continuously scanning for new CVEs",
+      "B": "Prioritizing fixes based on risk scores",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Integrating scan results with Jira"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Steganography' in a pen test scenario?",
+    "options": {
+      "A": "The practice of hiding data within a non-secret file, like an image or audio file.",
+      "B": "Hiring a person to take secret notes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Baseline' comparison?",
+    "options": {
+      "A": "Comparing the current security posture against a set of minimum requirements or industry standards.",
+      "B": "Drawing a line at the base of the computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Privilege Escalation' can be 'Vertical' (gaining more power) or 'Horizontal' (accessing another user's data with same level power).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Post-Exploitation' tasks? (Select all that apply)",
+    "options": {
+      "A": "Dumping password hashes",
+      "B": "Setting up a persistent backdoor",
+      "C": "Pivoting to other machines on the network",
+      "D": "Changing the office wallpaper"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Banner Grabbing' in reconnaissance?",
+    "options": {
+      "A": "Grabbing a physical banner from a wall.",
+      "B": "Reading the text sent by a service (like SSH or Apache) to identify its version and operating system.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'IP' 'Rotation' used for by a pen tester?",
+    "options": {
+      "A": "Rotating the computer's physical orientation.",
+      "B": "Switching outgoing IP addresses to avoid detection or rate-limiting by a WAF or IDS.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in pen testing refer to the friction between 'Red Teams' (Attackers) and 'Blue Teams' (Defenders) when communication is poor.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Risks'? (Select all that apply)",
+    "options": {
+      "A": "Lack of Multi-Factor Authentication (MFA)",
+      "B": "Weak password complexity rules",
+      "C": "Hardcoded credentials in internal scripts",
+      "D": "The color of the CEO's tie"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Payload' 'Encoding'?",
+    "options": {
+      "A": "Writing a letter in code.",
+      "B": "Modifying exploit code (e.g., using Base64 or URL encoding) to bypass input filters and security scanners.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Age'?",
+    "options": {
+      "A": "How long a specific vulnerability has been known to the security community.",
+      "B": "The age of the developer who introduced the bug.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environment' security occurs when the 'Staging' environment has no firewall while 'Production' is heavily protected.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Payload' 'Generation'? (Select all that apply)",
+    "options": {
+      "A": "Using MSFvenom to create custom malware",
+      "B": "Using tools to automatically bypass antivirus signatures",
+      "C": "Guaranteed to work 100% of the time",
+      "D": "Creating reverse shells for different architectures"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Lateral Movement'?",
+    "options": {
+      "A": "Moving sideways in the data center.",
+      "B": "The process an attacker uses, after initial compromise, to move through the network to reach high-value targets.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Density' in security?",
+    "options": {
+      "A": "The physical weight of the pen test report.",
+      "B": "The number of vulnerabilities found per 1,000 lines of code or per application module.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' refers to a server storing session tokens in unencrypted local logs instead of a secure vault.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' security 'Misconfigurations'? (Select all that apply)",
+    "options": {
+      "A": "Publicly accessible S3 buckets",
+      "B": "Unrestricted IAM permissions",
+      "C": "Leaving default admin ports (like 22) open to the world",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Session' 'Hijacking' 'Bypass' via 'Cross-Site Scripting'?",
+    "options": {
+      "A": "Using XSS to steal an active user's session cookie.",
+      "B": "Hijacking a person named Session.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Incident' 'Isolation'?",
+    "options": {
+      "A": "Disconnecting a compromised machine from the network to prevent further spread of an attack.",
+      "B": "Isolating a developer in a room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in an exploit occur when a payload designed for Windows 7 is attempted against a Windows 11 machine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Scanning' 'Limitations'? (Select all that apply)",
+    "options": {
+      "A": "Can miss business logic vulnerabilities",
+      "B": "Often results in high false-positive rates",
+      "C": "Replacing the need for a human pen tester entirely",
+      "D": "Difficulty in navigating complex authentication flows"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Subdomain' 'Takeover' 'Verification'?",
+    "options": {
+      "A": "Verifying that a takeover of a physical domain is complete.",
+      "B": "Checking if a DNS record points to a decommissioned cloud service that an attacker can re-register.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) critical vulnerabilities?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a critical vulnerability is reported until a verified fix is deployed.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' in a pen test refers to a tool that works for one server but crashes the network when scanning 1,000 servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Burp Suite' 'Extensions'? (Select all that apply)",
+    "options": {
+      "A": "Authorize (for IDOR testing)",
+      "B": "Turbo Intruder",
+      "C": "Logger++",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Credential' 'Stuffing' efficiency?",
+    "options": {
+      "A": "The ratio of successful logins using stolen credentials.",
+      "B": "Stuffing credentials into a physical box.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Threat' 'Profiling'?",
+    "options": {
+      "A": "Identifying the specific types of attackers likely to target an organization (e.g., script kiddies, state actors).",
+      "B": "Profiling a person who feels threatened.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' in security occurs when 'Prod' logs do not contain enough information to investigate a real-world hack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Pen Testing' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Defining clear scope and RoE",
+      "B": "Involving stakeholders in the debrief",
+      "C": "Sharing the pen test password on Slack",
+      "D": "Maintaining a historical record of vulnerabilities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Root' 'Cause' 'Remediation'?",
+    "options": {
+      "A": "Remediating a person name Root.",
+      "B": "Fixing the underlying software development process flaw that allowed a bug to occur, rather than just patching the bug.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Rate' significance?",
+    "options": {
+      "A": "The rate of people being happy in the office.",
+      "B": "A high rate indicates that security tools are providing noisy, inaccurate data that wastes the security team's time.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the pen test contract requires a 24-hour fix for 'Low' severity bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Phishing' 'Simulations'? (Select all that apply)",
+    "options": {
+      "A": "Cloning a company login page",
+      "B": "Sending SMS-based phishing (Smishing)",
+      "C": "Sending a physical letter to the CEO",
+      "D": "Simulating voice-based phishing (Vishing)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Evasion' 'Technique' in exploitation?",
+    "options": {
+      "A": "Evading a physical person in the office.",
+      "B": "Methods used by attackers to bypass security detection systems like Firewalls or Antivirus.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Executive' 'Summary' 'Clarity'?",
+    "options": {
+      "A": "The clarity of the CEO's favorite food.",
+      "B": "Ensuring the top-level report avoids technical jargon so business leaders can understand the organizational risk.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Observability' in a pen test refers to a target system that has alerts but no one is monitoring the dashboard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "During a Red Team engagement, an attacker utilizes 'Domain Fronting'. What is the primary technical objective of this technique?",
+    "options": {
+      "A": "To accelerate the brute-forcing of Active Directory credentials.",
+      "B": "To hide the true destination of Command and Control (C2) traffic by using a high-reputation Content Delivery Network (CDN) as a proxy.",
+      "C": "To physically bypass the front desk security of an office building.",
+      "D": "To perform a mass de-authentication attack on the target's wireless network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Blind OOB (Out-of-Band) XXE' attack, an attacker can exfiltrate sensitive files even if the application does not return an XML response by forcing the server to make a DNS or HTTP request to an external attacker-controlled server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Advanced' Post-Exploitation techniques used for credential harvesting in Windows environments? (Select all that apply)",
+    "options": {
+      "A": "DCSync attacks to pull password hashes from a Domain Controller",
+      "B": "LSASS memory dumping via tools like Mimikatz",
+      "C": "Exploiting 'Unquoted Service Paths' for local privilege escalation",
+      "D": "Deleting the 'Recycle Bin' to find deleted passwords"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical significance of a 'Living off the Land' (LotL) attack strategy?",
+    "options": {
+      "A": "It involves hackers using solar power to run their laptops.",
+      "B": "It utilizes legitimate system administration tools (like PowerShell, WMI, or Certutil) already present on the target OS to execute malicious actions, making detection harder.",
+      "C": "It is a specialized software for architects to design eco-friendly buildings.",
+      "D": "It focuses solely on attacking agricultural technology companies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Application' hacking, what is 'Prototype Pollution' in a Node.js environment?",
+    "options": {
+      "A": "Polluting the physical environment with old computer prototypes.",
+      "B": "A vulnerability where an attacker can modify the base 'Object' prototype, leading to property injection that can result in logic bypass or RCE.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the frame rate of a 3D rendering."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Heap Spraying' is a technique used to facilitate the execution of arbitrary code by 'spraying' large amounts of shellcode into the application's memory to increase the probability of a jump instruction hitting the payload.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Network' protocol exploitation is used to intercept traffic by tricking machines on a local network into thinking the attacker's machine is the gateway?",
+    "options": {
+      "A": "ARP Spoofing (or ARP Poisoning)",
+      "B": "DNS Filtering",
+      "C": "BGP Hijacking",
+      "D": "ICMP Flood"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical challenge when attempting a 'Buffer Overflow' exploit on a modern 64-bit OS with 'ASLR' enabled?",
+    "options": {
+      "A": "The lack of available RAM.",
+      "B": "Address Space Layout Randomization (ASLR) makes the memory addresses of the stack and libraries unpredictable, necessitating a secondary information leak to find the payload.",
+      "C": "The physical speed of the keyboard being too slow.",
+      "D": "Compilers automatically deleting any code that contains a buffer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'C2' (Command and Control) frameworks frequently used by advanced testers? (Select all that apply)",
+    "options": {
+      "A": "Cobalt Strike",
+      "B": "Empire (PowerShell Empire)",
+      "C": "Sliver",
+      "D": "Microsoft PowerPoint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Clock' 'Drift' in a distributed environment can be exploited to bypass time-based One-Time Passwords (TOTP) if the server's time-sync is significantly out of alignment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Golden Ticket' exploitation in an Active Directory environment?",
+    "options": {
+      "A": "A physical ticket to enter a high-security vault.",
+      "B": "Forging a Kerberos Ticket Granting Ticket (TGT) after compromising the KRBTGT account, giving an attacker near-permanent persistence as a Domain Admin.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Egress Filtering' and why does it impact a pen test?",
+    "options": {
+      "A": "Filtering the air inside the server room.",
+      "B": "Security rules that restrict outgoing traffic from an internal network, making it difficult for an attacker to establish a reverse shell or exfiltrate data.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Advanced' XSS bypass technique involves using the browser's own DOM-parsing logic to execute scripts that standard regex filters miss?",
+    "options": {
+      "A": "DOM Purify",
+      "B": "mXSS (Mutation XSS)",
+      "C": "Stored XSS",
+      "D": "Reflected XSS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Contexts' occur when an application component assumes a data object is safe because it passed security checks in a different, high-trust component, leading to exploitation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Red Teaming' vs 'Penetration Testing'? (Select all that apply)",
+    "options": {
+      "A": "Red Teaming tests the organization's 'Detection and Response' capabilities",
+      "B": "Penetration Testing focuses on 'Identifying all Vulnerabilities' within a scope",
+      "C": "Red Teaming often involves physical and social engineering vectors",
+      "D": "Penetration Testing is 100% automated"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Beaconing' in the context of C2 traffic?",
+    "options": {
+      "A": "Shining a physical light from the server room.",
+      "B": "The periodic, timed communication sent from an infected machine to a C2 server to check for new commands.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Aggregation' 'Attack' 'Chain'?",
+    "options": {
+      "A": "Linking multiple low-severity vulnerabilities together to demonstrate a high-severity exploit path (e.g., Info Leak -> IDOR -> RCE).",
+      "B": "A chain made of physical locks.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'API' 'Contracts' occur when an attacker exploits an undocumented endpoint that was left active for legacy support but lacks modern security controls.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Exfiltration' 'Detection' challenges? (Select all that apply)",
+    "options": {
+      "A": "Identifying sensitive data hidden in encrypted HTTPS streams",
+      "B": "Distinguishing between legitimate heavy traffic and data theft",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Detecting low-and-slow exfiltration over DNS"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Binary' 'Exploitation' 'ROP' (Return Oriented Programming)?",
+    "options": {
+      "A": "Programming with actual physical ropes.",
+      "B": "An advanced exploit technique that chains together small snippets of existing executable code (gadgets) to bypass Data Execution Prevention (DEP).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Compromise' (MTTC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the start of an engagement until the first critical objective or administrative access is achieved.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' refers to a scenario where application logs are stored on a server that the attacker has already compromised, allowing them to delete the evidence.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Network' 'Pivoting' tools? (Select all that apply)",
+    "options": {
+      "A": "Chisel",
+      "B": "ProxyChains",
+      "C": "Ligolo-ng",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Credential' 'Dumping' from 'NTDS.dit'?",
+    "options": {
+      "A": "Dumping physical papers into a trash can.",
+      "B": "Extracting the Active Directory database file to crack all user and service account hashes offline.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Statistical' 'Significance' in a Phishing test?",
+    "options": {
+      "A": "Calculating if the results are due to the security training or just random chance.",
+      "B": "Counting the number of fish in the office tank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in exploitation refer to attempting a modern HTTP/3 exploit against a legacy server that only supports HTTP/1.0.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response' 'Bypass'? (Select all that apply)",
+    "options": {
+      "A": "Executing actions during 'quiet' hours to avoid human review",
+      "B": "Slow-walking automated scans to stay under threshold alerts",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Using 'Domain Fronting' to mask malicious domains"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory' 'Forensics' in a pen test post-exploitation phase?",
+    "options": {
+      "A": "Analyzing a person's physical memory.",
+      "B": "Analyzing a system's RAM to find hidden malware, injected code, or unencrypted passwords that are not present on the disk.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Threat' 'Actor' 'Attribution'?",
+    "options": {
+      "A": "Identifying the specific group or individual responsible for an attack based on their TTPs (Tactics, Techniques, and Procedures).",
+      "B": "Giving an award to a person named Actor.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scale' in a Red Team engagement refers to a payload that works on a single VM but fails in a cluster because it doesn't account for load balancer session persistence.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Evasion' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Reflective DLL injection",
+      "B": "Process Hollowing",
+      "C": "API Unhooking",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Supply' 'Chain' 'Compromise'?",
+    "options": {
+      "A": "Compromising a physical chain for a supply boat.",
+      "B": "An attack that targets a trusted third-party vendor or library used by the primary target to gain entry into their environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Detections' (MTBD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a red team can operate within an environment before being identified by the SOC.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' in a cloud environment occur when a test 'Service Account' is accidentally granted 'Owner' rights in the production subscription.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Exploit' 'Reliability'? (Select all that apply)",
+    "options": {
+      "A": "The probability that an exploit will successfully trigger without crashing the target service",
+      "B": "Using 'VPC' for exploit delivery",
+      "C": "Checking for specific service 'offsets' before launching a memory exploit",
+      "D": "The frame rate of the exploit code"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Server-Side' 'Template' 'Injection' (SSTI)?",
+    "options": {
+      "A": "Injecting physical templates into a server rack.",
+      "B": "A vulnerability where an attacker can inject malicious code into a web template, which is then executed on the server, often leading to RCE.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Root' 'Cause' 'Strategic' 'Analysis'?",
+    "options": {
+      "A": "Analyzing why the company's culture allowed security to be ignored during the development lifecycle.",
+      "B": "Analyzing the roots of a physical tree.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the business expects a Red Team to find 'Bugs' while the team is focused on 'Access Objectives'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Identity' 'Attacks'? (Select all that apply)",
+    "options": {
+      "A": "Pass-the-Ticket (PtT) using Kerberos",
+      "B": "Token Impersonation",
+      "C": "Silver Ticket creation",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'DNS' 'Rebinding'?",
+    "options": {
+      "A": "Rebinding a physical book of DNS names.",
+      "B": "A technique used to bypass a browser's Same-Origin Policy (SOP) to interact with internal services by rapidly changing DNS records.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Surface' 'Convergence'?",
+    "options": {
+      "A": "When a person name Convergence attacks.",
+      "B": "The point at which an organization's physical, human, and digital security weaknesses overlap to create a single high-risk vulnerability.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in Red Teaming occur when the 'Blue Team' (Defenders) takes the attack personally and stops sharing technical information during the debrief.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Aggregation' 'Limitations'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in identifying complex chain-of-exploit logic",
+      "B": "Over-reliance on CVSS scores which lack business context",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Tendency to ignore low-severity findings that are critical pivot points"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Isolation' 'Bypass' in a VPC?",
+    "options": {
+      "A": "Walking through a physical wall.",
+      "B": "Using misconfigured peering, VPNs, or transit gateways to move between isolated network segments.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) in a Red Team scenario?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average time it takes for the defensive team to identify, isolate, and lock out the red team actors after detection.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in red teaming refer to using HTTP/1.1 for C2 traffic because the target's inspection tools only monitor HTTPS/TLS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'C2' 'Evasion' 'Techniques'? (Select all that apply)",
+    "options": {
+      "A": "Randomizing jitter and sleep intervals",
+      "B": "Using reputable domain categorization (Domain Recycling)",
+      "C": "Obfuscating the agent in memory",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Kernel-mode' 'Privilege' 'Escalation'?",
+    "options": {
+      "A": "Being promoted to manager of the kernel.",
+      "B": "Exploiting vulnerabilities in the operating system's kernel to gain the highest level of system control, effectively bypassing all user-mode security.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Governance' 'Audit'?",
+    "options": {
+      "A": "Evaluating if the organizational leadership is actually following their own security policies and investing in necessary defenses.",
+      "B": "Auditing a person name Governance.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a C2 agent occur when the agent is compiled for a different .NET version than what is installed on the target workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Threat' 'Modeling' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Integrating modeling into the design phase of every feature",
+      "B": "Updating models based on actual pen test findings",
+      "C": "Guaranteed to replace all human architects",
+      "D": "Using standardized taxonomies like STRIDE"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Lateral' 'Movement' 'Significance' in a Kill Chain?",
+    "options": {
+      "A": "Moving sideways in a physical chain.",
+      "B": "The stage where the attacker expands their reach to find the actual 'Crown Jewels' (Target Data) after initial entry.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Complexity' (AC) in CVSS?",
+    "options": {
+      "A": "The physical complexity of a weightlifter.",
+      "B": "A metric representing the conditions beyond the attacker's control that must exist in order to exploit the vulnerability.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in pen testing occur when the remediation timeline is based on 'Bug Discovery' rather than 'Exploitation Probability'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant generation of vulnerability executive summaries",
+      "B": "Standardized formatting across all tests",
+      "C": "Guaranteed to find all logical bugs",
+      "D": "Reduction in administrative manual effort for testers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'C2' 'Channel' 'Steganography'?",
+    "options": {
+      "A": "Hiding C2 commands within innocuous files like pixel data of images or headers of common requests to avoid DPI detection.",
+      "B": "Hiding a physical remote control in a book.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' (MTRS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a major security breach until all affected systems are verified clean and the vulnerability is completely patched.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in a pen test refers to a solution that requires high-performance GPUs for password cracking while the tester only has a basic laptop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Levels'? (Select all that apply)",
+    "options": {
+      "A": "Technical Report (Detailed logs/payloads)",
+      "B": "Management Report (Risk levels/Fix timelines)",
+      "C": "Executive Report (Total risk posture/ROI)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Exfiltration' 'Throttling'?",
+    "options": {
+      "A": "Throttling a person name Data.",
+      "B": "Limiting the speed of data theft to avoid triggering network anomaly alerts (e.g., sending 1MB every 10 minutes instead of 1GB at once).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Path' 'Analysis'?",
+    "options": {
+      "A": "Visualizing the step-by-step path an attacker took to reach a critical objective.",
+      "B": "Analyzing a physical path to the office.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Test' 'Data' in a pen test refers to using 2024 exploits against a system that hasn't been updated since 2010.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Phishing' 'Detection' 'Bypass'? (Select all that apply)",
+    "options": {
+      "A": "Using 'CAPTCHA' on a phishing landing page to block automated scanners",
+      "B": "Detecting scanner IP ranges and serving 'clean' content to them",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Using shortened URLs that redirect through high-reputation domains"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' in exploit development?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a payload in a separate, hidden thread or process to maintain persistence while the main application continues to function normally.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in a pen test?",
+    "options": {
+      "A": "Traceability of a person name Requirement.",
+      "B": "Ensuring that every vulnerability found is mapped back to a specific failure in a security requirement or organizational policy.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Infrastructure' in red teaming occurs when the C2 redirectors are hosted on IPs that are already blacklisted by the target's threat intelligence provider.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced' 'Binary' 'Exploitation' 'Protections'? (Select all that apply)",
+    "options": {
+      "A": "Control Flow Guard (CFG)",
+      "B": "Stack Canaries",
+      "C": "No-Execute (NX) bit",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Social' 'Engineering' 'Payload' 'Success' 'Rate'?",
+    "options": {
+      "A": "The ratio of successful people in the office.",
+      "B": "The percentage of targeted employees who actually clicked a link or executed a malicious attachment during a simulation.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

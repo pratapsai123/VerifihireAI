@@ -27,7 +27,10 @@
         "C": "/",
         "D": ".."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The /etc directory typically contains binary executable files.",
@@ -55,7 +58,10 @@
         "C": "list",
         "D": "show"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In Linux, everything is treated as a file, including hardware devices.",
@@ -119,7 +125,10 @@
         "C": "755",
         "D": "octal"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command provides a real-time view of running processes?",
@@ -147,7 +156,10 @@
         "C": "Using stop command",
         "D": "Using fg command"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the PID of the first process started by the Linux kernel?",
@@ -185,7 +197,10 @@
         "C": "stop-name",
         "D": "terminate"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to check the IP address of network interfaces on modern systems?",
@@ -213,7 +228,10 @@
         "C": "get",
         "D": "download"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to search for a string within a file?",
@@ -259,7 +277,10 @@
         "C": "chown +x myscript.sh",
         "D": "bash myscript.sh"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The command export VARNAME=value makes the variable available to child processes and subshells.",
@@ -287,7 +308,10 @@
         "C": "==",
         "D": ">"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The special variable $? stores the exit status of the last executed command, where 0 indicates success.",
@@ -323,7 +347,10 @@
         "C": "ping",
         "D": "traceroute"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which protocol does the 'ping' command use to check network connectivity?",
@@ -351,7 +378,10 @@
         "C": "NTFS",
         "D": "HFS"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The /etc/fstab file contains information about which filesystems are mounted automatically at boot.",
@@ -415,7 +445,10 @@
         "C": "clock",
         "D": "time"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The /boot directory contains the Linux kernel and bootloader files.",
@@ -461,7 +494,10 @@
         "C": "rdp",
         "D": "telnet"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to display the current system uptime and load average?",
@@ -489,7 +525,10 @@
         "C": "Permissions",
         "D": "Timestamp"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 's' in a file permission (SUID) allow?",
@@ -527,7 +566,10 @@
         "C": "The letter x",
         "D": "The number 4"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: If a file has permissions 000, even the root user cannot read it without changing permissions first.",
@@ -555,7 +597,10 @@
         "C": "user",
         "D": "showme"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which file stores the encrypted passwords for users on a Linux system?",
@@ -593,7 +638,10 @@
         "C": "It can cross different file systems.",
         "D": "It is essentially a shortcut or pointer to a filename."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The visudo command is the safest way to edit the /etc/sudoers file because it checks for syntax errors.",
@@ -639,7 +687,10 @@
         "C": "kernel -v",
         "D": "ver"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In the top command, the 'RES' column represents the non-swapped physical memory a task is using.",
@@ -693,7 +744,10 @@
         "C": "/bin",
         "D": "/etc"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The command pstree shows running processes as a tree, displaying parent-child relationships visually.",
@@ -775,7 +829,10 @@
         "C": "notepad",
         "D": "word"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to compress files into a .tar.gz archive?",
@@ -803,7 +860,10 @@
         "C": "install-pkg",
         "D": "exe"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is a 'Shebang' in a Linux script?",
@@ -913,7 +973,10 @@
         "C": "C-Plus",
         "D": "HyperShell"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to find files that have been modified within the last 24 hours?",
@@ -941,7 +1004,10 @@
         "C": "rdp",
         "D": "telnet"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command provides a real-time view of running processes with CPU and Memory usage?",
@@ -997,7 +1063,10 @@
         "C": "ip link",
         "D": "hostname"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the '/etc/resolv.conf' file in a Linux system?",
@@ -1025,7 +1094,10 @@
         "C": "1>",
         "D": "&>"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'nice' command do in Linux process management?",
@@ -1063,7 +1135,10 @@
         "C": "touch",
         "D": "mkdir"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the function of the 'umask' value in a Linux environment?",
@@ -1091,7 +1166,10 @@
         "C": "&",
         "D": "|"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the 'sticky bit' on a directory like '/tmp'?",
@@ -1129,7 +1207,10 @@
         "C": "SIGSTOP",
         "D": "SIGDEAD"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the role of the 'init' or 'systemd' process in Linux?",
@@ -1185,7 +1266,10 @@
         "C": "kerninit",
         "D": "sysctl"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the 'Swap' partition in a Linux system?",
@@ -1213,7 +1297,10 @@
         "C": "/etc/network/interfaces",
         "D": "/etc/iptables.conf"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the command 'top -p [PID]' do?",
@@ -1251,7 +1338,10 @@
         "C": "SIGKILL (9)",
         "D": "SIGWAIT"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the result of the command 'tail -n 20 access.log'?",
@@ -1279,7 +1369,10 @@
         "C": "yum",
         "D": "dnf"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the 'chroot' command?",
@@ -1307,7 +1400,10 @@
         "C": "ps -ef",
         "D": "df -h"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'df -h' command show?",
@@ -1345,7 +1441,10 @@
         "C": "rlogin",
         "D": "putty (client side)"
       },
-      "answer": "A, D"
+      "answer": [
+        "A",
+        "D"
+      ]
     },
     {
       "question": "What does the 'uptime' command provide?",
@@ -1391,7 +1490,10 @@
         "C": ";",
         "D": "--"
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "What is the function of the 'umask 022' command?",
@@ -1429,7 +1531,10 @@
         "C": "Hyper Link",
         "D": "Static Link"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the primary difference between 'top' and 'htop'?",
@@ -1467,7 +1572,10 @@
         "C": "lsdev",
         "D": "lshw"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the 'LD_LIBRARY_PATH' environment variable?",
@@ -1505,7 +1613,10 @@
         "C": "Using the multi-output flag",
         "D": "Using | tee -a"
       },
-      "answer": "A, D"
+      "answer": [
+        "A",
+        "D"
+      ]
     },
     {
       "question": "In a Bash script, what does the 'shift' command do?",
@@ -1523,7 +1634,7 @@
         "A": "True",
         "B": "False"
       },
-      "answer": "B (This is true for GID/setgid, not SUID)"
+      "answer": "B"
     },
     {
       "question": "Which command is used to find the Inode number of a specific file?",
@@ -1561,7 +1672,10 @@
         "C": "SIGKILL",
         "D": "SIGSTOP"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'strace' utility primarily track?",
@@ -1599,7 +1713,10 @@
         "C": "It stores data permanently on the disk.",
         "D": "It is faster than a standard pipe (|)."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of the 'sysctl' command?",
@@ -1665,7 +1782,10 @@
         "C": "Running 'alias name=command' in the terminal.",
         "D": "Adding it to /tmp/aliases"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which specific file contains information about currently supported filesystems by the running kernel?",
@@ -1693,7 +1813,10 @@
         "C": "SIGSTOP",
         "D": "SIGINT"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'strace' command allow a developer to do?",
@@ -1731,7 +1854,10 @@
         "C": "1>",
         "D": ">>"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The 'set -e' command in a script causes it to exit immediately if any command returns a non-zero exit status.",
@@ -1759,7 +1885,10 @@
         "C": "/home",
         "D": "/usr"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which command is used to check the available entropy on a system (crucial for random number generation)?",
@@ -1797,7 +1926,10 @@
         "C": "A network bridge.",
         "D": "A dedicated kernel."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of 'sysctl'?",
@@ -1835,7 +1967,10 @@
         "C": "fdisk",
         "D": "mkfs"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'sticky bit' do on a shared directory?",

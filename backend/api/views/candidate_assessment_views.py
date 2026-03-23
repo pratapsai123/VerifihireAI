@@ -1,4 +1,4 @@
-from ._imports import *
+from .._imports import *
 
 
 @csrf_exempt
@@ -30,6 +30,20 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
             assessment = Assessment.objects.get(id=assessment_id)
         except Assessment.DoesNotExist:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # --- RBAC ownership check ---
+        # Prevent users from inviting candidates to assessments outside their invite tree.
+        # This blocks Admin A from using Admin B's assessment_id even if they share a company.
+        req_user_profile = getattr(request.user, 'profile', None)
+        if req_user_profile:
+            scoped_ids = get_scoped_user_ids(req_user_profile)
+            if scoped_ids is not None:
+                # scoped_ids = None means platform superadmin (can access all)
+                if assessment.user_profile_id not in scoped_ids:
+                    return Response(
+                        {'error': 'You do not have permission to invite candidates to this assessment.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
 
         data = request.data or {}
         candidates = data.get('candidates', [])
@@ -1827,14 +1841,23 @@ def candidates_overview_view(request):
         # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
         if not assessment_id:
             try:
-                # SECURITY FIX: Scope AI candidates to the requester's company only
-                # The `company` FK already exists on Candidate model (migration 0020)
-                if company_id:
+                # RBAC: Scope AI candidates to the requester's invite TREE (not just company).
+                # This ensures Admin A cannot see Admin B's AI candidates even within the same company.
+                if scoped_ids is not None:
+                    # Tree-scoped: filter by the user_profile FK (who uploaded the candidate)
                     ai_qs = Candidate.objects.filter(
-                        company_id=company_id
+                        user_profile_id__in=scoped_ids,
+                        is_deleted=False,
+                    ).order_by('-submission_date')
+                elif company_id:
+                    # Platform superadmin: filter by company (sees all)
+                    ai_qs = Candidate.objects.filter(
+                        company_id=company_id,
+                        is_deleted=False,
                     ).order_by('-submission_date')
                 else:
                     ai_qs = Candidate.objects.none()
+
                 if start_date:
                     ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
                 if end_date:

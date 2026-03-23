@@ -464,7 +464,7 @@
         "C": "O(log n)",
         "D": "O(n^2)"
       },
-      "answer": "O(1)"
+      "answer": "B"
     },
     {
       "question": "Which TWO are properties of a 'B-Tree'?",

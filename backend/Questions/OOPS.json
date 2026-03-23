@@ -27,7 +27,10 @@
         "C": "Syntax",
         "D": "Compiler"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Procedural programming focuses on functions, while OOP focuses on data and objects.",
@@ -55,7 +58,10 @@
         "C": "Slower execution speed",
         "D": "Higher memory consumption"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In OOP, data is generally more secure because it can be hidden from the outside world.",
@@ -83,7 +89,10 @@
         "C": "DO-A",
         "D": "WAS-A"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Static members belong to the class, not to a specific object instance.",
@@ -119,7 +128,10 @@
         "C": "Headers",
         "D": "Footers"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The protected modifier allows access within the same package and by subclasses.",
@@ -147,7 +159,10 @@
         "C": "It speeds up the CPU.",
         "D": "It reduces file size."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Encapsulation helps in achieving 'Loose Coupling.'",
@@ -175,7 +190,10 @@
         "C": "hidden",
         "D": "global"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A setter method usually has a void return type.",
@@ -211,7 +229,10 @@
         "C": "Multiple Inheritance",
         "D": "Hybrid Inheritance"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An abstract class can be instantiated using the 'new' keyword.",
@@ -239,7 +260,10 @@
         "C": "They can store state in instance variables.",
         "D": "They can be instantiated directly."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The 'super' keyword calls the parent class's constructor.",
@@ -267,7 +291,10 @@
         "C": "Abstract classes can have non-abstract methods.",
         "D": "Abstract classes cannot have variables."
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "True or False: All methods in an interface are public by default.",
@@ -303,7 +330,10 @@
         "C": "Static methods",
         "D": "Different return types"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Method Overloading requires parameters to be different.",
@@ -331,7 +361,10 @@
         "C": "Encapsulation",
         "D": "Serialization"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Static methods can be overridden.",
@@ -359,7 +392,10 @@
         "C": "Memory speed",
         "D": "CPU cooling"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Private methods can be overridden.",
@@ -395,7 +431,10 @@
         "C": "They can be inherited.",
         "D": "They must be static."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Java provides a default constructor if none are defined.",
@@ -423,7 +462,10 @@
         "C": "Public",
         "D": "Private"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Destructors are used to free memory in C++, while Java uses Garbage Collection.",
@@ -451,7 +493,10 @@
         "C": "Inherited",
         "D": "Dynamic"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A class can have multiple constructors with different parameters.",
@@ -487,7 +532,10 @@
         "C": "Concrete Classes",
         "D": "Global Variables"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Abstract methods must be implemented by the first concrete subclass.",
@@ -515,7 +563,10 @@
         "C": "They cannot have constructors.",
         "D": "They can be static."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An abstract class must contain at least one abstract method.",
@@ -543,7 +594,10 @@
         "C": "Increased execution speed",
         "D": "Direct memory access"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An interface can extend another interface.",
@@ -579,7 +633,10 @@
         "C": "Generalization",
         "D": "Realization"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Inheritance is better than composition in all scenarios.",
@@ -607,7 +664,10 @@
         "C": "Automatic code generation.",
         "D": "Access to private parent data."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: IS-A relationship is achieved through Inheritance.",
@@ -635,7 +695,10 @@
         "C": "Tight Coupling",
         "D": "Low Cohesion"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: High Cohesion means a class does one thing well.",
@@ -671,7 +734,10 @@
         "C": "!=",
         "D": ".compare()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The finalize() method is called by the Garbage Collector before an object is destroyed.",
@@ -699,7 +765,10 @@
         "C": "External Class",
         "D": "Global Class"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An inner class can access private members of its outer class.",
@@ -727,7 +796,10 @@
         "C": "They run for every object created.",
         "D": "They are used for instance variables."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: You can overload the main method in Java.",
@@ -763,7 +835,10 @@
         "C": "length()",
         "D": "print()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Overloaded methods must have the same return type.",
@@ -791,7 +866,10 @@
         "C": "int",
         "D": "char"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Downcasting must be done explicitly in Java.",
@@ -819,7 +897,10 @@
         "C": "Encapsulation",
         "D": "Inheritance"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An abstract class can have a main method.",
@@ -855,7 +936,10 @@
         "C": "Stored on the Stack.",
         "D": "Created every time an object is made."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Inheritance represents a 'Weak' relationship.",
@@ -883,7 +967,10 @@
         "C": "It can be static.",
         "D": "It can be overridden."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A constructor can call another constructor using super() or this().",
@@ -911,7 +998,10 @@
         "C": "Inheritance",
         "D": "Encapsulation"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Java supports Multiple Inheritance through Interfaces.",
@@ -947,7 +1037,10 @@
         "C": "this",
         "D": "new"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Static methods can access instance variables.",
@@ -975,7 +1068,10 @@
         "C": "Must have only abstract methods.",
         "D": "Must be static."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Method overloading happens within the same class.",
@@ -1003,7 +1099,10 @@
         "C": "private",
         "D": "public"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Every class in Java inherits from the Object class.",
@@ -1039,7 +1138,10 @@
         "C": "Faster execution",
         "D": "Less memory usage"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An abstract class can have non-abstract methods.",
@@ -1067,7 +1169,10 @@
         "C": "Static class",
         "D": "Final class"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Final methods can be overloaded.",
@@ -1095,7 +1200,10 @@
         "C": "Design-time",
         "D": "Logic-time"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A subclass can restrict the access of an overridden method.",
@@ -1131,7 +1239,10 @@
         "C": "They must be public.",
         "D": "They can be static."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: String constant pool is part of the Heap.",
@@ -1167,7 +1278,10 @@
         "C": "sleep()",
         "D": "start()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Interface variables are static and final by default.",
@@ -1221,7 +1335,10 @@
         "C": "Different return types (only).",
         "D": "Different access modifiers (only)."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Abstract classes can have static methods.",
@@ -1257,7 +1374,10 @@
         "C": "check",
         "D": "error"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Garbage collection is an automatic process.",
@@ -1311,7 +1431,10 @@
         "C": "Staged",
         "D": "Modified"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An object can be cast to an interface it implements.",
@@ -1347,7 +1470,10 @@
         "C": "Make the class abstract.",
         "D": "Make the class static."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: this() must be the first line in a constructor.",
@@ -1401,7 +1527,10 @@
         "C": "Static",
         "D": "Private always"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Abstract classes cannot have instance variables.",
@@ -1437,7 +1566,10 @@
         "C": "Different class (inheritance).",
         "D": "Same static modifier."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: You can create an object of an interface.",
@@ -1491,7 +1623,10 @@
         "C": "Casting",
         "D": "Boxing"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Java is a pure object oriented language.",
@@ -1527,7 +1662,10 @@
         "C": "private",
         "D": "protected"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A class can extend only one class.",
@@ -1581,7 +1719,10 @@
         "C": "Logical",
         "D": "Virtual"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Every object has a unique hashcode.",
@@ -1617,7 +1758,10 @@
         "C": "global",
         "D": "external"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Abstract classes can be final.",
@@ -1671,7 +1815,10 @@
         "C": "Virtual",
         "D": "Logic"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Local variables can be static.",
@@ -1707,7 +1854,10 @@
         "C": "Exception Handling",
         "D": "Multithreading"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An object is an instance of a class.",
@@ -1761,7 +1911,10 @@
         "C": "Speed",
         "D": "File size"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: You can have a constructor in an interface.",
@@ -1797,7 +1950,10 @@
         "C": "Private methods",
         "D": "Final class"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Constructors can be private.",
@@ -1851,7 +2007,10 @@
         "C": "Adapter",
         "D": "Proxy"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the primary difference between a 'Shallow Copy' and a 'Deep Copy'?",
@@ -1879,7 +2038,10 @@
         "C": "It allows a class to inherit from multiple classes.",
         "D": "It speeds up the Garbage Collector."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is 'Constructor Chaining' in OOP?",
@@ -1907,7 +2069,10 @@
         "C": "An abstract class definition.",
         "D": "A public final variable."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the role of an 'Object Pool' pattern?",
@@ -1935,7 +2100,10 @@
         "C": "Generalization",
         "D": "Specialization"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the 'Diamond Problem' in the context of inheritance?",
@@ -1973,7 +2141,10 @@
         "C": "It contains multiple setter methods.",
         "D": "It can be modified only by the parent class."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Method Hiding' occurs when a subclass defines a static method with the same signature as a static method in the superclass.",
@@ -2001,7 +2172,10 @@
         "C": "Fixed (Build-time)",
         "D": "Global (Link-time)"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A constructor can be marked as 'abstract'.",

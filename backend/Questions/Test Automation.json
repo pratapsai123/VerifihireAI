@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Test Automation", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Test Automation?",
+    "options": {
+      "A": "To replace all human testers and eliminate the QA department.",
+      "B": "To increase testing efficiency and provide faster feedback by executing repetitive tests automatically.",
+      "C": "To ensure that a piece of software has exactly zero bugs before release.",
+      "D": "To make the source code easier for developers to read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Any test that can be performed manually should be automated to save time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common benefits of Test Automation? (Select all that apply)",
+    "options": {
+      "A": "Faster execution of regression suites",
+      "B": "Reduction of human error during repetitive tasks",
+      "C": "Immediate feedback in CI/CD pipelines",
+      "D": "Automated generation of product requirements"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "According to the 'Test Automation Pyramid', which type of tests should represent the largest volume?",
+    "options": {
+      "A": "UI / End-to-End Tests",
+      "B": "Unit Tests",
+      "C": "Manual Exploratory Tests",
+      "D": "Integration Tests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Regression Testing' mean in the context of automation?",
+    "options": {
+      "A": "Testing a feature for the very first time.",
+      "B": "Rerunning previously automated tests to ensure new changes haven't broken existing functionality.",
+      "C": "Testing the software on older hardware.",
+      "D": "Deleting old code that is no longer used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated tests are highly effective at finding brand-new, unexpected visual bugs compared to manual exploratory testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular open-source framework specifically used for automating web browsers?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Selenium",
+      "C": "Jira",
+      "D": "Slack"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Test Script'?",
+    "options": {
+      "A": "A document written for actors to perform in a commercial.",
+      "B": "A set of instructions written in a programming language to perform a specific test case.",
+      "C": "The user manual for the software.",
+      "D": "A list of all the developers' names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are characteristics of a 'Flaky Test'?",
+    "options": {
+      "A": "A test that passes 100% of the time.",
+      "B": "A test that intermittently passes and fails without any changes to the code.",
+      "C": "A test that only runs on a Friday.",
+      "D": "A test that has been deleted from the suite."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation 'Frameworks' are used to provide a structured environment and set of rules for writing and organized test scripts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is responsible for identifying elements on a webpage (like buttons or text boxes) in automation?",
+    "options": {
+      "A": "Iterators",
+      "B": "Locators (e.g., ID, XPath, CSS Selector)",
+      "C": "Variables",
+      "D": "Assertions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Assertion' in an automated test?",
+    "options": {
+      "A": "A comment left by a developer.",
+      "B": "A validation step that checks if the actual result matches the expected result.",
+      "C": "A command to restart the computer.",
+      "D": "A tool used to measure network speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Test Level' focuses on testing individual functions or methods in isolation?",
+    "options": {
+      "A": "Acceptance Testing",
+      "B": "Unit Testing",
+      "C": "System Testing",
+      "D": "Smoke Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Headless' browser testing means running automation without a visible browser window to save system resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Automation Design Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Page Object Model (POM)",
+      "B": "Screenplay Pattern",
+      "C": "Data-Driven Testing",
+      "D": "Abstract Art Pattern"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'CI/CD' stand for in modern software development?",
+    "options": {
+      "A": "Continuous Integration and Continuous Deployment",
+      "B": "Computer Interface and Control Device",
+      "C": "Code Improvement and Coding Design",
+      "D": "Centralized Input and Creative Delivery"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In automation, what is 'Data-Driven Testing'?",
+    "options": {
+      "A": "Testing only the data center hardware.",
+      "B": "Running the same test script multiple times using different sets of data from an external file.",
+      "C": "Testing the speed of the office internet.",
+      "D": "Automatically deleting data after every test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Maintenance' is a significant part of the automation lifecycle, as scripts must be updated when the application UI changes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to automate mobile applications?",
+    "options": {
+      "A": "Selenium",
+      "B": "Appium",
+      "C": "Postman",
+      "D": "Jenkins"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Wait' or 'Timeout' in an automation script?",
+    "options": {
+      "A": "To give the tester a break.",
+      "B": "To ensure the automation pauses until an element is visible or loaded before interacting with it.",
+      "C": "To slow down the test so it takes longer to finish.",
+      "D": "To wait for the developer to fix a bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Smoke Testing' in automation?",
+    "options": {
+      "A": "Testing if the server room is on fire.",
+      "B": "A small set of tests that verify the most critical functions of an application work after a new build.",
+      "C": "Testing every single pixel on the screen.",
+      "D": "Hiring a professional actor to read the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated testing is usually better than manual testing for usability and user-experience assessments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XPath' used for in web automation?",
+    "options": {
+      "A": "To calculate mathematical equations.",
+      "B": "To navigate through the HTML structure of a page to find specific elements.",
+      "C": "To encrypt the database password.",
+      "D": "To change the color of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are popular 'Test Runners' or frameworks? (Select all that apply)",
+    "options": {
+      "A": "JUnit",
+      "B": "Pytest",
+      "C": "TestNG",
+      "D": "Microsoft Word"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary function of the 'Page Object Model' (POM)?",
+    "options": {
+      "A": "To make the webpage load faster.",
+      "B": "To create an abstraction layer where webpage elements and methods are stored in separate classes for better reusability.",
+      "C": "To automatically design the UI of the website.",
+      "D": "To count the number of images on a page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API Testing' is generally faster and more stable than 'UI Testing' because it doesn't rely on graphical elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'ROI' stand for in the context of automation planning?",
+    "options": {
+      "A": "Random Output Interface",
+      "B": "Return on Investment",
+      "C": "Range of Integration",
+      "D": "Read Only Information"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to determine if an automation project is worth the initial effort and cost?",
+    "options": {
+      "A": "Counting the number of lines of code.",
+      "B": "Performing an ROI (Return on Investment) analysis.",
+      "C": "Asking a developer if they like automation.",
+      "D": "Flipping a coin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Record and Playback' tools are recommended for building large, maintainable enterprise automation suites.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a core component of a Selenium script? (Select all that apply)",
+    "options": {
+      "A": "WebDriver",
+      "B": "WebElement",
+      "C": "Browser Driver (e.g., ChromeDriver)",
+      "D": "Physical USB Cable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Modular' automation?",
+    "options": {
+      "A": "Building a script using actual LEGO bricks.",
+      "B": "Breaking down test scripts into smaller, reusable independent components or functions.",
+      "C": "Hiring a person named Modular.",
+      "D": "Testing only the login page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In automation, what does 'Setup' and 'Teardown' refer to?",
+    "options": {
+      "A": "Setting up the office furniture and tearing it down.",
+      "B": "The steps performed before a test (e.g., launching a browser) and after a test (e.g., closing it and cleaning data).",
+      "C": "Hiring and firing developers.",
+      "D": "Turning the computer on and off."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Hardcoded' data in every test script makes the automation suite easy to maintain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is often used to 'Orchestrate' automated tests to run automatically on every code commit?",
+    "options": {
+      "A": "Jenkins",
+      "B": "Excel",
+      "C": "PowerPoint",
+      "D": "Notepad"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Behavior-Driven Development' (BDD) often associated with?",
+    "options": {
+      "A": "Testing the behavior of the employees.",
+      "B": "Using human-readable language (Given/When/Then) to define test scenarios (e.g., Cucumber).",
+      "C": "A specialized tool for drawing graphs.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated testing can be used for 'Performance Testing' to see how the system handles many concurrent users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Locators' used in Selenium? (Select all that apply)",
+    "options": {
+      "A": "id",
+      "B": "name",
+      "C": "className",
+      "D": "fontColor"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Web Driver'?",
+    "options": {
+      "A": "A person who drives a car for a web company.",
+      "B": "A remote control interface that enables introspection and control of user agents (browsers).",
+      "C": "A security scan of the database.",
+      "D": "A specialized keyboard for testers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cross-Browser' testing?",
+    "options": {
+      "A": "Testing one browser across two different monitors.",
+      "B": "Verifying that an application works correctly on multiple different browsers (Chrome, Safari, Firefox, etc.).",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation can be used to generate large amounts of 'Test Data' in a database quickly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Keyword-Driven Testing'?",
+    "options": {
+      "A": "Testing only the keywords in a dictionary.",
+      "B": "A framework that uses a set of keywords (like 'Click', 'Type') in a spreadsheet to drive the test execution.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment' in the context of automation execution?",
+    "options": {
+      "A": "The physical weather outside the office.",
+      "B": "The specific configuration of hardware, software, and network where tests are run (e.g., Staging, QA, Dev).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Visual Regression' testing tools compare screenshots of the application to detect unintended visual changes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Functional' types of automated testing? (Select all that apply)",
+    "options": {
+      "A": "Load Testing",
+      "B": "Security Testing",
+      "C": "Stress Testing",
+      "D": "UI Color Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Test Suite'?",
+    "options": {
+      "A": "A physical hotel room for the testing team.",
+      "B": "A collection of related test cases grouped together for execution.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Dashboard'?",
+    "options": {
+      "A": "The front part of a physical car.",
+      "B": "A visual representation of test results, metrics, and trends.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation scripts are themselves software and should be subject to code reviews.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Unit Testing' benefits? (Select all that apply)",
+    "options": {
+      "A": "Finding bugs early in the development cycle",
+      "B": "Serving as documentation for the code",
+      "C": "Making refactoring safer",
+      "D": "Deleting the database automatically"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Parallel Execution'?",
+    "options": {
+      "A": "Executing two testers at the same time.",
+      "B": "Running multiple test scripts simultaneously across different threads or machines to save time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Stubbing'?",
+    "options": {
+      "A": "Hitting your toe on a physical server.",
+      "B": "Replacing a complex component or API with a simplified version that returns fixed data for testing purposes.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Test Case' in automation should ideally be independent of other test cases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Assertion' types? (Select all that apply)",
+    "options": {
+      "A": "assertEquals",
+      "B": "assertTrue",
+      "C": "assertNull",
+      "D": "assertMaybe"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Linter' used for in automation code?",
+    "options": {
+      "A": "To clean actual lint off the computer screen.",
+      "B": "To analyze code for potential errors, stylistic bugs, and suspicious constructs.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Log' file significance?",
+    "options": {
+      "A": "A physical log of wood for a fire.",
+      "B": "A record of everything that happened during the test execution, used for debugging failures.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every automated test should start from a clean, known state of the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Regression' coverage? (Select all that apply)",
+    "options": {
+      "A": "Tests for previously fixed bugs",
+      "B": "Tests for core business functionality",
+      "C": "Tests for every single button on every single page",
+      "D": "Tests for critical user workflows"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Object Repository'?",
+    "options": {
+      "A": "A physical warehouse for computers.",
+      "B": "A centralized location to store and manage the UI element definitions for an application.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Scheduled Execution'?",
+    "options": {
+      "A": "Executing a person on a specific schedule.",
+      "B": "Automatically triggering test suites at specific times (e.g., a nightly build).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation scripts should be stored in a version control system like Git.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Browser' options for automation? (Select all that apply)",
+    "options": {
+      "A": "Chrome",
+      "B": "Firefox",
+      "C": "Edge",
+      "D": "Netflix"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Coverage'?",
+    "options": {
+      "A": "The amount of insurance the code has.",
+      "B": "A metric that shows how much of the application's source code is executed by the test suite.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "The average time it takes to detect a developer's mood.",
+      "B": "The average time from the introduction of a bug to its discovery by a test.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a bug found in automation on 'QA' cannot be reproduced in 'Production' due to configuration differences.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automated API' testing tools? (Select all that apply)",
+    "options": {
+      "A": "RestAssured",
+      "B": "Postman",
+      "C": "Karate",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test Data' isolation?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring each test uses unique data so that concurrent tests do not interfere with each other.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Artifact' generation in a CI pipeline?",
+    "options": {
+      "A": "Creating ancient Egyptian statues.",
+      "B": "Saving specific output files from a test run, like logs or screenshots, for later analysis.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical advantage of using the 'Screenplay Pattern' over the 'Page Object Model'?",
+    "options": {
+      "A": "It allows the automation to run on mobile devices without any changes.",
+      "B": "It promotes better adherence to SOLID principles by separating 'Actors', 'Abilities', and 'Tasks'.",
+      "C": "It eliminates the need for any locators like XPath or CSS selectors.",
+      "D": "It is a 100x faster execution engine than Selenium."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Implicit Wait' is globally set for the entire life of the WebDriver instance and tells it to poll the DOM for a specific amount of time before throwing an exception.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Fluent' automation practices? (Select all that apply)",
+    "options": {
+      "A": "Chaining methods together to create readable test steps (e.g., page.login().search().logout())",
+      "B": "Using a library that automatically translates English to code",
+      "C": "Returning 'this' (the current class instance) from Page Object methods",
+      "D": "Writing code that only runs if the internet speed is fast"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is a 'JavaScript Executor' typically used for in Selenium automation?",
+    "options": {
+      "A": "To rewrite the server-side Java code into JavaScript.",
+      "B": "To perform actions that standard WebDriver commands cannot, such as scrolling to an element or interacting with hidden components.",
+      "C": "To encrypt the user's password before sending it to the database.",
+      "D": "To increase the frame rate of the browser animation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Behavior-Driven Development' (BDD), what is the technical role of a 'Step Definition' file?",
+    "options": {
+      "A": "To provide a dictionary of terms for the stakeholders.",
+      "B": "To map the Gherkin steps (Given/When/Then) to the actual executable automation code.",
+      "C": "To define the physical layout of the test environment.",
+      "D": "To count the number of words in a feature file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Thread.sleep()' is considered a best practice for handling synchronization in automated tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Explicit Wait' condition would you use to wait for an element to be clickable but not necessarily visible in the DOM?",
+    "options": {
+      "A": "presenceOfElementLocated",
+      "B": "elementToBeClickable",
+      "C": "visibilityOf",
+      "D": "textToBePresentInElement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Dynamic Locator' in automation?",
+    "options": {
+      "A": "A locator that changes color on the screen.",
+      "B": "A locator created at runtime using variables to handle elements with changing IDs or text (e.g., //div[text()='${userName}']).",
+      "C": "A locator that only works on high-speed internet connections.",
+      "D": "A way to backup the CSS file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid strategies for handling 'iFrames' in web automation? (Select all that apply)",
+    "options": {
+      "A": "Switching the driver context using driver.switchTo().frame()",
+      "B": "Using driver.switchTo().defaultContent() to move back to the main page",
+      "C": "Ignoring the iFrame and clicking the element directly",
+      "D": "Using index, name, or WebElement to identify the frame"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: A 'Base Page' class in a Page Object Model is used to store common elements (like Navigation bars) and common methods (like clickElement) shared across all pages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Desired Capabilities' in a Selenium Grid or Appium setup?",
+    "options": {
+      "A": "To list the personal hobbies of the automation engineer.",
+      "B": "To define the properties of the browser or device required for the test (e.g., browserName, platformVersion).",
+      "C": "To set the maximum salary for the QA team.",
+      "D": "To increase the monitor resolution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Automation Frameworks', what is a 'Wrapper' function?",
+    "options": {
+      "A": "A function that wraps the physical server in plastic.",
+      "B": "A custom method that encapsulates a standard library call (like click()) with additional logic like logging or explicit waits.",
+      "C": "A specialized software for architects.",
+      "D": "A way to delete the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which design pattern is used to provide a single interface to a set of interfaces in a subsystem, making automation easier to maintain?",
+    "options": {
+      "A": "Singleton Pattern",
+      "B": "Facade Pattern",
+      "C": "Factory Pattern",
+      "D": "Strategy Pattern"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hard Assertions' stop the execution of the current test immediately upon failure, while 'Soft Assertions' allow the test to continue and report all failures at the end.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Visual Regression' testing techniques? (Select all that apply)",
+    "options": {
+      "A": "Pixel-by-pixel comparison of screenshots",
+      "B": "DOM-based visual validation",
+      "C": "Ignoring dynamic areas like timestamps or rotating banners",
+      "D": "Counting the number of characters in the CSS file"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Self-Healing' automation?",
+    "options": {
+      "A": "Automation that fixes the developer's mood.",
+      "B": "Frameworks that use AI or fallback locators to automatically update a locator if the primary one fails during execution.",
+      "C": "Automation that cleans the physical computer parts.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'CI/CD', what is the purpose of 'Test Retries' (or Flaky Test Management)?",
+    "options": {
+      "A": "To delete the test if it fails.",
+      "B": "To automatically rerun a failed test a specified number of times to determine if the failure was a genuine bug or a transient environment issue.",
+      "C": "To force the developer to fix the code immediately.",
+      "D": "To increase the frame rate of the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'id' or 'data-testid' attributes is generally considered more stable than using 'XPath' based on the page hierarchy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Reporting' frameworks commonly integrated with Test Automation? (Select all that apply)",
+    "options": {
+      "A": "Allure",
+      "B": "ExtentReports",
+      "C": "ReportPortal",
+      "D": "Adobe Illustrator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Headless' execution primarily used for in a CI environment?",
+    "options": {
+      "A": "To test the application without a project manager.",
+      "B": "To run tests in a server environment that doesn't have a graphical display, saving CPU and RAM.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'REST API' automation, what is 'De-serialization'?",
+    "options": {
+      "A": "Converting a JSON response body into a high-level programming object (like a POJO in Java).",
+      "B": "Deleting the serial numbers of the hardware.",
+      "C": "A security scan of the network.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Parallel Execution' at the class level is usually faster than at the method level but requires more careful management of static variables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' is used in 'Data-Driven' frameworks to map spreadsheet columns to test script variables?",
+    "options": {
+      "A": "Switch-Case logic",
+      "B": "Parameterization (or DataProviders)",
+      "C": "Infinite loops",
+      "D": "Binary search"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Service Virtualization' (or Mocking) in an automation framework?",
+    "options": {
+      "A": "To make the office look more futuristic.",
+      "B": "To simulate the behavior of unstable or unavailable downstream systems (like a third-party payment gateway) to allow testing to continue.",
+      "C": "A specialized software for architects.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do 'Environmental Variables' help in running automation across different stages (Dev, QA, Prod)?",
+    "options": {
+      "A": "By changing the weather in the office.",
+      "B": "By allowing the same script to target different Base URLs and database credentials without changing the code.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Selenium 'Actions' class is used to perform complex user interactions like drag-and-drop or hover effects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Accessibility' testing? (Select all that apply)",
+    "options": {
+      "A": "Checking for missing alt-text on images",
+      "B": "Verifying ARIA labels",
+      "C": "Checking color contrast ratios",
+      "D": "Testing if the keyboard is physically broken"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Atomic Testing' in automation?",
+    "options": {
+      "A": "Testing with actual atoms in a lab.",
+      "B": "Writing very small, independent test cases that focus on a single piece of functionality to ensure clarity and stability.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Snapshot' or 'Artifact'?",
+    "options": {
+      "A": "A photo of the development team.",
+      "B": "Files generated during a test failure (like screenshots or logs) that are stored by the CI system for debugging.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Dependencies' occur when your automation project uses a version of a library that is incompatible with the test runner.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Wait' types in Selenium? (Select all that apply)",
+    "options": {
+      "A": "Fluent Wait",
+      "B": "Explicit Wait",
+      "C": "Implicit Wait",
+      "D": "Patience Wait"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dependency Injection' in a Test Framework?",
+    "options": {
+      "A": "Injecting medicine into a server.",
+      "B": "A design pattern where an object's dependencies (like the WebDriver instance) are provided by an external source rather than created inside the class.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Trend Analysis'?",
+    "options": {
+      "A": "Analyzing the latest fashion trends.",
+      "B": "Tracking the pass/fail rates of the automation suite over time to identify if the stability of the application is improving or declining.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated 'Security' scanning (DAST) can be part of an automation suite to identify vulnerabilities like SQL injection in every build.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Validation'? (Select all that apply)",
+    "options": {
+      "A": "Connecting to a DB via JDBC to verify data was saved correctly",
+      "B": "Cleaning up test data after the script finishes",
+      "C": "Checking if the physical server room is locked",
+      "D": "Comparing UI results against raw SQL queries"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Test Fragment' in automation design?",
+    "options": {
+      "A": "A broken piece of a computer.",
+      "B": "A reusable piece of a test script (like a login flow) that can be called by multiple different test cases.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR) for automation failures?",
+    "options": {
+      "A": "The average time it takes to fix a broken chair.",
+      "B": "The average time it takes to identify and fix a failure in the automation suite after it is reported.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Platform' testing refers to running the same automated scripts on both Windows and macOS machines.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Test' 'Parallelization' tools? (Select all that apply)",
+    "options": {
+      "A": "Selenium Grid",
+      "B": "Docker",
+      "C": "Kubernetes",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Object Identification' strategy 'Polling'?",
+    "options": {
+      "A": "Asking people in the office for their opinion.",
+      "B": "The repeated checking of the DOM at short intervals to see if a requested element has appeared yet.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Flaky' 'Test' 'Threshold'?",
+    "options": {
+      "A": "The level of flakes in a breakfast cereal.",
+      "B": "A predefined percentage of intermittent failures allowed before a build is automatically marked as 'Unstable'.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Relative' locators (e.g., 'the button to the left of the text') is a feature available in modern Selenium versions to make scripts more human-like.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Load' 'Generation'? (Select all that apply)",
+    "options": {
+      "A": "Simulating 1,000 virtual users hitting an API",
+      "B": "Testing if the server can physically hold the weight of the computer",
+      "C": "Using tools like JMeter or K6",
+      "D": "Monitoring CPU and RAM during high traffic"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Assertion'?",
+    "options": {
+      "A": "An assertion that moves across the screen.",
+      "B": "An assertion where the expected value is not hardcoded but is retrieved from a database or a previous API response.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Remote' 'Execution'?",
+    "options": {
+      "A": "Executing a person with a remote control.",
+      "B": "Running automated tests on a machine or server different from the one where the code is being developed.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation 'Hooks' (like @Before and @After) are used to manage the lifecycle of a test, such as opening and closing browsers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automation' 'Language' options for Selenium? (Select all that apply)",
+    "options": {
+      "A": "Java",
+      "B": "Python",
+      "C": "C#",
+      "D": "HTML"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Stale' 'Element' 'Reference' Exception?",
+    "options": {
+      "A": "When an element smells like old bread.",
+      "B": "An error that occurs when an element you are trying to interact with is no longer attached to the DOM (usually due to a page refresh).",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Execution' 'Time' 'Optimization'?",
+    "options": {
+      "A": "Making the clock run faster.",
+      "B": "Strategies like parallelism, headless execution, and stable locators used to reduce the time it takes to run a test suite.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Explicit Wait' is generally preferred over 'Implicit Wait' because it allows for more granular control over specific elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automated' 'Mobile' 'Gesture' commands? (Select all that apply)",
+    "options": {
+      "A": "swipe",
+      "B": "pinch",
+      "C": "tap",
+      "D": "wave"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Portability'?",
+    "options": {
+      "A": "The ability to carry the framework in a physical suitcase.",
+      "B": "The ability of an automation suite to run on different operating systems and environments with minimal changes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Visual' 'Artifact' 'Retention'?",
+    "options": {
+      "A": "Retaining ancient Egyptian statues.",
+      "B": "The practice of keeping screenshots or videos of failed tests for a specific period to help with long-term debugging.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data-Driven' framework should keep the test logic and the test data in the same file to keep things simple.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sanity' 'Checks'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that the basic features of a fix work as expected",
+      "B": "Testing the mental health of the developer",
+      "C": "Running a subset of the regression suite",
+      "D": "A quick check to see if the server is up"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Global' 'Variable' risk in automation?",
+    "options": {
+      "A": "The risk of a global pandemic.",
+      "B": "The risk that tests modifying a global variable will interfere with other tests running in parallel.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Auto-Scaling' 'Test' 'Agents'?",
+    "options": {
+      "A": "Scaling the physical height of the testers.",
+      "B": "A feature in cloud-based CI systems that automatically launches more test execution nodes as the queue of tests increases.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Screenplay Pattern' uses 'Questions' to perform assertions and check the state of the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automated' 'CI' 'Feedback' channels? (Select all that apply)",
+    "options": {
+      "A": "Slack notifications",
+      "B": "Email alerts",
+      "C": "Jira ticket updates",
+      "D": "Sending a physical letter"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Element' 'Polling' 'Interval'?",
+    "options": {
+      "A": "The distance between two physical poles.",
+      "B": "The frequency at which an explicit wait checks if a condition is met (e.g., every 500ms).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Case' 'Redundancy'?",
+    "options": {
+      "A": "Hiring two testers to do the same job.",
+      "B": "Having multiple automated tests that cover the exact same code path, leading to wasted execution time.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Headless' browsers are typically faster than 'Headed' browsers because they do not have to render the physical UI on a screen.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Mobile' 'Automation' 'Locators'? (Select all that apply)",
+    "options": {
+      "A": "accessibilityId",
+      "B": "xpath",
+      "C": "id",
+      "D": "fontSize"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Custom' 'Expected' 'Condition'?",
+    "options": {
+      "A": "A condition for an expected baby.",
+      "B": "A user-defined synchronization rule that goes beyond standard library checks (e.g., waiting for a specific value in a table cell).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Test' 'Execution'?",
+    "options": {
+      "A": "Executing a test that is physically dynamic.",
+      "B": "Selecting and running specific subsets of tests at runtime based on tags or labels (e.g., @Smoke, @Production).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Behavior-Driven Development', the 'Given' step usually sets up the initial state or preconditions for the test.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-scale concurrent execution environment, what is the primary risk of using a 'ThreadLocal' static WebDriver instance without a dedicated cleanup mechanism?",
+    "options": {
+      "A": "The browser will automatically uninstall itself from the server.",
+      "B": "Memory leaks due to abandoned WebDriver sessions and orphan browser processes that consume system RAM.",
+      "C": "The automation scripts will execute 50% faster than intended.",
+      "D": "The database will switch to read-only mode for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Reflection' in a Java-based automation framework allows for the dynamic instantiation of Page Objects at runtime based on external configuration files.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of the 'Screenplay Pattern' that differ from the standard 'Page Object Model'? (Select all that apply)",
+    "options": {
+      "A": "It utilizes 'Tasks' as granular, reusable units of work.",
+      "B": "It represents the user as an 'Actor' with specific 'Abilities'.",
+      "C": "It strictly follows the Open/Closed Principle of SOLID.",
+      "D": "It requires the physical presence of a project manager to run."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical significance of the 'Shadow DOM' for automation, and which strategy is required to interact with its elements?",
+    "options": {
+      "A": "It is a hidden layer for security; it cannot be automated.",
+      "B": "It encapsulates components to prevent global CSS leakage; you must use the shadowRoot property via JavaScript or specific WebDriver 4+ methods.",
+      "C": "It is a 3D rendering of the webpage; you must use a VR headset to automate it.",
+      "D": "It is a way to backup the HTML file; you must use a physical hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributed Testing', what is the purpose of a 'Docker Selenium Grid' over a traditional standalone grid?",
+    "options": {
+      "A": "To change the color of the browser icons.",
+      "B": "To provide scalable, ephemeral, and isolated browser environments that can be spun up and down on demand.",
+      "C": "To protect the server from physical theft.",
+      "D": "To increase the frame rate of the developer's monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Driver' 'Versions' (e.g., ChromeDriver 120 with Chrome Browser 115) will typically result in a 'SessionNotCreatedException'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Explicit Wait' strategy is most effective for handling 'StaleElementReferenceException' in a highly dynamic React application?",
+    "options": {
+      "A": "Increasing the Implicit Wait to 60 seconds.",
+      "B": "Implementing a custom 'FluentWait' that ignores the StaleElementReferenceException and retries the finding logic until successful.",
+      "C": "Deleting the element and recreating it via JavaScript.",
+      "D": "Restarting the browser session for every step."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Generics' in a modern automation framework's Base Page class?",
+    "options": {
+      "A": "To store the user's password in a generic format.",
+      "B": "To allow methods to return specialized page instances while maintaining type safety (e.g., public <T extends BasePage> T clickButton(Class<T> clazz)).",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' strategies for 'Parallel Execution' at the data level? (Select all that apply)",
+    "options": {
+      "A": "Independent Database schemas per thread",
+      "B": "Transactional Rollback after every test",
+      "C": "Unique ID partitioning in the CSV data provider",
+      "D": "Using a single shared user for 100 threads"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Visual Regression' testing using 'AI-based' tools can ignore layout shifts that do not change the user's perception of the UI, reducing false-positive failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutation' testing in the context of automation suite quality?",
+    "options": {
+      "A": "Testing if the developer has mutated into a hacker.",
+      "B": "Systematically modifying the application code to see if the automated tests fail (verifying test sensitivity).",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical impact of 'Headless' execution on 'Window Sizing' in Selenium?",
+    "options": {
+      "A": "It makes the window invisible to the CPU.",
+      "B": "The default viewport size in headless mode may differ from headed mode; you must explicitly set a window-size argument to ensure consistent element visibility.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Reporting' metric is most critical for assessing the 'Reliability' of an automation suite over time?",
+    "options": {
+      "A": "Total number of test cases.",
+      "B": "Flaky Test Percentage (tests that change status without code changes).",
+      "C": "The number of hours the QA team worked.",
+      "D": "The font size of the pass rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service' 'Virtualization' can be used to simulate 'Edge' network conditions (like 50% packet loss) to test the resilience of automated scripts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Infrastructure as Code' (IaC) tools used to provision automation environments? (Select all that apply)",
+    "options": {
+      "A": "Terraform",
+      "B": "Ansible",
+      "C": "CloudFormation",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Self-Scaling' Test Infrastructure?",
+    "options": {
+      "A": "A physical scale used to weigh servers.",
+      "B": "An architecture where the CI server triggers the cloud provider to dynamically spin up additional VMs or containers based on the size of the test queue.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Automation Failures' (MTBAF)?",
+    "options": {
+      "A": "The time it takes for a team to have a meeting.",
+      "B": "A metric that tracks the average runtime of the automation suite before an environmental or script-related error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Locators' in a cross-platform (iOS/Android) Appium framework can be solved using the 'ByAll' or 'ByChained' strategy to find an element that has different attributes on different OSs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Wait' conditions provided by 'WebDriverWait'? (Select all that apply)",
+    "options": {
+      "A": "numberOfWindowsToBe(2)",
+      "B": "invisibilityOfElementWithText",
+      "C": "attributeContains",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Object' 'Mapping' using Reflection in a Keyword-Driven framework?",
+    "options": {
+      "A": "Mapping a physical building.",
+      "B": "A mechanism that converts a string keyword from a spreadsheet into a method call on a specific Page Object class at runtime.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Contract-First' Automation?",
+    "options": {
+      "A": "Signing a contract before writing any tests.",
+      "B": "Generating automated API tests based strictly on the OpenAPI/Swagger definition before the actual endpoint code is written.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in automation refer to the conflict between a 'Maintenance-heavy' UI approach and a 'Resilient' API-first approach within the same organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Observability' in a framework? (Select all that apply)",
+    "options": {
+      "A": "Automatic attachment of Correlation IDs to API requests",
+      "B": "Real-time streaming of test logs to an ELK stack",
+      "C": "Capturing browser performance logs (HAR files) for every test",
+      "D": "The color of the test report"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a computer boot.",
+      "B": "A set of scripts or templates used to quickly initialize a standardized automation project with all dependencies and configurations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Regression' 'ROI' calculation?",
+    "options": {
+      "A": "ROI = (Total Manual Execution Cost) - (Automation Build + Maintenance Cost).",
+      "B": "ROI = (Number of Bugs) * (Salary).",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Types' occur when combining an 'Implicit' and 'Explicit' wait in the same script, which can cause unpredictable timeout behaviors and longer execution times.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Automation' 'Security' requirements? (Select all that apply)",
+    "options": {
+      "A": "Masking credentials in logs",
+      "B": "Using temporary 'Vault' tokens for API access",
+      "C": "Encrypting local test data files",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Assertion' 'Generation'?",
+    "options": {
+      "A": "An assertion that moves.",
+      "B": "Using a library to automatically generate assertions based on the historical 'Normal' response of an API (Anomaly Detection).",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Atomic' 'vs' 'End-to-End' Automation strategy?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Atomic tests are fast and focus on one component; End-to-End tests are slow and focus on full user journeys.",
+      "C": "Atomic is for beginners; End-to-End for experts.",
+      "D": "End-to-End is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' in automation refers to a framework that works for 10 tests but crashes the CI server when running 1,000 tests due to memory consumption.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Root' 'Cause' 'Identification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically parsing stack traces to identify the failing microservice",
+      "B": "Correlating test failures with recent code commits (Blame analysis)",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Using AI to suggest potential fix snippets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test' 'Asset' 'Versioning'?",
+    "options": {
+      "A": "Creating ancient Egyptian statues.",
+      "B": "The requirement to version test scripts and test data alongside the specific application version they are intended to validate.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Zero' 'Downtime' 'Automation' 'Refresh'?",
+    "options": {
+      "A": "Refreshing the server without stopping it.",
+      "B": "Updating the automation framework and scripts without disrupting the current CI/CD execution pipeline.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Device' 'Profiles' in mobile automation occur when testing on 'Simulators' while the actual bug only manifests on 'Real Devices'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'BDD' 'Hooks'? (Select all that apply)",
+    "options": {
+      "A": "@BeforeStep",
+      "B": "@AfterStep",
+      "C": "@BeforeFeature",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bloat'?",
+    "options": {
+      "A": "The framework gaining physical weight.",
+      "B": "The accumulation of redundant libraries and unused code in an automation project, leading to slow startup and high maintenance.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Automation' (MTRA)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average time required to fix the automation framework after a breaking change in the application or environment.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in automation refer to a framework attempting to use HTTP/2 commands on an API that only supports HTTP/1.1.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Profiling'? (Select all that apply)",
+    "options": {
+      "A": "Tracking memory usage trends across builds",
+      "B": "Measuring 'Time to First Byte' during functional tests",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Identifying slow database queries"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Object' 'Repository' 'Centralization'?",
+    "options": {
+      "A": "Storing computers in a central warehouse.",
+      "B": "Using a shared external service or database to store UI element locators to ensure all teams use the same definitions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Browser' 'Provisioning'?",
+    "options": {
+      "A": "Provisioning a physical ship for the browser.",
+      "B": "The ability of a grid to automatically download and launch the correct browser version requested by a test script.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the automation execution time exceeds the total build window allocated by the DevOps team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Checking if cookies follow GDPR 'Opt-In' rules",
+      "B": "Verifying that PII is masked in the UI",
+      "C": "Guaranteed to replace all lawyers",
+      "D": "Ensuring specific legal disclaimers are present"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Automation' 'Code' 'Complexity' 'Threshold'?",
+    "options": {
+      "A": "The number of lines of code allowed in a room.",
+      "B": "A metric that blocks a commit if the 'Cyclomatic Complexity' of an automation script is too high, preventing hard-to-maintain code.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Efficiency' 'Ratio'?",
+    "options": {
+      "A": "The ratio of successful people in the office.",
+      "B": "The percentage of defects found by automation compared to those found during manual exploratory testing.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'API' 'Contracts' occur when an automated test uses an old JSON schema while the actual service has migrated to a new, breaking structure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Reporting' 'Visualizations'? (Select all that apply)",
+    "options": {
+      "A": "Failure heatmaps by component",
+      "B": "Timeline execution gantt charts",
+      "C": "Requirement coverage sunburst charts",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Modularity' 'at' 'Scale'?",
+    "options": {
+      "A": "Building a scale to weigh the framework.",
+      "B": "Splitting a framework into separate versioned libraries (e.g., core, web-lib, api-lib) to allow different teams to innovate independently.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Automated' 'Regression' 'Pruning'?",
+    "options": {
+      "A": "Cutting branches off a physical tree.",
+      "B": "The process of identifying and removing automated tests that are obsolete, redundant, or flaky to keep the suite performant.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a framework is designed for multi-threading but the application uses a shared global state that causes race conditions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Data' 'Generation' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Faker' libraries for realistic mock data",
+      "B": "Executing 'SQL Insert' scripts before tests",
+      "C": "Creating data via 'Backdoor' API calls",
+      "D": "Manually typing data during the test"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test' 'Script' 'Portability' 'Challenge'?",
+    "options": {
+      "A": "Carrying a script in a physical suitcase.",
+      "B": "The difficulty of ensuring scripts run identically across local dev machines, Jenkins Linux nodes, and Windows-based browser farms.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) for broken tests?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric that tracks how long it takes for a developer or QA to repair an automated test after a failure is detected.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a framework generates so much log data that it crashes the CI server's disk space or slows down the execution engine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Metrics'? (Select all that apply)",
+    "options": {
+      "A": "Automation Coverage Percentage",
+      "B": "Execution Reliability Rate",
+      "C": "Maintenance Effort Ratio",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' strategy?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a new or modified automation suite in parallel with the stable production suite to verify its accuracy without affecting results.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Containerized' 'Test' 'Execution' 'Orchestration'?",
+    "options": {
+      "A": "Putting a person in a physical container.",
+      "B": "Using tools like Kubernetes to dynamically scale the number of test execution pods based on the demand of the CI pipeline.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Assertion' 'Precision' occurs when a test fails because it expects a decimal value with 10 places while the UI only displays 2 places.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Stability' 'Optimization'? (Select all that apply)",
+    "options": {
+      "A": "Retrying failed tests automatically",
+      "B": "Identifying and 'quarantining' flaky tests",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Using dynamic locators"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Automation' 'Code' 'Redundancy' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name Redundancy.",
+      "B": "The process of identifying duplicate logic and locators across different Page Objects to ensure a 'DRY' (Don't Repeat Yourself) framework.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Asset' 'Maturity'?",
+    "options": {
+      "A": "The age of the physical assets.",
+      "B": "A rating of how reusable, documented, and stable an automated script is based on its historical performance.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when the 'Polling Interval' of an explicit wait is longer than the 'Time To Visible' of a specific UI element.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Automation' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Principal Quality Architect",
+      "B": "Lead DevOps Engineer",
+      "C": "Head of Product Stability",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Automation' 'Coverage'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The intersection of requirements coverage, code coverage, and business-risk coverage as validated by automated tests.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA)?",
+    "options": {
+      "A": "The time it takes to wake up the manager.",
+      "B": "The average duration from the start of a failed automated test until the developer is notified via a Slack/Teams alert.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'States' in automation occur when a test fails because it assumes a user is 'New' while the database has not been cleaned from a previous run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Root' 'Cause' 'Correlation'? (Select all that apply)",
+    "options": {
+      "A": "Matching test failures with backend server error logs",
+      "B": "Identifying which Kubernetes pod the test was running on",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating UI failures with API latency spikes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Resilience' 'Engineering'?",
+    "options": {
+      "A": "Building a framework using physical steel.",
+      "B": "Designing the automation code to gracefully handle network timeouts, database deadlocks, and dynamic UI rendering without crashing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

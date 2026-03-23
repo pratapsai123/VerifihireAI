@@ -1,4 +1,4 @@
-from ._imports import *
+from .._imports import *
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])

@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Google Analytics", 
+  "questions": [
+    {
+    "question": "What is the fundamental data model used in Google Analytics 4 (GA4)?",
+    "options": {
+      "A": "Session-based model",
+      "B": "Event-based model",
+      "C": "Pageview-based model",
+      "D": "Transaction-only model"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GA4, a 'Session' starts when a user either opens your app in the foreground or views a page/screen and no session is currently active.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Enhanced Measurement' events that GA4 can track automatically without code changes? (Select all that apply)",
+    "options": {
+      "A": "Scrolls",
+      "B": "Outbound clicks",
+      "C": "Site search",
+      "D": "Add to cart"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the unique identifier used to send data from a website to a specific GA4 web stream?",
+    "options": {
+      "A": "UA-ID",
+      "B": "Measurement ID",
+      "C": "Stream Secret",
+      "D": "Tracking Token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where in the GA4 interface can you find data about how users are arriving at your website (e.g., via Organic Search or Paid Social)?",
+    "options": {
+      "A": "Retention report",
+      "B": "Acquisition report",
+      "C": "Monetization report",
+      "D": "Engagement report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 allows you to track both website and mobile app data within the same Property.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Identity Spaces' GA4 uses to stitch user journeys together? (Select all that apply)",
+    "options": {
+      "A": "User-ID",
+      "B": "Google Signals",
+      "C": "Device ID",
+      "D": "IP Address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Bounce Rate' represent in GA4?",
+    "options": {
+      "A": "The percentage of users who clicked the back button within 2 seconds.",
+      "B": "The percentage of sessions that were not 'Engaged Sessions'.",
+      "C": "The number of users who physically bounced their mouse cursor.",
+      "D": "The total number of one-page visits divided by total revenue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature in GA4 allows you to create custom visualizations like Funnel Explorations or Path Explorations?",
+    "options": {
+      "A": "Standard Reports",
+      "B": "Explorations",
+      "C": "DebugView",
+      "D": "Realtime Overview"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 automatically deletes all user-level data after 24 hours to comply with privacy laws.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the maximum number of 'Key Events' (formerly Conversions) you can mark in a single GA4 property?",
+    "options": {
+      "A": "10",
+      "B": "30",
+      "C": "50",
+      "D": "Unlimited"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe a 'Data Stream' in GA4?",
+    "options": {
+      "A": "A flow of water used to cool the Google servers.",
+      "B": "A source of data from your app or website that feeds into your property.",
+      "C": "The speed of your internet connection.",
+      "D": "A list of all users currently logged into Gmail."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GA4, which metric tells you the average time that your website was in the foreground of a user's browser?",
+    "options": {
+      "A": "Total Session Duration",
+      "B": "Average Engagement Time",
+      "C": "Foreground Clock Time",
+      "D": "Screen Dwell Ratio"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You must use Google Tag Manager (GTM) to install GA4 on a website.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are default 'User Dimensions' in GA4? (Select all that apply)",
+    "options": {
+      "A": "Country",
+      "B": "Device Category",
+      "C": "Language",
+      "D": "Credit Score"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Thresholding' in Google Analytics reports?",
+    "options": {
+      "A": "A physical limit on the number of people who can visit a site.",
+      "B": "The hiding of data in a report to prevent the identification of individual users when traffic is low.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The point where a website crashes due to high traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which GA4 report shows you the activity on your site as it happens 'right now'?",
+    "options": {
+      "A": "Tech report",
+      "B": "Realtime report",
+      "C": "Events report",
+      "D": "Demographics report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GA4, 'First Visit' and 'Session Start' are examples of automatically collected events.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these can be used to filter internal traffic (like employees) from your GA4 reports? (Select all that apply)",
+    "options": {
+      "A": "IP Address filtering",
+      "B": "Developer Mode",
+      "C": "Data Filters in Admin settings",
+      "D": "Deleting the cookies from employee browsers manually"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What does the 'Attribution' report help you understand?",
+    "options": {
+      "A": "The speed of the network data transfer.",
+      "B": "How different marketing channels work together to drive conversions.",
+      "C": "The names of the developers who built the website.",
+      "D": "The physical location of the Google data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Dimension' in Google Analytics?",
+    "options": {
+      "A": "A quantitative measurement (a number).",
+      "B": "An attribute or characteristic of your data (e.g., City, Browser, Event Name).",
+      "C": "The physical size of the user's monitor.",
+      "D": "A secret level inside the GA4 interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 can track 'Conversions' even if a user clears their cookies, provided 'User-ID' is implemented.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Engaged Session' criteria in GA4? (Select all that apply)",
+    "options": {
+      "A": "Lasted longer than 10 seconds",
+      "B": "Had 1 or more key events (conversions)",
+      "C": "Had 2 or more page/screen views",
+      "D": "The user clicked exactly five times"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of 'DebugView' in GA4?",
+    "options": {
+      "A": "To play video games inside the Analytics console.",
+      "B": "To monitor events from a specific device in real-time for troubleshooting.",
+      "C": "To delete old data that contains bugs.",
+      "D": "To increase the brightness of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you view which specific buttons users are clicking if you have 'Enhanced Measurement' enabled?",
+    "options": {
+      "A": "Acquisition report",
+      "B": "Events report (look for 'click' event)",
+      "C": "Retention report",
+      "D": "Admin panel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Property' is the highest level of organization in Google Analytics hierarchy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are standard 'Engagement' metrics in GA4? (Select all that apply)",
+    "options": {
+      "A": "Engagement Rate",
+      "B": "Engaged Sessions per User",
+      "C": "Average Engagement Time",
+      "D": "Physical Mouse Movement Distance"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Metric' in GA4?",
+    "options": {
+      "A": "The text name of a country.",
+      "B": "A quantitative measurement, such as a count or a ratio.",
+      "C": "The type of device a user is using.",
+      "D": "A specialized tool for measuring light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UTM' tagging used for?",
+    "options": {
+      "A": "To encrypt the website's password.",
+      "B": "To track the effectiveness of marketing campaigns across different traffic sources.",
+      "C": "To speed up the loading time of the home page.",
+      "D": "To verify the identity of the website owner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Historical data from Universal Analytics (UA) is automatically imported into your new GA4 property.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section in GA4 allows you to link your account to Google Ads?",
+    "options": {
+      "A": "Reports",
+      "B": "Admin",
+      "C": "Explore",
+      "D": "Advertising"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'LTV' stand for in GA4 reports?",
+    "options": {
+      "A": "Long Term Visibility",
+      "B": "Lifetime Value",
+      "C": "Last Top Visit",
+      "D": "Local Time Variation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Custom Dimensions must be registered in the GA4 interface before they appear in your reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Data Export' destinations from GA4? (Select all that apply)",
+    "options": {
+      "A": "BigQuery",
+      "B": "Google Sheets",
+      "C": "Looker Studio",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'User Property' in GA4?",
+    "options": {
+      "A": "A physical house owned by the user.",
+      "B": "An attribute that describes segments of your user base, such as 'premium member' or 'profession'.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where can you see a visualization of the steps users take before completing a purchase?",
+    "options": {
+      "A": "Tech report",
+      "B": "Funnel Exploration",
+      "C": "Realtime report",
+      "D": "Admin settings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 uses 'Modeling' to fill in gaps in data when users decline cookies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which elements are required for a 'Custom Event' to work in GA4? (Select all that apply)",
+    "options": {
+      "A": "Event Name",
+      "B": "Measuring ID in the code/tag",
+      "C": "At least one parameter",
+      "D": "A secret password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Library' in GA4 used for?",
+    "options": {
+      "A": "To borrow books about marketing.",
+      "B": "To customize the reports and collections shown in the left navigation menu.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Direct' traffic mean in GA4?",
+    "options": {
+      "A": "Users who arrived by clicking a Google Ad.",
+      "B": "Users who typed your URL directly into their browser or used a bookmark.",
+      "C": "Traffic that came directly from a data center.",
+      "D": "Hiring a person to drive to the website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the 'Data Retention' period for user-level data from 2 months to 14 months.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which section provides information about the devices and browsers users are using? (Select all that apply)",
+    "options": {
+      "A": "Tech overview",
+      "B": "Tech details",
+      "C": "Engagement overview",
+      "D": "Acquisition overview"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Default Channel Grouping'?",
+    "options": {
+      "A": "A list of all TV channels in a country.",
+      "B": "Google's system for categorizing different traffic sources into broad buckets (e.g., Organic Search, Paid Video).",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you identify a 'New User' in GA4?",
+    "options": {
+      "A": "Someone who has never used the internet before.",
+      "B": "A user who triggers the 'first_open' or 'first_visit' event.",
+      "C": "A user who has zero followers on social media.",
+      "D": "A user who types a specific password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 provides a 'Search Console' integration to see which organic keywords are driving traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric shows the total number of unique users who visited your site?",
+    "options": {
+      "A": "Sessions",
+      "B": "Active Users",
+      "C": "Event count",
+      "D": "Total Transactions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Segments' in an Exploration?",
+    "options": {
+      "A": "To divide the report into exactly four pieces.",
+      "B": "To isolate and analyze specific subsets of your data (e.g., 'Users from France').",
+      "C": "To increase the speed of light in the data center.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can set up 'Alerts' in GA4 to notify you if there is a sudden drop in traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Recommended Events' for E-commerce in GA4? (Select all that apply)",
+    "options": {
+      "A": "view_item",
+      "B": "add_to_cart",
+      "C": "purchase",
+      "D": "buy_now_immediately"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Key Event' (formerly Conversion) rate?",
+    "options": {
+      "A": "The speed at which a key turns in a lock.",
+      "B": "The percentage of sessions or users that resulted in a conversion.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GA4, what does 'Organic Social' traffic refer to?",
+    "options": {
+      "A": "Traffic from paid Facebook ads.",
+      "B": "Traffic from non-paid links on social media platforms like Twitter or LinkedIn.",
+      "C": "Traffic from a farm that uses organic methods.",
+      "D": "Hiring an influencer to write a blog post."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'Compare' tool to see data from two different date ranges side-by-side.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which section allows you to see where users are dropping off in a multi-step process? (Select all that apply)",
+    "options": {
+      "A": "Funnel Exploration",
+      "B": "Path Exploration",
+      "C": "Standard Tech report",
+      "D": "Retention report"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Cross-Domain Tracking'?",
+    "options": {
+      "A": "Tracking users as they travel between different countries.",
+      "B": "Connecting the user journey across two different websites that you own (e.g., site-a.com and site-b.com).",
+      "C": "A security bridge for data transfers.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How is 'Data Sampling' indicated in a GA4 report?",
+    "options": {
+      "A": "A loud alarm rings.",
+      "B": "A green or yellow checkmark/icon appears at the top of the report.",
+      "C": "The report font turns red.",
+      "D": "The user is logged out automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GA4, 'Page Views' are tracked as events named 'page_view'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which dimensions describe the 'Source' of traffic? (Select all that apply)",
+    "options": {
+      "A": "Session source",
+      "B": "First user source",
+      "C": "Transaction source",
+      "D": "Physical office source"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Monetization' report used for?",
+    "options": {
+      "A": "To pay the employees their monthly salary.",
+      "B": "To track revenue from e-commerce, in-app purchases, and ads.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GA4, what is a 'Cohort'?",
+    "options": {
+      "A": "A group of people who are very cold.",
+      "B": "A group of users who share a common characteristic, such as the same acquisition date.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can delete specific events from your historical GA4 data if they were collected by mistake.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which elements are part of a 'Campaign' in GA4? (Select all that apply)",
+    "options": {
+      "A": "utm_campaign",
+      "B": "utm_source",
+      "C": "utm_medium",
+      "D": "utm_social_security"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Predictive Audience' in GA4?",
+    "options": {
+      "A": "Hiring a person who is a psychic.",
+      "B": "An audience created based on Google's machine learning predictions (e.g., 'likely 7-day purchasers').",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Referral' traffic mean?",
+    "options": {
+      "A": "Traffic from users who were referred by a friend in person.",
+      "B": "Traffic that comes from another website that is not a search engine or social media platform.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 is a free tool for all businesses, regardless of their size or traffic volume.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which section allows you to manage 'Custom Definitions'? (Select all that apply)",
+    "options": {
+      "A": "Admin > Data Display",
+      "B": "Reports > Engagement",
+      "C": "Explore > Variable panel",
+      "D": "Advertising > Model"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What is 'Enhanced Measurement'?",
+    "options": {
+      "A": "Hiring a person to measure the website with a ruler.",
+      "B": "A feature that allows GA4 to automatically collect specific interactions without additional tagging.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'User-scoped' and 'Session-scoped' dimensions in GA4?",
+    "options": {
+      "A": "User-scoped attributes apply to the entire lifetime of the user; Session-scoped apply only to a specific visit.",
+      "B": "User-scoped is for mobile apps; Session-scoped is for websites.",
+      "C": "Session-scoped is only available in the paid 360 version.",
+      "D": "User-scoped dimensions cannot be used in Exploration reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In GA4, 'Measurement Protocol' allows you to send data to Google Analytics from servers or other non-web-connected devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Attribution Models' available in the GA4 Advertising reports? (Select all that apply)",
+    "options": {
+      "A": "Data-driven",
+      "B": "Last click",
+      "C": "Linear",
+      "D": "First-click (within specific reports)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "How does 'Data Thresholding' impact your reports when Google Signals is enabled?",
+    "options": {
+      "A": "It increases the number of users shown in the report to make it look better.",
+      "B": "It hides rows with small user counts to prevent the identification of individual users.",
+      "C": "It automatically deletes data that is older than 14 months.",
+      "D": "It forces the report to use a sample of only 10% of total traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'api_secret' parameter when using the GA4 Measurement Protocol?",
+    "options": {
+      "A": "To encrypt the user's credit card information.",
+      "B": "To authenticate the request and ensure it is being sent to the correct Data Stream.",
+      "C": "To hide the developer's name from Google.",
+      "D": "To increase the speed of the data transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 'Path Exploration' can be used to see both forward-pathing (where users go from a page) and backward-pathing (how they got to a page).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Custom Metrics' in GA4? (Select all that apply)",
+    "options": {
+      "A": "They must be assigned a unit of measurement (e.g., Currency, Distance).",
+      "B": "They are created to track numerical data not captured by default.",
+      "C": "They are used to track text-based attributes like 'Job Title'.",
+      "D": "They must be linked to a specific event parameter."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'BigQuery Export' primarily used for in a GA4 setup?",
+    "options": {
+      "A": "To create a backup of the GA4 interface settings.",
+      "B": "To access raw, unsampled event-level data for advanced analysis and SQL querying.",
+      "C": "To automatically post analytics data to social media.",
+      "D": "To reduce the monthly cost of Google Ads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Engagement' report, what does 'Average Engagement Time per Session' measure?",
+    "options": {
+      "A": "The total time the website was open in any tab.",
+      "B": "The time the website was in the foreground (active) divided by the number of sessions.",
+      "C": "The time it took for the page to load completely.",
+      "D": "The number of minutes a user spent typing in a search bar."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GA4, you can create a 'Custom Channel Grouping' to override the default system logic for traffic categorization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Reporting Identity' option relies most heavily on Google's machine learning when cookies are missing?",
+    "options": {
+      "A": "Device-only",
+      "B": "Observed",
+      "C": "Blended",
+      "D": "User-ID only"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Debug Device' feature in GTM/GA4 used for?",
+    "options": {
+      "A": "To fix a broken laptop screen.",
+      "B": "To isolate your own testing data so it only appears in the DebugView report.",
+      "C": "To increase the internet speed of the testing device.",
+      "D": "To prevent Google from seeing the developer's IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Sub-property' in GA4 (360 version)?",
+    "options": {
+      "A": "A physical building owned by Google.",
+      "B": "A property that gets its data from one other property, used for regional or departmental filtering.",
+      "C": "A property that only tracks data from mobile devices.",
+      "D": "A way to backup data in a second account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 can automatically identify 'Outbound Clicks' without any manual tagging if Enhanced Measurement is active.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Predictive Metrics' available for specific e-commerce properties? (Select all that apply)",
+    "options": {
+      "A": "Purchase probability",
+      "B": "Churn probability",
+      "C": "Predicted revenue",
+      "D": "Predicted page load speed"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Consent Mode' in GA4 implementation?",
+    "options": {
+      "A": "A mode that forces users to agree to all cookies.",
+      "B": "A framework that adjusts how Google tags behave based on the user's cookie consent status.",
+      "C": "A security scan that checks for legal compliance.",
+      "D": "The process of deleting data from users who declined cookies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which event parameter is required to track 'Revenue' correctly in a 'purchase' event?",
+    "options": {
+      "A": "price",
+      "B": "value",
+      "C": "amount",
+      "D": "total_cost"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GA4, a 'Session' will time out after 30 minutes of inactivity by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which section of GA4 allows you to compare the 'First User' source with the 'Session' source?",
+    "options": {
+      "A": "Retention",
+      "B": "Acquisition",
+      "C": "Engagement",
+      "D": "Monetization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'LTV' (Lifetime Value) analysis in GA4 help you determine?",
+    "options": {
+      "A": "The height of the user.",
+      "B": "How much revenue a user generates over a 120-day period after their first visit.",
+      "C": "The total number of clicks in a user's lifetime.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Redaction' in GA4 used for?",
+    "options": {
+      "A": "To highlight the most important data in red.",
+      "B": "To prevent the collection of PII (Personally Identifiable Information) like email addresses from URLs.",
+      "C": "To delete old data from the server.",
+      "D": "To increase the brightness of the reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can link a single GA4 property to multiple Google Ads accounts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are parts of a GA4 'Collection' in the Library? (Select all that apply)",
+    "options": {
+      "A": "Topics",
+      "B": "Reports",
+      "C": "Dimensions",
+      "D": "SQL Queries"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Referral Exclusion' used for in GA4 settings?",
+    "options": {
+      "A": "To prevent friends from referring each other.",
+      "B": "To prevent specific domains (like payment gateways) from starting a new session and being credited with a conversion.",
+      "C": "To delete users who come from competitors.",
+      "D": "To increase the security of the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BigQuery, what is the structure of the 'event_params' field in the GA4 export?",
+    "options": {
+      "A": "A simple comma-separated string.",
+      "B": "A nested and repeated record (Key-Value pairs).",
+      "C": "A hidden binary file.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'User-ID' feature in GA4 requires you to generate your own unique, persistent IDs for your users and send them to Analytics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid ways to create a 'Custom Segment' in an Exploration? (Select all that apply)",
+    "options": {
+      "A": "User segment",
+      "B": "Session segment",
+      "C": "Event segment",
+      "D": "Device segment"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Modelled Conversions' in GA4?",
+    "options": {
+      "A": "Conversions made by fashion models.",
+      "B": "Using machine learning to attribute conversions that couldn't be directly observed due to privacy or technical limitations.",
+      "C": "Conversions that are recorded in a 3D model.",
+      "D": "Conversions that were manually typed in by an admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you track 'File Downloads' automatically in GA4?",
+    "options": {
+      "A": "By writing a 100-line Javascript script.",
+      "B": "By enabling the 'File downloads' option in Enhanced Measurement settings.",
+      "C": "By uploading a PDF of the download list to Google.",
+      "D": "By hiring a professional to watch the site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 reports are 'Stateless', meaning they do not remember any previous filters you applied after you leave the page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Admin' setting allows you to adjust how long GA4 waits before a session is officially 'timed out'?",
+    "options": {
+      "A": "Data streams > Configure tag settings > Adjust session timeout",
+      "B": "Property settings > Data retention",
+      "C": "Reporting identity",
+      "D": "Key events list"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Google Signals'?",
+    "options": {
+      "A": "A physical light signal on the server.",
+      "B": "Session data from sites and apps that Google associates with users who have signed in to their Google accounts and have turned on Ad Personalization.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Calculated Metrics' in GA4?",
+    "options": {
+      "A": "To perform math on existing metrics (e.g., Revenue per User) and see them in your reports.",
+      "B": "To calculate the developer's salary.",
+      "C": "To increase the brightness of the UI.",
+      "D": "To delete zero-value events."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Segment' created in one Exploration is automatically available in all other Explorations in that Property.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are required to track 'E-commerce' items accurately? (Select all that apply)",
+    "options": {
+      "A": "item_id",
+      "B": "item_name",
+      "C": "item_price",
+      "D": "item_color_code"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Audience Trigger' in GA4?",
+    "options": {
+      "A": "A physical button that users press.",
+      "B": "A feature that creates a new event whenever a user becomes part of a specific Audience segment.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Attribution', what is 'Conversion Paths' report primarily used for?",
+    "options": {
+      "A": "To find a physical path to the office.",
+      "B": "To see the sequence of channel interactions (touchpoints) that led to conversions.",
+      "C": "A security bridge for data transfers.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can exclude specific URL query parameters (like session IDs) from being processed in GA4 reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'User-scoped' dimensions? (Select all that apply)",
+    "options": {
+      "A": "First user medium",
+      "B": "New vs Returning",
+      "C": "Device model",
+      "D": "Transaction ID"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Anomaly Detection' in GA4 Explorations?",
+    "options": {
+      "A": "Hiring a person to find bugs.",
+      "B": "A feature that highlights data points that fall outside the expected range based on historical patterns.",
+      "C": "A way to backup the SQL code.",
+      "D": "Deleting data that looks strange."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predictive Churn' audience based on?",
+    "options": {
+      "A": "Users who have already deleted their account.",
+      "B": "Users who are active now but are statistically likely not to visit in the next 7 days.",
+      "C": "Users who are from a specific country.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'purchase' event in GA4 is a reserved event name that cannot be used for anything else.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data Import' types? (Select all that apply)",
+    "options": {
+      "A": "Cost data",
+      "B": "Item data",
+      "C": "User data by User-ID",
+      "D": "Physical office furniture data"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Looker Studio' primarily used for?",
+    "options": {
+      "A": "To look at high-resolution photos.",
+      "B": "To create highly customizable and shareable dashboards using GA4 data as a source.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a person to draw graphs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BigQuery', what does 'Table Partitioning' help with?",
+    "options": {
+      "A": "Breaking the server into different pieces.",
+      "B": "Reducing query costs and improving speed by only scanning the relevant day's data.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical durability of the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 can track 'Store Visits' if the property is linked to a Google Business Profile.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Session-scoped' dimensions? (Select all that apply)",
+    "options": {
+      "A": "Session source/medium",
+      "B": "Session campaign",
+      "C": "Session ID",
+      "D": "User's favorite color"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cross-channel Data-driven' attribution?",
+    "options": {
+      "A": "Attributing conversion to the channel with the most data.",
+      "B": "An algorithmic model that assigns credit for conversions based on how different touchpoints influence the outcome.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Scaling' of metrics?",
+    "options": {
+      "A": "Hiring a person to weigh the data.",
+      "B": "Ensuring all metrics are presented in the same numeric format.",
+      "C": "A specialized software for architects.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Key Events' (formerly Conversions) can be toggle on and off for existing events in the Events report.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Exploration' techniques? (Select all that apply)",
+    "options": {
+      "A": "Free-form",
+      "B": "Cohort exploration",
+      "C": "Segment overlap",
+      "D": "SQL Command Line"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Metric' 'Granularity'?",
+    "options": {
+      "A": "The weight of a metric.",
+      "B": "The level of detail at which a metric is recorded (e.g., per minute vs per day).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Admin', what does 'Data Collection' settings allow you to enable? (Select all that apply)",
+    "options": {
+      "A": "Google Signals",
+      "B": "Granular location and device sensing",
+      "C": "Advanced Ad Personalization",
+      "D": "Automatic deletion of bad data"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Attribution' 'Window'?",
+    "options": {
+      "A": "A physical window in the Google office.",
+      "B": "The number of days after a touchpoint that a conversion can be credited to it.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the 'Currency' of a GA4 Property after it has been created.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'E-commerce' funnel steps? (Select all that apply)",
+    "options": {
+      "A": "view_item",
+      "B": "add_to_cart",
+      "C": "begin_checkout",
+      "D": "purchase"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Metric' 'Comparison' in reports?",
+    "options": {
+      "A": "Comparing a metric to a physical object.",
+      "B": "Applying a secondary set of data to a report to see how subsets perform against the total.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'User' 'Analytics', what is 'Retention'?",
+    "options": {
+      "A": "The amount of water the user drinks.",
+      "B": "The percentage of users who return to your site after their first visit.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 'Realtime' report shows data for the last 30 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Admin' roles in GA4? (Select all that apply)",
+    "options": {
+      "A": "Administrator",
+      "B": "Editor",
+      "C": "Analyst",
+      "D": "Viewer"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Property' 'ID'?",
+    "options": {
+      "A": "A physical card owned by Google.",
+      "B": "A unique numerical identifier for your GA4 property.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Data' 'Connector'?",
+    "options": {
+      "A": "A physical cable for the server.",
+      "B": "A tool that allows one software to pull data from another (e.g., Looker Studio to GA4).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Traffic Acquisition' report focuses on where a user's *current* session came from.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Events' parameters? (Select all that apply)",
+    "options": {
+      "A": "page_location",
+      "B": "page_title",
+      "C": "page_referrer",
+      "D": "user_home_address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Admin' 'Data' 'Display'?",
+    "options": {
+      "A": "Hiring a person to display data.",
+      "B": "A section in GA4 Admin where you manage events, key events, and custom definitions.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 is designed to be 'Privacy-first', meaning it does not store IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the GA4 BigQuery export, how would you calculate the total number of unique users who triggered a specific event using SQL?",
+    "options": {
+      "A": "SELECT count(user_id) FROM table",
+      "B": "SELECT count(DISTINCT user_pseudo_id) FROM table",
+      "C": "SELECT sum(user_hits) FROM table",
+      "D": "SELECT count(rows) GROUP BY event_name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 'Server-Side Tagging' can help bypass browser-based tracking protections (like ITP) by moving the data processing from the client's browser to a cloud-based server you control.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid reasons for a 'Key Event' (Conversion) discrepancy between GA4 and Google Ads? (Select all that apply)",
+    "options": {
+      "A": "Differences in attribution models (e.g., Data-Driven vs. Last Click)",
+      "B": "Reporting time zones being different across platforms",
+      "C": "Google Ads counting clicks, while GA4 counts events based on interaction time",
+      "D": "GA4 automatically deleting all Google Ads data every 48 hours"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical function of the 'firebase_screen_class' parameter in GA4 mobile app tracking?",
+    "options": {
+      "A": "To store the user's social media profile picture.",
+      "B": "To identify the specific code-level class or activity name of the screen being viewed.",
+      "C": "To encrypt the app's source code before it reaches Google.",
+      "D": "To increase the battery life of the user's smartphone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Path Exploration', what does a 'node' with the label '(other)' typically signify?",
+    "options": {
+      "A": "The user clicked on a broken link.",
+      "B": "The number of unique values for that dimension exceeds the system's limit for that specific visualization.",
+      "C": "A user who is browsing from a competitor's office.",
+      "D": "A technical error that requires a full account reset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Roll-up Property' in GA4 360 allows you to aggregate data from multiple source properties into a single unified view without extra tagging.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which BigQuery SQL function is required to extract a specific parameter value (like 'page_location') from the 'event_params' nested array?",
+    "options": {
+      "A": "EXTRACT_KEY()",
+      "B": "UNNEST()",
+      "C": "FLATTEN_JSON()",
+      "D": "GET_ARRAY_ITEM()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the consequence of exceeding the 'Cardinality' limit for a custom dimension in GA4?",
+    "options": {
+      "A": "The entire property is deleted by Google.",
+      "B": "High-cardinality data is grouped into an '(other)' row in standard reports.",
+      "C": "The website will load 50% slower for all users.",
+      "D": "Users are forced to re-verify their email addresses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When implementing 'User-ID', which of these practices are strictly prohibited by Google's terms of service? (Select all that apply)",
+    "options": {
+      "A": "Sending a user's plain-text email address as a User-ID",
+      "B": "Sending a hashed version of a user's phone number as a User-ID",
+      "C": "Sending a database-generated UUID as a User-ID",
+      "D": "Sending a user's full name as a User-ID"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "True or False: 'Predictive Audiences' can only be created if your property meets minimum volume requirements for both 'purchasers' and 'churned users' over the last 28 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific setting in the GA4 interface allows you to exclude 'URL Query Parameters' from your reports to prevent PII leaks?",
+    "options": {
+      "A": "Admin > Data Display > Events > Redact Data",
+      "B": "Admin > Data Streams > [Select Stream] > Redact Data",
+      "C": "Explore > Variable panel > Parameters",
+      "D": "There is no such setting; it must be done via GTM code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Session Start' event specifically use to determine if a new session should be generated?",
+    "options": {
+      "A": "The user's IP address changing.",
+      "B": "The absence of a current session ID or the presence of a new campaign source.",
+      "C": "The user clearing their browser cache while on the page.",
+      "D": "The clock hitting midnight in the user's local time zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the GA4 API, which 'Metric' would you query to find the number of unique users who were active within the last 30 days?",
+    "options": {
+      "A": "activeUsers",
+      "B": "totalUsers",
+      "C": "uniqueUserCount",
+      "D": "monthlyActiveUsers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GA4 uses 'HyperLogLog++' algorithms to provide extremely fast, yet approximate, counts for large-scale unique user metrics in BigQuery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Data Export' configurations in GA4? (Select all that apply)",
+    "options": {
+      "A": "Daily export to BigQuery",
+      "B": "Streaming (real-time) export to BigQuery",
+      "C": "Direct SFTP export to a private server",
+      "D": "Exporting specific sub-properties only"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary technical advantage of using 'gtag.js' over the old 'analytics.js' library?",
+    "options": {
+      "A": "It only works with Google Analytics 4 and nothing else.",
+      "B": "It provides a unified framework to manage multiple Google tags (Ads, Floodlight, GA) with a single implementation.",
+      "C": "It is exactly 10x smaller in file size.",
+      "D": "It automatically encrypts the local storage of the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Attribution', what is 'Linear' vs 'Time Decay' model logic?",
+    "options": {
+      "A": "Linear is for beginners; Time Decay for experts.",
+      "B": "Linear gives equal credit to all touches; Time Decay gives more credit to touches closer to the conversion.",
+      "C": "Time Decay is only available in the paid version.",
+      "D": "Linear is 100x faster to calculate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can create a 'Custom Insight' in GA4 that automatically sends an email to the marketing team if the 'Add to Cart' rate drops below a certain threshold.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which factors can trigger a 'New Session' in GA4? (Select all that apply)",
+    "options": {
+      "A": "A user returns to the site after 31 minutes of inactivity",
+      "B": "A user arrives via a new campaign (UTM) source mid-browsing",
+      "C": "The user closes the browser and re-opens it within 5 minutes",
+      "D": "A user switches from a mobile data connection to Wi-Fi"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What is 'Consent Mode' 'Advanced' vs 'Basic' implementation?",
+    "options": {
+      "A": "Advanced is for developers; Basic is for marketers.",
+      "B": "Advanced sends cookieless pings to Google even if consent is denied; Basic blocks tags completely until consent is given.",
+      "C": "Basic is 100x safer for privacy laws.",
+      "D": "Advanced requires a special license from Google."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BigQuery, what does the 'user_properties.value.string_value' field represent?",
+    "options": {
+      "A": "The user's password in string format.",
+      "B": "The value of a custom user-scoped dimension that was sent as a string.",
+      "C": "The city name of the user.",
+      "D": "The version of the user's operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 can track 'Off-site' conversions (like phone calls or store sales) using 'Data Import' and matching on a common identifier like User-ID.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Enhanced E-commerce' tracking in GA4? (Select all that apply)",
+    "options": {
+      "A": "Item-level parameters (brand, category, variant)",
+      "B": "Promotion views and clicks",
+      "C": "Refund events",
+      "D": "Calculating the user's credit card expiration date"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Server-side GTM' 'Client' object?",
+    "options": {
+      "A": "A physical computer client.",
+      "B": "A specialized script that parses incoming requests from the browser and converts them into an internal event data format.",
+      "C": "A security scan of the server.",
+      "D": "The name of the company's IT manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How is 'Session Source' different from 'First User Source' in GA4?",
+    "options": {
+      "A": "They are exactly the same metric.",
+      "B": "Session Source identifies where the current visit came from; First User Source identifies where the user originated on their very first visit.",
+      "C": "Session Source is only for organic traffic.",
+      "D": "First User Source is deleted after 30 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 'Data Redaction' can be configured to automatically mask specific patterns like credit card numbers or social security numbers using regex.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Exploration' limiters in GA4? (Select all that apply)",
+    "options": {
+      "A": "Data sampling (usually occurs at 10 million events)",
+      "B": "Maximum of 10 segments per exploration",
+      "C": "Maximum of 20 dimensions and metrics per exploration",
+      "D": "Cannot be shared with other users"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Measurement Protocol' 'Validation' Server?",
+    "options": {
+      "A": "A server that validates user identity.",
+      "B": "A specific endpoint used to test hits for syntax errors without actually recording them in the reports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data' 'Architecture', what is 'CDP' (Customer Data Platform) integration significance?",
+    "options": {
+      "A": "Replacing GA4 with a CDP entirely.",
+      "B": "Sending enriched user data from a CDP into GA4 to allow for better audience segmentation and attribution.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'event_timestamp' in BigQuery is stored in Microseconds (UTC), not Milliseconds.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Identity' 'Resolution' methods in GA4? (Select all that apply)",
+    "options": {
+      "A": "First-party Cookies",
+      "B": "Google Signals",
+      "C": "User-ID",
+      "D": "Facial Recognition"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Custom' 'JavaScript' variable in GTM used for in a GA4 setup?",
+    "options": {
+      "A": "Writing a new game for the website.",
+      "B": "Executing custom logic to transform or capture data from the page to be sent as an event parameter.",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Admin' > 'Data' 'Streams', what does 'API' 'Secret' enable?",
+    "options": {
+      "A": "Hiring a secret agent from Google.",
+      "B": "Securely sending data from a server directly to GA4 via the Measurement Protocol.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 can track 'Store Visits' if the property is linked to a Google Business Profile.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Admin' > 'Property' > 'Data' 'Settings'? (Select all that apply)",
+    "options": {
+      "A": "Data Collection",
+      "B": "Data Retention",
+      "C": "Data Filters",
+      "D": "Data Deletion Requests"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Looker' 'Studio' 'Blending'?",
+    "options": {
+      "A": "Mixing physical pieces of paper from different reports.",
+      "B": "Combining GA4 data with other sources (like Google Ads or CSVs) on a single chart using a common join key.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Metric' 'Scoping' error?",
+    "options": {
+      "A": "Using a microscope to look at a metric.",
+      "B": "An error that occurs when you try to combine a User-scoped dimension with a Session-scoped metric in a way that provides misleading data.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-platform' reporting in GA4 means you can track a single user's journey from a web browser to an iOS app to an Android app using User-ID.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'E-commerce' event parameters? (Select all that apply)",
+    "options": {
+      "A": "item_list_name",
+      "B": "item_list_id",
+      "C": "index (position of item in a list)",
+      "D": "The ink weight per page"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'DebugView' 'Batching' behavior?",
+    "options": {
+      "A": "Events are shown only once every hour.",
+      "B": "Events are displayed in near-real-time to allow for immediate testing of tags.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Data' 'Connector' 'Refresh'?",
+    "options": {
+      "A": "Refreshing the developer's water glass.",
+      "B": "The process of a third-party tool re-querying the GA4 API to get the latest metrics.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GA4 standard reports are subject to the same sampling limits as the Exploration reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Conversion' 'Attribution' models? (Select all that apply)",
+    "options": {
+      "A": "Data-Driven (Algorithmic)",
+      "B": "First Click",
+      "C": "Last Click",
+      "D": "Alphabetical Click"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Session' 'Timing' 'Threshold'?",
+    "options": {
+      "A": "The number of sessions that can fit in a room.",
+      "B": "The amount of time a session can remain active without interaction before it times out (default 30 mins).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'GA4', what is 'Calculated' 'Metric' 'Formula' limit?",
+    "options": {
+      "A": "10 operators.",
+      "B": "Formula syntax length (usually up to 1024 characters).",
+      "C": "A specialized software for poets.",
+      "D": "A list of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can export data from GA4 to BigQuery for free (subject to BigQuery's own storage/query limits).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'BigQuery' SQL keywords for GA4 analysis? (Select all that apply)",
+    "options": {
+      "A": "UNNEST",
+      "B": "CROSS JOIN",
+      "C": "STRUCT",
+      "D": "DELETE_GOOGLE_DATA"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Predictive' 'Revenue' model logic?",
+    "options": {
+      "A": "Predicting the name of a user's first child.",
+      "B": "Estimating the total revenue expected from all purchase events within the next 28 days from an active user.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Data' 'Blending' 'Join' 'Key'?",
+    "options": {
+      "A": "A physical key for the data center.",
+      "B": "The common dimension used to link data from two different tables in Looker Studio (e.g., 'Date' or 'Source').",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Conversion' in GA4 can be triggered by a single event multiple times per session, unlike UA which counted only one per session.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Audience' 'Definition' features? (Select all that apply)",
+    "options": {
+      "A": "Static membership",
+      "B": "Dynamic membership (users move in and out)",
+      "C": "Time-limited membership (e.g., users from last 30 days)",
+      "D": "Membership based on physical height"
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What is 'Server-side' 'Request' 'Path'?",
+    "options": {
+      "A": "A physical path in the server room.",
+      "B": "The URL endpoint where the client-side tag sends data to the server-side container.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'GA4', what is 'Anomaly' 'Detection' 'Sensitivity'?",
+    "options": {
+      "A": "The emotional sensitivity of the developer.",
+      "B": "The threshold setting that determines how far a data point must be from the prediction to be marked as an anomaly.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical durability of a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Key Events' (Conversions) can be exported to Google Ads to be used for automated bidding strategies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data' 'Redaction' 'Fields'? (Select all that apply)",
+    "options": {
+      "A": "Email",
+      "B": "Custom Parameters",
+      "C": "Query Parameters",
+      "D": "The CEO's personal travel budget"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Metric' 'Comparison' 'Delta'?",
+    "options": {
+      "A": "A type of airplane used by Google.",
+      "B": "The numerical difference between two metrics in a comparison report.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'User' 'Analytics', what is 'Stickiness'?",
+    "options": {
+      "A": "How sticky the user's fingers are.",
+      "B": "A metric that measures how frequently users return to your site (e.g., DAU/MAU).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'Library' in GA4 to remove the entire 'Monetization' section from the left navigation menu.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'BigQuery' 'Event' 'Fields'? (Select all that apply)",
+    "options": {
+      "A": "event_date",
+      "B": "event_timestamp",
+      "C": "event_name",
+      "D": "event_lucky_number"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Property' 'Moving' significance?",
+    "options": {
+      "A": "Moving the physical property to a new office.",
+      "B": "The process of moving a GA4 property from one Account to another account (only possible if you have admin rights on both).",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'GA4', what is 'Attribution' 'Credit' 'Calculation'?",
+    "options": {
+      "A": "Calculating the user's credit score.",
+      "B": "The process of distributing conversion value across the touchpoints based on the chosen model.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-device' 'Graphing' in GA4 allows for the same user to be counted once even if they visit from three different browsers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Data' 'Privacy' 'Features'? (Select all that apply)",
+    "options": {
+      "A": "IP Anonymization (automatic)",
+      "B": "Data Deletion requests",
+      "C": "EU-specific data centers",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Measurement' 'Protocol' 'JSON' 'Payload'?",
+    "options": {
+      "A": "A type of physical luggage.",
+      "B": "The structured data format used to send information from a server to GA4.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'GA4', what is 'User' 'Pseudo-ID'?",
+    "options": {
+      "A": "A fake name chosen by the user.",
+      "B": "An anonymous, unique identifier assigned by Google to represent a specific browser or device.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In BigQuery, the 'purchase' event revenue is stored as an integer, not a floating-point number.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Audience' 'Sharing'? (Select all that apply)",
+    "options": {
+      "A": "Sharing audiences automatically with Google Ads",
+      "B": "Sharing audiences with Google Search Console",
+      "C": "Sharing audiences with linked Display & Video 360 accounts",
+      "D": "Sharing audiences with the user's private Gmail"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Measurement' 'ID' 'Prefix'?",
+    "options": {
+      "A": "G-",
+      "B": "UA-",
+      "C": "AW-",
+      "D": "DC-"
+    },
+    "answer": "A"
+  }
+  ]
+}

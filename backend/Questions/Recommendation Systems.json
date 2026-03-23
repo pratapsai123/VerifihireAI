@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Recommendation Systems", 
+  "questions": [
+    {
+    "question": "What is the primary goal of a Recommendation System?",
+    "options": {
+      "A": "To delete irrelevant user accounts from the database.",
+      "B": "To predict the 'rating' or 'preference' a user would give to an item.",
+      "C": "To increase the physical storage capacity of the server.",
+      "D": "To encrypt user passwords using machine learning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Collaborative Filtering relies on the similarities between users and items based on their past interactions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common types of Recommendation Systems? (Select all that apply)",
+    "options": {
+      "A": "Content-Based Filtering",
+      "B": "Collaborative Filtering",
+      "C": "Hybrid Systems",
+      "D": "Binary Search Recommenders"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Content-Based Filtering' use to make recommendations?",
+    "options": {
+      "A": "The behavior of other similar users.",
+      "B": "The attributes or features of the items themselves (e.g., genre, director).",
+      "C": "The current weather and time of day only.",
+      "D": "Randomly generated numbers to ensure variety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'User-Item Matrix', what do the rows typically represent?",
+    "options": {
+      "A": "Available products or items.",
+      "B": "Individual users.",
+      "C": "The dates of transactions.",
+      "D": "The category of the item."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Cold Start' problem occurs when the system has plenty of data but the server is too cold to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are examples of 'Implicit Feedback'? (Select all that apply)",
+    "options": {
+      "A": "A user giving a 5-star rating",
+      "B": "A user clicking on a product link",
+      "C": "A user watching a video until the end",
+      "D": "A user writing a detailed text review"
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What is 'Sparsity' in the context of a recommendation matrix?",
+    "options": {
+      "A": "When the matrix has too many duplicate values.",
+      "B": "When most of the entries in the User-Item matrix are empty (unknown).",
+      "C": "When the matrix is too small to be useful.",
+      "D": "The speed at which the matrix is updated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which similarity measure is most commonly used to find the 'distance' between two users in Collaborative Filtering?",
+    "options": {
+      "A": "Hamming Distance",
+      "B": "Cosine Similarity",
+      "C": "Linear Regression",
+      "D": "Standard Deviation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Matrix Factorization is a technique used to decompose the User-Item matrix into lower-dimensional factor matrices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are challenges for Recommendation Systems? (Select all that apply)",
+    "options": {
+      "A": "Scalability (handling millions of users/items)",
+      "B": "Cold Start (new users or items)",
+      "C": "Over-specialization (Filter Bubbles)",
+      "D": "SQL Syntax highlighting"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Hybrid Recommendation System'?",
+    "options": {
+      "A": "A system that only works on hybrid electric vehicles.",
+      "B": "A system that combines multiple techniques (e.g., Content-based and Collaborative).",
+      "C": "A system that recommends both physical and digital goods.",
+      "D": "A system that uses both Python and R simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Item-Item Collaborative Filtering', how is a recommendation generated?",
+    "options": {
+      "A": "By finding users who are similar to the target user.",
+      "B": "By finding items similar to the ones the user has already liked.",
+      "C": "By suggesting the most expensive items in the catalog.",
+      "D": "By asking the user to fill out a long survey."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Precision' in a recommender system measures how many of the recommended items were actually relevant to the user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these metrics are used to evaluate the accuracy of predicted ratings? (Select all that apply)",
+    "options": {
+      "A": "RMSE (Root Mean Square Error)",
+      "B": "MAE (Mean Absolute Error)",
+      "C": "PageRank",
+      "D": "Entropy"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Serendipity' in recommendation systems?",
+    "options": {
+      "A": "The speed of the recommendation algorithm.",
+      "B": "The ability to recommend surprising and relevant items the user wouldn't have found otherwise.",
+      "C": "The total number of items in the database.",
+      "D": "A technical error that causes the system to crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Explicit Feedback' refer to?",
+    "options": {
+      "A": "Data collected through user clicks and views.",
+      "B": "Data provided directly by the user (e.g., star ratings, 'thumbs up').",
+      "C": "Encrypted feedback sent to the server.",
+      "D": "Feedback given by the developer during testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Content-based filtering is better than collaborative filtering at recommending items to a brand-new user with zero history.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are steps in the 'User-Based Collaborative Filtering' process? (Select all that apply)",
+    "options": {
+      "A": "Identify similar users based on rating history",
+      "B": "Predict the rating for an item based on the neighbors' ratings",
+      "C": "Analyze the text description of the items",
+      "D": "Filter out users who have never logged in"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Long Tail' problem?",
+    "options": {
+      "A": "When the server cables are too long.",
+      "B": "When most items receive very few interactions, making them hard to recommend accurately.",
+      "C": "When the user takes too long to make a purchase.",
+      "D": "The delay in loading high-resolution images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a dimensionality reduction technique used in Recommender Systems?",
+    "options": {
+      "A": "K-Means Clustering",
+      "B": "SVD (Singular Value Decomposition)",
+      "C": "Gradient Descent",
+      "D": "A/B Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Recall' measures the system's ability to find all the relevant items in the dataset.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are 'Latent Factors' in matrix factorization?",
+    "options": {
+      "A": "Hidden features or patterns (e.g., movie genre or user mood) that explain observed ratings.",
+      "B": "Factors that cause the database to become slow.",
+      "C": "The physical location of the data centers.",
+      "D": "The number of users currently online."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Association Rules' (Market Basket Analysis)? (Select all that apply)",
+    "options": {
+      "A": "If a user buys Bread, they are likely to buy Butter",
+      "B": "Measuring the distance between two users using Euclidean geometry",
+      "C": "Using 'Support' and 'Confidence' metrics",
+      "D": "Predicting movie ratings using neural networks"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Diversity' in the context of recommendations?",
+    "options": {
+      "A": "The variety of programming languages used to build the system.",
+      "B": "The extent to which the recommended items are different from each other.",
+      "C": "The number of different countries the users come from.",
+      "D": "The speed of the CPU processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Normalizing ratings (e.g., subtracting the user's average rating) helps account for 'optimistic' vs. 'pessimistic' raters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which evaluation method involves showing two different versions of a recommendation engine to two groups of users?",
+    "options": {
+      "A": "Offline Evaluation",
+      "B": "A/B Testing",
+      "C": "Cross-Validation",
+      "D": "SVD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Distance' or 'Similarity' metrics? (Select all that apply)",
+    "options": {
+      "A": "Euclidean Distance",
+      "B": "Pearson Correlation",
+      "C": "Jaccard Similarity",
+      "D": "Logistic Regression"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Cold Start' item?",
+    "options": {
+      "A": "An item that has just been added to the catalog and has no ratings yet.",
+      "B": "An item that only sells during the winter.",
+      "C": "An item that causes the algorithm to freeze.",
+      "D": "An item that is recommended at the start of the user's session."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Item-based collaborative filtering is generally more stable than user-based filtering because item relationships change less frequently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which technique is often used to represent text content (like movie descriptions) numerically for content-based filtering?",
+    "options": {
+      "A": "K-Nearest Neighbors",
+      "B": "TF-IDF (Term Frequency-Inverse Document Frequency)",
+      "C": "Binary Cross-Entropy",
+      "D": "Matrix Inversion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Coverage' in recommendation systems?",
+    "options": {
+      "A": "The insurance policy for the server hardware.",
+      "B": "The percentage of items in the catalog that the system is able to recommend.",
+      "C": "The physical area where the service is available.",
+      "D": "The number of lines of code in the algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Model-Based' collaborative filtering methods? (Select all that apply)",
+    "options": {
+      "A": "Matrix Factorization",
+      "B": "Deep Learning (Neural Networks)",
+      "C": "K-Nearest Neighbors (Memory-based)",
+      "D": "Clustering"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Collaborative filtering requires no knowledge of the items' features to work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Filter Bubble'?",
+    "options": {
+      "A": "A physical cleaning tool for data centers.",
+      "B": "A state where a user only sees information that reinforces their existing preferences.",
+      "C": "A specialized software for removing duplicate data.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Similarity' threshold for KNN algorithms?",
+    "options": {
+      "A": "P-value",
+      "B": "K (number of nearest neighbors)",
+      "C": "Learning Rate",
+      "D": "Batch Size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a User-Based CF, the 'neighbors' are items that are similar to each other.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Average Precision' (MAP) primarily used to evaluate?",
+    "options": {
+      "A": "The speed of the database query.",
+      "B": "The quality of a ranked list of recommendations.",
+      "C": "The memory usage of the server.",
+      "D": "The total volume of sales."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are parts of the 'Discovery' goal in recommendations? (Select all that apply)",
+    "options": {
+      "A": "Novelty",
+      "B": "Serendipity",
+      "C": "Exploration",
+      "D": "Data encryption"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Exploration vs. Exploitation'?",
+    "options": {
+      "A": "Choosing between exploring new countries and exploiting resources.",
+      "B": "Balancing between showing the user what they already like and trying new things to learn their tastes.",
+      "C": "A specialized security protocol.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Euclidean distance is often less effective than Cosine similarity for high-dimensional sparse data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'K-fold Cross-Validation' in training a recommender model?",
+    "options": {
+      "A": "To fold the data into paper airplanes.",
+      "B": "To ensure the model generalizes well to unseen data by testing on different subsets.",
+      "C": "To calculate the total cost of the project.",
+      "D": "To increase the number of layers in a neural network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a challenge for 'Memory-Based' CF as data grows? (Select all that apply)",
+    "options": {
+      "A": "High computational cost for similarity calculations",
+      "B": "Memory limitations as the matrix expands",
+      "C": "The color of the UI becomes outdated",
+      "D": "Increased latency for real-time recommendations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Top-N Recommendation'?",
+    "options": {
+      "A": "Recommending the top N most expensive items.",
+      "B": "Providing a ranked list of the N items the user is most likely to be interested in.",
+      "C": "A security scan for the top N servers.",
+      "D": "The first N rows of a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cold start for a new user can be solved by recommending the most 'Popular' items until they have a history.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is an example of a 'Knowledge-Based' recommendation system?",
+    "options": {
+      "A": "Netflix movie recommendations based on viewing history.",
+      "B": "A financial advisor system that asks for your goals and risk tolerance.",
+      "C": "Amazon's 'Users who bought this also bought' section.",
+      "D": "A random shuffle button on a music player."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Jaccard Index' used for in Recommender Systems?",
+    "options": {
+      "A": "To measure the overlap between two sets (e.g., sets of items liked by two users).",
+      "B": "To calculate the salary of a data scientist.",
+      "C": "To find the average age of a user.",
+      "D": "To rotate the items in the catalog."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SVD' stands for Standard Vector Distribution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Session-Based' recommendations? (Select all that apply)",
+    "options": {
+      "A": "They rely only on user actions in the current session",
+      "B": "Useful when users are anonymous (not logged in)",
+      "C": "They require years of historical data to work",
+      "D": "Common in e-commerce websites"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Popularity Bias'?",
+    "options": {
+      "A": "When the algorithm is too popular with users.",
+      "B": "When the system over-recommends popular items and ignores the 'Long Tail'.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a famous person to endorse the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Precision and Recall often have an inverse relationship.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Contextual' factors for recommendations? (Select all that apply)",
+    "options": {
+      "A": "Time of day",
+      "B": "User's current location",
+      "C": "Device used (Mobile vs Desktop)",
+      "D": "User's social security number"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Utility Matrix'?",
+    "options": {
+      "A": "A matrix that stores the utility bills for the data center.",
+      "B": "Another name for the User-Item rating matrix.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: One-Hot Encoding is a way to represent categorical item features numerically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Rank-Aware' evaluation metric?",
+    "options": {
+      "A": "RMSE",
+      "B": "nDCG (Normalized Discounted Cumulative Gain)",
+      "C": "Standard Deviation",
+      "D": "Kurtosis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Collaborative Filtering's biggest weakness?",
+    "options": {
+      "A": "It is too fast to calculate.",
+      "B": "The 'Cold Start' problem for new users/items with no history.",
+      "C": "It requires too much information about item content.",
+      "D": "It can only be written in SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Recommender systems can only be built using Deep Learning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Exploration' strategies? (Select all that apply)",
+    "options": {
+      "A": "Epsilon-greedy",
+      "B": "Upper Confidence Bound (UCB)",
+      "C": "Thompson Sampling",
+      "D": "Fixed Sorting"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Similarity Propagation'?",
+    "options": {
+      "A": "When a virus spreads through the server.",
+      "B": "A method to estimate ratings by looking at the network of user/item relationships.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SVD decomposition results in three matrices: U, Sigma, and V-transpose.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Metadata' examples for a book? (Select all that apply)",
+    "options": {
+      "A": "Author",
+      "B": "Publication Year",
+      "C": "Genre",
+      "D": "The ink weight per page"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Trust-Based' recommendation?",
+    "options": {
+      "A": "Trusting the server to not crash.",
+      "B": "Using social networks or explicit trust scores between users to influence recommendations.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Recommending only the most popular items is a high-coverage strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'User Profiling'?",
+    "options": {
+      "A": "Taking a physical photo of every user.",
+      "B": "The process of creating a digital representation of a user's interests and behavior.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a movie recommender, 'Horror' and 'Comedy' would be considered:",
+    "options": {
+      "A": "Latent factors.",
+      "B": "Item features or attributes.",
+      "C": "Users.",
+      "D": "Algorithm parameters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'A/B testing' is an example of 'Online' evaluation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Matrix Factorization technique uses 'Alternating Least Squares' (ALS) to handle sparse datasets?",
+    "options": {
+      "A": "Principal Component Analysis (PCA)",
+      "B": "Singular Value Decomposition (SVD)",
+      "C": "Collaborative Filtering with ALS",
+      "D": "K-Nearest Neighbors (KNN)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In a Matrix Factorization model, the number of 'Latent Factors' is a hyperparameter that must be tuned to balance underfitting and overfitting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Ranking' evaluation metrics? (Select all that apply)",
+    "options": {
+      "A": "Normalized Discounted Cumulative Gain (nDCG)",
+      "B": "Mean Reciprocal Rank (MRR)",
+      "C": "Root Mean Square Error (RMSE)",
+      "D": "Hit Rate at K"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary technical advantage of 'Item-Item' Collaborative Filtering over 'User-Based' Collaborative Filtering in large-scale production systems?",
+    "options": {
+      "A": "It requires significantly less memory to store the user profiles.",
+      "B": "Item similarities are generally more stable and can be pre-computed offline.",
+      "C": "It is better at recommending items to users with very few interactions.",
+      "D": "It automatically encrypts the data using AES-256."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'TF-IDF' primarily help achieve in a Content-Based Filtering system?",
+    "options": {
+      "A": "It calculates the total frequency of users in a database.",
+      "B": "It reduces the weight of common words and increases the weight of unique, descriptive terms in item descriptions.",
+      "C": "It identifies the physical location of the user.",
+      "D": "It predicts the future stock price of the items."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stochastic Gradient Descent' (SGD) is often used to minimize the loss function in Latent Factor models.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Filter Bubble' phenomenon? (Select all that apply)",
+    "options": {
+      "A": "The system limits a user's exposure to diverse perspectives.",
+      "B": "Algorithms prioritize items that align with a user's historical behavior.",
+      "C": "The physical air filter in the server room is dirty.",
+      "D": "Isolation from information that contradicts existing beliefs."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of 'Regularization' in Matrix Factorization algorithms?",
+    "options": {
+      "A": "To make the database tables more regular in shape.",
+      "B": "To prevent the model from overfitting to specific noise in the rating data.",
+      "C": "To increase the number of latent factors automatically.",
+      "D": "To sort the items alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'nDCG' evaluation, what does the 'Discounted' part of the term refer to?",
+    "options": {
+      "A": "Giving a price discount to the user.",
+      "B": "Reducing the value of a relevant item if it appears lower in the recommendation list.",
+      "C": "Subtracting the average rating from the total score.",
+      "D": "Deleting items that are not relevant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hybrid recommendation systems can address the 'Cold Start' problem by using content features when collaborative data is unavailable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid ways to represent 'User Embeddings'? (Select all that apply)",
+    "options": {
+      "A": "A dense vector in a latent space",
+      "B": "A row in the User-Factor matrix",
+      "C": "A physical photo of the user",
+      "D": "A collection of user-ID strings"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Collaborative Filtering's sensitivity to 'Popularity Bias'?",
+    "options": {
+      "A": "It tends to recommend obscure items that no one likes.",
+      "B": "It tends to over-recommend items that already have many interactions, potentially creating a feedback loop.",
+      "C": "It makes the algorithm popular with developers.",
+      "D": "It requires the items to be popular among celebrities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Mean Reciprocal Rank' (MRR), what is the score if the first relevant item is found at position 4?",
+    "options": {
+      "A": "4.0",
+      "B": "0.25",
+      "C": "0.75",
+      "D": "0.5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SVD++' is an extension of SVD that takes into account both explicit and implicit feedback.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Distance' metrics used for high-dimensional vectors? (Select all that apply)",
+    "options": {
+      "A": "Manhattan Distance",
+      "B": "Cosine Distance",
+      "C": "Spearman Rank Correlation",
+      "D": "Linear kernel"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Matrix Sparsity' formula in a User-Item matrix?",
+    "options": {
+      "A": "Total cells / filled cells",
+      "B": "1 - (Number of ratings / Total possible cells)",
+      "C": "Number of users + Number of items",
+      "D": "The square root of the number of empty cells"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Two-Tower' Neural Network for recommendations, what do the two towers typically represent?",
+    "options": {
+      "A": "The client and the server.",
+      "B": "The User features and the Item features.",
+      "C": "The training set and the test set.",
+      "D": "The database and the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Collaborative Filtering assumes that if User A and User B agreed on one issue, they are likely to agree on others.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Personalized' recommendation strategies? (Select all that apply)",
+    "options": {
+      "A": "Top-Selling items",
+      "B": "Most Recent arrivals",
+      "C": "Highest Rated globally",
+      "D": "Matrix Factorized results"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recall at K'?",
+    "options": {
+      "A": "Calling back the user after K days.",
+      "B": "The fraction of all relevant items that are included in the top K recommendations.",
+      "C": "The time it takes to recall a query result from memory.",
+      "D": "The number of users who returned to the site K times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Locality Sensitive Hashing' (LSH) used for in large recommendation systems?",
+    "options": {
+      "A": "To hash user passwords for security.",
+      "B": "To efficiently find approximate nearest neighbors in high-dimensional space.",
+      "C": "To localise the language of the recommendations.",
+      "D": "To delete duplicates in the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Bias' terms in Matrix Factorization (e.g., $b_u$ for user, $b_i$ for item) helps capture the baseline rating tendencies of specific users or items.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Explicit Matrix Factorization'? (Select all that apply)",
+    "options": {
+      "A": "The matrix contains only binary data (0/1).",
+      "B": "The matrix contains numeric scores (e.g., 1-5 stars).",
+      "C": "Loss is calculated only for the observed (non-missing) entries.",
+      "D": "It ignores all missing values during optimization."
+    },
+    "answer": ["B", "C", "D"]
+  },
+  {
+    "question": "What is 'Session-Based' recommendation in a 'Cookie-less' environment?",
+    "options": {
+      "A": "Giving recommendations based on a user's age.",
+      "B": "Predicting the next user action based on the sequence of events in the current visit only.",
+      "C": "A security scan for browser sessions.",
+      "D": "Storing recommendations in a physical session log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric evaluates how 'New' or 'Unknown' the recommended items are to the user?",
+    "options": {
+      "A": "Novelty",
+      "B": "Coverage",
+      "C": "Utility",
+      "D": "Consistency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Content-Based Filtering is more likely to result in a 'Filter Bubble' than Collaborative Filtering.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Implicit' signals in an e-commerce context? (Select all that apply)",
+    "options": {
+      "A": "Add to cart",
+      "B": "Search query text",
+      "C": "Hovering over an image",
+      "D": "A 1-star text review"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Pearson Correlation' useful for in Collaborative Filtering?",
+    "options": {
+      "A": "To find the average height of a user.",
+      "B": "To measure similarity between users while accounting for differences in their average rating levels.",
+      "C": "To calculate the price of a movie ticket.",
+      "D": "To find the name of a person named Pearson."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate 'Precision at K'?",
+    "options": {
+      "A": "Relevant Items in Top K / Total Relevant Items",
+      "B": "Relevant Items in Top K / K",
+      "C": "Total Items / K",
+      "D": "Successful clicks / total sessions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Long Tail' consists of the highly popular items that generate most of the revenue.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Matrix Factorization' variant is specifically designed for binary (implicit) data?",
+    "options": {
+      "A": "Weighted Matrix Factorization (WMF)",
+      "B": "Non-negative Matrix Factorization (NMF)",
+      "C": "SVD-3",
+      "D": "Euclidean Factorization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Exploitation' mean in a multi-armed bandit recommendation model?",
+    "options": {
+      "A": "Trying out items the model is uncertain about.",
+      "B": "Showing items the model already knows the user likes to maximize immediate reward.",
+      "C": "Deleting user data to save space.",
+      "D": "Hiring a professional to exploit the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are parts of the 'Context-Aware' recommendation paradigm? (Select all that apply)",
+    "options": {
+      "A": "Pre-filtering (based on context)",
+      "B": "Post-filtering (filtering results by context)",
+      "C": "Modeling context as a latent factor",
+      "D": "Ignoring the user's past history entirely"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dimensionality Reduction' intended to solve?",
+    "options": {
+      "A": "Making the physical server smaller.",
+      "B": "Compressing large, sparse user-item data into smaller, dense vectors (embeddings) to improve speed and generalization.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring fewer data scientists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Cosine Similarity', what does a value of 0 indicate for two vectors?",
+    "options": {
+      "A": "They are identical.",
+      "B": "They are orthogonal (independent/no similarity).",
+      "C": "They are opposite.",
+      "D": "The vectors are zero-length."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Domain' recommendation involves using knowledge from one domain (e.g., Books) to improve recommendations in another (e.g., Movies).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Latent Factors' for a music recommendation system? (Select all that apply)",
+    "options": {
+      "A": "Tempo/BPM",
+      "B": "Genre preference",
+      "C": "Instrumentalness",
+      "D": "The serial number of the user's phone"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Utility Matrix' in a mathematical sense?",
+    "options": {
+      "A": "A matrix of monthly electricity bills.",
+      "B": "A sparse matrix where $R_{u,i}$ is the rating given by user $u$ to item $i$.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inverse Propensity Weighting' (IPW) used for in recommender evaluation?",
+    "options": {
+      "A": "To increase the weight of popular items.",
+      "B": "To correct for selection bias in logged data (offline evaluation).",
+      "C": "To find the name of the project manager.",
+      "D": "To rotate the items in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Singular Value Decomposition (SVD) is mathematically identical to Matrix Factorization using Gradient Descent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Multi-Criteria' recommendation? (Select all that apply)",
+    "options": {
+      "A": "Recommending a hotel based on price, location, and cleanliness",
+      "B": "Using multiple algorithms for one user",
+      "C": "Aggregating several individual scores into a single recommendation",
+      "D": "Counting the number of criteria in a query"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Negative Sampling' in the context of training a recommendation model?",
+    "options": {
+      "A": "Removing items that the user hates.",
+      "B": "Randomly selecting items the user has not interacted with to serve as 'negative' examples for training.",
+      "C": "A way to speed up the network.",
+      "D": "Deleting items that have a negative rating."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Collaborative Filtering', what is the 'Gray Sheep' problem?",
+    "options": {
+      "A": "When a user likes items that are colored gray.",
+      "B": "Users whose tastes do not consistently align with any group, making them hard to recommend for.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jaccard Similarity only considers whether an item was interacted with (binary), ignoring the specific rating value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Metadata' features for a movie? (Select all that apply)",
+    "options": {
+      "A": "Director",
+      "B": "Cast member names",
+      "C": "Box office revenue",
+      "D": "The file size of the poster image"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Rank-Aware' evaluation?",
+    "options": {
+      "A": "Checking the rank of the server in the data center.",
+      "B": "Metrics that assign higher importance to relevant items at the top of the recommendation list.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Candidate Generation' in a large scale recommendation pipeline?",
+    "options": {
+      "A": "Generating names for political candidates.",
+      "B": "The fast, first stage that reduces millions of items to a few hundred potential candidates.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring new employees for the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Evaluation of a recommender system using only RMSE can sometimes lead to poor user experience because accuracy does not equal relevance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Diversity' vs 'Novelty'? (Select all that apply)",
+    "options": {
+      "A": "Diversity is about variety within one recommendation list",
+      "B": "Novelty is about items being unknown to the user",
+      "C": "Diversity and Novelty are exactly the same thing",
+      "D": "Novelty is always better than accuracy"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Knowledge-Based' recommendation logic?",
+    "options": {
+      "A": "Knowing everything about the user's private life.",
+      "B": "Using a set of rules or explicit requirements provided by the user to filter items (e.g., 'must have 4 doors').",
+      "C": "A security bridge for data.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Matrix Factorization', what happens if you increase the number of 'Latent Factors' ($k$) too much?",
+    "options": {
+      "A": "The model will become 100% accurate.",
+      "B": "The model will likely overfit the training data and fail to generalize.",
+      "C": "The physical speed of the keyboard increases.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Serendipity' metric measures how much the user expected the recommendation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Ranking' algorithms? (Select all that apply)",
+    "options": {
+      "A": "BPR (Bayesian Personalized Ranking)",
+      "B": "LambdaMART",
+      "C": "K-Means",
+      "D": "Factorization Machines"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Feedback Loop' in recommendation systems?",
+    "options": {
+      "A": "A loop in the SQL code.",
+      "B": "When user behavior is influenced by the recommendations, which then reinforces those same recommendations in the future.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hit Rate at 10'?",
+    "options": {
+      "A": "Hitting the server 10 times with a hammer.",
+      "B": "The percentage of users for whom at least one relevant item was found in the top 10 recommendations.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'One-Class' Collaborative Filtering is used when only positive interactions (clicks, buys) are recorded.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Hybrid' system architectures? (Select all that apply)",
+    "options": {
+      "A": "Weighted (linear combination)",
+      "B": "Switching (chooses one method based on context)",
+      "C": "Cascade (one refines the other)",
+      "D": "Binary (recommends only two items)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Epsilon-Greedy' in a recommendation bandit?",
+    "options": {
+      "A": "Greedily taking all the data.",
+      "B": "A strategy that selects the best item most of the time but explores a random item with probability epsilon.",
+      "C": "A way to speed up the network.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Collaborative Filtering', what is 'User-Item' Co-occurrence?",
+    "options": {
+      "A": "When a user and an item occur at the same physical location.",
+      "B": "A count of how many users have interacted with both Item A and Item B.",
+      "C": "A specialized software for accountants.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Evaluation of a system using 'A/B testing' is generally considered more reliable for business goals than offline metrics like RMSE.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Content-Based' similarity? (Select all that apply)",
+    "options": {
+      "A": "Items share similar tags or keywords",
+      "B": "Items are recommended based on similar users",
+      "C": "Items are in the same price range",
+      "D": "Items are by the same author"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Embedding' space?",
+    "options": {
+      "A": "The space inside a computer case.",
+      "B": "A low-dimensional vector space where items or users with similar characteristics are placed close together.",
+      "C": "A security scan for database viruses.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'nDCG', what is the 'Ideal DCF' (iDCG) used for?",
+    "options": {
+      "A": "To find the name of the perfect user.",
+      "B": "To normalize the DCG score by dividing it by the best possible score for that query.",
+      "C": "A specialized software for poets.",
+      "D": "The physical durability of the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Factorization Machines (FM) are a generalization of Matrix Factorization that can include arbitrary side features.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Implicit' evaluation? (Select all that apply)",
+    "options": {
+      "A": "Click-through rate (CTR)",
+      "B": "Conversion rate",
+      "C": "User surveys",
+      "D": "Dwell time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Re-Ranking' in a recommendation system?",
+    "options": {
+      "A": "Ranking the users by their age.",
+      "B": "A final stage where business logic (e.g., diversity, ads, profit) is applied to the initial ranked list.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Learning to Rank' (LTR), which approach treats the ranking problem as a classification or regression problem on individual query-item pairs?",
+    "options": {
+      "A": "Pointwise approach",
+      "B": "Pairwise approach",
+      "C": "Listwise approach",
+      "D": "Kernelized approach"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Neural Collaborative Filtering' (NCF) framework replaces the traditional inner product in Matrix Factorization with a neural network architecture to learn arbitrary function mappings.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of the 'Wide & Deep' learning model used in recommendations? (Select all that apply)",
+    "options": {
+      "A": "The 'Wide' component handles memorization of feature interactions.",
+      "B": "The 'Deep' component handles generalization to unseen feature combinations.",
+      "C": "It is specifically designed to eliminate the need for any feature engineering.",
+      "D": "It uses a joint training approach for both components."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary technical purpose of 'Bayesian Personalized Ranking' (BPR) optimization?",
+    "options": {
+      "A": "To predict the exact rating a user would give on a 1-5 scale.",
+      "B": "To optimize the model specifically for the ranking of items based on implicit feedback (pairwise preference).",
+      "C": "To calculate the probability that the server will fail under heavy load.",
+      "D": "To encrypt user embeddings using Bayesian cryptography."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Graph Neural Network' (GNN) recommender, what does 'Message Passing' represent?",
+    "options": {
+      "A": "Sending an email notification to the user about a new recommendation.",
+      "B": "The process of aggregating information from a node's neighbors (users or items) to update its own embedding.",
+      "C": "A protocol for transferring data between the SQL database and the Python script.",
+      "D": "The number of times a recommendation is skipped by the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Thompson Sampling' is a heuristic for the multi-armed bandit problem that involves sampling from the posterior distribution of the mean reward of each arm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describe the 'Explaining' capability in recommendation systems? (Select all that apply)",
+    "options": {
+      "A": "Providing reasons why an item was recommended (e.g., 'Because you watched X').",
+      "B": "Improving user trust and transparency.",
+      "C": "Helping users understand the limitations of the algorithm.",
+      "D": "Increasing the file size of the recommendation output."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Negative Sampling' in the training of a Word2Vec-style item embedding (Item2Vec)?",
+    "options": {
+      "A": "Removing users who have only given negative reviews.",
+      "B": "Selecting a few non-interacted items for each positive interaction to efficiently approximate the softmax function.",
+      "C": "Deleting items that are no longer in stock.",
+      "D": "A way to reduce the brightness of the training visualization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Ranking' metric is non-differentiable, posing challenges for direct optimization via Gradient Descent?",
+    "options": {
+      "A": "MSE (Mean Squared Error)",
+      "B": "nDCG (Normalized Discounted Cumulative Gain)",
+      "C": "Log Loss",
+      "D": "Binary Cross Entropy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Reinforcement Learning' for recommendations, the 'State' usually represents the user's historical profile and current context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid methods for 'Off-policy' evaluation in recommendation systems? (Select all that apply)",
+    "options": {
+      "A": "Inverse Propensity Scoring (IPS)",
+      "B": "Doubly Robust Estimator",
+      "C": "Live A/B Testing",
+      "D": "Direct Method (Reward Modeling)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Cold Start' mitigation strategy known as 'Cross-Domain Mapping'?",
+    "options": {
+      "A": "Mapping the IP address of the user to a physical map.",
+      "B": "Using a neural network to translate user preferences from a data-rich domain to a data-poor domain.",
+      "C": "Buying data from a different company to fill gaps.",
+      "D": "Hiring a professional to manually tag items."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Attention' mechanism used in sequential recommenders (like SASRec), what does the 'Query' vector typically represent?",
+    "options": {
+      "A": "A SQL query string written by the developer.",
+      "B": "The representation of the user's current intent or interest.",
+      "C": "The list of items in the database that are currently on sale.",
+      "D": "The number of users currently active in the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Calibration' in recommendations ensures that the predicted probability of a user clicking an item matches the actual observed click-through rate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of an 'Industrial-Scale' recommendation architecture? (Select all that apply)",
+    "options": {
+      "A": "Feature Store (e.g., Feast)",
+      "B": "Vector Database (e.g., Pinecone, Milvus)",
+      "C": "Real-time Scoring Engine",
+      "D": "Manual spreadsheet for final approval"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Long-tail' Item Recommendation challenge in GNNs?",
+    "options": {
+      "A": "When the tail of a distribution is physically too long for the CPU.",
+      "B": "The risk that popular items (high-degree nodes) dominate the embedding updates, suppressing niche items.",
+      "C": "A software bug that occurs during graph traversal.",
+      "D": "The difficulty of drawing a long tail on a graph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Factorization Machines' (FM), what is the primary benefit of the $k$-dimensional latent vectors for feature interactions?",
+    "options": {
+      "A": "They allow for modeling interactions even in extremely sparse data where specific combinations never occurred.",
+      "B": "They increase the complexity of the model to prevent underfitting.",
+      "C": "They automatically delete features that are not useful.",
+      "D": "They reduce the training time by exactly 50%."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Multi-Task Learning' (MTL) is used to simultaneously optimize for multiple user behaviors, such as 'Click', 'Add-to-Cart', and 'Purchase'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Exposure Bias' in recommender systems? (Select all that apply)",
+    "options": {
+      "A": "Users can only interact with items that were previously exposed/recommended to them.",
+      "B": "The system assumes that non-interacted items are always disliked by the user.",
+      "C": "The camera exposure in the item photos is too high.",
+      "D": "Model training on biased historical logs leads to a reinforcement of the status quo."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Counterfactual' evaluation?",
+    "options": {
+      "A": "Counting the number of facts in a report.",
+      "B": "The process of estimating what the user reward would have been if a different recommendation policy had been used.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Sequence-to-Sequence' recommendation models, what is the role of the 'Positional Encoding'?",
+    "options": {
+      "A": "To store the GPS coordinates of the user.",
+      "B": "To give the model information about the relative or absolute order of user interactions.",
+      "C": "To identify the position of the server in the rack.",
+      "D": "To encode the user's social status."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Differential Privacy' can be applied to recommendation systems to ensure that individual user interactions cannot be reverse-engineered from the trained model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Multi-Objective' optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Scalarization (Weighted sum of objectives)",
+      "B": "Pareto Optimization",
+      "C": "Alternating Optimization",
+      "D": "Ignoring all objectives except Profit"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Knowledge Graph' (KG) augmented recommendation?",
+    "options": {
+      "A": "Recommending only books about graphs.",
+      "B": "Integrating external structured information about items and entities to provide richer semantic context.",
+      "C": "A specialized software for architects.",
+      "D": "The process of teaching the algorithm how to draw."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DeepFM', how are the 'FM' and 'Deep' parts combined?",
+    "options": {
+      "A": "One is used for training, the other for testing.",
+      "B": "They share the same raw input embeddings and their outputs are summed before the final activation.",
+      "C": "The Deep part is a sub-layer of the FM part.",
+      "D": "They are never used at the same time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Unbiased' recommenders aim to provide the same recommendations to all users regardless of their past data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Listwise' ranking algorithms? (Select all that apply)",
+    "options": {
+      "A": "ListNet",
+      "B": "SoftRank",
+      "C": "LambdaRank",
+      "D": "PointNet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Latent Dirichlet Allocation' (LDA) used for in content-based filtering?",
+    "options": {
+      "A": "To calculate the price of a movie ticket.",
+      "B": "To discover abstract 'topics' within a collection of item descriptions.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate 'Discounted Cumulative Gain' (DCG) at position $p$?",
+    "options": {
+      "A": "Sum of (Relevance / Number of Users)",
+      "B": "Sum of (Relevance / log2(position + 1))",
+      "C": "Total Relevance - Total Cost",
+      "D": "Average Precision * K"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In large-scale systems, candidate generation (retrieval) must be extremely fast, often utilizing approximate nearest neighbor (ANN) search.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Matrix Factorization' variant incorporates 'Time-Drift' to account for changing user preferences over years?",
+    "options": {
+      "A": "SVD++",
+      "B": "TimeSVD++",
+      "C": "Temporal FM",
+      "D": "Dynamic KNN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Upper Confidence Bound' (UCB) prioritize in a recommendation strategy?",
+    "options": {
+      "A": "Items with the highest current average reward.",
+      "B": "Items with the highest potential reward, considering both mean estimate and uncertainty (exploration).",
+      "C": "Deleting items that have low ratings.",
+      "D": "Hiring a professional to exploit the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are parts of the 'Re-Ranking' phase logic? (Select all that apply)",
+    "options": {
+      "A": "Diversity filtering (e.g., Determinantal Point Processes)",
+      "B": "Business constraints (e.g., promoted items, inventory levels)",
+      "C": "User-level deduplication",
+      "D": "Training the base embedding model"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Collaborative Metric Learning' (CML)?",
+    "options": {
+      "A": "Learning how to use a physical ruler.",
+      "B": "An approach that learns a joint metric space where users and items are represented such that distances encode preferences.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring more people to measure data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Neural' recommenders, what is 'Embedding Dropout' used for?",
+    "options": {
+      "A": "Dropping a physical hard drive to see if it breaks.",
+      "B": "A regularization technique to prevent the model from over-relying on specific feature dimensions.",
+      "C": "A security scan for browser sessions.",
+      "D": "Storing recommendations in a physical session log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Factorization Machines' can model high-order feature interactions (e.g., user-item-location) in polynomial time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Echo Chambers' in recommendation systems? (Select all that apply)",
+    "options": {
+      "A": "Users are only exposed to information that aligns with their pre-existing biases.",
+      "B": "The algorithm feedback loop amplifies specific viewpoints while suppressing others.",
+      "C": "The server room has a literal physical echo.",
+      "D": "A social phenomenon where beliefs are amplified by communication within a closed system."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Cold Start' item challenge known as 'Content-Collaborative' gap?",
+    "options": {
+      "A": "The time it takes to move data from Content to Collaborative servers.",
+      "B": "The difficulty of aligning item features with user latent factors when no interaction data exists.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning' recommenders, what is 'Policy Gradient' used for?",
+    "options": {
+      "A": "Calculating the slope of a physical hill.",
+      "B": "Directly optimizing the recommendation policy (the mapping from states to actions) to maximize long-term reward.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Offline-to-Online' bias occurs when a model is trained on data generated by a previous version of itself.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Context-Aware' modeling techniques? (Select all that apply)",
+    "options": {
+      "A": "Tensor Factorization",
+      "B": "Contextual Bandits",
+      "C": "FM with context features",
+      "D": "Ignoring the user's current city"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Fairness-Aware' recommendation?",
+    "options": {
+      "A": "Making sure the UI colors are fair to all users.",
+      "B": "Ensuring that recommendations do not discriminate based on protected attributes like race, gender, or age.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'nDCG', what is the 'Ideal DCG' (IDCG)?",
+    "options": {
+      "A": "The DCG score of a completely random recommendation list.",
+      "B": "The maximum possible DCG score obtained by sorting all items in the dataset by their actual relevance.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Exploration' in recommendation systems can lead to a short-term decrease in click-through rate in exchange for long-term knowledge.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Listwise' ranking loss functions? (Select all that apply)",
+    "options": {
+      "A": "ApproxNDCG",
+      "B": "ListMLE",
+      "C": "RankNet",
+      "D": "Pointwise Cross Entropy"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Knowledge' 'Distillation' in the context of large recommenders?",
+    "options": {
+      "A": "Hiring a person who is an expert in many languages.",
+      "B": "Training a smaller, faster 'student' model to mimic the behavior of a larger, accurate 'teacher' model.",
+      "C": "A way to count the number of users.",
+      "D": "Deleting data to save space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Explainability' vs 'Interpretability'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Explainability is the ability to provide a post-hoc reason; Interpretability is the ability to understand the internal model logic.",
+      "C": "Interpretability is for beginners; Explainability for experts.",
+      "D": "Explainability is 100x faster to compute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Domain' recommenders usually require overlapping users or items between the two domains to function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Sequence' 'Modeling' architectures? (Select all that apply)",
+    "options": {
+      "A": "GRU (Gated Recurrent Unit)",
+      "B": "Transformer (Self-Attention)",
+      "C": "CNN (using 1D convolution over time)",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Autoencoder' based recommendation logic?",
+    "options": {
+      "A": "Automatically encoding the user's name in a secret code.",
+      "B": "Using a neural network to reconstruct the user-item interaction vector, learning latent features in the bottleneck layer.",
+      "C": "A security bridge for data.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Multi-Armed' 'Bandits', what is 'Regret'?",
+    "options": {
+      "A": "Feeling sorry after making a bad recommendation.",
+      "B": "The cumulative difference between the reward of the optimal policy and the reward of the current recommendation strategy.",
+      "C": "A specialized software for accountants.",
+      "D": "The number of users who unsubscribed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BPR' loss is calculated by comparing the scores of a positive item and a randomly sampled negative item for a specific user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Retrieval' (Candidate Generation) algorithms? (Select all that apply)",
+    "options": {
+      "A": "Two-Tower Model",
+      "B": "Matrix Factorization (via ANN)",
+      "C": "Heavy Gradient Boosted Decision Tree (GBDT)",
+      "D": "Collaborative Filtering"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Session' 'RNN'?",
+    "options": {
+      "A": "A recurrent neural network that only runs during the day.",
+      "B": "An RNN-based model (like GRU4Rec) that processes sequences of user interactions within a session.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Fairness', what is 'Disparate Impact'?",
+    "options": {
+      "A": "When the server physically impacts the floor.",
+      "B": "When a recommendation policy results in significantly different outcomes for different groups (even if the intent was fair).",
+      "C": "A way to count the number of characters.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hybrid' recommenders can be categorized as monolithic, parallel, or pipelined based on how the components interact.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Graph-based' recommendation features? (Select all that apply)",
+    "options": {
+      "A": "Higher-order connectivity",
+      "B": "Inductive learning (generalizing to new nodes)",
+      "C": "Transductive learning (learning on fixed nodes)",
+      "D": "Using only the user's age as input"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Transformer' 'Encoder' 'Self-Attention' scale?",
+    "options": {
+      "A": "The physical size of the transformer hardware.",
+      "B": "The computational complexity of self-attention, which scales quadratically with sequence length ($O(L^2)$).",
+      "C": "A way to speed up the network.",
+      "D": "Hiring a person named Transformer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Collaborative' 'Filtering', what is 'Data' 'Density' significance?",
+    "options": {
+      "A": "How many bits are in a byte.",
+      "B": "The percentage of observed interactions; higher density usually leads to more reliable similarity estimates.",
+      "C": "A specialized software for architects.",
+      "D": "A list of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Embedding' 'Space' 'Normalization' (e.g., L2 norm) is often required to make Cosine similarity calculations valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Offline' 'Evaluation' metrics? (Select all that apply)",
+    "options": {
+      "A": "RMSE",
+      "B": "Recall@K",
+      "C": "nDCG",
+      "D": "Conversion Rate (CVR)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Search' 'Personalization'?",
+    "options": {
+      "A": "Hiring a person to search for you.",
+      "B": "Adapting search results based on the individual user's preferences, location, and past behavior.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep' 'Learning', what is 'AutoInt'?",
+    "options": {
+      "A": "An automatic integer calculator.",
+      "B": "A model that uses multi-head self-attentive neural networks to automatically learn high-order feature interactions.",
+      "C": "A security firewall for digital photos.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Feature' 'Crosses' are manual combinations of features (e.g., [City x Genre]) used to help linear models learn non-linear relationships.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Candidate' 'Generation' techniques? (Select all that apply)",
+    "options": {
+      "A": "Approximate Nearest Neighbors (ANN)",
+      "B": "Inverted Index (BM25)",
+      "C": "Filtering by Popularity",
+      "D": "Full nDCG ranking of all items"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cold' 'Start' 'User' 'Profile' 'Enrichment'?",
+    "options": {
+      "A": "Putting the user's computer in a freezer.",
+      "B": "Using third-party data or initial surveys to build a preliminary profile for a new user.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Ranking', what is 'Position' 'Bias'?",
+    "options": {
+      "A": "When the user sits in a biased position.",
+      "B": "The tendency of users to click items simply because they appear at the top of the list, regardless of relevance.",
+      "C": "A security scan for computer viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Reinforcement' 'Learning' allow recommenders to optimize for long-term user retention rather than just short-term clicks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Ethical Hacking", 
+  "questions": [
+    {
+    "question": "What is the primary difference between an 'Ethical Hacker' (White Hat) and a 'Cracker' (Black Hat)?",
+    "options": {
+      "A": "White hats only use MacBooks, while black hats use Linux.",
+      "B": "Ethical hackers have legal permission and a contract to test systems; crackers do so illegally.",
+      "C": "White hats are always faster at typing code.",
+      "D": "Cracker is a term for people who physically break hardware with hammers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Footprinting' is the first phase of an ethical hack, used to gather as much information as possible about a target network.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which networking protocol is used to translate a domain name (like google.com) into an IP address?",
+    "options": {
+      "A": "HTTP",
+      "B": "DNS",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Enumeration' involve in the hacking process?",
+    "options": {
+      "A": "Counting the physical number of employees in a building.",
+      "B": "The process of identifying user accounts, system names, network resources, and services on a target.",
+      "C": "A specialized software for architects to design offices.",
+      "D": "Increasing the frame rate of the terminal window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Reconnaissance' tools? (Select all that apply)",
+    "options": {
+      "A": "Nmap",
+      "B": "Whois",
+      "C": "Shodan",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Social Engineering' in the context of ethical hacking?",
+    "options": {
+      "A": "Engineering a physical bridge for a city.",
+      "B": "Manipulating individuals into divesting confidential information or performing actions that compromise security.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "The process of counting social media followers using SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Assessment' is the same as a 'Penetration Test'; both involve active exploitation of found bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TCP port is traditionally used for 'Secure Shell' (SSH) communications?",
+    "options": {
+      "A": "80",
+      "B": "22",
+      "C": "443",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Denial of Service' (DoS) attack?",
+    "options": {
+      "A": "An attack that makes a physical door impossible to open.",
+      "B": "An attempt to make a machine or network resource unavailable to its intended users by flooding it with traffic.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Passive Reconnaissance' involves gathering information without directly interacting with the target's systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is an example of 'Multi-Factor Authentication' (MFA)?",
+    "options": {
+      "A": "A password and a pet's name.",
+      "B": "A password and a one-time code from an authenticator app.",
+      "C": "Using the same password for two different websites.",
+      "D": "Writing a password on a physical sticky note."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of the 'Executive Summary' in a penetration test report? (Select all that apply)",
+    "options": {
+      "A": "To provide a high-level, non-technical overview of the security posture",
+      "B": "To list the physical snacks consumed during the test",
+      "C": "To highlight the most critical risks to business stakeholders",
+      "D": "To show the SQL code used to drop a database"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "Catching physical fish in a lake.",
+      "B": "Sending fraudulent communications that appear to come from a reputable source to steal sensitive data.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Exploit' is a piece of software or a sequence of commands that takes advantage of a vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Packet Sniffing'?",
+    "options": {
+      "A": "Physically smelling a computer component.",
+      "B": "The process of capturing and inspecting data packets as they travel across a network.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Least Privilege'?",
+    "options": {
+      "A": "Granting every user 'Root' access to ensure they can do their jobs.",
+      "B": "Ensuring users have only the minimum access levels necessary to perform their specific tasks.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Firewall' can be either hardware-based or software-based.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Keylogger'?",
+    "options": {
+      "A": "A physical person who makes keys for locks.",
+      "B": "Malware that records every keystroke made by a user to steal passwords or sensitive data.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Patch Management'?",
+    "options": {
+      "A": "The process of identifying, acquiring, installing, and verifying software updates to fix security vulnerabilities.",
+      "B": "Collecting physical cloth patches for a jacket.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in cybersecurity occur when the IT team prioritizes uptime while the Security team prioritizes strict lockdown, without a shared risk strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Scanning' techniques? (Select all that apply)",
+    "options": {
+      "A": "TCP Connect Scan",
+      "B": "Stealth (SYN) Scan",
+      "C": "Buying physical snack for the office",
+      "D": "UDP Scan"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cross-Site Scripting' (XSS)?",
+    "options": {
+      "A": "A vulnerability that allows attackers to inject malicious scripts into web pages viewed by other users.",
+      "B": "A person named XSS who is very cross.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Networking', what is the purpose of an 'IP Address'?",
+    "options": {
+      "A": "A unique string of numbers that identifies a computer or device on a network.",
+      "B": "A physical home address for a person.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Brute Force' attacks involve trying every possible combination of characters to crack a password.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Encryption'? (Select all that apply)",
+    "options": {
+      "A": "Encoding data so it cannot be read without a secret key",
+      "B": "Protecting data 'at rest' and 'in transit'",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Converting plaintext into ciphertext"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Malware'?",
+    "options": {
+      "A": "A physical clothing store for hackers.",
+      "B": "Software specifically designed to disrupt, damage, or gain unauthorized access to a computer system.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Risk Level'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A rating (e.g., Low, Medium, High, Critical) based on the probability and impact of a vulnerability.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hacking occurs when a penetration test is scheduled for 48 hours but the target network takes 72 hours to provision.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Wireless' security protocols? (Select all that apply)",
+    "options": {
+      "A": "WPA2",
+      "B": "WPA3",
+      "C": "The SQL query parser",
+      "D": "WEP"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Banner Grabbing'?",
+    "options": {
+      "A": "Grabbing a physical banner from a wall.",
+      "B": "A technique used to gain information about a computer system on a network and the services running on its open ports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Identity and Access Management' (IAM)?",
+    "options": {
+      "A": "The security discipline that enables the right individuals to access the right resources at the right times and for the right reasons.",
+      "B": "Managing physical ID cards for employees.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SQL Injection' (SQLi) is an attack where malicious SQL statements are inserted into an entry field for execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Physical' Security? (Select all that apply)",
+    "options": {
+      "A": "Security guards and cameras",
+      "B": "Biometric door locks",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring servers are in a locked room"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'White-Box' Testing?",
+    "options": {
+      "A": "Testing where the hacker has full knowledge of the internal code, structure, and IP address scheme of the target.",
+      "B": "Testing a white-colored box.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Remediation'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The process of fixing vulnerabilities identified during an ethical hacking engagement.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a client expects a 'Full Security Guarantee' after a simple 1-hour vulnerability scan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Security tools? (Select all that apply)",
+    "options": {
+      "A": "Metasploit",
+      "B": "Burp Suite",
+      "C": "Nessus",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Blue Teaming'?",
+    "options": {
+      "A": "A group of people wearing blue shirts.",
+      "B": "The group of security professionals responsible for maintaining defensive measures against cyberattacks.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediate' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average time it takes to fix a discovered security flaw.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a hacker tests a staging server that is much more secure than the actual production server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Hacking' Ethics? (Select all that apply)",
+    "options": {
+      "A": "Respecting privacy and confidentiality",
+      "B": "Staying within the scope of the agreement",
+      "C": "Identifying program satisfaction trends",
+      "D": "Reporting all findings to the client"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Social Engineering' logic?",
+    "options": {
+      "A": "Exploiting human psychology rather than technical hardware or software bugs to gain access.",
+      "B": "Engineering a social party.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Vulnerability' Index?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A quantifiable measure of the potential risk exposure within an organization's digital assets.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an ethical hacker provides feedback 1 year after the vulnerability was discovered.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Security Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CISO",
+      "B": "IT Director",
+      "C": "Compliance Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Honeypot'?",
+    "options": {
+      "A": "A physical pot full of actual honey.",
+      "B": "A decoy computer system intended to mimic likely targets of cyberattacks to detect or deflect them.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Exploit' Coverage?",
+    "options": {
+      "A": "A report showing the percentage of identified vulnerabilities for which a successful exploit was demonstrated.",
+      "B": "The amount of insurance the code has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer expects 'Instant' verification of a security fix while the pen-test is still ongoing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Hacking tools? (Select all that apply)",
+    "options": {
+      "A": "Automated vulnerability scanners (like OpenVAS)",
+      "B": "Scripted brute-force tools",
+      "C": "Guaranteed to replace all human managers",
+      "D": "AI-driven threat detection systems"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Packet' Injection?",
+    "options": {
+      "A": "Injecting a person with packets.",
+      "B": "A technique that interferes with an established network connection by constructing and sending forged packets to a target.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "A metric track tracking the duration of application uptime.",
+      "B": "The average amount of time it takes for an organization to realize that a security incident has occurred.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a system records too much irrelevant data, making it impossible for a security analyst to find an actual attack trace.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Security Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Legal Department",
+      "B": "HR Department",
+      "C": "Operations Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' Analysis in Hacking?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The process of assessing the potential danger posed by identified vulnerabilities to prioritize remediation.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average time taken to fix a security flaw after it has been discovered and verified.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in hacking refers to a security researcher trying to run high-end password cracking tools on a computer from 1995.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' Security? (Select all that apply)",
+    "options": {
+      "A": "Ensuring security awareness reaches non-technical staff",
+      "B": "Actively seeking diversity in the pentesting team",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where all security concerns can be voiced"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Data' Integrity in Security?",
+    "options": {
+      "A": "Maintaining and assuring the accuracy and consistency of data over its entire life-cycle.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The predicted elapsed time between inherent failures of a mechanical or electronic system, during normal system operation.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a security clearance to be granted immediately after submitting the form.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Security Champions' in the dev team",
+      "B": "Predicting future release delays based on current vulnerability burn-down",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing trends in common attack vectors over time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' Architecture?",
+    "options": {
+      "A": "The design of a physical building for security.",
+      "B": "A unified security design that addresses the necessities and potential risks involved in a certain scenario or environment.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Outages' (MTBO)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time between network or system failures caused by security incidents.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a company enforces a strict dress code for remote employees.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Security Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Chief Technology Officer (CTO)",
+      "B": "Security Operations Center (SOC) Manager",
+      "C": "Data Privacy Officer (DPO)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Ethical Hacking?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' and reuse successful exploit payloads across different targets to save time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Metasploit module is technically used to gather information about a target before launching an exploit?",
+    "options": {
+      "A": "Payloads",
+      "B": "Auxiliary",
+      "C": "Post",
+      "D": "Encoders"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Blind SQL Injection' attack, the database does not return any visible data, so the attacker must rely on time delays or Boolean responses to extract information.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which technical mechanism is primarily used to prevent 'Buffer Overflow' vulnerabilities at the operating system level?",
+    "options": {
+      "A": "Input Sanitization strictly",
+      "B": "Address Space Layout Randomization (ASLR)",
+      "C": "WPA3 Encryption",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical objective of a 'Reverse Shell' in a penetration test?",
+    "options": {
+      "A": "To physically turn the server computer around.",
+      "B": "To have the target machine initiate a connection back to the attacker's machine, often to bypass firewall restrictions.",
+      "C": "A specialized software for architects to design server rooms.",
+      "D": "To increase the frame rate of the remote terminal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of 'Emotional Intelligence' is technically required for a Red Team Lead when delivering a critical failure report to a sensitive IT department?",
+    "options": {
+      "A": "Self-Awareness strictly",
+      "B": "Social Regulation and Conflict Management",
+      "C": "Owning the fastest computer in the SOC",
+      "D": "Hiring a professional actor to represent the team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in ethical hacking occurs when a client expects a 'Full Zero-Day Audit' within a 24-hour time window.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Strategic Hacking', what is 'Lateral Movement' technically intended to achieve?",
+    "options": {
+      "A": "Moving a physical server to the left side of the room.",
+      "B": "The process of moving from an initially compromised host to other systems within the same network to find higher-value targets.",
+      "C": "A specialized security scan for hardware viruses.",
+      "D": "Increasing the size of the font on the admin dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Salt' in the context of cracking password hashes?",
+    "options": {
+      "A": "A physical condiment used in the server room.",
+      "B": "Unique, random data added to each password before hashing to prevent the use of pre-computed Rainbow Tables.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Privilege Escalation' vectors? (Select all that apply)",
+    "options": {
+      "A": "Exploiting misconfigured SUID bits in Linux",
+      "B": "Abusing insecure Windows Service permissions",
+      "C": "Buying physical snack for the system admin",
+      "D": "Kernel-level exploit execution"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Cross-Site Request Forgery' (CSRF) involves an attacker forcing a user's browser to perform an unwanted action on a different website where the user is currently authenticated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of the 'Burp Suite' Proxy during a web application pentest?",
+    "options": {
+      "A": "To intercept and modify HTTP/S requests between the browser and the server in real-time.",
+      "B": "A physical proxy for a person who is sick.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Criticality' 'Aggregation'?",
+    "options": {
+      "A": "The physical weight of the pen-test report.",
+      "B": "The process of grouping related vulnerabilities to show a systemic risk (e.g., 'Weak Authentication' across 5 apps) rather than 5 isolated bugs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Payload' type should an ethical hacker use to maintain access across a system reboot?",
+    "options": {
+      "A": "Non-persistent Payload",
+      "B": "Persistent Payload (e.g., Registry Run Keys or Cron jobs)",
+      "C": "A simple 'Hello World' script",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in red-teaming occur when the 'Blue Team' treats the test as a 'Win/Loss' competition rather than a collaborative learning exercise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sentiment' 'Analysis' benefits for a Security Lead? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-stress periods for the SOC team via log analysis",
+      "B": "Tracking 'Trust' levels between the Dev and Security squads",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Enabling data-driven interventions for burnout"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Leader' 'Standard' 'Work' (LSW) in a Pen-Test firm context?",
+    "options": {
+      "A": "A physical manual for building server racks.",
+      "B": "A checklist of daily/weekly actions (like Scope Reviews, Report QA, Stakeholder Updates) to ensure testing quality is consistent.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Exploit' (MTTE)?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The duration between a vulnerability being publicly disclosed and the first known automated exploit appearing in the wild.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a hacker expects a 'Dictionary Attack' against a 20-character complex password to finish in 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' Hacking framework handles 'Exfiltration' simulation?",
+    "options": {
+      "A": "The Data Loss Prevention (DLP) bypass testing",
+      "B": "The initial Nmap scan strictly",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' and why is it important for Red Teamers?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "A process of questioning not just 'how we hacked the app' but 'why the security architecture allowed this vulnerability to exist'.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Calibration' in a security squad?",
+    "options": {
+      "A": "Putting the employees on a physical bus.",
+      "B": "Standardizing 'Skill Level' definitions (e.g., Senior vs Junior Pen-tester) to ensure consistent report quality across global teams.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a lead expects 'Full Remediation' of a Kernel-level vulnerability within 48 hours of discovery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Security' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Technology Officer (CTO)",
+      "B": "Governance, Risk, and Compliance (GRC) Lead",
+      "C": "Legal Counsel",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Leadership' in a Red Team context?",
+    "options": {
+      "A": "Leading a team in a dark room.",
+      "B": "The informal influence exerted by senior individual contributors who shape the team's testing methodologies without having a formal management title.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Remediation' 'Velocity'?",
+    "options": {
+      "A": "Analytics of a person named Velocity.",
+      "B": "A metric tracking how quickly the dev team fixes 'Critical' vulnerabilities found in pen-tests over time.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a hacker uses a 2024 'C2' (Command & Control) server framework for a 1990s legacy 'SCADA' system, causing a system crash.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Red' 'Team' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Physical Security Lead",
+      "B": "Chief Privacy Officer",
+      "C": "Incident Response (Blue Team) Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Risk' 'Management' in an Ethical Hack?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The process of weighing the potential negative impact of an exploit (e.g., crashing a production DB) against the value of proving the vulnerability.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a simulated breach?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the start of an exploit until the Blue Team's SOC flags the activity in their dashboard.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a hacker uses 'Discord' for C2 communications in an environment that only allows 'Strictly Inspected' HTTP traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Security' 'Decision' 'Making'? (Select all that apply)",
+    "options": {
+      "A": "Inviting the Blue Team to participate in the Red Team debrief",
+      "B": "Conducting 'blind' methodology reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring quiet team members have space to share their exploit ideas"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Bias' in Hacking?",
+    "options": {
+      "A": "Mental shortcuts like 'Confirmation Bias' where a hacker only searches for vulnerabilities they are already good at finding.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Debt' in Security?",
+    "options": {
+      "A": "The future cost of negative cultural issues (toxic behavior, lack of trust) caused by choosing quick, easy security fixes today.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a hacker provides report feedback only once a year during the annual engagement review.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engagement' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Regulatory Compliance (PCI/HIPAA)",
+      "B": "Board-level Cyber Risk Awareness",
+      "C": "Brand Reputation Protection",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' logic in a Security squad?",
+    "options": {
+      "A": "Hiring servants to write the code.",
+      "B": "Focusing on removing bureaucratic blockers so the security engineers can focus on 'Deep Work' and exploit research.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The number of identified security vulnerabilities relative to the size of the application (e.g., per 1,000 lines of code).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Wireless Auditor' a laptop that does not physically support 'Monitor Mode'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hacking' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into vulnerability 'Burn-down' charts",
+      "B": "Consistency in data presentation for executive boards",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Reduction in manual spreadsheet tracking for managers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in hacker training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' and reuse exploit logic or payloads across different projects to increase team efficiency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a 'Critical' bug?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a critical vulnerability is reported until it is verified as 'Fixed' in the main production branch.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a hacker is given access to test a 'User-level' account but is expected to demonstrate 'Admin-level' exploits without privilege escalation path.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Global Privacy Officer (GPO)",
+      "C": "Internal Security Audit Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed Red Team?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The process of quickly establishing shared exploit payloads, communication channels, and reporting templates for a new group of researchers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of simulated phishing?",
+    "options": {
+      "A": "The percentage of employees who successfully identified and reported the simulated phishing email without clicking the link.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Instant' feedback on an exploit that requires 48 hours of automated scanning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for Security Leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Security Champions' in the dev team",
+      "B": "Predicting future breach probability based on current debt levels",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Analyzing team sentiment to identify 'Compliance Fatigue'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in a Secure Lab?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Exploit Payload' data from a current engagement is technically unreachable by unauthorized employees to prevent accidental leaks.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Findings' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of network stability before a major logic bug or exploit path is identified by the Red Team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hacking occur when the remediation timeline for a 'Zero-Day' is based on 'Fixed Dates' rather than 'Current Risk Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Usability' standards",
+      "B": "Keeping records updated with rapidly changing global 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Safety' if leads check boxes without actual verification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a strategic hacking plan?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical exploit details are isolated from the high-level business risk goals, so tactics can change without shifting the vision.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an internal threat?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a simulated 'Insider Threat' event until the SOC team officially identifies and investigates the anomaly.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in hacking occur when an organization uses a 2010 'Signature-based' defense for a 2026 'Polymorphic' malware threat.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Global Privacy Director",
+      "B": "Lead Incident Responder",
+      "C": "Compliance Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Ecosystem' 'Orchestration' for a Security Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of external vendors, threat intelligence feeds, internal talent, and automation tools to ensure long-term resilience.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Confidence' (MTRSC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile security failure and the point where the organization's 'Safety' metrics return to baseline.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects a 'Market Leader' safety score from a project that has been active for exactly 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Blockers' for the Board",
+      "B": "Reduction in manual administrative work for directors",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a security pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Security Sprints' where each phase results in a specific, independently verifiable 'Technical Integrity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in security?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical security seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority security audits to a single Lead Researcher with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Operational Vulnerability' scores",
+      "B": "Predicting future market 'Policy' shocks based on global user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Security Training' spend with 'Incident Reduction' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific hacker is developed, based on their team's engagement scores, historical pass rates, and exploit ROI.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major security strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hacking leadership occur when the remediation timeline for a 'Zero-Day' is based on 'Fixed Dates' rather than 'Current System Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of modern memory corruption exploits, how does 'Return-Oriented Programming' (ROP) technically bypass 'Data Execution Prevention' (DEP)?",
+    "options": {
+      "A": "By physically disabling the NX bit in the server's BIOS.",
+      "B": "By chaining together small snippets of existing executable code (gadgets) already present in the memory to perform malicious actions.",
+      "C": "By injecting a very long string of 'NOP' instructions to confuse the CPU.",
+      "D": "By requiring the server to restart in 'Safe Mode' automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Golden Ticket' attacks involve the exploitation of the Kerberos 'Ticket-Granting Ticket' (TGT) to grant an attacker permanent, undetectable administrative access to an Active Directory domain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a Red Team Lead to predict the joint probability of a multi-vector attack succeeding based on 'Lateral Movement' and 'Privilege Escalation' nodes?",
+    "options": {
+      "A": "Attack Graph Analysis with Markov Chains",
+      "B": "Standard SQL COUNT strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'C2 Infrastructure Sharding' during a global red-team engagement?",
+    "options": {
+      "A": "To ensure every hacker has the same physical brand of keyboard.",
+      "B": "To distribute Command & Control traffic across multiple domains, providers, and IP addresses to prevent a single 'Blue Team' block from terminating the entire operation.",
+      "C": "A specialized software for architects to design server rooms.",
+      "D": "To increase the frame rate of the remote terminal window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Post-Exploitation', what is 'DLL Side-Loading' and how is it technically executed?",
+    "options": {
+      "A": "Physically loading a CD into a side-loading drive.",
+      "B": "Placing a malicious DLL in a directory where a legitimate, signed application will load it due to search order hijacking, bypassing application whitelisting.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the system's dynamic link library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Archetypes' occur when a Red Team focuses exclusively on 'Technical Vulnerabilities' while ignoring 'Process Vulnerabilities', leading to a report that misses systemic organizational risks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Persistence' strategy involves an attacker modifying the 'Windows Management Instrumentation' (WMI) event filters to trigger a malicious payload based on a system event?",
+    "options": {
+      "A": "Standard Registry Run Key",
+      "B": "WMI Event Subscription Persistence",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Defense' 'Evasion' and its relation to 'Heuristics' in a modern EDR (Endpoint Detection and Response) environment?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "Designing exploit payloads that mimic legitimate system behavior (living off the land) to avoid triggering behavioral detection patterns.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' ROI metrics for a strategic Penetration Testing program? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Detection' (MTTD) for Blue Team during simulations",
+      "B": "Financial delta of 'Cyber Liability' insurance premiums post-remediation",
+      "C": "Number of 'Critical Paths' identified that bypass MFA or Zero-Trust gates",
+      "D": "The number of security cameras in the office lobby"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' within a Red Team allows researchers to report 'Failed Exploits' without fear of being seen as incompetent, leading to better technical post-mortems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Red Team Lead's strategy?",
+    "options": {
+      "A": "The physical weight of the researcher's laptop.",
+      "B": "The ability to architect an attack chain across heterogeneous environments (Cloud, On-prem, IoT) where trust boundaries are ambiguous.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a breach decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Payload' 'Polymorphism'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of generating unique exploit signatures for every target host to prevent 'Global' detection based on a single file hash.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves the hacker 'Self-Policing' and stopping an exploit when it risks 'Production Data Corruption', even if the goal is not yet achieved?",
+    "options": {
+      "A": "Micromanagement",
+      "B": "Professional Restraint (Ethical Guarding)",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a security acquisition often result in 'Technological Rejection', where the acquired firm's Red Team refuses to adopt the parent company's 'Standardized' reporting templates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Security' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Lead Exploiter' potential in analysts who show high creative-lateral thinking",
+      "B": "Standardizing 'Resilience' scores across internal and external testing teams",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic Thinking' capacity of potential Security Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in an Exploit Retrospective?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Exploited Protocol' (e.g. SMB) should be retired entirely from the organization rather than just patching the single server.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Exploit' 'Path' 'Aggregation'?",
+    "options": {
+      "A": "Visualizing the cumulative risk of multiple 'Low' vulnerabilities that together allow for 'Domain Admin' access.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Defensive' 'Inertia' occurs when a firm continues to rely on 'Antivirus' signatures long after the Red Team has demonstrated they can bypass them in under 60 seconds.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Red' 'Team' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Detection Rate vs. Prevention Rate by Blue Team",
+      "B": "Mean Time to Actions on Objectives (MTAO)",
+      "C": "Percentage of 'Business-Logic' findings that automated scanners cannot find",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Entrenchment' risk during a 'Zero Trust' migration?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that senior network admins will block 'Identity-Based' routing to protect their traditional 'IP-based' security power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Compromises' (MTBCC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational stability by measuring how long the enterprise network remains 'Un-breached' during an active Red Team engagement.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a company demands 'Zero Incidents' while only rewarding the Security team for 'Low Vulnerability Counts' in a scanner report.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Threat' 'Intelligence' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Pastebin' leaks with internal employee credentials",
+      "B": "Automatically identifying 'Blind Spots' in an organization's EDR coverage",
+      "C": "Guaranteed to replace all human Red Teamers",
+      "D": "Analyzing attacker TTPs (Tactics, Techniques, Procedures) to predict future attack paths"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resilience' 'Portfolio' 'Management' (RPM) in Hacking?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The high-level balancing of Red, Blue, and Purple team investments to ensure systemic organizational safety.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Calibration' in a global security organization?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "Standardizing 'Skill Level' definitions (e.g. what constitutes a 'Senior Exploiter') across NY, Tokyo, and Berlin offices.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when a CEO expects '100% Security' in 3 months for a 20-year-old legacy system that the Red Team hacked in 4 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hacking' 'Governance' for Leads? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging 'Testing Scopes' that have not been audited in 6 months",
+      "B": "Calculating 'Vulnerability Remediation' speed for every engineering squad",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Legal Consent' forms are current for all active IP ranges"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Strategic Hacking Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the 'Technical Payloads' are isolated from the 'High-level Strategic Intent', allowing researchers to swap tools without changing the engagement's goals.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High' 'Impact' 'Exploit'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an exploit first hitting the network and the SOC team officially flagging it as a systemic breach.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Red Team Lead shares 'Critical Risks' with the CEO before explaining them to the IT Director, creating organizational friction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Security' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Connecting 'Vulnerability Trends' to the 'Strategic Board Dashboard'",
+      "B": "Syncing 'Pentest Maturity' scores directly with 'Departmental Risk' scores",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Linking 'Breach Remediation' time to 'CTO Performance' reviews"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hacking' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common Scoping, Legal, and Reporting protocols for a newly acquired security team.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' 'Decay' Index?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'System Hardening' as new employees join and bypass existing security standards.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Director expects 'Instant Visual Hack' demos for a system that is currently undergoing a 'Back-end' logic refactor.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Red' 'Team' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Real-time 'Breach Probability' heatmaps for the CEO",
+      "B": "Consolidated 'Risk' views that hide tactical 'Exploit Signature' noise",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Automatic generation of 'Executive Summaries' for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Strategic Security M&A?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring the acquired company's 'Hacking Artifacts' are logically separated from the parent network until a full technical and privacy audit is completed.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Clarity' (MTRSC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a major security failure and the point at which a new 'Defensive Strategy' is officially accepted by the board.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in security refers to a firm promising '100% Hack-Proof' results for an environment that has zero 'Security Monitoring' enabled.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Director of Offensive Security",
+      "C": "Lead Resilience Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' in a Cyber context?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Blue Team MTTD', 'Red Team MTAO', 'Backup Integrity', and 'Incident Response Effectiveness'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Findings' (MTBCF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking organizational safety by measuring how long the network remains stable before the Red Team finds a new critical exploit path.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 1990s 'Vulnerability Scanning' (Checkboxes) in a 2026 'Red-Teaming' (Outcome-based) culture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Human-Logic' hack paths",
+      "B": "Keeping records updated with rapidly changing global 'Cybersecurity' laws",
+      "C": "Guaranteed to replace all human hackers",
+      "D": "Risk of 'False Safety Confidence' if leads only use automated vulnerability scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Hacking' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which an organization's 'Red Team Infrastructure' (Proxies, C2, Labs) can sustain major technological shifts without a loss of testing velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' breach?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an automated 'Audit' failure and the Legal/Compliance team being officially notified of the risk.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Artifact' 'Ownership' in security occurs when 'Hacking Payloads' are stored on a server that only the 'Marketing' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Privacy Compliance Leads",
+      "C": "Engineering Directors",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Bootstrap' orchestration for a new remote research hub?",
+    "options": {
+      "A": "The rapid establishment of standardized test labs, C2 frameworks, and 'Safety Culture' workshops in a new offshore location within 60 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Threat Model' and 'Defensive Stack' to stay current with technology.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a University Intern after exactly 48 hours of security training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hacking' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Security Asset' (e.g. Exploit Lab) has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Ethics Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Red Team leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global security talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Offensive Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Hack Strategy' can be 'Lifted' from one product line (e.g. Cloud) and applied to another (e.g. Mobile).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTRROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an offensive tool becoming 'Detected' and the point where its 'Logic' is updated to provide business value (evasion) again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the Board expects 'Zero Release Delays' while the Security Director is enforcing a 'Zero Critical Vulnerabilities' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Hacking' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Security ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Red Team Leads",
+      "C": "Guaranteed to replace all human security managers",
+      "D": "Instant generation of 'Vulnerability-Density-per-R&D-Dollar' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hacking' 'Encapsulation' in a 'Squad' 'Based' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing the team structure so that a 'Squad A' failure in exploit logic does not technically or culturally jeopardize the 'Squad B' testing cycle.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Threat' 'Intelligence' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new threat vector (e.g. LLM Jailbreaking) is identified until the Security Architect identifies the tools needed to test it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when the 'Security Refactor' is planned annually, but the 'Attack Surface' updates every 14 days, leading to permanent strategic debt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Officer (CIO)",
+      "B": "Global Release Train Engineer",
+      "C": "Lead Regulatory Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Hacking' 'Bootstrap' complexity for a 'Turnaround' Red Team Lead?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of resetting a 'Low-Maturity/Legacy' security culture into a 'Modern and Offensive' engineering organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTBLE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the Security Leadership layer, identifying if 'Management Burnout' is causing frequent Director-level churn.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects a 'Zero-Trust Culture' in a 1,000-person manual organization to be masterfully completed in 30 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hacking' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Exploit' mapping across global product lines",
+      "B": "Reducing the 'Vulnerability Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated tests"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Security.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Defense' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Confidence' (MTRSC) post-breach?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical 'Red Team' compromise until the organization's 'Safety' scores return to baseline through process fix and Blue Team training.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Governance' in cybersecurity leadership refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic auditing grid that prevents squad innovation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Defense vs. Offensive' spend ratio",
+      "B": "Identifying squads that are 'Security Lagging' based on vulnerability trends",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Offensive Security' tools relative to incident reduction"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Hacking' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Payloads' (the How) are hidden from the 'High-level Security Policy' (the What), allowing tools to be swapped without changing organizational standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

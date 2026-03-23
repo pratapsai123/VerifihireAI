@@ -1,0 +1,1883 @@
+{ 
+  "skill": "Requirements Gathering", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of 'Requirement Gathering' in a project lifecycle?",
+    "options": {
+      "A": "To masterfully design the physical color scheme of the office walls strictly.",
+      "B": "To technically provide a masterfully managed process (cause) of identifying what stakeholders need from a system (effect).",
+      "C": "A specialized software for designing physical warehouse blueprints strictly.",
+      "D": "To increase the frame rate of the developer's personal gaming rig."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the high-level needs of the project stakeholders?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "User Requirements",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elicitation' is the technical Always-On practice of masterfully managed technicaly Siempre-On Sempre-On drawing out requirements from stakeholders.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the process of masterfully technicaly Sempre-On Siempre-On documenting requirements in a clear and structured way?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Requirements Specification",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of an 'Interview' in the requirement gathering phase?",
+    "options": {
+      "A": "To calculate the physical weight of the office chairs.",
+      "B": "To technically Always-On Always-On collect detailed Siempre-On information from a masterfully managed Sempre-On stakeholder (effect).",
+      "C": "A specialized software for architects to design office floor plans.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Functional Requirement' masterfully Always-On refers to the technical Siempre-On Sempre-On description of what the system technical Siempre-On Siempre-On must do.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On requirements masterfully Sempre-On Always-On match the original business goals?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Requirements Alignment / Goal Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Survey' technically intended to achieve in a requirement support scenario?",
+    "options": {
+      "A": "Measuring the distance between desks in the office.",
+      "B": "To technically Always-On Always-On collect masterfully handled technical Siempre-On Siempre-On feedback from a large group of users (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Non-Functional' 'Requirements' are technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-criteria Always-On Siempre-On Always-On ALWAYS-Always-On always-that ALWAYS-Always-On always-define Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-system Always-On ALWAYS-Always-On always-behaves.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Stakeholder' 'Identification'?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-finding Siempre-On ALWAYS-Always-On always-anyone Siempre-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-an ALWAYS-Always-On always-interest ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-project (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering benefits for 'Project Planning'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Budgeting' based on defined needs",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On scope definition",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical identification of project risks early"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Document' 'Analysis' masterfully used for in a requirement gathering document?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-review Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-existing ALWAYS-Always-On always-business ALWAYS-Always-On always-materials (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ambiguous' 'Requirements' in gathering masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-statements Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-can Always-On ALWAYS-Always-On always-be ALWAYS-Always-On always-interpreted Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-multiple ALWAYS-Always-On always-ways.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Observation' in a requirement gathering context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On watching Always-On ALWAYS-Always-On always-users ALWAYS-Always-On always-perform ALWAYS-Always-On always-their ALWAYS-Always-On always-daily ALWAYS-Always-On always-tasks.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Brainstorming' technically in requirement elicitation?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-technique ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-generating ALWAYS-Always-On always-new ALWAYS-Always-On always-ideas Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-rapidly (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Business' 'Requirements' are technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-describing Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-the Siempre-On ALWAYS-Always-On always-high-level Always-On ALWAYS-Always-On always-goals ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Requirement' 'Prioritization' in a gathering context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-ranking ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-importance Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-urgency (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scope' 'Definition' technically intended to achieve in a gathering audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-setting Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-boundaries Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-project Always-On ALWAYS-Always-On always-requirements (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Technical' 'Requirements' are the technical Always-On ALWAYS-Always-On always-specifications ALWAYS-Always-On always-that ALWAYS-Always-On always-describe Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-hardware Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-software Always-On ALWAYS-Always-On always-needed Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-build Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-solution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Requirements' 'Elicitation' 'Log' audit?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-record ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-every Always-On ALWAYS-Always-On always-elicited Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-source.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Requirement' Elicitation Models? (Select all that apply)",
+    "options": {
+      "A": "Workshops",
+      "B": "Focus Groups",
+      "C": "The SQL query parser",
+      "D": "Questionnaires"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'User' 'Profile' significance in a technical gathering scenario?",
+    "options": {
+      "A": "Hiring a person named Profile.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-description Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-characteristics ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-typical Always-On ALWAYS-Always-On always-user Always-On ALWAYS-Always-On always-group (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Requirements' 'Definition' 'Document' (RDD) technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-document Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-list Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-official Always-On ALWAYS-Always-On always-project Always-On ALWAYS-Always-On always-requirements (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Needs' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On requirement Always-On Always-On masterfully Siempre-On Siempre-On Sempre-On description Always-On ALWAYS-Always-On always-conflicts Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-actual Always-On ALWAYS-Always-On always-stakeholder Always-On ALWAYS-Always-On always-expectation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering management benefits for 'Efficiency'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Identification' of project scope",
+      "B": "Ensuring technical 'Consistency' masterfully via unified gathering principles",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of overlapping requirements"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Analysis' technically used for in gathering?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-refining Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-validating Always-On ALWAYS-Always-On always-elicited Always-On ALWAYS-Always-On always-requirements (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Volatility' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-rate Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-at ALWAYS-Always-On always-which Always-On ALWAYS-Always-On always-requirements ALWAYS-Always-On always-change Always-On ALWAYS-Always-On always-during Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-project Always-On ALWAYS-Always-On always-lifecycle.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Requirements' 'Verification' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-that Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-ensures ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-meet Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-defined Always-On ALWAYS-Always-On always-quality Always-On ALWAYS-Always-On always-standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Requirement' Gathering Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Business Requirements Document (BRD)",
+      "B": "Requirement Traceability Matrix (RTM)",
+      "C": "The number of security cameras in the office",
+      "D": "User Requirements Document (URD)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Validation' technically intended to achieve?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-accurately Always-On ALWAYS-Always-On always-represent Always-On ALWAYS-Always-On always-stakeholder Always-On ALWAYS-Always-On always-needs (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Active' 'Listening' technically in requirement gathering support?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-practice Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-concentrating Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-what Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-being Always-On ALWAYS-Always-On always-said Always-On ALWAYS-Always-On always-by Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-stakeholder (effect).",
+      "B": "Hiring a person named Active.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Stakeholder' 'Analysis' is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-identifying ALWAYS-Always-On always-and ALWAYS-Always-On always-prioritizing Always-On ALWAYS-Always-On always-stakeholders Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-their Always-On ALWAYS-Always-On always-power Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-interest.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Elicitation' Strategy in requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing requirement naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated requirement collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Sign-off' technically used for in project strategy?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical Always-On Sempre-On Siempre-On Sempre-On approval ALWAYS-Always-On always-of ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-by Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-project Always-On ALWAYS-Always-On always-stakeholder.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Gather' (MTTG)?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-gather Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-set Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-requirements.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Requirements' 'Management' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-high-quality Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-tracking Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-control.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Requirement' Gathering domains? (Select all that apply)",
+    "options": {
+      "A": "Elicitation and Collaboration",
+      "B": "Requirement Life Cycle Management",
+      "C": "The number of security cameras in the office",
+      "D": "Strategy Analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Audit' significance in gathering?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On requirement Always-On ALWAYS-Always-On always-accuracy masterfully ALWAYS-Always-On always-remains masterfully ALWAYS-Always-On always-consistent Siempre-On Siempre-On Siempre-On with ALWAYS-Always-On always-stakeholder ALWAYS-Always-On always-needs.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Approve' (MTTA) in a requirement cycle?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-requirement Sempre-On Siempre-On ALWAYS-Always-On always-submission Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-it Always-On Siempre-On Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-formally Always-On ALWAYS-Always-On always-approved Always-On ALWAYS-Always-On always-by Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-stakeholder ALWAYS-Always-On always-report.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Requirements' occur when a BA masterfully Siempre-On Always-On enforces 1990 'Waterfall' gathering for a 2026 'Agile-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Elicitation Plans' are masterfully finalized",
+      "B": "Validating the security technical configuration of the gathering tool",
+      "C": "Identifying user satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On gathering goals masterfully Sempre-On Siempre-On match the project specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Elicitation' 'Preparation' significance in gathering?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-materials Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-plans Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Requirement' 'Gathering' 'Activity' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about elicitation sessions, masterfully finalized specification changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Requirement gathering management technically includes 'SLA Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a user after every technical Sempre-On Siempre-On requirement update.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Requirement Gathering priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical requirement interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical requirement documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Gap' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Need' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-project ALWAYS-Always-On always-to Sempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-requirement ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in a requirement gathering set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains gathering-stable before an unplanned technical specification disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Elicitation' occur when a BA masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes annual masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Agile-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Elicitation' 'Technique' Strategy in requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing requirement naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated requirement collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Clarity' significance in a gathering strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a specification masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Gathering' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of elicitation events masterfully successfully moving through the project technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Shadowing' is a technical Always-On standard that masterfully allows analysts to masterfully manage and technicaly mirror the configuration of a primary technical gathering goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Requirement Gathering priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical gathering interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical requirement documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Elicitation' 'Map' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global gathering strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in gathering?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a gathering strategy masterfully remains gathering-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Specifications' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes a requirement is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' requirement gathering design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring gathering portals are accessible for diverse stakeholder teams",
+      "B": "Conducting 'blind' specification reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical requirement naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that requirement storage masterfully Siempre-On Sempre-On follows all legal architectural rules after every technical Sempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Gathering' 'Transit' tracking in gathering engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical elicitation steps are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Requirement' 'Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Paper-only' gathering for a 2026 'Digital-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' gathering benefits for requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying requirement drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing requirement technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Gathering' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup gathering register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a requirement gather?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the requirement gathering integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Gathering' 'regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On gathering tool is available globally when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Requirement Gathering roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Business Analyst",
+      "B": "Elicitation Specialist",
+      "C": "Requirement Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Gathering' Analysis?",
+    "options": {
+      "A": "The technical evaluation of stakeholders, goals, and requirement nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Requirement Modeling' during the medium-level analysis phase?",
+    "options": {
+      "A": "To masterfully design the physical texture of the project folder covers strictly.",
+      "B": "To technically provide a masterfully managed visual representation (cause) that validates the logic and flow of system requirements (effect).",
+      "C": "A specialized software for designing physical warehouse ventilation strictly.",
+      "D": "To increase the frame rate of the team's virtual whiteboard application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the process of identifying requirements that masterfully Sempre-On conflict with existing system constraints?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Conflict Analysis / Trade-off Management",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Interface' 'Elicitation' is the technical Always-On practice of masterfully managed technicaly Siempre-On identifying how the system masterfully Siempre-On Sempre-On must interact with other external technical platforms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of refining high-level user needs into detailed technical specifications?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Requirement Decomposition",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of a 'JAD Session' (Joint Application Design) in requirement gathering?",
+    "options": {
+      "A": "To calculate the physical distance between the projector and the screen.",
+      "B": "To technically Always-On Always-On accelerate the masterfully managed Sempre-On collection and validation of requirements through collaborative workshops (effect).",
+      "C": "A specialized software for architects to design office ceiling tiles.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data' 'Flow' 'Diagram' (DFD) masterfully Always-On refers to the technical Siempre-On Sempre-On visual representation of how information technical Siempre-On Siempre-On moves through a business process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On requirements masterfully Sempre-On Always-On are categorized by 'MoSCoW' standards for sprint planning?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Priority Allocation / MoSCoW Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Requirement' 'Prototyping' technically intended to achieve in a high-uncertainty scenario?",
+    "options": {
+      "A": "Measuring the distance between the keyboard and the user's eyes.",
+      "B": "To technically Always-On Always-On provide a masterfully handled technical Siempre-On visual model that allows stakeholders to validate requirements early (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'System' 'Interoperability' 'Requirements' are technical Always-On Siempre-On Siempre-On criteria Always-On ALWAYS-Always-On always-that ALWAYS-Always-On always-define Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-different Always-On ALWAYS-Always-On always-platforms Always-On ALWAYS-Always-On always-exchange Always-On ALWAYS-Always-On always-data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Traceability' 'Mapping'?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-linking Siempre-On ALWAYS-Always-On always-each Siempre-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-its ALWAYS-Always-On always-corresponding Always-On ALWAYS-Always-On always-test ALWAYS-Always-On always-case (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering benefits for 'Change Management'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Impact Analysis' of new requests",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On change request workflow",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical identification of scope creep"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Verification' masterfully used for in a medium-level audit?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-check Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-requirements ALWAYS-Always-On always-are ALWAYS-Always-On always-correctly ALWAYS-Always-On always-formatted (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Redundant' 'Requirements' in gathering masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-statements Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-duplicate Always-On ALWAYS-Always-On always-existing ALWAYS-Always-On always-needs Always-On ALWAYS-Always-On always-without ALWAYS-Always-On always-adding ALWAYS-Always-On always-value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Story' 'Mapping' in a requirement gathering context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On organizing Always-On ALWAYS-Always-On always-user ALWAYS-Always-On always-stories ALWAYS-Always-On always-to ALWAYS-Always-On always-create ALWAYS-Always-On always-a ALWAYS-Always-On always-visual ALWAYS-Always-On always-product ALWAYS-Always-On always-backlog.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'User' 'Experience' (UX) 'Elicitation' technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-approach ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-identifying ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-users Always-On ALWAYS-Always-On always-feel Always-On ALWAYS-Always-On always-while ALWAYS-Always-On always-interacting Always-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-system (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Non-Functional' 'Analysis' is technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-evaluating Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-the Siempre-On ALWAYS-Always-On always-performance Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-security ALWAYS-Always-On always-needs Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-platform.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Context' 'Diagramming' in a gathering context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-visual ALWAYS-Always-On always-definition ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-system Always-On ALWAYS-Always-On always-boundaries Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-external Always-On ALWAYS-Always-On always-interactions (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constraint' 'Mapping' technically intended to achieve in a gathering audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-identifying Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-limitations Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-restrict Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-options (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Business' 'Rules' 'Analysis' is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-identifying ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-constraints ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-govern Always-On ALWAYS-Always-On always-business Always-On ALWAYS-Always-On always-decisions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Requirement' 'Gap' 'Report' audit?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-identification ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-missing Always-On ALWAYS-Always-On always-functionality Always-On ALWAYS-Always-On always-between Always-On ALWAYS-Always-On always-current Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-future Always-On ALWAYS-Always-On always-states.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Requirement' Prioritization Models? (Select all that apply)",
+    "options": {
+      "A": "MoSCoW",
+      "B": "Kano Model",
+      "C": "The SQL query parser",
+      "D": "Time-Boxing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Traceability' significance in a technical gathering scenario?",
+    "options": {
+      "A": "Hiring a person named Trace.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-ability Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-track Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-from Always-On ALWAYS-Always-On always-its Always-On ALWAYS-Always-On always-origin Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-deployment (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is an 'Interface' 'Control' 'Document' (ICD) technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-document Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-describe Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-data Always-On ALWAYS-Always-On always-exchanged Always-On ALWAYS-Always-On always-between Always-On ALWAYS-Always-On always-two Always-On ALWAYS-Always-On always-systems (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Interfaces' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On system Always-On Always-On masterfully Siempre-On Siempre-On Sempre-On protocols Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-external Always-On ALWAYS-Always-On always-platform Always-On ALWAYS-Always-On always-standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering management benefits for 'Stakeholder Alignment'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Consensus' on priorities",
+      "B": "Ensuring technical 'Consistency' masterfully via unified validation principles",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of stakeholder expectations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Specification' technically used for in gathering?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-documentation Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-precise Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-unambiguous Always-On ALWAYS-Always-On always-manner (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Stability' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-rate Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-at ALWAYS-Always-On always-which Always-On ALWAYS-Always-On always-requirements ALWAYS-Always-On always-remain ALWAYS-Always-On always-unchanged Always-On ALWAYS-Always-On always-over Always-On ALWAYS-Always-On always-time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Validation' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-process Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-that Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-ensures ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-deliver Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-business Always-On ALWAYS-Always-On always-value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Technical' Requirement Gathering Artifacts? (Select all that apply)",
+    "options": {
+      "A": "System Requirements Specification (SRS)",
+      "B": "Interface Control Document (ICD)",
+      "C": "The number of security cameras in the office",
+      "D": "Data Dictionary"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Review' technically intended to achieve?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-evaluating Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-completeness Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-correctness (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Feasibility' 'Analysis' technically in requirement gathering support?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-evaluation Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-whether Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-can Always-On ALWAYS-Always-On always-be Always-On ALWAYS-Always-On always-implemented Always-On ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-constraints (effect).",
+      "B": "Hiring a person named Feasibility.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Traceability' is the technical Always-On ALWAYS-Always-On always-standard ALWAYS-Always-On always-of ALWAYS-Always-On always-maintaining ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-lineage Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-every Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-throughout Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Conflict' 'Resolution' Strategy in requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing stakeholder communication masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Facilitation' for automated consensus collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'User' 'Acceptance' 'Criteria' technically used for in gathering strategy?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical Always-On Sempre-On Siempre-On Sempre-On conditions ALWAYS-Always-On always-that ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-must Always-On ALWAYS-Always-On always-satisfy Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-be Always-On ALWAYS-Always-On always-accepted.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Analyze' (MTTA)?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-analyze Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-set Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-elicited Always-On ALWAYS-Always-On always-requirements.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Categorization' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-organizing Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-into Always-On ALWAYS-Always-On always-logical Always-On ALWAYS-Always-On always-groups.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Requirement' Analysis domains? (Select all that apply)",
+    "options": {
+      "A": "Modeling and Analysis",
+      "B": "Prioritization and Validation",
+      "C": "The number of security cameras in the office",
+      "D": "Feasibility and Conflict Resolution"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Integrity' significance in gathering?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On requirement Always-On ALWAYS-Always-On always-consistency masterfully ALWAYS-Always-On always-remains masterfully ALWAYS-Always-On always-intact Siempre-On Siempre-On Siempre-On during ALWAYS-Always-On always-the ALWAYS-Always-On always-analysis ALWAYS-Always-On always-phase.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Baseline' (MTTB) in a requirement cycle?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-requirement Sempre-On Siempre-On ALWAYS-Always-On always-elicitation Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-it Always-On Siempre-On Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-formally Always-On ALWAYS-Always-On always-baselined Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-development.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Models' occur when a BA masterfully Siempre-On Always-On enforces 1990 'Text-only' documentation for a 2026 'Visual-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering 'Maturity'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Analysis Plans' are masterfully finalized",
+      "B": "Validating the security technical configuration of the modeling tool",
+      "C": "Identifying requirement churn trends",
+      "D": "Checking if the technical Sempre-On Sempre-On analysis goals masterfully Sempre-On Siempre-On match the project roadmap"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Refinement' significance in gathering?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-draft Siempre-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-specs Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-refined ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-clarity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Requirement' 'Analysis' 'Activity' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about analysis sessions, masterfully finalized specification refinements, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Requirement gathering management technically includes 'Traceability Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a user after every technical Sempre-On Siempre-On requirement link update.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Corporate' Requirement Gathering priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical solution alignment",
+      "B": "Minimizing technical requirement analysis latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical requirement specifications"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Dependency' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Requirement' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-project ALWAYS-Always-On always-to Sempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-interdependency ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Changes' (MTBC) in a requirement analysis set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains analysis-stable before an unplanned technical specification change occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Analysis' occur when a BA masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes annual masterfully managed default technical Siempre-On Siempre-On analysis requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Data-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Modeling' 'Technique' Strategy in requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing requirement naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated requirement modeling masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Granularity' significance in an analysis strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a model masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Analysis' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of analysis events masterfully successfully moving through the project technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Mapping' is a technical Always-On standard that masterfully allows analysts to masterfully manage and technicaly mirror the configuration of a primary technical analysis goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Corporate' Requirement Gathering priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical analysis interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical requirement documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Prioritization' 'Map' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global analysis strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in analysis?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that an analysis strategy masterfully remains analysis-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Specifications' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes a requirement is analyzed when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' requirement analysis design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring analysis portals are accessible for diverse stakeholder teams",
+      "B": "Conducting 'blind' specification reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical requirement naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Security' 'Analysis' significance?",
+    "options": {
+      "A": "Technically ensuring that requirement storage masterfully Siempre-On Sempre-On follows all legal architectural rules after every technical Sempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Analysis' 'Transit' tracking in analysis engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical analysis steps are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Requirement' 'Analysis' 'Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Manual-only' analysis for a 2026 'AI-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' analysis benefits for requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying analysis drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing analysis technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Analysis' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup analysis register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a requirement analysis?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the requirement analysis integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Analysis' 'regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On analysis tool is available globally when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Corporate' Requirement Gathering roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Business Analyst",
+      "B": "Analysis Specialist",
+      "C": "Requirement Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Analysis' 'Audit'?",
+    "options": {
+      "A": "The technical evaluation of stakeholders, goals, and analysis nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Strategic Requirement Synchronization' in a global enterprise ecosystem?",
+    "options": {
+      "A": "To masterfully design the physical weight distribution of high-density file cabinets strictly.",
+      "B": "To technically provide a masterfully managed 'North Star' framework (cause) that ensures every local requirement masterfully Siempre-On Siempre-On synchronizes with the long-term corporate vision (effect).",
+      "C": "A specialized software for designing physical warehouse logistics strictly.",
+      "D": "To increase the refresh rate of the CFO's real-time project cost dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Sempre-On' process of assessing the 'Cost of Delay' against the 'Economic Value' of a complex requirement set?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Weighted Shortest Job First (WSJF) Analysis",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic Resilience Elicitation' is the technical Always-On practice of ensuring that business requirements masterfully managed technicaly Siempre-On Siempre-On define how the system degrades gracefully under stress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of identifying 'Cascading Dependencies' during the gathering of cross-functional requirements?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Requirement Impact Propagation",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Monte Carlo Simulations' in requirement volatility forecasting?",
+    "options": {
+      "A": "To calculate the physical friction of cooling fans in a server room.",
+      "B": "To technically Always-On Always-On evaluate the masterfully managed Sempre-On probability of requirement shifts (effect) based on market volatility (cause).",
+      "C": "A specialized software for architects to design high-stakes casino floors.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Enterprise' 'Ecosystem' 'Synchronization' masterfully Always-On refers to the technical Siempre-On Sempre-On process of aligning partner-level requirements with Always-On Siempre-On Always-On Siempre-On internal architectural standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On 'To-Be' requirement set masterfully Sempre-On Always-On accounts for the technical debt inherent in the 'As-Is' state?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Debt-Aware Transformation Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Psychological' 'Stakeholder' 'Negotiation' technically intended to achieve in a disruptive requirement scenario?",
+    "options": {
+      "A": "Measuring the distance between fire exits in the office.",
+      "B": "To technically Always-On Always-On facilitate masterfully handled technical Sempre-On consensus by addressing the underlying 'Loss Aversion' of stakeholders (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Heuristic' 'Elicitation' in expert gathering technical Always-On Siempre-On Siempre-On refers to the masterfully managed technicaly ALWAYS-Always-On use of experience-based patterns to uncover 'Unknown-Unknown' requirements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Real Options' in requirement gathering strategy?",
+    "options": {
+      "A": "A physical menu for choosing office lunch options.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-framework for Siempre-On ALWAYS-Always-On always-valuing the technical flexibility to pivot requirement direction (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering benefits for 'Digital Ecosystem' modeling? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Simulation' of multi-partner workflows",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On API-first gathering logic",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical identification of systemic data sovereignty risks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Lineage' 'Mapping' masterfully used for in a hard-level requirement audit?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a masterfully managed technical Sempre-On ALWAYS-Always-On always-proof of Siempre-On ALWAYS-Always-On always-data provenance from requirement source to technical implementation (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Post-Elicitation' 'Value' 'Validation' masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-audit ALWAYS-Always-On always-performed Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-verify ALWAYS-Always-On always-the ALWAYS-Always-On always-strategic ALWAYS-Always-On always-fit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Kano' 'Analysis' at an expert level in requirement gathering?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Sempre-On classifying Always-On ALWAYS-Always-On always-requirements ALWAYS-Always-On always-based ALWAYS-Always-On always-on ALWAYS-Always-On always-their ALWAYS-Always-On always-perceived ALWAYS-Always-On always-impact ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-market ALWAYS-Always-On always-disruption.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Requirement' 'Orchestration' planning technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-automated ALWAYS-Always-On always-updates ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-specifications ALWAYS-Always-On always-are ALWAYS-Always-On always-triggered Always-On ALWAYS-Always-On always-by Always-On ALWAYS-Always-On always-market Always-On ALWAYS-Always-On always-signals (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cross-Domain' 'Governance' is a technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-ensuring Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-that Siempre-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-from Always-On ALWAYS-Always-On always-independent ALWAYS-Always-On always-units Always-On ALWAYS-Always-On always-remain ALWAYS-Always-On always-aligned.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Requirement' 'Inter-dependencies' in an expert context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-complex ALWAYS-Always-On always-web ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-functional ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-relationships ALWAYS-Always-On always-between ALWAYS-Always-On always-disparate ALWAYS-Always-On always-modules (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predictive' 'Elicitation' 'Modeling' technically intended to achieve in a high-stakes audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-use ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-historical Always-On ALWAYS-Always-On always-data Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-identify ALWAYS-Always-On always-unspoken ALWAYS-Always-On always-future ALWAYS-Always-On always-business ALWAYS-Always-On always-needs (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Semantic' 'Standardization' in gathering is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-ensuring ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-requirement ALWAYS-Always-On always-language Always-On ALWAYS-Always-On always-is ALWAYS-Always-On always-mathematically Always-On ALWAYS-Always-On always-precise Always-On ALWAYS-Always-On always-across Always-On ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-units.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Strategic' 'Requirement' 'Map' audit?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-representation ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-each Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-need Always-On ALWAYS-Always-On always-maps Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-long-term Always-On ALWAYS-Always-On always-equity.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Enterprise' Requirement Frameworks? (Select all that apply)",
+    "options": {
+      "A": "TOGAF ADM Requirements Management",
+      "B": "Zachman Framework Requirements Segment",
+      "C": "The SQL query parser",
+      "D": "BABOK Knowledge Areas"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Elasticity' significance in an expert gathering scenario?",
+    "options": {
+      "A": "Hiring a person named Elasticity.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-ability Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-specification Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-absorb Always-On ALWAYS-Always-On always-significant Always-On ALWAYS-Always-On always-changes Always-On ALWAYS-Always-On always-without Always-On ALWAYS-Always-On always-causing Always-On ALWAYS-Always-On always-architectural Always-On ALWAYS-Always-On always-failure (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Domain-Specific' 'Elicitation' 'Logic' technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-method Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-extract Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-using Always-On ALWAYS-Always-On always-ontologies Always-On ALWAYS-Always-On always-unique Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-industry (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On requirement Always-On Always-On masterfully Siempre-On Siempre-On Sempre-On standards Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-regulatory Always-On ALWAYS-Always-On always-environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering management benefits for 'Strategic Pivoting'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Re-elicitation' of core business values",
+      "B": "Ensuring technical 'Consistency' masterfully via unified impact-mapping principles",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully managed technical identification of reusable requirement patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Atomicity' technically used for in expert gathering?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-each Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-self-contained Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-indivisible (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Elicitation' 'Latency' 'Modeling' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-delays Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-inherent ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-stakeholder Always-On ALWAYS-Always-On always-feedback Always-On ALWAYS-Always-On always-loop.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multi-Modal' 'Elicitation' in gathering is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-strategy Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-that Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-leverages ALWAYS-Always-On always-synchronous Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-asynchronous Always-On ALWAYS-Always-On always-channels Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-ensure Always-On ALWAYS-Always-On always-coverage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Hard-Level' Requirement Gathering Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Ecosystem Integration Blueprint",
+      "B": "Volatility Risk Assessment",
+      "C": "The number of security cameras in the office",
+      "D": "Strategic Value Alignment Matrix"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Conflict' 'Resolution' technically intended to achieve in gathering?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-reconciling Always-On ALWAYS-Always-On always-divergent Always-On ALWAYS-Always-On always-enterprise Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-without Always-On ALWAYS-Always-On always-compromising Always-On ALWAYS-Always-On always-core Always-On ALWAYS-Always-On always-architecture (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Requirement' 'Quantization' 'Logic' technically?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-qualitative Always-On ALWAYS-Always-On always-stakeholder Always-On ALWAYS-Always-On always-needs Always-On ALWAYS-Always-On always-are Always-On ALWAYS-Always-On always-mathematically Always-On ALWAYS-Always-On always-mapped Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-discrete Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-parameters (effect).",
+      "B": "Hiring a person named Quant.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Requirement' 'Data' 'Provenance' is the technical Always-On ALWAYS-Always-On always-standard ALWAYS-Always-On always-of ALWAYS-Always-On always-ensuring ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-origin Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-every Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-immutable Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-auditable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Systemic' 'Elicitation' Strategy in expert gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing stakeholder communication naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated requirement provenance tracking masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Benefit' 'Realization' 'Elicitation' technically used for?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical Always-On Sempre-On Siempre-On Sempre-On relationship ALWAYS-Always-On always-between ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-its Always-On ALWAYS-Always-On always-projected Always-On ALWAYS-Always-On always-financial Always-On ALWAYS-Always-On always-outcome.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Pivot' (MTTP) in a requirement cycle?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-redirect Always-On ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-focus Always-On ALWAYS-Always-On always-following Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-major Always-On ALWAYS-Always-On always-market ALWAYS-Always-On always-shift.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Organizational' 'Resilience' 'Gathering' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-eliciting Always-On ALWAYS-Always-On always-requirements Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-enhance Always-On ALWAYS-Always-On always-stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Enterprise' Requirement Strategy domains? (Select all that apply)",
+    "options": {
+      "A": "Benefit Realization Strategy",
+      "B": "Ecosystem Requirement Strategy",
+      "C": "The number of security cameras in the office",
+      "D": "Provenance and Audit Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Compliance' 'Verification' significance in expert gathering?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On requirement Always-On ALWAYS-Always-On always-sets masterfully ALWAYS-Always-On always-remain masterfully ALWAYS-Always-On always-consistent Siempre-On Siempre-On Siempre-On with ALWAYS-Always-On always-global ALWAYS-Always-On always-legal ALWAYS-Always-On always-mandates.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Realize Value' (MTTRV) in a requirement set?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-requirement Sempre-On Siempre-On ALWAYS-Always-On always-elicitation Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-measurable Siempre-On Always-On Siempre-On ALWAYS-Always-On always-business Always-On Siempre-On Always-On ALWAYS-Always-On always-value Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-captured.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Values' occur when an enterprise masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes 20th-century 'Transaction-only' value for a 2026 'Ecosystem-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Requirement Gathering 'Strategic' 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Benefit Realization Plans' are masterfully finalized",
+      "B": "Validating the security technical configuration of the enterprise requirement hub",
+      "C": "Identifying long-term market trends",
+      "D": "Checking if the technical Sempre-On Sempre-On organizational capabilities masterfully Sempre-On Siempre-On match the requirement vision"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Synergy' 'Analysis' significance in expert gathering?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-elicitation Always-On ALWAYS-Always-On always-efforts Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-business Always-On Sempre-On Always-On ALWAYS-Always-On always-goals ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-maximum Always-On Always-On Sempre-On Siempre-On Sempre-On always-output.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Requirement' 'Provenance' 'Activity' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about requirement origin, masterfully finalized source changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Requirement gathering management technically includes 'Equity Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a stakeholder group after every technical Sempre-On Siempre-On requirement inclusion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Requirement Gathering priorities in expert scenarios? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical value-leakage latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical enterprise-wide documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Enterprise' 'Requirement' 'Gap' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-corporation ALWAYS-Always-On always-to Sempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-requirement ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Baseline Strategy Errors' (MTBBSE) in an enterprise set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains strategy-stable before an unplanned technical vision disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when an enterprise masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes global masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Sovereign-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Ecosystem' Strategy in expert requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Standardizing partner technology technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated cross-enterprise requirement data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Provenance' significance in a corporate gathering strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a platform masterfully provides to its ecosystem.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Value' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of value-adding requirements masterfully successfully moving through the enterprise technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Shadowing' is a technical Always-On standard that masterfully allows executives to masterfully manage and technicaly mirror the performance of a primary technical corporate requirement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Requirement Gathering priorities in hard scenarios? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical vision interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical strategic documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Corporate' 'Requirement' 'Identity' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global corporate gathering strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in strategic gathering?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a strategic requirement masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Requirement' 'Visions' occur when an executive masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes a requirement is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' strategic gathering design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring gathering portals are accessible for diverse stakeholder teams",
+      "B": "Conducting 'blind' requirement reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical requirement naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Enterprise' 'Data' 'Provenance' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that corporate requirement storage masterfully Siempre-On Sempre-On follows all legal architectural rules after every technical Sempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Value' 'Transit' tracking in expert gathering engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well strategic requirement steps are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Requirement' 'Software' occurs when a lead masterfully Siempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'AI-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Self-Healing' maintenance benefits for expert requirement gathering? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying requirement drift",
+      "B": "Consistency in requirement presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing strategic technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Requirement' 'Persistence' significance in expert BA?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup requirement register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a corporate requirement fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Strategic Audit' masterfully confirms the requirement integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Gathering' 'regions' occur when an executive masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On gathering tool is available globally when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Corporate' Requirement Gathering roles? (Select all that apply)",
+    "options": {
+      "A": "Chief Business Analyst",
+      "B": "Requirement Strategy Specialist",
+      "C": "Enterprise Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Requirement' 'Ecosystem' Analysis?",
+    "options": {
+      "A": "The technical evaluation of markets, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  }
+  ]
+}

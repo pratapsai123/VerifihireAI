@@ -1425,9 +1425,9 @@
       "question": "Which testing pattern involves checking that the View correctly reflects the ViewModel's state without a real device?",
       "options": {
         "A": "Unit Testing",
-        "0B": "Snapshot Testing (verifying the UI output for a given state)",
         "C": "Beta Testing",
-        "D": "Stress Testing"
+        "D": "Stress Testing",
+        "B": "Snapshot Testing (verifying the UI output for a given state)"
       },
       "answer": "B"
     },

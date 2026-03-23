@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Risk Management", 
+  "questions": [
+    {
+    "question": "What is the basic definition of 'Risk' in a project management context?",
+    "options": {
+      "A": "A guaranteed event that will physically stop the project.",
+      "B": "An uncertain event or condition that, if it occurs, has a positive or negative effect on project objectives.",
+      "C": "The list of employees who are currently on vacation.",
+      "D": "The total amount of money spent on office snacks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Risk management only focuses on negative events; positive risks (opportunities) are ignored in professional frameworks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which document is primarily used to record and track all identified risks throughout a project?",
+    "options": {
+      "A": "The physical building logbook.",
+      "B": "The Risk Register.",
+      "C": "The employee payroll spreadsheet.",
+      "D": "A SQL query history log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Risk Identification'?",
+    "options": {
+      "A": "Naming a person who is physically risky.",
+      "B": "The process of determining which risks may affect a project and documenting their characteristics.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Increasing the frame rate of a video call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common sources of risk in a software project? (Select all that apply)",
+    "options": {
+      "A": "Technical complexity",
+      "B": "Requirement changes (Scope creep)",
+      "C": "Having enough chairs in the office",
+      "D": "Resource unavailability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Risk Probability' technically refer to?",
+    "options": {
+      "A": "The physical weight of a risky object.",
+      "B": "The likelihood or chance that a specific risk event will occur.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "The number of hours a team worked last week."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Risk Impact' measures the potential effect a risk will have on project constraints like time, cost, or quality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Mitigation' strategy involves changing a project plan to eliminate a threat entirely?",
+    "options": {
+      "A": "Risk Acceptance",
+      "B": "Risk Avoidance",
+      "C": "Risk Mitigation",
+      "D": "Risk Transference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Qualitative' Risk Analysis?",
+    "options": {
+      "A": "Counting the physical number of risks.",
+      "B": "The process of prioritizing risks for further analysis by assessing their probability of occurrence and impact.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the office internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Risk Transference' typically involves shifting the impact and ownership of a risk to a third party, such as through insurance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common 'Soft Skill' for a risk manager when discussing potential failures with senior leadership?",
+    "options": {
+      "A": "SQL Query Optimization.",
+      "B": "Transparency and Objective Communication.",
+      "C": "Hardware Assembly.",
+      "D": "Adobe Photoshop skills."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Risk Heatmap' used for? (Select all that apply)",
+    "options": {
+      "A": "Visualizing risks based on their Probability and Impact",
+      "B": "Checking the physical temperature of the server room",
+      "C": "Quickly identifying high-priority risks that need immediate attention",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Risk Acceptance'?",
+    "options": {
+      "A": "Accepting a physical gift from a risky person.",
+      "B": "A strategy where the team decides to acknowledge the risk and not take any action unless the risk occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Quantitative' Risk Analysis uses numerical data to calculate the probability and impact of risks, often in financial terms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Contingency Plan'?",
+    "options": {
+      "A": "A physical plan for an office party.",
+      "B": "A pre-defined set of actions to be taken if a specific risk event occurs (Plan B).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Residual Risk'?",
+    "options": {
+      "A": "Risk that physically remains in a room after people leave.",
+      "B": "The risk that remains after risk responses or mitigation strategies have been implemented.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Risk monitoring is a one-time activity performed only at the beginning of a project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Risk Mitigation' specifically?",
+    "options": {
+      "A": "Increasing the physical size of a risky object.",
+      "B": "Actions taken to reduce the probability or the impact of a negative risk event.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Risk Threshold'?",
+    "options": {
+      "A": "The physical door frame of the risk office.",
+      "B": "The level of risk exposure above which a specific action or escalation is required.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the risk assessment uses outdated information to predict future failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Risk Response' categories? (Select all that apply)",
+    "options": {
+      "A": "Avoid",
+      "B": "Mitigate",
+      "C": "Accept",
+      "D": "Buy physical snacks"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Secondary Risk'?",
+    "options": {
+      "A": "A new risk that arises as a direct result of implementing a risk response.",
+      "B": "A risk that only happens to the second person in the room.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Risk Appetite'?",
+    "options": {
+      "A": "How hungry a person is for physical food.",
+      "B": "The degree of uncertainty an organization or individual is willing to accept in pursuit of its goals.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Risk Owner' is the individual responsible for monitoring a specific risk and implementing the response plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Risk Monitoring benefits? (Select all that apply)",
+    "options": {
+      "A": "Real-time alerts when risk thresholds are exceeded",
+      "B": "Reduced manual effort in data collection",
+      "C": "Guaranteed to eliminate 100% of risks",
+      "D": "Consistent application of risk scoring logic"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Brainstorming' in the context of risk identification?",
+    "options": {
+      "A": "A physical storm happening inside the office.",
+      "B": "A group creativity technique used to generate a list of potential risks through open discussion.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a risk?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a risk signal first appears until it is officially identified and logged.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when a project promises a client 'Zero Downtime' without identifying the risks of a single-region server setup.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Technical' risks? (Select all that apply)",
+    "options": {
+      "A": "Integration failures",
+      "B": "Security vulnerabilities",
+      "C": "The SQL query parser",
+      "D": "API performance bottlenecks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk Escalation'?",
+    "options": {
+      "A": "Climbing a physical ladder of risks.",
+      "B": "Moving the management of a risk to a higher level in the organization because it exceeds the current team's authority.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Risk Review'?",
+    "options": {
+      "A": "Reviewing a physical book about risks.",
+      "B": "A periodic meeting to evaluate the effectiveness of risk responses and identify new risks.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Stakeholders' in risk management refers to identifying risks for the technical team but ignoring risks for the business users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' risks? (Select all that apply)",
+    "options": {
+      "A": "Changes in government regulations",
+      "B": "Natural disasters",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Competitor market moves"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk Scoring'?",
+    "options": {
+      "A": "Winning points in a risky game.",
+      "B": "The technical process of assigning a numerical value to a risk based on its Probability * Impact.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Velocity'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "How quickly a risk can impact the organization after it occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a risk to be mitigated instantly without allocating time for the necessary technical fixes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Risk Management stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Chief Risk Officer (CRO)",
+      "B": "Internal Auditor",
+      "C": "Compliance Manager",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'SWOT Analysis' in risk identification?",
+    "options": {
+      "A": "Analyzing a physical SWAT team.",
+      "B": "A technique to identify Strengths, Weaknesses, Opportunities, and Threats related to project risks.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Burn-down'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A chart showing the cumulative risk score of a project over time as risks are mitigated or closed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a risk is identified for the Linux production server but the Windows test environment is ignored.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Risk' Awareness training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on identifying common security pitfalls",
+      "B": "Developing conflict resolution skills for managers",
+      "C": "Identifying program satisfaction trends",
+      "D": "Guaranteed to replace all human managers"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What is 'Risk Exposure'?",
+    "options": {
+      "A": "Exposing a physical risk to the sun.",
+      "B": "A measure of the potential loss from a specific risk, calculated as Probability * Impact.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Role' 'Aging' in the risk register?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing how long a risk has remained in the 'Open' or 'Active' state without being addressed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a company uses casual verbal agreements to manage high-stakes financial risks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Risk Governance stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Board of Directors",
+      "B": "Legal Counsel",
+      "C": "Operations Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Opportunity' Management?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The process of identifying and enhancing positive risks to increase their probability and impact on the project.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Variance' Analysis in risk?",
+    "options": {
+      "A": "Comparing the actual risk events that occurred versus the risks that were predicted in the plan.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a project waits 4 weeks to address a risk that has already turned into an active issue.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Risk Assessment benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant identification of technical debt risks via static analysis",
+      "B": "Consistency in risk scoring across different project teams",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual spreadsheet tracking"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Workaround' in risk management?",
+    "options": {
+      "A": "Walking around a physical person named Risk.",
+      "B": "An unplanned response to a negative risk that has occurred, used when no contingency plan exists.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cost of Risk'?",
+    "options": {
+      "A": "The total amount spent on risk management activities plus the cost of any risk events that actually occurred.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a team fails to document the lessons learned after a major risk event occurs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Risk management roles? (Select all that apply)",
+    "options": {
+      "A": "Risk Analyst",
+      "B": "Risk Facilitator",
+      "C": "Project Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Checklist Analysis' in risk identification?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "Using a pre-defined list of common risks based on historical project data to ensure no major categories are missed.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Density'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The number of risks identified per specific business unit or software module.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in risk management refers to identifying 'Hardware Failure' as a risk but failing to verify if the backup hardware actually works.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' risk planning? (Select all that apply)",
+    "options": {
+      "A": "Inviting junior team members to risk identification sessions",
+      "B": "Actively seeking risks from different department perspectives",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a 'No-Blame' culture for reporting risks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Root Cause' Identification?",
+    "options": {
+      "A": "Searching for the underlying cause of a potential risk rather than just the symptoms.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Mitigate' (MTTM)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a risk is identified until the mitigation plan is successfully implemented.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a company expects 'Instant' compliance with a new safety regulation that takes 6 months to implement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Reporting'? (Select all that apply)",
+    "options": {
+      "A": "Dynamic dashboards that update risk status automatically",
+      "B": "Automated distribution of risk reports to stakeholders",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Integration of risk registers with project management tools"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' Portfolio?",
+    "options": {
+      "A": "A physical binder for risk documents.",
+      "B": "The collection of all risks being managed across an entire organization or program.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' Distribution?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing how risks are spread across different project phases, departments, or categories.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an external vendor identifies a risk but fails to report it within the contractually agreed time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Risk Management frameworks? (Select all that apply)",
+    "options": {
+      "A": "COSO ERM",
+      "B": "ISO 31000",
+      "C": "PMBOK Risk Management",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' Taxonomy?",
+    "options": {
+      "A": "A standardized classification system for organizing and naming different types of risks within an organization.",
+      "B": "Building a physical shelf for risk labels.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When performing a 'Probability-Impact' (P-I) matrix assessment, what is the primary technical reason for assigning numerical weights instead of just labels like 'High' or 'Low'?",
+    "options": {
+      "A": "To make the report look physically heavier to impress stakeholders.",
+      "B": "To allow for the calculation of 'Expected Monetary Value' (EMV) and precise ranking in a large-scale risk portfolio.",
+      "C": "Numerical weights are legally required for all office supply orders.",
+      "D": "To increase the frame rate of the project dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Quantitative Risk Analysis' is technically more complex than 'Qualitative Analysis' because it uses mathematical modeling (like Monte Carlo simulations) to predict project outcomes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involve a firm creating a 'Redundancy' in its supply chain to handle the risk of a single vendor failure?",
+    "options": {
+      "A": "Risk Avoidance",
+      "B": "Risk Mitigation (through diversification)",
+      "C": "Risk Acceptance strictly",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Monte Carlo Simulation' in the context of project risk management?",
+    "options": {
+      "A": "To simulate the physical layout of a casino in Monaco.",
+      "B": "To run thousands of 'What-if' scenarios to determine the statistical probability of completing a project on time and within budget.",
+      "C": "A specialized software for architects to design high-rise buildings.",
+      "D": "To increase the frame rate of the executive dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which aspect of 'Strategic Risk' is technically most difficult to quantify during a 'Merger and Acquisition' (M&A) process?",
+    "options": {
+      "A": "The physical count of office chairs in the new building.",
+      "B": "Cultural Integration Risk and its impact on the 'Knowledge Attrition' rate.",
+      "C": "The total electricity bill for the data center.",
+      "D": "Hiring a professional actor to represent the legal team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in risk management occurs when a 'Risk Owner' is assigned to a risk that they have no physical or budgetary authority to mitigate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operational Risk', what is a 'Key Risk Indicator' (KRI) technically intended to provide for the leadership team?",
+    "options": {
+      "A": "The physical weight of the risk register document.",
+      "B": "An early warning signal that identifies a potential risk event before it reaches a critical threshold.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font on the safety billboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Force Majeure' in the context of risk-based legal contracts?",
+    "options": {
+      "A": "A physical force used to move server racks.",
+      "B": "A clause that excuses a party from liability if an 'Act of God' or unforeseeable event (like a pandemic) prevents them from fulfilling the contract.",
+      "C": "A specialized tool for measuring atmospheric pressure.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Risk Response' actions for a 'Positive Risk' (Opportunity)? (Select all that apply)",
+    "options": {
+      "A": "Exploit (ensure the opportunity happens)",
+      "B": "Share (allocate ownership to a partner to maximize benefit)",
+      "C": "Enhance (increase the probability/impact)",
+      "D": "Mitigate (reduce the chance of the opportunity occurring)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Strategic' 'Drift' occurs when a risk management framework fails to update its 'Threat Models' as the company migrates from on-premise to cloud infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of 'Risk Appetite' vs. 'Risk Tolerance' in corporate governance?",
+    "options": {
+      "A": "Appetite is how much you eat; Tolerance is how much you can lift.",
+      "B": "Appetite is the high-level amount of risk an organization *wants* to take; Tolerance is the specific, measurable *limit* for a project.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Gravity' analysis?",
+    "options": {
+      "A": "The physical weight of a risky object.",
+      "B": "A weighted scoring system that prioritizes risks based on their potential to cause a 'Cascading Failure' across multiple business units.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involve a firm purchasing 'Cyber Insurance' to handle the financial impact of a potential data breach?",
+    "options": {
+      "A": "Risk Avoidance",
+      "B": "Risk Transference",
+      "C": "Risk Mitigation strictly",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' in risk refers to a system where 'Critical' risk evidence is stored in an unsecured shared folder rather than a hardened audit vault.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vendor' 'Risk' 'Assessment' (VRA)? (Select all that apply)",
+    "options": {
+      "A": "Real-time monitoring of a vendor's public security score (e.g., BitSight)",
+      "B": "Automated scanning of vendor API endpoints for SSL vulnerabilities",
+      "C": "Hiring 100 manual auditors to visit vendor offices daily",
+      "D": "Integrating vendor breach news alerts directly into the Risk Dashboard"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Organizational' 'Resilience' as a risk strategy?",
+    "options": {
+      "A": "A physical manual for building server racks.",
+      "B": "The ability of an organization to absorb stress, recover critical functionality, and thrive in altered circumstances after a risk occurs.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Mitigate' (MTTM) a high-level risk?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The duration between a risk being identified and the official 'Response Plan' being fully implemented and verified.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a Board of Directors assumes 'Risk Mitigation' means 'Zero Probability of Failure', ignoring the reality of 'Residual Risk'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Layered' risk framework handles 'Zero' 'Day' vulnerability management?",
+    "options": {
+      "A": "The Technical Debt Backlog",
+      "B": "The Incident Response / Contingency Plan",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Expected' 'Monetary' 'Value' (EMV) and how is it calculated?",
+    "options": {
+      "A": "The physical stretchiness of a currency bill.",
+      "B": "A statistical concept that calculates the average outcome when the future includes uncertain scenarios: (Probability (%) * Impact ($)).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Scenario' 'Analysis'?",
+    "options": {
+      "A": "Allocating physical office chairs to employees.",
+      "B": "The process of developing multiple, plausible 'Future Worlds' to see how your project's risk profile changes under different economic or technical conditions.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a 'Security Patch' to be deployed instantly, ignoring the risk of breaking production logic without regression testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Risk' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Risk Officer (CRO)",
+      "B": "External Audit Partners",
+      "C": "Internal Legal Counsel",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Normalization' and why is it dangerous for a Lead?",
+    "options": {
+      "A": "Being the first person to move into a dark office.",
+      "B": "The gradual process where the team stops seeing a known risk (like a flaky test) as a problem because it hasn't caused a failure *yet*.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Inherent' 'Risk' 'Score'?",
+    "options": {
+      "A": "Analytics of a person named Inherent.",
+      "B": "The risk level of a business process *before* any security controls or mitigation strategies are applied.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a project uses a 2018 'Risk Taxonomy' for a 2026 'DeFi/Web3' project, missing entire categories of new technical threats.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Risk' 'Modeling' tools? (Select all that apply)",
+    "options": {
+      "A": "Palisade @RISK",
+      "B": "Crystal Ball (Oracle)",
+      "C": "Decision Tree Pro",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Exposure' for a data center outage?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The financial cost per hour of downtime multiplied by the probability of an outage based on historical 'Uptime' data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Density' as a risk indicator?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The number of identified defects per 1,000 lines of code; high density identifies a high risk of 'Cascading Failures' in that module.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a company uses an 'Informal Slack Thread' to authorize a high-risk 'Root Access' change to the production database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Systemic' 'Risk' in a global organization? (Select all that apply)",
+    "options": {
+      "A": "A single point of failure in a global payment gateway",
+      "B": "Contagion risk (one department's failure crashing another)",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Dependence on a single cloud region (e.g., us-east-1)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Bias' in risk identification?",
+    "options": {
+      "A": "Mental shortcuts like 'Availability Bias' where managers only identify risks that happened recently, ignoring long-term statistical threats.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Strategic' 'Risk' 'Debt'?",
+    "options": {
+      "A": "The future cost of negative events caused by 'skipping' proper security or compliance today to meet a short-term release goal.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an organization provides risk assessment feedback only once every 3 years during a 'Standard Review' cycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resilience' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Disaster Recovery (DR) Readiness",
+      "B": "Business Continuity Planning (BCP)",
+      "C": "Operational Redundancy",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Risk' logic in a leadership context?",
+    "options": {
+      "A": "Hiring servants to identify risks.",
+      "B": "Leading by empowering the team to own and report risks without fear of blame, which improves the 'Identification Accuracy' for the whole organization.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Control' 'Effectiveness'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric evaluating how well a specific mitigation (e.g., a firewall) is actually working to reduce the 'Residual Risk' score.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in risk refers to a company having a 'High-Performance' primary server but a 10-year-old 'Legacy' backup server that cannot handle production load.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into 'Compliance Drift'",
+      "B": "Consistency in result presentation for the Executive Board",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual 'Audit Prep' work for the team"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in risk framework adaptation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful risk mitigation strategy from one department (e.g., IT) and apply its 'Logic' to another (e.g., Supply Chain).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a security risk?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when a new vulnerability is publicly disclosed (e.g., a CVE) until the organization flags it in its own systems.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a 'Risk Auditor' has the authority to identify risks but no technical access to the logs required to verify if they were fixed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Risk' 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Audit Executive (CAE)",
+      "B": "Global Privacy Officer (GPO)",
+      "C": "Departmental Vice Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' in a newly acquired business unit?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The rapid deployment of standardized Risk Registers, Incident Reporting tools, and Compliance Gates within the first 60 days of an acquisition.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Coverage' Index?",
+    "options": {
+      "A": "The percentage of identified high-level risks that have a formal, tested, and active mitigation plan in place.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Instant' compliance with a massive new regulation (like EU AI Act) after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for Risk Managers? (Select all that apply)",
+    "options": {
+      "A": "Identifying project teams with the highest 'Control Failure' trends",
+      "B": "Predicting future market 'Supply Chain' shocks based on global user data",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing trends in 'Third-party Breach' events"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Risk Management software?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Red-Team' exploit data from a security test is technically unreachable by unauthorized 'Blue-Team' personnel to prevent bias.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Risk' 'Events' (MTBRE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking organizational stability by measuring how long the company goes without a high-severity incident occurring.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in risk leadership occur when the remediation timeline for a 'Critical Security Risk' is based on 'Fixed Quarters' rather than 'Real-time Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' for Risk? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in auditing subjective 'Company Culture' risks",
+      "B": "Keeping frameworks updated with rapidly changing global 'Cyber' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if leads check boxes without actual verification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a resilience strategy?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'how' of security (e.g., specific firewall rules) is isolated from the 'why' (the risk goal), so tools can change without a policy rewrite.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a control failure?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when a safety control stops working until the Risk Lead officially identifies the gap in the dashboard.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in risk occur when a company uses a 1990 'Waterfall' risk model for a 2026 'Cloud-Native' 'DevSecOps' team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resilience' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Disaster Recovery Lead",
+      "C": "Lead Cybersecurity Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of insurance, internal controls, vendor risks, and employee training to ensure a stable release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Risk' 'Margin' (MTRRM)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a significant loss of 'Insurance Coverage' or 'Capital Reserve' and the point where the organization returns to its healthy baseline.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Team Lead expects a 'Full Culture Shift' toward risk-awareness after exactly 12 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Blockers' for the Board",
+      "B": "Reduction in manual administrative work for Risk leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a risk-hiring pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Candidate Assessments' where each phase results in a specific, independently verifiable 'Technical Integrity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a compliance gap?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a regulatory deficiency until the new 'Control' is fully verified and merged into the main operational branch.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority risk audits to a single analyst with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Risk' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Operational Vulnerability' scores",
+      "B": "Predicting future market 'Policy' shocks based on global user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Risk Training' spend with 'Incident Reduction' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific risk mitigation asset is developed, based on its reliability history, bypass frequency, and maintenance cost.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Risk' 'Failures' (MTBSRF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major strategic error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in risk leadership occur when the remediation timeline for a 'Financial Risk' is based on 'Fixed Quarters' rather than 'Current Cash Flow Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Black Swan Theory', how should a strategic Risk Director technically model 'Tail Risk' in a global portfolio?",
+    "options": {
+      "A": "By assuming a standard 'Normal Distribution' and focusing on the 95th percentile.",
+      "B": "By using 'Extreme Value Theory' (EVT) and stress-testing for events that fall beyond three standard deviations from the mean.",
+      "C": "By monitoring the physical electricity usage of the risk department.",
+      "D": "By ensuring every department has exactly the same number of risk mitigators."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Risk' in a financial ecosystem is technically defined as the risk that the failure of one entity will cause a 'Cascading' collapse of the entire network due to interdependencies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a CRO to predict the impact of a 5% increase in 'Interest Rates' on the 'Default Probability' of a multi-billion dollar credit portfolio?",
+    "options": {
+      "A": "Monte Carlo Simulation with Macro-economic Stress Testing",
+      "B": "Standard SQL AVG strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Risk Asset Arbitrage' during an international M&A process?",
+    "options": {
+      "A": "To ensure both companies use the same physical brand of insurance.",
+      "B": "To identify and consolidate redundant 'Risk Captives' and insurance policies into a single global program to optimize the 'Total Cost of Risk' (TCoR).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive risk dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Organizational Psychology', what is 'Risk Homeostasis' and how does it technically impact safety protocols?",
+    "options": {
+      "A": "When employees forget where the physical exits are.",
+      "B": "The theory that people adjust their behavior in response to perceived risk changes, often taking *more* risks when they feel safer (e.g., driving faster with better brakes).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the company's internal safety portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Risk' 'Archetypes' occur when a 'Conservative/Risk-Averse' auditor is put in charge of a 'High-Innovation' R&D lab, often leading to 'Compliance Bottlenecks' that kill strategic velocity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a CRO deliberately implementing 'Chaos Engineering' in a banking environment to identify 'Silent' system failures before they occur in production?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Synthetic Failure Injection)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Contagion' and its relation to 'Adjacency' in a supply chain?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk that a failure in a 'Tier-3' supplier (cause) impacts 'Tier-1' operations through a chain of technical and financial dependencies.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Resilience' ROI calculations for a strategic security shift? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Recovery' (MTTR) post-incident",
+      "B": "Financial savings from lower 'Cyber Insurance' premiums due to better controls",
+      "C": "The cost of 'Brand Recovery' avoided through successful threat mitigation",
+      "D": "The number of security cameras in the office"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Risk Governance level ensures that 'Whistleblowers' can flag executive-level compliance failures without fear of career termination.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Chief Risk Officer's decision-making?",
+    "options": {
+      "A": "The physical weight of the CRO's laptop.",
+      "B": "The ability to integrate contradictory risk signals (e.g., high revenue growth vs. declining data quality) into a cohesive 'Risk Appetite Statement'.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a release decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Risk' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of isolating high-risk 'Experimental' business units from the core 'Steady-State' business to prevent a failure from triggering a corporate-wide crisis.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' risk behavior involves 'Pre-emptive Containment' during an emerging geopolitical crisis?",
+    "options": {
+      "A": "Waiting for the board to provide a written directive.",
+      "B": "Immediately triggering 'Disaster Recovery' (DR) site replication and moving liquidity to 'Safe Haven' accounts before local markets freeze.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a risk acquisition often result in 'Governance Rejection', where the acquired firm's employees find ways to bypass the parent company's 'Rigid' security gates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Risk' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Ethics' risk competencies before they are mandated by law",
+      "B": "Standardizing 'Crisis Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the Audit department",
+      "D": "Assessing the 'Resilience thinking' capacity of potential Managing Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Risk Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Risk Policy' itself (e.g., '100% Cloud-First') is the cause of systemic vulnerability, rather than just fixing a single server error.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative risk of having too many critical vendors based in a single, high-risk geographic location.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in risk management occurs when a firm continues to rely on 2010-era 'Perimeter Defense' firewalls in a 2026 'Zero-Trust' cloud environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Risk' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Capital (RAROC)",
+      "B": "Economic Capital required to cover 'Expected Loss'",
+      "C": "Velocity of 'Risk Remediation' across the top 10% of critical threats",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Compliance' 'Entrenchment' risk during a digital transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured legal officers will block 'Automated CI/CD' deployments to protect their manual 'Signature-based' approval power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally exceed the board-mandated 'Risk Appetite' limits.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CRO demands 'Zero Security Incidents' while the only metric for the team is '100% On-time Release Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using machine learning to correlate 'Social Media Sentiment' with 'Brand Risk' scores",
+      "B": "Automatically identifying 'Compliance Gaps' in new code before it is merged into production",
+      "C": "Guaranteed to replace all human Risk Directors",
+      "D": "Analyzing global financial data to predict 'Liquidity Shocks' in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Ecosystem' 'Architecture' (REA)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of insurance, internal controls, vendor audits, and real-time monitoring into a single 'Resilience Layer'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Risk' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The process of identifying the 'Hidden Liabilities' and 'Cybersecurity Gaps' in an acquired firm's infrastructure before technical integration begins.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant ROI' from a junior-heavy team that requires an 18-month 'Risk Mastery' curriculum to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of data encryption for GDPR regulators",
+      "B": "Automatically calculating 'Fair-Lending' risk scores across global banking units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are strictly enforced by automated cloud policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Risk Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Systemic Risk Policies' are isolated from 'Departmental Tactics', allowing business units to innovate while remaining within corporate safety guardrails.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a major external risk trigger (e.g., a currency crash) and the CRO's official dashboard flagging the internal exposure.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Director reports 'Low Risk' to the board while the internal team is aware of 'Massive Technical Debt' that could trigger a crash.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Risk' 'Governance' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Employee Security scores' directly to 'System Access' eligibility",
+      "B": "Connecting 'Real-time Vendor Breaches' to 'Operational Shutdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Compliance Reporting' data with 'Legal Case Management' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common Legal, IT Security, and Insurance protocols to stabilize a new offshore office within 90 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Disaster Recovery' effectiveness as system complexity outpaces current backup technology.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Compliance' with a 500-page new regulation after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Risk' heatmaps for the CEO",
+      "B": "Reduction in 'Deck-building' labor for the Risk Management office",
+      "C": "Guaranteed to replace all human Risk Leads",
+      "D": "Automatic generation of 'Policy Breach' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Risk Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Sensitive Whistleblower data' from the EU region technically cannot be accessed by Risk Managers in regions with different privacy laws.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Risk' 'Trust' (MTRRT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile organizational failure (e.g., massive data leak) and the point at which 'Market Confidence' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in risk strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'High-Leverage' investment model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Risk' 'Governance' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Chief Risk Officer",
+      "B": "Chief Privacy Architect",
+      "C": "Director of Business Continuity",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global infrastructure?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Auto-failover success rate', 'MTTR', 'Backup Integrity', and 'Redundancy depth' for critical system paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Risk team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 1980s 'Insurance-only' models to manage 2026 'Cyber-First' risk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Compliance' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Culture Fit' requirements",
+      "B": "Keeping frameworks updated with rapidly changing global 'Antitrust' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if test environments use unverified third-party data"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Mitigation Pipeline' can sustain major market shifts without a systemic loss of release velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g., a massive fine to a competitor) and the CRO presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in risk occurs when 'Fraud Data' is stored on a server that only the 'Sales' team can access, blocking the 'Compliance' audit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Risk' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Regulatory Compliance Leads",
+      "C": "Business Unit Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Resilience Intelligence' tools and 'Maturity Scoring' to a newly acquired risk team within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Risk' 'Strategy' 'Refreshes' (MTBRSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Risk Appetite' and 'Control Stack' to stay current with global technological threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a University Intern after exactly 48 hours of risk training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Control' (e.g., Encryption Key) has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Ethics Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Risk Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global risk talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Resilience Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Fraud Prevention Model' can be 'Lifted' from one product line (e.g., Credit Cards) and applied to another (e.g., Digital Wallets).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Risk' 'ROI' (MTR-RROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated control becoming 'Inactive' and the point where its 'Reliability' is restored to provide organizational value again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Compliance Budget Increase' while the CRO is enforcing a 'Global Data Sovereignty' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Risk' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Risk ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for CROs",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Risk-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Encapsulation' in a 'Micro-Control' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Controls' that are independently verifiable, preventing a 'Systemic Compliance Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in risk?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new threat vector (e.g., Quantum Decryption) is identified until the Risk Architect specifies the necessary tools to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Cyber Resilience Audits' are planned annually, but 'Zero-Day' threats update every 12 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Risk' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' complexity for a 'Turnaround' CRO?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' risk culture into a 'Modern and Proactive' engineering organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Risk' 'Lead' 'Exits' (MTB-RLE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Management Burnout' is causing frequent strategic shifts in the Risk team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Risk' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Threat' mapping across global subsidiaries",
+      "B": "Reducing the 'Compliance Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Risk.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Resilience' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-risk-incident?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Risk' 'Governance' in a large firm refers to having a 'Decentralized' decision-making structure while using a 'Centralized' monolithic auditing system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Risk' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on competitive benchmarking",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Resilience Alliances' relative to market stability automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Risk' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Risk Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

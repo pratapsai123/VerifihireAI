@@ -225,6 +225,8 @@ export default function CodingReview() {
       min_pass_percentage: Number(minPassPercentage),
       total_points: totalPoints,
       total_time: msToHHMMSS(totalCodingTimeSeconds * 1000), // Total time from all questions
+      weightage_objective: 0,
+      weightage_coding: 100,
     };
 
     if (allowed.length > 0) payload.coding_allowed_languages = allowed;

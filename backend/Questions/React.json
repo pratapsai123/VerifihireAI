@@ -55,7 +55,10 @@
         "C": "It replaces the need for CSS.",
         "D": "It allows React to run without JavaScript."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React components must always start with a capital letter.",
@@ -101,7 +104,10 @@
         "C": "Logical Components",
         "D": "Style Components"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Functional components are now the recommended way to write React code.",
@@ -165,7 +171,10 @@
         "C": "useEffect",
         "D": "useState"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The Virtual DOM is a complete copy of the real DOM that is updated manually by the developer.",
@@ -193,7 +202,10 @@
         "C": "if-else inside JSX",
         "D": "CSS display: none"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React can only be used to build single-page applications (SPAs).",
@@ -249,7 +261,10 @@
         "C": "It uses random numbers in the render method.",
         "D": "It directly modifies the DOM."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React Events are named using camelCase (e.g., onClick instead of onclick).",
@@ -287,7 +302,10 @@
         "C": "Inline style objects",
         "D": "HTML &lt;font&gt; tags"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Using an index as a key is recommended for lists that may change order.",
@@ -333,7 +351,10 @@
         "C": "They require the this keyword.",
         "D": "They must have a constructor."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React.memo is used to memoize a component, preventing unnecessary re-renders when props don't change.",
@@ -397,7 +418,10 @@
         "C": "useData",
         "D": "useStyle"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Hooks can be called inside loops or conditions.",
@@ -425,7 +449,10 @@
         "C": "A component name.",
         "D": "A CSS object."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: If the dependency array in useEffect is empty [], the effect runs only once after the initial render.",
@@ -489,7 +516,10 @@
         "C": "Middleware",
         "D": "Selector"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: useCallback returns a memoized version of a callback function.",
@@ -517,7 +547,10 @@
         "C": "Only call Hooks inside if statements.",
         "D": "Hooks can be called from regular JavaScript functions."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: useLayoutEffect runs synchronously after all DOM mutations but before the browser paints.",
@@ -563,7 +596,10 @@
         "C": "Improved app startup time.",
         "D": "Direct access to the backend."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Every call to a Custom Hook gets its own isolated state.",
@@ -609,7 +645,10 @@
         "C": "The previous state value.",
         "D": "A function to delete the state."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: You should always use the functional update form when the new state depends on the previous state.",
@@ -655,7 +694,10 @@
         "C": "It runs before every single render.",
         "D": "It is used to fetch data."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: useTransition allows you to mark state updates as non-urgent transitions.",
@@ -701,7 +743,10 @@
         "C": "Using async directly on the effect callback.",
         "D": "Putting state in the dependency array."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The ref object returned by useRef has a .current property.",
@@ -765,7 +810,10 @@
         "C": "<Switch>",
         "D": "<Path>"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Controlled Components' are form elements whose value is handled by React state.",
@@ -811,7 +859,10 @@
         "C": "It speeds up API requests.",
         "D": "It manages form state."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Error Boundaries are React components that catch JavaScript errors anywhere in their child component tree.",
@@ -839,7 +890,10 @@
         "C": "Using only Class Components",
         "D": "Removing all Hooks"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Portals' provide a way to render children into a DOM node that exists outside the hierarchy of the parent component.",
@@ -885,7 +939,10 @@
         "C": "Changing a local variable (let x = 10).",
         "D": "Resizing the browser window (without state)."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: forwardRef allows a component to pass a ref it receives further down to one of its children.",
@@ -949,7 +1006,10 @@
         "C": "Context",
         "D": "Props"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Redux Toolkit (RTK) is the recommended way to write Redux logic today.",
@@ -977,7 +1037,10 @@
         "C": "Axios",
         "D": "Express"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Zustand' is a small, fast, and scalable bear-bones state-management solution.",
@@ -1023,7 +1086,10 @@
         "C": "Redux Thunk",
         "D": "React Router"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React Query automatically handles loading and error states for asynchronous data.",
@@ -1087,7 +1153,10 @@
         "C": "getElementByClassName",
         "D": "querySelector"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Shallow Rendering' is preferred over full DOM rendering in modern React testing best practices.",
@@ -1115,7 +1184,10 @@
         "C": "Number of lines of code.",
         "D": "Battery consumption."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Over-memoizing every function and variable with useCallback and useMemo can actually hurt performance.",
@@ -1179,7 +1251,10 @@
         "C": "DDR (Direct DOM Rendering)",
         "D": "VPR (Virtual Prop Rendering)"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Remix' is a React framework that focuses heavily on web standards and HTTP caching.",
@@ -1207,7 +1282,10 @@
         "C": "Sass",
         "D": "Bootstrap"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Tailwind CSS' uses a utility-first approach that integrates very well with React's component model.",
@@ -1253,7 +1331,10 @@
         "C": "It makes the code run faster in the browser.",
         "D": "It removes the need for state."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Functional updates in useState are necessary if the next state depends on the previous state.",
@@ -1299,7 +1380,10 @@
         "C": "Converting all images to Base64.",
         "D": "Disabling the cache."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: memo only does a 'shallow' comparison of props by default.",
@@ -1345,7 +1429,10 @@
         "C": "The render function fetches data.",
         "D": "The render function changes global variables."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React.Children.map is a utility used to iterate over children when they are not guaranteed to be an array.",
@@ -1409,7 +1496,10 @@
         "C": "It is built into the React core library.",
         "D": "It only works with class components."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In React 18, createRoot is the new API used to enable concurrent features.",
@@ -1437,7 +1527,10 @@
         "C": "They can use the useState Hook.",
         "D": "They are interactive by default."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A 'Suspense Boundary' can catch errors during data fetching if used with a compatible library.",
@@ -1483,7 +1576,10 @@
         "C": "React Query",
         "D": "Redux Toolkit"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React Hook Form is generally more performant than Formik because it uses uncontrolled components.",
@@ -1547,7 +1643,10 @@
         "C": "Using only <div> tags for everything.",
         "D": "Disabling the keyboard tab index."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Snapshot Testing' in Jest records the rendered component tree and compares it to a previous version.",
@@ -1575,7 +1674,10 @@
         "C": "Axios",
         "D": "Lodash"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Using a 'State Machine' prevents the UI from entering 'impossible states.'",
@@ -1621,7 +1723,10 @@
         "C": "It deletes all JavaScript from the app.",
         "D": "It runs without an internet connection."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Hydration Mismatch' occurs when the server HTML and the client-side JavaScript render different content.",
@@ -1667,7 +1772,10 @@
         "C": "Photoshop",
         "D": "Excel"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Storybook allows you to develop and test components in isolation from the main application.",
@@ -1713,7 +1821,10 @@
         "C": "They can have CSS styles applied directly to them.",
         "D": "They speed up the database."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Error Boundaries' can catch errors in event handlers.",
@@ -1759,7 +1870,10 @@
         "C": "React Images",
         "D": "Icon-Maker"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: React components can be defined as asynchronous functions if they are Server Components.",
@@ -1805,7 +1919,10 @@
         "C": "React Style Kit",
         "D": "UI Master"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: dangerouslySetInnerHTML is React's replacement for innerHTML and should be used with caution.",

@@ -1,0 +1,1899 @@
+{ 
+  "skill": "Adobe XD", 
+  "questions": [
+    {
+    "question": "Which of the following is the primary purpose of Adobe XD?",
+    "options": {
+      "A": "High-end video editing",
+      "B": "UX/UI design and prototyping",
+      "C": "Vector illustration for print",
+      "D": "Photo retouching and manipulation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the keyboard shortcut to switch to the 'Prototype' tab in Adobe XD?",
+    "options": {
+      "A": "Ctrl/Cmd + 1",
+      "B": "Ctrl/Cmd + 2",
+      "C": "Ctrl/Cmd + Tab",
+      "D": "Ctrl/Cmd + P"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD allows you to create multiple artboards within a single project file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature is used to create a list of items that can be easily updated by dragging a handle?",
+    "options": {
+      "A": "Component States",
+      "B": "Repeat Grid",
+      "C": "Auto-Animate",
+      "D": "Responsive Resize"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the file extension for a native Adobe XD project file?",
+    "options": {
+      "A": ".psd",
+      "B": ".ai",
+      "C": ".xd",
+      "D": ".ux"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which tool allows you to select and move objects on the artboard?",
+    "options": {
+      "A": "Rectangle Tool (R)",
+      "B": "Select Tool (V)",
+      "C": "Pen Tool (P)",
+      "D": "Artboard Tool (A)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can import Adobe Photoshop (.PSD) files directly into Adobe XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the 'Design' tab, where can you change the opacity of a selected element?",
+    "options": {
+      "A": "The Assets panel",
+      "B": "The Layers panel",
+      "C": "The Property Inspector (Right sidebar)",
+      "D": "The Menu bar"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which feature automatically adjusts the size and position of elements when you resize an artboard?",
+    "options": {
+      "A": "Auto-Layout",
+      "B": "Responsive Resize",
+      "C": "Smart Animate",
+      "D": "Grid Layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Component' in Adobe XD?",
+    "options": {
+      "A": "A design element that can be reused across multiple artboards.",
+      "B": "A plugin for exporting code.",
+      "C": "A type of font used in prototypes.",
+      "D": "The background color of an artboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can share a prototype for review via a web link directly from Adobe XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which panel allows you to manage colors, character styles, and components globally?",
+    "options": {
+      "A": "Layers panel",
+      "B": "Document Assets panel",
+      "C": "Plugins panel",
+      "D": "History panel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all valid 'Triggers' available in the Prototype mode:",
+    "options": {
+      "A": "Tap",
+      "B": "Drag",
+      "C": "Voice",
+      "D": "Smell"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "How do you create a link between two artboards in Prototype mode?",
+    "options": {
+      "A": "Right-click and select 'Connect'",
+      "B": "Drag the blue arrow handle from one object to another artboard",
+      "C": "Name the artboards the same",
+      "D": "Use the Pen tool to draw a line"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD is available for both macOS and Windows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Eye' icon in the Layers panel do?",
+    "options": {
+      "A": "Deletes the layer",
+      "B": "Locks the layer",
+      "C": "Toggles visibility of the layer",
+      "D": "Changes the layer color"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which tool would you use to create a custom vector shape from scratch?",
+    "options": {
+      "A": "Rectangle Tool",
+      "B": "Pen Tool",
+      "C": "Text Tool",
+      "D": "Ellipse Tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Co-editing' where multiple users work on the same file at once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which shortcut key activates the 'Artboard' tool?",
+    "options": {
+      "A": "V",
+      "B": "A",
+      "C": "T",
+      "D": "R"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Desktop Preview' (the Play icon)?",
+    "options": {
+      "A": "To export the project to PDF",
+      "B": "To record a video of the screen",
+      "C": "To interact with the prototype and test links",
+      "D": "To render the final app"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following can be used as a background for an artboard?",
+    "options": {
+      "A": "Solid color",
+      "B": "Linear gradient",
+      "C": "Radial gradient",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can apply a 'Blur' effect to an object or an entire background in XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which action allows you to duplicate an object while dragging it?",
+    "options": {
+      "A": "Holding Shift",
+      "B": "Holding Alt/Option",
+      "C": "Holding Ctrl/Cmd",
+      "D": "Double-clicking"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the shortcut for 'Grouping' selected elements?",
+    "options": {
+      "A": "Ctrl/Cmd + G",
+      "B": "Ctrl/Cmd + Shift + G",
+      "C": "Ctrl/Cmd + L",
+      "D": "Ctrl/Cmd + Alt + G"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'Voice Commands' to trigger interactions in an XD prototype.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which panel shows the hierarchy of all objects on the current artboard?",
+    "options": {
+      "A": "Assets",
+      "B": "Layers",
+      "C": "Plugins",
+      "D": "Prototype"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you 'Mask' an image into a shape in Adobe XD?",
+    "options": {
+      "A": "Select both and choose 'Mask with Shape' (Ctrl/Cmd + Shift + M)",
+      "B": "Drag the image on top of the shape and press Delete",
+      "C": "Use the Eraser tool",
+      "D": "Images cannot be masked in XD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Adobe XD is primarily a raster-based design tool like Photoshop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Fix Position when Scrolling' checkbox do?",
+    "options": {
+      "A": "Locks the object so it cannot be moved",
+      "B": "Makes an element (like a status bar) stay in place while the rest of the content scrolls",
+      "C": "Fixes the aspect ratio of the object",
+      "D": "Centers the object on the artboard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Share' mode, which link type is best for sending to a developer?",
+    "options": {
+      "A": "Design Review",
+      "B": "Development",
+      "C": "User Testing",
+      "D": "Presentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Grid' and 'Layout' guides to align objects on an artboard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which key do you hold to maintain the aspect ratio of a shape while resizing?",
+    "options": {
+      "A": "Alt/Option",
+      "B": "Ctrl/Cmd",
+      "C": "Shift",
+      "D": "Space"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Auto-Animate' used for in XD?",
+    "options": {
+      "A": "Creating simple GIFs",
+      "B": "Automatically animating the transition between two artboards based on object differences",
+      "C": "Coding the app automatically",
+      "D": "Recording the designer's voice"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to create text elements in Adobe XD?",
+    "options": {
+      "A": "Select Tool (V)",
+      "B": "Pen Tool (P)",
+      "C": "Text Tool (T)",
+      "D": "Line Tool (L)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can change the 'Corner Radius' of a rectangle to create rounded corners.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when you double-click a 'Component' instance on an artboard?",
+    "options": {
+      "A": "It deletes the component.",
+      "B": "It allows you to edit the main component's properties.",
+      "C": "It enters the isolation mode to edit that specific instance or its contents.",
+      "D": "It exports the component as a PNG."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is used to create a vertical or horizontal scrollable area within an artboard?",
+    "options": {
+      "A": "Repeat Grid",
+      "B": "Scroll Groups",
+      "C": "Auto-Animate",
+      "D": "Stack"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Assets' panel allows you to save and reuse colors across the document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which shortcut is used to 'Zoom In' on the canvas?",
+    "options": {
+      "A": "Ctrl/Cmd + Minus (-)",
+      "B": "Ctrl/Cmd + Plus (+)",
+      "C": "Ctrl/Cmd + Z",
+      "D": "Ctrl/Cmd + 0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you 'Ungroup' objects in Adobe XD?",
+    "options": {
+      "A": "Ctrl/Cmd + G",
+      "B": "Ctrl/Cmd + Shift + G",
+      "C": "Ctrl/Cmd + U",
+      "D": "Right-click and select 'Delete'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can preview your Adobe XD prototypes on a mobile device using the Adobe XD mobile app.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Guides' in Adobe XD?",
+    "options": {
+      "A": "To provide tutorials on how to use the app.",
+      "B": "To help align objects precisely on an artboard.",
+      "C": "To automatically generate code.",
+      "D": "To show the user where to click in a prototype."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which panel is used to install and manage third-party extensions in XD?",
+    "options": {
+      "A": "Layers panel",
+      "B": "Assets panel",
+      "C": "Plugins panel",
+      "D": "Property Inspector"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Lottie' animations (JSON files).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the shortcut to 'Play' the prototype preview?",
+    "options": {
+      "A": "Ctrl/Cmd + P",
+      "B": "Ctrl/Cmd + Enter",
+      "C": "Ctrl/Cmd + Shift + P",
+      "D": "Spacebar"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a 'Circle' using the Ellipse Tool?",
+    "options": {
+      "A": "Just drag the mouse.",
+      "B": "Hold Alt while dragging.",
+      "C": "Hold Shift while dragging.",
+      "D": "Double-click the canvas."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can only have one 'Main Component' for any given element.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these allows you to quickly change the spacing between items in a group or Repeat Grid?",
+    "options": {
+      "A": "Padding",
+      "B": "Pink handles/overlays on hover",
+      "C": "The Layers panel",
+      "D": "The Pen tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Eyedropper' tool's function?",
+    "options": {
+      "A": "It deletes colors.",
+      "B": "It picks up a color from an image or object and applies it to the selection.",
+      "C": "It zooms into a specific point.",
+      "D": "It creates a circular shape."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can export assets for Web, iOS, and Android directly from the export menu.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Pasteboard' in Adobe XD?",
+    "options": {
+      "A": "The area where you type text.",
+      "B": "The grey area outside of the artboards where you can keep extra elements.",
+      "C": "The clipboard history.",
+      "D": "A plugin for copying code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which shortcut aligns a selected object to the horizontal center of an artboard?",
+    "options": {
+      "A": "Ctrl/Cmd + C",
+      "B": "Shift + C",
+      "C": "Ctrl/Cmd + Shift + M",
+      "D": "No shortcut; must use the alignment icons in the inspector."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can add 'Links' to external websites in an Adobe XD prototype.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature allows you to change the state of a button (e.g., from Default to Hover)?",
+    "options": {
+      "A": "Artboard transitions",
+      "B": "Component States",
+      "C": "Repeat Grid",
+      "D": "Scroll Groups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Home' icon on an artboard in Prototype mode used for?",
+    "options": {
+      "A": "It deletes the artboard.",
+      "B": "It marks that artboard as the starting point of the prototype.",
+      "C": "It returns the designer to the start screen.",
+      "D": "It saves the file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Boolean Operations' (Add, Subtract, Intersect, Exclude) to combine shapes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Property Inspector, what does the 'Fill' checkbox control?",
+    "options": {
+      "A": "The border of the object.",
+      "B": "The inner color of the object.",
+      "C": "The shadow of the object.",
+      "D": "The size of the object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select the correct method to rename an artboard:",
+    "options": {
+      "A": "Double-click the artboard title above the artboard.",
+      "B": "Right-click the artboard and select 'Rename'.",
+      "C": "Rename it in the Layers panel.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Adobe XD is part of the Adobe Creative Cloud suite.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the shortcut to 'Lock' a layer?",
+    "options": {
+      "A": "Ctrl/Cmd + L",
+      "B": "Ctrl/Cmd + Shift + L",
+      "C": "Ctrl/Cmd + K",
+      "D": "Ctrl/Cmd + 2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool allows you to draw a straight line?",
+    "options": {
+      "A": "Pen Tool",
+      "B": "Line Tool (L)",
+      "C": "Rectangle Tool",
+      "D": "Select Tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can adjust the line spacing (leading) of a text block in XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Stacks' within a group?",
+    "options": {
+      "A": "To layer objects on top of each other.",
+      "B": "To automatically maintain equal spacing between objects when they are reordered or resized.",
+      "C": "To create a 3D effect.",
+      "D": "To hide objects from the Layers panel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these can be adjusted for a 'Shadow' effect in XD?",
+    "options": {
+      "A": "X and Y Offset",
+      "B": "Blur amount",
+      "C": "Color and Opacity",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can 'Import' an SVG file and still edit its vector paths in XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you switch back to 'Design' mode from 'Prototype' mode?",
+    "options": {
+      "A": "Ctrl/Cmd + 1",
+      "B": "Ctrl/Cmd + 2",
+      "C": "Ctrl/Cmd + D",
+      "D": "Press Escape"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When using 'Auto-Animate', how does Adobe XD identify which objects to animate between two artboards?",
+    "options": {
+      "A": "Based on the order they were created.",
+      "B": "By matching the layer names and group hierarchy across both artboards.",
+      "C": "By the color of the objects.",
+      "D": "By the position of the objects on the Pasteboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Main Component' and a 'Component Instance'?",
+    "options": {
+      "A": "Instances can have unique interactions, but Main Components cannot.",
+      "B": "Changes made to the Main Component sync to all Instances, but overrides on an Instance do not affect the Main Component.",
+      "C": "Main Components are only available in the cloud.",
+      "D": "Instances cannot be resized."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Repeat Grid', you can adjust the spacing between all items simultaneously by dragging the pink area between them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature allows you to create a 'Sticky' element that stays fixed at the top while other content moves behind it during a scroll?",
+    "options": {
+      "A": "Stacking",
+      "B": "Fix Position when Scrolling",
+      "C": "Scroll Groups",
+      "D": "Overlay"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hover State' used for in Adobe XD components?",
+    "options": {
+      "A": "To animate an object automatically when the prototype starts.",
+      "B": "To define a specific appearance that triggers when the user's cursor moves over a component in the preview.",
+      "C": "To show hidden layers in the Layers panel.",
+      "D": "To change the artboard background."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Action' type in Prototype mode is best used for creating a sliding navigation menu that appears over the current screen?",
+    "options": {
+      "A": "Transition",
+      "B": "Overlay",
+      "C": "Previous Artboard",
+      "D": "Audio Playback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Padding' in Adobe XD allows the background of a component to automatically resize when you change the text inside it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Responsive Resize', what happens if you toggle the setting to 'Manual'?",
+    "options": {
+      "A": "The object stops resizing entirely.",
+      "B": "You can manually specify constraints like 'Fix Width' or 'Pin to Edge' for each element.",
+      "C": "The object becomes a raster image.",
+      "D": "It deletes all layout guides."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Linked Assets' in Adobe XD?",
+    "options": {
+      "A": "To link a website to an image.",
+      "B": "To share and sync components and styles from a source cloud document to other XD files.",
+      "C": "To keep track of the designer's hourly rate.",
+      "D": "To connect the prototype to a live database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply a 'Multiple Trigger' interaction to a single object (e.g., both a Tap and a Drag).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which panel allows you to view and edit the CSS properties of an element for developer handoff?",
+    "options": {
+      "A": "Design Panel",
+      "B": "Share Mode (under the Development preset)",
+      "C": "Layers Panel",
+      "D": "Plugins Panel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Preserve Scroll Position' option do when creating a transition?",
+    "options": {
+      "A": "It prevents the user from scrolling.",
+      "B": "It keeps the user at the same vertical scroll depth when moving between two artboards of different lengths.",
+      "C": "It saves the file automatically.",
+      "D": "It fixes the header to the top."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'Auto-Animate' to function correctly between two artboards?",
+    "options": {
+      "A": "Both artboards must have the same background color.",
+      "B": "Objects must have identical layer names in both artboards.",
+      "C": "The artboards must be the same size.",
+      "D": "You must use the Pen tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use '3D Transforms' to rotate objects along the X and Y axes in Adobe XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Scroll Group' used for?",
+    "options": {
+      "A": "To scroll the entire artboard.",
+      "B": "To define a specific area (horizontal, vertical, or both) within an artboard that can be scrolled independently.",
+      "C": "To group objects that have the same color.",
+      "D": "To create a slideshow of artboards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature would you use to create a 'Toggle Switch' that changes from Off to On within a single component instance?",
+    "options": {
+      "A": "Repeat Grid",
+      "B": "Component States",
+      "C": "Overlay",
+      "D": "Artboard Transition"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can record a video of your prototype interaction on macOS using the built-in 'Record' button in the Preview window.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Document Assets' limit for colors and character styles?",
+    "options": {
+      "A": "10",
+      "B": "50",
+      "C": "100",
+      "D": "There is no set limit; you can add as many as needed."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In 'Share' mode, which setting allows stakeholders to leave comments on specific parts of the design?",
+    "options": {
+      "A": "Allow Comments",
+      "B": "Show Hotspot Hints",
+      "C": "Open in Fullscreen",
+      "D": "Require Password"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool or feature helps you identify the distance between two objects in Design mode?",
+    "options": {
+      "A": "Rulers",
+      "B": "Holding Alt/Option while hovering over the second object with the first selected.",
+      "C": "The Layers panel.",
+      "D": "Pen tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD can export assets directly to Zeplin via a plugin.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens to 'Overrides' on a component instance if the Main Component is deleted?",
+    "options": {
+      "A": "The instance is deleted.",
+      "B": "The instance becomes a regular group and keeps its current appearance.",
+      "C": "The instance loses all styling.",
+      "D": "The file crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all valid 'Easing' options in Adobe XD prototyping:",
+    "options": {
+      "A": "Ease In",
+      "B": "Ease Out",
+      "C": "Bounce",
+      "D": "Heavy"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'Guides' in a Layout Grid?",
+    "options": {
+      "A": "To draw shapes.",
+      "B": "To establish columns and gutters for consistent alignment across different screen sizes.",
+      "C": "To show where text should go.",
+      "D": "To hide elements during export."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can animate the 'Path' of a vector object using Auto-Animate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to quickly replace a placeholder image in a 'Repeat Grid' with multiple different images?",
+    "options": {
+      "A": "Copy and Paste",
+      "B": "Dragging a selection of multiple images from your computer directly onto one of the grid items.",
+      "C": "Using the Pen tool to draw them.",
+      "D": "Right-clicking and selecting 'Shuffle'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Lottie' plugin allow you to do in Adobe XD?",
+    "options": {
+      "A": "Edit video files.",
+      "B": "Import and play interactive vector-based animations in your prototypes.",
+      "C": "Create 3D models.",
+      "D": "Export the design to HTML."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Prototyping, what is a 'Timed Trigger'?",
+    "options": {
+      "A": "An interaction that happens when the user clicks a clock.",
+      "B": "An automatic transition that occurs after a specified delay without user input.",
+      "C": "A way to limit the time a user spends on a page.",
+      "D": "A stopwatch for the designer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use a 'Video' file as a background for an artboard in Adobe XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Non-destructive' way to edit a shape's appearance?",
+    "options": {
+      "A": "Using 'Path' editing to move anchor points.",
+      "B": "Applying 'Boolean Groups' (Add, Subtract, etc.) where you can still edit the original shapes later.",
+      "C": "Using the Eraser tool.",
+      "D": "Flattening the layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Viewport Height' setting on an artboard used for?",
+    "options": {
+      "A": "It defines the actual size of the device screen in the preview, showing where content starts to scroll.",
+      "B": "It sets the resolution of the exported images.",
+      "C": "It changes the color of the pasteboard.",
+      "D": "It limits how much text you can type."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature helps you maintain consistent vertical spacing between different sections of a layout?",
+    "options": {
+      "A": "Stacks",
+      "B": "Repeat Grid",
+      "C": "3D Transforms",
+      "D": "Components"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Right-to-Left' (RTL) text for languages like Arabic and Hebrew.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature allows you to change the structure of a component (like hiding a button) in one state without affecting the other states?",
+    "options": {
+      "A": "Responsive Resize",
+      "B": "Component States",
+      "C": "Repeat Grid",
+      "D": "Scroll Groups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When you drag a folder of images into a 'Repeat Grid', Adobe XD will automatically populate each grid item with a different image from that folder.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Trigger' is specifically designed to work with game controllers or keyboard keys in a prototype?",
+    "options": {
+      "A": "Tap",
+      "B": "Drag",
+      "C": "Keys & Gamepad",
+      "D": "Voice"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the 'Assets' panel, what does the 'Link' icon next to a component indicate?",
+    "options": {
+      "A": "The component is broken.",
+      "B": "The component is a 'Linked Asset' from another cloud document.",
+      "C": "The component is linked to a website.",
+      "D": "The component has an active prototype link."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Padding' when enabled on a Component or Group?",
+    "options": {
+      "A": "To add a border around the element.",
+      "B": "To maintain a fixed distance between the content and the boundary of the background/container.",
+      "C": "To increase the file size.",
+      "D": "To slow down animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mode in Adobe XD is used to define how stakeholders and developers interact with the published design?",
+    "options": {
+      "A": "Design Mode",
+      "B": "Prototype Mode",
+      "C": "Share Mode",
+      "D": "Review Mode"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can nest a 'Repeat Grid' inside a 'Scroll Group'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which export format is best for preserving vector scalability when hand-off to a web developer?",
+    "options": {
+      "A": "PNG",
+      "B": "JPG",
+      "C": "SVG",
+      "D": "TIFF"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'Snap to Pixel Grid' feature ensure in Adobe XD?",
+    "options": {
+      "A": "That all colors are web-safe.",
+      "B": "That object edges and paths align perfectly with the pixel grid to prevent blurriness.",
+      "C": "That the prototype runs at 60fps.",
+      "D": "That all fonts are converted to shapes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which panel is used to manage and trigger 'Voice' responses in a prototype?",
+    "options": {
+      "A": "Assets Panel",
+      "B": "Prototype Panel (Property Inspector)",
+      "C": "Layers Panel",
+      "D": "Voice Panel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Plugins' that can generate real data (like names and addresses) into your designs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Star' icon in the Assets panel?",
+    "options": {
+      "A": "It marks an asset as a favorite.",
+      "B": "There is no star icon; assets are added using the 'Plus' (+) icon.",
+      "C": "It indicates the 'Main Component'.",
+      "D": "It exports the asset to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Auto-Animate', which property CANNOT be animated between artboards?",
+    "options": {
+      "A": "Position",
+      "B": "Fill Color",
+      "C": "A change in font family (e.g., Arial to Roboto)",
+      "D": "Opacity"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which feature allows you to create a 'Card' that expands when clicked, using only one artboard and a component?",
+    "options": {
+      "A": "Scroll Groups",
+      "B": "Component States with Auto-Animate",
+      "C": "Repeat Grid",
+      "D": "Overlay"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can share a 'Private Link' in Share Mode that only specific invited people can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Responsive Resize' when working with groups?",
+    "options": {
+      "A": "To make the file load faster.",
+      "B": "To maintain the relationships and scales of elements automatically when the group is resized for different screen sizes.",
+      "C": "To change the color of the group.",
+      "D": "To convert the group into a component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid use case for 'Multiple Flows' in a single XD document?",
+    "options": {
+      "A": "To show different versions of a design to a client.",
+      "B": "To separate a 'Login' journey from an 'Onboarding' journey within the same file.",
+      "C": "To test different navigation structures.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How do you create a 'Mask with Shape' using a keyboard shortcut?",
+    "options": {
+      "A": "Ctrl/Cmd + M",
+      "B": "Ctrl/Cmd + Shift + M",
+      "C": "Ctrl/Cmd + G",
+      "D": "Ctrl/Cmd + Alt + M"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If you update a 'Main Component' in the source document, all files using it as a 'Linked Asset' will receive a notification to update.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Overlay' action in Prototyping typically used for?",
+    "options": {
+      "A": "Switching between full-screen pages.",
+      "B": "Displaying content like keyboards, menus, or dialog boxes on top of the current artboard.",
+      "C": "Adding a shadow to a button.",
+      "D": "Deleting an artboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In '3D Transforms', what does the 'Z-axis' control?",
+    "options": {
+      "A": "Horizontal rotation.",
+      "B": "Vertical rotation.",
+      "C": "The depth or distance of the object from the viewer (forward/backward).",
+      "D": "The transparency of the object."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which 'Share' preset provides the 'Specs' tab, allowing developers to see measurements and asset download options?",
+    "options": {
+      "A": "Design Review",
+      "B": "Development",
+      "C": "User Testing",
+      "D": "Presentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply a 'Gradient' to a text layer without converting it to a path first.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Fix Position' option do in the Property Inspector?",
+    "options": {
+      "A": "Prevents the object from being moved in Design mode.",
+      "B": "Keeps the element in a fixed location on the screen while the artboard content scrolls behind it.",
+      "C": "Pins the object to the center of the screen.",
+      "D": "Locks the layer name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all valid ways to add assets to the 'Document Assets' panel:",
+    "options": {
+      "A": "Select an object and click the '+' icon next to Colors or Components.",
+      "B": "Right-click an object and select 'Make Component'.",
+      "C": "Drag and drop a file from the desktop into the Assets panel.",
+      "D": "Both A and B."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which tool is best for creating a 'Background Blur' on a UI element?",
+    "options": {
+      "A": "The Blur tool in the toolbar.",
+      "B": "The 'Background Blur' option in the Property Inspector for a selected shape.",
+      "C": "The Pen tool.",
+      "D": "Adobe XD does not support background blur."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can 'Record' your prototype on Windows using the Adobe XD built-in recorder.",
+    "options": {
+      "A": "True",
+      "B": "False (Requires Windows Game Bar or third-party software)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the keyboard shortcut to 'Make Component'?",
+    "options": {
+      "A": "Ctrl/Cmd + C",
+      "B": "Ctrl/Cmd + K",
+      "C": "Ctrl/Cmd + M",
+      "D": "Ctrl/Cmd + G"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows you to adjust the spacing between elements in a 'Stack' by simply dragging them?",
+    "options": {
+      "A": "Repeat Grid",
+      "B": "Direct manipulation of pink spacing handles in the group.",
+      "C": "The Layers panel.",
+      "D": "The Alignment tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Co-editing' in Adobe XD requires the document to be saved as a 'Cloud Document'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Viewport' of an artboard in Design mode?",
+    "options": {
+      "A": "The total length of the artboard.",
+      "B": "The visible area of the artboard when the prototype is first loaded on a device.",
+      "C": "The resolution of the screen.",
+      "D": "The area where plugins work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which panel shows the 'Flow' names and starting artboards?",
+    "options": {
+      "A": "Layers Panel",
+      "B": "Assets Panel",
+      "C": "The upper-left corner of the Prototype workspace.",
+      "D": "Property Inspector."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you 'Flatten' a Boolean Group into a single path?",
+    "options": {
+      "A": "Right-click and select 'Convert to Path'.",
+      "B": "Right-click and select 'Flatten Selection'.",
+      "C": "Press Ctrl/Cmd + E.",
+      "D": "Press Ctrl/Cmd + G."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When building a Design System, what is the primary architectural advantage of using 'Linked Assets' over local components?",
+    "options": {
+      "A": "It makes the file size smaller.",
+      "B": "It establishes a 'Single Source of Truth' allowing global updates to propagate across multiple project files simultaneously.",
+      "C": "It allows you to use Photoshop tools inside XD.",
+      "D": "It automatically generates React code for the developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a limitation of 'Auto-Animate' when transitioning between two artboards?",
+    "options": {
+      "A": "It cannot animate changes in Opacity.",
+      "B": "It cannot animate between two different vector shapes if the number of anchor points has changed (it will cross-dissolve instead).",
+      "C": "It only works on macOS.",
+      "D": "It requires a 'Timed' trigger to work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Adobe XD, a 'Component State' can have its own unique 'Timed' trigger that differs from the Default state.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Responsive Resize' prioritize which constraints to apply when set to 'Auto'?",
+    "options": {
+      "A": "It randomizes the constraints.",
+      "B": "It analyzes the proximity of elements to the edges of their container and their relative hierarchical relationships.",
+      "C": "It pins everything to the center by default.",
+      "D": "It bases it on the layer's alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When creating a 'Scroll Group', what must you ensure regarding the 'Viewport' of that group?",
+    "options": {
+      "A": "The viewport must be the same size as the artboard.",
+      "B": "The content inside the group must be larger than the defined boundary (viewport) of the scroll group itself.",
+      "C": "The group must be converted into a component first.",
+      "D": "The scroll group must always be vertical."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In '3D Transforms', how is the 'Z-Index' (layering) handled relative to 'Z-Depth' (positioning)?",
+    "options": {
+      "A": "Z-Depth overrides the layer order in the Layers panel.",
+      "B": "The layer order in the Layers panel still determines which object is on top, regardless of Z-axis position.",
+      "C": "3D objects are automatically moved to a special '3D Layer'.",
+      "D": "Z-Depth only works if the objects are grouped."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can nest 'Component States' within other 'Component States' to create complex multi-level interactions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to a 'Linked Asset' in a destination file if the Main Component in the source file is renamed?",
+    "options": {
+      "A": "The link is broken.",
+      "B": "The name updates automatically in the Assets panel of the destination file.",
+      "C": "The destination file crashes.",
+      "D": "A duplicate component is created."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the behavior of 'Stacks' when an element within the stack is hidden using the 'Eye' icon?",
+    "options": {
+      "A": "The other elements stay in place, leaving a gap.",
+      "B": "The other elements automatically shift to fill the space previously occupied by the hidden element.",
+      "C": "The stack is automatically ungrouped.",
+      "D": "The entire stack becomes invisible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Share Mode', which specific setting must be enabled for developers to download individual assets like icons and images?",
+    "options": {
+      "A": "Allow Comments",
+      "B": "The 'Mark for Export' icon must be checked for each asset in Design mode.",
+      "C": "Include Password",
+      "D": "Open in Fullscreen"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Voice Trigger' and 'Speech Playback' allows you to create a fully functional voice assistant prototype that can recognize specific phrases and respond.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you 'Reset' a component instance back to the exact styling of the Main Component, removing all overrides?",
+    "options": {
+      "A": "Delete and recreate it.",
+      "B": "Right-click the instance and select 'Reset to Main State'.",
+      "C": "Double-click the instance.",
+      "D": "There is no reset button; you must undo the changes manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which scenario would require using an 'Overlay' rather than 'Auto-Animate'?",
+    "options": {
+      "A": "Changing the color of a button.",
+      "B": "Displaying a modal or popup that should appear on top of any artboard without duplicating the background content.",
+      "C": "A sliding hero banner.",
+      "D": "A parallax scrolling effect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary constraint when using 'Multiple Triggers' on a single object?",
+    "options": {
+      "A": "You cannot have two triggers of the same type (e.g., two 'Tap' triggers) on the same object.",
+      "B": "You can only have one trigger per artboard.",
+      "C": "The object must be a Component.",
+      "D": "It only works in the desktop browser preview."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Path Operations' (Boolean) on text layers while keeping the text editable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature is essential for simulating a 'Long-press' interaction in a prototype?",
+    "options": {
+      "A": "Tap Trigger",
+      "B": "Timed Trigger on a secondary artboard.",
+      "C": "Drag Trigger with a very short distance.",
+      "D": "XD does not natively support a 'Long-press' trigger."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How does 'Document History' (Cloud Documents) handle versioning?",
+    "options": {
+      "A": "It only saves when you click 'Save'.",
+      "B": "It automatically saves versions every few minutes, and you can 'Bookmark' specific versions to keep them permanently.",
+      "C": "It deletes old versions after 24 hours.",
+      "D": "It requires a separate plugin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the maximum number of 'Main Components' allowed in a single XD document?",
+    "options": {
+      "A": "500",
+      "B": "1000",
+      "C": "5000",
+      "D": "There is no theoretical limit, though performance may degrade with extreme numbers."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: If you apply a 'Blur' to a folder (Group), it will blur everything inside it, including text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When exporting to 'After Effects', what happens to Adobe XD layers?",
+    "options": {
+      "A": "They are flattened into one image.",
+      "B": "They are preserved as editable shapes, text, and layers within After Effects.",
+      "C": "They are converted into HTML.",
+      "D": "After Effects cannot open XD files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all that apply: Which of the following can be shared via 'Creative Cloud Libraries' from XD?",
+    "options": {
+      "A": "Colors",
+      "B": "Character Styles",
+      "C": "Components",
+      "D": "Artboard Transitions"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Hover State' technically in the context of Adobe XD's interaction model?",
+    "options": {
+      "A": "A separate artboard.",
+      "B": "An automatic 'Auto-Animate' transition between the Default state and a Hover state triggered by cursor proximity.",
+      "C": "A GIF animation.",
+      "D": "A JavaScript event."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Repeat Grid', you can create unique interactions for individual instances within the grid (e.g., clicking item 1 goes to Page A, clicking item 2 goes to Page B).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows for 'Parallax Scrolling' effects in XD?",
+    "options": {
+      "A": "Repeat Grid.",
+      "B": "Combining 'Drag' triggers with 'Auto-Animate' where background objects move at a different rate than foreground objects.",
+      "C": "Using the 3D tool.",
+      "D": "The 'Parallax' plugin is required."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Responsive Resize' manually, what does the 'Fix Width' constraint do?",
+    "options": {
+      "A": "It locks the aspect ratio.",
+      "B": "It prevents the element's width from changing regardless of how much the parent container is resized.",
+      "C": "It centers the object.",
+      "D": "It stretches the object to fill the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Prototyping' limitation in Adobe XD?",
+    "options": {
+      "A": "No support for 'If/Else' logic or variables.",
+      "B": "No support for Voice triggers.",
+      "C": "No support for Lottie animations.",
+      "D": "No support for 3D transforms."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can 'Import' Adobe Illustrator (.AI) files into XD and keep the vector paths fully editable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Stacks', what is the 'Gutter'?",
+    "options": {
+      "A": "The space outside the artboard.",
+      "B": "The specific value of spacing between elements within the stack.",
+      "C": "The area where deleted layers go.",
+      "D": "The width of the columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary use of 'Multiple Triggers' with 'Audio Playback'?",
+    "options": {
+      "A": "To play two songs at once.",
+      "B": "To trigger an action (like a transition) and a sound effect (like a click) simultaneously on a single user interaction.",
+      "C": "To record the user's voice.",
+      "D": "To increase the volume of the prototype."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should be used if the request is valid, but the user has reached their monthly quota for the API?",
+    "options": {
+      "A": "401",
+      "B": "403",
+      "C": "429 Too Many Requests",
+      "D": "503"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use 'Lottie' animations as a trigger for a transition to another artboard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Component Nesting'?",
+    "options": {
+      "A": "Putting components in folders.",
+      "B": "Placing one or more components inside another component (e.g., placing an 'Icon' component inside a 'Button' component).",
+      "C": "Deleting a component.",
+      "D": "Naming components the same."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Design Tokens' in an XD workflow?",
+    "options": {
+      "A": "The price of the software.",
+      "B": "A set of design decisions (colors, typography, spacing) stored in the Assets panel that can be shared via a Design System.",
+      "C": "The icons used in the app.",
+      "D": "A way to unlock premium features."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you ensure a 'Fixed Header' doesn't overlap with the main content when using 'Scroll Groups'?",
+    "options": {
+      "A": "Put the header inside the scroll group.",
+      "B": "Ensure the header is the top-most layer and the 'Fix Position' option is checked, while the scroll group is positioned below it in the layer stack.",
+      "C": "Make the header transparent.",
+      "D": "Delete the header."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When a Component Instance is placed in a different document as a 'Linked Asset', what happens if you break the link?",
+    "options": {
+      "A": "The component is deleted from the canvas.",
+      "B": "The component becomes a local 'Main Component' within that specific document.",
+      "C": "The component reverts to a standard group of paths and shapes.",
+      "D": "The component loses all its states but remains a component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Adobe XD, you can create a 'Circular' Scroll Group by overlapping the start and end of the content.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'State Transition' behavior when moving between two artboards that both contain the same component in different states?",
+    "options": {
+      "A": "The component will instantly snap to the state of the destination artboard.",
+      "B": "If 'Auto-Animate' is selected, XD will animate the properties of the component from the source state to the destination state.",
+      "C": "The component will reset to its 'Default' state during the transition.",
+      "D": "Components cannot exist in different states on different artboards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary architectural challenge of nesting a 'Scroll Group' inside a 'Repeat Grid'?",
+    "options": {
+      "A": "The file size will double.",
+      "B": "It becomes difficult to manage 'Auto-Animate' transitions because layer names must remain identical across grid instances.",
+      "C": "XD does not allow this nesting.",
+      "D": "The scroll group will only work in the first item of the grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Share Mode', what is the purpose of the 'Hotspot Hints' setting?",
+    "options": {
+      "A": "It shows where the most popular parts of the design are (Heatmap).",
+      "B": "It flashes blue overlays on interactive areas if a user clicks on a non-interactive part of the prototype.",
+      "C": "It highlights accessibility errors.",
+      "D": "It shows the developer the CSS code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Blend Mode' is most useful for creating a 'Glassmorphism' effect when combined with Background Blur?",
+    "options": {
+      "A": "Multiply",
+      "B": "Overlay or Soft Light",
+      "C": "Difference",
+      "D": "Hue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD supports 'Lottie' playback that can be synced to a 'Drag' trigger (e.g., pulling a handle plays the animation).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Responsive Resize' handle a group that contains an image with 'Fill' set to 'Aspect Fill'?",
+    "options": {
+      "A": "It stretches the image and loses the aspect ratio.",
+      "B": "It maintains the aspect ratio of the image while scaling the container.",
+      "C": "It converts the image to a solid color.",
+      "D": "It crops the image from the top-left only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all that apply: Which properties are preserved when 'Resetting to Main State' on a component instance?",
+    "options": {
+      "A": "The layer name.",
+      "B": "The X and Y coordinates on the artboard.",
+      "C": "The text content overrides.",
+      "D": "None; it reverts everything to the Main Component's values."
+    },
+    "answer": ["B"]
+  },
+  {
+    "question": "What is the 'Maximum Viewport Height' supported in Adobe XD for a single artboard?",
+    "options": {
+      "A": "10,000 px",
+      "B": "50,000 px",
+      "C": "60,000 px",
+      "D": "There is no fixed limit, but artboards over 60,000 px may experience rendering issues."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: In Adobe XD, you can use 'Speech Playback' to read out dynamic text that a user might have typed into a form during the preview.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if two different designers are 'Co-editing' and they both move the same object at the same time?",
+    "options": {
+      "A": "The file creates a 'Conflict' copy.",
+      "B": "The last move made is the one that is synced and preserved (Last-in-wins).",
+      "C": "The object is locked and cannot be moved by either.",
+      "D": "The software crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Share' preset is required to allow users to open the prototype in the 'Adobe XD mobile app' for offline viewing?",
+    "options": {
+      "A": "Design Review",
+      "B": "Development",
+      "C": "User Testing",
+      "D": "The prototype must be saved as a Cloud Document; Share presets do not affect mobile app syncing."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the primary use for the 'Exclude' boolean operation?",
+    "options": {
+      "A": "To combine two shapes into one.",
+      "B": "To create a hole where two shapes overlap, while keeping the non-overlapping parts visible.",
+      "C": "To delete the top shape.",
+      "D": "To merge all layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adobe XD allows you to export 'Code Snippets' for Flutter directly without any plugins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Multiple Flows', how do you define a second 'Starting Point'?",
+    "options": {
+      "A": "Right-click an artboard and select 'Make Start'.",
+      "B": "In Prototype mode, click the 'Home' icon on any artboard that isn't already connected to the first flow.",
+      "C": "Name the artboard 'Flow 2'.",
+      "D": "It happens automatically when you create a new link."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Mark for Batch Export' do?",
+    "options": {
+      "A": "It highlights the object in red.",
+      "B": "It tags the object so it can be exported all at once when using the 'Export > All Victors' or 'Selected' command.",
+      "C": "It uploads the asset to the developer specs immediately.",
+      "D": "It creates a backup of the layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Hover' interaction behavior on a mobile device prototype?",
+    "options": {
+      "A": "It works when the finger is near the screen.",
+      "B": "It is generally triggered by the first 'Tap', and the second 'Tap' triggers the actual click action.",
+      "C": "It is completely disabled.",
+      "D": "It works via the front-facing camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply '3D Transforms' to a 'Repeat Grid' as a whole, rotating the entire grid in 3D space.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default State' of a component?",
+    "options": {
+      "A": "The first state created, which acts as the base for all other states.",
+      "B": "A state that cannot be edited.",
+      "C": "A state that is only visible in the browser.",
+      "D": "The state that appears when an error occurs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Auto-Animate', what happens if an object exists on the destination artboard but NOT on the source artboard?",
+    "options": {
+      "A": "The object will slide in from the left.",
+      "B": "The object will cross-dissolve (fade in) at its destination position.",
+      "C": "The animation will fail.",
+      "D": "The object will remain hidden."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature is used to create a 'Carousel' where you can drag to see the next card?",
+    "options": {
+      "A": "Repeat Grid with Transition.",
+      "B": "Horizontal Scroll Group.",
+      "C": "Auto-Animate between two artboards with a Drag trigger.",
+      "D": "Both B and C."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: If you change the 'Opacity' of a Main Component, all instances will update, even if they had a color override.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Responsive Resize' when it is used on a single, top-level Artboard?",
+    "options": {
+      "A": "It has no effect.",
+      "B": "It allows the artboard to behave like a 'Fluid' container, moving internal elements as the artboard width is dragged.",
+      "C": "It changes the device preset.",
+      "D": "It converts the artboard to a component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mode should you use to see how many people have viewed your shared prototype?",
+    "options": {
+      "A": "Share Mode > Manage Links (opens a web dashboard).",
+      "B": "Design Mode.",
+      "C": "Prototype Mode.",
+      "D": "The Analytics plugin."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you 'Archive' a version of a Cloud Document so it doesn't get deleted over time?",
+    "options": {
+      "A": "Download it as a .xd file.",
+      "B": "Open 'Document History' and 'Bookmark' that specific version.",
+      "C": "Rename the file with 'BACKUP' in the title.",
+      "D": "Move it to a different folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can set a 'Video' to play automatically when an artboard loads in a prototype.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to quickly 'Swap' a component instance with a different component from the Assets panel?",
+    "options": {
+      "A": "Delete and Paste.",
+      "B": "Drag the new component from the Assets panel and drop it directly onto the instance you want to replace.",
+      "C": "Right-click and select 'Replace'.",
+      "D": "Use the Pen tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Padding' logic in a Stacked Group?",
+    "options": {
+      "A": "It adds space between elements.",
+      "B": "It defines the internal margins of the group container, which are respected even as elements inside the stack grow or shrink.",
+      "C": "It hides the background.",
+      "D": "It prevents the user from clicking."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Auto-Animate', how do you create a 'Rotation' effect larger than 360 degrees?",
+    "options": {
+      "A": "Type '720' into the rotation field.",
+      "B": "You cannot; Auto-Animate always takes the shortest path between two angles.",
+      "C": "Use a Timed trigger with multiple artboards.",
+      "D": "Use the 3D tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can 'Password Protect' a shared development link in Adobe XD.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Fix Position when Scrolling' option do when applied to an element inside a 'Scroll Group'?",
+    "options": {
+      "A": "It has no effect (Scroll Group elements cannot be fixed).",
+      "B": "It fixes the element relative to the Scroll Group's viewport rather than the Artboard's viewport.",
+      "C": "It locks the scroll group.",
+      "D": "It makes the element invisible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature helps avoid 'Color Inconsistency' in a large team project?",
+    "options": {
+      "A": "The Layers panel.",
+      "B": "Document Assets / Creative Cloud Libraries.",
+      "C": "The Eyedropper tool.",
+      "D": "Using hex codes only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a 'Mask' using an image itself as the shape?",
+    "options": {
+      "A": "You cannot; a mask must be a vector shape.",
+      "B": "Drag an image file onto an existing shape to fill that shape with the image.",
+      "C": "Right-click the image and select 'Make Mask'.",
+      "D": "Use the Eraser tool on the image."
+    },
+    "answer": "B"
+  }
+  ]
+}

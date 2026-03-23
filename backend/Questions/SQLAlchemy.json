@@ -1,1888 +1,2010 @@
-{ 
+{
   "skill": "SQLAlchemy",
   "questions": [
     {
-    "question": "What are the two primary components of SQLAlchemy?",
-    "options": {
-      "A": "Core and ORM",
-      "B": "Engine and Driver",
-      "C": "Schema and Query",
-      "D": "Session and Connection"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: SQLAlchemy's ORM (Object Relational Mapper) allows you to interact with databases using Python classes instead of raw SQL.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to create a new database connectivity source (the entry point for a SQLAlchemy application)?",
-    "options": {
-      "A": "start_engine()",
-      "B": "connect_db()",
-      "C": "create_engine()",
-      "D": "init_sqlalchemy()"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "Select TWO common database dialects supported by SQLAlchemy.",
-    "options": {
-      "A": "PostgreSQL",
-      "B": "SQLite",
-      "C": "MongoDB",
-      "D": "Redis"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In SQLAlchemy ORM, what is the standard base class for all declarative class definitions?",
-    "options": {
-      "A": "DeclarativeBase",
-      "B": "BaseModel",
-      "C": "SQLTable",
-      "D": "SessionBase"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'echo=True' parameter in create_engine() will print all generated SQL statements to the console.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy object is responsible for managing a specific set of database operations and holding objects in memory?",
-    "options": {
-      "A": "The Engine",
-      "B": "The Session",
-      "C": "The Metadata",
-      "D": "The Transaction"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO essential arguments for a Column definition in SQLAlchemy.",
-    "options": {
-      "A": "Data Type (e.g., Integer, String)",
-      "B": "Primary Key status (e.g., primary_key=True)",
-      "C": "Database User",
-      "D": "Table Size"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which method is used to persist all pending changes in a Session to the database?",
-    "options": {
-      "A": "session.save()",
-      "B": "session.commit()",
-      "C": "session.push()",
-      "D": "session.execute()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: In SQLAlchemy 2.0, the recommended way to perform a 'SELECT' is using the select() construct rather than session.query().",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which attribute in a declarative class maps to the actual database table name?",
-    "options": {
-      "A": "__tablename__",
-      "B": "table_name",
-      "C": "__mapping__",
-      "D": "db_table"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods used to retrieve data from a Query result.",
-    "options": {
-      "A": "first()",
-      "B": "all()",
-      "C": "fetch()",
-      "D": "get_list()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'primary_key=True' argument in a Column?",
-    "options": {
-      "A": "It marks the column as the unique identifier for the row.",
-      "B": "It encrypts the data in that column.",
-      "C": "It prevents the column from being deleted.",
-      "D": "It links the column to another table."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: session.add() immediately sends an INSERT statement to the database.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which SQLAlchemy Core construct is used to define the metadata of a single table?",
-    "options": {
-      "A": "Table()",
-      "B": "Schema()",
-      "C": "Definition()",
-      "D": "Entity()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common data types provided by SQLAlchemy.",
-    "options": {
-      "A": "Integer",
-      "B": "String",
-      "C": "BitMap",
-      "D": "Script"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: SQLite is a file-based database that requires no separate server process.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to combine multiple results in the session and remove any pending changes without committing?",
-    "options": {
-      "A": "session.rollback()",
-      "B": "session.clear()",
-      "C": "session.delete()",
-      "D": "session.close()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "In a database connection string, what does 'postgresql+psycopg2://' signify?",
-    "options": {
-      "A": "The dialect and the driver being used.",
-      "B": "The username and password.",
-      "C": "The table name and schema.",
-      "D": "The encryption method."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Metadata.create_all(engine) is used to create all tables defined in the metadata that don't already exist in the database.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to retrieve a single record from the database by its primary key?",
-    "options": {
-      "A": "session.query().first()",
-      "B": "session.get()",
-      "C": "session.fetch_one()",
-      "D": "session.id_lookup()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The filter_by() method allows for keyword-argument filtering (e.g., name='John').",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy function is used to create a relationship between two mapped classes?",
-    "options": {
-      "A": "link()",
-      "B": "relationship()",
-      "C": "foreign_key()",
-      "D": "connect_models()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO valid ways to execute a raw SQL string in SQLAlchemy.",
-    "options": {
-      "A": "engine.execute(text('SELECT * FROM users'))",
-      "B": "session.execute(text('SELECT * FROM users'))",
-      "C": "db.run('SELECT * FROM users')",
-      "D": "conn.query_raw('SELECT * FROM users')"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which placeholder is used in SQLAlchemy 2.0 select statements to represent the 'WHERE' clause?",
-    "options": {
-      "A": "where()",
-      "B": "filter()",
-      "C": "constrain()",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: In SQLAlchemy 2.0, the 'Mapped' and 'mapped_column' types are the preferred way to define ORM models with type hints.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to remove an object from the database via the session?",
-    "options": {
-      "A": "session.remove()",
-      "B": "session.delete()",
-      "C": "session.drop()",
-      "D": "session.discard()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO methods used to sort results in a query.",
-    "options": {
-      "A": "order_by()",
-      "B": "sort()",
-      "C": "desc()",
-      "D": "asc_order()"
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "What does the session.flush() method do?",
-    "options": {
-      "A": "Sends pending changes to the database but does not commit the transaction.",
-      "B": "Deletes all records from the database.",
-      "C": "Closes the database connection.",
-      "D": "Clears the Python memory cache."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A 'ForeignKey' constraint in a Column definition is used to link a column to another table's primary key.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to apply aggregate functions like COUNT or SUM in a query?",
-    "options": {
-      "A": "db.aggregate()",
-      "B": "func.count()",
-      "C": "sql.sum()",
-      "D": "math.total()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO benefits of using the 'with' statement (context manager) with an Engine or Session.",
-    "options": {
-      "A": "It automatically closes the connection/session when the block ends.",
-      "B": "It handles rollbacks automatically if an error occurs.",
-      "C": "It speeds up the query execution time.",
-      "D": "It prevents SQL injection."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which attribute on a result row allows accessing column data by name?",
-    "options": {
-      "A": "row._mapping",
-      "B": "row.keys",
-      "C": "row.data",
-      "D": "row.columns"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In SQLAlchemy Core, a 'Result' object is used to iterate over rows returned by a query.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to refresh the attributes of an instance with the latest data from the database?",
-    "options": {
-      "A": "session.refresh()",
-      "B": "session.reload()",
-      "C": "session.update()",
-      "D": "session.sync()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO arguments that can be passed to relationship() to control loading behavior.",
-    "options": {
-      "A": "back_populates",
-      "B": "lazy",
-      "C": "eager_load",
-      "D": "auto_join"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The 'nullable=False' constraint ensures that a column cannot contain NULL values.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on a Result object returns only the first value of the first row?",
-    "options": {
-      "A": "scalar()",
-      "B": "one()",
-      "C": "single()",
-      "D": "first_value()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the role of 'sessionmaker' in SQLAlchemy?",
-    "options": {
-      "A": "It is a factory that creates new Session objects with a fixed configuration.",
-      "B": "It creates the actual database tables.",
-      "C": "It generates SQL strings from Python code.",
-      "D": "It manages the database driver installation."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: You must always call session.commit() to save changes made via session.add().",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which operator is used in a filter() call to check if a column's value is in a list?",
-    "options": {
-      "A": "Column.in_([])",
-      "B": "Column == []",
-      "C": "Column.is_in([])",
-      "D": "Column.contains([])"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to handle 'AND' logic in a where() clause.",
-    "options": {
-      "A": "Passing multiple arguments to where()",
-      "B": "Using the and_() function",
-      "C": "Using the bitwise & operator",
-      "D": "Using the concat() function"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which method limits the number of rows returned by a query?",
-    "options": {
-      "A": "limit()",
-      "B": "top()",
-      "C": "take()",
-      "D": "slice()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Declarative' is the most common way to define tables in the SQLAlchemy ORM.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which data type would you use for a column that stores long text like a blog post?",
-    "options": {
-      "A": "String",
-      "B": "Text",
-      "C": "Varchar",
-      "D": "Blob"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO common keywords used in relationship() for 'Many-to-One' mapping.",
-    "options": {
-      "A": "ForeignKey",
-      "B": "relationship",
-      "C": "backref",
-      "D": "Link"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The session.query(User) syntax is officially deprecated in SQLAlchemy 2.0.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function allows you to execute a query and get back only the scalar values (e.g., just the objects)?",
-    "options": {
-      "A": "session.scalars()",
-      "B": "session.values()",
-      "C": "session.objects()",
-      "D": "session.list()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'lazy=\"select\"' mean in a relationship definition?",
-    "options": {
-      "A": "The related objects are loaded in a separate SELECT statement only when the attribute is accessed.",
-      "B": "The related objects are never loaded.",
-      "C": "The related objects are loaded immediately using a JOIN.",
-      "D": "The loading happens in the background automatically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: SQLAlchemy can automatically detect changes to objects in the session and mark them as 'dirty'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to check if an object is currently part of a session?",
-    "options": {
-      "A": "object in session",
-      "B": "session.contains(object)",
-      "C": "object.is_attached()",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO parameters for the create_engine() function used to manage connections.",
-    "options": {
-      "A": "pool_size",
-      "B": "max_overflow",
-      "C": "user_auth",
-      "D": "retry_limit"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'Index' can be added to a Column to speed up search operations.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy object represents the 'connection pool'?",
-    "options": {
-      "A": "Engine",
-      "B": "Pool",
-      "C": "Session",
-      "D": "Connector"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method returns a single result or raises an error if more than one result is found?",
-    "options": {
-      "A": "one()",
-      "B": "first()",
-      "C": "scalar()",
-      "D": "unique()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: SQLAlchemy's select() function can accept multiple entities to perform a multi-table query.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Autoflush' in a SQLAlchemy Session?",
-    "options": {
-      "A": "The session automatically calls flush() before a query is executed to ensure results include recent changes.",
-      "B": "The session automatically deletes old objects.",
-      "C": "The session automatically commits every 5 minutes.",
-      "D": "The database is cleared after every session."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to define a 'String' column with a specific length.",
-    "options": {
-      "A": "String(50)",
-      "B": "mapped_column(String(50))",
-      "C": "String.at(50)",
-      "D": "Column('name', 50)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The 'unique=True' constraint ensures no two rows have the same value in that column.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method skip a specific number of rows in the result set?",
-    "options": {
-      "A": "offset()",
-      "B": "skip()",
-      "C": "jump()",
-      "D": "start_at()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Identity Map' in SQLAlchemy?",
-    "options": {
-      "A": "A cache that ensures each database row is represented by only one Python object in a session.",
-      "B": "A list of all primary keys in the table.",
-      "C": "A tool to generate unique IDs.",
-      "D": "A mapping of users to their database permissions."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The select() construct can be used with both Table objects (Core) and Class objects (ORM).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to convert a query to its raw SQL string representation for debugging?",
-    "options": {
-      "A": "str(statement)",
-      "B": "statement.compile()",
-      "C": "print(statement)",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO valid values for the 'ondelete' parameter in a ForeignKey.",
-    "options": {
-      "A": "CASCADE",
-      "B": "SET NULL",
-      "C": "DELETE ALL",
-      "D": "REMOVE LINK"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'session.add_all([])' allows you to add multiple objects to a session in one call.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to release all resources held by a Session?",
-    "options": {
-      "A": "session.close()",
-      "B": "session.stop()",
-      "C": "session.exit()",
-      "D": "session.release()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which parameter in relationship() is used to specify the name of the attribute on the target class that will point back to this class?",
-    "options": {
-      "A": "back_populates",
-      "B": "reverse_link",
-      "C": "target_attr",
-      "D": "backref_name"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a Many-to-Many relationship, a secondary table (association table) is required to hold the foreign keys of both related tables.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO loading strategies that help solve the 'N+1 Problem' by using joins.",
-    "options": {
-      "A": "joinedload()",
-      "B": "subqueryload()",
-      "C": "lazyload()",
-      "D": "deferload()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the @hybrid_property decorator?",
-    "options": {
-      "A": "It defines a property that can be used both as a Python attribute and within SQL expressions.",
-      "B": "It allows a class to inherit from multiple base models.",
-      "C": "It encrypts a column while it is in memory.",
-      "D": "It maps a single class to multiple database tables."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Alembic command is used to generate a new migration script based on changes detected in your models?",
-    "options": {
-      "A": "alembic revision --autogenerate",
-      "B": "alembic upgrade head",
-      "C": "alembic generate migration",
-      "D": "alembic detect-changes"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The selectinload() strategy is often more efficient than joinedload() for loading large collections because it avoids a massive Cartesian product.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy extension allows you to treat a relationship across an association table as if it were a direct attribute?",
-    "options": {
-      "A": "association_proxy",
-      "B": "bridge_attribute",
-      "C": "direct_link",
-      "D": "nested_property"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid cascade options for a relationship.",
-    "options": {
-      "A": "all, delete-orphan",
-      "B": "save-update, merge",
-      "C": "sync-on-commit",
-      "D": "auto-persist"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'passive_deletes' parameter in a relationship do?",
-    "options": {
-      "A": "It prevents SQLAlchemy from loading objects just to delete them, relying on DB-level ON DELETE CASCADE.",
-      "B": "It marks a record as 'deleted' without removing it from the database.",
-      "C": "It stops all delete operations on that relationship.",
-      "D": "It deletes related objects after a 5-minute delay."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A 'Single Table Inheritance' strategy stores multiple classes in one table using a 'discriminator' column.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to combine two select() statements into a single result set using SQL UNION logic?",
-    "options": {
-      "A": "union()",
-      "B": "combine()",
-      "C": "merge_results()",
-      "D": "join_all()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to apply a 'LIMIT' and 'OFFSET' in SQLAlchemy 2.0 select statements.",
-    "options": {
-      "A": "select(User).limit(10).offset(5)",
-      "B": "select(User)[5:15]",
-      "C": "select(User).range(5, 10)",
-      "D": "select(User).fetch(10, 5)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the primary function of the declarative_attr decorator?",
-    "options": {
-      "A": "It allows defining class-level attributes (like tables or constraints) inside a Mixin class.",
-      "B": "It marks an attribute as read-only.",
-      "C": "It converts a string into a Column object.",
-      "D": "It creates a unique index automatically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The defer() function is used to prevent specific columns from being loaded until they are explicitly accessed.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to explicitly perform an INNER JOIN between two models in a select statement?",
-    "options": {
-      "A": "join()",
-      "B": "inner()",
-      "C": "link_to()",
-      "D": "cross()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for creating a 'Many-to-Many' relationship.",
-    "options": {
-      "A": "Using the 'secondary' argument in relationship()",
-      "B": "Using an Association Object (a class that maps to the association table)",
-      "C": "Using 'many_to_many=True' in a Column",
-      "D": "Using two separate One-to-Many relationships without a third table"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is 'Column Bundling' (load_only) used for in SQLAlchemy?",
-    "options": {
-      "A": "To fetch only a specific set of columns for an entity, leaving the rest deferred.",
-      "B": "To group columns into a single JSON object in the DB.",
-      "C": "To create a composite primary key.",
-      "D": "To speed up the network transfer of metadata."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The use_alter=True parameter in a ForeignKey is used to resolve circular dependency issues between two tables.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to create a case-insensitive 'LIKE' comparison in a where clause?",
-    "options": {
-      "A": "Column.ilike()",
-      "B": "Column.like_case()",
-      "C": "Column.match()",
-      "D": "Column.ci_like()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to handle 'Bulk Inserts' efficiently in SQLAlchemy.",
-    "options": {
-      "A": "session.execute(insert(User), [list_of_dicts])",
-      "B": "session.bulk_insert_mappings(User, [list_of_dicts])",
-      "C": "session.add_all([User(...) for i in range(1000)])",
-      "D": "session.fast_insert(User, data)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'uselist=False' argument in relationship() do?",
-    "options": {
-      "A": "It converts a One-to-Many relationship into a One-to-One relationship on the 'one' side.",
-      "B": "It prevents the creation of a list object in Python.",
-      "C": "It limits the query to return only one row.",
-      "D": "It disables the use of array types in the database."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The query.with_for_update() method adds a 'FOR UPDATE' clause to a SELECT statement for row-level locking.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which class is used in Alembic's env.py to access the database connection and transaction during a migration?",
-    "options": {
-      "A": "context",
-      "B": "migration_manager",
-      "C": "config",
-      "D": "engine_facade"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO reasons to use 'Joined Table Inheritance' over 'Single Table Inheritance'.",
-    "options": {
-      "A": "To avoid having many NULL columns in a single table.",
-      "B": "To enforce database-level constraints on sub-type specific columns.",
-      "C": "To improve query performance by avoiding joins.",
-      "D": "To keep the schema simple with fewer tables."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: SQLAlchemy's 'Events' system allows you to trigger custom code when certain actions occur, such as 'before_insert' or 'after_update'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to synchronize the state of an object in the session with the database, potentially expiring its attributes?",
-    "options": {
-      "A": "session.expire()",
-      "B": "session.flush()",
-      "C": "session.clean()",
-      "D": "session.reset()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the 'info' parameter in a Column definition?",
-    "options": {
-      "A": "It is a dictionary used to store custom metadata for third-party libraries or custom extensions.",
-      "B": "It stores the column documentation.",
-      "C": "It provides a help text for the database administrator.",
-      "D": "It enables debug logging for that column."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Alembic can automatically detect a change in a column's name if you use the '--autogenerate' flag.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship loading strategy should be used if you want the related items to be loaded in the same query via an OUTER JOIN?",
-    "options": {
-      "A": "joinedload()",
-      "B": "selectinload()",
-      "C": "immediate()",
-      "D": "lazyload()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to create a 'UniqueConstraint' on multiple columns.",
-    "options": {
-      "A": "UniqueConstraint('col1', 'col2', name='uix_1')",
-      "B": "Adding 'unique=True' to both individual Column definitions.",
-      "C": "Using the __table_args__ attribute in a Declarative model.",
-      "D": "Using the Index(unique=True) construct."
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "True or False: The @validates decorator allows you to define a method that validates and potentially transforms the value of an attribute before it is assigned.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Alembic command is used to apply all pending migrations and move the database to the latest version?",
-    "options": {
-      "A": "alembic upgrade head",
-      "B": "alembic update latest",
-      "C": "alembic run migrations",
-      "D": "alembic apply"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'order_by' parameter inside a relationship() definition ensures that the collection is sorted at the database level when loaded.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for creating a 'Self-Referential' relationship (e.g., a Folder that has sub-folders).",
-    "options": {
-      "A": "Setting the remote_side parameter in relationship()",
-      "B": "Defining a ForeignKey that points to the same table's ID",
-      "C": "Using a secondary association table pointing to itself",
-      "D": "SQLAlchemy does not support self-referential models"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'viewonly=True' parameter in a relationship?",
-    "options": {
-      "A": "It prevents any changes made to the collection from being persisted during a commit.",
-      "B": "It hides the attribute from the class __dict__.",
-      "C": "It creates a SQL VIEW in the database.",
-      "D": "It marks the column as read-only in the UI."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to create a case-insensitive sorting order in an order_by() clause?",
-    "options": {
-      "A": "func.lower(Column)",
-      "B": "Column.ci_sort()",
-      "C": "Column.nocase()",
-      "D": "func.ignore_case(Column)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @declared_attr.cascading decorator is used in mixins to allow attributes to be shared across a class hierarchy.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy object allows you to track exactly which attributes on an object have been modified?",
-    "options": {
-      "A": "inspect(object).attrs",
-      "B": "object.__changes__",
-      "C": "session.dirty_attributes(object)",
-      "D": "The Auditor object"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to handle 'Soft Deletes' (marking as deleted without removing) in SQLAlchemy.",
-    "options": {
-      "A": "Using a 'deleted' Boolean column and a custom @hybrid_property",
-      "B": "Overriding the session.delete() method via events",
-      "C": "Setting cascade='soft-delete'",
-      "D": "Using the delete_orphan=False flag"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'eagerload' refer to in SQLAlchemy?",
-    "options": {
-      "A": "Loading related objects in the same initial query to avoid N+1 issues.",
-      "B": "Loading the database driver early at startup.",
-      "C": "Connecting to the database as fast as possible.",
-      "D": "Downloading all table metadata upon engine creation."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'TypeDecorator' class allows you to create custom column types that handle Python-to-DB serialization logic.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on a Session is used to manually remove an object from the Identity Map without deleting it from the DB?",
-    "options": {
-      "A": "session.expunge(object)",
-      "B": "session.detach(object)",
-      "C": "session.remove(object)",
-      "D": "session.pop(object)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to pass a 'Schema' name to a Table or Model.",
-    "options": {
-      "A": "Using the 'schema' argument in Table()",
-      "B": "Using the __table_args__ = {'schema': 'name'} in Declarative",
-      "C": "Setting the DATABASE_SCHEMA environment variable",
-      "D": "Prefixing the table name with 'name.'"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: scoped_session ensures that the same session is returned within a single thread or request context.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship parameter is used to define the foreign key when there are multiple paths between two tables?",
-    "options": {
-      "A": "foreign_keys=[Column]",
-      "B": "link_to=[Column]",
-      "C": "join_on=[Column]",
-      "D": "explicit_key=[Column]"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary role of the 'bind' parameter in a Session?",
-    "options": {
-      "A": "It connects the session to a specific Engine or Connection.",
-      "B": "It binds Python variables to SQL parameters.",
-      "C": "It links two separate sessions together.",
-      "D": "It secures the connection using SSL."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common aggregate functions provided via 'func'.",
-    "options": {
-      "A": "func.avg()",
-      "B": "func.max()",
-      "C": "func.median()",
-      "D": "func.total_sum()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'subqueryload' is generally better than 'joinedload' for one-to-many relationships with large numbers of rows.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to execute a stored procedure or function from the database dialect?",
-    "options": {
-      "A": "session.execute(func.my_procedure())",
-      "B": "session.run_procedure()",
-      "C": "engine.call_function()",
-      "D": "db.procedure()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'single_parent=True' do in a relationship?",
-    "options": {
-      "A": "It ensures an object can only be associated with one parent in a one-to-many relationship.",
-      "B": "It disables the backref.",
-      "C": "It creates a unique constraint on the foreign key.",
-      "D": "It marks the class as an abstract base."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The query.execution_options(stream_results=True) allows for processing millions of rows without loading them all into memory.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Alembic command shows the current migration version of the database?",
-    "options": {
-      "A": "alembic current",
-      "B": "alembic show",
-      "C": "alembic version",
-      "D": "alembic head"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to prevent 'ObjectDeletedError' when accessing attributes after a commit.",
-    "options": {
-      "A": "Setting expire_on_commit=False in sessionmaker",
-      "B": "Refreshing the object manually using session.refresh()",
-      "C": "Disabling the Identity Map",
-      "D": "Closing the engine immediately"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: You can use the 'TypeEngine' to define how a custom Python object should be persisted into a JSON column.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which construct allows you to perform a 'Lateral Join' in SQLAlchemy?",
-    "options": {
-      "A": "lateral()",
-      "B": "side_join()",
-      "C": "cross_apply()",
-      "D": "linked_select()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Polyglot Persistence' support in SQLAlchemy?",
-    "options": {
-      "A": "The ability to define models once and switch between different SQL backends easily.",
-      "B": "The ability to store code in multiple languages.",
-      "C": "A feature that translates SQL to Spanish or French.",
-      "D": "Support for both NoSQL and SQL in the same engine."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'info' attribute in Column can be used to pass custom validation parameters to a Pydantic or Marshmallow schema generator.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship parameter is used to define an ordering on the secondary table in a many-to-many relationship?",
-    "options": {
-      "A": "order_by",
-      "B": "sort_on",
-      "C": "secondary_order",
-      "D": "index_by"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO reasons why you would use a 'Session' as a Context Manager.",
-    "options": {
-      "A": "Ensures the session is closed automatically.",
-      "B": "Supports automatic transaction rollback on exception.",
-      "C": "Speeds up the CPU processing of rows.",
-      "D": "Prevents the database from shutting down."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In SQLAlchemy 2.0, the update() construct supports 'bulk' updates across multiple rows based on a where clause.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to retrieve a connection from the engine for raw SQL operations in a safe manner?",
-    "options": {
-      "A": "engine.connect()",
-      "B": "engine.get_conn()",
-      "C": "engine.open()",
-      "D": "engine.start()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the difference between backref and back_populates?",
-    "options": {
-      "A": "backref creates the reverse attribute automatically; back_populates requires it to be defined on both classes.",
-      "B": "backref is for One-to-One; back_populates is for Many-to-Many.",
-      "C": "backref is faster.",
-      "D": "There is no difference in SQLAlchemy 2.0."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'Metadata.reflect(bind=engine)' method can be used to automatically generate Column objects for an existing database table.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which event listener would you use to modify an object's attribute every time it is loaded from the database?",
-    "options": {
-      "A": "load",
-      "B": "init",
-      "C": "after_attach",
-      "D": "refresh"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for joining a table that does not have a formal ForeignKey defined.",
-    "options": {
-      "A": "join(OtherTable, User.id == OtherTable.user_id)",
-      "B": "Using the 'primaryjoin' parameter in a relationship",
-      "C": "Setting 'strict=False' on the engine",
-      "D": "Using the 'link' operator"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'Alembic' supports branching, allowing multiple developers to work on different migration paths simultaneously.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which specific function must be used in SQLAlchemy 2.0 to create an asynchronous database engine?",
-    "options": {
-      "A": "create_async_engine()",
-      "B": "AsyncEngine()",
-      "C": "create_engine(async=True)",
-      "D": "start_async_session()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In Asynchronous SQLAlchemy, you must use the 'await' keyword when calling session.commit() and session.execute().",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods required to run a synchronous function that uses the ORM within an asynchronous greenlet context.",
-    "options": {
-      "A": "AsyncSession.run_sync()",
-      "B": "run_sync_in_worker_thread()",
-      "C": "awaitable_sync()",
-      "D": "sync_to_async()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the primary purpose of the '@compiles' decorator in SQLAlchemy's compiler extension?",
-    "options": {
-      "A": "To provide a custom SQL string representation for a specific database dialect.",
-      "B": "To speed up Python bytecode execution.",
-      "C": "To validate the schema before runtime.",
-      "D": "To automatically generate Alembic migrations."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which internal SQLAlchemy object acts as a 'Unit of Work', coordinating the order of INSERT, UPDATE, and DELETE statements during a flush?",
-    "options": {
-      "A": "The Session",
-      "B": "The UOW Processor",
-      "C": "The Dependency Sorter",
-      "D": "The Transaction Coordinator"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'ShardedSession' extension allows SQLAlchemy to distribute queries across multiple database backends based on a shard key.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship loading technique is most vulnerable to 'Stale Data' if the database is modified by an external process, due to its use of a separate query?",
-    "options": {
-      "A": "subqueryload()",
-      "B": "selectinload()",
-      "C": "joinedload()",
-      "D": "immediateload()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to implement 'Horizontal Sharding' in SQLAlchemy.",
-    "options": {
-      "A": "Using HorizontalShardSession",
-      "B": "Customizing the 'bind_mapper' logic",
-      "C": "Using Multiple Metadata objects",
-      "D": "Creating separate engines for every table"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How does SQLAlchemy handle 'Circular Dependencies' between rows in the same table during a flush?",
-    "options": {
-      "A": "By using the 'post_update' parameter on the relationship definition.",
-      "B": "By executing a partial commit.",
-      "C": "By disabling foreign key checks temporarily.",
-      "D": "It throws a CircularDependencyError that cannot be resolved."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Connection.execution_options(isolation_level=\"SERIALIZABLE\")' can be used to set the transaction isolation level for a single connection.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on the 'inspect' object allows you to retrieve the 'History' of a specific attribute (showing added, unchanged, and deleted values)?",
-    "options": {
-      "A": "inspect(obj).attrs.name.history",
-      "B": "get_history(obj, 'name')",
-      "C": "obj.__history__['name']",
-      "D": "session.get_attribute_history(obj)"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO attributes of the 'InstanceState' object that track an object's relationship to the Session.",
-    "options": {
-      "A": "persistent",
-      "B": "detached",
-      "C": "orphaned",
-      "D": "linked"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is a 'Weak Identity Map' in SQLAlchemy?",
-    "options": {
-      "A": "A system where the session only holds a weak reference to objects, allowing them to be garbage collected if not referenced elsewhere.",
-      "B": "A map that does not require a primary key.",
-      "C": "A cache that expires every 30 seconds.",
-      "D": "A map used only for read-only sessions."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: You can create a custom 'Dialect' for a non-standard database by inheriting from 'sqlalchemy.engine.default.DefaultDialect'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which compiler hook allows you to modify the behavior of 'INSERT ... ON CONFLICT' for a specific database like PostgreSQL?",
-    "options": {
-      "A": "@compiles(Insert, 'postgresql')",
-      "B": "PostgreSQLDialect.on_conflict()",
-      "C": "Insert.extra_compiler()",
-      "D": "dialect.compiler.visit_insert()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to profile the 'SQL overhead' of a SQLAlchemy application.",
-    "options": {
-      "A": "Listening to the 'before_cursor_execute' event",
-      "B": "Using the 'SQLAlchemy-Profiler' extension",
-      "C": "Setting logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)",
-      "D": "Inspecting the __pycache__ folder"
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "What does the 'objects' parameter in 'session.bulk_save_objects()' do compared to 'session.add_all()'?",
-    "options": {
-      "A": "It bypasses the internal Identity Map and 'dirty checking' for higher performance during inserts.",
-      "B": "It validates the objects against a JSON schema.",
-      "C": "It automatically compresses the data.",
-      "D": "It only works for SQLite."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a 'Polymorphic' setup, 'with_polymorphic()' allows you to load multiple subclasses in a single query using a series of LEFT OUTER JOINs.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which object in the SQLAlchemy Core represents a 'Namespace' for a collection of Table objects?",
-    "options": {
-      "A": "MetaData",
-      "B": "SchemaItem",
-      "C": "Registry",
-      "D": "Catalog"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which argument in 'mapped_column' is used to define a 'Server-Side Default' value (e.g., CURRENT_TIMESTAMP)?",
-    "options": {
-      "A": "server_default",
-      "B": "default_factory",
-      "C": "sql_default",
-      "D": "db_init"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method in a custom 'TypeDecorator' is responsible for converting a Python object into a value the database driver can understand?",
-    "options": {
-      "A": "process_bind_param()",
-      "B": "process_result_value()",
-      "C": "bind_processor()",
-      "D": "result_processor()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'info' parameter in a Column definition can be used to pass custom validation parameters to external libraries like Pydantic during model generation.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO features of SQLAlchemy's 'baked queries' (now deprecated in favor of lambda_stmt) that improved performance.",
-    "options": {
-      "A": "Caching the resulting SQL string to avoid repeated compilation overhead.",
-      "B": "Bypassing the Python interpreter for query execution.",
-      "C": "Pre-calculating result row mappings.",
-      "D": "Automating database index creation."
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "In the context of 'Alembic', what does 'Offline Mode' allow you to do?",
-    "options": {
-      "A": "Generate a SQL script of the migration without actually connecting to or modifying the database.",
-      "B": "Run migrations while the database server is powered off.",
-      "C": "Edit migration files without an internet connection.",
-      "D": "Cache the database schema locally for faster detection."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which event listener would you use to intercept and modify every SQL statement before it is sent to the database driver?",
-    "options": {
-      "A": "before_cursor_execute",
-      "B": "before_execute",
-      "C": "do_execute",
-      "D": "handle_error"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'mapped_column' in SQLAlchemy 2.0 can automatically derive the 'nullable' status and 'type' from Python 3.9+ type hints.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship parameter is required to allow a Many-to-Many relationship to be deleted from the secondary table automatically when an object is removed?",
-    "options": {
-      "A": "cascade='all, delete-orphan'",
-      "B": "passive_deletes=True",
-      "C": "single_parent=True",
-      "D": "back_populates"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO components of an 'Association Object' pattern that distinguish it from a simple many-to-many relationship.",
-    "options": {
-      "A": "The association table is mapped to a formal Python class.",
-      "B": "You can store extra data (e.g., 'created_at') on the relationship itself.",
-      "C": "It eliminates the need for foreign keys.",
-      "D": "It requires the use of the 'secondary' keyword."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'lambda_stmt' construct in SQLAlchemy 2.0 provide?",
-    "options": {
-      "A": "A high-performance way to cache the compilation of SQL statements using Python lambdas.",
-      "B": "A method to write anonymous functions directly in the DB.",
-      "C": "A tool for translating Python to JavaScript.",
-      "D": "An automatic way to create primary keys."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Attribute Instrumentation' is the mechanism SQLAlchemy uses to wrap Python class attributes so it can track changes in the Session.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Alembic configuration option in 'env.py' is used to prevent certain tables (like system tables) from being included in autogenerated migrations?",
-    "options": {
-      "A": "include_object",
-      "B": "exclude_tables",
-      "C": "ignore_schema",
-      "D": "filter_metadata"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to handle 'Deadlocks' when performing bulk updates in SQLAlchemy.",
-    "options": {
-      "A": "Sorting the primary keys of the objects being updated to ensure a consistent lock order.",
-      "B": "Using 'with_for_update()' to lock rows explicitly.",
-      "C": "Increasing the pool_recycle time.",
-      "D": "Using the 'autocommit' execution option."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the function of the 'Mutable' extension in SQLAlchemy?",
-    "options": {
-      "A": "It allows SQLAlchemy to track internal changes to complex types like JSON or Pickle columns.",
-      "B": "It allows changing the primary key of a row.",
-      "C": "It enables the engine to switch dialects at runtime.",
-      "D": "It converts all strings to uppercase automatically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Composite Types' allow you to map multiple columns in a single table to a single custom Python object.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on the 'Engine' object provides a dictionary of the current connection pool status?",
-    "options": {
-      "A": "engine.pool.status()",
-      "B": "engine.get_stats()",
-      "C": "engine.pool_info()",
-      "D": "inspect(engine).pool"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO advanced features of the 'Session' that are managed by the 'unit of work' pattern.",
-    "options": {
-      "A": "Topological sorting of dependencies to ensure parents are inserted before children.",
-      "B": "Automatic removal of duplicate SQL statements.",
-      "C": "Real-time synchronization with external caches like Redis.",
-      "D": "Automatic translation of Python exceptions to SQL codes."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'selectin_polymorphic()' is a loading strategy that fetches subclass-specific columns in separate queries to avoid complex joins.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which internal object is responsible for generating the 'Compiled' SQL string from a 'ClauseElement'?",
-    "options": {
-      "A": "SQLCompiler",
-      "B": "DialectMapper",
-      "C": "ExpressionWriter",
-      "D": "StringGenerator"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which SQLAlchemy function is the primary entry point for a database application and creates a connectivity source?",
-    "options": {
-      "A": "start_db()",
-      "B": "create_engine()",
-      "C": "init_sqlalchemy()",
-      "D": "connect_engine()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The 'echo=True' parameter in the engine configuration allows you to see the raw SQL generated by SQLAlchemy in the console.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common data types provided by the SQLAlchemy library.",
-    "options": {
-      "A": "Integer",
-      "B": "String",
-      "C": "BitMap",
-      "D": "Script"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which object is responsible for holding objects in memory and managing transactions in the ORM?",
-    "options": {
-      "A": "The Engine",
-      "B": "The Session",
-      "C": "The Metadata",
-      "D": "The Table"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'nullable=False' constraint do in a column definition?",
-    "options": {
-      "A": "It prevents the column from being empty (NULL).",
-      "B": "It makes the column the primary key.",
-      "C": "It encrypts the column data.",
-      "D": "It makes the column hidden in queries."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: SQLAlchemy Core uses a schema-centric approach, while the ORM uses a domain-model centric approach.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to save all current changes in a Session to the database permanently?",
-    "options": {
-      "A": "session.push()",
-      "B": "session.commit()",
-      "C": "session.save()",
-      "D": "session.sync()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO methods used to retrieve results from a query.",
-    "options": {
-      "A": "all()",
-      "B": "first()",
-      "C": "fetch()",
-      "D": "get_list()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In a connection string, what does 'sqlite:///:memory:' represent?",
-    "options": {
-      "A": "A temporary database stored entirely in RAM.",
-      "B": "A database stored in the cloud.",
-      "C": "A database that requires no password.",
-      "D": "A database that cannot be deleted."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The primary_key=True argument must be assigned to at least one column in a declarative model.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which parameter in relationship() allows you to define the attribute name on the opposite class for bidirectional access?",
-    "options": {
-      "A": "back_populates",
-      "B": "link_back",
-      "C": "reverse_attr",
-      "D": "target_name"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A Many-to-Many relationship in SQLAlchemy requires an intermediate 'association table'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO 'eager loading' strategies used to prevent the N+1 problem.",
-    "options": {
-      "A": "joinedload()",
-      "B": "selectinload()",
-      "C": "lazyload()",
-      "D": "deferredload()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the Alembic tool in a SQLAlchemy project?",
-    "options": {
-      "A": "To handle database schema migrations.",
-      "B": "To encrypt the database connection.",
-      "C": "To provide a GUI for SQL queries.",
-      "D": "To automatically generate unit tests."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which decorator is used to create a property that works as both a Python attribute and a SQL expression?",
-    "options": {
-      "A": "@hybrid_property",
-      "B": "@sql_attr",
-      "C": "@mixed_column",
-      "D": "@orm_property"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'delete-orphan' cascade option ensures that child objects are deleted when they are removed from a parent's collection.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method is used to explicitly join two tables in a select() statement?",
-    "options": {
-      "A": "join()",
-      "B": "link()",
-      "C": "inner_join()",
-      "D": "combine()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO attributes of a 'Session' that describe its state management.",
-    "options": {
-      "A": "autoflush",
-      "B": "autocommit",
-      "C": "autoscale",
-      "D": "autorepair"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'lazy=\"dynamic\"' do in a relationship definition?",
-    "options": {
-      "A": "It returns a Query object instead of a list, allowing for further filtering before execution.",
-      "B": "It loads the data immediately at startup.",
-      "C": "It prevents the data from ever being loaded.",
-      "D": "It creates a separate thread for loading."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Alembic migrations can be 'autogenerated' by comparing the metadata of your models to the current database state.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function must be used to create a database engine for asynchronous operations in SQLAlchemy 2.0?",
-    "options": {
-      "A": "create_async_engine()",
-      "B": "start_async_engine()",
-      "C": "init_async_db()",
-      "D": "create_engine(async=True)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In an async context, you must use the 'await' keyword when calling session.execute() and session.commit().",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO components of the 'Unit of Work' pattern implemented by the SQLAlchemy Session.",
-    "options": {
-      "A": "Topological sorting of insert/delete operations.",
-      "B": "Identity Map to ensure unique objects per row.",
-      "C": "Automatic creation of database indexes.",
-      "D": "Native translation of Python exceptions to browser errors."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How do you handle circular dependencies between rows during a flush operation?",
-    "options": {
-      "A": "By setting 'post_update=True' on the relationship.",
-      "B": "By manually committing the parent before the child.",
-      "C": "By disabling foreign key checks on the engine.",
-      "D": "By using the 'Circular' dialect."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary role of the '@compiles' decorator in the compiler extension?",
-    "options": {
-      "A": "To provide custom SQL generation for a specific database dialect.",
-      "B": "To compile Python code to C for speed.",
-      "C": "To create Alembic migration files.",
-      "D": "To validate the data types in a column."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The HorizontalShardSession allows for distributing queries across multiple database backends based on a shard key.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which relationship loading strategy is generally the most memory-efficient for very large one-to-many collections?",
-    "options": {
-      "A": "selectinload()",
-      "B": "joinedload()",
-      "C": "subqueryload()",
-      "D": "immediateload()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods provided by the 'inspect' object to look into an instance's state.",
-    "options": {
-      "A": "persistent",
-      "B": "detached",
-      "C": "compiled",
-      "D": "encrypted"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'with_for_update()' do when added to a select statement?",
-    "options": {
-      "A": "It adds a 'FOR UPDATE' clause to the SQL, creating a row-level lock.",
-      "B": "It automatically updates the row with the current timestamp.",
-      "C": "It creates a temporary backup of the row.",
-      "D": "It prevents the row from being deleted forever."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A custom 'TypeDecorator' can be used to automatically encrypt and decrypt data as it moves between Python and the database.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  }
+      "question": "What are the two primary components of SQLAlchemy?",
+      "options": {
+        "A": "Core and ORM",
+        "B": "Engine and Driver",
+        "C": "Schema and Query",
+        "D": "Session and Connection"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SQLAlchemy's ORM (Object Relational Mapper) allows you to interact with databases using Python classes instead of raw SQL.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to create a new database connectivity source (the entry point for a SQLAlchemy application)?",
+      "options": {
+        "A": "start_engine()",
+        "B": "connect_db()",
+        "C": "create_engine()",
+        "D": "init_sqlalchemy()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO common database dialects supported by SQLAlchemy.",
+      "options": {
+        "A": "PostgreSQL",
+        "B": "SQLite",
+        "C": "MongoDB",
+        "D": "Redis"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In SQLAlchemy ORM, what is the standard base class for all declarative class definitions?",
+      "options": {
+        "A": "DeclarativeBase",
+        "B": "BaseModel",
+        "C": "SQLTable",
+        "D": "SessionBase"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'echo=True' parameter in create_engine() will print all generated SQL statements to the console.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy object is responsible for managing a specific set of database operations and holding objects in memory?",
+      "options": {
+        "A": "The Engine",
+        "B": "The Session",
+        "C": "The Metadata",
+        "D": "The Transaction"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO essential arguments for a Column definition in SQLAlchemy.",
+      "options": {
+        "A": "Data Type (e.g., Integer, String)",
+        "B": "Primary Key status (e.g., primary_key=True)",
+        "C": "Database User",
+        "D": "Table Size"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to persist all pending changes in a Session to the database?",
+      "options": {
+        "A": "session.save()",
+        "B": "session.commit()",
+        "C": "session.push()",
+        "D": "session.execute()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In SQLAlchemy 2.0, the recommended way to perform a 'SELECT' is using the select() construct rather than session.query().",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which attribute in a declarative class maps to the actual database table name?",
+      "options": {
+        "A": "__tablename__",
+        "B": "table_name",
+        "C": "__mapping__",
+        "D": "db_table"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to retrieve data from a Query result.",
+      "options": {
+        "A": "first()",
+        "B": "all()",
+        "C": "fetch()",
+        "D": "get_list()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'primary_key=True' argument in a Column?",
+      "options": {
+        "A": "It marks the column as the unique identifier for the row.",
+        "B": "It encrypts the data in that column.",
+        "C": "It prevents the column from being deleted.",
+        "D": "It links the column to another table."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: session.add() immediately sends an INSERT statement to the database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SQLAlchemy Core construct is used to define the metadata of a single table?",
+      "options": {
+        "A": "Table()",
+        "B": "Schema()",
+        "C": "Definition()",
+        "D": "Entity()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common data types provided by SQLAlchemy.",
+      "options": {
+        "A": "Integer",
+        "B": "String",
+        "C": "BitMap",
+        "D": "Script"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: SQLite is a file-based database that requires no separate server process.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to combine multiple results in the session and remove any pending changes without committing?",
+      "options": {
+        "A": "session.rollback()",
+        "B": "session.clear()",
+        "C": "session.delete()",
+        "D": "session.close()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a database connection string, what does 'postgresql+psycopg2://' signify?",
+      "options": {
+        "A": "The dialect and the driver being used.",
+        "B": "The username and password.",
+        "C": "The table name and schema.",
+        "D": "The encryption method."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Metadata.create_all(engine) is used to create all tables defined in the metadata that don't already exist in the database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to retrieve a single record from the database by its primary key?",
+      "options": {
+        "A": "session.query().first()",
+        "B": "session.get()",
+        "C": "session.fetch_one()",
+        "D": "session.id_lookup()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The filter_by() method allows for keyword-argument filtering (e.g., name='John').",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy function is used to create a relationship between two mapped classes?",
+      "options": {
+        "A": "link()",
+        "B": "relationship()",
+        "C": "foreign_key()",
+        "D": "connect_models()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid ways to execute a raw SQL string in SQLAlchemy.",
+      "options": {
+        "A": "engine.execute(text('SELECT * FROM users'))",
+        "B": "session.execute(text('SELECT * FROM users'))",
+        "C": "db.run('SELECT * FROM users')",
+        "D": "conn.query_raw('SELECT * FROM users')"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which placeholder is used in SQLAlchemy 2.0 select statements to represent the 'WHERE' clause?",
+      "options": {
+        "A": "where()",
+        "B": "filter()",
+        "C": "constrain()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: In SQLAlchemy 2.0, the 'Mapped' and 'mapped_column' types are the preferred way to define ORM models with type hints.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to remove an object from the database via the session?",
+      "options": {
+        "A": "session.remove()",
+        "B": "session.delete()",
+        "C": "session.drop()",
+        "D": "session.discard()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods used to sort results in a query.",
+      "options": {
+        "A": "order_by()",
+        "B": "sort()",
+        "C": "desc()",
+        "D": "asc_order()"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What does the session.flush() method do?",
+      "options": {
+        "A": "Sends pending changes to the database but does not commit the transaction.",
+        "B": "Deletes all records from the database.",
+        "C": "Closes the database connection.",
+        "D": "Clears the Python memory cache."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'ForeignKey' constraint in a Column definition is used to link a column to another table's primary key.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to apply aggregate functions like COUNT or SUM in a query?",
+      "options": {
+        "A": "db.aggregate()",
+        "B": "func.count()",
+        "C": "sql.sum()",
+        "D": "math.total()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO benefits of using the 'with' statement (context manager) with an Engine or Session.",
+      "options": {
+        "A": "It automatically closes the connection/session when the block ends.",
+        "B": "It handles rollbacks automatically if an error occurs.",
+        "C": "It speeds up the query execution time.",
+        "D": "It prevents SQL injection."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which attribute on a result row allows accessing column data by name?",
+      "options": {
+        "A": "row._mapping",
+        "B": "row.keys",
+        "C": "row.data",
+        "D": "row.columns"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In SQLAlchemy Core, a 'Result' object is used to iterate over rows returned by a query.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to refresh the attributes of an instance with the latest data from the database?",
+      "options": {
+        "A": "session.refresh()",
+        "B": "session.reload()",
+        "C": "session.update()",
+        "D": "session.sync()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO arguments that can be passed to relationship() to control loading behavior.",
+      "options": {
+        "A": "back_populates",
+        "B": "lazy",
+        "C": "eager_load",
+        "D": "auto_join"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'nullable=False' constraint ensures that a column cannot contain NULL values.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on a Result object returns only the first value of the first row?",
+      "options": {
+        "A": "scalar()",
+        "B": "one()",
+        "C": "single()",
+        "D": "first_value()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of 'sessionmaker' in SQLAlchemy?",
+      "options": {
+        "A": "It is a factory that creates new Session objects with a fixed configuration.",
+        "B": "It creates the actual database tables.",
+        "C": "It generates SQL strings from Python code.",
+        "D": "It manages the database driver installation."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You must always call session.commit() to save changes made via session.add().",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator is used in a filter() call to check if a column's value is in a list?",
+      "options": {
+        "A": "Column.in_([])",
+        "B": "Column == []",
+        "C": "Column.is_in([])",
+        "D": "Column.contains([])"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle 'AND' logic in a where() clause.",
+      "options": {
+        "A": "Passing multiple arguments to where()",
+        "B": "Using the and_() function",
+        "C": "Using the bitwise & operator",
+        "D": "Using the concat() function"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method limits the number of rows returned by a query?",
+      "options": {
+        "A": "limit()",
+        "B": "top()",
+        "C": "take()",
+        "D": "slice()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Declarative' is the most common way to define tables in the SQLAlchemy ORM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which data type would you use for a column that stores long text like a blog post?",
+      "options": {
+        "A": "String",
+        "B": "Text",
+        "C": "Varchar",
+        "D": "Blob"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common keywords used in relationship() for 'Many-to-One' mapping.",
+      "options": {
+        "A": "ForeignKey",
+        "B": "relationship",
+        "C": "backref",
+        "D": "Link"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The session.query(User) syntax is officially deprecated in SQLAlchemy 2.0.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function allows you to execute a query and get back only the scalar values (e.g., just the objects)?",
+      "options": {
+        "A": "session.scalars()",
+        "B": "session.values()",
+        "C": "session.objects()",
+        "D": "session.list()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'lazy=\"select\"' mean in a relationship definition?",
+      "options": {
+        "A": "The related objects are loaded in a separate SELECT statement only when the attribute is accessed.",
+        "B": "The related objects are never loaded.",
+        "C": "The related objects are loaded immediately using a JOIN.",
+        "D": "The loading happens in the background automatically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SQLAlchemy can automatically detect changes to objects in the session and mark them as 'dirty'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to check if an object is currently part of a session?",
+      "options": {
+        "A": "object in session",
+        "B": "session.contains(object)",
+        "C": "object.is_attached()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO parameters for the create_engine() function used to manage connections.",
+      "options": {
+        "A": "pool_size",
+        "B": "max_overflow",
+        "C": "user_auth",
+        "D": "retry_limit"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Index' can be added to a Column to speed up search operations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy object represents the 'connection pool'?",
+      "options": {
+        "A": "Engine",
+        "B": "Pool",
+        "C": "Session",
+        "D": "Connector"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method returns a single result or raises an error if more than one result is found?",
+      "options": {
+        "A": "one()",
+        "B": "first()",
+        "C": "scalar()",
+        "D": "unique()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SQLAlchemy's select() function can accept multiple entities to perform a multi-table query.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Autoflush' in a SQLAlchemy Session?",
+      "options": {
+        "A": "The session automatically calls flush() before a query is executed to ensure results include recent changes.",
+        "B": "The session automatically deletes old objects.",
+        "C": "The session automatically commits every 5 minutes.",
+        "D": "The database is cleared after every session."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to define a 'String' column with a specific length.",
+      "options": {
+        "A": "String(50)",
+        "B": "mapped_column(String(50))",
+        "C": "String.at(50)",
+        "D": "Column('name', 50)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'unique=True' constraint ensures no two rows have the same value in that column.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method skip a specific number of rows in the result set?",
+      "options": {
+        "A": "offset()",
+        "B": "skip()",
+        "C": "jump()",
+        "D": "start_at()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Identity Map' in SQLAlchemy?",
+      "options": {
+        "A": "A cache that ensures each database row is represented by only one Python object in a session.",
+        "B": "A list of all primary keys in the table.",
+        "C": "A tool to generate unique IDs.",
+        "D": "A mapping of users to their database permissions."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The select() construct can be used with both Table objects (Core) and Class objects (ORM).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to convert a query to its raw SQL string representation for debugging?",
+      "options": {
+        "A": "str(statement)",
+        "B": "statement.compile()",
+        "C": "print(statement)",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO valid values for the 'ondelete' parameter in a ForeignKey.",
+      "options": {
+        "A": "CASCADE",
+        "B": "SET NULL",
+        "C": "DELETE ALL",
+        "D": "REMOVE LINK"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'session.add_all([])' allows you to add multiple objects to a session in one call.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to release all resources held by a Session?",
+      "options": {
+        "A": "session.close()",
+        "B": "session.stop()",
+        "C": "session.exit()",
+        "D": "session.release()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which parameter in relationship() is used to specify the name of the attribute on the target class that will point back to this class?",
+      "options": {
+        "A": "back_populates",
+        "B": "reverse_link",
+        "C": "target_attr",
+        "D": "backref_name"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a Many-to-Many relationship, a secondary table (association table) is required to hold the foreign keys of both related tables.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO loading strategies that help solve the 'N+1 Problem' by using joins.",
+      "options": {
+        "A": "joinedload()",
+        "B": "subqueryload()",
+        "C": "lazyload()",
+        "D": "deferload()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the @hybrid_property decorator?",
+      "options": {
+        "A": "It defines a property that can be used both as a Python attribute and within SQL expressions.",
+        "B": "It allows a class to inherit from multiple base models.",
+        "C": "It encrypts a column while it is in memory.",
+        "D": "It maps a single class to multiple database tables."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Alembic command is used to generate a new migration script based on changes detected in your models?",
+      "options": {
+        "A": "alembic revision --autogenerate",
+        "B": "alembic upgrade head",
+        "C": "alembic generate migration",
+        "D": "alembic detect-changes"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The selectinload() strategy is often more efficient than joinedload() for loading large collections because it avoids a massive Cartesian product.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy extension allows you to treat a relationship across an association table as if it were a direct attribute?",
+      "options": {
+        "A": "association_proxy",
+        "B": "bridge_attribute",
+        "C": "direct_link",
+        "D": "nested_property"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid cascade options for a relationship.",
+      "options": {
+        "A": "all, delete-orphan",
+        "B": "save-update, merge",
+        "C": "sync-on-commit",
+        "D": "auto-persist"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'passive_deletes' parameter in a relationship do?",
+      "options": {
+        "A": "It prevents SQLAlchemy from loading objects just to delete them, relying on DB-level ON DELETE CASCADE.",
+        "B": "It marks a record as 'deleted' without removing it from the database.",
+        "C": "It stops all delete operations on that relationship.",
+        "D": "It deletes related objects after a 5-minute delay."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Single Table Inheritance' strategy stores multiple classes in one table using a 'discriminator' column.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to combine two select() statements into a single result set using SQL UNION logic?",
+      "options": {
+        "A": "union()",
+        "B": "combine()",
+        "C": "merge_results()",
+        "D": "join_all()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to apply a 'LIMIT' and 'OFFSET' in SQLAlchemy 2.0 select statements.",
+      "options": {
+        "A": "select(User).limit(10).offset(5)",
+        "B": "select(User)[5:15]",
+        "C": "select(User).range(5, 10)",
+        "D": "select(User).fetch(10, 5)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary function of the declarative_attr decorator?",
+      "options": {
+        "A": "It allows defining class-level attributes (like tables or constraints) inside a Mixin class.",
+        "B": "It marks an attribute as read-only.",
+        "C": "It converts a string into a Column object.",
+        "D": "It creates a unique index automatically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The defer() function is used to prevent specific columns from being loaded until they are explicitly accessed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to explicitly perform an INNER JOIN between two models in a select statement?",
+      "options": {
+        "A": "join()",
+        "B": "inner()",
+        "C": "link_to()",
+        "D": "cross()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for creating a 'Many-to-Many' relationship.",
+      "options": {
+        "A": "Using the 'secondary' argument in relationship()",
+        "B": "Using an Association Object (a class that maps to the association table)",
+        "C": "Using 'many_to_many=True' in a Column",
+        "D": "Using two separate One-to-Many relationships without a third table"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Column Bundling' (load_only) used for in SQLAlchemy?",
+      "options": {
+        "A": "To fetch only a specific set of columns for an entity, leaving the rest deferred.",
+        "B": "To group columns into a single JSON object in the DB.",
+        "C": "To create a composite primary key.",
+        "D": "To speed up the network transfer of metadata."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The use_alter=True parameter in a ForeignKey is used to resolve circular dependency issues between two tables.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to create a case-insensitive 'LIKE' comparison in a where clause?",
+      "options": {
+        "A": "Column.ilike()",
+        "B": "Column.like_case()",
+        "C": "Column.match()",
+        "D": "Column.ci_like()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle 'Bulk Inserts' efficiently in SQLAlchemy.",
+      "options": {
+        "A": "session.execute(insert(User), [list_of_dicts])",
+        "B": "session.bulk_insert_mappings(User, [list_of_dicts])",
+        "C": "session.add_all([User(...) for i in range(1000)])",
+        "D": "session.fast_insert(User, data)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'uselist=False' argument in relationship() do?",
+      "options": {
+        "A": "It converts a One-to-Many relationship into a One-to-One relationship on the 'one' side.",
+        "B": "It prevents the creation of a list object in Python.",
+        "C": "It limits the query to return only one row.",
+        "D": "It disables the use of array types in the database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The query.with_for_update() method adds a 'FOR UPDATE' clause to a SELECT statement for row-level locking.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which class is used in Alembic's env.py to access the database connection and transaction during a migration?",
+      "options": {
+        "A": "context",
+        "B": "migration_manager",
+        "C": "config",
+        "D": "engine_facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons to use 'Joined Table Inheritance' over 'Single Table Inheritance'.",
+      "options": {
+        "A": "To avoid having many NULL columns in a single table.",
+        "B": "To enforce database-level constraints on sub-type specific columns.",
+        "C": "To improve query performance by avoiding joins.",
+        "D": "To keep the schema simple with fewer tables."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: SQLAlchemy's 'Events' system allows you to trigger custom code when certain actions occur, such as 'before_insert' or 'after_update'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to synchronize the state of an object in the session with the database, potentially expiring its attributes?",
+      "options": {
+        "A": "session.expire()",
+        "B": "session.flush()",
+        "C": "session.clean()",
+        "D": "session.reset()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'info' parameter in a Column definition?",
+      "options": {
+        "A": "It is a dictionary used to store custom metadata for third-party libraries or custom extensions.",
+        "B": "It stores the column documentation.",
+        "C": "It provides a help text for the database administrator.",
+        "D": "It enables debug logging for that column."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Alembic can automatically detect a change in a column's name if you use the '--autogenerate' flag.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship loading strategy should be used if you want the related items to be loaded in the same query via an OUTER JOIN?",
+      "options": {
+        "A": "joinedload()",
+        "B": "selectinload()",
+        "C": "immediate()",
+        "D": "lazyload()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to create a 'UniqueConstraint' on multiple columns.",
+      "options": {
+        "A": "UniqueConstraint('col1', 'col2', name='uix_1')",
+        "B": "Adding 'unique=True' to both individual Column definitions.",
+        "C": "Using the __table_args__ attribute in a Declarative model.",
+        "D": "Using the Index(unique=True) construct."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The @validates decorator allows you to define a method that validates and potentially transforms the value of an attribute before it is assigned.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Alembic command is used to apply all pending migrations and move the database to the latest version?",
+      "options": {
+        "A": "alembic upgrade head",
+        "B": "alembic update latest",
+        "C": "alembic run migrations",
+        "D": "alembic apply"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'order_by' parameter inside a relationship() definition ensures that the collection is sorted at the database level when loaded.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for creating a 'Self-Referential' relationship (e.g., a Folder that has sub-folders).",
+      "options": {
+        "A": "Setting the remote_side parameter in relationship()",
+        "B": "Defining a ForeignKey that points to the same table's ID",
+        "C": "Using a secondary association table pointing to itself",
+        "D": "SQLAlchemy does not support self-referential models"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'viewonly=True' parameter in a relationship?",
+      "options": {
+        "A": "It prevents any changes made to the collection from being persisted during a commit.",
+        "B": "It hides the attribute from the class __dict__.",
+        "C": "It creates a SQL VIEW in the database.",
+        "D": "It marks the column as read-only in the UI."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to create a case-insensitive sorting order in an order_by() clause?",
+      "options": {
+        "A": "func.lower(Column)",
+        "B": "Column.ci_sort()",
+        "C": "Column.nocase()",
+        "D": "func.ignore_case(Column)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @declared_attr.cascading decorator is used in mixins to allow attributes to be shared across a class hierarchy.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy object allows you to track exactly which attributes on an object have been modified?",
+      "options": {
+        "A": "inspect(object).attrs",
+        "B": "object.__changes__",
+        "C": "session.dirty_attributes(object)",
+        "D": "The Auditor object"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle 'Soft Deletes' (marking as deleted without removing) in SQLAlchemy.",
+      "options": {
+        "A": "Using a 'deleted' Boolean column and a custom @hybrid_property",
+        "B": "Overriding the session.delete() method via events",
+        "C": "Setting cascade='soft-delete'",
+        "D": "Using the delete_orphan=False flag"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'eagerload' refer to in SQLAlchemy?",
+      "options": {
+        "A": "Loading related objects in the same initial query to avoid N+1 issues.",
+        "B": "Loading the database driver early at startup.",
+        "C": "Connecting to the database as fast as possible.",
+        "D": "Downloading all table metadata upon engine creation."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'TypeDecorator' class allows you to create custom column types that handle Python-to-DB serialization logic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on a Session is used to manually remove an object from the Identity Map without deleting it from the DB?",
+      "options": {
+        "A": "session.expunge(object)",
+        "B": "session.detach(object)",
+        "C": "session.remove(object)",
+        "D": "session.pop(object)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to pass a 'Schema' name to a Table or Model.",
+      "options": {
+        "A": "Using the 'schema' argument in Table()",
+        "B": "Using the __table_args__ = {'schema': 'name'} in Declarative",
+        "C": "Setting the DATABASE_SCHEMA environment variable",
+        "D": "Prefixing the table name with 'name.'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: scoped_session ensures that the same session is returned within a single thread or request context.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship parameter is used to define the foreign key when there are multiple paths between two tables?",
+      "options": {
+        "A": "foreign_keys=[Column]",
+        "B": "link_to=[Column]",
+        "C": "join_on=[Column]",
+        "D": "explicit_key=[Column]"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the 'bind' parameter in a Session?",
+      "options": {
+        "A": "It connects the session to a specific Engine or Connection.",
+        "B": "It binds Python variables to SQL parameters.",
+        "C": "It links two separate sessions together.",
+        "D": "It secures the connection using SSL."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common aggregate functions provided via 'func'.",
+      "options": {
+        "A": "func.avg()",
+        "B": "func.max()",
+        "C": "func.median()",
+        "D": "func.total_sum()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'subqueryload' is generally better than 'joinedload' for one-to-many relationships with large numbers of rows.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to execute a stored procedure or function from the database dialect?",
+      "options": {
+        "A": "session.execute(func.my_procedure())",
+        "B": "session.run_procedure()",
+        "C": "engine.call_function()",
+        "D": "db.procedure()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'single_parent=True' do in a relationship?",
+      "options": {
+        "A": "It ensures an object can only be associated with one parent in a one-to-many relationship.",
+        "B": "It disables the backref.",
+        "C": "It creates a unique constraint on the foreign key.",
+        "D": "It marks the class as an abstract base."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The query.execution_options(stream_results=True) allows for processing millions of rows without loading them all into memory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Alembic command shows the current migration version of the database?",
+      "options": {
+        "A": "alembic current",
+        "B": "alembic show",
+        "C": "alembic version",
+        "D": "alembic head"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to prevent 'ObjectDeletedError' when accessing attributes after a commit.",
+      "options": {
+        "A": "Setting expire_on_commit=False in sessionmaker",
+        "B": "Refreshing the object manually using session.refresh()",
+        "C": "Disabling the Identity Map",
+        "D": "Closing the engine immediately"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: You can use the 'TypeEngine' to define how a custom Python object should be persisted into a JSON column.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which construct allows you to perform a 'Lateral Join' in SQLAlchemy?",
+      "options": {
+        "A": "lateral()",
+        "B": "side_join()",
+        "C": "cross_apply()",
+        "D": "linked_select()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Polyglot Persistence' support in SQLAlchemy?",
+      "options": {
+        "A": "The ability to define models once and switch between different SQL backends easily.",
+        "B": "The ability to store code in multiple languages.",
+        "C": "A feature that translates SQL to Spanish or French.",
+        "D": "Support for both NoSQL and SQL in the same engine."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'info' attribute in Column can be used to pass custom validation parameters to a Pydantic or Marshmallow schema generator.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship parameter is used to define an ordering on the secondary table in a many-to-many relationship?",
+      "options": {
+        "A": "order_by",
+        "B": "sort_on",
+        "C": "secondary_order",
+        "D": "index_by"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons why you would use a 'Session' as a Context Manager.",
+      "options": {
+        "A": "Ensures the session is closed automatically.",
+        "B": "Supports automatic transaction rollback on exception.",
+        "C": "Speeds up the CPU processing of rows.",
+        "D": "Prevents the database from shutting down."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In SQLAlchemy 2.0, the update() construct supports 'bulk' updates across multiple rows based on a where clause.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to retrieve a connection from the engine for raw SQL operations in a safe manner?",
+      "options": {
+        "A": "engine.connect()",
+        "B": "engine.get_conn()",
+        "C": "engine.open()",
+        "D": "engine.start()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the difference between backref and back_populates?",
+      "options": {
+        "A": "backref creates the reverse attribute automatically; back_populates requires it to be defined on both classes.",
+        "B": "backref is for One-to-One; back_populates is for Many-to-Many.",
+        "C": "backref is faster.",
+        "D": "There is no difference in SQLAlchemy 2.0."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Metadata.reflect(bind=engine)' method can be used to automatically generate Column objects for an existing database table.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which event listener would you use to modify an object's attribute every time it is loaded from the database?",
+      "options": {
+        "A": "load",
+        "B": "init",
+        "C": "after_attach",
+        "D": "refresh"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for joining a table that does not have a formal ForeignKey defined.",
+      "options": {
+        "A": "join(OtherTable, User.id == OtherTable.user_id)",
+        "B": "Using the 'primaryjoin' parameter in a relationship",
+        "C": "Setting 'strict=False' on the engine",
+        "D": "Using the 'link' operator"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Alembic' supports branching, allowing multiple developers to work on different migration paths simultaneously.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific function must be used in SQLAlchemy 2.0 to create an asynchronous database engine?",
+      "options": {
+        "A": "create_async_engine()",
+        "B": "AsyncEngine()",
+        "C": "create_engine(async=True)",
+        "D": "start_async_session()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In Asynchronous SQLAlchemy, you must use the 'await' keyword when calling session.commit() and session.execute().",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods required to run a synchronous function that uses the ORM within an asynchronous greenlet context.",
+      "options": {
+        "A": "AsyncSession.run_sync()",
+        "B": "run_sync_in_worker_thread()",
+        "C": "awaitable_sync()",
+        "D": "sync_to_async()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary purpose of the '@compiles' decorator in SQLAlchemy's compiler extension?",
+      "options": {
+        "A": "To provide a custom SQL string representation for a specific database dialect.",
+        "B": "To speed up Python bytecode execution.",
+        "C": "To validate the schema before runtime.",
+        "D": "To automatically generate Alembic migrations."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal SQLAlchemy object acts as a 'Unit of Work', coordinating the order of INSERT, UPDATE, and DELETE statements during a flush?",
+      "options": {
+        "A": "The Session",
+        "B": "The UOW Processor",
+        "C": "The Dependency Sorter",
+        "D": "The Transaction Coordinator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'ShardedSession' extension allows SQLAlchemy to distribute queries across multiple database backends based on a shard key.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship loading technique is most vulnerable to 'Stale Data' if the database is modified by an external process, due to its use of a separate query?",
+      "options": {
+        "A": "subqueryload()",
+        "B": "selectinload()",
+        "C": "joinedload()",
+        "D": "immediateload()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to implement 'Horizontal Sharding' in SQLAlchemy.",
+      "options": {
+        "A": "Using HorizontalShardSession",
+        "B": "Customizing the 'bind_mapper' logic",
+        "C": "Using Multiple Metadata objects",
+        "D": "Creating separate engines for every table"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How does SQLAlchemy handle 'Circular Dependencies' between rows in the same table during a flush?",
+      "options": {
+        "A": "By using the 'post_update' parameter on the relationship definition.",
+        "B": "By executing a partial commit.",
+        "C": "By disabling foreign key checks temporarily.",
+        "D": "It throws a CircularDependencyError that cannot be resolved."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Connection.execution_options(isolation_level=\"SERIALIZABLE\")' can be used to set the transaction isolation level for a single connection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on the 'inspect' object allows you to retrieve the 'History' of a specific attribute (showing added, unchanged, and deleted values)?",
+      "options": {
+        "A": "inspect(obj).attrs.name.history",
+        "B": "get_history(obj, 'name')",
+        "C": "obj.__history__['name']",
+        "D": "session.get_attribute_history(obj)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO attributes of the 'InstanceState' object that track an object's relationship to the Session.",
+      "options": {
+        "A": "persistent",
+        "B": "detached",
+        "C": "orphaned",
+        "D": "linked"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Weak Identity Map' in SQLAlchemy?",
+      "options": {
+        "A": "A system where the session only holds a weak reference to objects, allowing them to be garbage collected if not referenced elsewhere.",
+        "B": "A map that does not require a primary key.",
+        "C": "A cache that expires every 30 seconds.",
+        "D": "A map used only for read-only sessions."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can create a custom 'Dialect' for a non-standard database by inheriting from 'sqlalchemy.engine.default.DefaultDialect'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which compiler hook allows you to modify the behavior of 'INSERT ... ON CONFLICT' for a specific database like PostgreSQL?",
+      "options": {
+        "A": "@compiles(Insert, 'postgresql')",
+        "B": "PostgreSQLDialect.on_conflict()",
+        "C": "Insert.extra_compiler()",
+        "D": "dialect.compiler.visit_insert()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to profile the 'SQL overhead' of a SQLAlchemy application.",
+      "options": {
+        "A": "Listening to the 'before_cursor_execute' event",
+        "B": "Using the 'SQLAlchemy-Profiler' extension",
+        "C": "Setting logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)",
+        "D": "Inspecting the __pycache__ folder"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What does the 'objects' parameter in 'session.bulk_save_objects()' do compared to 'session.add_all()'?",
+      "options": {
+        "A": "It bypasses the internal Identity Map and 'dirty checking' for higher performance during inserts.",
+        "B": "It validates the objects against a JSON schema.",
+        "C": "It automatically compresses the data.",
+        "D": "It only works for SQLite."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Polymorphic' setup, 'with_polymorphic()' allows you to load multiple subclasses in a single query using a series of LEFT OUTER JOINs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which object in the SQLAlchemy Core represents a 'Namespace' for a collection of Table objects?",
+      "options": {
+        "A": "MetaData",
+        "B": "SchemaItem",
+        "C": "Registry",
+        "D": "Catalog"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which argument in 'mapped_column' is used to define a 'Server-Side Default' value (e.g., CURRENT_TIMESTAMP)?",
+      "options": {
+        "A": "server_default",
+        "B": "default_factory",
+        "C": "sql_default",
+        "D": "db_init"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method in a custom 'TypeDecorator' is responsible for converting a Python object into a value the database driver can understand?",
+      "options": {
+        "A": "process_bind_param()",
+        "B": "process_result_value()",
+        "C": "bind_processor()",
+        "D": "result_processor()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'info' parameter in a Column definition can be used to pass custom validation parameters to external libraries like Pydantic during model generation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO features of SQLAlchemy's 'baked queries' (now deprecated in favor of lambda_stmt) that improved performance.",
+      "options": {
+        "A": "Caching the resulting SQL string to avoid repeated compilation overhead.",
+        "B": "Bypassing the Python interpreter for query execution.",
+        "C": "Pre-calculating result row mappings.",
+        "D": "Automating database index creation."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "In the context of 'Alembic', what does 'Offline Mode' allow you to do?",
+      "options": {
+        "A": "Generate a SQL script of the migration without actually connecting to or modifying the database.",
+        "B": "Run migrations while the database server is powered off.",
+        "C": "Edit migration files without an internet connection.",
+        "D": "Cache the database schema locally for faster detection."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which event listener would you use to intercept and modify every SQL statement before it is sent to the database driver?",
+      "options": {
+        "A": "before_cursor_execute",
+        "B": "before_execute",
+        "C": "do_execute",
+        "D": "handle_error"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'mapped_column' in SQLAlchemy 2.0 can automatically derive the 'nullable' status and 'type' from Python 3.9+ type hints.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship parameter is required to allow a Many-to-Many relationship to be deleted from the secondary table automatically when an object is removed?",
+      "options": {
+        "A": "cascade='all, delete-orphan'",
+        "B": "passive_deletes=True",
+        "C": "single_parent=True",
+        "D": "back_populates"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO components of an 'Association Object' pattern that distinguish it from a simple many-to-many relationship.",
+      "options": {
+        "A": "The association table is mapped to a formal Python class.",
+        "B": "You can store extra data (e.g., 'created_at') on the relationship itself.",
+        "C": "It eliminates the need for foreign keys.",
+        "D": "It requires the use of the 'secondary' keyword."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'lambda_stmt' construct in SQLAlchemy 2.0 provide?",
+      "options": {
+        "A": "A high-performance way to cache the compilation of SQL statements using Python lambdas.",
+        "B": "A method to write anonymous functions directly in the DB.",
+        "C": "A tool for translating Python to JavaScript.",
+        "D": "An automatic way to create primary keys."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Attribute Instrumentation' is the mechanism SQLAlchemy uses to wrap Python class attributes so it can track changes in the Session.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Alembic configuration option in 'env.py' is used to prevent certain tables (like system tables) from being included in autogenerated migrations?",
+      "options": {
+        "A": "include_object",
+        "B": "exclude_tables",
+        "C": "ignore_schema",
+        "D": "filter_metadata"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to handle 'Deadlocks' when performing bulk updates in SQLAlchemy.",
+      "options": {
+        "A": "Sorting the primary keys of the objects being updated to ensure a consistent lock order.",
+        "B": "Using 'with_for_update()' to lock rows explicitly.",
+        "C": "Increasing the pool_recycle time.",
+        "D": "Using the 'autocommit' execution option."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the function of the 'Mutable' extension in SQLAlchemy?",
+      "options": {
+        "A": "It allows SQLAlchemy to track internal changes to complex types like JSON or Pickle columns.",
+        "B": "It allows changing the primary key of a row.",
+        "C": "It enables the engine to switch dialects at runtime.",
+        "D": "It converts all strings to uppercase automatically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Composite Types' allow you to map multiple columns in a single table to a single custom Python object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on the 'Engine' object provides a dictionary of the current connection pool status?",
+      "options": {
+        "A": "engine.pool.status()",
+        "B": "engine.get_stats()",
+        "C": "engine.pool_info()",
+        "D": "inspect(engine).pool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO advanced features of the 'Session' that are managed by the 'unit of work' pattern.",
+      "options": {
+        "A": "Topological sorting of dependencies to ensure parents are inserted before children.",
+        "B": "Automatic removal of duplicate SQL statements.",
+        "C": "Real-time synchronization with external caches like Redis.",
+        "D": "Automatic translation of Python exceptions to SQL codes."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'selectin_polymorphic()' is a loading strategy that fetches subclass-specific columns in separate queries to avoid complex joins.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal object is responsible for generating the 'Compiled' SQL string from a 'ClauseElement'?",
+      "options": {
+        "A": "SQLCompiler",
+        "B": "DialectMapper",
+        "C": "ExpressionWriter",
+        "D": "StringGenerator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which SQLAlchemy function is the primary entry point for a database application and creates a connectivity source?",
+      "options": {
+        "A": "start_db()",
+        "B": "create_engine()",
+        "C": "init_sqlalchemy()",
+        "D": "connect_engine()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'echo=True' parameter in the engine configuration allows you to see the raw SQL generated by SQLAlchemy in the console.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common data types provided by the SQLAlchemy library.",
+      "options": {
+        "A": "Integer",
+        "B": "String",
+        "C": "BitMap",
+        "D": "Script"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which object is responsible for holding objects in memory and managing transactions in the ORM?",
+      "options": {
+        "A": "The Engine",
+        "B": "The Session",
+        "C": "The Metadata",
+        "D": "The Table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'nullable=False' constraint do in a column definition?",
+      "options": {
+        "A": "It prevents the column from being empty (NULL).",
+        "B": "It makes the column the primary key.",
+        "C": "It encrypts the column data.",
+        "D": "It makes the column hidden in queries."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SQLAlchemy Core uses a schema-centric approach, while the ORM uses a domain-model centric approach.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to save all current changes in a Session to the database permanently?",
+      "options": {
+        "A": "session.push()",
+        "B": "session.commit()",
+        "C": "session.save()",
+        "D": "session.sync()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods used to retrieve results from a query.",
+      "options": {
+        "A": "all()",
+        "B": "first()",
+        "C": "fetch()",
+        "D": "get_list()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In a connection string, what does 'sqlite:///:memory:' represent?",
+      "options": {
+        "A": "A temporary database stored entirely in RAM.",
+        "B": "A database stored in the cloud.",
+        "C": "A database that requires no password.",
+        "D": "A database that cannot be deleted."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The primary_key=True argument must be assigned to at least one column in a declarative model.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which parameter in relationship() allows you to define the attribute name on the opposite class for bidirectional access?",
+      "options": {
+        "A": "back_populates",
+        "B": "link_back",
+        "C": "reverse_attr",
+        "D": "target_name"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A Many-to-Many relationship in SQLAlchemy requires an intermediate 'association table'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO 'eager loading' strategies used to prevent the N+1 problem.",
+      "options": {
+        "A": "joinedload()",
+        "B": "selectinload()",
+        "C": "lazyload()",
+        "D": "deferredload()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the Alembic tool in a SQLAlchemy project?",
+      "options": {
+        "A": "To handle database schema migrations.",
+        "B": "To encrypt the database connection.",
+        "C": "To provide a GUI for SQL queries.",
+        "D": "To automatically generate unit tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which decorator is used to create a property that works as both a Python attribute and a SQL expression?",
+      "options": {
+        "A": "@hybrid_property",
+        "B": "@sql_attr",
+        "C": "@mixed_column",
+        "D": "@orm_property"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'delete-orphan' cascade option ensures that child objects are deleted when they are removed from a parent's collection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to explicitly join two tables in a select() statement?",
+      "options": {
+        "A": "join()",
+        "B": "link()",
+        "C": "inner_join()",
+        "D": "combine()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO attributes of a 'Session' that describe its state management.",
+      "options": {
+        "A": "autoflush",
+        "B": "autocommit",
+        "C": "autoscale",
+        "D": "autorepair"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'lazy=\"dynamic\"' do in a relationship definition?",
+      "options": {
+        "A": "It returns a Query object instead of a list, allowing for further filtering before execution.",
+        "B": "It loads the data immediately at startup.",
+        "C": "It prevents the data from ever being loaded.",
+        "D": "It creates a separate thread for loading."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Alembic migrations can be 'autogenerated' by comparing the metadata of your models to the current database state.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function must be used to create a database engine for asynchronous operations in SQLAlchemy 2.0?",
+      "options": {
+        "A": "create_async_engine()",
+        "B": "start_async_engine()",
+        "C": "init_async_db()",
+        "D": "create_engine(async=True)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In an async context, you must use the 'await' keyword when calling session.execute() and session.commit().",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO components of the 'Unit of Work' pattern implemented by the SQLAlchemy Session.",
+      "options": {
+        "A": "Topological sorting of insert/delete operations.",
+        "B": "Identity Map to ensure unique objects per row.",
+        "C": "Automatic creation of database indexes.",
+        "D": "Native translation of Python exceptions to browser errors."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you handle circular dependencies between rows during a flush operation?",
+      "options": {
+        "A": "By setting 'post_update=True' on the relationship.",
+        "B": "By manually committing the parent before the child.",
+        "C": "By disabling foreign key checks on the engine.",
+        "D": "By using the 'Circular' dialect."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the '@compiles' decorator in the compiler extension?",
+      "options": {
+        "A": "To provide custom SQL generation for a specific database dialect.",
+        "B": "To compile Python code to C for speed.",
+        "C": "To create Alembic migration files.",
+        "D": "To validate the data types in a column."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The HorizontalShardSession allows for distributing queries across multiple database backends based on a shard key.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which relationship loading strategy is generally the most memory-efficient for very large one-to-many collections?",
+      "options": {
+        "A": "selectinload()",
+        "B": "joinedload()",
+        "C": "subqueryload()",
+        "D": "immediateload()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods provided by the 'inspect' object to look into an instance's state.",
+      "options": {
+        "A": "persistent",
+        "B": "detached",
+        "C": "compiled",
+        "D": "encrypted"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'with_for_update()' do when added to a select statement?",
+      "options": {
+        "A": "It adds a 'FOR UPDATE' clause to the SQL, creating a row-level lock.",
+        "B": "It automatically updates the row with the current timestamp.",
+        "C": "It creates a temporary backup of the row.",
+        "D": "It prevents the row from being deleted forever."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A custom 'TypeDecorator' can be used to automatically encrypt and decrypt data as it moves between Python and the database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    }
   ]
 }
-

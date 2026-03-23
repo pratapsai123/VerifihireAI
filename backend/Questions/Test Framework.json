@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Test Framework", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a 'Test Framework' in automation?",
+    "options": {
+      "A": "To provide a set of protocols and rules for creating and designing test cases efficiently.",
+      "B": "To replace the need for writing any code during the development process.",
+      "C": "To act as a physical server that stores all company data.",
+      "D": "To automatically find and hire new QA engineers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Linear Framework' is often called a 'Record and Playback' framework because tests are created by recording user actions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common components found in a typical test framework? (Select all that apply)",
+    "options": {
+      "A": "Object Repository",
+      "B": "Test Data Loader",
+      "C": "Reporting Engine",
+      "D": "Office Furniture Inventory"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In a 'Modular Framework', what is the main benefit of breaking scripts into small components?",
+    "options": {
+      "A": "It makes the scripts much slower to execute.",
+      "B": "It increases reusability and makes maintenance easier since a change in one module updates all related tests.",
+      "C": "It prevents developers from seeing the automation code.",
+      "D": "It requires a specialized physical keyboard to write."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of framework uses external files (like CSV or Excel) to feed different inputs into the same test script?",
+    "options": {
+      "A": "Linear Framework",
+      "B": "Data-Driven Framework",
+      "C": "Static Framework",
+      "D": "Visual Framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a framework is usually more time-consuming in the long run than writing simple standalone scripts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of a framework is responsible for deciding which tests to execute and in what order?",
+    "options": {
+      "A": "Object Mapper",
+      "B": "Test Runner",
+      "C": "Data Provider",
+      "D": "Assertion Library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'POM' stand for in framework design?",
+    "options": {
+      "A": "Program Output Manager",
+      "B": "Page Object Model",
+      "C": "Protocol Optimization Method",
+      "D": "Primary Object Mapper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Keyword-Driven Framework', what do 'Keywords' typically represent?",
+    "options": {
+      "A": "Names of the developers.",
+      "B": "Action verbs like 'Click', 'Type', or 'Verify' that correspond to underlying code functions.",
+      "C": "The security passwords for the server room.",
+      "D": "Commonly misspelled words in the documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hybrid Framework' combines two or more different types of frameworks (e.g., Data-Driven and Keyword-Driven).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer of a testing framework handles the communication with the application being tested (e.g., the browser)?",
+    "options": {
+      "A": "Reporting Layer",
+      "B": "Driver/Execution Layer",
+      "C": "Data Layer",
+      "D": "Business Logic Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Assertion Library' in a framework?",
+    "options": {
+      "A": "To store physical books about testing.",
+      "B": "To provide functions that compare actual results with expected results and determine pass/fail status.",
+      "C": "To translate code into different human languages.",
+      "D": "To increase the frame rate of the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of using 'Environment Variables' in a framework? (Select all that apply)",
+    "options": {
+      "A": "Enables switching between QA, Staging, and Production environments easily",
+      "B": "Keeps sensitive credentials out of the source code",
+      "C": "Allows the same test to run on different browser types",
+      "D": "Deletes the logs automatically"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Scalability' in a framework means that it can easily handle an increasing number of test cases without a significant decrease in performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Object Repository' primarily used for?",
+    "options": {
+      "A": "To store old computer monitors.",
+      "B": "To centralize the locators (ID, Name, XPath) of UI elements in one place for easy management.",
+      "C": "To keep track of employee office hours.",
+      "D": "To store large images used in the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework type is the simplest to create but the hardest to maintain as the UI changes?",
+    "options": {
+      "A": "Modular Framework",
+      "B": "Linear (Record and Playback) Framework",
+      "C": "Hybrid Framework",
+      "D": "BDD Framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks help in achieving 'Code Reusability' by allowing common functions to be shared across many tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Reporting Engine' do in an automation framework?",
+    "options": {
+      "A": "Fires employees who report too many bugs.",
+      "B": "Generates visual and textual summaries of test results, often including logs and screenshots.",
+      "C": "Increases the speed of the server's CPU.",
+      "D": "A specialized software for architects to draw graphs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common 'Test Runner' tool? (Select all that apply)",
+    "options": {
+      "A": "TestNG",
+      "B": "JUnit",
+      "C": "Pytest",
+      "D": "Microsoft PowerPoint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function of a 'Base Page' class in a Page Object Model (POM) framework?",
+    "options": {
+      "A": "To design the background colors of the website.",
+      "B": "To contain common actions and elements (like headers and footers) used by all other page classes.",
+      "C": "To store the database passwords.",
+      "D": "To count the number of users on the site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Behavior-Driven Development' (BDD), what file format is typically used to write test scenarios?",
+    "options": {
+      "A": ".exe",
+      "B": ".feature (Gherkin syntax)",
+      "C": ".png",
+      "D": ".sql"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks can include 'Configuration Files' (like .xml or .yaml) to store settings without changing code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component allows a framework to handle 'Asynchronous' events (like waiting for a loading spinner)?",
+    "options": {
+      "A": "Data Provider",
+      "B": "Wait/Synchronization Logic",
+      "C": "Object Mapper",
+      "D": "Assertion Engine"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Abstraction' in the context of a testing framework?",
+    "options": {
+      "A": "Writing code that is impossible to understand.",
+      "B": "Hiding the technical details of element interaction behind simple method names like 'login()'.",
+      "C": "A specialized tool for drawing abstract art.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A framework should be designed so that even non-technical stakeholders can understand the test reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are characteristics of a 'Maintainable' framework? (Select all that apply)",
+    "options": {
+      "A": "Low coupling between test scripts and logic",
+      "B": "Clear naming conventions",
+      "C": "Centralized element locators",
+      "D": "Hardcoded login credentials in every file"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Library' layer in a framework?",
+    "options": {
+      "A": "A place where testers go to read books.",
+      "B": "A collection of reusable functions (e.g., date formatting, DB connection) used by multiple tests.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Step Definitions' in a BDD framework bridge the gap between human-readable feature files and executable code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to manage 'Dependencies' (libraries) in a Java-based testing framework?",
+    "options": {
+      "A": "Notepad",
+      "B": "Maven (or Gradle)",
+      "C": "Photoshop",
+      "D": "Excel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parallel Execution' capability in a framework?",
+    "options": {
+      "A": "Hiring two testers to write the same script.",
+      "B": "The ability to run multiple tests at the same time across different browsers or machines.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Automatically deleting old reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a framework makes it harder for multiple testers to work on the same automation project simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Global Hooks' (Setup/Teardown) in a framework? (Select all that apply)",
+    "options": {
+      "A": "Steps that run before the entire test suite starts",
+      "B": "Steps that run after every individual test case",
+      "C": "A way to backup the SQL code",
+      "D": "Steps that run only if the internet is disconnected"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Wrapper Function' in framework design?",
+    "options": {
+      "A": "Wrapping the physical server in a blanket.",
+      "B": "A custom method that adds extra logic (like logging or error handling) around a standard tool command.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A framework should provide 'Logging' to help developers understand why a test failed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is responsible for 'Parameterization' in a Data-Driven framework?",
+    "options": {
+      "A": "The Test Data file",
+      "B": "The Graphic Designer",
+      "C": "The Keyboard Driver",
+      "D": "The Monitor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Cross-Platform' compatibility for a framework?",
+    "options": {
+      "A": "Running the framework on a physical platform.",
+      "B": "The ability of the framework to execute tests on various operating systems (Windows, Linux, macOS).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Headless' mode is usually supported by modern frameworks to run tests faster on CI servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Reporting' formats commonly used by frameworks? (Select all that apply)",
+    "options": {
+      "A": "HTML",
+      "B": "JSON",
+      "C": "XML",
+      "D": "MP3"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Execution Engine' in a framework?",
+    "options": {
+      "A": "The person who executes the code.",
+      "B": "The core logic that parses test cases and triggers the appropriate tool actions.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks should ideally be independent of the specific version of the application being tested.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Modular' framework logic? (Select all that apply)",
+    "options": {
+      "A": "Creating small, independent scripts",
+      "B": "Using a master script to call modules",
+      "C": "Breaking the office furniture into modules",
+      "D": "Reducing redundancy in code"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Object Identification'?",
+    "options": {
+      "A": "Identifying physical objects in the room.",
+      "B": "The process of the framework finding a UI element using its unique properties.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Screenshot on Failure' feature?",
+    "options": {
+      "A": "Taking a selfie when the developer is sad.",
+      "B": "Automatically capturing a visual image of the application state when an assertion fails.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Sleep' commands instead of 'Dynamic Waits' makes a framework more stable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Keyword' framework structure? (Select all that apply)",
+    "options": {
+      "A": "Separates test logic from test data",
+      "B": "Allows non-coders to create tests using keywords",
+      "C": "Requires a 1,000-page manual to start",
+      "D": "Uses a keyword table or spreadsheet"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Test Suite' in framework terminology?",
+    "options": {
+      "A": "A physical suite of offices.",
+      "B": "A logical grouping of related test cases.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Planning', what is 'Framework ROI'?",
+    "options": {
+      "A": "The amount of interest earned on a bank account.",
+      "B": "The return on investment calculated by comparing framework build costs with long-term manual testing savings.",
+      "C": "A specialized software for historians.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every framework must have a GUI to be considered valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Test Runner' features? (Select all that apply)",
+    "options": {
+      "A": "Grouping tests",
+      "B": "Handling timeouts",
+      "C": "Reporting errors",
+      "D": "Ordering lunch"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Decoupling' in a framework?",
+    "options": {
+      "A": "Removing the physical cables from the computer.",
+      "B": "The practice of making different parts of the framework independent so changes in one don't break others.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Execute' (MTE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration it takes for the framework to run a single test case or the entire suite.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A framework should be stored in a Version Control System (VCS) like Git.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Framework' design patterns? (Select all that apply)",
+    "options": {
+      "A": "Singleton",
+      "B": "Factory",
+      "C": "Facade",
+      "D": "Acrylic"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test Isolation' in a framework?",
+    "options": {
+      "A": "Locking the tester in a quiet room.",
+      "B": "Ensuring each test case can run independently without depending on the results of previous tests.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Infrastructure as Code' (IaC) for testing?",
+    "options": {
+      "A": "Writing code to build a physical server room.",
+      "B": "Using scripts to automatically set up the testing environment (like spinning up Docker containers).",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks can be designed to work with both Mobile and Web applications at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Data-Driven' logic? (Select all that apply)",
+    "options": {
+      "A": "Separates data from test scripts",
+      "B": "Uses a single script for multiple data sets",
+      "C": "Requires a 100-core CPU",
+      "D": "Easy to add new test scenarios by adding data rows"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Execution Logs'?",
+    "options": {
+      "A": "Physical logs used to fuel a heater.",
+      "B": "Text files that record every step taken by the framework during a test run for debugging.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test Coverage' visualization?",
+    "options": {
+      "A": "Drawing a physical cover on a chart.",
+      "B": "A visual report showing which requirements or code modules have been tested and which have not.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Locators' occur when the XPath in the framework does not match the actual element in the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Framework' 'Cleanup'? (Select all that apply)",
+    "options": {
+      "A": "Closing the browser after tests",
+      "B": "Deleting temporary test data from the DB",
+      "C": "Cleaning the physical monitors",
+      "D": "Killing orphan driver processes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Modular' code design?",
+    "options": {
+      "A": "Designing a building using modules.",
+      "B": "Breaking code into small, reusable, and independent functions or classes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Automated' 'Deployment' of a framework?",
+    "options": {
+      "A": "Deploying a physical army of robots.",
+      "B": "Automatically pushing framework updates to execution servers via a pipeline.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks can integrate with 'Slack' or 'Teams' to send instant alerts on test failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Assertion' types? (Select all that apply)",
+    "options": {
+      "A": "assertEquals",
+      "B": "assertTrue",
+      "C": "assertNull",
+      "D": "assertLikely"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the physical office.",
+      "B": "How easy it is to update and repair the framework as the application and technologies change.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of using the 'Factory Design Pattern' in a cross-browser testing framework?",
+    "options": {
+      "A": "To manufacture physical computer parts for the testing lab.",
+      "B": "To centralize the logic for instantiating different WebDriver types (Chrome, Firefox, Edge) based on input parameters.",
+      "C": "To ensure that only one instance of the browser is open at any given time.",
+      "D": "To automatically delete old test reports from the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Page Object Model (POM) framework, it is considered a best practice to include 'Assertions' directly inside the Page Object classes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of implementing a 'Singleton Design Pattern' for a Framework's Configuration Reader? (Select all that apply)",
+    "options": {
+      "A": "It ensures that the config file is only loaded into memory once.",
+      "B": "It provides a global point of access to configuration settings.",
+      "C": "It allows the framework to run 100x faster by bypassing the CPU.",
+      "D": "It prevents redundant file I/O operations during a large test suite run."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'ThreadLocal' used for in a multi-threaded (Parallel) execution framework?",
+    "options": {
+      "A": "To share a single browser instance across all parallel threads.",
+      "B": "To provide each thread with its own isolated instance of the WebDriver to avoid race conditions.",
+      "C": "To translate the code into a local language for the tester.",
+      "D": "To increase the physical speed of the network cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework layer is responsible for translating high-level business actions (e.g., 'User adds item to cart') into low-level tool commands (e.g., 'driver.findElement().click()')?",
+    "options": {
+      "A": "The Reporting Layer",
+      "B": "The Abstraction/Business Logic Layer",
+      "C": "The Data Layer",
+      "D": "The Physical Hardware Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Fluent Interface' in framework design allows for method chaining, making test scripts read like human sentences.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Listener' (e.g., ITestListener in TestNG) in a test framework?",
+    "options": {
+      "A": "To listen to music while the tests are running.",
+      "B": "To monitor the execution and trigger specific actions, like taking a screenshot, when a test fails or starts.",
+      "C": "To record the voices of the developers during meetings.",
+      "D": "To intercept and block unauthorized network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a framework handles 'Data Provider' logic for running a single script with 50 different user accounts?",
+    "options": {
+      "A": "The Object Repository",
+      "B": "The Test Data Engine (or Iterator)",
+      "C": "The CSS Pre-processor",
+      "D": "The Assertion Library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of the 'Facade Design Pattern' when applied to a complex API testing framework? (Select all that apply)",
+    "options": {
+      "A": "It simplifies a complex set of API calls into a single, easy-to-use method.",
+      "B": "It hides the complexity of headers, tokens, and serialization from the end test script.",
+      "C": "It requires a physical 'Facade' to be built in the office.",
+      "D": "It improves code readability and reduces script maintenance."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Using 'Hardcoded Thread.sleep()' inside a framework's base library is preferred over 'Dynamic Explicit Waits' for ensuring stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Externalizing' test data (e.g., in JSON, XML, or Excel files)?",
+    "options": {
+      "A": "To make the data visible to people outside the company.",
+      "B": "To allow test data to be updated without needing to recompile or modify the automation code.",
+      "C": "To increase the security of the physical server room.",
+      "D": "To reduce the file size of the test script by 90%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Behavior-Driven Development' (BDD), what is a 'Background' step used for in a feature file?",
+    "options": {
+      "A": "To change the background color of the report.",
+      "B": "To define common preconditions (like logging in) that should run before every scenario in that specific file.",
+      "C": "To play background music during test execution.",
+      "D": "To list the names of the project's background investors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technical challenge is 'Service Virtualization' designed to solve within a testing framework?",
+    "options": {
+      "A": "The physical server taking up too much room.",
+      "B": "Dependencies on unstable, unavailable, or expensive-to-use third-party systems or APIs.",
+      "C": "A specialized software for architects to draw 3D models.",
+      "D": "Increasing the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Modular Framework' requires the use of a master script that calls various independent test modules in a specific sequence.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Assertion' type would you use in a framework to verify that a specific error message appears *without* stopping the rest of the test execution?",
+    "options": {
+      "A": "Hard Assertion",
+      "B": "Soft Assertion",
+      "C": "Recursive Assertion",
+      "D": "Static Assertion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Maven Surefire' or 'Failsafe' plugins in a framework's POM.xml?",
+    "options": {
+      "A": "To prevent the computer from catching on fire.",
+      "B": "To manage the execution of unit and integration tests and generate reports during the build process.",
+      "C": "To automatically translate the code into Python.",
+      "D": "Hiring a professional actor to read the build logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Hybrid Framework', the Keyword-Driven component is often used for high-level business flow, while the Data-Driven component handles variable inputs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Identification' through 'Dynamic Locators'?",
+    "options": {
+      "A": "Locating an object that is physically moving in the office.",
+      "B": "Constructing locators at runtime using variables (e.g., using a variable to find a specific row in a table based on text).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the 'Dependency Injection' principle in framework design? (Select all that apply)",
+    "options": {
+      "A": "Objects receive their dependencies from an external source rather than creating them internally.",
+      "B": "It improves code testability and decuples components.",
+      "C": "It involves injecting actual medicine into the server rack.",
+      "D": "It is often implemented using frameworks like Guice or Spring."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Hook' in the context of an automation framework lifecycle?",
+    "options": {
+      "A": "A physical hook used to organize cables.",
+      "B": "Specific methods (e.g., @BeforeMethod, @AfterClass) that execute automatically at predefined points in the test lifecycle.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Maintainable' framework should have 'High Cohesion' within modules and 'Low Coupling' between different components.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Retrying Flaky Tests' logic within a framework runner aim to achieve?",
+    "options": {
+      "A": "To hide all the bugs from the client.",
+      "B": "To automatically rerun a failed test case to see if the failure was a transient environment issue rather than a genuine bug.",
+      "C": "To force the developer to rewrite the code until it passes.",
+      "D": "To increase the amount of electricity used by the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is essential for 'Remote Execution' of framework-based tests across a cluster of nodes?",
+    "options": {
+      "A": "A local monitor",
+      "B": "Selenium Grid (or similar orchestration tool)",
+      "C": "A physical remote control",
+      "D": "A printer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Screenplay Pattern' uses 'Tasks' and 'Interactions' to represent user behavior, moving away from the structural focus of Page Object Model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which file format is commonly used to manage 'Project Dependencies' in a Python-based testing framework?",
+    "options": {
+      "A": "pom.xml",
+      "B": "requirements.txt",
+      "C": "build.gradle",
+      "D": "index.html"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Virtualization' in the context of a CI/CD-ready framework?",
+    "options": {
+      "A": "Creating a VR world for the testers.",
+      "B": "Using containerization (e.g., Docker) to spin up identical, ephemeral test environments for every build.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Waits' are typically avoided in a framework because they can lead to 'Mismatched' timeout behaviors when combined?",
+    "options": {
+      "A": "Explicit Waits",
+      "B": "Mixing Implicit and Explicit Waits",
+      "C": "Fluent Waits",
+      "D": "Polling Waits"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Keyword-Driven' frameworks are particularly useful when manual testers or business analysts need to create automated tests without writing code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Reporting' enhancements provided by a mature framework? (Select all that apply)",
+    "options": {
+      "A": "Embedded screenshots on failure",
+      "B": "Video recordings of test execution",
+      "C": "Historical pass/fail trend graphs",
+      "D": "The salary of the QA manager"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logic Encapsulation' in a Page Object?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Placing the technical details of how to interact with a page (locators and actions) inside the class, providing simple methods to the test scripts.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Build Triggering'?",
+    "options": {
+      "A": "Automatically starting the test execution when a new code commit is detected in the repository.",
+      "B": "Pulling a physical trigger to start a build.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browser' 'Drivers' occur when the framework attempts to use a ChromeDriver version that is older than the installed Chrome browser version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which design pattern ensures that an automation framework has only one instance of a 'Log Manager' or 'Extent Report' object throughout the run?",
+    "options": {
+      "A": "Factory",
+      "B": "Singleton",
+      "C": "Proxy",
+      "D": "Strategy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Framework' 'Cleanup' logic?",
+    "options": {
+      "A": "Mopping the floor of the server room.",
+      "B": "The automated steps taken after a test run to close browsers, kill orphan processes, and reset test data in the database.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Debug' (MTTD) in automation?",
+    "options": {
+      "A": "The average time it takes for a person to find a bug.",
+      "B": "The average duration between a test failure and identifying whether the cause is a script bug, environment issue, or application defect.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data-Driven' framework should always store the test data inside the Java/Python code to improve execution speed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Wait' types in an advanced framework? (Select all that apply)",
+    "options": {
+      "A": "Static Sleep",
+      "B": "Explicit Wait",
+      "C": "Fluent Wait",
+      "D": "Patience Wait"
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What is the primary function of a 'Configuration Manager' class in a framework?",
+    "options": {
+      "A": "To manage the configuration of the office furniture.",
+      "B": "To read and provide project-level settings (like URL, Browser, Timeouts) from external files (like .properties or .yaml).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Artifact' retention?",
+    "options": {
+      "A": "Retaining ancient Egyptian statues.",
+      "B": "Saving the output of a test run (logs, reports, screenshots) in the CI system for a specific period to assist with debugging.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Locators' in a Page Object Model framework can lead to 'NoSuchElementException' during runtime.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Component-Based' framework design? (Select all that apply)",
+    "options": {
+      "A": "Building reusable UI components (like a Navbar component) that can be used across multiple Page Objects.",
+      "B": "Increases maintenance effort by 500%.",
+      "C": "Follows the 'Composition over Inheritance' design principle.",
+      "D": "Requires a 100-core CPU."
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bloat'?",
+    "options": {
+      "A": "The framework gaining physical weight.",
+      "B": "The accumulation of redundant, unused libraries and over-engineered code that makes the framework slow and difficult to understand.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Regression' 'Status' 'Dashboard'?",
+    "options": {
+      "A": "A dashboard showing if the developers are getting older.",
+      "B": "A visual report showing the stability of previously working features over multiple builds.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Frameworks should use 'Hardcoded' URLs in test scripts to ensure they always point to the correct environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Test Runner' configurations? (Select all that apply)",
+    "options": {
+      "A": "Parallel thread count",
+      "B": "Test groups/tags to include",
+      "C": "Retry count for failed tests",
+      "D": "The color of the mouse pad"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Atomic' testing in framework strategy?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "Designing test cases that are very small and focus on a single, independent function to ensure high stability and clear failure points.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test' 'Parallelization' strategy?",
+    "options": {
+      "A": "Running tests in a parallel dimension.",
+      "B": "Executing multiple independent tests simultaneously to reduce the total time of the test suite.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every framework must include a 'Reporting' component to be considered complete.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Test' 'Data' 'Generation'? (Select all that apply)",
+    "options": {
+      "A": "Using libraries like 'Faker' to create random but realistic data.",
+      "B": "Using SQL scripts to insert data directly into the database before the test starts.",
+      "C": "Manually typing data into the database during the test run.",
+      "D": "The SQL query parser."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Framework' 'Portability'?",
+    "options": {
+      "A": "Carrying the framework in a physical suitcase.",
+      "B": "The ability of the framework code to run across different environments and OSs without major modifications.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Step-by-Step' logging?",
+    "options": {
+      "A": "Logging every time a person takes a step in the office.",
+      "B": "Detailed records of every interaction performed by the framework (e.g., 'Clicked Login', 'Entered Password') for easy debugging.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Base Test' and 'Base Page' classes helps in reducing code redundancy through inheritance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cross-Browser' testing platforms that frameworks can integrate with? (Select all that apply)",
+    "options": {
+      "A": "BrowserStack",
+      "B": "Sauce Labs",
+      "C": "LambdaTest",
+      "D": "Netflix"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'StaleElementReferenceException' handling logic?",
+    "options": {
+      "A": "Throwing the computer in the trash when it gets old.",
+      "B": "Logic built into the framework's wrapper methods that automatically retries finding an element if it becomes detached from the DOM.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Resource' 'Provisioning'?",
+    "options": {
+      "A": "Provisioning physical resources like paper and pens.",
+      "B": "Automatically spinning up and shutting down cloud execution nodes as needed by the test runner.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a framework built for REST APIs attempts to test a GraphQL endpoint without proper libraries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Object' 'Repository' 'Formats'? (Select all that apply)",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "Properties Files",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Modularity'?",
+    "options": {
+      "A": "Designing a building using modules.",
+      "B": "The degree to which the framework is composed of independent, swappable components.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Execution' 'Time' 'Profiling'?",
+    "options": {
+      "A": "Checking the personal profiles of the team.",
+      "B": "Analyzing which parts of the framework or application take the most time during execution to identify performance bottlenecks.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Relative' locators (like 'to the left of') is a modern framework feature that reduces reliance on rigid XPaths.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Framework' 'Integration' points? (Select all that apply)",
+    "options": {
+      "A": "CI/CD Pipeline (Jenkins/GitLab)",
+      "B": "Bug Tracking Systems (Jira)",
+      "C": "Communication Tools (Slack/Teams)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Scalability'?",
+    "options": {
+      "A": "Measuring the framework on a physical scale.",
+      "B": "The ability of the framework to handle 1,000s of tests without becoming unmanageable or significantly slower.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test' 'Data' 'Cleaning' logic?",
+    "options": {
+      "A": "Mopping the data floor.",
+      "B": "Steps taken after a test run to remove or reset any data that was created or modified, ensuring a clean slate for the next run.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A framework must use 'WebDriverManager' to avoid manually downloading browser executable files.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Framework' 'Audit' 'Criteria'? (Select all that apply)",
+    "options": {
+      "A": "Code Reusability",
+      "B": "Stability of Locators",
+      "C": "Reporting Clarity",
+      "D": "The brand of the computer monitor"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logic' 'Layer' 'Separation'?",
+    "options": {
+      "A": "Separating the physical layers of a cake.",
+      "B": "Keeping test case logic (what to do) separate from framework implementation logic (how to do it).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a high-performance framework, what is the technical justification for using 'Reflection' to instantiate Page Objects?",
+    "options": {
+      "A": "It allows the code to run 50% faster by bypassing the compiler.",
+      "B": "It enables the framework to dynamically create page instances at runtime based on external data or configuration without hardcoding every possible transition.",
+      "C": "It is a security feature that prevents developers from seeing the class structure.",
+      "D": "It automatically generates the HTML for the application's UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a multi-threaded execution environment, 'Inheritance' of a static WebDriver instance in the BaseTest class is the most reliable way to handle parallel browser sessions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are advanced strategies for managing 'Global State' in a parallel execution framework? (Select all that apply)",
+    "options": {
+      "A": "ThreadLocal variable encapsulation for WebDriver and ExtentTest objects",
+      "B": "Using the 'Singleton' pattern with caution to ensure read-only access to config data",
+      "C": "Implementing an 'Execution Listener' to clean up thread-specific data after every test",
+      "D": "Sharing a single static list of all test results across 100 concurrent threads"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical difference between 'Service Virtualization' and simple 'Mocking' at the framework level?",
+    "options": {
+      "A": "Virtualization is only for mobile apps; Mocking is for web.",
+      "B": "Mocking typically replaces an object in code; Virtualization simulates the entire network-level behavior of a remote service (like latency and protocol).",
+      "C": "Virtualization requires a physical license for the server.",
+      "D": "Mocking is 100x faster than Virtualization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Design Pattern' is used in frameworks to provide a uniform interface to a set of interfaces in a subsystem, effectively shielding the test script from complex underlying logic?",
+    "options": {
+      "A": "Factory Pattern",
+      "B": "Facade Pattern",
+      "C": "Observer Pattern",
+      "D": "Decorator Pattern"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Dependencies' in a Maven-based framework (Transitive Dependency Conflict) can be resolved by using the <exclusions> tag in the pom.xml.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Self-Healing' locator technology in a modern framework architecture?",
+    "options": {
+      "A": "The code automatically rewrites itself to fix syntax errors.",
+      "B": "The framework uses secondary locators or AI-based attributes to find an element if the primary CSS/XPath selector fails due to a UI change.",
+      "C": "The computer physically repairs itself after a crash.",
+      "D": "The framework deletes all bugs from the database automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributed' testing, what is the role of the 'Sidecar' pattern when running Selenium nodes in a Kubernetes cluster?",
+    "options": {
+      "A": "To provide a physical seat for the tester.",
+      "B": "To run auxiliary services (like logging, video recording, or proxying) alongside the main browser container in the same pod.",
+      "C": "A specialized software for architects.",
+      "D": "To increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Assertion' strategies in a mature framework? (Select all that apply)",
+    "options": {
+      "A": "Soft Assertions (collecting multiple failures without stopping the test)",
+      "B": "Visual assertions using pixel-comparison AI",
+      "C": "Database-to-UI 'Round-trip' assertions",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using 'Java Generics' in a Page Object framework allows for the creation of a 'Generic Base Page' that can be extended to handle different localized versions of the same page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cyclomatic Complexity' in the context of framework code maintenance?",
+    "options": {
+      "A": "The number of cycles a computer performs per second.",
+      "B": "A quantitative measure of the number of linearly independent paths through a framework's source code (logic complexity).",
+      "C": "A specialized security scan.",
+      "D": "Hiring a professional mathematician to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical impact of 'Implicit' vs 'Explicit' wait 'Interference' in Selenium?",
+    "options": {
+      "A": "It doubles the speed of the browser.",
+      "B": "It causes unpredictable wait times and timeouts because the two wait types reside in different parts of the execution stack (Client vs. Remote side).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Design' principle states that a framework should be 'Open for extension but Closed for modification'?",
+    "options": {
+      "A": "Single Responsibility Principle",
+      "B": "Open/Closed Principle",
+      "C": "Liskov Substitution Principle",
+      "D": "Interface Segregation Principle"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Containerized' 'Test' 'Agents' allow for perfect 'Environment Parity' by ensuring that the exact same OS and library versions are used in both Dev and CI execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Logging' integrations for an enterprise framework? (Select all that apply)",
+    "options": {
+      "A": "ELK Stack (Elasticsearch, Logstash, Kibana) for log aggregation",
+      "B": "Splunk for security event monitoring",
+      "C": "Custom database logging for historical execution trends",
+      "D": "Microsoft Paint for log visualization"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Reflection-based' 'Keyword' 'Mapping'?",
+    "options": {
+      "A": "Mapping a physical building.",
+      "B": "A framework feature that dynamically calls a method by its string name at runtime, allowing spreadsheets to control code execution.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of characters in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) for an automation suite?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration the automation framework runs successfully before an environmental or infrastructure failure occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dependency' 'Injection' frameworks like Guice or Spring are often used in automation to manage the lifecycle of complex objects like WebDriver and DB connections.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Observability' in a testing context? (Select all that apply)",
+    "options": {
+      "A": "Tracing the path of a request through microservices during a test",
+      "B": "Capturing browser performance metrics (HAR files)",
+      "C": "Monitoring CPU/RAM on the SUT during test execution",
+      "D": "The color of the CEO's tie"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Hydration'?",
+    "options": {
+      "A": "Giving the computer actual water.",
+      "B": "The process of populating the framework's internal memory/cache with configuration and environment data before starting the first test.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Orchestration' vs 'Automation'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Automation is a single task; Orchestration is the coordination of multiple automated tasks into a workflow (e.g., spin up pod -> run tests -> teardown).",
+      "C": "Orchestration is only for musicians.",
+      "D": "Automation is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a framework occur when the automation is built in Java but the development team uses C#, making code reviews difficult.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Test' 'Data' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "On-the-fly 'Faker' data generation",
+      "B": "Production database 'Sanitized' subsetting",
+      "C": "Hardcoding 1000 users in a text file",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' 'Violation'?",
+    "options": {
+      "A": "Hiring a person named Logic.",
+      "B": "When a test script contains low-level interaction code (e.g., driver.findElement) instead of calling a high-level Page Object method.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Trend' 'Analysis' 'Drill-down'?",
+    "options": {
+      "A": "Drilling a hole in a physical computer.",
+      "B": "The ability to click on a high-level pass/fail trend graph and view the individual step logs for a specific historical failure.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scale' occurs when a framework designed for 50 tests is used to run 5,000 tests, resulting in heap space errors on the CI server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Parallel' 'Configuration' options in TestNG? (Select all that apply)",
+    "options": {
+      "A": "parallel='methods' with thread-count",
+      "B": "parallel='classes' with thread-count",
+      "C": "parallel='instances' with thread-count",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Resilience' 'Engineering'?",
+    "options": {
+      "A": "Building the server room with bricks.",
+      "B": "Designing the framework to handle transient network errors and browser crashes via automated retries and graceful fallback logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cloud-Bursting' for test frameworks?",
+    "options": {
+      "A": "Popping a physical cloud balloon.",
+      "B": "Dynamically moving test execution from local servers to the public cloud when local capacity is exceeded during heavy release cycles.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Locators' in a mobile framework (Appium) can often be managed using 'Accessibility IDs', which provide a consistent identifier across both iOS and Android.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Reporting' 'Metadata'? (Select all that apply)",
+    "options": {
+      "A": "Browser performance metrics (HAR files)",
+      "B": "SUT environment system logs",
+      "C": "Video timestamps of specific test steps",
+      "D": "The color of the mouse pad"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Refactoring' 'ROI'?",
+    "options": {
+      "A": "The amount of interest earned on a bank account.",
+      "B": "The reduction in maintenance time and increase in stability gained after updating an old framework to modern design patterns.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric representing the average duration from when an automation script fails until it is successfully repaired and verified.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browsers' refer to a situation where the automation framework is tested against Chrome but the actual user base primarily uses mobile Safari.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Infrastructure' 'Compliance'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that the test grid follows corporate security policies",
+      "B": "Checking if containers are running with non-root permissions",
+      "C": "Guaranteed to stop all database bugs",
+      "D": "Ensuring PII is not stored in test reports"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' in a CI pipeline?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a new or modified automation framework alongside the official stable version to verify results without affecting the build status.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Automation' 'Saturation' 'Point'?",
+    "options": {
+      "A": "The point where the developer is full of coffee.",
+      "B": "The point where adding more automated tests provides diminishing returns or increases maintenance costs beyond the value of the tests.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the framework level is set to 'INFO' but the execution environment requires 'DEBUG' to troubleshoot intermittent failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Levels'? (Select all that apply)",
+    "options": {
+      "A": "Executive Dashboard (High-level ROI/Pass rate)",
+      "B": "Manager Dashboard (Module stability/Resource usage)",
+      "C": "Technical Dashboard (Logs/Stack traces)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of scripts or templates used to quickly initialize a new, standardized automation project with correct dependencies.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Visual' 'Artifact' 'Aging'?",
+    "options": {
+      "A": "The aging of a person named Visual.",
+      "B": "The process of automatically deleting old screenshots and videos from the CI server after a set time to save storage space.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the time taken for a full automation regression exceeds the duration of the developer's sprint cycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Wait' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Fluent Wait with polling every 250ms",
+      "B": "Wait for 'Ajax' call completion using JS execution",
+      "C": "Wait for 'iFrame' to be available and switch to it",
+      "D": "Static sleep of 5 minutes"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logic' 'Decoupling' in a mature framework?",
+    "options": {
+      "A": "Removing the physical cables from the CPU.",
+      "B": "The practice of making the test scripts completely unaware of the underlying tool (e.g., Selenium) using an abstraction layer.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Code' 'Coverage' 'vs' 'Requirement' 'Coverage'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Code Coverage measures lines of code executed; Requirement Coverage measures features validated against the specification.",
+      "C": "Requirement Coverage is for experts; Code for beginners.",
+      "D": "Requirement Coverage is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in a framework occur when attempting to perform REST assertions on a SOAP response without a conversion layer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response'? (Select all that apply)",
+    "options": {
+      "A": "Automatically creating a Jira ticket on test failure",
+      "B": "Sending a Slack notification to the developer who broke the build",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Auto-scaling the test grid during peak demand"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Modularity' 'Benefit'?",
+    "options": {
+      "A": "Hiring a person named Modularity.",
+      "B": "The ability to replace a specific component (like the reporting tool) without affecting the rest of the framework logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Rate'?",
+    "options": {
+      "A": "The rate of people being positive in the office.",
+      "B": "The percentage of test failures that are actually due to script or environment bugs rather than application defects.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Credentials' occur when the framework uses a test account in 'Production' that does not have the required permissions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'CI' 'Orchestration' 'Tasks'? (Select all that apply)",
+    "options": {
+      "A": "Spinning up a 'Clean' database container for every test suite",
+      "B": "Provisioning dynamic Selenium nodes on AWS Fargate",
+      "C": "Deleting the entire codebase if a test fails",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' 'Best' 'Practice'?",
+    "options": {
+      "A": "Putting all the code in a single file.",
+      "B": "Placing complex multi-step interactions (like a checkout flow) into the Page Object as a single method for test scripts to call.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Execution' 'Heatmap'?",
+    "options": {
+      "A": "A physical map of the server room temperature.",
+      "B": "A visual report showing which application modules have the most frequent test failures or execution time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Infrastructure' occurs when automation is run on 32-bit Linux while production is 64-bit Windows, leading to subtle environment-specific bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Framework' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Standard Operating Procedures (SOP) for new test creation",
+      "B": "Library of reusable UI components",
+      "C": "Centralized reporting dashboard",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Atomic' 'Test' 'Principle'?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "The design of test cases that focus on a single piece of functionality to ensure clear failure analysis and high stability.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Efficiency' 'Metric'?",
+    "options": {
+      "A": "Hiring a person named Efficiency.",
+      "B": "The measurement of resources (Time/CPU/RAM) consumed per test case execution.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Test' 'Data' occurs when the framework uses 2023 dates for assertions in 2024, leading to false failure results.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Checking if test scripts follow internal coding standards",
+      "B": "Verifying that test reports do not contain plain-text passwords",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Ensuring every requirement has at least one associated test"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Shadow' 'DOM' 'Automation' 'Complexity'?",
+    "options": {
+      "A": "Automating a computer in a dark room.",
+      "B": "The difficulty of accessing elements nested inside encapsulated web components that are not visible to standard WebDriver finding methods.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name Traceability.",
+      "B": "Verifying that the automation suite provides 100% coverage for the business requirements defined in tools like Jira or Azure DevOps.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when the database cannot handle the number of concurrent connections generated by the parallel automation threads.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Testing'? (Select all that apply)",
+    "options": {
+      "A": "Injecting network latency during a test run",
+      "B": "Killing backend services while a UI test is in progress",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Verifying circuit breaker activation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Inheritance' 'Hierarchy'?",
+    "options": {
+      "A": "Inheriting money from the framework.",
+      "B": "The structured design where specialized page classes inherit from a base page, and test classes inherit from a base test, sharing common logic.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Step' 'Latency' 'Analysis'?",
+    "options": {
+      "A": "Analyzing how slow a person walks.",
+      "B": "Identifying which specific step within a test case (e.g., 'Click Submit') is taking unusually long to complete.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Logic' (Implicit + Explicit) can cause a Selenium script to wait significantly longer than the specified timeout period.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Framework' 'Modular' 'Components'? (Select all that apply)",
+    "options": {
+      "A": "Custom WebDriver Wrapper",
+      "B": "External Data Iterator",
+      "C": "Global Assertion Engine",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Reflection' 'Method' 'Invocation'?",
+    "options": {
+      "A": "Invoking a ghost in a mirror.",
+      "B": "The technical process of executing a Java method whose name is only known as a string at runtime.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -34,8 +34,8 @@ function ReviewPage() {
   const [codingTime, setCodingTime] = useState('00:00:00');
   const [hasObjectiveCutoff, setHasObjectiveCutoff] = useState(false);
   const [objPassPercentage, setObjPassPercentage] = useState(60);
-  const [objWeight, setObjWeight] = useState(0);
-  const [codingWeight, setCodingWeight] = useState(100);
+  const [objWeight, setObjWeight] = useState(30);
+  const [codingWeight, setCodingWeight] = useState(70);
   const [removedQuestionIds, setRemovedQuestionIds] = useState(new Set());
 
   const totalCodingPoints = useMemo(() => {
@@ -87,7 +87,29 @@ function ReviewPage() {
     removedQuestionIds
   ]);
 
+  // Automatic Weight Balancing
+  useEffect(() => {
+    if (loading || !questions) return;
 
+    const objCount = Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+    const codingCount = (questions['Coding'] || []).length;
+    if (objCount > 0 && codingCount === 0) {
+      if (objWeight !== 100) {
+        setObjWeight(100);
+        setCodingWeight(0);
+      }
+    } else if (objCount === 0 && codingCount > 0) {
+      if (codingWeight !== 100) {
+        setObjWeight(0);
+        setCodingWeight(100);
+      }
+    }
+    // Note: If both counts are > 0, we allow the user to choose any weight split, 
+    // including manual 100/0 or 0/100 if they wish.
+  }, [questions, loading, objWeight, codingWeight]);
   // Initial Data Loading & Restoration
   useEffect(() => {
     let state = location.state || null;

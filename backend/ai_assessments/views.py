@@ -22,7 +22,7 @@ import traceback
 import base64
 from django.core.files.base import ContentFile
 from api.models import UserProfile, DeletionRequest
-from api.views._imports import _is_application_admin_email, handle_deletion_request
+from api._imports import _is_application_admin_email, handle_deletion_request
 
 
 def _normalize_difficulty_label(value, *, default='Medium'):

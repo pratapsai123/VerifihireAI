@@ -1,0 +1,1741 @@
+{ 
+  "skill": "Cocoapods", 
+  "questions": [
+    {
+"question":"What is CocoaPods primarily used for in iOS development?",
+"options":{
+"A":"Dependency management",
+"B":"Database storage",
+"C":"UI design",
+"D":"Version control"
+},
+"answer":"A"
+},
+{
+"question":"True or False: CocoaPods is a dependency manager for Swift and Objective-C projects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are features of CocoaPods? (Select all that apply)",
+"options":{
+"A":"Dependency resolution",
+"B":"Automatic library integration",
+"C":"Version management",
+"D":"Hardware compilation"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which file is used to define project dependencies in CocoaPods?",
+"options":{
+"A":"Podfile",
+"B":"Package.json",
+"C":"build.gradle",
+"D":"Makefile"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Podfile is written in Ruby syntax.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command installs dependencies defined in Podfile?",
+"options":{
+"A":"pod install",
+"B":"pod update",
+"C":"pod create",
+"D":"pod delete"
+},
+"answer":"A"
+},
+{
+"question":"Which commands are used in CocoaPods CLI? (Select all that apply)",
+"options":{
+"A":"pod install",
+"B":"pod update",
+"C":"pod search",
+"D":"pod compile"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"True or False: 'pod update' updates installed pods to the latest allowed version.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which file is generated after running 'pod install'?",
+"options":{
+"A":"Podfile.lock",
+"B":"Package.lock",
+"C":"Podspec.lock",
+"D":"Pods.config"
+},
+"answer":"A"
+},
+{
+"question":"What is the purpose of Podfile.lock?",
+"options":{
+"A":"Lock dependency versions",
+"B":"Compile source code",
+"C":"Run tests",
+"D":"Create UI components"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podfile.lock ensures consistent builds across machines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which folder contains installed CocoaPods libraries?",
+"options":{
+"A":"Pods",
+"B":"Libraries",
+"C":"Dependencies",
+"D":"Modules"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are CocoaPods components? (Select all that apply)",
+"options":{
+"A":"Podfile",
+"B":"Podspec",
+"C":"Pods directory",
+"D":"Dockerfile"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"What is a Podspec?",
+"options":{
+"A":"Specification file describing a library",
+"B":"Database schema",
+"C":"Compiler configuration",
+"D":"UI layout"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec defines metadata and dependencies of a pod.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command searches for pods in CocoaPods repository?",
+"options":{
+"A":"pod search",
+"B":"pod find",
+"C":"pod locate",
+"D":"pod list"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command creates a new pod library template?",
+"options":{
+"A":"pod lib create",
+"B":"pod new",
+"C":"pod create lib",
+"D":"pod start"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods supports both Swift and Objective-C libraries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which platforms does CocoaPods support? (Select all that apply)",
+"options":{
+"A":"iOS",
+"B":"macOS",
+"C":"tvOS",
+"D":"Windows kernel"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which command updates CocoaPods repo?",
+"options":{
+"A":"pod repo update",
+"B":"pod repo install",
+"C":"pod repo start",
+"D":"pod repo compile"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods repositories contain pod specifications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which file integrates pods with Xcode project?",
+"options":{
+"A":".xcworkspace",
+"B":".xcodeproj",
+"C":".swift",
+"D":".plist"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: After installing pods you should open .xcworkspace file.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command lists installed pods?",
+"options":{
+"A":"pod list",
+"B":"pod installed",
+"C":"pod show",
+"D":"pod view"
+},
+"answer":"A"
+},
+
+{
+"question":"Which are version constraints used in Podfile? (Select all that apply)",
+"options":{
+"A":"~>",
+"B":">=",
+"C":"=",
+"D":"<>"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: '~>' operator means compatible version constraint.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command removes CocoaPods integration from project?",
+"options":{
+"A":"pod deintegrate",
+"B":"pod remove",
+"C":"pod uninstall",
+"D":"pod delete"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command cleans CocoaPods cache?",
+"options":{
+"A":"pod cache clean",
+"B":"pod clear",
+"C":"pod delete cache",
+"D":"pod clean"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods dependencies are fetched from remote repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are benefits of dependency managers? (Select all that apply)",
+"options":{
+"A":"Version control of libraries",
+"B":"Automatic installation",
+"C":"Dependency resolution",
+"D":"Hardware optimization"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which language is CocoaPods written in?",
+"options":{
+"A":"Ruby",
+"B":"Swift",
+"C":"Python",
+"D":"Java"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods uses RubyGems for distribution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which package manager alternative exists for Swift?",
+"options":{
+"A":"Swift Package Manager",
+"B":"Gradle",
+"C":"Maven",
+"D":"Composer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command checks environment setup?",
+"options":{
+"A":"pod env",
+"B":"pod setup",
+"C":"pod check",
+"D":"pod config"
+},
+"answer":"A"
+},
+{
+"question":"Which CocoaPods command initializes a new Podfile in a project?",
+"options":{
+"A":"pod init",
+"B":"pod start",
+"C":"pod setup",
+"D":"pod new"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod init' creates a Podfile in the current directory.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are valid sections in a Podfile? (Select all that apply)",
+"options":{
+"A":"target",
+"B":"platform",
+"C":"pod",
+"D":"compile"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which keyword specifies the platform in a Podfile?",
+"options":{
+"A":"platform",
+"B":"target",
+"C":"project",
+"D":"library"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: The 'target' block in Podfile defines dependencies for a specific build target.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command installs a specific version of CocoaPods gem?",
+"options":{
+"A":"gem install cocoapods",
+"B":"pod install cocoapods",
+"C":"brew install cocoapods",
+"D":"swift install cocoapods"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools are required before installing CocoaPods? (Select all that apply)",
+"options":{
+"A":"Ruby",
+"B":"Xcode",
+"C":"Git",
+"D":"Docker Engine"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: CocoaPods works only with Swift projects.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which command displays CocoaPods version?",
+"options":{
+"A":"pod --version",
+"B":"pod version",
+"C":"pod check",
+"D":"pod info"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file specifies pod metadata such as name, version, and source?",
+"options":{
+"A":"Podspec",
+"B":"Podfile",
+"C":"Package.json",
+"D":"Info.plist"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec files are written in Ruby DSL.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following fields exist in a Podspec file? (Select all that apply)",
+"options":{
+"A":"name",
+"B":"version",
+"C":"source",
+"D":"compiler"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which CocoaPods command validates a Podspec?",
+"options":{
+"A":"pod spec lint",
+"B":"pod validate",
+"C":"pod test spec",
+"D":"pod spec verify"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod spec lint' checks if the Podspec is valid.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command pushes a pod to the trunk repository?",
+"options":{
+"A":"pod trunk push",
+"B":"pod repo push",
+"C":"pod publish",
+"D":"pod trunk upload"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are CocoaPods repositories? (Select all that apply)",
+"options":{
+"A":"Trunk",
+"B":"Private Specs Repo",
+"C":"Master Repo",
+"D":"Linux Repo"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: CocoaPods supports private pods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command adds a new specs repo?",
+"options":{
+"A":"pod repo add",
+"B":"pod repo new",
+"C":"pod repo init",
+"D":"pod repo start"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command lists all repos?",
+"options":{
+"A":"pod repo list",
+"B":"pod repo show",
+"C":"pod repo check",
+"D":"pod repo info"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Pods can be hosted on Git repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which source types can Podspec reference? (Select all that apply)",
+"options":{
+"A":"Git",
+"B":"HTTP",
+"C":"SVN",
+"D":"Bluetooth"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which dependency manager competes with CocoaPods?",
+"options":{
+"A":"Swift Package Manager",
+"B":"Gradle",
+"C":"Composer",
+"D":"npm"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods integrates with Xcode automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command analyzes pod dependencies without installing them?",
+"options":{
+"A":"pod install --dry-run",
+"B":"pod check",
+"C":"pod analyze",
+"D":"pod verify"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are CocoaPods dependency sources? (Select all that apply)",
+"options":{
+"A":"GitHub",
+"B":"GitLab",
+"C":"Bitbucket",
+"D":"Printer"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which command displays pod environment information?",
+"options":{
+"A":"pod env",
+"B":"pod info",
+"C":"pod status",
+"D":"pod inspect"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod env' helps debug environment issues.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command checks outdated pods?",
+"options":{
+"A":"pod outdated",
+"B":"pod check",
+"C":"pod status",
+"D":"pod verify"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command opens Podspec template?",
+"options":{
+"A":"pod spec create",
+"B":"pod spec new",
+"C":"pod spec open",
+"D":"pod spec start"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods can manage multiple dependencies simultaneously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods feature resolves dependency conflicts automatically?",
+"options":{
+"A":"Dependency resolver",
+"B":"Compiler",
+"C":"Cache manager",
+"D":"Database manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following improve CocoaPods build performance? (Select all that apply)",
+"options":{
+"A":"Caching pods",
+"B":"Using static libraries",
+"C":"Reducing dependencies",
+"D":"Increasing CPU voltage"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"What does CocoaPods primarily manage in iOS projects?",
+"options":{
+"A":"External library dependencies",
+"B":"Operating system services",
+"C":"UI layouts",
+"D":"Network routing"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods automatically downloads libraries defined in the Podfile.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command resolves and installs dependencies?",
+"options":{
+"A":"pod install",
+"B":"pod compile",
+"C":"pod resolve",
+"D":"pod create"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command updates pods to newer versions allowed by Podfile?",
+"options":{
+"A":"pod update",
+"B":"pod install",
+"C":"pod refresh",
+"D":"pod compile"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod update' ignores Podfile.lock restrictions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods file tracks installed pod versions?",
+"options":{
+"A":"Podfile.lock",
+"B":"Podfile",
+"C":"Pods.json",
+"D":"Pods.lock"
+},
+"answer":"A"
+},
+
+{
+"question":"Which directory stores downloaded dependencies?",
+"options":{
+"A":"Pods",
+"B":"Libraries",
+"C":"Sources",
+"D":"Frameworks"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Pods folder should normally not be edited manually.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which dependency version format means compatible version?",
+"options":{
+"A":"~>",
+"B":"=",
+"C":">",
+"D":"<"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command removes CocoaPods integration?",
+"options":{
+"A":"pod deintegrate",
+"B":"pod remove",
+"C":"pod uninstall",
+"D":"pod delete"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods can install pods from Git repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are valid pod sources? (Select all that apply)",
+"options":{
+"A":"GitHub",
+"B":"GitLab",
+"C":"HTTP archive",
+"D":"Bluetooth"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which command clears CocoaPods cache?",
+"options":{
+"A":"pod cache clean",
+"B":"pod cache delete",
+"C":"pod remove cache",
+"D":"pod clean"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods caches downloaded libraries to speed builds.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command checks installed pod versions?",
+"options":{
+"A":"pod list",
+"B":"pod inspect",
+"C":"pod show",
+"D":"pod view"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file defines CocoaPods dependencies?",
+"options":{
+"A":"Podfile",
+"B":"Podspec",
+"C":"Package.json",
+"D":"Gemfile"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podfile supports multiple targets.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares dependency in Podfile?",
+"options":{
+"A":"pod",
+"B":"lib",
+"C":"module",
+"D":"import"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property sets platform version?",
+"options":{
+"A":"platform",
+"B":"version",
+"C":"target",
+"D":"build"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods integrates dependencies as frameworks or static libraries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which build artifact is created after pod installation?",
+"options":{
+"A":"xcworkspace",
+"B":"plist",
+"C":"bundle",
+"D":"swiftmodule"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file should be opened after installing pods?",
+"options":{
+"A":"workspace file",
+"B":"project file",
+"C":"plist file",
+"D":"swift file"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Opening .xcodeproj instead of .xcworkspace may break builds with CocoaPods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command shows pod info?",
+"options":{
+"A":"pod trunk info",
+"B":"pod info",
+"C":"pod spec info",
+"D":"pod describe"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command initializes CocoaPods environment?",
+"options":{
+"A":"pod setup",
+"B":"pod init",
+"C":"pod start",
+"D":"pod configure"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod setup' downloads CocoaPods specs repository.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods feature resolves version conflicts automatically?",
+"options":{
+"A":"Dependency resolver",
+"B":"Compiler engine",
+"C":"Pod builder",
+"D":"Library compiler"
+},
+"answer":"A"
+},
+
+{
+"question":"Which dependency manager is built into Swift?",
+"options":{
+"A":"Swift Package Manager",
+"B":"Gradle",
+"C":"Maven",
+"D":"Composer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Swift Package Manager can replace CocoaPods in some projects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CocoaPods command displays the list of available pods?",
+"options":{
+"A":"pod search",
+"B":"pod list",
+"C":"pod show",
+"D":"pod check"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods can install pods directly from a Git repository.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are advantages of CocoaPods? (Select all that apply)",
+"options":{
+"A":"Easy dependency management",
+"B":"Automatic library integration",
+"C":"Version control for libraries",
+"D":"Operating system installation"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which CocoaPods command updates the local specs repository?",
+"options":{
+"A":"pod repo update",
+"B":"pod repo refresh",
+"C":"pod update repo",
+"D":"pod sync"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods dependencies are defined inside the Podfile.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword specifies dependency in Podfile?",
+"options":{
+"A":"pod",
+"B":"import",
+"C":"library",
+"D":"include"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command installs dependencies after modifying Podfile?",
+"options":{
+"A":"pod install",
+"B":"pod compile",
+"C":"pod update",
+"D":"pod build"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod install' should be used when Podfile changes but Podfile.lock should remain.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command updates all pods to latest versions allowed by Podfile?",
+"options":{
+"A":"pod update",
+"B":"pod upgrade",
+"C":"pod refresh",
+"D":"pod sync"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file ensures consistent pod versions across developers?",
+"options":{
+"A":"Podfile.lock",
+"B":"Podfile",
+"C":"Pods.lock",
+"D":"spec.lock"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podfile.lock should be committed to version control.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command shows outdated pods?",
+"options":{
+"A":"pod outdated",
+"B":"pod check",
+"C":"pod show",
+"D":"pod list"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command validates Podspec before publishing?",
+"options":{
+"A":"pod spec lint",
+"B":"pod validate",
+"C":"pod verify",
+"D":"pod publish check"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec defines how a pod should be built.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which property defines source location in Podspec?",
+"options":{
+"A":"source",
+"B":"origin",
+"C":"repository",
+"D":"library"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command pushes Podspec to trunk?",
+"options":{
+"A":"pod trunk push",
+"B":"pod push trunk",
+"C":"pod upload",
+"D":"pod publish"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods trunk repository hosts public pods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command removes pods integration from project?",
+"options":{
+"A":"pod deintegrate",
+"B":"pod remove",
+"C":"pod uninstall",
+"D":"pod clear"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command removes cache?",
+"options":{
+"A":"pod cache clean",
+"B":"pod cache delete",
+"C":"pod cache remove",
+"D":"pod clean cache"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Cached pods help reduce download time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command prints environment info?",
+"options":{
+"A":"pod env",
+"B":"pod info",
+"C":"pod config",
+"D":"pod status"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command creates Podspec template?",
+"options":{
+"A":"pod spec create",
+"B":"pod create spec",
+"C":"pod spec init",
+"D":"pod new spec"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec files define pod name, version, and source.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which file extension is used for CocoaPods specifications?",
+"options":{
+"A":".podspec",
+"B":".pods",
+"C":".spec",
+"D":".libspec"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods component resolves dependency conflicts?",
+"options":{
+"A":"Dependency resolver",
+"B":"Compiler",
+"C":"Parser",
+"D":"Framework manager"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods integrates pods as frameworks or static libraries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are CocoaPods supported platforms? (Select all that apply)",
+"options":{
+"A":"iOS",
+"B":"macOS",
+"C":"tvOS",
+"D":"watchOS"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"Which dependency manager is native to Swift ecosystem?",
+"options":{
+"A":"Swift Package Manager",
+"B":"Gradle",
+"C":"Maven",
+"D":"Composer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Swift Package Manager can sometimes replace CocoaPods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command creates a new library project?",
+"options":{
+"A":"pod lib create",
+"B":"pod create lib",
+"C":"pod new lib",
+"D":"pod start lib"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command lists installed CocoaPods repositories?",
+"options":{
+"A":"pod repo list",
+"B":"pod repo show",
+"C":"pod repo check",
+"D":"pod repo inspect"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods repositories store pod specifications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command adds new specs repository?",
+"options":{
+"A":"pod repo add",
+"B":"pod repo create",
+"C":"pod repo new",
+"D":"pod repo setup"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are CocoaPods repository types? (Select all that apply)",
+"options":{
+"A":"Trunk",
+"B":"Private Specs Repo",
+"C":"Local Specs Repo",
+"D":"Database Repo"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Private pods allow companies to manage internal libraries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command removes a repository?",
+"options":{
+"A":"pod repo remove",
+"B":"pod repo delete",
+"C":"pod repo uninstall",
+"D":"pod repo clear"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command analyzes dependencies without installing?",
+"options":{
+"A":"pod install --dry-run",
+"B":"pod analyze",
+"C":"pod check",
+"D":"pod verify"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods can integrate dependencies automatically with Xcode build settings.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which command shows installed CocoaPods version?",
+"options":{
+"A":"pod --version",
+"B":"pod version",
+"C":"pod info",
+"D":"pod check"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods is distributed through RubyGems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which tools are required before installing CocoaPods? (Select all that apply)",
+"options":{
+"A":"Ruby",
+"B":"Xcode",
+"C":"Git",
+"D":"Docker"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which CocoaPods command initializes a Podfile?",
+"options":{
+"A":"pod init",
+"B":"pod setup",
+"C":"pod start",
+"D":"pod create"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podfile uses Ruby DSL syntax.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Podfile directive defines supported platform?",
+"options":{
+"A":"platform",
+"B":"target",
+"C":"pod",
+"D":"library"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command installs dependencies defined in Podfile?",
+"options":{
+"A":"pod install",
+"B":"pod update",
+"C":"pod sync",
+"D":"pod resolve"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: After installing pods you should open .xcworkspace instead of .xcodeproj.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which folder stores installed pods?",
+"options":{
+"A":"Pods",
+"B":"Libraries",
+"C":"Sources",
+"D":"Modules"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file locks pod versions?",
+"options":{
+"A":"Podfile.lock",
+"B":"Pods.lock",
+"C":"Lockfile",
+"D":"Dependencies.lock"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podfile.lock ensures identical dependency versions across machines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command lists outdated dependencies?",
+"options":{
+"A":"pod outdated",
+"B":"pod check",
+"C":"pod list",
+"D":"pod update list"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command removes CocoaPods integration from a project?",
+"options":{
+"A":"pod deintegrate",
+"B":"pod remove",
+"C":"pod uninstall",
+"D":"pod reset"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods supports private repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command lists repositories?",
+"options":{
+"A":"pod repo list",
+"B":"pod repo show",
+"C":"pod repo check",
+"D":"pod repo status"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command adds a new specs repository?",
+"options":{
+"A":"pod repo add",
+"B":"pod repo create",
+"C":"pod repo init",
+"D":"pod repo setup"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Pods can be downloaded from GitHub.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Podspec field defines library name?",
+"options":{
+"A":"name",
+"B":"title",
+"C":"library",
+"D":"package"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Podspec field defines version?",
+"options":{
+"A":"version",
+"B":"build",
+"C":"release",
+"D":"edition"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec files describe how a library should be built.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command validates Podspec before publishing?",
+"options":{
+"A":"pod spec lint",
+"B":"pod verify",
+"C":"pod validate",
+"D":"pod check"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command publishes Podspec to trunk?",
+"options":{
+"A":"pod trunk push",
+"B":"pod trunk publish",
+"C":"pod push trunk",
+"D":"pod upload"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods trunk hosts public pods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command clears CocoaPods cache?",
+"options":{
+"A":"pod cache clean",
+"B":"pod cache delete",
+"C":"pod clean",
+"D":"pod clear"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command prints environment details?",
+"options":{
+"A":"pod env",
+"B":"pod info",
+"C":"pod config",
+"D":"pod status"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod env' is useful for debugging installation problems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which dependency manager is built into Swift?",
+"options":{
+"A":"Swift Package Manager",
+"B":"Gradle",
+"C":"Composer",
+"D":"Maven"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Swift Package Manager can sometimes replace CocoaPods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command creates a new pod project template?",
+"options":{
+"A":"pod lib create",
+"B":"pod new lib",
+"C":"pod create",
+"D":"pod start"
+},
+"answer":"A"
+},
+
+{
+"question":"Which platforms does CocoaPods support? (Select all that apply)",
+"options":{
+"A":"iOS",
+"B":"macOS",
+"C":"tvOS",
+"D":"watchOS"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CocoaPods integrates dependencies automatically into Xcode build settings.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command searches for pods?",
+"options":{
+"A":"pod search",
+"B":"pod find",
+"C":"pod locate",
+"D":"pod list"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command checks installed pods in project?",
+"options":{
+"A":"pod list",
+"B":"pod installed",
+"C":"pod show",
+"D":"pod verify"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods resolves dependency conflicts automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CocoaPods command updates the local specs repository?",
+"options":{"A":"pod repo update","B":"pod repo refresh","C":"pod repo upgrade","D":"pod repo sync"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods repositories store pod specification files.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command displays pod environment configuration?",
+"options":{"A":"pod env","B":"pod info","C":"pod config","D":"pod setup"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command installs pods without updating the specs repository?",
+"options":{"A":"pod install --no-repo-update","B":"pod install --skip","C":"pod install --local","D":"pod install --fast"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods can install dependencies directly from Git tags.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which field in Podspec defines license information?",
+"options":{"A":"license","B":"copyright","C":"terms","D":"policy"},
+"answer":"A"
+},
+
+{
+"question":"Which Podspec property defines supported platform version?",
+"options":{"A":"platform","B":"target","C":"version","D":"system"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Podspec files can declare dependencies on other pods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command removes a repository?",
+"options":{"A":"pod repo remove","B":"pod repo delete","C":"pod repo uninstall","D":"pod repo clear"},
+"answer":"A"
+},
+
+{
+"question":"Which command shows pod trunk account info?",
+"options":{"A":"pod trunk me","B":"pod trunk info","C":"pod trunk show","D":"pod trunk account"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods trunk requires email verification.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command registers a new trunk account?",
+"options":{"A":"pod trunk register","B":"pod trunk create","C":"pod trunk add","D":"pod trunk signup"},
+"answer":"A"
+},
+
+{
+"question":"Which command deletes a pod version from trunk?",
+"options":{"A":"pod trunk delete","B":"pod trunk remove","C":"pod trunk uninstall","D":"pod trunk erase"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods dependencies can be stored in private Git repos.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following can be specified in Podfile dependency source? (Select all that apply)",
+"options":{"A":"Git URL","B":"HTTP archive","C":"Local path","D":"Bluetooth"},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which command installs pods with verbose output?",
+"options":{"A":"pod install --verbose","B":"pod install --log","C":"pod install --debug","D":"pod install --trace"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods integrates pods as frameworks by default in modern Xcode versions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods option installs dependencies without building documentation?",
+"options":{"A":"--no-docs","B":"--skip-docs","C":"--no-build","D":"--fast"},
+"answer":"A"
+},
+
+{
+"question":"Which command updates a specific pod dependency?",
+"options":{"A":"pod update PodName","B":"pod install PodName","C":"pod refresh PodName","D":"pod upgrade PodName"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods dependency resolver ensures compatible versions across dependencies.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command prints dependency tree?",
+"options":{"A":"pod dependencies","B":"pod tree","C":"pod graph","D":"pod list --tree"},
+"answer":"A"
+},
+
+{
+"question":"Which command checks CocoaPods installation health?",
+"options":{"A":"pod doctor","B":"pod health","C":"pod verify","D":"pod inspect"},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'pod doctor' helps detect environment issues.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command updates all dependencies ignoring Podfile.lock?",
+"options":{"A":"pod update","B":"pod install","C":"pod refresh","D":"pod upgrade"},
+"answer":"A"
+},
+
+{
+"question":"Which Podfile directive allows using frameworks instead of static libraries?",
+"options":{"A":"use_frameworks!","B":"enable_frameworks","C":"framework_mode","D":"frameworks!"},
+"answer":"A"
+},
+
+{
+"question":"True or False: 'use_frameworks!' forces CocoaPods to integrate pods as dynamic frameworks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Podfile directive enables modular headers?",
+"options":{"A":"use_modular_headers!","B":"modular_headers","C":"headers!","D":"enable_headers"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command installs dependencies without integration?",
+"options":{"A":"pod install --no-integrate","B":"pod install --skip-integrate","C":"pod install --manual","D":"pod install --no-build"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods dependency resolution may change versions when Podfile constraints change.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command shows information about a pod on trunk?",
+"options":{"A":"pod trunk info","B":"pod trunk show","C":"pod trunk view","D":"pod trunk describe"},
+"answer":"A"
+},
+
+{
+"question":"Which CocoaPods command removes cached versions of a specific pod?",
+"options":{"A":"pod cache clean PodName","B":"pod cache delete PodName","C":"pod cache remove PodName","D":"pod cache reset PodName"},
+"answer":"A"
+},
+
+{
+"question":"True or False: CocoaPods is open-source.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+  ]
+}

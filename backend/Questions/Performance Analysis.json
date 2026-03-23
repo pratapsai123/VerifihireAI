@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Performance Analysis", 
+  "questions": [
+    {
+    "question": "In performance analysis, what does 'Response Time' technically measure?",
+    "options": {
+      "A": "The time it takes for a developer to respond to an email.",
+      "B": "The total time elapsed from when a user sends a request until the system provides a complete response.",
+      "C": "The physical speed of the keyboard being typed on.",
+      "D": "The number of users logged into the system at one time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Throughput' refers to the number of requests a system can handle within a specific unit of time (e.g., requests per second).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are standard 'Hardware Utilization' metrics? (Select all that apply)",
+    "options": {
+      "A": "CPU Usage",
+      "B": "Memory (RAM) Usage",
+      "C": "Disk I/O",
+      "D": "The brightness of the monitor"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Latency' in a networking context?",
+    "options": {
+      "A": "The total size of the data being sent.",
+      "B": "The time delay between a request and the start of the response.",
+      "C": "The color of the ethernet cable.",
+      "D": "The number of servers in a data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'Load Testing'?",
+    "options": {
+      "A": "To see if the server can physically hold the weight of a heavy computer.",
+      "B": "To verify that the system performs as expected under the anticipated volume of users.",
+      "C": "To find all the logical bugs in the source code.",
+      "D": "To increase the internet speed of the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A system's performance always improves linearly as you add more CPU cores.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the maximum load a system can handle before its performance begins to degrade significantly?",
+    "options": {
+      "A": "Breakpoint",
+      "B": "Saturation Point",
+      "C": "Baseline",
+      "D": "Resting State"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Bottleneck' mean in performance analysis?",
+    "options": {
+      "A": "A physical blockage in the water cooling system.",
+      "B": "A single component that limits the overall performance of the entire system.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The end of a project where no more work can be done."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are types of Performance Testing? (Select all that apply)",
+    "options": {
+      "A": "Stress Testing",
+      "B": "Endurance (Soak) Testing",
+      "C": "Scalability Testing",
+      "D": "Keyboard Latency Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Scalability' is the ability of a system to handle increased load by adding more resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Stress Testing'?",
+    "options": {
+      "A": "To measure the stress levels of the developers.",
+      "B": "To determine the breaking point of the system by applying extreme load.",
+      "C": "To ensure the UI is visually appealing.",
+      "D": "To backup the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In performance reporting, what does the '90th Percentile' indicate?",
+    "options": {
+      "A": "90% of the requests were faster than this value.",
+      "B": "The average response time multiplied by 0.9.",
+      "C": "The score the server got on its health check.",
+      "D": "That the test was 90% successful."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric tracks the amount of data transferred over a network connection in a given time?",
+    "options": {
+      "A": "Latency",
+      "B": "Bandwidth",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: High CPU utilization (e.g., 99%) always indicates a performance problem.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Endurance Testing' (Soak Testing) used for?",
+    "options": {
+      "A": "To see how fast a user can click buttons.",
+      "B": "To identify issues like memory leaks that only appear over long periods of continuous load.",
+      "C": "To test the physical durability of the server rack.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is usually responsible for distributing incoming network traffic across multiple servers?",
+    "options": {
+      "A": "Database Engine",
+      "B": "Load Balancer",
+      "C": "Compiler",
+      "D": "File System"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Think Time' is the simulated delay between user actions in a performance test script.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Baseline' in performance testing?",
+    "options": {
+      "A": "A line drawn at the base of the server room wall.",
+      "B": "A set of performance measurements taken under normal conditions to serve as a comparison point.",
+      "C": "The minimum number of users required to start a test.",
+      "D": "A way to count the number of lines in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can cause high 'Disk I/O' wait times? (Select all that apply)",
+    "options": {
+      "A": "Slow hard drive speeds",
+      "B": "Large database queries without proper indexing",
+      "C": "High volume of log file writing",
+      "D": "Too many tabs open in a web browser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Ramp-up' time refer to in a load test?",
+    "options": {
+      "A": "The time it takes to turn on all the office lights.",
+      "B": "The period during which the number of virtual users is gradually increased.",
+      "C": "The speed of the server's fans.",
+      "D": "The time it takes to delete old test data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Wait Time' is the time a request spends in a queue before being processed by the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance metric is most critical for a real-time video streaming service?",
+    "options": {
+      "A": "Batch processing speed",
+      "B": "Jitter and Latency",
+      "C": "The number of lines of code",
+      "D": "The size of the server room"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Leak'?",
+    "options": {
+      "A": "When the computer forgets where it stored a file.",
+      "B": "When an application fails to release memory it no longer needs, eventually exhausting system resources.",
+      "C": "When a physical RAM stick breaks.",
+      "D": "When data is leaked to the public internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Horizontal Scaling'?",
+    "options": {
+      "A": "Replacing a small server with a bigger, more powerful one.",
+      "B": "Adding more server instances to a pool to share the load.",
+      "C": "Scaling a 3D model horizontally.",
+      "D": "Increasing the size of the font in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Standard Deviation' in performance reports helps identify how much the response times vary from the average.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Spike Testing'? (Select all that apply)",
+    "options": {
+      "A": "A sudden, extreme increase in user load",
+      "B": "Verifying how the system handles rapid bursts of traffic",
+      "C": "Testing the sharpness of the server rack edges",
+      "D": "Checking system recovery after the load returns to normal"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Context Switching' in terms of CPU performance?",
+    "options": {
+      "A": "Switching the lights off in the office.",
+      "B": "The process of the CPU switching from one process or thread to another, which incurs a small overhead.",
+      "C": "Changing the topic of a meeting.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'SLA' (Service Level Agreement)?",
+    "options": {
+      "A": "A physical agreement signed in ink.",
+      "B": "A contract or target that defines required performance levels (e.g., 99.9% uptime).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Virtual Users' are software-simulated users used to generate load on a system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'Resource Contention'?",
+    "options": {
+      "A": "The server becomes 100% more efficient.",
+      "B": "Performance degradation because multiple processes are fighting for the same resource (like a database lock).",
+      "C": "Hiring a new manager for the project.",
+      "D": "The computer screen turning blue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric measures the percentage of requests that failed during a performance test?",
+    "options": {
+      "A": "Success Rate",
+      "B": "Error Rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Performance analysis should ideally take place only after the software is fully developed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical Scaling'?",
+    "options": {
+      "A": "Adding more servers to a list.",
+      "B": "Increasing the capacity of a single server (e.g., adding more RAM or CPU).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Scaling a chart vertically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can negatively impact 'Web Page Load Time'? (Select all that apply)",
+    "options": {
+      "A": "Unoptimized, high-resolution images",
+      "B": "Too many external JavaScript files",
+      "C": "Slow server-side processing",
+      "D": "The color of the website background"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'MTBF' stand for in performance and reliability?",
+    "options": {
+      "A": "Mean Time Between Failures",
+      "B": "Maximum Total Byte Frequency",
+      "C": "Modular Task Build Format",
+      "D": "Main Technical Business Function"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cold Cache' refers to a system state where no data is pre-loaded in memory, often resulting in slower initial performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to simulate heavy user load for web applications?",
+    "options": {
+      "A": "Apache JMeter",
+      "B": "Adobe Photoshop",
+      "C": "Microsoft Excel",
+      "D": "Notepad++"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Concurrency' in a performance context?",
+    "options": {
+      "A": "The number of users registered in the database.",
+      "B": "The number of tasks or requests being handled at the exact same time.",
+      "C": "A specialized software for architects.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Response Time'?",
+    "options": {
+      "A": "The mathematical average of all response times recorded.",
+      "B": "The response time of the most difficult user.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Network 'Jitter' is the variation in the delay of received packets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are metrics tracked in a 'Server Health' dashboard? (Select all that apply)",
+    "options": {
+      "A": "Uptime",
+      "B": "Average Load",
+      "C": "Network In/Out",
+      "D": "The brand of the server's CPU"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Garbage Collection' (GC) impact on performance?",
+    "options": {
+      "A": "Hiring a person to clean the office.",
+      "B": "Automatic memory management that can cause brief 'pauses' in application execution.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance', what is 'Profiling'?",
+    "options": {
+      "A": "Analyzing a person's behavior.",
+      "B": "Using a tool to measure where an application spends its time and resources at the code level.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a Content Delivery Network (CDN) can help reduce latency for users located far from the main server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Performance Tuning'? (Select all that apply)",
+    "options": {
+      "A": "Optimizing SQL queries",
+      "B": "Adjusting server configuration settings",
+      "C": "Replacing a mouse with a faster one",
+      "D": "Compressing web assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Warm-up' time for an application?",
+    "options": {
+      "A": "Turning on the physical heater.",
+      "B": "A period during which a system's components (like JIT compilers) reach a steady state after starting.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Active Threads'?",
+    "options": {
+      "A": "A measure of how many virtual users are currently sending requests.",
+      "B": "A list of clothes developers wear.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Disk Queue Length' is the number of I/O requests waiting for the disk to become available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Database' performance metrics? (Select all that apply)",
+    "options": {
+      "A": "Query execution time",
+      "B": "Connection pool usage",
+      "C": "Buffer cache hit ratio",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Throughput' 'Degradation'?",
+    "options": {
+      "A": "When throughput increases to infinite.",
+      "B": "When a system handles fewer requests per second as the load continues to increase.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Auto-scaling'?",
+    "options": {
+      "A": "Scaling a fish automatically.",
+      "B": "A feature that automatically adds or removes computing resources based on actual traffic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Round-robin' is a simple method for a load balancer to distribute traffic equally among servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Environmental' factors for performance? (Select all that apply)",
+    "options": {
+      "A": "Network bandwidth",
+      "B": "Server CPU type",
+      "C": "Available RAM",
+      "D": "The brand of the keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Response' 'Time' 'Variance'?",
+    "options": {
+      "A": "The amount of change or inconsistency in response times across a test run.",
+      "B": "A way to count the number of characters.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'P99' latency?",
+    "options": {
+      "A": "The response time that 99% of users were faster than.",
+      "B": "The response time that was 99% accurate.",
+      "C": "A security scan for database viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Over-provisioning' is the practice of allocating more resources than are typically needed to handle peak load.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'End-to-End' performance? (Select all that apply)",
+    "options": {
+      "A": "Performance from the user's browser back to the user's browser",
+      "B": "Includes network, server, and client processing time",
+      "C": "Only includes the time the database took",
+      "D": "The total time for a complete transaction"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cold' 'Startup' time?",
+    "options": {
+      "A": "Starting the server in the winter.",
+      "B": "The time it takes for an application or service to start when it has not been recently used.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to fix a system failure.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resource' 'Contention' occurs when two or more threads try to access a shared resource at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Throughput' metrics? (Select all that apply)",
+    "options": {
+      "A": "Transactions per second",
+      "B": "Hits per second",
+      "C": "Bytes per second",
+      "D": "Minutes per request"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Pagination' impact on performance?",
+    "options": {
+      "A": "Reducing load by fetching data in small chunks instead of all at once.",
+      "B": "Increasing the number of pages in a book.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Health' 'Check'?",
+    "options": {
+      "A": "A person named Health checking the office.",
+      "B": "A periodic request sent to a server to verify that it is still functioning correctly.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Response Time' is always the same as 'Latency'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Performance' 'Goals'? (Select all that apply)",
+    "options": {
+      "A": "Meeting SLA requirements",
+      "B": "Improving user satisfaction",
+      "C": "Reducing infrastructure costs",
+      "D": "Making the code look pretty"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Resource' 'Allocation'?",
+    "options": {
+      "A": "Allocating physical resources like paper.",
+      "B": "Assigning computing resources to tasks based on real-time demand.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific metric is most useful for identifying 'Tail Latency' issues that affect a small but significant percentage of users?",
+    "options": {
+      "A": "Average Response Time",
+      "B": "99th Percentile (P99) Response Time",
+      "C": "Total Throughput",
+      "D": "Median (P50) Response Time"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Distributed Architecture', a performance bottleneck in a single downstream microservice can cause a 'Cascading Failure' across the entire system if timeouts are not properly configured.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common symptoms of 'Database Connection Pool Exhaustion'? (Select all that apply)",
+    "options": {
+      "A": "Rapidly increasing response times for queries",
+      "B": "HTTP 504 Gateway Timeout errors",
+      "C": "CPU utilization dropping to near 0% on the web server",
+      "D": "Application logs showing 'Connection refused' or 'Timeout' errors while acquiring a connection"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Knee of the Curve' in a Load vs. Response Time graph?",
+    "options": {
+      "A": "The point where the system is completely idle.",
+      "B": "The point where response time begins to increase rapidly as resources reach their saturation limit.",
+      "C": "The point where the throughput is at its absolute minimum.",
+      "D": "The point where the server room temperature is highest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Java performance tuning, what does a 'Stop-the-World' event refer to?",
+    "options": {
+      "A": "The server being physically unplugged.",
+      "B": "A pause in application execution while the Garbage Collector clears memory.",
+      "C": "A network outage affecting global users.",
+      "D": "The end of a performance test run."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vertical Scaling' (adding more RAM/CPU to one machine) is generally more complex to implement than 'Horizontal Scaling' (adding more machines).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thrashing' in the context of Memory Management?",
+    "options": {
+      "A": "A physical defect in a hard drive.",
+      "B": "A state where the system spends more time swapping data between RAM and Disk than executing actual instructions.",
+      "C": "A specialized tool for measuring keyboard speed.",
+      "D": "Increasing the frame rate of a video by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Little’s Law' as applied to performance engineering?",
+    "options": {
+      "A": "Throughput = Latency / Concurrency",
+      "B": "The average number of items in a system equals the average arrival rate multiplied by the average time an item spends in the system.",
+      "C": "Response time is always 10% of throughput.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of using 'Sticky Sessions' in a Load Balancer configuration? (Select all that apply)",
+    "options": {
+      "A": "Uneven distribution of load if some users have very heavy sessions",
+      "B": "Difficulty in scaling down individual servers without dropping user data",
+      "C": "Complete loss of session data if a specific server fails",
+      "D": "The font color of the UI changing randomly"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Ramp-down' is a critical phase in performance testing where users are gradually removed to verify that the system successfully releases allocated resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a high 'I/O Wait' percentage on a Linux server typically indicate?",
+    "options": {
+      "A": "The CPU is too fast for the memory.",
+      "B": "The CPU is idle while waiting for the storage system (Disk or Network) to complete data requests.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should an API return if a user exceeds the allowed 'Rate Limit' defined in the SLA?",
+    "options": {
+      "A": "401 Unauthorized",
+      "B": "429 Too Many Requests",
+      "C": "503 Service Unavailable",
+      "D": "400 Bad Request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Baseline' used for in a Regression Performance Test?",
+    "options": {
+      "A": "A line drawn at the bottom of a report.",
+      "B": "A reference result from a previous 'Known Good' run to determine if new code has introduced performance degradation.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Asynchronous Processing' (using message queues) can improve the 'Perceived' response time for a user, even if the actual task takes a long time to complete.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Profiling' techniques? (Select all that apply)",
+    "options": {
+      "A": "CPU Sampling (taking snapshots of stack traces)",
+      "B": "Instrumentation (adding timing code to every function)",
+      "C": "Memory Dump analysis (viewing object allocation)",
+      "D": "Hiring a professional actor to read logs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Serialization Overhead'?",
+    "options": {
+      "A": "The cost of printing serial numbers on hardware.",
+      "B": "The CPU and memory time required to convert objects into a transportable format (like JSON or Protobuf) and back.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance', what is 'Warm-up' of the JIT (Just-In-Time) compiler?",
+    "options": {
+      "A": "Running the code multiple times so the compiler can optimize the frequently used 'Hot' paths.",
+      "B": "Turning on the server 30 minutes early.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'MTU' (Maximum Transmission Unit) sizes on a network can lead to packet fragmentation and significant performance loss.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Component-Level' performance testing? (Select all that apply)",
+    "options": {
+      "A": "Testing only the database speed",
+      "B": "Isolating a single microservice with mocks for all dependencies",
+      "C": "Testing the entire application end-to-end",
+      "D": "Finding bottlenecks in a specific algorithm"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap Fragmentation' in managed memory languages?",
+    "options": {
+      "A": "Breaking a physical memory stick.",
+      "B": "Small gaps of unusable memory between allocated objects that prevent large objects from being stored despite enough total free space.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Response Time Percentile' vs 'Average' significance?",
+    "options": {
+      "A": "Averages are for experts; Percentiles for beginners.",
+      "B": "Averages can hide outliers (outlying slow requests); Percentiles show exactly what the worst-case users are experiencing.",
+      "C": "Percentiles are 100x faster than averages.",
+      "D": "Averages are used for mobile apps only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stateless' application is generally much easier to scale horizontally than a 'Stateful' one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' caching strategy involves pre-loading data into the cache based on predicted user behavior?",
+    "options": {
+      "A": "Write-through caching",
+      "B": "Cache Warming (or Predictive Prefetching)",
+      "C": "Least Recently Used (LRU) eviction",
+      "D": "Static caching"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tail Drop' in a network router?",
+    "options": {
+      "A": "When a router physically drops off a desk.",
+      "B": "When a network queue is full and the router starts discarding all new incoming packets.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Load Shedding'?",
+    "options": {
+      "A": "Shedding physical weight from a server.",
+      "B": "A defense mechanism where a system starts rejecting new low-priority requests to preserve resources for existing or high-priority tasks.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cores' refers to a performance issue where an application is single-threaded and cannot utilize more than one CPU core regardless of how many are available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Web' performance optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Minification of JS and CSS",
+      "B": "Image Compression",
+      "C": "Enabling Gzip or Brotli compression",
+      "D": "Changing the font size of the code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database Query Plan' analysis?",
+    "options": {
+      "A": "Analyzing a person's plan for the database.",
+      "B": "Reviewing the steps the DB engine takes (e.g., Index Scan vs. Sequential Scan) to identify why a query is slow.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Standard Deviation' in a performance chart?",
+    "options": {
+      "A": "The amount of variation in response times; a high value indicates inconsistent performance (jitter).",
+      "B": "A list of developers who deviated from the plan.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Connection Leak' occurs when an application opens a database connection but fails to close it, eventually causing the system to run out of available connections.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' performance factors? (Select all that apply)",
+    "options": {
+      "A": "Instance Type (Compute optimized vs Memory optimized)",
+      "B": "Region/Availability Zone distance",
+      "C": "Storage I/O limits (IOPS)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Synthetic Monitoring'?",
+    "options": {
+      "A": "Monitoring physical synthetic materials.",
+      "B": "Simulating user interactions with a system at regular intervals from different global locations to measure uptime and performance.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'APDEX' (Application Performance Index)?",
+    "options": {
+      "A": "A tool for indexing actual physical papers.",
+      "B": "An open standard that measures user satisfaction with the response time of software applications.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Payload' occurs when the response size from an API is significantly larger than the client expected, leading to slow processing on the client side.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Stress' vs 'Load' Testing? (Select all that apply)",
+    "options": {
+      "A": "Load testing tests the 'Expected' load",
+      "B": "Stress testing tests the 'Beyond-Expected' load",
+      "C": "Load testing is only for mobile apps",
+      "D": "Stress testing identifies the breaking point"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource' 'Contention' 'Locking'?",
+    "options": {
+      "A": "Locking the physical server door.",
+      "B": "When a thread is blocked from proceeding because another thread holds a necessary lock on a shared resource.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Scaling' 'Lag'?",
+    "options": {
+      "A": "The delay between a traffic spike and the time it takes for new server instances to become ready to handle that traffic.",
+      "B": "Hiring a person to lag the server.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Timeouts' between a Load Balancer and a Web Server can cause requests to be dropped prematurely.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Micro-benchmarking'? (Select all that apply)",
+    "options": {
+      "A": "Testing the performance of a tiny piece of code (e.g., a single loop)",
+      "B": "Often misleading because they don't account for full system complexity",
+      "C": "Guaranteed to fix all server bugs",
+      "D": "Useful for optimizing specific low-level algorithms"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cold' vs 'Warm' storage in database performance?",
+    "options": {
+      "A": "Cold storage is in a freezer.",
+      "B": "Warm storage (RAM/SSD) is fast for active data; Cold storage (HDD/Archive) is slow but cheap for old data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Transactions per Second' (TPS) significance?",
+    "options": {
+      "A": "The speed at which a person walks.",
+      "B": "A measure of the total business volume the system can handle, indicating its true commercial capacity.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'JVM' 'Settings' (like improper Xmx or Xms values) can cause frequent and unnecessary Garbage Collection pauses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Regression'? (Select all that apply)",
+    "options": {
+      "A": "Running performance tests as part of a CI/CD pipeline",
+      "B": "Automatically failing a build if response times increase by > 10%",
+      "C": "Replacing the need for a human analyst",
+      "D": "Identifying slow commits early"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Connection' 'Pooling' efficiency?",
+    "options": {
+      "A": "Sharing a physical pool with developers.",
+      "B": "The ability to reuse existing database connections rather than creating a new one for every request, which reduces latency.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Time to First Byte' (TTFB)?",
+    "options": {
+      "A": "The time it takes for a user to eat.",
+      "B": "The measurement of how long it takes for a browser to receive the first byte of data from the server after making a request.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Load' 'Distributions' occur when a performance test uses a single IP address to simulate 10,000 users, leading the server to treat it as a DDoS attack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Resource' 'Saturation' metrics? (Select all that apply)",
+    "options": {
+      "A": "CPU Load Average",
+      "B": "Disk Queue Length",
+      "C": "TCP Retransmission rate",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Zombie' 'Process' impact on performance?",
+    "options": {
+      "A": "Hiring a person named Zombie.",
+      "B": "A process that has completed execution but still has an entry in the process table, potentially wasting OS resources if they accumulate.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Latency' 'Budget'?",
+    "options": {
+      "A": "The amount of money spent on latency.",
+      "B": "The total allowed response time for a request, divided among all the components (Service A, DB, Network) involved.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in performance occur when developers optimize for 'Clean Code' while the performance team optimizes for 'Execution Speed', which can lead to conflict.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Performance' 'Tools'? (Select all that apply)",
+    "options": {
+      "A": "LoadRunner",
+      "B": "Dynatrace",
+      "C": "AppDynamics",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Scalability' 'Ceiling'?",
+    "options": {
+      "A": "A ceiling made of servers.",
+      "B": "The point beyond which adding more resources no longer increases the performance of a system due to inherent architectural limits.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric that represents the average time a system operates before a failure occurs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a distributed system can cause performance drops if one service uses a slower, legacy API protocol compared to others.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Real' 'User' 'Monitoring' (RUM)? (Select all that apply)",
+    "options": {
+      "A": "Capturing performance data from actual users in their browsers",
+      "B": "Tracking actual clicks and load times in the wild",
+      "C": "Requires simulated virtual users",
+      "D": "Provides the most accurate view of the end-user experience"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Garbage' 'Collection' 'Throughput'?",
+    "options": {
+      "A": "The physical speed of a garbage truck.",
+      "B": "The percentage of total time the application spends doing actual work versus the time spent paused for memory management.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Request' 'Queue' 'Depth' significance?",
+    "options": {
+      "A": "The depth of a physical hole in the office.",
+      "B": "The number of requests waiting to be processed; a high value indicates the system is falling behind and response times will rise.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' 'Expectations' occur when code optimized for SSDs is run on legacy HDD servers, causing catastrophic I/O bottlenecks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Performance' 'Monitoring' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Monitoring both System (CPU/RAM) and Application (TTFB/TPS) metrics",
+      "B": "Setting up alerts for anomalous behavior",
+      "C": "Monitoring only the CPU",
+      "D": "Maintaining historical logs for trend analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory' 'Leak' 'Detection' strategy?",
+    "options": {
+      "A": "Wiping the memory of the computer.",
+      "B": "Running a system under constant load for a long time (Soak Test) and observing if memory usage never returns to the baseline.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Response' 'Time' vs 'P95' significance?",
+    "options": {
+      "A": "Mean is for mobile apps; P95 for desktops.",
+      "B": "Mean is the average; P95 shows the response time for the unluckiest 5% of users.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Configurations' in a Load Balancer can cause 'Session' 'Flapping', where a user is constantly bounced between different servers, losing their state.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Functional' performance goals? (Select all that apply)",
+    "options": {
+      "A": "Uptime of 99.99%",
+      "B": "Response time < 200ms",
+      "C": "The software must be easy to use",
+      "D": "Supporting 1,000 concurrent users"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Vertical' 'Scaling' 'Limit'?",
+    "options": {
+      "A": "Scaling a 3D model vertically.",
+      "B": "The physical limit of how much RAM or CPU can be added to a single server chassis.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Throughput' 'Variance'?",
+    "options": {
+      "A": "Hiring a person named Variance.",
+      "B": "The inconsistency in the number of requests handled per second, often indicating unstable network or background processes.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Code' 'Optimization' refers to a compiler optimizing code for a CPU instruction set that the target production server does not support.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "According to Gunther's 'Universal Scalability Law' (USL), what is the primary factor that causes a system's throughput to eventually decline (retrograde) as more resources are added?",
+    "options": {
+      "A": "Linear serialization of tasks.",
+      "B": "The overhead of inter-node communication and data consistency (Coherence).",
+      "C": "The physical heat generated by the extra CPU cores.",
+      "D": "The lack of available RAM in the primary node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a high-concurrency system, 'Lock Contention' can lead to 'Priority Inversion,' where a low-priority task prevents a high-priority task from executing by holding a required resource.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Coordinated Omission' in performance testing tools? (Select all that apply)",
+    "options": {
+      "A": "It occurs when a tool fails to measure the time a request spends in a queue before being sent.",
+      "B": "It results in reporting significantly lower latencies than users actually experience.",
+      "C": "It is caused by the test tool being blocked by the very system it is measuring.",
+      "D": "It only happens when testing physical hardware, not cloud instances."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical significance of 'eBPF' (Extended Berkeley Packet Filter) in modern performance analysis?",
+    "options": {
+      "A": "It is a new type of fiber optic cable for faster internet.",
+      "B": "It allows for high-performance, low-overhead tracing and monitoring directly within the Linux kernel without modifying the source code.",
+      "C": "It is a specialized compiler for translating Java to C++.",
+      "D": "It is a security protocol used to hide performance logs from hackers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In distributed tracing, what is a 'Span' in the context of an OpenTelemetry trace?",
+    "options": {
+      "A": "The total duration of the performance test run.",
+      "B": "The basic unit of work, representing a single operation or function call within a service.",
+      "C": "The physical distance between two data centers.",
+      "D": "The number of users currently hitting the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'NUMA' (Non-Uniform Memory Access) effects can cause significant performance variability in multi-socket servers if threads access memory controlled by a remote CPU socket.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric is most critical for diagnosing 'Micro-bursting' in a high-speed trading or financial application?",
+    "options": {
+      "A": "Average Hourly Throughput",
+      "B": "Micro-second level interface utilization",
+      "C": "Total Daily Error Rate",
+      "D": "The size of the SQL transaction log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TCP Head-of-Line Blocking' and how does it affect HTTP/2 performance?",
+    "options": {
+      "A": "A person blocking the line in the office cafeteria.",
+      "B": "When a single dropped packet causes all subsequent packets in the stream to wait, potentially negating the benefits of multiplexing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Kernel-level' performance bottlenecks? (Select all that apply)",
+    "options": {
+      "A": "Context Switching overhead",
+      "B": "Interrupt Storms (IRQ pressure)",
+      "C": "File Descriptor exhaustion",
+      "D": "CSS Z-index conflicts"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Clock' 'Rates' across a distributed cluster can lead to 'Clock Drift,' making it impossible to accurately calculate the duration of requests between services.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Copy-on-Write' (COW) and its impact on performance during memory allocation?",
+    "options": {
+      "A": "Copying actual physical paper in the office.",
+      "B": "An optimization strategy that delays the actual copying of data until a modification is made, which can cause sudden latency spikes during the write operation.",
+      "C": "A specialized security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical purpose of 'Flame Graphs' in performance profiling?",
+    "options": {
+      "A": "To visualize the temperature of the server room.",
+      "B": "To provide a visual representation of hierarchical stack traces, making it easy to identify the most frequent code paths (Hot spots).",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Advanced' caching anomaly occurs when multiple servers simultaneously realize a cache has expired and all hit the database at once?",
+    "options": {
+      "A": "Cache Eviction",
+      "B": "Cache Stampede (or Thundering Herd)",
+      "C": "Cache Penetration",
+      "D": "Static Caching"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in performance refers to the 'Clean Code' vs. 'Fast Code' debate, where abstraction layers needed for readability introduce significant micro-latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Capacity' 'Planning' benefits? (Select all that apply)",
+    "options": {
+      "A": "Predicting when resources will run out based on growth trends",
+      "B": "Optimizing cloud spend by identifying under-utilized instances",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Enabling accurate procurement of physical hardware"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Write-Ahead' 'Logging' (WAL) impact on DB performance?",
+    "options": {
+      "A": "Logging the developer's mood before they write code.",
+      "B": "Ensuring data integrity by writing changes to a sequential log before the data files, which can create a disk I/O bottleneck under heavy write load.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Service' 'Mesh' 'Observability' overhead?",
+    "options": {
+      "A": "The extra latency and CPU cycles consumed by sidecar proxies (like Envoy) while capturing performance data.",
+      "B": "The weight of the physical mesh used to filter dust.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Queues' occur when an upstream service has a larger concurrency limit than its downstream dependent, leading to saturation and high wait times at the downstream service.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero-Copy' 'I/O'?",
+    "options": {
+      "A": "Moving data between kernel and user space without redundant memory copies to significantly reduce CPU usage during file transfers.",
+      "B": "A printer that never makes copies.",
+      "C": "Hiring 100 extra developers.",
+      "D": "Deleting all copies of the data for security."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Am dahl’s Law' specifically used to calculate?",
+    "options": {
+      "A": "The price of the office coffee.",
+      "B": "The theoretical maximum speedup of a system when only a part of it is improved or parallelized.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Network' 'Jitter' vs 'Latency'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Latency is the delay; Jitter is the variation or inconsistency in that delay over time.",
+      "C": "Jitter is for experts; Latency for beginners.",
+      "D": "Latency is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Instruction' 'Sets' (e.g., AVX-512) can cause performance drops if an application is compiled for a feature the production CPU does not support, forcing emulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Profiling'? (Select all that apply)",
+    "options": {
+      "A": "Identifying when a code change increases memory allocation per request",
+      "B": "Detecting increases in CPU cycles for specific API endpoints",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Enabling performance-based 'Quality Gates' in CI"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap' 'Dump' 'Analysis'?",
+    "options": {
+      "A": "Dumping the physical garbage at the office.",
+      "B": "Examining a snapshot of all objects in memory to identify leaks or excessive memory consumption.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'P99.99' latency significance in Banking?",
+    "options": {
+      "A": "The response time for the unluckiest 0.01% of transactions, critical for ensuring reliability in high-stakes environments.",
+      "B": "The response time that was 99.99% accurate.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'JVM' 'Garbage' 'Collectors' (e.g., G1 vs. ZGC) can lead to vastly different performance characteristics under the same application load.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Load' 'Balancing' 'Algorithms'? (Select all that apply)",
+    "options": {
+      "A": "Least Response Time",
+      "B": "Weighted Round Robin",
+      "C": "IP Hash",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Frequency' 'Scaling' (Throttling) and its effect on performance?",
+    "options": {
+      "A": "Throttling a person name Dynamic.",
+      "B": "When the CPU reduces its speed to prevent overheating, causing unpredictable performance drops during heavy load.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Time' 'Wait' 'Saturation' in TCP?",
+    "options": {
+      "A": "When a server runs out of ephemeral ports because too many connections are in the TIME_WAIT state, preventing new connections.",
+      "B": "The time it takes for a user to wait for a physical package.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Storage' 'IOPS' occurs when a database's peak demand exceeds the maximum Input/Output Operations Per Second supported by the cloud storage volume.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Chaos' 'Performance' 'Testing'? (Select all that apply)",
+    "options": {
+      "A": "Measuring performance while backend pods are being randomly killed",
+      "B": "Verifying recovery time while network latency is being fluctuated",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Checking performance during a simulated region-wide power outage"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Thread' 'Starvation'?",
+    "options": {
+      "A": "A thread that has not eaten any physical food.",
+      "B": "When a process cannot gain access to CPU time or resources because other high-priority processes are constantly using them.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Inter-Service' 'Latency' in microservices?",
+    "options": {
+      "A": "The time spent communicating between services across the network, which adds to the total user response time.",
+      "B": "The time between two services in a physical church.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Serialization' occurs when a producer uses Gzip and the consumer expects Brotli, causing a processing failure or extreme latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Performance' 'Metrics'? (Select all that apply)",
+    "options": {
+      "A": "Infrastructure Cost per Transaction",
+      "B": "SLA Compliance Rate",
+      "C": "Mean Time Between Performance Regressions",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Prefetching' 'Inefficiency'?",
+    "options": {
+      "A": "Fetching too much physical paper.",
+      "B": "Loading data into cache that is never used, wasting bandwidth and cache space.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cold' 'Cache' 'Penalty'?",
+    "options": {
+      "A": "A fine paid for having a cold server.",
+      "B": "The significant increase in latency for the first few requests to a system before the data is cached in memory.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a Load Balancer can cause 'Session' 'Persistence' failures if one server instance uses an incompatible session schema.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced' 'Database' 'Indexing' for performance? (Select all that apply)",
+    "options": {
+      "A": "Covering Indexes",
+      "B": "Partial Indexes",
+      "C": "Bitmap Indexes",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Memory' 'Paging' 'Overhead'?",
+    "options": {
+      "A": "The cost of paging a person in the office.",
+      "B": "The performance cost of the OS moving blocks of memory between physical RAM and Disk (Swap).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Throughput' 'Limit' vs 'Bandwidth' 'Limit'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Bandwidth is the capacity of the pipe; Throughput is how much data is actually flowing through it.",
+      "C": "Throughput is for experts; Bandwidth for beginners.",
+      "D": "Bandwidth is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a performance test succeeds on a 64-core machine but the production environment is constrained to 4-core containers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Bottleneck' 'Detection' using ML? (Select all that apply)",
+    "options": {
+      "A": "Automatically correlating latency spikes with CPU steal time",
+      "B": "Identifying anomalous database lock durations",
+      "C": "Guaranteed to replace all performance analysts",
+      "D": "Using historical data to flag 'Sudden Performance Regressions'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Context' 'Switch' 'Profiling'?",
+    "options": {
+      "A": "Profiling a person who switches contexts.",
+      "B": "Measuring the frequency and duration of CPU switches between tasks to identify 'High Contention' in multi-threaded code.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' (MTTR) performance?",
+    "options": {
+      "A": "The average time it takes to restore a broken chair.",
+      "B": "The average duration from a performance degradation event until the system returns to its normal baseline.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in performance occur when 'Feature Velocity' is prioritized over 'Reliability Engineering,' leading to unmonitored technical debt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Performance' 'Monitoring' 'Layers'? (Select all that apply)",
+    "options": {
+      "A": "Infrastructure Layer (Cloud metrics)",
+      "B": "Platform Layer (K8s/JVM metrics)",
+      "C": "Application Layer (APM/Business logic)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Buffer' 'Bloat'?",
+    "options": {
+      "A": "The physical buffer gaining weight.",
+      "B": "When large network buffers cause high latency by queuing packets for too long instead of dropping them during congestion.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' 'Leak' 'Trend'?",
+    "options": {
+      "A": "A visualization showing a slow, steady increase in memory or file descriptor usage over time under a constant load.",
+      "B": "A trend of leaking actual water in the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Timezones' in distributed logs can make it extremely difficult to identify the 'Root Cause' of a performance issue that spans multiple regions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Synthetic' 'Monitoring' 'Capabilities'? (Select all that apply)",
+    "options": {
+      "A": "Global Latency Heatmaps",
+      "B": "Simulating multi-step user workflows",
+      "C": "Identifying regional ISP outages",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Predictive' 'Auto-scaling'?",
+    "options": {
+      "A": "Predicting when a scale will break.",
+      "B": "Using machine learning to anticipate traffic spikes and scale resources *before* the load actually hits the system.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Remediations' (MTBR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between when a performance fix is applied and the next time the system fails to meet its SLA.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocol' 'Overhead' occurs when choosing verbose JSON over binary Protobuf for a high-frequency, low-latency microservice communication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Load' 'Balancing' 'Re-balancing'? (Select all that apply)",
+    "options": {
+      "A": "Moving traffic away from nodes showing high error rates",
+      "B": "Optimizing traffic distribution based on real-time server CPU temperature",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Dynamic weighting of servers based on response time"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Efficiency'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The ratio of total system throughput to the theoretical maximum based on the current resource allocation.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Tail' 'Latency' 'Analysis'?",
+    "options": {
+      "A": "Analyzing the tail of a physical cat.",
+      "B": "Focusing on the outliers (P99+) to identify components that are intermittently slow and negatively affecting the overall user experience.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Persistence' 'Strategies' occur when a high-write application uses a standard relational database instead of a write-optimized NoSQL database or append-only log.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Garbage' 'Collection' 'Metrics'? (Select all that apply)",
+    "options": {
+      "A": "Promotion Rate (from Young to Old gen)",
+      "B": "Allocation Rate",
+      "C": "Survivor Space Overflow Frequency",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logical' 'Saturation' in a distributed system?",
+    "options": {
+      "A": "Saturation of a person named Logical.",
+      "B": "When a system reaches a limit on non-hardware resources, such as available worker threads, database connection IDs, or open file descriptors.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC)?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average duration from when a performance degradation is detected until it is isolated and no longer affecting the majority of users.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' 'Expectations' occur when a system is designed to scale horizontally but uses a single global lock that causes serialization at high load.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Capacity' 'Governance' 'Factors'? (Select all that apply)",
+    "options": {
+      "A": "Multi-year traffic forecasting",
+      "B": "Infrastructure budget allocation",
+      "C": "Vendor SLA verification",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inter-Process' 'Communication' (IPC) 'Latent' 'Risk'?",
+    "options": {
+      "A": "Communicating with a person who is late.",
+      "B": "The performance overhead of moving data between different processes on the same machine, which can become a bottleneck as a system is split into microservices.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Performance' 'Baseline' 'Drift'?",
+    "options": {
+      "A": "The slow degradation of system performance over many months that is difficult to detect between individual small updates.",
+      "B": "A drift made of physical paper reports.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Optimization' occurs when a developer spends weeks optimizing a function that accounts for only 0.01% of the total request duration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Profiling' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Automated Flame Graph generation for every failed build",
+      "B": "Capture of GC logs during load tests",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Snapshots of the thread dump at the point of saturation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Micro-benchmark' 'Validation' 'Fallacy'?",
+    "options": {
+      "A": "Validating a micro-benchmark using a physical scale.",
+      "B": "The mistaken belief that performance results from a small, isolated code test will accurately predict performance in a complex, multi-threaded production environment.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

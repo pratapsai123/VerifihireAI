@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Application Security", 
+  "questions": [
+    {
+    "question": "In Application Security, what does the 'C' in the CIA Triad stand for?",
+    "options": {
+      "A": "Compliance",
+      "B": "Confidentiality",
+      "C": "Concurrency",
+      "D": "Calculation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Authentication' is the process of verifying who a user is, while 'Authorization' is the process of verifying what they have access to.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common security vulnerability where an attacker injects malicious scripts into a web page viewed by other users?",
+    "options": {
+      "A": "SQL Injection",
+      "B": "Cross-Site Scripting (XSS)",
+      "C": "Buffer Overflow",
+      "D": "Broken Pipe"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Multi-Factor Authentication' (MFA)?",
+    "options": {
+      "A": "To make the login process faster for the user.",
+      "B": "To add an extra layer of security by requiring at least two pieces of evidence to prove identity.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "To increase the frame rate of the login screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are considered 'Sensitive Data' that must be protected in an application? (Select all that apply)",
+    "options": {
+      "A": "Passwords",
+      "B": "Credit Card Numbers",
+      "C": "Personally Identifiable Information (PII)",
+      "D": "The color of the application's footer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'HTTPS' provide that standard 'HTTP' does not?",
+    "options": {
+      "A": "A faster physical connection speed.",
+      "B": "Encryption of data in transit between the browser and the server.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "The ability to use SQL queries in the URL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Strong Password' should ideally contain a mix of uppercase letters, lowercase letters, numbers, and special characters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific vulnerability occurs when an application includes untrusted data in a database query without proper validation?",
+    "options": {
+      "A": "Cross-Site Request Forgery (CSRF)",
+      "B": "SQL Injection (SQLi)",
+      "C": "Insecure Deserialization",
+      "D": "Logic Bomb"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Firewall' in application security?",
+    "options": {
+      "A": "To physically extinguish fires in the server room.",
+      "B": "To monitor and control incoming and outgoing network traffic based on predetermined security rules.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hashing' a password is the same as 'Encrypting' a password because both can be easily reversed to see the original text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is the most secure way to store user passwords in a database?",
+    "options": {
+      "A": "Plain text",
+      "B": "Base64 encoding",
+      "C": "Salted and Hashed (e.g., using bcrypt)",
+      "D": "Encrypted with a static key"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Reporting', what does 'CVE' stand for in the context of security vulnerabilities? (Select all that apply)",
+    "options": {
+      "A": "Common Vulnerabilities and Exposures",
+      "B": "Central Virtual Environment",
+      "C": "Custom Variable Entry",
+      "D": "Company Value Evaluation"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What is a 'Brute Force' attack?",
+    "options": {
+      "A": "Attacking a server with physical brute force.",
+      "B": "An attack that uses trial-and-error to guess login info, encryption keys, or find a hidden web page.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Default Passwords' for administrative interfaces is a common security misconfiguration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Input Validation'?",
+    "options": {
+      "A": "Validating the physical input of a keyboard.",
+      "B": "The process of ensuring that a program operates on clean, correct, and useful data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Least Privilege' principle?",
+    "options": {
+      "A": "Giving every user 'Admin' rights to avoid permission issues.",
+      "B": "Giving users only the minimum levels of access or permissions needed to perform their job functions.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Social Engineering' relies on technical exploits rather than human interaction to trick people into breaking security procedures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Patch' in a security context?",
+    "options": {
+      "A": "A physical piece of cloth to clean servers.",
+      "B": "An update to a software program to fix a bug or a security vulnerability.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Attack Surface'?",
+    "options": {
+      "A": "The total sum of all points (the 'attack vectors') where an unauthorized user can try to enter data to or extract data from an environment.",
+      "B": "A physical surface like a table that is under attack.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data at Rest' refers to data that is currently moving through a network, such as through an API call.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods to secure a 'REST API'? (Select all that apply)",
+    "options": {
+      "A": "Using OAuth2 for authentication",
+      "B": "Implementing Rate Limiting",
+      "C": "Buying physical snack for the office",
+      "D": "Validating all incoming JSON payloads"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Encryption'?",
+    "options": {
+      "A": "The process of encoding information so that only authorized parties can access it.",
+      "B": "Writing code in a dark room.",
+      "C": "A Strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Penetration Testing'?",
+    "options": {
+      "A": "An authorized simulated cyberattack on a computer system, performed to evaluate the security of the system.",
+      "B": "A physical fight in the server room.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Web Application Firewall' (WAF) is designed to protect web applications by filtering and monitoring HTTP traffic between a web application and the Internet.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Sanitization' in security? (Select all that apply)",
+    "options": {
+      "A": "Cleaning the physical office desks",
+      "B": "Removing or neutralizing potentially harmful characters from user input",
+      "C": "Escaping characters before they are used in a SQL query",
+      "D": "Ensuring data conforms to a specific format"
+    },
+    "answer": ["B", "C", "D"]
+  },
+  {
+    "question": "What is 'Session Hijacking'?",
+    "options": {
+      "A": "Stealing a physical session chair.",
+      "B": "The exploitation of a valid computer session to gain unauthorized access to information or services in a computer system.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Exposure' in AppSec?",
+    "options": {
+      "A": "A measure of the potential loss or damage from a security threat, calculated as Probability * Impact.",
+      "B": "The amount of time a server is physically exposed to the sun.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in security occurs when a company promises 24-hour response to a breach but lacks a dedicated incident response team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Security Headers'? (Select all that apply)",
+    "options": {
+      "A": "Content-Security-Policy (CSP)",
+      "B": "Strict-Transport-Security (HSTS)",
+      "C": "The SQL query parser",
+      "D": "X-Frame-Options"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Denial of Service' (DoS)?",
+    "options": {
+      "A": "Denying service to a person named Service.",
+      "B": "A cyberattack in which the perpetrator seeks to make a machine or network resource unavailable to its intended users.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Vulnerability Scanning'?",
+    "options": {
+      "A": "Scanning a physical building for cracks.",
+      "B": "The automated process of identifying security weaknesses and flaws in systems and software.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Insecure Direct Object References' (IDOR) happens when an application provides direct access to objects based on user-supplied input.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Encryption at Rest'? (Select all that apply)",
+    "options": {
+      "A": "Encrypting data stored on a hard drive",
+      "B": "Encrypting data stored in a database",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Protecting data while it is being backed up to a tape"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Making a physical model of a person who is a threat.",
+      "B": "A process by which potential threats can be identified, enumerated, and prioritized from an attacker's point of view.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediate' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to fix a security vulnerability after it has been discovered.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer waits for a security scan that never actually finishes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' AppSec tools? (Select all that apply)",
+    "options": {
+      "A": "Snyk",
+      "B": "Checkmarx",
+      "C": "Veracode",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Audit' Readiness in AppSec?",
+    "options": {
+      "A": "Being ready for a physical audit of the office furniture.",
+      "B": "Ensuring all security controls and documentation are in place to pass a formal security audit (e.g., SOC2, ISO 27001).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Density' in security?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The number of security vulnerabilities found per 1,000 lines of code.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a security patch is tested on a staging server that has different security configurations than the production server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Security' Awareness Training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on identifying phishing emails",
+      "B": "Training on secure coding practices for developers",
+      "C": "Identifying program satisfaction trends",
+      "D": "Guaranteed to replace all human managers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Least Privilege'?",
+    "options": {
+      "A": "A physical privilege that is very small.",
+      "B": "An information security concept in which a user is given the minimum levels of access necessary to complete a task.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' Aging?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing how long vulnerabilities have remained unpatched since their discovery.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a client tries to communicate with a server using an outdated, insecure encryption protocol (like SSLv3).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Security stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CISO (Chief Information Security Officer)",
+      "B": "Compliance Officer",
+      "C": "DevOps Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Access' Control?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "A security technique that can be used to regulate who or what can view or use resources in a computing environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Compliance' Variance?",
+    "options": {
+      "A": "The difference between the required security standards and the organization's actual security posture.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a security scanner polls a large repository every 1 second, causing it to crash.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Security Testing benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant identification of common vulnerabilities (SAST/DAST)",
+      "B": "Consistency in result presentation for leadership",
+      "C": "Guaranteed to replace all human security analysts",
+      "D": "Reduction in manual code review effort"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'White-Box' Security Testing?",
+    "options": {
+      "A": "Testing a white-colored box.",
+      "B": "A method of security testing that examines the internal structures or workings of an application.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Security' ROI?",
+    "options": {
+      "A": "A metric that calculates the value provided by security investments, often measured by cost of prevented breaches.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when an application logs too much sensitive information, like credit card numbers or passwords.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' AppSec management roles? (Select all that apply)",
+    "options": {
+      "A": "Security Architect",
+      "B": "AppSec Engineer",
+      "C": "Incident Responder",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' Analysis in AppSec?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The process of identifying and assessing potential security threats and vulnerabilities in an application.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD) a breach?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average time it takes for an organization to become aware of a security incident.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in AppSec refers to using a legacy firewall that cannot handle the throughput of a modern 10Gbps network.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' Security? (Select all that apply)",
+    "options": {
+      "A": "Ensuring security policies are understandable by non-technical staff",
+      "B": "Actively seeking diversity in the cybersecurity team",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a 'No-Blame' culture for reporting security incidents"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Data' Integrity?",
+    "options": {
+      "A": "The assurance that data has not been altered or tampered with by unauthorized parties.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking the duration of application uptime before a security incident or crash occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a security clearance to be granted in exactly 48 hours without a background check.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Management'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging known CVEs in dependencies",
+      "B": "Predicting which code changes are most likely to introduce a bug",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing trends in security metrics over time"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Encryption at Rest'?",
+    "options": {
+      "A": "Protecting data while it is stored on a disk or in a database.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Security' Scorecard?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report that provides a high-level overview of an organization's overall security health.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an external security vendor fails to provide the monthly compliance report as agreed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Compliance standards? (Select all that apply)",
+    "options": {
+      "A": "PCI-DSS",
+      "B": "HIPAA",
+      "C": "GDPR",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' Hygiene?",
+    "options": {
+      "A": "The regular, routine practices performed to maintain basic security health (like updating software).",
+      "B": "Building a physical warehouse for security.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical mechanism of a 'Server-Side Request Forgery' (SSRF) attack?",
+    "options": {
+      "A": "The attacker forces the victim's browser to send a request to a third-party site.",
+      "B": "The attacker abuses server-side functionality to read or update internal resources that are not normally accessible from the public internet.",
+      "C": "The attacker fills the server's hard drive with physical junk files.",
+      "D": "The attacker guesses the administrator's password using a dictionary file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'DevSecOps' model, security scanning (SAST/DAST) should only occur once the code has been fully deployed to the Production environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific component of a 'JSON Web Token' (JWT) is technically responsible for ensuring that the token payload has not been tampered with?",
+    "options": {
+      "A": "The Header",
+      "B": "The Payload",
+      "C": "The Signature",
+      "D": "The SQL query parser"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the technical objective of 'Insecure Deserialization' exploits?",
+    "options": {
+      "A": "To physically unplug the server from the wall.",
+      "B": "To manipulate serialized objects to pass harmful data into the application logic, often leading to Remote Code Execution (RCE).",
+      "C": "A specialized software for architects to design data centers.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which aspect of 'OAuth2' is technically used to provide 'Identity' information about the user, essentially acting as the login layer?",
+    "options": {
+      "A": "The Access Token",
+      "B": "OpenID Connect (OIDC)",
+      "C": "The Client ID",
+      "D": "Hiring a professional actor to represent the user"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in AppSec occurs when the 'Vulnerability Disclosure Policy' promises a 48-hour fix for Critical bugs, but the 'Sprint Cycle' is locked at 2 weeks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Strategic Security', what is 'Dynamic Application Security Testing' (DAST) technically intended to provide?",
+    "options": {
+      "A": "The physical weight of the application's source code.",
+      "B": "An analysis of the application in its running state to find vulnerabilities like XSS or SQLi by simulating external attacks.",
+      "C": "A security scan for database hardware viruses.",
+      "D": "Increasing the size of the font on the developer's monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Salt' in the context of password hashing logic?",
+    "options": {
+      "A": "A physical condiment used in the office kitchen.",
+      "B": "Unique, random data added to each password before hashing to prevent 'Rainbow Table' attacks.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Zero Trust' architecture principles? (Select all that apply)",
+    "options": {
+      "A": "Never trust, always verify",
+      "B": "Assume the network is already compromised",
+      "C": "Explicitly verify every access request based on context",
+      "D": "Allowing all internal traffic to bypass firewalls"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Static Application Security Testing' (SAST) finds technical bugs by executing the code and monitoring its memory usage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of 'Rate Limiting' as a security control?",
+    "options": {
+      "A": "The physical cost of moving a server to a new room.",
+      "B": "Preventing automated attacks like 'Brute Force' or 'DDoS' by restricting the number of requests a user can make in a timeframe.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a security incident?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The duration from the first signal of an attack until the security team officially identifies and logs the breach.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Assertion' should a security lead use when a developer claims a vulnerability is a 'False Positive'?",
+    "options": {
+      "A": "Accepting the claim immediately to maintain a good relationship.",
+      "B": "Requiring a technical 'Proof of Concept' (PoC) or a documented risk-acceptance sign-off from the business owner.",
+      "C": "Refusing to speak to the developer until the bug is fixed.",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in AppSec occur when an organization claims to value 'Privacy' while storing unencrypted customer data in public S3 buckets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Interactive' 'Application' 'Security' 'Testing' (IAST)? (Select all that apply)",
+    "options": {
+      "A": "Combining elements of SAST and DAST in real-time",
+      "B": "Deploying an agent inside the application to monitor code execution",
+      "C": "Guaranteed to replace all human security leads",
+      "D": "Identifying vulnerabilities by observing data flow within the running app"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Software' 'Composition' 'Analysis' (SCA)?",
+    "options": {
+      "A": "A physical manual for building server racks.",
+      "B": "The process of identifying and managing security vulnerabilities in open-source libraries and third-party dependencies.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Criticality' 'Ratio'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The percentage of 'Critical' and 'High' severity bugs relative to the total number of identified security flaws.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a security scanner polls a CI/CD job for results every 1 second, causing 'Job Congestion' in the build agent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' AppSec framework handles 'Secrets' management?",
+    "options": {
+      "A": "Hardcoding them in the source code",
+      "B": "A dedicated Secrets Vault (e.g., HashiCorp Vault or AWS Secrets Manager)",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XML' 'External' 'Entity' (XXE) and why is it dangerous?",
+    "options": {
+      "A": "A physical entity that lives in the office building.",
+      "B": "A vulnerability that allows an attacker to interfere with an application's processing of XML data, potentially leading to local file disclosure.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Security' 'Orchestration'?",
+    "options": {
+      "A": "The automated coordination of disparate security tools and workflows to improve incident response and vulnerability management.",
+      "B": "Hiring a person named Orchestration.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a security tool is configured to scan for 'Java 8' vulnerabilities while the application is actually running on 'Java 21'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'AppSec' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Privacy & Compliance Lead",
+      "C": "DevOps / Infrastructure Manager",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'IT' risk for a security lead?",
+    "options": {
+      "A": "Leading a team in a dark room.",
+      "B": "The use of hardware or software within an organization without the explicit approval or knowledge of the IT or Security department.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Security' 'Burn-down' 'Velocity'?",
+    "options": {
+      "A": "Analytics of a person named Velocity.",
+      "B": "A metric tracking how quickly identified security vulnerabilities are being fixed compared to the rate at which new ones are being discovered.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated DAST scan takes 12 hours to run but is triggered for every 'Git Commit' in a high-speed squad.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced' 'Authentication' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Passwordless (Biometrics / FIDO2)",
+      "B": "Adaptive Authentication (Risk-based prompts)",
+      "C": "Hiring 100 manual testers to verify IDs",
+      "D": "Single Sign-On (SSO) with SAML/OIDC"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Security' 'ROI' for an AppSec program?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The ratio of (Estimated Cost of a Data Breach * Probability) to the (Total Cost of Security Controls and Labor).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Remediate' (MTTR) a 'Critical' bug?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a critical vulnerability being logged until the fix is deployed to Production.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 security tool attempts to use 'TLS 1.3' features on a 2005 legacy server that only supports 'SSLv3'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Compliance'? (Select all that apply)",
+    "options": {
+      "A": "Generating immutable audit logs for every PR security approval",
+      "B": "Verifying that 'Auth tokens' are redacted in all logs automatically",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring all 'Critical' CVEs have a linked Jira ticket before release"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Bias' in security code review?",
+    "options": {
+      "A": "The tendency to skip reviewing code from a 'Senior Developer' because the reviewer assumes they don't make security mistakes.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Security' 'Debt'?",
+    "options": {
+      "A": "The cumulative future cost of security vulnerabilities that are 'deferred' (not fixed) to meet short-term release deadlines.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a security clearance to be granted instantly without any verification logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'AppSec' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Regulatory Compliance (GDPR/SOC2)",
+      "B": "Brand Reputation Protection",
+      "C": "Customer Data Privacy requirements",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Security' logic in a DevOps squad?",
+    "options": {
+      "A": "Hiring servants to write security tests.",
+      "B": "The security team provides automated, self-service tools and clear documentation so developers can find and fix bugs without being blocked.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' 'Inventory' 'Maturity'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The degree to which an organization has an automated, real-time list of all applications, APIs, and microservices in its environment.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Security Researcher' a computer that is too slow to run modern decompiler or scanning software.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'AppSec' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which business units have the highest 'Vulnerability Density'",
+      "B": "Predicting which code changes are most likely to introduce a bug via ML",
+      "C": "Guaranteed to replace all human security analysts",
+      "D": "Analyzing trends in MTTR across different global squads"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in AppSec training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Secure Coding Pattern' can be 'Lifted' from one team and applied to another to reduce systemic risk.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Breaches' (MTBB)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A reliability metric track tracking the duration of application security stability before an incident is identified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Lead assigns 'Security Audit' tasks to a user but does not provide them with 'Read' access to the repository's main branch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'AppSec' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Security Engineering",
+      "B": "Head of Technical Recruitment",
+      "C": "Principal Security Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed Security squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The automated process of initializing a standard 'Security Tech Stack' (e.g., Snyk + Burp + Jira) to get a new team auditing within 24 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Compliance' 'Gates'?",
+    "options": {
+      "A": "The percentage of software releases that successfully passed all automated security and compliance checks on the first attempt.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects '100% Zero-Day Protection' for a project that was bootstrapped in 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for Security leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Security Champions' in engineering",
+      "B": "Predicting future breach probability based on current debt levels",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing team sentiment to identify 'Compliance Resistance'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in AppSec multi-tenancy?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Customer A' data is technically unreachable by 'Customer B' even if both share the same database server.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Policy' 'Violations' (MTBPV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational safety before a security guardrail is bypassed by a developer.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker bug' is based on 'Fixed Dates' rather than 'Current System Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Usability' security standards",
+      "B": "Keeping records updated with rapidly changing local privacy laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if leaders check boxes without actual verification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a secure authentication flow?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical details of 'Encryption' and 'Key Exchange' are hidden from the high-level business logic to prevent implementation errors.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Credential' 'Leak'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a secret being committed to a public repo until the 'Secrets Scanning' tool flags it for the Security lead.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a security lead enforces 2010 'Complexity' requirements (e.g. 8 chars) in a 2026 'Passwordless' or 'Passphrase' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'AppSec' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Principal Cloud Security Architect",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of SIEM, SAST/DAST, Vaults, and Identity Providers to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Posture' (MTRSP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant security control failure until the organization's safety baseline is restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after working on a security project for exactly 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Global Risk' heatmaps for the Board",
+      "B": "Reduction in manual administrative work for security leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a security pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Security Sprints' where each phase results in a specific, independently verifiable compliance score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in AppSec?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical security seat being vacated until the new hire is fully productive in the SOC.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 5 high-priority security audits to a single Architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Breach Probability' scores",
+      "B": "Predicting future market 'Security' needs based on user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Security Training' spend with 'Incident Reduction' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific security tool is developed and maintained, based on its reliability, integration depth, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major security strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in security leadership occur when the remediation timeline for a 'zero-day exploit' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Risk-Based Resource Allocation', how should a CISO technically model the 'Cost of Poor Security' (CoPS) relative to 'Opportunity Cost' during a digital transformation?",
+    "options": {
+      "A": "By counting the total number of SAST findings in the backlog.",
+      "B": "By calculating the 'Annual Loss Expectancy' (ALE) including remediation labor, brand equity loss, and regulatory fines, versus the 'Strategic Upside' of faster release cycles.",
+      "C": "By ensuring the security budget is exactly 10% of the total engineering spend.",
+      "D": "By requiring a physical sign-off from the Board for every code commit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Security Homeostasis' in an organization occurs when the implementation of better automated security tools leads developers to take higher risks in manual code reviews, effectively nullifying the net gain in safety.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique is used to predict the probability of a multi-stage attack (e.g., APT) by calculating the joint probability of failures across independent defensive layers?",
+    "options": {
+      "A": "Attack Tree Analysis with Bayesian Inference",
+      "B": "Linear Regression strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Security Asset Calibration' during a multi-national corporate merger?",
+    "options": {
+      "A": "To ensure both companies use the same physical office furniture.",
+      "B": "To standardize identity providers (IdP), encryption standards, and incident response playbooks across different legal jurisdictions to ensure a unified defensive posture.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive CISO dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Immutable Infrastructure' and how does it technically mitigate 'Configuration Drift' risks?",
+    "options": {
+      "A": "Making sure the servers are made of actual physical stone.",
+      "B": "A practice where servers are never modified after deployment; any change results in a new image being built and deployed, ensuring the environment always matches the 'Security-Verified' template.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the infrastructure-as-code repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Archetypes' occur when a 'Compliance-Driven' leader is kept in power during a 'Threat-Hunting' phase, often leading to a 'Check-the-box' culture that misses zero-day exploits.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Security Architect deliberately creating a 'Synthetic Incident' (Chaos Security) in production to verify if the 'Circuit Breakers' and 'Alerting' systems actually respond to a data exfiltration attempt?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Security Chaos Engineering)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Security' 'Fragility' and its relation to 'Single-Point-of-Failure' in a global authentication mesh?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The condition where a minor failure in a centralized IdP (cause) triggers a global 'Cascading Outage' across all interconnected SaaS and internal applications.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Defensive' ROI calculations for a strategic AppSec shift? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Recovery' (MTTR) post-breach",
+      "B": "Financial delta of 'Insurance Premium' reduction due to verified control maturity",
+      "C": "The cost of 'Developer Rework' avoided through Shift-Left SAST integration",
+      "D": "The number of cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the CISO level allows for 'Productive Friction', where security engineers can challenge the CTO's release timeline without fear of political retaliation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the context of advanced Threat Modeling?",
+    "options": {
+      "A": "The physical weight of the auditor's laptop.",
+      "B": "A leader's ability to identify non-obvious attack vectors in distributed systems where dependencies are 'Eventually Consistent'.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a breach decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Secret' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of splitting high-value encryption keys into multiple fragments (shards) distributed across different regions/administrators to prevent a single compromise from exposing the key.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' security behavior involves the leader absorbing the 'Anxiety' of a data breach to maintain the 'Operational Focus' of the incident response squad?",
+    "options": {
+      "A": "Micromanagement",
+      "B": "Emotional Containment (Buffer Leadership)",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a security merger often result in 'Process Rejection', where the acquired firm's 'Dev-First' culture ignores the parent company's 'Gated-Security' standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Security' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Identifying future 'Quantum-Safe' cryptography competencies today",
+      "B": "Objectively comparing internal vs. external candidate 'Resilience' scores",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic Thinking' capacity of potential Security Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in an Incident Retrospective?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Security Policy' (e.g. MFA requirements) is still valid given current attacker bypass techniques, rather than just fixing the single account.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Risk' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative risk of multiple 'Low-severity' bugs that, when chained together, allow for a 'Critical' exploit path.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Security' 'Inertia' occurs when an organization continues to invest in legacy 'Perimeter' defenses while its data has moved entirely to the 'Public Cloud'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Security' 'Governance' metrics for a CISO? (Select all that apply)",
+    "options": {
+      "A": "Risk-Adjusted Return on Security Investment (RARSI)",
+      "B": "Percentage of 'Crown Jewel' assets with verified 100% control coverage",
+      "C": "Mean Time to Global Patch (MTGP) for critical zero-days",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Entrenchment' risk during a 'Zero Trust' transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured managers will block 'Identity-Based' controls to protect their traditional 'Network-Zone' authority.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Security' 'Pivot' (MTTSP)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how quickly the organization can update its 'Threat Model' and 'Defense Stack' in response to a newly identified global exploit (e.g. Log4j).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a company demands 'Zero Breaches' while the executive bonus structure is tied exclusively to 'Rapid Release Throughput'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Threat' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Dark Web' chatter with internal asset vulnerabilities",
+      "B": "Automatically identifying 'Regulatory Blindspots' across global business units",
+      "C": "Guaranteed to replace all human CISOs",
+      "D": "Analyzing market data to predict 'Competitive Espionage' risks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Portfolio' 'Management' (SPM)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The high-level balancing of security investments across 'Defend', 'Detect', 'Respond', and 'Recover' modules to ensure systemic resilience.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Calibration' in a global security organization?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "Standardizing competency definitions for roles (e.g. 'Senior Security Architect') across different global hubs to ensure consistent incident response quality.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Quarterly ROI' from an AppSec program that requires a 3-year 'Architectural Refactor' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Governance' for Strategy? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging 'Business Units' that fall below a 'Security Maturity' baseline",
+      "B": "Dynamic adjustment of 'Budget' based on real-time threat landscapes",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying 'Third-Party' security compliance via automated API checks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Security Chart?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Strategic Security Policy' (Global) is isolated from 'Tactical Implementation' (Regional) to allow for localized agility without compromising global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High' 'Impact' 'Compliance' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a regulatory change (e.g. GDPR update) and the CISO's dashboard identifying the specific business units out of alignment.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a CISO reports '100% Patch Compliance' to the board while ignoring the fact that 'Critical' servers are excluded from the report scope.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Security' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Security Scorecards' directly to 'Merger & Acquisition' valuation tools",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Response' workflows",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Evidence' directly with 'Investor Relations' portals"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' orchestration for a new security operations center (SOC)?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common SIEM, IR, and Governance protocols to stabilize a new offshore security team immediately.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Control' 'Decay' Index?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'WAF' or 'AV' effectiveness as new bypass techniques emerge faster than rule updates.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Instant Global Compliance' with a new regulation (like EU AI Act) after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Risk' heatmaps for the CEO",
+      "B": "Reduction in manual 'Audit Prep' labor for security leads",
+      "C": "Guaranteed to replace all human CISOs",
+      "D": "Automatic generation of 'Policy Breach' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Strategic M&A Security?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Keeping the acquired company's 'High-Risk' systems logically separated from the parent network until a 'Zero-Trust' verification is completed.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'Trust' (MTRST)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a major security scandal (e.g. massive data leak) until the organization's 'Trust' scores with customers and regulators return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in security strategy refers to an organization promising '100% Uptime' for a legacy system that has no 'Disaster Recovery' (DR) site.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Governance' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Global Privacy Architect",
+      "C": "Director of Business Continuity",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' score?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Auto-failover Success', 'MTTR', 'Control Redundancy', and 'Backup Integrity' for critical asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Major' 'Escapes' (MTBME)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of production security stability before a 'Blocker/Critical' vulnerability is identified by an external party.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a CISO uses 1980s 'Gated-Security' models (approve at end) in a 2026 'Autonomous-Cloud' (Shift-Left) culture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in auditing subjective 'Company Culture' safety standards",
+      "B": "Keeping records updated with rapidly changing global 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Safety Confidence' if dashboards use unverified third-party scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Security' 'Maintainability'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Defensive Pipeline' can sustain major technological shifts without a systemic loss of release velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Global' 'Policy' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory trigger (e.g. a massive legal injunction) and the CISO's presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' in security occurs when 'Identity Logs' are stored on a server that only the 'Marketing' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Security' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Regulatory Compliance Leads",
+      "C": "Engineering Directors",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Security Intelligence' tools and 'Maturity Scoring' to a newly acquired engineering team within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Security Vision' and 'Tooling Stack' to stay current with technology.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'High-Fidelity' AI threat prevention for a system that is currently under 'Minimum Viable Product' (MVP) development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Security Asset' (e.g. Master Key) has zero backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human CISOs",
+      "D": "Tracking the 'Readiness' of the top 10% of global security talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Security Engineering?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Defense Strategy' can be 'Lifted' from one microservice (e.g. Order Entry) and applied to another (e.g. Shipping).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a security tool becoming 'Inactive' and the point where its 'Reliability' is restored to provide business value again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the Board of Directors expects 'Zero Release Delays' while the CISO is enforcing a 'Zero Critical CVE' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Security ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Security Leads",
+      "C": "Guaranteed to replace all human CISOs",
+      "D": "Instant generation of 'Breach-Cost-per-Asset' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Encapsulation' in a 'Micro-Segmented' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing the network structure so that a security failure in 'Service A' does not technically or culturally jeopardize the safety of 'Service B'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Security' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new technology (e.g. Web3) is introduced until the CISO identifies the necessary security standards to support it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' in AppSec occur when 'Architecture Audits' are planned annually, but 'Front-end' updates happen every 7 days, making the audit permanently legacy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'AppSec' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Strategic Transformation",
+      "B": "Global Release Train Engineer",
+      "C": "Chief Security Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Security' 'Bootstrap' complexity for a 'Turnaround' CISO?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of resetting an organization's 'Low-Safety/Legacy' security culture into a 'Modern/Proactive' engineering organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTBLE) in security?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the security leadership layer, identifying if 'Burnout' is causing frequent Director-level churn.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects a 'Shift-Left Culture' in a 10,000-person manual organization to be completed in 45 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Breach' mapping across global product lines",
+      "B": "Reducing the 'Vulnerability Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Security.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'AI-Defensive' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Investor' 'Security' 'Confidence' (MTR-ISC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical 'Data breach' disclosure until the organization's 'Trust' scores with institutional shareholders return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic security grid that prevents squad innovation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Defense vs. Response' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on incident history",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Analyzing the ROI of 'Security Automation' tools relative to manual labor costs automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Intent' (the What), allowing tools to be swapped without changing corporate standard.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

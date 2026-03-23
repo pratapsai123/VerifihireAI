@@ -1,5 +1,5 @@
-from ._imports import *
-from ._imports import _db_call_with_retry
+from .._imports import *
+from .._imports import _db_call_with_retry
 from api.utils.slot_utils import generate_slots_for_interviewer
 
 
@@ -1745,6 +1745,21 @@ def get_assessment_detail_view(request, assessment_id: int):
         except Assessment.DoesNotExist:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        # --- RBAC ownership check ---
+        # Verify the assessment belongs to the requesting user's invite tree.
+        # This prevents Admin A from reading Admin B's assessment even if they
+        # share the same company record.
+        user_profile = getattr(request.user, 'profile', None)
+        if user_profile:
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if scoped_ids is not None:
+                # scoped_ids = None means platform superadmin (can access all)
+                if a.user_profile_id not in scoped_ids:
+                    return Response(
+                        {'error': 'You do not have permission to access this assessment.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+
         if request.method == 'PATCH':
             data = request.data
             if 'name' in data: a.name = data['name']
@@ -1779,6 +1794,7 @@ def get_assessment_detail_view(request, assessment_id: int):
         print(f"Error in get_assessment_detail_view: {str(e)}")
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while fetching assessment: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 def _is_valid_pan(pan: str) -> bool:

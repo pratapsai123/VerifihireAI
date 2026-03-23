@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Threat Hunting", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of Threat Hunting?",
+    "options": {
+      "A": "To physically repair broken network cables in the data center.",
+      "B": "To proactively search through networks and datasets to detect malicious activity that has bypassed existing security solutions.",
+      "C": "To automatically send marketing emails to potential hackers.",
+      "D": "To eliminate the need for any firewalls or antivirus software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Threat Hunting is a reactive process that only begins after a security alert has been triggered by a SIEM or EDR.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Threat Hunting terminology, what is a 'Hypothesis'?",
+    "options": {
+      "A": "A physical tool used to measure server rack temperature.",
+      "B": "A proposed explanation or educated guess about how an attacker might be hiding in the network, used to guide a hunt.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "The SQL query used to delete old user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which globally recognized framework provides a knowledge base of adversary tactics and techniques used by hunters to map attacker behavior?",
+    "options": {
+      "A": "The periodic table strictly",
+      "B": "MITRE ATT&CK",
+      "C": "The ISO 9001 standard",
+      "D": "A specialized tool for measuring light levels"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common data sources used for Threat Hunting? (Select all that apply)",
+    "options": {
+      "A": "Endpoint process logs (e.g., Sysmon)",
+      "B": "Network flow data (NetFlow)",
+      "C": "DNS query history",
+      "D": "The brand of the office snacks"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dwell Time' in the context of Threat Hunting?",
+    "options": {
+      "A": "The time an analyst spends in the breakroom.",
+      "B": "The duration an attacker remains undetected within a target network.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IOCs' (Indicators of Compromise) like file hashes and IP addresses are the most difficult things for an attacker to change.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structured Hunting' based on?",
+    "options": {
+      "A": "Searching for random patterns in logs without a plan.",
+      "B": "Using specific tactics, techniques, and procedures (TTPs) and frameworks like MITRE ATT&CK to guide the search.",
+      "C": "Hiring a person named Hunter to watch the screen.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific layer of the 'Pyramid of Pain' is technically the most difficult for an attacker to overcome when discovered by a hunter?",
+    "options": {
+      "A": "Hash Values",
+      "B": "TTPs (Tactics, Techniques, and Procedures)",
+      "C": "IP Addresses",
+      "D": "Domain Names"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Threat Hunting is technically a 'Continuous' process rather than a one-time event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Proactive' security behavior?",
+    "options": {
+      "A": "Waiting for an antivirus pop-up to tell you there is a virus.",
+      "B": "Searching for unusual PowerShell execution patterns before an alert fires.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Data Normalization' technically defined as? (Select all that apply)",
+    "options": {
+      "A": "Ensuring logs from different sources use a common schema for easier searching",
+      "B": "Physically cleaning the dust off of server racks",
+      "C": "A critical step before performing cross-platform hunting queries",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is an 'Insider Threat'?",
+    "options": {
+      "A": "A threat actor who is technically an employee or contractor within the organization.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Triage' in hunting refers to the technical process of quickly investigating a discovery to determine if it is a real threat or a benign anomaly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lateral Movement'?",
+    "options": {
+      "A": "Techniques that adversaries use to move from one system to another within a network.",
+      "B": "Physically moving a desk from left to right.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common 'Host-based' hunting tool or source?",
+    "options": {
+      "A": "Using a physical key to open a safe.",
+      "B": "EDR (Endpoint Detection and Response) telemetry.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Successful Threat Hunting often leads to the creation of new automated detection rules in a SIEM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Intelligence' in the context of hunting?",
+    "options": {
+      "A": "Measuring the physical weight of a computer.",
+      "B": "Using data about known attackers and their methods to inform where and how to hunt.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "The average time it takes to identify a threat from the moment it enters the environment.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Threat Hunting technically requires a high degree of manual analysis and expert judgment compared to automated scanning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Hypothesis Generation'? (Select all that apply)",
+    "options": {
+      "A": "Focusing on a specific threat actor's known behaviors",
+      "B": "Looking at anomalies in high-value asset logs",
+      "C": "Buying physical snacks for the SOC team",
+      "D": "Predicting how an attacker might exploit a new vulnerability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Exfiltration'?",
+    "options": {
+      "A": "The technical process of an attacker stealing data and moving it out of the organization.",
+      "B": "Hiring a person named Data to leave the building.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'False Positive' management?",
+    "options": {
+      "A": "The technical process of identifying and ignoring benign activity that looks suspicious but is legitimate.",
+      "B": "Physically tagging a server with a sticker.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Crown Jewel' analysis helps hunters prioritize systems that contain the most sensitive or critical data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Hunting benefits? (Select all that apply)",
+    "options": {
+      "A": "Scaling hunting patterns across thousands of hosts instantly",
+      "B": "Reducing the manual labor of repeatable searches",
+      "C": "Guaranteed to replace all human threat hunters",
+      "D": "Identifying program satisfaction trends"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Persistent' malware?",
+    "options": {
+      "A": "Malware that technically re-installs itself or survives a system reboot.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Indicator of Attack' (IOA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A technical sign that an attack is currently in progress, focusing on behavior rather than static signatures.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Threat Hunting is technically the same as 'Vulnerability Scanning'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Threat Hunting platforms? (Select all that apply)",
+    "options": {
+      "A": "Splunk",
+      "B": "CrowdStrike Falcon",
+      "C": "The SQL query parser",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Beaconing'?",
+    "options": {
+      "A": "Building a physical bridge for a social event.",
+      "B": "Technical rhythmic signals sent by malware to a Command and Control (C2) server to check for instructions.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'SIEM' (Security Information and Event Management)?",
+    "options": {
+      "A": "A central technical system that aggregates and correlates logs for analysis and hunting.",
+      "B": "Hiring a person named SIEM.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A hunter should always start a hunt without any specific goals or questions in mind.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Threat Modeling'? (Select all that apply)",
+    "options": {
+      "A": "Identifying potential entry points for an attacker",
+      "B": "Scanning physical shipping containers",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Mapping out the likely path an adversary would take through a system"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'OSINT'?",
+    "options": {
+      "A": "Open Source Intelligence: information gathered technically from publicly available sources to aid a hunt.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Detection Gap'?",
+    "options": {
+      "A": "A technical area where an organization currently has zero visibility or monitoring coverage.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Threat Hunting technically helps to decrease the 'Dwell Time' of an attacker.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Hunting' metrics? (Select all that apply)",
+    "options": {
+      "A": "Number of new detection rules created",
+      "B": "Reduction in MTTD (Mean Time to Detect)",
+      "C": "The number of security cameras in the office",
+      "D": "Percentage of high-value assets covered by hunting missions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'DNS Tunneling'?",
+    "options": {
+      "A": "A technical method of using DNS queries to exfiltrate data or communicate with a C2 server, bypassing standard firewalls.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Contain' (MTTC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a threat being detected until technical action is taken to isolate or stop it.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Zero-Day' exploit is one that is technically known to the software vendor but has not been patched yet.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Hunt' Readiness? (Select all that apply)",
+    "options": {
+      "A": "Having historical logs available for searching",
+      "B": "Ensuring analysts have the technical skills to write queries (e.g., KQL or SPL)",
+      "C": "Identifying program satisfaction trends",
+      "D": "Having a clear list of the organization's 'Crown Jewels'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Process Tree' analysis?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "Examining the technical parent-child relationship between running programs to identify suspicious execution (e.g., Word launching PowerShell).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Alert Fatigue'?",
+    "options": {
+      "A": "When analysts are overwhelmed by a high volume of automated alerts, potentially leading to missed threats.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Threat Hunting is technically more about the 'Mindset' and 'Process' than it is about a specific single tool.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Threat Actor categories? (Select all that apply)",
+    "options": {
+      "A": "Cybercriminals",
+      "B": "Nation-States",
+      "C": "Hacktivists",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Memory' Forensics in hunting?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical analysis of a computer's RAM to find malware that is hiding and does not leave files on the hard drive.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Analyst Utilization'?",
+    "options": {
+      "A": "A metric tracking how much time a hunter spends on actual hunting vs. administrative tasks.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a forensic search to complete masterfully in exactly 1 second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'SOAR' Automation benefits? (Select all that apply)",
+    "options": {
+      "A": "Orchestrating complex response actions across multiple tools",
+      "B": "Consistency in how incidents are handled",
+      "C": "Guaranteed to replace all human IT staff",
+      "D": "Reduction in manual 'Containment' labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'PowerShell' hunting?",
+    "options": {
+      "A": "Searching for technical signs of malicious script execution using the built-in Windows PowerShell engine.",
+      "B": "Digging up a physical root in the office garden.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Intelligence Confidence'?",
+    "options": {
+      "A": "The level of certainty a hunter has in the quality and accuracy of a specific piece of threat intelligence.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a system is technically generating logs but the hunting platform is not ingesting them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Threat Hunting roles? (Select all that apply)",
+    "options": {
+      "A": "Threat Hunter",
+      "B": "SOC Analyst (Tier 2/3)",
+      "C": "Security Researcher",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Endpoint' Monitoring?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical process of collecting and analyzing data from individual computers and servers (endpoints) to detect threats.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Recovery' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration from a threat being discovered until a system is fully restored and technically secure.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an organization promises 'Real-time detection' but only performs hunting missions masterfully once per month.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' hunting planning? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all relevant IT and development teams are aware of hunting activities",
+      "B": "Conducting 'blind' alert triages to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where security is a shared technical responsibility"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Log Aggregation'?",
+    "options": {
+      "A": "The technical process of gathering logs from many different sources into a single central location for easier analysis.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'False Negative' rate?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The percentage of real attacks that technically occurred but were *not* identified by security controls or hunters.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when an Executive expects a single hunter to protect 100,000 servers masterfully with exactly 5 minutes of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Rule updating benefits? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all sensors receive the latest threat signatures instantly",
+      "B": "Predicting future 'Risk' trends based on historical hunting results",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Reducing the manual labor of updating blocking lists"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Priority Intelligence Requirement' (PIR)?",
+    "options": {
+      "A": "A specific technical or strategic question that an organization needs to answer to protect its critical assets.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Intel' sharing?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The process of providing discovered threat data to other organizations and industry groups to improve collective technical defense.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' refers to having a 'Decentralized' hunting team while using a 'Centralized' monolithic log storage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Threat Hunting priorities? (Select all that apply)",
+    "options": {
+      "A": "Detecting Advanced Persistent Threats (APTs)",
+      "B": "Protecting Customer PII",
+      "C": "Maintaining System Uptime",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Threat' Analysis?",
+    "options": {
+      "A": "The comprehensive technical process of evaluating data to identify patterns, TTPs, and potential motivations of attackers.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical hypothesis is an analyst testing when they search for 'PowerShell.exe' making external network connections on port 443 to non-standard domains?",
+    "options": {
+      "A": "Physical hardware theft",
+      "B": "Command and Control (C2) Beaconing",
+      "C": "Printer Driver misconfiguration",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Threat Hunting, 'Living-off-the-Land' (LotL) refers to attackers using legitimate system tools (like certutil.exe or wmic.exe) to carry out malicious actions, making detection more difficult.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Stacking' (or Least-Frequency Analysis) in a hunting dataset?",
+    "options": {
+      "A": "To physically stack server racks on top of each other.",
+      "B": "To identify outliers by counting the frequency of events (like process names or network destinations) and investigating the ones that occur least often.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Registry' location is a hunter most likely to investigate to identify technical 'Persistence' mechanisms on a Windows endpoint?",
+    "options": {
+      "A": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "B": "C:\\Windows\\System32\\Drivers",
+      "C": "The physical BIOS serial number",
+      "D": "Increasing the font size on the monitor tab"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of searching for 'Process Parent-Child' mismatches (e.g., 'cmd.exe' being launched by 'notepad.exe')?",
+    "options": {
+      "A": "It indicates a physical failure of the keyboard.",
+      "B": "It is a strong behavioral indicator of process injection or a malicious macro execution.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "To increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Entropy' in a network payload can technically indicate that an attacker is using encryption or obfuscation to hide data exfiltration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves searching for 'EncodedCommand' flags in PowerShell logs to find hidden malicious scripts?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Base64 Deobfuscation Analysis",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Indicator' 'Pivoting' technically used for during a hunt?",
+    "options": {
+      "A": "Rotating a physical monitor to show a colleague.",
+      "B": "Using one piece of discovered evidence (like a malicious IP) to search for related indicators (like a file hash or domain) across the entire dataset.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' hunting hypotheses for 'Lateral Movement'? (Select all that apply)",
+    "options": {
+      "A": "Identifying anomalous Kerberos Ticket Granting Service (TGS) requests",
+      "B": "Searching for unusual 'psexec' or 'WMI' execution between workstations",
+      "C": "Buying physical snacks for the SOC team",
+      "D": "Detecting new, unauthorized administrative shares (C$, ADMIN$)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Dynamic' 'Threat' 'Hunting' technically allows a hunter to pivot into 'Memory Forensics' to find rootkits that do not reside on the physical disk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'DNS' 'Exfiltration' hunting?",
+    "options": {
+      "A": "Hiring a person named DNS to sort mail.",
+      "B": "Identifying anomalous TXT or AAAA record queries that technically encode stolen data to bypass web proxies.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) in a hunting context?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The duration from an adversary's first technical action until the hunter identifies the activity as malicious.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Frequency' 'Analysis' on 'Process Command Lines' to identify rare and suspicious arguments?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Long-tail Analysis",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Timestamps' between a local workstation and the central SIEM can technically prevent a hunter from accurately correlating the sequence of an attack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Evasion' via 'Binary' 'Renaming'? (Select all that apply)",
+    "options": {
+      "A": "An attacker renaming 'mimikatz.exe' to 'svchost.exe' to avoid simple name-based detection",
+      "B": "Automatically hiding files in the recycle bin",
+      "C": "Guaranteed to replace all human network leads",
+      "D": "Moving a malicious file into the C:\\Windows\\Temp directory"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Trust' 'Relationship' hunting?",
+    "options": {
+      "A": "Building a physical warehouse for servers.",
+      "B": "Investigating how an attacker uses a compromised 'Trusted' third-party connection (like a VPN) to bypass perimeter defenses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Dwell' 'Time' 'Reduction'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric showing the decrease in the number of days an attacker is active before being caught, technically due to proactive hunting.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a hunter attempts to decrypt SSL/TLS traffic but the monitoring sensor technically lacks the private key to view the payload.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' hunting framework handles 'Adversary' 'Behavior' 'Cataloging'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "The MITRE ATT&CK Matrix",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scheduled' 'Task' 'Abuse' hunting logic?",
+    "options": {
+      "A": "Abusing a person name Schedule.",
+      "B": "Searching technical logs for new, unusual, or hidden scheduled tasks that an attacker uses to maintain persistence across reboots.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Execution' 'Environment' (EE) analysis for hunting?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "Analyzing whether a malicious script checks for 'Sandbox' artifacts (like CPU core counts or MAC addresses) before running its payload.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when an Executive expects a hunter to find a 'Zero-Day' in a dataset where the critical logs were technically never turned on.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Hunting' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Lead Detection Engineer",
+      "B": "CISO (Budget and Risk Alignment)",
+      "C": "Infrastructure Operations Lead",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Registry' 'Hiding' in a Windows hunting context?",
+    "options": {
+      "A": "Hiding the registry in a physical safe.",
+      "B": "Attacker techniques where malicious configurations are stored in 'null-terminated' registry keys that standard Windows tools cannot technically display.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Incident' 'High-Water' 'Mark'?",
+    "options": {
+      "A": "The average height of the water in the office cooler.",
+      "B": "The technical record of the most complex or damaging breach discovered through hunting, used to set the baseline for future defense.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a hunter attempts to run a query across 100,000 hosts simultaneously but the SIEM technically only allows 5 concurrent search threads.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Playbooks'? (Select all that apply)",
+    "options": {
+      "A": "Standardized KQL/SPL scripts that can be rerun every Monday morning",
+      "B": "SOAR workflows that automatically pull forensic artifacts when a specific hunt matches",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automated reporting of 'No threats found' to leadership"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Detection' 'Coverage' for a hunt?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score based on which MITRE ATT&CK techniques the current hunting queries technically cover across the environment.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a hunter discovering a live intruder until the technical isolation of the compromised host is confirmed.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Levels' occur when a hunter needs 'Command Line' telemetry but the system is technically only configured for 'Process Start' events.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits' for hunters? (Select all that apply)",
+    "options": {
+      "A": "Consistency in presenting 'Threat Landscapes' to the Board",
+      "B": "Automatically identifying 'Analyst Burnout' through ticket volume",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Real-time updates on 'Crown Jewel' monitoring health"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'WMI' 'Persistence' hunting logic?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Identifying malicious 'Event Consumers' and 'Filters' in the Windows Management Instrumentation technically used to execute code on startup.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Visibility' 'Debt'?",
+    "options": {
+      "A": "The future labor cost required to fix unmonitored systems that have been ignored, making them technically 'invisible' to the hunter.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a hunter is assigned to investigate 'Domain Controllers' but does not technically have 'Read' access to the AD logs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Hunting' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Reduction of 'Financial Impact' from a major breach",
+      "B": "Audit compliance for high-risk industries (Finance/Health)",
+      "C": "Avoiding 'Legal Liability' through proactive defense",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Hunting' logic in a DevOps squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The hunting team provides the 'Query Templates' and 'Telemetry Specs' so that App teams can hunt for their own vulnerabilities safely.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'True' 'Positive' 'Yield'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing the percentage of hunting missions that resulted in the discovery of actual malicious or unauthorized technical activity.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Threat Hunter' a computer that is too slow to run modern big-data analysis or local VM sandboxes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Telemetry' 'Validation'? (Select all that apply)",
+    "options": {
+      "A": "Identifying systems that have stopped sending critical security logs",
+      "B": "Predicting future 'Visibility Gaps' based on upcoming software patches",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Verifying that 'Sysmon' configurations are consistent across the global fleet"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in hunt automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful KQL query from one department and apply it to a global SIEM instance for enterprise-wide hunting.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a hunt identifying a 'Suspect' event until the lead confirms it is a 'True Positive' technical breach.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a hunter uses 2005 'Signature' logic for a 2026 'State-based' detection environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Hunting' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Security Operations",
+      "B": "Principal Forensic Architect",
+      "C": "Principal Detection Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed hunting squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Logging', 'Queries', and 'RBAC' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Purple' 'Team' 'Exercises'?",
+    "options": {
+      "A": "The percentage of 'Red Team' attacks that were successfully technically discovered by the 'Blue Team' hunters during a joint exercise.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Hunt Results' on 10PB of cold-storage logs that technically require 4 hours to rehydrate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Hunting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Unpatched Asset' counts",
+      "B": "Predicting future 'TTP' trends based on dark-web forum mentions",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing team sentiment to identify 'Hunt Fatigue'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Inventory' 'Isolation' in Multi-tenant Hunting?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Department A' analysts technically cannot search or see 'Department B' logs through restricted scopes and RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long a hunting baseline remains effective before a major technical change breaks it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hunting leadership occur when the remediation timeline for a 'High' discovery is based on 'Fixed Dates' rather than 'Current System Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Attacker Intent' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if hunting only checks 'Cloud' and ignores 'On-Prem' systems"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a hunting pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a hunt (the KQL/SPL query) is isolated from the 'What' (the TTP hypothesis), allowing for easy platform migrations.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Ghost' 'Admin'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an unauthorized administrative account being technically created and the hunter officially flagging it.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead enforces 2010 'Signature' logic for a 2026 'Stateless' cloud hunting environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Hunting' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Principal Infrastructure Architect",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Threat' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Logging, SIEM, SOAR, and EDR platforms to ensure a seamless and safe technical observation pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Visibility' (MTRV)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant logging failure until the organization's 'Hunting Baseline' is technically restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a hunter expects a 'Memory Dump' analysis to be masterfully delivered in exactly 1 second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Visibility Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for hunting leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Intel pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Hunt Sprints' where each phase results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in hunters?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical threat hunter seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority hunt missions to a single Architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Risk Surface' scores",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Training' spend with 'Hunt Success' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in hunting?",
+    "options": {
+      "A": "A rating of how well a specific system is developed, based on its log fidelity, search efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major hunt strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hunting leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-consequence environment, how should a Principal Hunter technically model 'Adversary Persistence' using a graph-theoretic approach to identify 'Silent' lateral movement?",
+    "options": {
+      "A": "By counting the total number of logs and assuming a linear progression of risk.",
+      "B": "By mapping technical 'Edge Weights' between identities and assets based on the frequency of 'Logon Type 3' vs 'Logon Type 10' events to identify anomalous hub-and-spoke patterns.",
+      "C": "By increasing the frequency of the EDR heartbeat signal to 100ms strictly.",
+      "D": "By requiring a manual board-level signature for every new service account created."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Hunting' 'Saturation' refers to the technical point where adding more telemetry (e.g. enabling Debug logs globally) results in a 'Negative Return' due to the overwhelming volume of data masking high-fidelity signals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Architect to predict the 'Evasion Probability' of a polymorphic malware variant based on its entropy levels in memory?",
+    "options": {
+      "A": "Monte Carlo Simulation of Binary Execution Paths",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Entropy-Based Beaconing' analysis when hunting for covert C2 (Command and Control) channels?",
+    "options": {
+      "A": "To ensure all server racks have the same physical weight.",
+      "B": "To identify non-rhythmic, encrypted traffic patterns that technically bypass standard 'Fixed-Interval' detection logic by simulating legitimate user web browsing.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live network flow dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Sigma' 'Rule' 'Abstraction' and how does it technically enable 'Cloud-Native' hunting across multi-SIEM environments?",
+    "options": {
+      "A": "When an employee physically performs the hunt manually.",
+      "B": "A generic open-source format that allows hunters to define 'Detection Logic' once and technically translate it into tool-specific queries like KQL, SPL, or QQL.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the hunt result summary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Forensic' 'Archetypes' occur when a 'Host-based' hunter attempts to find 'Fileless' malware using only 'Disk Integrity' checks, leading to a systemic visibility failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Hunter deliberately implementing 'Active Deception' (deploying high-value decoy credentials) to verify if an attacker is technically utilizing 'LSASS' memory dumping?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Active Defense (Deception Orchestration)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Visibility' 'Contagion' and its relation to 'End-to-End Encryption' in a modern network?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where the adoption of 'Encrypted Client Hello' (ECH) (cause) technically blinds the network-based hunter to malicious SNI-based exfiltration (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Hunting' ROI calculations for a strategic shift to 'Behavioral-Only' detection? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Identify' (MTTI) for Zero-Day LotL binaries",
+      "B": "Financial savings from 'Legacy Signature' license retirement",
+      "C": "The cost of 'Brand Reputation' preserved through 10-minute containment of APTs",
+      "D": "The number of security cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Hunting Leadership level ensures that 'Junior Analysts' can flag 'Broken Detection Rules' without fear of termination, allowing for systemic recovery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Threat Hunter's decision-making?",
+    "options": {
+      "A": "The physical weight of the 'Incident Response' binder.",
+      "B": "The ability to synthesize contradictory signals (e.g. valid admin login vs. anomalous file system entropy) into a cohesive 'Insider Threat' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Telemetry' 'Sharding' for forensic preservation?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of isolating 'Impacted' log segments to ensure they are 'Read-Only' locked while allowing a hunt to proceed in parallel on clean datasets.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' hunting behavior involves 'Pre-emptive Process Isolation' during a suspected supply-chain event?",
+    "options": {
+      "A": "Waiting for a CVE to be assigned to the binary.",
+      "B": "Immediately isolating all systems running the affected binary and revoking associated 'OIDC Tokens' before an exploit is observed.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a hunting acquisition often result in 'Detection Rejection', where the 'Rule-Based' team refuses to trust the 'Behavioral/ML' findings of the other firm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Hunt' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Attribution' risk competencies within the team",
+      "B": "Standardizing 'Hunt Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Hunting Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Threat Hunting Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Defense Strategy' itself (e.g. why we allow unmonitored SSH tunnels) is the cause of systemic failure, rather than just fixing a single detection gap.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in threat hunting?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Root Certificate' that is technically un-managed.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in hunting occurs when a firm continues to rely on 'Legacy Hash-Matching' in 2026, despite attackers using 'AI-Polymorphic' payloads that change on every execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Hunting' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Hunting Spend (RAROHS)",
+      "B": "Percentage of 'Business Critical' incidents preceded by a proactive hunt finding",
+      "C": "Velocity of 'Detection Cleanup' across the top 10% of noisy legacy rules",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Detection' 'Entrenchment' risk during a 'Zero Trust' monitoring transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured security admins will block 'Cloud-Native' monitoring to protect their manual 'Host-based' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally exceed the board-mandated 'Security Risk Appetite' limits.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CISO demands 'Zero Dwell Time' while the CEO only rewards the team for '100% Code Release Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Attacker Behavioral Sentiment' with internal breach telemetry",
+      "B": "Automatically identifying 'Log Source' gaps in real-time as a hunt unfolds",
+      "C": "Guaranteed to replace all human Lead Hunters",
+      "D": "Analyzing global metadata to predict 'Lateral Movement' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Ecosystem' 'Architecture' (SEA) for Hunting?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of EDR, SIEM, SOAR, and Identity logs into a single 'Unified Observation Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Log Detail' matches the parent company's 'Detection Standard' before merging data lakes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Breach Detection' from a newly hired team that requires 18 months of 'Environment Baselining' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of incident response actions for HIPAA/PCI auditors",
+      "B": "Automatically calculating 'Fair-Response' risk scores across global hubs",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are enforced via automated cloud policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Hunting Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Systemic Governance Policies' (the What) are isolated from 'Local Departmental Hunt Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major external '0-day' release and the Director officially flagging the total internal exposure count.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports 'Zero Breaches' to the board while the internal team is aware that 'Legacy Linux' units are technically un-monitored.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Hunting' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Developer Performance scores' directly to 'Resource Access' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Internal Scan' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Forensic Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Logging agents, SIEM-mapping, and BCP protocols to stabilize a new offshore office in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in hunting?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new cloud flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed cold storage after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Risk' heatmaps for the CEO",
+      "B": "Reduction in manual 'Deck-building' labor for the Security Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Hunting Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw Forensic Data' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Trust' (MTRST)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile detection failure (e.g. missing logs for 30 days) and the point at which 'Business Confidence' return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in hunting strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'Low-Budget' manual sampling model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Hunting' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Detection Engineering",
+      "B": "Chief Resilience Architect",
+      "C": "Director of Behavioral Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Log Uptime', 'MTTI', 'Control Redundancy', and 'Incident Response Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the hunting team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Cloud-Serverless' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Attacker Motivation' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade telemetry"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in SecOps?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Detection Pipeline' can sustain major technological shifts without a systemic loss of release velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in hunting auditing occurs when 'Forensic Data' is stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Hunting' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Internal Control Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Detection Intelligence' tools and 'Maturity Scoring' to a newly acquired network within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Hunting' 'Strategy' 'Refreshes' (MTBHSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Security Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a University Intern after exactly 48 hours of Hunting training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Hunt' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Detection Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global forensic talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Hunting Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Visibility Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Hunting' 'ROI' (MTR-HROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated visibility rule becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Hunting Budget Increase' while the Architect is enforcing a 'Global Data Lake' migration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Hunt' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Infrastructure ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Detection Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Security-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Monitoring Units' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in hunting?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new network threat vector is identified until the Lead specifies the necessary telemetry modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Detection Schemas' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Hunting' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Backbone' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' monitoring culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Management Burnout' is causing frequent strategic shifts in the hunting team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Hunt' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Threat' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hunting' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Hunting.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-hunt-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hunting' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic commit grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on hunt history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Hunt Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Hunt' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Hunt Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,1895 @@
+{ 
+  "skill": "R", 
+  "questions": [
+    {
+    "question": "Which operator is the standard assignment operator used in R?",
+    "options": {
+      "A": "==",
+      "B": "<-",
+      "C": "->>",
+      "D": ":="
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: R is a case-sensitive programming language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are basic data types in R? (Select all that apply)",
+    "options": {
+      "A": "Numeric",
+      "B": "Character",
+      "C": "Logical",
+      "D": "Tuple"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What function is used to combine multiple elements into a single vector?",
+    "options": {
+      "A": "combine()",
+      "B": "v()",
+      "C": "c()",
+      "D": "join()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you check the data structure or class of an object named 'my_data'?",
+    "options": {
+      "A": "type(my_data)",
+      "B": "class(my_data)",
+      "C": "struct(my_data)",
+      "D": "typeof(my_data)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In R, indices of a vector start at 0.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are used to create a Data Frame in R? (Select all that apply)",
+    "options": {
+      "A": "data.frame()",
+      "B": "as.data.frame()",
+      "C": "read.csv()",
+      "D": "make_frame()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the output of '5 %% 2' in R?",
+    "options": {
+      "A": "2.5",
+      "B": "1",
+      "C": "0",
+      "D": "2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to install a new package from CRAN?",
+    "options": {
+      "A": "get.package()",
+      "B": "add.library()",
+      "C": "install.packages()",
+      "D": "download.r()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A List in R can contain elements of different data types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which symbols are used to comment out code in R? (Select all that apply)",
+    "options": {
+      "A": "#",
+      "B": "//",
+      "C": "/*",
+      "D": "No multi-line comment symbol exists in R natively"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What function is used to display the first few rows of a data frame?",
+    "options": {
+      "A": "first()",
+      "B": "top()",
+      "C": "head()",
+      "D": "show()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you access the 'age' column in a data frame called 'df'?",
+    "options": {
+      "A": "df.age",
+      "B": "df$age",
+      "C": "df->age",
+      "D": "df@age"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'length()' function returns the number of characters in a string.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following functions can be used to read data from a file? (Select all that apply)",
+    "options": {
+      "A": "read.table()",
+      "B": "read.csv()",
+      "C": "read.delim()",
+      "D": "load.file()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'NA' represent in R?",
+    "options": {
+      "A": "Not Applicable",
+      "B": "Missing Value",
+      "C": "Name Absent",
+      "D": "Numerical Array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to view the structure of an object, including data types and sample values?",
+    "options": {
+      "A": "view()",
+      "B": "inspect()",
+      "C": "str()",
+      "D": "summary()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Matrices in R are two-dimensional and must contain elements of the same data type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are logical operators in R? (Select all that apply)",
+    "options": {
+      "A": "&",
+      "B": "|",
+      "C": "!",
+      "D": "not"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function to get the current working directory in R?",
+    "options": {
+      "A": "dir()",
+      "B": "getcwd()",
+      "C": "getwd()",
+      "D": "workdir()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you create a sequence of numbers from 1 to 10?",
+    "options": {
+      "A": "seq(1:10)",
+      "B": "1 to 10",
+      "C": "1:10",
+      "D": "list(1, 10)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'NaN' stands for 'Not a Number'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which packages are part of the 'tidyverse' collection? (Select all that apply)",
+    "options": {
+      "A": "ggplot2",
+      "B": "dplyr",
+      "C": "tidyr",
+      "D": "lattice"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the result of 'is.numeric(10L)'?",
+    "options": {
+      "A": "FALSE",
+      "B": "10",
+      "C": "TRUE",
+      "D": "Error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function provides a statistical summary of a data frame (mean, median, etc.)?",
+    "options": {
+      "A": "stats()",
+      "B": "describe()",
+      "C": "summary()",
+      "D": "report()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Logical values in R are TRUE, FALSE, and optionally T or F.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid ways to create a vector? (Select all that apply)",
+    "options": {
+      "A": "rep(1, 5)",
+      "B": "seq(1, 10, by=2)",
+      "C": "vector('numeric', 5)",
+      "D": "new_vector(1:5)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the function 'library()' do?",
+    "options": {
+      "A": "Downloads a package from the internet.",
+      "B": "Lists all books about R.",
+      "C": "Loads a package into the current session.",
+      "D": "Creates a new folder on the disk."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you name the rows of a matrix 'm'?",
+    "options": {
+      "A": "names(m)",
+      "B": "set.names(m)",
+      "C": "rownames(m)",
+      "D": "row.id(m)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Data Frames are actually specialized Lists.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which functions are used to manage the workspace? (Select all that apply)",
+    "options": {
+      "A": "ls()",
+      "B": "rm()",
+      "C": "getwd()",
+      "D": "clear()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary use of the 'dim()' function?",
+    "options": {
+      "A": "To dim the brightness of the console.",
+      "B": "To get or set the dimensions of an object.",
+      "C": "To calculate the density of a vector.",
+      "D": "To find the middle element."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In R, how do you specify 'not equal to'?",
+    "options": {
+      "A": "<>",
+      "B": "~=",
+      "C": "!=",
+      "D": "!=="
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: R supports object-oriented programming.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are looping structures in R? (Select all that apply)",
+    "options": {
+      "A": "for",
+      "B": "while",
+      "C": "repeat",
+      "D": "foreach (with package)"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What does the function 'ls()' do?",
+    "options": {
+      "A": "List all files in the current folder.",
+      "B": "List all packages installed.",
+      "C": "List all objects in the current environment.",
+      "D": "List all syntax errors."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you get help for a function like 'plot' in the R console?",
+    "options": {
+      "A": "help(plot)",
+      "B": "?plot",
+      "C": "man plot",
+      "D": "info(plot)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Factors are used to represent categorical data in R.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are used for subsetting a vector 'x'? (Select all that apply)",
+    "options": {
+      "A": "x[1]",
+      "B": "x[x > 5]",
+      "C": "x[c(1, 3)]",
+      "D": "x{1}"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function to delete an object from the environment?",
+    "options": {
+      "A": "delete()",
+      "B": "kill()",
+      "C": "rm()",
+      "D": "remove_obj()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you check if a value is 'NA'?",
+    "options": {
+      "A": "x == NA",
+      "B": "is.na(x)",
+      "C": "na.check(x)",
+      "D": "exists(x, 'NA')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'mean()' function handles NA values automatically by removing them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which functions can be used to view data? (Select all that apply)",
+    "options": {
+      "A": "print()",
+      "B": "View()",
+      "C": "tail()",
+      "D": "display()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What character is used to separate multiple arguments in a function?",
+    "options": {
+      "A": ";",
+      "B": ":",
+      "C": ",",
+      "D": "|"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you calculate the sum of a vector 'v'?",
+    "options": {
+      "A": "v.sum()",
+      "B": "total(v)",
+      "C": "sum(v)",
+      "D": "add(v)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can perform arithmetic operations on vectors of the same length element-wise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid variable names in R? (Select all that apply)",
+    "options": {
+      "A": "my_variable",
+      "B": "my.variable",
+      "C": ".myvariable",
+      "D": "2myvariable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What function is used to create a matrix?",
+    "options": {
+      "A": "new_matrix()",
+      "B": "array(..., dim=2)",
+      "C": "matrix()",
+      "D": "m()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'CRAN'?",
+    "options": {
+      "A": "A specific type of data frame.",
+      "B": "The Comprehensive R Archive Network.",
+      "C": "The main developer of the R language.",
+      "D": "A specialized plotting library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: R code blocks are defined using curly braces {}.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are comparison operators in R? (Select all that apply)",
+    "options": {
+      "A": ">=",
+      "B": "<=",
+      "C": "==",
+      "D": "=>"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'args(lm)' show you?",
+    "options": {
+      "A": "The results of the 'lm' function.",
+      "B": "The arguments required by the 'lm' function.",
+      "C": "The history of the 'lm' package.",
+      "D": "A list of all linear models."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you convert a character vector to a factor?",
+    "options": {
+      "A": "make.factor()",
+      "B": "to_factor()",
+      "C": "as.factor()",
+      "D": "cast_factor()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The function 'rm(list = ls())' clears the entire workspace.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which functions help you check the data type? (Select all that apply)",
+    "options": {
+      "A": "is.integer()",
+      "B": "is.character()",
+      "C": "is.logical()",
+      "D": "is.type()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the default value of the 'header' argument in 'read.csv()'?",
+    "options": {
+      "A": "FALSE",
+      "B": "NULL",
+      "C": "TRUE",
+      "D": "0"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you find the number of rows in a data frame 'df'?",
+    "options": {
+      "A": "rows(df)",
+      "B": "length(df)",
+      "C": "nrow(df)",
+      "D": "count(df)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Comments in R can be placed at the end of a line of code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are used to define a function in R? (Select all that apply)",
+    "options": {
+      "A": "function()",
+      "B": "{ }",
+      "C": "def",
+      "D": "return()"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the function to round a number to the nearest integer?",
+    "options": {
+      "A": "floor()",
+      "B": "ceiling()",
+      "C": "round()",
+      "D": "trunc()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you select the third row and second column of a matrix 'm'?",
+    "options": {
+      "A": "m(3, 2)",
+      "B": "m[2, 3]",
+      "C": "m[3, 2]",
+      "D": "m[[3, 2]]"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'head()' function by default shows the first 10 rows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are basic plot types in base R? (Select all that apply)",
+    "options": {
+      "A": "plot()",
+      "B": "hist()",
+      "C": "boxplot()",
+      "D": "chart()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'getwd()' stand for?",
+    "options": {
+      "A": "Get World Data",
+      "B": "Get Weekly Directory",
+      "C": "Get Working Directory",
+      "D": "Go to Web Document"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you check the version of R installed?",
+    "options": {
+      "A": "version()",
+      "B": "R.version",
+      "C": "Sys.version()",
+      "D": "info()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the up-arrow key in the R console to scroll through previous commands.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function in the 'dplyr' package is used to select specific columns from a data frame?",
+    "options": {
+      "A": "filter()",
+      "B": "pick()",
+      "C": "select()",
+      "D": "choose()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'lapply()' function always returns a list of the same length as the input.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of a 'ggplot2' plot? (Select all that apply)",
+    "options": {
+      "A": "Geoms (geometric objects)",
+      "B": "Aesthetics (mappings)",
+      "C": "Scales",
+      "D": "Pointers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of the 'pipe' operator '%>%' (found in magrittr/dplyr)?",
+    "options": {
+      "A": "To perform bitwise operations on vectors.",
+      "B": "To pass the result of one function as the first argument to the next.",
+      "C": "To create a connection to a SQL database.",
+      "D": "To filter out all rows containing NA values."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'sapply()' differ from 'lapply()'?",
+    "options": {
+      "A": "sapply() is faster for large datasets.",
+      "B": "sapply() attempts to simplify the result into a vector or matrix if possible.",
+      "C": "lapply() only works on data frames, while sapply() works on lists.",
+      "D": "There is no difference; they are aliases for the same function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In R, the 'double bracket' notation [[ ]] is used to extract a single element from a list, removing the list shell.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which functions can be used to join two data frames together? (Select all that apply)",
+    "options": {
+      "A": "inner_join()",
+      "B": "left_join()",
+      "C": "merge()",
+      "D": "combine_df()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary use of the 'factor()' function's 'levels' argument?",
+    "options": {
+      "A": "To set the height of a bar chart.",
+      "B": "To define the possible categories and their order for a categorical variable.",
+      "C": "To increase the numerical precision of a vector.",
+      "D": "To determine the number of rows in a matrix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'dplyr' function is used to create new columns based on existing ones?",
+    "options": {
+      "A": "create()",
+      "B": "mutate()",
+      "C": "transform()",
+      "D": "add_col()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'grep()' function searches for matches to an argument within a character vector using regular expressions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid ways to handle missing data in R? (Select all that apply)",
+    "options": {
+      "A": "na.omit()",
+      "B": "complete.cases()",
+      "C": "is.na()",
+      "D": "drop.na()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'apply()' function do when given a matrix and 'MARGIN = 2'?",
+    "options": {
+      "A": "Applies a function to each row.",
+      "B": "Applies a function to each column.",
+      "C": "Applies a function to the entire matrix at once.",
+      "D": "Applies a function to the diagonal elements only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the output of 'paste('A', 1:3, sep = '-')'?",
+    "options": {
+      "A": "'A-1-2-3'",
+      "B": "c('A-1', 'A-2', 'A-3')",
+      "C": "'A-1 2 3'",
+      "D": "Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Tibble' is a modern version of a data frame that never changes variable names or types automatically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions are used for 'tidying' data (pivoting)? (Select all that apply)",
+    "options": {
+      "A": "pivot_longer()",
+      "B": "pivot_wider()",
+      "C": "spread() (deprecated)",
+      "D": "rotate_df()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'lazy evaluation' in R?",
+    "options": {
+      "A": "Code that takes a long time to run.",
+      "B": "Arguments to functions are only evaluated when they are actually used within the function.",
+      "C": "Using the cursor instead of the keyboard.",
+      "D": "A process that deletes variables to save memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a global variable from within a function in R?",
+    "options": {
+      "A": "Use the 'global' keyword.",
+      "B": "Use the '<<-' operator.",
+      "C": "Use the ':=' operator.",
+      "D": "Variables inside functions are always global by default."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'tapply()' is used to apply a function over subsets of a vector defined by a factor.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these 'stringr' functions are used for string manipulation? (Select all that apply)",
+    "options": {
+      "A": "str_detect()",
+      "B": "str_replace()",
+      "C": "str_length()",
+      "D": "str_math()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'uniroot()' function do?",
+    "options": {
+      "A": "Finds the square root of a single number.",
+      "B": "Searches an interval for a root (zero) of a function.",
+      "C": "Combines multiple lists into one.",
+      "D": "Generates a unique ID for a data frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'set.seed()' function?",
+    "options": {
+      "A": "To plant a physical garden in the lab.",
+      "B": "To ensure that random number generation is reproducible.",
+      "C": "To set the starting value of a loop.",
+      "D": "To speed up the network data transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In R, 'NaN' is considered a logical value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'ggplot2' geoms? (Select all that apply)",
+    "options": {
+      "A": "geom_point()",
+      "B": "geom_histogram()",
+      "C": "geom_boxplot()",
+      "D": "geom_pie()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the result of 'rep(1:2, each = 2)'?",
+    "options": {
+      "A": "c(1, 2, 1, 2)",
+      "B": "c(1, 1, 2, 2)",
+      "C": "c(1, 2)",
+      "D": "c(2, 2, 1, 1)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert a wide data frame to a long format in 'tidyr'?",
+    "options": {
+      "A": "gather()",
+      "B": "pivot_longer()",
+      "C": "reshape()",
+      "D": "flatten()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'with()' function allows you to evaluate expressions within a data environment without using the $ operator.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions help in reshaping data? (Select all that apply)",
+    "options": {
+      "A": "melt() (from reshape2)",
+      "B": "cast() (from reshape2)",
+      "C": "separate() (from tidyr)",
+      "D": "cut() (from base)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'dist()' calculate in base R?",
+    "options": {
+      "A": "The distribution of a variable.",
+      "B": "The distance matrix between rows of a data matrix.",
+      "C": "The disk space used by a dataset.",
+      "D": "The distinct values in a vector."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you rename a column in a data frame using 'dplyr'?",
+    "options": {
+      "A": "set_names()",
+      "B": "rename(new_name = old_name)",
+      "C": "change_name()",
+      "D": "fix_col()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In R, vectors can have named elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which functions are used to examine the beginning and end of a data object? (Select all that apply)",
+    "options": {
+      "A": "head()",
+      "B": "tail()",
+      "C": "top_n()",
+      "D": "peek()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'which(x > 10)' return?",
+    "options": {
+      "A": "The actual values in x that are greater than 10.",
+      "B": "The indices of elements in x that are greater than 10.",
+      "C": "A logical vector of TRUE/FALSE.",
+      "D": "The number of elements greater than 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you combine two vectors 'a' and 'b' row-wise into a matrix?",
+    "options": {
+      "A": "cbind(a, b)",
+      "B": "rbind(a, b)",
+      "C": "merge(a, b)",
+      "D": "stack(a, b)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'any()' function returns TRUE if at least one element of a logical vector is TRUE.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are data visualization packages in R? (Select all that apply)",
+    "options": {
+      "A": "lattice",
+      "B": "plotly",
+      "C": "ggplot2",
+      "D": "readr"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the result of '3^2' in R?",
+    "options": {
+      "A": "6",
+      "B": "9",
+      "C": "8",
+      "D": "Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you install a package from GitHub in R?",
+    "options": {
+      "A": "install.packages('github/user/repo')",
+      "B": "devtools::install_github('user/repo')",
+      "C": "get_from_git('user/repo')",
+      "D": "R cannot install packages from GitHub."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Matrices are filled column-wise by default in R.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions are used for sorting data? (Select all that apply)",
+    "options": {
+      "A": "sort()",
+      "B": "order()",
+      "C": "arrange() (dplyr)",
+      "D": "rank()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function to create a frequency table in R?",
+    "options": {
+      "A": "freq()",
+      "B": "table()",
+      "C": "count() (dplyr)",
+      "D": "summarize()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate the correlation between two vectors 'x' and 'y'?",
+    "options": {
+      "A": "correlation(x, y)",
+      "B": "cor(x, y)",
+      "C": "rel(x, y)",
+      "D": "stats(x, y)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'seq_along()' function is safer than '1:length(x)' for loops over vectors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are used for conditional execution? (Select all that apply)",
+    "options": {
+      "A": "if...else",
+      "B": "ifelse()",
+      "C": "switch()",
+      "D": "case_when() (dplyr)"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What does 'cut()' do to a continuous variable?",
+    "options": {
+      "A": "Deletes half the values.",
+      "B": "Divides the range into intervals and codes values according to which interval they fall into.",
+      "C": "Shortens the string length of values.",
+      "D": "Finds the median and cuts the data into two."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you save an R object (like a list or data frame) to a file for later use in R?",
+    "options": {
+      "A": "write.obj()",
+      "B": "saveRDS()",
+      "C": "export()",
+      "D": "store()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'names()' function to both get and set the names of vector elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are base R functions for managing strings? (Select all that apply)",
+    "options": {
+      "A": "substr()",
+      "B": "nchar()",
+      "C": "toupper()",
+      "D": "str_split()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function to perform a linear regression in R?",
+    "options": {
+      "A": "linear()",
+      "B": "lm()",
+      "C": "reg()",
+      "D": "model.linear()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you remove duplicate rows from a data frame using 'dplyr'?",
+    "options": {
+      "A": "unique()",
+      "B": "distinct()",
+      "C": "dedupe()",
+      "D": "clear_dup()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'stop()' function is used to generate an error and terminate execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions are part of the 'apply' family? (Select all that apply)",
+    "options": {
+      "A": "mapply()",
+      "B": "vapply()",
+      "C": "tapply()",
+      "D": "eapply()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What does 'all(x > 0)' return?",
+    "options": {
+      "A": "A vector of TRUE/FALSE.",
+      "B": "A single TRUE if every element in x is greater than 0, otherwise FALSE.",
+      "C": "The sum of elements greater than 0.",
+      "D": "The actual values greater than 0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate the median of a vector while ignoring NA values?",
+    "options": {
+      "A": "median(x, ignore.na = TRUE)",
+      "B": "median(x, na.rm = TRUE)",
+      "C": "median(na.omit(x))",
+      "D": "median(x)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Data frames can have different data types in different columns, but all columns must have the same length.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which functions are used for reading from or writing to Excel files? (Select all that apply)",
+    "options": {
+      "A": "readxl::read_excel()",
+      "B": "writexl::write_xlsx()",
+      "C": "openxlsx::read.xlsx()",
+      "D": "base::read.excel()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'broadcasting' in R (element-wise operations with different lengths)?",
+    "options": {
+      "A": "R does not support different lengths.",
+      "B": "Recycling: the shorter vector is repeated until it matches the length of the longer one.",
+      "C": "An error message is always shown.",
+      "D": "The extra elements are deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you change the global plot parameters in base R?",
+    "options": {
+      "A": "set_plot()",
+      "B": "par()",
+      "C": "options()",
+      "D": "config()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Character vectors in R are enclosed in single or double quotes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are used for inspecting the first few elements of a list or vector? (Select all that apply)",
+    "options": {
+      "A": "head()",
+      "B": "x[1:5]",
+      "C": "str()",
+      "D": "inspect()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'unname()'?",
+    "options": {
+      "A": "To delete the whole object.",
+      "B": "To remove the name attribute from an object.",
+      "C": "To rename a file.",
+      "D": "To change the author's name in a package."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you obtain the unique values in a vector 'v'?",
+    "options": {
+      "A": "distinct(v)",
+      "B": "unique(v)",
+      "C": "table(v)",
+      "D": "only(v)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'match()' function returns the position of the first matches of its first argument in its second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions extract parts of a date? (Select all that apply)",
+    "options": {
+      "A": "lubridate::year()",
+      "B": "lubridate::month()",
+      "C": "format(x, '%Y')",
+      "D": "get_day()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function to exit R?",
+    "options": {
+      "A": "exit()",
+      "B": "quit() or q()",
+      "C": "close()",
+      "D": "stop()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if an object 'obj' belongs to the class 'factor'?",
+    "options": {
+      "A": "class(obj) == 'factor'",
+      "B": "is.factor(obj)",
+      "C": "type(obj) == 'factor'",
+      "D": "inherits(obj, 'factor')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In R's 'Non-Standard Evaluation' (NSE), what is the primary function of 'enquo()' in the 'rlang' package?",
+    "options": {
+      "A": "To convert a character string into a function name automatically.",
+      "B": "To capture both the expression and the environment of a function argument (creating a quosure).",
+      "C": "To evaluate a promise immediately within the global environment.",
+      "D": "To delete all local variables once a function returns a value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The S4 object system in R is informal and relies on naming conventions rather than formal class definitions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Closures' in R? (Select all that apply)",
+    "options": {
+      "A": "They are functions that enclose the environment in which they were created.",
+      "B": "They allow for 'state-persistent' variables across multiple function calls.",
+      "C": "They are created whenever a function returns another function.",
+      "D": "They automatically bypass R's copy-on-write memory management."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical purpose of the 'vapply()' function compared to 'sapply()'?",
+    "options": {
+      "A": "It allows for parallel processing across multiple CPU cores.",
+      "B": "It requires a pre-specified return type (FUN.VALUE), making it safer and faster.",
+      "C": "It only works on virtual matrices and arrays.",
+      "D": "It automatically converts character outputs to factors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When developing a package, which file is used to specify the external functions that should be made available to users?",
+    "options": {
+      "A": "DESCRIPTION",
+      "B": "NAMESPACE",
+      "C": "README.md",
+      "D": "INDEX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'pryr' package function 'address()' can be used to track if two names point to the same location in memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'S3' generic functions in base R? (Select all that apply)",
+    "options": {
+      "A": "print()",
+      "B": "summary()",
+      "C": "plot()",
+      "D": "lm()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'force()' function do when used inside a function factory?",
+    "options": {
+      "A": "It forces the CPU to prioritize the R session over background tasks.",
+      "B": "It explicitly evaluates a promise to prevent issues with lazy evaluation.",
+      "C": "It converts a List into a Matrix even if dimensions do not match.",
+      "D": "It forces the garbage collector to run immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Rcpp', which data structure is used to represent a standard R numeric vector in C++ code?",
+    "options": {
+      "A": "std::vector<double>",
+      "B": "NumericVector",
+      "C": "R_vector_num",
+      "D": "DoubleArray"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Environments in R are the only data structures that do not follow 'copy-on-write' semantics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid ways to speed up R code? (Select all that apply)",
+    "options": {
+      "A": "Vectorization",
+      "B": "Pre-allocating memory for loops",
+      "C": "Using 'mclapply' for parallelization (on Unix-like systems)",
+      "D": "Byte-compiling functions using the 'compiler' package"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is the 'Method Dispatch' logic for S3 objects?",
+    "options": {
+      "A": "It looks for a function named 'generic.class'.",
+      "B": "It uses a central registry of XML definitions.",
+      "C": "It searches for the method in the global environment only.",
+      "D": "It requires all methods to be explicitly registered in a .cpp file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What occurs when you use the 'quote()' function on an R expression?",
+    "options": {
+      "A": "The expression is evaluated and the result is turned into a string.",
+      "B": "The expression is captured as an 'abstract syntax tree' (AST) without being evaluated.",
+      "C": "The expression is sent to a remote server for high-performance computing.",
+      "D": "Double quotes are added to every variable name in the expression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Reference Classes (RC) in R use 'message-passing' OO rather than the 'generic-function' OO used by S3/S4.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tools are essential for building R packages from source? (Select all that apply)",
+    "options": {
+      "A": "roxygen2",
+      "B": "devtools",
+      "C": "knitr",
+      "D": "testthat"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'active binding' feature in R environments?",
+    "options": {
+      "A": "A variable that is currently being used by a loop.",
+      "B": "A function that is called every time a specific variable is accessed or modified.",
+      "C": "A way to bind R to a specific hardware GPU.",
+      "D": "The process of deleting inactive packages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'ggplot2', what does the '!!' (bang-bang) operator do within a tidy evaluation context?",
+    "options": {
+      "A": "It marks a variable as a global constant.",
+      "B": "It 'unquotes' an expression, allowing it to be evaluated in place.",
+      "C": "It doubles the size of the points in a scatter plot.",
+      "D": "It forces the plot to render as a PDF."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'formals()' function allows you to modify the arguments of an existing function dynamically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'purrr' functions are used for iterating with side effects (like plotting) rather than returning a value? (Select all that apply)",
+    "options": {
+      "A": "walk()",
+      "B": "iwalk()",
+      "C": "walk2()",
+      "D": "pwalk()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Memoization' in R programming?",
+    "options": {
+      "A": "Adding comments to explain complex code logic.",
+      "B": "Caching the results of expensive function calls to avoid redundant computations.",
+      "C": "The process of memorizing R syntax for an exam.",
+      "D": "A security feature that encrypts local data frames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'on.exit()' behave within an R function?",
+    "options": {
+      "A": "It immediately exits the function and returns NULL.",
+      "B": "It ensures a specific piece of code runs when the function finishes, regardless of how it ends.",
+      "C": "It asks the user for permission before closing the R session.",
+      "D": "It clears the console every time a function completes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'S3' objects are essentially just base types (like lists) with a 'class' attribute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Recursive' functions in R? (Select all that apply)",
+    "options": {
+      "A": "Functions that call themselves within their own body.",
+      "B": "They must have a 'base case' to prevent infinite loops.",
+      "C": "They are always faster than vectorized operations.",
+      "D": "They utilize the call stack for each iteration."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Search Path' in R?",
+    "options": {
+      "A": "The folder path where the user stores their CSV files.",
+      "B": "The sequence of environments R looks through to find an object name.",
+      "C": "The history of keywords searched in the R documentation.",
+      "D": "A way to find bugs in a package's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the '.Internal()' function indicate in R source code?",
+    "options": {
+      "A": "The function is only available to employees of CRAN.",
+      "B": "The function calls C code built into the R interpreter.",
+      "C": "The function is stored on an internal hard drive.",
+      "D": "The function is intended for internal company use only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tidy evaluation' allows you to use data variables as if they were variables in the current environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'base' R functions are used for profiling code performance? (Select all that apply)",
+    "options": {
+      "A": "Rprof()",
+      "B": "summaryRprof()",
+      "C": "system.time()",
+      "D": "microbenchmark() (package-based)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the role of 'LazyData: true' in an R package 'DESCRIPTION' file?",
+    "options": {
+      "A": "It tells R to ignore the data folder entirely.",
+      "B": "It makes datasets in the package available for loading only when they are first called (lazy loading).",
+      "C": "It creates a copy of the data in the cloud.",
+      "D": "It sets the data type of all columns to 'lazy'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'S4' OO, what is the function to create a new generic function?",
+    "options": {
+      "A": "setGeneric()",
+      "B": "makeGeneric()",
+      "C": "newGeneric()",
+      "D": "Generic()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data frames in R use 'shallow copy' for columns that are not modified.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'rlang' functions for manipulation of ASTs? (Select all that apply)",
+    "options": {
+      "A": "expr()",
+      "B": "call2()",
+      "C": "sym()",
+      "D": "parse_expr()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Partial Function Application' using the 'purrr' package?",
+    "options": {
+      "A": "Applying a function to only half of the data.",
+      "B": "Creating a new function by pre-filling some arguments of an existing function (partial()).",
+      "C": "A function that only runs if the computer is partially loaded.",
+      "D": "Deleting the last argument of a function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'stopifnot()' and 'assertthat::assert_that()'?",
+    "options": {
+      "A": "stopifnot() is 100x faster.",
+      "B": "assert_that() provides more descriptive and user-friendly error messages.",
+      "C": "stopifnot() only works on logical vectors of length 1.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In R's garbage collection, objects are only deleted when memory is actually needed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are required to define an S4 class? (Select all that apply)",
+    "options": {
+      "A": "setClass()",
+      "B": "slots",
+      "C": "prototype",
+      "D": "contains (for inheritance)"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What does the 'nextMethod()' function do in S3 method dispatch?",
+    "options": {
+      "A": "It moves to the next row in a data frame.",
+      "B": "It calls the next available method for a generic function, often used for inheritance.",
+      "C": "It skips the current function and returns to the console.",
+      "D": "It renames a method to 'Next'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check the 'ancestry' or inheritance of an S3 object?",
+    "options": {
+      "A": "parent.class()",
+      "B": "class()",
+      "C": "getInheritance()",
+      "D": "family()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Promise' in R is an object that contains both an expression and the environment where the expression was created.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Rcpp' features facilitate communication between R and C++? (Select all that apply)",
+    "options": {
+      "A": "sourceCpp()",
+      "B": "cppFunction()",
+      "C": "export attributes (// [[Rcpp::export]])",
+      "D": "Rcpp modules"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is the purpose of the 'match.call()' function?",
+    "options": {
+      "A": "To find a matching function name in a package.",
+      "B": "To capture the function call and expand all arguments to their full names.",
+      "C": "To call a function only if it matches the current date.",
+      "D": "To compare two different function calls for equality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'data.table', what does the '.SD' variable represent?",
+    "options": {
+      "A": "Standard Deviation",
+      "B": "Subset of Data: a data.table containing the subset of data for each group.",
+      "C": "System Directory",
+      "D": "Statistical Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'parent.env()' function can be used to set the parent environment of a new environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are properties of 'Environments'? (Select all that apply)",
+    "options": {
+      "A": "Every environment has a parent (except the empty environment).",
+      "B": "They have reference semantics (no copying).",
+      "C": "Objects within an environment must have unique names.",
+      "D": "They are ordered lists."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'dots' argument (...) used for in R functions?",
+    "options": {
+      "A": "To hide the code from the user.",
+      "B": "To allow a function to take an arbitrary number of additional arguments.",
+      "C": "To represent a missing value in a list.",
+      "D": "To signify the end of a function definition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'sys.calls()' return?",
+    "options": {
+      "A": "A list of all phone calls made by the developer.",
+      "B": "A list of all active function calls in the current stack.",
+      "C": "The version of the operating system.",
+      "D": "The number of users currently calling the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In S4 OO, 'validObject()' is used to check if an object meets the constraints of its class definition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which file formats are used for 'Vignettes' in modern R packages? (Select all that apply)",
+    "options": {
+      "A": "R Markdown (.Rmd)",
+      "B": "LaTeX (.Rnw)",
+      "C": "HTML",
+      "D": "PDF"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Higher-order Function' in R?",
+    "options": {
+      "A": "A function that is very important to the project.",
+      "B": "A function that takes another function as an argument or returns a function.",
+      "C": "A function that is defined at the top of a script.",
+      "D": "A function that calculates exponents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Static Analysis' of R code?",
+    "options": {
+      "A": "Analyzing code while the computer is not moving.",
+      "B": "Examining code without executing it to find errors or style issues (e.g., lintr).",
+      "C": "Measuring the static electricity of the server.",
+      "D": "A way to backup code as a static image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The '::' operator allows you to access unexported internal functions from a package.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'rlang' functions help you create and manipulate 'quosures'? (Select all that apply)",
+    "options": {
+      "A": "quo()",
+      "B": "new_quosure()",
+      "C": "get_expr()",
+      "D": "get_env()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'NSE' (Non-Standard Evaluation) 'Data Masking'?",
+    "options": {
+      "A": "Hiding sensitive data columns from users.",
+      "B": "Evaluating an expression using columns of a data frame as if they were variables in an environment.",
+      "C": "A way to speed up the network.",
+      "D": "Encrypting the source code of a function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Object-Oriented' 'Generic-Function' dispatch?",
+    "options": {
+      "A": "Dispatching a package to the user.",
+      "B": "An approach where the generic function decides which method to run based on the class of the input object.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'S3' methods can be defined for base types like 'numeric' or 'character'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'testthat' expectations? (Select all that apply)",
+    "options": {
+      "A": "expect_equal()",
+      "B": "expect_error()",
+      "C": "expect_true()",
+      "D": "expect_plot()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Package' 'Shimming' (or shadowing)?",
+    "options": {
+      "A": "Making a package shiny.",
+      "B": "When a function in one package has the same name as a function in another, and the most recently loaded one takes precedence.",
+      "C": "A specialized software for poets.",
+      "D": "Deleting a package from the library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lexical Scoping' in R?",
+    "options": {
+      "A": "A way to look at code through a telescope.",
+      "B": "The rule that looks for values of variables based on where the function was defined, not where it is called.",
+      "C": "A dictionary that contains every word in the world.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Reference Classes' (RC) allow for mutable objects where the object is modified in place.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'purrr' functions are useful for handling errors during iteration? (Select all that apply)",
+    "options": {
+      "A": "safely()",
+      "B": "quietly()",
+      "C": "possibly()",
+      "D": "errorly()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Function' 'Currying'?",
+    "options": {
+      "A": "Adding curry spice to the lab's food.",
+      "B": "Transforming a function with multiple arguments into a sequence of functions each with one argument.",
+      "C": "A specialized software for accountants.",
+      "D": "Hiring a professional chef for the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment' 'Nesting'?",
+    "options": {
+      "A": "Birds building nests in the server room.",
+      "B": "The relationship where an environment has access to objects in its parent environment.",
+      "C": "A way to backup the storage layer.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vapply' is generally preferred over 'sapply' in production package code to avoid unexpected return types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are parts of the 'Roxygen2' documentation workflow? (Select all that apply)",
+    "options": {
+      "A": "@param",
+      "B": "@return",
+      "C": "@export",
+      "D": "@example"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Byte-code' 'Compilation' in R?",
+    "options": {
+      "A": "Converting R code into C++ automatically.",
+      "B": "Compiling R code into a faster internal representation (used by the 'compiler' package).",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Formula' object (~ x + y) primarily used for in R?",
+    "options": {
+      "A": "Calculating mathematical integrals.",
+      "B": "To symbolically represent a relationship between variables, often in modeling functions.",
+      "C": "A security scan of the database.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'standardGeneric()' function is used to create the body of an S4 generic function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'base' R functions help manage the call stack? (Select all that apply)",
+    "options": {
+      "A": "sys.nframe()",
+      "B": "sys.parent()",
+      "C": "sys.frame()",
+      "D": "sys.call()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Tail' 'Call' 'Optimization' (TCO) in R?",
+    "options": {
+      "A": "Optimizing the end of a long research study.",
+      "B": "R does not natively support TCO, which can lead to stack overflow in deep recursion.",
+      "C": "A way to backup data in the sky.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -2315,3 +2315,84 @@ Traceback (most recent call last):
 groq.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Forbidden'}}
 
 RAW: 
+
+[2026-03-20 11:08:32.814111+00:00] ERROR in GenerateAssessmentView: Error code: 403 - {'error': {'message': 'Forbidden'}}
+Traceback (most recent call last):
+  File "C:\Users\manishthaduri\Desktop\verifihire-main\VerifiHireAI\backend\ai_assessments\views.py", line 776, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Forbidden'}}
+
+RAW: 
+
+[2026-03-20 11:08:44.042794+00:00] ERROR in GenerateAssessmentView: Error code: 403 - {'error': {'message': 'Forbidden'}}
+Traceback (most recent call last):
+  File "C:\Users\manishthaduri\Desktop\verifihire-main\VerifiHireAI\backend\ai_assessments\views.py", line 776, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Forbidden'}}
+
+RAW: 
+
+[2026-03-20 11:08:58.270714+00:00] ERROR in GenerateAssessmentView: Error code: 403 - {'error': {'message': 'Forbidden'}}
+Traceback (most recent call last):
+  File "C:\Users\manishthaduri\Desktop\verifihire-main\VerifiHireAI\backend\ai_assessments\views.py", line 776, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manishthaduri\AppData\Local\Programs\Python\Python314\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Forbidden'}}
+
+RAW: 

@@ -28,7 +28,7 @@ MAX_CODING_TASKS = 50
 
 from api.views import ensure_role_exists
 from api.models import UserProfile
-from api.views._imports import _is_application_admin_email, handle_deletion_request
+from api._imports import _is_application_admin_email, handle_deletion_request
 
 # Configure Groq
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
@@ -440,7 +440,7 @@ class CandidateListCreateView(generics.ListCreateAPIView):
         if not user_profile or not user_profile.company:
             return Candidate.objects.none()
         
-        from api.views._imports import get_scoped_user_ids
+        from api._imports import get_scoped_user_ids
         scoped_ids = get_scoped_user_ids(user_profile)
         
         if scoped_ids is None:
@@ -470,7 +470,7 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
             if not user_profile or not user_profile.company:
                 return Candidate.objects.none()
 
-            from api.views._imports import get_scoped_user_ids
+            from api._imports import get_scoped_user_ids
             scoped_ids = get_scoped_user_ids(user_profile)
 
             if scoped_ids is None:

@@ -1,0 +1,1905 @@
+{ 
+  "skill": "Operation Analysis", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Operation Analysis?",
+    "options": {
+      "A": "To increase the physical size of the office building.",
+      "B": "To improve productivity and reduce costs by studying and improving work methods.",
+      "C": "To write a fictional history of the company.",
+      "D": "To replace all human workers with social media influencers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bottleneck' is a stage in a process that has the highest capacity and fastest speed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are the three components of 'OEE' (Overall Equipment Effectiveness)? (Select all that apply)",
+    "options": {
+      "A": "Availability",
+      "B": "Performance",
+      "C": "Quality",
+      "D": "Affordability"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Six Sigma' methodology primarily aim to reduce in a process?",
+    "options": {
+      "A": "The number of employees.",
+      "B": "Variation and defects.",
+      "C": "The amount of coffee consumed.",
+      "D": "The speed of the assembly line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a process flowchart, what does a 'Diamond' shape typically represent?",
+    "options": {
+      "A": "A starting point.",
+      "B": "A decision or branch in the process.",
+      "C": "A final storage area.",
+      "D": "A physical machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lean Manufacturing' focuses on the elimination of waste (Muda) within a manufacturing system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are examples of 'Waste' in a Lean context? (Select all that apply)",
+    "options": {
+      "A": "Overproduction",
+      "B": "Waiting time",
+      "C": "Unnecessary motion",
+      "D": "High-quality output"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Lead Time'?",
+    "options": {
+      "A": "The time it takes to melt lead metal.",
+      "B": "The total time from the start of a process to its completion.",
+      "C": "The age of the team leader.",
+      "D": "The time spent in holiday meetings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which analytical tool uses the '80/20 Rule' to identify the most significant problems in a process?",
+    "options": {
+      "A": "Gantt Chart",
+      "B": "Pareto Analysis",
+      "C": "Scatter Plot",
+      "D": "Pie Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Standard Operating Procedures' (SOPs) are written instructions intended to document how to perform a routine activity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Kaizen' philosophy focus on?",
+    "options": {
+      "A": "One-time massive changes to the company structure.",
+      "B": "Continuous, small incremental improvements involving all employees.",
+      "C": "Replacing all machinery every 12 months.",
+      "D": "Deleting all historical data to start fresh."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a visual tool used to schedule tasks and track project progress over time?",
+    "options": {
+      "A": "Heat Map",
+      "B": "Gantt Chart",
+      "C": "Histogram",
+      "D": "Fishbone Diagram"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cycle Time'?",
+    "options": {
+      "A": "The time spent riding a bicycle to work.",
+      "B": "The average time it takes to complete one full unit of a process.",
+      "C": "The time between two consecutive solar eclipses.",
+      "D": "The length of the fiscal year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Just-in-Time' (JIT) production aims to keep high levels of inventory to prevent running out of stock.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are part of the '5S' methodology? (Select all that apply)",
+    "options": {
+      "A": "Sort",
+      "B": "Set in Order",
+      "C": "Shine",
+      "D": "Sleep"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does a 'Fishbone Diagram' (Ishikawa) help analysts identify?",
+    "options": {
+      "A": "The cost of seafood.",
+      "B": "The potential root causes of a specific problem or effect.",
+      "C": "The internal skeleton of a building.",
+      "D": "The fastest way to ship goods by sea."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Value Stream Mapping'?",
+    "options": {
+      "A": "Drawing a map of where the most expensive items are stored.",
+      "B": "A visual method for analyzing the current state and designing a future state for the series of events that take a product to the customer.",
+      "C": "A specialized tool for measuring the depth of a stream.",
+      "D": "A security scan of the company's financial records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Total Quality Management (TQM) is an organization-wide effort to install and make a permanent climate where employees continuously improve their ability to provide on-demand products.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Input' factors in an Operation Analysis? (Select all that apply)",
+    "options": {
+      "A": "Raw materials",
+      "B": "Labor hours",
+      "C": "Energy consumption",
+      "D": "Final customer reviews"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Throughput'?",
+    "options": {
+      "A": "The weight of a product.",
+      "B": "The amount of product or service a system can produce in a given period.",
+      "C": "The total number of employees in a system.",
+      "D": "The depth of the factory floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the maximum amount that something can contain or produce?",
+    "options": {
+      "A": "Volume",
+      "B": "Capacity",
+      "C": "Density",
+      "D": "Velocity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Benchmarking' involves comparing your own business processes and performance metrics to industry bests or best practices from other companies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Indirect Labor'? (Select all that apply)",
+    "options": {
+      "A": "Maintenance staff",
+      "B": "Quality inspectors",
+      "C": "Assembly line workers",
+      "D": "Security guards"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Work-in-Process' (WIP)?",
+    "options": {
+      "A": "The work done by employees while they are in the bathroom.",
+      "B": "Materials that have entered the production process but are not yet finished products.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The total number of job applications received."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Time and Motion Study'?",
+    "options": {
+      "A": "To measure the speed of light.",
+      "B": "To establish standard times for tasks and eliminate inefficient movements.",
+      "C": "To track the movement of the stars.",
+      "D": "To find the best time to take a lunch break."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Ergonomic' analysis focuses on designing the workplace to fit the capabilities and limitations of the human operator.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Key Performance Indicators' (KPIs) for operations? (Select all that apply)",
+    "options": {
+      "A": "Defect rate",
+      "B": "On-time delivery percentage",
+      "C": "Inventory turnover",
+      "D": "The brand of coffee in the breakroom"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'ROI' stand for in an operational investment context?",
+    "options": {
+      "A": "Rate Of Improvement",
+      "B": "Return On Investment",
+      "C": "Revenue Over Income",
+      "D": "Risk Of Inefficiency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Cause Analysis' (RCA)?",
+    "options": {
+      "A": "Analyzing the roots of physical plants in the office.",
+      "B": "A method of problem-solving used for identifying the underlying causes of faults or problems.",
+      "C": "A security scan of the computer system.",
+      "D": "Hiring a professional gardener."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Outsourcing' is the practice of having certain job functions done outside a company instead of having an in-house department.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used to identify the steps that add value versus those that do not?",
+    "options": {
+      "A": "Bar Chart",
+      "B": "Value-Added Analysis",
+      "C": "Pie Chart",
+      "D": "Line Graph"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Takt Time'?",
+    "options": {
+      "A": "The time it takes to say a specific word.",
+      "B": "The rate at which a finished product needs to be completed to meet customer demand.",
+      "C": "A specialized software for musicians.",
+      "D": "The time spent in traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are types of 'Maintenance' strategies? (Select all that apply)",
+    "options": {
+      "A": "Preventive",
+      "B": "Predictive",
+      "C": "Reactive (Run-to-fail)",
+      "D": "Imaginary"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logistics'?",
+    "options": {
+      "A": "The logic used in computer programming.",
+      "B": "The detailed coordination of a complex operation involving many people, facilities, or supplies.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Compliance'?",
+    "options": {
+      "A": "The act of following a rule or order (legal or safety standards).",
+      "B": "The speed of the network bandwidth.",
+      "C": "The total number of complaints received.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scalability' is the ability of a system to handle a growing amount of work by adding resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Supply Chain' stages? (Select all that apply)",
+    "options": {
+      "A": "Sourcing",
+      "B": "Manufacturing",
+      "C": "Distribution",
+      "D": "Personal Shopping"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Capacity Utilization'?",
+    "options": {
+      "A": "The size of a water bottle.",
+      "B": "The extent to which an enterprise or a nation uses its installed productive capacity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SLA' stand for?",
+    "options": {
+      "A": "Standard Labor Agreement",
+      "B": "Service Level Agreement",
+      "C": "System Logic Analysis",
+      "D": "Storage Level Access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Training' involves training employees to perform multiple different tasks or roles within the operation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Forecasting' in operations? (Select all that apply)",
+    "options": {
+      "A": "Predicting future demand for products",
+      "B": "Estimating future labor requirements",
+      "C": "Predicting the weather for outdoor work",
+      "D": "Guessing the CEO's favorite food"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inventory Turnover'?",
+    "options": {
+      "A": "Turning the physical boxes upside down.",
+      "B": "A ratio showing how many times a company has sold and replaced inventory during a specific period.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the conveyor belt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Downspeeding'?",
+    "options": {
+      "A": "Running a machine slower to reduce wear and energy consumption.",
+      "B": "The speed of an internet download.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Poka-Yoke' is a Japanese term that means 'mistake-proofing' a process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Fixed Costs'? (Select all that apply)",
+    "options": {
+      "A": "Rent",
+      "B": "Salaries (Permanent staff)",
+      "C": "Insurance",
+      "D": "Raw material costs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Job Enlargement'?",
+    "options": {
+      "A": "Increasing the physical size of a person's desk.",
+      "B": "Increasing the number of tasks associated with a job to provide more variety.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CRM' stand for in a business context?",
+    "options": {
+      "A": "Cost Reduction Management",
+      "B": "Customer Relationship Management",
+      "C": "Central Resource Mapping",
+      "D": "Corporate Risk Metric"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Reliability' is the probability that a system will perform its intended function for a specified period of time under stated conditions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Variable Costs'? (Select all that apply)",
+    "options": {
+      "A": "Raw materials",
+      "B": "Shipping costs",
+      "C": "Electricity (production based)",
+      "D": "Property tax"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Total Productive Maintenance' (TPM)?",
+    "options": {
+      "A": "Hiring one person to fix everything.",
+      "B": "A system of maintaining and improving the integrity of production and quality systems through the machines and equipment.",
+      "C": "A specialized software for architects.",
+      "D": "The process of deleting old data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Ergonomics'?",
+    "options": {
+      "A": "The study of the economy.",
+      "B": "The study of people's efficiency in their working environment.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Economies of Scale' are the cost advantages that enterprises obtain due to their scale of operation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Inventory' types? (Select all that apply)",
+    "options": {
+      "A": "Raw Materials",
+      "B": "Work-in-Process",
+      "C": "Finished Goods",
+      "D": "Personal belongings of staff"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Business Process Reengineering' (BPR)?",
+    "options": {
+      "A": "Hiring an engineer to fix the sink.",
+      "B": "The radical redesign of core business processes to achieve dramatic improvements in productivity and quality.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standardization'?",
+    "options": {
+      "A": "Increasing the speed of light.",
+      "B": "The process of implementing and developing technical standards based on the consensus of different parties.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Muda' is a Japanese word meaning 'waste'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Operation Analysis' techniques? (Select all that apply)",
+    "options": {
+      "A": "Process Mapping",
+      "B": "Time Study",
+      "C": "Work Sampling",
+      "D": "Psychological Analysis"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asset Management'?",
+    "options": {
+      "A": "Hiring a person to look at pictures of assets.",
+      "B": "A systematic process of developing, operating, maintaining, upgrading, and disposing of assets in the most cost-effective manner.",
+      "C": "A specialized software for historians.",
+      "D": "A security scan for computer viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Scrap'?",
+    "options": {
+      "A": "A fight between two employees.",
+      "B": "Material that is left over after a product has been made and is not reused.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vendor' is another term for a supplier.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automation' in operations? (Select all that apply)",
+    "options": {
+      "A": "Using robots for repetitive tasks",
+      "B": "Using software to manage schedules",
+      "C": "Using sensors to monitor quality",
+      "D": "Using a manual typewriter"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Lead' 'Time' 'Reduction'?",
+    "options": {
+      "A": "Making a physical piece of lead smaller.",
+      "B": "The practice of identifying and removing non-value-added activities to speed up a process.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Shift'?",
+    "options": {
+      "A": "Moving a physical object to the left.",
+      "B": "A scheduled period of time in which a group of workers is at work.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capacity' 'Planning' is the process of determining the production capacity needed by an organization to meet changing demands for its products.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Project' 'Management' 'Software'? (Select all that apply)",
+    "options": {
+      "A": "Asana",
+      "B": "Jira",
+      "C": "Trello",
+      "D": "Calculator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Operations' 'Strategy'?",
+    "options": {
+      "A": "A plan for how to win a video game.",
+      "B": "The total pattern of decisions which shape the long-term capabilities of any type of operations.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bullwhip Effect' in supply chain operations?",
+    "options": {
+      "A": "A physical safety hazard involving heavy machinery.",
+      "B": "The phenomenon where small fluctuations in demand at the retail level cause progressively larger fluctuations at the wholesale and manufacturing levels.",
+      "C": "The speed at which a delivery truck moves between warehouses.",
+      "D": "A method for increasing worker productivity through strict supervision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Poka-Yoke' system, the goal is to design the process so that it is impossible for an error to occur or so that the error is immediately obvious.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Common Cause' variations in Statistical Process Control (SPC)? (Select all that apply)",
+    "options": {
+      "A": "Slight variations in raw material quality",
+      "B": "Normal wear and tear of machine parts",
+      "C": "Ambient temperature and humidity changes",
+      "D": "A sudden power surge that restarts a machine"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Critical Path' represent in project management (CPM)?",
+    "options": {
+      "A": "The path that is the most expensive to complete.",
+      "B": "The longest sequence of dependent tasks that determines the shortest possible project duration.",
+      "C": "The list of tasks that only senior management can perform.",
+      "D": "The physical exit path in a warehouse during an emergency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Queuing Theory', what is the significance of the 'Utilization Factor' ($\rho$)?",
+    "options": {
+      "A": "It measures the percentage of time a server or machine is busy.",
+      "B": "It calculates the total cost of electricity for the operation.",
+      "C": "It determines the physical weight capacity of a shelf.",
+      "D": "It counts the number of employees who are on vacation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Little’s Law' states that the long-term average number of items in a stationary system is equal to the long-term average arrival rate multiplied by the average time an item spends in the system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Double Sampling' in quality control? (Select all that apply)",
+    "options": {
+      "A": "Taking a second sample if the first one is inconclusive",
+      "B": "Taking two samples at once from the same batch",
+      "C": "Reducing the total amount of inspection needed for very high-quality batches",
+      "D": "Hiring two different companies to inspect the same product"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is the primary difference between 'Preventive Maintenance' and 'Predictive Maintenance'?",
+    "options": {
+      "A": "Preventive is done after a crash; Predictive is done before.",
+      "B": "Preventive is schedule-based; Predictive is condition-based using sensor data to forecast failure.",
+      "C": "Preventive is for software; Predictive is for hardware.",
+      "D": "Predictive maintenance is 100% cheaper than preventive maintenance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CPK' (Process Capability Index) measure?",
+    "options": {
+      "A": "The speed of the production line.",
+      "B": "How well a process can produce output within specified limits, accounting for how centered the process is.",
+      "C": "The total number of kilograms produced per hour.",
+      "D": "The percentage of employees who are certified in Six Sigma."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Lean' methodology, 'Mura' refers to waste caused by unevenness or inconsistency in a process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of 'Holding Costs' in inventory management? (Select all that apply)",
+    "options": {
+      "A": "Warehouse rent",
+      "B": "Insurance on stored goods",
+      "C": "Opportunity cost of tied-up capital",
+      "D": "Shipping fees to the customer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Line Balancing' in assembly operations?",
+    "options": {
+      "A": "Ensuring the physical line is perfectly horizontal.",
+      "B": "Distributing tasks among workstations so that each has an equal amount of work time to maximize efficiency.",
+      "C": "Balancing the number of male and female workers on a line.",
+      "D": "Keeping the total cost of the line under a specific budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Kanban' system, what does a 'Signal' (or Card) typically trigger?",
+    "options": {
+      "A": "An immediate meeting to discuss strategy.",
+      "B": "The movement, production, or supply of a specific quantity of items.",
+      "C": "The deletion of old customer data.",
+      "D": "A security alarm in the warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Heijunka' board is used in Lean manufacturing to level the type and quantity of production over a fixed period of time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are steps in the 'DMAIC' process? (Select all that apply)",
+    "options": {
+      "A": "Define",
+      "B": "Measure",
+      "C": "Analyze",
+      "D": "Integrate"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of an 'X-bar Chart' in SPC?",
+    "options": {
+      "A": "To track the number of 'X' marks on a product.",
+      "B": "To monitor the central tendency (mean) of a process over time.",
+      "C": "To calculate the total cost of raw materials.",
+      "D": "To show the relationship between two different variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Economic Order Quantity' (EOQ) intended to minimize?",
+    "options": {
+      "A": "The total number of orders per year.",
+      "B": "The sum of inventory holding costs and ordering costs.",
+      "C": "The time it takes to deliver an item.",
+      "D": "The number of warehouse employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Muri' in Lean philosophy refers to the 'overburdening' of equipment or operators.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Work Sampling'? (Select all that apply)",
+    "options": {
+      "A": "Taking random observations of workers to determine the proportion of time spent on various activities",
+      "B": "Providing free samples of the product to workers",
+      "C": "A statistical technique used to determine the standard time for a task",
+      "D": "Testing every single unit of output for defects"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Safety Stock'?",
+    "options": {
+      "A": "The inventory kept in a locked safe.",
+      "B": "Extra inventory held to mitigate the risk of stockouts caused by uncertainties in supply and demand.",
+      "C": "Stock that is specifically for the safety department.",
+      "D": "Stock that has passed a safety inspection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what does 'SMED' stand for?",
+    "options": {
+      "A": "Standardized Machine Engineering Department",
+      "B": "Single-Minute Exchange of Die",
+      "C": "Systematic Maintenance and Equipment Design",
+      "D": "Simple Measurement of Error Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Docking' is a logistics procedure where products from a supplier are distributed directly to a customer with little or no storage time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Value-Added' activities? (Select all that apply)",
+    "options": {
+      "A": "Reworking a defective part",
+      "B": "Moving materials across the factory floor",
+      "C": "Counting parts in inventory",
+      "D": "Assembling the final product"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Functional Silo Syndrome'?",
+    "options": {
+      "A": "A disease found in farm workers.",
+      "B": "A lack of communication and cooperation between different departments in an organization.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the computer server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Management', what is 'Slack Time' (or Float)?",
+    "options": {
+      "A": "The amount of time employees spend on social media.",
+      "B": "The amount of time a task can be delayed without delaying the project completion date.",
+      "C": "A security scan for database viruses.",
+      "D": "The time spent in the lunchroom."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Pull' system, production is based on actual customer orders rather than forecasts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which factors are used to calculate 'Takt Time'? (Select all that apply)",
+    "options": {
+      "A": "Available working time",
+      "B": "Customer demand quantity",
+      "C": "Number of machines available",
+      "D": "Average speed of the workers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Process Mapping' primarily used for in analysis?",
+    "options": {
+      "A": "To find the GPS coordinates of the factory.",
+      "B": "To visualize every step of a workflow to identify inefficiencies and waste.",
+      "C": "A way to backup the SQL code.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Standard Hour' in operation analysis?",
+    "options": {
+      "A": "An hour that has exactly 60 minutes.",
+      "B": "The amount of work that should be performed by a qualified worker in one hour under standard conditions.",
+      "C": "A security bridge for data transfers.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Activity-Based Costing' (ABC) assigns overhead costs to specific activities rather than broad categories.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are parts of the 'Theory of Constraints' (TOC) five-step process? (Select all that apply)",
+    "options": {
+      "A": "Identify the constraint",
+      "B": "Exploit the constraint",
+      "C": "Subordinate everything else to the constraint",
+      "D": "Delete the constraint immediately"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'OEE' 'Availability' loss?",
+    "options": {
+      "A": "When the operator is late to work.",
+      "B": "Time lost due to equipment failures, setup, and adjustments.",
+      "C": "The time spent in holiday meetings.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Maintenance', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to fix a machine.",
+      "B": "The predicted elapsed time between inherent failures of a mechanical or electronic system during normal operation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Value-Added' (VA) time is the time spent on activities that the customer is willing to pay for.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Vendor-Managed Inventory' (VMI)? (Select all that apply)",
+    "options": {
+      "A": "The supplier is responsible for maintaining the buyer's inventory levels",
+      "B": "The supplier physically owns the warehouse",
+      "C": "It aims to reduce stockouts and total inventory costs",
+      "D": "The customer must pay for everything upfront"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Process' 'Variation' 'Sigma' 'Level'?",
+    "options": {
+      "A": "The weight of the process on a scale.",
+      "B": "A statistical measurement of process capability (e.g., Six Sigma is 3.4 defects per million).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Ergonomic' 'Risk' 'Assessment'?",
+    "options": {
+      "A": "Assessing the risk of the economy crashing.",
+      "B": "Evaluating physical stressors in the workplace to prevent musculoskeletal disorders.",
+      "C": "A security scan of the database.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Point-of-Use' (POU) storage involves keeping materials as close as possible to where they will be used in the process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Project' 'Scheduling' 'Constraints'? (Select all that apply)",
+    "options": {
+      "A": "Resource availability",
+      "B": "Task dependencies",
+      "C": "Hard deadlines",
+      "D": "The number of likes on social media"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Supply' 'Chain' 'Visibility'?",
+    "options": {
+      "A": "Using binoculars to see the warehouse.",
+      "B": "The ability of all partners in a supply chain to see relevant data in real-time.",
+      "C": "A security bridge for data transfers.",
+      "D": "Hiring a person named Visibility."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Quality', what is a 'Control' 'Limit'?",
+    "options": {
+      "A": "A limit on the amount of control a manager has.",
+      "B": "The statistically calculated boundary (UCL/LCL) that a process should stay within if it is in control.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a person to limit the speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Total' 'Cost' 'of' 'Ownership' (TCO) includes only the initial purchase price of an asset.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Lead' 'Time' 'Components'? (Select all that apply)",
+    "options": {
+      "A": "Order processing time",
+      "B": "Manufacturing lead time",
+      "C": "Delivery time",
+      "D": "Lunch break duration"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Operational' 'Redundancy'?",
+    "options": {
+      "A": "Hiring too many people for one job.",
+      "B": "The intentional duplication of critical components or functions of a system with the intention of increasing reliability.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Just-in-Case' (JIC) inventory?",
+    "options": {
+      "A": "Inventory that is kept in a physical case.",
+      "B": "An inventory management strategy where large volumes of materials are kept on hand to prevent stockouts.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Continuous' 'Flow' in Lean manufacturing means products move through the process one unit at a time without stopping.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Performance' 'Appraisal' 'Methods'? (Select all that apply)",
+    "options": {
+      "A": "360-degree feedback",
+      "B": "Graphic rating scales",
+      "C": "Management by Objectives (MBO)",
+      "D": "Measuring the weight of the employee"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Capacity' 'Lag' 'Strategy'?",
+    "options": {
+      "A": "Hiring a person who is very slow.",
+      "B": "Adding capacity only after the organization is running at full capacity or beyond due to increase in demand.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Queuing', what is 'First-In, First-Out' (FIFO)?",
+    "options": {
+      "A": "A type of physical food in the cafeteria.",
+      "B": "A service discipline where customers are served in the order they arrived.",
+      "C": "A security scan for computer viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Benchmarking' should only be done against direct competitors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Statistical' 'Process' 'Control' 'Tools'? (Select all that apply)",
+    "options": {
+      "A": "Control Charts",
+      "B": "Histograms",
+      "C": "Check Sheets",
+      "D": "Social media profiles"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Operation' 'Sequencing'?",
+    "options": {
+      "A": "Ordering the operations in alphabetical order.",
+      "B": "Determining the order in which specific jobs or tasks are performed at a workstation.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Production', what is 'Batch' 'Size' 'Optimization'?",
+    "options": {
+      "A": "Making every batch the same size as a car.",
+      "B": "Finding the ideal number of units to produce at once to balance setup costs and holding costs.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cycle' 'Time' is always exactly the same as 'Takt Time'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Supply' 'Chain' 'Metrics'? (Select all that apply)",
+    "options": {
+      "A": "Order fulfillment cycle time",
+      "B": "Freight cost per unit",
+      "C": "Supplier defect rate",
+      "D": "The number of hours the CEO sleeps"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asset' 'Utilization'?",
+    "options": {
+      "A": "The amount of assets stored in a warehouse.",
+      "B": "A metric used to determine how much of a company's assets are being used to generate revenue.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Work' 'Design', what is 'Job' 'Enrichment'?",
+    "options": {
+      "A": "Giving every employee a piece of actual gold.",
+      "B": "Adding more high-level responsibilities (like planning or control) to a job to increase motivation.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Work-in-Process' (WIP) should be kept as high as possible to ensure machines never stop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Predictive' 'Analytics' in operations? (Select all that apply)",
+    "options": {
+      "A": "Forecasting machine failure",
+      "B": "Predicting customer demand shifts",
+      "C": "Predicting future raw material price increases",
+      "D": "Deleting historical data"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Quality' 'Assurance' (QA) vs 'Quality' 'Control' (QC)?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "QA focuses on the process to prevent defects; QC focuses on the final product to find defects.",
+      "C": "QA is for beginners; QC for experts.",
+      "D": "QC is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Logistics' 'Lead' 'Time'?",
+    "options": {
+      "A": "The time it takes to drive a delivery truck.",
+      "B": "The total time from when an order is placed until it is received by the customer.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Standardization' of parts across different products can significantly reduce inventory holding costs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Risk' 'Management' 'Strategies'? (Select all that apply)",
+    "options": {
+      "A": "Avoidance",
+      "B": "Mitigation",
+      "C": "Transfer (e.g., Insurance)",
+      "D": "Ignorance"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Process' 'Flow' 'Analysis'?",
+    "options": {
+      "A": "Analyzing the flow of water in a pipe.",
+      "B": "Studying the logical and physical movement of data or materials through a system.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Service' 'Blueprinting'?",
+    "options": {
+      "A": "Drawing a building using blue ink.",
+      "B": "A visual map of the service process, including front-stage (customer-facing) and back-stage activities.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Kanban' is a 'Push' system designed to maximize production speed regardless of demand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical approach is best suited for optimizing the location of a new distribution center based on minimizing total weighted distance to customers?",
+    "options": {
+      "A": "Simple Linear Regression",
+      "B": "Center-of-Gravity Method",
+      "C": "Binary Search Algorithm",
+      "D": "Exponential Smoothing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Statistical Process Control, 'Capability Indices' ($C_p$ and $C_{pk}$) are only valid if the underlying process distribution is approximately normal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Agile' Supply Chains compared to 'Lean' ones? (Select all that apply)",
+    "options": {
+      "A": "High focus on responsiveness to unpredictable demand",
+      "B": "Prioritization of cost reduction through high volume",
+      "C": "Extensive use of modular product design",
+      "D": "High levels of buffer capacity and inventory"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is the primary technical purpose of 'Little’s Law' ($L = lambda W$) in operational bottleneck analysis?",
+    "options": {
+      "A": "To calculate the physical density of raw materials.",
+      "B": "To relate the average number of items in a system to the arrival rate and average wait time.",
+      "C": "To predict the exact time a specific machine will fail.",
+      "D": "To determine the optimal salary for a plant manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Queuing Theory', an M/M/1 queue assumes which of the following distributions for inter-arrival times?",
+    "options": {
+      "A": "Normal Distribution",
+      "B": "Exponential Distribution",
+      "C": "Uniform Distribution",
+      "D": "Poisson Distribution (for counts)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Total Productive Maintenance' (TPM) identifies 'The Six Big Losses', which include idling, minor stoppages, and reduced speed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced Planning and Scheduling' (APS) logic handles constraints by prioritizing tasks based on their impact on the final delivery date? (Select all that apply)",
+    "options": {
+      "A": "Theory of Constraints (TOC)",
+      "B": "Finite Capacity Scheduling",
+      "C": "Infinite Loading",
+      "D": "Critical Chain Project Management (CCPM)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Johnson's Rule' optimize in a two-machine flow shop?",
+    "options": {
+      "A": "The total energy consumption of both machines.",
+      "B": "The sequence of jobs to minimize total makespan (idle time).",
+      "C": "The number of employees required to staff the machines.",
+      "D": "The physical distance between the two machines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which econometric issue occurs when an operation analysis model ignores seasonal demand, leading to correlated errors?",
+    "options": {
+      "A": "Multicollinearity",
+      "B": "Autocorrelation",
+      "C": "Heteroscedasticity",
+      "D": "Endogeneity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'News Vendor Model' is used to determine optimal inventory levels for products with stable, long-term demand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Double Exponential Smoothing' (Holt's Method)? (Select all that apply)",
+    "options": {
+      "A": "It accounts for data with a linear trend",
+      "B": "It ignores all historical data older than one month",
+      "C": "It uses two different smoothing constants (Alpha and Beta)",
+      "D": "It is specifically designed for seasonal data without trends"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Overall Labor Effectiveness' (OLE) intended to measure?",
+    "options": {
+      "A": "The total number of hours worked by the entire company.",
+      "B": "The cumulative effect of workforce availability, performance, and quality on production.",
+      "C": "The speed at which an employee can type a report.",
+      "D": "The percentage of employees who arrive to work on time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Six Sigma' analysis, what does the 'p-value' indicate during a Hypothesis Test on process improvements?",
+    "options": {
+      "A": "The physical pressure of the machine parts.",
+      "B": "The probability that the observed difference occurred by chance, assuming the null hypothesis is true.",
+      "C": "The total cost of the project in dollars.",
+      "D": "The number of parameters in the regression model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Slotting' in a warehouse involves adjusting the physical location of items based on changes in demand frequency (velocity).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are required for 'Mixed-Integer Linear Programming' (MILP) in supply chain optimization? (Select all that apply)",
+    "options": {
+      "A": "Objective function",
+      "B": "Decision variables (integer and continuous)",
+      "C": "Constraints",
+      "D": "A list of employee names"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cross-Functional' 'Alignment' risk in BPR?",
+    "options": {
+      "A": "The risk of a building's foundation being misaligned.",
+      "B": "The failure of redesigned processes because they conflict with the incentives of different departments.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for every team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Decision Analysis', what is the 'Expected Monetary Value' (EMV)?",
+    "options": {
+      "A": "The total amount of money in the company's bank account.",
+      "B": "A calculated value that weights the probability of various outcomes against their financial payoffs.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Taguchi Loss Function', any deviation from the target value results in a financial loss, even if it is within tolerance limits.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Inventory' 'Valuation' methods? (Select all that apply)",
+    "options": {
+      "A": "First-In, First-Out (FIFO)",
+      "B": "Last-In, First-Out (LIFO)",
+      "C": "Weighted Average Cost",
+      "D": "Random Order Selection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Sourcing' vs 'Transactional' 'Purchasing'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Strategic sourcing focuses on total cost of ownership and long-term partnerships; Transactional purchasing focuses on immediate price.",
+      "C": "Transactional is for large companies; Strategic for small.",
+      "D": "Transactional is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Drum-Buffer-Rope' (DBR) method in production control?",
+    "options": {
+      "A": "A physical method for moving heavy equipment.",
+      "B": "A Theory of Constraints technique where the constraint sets the beat (Drum), inventory protects it (Buffer), and release is controlled (Rope).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a person name Drum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service' 'Level' 'Gaps' (ServQual model) identify the difference between customer expectations and management perceptions of those expectations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Operational' 'Resilience' strategies? (Select all that apply)",
+    "options": {
+      "A": "Multi-sourcing critical components",
+      "B": "Decoupling supply chain nodes",
+      "C": "Scenario-based stress testing",
+      "D": "Deleting all backup data"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Aggregate' 'Production' 'Planning'?",
+    "options": {
+      "A": "Planning the production of a single small part.",
+      "B": "The process of developing a high-level production schedule for a family of products over a medium-term horizon.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring a person named Aggregate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Disaggregation'?",
+    "options": {
+      "A": "Breaking the company into separate businesses.",
+      "B": "Breaking down an aggregate plan into specific requirements for individual items or sub-assemblies (Master Production Schedule).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the computer server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Simulated' 'Annealing' is a probabilistic technique for finding an approximate global optimum in complex operational scheduling problems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Constraint' 'Management' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Throughput ($T$)",
+      "B": "Inventory ($I$)",
+      "C": "Operating Expense ($OE$)",
+      "D": "Total Number of Chairs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Statistical' 'Tolerance' 'Stacking'?",
+    "options": {
+      "A": "Stacking physical boxes on a shelf.",
+      "B": "Calculating the total variation of an assembly by combining the individual part variations using the Root Sum Square method.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Inventory' 'Theory', what is 'Economic' 'Production' 'Quantity' (EPQ)?",
+    "options": {
+      "A": "The cost of producing a single item.",
+      "B": "An extension of EOQ that accounts for inventory being produced and consumed simultaneously.",
+      "C": "A security bridge for data transfers.",
+      "D": "The number of hours a developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Lead' 'Times' between suppliers can cause high inventory levels or stockouts if not synchronized via MRP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Heuristic' 'Optimization' methods? (Select all that apply)",
+    "options": {
+      "A": "Genetic Algorithms",
+      "B": "Tabu Search",
+      "C": "Ant Colony Optimization",
+      "D": "Standard Average Calculation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Postponement' 'Strategy' in supply chains?",
+    "options": {
+      "A": "Delaying a meeting until next week.",
+      "B": "Delaying the final customization of a product until as close as possible to the point of sale to reduce inventory risk.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Bullwhip' 'Mitigation'?",
+    "options": {
+      "A": "Hiring a person to stop a literal whip.",
+      "B": "Reducing demand variability through information sharing (CPFR), smaller batch sizes, and everyday low pricing (EDLP).",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Queuing' 'Model' M/G/1 allows for a general distribution of service times instead of just exponential.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Predictive' 'Maintenance' 'Telemetry'? (Select all that apply)",
+    "options": {
+      "A": "Vibration analysis data",
+      "B": "Thermal imaging logs",
+      "C": "Acoustic emission sensors",
+      "D": "The color of the factory wall"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inventory' 'Service' 'Level' (e.g., 95%)?",
+    "options": {
+      "A": "The level of respect shown to the warehouse staff.",
+      "B": "The probability that the inventory on hand during the lead time will be sufficient to meet demand.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Production', what is 'Work' 'Order' 'Release' 'Control'?",
+    "options": {
+      "A": "Releasing a bird from a cage.",
+      "B": "A mechanism to control the entry of jobs into a work center to prevent overloading and maintain throughput.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Markov' 'Chain' 'Analysis' can be used to predict the long-term state of a machine (e.g., Working, Degraded, Failed).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Risk' 'Aggregation' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Correlated supply failures",
+      "B": "Natural disasters affecting multiple nodes",
+      "C": "Political instability in source regions",
+      "D": "Choosing a color for the report"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Monte' 'Carlo' 'Simulation' in operations?",
+    "options": {
+      "A": "Hiring a person named Monte to run a casino.",
+      "B": "A computational algorithm that uses repeated random sampling to obtain numerical results for complex operational variables.",
+      "C": "A way to backup data in the sky.",
+      "D": "Deleting data to save space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Maintenance', what is 'Mean' 'Time' 'To' 'Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to buy a new machine.",
+      "B": "The average time required to troubleshoot and fix a failed component or system.",
+      "C": "A specialized software for poets.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bottleneck' 'Starvation' occurs when a non-bottleneck process fails, leaving the bottleneck with no work to perform.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Total' 'Quality' 'Management' (TQM) 'Pillars'? (Select all that apply)",
+    "options": {
+      "A": "Customer focus",
+      "B": "Continuous improvement",
+      "C": "Employee empowerment",
+      "D": "Manual spreadsheet tracking only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Activity' 'On' 'Node' (AON) in project mapping?",
+    "options": {
+      "A": "A person standing on a physical node.",
+      "B": "A network diagram where nodes represent tasks and arrows represent the sequence/dependencies.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Work-load' 'Smoothing'?",
+    "options": {
+      "A": "Smoothing the physical surface of a desk.",
+      "B": "The process of adjusting production schedules to avoid periods of extreme over-utilization or under-utilization.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' in a supply chain occur when local optimizations by one partner lead to sub-optimal performance for the whole chain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Industrial' 'Scale' 'Automation' 'Levels'? (Select all that apply)",
+    "options": {
+      "A": "Manual control",
+      "B": "Programmed logic (PLC)",
+      "C": "Autonomous agents (AI)",
+      "D": "Psychic control"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'OEE' 'Performance' 'Loss'?",
+    "options": {
+      "A": "When the machine is physically broken.",
+      "B": "Time lost when equipment runs at less than its maximum rated speed (slow cycles and minor stops).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Supply' 'Chain', what is 'Safety' 'Stock' 'Calculation' 'Factor'?",
+    "options": {
+      "A": "The weight of the stock on a scale.",
+      "B": "The service level factor ($Z$-score) multiplied by the standard deviation of demand during lead time.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cycle' 'Inventory' is the portion of total inventory that results from purchasing or producing in lots rather than single units.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Statistical' 'Inference' 'Parameters'? (Select all that apply)",
+    "options": {
+      "A": "Mean ($mu$)",
+      "B": "Standard Deviation ($sigma$)",
+      "C": "Variance ($sigma^2$)",
+      "D": "Employee ID Number"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Process' 'Yield'?",
+    "options": {
+      "A": "Yielding to a car in a parking lot.",
+      "B": "The ratio of usable (non-defective) products produced by a process compared to the total number of items started.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Six Sigma', what is 'DMAIC' 'Phase' 'Control' significance?",
+    "options": {
+      "A": "Controlling the physical temperature of the room.",
+      "B": "The final stage where mechanisms are put in place to ensure that the gains achieved are sustained over time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Demand' 'Signals' occur when a company uses retail sales data while its suppliers use wholesale order data, leading to the Bullwhip Effect.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Operations' 'Scheduling' 'Rules'? (Select all that apply)",
+    "options": {
+      "A": "Shortest Processing Time (SPT)",
+      "B": "Earliest Due Date (EDD)",
+      "C": "First-Come, First-Served (FCFS)",
+      "D": "Random Order selection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Operational' 'Bottleneck' 'Detection'?",
+    "options": {
+      "A": "Finding a literal glass bottle in a machine.",
+      "B": "Identifying the resource with the highest utilization or the largest queue of work-in-process.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Business', what is 'Standard' 'Cost' 'Variance'?",
+    "options": {
+      "A": "The difference between your cost and a friend's cost.",
+      "B": "The difference between the actual cost incurred and the predefined standard cost for a specific activity.",
+      "C": "A security scan for database viruses.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lean' 'Thinking' eliminates waste, while 'Six Sigma' eliminates variation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Project' 'Risk' 'Attributes'? (Select all that apply)",
+    "options": {
+      "A": "Probability of occurrence",
+      "B": "Severity of impact",
+      "C": "Detectability",
+      "D": "The color of the CEO's tie"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Heijunka' 'Leveling'?",
+    "options": {
+      "A": "Hiring a person who is very level-headed.",
+      "B": "The practice of leveling production by both volume and product mix to reduce waste and unevenness.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Andon' system?",
+    "options": {
+      "A": "A system for ordering actual 'Andon' noodles.",
+      "B": "A visual control system that alerts management or maintenance when an issue arises on the production floor.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Standard' 'Work' is the documentation of the current best practices to perform a task, providing a baseline for future improvements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Maintenance' 'Maturity' 'Stages'? (Select all that apply)",
+    "options": {
+      "A": "Reactive",
+      "B": "Planned",
+      "C": "Proactive",
+      "D": "Optimized"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Asset' 'Criticality' 'Analysis'?",
+    "options": {
+      "A": "Criticizing a machine for being slow.",
+      "B": "Ranking assets based on the severity of consequences if they were to fail (e.g., Safety, Environment, Cost).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Process' 'Mining'?",
+    "options": {
+      "A": "Mining for physical minerals in a factory.",
+      "B": "The analysis of event logs from enterprise systems to visualize and optimize the 'as-is' business processes.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Supply' 'Chain' 'Strategies' occur when a company uses an efficient (Lean) strategy for a highly innovative, unpredictable product.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Theory' 'of' 'Constraints' 'Performance' 'Measures'? (Select all that apply)",
+    "options": {
+      "A": "Net Profit",
+      "B": "Return on Investment",
+      "C": "Cash Flow",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Single' 'Minute' 'Exchange' 'of' 'Die' (SMED) goal?",
+    "options": {
+      "A": "To swap an employee in under one minute.",
+      "B": "To reduce the time it takes to change over a machine from the last good piece of the previous run to the first good piece of the next run.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  }
+  ]
+}

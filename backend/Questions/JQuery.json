@@ -1,0 +1,1883 @@
+{ 
+  "skill": "JQuery", 
+  "questions": [
+    {
+    "question": "Which symbol is used as a shortcut for the jQuery function?",
+    "options": {
+      "A": "&",
+      "B": "$",
+      "C": "@",
+      "D": "#"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is the correct syntax to select all <p> elements using jQuery?",
+    "options": {
+      "A": "document.select('p')",
+      "B": "$('p')",
+      "C": "query('p')",
+      "D": "p.all()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: jQuery is a server-side JavaScript library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which jQuery method is used to hide an element?",
+    "options": {
+      "A": "visible(false)",
+      "B": "display(none)",
+      "C": "hide()",
+      "D": "remove()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you select an element with the ID 'header' in jQuery?",
+    "options": {
+      "A": "$('.header')",
+      "B": "$('#header')",
+      "C": "$('header')",
+      "D": "$('id=header')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to set or return the text content of selected elements?",
+    "options": {
+      "A": "html()",
+      "B": "val()",
+      "C": "text()",
+      "D": "content()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The $(document).ready() function ensures the DOM is fully loaded before executing code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to handle a mouse click event?",
+    "options": {
+      "A": "onTap()",
+      "B": "click()",
+      "C": "mouseClick()",
+      "D": "clicked()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you select all elements with the class name 'highlight'?",
+    "options": {
+      "A": "$('#highlight')",
+      "B": "$('.highlight')",
+      "C": "$('highlight')",
+      "D": "$('*highlight')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to add one or more CSS classes to selected elements?",
+    "options": {
+      "A": "setClass()",
+      "B": "addClass()",
+      "C": "appendClass()",
+      "D": "style()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: jQuery code can be written in a separate .js file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to change the CSS property of an element?",
+    "options": {
+      "A": "style()",
+      "B": "css()",
+      "C": "attr()",
+      "D": "change()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the method $('div').parent() return?",
+    "options": {
+      "A": "All children of the div",
+      "B": "The direct parent element of the div",
+      "C": "All ancestors of the div",
+      "D": "The siblings of the div"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid jQuery effects? (Select all that apply)",
+    "options": {
+      "A": "fadeIn()",
+      "B": "slideUp()",
+      "C": "colorChange()",
+      "D": "animate()"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: jQuery is a library of the JavaScript language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to get the value of an input field?",
+    "options": {
+      "A": "text()",
+      "B": "val()",
+      "C": "html()",
+      "D": "get()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you select all <div> elements that are currently visible?",
+    "options": {
+      "A": "$('div').visible()",
+      "B": "$('div:visible')",
+      "C": "$('div').is(':shown')",
+      "D": "$('div').filter('visible')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The append() method inserts content at the beginning of selected elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which jQuery method removes the set of matched elements from the DOM?",
+    "options": {
+      "A": "empty()",
+      "B": "remove()",
+      "C": "delete()",
+      "D": "detach()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct jQuery syntax to set the background color of all <h1> elements to red?",
+    "options": {
+      "A": "$('h1').layout('background-color', 'red')",
+      "B": "$('h1').css('background-color', 'red')",
+      "C": "$('h1').style('background-color', 'red')",
+      "D": "$('h1').red()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to toggle between hiding and showing elements?",
+    "options": {
+      "A": "switch()",
+      "B": "toggle()",
+      "C": "hideShow()",
+      "D": "fade()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: jQuery requires a <script> tag to be included in the HTML file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to perform an asynchronous HTTP (Ajax) request?",
+    "options": {
+      "A": "$.request()",
+      "B": "$.ajax()",
+      "C": "$.getAjax()",
+      "D": "$.http()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which selector is used to select the very first <li> element in a list?",
+    "options": {
+      "A": "$('li').first()",
+      "B": "$('li:first')",
+      "C": "Both A and B",
+      "D": "$('li[0]')"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The empty() method removes all child nodes and content from the selected elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you select all elements with a 'title' attribute?",
+    "options": {
+      "A": "$('[title]')",
+      "B": "$(title)",
+      "C": "$('.title')",
+      "D": "$('#title')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to find all sibling elements of a selected element?",
+    "options": {
+      "A": "next()",
+      "B": "prev()",
+      "C": "siblings()",
+      "D": "children()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: jQuery can be downloaded and hosted locally or used via a CDN.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which effect method makes an element transparent slowly?",
+    "options": {
+      "A": "fadeOut()",
+      "B": "slideDown()",
+      "C": "hide()",
+      "D": "invisible()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to set the HTML content of an element?",
+    "options": {
+      "A": "content()",
+      "B": "text()",
+      "C": "html()",
+      "D": "inner()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The '$' sign in jQuery is just an alias for 'jQuery'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method attaches an event handler for one or more events to the selected elements?",
+    "options": {
+      "A": "bind()",
+      "B": "on()",
+      "C": "attach()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the method $('p').last() do?",
+    "options": {
+      "A": "Selects the last paragraph on the page",
+      "B": "Deletes the last paragraph",
+      "C": "Moves the paragraph to the end",
+      "D": "Selects all but the last paragraph"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to remove only the child nodes and content from selected elements, but not the elements themselves?",
+    "options": {
+      "A": "remove()",
+      "B": "empty()",
+      "C": "detach()",
+      "D": "clean()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The text() method can be used to get the combined text of all matched elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to return the value of an attribute for the first element in the set of matched elements?",
+    "options": {
+      "A": "val()",
+      "B": "attr()",
+      "C": "prop()",
+      "D": "getAttr()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct jQuery syntax to select all elements with a 'href' attribute ending with '.pdf'?",
+    "options": {
+      "A": "$('a[href$=.pdf]')",
+      "B": "$('a[href^=.pdf]')",
+      "C": "$('a[href*=.pdf]')",
+      "D": "$('a:pdf')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: jQuery allows you to chain multiple methods together on a single line of code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to insert content AFTER the selected elements?",
+    "options": {
+      "A": "append()",
+      "B": "after()",
+      "C": "insertAfter()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which jQuery method is used to get the direct children of an element?",
+    "options": {
+      "A": "find()",
+      "B": "children()",
+      "C": "descendants()",
+      "D": "siblings()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The focus() method in jQuery can only be used on input fields.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you select all odd-numbered table rows (<tr>) in a table?",
+    "options": {
+      "A": "$('tr:odd')",
+      "B": "$('tr').odd()",
+      "C": "$('tr:even')",
+      "D": "$('tr').filter('odd')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to toggle the presence of a CSS class on an element?",
+    "options": {
+      "A": "switchClass()",
+      "B": "toggleClass()",
+      "C": "changeClass()",
+      "D": "toggle()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the method $('p').next() do?",
+    "options": {
+      "A": "Selects the previous paragraph",
+      "B": "Selects the next sibling element of the paragraph",
+      "C": "Moves the paragraph to the next line",
+      "D": "Selects the first child of the paragraph"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: jQuery is compatible with all modern web browsers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to set the value of an input field?",
+    "options": {
+      "A": "text('value')",
+      "B": "html('value')",
+      "C": "val('value')",
+      "D": "attr('value')"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which selector would you use to select all checkboxes on a form?",
+    "options": {
+      "A": "$('checkbox')",
+      "B": "$(':checkbox')",
+      "C": "$('input[type=check]')",
+      "D": "$('.checkbox')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The prepend() method inserts content at the end of the selected elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to return the width of an element (excluding padding and border)?",
+    "options": {
+      "A": "width()",
+      "B": "innerWidth()",
+      "C": "outerWidth()",
+      "D": "fullWidth()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you select all elements that are currently being animated?",
+    "options": {
+      "A": "$(':animated')",
+      "B": "$('.animated')",
+      "C": "$('animation')",
+      "D": "$('div').is(':moving')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The stop() method is used to stop an animation before it is finished.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to return the vertical scrollbar position for the first element in the set of matched elements?",
+    "options": {
+      "A": "scroll()",
+      "B": "scrollTop()",
+      "C": "position()",
+      "D": "offset()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method executes a function when the mouse pointer leaves an element?",
+    "options": {
+      "A": "mouseaway()",
+      "B": "mouseleave()",
+      "C": "mouseout()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: jQuery uses CSS-style selectors to find elements on a page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the shortcut for $('*')?",
+    "options": {
+      "A": "Selects the body only",
+      "B": "Selects all elements in the document",
+      "C": "Selects all hidden elements",
+      "D": "Selects no elements"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to attach a data object to an element?",
+    "options": {
+      "A": "store()",
+      "B": "data()",
+      "C": "attach()",
+      "D": "meta()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The animate() method can be used to animate CSS properties like 'backgroundColor'.",
+    "options": {
+      "A": "True (with jQuery UI or a plugin)",
+      "B": "False (standard jQuery only supports numeric properties)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to slide down an element?",
+    "options": {
+      "A": "slideUp()",
+      "B": "slideDown()",
+      "C": "slideToggle()",
+      "D": "show()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which selector is used to select all elements that are enabled?",
+    "options": {
+      "A": "$(':enabled')",
+      "B": "$('input:enabled')",
+      "C": "$('.enabled')",
+      "D": "$('[enabled]')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The each() method is used to iterate over a jQuery object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method returns the offset coordinates of an element, relative to the document?",
+    "options": {
+      "A": "position()",
+      "B": "offset()",
+      "C": "coordinates()",
+      "D": "top()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method triggers the 'submit' event of a form?",
+    "options": {
+      "A": "send()",
+      "B": "submit()",
+      "C": "post()",
+      "D": "commit()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: jQuery is a case-sensitive library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which selector selects all <a> elements with a target attribute equal to '_blank'?",
+    "options": {
+      "A": "$('a[target=_blank]')",
+      "B": "$('a:target(_blank)')",
+      "C": "$('a.target')",
+      "D": "$('a#_blank')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to perform a GET request?",
+    "options": {
+      "A": "$.ajax('GET')",
+      "B": "$.get()",
+      "C": "Both A and B",
+      "D": "$.fetch()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does $(this) represent inside a jQuery event handler?",
+    "options": {
+      "A": "The window object",
+      "B": "The DOM element that triggered the event",
+      "C": "The jQuery library itself",
+      "D": "The parent of the element"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is preferred for attaching event handlers to elements that are added to the DOM dynamically after the initial page load?",
+    "options": {
+      "A": "click()",
+      "B": "bind()",
+      "C": "on()",
+      "D": "delegate()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the difference between 'attr()' and 'prop()' in jQuery?",
+    "options": {
+      "A": "attr() gets the HTML attribute; prop() gets the DOM property (e.g., 'checked' status).",
+      "B": "prop() is only for CSS; attr() is for HTML.",
+      "C": "attr() is faster than prop().",
+      "D": "There is no difference; prop() replaced attr() in jQuery 3.0."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'event.preventDefault()' method stops the event from bubbling up the DOM tree.",
+    "options": {
+      "A": "True",
+      "B": "False (It only stops the default browser action)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AJAX setting is used to convert the data into a query string when sending data to the server?",
+    "options": {
+      "A": "stringify",
+      "B": "processData",
+      "C": "traditional",
+      "D": "serialize"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you prevent multiple jQuery libraries from conflicting with each other or other libraries using the '$' sign?",
+    "options": {
+      "A": "$.noConflict()",
+      "B": "jQuery.stop()",
+      "C": "$.reset()",
+      "D": "jQuery.avoid()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'deferred.done()' method do in a jQuery Promise?",
+    "options": {
+      "A": "Executes a function when the task fails.",
+      "B": "Executes a function only when the task is successfully resolved.",
+      "C": "Always executes regardless of success or failure.",
+      "D": "Stops the promise from executing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Event Delegation' in jQuery?",
+    "options": {
+      "A": "Passing an event from the server to the client.",
+      "B": "Attaching an event listener to a parent element to manage events for its current and future children.",
+      "C": "Deleting an event after it runs once.",
+      "D": "Assigning an event to multiple buttons at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'serialize()' method creates a URL-encoded text string by serializing form values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery traversal method returns all ancestor elements of the selected element, all the way up to the document's root?",
+    "options": {
+      "A": "parent()",
+      "B": "parents()",
+      "C": "closest()",
+      "D": "ancestors()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'parents()' and 'closest()'?",
+    "options": {
+      "A": "closest() returns only one element; parents() returns all ancestors.",
+      "B": "parents() starts from the element itself; closest() starts from the parent.",
+      "C": "closest() is only for classes; parents() is for IDs.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to stop an currently running animation and clear the animation queue?",
+    "options": {
+      "A": "pause()",
+      "B": "stop(true, true)",
+      "C": "finish()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In an AJAX call, what does the 'dataType' property specify?",
+    "options": {
+      "A": "The type of data being sent to the server.",
+      "B": "The type of data expected back from the server (e.g., json, xml, html).",
+      "C": "The version of JavaScript being used.",
+      "D": "The encryption level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The '$.when()' function provides a way to execute callback functions based on one or more objects, usually Deferred objects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method allows you to execute a function for each element in a jQuery object, providing the index and the element itself?",
+    "options": {
+      "A": "forEach()",
+      "B": "map()",
+      "C": "each()",
+      "D": "filter()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you select all elements that contain the text 'Submit'?",
+    "options": {
+      "A": "$('*:contains(\"Submit\")')",
+      "B": "$('*:hasText(\"Submit\")')",
+      "C": "$('*:filter(\"Submit\")')",
+      "D": "$('*:search(\"Submit\")')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'event.stopPropagation()' prevents the browser from executing the default action of an element.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid ways to send data in a $.post() request? (Select all that apply)",
+    "options": {
+      "A": "As a JavaScript object: { name: 'John' }",
+      "B": "As a serialized string: 'name=John&age=30'",
+      "C": "As an array: ['John', 30]",
+      "D": "As a JSON string (with proper headers)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "Which method returns the immediate preceding sibling of each element in the set of matched elements?",
+    "options": {
+      "A": "prev()",
+      "B": "prevAll()",
+      "C": "parentsUntil()",
+      "D": "siblings()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'queue()' method do in jQuery?",
+    "options": {
+      "A": "Deletes the elements from the page.",
+      "B": "Shows or manipulates the queue of functions to be executed on the matched elements.",
+      "C": "Sends the request to a database queue.",
+      "D": "Sorts the elements alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'load()' method can fetch HTML from a server and inject it into the selected element in one step.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '$.proxy()' method?",
+    "options": {
+      "A": "To bypass a firewall.",
+      "B": "To ensure that 'this' inside a function refers to a specific object.",
+      "C": "To create a fake server for testing.",
+      "D": "To speed up AJAX requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method creates a deep copy of a set of matched elements?",
+    "options": {
+      "A": "copy()",
+      "B": "clone()",
+      "C": "duplicate()",
+      "D": "replicate()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Passing 'true' to 'clone(true)' will also copy the event handlers and data attached to the elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you check if an element has a specific class?",
+    "options": {
+      "A": "$('div').is('.myClass')",
+      "B": "$('div').hasClass('myClass')",
+      "C": "Both A and B",
+      "D": "$('div').checkClass('myClass')"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method is used to remove an attribute from each element in the set of matched elements?",
+    "options": {
+      "A": "removeAttr()",
+      "B": "deleteAttr()",
+      "C": "strip()",
+      "D": "unload()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'find()' method searches through the descendants of the selected elements in the DOM tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the '.animate()' method, which of the following is NOT a valid duration name?",
+    "options": {
+      "A": "slow",
+      "B": "fast",
+      "C": "medium",
+      "D": "normal"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method is used to handle multiple events with different functions in a single call?",
+    "options": {
+      "A": "$('div').on({ click: fn1, mouseenter: fn2 })",
+      "B": "$('div').bindAll(fn1, fn2)",
+      "C": "$('div').attach({ click: fn1 })",
+      "D": "jQuery does not support this."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The '$.getJSON()' method is a shorthand Ajax function for '$.ajax()' with 'dataType: json'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method returns the height of an element including padding, but not the border or margin?",
+    "options": {
+      "A": "height()",
+      "B": "innerHeight()",
+      "C": "outerHeight()",
+      "D": "fullHeight()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the '$.trim()' function do?",
+    "options": {
+      "A": "Removes elements from the DOM.",
+      "B": "Removes whitespace from the beginning and end of a string.",
+      "C": "Cuts the length of an array.",
+      "D": "Reduces the size of an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'wrap()' method wraps an HTML structure around each element in the set of matched elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to attach a function to the 'error' event of an AJAX request globally?",
+    "options": {
+      "A": "$.ajaxError()",
+      "B": "$(document).ajaxError()",
+      "C": "$.getError()",
+      "D": "$.on('ajaxError')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the difference between .detach() and .remove()?",
+    "options": {
+      "A": ".detach() keeps the element in the DOM but hides it; .remove() deletes it.",
+      "B": ".detach() keeps the associated jQuery data and event handlers of the removed element; .remove() does not.",
+      "C": ".remove() is only for child elements; .detach() is for parents.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using the .animate() method, which properties can be animated? (Select all that apply)",
+    "options": {
+      "A": "width",
+      "B": "opacity",
+      "C": "fontSize",
+      "D": "backgroundColor (standard jQuery)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The .promise() method returns a Promise object that is resolved when all actions of a certain type bound to the collection (like animations) have finished.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which jQuery method is used to filter a set of elements based on a selector or a function?",
+    "options": {
+      "A": "slice()",
+      "B": "filter()",
+      "C": "not()",
+      "D": "has()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid jQuery AJAX shorthand methods? (Select all that apply)",
+    "options": {
+      "A": "$.get()",
+      "B": "$.post()",
+      "C": "$.getJSON()",
+      "D": "$.getScript()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: Using .val() on a <select multiple> element will return an array containing the values of all selected options.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In jQuery, what is the 'Animation Queue'?",
+    "options": {
+      "A": "A list of elements that need to be created.",
+      "B": "A sequence of functions/animations that execute one after another on a specific element.",
+      "C": "A database of all active users.",
+      "D": "A way to speed up the page load."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid jQuery traversal methods to move 'up' the DOM tree? (Select all that apply)",
+    "options": {
+      "A": "parent()",
+      "B": "parentsUntil()",
+      "C": "closest()",
+      "D": "find()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The .stop() method by default only stops the currently active animation and allows the queue to proceed with the next animation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to get the HTML content of the first element in the set of matched elements, including its own tag?",
+    "options": {
+      "A": "html()",
+      "B": "prop('outerHTML')",
+      "C": "text()",
+      "D": "val()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods can be used to insert an element as a 'sibling' to another element? (Select all that apply)",
+    "options": {
+      "A": "after()",
+      "B": "before()",
+      "C": "insertAfter()",
+      "D": "insertBefore()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: The .off() method is used to remove event handlers that were attached with .on().",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the .end() method do in a jQuery chain?",
+    "options": {
+      "A": "Terminates the script.",
+      "B": "Ends the current filtering operation and returns the set of matched elements to its previous state.",
+      "C": "Removes the element from the DOM.",
+      "D": "Clears the console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AJAX events are considered 'Global Events'? (Select all that apply)",
+    "options": {
+      "A": "ajaxStart",
+      "B": "ajaxComplete",
+      "C": "ajaxSuccess",
+      "D": "ajaxError"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: $.parseJSON() is still the recommended way to parse JSON in jQuery 3.x.",
+    "options": {
+      "A": "True",
+      "B": "False (Native JSON.parse() is preferred)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'context' property in the $.ajax() settings object?",
+    "options": {
+      "A": "To define the URL of the request.",
+      "B": "To set the object that 'this' will refer to in all AJAX-related callbacks.",
+      "C": "To specify the data type.",
+      "D": "To handle cross-domain security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which selectors can be used to find empty elements? (Select all that apply)",
+    "options": {
+      "A": "$(':empty')",
+      "B": "$('div:empty')",
+      "C": "$('div').filter(':empty')",
+      "D": "$('div').not(':has(*)')"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: The .trigger() method can trigger custom events in addition to standard browser events.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'step' function in the .animate() options object do?",
+    "options": {
+      "A": "It counts the number of elements animated.",
+      "B": "It is a callback function called after each step of the animation for each animated property.",
+      "C": "It determines the speed of the animation.",
+      "D": "It stops the animation after one step."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid ways to get the height of an element? (Select all that apply)",
+    "options": {
+      "A": "height()",
+      "B": "innerHeight()",
+      "C": "outerHeight()",
+      "D": "css('height')"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery.fn is an alias for the jQuery.prototype.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to attach a handler to one or more events that will execute only once per element?",
+    "options": {
+      "A": "once()",
+      "B": "one()",
+      "C": "single()",
+      "D": "first()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which properties are included in the 'event' object passed to a jQuery event handler? (Select all that apply)",
+    "options": {
+      "A": "target",
+      "B": "pageX",
+      "C": "type",
+      "D": "which (key or mouse button code)"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: .unwrap() removes the parents of the set of matched elements from the DOM, leaving the matched elements in their place.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to create a new jQuery object with elements added to the set of matched elements?",
+    "options": {
+      "A": "append()",
+      "B": "add()",
+      "C": "concat()",
+      "D": "push()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'position' related methods in jQuery? (Select all that apply)",
+    "options": {
+      "A": "offset()",
+      "B": "position()",
+      "C": "scrollTop()",
+      "D": "scrollLeft()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: The .replaceWith() method removes content from the DOM and inserts new content in its place with a single call.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you select all elements that do NOT match a specific selector?",
+    "options": {
+      "A": "not() method",
+      "B": ":not() selector",
+      "C": "Both A and B",
+      "D": "exclude() method"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which features were introduced in jQuery 3.0? (Select all that apply)",
+    "options": {
+      "A": "Full Support for Promises/A+",
+      "B": "RequestAnimationFrame for animations",
+      "C": "Removal of .load(), .unload(), and .error() methods",
+      "D": "Introduction of .on()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: $.each() can be used to iterate over both objects and arrays.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of $('div').length if there are 5 div elements on the page?",
+    "options": {
+      "A": "0",
+      "B": "5",
+      "C": "undefined",
+      "D": "null"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods are used for 'fading' effects? (Select all that apply)",
+    "options": {
+      "A": "fadeIn()",
+      "B": "fadeOut()",
+      "C": "fadeToggle()",
+      "D": "fadeTo()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: You can use a function as the second argument to .attr() to set attribute values dynamically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Sizzle' engine in the context of jQuery?",
+    "options": {
+      "A": "The animation engine used for CSS transitions.",
+      "B": "A standalone pure-JavaScript CSS selector engine used by jQuery to handle complex selectors.",
+      "C": "A compression tool for reducing jQuery's file size.",
+      "D": "The internal AJAX handling module."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid ways to improve jQuery selector performance in a large DOM? (Select all that apply)",
+    "options": {
+      "A": "Using ID selectors over class selectors.",
+      "B": "Providing a context to the selector, e.g., $('.child', '#parent').",
+      "C": "Caching selectors in variables.",
+      "D": "Using specific tag names with classes, e.g., $('div.myClass')."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In jQuery 3.0+, all Deferred objects are fully compatible with the Promises/A+ specification, meaning .then() now returns a new Promise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When developing a jQuery plugin, why is it standard practice to return 'this' at the end of the function?",
+    "options": {
+      "A": "To ensure the plugin is private.",
+      "B": "To maintain chainability so other jQuery methods can be called after the plugin.",
+      "C": "To prevent memory leaks.",
+      "D": "To refresh the DOM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are states of a jQuery Deferred object? (Select all that apply)",
+    "options": {
+      "A": "pending",
+      "B": "resolved",
+      "C": "rejected",
+      "D": "waiting"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using the '.on()' method for event delegation consumes more memory than attaching individual events to 1,000 child elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of '$.callbacks()', and how is it used internally?",
+    "options": {
+      "A": "It is used to create event handlers for buttons.",
+      "B": "It is a multi-purpose callback list object used to manage sequences of functions, supporting both Promises and AJAX internally.",
+      "C": "It is used to revert the '$' sign.",
+      "D": "It is a debugging tool for console logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods can be used to stop an event from triggering handlers on parent elements? (Select all that apply)",
+    "options": {
+      "A": "event.stopPropagation()",
+      "B": "event.stopImmediatePropagation()",
+      "C": "return false (in a jQuery handler)",
+      "D": "event.preventDefault()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The '$.holdReady(true)' method can be used to delay the execution of the $(document).ready() event until a certain condition (like a dynamic script load) is met.",
+    "options": {
+      "A": "True",
+      "B": "False (Deprecated/Removed in jQuery 3.4+)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does '$.speed()' function internally within the jQuery effects module?",
+    "options": {
+      "A": "It measures the user's internet speed.",
+      "B": "It is an internal utility that normalizes animation duration, easing, and complete callbacks into a single settings object.",
+      "C": "It speeds up the DOM rendering.",
+      "D": "It is used to set the frame rate of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid jQuery UI interactions? (Select all that apply)",
+    "options": {
+      "A": "Draggable",
+      "B": "Droppable",
+      "C": "Resizable",
+      "D": "Sortable"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: In modern jQuery, '.promise()' can be called on a collection to get a Promise that resolves when all active animations on that collection are finished.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method would you use to find the nearest ancestor that matches a selector, including the element itself?",
+    "options": {
+      "A": "parents()",
+      "B": "closest()",
+      "C": "parent()",
+      "D": "find()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid arguments for the '$.ajax()' method's 'converters' option? (Select all that apply)",
+    "options": {
+      "A": "text html",
+      "B": "text json",
+      "C": "xml json",
+      "D": "json html"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery's '.animate()' method can natively animate CSS Grid properties.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of using '$.noConflict(true)'?",
+    "options": {
+      "A": "It only releases the '$' variable.",
+      "B": "It releases both the '$' and the 'jQuery' variables from the global scope.",
+      "C": "It stops all AJAX requests.",
+      "D": "It resets the jQuery version to 1.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following flags can be passed to '$.callbacks()'? (Select all that apply)",
+    "options": {
+      "A": "once",
+      "B": "memory",
+      "C": "unique",
+      "D": "stopOnFalse"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery.readyException is a hook that can be used to handle errors that occur synchronously inside a $(function() { ... }) block.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the internal 'jQuery.access' function do?",
+    "options": {
+      "A": "It handles user permissions for the API.",
+      "B": "It is a helper function used to get/set values for collections (used by .css(), .attr(), .prop()).",
+      "C": "It allows jQuery to access external databases.",
+      "D": "It is used for password encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods are part of the jQuery Deferred interface? (Select all that apply)",
+    "options": {
+      "A": "resolveWith()",
+      "B": "rejectWith()",
+      "C": "notifyWith()",
+      "D": "progress()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery 3.x uses 'requestAnimationFrame' for animations, resulting in smoother transitions and lower CPU usage than 'setInterval'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Tick' in the context of jQuery's internal animation loop?",
+    "options": {
+      "A": "A unit of time equal to 1 second.",
+      "B": "A single execution of the animation function for all currently active animations.",
+      "C": "A specific error in the AJAX module.",
+      "D": "The sound jQuery makes when it loads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Event Object' methods used to handle event flow? (Select all that apply)",
+    "options": {
+      "A": "isDefaultPrevented()",
+      "B": "isPropagationStopped()",
+      "C": "isImmediatePropagationStopped()",
+      "D": "isTriggered()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using '$.ajaxSetup()' is generally discouraged for modern applications because it globally affects all future AJAX requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In jQuery, what is the 'expando' property?",
+    "options": {
+      "A": "A special plugin for expanding menus.",
+      "B": "A unique, internal string used to link DOM elements to their associated jQuery data without causing memory leaks.",
+      "C": "An attribute that tells the browser to expand the cache.",
+      "D": "A way to make the text bigger."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which features were officially deprecated or removed in jQuery 3.5.0 to address security vulnerabilities? (Select all that apply)",
+    "options": {
+      "A": "Internal regex for self-closing HTML tags.",
+      "B": "The '$.htmlPrefilter' method.",
+      "C": "The '.on()' method.",
+      "D": "The '$' shortcut."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: You can create a custom selector in jQuery by adding a function to '$.expr.pseudos'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaining' in jQuery?",
+    "options": {
+      "A": "Executing multiple functions in parallel.",
+      "B": "Linking multiple jQuery methods together on a single set of elements.",
+      "C": "A way to secure the database.",
+      "D": "Grouping multiple files into one."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods allow you to manage the jQuery 'Queue'? (Select all that apply)",
+    "options": {
+      "A": "queue()",
+      "B": "dequeue()",
+      "C": "clearQueue()",
+      "D": "delay()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: Using '$.data()' directly on a DOM element is the same as using the jQuery '.data()' method.",
+    "options": {
+      "A": "True",
+      "B": "False (The method version handles data-attributes and internal storage differently)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method should be used to change the 'this' context of a function to a specific element?",
+    "options": {
+      "A": "$.bind()",
+      "B": "$.proxy()",
+      "C": "$.apply()",
+      "D": "$.call()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'easing' types in standard jQuery? (Select all that apply)",
+    "options": {
+      "A": "linear",
+      "B": "swing",
+      "C": "easeInQuad",
+      "D": "bounce"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The 'jQuery.uniqueSort' method sorts an array of DOM elements and removes duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '$.param()' method?",
+    "options": {
+      "A": "To validate function parameters.",
+      "B": "To create a serialized representation of an array or object, suitable for use in a URL query string.",
+      "C": "To set the parameters of the server.",
+      "D": "To encode a string in Base64."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Prefilter' in jQuery AJAX?",
+    "options": {
+      "A": "A way to filter the results of an AJAX call.",
+      "B": "A hook that allows you to modify the AJAX options before the request is sent.",
+      "C": "A security feature that removes malicious scripts.",
+      "D": "A tool to compress the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Self-invoking' anonymous functions in jQuery development? (Select all that apply)",
+    "options": {
+      "A": "They prevent global namespace pollution.",
+      "B": "They allow the '$' sign to be used safely inside as an alias.",
+      "C": "They are required for all plugins.",
+      "D": "They speed up the execution."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The 'jQuery.ready' property is a Promise-like object that resolves when the DOM is ready.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Flash of Unstyled Content' (FOUC) and how can jQuery help prevent it?",
+    "options": {
+      "A": "When the screen flashes during an animation.",
+      "B": "When the page content appears before the CSS loads; jQuery can hide the body and fade it in once ready.",
+      "C": "A type of server error.",
+      "D": "When the images don't load."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are internal jQuery objects used for event management? (Select all that apply)",
+    "options": {
+      "A": "jQuery.event.add",
+      "B": "jQuery.event.remove",
+      "C": "jQuery.event.trigger",
+      "D": "jQuery.event.dispatch"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery.cssHooks provides a way to define custom behavior for getting and setting specific CSS properties.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using '$.Deferred()' over standard callbacks in complex async logic?",
+    "options": {
+      "A": "It is faster.",
+      "B": "It avoids 'callback hell' by allowing multiple handlers to be attached to a single async task.",
+      "C": "It is more secure.",
+      "D": "It automatically retries failed requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'transport' objects in jQuery AJAX? (Select all that apply)",
+    "options": {
+      "A": "XMLHttpRequest",
+      "B": "script",
+      "C": "jsonp",
+      "D": "websocket"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'event.stopImmediatePropagation()' not only stops bubbling but also prevents other handlers on the same element from executing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a custom jQuery selector function, what is the 'meta' argument?",
+    "options": {
+      "A": "The metadata of the document.",
+      "B": "An array containing the details of the selector, including the value passed in parentheses.",
+      "C": "The index of the element.",
+      "D": "The parent element."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods can be used to manage 'Deferred' progress? (Select all that apply)",
+    "options": {
+      "A": "notify()",
+      "B": "progress()",
+      "C": "notifyWith()",
+      "D": "update()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: '$.contains(container, contained)' returns true if the second DOM element is a descendant of the first.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Namespace' in jQuery events, e.g., '.on(\"click.myPlugin\")'?",
+    "options": {
+      "A": "The URL of the plugin.",
+      "B": "A way to tag events so they can be easily identified and removed later without affecting other events of the same type.",
+      "C": "The name of the developer.",
+      "D": "A variable name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid jQuery AJAX events that receive the 'xhr' object? (Select all that apply)",
+    "options": {
+      "A": "ajaxSend",
+      "B": "ajaxComplete",
+      "C": "ajaxSuccess",
+      "D": "ajaxError"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: You can use '$.cleanData(elems)' to manually remove data and events from a set of elements to prevent memory leaks when those elements are deleted.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does '$.grep()' do in jQuery?",
+    "options": {
+      "A": "Finds a string in a text file.",
+      "B": "Filters an array of items using a callback function.",
+      "C": "Deletes elements from the DOM.",
+      "D": "Sorts a list of numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid properties of the '$.support' object? (Select all that apply)",
+    "options": {
+      "A": "ajax",
+      "B": "cors",
+      "C": "opacity",
+      "D": "checkOn"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: The '$.sub()' method was removed in jQuery 1.9 because it was rarely used and complex to maintain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between '$.map()' and '.map()'?",
+    "options": {
+      "A": "$.map() works on both arrays and objects; .map() works only on a jQuery collection.",
+      "B": ".map() is faster.",
+      "C": "$.map() is only for numbers.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which methods are used to attach 'global' AJAX handlers to the document? (Select all that apply)",
+    "options": {
+      "A": "ajaxStart()",
+      "B": "ajaxStop()",
+      "C": "ajaxError()",
+      "D": "ajaxSuccess()"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: jQuery 3.x enforces 'strict mode' for all internal operations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '$.parseHTML()' method?",
+    "options": {
+      "A": "To validate a website's HTML.",
+      "B": "To safely parse a string into an array of DOM nodes, preventing script execution by default.",
+      "C": "To convert HTML to JSON.",
+      "D": "To show the HTML code on the page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to 'throttle' an event handler in jQuery? (Select all that apply)",
+    "options": {
+      "A": "Using a custom setTimeout timer.",
+      "B": "Using the 'requestAnimationFrame' API.",
+      "C": "Using a dedicated plugin like 'jQuery Throttle/Debounce'.",
+      "D": "jQuery has a native '.throttle()' method."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a jQuery AJAX 'JSONP' request, the 'cache' option is set to 'false' by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the internal 'jQuery.offset.setOffset' function used for?",
+    "options": {
+      "A": "To get the page coordinates.",
+      "B": "To accurately set the position of an element by calculating the necessary CSS relative to its parent.",
+      "C": "To hide an element.",
+      "D": "To change the size of the window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid arguments for '$.each(collection, callback)'? (Select all that apply)",
+    "options": {
+      "A": "An array.",
+      "B": "An object.",
+      "C": "A string.",
+      "D": "A jQuery object."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: The '$.boxModel' property was deprecated in 1.3 and removed in 1.8 because jQuery now assumes the W3C box model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you define a 'Custom Easing' function in jQuery?",
+    "options": {
+      "A": "Add a function to '$.easing'.",
+      "B": "Use the 'animate()' speed parameter.",
+      "C": "Modify the 'jQuery.core.js' file.",
+      "D": "It is not possible without jQuery UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which methods are available to clear the 'Animation Queue'? (Select all that apply)",
+    "options": {
+      "A": "stop(true)",
+      "B": "clearQueue()",
+      "C": "finish()",
+      "D": "reset()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: jQuery 3.x removed support for 'IE8' and below.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '$.fn.extend()' method?",
+    "options": {
+      "A": "To extend the built-in JavaScript Array class.",
+      "B": "To add new methods to the jQuery prototype (for plugin development).",
+      "C": "To merge two objects.",
+      "D": "To increase the version number of jQuery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid property of the 'event' object in a mouse event? (Select all that apply)",
+    "options": {
+      "A": "clientX",
+      "B": "clientY",
+      "C": "screenX",
+      "D": "ctrlKey"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "True or False: The '.andSelf()' method was renamed to '.addBack()' in jQuery 1.8.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'jQuery.noop()' function?",
+    "options": {
+      "A": "A function that stops the script.",
+      "B": "An empty function that does nothing, often used as a placeholder for optional callbacks.",
+      "C": "A way to hide errors.",
+      "D": "A tool to delete variables."
+    },
+    "answer": "B"
+  }
+  ]
+}

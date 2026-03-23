@@ -1,0 +1,1909 @@
+{ 
+  "skill": "API Testing", 
+  "questions": [
+    {
+    "question": "What does 'API' stand for in the context of software testing?",
+    "options": {
+      "A": "Automated Program Integration",
+      "B": "Application Programming Interface",
+      "C": "Advanced Protocol Instruction",
+      "D": "Application Performance Index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API testing is performed at the 'Presentation Layer' (UI) of an application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following HTTP methods is primarily used to 'Create' a new resource on a server?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "DELETE",
+      "D": "PATCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code category represents a 'Successful' request?",
+    "options": {
+      "A": "1xx",
+      "B": "2xx",
+      "C": "4xx",
+      "D": "5xx"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common data formats used in API responses? (Select all that apply)",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "HTML",
+      "D": "MP4"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of the 'GET' method in RESTful APIs?",
+    "options": {
+      "A": "To update an existing record.",
+      "B": "To retrieve data from a specified resource.",
+      "C": "To delete a user account.",
+      "D": "To upload a large file to the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A '404 Not Found' status code indicates that the error is on the client's side (e.g., a wrong URL).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these tools is widely used for manual and automated API testing?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Postman",
+      "C": "Excel",
+      "D": "PowerPoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an API request, where would you typically place 'Authentication Tokens' (like Bearer tokens)?",
+    "options": {
+      "A": "Query Parameters",
+      "B": "Request Headers",
+      "C": "Response Body",
+      "D": "URL Path"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'JSON' stand for?",
+    "options": {
+      "A": "Java Standard Object Notation",
+      "B": "JavaScript Object Notation",
+      "C": "Junction System Over Network",
+      "D": "Java Serialized Output Node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used to 'Delete' a resource?",
+    "options": {
+      "A": "REMOVE",
+      "B": "DELETE",
+      "C": "POST",
+      "D": "PUT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API testing allows for testing the business logic of an application without the need for a graphical user interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when a request is successful and a new resource has been created?",
+    "options": {
+      "A": "200 OK",
+      "B": "201 Created",
+      "C": "204 No Content",
+      "D": "401 Unauthorized"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Resource' in the context of a REST API?",
+    "options": {
+      "A": "The physical server hardware.",
+      "B": "An object or data representation that can be accessed via a specific URI.",
+      "C": "The person writing the code.",
+      "D": "The amount of RAM used by the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of API testing? (Select all that apply)",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Security Testing",
+      "C": "Load Testing",
+      "D": "Keyboard Latency Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function of 'Request Headers' in an API call?",
+    "options": {
+      "A": "To store the main data being sent to the server.",
+      "B": "To provide metadata about the request, such as Content-Type or Authorization.",
+      "C": "To display the company logo on the screen.",
+      "D": "To count the number of users online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SOAP' APIs exclusively use JSON for data exchange.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code indicates that the user must provide valid authentication credentials?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "401 Unauthorized",
+      "C": "403 Forbidden",
+      "D": "500 Internal Server Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Payload' in API testing?",
+    "options": {
+      "A": "The cost of using the API.",
+      "B": "The actual data sent in the body of an HTTP request or response.",
+      "C": "The weight of the data center.",
+      "D": "The number of lines in the API documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is typically used to 'Update' an entire resource with a new version?",
+    "options": {
+      "A": "GET",
+      "B": "PUT",
+      "C": "HEAD",
+      "D": "OPTIONS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Collection' in Postman is a group of saved API requests organized into folders.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code category represents errors that occurred on the 'Server' side?",
+    "options": {
+      "A": "2xx",
+      "B": "3xx",
+      "C": "4xx",
+      "D": "5xx"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is an 'Endpoint' in API testing?",
+    "options": {
+      "A": "The end of a network cable.",
+      "B": "The specific URL where an API can be accessed.",
+      "C": "The last line of a JSON file.",
+      "D": "The closing bracket of a function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of REST APIs? (Select all that apply)",
+    "options": {
+      "A": "Statelessness",
+      "B": "Client-Server Architecture",
+      "C": "Cacheable",
+      "D": "Requires a physical CD-ROM to install"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'Query Parameters' in a URL?",
+    "options": {
+      "A": "To change the server password.",
+      "B": "To filter or sort the data being retrieved (e.g., ?id=10).",
+      "C": "To encrypt the entire database.",
+      "D": "To show the website in dark mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Regression Testing' in APIs ensures that new changes haven't broken existing functionality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is used to apply 'Partial' updates to a resource?",
+    "options": {
+      "A": "PUT",
+      "B": "PATCH",
+      "C": "POST",
+      "D": "UPDATE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the status code '500' generally mean?",
+    "options": {
+      "A": "The URL is misspelled.",
+      "B": "An unexpected error occurred on the server.",
+      "C": "The user is not logged in.",
+      "D": "The request was too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Mock API'?",
+    "options": {
+      "A": "An API that makes fun of the developer.",
+      "B": "A simulated API that returns static data for testing purposes when the real API is not ready.",
+      "C": "A security tool used to hack websites.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'URI'?",
+    "options": {
+      "A": "Uniform Resource Identifier",
+      "B": "User Registration Interface",
+      "C": "Universal Request Index",
+      "D": "Unique Routing Instruction"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: API testing is usually faster to execute than UI-based automated testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates that a request was 'Bad' or malformed (e.g., invalid JSON syntax)?",
+    "options": {
+      "A": "200",
+      "B": "400",
+      "C": "401",
+      "D": "503"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Variables' in a tool like Postman?",
+    "options": {
+      "A": "The temperature of the server room.",
+      "B": "A set of key-value pairs that allow you to reuse values (like URLs) across different requests.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is 'Idempotent' (meaning multiple identical requests have the same effect as one)? (Select all that apply)",
+    "options": {
+      "A": "GET",
+      "B": "PUT",
+      "C": "DELETE",
+      "D": "POST"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API Documentation'?",
+    "options": {
+      "A": "A list of the developer's favorite movies.",
+      "B": "Instructions on how to use and integrate with the API (e.g., Swagger/OpenAPI).",
+      "C": "A security certificate for the office.",
+      "D": "A physical book stored in the library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API can return a '204 No Content' status if a request was successful but there is nothing to return in the body.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to check the 'Headers' of a resource without downloading its body?",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "TRACE",
+      "D": "OPTIONS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XML'?",
+    "options": {
+      "A": "Extended Machine Language",
+      "B": "eXtensible Markup Language",
+      "C": "X-linked Method Link",
+      "D": "Extra Memory Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In API testing, what does 'Schema Validation' involve?",
+    "options": {
+      "A": "Checking if the server is physically clean.",
+      "B": "Ensuring the API response matches a predefined structure (data types, required fields).",
+      "C": "Increasing the speed of the CPU.",
+      "D": "Counting the number of layers in a neural network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'HTTPS' instead of 'HTTP' is essential for securing sensitive data in transit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'API Authentication' methods? (Select all that apply)",
+    "options": {
+      "A": "API Keys",
+      "B": "OAuth 2.0",
+      "C": "Basic Auth",
+      "D": "Writing your name on a piece of paper"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Postman'?",
+    "options": {
+      "A": "A person who delivers physical mail.",
+      "B": "A popular collaboration platform for API development and testing.",
+      "C": "A specialized software for architects.",
+      "D": "A training program for marathon runners."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code indicates that the server is 'Forbidden' from fulfilling the request even if the user is logged in?",
+    "options": {
+      "A": "401",
+      "B": "403",
+      "C": "404",
+      "D": "405"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Sandboxing'?",
+    "options": {
+      "A": "Putting the server in a box of sand.",
+      "B": "Providing an isolated environment where developers can test their integration without affecting production data.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SOAP' stands for Simple Object Access Protocol.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of an HTTP response tells you the format of the data (e.g., application/json)?",
+    "options": {
+      "A": "Status Code",
+      "B": "Content-Type Header",
+      "C": "Request Body",
+      "D": "URL path"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Query String'?",
+    "options": {
+      "A": "A physical string used for measuring servers.",
+      "B": "The part of a URL that follows a question mark and contains data to be passed to the web app.",
+      "C": "A specialized software for poets.",
+      "D": "A hidden password for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Functional Testing' in APIs? (Select all that apply)",
+    "options": {
+      "A": "Verifying that a POST request correctly saves a record",
+      "B": "Verifying that a GET request returns the correct data",
+      "C": "Verifying that the server cabinet is locked",
+      "D": "Verifying that error messages are descriptive"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'WSDL' used for?",
+    "options": {
+      "A": "To translate a website into 10 languages.",
+      "B": "To describe the functionality offered by a SOAP web service (Web Services Description Language).",
+      "C": "A security scan for network firewalls.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API testing is only used for web-based services and cannot be used for mobile apps.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code means 'Method Not Allowed'?",
+    "options": {
+      "A": "403",
+      "B": "405",
+      "C": "406",
+      "D": "407"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Assertion' in an API test?",
+    "options": {
+      "A": "Asserting your dominance in the office.",
+      "B": "A check that compares the actual response (like a status code or value) against an expected result.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST, what does 'Stateless' mean?",
+    "options": {
+      "A": "The server does not have a physical state.",
+      "B": "The server does not store any client context between requests; each request must contain all necessary info.",
+      "C": "The API only works in one country.",
+      "D": "The API is not governed by any laws."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Swagger' (OpenAPI) is a tool used to design, build, and document RESTful APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of an 'API Request'? (Select all that apply)",
+    "options": {
+      "A": "HTTP Method",
+      "B": "Endpoint URL",
+      "C": "Headers",
+      "D": "The developer's home address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the status code for 'Internal Server Error'?",
+    "options": {
+      "A": "400",
+      "B": "500",
+      "C": "502",
+      "D": "504"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Rate Limiting'?",
+    "options": {
+      "A": "Limiting the number of developers in a team.",
+      "B": "Restricting the number of requests a user can make to an API in a given timeframe.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API tests can be integrated into a CI/CD pipeline for automated testing on every code commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is often used to get the 'Available' methods on a resource?",
+    "options": {
+      "A": "GET",
+      "B": "OPTIONS",
+      "C": "CONNECT",
+      "D": "TRACE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Path Variable'?",
+    "options": {
+      "A": "A variable that changes the color of the path.",
+      "B": "A part of the URL path that is used to identify a specific resource (e.g., /users/{id}).",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code means 'Service Unavailable' (often due to maintenance)?",
+    "options": {
+      "A": "500",
+      "B": "503",
+      "C": "504",
+      "D": "505"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Positive Testing' in APIs involves sending valid data and expecting a success response.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Negative Testing' in APIs? (Select all that apply)",
+    "options": {
+      "A": "Sending invalid data types",
+      "B": "Sending mandatory fields as empty",
+      "C": "Sending a request without authentication",
+      "D": "Sending the request from a computer with a dark theme"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Performance Testing' for APIs?",
+    "options": {
+      "A": "Testing how well the developer performs.",
+      "B": "Measuring the response time, throughput, and stability of an API under load.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Postman', what is the purpose of the 'Tests' tab?",
+    "options": {
+      "A": "To write a fictional novel.",
+      "B": "To write JavaScript-based assertions to validate the API response.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'REST' stands for Representational State Transfer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary benefit of 'Contract Testing' for microservices?",
+    "options": {
+      "A": "It ensures that the UI matches the design mockups exactly.",
+      "B": "It ensures that a provider and a consumer agree on the structure of the data exchanged between them.",
+      "C": "It automatically generates the source code for the API controller.",
+      "D": "It replaces the need for any unit testing in the backend."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Stateful' API test, the outcome of a request depends on the actions performed in previous requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is most appropriate when a client sends a request that is syntactically correct but fails business logic validation (e.g., trying to withdraw more money than available)?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "422 Unprocessable Entity",
+      "C": "500 Internal Server Error",
+      "D": "404 Not Found"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Pre-request Script' in an API testing tool like Postman?",
+    "options": {
+      "A": "To format the final test report into a PDF.",
+      "B": "To execute code (like generating a timestamp or dynamic ID) before the main request is sent.",
+      "C": "To delete the API documentation from the server.",
+      "D": "To increase the security level of the physical server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'JSON Schema Validation', what does the 'required' keyword ensure?",
+    "options": {
+      "A": "That the API requires a payment to be used.",
+      "B": "That specific fields must be present in the JSON response body.",
+      "C": "That the user must be logged in with an admin account.",
+      "D": "That the response time is under 100 milliseconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pact' is a popular tool used specifically for implementation of Consumer-Driven Contract Testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'API Chaining'?",
+    "options": {
+      "A": "Locking the API so no one can edit the code.",
+      "B": "Taking the output of one API request (e.g., an ID) and using it as the input for the next request.",
+      "C": "Running 100 APIs on a single physical server.",
+      "D": "A security scan that checks for circular dependencies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'PUT' and 'PATCH'?",
+    "options": {
+      "A": "PUT is for creating; PATCH is for deleting.",
+      "B": "PUT replaces the entire resource; PATCH applies a partial update to the resource.",
+      "C": "PATCH is 100x faster than PUT.",
+      "D": "PUT only works with XML; PATCH only works with JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Authentication' headers? (Select all that apply)",
+    "options": {
+      "A": "Authorization: Bearer <token>",
+      "B": "Authorization: Basic <credentials>",
+      "C": "X-API-Key: <key>",
+      "D": "Content-Type: application/json"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Fuzzing' an API involves sending massive amounts of random or malformed data to find hidden crashes or security holes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Dynamic Variable' generation in API automation?",
+    "options": {
+      "A": "To change the background color of the testing tool.",
+      "B": "To ensure each test run uses unique data (like a new email address) to avoid conflicts or caching issues.",
+      "C": "To automatically fix bugs found during testing.",
+      "D": "To translate the API response into multiple languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should be returned if an API endpoint is temporarily down for maintenance?",
+    "options": {
+      "A": "404 Not Found",
+      "B": "503 Service Unavailable",
+      "C": "500 Internal Server Error",
+      "D": "401 Unauthorized"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latent' data testing in an API context?",
+    "options": {
+      "A": "Testing data that has been deleted.",
+      "B": "Verifying that data modified via an API is correctly reflected in the underlying database or other connected systems.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of the API response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Newman' allows you to run Postman collections directly from the command line, enabling CI/CD integration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of an 'OAuth 2.0' flow? (Select all that apply)",
+    "options": {
+      "A": "Access Token",
+      "B": "Refresh Token",
+      "C": "Client ID",
+      "D": "Physical Hardware Key"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does a '429 Too Many Requests' status code signify?",
+    "options": {
+      "A": "The server has run out of disk space.",
+      "B": "The user has exceeded the API's rate limit.",
+      "C": "The JSON payload is too large to process.",
+      "D": "The API requires a premium subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RestAssured' (Java), which method is used to begin the validation of a response?",
+    "options": {
+      "A": "given()",
+      "B": "then()",
+      "C": "when()",
+      "D": "check()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A '304 Not Modified' status code means the client can continue to use its cached version of the resource.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Golden Path' test in API testing?",
+    "options": {
+      "A": "Testing with actual gold bars.",
+      "B": "The simplest, most common successful use case for an API endpoint without any errors.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP header is used by the client to indicate the format of data it is *sending* in the request body?",
+    "options": {
+      "A": "Accept",
+      "B": "Content-Type",
+      "C": "User-Agent",
+      "D": "Host"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Boundary Value Analysis' in the context of an API field?",
+    "options": {
+      "A": "Analyzing the physical boundaries of the office.",
+      "B": "Testing the extreme ends of input ranges (e.g., testing age at 0, 1, 99, and 100).",
+      "C": "A security scan of the network cables.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API 'Virtualization' and API 'Mocking' are exactly the same concept and used interchangeably in all technical contexts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents a 'Conflict', such as trying to register a username that already exists?",
+    "options": {
+      "A": "400",
+      "B": "409",
+      "C": "415",
+      "D": "502"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Idempotency' in the context of a DELETE request?",
+    "options": {
+      "A": "The first request deletes the resource; subsequent identical requests return the same net state (resource remains deleted).",
+      "B": "Every request deletes a different resource randomly.",
+      "C": "The API requires a password to delete anything.",
+      "D": "The request is 100x faster than a POST request."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'JSON' data types? (Select all that apply)",
+    "options": {
+      "A": "String",
+      "B": "Number",
+      "C": "Boolean",
+      "D": "Function"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Headless' testing?",
+    "options": {
+      "A": "Testing without a project manager.",
+      "B": "Executing tests without a graphical user interface (GUI), often used for backend API automation.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Postman, what is the 'Collection Runner' used for?",
+    "options": {
+      "A": "To run all the requests in a collection in a specified order.",
+      "B": "To physically run to the server room.",
+      "C": "To collect the names of all employees.",
+      "D": "To increase the frame rate of the report."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SOAP APIs use a 'WSDL' file to describe the structure and available operations of the service.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code means 'Unsupported Media Type' (e.g., sending XML to an endpoint that only accepts JSON)?",
+    "options": {
+      "A": "400",
+      "B": "415",
+      "C": "406",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Response Time' assertions?",
+    "options": {
+      "A": "To ensure the server is turned on.",
+      "B": "To verify that the API responds within a specific threshold (e.g., < 200ms) to meet performance requirements.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of an API response identifies the server software that generated the response?",
+    "options": {
+      "A": "Status Code",
+      "B": "Server Header",
+      "C": "Response Body",
+      "D": "Set-Cookie Header"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Global Variables' in Postman is the best way to handle sensitive passwords that should not be shared with a team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Non-Functional' API tests? (Select all that apply)",
+    "options": {
+      "A": "Security Penetration Testing",
+      "B": "Load Testing",
+      "C": "Resilience Testing",
+      "D": "JSON Syntax Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'JWT' (JSON Web Token) commonly used for?",
+    "options": {
+      "A": "Storing large image files.",
+      "B": "Securely transmitting information between parties as a JSON object, often for authentication.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Base URL' refer to in an API project?",
+    "options": {
+      "A": "The URL of the database server.",
+      "B": "The common part of the address used for all endpoints in an API (e.g., https://api.example.com/v1).",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Negative Testing' includes sending an invalid API key to verify that the server returns a 401 Unauthorized status.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code category represents 'Redirection'?",
+    "options": {
+      "A": "1xx",
+      "B": "2xx",
+      "C": "3xx",
+      "D": "4xx"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'API Documentation' tool 'Swagger' primarily used for?",
+    "options": {
+      "A": "To write code for the frontend UI.",
+      "B": "To provide an interactive UI where users can explore and test API endpoints directly.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In API automation, what is a 'Data-Driven' test?",
+    "options": {
+      "A": "A test that runs on a physical hard drive.",
+      "B": "Executing the same test script multiple times using different sets of input data from an external file.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL APIs only have one single endpoint and use a query language to specify exactly what data is needed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code means 'Gateway Timeout'?",
+    "options": {
+      "A": "500",
+      "B": "504",
+      "C": "502",
+      "D": "408"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XML' namespaces used for?",
+    "options": {
+      "A": "To provide names for the developers.",
+      "B": "To provide uniquely named elements and attributes in an XML document to avoid naming conflicts.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Postman', what is 'pm.response.json()' used for in a test script?",
+    "options": {
+      "A": "To delete the JSON response.",
+      "B": "To parse the response body as a JSON object so its properties can be validated.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API testing' can be used to identify security vulnerabilities like SQL injection or sensitive data exposure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'RESTful' constraints? (Select all that apply)",
+    "options": {
+      "A": "Uniform Interface",
+      "B": "Layered System",
+      "C": "Code on Demand (Optional)",
+      "D": "Fixed SQL table names"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Payload' size optimization testing?",
+    "options": {
+      "A": "Measuring the weight of the server.",
+      "B": "Verifying how the API handles very large requests or if it can be optimized to send smaller, more efficient responses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test Coverage' in APIs?",
+    "options": {
+      "A": "The amount of insurance the test has.",
+      "B": "The percentage of available API endpoints or logical paths that are exercised by the test suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Host' header is mandatory in HTTP/1.1 requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'API Intercepting' tools? (Select all that apply)",
+    "options": {
+      "A": "Burp Suite",
+      "B": "Charles Proxy",
+      "C": "Fiddler",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Schema Drift'?",
+    "options": {
+      "A": "When the server physically moves locations.",
+      "B": "When the API response structure changes over time without updates to the tests or documentation.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'Cross-Origin Resource Sharing' (CORS)?",
+    "options": {
+      "A": "Sharing physical resources in the office.",
+      "B": "A mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API performance testing' should only be done in the production environment for the most accurate results.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Regression' testing in APIs? (Select all that apply)",
+    "options": {
+      "A": "Running old tests on new code",
+      "B": "Ensuring bug fixes didn't break other features",
+      "C": "Testing the code while it is being written",
+      "D": "Automated daily test runs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API Throttling'?",
+    "options": {
+      "A": "Hiring a person to stop the API.",
+      "B": "The process of limiting the number of requests a user can make in a given timeframe to ensure service availability.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'SLA' (Service Level Agreement) in APIs?",
+    "options": {
+      "A": "A physical agreement signed in ink.",
+      "B": "A set of predefined performance targets (like uptime or response time) that the API must meet.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON keys must be enclosed in double quotes according to the standard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'API Design' patterns? (Select all that apply)",
+    "options": {
+      "A": "HATEOAS",
+      "B": "BFF (Backend for Frontend)",
+      "C": "Facade Pattern",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'JSONP' (JSON with Padding)?",
+    "options": {
+      "A": "JSON data with actual physical padding.",
+      "B": "A method used to bypass cross-domain restrictions in older browsers by wrapping JSON data in a function call.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'Input Validation' for APIs?",
+    "options": {
+      "A": "Checking the user's password length.",
+      "B": "Ensuring that the data sent in the request body or parameters matches the expected format, type, and length.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SOAP' is generally considered more complex and heavyweight than 'REST'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Testing' levels for APIs? (Select all that apply)",
+    "options": {
+      "A": "Component Testing",
+      "B": "Integration Testing",
+      "C": "System Testing",
+      "D": "Office Furniture Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Rate Limiting' bypass testing?",
+    "options": {
+      "A": "Testing if the rate limit can be broken.",
+      "B": "Trying various techniques (like rotating IPs or headers) to see if the API's restriction mechanisms can be circumvented.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Downtime' in API monitoring?",
+    "options": {
+      "A": "The time the developer spends sleeping.",
+      "B": "The period when the API is unresponsive or failing to return successful responses to users.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API versioning' is used to allow multiple versions of an API to coexist, ensuring backward compatibility for existing clients.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'API Documentation' formats? (Select all that apply)",
+    "options": {
+      "A": "RAML",
+      "B": "API Blueprint",
+      "C": "Markdown",
+      "D": "Postscript"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Error Handling' verification in APIs?",
+    "options": {
+      "A": "Checking if the error messages use pretty colors.",
+      "B": "Ensuring the API returns appropriate status codes and clear error messages for invalid requests.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In advanced OAuth 2.0 security, what is the specific purpose of the 'PKCE' (Proof Key for Code Exchange) extension?",
+    "options": {
+      "A": "To encrypt the API payload at the database layer.",
+      "B": "To prevent 'Authorization Code Injection' attacks, specifically in public clients like mobile or single-page apps.",
+      "C": "To allow the API to use physical hardware keys for every request.",
+      "D": "To increase the speed of the OAuth token refresh cycle by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Stateful' API environment, testing 'Race Conditions' involves sending multiple concurrent requests that attempt to modify the same resource simultaneously to observe data corruption or locking issues.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Idempotent' methods that can still result in a '409 Conflict' under specific high-concurrency scenarios? (Select all that apply)",
+    "options": {
+      "A": "PUT",
+      "B": "DELETE",
+      "C": "PATCH",
+      "D": "GET"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is the primary technical distinction between 'Shallow' and 'Deep' Health Checks in API monitoring?",
+    "options": {
+      "A": "Shallow checks only verify the web server is up; Deep checks verify downstream dependencies like databases and message queues.",
+      "B": "Deep checks are only for mobile apps; Shallow checks are for desktop web browsers.",
+      "C": "Shallow checks are 100x faster than Deep checks.",
+      "D": "Deep checks require a physical manual inspection of the server rack."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'JSON Web Token' (JWT) validation, what does the 'exp' claim technically represent?",
+    "options": {
+      "A": "The Expected Payload size in bytes.",
+      "B": "The Expiration time, after which the token must not be accepted for processing.",
+      "C": "The Export frequency of the token log.",
+      "D": "The Encryption algorithm version used for the signature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Consumer-Driven Contract Testing' (PACT), the provider is responsible for generating the 'Pact' file that defines the interactions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Advanced' HTTP header is used to prevent 'MIME-Sniffing' attacks where an API might misinterpret a file type?",
+    "options": {
+      "A": "X-Frame-Options",
+      "B": "X-Content-Type-Options: nosniff",
+      "C": "Content-Security-Policy",
+      "D": "Access-Control-Allow-Origin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs during a 'Recursive' API payload attack?",
+    "options": {
+      "A": "The API code is rewritten to be recursive.",
+      "B": "An attacker sends a deeply nested JSON or XML structure designed to cause a stack overflow or high CPU usage during parsing.",
+      "C": "The API deletes its own database in a loop.",
+      "D": "A specialized software for architects creates a 3D model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RestAssured' or similar frameworks, what is the role of a 'ResponseSpecBuilder'?",
+    "options": {
+      "A": "To physically build the server response.",
+      "B": "To create reusable assertion templates (e.g., status code 200 + specific headers) that can be applied to multiple tests.",
+      "C": "A security certificate for a database.",
+      "D": "Increasing the frame rate of the test output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mutual TLS' (mTLS) provides 'Zero Trust' security by requiring both the client and the server to present a valid certificate before communication begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Testing' pattern is most effective for verifying that an API gracefully handles 'Upstream' service failures? (Select all that apply)",
+    "options": {
+      "A": "Chaos Engineering (Injection of failures)",
+      "B": "Circuit Breaker testing",
+      "C": "Standard Unit Testing",
+      "D": "Retrying logic verification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API Drift' in the context of Microservices?",
+    "options": {
+      "A": "When the server physically moves to a new data center.",
+      "B": "The divergence between the actual API implementation and the published OpenAPI/Swagger specification.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance' testing, what does 'Tail Latency' (P99.9) specifically highlight?",
+    "options": {
+      "A": "The average speed for the majority of users.",
+      "B": "The worst-case performance experienced by the slowest 0.1% of requests, often indicating deep-seated architectural issues.",
+      "C": "The time it takes to delete a log file.",
+      "D": "Increasing the size of the font in the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GraphQL' 'Introspection' should be disabled in production environments to prevent attackers from discovering the entire schema and its relationships.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Idempotency Key' implementation? (Select all that apply)",
+    "options": {
+      "A": "Clients send a unique 'Idempotency-Key' header in POST requests",
+      "B": "Servers store the key and the previous response to prevent duplicate processing",
+      "C": "It is only required for GET requests",
+      "D": "Ensures safety in 'Retry' scenarios for non-idempotent methods"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Payload' 'Serialization' 'Overhead'?",
+    "options": {
+      "A": "The time it takes to write a JSON file.",
+      "B": "The performance cost of converting objects in memory into a format like JSON or Protobuf for transmission.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) for an API?",
+    "options": {
+      "A": "The average time it takes to reboot the API.",
+      "B": "The predicted elapsed time between inherent failures of the API service during normal operation.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BFLA' (Broken Function Level Authorization) is a vulnerability where a user can access administrative API endpoints simply by knowing the URL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Authentication' vulnerabilities? (Select all that apply)",
+    "options": {
+      "A": "Insecure JWT Signature algorithms (e.g., 'none')",
+      "B": "Credential Stuffing via large-scale automation",
+      "C": "Broken Password Reset logic with predictable tokens",
+      "D": "The color of the login button"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Shadow' 'Traffic'?",
+    "options": {
+      "A": "Traffic that occurs in a dark room.",
+      "B": "A deployment strategy where production traffic is cloned and sent to a test API version to observe behavior without affecting users.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Negative' 'Caching'?",
+    "options": {
+      "A": "Caching only negative numbers.",
+      "B": "The practice of caching the *absence* of data or an error response to reduce load on the origin server.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API' 'Gateway' 'Latency' is the time added to the total response because of processing steps (like Auth or Logging) inside the gateway itself.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Binary' 'API' 'Protocols'? (Select all that apply)",
+    "options": {
+      "A": "gRPC (using Protobuf)",
+      "B": "Apache Thrift",
+      "C": "Avros",
+      "D": "JSON"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Schema' 'Evolution'?",
+    "options": {
+      "A": "Hiring a person named Darwin.",
+      "B": "The ability of an API to handle data structure changes without breaking existing clients (Backward/Forward compatibility).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Microservices', what is a 'Circuit Breaker' state 'Open'?",
+    "options": {
+      "A": "When the server door is open.",
+      "B": "A state where the system stops sending requests to a failing upstream service to prevent a total system crash.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Accept' 'Headers' occur when a client requests a format (e.g., application/xml) that the server cannot provide, leading to a 406 Not Acceptable status.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'API' 'Exploitation' via 'Mass Assignment'? (Select all that apply)",
+    "options": {
+      "A": "Attacker adding hidden fields (like 'is_admin': true) to a JSON POST payload",
+      "B": "Server automatically mapping all incoming JSON fields to a database model",
+      "C": "Hiring 100 extra hackers",
+      "D": "Bypassing business logic by overwriting sensitive properties"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Versioning' via 'Content Negotiation'?",
+    "options": {
+      "A": "Negotiating the price of the API.",
+      "B": "Specifying the API version inside the 'Accept' or 'Content-Type' header rather than in the URL path.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'API' 'Rate' 'Limit' 'Reset' header?",
+    "options": {
+      "A": "A header that resets the physical server.",
+      "B": "An HTTP header that tells the client exactly when their current rate limit window will expire and reset.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stateless' APIs are generally easier to scale horizontally because any server instance can handle any incoming request without needing shared session memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Monitoring' 'Metrics' for APIs? (Select all that apply)",
+    "options": {
+      "A": "Request per second (RPS)",
+      "B": "Error rate per endpoint",
+      "C": "Latency percentiles (P50, P90, P99)",
+      "D": "The color of the CEO's tie"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'HATEOAS' (Hypermedia as the Engine of Application State)?",
+    "options": {
+      "A": "A feeling of hatred toward APIs.",
+      "B": "A REST constraint where the API response includes links to other related actions and resources, allowing the client to discover the API dynamically.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'API' 'Usage' 'Quotas' vs 'Rate Limits'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Rate limits are for short bursts (e.g., per minute); Quotas are for long-term usage (e.g., per month).",
+      "C": "Quotas are for experts; Rate limits for beginners.",
+      "D": "Quotas are 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'CORS' 'Origins' occur when the 'Origin' header sent by a browser is not in the server's allow-list, leading to the browser blocking the response.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Load' 'Testing' 'Scenarios' for APIs? (Select all that apply)",
+    "options": {
+      "A": "Soak Testing (Long duration load)",
+      "B": "Spike Testing (Sudden increase in traffic)",
+      "C": "Break-point Testing (Finding where the server fails)",
+      "D": "Writing a novel about traffic"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Payload' 'Encryption' vs 'Transport' 'Encryption'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Transport encryption (TLS) secures the pipe; Payload encryption secures the actual data inside the pipe.",
+      "C": "Payload encryption is only for mobile apps.",
+      "D": "Transport encryption is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'API' 'Inventory' 'Management'?",
+    "options": {
+      "A": "Managing the inventory of physical servers.",
+      "B": "Tracking all active, deprecated, and 'Zombie' (forgotten) API endpoints within an organization to ensure security coverage.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GraphQL' 'Query' 'Complexity' 'Analysis' is a security measure used to reject queries that would consume excessive server resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Postman' 'Advanced' 'Scripting' 'Objects'? (Select all that apply)",
+    "options": {
+      "A": "pm.environment",
+      "B": "pm.globals",
+      "C": "pm.iterationData",
+      "D": "pm.physicalHardware"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Schema' 'Strict' 'Validation'?",
+    "options": {
+      "A": "Validating the schema of a building.",
+      "B": "Rejecting any API response that includes fields not explicitly defined in the schema to prevent data leakage.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Flaky' 'API' 'Test'?",
+    "options": {
+      "A": "A test that smells like physical flakes.",
+      "B": "A test that intermittently passes and fails without any changes to the code, often due to network issues or race conditions.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'JWT' 'Signing' 'Algorithms' (e.g., using HS256 to verify a token signed with RS256) is a critical security flaw.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Contract' 'Testing' benefits? (Select all that apply)",
+    "options": {
+      "A": "Preventing breaking changes between services",
+      "B": "Reducing the need for large-scale integration environments",
+      "C": "Guaranteed to stop all database bugs",
+      "D": "Enabling independent scaling of teams"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Idempotency' 'Token' 'Storage'?",
+    "options": {
+      "A": "Storing a physical token in a safe.",
+      "B": "Using a high-speed cache (like Redis) to store unique request keys to ensure that a second identical request is not re-processed.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'API' 'Scraping'?",
+    "options": {
+      "A": "Scraping the physical paint off a server.",
+      "B": "Using automated scripts to repeatedly call an API to extract large volumes of data for unauthorized use.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'HTTP' 'Methods' (e.g., sending a POST to an endpoint that only expects GET) will typically result in a 405 Method Not Allowed status.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' 'API' 'Management' 'Features'? (Select all that apply)",
+    "options": {
+      "A": "API Gateway",
+      "B": "Developer Portal",
+      "C": "Monetization tracking",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Mocking' 'Latency' 'Simulation'?",
+    "options": {
+      "A": "Making a mock API run slower.",
+      "B": "Deliberately adding delays to a mock response to verify how the client application handles high-latency scenarios.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'API' 'Uptime' 'SLA' of 99.99%?",
+    "options": {
+      "A": "The API is only available for 9 minutes a month.",
+      "B": "A target where the API is allowed only ~52 minutes of downtime per *year*.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GraphQL' 'Aliasing' allows a single request to fetch multiple different versions of the same resource simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Schema' 'Validation' limitations? (Select all that apply)",
+    "options": {
+      "A": "Checks data types but not business logic correctness",
+      "B": "Cannot verify that an 'id' actually exists in the database",
+      "C": "Always finds 100% of data bugs",
+      "D": "Most effective when combined with functional assertions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Service' 'Mesh' (e.g., Linkerd)?",
+    "options": {
+      "A": "A mesh used to filter water for the servers.",
+      "B": "An infrastructure layer that handles service-to-service communication, providing features like load balancing and encryption.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'API' 'Side-effect' verification?",
+    "options": {
+      "A": "Checking the physical side-effects of using a computer.",
+      "B": "Verifying that calling an API correctly updates secondary systems, like sending an email or triggering a background job.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Encoding' (e.g., UTF-8 vs ISO-8859-1) can lead to data corruption in API payloads.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'API' 'Integration' 'Protocols'? (Select all that apply)",
+    "options": {
+      "A": "Webhooks",
+      "B": "gRPC",
+      "C": "SOAP",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Response' 'Streaming'?",
+    "options": {
+      "A": "Streaming a movie through an API.",
+      "B": "Technique where the server sends data to the client in small chunks as it becomes available, rather than waiting for the full response.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'API' 'Bypass' via 'Parameter' 'Pollution'?",
+    "options": {
+      "A": "Polluting the office with parameters.",
+      "B": "Sending multiple parameters with the same name to trick the API gateway into accepting an unauthorized value that the backend then uses.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GraphQL' 'Mutations' are the equivalent of POST, PUT, or DELETE requests in REST, used to modify data on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Profiling' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying code-level bottlenecks (e.g., slow SQL queries)",
+      "B": "Tracking resource usage (CPU/RAM) per API call",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Enabling performance regression detection"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Request' 'Signing' (e.g., AWS V4)?",
+    "options": {
+      "A": "Signing a physical piece of paper for a request.",
+      "B": "Generating a cryptographic signature of the entire request (headers + body) to ensure integrity and authenticity during transit.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'API' 'Stubbing'?",
+    "options": {
+      "A": "Hitting your toe on a physical API server.",
+      "B": "Replacing a real service component with a simplified implementation that returns fixed responses for specific inputs.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'CORS' 'Pre-flight' 'Headers' occur when a client requests headers (e.g., X-Custom-Header) that are not allowed by the server's Access-Control-Allow-Headers response.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' 'Native' 'API' 'Security' 'Standards'? (Select all that apply)",
+    "options": {
+      "A": "OpenID Connect",
+      "B": "OAuth 2.1",
+      "C": "FAPI (Financial-grade API)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Response' 'Caching' 'TTL' (Time To Live)?",
+    "options": {
+      "A": "The time the developer takes to live.",
+      "B": "The duration for which a cached response remains valid before it must be re-fetched from the origin server.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'API' 'Response' 'Time' 'Jitter'?",
+    "options": {
+      "A": "The physical jitter of the user's hand.",
+      "B": "The variation or inconsistency in response times across multiple requests to the same endpoint.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GraphQL' 'Subscription' allows an API to push real-time updates to a client over a persistent connection (WebSocket).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Testing' 'Efficiency'? (Select all that apply)",
+    "options": {
+      "A": "Running 1000s of tests in minutes via parallelism",
+      "B": "Identifying breaking changes before they reach production",
+      "C": "Replacing all manual testers entirely",
+      "D": "Freeing up humans for complex exploratory testing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Observability' vs 'Monitoring'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Monitoring tells you when it breaks; Observability helps you understand *why* it broke by analyzing logs, metrics, and traces.",
+      "C": "Observability is for experts; Monitoring for beginners.",
+      "D": "Monitoring is 100x faster."
+    },
+    "answer": "B"
+  }
+  ]
+}

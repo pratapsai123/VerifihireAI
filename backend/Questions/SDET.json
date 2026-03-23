@@ -1,0 +1,1885 @@
+{ 
+  "skill": "SDET", 
+  "questions": [
+    {
+    "question": "What is the primary difference between a traditional QA Tester and an SDET?",
+    "options": {
+      "A": "SDETs only perform manual testing while QA Testers write code.",
+      "B": "SDETs are developers who focus on building automated test frameworks and tools to improve quality.",
+      "C": "QA Testers are always part of the DevOps team, while SDETs are not.",
+      "D": "There is no difference; the titles are exactly interchangeable in all companies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SDET's responsibility includes participating in design and code reviews to identify potential quality issues early.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a core benefit of 'Shift-Left' testing in the SDET workflow?",
+    "options": {
+      "A": "It moves all testing to the final day of the production release.",
+      "B": "It allows for the detection and resolution of bugs earlier in the development lifecycle.",
+      "C": "It requires developers to write 100% of the automation scripts.",
+      "D": "It eliminates the need for any documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which testing level is primarily focused on verifying that individual components of the code work correctly in isolation?",
+    "options": {
+      "A": "System Testing",
+      "B": "Unit Testing",
+      "C": "Acceptance Testing",
+      "D": "Integration Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'TDD' stand for in software development?",
+    "options": {
+      "A": "Technical Data Design",
+      "B": "Test-Driven Development",
+      "C": "Total Deployment Duration",
+      "D": "Terminal Debugging Device"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs should avoid learning the application's source code to remain unbiased during testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common languages used by SDETs for automation? (Select all that apply)",
+    "options": {
+      "A": "Java",
+      "B": "Python",
+      "C": "JavaScript",
+      "D": "English"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of a 'Mock' object in SDET automation?",
+    "options": {
+      "A": "To make fun of the developer's code.",
+      "B": "To simulate the behavior of a real component or service that is unavailable or difficult to test.",
+      "C": "To act as a permanent replacement for the production database.",
+      "D": "To increase the physical size of the test suite."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of SDET, what is 'White-Box' testing?",
+    "options": {
+      "A": "Testing with zero knowledge of the internal code.",
+      "B": "Testing with full knowledge of the internal structure, design, and implementation of the software.",
+      "C": "Testing the physical durability of a white computer box.",
+      "D": "Hiring a new manager for the QA department."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs are responsible for maintaining the 'Continuous Integration' (CI) pipeline for test execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used by SDETs to manage and version their automation code?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Git",
+      "C": "Slack",
+      "D": "PowerPoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Code Coverage'?",
+    "options": {
+      "A": "The amount of insurance the software has.",
+      "B": "A metric that measures the percentage of source code executed during automated testing.",
+      "C": "The number of comments per line of code.",
+      "D": "The size of the physical manual for the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are components of the 'Test Automation Pyramid'? (Select all that apply)",
+    "options": {
+      "A": "Unit Tests",
+      "B": "API / Integration Tests",
+      "C": "UI / E2E Tests",
+      "D": "Manual Exploratory Tests"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Refactoring' automated test code is unnecessary as long as the tests are passing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an SDET during the 'Requirement Analysis' phase?",
+    "options": {
+      "A": "To write the actual production code for the feature.",
+      "B": "To evaluate the testability of requirements and plan the automation strategy.",
+      "C": "To wait until the developers are finished before starting work.",
+      "D": "To design the marketing logos for the product."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which design pattern is most commonly used by SDETs to create an abstraction of a web page?",
+    "options": {
+      "A": "Singleton Pattern",
+      "B": "Page Object Model (POM)",
+      "C": "Factory Pattern",
+      "D": "Strategy Pattern"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs should use 'Hardcoded' data in all their test scripts to ensure consistency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression Testing' in an SDET context?",
+    "options": {
+      "A": "Testing a feature for the very first time.",
+      "B": "Rerunning automated tests to ensure that new code changes haven't broken existing functionality.",
+      "C": "Testing the software on older operating systems only.",
+      "D": "Hiring a professional actor to read test logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'API Testing' tools used by SDETs? (Select all that apply)",
+    "options": {
+      "A": "RestAssured",
+      "B": "Postman",
+      "C": "Supertest",
+      "D": "Adobe Premiere"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Headless' browser testing?",
+    "options": {
+      "A": "Testing without a project manager.",
+      "B": "Running browser automation without a graphical user interface (GUI) to save resources.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs often build 'Internal Tools' (like data generators) to help the entire QA team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Flaky Test'?",
+    "options": {
+      "A": "A test that passes 100% of the time.",
+      "B": "A test that intermittently passes and fails without any changes to the code or environment.",
+      "C": "A test written by a junior developer.",
+      "D": "A test that has been deleted from the repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific activity helps an SDET identify the 'Root Cause' of a failing automated test?",
+    "options": {
+      "A": "Deleting the test script.",
+      "B": "Analyzing logs, stack traces, and debugging the test code.",
+      "C": "Hiring a mathematician to count bugs.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs are expected to have strong knowledge of Data Structures and Algorithms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of an automated framework handles the 'Setup' and 'Teardown' of the test environment?",
+    "options": {
+      "A": "Reporting Engine",
+      "B": "Hooks (or Fixtures)",
+      "C": "Object Repository",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BDD' (Behavior-Driven Development) primarily aimed at?",
+    "options": {
+      "A": "Making the code run faster.",
+      "B": "Improving collaboration between technical and non-technical stakeholders using human-readable language.",
+      "C": "Eliminating the need for a database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Sanity Testing'? (Select all that apply)",
+    "options": {
+      "A": "A quick check to verify a specific bug fix works",
+      "B": "A subset of regression testing",
+      "C": "Testing the mental health of the team",
+      "D": "Narrow and deep testing of a specific functional area"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of 'Code Reviews' for automation scripts?",
+    "options": {
+      "A": "To slow down the release process.",
+      "B": "To ensure scripts are maintainable, efficient, and follow team coding standards.",
+      "C": "To find typos in the user manual.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Docker' container used for in SDET work?",
+    "options": {
+      "A": "To store physical server parts.",
+      "B": "To provide a consistent and isolated environment for running automated tests.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs should automate 'Exploratory Testing' scenarios because they are highly predictable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Assertion' would you use to verify that a login was *not* successful?",
+    "options": {
+      "A": "assertEquals(true, true)",
+      "B": "assertNotEquals(expectedUser, actualUser)",
+      "C": "assertTrue(true)",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stubbing' in an automated test?",
+    "options": {
+      "A": "Hitting your toe on a server.",
+      "B": "Providing fixed, predefined responses to calls made during the test to avoid calling a real, complex service.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Dashboard'?",
+    "options": {
+      "A": "The front part of a car.",
+      "B": "A visual representation of test metrics, pass/fail trends, and quality status.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when an SDET tests on a Mac but the production server runs on Linux, potentially leading to 'works on my machine' bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are core 'SDET' competencies? (Select all that apply)",
+    "options": {
+      "A": "Proficiency in at least one programming language",
+      "B": "Understanding of CI/CD concepts",
+      "C": "Ability to design test frameworks",
+      "D": "Ability to type 150 words per minute"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Integration Testing' logic?",
+    "options": {
+      "A": "Testing if the developer is well-integrated into the team.",
+      "B": "Verifying that different modules or services of an application work correctly together.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Jenkins' primarily used for?",
+    "options": {
+      "A": "To write automation scripts.",
+      "B": "An automation server used to build, test, and deploy software (CI/CD).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Analysis' tools can help an SDET find memory leaks and code smells without running the program.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Functional' testing types an SDET might automate? (Select all that apply)",
+    "options": {
+      "A": "Performance / Load Testing",
+      "B": "Security Testing",
+      "C": "Accessibility Testing",
+      "D": "Button Color Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test Data Management'?",
+    "options": {
+      "A": "Managing a list of the tester's favorite books.",
+      "B": "The process of providing, managing, and cleaning up the data required for automated test execution.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Leakage'?",
+    "options": {
+      "A": "When liquid spills on a computer.",
+      "B": "The number of defects found in production that should have been caught during the testing phase.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SDETs should strive to automate 100% of all possible test cases to ensure perfect quality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Faster feedback to developers",
+      "B": "Reduction in manual effort for repetitive tasks",
+      "C": "Guaranteed to find all logical bugs",
+      "D": "High repeatability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Wait' 'Strategy' in UI automation?",
+    "options": {
+      "A": "Waiting for the developer to buy lunch.",
+      "B": "The method used to synchronize the automation script with the application's UI (e.g., Implicit vs. Explicit waits).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Environment' 'Provisioning'?",
+    "options": {
+      "A": "Provisioning physical food for the office.",
+      "B": "Automatically setting up the hardware and software required to run a specific test suite.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the automation script uses a library that is incompatible with the version of the application under test.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'SDET' 'Architecture' layers? (Select all that apply)",
+    "options": {
+      "A": "Test Script Layer",
+      "B": "Page Object / Logic Layer",
+      "C": "Base / Infrastructure Layer",
+      "D": "Marketing / Sales Layer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Atomic' 'Testing'?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "Designing test cases that are small, independent, and focus on a single piece of functionality.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Execution' 'Time'?",
+    "options": {
+      "A": "The time it takes for a team to have a meeting.",
+      "B": "The total duration required for the automated suite to finish its run.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the automation expects 'User_A' to exist, but the database was cleared before the test started.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Unit' 'Testing' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Test Results (.xml / .html)",
+      "B": "Code Coverage Reports",
+      "C": "The SQL query parser",
+      "D": "Static Analysis logs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Parallel' 'Execution'?",
+    "options": {
+      "A": "Executing a person in a parallel dimension.",
+      "B": "Running multiple automated tests simultaneously to reduce total execution time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cloud' 'Testing'?",
+    "options": {
+      "A": "Testing actual clouds in the sky.",
+      "B": "Executing automated tests on cloud-based infrastructure like AWS, Sauce Labs, or BrowserStack.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' refer to the tension between developers and testers when quality is seen as only the 'Tester's' job.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Software' 'Scalability' 'Testing'? (Select all that apply)",
+    "options": {
+      "A": "Verifying the system can handle an increasing number of users",
+      "B": "Testing if the UI works on a very large monitor",
+      "C": "Checking performance as more CPU/RAM is added",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Testing'?",
+    "options": {
+      "A": "Testing in a room with no physical lights.",
+      "B": "Running a new version of a service in parallel with the stable version to compare outputs without affecting real users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a bug is reported until a verified fix is deployed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the business expects 100% uptime but the automation framework only supports 90% test stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' 'Checks'? (Select all that apply)",
+    "options": {
+      "A": "Checking for missing alt-text on images",
+      "B": "Verifying ARIA labels",
+      "C": "Testing if the keyboard is physically broken",
+      "D": "Enforcing color contrast standards"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which an automation framework can be updated or fixed as the application under test changes.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Case' 'Efficiency'?",
+    "options": {
+      "A": "Hiring a person named Efficiency.",
+      "B": "The ratio of bugs found per automated test case over a specific period.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Dependencies' occur when an SDET uses a 2024 version of a tool but the project requires a 2020 version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in data presentation",
+      "B": "Instant availability of results",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual spreadsheet updates"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation'?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that test data from one execution thread does not interfere with data from another during parallel testing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a multi-threaded automation framework, which Java class is commonly used to ensure each thread has its own isolated instance of the WebDriver?",
+    "options": {
+      "A": "StaticDriver",
+      "B": "ThreadLocal",
+      "C": "SynchronizedMap",
+      "D": "ArrayList"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Fluent Waits' allows an SDET to define the maximum timeout and the polling frequency, as well as ignore specific exceptions like 'NoSuchElementException'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are benefits of implementing the 'Factory Design Pattern' for browser instantiation? (Select all that apply)",
+    "options": {
+      "A": "Centralizes the logic for creating different driver types (Chrome, Firefox, Edge)",
+      "B": "Promotes loose coupling by hiding the instantiation logic from the test scripts",
+      "C": "Automatically deletes old log files from the server",
+      "D": "Simplifies the process of adding support for new browser types"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary technical reason an SDET would use a 'Service Virtualization' tool (like WireMock) instead of a simple Mock object?",
+    "options": {
+      "A": "Service Virtualization is only used for UI testing.",
+      "B": "Virtualization simulates the entire network-level behavior (latency, protocols, status codes) of a remote service.",
+      "C": "Mock objects are much faster than Virtualized services.",
+      "D": "Virtualization requires a physical license for every tester's laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'REST API' automation, what is the role of 'De-serialization'?",
+    "options": {
+      "A": "Formatting a JSON string to be pretty-printed in a report.",
+      "B": "Converting a JSON or XML response body into a high-level programming object (like a POJO) for easier assertions.",
+      "C": "Removing the serial numbers from the server hardware.",
+      "D": "Increasing the size of the network payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hard Assertions' are preferred over 'Soft Assertions' when the failure of a specific step makes the rest of the test case impossible or irrelevant to execute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which design pattern provides a single point of access to a framework's configuration settings or database connections throughout the entire execution?",
+    "options": {
+      "A": "Observer Pattern",
+      "B": "Singleton Pattern",
+      "C": "Strategy Pattern",
+      "D": "Facade Pattern"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of 'JavaScript Executor' in Selenium-based automation?",
+    "options": {
+      "A": "It is used to rewrite the backend Java code into JavaScript.",
+      "B": "It allows the automation to perform actions that standard WebDriver commands cannot, such as scrolling to hidden elements or clicking non-interactable buttons.",
+      "C": "It is a security tool used to encrypt the user's password.",
+      "D": "It increases the frame rate of the browser window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid strategies for handling 'iFrames' in web automation? (Select all that apply)",
+    "options": {
+      "A": "driver.switchTo().frame(index)",
+      "B": "driver.switchTo().frame(\"frameName\")",
+      "C": "driver.switchTo().defaultContent() to exit the frame",
+      "D": "Ignoring the frame and clicking the element directly"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a 'Data-Driven' framework, 'Parameterization' refers to the process of hardcoding different data sets into the test method itself.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Wrapper Function' in the context of an SDET automation library?",
+    "options": {
+      "A": "A function that wraps the physical server in a protective case.",
+      "B": "A custom method that encapsulates a standard tool command (like click()) with additional logic like logging, explicit waits, or error handling.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Hiring a professional actor to read test reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code would an SDET expect when verifying that a resource was successfully created via a POST request?",
+    "options": {
+      "A": "200 OK",
+      "B": "201 Created",
+      "C": "204 No Content",
+      "D": "400 Bad Request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Contract Testing' verify in a Microservices architecture?",
+    "options": {
+      "A": "The legal contract between the company and the client.",
+      "B": "That a service (provider) meets the expectations and data formats required by its consumers.",
+      "C": "The physical speed of the network between servers.",
+      "D": "The number of lines of code in the database schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Implicit Wait' and 'Explicit Wait' together in the same script is a recommended best practice for maximum stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Test Listeners' used in frameworks like TestNG? (Select all that apply)",
+    "options": {
+      "A": "onTestStart",
+      "B": "onTestFailure",
+      "C": "onFinish",
+      "D": "onInternetOutage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Self-Healing' automation technology?",
+    "options": {
+      "A": "Automation that fixes the developer's syntax errors.",
+      "B": "Frameworks that use AI or fallback locators to automatically find an element if the primary selector (like an ID) has changed.",
+      "C": "Automation that cleans the physical computer screen.",
+      "D": "A way to count the number of users on a site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the purpose of 'Artifact' retention in a CI tool like GitLab CI?",
+    "options": {
+      "A": "Storing ancient historical artifacts in the office.",
+      "B": "Saving output files (like test reports, logs, and screenshots) from a build so they can be reviewed later.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in SDET work refers to the friction that occurs when developers only write unit tests and ignore integration testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Behavior-Driven' framework maps the human-readable Gherkin steps to the actual code?",
+    "options": {
+      "A": "Feature File",
+      "B": "Step Definition",
+      "C": "Runner Class",
+      "D": "Object Mapper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency Injection' (DI) and why is it useful in automation frameworks?",
+    "options": {
+      "A": "Injecting actual medicine into a server rack.",
+      "B": "A design pattern where an object's dependencies are provided externally, making the framework easier to test and manage (e.g., using Guice or Spring).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD) in a quality context?",
+    "options": {
+      "A": "The average time it takes to detect if a person is happy.",
+      "B": "The average duration from when a bug is introduced to when it is caught by an automated test.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Parallel Execution' at the 'Method' level is generally more complex to manage than at the 'Suite' level due to shared state risks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Wait' conditions in Selenium WebDriverWait? (Select all that apply)",
+    "options": {
+      "A": "visibilityOfElementLocated",
+      "B": "elementToBeClickable",
+      "C": "textToBePresentInElement",
+      "D": "colorOfElementToBeRed"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Property' file externalization in a framework?",
+    "options": {
+      "A": "Selling the company's physical property.",
+      "B": "Storing environment-specific settings (URL, credentials, timeouts) in separate .properties or .yaml files to avoid changing code.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Container Orchestration' (like Kubernetes) role in testing?",
+    "options": {
+      "A": "Managing a physical orchestra in the office.",
+      "B": "Scaling and managing the execution of hundreds of automated test containers across a cluster of servers.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Dependencies' occur when two different libraries in your automation project require conflicting versions of the same third-party library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Validation' techniques? (Select all that apply)",
+    "options": {
+      "A": "Using JDBC/ODBC to verify that a UI action saved data correctly",
+      "B": "Checking if the physical server room is locked",
+      "C": "Comparing API response data against a SQL query result",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Snapshot' testing primarily used for in UI/Mobile work?",
+    "options": {
+      "A": "Taking a selfie of the testing team.",
+      "B": "Comparing a current screenshot of a component against a 'Golden Master' reference image to detect visual regressions.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Flaky' 'Test' 'Analysis'?",
+    "options": {
+      "A": "Analyzing if the tests have flakes like cereal.",
+      "B": "Identifying tests that produce inconsistent results and investigating the environmental or timing causes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browsers' occur when automation is run on a local Chrome instance while the CI pipeline uses a headless Chrome instance with different viewport dimensions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Profiling'? (Select all that apply)",
+    "options": {
+      "A": "Measuring memory usage during a heavy regression run",
+      "B": "Tracking API response time trends across different builds",
+      "C": "Replacing the need for a physical server",
+      "D": "Identifying slow database queries triggered by automation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Separation' in an SDET framework?",
+    "options": {
+      "A": "Separating the physical wires in a computer.",
+      "B": "Ensuring the test script only contains 'What' to test, while the framework classes handle 'How' to interact with the system.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Test' 'Data' generation?",
+    "options": {
+      "A": "Generating data using a physical machine.",
+      "B": "Using libraries like 'Faker' to create unique user data at runtime to avoid collisions in parallel tests.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the SDET builds a complex framework that the rest of the QA team does not have the skills to use or maintain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'SDET' 'Environment' 'Variables'? (Select all that apply)",
+    "options": {
+      "A": "BASE_URL",
+      "B": "BROWSER_TYPE",
+      "C": "TEST_ENV (e.g., Staging, Dev)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asynchronous' interaction in UI automation?",
+    "options": {
+      "A": "Interacting with a person who is not synchronized.",
+      "B": "Dealing with UI elements that appear or disappear based on background API calls without a page refresh (like in React or Vue).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Pass' 'Rate'?",
+    "options": {
+      "A": "The rate at which people pass the office hallway.",
+      "B": "The percentage of automated tests that completed successfully compared to the total number of tests executed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when the automation suite takes longer to run than the developer's entire build-and-deploy cycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Maintenance'? (Select all that apply)",
+    "options": {
+      "A": "Updating locators when the UI changes",
+      "B": "Fixing brittle scripts that fail due to timing issues",
+      "C": "Guaranteed to be zero in a good framework",
+      "D": "Removing tests for features that no longer exist"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Global' 'Hook' in framework architecture?",
+    "options": {
+      "A": "A physical hook for the office globe.",
+      "B": "Methods that run at the very beginning or end of the entire test suite (e.g., @BeforeSuite in TestNG).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in SDET work?",
+    "options": {
+      "A": "Traceability of a person named Requirement.",
+      "B": "The ability to map every automated test case to a specific user story or business requirement in a tool like Jira.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' occurs when a framework is designed to run 5 tests locally but crashes the CI server when running 500 tests in parallel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'SDET' 'Debugging' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Thread dumps",
+      "B": "Browser console logs",
+      "C": "Network HAR files",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Decoupling' in a framework library?",
+    "options": {
+      "A": "Removing the physical cables from the computer.",
+      "B": "Ensuring that changes in one part of the framework (like a reporting tool) do not require changes in another part (like the test scripts).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cycle' 'Time' in automation?",
+    "options": {
+      "A": "The time it takes to ride a physical bike.",
+      "B": "The total time from code commit to receiving test results in the CI/CD pipeline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the framework level is set to 'DEBUG' but the CI system hides all logs, making troubleshooting impossible.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sanity' 'Checks' in a pipeline? (Select all that apply)",
+    "options": {
+      "A": "Verifying that the basic functionality of a new build is stable",
+      "B": "Running a 10-minute subset of the 10-hour regression suite",
+      "C": "Testing the mental health of the developer",
+      "D": "Blocking a deployment if core features fail"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Atomic' 'Test' 'Principle'?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "Writing tests that are small, independent, and contain only one or two assertions to ensure clear failure analysis.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Standard' 'Deviation' in test results?",
+    "options": {
+      "A": "A measure of how much individual test execution times vary from the average, used to find unstable environments.",
+      "B": "A list of developers who deviated from the standard.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a script polls for an element every 1 second, but the UI takes 1.5 seconds to refresh.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Running tools like Axe-core inside an automation script",
+      "B": "Checking for valid HTML structure",
+      "C": "Testing if the keyboard is physically broken",
+      "D": "Identifying missing screen reader labels"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Page Object?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical details of element identification are hidden inside the class, providing clean methods to the test script.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF) for an automation suite?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric that represents the average time the automation suite runs without encountering a script or environment error.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Payloads' occur when an automated API test sends a request in JSON format while the server only accepts XML.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'SDET' 'Leadership' tasks? (Select all that apply)",
+    "options": {
+      "A": "Defining the long-term automation strategy",
+      "B": "Mentoring junior testers in coding best practices",
+      "C": "Choosing the technical stack for the framework",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Automation' 'Coverage'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The intersection of code coverage, requirement coverage, and risk-based functional coverage.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Rate'?",
+    "options": {
+      "A": "The rate of people being happy in the office.",
+      "B": "The percentage of test failures that are caused by automation bugs or environment issues rather than actual application defects.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when an automated test is run with 'Admin' access and passes, while the real user has 'Guest' access and fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Root' 'Cause' identification? (Select all that apply)",
+    "options": {
+      "A": "Automatically parsing server logs when a test fails",
+      "B": "Correlating test failures with recent code commits",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Attaching database state snapshots to the failure report"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a computer boot.",
+      "B": "A script or set of commands used to quickly initialize a standardized automation project for a new team.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Execution' 'Heatmap'?",
+    "options": {
+      "A": "A physical map showing the temperature of the server room.",
+      "B": "A visual report showing which application modules or test cases take the longest time or fail most frequently.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when the automation framework generates 10GB of logs for a 5-minute run, crashing the CI server's disk space.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'SDET' 'Governance' tasks? (Select all that apply)",
+    "options": {
+      "A": "Reviewing framework ROI metrics",
+      "B": "Enforcing coding standards across different squads",
+      "C": "Maintaining a shared library of common automation components",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Test' 'Asset' 'Inventory'?",
+    "options": {
+      "A": "An inventory of physical office chairs.",
+      "B": "The structured management and tracking of all reusable scripts, data files, and environment configs in an organization.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the completion of a failed test run until the notification is received by the developer.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in automation occurs when the business defines 'Done' as 'Automated' but does not allocate time for script maintenance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In an enterprise-scale automation framework, what is the primary architectural advantage of using 'Java Reflection' for Page Object instantiation?",
+    "options": {
+      "A": "It allows the code to run 50% faster by bypassing the standard JVM compiler.",
+      "B": "It enables the framework to dynamically instantiate page classes at runtime based on external metadata, facilitating complex state transitions without hardcoding flows.",
+      "C": "It is a security requirement that prevents developers from seeing the internal logic of the test scripts.",
+      "D": "It automatically generates the necessary SQL queries for database validation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a high-concurrency multi-threaded framework, using a 'Synchronized' block on the WebDriver instance is the most efficient way to achieve parallel execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Advanced' strategies for managing 'Global State' in a distributed testing environment? (Select all that apply)",
+    "options": {
+      "A": "Utilizing 'ThreadLocal' for driver and reporting object isolation",
+      "B": "Implementing an 'Aspect-Oriented Programming' (AOP) approach for cross-cutting concerns like logging",
+      "C": "Using a centralized Redis cache for sharing session tokens across parallel nodes",
+      "D": "Sharing a single static HashMap across all concurrent execution threads"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical significance of the 'Liskov Substitution Principle' (SOLID) when designing a base Page Object class hierarchy?",
+    "options": {
+      "A": "It ensures that the UI renders exactly the same on every browser engine.",
+      "B": "It guarantees that any subclass of a Page Object can be used interchangeably with the base class without breaking the automation logic.",
+      "C": "It is a mathematical formula used to calculate the frame rate of the UI.",
+      "D": "It requires all locators to be stored in a physical vault for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Software Reliability Growth Model' (SRGM) is most effective for an SDET to predict the remaining defect density after a massive automated regression run?",
+    "options": {
+      "A": "Linear Regression Model",
+      "B": "Goel-Okumoto Non-Homogeneous Poisson Process (NHPP) Model",
+      "C": "Monte Carlo Simulation",
+      "D": "Pareto Distribution Model"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Architectures' occur when an SDET attempts to run an automation container designed for x86_64 on an ARM64-based cloud execution node without emulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Wait' strategy is technically necessary to handle 'Shadow DOM' elements in modern web components using WebDriver 4+?",
+    "options": {
+      "A": "Increasing the global Implicit Wait to 60 seconds",
+      "B": "Using JavaScript execution to access the 'shadowRoot' property combined with an Explicit Wait",
+      "C": "Restarting the browser session every time a shadow element is encountered",
+      "D": "Deleting the CSS file to make the shadow elements visible"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Generics' in a modern SDET framework's Base Page class?",
+    "options": {
+      "A": "To allow methods to return specialized page instances while maintaining type safety (e.g., return clickButton(Class<T> clazz)).",
+      "B": "To store the user's password in a generic, unencrypted format.",
+      "C": "A specialized tool for measuring the brightness of the monitor.",
+      "D": "To increase the physical speed of the network cable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Parallel' execution risks in a CI pipeline? (Select all that apply)",
+    "options": {
+      "A": "Database 'Deadlocks' caused by concurrent write operations from tests",
+      "B": "Race conditions in shared singleton configuration managers",
+      "C": "Exhaustion of the ephemeral port range on the execution host",
+      "D": "The color of the terminal text changing to red"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Visual Regression' testing using 'AI-based' differential analysis can ignore layout shifts that do not change the user's functional perception, reducing false-positive failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutation' testing and why is it part of a high-end SDET strategy?",
+    "options": {
+      "A": "Testing if the developer has mutated into a hacker.",
+      "B": "Systematically modifying the source code to verify if existing automated tests are sensitive enough to catch the 'mutants' (errors).",
+      "C": "A specialized security scan for hardware components.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical impact of 'Sidecar' containers in a Kubernetes-based testing grid?",
+    "options": {
+      "A": "Providing a physical seat for the tester in the server room.",
+      "B": "Running auxiliary services like log forwarders or proxy captures alongside the test runner in the same pod.",
+      "C": "A specialized software for poets to write code.",
+      "D": "Increasing the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Governance' metric is most effective for an SDET Lead to justify the 'ROI' of a framework refactor?",
+    "options": {
+      "A": "Total number of lines of automation code",
+      "B": "Maintenance Effort Ratio (Time spent fixing tests vs. Time spent developing new features)",
+      "C": "The font size of the pass rate in the final report",
+      "D": "The number of emails sent to the stakeholders"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service' 'Virtualization' can be used to simulate 'Edge' network latency (e.g., 5G with 10% packet loss) to test the resilience of an application's retry logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Infrastructure as Code' (IaC) tools an SDET might use to provision dynamic test environments? (Select all that apply)",
+    "options": {
+      "A": "Terraform",
+      "B": "Ansible",
+      "C": "AWS CloudFormation",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Self-Scaling' Test Infrastructure in a DevOps context?",
+    "options": {
+      "A": "A physical scale used to weigh the server hardware.",
+      "B": "An architecture that dynamically launches additional execution pods in a cloud cluster based on the size of the Jenkins/GitLab test queue.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font on the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Automation Failures' (MTBAF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a lunch break.",
+      "B": "A reliability metric tracking the average duration of a stable, error-free automation execution before a script or environment bug occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Locators' in a cross-platform (iOS/Android) Appium framework can be solved using a 'Chain of Responsibility' pattern to attempt different finding strategies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Wait' conditions available in modern automation libraries? (Select all that apply)",
+    "options": {
+      "A": "numberOfWindowsToBe(2)",
+      "B": "invisibilityOfElementWithText",
+      "C": "attributeContains",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Reflection-based' 'Keyword' 'Mapping' in a custom framework?",
+    "options": {
+      "A": "Mapping a physical building architecture.",
+      "B": "A mechanism that converts a string keyword from a CSV/Excel file into a method call on a specific Page class at runtime.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Contract-First' automation strategy?",
+    "options": {
+      "A": "Signing a physical contract before writing code.",
+      "B": "Generating automated API tests based strictly on the OpenAPI/Swagger definition before the service is actually built.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in an SDET environment refer to the conflict between a 'Maintenance-heavy' UI approach and a 'Resilient' API-first quality strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Observability' in an SDET framework? (Select all that apply)",
+    "options": {
+      "A": "Automatic attachment of Correlation IDs to every API request",
+      "B": "Real-time streaming of execution logs to an ELK stack",
+      "C": "Capturing browser performance logs (HAR) for every UI test",
+      "D": "The color of the developer's keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of scripts used to quickly initialize a standardized automation project with pre-configured dependencies and CI/CD templates.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is the 'Defect Discovery Rate' (DDR) vs 'Test Case Execution Rate'?",
+    "options": {
+      "A": "DDR measures the number of bugs found over time; Execution Rate measures the speed of the test suite.",
+      "B": "They are exactly the same metric.",
+      "C": "DDR is for experts; Execution Rate for beginners.",
+      "D": "Execution Rate is 100x faster."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Patterns' (e.g., combining Implicit and Explicit waits) can cause unpredictable timeout behaviors and significantly increase execution time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Automation' 'Security' requirements? (Select all that apply)",
+    "options": {
+      "A": "Masking credentials in execution logs",
+      "B": "Using temporary 'Vault' tokens for API authentication",
+      "C": "Encrypting local test data repositories",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Assertion' 'Generation'?",
+    "options": {
+      "A": "An assertion that physically moves.",
+      "B": "Using a library to automatically generate assertions based on the historical 'Normal' response patterns of an API.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Atomic' vs 'Flow-based' automation?",
+    "options": {
+      "A": "They are identical strategies.",
+      "B": "Atomic tests verify one component; Flow-based tests verify a complete user journey.",
+      "C": "Atomic is for beginners; Flow-based for experts.",
+      "D": "Flow-based is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' refers to a quality framework that works for 10 tests but crashes the CI server when running 1,000 tests due to memory leaks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Root' 'Cause' 'Correlation'? (Select all that apply)",
+    "options": {
+      "A": "Matching test failures with backend microservice error logs",
+      "B": "Identifying which specific container pod the test was running on",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating UI failures with recent database schema changes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test' 'Asset' 'Versioning'?",
+    "options": {
+      "A": "Creating ancient Egyptian statues.",
+      "B": "The requirement to version test scripts and data alongside the specific version of the application code they are intended to validate.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Zero' 'Downtime' 'Framework' 'Updates'?",
+    "options": {
+      "A": "Updating the framework without stopping the server.",
+      "B": "Updating the automation core and libraries without disrupting the active CI/CD execution pipeline.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Device' 'Profiles' occur when an SDET tests on a 'Simulator' while the actual application bug only manifests on 'Real Mobile Hardware'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'BDD' 'Execution' 'Hooks'? (Select all that apply)",
+    "options": {
+      "A": "@BeforeStep",
+      "B": "@AfterFeature",
+      "C": "@BeforeScenario",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Complexity' 'Threshold'?",
+    "options": {
+      "A": "The number of people allowed in the server room.",
+      "B": "A metric that triggers a refactor when the 'Cyclomatic Complexity' of a Page Object exceeds a maintainable limit.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Automation' (MTRA)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration required to repair a broken automation framework after a breaking change in the environment or application.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when an SDET attempts to use REST-based assertions on an API that has migrated to a gRPC or GraphQL protocol.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Performance' 'Profiling' during functional tests? (Select all that apply)",
+    "options": {
+      "A": "Tracking memory heap growth across a long-running suite",
+      "B": "Measuring 'Time to First Byte' (TTFB) during every API test",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Identifying database connection leaks during functional runs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Object' 'Repository' 'Centralization' strategy?",
+    "options": {
+      "A": "Storing computers in a central warehouse.",
+      "B": "Using a shared external service or database to store UI locators so that multiple teams use the exact same definitions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Browser' 'Provisioning'?",
+    "options": {
+      "A": "Provisioning a physical ship for a browser.",
+      "B": "The capability of a test grid to automatically pull and launch the specific browser/OS container requested by a script at runtime.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the time required for a full regression run exceeds the total duration of the developer's sprint cycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Verification' for SDETs? (Select all that apply)",
+    "options": {
+      "A": "Checking if user data follows GDPR 'Opt-In' logic",
+      "B": "Verifying that PII is masked in the UI and API responses",
+      "C": "Guaranteed to replace all lawyers",
+      "D": "Ensuring legal disclaimers are present on all transactional screens"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SDET' 'Code' 'Redundancy' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name Redundancy.",
+      "B": "The process of identifying duplicate logic across different Page Objects and refactoring it into a centralized library.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Efficiency' 'Ratio'?",
+    "options": {
+      "A": "The ratio of successful employees in the office.",
+      "B": "The percentage of defects identified by automation compared to those found during manual exploratory testing.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'API' 'Contracts' occur when an SDET uses an outdated JSON schema for validation while the service has moved to a new version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Quality' 'Reporting' 'Visualizations'? (Select all that apply)",
+    "options": {
+      "A": "Failure heatmaps segmented by application module",
+      "B": "Timeline execution gantt charts showing parallel usage",
+      "C": "Requirement coverage sunburst charts",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Modularity' at an enterprise scale?",
+    "options": {
+      "A": "Building a physical scale to weigh the framework.",
+      "B": "Decoupling a framework into separate versioned libraries (e.g., Core, Web-Lib, API-Lib) to allow independent innovation across teams.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Automated' 'Regression' 'Pruning'?",
+    "options": {
+      "A": "Cutting branches off a physical tree.",
+      "B": "The systematic process of identifying and deleting obsolete, redundant, or chronically flaky automated tests to keep the suite performant.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a framework is built for multi-threading but the application uses a shared global state that causes race conditions during tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Data' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Faker' for on-the-fly mock data creation",
+      "B": "Executing SQL 'Upsert' scripts before every test scenario",
+      "C": "Manually typing data during the test run",
+      "D": "Creating unique data entities via hidden 'Backdoor' API calls"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test' 'Script' 'Portability' 'Risk'?",
+    "options": {
+      "A": "Carrying a script in a physical suitcase.",
+      "B": "The risk that automation code behaves differently across local Dev, Linux Jenkins nodes, and Windows-based mobile devices.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Repair' (MTTR) for broken tests?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long it takes an SDET to fix a failed automated script after the failure is reported.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when an automation suite produces so much log data that it crashes the CI server's storage or slows down the execution engine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'SDET' 'Governance' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Automation Coverage Percentage by Risk Level",
+      "B": "Execution Reliability Rate (Pass/Fail vs. Script Bug)",
+      "C": "Maintenance Effort per Test Case",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' quality strategy?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a new or refactored automation suite in parallel with the stable production suite to verify its accuracy without affecting results.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Containerized' 'Test' 'Grid' 'Orchestration'?",
+    "options": {
+      "A": "Putting a person in a physical container.",
+      "B": "Using tools like KEDA to dynamically scale the number of test execution containers based on the load in the CI pipeline.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Assertion' 'Precision' occurs when a test fails because it expects 10 decimal places while the application UI only displays 2.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Stability' 'Tuning'? (Select all that apply)",
+    "options": {
+      "A": "Implementing automatic retries for failed tests",
+      "B": "Quarantining 'chronically flaky' tests out of the main build",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Optimizing polling intervals in explicit waits"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Automation' 'Code' 'Redundancy' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name Redundancy.",
+      "B": "The process of identifying duplicate logic across different Page Objects and moving it into a centralized core library.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "The age of the physical office equipment.",
+      "B": "A rating of how reusable, stable, and well-documented an automated script is based on its historical performance metrics.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when the 'Polling Interval' of an explicit wait is significantly longer than the 'Time To Ready' of a specific UI component.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'SDET' 'Leadership' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Principal Quality Architect",
+      "B": "Lead DevOps Engineer",
+      "C": "Head of Release Engineering",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Quality' score?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted average of automated pass rates, performance metrics, and security vulnerability density.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) threshold?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed between a critical automation failure and the notification being delivered to the assigned engineer.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'States' occur when an automated test fails because it assumes a database is 'Empty' while it still contains data from a previous parallel thread.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Injecting network latency during an automated functional test",
+      "B": "Killing backend pods while a UI test is in progress",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Verifying that circuit breakers trigger as expected"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SDET' 'Framework' 'Inheritance' 'Logic'?",
+    "options": {
+      "A": "Inheriting actual money from the framework.",
+      "B": "The structural design where specialized page classes inherit from a base page, and test classes inherit from a base test, sharing common utility methods.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

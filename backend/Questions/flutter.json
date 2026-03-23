@@ -1,5 +1,5 @@
 {
-  "skill": "flutter",
+  "skill": "Flutter",
   "questions": [
     {
       "question": "Which programming language is Flutter primarily based on?",
@@ -1335,9 +1335,9 @@
       "question": "Which widget is used to create a parallax or custom scrolling effect with multiple 'slivers'?",
       "options": {
         "A": "SingleChildScrollView",
-        "1B": "CustomScrollView",
         "C": "NestedScrollView",
-        "D": "ListView.builder"
+        "D": "ListView.builder",
+        "B": "CustomScrollView"
       },
       "answer": "B"
     },

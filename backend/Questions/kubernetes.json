@@ -1,5 +1,5 @@
 {
-  "skill": "kubernetes",
+  "skill": "Kubernetes",
   "questions": [
     {
       "question": "What is the smallest deployable unit in Kubernetes that can contain one or more containers?",

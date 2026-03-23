@@ -1,0 +1,1889 @@
+{ 
+  "skill": "Security Tools", 
+  "questions": [
+    {
+    "question": "Which tool is widely considered the industry standard for network discovery and security auditing?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Nmap",
+      "C": "Slack",
+      "D": "Visual Studio Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Wireshark' is a tool used to capture and interactively browse the traffic running on a computer network.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following tools are primarily used for 'Web Application Security Testing'? (Select all that apply)",
+    "options": {
+      "A": "Burp Suite",
+      "B": "OWASP ZAP",
+      "C": "Metasploit",
+      "D": "Microsoft Excel"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the primary function of the 'Metasploit Framework'?",
+    "options": {
+      "A": "To design high-resolution graphics for websites.",
+      "B": "To provide a platform for developing, testing, and executing exploit code against a remote target.",
+      "C": "To act as a physical firewall for a small office.",
+      "D": "To automatically write blog posts about cybersecurity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In security testing, what does 'SAST' stand for?",
+    "options": {
+      "A": "Secure Application System Tool",
+      "B": "Static Application Security Testing",
+      "C": "Server Authentication and Security Terminal",
+      "D": "Shared Asset Scanning Technology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'John the Ripper' and 'Hashcat' are popular tools used for password cracking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which category of tool is 'Splunk' primarily associated with?",
+    "options": {
+      "A": "Password Cracking",
+      "B": "SIEM (Security Information and Event Management)",
+      "C": "Wireless Hacking",
+      "D": "Mobile App Design"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Nikto' primarily used for?",
+    "options": {
+      "A": "Testing the physical durability of servers.",
+      "B": "Scanning web servers for dangerous files, outdated versions, and other vulnerabilities.",
+      "C": "Editing video files for security training.",
+      "D": "A way to count the number of characters in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Vulnerability Scanners'? (Select all that apply)",
+    "options": {
+      "A": "Nessus",
+      "B": "Qualys",
+      "C": "OpenVAS",
+      "D": "Adobe Illustrator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Snort' is an open-source tool used for intrusion detection and prevention (IDS/IPS).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'sqlmap' in a penetration test?",
+    "options": {
+      "A": "To create new SQL databases automatically.",
+      "B": "To automate the process of detecting and exploiting SQL injection flaws.",
+      "C": "To translate SQL queries into different languages.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'DAST', what does the 'D' stand for?",
+    "options": {
+      "A": "Database",
+      "B": "Dynamic",
+      "C": "Distributed",
+      "D": "Desktop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular open-source Linux distribution specifically designed for digital forensics and penetration testing?",
+    "options": {
+      "A": "Ubuntu",
+      "B": "Kali Linux",
+      "C": "Windows 11",
+      "D": "macOS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Aircrack-ng' is a suite of tools for assessing WiFi network security.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to perform 'Banner Grabbing' to identify a service's version?",
+    "options": {
+      "A": "Nmap",
+      "B": "Notepad",
+      "C": "Excel",
+      "D": "Paint"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Nessus' primarily used for?",
+    "options": {
+      "A": "Writing technical documentation.",
+      "B": "Automated vulnerability scanning of networks and systems.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snyk' is a developer-focused tool used to find and fix vulnerabilities in open-source dependencies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the function of a 'WAF' (Web Application Firewall)? (Select all that apply)",
+    "options": {
+      "A": "Protects web applications by filtering HTTP traffic",
+      "B": "Prevents attacks like SQL injection and XSS",
+      "C": "Deletes the source code if a bug is found",
+      "D": "Monitors traffic from the public internet"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hydra' used for in a security assessment?",
+    "options": {
+      "A": "A multi-headed mythical creature.",
+      "B": "A fast and parallelized login cracker that supports numerous protocols.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BeEF' (Browser Exploitation Framework) is used to test the security of web browsers by hooking them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Burp Suite' tool allows you to intercept and modify HTTP/S traffic between your browser and the target application?",
+    "options": {
+      "A": "Repeater",
+      "B": "Proxy",
+      "C": "Intruder",
+      "D": "Sequencer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical use of 'Netcat' (nc)?",
+    "options": {
+      "A": "Chatting with other security professionals.",
+      "B": "Reading and writing data across network connections using TCP or UDP.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Analysis' (SAST) tools require the application to be running to find vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Cloud' security posture management (CSPM) tools? (Select all that apply)",
+    "options": {
+      "A": "Prisma Cloud",
+      "B": "Wiz",
+      "C": "Checkov (for IaC)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cain & Abel' traditionally used for?",
+    "options": {
+      "A": "Editing digital photos.",
+      "B": "Password recovery and sniffing in Windows environments.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Security Operations', what does 'SOAR' stand for?",
+    "options": {
+      "A": "System Operations and Risk",
+      "B": "Security Orchestration, Automation, and Response",
+      "C": "Shared Online Asset Repository",
+      "D": "Server Optimization and Reporting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Postman' can be used as a tool for manual API security testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Maltego'? (Select all that apply)",
+    "options": {
+      "A": "An OSINT tool for link analysis",
+      "B": "Visualizes relationships between people, domains, and IP addresses",
+      "C": "Used for cracking passwords",
+      "D": "Helpful in information gathering"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Kismet' primarily used for?",
+    "options": {
+      "A": "A tool for finding a romantic partner.",
+      "B": "A wireless network detector, sniffer, and intrusion detection system.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Nikto' is a GUI-based tool designed for beginners only.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is often referred to as the 'Swiss Army Knife' of networking?",
+    "options": {
+      "A": "Netcat",
+      "B": "Nmap",
+      "C": "Nessus",
+      "D": "Notepad"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SpiderFoot' used for?",
+    "options": {
+      "A": "Counting the legs of a spider.",
+      "B": "Automating OSINT (Open Source Intelligence) collection from hundreds of sources.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OpenVAS' is a free and open-source alternative to commercial vulnerability scanners like Nessus.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Interactive' Application Security Testing (IAST) tools? (Select all that apply)",
+    "options": {
+      "A": "Contrast Security",
+      "B": "Checkmarx IAST",
+      "C": "HCL AppScan",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Wapiti'?",
+    "options": {
+      "A": "A large species of elk.",
+      "B": "A web application security auditor that performs 'black-box' scans.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk scoring' in a tool like Qualys?",
+    "options": {
+      "A": "A score given to the technical person.",
+      "B": "A numerical value assigned to a vulnerability based on its potential impact and ease of exploit.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Checkov' is an open-source tool for scanning Infrastructure as Code (IaC) files (like Terraform) for security misconfigurations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Identity and Access Management' (IAM) auditing tools? (Select all that apply)",
+    "options": {
+      "A": "CloudSplaining",
+      "B": "PMapper",
+      "C": "Adobe Acrobat",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'AmIBreached'?",
+    "options": {
+      "A": "A feeling of having been hacked.",
+      "B": "An OSINT tool that enables identification of dark web risks and leaked credentials.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tshark' is the command-line version of Wireshark.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to find command injection vulnerabilities in web applications?",
+    "options": {
+      "A": "commix",
+      "B": "Nmap",
+      "C": "Wireshark",
+      "D": "Calculator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ettercap' primarily known for?",
+    "options": {
+      "A": "Hacking a person name Etter.",
+      "B": "Man-in-the-Middle (MitM) attacks and network sniffing on a local network.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Burp Suite's' 'Decoder' can be used to manually transform data using various encodings like Base64 or URL encoding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used to automate the detection and exploitation of XSS vulnerabilities?",
+    "options": {
+      "A": "XSSer",
+      "B": "sqlmap",
+      "C": "Nmap",
+      "D": "Paint"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shodan'?",
+    "options": {
+      "A": "A person named Shodan.",
+      "B": "A search engine that lets the user find specific types of computers connected to the internet using a variety of filters.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SonarQube' is a platform for continuous inspection of code quality and security (SAST).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Software Composition Analysis' (SCA) tools? (Select all that apply)",
+    "options": {
+      "A": "Analyze third-party libraries for vulnerabilities",
+      "B": "Generate a Software Bill of Materials (SBOM)",
+      "C": "Help manage license compliance",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Metasploit Pro' compared to the Framework?",
+    "options": {
+      "A": "The commercial version with more automation and reporting features.",
+      "B": "A version for professional actors only.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Nagios' used for in security?",
+    "options": {
+      "A": "A specialized software for architects.",
+      "B": "Infrastructure monitoring that can alert when unauthorized network activity or service downtime occurs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Toolsets' occur when a security tester attempts to use a web scanner for a low-level network protocol attack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' security scanning tools? (Select all that apply)",
+    "options": {
+      "A": "Scout Suite",
+      "B": "Prowler",
+      "C": "Pacu",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'ZAP' (Zed Attack Proxy)?",
+    "options": {
+      "A": "A tool that zaps actual bugs.",
+      "B": "A free, open-source web application scanner used to find common security vulnerabilities.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Dashboard' in a tool like SentinelOne?",
+    "options": {
+      "A": "A high-level view of all security incidents and system health in real-time.",
+      "B": "A list of developers who are happy.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Acunetix' is a commercial web vulnerability scanner.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Container' security scanning? (Select all that apply)",
+    "options": {
+      "A": "Checking Docker images for known CVEs",
+      "B": "Verifying container orchestration settings (Kubernetes)",
+      "C": "Cleaning the physical office space",
+      "D": "Enforcing non-root user execution"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'OSINT' collection?",
+    "options": {
+      "A": "Collecting physical mint leaves.",
+      "B": "Gathering data from publicly available sources (Open Source Intelligence).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'SIEM' 'Log' 'Correlation'?",
+    "options": {
+      "A": "Correlating logs of actual wood.",
+      "B": "Combining event data from multiple sources to identify a single security incident (like a multi-stage attack).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scanning' occurs when a scanner is configured for 'Safe' mode and misses deep, exploitable vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Identity' security testing tools? (Select all that apply)",
+    "options": {
+      "A": "Burp Suite (for session management)",
+      "B": "OAuth2-Proxy",
+      "C": "Keycloak auditing",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Fuzzing' with a tool like 'AFL' (American Fuzzy Lop)?",
+    "options": {
+      "A": "Brushing a rabbit.",
+      "B": "Providing huge amounts of random data to an application to find memory corruption and other crashes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Prioritization'?",
+    "options": {
+      "A": "Sorting vulnerabilities by their importance to the business.",
+      "B": "Hiring a person named Priority.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Infrastructure' occurs when security tools are running on the same network they are trying to monitor, potentially creating a feedback loop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Reduces manual work for security teams",
+      "B": "Provides consistent and repeatable metrics",
+      "C": "Guaranteed to replace all security analysts",
+      "D": "Enables faster response to critical threats"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Secret' 'Scanning' in a Git repository?",
+    "options": {
+      "A": "Scanning a repo for actual physical secrets.",
+      "B": "Using tools to find hardcoded passwords, API keys, and tokens in the source code.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Trend' 'Analysis'?",
+    "options": {
+      "A": "Analyzing if the security posture is getting better or worse over time.",
+      "B": "Analyzing if the developers are wearing trendy clothes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scanning' 'Windows' occur when a heavy scan is run during peak business hours, causing a self-inflicted Denial of Service.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Nmap flag is used to enable 'OS Detection', 'Version Detection', 'Script Scanning', and 'Traceroute' simultaneously?",
+    "options": {
+      "A": "-sS",
+      "B": "-A",
+      "C": "-Pn",
+      "D": "-T4"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Burp Suite, the 'Repeater' tool is primarily used for automated brute-forcing of multiple login credentials.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid Metasploit 'Payload' types? (Select all that apply)",
+    "options": {
+      "A": "Staged (e.g., shell/reverse_tcp)",
+      "B": "Inline (Single) (e.g., shell_reverse_tcp)",
+      "C": "Meterpreter",
+      "D": "Static HTML files"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary function of the 'Intruder' tool in Burp Suite Professional?",
+    "options": {
+      "A": "To provide a 3D visualization of the server's network traffic.",
+      "B": "To automate customized attacks against web applications, such as fuzzing for hidden parameters or brute-forcing.",
+      "C": "To act as a physical alarm for the data center.",
+      "D": "To translate the application's source code into different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'sqlmap', which flag is used to automatically test all parameters in a GET/POST request and provide the most thorough exploitation analysis?",
+    "options": {
+      "A": "--batch",
+      "B": "--level 5 --risk 3",
+      "C": "--u (url)",
+      "D": "--dbs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OAST' (Out-of-Band Application Security Testing) tools like Burp Collaborator are used to detect vulnerabilities that do not provide an immediate response to the attacker (e.g., Blind SSRF).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is designed to perform 'Software Composition Analysis' (SCA) specifically by scanning container images for known vulnerabilities?",
+    "options": {
+      "A": "Trivy",
+      "B": "Wireshark",
+      "C": "Nmap",
+      "D": "Postman"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BloodHound' primarily used for in an Active Directory (AD) security assessment?",
+    "options": {
+      "A": "To track physical hackers in an office building.",
+      "B": "To use graph theory to reveal hidden relationships and identify complex attack paths in an AD environment.",
+      "C": "A specialized software for veterinarians.",
+      "D": "Increasing the frame rate of the server response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the function of a 'DAST' tool in a DevOps pipeline? (Select all that apply)",
+    "options": {
+      "A": "Crawling the application to map out all endpoints",
+      "B": "Testing for SQLi and XSS on the running application",
+      "C": "Analyzing the uncompiled source code for logic flaws",
+      "D": "Providing proof-of-concept (PoC) payloads for found vulnerabilities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Hashcat' is generally preferred over 'John the Ripper' for GPU-based password cracking because of its high performance and support for hundreds of hash types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Nmap scripting engine (NSE) category should be used with caution because it may crash the target system?",
+    "options": {
+      "A": "safe",
+      "B": "intrusive",
+      "C": "discovery",
+      "D": "version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Passive' vulnerability scanning (like using a tool like PVS/Tenable.ot) do differently than 'Active' scanning?",
+    "options": {
+      "A": "It scans only on weekends.",
+      "B": "It monitors network traffic to identify vulnerabilities without interacting with the hosts, avoiding the risk of system disruption.",
+      "C": "It requires the technical person to be passive during the test.",
+      "D": "It deletes all the scan logs automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to bypass Web Application Firewalls (WAFs) by generating thousands of encoded payloads to test filter logic?",
+    "options": {
+      "A": "Metasploit",
+      "B": "WAFW00F",
+      "C": "Burp Suite (Intruder)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Metasploit's' 'db_nmap' command allows you to save the output of an Nmap scan directly into the Metasploit database for later exploitation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Detection' mechanisms in a modern EDR (Endpoint Detection and Response) tool? (Select all that apply)",
+    "options": {
+      "A": "Behavioral analysis of running processes",
+      "B": "Signature-based malware detection",
+      "C": "Physical weight analysis of the computer",
+      "D": "Monitoring system API calls for suspicious activity"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary use case for 'Responder' in a penetration test?",
+    "options": {
+      "A": "To respond to client emails automatically.",
+      "B": "To perform LLMNR, NBT-NS, and MDNS poisoning to capture NetNTLM hashes on a Windows network.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what does the 'Sequencer' tool in Burp Suite analyze?",
+    "options": {
+      "A": "The sequence of the developer's genetic code.",
+      "B": "The randomness and entropy of session tokens to determine if they are predictable.",
+      "C": "The order in which the CSS files are loaded.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Tool Versions' in a CI/CD pipeline can lead to 'False Negatives' if the scanner does not have the latest vulnerability signatures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Wireshark' filter would you use to find only HTTP POST requests that might contain sensitive form data?",
+    "options": {
+      "A": "http",
+      "B": "http.request.method == \"POST\"",
+      "C": "tcp.port == 80",
+      "D": "ip.addr == 127.0.0.1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CevL' used for in a reconnaissance mission?",
+    "options": {
+      "A": "Calculating the level of a character in a game.",
+      "B": "Crawling a website to generate a custom wordlist based on the site's content for password cracking.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Scoring' in a tool like Nessus?",
+    "options": {
+      "A": "A score given to the person who found the bug.",
+      "B": "Assigning a CVSS (Common Vulnerability Scoring System) value to vulnerabilities to help prioritize remediation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scopes' in a Burp Suite project can cause the tool to send malicious traffic to third-party websites not intended for testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are standard 'Kali Linux' tool categories? (Select all that apply)",
+    "options": {
+      "A": "Information Gathering",
+      "B": "Vulnerability Analysis",
+      "C": "Wireless Attacks",
+      "D": "Office Productivity"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'LinPeas' (and WinPeas) during a penetration test?",
+    "options": {
+      "A": "To count the number of peas in a garden.",
+      "B": "To automate the search for local privilege escalation vectors on Linux or Windows systems.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the terminal font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Elasticsearch' (as part of ELK) used for in security?",
+    "options": {
+      "A": "To search for physical logs of wood.",
+      "B": "To store and index large volumes of security log data for rapid searching and analysis.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Checkov' is an open-source tool that scans 'Infrastructure as Code' (IaC) like Terraform for security misconfigurations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to automate the exploitation of 'Insecure Deserialization' in Java applications?",
+    "options": {
+      "A": "ysoserial",
+      "B": "sqlmap",
+      "C": "Nmap",
+      "D": "Paint"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Wapiti' primarily known for?",
+    "options": {
+      "A": "A large elk species.",
+      "B": "An open-source 'black-box' vulnerability scanner for web applications.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Dashboard' in a SIEM?",
+    "options": {
+      "A": "A visual interface that aggregates real-time security events, alerts, and system health metrics.",
+      "B": "A list of developers who are wearing security uniforms.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a scanner only supports weak encryption (like SSLv3) while the server only supports strong encryption (like TLS 1.3).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Gitleaks' tool? (Select all that apply)",
+    "options": {
+      "A": "Scans Git repositories for hardcoded secrets like API keys",
+      "B": "Identifies exposed passwords in commit history",
+      "C": "Automatically deletes the code if it's too buggy",
+      "D": "Helps prevent data leakage in DevSecOps pipelines"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Prowler' used for in a cloud security context?",
+    "options": {
+      "A": "Hiring a person named Prowler.",
+      "B": "An open-source security tool to perform AWS, Azure, and Google Cloud security best practices assessments.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Graylog' used for?",
+    "options": {
+      "A": "A tool for logs that are physically gray.",
+      "B": "Centralized log management that enables security teams to collect and analyze data from many sources.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Netcat' is purely a defensive tool and cannot be used to establish a reverse shell.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to perform 'Visual Regression' testing on a security dashboard UI?",
+    "options": {
+      "A": "Applitools",
+      "B": "Wireshark",
+      "C": "Nmap",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sherlock' (OSINT tool) used for?",
+    "options": {
+      "A": "Solving physical murder mysteries.",
+      "B": "Searching for a specific username across hundreds of social media platforms and websites.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional detective."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Metasploit's' 'Auxiliary' modules are used for reconnaissance and scanning rather than direct exploitation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' vulnerability scanning tools? (Select all that apply)",
+    "options": {
+      "A": "Scout Suite",
+      "B": "Prisma Cloud",
+      "C": "Wiz",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Impacket' primarily used for?",
+    "options": {
+      "A": "A physical packet of imp seeds.",
+      "B": "A collection of Python classes for working with network protocols (like SMB and RPC) often used in Windows environment assessments.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR) for a security tool?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to fix a security vulnerability once it is identified by the tool.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Signatures' occur when an antivirus tool has an outdated database and fails to detect a known malware sample.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'OWASP Zed Attack Proxy' (ZAP)? (Select all that apply)",
+    "options": {
+      "A": "Free and open-source web application security tool",
+      "B": "Can be automated for use in CI/CD pipelines",
+      "C": "Used for cracking physical door locks",
+      "D": "Includes an active and passive scanner"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Amass' used for in the reconnaissance phase?",
+    "options": {
+      "A": "Amassing a physical pile of gold.",
+      "B": "In-depth subdomain enumeration and network mapping using open-source data and active techniques.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Threat' 'Intelligence' 'Feeds'?",
+    "options": {
+      "A": "Information feeds for actual predators.",
+      "B": "Streams of data regarding known malicious IP addresses, domains, and malware signatures used to update security tools.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parsing' occurs when a security scanner interprets a piece of code differently than the target application's compiler, potentially missing a vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response' (SOAR)? (Select all that apply)",
+    "options": {
+      "A": "Automatically isolating a compromised server",
+      "B": "Updating firewall rules based on detected attacks",
+      "C": "Hiring 100 junior security guards",
+      "D": "Triggering forensic data collection when an alert occurs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cuckoo Sandbox' used for?",
+    "options": {
+      "A": "A physical box for a cuckoo bird.",
+      "B": "Automated malware analysis where files are executed in an isolated environment to observe their behavior.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Suppression'?",
+    "options": {
+      "A": "Suppression of a person named False Positive.",
+      "B": "The process of configuring security tools to ignore specific known-safe behaviors to reduce noise in reports.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Levels' in security occur when a tool is set to 'DEBUG' in production, potentially leaking sensitive data into logs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Binary' 'Analysis' tools? (Select all that apply)",
+    "options": {
+      "A": "Ghidra",
+      "B": "IDA Pro",
+      "C": "Radare2",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dirsearch' used for?",
+    "options": {
+      "A": "Searching for a person name Dir.",
+      "B": "Automated directory and file brute-forcing on web servers to find hidden or undocumented content.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'SIEM' 'Rule' 'Tuning'?",
+    "options": {
+      "A": "Tuning a person name SIEM.",
+      "B": "Adjusting the logic used to trigger security alerts to ensure they are accurate and minimize false alarms.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scan' 'Frequencies' occur when a system is only scanned once a year, potentially missing vulnerabilities introduced by daily updates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Internal Audit Team",
+      "C": "Regulatory Compliance Officers",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'ExifTool' used for in digital forensics?",
+    "options": {
+      "A": "A tool for fixing physical exits.",
+      "B": "Reading, writing, and manipulating metadata (like GPS location or camera type) in image and video files.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Surface' 'Visualization'?",
+    "options": {
+      "A": "Visualizing a person name Attack Surface.",
+      "B": "Providing a map of all reachable assets, services, and ports to help security teams understand where they are most vulnerable.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocol' 'Inspection' occurs when a firewall is configured to inspect HTTP traffic but completely ignores custom encrypted protocols used by an attacker.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Scanning'? (Select all that apply)",
+    "options": {
+      "A": "Verifying systems match specific benchmarks like CIS or STIG",
+      "B": "Identifying deviations from regulatory standards",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Enabling continuous compliance monitoring"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'WAF' 'Learning' 'Mode'?",
+    "options": {
+      "A": "A mode where the WAF goes to physical school.",
+      "B": "A configuration where the WAF observes traffic patterns to build a 'baseline' of normal behavior before enforcing blocking rules.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Drift'?",
+    "options": {
+      "A": "The slow increase in the number of unpatched vulnerabilities over time as new code is released and legacy systems are neglected.",
+      "B": "A drift made of physical vulnerability reports.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Authentication' occurs when a security tool is given low-level user credentials but is expected to perform an audit that requires administrative access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Threat' 'Hunting'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to search for patterns of known attack techniques (TTPs)",
+      "B": "Automatically correlating suspicious file executions with unusual network traffic",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Identifying dormant backdoors using behavioral analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Trufflehog' used for?",
+    "options": {
+      "A": "Finding actual physical truffles in the forest.",
+      "B": "Searching through Git commit history to find high-entropy strings and secrets that were accidentally committed.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the occurrence of a security event until an alert is generated and sent to the SOC.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Tool' 'Permissions' occur when a scanner is run with 'Root' access but is only intended to perform a 'Guest' level security audit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When developing a custom 'Metasploit' exploit module, what is the primary technical purpose of the 'check' method?",
+    "options": {
+      "A": "To automatically apply a security patch to the target after the exploit finishes.",
+      "B": "To verify if a target is vulnerable without actually triggering the payload, minimizing the risk of crashing the service.",
+      "C": "To check if the attacker's laptop has enough battery to run the exploit.",
+      "D": "To verify the checksum of the Metasploit framework itself."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Burp Suite Professional', the 'BApp Store' allows users to install extensions written in Java, Python, or Ruby to add custom functionality like automated IDOR detection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Advanced' features of 'Nmap' used to bypass sophisticated IDSs? (Select all that apply)",
+    "options": {
+      "A": "--mtu (Fragmenting packets to match a specific size)",
+      "B": "--spoof-mac (Using a fake MAC address to bypass hardware filters)",
+      "C": "--data-length (Adding random data to sent packets to alter signatures)",
+      "D": "--delete-logs (Automatically deleting the IDS logs remotely)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical significance of 'eBPF' in modern Security Observability tools like 'Falco' or 'Cilium'?",
+    "options": {
+      "A": "It is a new type of fiber optic cable for secure communication.",
+      "B": "It allows for the execution of sandboxed programs in the Linux kernel for low-overhead monitoring of system calls and network events.",
+      "C": "It is a specialized compiler for translating Python exploits to C++.",
+      "D": "It is a hardware-level firewall built into the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Digital Forensics', what is the primary role of the 'Volatility Framework'?",
+    "options": {
+      "A": "To measure the stability of the physical server room temperature.",
+      "B": "To perform advanced memory (RAM) analysis to identify injected code, rootkits, and unencrypted credentials.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "To increase the frame rate of the forensic workstation's monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Tool' 'Kernels' occur when an exploit designed for a 64-bit Linux kernel is executed against a 32-bit architecture, resulting in an immediate 'illegal instruction' error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific tool is used for 'Dynamic' binary instrumentation to analyze the behavior of closed-source applications in real-time?",
+    "options": {
+      "A": "Frida",
+      "B": "Wireshark",
+      "C": "Nmap",
+      "D": "Postman"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Domain Fronting' in C2 (Command & Control) tool orchestration?",
+    "options": {
+      "A": "To gain physical access to a company's front office.",
+      "B": "To hide malicious traffic by using high-reputation CDN domains in the SNI/Host headers to bypass censorship or inspection.",
+      "C": "A specialized software for architects to design storefronts.",
+      "D": "To increase the speed of DNS resolution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'SIEM' 'SOAR' integration? (Select all that apply)",
+    "options": {
+      "A": "SIEM detects an anomaly and SOAR automatically triggers an account lockout",
+      "B": "Orchestrating multi-tool responses to a single security incident",
+      "C": "Hiring 100 junior security guards to watch the dashboard",
+      "D": "Reducing the 'Mean Time to Respond' (MTTR) through playbook automation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Signatures' in an EDR tool occur when a 'Living off the Land' (LotL) attack uses legitimate binary files (like PowerShell) that are not flagged as malicious.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Beaconing' interval jitter in a C2 tool like Cobalt Strike?",
+    "options": {
+      "A": "The physical jitter of the hacker's hand on the mouse.",
+      "B": "Adding a random time variance to the periodic agent check-ins to prevent detection by network anomaly sensors.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the purpose of 'Honeypots' in a security tool strategy?",
+    "options": {
+      "A": "To store physical honey for the office kitchen.",
+      "B": "To act as decoy systems that attract attackers, allowing security teams to observe their TTPs and alert on unauthorized access.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Advanced' static analysis (SAST) technique involves tracking the flow of data from untrusted 'Sinks' to dangerous 'Sources'?",
+    "options": {
+      "A": "Code Linting",
+      "B": "Taint Analysis",
+      "C": "Style Checking",
+      "D": "Unit Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encodings' between a security scanner and a target WAF can be exploited to 'Smuggle' malicious requests by using double-URL or Unicode encoding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Ghidra' tool developed by the NSA? (Select all that apply)",
+    "options": {
+      "A": "Open-source software reverse engineering suite",
+      "B": "Capable of de-compiling binary code into human-readable C code",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Includes a powerful scripting engine for automated analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory' 'Corruption' analysis using a fuzzer like 'AFL++'?",
+    "options": {
+      "A": "Analyzing how actual physical RAM chips rust over time.",
+      "B": "Using feedback-driven genetic algorithms to find crashes, hangs, and memory leaks in target binaries.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Aggregation' across multiple tools?",
+    "options": {
+      "A": "The difficulty of combining low-severity findings from SAST, DAST, and SCA into a single, cohesive view of organizational risk.",
+      "B": "Aggregating physical risks like falling over in the data center.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in tool selection occur when the technical team chooses tools based on 'Feature Richness' while the security team requires 'Governance and Compliance'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Binary' 'Exploitation' 'Protections' that tools must account for? (Select all that apply)",
+    "options": {
+      "A": "ASLR (Address Space Layout Randomization)",
+      "B": "DEP (Data Execution Prevention / NX Bit)",
+      "C": "Control Flow Guard (CFG)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Agentless' security scanning in a cloud environment?",
+    "options": {
+      "A": "Scanning the cloud without hiring any security agents.",
+      "B": "The ability to audit cloud instances by taking snapshots of the storage volume and scanning them out-of-band without installing software on the target machine.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Fatigue' in security tools?",
+    "options": {
+      "A": "When a security analyst becomes exhausted from triaging too many inaccurate alerts.",
+      "B": "When the positive values in a report are physically too large to read.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when a security tool identifies a 'Critical' bug but the remediation policy allows for 90 days to fix it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Threat' 'Modeling' 'Tools'? (Select all that apply)",
+    "options": {
+      "A": "IriusRisk",
+      "B": "ThreatModeler",
+      "C": "OWASP Dragon",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Static' 'Application' 'Security' 'Testing' (SAST) 'Custom' 'Rule' development?",
+    "options": {
+      "A": "Writing a custom rule for the office cafeteria.",
+      "B": "Defining specific patterns or logic checks in a SAST tool to find proprietary or industry-specific vulnerabilities in source code.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Tool' 'Failures' (MTBTF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration that an automated security tool runs correctly before crashing or encountering an integration error.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a security scanner is run against 'QA' but the 'Production' environment uses a different underlying OS or web server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Container' 'Orchestration' 'Security' tools? (Select all that apply)",
+    "options": {
+      "A": "Kube-bench",
+      "B": "Kube-hunter",
+      "C": "Falco",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Software' 'Bill' 'of' 'Materials' (SBOM) 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a musical about a software bill.",
+      "B": "Automating the collection, analysis, and vulnerability tracking of all third-party components across an entire enterprise's software portfolio.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'Risk' 'vs' 'Residual' 'Risk'?",
+    "options": {
+      "A": "Residual Risk is the threat that remains after security controls and optimizations have been applied.",
+      "B": "Calculated Risk is for experts; Residual for beginners.",
+      "C": "A security scan of the database.",
+      "D": "Residual Risk is 100x larger."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a scanner attempts to use HTTP/2 headers to find vulnerabilities in a server that only supports legacy HTTP/1.0.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Identity' 'Security' 'Auditing'? (Select all that apply)",
+    "options": {
+      "A": "Finding 'Ghost' accounts that haven't been used in 90 days",
+      "B": "Identifying users with 'Over-permissioned' roles",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Detecting 'Impossible Travel' login patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Fuzzing' 'Saturation' in security testing?",
+    "options": {
+      "A": "When the developer is full of coffee.",
+      "B": "The point at which providing more random input to a tool provides diminishing returns in terms of discovering new code paths or crashes.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Drift' 'Analysis'?",
+    "options": {
+      "A": "Tracking how the count of unpatched vulnerabilities increases or decreases across different business units over time.",
+      "B": "A drift made of physical vulnerability reports.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when 'Prod' logs are set to 'ERROR' only, making it impossible for security tools to reconstruct a multi-step attack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'SOAR' 'Playbook' 'Features'? (Select all that apply)",
+    "options": {
+      "A": "Automated data enrichment from IP reputation services",
+      "B": "Human-in-the-loop approval gates for critical actions",
+      "C": "Conditional logic for different types of alerts",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Tool' 'Decoupling' in a Security Platform?",
+    "options": {
+      "A": "Removing physical cables from the tool.",
+      "B": "An architecture that allows a company to switch security scanners (e.g., from Tool A to Tool B) without losing historical vulnerability data.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Surface' 'Convergence'?",
+    "options": {
+      "A": "The point at which an organization's physical, digital, and cloud vulnerabilities overlap to create a single high-risk exploit path.",
+      "B": "A person named Convergence attacking.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' occurs when a high-performance scanner requires massive RAM to perform deep binary analysis that the tester's laptop cannot provide.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'SIEM' 'Correlation' 'Rules'? (Select all that apply)",
+    "options": {
+      "A": "Detecting 50 failed logins followed by 1 success within 5 minutes",
+      "B": "Correlating a file execution event with an outbound connection to a known C2 IP",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Identifying 'Dormant' processes suddenly accessing sensitive files"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Artifact' 'Retention' in an automated security toolchain?",
+    "options": {
+      "A": "Retaining ancient Egyptian statues.",
+      "B": "The policy and technical process of storing scan logs, PCAP files, and screenshots for legal and forensic evidence.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC)?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average duration between the detection of a security incident and its full isolation from the rest of the network.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a scanner polls for a response every 10 seconds, but the target server times out connections after 5 seconds.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response' 'Limitations'? (Select all that apply)",
+    "options": {
+      "A": "Automation may lock out legitimate users during a false positive alert",
+      "B": "Complexity of maintaining playbooks for every possible scenario",
+      "C": "Guaranteed to replace all security engineers",
+      "D": "High risk of 'Broken Logic' causing system-wide outages"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Obfuscation' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name Obfuscation.",
+      "B": "Using tools to reverse-engineer and verify that proprietary logic is sufficiently hidden from attackers who might steal the source code.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability'?",
+    "options": {
+      "A": "Traceability of a person named Requirement.",
+      "B": "The ability to map every security vulnerability found by a tool back to a specific corporate policy or regulatory standard.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Infrastructure' occurs when security tools are running on the same hardware as the production application, potentially stealing resources needed for end-users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Reporting' 'Visualizations' for security tools? (Select all that apply)",
+    "options": {
+      "A": "Vulnerability 'Heatmaps' by asset criticality",
+      "B": "Kill-chain stage 'Sankey' diagrams",
+      "C": "Threat actor 'TTP' radar charts",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' in a scanning strategy?",
+    "options": {
+      "A": "Executing a scanner in a dark room.",
+      "B": "Running a new, untested security tool in parallel with a trusted one to verify its accuracy without affecting the official report.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Age' vs 'Maturity'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Age is how long a bug has existed; Maturity is the availability of reliable, public exploit code for that bug.",
+      "C": "Maturity is for experts; Age for beginners.",
+      "D": "Maturity is 100x larger."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an 'SCA' tool identifies a vulnerability in a library but the library developer has not released a patch yet (Zero-Day path).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Threat' 'Hunting' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Indicator of Compromise (IoC) lists",
+      "B": "Tactics, Techniques, and Procedures (TTP) patterns",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Behavioral anomaly detection profiles"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Tool' 'Saturation'?",
+    "options": {
+      "A": "When a security team has too many tools to manage efficiently, leading to overlapping alerts and decreased effectiveness.",
+      "B": "When a tool is full of coffee.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by severity?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to resolve 'Critical' bugs compared to 'Low' priority bugs, used to measure security team efficiency.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' occurs when a DAST tool works perfectly for a 10-page site but crashes when trying to crawl a 1,000,000-page enterprise portal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Governance' 'Reporting' 'Levels'? (Select all that apply)",
+    "options": {
+      "A": "Operational Level (Detailed tool logs)",
+      "B": "Management Level (KPIs and Fix timelines)",
+      "C": "Executive Level (Overall risk posture and ROI)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Tool' 'Portability'?",
+    "options": {
+      "A": "Carrying a physical tool in a suitcase.",
+      "B": "The ability of a security scanner to run consistently across different operating systems, cloud providers, and on-premise environments.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Prioritization' 'Algorithm'?",
+    "options": {
+      "A": "A mathematical formula that combines CVSS scores with asset criticality and threat intelligence to decide which bug to fix first.",
+      "B": "Hiring a person named Algorithm.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a security toolchain occur when a scanner uses an old version of the OpenAPI spec, missing new endpoints added in the latest release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Governance' requirements",
+      "B": "Keeping tools updated with rapidly changing regulations (e.g., GDPR)",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "High risk of 'False Compliance' if tools are configured incorrectly"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Tool' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the physical office.",
+      "B": "How easy it is to update, configure, and troubleshoot a security tool as the target environment evolves.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) threshold?",
+    "options": {
+      "A": "The maximum allowed time for a tool to detect and notify a human about a critical security breach before an SLA violation occurs.",
+      "B": "The average time it takes for a team to have lunch.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' occurs when security tool logs are stored in a public S3 bucket, allowing attackers to see what the defenders know.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Tool' 'Integration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "RESTful JSON APIs",
+      "B": "Webhook callbacks",
+      "C": "gRPC for high-performance data streams",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Tool' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of scripts or templates used to quickly initialize and configure a security tool with the correct baseline settings for a new project.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Negative' 'Rate'?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "The percentage of real vulnerabilities that a security tool fails to identify during a scan.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a scanner tries to open 1,000 connections to a microservice that is only configured to handle 100 concurrent requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Aggregation' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Unified view of security posture across all tools",
+      "B": "Faster identification of 'Attack Chains'",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Consistent prioritization of remediation efforts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Tool' 'Asset' 'Inventory'?",
+    "options": {
+      "A": "An inventory of physical assets like chairs and tables.",
+      "B": "The systematic tracking and management of all security software licenses, versions, and deployment locations within an organization.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

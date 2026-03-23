@@ -1,0 +1,1987 @@
+{ 
+  "skill": "Lambda", 
+  "questions": [
+    {
+"question":"What is AWS Lambda?",
+"options":{
+"A":"Serverless compute service",
+"B":"Storage service",
+"C":"Database service",
+"D":"Networking service"
+},
+"answer":"A"
+},
+
+{
+"question":"Which languages are supported by AWS Lambda? (Select all that apply)",
+"options":{
+"A":"Python",
+"B":"Node.js",
+"C":"Java",
+"D":"C#"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: AWS Lambda runs code without provisioning servers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is the maximum execution time of a Lambda function?",
+"options":{
+"A":"15 minutes",
+"B":"5 minutes",
+"C":"30 minutes",
+"D":"1 hour"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services commonly trigger Lambda functions? (Select all that apply)",
+"options":{
+"A":"S3",
+"B":"API Gateway",
+"C":"DynamoDB",
+"D":"CloudWatch"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda automatically scales with incoming requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which component contains Lambda code and dependencies?",
+"options":{
+"A":"Deployment package",
+"B":"Runtime",
+"C":"Handler",
+"D":"Layer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which elements define a Lambda function? (Select all that apply)",
+"options":{
+"A":"Code",
+"B":"Runtime",
+"C":"Handler",
+"D":"Permissions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions require a handler method.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service provides HTTP endpoints for Lambda?",
+"options":{
+"A":"API Gateway",
+"B":"Route 53",
+"C":"CloudFront",
+"D":"Elastic Load Balancer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which compute features are provided by Lambda? (Select all that apply)",
+"options":{
+"A":"Automatic scaling",
+"B":"Pay-per-use billing",
+"C":"Server management",
+"D":"Event-driven execution"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Lambda charges only for execution time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service stores Lambda logs?",
+"options":{
+"A":"CloudWatch Logs",
+"B":"CloudTrail",
+"C":"S3",
+"D":"X-Ray"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda monitoring tools exist? (Select all that apply)",
+"options":{
+"A":"CloudWatch",
+"B":"X-Ray",
+"C":"CloudTrail",
+"D":"AWS Config"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: AWS X-Ray helps trace Lambda execution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows sharing code between Lambda functions?",
+"options":{
+"A":"Lambda Layers",
+"B":"Lambda Templates",
+"C":"Lambda Containers",
+"D":"Lambda Snapshots"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Lambda layers provide? (Select all that apply)",
+"options":{
+"A":"Code reuse",
+"B":"Dependency sharing",
+"C":"Smaller deployment packages",
+"D":"Faster updates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda layers can store libraries and runtime dependencies.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows running functions in private networks?",
+"options":{
+"A":"VPC Integration",
+"B":"Private Lambda",
+"C":"Secure Execution",
+"D":"Network Lambda"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can Lambda access inside a VPC? (Select all that apply)",
+"options":{
+"A":"RDS",
+"B":"EC2",
+"C":"ElastiCache",
+"D":"Internal APIs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions in a VPC require subnet configuration.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows executing code on a schedule?",
+"options":{
+"A":"EventBridge",
+"B":"CloudFront",
+"C":"Route 53",
+"D":"S3"
+},
+"answer":"A"
+},
+
+{
+"question":"Which event sources can trigger Lambda? (Select all that apply)",
+"options":{
+"A":"S3",
+"B":"SNS",
+"C":"SQS",
+"D":"Kinesis"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda can process streaming data from Kinesis.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows version control of functions?",
+"options":{
+"A":"Versions",
+"B":"Snapshots",
+"C":"Backups",
+"D":"Instances"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda deployment options exist? (Select all that apply)",
+"options":{
+"A":"Zip package",
+"B":"Container image",
+"C":"Layers",
+"D":"Inline code"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Lambda supports container images up to 10 GB.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows orchestrating multiple Lambda functions?",
+"options":{
+"A":"Step Functions",
+"B":"CloudFormation",
+"C":"CodeDeploy",
+"D":"SNS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Step Functions features exist? (Select all that apply)",
+"options":{
+"A":"Workflow orchestration",
+"B":"Error handling",
+"C":"Parallel execution",
+"D":"Retry logic"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Step Functions can coordinate multiple Lambda tasks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows controlling traffic between versions?",
+"options":{
+"A":"Aliases",
+"B":"Snapshots",
+"C":"Tags",
+"D":"Layers"
+},
+"answer":"A"
+},
+
+{
+"question":"Which capabilities do Lambda aliases provide? (Select all that apply)",
+"options":{
+"A":"Version routing",
+"B":"Blue-green deployments",
+"C":"Traffic shifting",
+"D":"Stable endpoints"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda aliases map to specific function versions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which AWS service helps automate deployment of Lambda functions?",
+"options":{
+"A":"AWS CodeDeploy",
+"B":"AWS Inspector",
+"C":"AWS Config",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment strategies are supported with Lambda? (Select all that apply)",
+"options":{
+"A":"Canary deployment",
+"B":"Linear deployment",
+"C":"All-at-once deployment",
+"D":"Blue-green deployment"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: CodeDeploy can automatically shift traffic between Lambda versions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows adding environment-specific settings?",
+"options":{
+"A":"Environment Variables",
+"B":"Lambda Layers",
+"C":"Deployment Packages",
+"D":"Runtime Settings"
+},
+"answer":"A"
+},
+
+{
+"question":"Which uses of environment variables exist in Lambda? (Select all that apply)",
+"options":{
+"A":"Configuration values",
+"B":"Database credentials",
+"C":"API keys",
+"D":"Feature flags"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Environment variables in Lambda can be encrypted with KMS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows executing code in response to file uploads?",
+"options":{
+"A":"S3 Event Trigger",
+"B":"CloudWatch Logs",
+"C":"Step Functions",
+"D":"SNS Topics"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of S3 events can trigger Lambda? (Select all that apply)",
+"options":{
+"A":"Object created",
+"B":"Object deleted",
+"C":"Object restored",
+"D":"Object replication"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Lambda can automatically process files uploaded to S3.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows scheduled execution of functions?",
+"options":{
+"A":"EventBridge",
+"B":"CloudFront",
+"C":"IAM",
+"D":"EFS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scheduling formats are supported in EventBridge? (Select all that apply)",
+"options":{
+"A":"Rate expressions",
+"B":"Cron expressions",
+"C":"Time triggers",
+"D":"Calendar triggers"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: EventBridge can trigger Lambda at scheduled intervals.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service provides serverless workflow orchestration with Lambda?",
+"options":{
+"A":"AWS Step Functions",
+"B":"CloudFormation",
+"C":"AWS Inspector",
+"D":"Elastic Beanstalk"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Step Functions capabilities exist? (Select all that apply)",
+"options":{
+"A":"Task sequencing",
+"B":"Parallel execution",
+"C":"Error handling",
+"D":"Retry logic"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Step Functions can coordinate multiple Lambda functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature helps reuse common libraries across functions?",
+"options":{
+"A":"Lambda Layers",
+"B":"Deployment Packages",
+"C":"Function Templates",
+"D":"Runtime Images"
+},
+"answer":"A"
+},
+
+{
+"question":"Which items can be stored in Lambda layers? (Select all that apply)",
+"options":{
+"A":"Libraries",
+"B":"Custom runtimes",
+"C":"Dependencies",
+"D":"Configuration files"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Lambda layers reduce deployment package size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which service allows monitoring Lambda performance metrics?",
+"options":{
+"A":"CloudWatch",
+"B":"CloudTrail",
+"C":"Inspector",
+"D":"Config"
+},
+"answer":"A"
+},
+
+{
+"question":"Which metrics are tracked for Lambda functions? (Select all that apply)",
+"options":{
+"A":"Invocations",
+"B":"Duration",
+"C":"Errors",
+"D":"Throttles"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms can notify when Lambda errors increase.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows controlling concurrency limits?",
+"options":{
+"A":"Reserved Concurrency",
+"B":"Concurrency Lock",
+"C":"Execution Limit",
+"D":"Parallel Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does reserved concurrency provide? (Select all that apply)",
+"options":{
+"A":"Limit execution",
+"B":"Guarantee capacity",
+"C":"Prevent overload",
+"D":"Control scaling"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda automatically scales up to handle concurrent executions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature provides tracing of distributed applications?",
+"options":{
+"A":"AWS X-Ray",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which X-Ray features exist? (Select all that apply)",
+"options":{
+"A":"Service map",
+"B":"Request tracing",
+"C":"Latency analysis",
+"D":"Error tracking"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: X-Ray helps visualize Lambda execution paths.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which AWS service allows Lambda functions to access secrets securely?",
+"options":{
+"A":"AWS Secrets Manager",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does AWS Secrets Manager provide? (Select all that apply)",
+"options":{
+"A":"Secure secret storage",
+"B":"Automatic rotation",
+"C":"Access control",
+"D":"Encryption"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions can retrieve secrets securely from Secrets Manager.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows running functions inside a container image?",
+"options":{
+"A":"Container Image Support",
+"B":"Lambda Layers",
+"C":"Lambda Runtime",
+"D":"Lambda Package"
+},
+"answer":"A"
+},
+
+{
+"question":"Which container registries can store Lambda images? (Select all that apply)",
+"options":{
+"A":"Amazon ECR",
+"B":"Docker Hub",
+"C":"GitHub Container Registry",
+"D":"Azure Container Registry"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Lambda container images can be up to 10 GB in size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature enables persistent file storage for functions?",
+"options":{
+"A":"Amazon EFS",
+"B":"Amazon S3",
+"C":"Amazon EBS",
+"D":"Amazon FSx"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Lambda integration with EFS provide? (Select all that apply)",
+"options":{
+"A":"Persistent storage",
+"B":"Shared access across functions",
+"C":"Large file support",
+"D":"Low latency access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions can mount Amazon EFS file systems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows message queues to trigger Lambda?",
+"options":{
+"A":"Amazon SQS",
+"B":"Amazon SNS",
+"C":"Amazon Kinesis",
+"D":"Amazon EventBridge"
+},
+"answer":"A"
+},
+
+{
+"question":"Which event sources support Lambda triggers? (Select all that apply)",
+"options":{
+"A":"SQS",
+"B":"SNS",
+"C":"Kinesis",
+"D":"DynamoDB Streams"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda can process messages from SQS queues automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows routing traffic between different versions?",
+"options":{
+"A":"Aliases",
+"B":"Tags",
+"C":"Layers",
+"D":"Snapshots"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment benefits do Lambda aliases provide? (Select all that apply)",
+"options":{
+"A":"Traffic shifting",
+"B":"Blue/green deployment",
+"C":"Version control",
+"D":"Stable endpoints"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda aliases can route a percentage of traffic to a new version.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service helps define infrastructure for Lambda using templates?",
+"options":{
+"A":"AWS CloudFormation",
+"B":"AWS Inspector",
+"C":"AWS Config",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can CloudFormation create for Lambda? (Select all that apply)",
+"options":{
+"A":"Lambda functions",
+"B":"IAM roles",
+"C":"API Gateway",
+"D":"Event triggers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be written in JSON or YAML.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature controls the memory allocated to a function?",
+"options":{
+"A":"Memory Configuration",
+"B":"Compute Settings",
+"C":"Runtime Allocation",
+"D":"Execution Profile"
+},
+"answer":"A"
+},
+
+{
+"question":"Which factors affect Lambda performance? (Select all that apply)",
+"options":{
+"A":"Memory size",
+"B":"Execution time",
+"C":"Concurrency",
+"D":"Runtime language"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Increasing memory allocation also increases CPU power for Lambda.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows serverless REST APIs backed by Lambda?",
+"options":{
+"A":"API Gateway",
+"B":"CloudFront",
+"C":"Elastic Load Balancer",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which API Gateway features integrate with Lambda? (Select all that apply)",
+"options":{
+"A":"HTTP endpoints",
+"B":"Authentication",
+"C":"Request validation",
+"D":"Throttling"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: API Gateway can trigger Lambda functions through HTTP requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature helps prevent overloading downstream systems?",
+"options":{
+"A":"Throttling",
+"B":"Execution Lock",
+"C":"Concurrency Guard",
+"D":"Runtime Limits"
+},
+"answer":"A"
+},
+
+{
+"question":"Which concurrency control mechanisms exist in Lambda? (Select all that apply)",
+"options":{
+"A":"Reserved concurrency",
+"B":"Provisioned concurrency",
+"C":"Account concurrency limits",
+"D":"Burst concurrency"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Provisioned concurrency reduces cold start latency.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service provides distributed tracing for Lambda applications?",
+"options":{
+"A":"AWS X-Ray",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features does AWS X-Ray provide? (Select all that apply)",
+"options":{
+"A":"Request tracing",
+"B":"Latency monitoring",
+"C":"Error detection",
+"D":"Service map visualization"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: X-Ray helps analyze performance bottlenecks in Lambda applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which AWS service allows Lambda functions to access secrets securely?",
+"options":{
+"A":"AWS Secrets Manager",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does AWS Secrets Manager provide? (Select all that apply)",
+"options":{
+"A":"Secure secret storage",
+"B":"Automatic rotation",
+"C":"Access control",
+"D":"Encryption"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions can retrieve secrets securely from Secrets Manager.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows running functions inside a container image?",
+"options":{
+"A":"Container Image Support",
+"B":"Lambda Layers",
+"C":"Lambda Runtime",
+"D":"Lambda Package"
+},
+"answer":"A"
+},
+
+{
+"question":"Which container registries can store Lambda images? (Select all that apply)",
+"options":{
+"A":"Amazon ECR",
+"B":"Docker Hub",
+"C":"GitHub Container Registry",
+"D":"Azure Container Registry"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Lambda container images can be up to 10 GB in size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature enables persistent file storage for functions?",
+"options":{
+"A":"Amazon EFS",
+"B":"Amazon S3",
+"C":"Amazon EBS",
+"D":"Amazon FSx"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Lambda integration with EFS provide? (Select all that apply)",
+"options":{
+"A":"Persistent storage",
+"B":"Shared access across functions",
+"C":"Large file support",
+"D":"Low latency access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda functions can mount Amazon EFS file systems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows message queues to trigger Lambda?",
+"options":{
+"A":"Amazon SQS",
+"B":"Amazon SNS",
+"C":"Amazon Kinesis",
+"D":"Amazon EventBridge"
+},
+"answer":"A"
+},
+
+{
+"question":"Which event sources support Lambda triggers? (Select all that apply)",
+"options":{
+"A":"SQS",
+"B":"SNS",
+"C":"Kinesis",
+"D":"DynamoDB Streams"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda can process messages from SQS queues automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows routing traffic between different versions?",
+"options":{
+"A":"Aliases",
+"B":"Tags",
+"C":"Layers",
+"D":"Snapshots"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment benefits do Lambda aliases provide? (Select all that apply)",
+"options":{
+"A":"Traffic shifting",
+"B":"Blue/green deployment",
+"C":"Version control",
+"D":"Stable endpoints"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda aliases can route a percentage of traffic to a new version.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service helps define infrastructure for Lambda using templates?",
+"options":{
+"A":"AWS CloudFormation",
+"B":"AWS Inspector",
+"C":"AWS Config",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can CloudFormation create for Lambda? (Select all that apply)",
+"options":{
+"A":"Lambda functions",
+"B":"IAM roles",
+"C":"API Gateway",
+"D":"Event triggers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be written in JSON or YAML.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature controls the memory allocated to a function?",
+"options":{
+"A":"Memory Configuration",
+"B":"Compute Settings",
+"C":"Runtime Allocation",
+"D":"Execution Profile"
+},
+"answer":"A"
+},
+
+{
+"question":"Which factors affect Lambda performance? (Select all that apply)",
+"options":{
+"A":"Memory size",
+"B":"Execution time",
+"C":"Concurrency",
+"D":"Runtime language"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Increasing memory allocation also increases CPU power for Lambda.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows serverless REST APIs backed by Lambda?",
+"options":{
+"A":"API Gateway",
+"B":"CloudFront",
+"C":"Elastic Load Balancer",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which API Gateway features integrate with Lambda? (Select all that apply)",
+"options":{
+"A":"HTTP endpoints",
+"B":"Authentication",
+"C":"Request validation",
+"D":"Throttling"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: API Gateway can trigger Lambda functions through HTTP requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature helps prevent overloading downstream systems?",
+"options":{
+"A":"Throttling",
+"B":"Execution Lock",
+"C":"Concurrency Guard",
+"D":"Runtime Limits"
+},
+"answer":"A"
+},
+
+{
+"question":"Which concurrency control mechanisms exist in Lambda? (Select all that apply)",
+"options":{
+"A":"Reserved concurrency",
+"B":"Provisioned concurrency",
+"C":"Account concurrency limits",
+"D":"Burst concurrency"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Provisioned concurrency reduces cold start latency.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service provides distributed tracing for Lambda applications?",
+"options":{
+"A":"AWS X-Ray",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features does AWS X-Ray provide? (Select all that apply)",
+"options":{
+"A":"Request tracing",
+"B":"Latency monitoring",
+"C":"Error detection",
+"D":"Service map visualization"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: X-Ray helps analyze performance bottlenecks in Lambda applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Lambda feature allows pre-initializing execution environments to reduce cold starts?",
+"options":{
+"A":"Provisioned Concurrency",
+"B":"Reserved Concurrency",
+"C":"Execution Control",
+"D":"Auto Scaling"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does provisioned concurrency provide? (Select all that apply)",
+"options":{
+"A":"Reduced cold starts",
+"B":"Predictable latency",
+"C":"Pre-initialized environments",
+"D":"Improved performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Provisioned concurrency keeps Lambda environments ready to handle requests instantly.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows labeling functions for organization and billing?",
+"options":{
+"A":"Tags",
+"B":"Aliases",
+"C":"Layers",
+"D":"Policies"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do Lambda tags serve? (Select all that apply)",
+"options":{
+"A":"Resource organization",
+"B":"Cost allocation",
+"C":"Access control",
+"D":"Automation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Tags are key-value pairs assigned to Lambda resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows sharing functions with other AWS accounts?",
+"options":{
+"A":"Resource-based policies",
+"B":"IAM roles",
+"C":"Access tokens",
+"D":"Execution roles"
+},
+"answer":"A"
+},
+
+{
+"question":"Which permissions can resource-based policies grant? (Select all that apply)",
+"options":{
+"A":"Invoke function",
+"B":"Access function URL",
+"C":"Cross-account invocation",
+"D":"Service integration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Resource-based policies allow cross-account Lambda invocation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature enables direct HTTPS access to functions without API Gateway?",
+"options":{
+"A":"Lambda Function URLs",
+"B":"Direct API",
+"C":"HTTP Endpoint",
+"D":"Lambda Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Lambda function URLs provide? (Select all that apply)",
+"options":{
+"A":"Simple HTTP access",
+"B":"Reduced configuration",
+"C":"Built-in authentication options",
+"D":"Direct invocation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda function URLs allow invoking functions via HTTP requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows asynchronous execution of functions?",
+"options":{
+"A":"Async Invocation",
+"B":"Batch Execution",
+"C":"Delayed Execution",
+"D":"Background Invocation"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does asynchronous invocation provide? (Select all that apply)",
+"options":{
+"A":"Event queueing",
+"B":"Retry mechanism",
+"C":"Error handling",
+"D":"Decoupled processing"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Asynchronous invocation automatically retries failed Lambda executions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows handling failed events automatically?",
+"options":{
+"A":"Dead Letter Queue",
+"B":"Error Queue",
+"C":"Retry Queue",
+"D":"Failure Bucket"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can be used as Lambda Dead Letter Queues? (Select all that apply)",
+"options":{
+"A":"Amazon SQS",
+"B":"Amazon SNS",
+"C":"Amazon Kinesis",
+"D":"Amazon DynamoDB"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Dead Letter Queues store events that failed Lambda processing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows configuration of retry attempts?",
+"options":{
+"A":"Event Retry Policy",
+"B":"Execution Retry",
+"C":"Invocation Retry",
+"D":"Error Retry"
+},
+"answer":"A"
+},
+
+{
+"question":"Which retry configurations exist in Lambda? (Select all that apply)",
+"options":{
+"A":"Maximum retry attempts",
+"B":"Maximum event age",
+"C":"Failure destination",
+"D":"Success destination"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda destinations allow routing events after execution success or failure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature enables event-driven architecture?",
+"options":{
+"A":"Event Source Mapping",
+"B":"Execution Mapping",
+"C":"Runtime Mapping",
+"D":"Trigger Mapping"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services support event source mapping? (Select all that apply)",
+"options":{
+"A":"SQS",
+"B":"Kinesis",
+"C":"DynamoDB Streams",
+"D":"Kafka"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Event source mapping allows Lambda to poll streaming sources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows defining execution timeout limits?",
+"options":{
+"A":"Timeout Configuration",
+"B":"Execution Limit",
+"C":"Runtime Timer",
+"D":"Function Limit"
+},
+"answer":"A"
+},
+
+{
+"question":"Which configuration settings are adjustable in Lambda? (Select all that apply)",
+"options":{
+"A":"Memory size",
+"B":"Timeout",
+"C":"Environment variables",
+"D":"Concurrency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda timeout can be configured up to 15 minutes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service helps audit Lambda API activity?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"AWS Config",
+"C":"CloudWatch",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which activities can CloudTrail track for Lambda? (Select all that apply)",
+"options":{
+"A":"Function creation",
+"B":"Function deletion",
+"C":"Configuration changes",
+"D":"API calls"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail records Lambda API calls for auditing purposes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Lambda feature allows secure access to databases without storing credentials in code?",
+"options":{
+"A":"AWS Secrets Manager",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"IAM Users"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages does Secrets Manager provide for Lambda? (Select all that apply)",
+"options":{
+"A":"Secret rotation",
+"B":"Secure storage",
+"C":"Encryption",
+"D":"Access control"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda can retrieve secrets dynamically from AWS Secrets Manager.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows persistent shared storage across executions?",
+"options":{
+"A":"Amazon EFS",
+"B":"Amazon S3",
+"C":"Amazon DynamoDB",
+"D":"Amazon EBS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does EFS integration provide for Lambda? (Select all that apply)",
+"options":{
+"A":"Shared file storage",
+"B":"Persistent storage",
+"C":"Large file access",
+"D":"Low latency file system"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda can mount Amazon EFS file systems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows defining environment configuration variables?",
+"options":{
+"A":"Environment Variables",
+"B":"Lambda Layers",
+"C":"Deployment Packages",
+"D":"Execution Roles"
+},
+"answer":"A"
+},
+
+{
+"question":"Which uses of Lambda environment variables exist? (Select all that apply)",
+"options":{
+"A":"Configuration settings",
+"B":"API keys",
+"C":"Database credentials",
+"D":"Feature flags"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Environment variables in Lambda can be encrypted using AWS KMS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service allows REST APIs backed by Lambda?",
+"options":{
+"A":"API Gateway",
+"B":"Route 53",
+"C":"CloudFront",
+"D":"Elastic Load Balancer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which API Gateway features integrate with Lambda? (Select all that apply)",
+"options":{
+"A":"Authentication",
+"B":"Request validation",
+"C":"Throttling",
+"D":"HTTP endpoints"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: API Gateway can trigger Lambda using HTTP requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows traffic shifting between versions?",
+"options":{
+"A":"Aliases",
+"B":"Layers",
+"C":"Snapshots",
+"D":"Runtime"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment benefits do Lambda aliases provide? (Select all that apply)",
+"options":{
+"A":"Traffic shifting",
+"B":"Blue-green deployments",
+"C":"Version management",
+"D":"Stable endpoints"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda aliases map to specific versions of functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service orchestrates Lambda workflows?",
+"options":{
+"A":"AWS Step Functions",
+"B":"CloudFormation",
+"C":"CloudTrail",
+"D":"AWS Config"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Step Functions features exist? (Select all that apply)",
+"options":{
+"A":"Workflow orchestration",
+"B":"Parallel tasks",
+"C":"Retry logic",
+"D":"Error handling"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Step Functions coordinate multiple Lambda executions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows asynchronous invocation of functions?",
+"options":{
+"A":"Async Invocation",
+"B":"Parallel Invocation",
+"C":"Delayed Invocation",
+"D":"Batch Invocation"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does asynchronous invocation provide? (Select all that apply)",
+"options":{
+"A":"Retry logic",
+"B":"Event queueing",
+"C":"Error handling",
+"D":"Decoupled execution"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Asynchronous Lambda invocation retries failed executions automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature stores failed events for later processing?",
+"options":{
+"A":"Dead Letter Queue",
+"B":"Retry Bucket",
+"C":"Failure Queue",
+"D":"Event Storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can be used as Lambda Dead Letter Queues? (Select all that apply)",
+"options":{
+"A":"Amazon SQS",
+"B":"Amazon SNS",
+"C":"Amazon Kinesis",
+"D":"Amazon DynamoDB"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Dead Letter Queues store failed Lambda events.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows controlling concurrent executions?",
+"options":{
+"A":"Reserved Concurrency",
+"B":"Execution Lock",
+"C":"Scaling Guard",
+"D":"Concurrency Policy"
+},
+"answer":"A"
+},
+
+{
+"question":"Which concurrency controls exist in Lambda? (Select all that apply)",
+"options":{
+"A":"Reserved concurrency",
+"B":"Provisioned concurrency",
+"C":"Account concurrency limit",
+"D":"Burst concurrency"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Provisioned concurrency reduces cold start latency.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service traces Lambda request flows?",
+"options":{
+"A":"AWS X-Ray",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which capabilities does AWS X-Ray provide? (Select all that apply)",
+"options":{
+"A":"Service maps",
+"B":"Request tracing",
+"C":"Latency analysis",
+"D":"Error tracking"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: X-Ray helps identify Lambda performance bottlenecks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows monitoring metrics and logs?",
+"options":{
+"A":"Amazon CloudWatch",
+"B":"AWS Config",
+"C":"AWS Inspector",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda metrics does CloudWatch monitor? (Select all that apply)",
+"options":{
+"A":"Invocations",
+"B":"Duration",
+"C":"Errors",
+"D":"Throttles"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms can notify when Lambda errors increase.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Lambda feature allows labeling resources for organization and billing?",
+"options":{
+"A":"Tags",
+"B":"Aliases",
+"C":"Layers",
+"D":"Policies"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do Lambda tags serve? (Select all that apply)",
+"options":{
+"A":"Resource organization",
+"B":"Cost allocation",
+"C":"Automation",
+"D":"Access management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Tags in Lambda are key-value pairs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows direct HTTPS access without API Gateway?",
+"options":{
+"A":"Lambda Function URL",
+"B":"Direct Endpoint",
+"C":"Lambda Gateway",
+"D":"Execution URL"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Lambda Function URLs provide? (Select all that apply)",
+"options":{
+"A":"Simple HTTP invocation",
+"B":"Reduced configuration",
+"C":"Direct invocation",
+"D":"Built-in authentication"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda Function URLs allow invoking functions via HTTP requests.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows cross-account invocation?",
+"options":{
+"A":"Resource-based policies",
+"B":"IAM users",
+"C":"Execution roles",
+"D":"Security groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which permissions can Lambda resource policies grant? (Select all that apply)",
+"options":{
+"A":"Invoke function",
+"B":"Cross-account access",
+"C":"Service invocation",
+"D":"API access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Resource-based policies allow other AWS accounts to invoke Lambda functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows running code at scheduled intervals?",
+"options":{
+"A":"EventBridge Scheduler",
+"B":"Lambda Timer",
+"C":"CloudWatch Alarm",
+"D":"Auto Invocation"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scheduling formats does EventBridge support? (Select all that apply)",
+"options":{
+"A":"Rate expressions",
+"B":"Cron expressions",
+"C":"Calendar schedules",
+"D":"Event triggers"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: EventBridge can trigger Lambda functions on schedules.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature manages configuration and deployment templates?",
+"options":{
+"A":"AWS CloudFormation",
+"B":"AWS Inspector",
+"C":"AWS Shield",
+"D":"AWS Config"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can CloudFormation deploy for Lambda? (Select all that apply)",
+"options":{
+"A":"Lambda functions",
+"B":"API Gateway",
+"C":"IAM roles",
+"D":"Event triggers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be written in JSON or YAML.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature controls how long a function can run?",
+"options":{
+"A":"Timeout",
+"B":"Execution limit",
+"C":"Runtime control",
+"D":"Process limit"
+},
+"answer":"A"
+},
+
+{
+"question":"Which settings affect Lambda performance? (Select all that apply)",
+"options":{
+"A":"Memory allocation",
+"B":"Runtime language",
+"C":"Execution timeout",
+"D":"Concurrency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Increasing Lambda memory increases CPU allocation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service records Lambda API activity?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"AWS Config",
+"C":"CloudWatch",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which activities can CloudTrail track for Lambda? (Select all that apply)",
+"options":{
+"A":"Function creation",
+"B":"Function updates",
+"C":"Configuration changes",
+"D":"API calls"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail records Lambda API operations for auditing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature helps reuse code libraries across functions?",
+"options":{
+"A":"Lambda Layers",
+"B":"Lambda Templates",
+"C":"Lambda Modules",
+"D":"Lambda Packages"
+},
+"answer":"A"
+},
+
+{
+"question":"Which items can Lambda layers store? (Select all that apply)",
+"options":{
+"A":"Libraries",
+"B":"Dependencies",
+"C":"Custom runtimes",
+"D":"Shared utilities"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda layers allow sharing dependencies between functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature allows scaling automatically based on events?",
+"options":{
+"A":"Auto Scaling",
+"B":"Concurrency scaling",
+"C":"Dynamic execution",
+"D":"Automatic invocation"
+},
+"answer":"B"
+},
+
+{
+"question":"Which benefits does Lambda automatic scaling provide? (Select all that apply)",
+"options":{
+"A":"Handles large workloads",
+"B":"Reduces operational overhead",
+"C":"Event-driven scaling",
+"D":"Automatic concurrency management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda automatically scales to handle incoming events.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Lambda feature provides distributed tracing?",
+"options":{
+"A":"AWS X-Ray",
+"B":"CloudTrail",
+"C":"Inspector",
+"D":"CloudWatch"
+},
+"answer":"A"
+},
+
+{
+"question":"Which AWS X-Ray features support Lambda? (Select all that apply)",
+"options":{
+"A":"Service maps",
+"B":"Request tracing",
+"C":"Latency monitoring",
+"D":"Error detection"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: X-Ray helps identify bottlenecks in Lambda workflows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+
+  ]
+}

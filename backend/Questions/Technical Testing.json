@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Technical Testing", 
+  "questions": [
+    {
+    "question": "In technical testing, which HTTP status code indicates that a resource was 'Not Found' on the server?",
+    "options": {
+      "A": "200",
+      "B": "404",
+      "C": "500",
+      "D": "403"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'White-box' testing is a technical testing method where the tester has full access to the internal code and program structure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SQL command is used to retrieve data from a database table to verify test results?",
+    "options": {
+      "A": "GET",
+      "B": "SELECT",
+      "C": "EXTRACT",
+      "D": "PUSH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical purpose of using 'Browser Developer Tools' (F12) during testing?",
+    "options": {
+      "A": "To play hidden games in the browser.",
+      "B": "To inspect the DOM, monitor network requests, and debug JavaScript errors.",
+      "C": "To physically clean the computer's monitor.",
+      "D": "To automatically write the test plan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid HTTP methods for interacting with a REST API? (Select all that apply)",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "DELETE",
+      "D": "SEND"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'API' stand for in technical testing?",
+    "options": {
+      "A": "Automated Program Integration",
+      "B": "Application Programming Interface",
+      "C": "Access Point Interior",
+      "D": "Advanced Protocol Interaction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Static' technical test, the code is executed to find runtime errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific status code indicates a 'Successful' API request?",
+    "options": {
+      "A": "404",
+      "B": "200",
+      "C": "503",
+      "D": "401"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Integration Testing'?",
+    "options": {
+      "A": "To test if the office Wi-Fi is working.",
+      "B": "To verify that different software modules or services work together correctly.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'JSON' is a lightweight data-interchange format frequently used in API testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tab in Browser DevTools is used to verify if an API call was triggered when a button was clicked?",
+    "options": {
+      "A": "Console",
+      "B": "Network",
+      "C": "Sources",
+      "D": "Elements"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are considered 'Technical' testing activities? (Select all that apply)",
+    "options": {
+      "A": "API Schema Validation",
+      "B": "SQL Query Execution",
+      "C": "Reviewing system logs",
+      "D": "Checking the color of the office carpet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Unit Testing'?",
+    "options": {
+      "A": "Testing the physical weight of a computer unit.",
+      "B": "Testing the smallest testable parts of an application in isolation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A '401 Unauthorized' status code means the server is physically broken.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Environment Variables' in technical testing suites?",
+    "options": {
+      "A": "To track the temperature of the office.",
+      "B": "To store configuration values (like URLs) that change between Dev, Staging, and Production.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL keyword is used to find unique values in a column during data verification?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "DISTINCT",
+      "C": "ONLY",
+      "D": "SINGLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Gray-box' testing is a mix of both Black-box and White-box testing techniques.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stub' in technical testing?",
+    "options": {
+      "A": "A physical toe injury.",
+      "B": "A minimal implementation of a component used to provide responses during testing of another component.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what does 'Code Coverage' measure?",
+    "options": {
+      "A": "The amount of insurance the software has.",
+      "B": "The percentage of the source code executed during the test suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Technical testers often use 'Postman' or 'Insomnia' to perform manual and automated API tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sanity Testing' in a technical context?",
+    "options": {
+      "A": "A quick check to ensure a specific bug fix works as expected after a new build.",
+      "B": "Testing the mental health of the developer.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Load Testing'? (Select all that apply)",
+    "options": {
+      "A": "Determining a system's behavior under expected peak usage",
+      "B": "Identifying performance bottlenecks",
+      "C": "Testing the physical weight of the server racks",
+      "D": "Ensuring the system handles concurrent users"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary role of a 'Mock' object in testing?",
+    "options": {
+      "A": "To make fun of the developer's code.",
+      "B": "To simulate the behavior of a real, complex object for controlled testing scenarios.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "A way to count users in a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the database schema and the application's data model do not align.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does an HTTP status code starting with '5' (e.g., 500, 503) usually indicate?",
+    "options": {
+      "A": "The user made an error in the request.",
+      "B": "The server encountered an error or is unable to process the request.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Smoke Testing'?",
+    "options": {
+      "A": "Testing if the computer is physically smoking.",
+      "B": "A basic set of tests to ensure the core functions of a system are working after a new deployment.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Regression testing is performed to ensure that new code changes haven't introduced bugs in existing features.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid JSON data types? (Select all that apply)",
+    "options": {
+      "A": "String",
+      "B": "Number",
+      "C": "Boolean",
+      "D": "Java-Object"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic Analysis' in technical testing?",
+    "options": {
+      "A": "Analyzing a person name Dynamic.",
+      "B": "Testing and evaluating an application while it is actually running.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Log File'?",
+    "options": {
+      "A": "A file made of actual physical wood.",
+      "B": "A file that records events that happen in an operating system or software.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when technical performance doesn't meet the business agreement for speed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific tool is used to 'Sniff' network traffic to debug API issues?",
+    "options": {
+      "A": "Jira",
+      "B": "Wireshark",
+      "C": "Slack",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Concurrency' testing?",
+    "options": {
+      "A": "Testing if two people can run at the same speed.",
+      "B": "Verifying how the system behaves when multiple users perform the same action simultaneously.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Configuration' testing?",
+    "options": {
+      "A": "Testing the software on different hardware and software settings.",
+      "B": "Configuring a person name Testing.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the API documentation is updated but the actual API implementation is not.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' testing? (Select all that apply)",
+    "options": {
+      "A": "Executing tests using a script or tool",
+      "B": "Reducing manual repetitive effort",
+      "C": "Guaranteed to find 100% of bugs",
+      "D": "Increasing speed of regression cycles"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Stress Testing'?",
+    "options": {
+      "A": "Testing the system's robustness by pushing it beyond its normal operational limits.",
+      "B": "Testing if the testers are physically stressed.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The number of confirmed defects identified in a software component divided by the size of that component.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when logs are enabled but do not provide enough detail to identify a failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Technical' 'Testing' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Test Execution Time",
+      "B": "Automation Pass Rate",
+      "C": "API Response Latency",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mutation Testing'?",
+    "options": {
+      "A": "Making a physical model of an employee.",
+      "B": "Modifying small parts of the source code to see if existing test cases can detect the change.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Environment' Onboarding?",
+    "options": {
+      "A": "The process of setting up and configuring the technical resources needed for testing.",
+      "B": "Putting the computer on a physical boat.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in technical testing refers to using a high-powered server for tests while production uses a low-powered one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Customers",
+      "B": "Investors",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Suppliers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'White-Box' logic?",
+    "options": {
+      "A": "Testing a white-colored box.",
+      "B": "Designing test cases based on the internal logic, paths, and conditions of the code.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a failure is found.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a client tries to talk to a server using a language (like GraphQL) that the server does not speak.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Testing stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Project Manager",
+      "B": "Technical Lead",
+      "C": "Business Analyst",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a technical test?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the complex technical steps are hidden behind a reusable function for cleaner tests.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'ROI'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The return on investment for the time and tools spent on testing versus the bugs found.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test expects a response from a database in 1ms, but it actually takes 100ms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Performance' monitoring? (Select all that apply)",
+    "options": {
+      "A": "Tracking CPU and RAM usage during testing",
+      "B": "Identifying program satisfaction trends",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing API response times"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Integrity' testing?",
+    "options": {
+      "A": "Verifying that data remains accurate and consistent throughout its entire life cycle in the system.",
+      "B": "Testing if the data is physically heavy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time To Alert' (MTTA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a failure until the monitoring system triggers an alert.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a developer uses a Mac for development but the production server is Linux.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Top 10 flakiest tests'",
+      "B": "Predicting release delays based on current bug rates",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing trends in test execution speed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which a testing framework can be updated to handle new features or changes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality'?",
+    "options": {
+      "A": "A weighted score that includes automated pass rates, performance scores, and current bug debt.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test script polls for an API response faster than the server can physically respond.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Technical Testing tools? (Select all that apply)",
+    "options": {
+      "A": "JMeter",
+      "B": "Selenium",
+      "C": "Burp Suite",
+      "D": "Adobe Premiere"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Debt' in testing?",
+    "options": {
+      "A": "The future cost of reworking test code that was written poorly to save time today.",
+      "B": "A physical debt owed to a hardware store.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time To Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a bug being reported until it is verified as fixed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a test framework tries to run 100 tests on a machine with only 1 CPU core.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Security' testing basics? (Select all that apply)",
+    "options": {
+      "A": "Scanning for SQL Injection vulnerabilities",
+      "B": "Verifying proper data encryption",
+      "C": "Checking the color of the UI button",
+      "D": "Testing for Cross-Site Scripting (XSS)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in technical training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to reuse technical test logic across different projects.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Defect Discovery' (MTBDD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration between finding new bugs in a stable system.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL 'JOIN' type is most technically appropriate to identify orphaned records in a child table that have no corresponding entry in a parent table during data integrity testing?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "LEFT JOIN with a NULL check on the parent key",
+      "C": "CROSS JOIN",
+      "D": "SELF JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In API testing, a '429 Too Many Requests' status code is a technical indicator that the server's Rate Limiting or Throttling mechanism is functioning correctly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Browser API is used in technical performance testing to measure 'First Contentful Paint' (FCP) and 'Time to Interactive' (TTI)?",
+    "options": {
+      "A": "The Geolocation API",
+      "B": "The Navigation Timing API (performance.timing)",
+      "C": "The Canvas API",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Service Virtualization' compared to simple 'Mocking'?",
+    "options": {
+      "A": "To provide a physical virtual reality simulation of the office.",
+      "B": "To simulate the full behavior, state, and network protocols of complex dependent systems (e.g., Mainframes, 3rd party APIs) for E2E testing.",
+      "C": "To increase the frame rate of the reporting dashboard.",
+      "D": "To automatically write the source code for the backend."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are technically valid methods for preventing 'SQL Injection' (SQLi) vulnerabilities? (Select all that apply)",
+    "options": {
+      "A": "Using Prepared Statements (Parameterized Queries)",
+      "B": "Implementing Stored Procedures with input validation",
+      "C": "Hardcoding user input directly into the SQL string",
+      "D": "Using an ORM (Object-Relational Mapping) framework"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the technical purpose of a 'Heap Dump' in the context of performance and stability testing?",
+    "options": {
+      "A": "To physically dump old hardware into a trash heap.",
+      "B": "To capture a snapshot of all objects in the system's memory at a specific moment to identify memory leaks.",
+      "C": "A specialized software for architects to design data centers.",
+      "D": "Increasing the speed of the CPU clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Site Scripting' (XSS) occurs when a technical tester successfully injects malicious client-side scripts into a web page viewed by other users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Chrome DevTools' feature allows a tester to simulate a '3G' network connection to test mobile performance?",
+    "options": {
+      "A": "The Console Tab",
+      "B": "Network Throttling (under the Network tab)",
+      "C": "The Memory Profiler",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Contract Testing' (e.g., using Pact) in a microservices architecture?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To ensure that a service (Provider) meets the specific requirements defined by its users (Consumers) without requiring a full system integration test.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the video reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'CORS' (Cross-Origin Resource Sharing) policies often cause API requests to fail when the frontend and backend are hosted on different domains.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutation' 'Testing' logic in a technical framework?",
+    "options": {
+      "A": "Modifying the application code slightly to see if existing tests fail, thereby measuring the 'effectiveness' of the assertions.",
+      "B": "Checking for physical mutations in the server hardware.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the browser."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Expert' metric identifies how many new bugs are being introduced as a result of fixing old bugs in the codebase?",
+    "options": {
+      "A": "Defect Density",
+      "B": "Regression Rate (or Re-open Rate)",
+      "C": "Pass Rate",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test' 'Data' 'Anonymization'?",
+    "options": {
+      "A": "Deleting all test data so it is anonymous.",
+      "B": "The process of replacing Personally Identifiable Information (PII) with realistic but fake data to comply with privacy laws like GDPR.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static' 'Code' 'Analysis' tools (like SonarQube) find technical bugs by executing the code and monitoring its behavior.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' technical testing strategies? (Select all that apply)",
+    "options": {
+      "A": "Fuzzing (Providing random/invalid data to find crashes)",
+      "B": "Property-Based Testing",
+      "C": "Visual Regression Testing (Pixel comparison)",
+      "D": "Hiring 100 manual testers to click buttons"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gray-box' Testing in a technical context?",
+    "options": {
+      "A": "Testing software in a gray-colored room.",
+      "B": "Testing where the tester has limited knowledge of the internal code (e.g., access to DB schemas or API specs) but performs tests at the interface level.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Repair' (MTTR) for a technical regression?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a bug is identified until the code fix is verified and deployed.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encodings' (e.g., UTF-8 vs. Latin-1) can cause API data verification to fail even if the underlying logic is correct.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Security' check involves verifying that an application does not reveal sensitive system information in error messages?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Information Disclosure Testing",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Container' 'Testing' (e.g., for Docker)?",
+    "options": {
+      "A": "Testing the physical strength of shipping containers.",
+      "B": "Verifying the security, configuration, and runtime behavior of application images within a containerized environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Log' 'Aggregation' for technical testing?",
+    "options": {
+      "A": "The automated process of collecting logs from multiple microservices into a single searchable dashboard (e.g., ELK stack) for failure analysis.",
+      "B": "Hiring a person named Aggregation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test script polls for an element much faster than the frontend can render it, leading to wasted CPU cycles.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' auditing? (Select all that apply)",
+    "options": {
+      "A": "Checking for valid ARIA roles in the DOM",
+      "B": "Verifying WCAG color contrast standards automatically",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Identifying missing 'alt' text for images via scripts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Environment' 'Drift' and how does it affect technical testing?",
+    "options": {
+      "A": "When a server physically drifts across the data center floor.",
+      "B": "The slow divergence in configuration between Staging and Production, leading to 'False Passes' where tests pass in one but fail in the other.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Code' 'Coverage' logic?",
+    "options": {
+      "A": "A percentage representing how many lines or branches of code were executed during a test run.",
+      "B": "Traceability of a person named Coverage.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occur when a technical test produces so much log data that it crashes the CI node's storage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Technical Testing tools? (Select all that apply)",
+    "options": {
+      "A": "Postman",
+      "B": "k6 (Performance)",
+      "C": "OWASP ZAP (Security)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Seeding' in a technical test framework?",
+    "options": {
+      "A": "Planting physical seeds in the office garden.",
+      "B": "Automatically populating the database with a known set of records before a test begins to ensure a consistent state.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Parallel' 'Test' 'Execution'?",
+    "options": {
+      "A": "Running multiple technical test cases simultaneously across different CPU cores or machines to reduce total runtime.",
+      "B": "Executing a person in a parallel dimension.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resource' 'Limits' occur when a performance test is run on a local machine with 32GB RAM while the actual production environment only has 2GB RAM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Schema' 'Validation'? (Select all that apply)",
+    "options": {
+      "A": "Verifying the data types of response fields (e.g., Integer vs. String)",
+      "B": "Ensuring mandatory fields are present in the JSON body",
+      "C": "Guaranteed to replace all QA managers",
+      "D": "Validating the response against an OpenAPI/Swagger definition"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heuristic' Analysis in security testing?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "An experience-based approach that uses known patterns of common vulnerabilities (like 'hidden' input fields) to find potential exploits.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a technical failure?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a system error occurring and the monitoring tool triggering a notification to the technical team.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a technical test attempt to send a SOAP request to a REST-only endpoint.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Infrastructure' 'Verification' (IaC testing)? (Select all that apply)",
+    "options": {
+      "A": "Testing Terraform or CloudFormation scripts",
+      "B": "Verifying that cloud security groups are configured correctly",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Validating that server environments match the intended 'Code' definition"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Combinatorial' Testing logic?",
+    "options": {
+      "A": "Finding all possible combinations of a person's clothes.",
+      "B": "A strategy (like Pairwise) that tests all possible interactions between pairs of input parameters to find technical defects efficiently.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Browser' 'Storage' 'Verification'?",
+    "options": {
+      "A": "Verifying that technical data is correctly written to and read from LocalStorage, SessionStorage, and Cookies.",
+      "B": "Hiring a person named Storage.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in performance testing occur when the user expects a 2-second load time but the database query technically requires 5 seconds to complete.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Technical' 'Quality' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Enforcing standard 'Header' security across all APIs",
+      "B": "Standardizing SQL naming conventions for testing",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Defining 'No-Go' criteria based on performance benchmarks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Database' 'Isolation' in a CI/CD pipeline?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that each parallel technical test run utilizes a unique database schema or tenant ID to prevent data corruption between threads.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Environmental' 'Failures' (MTBEF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of test environment stability before a server, network, or cloud configuration error occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the technical test suite is using a 2024 database driver set against a 2010 legacy database engine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Technical' 'Testing' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Performance Engineer",
+      "B": "Security Analyst",
+      "C": "Database Architect (Testing)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Fault' 'Injection' in a distributed system test?",
+    "options": {
+      "A": "Testing a person's tolerance for faults.",
+      "B": "Deliberately introducing errors (e.g., disconnecting a database) to verify that the system handles failures gracefully.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Test' 'Debt'?",
+    "options": {
+      "A": "The future cost of additional labor required because of quick, 'hacky' code in the testing framework today.",
+      "B": "When the server is full of water.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an 'Explicit Wait' polls every 10ms while the browser's main thread is locked for 200ms due to heavy JavaScript.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of failure heap dumps and logs",
+      "B": "Consistency in result presentation across different tech stacks",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Reduction in manual data entry for release sign-offs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability' in technical testing?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which technical components of the framework can be updated to support new browser or OS versions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a technical bottleneck?",
+    "options": {
+      "A": "The average duration between a performance regression being introduced and it being flagged by a load test.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' occurs when a technical test works for 1 user but fails for 1,000 users due to 'Database Connection Pool' exhaustion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Technical' 'Data' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Snapshots' for database rollback",
+      "B": "Dynamic data injection via API Request Contexts",
+      "C": "Hiring 100 manual testers to type in records",
+      "D": "Masking PII data automatically in test environments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Technical' 'Quality' for a software release?",
+    "options": {
+      "A": "A weighted score including unit test coverage, security scan results, and P95 performance scores.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' (MTTR) an infrastructure failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a 'Blocked' technical test run until the underlying infrastructure issue is fixed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a researcher expects a 2024 technical test to run on a computer from the year 1990 in under 1 second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that every API response includes mandatory security headers",
+      "B": "Confirming all test database communication is encrypted",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring 'Test Data' is automatically deleted after a run"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in technical framework refactoring?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ease with which specialized technical functions (like custom DB listeners) can be 'Lifted' from one project to another.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Technical' 'Regression' 'Bugs' (MTBTRB)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long technical areas of the code remain stable before a bug is introduced into a previously verified feature.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a technical test fails because the 'Service Account' used for automation lacks 'DELETE' rights on a test table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Trends' in memory usage over 30 release builds",
+      "B": "Predicting performance bottlenecks based on current throughput growth",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Analyzing failure patterns to identify common Root Causes (e.g., 'Socket Hang Up')"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Verification' 'Testing' (Technical)?",
+    "options": {
+      "A": "Verifying the physical architecture of the office.",
+      "B": "Using technical tools to ensure the code follows architectural rules (e.g., the UI layer cannot call the Database directly).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a technical flake?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between the first inconsistent test result and the point where it is officially flagged as an 'Infrastructure Issue'.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 technical test tool attempt to use 'HTTP/3' server features on a 2015 legacy server that only supports 'HTTP/1.1'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'UX Design' standards",
+      "B": "Ensuring technical logs cover all required regulatory audit data",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments are less secure than production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring the 'How' of testing (e.g., complex API headers) is hidden from the 'What' (the test scenario), allowing for easier technical updates.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a significant technical failure until the system's quality benchmarks (Pass rate/Performance) return to baseline levels.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the technical test suite uses a library version that is technically incompatible with the application's runtime version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-concurrency microservices environment, how can technical testing identify 'Deadlocks' in a Java-based backend service using runtime analysis?",
+    "options": {
+      "A": "By manually counting the number of users in the system.",
+      "B": "By performing a Thread Dump during the lockup and using a JVM profiler to identify threads in a 'BLOCKED' state waiting for each other's monitors.",
+      "C": "By increasing the timeout of the API gateway to 999 seconds.",
+      "D": "By requiring a physical server restart for every individual test case."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Clock' 'Skew' in a distributed test environment can lead to technical failures in 'Idempotency' checks if the server uses time-based UUIDs for deduplication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific architectural pattern is technically required to perform 'Database-First' contract testing when the 'Producer' service is a legacy monolith with no public API endpoints?",
+    "options": {
+      "A": "The Page Object Model",
+      "B": "The Sidecar Pattern (capturing DB logs to generate virtualized responses)",
+      "C": "The Singleton Pattern",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When performing 'Dynamic' analysis on a React application, which Chrome DevTools metric is most effective for identifying 'Jank' during a complex user interaction?",
+    "options": {
+      "A": "The physical temperature of the CPU.",
+      "B": "The 'Long Task' count (any task over 50ms) in the Performance Timeline.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Technical Profiling', what is the technical significance of a 'Survivor' space in a JVM heap analysis during a long-running performance test?",
+    "options": {
+      "A": "It is a room in the office for employees who survive a layoff.",
+      "B": "It is the area of the Young Generation heap where objects that survived a 'Minor GC' are held before being promoted to the 'Old Generation'.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the performance report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Architectures' occur when a performance test container compiled for x86_64 is executed on an ARM64 host, leading to 'Instruction Translation' overhead that invalidates latency results.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Expert' strategy is technically most efficient for identifying 'Race Conditions' in an 'Event-Driven' system utilizing Kafka as a message broker?",
+    "options": {
+      "A": "Increasing the sleep() time between tests.",
+      "B": "Implementing 'Consumer-Group-Lag' monitoring to verify if specific events are processed out of order during peak technical load.",
+      "C": "Using only physical hardware for testing.",
+      "D": "Deleting the .css files to make the application run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Synthetic' 'Transaction' 'Monitoring' in a technical test strategy?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To run automated 'Probes' in production on a schedule to proactively identify outages or latency degradation before real users report them.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' configurations for managing 'Multi-tenant' technical test isolation? (Select all that apply)",
+    "options": {
+      "A": "Dynamically provisioning unique 'Database Schemas' per parallel test thread",
+      "B": "Utilizing 'Row-Level Security' (RLS) policies to isolate test data",
+      "C": "Spinning up isolated Docker 'Sidecars' for every worker machine",
+      "D": "Sharing the same physical mouse between all test runners"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in technical testing occur when an automation tool attempts to use 'HTTP/2' multiplexing against a 'WAF' (Web Application Firewall) that only supports 'HTTP/1.1'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Binary' 'Fuzzing' compared to standard 'Payload' testing?",
+    "options": {
+      "A": "Hiring a person to manually type in zeros and ones.",
+      "B": "Sending random/semi-valid binary data streams directly to a service to identify memory corruption or buffer overflow vulnerabilities.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Service' 'Mesh' 'Injection' testing?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The practice of using a service mesh (like Istio) to inject artificial errors or latency into specific network paths to test system resilience.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' metric is most effective for measuring the 'Quality' of a technical performance test?",
+    "options": {
+      "A": "Total number of users simulated during the test.",
+      "B": "The 'Coefficient of Variation' (CoV) for response times—measuring the consistency and reproducibility of the performance environment.",
+      "C": "The font size of the pass rate on the dashboard.",
+      "D": "The number of hours the developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Thread' 'Pools' in technical testing occur when a performance test uses 1,000 threads while the application server is configured with a 'Max-Threads' limit of 100, causing a misleading 'False Bottleneck'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Resilience' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Verifying 'Fail-over' time for a primary database instance",
+      "B": "Checking how a UI handles 'Socket Hang-up' errors from the backend",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing system behavior when a 'Third-party API' returns a 504 status"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap' 'Allocation' 'Profiling' in technical testing?",
+    "options": {
+      "A": "Testing actual physical heaps of dirt in the office.",
+      "B": "Identifying which specific code paths are creating the most garbage (Short-lived objects), which increases 'Garbage Collection' overhead.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Isolate' (MTTI) a technical regression?",
+    "options": {
+      "A": "The average duration from a failure occurring until the specific 'Layer' (UI vs API vs DB) causing the error is technically identified.",
+      "B": "The time it takes to clean the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consistency' 'Models' in technical testing occur when a tester assumes 'Strict Serializability' for a test plan running against an 'Eventually Consistent' global database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Technical' 'Governance' factors? (Select all that apply)",
+    "options": {
+      "A": "Establishing 'Quality Gates' based on P99 Latency benchmarks",
+      "B": "Defining standard 'Header' security for internal inter-service calls",
+      "C": "Verification of 'Secrets' rotation in CI/CD pipelines",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'JIT' (Just-In-Time) 'De-compilation' testing?",
+    "options": {
+      "A": "Providing physical snacks for the user journey.",
+      "B": "Analyzing how the JVM optimizes 'Hot' code paths during a performance test to ensure the system is truly warmed up before measuring results.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Execution' 'Entropy' in a technical test suite?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the randomness or unpredictability of test failure patterns, identifying areas of high 'Fragility' in the infrastructure.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in technical testing occur when a developer uses a 2024 'Playwright' binary to test a 2012 application that relies on 'deprecated' browser behaviors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Network' 'Observability' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that every UI interaction triggers a unique 'Trace-ID'",
+      "B": "Confirming that 'Request payloads' are correctly encrypted in transit",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Validating that 'Circuit Breakers' report their status to the central dashboard"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in enterprise-wide technical frameworks?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to extract successful 'Technical Utilities' (e.g., custom gRPC clients) from one project and 'Lift' them into a corporate standard.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Environmental' 'Outages' (MTBEO)?",
+    "options": {
+      "A": "Traceability of a person named Outage.",
+      "B": "The average duration a test environment remains fully functional before a technical failure (e.g., DNS issue) blocks the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encoding' in technical testing refers to using 'UTF-16' in the test client while the server is configured to strictly expect 'UTF-8', causing character corruption.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Technical' 'Orchestration' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Managing 'Mutual TLS' (mTLS) certificate rotation across 1,000 nodes",
+      "B": "Synchronizing parallel technical workers across multi-region cloud nodes",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Handling 'Database' deadlocks during high-parallel data cleanup"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an 'Object-Relational' testing model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing reusable classes for specific DB entities that hide complex SQL logic from the high-level test scripts.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a technical bottleneck?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a code commit until a technical performance suite flags a throughput regression.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a technical tool attempts to use 'gRPC' on a server that only has standard 'REST' listeners enabled.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Technical' 'Testing' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Site Reliability Engineer (SRE)",
+      "B": "Cloud Operations Architect",
+      "C": "Principal Security Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Technical' 'Quality' in a release dashboard?",
+    "options": {
+      "A": "A weighted score combining code coverage, security vulnerability scores, and average P95 system latency.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Impact' in technical testing?",
+    "options": {
+      "A": "A positive value that is actually negative.",
+      "B": "When a test fails due to 'Infrastructure Flakiness' rather than an actual technical bug, wasting the engineering team's triage time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in technical testing refers to a suite that passes with 1 concurrent connection but fails with 50 due to 'Database Locking' in the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Assessment' for Technical QA? (Select all that apply)",
+    "options": {
+      "A": "Scanning container images for known 'CVEs'",
+      "B": "Verifying that 'Auth tokens' are not leaked in server access logs",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Confirming 'Secure' flags on all application cookies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Bootstrap' complexity for multi-cloud environments?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of initializing a unified testing grid that can run across AWS, Azure, and GCP simultaneously with shared reporting.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a system crash?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed from the first error signal until an automated high-priority Slack/Teams alert is sent.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a researcher's debug tool produces 100GB of log data for a 5-second API test, crashing the logging cluster.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Technical' 'Quality' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Lead Backend Architect",
+      "B": "Director of Platform Engineering",
+      "C": "Chief Security Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Binary' 'vs' 'Semantic' technical testing?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Binary testing verifies if the system crashes or errors; Semantic testing verifies if the technical data returned is logically correct.",
+      "C": "Binary is for beginners; Semantic for experts.",
+      "D": "Binary is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Stability' (MTRS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a systemic technical failure until the system returns to its baseline quality metrics.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in performance occur when the business expects 'Zero Execution Cost' in a cloud environment where test workers consume high RAM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the 'Top 5 flakiest services' over a 30-day period",
+      "B": "Correlating 'API latency' with 'System memory' usage automatically",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Predicting software release delays based on current 'Sanity' suite stability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a technical test pipeline?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Using unique UUIDs or Schema-per-Worker to ensure that concurrent technical tests do not overwrite each other's state.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Technical' 'Failures' (MTBTF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a regression is identified by the automation suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in technical testing refers to a framework that passes on a local machine but fails on a 50-node shard due to 'Global Resource Contention'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Security' 'Audits'? (Select all that apply)",
+    "options": {
+      "A": "Scanning response bodies for sensitive 'PII' leakage",
+      "B": "Verifying that 'Auth tokens' are not visible in UI screenshots",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Identifying 'Clear-text' passwords in backend error logs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Logic' 'Drift'?",
+    "options": {
+      "A": "When the underlying data schema updates but the technical test validators (e.g., Assertions) are not updated, leading to false passes.",
+      "B": "A drift made of physical test reports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by technical tier?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how much faster 'Database Level' errors are fixed compared to 'UI Presentation' errors.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 technical tool attempts to use 'WebSockets' on a 2010 legacy server that only supports polling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'UX Design' standards",
+      "B": "Keeping records updated with rapidly changing local data privacy laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments lack production-grade security"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which the internal structure of the technical testing engine allows for adding new browser drivers or tools without breaking legacy tests.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Efficiency' for a technical grid?",
+    "options": {
+      "A": "The ratio of 'Test Execution Time' to 'Infrastructure Idle Time' across a release cycle.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in technical testing occur when a developer uses a 2024 DB driver for an application using a 1995 legacy engine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Enterprise' 'Technical' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Webhooks for 'Test Result Completion' alerts",
+      "B": "REST APIs for triggering 'Global' technical regression runs",
+      "C": "Bulk asset ingestion gRPC streams",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Bootstrap' complexity for global teams?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of standardizing a technical testing framework across teams with different network security and local data laws.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a technical bottleneck?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the point a performance regression is introduced until the first load test flags the failure in the dashboard.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a technical test polls every 5ms, consuming excessive backend CPU and invalidating performance results.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Trace Triggers' for rapid technical triage",
+      "B": "Consistency in Quality ROI data presentation for the business",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual administrative work for developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Technical' 'Fixture'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Encapsulating complex environmental setup (like 'Global Data Clean' or 'Mock Server Init') within a reusable module.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an infrastructure failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a technical environment failure until the automation team verified the fix in the main pipeline.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a technical framework attempt to execute 100 tests on a machine physically limited to 2 CPU cores.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Systemic' failure patterns in the API layer",
+      "B": "Correlating 'Failure Rate' with 'System Load' in production",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing failure patterns to identify 'Fragile' technical components"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a technical test suite is maintained, based on its reliability, execution speed, and historical flake rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Technical' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of technical stability before a regression is identified by the automation engine.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in technical testing occur when the remediation timeline is based on 'Fixed Dates' rather than 'Current System Risk'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Profiling' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Flame graphs (CPU usage analysis)",
+      "B": "Heap dumps (Memory usage analysis)",
+      "C": "Guaranteed to replace all manual performance testers",
+      "D": "Har files (Network traffic analysis)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Logic' 'Encapsulation' strategy?",
+    "options": {
+      "A": "Ensuring the technical interaction details (like SQL strings) are hidden from the high-level test scripts, facilitating maintenance.",
+      "B": "Hiding the computer in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  }
+  ]
+}

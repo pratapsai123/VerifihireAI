@@ -1,0 +1,1847 @@
+{ 
+  "skill": "Cloud Formation", 
+  "questions": [
+    {
+"question":"What is AWS CloudFormation?",
+"options":{
+"A":"Infrastructure as Code service",
+"B":"Database service",
+"C":"Storage service",
+"D":"Networking service"
+},
+"answer":"A"
+},
+
+{
+"question":"Which languages are supported for CloudFormation templates? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"YAML",
+"C":"XML",
+"D":"HTML"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: CloudFormation allows developers to define infrastructure using code.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is a CloudFormation stack?",
+"options":{
+"A":"Collection of AWS resources managed together",
+"B":"Single AWS resource",
+"C":"Networking configuration",
+"D":"Security policy"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can be managed by CloudFormation? (Select all that apply)",
+"options":{
+"A":"EC2",
+"B":"S3",
+"C":"Lambda",
+"D":"IAM"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: A stack can contain multiple AWS resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of a CloudFormation template defines AWS resources?",
+"options":{
+"A":"Resources",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Mappings"
+},
+"answer":"A"
+},
+
+{
+"question":"Which sections exist in a CloudFormation template? (Select all that apply)",
+"options":{
+"A":"Resources",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Mappings"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The Resources section is required in every CloudFormation template.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section allows passing user inputs into a CloudFormation template?",
+"options":{
+"A":"Parameters",
+"B":"Mappings",
+"C":"Outputs",
+"D":"Conditions"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do parameters serve in CloudFormation? (Select all that apply)",
+"options":{
+"A":"Input values",
+"B":"Environment configuration",
+"C":"Reusable templates",
+"D":"Dynamic deployment"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parameters allow users to customize stack deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of a template defines conditional resource creation?",
+"options":{
+"A":"Conditions",
+"B":"Resources",
+"C":"Mappings",
+"D":"Metadata"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do conditions provide? (Select all that apply)",
+"options":{
+"A":"Environment-based deployment",
+"B":"Selective resource creation",
+"C":"Cost optimization",
+"D":"Flexible templates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Conditions allow resources to be created only if certain criteria are met.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation section defines static values used in templates?",
+"options":{
+"A":"Mappings",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Resources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which use cases exist for mappings? (Select all that apply)",
+"options":{
+"A":"Region-specific values",
+"B":"Environment configurations",
+"C":"Instance type mapping",
+"D":"AMI mapping"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Mappings help define region-based configurations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of CloudFormation outputs information after stack creation?",
+"options":{
+"A":"Outputs",
+"B":"Results",
+"C":"Responses",
+"D":"Parameters"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can outputs provide? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"Endpoint URLs",
+"C":"Public IP addresses",
+"D":"ARN values"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs allow sharing stack information with other stacks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature helps manage stack updates safely?",
+"options":{
+"A":"Change Sets",
+"B":"Stack Logs",
+"C":"Update Mode",
+"D":"Rollback Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do change sets provide? (Select all that apply)",
+"options":{
+"A":"Preview changes",
+"B":"Review resource updates",
+"C":"Detect replacements",
+"D":"Improve deployment safety"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Change sets allow previewing stack updates before execution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature automatically reverses failed deployments?",
+"options":{
+"A":"Rollback",
+"B":"Stack Recovery",
+"C":"Failure Restore",
+"D":"Deployment Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which situations trigger rollback? (Select all that apply)",
+"options":{
+"A":"Resource creation failure",
+"B":"Stack update failure",
+"C":"Dependency errors",
+"D":"Configuration errors"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation can roll back stacks automatically on failure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows organizing stacks hierarchically?",
+"options":{
+"A":"Nested Stacks",
+"B":"Stack Groups",
+"C":"Stack Layers",
+"D":"Stack Clusters"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do nested stacks provide? (Select all that apply)",
+"options":{
+"A":"Modular templates",
+"B":"Code reuse",
+"C":"Simplified management",
+"D":"Large infrastructure management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Nested stacks allow dividing infrastructure into smaller templates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"What is AWS CloudFormation?",
+"options":{
+"A":"Infrastructure as Code service",
+"B":"Database service",
+"C":"Storage service",
+"D":"Networking service"
+},
+"answer":"A"
+},
+
+{
+"question":"Which languages are supported for CloudFormation templates? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"YAML",
+"C":"XML",
+"D":"HTML"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: CloudFormation allows developers to define infrastructure using code.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is a CloudFormation stack?",
+"options":{
+"A":"Collection of AWS resources managed together",
+"B":"Single AWS resource",
+"C":"Networking configuration",
+"D":"Security policy"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can be managed by CloudFormation? (Select all that apply)",
+"options":{
+"A":"EC2",
+"B":"S3",
+"C":"Lambda",
+"D":"IAM"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: A stack can contain multiple AWS resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of a CloudFormation template defines AWS resources?",
+"options":{
+"A":"Resources",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Mappings"
+},
+"answer":"A"
+},
+
+{
+"question":"Which sections exist in a CloudFormation template? (Select all that apply)",
+"options":{
+"A":"Resources",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Mappings"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The Resources section is required in every CloudFormation template.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section allows passing user inputs into a CloudFormation template?",
+"options":{
+"A":"Parameters",
+"B":"Mappings",
+"C":"Outputs",
+"D":"Conditions"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do parameters serve in CloudFormation? (Select all that apply)",
+"options":{
+"A":"Input values",
+"B":"Environment configuration",
+"C":"Reusable templates",
+"D":"Dynamic deployment"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parameters allow users to customize stack deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of a template defines conditional resource creation?",
+"options":{
+"A":"Conditions",
+"B":"Resources",
+"C":"Mappings",
+"D":"Metadata"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do conditions provide? (Select all that apply)",
+"options":{
+"A":"Environment-based deployment",
+"B":"Selective resource creation",
+"C":"Cost optimization",
+"D":"Flexible templates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Conditions allow resources to be created only if certain criteria are met.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation section defines static values used in templates?",
+"options":{
+"A":"Mappings",
+"B":"Parameters",
+"C":"Outputs",
+"D":"Resources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which use cases exist for mappings? (Select all that apply)",
+"options":{
+"A":"Region-specific values",
+"B":"Environment configurations",
+"C":"Instance type mapping",
+"D":"AMI mapping"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Mappings help define region-based configurations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section of CloudFormation outputs information after stack creation?",
+"options":{
+"A":"Outputs",
+"B":"Results",
+"C":"Responses",
+"D":"Parameters"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can outputs provide? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"Endpoint URLs",
+"C":"Public IP addresses",
+"D":"ARN values"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs allow sharing stack information with other stacks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature helps manage stack updates safely?",
+"options":{
+"A":"Change Sets",
+"B":"Stack Logs",
+"C":"Update Mode",
+"D":"Rollback Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do change sets provide? (Select all that apply)",
+"options":{
+"A":"Preview changes",
+"B":"Review resource updates",
+"C":"Detect replacements",
+"D":"Improve deployment safety"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Change sets allow previewing stack updates before execution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature automatically reverses failed deployments?",
+"options":{
+"A":"Rollback",
+"B":"Stack Recovery",
+"C":"Failure Restore",
+"D":"Deployment Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which situations trigger rollback? (Select all that apply)",
+"options":{
+"A":"Resource creation failure",
+"B":"Stack update failure",
+"C":"Dependency errors",
+"D":"Configuration errors"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation can roll back stacks automatically on failure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows organizing stacks hierarchically?",
+"options":{
+"A":"Nested Stacks",
+"B":"Stack Groups",
+"C":"Stack Layers",
+"D":"Stack Clusters"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do nested stacks provide? (Select all that apply)",
+"options":{
+"A":"Modular templates",
+"B":"Code reuse",
+"C":"Simplified management",
+"D":"Large infrastructure management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Nested stacks allow dividing infrastructure into smaller templates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CloudFormation feature allows deploying stacks across multiple AWS accounts and regions?",
+"options":{
+"A":"StackSets",
+"B":"Nested Stacks",
+"C":"Stack Groups",
+"D":"MultiStacks"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do StackSets provide? (Select all that apply)",
+"options":{
+"A":"Multi-account deployment",
+"B":"Multi-region deployment",
+"C":"Centralized management",
+"D":"Automated stack updates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: StackSets can deploy stacks across multiple AWS accounts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation template section contains descriptive information about the template?",
+"options":{
+"A":"Metadata",
+"B":"Outputs",
+"C":"Resources",
+"D":"Parameters"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes does Metadata serve? (Select all that apply)",
+"options":{
+"A":"Template description",
+"B":"Resource documentation",
+"C":"Custom configuration data",
+"D":"Deployment instructions"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Metadata can store additional template information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows referencing values from other stacks?",
+"options":{
+"A":"Cross-Stack References",
+"B":"Stack Links",
+"C":"Stack Sharing",
+"D":"Stack Mapping"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods allow cross-stack communication? (Select all that apply)",
+"options":{
+"A":"Outputs",
+"B":"Export values",
+"C":"ImportValue function",
+"D":"Parameters"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Exported values from one stack can be imported into another stack.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic function retrieves values from mappings?",
+"options":{
+"A":"Fn::FindInMap",
+"B":"Fn::Join",
+"C":"Fn::Sub",
+"D":"Fn::ImportValue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic functions exist in CloudFormation? (Select all that apply)",
+"options":{
+"A":"Fn::Join",
+"B":"Fn::Sub",
+"C":"Fn::FindInMap",
+"D":"Fn::ImportValue"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Intrinsic functions help manipulate template data dynamically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation function concatenates strings?",
+"options":{
+"A":"Fn::Join",
+"B":"Fn::Concat",
+"C":"Fn::Merge",
+"D":"Fn::Append"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions help construct strings dynamically? (Select all that apply)",
+"options":{
+"A":"Fn::Join",
+"B":"Fn::Sub",
+"C":"Ref",
+"D":"Fn::ImportValue"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Fn::Sub substitutes variables inside strings.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic function references parameters or resources?",
+"options":{
+"A":"Ref",
+"B":"Fn::GetAtt",
+"C":"Fn::Sub",
+"D":"Fn::Join"
+},
+"answer":"A"
+},
+
+{
+"question":"Which references can Ref return? (Select all that apply)",
+"options":{
+"A":"Resource ID",
+"B":"Parameter value",
+"C":"Logical resource name",
+"D":"Physical resource ID"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Ref returns the value of a parameter or resource.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic function retrieves resource attributes?",
+"options":{
+"A":"Fn::GetAtt",
+"B":"Fn::FindInMap",
+"C":"Fn::Join",
+"D":"Fn::Split"
+},
+"answer":"A"
+},
+
+{
+"question":"Which attributes can Fn::GetAtt retrieve? (Select all that apply)",
+"options":{
+"A":"ARN",
+"B":"Public IP",
+"C":"Endpoint URL",
+"D":"Resource name"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Fn::GetAtt returns attributes of AWS resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature monitors stack events?",
+"options":{
+"A":"Stack Events",
+"B":"Deployment Logs",
+"C":"Stack Monitor",
+"D":"Cloud Logs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information do stack events provide? (Select all that apply)",
+"options":{
+"A":"Resource creation status",
+"B":"Error messages",
+"C":"Update progress",
+"D":"Deployment timestamps"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Stack events track the progress of stack creation and updates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service tracks CloudFormation API calls?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"CloudWatch",
+"C":"AWS Config",
+"D":"AWS Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which activities does CloudTrail track for CloudFormation? (Select all that apply)",
+"options":{
+"A":"Stack creation",
+"B":"Stack deletion",
+"C":"Stack updates",
+"D":"API requests"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail logs CloudFormation API activity.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CloudFormation feature helps validate templates before deployment?",
+"options":{
+"A":"Template Validation",
+"B":"Stack Testing",
+"C":"Template Check",
+"D":"Stack Preview"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools can validate CloudFormation templates? (Select all that apply)",
+"options":{
+"A":"AWS CLI",
+"B":"CloudFormation console",
+"C":"AWS SDK",
+"D":"cfn-lint"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Template validation helps detect syntax errors before stack creation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows defining reusable template snippets?",
+"options":{
+"A":"Modules",
+"B":"Stacks",
+"C":"Layers",
+"D":"Resources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do CloudFormation modules provide? (Select all that apply)",
+"options":{
+"A":"Reusable infrastructure patterns",
+"B":"Simplified templates",
+"C":"Standardization",
+"D":"Reduced template complexity"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Modules allow packaging reusable CloudFormation resource configurations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature enables continuous monitoring of stack drift?",
+"options":{
+"A":"Drift Detection",
+"B":"Stack Monitoring",
+"C":"Resource Drift",
+"D":"Stack Analysis"
+},
+"answer":"A"
+},
+
+{
+"question":"Which situations indicate stack drift? (Select all that apply)",
+"options":{
+"A":"Manual resource modification",
+"B":"External configuration changes",
+"C":"Resource deletion outside CloudFormation",
+"D":"Parameter updates"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Drift detection identifies resources that differ from the template configuration.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows grouping multiple resources logically?",
+"options":{
+"A":"Stack",
+"B":"Module",
+"C":"Template",
+"D":"Deployment"
+},
+"answer":"A"
+},
+
+{
+"question":"Which stack operations exist in CloudFormation? (Select all that apply)",
+"options":{
+"A":"Create",
+"B":"Update",
+"C":"Delete",
+"D":"Rollback"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: A stack update modifies existing resources defined in a template.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service integrates with CloudFormation for CI/CD deployments?",
+"options":{
+"A":"AWS CodePipeline",
+"B":"AWS Inspector",
+"C":"AWS Shield",
+"D":"AWS Config"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CI/CD tools integrate with CloudFormation? (Select all that apply)",
+"options":{
+"A":"CodePipeline",
+"B":"CodeBuild",
+"C":"CodeDeploy",
+"D":"GitHub Actions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be deployed automatically through CI/CD pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature enables infrastructure automation using templates?",
+"options":{
+"A":"Infrastructure as Code",
+"B":"Resource Automation",
+"C":"Template Automation",
+"D":"Deployment Automation"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages does Infrastructure as Code provide? (Select all that apply)",
+"options":{
+"A":"Automation",
+"B":"Version control",
+"C":"Repeatability",
+"D":"Reduced manual configuration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Infrastructure as Code allows managing infrastructure using code files.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows defining dependencies between resources?",
+"options":{
+"A":"DependsOn",
+"B":"ResourceOrder",
+"C":"StackDependency",
+"D":"DeploymentOrder"
+},
+"answer":"A"
+},
+
+{
+"question":"Which situations require DependsOn? (Select all that apply)",
+"options":{
+"A":"Explicit resource ordering",
+"B":"Resource dependency control",
+"C":"Complex resource relationships",
+"D":"Avoid race conditions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: DependsOn ensures resources are created in a specific order.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows importing existing AWS resources into a stack?",
+"options":{
+"A":"Resource Import",
+"B":"Stack Import",
+"C":"Template Import",
+"D":"Resource Attach"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources can be imported into CloudFormation? (Select all that apply)",
+"options":{
+"A":"EC2",
+"B":"S3",
+"C":"IAM",
+"D":"VPC"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Resource import allows managing existing AWS resources with CloudFormation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service monitors CloudFormation metrics?",
+"options":{
+"A":"Amazon CloudWatch",
+"B":"AWS Config",
+"C":"AWS Inspector",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CloudWatch features support CloudFormation monitoring? (Select all that apply)",
+"options":{
+"A":"Metrics",
+"B":"Logs",
+"C":"Alarms",
+"D":"Dashboards"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms can trigger notifications for CloudFormation events.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CloudFormation feature allows defining stack policies to protect resources?",
+"options":{
+"A":"Stack Policy",
+"B":"Security Policy",
+"C":"Resource Lock",
+"D":"Protection Rule"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do stack policies serve? (Select all that apply)",
+"options":{
+"A":"Prevent accidental updates",
+"B":"Protect critical resources",
+"C":"Restrict stack changes",
+"D":"Improve deployment safety"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Stack policies help protect specific resources during stack updates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows exporting values to other stacks?",
+"options":{
+"A":"Export",
+"B":"Output Reference",
+"C":"Stack Link",
+"D":"Stack Share"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can be exported from a stack? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"ARN values",
+"C":"Endpoint URLs",
+"D":"Public IPs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Exported values can be imported by other stacks using ImportValue.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature automatically deletes dependent resources?",
+"options":{
+"A":"DeletionPolicy",
+"B":"AutoDelete",
+"C":"ResourceCleanup",
+"D":"StackRemoval"
+},
+"answer":"A"
+},
+
+{
+"question":"Which DeletionPolicy options exist? (Select all that apply)",
+"options":{
+"A":"Delete",
+"B":"Retain",
+"C":"Snapshot",
+"D":"Archive"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Retain prevents resources from being deleted when the stack is deleted.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows specifying resource creation order?",
+"options":{
+"A":"DependsOn",
+"B":"CreateOrder",
+"C":"StackSequence",
+"D":"ResourceFlow"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios require DependsOn? (Select all that apply)",
+"options":{
+"A":"Explicit resource ordering",
+"B":"Managing dependencies",
+"C":"Complex infrastructure setups",
+"D":"Avoiding race conditions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: DependsOn ensures resources are created in a specified order.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature detects configuration drift?",
+"options":{
+"A":"Drift Detection",
+"B":"Resource Monitoring",
+"C":"Stack Drift",
+"D":"Template Drift"
+},
+"answer":"A"
+},
+
+{
+"question":"Which conditions indicate drift in a stack? (Select all that apply)",
+"options":{
+"A":"Manual changes to resources",
+"B":"External updates",
+"C":"Configuration mismatch",
+"D":"Resource deletion outside CloudFormation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Drift detection compares the current resource state with the template.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature helps deploy infrastructure repeatedly across environments?",
+"options":{
+"A":"Templates",
+"B":"Instances",
+"C":"Snapshots",
+"D":"Deployments"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do CloudFormation templates provide? (Select all that apply)",
+"options":{
+"A":"Repeatable deployments",
+"B":"Version control",
+"C":"Automation",
+"D":"Consistency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Templates allow infrastructure to be recreated consistently.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service stores CloudFormation templates for deployment?",
+"options":{
+"A":"Amazon S3",
+"B":"Amazon DynamoDB",
+"C":"Amazon RDS",
+"D":"Amazon EFS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which storage locations can store templates? (Select all that apply)",
+"options":{
+"A":"Local file",
+"B":"Amazon S3",
+"C":"Git repositories",
+"D":"AWS Console editor"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be stored in version control systems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature allows grouping stacks for large deployments?",
+"options":{
+"A":"StackSets",
+"B":"Nested Stacks",
+"C":"Stack Groups",
+"D":"Stack Modules"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do StackSets provide? (Select all that apply)",
+"options":{
+"A":"Multi-account deployment",
+"B":"Multi-region deployment",
+"C":"Centralized management",
+"D":"Automated stack updates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: StackSets allow deploying stacks across multiple AWS accounts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service logs CloudFormation API calls?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"Amazon CloudWatch",
+"C":"AWS Config",
+"D":"AWS Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which events can CloudTrail track for CloudFormation? (Select all that apply)",
+"options":{
+"A":"Stack creation",
+"B":"Stack updates",
+"C":"Stack deletion",
+"D":"API activity"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail provides auditing for CloudFormation operations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which CloudFormation template section defines input values supplied during stack creation?",
+"options":{
+"A":"Parameters",
+"B":"Outputs",
+"C":"Resources",
+"D":"Mappings"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameter types are supported in CloudFormation? (Select all that apply)",
+"options":{
+"A":"String",
+"B":"Number",
+"C":"CommaDelimitedList",
+"D":"List<AWS::EC2::Instance::Id>"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parameters allow dynamic configuration of CloudFormation stacks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section defines values returned after stack creation?",
+"options":{
+"A":"Outputs",
+"B":"Parameters",
+"C":"Mappings",
+"D":"Metadata"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can be returned using Outputs? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"Load balancer DNS",
+"C":"Database endpoints",
+"D":"Security group IDs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs can be referenced by other stacks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic function splits a string into a list?",
+"options":{
+"A":"Fn::Split",
+"B":"Fn::Join",
+"C":"Fn::Sub",
+"D":"Fn::Select"
+},
+"answer":"A"
+},
+
+{
+"question":"Which intrinsic functions manipulate lists in CloudFormation? (Select all that apply)",
+"options":{
+"A":"Fn::Split",
+"B":"Fn::Select",
+"C":"Fn::Join",
+"D":"Fn::Sub"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Fn::Select retrieves an element from a list.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation function joins list elements into a string?",
+"options":{
+"A":"Fn::Join",
+"B":"Fn::Split",
+"C":"Fn::Sub",
+"D":"Fn::Select"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions help manipulate strings? (Select all that apply)",
+"options":{
+"A":"Fn::Join",
+"B":"Fn::Sub",
+"C":"Fn::Split",
+"D":"Fn::Base64"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Fn::Base64 encodes a string in Base64 format.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows defining logical names for resources?",
+"options":{
+"A":"Logical ID",
+"B":"Resource Tag",
+"C":"Resource Label",
+"D":"Stack Name"
+},
+"answer":"A"
+},
+
+{
+"question":"Which identifiers exist for CloudFormation resources? (Select all that apply)",
+"options":{
+"A":"Logical ID",
+"B":"Physical ID",
+"C":"Resource ARN",
+"D":"Resource Name"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Logical IDs uniquely identify resources within a template.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation capability allows using macros to transform templates?",
+"options":{
+"A":"CloudFormation Macros",
+"B":"Template Scripts",
+"C":"Lambda Templates",
+"D":"Template Hooks"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do CloudFormation macros provide? (Select all that apply)",
+"options":{
+"A":"Template transformation",
+"B":"Reusable logic",
+"C":"Template automation",
+"D":"Dynamic configuration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Macros can modify templates during deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service executes CloudFormation macros?",
+"options":{
+"A":"AWS Lambda",
+"B":"Amazon EC2",
+"C":"Amazon ECS",
+"D":"AWS Batch"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features integrate Lambda with CloudFormation? (Select all that apply)",
+"options":{
+"A":"Custom resources",
+"B":"Macros",
+"C":"Hooks",
+"D":"Extensions"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Custom resources allow extending CloudFormation functionality.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature enforces governance rules before stack operations?",
+"options":{
+"A":"Hooks",
+"B":"Stack Policy",
+"C":"Drift Detection",
+"D":"Change Sets"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operations can hooks intercept? (Select all that apply)",
+"options":{
+"A":"Stack creation",
+"B":"Resource updates",
+"C":"Resource deletion",
+"D":"Stack updates"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Hooks can enforce compliance rules during deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature enables stack update previews?",
+"options":{
+"A":"Change Sets",
+"B":"Stack Drift",
+"C":"Stack Preview",
+"D":"Template Review"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information does a change set display? (Select all that apply)",
+"options":{
+"A":"Resource additions",
+"B":"Resource deletions",
+"C":"Resource modifications",
+"D":"Resource replacements"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Change sets help prevent unintended infrastructure changes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows deploying multiple stacks together?",
+"options":{
+"A":"Nested Stacks",
+"B":"Stack Chains",
+"C":"Stack Groups",
+"D":"Stack Packages"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do nested stacks provide? (Select all that apply)",
+"options":{
+"A":"Reusability",
+"B":"Modular templates",
+"C":"Simplified infrastructure",
+"D":"Better organization"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Nested stacks allow large templates to be broken into smaller components.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which AWS service can trigger CloudFormation stack deployments automatically?",
+"options":{
+"A":"AWS CodePipeline",
+"B":"AWS Inspector",
+"C":"AWS Config",
+"D":"AWS Shield"
+},
+"answer":"A"
+},
+
+{
+"question":"Which CI/CD tools integrate with CloudFormation? (Select all that apply)",
+"options":{
+"A":"CodePipeline",
+"B":"CodeBuild",
+"C":"CodeDeploy",
+"D":"GitHub Actions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be deployed automatically through CI/CD pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation resource type defines an EC2 instance?",
+"options":{
+"A":"AWS::EC2::Instance",
+"B":"AWS::EC2::VM",
+"C":"AWS::Compute::Instance",
+"D":"AWS::Instance::EC2"
+},
+"answer":"A"
+},
+
+{
+"question":"Which AWS resources can be created with CloudFormation? (Select all that apply)",
+"options":{
+"A":"EC2 instances",
+"B":"S3 buckets",
+"C":"Lambda functions",
+"D":"VPC networks"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation supports provisioning most AWS services.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature stores template code for reuse?",
+"options":{
+"A":"Template Repository",
+"B":"S3 Template Storage",
+"C":"Stack Storage",
+"D":"Resource Library"
+},
+"answer":"B"
+},
+
+{
+"question":"Which benefits does storing templates in S3 provide? (Select all that apply)",
+"options":{
+"A":"Version control",
+"B":"Centralized storage",
+"C":"Reusable templates",
+"D":"Secure access"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates can be stored in Amazon S3 buckets.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation function returns the AWS region where the stack is deployed?",
+"options":{
+"A":"AWS::Region",
+"B":"AWS::Location",
+"C":"AWS::Zone",
+"D":"AWS::Area"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pseudo parameters are available in CloudFormation? (Select all that apply)",
+"options":{
+"A":"AWS::Region",
+"B":"AWS::AccountId",
+"C":"AWS::StackName",
+"D":"AWS::Partition"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pseudo parameters are predefined values provided by CloudFormation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation function retrieves the AWS account ID?",
+"options":{
+"A":"AWS::AccountId",
+"B":"Fn::Account",
+"C":"AWS::User",
+"D":"Fn::AccountId"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pseudo parameters help identify deployment context? (Select all that apply)",
+"options":{
+"A":"AWS::Region",
+"B":"AWS::AccountId",
+"C":"AWS::StackId",
+"D":"AWS::StackName"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: AWS::StackName returns the stack's name.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature ensures infrastructure consistency across deployments?",
+"options":{
+"A":"Infrastructure as Code",
+"B":"Manual Provisioning",
+"C":"Resource Automation",
+"D":"Stack Scripts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages does Infrastructure as Code provide? (Select all that apply)",
+"options":{
+"A":"Automation",
+"B":"Consistency",
+"C":"Repeatability",
+"D":"Version control"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Infrastructure as Code helps reduce manual configuration errors.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature helps control stack updates safely?",
+"options":{
+"A":"Change Sets",
+"B":"Stack Logs",
+"C":"Update Control",
+"D":"Deployment Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operations can be previewed using Change Sets? (Select all that apply)",
+"options":{
+"A":"Resource creation",
+"B":"Resource modification",
+"C":"Resource deletion",
+"D":"Resource replacement"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Change Sets allow reviewing updates before applying them.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which CloudFormation feature enables rollback after failed stack updates?",
+"options":{
+"A":"Rollback",
+"B":"Stack Recovery",
+"C":"Error Restore",
+"D":"Deployment Reset"
+},
+"answer":"A"
+},
+
+{
+"question":"Which events can trigger rollback? (Select all that apply)",
+"options":{
+"A":"Resource creation failure",
+"B":"Stack update failure",
+"C":"Configuration error",
+"D":"Dependency failure"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Rollback restores infrastructure to the previous stable state.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service logs CloudFormation operations for auditing?",
+"options":{
+"A":"AWS CloudTrail",
+"B":"AWS Config",
+"C":"CloudWatch",
+"D":"AWS Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which events can CloudTrail track for CloudFormation? (Select all that apply)",
+"options":{
+"A":"Stack creation",
+"B":"Stack updates",
+"C":"Stack deletion",
+"D":"API calls"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudTrail records CloudFormation API activity.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+
+  ]
+}

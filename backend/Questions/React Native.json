@@ -1,0 +1,2005 @@
+{
+  "skill": "React Native",
+  "questions": [
+    {
+      "question": "Which component is used as the basic building block for the UI, similar to a <div> in web development?",
+      "options": {
+        "A": "Text",
+        "B": "View",
+        "C": "Container",
+        "D": "Section"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which engine does React Native use to execute JavaScript code on mobile devices?",
+      "options": {
+        "A": "V8",
+        "B": "SpiderMonkey",
+        "C": "Hermes",
+        "D": "Chakra"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you apply styles in React Native?",
+      "options": {
+        "A": "Using CSS files",
+        "B": "Using the StyleSheet.create() method",
+        "C": "Using Sass",
+        "D": "Using HTML style attributes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display text in React Native?",
+      "options": {
+        "A": "Paragraph",
+        "B": "Span",
+        "C": "Text",
+        "D": "Label"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which command is used to start the React Native development server (Metro)?",
+      "options": {
+        "A": "npm start",
+        "B": "react-native run-android",
+        "C": "npx react-native start",
+        "D": "Both A and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In React Native, layout is primarily handled using which system?",
+      "options": {
+        "A": "CSS Grid",
+        "B": "Flexbox",
+        "C": "Floats",
+        "D": "Table Layout"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default Flex Direction in React Native?",
+      "options": {
+        "A": "row",
+        "B": "column",
+        "C": "row-reverse",
+        "D": "column-reverse"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is best for rendering large, scrollable lists efficiently?",
+      "options": {
+        "A": "ScrollView",
+        "B": "ListView",
+        "C": "FlatList",
+        "D": "Map"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'SafeAreaView' component?",
+      "options": {
+        "A": "To encrypt user data",
+        "B": "To render content within the safe boundaries of a device (avoiding notches/toolbars)",
+        "C": "To prevent the app from crashing",
+        "D": "To handle permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to handle side effects in a functional React Native component?",
+      "options": {
+        "A": "useState",
+        "B": "useReducer",
+        "C": "useEffect",
+        "D": "useMemo"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How can you detect the platform (iOS or Android) at runtime?",
+      "options": {
+        "A": "Using the 'Platform' module from react-native",
+        "B": "Using window.navigator",
+        "C": "Using process.env.OS",
+        "D": "By checking the file extension"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is used to handle user text input?",
+      "options": {
+        "A": "Input",
+        "B": "TextInput",
+        "C": "TextField",
+        "D": "Label"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Metro' in the context of React Native?",
+      "options": {
+        "A": "A navigation library",
+        "B": "The JavaScript bundler for React Native",
+        "C": "A database for mobile",
+        "D": "An Android emulator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which core component would you use to make a UI element respond to touches?",
+      "options": {
+        "A": "View",
+        "B": "TouchableOpacity",
+        "C": "Button",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'Fast Refresh'?",
+      "options": {
+        "A": "To restart the phone",
+        "B": "To instantly see the results of code changes while maintaining component state",
+        "C": "To clear the cache",
+        "D": "To update the app in the App Store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is the most common standard for navigation in React Native?",
+      "options": {
+        "A": "React Router",
+        "B": "React Navigation",
+        "C": "Native Router",
+        "D": "Linker"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display a background image?",
+      "options": {
+        "A": "Image",
+        "B": "ImageBackground",
+        "C": "View",
+        "D": "Background"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the command to run the app on an iOS simulator?",
+      "options": {
+        "A": "npx react-native run-ios",
+        "B": "npx start-ios",
+        "C": "npm run apple",
+        "D": "xcode-run"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which prop is used in FlatList to uniquely identify items?",
+      "options": {
+        "A": "id",
+        "B": "keyExtractor",
+        "C": "itemKey",
+        "D": "uniqueId"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Bridge' in React Native?",
+      "options": {
+        "A": "A physical connector",
+        "B": "The communication layer between the JavaScript thread and the Native thread",
+        "C": "A design pattern for components",
+        "D": "A way to connect to Wi-Fi"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to show a loading spinner?",
+      "options": {
+        "A": "Spinner",
+        "B": "Loader",
+        "C": "ActivityIndicator",
+        "D": "ProgressCircle"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you handle local images in React Native?",
+      "options": {
+        "A": "Using source={{ uri: 'path' }}",
+        "B": "Using source={require('./path/to/image.png')}",
+        "C": "Using &lt;img src='...' /&gt;",
+        "D": "Images are not supported locally"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component provides a way to scroll through a list of items that are not necessarily repeated?",
+      "options": {
+        "A": "ListView",
+        "B": "ScrollView",
+        "C": "FlatList",
+        "D": "Div"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'flex: 1' style property do?",
+      "options": {
+        "A": "Makes the element take up all available space",
+        "B": "Sets the width to 1 pixel",
+        "C": "Hides the element",
+        "D": "Sets the opacity to 1"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to link native dependencies in older versions of React Native (pre-autolinking)?",
+      "options": {
+        "A": "react-native link",
+        "B": "npm link",
+        "C": "native-link",
+        "D": "pod install"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the entry point file for a React Native project?",
+      "options": {
+        "A": "index.js or App.js",
+        "B": "main.js",
+        "C": "App.html",
+        "D": "home.js"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which API is used to store small amounts of data locally on the device?",
+      "options": {
+        "A": "LocalStorage",
+        "B": "AsyncStorage",
+        "C": "SessionStorage",
+        "D": "SQLite"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to render content that can be pulled to refresh?",
+      "options": {
+        "A": "PullToRefresh",
+        "B": "RefreshControl",
+        "C": "ScrollViewContainer",
+        "D": "UpdateView"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the use of 'KeyboardAvoidingView'?",
+      "options": {
+        "A": "To disable the keyboard",
+        "B": "To automatically adjust the view when the software keyboard appears",
+        "C": "To change the keyboard color",
+        "D": "To show emoji keyboard"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Native, how do you handle alert dialogs?",
+      "options": {
+        "A": "window.alert()",
+        "B": "Alert.alert() from react-native",
+        "C": "console.log()",
+        "D": "Modal.show()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to access the navigation object in any component inside a Navigation Container?",
+      "options": {
+        "A": "useRoute",
+        "B": "useNavigation",
+        "C": "useLink",
+        "D": "useHistory"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Navigation, which navigator is used to slide in a menu from the side of the screen?",
+      "options": {
+        "A": "Stack Navigator",
+        "B": "Tab Navigator",
+        "C": "Drawer Navigator",
+        "D": "Switch Navigator"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of 'useWindowDimensions' hook?",
+      "options": {
+        "A": "To change the app's resolution",
+        "B": "To automatically get the screen's width and height and update on change",
+        "C": "To open a new window",
+        "D": "To set the padding of the root view"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which prop is used to provide the list of items to a FlatList component?",
+      "options": {
+        "A": "items",
+        "B": "list",
+        "C": "data",
+        "D": "source"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which property in StyleSheet is used to create space between an element's border and its content?",
+      "options": {
+        "A": "margin",
+        "B": "padding",
+        "C": "borderSpacing",
+        "D": "gap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define a 'Pressable' area that doesn't change opacity when touched?",
+      "options": {
+        "A": "TouchableOpacity",
+        "B": "TouchableHighlight",
+        "C": "TouchableWithoutFeedback",
+        "D": "Button"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Flipper' in the React Native ecosystem?",
+      "options": {
+        "A": "A navigation library",
+        "B": "A desktop debugging tool for mobile apps",
+        "C": "An animation engine",
+        "D": "A way to flip images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to remove all data from AsyncStorage?",
+      "options": {
+        "A": "AsyncStorage.clear()",
+        "B": "AsyncStorage.remove()",
+        "C": "AsyncStorage.deleteAll()",
+        "D": "AsyncStorage.reset()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'zIndex' style property?",
+      "options": {
+        "A": "To set the zoom level",
+        "B": "To control the stack order of elements",
+        "C": "To set the horizontal position",
+        "D": "To change the font size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to show a list of items that are grouped by headers?",
+      "options": {
+        "A": "FlatList",
+        "B": "SectionList",
+        "C": "GroupList",
+        "D": "ScrollView"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook provides the parameters passed to a route in React Navigation?",
+      "options": {
+        "A": "useParams",
+        "B": "useRoute",
+        "C": "useData",
+        "D": "useNavigationState"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'pixelRatio' API help with?",
+      "options": {
+        "A": "Changing the color of pixels",
+        "B": "Handling high-density screens by getting device pixel density",
+        "C": "Reducing the number of pixels for performance",
+        "D": "Taking a screenshot"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display an external web page inside the app?",
+      "options": {
+        "A": "WebLink",
+        "B": "WebView (from react-native-webview)",
+        "C": "Browser",
+        "D": "Frame"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define a default value for a state using the useState hook?",
+      "options": {
+        "A": "useState(defaultValue)",
+        "B": "useState.set(defaultValue)",
+        "C": "useState = defaultValue",
+        "D": "initValue(defaultValue)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows an element to grow to fill its parent space along the main axis?",
+      "options": {
+        "A": "flexGrow",
+        "B": "flexBasis",
+        "C": "flexShrink",
+        "D": "alignSelf"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary use of 'React.memo' in React Native?",
+      "options": {
+        "A": "To save data to the database",
+        "B": "To prevent unnecessary re-renders of functional components",
+        "C": "To remember the user's password",
+        "D": "To create a global variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component would you use to show a modal dialog box on top of the current screen?",
+      "options": {
+        "A": "Popup",
+        "B": "Dialog",
+        "C": "Modal",
+        "D": "Overlay"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How can you pass data back to the previous screen in React Navigation?",
+      "options": {
+        "A": "Using navigation.backWithData()",
+        "B": "By passing a callback function as a parameter to the next screen",
+        "C": "Using global variables only",
+        "D": "Data cannot be passed back"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which prop of the Image component is used to resize the image (e.g., cover, contain)?",
+      "options": {
+        "A": "resizeMode",
+        "B": "imageScale",
+        "C": "fit",
+        "D": "size"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to install pods for an iOS project?",
+      "options": {
+        "A": "npx install-pods",
+        "B": "cd ios && pod install",
+        "C": "npm install ios",
+        "D": "react-native pod-link"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Redux' primarily used for in React Native?",
+      "options": {
+        "A": "Managing the visual theme",
+        "B": "Predictable state management for the entire application",
+        "C": "Handling API calls only",
+        "D": "Creating animations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which style property is used to align items along the cross axis (perpendicular to main axis)?",
+      "options": {
+        "A": "justifyContent",
+        "B": "alignItems",
+        "C": "flexDirection",
+        "D": "textAlign"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'AppRegistry' in React Native?",
+      "options": {
+        "A": "To store user accounts",
+        "B": "To define the entry point of the app for the native side",
+        "C": "To manage the app's file system",
+        "D": "To register third-party plugins"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you apply multiple styles to a single component?",
+      "options": {
+        "A": "style={styles.one + styles.two}",
+        "B": "style={[styles.one, styles.two]}",
+        "C": "style={styles.one, styles.two}",
+        "D": "style={merge(styles.one, styles.two)}"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook allows you to get the current theme (light or dark) of the device?",
+      "options": {
+        "A": "useTheme",
+        "B": "useColorScheme",
+        "C": "useAppearance",
+        "D": "useDarkMode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'keyboardType' prop in TextInput allow you to do?",
+      "options": {
+        "A": "Change the keyboard's language",
+        "B": "Show specific keyboards (numeric, email-address, etc.)",
+        "C": "Hide the keyboard",
+        "D": "Record keystrokes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used in an Image component to provide the image URL?",
+      "options": {
+        "A": "src",
+        "B": "uri",
+        "C": "source={{ uri: 'URL' }}",
+        "D": "path"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the use of 'StatusBar' component?",
+      "options": {
+        "A": "To show the app's progress",
+        "B": "To control the appearance of the device's status bar (clock, battery, etc.)",
+        "C": "To create a navigation bar",
+        "D": "To show notifications"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is used to handle gesture management more fluidly in React Native?",
+      "options": {
+        "A": "react-native-touch",
+        "B": "react-native-gesture-handler",
+        "C": "react-native-motion",
+        "D": "react-native-swipe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Lottie' do in a React Native app?",
+      "options": {
+        "A": "Manages local storage",
+        "B": "Renders high-quality vector animations exported from Adobe After Effects",
+        "C": "Handles push notifications",
+        "D": "Translates the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to memoize a function so it isn't recreated on every re-render?",
+      "options": {
+        "A": "useMemo",
+        "B": "useCallback",
+        "C": "useFunction",
+        "D": "useRef"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'useRef' in React Native?",
+      "options": {
+        "A": "To re-render the component when a value changes",
+        "B": "To store a mutable value that does not trigger a re-render",
+        "C": "To create a global state",
+        "D": "To navigate between screens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to run the app on a connected Android device or emulator?",
+      "options": {
+        "A": "npx react-native run-android",
+        "B": "npx start-android",
+        "C": "npm run android",
+        "D": "android-studio --start"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In React Native, what is 'Linking' used for?",
+      "options": {
+        "A": "To connect two different components",
+        "B": "To interact with other apps via deep links (e.g., opening a URL or an email)",
+        "C": "To link JavaScript to CSS",
+        "D": "To connect to a Wi-Fi network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which prop in FlatList is used to render a component when the list is empty?",
+      "options": {
+        "A": "renderEmpty",
+        "B": "ListEmptyComponent",
+        "C": "onEmpty",
+        "D": "emptyListPlaceholder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'NativeModules' in React Native?",
+      "options": {
+        "A": "To create styles for Android only",
+        "B": "To access platform-specific APIs (Java/Swift) that aren't available in JS by default",
+        "C": "To install packages from npm",
+        "D": "To manage the app's versioning"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is commonly used for making HTTP requests in React Native?",
+      "options": {
+        "A": "Axios",
+        "B": "Fetch API",
+        "C": "Both A and B",
+        "D": "None of the above"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'InteractionManager.runAfterInteractions' do?",
+      "options": {
+        "A": "Starts an animation",
+        "B": "Schedules a task to run after animations/interactions have finished",
+        "C": "Stops user input",
+        "D": "Restarts the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to get the current state of the application (active, background, inactive)?",
+      "options": {
+        "A": "useAppState",
+        "B": "useApplicationStatus",
+        "C": "useLifeCycle",
+        "D": "useBackground"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you apply a conditional style to a View?",
+      "options": {
+        "A": "style={isActive ? styles.active : styles.inactive}",
+        "B": "style={isActive && styles.active}",
+        "C": "style={[styles.base, isActive && styles.active]}",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'key' prop in a list of items?",
+      "options": {
+        "A": "To identify which items have changed, been added, or removed for efficient rendering",
+        "B": "To encrypt the item data",
+        "C": "To set the index of the item",
+        "D": "To define the item's color"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which API allows you to create high-performance animations that run on the native thread?",
+      "options": {
+        "A": "Animated API with useNativeDriver: true",
+        "B": "Standard CSS animations",
+        "C": "SetInterval",
+        "D": "LayoutAnimation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'JSI' (JavaScript Interface) in the new React Native architecture?",
+      "options": {
+        "A": "A new styling engine",
+        "B": "A way for JS to hold a reference to C++ host objects and call methods on them directly",
+        "C": "A database for iOS",
+        "D": "A JavaScript minifier"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to handle different text styles within a single paragraph?",
+      "options": {
+        "A": "View",
+        "B": "Text nested inside another Text component",
+        "C": "Span",
+        "D": "StyleText"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'pointerEvents' prop in a View do?",
+      "options": {
+        "A": "Controls how the View responds to touch events",
+        "B": "Changes the mouse cursor to a pointer",
+        "C": "Counts the number of clicks",
+        "D": "Animates the touch point"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used in an Image component to specify how the image should be scaled?",
+      "options": {
+        "A": "scaleMode",
+        "B": "resizeMode",
+        "C": "objectFit",
+        "D": "imageFit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you access the global 'context' in a functional component?",
+      "options": {
+        "A": "useContext(MyContext)",
+        "B": "MyContext.get()",
+        "C": "this.context",
+        "D": "contextValue"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is used to manage and version iOS dependencies (like native libraries)?",
+      "options": {
+        "A": "npm",
+        "B": "CocoaPods",
+        "C": "Gradle",
+        "D": "Metro"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'keyboardShouldPersistTaps' prop in a ScrollView?",
+      "options": {
+        "A": "To prevent the keyboard from closing when tapping outside a text input",
+        "B": "To show the keyboard on tap",
+        "C": "To record keystrokes",
+        "D": "To change the keyboard color"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to clear a specific item from AsyncStorage?",
+      "options": {
+        "A": "AsyncStorage.deleteItem()",
+        "B": "AsyncStorage.removeItem()",
+        "C": "AsyncStorage.clear('key')",
+        "D": "AsyncStorage.reset('key')"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CodePush'?",
+      "options": {
+        "A": "A tool to push code to GitHub",
+        "B": "A cloud service that allows developers to deploy app updates directly to users' devices",
+        "C": "A JavaScript compiler",
+        "D": "A styling library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to perform a specific action before a component is unmounted?",
+      "options": {
+        "A": "useUnmount",
+        "B": "useEffect with a return cleanup function",
+        "C": "useComponentWillUnmount",
+        "D": "useCleanup"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'onEndReached' in FlatList do?",
+      "options": {
+        "A": "Called when the end of the list is reached (useful for infinite scrolling)",
+        "B": "Closes the list",
+        "C": "Scrolls to the top",
+        "D": "Deletes the last item"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in a StyleSheet allows for responsive font sizes based on device scale?",
+      "options": {
+        "A": "fontSize",
+        "B": "allowFontScaling",
+        "C": "pixelSize",
+        "D": "scaleFont"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'LayoutAnimation'?",
+      "options": {
+        "A": "To animate a single component",
+        "B": "To globally animate any layout changes in the next render cycle",
+        "C": "To create 3D transitions",
+        "D": "To handle navigation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Native, what is the 'Shadow' property used for?",
+      "options": {
+        "A": "To create 3D effects on Android",
+        "B": "To add drop shadows to components (iOS only, usually elevation for Android)",
+        "C": "To hide elements",
+        "D": "To create a dark mode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is part of the 'new architecture' and replaces the Bridge for faster communication?",
+      "options": {
+        "A": "TurboModules",
+        "B": "FastLink",
+        "C": "QuickBridge",
+        "D": "MetroV2"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How can you optimize a FlatList that has very complex items?",
+      "options": {
+        "A": "Use the 'getItemLayout' prop",
+        "B": "Increase the 'initialNumToRender'",
+        "C": "Use 'removeClippedSubviews'",
+        "D": "Both A and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which component is used to display a formatted date and time picker?",
+      "options": {
+        "A": "DatePicker",
+        "B": "DateTimePicker (from @react-native-community/datetimepicker)",
+        "C": "TimePicker",
+        "D": "CalendarView"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'hitSlop' prop?",
+      "options": {
+        "A": "To increase the touchable area of a component without increasing its visual size",
+        "B": "To add padding to the text",
+        "C": "To slow down animations",
+        "D": "To detect screen swipes"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to generate a private signing key for an Android release build?",
+      "options": {
+        "A": "npx react-native keygen",
+        "B": "keytool -genkey -v -keystore my-upload-key.keystore",
+        "C": "npm run build-key",
+        "D": "gradlew assembleRelease"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of enabling 'Hermes' in a React Native project?",
+      "options": {
+        "A": "Better security",
+        "B": "Improved start-up time, decreased memory usage, and smaller app size",
+        "C": "Automatic translation of the UI",
+        "D": "Easier connection to databases"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which practice helps secure sensitive data like API keys on the client side in React Native?",
+      "options": {
+        "A": "Storing them in plain text in App.js",
+        "B": "Using react-native-dotenv or a secure keychain for sensitive values",
+        "C": "Hardcoding them in the styles",
+        "D": "Saving them in AsyncStorage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Native, what does 'obfuscation' do during the build process?",
+      "options": {
+        "A": "Minifies the images",
+        "B": "Makes the JavaScript code difficult for humans to read to protect intellectual property",
+        "C": "Speeds up the networking calls",
+        "D": "Automatically fixes syntax errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is commonly used to debug the 'Bridge' and see the messages passing between JS and Native?",
+      "options": {
+        "A": "Console Log",
+        "B": "React Native Debugger or Flipper",
+        "C": "Chrome Task Manager",
+        "D": "Postman"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which file in the Android folder is used to configure permissions like Camera or Internet?",
+      "options": {
+        "A": "build.gradle",
+        "B": "AndroidManifest.xml",
+        "C": "MainActivity.java",
+        "D": "settings.gradle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Info.plist' file in an iOS project?",
+      "options": {
+        "A": "To write CSS styles",
+        "B": "To define app metadata and request permissions (e.g., Camera, Location)",
+        "C": "To list JavaScript dependencies",
+        "D": "To configure the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command builds a release version of the Android app (AAB format) for the Play Store?",
+      "options": {
+        "A": "npx react-native run-android --variant=release",
+        "B": "cd android && ./gradlew bundleRelease",
+        "C": "npm run build-android",
+        "D": "gradlew installRelease"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you significantly reduce the APK size for an Android React Native app?",
+      "options": {
+        "A": "Setting enableCrashlytics to false",
+        "B": "Enabling 'enableSeparateBuildPerCPUArchitecture' in build.gradle",
+        "C": "Removing all View components",
+        "D": "Using only local images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in the package.json file defines the version of React Native the project is using?",
+      "options": {
+        "A": "rn-version",
+        "B": "dependencies: { \"react-native\": \"...\" }",
+        "C": "engines: { \"node\": \"...\" }",
+        "D": "version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'Higher-Order Components' (HOC) in React Native?",
+      "options": {
+        "A": "To increase the height of a component",
+        "B": "To reuse component logic by wrapping a component with another",
+        "C": "To manage the database",
+        "D": "To handle network requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which React Navigation navigator is used to maintain a stack of screens where each new screen is placed on top?",
+      "options": {
+        "A": "Tab Navigator",
+        "B": "Stack Navigator",
+        "C": "Drawer Navigator",
+        "D": "Switch Navigator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to see the logs for a React Native Android application?",
+      "options": {
+        "A": "npx react-native log-android",
+        "B": "npm run logs",
+        "C": "adb logcat",
+        "D": "Both A and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of the 'renderItem' prop in a FlatList?",
+      "options": {
+        "A": "To set the data for the list",
+        "B": "A function that takes an item from the data and returns a component to render",
+        "C": "To refresh the list",
+        "D": "To sort the data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Native, how do you specify a background color that is semi-transparent?",
+      "options": {
+        "A": "backgroundColor: 'rgba(0,0,0,0.5)'",
+        "B": "opacity: 0.5",
+        "C": "transparent: true",
+        "D": "backgroundColor: 'half'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool allows you to run React Native apps on a physical device wirelessly during development?",
+      "options": {
+        "A": "Metro Bundler",
+        "B": "ADB (Android Debug Bridge) over Wi-Fi",
+        "C": "Xcode",
+        "D": "Simulator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook can be used to perform expensive calculations only when certain dependencies change?",
+      "options": {
+        "A": "useEffect",
+        "B": "useMemo",
+        "C": "useCallback",
+        "D": "useReducer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'onRefresh' and 'refreshing' props in a FlatList?",
+      "options": {
+        "A": "To restart the app",
+        "B": "To implement the 'pull-to-refresh' functionality",
+        "C": "To update the text",
+        "D": "To clear the cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which style property is used to make a View's corners circular?",
+      "options": {
+        "A": "borderStyle: 'circle'",
+        "B": "borderRadius",
+        "C": "cornerSize",
+        "D": "shape"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which package is commonly used to create vector icons (like FontAwesome or Ionicons) in React Native?",
+      "options": {
+        "A": "react-native-images",
+        "B": "react-native-vector-icons",
+        "C": "react-native-symbols",
+        "D": "lucide-native"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'InteractionManager' help with in React Native?",
+      "options": {
+        "A": "Connecting to the internet",
+        "B": "Delaying long-running tasks until after animations have completed to avoid jank",
+        "C": "Handling user touches",
+        "D": "Managing the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display a simple progress bar in Android?",
+      "options": {
+        "A": "ActivityIndicator",
+        "B": "ProgressBarAndroid (deprecated, use ActivityIndicator or community packages)",
+        "C": "LoadingBar",
+        "D": "Spinner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you detect the current orientation (portrait/landscape) of the device?",
+      "options": {
+        "A": "Using the Dimensions API and checking if width > height",
+        "B": "Using the Orientation module",
+        "C": "Using the Platform API",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which command is used to reset the Metro Bundler cache?",
+      "options": {
+        "A": "npx react-native start --reset-cache",
+        "B": "npm run clear",
+        "C": "react-native clean",
+        "D": "metro --reset"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'prop-types' in a React Native project?",
+      "options": {
+        "A": "To style components",
+        "B": "To perform runtime type checking for component props",
+        "C": "To manage state",
+        "D": "To handle navigation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which navigator in React Navigation is used to switch between different screens using a bottom bar?",
+      "options": {
+        "A": "createBottomTabNavigator",
+        "B": "createTopTabNavigator",
+        "C": "createStackNavigator",
+        "D": "createDrawerNavigator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which style property is used to align content along the main axis of a flex container?",
+      "options": {
+        "A": "alignItems",
+        "B": "justifyContent",
+        "C": "flexDirection",
+        "D": "alignSelf"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Code Splitting' in the context of React Native?",
+      "options": {
+        "A": "Dividing the code into multiple files for better organization",
+        "B": "Breaking the JS bundle into smaller pieces to load only what is needed (rare in RN without specific tools)",
+        "C": "Splitting the team into developers",
+        "D": "Using two different languages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component would you use to create a 'Card' look with elevation on Android?",
+      "options": {
+        "A": "View with elevation style property",
+        "B": "Card component",
+        "C": "ShadowView",
+        "D": "RaisedBox"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a global style that can be reused across components?",
+      "options": {
+        "A": "By creating a separate file and exporting a StyleSheet object",
+        "B": "By using inline styles everywhere",
+        "C": "By using HTML tags",
+        "D": "Global styles are not supported"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook is used to access the current route object and its parameters?",
+      "options": {
+        "A": "useNavigation",
+        "B": "useRoute",
+        "C": "useParams",
+        "D": "useLink"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Deep Linking' in React Native?",
+      "options": {
+        "A": "Linking two databases together",
+        "B": "A way to link to a specific screen within the app from an external URL or another app",
+        "C": "A deep nested component structure",
+        "D": "A way to connect to a VPN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to capture numeric input from the user specifically?",
+      "options": {
+        "A": "NumberInput",
+        "B": "TextInput with keyboardType='numeric'",
+        "C": "DigitField",
+        "D": "Slider"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'flexDirection: row-reverse' style property do?",
+      "options": {
+        "A": "Arranges items in a column backwards",
+        "B": "Arranges items in a row from right to left",
+        "C": "Flips the items upside down",
+        "D": "Hides the row"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in a FlatList is used to set the number of columns (for a grid layout)?",
+      "options": {
+        "A": "columns",
+        "B": "numColumns",
+        "C": "gridSize",
+        "D": "columnCount"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'React Native CLI' vs 'Expo'?",
+      "options": {
+        "A": "CLI is for web, Expo is for mobile",
+        "B": "CLI gives full control over native code; Expo is a set of tools to simplify development",
+        "C": "They are the same thing",
+        "D": "CLI is for Android, Expo is for iOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to show a list of items that can be scrolled horizontally?",
+      "options": {
+        "A": "FlatList with horizontal={true}",
+        "B": "RowList",
+        "C": "HorizontalScroll",
+        "D": "Carousel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'accessibilityLabel' prop?",
+      "options": {
+        "A": "To set the text color",
+        "B": "To provide a description of the element for screen readers",
+        "C": "To change the font size",
+        "D": "To set a unique ID for the element"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to install all dependencies for a React Native project?",
+      "options": {
+        "A": "npm install",
+        "B": "yarn install",
+        "C": "Both A and B",
+        "D": "flutter pub get"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you add a custom font to a React Native project?",
+      "options": {
+        "A": "By adding the font file to assets and linking it (or using expo-font)",
+        "B": "By using @font-face in CSS",
+        "C": "By using a URL in the style property",
+        "D": "Custom fonts are not supported"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which package is the official suite for using Firebase services in React Native?",
+      "options": {
+        "A": "firebase-js-sdk",
+        "B": "@react-native-firebase/app",
+        "C": "react-native-gcp",
+        "D": "native-firebase-core"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary use of 'WatermelonDB' in React Native?",
+      "options": {
+        "A": "To handle image processing",
+        "B": "A high-performance reactive database for building complex applications that scale to thousands of records",
+        "C": "To manage navigation",
+        "D": "To create liquid animations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used in the 'Animated' API to define how an animation should ease in or out?",
+      "options": {
+        "A": "easing",
+        "B": "timing",
+        "C": "duration",
+        "D": "curve"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Firebase service is used to store user-generated content like photos and videos?",
+      "options": {
+        "A": "Firestore",
+        "B": "Cloud Storage",
+        "C": "Realtime Database",
+        "D": "Hosting"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'useImperativeHandle' hook?",
+      "options": {
+        "A": "To manage state globally",
+        "B": "To customize the instance value that is exposed to parent components when using ref",
+        "C": "To force a component to re-render",
+        "D": "To handle API errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is considered the industry standard for creating high-performance, gesture-driven animations in React Native?",
+      "options": {
+        "A": "Animated API",
+        "B": "react-native-reanimated",
+        "C": "Lottie",
+        "D": "Velocity.js"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hermes' in the context of React Native?",
+      "options": {
+        "A": "A navigation library",
+        "B": "An open-source JavaScript engine optimized for running React Native on Android and iOS",
+        "C": "A database tool",
+        "D": "A styling framework"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component would you use to provide a fallback UI while a component is 'lazy loading'?",
+      "options": {
+        "A": "Wait",
+        "B": "Suspense",
+        "C": "Loader",
+        "D": "AsyncBoundary"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Firebase service allows you to track app usage and user engagement?",
+      "options": {
+        "A": "Crashlytics",
+        "B": "Analytics",
+        "C": "Remote Config",
+        "D": "Performance Monitoring"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the benefit of using 'Realm' over AsyncStorage?",
+      "options": {
+        "A": "Realm is faster and supports complex data relationships and queries",
+        "B": "Realm is built-in to React Native",
+        "C": "Realm only works on iOS",
+        "D": "AsyncStorage is more secure than Realm"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In React Native Reanimated, what is a 'Shared Value'?",
+      "options": {
+        "A": "A variable shared between users",
+        "B": "A value that drives animations and is shared between the JS and UI threads",
+        "C": "A global state variable",
+        "D": "A value stored in a database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method in the Animated API allows you to combine multiple animations to run at the same time?",
+      "options": {
+        "A": "Animated.sequence()",
+        "B": "Animated.parallel()",
+        "C": "Animated.stagger()",
+        "D": "Animated.group()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'Podfile.lock' in an iOS project?",
+      "options": {
+        "A": "To lock the screen orientation",
+        "B": "To track and lock the specific versions of CocoaPods dependencies installed",
+        "C": "To store passwords",
+        "D": "To manage app permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook from React Redux is used to dispatch actions to the store?",
+      "options": {
+        "A": "useSelector",
+        "B": "useDispatch",
+        "C": "useStore",
+        "D": "useReducer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Firebase Remote Config'?",
+      "options": {
+        "A": "To update the app code",
+        "B": "To change the behavior and appearance of the app without publishing an update",
+        "C": "To manage cloud servers",
+        "D": "To send emails"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to handle 'Deep Linking' within React Navigation?",
+      "options": {
+        "A": "Linker",
+        "B": "NavigationContainer with a 'linking' prop",
+        "C": "DeepLinkHandler",
+        "D": "Router"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In React Native, how do you specify styles that should only apply to 'dark mode' using a library like Styled Components?",
+      "options": {
+        "A": "Using a ThemeProvider and checking the theme property",
+        "B": "Using CSS Media Queries",
+        "C": "By creating a separate App-dark.js file",
+        "D": "Dark mode styles are not possible with Styled Components"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Patch-Package' used for in a React Native project?",
+      "options": {
+        "A": "To update all npm packages",
+        "B": "To fix bugs in third-party node_modules and keep those changes persistent",
+        "C": "To create app patches for the store",
+        "D": "To minify the bundle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to manage different versions of Node.js for your project?",
+      "options": {
+        "A": "npm",
+        "B": "nvm (Node Version Manager)",
+        "C": "npx",
+        "D": "brew"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Fastlane' in a mobile dev workflow?",
+      "options": {
+        "A": "To speed up the emulator",
+        "B": "To automate the beta deployment and release process to the App Store and Play Store",
+        "C": "To write faster JavaScript code",
+        "D": "To handle network requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to verify the native dependencies of a React Native project?",
+      "options": {
+        "A": "npx react-native doctor",
+        "B": "npx react-native check",
+        "C": "npx react-native verify",
+        "D": "npm audit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook from React Redux is used to extract data from the Redux store state?",
+      "options": {
+        "A": "useDispatch",
+        "B": "useSelector",
+        "C": "useConnect",
+        "D": "useReducer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Firebase, what is the 'Security Rules' configuration used for?",
+      "options": {
+        "A": "To set the app's password",
+        "B": "To determine who has read and write access to your data",
+        "C": "To encrypt the database",
+        "D": "To prevent DDoS attacks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component allows for horizontal swiping between screens in React Navigation?",
+      "options": {
+        "A": "Stack Navigator",
+        "B": "Material Top Tab Navigator",
+        "C": "Drawer Navigator",
+        "D": "Grid Navigator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'pointerEvents=\"none\"' prop do when applied to a View?",
+      "options": {
+        "A": "Hides the mouse cursor",
+        "B": "Makes the View and its children invisible to touch events",
+        "C": "Disables all animations",
+        "D": "Prevents the keyboard from opening"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in the 'Animated.spring' configuration controls the bounciness of the animation?",
+      "options": {
+        "A": "friction",
+        "B": "tension",
+        "C": "bounciness",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you enable 'LayoutAnimation' on Android?",
+      "options": {
+        "A": "It is enabled by default",
+        "B": "By calling UIManager.setLayoutAnimationEnabledExperimental(true)",
+        "C": "By adding a flag in AndroidManifest.xml",
+        "D": "It is not supported on Android"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'AppCheck' in Firebase?",
+      "options": {
+        "A": "To check the app version",
+        "B": "To protect your backend resources from abuse by verifying that requests come from your authentic app",
+        "C": "To test the app's performance",
+        "D": "To verify user emails"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to run tests in a React Native project using Jest?",
+      "options": {
+        "A": "npm test",
+        "B": "npx jest",
+        "C": "Both A and B",
+        "D": "react-native run-test"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Bundle Identifier' (iOS) and 'Application ID' (Android) used for?",
+      "options": {
+        "A": "To name the app",
+        "B": "To uniquely identify the app in the App Store and Play Store",
+        "C": "To version the code",
+        "D": "To track user sessions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Fabric' in the context of the new React Native architecture?",
+      "options": {
+        "A": "A new CSS-in-JS library",
+        "B": "The new concurrent rendering system that replaces the old UIManager",
+        "C": "A database synchronization tool",
+        "D": "A tool for managing assets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is specifically designed to allow functional components to handle side effects that require a reference to a DOM/Native node?",
+      "options": {
+        "A": "useLayoutEffect",
+        "B": "useEffect",
+        "C": "useNode",
+        "D": "useRef"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary advantage of 'TurboModules' over the legacy Native Modules?",
+      "options": {
+        "A": "They are easier to write in Java",
+        "B": "They are loaded lazily and allow direct synchronous calls from JS via JSI",
+        "C": "They automatically translate code to Swift",
+        "D": "They don't require any native code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to profile the 'JS Frame Rate' and 'UI Frame Rate' to identify jank?",
+      "options": {
+        "A": "React DevTools",
+        "B": "Flipper Performance Plugin",
+        "C": "Chrome Network Tab",
+        "D": "Postman"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'removeClippedSubviews' prop in a ScrollView help with?",
+      "options": {
+        "A": "It crops the images in the list",
+        "B": "It improves performance by unmounting components that are outside the viewport",
+        "C": "It removes the scrollbar",
+        "D": "It deletes empty items"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to handle complex state logic that involves multiple sub-values or when the next state depends on the previous one?",
+      "options": {
+        "A": "useState",
+        "B": "useReducer",
+        "C": "useMemo",
+        "D": "useLogic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Shadow Tree' in React Native?",
+      "options": {
+        "A": "The tree of styles for dark mode",
+        "B": "An intermediate tree used by the Yoga engine to calculate layouts before rendering",
+        "C": "A hidden copy of the database",
+        "D": "The list of background tasks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property of 'Animated.timing' is used to define the duration of the animation in milliseconds?",
+      "options": {
+        "A": "time",
+        "B": "duration",
+        "C": "delay",
+        "D": "speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to start a specific Android emulator from the command line?",
+      "options": {
+        "A": "emulator -avd [Emulator_Name]",
+        "B": "npx start-emulator",
+        "C": "adb start",
+        "D": "run-android --device"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Codegen' in the New Architecture?",
+      "options": {
+        "A": "To generate UI components from Figma",
+        "B": "To ensure type safety between JS and Native layers by generating C++ scaffolding",
+        "C": "To create automatic tests",
+        "D": "To minify the JavaScript bundle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display a native 'Action Sheet' on iOS?",
+      "options": {
+        "A": "Modal",
+        "B": "ActionSheetIOS",
+        "C": "Popup",
+        "D": "BottomSheet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you specify the 'StatusBar' style to be white text on a dark background?",
+      "options": {
+        "A": "barStyle='light-content'",
+        "B": "barStyle='dark-content'",
+        "C": "theme='dark'",
+        "D": "color='white'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Yoga' engine used for in React Native?",
+      "options": {
+        "A": "Managing animations",
+        "B": "An open-source cross-platform layout engine that implements Flexbox",
+        "C": "Handling navigation transitions",
+        "D": "Connecting to the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to track whether a component is currently focused in React Navigation?",
+      "options": {
+        "A": "useFocusEffect",
+        "B": "useIsFocused",
+        "C": "useNavigationState",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which library is used to handle 'SVG' files in React Native?",
+      "options": {
+        "A": "react-native-images",
+        "B": "react-native-svg",
+        "C": "react-native-vector",
+        "D": "svg-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Batching' in React's rendering process?",
+      "options": {
+        "A": "To group multiple state updates into a single re-render for better performance",
+        "B": "To upload multiple files at once",
+        "C": "To run the app on multiple devices",
+        "D": "To combine multiple CSS files"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method in a Class Component is equivalent to the cleanup function in useEffect?",
+      "options": {
+        "A": "componentWillUnmount",
+        "B": "componentDidUnmount",
+        "C": "componentWillUpdate",
+        "D": "render"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Memory Leaking' in React Native?",
+      "options": {
+        "A": "When the app deletes data unexpectedly",
+        "B": "When objects are no longer needed but are not garbage collected, consuming RAM",
+        "C": "When the phone runs out of storage",
+        "D": "When the API returns too much data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in FlatList helps to improve scroll performance by rendering items in chunks?",
+      "options": {
+        "A": "maxToRenderPerBatch",
+        "B": "updateCellsBatchingPeriod",
+        "C": "initialNumToRender",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In React Native, how do you handle a 'Long Press' on a component?",
+      "options": {
+        "A": "onPressLong",
+        "B": "onLongPress",
+        "C": "onHold",
+        "D": "pressDelay"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which environment variable is used to check if the app is running in 'Development' or 'Production'?",
+      "options": {
+        "A": "process.env.MODE",
+        "B": "__DEV__",
+        "C": "APP_STATUS",
+        "D": "isDev"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the use of 'Vibration' API in React Native?",
+      "options": {
+        "A": "To make the phone vibrate for notifications or haptic feedback",
+        "B": "To record sound",
+        "C": "To detect motion",
+        "D": "To animate the screen"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is used to display a horizontal line separating items in a list?",
+      "options": {
+        "A": "Line",
+        "B": "ItemSeparatorComponent in FlatList",
+        "C": "Divider",
+        "D": "Separator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook allows you to use a 'reducer' to manage state in a way similar to Redux?",
+      "options": {
+        "A": "useState",
+        "B": "useReducer",
+        "C": "useStore",
+        "D": "useDispatch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'React Native RootView'?",
+      "options": {
+        "A": "The first component in App.js",
+        "B": "The native container (UIView or ViewGroup) that hosts the React Native app",
+        "C": "The navigation container",
+        "D": "The database root"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to upgrade the React Native version of your project?",
+      "options": {
+        "A": "npx react-native upgrade",
+        "B": "npm update react-native",
+        "C": "react-native-git-upgrade",
+        "D": "Both A and C"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'memoization' do?",
+      "options": {
+        "A": "It records the user's voice",
+        "B": "It caches the result of a function call based on its inputs to save computation time",
+        "C": "It creates a backup of the state",
+        "D": "It minifies the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used to handle 'z-index' issues specifically on Android?",
+      "options": {
+        "A": "zIndex",
+        "B": "elevation",
+        "C": "depth",
+        "D": "androidIndex"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'PixelRatio.getPixelSizeForLayoutSize()'?",
+      "options": {
+        "A": "To set the font size",
+        "B": "To convert logical pixels (dp) to physical pixels (px) for images or borders",
+        "C": "To change the aspect ratio",
+        "D": "To measure the screen width"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property of FlatList determines the threshold (in screen lengths) for calling onEndReached?",
+      "options": {
+        "A": "endThreshold",
+        "B": "onEndReachedThreshold",
+        "C": "scrollThreshold",
+        "D": "triggerPoint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which testing library is the standard for 'End-to-End' (E2E) testing in React Native, allowing you to test on real devices/simulators?",
+      "options": {
+        "A": "Jest",
+        "B": "Detox",
+        "C": "Mocha",
+        "D": "Enzyme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SSL Pinning' used for in a mobile application?",
+      "options": {
+        "A": "To speed up HTTPS requests",
+        "B": "To prevent Man-in-the-Middle (MITM) attacks by verifying the server's specific certificate",
+        "C": "To encrypt the local database",
+        "D": "To hide the app's source code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is commonly used to obfuscate and shrink the Java/Kotlin code in an Android release build?",
+      "options": {
+        "A": "Metro",
+        "B": "ProGuard or R8",
+        "C": "Babel",
+        "D": "Webpack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Snapshot Testing' in Jest?",
+      "options": {
+        "A": "To take a screenshot of the app",
+        "B": "To ensure the UI component's rendered output does not change unexpectedly",
+        "C": "To test the camera functionality",
+        "D": "To verify the app's version number"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which package provides access to a secure 'Keychain' or 'Keystore' for storing sensitive credentials?",
+      "options": {
+        "A": "AsyncStorage",
+        "B": "react-native-keychain",
+        "C": "react-native-secure-db",
+        "D": "SafeStorage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tree Shaking' in the context of building a React Native app?",
+      "options": {
+        "A": "Optimizing the widget tree",
+        "B": "Removing dead or unused code during the bundling process to reduce size",
+        "C": "Clearing the cache",
+        "D": "Reorganizing the folder structure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to analyze the size of your JavaScript bundle?",
+      "options": {
+        "A": "npx react-native bundle-visualizer",
+        "B": "npm run analyze",
+        "C": "react-native inspect",
+        "D": "metro-bundle-stats"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In React Native, what does the 'useColorScheme' hook return?",
+      "options": {
+        "A": "A list of available colors",
+        "B": "The current color scheme of the device (light or dark)",
+        "C": "The primary theme color",
+        "D": "The hex code of a color"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used in Jest to mock a React Native module?",
+      "options": {
+        "A": "jest.fn()",
+        "B": "jest.mock('module_name')",
+        "C": "jest.spyOn()",
+        "D": "jest.create()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'rootTag' in a React Native application?",
+      "options": {
+        "A": "The HTML tag used for web",
+        "B": "The unique identifier for the root React Native view provided by the native side",
+        "C": "The version of the app",
+        "D": "A styling property"
+      },
+      "answer": "B"
+    }
+  ]
+}

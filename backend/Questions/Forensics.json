@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Forensics", 
+  "questions": [
+    {
+    "question": "What is the primary goal of 'Chain of Custody' in digital forensics?",
+    "options": {
+      "A": "To ensure every investigator has a physical set of handcuffs.",
+      "B": "To document the chronological history of evidence handling to ensure it hasn't been tampered with.",
+      "C": "To automatically delete old files from the server.",
+      "D": "To manage the company's social media password security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In digital forensics, 'Volatile Data' is data that is lost when the computer is powered off, such as the contents of RAM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is the first step an investigator should take when discovering a computer that is currently powered ON at a crime scene?",
+    "options": {
+      "A": "Pull the power plug immediately to stop processes.",
+      "B": "Photograph the screen and document the current state of the system.",
+      "C": "Log into the admin account to check for viruses.",
+      "D": "Delete the browser history to protect the victim."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Write Blocker' technically used for?",
+    "options": {
+      "A": "To prevent people from writing on the physical server with a marker.",
+      "B": "To allow an investigator to read data from a drive without accidentally modifying its contents.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Increasing the frame rate of the forensic imaging process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common forensic file formats? (Select all that apply)",
+    "options": {
+      "A": "E01 (Expert Witness Format)",
+      "B": "RAW (dd image)",
+      "C": "AFF (Advanced Forensic Format)",
+      "D": "JPEG (Photo format)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Hashing' provide in a forensic investigation?",
+    "options": {
+      "A": "The ability to search for physical evidence in a dark room.",
+      "B": "Verification of data integrity by ensuring the image matches the original source.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "A way to increase the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bit-stream' image is an exact, sector-by-sector copy of the original physical media.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is the most 'Volatile' and should be collected first according to the Order of Volatility?",
+    "options": {
+      "A": "Hard Drive Data",
+      "B": "CPU Registers and Cache",
+      "C": "USB Thumb Drive",
+      "D": "Optical Discs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Slack Space' in a file system?",
+    "options": {
+      "A": "A physical room where investigators take breaks.",
+      "B": "The unused space between the end of a file and the end of the cluster it occupies.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'File Carving' is a technique used to recover files based on their headers and footers when file system metadata is missing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which common forensic tool is widely used for creating bit-stream images of drives?",
+    "options": {
+      "A": "Adobe Photoshop",
+      "B": "FTK Imager",
+      "C": "Microsoft Excel",
+      "D": "Spotify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what must be included in a Forensic Report? (Select all that apply)",
+    "options": {
+      "A": "The tools used for the investigation",
+      "B": "The hash values of the evidence",
+      "C": "The investigator's personal social media handles",
+      "D": "A detailed log of findings and conclusions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Live Acquisition'?",
+    "options": {
+      "A": "Acquiring evidence from a physical animal.",
+      "B": "Collecting data from a system that is currently powered on and running.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deleting a file in a Windows environment (Recycle Bin bypass) physically erases all data from the hard drive instantly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Anti-Forensics' techniques?",
+    "options": {
+      "A": "To help investigators find evidence faster.",
+      "B": "To hide, delete, or falsify digital evidence to hinder an investigation.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Unallocated Space'?",
+    "options": {
+      "A": "Space that is physically missing from the server rack.",
+      "B": "Disk space that is not currently used by the file system to store active files, but may contain deleted data.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Digital Forensics is used solely for criminal law and never for corporate internal investigations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Windows Registry' technically used for in an investigation?",
+    "options": {
+      "A": "A physical book for registering office visitors.",
+      "B": "A database that stores configuration settings and info about users, software, and hardware on the OS.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Forensic Copy'?",
+    "options": {
+      "A": "An exact, bit-for-bit duplicate of the original digital evidence.",
+      "B": "A photocopy of a physical hard drive.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hashes' indicate that the forensic image is no longer an exact copy of the original source.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid digital evidence sources? (Select all that apply)",
+    "options": {
+      "A": "System Logs",
+      "B": "Browser History",
+      "C": "Buying physical snack for the team",
+      "D": "Cloud Storage accounts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Steganography'?",
+    "options": {
+      "A": "The practice of hiding a file, message, image, or video within another file.",
+      "B": "A person named Stegano who is very good at math.",
+      "C": "A Strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Incident Response', what is the first priority?",
+    "options": {
+      "A": "Containment of the threat to prevent further damage.",
+      "B": "A physical fight in the server room.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Forensic imaging should ideally be performed on the original drive rather than a copy to ensure accuracy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Data Recovery'? (Select all that apply)",
+    "options": {
+      "A": "Retrieving data from damaged or failed hardware",
+      "B": "Restoring accidentally deleted files",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Extracting information from encrypted volumes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Timeline Analysis'?",
+    "options": {
+      "A": "A physical line drawn on the office floor.",
+      "B": "The process of organizing digital events in chronological order to understand how an incident occurred.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Metadata'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "Data that provides information about other data, such as file creation date or GPS location of a photo.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Timezones' in logs can lead an investigator to conclude an event happened at the wrong time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common forensic operating systems? (Select all that apply)",
+    "options": {
+      "A": "Kali Linux",
+      "B": "SANS SIFT Workstation",
+      "C": "The SQL query parser",
+      "D": "CAINE (Computer Aided INvestigative Environment)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Evidence Preservation'?",
+    "options": {
+      "A": "Putting physical evidence in a museum.",
+      "B": "The technical process of ensuring digital evidence is not altered or damaged during collection and storage.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Mobile Forensics'?",
+    "options": {
+      "A": "Extracting and analyzing digital evidence from mobile devices like smartphones and tablets.",
+      "B": "Managing physical mobile homes for employees.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Logical Acquisition' captures only the files and folders that the user can see, rather than the entire physical drive structure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Network' Forensics? (Select all that apply)",
+    "options": {
+      "A": "Analyzing packet captures (PCAP)",
+      "B": "Reviewing firewall and router logs",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Tracking an attacker's movement through a network"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Admissibility' in forensics?",
+    "options": {
+      "A": "The legal standard used to determine if digital evidence can be used in a court of law.",
+      "B": "Admitting you are a person named Forensics.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Root Cause' in an incident report?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The fundamental reason why a security incident or breach occurred.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a forensic investigator tries to access a file without the proper administrative rights on the evidence drive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Forensics tools? (Select all that apply)",
+    "options": {
+      "A": "EnCase",
+      "B": "Magnet AXIOM",
+      "C": "Autopsy (Open Source)",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Evidence Verification'?",
+    "options": {
+      "A": "Verifying a person name Evidence.",
+      "B": "The process of using hash functions to prove that the acquired evidence is an identical copy of the original source.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Respond' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average time it takes for an incident response team to react to an identified threat.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in forensics refers to trying to read a legacy IDE hard drive using only modern SATA cables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Forensic' Awareness Training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on how to avoid contaminating a digital crime scene",
+      "B": "Training for IT staff on when to call the forensics team",
+      "C": "Identifying program satisfaction trends",
+      "D": "Guaranteed to replace all human managers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Bit-for-Bit' copying?",
+    "options": {
+      "A": "Standing in a dark room with a person.",
+      "B": "An imaging process that copies every binary digit from the source media, including deleted files and hidden areas.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Disposition'?",
+    "options": {
+      "A": "The final status or outcome of a forensic case or evidence item.",
+      "B": "Planning a physical party for forensic people.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an investigator expects a 10TB drive image to finish in exactly 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' team leadership? (Select all that apply)",
+    "options": {
+      "A": "Actively seeking feedback from all forensic analysts",
+      "B": "Conducting 'blind' report reviews to reduce investigator bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring a diverse range of technical expertise on the team"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Evidence' Storage?",
+    "options": {
+      "A": "Storing evidence in a secure, controlled environment to prevent physical damage or unauthorized access.",
+      "B": "Storing a person name Evidence.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Conflict' Management?",
+    "options": {
+      "A": "Resolving disputes between different agencies or legal teams regarding evidence access.",
+      "B": "A physical fight in the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a forensic team uses casual text messages to document evidence hand-offs instead of formal paper forms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Forensics frameworks? (Select all that apply)",
+    "options": {
+      "A": "NIST SP 800-86",
+      "B": "ISO/IEC 27037",
+      "C": "The SQL query parser",
+      "D": "SANS Forensic Artifacts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Expert Witness' testimony?",
+    "options": {
+      "A": "Giving a person physical power cables.",
+      "B": "A forensic professional providing specialized knowledge and opinion to a court to assist in understanding complex digital evidence.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'NPS' for a forensic service?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A measure of how satisfied internal legal or HR stakeholders are with the forensics team's investigation quality and reporting.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a forensic tool fails to record its own activity logs during an evidence extraction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' Stakeholders in Forensics? (Select all that apply)",
+    "options": {
+      "A": "Law Enforcement Agencies",
+      "B": "External Legal Counsel",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Regulatory Auditors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Evidence' Seizure?",
+    "options": {
+      "A": "Seizing a person named Evidence.",
+      "B": "The legal process of taking physical and digital possession of evidence from a suspect or location.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Forensic' Onboarding?",
+    "options": {
+      "A": "Putting the team on a physical boat.",
+      "B": "The structured process of training a new forensic analyst on lab procedures, evidence handling, and legal compliance.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in forensics refers to an analyst using a personal laptop to analyze sensitive evidence instead of a dedicated, forensic workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' Forensics Goals? (Select all that apply)",
+    "options": {
+      "A": "Developing internal rapid-response capabilities",
+      "B": "Standardizing evidence collection across global offices",
+      "C": "Buying physical snack for the office",
+      "D": "Reducing the mean time to investigate incidents"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' Collaboration?",
+    "options": {
+      "A": "The intelligence of a person named EQ.",
+      "B": "Different departments (Legal, HR, IT) working together to conduct a successful and compliant investigation.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Evidence' Density?",
+    "options": {
+      "A": "A metric track tracking the amount of relevant evidence found per gigabyte of data analyzed.",
+      "B": "The physical weight of a bug.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a password bypass tool to unlock a smartphone in exactly 2 seconds.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Case' Management? (Select all that apply)",
+    "options": {
+      "A": "Tracking investigator assignments and hours",
+      "B": "Managing physical evidence locker inventory",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Organizing digital artifacts and report drafts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' Integrity?",
+    "options": {
+      "A": "Analyzing a person name Integrity.",
+      "B": "The degree to which an investigation is conducted ethically and within legal boundaries to ensure the evidence remains valid.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Investigate' (MTTI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes from the initial identification of an incident until the final forensic report is completed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a lead analyzes cloud-based logs using tools designed only for local physical hard drives.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Forensics stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CISO",
+      "B": "Chief Legal Officer",
+      "C": "Head of Human Resources",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Lab' Maturity?",
+    "options": {
+      "A": "Building a physical scale to weigh the lab equipment.",
+      "B": "The level of sophistication and technical capability of a forensic laboratory to handle complex investigations.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical purpose of analyzing 'Prefetch' files (.pf) during a Windows forensic investigation?",
+    "options": {
+      "A": "To physically speed up the boot time of the evidence machine.",
+      "B": "To identify which applications were executed on the system, including the frequency and the last time of execution.",
+      "C": "To automatically delete temporary internet files to hide evidence.",
+      "D": "To manage the physical cooling fans of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In memory forensics, the 'Volatility' framework allows an investigator to extract artifacts like active network connections and running processes from a RAM dump.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Windows Registry hive contains the 'Shellbags' artifacts, which are technically used to track user folder navigation history?",
+    "options": {
+      "A": "HKEY_LOCAL_MACHINE (HKLM)",
+      "B": "HKEY_CURRENT_USER (HKCU) - specifically within UsrClass.dat",
+      "C": "HKEY_CLASSES_ROOT (HKCR)",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Memory Carving' during a live incident response?",
+    "options": {
+      "A": "To physically carve a person's name into the RAM chip.",
+      "B": "To recover fragmented files or encryption keys directly from the system's memory before they are overwritten or cleared.",
+      "C": "A specialized software for architects to design server memory layouts.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which aspect of 'Timeline Analysis' is technically most reliable for identifying the 'Staging' phase of a ransomware attack?",
+    "options": {
+      "A": "Self-Awareness strictly",
+      "B": "Cross-correlation of file creation timestamps with network lateral movement logs",
+      "C": "Buying the fastest server in the region",
+      "D": "Hiring a professional actor to represent the victim"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in forensics occurs when the legal department expects a full forensic report within 24 hours, but the data decryption process alone technically requires 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Windows Forensics', what is an 'LNK' file technically used to prove?",
+    "options": {
+      "A": "The physical weight of the computer's shortcut icons.",
+      "B": "That a specific file or folder was opened by a user, providing the original path and timestamps of the target file.",
+      "C": "A security scan for database hardware viruses.",
+      "D": "Increasing the size of the font on the desktop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Jump List' analysis and why is it a critical technical data point?",
+    "options": {
+      "A": "Analyzing a physical list of employees who can jump high.",
+      "B": "It reveals the 'Recent' items opened by a user per application, even if the user deleted the original target file.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Anti-Forensics' countermeasures an investigator might encounter? (Select all that apply)",
+    "options": {
+      "A": "Timestomping (modifying file timestamps)",
+      "B": "File Wiping (overwriting data multiple times)",
+      "C": "Steganography (hiding data in images)",
+      "D": "Deleting the physical recycle bin icon from the desktop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Alternate Data Streams' (ADS) in NTFS are often used by malware to hide malicious code within legitimate files without changing the file's visible size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of 'Shimcache' (AppCompatCache) in a forensic investigation?",
+    "options": {
+      "A": "To identify executable files that were present on the system, regardless of whether they were actually executed.",
+      "B": "A physical cache for storing office supplies.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) in incident response?",
+    "options": {
+      "A": "The physical weight of the evidence container.",
+      "B": "The average duration from the initial detection of a security threat until the threat is technically neutralized or isolated.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Registry Key' should an investigator check to find the list of 'Recently Used' programs in a user's session?",
+    "options": {
+      "A": "HKLM\\SYSTEM\\CurrentControlSet",
+      "B": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist",
+      "C": "HKCR\\Software\\Classes",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in DFIR occur when the 'IT Ops' team wipes a compromised server to restore service before the 'Security' team can capture a forensic image.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced' 'Artifact' 'Extraction' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Shadow Copy' versions of deleted documents",
+      "B": "Parsing 'Chrome' LevelDB files for synchronized account data",
+      "C": "Guaranteed to replace all human forensic leads",
+      "D": "Reconstructing chat history from unallocated memory space"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Registry' 'Hive' 'Reconstruction'?",
+    "options": {
+      "A": "A physical manual for building beehives in the office.",
+      "B": "The process of assembling corrupted or partial registry files found in unallocated space to recover deleted system configurations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Chain' 'of' 'Custody' 'Continuity'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The unbroken record showing that evidence was under the control of authorized personnel at all times.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a lead expects an 'Automated Keyword Search' across 50 encrypted drives to finish in under 10 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' DFIR framework handles 'Evidence' 'Log' 'Retention'?",
+    "options": {
+      "A": "Deleting all logs every 24 hours strictly",
+      "B": "A centralized SIEM or Log Aggregator with immutable storage policies",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dirty' 'Memory' in the context of forensic RAM acquisition?",
+    "options": {
+      "A": "Memory that is physically covered in dust.",
+      "B": "Memory pages that have been modified by a process but have not yet been written back to the disk storage.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Forensic' 'Lab' 'Standardization'?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "Ensuring all hardware and software tools used for analysis are validated, updated, and meet industry standards (like ASCLD/LAB).",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead uses a 2024 forensic parser for a proprietary file format from 1998, leading to data misinterpretation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Forensic' 'Alignment' drivers? (Select all that apply)",
+    "options": {
+      "A": "Legal Hold Requirements",
+      "B": "Internal Audit Compliance",
+      "C": "Employee Privacy Regulations (GDPR)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Data' risk for a forensic lead?",
+    "options": {
+      "A": "Leading a team in a dark room.",
+      "B": "Relevant evidence residing in 'Personal' devices or 'Unsanctioned' cloud accounts used by employees for work tasks.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Artifact' 'Reliability' 'Score'?",
+    "options": {
+      "A": "Analytics of a person named Reliability.",
+      "B": "A rating based on whether a technical artifact (like an IP address) can be spoofed or easily altered by an attacker.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager holds a 'Root Cause Analysis' meeting for an incident while the primary server is still actively being attacked.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visualization of 'Lateral Movement' paths",
+      "B": "Consistency in evidence presentation for HR/Legal",
+      "C": "Guaranteed to replace all human investigators",
+      "D": "Reduction in manual spreadsheet tracking for case leads"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in forensic automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' custom scripts from one investigation and reuse them to parse similar artifacts in future cases.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a breach through forensics?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between the actual compromise occurring and the point where forensics officially identifies the scope of the incident.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a lead uses 'Plain Text Email' to share a password list discovered during a sensitive forensic investigation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Forensic' 'Discovery'? (Select all that apply)",
+    "options": {
+      "A": "Conducting 'blind' evidence reviews to minimize investigator bias",
+      "B": "Ensuring privacy-by-design when collecting employee data",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Allowing third-party experts to validate forensic methodologies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Bias' in forensic analysis?",
+    "options": {
+      "A": "A bias that is physically small.",
+      "B": "The tendency for an investigator to look only for evidence that confirms their initial theory of who committed the crime.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Evidence' 'Attrition'?",
+    "options": {
+      "A": "The future cost of negative cultural issues (toxic behavior, lack of trust) caused by choosing quick, easy social fixes today.",
+      "B": "The gradual loss or corruption of digital data over time due to hardware failure or overwriting by the system.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Forensic Clearance' for their laptop in exactly 12 hours without a scope agreement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'DFIR' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Legal Officer",
+      "B": "Director of Incident Response",
+      "C": "Principal Forensic Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' logic in a Forensic squad?",
+    "options": {
+      "A": "Hiring servants to write test cases.",
+      "B": "Focusing on providing the team with the best forensic workstations and legal air-cover so they can focus on 'Deep Analysis' without distraction.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Artifact' 'Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The volume of high-value digital evidence found within a specific area of the storage (e.g. User Profile vs System Folders).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in forensics refers to a lead using a 'Read/Write' adapter instead of a 'Write-Blocker', which physically alters the evidence drive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' for Leads? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into 'Case Burn-down' charts",
+      "B": "Consistency in 'Evidence Hash' verification logs",
+      "C": "Guaranteed to replace all human investigators",
+      "D": "Reduction in manual 'Chain of Custody' tracking labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Artifact' 'Lifting' significance in forensic training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' and apply a known 'User Pattern' (e.g. specific browser behavior) from one case to identify the same behavior in another.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a chain-of-custody error?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from identifying an evidence-tracking discrepancy until the correct documentation is verified and signed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a lead assigns 'Mobile Analysis' tasks to a user but does not provide them with access to the 'Encrypted Image' decryption keys.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Forensics' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which business units have the highest 'Insider Threat' artifact counts",
+      "B": "Predicting future 'Legal Hold' storage needs based on case trends",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Analyzing trends in 'Common Malware Families' found across global offices"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed DFIR team?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The rapid establishment of standardized imaging tools, legal forms, and forensic evidence lockers within 30 days of the team's formation.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Evidence' 'Retention' 'Compliance'?",
+    "options": {
+      "A": "The percentage of forensic cases that met all legal and internal timeframes for evidence destruction after a case close.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects 'Full Case Closure' for a data-theft investigation in under 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Artifact' 'Analysis' for Leads? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging 'Suspicious' registry keys in a system image",
+      "B": "Consolidating browser history across multiple devices into a single view",
+      "C": "Guaranteed to replace all human forensic analysts",
+      "D": "Predicting 'User Intent' based on a sequence of technical actions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in a Forensic Lab environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Case A' evidence images are technically unreachable by investigators assigned strictly to 'Case B' to prevent contamination.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Investigative' 'Failures' (MTBIF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of lab stability before a tool error or process breach invalidates an investigation.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in forensic leadership occur when the remediation timeline for a 'Malware outbreak' is based on 'Fixed Dates' rather than 'Current System Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' for Forensics? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Legal Admissibility' requirements",
+      "B": "Keeping lab records updated with rapidly changing local privacy laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Discovery' if tools only search for pre-defined keywords"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a strategic forensic plan?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'how' of imaging (e.g. specific EnCase commands) is isolated from the 'why' (the legal goal), allowing tools to be swapped without rewriting the standard operating procedure.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tampering' event?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an evidence file being altered and the forensic auditing software flagging the hash mismatch in the system.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in forensics occur when an organization uses a 2010 'Disk-Only' model for a 2026 'Cloud-SaaS' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resilience' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Legal Officer",
+      "B": "Director of Security Operations",
+      "C": "Global Privacy Director",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Ecosystem' 'Orchestration' for a Forensic Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of external legal partners, forensic tool vendors, and internal HR/IT talent to ensure a scalable investigative capability.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Chain-of-Custody' (MTRCC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a break in documentation until the point where the evidence can be legally re-verified and stabilized.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects a 'High Fidelity' mobile extraction for a device that has a 10-year-old proprietary encryption chip.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Evidence Aging' for the Board",
+      "B": "Reduction in manual administrative work for lead analysts",
+      "C": "Guaranteed to replace all human investigators",
+      "D": "Consistency in forensic findings across global regional units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a forensic lab pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Analysis Sprints' where each phase results in a specific, independently verifiable 'Evidence Artifact' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an analysis error?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a flaw in a forensic report until the corrected and verified findings are resubmitted.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 complex mobile extractions to a single analyst with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Compliance' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying project teams with high 'Policy Breach' artifact patterns",
+      "B": "Predicting future 'Evidence Discovery' needs based on global legal trends",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Forensic Training' spend with 'Evidence Integrity' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific lab tool is developed, based on its success rate in court, reliability, and maintenance history.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Forensic' 'Failures' (MTBSFF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of lab stability before a major strategic error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in forensic leadership occur when the remediation timeline for a 'Sensitive Data Leak' is based on 'Fixed Dates' rather than 'Current PR Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-stakes corporate espionage investigation, how should a Forensic Director technically model 'Anti-Forensic Resistance' during the acquisition of a secure enclave?",
+    "options": {
+      "A": "By counting the total number of encryption apps installed on the device.",
+      "B": "By calculating the 'Complexity Variance' between the raw hardware image and the decrypted logical layer to identify hidden volumes or 'Pluralistic' deniable storage.",
+      "C": "By monitoring the physical temperature of the CPU during the imaging process.",
+      "D": "By requiring the suspect to provide a written explanation of every deleted file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic Forensic Readiness' involves the proactive implementation of immutable logging and 'Shadow-Copy' automation to ensure that 'Actionable Evidence' exists before an incident even occurs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique is used to determine the probability of an 'Insider Threat' successfully executing 'Data Exfiltration' based on current file-access entropy and network egress limits?",
+    "options": {
+      "A": "Bayesian Network Modeling for Behavioral Anomalies",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Forensic Asset Calibration' during a cross-border corporate merger involving differing data privacy laws (e.g., GDPR vs. CCPA)?",
+    "options": {
+      "A": "To ensure both companies use the same physical brand of forensic laptop.",
+      "B": "To standardize data anonymization and 'Legal Hold' protocols across regions to ensure 'Admissibility' in multiple jurisdictions simultaneously.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive investigation dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Advanced Artifact Analysis', what is the significance of 'VSS' (Volume Shadow Copies) logic for a lead investigator?",
+    "options": {
+      "A": "When an employee physically copies a paper document.",
+      "B": "It allows the investigator to access historical 'snapshots' of the file system, technically bypassing 'Timestomping' by viewing the file state at a specific point in the past.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the system's event log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Forensic' 'Archetypes' occur when a 'Disk-focused' investigator is assigned to a 'Cloud-Native' serverless incident, leading to the total loss of volatile ephemeral logs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Director deliberately implementing 'Honey-Artifacts' (decoy files) to identify if a malicious insider is performing 'Forensic Probing' within the network?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Strategic Deception Orchestration (Active Defense)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Evidence' 'Fragility' and its relation to 'SSD Garbage Collection' algorithms?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk that deleted data is physically erased by the drive's internal 'TRIM' command before a forensic image can be captured, regardless of OS settings.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Human Capital' ROI calculations for an internal Forensics department? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Legal Discovery' costs per case",
+      "B": "Financial delta of 'Insurance Settlement' accuracy due to better evidence",
+      "C": "The cost of 'Brand Damage' mitigated by rapid root-cause identification",
+      "D": "The number of forensic workstations in the lab"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' within a DFIR squad ensures that analysts can flag 'Methods' that might be legally questionable without fear of internal discipline.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Forensic Architect's case strategy?",
+    "options": {
+      "A": "The physical weight of the forensic workstation.",
+      "B": "The ability to reconstruct a sequence of events across 10+ distributed systems where timestamps are unsynchronized and logs are partial.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a breach decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Evidence' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of distributing sensitive evidence fragments across physically isolated, encrypted nodes to prevent a single 'Lab Breach' from compromising an entire case.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' forensic behavior involves 'Controlled Leakage' during a stakeholder debrief to identify a suspected 'Confidentiality' breach within the legal team?",
+    "options": {
+      "A": "Micromanagement",
+      "B": "Canary Data Orchestration (Strategic Integrity)",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a forensic acquisition often result in 'Discovery Rejection', where the acquired firm's IT team 'cleans' devices before the parent company's auditors can arrive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Forensic' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Identifying future 'Cloud-Forensic' competencies before a total migration",
+      "B": "Objectively comparing internal vs. external 'Laboratory Agility' scores",
+      "C": "Buying physical snacks for the Legal department",
+      "D": "Assessing the 'Systemic Thinking' capacity of potential Forensic Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Case Review?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Hiring Policy' for privileged admins is flawed, rather than just investigating the single admin who stole data.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Artifact' 'Reliability' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative 'Weight of Evidence' derived from multiple, independent digital sources (e.g. Registry + Prefetch + LNK) that all point to the same user action.",
+      "B": "Aggregating physical risks like fire in the lab.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Forensic' 'Inertia' occurs when a firm continues to rely on 'Disk Imaging' tools long after its workforce has moved entirely to 'SaaS-based' productivity suites.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Forensic' 'Governance' metrics for a Director? (Select all that apply)",
+    "options": {
+      "A": "Mean Time to Discovery (MTTD) of Insider Policy Breaches",
+      "B": "Evidence 'Admissibility' success rate in formal litigation",
+      "C": "Percentage of 'Dark Data' assets that are forensically indexable",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Forensic' 'Entrenchment' risk during a 'Zero Trust' transition?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured investigators will block 'Decentralized Audit' tools to protect their centralized 'Control' over all data acquisitions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Investigative' 'Pivots' (MTBIP)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational stability by measuring how often the 'Initial Hypothesis' of a crime must be changed due to poor initial scoping.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a company demands 'Thorough Investigations' while only rewarding the team for 'Low Hours-per-Case' billable efficiency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to automatically correlate 'Employee Travel' data with 'Server Access' anomalies",
+      "B": "Automatically identifying 'Compliance Gaps' in data retention policies",
+      "C": "Guaranteed to replace all human investigators",
+      "D": "Analyzing market data to predict 'Competitive Talent Poaching' risks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' 'Ecosystem' 'Architecture' (FEA)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of legal holds, automated collection agents, secure vaults, and analysis platforms into a single 'Response Unit'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Forensic' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Data Governance' meets the parent company's 'Evidentiary Standards' before a breach occurs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Forensic Proof' after a hack, while the decryption and processing of 50TB of data takes 2 weeks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of evidence destruction for GDPR",
+      "B": "Automatically flagging 'Illegal Access' to forensic images by unauthorized IT staff",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Custodians' meet mandatory legal certification standards"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Forensic Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Evidence Handling Policy' is isolated from 'Departmental IT Operations' to prevent the risk of IT staff unknowingly destroying forensic artifacts.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High' 'Impact' 'Discovery'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an investigator starting their analysis and the dashboard flagging a 'Critical smoking gun' artifact.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Director reports 'Evidence Found' to the board before the 'Integrity/Hash' of that evidence has been verified.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Forensic' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Employee Exit' triggers directly to 'Workstation Imaging' workflows",
+      "B": "Connecting 'Real-time Legal Holds' to 'Automated Data Archival' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Forensic Finding' metadata with 'Global Risk' dashboards"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' orchestration for a new global lab?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common Legal privilege, Chain-of-Custody forms, and Lab Security for a new offshore forensic hub.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Evidence' 'Volatility' Score?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Recoverable Data' as users continue to use a compromised system post-breach.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Full Mobile Forensics' for an iPhone that has zero known bootroom exploits available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Executive' 'Reporting'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Liability' heatmaps for the CEO",
+      "B": "Reduction in 'Status-building' labor for Forensic Leads",
+      "C": "Guaranteed to replace all human investigators",
+      "D": "Automatic generation of 'Admissibility Reports' for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-jurisdictional Forensics?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that evidence from 'Region A' (EU) technically cannot be accessed by investigators in 'Region B' (US) without explicit legal 'Transfer' authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Forensic' 'Trust' (MTRFT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile lab error (e.g. hash mismatch in court) and the point at which 'Methodology Confidence' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in forensic strategy refers to an organization promising '100% Privacy' while utilizing a 'Centralized Mirroring' system that records all employee keystrokes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Forensic' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Digital Discovery",
+      "B": "Lead Forensic Ethics Auditor",
+      "C": "Director of Incident Response",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Lab' 'Resilience' score?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Tool Validation success', 'MTTI', 'Evidence Redundancy', and 'Chain-of-Custody Audit Integrity'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Chain' 'Failures' (MTBCF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of lab stability before a documentation or physical handling error occurs with evidence.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 1990s 'Dead-Box' models (analyze later) in a 2026 'In-Memory/Live' (analyze now) incident.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in auditing subjective 'Legal Strategy' artifacts",
+      "B": "Keeping records updated with rapidly changing global 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Forensic Confidence' if tools use outdated artifact parsers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Forensic' 'Maintainability'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Forensic Pipeline' can sustain major technological shifts without a systemic loss of release velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Privacy' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an unauthorized 'Privacy-Sensitive' artifact being accessed and the GPO's presenting an 'Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' in forensics occurs when 'Evidence Logs' are stored on a server that only the 'Marketing' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Forensic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Legal Compliance Leads",
+      "C": "Engineering Directors",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Forensic' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Forensic Intelligence' tools and 'Maturity Scoring' to a newly acquired engineering team within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Forensic Vision' and 'Tooling Stack' to stay current with technology.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'High-Fidelity' AI artifact correlation for a system that is currently under 'Minimum Viable Product' (MVP) development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Forensic Asset' (e.g. EnCase Dongle) has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Ethics Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Lead analysts",
+      "D": "Tracking the 'Readiness' of the top 10% of global forensic talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Forensic Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Investigative Model' can be 'Lifted' from one product line (e.g. Cloud) and applied to another (e.g. Mobile).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Forensic' 'ROI' (MTRROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a forensic tool becoming 'Detected' (anti-forensics) and the point where its 'Logic' is updated to provide business value again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the Legal Director expects 'Zero Case Delays' while the Forensic Lead is enforcing a 'Zero Integrity Failure' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Forensic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Discovery ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Forensic Leads",
+      "C": "Guaranteed to replace all human forensic managers",
+      "D": "Instant generation of 'Artifact-Density-per-Case' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' 'Encapsulation' in a 'Multi-Case' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing the team structure so that a forensic failure in 'Case A' does not technically or culturally jeopardize the integrity of 'Case B'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new technology (e.g. Web3) is introduced until the Forensic Architect identifies the necessary analysis standards to support it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' in Forensics occur when the 'Lab Validation' is planned annually, but 'iOS' updates happen every 3 months, making the lab permanently legacy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Forensic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Discovery",
+      "B": "Global Release Train Engineer",
+      "C": "Lead Regulatory Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Forensic' 'Bootstrap' complexity for a 'Turnaround' Lead?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of resetting an organization's 'Low-Integrity/Legacy' forensic culture into a 'Modern/Defensible' investigative organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTBLE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the Forensic Leadership layer, identifying if 'Burnout' is causing frequent Director-level churn.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects a 'Shift-Left Culture' in a 1,000-person manual organization to be completed in 30 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Artifact' mapping across global product lines",
+      "B": "Reducing the 'Discovery Data Lag' between regional forensic hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Integrity-Scoring' logic across all automated analysis"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forensic' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Forensic.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Automated Discovery' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Forensic' 'Confidence' (MTRFC) post-major-case-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical 'Discovery escape' until the organization's 'Methodology' scores return to baseline through process fix and audit validation.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Forensic' 'Governance' in cybersecurity leadership refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic lab that prevents squad innovation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forensic' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Manual vs. Automated' analysis ratio",
+      "B": "Identifying business units that are 'Discovery Lagging' based on artifact extraction trends",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'AI-Assisted' analysis tools relative to investigation labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Forensic' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Methodology' (the How) is hidden from the 'High-level Investigative Intent' (the What), allowing tools to be swapped without changing legal standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

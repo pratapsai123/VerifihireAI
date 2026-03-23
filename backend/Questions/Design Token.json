@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Design Token", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of using 'Design Tokens' in a design system?",
+    "options": {
+      "A": "To write the backend server-side database encryption logic strictly.",
+      "B": "To technically store visual design attributes like color and spacing in a platform-agnostic format to ensure masterfully managed consistency across design and code.",
+      "C": "A specialized software for designing physical architectural blueprints strictly.",
+      "D": "To increase the frame rate of the designer's local computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical format is most commonly used to store Design Tokens so they can masterfully be read by both design tools and code repositories?",
+    "options": {
+      "A": "PNG",
+      "B": "JSON",
+      "C": "Binary Header strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Design Tokens masterfully act as a 'Single Source of Truth' for visual styles, technicaly allowing a change in one file to update multiple platforms simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific category of Design Tokens technically refers to the raw, masterfully managed values such as 'Hex Codes' or 'Pixel' counts?",
+    "options": {
+      "A": "Semantic Tokens",
+      "B": "Global / Base Tokens",
+      "C": "Component Tokens strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Semantic Tokens' in a design system hierarchy?",
+    "options": {
+      "A": "To calculate the physical weight of the CSS file.",
+      "B": "To masterfully assign a technical meaning or 'intent' to a token (e.g., 'action-primary' instead of 'blue-500') to simplify masterfully handled updates (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To physically lock the font styles in a Figma file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Design Tokens technically allow for 'Dark Mode' support by masterfully swapping one technical set of token values for another without changing the component code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that a Design Token technically follows a standard naming convention to masterfully reduce confusion between designers and developers?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Taxonomy Orchestration / Naming Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alias' significance in a Design Token structure?",
+    "options": {
+      "A": "Hiring a person named Alias to watch the code.",
+      "B": "A technical masterfully assigned reference where one token technicaly points to another token (cause), rather than a masterfully managed hardcoded value (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Design Tokens can technically masterfully represent non-visual properties, such as 'Animation Durations' or 'Z-index' layers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of a 'Transformer' tool in a token pipeline?",
+    "options": {
+      "A": "A physical device for converting electricity in the office.",
+      "B": "A technical masterfully managed script (e.g., Style Dictionary) used to technicaly convert JSON tokens into platform-specific files like CSS, Swift, or XML.",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Design Token benefits for 'Product Scalability'? (Select all that apply)",
+    "options": {
+      "A": "Reducing technical 'Stylistic Debt' masterfully by removing hardcoded hex values",
+      "B": "Ensuring masterfully perceived technical 'Consistency' across Web, iOS, and Android",
+      "C": "Buying physical snacks for the engineering leads",
+      "D": "Enabling masterfully fast technical 'Theming' and rebranding efforts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Kebab-case' vs. 'CamelCase' masterfully used for in token naming?",
+    "options": {
+      "A": "Ensuring the physical office floor is level.",
+      "B": "Technical masterfully managed 'Formatting Conventions' used to technicaly define how token names are written for specific masterfully handled programming languages.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hardcoding' refers to the technical practice of masterfully managed manual entry of raw values into code, which Design Tokens technically masterfully seek to replace.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Theming' with Design Tokens?",
+    "options": {
+      "A": "Using a physical ruler to measure the screen color.",
+      "B": "The technical process of masterfully mapping a set of tokens to masterfully finalized specific visual brands or masterfully managed UI modes (e.g., High Contrast).",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Style Dictionary' technically?",
+    "options": {
+      "A": "A technical masterfully managed build system used to technicaly define and masterfully transform design tokens for multiple platforms.",
+      "B": "A physical book of design terms in the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Component-Level' tokens technically masterfully define the masterfully assigned visual properties of a specific UI element, such as 'button-background-color'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Spacing' tokens in a design system?",
+    "options": {
+      "A": "The weight of the CSS file.",
+      "B": "The technical masterfully assigned units used to technicaly define masterfully managed padding, margins, and gap sizes consistently.",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Value' 'Standardization' technically intended to achieve in a token audit?",
+    "options": {
+      "A": "Making sure the office wall is painted white.",
+      "B": "The technical process of masterfully ensuring that redundant raw values (e.g., three slightly different blues) are technicaly consolidated into a single masterfully managed token (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elevation' tokens technically masterfully define the technical Always-On depth of UI elements, often technicaly including masterfully managed drop shadow and Z-index values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Token' 'Inventory'?",
+    "options": {
+      "A": "To technically provide a masterfully definitive record of all technical Always-On visual variables currently masterfully managed within the design system.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Design Token' types? (Select all that apply)",
+    "options": {
+      "A": "Color Tokens",
+      "B": "Typography Tokens",
+      "C": "The SQL query parser",
+      "D": "Border Radius Tokens"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Inheritance' logic in a Design Token pipeline?",
+    "options": {
+      "A": "Hiring a person named Inheritance.",
+      "B": "The technical masterfully assigned structure where a 'Global' token masterfully technicaly feeds into a 'Semantic' token, ensuring masterfully handled cascading updates.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Amazon Style Dictionary' technically used for?",
+    "options": {
+      "A": "A technical masterfully managed framework for technicaly automating the transformation and masterfully managed distribution of design tokens.",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Tokens' occur when a designer masterfully masterfully assumes a code value matches a design token when the technical reality is masterfully managed differently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Design Token benefits for 'Collaboration'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Hand-off' via shared JSON files",
+      "B": "Ensuring technical 'Alignment' masterfully via a shared masterfully managed visual language",
+      "C": "Guaranteed to replace all human designers",
+      "D": "Facilitating masterfully clear technical communication masterfully between design and engineering squads"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Primitive' token technically used for?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully assigned 'Lowest Level' token masterfully used to technicaly define a masterfully handled raw value without semantic intent.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Token' 'Drift' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of how masterfully much the masterfully assigned production values technicaly diverge from the masterfully defined design token source.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Consistency' is a technical Always-On standard that masterfully measures how technicaly masterfully Design Tokens are technicaly applied across the masterfully assigned entire product interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Design Token storage methods? (Select all that apply)",
+    "options": {
+      "A": "GitHub / GitLab repositories",
+      "B": "Figma Variables",
+      "C": "The number of security cameras in the office",
+      "D": "JSON / YAML files"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Component' 'Hardening' logic in token management?",
+    "options": {
+      "A": "Building a physical warehouse for components.",
+      "B": "The technical masterfully assigned understanding of masterfully managed technical UI parts masterfully technicaly locked to specific tokens to technically prevent visual breakage (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Token' 'Mapping' technically?",
+    "options": {
+      "A": "A technical masterfully managed process masterfully ensuring that technical design variables masterfully technicaly align with masterfully handled technical code variables.",
+      "B": "Hiring a person named Mapping.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when a design team masterfully masterfully assumes an instant token sync while the technical engineering system masterfully masterfully requires a 24-hour masterfully handled technical deploy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Platform' Strategy in token management? (Select all that apply)",
+    "options": {
+      "A": "Standardizing technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated token technical data distribution masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Opacity' technically used for in a token?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical level of transparency masterfully technicaly applied to a visual element (effect).",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'System' 'Technical' 'Debt' in a token context?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' hardcoded hex values and manual CSS workarounds, which makes the product technicaly 'Riskier' over time.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Update' logs are technical Always-On standards that masterfully allow design leads to masterfully manage and technicaly mirror the performance of a primary token change.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Token' Categories? (Select all that apply)",
+    "options": {
+      "A": "Grid Tokens",
+      "B": "Z-Index Tokens",
+      "C": "The number of security cameras in the office",
+      "D": "Duration / Timing Tokens"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hex' 'to' 'RGB' conversion significance in support?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical color values masterfully remain masterfully consistent with the masterfully assigned display technical requirements.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a token error?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a visual technical flaw masterfully occurring technicaly until it is masterfully flagged in the technical design audit report.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Token-Native' design system era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Token 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'JSON Files' are masterfully signed",
+      "B": "Validating the security technical configuration of the token repository",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if the visual technical goals masterfully match the project specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Naming' 'Convention' significance in management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where technical token names masterfully are technicaly structured to ensure masterfully managed strategic success and developer clarity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Token' 'Event' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about style updates, masterfully finalized value changes, and masterfully applied hardware alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Token management technically includes 'Visual Validation' by masterfully defining the technical support masterfully given to a user after every technical design release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Token priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical operational alignment",
+      "B": "Minimizing technical style rendering latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical design documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Value' 'Usage' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Color' masterfully moving through the suite to masterfully identify technical friction points and redundant values.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE)?",
+    "options": {
+      "A": "The average technical duration that a visual technical baseline masterfully remains performance-stable before an unplanned technical style disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully masterfully assumes a style is 100% stable for all platforms when it technicaly is masterfully only optimized for one web browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Workflow' Strategy in token management? (Select all that apply)",
+    "options": {
+      "A": "Standardizing token technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated style technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Source' significance in a token pipeline?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary file masterfully intended to technicaly capture the core masterfully assigned visual value that a company masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Token' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of token approvals masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Value' 'Shadowing' is a technical Always-On standard that masterfully allows designers to masterfully manage and technicaly mirror the configuration of a primary visual goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical data style latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical token documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Style' 'Registry' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global design token strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a token strategy masterfully remains performance-stable before an unplanned technical style disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a designer masterfully masterfully assumes a value is final when it technicaly is masterfully preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' token design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring token-driven contrast ratios are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Token' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that token data masterfully follows all legal architectural rules after every technical transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Style' 'Transit' tracking?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well visual states (like colors) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' design system era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for tokens? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying style drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing visual technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup style register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the style integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Identity regions' occur when a lead masterfully masterfully assumes a token is available globally when it technicaly is masterfully regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Token Architect",
+      "B": "Systemic Identity Specialist",
+      "C": "Style Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Design' 'Token' 'Architecture' Analysis?",
+    "options": {
+      "A": "The technical evaluation of variables, goals, and visual nodes to masterfully optimize the entire technical design fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical concept refers to a token that bundles multiple visual properties together, such as a 'Typography' token containing font-family, size, weight, and line-height?",
+    "options": {
+      "A": "The SQL query parser strictly",
+      "B": "Composite Tokens",
+      "C": "Binary Header strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'W3C Design Tokens Community Group' is currently masterfully developing a technical standard for a universal Design Token file format to technicaly improve tool interoperability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Token Aliasing' in a multi-brand design system architecture?",
+    "options": {
+      "A": "To physically organize the seating chart of the marketing team.",
+      "B": "To technically map brand-specific 'Primitive' tokens to a shared set of 'Semantic' tokens, ensuring masterfully managed logic remains consistent across products (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live CSS monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', which technical tool is commonly masterfully used to 'Lint' design tokens to technicaly ensure they follow specific masterfully managed schema and naming rules?",
+    "options": {
+      "A": "Manual CSS Validator",
+      "B": "Style Dictionary / Token Transformer",
+      "C": "The Recycle Bin strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Pipeline Engineering', what is the technical significance of 'CI/CD' integration for Design Tokens?",
+    "options": {
+      "A": "It defines the physical color of the server hardware.",
+      "B": "The technical orchestration of masterfully technicaly triggering a code build and masterfully managed distribution whenever a token value is masterfully finalized in the design tool.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the size of the font on the admin console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Token-Driven' development technically allows engineers to masterfully update an entire application's visual style masterfully by simply technicaly pulling the latest JSON token payload.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Math Functions' within a token definition to technically calculate 'Scale' values (e.g., base-size * 1.5)?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Algorithmic Scale Orchestration / Computed Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Modality' technically designed to achieve in a Design Token structure (e.g., Touch vs. Mouse)?",
+    "options": {
+      "A": "Measuring the weight of physical input devices.",
+      "B": "To masterfully adjust 'Spacing' and 'Sizing' tokens technicaly based on the user's masterfully assigned technical input method (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for managing 'Token Versioning'? (Select all that apply)",
+    "options": {
+      "A": "Implementing technical 'Semantic Versioning' (SemVer) for token packages masterfully",
+      "B": "Utilizing masterfully configured 'Git Branching' for token experimentation",
+      "C": "Buying physical snacks for the DevOps team",
+      "D": "Conducting masterfully applied 'Change-Log' audits for every value update"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: In 'Component Engineering', the technical 'Token Scope' must masterfully be verified to ensure that a local component override technicaly does not break the global semantic baseline.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reference' 'Resolution' significance in a multi-platform token audit?",
+    "options": {
+      "A": "Ensuring the physical room temperature is level.",
+      "B": "The technical evaluation of how masterfully a system technicaly resolves nested aliases (e.g., A -> B -> C) to a masterfully handled final value for the end user.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Sync' (MTTS) in a token pipeline?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A technical metric tracking organizational efficiency by measuring how masterfully fast a design-side token update masterfully technicaly propagates to the production codebase.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Shadow Tokens' to technically test new visual updates masterfully without impacting the primary 'Live' token registry?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Parallel State Orchestration / Sandbox Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' expectations in token management occur when a design lead masterfully promises 'Instant Global Color Updates' while technicaly utilizing a masterfully managed 'Manual-Branch-Merge' engineering flow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Token' 'Hardening' benefits? (Select all that apply)",
+    "options": {
+      "A": "Technically finalizing an Interaction Standard for masterfully global product alignment",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Reducing technical 'Visual Debt' masterfully by locking masterfully validated accessibility ratios"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Token' 'Mapping' 'Validation' significance in an enterprise rebranding audit?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical act of masterfully ensuring that new brand values technicaly replace old values masterfully across 100% of the masterfully assigned component registry (effect).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Token' 'Volatility' monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the frequency of masterfully identified 'Hardcoded' overrides, identifying an unstable technical system-fit baseline.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Conditional' 'Tokens' logic technically refers to values that masterfully change technicaly based on system technical data or user technical context (e.g., reducing padding for denser data views).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' framework handles 'Automated' 'Token' 'Translation' for iOS/Android?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Style Dictionary / Node.js / CLI orchestration",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Specificity' significance in a multi-tenant interaction support?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The technical evaluation of how masterfully a token technically identifies the masterfully assigned specific intent of a value (cause) to prevent masterfully handled styling collisions (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Platform-Specific' 'Transformation' logic technically in tokens?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical process of masterfully adapting technical token values (e.g., converting 'px' to 'rem' or 'dp') during the masterfully assigned technical build step (effect).",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Mental Models' occur when a lead masterfully assumes 'Primitive' tokens technicaly provide the masterfully assigned same business value as masterfully managed 'Semantic' tokens.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Token' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Design Operations Lead (Defining core methodologies and asset repositories)",
+      "B": "Frontend Performance Lead (Enforcing technical latency and rendering policies)",
+      "C": "System Insights Manager (Monitoring technical consistency MTBF and stability)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Value' 'Drift' discovery in an organizational token audit?",
+    "options": {
+      "A": "Designing icons in a dark room.",
+      "B": "The technical process of identifying 'Legacy' hardcoded colors (cause) that masterfully no longer masterfully technicaly align with the masterfully assigned token source (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Token' 'Breach'?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long a technical visual error exists before the masterfully configured 'Linter' flags the anomaly.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Taxonomies' logic technically occurs when a designer masterfully uses 'Business Terminology' while the technical engineering system masterfully masterfully enforces 'Technical Slang' for tokens.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Style' 'Optimization' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical business units with technically high 'Token Disconnect' automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technicaly generating 'Token Documentation' based on masterfully tracked metadata"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' in token design?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Reference reusability', 'MTTR for recent style bugs', 'Consistency stability', and 'Identity integrity maturity'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Failures' (MTBSF) in token platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the token protocol baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Token Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Token' 'Analytics' for design leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical components with the highest 'Operational Waste' (Silent tokens) automatically",
+      "B": "Predicting future 'Storage' needs based on historical growth in technical session data",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Accessibility Blindspots' in un-vetted technical style segments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Design Token Registry?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a style update (the pipeline script) is isolated from the service 'What' (the visual value), allowing for central masterfully updated standards.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'System' 'Technical' 'Debt' in an enterprise environment?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated token versions and manual CSS workarounds, which makes the product technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a lead reports '100% Token Readiness' while the internal team is aware that 'Branch B' is technically suffering from reference drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Token' 'Design' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Architecture Policy' (e.g. Mandatory Token usage) via automated compliance linters",
+      "B": "Accelerating 'App Onboarding' through standardized Token Library Blueprints",
+      "C": "Ensuring 'Systemic' integrity for global interaction logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Resiliency' orchestration in a Token squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted Token Modules' and 'Telemetry Sinks' so local units can manage their own technical identity health without manual roadblocks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Token' 'Success' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Interactive' failures and resets, identifying an unstable technical environment or masterfully inconsistent design logic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in token leadership refers to a manager giving a 'Design Lead' a test machine that technicaly lacks the masterfully required DCI-P3 color gamut.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Tokens? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Style' waste via automated auditing",
+      "B": "Predicting future market 'No-Code Tooling' needs based on technical adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Token Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in token automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful structural logic state (like a proven Dark Mode pattern) from one site and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a technical token fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a structural fix being committed until 'Automated Smoke Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Static-Asset' requirements for a 2026 'Cloud-Native' interaction environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Token' 'Design' 'Succession' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Identity Health",
+      "B": "Principal Interaction Architect",
+      "C": "Lead Regulatory Transit Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Token squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Finding Sinks', 'Organization Permissions', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Token' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Snapshot' runs where the organization's technical design logic masterfully matched the masterfully expected behavioral outcome without manual correction.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Token Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Tokens? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded instances) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global regional centers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Token Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' technical definitions masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Registry RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in token platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the design platform baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IT leadership occurs when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Performance Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping component templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' technical hardware"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Token' 'Support' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a monitoring control (the session config) is isolated from the visual 'What' (the branding target), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Telemetry' 'Failure' in monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated technical sensor going 'Offline' until the 'Log Platform' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead masterfully enforces 2010 'Signature-only' models to manage a 2026 'Experience-Edge' token environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Token' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Connectivity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Identity' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Symbols, Style Audits, Extended Variables, and Secret Managers to ensure a seamless and safe service release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP) in design?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant skeletal control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one complex token simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded subnets) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Design Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Design Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' for design platforms? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Token Training' spend with 'MTTR' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Tokens?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major interactive strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global multi-entity brand consolidation, how should a Principal Architect technically model 'Token Collision' to predict the impact of merging two disparate JSON schemas into a unified 'Universal Token Fabric'?",
+    "options": {
+      "A": "By assuming a flat 20% manual overwrite rate for every brand-specific primitive strictly.",
+      "B": "By utilizing 'Relational Schema Mapping' to calculate the delta between token taxonomies and applying a stochastic model to determine 'Namespace Conflict' probability.",
+      "C": "By limiting the number of semantic aliases to exactly 50 to prevent metadata overhead strictly.",
+      "D": "By requiring a manual board-level signature for every change in the primary color-base registry."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Token' 'Decoupling' refers to the technical practice of isolating 'Visual Intent' from 'Platform Implementation' via a headless translation layer to ensure that a brand pivot (cause) does not systemically force a manual re-touching of the production component code (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a Design Systems Director to predict the 'FinOps ROI' of shifting from 'Static Hardcoded CSS' to a 'Token-Native CI/CD Pipeline' for a petabyte-scale SaaS ecosystem?",
+    "options": {
+      "A": "Probabilistic Analysis of 'Maintenance Labor' reduction vs. the fixed technical amortization of building a headless transformer and automated compliance linter.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Token Arbitrage' during an international M&A involving the merger of a firm using 'Tailwind-Native' tokens and a firm using 'W3C-Draft-Standard' tokens?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Token Archetypes' into a unified 'Design Mesh' that technically satisfies the security compliance and MTTR requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live token-sync monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Token' 'Splicing' (Dynamic Theming Injection) and how does it technically enable 'Regional Resilience' during a rolling blue-green deployment of a core brand asset service?",
+    "options": {
+      "A": "When an employee physically routes support calls to a different country.",
+      "B": "A technical design pattern where the application masterfully manages 'Theme-State' via mapped triggers, technically allowing for an immediate shift to fallback brand tokens without re-deploying the binary (effect).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the interaction specification logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'High-Velocity' marketing token policy is technically applied to a 'High-Precision' system (e.g. medical instrumentation), leading to systemic 'Contrast Failure' and operator risk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Token' 'Chaos' (injecting randomized 'Value Jitter' into a sandbox registry) to verify if the 'Automated Linter' technically maintains 'A11Y Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Style Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Value' 'Contagion' and its relation to 'Reference Dependency' exhaustion in a massive 10,000-token design ecosystem?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flawed update to a core 'Global Primitive' (cause) masterfully triggers a surge in invalid aliases across 100+ platforms, resulting in a systemic 'Build Break' that technically halts the release (effect).",
+      "C": "A specialized tool for measuring light levels in the design studio.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Token Mesh' ROI calculations for a strategic shift to 'Platform-Agnostic' token management? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Waste TCO' by automatically identifying and masterfully purging 90% of unused stylistic aliases",
+      "B": "Financial savings from 'QA' labor reclamation due to 100% verified 'Design-to-Production' token mapping",
+      "C": "The value of 'Strategic Integrity' gained through 100% verified contrast compliance across all automated exports",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Systems Leadership level ensures that 'Developers' can flag 'Technical Debt in the Style Dictionary' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Cross-Platform Token Translation' design for a 1,000,000-variation personalized product suite?",
+    "options": {
+      "A": "The physical weight of the 'Atomic Design' book.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'JSON data' vs. anomalous 'CSS specificity collisions' in legacy browsers) into a cohesive 'Pipeline Failure' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Style' 'Splicing' logic during a high-throughput multi-region render event?",
+    "options": {
+      "A": "Breaking a physical router into pieces.",
+      "B": "The process of masterfully isolating 'Layout-Critical Tokens' (Dimensions) from 'Purely Aesthetic Tokens' (Colors) on dedicated processing tiers to ensure 'UI Accessibility' during information saturation.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Visual Dampening' during a suspected 'Rendering Regression' on a core global application infrastructure?",
+    "options": {
+      "A": "Waiting for the CSS to physically break on-screen before acting.",
+      "B": "Immediately initiating a 'System-Only' token policy and technically diverting high-bitrate visual traffic to a 'Secondary-Tier' before the client engine masterfully enters a 'Style-Sheet-Starvation' state.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a system acquisition often result in 'System Rejection', where the acquired firm's developers find ways to 'Side-load' personal variables to bypass parent firm's 'Token-Strict' architecture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Succession' 'Calibrations' in a Design Systems team? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Generative-Token-Engineering' and 'Spatial-Sizing' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the design team",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Systems Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Design Token Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Token Strategy' itself (e.g. why we use 'Deep Aliasing' for a distributed team) is the cause of systemic failure, rather than just fixing a single 'Wrong Hex Code'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Global Design Ops?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Token Registry API' that technically has zero redundant regional endpoints.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Token Ops occurs when a firm continues to rely on 'Manual CSS Overrides' in 2026, despite modern business requirements necessitating 'API-Native' visual fabrics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Token' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Stylistic Spend (RAROSS)",
+      "B": "Percentage of 'Business Critical' flows with 100% verified 'Idempotency' in token-to-code mapping",
+      "C": "Velocity of 'Hardcoded Asset' retirement across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Manual-to-Automated' token transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the design studio.",
+      "B": "The risk that long-tenured 'Lead Designers' will block 'Programmatic Logic' adoption to protect their manual 'Art-Direction-Gatekeeping' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in a Design Token platform?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of business stability before a major architecture or strategy-alignment error occurs in the visual stack.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a Head of Systems demands 'Zero Styling Drift' while the Board only rewards the team for '100% Feature Output Growth' (ignoring consistency debt).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Insight' 'Orchestration' for Tokens? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Token Interaction Patterns' with potential 'Intellectual-Property' data exfiltration attempts",
+      "B": "Automatically identifying 'Alias Owner' gaps in real-time as a new Product Unit is provisioned",
+      "C": "Guaranteed to replace all human Systems leads",
+      "D": "Analyzing global metadata to predict 'Version Reconvergence' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Design' 'Token' 'Ecosystem' 'Architecture' (DTEA) for a Principal Lead?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Headless Registry Hubs, Multi-region Translation Meshes, Identity Fabrics, and Real-time Visual Telemetry into a single 'Unified Digital Fabric'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in Token M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Variable' logic matches the parent company's 'Aesthetic Standard' before registry merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Global Consistency' from a newly hired team that requires 12 months of 'Historic Path Mapping' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Style' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of path integrity for Regulatory auditors",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residence' rules are enforced during automated multi-region replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Token Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Execution Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in legacy tokens?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Stylistic' vulnerability release and the Architect officially flagging the total internal strategy exposure count based on version scans.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Token Readiness' to the board while the internal team is aware that 'Segment B' is technically suffering from reference drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Strategy' 'APIs' for Tokens? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Token Write' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Style Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Visual Audit' data with 'Corporate Risk' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global design region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Monitoring Sinks, Token-tags, and Encryption Proxies to stabilize a new offshore design studio in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Token Architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new stylistic data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed legacy variables after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Token' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Design Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Raw style logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT) post-major-visual-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile design system failure (e.g. global asset sync outage) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Token strategy refers to an organization promising 'Zero Latency' while utilizing a 'Low-Budget' sequential release model for high-stakes brand assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Roles' in Design Systems? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Strategic Resilience",
+      "B": "Chief Systems Architect",
+      "C": "Director of Visual Telemetry",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global design firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Registry Uptime', 'MTTI for logic findings', 'Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Systems team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Intent-Native' design environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Verification' 'Challenges' in Token Design? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping hardware artifacts updated with rapidly changing OS versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Design Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Systems Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Style Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired circuit within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Strategic Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Systems Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Platform Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Token Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Token Model' can be 'Lifted' from one project and applied to another to ensure global parity.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated security service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Strategy Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for IT Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' Systems model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Registry Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new performance vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Systems Audits' are planned annually, but 'Global Threat TTPs' update every 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Systems Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' systems culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic strategy shifts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits for Systems?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systems' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named Systems.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'AIOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic failure until the organization's 'Operating Margin' returns to its target levels through style process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic variable grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Token' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

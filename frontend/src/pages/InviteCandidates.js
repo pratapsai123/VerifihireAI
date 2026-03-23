@@ -106,10 +106,6 @@ export default function InviteCandidates() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [isAutoSchedule, setIsAutoSchedule] = useState(false);
-  const [interviewerName, setInterviewerName] = useState('');
-  const [interviewerEmail, setInterviewerEmail] = useState('');
-  const [showAddInterviewerForm, setShowAddInterviewerForm] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
   const fileRef = useRef(null);
 
   // Scheduling / validity controls (applied to all candidates in this batch)
@@ -164,43 +160,8 @@ export default function InviteCandidates() {
         
         setTeamMembers(interviewers);
       }
-
-      // Fetch current user's profile to know the company domain
-      const storedEmail = localStorage.getItem('userEmail') || localStorage.getItem('email');
-      if (storedEmail) {
-        const pResp = await axios.get(`${API_BASE_URL}/profile/?email=${storedEmail}`);
-        setUserProfile(pResp.data);
-      }
     } catch (err) {
       console.error('Error in fetchTeamMembers metadata:', err);
-    }
-  };
-
-  const handleAddInterviewer = async () => {
-    if (!interviewerName || !interviewerEmail) {
-      alert('Please provide both name and email');
-      return;
-    }
-    try {
-      const resp = await axios.post(`${API_BASE_URL}/users/team-members/add/`, {
-        name: interviewerName,
-        email: interviewerEmail
-      });
-      if (resp.data.member) {
-        // If already in list, don't double add
-        if (!teamMembers.some(m => m.id === resp.data.member.id)) {
-          setTeamMembers(prev => [...prev, resp.data.member]);
-        }
-        // Auto select the newly added one
-        if (!selectedInterviewerIds.includes(resp.data.member.id)) {
-          setSelectedInterviewerIds(prev => [...prev, resp.data.member.id]);
-        }
-        setInterviewerName('');
-        setInterviewerEmail('');
-        setShowAddInterviewerForm(false);
-      }
-    } catch (err) {
-      alert(err.response?.data?.error || 'Failed to add interviewer');
     }
   };
 
@@ -882,59 +843,9 @@ export default function InviteCandidates() {
             <div className="modal-body">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                 <p style={{ margin: 0, color: '#6b7280', fontSize: '0.85rem' }}>
-                  Select or add interviewers for this assessment.
+                  Select interviewers for this assessment.
                 </p>
-                <button 
-                  onClick={() => setShowAddInterviewerForm(!showAddInterviewerForm)}
-                  style={{ 
-                    padding: '6px 12px', 
-                    borderRadius: '6px', 
-                    border: '1px solid #4318FF', 
-                    color: '#4318FF', 
-                    background: 'white', 
-                    fontSize: '0.8rem', 
-                    fontWeight: '600',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {showAddInterviewerForm ? '- Close Form' : '+ Add Interviewer'}
-                </button>
               </div>
-
-              {showAddInterviewerForm && (
-                <div style={{ background: '#f8fafc', padding: '15px', borderRadius: '10px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
-                  <div style={{ marginBottom: '10px', fontSize: '0.75rem', color: '#475569', fontWeight: '500' }}>
-                    Requirement: Must use official <strong>@{userProfile?.company?.domain || 'company'}</strong> email.
-                  </div>
-                  <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ flex: 1 }}>
-                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: '#475569', marginBottom: '4px' }}>Name <span style={{ color: '#ff4d4f' }}>*</span></label>
-                      <input 
-                        placeholder="e.g. John Smith" 
-                        value={interviewerName} 
-                        onChange={e => setInterviewerName(e.target.value)}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '0.85rem' }}
-                      />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: '#475569', marginBottom: '4px' }}>Work Email <span style={{ color: '#ff4d4f' }}>*</span></label>
-                      <input 
-                        placeholder="john@company.com" 
-                        value={interviewerEmail} 
-                        onChange={e => setInterviewerEmail(e.target.value)}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '0.85rem' }}
-                      />
-                    </div>
-                  </div>
-                  <button 
-                    onClick={handleAddInterviewer}
-                    className="btn-primary" 
-                    style={{ width: '100%', padding: '8px', fontSize: '0.85rem' }}
-                  >
-                    Save Interviewer
-                  </button>
-                </div>
-              )}
               
               <div style={{ maxHeight: '250px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px', background: '#fff' }}>
                 {teamMembers.length > 0 ? (
@@ -972,8 +883,7 @@ export default function InviteCandidates() {
                 ) : (
                   <div style={{ padding: '40px 20px', textAlign: 'center' }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '10px' }}>👥</div>
-                    <div style={{ color: '#9ca3af', fontSize: '0.9rem' }}>No interviewers added yet.</div>
-                    <div style={{ color: '#9ca3af', fontSize: '0.8rem' }}>Click "+ Add Interviewer" to start.</div>
+                    <div style={{ color: '#9ca3af', fontSize: '0.9rem' }}>No interviewers available.</div>
                   </div>
                 )}
               </div>

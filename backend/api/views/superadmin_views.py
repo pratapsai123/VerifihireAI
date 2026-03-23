@@ -1,4 +1,4 @@
-from ._imports import *
+from .._imports import *
 
 
 def _require_application_admin(request):

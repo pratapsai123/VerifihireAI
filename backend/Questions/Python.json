@@ -27,7 +27,10 @@
         "C": "//",
         "D": "/* */"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python uses indentation to define blocks of code instead of curly braces {}.",
@@ -55,7 +58,10 @@
         "C": "2var",
         "D": "my-var"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python is a case-sensitive language.",
@@ -119,7 +125,10 @@
         "C": "_private",
         "D": "first_name"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The input() function always returns the data as a string.",
@@ -147,7 +156,10 @@
         "C": "array",
         "D": "integer"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Indentation is optional in Python if you use semicolons.",
@@ -203,7 +215,10 @@
         "C": "=>",
         "D": "=<"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python strings can be enclosed in either single quotes or double quotes.",
@@ -257,7 +272,10 @@
         "C": "^",
         "D": "^^"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python supports complex numbers as a built-in data type.",
@@ -285,7 +303,10 @@
         "C": "int",
         "D": "dictionary"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The operator == checks for identity, while is checks for equality.",
@@ -347,7 +368,10 @@
         "C": "is",
         "D": "exists"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python 3 uses Unicode for its string representation by default.",
@@ -375,7 +399,10 @@
         "C": "% (printf style)",
         "D": "concat()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: String slicing s[::-1] effectively reverses a string.",
@@ -421,7 +448,10 @@
         "C": "isint()",
         "D": "isval()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: int(\"10.5\") will successfully convert the string to the integer 10.",
@@ -485,7 +515,10 @@
         "C": ".add()",
         "D": ".push()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A Dictionary key must be of an immutable type (like string or tuple).",
@@ -513,7 +546,10 @@
         "C": "It is indexed.",
         "D": "It is defined with ()."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: list.pop() removes and returns the first item in a list.",
@@ -541,7 +577,10 @@
         "C": "list1.join(list2)",
         "D": "list1.merge(list2)"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Tuples are defined using square brackets [].",
@@ -605,7 +644,10 @@
         "C": "L2 = L1",
         "D": "L2 = L1.clone()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A set can contain a list as an element.",
@@ -633,7 +675,10 @@
         "C": ".reset()",
         "D": "dict_name = {}"
       },
-      "answer": "A, D"
+      "answer": [
+        "A",
+        "D"
+      ]
     },
     {
       "question": "True or False: Slicing a list returns a new list object.",
@@ -669,7 +714,10 @@
         "C": "list",
         "D": "dict"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the output of len({\"A\": 1, \"B\": 2, \"A\": 3})?",
@@ -715,7 +763,10 @@
         "C": "do-while",
         "D": "foreach"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The range(5) function generates numbers from 0 to 5 inclusive.",
@@ -761,7 +812,10 @@
         "C": "catch",
         "D": "throw"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The finally block runs only if an exception occurs.",
@@ -807,7 +861,10 @@
         "C": "NullPointerError",
         "D": "LogicError"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A function can access a global variable without the global keyword if it is only reading the value.",
@@ -881,7 +938,10 @@
         "C": "Functions using return list()",
         "D": "Using gen_func()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python supports 'Duck Typing'.",
@@ -945,7 +1005,10 @@
         "C": "Compilation",
         "D": "Interpretation"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Attributes defined inside __init__ are class-level attributes shared by all instances.",
@@ -973,7 +1036,10 @@
         "C": "__create__",
         "D": "__delete__"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Private variables in Python are defined by prefixing the name with two underscores (e.g., __name).",
@@ -1037,7 +1103,10 @@
         "C": "Encrypting attributes.",
         "D": "Speeding up math operations."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python's MRO stands for Method Resolution Order.",
@@ -1083,7 +1152,10 @@
         "C": "f.scan()",
         "D": "f.get()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Closing a file manually using f.close() is not necessary if you use the with statement.",
@@ -1111,7 +1183,10 @@
         "C": "os.delete()",
         "D": "os.move()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The pickle module is used for serializing and de-serializing Python objects.",
@@ -1175,7 +1250,10 @@
         "C": "venv-create",
         "D": "pyenv-new"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The __pycache__ folder contains bytecode compiled versions of your imported modules to speed up loading.",
@@ -1203,7 +1281,10 @@
         "C": "using math",
         "D": "include math"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The sys.argv list in the sys module contains command-line arguments passed to a script.",
@@ -1249,7 +1330,10 @@
         "C": "numeric",
         "D": "calculator"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The copy module is used to create 'shallow' or 'deep' copies of objects.",
@@ -1313,7 +1397,10 @@
         "C": "for i in range(d):",
         "D": "for val in d.all():"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: An 'Iterator' is an object that contains a countable number of values and can be traversed.",
@@ -1341,7 +1428,10 @@
         "C": "each()",
         "D": "loop()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The zip() function combines elements from multiple iterables into tuples.",
@@ -1405,7 +1495,10 @@
         "C": "They allow for faster index-based access.",
         "D": "They can be sorted in-place."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The @property decorator is used to define 'getter' methods for class attributes.",
@@ -1433,7 +1526,10 @@
         "C": "@function",
         "D": "@global"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A 'Closure' is a function object that remembers values in enclosing scopes even if they are not present in memory.",
@@ -1497,7 +1593,10 @@
         "C": "Scipy",
         "D": "PyTest"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Scikit-learn is a popular library for Machine Learning in Python.",
@@ -1533,7 +1632,10 @@
         "C": "Pandas",
         "D": "NumPy"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The Requests library is used to send HTTP requests easily.",
@@ -1587,7 +1689,10 @@
         "C": "Using as many global variables as possible.",
         "D": "Writing all code in a single line."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: is checks if two variables point to the same object in memory, while == checks if the values are equal.",
@@ -1633,7 +1738,10 @@
         "C": "reversed(my_list)",
         "D": "my_list.flip()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: __name__ == \"__main__\" is used to prevent code from executing when a file is imported as a module.",
@@ -1679,7 +1787,10 @@
         "C": "test-it",
         "D": "pycheck"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: nonlocal is used to declare that a variable inside a nested function is not local to it.",
@@ -1725,7 +1836,10 @@
         "C": "string.join()",
         "D": "string.split()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The set data structure automatically removes duplicate items.",
@@ -1769,7 +1883,10 @@
         "C": "webbrowser",
         "D": "html-parser"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Python's int type has arbitrary precision (it can store very large numbers limited only by memory).",
@@ -1805,7 +1922,10 @@
         "C": "d = []",
         "D": "d = set()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: map(func, iterable) returns a list by default.",

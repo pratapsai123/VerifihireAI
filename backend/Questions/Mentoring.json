@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Mentoring", 
+  "questions": [
+    {
+    "question": "What is the primary goal of a mentoring relationship?",
+    "options": {
+      "A": "To provide a strict list of tasks for the employee to complete daily.",
+      "B": "To support the professional and personal growth of a mentee through guidance and shared experience.",
+      "C": "To act as a physical bodyguard for the mentee in the office.",
+      "D": "To automatically write the mentee's performance review."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Mentoring is generally a long-term relationship focused on overall development, whereas coaching is often short-term and task-oriented.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a key responsibility of a mentee?",
+    "options": {
+      "A": "Waiting for the mentor to do all the work.",
+      "B": "Taking initiative, setting goals, and being open to feedback.",
+      "C": "Buying physical snacks for the mentor every day.",
+      "D": "Increasing the frame rate of the mentor's computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Active Listening' involve in a mentoring session?",
+    "options": {
+      "A": "Listening to music while the mentee speaks.",
+      "B": "Fully concentrating, understanding, responding, and remembering what the mentee says.",
+      "C": "Interrupting the mentee to show how much you know.",
+      "D": "Counting the number of words the mentee uses per minute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common phases in a mentoring relationship? (Select all that apply)",
+    "options": {
+      "A": "Preparation (Getting to know each other)",
+      "B": "Negotiation (Setting expectations and goals)",
+      "C": "Enabling Growth (The core work phase)",
+      "D": "Manufacturing physical office supplies"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Reverse Mentoring'?",
+    "options": {
+      "A": "A mentor yelling at a mentee to go backward.",
+      "B": "A relationship where a junior employee mentors a senior leader, often on topics like technology or current trends.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup SQL logs in reverse order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A mentor should always give the mentee the exact answer to their problems rather than helping them find the solution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which quality is most important for a successful mentor?",
+    "options": {
+      "A": "The ability to run very fast.",
+      "B": "Empathy, patience, and a willingness to share knowledge.",
+      "C": "Owning the most expensive car in the parking lot.",
+      "D": "Knowing how to use Photoshop perfectly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of mentoring, what is a 'SMART' goal?",
+    "options": {
+      "A": "A goal that is physically smart.",
+      "B": "Specific, Measurable, Achievable, Relevant, and Time-bound.",
+      "C": "A goal written by an AI.",
+      "D": "A way to increase the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Mentoring relationships can be either formal (structured by the company) or informal (developed naturally).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Mentoring Agreement'?",
+    "options": {
+      "A": "To create a physical barrier between offices.",
+      "B": "To define the frequency of meetings, goals, and confidentiality rules for the relationship.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of being a mentor? (Select all that apply)",
+    "options": {
+      "A": "Refining leadership and communication skills",
+      "B": "Gaining new perspectives from the mentee",
+      "C": "Getting a 50% discount on all physical goods",
+      "D": "Contributing to the organization's culture"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Confidentiality' mean in mentoring?",
+    "options": {
+      "A": "Sharing everything the mentee says with their direct manager.",
+      "B": "Keeping the details of the mentoring discussions private between the mentor and mentee.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A mentee should only have one mentor during their entire career.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constructive Feedback'?",
+    "options": {
+      "A": "Constructing a physical wall of feedback.",
+      "B": "Specific, actionable information intended to help the mentee improve without being discouraging.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Self-Directed' learning in mentoring? (Select all that apply)",
+    "options": {
+      "A": "The mentee identifying their own learning gaps",
+      "B": "The mentee seeking out resources without being told",
+      "C": "The mentor doing the homework for the mentee",
+      "D": "Taking ownership of one's own professional path"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary role of 'Psychological Safety' in a mentoring relationship?",
+    "options": {
+      "A": "Ensuring the server room is physically safe.",
+      "B": "Creating an environment where the mentee feels safe to take risks and admit mistakes without fear of judgment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Peer Mentoring involves two individuals at similar levels in an organization supporting each other's growth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which activity should occur during the 'First Meeting' of a mentor and mentee?",
+    "options": {
+      "A": "The mentor should assign 50 hours of work.",
+      "B": "Establishing rapport and discussing personal and professional backgrounds.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the brightness of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Development Plan' in mentoring?",
+    "options": {
+      "A": "A physical map of the office building.",
+      "B": "A documented strategy outlining the steps, resources, and timeline needed to reach a mentee's goals.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users in a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the mentor thinks they are there to give career advice, but the mentee wants technical training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Verbal' communication cues to watch for in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Body language",
+      "B": "Eye contact",
+      "C": "Tone of voice",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Empowerment' in a mentoring context?",
+    "options": {
+      "A": "Giving a person physical power cables.",
+      "B": "Encouraging the mentee to take control of their own decisions and growth.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Mentoring Log'?",
+    "options": {
+      "A": "A log made of actual wood in the office.",
+      "B": "A record of the dates, topics discussed, and action items from each mentoring session.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Virtual Mentoring (using tools like Zoom or Slack) is considered an ineffective substitute for in-person mentoring.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Closure' phase of a mentoring relationship?",
+    "options": {
+      "A": "Closing the physical door to the office.",
+      "B": "The formal end of the relationship, where progress is reviewed and future independent steps are discussed.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Sponsoring' vs 'Mentoring'?",
+    "options": {
+      "A": "Mentors talk TO you; Sponsors talk ABOUT you (advocating for your promotion).",
+      "B": "Sponsors are always older than mentors.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Self-Awareness' is a critical trait for a mentor to understand their own biases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to track a mentee's 'Skills Gap'?",
+    "options": {
+      "A": "A hammer.",
+      "B": "A skills matrix or self-assessment survey.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Open-Ended' questioning?",
+    "options": {
+      "A": "Questions that can only be answered with 'Yes' or 'No'.",
+      "B": "Questions that require a detailed response, encouraging the mentee to think critically.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Group Mentoring'?",
+    "options": {
+      "A": "One mentor working with several mentees at the same time.",
+      "B": "A physical group of people sitting in a circle.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A mentor should provide 'Feedback' immediately after a mistake is made, regardless of the setting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Mentoring' pitfalls? (Select all that apply)",
+    "options": {
+      "A": "Creating a 'Mini-Me' instead of encouraging independent thought",
+      "B": "Lack of consistency in meeting schedules",
+      "C": "Breaking confidentiality",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Soft Skill' development in mentoring?",
+    "options": {
+      "A": "Developing soft physical objects.",
+      "B": "Improving interpersonal skills like communication, time management, and emotional intelligence.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Milestone' (MTTM)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration for a mentee to achieve a specific professional goal defined in the mentoring agreement.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in mentoring occur when the mentor and mentee have different values regarding work-life balance or hierarchy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Mentoring tools? (Select all that apply)",
+    "options": {
+      "A": "Chronus",
+      "B": "MentorcliQ",
+      "C": "Together Platform",
+      "D": "Adobe Premiere"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Networking' in a professional development context?",
+    "options": {
+      "A": "Connecting computers with physical wires.",
+      "B": "Building relationships with other professionals to share information and opportunities.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Resource' 'Sharing' in mentoring?",
+    "options": {
+      "A": "Sharing a physical office chair.",
+      "B": "Providing the mentee with books, articles, contacts, or internal documents to aid their learning.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in mentoring occurs when the organization promises 5 hours of mentoring per week but the mentors are too busy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Mentor' 'Matching'? (Select all that apply)",
+    "options": {
+      "A": "Using algorithms to pair mentors and mentees based on skills and interests",
+      "B": "Manually picking names from a hat",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Reducing administrative manual effort in large organizations"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Shadowing'?",
+    "options": {
+      "A": "Following a person in a dark room.",
+      "B": "When a mentee observes a mentor performing their daily tasks to learn through direct observation.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Succession' 'Planning'?",
+    "options": {
+      "A": "Planning a physical party for the successor.",
+      "B": "Identifying and developing internal people with the potential to fill key business leadership positions in the future.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentor takes 2 weeks to respond to a simple question, causing the mentee to lose momentum.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Mentee' 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Being open to change",
+      "B": "Having clear professional goals",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Being willing to accept critical feedback"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Implicit' 'Bias' in mentoring?",
+    "options": {
+      "A": "Unconscious attitudes or stereotypes that affect our understanding and actions toward others.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Cross-Functional' Mentoring?",
+    "options": {
+      "A": "Mentoring across two different physical buildings.",
+      "B": "A relationship where the mentor and mentee are from different departments (e.g., Marketing and Engineering).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a mentor tries to use a very formal communication style with a mentee who prefers casual Slack messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Professional' 'Development' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Certificates of completion",
+      "B": "Updated Resumes",
+      "C": "The SQL query parser",
+      "D": "Individual Development Plans (IDP)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Micro-Mentoring'?",
+    "options": {
+      "A": "Mentoring using a physical microscope.",
+      "B": "Brief, task-specific interactions or advice sessions rather than a long-term relationship.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Feedback' (MTTF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a mentee's request for advice and the mentor's response.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the mentoring program manager doesn't track if the meetings are actually happening.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' Mentoring? (Select all that apply)",
+    "options": {
+      "A": "Finding a mentor outside of your own company",
+      "B": "Participating in industry-wide mentoring programs",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Paying for a professional career coach"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Situational' Mentoring?",
+    "options": {
+      "A": "Mentoring that only happens in specific physical situations.",
+      "B": "Providing guidance tailored to a specific immediate problem or event.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Mentor' 'Onboarding'?",
+    "options": {
+      "A": "Putting the mentor on a physical boat.",
+      "B": "Training mentors on how to effectively guide and support their mentees before the program begins.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in mentoring refers to a mentor trying to teach a mentee using a Mac when the mentee only has a PC.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' Mentoring Goals? (Select all that apply)",
+    "options": {
+      "A": "Reducing employee turnover (Retention)",
+      "B": "Improving diversity in leadership",
+      "C": "Buying physical snack for the office",
+      "D": "Accelerating leadership development"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Emotional Intelligence' (EQ)?",
+    "options": {
+      "A": "The intelligence of a person named EQ.",
+      "B": "The ability to identify, understand, and manage one's own emotions and the emotions of others.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Retention' 'Rate' of mentees?",
+    "options": {
+      "A": "The percentage of employees in the mentoring program who remain with the company compared to those who are not in the program.",
+      "B": "The rate at which physical papers are lost.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects a promotion immediately after 1 mentoring session.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Mentoring' 'Surveys'? (Select all that apply)",
+    "options": {
+      "A": "Regularly sending feedback forms to participants",
+      "B": "Identifying program satisfaction trends",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Enabling continuous program improvement"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Executive' Mentoring?",
+    "options": {
+      "A": "Mentoring a person name Executive.",
+      "B": "High-level development focused specifically on C-suite leaders and senior directors.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Goal' (MTTG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration of the mentoring relationship before the mentee reaches their primary stated goal.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a mentor tries to teach a mentee about office culture while the company is 100% remote.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Mentoring 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "HR Director",
+      "B": "Chief Learning Officer (CLO)",
+      "C": "Program Coordinator",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Scalability'?",
+    "options": {
+      "A": "Building a physical scale to weigh the mentor.",
+      "B": "The ability to expand a mentoring program to hundreds or thousands of participants across an organization efficiently.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'GROW' model is a popular framework in mentoring. What does the 'O' in GROW specifically address?",
+    "options": {
+      "A": "Obstacles: Identifying the physical barriers in the office.",
+      "B": "Options: Brainstorming possible strategies and courses of action to achieve the goal.",
+      "C": "Objectives: A secondary list of smaller tasks.",
+      "D": "Organization: How the mentor's desk is arranged."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Co-mentoring' relationship, both parties take turns acting as the mentor and the mentee, focusing on mutual skill exchange.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Johari Window' and its application in mentoring?",
+    "options": {
+      "A": "A physical window in the HR department used for interviews.",
+      "B": "A psychological tool used to help mentees understand their relationship with themselves and others by uncovering 'Blind Spots'.",
+      "C": "A specialized software for measuring the thermal output of servers.",
+      "D": "A way to count the number of promotions in a quarter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Socratic Questioning' in a mentoring context?",
+    "options": {
+      "A": "Giving the mentee a physical book about Greek philosophy.",
+      "B": "Asking a series of disciplined questions to help the mentee explore complex ideas and uncover their own underlying assumptions.",
+      "C": "Interrupting the mentee to provide a 20-minute lecture.",
+      "D": "Asking only 'Yes' or 'No' questions to save time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When a mentee experiences 'Imposter Syndrome', what is the mentor's most effective technical response?",
+    "options": {
+      "A": "Agreeing that the mentee might not be qualified for the role.",
+      "B": "Helping the mentee reframe their achievements through objective data and normalizing the feeling as part of growth.",
+      "C": "Buying the mentee a physical trophy to boost their ego.",
+      "D": "Telling the mentee to 'just work harder' to ignore the feeling."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Developmental' 'Stages' occur when a mentor uses a 'Hands-off' approach with a mentee who is in the early 'Beginner' stage and needs more structure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Conflict Resolution' strategies within a mentoring relationship? (Select all that apply)",
+    "options": {
+      "A": "Revisiting the original Mentoring Agreement to clarify expectations",
+      "B": "Openly discussing the 'Elephant in the Room' using 'I' statements",
+      "C": "Ending the relationship immediately without a closing session",
+      "D": "Involving a neutral third-party program coordinator if the conflict persists"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the technical significance of 'Sponsorship' compared to 'Mentoring' for career advancement?",
+    "options": {
+      "A": "Mentors provide physical snacks; Sponsors provide physical money.",
+      "B": "Sponsors have the organizational power to actively place a protege in high-visibility roles and advocate for their promotion.",
+      "C": "Sponsors are only found in sports teams, not business.",
+      "D": "Mentors are required by law, whereas sponsors are optional."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cross-Cultural' Mentoring logic?",
+    "options": {
+      "A": "Mentoring a person who lives in a different physical building.",
+      "B": "Navigating differences in communication styles, hierarchy perceptions, and feedback norms across diverse backgrounds.",
+      "C": "A specialized software for translating emails automatically.",
+      "D": "Increasing the frame rate of a video conference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A mentor should avoid sharing their own professional failures to maintain an image of perfect authority.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Succession' 'Bench' 'Strength' in a talent development context?",
+    "options": {
+      "A": "The physical strength of the office chairs.",
+      "B": "The quantity and quality of internal candidates who are ready to move into key leadership roles immediately.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Mentoring' behavior involves the mentor introducing the mentee to key stakeholders and industry experts?",
+    "options": {
+      "A": "Coaching",
+      "B": "Networking Facilitation",
+      "C": "Unit Testing",
+      "D": "Static Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Cognitive' 'Empathy' mean for a mentor?",
+    "options": {
+      "A": "Feeling the exact same emotions as the mentee.",
+      "B": "The ability to intellectually understand the mentee's perspective and mental state without necessarily sharing their emotions.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "A way to count the number of users in a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the organization provides mentors with 50 mentees each, leading to a collapse in the quality of guidance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Professional' 'Boundary' violations in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Asking the mentee to perform personal errands for the mentor",
+      "B": "Discussing the mentee's private health information with colleagues",
+      "C": "Setting a regular bi-weekly meeting schedule",
+      "D": "Borrowing money from the mentee"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Neurodiverse' Mentoring and why does it require specific technical adjustments?",
+    "options": {
+      "A": "Mentoring a person name Neurodiverse.",
+      "B": "Tailoring communication and feedback to support individuals with ADHD, Autism, or Dyslexia by providing clear, written instructions and reducing sensory distractions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Skills' 'Acquisition' 'Velocity'?",
+    "options": {
+      "A": "The speed at which a person runs in the office.",
+      "B": "A metric tracking how quickly a mentee masters a specific set of professional competencies through the mentoring program.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Learning' 'Styles' occur when a mentor uses only verbal instructions for a mentee who learns best through hands-on practice (Kinesthetic).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific activity in 'Professional Development' helps a mentee identify their 'Transferable' skills?",
+    "options": {
+      "A": "Deleting their resume.",
+      "B": "Mapping technical or soft skills from one domain (e.g., teaching) to a new role (e.g., management).",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Relational' 'Mentoring' and how does it differ from 'Functional' mentoring?",
+    "options": {
+      "A": "Functional focuses on tasks; Relational focuses on the mutual growth and interpersonal connection between both parties.",
+      "B": "Functional is for experts; Relational is for beginners.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Relational mentoring requires a physical contract."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Mentoring' 'Program' 'Triage'?",
+    "options": {
+      "A": "Triaging a person named Mentoring.",
+      "B": "The process of identifying and intervening in failing mentoring pairs before the relationship causes damage to either party.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sponsorship' is typically a more private relationship than 'Mentoring', which is often public and structured.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Emotional Intelligence' (EI) domains for a mentor to develop? (Select all that apply)",
+    "options": {
+      "A": "Self-Regulation (Managing your own impulses)",
+      "B": "Social Skill (Managing relationships)",
+      "C": "Physical Strength (Lifting servers)",
+      "D": "Empathy (Understanding others' emotions)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Lateral' Mentoring?",
+    "options": {
+      "A": "Mentoring a person who is physically sitting to your left.",
+      "B": "Developmental support between colleagues at the same level but in different departments to share unique insights.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Promotions' (MTBP) for mentored employees?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A metric used to compare the career progression speed of employees in the mentoring program against those who are not.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in mentoring occur when the mentee values 'High Context' communication (subtle hints) while the mentor uses 'Low Context' (direct and blunt).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Reverse' Mentoring 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "The senior leader must be willing to be vulnerable and learn",
+      "B": "The junior employee should be treated as the expert on the topic",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Setting clear boundaries so the junior employee doesn't feel exploited"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Chemistry' and can it be automated?",
+    "options": {
+      "A": "Mixing actual physical chemicals in the office.",
+      "B": "The interpersonal rapport between a pair; while algorithms can match skills, human chemistry is subjective and often requires initial trial sessions.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Alumni' Mentoring?",
+    "options": {
+      "A": "Mentoring a person named Alumni.",
+      "B": "Leveraging former employees or retired leaders to provide perspective and guidance to current staff.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the mentee believes the mentor will find them a new job, rather than developing the skills to find one themselves.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Mentoring' 'Styles'? (Select all that apply)",
+    "options": {
+      "A": "The Challenger (Pushing the mentee out of their comfort zone)",
+      "B": "The Cheerleader (Providing constant positive reinforcement)",
+      "C": "The Facilitator (Connecting the mentee to resources)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Mentoring' 'ROI'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "Measuring the financial benefit to the company through reduced turnover, lower training costs, and increased productivity of mentored staff.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Engagement' 'Sustainability' metric?",
+    "options": {
+      "A": "The duration and consistency of the mentoring relationship over time, used to identify 'Drop-off' points.",
+      "B": "The sustainability of the physical office building.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentor expects the mentee to master a complex leadership skill after only one 30-minute meeting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Feedback' 'Loops' in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Using 'Pulse Surveys' to check relationship health",
+      "B": "Automatically flagging pairs that haven't met in 30 days",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing sentiment in mentoring communication logs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Asset' 'Inventory'?",
+    "options": {
+      "A": "An inventory of physical assets like books and desks.",
+      "B": "A centralized collection of resources, templates, and training modules available to both mentors and mentees.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Internal' 'Mobility' Support?",
+    "options": {
+      "A": "Helping a person physically move their desk.",
+      "B": "Mentors helping mentees understand different departments to facilitate career moves within the same company.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the mentoring algorithm matches two people based on their 'Zip Code' rather than their 'Skills Gap'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Diversity' and 'Inclusion' in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Deliberately pairing individuals from different demographic groups",
+      "B": "Training mentors on 'Unconscious Bias'",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Using mentoring to break down 'Siloed' departments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentee' 'Proactive' 'Communication'?",
+    "options": {
+      "A": "When the mentee sends an email before they are asked.",
+      "B": "The mentee's responsibility to schedule meetings, send agendas in advance, and follow up on action items.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Feedback' (MTTF) in a structured program?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a mentee submitting a question or work sample and receiving detailed guidance from the mentor.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in mentoring occurs when the business expects a mentor to provide '24/7' availability to the mentee.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Development' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Talent Management Lead",
+      "B": "Department Head",
+      "C": "Learning & Development (L&D) Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Knowledge' 'Silo' 'Breakdown' in mentoring?",
+    "options": {
+      "A": "Breaking down a physical grain silo.",
+      "B": "The process of moving 'tribal knowledge' from senior experts to junior staff through one-on-one relationships.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Professional' 'Development' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how self-sufficient and proactive a mentee has become over the course of the relationship.",
+      "B": "The age of the physical office equipment.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects a response to a Slack message during the mentor's annual vacation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Goal' 'Tracking' benefits? (Select all that apply)",
+    "options": {
+      "A": "Gamifying the achievement of development milestones",
+      "B": "Providing real-time data on program progress to L&D",
+      "C": "Guaranteed to replace all human mentors",
+      "D": "Reducing the manual work of updating progress spreadsheets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Situational' 'Leadership' in mentoring?",
+    "options": {
+      "A": "Leading a person in a specific physical situation.",
+      "B": "Adapting the mentoring style (Directing, Coaching, Supporting, or Delegating) based on the mentee's current competence and commitment.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) a relationship failure?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The duration from when a pair reports a conflict until a program manager intervenes to re-match or resolve the issue.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the mentor records all the meetings but the mentee does not, leading to different perceptions of progress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Mentoring' 'Evaluation' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "360-degree feedback reports",
+      "B": "Skill proficiency change logs",
+      "C": "The SQL query parser",
+      "D": "Promotion tracking spreadsheets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Framework' 'Portability'?",
+    "options": {
+      "A": "Carrying a physical framework in a suitcase.",
+      "B": "The ability to use the same mentoring structures and templates across different business units or global office locations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality' for a mentoring program?",
+    "options": {
+      "A": "A weighted score including participant satisfaction, goal completion rates, and the program's impact on employee retention.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for computer viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a mentor tries to teach a mentee the 1990s 'Top-Down' leadership style while the company has moved to a 'Flat' decentralized model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Super-Mentors' who consistently produce high-performing mentees",
+      "B": "Predicting mentee turnover risk based on engagement levels",
+      "C": "Guaranteed to replace all human HR managers",
+      "D": "Analyzing feedback to identify organizational skill gaps"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a mentoring agenda?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring each meeting focuses on a single, self-contained development objective rather than trying to fix everything at once.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a mentee at risk?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a mentee showing signs of disengagement (e.g., missed meetings) and the program manager receiving a notification.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in mentoring refers to a pair where the mentor wants to use expensive VR headsets for training but the company only provides basic laptops.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Mentoring 'Governance' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Goal Completion Rate",
+      "B": "Participant Satisfaction Score (NPS)",
+      "C": "Mentee Promotion Speed",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A toolkit including initial emails, meeting templates, and goal-setting sheets to quickly launch a new mentoring cycle.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ) in mentoring?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between identifying a skill gap in a mentee and the mentor providing the resources or training to bridge that gap.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects the mentor to solve their physical computer hardware problems immediately.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Mentoring' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Triggering a mentoring invite when an employee hits their 1-year mark",
+      "B": "Syncing mentoring meetings with Microsoft Outlook/Google Calendar",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Updating the HR system when a developmental milestone is reached"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentee' 'Self-Efficiency'?",
+    "options": {
+      "A": "How efficient a person name Mentee is at home.",
+      "B": "The mentee's belief in their own capability to manage their learning process and achieve their goals without constant supervision.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Milestones' (MTBM)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration between the achievement of different developmental goals by a mentee.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in mentoring occurs when the organization promises 'Unlimited Access' to a senior mentor who is already working 60 hours a week.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Strategic Workforce Planning', how does a 'Mentoring Maturity Model' (MMM) assist in risk mitigation?",
+    "options": {
+      "A": "By providing a physical checklist for office safety protocols.",
+      "B": "By evaluating the organization's ability to systematically transfer 'Critical Knowledge' and build internal leadership benches, reducing the impact of key talent attrition.",
+      "C": "By automatically calculating the electricity usage of the HR department.",
+      "D": "By ensuring that every mentor has exactly the same personality type as their mentee."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sponsorship Bias' is a systemic risk where senior leaders predominantly advocate for proteges who share similar backgrounds or demographic traits, often undermining organizational diversity goals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following psychological concepts describes the risk of a mentor unconsciously shaping a mentee to fulfill the mentor's own unachieved professional ambitions?",
+    "options": {
+      "A": "The Pygmalion Effect",
+      "B": "Narcissistic Extension",
+      "C": "Cognitive Dissonance",
+      "D": "The Dunning-Kruger Effect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical role of 'High-Potential' (HiPo) identification algorithms in large-scale mentoring orchestration?",
+    "options": {
+      "A": "To pick employees based on who has the highest physical energy in the office.",
+      "B": "To use predictive analytics—combining performance history, agility scores, and aspiration data—to prioritize mentoring resources for individuals most likely to succeed in future leadership roles.",
+      "C": "A specialized software for architects to design training rooms.",
+      "D": "To increase the frame rate of performance review videos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Executive Development', what is the strategic objective of '360-Degree Feedback' when integrated into a mentoring program?",
+    "options": {
+      "A": "To allow the mentor to see the mentee from all 360 physical angles.",
+      "B": "To provide a comprehensive view of an executive's leadership effectiveness by aggregating data from peers, subordinates, and superiors, highlighting 'Blind Spots' for the mentor to address.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the size of the font on the board-level reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Psychological' 'Contracts' occur when the mentor assumes a developmental focus while the organization's reward system only recognizes immediate transactional output, leading to mentee disengagement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' mentoring technique involves placing a mentee in a high-stress, high-visibility role temporarily to accelerate behavioral adaptation and leadership 'Grit'?",
+    "options": {
+      "A": "Active Listening",
+      "B": "Stretch Assignment Orchestration",
+      "C": "Unit Testing",
+      "D": "Shadowing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Succession' 'Gap' 'Analysis' and its relationship to mentoring?",
+    "options": {
+      "A": "Measuring the physical gap between office desks.",
+      "B": "Identifying specific technical and leadership competencies missing in the current talent pipeline and using targeted mentoring to bridge those gaps before a leadership transition occurs.",
+      "C": "A specialized tool for measuring light levels in the boardroom.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Human Capital' ROI metrics for a global mentoring program? (Select all that apply)",
+    "options": {
+      "A": "Turnover Reduction Cost Savings (Mentored vs. Non-mentored)",
+      "B": "Reduction in 'Time to Productivity' for new hires",
+      "C": "Mentee Promotion Velocity compared to organizational averages",
+      "D": "The number of coffee cups consumed during meetings"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Neurodiverse' mentoring frameworks should utilize 'Low-Arousal' communication strategies and explicit 'Social Rule' mapping to ensure psychological safety for autistic mentees.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Behavioral' 'Modeling' in the context of expert mentoring?",
+    "options": {
+      "A": "Making a physical 3D model of an employee.",
+      "B": "A process where a mentor explicitly demonstrates high-level decision-making logic and emotional regulation during real-time business crises for the mentee to observe and replicate.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Mentoring' 'Network' 'Analysis' (MNA)?",
+    "options": {
+      "A": "Measuring the speed of the office Wi-Fi.",
+      "B": "Using graph theory to map informal knowledge-sharing relationships within a company to identify 'Hidden Influencers' who should be trained as mentors.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' coaching technique involves the mentor reflecting the mentee's non-verbal communication back to them to increase somatic self-awareness?",
+    "options": {
+      "A": "Socratic Questioning",
+      "B": "Mirroring (or Somatic Reframing)",
+      "C": "Open-Ended Questioning",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in mentoring often occur when a 'Collectivist' mentor is paired with an 'Individualist' mentee, leading to friction regarding career autonomy vs. team loyalty.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Talent' 'Calibration' sessions? (Select all that apply)",
+    "options": {
+      "A": "Cross-departmental leaders discussing the growth of mentored HiPos",
+      "B": "Standardizing 'Developmental Readiness' scores across the organization",
+      "C": "Buying physical snacks for the HR team",
+      "D": "Ensuring that 'Performance' is not confused with 'Potential' during reviews"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' in an advanced mentoring dialogue?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "A process where the mentee questions the underlying values, assumptions, and policies of the organization, rather than just solving a task-level problem.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Knowledge' 'Loss' 'Risk' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative risk of critical skills leaving the organization when senior experts retire without a structured mentoring or knowledge-transfer system.",
+      "B": "Aggregating physical risks like fire in the archive room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Identity' 'Erasure' in mentoring occurs when a mentor forces a minority mentee to adopt 'Majority' cultural norms (Assimilation) rather than supporting their authentic professional identity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Mentoring' 'Governance' factors? (Select all that apply)",
+    "options": {
+      "A": "Alignment with ESG (Environmental, Social, and Governance) targets",
+      "B": "Calculation of 'Mentoring Hours' as a billable organizational asset",
+      "C": "Integration with 'Learning Management Systems' (LMS) for skill tracking",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Entrenchment' risk?",
+    "options": {
+      "A": "When a physical trench is dug in the server room.",
+      "B": "A scenario where a mentee becomes overly dependent on their mentor, stunting their ability to make independent decisions or build their own network.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Behavioral' 'Shift' (MTTBS)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A developmental metric tracking the average duration required for a mentee to demonstrate a permanent positive change in a target competency (e.g., Conflict Management).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in mentoring occurs when the organization defines 'Success' as 'Program Completion' while the mentee defines it as 'Obtaining a Promotion'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sentiment' 'Analysis' in mentoring oversight? (Select all that apply)",
+    "options": {
+      "A": "Using AI to identify signs of 'Relationship Fatigue' in survey text",
+      "B": "Detecting shifts from 'Growth Mindset' to 'Fixed Mindset' language in reports",
+      "C": "Guaranteed to replace all human psychologists",
+      "D": "Identifying early indicators of interpersonal conflict in digital communications"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Portfolio' management at an organizational level?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic balancing of different mentoring types (Flash, Peer, Reverse, Executive) to ensure a holistic developmental culture across all levels.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Arbitrage' through mentoring?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "Moving high-potential talent from low-growth departments to high-growth areas by using cross-functional mentoring as the vehicle for transition.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in executive development occur when the board expects cultural transformation within 6 months while organizational psychology suggests 18-24 months for deep shifts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Gates' for mentoring? (Select all that apply)",
+    "options": {
+      "A": "Preventing a person from being a mentor if their own engagement scores are low",
+      "B": "Flagging relationships where 'Active Goals' have not been updated in 90 days",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Requiring a 'Liveness Check' for virtual mentoring sessions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a strategic development plan?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Grouping specific, related professional competencies into self-contained 'Learning Modules' to ensure modular and measurable progress.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Toxic' mentoring relationship?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the first occurrence of professional boundary violation until the program manager intervenes.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the organization tracks 'Mentoring Attendance' as the primary metric, while ignoring 'Actual Competency Gains'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Mentoring' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Syncing mentoring goals with OKR (Objectives and Key Results) software",
+      "B": "Pulling 'Skills Proficiency' data from LinkedIn Learning into the mentoring tool",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Updating the HRIS (HR Information System) when a mentoring cycle is completed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Bootstrap' orchestration for new mergers and acquisitions?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of pre-configured mentoring frameworks and cultural immersion plans used to quickly integrate new leadership teams during a business merger.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Professional' 'Development' 'Degradation'?",
+    "options": {
+      "A": "A metric identifying when an employee's skill acquisition stops or reverses due to 'Burnout' or 'Plateauing', triggering a mentor intervention.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects the mentor to solve their 'Cloud Infrastructure' bugs rather than developing the mentee's architectural thinking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Best' 'Practices' in L&D? (Select all that apply)",
+    "options": {
+      "A": "Instant generation of 'Talent Pipeline' heatmaps for the board",
+      "B": "Anonymized aggregation of mentee feedback to identify company-wide management flaws",
+      "C": "Guaranteed to replace all human HR managers",
+      "D": "Automated distribution of 'Success Stories' to boost program participation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a multi-tenant mentoring platform?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that sensitive 'Coaching Notes' for one organization are cryptographically isolated from all other organizations on the same SaaS platform.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Engagement' (MTRE)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when a pair is flagged as 'Inactive' until they resume their scheduled mentoring rhythm.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in mentoring refers to an organization promising 'Executive Access' to junior staff when the executive team's schedules are 100% committed to business strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Workforce' 'Planning' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Head of People Analytics",
+      "B": "Talent Development Architect",
+      "C": "Organizational Effectiveness Consultant",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Quality' for an L&D Ecosystem?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score that includes mentoring health, training effectiveness, and the internal mobility rate of participants.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Promotions' (MTBP) by department?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric used to identify if certain managers or mentors are significantly better at developing and promoting their talent than others.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a mentor uses 1980s 'Hierarchical' leadership theory to mentor a Gen-Z mentee who values 'Inclusive' and 'Purpose-driven' work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Empathy' requirements",
+      "B": "Ensuring mentoring data follows local GDPR 'Right to Erasure' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if mentors check boxes without actually meeting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability' in an L&D context?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ability to update a mentoring program's structure as the company evolves (e.g., from an 'Engineering-only' to a 'Whole-Company' model).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a high-value talent resignation risk?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an employee's disengagement signals and the 'Retention Task Force' being notified to intervene.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' occurs when the mentoring logs are stored in a database that only the IT team can access, preventing HR from viewing performance trends.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Talent' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Human Resources Officer (CHRO)",
+      "B": "Head of Diversity and Inclusion (D&I)",
+      "C": "Learning & Development (L&D) Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Bootstrap' orchestration for new office openings?",
+    "options": {
+      "A": "A set of templates and 'Cultural Guides' used to rapidly build a professional development infrastructure in a new country or region.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Feedback' 'Cycles' (MTBFC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often mentors and mentees formally review their progress and adjust their SMART goals.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects a promotion immediately after the mentor provides a 'Recommendation' to the manager.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Role' has zero identified successors",
+      "B": "Identifying if a successor's skill profile matches the target role requirement",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Tracking the 'Readiness Date' of successors across the fleet"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in leadership training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which leadership principles can be 'Lifted' from one domain (e.g., Military) and applied effectively to another (e.g., Software Engineering).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Clarity' (MTRC) after an organizational change?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a corporate restructuring and the point where mentored employees have updated development plans that align with the new structure.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the technical mentor expects 'Perfect Code' while the organizational coach expects 'Leadership Agility'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits' in Mentoring? (Select all that apply)",
+    "options": {
+      "A": "Consistency in ROI data presentation for the board",
+      "B": "Reduction in manual administrative work for HR teams",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Instant generation of 'Skills Gap' reports by business unit"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a development curriculum?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing self-contained training 'Sprints' where each sprint results in a specific, independently verifiable professional credential.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High Potential' (HiPo)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from an employee's hire date until they are officially identified and entered into a high-level mentoring program.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when the mentoring cycle lasts for 12 months, while the business pivot cycle happens every 3 months, making the goals obsolete.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Mentoring' 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Talent Development Manager",
+      "B": "Internal Communications Lead",
+      "C": "Legal / Privacy Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Mentoring' 'Bootstrap' complexity for a global rollout?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The level of difficulty in localized content, languages, and cultural norms into a single, standardized global mentoring framework.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Engagements' (MTBE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration between a mentee's completion of one mentoring cycle and their entry into a new one.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a mentee expects the mentor to solve their 'Physical Health' problems immediately instead of providing professional guidance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Mentoring' 'Scaling' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 10,000 employees to find a mentor in 1 day",
+      "B": "Reducing the 'Matching' bottleneck in HR departments",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent enforcement of program rules across all global locations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mentee' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Mentee.",
+      "B": "The ability of a mentee to objectively assess their own growth and identify when their current mentor no longer meets their developmental needs.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Productivity' (MTRP) through mentoring?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when an underperforming employee is identified until their performance returns to standard levels via mentor intervention.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' in mentoring refers to storing confidential session notes on a public internal wiki instead of a secure development tool.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Diversity' 'Analysis' in mentoring? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the demographic diversity of mentoring pairs",
+      "B": "Identifying if certain groups are 'Under-mentored' compared to others",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing promotion rates across different demographic mentor groups"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Developmental' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the technical learning logic is hidden inside a 'Learning Sandbox' until the mentee is ready for production environments.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

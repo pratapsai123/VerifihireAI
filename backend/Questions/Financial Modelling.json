@@ -1,0 +1,1893 @@
+{ 
+  "skill": "Financial Modelling", 
+  "questions": [
+    {
+    "question": "In financial modelling, what is the 'Golden Rule' regarding hard-coded numbers?",
+    "options": {
+      "A": "Hard-code everything to ensure the numbers never change.",
+      "B": "Hard-code inputs only once in a dedicated section and reference them elsewhere via formulas.",
+      "C": "Never use formulas; only use hard-coded values for speed.",
+      "D": "Only hard-code values that are greater than one million."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Circular Reference' in Excel occurs when a formula refers to its own cell, either directly or indirectly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common sections of a standard 3-statement financial model? (Select all that apply)",
+    "options": {
+      "A": "Income Statement",
+      "B": "Balance Sheet",
+      "C": "Cash Flow Statement",
+      "D": "Marketing Strategy Log"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of a 'Plug' in a financial model?",
+    "options": {
+      "A": "To fill a gap in the office wall.",
+      "B": "To force the Balance Sheet to balance (usually through Cash or Revolver debt).",
+      "C": "To increase the total revenue by a fixed percentage.",
+      "D": "To connect the computer to a secondary power source."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel function is most commonly used to retrieve data from a table based on a matching criteria?",
+    "options": {
+      "A": "SUM()",
+      "B": "VLOOKUP() or XLOOKUP()",
+      "C": "AVERAGE()",
+      "D": "COUNTIF()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In financial modelling, inputs should typically be colored blue and formulas should be colored black.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are types of valuation models used in finance? (Select all that apply)",
+    "options": {
+      "A": "Discounted Cash Flow (DCF)",
+      "B": "Leveraged Buyout (LBO)",
+      "C": "Comparable Company Analysis",
+      "D": "Binary Search Model"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'WACC' represent in a valuation model?",
+    "options": {
+      "A": "Weekly Account Credit Check",
+      "B": "Weighted Average Cost of Capital",
+      "C": "Worldwide Asset Consolidation Center",
+      "D": "Working Amount of Capital Contributed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel shortcut is used to 'Paste Special'?",
+    "options": {
+      "A": "Ctrl + C",
+      "B": "Alt + E + S",
+      "C": "Ctrl + V",
+      "D": "Shift + F11"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Net Present Value' (NPV) function in Excel is used to determine the profitability of an investment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following help maintain model integrity? (Select all that apply)",
+    "options": {
+      "A": "Error check cells (e.g., BS balance check)",
+      "B": "Consistent formatting",
+      "C": "Hiding rows and columns randomly",
+      "D": "Using simple, readable formulas"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Terminal Value' in a DCF model?",
+    "options": {
+      "A": "The value of a company's office terminal/computer.",
+      "B": "The value of a company beyond the explicit forecast period.",
+      "C": "The value of a company when it goes bankrupt.",
+      "D": "The interest paid in the very last month of a loan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyboard key allows you to toggle through cell references (Absolute vs. Relative) in Excel?",
+    "options": {
+      "A": "F2",
+      "B": "F4",
+      "C": "F9",
+      "D": "Esc"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Sensitivity Analysis' involves changing one or more variables to see the impact on the model's output.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Current Assets' on a Balance Sheet? (Select all that apply)",
+    "options": {
+      "A": "Cash",
+      "B": "Accounts Receivable",
+      "C": "Inventory",
+      "D": "Goodwill"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'EBITDA' margin measure?",
+    "options": {
+      "A": "The total amount of debt relative to equity.",
+      "B": "Operating profitability as a percentage of revenue.",
+      "C": "The speed at which inventory is sold.",
+      "D": "The percentage of taxes paid to the government."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate 'Equity Value' from 'Enterprise Value'?",
+    "options": {
+      "A": "Add Debt and subtract Cash.",
+      "B": "Subtract Debt and add Cash.",
+      "C": "Multiply by the tax rate.",
+      "D": "Subtract Depreciation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LBO' stands for 'Last Business Operation'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common Excel errors in financial modelling? (Select all that apply)",
+    "options": {
+      "A": "#REF!",
+      "B": "#VALUE!",
+      "C": "#DIV/0!",
+      "D": "#PROFIT!"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Unlevered Free Cash Flow'?",
+    "options": {
+      "A": "Cash flow available to only the shareholders.",
+      "B": "Cash flow available to all capital providers (debt and equity) before debt payments.",
+      "C": "Cash flow that is stored in a physical safe.",
+      "D": "The amount of money earned from selling old equipment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel tool is best for comparing different outcomes based on two changing variables?",
+    "options": {
+      "A": "Pivot Table",
+      "B": "Data Table",
+      "C": "Goal Seek",
+      "D": "Scenario Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Income Statement' shows the financial performance over a period of time, not a specific point in time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Working Capital'? (Select all that apply)",
+    "options": {
+      "A": "Accounts Receivable",
+      "B": "Accounts Payable",
+      "C": "Inventory",
+      "D": "Long-term Debt"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'Scenario Analysis'?",
+    "options": {
+      "A": "To write a movie script for the company's advertisement.",
+      "B": "To evaluate the model's output under different sets of assumptions (e.g., Base, Upside, Downside).",
+      "C": "To find the name of the project manager.",
+      "D": "To increase the brightness of the Excel interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, what does the 'IFERROR' function do?",
+    "options": {
+      "A": "It creates an error intentionally.",
+      "B": "It returns a specific value if a formula results in an error.",
+      "C": "It sends an email to the IT department when a formula breaks.",
+      "D": "It deletes the contents of the cell if there is a mistake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Balance Sheet, Assets must always equal Liabilities plus Equity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Financial Ratios'? (Select all that apply)",
+    "options": {
+      "A": "Current Ratio",
+      "B": "Debt-to-Equity",
+      "C": "Return on Investment (ROI)",
+      "D": "Employee Height Ratio"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Days Sales Outstanding' (DSO) measure?",
+    "options": {
+      "A": "The number of days an office is open per year.",
+      "B": "The average number of days it takes for a company to collect payment after a sale.",
+      "C": "The total volume of sales in a single day.",
+      "D": "The number of days a product stays in the warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Beta' in a financial model?",
+    "options": {
+      "A": "The second version of the Excel file.",
+      "B": "A measure of a stock's volatility relative to the overall market.",
+      "C": "The name of the company's internal software.",
+      "D": "The percentage of employees who use Mac computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Discounting cash flows refers to adjusting future money to its equivalent value today.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions are used to manage dates in Excel? (Select all that apply)",
+    "options": {
+      "A": "EOMONTH()",
+      "B": "DATE()",
+      "C": "YEAR()",
+      "D": "CALENDAR()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the result of 'EBIT' minus 'Interest' and 'Taxes'?",
+    "options": {
+      "A": "Gross Profit",
+      "B": "Net Income",
+      "C": "Operating Income",
+      "D": "Revenue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capital Expenditure' (CapEx)?",
+    "options": {
+      "A": "Money spent on daily office snacks.",
+      "B": "Funds used by a company to acquire or upgrade physical assets like buildings or machinery.",
+      "C": "The tax paid to the capital city.",
+      "D": "The interest rate on a short-term loan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Retained Earnings' are the profits a company keeps rather than paying out as dividends.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are found in the 'Financing' section of a Cash Flow Statement? (Select all that apply)",
+    "options": {
+      "A": "Issuing shares",
+      "B": "Repaying loans",
+      "C": "Paying dividends",
+      "D": "Buying inventory"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gross Margin'?",
+    "options": {
+      "A": "Net Income divided by Assets.",
+      "B": "Total Revenue minus Cost of Goods Sold (COGS).",
+      "C": "Sales minus Operating Expenses.",
+      "D": "The distance between two columns in Excel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What Excel shortcut allows you to enter a cell to edit its formula?",
+    "options": {
+      "A": "Ctrl + E",
+      "B": "F2",
+      "C": "Alt + F4",
+      "D": "Ctrl + Shift + L"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Depreciation is a non-cash expense.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Liabilities'? (Select all that apply)",
+    "options": {
+      "A": "Accounts Payable",
+      "B": "Accrued Expenses",
+      "C": "Deferred Revenue",
+      "D": "Prepaid Expenses"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Enterprise Value'?",
+    "options": {
+      "A": "The value of a company if it were an enterprise-level software.",
+      "B": "The total value of a company, including both its equity and its debt.",
+      "C": "The amount of revenue a company makes in its first year.",
+      "D": "The weight of the company's physical office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a model, what does 'Hard-coding' usually imply?",
+    "options": {
+      "A": "Using very difficult programming language.",
+      "B": "Entering a raw number directly into a cell instead of using a formula.",
+      "C": "Encrypting the Excel file so it cannot be hacked.",
+      "D": "Developing the model on a hardware device."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Internal Rate of Return' (IRR) is the discount rate that makes the NPV of an investment zero.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cash Inflows' for a business? (Select all that apply)",
+    "options": {
+      "A": "Revenue from customers",
+      "B": "Taking out a new bank loan",
+      "C": "Selling a piece of land",
+      "D": "Purchasing new equipment"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Amortization'?",
+    "options": {
+      "A": "Spreading the cost of a tangible asset over its useful life.",
+      "B": "Spreading the cost of an intangible asset over its useful life.",
+      "C": "Increasing the value of an asset every year.",
+      "D": "Paying off a loan in a single lump sum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel function sums values based on a single condition?",
+    "options": {
+      "A": "TOTALIF()",
+      "B": "SUMIF()",
+      "C": "ADDIF()",
+      "D": "CALCIF()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Working Capital is calculated as Current Assets minus Current Liabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of the 'DuPont Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Net Profit Margin",
+      "B": "Asset Turnover",
+      "C": "Financial Leverage",
+      "D": "Customer Retention Rate"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Forecast Period'?",
+    "options": {
+      "A": "The time it takes to watch a weather report.",
+      "B": "The specific future years for which a company's financials are explicitly projected.",
+      "C": "The history of a company's sales over the last 10 years.",
+      "D": "The time it takes to build a financial model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'EPS' stand for?",
+    "options": {
+      "A": "Estimated Project Savings",
+      "B": "Earnings Per Share",
+      "C": "Equity Price Standard",
+      "D": "Every Person's Stake"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Excel, the 'Goal Seek' tool is used to find the input needed to reach a specific target output.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these help make a model 'User-Friendly'? (Select all that apply)",
+    "options": {
+      "A": "Clear labeling",
+      "B": "Instruction tab",
+      "C": "Formatting consistency",
+      "D": "Complex, nested formulas without comments"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Net Debt'?",
+    "options": {
+      "A": "The total weight of the financial ledgers.",
+      "B": "Total Debt minus Cash and Cash Equivalents.",
+      "C": "Debt that is caught in a physical net.",
+      "D": "Revenue minus total expenses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel shortcut selects the entire current row?",
+    "options": {
+      "A": "Ctrl + Space",
+      "B": "Shift + Space",
+      "C": "Alt + S",
+      "D": "Ctrl + Enter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Precedent Transactions' involves valuing a company based on the prices paid for similar companies in past M&A deals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Fixed Costs'? (Select all that apply)",
+    "options": {
+      "A": "Rent",
+      "B": "Salaries of permanent staff",
+      "C": "Annual Insurance",
+      "D": "Raw materials used for production"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Break-even Point'?",
+    "options": {
+      "A": "The moment a physical tool breaks during use.",
+      "B": "The level of sales where total revenue equals total costs, resulting in zero profit.",
+      "C": "The end of the fiscal year.",
+      "D": "When a company decides to stop all operations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function in Excel returns the absolute value of a number?",
+    "options": {
+      "A": "VAL()",
+      "B": "ABS()",
+      "C": "NUM()",
+      "D": "FIX()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model Auditing' is the process of checking a model for logical errors and formula mistakes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are used for 'Scenario Selection' in Excel models? (Select all that apply)",
+    "options": {
+      "A": "CHOOSE() function",
+      "B": "INDEX() function",
+      "C": "OFFSET() function",
+      "D": "SUMPRODUCT() function"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cost of Goods Sold' (COGS)?",
+    "options": {
+      "A": "The price of marketing a product.",
+      "B": "The direct costs of producing the goods sold by a company.",
+      "C": "The tax paid on luxury items.",
+      "D": "The salary of the CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, which shortcut 'Checks' for dependents and precedents (traces arrows)?",
+    "options": {
+      "A": "Alt + M + D",
+      "B": "Alt + T + U",
+      "C": "Ctrl + [",
+      "D": "F5"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Common Size' Income Statement expresses every line item as a percentage of Total Assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Non-Current Liabilities'? (Select all that apply)",
+    "options": {
+      "A": "Long-term Bank Loans",
+      "B": "Bonds Payable",
+      "C": "Deferred Tax Liabilities",
+      "D": "Accounts Payable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Operating Margin' represent?",
+    "options": {
+      "A": "The edge of a factory floor.",
+      "B": "The percentage of revenue left after paying operating expenses.",
+      "C": "Net profit divided by equity.",
+      "D": "The total number of units sold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function to find the maximum value in a range in Excel?",
+    "options": {
+      "A": "HIGHEST()",
+      "B": "MAX()",
+      "C": "TOP()",
+      "D": "LIMIT()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a financial model, it is best practice to group sheets by color and logical flow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Excel function is used to calculate the Internal Rate of Return (IRR) for a series of cash flows that occur at irregular intervals?",
+    "options": {
+      "A": "IRR()",
+      "B": "XIRR()",
+      "C": "MIRR()",
+      "D": "NPV()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Leveraged Buyout (LBO) model, the 'Entry Multiple' and 'Exit Multiple' are usually assumed to be the same to remain conservative.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of 'Unlevered Free Cash Flow'? (Select all that apply)",
+    "options": {
+      "A": "EBIT * (1 - Tax Rate)",
+      "B": "Depreciation & Amortization",
+      "C": "Capital Expenditures (CapEx)",
+      "D": "Interest Expense"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "How do you calculate the 'Equity Multiplier' in a DuPont Analysis?",
+    "options": {
+      "A": "Total Liabilities / Total Assets",
+      "B": "Total Assets / Total Equity",
+      "C": "Net Income / Total Sales",
+      "D": "Total Sales / Average Assets"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a 'Control Toggle' in a financial model?",
+    "options": {
+      "A": "To turn the computer's power on and off.",
+      "B": "To switch the entire model between different scenarios (e.g., Case 1, Case 2).",
+      "C": "To hide specific rows from the client.",
+      "D": "To increase the calculation speed of Excel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When linking the three financial statements, the ending cash balance from the Cash Flow Statement flows into the Balance Sheet under Cash & Cash Equivalents.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these factors would 'increase' the Weighted Average Cost of Capital (WACC)? (Select all that apply)",
+    "options": {
+      "A": "A higher risk-free rate",
+      "B": "A higher corporate tax rate",
+      "C": "A higher Beta",
+      "D": "A lower cost of debt"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "In a DCF model, which 'Beta' should be used to find the cost of equity if the peer group has varying capital structures?",
+    "options": {
+      "A": "Levered Beta",
+      "B": "Unlevered Beta (Asset Beta) re-levered to the target's structure",
+      "C": "Historical Beta of the S&P 500",
+      "D": "Beta of 1.0 (Market Beta)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Data Table' in Excel typically calculate in a valuation summary?",
+    "options": {
+      "A": "The names of all employees in the finance department.",
+      "B": "A range of share prices based on varying two inputs (e.g., WACC and Terminal Growth Rate).",
+      "C": "The total amount of tax paid over the last 10 years.",
+      "D": "A list of all previous M&A transactions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Mid-Year Convention' in a DCF model results in a higher valuation because cash flows are assumed to be received sooner.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Excel functions are useful for creating dynamic headers or titles? (Select all that apply)",
+    "options": {
+      "A": "CONCATENATE()",
+      "B": "TEXT()",
+      "C": "YEAR()",
+      "D": "SUMPRODUCT()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Net Working Capital' (NWC) in a financial model context?",
+    "options": {
+      "A": "Total Assets minus Total Liabilities.",
+      "B": "Operating Current Assets minus Operating Current Liabilities.",
+      "C": "Cash minus Debt.",
+      "D": "The number of hours worked by the capital team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Unlevering' a Beta?",
+    "options": {
+      "A": "To make the number smaller and easier to read.",
+      "B": "To remove the financial risk associated with debt and isolate the business risk.",
+      "C": "To calculate the tax shield of a company.",
+      "D": "To determine the dividend payout ratio."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 3-Statement Model, an increase in 'Accounts Receivable' is a 'Source' of cash on the Cash Flow Statement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are considered 'Operating' line items? (Select all that apply)",
+    "options": {
+      "A": "COGS",
+      "B": "SG&A",
+      "C": "Interest Expense",
+      "D": "Revenue"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Gordon Growth Method' assume about a company's cash flows?",
+    "options": {
+      "A": "They will drop to zero in the 10th year.",
+      "B": "They will grow at a constant rate into perpetuity.",
+      "C": "They will grow at the same rate as the inflation for only 5 years.",
+      "D": "They will fluctuate based on the stock market performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel formula correctly calculates 'Days Inventory Outstanding' (DIO)?",
+    "options": {
+      "A": "(Average Inventory / Revenue) * 365",
+      "B": "(Average Inventory / COGS) * 365",
+      "C": "(Sales / Inventory) * 365",
+      "D": "(Inventory / Net Income) * 365"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Deferred Tax Asset' (DTA) represents a future cash outflow for taxes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Uses of Funds' table in an LBO model? (Select all that apply)",
+    "options": {
+      "A": "The purchase price of the target company equity",
+      "B": "Refinancing of existing debt",
+      "C": "Transaction fees (Legal, Advisory)",
+      "D": "Projected annual revenue"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'PIK Interest' (Payment-in-Kind)?",
+    "options": {
+      "A": "Interest paid in physical gold or silver.",
+      "B": "Interest that is not paid in cash but added to the principal balance of the debt.",
+      "C": "A specialized tax on the sale of a business.",
+      "D": "Interest that is paid only when the company makes a profit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel tool is used to find the specific input value needed to achieve a target outcome (e.g., zero NPV)?",
+    "options": {
+      "A": "Pivot Table",
+      "B": "Goal Seek",
+      "C": "AutoSum",
+      "D": "Solver"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When a company repurchases its own shares, 'Treasury Stock' increases on the Balance Sheet, which reduces Total Shareholder Equity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are metrics used to evaluate an LBO? (Select all that apply)",
+    "options": {
+      "A": "Internal Rate of Return (IRR)",
+      "B": "Multiple of Money (MoM)",
+      "C": "Debt-to-EBITDA ratio",
+      "D": "P/E Ratio of the acquirer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Operating Leverage'?",
+    "options": {
+      "A": "Using a physical lever to start a factory machine.",
+      "B": "The degree to which a firm or project relies on fixed costs rather than variable costs.",
+      "C": "The ability to borrow money for daily operations.",
+      "D": "The number of managers compared to laborers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Capitalized Interest'?",
+    "options": {
+      "A": "Interest that is paid to the capital city.",
+      "B": "Interest expense that is added to the cost of an asset on the Balance Sheet instead of being expensed immediately.",
+      "C": "Interest paid on common stock dividends.",
+      "D": "Interest earned from a high-yield savings account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Excel, the 'OFFSET' function is frequently used to create dynamic ranges but can slow down large models because it is 'volatile'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are needed to calculate 'Beta' using the Pure Play method? (Select all that apply)",
+    "options": {
+      "A": "Peer group levered betas",
+      "B": "Peer group debt-to-equity ratios",
+      "C": "Target company tax rate",
+      "D": "Target company current stock price"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does a 'Negative Goodwill' (Bargain Purchase) indicate?",
+    "options": {
+      "A": "The company has a bad reputation.",
+      "B": "The purchase price was less than the fair value of the net assets acquired.",
+      "C": "The company has zero intangible assets.",
+      "D": "The acquisition was funded entirely by debt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, what is the shortcut for 'Trace Precedents'?",
+    "options": {
+      "A": "Ctrl + ]",
+      "B": "Ctrl + [",
+      "C": "Alt + M + P",
+      "D": "F5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Quick Ratio' (Acid-Test) includes Inventory in its calculation of current assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Non-Cash' items on the Income Statement? (Select all that apply)",
+    "options": {
+      "A": "Depreciation",
+      "B": "Amortization",
+      "C": "Stock-Based Compensation",
+      "D": "Sales Commissions"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Exit Multiple' in a terminal value calculation?",
+    "options": {
+      "A": "The number of exits in a warehouse.",
+      "B": "A multiple (like EV/EBITDA) applied to the final year's financial metric to estimate the sale value.",
+      "C": "The number of employees who quit in the last year.",
+      "D": "A specialized tax on the sale of a business."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Fully Diluted Shares Outstanding' include?",
+    "options": {
+      "A": "Only the common stock currently held by investors.",
+      "B": "Common stock plus the potential impact of options, warrants, and convertible debt.",
+      "C": "The stock owned by the government treasury.",
+      "D": "The shares that have been deleted from the exchange."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An increase in 'Accounts Payable' is an 'Outflow' of cash on the Cash Flow Statement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which items are typically found on the 'Debt Schedule' of an LBO model? (Select all that apply)",
+    "options": {
+      "A": "Interest rates for different tranches",
+      "B": "Mandatory principal repayments",
+      "C": "Optional prepayments",
+      "D": "Marketing expenses"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Accretion' in a merger model?",
+    "options": {
+      "A": "The combined company's stock price dropping.",
+      "B": "When the acquirer's Earnings Per Share (EPS) increases after the acquisition.",
+      "C": "The process of a company shrinking in size.",
+      "D": "The loss of a company's brand value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate 'Unlevered Free Cash Flow' starting from EBITDA?",
+    "options": {
+      "A": "EBITDA - Taxes - Interest",
+      "B": "EBITDA - CapEx - Change in NWC - Taxes on EBIT",
+      "C": "EBITDA + Depreciation - Taxes",
+      "D": "EBITDA / Total Debt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 3-Statement Model, the Income Statement is usually built for historical years first.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metrics are part of a 'Liquidity' analysis? (Select all that apply)",
+    "options": {
+      "A": "Current Ratio",
+      "B": "Quick Ratio",
+      "C": "Cash Ratio",
+      "D": "Debt-to-Equity Ratio"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Waterfall' in a debt schedule?",
+    "options": {
+      "A": "A physical water feature in the office lobby.",
+      "B": "The priority order in which cash flow is used to pay down different layers of debt.",
+      "C": "The speed at which stock prices fall.",
+      "D": "A way to count the number of shareholders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'EBITDA' exclude that 'Net Income' includes?",
+    "options": {
+      "A": "Revenue and Sales.",
+      "B": "Interest, Taxes, Depreciation, and Amortization.",
+      "C": "Only marketing expenses.",
+      "D": "The names of the company directors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In financial modelling, a 'Step-up in Basis' refers to increasing the tax value of assets during an acquisition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which are common 'Drivers' for projecting Revenue? (Select all that apply)",
+    "options": {
+      "A": "Volume (Units sold)",
+      "B": "Price per unit",
+      "C": "Market share growth",
+      "D": "Current cash balance"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Levered Free Cash Flow'?",
+    "options": {
+      "A": "Cash flow available to all capital providers.",
+      "B": "Cash flow available to only equity holders after mandatory debt repayments.",
+      "C": "The amount of cash a company borrows every year.",
+      "D": "The cash found in the company's vault."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel function returns the value of a cell at the intersection of a specific row and column?",
+    "options": {
+      "A": "VLOOKUP()",
+      "B": "INDEX()",
+      "C": "MATCH()",
+      "D": "FIND()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Goodwill' is never amortized under US GAAP but is tested for impairment annually.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are components of 'Investing Activities' in a Cash Flow Statement? (Select all that apply)",
+    "options": {
+      "A": "Purchase of Property, Plant & Equipment (PP&E)",
+      "B": "Proceeds from the sale of a business unit",
+      "C": "Acquisition of intangible assets",
+      "D": "Repayment of bank loans"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Interest Tax Shield'?",
+    "options": {
+      "A": "A physical shield used by bank security.",
+      "B": "The tax savings a company gets because interest expense is tax-deductible.",
+      "C": "A legal contract that prevents interest rates from rising.",
+      "D": "The percentage of interest paid to the government."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operating Margin' formula?",
+    "options": {
+      "A": "Net Income / Revenue",
+      "B": "Operating Income / Revenue",
+      "C": "Gross Profit / Revenue",
+      "D": "EBITDA / Total Debt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'CHOOSE' function is more efficient than nested 'IF' statements for scenario selection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are types of 'Financial Leverage' ratios? (Select all that apply)",
+    "options": {
+      "A": "Debt-to-Equity",
+      "B": "Debt-to-EBITDA",
+      "C": "Interest Coverage Ratio",
+      "D": "Inventory Turnover"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Normalized' EBITDA?",
+    "options": {
+      "A": "EBITDA that has been adjusted for inflation.",
+      "B": "EBITDA adjusted for one-time, non-recurring expenses or gains.",
+      "C": "EBITDA that is equal to the industry average.",
+      "D": "EBITDA that has been verified by a third-party auditor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel formula correctly calculates 'Weighted Average Cost of Debt'?",
+    "options": {
+      "A": "Interest Expense / Total Assets",
+      "B": "Pre-tax Cost of Debt * (1 - Tax Rate)",
+      "C": "Total Debt / Net Income",
+      "D": "Cost of Equity + 5%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Working Capital' in a model should always exclude cash and debt to focus on operational efficiency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are common 'Outputs' of a merger model? (Select all that apply)",
+    "options": {
+      "A": "Pro-forma Balance Sheet",
+      "B": "Accretion/Dilution analysis",
+      "C": "Combined Revenue growth",
+      "D": "The CEO's personal travel budget"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Enterprise Value' / 'Revenue' multiple usually used for?",
+    "options": {
+      "A": "Companies with very high profits.",
+      "B": "High-growth companies that are not yet profitable (negative EBITDA).",
+      "C": "Companies in the manufacturing sector only.",
+      "D": "To calculate the total number of shareholders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel function allows you to calculate the number of periods for an investment to reach a target value?",
+    "options": {
+      "A": "PMT()",
+      "B": "NPER()",
+      "C": "RATE()",
+      "D": "PV()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capital Structure' refers to the way a company finances its assets through a combination of equity, debt, or hybrid securities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which items are found in the 'Financing' section of the Cash Flow Statement? (Select all that apply)",
+    "options": {
+      "A": "Payment of dividends",
+      "B": "Issuance of long-term debt",
+      "C": "Repurchase of common stock",
+      "D": "Purchase of inventory"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asset Turnover'?",
+    "options": {
+      "A": "Rotating a physical asset by 180 degrees.",
+      "B": "A ratio that measures the efficiency of a company's use of its assets in generating sales revenue.",
+      "C": "The price of selling an asset for a loss.",
+      "D": "The number of hours a factory is open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-money Valuation' vs 'Post-money Valuation'?",
+    "options": {
+      "A": "They are exactly the same.",
+      "B": "Pre-money is the value before new investment; Post-money includes the new investment cash.",
+      "C": "Post-money is always 100x larger.",
+      "D": "Pre-money is for text; Post-money for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a DCF, the 'Discount Rate' and the 'WACC' are interchangeable terms when valuing the entire firm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Equity Value'? (Select all that apply)",
+    "options": {
+      "A": "Fully diluted shares outstanding",
+      "B": "Current stock price",
+      "C": "Total debt",
+      "D": "Dividends per share"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Sensitivity Analysis' 'Tornado Chart'?",
+    "options": {
+      "A": "A chart showing the speed of a storm.",
+      "B": "A special type of bar chart that shows the sensitivity of a result to changes in multiple variables at once.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synergy' in a merger model?",
+    "options": {
+      "A": "The energy used by the computers.",
+      "B": "The concept that the combined value of two companies will be greater than the sum of their separate parts.",
+      "C": "A specialized software for architects.",
+      "D": "The legal fee for merging two businesses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'EBIT' is the same as 'Operating Income' on the Income Statement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Leveraged Buyout (LBO) model, which of the following typically acts as the 'Primary Driver' of the equity internal rate of return (IRR)?",
+    "options": {
+      "A": "Total amount of dividends paid over the holding period.",
+      "B": "De-leveraging through debt paydown and exit multiple expansion.",
+      "C": "The immediate liquidation of the target company's current assets.",
+      "D": "The reduction of the corporate tax rate to zero via offshore tax havens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a merger model, a transaction is considered 'Accretive' if the acquirer's Earnings Per Share (EPS) increases after the combined entity is formed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are adjustments made when moving from 'Enterprise Value' to 'Equity Value'? (Select all that apply)",
+    "options": {
+      "A": "Subtract Total Debt",
+      "B": "Add Cash and Cash Equivalents",
+      "C": "Subtract Minority Interest",
+      "D": "Add Preferred Stock"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical purpose of 'Unlevering' Beta during a comparable company analysis?",
+    "options": {
+      "A": "To make the beta value easier to calculate in Excel without using the CAPM formula.",
+      "B": "To isolate the business risk of the company by removing the effect of its specific capital structure.",
+      "C": "To ensure that the beta is always exactly 1.0 for high-growth tech companies.",
+      "D": "To account for the historical volatility of the company's dividend payments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In advanced modelling, what does a 'Deferred Tax Liability' (DTL) on the Balance Sheet usually imply?",
+    "options": {
+      "A": "The company has paid more taxes in the current year than it owed under GAAP.",
+      "B": "A future cash tax outflow will occur due to a temporary difference where GAAP depreciation is lower than tax depreciation.",
+      "C": "The government has granted the company a permanent tax holiday for international sales.",
+      "D": "The company is using the LIFO method for inventory during a period of falling prices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Hamada Equation' is used to adjust a company's levered beta to reflect its optimal capital structure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are required components to calculate 'Weighted Average Cost of Capital' (WACC)? (Select all that apply)",
+    "options": {
+      "A": "Cost of Equity (via CAPM)",
+      "B": "After-tax Cost of Debt",
+      "C": "Market Value of Equity and Debt",
+      "D": "Book Value of Total Assets"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'PIK Toggle' debt in the context of an LBO?",
+    "options": {
+      "A": "Debt that can be converted into physical gold at the lender's request.",
+      "B": "Debt that allows the borrower to choose between paying interest in cash or adding it to the principal balance.",
+      "C": "Debt that is automatically forgiven if the company hits a specific revenue target.",
+      "D": "A specialized bond that is issued only to the company's employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Excel function is best for conducting a 'Tornado Chart' sensitivity analysis involving 10+ variables?",
+    "options": {
+      "A": "Goal Seek",
+      "B": "Data Tables (Multiple inputs)",
+      "C": "Solver add-in",
+      "D": "Consolidate"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In a DCF, using a 'Mid-Year Convention' assumes that cash flows occur at the exact end of each fiscal year.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which adjustments are part of the 'Bridge' from Net Income to Operating Cash Flow? (Select all that apply)",
+    "options": {
+      "A": "Add back Depreciation & Amortization",
+      "B": "Subtract Gains on the Sale of Assets",
+      "C": "Subtract Increases in Accounts Receivable",
+      "D": "Add Increases in Inventory"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What occurs during a 'Section 338(h)(10)' election in an M&A transaction?",
+    "options": {
+      "A": "The buyer treats the stock purchase as an asset purchase for tax purposes, allowing for a 'step-up' in basis.",
+      "B": "The seller is forced to pay a 100% tax on the capital gains of the sale.",
+      "C": "The combined company is barred from using the acquirer's historical Net Operating Losses (NOLs).",
+      "D": "The transaction is automatically categorized as a 'Bargain Purchase' with negative goodwill."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes 'Circular Debt Interest' in a 3-statement model?",
+    "options": {
+      "A": "When interest is paid to a circular group of banks.",
+      "B": "When the interest expense depends on the average debt balance, which in turn depends on the cash flow available to pay down debt.",
+      "C": "When the company borrows money to pay back the same bank on the same day.",
+      "D": "A specialized accounting error that occurs only in European financial reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Interest Tax Shield' is calculated as (Interest Expense) multiplied by the (Marginal Tax Rate).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Sources and Uses' table, which of the following is typically a 'Source'? (Select all that apply)",
+    "options": {
+      "A": "Equity Contribution from Private Equity firm",
+      "B": "Management Rollover",
+      "C": "New Senior Debt Issued",
+      "D": "Legal and Advisory Fees"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary risk of an 'Inverted Yield Curve' for a financial modeler projecting long-term growth?",
+    "options": {
+      "A": "It indicates that inflation will rise to over 20% in the next quarter.",
+      "B": "It is a historical signal for an impending recession, suggesting that growth assumptions should be stress-tested.",
+      "C": "It means that the company's cost of equity will drop to zero.",
+      "D": "It requires the model to be rebuilt using the 'LIFO' inventory method immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'High Net Debt / EBITDA' ratio (e.g., > 6.0x) suggest in a credit model?",
+    "options": {
+      "A": "The company has very little risk and should borrow more.",
+      "B": "The company is highly levered and may face difficulty servicing its debt or complying with covenants.",
+      "C": "The company's asset turnover is the highest in its industry.",
+      "D": "The company must pay out 100% of its earnings as dividends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Negative Goodwill' arises when the purchase price of an acquisition is higher than the fair market value of the net assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following would be categorized as 'Cash Flow from Financing'? (Select all that apply)",
+    "options": {
+      "A": "Dividends Paid",
+      "B": "Repurchase of Common Stock",
+      "C": "Proceeds from Long-term Debt",
+      "D": "Purchase of Marketable Securities"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "How is the 'Terminal Value' calculated using the 'Exit Multiple' method?",
+    "options": {
+      "A": "Projected EBITDA in the final year multiplied by an assumed industry multiple.",
+      "B": "Total Revenue divided by the number of shares outstanding.",
+      "C": "The sum of all cash flows over the historical 10-year period.",
+      "D": "The value of the company's land and buildings at the end of the project."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a DCF, which of these would 'Decrease' the valuation, all else being equal?",
+    "options": {
+      "A": "A decrease in the WACC.",
+      "B": "An increase in Capital Expenditures (CapEx).",
+      "C": "An increase in the Terminal Growth Rate.",
+      "D": "A decrease in the Marginal Tax Rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Excel, the 'INDIRECT' function is considered 'volatile' and can cause performance issues in very large financial models.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which are the 'Three Pillars' of returns in an LBO? (Select all that apply)",
+    "options": {
+      "A": "Debt Paydown",
+      "B": "EBITDA Growth",
+      "C": "Multiple Expansion",
+      "D": "Employee Headcount Reduction"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Treasury Stock Method' used for in financial modelling?",
+    "options": {
+      "A": "To calculate the amount of cash the government holds in reserve.",
+      "B": "To estimate the dilutive impact of in-the-money options and warrants on share count.",
+      "C": "To find the best way to hide cash from tax authorities.",
+      "D": "To determine the interest rate on 10-year treasury bonds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Minimum Cash Balance' in a revolver schedule designed for?",
+    "options": {
+      "A": "To ensure the company always has enough cash for day-to-day operations and safety.",
+      "B": "To set the maximum limit that a company can spend on marketing.",
+      "C": "To calculate the total amount of dividends to be paid in the terminal year.",
+      "D": "To verify the identity of the bank's account manager."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Free Cash Flow to Firm' (FCFF) is cash available to both debt and equity holders.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Excel shortcuts are used for navigation and selection? (Select all that apply)",
+    "options": {
+      "A": "Ctrl + Arrow Keys (Jump to edge)",
+      "B": "Ctrl + Shift + Arrow Keys (Select to edge)",
+      "C": "Ctrl + Page Up/Down (Switch sheets)",
+      "D": "Alt + F4 (Save and close)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Dividend Recapitalization'?",
+    "options": {
+      "A": "When a company cancels all its dividends to pay down debt.",
+      "B": "When a company issues new debt to pay a large, one-time dividend to shareholders.",
+      "C": "The process of re-investing dividends back into the same stock automatically.",
+      "D": "A legal requirement to pay dividends in the form of extra shares."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DCF, what is the 'Stub Period'?",
+    "options": {
+      "A": "The period where the modeler stops working for the day.",
+      "B": "A partial year at the beginning of a projection if the valuation date is not at the fiscal year-end.",
+      "C": "The time it takes for a check to clear the bank.",
+      "D": "The very last month of the terminal year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a merger model, 'Synergies' are typically categorized as either 'Cost Synergies' or 'Revenue Synergies'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metrics help assess a company's 'Pricing Power'? (Select all that apply)",
+    "options": {
+      "A": "Gross Margin stability over time",
+      "B": "Market share growth relative to price increases",
+      "C": "Days Sales Outstanding (DSO)",
+      "D": "Current Ratio"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the function of an 'Intercompany Elimination' during the consolidation of financial statements?",
+    "options": {
+      "A": "To fire employees who work for both the parent and the subsidiary.",
+      "B": "To remove the impact of transactions between the parent and subsidiary to avoid double-counting.",
+      "C": "To hide the debt of the subsidiary from the parent's investors.",
+      "D": "To convert the currency of the subsidiary to the parent's local currency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operating Lease' vs 'Finance Lease' under ASC 842?",
+    "options": {
+      "A": "Operating leases are for equipment; Finance leases are for buildings only.",
+      "B": "Both are now recorded on the balance sheet, but the expense recognition pattern differs (straight-line vs. front-loaded).",
+      "C": "Finance leases are only used by bankrupt companies.",
+      "D": "Operating leases are never disclosed in the footnotes of a financial report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Internal Rate of Return' (IRR) assumes that all interim cash flows are reinvested at the WACC.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors contribute to a 'Higher Valuation' in a Precedent Transaction analysis? (Select all that apply)",
+    "options": {
+      "A": "A 'Control Premium' paid by the acquirer",
+      "B": "Competitive bidding among multiple potential buyers",
+      "C": "Strategic synergies expected by the buyer",
+      "D": "A high risk-free rate in the economy"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Non-Controlling Interest' (Minority Interest) on the Balance Sheet?",
+    "options": {
+      "A": "The amount of stock owned by the company's junior employees.",
+      "B": "The portion of equity in a subsidiary that is not owned by the parent company.",
+      "C": "The interest rate paid on loans that are not secured by assets.",
+      "D": "A list of shareholders who have lost their voting rights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, what does the 'INDEX/MATCH' combination offer over 'VLOOKUP'?",
+    "options": {
+      "A": "It is 100x slower but more accurate.",
+      "B": "It allows for 'left-to-right' lookups and is generally more flexible and efficient for large models.",
+      "C": "It is a specialized function used only for tax calculations.",
+      "D": "It automatically formats the resulting cell in blue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Asset Write-down' results in a decrease in Net Income but an increase in Cash Flow from Operations (due to the tax shield).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which are typical 'Uses' in an LBO transaction? (Select all that apply)",
+    "options": {
+      "A": "Purchase of Target Equity",
+      "B": "Refinancing of existing Target Debt",
+      "C": "Financing Fees",
+      "D": "Issuance of New Debt"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Exit Strategy' in a financial model?",
+    "options": {
+      "A": "A list of fire exits in the office building.",
+      "B": "The planned method and timing for investors to sell their stake in the company (e.g., IPO, M&A).",
+      "C": "The way employees leave the building at the end of the day.",
+      "D": "The process of deleting the model after the project is over."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Accretion' vs 'Dilution' logic?",
+    "options": {
+      "A": "Accretion means stock price goes up; Dilution means it goes down.",
+      "B": "Accretion means post-deal EPS is higher than pre-deal EPS; Dilution means it is lower.",
+      "C": "Accretion is for cash deals; Dilution is for stock deals only.",
+      "D": "Dilution is a 100% sign that a deal is a failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Equity Multiplier' is a component of the DuPont analysis that measures financial leverage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-recurring' items that should be adjusted for when calculating 'Normalized EBITDA'? (Select all that apply)",
+    "options": {
+      "A": "Restructuring costs",
+      "B": "One-time legal settlements",
+      "C": "Gains or losses from asset sales",
+      "D": "Standard raw material costs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Levered Beta'?",
+    "options": {
+      "A": "Beta that is used only by banks.",
+      "B": "A measure of a stock's volatility that includes the effect of the company's debt/capital structure.",
+      "C": "The beta value after it has been multiplied by 10.",
+      "D": "The beta of a company that has zero liabilities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, what does the 'EOMONTH' function return?",
+    "options": {
+      "A": "The name of the current month.",
+      "B": "The serial number for the last day of the month that is a indicated number of months before or after a start date.",
+      "C": "The total number of days in a fiscal year.",
+      "D": "The interest payment due at the end of the month."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Net Operating Losses' (NOLs) can be carried forward to offset future taxable income, creating a 'Deferred Tax Asset'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which are components of the 'Cost of Equity' in the Capital Asset Pricing Model (CAPM)? (Select all that apply)",
+    "options": {
+      "A": "Risk-Free Rate",
+      "B": "Beta",
+      "C": "Equity Risk Premium",
+      "D": "Weighted Average Cost of Debt"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Contingent Consideration' (Earn-out) in an M&A model?",
+    "options": {
+      "A": "A payment made only if the seller stays with the company for 10 years.",
+      "B": "A portion of the purchase price that is paid only if the target company achieves certain performance targets after the deal closes.",
+      "C": "The money used to pay for transaction fees like legal and accounting.",
+      "D": "The interest paid on the senior debt used to fund the acquisition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Working Capital' a signal of in certain industries like Retail?",
+    "options": {
+      "A": "The company is about to go bankrupt immediately.",
+      "B": "The company is highly efficient, essentially getting customers to finance its operations (high turnover, slow payables).",
+      "C": "The company has zero cash in its bank accounts.",
+      "D": "The company is not allowed to sell inventory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a financial model, 'Total Assets' must always equal the sum of 'Total Liabilities' and 'Total Shareholder Equity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which adjustments are common in an 'LBO Debt Waterfall'? (Select all that apply)",
+    "options": {
+      "A": "Mandatory Principal Repayments",
+      "B": "Cash Flow Sweeps (Optional Repayments)",
+      "C": "Interest Accrual on PIK Debt",
+      "D": "Marketing Expense Allocation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gordon Growth' vs 'Exit Multiple' terminal value?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Gordon Growth assumes a constant perpetual growth rate; Exit Multiple assumes the company is sold for a multiple of its financials.",
+      "C": "Exit Multiple is only for bankrupt companies.",
+      "D": "Gordon Growth is much faster to calculate in Excel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Sensitivity Analysis' table with #VALUE! errors usually indicate?",
+    "options": {
+      "A": "The valuation is too high for Excel to display.",
+      "B": "There is a circular reference or a hard-coded error in one of the input cells linked to the data table.",
+      "C": "The computer is running out of RAM.",
+      "D": "The user has not paid for the Excel license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stock-for-Stock' transaction typically allows for a 'tax-free' exchange of shares for the seller.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Mezzanine Debt' characteristics? (Select all that apply)",
+    "options": {
+      "A": "Subordinated to senior debt",
+      "B": "Often carries a high interest rate (e.g., 10-15%)",
+      "C": "May include equity warrants (equity 'kickers')",
+      "D": "The first debt to be paid down in a cash flow sweep"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Fair Value' of an asset?",
+    "options": {
+      "A": "The original price paid for the asset (Historical Cost).",
+      "B": "The price that would be received to sell an asset in an orderly transaction between market participants.",
+      "C": "The value of the asset as determined by the company's CEO.",
+      "D": "The amount the company would get if it sold the asset to a relative."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 3-statement model, where does the 'Opening Cash Balance' come from?",
+    "options": {
+      "A": "The current year's Income Statement.",
+      "B": "The prior year's Balance Sheet (Ending Cash).",
+      "C": "The total amount of debt issued in the current period.",
+      "D": "A random number generated by Excel for scenario testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Net Operating Profit After Tax' (NOPAT) is used to calculate the Unlevered Free Cash Flow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which are 'Valuation Multiples'? (Select all that apply)",
+    "options": {
+      "A": "EV / EBITDA",
+      "B": "P / E Ratio",
+      "C": "EV / Revenue",
+      "D": "Current Ratio"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asset-Light' business model projecting?",
+    "options": {
+      "A": "A model that uses very thin fonts.",
+      "B": "A company that operates with minimal physical assets to maximize flexibility and ROIC.",
+      "C": "A company that sells only lightweight products like software.",
+      "D": "A company that operates only in the daytime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Working Capital Adjustment' in a purchase agreement?",
+    "options": {
+      "A": "Adjusting the number of hours the employees work.",
+      "B": "A mechanism to ensure the buyer receives a 'normal' level of inventory and receivables at the close.",
+      "C": "A way to increase the price of the acquisition after it has already closed.",
+      "D": "Deleting the accounts payable from the balance sheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Coverage Ratio' measures a company's ability to meet its interest and principal obligations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Excel formula is used to calculate the 'Weighted Average' of a set of values with varying weights?",
+    "options": {
+      "A": "SUMIF()",
+      "B": "SUMPRODUCT(values, weights) / SUM(weights)",
+      "C": "AVERAGE()",
+      "D": "INDEX(MATCH())"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Diluted' EPS vs 'Basic' EPS?",
+    "options": {
+      "A": "They are exactly the same.",
+      "B": "Basic uses actual shares; Diluted accounts for all potential shares from options, warrants, etc.",
+      "C": "Diluted EPS is always higher than Basic EPS.",
+      "D": "Basic is for text; Diluted for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Capital Budgeting', what is the 'Payback Period'?",
+    "options": {
+      "A": "The time it takes for a project to generate enough cash to recover the initial investment.",
+      "B": "The interest rate paid to the bank every year.",
+      "C": "The total number of years a project is expected to last.",
+      "D": "The percentage of revenue paid to the CEO."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a financial model, 'Blue' font typically represents a cell that contains a formula.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are types of 'Real Options' in capital budgeting? (Select all that apply)",
+    "options": {
+      "A": "Option to expand",
+      "B": "Option to abandon",
+      "C": "Option to delay",
+      "D": "Option to fire the CEO"
+    },
+    "answer": ["A", "B", "C"]
+  }
+  ]
+}

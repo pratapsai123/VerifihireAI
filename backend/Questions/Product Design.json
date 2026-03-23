@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Product Design", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of 'Product Design' in a business ecosystem?",
+    "options": {
+      "A": "To write the backend server-side code for data encryption strictly.",
+      "B": "To masterfully solve user problems and create functional, aesthetically pleasing products that align with technical business goals.",
+      "C": "A specialized software for designing physical architectural blueprints strictly.",
+      "D": "To increase the frame rate of the developer's local code editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the first step of the Design Thinking process where designers masterfully seek to understand the user's needs and challenges?",
+    "options": {
+      "A": "Prototyping",
+      "B": "Empathize",
+      "C": "Rasterization strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Minimum Viable Product' (MVP) is a version of a product with just enough features to satisfy early customers and masterfully provide technical feedback for future development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical component refers to the overall masterfully managed look and feel of a product's interface, including buttons, icons, and spacing?",
+    "options": {
+      "A": "Backend Architecture",
+      "B": "User Interface (UI)",
+      "C": "Binary Header strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of a 'Design System' in an enterprise organization?",
+    "options": {
+      "A": "To calculate the physical weight of the designer's laptop.",
+      "B": "To technically provide a collection of reusable components and masterfully assigned standards that ensure visual and functional consistency (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To physically lock the company's Figma account after hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'User Experience' (UX) technically focuses on the masterfully assigned ease of use and pleasure provided in the interaction between a user and the product.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Wireframes' to technically map out the skeletal structure of a digital product masterfully?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Structural Orchestration / Layout Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Affordance' technically defined as in product design?",
+    "options": {
+      "A": "The speed at which a designer can create a prototype.",
+      "B": "The technical properties of an object that masterfully suggest how it masterfully should technicaly be used (e.g., a button looks clickable).",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Design Debt' masterfully refers to the technical Always-On cost of masterfully managed rework caused by choosing an easy design solution now instead of a better long-term approach.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Accessibility' in product design?",
+    "options": {
+      "A": "The physical ability to enter the office building.",
+      "B": "The technical practice of masterfully designing products so they technicaly can be used by everyone, including people with masterfully managed disabilities.",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a design team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Product Design benefits for 'Customer Satisfaction'? (Select all that apply)",
+    "options": {
+      "A": "Reducing technical 'Friction' masterfully during the user journey",
+      "B": "Ensuring masterfully perceived technical 'Value' through masterfully managed aesthetics",
+      "C": "Buying physical snacks for the product managers",
+      "D": "Providing masterfully clear technical 'Feedback' after every user action"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hierarchy' masterfully used for in a visual layout?",
+    "options": {
+      "A": "Ensuring the physical office floor is level.",
+      "B": "The technical arrangement of elements to technicaly signal their masterfully managed level of importance to the user (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Information Architecture' (IA) refers to the technical Always-On structure used to masterfully organize and technicaly label content to help users find information.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Iterative' design?",
+    "options": {
+      "A": "Using a physical ruler to measure the screen.",
+      "B": "The technical process of masterfully repeating the design cycle based on masterfully assigned technical feedback and testing.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'User Journey Map' technically?",
+    "options": {
+      "A": "A technical masterfully assigned visual representation of every masterfully managed technical step a user takes to achieve a goal within a product.",
+      "B": "A physical map of the world in the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Low-Fidelity' prototypes technically focus on the masterfully assigned layout and logic masterfully without using final colors or technical imagery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Usability Testing'?",
+    "options": {
+      "A": "The weight of the project team.",
+      "B": "The technical masterfully assigned method of masterfully evaluating a product by technicaly testing it with real users (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constraint' technically intended to achieve in a design sprint?",
+    "options": {
+      "A": "Making sure the designer moves slowly.",
+      "B": "The masterfully managed technical limitations (e.g., time, budget, technology) that masterfully technicaly guide the focus of the design solution (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Skeuomorphism' is a technical design style that masterfully mimics the technical appearance of masterfully assigned real-world objects in a digital interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Product' 'Spec' (Specification)?",
+    "options": {
+      "A": "To technically provide a masterfully definitive record of the masterfully intended technical features and masterfully managed requirements for a design.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Product Design' phases? (Select all that apply)",
+    "options": {
+      "A": "Discovery",
+      "B": "Ideation",
+      "C": "The SQL query parser",
+      "D": "Validation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Empathy Map' significance in product architecture?",
+    "options": {
+      "A": "Hiring a person named Empathy.",
+      "B": "The technical masterfully assigned visualization tool used to technicaly capture what users say, do, think, and masterfully managed feel (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Service' 'Design' technically?",
+    "options": {
+      "A": "A technical masterfully managed framework masterfully aligning technical processes, infrastructure, and people to technically improve the user experience (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Models' occur when a designer masterfully masterfully assumes a user knows how a complex technical feature works when it technically is masterfully managed for experts only.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Product Design benefits for 'Business Growth'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Pivot' points based on market feedback",
+      "B": "Ensuring technical 'Market-Fit' masterfully via masterfully managed user research",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Facilitating masterfully clear technical communication of masterfully assigned product value"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'White' 'Space' technically used for in a layout?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully assigned area masterfully left unmarked to masterfully technicaly improve focus and masterfully managed readability (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'User' 'Churn' tracking in product design?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of how masterfully many users technicaly stop using a masterfully managed product over a masterfully defined period.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Contrast' is a technical Always-On standard that masterfully measures how technicaly masterfully elements are distinguished masterfully by their technical color or masterfully assigned weight.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Product Design tools? (Select all that apply)",
+    "options": {
+      "A": "Figma",
+      "B": "Miro",
+      "C": "The number of security cameras in the office",
+      "D": "Sketch"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mobile-First' logic in modern product design?",
+    "options": {
+      "A": "Building a physical warehouse for mobile phones.",
+      "B": "The technical masterfully assigned strategy of masterfully designing for the masterfully managed smallest screen first to technicaly ensure essential features are masterfully prioritized.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Product' 'Validation' technically?",
+    "options": {
+      "A": "A technical masterfully managed process masterfully ensuring that a technical masterfully assigned solution masterfully technicaly solves the masterfully managed user problem (effect).",
+      "B": "Hiring a person named Validation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when a design team technicaly masterfully enforces 1990 'Waterfall-only' requirements for a 2026 'Agile-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Workflow' Strategy in product design? (Select all that apply)",
+    "options": {
+      "A": "Standardizing technical asset naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated visual technical asset production masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Proximity' technically used for in a layout?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical relationship between elements by masterfully technicaly grouping them (effect).",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Product' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated design patterns and manual UI workarounds, which makes the product technicaly 'Riskier' over time.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Moodboards' are a technical Always-On standard that masterfully allow designers to masterfully manage and technicaly mirror the masterfully assigned visual technical aesthetic of a project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Design' Categories? (Select all that apply)",
+    "options": {
+      "A": "Interaction Design",
+      "B": "Visual Design",
+      "C": "The number of security cameras in the office",
+      "D": "Experience Design"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Consistency' significance in design support?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical elements masterfully remain masterfully consistent across the masterfully assigned entire product interface.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a design flaw?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a visual technical flaw masterfully occurring technicaly until it is masterfully flagged in the technical product design report.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' product era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Product 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Prototypes' are masterfully finalized",
+      "B": "Validating the security technical configuration of the design server",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if the visual technical goals masterfully match the business specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Feedback' 'Loop' significance in design management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where user technical feedback and masterfully assigned concerns masterfully are technicaly captured to ensure masterfully managed strategic success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Design' 'Event' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about design launches, masterfully finalized visual approvals, and masterfully applied hardware alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Product design technically includes 'Accessibility Validation' by masterfully defining the technical support masterfully given to a user after every technical product release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical operational alignment",
+      "B": "Minimizing technical asset rendering latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical design documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Asset' 'Usage' Analysis in a design system?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Component' masterfully moving through the suite to masterfully identify technical friction points.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE)?",
+    "options": {
+      "A": "The average technical duration that a design technical baseline masterfully remains performance-stable before an unplanned technical service disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully masterfully assumes a design is 100% stable for all devices when it technicaly is masterfully only optimized for one browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Engagement' Strategy in design? (Select all that apply)",
+    "options": {
+      "A": "Standardizing design technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated design technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'North' 'Star' significance in a product?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary vision masterfully intended to technicaly capture the core masterfully assigned value that a product masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of design approvals masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Identity' 'Shadowing' is a technical Always-On standard that masterfully allows project leads to masterfully manage and technicaly mirror the configuration of a primary brand goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Product priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical data asset latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical design documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Identity' Map Analysis in design?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global design strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a design strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a stakeholder masterfully masterfully assumes a design is final when it technicaly is masterfully preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' product design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring design portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Product' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that design data masterfully follows all legal architectural rules after every technical transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Transit' tracking?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well design assets are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' product era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for products? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying design drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing product technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup design register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the design integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Design regions' occur when a lead masterfully masterfully assumes a product is available globally when it technicaly is masterfully regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Product Designer",
+      "B": "Design Program Specialist",
+      "C": "Design Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Product' 'Architecture' Analysis?",
+    "options": {
+      "A": "The technical evaluation of people, goals, and design nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical framework is used to measure user experience through five categories: Happiness, Engagement, Adoption, Retention, and Task Success?",
+    "options": {
+      "A": "The SQL query parser strictly",
+      "B": "Google H.E.A.R.T. Framework",
+      "C": "Rasterization Entropy strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Design Tokens' are a technical orchestration method used to store visual atoms like colors, spacing, and typography in a platform-agnostic format (e.g., JSON) to ensure design-to-code parity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Design-to-Development Handoff' tools like Zeplin or Figma Inspect?",
+    "options": {
+      "A": "To physically organize the office floor plan.",
+      "B": "To technically provide engineers with masterfully managed CSS attributes, asset exports, and structural redlines directly from the design file (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live customer chat monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', which technical concept involves managing how a product's interface transitions between 'Empty', 'Loading', 'Success', and 'Error' states?",
+    "options": {
+      "A": "Static Routing strictly",
+      "B": "State Management / Interaction States",
+      "C": "The Recycle Bin strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Experience Engineering', what is the technical significance of 'Cognitive Load' in a complex SaaS dashboard design?",
+    "options": {
+      "A": "It defines the physical weight of the user's hard drive.",
+      "B": "The technical measure of the masterfully managed mental effort required for a user to process information and finalize a task without system failure (effect).",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the size of the font on the admin console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'High-Fidelity' prototyping is a technical Always-On standard used to create interactive models that technicaly mimic the final product's look, feel, and logic for stakeholder validation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Tree Testing' to technically verify the findability of items within a product's navigational structure?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Information Architecture Validation / Findability Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Visual' 'Regression' 'Testing' technically designed to achieve in a design system update?",
+    "options": {
+      "A": "Measuring the distance between physical office desks.",
+      "B": "To masterfully identify technical discrepancies between a masterfully assigned 'Golden Image' and the current UI rendering to prevent stylistic breakage (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for managing 'Component Complexity'? (Select all that apply)",
+    "options": {
+      "A": "Implementing technical 'Atomic Design' principles masterfully",
+      "B": "Utilizing masterfully configured 'Slot' patterns for flexible sub-components",
+      "C": "Buying physical snacks for the Board members",
+      "D": "Conducting masterfully applied 'Stress Tests' on responsive layout breakpoints"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: In 'Responsive Engineering', the technical 'Container Query' must masterfully be verified to ensure that components adapt technicaly based on their own width rather than the viewport size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dark' 'Mode' 'Tokenization' significance in an enterprise product audit?",
+    "options": {
+      "A": "Ensuring the physical room temperature is level.",
+      "B": "The technical orchestration of masterfully mapping color aliases so that a single 'Primary-Action' token technicaly updates for both light and dark themes (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Success' (MTTS) in a product usability study?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A technical metric tracking organizational efficiency by measuring the average technical duration required for a user to masterfully complete a critical flow.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a designer using 'Micro-interactions' to technically provide immediate feedback and masterfully guide user behavior through small visual cues?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Feedback Orchestration / Trigger Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' expectations in product design occur when a lead masterfully promises '100% Mobile Accessibility' while technicaly utilizing a masterfully managed 'Desktop-Only' interaction pattern.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Design' 'System' 'Hardening' benefits? (Select all that apply)",
+    "options": {
+      "A": "Technically finalizing a Component Library for masterfully global product alignment",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Reducing technical 'UI Debt' masterfully by locking masterfully validated accessibility patterns"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Heuristic' 'Analysis' significance in a multi-region product interaction audit?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical act of masterfully reviewing an interface against a masterfully managed set of established usability principles (cause) to flag interaction friction (effect).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interaction' 'Volatility' monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the frequency of masterfully identified user errors, identifying an unstable technical product-fit baseline.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Accessibility' 'Automation' logic technically refers to the use of 'Linters' and 'Scan APIs' to masterfully identify contrast and aria-label failures in the technical production code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' framework handles 'Automated' 'Sentiment' 'Ingestion'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Qualtrics / Hotjar / Sentiment Analysis API orchestration",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information' 'Scent' significance in a navigational interaction support?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The technical evaluation of whether labels and icons masterfully technicaly provide enough information for a user to predict what they will find on the next page (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Constraint-Based' 'Layout' logic technically in product design?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "A technical system of masterfully defining the technical relationship between elements so the UI masterfully adapts to different aspect ratios without manual rework.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Mental Models' occur when a designer masterfully assumes a 'Horizontal Scroll' is intuitive for all users while technicaly the users masterfully masterfully expect a 'Vertical List'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Product' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Principal Design Architect (Defining core patterns and token taxonomies)",
+      "B": "VP of Product Quality (Enforcing technical performance and accessibility policies)",
+      "C": "Data Insights Lead (Monitoring technical conversion MTBF and stability)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Friction' discovery in an organizational interaction audit?",
+    "options": {
+      "A": "Designing icons in a dark room.",
+      "B": "The technical process of identifying masterfully managed UI steps (cause) that masterfully no longer technicaly align with the masterfully assigned user intent (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'UX' 'Breach'?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long a technical interaction error exists before the masterfully configured 'Telemetry' flags the dropout.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Taxonomies' logic technically occurs when a designer masterfully uses 'Business Slang' while the technical product masterfully masterfully enforces 'User-Friendly Terminology'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Optimization' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical business units with technically high 'Design Drift' automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technicaly generating 'Interaction Snapshots' based on masterfully tracked session metadata"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' in product design?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Component reusability', 'MTTR for recent design bugs', 'Consistency stability', and 'Identity integrity maturity'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Failures' (MTBSF) in design platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the design protocol baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a designer masterfully masterfully assumes an 'Instant Update' but the technical engineering system masterfully requires a 5-second technical 'Wait' for state validation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Experience' 'Analytics' for design leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Operational Waste' (High friction) automatically",
+      "B": "Predicting future 'Storage' needs based on historical growth in technical session data",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Accessibility Blindspots' in un-vetted technical design segments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Product Design Pattern?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a UI function (the component logic) is isolated from the service 'What' (the user goal), allowing for central masterfully updated standards.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Technical' 'Debt' in an enterprise environment?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated component versions and manual CSS overrides, which makes the product technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in product leadership refers to a manager giving a 'Remote Lead' a local machine that technicaly lacks the masterfully required camera resolution for emotion-tracking studies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Product' 'Design' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Architecture Policy' (e.g. Mandatory Token usage) via automated compliance linters",
+      "B": "Accelerating 'App Onboarding' through standardized Design Library Blueprints",
+      "C": "Ensuring 'Systemic' integrity for global interaction logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Resiliency' orchestration in a Design squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted UI Modules' and 'Telemetry Sinks' so local units can manage their own technical design health without manual roadblocks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Success' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Interactive' failures and resets, identifying an unstable technical environment or masterfully inconsistent design logic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' logic technically occurs when a design lead masterfully attempts a 'Zero-Error' claim while the technical hardware masterfully enforces 'Periodic-Only' state updates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Product Design? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Interaction' waste via automated auditing",
+      "B": "Predicting future market 'No-Code Tooling' needs based on technical adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Design Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in design automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful structural logic state (like a proven multi-tenant navigation pattern) from one site and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a technical design fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a structural fix being committed until 'Automated Smoke Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Static-Mockup' requirements for a 2026 'Cloud-Native' interaction environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Product' 'Design' 'Succession' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Experience Health",
+      "B": "Principal Interaction Architect",
+      "C": "Lead Regulatory Transit Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Design squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Finding Sinks', 'Organization Permissions', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Product' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Snapshot' runs where the organization's technical design logic masterfully matched the masterfully expected behavioral outcome without manual correction.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive masterfully expects a 'Full Global Design Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Product Design? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded instances) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global regional centers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Design Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' technical definitions masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Registry RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in design platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the design platform baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IT leadership occurs when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Performance Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping component templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' technical hardware"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Product' 'Support' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a monitoring control (the session config) is isolated from the visual 'What' (the branding target), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Telemetry' 'Failure' in monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated technical sensor going 'Offline' until the 'Log Platform' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead masterfully enforces 2010 'Signature-only' models to manage a 2026 'Experience-Edge' design environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Product' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Connectivity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Experience' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Symbols, Design Audits, Extended Variables, and Secret Managers to ensure a seamless and safe service release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP) in design?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant skeletal control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one complex design simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded subnets) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Design Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Design Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical design expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' for design platforms? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Design Training' spend with 'MTTR' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Product Design?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major interactive strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global enterprise environment, how should a Principal Designer technically model 'Design System Entropy' to predict the impact of component 'detachment' on front-end rendering performance and maintainability across 50+ product lines?",
+    "options": {
+      "A": "By assuming a flat 10% decrease in velocity for every custom CSS override strictly.",
+      "B": "By utilizing 'Graph Theory' to calculate dependency density and applying a stochastic model to determine the 'Drift Variance' between the Figma source-of-truth and production code.",
+      "C": "By limiting the number of global design tokens to exactly 100 to prevent metadata overhead strictly.",
+      "D": "By requiring a manual board-level signature for every change in a primary button's border-radius."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Design' 'Decoupling' refers to the technical practice of isolating 'Visual Aesthetics' from 'Functional Logic' within a component library to ensure that a brand pivot (cause) does not systemically force a rewrite of the masterfully validated user-interaction flows (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a Design Director to predict the 'FinOps ROI' of shifting from 'Static High-Fidelity Mockups' to a 'Code-Based Prototyping' workflow for a petabyte-scale data product?",
+    "options": {
+      "A": "Probabilistic Analysis of 'Rework Amortization' vs. the fixed technical cost of training designers in React/Swift-native logic frameworks.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Design Arbitrage' during an international M&A involving the merger of a firm using 'Material Design' and a firm using 'Human Interface Guidelines' (HIG)?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Interaction Archetypes' into a unified 'Experience Fabric' that technically satisfies the cross-platform accessibility and performance requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live user interaction telemetry dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Design' 'Splicing' (Dynamic Rendering) and how does it technically enable 'Global Resilience' during a regional outage of a core design-token CDN?",
+    "options": {
+      "A": "When an employee physically routes support calls to a different country.",
+      "B": "A technical design pattern where the application masterfully switches to 'Local-Native Fallbacks' via mapped logic, technically allowing for visual continuity without a network-dependent style layer (effect).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the interaction specification logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'High-Velocity' consumer design policy is technically applied to a 'High-Reliability' expert system (e.g. air traffic control), leading to systemic 'Cognitive Tunneling' and critical operator error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Design' 'Chaos' (injecting randomized 500ms 'UI Lag' in a sandbox) to verify if the 'Error Handling' technical pipeline masterfully maintains 'User Trust Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection UX Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Experience' 'Contagion' and its relation to 'Platform Exhaustion' in a massive 10,000-page enterprise product ecosystem?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flawed navigational update in a core 'Global Module' (cause) masterfully triggers a surge in invalid user states across nested subsidiaries, resulting in a systemic 'Workflow Freeze' (effect).",
+      "C": "A specialized tool for measuring light levels in the design studio.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Design Fabric' ROI calculations for a strategic shift to 'Token-Native' Product Ops? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Waste TCO' by automatically identifying and masterfully purging 90% of redundant UI components",
+      "B": "Financial savings from 'QA' labor reclamation due to 100% verified 'System-to-Production' mapping",
+      "C": "The value of 'Strategic Integrity' gained through 100% verified compliance with global data-privacy (GDPR) visual requirements",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Design Leadership level ensures that 'Designers' can flag 'Technical Debt in the Visual Baseline' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Design System Governance' model for a 10,000-person global engineering workforce?",
+    "options": {
+      "A": "The physical weight of the 'Apple Human Interface Guidelines' book.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'Feature Velocity' vs. anomalous 'Design Drift' in sub-brands) into a cohesive 'Experience Failure' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Asset' 'Splicing' logic during a high-throughput multi-region product launch?",
+    "options": {
+      "A": "Breaking a physical router into pieces.",
+      "B": "The process of masterfully isolating 'High-Priority Global Assets' from 'Low-Priority Regional Overrides' on dedicated processing tiers to ensure 'Infrastructure Accessibility' during peak traffic windows.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Visual Dampening' during a suspected 'Market Crash' or 'Crisis' event on a core global product?",
+    "options": {
+      "A": "Waiting for the news to report the failure before acting.",
+      "B": "Immediately initiating a 'Minimal-Visual-Interference' layout policy and technically diverting complex marketing imagery to a 'Secondary-Tier' before the user-attention engine masterfully enters an 'Overload' state.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a design firm acquisition often result in 'System Rejection', where the acquired firm's designers find ways to 'Side-load' personal legacy plugins to bypass parent firm's 'Security-Strict' Figma architecture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Succession' 'Calibrations' in a Product Design team? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Generative Design AI' and 'Spatial Computing' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the design team",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Product Design Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Product Design Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Design Strategy' itself (e.g. why we use 'Subscription' vs 'Freemium' flows) is the cause of systemic failure, rather than just fixing a single 'Broken Button'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Global Design Ops?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'UI Kit' that technically has zero redundant regional owners.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Product Design occurs when a firm continues to rely on 'Manual Specification PDFs' in 2026, despite modern business requirements necessitating 'API-Native' documentation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Design' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Creative Spend (RAROCS)",
+      "B": "Percentage of 'Business Critical' components with 100% verified 'Idempotency' in automated tests",
+      "C": "Velocity of 'Legacy Pattern' retirement across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Project-to-Platform' design transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the design studio.",
+      "B": "The risk that long-tenured 'Lead Designers' will block 'Systemized Logic' adoption to protect their manual 'Creative-Gatekeeping' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in a Design Fabric?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of business stability before a major architecture or strategy-alignment error occurs in the design layer.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a Head of Product demands 'Zero Interaction Friction' while the Board only rewards the team for '100% Volume Output Growth' (ignoring usability debt).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Insight' 'Orchestration' for Design? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'UI Interaction Patterns' with potential 'Kernel-level' data exfiltration attempts",
+      "B": "Automatically identifying 'System Owner' gaps in real-time as a new Product Suite is provisioned",
+      "C": "Guaranteed to replace all human Design leads",
+      "D": "Analyzing global metadata to predict 'Behavioral drift' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Experience' 'Ecosystem' 'Architecture' (EEA) for a Principal Lead?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Design Systems, Multi-region Interaction Hubs, Identity Fabrics, and Real-time Market Telemetry into a single 'Unified Experience Fabric'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in Design M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Interaction' logic matches the parent company's 'Durability Standard' before fabric merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Global Consistency' from a newly hired team that requires 12 months of 'Historic Workflow Mapping' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Asset' 'Compliance' 'Audit' 'Challenges' in Product Design? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of path integrity for Regulatory auditors",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residence' rules are enforced during automated multi-region style replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Design Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Tactical Execution' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in legacy UI components?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Usability' vulnerability release and the Architect officially flagging the total internal strategy exposure count based on library scans.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Component Readiness' to the board while the internal team is aware that 'Segment B' is technically suffering from accessibility drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Interaction Write' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Library Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Design Audit' data with 'Corporate Risk' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global design region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Monitoring Sinks, Pattern-tags, and RBAC to stabilize a new offshore design studio in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Design Architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed legacy files after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Product' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Design Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating product designers on a deserted island.",
+      "B": "Ensuring that 'Raw user-interaction logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT) post-major-experience-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile design failure (e.g. global navigational outage during tax season) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Product Design strategy refers to an organization promising 'Zero Disruption' while utilizing a 'Low-Budget' sequential release model for high-stakes components.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Roles' in Design?",
+    "options": {
+      "A": "Global Head of Experience Resilience",
+      "B": "Chief Product Architect",
+      "C": "Director of Interaction Telemetry",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global design firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Library Uptime', 'MTTI for design findings', 'Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Design team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Intent-Native' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Verification' 'Challenges' in Product Design? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Intent' analysis",
+      "B": "Keeping hardware artifacts updated with rapidly changing OS versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Design Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Design Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency' in Design?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Product Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired inventory within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Strategic Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Design Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Platform Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Design Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Experience Model' can be 'Lifted' from one product line and applied to another to ensure global parity.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated security service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Strategy Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for Design Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' Design model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Experience Sinks' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new performance vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Design Audits' are planned annually, but 'Global Threat TTPs' update every 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Design Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' design culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic strategy shifts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits for design?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Product' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named Product.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'AIOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic failure until the organization's 'Operating Margin' returns to its target levels through execution process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic design grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Design' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}
