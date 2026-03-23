@@ -673,7 +673,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 onChange={(v) => setData({ ...data, pan: v })}
               />
               <div className="candidate-input-group">
-                <label className="candidate-static-label">Upload PAN Card</label>
+                <label className="candidate-static-label">Upload PAN Card (Max size: 2.5MB)</label>
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
@@ -698,7 +698,7 @@ const CandidateDetails = ({ token, onComplete }) => {
 
                       // Accept if either MIME type or extension is valid
                       const isValidType = isValidMimeType || hasValidExtension;
-                      const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB (increased from 2MB for PAN card images)
+                      const isValidSize = file.size <= 2.5 * 1024 * 1024; // 2.5MB limit
 
                       // Debug logging
                       console.log('File validation:', {

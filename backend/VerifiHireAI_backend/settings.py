@@ -182,6 +182,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# File upload limits (2.5MB)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
+
 # OTP settings
 # OTP validity duration (in seconds). Default used by `EmailOTP.is_expired()`.
 EMAIL_OTP_EXPIRY_SECONDS = 120

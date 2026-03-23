@@ -145,6 +145,7 @@ export default function CodingHome() {
                     </div>
                 </div>
 
+                {items.length > 0 && (
                 <div className="coding-card" style={{ marginBottom: '16px' }}>
                     <div className="coding-form-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
                         <div className="coding-field">
@@ -205,6 +206,7 @@ export default function CodingHome() {
                         </div>
                     </div>
                 </div>
+                )}
 
                 {loading ? (
                     <div className="coding-card">Loading…</div>

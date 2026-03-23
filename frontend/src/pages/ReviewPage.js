@@ -1004,6 +1004,7 @@ function ReviewPage() {
                 />
               </div>
 
+              {(questions['Coding'] || []).length > 0 && (
               <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
@@ -1056,6 +1057,7 @@ function ReviewPage() {
                   <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
                 </div>
               </div>
+              )}
             </div>
           </div>
 

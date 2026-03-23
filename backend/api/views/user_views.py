@@ -40,11 +40,14 @@ def invite_user_view(request):
         if not inviter or not inviter.company:
             return Response({'error': 'Invalid inviter.'}, status=status.HTTP_403_FORBIDDEN)
 
-        if inviter.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
+        if inviter.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR}:
             return Response({'error': 'You are not allowed to invite users.'}, status=status.HTTP_403_FORBIDDEN)
 
         if inviter.role == UserProfile.ROLE_HR_MANAGER and role not in {UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
             return Response({'error': 'HR Manager can only invite HR or Interviewer users.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if inviter.role == UserProfile.ROLE_HR and role != UserProfile.ROLE_INTERVIEWER:
+            return Response({'error': 'HR can only invite Interviewer users.'}, status=status.HTTP_403_FORBIDDEN)
 
         company = inviter.company
         company_domain = (company.domain or '').strip().lower()
