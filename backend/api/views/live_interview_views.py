@@ -108,8 +108,16 @@ def create_interview_invitations_and_send_email_view(request):
             end_time = invitation.end_time
             time_zone = invitation.time_zone
             
-            # Read validity mode (assuming it was passed if needed, or default to exact_window for now)
-            validity_mode = 'exact_window'
+            # Read validity mode from payload
+            validity_mode = (data.get('validity_mode') or '').strip() or 'exact_window'
+            
+            # Mapping validity_mode to user-friendly label
+            validity_labels = {
+                'exact_window': 'Particular date + time window',
+                'date_anytime': 'Particular date (whole day / date range)',
+                'one_week': '1 week from start'
+            }
+            validity_type_label = validity_labels.get(validity_mode, 'Particular date + time window')
 
             # Convert UTC times to candidate's local timezone for display
             display_tz = time_zone or ''
@@ -182,7 +190,6 @@ def create_interview_invitations_and_send_email_view(request):
                     schedule_text = f"Start Date: {display_start_date}\n"
                     if display_end_date and display_end_date != display_start_date:
                         schedule_text += f"End Date: {display_end_date}\n"
-                    schedule_text += "Available: 12:00 AM to 11:59 PM\n"
                     if display_tz:
                         schedule_text += f"Time Zone: {display_tz}\n"
 
@@ -202,12 +209,6 @@ def create_interview_invitations_and_send_email_view(request):
                             f'<td style="padding:6px 0;">{display_end_date}</td>'
                             '</tr>'
                         )
-                    schedule_html += (
-                        '<tr>'
-                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Available</td>'
-                        '<td style="padding:6px 0;">12:00 AM to 11:59 PM</td>'
-                        '</tr>'
-                    )
                     if display_tz:
                         schedule_html += (
                             '<tr>'

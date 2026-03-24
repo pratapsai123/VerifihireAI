@@ -37,7 +37,7 @@ FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifihireai.co
 # Application definition
 
 INSTALLED_APPS = [
-#    'daphne',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-#    'channels',
+    'channels',
     'api',
     'ai_assessments',
     'ai_candidates',
@@ -88,7 +88,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VerifiHireAI_backend.wsgi.application'
-# ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
+ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {

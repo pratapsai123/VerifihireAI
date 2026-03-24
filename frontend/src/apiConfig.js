@@ -35,12 +35,18 @@ const getWsBaseUrl = () => {
         }
 
         if (hostname === 'verifihireai.com' || hostname === 'www.verifihireai.com') {
-            // Nginx handles the /ws path
-            return `${protocol}//${hostname}/ws`;
+            // Nginx handles the /ws path. Always use wss if the site is accessed via https.
+            // If the user is on port 3000, we still want to connect to the main domain's /ws
+            return `wss://${hostname}/ws`;
         }
 
-        // Default for other domains
-        return `${protocol}//${hostname}:8001/ws`;
+        // Default for other domains (e.g. public IP directly)
+        // If accessed via port 3000, we try to reach the backend on 8001 directly
+        if (window.location.port === '3000') {
+            return `${protocol}//${hostname}:8001/ws`;
+        }
+
+        return `${protocol}//${hostname}/ws`;
     }
     return process.env.REACT_APP_WS_BASE_URL || 'ws://localhost:8001/ws';
 };

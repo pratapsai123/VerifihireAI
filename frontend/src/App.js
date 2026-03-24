@@ -43,6 +43,7 @@ import Settings from './pages/Settings';
 import BookInterview from './pages/BookInterview';
 import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
+import ThankYou from './pages/ThankYou';
 import './App.css';
 
 import Header from './components/Header';
@@ -177,6 +178,7 @@ function AppContent() {
           <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
           <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
           <Route path="/book-interview/:token" element={<BookInterview />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
 
         {/* Cookie Consent Banner */}

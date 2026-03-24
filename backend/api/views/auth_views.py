@@ -55,7 +55,7 @@ def send_otp_view(request):
             domain = _email_domain(email)
             if domain:
                 company = Company.objects.filter(domain=domain).first()
-                if company and UserProfile.objects.filter(company=company).count() >= 5:
+                if company and UserProfile.objects.filter(company=company).count() >= 10:
                     return Response(
                         {
                             'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],
@@ -429,7 +429,7 @@ def register_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        if UserProfile.objects.filter(company=company).count() >= 5:
+        if UserProfile.objects.filter(company=company).count() >= 10:
             return Response(
                 {
                     'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],

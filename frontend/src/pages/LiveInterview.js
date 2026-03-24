@@ -10,10 +10,13 @@ function LiveInterview() {
   const sessionId = searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session';
 
   // State management
+  // eslint-disable-next-line no-unused-vars
   const [candidateName, setCandidateName] = useState('Candidate');
+  // eslint-disable-next-line no-unused-vars
   const [interviewerName, setInterviewerName] = useState('Interviewer');
   const [sessionExpired, setSessionExpired] = useState(false);
   const [bothPartiesConnected, setBothPartiesConnected] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [connectionEstablished, setConnectionEstablished] = useState(false);
 
   // Media states
@@ -45,7 +48,11 @@ function LiveInterview() {
   // Proxy detection states
   const [cameraReady, setCameraReady] = useState(false);
   const [isDetectionPaused, setIsDetectionPaused] = useState(false);
-  const [violationCount, setViolationCount] = useState(0);
+  const violationKey = `violation_count_${sessionId}`;
+  const [violationCount, setViolationCount] = useState(() => {
+    const saved = sessionStorage.getItem(violationKey);
+    return saved ? parseInt(saved, 10) : 0;
+  });
   const violationLimit = 4;
 
   // Refs
@@ -102,32 +109,39 @@ function LiveInterview() {
   useEffect(() => {
     if (sessionExpired) return;
 
-    // Get backend URL from API_BASE_URL or use current host
-    const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '').split(':')[0]; // Remove port if present to avoid :3000 issues
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
+    const hostname = window.location.hostname;
+
+    // Clean hostname to avoid port 3000 issues if accessed via development port
+    const cleanHostname = hostname;
 
     const candidates = [];
 
-    // 1. Explicit Production URL (Highest Priority for external access)
-    if (isProduction) {
-      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/candidate/`);
+    // 1. Primary: Use the centralized WS_BASE_URL (which should be correct)
+    let base = WS_BASE_URL.endsWith('/') ? WS_BASE_URL.slice(0, -1) : WS_BASE_URL;
+    // Ensure base doesn't have :3000 if we are on verifihireai.com
+    if ((hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) && base.includes(':3000')) {
+      base = base.replace(':3000', '');
+    }
+    candidates.push(`${base}/interview/${sessionId}/candidate/`);
+
+    // 2. Production Domain (Explicit)
+    if (hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) {
+      candidates.push(`wss://${hostname}/ws/interview/${sessionId}/candidate/`);
     }
 
-    // 2. API_BASE_URL derived
-    if (apiUrl && apiUrl !== 'localhost' && !candidates.some(c => c.includes(apiUrl))) {
-      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/candidate/`);
-    }
-
-    // 3. Current Host (Fallback)
+    // 3. Fallback: Host but NO PORT 3000
     const currentHost = window.location.host;
-    if (!candidates.some(c => c.includes(currentHost))) {
-      candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/candidate/`);
+    if (!currentHost.includes(':3000')) {
+      const hostCandidate = `${protocol}//${currentHost}/ws/interview/${sessionId}/candidate/`;
+      if (!candidates.includes(hostCandidate)) {
+        candidates.push(hostCandidate);
+      }
     }
 
     // 4. Localhost Fallback (for mixed environments)
-    if (window.location.hostname === 'localhost') {
-      candidates.push(`${WS_BASE_URL}/interview/${sessionId}/candidate/`);
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      candidates.push(`ws://${hostname}:8001/ws/interview/${sessionId}/candidate/`);
     }
 
     let socket;
@@ -266,12 +280,19 @@ function LiveInterview() {
   const handleWebSocketMessage = useCallback((event) => {
     try {
       const data = JSON.parse(event.data);
-      console.log('Received message:', data);
+      console.log('≡ƒô⌐ Received message type:', data.type, data);
 
       // Handle ping/pong
       if (data.type === 'server_ping' || data.type === 'pong') return;
 
       switch (data.type) {
+        case 'session_info':
+          if (data.start_time) {
+            console.log('ΓÅ▒≡ƒôí Syncing start time from server:', data.start_time);
+            startTimeRef.current = new Date(data.start_time).getTime();
+          }
+          break;
+
         case 'connection_error':
           showNotification(`Connection error: ${data.error}`, 'error');
           break;
@@ -392,6 +413,7 @@ function LiveInterview() {
     } catch (error) {
       console.error('Error processing message:', error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [candidateName, interviewerName, screenShareLocked, screenShareHolder, sessionKey]);
 
   // Chat message handler
@@ -747,6 +769,7 @@ function LiveInterview() {
     streamIntervalRef.current = setInterval(() => {
       sendFrame();
     }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDetectionPaused, cameraReady]);
 
   const stopDetection = useCallback(() => {
@@ -830,6 +853,7 @@ function LiveInterview() {
   const registerViolation = useCallback((reason) => {
     const newCount = violationCount + 1;
     setViolationCount(newCount);
+    sessionStorage.setItem(`violation_count_${sessionId}`, newCount.toString());
 
     if (socketRef.current?.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
@@ -847,7 +871,7 @@ function LiveInterview() {
       showPopup(`⚠️ Warning ${newCount}/${violationLimit}: ${reason}`);
       pauseDetection();
     }
-  }, [violationCount, violationLimit, pauseDetection]);
+  }, [violationCount, violationLimit, pauseDetection, sessionId]);
 
   const endInterviewDueToViolations = useCallback(() => {
     stopDetection();
@@ -1118,6 +1142,7 @@ function LiveInterview() {
       console.error('❌ Error sending chat message:', error);
       showSessionPopup('Failed to send message. Please try again.', 'error');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [candidateName]);
 
   const appendChatMessage = useCallback((sender, message, isMine) => {

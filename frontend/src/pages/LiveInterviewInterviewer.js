@@ -13,6 +13,7 @@ function LiveInterviewInterviewer() {
 
   // State management
   const [candidateName, setCandidateName] = useState('Candidate');
+  // eslint-disable-next-line no-unused-vars
   const [interviewerName, setInterviewerName] = useState('Interviewer');
   const [sessionExpired, setSessionExpired] = useState(false);
   const [bothPartiesConnected, setBothPartiesConnected] = useState(false);
@@ -297,36 +298,36 @@ function LiveInterviewInterviewer() {
 
   // WebSocket connection
   const buildWsCandidates = useCallback((sessionId) => {
-    // Get backend URL from API_BASE_URL
-    const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '').split(':')[0];
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
+    const hostname = window.location.hostname;
 
     const candidates = [];
 
-    // 1. Explicit Production URL
-    if (isProduction) {
-      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/interviewer/`);
+    // 1. Primary: Use the centralized WS_BASE_URL
+    let base = WS_BASE_URL.endsWith('/') ? WS_BASE_URL.slice(0, -1) : WS_BASE_URL;
+    // Ensure base doesn't have :3000 if we are on verifihireai.com
+    if ((hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) && base.includes(':3000')) {
+      base = base.replace(':3000', '');
+    }
+    candidates.push(`${base}/interview/${sessionId}/interviewer/`);
+
+    // 2. Production Domain (Explicit)
+    if (hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) {
+      candidates.push(`wss://${hostname}/ws/interview/${sessionId}/interviewer/`);
     }
 
-    // 2. API_BASE_URL derived
-    if (apiUrl && apiUrl !== 'localhost') {
-      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/interviewer/`);
-    }
-    // 1. Primary WS_BASE_URL
-    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/interviewer/`);
-
-    // 2. Current Host (if different from WS_BASE_URL's host)
-    const wsBaseUrlHost = new URL(WS_BASE_URL).host;
+    // 3. Fallback: Host but NO PORT 3000
     const currentHost = window.location.host;
-
-    if (currentHost !== wsBaseUrlHost) {
-      candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
+    if (!currentHost.includes(':3000')) {
+      const hostCandidate = `${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`;
+      if (!candidates.includes(hostCandidate)) {
+        candidates.push(hostCandidate);
+      }
     }
 
-    // 3. Localhost Fallback (for mixed environments, if not already covered)
-    if (window.location.hostname === 'localhost' && wsBaseUrlHost !== 'localhost:8001') {
-      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`);
+    // 4. Localhost Fallback
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      candidates.push(`ws://${hostname}:8001/ws/interview/${sessionId}/interviewer/`);
     }
 
     return candidates;
@@ -521,7 +522,6 @@ function LiveInterviewInterviewer() {
       }
     } catch (e) { }
 
-    // Persist interview duration
     try {
       const totalTime = timer;
       const payload = {
@@ -531,11 +531,8 @@ function LiveInterviewInterviewer() {
         sessionId: sessionId,
         isDraft: true
       };
-      fetch('/submit-interview-feedback/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify(payload)
+      axios.post(`${API_BASE_URL}/submit-interview-feedback/`, payload, {
+        withCredentials: true
       }).catch(() => { });
     } catch (e) {
       console.warn('Failed to persist total time on end:', e);
@@ -554,12 +551,18 @@ function LiveInterviewInterviewer() {
     }, 800);
   }, [bothPartiesConnected, sessionKey, showNotification, showConfirmation, timer, sessionId, candidateName, interviewerName, navigate]);
 
-  const handleSocketMessage = useCallback(async (rawMessage) => {
+  const handleSocketMessage = useCallback(async (eventData) => {
     try {
-      const data = JSON.parse(rawMessage);
-      console.log(`📩 Received message type: ${data.type}`, data);
+      const data = JSON.parse(eventData);
+      console.log('≡ƒô⌐ Received message type:', data.type, data);
 
       switch (data.type) {
+        case 'session_info':
+          if (data.start_time) {
+            console.log('ΓÅ▒≡ƒôí Syncing start time from server:', data.start_time);
+            startTimeRef.current = new Date(data.start_time).getTime();
+          }
+          break;
         case 'connection_error':
           console.error('❌ Server reported connection error:', data.error);
           showNotification(`Connection error: ${data.error}`, 'error');
@@ -721,15 +724,10 @@ function LiveInterviewInterviewer() {
             r(true);
           }
           break;
-        case 'screen_share_denied':
-          if (pendingScreenShareGrantResolverRef.current) {
-            const r = pendingScreenShareGrantResolverRef.current;
-            pendingScreenShareGrantResolverRef.current = null;
-            r(false);
-          }
-          if (screenShareLocked && screenShareHolder) {
-            showNotification(`${screenShareHolder} is already sharing. Please wait.`, 'warning');
-          }
+        case 'screen_share_release':
+          setScreenShareLocked(false);
+          setScreenShareHolder(null);
+          console.log('🔓 Screen share lock released');
           break;
         default:
           console.warn('Unknown message type:', data.type);
@@ -920,6 +918,7 @@ function LiveInterviewInterviewer() {
       }
       showNotification(errorMessage, 'error');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showNotification]);
 
   const createVideoOffer = useCallback(async (options = {}) => {
@@ -953,6 +952,7 @@ function LiveInterviewInterviewer() {
       console.error('❌ Error creating video offer:', error);
       showNotification('Failed to create video offer', 'error');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showNotification]);
 
   const handleVideoOffer = useCallback(async (offer) => {
@@ -1436,6 +1436,7 @@ function LiveInterviewInterviewer() {
     showNotification('Functionality to join later would be implemented here.', 'info');
   }, [showNotification]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleEndWithFeedback = useCallback(() => {
     setShowEndInterviewModal(false);
 

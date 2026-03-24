@@ -104,6 +104,14 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
             # Read validity mode from payload
             validity_mode = (payload.get('validity_mode') or '').strip() or 'exact_window'
+            
+            # Mapping validity_mode to user-friendly label
+            validity_labels = {
+                'exact_window': 'Particular date + time window',
+                'date_anytime': 'Particular date (whole day / date range)',
+                'one_week': '1 week from start'
+            }
+            validity_type_label = validity_labels.get(validity_mode, 'Particular date + time window')
 
             # Convert UTC times to candidate's local timezone for display
             display_tz = time_zone or ''
@@ -205,7 +213,6 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                     )
                     if display_end_date and display_end_date != display_start_date:
                         schedule_text += f"  End Date: {display_end_date}\n"
-                    schedule_text += "  Available: 12:00 AM to 11:59 PM\n"
                     if display_tz:
                         schedule_text += f"  Time Zone: {display_tz}\n"
                     schedule_text += "\n"
@@ -226,12 +233,6 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                             f'<td style="padding:6px 0;">{display_end_date}</td>'
                             '</tr>'
                         )
-                    schedule_html += (
-                        '<tr>'
-                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Available</td>'
-                        '<td style="padding:6px 0;">12:00 AM to 11:59 PM</td>'
-                        '</tr>'
-                    )
                     if display_tz:
                         schedule_html += (
                             '<tr>'

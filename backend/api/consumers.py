@@ -1,4 +1,4 @@
-﻿import json
+import json
 import logging
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
@@ -7,9 +7,10 @@ from .models import InterviewInvitation
 
 logger = logging.getLogger(__name__)
 
-# In-memory store for screen share state per session
+# In-memory store for session states
 # In production, use Redis or database for distributed systems
 _screen_share_state = {}
+_interview_start_times = {}
 
 
 class InterviewConsumer(AsyncWebsocketConsumer):
@@ -79,6 +80,17 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     'active': True,
                     'holder': session_state.get('holder'),
                 }))
+            
+            # Initialize or get start time for synchronization
+            if self.session_id not in _interview_start_times:
+                _interview_start_times[self.session_id] = timezone.now().isoformat()
+            
+            # Send session info including start time to the connecting client
+            await self.send(text_data=json.dumps({
+                'type': 'session_info',
+                'start_time': _interview_start_times[self.session_id],
+                'role': self.role
+            }))
             
             # Notify others that this user joined
             await self.channel_layer.group_send(
