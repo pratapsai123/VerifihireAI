@@ -163,18 +163,9 @@ class SubmitAssessmentView(APIView):
             submission.submitted_at = timezone.now()
             submission.save()
 
-            # Trigger automated interview invite if selected
-            logger.info(f"CELERY DEBUG: submission={submission.id}, percentage={percentage}, pass_status={pass_status}")
-            if pass_status == 'selected':
-                try:
-                    from api.tasks import send_interview_link_task
-                    logger.info(f"CELERY DEBUG: Dispatching send_interview_link_task for submission {submission.id}")
-                    task_res = send_interview_link_task.delay(submission.id)
-                    logger.info(f"CELERY DEBUG: Task dispatched. Task ID: {task_res.id}")
-                except Exception as task_err:
-                    logger.error(f"CELERY DEBUG ERROR: Failed to trigger automated interview task: {task_err}", exc_info=True)
-            else:
-                logger.info(f"CELERY DEBUG: Interview task NOT triggered. pass_status={pass_status}")
+            # Status change to 'selected' will trigger handle_assessment_save signal (api/signals.py) 
+            # which schedules the interview link email with a 2-minute delay as requested.
+            logger.info(f"Assessment completed: submission={submission.id}, percentage={percentage}, pass_status={pass_status}")
 
             # After successful save, ensure we return no-cache headers to the submission confirmation
             response_data = {
@@ -523,8 +514,12 @@ class GenerateAssessmentView(APIView):
             
             # Log to terminal-like file for easy debugging
             error_log = f"\n[{timezone.now()}] ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}\n"
-            with open('api_debug.txt', 'a') as f:
-                f.write(error_log)
+            try:
+                with open('api_debug.txt', 'a') as f:
+                    f.write(error_log)
+            except Exception:
+                pass # Ignore if file is locked
+
             
             logger.error(f"ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}")
             if 'assessment' in locals() and assessment:
@@ -742,51 +737,63 @@ class AssessmentListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        user_profile = getattr(request.user, 'profile', None)
-        company = user_profile.company if user_profile else None
-        
-        if not company:
-            return Response([], status=status.HTTP_200_OK)
+        try:
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            if not company:
+                return Response([], status=status.HTTP_200_OK)
 
-        from api._imports import get_scoped_user_ids
-        scoped_ids = get_scoped_user_ids(user_profile)
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
 
-        if scoped_ids is None:
-            # Application Admin: all in company
-            assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
-        else:
-            # Scoped: only assessments created by users in this user's reporting hierarchy
-            assessments = Assessment.objects.filter(company=company, user_profile_id__in=scoped_ids, is_deleted=False).order_by('-created_at')
-
-        data = []
-        for assessment in assessments:
-            count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
-            completed_count = AIAssessmentSubmission.objects.filter(assessment=assessment, submitted_at__isnull=False).count()
-            # Use available_until as expiry if present, else fallback to 7 days
-            if assessment.available_until:
-                expiry_at = assessment.available_until
+            if scoped_ids is None:
+                # Application Admin: all in company, OR assessments with company=None that they created
+                assessments = Assessment.objects.filter(
+                    models.Q(company=company) | models.Q(company__isnull=True, user_profile=user_profile),
+                    is_deleted=False
+                ).order_by('-created_at')
             else:
-                expiry_at = assessment.created_at + timedelta(days=7)
+                # Scoped: only assessments created by users in this user's reporting hierarchy
+                assessments = Assessment.objects.filter(
+                    company=company, 
+                    user_profile_id__in=scoped_ids, 
+                    is_deleted=False
+                ).order_by('-created_at')
 
-            data.append({
-                "id": assessment.id,
-                "job_description": assessment.job_description,
-                "required_skills": assessment.required_skills,
-                "mcq_count": assessment.mcq_count,
-                "coding_count": assessment.coding_count,
-                "duration_minutes": assessment.duration_minutes,
-                "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
-                "status": assessment.status,
-                "share_token": str(assessment.share_token),
-                "candidate_count": count,
-                "completed_count": completed_count,
-                "invited_count": assessment.invited_count,
-                "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
-                "available_until": assessment.available_until.isoformat() if assessment.available_until else None
-            })
-        return Response(data, status=status.HTTP_200_OK)
+            data = []
+            for assessment in assessments:
+                count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
+                completed_count = AIAssessmentSubmission.objects.filter(assessment=assessment, submitted_at__isnull=False).count()
+                # Use available_until as expiry if present, else fallback to 7 days
+                if assessment.available_until:
+                    expiry_at = assessment.available_until
+                else:
+                    expiry_at = assessment.created_at + timedelta(days=7)
+
+                data.append({
+                    "id": assessment.id,
+                    "job_description": assessment.job_description,
+                    "required_skills": assessment.required_skills,
+                    "mcq_count": assessment.mcq_count,
+                    "coding_count": assessment.coding_count,
+                    "duration_minutes": assessment.duration_minutes,
+                    "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
+                    "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
+                    "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
+                    "status": assessment.status,
+                    "share_token": str(assessment.share_token),
+                    "candidate_count": count,
+                    "completed_count": completed_count,
+                    "invited_count": assessment.invited_count,
+                    "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
+                    "available_until": assessment.available_until.isoformat() if assessment.available_until else None
+                })
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return Response({"error": f"Server error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class AssessmentDetailView(APIView):
     from rest_framework.permissions import IsAuthenticated
@@ -801,9 +808,16 @@ class AssessmentDetailView(APIView):
             scoped_ids = get_scoped_user_ids(user_profile)
 
             if scoped_ids is None:
-                assessment = Assessment.objects.get(pk=pk, company=company)
+                # Primary attempt: By ID and Company
+                assessment = Assessment.objects.filter(pk=pk, company=company).first()
+                # Fallback: By ID and Creator (handles legacy/admin assessments with company=None)
+                if not assessment:
+                    assessment = Assessment.objects.filter(pk=pk, user_profile=user_profile).first()
             else:
-                assessment = Assessment.objects.get(pk=pk, company=company, user_profile_id__in=scoped_ids)
+                assessment = Assessment.objects.filter(pk=pk, company=company, user_profile_id__in=scoped_ids).first()
+            
+            if not assessment:
+                raise Assessment.DoesNotExist
                 
             submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
             
@@ -832,6 +846,7 @@ class AssessmentDetailView(APIView):
                     "status": sub.status,
                     "integrity_score": sub.integrity_score,
                     "answers": sub.answers,
+                    "candidate_questions": sub.candidate_questions,
                     "integrity_screenshots": screenshots_data,
                     "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M") if sub.submitted_at else "In Progress"
                 })
@@ -851,15 +866,24 @@ class AssessmentDetailView(APIView):
                 "share_token": str(assessment.share_token),
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
-                "assigned_interviewers": [
-                    {"id": i.id, "name": f"{i.first_name or ''} {i.last_name or ''}".strip() or i.email, "email": i.email, "role": i.role}
-                    for i in assessment.assigned_interviewers.all()
-                ],
+                "assigned_interviewers": [],
                 "submissions": submission_data
             }
+            # Safely try to load assigned_interviewers (field may not exist after migration)
+            try:
+                data["assigned_interviewers"] = [
+                    {"id": i.id, "name": f"{i.first_name or ''} {i.last_name or ''}".strip() or i.email, "email": i.email, "role": i.role}
+                    for i in assessment.assigned_interviewers.all()
+                ]
+            except Exception:
+                pass
             return Response(data, status=status.HTTP_200_OK)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return Response({"error": f"Server error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def delete(self, request, pk):
         try:
@@ -892,10 +916,13 @@ class AssessmentDetailView(APIView):
 
 class PublicAssessmentView(APIView):
     def get(self, request, token):
-        with open('api_debug.txt', 'a') as f:
-            f.write(f"\n[{timezone.now()}] PUBLIC ACCESS: Token='{token}'\n")
-            f.write(f"Query Params: {request.query_params}\n")
-            f.write(f"Host: {request.get_host()}\n")
+        try:
+            with open('api_debug.txt', 'a') as f:
+                f.write(f"\n[{timezone.now()}] PUBLIC ACCESS: Token='{token}'\n")
+                f.write(f"Query Params: {request.query_params}\n")
+                f.write(f"Host: {request.get_host()}\n")
+        except Exception:
+            pass
 
         try:
             assessment = Assessment.objects.get(share_token=token)

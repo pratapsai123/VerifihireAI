@@ -3,6 +3,8 @@ import PyPDF2
 from groq import Groq
 import os
 import json
+import numpy as np
+from PIL import Image
 from datetime import datetime, timedelta
 from django.utils import timezone
 from rest_framework.views import APIView
@@ -17,6 +19,7 @@ import traceback
 import time
 import re
 import logging
+from api.ocr_utils import _get_reader
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -234,12 +237,15 @@ class ResumeMatchView(APIView):
              try:
                 candidate = Candidate.objects.get(id=candidate_id)
                 if not job_description:
-                    job_description = candidate.job_description
+                    job_description = candidate.job_description or "General requirements and responsibilities for this role."
                 if not candidate.resume:
                     return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
                 resume_files = [candidate.resume] # Process this single resume
              except Candidate.DoesNotExist:
                  return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if not job_description:
+            job_description = "General requirements and responsibilities for this role."
 
         if not resume_files or not job_description:
             missing = []
@@ -297,7 +303,31 @@ class ResumeMatchView(APIView):
                         resume_file.seek(0)
                         pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
                         for page in pdf_reader.pages:
-                            resume_text += page.extract_text()
+                            resume_text += (page.extract_text() or "")
+                        
+                        # --- OCR Fallback for Scanned PDFs ---
+                        if len(resume_text.strip()) < 100:
+                            logger.info(f"RESUME DEBUG: Regular extraction failed ({len(resume_text)} chars). Attempting IMAGE/OCR fallback.")
+                            try:
+                                # Try to open as image (case where PDF is just a renamed image or standard OCR case)
+                                resume_file.seek(0)
+                                reader = _get_reader()
+                                if reader:
+                                    # We try to read it as an image first
+                                    try:
+                                        img = Image.open(resume_file)
+                                        results = reader.readtext(np.array(img), detail=0)
+                                        ocr_text = " ".join(results)
+                                        if len(ocr_text.strip()) > len(resume_text.strip()):
+                                            resume_text = ocr_text
+                                            logger.info(f"RESUME DEBUG: OCR Success! extracted {len(resume_text)} chars from image-pdf.")
+                                    except:
+                                        # Not an image? Maybe we need pdf2image or fitz, but let's try reading the first few bytes.
+                                        pass
+                            except Exception as ocr_e:
+                                logger.error(f"OCR Fallback Error: {ocr_e}")
+
+                        logger.info(f"RESUME DEBUG: Final extracted {len(resume_text)} characters from {getattr(resume_file, 'name', 'unknown')}")
 
                     # --- Validation for Empty or Short Text ---
                     if not resume_text or len(resume_text.strip()) < 50:
@@ -339,12 +369,14 @@ class ResumeMatchView(APIView):
                     {job_description}
                     
                     Please provide:
-                    1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Extraction Failed").
-                    2. The candidate's email address (Look for '@' symbol patterns. If not found, use "Extraction Failed").
-                    3. A match percentage (0-100).
+                    1. The candidate's full name. Look at the very top of the document. If missing, return "Extraction Failed".
+                    2. The candidate's contact email. Look for email patterns. If missing, return "Extraction Failed".
+                    3. A match percentage (0-100) based on skills and experience matching the JD.
                     4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
                     5. A brief 2-3 sentence summary of the fit.
-                    6. A list of 5 interview questions. 
+                    6. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD. 
+                    
+                    CRITICAL: You MUST extract the name and email if they are present in ANY form. Do not be overly strict with formatting.
                     
                     Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
                     """
@@ -359,8 +391,8 @@ class ResumeMatchView(APIView):
                     match_result = extract_json(raw_text)
                     
                     if match_result:
-                        extracted_name = match_result.get('candidate_name') or match_result.get('name') or "Extraction Failed"
-                        extracted_email = match_result.get('candidate_email') or match_result.get('email') or "Extraction Failed"
+                        extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
+                        extracted_email = match_result.get('candidate_email') or match_result.get('email') or match_result.get('email_address') or "Extraction Failed"
                         
                         current_candidate.full_name = extracted_name
                         current_candidate.email = extracted_email

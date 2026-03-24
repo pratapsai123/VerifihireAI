@@ -161,7 +161,13 @@ const Dashboard = () => {
 
         // Calculate Stats
         const today = new Date().toISOString().split('T')[0];
-        const resumesTodayCount = results.filter(r => r.submitted_at && String(r.submitted_at).startsWith(today)).length;
+        
+        // Use AI Candidates for Resume Screening instead of Assessment results
+        const aiCandsList = aiCandidatesRes.data?.results || aiCandidatesRes.data || [];
+        const resumesTodayCount = aiCandsList.filter(c => {
+          const dateStr = c.submission_date || c.created_at || '';
+          return String(dateStr).startsWith(today);
+        }).length;
 
         const totalCandidates = candidates.length + (results.length - candidates.filter(c => results.some(r => r.candidate?.email === c.email)).length);
         const hiredCount = results.filter(r => r.status === 'selected' || r.result === 'selected').length;

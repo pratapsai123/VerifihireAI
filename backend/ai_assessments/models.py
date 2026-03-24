@@ -31,6 +31,7 @@ class Assessment(models.Model):
     available_from = models.DateTimeField(blank=True, null=True)
     available_until = models.DateTimeField(blank=True, null=True)
     invited_count = models.IntegerField(default=0)
+    num_applicants = models.IntegerField(default=0)
     company = models.ForeignKey(
         'api.Company', 
         on_delete=models.CASCADE, 
@@ -47,18 +48,19 @@ class Assessment(models.Model):
         help_text="The user who generated this AI assessment"
     )
     is_deleted = models.BooleanField(default=False)
-    assigned_interviewers = models.ManyToManyField(
+    created_by = models.ForeignKey(
         'api.UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True,
-        related_name='ai_assigned_assessments',
-        help_text="Interviewers assigned to conduct live interviews for this AI assessment"
+        related_name='ai_assessments_created'
     )
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"
 
     class Meta:
-        db_table = 'ai_assessment'
+        db_table = 'ai_assessments_assessment'
 
 class AIAssessmentSubmission(models.Model):
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='submissions')

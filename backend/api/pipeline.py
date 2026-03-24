@@ -44,7 +44,8 @@ def process_resume_passed(candidate_id):
         # Generate Assessment Database Record
         assessment = Assessment()
         assessment.job_description = job_desc
-        assessment.required_skills = "Technical Assessment"
+        # Sync naming with Candidate's job_title for better grouping in Results dashboard
+        assessment.required_skills = candidate.job_title or "Technical Assessment"
         assessment.mcq_count = mcq_count
         assessment.coding_count = coding_count
         assessment.duration_minutes = duration
@@ -53,8 +54,13 @@ def process_resume_passed(candidate_id):
         assessment.status = 'GENERATING'
         assessment.available_from = assessment_from
         assessment.available_until = assessment_until
-        assessment.created_by = getattr(candidate, 'user_profile', None)
+        
+        # Ownership fields
+        user_prof = getattr(candidate, 'user_profile', None)
+        assessment.user_profile = user_prof
+        assessment.created_by = user_prof
         assessment.company = getattr(candidate, 'company', None)
+        
         assessment.coding_difficulty_list = []
         assessment.mcq_easy = 5
         assessment.mcq_medium = 3
