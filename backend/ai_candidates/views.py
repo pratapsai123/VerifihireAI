@@ -19,6 +19,7 @@ import traceback
 import time
 import re
 import logging
+import requests
 from api.ocr_utils import _get_reader
 
 from django.conf import settings
@@ -64,6 +65,24 @@ def extract_json(text):
     except Exception as e:
         logger.error(f"JSON Extraction Error: {e}")
         return None
+
+class AssemblyAITokenView(APIView):
+    def get(self, request):
+        api_key = getattr(settings, 'ASSEMBLYAI_API_KEY', None)
+        if not api_key:
+            return Response({'error': 'ASSEMBLYAI_API_KEY is missing from configuration.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        try:
+            response = requests.post(
+                "https://api.assemblyai.com/v2/realtime/token",
+                headers={"Authorization": api_key, "Content-Type": "application/json"},
+                json={"expires_in": 3600}
+            )
+            response.raise_for_status()
+            return Response(response.json())
+        except Exception as e:
+            logger.error(f"Failed to generate AssemblyAI token: {str(e)}")
+            return Response({'error': 'Failed to generate transcription token.'}, status=status.HTTP_502_BAD_GATEWAY)
 
 class BulkInviteView(APIView):
     from rest_framework.permissions import IsAuthenticated
@@ -127,7 +146,7 @@ class BulkInviteView(APIView):
                     status='Invited',
                     company=company
                 )
-                link = f"https://verifihireai.com/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -445,6 +464,10 @@ class ResumeMatchView(APIView):
                             if interview_from: current_candidate.available_from = parse_datetime(interview_from)
                             if interview_until: current_candidate.available_until = parse_datetime(interview_until)
                         
+                        # Persist generated questions for session recovery
+                        if match_result.get('interview_questions'):
+                            current_candidate.interview_questions = match_result['interview_questions']
+                            
                         current_candidate.save()
                         
                         # Trigger automated assessment if in fully automatic mode
@@ -500,10 +523,12 @@ class CandidateListCreateView(generics.ListCreateAPIView):
         company = user_profile.company if user_profile else None
         serializer.save(company=company, user_profile=user_profile)
 
-INTERVIEW_LINK_TTL_MINUTES = 60
+INTERVIEW_LINK_TTL_MINUTES = 60 # Back to 60 minutes as requested
 
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CandidateSerializer
+    from rest_framework.permissions import AllowAny
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -787,6 +812,7 @@ class ProcessAnswerView(APIView):
             "is_exit": boolean,
             "feedback": "...",
             "refined_next_question": "...",
+            "requires_code_input": boolean, // Set to true IF AND ONLY IF the next question specifically asks for code, logic, or syntax.
             "score": integer
         }}
         """
@@ -796,7 +822,7 @@ class ProcessAnswerView(APIView):
             local_groq_client = Groq(api_key=local_api_key)
 
             response = local_groq_client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model="llama-3.3-70b-versatile",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
                 response_format={"type": "json_object"}
@@ -848,10 +874,21 @@ class ProcessAnswerView(APIView):
             return Response(data, status=status.HTTP_200_OK)
 
         except Exception as e:
-            with open('debug_ai.log', 'a') as f:
-                f.write(f"PROCESS ERROR: {str(e)}\n")
-                f.write(traceback.format_exc())
+            error_msg = str(e)
+            is_rate_limit = "rate limit" in error_msg.lower() or "429" in error_msg
+            is_connection = "connection" in error_msg.lower() or "timeout" in error_msg.lower()
             
-            return Response({
-                "error": "AI is temporarily unavailable. Please try again or contact support."
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            with open('debug_ai.log', 'a') as f:
+                f.write(f"PROCESS ERROR: {error_msg}\n")
+                if not (is_rate_limit or is_connection):
+                    f.write(traceback.format_exc())
+            
+            # Treat connection errors as temporary (retryable) just like rate limits
+            if is_rate_limit or is_connection:
+                status_code = status.HTTP_429_TOO_MANY_REQUESTS
+                msg = "Indu is taking a moment to think (AI Busy). Retrying automatically..."
+            else:
+                status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                msg = "AI is temporarily unavailable. Please try again or click the microphone to resume."
+
+            return Response({"error": msg, "retryable": (is_rate_limit or is_connection)}, status=status_code)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView
+from .views import CandidateListCreateView, CandidateDetailView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView
 
 urlpatterns = [
     path('', CandidateListCreateView.as_view(), name='candidate-list-create'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('match/', ResumeMatchView.as_view(), name='resume-match'),
     path('bulk-invite/', BulkInviteView.as_view(), name='bulk-invite'),
     path('process-answer/', ProcessAnswerView.as_view(), name='process-answer'),
+    path('assemblyai-token/', AssemblyAITokenView.as_view(), name='assemblyai-token'),
 ]

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
+import { RealtimeTranscriber } from 'assemblyai';
 import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
@@ -10,7 +12,7 @@ const AiInterviewSession = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
-    const MAX_QUESTIONS = 10;
+    const [maxQuestions, setMaxQuestions] = useState(10);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [chatMessages, setChatMessages] = useState([]);
@@ -25,6 +27,9 @@ const AiInterviewSession = () => {
     const [integrityBreech, setIntegrityBreech] = useState({ active: false, text: '' });
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
     const [isCompleted, setIsCompleted] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(null); // Timer in seconds
+    const [sttReady, setSttReady] = useState(false); // New state for WS status
+    const [silenceCountdown, setSilenceCountdown] = useState(0);
 
     // Refs
     const videoRef = useRef(null);
@@ -40,11 +45,15 @@ const AiInterviewSession = () => {
     const isProcessingRef = useRef(false);
     const isSpeakingRef = useRef(false);
     const isRecordingRef = useRef(false);
+    const isCompletedRef = useRef(false);
     const silenceTimerRef = useRef(null);
     const globalSilenceTimerRef = useRef(null);
     const nudgeCountRef = useRef(0);
     const transcriptRef = useRef("");
+    const interimTranscriptRef = useRef("");
     const submitHandlerRef = useRef(null);
+    const assemblyAIRef = useRef(null);
+    const startListeningRef = useRef(null);
 
     // 1. Load Voices
     useEffect(() => {
@@ -179,6 +188,14 @@ const AiInterviewSession = () => {
     }, [token, showAiEvent]);
 
     // 3. Speech and Interactions
+    const unlockSpeech = useCallback(() => {
+        if (!synthRef.current) return;
+        // Playing a silent 0.01s utterance unlocks the browser's speech synthesis
+        const silentU = new SpeechSynthesisUtterance(" ");
+        silentU.volume = 0;
+        synthRef.current.speak(silentU);
+    }, []);
+
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
         return new Promise((resolve) => {
@@ -199,11 +216,13 @@ const AiInterviewSession = () => {
             if (synthRef.current.paused) synthRef.current.resume();
 
             const utterance = new SpeechSynthesisUtterance(text);
-            const voice = voicesRef.current.find(v => v.lang.includes('IN') && (v.name.includes('Heera') || v.name.includes('Ravi'))) ||
-                voicesRef.current.find(v => v.lang.includes('IN')) ||
-                voicesRef.current.find(v => v.name.toLowerCase().includes('india')) ||
-                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
-                voicesRef.current.find(v => v.name.includes('US English')) ||
+            const voice = 
+                voicesRef.current.find(v => (v.name.includes('Siri') || v.name.includes('Samantha')) && v.name.toLowerCase().includes('female')) ||
+                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.toLowerCase().includes('female')) ||
+                voicesRef.current.find(v => (v.name.includes('Jenny') || v.name.includes('Aria')) && v.name.toLowerCase().includes('female')) ||
+                voicesRef.current.find(v => v.name.toLowerCase().includes('female')) ||
+                voicesRef.current.find(v => v.name.includes('Siri') || v.name.includes('Samantha')) ||
+                voicesRef.current.find(v => v.lang.startsWith('en')) ||
                 voicesRef.current[0];
 
             if (voice) {
@@ -239,11 +258,17 @@ const AiInterviewSession = () => {
 
     const addMessage = useCallback((sender, text) => {
         const displayText = typeof text === 'object' ? (text.question || JSON.stringify(text)) : text;
-        setChatMessages(prev => [...prev, { sender, text: displayText }]);
+        // ONLY show AI messages in the chat history box as requested
+        if (sender === 'ai') {
+            setChatMessages(prev => [...prev, { sender, text: displayText }]);
+        }
         chatHistoryRef.current.push({ role: sender === 'ai' ? 'assistant' : 'user', content: displayText });
     }, []);
 
     const completeInterview = useCallback(async (customMessage = null) => {
+        if (isCompletedRef.current) return;
+        isCompletedRef.current = true;
+        setIsCompleted(true);
         stopCamera();
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
@@ -255,39 +280,214 @@ const AiInterviewSession = () => {
 
         setIsProcessing(true);
         setAiStatus("Session Finished");
-        setIsCompleted(true);
     }, [token, speak, addMessage]);
 
-    const startListening = useCallback(() => {
-        if (userInputMode !== 'audio' || !recognitionRef.current || isRecordingRef.current) return;
+    const startSilenceWatchdog = useCallback((delay) => {
+        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+        globalSilenceTimerRef.current = setTimeout(async () => {
+            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
+
+            if (nudgeCountRef.current === 0) {
+                // First nudge
+                nudgeCountRef.current = 1;
+                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
+                addMessage('ai', nudgeText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(nudgeText);
+                    if (startListeningRef.current) startListeningRef.current(); // Restart with a fresh 15s timer via ref
+                } catch (e) { }
+            } else {
+                // Second nudge = AUTO SKIP
+                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
+                addMessage('ai', skipText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(skipText);
+                    // Force submission with a "skipped" tag
+                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
+                } catch (e) { }
+            }
+        }, delay);
+    }, [addMessage, speak]);
+
+    const startListening = useCallback(async () => {
+        if (userInputMode !== 'audio' || isRecordingRef.current) return;
 
         let attempts = 0;
         const maxAttempts = 10;
 
-        const tryStart = () => {
-            // Check if AI is occupied - Use REFS to avoid stale closures
+        const tryStart = async () => {
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
-                    setTimeout(tryStart, 350); // Retry 
+                    setTimeout(tryStart, 350);
                 }
                 return;
             }
 
             try {
-                recognitionRef.current.start();
-                console.log("Auto-mic activated successfully");
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already started, ignore
-                } else {
-                    console.warn("Auto-start mic error:", e);
+                // Initialize AssemblyAI
+                setIsRecording(true);
+                isRecordingRef.current = true;
+                setAiStatus("Connecting to AssemblyAI...");
+
+                const token = process.env.REACT_APP_ASSEMBLYAI_API_KEY;
+
+                if (!token) {
+                    console.error("Missing REACT_APP_ASSEMBLYAI_API_KEY");
+                    setAiStatus("Config Error - Missing Key");
+                    return;
                 }
+
+                const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&speech_model=u3-rt-pro&token=${token}`;
+                const ws = new WebSocket(wsUrl);
+
+                ws.onopen = () => {
+                    console.log("AssemblyAI Auto-mic active via Native WebSocket!");
+                    setSttReady(true);
+                    setAiStatus("Listening...");
+                    transcriptRef.current = "";
+                    interimTranscriptRef.current = "";
+                    startSilenceWatchdog(15000);
+                };
+
+                ws.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    
+                    if (data.type === "SessionBegins") {
+                        console.log("AssemblyAI Session Started:", data.session_id);
+                        return;
+                    }
+
+                    // CRITICAL: Ignore all transcripts while Indu is speaking to avoid feedback loops
+                    if (isSpeakingRef.current) return;
+
+                    if (data.type !== "Turn") return;
+
+                    const text = data.transcript;
+                    if (!text) return;
+
+                    if (!data.turn_is_formatted) {
+                        interimTranscriptRef.current = text;
+                    } else {
+                        transcriptRef.current += text + " ";
+                        interimTranscriptRef.current = "";
+                        
+                        // Patience Silence Update
+                        if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
+                        if (globalSilenceTimerRef.current) {
+                            clearTimeout(globalSilenceTimerRef.current);
+                            globalSilenceTimerRef.current = null;
+                        }
+                        // Stop any active countdown visual
+                        setSilenceCountdown(0);
+
+                        const finalSubmission = transcriptRef.current;
+                        if (finalSubmission.trim().length > 4) {
+                            let secondsRemaining = 5;
+                            setSilenceCountdown(secondsRemaining);
+                            
+                            silenceTimerRef.current = setInterval(() => {
+                                secondsRemaining -= 1;
+                                setSilenceCountdown(secondsRemaining);
+                                
+                                if (secondsRemaining <= 0) {
+                                    clearInterval(silenceTimerRef.current);
+                                    silenceTimerRef.current = null;
+                                    setSilenceCountdown(0);
+                                    
+                                    console.log("Planned pause detected. Processing answer...");
+                                    setIsProcessing(true);
+                                    setAiStatus("Processing answer...");
+                                    if (assemblyAIRef.current) assemblyAIRef.current.stop();
+                                    if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
+                                }
+                            }, 1000); // 5s countdown
+                        }
+                    }
+
+                    const currentTotal = (transcriptRef.current + interimTranscriptRef.current).trim();
+                    if (currentTotal) {
+                        const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
+                        setAiStatus(`Heard: "${display}"`);
+                    }
+                };
+
+                ws.onerror = (error) => {
+                    console.error("AssemblyAI Native WebSocket error:", error);
+                    setSttReady(false);
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                    setAiStatus("Mic Error - Retrying...");
+                };
+
+                ws.onclose = (event) => {
+                    console.log("AssemblyAI Native WebSocket closed:", event.code, event.reason);
+                    setSttReady(false);
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                    if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
+                    if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+
+                    // Reconnect if closed unexpectedly (not by us calling stop())
+                    if (event.code !== 1000 && !isProcessingRef.current && !isCompletedRef.current) {
+                        console.log("Triggering auto-reconnect for AssemblyAI...");
+                        setTimeout(() => startListening(), 2000);
+                    }
+                };
+
+                // Remove sdk from connect queue
+                // await rt.connect();
+
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const recorder = new RecordRTC(stream, {
+                    type: 'audio',
+                    mimeType: 'audio/webm;codecs=pcm',
+                    recorderType: StereoAudioRecorder,
+                    timeSlice: 250,
+                    desiredSampRate: 16000,
+                    numberOfAudioChannels: 1,
+                    ondataavailable: async (blob) => {
+                        try {
+                            const buffer = await blob.arrayBuffer();
+                            if (ws.readyState === WebSocket.OPEN) {
+                                ws.send(buffer);
+                            }
+                        } catch (e) { } // In case connection closed
+                    }
+                });
+                recorder.startRecording();
+
+                assemblyAIRef.current = {
+                    stop: () => {
+                        try {
+                           recorder.stopRecording(() => {
+                               stream.getTracks().forEach(track => track.stop());
+                           });
+                           ws.close();
+                        } catch(e) { }
+                    }
+                };
+                
+                // Allow toggle functions to use this reference logic
+                recognitionRef.current = assemblyAIRef.current;
+
+            } catch (e) {
+                console.error("AssemblyAI start error:", e);
+                setIsRecording(false);
+                isRecordingRef.current = false;
             }
         };
 
         tryStart();
-    }, [userInputMode]);
+
+        return () => {
+            if (assemblyAIRef.current) {
+                try { assemblyAIRef.current.stop(); } catch (e) { }
+            }
+        };
+    }, [userInputMode, startSilenceWatchdog]);
 
     const handleAnswerSubmission = useCallback(async (answer) => {
         if (!answer || !answer.trim() || isProcessing) {
@@ -306,7 +506,8 @@ const AiInterviewSession = () => {
         if (recognitionRef.current) {
             try { recognitionRef.current.stop(); } catch (e) { }
         }
-        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
+        setSilenceCountdown(0);
 
         addMessage('user', answer);
         setResponseInput('');
@@ -320,7 +521,7 @@ const AiInterviewSession = () => {
                 answer: answer,
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
-            }, { timeout: 35000 }); // 35s for more complex reasoning
+            }, { timeout: 60000 }); // 60s for more complex reasoning (increased for stability)
 
             const data = response.data;
             const isClarification = data.is_clarification === true;
@@ -352,8 +553,8 @@ const AiInterviewSession = () => {
             const nextIdx = currentQuestionIndex + 1;
             const totalAnswered = nextIdx; // questions answered so far
 
-            // --- HARD STOP: end after MAX_QUESTIONS ---
-            if (totalAnswered >= MAX_QUESTIONS) {
+            // --- HARD STOP: end after maxQuestions ---
+            if (totalAnswered >= maxQuestions) {
                 completeInterview(fullFeedback.trim() ? fullFeedback.trim() : undefined);
                 return;
             }
@@ -392,7 +593,7 @@ const AiInterviewSession = () => {
             } else {
                 const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / MAX_QUESTIONS) * 100);
+                setProgress((nextIdx / maxQuestions) * 100);
 
                 setQuestions(prev => {
                     const newQs = [...prev];
@@ -408,7 +609,7 @@ const AiInterviewSession = () => {
 
                 // If this is the last question being answered (nextIdx >= MAX_QUESTIONS), 
                 // we don't want "No worries, let's move on" right before the goodbye.
-                if (nextIdx >= MAX_QUESTIONS) {
+                if (nextIdx >= maxQuestions) {
                     finalTurnText = fullFeedback.trim();
                 }
 
@@ -417,24 +618,45 @@ const AiInterviewSession = () => {
                     await speak(finalTurnText);
                 }
 
+                // Auto-switch to text mode if the AI asks for syntax/code
+                if (data.requires_code_input) {
+                    setUserInputMode('text');
+                    setAiStatus("Coding Mode Active");
+                }
+
                 setIsProcessing(false);
                 isProcessingRef.current = false;
                 if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 setAiStatus("Indu is Online");
             }
         } catch (err) {
-            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
-            if (err.response?.status === 429) setShowQuotaWarning(true);
-
-            // Show AI failure popup instead of static data
-            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
-            alert(`AI is not working. Please try again later.\nError: ${errorMessage}`);
-
-            // Optionally notify user
-            setAiToast({ active: true, text: 'AI processing failed', urgent: true });
-
+            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (60s)" : err.message);
+            
+            // ALWAYS reset processing state so the UI doesn't "stick"
             setIsProcessing(false);
-            setAiStatus("AI Interviewer Online");
+            isProcessingRef.current = false;
+
+            if (err.response?.status === 429 || err.response?.data?.retryable) {
+                const retryMsg = err.response?.data?.error || "AI is busy... retrying in 8s";
+                setAiStatus(retryMsg);
+                setShowQuotaWarning(true);
+                // Simple 1-time auto-retry after 8 seconds
+                setTimeout(() => {
+                    setShowQuotaWarning(false);
+                    handleAnswerSubmission(answer);
+                }, 8000);
+                return;
+            }
+
+            // Show AI failure popup
+            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
+            setAiStatus("Connection Issue");
+            alert(`AI is having trouble connecting. Please try again.\nError: ${errorMessage}`);
+            
+            // Automatically try to restart the mic to help the user
+            if (userInputMode === 'audio') {
+                setTimeout(() => startListening(), 1000);
+            }
         }
     }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening, showQuotaWarning, userInputMode]);
 
@@ -451,28 +673,64 @@ const AiInterviewSession = () => {
                 return;
             }
 
-            const storedData = sessionStorage.getItem('interviewData');
-            if (storedData) {
-                const data = JSON.parse(storedData);
-                setCandidateName(data.candidateName);
-                setQuestions(data.questions);
-                startInterview(data.candidateName, data.questions);
+            const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
+            const candidate = res.data;
+            setCandidateName(candidate.full_name);
+
+            // 1. Timer Initialization
+            if (candidate.link_opened_at) {
+                const startTime = new Date(candidate.link_opened_at).getTime();
+                const now = new Date().getTime();
+                const secondsElapsed = Math.floor((now - startTime) / 1000);
+                const initialTimeLeft = Math.max(0, (60 * 60) - secondsElapsed);
+                setTimeLeft(initialTimeLeft);
+            }
+
+            // 2. Persistence Logic: Check if we have history
+            if (candidate.interview_summary && candidate.interview_summary.length > 0) {
+                console.log("Restoring session from backend summary...");
+                const summary = candidate.interview_summary;
+                
+                // Reconstruct Chat History
+                const restoredMessages = [];
+                const restoredHistory = [];
+                summary.forEach(turn => {
+                    restoredMessages.push({ sender: 'ai', text: turn.question });
+                    restoredMessages.push({ sender: 'user', text: turn.answer });
+                    restoredHistory.push({ role: 'assistant', content: turn.question });
+                    restoredHistory.push({ role: 'user', content: turn.answer });
+                });
+                
+                setChatMessages(restoredMessages);
+                chatHistoryRef.current = restoredHistory;
+                
+                const nextIdx = summary.length;
+                setCurrentQuestionIndex(nextIdx);
+                setProgress((nextIdx / maxQuestions) * 100);
+
+                const currentQs = candidate.interview_questions || [];
+                setQuestions(currentQs);
+
+                await startCamera();
+                setAiStatus("Resuming Session...");
+                
+                // Ask the current question again (or the next one)
+                const resumeQ = currentQs[nextIdx] || "Let's continue. Please share more about your experience.";
+                addMessage('ai', resumeQ);
+                await speak(resumeQ);
+                if (userInputMode === 'audio') startListening();
+
             } else {
-                try {
-                    // Cache-busting nonce _t
-                    const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
-                    setCandidateName(res.data.full_name);
-                    const matchRes = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, {
-                        candidate_id: token,
-                        job_description: res.data.job_description
-                    });
-                    setQuestions(matchRes.data.interview_questions);
-                    startInterview(res.data.full_name, matchRes.data.interview_questions);
-                } catch (err) {
-                    console.error("Init session error:", err);
-                    if (err.response && err.response.data && err.response.data.error) {
-                        setAiToast({ active: true, text: err.response.data.error, urgent: true });
-                    }
+                // Fresh Start or SessionStorage fallback
+                const storedData = sessionStorage.getItem('interviewData');
+                if (storedData) {
+                    const data = JSON.parse(storedData);
+                    setQuestions(data.questions);
+                    startInterview(data.candidateName, data.questions);
+                } else {
+                    const qList = candidate.interview_questions || [];
+                    setQuestions(qList);
+                    startInterview(candidate.full_name, qList);
                 }
             }
         };
@@ -500,159 +758,44 @@ const AiInterviewSession = () => {
         return () => stopCamera();
     }, [token, addMessage, speak, startListening, userInputMode]); // Only re-init if token changes, perfectly stable camera feed
 
-    const startSilenceWatchdog = useCallback((delay) => {
-        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
-        globalSilenceTimerRef.current = setTimeout(async () => {
-            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
-
-            if (nudgeCountRef.current === 0) {
-                // First nudge
-                nudgeCountRef.current = 1;
-                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
-                addMessage('ai', nudgeText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(nudgeText);
-                    startListening(); // Restart with a fresh 15s timer
-                } catch (e) { }
-            } else {
-                // Second nudge = AUTO SKIP
-                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
-                addMessage('ai', skipText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(skipText);
-                    // Force submission with a "skipped" tag
-                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
-                } catch (e) { }
-            }
-        }, delay);
-    }, [addMessage, speak, startListening]);
+    useEffect(() => {
+        startListeningRef.current = startListening;
+    }, [startListening]);
 
     useEffect(() => {
         submitHandlerRef.current = handleAnswerSubmission;
     }, [handleAnswerSubmission]);
 
-    // stable Speech Recognition Setup
+    // (Native WebKit Speech Recognition removed in favor of AssemblyAI)
     useEffect(() => {
-        if (!('webkitSpeechRecognition' in window)) return;
-
-        const recognition = new window.webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = 'en-IN';
-
-        recognition.onstart = () => {
-            console.log("INFINITE MIC: Speech recognition is now active and stay on.");
-            setIsRecording(true);
-            isRecordingRef.current = true;
-            setAiStatus("Listening...");
-            transcriptRef.current = "";
-
-            // Start Global Silence Watchdog (15s for first nudge)
-            startSilenceWatchdog(15000);
-        };
-
-        recognition.onresult = (event) => {
-            let interimTranscript = "";
-            let newFinals = "";
-
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    newFinals += event.results[i][0].transcript;
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
+        // Initialize recognitionRef stub so toggleRecording doesn't fail immediately
+        if (!recognitionRef.current) {
+            recognitionRef.current = {
+                start: startListening,
+                stop: () => {
+                    if (assemblyAIRef.current) assemblyAIRef.current.stop();
                 }
-            }
-
-            if (newFinals) {
-                transcriptRef.current += newFinals;
-            }
-
-            const currentTotal = (transcriptRef.current + interimTranscript).trim();
-            if (currentTotal) {
-                const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
-                setAiStatus(`Heard: "${display}"`);
-            }
-
-            // PATIENT SILENCE: Reset timer every time we hear ANY sound/speech
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) {
-                clearTimeout(globalSilenceTimerRef.current);
-                globalSilenceTimerRef.current = null;
-            }
-
-            // Only submit if we have a significant answer length
-            if (currentTotal.length > 3) {
-                silenceTimerRef.current = setTimeout(() => {
-                    const finalSubmission = transcriptRef.current + interimTranscript;
-                    if (finalSubmission.trim().length > 4) {
-                        console.log("Planned pause detected. Processing answer...");
-                        setIsProcessing(true);
-                        setAiStatus("Processing answer...");
-                        try { recognition.stop(); } catch (e) { }
-                        if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
-                    }
-                }, 3500); // 3.5 seconds - perfect balance of patience and speed
-            }
-        };
-
-        recognition.onerror = (event) => {
-            // Ignore no-speech and stay active
-            if (event.error === 'no-speech' || event.error === 'aborted') {
-                console.log("Mic background silence...");
-                return;
-            }
-            console.warn("Recognition Error:", event.error);
-            setIsRecording(false);
-            setAiStatus(`Mic ready`);
-        };
-
-        recognition.onend = () => {
-            setIsRecording(false);
-            isRecordingRef.current = false;
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current); // Clear global timer on recognition end
-            console.log("Recognition session ended.");
-        };
-
-        recognitionRef.current = recognition;
-
-        return () => {
-            if (recognitionRef.current) {
-                try { recognitionRef.current.stop(); } catch (e) { }
-            }
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
-        };
-    }, [startSilenceWatchdog]);
+            };
+        }
+    }, [startListening]);
 
 
 
     const toggleRecording = () => {
-        if (!recognitionRef.current) return alert("Speech recognition not supported");
-
+        // Unlock speech on first user click if not already
+        unlockSpeech();
+        
         if (isRecording) {
-            try { recognitionRef.current.stop(); } catch (e) { }
+            try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
             setIsRecording(false);
+            isRecordingRef.current = false;
         } else {
             // Cancel any AI speech if user wants to speak
             if (synthRef.current.speaking) {
                 synthRef.current.cancel();
                 setIsSpeaking(false);
             }
-
-            try {
-                recognitionRef.current.start();
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already starting/running
-                    console.log("Recognition already active");
-                } else {
-                    console.error("Manual mic start error:", e);
-                    setAiStatus("Mic Error - Refresh");
-                }
-            }
+            startListening();
         }
     };
 
@@ -660,11 +803,33 @@ const AiInterviewSession = () => {
         if (chatContainerRef.current) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }, [chatMessages]);
 
+    // Timer Countdown Effect
+    useEffect(() => {
+        if (timeLeft === null || isCompleted) return;
+
+        if (timeLeft <= 0) {
+            completeInterview("Time has expired for this interview session. Thank you.");
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setTimeLeft(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [timeLeft, isCompleted, completeInterview]);
+
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
     return (
         <div className="ai-session-page">
             {showQuotaWarning && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#ff4444', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold' }}>
-                    ⚠️ AI Service Limit Reached. The interview cannot continue at this time.
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#667eea', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                    ⏳ Indu is taking a moment to think (AI Busy). Please wait, your answer is being saved and will process automatically...
                 </div>
             )}
 
@@ -688,9 +853,45 @@ const AiInterviewSession = () => {
 
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
                     <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                            </div>
+                            
+                            {timeLeft !== null && (
+                                <div style={{ 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    gap: '6px', 
+                                    background: timeLeft < 300 ? '#fff5f5' : '#f0f4ff', 
+                                    padding: '4px 10px', 
+                                    borderRadius: '8px',
+                                    color: timeLeft < 300 ? '#e53e3e' : '#667eea',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.8rem',
+                                    border: `1px solid ${timeLeft < 300 ? '#feb2b2' : '#c3dafe'}`
+                                }}>
+                                    <i className="fa-solid fa-clock"></i>
+                                    <span>{formatTime(timeLeft)}</span>
+                                </div>
+                            )}
+
+                            <div style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '6px', 
+                                background: sttReady ? (silenceCountdown > 0 ? '#fffbec' : '#f0fff4') : '#fff5f5', 
+                                padding: '4px 10px', 
+                                borderRadius: '8px',
+                                color: sttReady ? (silenceCountdown > 0 ? '#b7791f' : '#38a169') : '#e53e3e',
+                                fontWeight: 'bold',
+                                fontSize: '0.8rem',
+                                border: `1px solid ${sttReady ? (silenceCountdown > 0 ? '#f6e05e' : '#c6f6d5') : '#feb2b2'}`
+                            }}>
+                                <i className={`fa-solid ${sttReady ? (silenceCountdown > 0 ? 'fa-hourglass-half' : 'fa-microphone') : 'fa-microphone-slash'}`}></i>
+                                <span>{sttReady ? (silenceCountdown > 0 ? `Indu Waiting (${silenceCountdown}s)` : 'AssemblyAI Live') : 'Mic Offline'}</span>
+                            </div>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
                         <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
@@ -736,16 +937,45 @@ const AiInterviewSession = () => {
                                 <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
                             </div>
                         ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                <input
-                                    className="response-input"
-                                    style={{ flex: 1, border: '1px solid #cbd5e0', borderRadius: '8px', padding: '6px 12px', fontSize: '0.85rem', outline: 'none' }}
+                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: '#f8fafc', padding: '8px', borderRadius: '8px' }}>
+                                <textarea
+                                    className="response-textarea"
+                                    style={{ 
+                                        flex: 1, 
+                                        border: '1px solid #cbd5e0', 
+                                        borderRadius: '8px', 
+                                        padding: '8px 12px', 
+                                        fontSize: '0.85rem', 
+                                        outline: 'none',
+                                        minHeight: '40px',
+                                        maxHeight: '150px',
+                                        resize: 'vertical',
+                                        fontFamily: 'monospace'
+                                    }}
                                     value={responseInput}
                                     onChange={(e) => setResponseInput(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleAnswerSubmission(responseInput)}
-                                    placeholder="Type answer..."
+                                    placeholder="Type answer or code here... (Enter for new line)"
                                 />
-                                <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
+                                <button 
+                                    onClick={() => handleAnswerSubmission(responseInput)} 
+                                    disabled={isProcessing || !responseInput.trim()} 
+                                    style={{ 
+                                        background: '#667eea', 
+                                        color: 'white', 
+                                        border: 'none', 
+                                        width: '40px', 
+                                        height: '40px', 
+                                        borderRadius: '8px', 
+                                        fontSize: '1rem', 
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                    title="Send Answer"
+                                >
+                                    <i className="fa-solid fa-paper-plane"></i>
+                                </button>
                             </div>
                         )}
                         <button

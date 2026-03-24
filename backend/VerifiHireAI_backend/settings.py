@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifihireai.com")
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
 
 
 # Application definition
@@ -131,9 +131,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihire'),
+        'NAME': os.environ.get('DB_NAME', 'verifihire_db'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),
@@ -210,10 +210,10 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "https://www.verifihireai.com",
     "http://20.205.31.46",
 ]
@@ -267,7 +267,8 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
+ASSEMBLYAI_API_KEY = os.environ.get('ASSEMBLYAI_API_KEY')
 
 from datetime import timedelta
 SIMPLE_JWT = {
