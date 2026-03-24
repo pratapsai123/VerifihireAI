@@ -210,7 +210,7 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5173",
     "http://localhost:5174",
     "https://verifihireai.com",

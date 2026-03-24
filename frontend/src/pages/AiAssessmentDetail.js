@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
@@ -8,11 +8,12 @@ const AiAssessmentDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const initialTab = searchParams.get('tab') || 'overview';
+    const subIdParam = searchParams.get('subId');
+
     const [assessment, setAssessment] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // Default to 'questions' if no tab param or invalid param
-    const initialTab = searchParams.get('tab') === 'submissions' ? 'submissions' : 'questions';
     const [activeTab, setActiveTab] = useState(initialTab);
     const [selectedSubmission, setSelectedSubmission] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -36,6 +37,16 @@ const AiAssessmentDetail = () => {
         };
         fetchDetail();
     }, [id]);
+
+    useEffect(() => {
+        if (!loading && assessment && subIdParam && !selectedSubmission) {
+            const sub = (assessment.submissions || []).find(s => String(s.id) === String(subIdParam));
+            if (sub) {
+                setSelectedSubmission(sub);
+                setActiveTab('submissions');
+            }
+        }
+    }, [loading, assessment, subIdParam, selectedSubmission]);
 
     useEffect(() => {
         if (activeTab === 'interviewers') {
@@ -398,7 +409,7 @@ const AiAssessmentDetail = () => {
 
                             <h4 style={{ color: '#1B254B', marginBottom: '1.5rem' }}>Answer Verification</h4>
                             <div style={{ display: 'grid', gap: '1.5rem' }}>
-                                {mcqs.map((q, i) => {
+                                {(selectedSubmission.candidate_questions?.mcqs || mcqs).map((q, i) => {
                                     const candAns = selectedSubmission.answers[`mcq_${i}`];
                                     const isCorrect = candAns === q.answer;
                                     return (
@@ -485,13 +496,13 @@ const AiAssessmentDetail = () => {
                             </div>
 
                             {/* Coding Submissions */}
-                            {coding.length > 0 && (
+                            {(selectedSubmission.candidate_questions?.coding_challenges || coding).length > 0 && (
                                 <div style={{ marginTop: '4rem' }}>
                                     <h4 style={{ color: '#1B254B', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Challenge Verification
                                     </h4>
                                     <div style={{ display: 'grid', gap: '3rem' }}>
-                                        {coding.map((c, i) => (
+                                        {(selectedSubmission.candidate_questions?.coding_challenges || coding).map((c, i) => (
                                             <div key={i} style={{ background: '#F8F9FF', borderRadius: '30px', padding: '2rem', border: '1px solid #E0E5F2' }}>
                                                 <div style={{ marginBottom: '2rem' }}>
                                                     <h5 style={{ color: '#1B254B', fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem 0' }}>{c.title}</h5>

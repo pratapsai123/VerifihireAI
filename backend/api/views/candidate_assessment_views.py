@@ -1664,6 +1664,43 @@ def results_overview_view(request):
                 }
             )
 
+        for s in ai_qs[:400]:
+            a = s.assessment
+            results.append(
+                {
+                    'submission_id': f"ai_{s.id}",
+                    'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else None,
+                    'candidate': {
+                        'name': getattr(s, 'candidate_name', 'Unknown'),
+                        'email': getattr(s, 'candidate_email', 'Unknown'),
+                    },
+                    'assessment': {
+                        'id': f"ai_{a.id}",
+                        'display_name': getattr(a, 'title', str(a.id)),
+                        'name': getattr(a, 'title', str(a.id)),
+                        'weightage_objective': 0,
+                        'weightage_coding': 100,
+                    },
+                    'score': getattr(s, 'score', 0),
+                    'total': getattr(s, 'total', 100),
+                    'percentage': getattr(s, 'percentage', 0),
+                    
+                    'objective_score': 0,
+                    'objective_total': 0,
+                    'objective_percentage': 0,
+                    
+                    'coding_score': getattr(s, 'score', 0),
+                    'coding_total': getattr(s, 'total', 100),
+                    'coding_percentage': getattr(s, 'percentage', 0),
+
+                    'status': getattr(s, 'status', 'COMPLETED'),
+                    'integrity': {
+                        'integrity_score': getattr(s, 'integrity_score', 100.0),
+                        'warning_logs': getattr(s, 'warning_logs', [])
+                    }
+                }
+            )
+
         # Re-sort combined results by submitted_at
         results.sort(key=lambda x: str(x['submitted_at'] or ''), reverse=True)
 

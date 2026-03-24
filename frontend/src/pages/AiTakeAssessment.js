@@ -131,8 +131,14 @@ const AiTakeAssessment = () => {
     const screenCanvasRef = useRef(null);
     const timerRef = useRef(null);
     const handleSubmitRef = useRef(null); // always points to latest handleSubmit
-    const mcqSection = React.useMemo(() => assessment?.generated_content?.mcqs || [], [assessment]);
-    const codingSection = React.useMemo(() => assessment?.generated_content?.coding_challenges || [], [assessment]);
+    const mcqSection = React.useMemo(() => {
+        const raw = assessment?.generated_content?.mcqs;
+        return Array.isArray(raw) ? raw : [];
+    }, [assessment]);
+    const codingSection = React.useMemo(() => {
+        const raw = assessment?.generated_content?.coding_challenges;
+        return Array.isArray(raw) ? raw : [];
+    }, [assessment]);
     const allQs = React.useMemo(() => [
         ...mcqSection.map((q, i) => ({ ...q, type: 'mcq', id: i })),
         ...codingSection.map((c, i) => ({ ...c, type: 'coding', id: i }))
@@ -936,7 +942,7 @@ const AiTakeAssessment = () => {
                                 </h2>
                                 <p style={{ color: '#111827', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>{currentQ.question}</p>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                                    {currentQ.options?.map((opt, i) => {
+                                    {(Array.isArray(currentQ.options) ? currentQ.options : Object.values(currentQ.options || {})).map((opt, i) => {
                                         const selected = answers[currentAnswerKey] === opt;
                                         const labels = ['A', 'B', 'C', 'D', 'E'];
                                         return (

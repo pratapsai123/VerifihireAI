@@ -35,7 +35,8 @@ const ResultsAI = () => {
     const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
     const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail'
     const [selectedRole, setSelectedRole] = useState(null);
-    const [summaryModal, setSummaryModal] = useState(null); // Candidate object
+    const [summaryModal, setSummaryModal] = useState(null); // Candidate object for interview
+    const [viewedSubmission, setViewedSubmission] = useState(null); // Submission object for assessment
 
     const showToast = (type, message) => {
         setToast({ type, message });
@@ -78,15 +79,10 @@ const ResultsAI = () => {
                             display_name: assessment.role || assessment.required_skills, // Use role if available
                             role: assessment.role,
                         },
-                        candidate: {
-                            name: sub.candidate_name,
-                            email: sub.candidate_email,
-                        },
-                        score: sub.score,
-                        total: sub.results_breakdown?.total_possible || (assessment.total_points || 100),
-                        percentage: sub.percentage,
-                        status: sub.status,
+                        candidate_questions: sub.candidate_questions || assessment.generated_content,
+                        answers: sub.answers || {},
                         submitted_at: sub.submitted_at,
+                        total_possible: sub.results_breakdown?.total_possible || sub.total_points || 0
                     });
                 });
             });
@@ -103,12 +99,13 @@ const ResultsAI = () => {
             });
 
             const addToGroup = (role, item, type) => {
-                const name = (role || '').trim();
-                // Only add to group if it's a known job role title
-                if (groups[name]) {
-                    groups[name][type].push(item);
-                    groups[name].total += 1;
+                const name = (role || 'Other').trim();
+                // Create group if it doesn't exist (previously it only used predefined Job Roles)
+                if (!groups[name]) {
+                    groups[name] = { resume: [], assessment: [], interview: [], total: 0 };
                 }
+                groups[name][type].push(item);
+                groups[name].total += 1;
             };
 
             allCandidates.forEach(c => {
@@ -117,7 +114,8 @@ const ResultsAI = () => {
             });
 
             sorted.forEach(s => {
-                addToGroup(s.assessment.role || s.assessment.display_name, s, 'assessment');
+                const roleName = s.assessment.role || s.assessment.display_name || s.assessment.name || 'General Assessment';
+                addToGroup(roleName, s, 'assessment');
             });
 
             setGroupedData(groups);
@@ -130,6 +128,20 @@ const ResultsAI = () => {
     }, []);
 
     useEffect(() => { fetchData(); }, [fetchData]);
+
+    useEffect(() => {
+        const sid = searchParams.get('subId');
+        if (sid) {
+            const numSid = parseInt(sid);
+            // Search in all assessments across roles if needed, or just current role
+            const sub = aiAssessments.find(a => a.id === numSid || a.submission_id === `ai_${sid}`);
+            if (sub && sub !== viewedSubmission) {
+                setViewedSubmission(sub);
+            }
+        } else if (viewedSubmission) {
+            setViewedSubmission(null);
+        }
+    }, [searchParams, aiAssessments, viewedSubmission]);
 
     useEffect(() => {
         const tab = searchParams.get('tab');
@@ -358,41 +370,295 @@ const ResultsAI = () => {
             )}
 
 
-            {summaryModal && (
-                <div className="glass-modal-overlay">
-                    <div className="glass-modal-content" style={{ width: '100%', maxWidth: '800px', maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
-                        <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            {viewedSubmission && (
+                <div className="glass-modal-overlay" style={{ zIndex: 10000, background: 'rgba(27, 37, 75, 0.4)', backdropFilter: 'blur(8px)' }}>
+                    <div className="glass-modal-content" style={{ 
+                        width: '95%', maxWidth: '1200px', height: '90vh', 
+                        display: 'flex', flexDirection: 'column', padding: 0,
+                        background: '#F4F7FE', borderRadius: '30px'
+                    }}>
+                        {/* Modal Header */}
+                        <div style={{ 
+                            padding: '1.5rem 2.5rem', background: 'white', borderBottom: '1px solid #E2E8F0',
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            borderTopLeftRadius: '30px', borderTopRightRadius: '30px'
+                        }}>
                             <div>
-                                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0 }}>Interview Justification</h2>
-                                <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: '0.2rem 0 0' }}>AI Evaluation for <strong>{summaryModal.full_name}</strong></p>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: '900', color: '#1B254B', margin: 0 }}>
+                                    {viewedSubmission.candidate_name} <span style={{ color: '#707EAE', fontWeight: '400', fontSize: '1.1rem' }}>Review</span>
+                                </h2>
+                                <p style={{ fontSize: '0.9rem', color: '#A3AED0', margin: '0.25rem 0 0', fontWeight: '600' }}>
+                                    Assessment: <span style={{ color: '#4318FF' }}>{viewedSubmission.assessment_name}</span>
+                                    <span style={{ margin: '0 0.75rem', color: '#CBD5E1' }}>|</span>
+                                    Submitted {new Date(viewedSubmission.submitted_at).toLocaleString()}
+                                </p>
                             </div>
-                            <button onClick={() => setSummaryModal(null)} style={{ border: 'none', background: '#F3F4F6', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer' }}>
-                                <i className="fa-solid fa-xmark" />
+                            <button 
+                                onClick={() => {
+                                    const newParams = new URLSearchParams(searchParams);
+                                    newParams.delete('subId');
+                                    setSearchParams(newParams);
+                                }}
+                                style={{ 
+                                    background: '#F4F7FE', border: 'none', borderRadius: '50%', 
+                                    width: '44px', height: '44px', cursor: 'pointer',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                }}
+                            >
+                                <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
                             </button>
                         </div>
-                        <div style={{ padding: '2rem', overflowY: 'auto', flex: 1 }}>
-                            {(!summaryModal.interview_summary || summaryModal.interview_summary.length === 0) ? (
-                                <p>No feedback available.</p>
-                            ) : (
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                                    {summaryModal.interview_summary.map((item, idx) => (
-                                        <div key={idx} style={{ border: '1px solid #E5E7EB', borderRadius: '16px', overflow: 'hidden' }}>
-                                            <div style={{ padding: '1rem', background: '#F9FAFB', borderBottom: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between' }}>
-                                                <span style={{ fontWeight: '800', color: '#4F46E5' }}>Question {idx + 1}</span>
-                                                <div style={{ fontWeight: '800' }}>Score: {item.score}/10</div>
-                                            </div>
-                                            <div style={{ padding: '1.25rem' }}>
-                                                <p style={{ fontWeight: '700', marginBottom: '0.5rem' }}>{item.question}</p>
-                                                <p style={{ fontStyle: 'italic', color: '#4B5563' }}>"{item.answer}"</p>
-                                                <p style={{ marginTop: '1rem' }}><strong>AI Justification:</strong> {item.feedback}</p>
-                                            </div>
+
+                        {/* Modal Body */}
+                        <div style={{ flex: 1, overflowY: 'auto', padding: '2.5rem' }}>
+                            <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                                
+                                {/* 3-Card Summary (Matching AiAssessmentDetail.js) */}
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                                    {/* MCQ Card */}
+                                    <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                        <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
+                                        <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                            {viewedSubmission.results_breakdown?.mcq?.total > 0
+                                                ? Math.round((viewedSubmission.mcq_score / viewedSubmission.results_breakdown.mcq.total) * 100)
+                                                : 0}%
                                         </div>
-                                    ))}
+                                        <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                            {viewedSubmission.mcq_score / 20} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
+                                        </div>
+                                    </div>
+
+                                    {/* Coding Card */}
+                                    <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                        <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
+                                        <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                            {viewedSubmission.results_breakdown?.coding?.total > 0
+                                                ? Math.round((viewedSubmission.coding_score / viewedSubmission.results_breakdown.coding.total) * 100)
+                                                : 0}%
+                                        </div>
+                                        <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                            {viewedSubmission.coding_score} / {viewedSubmission.results_breakdown?.coding?.total || 0} pts
+                                        </div>
+                                    </div>
+
+                                    {/* Integrity Card */}
+                                    <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                        <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
+                                        <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity_score || 0) >= 70 ? '#05CD99' : '#EE5D50' }}>
+                                            {viewedSubmission.integrity_score || 0}%
+                                        </div>
+                                        <div style={{ color: (viewedSubmission.integrity_score || 0) >= 70 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                                            {(viewedSubmission.integrity_score || 0) >= 70 ? '✓ Reliable' : '⚠ Suspicious'}
+                                        </div>
+                                    </div>
                                 </div>
-                            )}
+
+                                {/* Overall Result Banner */}
+                                <div style={{ 
+                                    background: viewedSubmission.status === 'selected' ? '#E6FBF5' : '#FFF5F5', 
+                                    padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem',
+                                    border: `1px solid ${viewedSubmission.status === 'selected' ? '#05CD99' : '#EE5D50'}`
+                                }}>
+                                    <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.3rem' }}>Overall Result</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: viewedSubmission.status === 'selected' ? '#05CD99' : '#EE5D50' }}>{viewedSubmission.percentage}%</div>
+                                    <div style={{ color: '#1B254B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{viewedSubmission.status}</div>
+                                </div>
+
+                                {/* Answer Verification (MCQs) */}
+                                <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> MCQ Answer Verification
+                                </h4>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                                    {viewedSubmission.candidate_questions?.mcqs?.map((q, i) => {
+                                        const candAns = viewedSubmission.answers[`mcq_${i}`];
+                                        const isCorrect = candAns === q.answer;
+                                        return (
+                                            <div key={i} style={{ 
+                                                padding: '2rem', borderRadius: '30px', 
+                                                border: '1px solid #E0E5F2', background: 'white', 
+                                                boxShadow: '0 10px 30px rgba(0,0,0,0.02)' 
+                                            }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                                    <div style={{ flex: 1 }}>
+                                                        <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
+                                                        <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0', lineHeight: 1.5 }}>{q.question}</p>
+                                                    </div>
+                                                    <div style={{ 
+                                                        padding: '0.5rem 1rem', borderRadius: '12px', 
+                                                        background: isCorrect ? '#E6FBF5' : '#FFF5F5', 
+                                                        color: isCorrect ? '#05CD99' : '#EE5D50', 
+                                                        fontWeight: '800', fontSize: '0.75rem', 
+                                                        display: 'flex', alignItems: 'center', gap: '6px',
+                                                        border: `1px solid ${isCorrect ? '#05CD9944' : '#EE5D5044'}`
+                                                    }}>
+                                                        <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
+                                                        {isCorrect ? 'CORRECT' : 'INCORRECT'}
+                                                    </div>
+                                                </div>
+
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                                                    {q.options.map((opt, oi) => {
+                                                        const isSelected = opt === candAns;
+                                                        const isAnswer = opt === q.answer;
+
+                                                        let bg = 'white';
+                                                        let border = '1px solid #E0E5F2';
+                                                        let color = '#1B254B';
+                                                        let icon = null;
+
+                                                        if (isAnswer) {
+                                                            bg = '#E6FBF5';
+                                                            border = '2px solid #05CD99';
+                                                            color = '#05CD99';
+                                                            icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
+                                                        } else if (isSelected && !isCorrect) {
+                                                            bg = '#FFF5F5';
+                                                            border = '2px solid #EE5D50';
+                                                            color = '#EE5D50';
+                                                            icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
+                                                        }
+
+                                                        return (
+                                                            <div key={oi} style={{
+                                                                padding: '1rem 1.25rem', background: bg, borderRadius: '16px', border,
+                                                                color: color, fontWeight: (isAnswer || isSelected) ? '700' : '500',
+                                                                fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '10px'
+                                                            }}>
+                                                                <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
+                                                                <span style={{ flex: 1 }}>{opt}</span>
+                                                                {icon}
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                
+                                                {!isCorrect && (
+                                                    <div style={{ 
+                                                        marginTop: '1.25rem', padding: '1rem 1.5rem', 
+                                                        background: 'linear-gradient(135deg, #E6FBF5, #D1F7ED)', 
+                                                        borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px',
+                                                        border: '1px solid #05CD9933'
+                                                    }}>
+                                                        <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.2rem' }} />
+                                                        <div>
+                                                            <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase' }}>Correct Solution</div>
+                                                            <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>{q.answer}</div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Coding Challenges */}
+                                {viewedSubmission.candidate_questions?.coding_challenges?.length > 0 && (
+                                    <div style={{ marginBottom: '4rem' }}>
+                                        <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Verification
+                                        </h4>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+                                            {viewedSubmission.candidate_questions.coding_challenges.map((c, i) => {
+                                                const candCode = viewedSubmission.answers[`coding_${i}`];
+                                                const res = viewedSubmission.results_breakdown?.coding_results?.[c.id] || {};
+                                                return (
+                                                    <div key={i} style={{ background: 'white', borderRadius: '30px', padding: '2rem', border: '1px solid #E0E5F2', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                                                        <div style={{ marginBottom: '2rem' }}>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                                                <div>
+                                                                    <h5 style={{ color: '#1B254B', fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem 0' }}>{c.title}</h5>
+                                                                    <p style={{ color: '#707EAE', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>{c.problem_statement}</p>
+                                                                </div>
+                                                                <div style={{ textAlign: 'right', background: '#F4F7FE', padding: '0.5rem 1rem', borderRadius: '12px' }}>
+                                                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#A3AED0', textTransform: 'uppercase' }}>Passed Tests</div>
+                                                                    <div style={{ fontSize: '1.2rem', fontWeight: '900', color: res.pass_count === res.total_count ? '#05CD99' : '#F59E0B' }}>
+                                                                        {res.pass_count || 0}/{res.total_count || 10}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div style={{ position: 'relative' }}>
+                                                            <div style={{
+                                                                position: 'absolute', top: '-14px', left: '24px',
+                                                                background: '#4318FF', color: 'white', padding: '4px 14px',
+                                                                borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
+                                                            }}>CANDIDATE SUBMISSION</div>
+                                                            <div style={{
+                                                                background: '#1B254B', borderRadius: '20px',
+                                                                padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
+                                                            }}>
+                                                                <pre style={{
+                                                                    margin: 0, color: '#05CD99',
+                                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                    fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
+                                                                }}>
+                                                                    {candCode || '// No code submitted'}
+                                                                </pre>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Integrity Violations */}
+                                {viewedSubmission.integrity_screenshots?.length > 0 && (
+                                    <div style={{ marginTop: '4rem' }}>
+                                        <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
+                                        </h4>
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                                            {viewedSubmission.integrity_screenshots.map((snap, sIdx) => (
+                                                <div key={sIdx} style={{ background: 'white', borderRadius: '20px', padding: '12px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
+                                                    <div style={{ 
+                                                        width: '100%', height: '160px', background: '#F4F7FE', 
+                                                        borderRadius: '15px', overflow: 'hidden', marginBottom: '10px', 
+                                                        position: 'relative', border: '1px solid #E0E5F2'
+                                                    }}>
+                                                        <img 
+                                                            src={snap.screenshot_url || snap.webcam_screenshot_url} 
+                                                            alt={snap.event_type}
+                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                            onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
+                                                        />
+                                                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.8)', color: 'white', fontSize: '0.65rem', padding: '6px', fontWeight: '700' }}>
+                                                            {snap.event_type.replace(/_/g, ' ').toUpperCase()}
+                                                        </div>
+                                                    </div>
+                                                    <div style={{ color: '#A3AED0', fontSize: '0.75rem', fontWeight: '700' }}>
+                                                        {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                        <div style={{ padding: '1.25rem 2rem', borderTop: '1px solid #F3F4F6', textAlign: 'right' }}>
-                            <button onClick={() => setSummaryModal(null)} style={{ padding: '0.6rem 1.5rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700' }}>Close</button>
+
+                        {/* Modal Footer */}
+                        <div style={{ 
+                            padding: '1.5rem 2.5rem', background: 'white', borderTop: '1px solid #E2E8F0',
+                            textAlign: 'right', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px'
+                        }}>
+                            <button 
+                                onClick={() => {
+                                    const newParams = new URLSearchParams(searchParams);
+                                    newParams.delete('subId');
+                                    setSearchParams(newParams);
+                                }}
+                                style={{ 
+                                    padding: '0.8rem 2.5rem', background: '#4318FF', color: 'white', 
+                                    border: 'none', borderRadius: '15px', fontWeight: '800', cursor: 'pointer',
+                                    boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)', fontSize: '0.95rem'
+                                }}
+                            >
+                                Finished Review
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -404,11 +670,47 @@ const ResultsAI = () => {
                         AI <span style={{ color: '#4F46E5' }}>Results</span>
                     </h1>
                     {viewMode === 'detail' && (
-                        <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                            <button onClick={handleBackToOverview} style={{ background: '#F3F4F6', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '10px', cursor: 'pointer', fontWeight: '700', color: '#4B5563' }}>
-                                <i className="fa-solid fa-arrow-left" /> Back to Roles
+                        <div style={{ marginTop: '1.5rem' }}>
+                            <button onClick={handleBackToOverview} style={{ 
+                                background: 'none', border: 'none', padding: '0', 
+                                cursor: 'pointer', fontWeight: '800', color: '#4F46E5', 
+                                display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                marginBottom: '1.5rem', fontSize: '1rem'
+                            }}>
+                                <i className="fa-solid fa-arrow-left" /> Back to Archive
                             </button>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{selectedRole}</h2>
+                            
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+                                <div>
+                                    <h1 style={{ fontSize: '3.5rem', fontWeight: '900', color: '#111827', margin: 0, textTransform: 'lowercase' }}>
+                                        {selectedRole} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1.8rem' }}>Assessment Results</span>
+                                    </h1>
+                                    <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: '700', color: '#4F46E5' }}>
+                                            <i className="fa-solid fa-calendar-plus" />
+                                            <span style={{ color: '#94A3B8' }}>Available From:</span>
+                                            <span>
+                                                {paginatedRows[0]?.available_from ? new Date(paginatedRows[0].available_from).toLocaleString() : 'N/A'}
+                                            </span>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: '700', color: '#E11D48' }}>
+                                            <i className="fa-solid fa-calendar-xmark" />
+                                            <span style={{ color: '#94A3B8' }}>Available Until:</span>
+                                            <span>
+                                                {paginatedRows[0]?.available_until ? new Date(paginatedRows[0].available_until).toLocaleString() : 'N/A'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{ 
+                                    background: 'white', padding: '1.5rem 2.5rem', borderRadius: '24px', 
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.05)', textAlign: 'center',
+                                    border: '1px solid #F1F5F9'
+                                }}>
+                                    <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Submissions</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </header>
@@ -417,7 +719,7 @@ const ResultsAI = () => {
                     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                         <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <div style={{ width: '4px', height: '24px', background: '#4F46E5', borderRadius: '2px' }} />
-                            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Job Roles</h2>
+                            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Candidate Performance</h2>
                             <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600', marginLeft: 'auto' }}>
                                 {Object.keys(groupedData).length} Roles Found
                             </span>
@@ -505,13 +807,15 @@ const ResultsAI = () => {
                                         <thead>
                                             <tr>
                                                 <th style={{ width: '60px', textAlign: 'center' }}>
-                                                    <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
+                                                    {activeTab === 'assessment' && (
+                                                        <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
+                                                    )}
                                                 </th>
                                                 <th>Candidate Info</th>
                                                 <th>Result Data</th>
                                                 <th>Date</th>
                                                 <th>AI Status</th>
-                                                {canDelete && <th style={{ textAlign: 'center' }}>Actions</th>}
+                                                {activeTab === 'assessment' && <th>Action</th>}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -524,7 +828,9 @@ const ResultsAI = () => {
                                                 return (
                                                     <tr key={r._deleteKey} className={isSelected ? 'selected' : ''}>
                                                         <td style={{ textAlign: 'center' }}>
-                                                            <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                            {activeTab === 'assessment' && (
+                                                                <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                            )}
                                                         </td>
                                                         <td>
                                                             <div style={{ fontWeight: '800', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
@@ -536,23 +842,41 @@ const ResultsAI = () => {
                                                         </td>
                                                         <td>
                                                             {activeTab === 'resume' ? `${r.resume_score || 0}% Match` :
-                                                                activeTab === 'assessment' ? `${Math.round((r.score / r.total) * 100)}% (${r.score}/${r.total})` :
-                                                                    `${Math.round(r.score)}% Evaluation`}
+                                                                activeTab === 'assessment' ? `${r.percentage ?? 0}% (${r.score || 0}/${r.total_possible || r.total || r.total_questions || 0})` :
+                                                                    `${r.score != null ? Math.round(r.score) : 0}% Evaluation`}
                                                         </td>
                                                         <td>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</td>
                                                         <td>
-                                                            <span style={{ padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                                {getStatusLabel(r.status)}
-                                                            </span>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
+                                                                <span style={{ padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
+                                                                    {getStatusLabel(r.status)}
+                                                                </span>
+                                                                {activeTab === 'assessment' && (
+                                                                    <button 
+                                                                        onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
+                                                                        style={{ background: 'none', border: 'none', color: '#EE5D50', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center', transition: 'all 0.2s', opacity: 0.6 }}
+                                                                        title="Delete Result"
+                                                                    >
+                                                                        <i className="fa-solid fa-trash-can" style={{ fontSize: '0.9rem' }}></i>
+                                                                    </button>
+                                                                )}
+                                                            </div>
                                                         </td>
-                                                        {canDelete && (
-                                                            <td style={{ textAlign: 'center' }}>
-                                                                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                                                                    {activeTab !== 'resume' && (
-                                                                        <button onClick={() => activeTab === 'assessment' ? navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`) : setSummaryModal(r)} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.8rem' }}>Review</button>
-                                                                    )}
-                                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                                </div>
+                                                        {activeTab === 'assessment' && (
+                                                            <td>
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                    className="view-details-btn"
+                                                                    style={{ 
+                                                                        padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
+                                                                        background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                        color: 'white', fontWeight: '700', fontSize: '0.85rem',
+                                                                        cursor: 'pointer', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                                                                        transition: 'all 0.2s'
+                                                                    }}
+                                                                >
+                                                                    View Details
+                                                                </button>
                                                             </td>
                                                         )}
                                                     </tr>

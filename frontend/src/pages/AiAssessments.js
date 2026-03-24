@@ -41,9 +41,39 @@ const AiAssessments = () => {
         fetchAssessments();
     }, []);
 
+    const getStatusInfo = (assessment) => {
+        const now = new Date();
+        const until = assessment.available_until ? new Date(assessment.available_until) : null;
+        const invited = assessment.invited_count || 0;
+        const completed = assessment.completed_count || 0;
+        const started = assessment.candidate_count || 0;
+        const isBulk = invited > 1;
+        
+        // 1. Time-based Expiry (Absolute deadline)
+        if (until && now > until) {
+            return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
+        }
+
+        // 2. Completion-based
+        if (completed > 0) {
+            if (!isBulk || completed >= invited) {
+                return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-calendar-xmark' };
+            }
+        }
+
+        // 3. Activity-based (Someone has started)
+        if (started > 0) {
+            const label = isBulk ? `Ongoing (${completed}/${invited})` : 'Ongoing';
+            return { type: 'ONGOING', label, isExpired: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin', isOngoing: true };
+        }
+
+        // 4. Default State (Fresh link)
+        return { type: 'SCHEDULED', label: 'Share', isExpired: false, color: 'white', bg: '#10b981', icon: 'fa-link' };
+    };
+
     const filteredAssessments = filter === 'ALL'
         ? assessments
-        : assessments.filter(a => a.status === filter);
+        : assessments.filter(a => getStatusInfo(a).type === filter);
 
     // Pagination logic
     const indexOfLastItem = currentPage * 10;
@@ -112,37 +142,6 @@ const AiAssessments = () => {
     };
 
 
-    const getStatusInfo = (assessment) => {
-        const now = new Date();
-        const until = assessment.available_until ? new Date(assessment.available_until) : null;
-        const invited = assessment.invited_count || 0;
-        const completed = assessment.completed_count || 0;
-        const started = assessment.candidate_count || 0;
-        const isBulk = invited > 1;
-        
-        // 1. Time-based Expiry (Absolute deadline)
-        if (until && now > until) {
-            return { label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
-        }
-
-        // 2. Completion-based
-        // If it's bulk (e.g., 3 people), wait for all to complete.
-        // If it's a single invite or manual link (invited <= 1), expire on the first completion.
-        if (completed > 0) {
-            if (!isBulk || completed >= invited) {
-                return { label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-calendar-xmark' };
-            }
-        }
-
-        // 3. Activity-based (Someone has started)
-        if (started > 0) {
-            const label = isBulk ? `Ongoing (${completed}/${invited})` : 'Ongoing';
-            return { label, isExpired: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin', isOngoing: true };
-        }
-
-        // 4. Default State (Fresh link)
-        return { label: 'Share', isExpired: false, color: 'white', bg: '#10b981', icon: 'fa-link' };
-    };
 
     return (
         <div className="dashboard-container" style={{ paddingTop: 0 }}>
