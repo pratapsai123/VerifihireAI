@@ -525,7 +525,7 @@ const AiInterviewSession = () => {
                             vocalVolume += dataArray[i];
                         }
                         const averageVocal = vocalVolume / 10;
-                        if (averageVocal > 75) isSpeakingLocal = true; // Calibrated vocal detection to prevent sticking on noise
+                        if (averageVocal > 110) isSpeakingLocal = true; // Increased threshold to 110 to ignore background noise/fans
                         
                         for(let i = 0; i < visualBins; i++) {
                             const val = dataArray[i];
@@ -561,6 +561,7 @@ const AiInterviewSession = () => {
                         
                         // Local Mic Check: if we hear sound locally, update our master timestamp
                         if (isSpeakingLocal && isRecordingRef.current) {
+                            if (Date.now() % 5000 < 100) console.log("VAD Active. Avg Volume:", averageVocal);
                             lastSpokenTimeRef.current = Date.now();
                         }
                         
@@ -1002,17 +1003,17 @@ const AiInterviewSession = () => {
             // keep the timer at 5. This prevents cutouts during natural speech pauses.
             if (timeSinceActivity < 2000) {
                 secondsRemaining = 5;
-                setSilenceCountdown(5);
+                setSilenceCountdown("Listening..."); 
                 return;
             }
 
-            // Otherwise, proceed with the visible countdown
+            // Otherwise, proceed with the visible countdown (5-4-3-2-1)
             secondsRemaining = 5 - Math.floor((timeSinceActivity - 2000) / 1000);
             
             if (secondsRemaining > 0) {
-                setSilenceCountdown(secondsRemaining);
+                setSilenceCountdown(secondsRemaining + "s");
             } else if (secondsRemaining === 0 || secondsRemaining === -1) {
-                setSilenceCountdown("..."); // Network/Post-processing buffer visual
+                setSilenceCountdown("..."); 
             } else if (secondsRemaining <= -2) {
                 // TRUE EXPIRATION
                 console.log("Unified Watchdog: Maximum silence exceeded. Forcing submission.");
@@ -1169,16 +1170,16 @@ const AiInterviewSession = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '6px',
-                                background: sttReady ? (silenceCountdown > 0 ? '#fffbec' : '#f0fff4') : '#fff5f5',
+                                background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#ebf8ff' : '#fffbec') : '#f0fff4') : '#fff5f5',
                                 padding: '4px 10px',
                                 borderRadius: '8px',
-                                color: sttReady ? (silenceCountdown > 0 ? '#b7791f' : '#38a169') : '#e53e3e',
+                                color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#3182ce' : '#b7791f') : '#38a169') : '#e53e3e',
                                 fontWeight: 'bold',
                                 fontSize: '0.8rem',
-                                border: `1px solid ${sttReady ? (silenceCountdown > 0 ? '#f6e05e' : '#c6f6d5') : '#feb2b2'}`
+                                border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#bee3f8' : '#f6e05e') : '#c6f6d5') : '#feb2b2'}`
                             }}>
-                                <i className={`fa-solid ${sttReady ? (silenceCountdown > 0 ? 'fa-hourglass-half' : 'fa-microphone') : 'fa-microphone-slash'}`}></i>
-                                <span>{sttReady ? (silenceCountdown > 0 ? `Indu Waiting (${silenceCountdown}s)` : 'AssemblyAI Live') : 'Mic Offline'}</span>
+                                <i className={`fa-solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'fa-microphone-lines' : 'fa-hourglass-half') : 'fa-check-circle') : 'fa-microphone-slash'}`}></i>
+                                <span>{sttReady ? (silenceCountdown ? `Indu Waiting (${silenceCountdown})` : 'AssemblyAI Live') : 'Mic Offline'}</span>
                             </div>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
