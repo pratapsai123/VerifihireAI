@@ -404,8 +404,8 @@ const AiInterviewSession = () => {
                         return;
                     }
 
-                    // CRITICAL: Ignore all transcripts while Indu is speaking to avoid feedback loops
-                    if (isSpeakingRef.current) return;
+                    // CRITICAL: Ignore all transcripts while Indu is speaking or processing to avoid feedback loops and buffer pollution
+                    if (isSpeakingRef.current || isProcessingRef.current) return;
 
                     if (data.type !== "Turn") return;
 
@@ -682,6 +682,13 @@ const AiInterviewSession = () => {
 
         addMessage('user', answer);
         setResponseInput('');
+        
+        // 3. Clear all speech buffers to prevent the "Repeated Input" bug
+        transcriptRef.current = "";
+        interimTranscriptRef.current = "";
+        lastTranscriptStrRef.current = "";
+        lastSpokenTimeRef.current = Date.now();
+        
         console.log("Submitting answer turn...");
 
         try {
