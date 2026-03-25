@@ -115,11 +115,23 @@ def extract_skills_from_resume_view(request):
         
         # Sort skills alphabetically
         extracted_skills.sort()
+
+        # Extract Name (Heuristic: First non-empty line that looks like a name)
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        extracted_name = ""
+        for line in lines[:5]:  # Look at first 5 non-empty lines
+            # If line doesn't have many numbers and isn't too long/short, it might be a name
+            if not any(char.isdigit() for char in line) and 3 < len(line) < 50:
+                # Avoid lines that look like headers (e.g., "SKILLS", "EXPERIENCE")
+                if line.upper() not in ["SKILLS", "EXPERIENCE", "PROJECTS", "EDUCATION", "CONTACT", "RESUME", "CURRICULUM VITAE"]:
+                    extracted_name = line
+                    break
         
         return Response(
             {
                 'skills': extracted_skills,
                 'count': len(extracted_skills),
+                'name': extracted_name,
                 'message': f'Successfully extracted {len(extracted_skills)} skills from resume.'
             },
             status=status.HTTP_200_OK

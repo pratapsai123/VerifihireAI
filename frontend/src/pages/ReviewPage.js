@@ -37,6 +37,8 @@ function ReviewPage() {
   const [objWeight, setObjWeight] = useState(30);
   const [codingWeight, setCodingWeight] = useState(70);
   const [removedQuestionIds, setRemovedQuestionIds] = useState(new Set());
+  const [isEditingRole, setIsEditingRole] = useState(false);
+  const [editedRole, setEditedRole] = useState('');
 
   const totalCodingPoints = useMemo(() => {
     const list = questions['Coding'] || [];
@@ -153,7 +155,14 @@ function ReviewPage() {
     if (state) {
       // Restore all state fields
       setAssessmentData(state);
-      if (state.assessmentName) setAssessmentName(state.assessmentName);
+      if (state.assessmentName) {
+        setAssessmentName(state.assessmentName);
+        setEditedRole(state.assessmentName);
+      } else if (state.role) {
+        const resolved = state.role === 'other' ? state.customRole : state.role.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        setAssessmentName(resolved);
+        setEditedRole(resolved);
+      }
       if (state.minPassPercentage !== undefined) setMinPassPercentage(state.minPassPercentage);
       if (state.timeLimit) setTimeLimit(state.timeLimit);
       if (state.objectiveTime) setObjectiveTime(state.objectiveTime);
@@ -175,8 +184,9 @@ function ReviewPage() {
       // If we need to refresh manual questions (e.g. just came back from ManualQuestions page)
       if (state.refreshManual) {
         console.log("ReviewPage: refreshManual is true, preparing to fetch latest manual questions.");
-        const restoredQuestions = { ...(state.questions || {}) };
-        const restoredTopics = [...(state.topics || [])];
+        // If onlyManual is true, start with empty questions/topics to discard AI-generated ones.
+        const restoredQuestions = state.onlyManual ? {} : { ...(state.questions || {}) };
+        const restoredTopics = state.onlyManual ? [] : [...(state.topics || [])];
         console.log("Initial questions groups:", Object.keys(restoredQuestions));
 
         const fetchLatestManual = async (forcedRemovedIds) => {
@@ -567,6 +577,32 @@ function ReviewPage() {
     };
   };
 
+  const handleUpdateRole = async () => {
+    if (!editedRole.trim()) return;
+
+    const caid = assessmentData?.id || assessmentData?.customAssessmentId;
+    if (!caid) return;
+
+    try {
+      const url = `${API_BASE_URL}/custom-assessments/${caid}/`;
+      await axios.patch(url, {
+        role: editedRole.trim()
+      });
+
+      setAssessmentName(editedRole.trim());
+      setIsEditingRole(false);
+
+      setAssessmentData(prev => ({
+        ...prev,
+        role: editedRole.trim()
+      }));
+    } catch (err) {
+      console.error('Error updating role:', err);
+      const detail = err.response?.data?.error || err.response?.data?.detail || err.message;
+      alert(`Failed to update role: ${detail}`);
+    }
+  };
+
   const handleBack = () => {
     navigate('/custom-assessment', { state: getCurrentState() });
   };
@@ -892,10 +928,63 @@ function ReviewPage() {
             <div className="summary-grid">
               <div className="summary-item">
                 <span className="summary-label">Role:</span>
-                <span className="summary-value">
-                  {assessmentData.role === 'other'
-                    ? assessmentData.customRole
-                    : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                <span className="summary-value" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {isEditingRole ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editedRole}
+                        onChange={(e) => setEditedRole(e.target.value)}
+                        className="role-edit-input"
+                        autoFocus
+                        style={{
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          border: '1px solid #d1d5db',
+                          fontSize: '0.9rem',
+                          fontWeight: '600',
+                          width: '180px'
+                        }}
+                      />
+                      <button
+                        onClick={handleUpdateRole}
+                        className="role-save-btn"
+                        style={{ color: '#10b981', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => { setIsEditingRole(false); setEditedRole(assessmentName); }}
+                        className="role-cancel-btn"
+                        style={{ color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        {(assessmentName === 'Manual Assessment' ? (topics[0] || assessmentName) : assessmentName) || (assessmentData.role === 'other'
+                          ? assessmentData.customRole
+                          : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()))}
+                      </span>
+                      <button
+                        onClick={() => setIsEditingRole(true)}
+                        className="role-edit-btn"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#6b7280', display: 'flex', alignItems: 'center' }}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                      </button>
+                    </>
+                  )}
                 </span>
               </div>
               <div className="summary-item">
@@ -1005,58 +1094,58 @@ function ReviewPage() {
               </div>
 
               {(questions['Coding'] || []).length > 0 && (
-              <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={hasObjectiveCutoff}
-                      onChange={(e) => setHasObjectiveCutoff(e.target.checked)}
-                    />
-                    <strong>Enforce Objective Cutoff?</strong>
-                  </label>
-                  {hasObjectiveCutoff && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span>Min Obj Pass %:</span>
+                <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                       <input
-                        type="number"
-                        value={objPassPercentage}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          const num = Number(val);
-                          if (num > 100) setObjPassPercentage(100);
-                          else if (num < 0) setObjPassPercentage(0);
-                          else setObjPassPercentage(val);
-                        }}
-                        style={{ width: '60px', padding: '4px' }}
+                        type="checkbox"
+                        checked={hasObjectiveCutoff}
+                        onChange={(e) => setHasObjectiveCutoff(e.target.checked)}
                       />
-                    </div>
-                  )}
+                      <strong>Enforce Objective Cutoff?</strong>
+                    </label>
+                    {hasObjectiveCutoff && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>Min Obj Pass %:</span>
+                        <input
+                          type="number"
+                          value={objPassPercentage}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const num = Number(val);
+                            if (num > 100) setObjPassPercentage(100);
+                            else if (num < 0) setObjPassPercentage(0);
+                            else setObjPassPercentage(val);
+                          }}
+                          style={{ width: '60px', padding: '4px' }}
+                        />
+                      </div>
+                    )}
 
-                  <div style={{ marginLeft: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Coding Possible Points:</span>
-                    <span style={{ fontSize: '1.1rem', fontWeight: '900', color: '#007bff' }}>{totalCodingPoints}</span>
+                    <div style={{ marginLeft: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Coding Possible Points:</span>
+                      <span style={{ fontSize: '1.1rem', fontWeight: '900', color: '#007bff' }}>{totalCodingPoints}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
+                    <strong style={{ minWidth: '70px' }}>Weights:</strong>
+                    <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={codingWeight}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setCodingWeight(val);
+                        setObjWeight(100 - val);
+                      }}
+                      style={{ flex: 1, cursor: 'pointer' }}
+                    />
+                    <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
                   </div>
                 </div>
-
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
-                  <strong style={{ minWidth: '70px' }}>Weights:</strong>
-                  <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={codingWeight}
-                    onChange={(e) => {
-                      const val = Number(e.target.value);
-                      setCodingWeight(val);
-                      setObjWeight(100 - val);
-                    }}
-                    style={{ flex: 1, cursor: 'pointer' }}
-                  />
-                  <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
-                </div>
-              </div>
               )}
             </div>
           </div>

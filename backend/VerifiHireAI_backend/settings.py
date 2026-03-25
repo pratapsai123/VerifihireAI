@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifihireai.com")
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
 
 
 # Application definition
@@ -210,10 +210,10 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "https://www.verifihireai.com",
     "http://20.205.31.46",
 ]

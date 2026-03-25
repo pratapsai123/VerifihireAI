@@ -54,9 +54,10 @@ from .candidate_assessment_views import (
     candidates_overview_view,
     backfill_assessment_questions_view,
     submit_objective_section,
-    save_candidate_details_view,
+    save_all_candidate_details_view,
     _acq_merge_code,
     update_standard_integrity_view,
+    verify_pan_backend_view,
 )
 
 from .live_interview_views import (
@@ -65,7 +66,6 @@ from .live_interview_views import (
     get_interview_invitation_by_token_view,
     submit_interview_feedback,
     draft_interview_invitations_view,
-    verify_pan_backend_view,
     download_candidate_report_view,
     get_candidate_details_view,
     generate_all_interviewer_slots_view,

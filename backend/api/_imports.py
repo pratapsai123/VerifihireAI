@@ -53,7 +53,7 @@ from .models import (
 )
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from .ocr_utils import extract_text_from_image
+from .ocr_utils import extract_text_from_image, extract_text_from_pdf
 from .report_utils import generate_candidate_report
 
 import re
