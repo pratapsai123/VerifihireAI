@@ -339,23 +339,39 @@ class ResumeMatchView(APIView):
                     company = user_profile.company if user_profile else None
                     candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
                     
-                    current_candidate = Candidate.objects.create(
-                        full_name=candidate_name,
-                        email="pending@example.com",
-                        job_title=job_title or "Applicant",
-                        resume=None if hasattr(resume_file, 'open') else resume_file,
-                        resume_text=resume_text,
-                        status='New',
-                        job_description=job_description,
-                        company=company,
-                        user_profile=user_profile,
-                        batch_id=batch_id
-                    )
-                    results.append({"id": current_candidate.id, "name": candidate_name, "status": "Queued"})
+                    current_candidate = None
+                    if candidate_id:
+                        try:
+                            current_candidate = Candidate.objects.get(id=candidate_id)
+                            current_candidate.resume_text = resume_text
+                            current_candidate.batch_id = batch_id
+                            current_candidate.status = 'New'
+                            current_candidate.job_description = job_description
+                            # Also update company/profile if missing
+                            if not current_candidate.company: current_candidate.company = company
+                            if not current_candidate.user_profile: current_candidate.user_profile = user_profile
+                            current_candidate.save()
+                        except Candidate.DoesNotExist:
+                            pass
+
+                    if not current_candidate:
+                        current_candidate = Candidate.objects.create(
+                            full_name=candidate_name,
+                            email="pending@example.com",
+                            job_title=job_title or "Applicant",
+                            resume=None if hasattr(resume_file, 'open') else resume_file,
+                            resume_text=resume_text,
+                            status='New',
+                            job_description=job_description,
+                            company=company,
+                            user_profile=user_profile,
+                            batch_id=batch_id
+                        )
+                    results.append({"id": current_candidate.id, "name": current_candidate.full_name, "status": "Queued"})
                 except Exception as e:
                     logger.error(f"Early extraction error: {e}")
 
-            # 2. Trigger background processing
+            # 2. Trigger processing (Synchronous for single candidate flow, Asynchronous for bulk)
             is_auto = False
             raw_is_auto = request.data.get('is_fully_automatic')
             if raw_is_auto:
@@ -374,6 +390,23 @@ class ResumeMatchView(APIView):
                 'interview_available_until': request.data.get('interview_available_until')
             }
 
+            # If it was a single candidate session (start interview flow), process synchronously
+            if len(results) == 1 and (candidate_id or len(resume_files) == 1):
+                from .tasks import process_resume_batch_task
+                # Call synchronously (not as .delay)
+                process_resume_batch_task(
+                    batch_id=batch_id,
+                    job_description=job_description,
+                    threshold=threshold,
+                    is_fully_automatic=is_auto,
+                    automation_settings=automation_settings
+                )
+                
+                # Fetch updated candidate and return full data
+                final_candidate = Candidate.objects.get(id=results[0]['id'])
+                return Response(CandidateSerializer(final_candidate).data, status=status.HTTP_200_OK)
+
+            # Bulk flow: trigger as background task
             process_resume_batch_task.delay(
                 batch_id=batch_id,
                 job_description=job_description,

@@ -1002,3 +1002,430 @@ Host: localhost:8001
 [2026-03-25 09:51:17.455027+00:00] PUBLIC ACCESS: Token='f8cd5d4f-6174-4e01-a19a-d19a8913868e'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1774432277129']}>
 Host: localhost:8001
+
+[2026-03-25 12:30:43.011751+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmhq6pw9ffm81kw6aw2j6r7n` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 829. Please try again in 11m56.256s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\STT\backend\ai_assessments\views.py", line 372, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+    ...<6 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmhq6pw9ffm81kw6aw2j6r7n` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 829. Please try again in 11m56.256s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: {
+  "mcqs":[
+      {
+         "question":"What is the purpose of the 'finally' block in Java?",
+         "options":[
+            "To handle exceptions",
+            "To execute code regardless of exceptions",
+            "To skip exceptions",
+            "To throw exceptions"
+         ],
+         "answer":"To execute code regardless of exceptions",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"Which data structure is suitable for implementing a queue in Java?",
+         "options":[
+            "Array",
+            "Linked List",
+            "Stack",
+            "Tree"
+         ],
+         "answer":"Linked List",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the difference between 'break' and 'continue' statements in Java?",
+         "options":[
+            "'break' skips the current iteration, 'continue' stops the loop",
+            "'break' stops the loop, 'continue' skips the current iteration",
+            "'break' restarts the loop, 'continue' stops the loop",
+            "'break' stops the loop, 'continue' restarts the loop"
+         ],
+         "answer":"'break' stops the loop, 'continue' skips the current iteration",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you handle null pointer exceptions in Java?",
+         "options":[
+            "Using try-catch blocks",
+            "Using if-else statements",
+            "Using switch statements",
+            "Using loops"
+         ],
+         "answer":"Using try-catch blocks",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'synchronized' keyword in Java?",
+         "options":[
+            "To make a method thread-safe",
+            "To make a method non-thread-safe",
+            "To make a class thread-safe",
+            "To make a class non-thread-safe"
+         ],
+         "answer":"To make a method thread-safe",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Java collection class is suitable for storing unique elements?",
+         "options":[
+            "ArrayList",
+            "LinkedList",
+            "HashSet",
+            "TreeSet"
+         ],
+         "answer":"HashSet",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between '=='' and '.equals()' methods in Java?",
+         "options":[
+            "'==' checks for reference equality, '.equals()' checks for content equality",
+            "'==' checks for content equality, '.equals()' checks for reference equality",
+            "'==' checks for reference equality, '.equals()' checks for reference equality",
+            "'==' checks for content equality, '.equals()' checks for content equality"
+         ],
+         "answer":"'==' checks for reference equality, '.equals()' checks for content equality",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you implement inheritance in Java?",
+         "options":[
+            "Using the 'extends' keyword",
+            "Using the 'implements' keyword",
+            "Using the 'interface' keyword",
+            "Using the 'abstract' keyword"
+         ],
+         "answer":"Using the 'extends' keyword",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'abstract' keyword in Java?",
+         "options":[
+            "To declare a method that must be implemented by subclasses",
+            "To declare a method that cannot be overridden by subclasses",
+            "To declare a class that cannot be instantiated",
+            "To declare a class that can be instantiated"
+         ],
+         "answer":"To declare a method that must be implemented by subclasses",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Java keyword is used to declare a constant variable?",
+         "options":[
+            "final",
+            "static",
+            "public",
+            "private"
+         ],
+         "answer":"final",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'interface' and 'abstract class' in Java?",
+         "options":[
+            "'interface' can have state, 'abstract class' cannot have state",
+            "'interface' cannot have state, 'abstract class' can have state",
+            "'interface' can have multiple inheritance, 'abstract class' cannot have multiple inheritance",
+            "'interface' cannot have multiple inheritance, 'abstract class' can have multiple inheritance"
+         ],
+         "answer":"'interface' cannot have state, 'abstract class' can have state",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"How do you handle exceptions in Java using try-catch-finally blocks?",
+         "options":[
+            "Try-catch-finally blocks are used to handle exceptions and ensure resource cleanup",
+            "Try-catch-finally blocks are used to handle exceptions but not resource cleanup",
+            "Try-catch-finally blocks are used to handle exceptions and skip resource cleanup",
+            "Try-catch-finally blocks are used to skip exceptions and handle resource cleanup"
+         ],
+         "answer":"Try-catch-finally blocks are used to handle exceptions and ensure resource cleanup",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'clone()' method in Java?",
+         "options":[
+            "To create a deep copy of an object",
+            "To create a shallow copy of an object",
+            "To create a reference to an object",
+            "To delete an object"
+         ],
+         "answer":"To create a shallow copy of an object",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"Which Java class is used to read input from the console?",
+         "options":[
+            "Scanner",
+            "BufferedReader",
+            "InputStreamReader",
+            "Console"
+         ],
+         "answer":"Scanner",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'HashMap' and 'TreeMap' in Java?",
+         "options":[
+            "'HashMap' uses a hash table, 'TreeMap' uses a balanced tree",
+            "'HashMap' uses a balanced tree, 'TreeMap' uses a hash table",
+            "'HashMap' uses a linked list, 'TreeMap' uses a hash table",
+            "'HashMap' uses a hash table, 'TreeMap' uses a linked list"
+         ],
+         "answer":"'HashMap' uses a hash table, 'TreeMap' uses a balanced tree",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you implement a singleton class in Java?",
+         "options":[
+            "Using a private constructor and a public static method",
+            "Using a public constructor and a private static method",
+            "Using a private constructor and a private static method",
+            "Using a public constructor and a public static method"
+         ],
+         "answer":"Using a private constructor and a public static method",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"What is the purpose of the 'wait()' method in Java?",
+         "options":[
+            "To make a thread wait for a specified amount of time",
+            "To make a thread wait for a notification from another thread",
+            "To make a thread wait for a resource to become available",
+            "To make a thread wait for a lock to be released"
+         ],
+         "answer":"To make a thread wait for a notification from another thread",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"Which Java class is used to represent a date and time?",
+         "options":[
+            "Date",
+            "Time",
+            "Calendar",
+            "DateTime"
+         ],
+         "answer":"Date",
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'ArrayList' and 'Vector' in Java?",
+         "options":[
+            "'ArrayList' is synchronized, 'Vector' is not synchronized",
+            "'ArrayList' is not synchronized, 'Vector' is synchronized",
+            "'ArrayList' uses a linked list, 'Vector' uses an array",
+            "'ArrayList' uses an array, 'Vector' uses a linked list"
+         ],
+         "answer":"'ArrayList' is not synchronized, 'Vector' is synchronized",
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you implement a callback function in Java?",
+         "options":[
+            "Using an interface and a lambda expression",
+            "Using a class and a method",
+            "Using a function and a variable",
+            "Using a loop and a conditional statement"
+         ],
+         "answer":"Using an interface and a lambda expression",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"What is the purpose of the 'notify()' method in Java?",
+         "options":[
+            "To notify a thread that a resource is available",
+            "To notify a thread that a lock has been released",
+            "To notify a thread that a notification has been received",
+            "To notify a thread that a wait has been interrupted"
+         ],
+         "answer":"To notify a thread that a resource is available",
+         "difficulty":"Hard"
+      },
+      {
+         "question":"Which Java class is used to represent a regular expression?",
+         "options":[
+            "Pattern",
+            "Matcher",
+            "Regex",
+            "Expression"
+         ],
+         "answer":"Pattern",
+         "difficulty":"Medium"
+      }
+   ],
+   "coding_challenges":[
+      {
+         "title":"Array Rotation",
+         "problem_statement":"Given an array of integers and a number of positions to rotate, write a function to rotate the array to the right by the given number of positions.",
+         "input_format":"The first line contains the number of elements in the array. The second line contains the elements of the array. The third line contains the number of positions to rotate.",
+         "output_format":"The rotated array.",
+         "constraints":"1 <= number of elements <= 1000, 0 <= number of positions <= 1000",
+         "example_input":"5\n1 2 3 4 5\n2",
+         "example_output":"4 5 1 2 3",
+         "explanation":"The array is rotated to the right by 2 positions.",
+         "starter_code":{
+            "python":"import sys\n\ndef rotate_array(arr, num_positions):\n    # TODO: Write logic here\n    pass\n",
+            "java":"import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int numElements = scanner.nextInt();\n        int[] arr = new int[numElements];\n        for (int i = 0; i < numElements; i++) {\n            arr[i] = scanner.nextInt();\n        }\n        int numPositions = scanner.nextInt();\n        // TODO: Write logic here\n    }\n}",
+            "javascript":"const readline = require('readline');\nconst rl = readline.createInterface({\n    input: process.stdin,\n    output: process.stdout\n});\nlet numElements, arr, numPositions;\nrl.on('line', (input) => {\n    if (!numElements) {\n        numElements = parseInt(input);\n    } else if (!arr) {\n        arr = input.split(' ').map((num) => parseInt(num));\n    } else {\n        numPositions = parseInt(input);\n        // TODO: Write logic here\n    }\n});",
+            "cpp":"#include <iostream>\nusing namespace std;\nint main() {\n    int numElements;\n    cin >> numElements;\n    int* arr = new int[numElements];\n    for (int i = 0; i < numElements; i++) {\n        cin >> arr[i];\n    }\n    int numPositions;\n    cin >> numPositions;\n    // TODO: Write logic here\n    return 0;\n}",
+            "csharp":"using System;\npublic class Program {\n    public static void Main(string[] args) {\n        Console.Write(\"Enter the number of elements: \");\n        int numElements = Convert.ToInt32(Console.ReadLine());\n        int[] arr = new int[numElements];\n        Console.Write(\"Enter the elements: \");\n        string[] input = Console.ReadLine().Split(' ');\n        for (int i = 0; i < numElements; i++) {\n            arr[i] = Convert.ToInt32(input[i]);\n        }\n        Console.Write(\"Enter the number of positions to rotate: \");\n        int numPositions = Convert.ToInt32(Console.ReadLine());\n        // TODO: Write logic here\n    }\n}",
+            "kotlin":"import java.util.Scanner\nfun main() {\n    val scanner = Scanner(System.`in`)\n    val numElements = scanner.nextInt()\n    val arr = IntArray(numElements) {\n        scanner.nextInt()\n    }\n    val numPositions = scanner.nextInt()\n    // TODO: Write logic here\n}",
+            "swift":"import Foundation\nlet stdin = FileHandle.standardInput\nfunc readLine() -> String? {\n    return String(data: stdin.availableData, encoding: .utf8)?.trimmingCharacters(in: .newlines)\n}\nif let input = readLine() {\n    let numElements = Int(input)!\n    var arr = [Int]()\n    if let input = readLine() {\n        let elements = input.components(separatedBy: \" \")\n        for element in elements {\n            arr.append(Int(element)!)\n        }\n    }\n    if let input = readLine() {\n        let numPositions = Int(input)!\n        // TODO: Write logic here\n    }\n}",
+            "sql":""
+         },
+         "difficulty":"Medium",
+         "test_cases":[
+            {
+               "input":"5\n1 2 3 4 5\n2",
+               "output":"4 5 1 2 3"
+            },
+            {
+               "input":"5\n1 2 3 4 5\n3",
+               "output":"3 4 5 1 2"
+            },
+            {
+               "input":"10\n1 2 3 4 5 6 7 8 9 10\n5",
+               "output":"6 7 8 9 10 1 2 3 4 5"
+            },
+            {
+               "input":"10\n1 2 3 4 5 6 7 8 9 10\n10",
+               "output":"1 2 3 4 5 6 7 8 9 10"
+            },
+            {
+               "input":"5\n1 2 3 4 5\n0",
+               "output":"1 2 3 4 5"
+            },
+            {
+               "input":"5\n1 2 3 4 5\n1",
+               "output":"5 1 2 3 4"
+            },
+            {
+               "input":"5\n1 2 3 4 5\n4",
+               "output":"2 3 4 5 1"
+            },
+            {
+               "input":"5\n1 2 3 4 5\n5",
+               "output":"1 2 3 4 5"
+            },
+            {
+               "input":"10\n1 2 3 4 5 6 7 8 9 10\n7",
+               "output":"4 5 6 7 8 9 10 1 2 3"
+            },
+            {
+               "input":"10\n1 2 3 4 5 6 7 8 9 10\n8",
+               "output":"3 4 5 6 7 8 9 10 1 2"
+            }
+         ]
+      },
+      {
+         "title":"String Reversal",
+         "problem_statement":"Given a string, write a function to reverse the string.",
+         "input_format":"The first line contains the string to be reversed.",
+         "output_format":"The reversed string.",
+         "constraints":"1 <= length of string <= 1000",
+         "example_input":"hello",
+         "example_output":"olleh",
+         "explanation":"The string is reversed.",
+         "starter_code":{
+            "python":"import sys\n\ndef reverse_string(s):\n    # TODO: Write logic here\n    pass\n",
+            "java":"import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        String s = scanner.nextLine();\n        // TODO: Write logic here\n    }\n}",
+            "javascript":"const readline = require('readline');\nconst rl = readline.createInterface({\n    input: process.stdin,\n    output: process.stdout\n});\nlet s;\nrl.on('line', (input) => {\n    s = input;\n    // TODO: Write logic here\n});",
+            "cpp":"#include <iostream>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // TODO: Write logic here\n    return 0;\n}",
+            "csharp":"using System;\npublic class Program {\n    public static void Main(string[] args) {\n        Console.Write(\"Enter a string: \");\n        string s = Console.ReadLine();\n        // TODO: Write logic here\n    }\n}",
+            "kotlin":"import java.util.Scanner\nfun main() {\n    val scanner = Scanner(System.`in`)\n    val s = scanner.nextLine()\n    // TODO: Write logic here\n}",
+            "swift":"import Foundation\nlet stdin = FileHandle.standardInput\nfunc readLine() -> String? {\n    return String(data: stdin.availableData, encoding: .utf8)?.trimmingCharacters(in: .newlines)\n}\nif let input = readLine() {\n    let s = input\n    // TODO: Write logic here\n}",
+            "sql":""
+         },
+         "difficulty":"Medium",
+         "test_cases":[
+            {
+               "input":"hello",
+               "output":"olleh"
+            },
+            {
+               "input":"world",
+               "output":"dlrow"
+            },
+            {
+               "input":"abc",
+               "output":"cba"
+            },
+            {
+               "input":"abcdef",
+               "output":"fedcba"
+            },
+            {
+               "input":"a",
+               "output":"a"
+            },
+            {
+               "input":"ab",
+               "output":"ba"
+            },
+            {
+               "input":"abcde",
+               "output":"edcba"
+            },
+            {
+               "input":"abcdefgh",
+               "output":"hgfedcba"
+            },
+            {
+               "input":"abcdefghi",
+               "output":"ihgfedcba"
+            },
+            {
+               "input":"abcdefghij",
+               "output":"jihgfedcba"
+            }
+         ]
+      }
+   ]
+}
+
+[2026-03-25 12:34:44.172175+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmhq6pw9ffm81kw6aw2j6r7n` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99721, Requested 736. Please try again in 6m34.848s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\STT\backend\ai_assessments\views.py", line 372, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+    ...<6 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmhq6pw9ffm81kw6aw2j6r7n` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99721, Requested 736. Please try again in 6m34.848s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: 
