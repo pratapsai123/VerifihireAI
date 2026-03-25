@@ -475,12 +475,14 @@ class RetryFailedExtractionsView(APIView):
                 Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
                 """
 
-                # Retry with backoff (using 70b model)
+                # Retry with backoff (using 70b model with fallback to 8b)
                 match_result = None
-                for attempt in range(3):
+                current_model = "llama-3.3-70b-versatile"
+                max_attempts = 3
+                for attempt in range(max_attempts):
                     try:
                         response = local_groq_client.chat.completions.create(
-                            model="llama-3.3-70b-versatile",
+                            model=current_model,
                             messages=[{"role": "user", "content": prompt}],
                             response_format={"type": "json_object"},
                             temperature=0.1
@@ -489,10 +491,17 @@ class RetryFailedExtractionsView(APIView):
                         match_result = extract_json(raw_text)
                         if match_result:
                             break
-                        time.sleep(2)
+                        logger.warning(f"Retry attempt {attempt+1}: JSON extraction failed for candidate {cid}")
                     except Exception as e:
-                        logger.warning(f"Retry attempt {attempt+1} failed for {candidate.id}: {e}")
-                        time.sleep(2)
+                        error_msg = str(e).lower()
+                        if ("429" in error_msg or "rate limit" in error_msg or "quota" in error_msg) and current_model == "llama-3.3-70b-versatile":
+                            logger.warning(f"Quota reached for 70b in retry view. Falling back to 8b for candidate {cid}.")
+                            current_model = "llama-3.1-8b-instant"
+                            continue # Immediate retry with 8b
+
+                        logger.warning(f"Retry attempt {attempt+1}/{max_attempts} failed for candidate {cid}: {e}")
+                        if attempt < max_attempts - 1:
+                            time.sleep(2)
                 
                 if match_result:
                     extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
@@ -527,7 +536,7 @@ class RetryFailedExtractionsView(APIView):
                         "extraction_failed": True,
                         "is_eligible": False,
                         "match_percentage": 0,
-                        "summary": "Extraction Failed after retry."
+                        "summary": "Extraction Failed after retry (Quota or AI Error)."
                     })
 
             except Exception as e:

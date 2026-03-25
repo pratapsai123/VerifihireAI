@@ -39,8 +39,10 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
 
     client = Groq(api_key=local_api_key)
 
+    current_model = "llama-3.3-70b-versatile"
+    
     for index, candidate in enumerate(candidates):
-        logger.info(f"Processing candidate {index+1}/{total}: {candidate.full_name} (ID: {candidate.id})")
+        logger.info(f"Processing candidate {index+1}/{total}: {candidate.full_name} (ID: {candidate.id}) using {current_model}")
         
         try:
             prompt = f"""
@@ -63,12 +65,12 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
             Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
             """
 
-            # Try processing with llama-3.3-70b-versatile
             match_result = None
-            for attempt in range(2): # 2 attempts in bg task to handle any weirdness
+            max_attempts = 2
+            for attempt in range(max_attempts):
                 try:
                     response = client.chat.completions.create(
-                        model="llama-3.3-70b-versatile",
+                        model=current_model,
                         messages=[{"role": "user", "content": prompt}],
                         response_format={"type": "json_object"},
                         temperature=0.1
@@ -79,8 +81,18 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
                         break
                     time.sleep(2)
                 except Exception as e:
+                    error_msg = str(e).lower()
+                    # Check for rate limit / quota exceeded
+                    if ("429" in error_msg or "rate limit" in error_msg or "quota" in error_msg) and current_model == "llama-3.3-70b-versatile":
+                        logger.warning(f"Quota reached for 70b model. Falling back to 8b model for candidate {candidate.id} and remaining batch.")
+                        current_model = "llama-3.1-8b-instant"
+                        # Reset attempts for the new model if this happened on first attempt
+                        # Actually, just let the next iteration of the 'for attempt' loop use the new model
+                        continue 
+                    
                     logger.warning(f"Groq API error for candidate {candidate.id} (attempt {attempt+1}): {e}")
-                    time.sleep(5)
+                    if attempt < max_attempts - 1:
+                        time.sleep(10) # Wait a bit longer on error
 
             if match_result:
                 percentage = match_result.get('match_percentage', 0)
