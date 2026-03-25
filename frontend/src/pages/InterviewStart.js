@@ -93,8 +93,10 @@ const InterviewStart = () => {
             } catch (err) {
                 if (err.response?.status === 403 && err.response?.data?.link_expired) {
                     setLinkExpired(true);
+                } else if (err.response?.status === 404) {
+                    setError('Candidate not found. Testing the link as a scoped user? Or the link is invalid.');
                 } else {
-                    setError('Invalid or expired interview link.');
+                    setError(err.response?.data?.error || err.message || 'Invalid or expired interview link.');
                 }
                 setLoading(false);
             }

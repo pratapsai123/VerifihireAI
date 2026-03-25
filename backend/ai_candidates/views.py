@@ -145,7 +145,8 @@ class BulkInviteView(APIView):
                     available_until=available_until if available_until else None,
                     job_description=job_description,
                     status='Invited',
-                    company=company
+                    company=company,
+                    user_profile=user_profile
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
@@ -910,12 +911,46 @@ class ProcessAnswerView(APIView):
             local_api_key = getattr(settings, 'GROQ_API_KEY', None)
             local_groq_client = Groq(api_key=local_api_key)
 
-            response = local_groq_client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
-                response_format={"type": "json_object"}
-            )
+            # --- AUTO MODEL FALLBACK ---
+            # Use module-level cooldown to remember when 70b was rate-limited
+            import time as _time
+            PRIMARY_MODEL = "llama-3.3-70b-versatile"
+            FALLBACK_MODEL = "llama-3.1-8b-instant"
+            COOLDOWN_SECONDS = 60
+
+            # Check if we're currently in cooldown from a previous 70b rate limit
+            if not hasattr(ProcessAnswerView, '_fallback_until'):
+                ProcessAnswerView._fallback_until = 0
+
+            if _time.time() < ProcessAnswerView._fallback_until:
+                chosen_model = FALLBACK_MODEL
+                logger.info(f"Using fallback model {FALLBACK_MODEL} (70b cooldown active for {int(ProcessAnswerView._fallback_until - _time.time())}s more)")
+            else:
+                chosen_model = PRIMARY_MODEL
+
+            try:
+                response = local_groq_client.chat.completions.create(
+                    model=chosen_model,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.7,
+                    response_format={"type": "json_object"}
+                )
+            except Exception as model_err:
+                error_str = str(model_err).lower()
+                if ("rate limit" in error_str or "429" in error_str) and chosen_model == PRIMARY_MODEL:
+                    # 70b hit rate limit → activate cooldown and retry with 8b immediately
+                    ProcessAnswerView._fallback_until = _time.time() + COOLDOWN_SECONDS
+                    logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
+                    response = local_groq_client.chat.completions.create(
+                        model=FALLBACK_MODEL,
+                        messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7,
+                        response_format={"type": "json_object"}
+                    )
+                else:
+                    raise  # Re-raise non-rate-limit errors
+            # --- END MODEL FALLBACK ---
+
             raw_text = response.choices[0].message.content
             data = extract_json(raw_text)
             

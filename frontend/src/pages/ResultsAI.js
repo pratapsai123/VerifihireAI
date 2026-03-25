@@ -664,6 +664,85 @@ const ResultsAI = () => {
                 </div>
             )}
 
+            {summaryModal && (
+                <div className="glass-modal-overlay" style={{ zIndex: 10000, background: 'rgba(27, 37, 75, 0.4)', backdropFilter: 'blur(8px)' }}>
+                    <div className="glass-modal-content" style={{ 
+                        width: '95%', maxWidth: '900px', height: '85vh', 
+                        display: 'flex', flexDirection: 'column', padding: 0,
+                        background: '#F4F7FE', borderRadius: '30px'
+                    }}>
+                        <div style={{ 
+                            padding: '1.5rem 2.5rem', background: 'white', borderBottom: '1px solid #E2E8F0',
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            borderTopLeftRadius: '30px', borderTopRightRadius: '30px'
+                        }}>
+                            <div>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: '900', color: '#1B254B', margin: 0 }}>
+                                    {summaryModal.full_name || summaryModal.candidate?.name} <span style={{ color: '#707EAE', fontWeight: '400', fontSize: '1.1rem' }}>Interview Transcript</span>
+                                </h2>
+                                <p style={{ fontSize: '0.9rem', color: '#A3AED0', margin: '0.25rem 0 0', fontWeight: '600' }}>
+                                    Role: <span style={{ color: '#4318FF' }}>{summaryModal.job_title || 'General'}</span>
+                                    <span style={{ margin: '0 0.75rem', color: '#CBD5E1' }}>|</span>
+                                    {summaryModal.interview_summary?.length || 0} Questions Answered
+                                </p>
+                            </div>
+                            <button 
+                                onClick={() => setSummaryModal(null)}
+                                style={{ 
+                                    background: '#F4F7FE', border: 'none', borderRadius: '50%', 
+                                    width: '44px', height: '44px', cursor: 'pointer',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                }}
+                            >
+                                <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
+                            </button>
+                        </div>
+                        
+                        <div style={{ flex: 1, overflowY: 'auto', padding: '2.5rem' }}>
+                            <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                {(!summaryModal.interview_summary || summaryModal.interview_summary.length === 0) ? (
+                                    <div style={{ textAlign: 'center', color: '#A3AED0', padding: '3rem' }}>
+                                        <i className="fa-solid fa-microphone-slash" style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                                        <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
+                                    </div>
+                                ) : (
+                                    summaryModal.interview_summary.map((turn, i) => (
+                                        <div key={i} style={{ 
+                                            background: 'white', borderRadius: '24px', padding: '2rem', 
+                                            boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2'
+                                        }}>
+                                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+                                                <div style={{ 
+                                                    width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #4F46E5, #4338CA)', 
+                                                    color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                                                    boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)'
+                                                }}>
+                                                    <i className="fa-solid fa-robot"></i>
+                                                </div>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#4318FF', textTransform: 'uppercase', marginBottom: '0.25rem' }}>AI Interviewer</div>
+                                                    <p style={{ margin: 0, fontWeight: '700', color: '#1B254B', fontSize: '1.05rem', lineHeight: '1.6' }}>{turn.question}</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem', background: '#F8FAFC', borderRadius: '16px', border: '1px solid #E2E8F0' }}>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Candidate Response</div>
+                                                    <p style={{ margin: 0, fontWeight: '500', color: '#334155', fontSize: '1rem', lineHeight: '1.7' }}>
+                                                        {turn.answer ? `"${turn.answer}"` : <span style={{ fontStyle: 'italic', color: '#94A3B8' }}>[No answer provided]</span>}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="dashboard-main" style={{ width: '100%', padding: '0 2rem 3rem' }}>
                 <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
                     <h1 style={{ fontSize: '3.2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
@@ -815,7 +894,7 @@ const ResultsAI = () => {
                                                 <th>Result Data</th>
                                                 <th>Date</th>
                                                 <th>AI Status</th>
-                                                {activeTab === 'assessment' && <th>Action</th>}
+                                                {(activeTab === 'assessment' || activeTab === 'interview') && <th>Action</th>}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -845,7 +924,14 @@ const ResultsAI = () => {
                                                                 activeTab === 'assessment' ? `${r.percentage ?? 0}% (${r.score || 0}/${r.total_possible || r.total || r.total_questions || 0})` :
                                                                     `${r.score != null ? Math.round(r.score) : 0}% Evaluation`}
                                                         </td>
-                                                        <td>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</td>
+                                                        <td>
+                                                            <div style={{ fontWeight: '500', color: '#1E293B' }}>
+                                                                {new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}
+                                                            </div>
+                                                            <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
+                                                                {new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
                                                                 <span style={{ padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
@@ -862,21 +948,37 @@ const ResultsAI = () => {
                                                                 )}
                                                             </div>
                                                         </td>
-                                                        {activeTab === 'assessment' && (
+                                                        {(activeTab === 'assessment' || activeTab === 'interview') && (
                                                             <td>
-                                                                <button 
-                                                                    onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
-                                                                    className="view-details-btn"
-                                                                    style={{ 
-                                                                        padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
-                                                                        background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                        color: 'white', fontWeight: '700', fontSize: '0.85rem',
-                                                                        cursor: 'pointer', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
-                                                                        transition: 'all 0.2s'
-                                                                    }}
-                                                                >
-                                                                    View Details
-                                                                </button>
+                                                                {activeTab === 'assessment' ? (
+                                                                    <button 
+                                                                        onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                        className="view-details-btn"
+                                                                        style={{ 
+                                                                            padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
+                                                                            background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                            color: 'white', fontWeight: '700', fontSize: '0.85rem',
+                                                                            cursor: 'pointer', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                                                                            transition: 'all 0.2s'
+                                                                        }}
+                                                                    >
+                                                                        View Details
+                                                                    </button>
+                                                                ) : (
+                                                                    <button 
+                                                                        onClick={(e) => { e.stopPropagation(); setSummaryModal(r); }}
+                                                                        className="view-details-btn"
+                                                                        style={{ 
+                                                                            padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
+                                                                            background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                            color: 'white', fontWeight: '700', fontSize: '0.85rem',
+                                                                            cursor: 'pointer', boxShadow: '0 4px 12px rgba(5, 205, 153, 0.25)',
+                                                                            transition: 'all 0.2s'
+                                                                        }}
+                                                                    >
+                                                                        Transcript
+                                                                    </button>
+                                                                )}
                                                             </td>
                                                         )}
                                                     </tr>
