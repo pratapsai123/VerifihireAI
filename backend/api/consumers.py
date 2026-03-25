@@ -3,14 +3,18 @@ import logging
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
+from django.core.cache import cache
 from .models import InterviewInvitation
 
 logger = logging.getLogger(__name__)
 
-# In-memory store for session states
-# In production, use Redis or database for distributed systems
-_screen_share_state = {}
-_interview_start_times = {}
+# Replaced in-memory cache with Redis distributed cache
+async def get_screen_share_state(session_id):
+    state = await database_sync_to_async(cache.get)(f"interview_{session_id}_screen_share")
+    return state or {'locked': False, 'holder': None}
+
+async def set_screen_share_state(session_id, state):
+    await database_sync_to_async(cache.set)(f"interview_{session_id}_screen_share", state, timeout=86400)
 
 
 class InterviewConsumer(AsyncWebsocketConsumer):
@@ -28,38 +32,38 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         self.role = self.scope['url_route']['kwargs']['role']  # 'interviewer' or 'candidate'
         self.room_group_name = f'interview_{self.session_id}'
         
-        # Initialize screen share state for this session if not exists
-        if self.session_id not in _screen_share_state:
-            _screen_share_state[self.session_id] = {
-                'locked': False,
-                'holder': None
-            }
-        
         try:
-            # Validate session ID (InterviewInvitation token)
-            is_valid, is_expired = await self.validate_session()
+            # Enforce 1:1 Connection
+            presence_key = f"interview_{self.session_id}_presence_{self.role}"
+            old_channel = await database_sync_to_async(cache.get)(presence_key)
+            if old_channel:
+                # Notify the old connection to close
+                await self.channel_layer.send(old_channel, {
+                    "type": "disconnect_duplicate",
+                    "close_code": 4001
+                })
+            # Register current connection
+            await database_sync_to_async(cache.set)(presence_key, self.channel_name, timeout=86400)
+
+            # Validate session ID (InterviewInvitation token), time, and status
+            is_valid, error_reason = await self.validate_session()
             
             if not is_valid:
-                logger.warning(f"Γ£û WebSocket connection rejected: Invalid session {self.session_id}")
-                # We accept then immediately close with a custom code because 
-                # standard WebSocket protocols don't support rejecting during handshake 
-                # easily with custom codes in all client environments.
+                logger.warning(f"WebSocket connection rejected: {error_reason} for session {self.session_id}")
                 await self.accept()
+                
+                messages = {
+                    'invalid': 'Invalid session ID. Please check your interview link.',
+                    'expired': 'This interview session has expired or ended.',
+                    'completed': 'This interview session has already been completed.',
+                    'not_started': 'This interview session has not started yet.'
+                }
+                
                 await self.send(text_data=json.dumps({
-                    'type': 'error',
-                    'message': 'Invalid session ID. Please check your interview link.'
+                    'type': 'error' if error_reason in ['invalid', 'not_started'] else 'session_expired',
+                    'message': messages.get(error_reason, 'Invalid session.')
                 }))
-                await self.close(code=4004) # Not Found
-                return
-
-            if is_expired:
-                logger.warning(f"Γ£û WebSocket connection rejected: Expired session {self.session_id}")
-                await self.accept()
-                await self.send(text_data=json.dumps({
-                    'type': 'session_expired',
-                    'message': 'This interview session has already been completed or has expired.'
-                }))
-                await self.close(code=4003) # Forbidden/Expired
+                await self.close(code=4003 if error_reason in ['expired', 'completed'] else 4004)
                 return
 
             # Join room group
@@ -69,11 +73,10 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             )
             
             await self.accept()
-            
-            logger.info(f"Γ£à WebSocket connected: {self.role} for session {self.session_id}")
+            logger.info(f"WebSocket connected: {self.role} for session {self.session_id}")
             
             # Send current screen share state to new connection
-            session_state = _screen_share_state.get(self.session_id, {})
+            session_state = await get_screen_share_state(self.session_id)
             if session_state.get('locked'):
                 await self.send(text_data=json.dumps({
                     'type': 'screen_share_lock',
@@ -82,28 +85,31 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 }))
             
             # Initialize or get start time for synchronization
-            if self.session_id not in _interview_start_times:
-                _interview_start_times[self.session_id] = timezone.now().isoformat()
+            start_time_key = f"interview_{self.session_id}_start_time"
+            start_time = await database_sync_to_async(cache.get)(start_time_key)
+            if not start_time:
+                start_time = timezone.now().isoformat()
+                await database_sync_to_async(cache.set)(start_time_key, start_time, timeout=86400)
             
             # Send session info including start time to the connecting client
             await self.send(text_data=json.dumps({
                 'type': 'session_info',
-                'start_time': _interview_start_times[self.session_id],
+                'start_time': start_time,
                 'role': self.role
             }))
             
-            # Notify others that this user joined
+            # Reconnection Sync: notify others
+            msg_type = 'user_rejoined' if old_channel else 'user_joined'
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': 'user_joined',
+                    'type': msg_type,
                     'user': self.role.capitalize(),
                     'session_id': self.session_id,
                 }
             )
         except Exception as e:
             logger.error(f"Error in WebSocket connect: {str(e)}", exc_info=True)
-            # Try to close with error code if possible, or just let it fail
             try:
                 await self.close(code=4000)
             except:
@@ -114,39 +120,48 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         """
         Called when WebSocket connection is closed.
         """
-        # Release screen share if this user was sharing
-        session_state = _screen_share_state.get(self.session_id, {'locked': False, 'holder': None})
-        if session_state.get('holder') == self.role:
-            session_state['locked'] = False
-            session_state['holder'] = None
-            _screen_share_state[self.session_id] = session_state
+        try:
+            # Release screen share if this user was sharing
+            session_state = await get_screen_share_state(self.session_id)
+            if session_state.get('holder') == self.role:
+                session_state['locked'] = False
+                session_state['holder'] = None
+                await set_screen_share_state(self.session_id, session_state)
+                
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'screen_share_lock',
+                        'active': False,
+                        'holder': None,
+                    }
+                )
             
-            await self.channel_layer.group_send(
+            # Prevent firing user_left if this disconnecting channel is replaced
+            presence_key = f"interview_{self.session_id}_presence_{self.role}"
+            current_channel = await database_sync_to_async(cache.get)(presence_key)
+            
+            if current_channel == self.channel_name:
+                await database_sync_to_async(cache.delete)(presence_key)
+                # Notify others that this user left (only if they are the primary)
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'user_left',
+                        'user': self.role.capitalize(),
+                        'session_id': self.session_id,
+                    }
+                )
+
+            # Leave room group
+            await self.channel_layer.group_discard(
                 self.room_group_name,
-                {
-                    'type': 'screen_share_lock',
-                    'active': False,
-                    'holder': None,
-                }
+                self.channel_name
             )
-        
-        # Leave room group
-        await self.channel_layer.group_discard(
-            self.room_group_name,
-            self.channel_name
-        )
-        
-        logger.info(f"≡ƒöî WebSocket disconnected: {self.role} for session {self.session_id} (code: {close_code})")
-        
-        # Notify others that this user left
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'user_left',
-                'user': self.role.capitalize(),
-                'session_id': self.session_id,
-            }
-        )
+            
+            logger.info(f"WebSocket disconnected: {self.role} for session {self.session_id} (code: {close_code})")
+        except Exception as e:
+            logger.error(f"Error in WebSocket disconnect: {str(e)}", exc_info=True)
     
     async def receive(self, text_data):
         """
@@ -156,11 +171,11 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             data = json.loads(text_data)
             message_type = data.get('type')
             
-            logger.debug(f"≡ƒô⌐ Received message type: {message_type} from {self.role}")
+            logger.debug(f"Received message type: {message_type} from {self.role}")
             
             # Handle different message types
             if message_type == 'client_ping':
-                # Heartbeat - just acknowledge
+                # Heartbeat - acknowledge to keep connection alive
                 await self.send(text_data=json.dumps({
                     'type': 'server_pong',
                     'ts': data.get('ts')
@@ -204,7 +219,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             
             # Handle screen share requests
             elif message_type == 'screen_share_request':
-                session_state = _screen_share_state.get(self.session_id, {'locked': False, 'holder': None})
+                session_state = await get_screen_share_state(self.session_id)
                 
                 # Check if someone else is already sharing
                 if session_state.get('locked') and session_state.get('holder') != self.role:
@@ -217,7 +232,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     # Grant request and lock
                     session_state['locked'] = True
                     session_state['holder'] = self.role
-                    _screen_share_state[self.session_id] = session_state
+                    await set_screen_share_state(self.session_id, session_state)
                     
                     # Notify all participants about the lock
                     await self.channel_layer.group_send(
@@ -237,17 +252,16 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             # Handle screen share state (when someone starts/stops sharing)
             elif message_type == 'screen_share_state':
                 # Update local state
+                session_state = await get_screen_share_state(self.session_id)
                 if data.get('active', False):
-                    session_state = _screen_share_state.get(self.session_id, {'locked': False, 'holder': None})
                     session_state['locked'] = True
                     session_state['holder'] = self.role
-                    _screen_share_state[self.session_id] = session_state
+                    await set_screen_share_state(self.session_id, session_state)
                 else:
-                    session_state = _screen_share_state.get(self.session_id, {'locked': False, 'holder': None})
                     if session_state.get('holder') == self.role:
                         session_state['locked'] = False
                         session_state['holder'] = None
-                        _screen_share_state[self.session_id] = session_state
+                        await set_screen_share_state(self.session_id, session_state)
                 
                 # Broadcast state to all participants
                 await self.channel_layer.group_send(
@@ -273,11 +287,11 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             # Handle screen share release
             elif message_type == 'screen_share_release':
                 # Release lock if this user was holding it
-                session_state = _screen_share_state.get(self.session_id, {'locked': False, 'holder': None})
+                session_state = await get_screen_share_state(self.session_id)
                 if session_state.get('holder') == self.role:
                     session_state['locked'] = False
                     session_state['holder'] = None
-                    _screen_share_state[self.session_id] = session_state
+                    await set_screen_share_state(self.session_id, session_state)
                     
                     await self.channel_layer.group_send(
                         self.room_group_name,
@@ -339,11 +353,28 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     
     # Handler methods for group messages
     
+    async def disconnect_duplicate(self, event):
+        """Disconnect this WebSocket due to a newer connection taking its place."""
+        close_code = event.get('close_code', 4001)
+        await self.send(text_data=json.dumps({
+            'type': 'error',
+            'message': 'Duplicate connection detected. Your session was opened in another tab.'
+        }))
+        await self.close(code=close_code)
+    
     async def user_joined(self, event):
         """Send user joined notification to WebSocket"""
         await self.send(text_data=json.dumps({
             'type': 'user_joined',
             'user': event['user'],
+        }))
+        
+    async def user_rejoined(self, event):
+        """Send user rejoined synchronization to WebSocket"""
+        await self.send(text_data=json.dumps({
+            'type': 'user_rejoined',
+            'user': event['user'],
+            'message': 'User has reconnected.'
         }))
     
     async def user_left(self, event):
@@ -360,7 +391,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     
     async def chat_message(self, event):
         """Send chat message to WebSocket - send to all participants"""
-        # Send to all participants (including sender, so they can see it in their UI if needed)
+        # Send to all participants (including sender)
         await self.send(text_data=json.dumps({
             'type': 'chat',
             'message': event['message'],
@@ -378,9 +409,6 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     
     async def screen_share_request(self, event):
         """Handle screen share request - this is called when someone requests screen share"""
-        # This handler is called for other participants when a request comes in
-        # The actual grant/deny logic is handled in the receive() method
-        # This is just for notification purposes
         pass
     
     async def screen_share_state(self, event):
@@ -433,23 +461,29 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def validate_session(self):
         """
-        Check if interview session exists and is active.
-        Returns: (is_valid, is_expired)
+        Check if interview session exists, is active, and is within valid time bounds.
+        Returns: (is_valid, error_reason_string)
         """
         try:
             invitation = InterviewInvitation.objects.filter(token=self.session_id).first()
             if not invitation:
-                return False, False
+                return False, 'invalid'
             
-            # For now, we consider it expired if status is 'completed' or similar
-            # In your current model, 'sent' is the active status. 
-            # You might have 'completed' later.
-            is_expired = invitation.status == 'completed'
+            if invitation.status == 'completed':
+                return False, 'completed'
             
-            return True, is_expired
+            now = timezone.now()
+            
+            if invitation.start_time and now < invitation.start_time:
+                return False, 'not_started'
+                
+            if invitation.end_time and now > invitation.end_time:
+                return False, 'expired'
+            
+            return True, None
         except Exception as e:
-            logger.error(f"Error validating session: {e}")
-            return False, False
+            logger.error(f"Error validating session: {e}", exc_info=True)
+            return False, 'invalid'
 
     @database_sync_to_async
     def check_session_expired(self):
@@ -457,7 +491,11 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         try:
             invitation = InterviewInvitation.objects.filter(token=self.session_id).first()
             if invitation:
-                return invitation.status == 'completed'
+                if invitation.status == 'completed':
+                    return True
+                if invitation.end_time and timezone.now() > invitation.end_time:
+                    return True
+                return False
             return True # If not found, treat as expired/invalid
         except Exception as e:
             logger.error(f"Error checking session expiry: {e}")
