@@ -394,40 +394,6 @@ const AiInterviewSession = () => {
                     interimTranscriptRef.current = "";
                     lastTranscriptStrRef.current = "";
                     lastSpokenTimeRef.current = Date.now();
-                    
-                    // Immediately start the 5-second uniform wait timer!
-                    if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
-                    
-                    let secondsRemaining = 5;
-                    setSilenceCountdown(secondsRemaining);
-                    
-                    silenceTimerRef.current = setInterval(() => {
-                        secondsRemaining -= 1;
-                        if (secondsRemaining > 0) {
-                            setSilenceCountdown(secondsRemaining);
-                        } else if (secondsRemaining === 0) {
-                            setSilenceCountdown("..."); // Buffer tick 1
-                        } else if (secondsRemaining === -1) {
-                            setSilenceCountdown("..."); // Buffer tick 2
-                        } else if (secondsRemaining <= -2) {
-                            clearInterval(silenceTimerRef.current);
-                            silenceTimerRef.current = null;
-                            setSilenceCountdown(0);
-                            
-                            const liveTranscript = lastTranscriptStrRef.current;
-                            console.log("Initial 5s silence expiration! Force submitting.");
-                            setIsProcessing(true);
-                            setAiStatus("Processing answer...");
-                            if (assemblyAIRef.current) assemblyAIRef.current.stop();
-                            
-                            // If they genuinely didn't speak a single word, submit a skipped tag string
-                            if (liveTranscript && liveTranscript.trim().length > 0) {
-                                if (submitHandlerRef.current) submitHandlerRef.current(liveTranscript);
-                            } else {
-                                if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
-                            }
-                        }
-                    }, 1000);
                 };
 
                 ws.onmessage = (event) => {
@@ -448,44 +414,10 @@ const AiInterviewSession = () => {
 
                     // Compute the exact total text currently understood
                     const currentFullText = (transcriptRef.current + " " + text).trim();
-
-                    // If AssemblyAI keeps repeating the exact same text due to ambient noise, IGNORE IT.
-                    // ONLY reset our strict 5-second timer if we actually hear NEW words!
+                    // ONLY reset our strict timer if we actually hear NEW words!
                     if (currentFullText !== lastTranscriptStrRef.current) {
                         lastTranscriptStrRef.current = currentFullText;
-                        lastSpokenTimeRef.current = Date.now();
-                        
-                        // Restart the strict 5s submission interval
-                        if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
-                        
-                        let secondsRemaining = 5;
-                        if (currentFullText.length > 4) {
-                            setSilenceCountdown(secondsRemaining);
-                            
-                            silenceTimerRef.current = setInterval(() => {
-                                secondsRemaining -= 1;
-                                
-                                // Visible countdown stops at 1, but we give a 2-tick invisible network latency buffer
-                                if (secondsRemaining > 0) {
-                                    setSilenceCountdown(secondsRemaining);
-                                } else if (secondsRemaining === 0) {
-                                    setSilenceCountdown("..."); // Buffer tick 1
-                                } else if (secondsRemaining === -1) {
-                                    setSilenceCountdown("..."); // Buffer tick 2
-                                } else if (secondsRemaining <= -2) {
-                                    // True expiration (5s visual + 2s grace)
-                                    clearInterval(silenceTimerRef.current);
-                                    silenceTimerRef.current = null;
-                                    setSilenceCountdown(0);
-
-                                    console.log("Strict 5s Textual Pause detected! Force submitting.");
-                                    setIsProcessing(true);
-                                    setAiStatus("Processing answer...");
-                                    if (assemblyAIRef.current) assemblyAIRef.current.stop();
-                                    if (submitHandlerRef.current) submitHandlerRef.current(currentFullText);
-                                }
-                            }, 1000); 
-                        }
+                        lastSpokenTimeRef.current = Date.now(); // Activity Reset!
                     }
                     
                     if (!data.turn_is_formatted) {
@@ -593,7 +525,7 @@ const AiInterviewSession = () => {
                             vocalVolume += dataArray[i];
                         }
                         const averageVocal = vocalVolume / 10;
-                        if (averageVocal > 50) isSpeakingLocal = true; // True vocal detection
+                        if (averageVocal > 75) isSpeakingLocal = true; // Calibrated vocal detection to prevent sticking on noise
                         
                         for(let i = 0; i < visualBins; i++) {
                             const val = dataArray[i];
@@ -1051,6 +983,59 @@ const AiInterviewSession = () => {
             };
         }
     }, [startListening]);
+
+    // --- UNIFIED ACTIVITY WATCHDOG ---
+    // This single interval handles all microphone lifecycle timing
+    useEffect(() => {
+        if (!isRecording) {
+            setSilenceCountdown(0);
+            return;
+        }
+
+        let secondsRemaining = 5;
+        const watchdog = setInterval(() => {
+            if (isSpeakingRef.current || isProcessingRef.current) return;
+
+            const timeSinceActivity = Date.now() - lastSpokenTimeRef.current;
+            
+            // If the user has spoken or transcript has updated within the last 2 seconds, 
+            // keep the timer at 5. This prevents cutouts during natural speech pauses.
+            if (timeSinceActivity < 2000) {
+                secondsRemaining = 5;
+                setSilenceCountdown(5);
+                return;
+            }
+
+            // Otherwise, proceed with the visible countdown
+            secondsRemaining = 5 - Math.floor((timeSinceActivity - 2000) / 1000);
+            
+            if (secondsRemaining > 0) {
+                setSilenceCountdown(secondsRemaining);
+            } else if (secondsRemaining === 0 || secondsRemaining === -1) {
+                setSilenceCountdown("..."); // Network/Post-processing buffer visual
+            } else if (secondsRemaining <= -2) {
+                // TRUE EXPIRATION
+                console.log("Unified Watchdog: Maximum silence exceeded. Forcing submission.");
+                clearInterval(watchdog);
+                setSilenceCountdown(0);
+                setIsProcessing(true);
+                setAiStatus("Processing answer...");
+                
+                if (assemblyAIRef.current) {
+                    try { assemblyAIRef.current.stop(); } catch(e) {}
+                }
+
+                const finalTranscript = (transcriptRef.current + interimTranscriptRef.current).trim();
+                const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
+                
+                if (submitHandlerRef.current) {
+                    submitHandlerRef.current(submissionText);
+                }
+            }
+        }, 1000);
+
+        return () => clearInterval(watchdog);
+    }, [isRecording]);
 
 
 
