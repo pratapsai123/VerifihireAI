@@ -62,7 +62,6 @@ urlpatterns = [
     path('results/', views.results_overview_view, name='results_overview'),
     path('submissions/<int:pk>/', views.CandidateSubmissionDeleteView.as_view(), name='delete_submission'),
     path('results/<int:submission_id>/report/', views.download_candidate_report_view, name='download_candidate_report'),
-    path('candidates/', views.candidates_overview_view, name='candidates_overview'),
     path('assessments/backfill-questions/', views.backfill_assessment_questions_view, name='backfill_assessment_questions'),
 
     # Coding Platform (isolated)

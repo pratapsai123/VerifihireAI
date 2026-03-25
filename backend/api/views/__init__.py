@@ -51,7 +51,6 @@ from .candidate_assessment_views import (
     results_overview_view,
     CandidateSubmissionDeleteView,
     submit_rating_view,
-    candidates_overview_view,
     backfill_assessment_questions_view,
     submit_objective_section,
     save_candidate_details_view,
