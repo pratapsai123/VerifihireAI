@@ -876,11 +876,18 @@ class ProcessAnswerView(APIView):
             history_context = ""
             if chat_history:
                 turns = []
-                for h in chat_history[-6:]: # Increased history
+                # Total turns for logic:
+                ai_questions_count = sum(1 for h in chat_history if (h.get('role') == 'ai' or h.get('sender') == 'ai'))
+                current_turn_number = ai_questions_count + 1 # This is the question we are about to ask
+                
+                for h in chat_history[-10:]: # Show more history for better context
                     role = h.get('role') or h.get('sender', 'unknown')
                     content = h.get('content') or h.get('text', '')
                     turns.append(f"{role.upper()}: {content}")
-                history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+                history_context = f"CURRENT QUESTION NUMBER: {current_turn_number} of 10\nCONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+            else:
+                current_turn_number = 1
+                history_context = "This is the START of the interview. Question #1.\n"
 
             prompt = f"""
         Role: "Expert Interviewer for the position of {job_title}". 
@@ -902,21 +909,18 @@ class ProcessAnswerView(APIView):
 
         (C) ACTUAL ANSWER - Trigger for:
         - Any substantive information, greetings, or "I don't know" / "skip".
-        - IMPORTANT: If a candidate says "I don't know", "no idea", or "skip", it is an ACTUAL ANSWER (Score 0), NOT a clarification request. You must MOVE ON to the next topic.
+        STRICT INTERVIEW TIMELINE:
+        - We are currently at Turn #{current_turn_number} of 10.
+        - Questions 1-6: General Technical & Behavioral.
+        - Questions 7-8: MUST be SCENARIO-BASED (e.g., "Imagine you are...", "How would you handle...").
+        - Questions 9-10: MUST be SYNTAX-BASED (e.g., "Write a function...", "What is the syntax for...").
         
-        STT & CONTEXT AWARENESS:
-        - NEVER loop more than once on the same question. If they tried to answer (even with just "I don't know"), MOVE ON.
-        - DO NOT be a robot. If they gave any info, acknowledge it briefly and move to a DIFFERENT topic.
-        
-        STRICT INTERVIEW SEQUENCE (Total 10 Questions):
-        - Turn 1-6: General Technical & Behavioral questions based on JD/Resume.
-        - Turn 7-8: SCENARIO-BASED questions (e.g. "Imagine you are...", "How would you handle...").
-        - Turn 9-10: SYNTAX-BASED questions (e.g. "Write a function...", "What is the syntax for...").
-        
-        INSTRUCTIONS:
-        - Check the CONVERSATION HISTORY to identify which turn number you are on.
-        - For Turn 9 and 10 (SYNTAX), you MUST set "requires_code_input": true.
-        - For all other turns (1-8), you MUST set "requires_code_input": false.
+        CRITICAL RULES:
+        - If Turn is 7 or 8: You MUST ask a Scenario question. Set "requires_code_input": false.
+        - If Turn is 9 or 10: You MUST ask a Syntax/Coding question. Set "requires_code_input": true.
+        - INTERVIEW COMPLETION: If "current_turn_number" is 11 or higher, the interview is OVER. You MUST set "is_exit": true, "refined_next_question": null, and provide a polite "Thank you and goodbye" feedback.
+        - Otherwise (1-6): Ask General Tech/JD questions. Set "requires_code_input": false.
+        - Do not count your OWN feedback sentences as questions. Only count the distinct interview turns.
 
         IF (A) CLARIFICATION REQUEST:
         1. Set "is_clarification": true, "is_exit": false.
