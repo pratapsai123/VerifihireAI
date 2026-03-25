@@ -1624,6 +1624,25 @@ def results_overview_view(request):
         if end_date:
             ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
 
+        # Similar logic for AI Candidate interviews
+        if scoped_ids is None:
+            ai_cand_qs = Candidate.objects.filter(
+                company_id=company_id,
+                is_deleted=False,
+                status__in=['Completed', 'Hired', 'Rejected']
+            ).order_by('-submission_date')
+        else:
+            ai_cand_qs = Candidate.objects.filter(
+                user_profile_id__in=scoped_ids,
+                is_deleted=False,
+                status__in=['Completed', 'Hired', 'Rejected']
+            ).order_by('-submission_date')
+            
+        if start_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__date__gte=start_date)
+        if end_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__date__lte=end_date)
+
         # Combine and limit
         results = []
         for s in qs[:400]:
@@ -1697,6 +1716,43 @@ def results_overview_view(request):
                     'integrity': {
                         'integrity_score': getattr(s, 'integrity_score', 100.0),
                         'warning_logs': getattr(s, 'warning_logs', [])
+                    }
+                }
+            )
+
+        for s in ai_cand_qs[:400]:
+            submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.submission_date.isoformat() if getattr(s, 'submission_date', None) else None)
+            results.append(
+                {
+                    'submission_id': f"aicand_{s.id}",
+                    'submitted_at': submitted_date_iso,
+                    'candidate': {
+                        'name': s.full_name,
+                        'email': s.email,
+                    },
+                    'assessment': {
+                        'id': f"aicand_{s.id}",
+                        'display_name': s.job_title or "AI Interview",
+                        'name': s.job_title or "AI Interview",
+                        'weightage_objective': 0,
+                        'weightage_coding': 100,
+                    },
+                    'score': s.score,
+                    'total': 100,
+                    'percentage': s.score,
+                    
+                    'objective_score': 0,
+                    'objective_total': 0,
+                    'objective_percentage': 0,
+                    
+                    'coding_score': s.score,
+                    'coding_total': 100,
+                    'coding_percentage': s.score,
+
+                    'status': s.status,
+                    'integrity': {
+                        'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
+                        'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
                     }
                 }
             )

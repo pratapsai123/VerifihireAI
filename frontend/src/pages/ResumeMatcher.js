@@ -11,11 +11,13 @@ const ResumeMatcher = () => {
     const [jobDescription, setJobDescription] = useState('');
     const [threshold, setThreshold] = useState(70);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [isRetrying, setIsRetrying] = useState(false);
     const [results, setResults] = useState(null);
-    const [matchMode, setMatchMode] = useState('automatic'); // 'automatic' or 'manual'
+    const [batchId, setBatchId] = useState(null);
+    const [progress, setProgress] = useState({ processed: 0, total: 0 });
+    const [matchMode, setMatchMode] = useState('automatic');
     const [customRoleTitle, setCustomRoleTitle] = useState('');
 
-    // Saved Roles from DB
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
 
@@ -31,7 +33,30 @@ const ResumeMatcher = () => {
         fetchRoles();
     }, []);
 
-    // Automation Pipeline Settings
+    // --- Polling Logic ---
+    React.useEffect(() => {
+        let interval;
+        if (batchId && isAnalyzing) {
+            interval = setInterval(async () => {
+                try {
+                    const response = await axios.get(`${API_BASE_URL}/ai-candidates/batch-progress/${batchId}/`);
+                    const data = response.data;
+                    setProgress({ processed: data.processed, total: data.total });
+                    
+                    if (data.is_complete) {
+                        setResults(data.results);
+                        setBatchId(null);
+                        setIsAnalyzing(false);
+                        clearInterval(interval);
+                    }
+                } catch (err) {
+                    console.error("Polling error:", err);
+                }
+            }, 3000); // Poll every 3 seconds
+        }
+        return () => clearInterval(interval);
+    }, [batchId, isAnalyzing]);
+
     const [duration, setDuration] = useState(60);
     const [mcqCount, setMcqCount] = useState(10);
     const [codingCount, setCodingCount] = useState(1);
@@ -106,13 +131,15 @@ const ResumeMatcher = () => {
         }
 
         setIsAnalyzing(true);
+        setResults(null); 
+        setProgress({ processed: 0, total: files.length });
+        
         const formData = new FormData();
         files.forEach(file => {
             formData.append('resume', file);
         });
         formData.append('job_description', jobDescription);
 
-        // Include Job Title for persistence
         if (selectedRoleId === 'custom') {
             formData.append('role_title', customRoleTitle);
         } else {
@@ -144,47 +171,97 @@ const ResumeMatcher = () => {
             }
         }
 
-
         try {
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
             const data = response.data;
-
-            // --- DETAILED CONSOLE LOG FOR DEBUGGING ---
-            console.log("🔍 ======= AI MATCHING PIPELINE REPORT ======= 🔍");
-            console.table(Array.isArray(data) ? data : [data], ["candidate_name", "candidate_email", "match_percentage", "is_eligible", "candidate_id"]);
-            console.log("Full AI Summary/Feedback:", data.summary);
-            console.log("==============================================");
-            // ------------------------------------------
-
-            setResults(Array.isArray(data) ? data : [data]);
+            if (data.batch_id) {
+                setBatchId(data.batch_id);
+                setProgress({ processed: 0, total: data.total });
+                console.log(`🚀 Batch started: ${data.batch_id} (${data.total} candidates)`);
+            } else {
+                setResults(Array.isArray(data) ? data : [data]);
+                setIsAnalyzing(false);
+            }
         } catch (error) {
             const errorMsg = error.response?.data?.error || error.response?.data?.detail || error.message || 'Analysis failed';
             alert(`Failed to analyze: ${errorMsg}`);
-        } finally {
             setIsAnalyzing(false);
         }
     };
 
+    // --- Retry failed extractions only ---
+    const handleRetryFailed = async () => {
+        if (!results) return;
+
+        const failedResults = results.filter(r =>
+            r.extraction_failed ||
+            r.candidate_name === 'Extraction Failed' ||
+            (!r.candidate_name && r.error)
+        );
+
+        const failedIds = failedResults
+            .map(r => r.candidate_id)
+            .filter(id => id != null);
+
+        if (failedIds.length === 0) {
+            alert('No failed extractions to retry.');
+            return;
+        }
+
+        setIsRetrying(true);
+        try {
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/retry-extraction/`, {
+                candidate_ids: failedIds,
+                job_description: jobDescription,
+                threshold: threshold
+            });
+
+            const retryData = response.data;
+            console.log("🔄 ======= RETRY RESULTS ======= 🔄");
+            console.table(retryData, ["candidate_name", "candidate_email", "match_percentage", "extraction_failed", "file_name"]);
+
+            // Merge: replace only the failed results, keep screened ones untouched
+            setResults(prev => {
+                const retryMap = {};
+                retryData.forEach(r => {
+                    if (r.candidate_id) retryMap[r.candidate_id] = r;
+                });
+                return prev.map(existing => {
+                    if (existing.candidate_id && retryMap[existing.candidate_id]) {
+                        return retryMap[existing.candidate_id];
+                    }
+                    return existing;
+                });
+            });
+        } catch (error) {
+            const errorMsg = error.response?.data?.error || error.message || 'Retry failed';
+            alert(`Retry failed: ${errorMsg}`);
+        } finally {
+            setIsRetrying(false);
+        }
+    };
+
     const getProgressColor = (percentage, isEligible) => {
-        if (isEligible) return '#10B981'; // Green for meeting threshold
-        if (percentage >= 40) return '#F59E0B'; // Orange for moderate matches that missed threshold
-        return '#EF4444'; // Red for poor matches
+        if (isEligible) return '#10B981';
+        if (percentage >= 40) return '#F59E0B';
+        return '#EF4444';
+    };
+
+    // Helper: determine if a result is a failed extraction
+    const checkExtractionFailed = (data) => {
+        return data.extraction_failed ||
+            data.candidate_name === 'Extraction Failed' ||
+            (!data.candidate_name && data.error);
     };
 
     return (
         <div className="resume-matcher-page">
-
-
             <div className="matcher-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
                 <header className="page-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
                     <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
-                    <p>
-                        AI-powered side-by-side analysis of candidate fit against specific role requirements.
-                    </p>
+                    <p>AI-powered side-by-side analysis of candidate fit against specific role requirements.</p>
                 </header>
 
                 <div className="form-stack">
@@ -350,19 +427,11 @@ const ResumeMatcher = () => {
                             </div>
                         </div>
                         <div className="toggle-container">
-                            <button
-                                type="button"
-                                className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`}
-                                onClick={() => setMatchMode('automatic')}
-                            >
+                            <button type="button" className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`} onClick={() => setMatchMode('automatic')}>
                                 <i className="fa-solid fa-bolt"></i>
                                 <span>Fully-Automatic</span>
                             </button>
-                            <button
-                                type="button"
-                                className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`}
-                                onClick={() => setMatchMode('manual')}
-                            >
+                            <button type="button" className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`} onClick={() => setMatchMode('manual')}>
                                 <i className="fa-solid fa-hand"></i>
                                 <span>Manual Review</span>
                             </button>
@@ -381,7 +450,6 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
-                            {/* Row 1: MCQ, Coding Tasks, Total Time */}
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
                                 <div className="setting-item">
                                     <label>MCQ Questions</label>
@@ -397,7 +465,6 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
-                            {/* Per-task coding difficulty — only if tasks > 0 */}
                             {codingCount > 0 && (
                                 <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -408,11 +475,8 @@ const ResumeMatcher = () => {
                                         {codingChallenges.map((c, idx) => (
                                             <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
                                                 <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
-                                                <select
-                                                    value={c.difficulty}
-                                                    onChange={(e) => updateCodingDiff(c.id, e.target.value)}
-                                                    style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}
-                                                >
+                                                <select value={c.difficulty} onChange={(e) => updateCodingDiff(c.id, e.target.value)}
+                                                    style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}>
                                                     <option value="Easy">Easy</option>
                                                     <option value="Medium">Medium</option>
                                                     <option value="Hard">Hard</option>
@@ -423,21 +487,15 @@ const ResumeMatcher = () => {
                                 </div>
                             )}
 
-                            {/* Pass Threshold */}
                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>Assessment Pass Threshold ({passThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <input
-                                        type="range" min="0" max="100" value={passThreshold}
-                                        onChange={(e) => setPassThreshold(e.target.value)}
-                                        style={{ flex: 1, accentColor: '#6366F1' }}
-                                    />
+                                    <input type="range" min="0" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
                             </div>
 
-                            {/* Date & Time Selection Range */}
                             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div className="module-icon-wrapper teal-glow" style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
@@ -494,16 +552,11 @@ const ResumeMatcher = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     )}
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
-                        <button
-                            onClick={handleMatch}
-                            disabled={isAnalyzing}
-                            className="generate-btn"
-                        >
+                        <button onClick={handleMatch} disabled={isAnalyzing} className="generate-btn">
                             {isAnalyzing ? (
                                 <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
                             ) : (
@@ -516,18 +569,72 @@ const ResumeMatcher = () => {
                     </div>
                 </div>
 
+                {isAnalyzing && progress.total > 0 && (
+                    <div className="section-container" style={{ marginTop: '2rem', textAlign: 'center' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#4B5563' }}>
+                                Processing Resumes...
+                            </span>
+                            <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#6366F1' }}>
+                                {progress.processed} of {progress.total}
+                            </span>
+                        </div>
+                        <div style={{ width: '100%', height: '10px', background: '#E5E7EB', borderRadius: '5px', overflow: 'hidden' }}>
+                            <div style={{ 
+                                width: `${(progress.processed / progress.total) * 100}%`, 
+                                height: '100%', 
+                                background: 'linear-gradient(90deg, #6366F1, #A855F7)',
+                                transition: 'width 0.5s ease-out'
+                            }}></div>
+                        </div>
+                        <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#6B7280', fontStyle: 'italic' }}>
+                            <i className="fa-solid fa-circle-info" style={{ marginRight: '5px' }}></i>
+                            Sequential processing active to respect API limits. This may take a few minutes for large batches.
+                        </p>
+                    </div>
+                )}
+
                 {results && (
                     <div className="results-wrapper" style={{ marginTop: '2.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                             <h2 style={{ fontSize: '1.5rem', fontWeight: '500', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
+
+                            {/* Retry button — only visible if there are failed extractions */}
+                            {results.some(r => checkExtractionFailed(r)) && (
+                                <button
+                                    onClick={handleRetryFailed}
+                                    disabled={isRetrying}
+                                    style={{
+                                        background: isRetrying ? '#94A3B8' : 'linear-gradient(135deg, #F59E0B, #EF4444)',
+                                        color: 'white',
+                                        border: 'none',
+                                        padding: '0.6rem 1.25rem',
+                                        borderRadius: '12px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: '600',
+                                        cursor: isRetrying ? 'not-allowed' : 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem',
+                                        boxShadow: '0 4px 12px rgba(239, 68, 68, 0.2)',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                >
+                                    <i className={`fa-solid ${isRetrying ? 'fa-spinner fa-spin' : 'fa-rotate-right'}`}></i>
+                                    {isRetrying ? 'Retrying...' : `Retry Failed (${results.filter(r => checkExtractionFailed(r)).length})`}
+                                </button>
+                            )}
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             {results.map((data, index) => {
+                                const failed = checkExtractionFailed(data);
                                 const percentage = data.match_percentage || 0;
-                                const progressColor = getProgressColor(percentage, data.is_eligible);
+                                const progressColor = failed ? '#EF4444' : getProgressColor(percentage, data.is_eligible);
+                                const fileName = data.file_name || 'Unknown PDF';
+
                                 return (
-                                    <div key={index} className="glass-card result-card">
+                                    <div key={index} className="glass-card result-card" style={failed ? { borderLeft: '4px solid #EF4444' } : {}}>
                                         <div className="score-circle" style={{ background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #f1f5f9 0deg)` }}>
                                             <div className="score-inner">
                                                 <span className="score-value" style={{ color: progressColor }}>{percentage}%</span>
@@ -536,13 +643,34 @@ const ResumeMatcher = () => {
                                         </div>
 
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                                                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.candidate_name || 'Extraction Failed'}</h4>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                                                {failed ? (
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                                        <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#EF4444' }}>
+                                                            <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: '0.5rem' }}></i>
+                                                            Extraction Failed
+                                                        </h4>
+                                                        <span style={{
+                                                            fontSize: '0.8rem',
+                                                            color: '#64748b',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '0.35rem'
+                                                        }}>
+                                                            <i className="fa-solid fa-file-pdf" style={{ color: '#EF4444', fontSize: '0.75rem' }}></i>
+                                                            {fileName}
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>
+                                                        {data.candidate_name}
+                                                    </h4>
+                                                )}
                                                 <span className="status-tag" style={{
-                                                    background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                                                    color: data.is_eligible ? '#059669' : '#dc2626'
+                                                    background: failed ? 'rgba(239, 68, 68, 0.1)' : data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                                                    color: failed ? '#dc2626' : data.is_eligible ? '#059669' : '#dc2626'
                                                 }}>
-                                                    {data.is_eligible ? 'ELIGIBLE' : 'GAP DETECTED'}
+                                                    {failed ? 'EXTRACTION FAILED' : data.is_eligible ? 'ELIGIBLE' : 'GAP DETECTED'}
                                                 </span>
                                             </div>
                                             <p style={{ margin: 0, color: '#64748b', fontSize: '1rem', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
@@ -561,4 +689,3 @@ const ResumeMatcher = () => {
 };
 
 export default ResumeMatcher;
-
