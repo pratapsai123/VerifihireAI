@@ -907,7 +907,13 @@ class ProcessAnswerView(APIView):
         STT & CONTEXT AWARENESS:
         - NEVER loop more than once on the same question. If they tried to answer (even with just "I don't know"), MOVE ON.
         - DO NOT be a robot. If they gave any info, acknowledge it briefly and move to a DIFFERENT topic.
-        - DO NOT start the question with "You were asked to..." or "Let's try again...". Just provide the next logical question.
+        
+        QUESTION VARIETY (Across 10 turns):
+        - You MUST include exactly 2 SYNTAX-BASED questions (e.g. "Write a function to...", "What is the syntax for...").
+        - You MUST include exactly 2 SCENARIO-BASED questions (e.g. "Imagine you are...", "How would you handle...").
+        - Check the CONVERSATION HISTORY to see how many of each you have already asked.
+        - For SYNTAX-BASED questions, you MUST set "requires_code_input": true.
+        - For SCENARIO-BASED or general questions, set "requires_code_input": false.
 
         IF (A) CLARIFICATION REQUEST:
         1. Set "is_clarification": true, "is_exit": false.

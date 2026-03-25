@@ -789,10 +789,25 @@ const AiInterviewSession = () => {
                     : (fullFeedback.trim() + " " + followUpQ);
 
                 addMessage('ai', followUpText);
+                
+                // Determine mode BEFORE speaking
+                let effectiveMode = userInputMode;
+                if (data.requires_code_input) {
+                    effectiveMode = 'text';
+                    setUserInputMode('text');
+                    setAiStatus("Coding Mode (Keyboard)");
+                    try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch(e){}
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                } else {
+                    setAiStatus("Indu is Online");
+                }
+
                 await speak(followUpText);
                 setIsProcessing(false);
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
+                isProcessingRef.current = false;
+
+                if (effectiveMode === 'audio' && !showQuotaWarning) startListening();
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 if (fullTurnText) addMessage('ai', fullTurnText);
                 if (fullTurnText) await speak(fullTurnText);
@@ -820,21 +835,34 @@ const AiInterviewSession = () => {
                     finalTurnText = fullFeedback.trim();
                 }
 
+                // 1. DETERMINE MODE & STATUS (Instant UI Update)
+                let effectiveMode = userInputMode;
+                if (data.requires_code_input) {
+                    effectiveMode = 'text';
+                    setUserInputMode('text');
+                    setAiStatus("Coding Mode (Keyboard)");
+                    // Force Mic Stop
+                    try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch(e){}
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                } else {
+                    setAiStatus("Indu is Online");
+                }
+
+                // 2. LOG & SPEAK (Can be long-running)
                 if (finalTurnText) {
                     addMessage('ai', finalTurnText);
                     await speak(finalTurnText);
                 }
 
-                // Auto-switch to text mode if the AI asks for syntax/code
-                if (data.requires_code_input) {
-                    setUserInputMode('text');
-                    setAiStatus("Coding Mode Active");
-                }
-
+                // 3. FINAL STATE SYNC
                 setIsProcessing(false);
                 isProcessingRef.current = false;
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
+
+                // Resume listening only if we are in audio mode AND not in a coding task
+                if (effectiveMode === 'audio' && !showQuotaWarning) {
+                    startListening();
+                }
             }
         } catch (err) {
             console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (60s)" : err.message);
@@ -1016,6 +1044,11 @@ const AiInterviewSession = () => {
 
         let secondsRemaining = 5;
         const watchdog = setInterval(() => {
+            // Safety Guard: If mic is physically off, this interval MUST not proceed
+            if (!isRecordingRef.current || isCompletedRef.current) {
+                clearInterval(watchdog);
+                return;
+            }
             if (isSpeakingRef.current || isProcessingRef.current) return;
 
             const timeSinceActivity = Date.now() - lastSpokenTimeRef.current;
