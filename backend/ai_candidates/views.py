@@ -1,5 +1,6 @@
 import io
 import PyPDF2
+import fitz  # PyMuPDF
 from groq import Groq
 import os
 import json
@@ -278,27 +279,56 @@ class ResumeMatchView(APIView):
                     resume_text = ""
                     if hasattr(resume_file, 'open'):
                         with resume_file.open('rb') as f:
-                            pdf_reader = PyPDF2.PdfReader(f)
-                            for page in pdf_reader.pages:
-                                resume_text += (page.extract_text() or "")
+                            file_bytes = f.read()
                     else:
                         resume_file.seek(0)
-                        pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
-                        for page in pdf_reader.pages:
-                            resume_text += (page.extract_text() or "")
-                        
-                        # OCR Fallback
-                        if len(resume_text.strip()) < 100:
-                            try:
-                                resume_file.seek(0)
-                                reader = _get_reader()
-                                if reader:
-                                    img = Image.open(resume_file)
+                        file_bytes = resume_file.read()
+
+                    # 1. Primary Attempt: PyMuPDF (fitz) - Best for modern PDFs
+                    try:
+                        doc = fitz.open(stream=file_bytes, filetype="pdf")
+                        for page in doc:
+                            resume_text += page.get_text()
+                        doc.close()
+                    except Exception as e:
+                        logger.warning(f"PyMuPDF extraction failed for {resume_file.name}: {e}")
+
+                    # 2. Fallback Attempt: PyPDF2 - If PyMuPDF failed or returned very little text
+                    if len(resume_text.strip()) < 100:
+                        try:
+                            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                            pypdf_text = ""
+                            for page in pdf_reader.pages:
+                                pypdf_text += (page.extract_text() or "")
+                            if len(pypdf_text.strip()) > len(resume_text.strip()):
+                                resume_text = pypdf_text
+                        except Exception as e:
+                            logger.warning(f"PyPDF2 fallback failed for {resume_file.name}: {e}")
+
+                    # 3. OCR Fallback: EasyOCR - For image-based PDFs
+                    if len(resume_text.strip()) < 100:
+                        try:
+                            logger.info(f"Attempting OCR fallback for {resume_file.name}")
+                            reader = _get_reader()
+                            if reader:
+                                # Use fitz to get the first page as an image (best for PDF OCR)
+                                doc = fitz.open(stream=file_bytes, filetype="pdf")
+                                if doc.page_count > 0:
+                                    page = doc.load_page(0)
+                                    pix = page.get_pixmap()
+                                    img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
                                     ocr_res = reader.readtext(np.array(img), detail=0)
                                     ocr_text = " ".join(ocr_res)
                                     if len(ocr_text.strip()) > len(resume_text.strip()):
                                         resume_text = ocr_text
-                            except: pass
+                                        logger.info(f"OCR extracted {len(ocr_text)} characters")
+                                doc.close()
+                        except Exception as e:
+                            logger.warning(f"OCR fallback failed for {resume_file.name}: {e}")
+
+                    logger.info(f"Final extraction complete for {resume_file.name}. Total characters: {len(resume_text)}")
+                    if len(resume_text.strip()) < 50:
+                        logger.error(f"CRITICAL: Extraction returned nearly empty text for {resume_file.name}!")
 
                     job_title = request.data.get('job_title') or request.data.get('role_title')
                     if job_title:
@@ -456,23 +486,29 @@ class RetryFailedExtractionsView(APIView):
                 prompt = f"""
                 Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
                 
-                Resume Content:
+                RESUME:
                 {resume_text}
                 
-                Job Description:
+                JOB DESCRIPTION:
                 {jd}
+                
+                SCORING RULES (Strict & Objective):
+                1. Start with a BASE SCORE of 100%.
+                2. For every CORE SKILL or TECHNOLOGY mentioned in the JD that is MISSING from the resume, SUBTRACT 15-20 points.
+                3. If the candidate has NO relevant industry experience for the role, the final score must be below 20%.
+                4. If the resume and JD are a 100% match, return 100%.
+                5. Be brutally honest. Do not "inflate" the score, but do not drop to 0% unless there is zero relevance.
                 
                 Please provide:
                 1. The candidate's full name. Look at the very top of the document. If missing, return "Extraction Failed".
                 2. The candidate's contact email. Look for email patterns. If missing, return "Extraction Failed".
-                3. A match percentage (0-100) based on skills and experience matching the JD.
-                4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
-                5. A brief 2-3 sentence summary of the fit.
-                6. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD.
+                3. A match percentage (0-100).
+                4. A brief 2-3 sentence summary of the fit. Explicitly mention any critical missing skills.
+                5. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD.
                 
                 CRITICAL: You MUST extract the name and email if they are present in ANY form. Do not be overly strict with formatting.
                 
-                Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
+                Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "summary", "interview_questions".
                 """
 
                 # Retry with backoff (using 70b model with fallback to 8b)
@@ -485,7 +521,7 @@ class RetryFailedExtractionsView(APIView):
                             model=current_model,
                             messages=[{"role": "user", "content": prompt}],
                             response_format={"type": "json_object"},
-                            temperature=0.1
+                            temperature=0.0
                         )
                         raw_text = response.choices[0].message.content
                         match_result = extract_json(raw_text)
@@ -527,6 +563,8 @@ class RetryFailedExtractionsView(APIView):
                     
                     match_result['candidate_id'] = candidate.id
                     match_result['file_name'] = candidate.full_name
+                    match_result['is_eligible'] = is_eligible
+                    match_result['status'] = candidate.status
                     match_result['extraction_failed'] = (extracted_name == 'Extraction Failed' and extracted_email == 'Extraction Failed')
                     results.append(match_result)
                 else:

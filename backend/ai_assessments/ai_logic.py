@@ -165,6 +165,7 @@ def _repair_pool_shortfall(
                     {"role": "user", "content": repair_prompt},
                 ],
                 response_format={"type": "json_object"},
+                max_tokens=4096,
                 temperature=0.2,
             )
             repair_text = repair_response.choices[0].message.content or ""
@@ -243,6 +244,7 @@ def _generate_coding_pool_ai_only(
                     {"role": "user", "content": prompt},
                 ],
                 response_format={"type": "json_object"},
+                max_tokens=4096,
                 temperature=0.2,
             )
             raw = response.choices[0].message.content or ""
@@ -319,6 +321,7 @@ def _generate_mcq_pool_ai_only(
                     {"role": "user", "content": prompt},
                 ],
                 response_format={"type": "json_object"},
+                max_tokens=4096,
                 temperature=0.2,
             )
             raw = response.choices[0].message.content or ""

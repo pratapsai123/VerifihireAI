@@ -42,27 +42,43 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
     current_model = "llama-3.3-70b-versatile"
     
     for index, candidate in enumerate(candidates):
-        logger.info(f"Processing candidate {index+1}/{total}: {candidate.full_name} (ID: {candidate.id}) using {current_model}")
+        # Debug: Check if resume text exists
+        resume_len = len(candidate.resume_text or "")
+        logger.info(f"--- DEBUG: Processing candidate {candidate.id} ---")
+        logger.info(f"Resume text length: {resume_len} characters")
+        logger.info(f"JD length: {len(job_description or '')} characters")
+        
+        if resume_len < 100:
+            logger.warning(f"Candidate {candidate.id} has very short resume text. Scoring may be inaccurate.")
         
         try:
+            # Re-read from DB to ensure we have latest data
+            candidate.refresh_from_db()
+            
             prompt = f"""
             Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
             
-            Resume Content:
+            RESUME:
             {candidate.resume_text}
             
-            Job Description:
+            JOB DESCRIPTION:
             {job_description}
+            
+            SCORING RULES (Strict & Objective):
+            1. Start with a BASE SCORE of 100%.
+            2. For every CORE SKILL or TECHNOLOGY mentioned in the JD that is MISSING from the resume, SUBTRACT 15-20 points.
+            3. If the candidate has NO relevant industry experience for the role, the final score must be below 20%.
+            4. If the resume and JD are a 100% match, return 100%.
+            5. Be brutally honest. Do not "inflate" the score, but do not drop to 0% unless there is zero relevance.
             
             Please provide:
             1. The candidate's full name. Look at the very top of the document. If missing, use "{candidate.full_name}". 
             2. The candidate's contact email. Look for email patterns. If missing, use "missing@example.com".
-            3. A match percentage (0-100) based on skills and experience matching the JD. NOTE: Give partial credit (20-30%) for transferable skills/general experience even if primary tech stack differs. Never return 0% if the candidate has any relevant engineering background.
-            4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
-            5. A brief 2-3 sentence summary of the fit. Mention both strengths and gaps.
-            6. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD. 
+            3. A match percentage (0-100). 
+            4. A brief 2-3 sentence summary of the fit. Explicitly mention any missing core skills.
+            5. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD. 
             
-            Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
+            Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "summary", "interview_questions".
             """
 
             match_result = None
@@ -73,9 +89,10 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
                         model=current_model,
                         messages=[{"role": "user", "content": prompt}],
                         response_format={"type": "json_object"},
-                        temperature=0.1
+                        temperature=0.0
                     )
                     raw_text = response.choices[0].message.content
+                    logger.info(f"Raw AI Response for {candidate.id}: {raw_text}")
                     match_result = extract_json(raw_text)
                     if match_result:
                         break

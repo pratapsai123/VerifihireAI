@@ -88,7 +88,8 @@ class SubmitAssessmentView(APIView):
                     status='ONGOING'
                 )
 
-            generated_content = assessment.generated_content or {}
+            # Use candidate_questions (the subset) instead of the whole pool
+            generated_content = submission.candidate_questions or assessment.generated_content or {}
             
             # Unwrap historic nested dictionaries from Llama-3.1
             if 'mcqs' not in generated_content and 'coding_challenges' not in generated_content:
@@ -101,28 +102,35 @@ class SubmitAssessmentView(APIView):
             mcqs = generated_content.get('mcqs', [])
             coding_challenges = generated_content.get('coding_challenges', [])
             
-            total_possible_points = assessment.total_points or 0
-            possible_mcq_points = 0
-            possible_coding_points = 0
-            candidate_mcq_points = 0
-            candidate_coding_points = 0
+            total_possible_points = 0
+            candidate_total_points = 0
             
-            # Difficulty weights
+            # Difficulty weight multipliers (matches user requirement: Easy=1x, Medium=2x, Hard=3x)
+            # Base points = 100 per question
             weight_map = {'Easy': 100, 'Medium': 200, 'Hard': 300}
 
-            # 1. MCQ Scoring - Fixed 20 points per question
+            import re
+            def clean_ans(s):
+                if not s: return ""
+                # Strip common choice prefixes like "a) ", "1. ", "Choice A: "
+                return re.sub(r'^(?:choice\s+)?[a-z0-9][\.\)\:\s-]+\s*', '', s.lower()).strip()
+
+            # 1. MCQ Scoring - Flat 20 points each
+            possible_mcq_points = 0
+            candidate_mcq_points = 0
             for i, mcq in enumerate(mcqs):
                 weight = 20
                 possible_mcq_points += weight
                 
-                # Check both 'answer' and 'correct_answer' for robustness
-                correct_ans = str(mcq.get('answer') or mcq.get('correct_answer') or '').strip().upper()
-                candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
+                correct_ans = str(mcq.get('answer') or mcq.get('correct_answer') or '').strip()
+                candidate_ans = str(answers.get(f'mcq_{i}') or '').strip()
                 
-                if correct_ans and candidate_ans == correct_ans:
+                if correct_ans and clean_ans(candidate_ans) == clean_ans(correct_ans):
                     candidate_mcq_points += weight
 
-            # 2. Coding Challenge Scoring
+            # 2. Coding Challenge Scoring - Weighted (100, 200, 300)
+            possible_coding_points = 0
+            candidate_coding_points = 0
             for i, challenge in enumerate(coding_challenges):
                 difficulty = challenge.get('difficulty', 'Medium')
                 weight = weight_map.get(difficulty, 200)
@@ -131,22 +139,16 @@ class SubmitAssessmentView(APIView):
                 res = coding_results.get(str(i))
                 if res:
                     passed = res.get('passed', 0)
-                    total_tc = res.get('total', 0) # Changed default to 0 for explicit division by zero guard
-                    if total_tc > 0: # Guard against division by zero
+                    total_tc = res.get('total', 1) 
+                    if total_tc > 0:
                         score_fraction = passed / total_tc
                         candidate_coding_points += (score_fraction * weight)
 
             candidate_total_points = candidate_mcq_points + candidate_coding_points
-            
-            # Always use the sum of calculated potential points for the denominator
             total_possible_points = possible_mcq_points + possible_coding_points
-
-            if total_possible_points > 0:
-                percentage = round((candidate_total_points / total_possible_points) * 100)
-            else:
-                percentage = 0
             
-            pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 70 else 'rejected'
+            percentage = round((candidate_total_points / total_possible_points * 100)) if total_possible_points > 0 else 0
+            pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 50 else 'rejected'
 
             submission.answers = answers
             submission.mcq_score = round(candidate_mcq_points)
@@ -176,7 +178,9 @@ class SubmitAssessmentView(APIView):
                 "coding_score": submission.coding_score,
                 "total_possible_points": total_possible_points,
                 "percentage": percentage,
-                "status": pass_status
+                "status": pass_status,
+                "final_status": "Qualified" if pass_status == 'selected' else "Not Qualified",
+                "display_percentage": f"{percentage}%"
             }
             response = Response(response_data, status=status.HTTP_200_OK)
             response["Cache-Control"] = "no-cache, no-store, must-revalidate"
@@ -366,12 +370,13 @@ class GenerateAssessmentView(APIView):
                 logger.info(f"AI Generation Attempt {attempts}/{max_attempts}")
                 
                 response = local_groq_client.chat.completions.create(
-                    model="llama-3.1-8b-instant",
+                    model="llama-3.3-70b-versatile",
                     messages=[
                         {"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only. ALWAYS provide the EXACT counts requested."}, 
                         {"role": "user", "content": current_prompt}
                     ],
                     response_format={"type": "json_object"},
+                    max_tokens=4096,
                     temperature=0.1 if attempts == 1 else 0.2
                 )
                 raw_text = response.choices[0].message.content

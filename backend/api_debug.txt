@@ -22,3 +22,983 @@ Host: localhost:8001
 [2026-03-24 06:27:33.881850+00:00] PUBLIC ACCESS: Token='731ee053-5815-4239-9135-09389c48ff7a'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1774333653540']}>
 Host: localhost:8001
+
+[2026-03-25 07:52:48.580413+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kghf70fhe8795yd08rvd0aab` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 498364, Requested 2717. Please try again in 3m6.7968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\views.py", line 442, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<5 lines>...
+        attempts_per_batch=4,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\ai_logic.py", line 239, in _generate_coding_pool_ai_only
+    response = groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kghf70fhe8795yd08rvd0aab` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 498364, Requested 2717. Please try again in 3m6.7968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: {
+  "mcqs": [
+      {
+         "question": "What is the primary purpose of the Django framework?",
+         "options": [
+            "A web development framework for Python",
+            "A machine learning library for Python",
+            "A database management system for Python",
+            "A scripting language for Python"
+         ],
+         "answer": "A web development framework for Python",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list and a tuple in Python?",
+         "options": [
+            "Lists are mutable, while tuples are immutable",
+            "Lists are immutable, while tuples are mutable",
+            "Lists are used for strings, while tuples are used for integers",
+            "Lists are used for integers, while tuples are used for strings"
+         ],
+         "answer": "Lists are mutable, while tuples are immutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'self' parameter in a Python class?",
+         "options": [
+            "To represent the current instance of the class",
+            "To represent the class itself",
+            "To represent the parent class",
+            "To represent the child class"
+         ],
+         "answer": "To represent the current instance of the class",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a for loop and a while loop in Python?",
+         "options": [
+            "A for loop is used for iterating over a list, while a while loop is used for iterating over a string",
+            "A for loop is used for iterating over a string, while a while loop is used for iterating over a list",
+            "A for loop is used for iterating over a list, while a while loop is used for iterating over a dictionary",
+            "A for loop is used for iterating over a dictionary, while a while loop is used for iterating over a list"
+         ],
+         "answer": "A for loop is used for iterating over a list, while a while loop is used for iterating over a string",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'try-except' block in Python?",
+         "options": [
+            "To handle errors and exceptions",
+            "To handle input and output",
+            "To handle memory and storage",
+            "To handle network and communication"
+         ],
+         "answer": "To handle errors and exceptions",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a set and a dictionary in Python?",
+         "options": [
+            "A set is an unordered collection of unique elements, while a dictionary is an ordered collection of key-value pairs",
+            "A set is an ordered collection of unique elements, while a dictionary is an unordered collection of key-value pairs",
+            "A set is an unordered collection of key-value pairs, while a dictionary is an ordered collection of unique elements",
+            "A set is an ordered collection of key-value pairs, while a dictionary is an unordered collection of unique elements"
+         ],
+         "answer": "A set is an unordered collection of unique elements, while a dictionary is an ordered collection of key-value pairs",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'lambda' function in Python?",
+         "options": [
+            "To create a small anonymous function",
+            "To create a large anonymous function",
+            "To create a function with a specific name",
+            "To create a function with a specific return type"
+         ],
+         "answer": "To create a small anonymous function",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list comprehension and a for loop in Python?",
+         "options": [
+            "A list comprehension is used for iterating over a list, while a for loop is used for iterating over a string",
+            "A list comprehension is used for iterating over a string, while a for loop is used for iterating over a list",
+            "A list comprehension is used for creating a new list, while a for loop is used for iterating over an existing list",
+            "A list comprehension is used for iterating over an existing list, while a for loop is used for creating a new list"
+         ],
+         "answer": "A list comprehension is used for creating a new list, while a for loop is used for iterating over an existing list",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'map' function in Python?",
+         "options": [
+            "To apply a function to each item in an iterable",
+            "To apply a function to each item in a list",
+            "To apply a function to each item in a string",
+            "To apply a function to each item in a dictionary"
+         ],
+         "answer": "To apply a function to each item in an iterable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a generator and an iterator in Python?",
+         "options": [
+            "A generator is a type of iterator that can be used to generate a sequence of values",
+            "A generator is a type of iterator that can be used to iterate over a sequence of values",
+            "An iterator is a type of generator that can be used to generate a sequence of values",
+            "An iterator is a type of generator that can be used to iterate over a sequence of values"
+         ],
+         "answer": "A generator is a type of iterator that can be used to generate a sequence of values",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'zip' function in Python?",
+         "options": [
+            "To combine two or more iterables into a single iterable",
+            "To combine two or more lists into a single list",
+            "To combine two or more strings into a single string",
+            "To combine two or more dictionaries into a single dictionary"
+         ],
+         "answer": "To combine two or more iterables into a single iterable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a 'with' statement and a try-except block in Python?",
+         "options": [
+            "A 'with' statement is used to handle errors and exceptions, while a try-except block is used to handle input and output",
+            "A 'with' statement is used to handle input and output, while a try-except block is used to handle errors and exceptions",
+            "A 'with' statement is used to handle memory and storage, while a try-except block is used to handle network and communication",
+            "A 'with' statement is used to handle network and communication, while a try-except block is used to handle memory and storage"
+         ],
+         "answer": "A 'with' statement is used to handle resources, while a try-except block is used to handle errors and exceptions",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'enumerate' function in Python?",
+         "options": [
+            "To iterate over a list and get both the index and value of each item",
+            "To iterate over a string and get both the index and value of each character",
+            "To iterate over a dictionary and get both the key and value of each item",
+            "To iterate over a set and get both the index and value of each item"
+         ],
+         "answer": "To iterate over a list and get both the index and value of each item",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a 'lambda' function and a 'def' function in Python?",
+         "options": [
+            "A 'lambda' function is used to create a small anonymous function, while a 'def' function is used to create a large anonymous function",
+            "A 'lambda' function is used to create a small anonymous function, while a 'def' function is used to create a function with a specific name",
+            "A 'lambda' function is used to create a function with a specific name, while a 'def' function is used to create a small anonymous function",
+            "A 'lambda' function is used to create a function with a specific return type, while a 'def' function is used to create a function with a specific name"
+         ],
+         "answer": "A 'lambda' function is used to create a small anonymous function, while a 'def' function is used to create a function with a specific name",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the 'filter' function in Python?",
+         "options": [
+            "To apply a function to each item in an iterable and return a new iterable with the filtered items",
+            "To apply a function to each item in a list and return a new list with the filtered items",
+            "To apply a function to each item in a string and return a new string with the filtered items",
+            "To apply a function to each item in a dictionary and return a new dictionary with the filtered items"
+         ],
+         "answer": "To apply a function to each item in an iterable and return a new iterable with the filtered items",
+         "difficulty": "Easy"
+      }]}
+
+[2026-03-25 09:24:06.521683+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Design a Cache System",\n         "problem_statement": "Design a cache system that supports the following operations: get, put, remove. The cache should have a maximum capacity and evict the least recently used item when the cache is full.",\n         "input_format": "An array of integers representing the cache operations, where each operation is either get, put, or remove.",\n         "output_format": "An array of integers representing the result of each operation.",\n         "constraints": "The cache has a maximum capacity of 2^16 - 1.",\n         "example_input": "[get, put, remove, get, put, get, remove, get]",\n         "example_output": "[null, 1, null, 1, 2, 1, null, 1]",\n         "explanation": "The cache system should use a combination of a hash map and a doubly linked list to keep track of the least recently used items.",\n         "starter_code": {\n            "python": "class Node:\\n    def __init__(self, key, value):\\n        self.key = key\\n        self.value = value\\n        self.prev = None\\n        self.next = None\\n\\nclass Cache:\\n    def __init__(self, capacity):\\n        self.capacity = capacity\\n        self.cache = {}\\n        self.head = Node(None, None)\\n        self.tail = Node(None, None)\\n        self.head.next = self.tail\\n        self.tail.prev = self.head",\n            "java": "class Node {\\n    int key;\\n    int value;\\n    Node prev;\\n    Node next;\\n\\n    public Node(int key, int value) {\\n        this.key = key;\\n        this.value = value;\\n    }\\n}\\n\\nclass Cache {\\n    int capacity;\\n    Map<Integer, Node> cache;\\n    Node head;\\n    Node tail;\\n\\n    public Cache(int capacity) {\\n        this.capacity = capacity;\\n        this.cache = new HashMap<>();\\n        this.head = new Node(0, 0);\\n        this.tail = new Node(0, 0);\\n        this.head.next = this.tail;\\n        this.tail.prev = this.head;\\n    }\\n}",\n            "javascript": "class Node {\\n    constructor(key, value) {\\n        this.key = key;\\n        this.value = value;\\n        this.prev = null;\\n        this.next = null;\\n    }\\n}\\n\\nclass Cache {\\n    constructor(capacity) {\\n        this.capacity = capacity;\\n        this.cache = {};\\n        this.head = new Node(null, null);\\n        this.tail = new Node(null, null);\\n        this.head.next = this.tail;\\n        this.tail.prev = this.head;\\n    }\\n}",\n            "cpp": "class Node {\\npublic:\\n    int key;\\n    int value;\\n    Node* prev;\\n    Node* next;\\n\\n    Node(int key, int value) {\\n        this->key = key;\\n        this->value = value;\\n    }\\n};\\n\\nclass Cache {\\npublic:\\n    int capacity;\\n    unordered_map<int, Node*> cache;\\n    Node* head;\\n    Node* tail;\\n\\n    Cache(int capacity) {\\n        this->capacity = capacity;\\n        this->cache = {};\\n        this->head = new Node(0, 0);\\n        this->tail = new Node(0, 0);\\n        this->head->next = this->tail;\\n        this->tail->prev = this->head;\\n    }\\n};",\n            "csharp": "public class Node {\\n    public int Key { get; set; }\\n    public int Value { get; set; }\\n    public Node Prev { get; set; }\\n    public Node Next { get; set; }\\n\\n    public Node(int key, int value) {\\n        Key = key;\\n        Value = value;\\n    }\\n}\\n\\npublic class Cache {\\n    public int Capacity { get; set; }\\n    public Dictionary<int, Node> Cache { get; set; }\\n    public Node Head { get; set; }\\n    public Node Tail { get; set; }\\n\\n    public Cache(int capacity) {\\n        Capacity = capacity;\\n        Cache = new Dictionary<int, Node>();\\n        Head = new Node(0, 0);\\n        Tail = new Node(0, 0);\\n        Head.Next = Tail;\\n        Tail.Prev = Head;\\n    }\\n}",\n            "kotlin": "class Node(var key: Int, var value: Int) {\\n    var prev: Node? = null\\n    var next: Node? = null\\n}\\n\\nclass Cache(var capacity: Int) {\\n    var cache = HashMap<Int, Node>()\\n    var head = Node(0, 0)\\n    var tail = Node(0, 0)\\n\\n    init {\\n        head.next = tail\\n        tail.prev = head\\n    }\\n}",\n            "swift": "class Node {\\n    var key: Int\\n    var value: Int\\n    var prev: Node?\\n    var next: Node?\\n\\n    init(key: Int, value: Int) {\\n        self.key = key\\n        self.value = value\\n    }\\n}\\n\\nclass Cache {\\n    var capacity: Int\\n    var cache = [Int: Node]()\\n    var head = Node(0, 0)\\n    var tail = Node(0, 0)\\n\\n    init(capacity: Int) {\\n        self.capacity = capacity\\n        head.next = tail\\n        tail.prev = head\\n    }\\n}",\n            "sql": "CREATE TABLE Cache (\\n    Key INT,\\n    Value INT\\n);\\n\\nINSERT INTO Cache (Key, Value) VALUES (1, 1);\\nINSERT INTO Cache (Key, Value) VALUES (2, 2);\\n"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[get, put, remove, get, put, get, remove, get]",\n               "output": "[null, 1, null, 1, 2, 1, null, 1]"\n            },\n            {\n               "input": "[put, put, get, get, put, get, remove, get]",\n               "output": "[1, 2, 1, 1, 2, 1, null, 1]"\n            },\n            {\n               "input": "[get, put, put, get, remove, get, get, remove]",\n               "output": "[null, 1, 2, 1, null, 1, 1, null]"\n            },\n            {\n               "input": "[put, put, put, get, get, get, remove, get]",\n               "output": "[1, 2, 3, 2, 3, 2, null, 2]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[put, put, put, put, put, put, put, put]",\n               "output": "[1, 2, 3, 4, 5, 6, 7, 8]"\n            },\n            {\n               "input": "[remove, remove, remove, remove, remove, remove, remove, remove]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[put, put, put, put, put, put, put, put]",\n               "output": "[1, 2, 3, 4, 5, 6, 7, 8]"\n            },\n            {\n               "input": "[remove, remove, remove, remove, remove, remove, remove, remove]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            }\n         ]\n      },\n      {\n         "title": "Validate a Palindrome",\n         "problem_statement": "Given a string, return true if it is a palindrome, and false otherwise. A palindrome is a string that reads the same backwards as forwards.",\n         "input_format": "A string.",\n         "output_format": "A boolean.",\n         "constraints": "The string only contains lowercase letters.",\n         "example_input": "madam",\n         "example_output": "true",\n         "explanation": "The solution should use a two-pointer approach to compare characters from the start and end of the string.",\n         "starter_code": {\n            "python": "def is_palindrome(s):\\n    return s == s[::-1]",\n            "java": "public boolean isPalindrome(String s)"}}, {"n    return s.equals(new StringBuilder(s).reverse().toString());\\n"null}'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\views.py", line 442, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<5 lines>...
+        attempts_per_batch=4,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\ai_logic.py", line 239, in _generate_coding_pool_ai_only
+    response = groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Design a Cache System",\n         "problem_statement": "Design a cache system that supports the following operations: get, put, remove. The cache should have a maximum capacity and evict the least recently used item when the cache is full.",\n         "input_format": "An array of integers representing the cache operations, where each operation is either get, put, or remove.",\n         "output_format": "An array of integers representing the result of each operation.",\n         "constraints": "The cache has a maximum capacity of 2^16 - 1.",\n         "example_input": "[get, put, remove, get, put, get, remove, get]",\n         "example_output": "[null, 1, null, 1, 2, 1, null, 1]",\n         "explanation": "The cache system should use a combination of a hash map and a doubly linked list to keep track of the least recently used items.",\n         "starter_code": {\n            "python": "class Node:\\n    def __init__(self, key, value):\\n        self.key = key\\n        self.value = value\\n        self.prev = None\\n        self.next = None\\n\\nclass Cache:\\n    def __init__(self, capacity):\\n        self.capacity = capacity\\n        self.cache = {}\\n        self.head = Node(None, None)\\n        self.tail = Node(None, None)\\n        self.head.next = self.tail\\n        self.tail.prev = self.head",\n            "java": "class Node {\\n    int key;\\n    int value;\\n    Node prev;\\n    Node next;\\n\\n    public Node(int key, int value) {\\n        this.key = key;\\n        this.value = value;\\n    }\\n}\\n\\nclass Cache {\\n    int capacity;\\n    Map<Integer, Node> cache;\\n    Node head;\\n    Node tail;\\n\\n    public Cache(int capacity) {\\n        this.capacity = capacity;\\n        this.cache = new HashMap<>();\\n        this.head = new Node(0, 0);\\n        this.tail = new Node(0, 0);\\n        this.head.next = this.tail;\\n        this.tail.prev = this.head;\\n    }\\n}",\n            "javascript": "class Node {\\n    constructor(key, value) {\\n        this.key = key;\\n        this.value = value;\\n        this.prev = null;\\n        this.next = null;\\n    }\\n}\\n\\nclass Cache {\\n    constructor(capacity) {\\n        this.capacity = capacity;\\n        this.cache = {};\\n        this.head = new Node(null, null);\\n        this.tail = new Node(null, null);\\n        this.head.next = this.tail;\\n        this.tail.prev = this.head;\\n    }\\n}",\n            "cpp": "class Node {\\npublic:\\n    int key;\\n    int value;\\n    Node* prev;\\n    Node* next;\\n\\n    Node(int key, int value) {\\n        this->key = key;\\n        this->value = value;\\n    }\\n};\\n\\nclass Cache {\\npublic:\\n    int capacity;\\n    unordered_map<int, Node*> cache;\\n    Node* head;\\n    Node* tail;\\n\\n    Cache(int capacity) {\\n        this->capacity = capacity;\\n        this->cache = {};\\n        this->head = new Node(0, 0);\\n        this->tail = new Node(0, 0);\\n        this->head->next = this->tail;\\n        this->tail->prev = this->head;\\n    }\\n};",\n            "csharp": "public class Node {\\n    public int Key { get; set; }\\n    public int Value { get; set; }\\n    public Node Prev { get; set; }\\n    public Node Next { get; set; }\\n\\n    public Node(int key, int value) {\\n        Key = key;\\n        Value = value;\\n    }\\n}\\n\\npublic class Cache {\\n    public int Capacity { get; set; }\\n    public Dictionary<int, Node> Cache { get; set; }\\n    public Node Head { get; set; }\\n    public Node Tail { get; set; }\\n\\n    public Cache(int capacity) {\\n        Capacity = capacity;\\n        Cache = new Dictionary<int, Node>();\\n        Head = new Node(0, 0);\\n        Tail = new Node(0, 0);\\n        Head.Next = Tail;\\n        Tail.Prev = Head;\\n    }\\n}",\n            "kotlin": "class Node(var key: Int, var value: Int) {\\n    var prev: Node? = null\\n    var next: Node? = null\\n}\\n\\nclass Cache(var capacity: Int) {\\n    var cache = HashMap<Int, Node>()\\n    var head = Node(0, 0)\\n    var tail = Node(0, 0)\\n\\n    init {\\n        head.next = tail\\n        tail.prev = head\\n    }\\n}",\n            "swift": "class Node {\\n    var key: Int\\n    var value: Int\\n    var prev: Node?\\n    var next: Node?\\n\\n    init(key: Int, value: Int) {\\n        self.key = key\\n        self.value = value\\n    }\\n}\\n\\nclass Cache {\\n    var capacity: Int\\n    var cache = [Int: Node]()\\n    var head = Node(0, 0)\\n    var tail = Node(0, 0)\\n\\n    init(capacity: Int) {\\n        self.capacity = capacity\\n        head.next = tail\\n        tail.prev = head\\n    }\\n}",\n            "sql": "CREATE TABLE Cache (\\n    Key INT,\\n    Value INT\\n);\\n\\nINSERT INTO Cache (Key, Value) VALUES (1, 1);\\nINSERT INTO Cache (Key, Value) VALUES (2, 2);\\n"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[get, put, remove, get, put, get, remove, get]",\n               "output": "[null, 1, null, 1, 2, 1, null, 1]"\n            },\n            {\n               "input": "[put, put, get, get, put, get, remove, get]",\n               "output": "[1, 2, 1, 1, 2, 1, null, 1]"\n            },\n            {\n               "input": "[get, put, put, get, remove, get, get, remove]",\n               "output": "[null, 1, 2, 1, null, 1, 1, null]"\n            },\n            {\n               "input": "[put, put, put, get, get, get, remove, get]",\n               "output": "[1, 2, 3, 2, 3, 2, null, 2]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[put, put, put, put, put, put, put, put]",\n               "output": "[1, 2, 3, 4, 5, 6, 7, 8]"\n            },\n            {\n               "input": "[remove, remove, remove, remove, remove, remove, remove, remove]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[put, put, put, put, put, put, put, put]",\n               "output": "[1, 2, 3, 4, 5, 6, 7, 8]"\n            },\n            {\n               "input": "[remove, remove, remove, remove, remove, remove, remove, remove]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            },\n            {\n               "input": "[get, get, get, get, get, get, get, get]",\n               "output": "[null, null, null, null, null, null, null, null]"\n            }\n         ]\n      },\n      {\n         "title": "Validate a Palindrome",\n         "problem_statement": "Given a string, return true if it is a palindrome, and false otherwise. A palindrome is a string that reads the same backwards as forwards.",\n         "input_format": "A string.",\n         "output_format": "A boolean.",\n         "constraints": "The string only contains lowercase letters.",\n         "example_input": "madam",\n         "example_output": "true",\n         "explanation": "The solution should use a two-pointer approach to compare characters from the start and end of the string.",\n         "starter_code": {\n            "python": "def is_palindrome(s):\\n    return s == s[::-1]",\n            "java": "public boolean isPalindrome(String s)"}}, {"n    return s.equals(new StringBuilder(s).reverse().toString());\\n"null}'}}
+
+RAW: {
+  "mcqs": [
+      {
+         "question": "What is the primary purpose of the Django framework?",
+         "options": [
+            "A web framework for building scalable web applications",
+            "A machine learning library for building intelligent models",
+            "A database management system for storing and retrieving data",
+            "A DevOps tool for automating workflows and deployments"
+         ],
+         "answer": "A web framework for building scalable web applications",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list and a tuple in Python?",
+         "options": [
+            "A list is mutable and a tuple is immutable",
+            "A list is immutable and a tuple is mutable",
+            "A list is a collection of items and a tuple is a single item",
+            "A list is a single item and a tuple is a collection of items"
+         ],
+         "answer": "A list is mutable and a tuple is immutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure cloud platform?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To manage and maintain databases",
+            "To implement and optimize machine learning models",
+            "To deploy, monitor, and scale applications"
+         ],
+         "answer": "To deploy, monitor, and scale applications",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a for loop and a while loop in Python?",
+         "options": [
+            "A for loop is used for iterating over a list and a while loop is used for iterating over a dictionary",
+            "A for loop is used for iterating over a dictionary and a while loop is used for iterating over a list",
+            "A for loop is used for iterating over a list and a while loop is used for iterating over a list",
+            "A for loop is used for iterating over a dictionary and a while loop is used for iterating over a dictionary"
+         ],
+         "answer": "A for loop is used for iterating over a list and a while loop is used for iterating over a list",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Git version control system?",
+         "options": [
+            "To manage and maintain databases",
+            "To implement and optimize machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To track changes and collaborate with team members"
+         ],
+         "answer": "To track changes and collaborate with team members",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a class and an object in Python?",
+         "options": [
+            "A class is a collection of items and an object is a single item",
+            "A class is a single item and an object is a collection of items",
+            "A class is a blueprint for creating objects and an object is an instance of a class",
+            "A class is an instance of an object and an object is a blueprint for creating classes"
+         ],
+         "answer": "A class is a blueprint for creating objects and an object is an instance of a class",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the DevOps toolchain?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To manage and maintain databases",
+            "To implement and optimize machine learning models",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list comprehension and a for loop in Python?",
+         "options": [
+            "A list comprehension is used for iterating over a list and a for loop is used for iterating over a dictionary",
+            "A list comprehension is used for iterating over a dictionary and a for loop is used for iterating over a list",
+            "A list comprehension is used for creating a new list and a for loop is used for iterating over a list",
+            "A list comprehension is used for iterating over a list and a for loop is used for creating a new list"
+         ],
+         "answer": "A list comprehension is used for creating a new list and a for loop is used for iterating over a list",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the MySQL database management system?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To implement and optimize machine learning models",
+            "To manage and maintain databases",
+            "To deploy, monitor, and scale applications"
+         ],
+         "answer": "To manage and maintain databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a set and a dictionary in Python?",
+         "options": [
+            "A set is a collection of items and a dictionary is a single item",
+            "A set is a single item and a dictionary is a collection of items",
+            "A set is an unordered collection of unique items and a dictionary is an ordered collection of items",
+            "A set is an ordered collection of items and a dictionary is an unordered collection of unique items"
+         ],
+         "answer": "A set is an unordered collection of unique items and a dictionary is an ordered collection of items",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the PostgreSQL database management system?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To implement and optimize machine learning models",
+            "To manage and maintain databases",
+            "To deploy, monitor, and scale applications"
+         ],
+         "answer": "To manage and maintain databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a function and a method in Python?",
+         "options": [
+            "A function is a block of code and a method is a variable",
+            "A function is a variable and a method is a block of code",
+            "A function is a block of code that takes arguments and returns a value and a method is a block of code that does not take arguments and does not return a value",
+            "A function is a block of code that does not take arguments and does not return a value and a method is a block of code that takes arguments and returns a value"
+         ],
+         "answer": "A function is a block of code that takes arguments and returns a value and a method is a block of code that does not take arguments and does not return a value",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure Machine Learning service?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To manage and maintain databases",
+            "To implement and optimize machine learning models",
+            "To deploy, monitor, and scale applications"
+         ],
+         "answer": "To implement and optimize machine learning models",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a class and an interface in Python?",
+         "options": [
+            "A class is a blueprint for creating objects and an interface is a blueprint for creating classes",
+            "A class is a blueprint for creating classes and an interface is a blueprint for creating objects",
+            "A class is a blueprint for creating objects and an interface is a blueprint for creating objects",
+            "A class is a blueprint for creating classes and an interface is a blueprint for creating classes"
+         ],
+         "answer": "A class is a blueprint for creating objects and an interface is a blueprint for creating classes",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Docker containerization tool?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To manage and maintain databases",
+            "To implement and optimize machine learning models",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list and a tuple in Java?",
+         "options": [
+            "A list is mutable and a tuple is immutable",
+            "A list is immutable and a tuple is mutable",
+            "A list is a collection of items and a tuple is a single item",
+            "A list is a single item and a tuple is a collection of items"
+         ],
+         "answer": "A list is mutable and a tuple is immutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the MySQL database management system in Java?",
+         "options": [
+            "To build and deploy scalable web applications",
+            "To implement and optimize machine learning models",
+            "To manage and maintain databases",
+            "To deploy, monitor, and scale applications"
+         ],
+         "answer": "To manage and maintain databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a set and a dictionary in Java?",
+         "options": [
+            "A set is a collection of items and a dictionary is a single item",
+            "A set is a single item and a dictionary is a collection of items",
+            "A set is an unordered collection of unique items and a dictionary is an ordered collection of items",
+            "A set is an ordered collection of items and a dictionary is an unordered collection of unique items"
+         ],
+         "answer": "A set is an unordered collection of unique items and a dictionary is an ordered collection of items",
+         "difficulty": "Easy"
+      }]}
+
+[2026-03-25 09:35:18.123933+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Maximum Subarray Sum",\n         "problem_statement": "Given an array of integers, find the maximum contiguous subarray sum.",\n         "input_format": "Array of integers",\n         "output_format": "Maximum subarray sum",\n         "constraints": "Array can be empty or contain negative numbers",\n         "example_input": "[[-2, -3, 4, -1, -2, 1, 5, -3]]",\n         "example_output": "7",\n         "explanation": "This problem can be solved using Kadane\'s algorithm, which scans the entire array and at each position finds the maximum sum of the subarray ending at that position.",\n         "starter_code": {\n            "python": "def max_subarray_sum(arr):",\n            "java": "public int maxSubarraySum(int[] arr) {",\n            "javascript": "function maxSubarraySum(arr) {",\n            "cpp": "int maxSubarraySum(int arr[], int n) {",\n            "csharp": "public int MaxSubarraySum(int[] arr) {",\n            "kotlin": "fun maxSubarraySum(arr: IntArray): Int {",\n            "swift": "func maxSubarraySum(_ arr: [Int]) -> Int {",\n            "sql": "SELECT MAX(SUM(column_name)) FROM table_name"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[-2, -3, 4, -1, -2, 1, 5, -3]",\n               "output": "7"\n            },\n            {\n               "input": "[1, 2, 3, 4, 5]",\n               "output": "15"\n            },\n            {\n               "input": "[-1, -2, -3, -4, -5]",\n               "output": "-1"\n            },\n            {\n               "input": "[0, 0, 0, 0, 0]",\n               "output": "0"\n            },\n            {\n               "input": "[-1, 1, -1, 1, -1, 1]",\n               "output": "1"\n            },\n            {\n               "input": "[5, 4, 3, 2, 1]",\n               "output": "15"\n            },\n            {\n               "input": "[-5, -4, -3, -2, -1]",\n               "output": "-1"\n            },\n            {\n               "input": "[1, -1, 1, -1, 1]",\n               "output": "1"\n            },\n            {\n               "input": "[0, 0, 0, 0, 0, 0]",\n               "output": "0"\n            },\n            {\n               "input": "[-1, 1, -1, 1, -1, 1, -1]",\n               "output": "1"\n            }\n         ]\n      },\n      {\n         "title": "Minimum Window Substring",\n         "problem_statement": "Given two strings, find the minimum window substring that contains all characters of the second string.",\n         "input_format": "Two strings",\n         "output_format": "Minimum window substring",\n         "constraints": "Second string can be empty or contain duplicate characters",\n         "example_input": "[""ADOBECODEBANC"", ""ABC"""]",\\n         "example_output": """BANC"""",\n         "explanation": "This problem can be solved using a sliding window approach, where we maintain a window of characters that contain all characters of the second string.",\n         "starter_code": {\n            "python": "def min_window(s, t):",\n            "java": "public String minWindow(String s, String t) {",\n            "javascript": "function minWindow(s, t) {",\n            "cpp": "string minWindow(string s, string t) {",\n            "csharp": "public string MinWindow(string s, string t) {",\n            "kotlin": "fun minWindow(s: String, t: String): String {",\n            "swift": "func minWindow(_ s: String, _ t: String) -> String {",\n            "sql": "SELECT MIN(LENGTH(column_name)) FROM table_name"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[""ADOBECODEBANC"", ""ABC"""]",\\n               "output": ""BANC""\\n            },\\n            {\\n               "input": "[""a"", ""a"""]",\n               "output": ""a""\n            },\n            {\n               "input": "[""bba"", ""ab"""]",\\n               "output": ""ba""\\n            },\\n            {\\n               "input": "[""ab"", ""ba"""]",\n               "output": ""ab""\n            },\n            {\n               "input": "[""a"", ""aa"""]",\\n               "output": ""a""\\n            },\\n            {\\n               "input": "[""aa"", ""a"""]",\n               "output": ""a""\n            },\n            {\n               "input": "[""aa"", ""aa"""]",\\n               "output": ""aa""\\n            },\\n            {\\n               "input": "[""abc"", ""b"""]",\n               "output": ""b""\n            },\n            {\n               "input": "[""abc"", ""c"""]",\\n               "output": ""c""\\n            },\\n            {\\n               "input": "[""abc"", ""a"""]",\n               "output": ""a""\n            }\n         ]\n      }\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\views.py", line 442, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<5 lines>...
+        attempts_per_batch=4,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\ai_logic.py", line 239, in _generate_coding_pool_ai_only
+    response = groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Maximum Subarray Sum",\n         "problem_statement": "Given an array of integers, find the maximum contiguous subarray sum.",\n         "input_format": "Array of integers",\n         "output_format": "Maximum subarray sum",\n         "constraints": "Array can be empty or contain negative numbers",\n         "example_input": "[[-2, -3, 4, -1, -2, 1, 5, -3]]",\n         "example_output": "7",\n         "explanation": "This problem can be solved using Kadane\'s algorithm, which scans the entire array and at each position finds the maximum sum of the subarray ending at that position.",\n         "starter_code": {\n            "python": "def max_subarray_sum(arr):",\n            "java": "public int maxSubarraySum(int[] arr) {",\n            "javascript": "function maxSubarraySum(arr) {",\n            "cpp": "int maxSubarraySum(int arr[], int n) {",\n            "csharp": "public int MaxSubarraySum(int[] arr) {",\n            "kotlin": "fun maxSubarraySum(arr: IntArray): Int {",\n            "swift": "func maxSubarraySum(_ arr: [Int]) -> Int {",\n            "sql": "SELECT MAX(SUM(column_name)) FROM table_name"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[-2, -3, 4, -1, -2, 1, 5, -3]",\n               "output": "7"\n            },\n            {\n               "input": "[1, 2, 3, 4, 5]",\n               "output": "15"\n            },\n            {\n               "input": "[-1, -2, -3, -4, -5]",\n               "output": "-1"\n            },\n            {\n               "input": "[0, 0, 0, 0, 0]",\n               "output": "0"\n            },\n            {\n               "input": "[-1, 1, -1, 1, -1, 1]",\n               "output": "1"\n            },\n            {\n               "input": "[5, 4, 3, 2, 1]",\n               "output": "15"\n            },\n            {\n               "input": "[-5, -4, -3, -2, -1]",\n               "output": "-1"\n            },\n            {\n               "input": "[1, -1, 1, -1, 1]",\n               "output": "1"\n            },\n            {\n               "input": "[0, 0, 0, 0, 0, 0]",\n               "output": "0"\n            },\n            {\n               "input": "[-1, 1, -1, 1, -1, 1, -1]",\n               "output": "1"\n            }\n         ]\n      },\n      {\n         "title": "Minimum Window Substring",\n         "problem_statement": "Given two strings, find the minimum window substring that contains all characters of the second string.",\n         "input_format": "Two strings",\n         "output_format": "Minimum window substring",\n         "constraints": "Second string can be empty or contain duplicate characters",\n         "example_input": "[""ADOBECODEBANC"", ""ABC"""]",\\n         "example_output": """BANC"""",\n         "explanation": "This problem can be solved using a sliding window approach, where we maintain a window of characters that contain all characters of the second string.",\n         "starter_code": {\n            "python": "def min_window(s, t):",\n            "java": "public String minWindow(String s, String t) {",\n            "javascript": "function minWindow(s, t) {",\n            "cpp": "string minWindow(string s, string t) {",\n            "csharp": "public string MinWindow(string s, string t) {",\n            "kotlin": "fun minWindow(s: String, t: String): String {",\n            "swift": "func minWindow(_ s: String, _ t: String) -> String {",\n            "sql": "SELECT MIN(LENGTH(column_name)) FROM table_name"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "[""ADOBECODEBANC"", ""ABC"""]",\\n               "output": ""BANC""\\n            },\\n            {\\n               "input": "[""a"", ""a"""]",\n               "output": ""a""\n            },\n            {\n               "input": "[""bba"", ""ab"""]",\\n               "output": ""ba""\\n            },\\n            {\\n               "input": "[""ab"", ""ba"""]",\n               "output": ""ab""\n            },\n            {\n               "input": "[""a"", ""aa"""]",\\n               "output": ""a""\\n            },\\n            {\\n               "input": "[""aa"", ""a"""]",\n               "output": ""a""\n            },\n            {\n               "input": "[""aa"", ""aa"""]",\\n               "output": ""aa""\\n            },\\n            {\\n               "input": "[""abc"", ""b"""]",\n               "output": ""b""\n            },\n            {\n               "input": "[""abc"", ""c"""]",\\n               "output": ""c""\\n            },\\n            {\\n               "input": "[""abc"", ""a"""]",\n               "output": ""a""\n            }\n         ]\n      }\n   ]\n}'}}
+
+RAW: {
+  "mcqs": [
+      {
+         "question": "What is the primary purpose of the Django framework?",
+         "options": [
+            "A web framework for building scalable web applications",
+            "A machine learning library for building intelligent models",
+            "A database management system for storing and retrieving data",
+            "A DevOps tool for automating workflows and deployments"
+         ],
+         "answer": "A web framework for building scalable web applications",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list and a tuple in Python?",
+         "options": [
+            "Lists are mutable, while tuples are immutable",
+            "Lists are immutable, while tuples are mutable",
+            "Lists are used for storing strings, while tuples are used for storing integers",
+            "Lists are used for storing integers, while tuples are used for storing strings"
+         ],
+         "answer": "Lists are mutable, while tuples are immutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the RESTful API?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To provide a standardized interface for communication between systems",
+            "To manage and maintain databases"
+         ],
+         "answer": "To provide a standardized interface for communication between systems",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a for loop and a while loop in Python?",
+         "options": [
+            "A for loop is used for iterating over lists, while a while loop is used for iterating over strings",
+            "A for loop is used for iterating over strings, while a while loop is used for iterating over lists",
+            "A for loop is used for iterating over a fixed number of times, while a while loop is used for iterating until a condition is met",
+            "A for loop is used for iterating until a condition is met, while a while loop is used for iterating over a fixed number of times"
+         ],
+         "answer": "A for loop is used for iterating over a fixed number of times, while a while loop is used for iterating until a condition is met",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure cloud platform?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To manage and maintain databases"
+         ],
+         "answer": "To deploy, monitor, and scale applications",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a list comprehension and a for loop in Python?",
+         "options": [
+            "A list comprehension is used for iterating over lists, while a for loop is used for iterating over strings",
+            "A list comprehension is used for iterating over strings, while a for loop is used for iterating over lists",
+            "A list comprehension is used for creating new lists, while a for loop is used for iterating over existing lists",
+            "A list comprehension is used for iterating over existing lists, while a for loop is used for creating new lists"
+         ],
+         "answer": "A list comprehension is used for creating new lists, while a for loop is used for iterating over existing lists",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Git version control system?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To manage and maintain databases",
+            "To track changes and collaborate with team members"
+         ],
+         "answer": "To track changes and collaborate with team members",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a set and a list in Python?",
+         "options": [
+            "Sets are mutable, while lists are immutable",
+            "Sets are immutable, while lists are mutable",
+            "Sets are used for storing strings, while lists are used for storing integers",
+            "Sets are used for storing integers, while lists are used for storing strings"
+         ],
+         "answer": "Sets are immutable, while lists are mutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the PostgreSQL database management system?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To manage and maintain databases"
+         ],
+         "answer": "To manage and maintain databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a dictionary and a list in Python?",
+         "options": [
+            "Dictionaries are mutable, while lists are immutable",
+            "Dictionaries are immutable, while lists are mutable",
+            "Dictionaries are used for storing strings, while lists are used for storing integers",
+            "Dictionaries are used for storing integers, while lists are used for storing strings"
+         ],
+         "answer": "Dictionaries are mutable, while lists are immutable",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the MySQL database management system?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To manage and maintain databases"
+         ],
+         "answer": "To manage and maintain databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a function and a method in Python?",
+         "options": [
+            "Functions are used for storing strings, while methods are used for storing integers",
+            "Functions are used for storing integers, while methods are used for storing strings",
+            "Functions are used for storing code, while methods are used for storing data",
+            "Functions are used for storing data, while methods are used for storing code"
+         ],
+         "answer": "Functions are used for storing code, while methods are used for storing data",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the DevOps toolchain?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a class and an object in Python?",
+         "options": [
+            "Classes are used for storing strings, while objects are used for storing integers",
+            "Classes are used for storing integers, while objects are used for storing strings",
+            "Classes are used for storing code, while objects are used for storing data",
+            "Classes are used for storing data, while objects are used for storing code"
+         ],
+         "answer": "Classes are used for storing code, while objects are used for storing data",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the CI/CD pipeline?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a try-except block and a try-finally block in Python?",
+         "options": [
+            "Try-except blocks are used for storing strings, while try-finally blocks are used for storing integers",
+            "Try-except blocks are used for storing integers, while try-finally blocks are used for storing strings",
+            "Try-except blocks are used for handling exceptions, while try-finally blocks are used for releasing resources",
+            "Try-except blocks are used for releasing resources, while try-finally blocks are used for handling exceptions"
+         ],
+         "answer": "Try-except blocks are used for handling exceptions, while try-finally blocks are used for releasing resources",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Agile development methodology?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the difference between a static method and an instance method in Python?",
+         "options": [
+            "Static methods are used for storing strings, while instance methods are used for storing integers",
+            "Static methods are used for storing integers, while instance methods are used for storing strings",
+            "Static methods are used for storing code, while instance methods are used for storing data",
+            "Static methods are used for storing data, while instance methods are used for storing code"
+         ],
+         "answer": "Static methods are used for storing code, while instance methods are used for storing data",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Scrum development methodology?",
+         "options": [
+            "To build scalable web applications",
+            "To develop and integrate machine learning models",
+            "To deploy, monitor, and scale applications",
+            "To automate workflows and deployments"
+         ],
+         "answer": "To automate workflows and deployments",
+         "difficulty": "Easy"
+      }]}
+
+[2026-03-25 09:40:13.556171+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Design a Parking Lot Management System",\n         "problem_statement": "Design a parking lot management system that can handle multiple parking lots, each with multiple levels and slots. The system should be able to manage the parking of vehicles, including checking availability, assigning slots, and calculating fees.",\n         "input_format": "JSON",\n         "output_format": "JSON",\n         "constraints": "The system should be able to handle a large number of vehicles and parking lots. The system should also be able to handle multiple levels and slots within each parking lot.",\n         "example_input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 1}",\n         "example_output": "{\\"status\\": \\"available\\", \\"fee\\": 10}",\n         "explanation": "The system should use a combination of data structures such as arrays and hash tables to efficiently manage the parking lots and vehicles.",\n         "starter_code": {\n            "python": "class ParkingLot:\\n    def __init__(self):\\n        pass\\n    def check_availability(self):\\n        pass\\n    def assign_slot(self):\\n        pass\\n    def calculate_fee(self):\\n        pass",\n            "java": "public class ParkingLot {\\n    public ParkingLot() {}\\n    public boolean checkAvailability() {}\\n    public void assignSlot() {}\\n    public double calculateFee() {}\\n}",\n            "javascript": "class ParkingLot {\\n    constructor() {}\\n    checkAvailability() {}\\n    assignSlot() {}\\n    calculateFee() {}\\n}",\n            "cpp": "class ParkingLot {\\npublic:\\n    ParkingLot() {}\\n    bool checkAvailability() {}\\n    void assignSlot() {}\\n    double calculateFee() {}\\n};",\n            "csharp": "public class ParkingLot {\\n    public ParkingLot() {}\\n    public bool CheckAvailability() {}\\n    public void AssignSlot() {}\\n    public double CalculateFee() {}\\n}",\n            "kotlin": "class ParkingLot {\\n    constructor() {}\\n    fun checkAvailability() {}\\n    fun assignSlot() {}\\n    fun calculateFee() {}\\n}",\n            "swift": "class ParkingLot {\\n    init() {}\\n    func checkAvailability() {}\\n    func assignSlot() {}\\n    func calculateFee() {}\\n}",\n            "sql": "CREATE TABLE parking_lot (\\n    id INT PRIMARY KEY,\\n    name VARCHAR(255)\\n);"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 2, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 2, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            }\n         ]\n      },\n      {\n         "title": "Implement a Machine Learning Model for Predicting House Prices",\n         "problem_statement": "Implement a machine learning model to predict the price of a house based on its features such as number of bedrooms, number of bathrooms, square footage, and location.",\n         "input_format": "JSON",\n         "output_format": "JSON",\n         "constraints": "The model should be able to handle a large number of features and data points. The model should also be able to handle missing values and outliers.",\n         "example_input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"urban\\"}",\n         "example_output": "{\\"price\\": 500000}",\n         "explanation": "The model should use a combination of data preprocessing and feature engineering to handle missing values and outliers. The model should also use a regression algorithm such as linear regression or decision trees to predict the house price.",\n         "starter_code": {\n            "python": "from sklearn.model_selection import train_test_split\\nfrom sklearn.linear_model import LinearRegression\\nfrom sklearn.metrics import mean_squared_error\\n\\n# Load the dataset\\n# Preprocess the data\\n# Split the data into training and testing sets\\n# Train a linear regression model\\n# Evaluate the model",\n            "java": "import weka.classifiers.Evaluation\\nimport weka.classifiers.functions.LinearRegression\\nimport weka.core.Instances\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "javascript": "const tf = require(\'@tensorflow/tfjs\')\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "cpp": "#include <tensorflow/cc/client/client_session.h>\\n#include <tensorflow/cc/saved_model/loader.h>\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "csharp": "using System;\\nusing System.IO;\\nusing System.Linq;\\nusing Microsoft.ML;\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "kotlin": "import org.tensorflow.framework.Tensor\\nimport org.tensorflow.framework.TensorShape\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "swift": "import TensorFlow\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "sql": "CREATE TABLE house_prices (\\n    id INT PRIMARY KEY,\\n    bedrooms INT,\\n    bathrooms INT,\\n    square_footage INT,\\n    location VARCHAR(255),\\n    price INT\\n);"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 500000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 4, \\"bathrooms\\": 3, \\"square_footage\\": 2000, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 700000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 5, \\"bathrooms\\": 4, \\"square_footage\\": 2500, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 900000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 400000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 4, \\"bathrooms\\": 3, \\"square_footage\\": 2000, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 600000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 5, \\"bathrooms\\": 4, \\"square_footage\\": 2500, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 800000}"\n            }'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\views.py", line 442, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<5 lines>...
+        attempts_per_batch=4,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\ai_assessments\ai_logic.py", line 239, in _generate_coding_pool_ai_only
+    response = groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\finna1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Design a Parking Lot Management System",\n         "problem_statement": "Design a parking lot management system that can handle multiple parking lots, each with multiple levels and slots. The system should be able to manage the parking of vehicles, including checking availability, assigning slots, and calculating fees.",\n         "input_format": "JSON",\n         "output_format": "JSON",\n         "constraints": "The system should be able to handle a large number of vehicles and parking lots. The system should also be able to handle multiple levels and slots within each parking lot.",\n         "example_input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 1}",\n         "example_output": "{\\"status\\": \\"available\\", \\"fee\\": 10}",\n         "explanation": "The system should use a combination of data structures such as arrays and hash tables to efficiently manage the parking lots and vehicles.",\n         "starter_code": {\n            "python": "class ParkingLot:\\n    def __init__(self):\\n        pass\\n    def check_availability(self):\\n        pass\\n    def assign_slot(self):\\n        pass\\n    def calculate_fee(self):\\n        pass",\n            "java": "public class ParkingLot {\\n    public ParkingLot() {}\\n    public boolean checkAvailability() {}\\n    public void assignSlot() {}\\n    public double calculateFee() {}\\n}",\n            "javascript": "class ParkingLot {\\n    constructor() {}\\n    checkAvailability() {}\\n    assignSlot() {}\\n    calculateFee() {}\\n}",\n            "cpp": "class ParkingLot {\\npublic:\\n    ParkingLot() {}\\n    bool checkAvailability() {}\\n    void assignSlot() {}\\n    double calculateFee() {}\\n};",\n            "csharp": "public class ParkingLot {\\n    public ParkingLot() {}\\n    public bool CheckAvailability() {}\\n    public void AssignSlot() {}\\n    public double CalculateFee() {}\\n}",\n            "kotlin": "class ParkingLot {\\n    constructor() {}\\n    fun checkAvailability() {}\\n    fun assignSlot() {}\\n    fun calculateFee() {}\\n}",\n            "swift": "class ParkingLot {\\n    init() {}\\n    func checkAvailability() {}\\n    func assignSlot() {}\\n    func calculateFee() {}\\n}",\n            "sql": "CREATE TABLE parking_lot (\\n    id INT PRIMARY KEY,\\n    name VARCHAR(255)\\n);"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 1, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 1, \\"level_id\\": 2, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 1, \\"slot_id\\": 3}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 10}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 2, \\"slot_id\\": 1}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            },\n            {\n               "input": "{\\"parking_lot_id\\": 2, \\"level_id\\": 2, \\"slot_id\\": 2}",\n               "output": "{\\"status\\": \\"available\\", \\"fee\\": 20}"\n            }\n         ]\n      },\n      {\n         "title": "Implement a Machine Learning Model for Predicting House Prices",\n         "problem_statement": "Implement a machine learning model to predict the price of a house based on its features such as number of bedrooms, number of bathrooms, square footage, and location.",\n         "input_format": "JSON",\n         "output_format": "JSON",\n         "constraints": "The model should be able to handle a large number of features and data points. The model should also be able to handle missing values and outliers.",\n         "example_input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"urban\\"}",\n         "example_output": "{\\"price\\": 500000}",\n         "explanation": "The model should use a combination of data preprocessing and feature engineering to handle missing values and outliers. The model should also use a regression algorithm such as linear regression or decision trees to predict the house price.",\n         "starter_code": {\n            "python": "from sklearn.model_selection import train_test_split\\nfrom sklearn.linear_model import LinearRegression\\nfrom sklearn.metrics import mean_squared_error\\n\\n# Load the dataset\\n# Preprocess the data\\n# Split the data into training and testing sets\\n# Train a linear regression model\\n# Evaluate the model",\n            "java": "import weka.classifiers.Evaluation\\nimport weka.classifiers.functions.LinearRegression\\nimport weka.core.Instances\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "javascript": "const tf = require(\'@tensorflow/tfjs\')\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "cpp": "#include <tensorflow/cc/client/client_session.h>\\n#include <tensorflow/cc/saved_model/loader.h>\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "csharp": "using System;\\nusing System.IO;\\nusing System.Linq;\\nusing Microsoft.ML;\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "kotlin": "import org.tensorflow.framework.Tensor\\nimport org.tensorflow.framework.TensorShape\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "swift": "import TensorFlow\\n\\n// Load the dataset\\n// Preprocess the data\\n// Split the data into training and testing sets\\n// Train a linear regression model\\n// Evaluate the model",\n            "sql": "CREATE TABLE house_prices (\\n    id INT PRIMARY KEY,\\n    bedrooms INT,\\n    bathrooms INT,\\n    square_footage INT,\\n    location VARCHAR(255),\\n    price INT\\n);"\n         },\n         "difficulty": "Medium",\n         "test_cases": [\n            {\n               "input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 500000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 4, \\"bathrooms\\": 3, \\"square_footage\\": 2000, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 700000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 5, \\"bathrooms\\": 4, \\"square_footage\\": 2500, \\"location\\": \\"urban\\"}",\n               "output": "{\\"price\\": 900000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 3, \\"bathrooms\\": 2, \\"square_footage\\": 1500, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 400000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 4, \\"bathrooms\\": 3, \\"square_footage\\": 2000, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 600000}"\n            },\n            {\n               "input": "{\\"bedrooms\\": 5, \\"bathrooms\\": 4, \\"square_footage\\": 2500, \\"location\\": \\"suburban\\"}",\n               "output": "{\\"price\\": 800000}"\n            }'}}
+
+RAW: {
+  "mcqs": [
+      {
+         "question": "What is the primary function of the Django framework?",
+         "options": [
+            "A web framework for Python",
+            "A machine learning library for Python",
+            "A database management system for Python",
+            "A DevOps tool for Python"
+         ],
+         "answer": "A web framework for Python",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the RESTful API?",
+         "options": [
+            "To provide a single point of entry for all API requests",
+            "To enable seamless communication between systems",
+            "To handle all database operations",
+            "To manage all user authentication"
+         ],
+         "answer": "To enable seamless communication between systems",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main difference between a microservice and a monolithic architecture?",
+         "options": [
+            "Microservices are more scalable than monolithic architectures",
+            "Microservices are less secure than monolithic architectures",
+            "Microservices are more complex than monolithic architectures",
+            "Microservices are more modular than monolithic architectures"
+         ],
+         "answer": "Microservices are more modular than monolithic architectures",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure cloud platform?",
+         "options": [
+            "To provide a web framework for Python",
+            "To enable seamless communication between systems",
+            "To deploy, monitor, and scale applications",
+            "To manage all user authentication"
+         ],
+         "answer": "To deploy, monitor, and scale applications",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Git version control system?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To track changes to code and collaborate with others"
+         ],
+         "answer": "To track changes to code and collaborate with others",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the DevOps pipeline?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To automate workflows and improve collaboration"
+         ],
+         "answer": "To automate workflows and improve collaboration",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a containerization tool like Docker?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django ORM?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a high-level interface for interacting with databases"
+         ],
+         "answer": "To provide a high-level interface for interacting with databases",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure DevOps pipeline?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To automate workflows and improve collaboration"
+         ],
+         "answer": "To automate workflows and improve collaboration",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a microservice architecture?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django templates?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a way to render dynamic content"
+         ],
+         "answer": "To provide a way to render dynamic content",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure Key Vault?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To securely store and manage sensitive data"
+         ],
+         "answer": "To securely store and manage sensitive data",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a containerization tool like Docker?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django forms?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a way to validate and process user input"
+         ],
+         "answer": "To provide a way to validate and process user input",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure Active Directory?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide identity and access management"
+         ],
+         "answer": "To provide identity and access management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a microservice architecture?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django signals?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a way to send notifications and trigger actions"
+         ],
+         "answer": "To provide a way to send notifications and trigger actions",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure Storage?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To store and manage data"
+         ],
+         "answer": "To store and manage data",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a containerization tool like Docker?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django views?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a way to handle HTTP requests and return responses"
+         ],
+         "answer": "To provide a way to handle HTTP requests and return responses",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure Cognitive Services?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide AI and machine learning capabilities"
+         ],
+         "answer": "To provide AI and machine learning capabilities",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the main advantage of using a microservice architecture?",
+         "options": [
+            "To improve security",
+            "To increase complexity",
+            "To reduce scalability",
+            "To enable faster deployment and easier management"
+         ],
+         "answer": "To enable faster deployment and easier management",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the primary function of the Django templates?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To provide a way to render dynamic content"
+         ],
+         "answer": "To provide a way to render dynamic content",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the purpose of the Azure DevOps?",
+         "options": [
+            "To manage all user authentication",
+            "To handle all database operations",
+            "To enable seamless communication between systems",
+            "To automate workflows and improve collaboration"
+         ],
+         "answer": "To automate workflows and improve collaboration",
+         "difficulty": "Easy"
+      }]}
+
+[2026-03-25 09:51:17.454669+00:00] PUBLIC ACCESS: Token='f8cd5d4f-6174-4e01-a19a-d19a8913868e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1774432277122']}>
+Host: localhost:8001
+
+[2026-03-25 09:51:17.455027+00:00] PUBLIC ACCESS: Token='f8cd5d4f-6174-4e01-a19a-d19a8913868e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1774432277129']}>
+Host: localhost:8001
