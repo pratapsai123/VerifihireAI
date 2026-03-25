@@ -22,3 +22,28 @@
 [2026-03-25 05:43:16.767127+00:00] Page 1: 1624 chars extracted
 [2026-03-25 05:43:42.192454+00:00] Page 2: 703 chars extracted
 [2026-03-25 05:43:42.195029+00:00] OCR complete. Total chars: 3704
+[2026-03-25 11:58:23.473296+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-03-25 11:58:43.534379+00:00] fitz opened PDF with 3 pages
+[2026-03-25 11:59:14.690083+00:00] Page 0: 1374 chars extracted
+[2026-03-25 11:59:47.065103+00:00] Page 1: 1624 chars extracted
+[2026-03-25 12:00:08.302900+00:00] Page 2: 703 chars extracted
+[2026-03-25 12:00:08.306030+00:00] OCR complete. Total chars: 3704
+[2026-03-25 12:00:34.623459+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-03-25 12:01:47.413499+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-03-25 12:01:47.414256+00:00] fitz opened PDF with 3 pages
+[2026-03-25 12:02:15.194601+00:00] Page 0: 1374 chars extracted
+[2026-03-25 12:02:44.313671+00:00] Page 1: 1624 chars extracted
+[2026-03-25 12:03:07.398193+00:00] Page 2: 703 chars extracted
+[2026-03-25 12:03:07.398193+00:00] OCR complete. Total chars: 3704
+[2026-03-25 12:13:36.078275+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-03-25 12:13:53.146116+00:00] fitz opened PDF with 3 pages
+[2026-03-25 12:14:21.159146+00:00] Page 0: 1374 chars extracted
+[2026-03-25 12:14:51.944077+00:00] Page 1: 1624 chars extracted
+[2026-03-25 12:15:14.663243+00:00] Page 2: 703 chars extracted
+[2026-03-25 12:15:14.664345+00:00] OCR complete. Total chars: 3704
+[2026-03-25 12:23:27.953898+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-03-25 12:23:43.305408+00:00] fitz opened PDF with 3 pages
+[2026-03-25 12:24:16.674603+00:00] Page 0: 1374 chars extracted
+[2026-03-25 12:24:51.043222+00:00] Page 1: 1624 chars extracted
+[2026-03-25 12:26:11.256785+00:00] Page 2: 703 chars extracted
+[2026-03-25 12:26:11.277898+00:00] OCR complete. Total chars: 3704

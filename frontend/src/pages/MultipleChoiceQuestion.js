@@ -29,10 +29,10 @@ function MultipleChoiceQuestion() {
   ];
 
   const [description, setDescription] = useState('');
-  const [assessmentName, setAssessmentName] = useState('');
+  const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
   const [topicSkill, setTopicSkill] = useState('');
   const [answers, setAnswers] = useState(initialAnswers);
-  const [experienceLevel, setExperienceLevel] = useState('');
+  const [experienceLevel, setExperienceLevel] = useState(assessmentContext?.experienceLevel || '');
   const [timeToAnswer, setTimeToAnswer] = useState('');
   const [timeError, setTimeError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -130,10 +130,15 @@ function MultipleChoiceQuestion() {
   };
 
   const handleSave = async () => {
-    const caid = assessmentContext?.customAssessmentId || assessmentContext?.id;
+    const caid = assessmentContext?.customAssessmentId ||
+      assessmentContext?.id ||
+      localStorage.getItem(STORAGE_KEYS.DRAFT_ID) ||
+      localStorage.getItem('draftCustomAssessmentId') ||
+      (JSON.parse(localStorage.getItem('temp_assessment_context') || '{}'))?.customAssessmentId;
+      
     if (!caid) {
       // eslint-disable-next-line no-alert
-      alert('Custom assessment ID not found. Please go back to Review page and try again.');
+      alert(`Custom assessment ID not found (debug: state=${Boolean(location.state)} store=${Boolean(localStorage.getItem('draftCustomAssessmentId'))}). Please go back to the first page (Custom Assessment) and try again.`);
       return;
     }
 
@@ -216,7 +221,7 @@ function MultipleChoiceQuestion() {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
       // go back to Review page so the saved question appears there
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: true } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error saving MCQ:', error);

@@ -2080,7 +2080,7 @@ def submit_objective_section(request, token):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @csrf_exempt
-def save_candidate_details_view(request):
+def save_all_candidate_details_view(request):
     """
     Save candidate details before starting the assessment.
     Expected payload:
@@ -2113,8 +2113,26 @@ def save_candidate_details_view(request):
             )
 
         # Extract data
+        full_name = request.data.get('full_name', '').strip()
         first_name = request.data.get('first_name', '').strip()
         last_name = request.data.get('last_name', '').strip()
+
+        # If full_name is provided, use it to derive first/last if they are empty
+        if full_name:
+            parts = full_name.split(' ', 1)
+            if not first_name: first_name = parts[0]
+            if not last_name and len(parts) > 1: last_name = parts[1]
+        
+        # If we only have first/last, construct full_name for validation check
+        if not full_name and first_name:
+            full_name = f"{first_name} {last_name}".strip()
+
+        # Final check: if we still don't have first_name but have full_name...
+        # this is just to be absolutely safe
+        if not first_name and full_name:
+            first_name = full_name
+            last_name = ""
+
         email = request.data.get('email', '').strip()
         phone = request.data.get('phone', '').strip()
         pan_number = request.data.get('pan_number', '').strip().upper()
@@ -2122,9 +2140,25 @@ def save_candidate_details_view(request):
         pan_file = request.FILES.get('pan_file')
 
         # Validation
-        if not all([first_name, last_name, email, phone, pan_number, snapshot]):
+        missing_fields = []
+        if not full_name: missing_fields.append('full_name')
+        if not email: missing_fields.append('email')
+        if not phone: missing_fields.append('phone')
+        if not pan_number: missing_fields.append('pan_number')
+        if not snapshot: missing_fields.append('snapshot')
+        
+        # Split full name into first and last name for storage
+        if full_name:
+            parts = full_name.split(' ', 1)
+            first_name = parts[0]
+            last_name = parts[1] if len(parts) > 1 else ""
+        else:
+            first_name = ""
+            last_name = ""
+
+        if missing_fields:
             return Response(
-                {'error': 'All fields are required: first_name, last_name, email, phone, pan_number, snapshot'},
+                {'error': f"The following fields are required: {', '.join(missing_fields)}"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -2177,4 +2211,111 @@ def save_candidate_details_view(request):
             {'error': f'Failed to save candidate details: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_pan_backend_view(request):
+    """
+    Backend view for PAN card automated verification via OCR.
+    """
+    try:
+        pan_number_raw = request.data.get('pan_number', '').strip().upper()
+        # Clean the input PAN of any spaces or junk for robust comparison
+        pan_number = re.sub(r'[^A-Z0-9]', '', pan_number_raw)
+        pan_file = request.FILES.get('pan_file')
+
+        if not pan_number or not pan_file:
+            return Response({'error': 'PAN number and file are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Basic validation of PAN format
+        if not re.match(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$', pan_number):
+             return Response({'error': 'Invalid PAN number format'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check file type
+        is_pdf = pan_file.content_type == 'application/pdf' or pan_file.name.lower().endswith('.pdf')
+        is_image = pan_file.content_type.startswith('image/')
+
+        if not (is_image or is_pdf):
+            return Response({'error': 'File must be an image or PDF for OCR verification'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Perform OCR / Extraction
+        if is_pdf:
+            extracted_text, success = extract_text_from_pdf(pan_file, target_pan=pan_number)
+        else:
+            extracted_text, success = extract_text_from_image(pan_file, target_pan=pan_number)
+        # Clean extracted text for comparison
+        clean_extracted = re.sub(r'[^A-Z0-9]', '', (extracted_text or "").upper())
+        
+        # Find ALL valid-formatted PANs on the document
+        pan_pattern = re.compile(r'[A-Z]{5}[0-9]{4}[A-Z]{1}')
+        all_potential_pans = re.findall(pan_pattern, clean_extracted)
+
+        # Step 1: Direct containment check (fast)
+        if pan_number in clean_extracted:
+             return Response({
+                'success': True, 
+                'verified': True, 
+                'message': 'PAN verification successful',
+                'extracted_pan': pan_number
+            }, status=status.HTTP_200_OK)
+
+        # Step 2: Advanced Fuzzy Window Search (Check every 10-char slice)
+        potential_matches = [clean_extracted[i:i+10] for i in range(len(clean_extracted) - 9)]
+        found_fuzzy = False
+        
+        for p in potential_matches:
+            norm = ""
+            for i, char in enumerate(p):
+                if 5 <= i <= 8: # Numeric section
+                    if char in "OQ": norm += "0"
+                    elif char in "I|L": norm += "1"
+                    elif char == "S": norm += "5"
+                    elif char == "Z": norm += "2"
+                    elif char == "B": norm += "8"
+                    elif char == "G": norm += "6"
+                    else: norm += char
+                else: norm += char
+            
+            if norm == pan_number:
+                found_fuzzy = True
+                break
+        
+        if found_fuzzy:
+            return Response({
+                'success': True, 
+                'verified': True, 
+                'message': 'PAN verification successful (Fuzzy)',
+                'extracted_pan': pan_number
+            }, status=status.HTTP_200_OK)
+
+        # Step 3: Determine failure reason
+        # If we found OTHER pans but not the target one -> Mismatch
+        # If we found NOTHING or very little text -> Unclear
+        if len(all_potential_pans) > 0:
+            reason = 'mismatch'
+            msg = f"The PAN found on your document ({all_potential_pans[0]}) does not match the one you entered."
+        elif len(clean_extracted) < 15:
+            reason = 'unclear'
+            msg = "The image is not clear enough. Please upload a higher resolution copy."
+        else:
+            reason = 'mismatch'
+            msg = "We could not find your PAN number. Please ensure you uploaded the correct document."
+
+        return Response({
+            'success': True, 
+            'verified': False, 
+            'reason': reason,
+            'message': msg,
+            'extracted_pan': all_potential_pans[0] if all_potential_pans else "Not found",
+            'debug_info': clean_extracted[:100]
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f"Backend PAN Verification Error: {e}")
+        return Response({
+            'success': False,
+            'error': f'Failed to verify PAN: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

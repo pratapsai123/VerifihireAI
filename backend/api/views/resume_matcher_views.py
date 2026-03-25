@@ -77,6 +77,23 @@ def extract_skills_from_resume_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Name Extraction Heuristic: First non-empty line
+        extracted_name = ""
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        if lines:
+            extracted_name = lines[0]
+            # If name is too long or contains many spaces, it might not be a name
+            if len(extracted_name) > 50 or extracted_name.count(' ') > 5:
+                # Try second line? Or just use "Candidate"
+                if len(lines) > 1 and len(lines[1]) < 40 and lines[1].count(' ') < 4:
+                     extracted_name = lines[1]
+                else:
+                     extracted_name = "Candidate"
+        else:
+            extracted_name = "Candidate"
+
+        print(f"DEBUG: Probable name extracted: {extracted_name}")
+
         # Extract skills from text
         # Common technical skills database
         common_skills = [
@@ -154,6 +171,7 @@ def extract_skills_from_resume_view(request):
             {
                 'skills': extracted_skills,
                 'count': len(extracted_skills),
+                'name': extracted_name,
                 'message': f'Successfully extracted {len(extracted_skills)} skills from resume.'
             },
             status=status.HTTP_200_OK

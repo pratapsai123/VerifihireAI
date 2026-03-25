@@ -921,13 +921,18 @@ function CustomAssessment() {
       // Call API to extract skills
       const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
         },
       });
 
       // Set extracted skills from API response
       if (response.data && response.data.skills) {
         setExtractedSkills(response.data.skills);
+
+        // Save extracted name to localStorage for other pages
+        if (response.data.name) {
+          localStorage.setItem('recentCandidateName', response.data.name);
+        }
       } else {
         setExtractedSkills([]);
       }
@@ -980,13 +985,18 @@ function CustomAssessment() {
       // Call API to extract skills
       const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
         },
       });
 
       // Set extracted skills from API response
       if (response.data && response.data.skills) {
         setExtractedSkills(response.data.skills);
+
+        // Even for JD, if there's a name, we can store it (though less likely)
+        if (response.data.name) {
+          localStorage.setItem('recentCandidateName', response.data.name);
+        }
       } else {
         setExtractedSkills([]);
       }
@@ -1372,11 +1382,14 @@ function CustomAssessment() {
     // If we have a draft id, verify it actually exists in the backend DB before reusing it.
     if (draftId) {
       try {
-        await axios.get(`${API_BASE_URL} /custom-assessments/${draftId}/`);
+        await axios.get(`${API_BASE_URL}/custom-assessments/${draftId}/`);
         return draftId;
       } catch (err) {
-        // Stale/invalid draft id or backend unavailable — don't trust it.
-        clearDraft();
+        // Only clear if it's explicitly "Not Found". 
+        // If the server is just down/unreachable, keep the ID in localStorage for later retries.
+        if (err.response?.status === 404) {
+          clearDraft();
+        }
       }
     }
 
@@ -1394,7 +1407,7 @@ function CustomAssessment() {
       }
     } catch (error) {
       console.error('Error saving custom assessment:', error);
-      clearDraft();
+      // Don't clearDraft() on creation failure unless it was a validation error
     }
 
     return null;
@@ -1577,6 +1590,53 @@ function CustomAssessment() {
     navigate('/review-assessment', { state: assessmentData });
   };
 
+  const handleSkipToManual = async () => {
+    // Collect user from localStorage for payload
+    let userData = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      organization_name: '',
+    };
+    try {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        userData = JSON.parse(storedUser);
+      }
+    } catch {
+      // ignore parse errors
+    }
+
+    // Prepare payload for a minimal custom assessment draft
+    const payload = {
+      user: {
+        first_name: userData.first_name || '',
+        last_name: userData.last_name || '',
+        email: userData.email || 'guest@manual.creation',
+        organization_name: userData.organization_name || '',
+      },
+      assessment: {
+        role: formData.role || 'Manual Assessment',
+        experience_level: formData.experienceLevel || 'mid',
+        number_of_questions: 10,
+        time: '00:30:00',
+        sub_roles: [],
+      },
+    };
+
+    const savedAssessmentId = await resolveCustomAssessmentId(payload);
+
+    // Prepare minimal assessment data to pass to manual pages
+    const skipAssessmentData = {
+      ...formData,
+      role: formData.role || 'Manual Assessment',
+      experienceLevel: formData.experienceLevel || 'mid',
+      customAssessmentId: savedAssessmentId || null,
+    };
+
+    navigate('/manual-questions', { state: skipAssessmentData });
+  };
+
   return (
     <div className="custom-assessment-container">
 
@@ -1637,7 +1697,7 @@ function CustomAssessment() {
               type="button"
               className="custom-skip-btn"
               style={{ position: 'absolute', top: '0', right: '0', marginBottom: 0 }}
-              onClick={() => navigate('/manual-questions')}
+              onClick={handleSkipToManual}
               aria-label="Skip to creating custom questions"
             >
               Skip

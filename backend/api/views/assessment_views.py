@@ -1155,12 +1155,12 @@ def create_custom_assessment_view(request):
 
 
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET', 'PATCH', 'PUT'])
 @permission_classes([IsAuthenticated])
 def get_custom_assessment_view(request, custom_assessment_id: int):
     """
-    Fetch a CustomAssessment by ID.
-    Used by the frontend to validate a locally-stored draftCustomAssessmentId.
+    Fetch or partial-update a CustomAssessment by ID.
+    Used by the frontend to validate drafts or update fields (like role inline).
     """
     try:
         try:
@@ -1180,6 +1180,24 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
                  if user_profile.company != ca.user_profile.company:
                       return Response({'error': 'Not authorized to view this CustomAssessment.'}, status=status.HTTP_403_FORBIDDEN)
 
+        # Handle PATCH/PUT request (Partial Update)
+        if request.method in ['PATCH', 'PUT']:
+            data = request.data or {}
+            # Allow updating basic fields 
+            allowed_fields = ['role', 'experience_level', 'number_of_questions', 'time', 'display_name', 'custom_role']
+            updated_any = False
+            for field in allowed_fields:
+                if field in data:
+                    setattr(ca, field, data[field])
+                    updated_any = True
+            
+            if updated_any:
+                try:
+                    ca.save()
+                except Exception as e:
+                    return Response({'error': f'Failed to save update: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Build response payload
         return Response(
             {
                 'id': ca.id,
@@ -1187,11 +1205,22 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
                 'updated_at': ca.updated_at.isoformat() if getattr(ca, 'updated_at', None) else None,
                 'role': ca.role,
                 'custom_role': ca.custom_role,
+                'sub_roles': ca.sub_roles or [],
                 'experience_level': ca.experience_level,
                 'number_of_questions': ca.number_of_questions,
                 'time': ca.time,
+                'auto_time': ca.auto_time,
                 'organization_name': ca.organization_name,
                 'email': ca.email,
+                'extracted_skills': ca.extracted_skills or [],
+                'suggested_skills': ca.suggested_skills or [],
+                'common_skills': ca.common_skills or [],
+                'removed_skills': ca.removed_skills or [],
+                'question_distribution': ca.question_distribution or {},
+                'weight_common': ca.weight_common,
+                'weight_role': ca.weight_role,
+                'weight_resume': ca.weight_resume,
+                'resume_file_name': ca.resume_file_name,
             },
             status=status.HTTP_200_OK
         )
