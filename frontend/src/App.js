@@ -9,6 +9,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
 import Assessment from './pages/Assessment';
+import ViewAssessment from './pages/ViewAssessment';
 import InviteCandidates from './pages/InviteCandidates';
 import TakeAssessment from './pages/TakeAssessment';
 import Result from './pages/Result';
@@ -131,6 +132,7 @@ function AppContent() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/assessments" element={<Assessment />} />
+            <Route path="/view-assessment/:id" element={<ViewAssessment />} />
             <Route path="/custom-assessment" element={<CustomAssessment />} />
             <Route path="/review-assessment" element={<ReviewPage />} />
             <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />

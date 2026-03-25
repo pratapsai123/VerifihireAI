@@ -1775,6 +1775,58 @@ def get_assessment_detail_view(request, assessment_id: int):
             a.save()
             return Response({'ok': True, 'message': 'Assessment updated successfully.'})
 
+        # Fetch questions
+        aq_qs = (
+            AssessmentQuestion.objects.filter(assessment=a)
+            .select_related('question')
+            .order_by('order')
+        )
+        questions = []
+        for aq in aq_qs:
+            questions.append(
+                {
+                    'id': aq.id,
+                    'order': aq.order,
+                    'skill': aq.skill,
+                    'question_type': aq.question_type,
+                    'difficulty': aq.difficulty,
+                    'time_limit': aq.time_limit,
+                    'question': aq.question.question if aq.question else None,
+                    'option_a': aq.option_a,
+                    'option_b': aq.option_b,
+                    'option_c': aq.option_c,
+                    'option_d': aq.option_d,
+                    'correct_answer': aq.correct_answer,
+                    'correct_answers': aq.correct_answers,
+                }
+            )
+
+        acq_qs = (
+            AssessmentCodingQuestion.objects.filter(assessment=a)
+            .select_related('coding_question')
+            .order_by('order')
+        )
+        coding_questions = []
+        for acq in acq_qs:
+            cq = acq.coding_question
+            coding_questions.append(
+                {
+                    'id': acq.id,
+                    'coding_question_id': cq.id if cq else None,
+                    'order': acq.order,
+                    'title': acq.title,
+                    'description': acq.description,
+                    'languages': acq.languages or [],
+                    'allowed_languages': acq.allowed_languages or [],
+                    'mode': acq.mode,
+                    'starter_code': acq.starter_code,
+                    'template_code': acq.template_code,
+                    'difficulty': acq.difficulty,
+                    'time_limit_ms': acq.time_limit_ms,
+                    'memory_limit_mb': acq.memory_limit_mb,
+                }
+            )
+
         return Response(
             {
                 'id': a.id,
@@ -1784,8 +1836,19 @@ def get_assessment_detail_view(request, assessment_id: int):
                 'experience_level': a.experience_level,
                 'total_questions': a.total_questions,
                 'total_time': a.total_time,
+                'objective_time_limit': a.objective_time_limit,
+                'coding_time_limit': a.coding_time_limit,
+                'coding_total_time': a.coding_total_time,
+                'coding_question_count': a.coding_question_count,
+                'min_pass_percentage': a.min_pass_percentage,
+                'has_objective_cutoff': a.has_objective_cutoff,
+                'min_objective_pass_percentage': a.min_objective_pass_percentage,
+                'weightage_objective': a.weightage_objective,
+                'weightage_coding': a.weightage_coding,
                 'invite_token': str(a.invite_token) if getattr(a, 'invite_token', None) else None,
                 'created_at': a.created_at.isoformat() if a.created_at else None,
+                'questions': questions,
+                'coding_questions': coding_questions,
             },
             status=status.HTTP_200_OK
         )
