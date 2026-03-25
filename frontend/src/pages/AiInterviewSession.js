@@ -61,6 +61,7 @@ const AiInterviewSession = () => {
     const lastSpokenTimeRef = useRef(Date.now());
     const lastTranscriptStrRef = useRef("");
     const micStreamRef = useRef(null); // Holds the active MediaStream to physically mute/unmute mic hardware
+    const consecutiveSilenceRef = useRef(0); // Track consecutive [Silent] answers to auto-exit if candidate leaves
 
     // 1. Load Voices
     useEffect(() => {
@@ -679,6 +680,19 @@ const AiInterviewSession = () => {
         }
         if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
         setSilenceCountdown(0);
+
+        // 3. Track Consecutive Silence (to end interview if candidate leaves)
+        if (answer === "[Candidate remained silent/skipped]") {
+            consecutiveSilenceRef.current += 1;
+        } else {
+            consecutiveSilenceRef.current = 0;
+        }
+
+        if (consecutiveSilenceRef.current >= 3) {
+            console.log("Consecutive silence limit reached (3). Ending interview.");
+            completeInterview("The interview has been ended due to lack of response. We will review the answers provided so far. Thank you.");
+            return;
+        }
 
         addMessage('user', answer);
         setResponseInput('');
