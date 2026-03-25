@@ -1,43 +1,6 @@
 from .._imports import *
 import datetime
 
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-@csrf_exempt
-def get_candidate_details_view(request, token):
-    """
-    Get candidate details for a given token.
-    """
-    try:
-        candidate_details = CandidateDetails.objects.get(token=token)
-        
-        return Response({
-            'success': True,
-            'data': {
-                'id': candidate_details.id,
-                'first_name': candidate_details.first_name,
-                'last_name': candidate_details.last_name,
-                'email': candidate_details.email,
-                'phone': candidate_details.phone,
-                'pan_number': candidate_details.pan_number,
-                'pan_file': candidate_details.pan_file.url if candidate_details.pan_file else None,
-                'snapshot': candidate_details.snapshot,
-                'created_at': candidate_details.created_at.isoformat(),
-                'updated_at': candidate_details.updated_at.isoformat(),
-            }
-        }, status=status.HTTP_200_OK)
-
-    except CandidateDetails.DoesNotExist:
-        return Response(
-            {'error': 'Candidate details not found'},
-            status=status.HTTP_404_NOT_FOUND
-        )
-    except Exception as e:
-        return Response(
-            {'error': f'Failed to retrieve candidate details: {str(e)}'},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_interview_invitations_and_send_email_view(request):
