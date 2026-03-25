@@ -852,6 +852,7 @@ class ProcessAnswerView(APIView):
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
         candidate_name = "Candidate"
+        job_title = "Technical Professional"
         resume_context = "No resume available."
         jd_context = "No job description available."
         
@@ -862,6 +863,7 @@ class ProcessAnswerView(APIView):
                 else:
                     candidate = Candidate.objects.get(pk=candidate_id)
                     candidate_name = candidate.full_name
+                    job_title = candidate.job_title or job_title
                     jd_context = candidate.job_description or jd_context
                     if candidate.resume_text:
                          resume_context = candidate.resume_text
@@ -881,12 +883,14 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
 
             prompt = f"""
-        Role: "Rigorous Technical Auditor & Expert Interviewer". 
+        Role: "Expert Interviewer for the position of {job_title}". 
         Candidate: {candidate_name}
-        Job Context: {jd_context[:200]}
+        Job Description: {jd_context[:1000]}
         
         GOAL:
-        Determine if the Candidate Answer is (A) A CLARIFICATION REQUEST, (B) An EXIT REQUEST, or (C) An ACTUAL ANSWER.
+        Interview the candidate for the SPECIFIC Job Description provided. 
+        While you should acknowledge their background in the Resume, your PRIMARY goal is to evaluate their fit for the {job_title} role. 
+        If the JD requires specific skills (e.g. Java, SQL) that aren't prominent in the Resume, you MUST ask questions to verify their proficiency in those required areas.
 
         (A) CLARIFICATION REQUEST - Trigger if:
         - The candidate explicitly asks to repeat: "repeat that", "pardon", "what?".
