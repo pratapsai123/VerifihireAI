@@ -908,12 +908,15 @@ class ProcessAnswerView(APIView):
         - NEVER loop more than once on the same question. If they tried to answer (even with just "I don't know"), MOVE ON.
         - DO NOT be a robot. If they gave any info, acknowledge it briefly and move to a DIFFERENT topic.
         
-        QUESTION VARIETY (Across 10 turns):
-        - You MUST include exactly 2 SYNTAX-BASED questions (e.g. "Write a function to...", "What is the syntax for...").
-        - You MUST include exactly 2 SCENARIO-BASED questions (e.g. "Imagine you are...", "How would you handle...").
-        - Check the CONVERSATION HISTORY to see how many of each you have already asked.
-        - For SYNTAX-BASED questions, you MUST set "requires_code_input": true.
-        - For SCENARIO-BASED or general questions, set "requires_code_input": false.
+        STRICT INTERVIEW SEQUENCE (Total 10 Questions):
+        - Turn 1-6: General Technical & Behavioral questions based on JD/Resume.
+        - Turn 7-8: SCENARIO-BASED questions (e.g. "Imagine you are...", "How would you handle...").
+        - Turn 9-10: SYNTAX-BASED questions (e.g. "Write a function...", "What is the syntax for...").
+        
+        INSTRUCTIONS:
+        - Check the CONVERSATION HISTORY to identify which turn number you are on.
+        - For Turn 9 and 10 (SYNTAX), you MUST set "requires_code_input": true.
+        - For all other turns (1-8), you MUST set "requires_code_input": false.
 
         IF (A) CLARIFICATION REQUEST:
         1. Set "is_clarification": true, "is_exit": false.

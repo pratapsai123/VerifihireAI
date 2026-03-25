@@ -206,8 +206,18 @@ const AiInterviewSession = () => {
 
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
+        
+        // Immediate State Lock: Stop silence watchdog before promise starts
+        setIsSpeaking(true);
+        isSpeakingRef.current = true;
+        setAiStatus("Speaking...");
+
         return new Promise((resolve) => {
-            if (!text) return resolve();
+            if (!text) {
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                return resolve();
+            }
 
             // Safety Watchdog: If speech fails to end, resolve anyway after a timeout
             // 200ms per character + 3s buffer is extremely safe
@@ -593,6 +603,8 @@ const AiInterviewSession = () => {
                 recorder.startRecording();
                 isRecordingRef.current = true;
                 setIsRecording(true);
+                // CRITICAL: Reset the activity timer so the 5s watchdog starts fresh from NOW
+                lastSpokenTimeRef.current = Date.now();
 
                 assemblyAIRef.current = {
                     stop: () => {
@@ -800,6 +812,8 @@ const AiInterviewSession = () => {
                     setIsRecording(false);
                     isRecordingRef.current = false;
                 } else {
+                    effectiveMode = 'audio';
+                    setUserInputMode('audio');
                     setAiStatus("Indu is Online");
                 }
 
@@ -846,6 +860,8 @@ const AiInterviewSession = () => {
                     setIsRecording(false);
                     isRecordingRef.current = false;
                 } else {
+                    effectiveMode = 'audio';
+                    setUserInputMode('audio');
                     setAiStatus("Indu is Online");
                 }
 
