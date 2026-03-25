@@ -1632,6 +1632,7 @@ def results_overview_view(request):
             results.append(
                 {
                     'submission_id': s.id,
+                    'invitation_id': inv.id,
                     'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
                     'candidate': {
                         'name': inv.name,
@@ -1701,8 +1702,66 @@ def results_overview_view(request):
                 }
             )
 
-        # Re-sort combined results by submitted_at
-        results.sort(key=lambda x: str(x['submitted_at'] or ''), reverse=True)
+        # Also include non-submitted invitations (Standard Assessments)
+        if company_id:
+            if scoped_ids is None:
+                inv_qs = CandidateInvitation.objects.filter(
+                    assessment__user_profile__company_id=company_id,
+                    submission__isnull=True
+                ).select_related('assessment')
+            else:
+                inv_qs = CandidateInvitation.objects.filter(
+                    Q(user_profile_id__in=scoped_ids) | Q(assessment__user_profile_id__in=scoped_ids),
+                    submission__isnull=True
+                ).select_related('assessment')
+            
+            if start_date:
+                inv_qs = inv_qs.filter(created_at__date__gte=start_date)
+            if end_date:
+                inv_qs = inv_qs.filter(created_at__date__lte=end_date)
+            
+            now = timezone.now()
+            for inv in inv_qs[:300]:
+                a = inv.assessment
+                # Logic: if current time > end_time -> not_attempted, else sent
+                inv_status = 'sent'
+                if inv.end_time and now > inv.end_time:
+                    inv_status = 'not_attempted'
+                
+                results.append({
+                    'submission_id': None,
+                    'invitation_id': inv.id,
+                    'submitted_at': None,
+                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
+                    'candidate': {
+                        'name': inv.name,
+                        'email': inv.email,
+                    },
+                    'assessment': {
+                        'id': a.id,
+                        'display_name': a.display_name,
+                        'name': a.name,
+                        'weightage_objective': a.weightage_objective,
+                        'weightage_coding': a.weightage_coding,
+                    },
+                    'score': 0,
+                    'total': 0,
+                    'percentage': 0,
+                    'objective_score': 0,
+                    'objective_total': 0,
+                    'objective_percentage': 0,
+                    'coding_score': 0,
+                    'coding_total': 0,
+                    'coding_percentage': 0,
+                    'status': inv_status,
+                    'integrity': {
+                        'integrity_score': None,
+                        'warning_logs': []
+                    }
+                })
+
+        # Re-sort combined results by submitted_at (fallback to created_at for invites)
+        results.sort(key=lambda x: str(x.get('submitted_at') or x.get('created_at') or ''), reverse=True)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:

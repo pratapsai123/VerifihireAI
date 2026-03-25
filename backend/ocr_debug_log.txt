@@ -1,0 +1,24 @@
+[2026-03-24 11:14:59.053187+00:00] Starting PDF OCR via fitz (pymupdf) rendering
+[2026-03-24 11:14:59.056846+00:00] fitz opened PDF with 3 pages
+[2026-03-24 11:15:23.473193+00:00] Page 0: 1374 chars extracted
+[2026-03-24 11:15:49.442520+00:00] Page 1: 1624 chars extracted
+[2026-03-24 11:16:07.729683+00:00] Page 2: 703 chars extracted
+[2026-03-24 11:16:07.729683+00:00] OCR complete. Total chars: 3704
+[2026-03-24 11:32:45.841025+00:00] Starting PDF OCR via fitz (pymupdf) rendering
+[2026-03-24 11:32:56.681002+00:00] fitz opened PDF with 3 pages
+[2026-03-24 11:33:17.337198+00:00] Page 0: 1374 chars extracted
+[2026-03-24 11:33:39.588715+00:00] Page 1: 1624 chars extracted
+[2026-03-24 11:33:56.465163+00:00] Page 2: 703 chars extracted
+[2026-03-24 11:33:56.466173+00:00] OCR complete. Total chars: 3704
+[2026-03-25 05:30:19.554398+00:00] Starting PDF OCR via fitz (pymupdf) rendering
+[2026-03-25 05:30:42.983023+00:00] fitz opened PDF with 3 pages
+[2026-03-25 05:31:17.195260+00:00] Page 0: 1374 chars extracted
+[2026-03-25 05:31:42.944767+00:00] Page 1: 1624 chars extracted
+[2026-03-25 05:31:59.458184+00:00] Page 2: 703 chars extracted
+[2026-03-25 05:31:59.459868+00:00] OCR complete. Total chars: 3704
+[2026-03-25 05:41:36.689865+00:00] Starting PDF OCR via fitz (pymupdf) rendering
+[2026-03-25 05:42:07.380454+00:00] fitz opened PDF with 3 pages
+[2026-03-25 05:42:41.190658+00:00] Page 0: 1374 chars extracted
+[2026-03-25 05:43:16.767127+00:00] Page 1: 1624 chars extracted
+[2026-03-25 05:43:42.192454+00:00] Page 2: 703 chars extracted
+[2026-03-25 05:43:42.195029+00:00] OCR complete. Total chars: 3704

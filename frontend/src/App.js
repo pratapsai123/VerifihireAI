@@ -12,7 +12,6 @@ import Assessment from './pages/Assessment';
 import InviteCandidates from './pages/InviteCandidates';
 import TakeAssessment from './pages/TakeAssessment';
 import Result from './pages/Result';
-import CandidatePage from './pages/CandidatePage';
 import ManualQuestions from './pages/ManualQuestions';
 import MultipleChoiceQuestion from './pages/MultipleChoiceQuestion';
 import MultipleSelectionQuestion from './pages/MultipleSelectionQuestion';
@@ -132,7 +131,6 @@ function AppContent() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/assessments" element={<Assessment />} />
-            <Route path="/candidates" element={<CandidatePage />} />
             <Route path="/custom-assessment" element={<CustomAssessment />} />
             <Route path="/review-assessment" element={<ReviewPage />} />
             <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />

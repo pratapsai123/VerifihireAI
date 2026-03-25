@@ -14,9 +14,10 @@ pandas
 openpyxl
 reportlab
 Pillow
-google-generativeai
+
 groq
 easyocr
+pymupdf
 celery
 redis
 djangorestframework-simplejwt

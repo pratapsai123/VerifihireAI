@@ -208,14 +208,7 @@ export default function Assessment() {
                           >
                             Invite
                           </button>
-                          <button
-                            type="button"
-                            className="btn-tertiary"
-                            onClick={() => copyToClipboard(inviteLink)}
-                            disabled={!inviteLink}
-                          >
-                            Copy link
-                          </button>
+
                         </div>
                       </td>
                     </tr>
