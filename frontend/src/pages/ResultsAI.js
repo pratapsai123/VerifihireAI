@@ -707,12 +707,23 @@ const ResultsAI = () => {
                                         <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
                                     </div>
                                 ) : (
-                                    summaryModal.interview_summary.map((turn, i) => (
                                         <div key={i} style={{ 
                                             background: 'white', borderRadius: '24px', padding: '2rem', 
-                                            boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2'
+                                            boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2',
+                                            position: 'relative', overflow: 'hidden'
                                         }}>
-                                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+                                            {/* Score Badge */}
+                                            <div style={{
+                                                position: 'absolute', top: '1.5rem', right: '1rem',
+                                                background: (turn.score || 0) >= 7 ? '#E6FBF5' : (turn.score || 0) >= 4 ? '#FFFBEB' : '#FFF5F5',
+                                                color: (turn.score || 0) >= 7 ? '#05CD99' : (turn.score || 0) >= 4 ? '#F59E0B' : '#EE5D50',
+                                                padding: '0.4rem 1rem', borderRadius: '12px', fontSize: '0.9rem', fontWeight: '900',
+                                                border: `1px solid ${(turn.score || 0) >= 7 ? '#05CD9944' : (turn.score || 0) >= 4 ? '#F59E0B44' : '#EE5D5044'}`
+                                            }}>
+                                                Marks: {turn.score || 0}/10
+                                            </div>
+
+                                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', paddingRight: '120px' }}>
                                                 <div style={{ 
                                                     width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #4F46E5, #4338CA)', 
                                                     color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
@@ -726,7 +737,7 @@ const ResultsAI = () => {
                                                 </div>
                                             </div>
                                             
-                                            <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem', background: '#F8FAFC', borderRadius: '16px', border: '1px solid #E2E8F0' }}>
+                                            <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem', background: '#F8FAFC', borderRadius: '16px', border: '1px solid #E2E8F0', marginBottom: '1rem' }}>
                                                 <div style={{ flex: 1 }}>
                                                     <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Candidate Response</div>
                                                     <p style={{ margin: 0, fontWeight: '500', color: '#334155', fontSize: '1rem', lineHeight: '1.7' }}>
@@ -734,8 +745,39 @@ const ResultsAI = () => {
                                                     </p>
                                                 </div>
                                             </div>
+
+                                            {turn.reason && (
+                                                <div style={{ padding: '1rem 1.5rem', background: '#F1F5F9', borderRadius: '12px', borderLeft: '4px solid #4318FF' }}>
+                                                    <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4318FF', textTransform: 'uppercase', marginBottom: '0.3rem' }}>AI Justification</div>
+                                                    <p style={{ margin: 0, fontSize: '0.9rem', color: '#475569', fontWeight: '600', lineHeight: '1.5' }}>{turn.reason}</p>
+                                                </div>
+                                            )}
                                         </div>
                                     ))
+                                )}
+
+                                {/* Total Calculation Summary */}
+                                {summaryModal.interview_summary && summaryModal.interview_summary.length > 0 && (
+                                    <div style={{ 
+                                        background: 'linear-gradient(135deg, #4F46E5, #4338CA)', 
+                                        borderRadius: '24px', padding: '2.5rem', color: 'white',
+                                        textAlign: 'center', boxShadow: '0 20px 40px rgba(67, 24, 255, 0.2)',
+                                        marginTop: '1rem', marginBottom: '2rem'
+                                    }}>
+                                        <h3 style={{ margin: '0 0 1.5rem 0', fontSize: '1.4rem', fontWeight: '800', opacity: 0.9 }}>Interview Performance Summary</h3>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                                            <div>
+                                                <div style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', opacity: 0.7, marginBottom: '0.5rem' }}>Total Marks Obtained</div>
+                                                <div style={{ fontSize: '2.5rem', fontWeight: '900' }}>{summaryModal.score} <span style={{ fontSize: '1.2rem', opacity: 0.6 }}>/ {summaryModal.interview_summary.length * 10}</span></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', opacity: 0.7, marginBottom: '0.5rem' }}>Overall Percentage</div>
+                                                <div style={{ fontSize: '2.5rem', fontWeight: '900' }}>
+                                                    {Math.round((summaryModal.score / (summaryModal.interview_summary.length * 10)) * 100)}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
                             </div>
                         </div>

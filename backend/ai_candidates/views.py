@@ -952,8 +952,9 @@ class ProcessAnswerView(APIView):
             "is_exit": boolean,
             "feedback": "...",
             "refined_next_question": "...",
-            "requires_code_input": boolean, // Set to true IF AND ONLY IF the next question specifically asks for code, logic, or syntax.
-            "score": integer
+            "requires_code_input": boolean,
+            "score": integer,
+            "score_reason": "Provide a CONCISE (1-sentence) justification for the score given to the candidate's LAST answer."
         }}
         """
 
@@ -1039,7 +1040,8 @@ class ProcessAnswerView(APIView):
                             "question": current_question,
                             "answer": answer,
                             "feedback": data.get('feedback', ''),
-                            "score": q_score
+                            "score": q_score,
+                            "reason": data.get('score_reason', 'No reasoning provided.')
                         })
                         
                         candidate.save()
