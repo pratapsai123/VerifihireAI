@@ -441,26 +441,42 @@ const AiTakeAssessment = () => {
             // Capture Screen
             if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
                 try {
+                    // Quick draw from the live stream track using ImageCapture if available,
+                    // otherwise rely on a pre-existing background video element.
+                    // For maximum compatibility and speed, we create a quick video element, 
+                    // but we don't wait for loadedmetadata if it takes too long.
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
                     video.muted = true;
                     video.playsInline = true;
 
-                    await new Promise((resolve, reject) => {
+                    await new Promise((resolve) => {
+                        let resolved = false;
+                        // Fallback timeout because loadedmetadata might not fire if tab is fully backgrounded
+                        const fallback = setTimeout(() => {
+                            if (!resolved) { resolved = true; resolve(); }
+                        }, 300);
+
                         video.onloadedmetadata = () => {
-                            video.play()
-                                .then(() => {
-                                    setTimeout(resolve, 100);
-                                })
-                                .catch(reject);
+                            video.play().then(() => {
+                                if (!resolved) {
+                                    resolved = true;
+                                    clearTimeout(fallback);
+                                    setTimeout(resolve, 50); // slight delay to paint
+                                }
+                            }).catch(() => {
+                                if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+                            });
                         };
-                        video.onerror = reject;
+                        video.onerror = () => {
+                            if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+                        };
                     });
 
                     const canvas = screenCanvasRef.current;
                     const ctx = canvas.getContext('2d');
-                    canvas.width = video.videoWidth || 1280;
-                    canvas.height = video.videoHeight || 720;
+                    canvas.width = video.videoWidth || window.innerWidth || 1280;
+                    canvas.height = video.videoHeight || window.innerHeight || 720;
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                     screenshot = canvas.toDataURL('image/jpeg', 0.5);
 
@@ -472,7 +488,7 @@ const AiTakeAssessment = () => {
             }
 
             // Capture Webcam
-            if (['multiface_detection', 'phone_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+            if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
                 try {
                     const camCanvas = document.createElement('canvas');
                     camCanvas.width = videoRef.current.videoWidth || 640;
@@ -500,16 +516,24 @@ const AiTakeAssessment = () => {
                 detectInterval = setInterval(async () => {
                     if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
                         const now = Date.now();
-                        if (now - lastDetectionTimeRef.current > 2000) {
+                        if (now - lastDetectionTimeRef.current > 1500) {
                             lastDetectionTimeRef.current = now;
                             const preds = await detectorRef.current.detect(videoRef.current);
-                            if (preds.find(p => p.class === 'cell phone')) showAiEvent('PHONE DETECTED', true, 'phone_detection');
-                            const people = preds.filter(p => p.class === 'person');
-                            if (people.length > 1) showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-                            else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                            
+                            // Filter by confidence score
+                            const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
+                            const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
+
+                            if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
+                            
+                            if (people.length > 1) {
+                                showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+                            } else if (people.length === 0) {
+                                showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                            }
                         }
                     }
-                }, 1000);
+                }, 800);
             }
         };
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
@@ -525,6 +549,22 @@ const AiTakeAssessment = () => {
             stopCamera();
         };
     }, [isStarted, submissionId, showAiEvent]);
+
+    // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
+    useEffect(() => {
+        if (!isStarted || !submissionId || submitted) return;
+
+        const bgInterval = setInterval(() => {
+            // If candidate is actively looking at our tab, do nothing
+            if (!document.hidden && document.hasFocus()) return;
+
+            // If they are hidden (different tab) or blurred (different window), capture every 5s
+            const eventType = document.hidden ? 'tab_switch' : 'window_switch';
+            showAiEvent('BACKGROUND ACTIVITY DETECTED', true, eventType);
+        }, 5000);
+
+        return () => clearInterval(bgInterval);
+    }, [showAiEvent, isStarted, submissionId, submitted]);
 
     // Save progress periodically (debounced)
     // Also exposes saveProgress via ref so beforeunload can call it synchronously

@@ -630,7 +630,7 @@ class UpdateIntegrityView(APIView):
                 integrity.phone_detections += 1
             elif event_type == 'multiface_detection':
                 integrity.multiface_detections += 1
-            elif event_type == 'no_face_detection':
+            elif event_type in ['no_face_detection', 'face_detection_lost']:
                 integrity.no_face_detections += 1
             
             # Grace Warning System Phase 2: Handle First 3 as Warnings

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Download, Trash2 } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -372,7 +373,7 @@ export default function Result() {
                                                         }
                                                     }}
                                                 >
-                                                    ⬇
+                                                    <Download size={18} />
                                                 </button>
                                             ) : (
                                                 <div style={{ width: '32px' }}></div>
@@ -422,7 +423,7 @@ export default function Result() {
                                                     }
                                                 }}
                                             >
-                                                🗑
+                                                <Trash2 size={18} />
                                             </button>
                                         </td>
                                     </tr>
