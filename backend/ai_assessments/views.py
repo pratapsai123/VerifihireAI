@@ -196,6 +196,10 @@ class SubmitAssessmentView(APIView):
 
 
 class GenerateAssessmentView(APIView):
+    PRIMARY_MODEL = "llama-3.3-70b-versatile"
+    FALLBACK_MODEL = "llama-3.1-8b-instant"
+    _fallback_until = 0
+
     def post(self, request):
         data = request.data
         job_description = data.get('job_description')
@@ -358,20 +362,6 @@ class GenerateAssessmentView(APIView):
             logger.info(f"Using Groq for Granular Assessment Generation ({total_possible_points} pts)")
             local_api_key = getattr(settings, 'GROQ_API_KEY', None)
             local_groq_client = Groq(api_key=local_api_key)
-
-            # --- AUTO MODEL FALLBACK & COOLDOWN ---
-            import time as _time
-            PRIMARY_MODEL = "llama-3.3-70b-versatile"
-            FALLBACK_MODEL = "llama-3.1-8b-instant"
-            COOLDOWN_SECONDS = 300 # 5 minutes
-
-            if not hasattr(GenerateAssessmentView, '_fallback_until'):
-                GenerateAssessmentView._fallback_until = 0
-
-            initial_model = PRIMARY_MODEL
-            if _time.time() < GenerateAssessmentView._fallback_until:
-                initial_model = FALLBACK_MODEL
-                logger.info(f"70b is in cooldown, starting with {FALLBACK_MODEL}")
             
             attempts = 0
             max_attempts = 3
@@ -383,8 +373,14 @@ class GenerateAssessmentView(APIView):
                 attempts += 1
                 logger.info(f"AI Generation Attempt {attempts}/{max_attempts}")
                 
-                chosen_model = initial_model
-                
+                # --- AUTO MODEL FALLBACK ---
+                import time as _time
+                if _time.time() < GenerateAssessmentView._fallback_until:
+                    chosen_model = self.FALLBACK_MODEL
+                    logger.info(f"Using fallback model {self.FALLBACK_MODEL} (70b cooldown active for {int(GenerateAssessmentView._fallback_until - _time.time())}s)")
+                else:
+                    chosen_model = self.PRIMARY_MODEL
+
                 try:
                     response = local_groq_client.chat.completions.create(
                         model=chosen_model,
@@ -398,13 +394,13 @@ class GenerateAssessmentView(APIView):
                     )
                 except Exception as model_err:
                     error_str = str(model_err).lower()
-                    if ("rate limit" in error_str or "429" in error_str) and chosen_model == PRIMARY_MODEL:
-                        # 70b hit rate limit → activate cooldown and retry with 8b immediately
-                        GenerateAssessmentView._fallback_until = _time.time() + COOLDOWN_SECONDS
-                        logger.warning(f"70b rate-limited during assessment generation! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
-                        initial_model = FALLBACK_MODEL
+                    if ("rate limit" in error_str or "429" in error_str) and chosen_model == self.PRIMARY_MODEL:
+                        # 70b hit rate limit → activate cooldown and retry this attempt with 8b immediately
+                        GenerateAssessmentView._fallback_until = _time.time() + 300 # 5 min cooldown
+                        logger.warning(f"70b rate-limited during assessment! Falling back to {self.FALLBACK_MODEL} for 5 mins.")
+                        chosen_model = self.FALLBACK_MODEL
                         response = local_groq_client.chat.completions.create(
-                            model=FALLBACK_MODEL,
+                            model=chosen_model,
                             messages=[
                                 {"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only. ALWAYS provide the EXACT counts requested."}, 
                                 {"role": "user", "content": current_prompt}
@@ -414,8 +410,8 @@ class GenerateAssessmentView(APIView):
                             temperature=0.1 if attempts == 1 else 0.2
                         )
                     else:
+                        # Re-raise if it's not a rate limit or we're already on fallback
                         raise model_err
-
                 raw_text = response.choices[0].message.content
                 if not raw_text: continue
 
