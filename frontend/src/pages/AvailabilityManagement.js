@@ -4,8 +4,6 @@ import { API_BASE_URL } from '../apiConfig';
 import { 
     Calendar, 
     Clock, 
-    Plus, 
-    Trash2, 
     Info,
     CalendarCheck,
     Loader2,
@@ -192,7 +190,9 @@ const AvailabilityManagement = () => {
 
                     <div className="slots-picker-grid">
                         {dailySlots.map(time => {
-                            const isSelected = windows.some(w => w.date === selectedDate && w.start_time === time);
+                            const window = windows.find(w => w.date === selectedDate && w.start_time === time);
+                            const isSelected = !!window;
+                            const isBooked = window?.is_booked;
                             const isLoading = actionLoading === `${selectedDate}_${time}`;
                             
                             // Check if slot is in the past (with a 60-minute prep buffer)
@@ -207,12 +207,14 @@ const AvailabilityManagement = () => {
                             return (
                                 <button
                                     key={time}
-                                    className={`slot-toggle-btn ${isSelected ? 'active' : ''} ${isLoading ? 'loading' : ''} ${isPast ? 'past' : ''}`}
-                                    onClick={() => !isLoading && !isPast && toggleSlot(time)}
-                                    disabled={isLoading || isPast}
+                                    className={`slot-toggle-btn ${isSelected ? 'active' : ''} ${isBooked ? 'booked' : ''} ${isLoading ? 'loading' : ''} ${isPast ? 'past' : ''}`}
+                                    onClick={() => !isLoading && !isPast && !isBooked && toggleSlot(time)}
+                                    disabled={isLoading || isPast || isBooked}
+                                    title={isBooked ? "This slot is booked and cannot be removed" : ""}
                                 >
-                                    {isLoading ? <Loader2 className="animate-spin" size={16} /> : <Clock size={16} />}
+                                    {isLoading ? <Loader2 className="animate-spin" size={16} /> : (isBooked ? <CalendarCheck size={16} /> : <Clock size={16} />)}
                                     <span>{formatTime(time)}</span>
+                                    {isBooked && <span className="booked-badge">Booked</span>}
                                 </button>
                             );
                         })}
