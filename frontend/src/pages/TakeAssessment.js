@@ -1577,44 +1577,6 @@ export default function TakeAssessment() {
 
   return (
     <div className="take-page take-exam-mode">
-      {!isFullscreen && !submitted && candidateDetailsCompleted && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'rgba(0,0,0,0.95)',
-          zIndex: 100000,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'white',
-          textAlign: 'center',
-          padding: '2rem'
-        }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>⚠️ Full Screen Required</h1>
-          <p style={{ fontSize: '1.2rem', color: '#A3AED0', maxWidth: '600px', marginBottom: '2rem' }}>
-            To maintain assessment integrity, you must be in full screen mode. This event has been logged.
-          </p>
-          <button
-            onClick={requestFullscreen}
-            style={{
-              padding: '1rem 2rem',
-              background: '#4318FF',
-              color: 'white',
-              border: 'none',
-              borderRadius: '12px',
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              cursor: 'pointer'
-            }}
-          >
-            Re-enter Full Screen
-          </button>
-        </div>
-      )}
       {aiToast.active && (
         <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
           <span style={{ fontSize: '1rem' }}>{aiToast.urgent ? '⚠️' : 'ℹ️'}</span>

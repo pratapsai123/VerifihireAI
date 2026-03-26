@@ -570,17 +570,22 @@ const CandidateDetails = ({ token, onComplete }) => {
     let panMismatch = false;
     let panNotExtracted = false;
 
+    if (data.isExtractingPan) {
+      alert("Please wait for PAN verification to complete.");
+      return;
+    }
+
     if (data.panFile) {
       if (data.extractedPan) {
-        // Extraction successful, must match
+        // Extraction result is in
         panMismatch = data.panMatch === false;
       } else if (data.extractionFailed) {
         // Extraction failed, must have manual confirmation
         if (!data.manualConfirmation) {
-          panNotExtracted = true; // Treat as not extracted/verified
+          panNotExtracted = true;
         }
-      } else if (!data.isExtractingPan) {
-        // Not extracting, no result, not failed? changing file...
+      } else {
+        // No result yet and not currently extracting (but we already checked isExtractingPan above)
         panNotExtracted = true;
       }
     }
@@ -776,14 +781,14 @@ const CandidateDetails = ({ token, onComplete }) => {
                           formData.append('pan_file', targetFile);
 
                           axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
-                            headers: { 
+                            headers: {
                               // 'Content-Type': 'multipart/form-data', // Let the browser set the boundary
                               'Authorization': `Bearer ${localStorage.getItem('token')}`
                             }
                           })
                             .then(response => {
                               const { verified, extracted_pan, message } = response.data;
-                              
+
                               setData(prev => ({
                                 ...prev,
                                 extractedPan: extracted_pan || prev.extractedPan,
@@ -1039,7 +1044,17 @@ const CandidateDetails = ({ token, onComplete }) => {
 
           {/* SUBMIT */}
           <div className="candidate-button-row">
-            <button type="submit" className="candidate-button">Submit Application</button>
+            <button
+              type="submit"
+              className={`candidate-button ${data.isExtractingPan ? 'candidate-button-disabled' : ''}`}
+              disabled={data.isExtractingPan}
+            >
+              {data.isExtractingPan ? (
+                <>
+                  <span className="candidate-spinner"></span> Verifying PAN...
+                </>
+              ) : 'Submit Application'}
+            </button>
           </div>
 
           {showError && (
