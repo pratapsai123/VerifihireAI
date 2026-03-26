@@ -237,23 +237,29 @@ def _generate_coding_pool_ai_only(
         prompt = base_prompt
 
         for attempt in range(attempts_per_batch):
-            response = groq_client.chat.completions.create(
-                model="llama-3.1-8b-instant",
-                messages=[
-                    {"role": "system", "content": "You output valid JSON only."},
-                    {"role": "user", "content": prompt},
-                ],
-                response_format={"type": "json_object"},
-                max_tokens=4096,
-                temperature=0.2,
-            )
-            raw = response.choices[0].message.content or ""
-            parsed = _normalize_generated_pool(extract_json(raw) or {})
-            coding = parsed.get('coding_challenges', [])
+            try:
+                response = groq_client.chat.completions.create(
+                    model="llama-3.1-8b-instant",
+                    messages=[
+                        {"role": "system", "content": "You output valid JSON only."},
+                        {"role": "user", "content": prompt},
+                    ],
+                    response_format={"type": "json_object"},
+                    max_tokens=4096,
+                    temperature=0.2,
+                )
+                raw = response.choices[0].message.content or ""
+                parsed = _normalize_generated_pool(extract_json(raw) or {})
+                coding = parsed.get('coding_challenges', [])
 
-            if len(coding) >= batch_count:
-                batch_data = coding[:batch_count]
-                break
+                if len(coding) >= batch_count:
+                    batch_data = coding[:batch_count]
+                    break
+            except Exception as batch_err:
+                logger.warning(f"Coding batch generation attempt {attempt+1} failed: {batch_err}")
+                import time
+                time.sleep(1 * (attempt + 1)) # Simple backoff
+                continue
 
             prompt = (
                 base_prompt
@@ -314,24 +320,30 @@ def _generate_mcq_pool_ai_only(
         prompt = base_prompt
 
         for attempt in range(attempts_per_batch):
-            response = groq_client.chat.completions.create(
-                model="llama-3.1-8b-instant",
-                messages=[
-                    {"role": "system", "content": "You output valid JSON only."},
-                    {"role": "user", "content": prompt},
-                ],
-                response_format={"type": "json_object"},
-                max_tokens=4096,
-                temperature=0.2,
-            )
-            raw = response.choices[0].message.content or ""
-            parsed = _normalize_generated_pool(extract_json(raw) or {})
-            mcqs = parsed.get('mcqs', [])
-            same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
+            try:
+                response = groq_client.chat.completions.create(
+                    model="llama-3.1-8b-instant",
+                    messages=[
+                        {"role": "system", "content": "You output valid JSON only."},
+                        {"role": "user", "content": prompt},
+                    ],
+                    response_format={"type": "json_object"},
+                    max_tokens=4096,
+                    temperature=0.2,
+                )
+                raw = response.choices[0].message.content or ""
+                parsed = _normalize_generated_pool(extract_json(raw) or {})
+                mcqs = parsed.get('mcqs', [])
+                same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
-            if len(same_diff) >= count:
-                batch_mcqs = same_diff[:count]
-                break
+                if len(same_diff) >= count:
+                    batch_mcqs = same_diff[:count]
+                    break
+            except Exception as mcq_err:
+                logger.warning(f"MCQ batch generation attempt {attempt+1} failed: {mcq_err}")
+                import time
+                time.sleep(1 * (attempt+1))
+                continue
 
             prompt = (
                 base_prompt
