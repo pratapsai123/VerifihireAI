@@ -707,6 +707,7 @@ const ResultsAI = () => {
                                         <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
                                     </div>
                                 ) : (
+                                    summaryModal.interview_summary.map((turn, i) => (
                                         <div key={i} style={{ 
                                             background: 'white', borderRadius: '24px', padding: '2rem', 
                                             boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2',
