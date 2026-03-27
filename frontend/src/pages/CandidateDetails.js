@@ -20,8 +20,8 @@ const validateField = (field, value) => {
   }
 };
 
-const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false }) => {
-  const hasValue = value.trim().length > 0;
+const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false, required = true }) => {
+  const hasValue = String(value || '').trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
   const showRedBorder = errorEmpty || !formatValid;
@@ -29,7 +29,9 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
   return (
     <div className="candidate-input-group">
       <div className="candidate-label-row">
-        <label className="candidate-static-label" style={{ marginBottom: 0 }}>{label}</label>
+        <label className="candidate-static-label" style={{ marginBottom: 0 }}>
+          {label} {required && <span style={{ color: '#1d4ed8', marginLeft: '2px' }}>*</span>}
+        </label>
       </div>
       <input
         type={type}
@@ -296,6 +298,26 @@ const CandidateDetails = ({ token, onComplete }) => {
     snapshotValid: false, // Whether captured snapshot has face and is not blurry
     invitedEmail: null, // Store the email they were invited with for validation
   });
+
+  // Live re-verification of PAN when input changes
+  useEffect(() => {
+    if (data.extractedPan && data.pan && data.pan.trim().length === 10) {
+      const currentPan = data.pan.toUpperCase().trim();
+      const extracted = data.extractedPan.toUpperCase().trim();
+      const isMatch = currentPan === extracted;
+      
+      // Update state ONLY if mismatch state needs to change
+      if (isMatch !== data.panMatch) {
+        setData(prev => ({
+          ...prev,
+          panMatch: isMatch,
+          // If it matches now, clear the extraction failure flag
+          extractionFailed: !isMatch,
+          extractionStatus: isMatch ? 'Verified' : (prev.extractionStatus || 'Mismatch')
+        }));
+      }
+    }
+  }, [data.pan, data.extractedPan, data.panMatch]);
 
   // Fetch invitation data to pre-fill fields
   useEffect(() => {
@@ -737,7 +759,7 @@ const CandidateDetails = ({ token, onComplete }) => {
               <div className="candidate-input-group">
                 <div className="candidate-label-row">
                   <label className="candidate-static-label" style={{ marginBottom: 0, whiteSpace: 'nowrap' }}>
-                    Upload PAN Card <span className="candidate-hint-text" style={{ marginLeft: '10px', fontWeight: '600', opacity: 0.9 }}>(Allowed formats: .png, .jpg, .jpeg, .pdf, Max 2.5MB)</span>
+                    Upload PAN Card <span style={{ color: '#1d4ed8', marginLeft: '2px' }}>*</span> <span className="candidate-hint-text" style={{ marginLeft: '10px', fontWeight: '600', opacity: 0.9 }}>(Allowed formats: .png, .jpg, .jpeg, .pdf, Max 2.5MB)</span>
                   </label>
                 </div>
                 <input
