@@ -14,8 +14,8 @@ function Header() {
     <header className="vh-header">
       <div className="vh-header__container">
         <div className="vh-header__left">
-          <span className="vh-header__title" onClick={handleLogoClick}>
-            VerifiHireAI
+          <span className="vh-header__logo" onClick={handleLogoClick}>
+            VerifiHire<span className="vh-header__logo-ai">AI</span>
           </span>
         </div>
         <div className="vh-header__right">

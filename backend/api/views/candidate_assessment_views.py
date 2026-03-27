@@ -1,4 +1,7 @@
 from .._imports import *
+from ai_candidates.models import Candidate
+from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
+from ..models import CandidateSubmission
 
 
 @csrf_exempt
@@ -1581,22 +1584,26 @@ def results_overview_view(request):
     try:
         user_profile = getattr(request.user, 'profile', None)
         company_id = user_profile.company_id if user_profile and user_profile.company else None
+        scoped_ids = get_scoped_user_ids(user_profile) if user_profile else []
 
-        if company_id:
-            scoped_ids = get_scoped_user_ids(user_profile)
-            if scoped_ids is None:
-                # Application Admin: all results across the company
+        if scoped_ids is None:
+            # Application Admin: all results across ALL companies (platform superadmin)
+            if company_id:
                 qs = CandidateSubmission.objects.filter(
                     invitation__assessment__user_profile__company_id=company_id,
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
             else:
-                from django.db.models import Q
-                # Role-scoped: results for candidates either invited by this user's hierarchy OR taking an assessment created by this user's hierarchy
                 qs = CandidateSubmission.objects.filter(
-                    Q(invitation__user_profile_id__in=scoped_ids) | Q(invitation__assessment__user_profile_id__in=scoped_ids),
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
+        elif company_id and scoped_ids:
+            from django.db.models import Q
+            # Role-scoped: results for candidates either invited by this user's hierarchy OR taking an assessment created by this user's hierarchy
+            qs = CandidateSubmission.objects.filter(
+                Q(invitation__user_profile_id__in=scoped_ids) | Q(invitation__assessment__user_profile_id__in=scoped_ids),
+                is_deleted=False
+            ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
         else:
             qs = CandidateSubmission.objects.none()
 
@@ -1611,22 +1618,67 @@ def results_overview_view(request):
         
         # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
         if scoped_ids is None:
+            if company_id:
+                ai_qs = AIAssessmentSubmission.objects.filter(
+                    assessment__company_id=company_id
+                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+            else:
+                ai_qs = AIAssessmentSubmission.objects.all(
+                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
+            # Broaden for corporate roles: see all in company
             ai_qs = AIAssessmentSubmission.objects.filter(
                 assessment__company_id=company_id
-            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
-        else:
+                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        elif scoped_ids:
             ai_qs = AIAssessmentSubmission.objects.filter(
                 assessment__user_profile_id__in=scoped_ids
             ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        else:
+            ai_qs = AIAssessmentSubmission.objects.none()
         
         if start_date:
             ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
         if end_date:
             ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
 
+        # Similar logic for AI Candidate interviews
+        if scoped_ids is None:
+            if company_id:
+                ai_cand_qs = Candidate.objects.filter(
+                    company_id=company_id,
+                    is_deleted=False,
+                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+                ).order_by('-submission_date')
+            else:
+                ai_cand_qs = Candidate.objects.filter(
+                    is_deleted=False,
+                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+                ).order_by('-submission_date')
+        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
+            # Broaden: see all in company, especially those with user_profile=None or created by others
+            ai_cand_qs = Candidate.objects.filter(
+                company_id=company_id,
+                is_deleted=False,
+                status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+            ).order_by('-submission_date')
+        elif scoped_ids:
+            ai_cand_qs = Candidate.objects.filter(
+                user_profile_id__in=scoped_ids,
+                is_deleted=False,
+                status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+            ).order_by('-submission_date')
+        else:
+            ai_cand_qs = Candidate.objects.none()
+            
+        if start_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__date__gte=start_date)
+        if end_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__date__lte=end_date)
+
         # Combine and limit
         results = []
-        for s in qs[:400]:
+        for s in qs[:5000]:
             inv = s.invitation
             a = inv.assessment
             results.append(
@@ -1658,6 +1710,7 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
 
                     'status': s.result,
+                    'answers': getattr(s, 'answers', {}),
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                         'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
@@ -1665,40 +1718,113 @@ def results_overview_view(request):
                 }
             )
 
-        for s in ai_qs[:400]:
+        for s in ai_qs[:5000]:
             a = s.assessment
+            
+            # Fetch integrity screenshots for this submission
+            integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=s).order_by('timestamp')
+            screenshots_data = []
+            for snap in integrity_snapshots:
+                screenshots_data.append({
+                    "event_type": snap.event_type,
+                    "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                    "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                    "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                })
+
             results.append(
                 {
+                    'id': s.id,
                     'submission_id': f"ai_{s.id}",
                     'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else None,
+                    'full_name': getattr(s, 'candidate_name', 'Unknown'),
+                    'email': getattr(s, 'candidate_email', 'Unknown'),
                     'candidate': {
                         'name': getattr(s, 'candidate_name', 'Unknown'),
                         'email': getattr(s, 'candidate_email', 'Unknown'),
                     },
                     'assessment': {
                         'id': f"ai_{a.id}",
-                        'display_name': getattr(a, 'title', str(a.id)),
-                        'name': getattr(a, 'title', str(a.id)),
+                        'display_name': getattr(a, 'required_skills', str(a.id)),
+                        'name': getattr(a, 'required_skills', str(a.id)),
                         'weightage_objective': 0,
                         'weightage_coding': 100,
                     },
                     'score': getattr(s, 'score', 0),
-                    'total': getattr(s, 'total', 100),
+                    'total': getattr(s, 'total_possible', 100), # Model has total_questions, SubmitView uses results_breakdown.total_possible
                     'percentage': getattr(s, 'percentage', 0),
                     
                     'objective_score': 0,
                     'objective_total': 0,
                     'objective_percentage': 0,
                     
-                    'coding_score': getattr(s, 'score', 0),
-                    'coding_total': getattr(s, 'total', 100),
+                    'coding_score': getattr(s, 'coding_score', 0),
+                    'coding_total': getattr(s, 'results_breakdown', {}).get('coding', {}).get('total', 100),
                     'coding_percentage': getattr(s, 'percentage', 0),
 
                     'status': getattr(s, 'status', 'COMPLETED'),
+                    'total_questions': getattr(s, 'total_questions', 0),
+                    'candidate_questions': getattr(s, 'candidate_questions', None) or getattr(a, 'generated_content', {}),
+                    'answers': getattr(s, 'answers', {}),
+                    'results_breakdown': getattr(s, 'results_breakdown', {}),
+                    'mcq_score': getattr(s, 'mcq_score', 0),
                     'integrity': {
                         'integrity_score': getattr(s, 'integrity_score', 100.0),
                         'warning_logs': getattr(s, 'warning_logs', [])
-                    }
+                    },
+                    'integrity_screenshots': screenshots_data,
+                    'is_resume_screening': False
+                }
+            )
+
+        for s in ai_cand_qs[:5000]:
+            submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.submission_date.isoformat() if getattr(s, 'submission_date', None) else None)
+            results.append(
+                {
+                    'submission_id': f"aicand_{s.id}",
+                    'submitted_at': submitted_date_iso,
+                    'full_name': s.full_name,
+                    'email': s.email,
+                    'candidate': {
+                        'name': s.full_name,
+                        'email': s.email,
+                    },
+                    'assessment': {
+                        'id': f"aicand_{s.id}",
+                        'display_name': s.job_title or "AI Interview",
+                        'name': s.job_title or "AI Interview",
+                        'weightage_objective': 0,
+                        'weightage_coding': 100,
+                    },
+                    'score': s.score,
+                    'total': 100,
+                    'percentage': s.score,
+                    
+                    'objective_score': 0,
+                    'objective_total': 0,
+                    'objective_percentage': 0,
+                    
+                    'coding_score': s.score,
+                    'coding_total': 100,
+                    'coding_percentage': s.score,
+
+                    'status': s.status,
+                    'is_resume_screening': True,
+                    'interview_summary': s.interview_summary,
+                    'total_questions': getattr(s, 'total_questions', 0),
+                    'resume_score': getattr(s, 'resume_score', 0),
+                    'integrity': {
+                        'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
+                        'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
+                    },
+                    'integrity_logs': [
+                        {
+                            'event_type': log.event_type,
+                            'screenshot_base64': log.screenshot_base64,
+                            'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                            'timestamp': log.timestamp.isoformat() if log.timestamp else None
+                        } for log in s.integrity_logs.all()
+                    ]
                 }
             )
 

@@ -90,11 +90,26 @@ const InterviewStart = () => {
                 const response = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/`);
                 setCandidate(response.data);
                 setLoading(false);
+
+                // REDIRECT LOGIC: If candidate already has questions, go straight to session
+                if (response.data.interview_questions && response.data.interview_questions.length > 0) {
+                    console.log("Candidate has existing questions. Redirecting to session...");
+                    const sessionData = {
+                        candidateId: response.data.id,
+                        candidateName: response.data.full_name,
+                        questions: response.data.interview_questions,
+                        status: 'interview_started'
+                    };
+                    sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
+                    navigate(`/ai-interview-session/${token}`);
+                }
             } catch (err) {
                 if (err.response?.status === 403 && err.response?.data?.link_expired) {
                     setLinkExpired(true);
+                } else if (err.response?.status === 404) {
+                    setError('Candidate not found. Testing the link as a scoped user? Or the link is invalid.');
                 } else {
-                    setError('Invalid or expired interview link.');
+                    setError(err.response?.data?.error || err.message || 'Invalid or expired interview link.');
                 }
                 setLoading(false);
             }

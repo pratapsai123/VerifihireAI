@@ -22,3 +22,5 @@ celery
 redis
 djangorestframework-simplejwt
 pygments
+pymupdf
+edge-tts

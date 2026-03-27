@@ -316,7 +316,7 @@ const Dashboard = () => {
           role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
           nestedItems: [
             { label: 'Start Session', path: '/ai-interview' },
-            { label: 'Result', path: '/results-ai' }
+            { label: 'Result', path: '/results-ai?tab=interview' }
           ]
         }
       ]

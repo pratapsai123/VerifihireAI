@@ -21,7 +21,7 @@
 }
 
 .results-page {
-    min-height: 100vh;
+    height: 100%;
     background: linear-gradient(-45deg, #f0f4ff, #f8f0ff, #f0faff, #f5f0ff);
     background-size: 400% 400%;
     animation: meshGradient 15s ease infinite alternate;
@@ -79,7 +79,9 @@
     gap: 0.75rem;
     position: relative;
     z-index: 1;
-    padding: 0 4rem 3rem;
+    padding: 0 4rem 1rem;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* Glass Card Component for the main table area */
@@ -110,7 +112,7 @@
 }
 
 .results-header h1 {
-    font-size: 3.2rem;
+    font-size: 1.8rem;
     font-weight: 900;
     letter-spacing: -0.04em;
     margin: 0;
@@ -236,10 +238,250 @@
     overflow: hidden;
 }
 
+/* Reports & Detail Page Styling */
+.report-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 2rem 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.report-breadcrumb {
+    color: #4F46E5;
+    font-weight: 800;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.report-breadcrumb:hover {
+    transform: translateX(-5px);
+    color: #4338ca;
+}
+
+.report-title-section h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #1e293b;
+    margin: 0;
+}
+
+.report-title-section p {
+    color: #64748b;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    flex: 1;
+    min-height: 0; /* Crucial for internal scrolling */
+    overflow: hidden;
+    padding-bottom: 1.5rem;
+}
+
+.report-sidebar, .report-main {
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 1.5rem;
+}
+
+.report-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.report-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.report-sidebar::-webkit-scrollbar-track { background: transparent; }
+.report-sidebar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+.sidebar-card {
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    border: 1px solid #f1f5f9;
+}
+
+.sidebar-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.report-main {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    border: 1px solid #f1f5f9;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.transcript-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.transcript-timeline::-webkit-scrollbar {
+    width: 5px;
+}
+
+.transcript-timeline::-webkit-scrollbar-track { background: #f8fafc; }
+.transcript-timeline::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+.timeline-turn {
+    position: relative;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.timeline-turn:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ai-prompt {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.ai-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2);
+}
+
+.ai-text {
+    flex: 1;
+}
+
+.ai-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #4f46e5;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.ai-question {
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #1e293b;
+    margin: 0;
+}
+
+.candidate-block {
+    margin-left: 4rem;
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 20px;
+    border-left: 4px solid #cbd5e1;
+}
+
+.candidate-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.candidate-answer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.7;
+    color: #334155;
+    margin: 0;
+}
+
+.marks-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 0.85rem;
+}
+
 /* Responsive tweaks */
 @media (max-width: 1100px) {
     .results-container {
         padding: 0 2rem 2rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+    .report-sidebar {
+        position: static;
     }
 }
 
@@ -256,4 +498,30 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+}
+
+/* Integrity Gallery Scroll */
+.integrity-gallery-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 0.5rem;
+}
+
+.integrity-gallery-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.integrity-gallery-scroll::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.integrity-gallery-scroll::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.integrity-gallery-scroll::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
 }

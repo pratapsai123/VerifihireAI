@@ -275,6 +275,7 @@
     font-size: 0.85rem;
     font-weight: 800;
     box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+    pointer-events: none;
 }
 
 /* Threshold & Availability Section */

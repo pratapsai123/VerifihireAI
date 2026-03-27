@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
+import { RealtimeTranscriber } from 'assemblyai';
 import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
@@ -10,7 +12,7 @@ const AiInterviewSession = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
-    const MAX_QUESTIONS = 10;
+    const [maxQuestions, setMaxQuestions] = useState(13);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [chatMessages, setChatMessages] = useState([]);
@@ -25,6 +27,11 @@ const AiInterviewSession = () => {
     const [integrityBreech, setIntegrityBreech] = useState({ active: false, text: '' });
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
     const [isCompleted, setIsCompleted] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(null); // Timer in seconds
+    const [sttReady, setSttReady] = useState(false); // New state for WS status
+    const [silenceCountdown, setSilenceCountdown] = useState(0);
+    const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     // Refs
     const videoRef = useRef(null);
@@ -40,11 +47,29 @@ const AiInterviewSession = () => {
     const isProcessingRef = useRef(false);
     const isSpeakingRef = useRef(false);
     const isRecordingRef = useRef(false);
+    const isCompletedRef = useRef(false);
+    const timeExpiredRef = useRef(false); // Flag to gracefully end after current answer if time runs out
     const silenceTimerRef = useRef(null);
     const globalSilenceTimerRef = useRef(null);
     const nudgeCountRef = useRef(0);
     const transcriptRef = useRef("");
+    const interimTranscriptRef = useRef("");
     const submitHandlerRef = useRef(null);
+    const assemblyAIRef = useRef(null);
+    const startListeningRef = useRef(null);
+    const canvasRef = useRef(null);
+    const animationRef = useRef(null);
+    const visualizerCtxRef = useRef(null);
+    const lastSpokenTimeRef = useRef(Date.now());
+    const lastTranscriptStrRef = useRef("");
+    const micStreamRef = useRef(null); // Holds the active MediaStream to physically mute/unmute mic hardware
+    const consecutiveSilenceRef = useRef(0); // Track consecutive [Silent] answers to auto-exit if candidate leaves
+    const screenStreamRef = useRef(null);
+    const screenCanvasRef = useRef(null);
+    const lastCaptureTimeRef = useRef({}); // Store timestamps per eventType for cooldowns
+    const isFullscreenRef = useRef(false);
+    const currentAudioRef = useRef(null);
+    const isStartingMicRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -76,30 +101,103 @@ const AiInterviewSession = () => {
         }
     };
 
+    const startScreenShare = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: { displaySurface: 'monitor' },
+                audio: false
+            });
+            const track = stream.getVideoTracks()[0];
+            if (track.getSettings().displaySurface !== 'monitor') {
+                track.stop();
+                alert('Please share your "Entire Screen" to proceed. Tab/Window sharing is prohibited.');
+                return false;
+            }
+            screenStreamRef.current = stream;
+            track.onended = () => {
+                showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
+            };
+            return true;
+        } catch (err) {
+            console.error("Screen share error:", err);
+            alert('Screen sharing (Entire Screen) is required to start the interview.');
+            return false;
+        }
+    };
+
     const stopCamera = () => {
         if (streamRef.current) {
             streamRef.current.getTracks().forEach(track => track.stop());
             streamRef.current = null;
         }
+        if (screenStreamRef.current) {
+            screenStreamRef.current.getTracks().forEach(track => track.stop());
+            screenStreamRef.current = null;
+        }
     };
 
-    const reportViolation = useCallback(async (eventType) => {
+    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
         try {
             await axios.post(`${API_BASE_URL}/ai-candidates/${token}/integrity/`, {
-                event_type: eventType
+                event_type: eventType,
+                screenshot: screenshot,
+                webcam_screenshot: webcamScreenshot
             });
         } catch (err) {
             console.error("Failed to report violation:", err);
         }
     }, [token]);
 
-    const showAiEvent = useCallback((text, urgent = false, eventType = null) => {
+    const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
         setAiToast({ active: true, text, urgent });
         if (urgent) {
             setIntegrityBreech({ active: true, text });
             setTimeout(() => setIntegrityBreech({ active: false, text: '' }), 3000);
         }
-        if (eventType) reportViolation(eventType);
+
+        if (eventType) {
+            // Throttling: 5-second cooldown per event type to prevent flooding the DB/UI
+            const now = Date.now();
+            const lastTime = lastCaptureTimeRef.current[eventType] || 0;
+            if (now - lastTime < 5000) return;
+            lastCaptureTimeRef.current[eventType] = now;
+
+            let screenshot = null;
+            let webcamScreenshot = null;
+
+            // Capture Screen (if screen event)
+            if (['tab_switch', 'window_blur', 'screen_stop'].includes(eventType) && screenStreamRef.current) {
+                try {
+                    const video = document.createElement('video');
+                    video.srcObject = screenStreamRef.current;
+                    video.play();
+                    await new Promise(r => setTimeout(r, 100)); // Brief wait for stream to render
+                    
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth || 1280;
+                    canvas.height = video.videoHeight || 720;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0);
+                    screenshot = canvas.toDataURL('image/jpeg', 0.3); // Lower quality for screen (it's large)
+                    video.pause();
+                } catch (e) { console.warn("Screen capture failed:", e); }
+            }
+
+            // Always capture Webcam for context
+            if (videoRef.current && videoRef.current.readyState === 4) {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = videoRef.current.videoWidth;
+                    canvas.height = videoRef.current.videoHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(videoRef.current, 0, 0);
+                    webcamScreenshot = canvas.toDataURL('image/jpeg', 0.5);
+                } catch (e) { console.warn("Webcam capture failed:", e); }
+            }
+
+            reportViolation(eventType, screenshot, webcamScreenshot);
+        }
+
         setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
     }, [reportViolation]);
 
@@ -170,80 +268,274 @@ const AiInterviewSession = () => {
         initAiMonitoring();
         const sc = startCamera; // Reference for cleanup if needed
 
+        const handleFullscreenChange = () => {
+            const isFS = !!document.fullscreenElement;
+            setIsFullscreen(isFS);
+            isFullscreenRef.current = isFS;
+
+            if (isFS && isPermissionsGranted) {
+                console.log("Integrity: Fullscreen restored. Resuming hardware...");
+                // 1. Unmute Hardware Tracks
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
+                if (streamRef.current) {
+                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
+                }
+                // 2. Ensure video element is playing
+                if (videoRef.current) {
+                    videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
+                }
+                // (Note: startListening is now handled by a dedicated useEffect for better sync)
+                setAiStatus("Interview Resumed");
+            }
+
+            if (!isFS && isPermissionsGranted) {
+                console.log("Integrity: Fullscreen exited. Pausing hardware...");
+                // 1. Physically Mute Microphone Hardware
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = false; });
+                }
+                // 2. Mute Camera Hardware
+                if (streamRef.current) {
+                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = false; });
+                }
+
+                // 3. Stop AssemblyAI STT
+                if (assemblyAIRef.current) {
+                    try { assemblyAIRef.current.stop(); } catch (e) { }
+                }
+                
+                // 3. Stop Speech (Browser TTS)
+                window.speechSynthesis.cancel();
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+
+                // 4. Stop Speech (Coqui TTS)
+                if (currentAudioRef.current) {
+                    try {
+                        currentAudioRef.current.pause();
+                        currentAudioRef.current.volume = 0; // Absolute silence
+                        currentAudioRef.current = null;
+                    } catch (e) { }
+                }
+                setAiStatus("Interview Paused (Not in Full Screen)");
+            }
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
         return () => {
             if (detectInterval) clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('blur', handleBlur);
-            // sc(); // Optional: stop camera on unmount if appropriate
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
         };
     }, [token, showAiEvent]);
 
-    // 3. Speech and Interactions
+    // 3. CONTINUOUS PRIVACY HAMMER: Mutes everything 10 times a second if not in FS
+    useEffect(() => {
+        if (!isFullscreen && isPermissionsGranted && !isCompleted) {
+            const hammer = setInterval(() => {
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                if (currentAudioRef.current) {
+                    try {
+                        currentAudioRef.current.pause();
+                        currentAudioRef.current.volume = 0;
+                    } catch (e) {}
+                }
+            }, 100);
+            return () => clearInterval(hammer);
+        }
+    }, [isFullscreen, isPermissionsGranted, isCompleted]);
+
+    // 4. Speech and Interactions
+    const unlockSpeech = useCallback(() => {
+        if (!synthRef.current) return;
+        // Playing a silent 0.01s utterance unlocks the browser's speech synthesis
+        const silentU = new SpeechSynthesisUtterance(" ");
+        silentU.volume = 0;
+        synthRef.current.speak(silentU);
+    }, []);
+
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
-        return new Promise((resolve) => {
-            if (!text) return resolve();
 
-            // Safety Watchdog: If speech fails to end, resolve anyway after a timeout
-            // 200ms per character + 3s buffer is extremely safe
-            const timeoutMs = Math.max(3000, (text.length * 200) + 3000);
-            const watchdog = setTimeout(() => {
-                console.warn("📢 Speak Watchdog triggered (Possible browser speech hang)");
+        if (!isFullscreenRef.current && isPermissionsGranted) {
+            console.log("Speak blocked: Not in full screen.");
+            return Promise.resolve();
+        }
+
+        // Immediate State Lock: Stop silence watchdog before promise starts
+        setIsSpeaking(true);
+        isSpeakingRef.current = true;
+        setAiStatus("Speaking...");
+
+        return new Promise(async (resolve) => {
+            if (!text) {
                 setIsSpeaking(false);
                 isSpeakingRef.current = false;
+                return resolve();
+            }
+
+            // Physically mute the mic hardware while Indu speaks
+            if (micStreamRef.current) {
+                micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = false; });
+            }
+
+            // Safety Watchdog: resolve anyway after a generous timeout
+            const timeoutMs = Math.max(15000, (text.length * 200) + 5000);
+            const watchdog = setTimeout(() => {
+                console.warn("📢 Speak Watchdog triggered (TTS timeout)");
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
                 resolve();
             }, timeoutMs);
 
-            synthRef.current.cancel();
-            // Force resume (Chrome bug fix)
-            if (synthRef.current.paused) synthRef.current.resume();
+            try {
+                // --- COQUI TTS: POST text to backend and play the returned WAV ---
+                const res = await axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text }, {
+                    responseType: 'blob',
+                    timeout: 30000 // 30s timeout for synthesis
+                });
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            const voice = voicesRef.current.find(v => v.lang.includes('IN') && (v.name.includes('Heera') || v.name.includes('Ravi'))) ||
-                voicesRef.current.find(v => v.lang.includes('IN')) ||
-                voicesRef.current.find(v => v.name.toLowerCase().includes('india')) ||
-                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
-                voicesRef.current.find(v => v.name.includes('US English')) ||
-                voicesRef.current[0];
+                const audioBlob = new Blob([res.data], { type: 'audio/mpeg' });
+                const audioUrl = URL.createObjectURL(audioBlob);
 
-            if (voice) {
-                utterance.voice = voice;
+                // SECONDARY GUARD: Ensure we didn't exit fullscreen while synthesis was occurring
+                if (!isFullscreenRef.current && isPermissionsGranted) {
+                    console.log("Speak aborted: Fullscreen exited during synthesis.");
+                    URL.revokeObjectURL(audioUrl);
+                    setIsSpeaking(false);
+                    isSpeakingRef.current = false;
+                    return resolve();
+                }
+
+                const audio = new Audio(audioUrl);
+                currentAudioRef.current = audio;
+
+                audio.onended = () => {
+                    currentAudioRef.current = null;
+                    clearTimeout(watchdog);
+                    URL.revokeObjectURL(audioUrl);
+                    // Delay unlock to allow speaker echo to fade
+                    setTimeout(() => {
+                        setIsSpeaking(false);
+                        isSpeakingRef.current = false;
+                        if (micStreamRef.current) {
+                            micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                        }
+                        if (isProcessingRef.current) {
+                            setAiStatus("Processing answer...");
+                        } else {
+                            setAiStatus("Indu is Online");
+                        }
+                        resolve();
+                    }, 500);
+                };
+
+                audio.onerror = (event) => {
+                    console.error("Audio playback error:", event);
+                    clearTimeout(watchdog);
+                    URL.revokeObjectURL(audioUrl);
+                    // Fallback to browser speech
+                    fallbackBrowserSpeak(text, watchdog, resolve);
+                };
+
+                audio.play().catch((err) => {
+                    if (err.name === 'AbortError') {
+                        console.log("Audio play interrupted by pause (intentional for fullscreen exit).");
+                        return;
+                    }
+                    // Autoplay blocked — fallback to browser TTS
+                    currentAudioRef.current = null;
+                    URL.revokeObjectURL(audioUrl);
+                    fallbackBrowserSpeak(text, watchdog, resolve);
+                });
+
+            } catch (err) {
+                console.warn("Coqui TTS failed, falling back to browser speech:", err.message);
+                fallbackBrowserSpeak(text, watchdog, resolve);
             }
-
-            utterance.onstart = () => {
-                setIsSpeaking(true);
-                isSpeakingRef.current = true;
-                setAiStatus("Speaking...");
-            };
-
-            utterance.onend = () => {
-                clearTimeout(watchdog);
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-                setAiStatus("Indu is Online");
-                resolve();
-            };
-
-            utterance.onerror = (event) => {
-                console.error("SpeechSynthesis error:", event);
-                clearTimeout(watchdog);
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-                setAiStatus("Indu is Online");
-                resolve();
-            };
-
-            synthRef.current.speak(utterance);
         });
+    }, []);
+
+    // Fallback: Browser SpeechSynthesis (used if Coqui TTS endpoint is unavailable)
+    const fallbackBrowserSpeak = useCallback((text, watchdog, resolve) => {
+        synthRef.current.cancel();
+        if (synthRef.current.paused) synthRef.current.resume();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice =
+            voicesRef.current.find(v => (v.name.includes('Siri') || v.name.includes('Samantha')) && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.includes('Google US English') && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => (v.name.includes('Jenny') || v.name.includes('Aria')) && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.includes('Siri') || v.name.includes('Samantha')) ||
+            voicesRef.current.find(v => v.lang.startsWith('en')) ||
+            voicesRef.current[0];
+
+        if (voice) utterance.voice = voice;
+
+        // SECONDARY GUARD: Prevent browser TTS if fullscreen was exited during setup
+        if (!isFullscreenRef.current && isPermissionsGranted) {
+            console.log("Browser Speak aborted: Not in full screen.");
+            if (watchdog) clearTimeout(watchdog);
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+            return resolve();
+        }
+
+        utterance.onend = () => {
+            if (watchdog) clearTimeout(watchdog);
+            setTimeout(() => {
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
+                if (isProcessingRef.current) {
+                    setAiStatus("Processing answer...");
+                } else {
+                    setAiStatus("Indu is Online");
+                }
+                resolve();
+            }, 500);
+        };
+
+        utterance.onerror = (event) => {
+            console.error("SpeechSynthesis error:", event);
+            if (watchdog) clearTimeout(watchdog);
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+            setAiStatus("Indu is Online");
+            if (micStreamRef.current) {
+                micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+            }
+            resolve();
+        };
+
+        synthRef.current.speak(utterance);
     }, []);
 
     const addMessage = useCallback((sender, text) => {
         const displayText = typeof text === 'object' ? (text.question || JSON.stringify(text)) : text;
-        setChatMessages(prev => [...prev, { sender, text: displayText }]);
+        setChatMessages(prev => {
+            // Optional: De-duplicate consecutive identical AI messages
+            if (prev.length > 0 && prev[prev.length - 1].sender === sender && prev[prev.length - 1].text === displayText) {
+                return prev;
+            }
+            return [...prev, { sender, text: displayText }];
+        });
         chatHistoryRef.current.push({ role: sender === 'ai' ? 'assistant' : 'user', content: displayText });
     }, []);
 
     const completeInterview = useCallback(async (customMessage = null) => {
+        if (isCompletedRef.current) return;
+        isCompletedRef.current = true;
+        setIsCompleted(true);
         stopCamera();
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
@@ -255,41 +547,376 @@ const AiInterviewSession = () => {
 
         setIsProcessing(true);
         setAiStatus("Session Finished");
-        setIsCompleted(true);
     }, [token, speak, addMessage]);
 
-    const startListening = useCallback(() => {
-        if (userInputMode !== 'audio' || !recognitionRef.current || isRecordingRef.current) return;
+    const startSilenceWatchdog = useCallback((delay) => {
+        if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
+        lastSpokenTimeRef.current = Date.now(); // Baseline reset
+        globalSilenceTimerRef.current = setInterval(async () => {
+            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) {
+                lastSpokenTimeRef.current = Date.now(); // Move baseline forward while busy
+                return;
+            }
+
+            if (Date.now() - lastSpokenTimeRef.current > delay) {
+                clearInterval(globalSilenceTimerRef.current);
+                if (nudgeCountRef.current === 0) {
+                    // First nudge
+                    nudgeCountRef.current = 1;
+                    const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
+                    addMessage('ai', nudgeText);
+                    try {
+                        if (assemblyAIRef.current) assemblyAIRef.current.stop();
+                        await speak(nudgeText);
+                        if (startListeningRef.current) startListeningRef.current(); // Restart with a fresh 15s timer via ref
+                    } catch (e) { }
+                } else {
+                    // Second nudge = AUTO SKIP
+                    const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
+                    addMessage('ai', skipText);
+                    try {
+                        if (assemblyAIRef.current) assemblyAIRef.current.stop();
+                        await speak(skipText);
+                        // Force submission with a "skipped" tag
+                        if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
+                    } catch (e) { }
+                }
+            }
+        }, 1000);
+    }, [addMessage, speak]);
+
+    const startListening = useCallback(async () => {
+        if (userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
+        if (!isFullscreenRef.current) {
+            console.log("Mic blocked: Not in full screen.");
+            return;
+        }
+        isStartingMicRef.current = true;
 
         let attempts = 0;
         const maxAttempts = 10;
 
-        const tryStart = () => {
-            // Check if AI is occupied - Use REFS to avoid stale closures
+        const tryStart = async () => {
+            if (!isFullscreenRef.current) return;
+            
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
-                    setTimeout(tryStart, 350); // Retry 
+                    setTimeout(tryStart, 350);
                 }
                 return;
             }
 
             try {
-                recognitionRef.current.start();
-                console.log("Auto-mic activated successfully");
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already started, ignore
-                } else {
-                    console.warn("Auto-start mic error:", e);
+                // Initialize AssemblyAI
+                setIsRecording(true);
+                isRecordingRef.current = true;
+                setAiStatus("Connecting to AssemblyAI...");
+
+                const token = process.env.REACT_APP_ASSEMBLYAI_API_KEY;
+
+                if (!token) {
+                    console.error("Missing REACT_APP_ASSEMBLYAI_API_KEY");
+                    setAiStatus("Config Error - Missing Key");
+                    return;
                 }
+
+                const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&speech_model=u3-rt-pro&token=${token}`;
+                const ws = new WebSocket(wsUrl);
+
+                // Buffer to hold audio chunks while WebSocket is connecting
+                const audioBufferQueue = [];
+
+                ws.onopen = () => {
+                    console.log("AssemblyAI Auto-mic active via Native WebSocket!");
+                    setSttReady(true);
+                    setAiStatus("Listening...");
+
+                    // Flush queued audio buffers
+                    while (audioBufferQueue.length > 0) {
+                        ws.send(audioBufferQueue.shift());
+                    }
+
+                    transcriptRef.current = "";
+                    interimTranscriptRef.current = "";
+                    lastTranscriptStrRef.current = "";
+                    lastSpokenTimeRef.current = Date.now();
+                };
+
+                ws.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+
+                    if (data.type === "SessionBegins") {
+                        console.log("AssemblyAI Session Started:", data.session_id);
+                        return;
+                    }
+
+                    // CRITICAL: Ignore all transcripts while Indu is speaking or processing to avoid feedback loops and buffer pollution
+                    if (isSpeakingRef.current || isProcessingRef.current) return;
+
+                    if (data.type !== "Turn") return;
+
+                    const text = data.transcript;
+                    if (!text) return;
+
+                    // Compute the exact total text currently understood
+                    const currentFullText = (transcriptRef.current + " " + text).trim();
+                    // ONLY reset our strict timer if we actually hear NEW words!
+                    if (currentFullText !== lastTranscriptStrRef.current) {
+                        lastTranscriptStrRef.current = currentFullText;
+                        lastSpokenTimeRef.current = Date.now(); // Activity Reset!
+                    }
+
+                    if (!data.turn_is_formatted) {
+                        interimTranscriptRef.current = text;
+                    } else {
+                        transcriptRef.current += text + " ";
+                        interimTranscriptRef.current = "";
+                        // Notice: We don't trigger submit timers here anymore. 
+                        // The strict interval above perfectly handles it the moment the text stops accumulating!
+                    }
+
+                    const currentTotal = (transcriptRef.current + interimTranscriptRef.current).trim();
+                    if (currentTotal) {
+                        const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
+                        setAiStatus(`Heard: "${display}"`);
+                    }
+                };
+
+                ws.onerror = (error) => {
+                    console.error("AssemblyAI Native WebSocket error:", error);
+                    setSttReady(false);
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                    setAiStatus("Mic Error - Retrying...");
+                };
+
+                ws.onclose = (event) => {
+                    console.log("AssemblyAI Native WebSocket closed:", event.code, event.reason);
+                    setSttReady(false);
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                    if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
+                    if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+
+                    // Reconnect if closed unexpectedly (not by us calling stop())
+                    if (event.code !== 1000 && !isProcessingRef.current && !isCompletedRef.current) {
+                        console.log("Triggering auto-reconnect for AssemblyAI...");
+                        setTimeout(() => startListening(), 2000);
+                    }
+                };
+
+                // Remove sdk from connect queue
+                // await rt.connect();
+
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                micStreamRef.current = stream; // Store ref for physical mute/unmute
+
+                // --- Audio Visualizer & Local VAD ---
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    visualizerCtxRef.current = audioCtx;
+                    const analyser = audioCtx.createAnalyser();
+                    const source = audioCtx.createMediaStreamSource(stream);
+                    source.connect(analyser);
+                    analyser.fftSize = 64;
+                    const bufferLength = analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+
+                    const drawVisualizer = () => {
+                        if (!canvasRef.current) return;
+                        const canvas = canvasRef.current;
+                        const ctx = canvas.getContext("2d");
+
+                        // While Indu is speaking, show flat resting dots instead of live audio
+                        if (isSpeakingRef.current) {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            const visualBins = 16;
+                            const spacing = 3;
+                            const bw = (canvas.width / (visualBins * 2)) - spacing;
+                            const cx2 = canvas.width / 2;
+                            const ry = (canvas.height / 2) - 2;
+                            ctx.fillStyle = '#cbd5e1';
+                            for (let i = 0; i < visualBins; i++) {
+                                ctx.beginPath();
+                                if (ctx.roundRect) ctx.roundRect(cx2 + (i * (bw + spacing)), ry, bw, 4, bw / 2);
+                                else ctx.fillRect(cx2 + (i * (bw + spacing)), ry, bw, 4);
+                                ctx.fill();
+                                if (i !== 0) {
+                                    ctx.beginPath();
+                                    if (ctx.roundRect) ctx.roundRect(cx2 - (i * (bw + spacing)), ry, bw, 4, bw / 2);
+                                    else ctx.fillRect(cx2 - (i * (bw + spacing)), ry, bw, 4);
+                                    ctx.fill();
+                                }
+                            }
+                            animationRef.current = requestAnimationFrame(drawVisualizer);
+                            return;
+                        }
+
+                        analyser.getByteFrequencyData(dataArray);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        // Premium gradient across the whole canvas
+                        const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+                        gradient.addColorStop(0, '#0ea5e9'); // Light blue
+                        gradient.addColorStop(0.5, '#6366f1'); // Indigo
+                        gradient.addColorStop(1, '#ec4899'); // Pink
+
+                        const visualBins = 16; // Number of bars on *each half* of the axis
+                        const spacing = 3;
+                        const barWidth = (canvas.width / (visualBins * 2)) - spacing;
+                        const centerX = canvas.width / 2;
+                        let isSpeakingLocal = false;
+                        let vocalVolume = 0;
+                        for (let i = 2; i < 12; i++) {
+                            vocalVolume += dataArray[i];
+                        }
+                        const averageVocal = vocalVolume / 10;
+                        if (averageVocal > 160) isSpeakingLocal = true; // Increased threshold to 110 to ignore background noise/fans
+
+                        for (let i = 0; i < visualBins; i++) {
+                            const val = dataArray[i];
+
+                            // Taper the outer bars slightly so it looks naturally curved like a voice
+                            const positionScale = 1 - (i / visualBins) * 0.4;
+                            let barHeight = (val / 255.0) * (canvas.height * 0.8) * positionScale;
+                            if (barHeight < 4) barHeight = 4; // Glowing resting dot height
+
+                            const y = (canvas.height / 2) - (barHeight / 2);
+
+                            ctx.fillStyle = gradient;
+                            ctx.shadowBlur = 8;
+                            ctx.shadowColor = `rgba(99, 102, 241, ${barHeight / canvas.height})`; // Dynamic indigo glow
+
+                            // Right side mirrored bar
+                            ctx.beginPath();
+                            if (ctx.roundRect) ctx.roundRect(centerX + (i * (barWidth + spacing)), y, barWidth, barHeight, barWidth / 2);
+                            else ctx.fillRect(centerX + (i * (barWidth + spacing)), y, barWidth, barHeight);
+                            ctx.fill();
+
+                            // Left side mirrored bar
+                            if (i !== 0) {
+                                ctx.beginPath();
+                                if (ctx.roundRect) ctx.roundRect(centerX - (i * (barWidth + spacing)), y, barWidth, barHeight, barWidth / 2);
+                                else ctx.fillRect(centerX - (i * (barWidth + spacing)), y, barWidth, barHeight);
+                                ctx.fill();
+                            }
+                        }
+
+                        // Reset shadow
+                        ctx.shadowBlur = 0;
+
+                        // Local Mic Check: if we hear sound locally, update our master timestamp
+                        if (isSpeakingLocal && isRecordingRef.current) {
+                            if (Date.now() % 5000 < 100) console.log("VAD Active. Avg Volume:", averageVocal);
+                            lastSpokenTimeRef.current = Date.now();
+                        }
+
+                        animationRef.current = requestAnimationFrame(drawVisualizer);
+                    };
+                    drawVisualizer();
+                } catch (e) { console.error("Visualizer Error:", e); }
+
+                const recorder = new RecordRTC(stream, {
+                    type: 'audio',
+                    mimeType: 'audio/webm;codecs=pcm',
+                    recorderType: StereoAudioRecorder,
+                    timeSlice: 250,
+                    desiredSampRate: 16000,
+                    numberOfAudioChannels: 1,
+                    ondataavailable: async (blob) => {
+                        try {
+                            const buffer = await blob.arrayBuffer();
+                            if (ws.readyState === WebSocket.OPEN) {
+                                ws.send(buffer);
+                            } else if (ws.readyState === WebSocket.CONNECTING) {
+                                // Add to queue if ws is not fully ready yet to prevent audio loss
+                                audioBufferQueue.push(buffer);
+                            }
+                        } catch (e) { } // In case connection closed
+                    }
+                });
+                recorder.startRecording();
+                isRecordingRef.current = true;
+                setIsRecording(true);
+                // CRITICAL: Reset the activity timer so the 5s watchdog starts fresh from NOW
+                lastSpokenTimeRef.current = Date.now();
+
+                assemblyAIRef.current = {
+                    stop: () => {
+                        try {
+                            if (animationRef.current) cancelAnimationFrame(animationRef.current);
+                            if (visualizerCtxRef.current) {
+                                visualizerCtxRef.current.close().catch(e => { });
+                                visualizerCtxRef.current = null;
+                            }
+
+                            // Flatline the canvas perfectly when mic turns off (resting dots)
+                            if (canvasRef.current) {
+                                const c = canvasRef.current;
+                                const cx = c.getContext("2d");
+                                cx.clearRect(0, 0, c.width, c.height);
+
+                                const visualBins = 16;
+                                const spacing = 3;
+                                const barWidth = (c.width / (visualBins * 2)) - spacing;
+                                const centerX = c.width / 2;
+                                const y = (c.height / 2) - 2;
+                                cx.fillStyle = '#cbd5e1'; // Dull offline gray
+
+                                for (let i = 0; i < visualBins; i++) {
+                                    cx.beginPath();
+                                    if (cx.roundRect) cx.roundRect(centerX + (i * (barWidth + spacing)), y, barWidth, 4, barWidth / 2);
+                                    else cx.fillRect(centerX + (i * (barWidth + spacing)), y, barWidth, 4);
+                                    cx.fill();
+                                    if (i !== 0) {
+                                        cx.beginPath();
+                                        if (cx.roundRect) cx.roundRect(centerX - (i * (barWidth + spacing)), y, barWidth, 4, barWidth / 2);
+                                        else cx.fillRect(centerX - (i * (barWidth + spacing)), y, barWidth, 4);
+                                        cx.fill();
+                                    }
+                                }
+                            }
+
+                            recorder.stopRecording(() => {
+                                stream.getTracks().forEach(track => track.stop());
+                                // Safely defer destruction to prevent corrupting the next question's AudioContext if started fast
+                                setTimeout(() => {
+                                    try { if (recorder && recorder.destroy) recorder.destroy(); } catch (e) { }
+                                }, 1500);
+                            });
+                            ws.close(1000); // 1000 = Normal Closure, prevents auto-reconnect loops
+                        } catch (e) { }
+                    }
+                };
+
+                // Allow toggle functions to use this reference logic
+                recognitionRef.current = assemblyAIRef.current;
+
+            } catch (e) {
+                console.error("AssemblyAI start error:", e);
+                setIsRecording(false);
+                isRecordingRef.current = false;
             }
         };
 
-        tryStart();
-    }, [userInputMode]);
+        tryStart().finally(() => {
+            isStartingMicRef.current = false;
+        });
+
+        return () => {
+            if (assemblyAIRef.current) {
+                try { assemblyAIRef.current.stop(); } catch (e) { }
+            }
+        };
+    }, [userInputMode, startSilenceWatchdog]);
 
     const handleAnswerSubmission = useCallback(async (answer) => {
+        if (!isFullscreenRef.current) {
+            console.log("Submission blocked: Not in full screen.");
+            return;
+        }
+
         if (!answer || !answer.trim() || isProcessing) {
             console.log("Submission skipped: answer empty or already processing");
             return;
@@ -300,16 +927,37 @@ const AiInterviewSession = () => {
         isProcessingRef.current = true;
         setAiStatus("AI is thinking...");
         nudgeCountRef.current = 0; // Reset nudge for the new question turn
-        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+        if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
 
         // 2. Force Microphone Stop
         if (recognitionRef.current) {
             try { recognitionRef.current.stop(); } catch (e) { }
         }
-        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
+        setSilenceCountdown(0);
+
+        // 3. Track Consecutive Silence (to end interview if candidate leaves)
+        if (answer === "[Candidate remained silent/skipped]") {
+            consecutiveSilenceRef.current += 1;
+        } else {
+            consecutiveSilenceRef.current = 0;
+        }
+
+        if (consecutiveSilenceRef.current >= 3) {
+            console.log("Consecutive silence limit reached (3). Ending interview.");
+            completeInterview("The interview has been ended due to lack of response. We will review the answers provided so far. Thank you.");
+            return;
+        }
 
         addMessage('user', answer);
         setResponseInput('');
+
+        // 3. Clear all speech buffers to prevent the "Repeated Input" bug
+        transcriptRef.current = "";
+        interimTranscriptRef.current = "";
+        lastTranscriptStrRef.current = "";
+        lastSpokenTimeRef.current = Date.now();
+
         console.log("Submitting answer turn...");
 
         try {
@@ -320,7 +968,7 @@ const AiInterviewSession = () => {
                 answer: answer,
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
-            }, { timeout: 35000 }); // 35s for more complex reasoning
+            }, { timeout: 60000 }); // 60s for more complex reasoning (increased for stability)
 
             const data = response.data;
             const isClarification = data.is_clarification === true;
@@ -352,9 +1000,24 @@ const AiInterviewSession = () => {
             const nextIdx = currentQuestionIndex + 1;
             const totalAnswered = nextIdx; // questions answered so far
 
-            // --- HARD STOP: end after MAX_QUESTIONS ---
-            if (totalAnswered >= MAX_QUESTIONS) {
-                completeInterview(fullFeedback.trim() ? fullFeedback.trim() : undefined);
+            // --- HARD STOP: end after maxQuestions ---
+            if (totalAnswered >= maxQuestions) {
+                let finalWords = "That concludes our interview questions today. Thank you for your time, we will be in touch soon. Goodbye!";
+                if (fullFeedback.trim()) {
+                    finalWords = fullFeedback.trim() + ". " + finalWords;
+                }
+                completeInterview(finalWords);
+                return;
+            }
+            // ------------------------------------------
+
+            // --- GRACEFUL TIME EXPIRY: if time ran out while candidate was answering ---
+            if (timeExpiredRef.current) {
+                let finalWords = "Time has expired for this interview. Thank you for your time, we will review your responses and get back to you soon. Goodbye!";
+                if (fullFeedback.trim()) {
+                    finalWords = fullFeedback.trim() + ". " + finalWords;
+                }
+                completeInterview(finalWords);
                 return;
             }
             // ------------------------------------------
@@ -381,10 +1044,27 @@ const AiInterviewSession = () => {
                     : (fullFeedback.trim() + " " + followUpQ);
 
                 addMessage('ai', followUpText);
+
+                // Determine mode BEFORE speaking
+                let effectiveMode = userInputMode;
+                if (data.requires_code_input) {
+                    effectiveMode = 'text';
+                    setUserInputMode('text');
+                    setAiStatus("Coding Mode (Keyboard)");
+                    try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                } else {
+                    effectiveMode = 'audio';
+                    setUserInputMode('audio');
+                    setAiStatus("Indu is Online");
+                }
+
                 await speak(followUpText);
                 setIsProcessing(false);
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
+                isProcessingRef.current = false;
+
+                if (effectiveMode === 'audio' && !showQuotaWarning) startListening();
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 if (fullTurnText) addMessage('ai', fullTurnText);
                 if (fullTurnText) await speak(fullTurnText);
@@ -392,7 +1072,7 @@ const AiInterviewSession = () => {
             } else {
                 const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / MAX_QUESTIONS) * 100);
+                setProgress((nextIdx / maxQuestions) * 100);
 
                 setQuestions(prev => {
                     const newQs = [...prev];
@@ -408,33 +1088,89 @@ const AiInterviewSession = () => {
 
                 // If this is the last question being answered (nextIdx >= MAX_QUESTIONS), 
                 // we don't want "No worries, let's move on" right before the goodbye.
-                if (nextIdx >= MAX_QUESTIONS) {
+                if (nextIdx >= maxQuestions) {
                     finalTurnText = fullFeedback.trim();
                 }
 
+                // 1. DETERMINE MODE & STATUS (Instant UI Update)
+                let effectiveMode = userInputMode;
+                if (data.requires_code_input) {
+                    effectiveMode = 'text';
+                    setUserInputMode('text');
+                    setAiStatus("Coding Mode (Keyboard)");
+                    // Force Mic Stop
+                    try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                } else {
+                    effectiveMode = 'audio';
+                    setUserInputMode('audio');
+                    setAiStatus("Indu is Online");
+                }
+
+                // 2. LOG & SPEAK (Can be long-running)
                 if (finalTurnText) {
                     addMessage('ai', finalTurnText);
                     await speak(finalTurnText);
                 }
 
+                // 3. FINAL STATE SYNC
                 setIsProcessing(false);
                 isProcessingRef.current = false;
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
+
+                // Resume listening only if we are in audio mode AND not in a coding task
+                if (effectiveMode === 'audio' && !showQuotaWarning) {
+                    startListening();
+                }
             }
         } catch (err) {
-            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
-            if (err.response?.status === 429) setShowQuotaWarning(true);
+            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (60s)" : err.message);
 
-            // Show AI failure popup instead of static data
-            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
-            alert(`AI is not working. Please try again later.\nError: ${errorMessage}`);
-
-            // Optionally notify user
-            setAiToast({ active: true, text: 'AI processing failed', urgent: true });
-
+            // ALWAYS reset processing state so the UI doesn't "stick"
             setIsProcessing(false);
-            setAiStatus("AI Interviewer Online");
+            isProcessingRef.current = false;
+
+            if (err.response?.status === 429 || err.response?.data?.retryable) {
+                // Track retry count to prevent infinite loops
+                const currentRetry = (answer._retryCount || 0);
+                const maxRetries = 3;
+
+                if (currentRetry < maxRetries) {
+                    const backoffDelay = 8000 * Math.pow(2, currentRetry); // 8s, 16s, 32s
+                    const retryMsg = `AI is busy... retrying in ${backoffDelay / 1000}s (attempt ${currentRetry + 1}/${maxRetries})`;
+                    setAiStatus(retryMsg);
+                    setShowQuotaWarning(true);
+
+                    setTimeout(() => {
+                        setShowQuotaWarning(false);
+                        // Tag the answer string with retry count
+                        const taggedAnswer = new String(answer);
+                        taggedAnswer._retryCount = currentRetry + 1;
+                        handleAnswerSubmission(taggedAnswer);
+                    }, backoffDelay);
+                } else {
+                    // Max retries exceeded — give up gracefully and move on
+                    setShowQuotaWarning(false);
+                    const sorryMsg = "I apologize, there seems to be a temporary issue on my end. Let's move on to the next question.";
+                    addMessage('ai', sorryMsg);
+                    await speak(sorryMsg);
+                    setIsProcessing(false);
+                    isProcessingRef.current = false;
+                    if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                    setAiStatus("Indu is Online");
+                }
+                return;
+            }
+
+            // Show AI failure popup
+            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
+            setAiStatus("Connection Issue");
+            alert(`AI is having trouble connecting. Please try again.\nError: ${errorMessage}`);
+
+            // Automatically try to restart the mic to help the user
+            if (userInputMode === 'audio') {
+                setTimeout(() => startListening(), 1000);
+            }
         }
     }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening, showQuotaWarning, userInputMode]);
 
@@ -444,215 +1180,237 @@ const AiInterviewSession = () => {
         isInitializedRef.current = true;
 
         const initSession = async () => {
-            // Check localStorage first for instant blocking
-            if (localStorage.getItem(`interview_completed_${token}`)) {
-                setAiToast({ active: true, text: 'You have already completed this interview.', urgent: true });
-                setIsCompleted(true);
-                return;
-            }
-
-            const storedData = sessionStorage.getItem('interviewData');
-            if (storedData) {
-                const data = JSON.parse(storedData);
-                setCandidateName(data.candidateName);
-                setQuestions(data.questions);
-                startInterview(data.candidateName, data.questions);
-            } else {
-                try {
-                    // Cache-busting nonce _t
-                    const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
-                    setCandidateName(res.data.full_name);
-                    const matchRes = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, {
-                        candidate_id: token,
-                        job_description: res.data.job_description
-                    });
-                    setQuestions(matchRes.data.interview_questions);
-                    startInterview(res.data.full_name, matchRes.data.interview_questions);
-                } catch (err) {
-                    console.error("Init session error:", err);
-                    if (err.response && err.response.data && err.response.data.error) {
-                        setAiToast({ active: true, text: err.response.data.error, urgent: true });
-                    }
+            try {
+                // Check localStorage first for instant blocking
+                if (localStorage.getItem(`interview_completed_${token}`)) {
+                    setAiStatus("Already Completed");
+                    setIsCompleted(true);
+                    return;
                 }
+
+                const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
+                const candidate = res.data;
+                setCandidateName(candidate.full_name);
+                const qList = candidate.interview_questions || [];
+                setQuestions(qList);
+
+                if (candidate.status === 'Completed') {
+                    setIsCompleted(true);
+                    return;
+                }
+
+                if (candidate.link_opened_at) {
+                    const startTime = new Date(candidate.link_opened_at).getTime();
+                    const now = new Date().getTime();
+                    const secondsElapsed = Math.floor((now - startTime) / 1000);
+                    const initialTimeLeft = Math.max(0, (60 * 60) - secondsElapsed);
+                    setTimeLeft(initialTimeLeft);
+                }
+
+                if (candidate.interview_summary && candidate.interview_summary.length > 0) {
+                    setAiStatus("Ready to Resume");
+                } else {
+                    setAiStatus("Ready to Start");
+                }
+            } catch (err) {
+                console.error("Session init error:", err);
             }
-        };
-
-        const startInterview = async (name, qs) => {
-            await startCamera();
-            const firstName = name.split(' ')[0];
-            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
-
-            const introQ = "To get started, please introduce yourself and your professional background.";
-            let finalQs = [...qs];
-            if (finalQs[0] !== introQ) {
-                finalQs = [introQ, ...finalQs];
-                setQuestions(finalQs);
-            }
-
-            // Combine welcome and intro question for a smooth start
-            const combinedStart = `${welcome} ${introQ}`;
-            addMessage('ai', combinedStart);
-            await speak(combinedStart);
-            if (userInputMode === 'audio') startListening();
         };
 
         initSession();
         return () => stopCamera();
-    }, [token, addMessage, speak, startListening, userInputMode]); // Only re-init if token changes, perfectly stable camera feed
+    }, [token]);
 
-    const startSilenceWatchdog = useCallback((delay) => {
-        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
-        globalSilenceTimerRef.current = setTimeout(async () => {
-            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
-
-            if (nudgeCountRef.current === 0) {
-                // First nudge
-                nudgeCountRef.current = 1;
-                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
-                addMessage('ai', nudgeText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(nudgeText);
-                    startListening(); // Restart with a fresh 15s timer
-                } catch (e) { }
-            } else {
-                // Second nudge = AUTO SKIP
-                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
-                addMessage('ai', skipText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(skipText);
-                    // Force submission with a "skipped" tag
-                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
-                } catch (e) { }
+    const handleStartInterview = async () => {
+        // 1. Request Fullscreen IMMEDIATELY on click (strict browser requirement)
+        try {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                await elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                await elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                await elem.msRequestFullscreen();
             }
-        }, delay);
-    }, [addMessage, speak, startListening]);
+        } catch (err) {
+            console.warn("Initial fullscreen request failed/denied:", err);
+        }
+
+        setAiStatus("Requesting Permissions...");
+        
+        const screenSuccess = await startScreenShare();
+        if (!screenSuccess) return;
+
+        await startCamera();
+        
+        setIsPermissionsGranted(true);
+        isFullscreenRef.current = true; // Assume success if code reaches here after await
+        setAiStatus("Preparing Indu...");
+
+        const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
+        const candidate = res.data;
+
+        if (candidate.interview_summary && candidate.interview_summary.length > 0) {
+            console.log("Resuming session...");
+            const summary = candidate.interview_summary;
+            const restoredMessages = [];
+            const restoredHistory = [];
+            summary.forEach(turn => {
+                restoredMessages.push({ sender: 'ai', text: turn.question }, { sender: 'user', text: turn.answer });
+                restoredHistory.push({ role: 'assistant', content: turn.question }, { role: 'user', content: turn.answer });
+            });
+            setChatMessages(restoredMessages);
+            chatHistoryRef.current = restoredHistory;
+            const nextIdx = summary.length;
+            setCurrentQuestionIndex(nextIdx);
+            
+            const resumeQ = questions[nextIdx] || "Let's continue. Please share more about your experience.";
+            addMessage('ai', resumeQ);
+            await speak(resumeQ);
+            if (userInputMode === 'audio') startListening();
+        } else {
+            const firstName = candidate.full_name.split(' ')[0];
+            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
+            const introQ = "To get started, please introduce yourself and your professional background.";
+            
+            let finalQs = [...questions];
+            if (finalQs.length === 0 || finalQs[0] !== introQ) {
+                finalQs = [introQ, ...finalQs];
+                setQuestions(finalQs);
+            }
+
+            const combinedStart = `${welcome} ${introQ}`;
+            addMessage('ai', combinedStart);
+            await speak(combinedStart);
+            if (userInputMode === 'audio') startListening();
+        }
+    };
+
+    useEffect(() => {
+        startListeningRef.current = startListening;
+    }, [startListening]);
 
     useEffect(() => {
         submitHandlerRef.current = handleAnswerSubmission;
     }, [handleAnswerSubmission]);
 
-    // stable Speech Recognition Setup
+    // AUTO-RESUME MIC after Fullscreen restore
     useEffect(() => {
-        if (!('webkitSpeechRecognition' in window)) return;
-
-        const recognition = new window.webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = 'en-IN';
-
-        recognition.onstart = () => {
-            console.log("INFINITE MIC: Speech recognition is now active and stay on.");
-            setIsRecording(true);
-            isRecordingRef.current = true;
-            setAiStatus("Listening...");
-            transcriptRef.current = "";
-
-            // Start Global Silence Watchdog (15s for first nudge)
-            startSilenceWatchdog(15000);
-        };
-
-        recognition.onresult = (event) => {
-            let interimTranscript = "";
-            let newFinals = "";
-
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    newFinals += event.results[i][0].transcript;
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
+        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current) {
+            const timer = setTimeout(() => {
+                if (!isRecordingRef.current) {
+                    console.log("Auto-resuming mic via Effect...");
+                    startListening();
                 }
-            }
+            }, 1000); // 1s buffer allowed for transition to settle
+            return () => clearTimeout(timer);
+        }
+    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening]);
 
-            if (newFinals) {
-                transcriptRef.current += newFinals;
-            }
+    // (Native WebKit Speech Recognition removed in favor of AssemblyAI)
+    useEffect(() => {
+        // Initialize recognitionRef stub so toggleRecording doesn't fail immediately
+        if (!recognitionRef.current) {
+            recognitionRef.current = {
+                start: startListening,
+                stop: () => {
+                    if (assemblyAIRef.current) assemblyAIRef.current.stop();
+                }
+            };
+        }
+    }, [startListening]);
 
-            const currentTotal = (transcriptRef.current + interimTranscript).trim();
-            if (currentTotal) {
-                const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
-                setAiStatus(`Heard: "${display}"`);
-            }
+    // --- UNIFIED ACTIVITY WATCHDOG ---
+    // This single interval handles all microphone lifecycle timing
+    useEffect(() => {
+        if (!isRecording) {
+            setSilenceCountdown(0);
+            return;
+        }
 
-            // PATIENT SILENCE: Reset timer every time we hear ANY sound/speech
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) {
-                clearTimeout(globalSilenceTimerRef.current);
-                globalSilenceTimerRef.current = null;
-            }
-
-            // Only submit if we have a significant answer length
-            if (currentTotal.length > 3) {
-                silenceTimerRef.current = setTimeout(() => {
-                    const finalSubmission = transcriptRef.current + interimTranscript;
-                    if (finalSubmission.trim().length > 4) {
-                        console.log("Planned pause detected. Processing answer...");
-                        setIsProcessing(true);
-                        setAiStatus("Processing answer...");
-                        try { recognition.stop(); } catch (e) { }
-                        if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
-                    }
-                }, 3500); // 3.5 seconds - perfect balance of patience and speed
-            }
-        };
-
-        recognition.onerror = (event) => {
-            // Ignore no-speech and stay active
-            if (event.error === 'no-speech' || event.error === 'aborted') {
-                console.log("Mic background silence...");
+        let secondsRemaining = 5;
+        const watchdog = setInterval(() => {
+            // Safety Guard: If mic is physically off, this interval MUST not proceed
+            if (!isRecordingRef.current || isCompletedRef.current) {
+                clearInterval(watchdog);
                 return;
             }
-            console.warn("Recognition Error:", event.error);
-            setIsRecording(false);
-            setAiStatus(`Mic ready`);
-        };
+            if (isSpeakingRef.current || isProcessingRef.current) return;
 
-        recognition.onend = () => {
-            setIsRecording(false);
-            isRecordingRef.current = false;
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current); // Clear global timer on recognition end
-            console.log("Recognition session ended.");
-        };
+            const timeSinceActivity = Date.now() - lastSpokenTimeRef.current;
 
-        recognitionRef.current = recognition;
-
-        return () => {
-            if (recognitionRef.current) {
-                try { recognitionRef.current.stop(); } catch (e) { }
+            // If the user has spoken or transcript has updated within the last 2 seconds, 
+            // keep the timer at 5. This prevents cutouts during natural speech pauses.
+            if (timeSinceActivity < 2000) {
+                secondsRemaining = 5;
+                setSilenceCountdown("Listening...");
+                return;
             }
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
-        };
-    }, [startSilenceWatchdog]);
+
+            // Otherwise, proceed with the visible countdown (5-4-3-2-1)
+            secondsRemaining = 5 - Math.floor((timeSinceActivity - 2000) / 1000);
+
+            if (secondsRemaining > 0) {
+                setSilenceCountdown(secondsRemaining + "s");
+            } else if (secondsRemaining === 0 || secondsRemaining === -1) {
+                setSilenceCountdown("...");
+            } else if (secondsRemaining <= -2) {
+                // TRUE EXPIRATION
+                console.log("Unified Watchdog: Maximum silence exceeded. Forcing submission.");
+                clearInterval(watchdog);
+                setSilenceCountdown(0);
+                setIsProcessing(true);
+                setAiStatus("Processing answer...");
+
+                if (assemblyAIRef.current) {
+                    try { assemblyAIRef.current.stop(); } catch (e) { }
+                }
+
+                const finalTranscript = (transcriptRef.current + interimTranscriptRef.current).trim();
+                const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
+
+                if (submitHandlerRef.current) {
+                    submitHandlerRef.current(submissionText);
+                }
+            }
+        }, 1000);
+
+        return () => clearInterval(watchdog);
+    }, [isRecording]);
 
 
 
     const toggleRecording = () => {
-        if (!recognitionRef.current) return alert("Speech recognition not supported");
+        if (!isFullscreen) {
+            alert("Please return to full-screen mode to resume the interview.");
+            return;
+        }
+
+        // Unlock speech on first user click if not already
+        unlockSpeech();
 
         if (isRecording) {
-            try { recognitionRef.current.stop(); } catch (e) { }
+            // Capture any final speech before stopping
+            const finalSubmission = (transcriptRef.current + interimTranscriptRef.current).trim();
+
+            try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
             setIsRecording(false);
+            isRecordingRef.current = false;
+
+            // If the user actually said something, instantly submit it instead of discarding it!
+            if (finalSubmission && finalSubmission.length > 3) {
+                console.log("Manual Mic Stop: Auto-submitting speech!");
+                if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
+            } else {
+                setAiStatus("Mic Muted"); // Clear the "Listening..." label since nothing was submitted
+            }
         } else {
             // Cancel any AI speech if user wants to speak
             if (synthRef.current.speaking) {
                 synthRef.current.cancel();
                 setIsSpeaking(false);
             }
-
-            try {
-                recognitionRef.current.start();
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already starting/running
-                    console.log("Recognition already active");
-                } else {
-                    console.error("Manual mic start error:", e);
-                    setAiStatus("Mic Error - Refresh");
-                }
-            }
+            startListening();
         }
     };
 
@@ -660,11 +1418,138 @@ const AiInterviewSession = () => {
         if (chatContainerRef.current) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }, [chatMessages]);
 
+    // Timer Countdown Effect
+    useEffect(() => {
+        if (timeLeft === null || isCompleted) return;
+
+        if (timeLeft <= 0) {
+            // NEVER abruptly cut the interview. Set the flag, and the normal 
+            // conversation loop will gracefully end the call after the current answer.
+            if (!timeExpiredRef.current) {
+                timeExpiredRef.current = true;
+                console.log("Global timer expired. Deferring actual completion to end of current conversational turn...");
+            }
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setTimeLeft(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [timeLeft, isCompleted, completeInterview]);
+
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    useEffect(() => {
+        return () => {
+            if (animationRef.current) cancelAnimationFrame(animationRef.current);
+            if (visualizerCtxRef.current) {
+                try { visualizerCtxRef.current.close(); } catch (e) { }
+            }
+        };
+    }, []);
+
     return (
         <div className="ai-session-page">
+            {isPermissionsGranted && !isFullscreen && !isCompleted && (
+                <div 
+                    onClick={() => {
+                        const elem = document.documentElement;
+                        if (elem.requestFullscreen) elem.requestFullscreen();
+                        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                    }}
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        background: '#0a0a0a',
+                        color: 'white',
+                        zIndex: 30000,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        padding: '2rem',
+                        fontFamily: 'Inter, sans-serif',
+                        cursor: 'pointer' // Indicate it is clickable
+                    }}
+                >
+                    <div style={{ maxWidth: '500px', pointerEvents: 'none' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>🖥️</div>
+                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>Switch to Full Screen</h1>
+                        <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2.5rem', lineHeight: '1.6' }}>
+                            To ensure the integrity of your interview, you must remain in <b>Full Screen</b> mode.
+                        </p>
+                        <p style={{ fontSize: '1rem', color: '#6366f1', fontWeight: 'bold' }}>
+                            <i className="fa-solid fa-arrow-pointer" style={{ marginRight: '8px' }}></i>
+                            Click anywhere to return to Full Screen
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {!isPermissionsGranted && !isCompleted && (
+                <div style={{
+                    position: 'fixed',
+                    inset: 0,
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(10px)',
+                    zIndex: 20000,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    padding: '2rem'
+                }}>
+                    <div style={{ maxWidth: '600px', background: 'white', padding: '3rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>👋</div>
+                        <h1 style={{ fontSize: '2rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>Ready to meet Indu?</h1>
+                        <p style={{ color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
+                            To ensure a fair and secure interview process, we require access to your <b>Camera</b> and <b>Entire Screen Share</b>.
+                        </p>
+                        <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '2.5rem', textAlign: 'left' }}>
+                            <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                                <i className="fa-solid fa-camera" style={{ color: '#6366f1', marginTop: '4px' }}></i>
+                                <span><b>Webcam:</b> Used for face and phone detection.</span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px' }}>
+                                <i className="fa-solid fa-desktop" style={{ color: '#6366f1', marginTop: '4px' }}></i>
+                                <span><b>Screen:</b> Used for tab-switch monitoring. Please choose "Entire Screen".</span>
+                            </div>
+                        </div>
+                        <button 
+                            onClick={handleStartInterview}
+                            className="start-session-btn"
+                            style={{
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                color: 'white',
+                                border: 'none',
+                                padding: '1rem 3rem',
+                                borderRadius: '50px',
+                                fontSize: '1.2rem',
+                                fontWeight: '700',
+                                cursor: 'pointer',
+                                transition: 'transform 0.2s',
+                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            Start Interview
+                        </button>
+                    </div>
+                </div>
+            )}
             {showQuotaWarning && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#ff4444', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold' }}>
-                    ⚠️ AI Service Limit Reached. The interview cannot continue at this time.
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#667eea', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                    ⏳ Indu is taking a moment to think (AI Busy). Please wait, your answer is being saved and will process automatically...
                 </div>
             )}
 
@@ -679,6 +1564,11 @@ const AiInterviewSession = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
                         <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
 
+                        {/* Local Mic Visualizer */}
+                        <div style={{ width: '150px', height: '30px', background: '#f8fafc', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-5px' }}>
+                            <canvas ref={canvasRef} width="150" height="30" style={{ width: '100%', height: '100%' }}></canvas>
+                        </div>
+
                         {/* Status Message moved to bottom as requested */}
                         <div className="ai-status-badge" style={{ marginTop: 'auto', marginBottom: '1rem' }}>
                             <span className="speaking-indicator"></span>{aiStatus}
@@ -688,12 +1578,48 @@ const AiInterviewSession = () => {
 
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
                     <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                            </div>
+
+                            {timeLeft !== null && (
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    background: timeLeft < 300 ? '#fff5f5' : '#f0f4ff',
+                                    padding: '4px 10px',
+                                    borderRadius: '8px',
+                                    color: timeLeft < 300 ? '#e53e3e' : '#667eea',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.8rem',
+                                    border: `1px solid ${timeLeft < 300 ? '#feb2b2' : '#c3dafe'}`
+                                }}>
+                                    <i className="fa-solid fa-clock"></i>
+                                    <span>{formatTime(timeLeft)}</span>
+                                </div>
+                            )}
+
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#ebf8ff' : '#fffbec') : '#f0fff4') : '#fff5f5',
+                                padding: '4px 10px',
+                                borderRadius: '8px',
+                                color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#3182ce' : '#b7791f') : '#38a169') : '#e53e3e',
+                                fontWeight: 'bold',
+                                fontSize: '0.8rem',
+                                border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#bee3f8' : '#f6e05e') : '#c6f6d5') : '#feb2b2'}`
+                            }}>
+                                <i className={`fa-solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'fa-microphone-lines' : 'fa-hourglass-half') : 'fa-check-circle') : 'fa-microphone-slash'}`}></i>
+                                <span>{sttReady ? (silenceCountdown ? `Indu Waiting (${silenceCountdown})` : 'AssemblyAI Live') : 'Mic Offline'}</span>
+                            </div>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
-                        <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
+                        <button onClick={() => completeInterview("You have chosen to end the interview early. Thank you for your time today.")} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
                     </div>
 
                     <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
@@ -736,16 +1662,45 @@ const AiInterviewSession = () => {
                                 <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
                             </div>
                         ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                <input
-                                    className="response-input"
-                                    style={{ flex: 1, border: '1px solid #cbd5e0', borderRadius: '8px', padding: '6px 12px', fontSize: '0.85rem', outline: 'none' }}
+                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: '#f8fafc', padding: '8px', borderRadius: '8px' }}>
+                                <textarea
+                                    className="response-textarea"
+                                    style={{
+                                        flex: 1,
+                                        border: '1px solid #cbd5e0',
+                                        borderRadius: '8px',
+                                        padding: '8px 12px',
+                                        fontSize: '0.85rem',
+                                        outline: 'none',
+                                        minHeight: '40px',
+                                        maxHeight: '150px',
+                                        resize: 'vertical',
+                                        fontFamily: 'monospace'
+                                    }}
                                     value={responseInput}
                                     onChange={(e) => setResponseInput(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleAnswerSubmission(responseInput)}
-                                    placeholder="Type answer..."
+                                    placeholder="Type answer or code here... (Enter for new line)"
                                 />
-                                <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
+                                <button
+                                    onClick={() => handleAnswerSubmission(responseInput)}
+                                    disabled={isProcessing || !responseInput.trim()}
+                                    style={{
+                                        background: '#667eea',
+                                        color: 'white',
+                                        border: 'none',
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '8px',
+                                        fontSize: '1rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                    title="Send Answer"
+                                >
+                                    <i className="fa-solid fa-paper-plane"></i>
+                                </button>
                             </div>
                         )}
                         <button
