@@ -9,8 +9,7 @@ import {
     Loader2,
     ChevronLeft,
     ChevronRight,
-    CheckCircle,
-    AlertTriangle
+    CheckCircle
 } from 'lucide-react';
 import './AvailabilityManagement.css';
 
@@ -71,7 +70,8 @@ const AvailabilityManagement = () => {
             }
             await fetchAvailability();
         } catch (err) {
-            alert("Error updating slot.");
+            const errorMsg = err.response?.data?.error || "Error updating slot.";
+            alert(errorMsg);
         } finally {
             setActionLoading(null);
         }
@@ -189,7 +189,7 @@ const AvailabilityManagement = () => {
                             <button 
                                 className="clear-day-btn"
                                 onClick={async () => {
-                                    if (window.confirm("Clear all unbooked slots for this day?")) {
+                                    if (window.confirm("Clear all unbooked slots for this day? Booked slots will remain and cannot be removed.")) {
                                         const unbooked = windows.filter(w => w.date === selectedDate && !w.is_booked);
                                         const token = localStorage.getItem('token');
                                         for (const slot of unbooked) {

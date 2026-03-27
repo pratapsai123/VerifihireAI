@@ -313,13 +313,24 @@
 }
 
 .slot-toggle-btn.booked {
-    background: rgba(239, 68, 68, 0.03);
-    border-color: rgba(239, 68, 68, 0.2);
-    cursor: not-allowed;
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    cursor: default;
+    opacity: 1 !important;
 }
 
 .slot-toggle-btn.booked .slot-inner {
-    color: #ef4444;
+    color: #ef4444 !important;
+}
+
+.slot-toggle-btn.booked:disabled {
+    opacity: 1 !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+.slot-toggle-btn.booked:disabled .slot-inner {
+    color: #ef4444 !important;
 }
 
 .booked-badge.sm {

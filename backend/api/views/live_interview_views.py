@@ -1537,10 +1537,20 @@ def manage_interviewer_availability_view(request):
                 status=InterviewSlot.STATUS_BOOKED
             ).exists()
             
-            if is_booked:
+            # Use same logic as confirmation check: if it's reserved and not expired
+            active_reservation = InterviewSlot.objects.filter(
+                interviewer=profile,
+                slot_date=window.date,
+                start_time=window.start_time,
+                status=InterviewSlot.STATUS_RESERVED,
+                reservation_expiry_time__gt=timezone.now()
+            ).exists()
+            
+            if is_booked or active_reservation:
+                error_msg = 'Cannot remove a slot that has already been booked by a candidate.' if is_booked else 'This slot is temporarily locked by a candidate who is currently booking it.'
                 return Response({
-                    'error': 'Cannot remove a slot that has already been booked by a candidate.',
-                    'code': 'SLOT_BOOKED'
+                    'error': error_msg,
+                    'code': 'SLOT_BOOKED' if is_booked else 'SLOT_RESERVED'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
             window.delete()
