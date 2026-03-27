@@ -138,20 +138,19 @@ const AvailabilityManagement = () => {
         <div className="availability-mgmt-container">
             <div className="mgmt-header">
                 <h1>Manage Your Availability</h1>
-                <p>Select a date and click time slots to open them for candidates. Each slot is 50 minutes.</p>
             </div>
 
-            <div className="mgmt-grid-triple">
+            <div className="mgmt-upper-layout triple">
                 {/* Column 1: Calendar */}
-                <div className="mgmt-card calendar-side">
+                <div className="mgmt-card calendar-side glass-card compact">
                     <div className="card-header">
                         <div className="header-info">
-                            <Calendar size={20} className="text-indigo-600" />
-                            <span>Select Date</span>
+                            <Calendar size={18} className="text-indigo-600" />
+                            <span className="text-sm">Select Date</span>
                         </div>
                         <div className="cal-nav">
-                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() - 1)))}><ChevronLeft size={18} /></button>
-                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() + 1)))}><ChevronRight size={18} /></button>
+                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() - 1)))}><ChevronLeft size={16} /></button>
+                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() + 1)))}><ChevronRight size={16} /></button>
                         </div>
                     </div>
                     
@@ -177,18 +176,38 @@ const AvailabilityManagement = () => {
                 </div>
 
                 {/* Column 2: Slot Grid */}
-                <div className="mgmt-card slots-side">
+                <div className="mgmt-card slots-side glass-card compact">
                     <div className="card-header">
                         <div className="header-info">
-                            <Clock size={20} className="text-indigo-600" />
-                            <span>Available Slots</span>
+                            <Clock size={18} className="text-indigo-600" />
+                            <span className="text-sm">Available Slots</span>
                         </div>
-                        <div className="selected-date-label">
-                            {new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
+                        <div className="slot-header-actions">
+                            <div className="selected-date-label text-xs">
+                                {new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
+                            </div>
+                            <button 
+                                className="clear-day-btn"
+                                onClick={async () => {
+                                    if (window.confirm("Clear all unbooked slots for this day?")) {
+                                        const unbooked = windows.filter(w => w.date === selectedDate && !w.is_booked);
+                                        const token = localStorage.getItem('token');
+                                        for (const slot of unbooked) {
+                                            await axios.delete(`${API_BASE_URL}/interviews/availability/manage/`, {
+                                                headers: { 'Authorization': `Bearer ${token}` },
+                                                data: { id: slot.id }
+                                            });
+                                        }
+                                        await fetchAvailability();
+                                    }
+                                }}
+                            >
+                                Clear Day
+                            </button>
                         </div>
                     </div>
 
-                    <div className="slots-picker-grid">
+                    <div className="slots-picker-grid mini">
                         {dailySlots.map(time => {
                             const window = windows.find(w => w.date === selectedDate && w.start_time === time);
                             const isSelected = !!window;
@@ -207,53 +226,62 @@ const AvailabilityManagement = () => {
                             return (
                                 <button
                                     key={time}
-                                    className={`slot-toggle-btn ${isSelected ? 'active' : ''} ${isBooked ? 'booked' : ''} ${isLoading ? 'loading' : ''} ${isPast ? 'past' : ''}`}
+                                    className={`slot-toggle-btn sm ${isSelected ? 'active' : ''} ${isBooked ? 'booked' : ''} ${isLoading ? 'loading' : ''} ${isPast ? 'past' : ''}`}
                                     onClick={() => !isLoading && !isPast && !isBooked && toggleSlot(time)}
                                     disabled={isLoading || isPast || isBooked}
                                     title={isBooked ? "This slot is booked and cannot be removed" : ""}
                                 >
-                                    {isLoading ? <Loader2 className="animate-spin" size={16} /> : (isBooked ? <CalendarCheck size={16} /> : <Clock size={16} />)}
-                                    <span>{formatTime(time)}</span>
-                                    {isBooked && <span className="booked-badge">Booked</span>}
+                                    <div className="slot-inner text-xs">
+                                        {isLoading ? <Loader2 className="animate-spin" size={14} /> : (isBooked ? <CalendarCheck size={14} /> : <Clock size={14} />)}
+                                        <span>{formatTime(time)}</span>
+                                    </div>
+                                    {isBooked && <span className="booked-badge sm">Booked</span>}
                                 </button>
                             );
                         })}
                     </div>
                 </div>
 
-                {/* Column 3: Summary/Info */}
-                <div className="mgmt-card info-side">
-                    <div className="section-title">
-                        <Info size={20} className="text-indigo-600" />
+                {/* Column 3: Rules & Stats */}
+                <div className="mgmt-card info-side glass-card compact">
+                    <div className="section-title text-sm">
+                        <Info size={18} className="text-indigo-600" />
                         <span>System Rules</span>
                     </div>
                     
-                    <div className="rules-list">
-                        <div className="rule-item">
-                            <div className="rule-icon"><CheckCircle size={16} /></div>
-                            <p>Each slot selected is <strong>50 minutes</strong> long.</p>
+                    <div className="rules-vertical-stack">
+                        <div className="rule-item-mini">
+                            <div className="rule-icon sm"><CheckCircle size={14} /></div>
+                            <div className="rule-text">
+                                <h4 className="text-xs">50 Min Slots</h4>
+                                <p className="text-xxs">Each slot selected is 50 minutes long.</p>
+                            </div>
                         </div>
-                        <div className="rule-item">
-                            <div className="rule-icon"><CheckCircle size={16} /></div>
-                            <p>A <strong>10-minute break</strong> is automatically added after each slot.</p>
+                        <div className="rule-item-mini">
+                            <div className="rule-icon sm"><CheckCircle size={14} /></div>
+                            <div className="rule-text">
+                                <h4 className="text-xs">10 Min Break</h4>
+                                <p className="text-xxs">A 10-minute break is included.</p>
+                            </div>
                         </div>
-                        <div className="rule-item">
-                            <div className="rule-icon"><CheckCircle size={16} /></div>
-                            <p>Candidates see these in real-time as available bookings.</p>
-                        </div>
-                        <div className="rule-item">
-                            <div className="rule-icon"><AlertTriangle size={16} /></div>
-                            <p>Overlapping with existing calendar events is discouraged.</p>
+                        <div className="rule-item-mini">
+                            <div className="rule-icon sm"><CheckCircle size={14} /></div>
+                            <div className="rule-text">
+                                <h4 className="text-xs">Live Sync</h4>
+                                <p className="text-xxs">Syncs instantly with bookings.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="future-openings-mini">
-                         <div className="mini-title">Total Opened Slots</div>
-                         <div className="big-count">{windows.length}</div>
-                         <p>Active availability windows across all dates.</p>
+                    <div className="stats-spacer"></div>
+
+                    <div className="stat-card mini">
+                        <div className="mini-title text-xxs">Active Slots</div>
+                        <div className="big-count sm">{windows.length}</div>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
