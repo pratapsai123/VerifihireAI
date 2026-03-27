@@ -152,10 +152,15 @@ const AiTakeAssessment = () => {
         const params = new URLSearchParams(window.location.search);
         const nameParam = params.get('name');
         const emailParam = params.get('email');
-        if (nameParam || emailParam) {
-            if (nameParam) setCandidateName(nameParam);
-            if (emailParam) setCandidateEmail(emailParam);
-            setIsAutoFilled(true);
+        
+        const isNameValid = nameParam && nameParam !== 'Extraction Failed';
+        const isEmailValid = emailParam && emailParam !== 'Extraction Failed';
+        
+        if (isNameValid || isEmailValid) {
+            if (isNameValid) setCandidateName(nameParam);
+            if (isEmailValid) setCandidateEmail(emailParam);
+            // Only lock inputs if we have a valid email to track them with
+            if (isEmailValid) setIsAutoFilled(true);
         }
     }, []);
 
@@ -321,7 +326,9 @@ const AiTakeAssessment = () => {
         if (isTestRun && currentQ?.test_cases?.length > 0) {
             try {
                 const results = await Promise.all((currentQ.test_cases || []).map(async (tc, index) => {
-                    const tcInput = tc.input || tc.input_data || tc.stdin || '';
+                    const rawInput = tc.input || tc.input_data || tc.stdin || '';
+                    // Coerce to string — AI test cases may have input as a JSON object
+                    const tcInput = (typeof rawInput === 'string') ? rawInput : JSON.stringify(rawInput);
                     const tcOutput = tc.output || tc.expected_output || tc.stdout || '';
                     const isHidden = index >= 2;
 

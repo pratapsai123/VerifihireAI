@@ -1,0 +1,43 @@
+﻿--- AI Assessments ---
+ID: 485, Skills: python developer, Created: 2026-03-26 09:04:53.893783+00:00, Submissions: 0
+ID: 484, Skills: python developer, Created: 2026-03-26 09:02:27.068865+00:00, Submissions: 1
+ID: 483, Skills: python developer, Created: 2026-03-26 07:50:56.551169+00:00, Submissions: 0
+ID: 482, Skills: python developer, Created: 2026-03-26 07:13:31.435056+00:00, Submissions: 1
+ID: 481, Skills: Job Title: Full Stack Python Developer (ML + DevOps), Created: 2026-03-26 06:52:08.651440+00:00, Submissions: 0
+ID: 480, Skills: Job Title: Full Stack Python Developer (ML + DevOps), Created: 2026-03-26 06:51:20.838539+00:00, Submissions: 0
+ID: 479, Skills: Role: Python Developer (Web & API Development), Created: 2026-03-26 05:30:52.445280+00:00, Submissions: 1
+ID: 478, Skills: Role: Python Developer (Web & API Development), Created: 2026-03-26 05:30:06.846928+00:00, Submissions: 0
+ID: 477, Skills: Role: Python Developer (Web & API Development), Created: 2026-03-26 04:45:33.335865+00:00, Submissions: 0
+ID: 476, Skills: Role: Python Developer (Web & API Development), Created: 2026-03-26 04:44:29.498324+00:00, Submissions: 0
+ID: 475, Skills: Job Title: Full Stack Python Developer (ML + DevOps), Created: 2026-03-26 04:17:40.199163+00:00, Submissions: 1
+ID: 474, Skills: python developer, Created: 2026-03-25 17:32:38.259758+00:00, Submissions: 0
+ID: 473, Skills: java developer, Created: 2026-03-25 17:31:04.489558+00:00, Submissions: 0
+ID: 472, Skills: java developer, Created: 2026-03-25 17:29:01.310645+00:00, Submissions: 0
+ID: 471, Skills: java developer, Created: 2026-03-25 17:18:33.555812+00:00, Submissions: 0
+ID: 470, Skills: java developer, Created: 2026-03-25 17:16:46.679119+00:00, Submissions: 0
+ID: 469, Skills: java developer, Created: 2026-03-25 16:53:14.195245+00:00, Submissions: 0
+ID: 468, Skills: Job Title: Full Stack Python Developer (ML + DevOps), Created: 2026-03-25 16:28:52.022202+00:00, Submissions: 0
+ID: 467, Skills: java developer, Created: 2026-03-25 11:59:14.937190+00:00, Submissions: 1
+ID: 466, Skills: java developer, Created: 2026-03-25 11:21:35.792599+00:00, Submissions: 0
+
+--- Recent Submissions ---
+ID: 57, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 245, Submitted: None
+ID: 18, Candidate: Test Candidate, Email: drafts@example.com, Assessment ID: 34, Submitted: None
+ID: 47, Candidate: rishi, Email: anderishidarreddy@gmail.com, Assessment ID: 61, Submitted: None
+ID: 60, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 302, Submitted: None
+ID: 40, Candidate: 1234, Email: anderishidarreddy@gmail.com, Assessment ID: 53, Submitted: None
+ID: 39, Candidate: 1234, Email: anderishidarreddy@gmail.com, Assessment ID: 52, Submitted: None
+ID: 56, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 243, Submitted: None
+ID: 62, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 310, Submitted: None
+ID: 16, Candidate: Test Candidate, Email: progress@example.com, Assessment ID: 32, Submitted: None
+ID: 12, Candidate: 12345678, Email: anderishidarreddy@gmail.com, Assessment ID: 24, Submitted: None
+ID: 59, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 255, Submitted: None
+ID: 6, Candidate: 12, Email: anderishidarreddy@gmail.com, Assessment ID: 17, Submitted: None
+ID: 34, Candidate: rishi, Email: anderishidarreddy@gmail.com, Assessment ID: 47, Submitted: None
+ID: 8, Candidate: 1234, Email: anderishidarreddy@gmail.com, Assessment ID: 20, Submitted: None
+ID: 1, Candidate: rishi, Email: anderishidarreddy@gmail.com, Assessment ID: 9, Submitted: None
+ID: 14, Candidate: 2345678, Email: anderishidarreddy@gmail.com, Assessment ID: 30, Submitted: None
+ID: 61, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 309, Submitted: None
+ID: 17, Candidate: 12345, Email: anderishidarreddy@gmail.com, Assessment ID: 33, Submitted: None
+ID: 21, Candidate: 12345, Email: anderishidarreddy@gmail.com, Assessment ID: 37, Submitted: None
+ID: 54, Candidate: ANDEY RISHIDAR REDDY, Email: anderishidarreddy@gmail.com, Assessment ID: 240, Submitted: None
