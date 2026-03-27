@@ -64,7 +64,7 @@ const ResultsAI = () => {
             const intResults = [];
 
             allResults.forEach(r => {
-                const sid = r.submission_id || '';
+                const sid = String(r.submission_id || '');
                 // Categorize based on prefix and total_questions
                 if (sid.startsWith('ai_')) {
                     assessResults.push({

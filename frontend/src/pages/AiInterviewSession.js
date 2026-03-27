@@ -172,7 +172,7 @@ const AiInterviewSession = () => {
                     video.srcObject = screenStreamRef.current;
                     video.play();
                     await new Promise(r => setTimeout(r, 100)); // Brief wait for stream to render
-                    
+
                     const canvas = document.createElement('canvas');
                     canvas.width = video.videoWidth || 1280;
                     canvas.height = video.videoHeight || 720;
@@ -305,7 +305,7 @@ const AiInterviewSession = () => {
                 if (assemblyAIRef.current) {
                     try { assemblyAIRef.current.stop(); } catch (e) { }
                 }
-                
+
                 // 3. Stop Speech (Browser TTS)
                 window.speechSynthesis.cancel();
                 setIsSpeaking(false);
@@ -341,7 +341,7 @@ const AiInterviewSession = () => {
                     try {
                         currentAudioRef.current.pause();
                         currentAudioRef.current.volume = 0;
-                    } catch (e) {}
+                    } catch (e) { }
                 }
             }, 100);
             return () => clearInterval(hammer);
@@ -598,7 +598,7 @@ const AiInterviewSession = () => {
 
         const tryStart = async () => {
             if (!isFullscreenRef.current) return;
-            
+
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
@@ -966,6 +966,7 @@ const AiInterviewSession = () => {
                 candidate_id: token,
                 question: typeof currentQ === 'object' ? currentQ.question : currentQ,
                 answer: answer,
+                turn_number: currentQuestionIndex + 1, // Explicit Turn Number
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
             }, { timeout: 60000 }); // 60s for more complex reasoning (increased for stability)
@@ -983,9 +984,15 @@ const AiInterviewSession = () => {
 
             if (isClarification) {
                 // Scenario A: Candidate asked for help/clarification
-                addMessage('ai', fullFeedback);
+                // REPHRASE LOGIC: Combine acknowledgement and the actual rephrased question
+                const rephrasedQ = data.refined_next_question || "";
+                const combinedClarification = (fullFeedback.trim() === rephrasedQ.trim())
+                    ? rephrasedQ
+                    : (fullFeedback.trim() + " " + rephrasedQ).trim();
+
+                addMessage('ai', combinedClarification);
                 try {
-                    await speak(fullFeedback);
+                    await speak(combinedClarification);
                 } catch (e) {
                     console.error("Clarification speak error:", e);
                 }
@@ -994,7 +1001,7 @@ const AiInterviewSession = () => {
                 isProcessingRef.current = false;
                 setAiStatus("Indu is Online");
                 if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                return; // STOP HERE: Don't move to next question
+                return; // STOP HERE: Don't move to next question index
             }
 
             const nextIdx = currentQuestionIndex + 1;
@@ -1237,12 +1244,12 @@ const AiInterviewSession = () => {
         }
 
         setAiStatus("Requesting Permissions...");
-        
+
         const screenSuccess = await startScreenShare();
         if (!screenSuccess) return;
 
         await startCamera();
-        
+
         setIsPermissionsGranted(true);
         isFullscreenRef.current = true; // Assume success if code reaches here after await
         setAiStatus("Preparing Indu...");
@@ -1263,7 +1270,7 @@ const AiInterviewSession = () => {
             chatHistoryRef.current = restoredHistory;
             const nextIdx = summary.length;
             setCurrentQuestionIndex(nextIdx);
-            
+
             const resumeQ = questions[nextIdx] || "Let's continue. Please share more about your experience.";
             addMessage('ai', resumeQ);
             await speak(resumeQ);
@@ -1272,7 +1279,7 @@ const AiInterviewSession = () => {
             const firstName = candidate.full_name.split(' ')[0];
             const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
             const introQ = "To get started, please introduce yourself and your professional background.";
-            
+
             let finalQs = [...questions];
             if (finalQs.length === 0 || finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
@@ -1457,7 +1464,7 @@ const AiInterviewSession = () => {
     return (
         <div className="ai-session-page">
             {isPermissionsGranted && !isFullscreen && !isCompleted && (
-                <div 
+                <div
                     onClick={() => {
                         const elem = document.documentElement;
                         if (elem.requestFullscreen) elem.requestFullscreen();
@@ -1524,7 +1531,7 @@ const AiInterviewSession = () => {
                                 <span><b>Screen:</b> Used for tab-switch monitoring. Please choose "Entire Screen".</span>
                             </div>
                         </div>
-                        <button 
+                        <button
                             onClick={handleStartInterview}
                             className="start-session-btn"
                             style={{

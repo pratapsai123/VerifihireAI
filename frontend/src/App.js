@@ -55,26 +55,65 @@ axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // List of public API paths that should not have the Authorization header
+      // This prevents 401 errors if an expired token exists in localStorage (e.g. from a recruiter session)
+      const publicApiPaths = [
+        '/invitations/public/',
+        '/candidate-details/',
+        '/ai/public/',
+        '/ai/submit/',
+        '/ai/submission/',
+        '/ai/execute/',
+        '/api/ai-candidates/',
+        '/users/invite/',
+        '/users/accept-invite/',
+        '/interviews/slots/'
+      ];
+
+      const isPublicApi = publicApiPaths.some(path => config.url && config.url.includes(path));
+
+      if (!isPublicApi) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
+
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
     // Check if error is 401 Unauthorized securely
     if (error.response && error.response.status === 401) {
-      console.error('Session expired or unauthorized. Logging out.');
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
+      // Check if the current page is a public candidate-facing page
+      const publicRoutes = [
+        '/take-assessment/',
+        '/take-ai-assessment/',
+        '/ai-interview-session/',
+        '/interview-start/',
+        '/result/',
+        '/live-interview',
+        '/ai-interview',
+        '/book-interview/',
+        '/accept-invite'
+      ];
+      const isPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
 
-      // Redirect to login if not already there
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+      // ONLY logout and redirect if NOT on a public candidate page
+      if (!isPublicPage) {
+        console.error('Session expired or unauthorized. Logging out.');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+
+        // Redirect to login if not already there
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      } else {
+        console.warn('Unauthorized access on public page - avoiding redirect to login.');
       }
     }
     return Promise.reject(error);
@@ -122,10 +161,10 @@ function AppContent() {
   return (
     <div className="app-container">
       {!isFullScreenPage && <Header />}
-      <div className="app-scroll" style={isFullScreenPage ? { 
-        top: 0, 
-        height: '100vh', 
-        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto' 
+      <div className="app-scroll" style={isFullScreenPage ? {
+        top: 0,
+        height: '100vh',
+        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto'
       } : {}}>
         <Routes>
           <Route path="/" element={<Home />} />
