@@ -20,15 +20,19 @@ const validateField = (field, value) => {
   }
 };
 
-const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false }) => {
-  const hasValue = value.trim().length > 0;
+const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false, required = true }) => {
+  const hasValue = String(value || '').trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
   const showRedBorder = errorEmpty || !formatValid;
 
   return (
     <div className="candidate-input-group">
-      <label className="candidate-static-label">{label}</label>
+      <div className="candidate-label-row">
+        <label className="candidate-static-label" style={{ marginBottom: 0 }}>
+          {label} {required && <span style={{ color: '#1d4ed8', marginLeft: '2px' }}>*</span>}
+        </label>
+      </div>
       <input
         type={type}
         value={value}
@@ -294,6 +298,26 @@ const CandidateDetails = ({ token, onComplete }) => {
     snapshotValid: false, // Whether captured snapshot has face and is not blurry
     invitedEmail: null, // Store the email they were invited with for validation
   });
+
+  // Live re-verification of PAN when input changes
+  useEffect(() => {
+    if (data.extractedPan && data.pan && data.pan.trim().length === 10) {
+      const currentPan = data.pan.toUpperCase().trim();
+      const extracted = data.extractedPan.toUpperCase().trim();
+      const isMatch = currentPan === extracted;
+      
+      // Update state ONLY if mismatch state needs to change
+      if (isMatch !== data.panMatch) {
+        setData(prev => ({
+          ...prev,
+          panMatch: isMatch,
+          // If it matches now, clear the extraction failure flag
+          extractionFailed: !isMatch,
+          extractionStatus: isMatch ? 'Verified' : (prev.extractionStatus || 'Mismatch')
+        }));
+      }
+    }
+  }, [data.pan, data.extractedPan, data.panMatch]);
 
   // Fetch invitation data to pre-fill fields
   useEffect(() => {
@@ -733,7 +757,11 @@ const CandidateDetails = ({ token, onComplete }) => {
                 onChange={(v) => setData({ ...data, pan: v })}
               />
               <div className="candidate-input-group">
-                <label className="candidate-static-label">Upload PAN Card (Max size: 2.5MB, Allow PNG, JPG, JPEG, PDF Formats)</label>
+                <div className="candidate-label-row">
+                  <label className="candidate-static-label" style={{ marginBottom: 0, whiteSpace: 'nowrap' }}>
+                    Upload PAN Card <span style={{ color: '#1d4ed8', marginLeft: '2px' }}>*</span> <span className="candidate-hint-text" style={{ marginLeft: '10px', fontWeight: '600', opacity: 0.9 }}>(Allowed formats: .png, .jpg, .jpeg, .pdf, Max 2.5MB)</span>
+                  </label>
+                </div>
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
@@ -854,7 +882,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                         // ❌ Reject invalid file with specific error message
                         let errorMsg = "Invalid file. ";
                         if (!isValidType) {
-                          errorMsg += "Please upload PNG, JPG, or PDF file. ";
+                          errorMsg += "Please upload PNG, JPG, JPEG, or PDF file. ";
                         }
                         if (!isValidSize) {
                           errorMsg += `File size (${(file.size / 1024 / 1024).toFixed(2)}MB) exceeds 2.5MB limit.`;
@@ -896,8 +924,8 @@ const CandidateDetails = ({ token, onComplete }) => {
                 )}
                 {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.extractionFailed && (
                   <div className="candidate-warning-box">
-                    <div className="candidate-error-text">
-                      ❌ {data.extractionStatus || "Extraction Failed: Image is not clear for extraction. Please re-upload a clear image or PDF."}
+                    <div className="candidate-error-text" style={{ fontSize: '15px' }}>
+                      ❌ Automatic Verification Failed: Image is not clear or incorrect document uploaded. Please re-upload a clear image or PDF.
                     </div>
                     <div style={{ marginTop: '10px' }}>
                       <label className="candidate-checkbox-label">

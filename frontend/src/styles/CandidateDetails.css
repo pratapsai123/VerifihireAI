@@ -47,7 +47,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 18px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .candidate-row-single {
@@ -60,7 +60,7 @@
   grid-template-columns: 1fr;
   gap: 24px;
   margin-bottom: 18px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .candidate-input-group {
@@ -71,16 +71,20 @@
 }
 
 .candidate-static-label {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  
+  align-items: flex-end;
   font-size: 14px;
   color: #1d4ed8;
   font-weight: 600;
   display: block;
+  white-space: nowrap;
 }
 
 .candidate-input {
   width: 100%;
   padding: 14px;
+  height: 54px;
   border-radius: 10px;
   background: transparent;
   border: 2px solid #1d4ed8;
@@ -102,7 +106,7 @@
 
 .candidate-input.read-only {
   cursor: not-allowed;
-  color: #4b5563; /* Muted text color but keep the blue border */
+  color: #1d4ed8; /* Muted text color but keep the blue border */
   background-color: rgba(0, 0, 0, 0.02); /* Very subtle background change */
 }
 
@@ -269,7 +273,7 @@
 .candidate-checkbox-label span {
   font-size: 14px;
   line-height: 1.5;
-  color: #4b5563;
+  color: #1d4ed8;
   font-weight: 500;
 }
 
@@ -290,4 +294,35 @@
   animation: candidate-spin 0.6s linear infinite;
   margin-right: 8px;
   vertical-align: middle;
+}
+.candidate-hint-text {
+  font-size: 13px;
+  color: #1d4ed8;
+  margin-top: 6px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+
+.candidate-static-label {
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+  font-size: 14px;
+}
+
+.candidate-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 12px;
+  min-height: 18px;
+}
+
+.candidate-hint-text {
+  font-size: 10.5px;
+  color: #1d4ed8;
+  opacity: 0.85;
+  white-space: nowrap;
 }
