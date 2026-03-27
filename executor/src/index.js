@@ -525,7 +525,9 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
     await ensureImage(spec.image);
 
     // Build the command that pipes stdin from file
-    const hasStdin = stdin && stdin.trim().length > 0;
+    // Coerce stdin to a string — test cases may pass objects/numbers from JSON payloads
+    const stdinStr = (typeof stdin === 'string') ? stdin : (stdin != null ? JSON.stringify(stdin) : '');
+    const hasStdin = stdinStr.trim().length > 0;
     let finalCmd = spec.cmd;
     if (hasStdin && Array.isArray(spec.cmd) && spec.cmd.length >= 3 && spec.cmd[0] === 'sh') {
       // Wrap the original command to pipe stdin from file
@@ -569,7 +571,7 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
 
     // Add stdin as a file in the archive
     if (hasStdin) {
-      const stdinContent = normalizeNewlines(stdin);
+      const stdinContent = normalizeNewlines(stdinStr);
       filesToWrite.push({ name: 'stdin.txt', content: stdinContent.endsWith('\n') ? stdinContent : stdinContent + '\n' });
     }
 
