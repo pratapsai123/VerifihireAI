@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Candidate, InterviewIntegrity
+from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog
 from .serializers import CandidateSerializer
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
@@ -340,23 +340,39 @@ class ResumeMatchView(APIView):
                     company = user_profile.company if user_profile else None
                     candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
                     
-                    current_candidate = Candidate.objects.create(
-                        full_name=candidate_name,
-                        email="pending@example.com",
-                        job_title=job_title or "Applicant",
-                        resume=None if hasattr(resume_file, 'open') else resume_file,
-                        resume_text=resume_text,
-                        status='New',
-                        job_description=job_description,
-                        company=company,
-                        user_profile=user_profile,
-                        batch_id=batch_id
-                    )
-                    results.append({"id": current_candidate.id, "name": candidate_name, "status": "Queued"})
+                    current_candidate = None
+                    if candidate_id:
+                        try:
+                            current_candidate = Candidate.objects.get(id=candidate_id)
+                            current_candidate.resume_text = resume_text
+                            current_candidate.batch_id = batch_id
+                            current_candidate.status = 'New'
+                            current_candidate.job_description = job_description
+                            # Also update company/profile if missing
+                            if not current_candidate.company: current_candidate.company = company
+                            if not current_candidate.user_profile: current_candidate.user_profile = user_profile
+                            current_candidate.save()
+                        except Candidate.DoesNotExist:
+                            pass
+
+                    if not current_candidate:
+                        current_candidate = Candidate.objects.create(
+                            full_name=candidate_name,
+                            email="pending@example.com",
+                            job_title=job_title or "Applicant",
+                            resume=None if hasattr(resume_file, 'open') else resume_file,
+                            resume_text=resume_text,
+                            status='New',
+                            job_description=job_description,
+                            company=company,
+                            user_profile=user_profile,
+                            batch_id=batch_id
+                        )
+                    results.append({"id": current_candidate.id, "name": current_candidate.full_name, "status": "Queued"})
                 except Exception as e:
                     logger.error(f"Early extraction error: {e}")
 
-            # 2. Trigger background processing
+            # 2. Trigger processing (Synchronous for single candidate flow, Asynchronous for bulk)
             is_auto = False
             raw_is_auto = request.data.get('is_fully_automatic')
             if raw_is_auto:
@@ -375,6 +391,23 @@ class ResumeMatchView(APIView):
                 'interview_available_until': request.data.get('interview_available_until')
             }
 
+            # If it was a single candidate session (start interview flow), process synchronously
+            if len(results) == 1 and (candidate_id or len(resume_files) == 1):
+                from .tasks import process_resume_batch_task
+                # Call synchronously (not as .delay)
+                process_resume_batch_task(
+                    batch_id=batch_id,
+                    job_description=job_description,
+                    threshold=threshold,
+                    is_fully_automatic=is_auto,
+                    automation_settings=automation_settings
+                )
+                
+                # Fetch updated candidate and return full data
+                final_candidate = Candidate.objects.get(id=results[0]['id'])
+                return Response(CandidateSerializer(final_candidate).data, status=status.HTTP_200_OK)
+
+            # Bulk flow: trigger as background task
             process_resume_batch_task.delay(
                 batch_id=batch_id,
                 job_description=job_description,
@@ -750,6 +783,9 @@ class UpdateIntegrityView(APIView):
             
             # Grace Warning System Phase 1: Record counts
             event_type = request.data.get('event_type')
+            screenshot_b64 = request.data.get('screenshot')
+            webcam_b64 = request.data.get('webcam_screenshot')
+            
             if event_type == 'tab_switch':
                 integrity.tab_switches += 1
             elif event_type == 'phone_detection':
@@ -759,8 +795,15 @@ class UpdateIntegrityView(APIView):
             elif event_type == 'no_face_detection':
                 integrity.no_face_detections += 1
             
+            # Create a detailed log entry with dual Base64 storage
+            InterviewIntegrityLog.objects.create(
+                candidate=candidate,
+                event_type=event_type,
+                screenshot_base64=screenshot_b64,
+                webcam_screenshot_base64=webcam_b64
+            )
+            
             # Grace Warning System Phase 2: Handle First 3 as Warnings
-            # We track the types of the first 3 events that should be "free"
             if len(integrity.warning_logs) < 3:
                 integrity.warning_logs.append(event_type)
             
@@ -770,7 +813,7 @@ class UpdateIntegrityView(APIView):
                 'phone_detection': 30,
                 'multiface_detection': 15,
                 'no_face_detection': 5,
-                'face_detection_lost': 5  # alias for no_face
+                'face_detection_lost': 5
             }
 
             # Simple penalty system
@@ -830,6 +873,7 @@ class ProcessAnswerView(APIView):
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
         candidate_name = "Candidate"
+        job_title = "Technical Professional"
         resume_context = "No resume available."
         jd_context = "No job description available."
         
@@ -840,6 +884,7 @@ class ProcessAnswerView(APIView):
                 else:
                     candidate = Candidate.objects.get(pk=candidate_id)
                     candidate_name = candidate.full_name
+                    job_title = candidate.job_title or job_title
                     jd_context = candidate.job_description or jd_context
                     if candidate.resume_text:
                          resume_context = candidate.resume_text
@@ -852,69 +897,122 @@ class ProcessAnswerView(APIView):
             history_context = ""
             if chat_history:
                 turns = []
-                for h in chat_history[-6:]: # Increased history
+                # Total turns for logic:
+                ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
+                current_turn_number = ai_questions_count + 1 # This is the question we are about to ask
+                
+                for h in chat_history[-10:]: # Show more history for better context
                     role = h.get('role') or h.get('sender', 'unknown')
                     content = h.get('content') or h.get('text', '')
                     turns.append(f"{role.upper()}: {content}")
-                history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+                history_context = f"CURRENT QUESTION NUMBER: {current_turn_number} of 13\nCONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+            else:
+                current_turn_number = 1
+                history_context = "This is the START of the interview. Question #1.\n"
+
+            # --- DYNAMIC CATEGORY INJECTION ---
+            category_map = {
+                1: ("INTRO", "Greet the candidate warmly and ask them to introduce themselves."),
+                2: ("JD-Q1", "Ask a question derived DIRECTLY from the Job Description requirements."),
+                3: ("JD-Q2", "Ask another question derived DIRECTLY from the Job Description requirements."),
+                4: ("JD-Q3", "Ask a third question derived DIRECTLY from the Job Description requirements."),
+                5: ("JD-Q4", "Ask a fourth question derived DIRECTLY from the Job Description requirements."),
+                6: ("RESUME-SKILL-Q1", "Ask about a SPECIFIC SKILL listed in the Resume that is relevant to the JD."),
+                7: ("RESUME-SKILL-Q2", "Ask about a DIFFERENT SPECIFIC SKILL from the Resume relevant to the JD."),
+                8: ("PROJECT-Q1", "Ask about a SPECIFIC PROJECT mentioned in the Resume (role, challenges, or architecture)."),
+                9: ("PROJECT-Q2", "Ask about a DIFFERENT PROJECT from the Resume (or deeper dive into the previous project)."),
+                10: ("SCENARIO-Q1", "Ask a 'Imagine you are...' or 'How would you handle...' hypothetical workplace scenario."),
+                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question."),
+                12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc."),
+                13: ("SYNTAX-Q2", "Ask a DIFFERENT coding or syntax question.")
+            }
+            
+            # Get current turn instructions
+            target_category, target_instruction = category_map.get(current_turn_number, ("EXIT", "The interview is over. Say goodbye."))
+            # ----------------------------------
 
             prompt = f"""
-        Role: "Rigorous Technical Auditor & Expert Interviewer". 
-        Candidate: {candidate_name}
-        Job Context: {jd_context[:200]}
+        You are "Indu", a warm, sharp, and experienced technical interviewer conducting a live interview for the position of **{job_title}**.
+        Candidate Name: {candidate_name}
         
-        GOAL:
-        Determine if the Candidate Answer is (A) A CLARIFICATION REQUEST, (B) An EXIT REQUEST, or (C) An ACTUAL ANSWER.
-
-        (A) CLARIFICATION REQUEST - Trigger if:
-        - The candidate explicitly asks to repeat: "repeat that", "pardon", "what?".
-        - The candidate indicates they didn't hear or understand the question.
+        ===== YOUR SPECIFIC MISSION FOR THIS TURN (TURN #{current_turn_number}) =====
+        CATEGORY: {target_category}
+        INSTRUCTION: {target_instruction} (STRICTLY FOLLOW THIS)
         
-        (B) EXIT REQUEST - Trigger if:
-        - The candidate asks to "end", "stop", "finish", or "exit" the interview.
-        - The candidate expresses they no longer want to continue.
-
-        (C) ACTUAL ANSWER - Trigger for:
-        - Any substantive information, greetings, or "I don't know" / "skip".
-        - IMPORTANT: If a candidate says "I don't know", "no idea", or "skip", it is an ACTUAL ANSWER (Score 0), NOT a clarification request. You must MOVE ON to the next topic.
+        ===== JOB DESCRIPTION =====
+        {jd_context[:1500]}
         
-        STT & CONTEXT AWARENESS:
-        - NEVER loop more than once on the same question. If they tried to answer (even with just "I don't know"), MOVE ON.
-        - DO NOT be a robot. If they gave any info, acknowledge it briefly and move to a DIFFERENT topic.
-        - DO NOT start the question with "You were asked to..." or "Let's try again...". Just provide the next logical question.
-
-        IF (A) CLARIFICATION REQUEST:
-        1. Set "is_clarification": true, "is_exit": false.
-        2. Set "feedback": A helpful rephrasing of the Last Question.
-        3. Set "refined_next_question": current_question.
-
-        IF (B) EXIT REQUEST:
-        1. Set "is_clarification": false, "is_exit": true.
-        2. Set "feedback": "I understand. Thank you for your time today. Goodbye!".
-        3. Set "refined_next_question": null.
-
-        IF (C) ACTUAL ANSWER:
-        1. Set "is_clarification": false, "is_exit": false.
-        2. "feedback": A brief acknowledgement.
-        3. "refined_next_question": MUST BE A NEW, DIFFERENT QUESTION.
-        4. SCORING: 0-1 for "I don't know", 2-4 for vague, 5-10 for correct.
-
-        CONTEXT:
-        Resume: {resume_context[:1000]}
+        ===== RESUME =====
+        {resume_context[:3000]}
+        
+        ===== PERSONALITY & TONE RULES =====
+        - You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
+        - NEVER use these banned phrases: "Your explanation was clear and concise", "Great answer", "That's a good point", "Well said", "That's not a great sign", "That's a concern". These sound robotic and repetitive.
+        - Instead, react SPECIFICALLY to what the candidate actually said. Reference their exact words. Examples:
+          * "Interesting that you chose React.memo for that — I've seen teams debate that approach..."
+          * "So you went with lazy loading — that makes sense for a dashboard with heavy data."
+          * "Hmm, that's a solid approach. Let me throw a curveball at you..."
+          * "Got it. I'd love to dig deeper into something you mentioned..."
+        - Keep feedback to 1-2 SHORT sentences max. Don't lecture or summarize their answer back to them.
+        - ⚠️ ABSOLUTE BAN: NEVER include ANY of these category tags in your spoken output: JD-Q1, JD-Q2, JD-Q3, JD-Q4, RESUME-SKILL-Q1, RESUME-SKILL-Q2, PROJECT-Q1, PROJECT-Q2, SCENARIO-Q1, SCENARIO-Q2, SYNTAX-Q1, SYNTAX-Q2, INTRO. These tags are ONLY for YOUR internal tracking. If the candidate hears them, the system is broken.
+        - NEVER announce or reference the question number, turn number, or category.
+        - NEVER repeat the same feedback phrasing twice in the same interview. Each response MUST be unique.
+        - When asking resume/project questions, START with a specific detail from the resume (e.g., "I noticed you worked on [specific project name]...", "Your resume mentions [specific skill]...").
+        - Use conversational fillers like "Hmm", "I see", "Got it", "Interesting", "Fair enough" occasionally to sound like you are listening.
+        - Vary your transitions naturally. Choose from these styles:
+            * Curiosity: "Now I'm curious about...", "I'd love to hear more about..."
+            * Shifting Gears: "Let's pivot slightly to...", "Alright, moving on to...", "Switching gears a bit..."
+            * Casual: "Okay, next up...", "So, tell me about...", "I want to ask you about..."
+            * Deep Dive: "Let's dig into...", "I want to focus on a particular area..."
+        - If the candidate gives a weak or wrong answer, gently note it: "That's not quite what I was looking for, but let's keep going."
+        - If they say "I don't know", say something like: "No worries, let's move on to something else."
+        - Avoid starting every response with "Great," "Alright," or "Okay." Mix it up.
+        
+        ===== CRITICAL ENFORCEMENT RULES =====
+        - You MUST ask a question matching the CATEGORY: {target_category}.
+        - For RESUME-SKILL questions: Pick a SPECIFIC skill from the resume.
+        - For PROJECT questions: Reference a SPECIFIC project from the resume by name.
+        - For SYNTAX questions (Turns 12-13): Ask actual coding problems, NOT conceptual questions.
+        - Do NOT ask follow-up questions on the same topic. Each turn MUST move to the next category.
+        
+        ===== INPUT MODE =====
+        - Turns 1-11: Set "requires_code_input": false (audio/verbal mode)
+        - Turns 12-13: Set "requires_code_input": true (keyboard/coding mode)
+        
+        ===== INTERVIEW COMPLETION =====
+        - If target_category == "EXIT" or current_turn_number >= 14: The interview is OVER. Set "is_exit": true.
+        
+        ===== SPECIAL TRIGGERS =====
+        (A) CLARIFICATION: If candidate says "repeat that", "pardon", "what?" → Set "is_clarification": true, rephrase the last question.
+        (B) EXIT: If candidate says "end", "stop", "finish" → Set "is_exit": true, say goodbye.
+        
+        ===== SCORING GUIDES (0-10) =====
+        - 10: Perfect, comprehensive, and accurate answer.
+        - 8-9: Correct and clear answer, perhaps missing minor detail. (BEYOND SATISFACTORY)
+        - 6-7: Good attempt, mostly correct but a bit vague or lacks depth. (PASSABLE)
+        - 4-5: Weak or slightly incorrect answer, but shows basic effort/knowledge. (LENIENT PARTIAL CREDIT)
+        - 2-3: Very poor or largely incorrect answer, but they tried to speak.
+        - 0-1: Silent, "I don't know," or "Skip."
+        
+        *BE GENEROUS*: If the candidate shows they understand the core concept but struggle to articulate it perfectly, lean towards a 6 or 7.
+        
+        ===== CONVERSATION CONTEXT =====
         {history_context}
         
         CURRENT TURN:
         Last Question: "{current_question}"
+        Target Category for this next question: {target_category}
         Candidate Answer: "{answer}"
         
-        OUTPUT (JSON):
+        ===== RESPOND WITH THIS EXACT JSON =====
         {{
-            "is_clarification": boolean,
-            "is_exit": boolean,
-            "feedback": "...",
-            "refined_next_question": "...",
-            "requires_code_input": boolean, // Set to true IF AND ONLY IF the next question specifically asks for code, logic, or syntax.
-            "score": integer
+            "is_clarification": false,
+            "is_exit": false,
+            "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer (NEVER generic praise)",
+            "refined_next_question": "Your next question — MUST match the category for Turn #{current_turn_number + 1}",
+            "requires_code_input": false,
+            "score": 0,
+            "score_reason": "1-sentence justification for the score"
         }}
         """
 
@@ -968,6 +1066,18 @@ class ProcessAnswerView(APIView):
             if not data:
                 raise ValueError("AI returned invalid JSON structure")
 
+            # --- SERVER-SIDE LABEL SANITIZER ---
+            # Strip any leaked category labels like "JD-Q1:", "RESUME-SKILL-Q2:", "PROJECT-Q1" etc.
+            import re
+            _label_pattern = re.compile(
+                r'\b(?:JD|RESUME[- ]?SKILL|PROJECT|SCENARIO|SYNTAX|INTRO)[- ]?Q?\d*[:\.\-—]*\s*',
+                re.IGNORECASE
+            )
+            for field in ('feedback', 'refined_next_question'):
+                if data.get(field):
+                    data[field] = _label_pattern.sub('', data[field]).strip()
+            # -----------------------------------
+
             # --- SAFETY GUARD: Prevent Question Looping ---
             # If the candidate said "I don't know" or similar, and the AI tries to repeat the question 
             # even while setting is_clarification=false, we force it to move on.
@@ -1000,7 +1110,8 @@ class ProcessAnswerView(APIView):
                             "question": current_question,
                             "answer": answer,
                             "feedback": data.get('feedback', ''),
-                            "score": q_score
+                            "score": q_score,
+                            "reason": data.get('score_reason', 'No reasoning provided.')
                         })
                         
                         candidate.save()
@@ -1027,3 +1138,41 @@ class ProcessAnswerView(APIView):
                 msg = "AI is temporarily unavailable. Please try again or click the microphone to resume."
 
             return Response({"error": msg, "retryable": (is_rate_limit or is_connection)}, status=status_code)
+
+
+class TTSView(APIView):
+    """
+    Text-to-Speech endpoint using Coqui TTS.
+    POST {"text": "Hello!"} → returns audio/wav binary response.
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        text = request.data.get('text', '').strip()
+        if not text:
+            return Response({"error": "Missing 'text' field"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Safety: limit text length to prevent extremely long synthesis
+        if len(text) > 1500:
+            text = text[:1500]
+
+        try:
+            from .tts_engine import get_tts_engine
+            import asyncio
+            engine = get_tts_engine()
+            # edge-tts is better handled via asyncio.run for sync views
+            wav_bytes = asyncio.run(engine.synthesize(text))
+
+            if not wav_bytes:
+                return Response({"error": "Synthesis produced empty audio"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            from django.http import HttpResponse
+            # Edge-TTS produces mp3 by default, we'll return as audio/mpeg
+            response = HttpResponse(wav_bytes, content_type='audio/mpeg')
+            response['Content-Length'] = len(wav_bytes)
+            response['Cache-Control'] = 'no-cache'
+            return response
+
+        except Exception as e:
+            logger.error(f"TTS Error: {str(e)}")
+            return Response({"error": f"TTS synthesis failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

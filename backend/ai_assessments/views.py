@@ -217,6 +217,10 @@ class SubmitAssessmentView(APIView):
 
 
 class GenerateAssessmentView(APIView):
+    PRIMARY_MODEL = "llama-3.3-70b-versatile"
+    FALLBACK_MODEL = "llama-3.1-8b-instant"
+    _fallback_until = 0
+
     def post(self, request):
         data = request.data
         job_description = data.get('job_description')

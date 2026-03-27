@@ -33,8 +33,9 @@ const ResultsAI = () => {
     const [aiAssessments, setAiAssessments] = useState([]);
     const [aiInterviews, setAiInterviews] = useState([]);
     const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
-    const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail'
+    const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail' | 'transcript'
     const [selectedRole, setSelectedRole] = useState(null);
+    const [showTranscriptDetail, setShowTranscriptDetail] = useState(null);
     const [summaryModal, setSummaryModal] = useState(null); // Candidate object for interview
     const [viewedSubmission, setViewedSubmission] = useState(null); // Submission object for assessment
 
@@ -317,9 +318,162 @@ const ResultsAI = () => {
     const handleBackToOverview = () => {
         setViewMode('overview');
         setSelectedRole(null);
+        setSummaryModal(null);
+        setShowTranscriptDetail(null);
     };
 
-    const checkboxStyle = { width: '16px', height: '16px', cursor: 'pointer', accentColor: '#4F46E5' };
+    const renderTranscriptReport = (data) => {
+        if (!data) return null;
+        const totalPossible = (data.interview_summary?.length || 13) * 10;
+        const calculatedPercentage = data.score != null ? Math.round((data.score / totalPossible) * 100) : 0;
+
+        return (
+            <div className="report-container">
+                <div className="report-header">
+                    <div className="report-title-section" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                        <button className="report-breadcrumb" onClick={() => setViewMode('detail')} style={{ margin: 0 }}>
+                            <i className="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <h1 style={{ fontSize: '1.4rem', fontWeight: '900', color: '#1e293b', margin: 0 }}>Interview Report</h1>
+                        <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0, fontWeight: '600', opacity: 0.8 }}>Performance breakdown & transcript</p>
+                    </div>
+                </div>
+
+                <div className="report-grid">
+                    <aside className="report-sidebar">
+                        <div className="sidebar-card">
+                            <span className="sidebar-label">Candidate</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: '#4F46E5' }}>
+                                    <i className="fa-solid fa-user"></i>
+                                </div>
+                                <div>
+                                    <div className="sidebar-value">{data.full_name || data.candidate?.name || 'Extraction Failed'}</div>
+                                    <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{data.email || data.candidate?.email || 'N/A'}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="sidebar-card">
+                            <span className="sidebar-label">Overall Performance</span>
+                            <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#4F46E5', lineHeight: 1 }}>{calculatedPercentage}%</div>
+                            <div style={{ width: '100%', height: '6px', background: '#f1f5f9', borderRadius: '3px', marginTop: '0.6rem', overflow: 'hidden' }}>
+                                <div style={{ width: `${calculatedPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
+                            </div>
+                        </div>
+
+                        <div className="sidebar-card">
+                            <span className="sidebar-label">Total Marks</span>
+                            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#059669' }}>{data.score || 0}</div>
+                                <div style={{ color: '#94a3b8', fontSize: '0.9rem', fontWeight: '700' }}>/ {totalPossible}</div>
+                            </div>
+                        </div>
+
+                        {/* Integrity Evidence Gallery */}
+                        {data.integrity_logs?.length > 0 && (
+                            <div className="sidebar-card">
+                                <span className="sidebar-label">Integrity Evidence</span>
+                                <div className="integrity-gallery-scroll">
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+                                        {data.integrity_logs.map((log, lIdx) => {
+                                            const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
+                                            const displayImg = isScreenEvent 
+                                                ? (log.screenshot_base64 || log.webcam_screenshot_base64)
+                                                : (log.webcam_screenshot_base64 || log.screenshot_base64);
+
+                                            return (
+                                                <div key={lIdx} style={{ 
+                                                    position: 'relative', borderRadius: '12px', overflow: 'hidden', 
+                                                    border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                                                    cursor: 'pointer'
+                                                }} onClick={() => window.open(displayImg, '_blank')}>
+                                                    <img 
+                                                        src={displayImg || 'https://placehold.co/100x100?text=No+Data'} 
+                                                        alt={log.event_type}
+                                                        style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block' }}
+                                                        onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
+                                                    />
+                                                    <div style={{ 
+                                                        position: 'absolute', bottom: 0, left: 0, right: 0, 
+                                                        background: 'rgba(27, 37, 75, 0.85)', color: 'white', 
+                                                        fontSize: '9px', padding: '4px 2px', textAlign: 'center',
+                                                        fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px'
+                                                    }}>
+                                                        {log.event_type.replace('_', ' ')}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                                <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.75rem', fontWeight: '500' }}>
+                                    <i className="fa-solid fa-circle-info" style={{ marginRight: '4px' }}></i>
+                                    Click images to enlarge
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="sidebar-card" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white' }}>
+                            <span className="sidebar-label" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.6rem' }}>Applied Role</span>
+                            <div style={{ fontSize: '1rem', fontWeight: '800' }}>{selectedRole || data.job_title || 'General'}</div>
+                        </div>
+                    </aside>
+
+                    <main className="report-main">
+                        <div style={{ marginBottom: '1.5rem', borderBottom: '1px solid #f1f5f9', paddingBottom: '1rem', display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
+                            <h2 style={{ fontSize: '1.2rem', fontWeight: '900', color: '#1e293b', margin: 0 }}>Conversation Transcript</h2>
+                            <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0, fontWeight: '500' }}>Full record of candidate responses</p>
+                        </div>
+
+                        <div className="transcript-timeline">
+                            {(!data.interview_summary || data.interview_summary.length === 0) ? (
+                                <div style={{ textAlign: 'center', color: '#A3AED0', padding: '3rem' }}>
+                                    <i className="fa-solid fa-microphone-slash" style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                                    <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
+                                </div>
+                            ) : (
+                                data.interview_summary.map((turn, i) => (
+                                    <div key={i} className="timeline-turn">
+                                        <div className="marks-badge" style={{ 
+                                            background: (turn.score || turn.marks) >= 7 ? '#ecfdf5' : (turn.score || turn.marks) >= 4 ? '#fffbeb' : '#fff1f2',
+                                            color: (turn.score || turn.marks) >= 7 ? '#059669' : (turn.score || turn.marks) >= 4 ? '#b45309' : '#e11d48'
+                                        }}>
+                                            {(turn.score || turn.marks)}/10 Points
+                                        </div>
+                                        
+                                        <div className="ai-prompt">
+                                            <div className="ai-icon">
+                                                <i className="fa-solid fa-robot"></i>
+                                            </div>
+                                            <div className="ai-text">
+                                                <span className="ai-label">Indu (AI Interviewer)</span>
+                                                <p className="ai-question">{turn.question}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="candidate-block">
+                                            <span className="candidate-label">Candidate Response</span>
+                                            <p className="candidate-answer">
+                                                {turn.answer || <span style={{ fontStyle: 'italic', opacity: 0.5 }}>[Candidate remained silent/skipped]</span>}
+                                            </p>
+                                        </div>
+
+                                        {(turn.reason || turn.justification) && (
+                                            <div style={{ marginTop: '1.5rem', padding: '1rem 1.5rem', background: '#F1F5F9', borderRadius: '12px', borderLeft: '4px solid #4F46E5', fontSize: '0.9rem' }}>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4F46E5', textTransform: 'uppercase', marginBottom: '0.3rem' }}>AI Feedback</div>
+                                                <p style={{ margin: 0, color: '#475569', fontWeight: '600', lineHeight: 1.5 }}>{turn.reason || turn.justification}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </main>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="results-page">
@@ -713,279 +867,157 @@ const ResultsAI = () => {
                 </div>
             )}
 
-            {summaryModal && (
-                <div className="glass-modal-overlay" style={{ zIndex: 10000, background: 'rgba(27, 37, 75, 0.4)', backdropFilter: 'blur(8px)' }}>
-                    <div className="glass-modal-content" style={{ 
-                        width: '95%', maxWidth: '900px', height: '85vh', 
-                        display: 'flex', flexDirection: 'column', padding: 0,
-                        background: '#F4F7FE', borderRadius: '30px'
-                    }}>
-                        <div style={{ 
-                            padding: '1.5rem 2.5rem', background: 'white', borderBottom: '1px solid #E2E8F0',
-                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                            borderTopLeftRadius: '30px', borderTopRightRadius: '30px'
-                        }}>
-                            <div>
-                                <h2 style={{ fontSize: '1.5rem', fontWeight: '900', color: '#1B254B', margin: 0 }}>
-                                    {summaryModal.full_name || summaryModal.candidate?.name} <span style={{ color: '#707EAE', fontWeight: '400', fontSize: '1.1rem' }}>Interview Transcript</span>
-                                </h2>
-                                <p style={{ fontSize: '0.9rem', color: '#A3AED0', margin: '0.25rem 0 0', fontWeight: '600' }}>
-                                    Role: <span style={{ color: '#4318FF' }}>{summaryModal.job_title || 'General'}</span>
-                                    <span style={{ margin: '0 0.75rem', color: '#CBD5E1' }}>|</span>
-                                    {summaryModal.interview_summary?.length || 0} Questions Answered
-                                </p>
-                            </div>
-                            <button 
-                                onClick={() => setSummaryModal(null)}
-                                style={{ 
-                                    background: '#F4F7FE', border: 'none', borderRadius: '50%', 
-                                    width: '44px', height: '44px', cursor: 'pointer',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                                }}
-                            >
-                                <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
-                            </button>
-                        </div>
-                        
-                        <div style={{ flex: 1, overflowY: 'auto', padding: '2.5rem' }}>
-                            <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                                {(!summaryModal.interview_summary || summaryModal.interview_summary.length === 0) ? (
-                                    <div style={{ textAlign: 'center', color: '#A3AED0', padding: '3rem' }}>
-                                        <i className="fa-solid fa-microphone-slash" style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}></i>
-                                        <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
-                                    </div>
-                                ) : (
-                                    summaryModal.interview_summary.map((turn, i) => (
-                                        <div key={i} style={{ 
-                                            background: 'white', borderRadius: '24px', padding: '2rem', 
-                                            boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2'
-                                        }}>
-                                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
-                                                <div style={{ 
-                                                    width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #4F46E5, #4338CA)', 
-                                                    color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                                                    boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)'
-                                                }}>
-                                                    <i className="fa-solid fa-robot"></i>
-                                                </div>
-                                                <div style={{ flex: 1 }}>
-                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#4318FF', textTransform: 'uppercase', marginBottom: '0.25rem' }}>AI Interviewer</div>
-                                                    <p style={{ margin: 0, fontWeight: '700', color: '#1B254B', fontSize: '1.05rem', lineHeight: '1.6' }}>{turn.question}</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem', background: '#F8FAFC', borderRadius: '16px', border: '1px solid #E2E8F0' }}>
-                                                <div style={{ flex: 1 }}>
-                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Candidate Response</div>
-                                                    <p style={{ margin: 0, fontWeight: '500', color: '#334155', fontSize: '1rem', lineHeight: '1.7' }}>
-                                                        {turn.answer ? `"${turn.answer}"` : <span style={{ fontStyle: 'italic', color: '#94A3B8' }}>[No answer provided]</span>}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Main Application Container */}
+            <div className="dashboard-main" style={{ 
+                width: '100%', 
+                height: '100%',
+                display: 'flex', flexDirection: 'column', 
+                overflow: 'hidden'
+            }}>
+                {/* Global Dashboard Header (Only on overview/detail) */}
+                {viewMode !== 'transcript' && (
+                    <header style={{ marginBottom: '1rem', textAlign: 'center', flexShrink: 0, paddingTop: '1rem' }}>
+                        <h1 style={{ fontSize: '2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
+                            AI <span style={{ color: '#4F46E5' }}>Results</span>
+                        </h1>
+                    </header>
+                )}
 
-            <div className="dashboard-main" style={{ width: '100%', padding: '0 2rem 3rem' }}>
-                <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
-                    <h1 style={{ fontSize: '3.2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                        AI <span style={{ color: '#4F46E5' }}>Results</span>
-                    </h1>
+                <div style={{ 
+                    flex: 1, 
+                    display: viewMode === 'transcript' ? 'flex' : 'block',
+                    flexDirection: 'column',
+                    overflow: viewMode === 'transcript' ? 'hidden' : 'auto', 
+                    padding: viewMode === 'transcript' ? '0' : '0 2rem 3rem' 
+                }}>
                     {viewMode === 'detail' && (
-                        <div style={{ marginTop: '1.5rem' }}>
+                        <div style={{ marginTop: '1rem' }}>
                             <button onClick={handleBackToOverview} style={{ 
                                 background: 'none', border: 'none', padding: '0', 
                                 cursor: 'pointer', fontWeight: '800', color: '#4F46E5', 
                                 display: 'flex', alignItems: 'center', gap: '0.5rem',
-                                marginBottom: '1.5rem', fontSize: '1rem'
+                                marginBottom: '1rem', fontSize: '0.9rem'
                             }}>
                                 <i className="fa-solid fa-arrow-left" /> Back to Archive
                             </button>
                             
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <div>
-                                    <h1 style={{ fontSize: '3.5rem', fontWeight: '900', color: '#111827', margin: 0, textTransform: 'lowercase' }}>
-                                        {selectedRole} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1.8rem' }}>Assessment Results</span>
+                                    <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
+                                        {selectedRole} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Results</span>
                                     </h1>
-                                    <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: '700', color: '#4F46E5' }}>
+                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
                                             <i className="fa-solid fa-calendar-plus" />
-                                            <span style={{ color: '#94A3B8' }}>Available From:</span>
-                                            <span>
-                                                {paginatedRows[0]?.available_from ? new Date(paginatedRows[0].available_from).toLocaleString() : 'N/A'}
-                                            </span>
+                                            <span style={{ color: '#94A3B8' }}>Start:</span>
+                                            <span>{paginatedRows[0]?.available_from ? new Date(paginatedRows[0].available_from).toLocaleDateString() : 'N/A'}</span>
                                         </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: '700', color: '#E11D48' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#E11D48' }}>
                                             <i className="fa-solid fa-calendar-xmark" />
-                                            <span style={{ color: '#94A3B8' }}>Available Until:</span>
-                                            <span>
-                                                {paginatedRows[0]?.available_until ? new Date(paginatedRows[0].available_until).toLocaleString() : 'N/A'}
-                                            </span>
+                                            <span style={{ color: '#94A3B8' }}>End:</span>
+                                            <span>{paginatedRows[0]?.available_until ? new Date(paginatedRows[0].available_until).toLocaleDateString() : 'N/A'}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ 
-                                    background: 'white', padding: '1.5rem 2.5rem', borderRadius: '24px', 
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.05)', textAlign: 'center',
+                                    background: 'white', padding: '1rem 2rem', borderRadius: '18px', 
+                                    boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textAlign: 'center',
                                     border: '1px solid #F1F5F9'
                                 }}>
-                                    <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Submissions</div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
+                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase' }}>Submissions</div>
+                                    <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
                                 </div>
                             </div>
                         </div>
                     )}
-                </header>
 
-                {viewMode === 'overview' && (
-                    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                        <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <div style={{ width: '4px', height: '24px', background: '#4F46E5', borderRadius: '2px' }} />
-                            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Candidate Performance</h2>
-                            <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600', marginLeft: 'auto' }}>
-                                {Object.keys(groupedData).length} Roles Found
-                            </span>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            {Object.entries(groupedData).map(([roleName, data]) => (
-                                <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
-                                    padding: '1.25rem 2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', borderLeft: '4px solid transparent'
-                                }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                        <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(79, 70, 229, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5' }}>
-                                            <i className="fa-solid fa-briefcase" />
-                                        </div>
-                                        <div>
-                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>{roleName}</h3>
-                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.25rem' }}>
-                                                <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: '600' }}>
-                                                    {data.total} Submission{data.total !== 1 ? 's' : ''}
-                                                </span>
-                                                {data.total > 0 && (
-                                                    <div style={{ display: 'flex', gap: '0.5rem', opacity: 0.7 }}>
-                                                        {data.resume.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.resume.length} Screening</span>}
-                                                        {data.assessment.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.assessment.length} Assessment</span>}
-                                                        {data.interview.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.interview.length} Interview</span>}
+                    {viewMode === 'transcript' ? renderTranscriptReport(showTranscriptDetail) : (
+                        <>
+                            {viewMode === 'overview' && (
+                                <div style={{ maxWidth: '800px', margin: '0 auto', marginTop: '1rem' }}>
+                                    <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                        <div style={{ width: '4px', height: '20px', background: '#4F46E5', borderRadius: '2px' }} />
+                                        <h2 style={{ fontSize: '1.2rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Candidate Performance</h2>
+                                        <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: '600', marginLeft: 'auto' }}>
+                                            {Object.keys(groupedData).length} Roles Found
+                                        </span>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                        {Object.entries(groupedData).map(([roleName, data]) => (
+                                            <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
+                                                padding: '1rem 1.5rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                                transition: 'all 0.2s', borderLeft: '4px solid transparent'
+                                            }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'rgba(79, 70, 229, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5' }}>
+                                                        <i className="fa-solid fa-briefcase" />
                                                     </div>
-                                                )}
+                                                    <div>
+                                                        <h3 style={{ fontSize: '1rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>{roleName}</h3>
+                                                        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.15rem' }}>
+                                                            <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: '600' }}>
+                                                                {data.total} Submission{data.total !== 1 ? 's' : ''}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style={{ color: '#94A3B8' }} className="arrow-icon">
+                                                    <i className="fa-solid fa-angle-right" />
+                                                </div>
                                             </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {viewMode === 'detail' && (
+                                <>
+                                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                        <div style={{ display: 'flex', gap: '0.4rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '10px' }}>
+                                            {[
+                                                { id: 'resume', label: 'Resume', icon: 'fa-file-magnifying-glass' },
+                                                { id: 'assessment', label: 'Assessments', icon: 'fa-brain' },
+                                                { id: 'interview', label: 'Interviews', icon: 'fa-microphone-lines' }
+                                            ].map(tab => (
+                                                <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
+                                                    background: activeTab === tab.id ? 'white' : 'transparent',
+                                                    border: 'none', padding: '0.5rem 1rem', borderRadius: '8px',
+                                                    fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
+                                                    cursor: 'pointer', fontSize: '0.85rem'
+                                                }}>
+                                                    <i className={`fa-solid ${tab.icon}`} style={{ marginRight: '0.4rem' }} />
+                                                    {tab.label}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
-                                    <div style={{ color: '#94A3B8', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="arrow-icon">
-                                        <i className="fa-solid fa-angle-right" />
+
+                                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#9CA3AF' }}>FILTER:</span>
+                                        {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
+                                            <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
+                                                padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
+                                                fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
+                                                borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
+                                                background: statusFilter === f.key ? '#EEF2FF' : 'white',
+                                                color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
+                                            }}>{f.label}</button>
+                                        ))}
+                                        <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
 
-                {viewMode === 'detail' && (
-                    <>
-                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                            <div style={{ display: 'flex', gap: '0.5rem', background: '#F4F7FE', padding: '0.35rem', borderRadius: '12px' }}>
-                                {[
-                                    { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
-                                    { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
-                                    { id: 'interview', label: 'AI Interviews', icon: 'fa-microphone-lines' }
-                                ].map(tab => (
-                                    <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
-                                        background: activeTab === tab.id ? 'white' : 'transparent',
-                                        border: 'none', padding: '0.65rem 1.3rem', borderRadius: '10px',
-                                        fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
-                                        cursor: 'pointer'
-                                    }}>
-                                        <i className={`fa-solid ${tab.icon}`} style={{ marginRight: '0.5rem' }} />
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF' }}>FILTER:</span>
-                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
-                                <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
-                                    padding: '0.35rem 0.9rem', borderRadius: '20px', border: '1px solid',
-                                    fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer',
-                                    borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
-                                    background: statusFilter === f.key ? '#EEF2FF' : 'white',
-                                    color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
-                                }}>{f.label}</button>
-                            ))}
-                            <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
-                        </div>
-
-                        <div className="glass-table-card">
-                            {loading ? (
-                                <div style={{ padding: '6rem 2rem', textAlign: 'center' }}>
-                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#4F46E5' }} />
-                                    Loading...
-                                </div>
-                            ) : (
-                                <div style={{ overflowX: 'auto' }}>
-                                    <table className="results-table">
-                                        <thead>
-                                            <tr>
-                                                <th style={{ width: '60px', textAlign: 'center' }}>
-                                                    {activeTab === 'assessment' && (
-                                                        <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
-                                                    )}
-                                                </th>
-                                                <th>Candidate Info</th>
-                                                <th>Result Data</th>
-                                                <th>Date</th>
-                                                <th>AI Status</th>
-                                                {(activeTab === 'assessment' || activeTab === 'interview') && <th>Action</th>}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {currentRows.length === 0 && (
-                                                <tr><td colSpan="6" style={{ padding: '4rem', textAlign: 'center' }}>No candidates found.</td></tr>
-                                            )}
-                                            {paginatedRows.map((r) => {
-                                                const isSelected = selected.has(r._deleteKey);
-                                                const isDeleting = deletingIds.has(r._deleteKey);
-                                                return (
-                                                    <tr key={r._deleteKey} className={isSelected ? 'selected' : ''}>
-                                                        <td style={{ textAlign: 'center' }}>
-                                                            {activeTab === 'assessment' && (
-                                                                <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            <div style={{ fontWeight: '800', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
-                                                                {r.full_name || r.candidate?.name || 'Extraction Failed'}
-                                                            </div>
-                                                            <div style={{ fontSize: '0.8rem', color: (r.email === 'Extraction Failed' || r.candidate?.email === 'Extraction Failed') ? '#EE5D50' : '#64748b' }}>
-                                                                {r.email || r.candidate?.email || 'Extraction Failed'}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            {activeTab === 'resume' ? `${r.resume_score || 0}% Match` :
-                                                                activeTab === 'assessment' ? `${r.percentage ?? 0}% (${r.score || 0}/${r.total_possible || r.total || r.total_questions || 0})` :
-                                                                    `${r.score != null ? Math.round(r.score) : 0}% Evaluation`}
-                                                        </td>
-                                                        <td>
-                                                            <div style={{ fontWeight: '500', color: '#1E293B' }}>
-                                                                {new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}
-                                                            </div>
-                                                            <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
-                                                                {new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
-                                                                <span style={{ padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                                    {getStatusLabel(r.status)}
-                                                                </span>
+                                    <div className="glass-table-card" style={{ marginBottom: '1rem' }}>
+                                        {loading ? (
+                                            <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
+                                                <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '1.5rem', color: '#4F46E5' }} />
+                                                <p>Loading...</p>
+                                            </div>
+                                        ) : (
+                                            <div style={{ overflowX: 'auto' }}>
+                                                <table className="results-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style={{ width: '40px', textAlign: 'center' }}>
                                                                 {activeTab === 'assessment' && (
                                                                     <button 
                                                                         onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
@@ -1028,28 +1060,82 @@ const ResultsAI = () => {
                                                                         Transcript
                                                                     </button>
                                                                 )}
-                                                            </td>
+                                                            </th>
+                                                            <th>Candidate Info</th>
+                                                            <th>Result</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {currentRows.length === 0 && (
+                                                            <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center' }}>No candidates found.</td></tr>
                                                         )}
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
-
-                                    {totalPages > 1 && (
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'white', borderTop: '1px solid #e2e8f0' }}>
-                                            <span style={{ fontSize: '0.8rem' }}>Page {currentPage} of {totalPages}</span>
-                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
-                                                <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+                                                        {paginatedRows.map((r) => {
+                                                            const isSelected = selected.has(r._deleteKey);
+                                                            return (
+                                                                <tr key={r._deleteKey} className={isSelected ? 'selected' : ''}>
+                                                                    <td style={{ textAlign: 'center' }}>
+                                                                        {activeTab === 'assessment' && (
+                                                                            <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                                        )}
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
+                                                                            {r.full_name || r.candidate?.name || 'Candidate'}
+                                                                        </div>
+                                                                        <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                                                                            {r.email || r.candidate?.email || 'N/A'}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
+                                                                        {activeTab === 'resume' ? `${r.resume_score || 0}%` :
+                                                                            activeTab === 'assessment' ? `${r.percentage ?? 0}%` :
+                                                                                `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
+                                                                    </td>
+                                                                    <td style={{ fontSize: '0.85rem' }}>
+                                                                        <div>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
+                                                                            {getStatusLabel(r.status)}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        {activeTab === 'interview' ? (
+                                                                            <button 
+                                                                                onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
+                                                                                style={{ 
+                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                    background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                }}
+                                                                            >Review</button>
+                                                                        ) : (
+                                                                            <button 
+                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                                style={{ 
+                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                    background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                }}
+                                                                            >View</button>
+                                                                        )}
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        })}
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                        </div>
-                                    )}
-                                </div>
+                                        )}
+                                    </div>
+                                </>
                             )}
-                        </div>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
