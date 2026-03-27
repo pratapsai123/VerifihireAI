@@ -861,6 +861,9 @@ class ProcessAnswerView(APIView):
         if not answer:
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # 1. Synchronize Turn Number with Frontend
+        current_turn_number = request.data.get('turn_number')
+        
         candidate_name = "Candidate"
         job_title = "Technical Professional"
         resume_context = "No resume available."
@@ -886,9 +889,10 @@ class ProcessAnswerView(APIView):
             history_context = ""
             if chat_history:
                 turns = []
-                # Total turns for logic:
-                ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
-                current_turn_number = ai_questions_count + 1 # This is the question we are about to ask
+                # Fallback calculation if frontend didn't pass turn_number
+                if not current_turn_number:
+                    ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
+                    current_turn_number = ai_questions_count + 1 
                 
                 for h in chat_history[-10:]: # Show more history for better context
                     role = h.get('role') or h.get('sender', 'unknown')
@@ -896,7 +900,8 @@ class ProcessAnswerView(APIView):
                     turns.append(f"{role.upper()}: {content}")
                 history_context = f"CURRENT QUESTION NUMBER: {current_turn_number} of 13\nCONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
             else:
-                current_turn_number = 1
+                if not current_turn_number:
+                    current_turn_number = 1
                 history_context = "This is the START of the interview. Question #1.\n"
 
             # --- DYNAMIC CATEGORY INJECTION ---
@@ -973,7 +978,10 @@ class ProcessAnswerView(APIView):
         - If target_category == "EXIT" or current_turn_number >= 14: The interview is OVER. Set "is_exit": true.
         
         ===== SPECIAL TRIGGERS =====
-        (A) CLARIFICATION: If candidate says "repeat that", "pardon", "what?" → Set "is_clarification": true, rephrase the last question.
+        (A) CLARIFICATION: If candidate says "repeat that", "pardon", "what?", "I don't understand", or asks for clarification:
+            1. Set "is_clarification": true.
+            2. In "feedback", write a friendly 1-sentence acknowledgement.
+            3. In "refined_next_question", provide a simplified or rephrased version of the EXACT SAME topic (Turn #{current_turn_number}). Do NOT move to the next category.
         (B) EXIT: If candidate says "end", "stop", "finish" → Set "is_exit": true, say goodbye.
         
         ===== SCORING GUIDES (0-10) =====

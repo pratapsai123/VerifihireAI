@@ -966,6 +966,7 @@ const AiInterviewSession = () => {
                 candidate_id: token,
                 question: typeof currentQ === 'object' ? currentQ.question : currentQ,
                 answer: answer,
+                turn_number: currentQuestionIndex + 1, // Explicit Turn Number
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
             }, { timeout: 60000 }); // 60s for more complex reasoning (increased for stability)
@@ -983,9 +984,15 @@ const AiInterviewSession = () => {
 
             if (isClarification) {
                 // Scenario A: Candidate asked for help/clarification
-                addMessage('ai', fullFeedback);
+                // REPHRASE LOGIC: Combine acknowledgement and the actual rephrased question
+                const rephrasedQ = data.refined_next_question || "";
+                const combinedClarification = (fullFeedback.trim() === rephrasedQ.trim())
+                    ? rephrasedQ
+                    : (fullFeedback.trim() + " " + rephrasedQ).trim();
+
+                addMessage('ai', combinedClarification);
                 try {
-                    await speak(fullFeedback);
+                    await speak(combinedClarification);
                 } catch (e) {
                     console.error("Clarification speak error:", e);
                 }
@@ -994,7 +1001,7 @@ const AiInterviewSession = () => {
                 isProcessingRef.current = false;
                 setAiStatus("Indu is Online");
                 if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                return; // STOP HERE: Don't move to next question
+                return; // STOP HERE: Don't move to next question index
             }
 
             const nextIdx = currentQuestionIndex + 1;
