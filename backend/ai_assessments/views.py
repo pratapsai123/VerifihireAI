@@ -1196,6 +1196,7 @@ class ProxyCodeExecuteView(APIView):
             # Special handling for SQL (default to sqlite for AI assessments)
             if language == 'sql':
                 payload["database_engine"] = "sqlite"
+                payload["stdin"] = "" # SQL executor shouldn't parse stdin as SQL if it's JSON
 
             # Call internal executor
             response = requests.post(f"{executor_base_url}/execute", json=payload, timeout=120)

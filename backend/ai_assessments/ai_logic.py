@@ -6,6 +6,7 @@ import time
 import groq
 from django.utils import timezone
 from ai_candidates.views import extract_json
+from .code_generator import CodeGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -74,6 +75,26 @@ def _normalize_generated_pool(payload):
             continue
         item = copy.deepcopy(c)
         item['difficulty'] = _normalize_difficulty_label(item.get('difficulty'), default='Medium')
+        
+        # Normalize starter_code keys to lowercase
+        sc = item.get('starter_code', {})
+        if not isinstance(sc, dict):
+            sc = {}
+        
+        # Priority 1: If AI provided function metadata, use our professional CodeGenerator templates
+        meta = item.get('function_meta')
+        if isinstance(meta, dict) and meta.get('name'):
+            func_name = meta.get('name')
+            params = meta.get('params', [])
+            ret_type = meta.get('return_type', 'void')
+            
+            # Generate code for all supported non-SQL languages automatically
+            for lang in ['python', 'java', 'javascript', 'cpp', 'csharp']:
+                sc[lang] = CodeGenerator.generate_starter_code(lang, func_name, params, ret_type)
+        
+        # Priority 2: Fill in or overwrite with normalized keys from existing sc (like SQL)
+        item['starter_code'] = {str(k).lower(): v for k, v in sc.items()}
+            
         normalized_coding.append(item)
 
     return {
@@ -165,8 +186,10 @@ def _repair_pool_shortfall(
                 "Generate ONLY missing coding challenges. "
                 f"Required missing coding count={missing_coding}, difficulties={needed_diffs}. "
                 "Each coding challenge must include: title, problem_statement, input_format, output_format, "
-                "constraints, example_input, example_output, explanation, starter_code, difficulty, test_cases. "
-                "Important: Generate EXACTLY 3 test_cases per challenge (1 sample, 2 hidden). "
+                "constraints, example_input, example_output, explanation, difficulty, test_cases, "
+                "and a function_meta object with keys: name (string), params (list of {name: str, type: str}), "
+                "return_type (string). For SQL, also include starter_code with table setup. "
+                "Important: Generate EXACTLY 10 test_cases per challenge (1 sample, 9 hidden). "
                 "CRITICAL: Do not return an empty coding_challenges list when missing_coding > 0."
             )
 
@@ -245,27 +268,53 @@ def _generate_coding_pool_ai_only(
 
         base_prompt = f"""
         Act as an expert technical recruiter and generate coding challenges only.
-        Job Description: {job_description}
-        Required Skills: {required_skills}
+        JOB DESCRIPTION: {job_description}
+        REQUIRED SKILLS: {required_skills}
 
         TASK: Generate EXACTLY {batch_count} coding challenges.
-        Required difficulties in order: {batch_diffs}
+        REQUIRED DIFFICULTIES in order: {batch_diffs}
 
-        Each challenge object must include keys:
-        title, problem_statement, input_format, output_format, constraints,
-        example_input, example_output, explanation, starter_code, difficulty, test_cases.
+        CRITICAL INSTRUCTIONS:
+        1. JD-ROOTED: Every challenge MUST be directly relevant to the tasks and technologies described in the Job Description above.
+        2. ENTERPRISE SCENARIOS: Use real-world business scenarios (e.g., "Optimize a logistics route", "Parse financial transaction logs", "Implement a caching layer for a high-traffic API") rather than generic "Reverse a string" problems.
+        3. DIFFICULTY ALIGNMENT: Ensure the complexity of the algorithm correctly matches the requested difficulty ({batch_diffs}).
+        4. NO DUPLICATES: {avoid_instr}
 
-        CRITICAL:
-        - JD-ROOTED: Challenges MUST be specifically rooted in the Job Description and Required Skills above. 
+        Each challenge object must include:
+        - title (string): Descriptive and professional.
+        - problem_statement (string): Clear, detailed, and JD-relevant.
+        - difficulty (string): Must match one of {batch_diffs}.
+        - function_meta: {{ name: "string", params: [{{name: "string", type: "string"}}], return_type: "string" }}.
+        - example_input/example_output: Sample data.
+        - explanation: Why the input results in the output.
+        - constraints: List of strings (e.g. ["n <= 10^5"]).
+        - 10 test_cases: Exactly 10 (1 sample, 9 hidden).
+
+        - JD-ROOTED: Challenges MUST be specifically rooted in the Job Description and Required Skills above.
+        - PROFESSIONAL SCENARIOS: Use real-world, enterprise-level scenarios related to the JD. Avoid generic "Hello World" or "Fibonacci" style problems.
+        - LOGICAL CONSISTENCY: Each problem must have clear parameters, edge cases (empty input, null, etc.), and unambiguous expected outputs.
         - Ensure VARIETY: Explore different facets, tools, and technical scenarios mentioned in the JD. Each challenge must cover a UNIQUE concept.
         - Avoid DUPLICATION: Do not repeat logic or themes across challenges.{avoid_instr}
         - STDLIB ONLY: DO NOT use external libraries (e.g., EXPRESS, LODASH, AXIOS, REACT). All solutions MUST use standard libraries only.
         - NO WEB SERVERS: Problems must be ALGORITHMIC, not web server-based.
         - STDIN/STDOUT: All problems must be solvable using standard input/output (stdin/stdout).
-        - problem_statement must be algorithmic/logic-based and language-agnostic.
-        - starter_code must be an object with keys: python, java, javascript, cpp, csharp, kotlin, swift, sql.
-        - starter_code must be boilerplate only (no solution logic).
-        - Generate exactly 3 test_cases per challenge (1 sample, 2 hidden). 
+        - problem_statement must be algorithmic/logic-based and 100% LANGUAGE-AGNOSTIC for 'Code' challenges.
+        - CRITICAL: In the problem_statement for 'Code', DO NOT use terms like "Write a Python function" or "Create a Java class". Use generic terms like "Write a solution" or "Implement a function".
+        - FOR SQL CHALLENGES: The `problem_statement` MUST include a professional table description of the schema (mimicking the HackerRank/LeetCode style). 
+        - SQL TABLE FORMAT: Inside the `problem_statement`, include an HTML table showing the schema. Example:
+          `<h3>STATION</h3><table border="1"><tr><th>Field</th><th>Type</th></tr><tr><td>ID</td><td>NUMBER</td></tr><tr><td>CITY</td><td>VARCHAR2(21)</td></tr></table>`
+        - CRITICAL: Ensure the SQL query complexity (e.g. JOINs, Subqueries, Window Functions) strictly matches the requested difficulty ({batch_diffs}).
+        - NO PLAGIARISM: Do not copy exact questions from HackerRank/LeetCode. Create original scenarios rooted in the JD ({job_description}).
+        - BALANCED MIX: If generating more than one challenge, ensure a mix of types (Code vs SQL) as previously instructed.
+        - For 'SQL' challenges, use "Write a SQL query" as these are specific to database environments.
+        - function_meta must be an object defined as: {{ name: "string", params: [{{name: "string", type: "string"}}], return_type: "string" }}.
+        - For SQL, starter_code MUST ONLY contain valid SQL table setup (CREATE/INSERT). If you include descriptions, they MUST be properly commented out using '--'.
+        - For non-SQL languages, you do not need to provide starter_code; the system will generate it from function_meta.
+        - Generate exactly 10 test_cases per challenge (1 sample, 9 hidden). 
+        - CRITICAL for SQL: test_case `input` MUST be an empty string "". The table schema belongs only in `starter_code`.
+        - CRITICAL for SQL: test_case `output` MUST be the final query result (e.g. the rows returned by SELECT), NOT the CREATE TABLE statements.
+        - For SQL, example_output and test_case outputs should be the raw string result expected from a standard SQL CLI (no Python formatting, no single quotes unless part of the data).
+        - CRITICAL: DO NOT use placeholders like `[...]`, `...`, or `null` (unless literal) in test case outputs. They MUST be the FULL expected string that the program should return.
         - Return JSON only with root key: coding_challenges.
         """
 
