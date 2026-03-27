@@ -107,8 +107,6 @@ function AppContent() {
     '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
     '/accept-invite',
     '/feedback-page',
-    '/results',
-    '/results-ai',
   ];
 
   const isFullScreenPage =
@@ -124,7 +122,11 @@ function AppContent() {
   return (
     <div className="app-container">
       {!isFullScreenPage && <Header />}
-      <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh', overflow: 'hidden' } : {}}>
+      <div className="app-scroll" style={isFullScreenPage ? { 
+        top: 0, 
+        height: '100vh', 
+        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto' 
+      } : {}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

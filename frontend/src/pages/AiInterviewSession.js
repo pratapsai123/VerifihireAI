@@ -31,6 +31,7 @@ const AiInterviewSession = () => {
     const [sttReady, setSttReady] = useState(false); // New state for WS status
     const [silenceCountdown, setSilenceCountdown] = useState(0);
     const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     // Refs
     const videoRef = useRef(null);
@@ -66,6 +67,9 @@ const AiInterviewSession = () => {
     const screenStreamRef = useRef(null);
     const screenCanvasRef = useRef(null);
     const lastCaptureTimeRef = useRef({}); // Store timestamps per eventType for cooldowns
+    const isFullscreenRef = useRef(false);
+    const currentAudioRef = useRef(null);
+    const isStartingMicRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -264,15 +268,87 @@ const AiInterviewSession = () => {
         initAiMonitoring();
         const sc = startCamera; // Reference for cleanup if needed
 
+        const handleFullscreenChange = () => {
+            const isFS = !!document.fullscreenElement;
+            setIsFullscreen(isFS);
+            isFullscreenRef.current = isFS;
+
+            if (isFS && isPermissionsGranted) {
+                console.log("Integrity: Fullscreen restored. Resuming hardware...");
+                // 1. Unmute Hardware Tracks
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
+                if (streamRef.current) {
+                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
+                }
+                // 2. Ensure video element is playing
+                if (videoRef.current) {
+                    videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
+                }
+                // (Note: startListening is now handled by a dedicated useEffect for better sync)
+                setAiStatus("Interview Resumed");
+            }
+
+            if (!isFS && isPermissionsGranted) {
+                console.log("Integrity: Fullscreen exited. Pausing hardware...");
+                // 1. Physically Mute Microphone Hardware
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = false; });
+                }
+                // 2. Mute Camera Hardware
+                if (streamRef.current) {
+                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = false; });
+                }
+
+                // 3. Stop AssemblyAI STT
+                if (assemblyAIRef.current) {
+                    try { assemblyAIRef.current.stop(); } catch (e) { }
+                }
+                
+                // 3. Stop Speech (Browser TTS)
+                window.speechSynthesis.cancel();
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+
+                // 4. Stop Speech (Coqui TTS)
+                if (currentAudioRef.current) {
+                    try {
+                        currentAudioRef.current.pause();
+                        currentAudioRef.current.volume = 0; // Absolute silence
+                        currentAudioRef.current = null;
+                    } catch (e) { }
+                }
+                setAiStatus("Interview Paused (Not in Full Screen)");
+            }
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
         return () => {
             if (detectInterval) clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('blur', handleBlur);
-            // sc(); // Optional: stop camera on unmount if appropriate
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
         };
     }, [token, showAiEvent]);
 
-    // 3. Speech and Interactions
+    // 3. CONTINUOUS PRIVACY HAMMER: Mutes everything 10 times a second if not in FS
+    useEffect(() => {
+        if (!isFullscreen && isPermissionsGranted && !isCompleted) {
+            const hammer = setInterval(() => {
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                if (currentAudioRef.current) {
+                    try {
+                        currentAudioRef.current.pause();
+                        currentAudioRef.current.volume = 0;
+                    } catch (e) {}
+                }
+            }, 100);
+            return () => clearInterval(hammer);
+        }
+    }, [isFullscreen, isPermissionsGranted, isCompleted]);
+
+    // 4. Speech and Interactions
     const unlockSpeech = useCallback(() => {
         if (!synthRef.current) return;
         // Playing a silent 0.01s utterance unlocks the browser's speech synthesis
@@ -283,6 +359,11 @@ const AiInterviewSession = () => {
 
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
+
+        if (!isFullscreenRef.current && isPermissionsGranted) {
+            console.log("Speak blocked: Not in full screen.");
+            return Promise.resolve();
+        }
 
         // Immediate State Lock: Stop silence watchdog before promise starts
         setIsSpeaking(true);
@@ -322,9 +403,21 @@ const AiInterviewSession = () => {
 
                 const audioBlob = new Blob([res.data], { type: 'audio/mpeg' });
                 const audioUrl = URL.createObjectURL(audioBlob);
+
+                // SECONDARY GUARD: Ensure we didn't exit fullscreen while synthesis was occurring
+                if (!isFullscreenRef.current && isPermissionsGranted) {
+                    console.log("Speak aborted: Fullscreen exited during synthesis.");
+                    URL.revokeObjectURL(audioUrl);
+                    setIsSpeaking(false);
+                    isSpeakingRef.current = false;
+                    return resolve();
+                }
+
                 const audio = new Audio(audioUrl);
+                currentAudioRef.current = audio;
 
                 audio.onended = () => {
+                    currentAudioRef.current = null;
                     clearTimeout(watchdog);
                     URL.revokeObjectURL(audioUrl);
                     // Delay unlock to allow speaker echo to fade
@@ -351,8 +444,13 @@ const AiInterviewSession = () => {
                     fallbackBrowserSpeak(text, watchdog, resolve);
                 };
 
-                audio.play().catch(() => {
+                audio.play().catch((err) => {
+                    if (err.name === 'AbortError') {
+                        console.log("Audio play interrupted by pause (intentional for fullscreen exit).");
+                        return;
+                    }
                     // Autoplay blocked — fallback to browser TTS
+                    currentAudioRef.current = null;
                     URL.revokeObjectURL(audioUrl);
                     fallbackBrowserSpeak(text, watchdog, resolve);
                 });
@@ -380,6 +478,15 @@ const AiInterviewSession = () => {
             voicesRef.current[0];
 
         if (voice) utterance.voice = voice;
+
+        // SECONDARY GUARD: Prevent browser TTS if fullscreen was exited during setup
+        if (!isFullscreenRef.current && isPermissionsGranted) {
+            console.log("Browser Speak aborted: Not in full screen.");
+            if (watchdog) clearTimeout(watchdog);
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+            return resolve();
+        }
 
         utterance.onend = () => {
             if (watchdog) clearTimeout(watchdog);
@@ -479,12 +586,19 @@ const AiInterviewSession = () => {
     }, [addMessage, speak]);
 
     const startListening = useCallback(async () => {
-        if (userInputMode !== 'audio' || isRecordingRef.current) return;
+        if (userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
+        if (!isFullscreenRef.current) {
+            console.log("Mic blocked: Not in full screen.");
+            return;
+        }
+        isStartingMicRef.current = true;
 
         let attempts = 0;
         const maxAttempts = 10;
 
         const tryStart = async () => {
+            if (!isFullscreenRef.current) return;
+            
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
@@ -786,7 +900,9 @@ const AiInterviewSession = () => {
             }
         };
 
-        tryStart();
+        tryStart().finally(() => {
+            isStartingMicRef.current = false;
+        });
 
         return () => {
             if (assemblyAIRef.current) {
@@ -796,6 +912,11 @@ const AiInterviewSession = () => {
     }, [userInputMode, startSilenceWatchdog]);
 
     const handleAnswerSubmission = useCallback(async (answer) => {
+        if (!isFullscreenRef.current) {
+            console.log("Submission blocked: Not in full screen.");
+            return;
+        }
+
         if (!answer || !answer.trim() || isProcessing) {
             console.log("Submission skipped: answer empty or already processing");
             return;
@@ -1101,6 +1222,20 @@ const AiInterviewSession = () => {
     }, [token]);
 
     const handleStartInterview = async () => {
+        // 1. Request Fullscreen IMMEDIATELY on click (strict browser requirement)
+        try {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                await elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                await elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                await elem.msRequestFullscreen();
+            }
+        } catch (err) {
+            console.warn("Initial fullscreen request failed/denied:", err);
+        }
+
         setAiStatus("Requesting Permissions...");
         
         const screenSuccess = await startScreenShare();
@@ -1109,6 +1244,7 @@ const AiInterviewSession = () => {
         await startCamera();
         
         setIsPermissionsGranted(true);
+        isFullscreenRef.current = true; // Assume success if code reaches here after await
         setAiStatus("Preparing Indu...");
 
         const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
@@ -1157,6 +1293,19 @@ const AiInterviewSession = () => {
     useEffect(() => {
         submitHandlerRef.current = handleAnswerSubmission;
     }, [handleAnswerSubmission]);
+
+    // AUTO-RESUME MIC after Fullscreen restore
+    useEffect(() => {
+        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current) {
+            const timer = setTimeout(() => {
+                if (!isRecordingRef.current) {
+                    console.log("Auto-resuming mic via Effect...");
+                    startListening();
+                }
+            }, 1000); // 1s buffer allowed for transition to settle
+            return () => clearTimeout(timer);
+        }
+    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening]);
 
     // (Native WebKit Speech Recognition removed in favor of AssemblyAI)
     useEffect(() => {
@@ -1232,6 +1381,11 @@ const AiInterviewSession = () => {
 
 
     const toggleRecording = () => {
+        if (!isFullscreen) {
+            alert("Please return to full-screen mode to resume the interview.");
+            return;
+        }
+
         // Unlock speech on first user click if not already
         unlockSpeech();
 
@@ -1302,6 +1456,44 @@ const AiInterviewSession = () => {
 
     return (
         <div className="ai-session-page">
+            {isPermissionsGranted && !isFullscreen && !isCompleted && (
+                <div 
+                    onClick={() => {
+                        const elem = document.documentElement;
+                        if (elem.requestFullscreen) elem.requestFullscreen();
+                        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                    }}
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        background: '#0a0a0a',
+                        color: 'white',
+                        zIndex: 30000,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        padding: '2rem',
+                        fontFamily: 'Inter, sans-serif',
+                        cursor: 'pointer' // Indicate it is clickable
+                    }}
+                >
+                    <div style={{ maxWidth: '500px', pointerEvents: 'none' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>🖥️</div>
+                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>Switch to Full Screen</h1>
+                        <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2.5rem', lineHeight: '1.6' }}>
+                            To ensure the integrity of your interview, you must remain in <b>Full Screen</b> mode.
+                        </p>
+                        <p style={{ fontSize: '1rem', color: '#6366f1', fontWeight: 'bold' }}>
+                            <i className="fa-solid fa-arrow-pointer" style={{ marginRight: '8px' }}></i>
+                            Click anywhere to return to Full Screen
+                        </p>
+                    </div>
+                </div>
+            )}
+
             {!isPermissionsGranted && !isCompleted && (
                 <div style={{
                     position: 'fixed',

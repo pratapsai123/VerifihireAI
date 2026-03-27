@@ -1815,7 +1815,15 @@ def results_overview_view(request):
                     'integrity': {
                         'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                         'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
-                    }
+                    },
+                    'integrity_logs': [
+                        {
+                            'event_type': log.event_type,
+                            'screenshot_base64': log.screenshot_base64,
+                            'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                            'timestamp': log.timestamp.isoformat() if log.timestamp else None
+                        } for log in s.integrity_logs.all()
+                    ]
                 }
             )
 

@@ -62,8 +62,13 @@ const AiInterview = () => {
         e.preventDefault();
         setError('');
 
-        if (!file || !jobDescription) {
-            setError('Please provide both a Candidate List and Job Description.');
+        if (!file) {
+            setError('Please upload a Candidate List (CSV/Excel).');
+            return;
+        }
+
+        if (!jobDescription || jobDescription.trim().length < 20) {
+            setError('Please provide a detailed Job Description (at least 20 characters) for the AI to analyze.');
             return;
         }
 
@@ -211,25 +216,28 @@ const AiInterview = () => {
                                         <option value="custom">Custom (Type Manually)</option>
                                     </select>
 
-                                    {selectedRoleId === 'custom' && (
+                                    {selectedRoleId && (
                                         <div className="input-group" style={{ marginTop: '1rem' }}>
                                             <label className="input-label">Role Title</label>
                                             <input
                                                 type="text"
-                                                value={customRoleTitle}
-                                                onChange={(e) => setCustomRoleTitle(e.target.value)}
+                                                value={selectedRoleId === 'custom' ? customRoleTitle : (jobRoles.find(r => r.id.toString() === selectedRoleId)?.title || '')}
+                                                onChange={(e) => selectedRoleId === 'custom' && setCustomRoleTitle(e.target.value)}
+                                                readOnly={selectedRoleId !== 'custom'}
                                                 placeholder="e.g. Senior Frontend Developer"
                                                 className="modern-input"
+                                                style={selectedRoleId !== 'custom' ? { background: '#f8fafc', cursor: 'default' } : {}}
                                             />
                                         </div>
                                     )}
 
-                                    {selectedRoleId === 'custom' && (
+                                    {selectedRoleId && (
                                         <textarea
                                             value={jobDescription}
                                             onChange={(e) => setJobDescription(e.target.value)}
-                                            placeholder="Paste the detailed Job Description here. AI will use this to dynamically generate probing questions."
+                                            placeholder="Detailed Job Description. AI will use this to dynamically generate probing questions."
                                             className="modern-textarea"
+                                            style={{ marginTop: '1rem', minHeight: '150px' }}
                                             required
                                         />
                                     )}

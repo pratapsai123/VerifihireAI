@@ -910,8 +910,8 @@ class ProcessAnswerView(APIView):
                 7: ("RESUME-SKILL-Q2", "Ask about a DIFFERENT SPECIFIC SKILL from the Resume relevant to the JD."),
                 8: ("PROJECT-Q1", "Ask about a SPECIFIC PROJECT mentioned in the Resume (role, challenges, or architecture)."),
                 9: ("PROJECT-Q2", "Ask about a DIFFERENT PROJECT from the Resume (or deeper dive into the previous project)."),
-                10: ("SCENARIO-Q1", "Ask a 'Imagine you are...' or 'How would you handle...' hypothetical workplace scenario."),
-                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question."),
+                10: ("SCENARIO-Q1", "Ask a 'Imagine you are...' or 'How would you handle...' hypothetical workplace scenario derived DIRECTLY from the Job Description requirements."),
+                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question, also derived DIRECTLY from the Job Description."),
                 12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc."),
                 13: ("SYNTAX-Q2", "Ask a DIFFERENT coding or syntax question.")
             }
@@ -962,6 +962,7 @@ class ProcessAnswerView(APIView):
         - For RESUME-SKILL questions: Pick a SPECIFIC skill from the resume.
         - For PROJECT questions: Reference a SPECIFIC project from the resume by name.
         - For SYNTAX questions (Turns 12-13): Ask actual coding problems, NOT conceptual questions.
+        - For SCENARIO questions (Turns 10-11): These MUST be hypothetical scenarios based on the Job Description's requirements or the challenges typical to the **{job_title}** role.
         - Do NOT ask follow-up questions on the same topic. Each turn MUST move to the next category.
         
         ===== INPUT MODE =====
