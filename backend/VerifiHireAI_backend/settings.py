@@ -131,7 +131,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihire'),
+        'NAME': os.environ.get('DB_NAME', 'user'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
