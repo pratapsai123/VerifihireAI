@@ -1,9 +1,0 @@
-Critical OCR error: Cannot open empty stream.
-Traceback (most recent call last):
-  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\api\ocr_utils.py", line 131, in extract_text_from_pdf_ocr
-    doc = fitz.open(stream=file_content, filetype="pdf")
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\pymupdf\__init__.py", line 2966, in __init__
-    raise EmptyFileError('Cannot open empty stream.')
-pymupdf.EmptyFileError: Cannot open empty stream.
-

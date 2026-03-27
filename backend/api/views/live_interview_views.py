@@ -1004,7 +1004,7 @@ def draft_interview_invitations_view(request, draft_id=None):
                 company=user_profile.company,
                 content_type='InterviewInvitation',
                 object_id=draft.id,
-                object_repr=f"Interview Draft for {draft.email}",
+                object_repr=f"Interview Draft for {draft.name} ({draft.email})",
                 reason=request.data.get('reason')
             )
             

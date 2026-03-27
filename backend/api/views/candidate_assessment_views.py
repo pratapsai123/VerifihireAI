@@ -1809,7 +1809,7 @@ class CandidateSubmissionDeleteView(generics.DestroyAPIView):
             company=user_profile.company,
             content_type='CandidateSubmission',
             object_id=instance.id,
-            object_repr=f"Submission for {instance.invitation.email}",
+            object_repr=f"Submission for {instance.invitation.name} ({instance.invitation.email})",
             reason=request.data.get('reason')
         )
         

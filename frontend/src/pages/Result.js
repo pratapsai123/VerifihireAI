@@ -385,33 +385,34 @@ export default function Result() {
                                                     const role = JSON.parse(localStorage.getItem('user'))?.role;
                                                     const isAdmin = role === 'company_admin' || role === 'application_admin';
 
+                                                    const delId = r.submission_id;
+                                                    if (!delId) {
+                                                        alert("Cannot delete a pending invitation from this view yet.");
+                                                        return;
+                                                    }
+
+                                                    const isAI = String(delId).startsWith('ai_');
+                                                    const realId = isAI ? String(delId).replace('ai_', '') : delId;
+                                                    const endpoint = isAI ? `${API_BASE_URL}/ai-assessments/submission/${realId}/` : `${API_BASE_URL}/submissions/${realId}/`;
+
                                                     if (isAdmin) {
                                                         if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
                                                             try {
-                                                                const delId = r.submission_id;
-                                                                if (!delId) {
-                                                                    alert("Cannot delete a pending invitation from this view yet.");
-                                                                    return;
-                                                                }
-                                                                await axios.delete(`${API_BASE_URL}/submissions/${delId}/`, {
+                                                                await axios.delete(endpoint, {
                                                                     data: { confirm_permanent_delete: true }
                                                                 });
                                                                 alert("Deleted successfully.");
                                                                 load();
                                                             } catch (err) {
-                                                                alert("Failed to delete.");
+                                                                console.error("Delete Error:", err.response || err);
+                                                                alert("Failed to delete. " + (err.response?.data?.error || err.message));
                                                             }
                                                         }
                                                     } else {
-                                                        if (!r.submission_id) {
-                                                            alert("Request delete is only for submissions.");
-                                                            return;
-                                                        }
                                                         const reason = prompt("Enter reason for deletion request:");
                                                         if (reason) {
                                                             try {
-                                                                await axios.get(`${API_BASE_URL}/submissions/${r.submission_id}/`); // check if exists
-                                                                await axios.delete(`${API_BASE_URL}/submissions/${r.submission_id}/`, {
+                                                                await axios.delete(endpoint, {
                                                                     data: { reason }
                                                                 });
                                                                 alert("Deletion request sent.");

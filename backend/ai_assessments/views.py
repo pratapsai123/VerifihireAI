@@ -1276,7 +1276,7 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
             company=user_profile.company,
             content_type='AIAssessmentSubmission',
             object_id=instance.id,
-            object_repr=f"AI Submission for {instance.candidate_email}",
+            object_repr=f"AI Submission for {instance.candidate_name} ({instance.candidate_email})",
             reason=request.data.get('reason')
         )
         

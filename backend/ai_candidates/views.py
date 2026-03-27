@@ -542,7 +542,7 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
             company=user_profile.company,
             content_type='Candidate',
             object_id=instance.id,
-            object_repr=f"Candidate Profile: {instance.name} ({instance.email})",
+            object_repr=f"Candidate Profile: {instance.full_name} ({instance.email})",
             reason=request.data.get('reason')
         )
         

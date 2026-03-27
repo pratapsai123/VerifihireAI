@@ -319,7 +319,7 @@ def handle_deletion_request(user_profile, company, content_type, object_id, obje
             status=DeletionRequest.STATUS_APPROVED,
             actioned_at=timezone.now()
         )
-        from .workflow_views import _perform_actual_deletion
+        from .views.workflow_views import _perform_actual_deletion
         _perform_actual_deletion(req)
         return Response({'message': f'{content_type} deleted successfully (Audit logged).'}, status=status.HTTP_200_OK), True
 
