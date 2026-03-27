@@ -57,7 +57,6 @@ class Candidate(models.Model):
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Groups resumes uploaded in the same bulk session")
 
-
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
 

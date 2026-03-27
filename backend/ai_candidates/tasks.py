@@ -118,15 +118,8 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
                 except:
                     num_percentage = 0
                 
-                # Robust Name Logic: Fallback to filename if "Extraction Failed"
-                extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
-                if (extracted_name == "Extraction Failed" or not extracted_name) and candidate.resume:
-                    import os
-                    base_name = os.path.basename(candidate.resume.name).rsplit('.', 1)[0]
-                    extracted_name = base_name.replace('_', ' ').replace('-', ' ').title()
-
-                candidate.full_name = extracted_name
-                candidate.email = match_result.get('candidate_email') or match_result.get('email') or match_result.get('email_address') or candidate.email
+                candidate.full_name = match_result.get('candidate_name', candidate.full_name)
+                candidate.email = match_result.get('candidate_email', candidate.email)
                 candidate.resume_score = num_percentage
                 is_eligible = (num_percentage >= threshold)
                 candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
@@ -145,12 +138,9 @@ def process_resume_batch_task(batch_id, job_description, threshold=70, is_fully_
                 logger.info(f"Successfully processed candidate {candidate.id}. Score: {num_percentage}%")
             else:
                 logger.error(f"Failed to extract results for candidate {candidate.id} after retries.")
-                # Fallback to filename even on total AI failure if possible so the record isn't just "Extraction Failed"
-                if candidate.full_name == "Extraction Failed" and candidate.resume:
-                    import os
-                    base_name = os.path.basename(candidate.resume.name).rsplit('.', 1)[0]
-                    candidate.full_name = base_name.replace('_', ' ').replace('-', ' ').title()
-                
+                # We don't mark as failure here so it can be manually retried if needed, or 
+                # we could mark it as failure. Let's keep it as 'New' or mark as error?
+                # Actually, let's mark it so the UI knows it failed.
                 candidate.status = 'Extraction Failed'
                 candidate.save()
 

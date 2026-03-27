@@ -1019,46 +1019,7 @@ const ResultsAI = () => {
                                                         <tr>
                                                             <th style={{ width: '40px', textAlign: 'center' }}>
                                                                 {activeTab === 'assessment' && (
-                                                                    <button 
-                                                                        onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
-                                                                        style={{ background: 'none', border: 'none', color: '#EE5D50', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center', transition: 'all 0.2s', opacity: 0.6 }}
-                                                                        title="Delete Result"
-                                                                    >
-                                                                        <i className="fa-solid fa-trash-can" style={{ fontSize: '0.9rem' }}></i>
-                                                                    </button>
-                                                                )}
-                                                            </div>
-                                                        </td>
-                                                        {(activeTab === 'assessment' || activeTab === 'interview') && (
-                                                            <td>
-                                                                {activeTab === 'assessment' ? (
-                                                                    <button 
-                                                                        onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.submission_id }); }}
-                                                                        className="view-details-btn"
-                                                                        style={{ 
-                                                                            padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
-                                                                            background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                            color: 'white', fontWeight: '700', fontSize: '0.85rem',
-                                                                            cursor: 'pointer', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
-                                                                            transition: 'all 0.2s'
-                                                                        }}
-                                                                    >
-                                                                        View Details
-                                                                    </button>
-                                                                ) : (
-                                                                    <button 
-                                                                        onClick={(e) => { e.stopPropagation(); setSummaryModal(r); }}
-                                                                        className="view-details-btn"
-                                                                        style={{ 
-                                                                            padding: '0.6rem 1.4rem', borderRadius: '12px', border: 'none',
-                                                                            background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
-                                                                            color: 'white', fontWeight: '700', fontSize: '0.85rem',
-                                                                            cursor: 'pointer', boxShadow: '0 4px 12px rgba(5, 205, 153, 0.25)',
-                                                                            transition: 'all 0.2s'
-                                                                        }}
-                                                                    >
-                                                                        Transcript
-                                                                    </button>
+                                                                    <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
                                                                 )}
                                                             </th>
                                                             <th>Candidate Info</th>

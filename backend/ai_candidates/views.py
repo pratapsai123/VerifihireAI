@@ -148,8 +148,7 @@ class BulkInviteView(APIView):
                     company=company,
                     user_profile=user_profile
                 )
-                base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
-                link = f"{base_url}/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -576,13 +575,6 @@ class RetryFailedExtractionsView(APIView):
                 
                 if match_result:
                     extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
-                    
-                    # Fallback to filename if extraction still says failure
-                    if extracted_name == "Extraction Failed" and candidate.resume:
-                        import os
-                        base_name = os.path.basename(candidate.resume.name).rsplit('.', 1)[0]
-                        extracted_name = base_name.replace('_', ' ').replace('-', ' ').title()
-
                     extracted_email = match_result.get('candidate_email') or match_result.get('email') or match_result.get('email_address') or "Extraction Failed"
                     
                     candidate.full_name = extracted_name
@@ -662,10 +654,6 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        # Allow unrestricted GET requests so that candidates (and testing recruiters) can access the interview link regardless of auth session.
-        if self.request.method == 'GET':
-            return Candidate.objects.filter(is_deleted=False)
-            
         if self.request.user.is_authenticated:
             user_profile = getattr(self.request.user, 'profile', None)
             if not user_profile or not user_profile.company:
@@ -682,6 +670,7 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
                 user_profile_id__in=scoped_ids,
                 is_deleted=False
             )
+        # Allow unauthenticated GET requests (required for candidates starting interviews)
         return Candidate.objects.filter(is_deleted=False)
 
     def destroy(self, request, *args, **kwargs):

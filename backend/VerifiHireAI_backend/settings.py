@@ -94,7 +94,6 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            # Since Redis is in Docker but exposed to 6379, 127.0.0.1 works for local backend
             "hosts": [(os.environ.get('REDIS_HOST', '127.0.0.1'), int(os.environ.get('REDIS_PORT', 6379)))],
         },
     },
@@ -121,7 +120,7 @@ CELERY_BEAT_SCHEDULE = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DB_CONNECT_TIMEOUT = int(os.environ.get('DB_CONNECT_TIMEOUT', '10'))
-DB_SSLMODE = os.environ.get('DB_SSLMODE', '').strip().lower()  # e.g. "require" for Supabase
+DB_SSLMODE = os.environ.get('DB_SSLMODE', '').strip().lower()
 
 db_options = {}
 if DB_SSLMODE:
@@ -187,7 +186,6 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440
 FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
 
 # OTP settings
-# OTP validity duration (in seconds). Default used by `EmailOTP.is_expired()`.
 EMAIL_OTP_EXPIRY_SECONDS = 120
 
 # Default primary key field type
@@ -203,7 +201,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    # Disable browsable API - return JSON only
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
@@ -213,7 +210,6 @@ default_cors_origins = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://localhost:3000",
     "https://www.verifihireai.com",
     "http://20.205.31.46",
 ]
@@ -267,7 +263,7 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
 ASSEMBLYAI_API_KEY = os.environ.get('ASSEMBLYAI_API_KEY')
 
 from datetime import timedelta
@@ -284,4 +280,4 @@ SIMPLE_JWT = {
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
-}  
+}
