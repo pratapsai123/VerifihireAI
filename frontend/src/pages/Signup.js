@@ -72,6 +72,23 @@ function Signup() {
       return;
     }
 
+    // Check for free email domains
+    const freeDomains = [
+      'gmail.com', 'googlemail.com',
+      'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
+      'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+      'icloud.com', 'me.com', 'mac.com',
+      'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+      'mail.com', 'email.com', 'post.com', 'usa.com',
+      'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com',
+      'tutanota.com', 'tuta.com'
+    ];
+    const domain = businessEmail.split('@')[1]?.toLowerCase();
+    if (freeDomains.includes(domain)) {
+      setFieldErrors(prev => ({ ...prev, businessEmail: 'Please use your business email. Free email domains like Gmail/Yahoo are not allowed for organization registration.' }));
+      return;
+    }
+
     setSendingOtp(true);
     setFieldErrors({}); // Clear previous errors
     setOtpSuccess('');
@@ -360,7 +377,18 @@ function Signup() {
                     placeholder="Business Email *"
                     value={businessEmail}
                     onChange={(e) => {
-                      setBusinessEmail(e.target.value);
+                      const value = e.target.value;
+                      setBusinessEmail(value);
+                      
+                      // Clear validation error if corrected
+                      if (fieldErrors.businessEmail) {
+                        setFieldErrors(prev => {
+                          const newState = { ...prev };
+                          delete newState.businessEmail;
+                          return newState;
+                        });
+                      }
+
                       // Reset verification if email changes
                       if (emailVerified) {
                         setEmailVerified(false);
@@ -369,7 +397,32 @@ function Signup() {
                       }
                     }}
                     onFocus={() => setBusinessEmailFocused(true)}
-                    onBlur={() => setBusinessEmailFocused(false)}
+                    onBlur={() => {
+                      setBusinessEmailFocused(false);
+                      if (businessEmail) {
+                        const freeDomains = [
+                          'gmail.com', 'googlemail.com',
+                          'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
+                          'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+                          'icloud.com', 'me.com', 'mac.com',
+                          'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+                          'mail.com', 'email.com', 'post.com', 'usa.com',
+                          'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com',
+                          'tutanota.com', 'tuta.com'
+                        ];
+                        const domain = businessEmail.split('@')[1]?.toLowerCase();
+                        if (freeDomains.includes(domain)) {
+                          setFieldErrors(prev => ({ ...prev, businessEmail: 'Please use your business email address.' }));
+                        } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(businessEmail)) {
+                           // Clear format error if valid business email
+                           setFieldErrors(prev => {
+                             const newState = { ...prev };
+                             delete newState.businessEmail;
+                             return newState;
+                           });
+                        }
+                      }
+                    }}
                     required
                     maxLength={100}
                     disabled={signupLoading}

@@ -96,6 +96,10 @@ def _free_email_domains() -> set:
         'yahoo.com', 'yahoo.in',
         'outlook.com', 'hotmail.com', 'live.com', 'icloud.com',
         'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+        'mail.com', 'yandex.com', 'msn.com', 'me.com',
+        'ymail.com', 'rocketmail.com', 'mac.com', 'fastmail.com',
+        'gmx.com', 'gmx.net', 'tutanota.com', 'tuta.com',
+        'email.com', 'post.com', 'usa.com'
     }
     configured = getattr(settings, 'FREE_EMAIL_DOMAINS', None)
     if not configured:

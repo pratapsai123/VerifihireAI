@@ -37,9 +37,28 @@ function ForgotPassword() {
       setError('Please enter your email.');
       return;
     }
-    setLoading(true);
     setError('');
     setSuccess('');
+    setFieldErrors({});
+
+    // Enforce business-domain policy for forgot password
+    const freeDomains = [
+      'gmail.com', 'googlemail.com',
+      'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
+      'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+      'icloud.com', 'me.com', 'mac.com',
+      'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+      'mail.com', 'email.com', 'post.com', 'usa.com',
+      'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com',
+      'tutanota.com', 'tuta.com'
+    ];
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (freeDomains.includes(domain)) {
+      setFieldErrors(prev => ({ ...prev, email: 'Password reset is restricted to business email accounts.' }));
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await axios.post(`${API_BASE_URL}/send-otp/`, {
         email,
@@ -171,9 +190,36 @@ function ForgotPassword() {
           className="auth-input-with-icon"
           placeholder="Email *"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (fieldErrors.email) {
+              setFieldErrors(prev => {
+                const newState = { ...prev };
+                delete newState.email;
+                return newState;
+              });
+            }
+          }}
           onFocus={() => setEmailFocused(true)}
-          onBlur={() => setEmailFocused(false)}
+          onBlur={() => {
+            setEmailFocused(false);
+            if (email) {
+              const freeDomains = [
+                'gmail.com', 'googlemail.com',
+                'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
+                'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+                'icloud.com', 'me.com', 'mac.com',
+                'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+                'mail.com', 'email.com', 'post.com', 'usa.com',
+                'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com',
+                'tutanota.com', 'tuta.com'
+              ];
+              const domain = email.split('@')[1]?.toLowerCase();
+              if (freeDomains.includes(domain)) {
+                setFieldErrors(prev => ({ ...prev, email: 'Password reset is restricted to business email accounts.' }));
+              }
+            }
+          }}
           required
           maxLength={100}
           disabled={loading}
