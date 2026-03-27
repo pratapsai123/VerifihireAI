@@ -20,7 +20,7 @@ const validateField = (field, value) => {
   }
 };
 
-const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field }) => {
+const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false }) => {
   const hasValue = value.trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
@@ -63,7 +63,8 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
 
           onChange(val);
         }}
-        className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''}`}
+        readOnly={readOnly}
+        className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''} ${readOnly ? 'read-only' : ''}`}
       />
     </div>
   );
@@ -487,23 +488,23 @@ const CandidateDetails = ({ token, onComplete }) => {
               } else if (status.count > 1) {
                 setCaptureStatus('Multiple people detected. Only one person is allowed.');
               } else if (status.halfFace) {
-                setCaptureStatus('Face not fully visible. Please center your face in the oval.');
+                setCaptureStatus('Face not fully visible. Please center your face.');
               } else if (status.hasFace && !status.isAlignedFrame) {
                 if (!status.isCenteredX || !status.isCenteredY) {
                   setCaptureStatus('Please center your face.');
                 } else if (!status.isGoodSize) { // Too small
                   setCaptureStatus('Please move closer to the camera.');
                 } else if (!status.isContainedX || !status.isContainedY) { // Too big / spilling out
-                  setCaptureStatus('Please move back slightly to fit in the oval.');
+                  setCaptureStatus('Please move back slightly.');
                 } else {
-                  setCaptureStatus('Please position your face fully inside within the green oval.');
+                  setCaptureStatus('Please position your face clearly.');
                 }
               } else if (dark) {
                 setCaptureStatus('Environment is too dark. Please ensure better lighting.');
               } else if (!notBlurry) {
                 setCaptureStatus('Image is blurry. Please hold still.');
               } else {
-                setCaptureStatus('Perfect! Face aligned and clear. Ready to capture.');
+                setCaptureStatus('Perfect! Face detected and clear. Ready to capture.');
               }
             });
           }
@@ -578,7 +579,7 @@ const CandidateDetails = ({ token, onComplete }) => {
     if (data.panFile) {
       if (data.extractedPan) {
         // Extraction result is in
-        panMismatch = data.panMatch === false;
+        panMismatch = data.panMatch === false && !data.manualConfirmation;
       } else if (data.extractionFailed) {
         // Extraction failed, must have manual confirmation
         if (!data.manualConfirmation) {
@@ -690,6 +691,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 value={data.fullName}
                 errorEmpty={submitted && !data.fullName}
                 onChange={(v) => setData({ ...data, fullName: v })}
+                readOnly={true}
               />
             </div>
             <div className="candidate-row">
@@ -731,7 +733,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 onChange={(v) => setData({ ...data, pan: v })}
               />
               <div className="candidate-input-group">
-                <label className="candidate-static-label">Upload PAN Card (Max size: 2.5MB)</label>
+                <label className="candidate-static-label">Upload PAN Card (Max size: 2.5MB, Allow PNG, JPG, JPEG, PDF Formats)</label>
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
@@ -878,7 +880,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {!data.isExtractingPan && data.panFileValid === true && data.extractedPan && data.panMatch === false && (
                   <div className="candidate-warning-box">
                     <div className="candidate-error-text">
-                      ❌ PAN Mismatch: You entered {data.pan.toUpperCase()} but the system read {data.extractedPan} from the document.
+                      ❌ PAN Mismatch: You entered {data.pan.toUpperCase()} but the system read {data.extractedPan} from the document. Please upload a clear image.
                     </div>
                     <div style={{ marginTop: '10px' }}>
                       <label className="candidate-checkbox-label">
@@ -922,8 +924,8 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {submitted && !data.panFile && (
                   <div className="candidate-error-text">⚠️ Please upload a valid PAN Card file</div>
                 )}
-                {submitted && data.panFile && data.panMatch === false && (
-                  <div className="candidate-error-text">⚠️ Invalid PAN card: PAN number doesn't match the uploaded image. Please verify your details.</div>
+                {submitted && data.panFile && data.panMatch === false && !data.manualConfirmation && (
+                  <div className="candidate-error-text">⚠️ Invalid PAN card: PAN number doesn't match the uploaded image. Please verify your details or upload a clear image.</div>
                 )}
               </div>
             </div>
@@ -941,13 +943,12 @@ const CandidateDetails = ({ token, onComplete }) => {
               {!snapshot ? (
                 <>
                   {modelsLoaded && (
-                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <div className={`candidate-webcam-frame ${(!faceDetected || isBlurry || isDark || isHalfFace || peopleCount !== 1 || !isAligned) ? 'face-not-detected' : 'face-detected'}`}>
                       <Webcam ref={webcamRef} width={320} height={240} disablePictureInPicture={true} />
-                      <div className={`candidate-face-overlay ${isAligned ? 'candidate-face-aligned' : 'candidate-face-not-aligned'}`}></div>
                     </div>
                   )}
                   {captureStatus && (
-                    <div className={`candidate-status-message ${faceDetected && !isBlurry && !isDark && !isHalfFace && peopleCount === 1 && isAligned ? 'candidate-status-success' : 'candidate-status-warning'}`}>
+                    <div className={`candidate-status-message ${faceDetected && !isBlurry && !isDark && !isHalfFace && peopleCount === 1 && !isDetecting ? 'candidate-status-success' : 'candidate-status-warning'}`}>
                       {isDetecting ? '🔍 Detecting...' : captureStatus}
                     </div>
                   )}
@@ -964,7 +965,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                         }
 
                         if (!isAligned) {
-                          alert('⚠️ Face not aligned. Please center your face within the oval.');
+                          alert('⚠️ Face not centered or clearly visible.');
                           return;
                         }
 
@@ -1046,14 +1047,10 @@ const CandidateDetails = ({ token, onComplete }) => {
           <div className="candidate-button-row">
             <button
               type="submit"
-              className={`candidate-button ${data.isExtractingPan ? 'candidate-button-disabled' : ''}`}
-              disabled={data.isExtractingPan}
+              className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
+              disabled={!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)}
             >
-              {data.isExtractingPan ? (
-                <>
-                  <span className="candidate-spinner"></span> Verifying PAN...
-                </>
-              ) : 'Submit Application'}
+              Submit Application
             </button>
           </div>
 

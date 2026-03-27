@@ -17,6 +17,34 @@ def _get_reader():
             return None
     return _reader
 
+def normalize_pan_format(s):
+    """
+    Normalizes a 10-character string that is likely a PAN by correcting common OCR misreads.
+    Positional logic: AAAAA 9999 A
+    """
+    if not s or len(s) != 10:
+        return s
+    
+    res = ""
+    for i, char in enumerate(s.upper()):
+        if 0 <= i <= 4 or i == 9: # Positions that should be Letters
+            if char == '0': res += 'O'
+            elif char == '1': res += 'I'
+            elif char == '2': res += 'Z'
+            elif char == '5': res += 'S'
+            elif char == '8': res += 'B'
+            elif char == '6': res += 'G'
+            else: res += char
+        else: # Positions that should be Digits
+            if char in "OQ": res += "0"
+            elif char in "I|L": res += "1"
+            elif char == "S": res += "5"
+            elif char == "Z": res += "2"
+            elif char == "B": res += "8"
+            elif char == "G": res += "6"
+            else: res += char
+    return res
+
 def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 270]):
     """
     Extract text from an image using EasyOCR with multiple rotations.
@@ -50,17 +78,22 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
                 
                 # Robust match (no spaces)
                 text_nospaces = text.replace(" ", "")
-                if target_pan and target_pan in text_nospaces:
-                    return text, True
+                if target_pan:
+                    if target_pan in text_nospaces:
+                        return text, True
+                    # Positional fuzzy check on slices
+                    for i in range(len(text_nospaces) - 9):
+                        if normalize_pan_format(text_nospaces[i:i+10]) == target_pan:
+                            return text, True
                 
                 # Find any PAN if target_pan not explicitly found yet
-                match_nospaces = pan_pattern.search(text_nospaces)
-                if match_nospaces and target_pan and match_nospaces.group(0) == target_pan:
-                    return match_nospaces.group(0), True
+                match_raw = pan_pattern.search(text_nospaces)
+                if match_raw and target_pan and match_raw.group(0) == target_pan:
+                    return match_raw.group(0), True
                 
             except:
                 continue
-        return full_log, False
+        return full_log.strip(), False
     except Exception as e:
         return f"OCR Failed: {str(e)}", False
 

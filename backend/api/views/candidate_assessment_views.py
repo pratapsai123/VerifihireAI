@@ -2224,6 +2224,12 @@ def verify_pan_backend_view(request):
         pan_number_raw = request.data.get('pan_number', '').strip().upper()
         # Clean the input PAN of any spaces or junk for robust comparison
         pan_number = re.sub(r'[^A-Z0-9]', '', pan_number_raw)
+        
+        # User entered normalization (AAAAA 9999 A)
+        # Handle cases where user might have put O instead of 0 in numeric part or vice versa
+        if len(pan_number) == 10:
+             pan_number = normalize_pan_format(pan_number)
+
         pan_file = request.FILES.get('pan_file')
 
         if not pan_number or not pan_file:
@@ -2248,9 +2254,10 @@ def verify_pan_backend_view(request):
         # Clean extracted text for comparison
         clean_extracted = re.sub(r'[^A-Z0-9]', '', (extracted_text or "").upper())
         
-        # Find ALL valid-formatted PANs on the document
-        pan_pattern = re.compile(r'[A-Z]{5}[0-9]{4}[A-Z]{1}')
-        all_potential_pans = re.findall(pan_pattern, clean_extracted)
+        # Find ALL potential PANs on the document (loose pattern)
+        loose_pattern = re.compile(r'[A-Z0-9]{5}[0-9A-Z]{4}[A-Z0-9]{1}')
+        raw_matches = re.findall(loose_pattern, clean_extracted)
+        all_potential_pans = [normalize_pan_format(m) for m in raw_matches]
 
         # Step 1: Direct containment check (fast)
         if pan_number in clean_extracted:
@@ -2291,24 +2298,32 @@ def verify_pan_backend_view(request):
             }, status=status.HTTP_200_OK)
 
         # Step 3: Determine failure reason
-        # If we found OTHER pans but not the target one -> Mismatch
-        # If we found NOTHING or very little text -> Unclear
+        # Check if the document has typical PAN card markers (comprehensive list)
+        pan_keywords = [
+            "INCOME", "TAX", "PERMANENT", "ACCOUNT", "NUMBER", "GOVT", "INDIA", 
+            "DEPT", "DOB", "HOLDER", "DATE", "BIRTH", "CARD", "FATHER", "SIGNATURE", "DEPARTMENT"
+        ]
+        is_likely_pan = any(kw in clean_extracted for kw in pan_keywords)
+
         if len(all_potential_pans) > 0:
             reason = 'mismatch'
-            msg = f"The PAN found on your document ({all_potential_pans[0]}) does not match the one you entered."
-        elif len(clean_extracted) < 15:
-            reason = 'unclear'
-            msg = "The image is not clear enough. Please upload a higher resolution copy."
+            if is_likely_pan:
+                msg = f"Mismatch: Entered PAN ({pan_number}) doesn't match the card ({all_potential_pans[0]}). Please enter valid PAN card or fix details."
+            else:
+                msg = "Incorrect Document: This document seems to have a PAN-like number but is not a valid PAN card. Please upload a genuine PAN card."
         else:
-            reason = 'mismatch'
-            msg = "We could not find your PAN number. Please ensure you uploaded the correct document."
+            reason = 'unclear'
+            if is_likely_pan:
+                msg = "Could not find your PAN number on the card. Please upload a clear, high-quality image of your PAN card."
+            else:
+                msg = "Invalid Document: We could not find any PAN markers. Please upload a clear image of your correct PAN card."
 
         return Response({
             'success': True, 
             'verified': False, 
             'reason': reason,
             'message': msg,
-            'extracted_pan': all_potential_pans[0] if all_potential_pans else "Not found",
+            'extracted_pan': all_potential_pans[0] if all_potential_pans else None,
             'debug_info': clean_extracted[:100]
         }, status=status.HTTP_200_OK)
 
