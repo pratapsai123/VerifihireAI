@@ -108,6 +108,7 @@ function AppContent() {
     '/accept-invite',
     '/feedback-page',
     '/results',
+    '/results-ai',
   ];
 
   const isFullScreenPage =
@@ -123,7 +124,7 @@ function AppContent() {
   return (
     <div className="app-container">
       {!isFullScreenPage && <Header />}
-      <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh' } : {}}>
+      <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh', overflow: 'hidden' } : {}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

@@ -1456,3 +1456,589 @@ Traceback (most recent call last):
 groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs":[\n      {\n         "question":"What is the purpose of the \'finally\' block in Java?",\n         "options":[\n            "To handle exceptions",\n            "To execute code regardless of exceptions",\n            "To skip exceptions",\n            "To throw exceptions"\n         ],\n         "answer":"To execute code regardless of exceptions",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"Which data structure is suitable for implementing a queue in Java?",\n         "options":[\n            "Array",\n            "Linked List",\n            "Stack",\n            "Tree"\n         ],\n         "answer":"Linked List",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"What is the difference between \'break\' and \'continue\' statements in Java?",\n         "options":[\n            "\'break\' skips the current iteration, \'continue\' stops the loop",\n            "\'break\' stops the loop, \'continue\' skips the current iteration",\n            "\'break\' restarts the loop, \'continue\' stops the loop",\n            "\'break\' stops the loop, \'continue\' restarts the loop"\n         ],\n         "answer":"\'break\' stops the loop, \'continue\' skips the current iteration",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"How do you handle null pointer exceptions in Java?",\n         "options":[\n            "Using try-catch blocks",\n            "Using if-else statements",\n            "Using switch statements",\n            "Using loops"\n         ],\n         "answer":"Using try-catch blocks",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the purpose of the \'synchronized\' keyword in Java?",\n         "options":[\n            "To make a method thread-safe",\n            "To make a method non-thread-safe",\n            "To make a class thread-safe",\n            "To make a class non-thread-safe"\n         ],\n         "answer":"To make a method thread-safe",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"Which Java collection class is suitable for storing unique elements?",\n         "options":[\n            "ArrayList",\n            "LinkedList",\n            "HashSet",\n            "TreeSet"\n         ],\n         "answer":"HashSet",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the difference between \'==\'\' and \'.equals()\' methods in Java?",\n         "options":[\n            "\'==\' checks for reference equality, \'.equals()\' checks for content equality",\n            "\'==\' checks for content equality, \'.equals()\' checks for reference equality",\n            "\'==\' checks for reference equality, \'.equals()\' checks for reference equality",\n            "\'==\' checks for content equality, \'.equals()\' checks for content equality"\n         ],\n         "answer":"\'==\' checks for reference equality, \'.equals()\' checks for content equality",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"How do you implement a singleton class in Java?",\n         "options":[\n            "Using a private constructor and a public static method",\n            "Using a public constructor and a private static method",\n            "Using a private constructor and a private static method",\n            "Using a public constructor and a public static method"\n         ],\n         "answer":"Using a private constructor and a public static method",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"What is the purpose of the \'volatile\' keyword in Java?",\n         "options":[\n            "To make a variable thread-safe",\n            "To make a variable non-thread-safe",\n            "To make a method thread-safe",\n            "To make a method non-thread-safe"\n         ],\n         "answer":"To make a variable thread-safe",\n         "difficulty":"Hard"\n      },\n      {\n         "question":"Which Java class is used for reading and writing files?",\n         "options":[\n            "FileInputStream",\n            "FileOutputStream",\n            "FileReader",\n            "FileWriter"\n         ],\n         "answer":"FileInputStream",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the difference between \'interface\' and \'abstract class\' in Java?",\n         "options":[\n            "\'interface\' can have state, \'abstract class\' cannot have state",\n            "\'interface\' cannot have state, \'abstract class\' can have state",\n            "\'interface\' can have multiple inheritance, \'abstract class\' cannot have multiple inheritance",\n            "\'interface\' cannot have multiple inheritance, \'abstract class\' can have multiple inheritance"\n         ],\n         "answer":"\'interface\' cannot have state, \'abstract class\' can have state",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"How do you handle exceptions in Java?",\n         "options":[\n            "Using try-catch blocks",\n            "Using if-else statements",\n            "Using switch statements",\n            "Using loops"\n         ],\n         "answer":"Using try-catch blocks",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the purpose of the \'transient\' keyword in Java?",\n         "options":[\n            "To make a variable non-serializable",\n            "To make a variable serializable",\n            "To make a method non-serializable",\n            "To make a method serializable"\n         ],\n         "answer":"To make a variable non-serializable",\n         "difficulty":"Hard"\n      },\n      {\n         "question":"Which Java class is used for parsing XML files?",\n         "options":[\n            "DocumentBuilderFactory",\n            "SAXParserFactory",\n            "DOMParser",\n            "XMLParser"\n         ],\n         "answer":"DocumentBuilderFactory",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"What is the difference between \'HashMap\' and \'TreeMap\' in Java?",\n         "options":[\n            "\'HashMap\' is sorted, \'TreeMap\' is unsorted",\n            "\'HashMap\' is unsorted, \'TreeMap\' is sorted",\n            "\'HashMap\' is thread-safe, \'TreeMap\' is non-thread-safe",\n            "\'HashMap\' is non-thread-safe, \'TreeMap\' is thread-safe"\n         ],\n         "answer":"\'HashMap\' is unsorted, \'TreeMap\' is sorted",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"How do you implement a factory pattern in Java?",\n         "options":[\n            "Using a private constructor and a public static method",\n            "Using a public constructor and a private static method",\n            "Using a private constructor and a private static method",\n            "Using a public constructor and a public static method"\n         ],\n         "answer":"Using a private constructor and a public static method",\n         "difficulty":"Hard"\n      },\n      {\n         "question":"What is the purpose of the \'assert\' statement in Java?",\n         "options":[\n            "To handle exceptions",\n            "To validate assumptions",\n            "To skip exceptions",\n            "To throw exceptions"\n         ],\n         "answer":"To validate assumptions",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"Which Java class is used for reading and writing properties files?",\n         "options":[\n            "Properties",\n            "FileInputStream",\n            "FileOutputStream",\n            "FileReader"\n         ],\n         "answer":"Properties",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the difference between \'ArrayList\' and \'Vector\' in Java?",\n         "options":[\n            "\'ArrayList\' is thread-safe, \'Vector\' is non-thread-safe",\n            "\'ArrayList\' is non-thread-safe, \'Vector\' is thread-safe",\n            "\'ArrayList\' is synchronized, \'Vector\' is non-synchronized",\n            "\'ArrayList\' is non-synchronized, \'Vector\' is synchronized"\n         ],\n         "answer":"\'ArrayList\' is non-thread-safe, \'Vector\' is thread-safe",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"How do you implement a decorator pattern in Java?",\n         "options":[\n            "Using a private constructor and a public static method",\n            "Using a public constructor and a private static method",\n            "Using a private constructor and a private static method",\n            "Using a public constructor and a public static method"\n         ],\n         "answer":"Using a private constructor and a public static method",\n         "difficulty":"Hard"\n      },\n      {\n         "question":"What is the purpose of the \'enum\' keyword in Java?",\n         "options":[\n            "To define a set of named values",\n            "To define a set of unnamed values",\n            "To define a class",\n            "To define an interface"\n         ],\n         "answer":"To define a set of named values",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"Which Java class is used for generating random numbers?",\n         "options":[\n            "Random",\n            "Math",\n            "UUID",\n            "Date"\n         ],\n         "answer":"Random",\n         "difficulty":"Easy"\n      },\n      {\n         "question":"What is the difference between \'HashSet\' and \'TreeSet\' in Java?",\n         "options":[\n            "\'HashSet\' is sorted, \'TreeSet\' is unsorted",\n            "\'HashSet\' is unsorted, \'TreeSet\' is sorted",\n            "\'HashSet\' is thread-safe, \'TreeSet\' is non-thread-safe",\n            "\'HashSet\' is non-thread-safe, \'TreeSet\' is thread-safe"\n         ],\n         "answer":"\'HashSet\' is unsorted, \'TreeSet\' is sorted",\n         "difficulty":"Medium"\n      },\n      {\n         "question":"How do you implement a strategy pattern in Java?",\n         "options":[\n            "Using a private constructor and a public static method",\n            "Using a public constructor and a private static method",\n            "Using a private constructor and a private static method",\n            "Using a public constructor and a public static method"\n         ],\n         "answer":"Using a private constructor and a public static method",\n         "difficulty":"Hard"\n      },\n      {\n         "question":"What is the purpose of the \'synchronized\' block in Java?",\n         "options":[\n            "To make a method thread-safe",\n            "To make a method non-thread-safe",\n            "To make a class thread-safe",\n            "To make a class non-thread-safe"\n         ],\n         "answer":"To make a method thread-safe",\n         "difficulty":"Medium"\n      }\n   ],\n   "coding_challenges":[\n      {\n         "title":"Array Rotation",\n         "problem_statement":"Given an array of integers and a number of positions to rotate, write a function to rotate the array to the right by the given number of positions.",\n         "input_format":"The first line contains the number of elements in the array. The second line contains the elements of the array. The third line contains the number of positions to rotate.",\n         "output_format":"The rotated array.",\n         "constraints":"1 <= n <= 10^5, 1 <= k <= 10^5",\n         "example_input":"5\\n1 2 3 4 5\\n2",\n         "example_output":"4 5 1 2 3",\n         "explanation":"The array is rotated to the right by 2 positions.",\n         "starter_code":{\n            "python":"import sys\\n\\ndef rotate_array(n, arr, k):\\n\\tn = len(arr)\\n\\tk = k % n\\n\\t# TODO: Write logic here\\n\\treturn arr\\n\\nn = int(sys.stdin.readline())\\narr = list(map(int, sys.stdin.readline().split()))\\nk = int(sys.stdin.readline())\\nprint(rotate_array(n, arr, k))",\n            "java":"import java.util.Scanner;\\npublic class Main {\\n\\tpublic static void main(String[] args) {\\n\\t\\tScanner scanner = new Scanner(System.in);\\n\\t\\tint n = scanner.nextInt();\\n\\t\\tint[] arr = new int[n];\\n\\t\\tfor (int i = 0; i < n; i++) {\\n\\t\\t\\tarr[i] = scanner.nextInt();\\n\\t\\t}\\n\\t\\tint k = scanner.nextInt();\\n\\t\\trotateArray(n, arr, k);\\n\\t}\\n\\n\\tpublic static void rotateArray(int n, int[] arr, int k) {\\n\\t\\t// TODO: Write logic here\\n\\t\\tfor (int i = 0; i < n; i++) {\\n\\t\\t\\tSystem.out.print(arr[i] + \\" \\");\\n\\t\\t}\\n\\t}\\n}",\n            "javascript":"const readline = require(\'readline\');\\nconst rl = readline.createInterface({\\n\\tinput: process.stdin,\\n\\toutput: process.stdout\\n});\\nlet n, arr, k;\\nrl.on(\'line\', (input) => {\\n\\tif (!n) {\\n\\t\\tn = parseInt(input);\\n\\t} else if (!arr) {\\n\\t\\tarr = input.split(\' \').map(Number);\\n\\t} else {\\n\\t\\tk = parseInt(input);\\n\\t\\trotateArray(n, arr, k);\\n\\t\\tprocess.exit();\\n\\t}\\n});\\nfunction rotateArray(n, arr, k) {\\n\\t// TODO: Write logic here\\n\\tconsole.log(arr.join(\' \'));\\n}",\n            "cpp":"#include <iostream>\\nusing namespace std;\\nvoid rotateArray(int n, int arr[], int k) {\\n\\t// TODO: Write logic here\\n\\tfor (int i = 0; i < n; i++) {\\n\\t\\tcout << arr[i] << \\" \\";\\n\\t}\\n}\\nint main() {\\n\\tint n, k;\\n\\tcin >> n;\\n\\tint arr[n];\\n\\tfor (int i = 0; i < n; i++) {\\n\\t\\tcin >> arr[i];\\n\\t}\\n\\tcin >> k;\\n\\trotateArray(n, arr, k);\\n\\treturn 0;\\n}",\n            "csharp":"using System;\\npublic class Program {\\n\\tpublic static void Main() {\\n\\t\\tint n = Convert.ToInt32(Console.ReadLine());\\n\\t\\tint[] arr = new int[n];\\n\\t\\tstring[] input = Console.ReadLine().Split();\\n\\t\\tfor (int i = 0; i < n; i++) {\\n\\t\\t\\tarr[i] = Convert.ToInt32(input[i]);\\n\\t\\t}\\n\\t\\tint k = Convert.ToInt32(Console.ReadLine());\\n\\t\\trotateArray(n, arr, k);\\n\\t}\\n\\n\\tpublic static void rotateArray(int n, int[] arr, int k) {\\n\\t\\t// TODO: Write logic here\\n\\t\\tfor (int i = 0; i < n; i++) {\\n\\t\\t\\tConsole.Write(arr[i] + \\" \\");\\n\\t\\t}\\n\\t}\\n}",\n            "kotlin":"import java.util.Scanner\\nfun main() {\\n\\tval scanner = Scanner(System.`in`)\\n\\tval n = scanner.nextInt()\\n\\tval arr = IntArray(n) {\\n\\t\\tscanner.nextInt()\\n\\t}\\n\\tval k = scanner.nextInt()\\n\\trotateArray(n, arr, k)\\n}\\nfun rotateArray(n: Int, arr: IntArray, k: Int) {\\n\\t// TODO: Write logic here\\n\\tfor (i in arr.indices) {\\n\\t\\tprint(\\"${arr[i]} \\")\\n\\t}\\n}",\n            "swift":"import Foundation\\nfunc rotateArray(_ n: Int, _ arr: [Int], _ k: Int) {\\n\\t// TODO: Write logic here\\n\\tprint(arr)\\n}\\nlet stdin = FileHandle.standardInput\\nlet n = Int(String(data: stdin.availableData, encoding: .utf8)!)!\\nlet arr = readLine()!.components(separatedBy: \\" \\").map { Int($0)! }\\nlet k = Int(readLine()!)!\\nrotateArray(n, arr, k)"\n         },\n         "difficulty":"Medium",\n         "test_cases":[\n            {\n               "input":"5\\n1 2 3 4 5\\n2",\n               "output":"4 5 1 2 3"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n3",\n               "output":"3 4 5 1 2"\n            },\n            {\n               "input":"10\\n1 2 3 4 5 6 7 8 9 10\\n5",\n               "output":"6 7 8 9 10 1 2 3 4 5"\n            },\n            {\n               "input":"10\\n1 2 3 4 5 6 7 8 9 10\\n10",\n               "output":"1 2 3 4 5 6 7 8 9 10"\n            },\n            {\n               "input":"10\\n1 2 3 4 5 6 7 8 9 10\\n11",\n               "output":"10 1 2 3 4 5 6 7 8 9"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n0",\n               "output":"1 2 3 4 5"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n1",\n               "output":"5 1 2 3 4"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n4",\n               "output":"2 3 4 5 1"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n6",\n               "output":"4 5 1 2 3"\n            },\n            {\n               "input":"5\\n1 2 3 4 5\\n7",\n               "output":"3 4 5 1 2"\n            }\n         ]\n      },\n      {\n         "title":"String Reversal",\n         "problem_statement":"Given a string, write a function to reverse the string.",\n         "input_format":"The first line contains the string.",\n         "output_format":"The reversed string.",\n         "constraints":"1 <= length of string <= 10^5",\n         "example_input":"hello",\n         "example_output":"olleh",\n         "explanation":"The string is reversed.",\n         "starter_code":{\n            "python":"import sys\\n\\ndef reverse_string(s):\\n\\t# TODO: Write logic here\\n\\treturn s\\n\\ns = sys.stdin.readline().strip()\\nprint(reverse_string(s))",\n            "java":"import java.util.Scanner;\\npublic class Main {\\n\\tpublic static void main(String[] args) {\\n\\t\\tScanner scanner = new Scanner(System.in);\\n\\t\\tString s = scanner.nextLine();\\n\\t\\treverseString(s);\\n\\t}\\n\\n\\tpublic static void reverseString(String s) {\\n\\t\\t// TODO: Write logic here\\n\\t\\tSystem.out.println(s);\\n\\t}\\n}",\n            "javascript":"const readline = require(\'readline\');\\nconst rl = readline.createInterface({\\n\\tinput: process.stdin,\\n\\toutput: process.stdout\\n});\\nlet s;\\nrl.on(\'line\', (input) => {\\n\\ts = input;\\n\\treverseString(s);\\n\\tprocess.exit();\\n});\\nfunction reverseString(s) {\\n\\t// TODO: Write logic here\\n\\tconsole.log(s);\\n}'}}
 
 RAW: 
+
+[2026-03-26 05:10:33.608261+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmjfw6t3fw98mhfj81q59b6g` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 1188. Please try again in 17m6.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\STT\backend\ai_assessments\views.py", line 372, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+    ...<6 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\groq\_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmjfw6t3fw98mhfj81q59b6g` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 1188. Please try again in 17m6.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: {
+  "mcqs":[
+      {
+         "question":"What is the purpose of the 'self' parameter in Python classes?",
+         "options":[
+            "To access static methods",
+            "To access class variables",
+            "To access instance variables",
+            "To access global variables"
+         ],
+         "answer":3,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"Which data structure is suitable for implementing a queue in Python?",
+         "options":[
+            "List",
+            "Tuple",
+            "Dictionary",
+            "Set"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'is' and '==' operators in Python?",
+         "options":[
+            "'is' checks for identity, '==' checks for equality",
+            "'is' checks for equality, '==' checks for identity",
+            "'is' checks for type, '==' checks for value",
+            "'is' checks for value, '==' checks for type"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you handle exceptions in Python?",
+         "options":[
+            "Using try-except blocks",
+            "Using if-else statements",
+            "Using for loops",
+            "Using while loops"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'finally' block in Python exception handling?",
+         "options":[
+            "To execute code when an exception occurs",
+            "To execute code when no exception occurs",
+            "To execute code regardless of whether an exception occurs",
+            "To skip execution of code when an exception occurs"
+         ],
+         "answer":2,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for creating regular expressions?",
+         "options":[
+            "re",
+            "regex",
+            "pattern",
+            "match"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'break' and 'continue' statements in Python?",
+         "options":[
+            "'break' exits the loop, 'continue' skips the current iteration",
+            "'break' skips the current iteration, 'continue' exits the loop",
+            "'break' restarts the loop, 'continue' stops the loop",
+            "'break' stops the loop, 'continue' restarts the loop"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you create a dictionary in Python?",
+         "options":[
+            "Using the 'dict' function",
+            "Using the 'dictionary' function",
+            "Using curly brackets {}",
+            "Using square brackets []"
+         ],
+         "answer":2,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'join' method in Python strings?",
+         "options":[
+            "To concatenate strings",
+            "To split strings",
+            "To search for substrings",
+            "To replace substrings"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing unique elements?",
+         "options":[
+            "List",
+            "Tuple",
+            "Set",
+            "Dictionary"
+         ],
+         "answer":2,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you sort a list in Python?",
+         "options":[
+            "Using the 'sort' method",
+            "Using the 'sorted' function",
+            "Using the 'order' method",
+            "Using the 'arrange' function"
+         ],
+         "answer":1,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'static' and 'instance' variables in Python classes?",
+         "options":[
+            "'static' variables are shared among instances, 'instance' variables are unique to each instance",
+            "'static' variables are unique to each instance, 'instance' variables are shared among instances",
+            "'static' variables are used for inheritance, 'instance' variables are used for polymorphism",
+            "'static' variables are used for polymorphism, 'instance' variables are used for inheritance"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with files and directories?",
+         "options":[
+            "os",
+            "file",
+            "directory",
+            "path"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'with' statement in Python?",
+         "options":[
+            "To handle exceptions",
+            "To manage resources",
+            "To create iterators",
+            "To define generators"
+         ],
+         "answer":1,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you create a generator in Python?",
+         "options":[
+            "Using the 'yield' keyword",
+            "Using the 'return' keyword",
+            "Using the 'generator' function",
+            "Using the 'iter' function"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the difference between 'list' and 'tuple' in Python?",
+         "options":[
+            "'list' is mutable, 'tuple' is immutable",
+            "'list' is immutable, 'tuple' is mutable",
+            "'list' is used for arrays, 'tuple' is used for linked lists",
+            "'list' is used for linked lists, 'tuple' is used for arrays"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing key-value pairs?",
+         "options":[
+            "List",
+            "Tuple",
+            "Dictionary",
+            "Set"
+         ],
+         "answer":2,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you handle errors in Python?",
+         "options":[
+            "Using try-except blocks",
+            "Using if-else statements",
+            "Using for loops",
+            "Using while loops"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'assert' statement in Python?",
+         "options":[
+            "To handle exceptions",
+            "To validate assumptions",
+            "To create iterators",
+            "To define generators"
+         ],
+         "answer":1,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with dates and times?",
+         "options":[
+            "datetime",
+            "date",
+            "time",
+            "calendar"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'isinstance' and 'type' in Python?",
+         "options":[
+            "'isinstance' checks for inheritance, 'type' checks for exact type",
+            "'isinstance' checks for exact type, 'type' checks for inheritance",
+            "'isinstance' checks for type, 'type' checks for value",
+            "'isinstance' checks for value, 'type' checks for type"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you create a class in Python?",
+         "options":[
+            "Using the 'class' keyword",
+            "Using the 'object' function",
+            "Using the 'inheritance' function",
+            "Using the 'polymorphism' function"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'super' function in Python?",
+         "options":[
+            "To access parent class methods",
+            "To access child class methods",
+            "To access static methods",
+            "To access class variables"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing a collection of unique elements?",
+         "options":[
+            "List",
+            "Tuple",
+            "Set",
+            "Dictionary"
+         ],
+         "answer":2,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you sort a dictionary in Python?",
+         "options":[
+            "Using the 'sort' method",
+            "Using the 'sorted' function",
+            "Using the 'order' method",
+            "Using the 'arrange' function"
+         ],
+         "answer":1,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the difference between 'deepcopy' and 'copy' in Python?",
+         "options":[
+            "'deepcopy' creates a shallow copy, 'copy' creates a deep copy",
+            "'deepcopy' creates a deep copy, 'copy' creates a shallow copy",
+            "'deepcopy' is used for lists, 'copy' is used for dictionaries",
+            "'deepcopy' is used for dictionaries, 'copy' is used for lists"
+         ],
+         "answer":1,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with JSON data?",
+         "options":[
+            "json",
+            "xml",
+            "csv",
+            "yaml"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the purpose of the 'lambda' function in Python?",
+         "options":[
+            "To create anonymous functions",
+            "To create named functions",
+            "To create classes",
+            "To create modules"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you use the 'map' function in Python?",
+         "options":[
+            "To apply a function to each element of a list",
+            "To apply a function to each key-value pair of a dictionary",
+            "To apply a function to each character of a string",
+            "To apply a function to each element of a set"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the difference between 'filter' and 'map' in Python?",
+         "options":[
+            "'filter' is used to select elements, 'map' is used to transform elements",
+            "'filter' is used to transform elements, 'map' is used to select elements",
+            "'filter' is used to create lists, 'map' is used to create dictionaries",
+            "'filter' is used to create dictionaries, 'map' is used to create lists"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing a collection of key-value pairs with unique keys?",
+         "options":[
+            "List",
+            "Tuple",
+            "Dictionary",
+            "Set"
+         ],
+         "answer":2,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you use the 'reduce' function in Python?",
+         "options":[
+            "To apply a function to each element of a list",
+            "To apply a function to each key-value pair of a dictionary",
+            "To apply a function to each character of a string",
+            "To apply a function to each element of a set"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'zip' function in Python?",
+         "options":[
+            "To combine two lists into a list of pairs",
+            "To combine two dictionaries into a dictionary of pairs",
+            "To combine two strings into a string of pairs",
+            "To combine two sets into a set of pairs"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with regular expressions?",
+         "options":[
+            "re",
+            "regex",
+            "pattern",
+            "match"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'find' and 'search' in Python?",
+         "options":[
+            "'find' is used to search for a substring, 'search' is used to search for a pattern",
+            "'find' is used to search for a pattern, 'search' is used to search for a substring",
+            "'find' is used to search for a key, 'search' is used to search for a value",
+            "'find' is used to search for a value, 'search' is used to search for a key"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you use the 'groupby' function in Python?",
+         "options":[
+            "To group a list of elements by a common attribute",
+            "To group a dictionary of key-value pairs by a common key",
+            "To group a string of characters by a common character",
+            "To group a set of elements by a common element"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'chain' function in Python?",
+         "options":[
+            "To combine two lists into a single list",
+            "To combine two dictionaries into a single dictionary",
+            "To combine two strings into a single string",
+            "To combine two sets into a single set"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing a collection of unique elements in a specific order?",
+         "options":[
+            "List",
+            "Tuple",
+            "Set",
+            "Dictionary"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you use the 'product' function in Python?",
+         "options":[
+            "To calculate the product of two numbers",
+            "To calculate the product of two lists",
+            "To calculate the product of two dictionaries",
+            "To calculate the product of two sets"
+         ],
+         "answer":1,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'permutations' function in Python?",
+         "options":[
+            "To generate all possible permutations of a list",
+            "To generate all possible permutations of a dictionary",
+            "To generate all possible permutations of a string",
+            "To generate all possible permutations of a set"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with mathematical functions?",
+         "options":[
+            "math",
+            "statistics",
+            "numpy",
+            "scipy"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'sin' and 'cos' in Python?",
+         "options":[
+            "'sin' is used to calculate the sine of an angle, 'cos' is used to calculate the cosine of an angle",
+            "'sin' is used to calculate the cosine of an angle, 'cos' is used to calculate the sine of an angle",
+            "'sin' is used to calculate the tangent of an angle, 'cos' is used to calculate the cotangent of an angle",
+            "'sin' is used to calculate the cotangent of an angle, 'cos' is used to calculate the tangent of an angle"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you use the 'exp' function in Python?",
+         "options":[
+            "To calculate the exponential of a number",
+            "To calculate the logarithm of a number",
+            "To calculate the square root of a number",
+            "To calculate the cube root of a number"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'log' function in Python?",
+         "options":[
+            "To calculate the natural logarithm of a number",
+            "To calculate the base-10 logarithm of a number",
+            "To calculate the base-2 logarithm of a number",
+            "To calculate the logarithm of a number with a custom base"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python data structure is suitable for storing a collection of elements with a specific order and allowing duplicates?",
+         "options":[
+            "List",
+            "Tuple",
+            "Set",
+            "Dictionary"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"How do you use the 'sqrt' function in Python?",
+         "options":[
+            "To calculate the square root of a number",
+            "To calculate the cube root of a number",
+            "To calculate the fourth root of a number",
+            "To calculate the fifth root of a number"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"What is the purpose of the 'pow' function in Python?",
+         "options":[
+            "To calculate the power of a number",
+            "To calculate the exponential of a number",
+            "To calculate the logarithm of a number",
+            "To calculate the square root of a number"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"Which Python module is used for working with random numbers?",
+         "options":[
+            "random",
+            "numpy",
+            "scipy",
+            "math"
+         ],
+         "answer":0,
+         "difficulty":"Easy"
+      },
+      {
+         "question":"What is the difference between 'randint' and 'uniform' in Python?",
+         "options":[
+            "'randint' is used to generate a random integer, 'uniform' is used to generate a random floating-point number",
+            "'randint' is used to generate a random floating-point number, 'uniform' is used to generate a random integer",
+            "'randint' is used to generate a random string, 'uniform' is used to generate a random list",
+            "'randint' is used to generate a random list, 'uniform' is used to generate a random string"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      },
+      {
+         "question":"How do you use the 'choice' function in Python?",
+         "options":[
+            "To select a random element from a list",
+            "To select a random key-value pair from a dictionary",
+            "To select a random character from a string",
+            "To select a random element from a set"
+         ],
+         "answer":0,
+         "difficulty":"Medium"
+      }]}
+
+[2026-03-26 09:03:24.160397+00:00] PUBLIC ACCESS: Token='2420b0b9-b66d-4fe4-8f66-830aaa6d586f'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1774515804068']}>
+Host: localhost:8001
+
+[2026-03-26 09:03:24.165760+00:00] PUBLIC ACCESS: Token='2420b0b9-b66d-4fe4-8f66-830aaa6d586f'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1774515804071']}>
+Host: localhost:8001

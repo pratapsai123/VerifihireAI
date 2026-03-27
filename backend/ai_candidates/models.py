@@ -73,3 +73,13 @@ class InterviewIntegrity(models.Model):
 
     def __str__(self):
         return f"Integrity: {self.candidate.full_name} ({self.integrity_score}%)"
+
+class InterviewIntegrityLog(models.Model):
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='integrity_logs')
+    event_type = models.CharField(max_length=100)
+    screenshot_base64 = models.TextField(blank=True, null=True, help_text="Desktop/Full screen snapshot")
+    webcam_screenshot_base64 = models.TextField(blank=True, null=True, help_text="Candidate webcam snapshot")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Violation: {self.event_type} - {self.candidate.full_name}"
