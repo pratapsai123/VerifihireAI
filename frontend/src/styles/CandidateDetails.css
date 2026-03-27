@@ -100,6 +100,12 @@
   border: 2px solid red;
 }
 
+.candidate-input.read-only {
+  cursor: not-allowed;
+  color: #4b5563; /* Muted text color but keep the blue border */
+  background-color: rgba(0, 0, 0, 0.02); /* Very subtle background change */
+}
+
 .candidate-button {
   padding: 12px 26px;
   background: #1d4ed8;
@@ -201,34 +207,22 @@
   align-items: center;
 }
 
-/* Face Overlay Styles */
-.candidate-face-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140px;
-  /* Adjust based on expected face size relative to 320px width */
-  height: 180px;
-  border-radius: 50%;
-  /* Oval shape */
-  border: 3px solid rgba(255, 255, 255, 0.7);
-  /* box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); Removed dimming effect */
-  pointer-events: none;
-  /* Let clicks pass through */
+.candidate-webcam-frame {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 4px solid transparent;
   transition: border-color 0.3s ease;
-  z-index: 10;
+  line-height: 0; /* remove any extra space below the video */
 }
 
-.candidate-face-aligned {
-  border-color: #10b981;
-  /* Green */
-  /* box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3); Removed dimming effect */
+.candidate-webcam-frame.face-not-detected {
+  border-color: #ef4444; /* Red border for errors */
 }
 
-.candidate-face-not-aligned {
-  border-color: #ef4444;
-  /* Red */
+.candidate-webcam-frame.face-detected {
+  border-color: #10b981; /* Green border for success */
 }
 
 /* Responsive design */
