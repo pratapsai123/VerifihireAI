@@ -194,7 +194,8 @@ const AiInterviewSession = () => {
                 try {
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
-                    video.play();
+                    // Add catch to prevent "play() interrupted by pause()" runtime error
+                    video.play().catch(e => console.warn("Screenshot capture play interrupted:", e));
                     await new Promise(r => setTimeout(r, 100)); // Brief wait for stream to render
                     
                     const canvas = document.createElement('canvas');
