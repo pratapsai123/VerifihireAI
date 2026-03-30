@@ -32,6 +32,7 @@ const AiInterviewSession = () => {
     const [silenceCountdown, setSilenceCountdown] = useState(0);
     const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isScreenSharing, setIsScreenSharing] = useState(false);
 
     // Refs
     const videoRef = useRef(null);
@@ -114,7 +115,9 @@ const AiInterviewSession = () => {
                 return false;
             }
             screenStreamRef.current = stream;
+            setIsScreenSharing(true);
             track.onended = () => {
+                setIsScreenSharing(false);
                 showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
             };
             return true;
@@ -133,6 +136,7 @@ const AiInterviewSession = () => {
         if (screenStreamRef.current) {
             screenStreamRef.current.getTracks().forEach(track => track.stop());
             screenStreamRef.current = null;
+            setIsScreenSharing(false);
         }
     };
 
@@ -273,8 +277,8 @@ const AiInterviewSession = () => {
             setIsFullscreen(isFS);
             isFullscreenRef.current = isFS;
 
-            if (isFS && isPermissionsGranted) {
-                console.log("Integrity: Fullscreen restored. Resuming hardware...");
+            if (isFS && isPermissionsGranted && isScreenSharing) {
+                console.log("Integrity: Safe state restored. Resuming hardware...");
                 // 1. Unmute Hardware Tracks
                 if (micStreamRef.current) {
                     micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
@@ -286,42 +290,52 @@ const AiInterviewSession = () => {
                 if (videoRef.current) {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
-                // (Note: startListening is now handled by a dedicated useEffect for better sync)
                 setAiStatus("Interview Resumed");
             }
 
             if (!isFS && isPermissionsGranted) {
-                console.log("Integrity: Fullscreen exited. Pausing hardware...");
-                // 1. Physically Mute Microphone Hardware
-                if (micStreamRef.current) {
-                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = false; });
-                }
-                // 2. Mute Camera Hardware
-                if (streamRef.current) {
-                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = false; });
-                }
-
-                // 3. Stop AssemblyAI STT
-                if (assemblyAIRef.current) {
-                    try { assemblyAIRef.current.stop(); } catch (e) { }
-                }
-                
-                // 3. Stop Speech (Browser TTS)
-                window.speechSynthesis.cancel();
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-
-                // 4. Stop Speech (Coqui TTS)
-                if (currentAudioRef.current) {
-                    try {
-                        currentAudioRef.current.pause();
-                        currentAudioRef.current.volume = 0; // Absolute silence
-                        currentAudioRef.current = null;
-                    } catch (e) { }
-                }
+                pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
             }
         };
+
+        const pauseHardware = () => {
+            console.log("Integrity Violation: Pausing hardware...");
+            // 1. Physically Mute Microphone Hardware
+            if (micStreamRef.current) {
+                micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = false; });
+            }
+            // 2. Mute Camera Hardware
+            if (streamRef.current) {
+                streamRef.current.getVideoTracks().forEach(track => { track.enabled = false; });
+            }
+
+            // 3. Stop AssemblyAI STT
+            if (assemblyAIRef.current) {
+                try { assemblyAIRef.current.stop(); } catch (e) { }
+            }
+            
+            // 3. Stop Speech (Browser TTS)
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+
+            // 4. Stop Speech (Coqui TTS)
+            if (currentAudioRef.current) {
+                try {
+                    currentAudioRef.current.pause();
+                    currentAudioRef.current.volume = 0; // Absolute silence
+                    currentAudioRef.current = null;
+                } catch (e) { }
+            }
+        };
+
+        // NEW: Monitor Screen Sharing status for pausing
+        if (!isScreenSharing && isPermissionsGranted && isInitializedRef.current && !isCompletedRef.current) {
+            pauseHardware();
+            setAiStatus("Interview Paused (Screen Share Stopped)");
+        }
+
         document.addEventListener('fullscreenchange', handleFullscreenChange);
 
         return () => {
@@ -330,7 +344,7 @@ const AiInterviewSession = () => {
             window.removeEventListener('blur', handleBlur);
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
         };
-    }, [token, showAiEvent]);
+    }, [token, showAiEvent, isScreenSharing]);
 
     // 3. CONTINUOUS PRIVACY HAMMER: Mutes everything 10 times a second if not in FS
     useEffect(() => {
@@ -1463,14 +1477,8 @@ const AiInterviewSession = () => {
 
     return (
         <div className="ai-session-page">
-            {isPermissionsGranted && !isFullscreen && !isCompleted && (
+            {isPermissionsGranted && (!isFullscreen || !isScreenSharing) && !isCompleted && (
                 <div 
-                    onClick={() => {
-                        const elem = document.documentElement;
-                        if (elem.requestFullscreen) elem.requestFullscreen();
-                        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-                        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-                    }}
                     style={{
                         position: 'fixed',
                         inset: 0,
@@ -1483,20 +1491,62 @@ const AiInterviewSession = () => {
                         justifyContent: 'center',
                         textAlign: 'center',
                         padding: '2rem',
-                        fontFamily: 'Inter, sans-serif',
-                        cursor: 'pointer' // Indicate it is clickable
+                        fontFamily: 'Inter, sans-serif'
                     }}
                 >
-                    <div style={{ maxWidth: '500px', pointerEvents: 'none' }}>
-                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>🖥️</div>
-                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>Switch to Full Screen</h1>
+                    <div style={{ maxWidth: '500px' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>
+                            {!isFullscreen ? '🖥️' : '🚫'}
+                        </div>
+                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>
+                            {!isFullscreen ? 'Resume Full Screen' : 'Enable Screen Sharing'}
+                        </h1>
                         <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2.5rem', lineHeight: '1.6' }}>
-                            To ensure the integrity of your interview, you must remain in <b>Full Screen</b> mode.
+                            {!isFullscreen 
+                                ? 'To ensure the integrity of your interview, you must remain in Full Screen mode.'
+                                : 'Screen sharing has been stopped. You must share your "Entire Screen" to continue the interview.'}
                         </p>
-                        <p style={{ fontSize: '1rem', color: '#6366f1', fontWeight: 'bold' }}>
-                            <i className="fa-solid fa-arrow-pointer" style={{ marginRight: '8px' }}></i>
-                            Click anywhere to return to Full Screen
-                        </p>
+                        
+                        {!isFullscreen ? (
+                            <button
+                                onClick={() => {
+                                    const elem = document.documentElement;
+                                    if (elem.requestFullscreen) elem.requestFullscreen();
+                                    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                                    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                                }}
+                                className="resume-integrity-btn"
+                                style={{
+                                    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                                    color: 'white',
+                                    border: 'none',
+                                    padding: '1rem 2.5rem',
+                                    borderRadius: '12px',
+                                    fontSize: '1.1rem',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Enter Full Screen
+                            </button>
+                        ) : (
+                            <button
+                                onClick={startScreenShare}
+                                className="resume-integrity-btn"
+                                style={{
+                                    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                                    color: 'white',
+                                    border: 'none',
+                                    padding: '1rem 2.5rem',
+                                    borderRadius: '12px',
+                                    fontSize: '1.1rem',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Restart Screen Sharing
+                            </button>
+                        )}
                     </div>
                 </div>
             )}
