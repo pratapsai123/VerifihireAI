@@ -197,7 +197,7 @@ const AiInterviewSession = () => {
                     // Add catch to prevent "play() interrupted by pause()" runtime error
                     video.play().catch(e => console.warn("Screenshot capture play interrupted:", e));
                     await new Promise(r => setTimeout(r, 100)); // Brief wait for stream to render
-                    
+
                     const canvas = document.createElement('canvas');
                     canvas.width = video.videoWidth || 1280;
                     canvas.height = video.videoHeight || 720;
@@ -315,6 +315,7 @@ const AiInterviewSession = () => {
             }
 
             if (!isFS && isPermissionsGranted) {
+<<<<<<< HEAD
                 pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
             }
@@ -379,7 +380,7 @@ const AiInterviewSession = () => {
                     try {
                         currentAudioRef.current.pause();
                         currentAudioRef.current.volume = 0;
-                    } catch (e) {}
+                    } catch (e) { }
                 }
             }, 100);
             return () => clearInterval(hammer);
@@ -636,7 +637,7 @@ const AiInterviewSession = () => {
 
         const tryStart = async () => {
             if (!isFullscreenRef.current) return;
-            
+
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
@@ -1282,12 +1283,12 @@ const AiInterviewSession = () => {
         }
 
         setAiStatus("Requesting Permissions...");
-        
+
         const screenSuccess = await startScreenShare();
         if (!screenSuccess) return;
 
         await startCamera();
-        
+
         setIsPermissionsGranted(true);
         isFullscreenRef.current = true; // Assume success if code reaches here after await
         setAiStatus("Preparing Indu...");
@@ -1308,7 +1309,7 @@ const AiInterviewSession = () => {
             chatHistoryRef.current = restoredHistory;
             const nextIdx = summary.length;
             setCurrentQuestionIndex(nextIdx);
-            
+
             const resumeQ = questions[nextIdx] || "Let's continue. Please share more about your experience.";
             addMessage('ai', resumeQ);
             await speak(resumeQ);
@@ -1317,7 +1318,7 @@ const AiInterviewSession = () => {
             const firstName = candidate.full_name.split(' ')[0];
             const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
             const introQ = "To get started, please introduce yourself and your professional background.";
-            
+
             let finalQs = [...questions];
             if (finalQs.length === 0 || finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
@@ -1502,7 +1503,15 @@ const AiInterviewSession = () => {
     return (
         <div className="ai-session-page">
             {isPermissionsGranted && (!isFullscreen || !isScreenSharing) && !isCompleted && (
-                <div 
+                <div
+                    onClick={() => {
+                        if (!isFullscreen) {
+                            const elem = document.documentElement;
+                            if (elem.requestFullscreen) elem.requestFullscreen();
+                            else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                            else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                        }
+                    }}
                     style={{
                         position: 'fixed',
                         inset: 0,
@@ -1605,7 +1614,7 @@ const AiInterviewSession = () => {
                                 <span><b>Screen:</b> Used for tab-switch monitoring. Please choose "Entire Screen".</span>
                             </div>
                         </div>
-                        <button 
+                        <button
                             onClick={handleStartInterview}
                             className="start-session-btn"
                             style={{

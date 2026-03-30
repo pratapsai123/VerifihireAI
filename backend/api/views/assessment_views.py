@@ -1153,6 +1153,82 @@ def create_custom_assessment_view(request):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
+@csrf_exempt
+@api_view(['PATCH', 'PUT'])
+@permission_classes([IsAuthenticated])
+def update_custom_assessment_view(request, custom_assessment_id):
+    """
+    Update an existing CustomAssessment record.
+    """
+    try:
+        custom_assessment = _db_call_with_retry(
+            lambda: CustomAssessment.objects.get(id=custom_assessment_id),
+            retries=1
+        )
+        
+        user_data = request.data.get('user', {}) or {}
+        assessment_data = request.data.get('assessment', {}) or {}
+        
+        # Update user info if provided
+        if 'first_name' in user_data: custom_assessment.first_name = user_data.get('first_name')
+        if 'last_name' in user_data: custom_assessment.last_name = user_data.get('last_name')
+        if 'email' in user_data: custom_assessment.email = user_data.get('email')
+        if 'organization_name' in user_data: custom_assessment.organization_name = user_data.get('organization_name')
+        
+        # Update assessment config
+        if 'role' in assessment_data: custom_assessment.role = assessment_data.get('role')
+        if 'sub_roles' in assessment_data: custom_assessment.sub_roles = assessment_data.get('sub_roles')
+        if 'custom_role' in assessment_data: custom_assessment.custom_role = assessment_data.get('custom_role')
+        if 'experience_level' in assessment_data: custom_assessment.experience_level = assessment_data.get('experience_level')
+        
+        if 'number_of_questions' in assessment_data:
+            try:
+                custom_assessment.number_of_questions = int(assessment_data.get('number_of_questions'))
+            except (TypeError, ValueError):
+                pass
+        
+        if 'time' in assessment_data: custom_assessment.time = assessment_data.get('time')
+        if 'auto_time' in assessment_data: custom_assessment.auto_time = assessment_data.get('auto_time')
+        
+        weights = assessment_data.get('weights', {})
+        if 'common' in weights: custom_assessment.weight_common = int(weights.get('common'))
+        if 'role' in weights: custom_assessment.weight_role = int(weights.get('role'))
+        if 'resume' in weights: custom_assessment.weight_resume = int(weights.get('resume'))
+        
+        if 'extracted_skills' in assessment_data: custom_assessment.extracted_skills = assessment_data.get('extracted_skills')
+        if 'suggested_skills' in assessment_data: custom_assessment.suggested_skills = assessment_data.get('suggested_skills')
+        if 'common_skills' in assessment_data: custom_assessment.common_skills = assessment_data.get('common_skills')
+        if 'question_distribution' in assessment_data: custom_assessment.question_distribution = assessment_data.get('question_distribution')
+        if 'removed_skills' in assessment_data: custom_assessment.removed_skills = assessment_data.get('removed_skills')
+        if 'resume_file_name' in assessment_data: custom_assessment.resume_file_name = assessment_data.get('resume_file_name')
+        
+        _db_call_with_retry(lambda: custom_assessment.save(), retries=1)
+        
+        return Response({'message': 'Custom assessment updated successfully.', 'id': custom_assessment.id}, status=status.HTTP_200_OK)
+        
+    except CustomAssessment.DoesNotExist:
+        return Response({'error': 'Custom assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except OperationalError:
+        close_old_connections()
+        return Response(
+            {
+                'error': (
+                    'Database connection failed while updating custom assessment. '
+                    'Please check your internet/VPN and DB connectivity, then try again.'
+                )
+            },
+            status=status.HTTP_503_SERVICE_UNAVAILABLE
+        )
+    except Exception as e:
+        import traceback
+        print(f"Error in update_custom_assessment_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(
+            {'error': f'An error occurred while creating custom assessment: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
 
 @csrf_exempt
 @api_view(['GET', 'PATCH', 'PUT'])

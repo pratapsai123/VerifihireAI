@@ -572,3 +572,146 @@
 .modal-close-btn:hover {
   background-color: #f3f4f6;
 }
+
+/* Hide default numeric input spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Question Distribution UI Improvements */
+.qty-button-container {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  height: 32px;
+}
+
+.qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #f8fafc;
+  color: #475569;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.qty-btn:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.qty-btn:active {
+  background-color: #e2e8f0;
+}
+
+.qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qty-input-field {
+  width: 40px;
+  height: 32px;
+  border: none;
+  border-left: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.qty-input-field:focus {
+  outline: none;
+  background-color: #f1f5f9;
+}
+
+/* Question Distribution Color Variants */
+.qty-button-container.common {
+  border-color: #f59e0b; /* Amber-500 */
+}
+.qty-button-container.common .qty-btn {
+  background-color: #fef3c7; /* Amber-100 */
+  color: #b45309; /* Amber-700 */
+}
+.qty-button-container.common .qty-input-field {
+  border-left-color: #f59e0b;
+  border-right-color: #f59e0b;
+  color: #b45309;
+}
+
+.qty-button-container.role {
+  border-color: #10b981; /* Emerald-500 */
+}
+.qty-button-container.role .qty-btn {
+  background-color: #d1fae5; /* Emerald-100 */
+  color: #047857; /* Emerald-700 */
+}
+.qty-button-container.role .qty-input-field {
+  border-left-color: #10b981;
+  border-right-color: #10b981;
+  color: #047857;
+}
+
+.qty-button-container.resume {
+  border-color: #3b82f6; /* Blue-500 */
+}
+.qty-button-container.resume .qty-btn {
+  background-color: #dbeafe; /* Blue-100 */
+  color: #1d4ed8; /* Blue-700 */
+}
+.qty-button-container.resume .qty-input-field {
+  border-left-color: #3b82f6;
+  border-right-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+/* Redesigned Skill Distribution Remove Button */
+.skill-distribution-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #fee2e2; /* Red-100 */
+  color: #dc2626; /* Red-600 */
+  border: 1px solid #fecaca; /* Red-200 */
+  border-radius: 4px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding-bottom: 2px; /* Visual alignment for '×' */
+}
+
+.skill-distribution-remove-btn:hover {
+  background-color: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.skill-distribution-remove-btn:active {
+  transform: scale(0.95);
+}
+

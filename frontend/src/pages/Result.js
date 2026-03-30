@@ -87,7 +87,13 @@ export default function Result() {
                 if (fromDate) params.start_date = fromDate;
                 if (toDate) params.end_date = toDate;
                 const resp = await axios.get(`${API_BASE_URL}/results/`, { params });
-                setOverview(resp.data?.results || []);
+                // Filter out AI results — those belong in ResultsAI.js only
+                const allResults = resp.data?.results || [];
+                const manualOnly = allResults.filter(r => {
+                    const sid = String(r.submission_id || '');
+                    return !sid.startsWith('ai_') && !sid.startsWith('aicand_');
+                });
+                setOverview(manualOnly);
             } else {
                 // Candidate view: validate submission exists but do NOT show score/selected/rejected.
                 const resp = await axios.get(`${API_BASE_URL}/invitations/public/${token}/result/`);

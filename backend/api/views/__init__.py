@@ -34,6 +34,7 @@ from .assessment_views import (
     bulk_create_questions_view,
     get_questions_by_skills_view,
     create_custom_assessment_view,
+    update_custom_assessment_view,
     get_custom_assessment_view,
     create_assessment_view,
     get_assessment_public_view,
