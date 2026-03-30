@@ -1,155 +1,116 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { WS_BASE_URL } from '../apiConfig';
+import { useEffect, useRef, useState, useCallback } from "react";
+import { WS_BASE_URL } from "../apiConfig";
 
 export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
   const socketRef = useRef(null);
-  const [connectionStatus, setConnectionStatus] = useState('Disconnected');
-  const [connectionStatusText, setConnectionStatusText] = useState('Connecting...');
-  const [connectionEstablished, setConnectionEstablished] = useState(false);
-  
+  const [connectionStatus, setConnectionStatus] = useState("Connecting");
+  const retryDelayRef = useRef(3000);
+  const reconnectTimeoutRef = useRef(null);
   const heartbeatIntervalRef = useRef(null);
-  const reconnectAttemptsRef = useRef(0);
-  const MAX_RECONNECT_ATTEMPTS = 12;
+  const shouldReconnectRef = useRef(true);
 
-  const buildWsCandidates = useCallback((sessionId, role) => {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const hostname = window.location.hostname;
-    const candidates = [];
+  // 🔥 CACHE: Store onMessage in a ref so connect() doesn't depend on it
+  const onMessageRef = useRef(onMessage);
+  useEffect(() => {
+    onMessageRef.current = onMessage;
+  }, [onMessage]);
 
-    // 1. Primary: Use the centralized WS_BASE_URL
-    let base = WS_BASE_URL.endsWith('/') ? WS_BASE_URL.slice(0, -1) : WS_BASE_URL;
-    if ((hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) && base.includes(':3000')) {
-      base = base.replace(':3000', '');
-    }
-    candidates.push(`${base}/interview/${sessionId}/${role}/`);
+  const connect = useCallback(() => {
+    if (!sessionId || !role || sessionExpired || !shouldReconnectRef.current) return;
 
-    // 2. Production Domain (Explicit)
-    if (hostname.includes('verifihireai.com') || hostname.includes('duckdns.org')) {
-      candidates.push(`wss://${hostname}/ws/interview/${sessionId}/${role}/`);
-    }
-
-    // 3. Fallback: Host but NO PORT 3000
-    const currentHost = window.location.host;
-    if (!currentHost.includes(':3000')) {
-      const hostCandidate = `${protocol}//${currentHost}/ws/interview/${sessionId}/${role}/`;
-      if (!candidates.includes(hostCandidate)) {
-        candidates.push(hostCandidate);
+    // 🔥 GUARD: Prevent redundant connections
+    if (socketRef.current) {
+      if (socketRef.current.readyState === WebSocket.OPEN || socketRef.current.readyState === WebSocket.CONNECTING) {
+        console.log("ℹ️ WebSocket already connected or connecting. Skipping.");
+        return;
       }
     }
 
-    // 4. Localhost Fallback
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      candidates.push(`ws://${hostname}:8001/ws/interview/${sessionId}/${role}/`);
-    }
+    const wsUrl = `${WS_BASE_URL}/${sessionId}/${role}/`;
+    console.log("🔌 Connecting to:", wsUrl);
 
-    return candidates;
-  }, []);
+    const socket = new WebSocket(wsUrl);
+    socketRef.current = socket;
 
-  const connectWebSocket = useCallback(() => {
-    if (sessionExpired) return;
+    socket.onopen = () => {
+      console.log("✅ WebSocket connected");
+      setConnectionStatus("Connected");
+      retryDelayRef.current = 3000;
 
-    const candidates = buildWsCandidates(sessionId, role);
-    let attemptIndex = 0;
+      if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current);
+      heartbeatIntervalRef.current = setInterval(() => {
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ type: "ping" }));
+        }
+      }, 20000);
+    };
 
-    const tryNext = () => {
-      if (attemptIndex >= candidates.length) {
-        console.error('❌ All WebSocket URL candidates failed');
-        setConnectionStatus('Error');
-        setConnectionStatusText('Connection failed');
+    socket.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+
+        // 🔥 TERMINATION GUARD: Stop reconnect if interview ends
+        if (data.type === "end_interview" || data.type === "session_expired") {
+          console.log("🛑 Termination message received. Stopping reconnect.");
+          shouldReconnectRef.current = false;
+        }
+
+        if (onMessageRef.current) onMessageRef.current(data);
+      } catch (e) {
+        console.error("Parse error:", e);
+      }
+    };
+
+    socket.onerror = (err) => {
+      console.error("❌ WebSocket error:", err);
+    };
+
+    socket.onclose = (event) => {
+      console.warn(`⚠️ WebSocket closed: ${event.code} ${event.reason}`);
+
+      // ❌ DO NOT reconnect for these cases
+      if (
+        event.code === 1000 ||   // normal close
+        event.code === 1008 ||   // policy violation (auth fail)
+        event.code === 4001 ||   // custom close (session expired)
+        event.code === 4003      // unauthorized / invalid
+      ) {
+        console.log("🛑 Not reconnecting due to server rejection");
+        shouldReconnectRef.current = false;
+        setConnectionStatus("Disconnected");
         return;
       }
 
-      const url = candidates[attemptIndex++];
-      console.log(`🔌 Attempting WS connection to ${url}`);
+      setConnectionStatus("Reconnecting");
 
-      try {
-        const socket = new WebSocket(url);
-        socketRef.current = socket;
-
-        const fallbackTimer = setTimeout(() => {
-          if (!socket || (socket.readyState !== WebSocket.OPEN && socket.readyState !== WebSocket.CONNECTING)) {
-            console.warn(`WS timeout on ${url}`);
-            tryNext();
-          }
-        }, 3000);
-
-        socket.addEventListener('open', () => {
-          clearTimeout(fallbackTimer);
-          console.log('✅ WebSocket connected successfully to', url);
-          setConnectionEstablished(true);
-          setConnectionStatus('Connected');
-          setConnectionStatusText('Ready for connection');
-          reconnectAttemptsRef.current = 0;
-
-          heartbeatIntervalRef.current = setInterval(() => {
-            try {
-              if (socket.readyState === WebSocket.OPEN) {
-                socket.send(JSON.stringify({ type: 'client_ping', ts: Date.now() }));
-              }
-            } catch (e) { }
-          }, 20000);
-        });
-
-        socket.addEventListener('message', (event) => {
-          try {
-            const data = JSON.parse(event.data);
-            if (data.type === 'server_ping' || data.type === 'pong' || data.type === 'server_pong') return;
-            if (onMessage) onMessage(data);
-          } catch (e) {
-            console.error('Failed to parse WebSocket message:', e);
-          }
-        });
-
-        socket.addEventListener('close', (e) => {
-          console.warn('WebSocket disconnected', e.code);
-          setConnectionStatus('Disconnected');
-          if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current);
-
-          if (!sessionExpired && reconnectAttemptsRef.current < MAX_RECONNECT_ATTEMPTS) {
-            const delay = Math.pow(2, reconnectAttemptsRef.current) * 1000;
-            reconnectAttemptsRef.current++;
-            setConnectionStatusText(`Reconnecting in ${delay / 1000}s...`);
-            setTimeout(connectWebSocket, delay);
-          } else if (reconnectAttemptsRef.current >= MAX_RECONNECT_ATTEMPTS) {
-            setConnectionStatus('Error');
-            setConnectionStatusText('Connection failed');
-          }
-        });
-
-        socket.addEventListener('error', (e) => {
-          console.warn('WS error on', url, e);
-          // tryNext will handle failover on close event
-        });
-      } catch (e) {
-        console.warn('WS construction failed for', url, e);
-        tryNext();
-      }
+      reconnectTimeoutRef.current = setTimeout(() => {
+        console.log(`🔄 Attempting reconnect in ${retryDelayRef.current}ms`);
+        retryDelayRef.current = Math.min(retryDelayRef.current * 2, 15000);
+        connect();
+      }, retryDelayRef.current);
     };
-
-    tryNext();
-  }, [sessionId, role, sessionExpired, buildWsCandidates, onMessage]);
+  }, [sessionId, role, sessionExpired]); // onMessage removed from deps
 
   useEffect(() => {
-    connectWebSocket();
+    connect();
     return () => {
-      if (socketRef.current) socketRef.current.close();
+      if (reconnectTimeoutRef.current) clearTimeout(reconnectTimeoutRef.current);
       if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current);
+      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+        socketRef.current.close(1000, "Normal closure");
+      }
     };
-  }, [connectWebSocket]);
+  }, [connect]);
 
-  const sendMessage = useCallback((msgObj) => {
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify(msgObj));
+  const sendMessage = useCallback((msg) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify(msg));
     }
   }, []);
 
   return {
     socketRef,
     connectionStatus,
-    setConnectionStatus,
-    connectionStatusText,
-    setConnectionStatusText,
-    connectionEstablished,
     sendMessage
   };
 };
