@@ -765,8 +765,8 @@ const Dashboard = () => {
                     <select className="filter-select"><option>Analytics</option></select>
                   </div>
                 </div>
-                <div className="chart-container">
-                  <ResponsiveContainer width="100%" height="100%">
+                <div className="chart-container" style={{ height: '300px', minHeight: '300px' }}>
+                  <ResponsiveContainer width="100%" height="100%" debounce={100}>
                     <AreaChart data={data.trendsTotal}>
                       <defs>
                         <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -786,13 +786,15 @@ const Dashboard = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
                   <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
                     <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
-                    <ResponsiveContainer width="100%" height={100}>
-                      <BarChart data={data.successRate}>
-                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                        <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                        <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
-                      </BarChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: '100px', width: '100%', minHeight: '100px' }}>
+                      <ResponsiveContainer width="100%" height="100%" debounce={100}>
+                        <BarChart data={data.successRate}>
+                          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                          <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                          <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>

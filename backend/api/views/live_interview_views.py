@@ -806,22 +806,25 @@ def submit_interview_feedback(request):
         "token": "uuid",
         "feedback": "text",
         "rating": int (1-5),
-        "role": "interviewer" | "candidate" (optional, default candidate)
+        "technical_rating": int,
+        "communication_rating": int,
+        "team_fit_rating": int,
+        "role": "interviewer" | "candidate"
     }
     """
     import uuid
-    print(f"DEBUG: submit_interview_feedback called. Data: {request.data}")
-    
-    token = request.data.get('token')
-    feedback_text = request.data.get('feedback')
-    rating = request.data.get('rating')  # Legacy/Overall
-    tech_rating = request.data.get('technical_rating')
-    comm_rating = request.data.get('communication_rating')
-    fit_rating = request.data.get('team_fit_rating')
-    role = request.data.get('role', 'candidate')
+    data = request.data or {}
+    token = data.get('token')
+    feedback_text = data.get('feedback')
+    rating = data.get('rating')
+    tech_rating = data.get('technical_rating')
+    comm_rating = data.get('communication_rating')
+    fit_rating = data.get('team_fit_rating')
+    role = data.get('role', 'candidate')
 
-    if not token or not feedback_text:
-        return Response({'error': 'Token and feedback are required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not token:
+        print("DEBUG: Missing token in feedback submission")
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         # Validate UUID
@@ -853,7 +856,7 @@ def submit_interview_feedback(request):
                 if comm_rating: feedback_obj.interviewer_communication_rating = int(comm_rating)
                 if fit_rating: feedback_obj.interviewer_team_fit_rating = int(fit_rating)
                 
-                # Calculate average if all three are present
+                # Calculate average
                 ratings_list = []
                 if tech_rating: ratings_list.append(int(tech_rating))
                 if comm_rating: ratings_list.append(int(comm_rating))
@@ -861,6 +864,8 @@ def submit_interview_feedback(request):
                 
                 if ratings_list:
                     feedback_obj.interviewer_average_rating = sum(ratings_list) / len(ratings_list)
+                elif rating:
+                    feedback_obj.interviewer_average_rating = float(rating)
             except (ValueError, TypeError):
                 pass
         else:

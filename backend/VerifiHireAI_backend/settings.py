@@ -37,7 +37,7 @@ FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifihireai.co
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+#    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,7 +95,7 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             # Since Redis is in Docker but exposed to 6379, 127.0.0.1 works for local backend
-            "hosts": [(os.environ.get('REDIS_HOST', '127.0.0.1'), int(os.environ.get('REDIS_PORT', 6379)))],
+           "hosts": [("127.0.0.1", 6379)],
         },
     },
 }
@@ -131,7 +131,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihire'),
+        'NAME': os.environ.get('DB_NAME', 'verifihireai'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
@@ -175,7 +175,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/django-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (User uploaded files)
