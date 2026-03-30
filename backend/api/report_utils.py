@@ -35,6 +35,7 @@ from .models import (
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
     CandidateIntegrity, IntegrityScreenshot
 )
+from .ocr_utils import pdf_page_to_png_bytes
 
 MAX_PAGES = 20
 EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
@@ -152,10 +153,23 @@ def _convert_image_to_png_bytesio(source):
     if _is_file_path(source):
         # File path
         try:
-            pil_img = PILImage.open(source)
-            print(f"[report] Opened image file: {source}")
+            if source.lower().endswith('.pdf'):
+                # PDF file path - convert first page to PNG
+                print(f"[report] Detected PDF file: {source}")
+                with open(source, 'rb') as f:
+                    pdf_content = f.read()
+                png_bytes = pdf_page_to_png_bytes(pdf_content, page_num=0)
+                if png_bytes:
+                    pil_img = PILImage.open(io.BytesIO(png_bytes))
+                    print(f"[report] PDF page 1 converted to PIL image")
+                else:
+                    print(f"[report] PDF conversion failed for {source}")
+                    return None
+            else:
+                pil_img = PILImage.open(source)
+                print(f"[report] Opened image file: {source}")
         except Exception as e:
-            print(f"[report] Cannot open image file {source}: {e}")
+            print(f"[report] Cannot open file {source}: {e}")
             return None
     elif isinstance(source, str) and len(source) > 50:
         # base64 string (data URI or raw)
@@ -413,6 +427,14 @@ def generate_candidate_report(submission_id):
     # 2. PAN CARD
     # ════════════════════════════════════════════════════════════════════════
     story.append(Paragraph('PAN Card', styles['SectionHeader']))
+    
+    if candidate_detail and candidate_detail.entered_with_consent:
+        story.append(Paragraph(
+            '<b>Note:</b> Candidate entered with manual confirmation (PAN mismatch / extraction failure)',
+            styles['NotQualifiedBadge']
+        ))
+        story.append(Spacer(1, 10))
+
     pan_added = False
     if candidate_detail and candidate_detail.pan_file:
         try:

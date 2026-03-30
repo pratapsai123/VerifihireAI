@@ -2309,6 +2309,10 @@ def save_all_candidate_details_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+        entered_with_consent = request.data.get('entered_with_consent', False)
+        if isinstance(entered_with_consent, str):
+            entered_with_consent = entered_with_consent.lower() == 'true'
+
         # Create or update candidate details
         candidate_details, created = CandidateDetails.objects.update_or_create(
             token=token,
@@ -2321,6 +2325,7 @@ def save_all_candidate_details_view(request):
                 'pan_number': pan_number,
                 'snapshot': snapshot,
                 'pan_file': pan_file,
+                'entered_with_consent': entered_with_consent,
             }
         )
 

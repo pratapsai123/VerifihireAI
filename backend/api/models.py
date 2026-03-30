@@ -1175,6 +1175,11 @@ class CandidateDetails(models.Model):
         null=True,
         help_text="Base64 encoded webcam snapshot for identity verification"
     )
+
+    entered_with_consent = models.BooleanField(
+        default=False, 
+        help_text="True if the candidate bypassed PAN mismatch with manual confirmation"
+    )
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
