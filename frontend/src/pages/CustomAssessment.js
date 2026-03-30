@@ -8,6 +8,7 @@ import '../styles/CustomAssessment.css';
 // LocalStorage key for custom assessment form data
 const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
+const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 
 function CustomAssessment() {
   const navigate = useNavigate();
@@ -337,18 +338,16 @@ function CustomAssessment() {
   };
 
   // Save form data to localStorage
-  const saveFormDataToLocalStorage = () => {
+  const saveFormDataToLocalStorage = useCallback(() => {
     try {
       const dataToSave = {
         formData: {
-          // Save all formData except the File object (can't serialize)
           role: formData.role,
           subRoles: formData.subRoles,
           customRole: formData.customRole,
           experienceLevel: formData.experienceLevel,
           numberOfQuestions: formData.numberOfQuestions,
           time: formData.time,
-          // Note: resume File object is not saved, only fileName is saved separately
         },
         resumeFileName,
         extractedSkills,
@@ -359,13 +358,29 @@ function CustomAssessment() {
         removedSkills,
         weights,
         autoTime,
-        timestamp: new Date().toISOString(), // Track when data was saved
+        timestamp: new Date().toISOString(),
       };
       localStorage.setItem(CUSTOM_ASSESSMENT_STORAGE_KEY, JSON.stringify(dataToSave));
     } catch (error) {
       console.error('Error saving form data to localStorage:', error);
     }
-  };
+  }, [
+    formData.role,
+    formData.subRoles,
+    formData.customRole,
+    formData.experienceLevel,
+    formData.numberOfQuestions,
+    formData.time,
+    resumeFileName,
+    extractedSkills,
+    suggestedSkills,
+    commonSkills,
+    questionDistribution,
+    manualDistribution,
+    removedSkills,
+    weights,
+    autoTime
+  ]);
 
   // Load form data from localStorage
   const loadFormDataFromLocalStorage = () => {
@@ -825,6 +840,28 @@ function CustomAssessment() {
       setAutoTime('');
     }
   }, [formData.numberOfQuestions]);
+  
+  // Auto-save form data to localStorage whenever important state changes
+  useEffect(() => {
+    saveFormDataToLocalStorage();
+  }, [
+    formData.role,
+    formData.subRoles,
+    formData.customRole,
+    formData.experienceLevel,
+    formData.numberOfQuestions,
+    formData.time,
+    resumeFileName,
+    extractedSkills,
+    suggestedSkills,
+    commonSkills,
+    questionDistribution,
+    manualDistribution,
+    removedSkills,
+    weights,
+    autoTime,
+    saveFormDataToLocalStorage
+  ]);
 
   // Calculate question distribution per skill
   useEffect(() => {
@@ -949,12 +986,23 @@ function CustomAssessment() {
       }
     } finally {
       setIsExtractingSkills(false);
+      // Ensure we save the newly extracted skills immediately
+      saveFormDataToLocalStorage();
     }
   };
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      // CLEAR stale storage data when a NEW resume is uploaded to ensure a fresh assessment context.
+      // This prevents the "same review questions" issue reported by users.
+      try {
+        localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+        localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+      } catch (err) {
+        console.error('Error clearing stale assessment storage:', err);
+      }
+
       setFormData({ ...formData, resume: file });
       setResumeFileName(file.name);
       setErrors({ ...errors, resume: '' });
@@ -1379,35 +1427,51 @@ function CustomAssessment() {
       // ignore
     }
 
-    // If we have a draft id, verify it actually exists in the backend DB before reusing it.
+    // If we have a draft id, attempt to update the existing record with the current payload.
+    // This ensures that any changes to role, distribution, or weights are correctly reflected
+    // in the review page even if the user refreshes or navigates back and forth.
     if (draftId) {
       try {
-        await axios.get(`${API_BASE_URL}/custom-assessments/${draftId}/`);
+        await axios.patch(`${API_BASE_URL}/custom-assessments/${draftId}/`, payload);
+        // Clear stale review state because the configuration has changed. 
+        // This forces ReviewPage to re-fetch questions next time it's loaded.
+        try {
+          localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+        } catch {
+          // ignore
+        }
         return draftId;
       } catch (err) {
-        // Only clear if it's explicitly "Not Found". 
-        // If the server is just down/unreachable, keep the ID in localStorage for later retries.
+        // If the draft ID was not found (e.g. backend was reset), clear it and move to creation.
         if (err.response?.status === 404) {
           clearDraft();
+          draftId = null; 
+        } else {
+          // If it's a network error or other server error, we still return the draftId to allow
+          // the flow to continue if possible, or fail gracefully later.
+          return draftId;
         }
       }
     }
 
-    // Create a new CustomAssessment record
-    try {
-      const saveResponse = await axios.post(`${API_BASE_URL}/custom-assessments/`, payload);
-      const newId = saveResponse?.data?.id;
-      if (newId) {
-        try {
-          localStorage.setItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY, String(newId));
-        } catch {
-          // ignore
+    // Create a new CustomAssessment record if no valid draftId exists
+    if (!draftId) {
+      try {
+        const saveResponse = await axios.post(`${API_BASE_URL}/custom-assessments/`, payload);
+        const newId = saveResponse?.data?.id;
+        if (newId) {
+          try {
+            localStorage.setItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY, String(newId));
+            // Also clear review state for new assessment records
+            localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+          } catch {
+            // ignore
+          }
+          return newId;
         }
-        return newId;
+      } catch (error) {
+        console.error('Error saving custom assessment:', error);
       }
-    } catch (error) {
-      console.error('Error saving custom assessment:', error);
-      // Don't clearDraft() on creation failure unless it was a validation error
     }
 
     return null;
@@ -2165,14 +2229,12 @@ function CustomAssessment() {
                   {/* Skills with question counts */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {Object.entries(questionDistribution)
-                      .sort((a, b) => b[1] - a[1]) // Sort by question count descending
+                      .sort((a, b) => a[0].localeCompare(b[0])) // Sort alphabetically for stability
                       .map(([skill, count]) => {
                         const normalizedSkill = skill.toLowerCase().trim();
                         const isCommonSkill = commonSkills.some(cs => cs.toLowerCase().trim() === normalizedSkill);
                         const isRoleSkill = suggestedSkills.some(rs => rs.toLowerCase().trim() === normalizedSkill);
                         const borderColor = isCommonSkill ? '#fcd34d' : isRoleSkill ? '#86efac' : '#bfdbfe';
-                        const bgColor = isCommonSkill ? '#fef3c7' : isRoleSkill ? '#f0fdf4' : '#eff6ff';
-                        const textColor = isCommonSkill ? '#92400e' : isRoleSkill ? '#166534' : '#1e40af';
                         return (
                           <div
                             key={skill}
@@ -2188,45 +2250,36 @@ function CustomAssessment() {
                           >
                             <span style={{ fontSize: '0.75rem', fontWeight: '500', flex: 1 }}>{skill}</span>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <input
-                                type="number"
-                                min="0"
-                                value={count || 0}
-                                onChange={(e) => handleUpdateSkillQuestions(skill, e.target.value)}
-                                style={{
-                                  width: '60px',
-                                  padding: '0.25rem 0.5rem',
-                                  fontSize: '0.625rem',
-                                  fontWeight: '600',
-                                  textAlign: 'center',
-                                  border: `1px solid ${borderColor}`,
-                                  borderRadius: '0.25rem',
-                                  backgroundColor: bgColor,
-                                  color: textColor,
-                                }}
-                              />
+                              <div className={`qty-button-container ${isCommonSkill ? 'common' : isRoleSkill ? 'role' : 'resume'}`}>
+                                <button
+                                  type="button"
+                                  className="qty-btn"
+                                  onClick={() => handleUpdateSkillQuestions(skill, Math.max(0, (count || 0) - 1))}
+                                  disabled={(count || 0) <= 0}
+                                  title="Decrease"
+                                >
+                                  -
+                                </button>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  value={count || 0}
+                                  onChange={(e) => handleUpdateSkillQuestions(skill, e.target.value)}
+                                  className="qty-input-field"
+                                />
+                                <button
+                                  type="button"
+                                  className="qty-btn"
+                                  onClick={() => handleUpdateSkillQuestions(skill, (count || 0) + 1)}
+                                  title="Increase"
+                                >
+                                  +
+                                </button>
+                              </div>
                               <button
                                 type="button"
                                 onClick={() => handleRemoveSkillFromDistribution(skill)}
-                                style={{
-                                  padding: '0.25rem 0.5rem',
-                                  backgroundColor: '#fee2e2',
-                                  color: '#dc2626',
-                                  border: '1px solid #fca5a5',
-                                  borderRadius: '0.25rem',
-                                  cursor: 'pointer',
-                                  fontSize: '0.625rem',
-                                  fontWeight: '600',
-                                  transition: 'all 0.2s'
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.target.style.backgroundColor = '#fecaca';
-                                  e.target.style.borderColor = '#f87171';
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.target.style.backgroundColor = '#fee2e2';
-                                  e.target.style.borderColor = '#fca5a5';
-                                }}
+                                className="skill-distribution-remove-btn"
                                 title="Remove this skill"
                               >
                                 ×

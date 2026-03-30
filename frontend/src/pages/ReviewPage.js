@@ -131,7 +131,7 @@ function ReviewPage() {
           // Merge: location state often has the source data, but parsedSaved has user edits (removed questions, settings)
           // Ensure we preserve incoming navigation flags like refreshManual
           const incomingRefresh = state.refreshManual;
-          state = { ...state, ...parsedSaved };
+          state = { ...parsedSaved, ...state };
           if (incomingRefresh) state.refreshManual = incomingRefresh;
         }
       }
