@@ -315,6 +315,7 @@ const AiInterviewSession = () => {
             }
 
             if (!isFS && isPermissionsGranted) {
+                showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
                 pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
             }
@@ -336,8 +337,10 @@ const AiInterviewSession = () => {
                 try { assemblyAIRef.current.stop(); } catch (e) { }
             }
 
-            // 3. Stop Speech (Browser TTS)
-            window.speechSynthesis.cancel();
+            // 3. Stop Speech (Browser TTS) - Respect proctoring notices
+            if (window.speechSynthesis && !isNoticePlayingRef.current) {
+                window.speechSynthesis.cancel();
+            }
             setIsSpeaking(false);
             isSpeakingRef.current = false;
 
