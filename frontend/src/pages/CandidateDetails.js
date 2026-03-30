@@ -666,6 +666,8 @@ const CandidateDetails = ({ token, onComplete }) => {
         formData.append('pan_file', data.panFile);
       }
 
+      formData.append('entered_with_consent', data.manualConfirmation);
+
       // Send to backend API
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
         headers: {
@@ -674,14 +676,17 @@ const CandidateDetails = ({ token, onComplete }) => {
       })
         .then((response) => {
           if (response.data.success) {
-            // Store success in localStorage for quick check
-            localStorage.setItem(`candidate_details_${token}`, JSON.stringify({
-              ...data,
-              snapshot,
-              token,
+            // Store success in localStorage for quick check (STRICTLY Metadata ONLY to avoid QuotaExceededError)
+            const leanData = {
+              fullName: data.fullName,
+              email: data.email,
+              phone: data.phone,
+              pan: data.pan,
+              token: token,
               saved: true,
               id: response.data.id,
-            }));
+            };
+            localStorage.setItem(`candidate_details_${token}`, JSON.stringify(leanData));
 
             // Call onComplete callback to proceed to exam
             if (onComplete) {

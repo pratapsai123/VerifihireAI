@@ -377,6 +377,21 @@ export default function TakeAssessment() {
     return {};
   });
 
+  // Cleanup old/large localStorage items to stay within quota
+  useEffect(() => {
+    try {
+      const keys = Object.keys(localStorage);
+      keys.forEach(key => {
+        // Clear old progress or details that don't match the current token
+        if ((key.startsWith('take_assessment_progress_') || key.startsWith('candidate_details_')) && !key.endsWith(token)) {
+          localStorage.removeItem(key);
+        }
+      });
+    } catch (e) {
+      console.warn('LocalStorage cleanup failed', e);
+    }
+  }, [token]);
+
   useEffect(() => {
     if (!token || submitted || assessmentStage === 'loading') return;
     try {
