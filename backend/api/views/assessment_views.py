@@ -1153,14 +1153,90 @@ def create_custom_assessment_view(request):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
+@csrf_exempt
+@api_view(['PATCH', 'PUT'])
+@permission_classes([IsAuthenticated])
+def update_custom_assessment_view(request, custom_assessment_id):
+    """
+    Update an existing CustomAssessment record.
+    """
+    try:
+        custom_assessment = _db_call_with_retry(
+            lambda: CustomAssessment.objects.get(id=custom_assessment_id),
+            retries=1
+        )
+        
+        user_data = request.data.get('user', {}) or {}
+        assessment_data = request.data.get('assessment', {}) or {}
+        
+        # Update user info if provided
+        if 'first_name' in user_data: custom_assessment.first_name = user_data.get('first_name')
+        if 'last_name' in user_data: custom_assessment.last_name = user_data.get('last_name')
+        if 'email' in user_data: custom_assessment.email = user_data.get('email')
+        if 'organization_name' in user_data: custom_assessment.organization_name = user_data.get('organization_name')
+        
+        # Update assessment config
+        if 'role' in assessment_data: custom_assessment.role = assessment_data.get('role')
+        if 'sub_roles' in assessment_data: custom_assessment.sub_roles = assessment_data.get('sub_roles')
+        if 'custom_role' in assessment_data: custom_assessment.custom_role = assessment_data.get('custom_role')
+        if 'experience_level' in assessment_data: custom_assessment.experience_level = assessment_data.get('experience_level')
+        
+        if 'number_of_questions' in assessment_data:
+            try:
+                custom_assessment.number_of_questions = int(assessment_data.get('number_of_questions'))
+            except (TypeError, ValueError):
+                pass
+        
+        if 'time' in assessment_data: custom_assessment.time = assessment_data.get('time')
+        if 'auto_time' in assessment_data: custom_assessment.auto_time = assessment_data.get('auto_time')
+        
+        weights = assessment_data.get('weights', {})
+        if 'common' in weights: custom_assessment.weight_common = int(weights.get('common'))
+        if 'role' in weights: custom_assessment.weight_role = int(weights.get('role'))
+        if 'resume' in weights: custom_assessment.weight_resume = int(weights.get('resume'))
+        
+        if 'extracted_skills' in assessment_data: custom_assessment.extracted_skills = assessment_data.get('extracted_skills')
+        if 'suggested_skills' in assessment_data: custom_assessment.suggested_skills = assessment_data.get('suggested_skills')
+        if 'common_skills' in assessment_data: custom_assessment.common_skills = assessment_data.get('common_skills')
+        if 'question_distribution' in assessment_data: custom_assessment.question_distribution = assessment_data.get('question_distribution')
+        if 'removed_skills' in assessment_data: custom_assessment.removed_skills = assessment_data.get('removed_skills')
+        if 'resume_file_name' in assessment_data: custom_assessment.resume_file_name = assessment_data.get('resume_file_name')
+        
+        _db_call_with_retry(lambda: custom_assessment.save(), retries=1)
+        
+        return Response({'message': 'Custom assessment updated successfully.', 'id': custom_assessment.id}, status=status.HTTP_200_OK)
+        
+    except CustomAssessment.DoesNotExist:
+        return Response({'error': 'Custom assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except OperationalError:
+        close_old_connections()
+        return Response(
+            {
+                'error': (
+                    'Database connection failed while updating custom assessment. '
+                    'Please check your internet/VPN and DB connectivity, then try again.'
+                )
+            },
+            status=status.HTTP_503_SERVICE_UNAVAILABLE
+        )
+    except Exception as e:
+        import traceback
+        print(f"Error in update_custom_assessment_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(
+            {'error': f'An error occurred while creating custom assessment: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
 
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET', 'PATCH', 'PUT'])
 @permission_classes([IsAuthenticated])
 def get_custom_assessment_view(request, custom_assessment_id: int):
     """
-    Fetch a CustomAssessment by ID.
-    Used by the frontend to validate a locally-stored draftCustomAssessmentId.
+    Fetch or partial-update a CustomAssessment by ID.
+    Used by the frontend to validate drafts or update fields (like role inline).
     """
     try:
         try:
@@ -1180,6 +1256,24 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
                  if user_profile.company != ca.user_profile.company:
                       return Response({'error': 'Not authorized to view this CustomAssessment.'}, status=status.HTTP_403_FORBIDDEN)
 
+        # Handle PATCH/PUT request (Partial Update)
+        if request.method in ['PATCH', 'PUT']:
+            data = request.data or {}
+            # Allow updating basic fields 
+            allowed_fields = ['role', 'experience_level', 'number_of_questions', 'time', 'display_name', 'custom_role']
+            updated_any = False
+            for field in allowed_fields:
+                if field in data:
+                    setattr(ca, field, data[field])
+                    updated_any = True
+            
+            if updated_any:
+                try:
+                    ca.save()
+                except Exception as e:
+                    return Response({'error': f'Failed to save update: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Build response payload
         return Response(
             {
                 'id': ca.id,
@@ -1187,11 +1281,22 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
                 'updated_at': ca.updated_at.isoformat() if getattr(ca, 'updated_at', None) else None,
                 'role': ca.role,
                 'custom_role': ca.custom_role,
+                'sub_roles': ca.sub_roles or [],
                 'experience_level': ca.experience_level,
                 'number_of_questions': ca.number_of_questions,
                 'time': ca.time,
+                'auto_time': ca.auto_time,
                 'organization_name': ca.organization_name,
                 'email': ca.email,
+                'extracted_skills': ca.extracted_skills or [],
+                'suggested_skills': ca.suggested_skills or [],
+                'common_skills': ca.common_skills or [],
+                'removed_skills': ca.removed_skills or [],
+                'question_distribution': ca.question_distribution or {},
+                'weight_common': ca.weight_common,
+                'weight_role': ca.weight_role,
+                'weight_resume': ca.weight_resume,
+                'resume_file_name': ca.resume_file_name,
             },
             status=status.HTTP_200_OK
         )
@@ -1775,6 +1880,58 @@ def get_assessment_detail_view(request, assessment_id: int):
             a.save()
             return Response({'ok': True, 'message': 'Assessment updated successfully.'})
 
+        # Fetch questions
+        aq_qs = (
+            AssessmentQuestion.objects.filter(assessment=a)
+            .select_related('question')
+            .order_by('order')
+        )
+        questions = []
+        for aq in aq_qs:
+            questions.append(
+                {
+                    'id': aq.id,
+                    'order': aq.order,
+                    'skill': aq.skill,
+                    'question_type': aq.question_type,
+                    'difficulty': aq.difficulty,
+                    'time_limit': aq.time_limit,
+                    'question': aq.question.question if aq.question else None,
+                    'option_a': aq.option_a,
+                    'option_b': aq.option_b,
+                    'option_c': aq.option_c,
+                    'option_d': aq.option_d,
+                    'correct_answer': aq.correct_answer,
+                    'correct_answers': aq.correct_answers,
+                }
+            )
+
+        acq_qs = (
+            AssessmentCodingQuestion.objects.filter(assessment=a)
+            .select_related('coding_question')
+            .order_by('order')
+        )
+        coding_questions = []
+        for acq in acq_qs:
+            cq = acq.coding_question
+            coding_questions.append(
+                {
+                    'id': acq.id,
+                    'coding_question_id': cq.id if cq else None,
+                    'order': acq.order,
+                    'title': acq.title,
+                    'description': acq.description,
+                    'languages': acq.languages or [],
+                    'allowed_languages': acq.allowed_languages or [],
+                    'mode': acq.mode,
+                    'starter_code': acq.starter_code,
+                    'template_code': acq.template_code,
+                    'difficulty': acq.difficulty,
+                    'time_limit_ms': acq.time_limit_ms,
+                    'memory_limit_mb': acq.memory_limit_mb,
+                }
+            )
+
         return Response(
             {
                 'id': a.id,
@@ -1784,8 +1941,19 @@ def get_assessment_detail_view(request, assessment_id: int):
                 'experience_level': a.experience_level,
                 'total_questions': a.total_questions,
                 'total_time': a.total_time,
+                'objective_time_limit': a.objective_time_limit,
+                'coding_time_limit': a.coding_time_limit,
+                'coding_total_time': a.coding_total_time,
+                'coding_question_count': a.coding_question_count,
+                'min_pass_percentage': a.min_pass_percentage,
+                'has_objective_cutoff': a.has_objective_cutoff,
+                'min_objective_pass_percentage': a.min_objective_pass_percentage,
+                'weightage_objective': a.weightage_objective,
+                'weightage_coding': a.weightage_coding,
                 'invite_token': str(a.invite_token) if getattr(a, 'invite_token', None) else None,
                 'created_at': a.created_at.isoformat() if a.created_at else None,
+                'questions': questions,
+                'coding_questions': coding_questions,
             },
             status=status.HTTP_200_OK
         )

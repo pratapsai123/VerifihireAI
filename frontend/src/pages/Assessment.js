@@ -202,19 +202,19 @@ export default function Assessment() {
                         <div className="row-actions" style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                           <button
                             type="button"
+                            className="btn-secondary"
+                            onClick={() => navigate(`/view-assessment/${a.id}`)}
+                            title="View assessment details"
+                          >
+                            View
+                          </button>
+                          <button
+                            type="button"
                             className="btn-invite"
                             onClick={() => navigate(`/invite-candidates/${a.id}`)}
                             title="Invite candidates"
                           >
                             Invite
-                          </button>
-                          <button
-                            type="button"
-                            className="btn-tertiary"
-                            onClick={() => copyToClipboard(inviteLink)}
-                            disabled={!inviteLink}
-                          >
-                            Copy link
                           </button>
                         </div>
                       </td>

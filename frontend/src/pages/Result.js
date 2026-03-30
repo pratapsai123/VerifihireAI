@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Download, Trash2 } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -66,7 +67,12 @@ export default function Result() {
 
         // Status Filter
         if (statusFilter) {
-            list = list.filter((r) => r.status === statusFilter);
+            list = list.filter((r) => {
+                if (statusFilter === 'selected') {
+                    return r.status === 'selected' || r.status === 'COMPLETED';
+                }
+                return r.status === statusFilter;
+            });
         }
 
         return list;
@@ -81,7 +87,13 @@ export default function Result() {
                 if (fromDate) params.start_date = fromDate;
                 if (toDate) params.end_date = toDate;
                 const resp = await axios.get(`${API_BASE_URL}/results/`, { params });
-                setOverview(resp.data?.results || []);
+                // Filter out AI results — those belong in ResultsAI.js only
+                const allResults = resp.data?.results || [];
+                const manualOnly = allResults.filter(r => {
+                    const sid = String(r.submission_id || '');
+                    return !sid.startsWith('ai_') && !sid.startsWith('aicand_');
+                });
+                setOverview(manualOnly);
             } else {
                 // Candidate view: validate submission exists but do NOT show score/selected/rejected.
                 const resp = await axios.get(`${API_BASE_URL}/invitations/public/${token}/result/`);
@@ -249,8 +261,10 @@ export default function Result() {
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
                         <option value="">All Statuses</option>
+                        <option value="sent">Sent</option>
                         <option value="selected">Qualified</option>
                         <option value="rejected">Not Qualified</option>
+                        <option value="not_attempted">Not Attempted</option>
                     </select>
                     <div className="date-filter">
                         <span>From:</span>
@@ -299,7 +313,7 @@ export default function Result() {
                             </thead>
                             <tbody>
                                 {filtered.map((r) => (
-                                    <tr key={r.submission_id}>
+                                    <tr key={r.submission_id || `inv_${r.invitation_id}`}>
                                         <td>
                                             <div className="cell-title">{r.candidate?.name || '-'}</div>
                                             <div className="cell-sub">{r.candidate?.email || '-'}</div>
@@ -329,7 +343,7 @@ export default function Result() {
                                         </td>
                                         <td>
                                             <div className="cell-title" style={{ fontWeight: 'bold' }}>
-                                                {r.integrity?.integrity_score !== undefined ? `${r.integrity.integrity_score}%` : '100%'}
+                                                {r.integrity?.integrity_score !== undefined && r.integrity?.integrity_score !== null ? `${r.integrity.integrity_score}%` : '-'}
                                             </div>
                                             {r.integrity?.warning_logs?.length > 0 && (
                                                 <div className="cell-sub" style={{ color: '#ef4444' }}>
@@ -338,41 +352,77 @@ export default function Result() {
                                             )}
                                         </td>
                                         <td>
-                                            <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>
-                                                {r.status === 'selected' ? 'Qualified' : 'Not Qualified'}
+                                            <span className={`pill ${r.status === 'selected' || r.status === 'COMPLETED' ? 'ok' : r.status === 'sent' ? 'info' : r.status === 'not_attempted' ? 'neutral' : 'bad'}`}>
+                                                {r.status === 'selected' || r.status === 'COMPLETED' ? 'Qualified' : r.status === 'rejected' ? 'Not Qualified' : r.status === 'sent' ? 'Sent' : r.status === 'not_attempted' ? 'Not Attempted' : r.status}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td style={{ display: 'flex', gap: '8px' }}>
+                                            {r.submission_id ? (
+                                                <button
+                                                    className="btn-report-dl"
+                                                    title="Download Report"
+                                                    onClick={async () => {
+                                                        const url = `${API_BASE_URL}/results/${r.submission_id}/report/`;
+                                                        try {
+                                                            const resp = await axios.get(url, { responseType: 'blob' });
+                                                            const blob = new Blob([resp.data], { type: 'application/pdf' });
+                                                            const durl = window.URL.createObjectURL(blob);
+                                                            const link = document.createElement('a');
+                                                            link.href = durl;
+                                                            link.setAttribute('download', `Report_${r.candidate?.name || r.submission_id}.pdf`);
+                                                            document.body.appendChild(link);
+                                                            link.click();
+                                                            link.remove();
+                                                            window.URL.revokeObjectURL(durl);
+                                                        } catch (err) {
+                                                            alert("Failed to download report.");
+                                                        }
+                                                    }}
+                                                >
+                                                    <Download size={18} />
+                                                </button>
+                                            ) : (
+                                                <div style={{ width: '32px' }}></div>
+                                            )}
                                             <button
-                                                className="btn-red"
-                                                style={{ padding: '4px 8px', fontSize: '0.75rem', borderRadius: '4px' }}
+                                                className="btn-action-delete"
+                                                title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
                                                 onClick={async () => {
                                                     const role = JSON.parse(localStorage.getItem('user'))?.role;
                                                     const isAdmin = role === 'company_admin' || role === 'application_admin';
 
+                                                    const delId = r.submission_id;
+                                                    if (!delId) {
+                                                        alert("Cannot delete a pending invitation from this view yet.");
+                                                        return;
+                                                    }
+
+                                                    const isAI = String(delId).startsWith('ai_');
+                                                    const realId = isAI ? String(delId).replace('ai_', '') : delId;
+                                                    const endpoint = isAI ? `${API_BASE_URL}/ai-assessments/submission/${realId}/` : `${API_BASE_URL}/submissions/${realId}/`;
+
                                                     if (isAdmin) {
                                                         if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
                                                             try {
-                                                                await axios.delete(`${API_BASE_URL}/submissions/${r.submission_id}/`, {
+                                                                await axios.delete(endpoint, {
                                                                     data: { confirm_permanent_delete: true }
                                                                 });
                                                                 alert("Deleted successfully.");
                                                                 load();
                                                             } catch (err) {
-                                                                alert("Failed to delete.");
+                                                                console.error("Delete Error:", err.response || err);
+                                                                alert("Failed to delete. " + (err.response?.data?.error || err.message));
                                                             }
                                                         }
                                                     } else {
                                                         const reason = prompt("Enter reason for deletion request:");
                                                         if (reason) {
                                                             try {
-                                                                const res = await axios.delete(`${API_BASE_URL}/submissions/${r.submission_id}/`, {
+                                                                await axios.delete(endpoint, {
                                                                     data: { reason }
                                                                 });
-                                                                alert(res.data.message);
-                                                                if (res.data.request_pending) {
-                                                                    navigate('/settings');
-                                                                }
+                                                                alert("Deletion request sent.");
+                                                                load();
                                                             } catch (err) {
                                                                 alert(err.response?.data?.error || "Failed to request deletion.");
                                                             }
@@ -380,7 +430,7 @@ export default function Result() {
                                                     }
                                                 }}
                                             >
-                                                {JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
+                                                <Trash2 size={18} />
                                             </button>
                                         </td>
                                     </tr>

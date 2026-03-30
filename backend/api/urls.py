@@ -18,7 +18,8 @@ urlpatterns = [
     path('questions/manual/', views.get_manual_questions_view, name='get_manual_questions'),
     path('questions/parse-document/', views.parse_questions_document_view, name='parse_questions_document'),
     path('custom-assessments/', views.create_custom_assessment_view, name='create_custom_assessment'),
-    path('custom-assessments/<int:custom_assessment_id>/', views.get_custom_assessment_view, name='get_custom_assessment'),
+    path('custom-assessments/<int:custom_assessment_id>/', views.update_custom_assessment_view, name='update_custom_assessment'),
+    path('custom-assessments/<int:custom_assessment_id>/get/', views.get_custom_assessment_view, name='get_custom_assessment'),
     path('assessments/', views.create_assessment_view, name='create_assessment'),
     path('assessments/<int:assessment_id>/', views.get_assessment_detail_view, name='get_assessment_detail'),
     path('assessments/<int:assessment_id>/invite/', views.create_invitations_and_send_email_view, name='invite_candidates'),
@@ -53,7 +54,7 @@ urlpatterns = [
     path('invitations/public/<uuid:token>/result/', views.get_invitation_result_view, name='get_invitation_result'),
     path('invitations/public/<uuid:token>/rating/', views.submit_rating_view, name='submit_rating'),
     path('invitations/public/<uuid:token>/integrity/', views.update_standard_integrity_view, name='update_standard_integrity'),
-    path('candidate-details/', views.save_candidate_details_view, name='save_candidate_details'),
+    path('candidate-details/', views.save_all_candidate_details_view, name='save_candidate_details'),
     path('candidate-details/verify-pan/', views.verify_pan_backend_view, name='verify_pan_backend'),
     path('candidate-details/<str:token>/', views.get_candidate_details_view, name='get_candidate_details'),
     path('invitations/public/<uuid:token>/coding/run/', views.invitation_coding_run_view, name='invitation_coding_run'),
@@ -62,7 +63,6 @@ urlpatterns = [
     path('results/', views.results_overview_view, name='results_overview'),
     path('submissions/<int:pk>/', views.CandidateSubmissionDeleteView.as_view(), name='delete_submission'),
     path('results/<int:submission_id>/report/', views.download_candidate_report_view, name='download_candidate_report'),
-    path('candidates/', views.candidates_overview_view, name='candidates_overview'),
     path('assessments/backfill-questions/', views.backfill_assessment_questions_view, name='backfill_assessment_questions'),
 
     # Coding Platform (isolated)

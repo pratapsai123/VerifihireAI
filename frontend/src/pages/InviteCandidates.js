@@ -222,6 +222,22 @@ export default function InviteCandidates() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assessmentId]);
 
+  // Load recently extracted candidate details if available
+  // Load recently extracted candidate details if available
+  useEffect(() => {
+    if (!hydrated) return;
+    
+    // Only pre-fill if current fields are empty
+    if (!name) {
+      const recentName = localStorage.getItem('recentCandidateName');
+      
+      if (recentName) {
+        setName(recentName);
+        localStorage.removeItem('recentCandidateName'); // Clear after use
+      }
+    }
+  }, [hydrated, name]);
+
   // Persist draft while user is adding/removing candidates (do NOT clear until Share succeeds)
   useEffect(() => {
     if (!assessmentId) return;

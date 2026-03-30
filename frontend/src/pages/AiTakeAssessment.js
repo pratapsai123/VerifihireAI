@@ -66,37 +66,36 @@ const AiTakeAssessment = () => {
         const qKey = currentAnswerKey;
 
         if (qKey && qKey.startsWith('coding_')) {
-            // 1. Save current code to draft BEFORE switching
             const currentCode = answers[qKey] || '';
             const draftKeyForOldLang = `${qKey}_${currentLang}`;
-
-            // 2. Determine what code should be in the editor for the NEW language
             const nextDraftKey = `${qKey}_${lang}`;
             let nextCode = codeDrafts[nextDraftKey];
 
             if (nextCode === undefined) {
-                // If no draft exists, check starter_code or fallbacks
                 const qIdx = parseInt(qKey.replace('coding_', ''), 10);
                 const q = assessment?.generated_content?.coding_challenges?.[qIdx];
                 if (q) {
-                    if (q.starter_code && typeof q.starter_code === 'object' && q.starter_code[lang]) {
-                        nextCode = formatCode(q.starter_code[lang]);
-                    } else if (q[`starter_code_${lang}`]) {
-                        nextCode = formatCode(q[`starter_code_${lang}`]);
-                    } else {
-                        nextCode = DEFAULT_BOILERPLATES[lang] || '# Write logic here\n';
+                    if (q.starter_code && typeof q.starter_code === 'object') {
+                        // Case-insensitive lookup
+                        const foundKey = Object.keys(q.starter_code).find(k => k.toLowerCase() === lang.toLowerCase());
+                        if (foundKey) nextCode = formatCode(q.starter_code[foundKey]);
                     }
-                } else {
+                    
+                    if (nextCode === undefined && q[`starter_code_${lang}`]) {
+                        nextCode = formatCode(q[`starter_code_${lang}`]);
+                    }
+                }
+                
+                if (nextCode === undefined) {
                     nextCode = DEFAULT_BOILERPLATES[lang] || '# Write logic here\n';
                 }
             }
 
-            // Update everything together to avoid race conditions
             setAnswers(prev => ({ ...prev, [qKey]: nextCode }));
             setCodeDrafts(prev => ({
                 ...prev,
                 [draftKeyForOldLang]: currentCode,
-                [nextDraftKey]: nextCode // Ensure the draft is also initialized so we don't reload starter next time
+                [nextDraftKey]: nextCode
             }));
         }
 
@@ -119,6 +118,10 @@ const AiTakeAssessment = () => {
 
     const formatText = (text) => {
         if (!text) return '';
+        // If it looks like HTML (contains tags), return it raw to let dangerouslySetInnerHTML handle it
+        if (/<[a-z][\s\S]*>/i.test(text)) {
+            return text;
+        }
         return text.replace(/\n/g, '<br />');
     };
 
@@ -152,10 +155,15 @@ const AiTakeAssessment = () => {
         const params = new URLSearchParams(window.location.search);
         const nameParam = params.get('name');
         const emailParam = params.get('email');
-        if (nameParam || emailParam) {
-            if (nameParam) setCandidateName(nameParam);
-            if (emailParam) setCandidateEmail(emailParam);
-            setIsAutoFilled(true);
+        
+        const isNameValid = nameParam && nameParam !== 'Extraction Failed';
+        const isEmailValid = emailParam && emailParam !== 'Extraction Failed';
+        
+        if (isNameValid || isEmailValid) {
+            if (isNameValid) setCandidateName(nameParam);
+            if (isEmailValid) setCandidateEmail(emailParam);
+            // Only lock inputs if we have a valid email to track them with
+            if (isEmailValid) setIsAutoFilled(true);
         }
     }, []);
 
@@ -321,7 +329,9 @@ const AiTakeAssessment = () => {
         if (isTestRun && currentQ?.test_cases?.length > 0) {
             try {
                 const results = await Promise.all((currentQ.test_cases || []).map(async (tc, index) => {
-                    const tcInput = tc.input || tc.input_data || tc.stdin || '';
+                    const rawInput = tc.input || tc.input_data || tc.stdin || '';
+                    // Coerce to string — AI test cases may have input as a JSON object
+                    const tcInput = (typeof rawInput === 'string') ? rawInput : JSON.stringify(rawInput);
                     const tcOutput = tc.output || tc.expected_output || tc.stdout || '';
                     const isHidden = index >= 2;
 
@@ -334,7 +344,16 @@ const AiTakeAssessment = () => {
                         });
                         const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
                         const exp = String(tcOutput).trim();
-                        const passed = out === exp;
+                        
+                        // Robust comparison: check for exact match OR normalized match
+                        const normalize = (s) => s.replace(/\s+/g, '').replace(/'/g, '"').toLowerCase();
+                        let passed = out === exp || normalize(out) === normalize(exp);
+                        
+                        // Further fallback: if it looks like a JSON wrap issue (e.g. expected {'result': ...} but got ...)
+                        if (!passed && normalize(exp).includes(normalize(out))) {
+                            passed = true; // Partial match if the core data is present
+                        }
+
                         return {
                             input: tcInput,
                             expected: exp,
@@ -397,6 +416,30 @@ const AiTakeAssessment = () => {
         finally { setIsExecuting(false); }
     };
 
+    const handleRestoreCode = () => {
+        if (!currentAnswerKey || !currentAnswerKey.startsWith('coding_')) return;
+        const qIdx = parseInt(currentAnswerKey.replace('coding_', ''), 10);
+        const q = assessment?.generated_content?.coding_challenges?.[qIdx];
+
+        let restoredCode = '';
+        if (q?.starter_code && typeof q.starter_code === 'object') {
+            const foundKey = Object.keys(q.starter_code).find(k => k.toLowerCase() === selectedLanguage.toLowerCase());
+            if (foundKey) restoredCode = formatCode(q.starter_code[foundKey]);
+        }
+
+        if (!restoredCode && q && q[`starter_code_${selectedLanguage}`]) {
+            restoredCode = formatCode(q[`starter_code_${selectedLanguage}`]);
+        }
+
+        if (!restoredCode) {
+            restoredCode = DEFAULT_BOILERPLATES[selectedLanguage] || '# Write logic here\n';
+        }
+
+        if (window.confirm("Restore predefined code? This will clear your current progress for this language.")) {
+            handleAnswerChange(currentAnswerKey, restoredCode);
+        }
+    };
+
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
@@ -441,26 +484,42 @@ const AiTakeAssessment = () => {
             // Capture Screen
             if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
                 try {
+                    // Quick draw from the live stream track using ImageCapture if available,
+                    // otherwise rely on a pre-existing background video element.
+                    // For maximum compatibility and speed, we create a quick video element, 
+                    // but we don't wait for loadedmetadata if it takes too long.
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
                     video.muted = true;
                     video.playsInline = true;
 
-                    await new Promise((resolve, reject) => {
+                    await new Promise((resolve) => {
+                        let resolved = false;
+                        // Fallback timeout because loadedmetadata might not fire if tab is fully backgrounded
+                        const fallback = setTimeout(() => {
+                            if (!resolved) { resolved = true; resolve(); }
+                        }, 300);
+
                         video.onloadedmetadata = () => {
-                            video.play()
-                                .then(() => {
-                                    setTimeout(resolve, 100);
-                                })
-                                .catch(reject);
+                            video.play().then(() => {
+                                if (!resolved) {
+                                    resolved = true;
+                                    clearTimeout(fallback);
+                                    setTimeout(resolve, 50); // slight delay to paint
+                                }
+                            }).catch(() => {
+                                if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+                            });
                         };
-                        video.onerror = reject;
+                        video.onerror = () => {
+                            if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+                        };
                     });
 
                     const canvas = screenCanvasRef.current;
                     const ctx = canvas.getContext('2d');
-                    canvas.width = video.videoWidth || 1280;
-                    canvas.height = video.videoHeight || 720;
+                    canvas.width = video.videoWidth || window.innerWidth || 1280;
+                    canvas.height = video.videoHeight || window.innerHeight || 720;
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                     screenshot = canvas.toDataURL('image/jpeg', 0.5);
 
@@ -472,7 +531,7 @@ const AiTakeAssessment = () => {
             }
 
             // Capture Webcam
-            if (['multiface_detection', 'phone_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+            if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
                 try {
                     const camCanvas = document.createElement('canvas');
                     camCanvas.width = videoRef.current.videoWidth || 640;
@@ -500,16 +559,24 @@ const AiTakeAssessment = () => {
                 detectInterval = setInterval(async () => {
                     if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
                         const now = Date.now();
-                        if (now - lastDetectionTimeRef.current > 2000) {
+                        if (now - lastDetectionTimeRef.current > 1500) {
                             lastDetectionTimeRef.current = now;
                             const preds = await detectorRef.current.detect(videoRef.current);
-                            if (preds.find(p => p.class === 'cell phone')) showAiEvent('PHONE DETECTED', true, 'phone_detection');
-                            const people = preds.filter(p => p.class === 'person');
-                            if (people.length > 1) showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-                            else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                            
+                            // Filter by confidence score
+                            const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
+                            const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
+
+                            if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
+                            
+                            if (people.length > 1) {
+                                showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+                            } else if (people.length === 0) {
+                                showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                            }
                         }
                     }
-                }, 1000);
+                }, 800);
             }
         };
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
@@ -525,6 +592,22 @@ const AiTakeAssessment = () => {
             stopCamera();
         };
     }, [isStarted, submissionId, showAiEvent]);
+
+    // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
+    useEffect(() => {
+        if (!isStarted || !submissionId || submitted) return;
+
+        const bgInterval = setInterval(() => {
+            // If candidate is actively looking at our tab, do nothing
+            if (!document.hidden && document.hasFocus()) return;
+
+            // If they are hidden (different tab) or blurred (different window), capture every 5s
+            const eventType = document.hidden ? 'tab_switch' : 'window_switch';
+            showAiEvent('BACKGROUND ACTIVITY DETECTED', true, eventType);
+        }, 5000);
+
+        return () => clearInterval(bgInterval);
+    }, [showAiEvent, isStarted, submissionId, submitted]);
 
     // Save progress periodically (debounced)
     // Also exposes saveProgress via ref so beforeunload can call it synchronously
@@ -613,23 +696,28 @@ const AiTakeAssessment = () => {
 
             assessment.generated_content.coding_challenges.forEach((q, idx) => {
                 const qKey = `coding_${idx}`;
-                if (q.starter_code && typeof q.starter_code === 'object') {
-                    Object.entries(q.starter_code).forEach(([lang, code]) => {
-                        const dKey = `${qKey}_${lang.toLowerCase()}`;
-                        if (nextDrafts[dKey] === undefined && code) {
-                            nextDrafts[dKey] = formatCode(code);
-                            changed = true;
-                        }
-                    });
-                }
-                // Also check old format
+                
+                // Use supported languages to bootstrap all possible defaults
                 supportedLanguages.forEach(sl => {
                     const dKey = `${qKey}_${sl.id}`;
-                    const oldKey = `starter_code_${sl.id}`;
-                    if (nextDrafts[dKey] === undefined && q[oldKey]) {
-                        nextDrafts[dKey] = formatCode(q[oldKey]);
-                        changed = true;
+                    if (nextDrafts[dKey] !== undefined) return;
+
+                    let starter = undefined;
+                    if (q.starter_code && typeof q.starter_code === 'object') {
+                        const foundKey = Object.keys(q.starter_code).find(k => k.toLowerCase() === sl.id.toLowerCase());
+                        if (foundKey) starter = formatCode(q.starter_code[foundKey]);
                     }
+                    
+                    if (starter === undefined && q[`starter_code_${sl.id}`]) {
+                        starter = formatCode(q[`starter_code_${sl.id}`]);
+                    }
+
+                    if (starter === undefined) {
+                        starter = DEFAULT_BOILERPLATES[sl.id] || '# Write logic here\n';
+                    }
+
+                    nextDrafts[dKey] = starter;
+                    changed = true;
                 });
             });
 
@@ -968,68 +1056,72 @@ const AiTakeAssessment = () => {
                                 {/* Problem statement */}
                                 <div style={{ width: '36%', display: 'flex', flexDirection: 'column', borderRight: '1px solid #e5e7eb', overflow: 'hidden', background: 'white' }}>
                                     <div style={{ flex: 1, overflowY: 'auto', padding: '1rem 1.2rem' }}>
-                                        <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: '#1a5276', letterSpacing: 0.8, marginBottom: 6 }}>Problem Statement</div>
-                                        <h3 style={{ fontSize: '0.93rem', fontWeight: 800, color: '#111827', margin: '0 0 0.6rem', lineHeight: 1.4 }}>
-                                            {currentQ.title || `Challenge ${currentQ.id + 1}`}
-                                        </h3>
-                                        <div style={{ color: '#374151', fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '0.8rem' }}>
-                                            {currentQ.problem_statement
-                                                ? <div dangerouslySetInnerHTML={{ __html: formatText(currentQ.problem_statement) }} />
-                                                : <p style={{ margin: 0 }}>{currentQ.description || 'No description.'}</p>}
+                                        {/* Professional Header */}
+                                        <div style={{ marginBottom: '1rem' }}>
+                                            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', margin: '0 0 0.5rem', display: 'flex', alignItems: 'center', gap: 10 }}>
+                                                {currentQ.title || `Challenge ${currentQ.id + 1}`}
+                                                <span style={{ 
+                                                    fontSize: '0.75rem', 
+                                                    padding: '2px 10px', 
+                                                    borderRadius: '12px', 
+                                                    fontWeight: 600,
+                                                    background: currentQ.difficulty?.toLowerCase() === 'easy' ? '#def7ec' : currentQ.difficulty?.toLowerCase() === 'hard' ? '#fde2e2' : '#fef3c7',
+                                                    color: currentQ.difficulty?.toLowerCase() === 'easy' ? '#03543f' : currentQ.difficulty?.toLowerCase() === 'hard' ? '#9b1c1c' : '#92400e',
+                                                    textTransform: 'capitalize'
+                                                }}>
+                                                    {currentQ.difficulty || 'Medium'}
+                                                </span>
+                                            </h2>
+                                            
+                                            <div style={{ display: 'flex', gap: 8, marginBottom: '1.2rem' }}>
+                                                <div style={{ fontSize: '0.7rem', padding: '3px 10px', background: '#f3f4f6', borderRadius: 15, color: '#4b5563', fontWeight: 600 }}>Topics</div>
+                                                <div style={{ fontSize: '0.7rem', padding: '3px 10px', background: '#f3f4f6', borderRadius: 15, color: '#4b5563', fontWeight: 600 }}>Companies</div>
+                                                <div style={{ fontSize: '0.7rem', padding: '3px 10px', background: '#f3f4f6', borderRadius: 15, color: '#4b5563', fontWeight: 600 }}>Hint</div>
+                                            </div>
+
+                                            <div style={{ color: '#374151', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                                                {currentQ.problem_statement
+                                                    ? <div dangerouslySetInnerHTML={{ __html: formatText(currentQ.problem_statement) }} />
+                                                    : <p style={{ margin: 0 }}>{currentQ.description || 'No description.'}</p>}
+                                            </div>
                                         </div>
-                                        {(currentQ.input_format || currentQ.output_format) && (
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', marginBottom: '0.8rem' }}>
-                                                {currentQ.input_format && (
-                                                    <div style={{ background: '#eff6ff', padding: '6px 8px', borderRadius: 7 }}>
-                                                        <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#1d4ed8', marginBottom: 2 }}>INPUT FORMAT</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#1e3a8a' }}>{currentQ.input_format}</div>
+
+                                        {/* Examples Section */}
+                                        {(currentQ.test_cases?.length > 0 || currentQ.example_input) && (
+                                            <div style={{ marginBottom: '1.5rem' }}>
+                                                {((currentQ.test_cases && currentQ.test_cases.length > 0) ? currentQ.test_cases.slice(0, 3) :
+                                                    (currentQ.example_input ? [{ input: currentQ.example_input, output: currentQ.example_output, explanation: currentQ.explanation }] : [])
+                                                ).map((tc, idx) => (
+                                                    <div key={idx} style={{ marginBottom: '1.2rem' }}>
+                                                        <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#111827', marginBottom: 8 }}>Example {idx + 1}:</div>
+                                                        <div style={{ 
+                                                            background: '#f8f9fa', 
+                                                            borderLeft: '2px solid #e5e7eb', 
+                                                            padding: '10px 15px', 
+                                                            fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
+                                                            fontSize: '0.85rem'
+                                                        }}>
+                                                            <div style={{ marginBottom: 4 }}><strong style={{ color: '#111827' }}>Input:</strong> {typeof tc.input === 'object' ? JSON.stringify(tc.input) : String(tc.input || '').trim()}</div>
+                                                            <div style={{ marginBottom: 4 }}><strong style={{ color: '#111827' }}>Output:</strong> {typeof tc.output === 'object' ? JSON.stringify(tc.output) : String(tc.output || '').trim()}</div>
+                                                            {tc.explanation && (
+                                                                <div><strong style={{ color: '#111827' }}>Explanation:</strong> {tc.explanation}</div>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                )}
-                                                {currentQ.output_format && (
-                                                    <div style={{ background: '#f0fdf4', padding: '6px 8px', borderRadius: 7 }}>
-                                                        <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#16a34a', marginBottom: 2 }}>OUTPUT FORMAT</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#14532d' }}>{currentQ.output_format}</div>
-                                                    </div>
-                                                )}
+                                                ))}
                                             </div>
                                         )}
+
+                                        {/* Constraints */}
                                         {currentQ.constraints && (Array.isArray(currentQ.constraints) ? currentQ.constraints.length > 0 : String(currentQ.constraints).length > 0) && (
-                                            <div style={{ marginBottom: '0.8rem' }}>
-                                                <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 4 }}>Constraints</div>
-                                                <ul style={{ margin: 0, paddingLeft: '1rem', color: '#6b7280', fontSize: '0.75rem' }}>
+                                            <div style={{ marginBottom: '1.5rem' }}>
+                                                <div style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: 8 }}>Constraints:</div>
+                                                <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#111827', fontSize: '0.85rem', lineHeight: 1.6 }}>
                                                     {Array.isArray(currentQ.constraints)
-                                                        ? currentQ.constraints.map((c, i) => <li key={i}>{c}</li>)
-                                                        : <li>{currentQ.constraints}</li>
+                                                        ? currentQ.constraints.map((c, i) => <li key={i} style={{ marginBottom: 4 }}><code>{c}</code></li>)
+                                                        : <li style={{ marginBottom: 4 }}><code>{currentQ.constraints}</code></li>
                                                     }
                                                 </ul>
-                                            </div>
-                                        )}
-                                        {(currentQ.test_cases?.length > 0 || currentQ.example_input) && (
-                                            <div style={{ marginBottom: '1rem' }}>
-                                                <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 8 }}>Sample Cases</div>
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                                                    {((currentQ.test_cases && currentQ.test_cases.length > 0) ? currentQ.test_cases.slice(0, 2) :
-                                                        (currentQ.example_input ? [{ input: currentQ.example_input, output: currentQ.example_output }] : [])
-                                                    ).map((tc, idx) => (
-                                                        <div key={idx} style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px' }}>
-                                                            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#1d4ed8', marginBottom: 6, textTransform: 'uppercase' }}>Case {idx + 1}</div>
-                                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
-                                                                <div>
-                                                                    <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 2 }}>Input</div>
-                                                                    <pre style={{ margin: 0, fontSize: '0.72rem', color: '#334155', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
-                                                                        {typeof tc.input === 'object' ? JSON.stringify(tc.input, null, 2) : String(tc.input || tc.input_data || '').trim()}
-                                                                    </pre>
-                                                                </div>
-                                                                <div>
-                                                                    <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 2 }}>Output</div>
-                                                                    <pre style={{ margin: 0, fontSize: '0.72rem', color: '#334155', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
-                                                                        {typeof tc.output === 'object' ? JSON.stringify(tc.output, null, 2) : String(tc.output || tc.expected_output || '').trim()}
-                                                                    </pre>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
                                             </div>
                                         )}
                                     </div>
@@ -1048,6 +1140,10 @@ const AiTakeAssessment = () => {
                                             {supportedLanguages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
                                         </select>
                                         <div style={{ display: 'flex', gap: 5 }}>
+                                            <button onClick={handleRestoreCode}
+                                                style={{ padding: '3px 12px', background: 'transparent', color: '#888', border: '1px solid #3d3d3d', borderRadius: 5, fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', marginRight: 5 }}>
+                                                Restore
+                                            </button>
                                             <button onClick={() => runCode(currentQ.id, false)} disabled={isExecuting}
                                                 style={{ padding: '3px 12px', background: '#2d2d2d', color: '#d4d4d4', border: '1px solid #4d4d4d', borderRadius: 5, fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', opacity: isExecuting ? 0.6 : 1 }}>
                                                 Run

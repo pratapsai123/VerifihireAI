@@ -53,7 +53,7 @@ from .models import (
 )
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from .ocr_utils import extract_text_from_image
+from .ocr_utils import extract_text_from_image, extract_text_from_pdf
 from .report_utils import generate_candidate_report
 
 import re
@@ -96,6 +96,10 @@ def _free_email_domains() -> set:
         'yahoo.com', 'yahoo.in',
         'outlook.com', 'hotmail.com', 'live.com', 'icloud.com',
         'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
+        'mail.com', 'yandex.com', 'msn.com', 'me.com',
+        'ymail.com', 'rocketmail.com', 'mac.com', 'fastmail.com',
+        'gmx.com', 'gmx.net', 'tutanota.com', 'tuta.com',
+        'email.com', 'post.com', 'usa.com'
     }
     configured = getattr(settings, 'FREE_EMAIL_DOMAINS', None)
     if not configured:
@@ -319,7 +323,7 @@ def handle_deletion_request(user_profile, company, content_type, object_id, obje
             status=DeletionRequest.STATUS_APPROVED,
             actioned_at=timezone.now()
         )
-        from .workflow_views import _perform_actual_deletion
+        from .views.workflow_views import _perform_actual_deletion
         _perform_actual_deletion(req)
         return Response({'message': f'{content_type} deleted successfully (Audit logged).'}, status=status.HTTP_200_OK), True
 

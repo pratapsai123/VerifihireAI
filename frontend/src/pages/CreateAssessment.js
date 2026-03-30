@@ -21,7 +21,8 @@ const CreateAssessment = () => {
         end_date: '',
         end_time: '',
         pass_threshold: 60,
-        customRoleTitle: ''
+        customRoleTitle: '',
+        num_applicants: 1
     });
 
     // Job Roles State
@@ -126,6 +127,7 @@ const CreateAssessment = () => {
             duration: formData.coding_time,
             pass_threshold: formData.pass_threshold,
             total_possible_points: calculateTotalPoints(),
+            num_applicants: formData.num_applicants,
             available_from: (formData.start_date && formData.start_time) ? new Date(`${formData.start_date}T${formData.start_time}`).toISOString() : null,
             available_until: (formData.end_date && formData.end_time) ? new Date(`${formData.end_date}T${formData.end_time}`).toISOString() : null
         };
@@ -218,7 +220,7 @@ const CreateAssessment = () => {
                     <SectionHeader title="Structure & Difficulty" />
 
                     {/* Reverted Parameter Row (from screenshot) */}
-                    <div className="parameters-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '2.5rem' }}>
+                    <div className="parameters-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
                         <div className="form-group">
                             <label>MCQ Questions</label>
                             <div className="input-with-marker">
@@ -250,6 +252,24 @@ const CreateAssessment = () => {
                                     onChange={(e) => handleChange('coding_time', parseInt(e.target.value) || 0)}
                                 />
                                 <span className="marker">⌛</span>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>No. of Applicants</label>
+                            <div className="input-with-marker">
+                                <input
+                                    type="number" min="1" max="1000"
+                                    value={formData.num_applicants || ''}
+                                    onChange={(e) => {
+                                        const val = e.target.value;
+                                        if (val === '') {
+                                            handleChange('num_applicants', '');
+                                        } else {
+                                            handleChange('num_applicants', parseInt(val) || 1);
+                                        }
+                                    }}
+                                />
+                                <span className="marker">👥</span>
                             </div>
                         </div>
                     </div>

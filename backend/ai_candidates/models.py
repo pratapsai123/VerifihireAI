@@ -53,8 +53,9 @@ class Candidate(models.Model):
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
     link_opened_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview link was first opened")
     interview_summary = models.JSONField(default=list, blank=True, help_text="Stores per-question AI feedback and scores")
+    interview_questions = models.JSONField(default=list, blank=True, help_text="The set of questions generated for this candidate")
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
-
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Groups resumes uploaded in the same bulk session")
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
@@ -71,3 +72,13 @@ class InterviewIntegrity(models.Model):
 
     def __str__(self):
         return f"Integrity: {self.candidate.full_name} ({self.integrity_score}%)"
+
+class InterviewIntegrityLog(models.Model):
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='integrity_logs')
+    event_type = models.CharField(max_length=100)
+    screenshot_base64 = models.TextField(blank=True, null=True, help_text="Desktop/Full screen snapshot")
+    webcam_screenshot_base64 = models.TextField(blank=True, null=True, help_text="Candidate webcam snapshot")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Violation: {self.event_type} - {self.candidate.full_name}"

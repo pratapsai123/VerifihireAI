@@ -1,4 +1,5 @@
 from .._imports import *
+from .._imports import _is_application_admin_email
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -178,6 +179,7 @@ def _perform_actual_deletion(req):
         elif req.content_type == 'Candidate':
             obj = Candidate.objects.get(id=req.object_id)
         elif req.content_type == 'AIAssessmentSubmission':
+            from ai_assessments.models import AIAssessmentSubmission
             obj = AIAssessmentSubmission.objects.get(id=req.object_id)
         elif req.content_type == 'InterviewInvitation':
             obj = InterviewInvitation.objects.get(id=req.object_id)
@@ -225,16 +227,18 @@ def _perform_restore(req):
         elif req.content_type == 'InterviewInvitation':
             obj = InterviewInvitation.objects.get(id=req.object_id)
         else:
-            return False
+            return False, 'Unknown content type'
 
         if not obj:
-            return False
+            return False, 'Object not found.'
 
         obj.is_deleted = False
         obj.save()
-        return True
-    except Exception:
-        return False
+        return True, ''
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return False, str(e)
 
 
 @api_view(['POST'])
@@ -262,7 +266,7 @@ def restore_deletion_request_view(request, request_id):
     if del_request.status != DeletionRequest.STATUS_APPROVED:
         return Response({'error': 'Only approved (deleted) items can be restored.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    success = _perform_restore(del_request)
+    success, error_msg = _perform_restore(del_request)
     if success:
         del_request.status = DeletionRequest.STATUS_PENDING
         del_request.actioned_at = None
@@ -270,4 +274,4 @@ def restore_deletion_request_view(request, request_id):
         del_request.save()
         return Response({'message': f'"{del_request.object_repr}" has been successfully restored.'})
     else:
-        return Response({'error': 'Failed to restore item. It may have been permanently deleted.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': f'Failed to restore item. {error_msg}'}, status=status.HTTP_400_BAD_REQUEST)

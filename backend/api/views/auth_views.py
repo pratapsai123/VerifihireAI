@@ -51,6 +51,19 @@ def send_otp_view(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
+            # Enforce business-domain signup for company registration
+            domain = _email_domain(email)
+            if not domain:
+                return Response({'error': 'Invalid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+            if domain in _free_email_domains():
+                return Response(
+                    {
+                        'businessEmail': ['Please use your company email (free email domains like Gmail/Yahoo are not allowed for company registration).'],
+                        'email': ['Please use your company email.']
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
             # Check company admin count for this domain
             domain = _email_domain(email)
             if domain:
@@ -73,6 +86,14 @@ def send_otp_view(request):
                 return Response(
                     {'error': 'Incorrect email or account does not exist.'},
                     status=status.HTTP_404_NOT_FOUND
+                )
+            
+            # Enforce business-domain policy for forgot password (except for platform admins)
+            domain = _email_domain(email)
+            if domain in _free_email_domains() and not _is_application_admin_email(email):
+                return Response(
+                    {'error': 'Password reset is only allowed for business email accounts. Platform admins, please contact support if you are using a personal email.'},
+                    status=status.HTTP_400_BAD_REQUEST
                 )
         
         # Generate OTP

@@ -5,7 +5,6 @@ import { API_BASE_URL } from '../apiConfig';
 import {
   LayoutDashboard,
   FileText,
-  Users,
   MessageSquare,
   Brain,
   Sparkles,
@@ -143,9 +142,8 @@ const Dashboard = () => {
     const fetchData = async () => {
 
       try {
-        const [resultsRes, candidatesRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes, aiCandidatesRes] = await Promise.all([
+        const [resultsRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes, aiCandidatesRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/results/`),
-          axios.get(`${API_BASE_URL}/candidates/`),
           axios.get(`${API_BASE_URL}/interviews/invitations/`),
           axios.get(`${API_BASE_URL}/ai/`),
           axios.get(`${API_BASE_URL}/assessments/`),
@@ -153,7 +151,6 @@ const Dashboard = () => {
         ]);
 
         const results = resultsRes.data.results || [];
-        const candidates = candidatesRes.data.results || [];
         const interviews = interviewsRes.data.results || [];
         const aiAssessmentsCount = (aiAssessmentsRes.data || []).length;
         const customAssessmentsCount = (customAssessmentsRes.data?.results || []).length;
@@ -169,9 +166,9 @@ const Dashboard = () => {
           return String(dateStr).startsWith(today);
         }).length;
 
-        const totalCandidates = candidates.length + (results.length - candidates.filter(c => results.some(r => r.candidate?.email === c.email)).length);
-        const hiredCount = results.filter(r => r.status === 'selected' || r.result === 'selected').length;
-        const pipelineCount = candidates.filter(c => c.status !== 'Submitted' && c.status !== 'Completed').length;
+        const totalCandidates = results.length;
+        const hiredCount = results.filter(r => r.status === 'selected' || r.result === 'selected' || r.status === 'Qualified' || r.status === 'COMPLETED').length;
+        const pipelineCount = results.filter(r => r.status === 'sent' || r.status === 'ongoing').length;
 
         const resultsAi = results.filter(r => String(r.submission_id || '').startsWith('ai_'));
         const resultsCustom = results.filter(r => !String(r.submission_id || '').startsWith('ai_'));
@@ -241,7 +238,7 @@ const Dashboard = () => {
         });
 
         setData({
-          recentCandidates: candidates.slice(0, 5),
+          recentCandidates: results.slice(0, 5),
           stats: {
             totalCandidates,
             inPipeline: pipelineCount,
@@ -319,13 +316,12 @@ const Dashboard = () => {
           role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
           nestedItems: [
             { label: 'Start Session', path: '/ai-interview' },
-            { label: 'Result', path: '/results-ai' }
+            { label: 'Result', path: '/results-ai?tab=interview' }
           ]
         }
       ]
     },
-    { icon: Users, label: 'Candidates', path: '/candidates', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
-    { icon: BarChart3, label: 'Reports', path: '/results', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
+    { icon: BarChart3, label: 'Results', path: '/results', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
     { 
       icon: SettingsIcon, 
       label: 'Settings', 
@@ -740,14 +736,14 @@ const Dashboard = () => {
                   {data.recentCandidates.length > 0 ? data.recentCandidates.map((cand, i) => (
                     <div key={i} className="candidate-row">
                       <div className="candidate-info">
-                        <div className="candidate-avatar">{cand.name ? cand.name.charAt(0) : '?'}</div>
+                        <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
                         <div>
-                          <div className="cand-name">{cand.name || 'Anonymous'}</div>
-                          <div className="cand-email">{cand.email}</div>
+                          <div className="cand-name">{cand.candidate?.name || 'Anonymous'}</div>
+                          <div className="cand-email">{cand.candidate?.email}</div>
                         </div>
                       </div>
-                      <span className={`status-badge ${cand.status === 'Submitted' || cand.status === 'Completed' ? 'status-hired' : 'status-in-pipeline'}`}>
-                        {cand.status === 'Submitted' || cand.status === 'Completed' ? 'Completed' : 'In Pipeline'}
+                      <span className={`status-badge ${cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'status-hired' : 'status-in-pipeline'}`}>
+                        {cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'Qualified' : cand.status === 'sent' ? 'Sent' : 'In Pipeline'}
                       </span>
                     </div>
                   )) : (

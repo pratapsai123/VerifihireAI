@@ -61,12 +61,39 @@ def extract_skills_from_resume_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        if not text.strip() and file_name.endswith('.pdf'):
+            # Fallback to OCR for non-selectable PDFs
+            from ..ocr_utils import extract_text_from_pdf_ocr
+            text = extract_text_from_pdf_ocr(file_content)
+
+        # DEBUG: Log extracted text length
+        print(f"DEBUG: Extracted text length: {len(text) if text else 0}")
+        if text and len(text) < 100:
+             print(f"DEBUG: Extracted text sample: {text[:100]}")
+
         if not text.strip():
             return Response(
-                {'error': 'Could not extract text from the resume file.'},
+                {'error': 'Could not extract text from the resume file. It might be a scanned document or image-heavy PDF.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Name Extraction Heuristic: First non-empty line
+        extracted_name = ""
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        if lines:
+            extracted_name = lines[0]
+            # If name is too long or contains many spaces, it might not be a name
+            if len(extracted_name) > 50 or extracted_name.count(' ') > 5:
+                # Try second line? Or just use "Candidate"
+                if len(lines) > 1 and len(lines[1]) < 40 and lines[1].count(' ') < 4:
+                     extracted_name = lines[1]
+                else:
+                     extracted_name = "Candidate"
+        else:
+            extracted_name = "Candidate"
+
+        print(f"DEBUG: Probable name extracted: {extracted_name}")
+
         # Extract skills from text
         # Common technical skills database
         common_skills = [
@@ -101,25 +128,50 @@ def extract_skills_from_resume_view(request):
         
         # Normalize text for matching (case-insensitive)
         text_lower = text.lower()
+        # Also create a space-stripped version to catch OCR word-splitting artifacts
+        # e.g. OCR may read "JavaScript" as "Java Script" -> strip spaces -> "javascript" still matches
+        text_nospace = text_lower.replace(" ", "")
         extracted_skills = []
-        
+
+        def _skill_in_text(skill_lower, text_lower, text_nospace):
+            """
+            Match a skill in text using word boundaries to prevent false positives.
+            e.g. 'scala' must NOT match inside 'scalable'.
+            Uses negative lookarounds so special-char skills (Node.js, C++) also work.
+            """
+            escaped = re.escape(skill_lower)
+            # Negative lookaround: skill must not be preceded/followed by a-z or 0-9
+            if re.search(r'(?<![a-z0-9])' + escaped + r'(?![a-z0-9])', text_lower):
+                return True
+            # OCR artifact fallback ONLY for multi-word skills:
+            # e.g. "JavaScript" (one word) read by OCR as "Java Script" (two words).
+            # We only do this for skills that contain a space, so single-word skills
+            # like "Scala" are never matched by stripping spaces (prevents 'scala' in 'scalable').
+            if ' ' in skill_lower:
+                skill_nospace = skill_lower.replace(" ", "")
+                if len(skill_nospace) > 4 and skill_nospace in text_nospace:
+                    return True
+            return False
+
+
         # Find skills in the text
         for skill in common_skills:
-            # Check if skill appears in text (case-insensitive, whole word or as part of a phrase)
-            skill_lower = skill.lower()
-            # Match whole word or as part of common phrases
-            if skill_lower in text_lower:
-                # Avoid duplicates and very short matches
-                if skill not in extracted_skills and len(skill) > 2:
-                    extracted_skills.append(skill)
-        
+            if len(skill) <= 2:
+                continue
+            if skill in extracted_skills:
+                continue
+            if _skill_in_text(skill.lower(), text_lower, text_nospace):
+                extracted_skills.append(skill)
+
         # Sort skills alphabetically
         extracted_skills.sort()
+
         
         return Response(
             {
                 'skills': extracted_skills,
                 'count': len(extracted_skills),
+                'name': extracted_name,
                 'message': f'Successfully extracted {len(extracted_skills)} skills from resume.'
             },
             status=status.HTTP_200_OK

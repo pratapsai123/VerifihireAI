@@ -1009,7 +1009,7 @@ def draft_interview_invitations_view(request, draft_id=None):
                 company=user_profile.company,
                 content_type='InterviewInvitation',
                 object_id=draft.id,
-                object_repr=f"Interview Draft for {draft.email}",
+                object_repr=f"Interview Draft for {draft.name} ({draft.email})",
                 reason=request.data.get('reason')
             )
             
@@ -1485,11 +1485,27 @@ def get_interviewer_availability_view(request):
             interviewer=profile,
             date__gte=timezone.now().date()
         )
+        
+        # Pre-fetch booked slots for this interviewer to avoid N+1 queries
+        booked_slots = InterviewSlot.objects.filter(
+            interviewer=profile,
+            status=InterviewSlot.STATUS_BOOKED,
+            slot_date__gte=timezone.now().date()
+        )
+        
+        # Map booked slots for easy lookup
+        # Key format: "YYYY-MM-DD_HH:MM"
+        booked_map = {
+            f"{s.slot_date.isoformat()}_{s.start_time.strftime('%H:%M')}": True
+            for s in booked_slots
+        }
+
         data = [{
             'id': w.id,
             'date': w.date.isoformat(),
             'start_time': w.start_time.strftime('%H:%M'),
             'end_time': w.end_time.strftime('%H:%M'),
+            'is_booked': booked_map.get(f"{w.date.isoformat()}_{w.start_time.strftime('%H:%M')}", False)
         } for w in windows]
         return Response({'success': True, 'windows': data})
     except Exception as e:
@@ -1514,7 +1530,35 @@ def manage_interviewer_availability_view(request):
             return Response({'success': True, 'message': 'Availability saved.'})
         elif request.method == 'DELETE':
             window_id = request.data.get('id')
-            InterviewerAvailability.objects.filter(id=window_id, interviewer=profile).delete()
+            window = InterviewerAvailability.objects.filter(id=window_id, interviewer=profile).first()
+            if not window:
+                return Response({'error': 'Availability window not found.'}, status=404)
+            
+            # Check if this specific slot is already booked
+            is_booked = InterviewSlot.objects.filter(
+                interviewer=profile,
+                slot_date=window.date,
+                start_time=window.start_time,
+                status=InterviewSlot.STATUS_BOOKED
+            ).exists()
+            
+            # Use same logic as confirmation check: if it's reserved and not expired
+            active_reservation = InterviewSlot.objects.filter(
+                interviewer=profile,
+                slot_date=window.date,
+                start_time=window.start_time,
+                status=InterviewSlot.STATUS_RESERVED,
+                reservation_expiry_time__gt=timezone.now()
+            ).exists()
+            
+            if is_booked or active_reservation:
+                error_msg = 'Cannot remove a slot that has already been booked by a candidate.' if is_booked else 'This slot is temporarily locked by a candidate who is currently booking it.'
+                return Response({
+                    'error': error_msg,
+                    'code': 'SLOT_BOOKED' if is_booked else 'SLOT_RESERVED'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            window.delete()
             return Response({'success': True, 'message': 'Availability removed.'})
     except Exception as e:
         return Response({'error': str(e)}, status=500)

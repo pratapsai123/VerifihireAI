@@ -266,15 +266,24 @@ def process_assessment_passed(submission_id):
             
         logger.info(f"Pipeline: Generating Interview Invite for {submission.candidate_name}")
         
-        # Link back to the Candidate model based on email
+        # Link back to the Candidate model based on email.
+        # If the candidate used a public assessment link, they won't have a Candidate record yet.
         candidates = Candidate.objects.filter(email=submission.candidate_email).order_by('-id')
         if not candidates.exists():
-            logger.error(f"Pipeline Error: Candidate not found for email {submission.candidate_email}")
-            return
-            
-        candidate = candidates.first()
-        candidate.status = 'Interview'
-        candidate.save()
+            logger.info(f"Pipeline: Candidate not found for email {submission.candidate_email}. Creating new Candidate record.")
+            candidate = Candidate.objects.create(
+                full_name=submission.candidate_name,
+                email=submission.candidate_email,
+                job_title=submission.assessment.required_skills or "Applicant",
+                job_description=submission.assessment.job_description,
+                status='Interview',
+                company=submission.assessment.company,
+                user_profile=getattr(submission.assessment, 'user_profile', None)
+            )
+        else:
+            candidate = candidates.first()
+            candidate.status = 'Interview'
+            candidate.save()
         
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         link = f"{base_url}/interview-start/{candidate.id}"

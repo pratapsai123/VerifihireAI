@@ -23,9 +23,9 @@ function TrueFalseQuestion() {
   const assessmentOptions = SHARED_ROLES;
 
   const [question, setQuestion] = useState('');
-  const [assessmentName, setAssessmentName] = useState('');
+  const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
   const [topicSkill, setTopicSkill] = useState('');
-  const [experienceLevel, setExperienceLevel] = useState('');
+  const [experienceLevel, setExperienceLevel] = useState(assessmentContext?.experienceLevel || '');
   const [timeToAnswer, setTimeToAnswer] = useState('');
   const [timeError, setTimeError] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(''); // 'A' (True) | 'B' (False)
@@ -82,7 +82,9 @@ function TrueFalseQuestion() {
   };
 
   const handleSave = async () => {
-    const caid = assessmentContext?.customAssessmentId || assessmentContext?.id;
+    const caid = assessmentContext?.customAssessmentId ||
+      assessmentContext?.id ||
+      localStorage.getItem(STORAGE_KEYS.DRAFT_ID);
     if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
@@ -158,7 +160,7 @@ function TrueFalseQuestion() {
     try {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: true } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error saving TF:', error);

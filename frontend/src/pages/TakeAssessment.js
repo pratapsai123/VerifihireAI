@@ -973,36 +973,46 @@ export default function TakeAssessment() {
     let screenshot = null;
     if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
       try {
+        // Quick draw from the live stream track using ImageCapture if available,
+        // otherwise rely on a pre-existing background video element.
+        // For maximum compatibility and speed, we create a quick video element, 
+        // but we don't wait for loadedmetadata if it takes too long.
         const video = document.createElement('video');
         video.srcObject = screenStreamRef.current;
         video.muted = true;
         video.playsInline = true;
 
-        // Wait for video metadata to load and video to start playing
-        await new Promise((resolve, reject) => {
+        await new Promise((resolve) => {
+          let resolved = false;
+          // Fallback timeout because loadedmetadata might not fire if tab is fully backgrounded
+          const fallback = setTimeout(() => {
+            if (!resolved) { resolved = true; resolve(); }
+          }, 300);
+
           video.onloadedmetadata = () => {
-            video.play()
-              .then(() => {
-                // Force a small delay (100ms) to ensure browser paints the frame
-                // especially critical during 'blur' or 'visibilitychange' events
-                setTimeout(resolve, 100);
-              })
-              .catch(reject);
+            video.play().then(() => {
+              if (!resolved) {
+                resolved = true;
+                clearTimeout(fallback);
+                setTimeout(resolve, 50); // slight delay to paint
+              }
+            }).catch(() => {
+              if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+            });
           };
-          video.onerror = reject;
+          video.onerror = () => {
+            if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+          };
         });
 
         const canvas = screenCanvasRef.current;
         const ctx = canvas.getContext('2d');
-
-        // Match canvas to actual video dimensions
-        canvas.width = video.videoWidth || 1280;
-        canvas.height = video.videoHeight || 720;
+        canvas.width = video.videoWidth || window.innerWidth || 1280;
+        canvas.height = video.videoHeight || window.innerHeight || 720;
 
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        screenshot = canvas.toDataURL('image/jpeg', 0.5); // JPEG with 50% quality
-
-        // Cleanup
+        screenshot = canvas.toDataURL('image/jpeg', 0.5); 
+        
         video.pause();
         video.srcObject = null;
       } catch (e) {
@@ -1069,16 +1079,24 @@ export default function TakeAssessment() {
         detectInterval = setInterval(async () => {
           if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
             const now = Date.now();
-            if (now - lastDetectionTimeRef.current > 2000) {
+            if (now - lastDetectionTimeRef.current > 1500) {
               lastDetectionTimeRef.current = now;
               const preds = await detectorRef.current.detect(videoRef.current);
-              if (preds.find(p => p.class === 'cell phone')) showAiEvent('PHONE DETECTED', true, 'phone_detection');
-              const people = preds.filter(p => p.class === 'person');
-              if (people.length > 1) showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-              else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+              
+              // Filter by confidence score
+              const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
+              const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
+
+              if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
+              
+              if (people.length > 1) {
+                showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+              } else if (people.length === 0) {
+                showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+              }
             }
           }
-        }, 1000);
+        }, 800);
       }
     };
     initMonitoring();
@@ -1114,6 +1132,22 @@ export default function TakeAssessment() {
     };
   }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage]);
 
+  // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
+  useEffect(() => {
+    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+
+    const bgInterval = setInterval(() => {
+      // If candidate is actively looking at our tab, do nothing
+      if (!document.hidden && document.hasFocus()) return;
+
+      // If they are hidden (different tab) or blurred (different window), capture every 5s
+      const eventType = document.hidden ? 'tab_switch' : 'window_switch';
+      showAiEvent('BACKGROUND ACTIVITY DETECTED', true, eventType);
+    }, 5000);
+
+    return () => clearInterval(bgInterval);
+  }, [showAiEvent, submitted, assessmentStage]);
+
   const startScreenShare = useCallback(async () => {
     try {
       setFsError('');
@@ -1136,10 +1170,10 @@ export default function TakeAssessment() {
 
       // If user stops sharing manually
       track.onended = () => {
-        showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
-        // Force them back to the start gate
-        if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
-        setIsFullscreen(false);
+        showAiEvent('SCREEN SHARING STOPPED', true, 'window_switch');
+        // Do not force exit fullscreen immediately to avoid jarring experience,
+        // but set error to force them to click "Resume" which retriggers requestFullscreen
+        setFsError('Screen sharing stopped. You must restart screen sharing to continue.');
       };
 
       return true;
@@ -1577,44 +1611,6 @@ export default function TakeAssessment() {
 
   return (
     <div className="take-page take-exam-mode">
-      {!isFullscreen && !submitted && candidateDetailsCompleted && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'rgba(0,0,0,0.95)',
-          zIndex: 100000,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'white',
-          textAlign: 'center',
-          padding: '2rem'
-        }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>⚠️ Full Screen Required</h1>
-          <p style={{ fontSize: '1.2rem', color: '#A3AED0', maxWidth: '600px', marginBottom: '2rem' }}>
-            To maintain assessment integrity, you must be in full screen mode. This event has been logged.
-          </p>
-          <button
-            onClick={requestFullscreen}
-            style={{
-              padding: '1rem 2rem',
-              background: '#4318FF',
-              color: 'white',
-              border: 'none',
-              borderRadius: '12px',
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              cursor: 'pointer'
-            }}
-          >
-            Re-enter Full Screen
-          </button>
-        </div>
-      )}
       {aiToast.active && (
         <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
           <span style={{ fontSize: '1rem' }}>{aiToast.urgent ? '⚠️' : 'ℹ️'}</span>

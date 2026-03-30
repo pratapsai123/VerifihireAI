@@ -250,6 +250,56 @@
   border: 1px solid #FEE2E2;
 }
 
+.pill.info {
+  /* Sent */
+  background-color: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #DBEAFE;
+}
+
+.pill.neutral {
+  /* Not Attempted */
+  background-color: #F3F4F6;
+  color: #4B5563;
+  border: 1px solid #E5E7EB;
+}
+
+/* --- Action Buttons --- */
+.btn-report-dl, .btn-action-delete {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-report-dl {
+  color: #111827;
+}
+
+.btn-report-dl:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-action-delete {
+  color: #EF4444;
+}
+
+.btn-action-delete:hover {
+  background: #FEF2F2;
+  border-color: #FECACA;
+  color: #DC2626;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+}
+
 /* --- Badges (in detail view) --- */
 .badge {
   display: inline-flex;

@@ -9,10 +9,10 @@ import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
 import Assessment from './pages/Assessment';
+import ViewAssessment from './pages/ViewAssessment';
 import InviteCandidates from './pages/InviteCandidates';
 import TakeAssessment from './pages/TakeAssessment';
 import Result from './pages/Result';
-import CandidatePage from './pages/CandidatePage';
 import ManualQuestions from './pages/ManualQuestions';
 import MultipleChoiceQuestion from './pages/MultipleChoiceQuestion';
 import MultipleSelectionQuestion from './pages/MultipleSelectionQuestion';
@@ -55,26 +55,68 @@ axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // List of public API paths that should not have the Authorization header
+      // This prevents 401 errors if an expired token exists in localStorage
+      const publicApiPatterns = [
+        /^\/api\/invitations\/public\//,
+        /^\/api\/candidate-details\//,
+        /^\/api\/ai\/public\//,
+        /^\/api\/ai\/submit\//,
+        /^\/api\/ai\/submission\//,
+        /^\/api\/ai\/execute\//,
+        /^\/api\/ai-candidates\/[0-9a-fA-F-]{36}/, // Matches UUID token paths
+        /^\/api\/ai-candidates\/tts\//,
+        /^\/api\/ai-candidates\/process-answer\//,
+        /^\/api\/users\/accept-invite\//,
+        /^\/api\/users\/invite\/[0-9a-fA-F-]{36}/, // Matches UUID token paths for getting invite
+        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/ // Matches UUID token paths
+      ];
+
+      const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
+      const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
+
+      if (!isPublicApi) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
+
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
     // Check if error is 401 Unauthorized securely
     if (error.response && error.response.status === 401) {
-      console.error('Session expired or unauthorized. Logging out.');
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
+      // Check if the current page is a public candidate-facing page
+      const publicRoutes = [
+        '/take-assessment/',
+        '/take-ai-assessment/',
+        '/ai-interview-session/',
+        '/interview-start/',
+        '/result/',
+        '/live-interview',
+        '/ai-interview',
+        '/book-interview/',
+        '/accept-invite'
+      ];
+      const isPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
 
-      // Redirect to login if not already there
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+      // ONLY logout and redirect if NOT on a public candidate page
+      if (!isPublicPage) {
+        console.error('Session expired or unauthorized. Logging out.');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+
+        // Redirect to login if not already there
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      } else {
+        console.warn('Unauthorized access on public page - avoiding redirect to login.');
       }
     }
     return Promise.reject(error);
@@ -107,7 +149,6 @@ function AppContent() {
     '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
     '/accept-invite',
     '/feedback-page',
-    '/results',
   ];
 
   const isFullScreenPage =
@@ -123,7 +164,11 @@ function AppContent() {
   return (
     <div className="app-container">
       {!isFullScreenPage && <Header />}
-      <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh' } : {}}>
+      <div className="app-scroll" style={isFullScreenPage ? {
+        top: 0,
+        height: '100vh',
+        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto'
+      } : {}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -132,7 +177,7 @@ function AppContent() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/assessments" element={<Assessment />} />
-            <Route path="/candidates" element={<CandidatePage />} />
+            <Route path="/view-assessment/:id" element={<ViewAssessment />} />
             <Route path="/custom-assessment" element={<CustomAssessment />} />
             <Route path="/review-assessment" element={<ReviewPage />} />
             <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />

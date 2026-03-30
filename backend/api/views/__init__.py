@@ -34,6 +34,7 @@ from .assessment_views import (
     bulk_create_questions_view,
     get_questions_by_skills_view,
     create_custom_assessment_view,
+    update_custom_assessment_view,
     get_custom_assessment_view,
     create_assessment_view,
     get_assessment_public_view,
@@ -51,12 +52,12 @@ from .candidate_assessment_views import (
     results_overview_view,
     CandidateSubmissionDeleteView,
     submit_rating_view,
-    candidates_overview_view,
     backfill_assessment_questions_view,
     submit_objective_section,
-    save_candidate_details_view,
+    save_all_candidate_details_view,
     _acq_merge_code,
     update_standard_integrity_view,
+    verify_pan_backend_view,
 )
 
 from .live_interview_views import (
@@ -65,7 +66,6 @@ from .live_interview_views import (
     get_interview_invitation_by_token_view,
     submit_interview_feedback,
     draft_interview_invitations_view,
-    verify_pan_backend_view,
     download_candidate_report_view,
     get_candidate_details_view,
     generate_all_interviewer_slots_view,
