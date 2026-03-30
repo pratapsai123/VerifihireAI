@@ -71,6 +71,7 @@ const AiInterviewSession = () => {
     const isFullscreenRef = useRef(false);
     const currentAudioRef = useRef(null);
     const isStartingMicRef = useRef(false);
+    const isNoticePlayingRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -152,10 +153,29 @@ const AiInterviewSession = () => {
         }
     }, [token]);
 
+    const playAuditNotice = useCallback((text) => {
+        if (!window.speechSynthesis) return;
+        isNoticePlayingRef.current = true;
+        
+        // Cancel any existing notices to avoid overlapping alerts
+        window.speechSynthesis.cancel(); 
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.onend = () => { isNoticePlayingRef.current = false; };
+        utterance.onerror = () => { isNoticePlayingRef.current = false; };
+        
+        // Optional: Custom voice/pitch for "System" feel
+        utterance.rate = 1.0;
+        utterance.pitch = 0.9; 
+        
+        window.speechSynthesis.speak(utterance);
+    }, []);
+
     const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
         setAiToast({ active: true, text, urgent });
         if (urgent) {
             setIntegrityBreech({ active: true, text });
+            playAuditNotice(text); // AUDIBLE ALERT
             setTimeout(() => setIntegrityBreech({ active: false, text: '' }), 3000);
         }
 
@@ -350,7 +370,10 @@ const AiInterviewSession = () => {
     useEffect(() => {
         if (!isFullscreen && isPermissionsGranted && !isCompleted) {
             const hammer = setInterval(() => {
-                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                // If a proctoring notice is playing, DO NOT cancel it
+                if (window.speechSynthesis && !isNoticePlayingRef.current) {
+                    window.speechSynthesis.cancel();
+                }
                 if (currentAudioRef.current) {
                     try {
                         currentAudioRef.current.pause();
