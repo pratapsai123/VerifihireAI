@@ -156,18 +156,18 @@ const AiInterviewSession = () => {
     const playAuditNotice = useCallback((text) => {
         if (!window.speechSynthesis) return;
         isNoticePlayingRef.current = true;
-        
+
         // Cancel any existing notices to avoid overlapping alerts
-        window.speechSynthesis.cancel(); 
+        window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.onend = () => { isNoticePlayingRef.current = false; };
         utterance.onerror = () => { isNoticePlayingRef.current = false; };
-        
+
         // Optional: Custom voice/pitch for "System" feel
         utterance.rate = 1.0;
-        utterance.pitch = 0.9; 
-        
+        utterance.pitch = 0.9;
+
         window.speechSynthesis.speak(utterance);
     }, []);
 
@@ -315,7 +315,6 @@ const AiInterviewSession = () => {
             }
 
             if (!isFS && isPermissionsGranted) {
-<<<<<<< HEAD
                 pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
             }
@@ -336,7 +335,7 @@ const AiInterviewSession = () => {
             if (assemblyAIRef.current) {
                 try { assemblyAIRef.current.stop(); } catch (e) { }
             }
-            
+
             // 3. Stop Speech (Browser TTS)
             window.speechSynthesis.cancel();
             setIsSpeaking(false);
@@ -1512,316 +1511,323 @@ const AiInterviewSession = () => {
                             else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
                         }
                     }}
-                    style={{
-                        position: 'fixed',
-                        inset: 0,
-                        background: '#0a0a0a',
-                        color: 'white',
-                        zIndex: 30000,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        padding: '2rem',
-                        fontFamily: 'Inter, sans-serif'
-                    }}
-                >
-                    <div style={{ maxWidth: '500px' }}>
-                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>
-                            {!isFullscreen ? '🖥️' : '🚫'}
-                        </div>
-                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>
-                            {!isFullscreen ? 'Resume Full Screen' : 'Enable Screen Sharing'}
-                        </h1>
-                        <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2.5rem', lineHeight: '1.6' }}>
-                            {!isFullscreen 
-                                ? 'To ensure the integrity of your interview, you must remain in Full Screen mode.'
-                                : 'Screen sharing has been stopped. You must share your "Entire Screen" to continue the interview.'}
-                        </p>
-                        
-                        {!isFullscreen ? (
-                            <button
-                                onClick={() => {
-                                    const elem = document.documentElement;
-                                    if (elem.requestFullscreen) elem.requestFullscreen();
-                                    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-                                    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-                                }}
-                                className="resume-integrity-btn"
-                                style={{
-                                    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '1rem 2.5rem',
-                                    borderRadius: '12px',
-                                    fontSize: '1.1rem',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Enter Full Screen
-                            </button>
-                        ) : (
-                            <button
-                                onClick={startScreenShare}
-                                className="resume-integrity-btn"
-                                style={{
-                                    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '1rem 2.5rem',
-                                    borderRadius: '12px',
-                                    fontSize: '1.1rem',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Restart Screen Sharing
-                            </button>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {!isPermissionsGranted && !isCompleted && (
-                <div style={{
+                style={{
                     position: 'fixed',
                     inset: 0,
-                    background: 'rgba(255, 255, 255, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    zIndex: 20000,
+                    background: '#0a0a0a',
+                    color: 'white',
+                    zIndex: 30000,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     textAlign: 'center',
-                    padding: '2rem'
-                }}>
-                    <div style={{ maxWidth: '600px', background: 'white', padding: '3rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
-                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>👋</div>
-                        <h1 style={{ fontSize: '2rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>Ready to meet Indu?</h1>
-                        <p style={{ color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
-                            To ensure a fair and secure interview process, we require access to your <b>Camera</b> and <b>Entire Screen Share</b>.
-                        </p>
-                        <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '2.5rem', textAlign: 'left' }}>
-                            <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
-                                <i className="fa-solid fa-camera" style={{ color: '#6366f1', marginTop: '4px' }}></i>
-                                <span><b>Webcam:</b> Used for face and phone detection.</span>
-                            </div>
-                            <div style={{ display: 'flex', gap: '12px' }}>
-                                <i className="fa-solid fa-desktop" style={{ color: '#6366f1', marginTop: '4px' }}></i>
-                                <span><b>Screen:</b> Used for tab-switch monitoring. Please choose "Entire Screen".</span>
-                            </div>
-                        </div>
+                    padding: '2rem',
+                    fontFamily: 'Inter, sans-serif'
+                }}
+            >
+                <div style={{ maxWidth: '500px' }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.4))' }}>
+                        {!isFullscreen ? '🖥️' : '🚫'}
+                    </div>
+                    <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em' }}>
+                        {!isFullscreen ? 'Resume Full Screen' : 'Enable Screen Sharing'}
+                    </h1>
+                    <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2.5rem', lineHeight: '1.6' }}>
+                        {!isFullscreen
+                            ? 'To ensure the integrity of your interview, you must remain in Full Screen mode.'
+                            : 'Screen sharing has been stopped. You must share your "Entire Screen" to continue the interview.'}
+                    </p>
+
+                    {!isFullscreen ? (
                         <button
-                            onClick={handleStartInterview}
-                            className="start-session-btn"
+                            onClick={() => {
+                                const elem = document.documentElement;
+                                if (elem.requestFullscreen) elem.requestFullscreen();
+                                else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                                else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                            }}
+                            className="resume-integrity-btn"
                             style={{
-                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
                                 color: 'white',
                                 border: 'none',
-                                padding: '1rem 3rem',
-                                borderRadius: '50px',
-                                fontSize: '1.2rem',
-                                fontWeight: '700',
-                                cursor: 'pointer',
-                                transition: 'transform 0.2s',
-                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            Start Interview
-                        </button>
-                    </div>
-                </div>
-            )}
-            {showQuotaWarning && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#667eea', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-                    ⏳ Indu is taking a moment to think (AI Busy). Please wait, your answer is being saved and will process automatically...
-                </div>
-            )}
-
-            <div className="ai-session-container">
-                <div className="ai-sidebar">
-                    <div className="camera-container">
-                        <video ref={videoRef} autoPlay playsInline muted id="candidateVideo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
-                        <div className="ai-scan-bar"></div>
-                        {integrityBreech.active && <div className="integrity-overlay"><span>{integrityBreech.text}</span></div>}
-                        {aiToast.active && <div className={`ai-event-toast ${aiToast.urgent ? 'urgent' : ''}`}>{aiToast.text}</div>}
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
-                        <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
-
-                        {/* Local Mic Visualizer */}
-                        <div style={{ width: '150px', height: '30px', background: '#f8fafc', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-5px' }}>
-                            <canvas ref={canvasRef} width="150" height="30" style={{ width: '100%', height: '100%' }}></canvas>
-                        </div>
-
-                        {/* Status Message moved to bottom as requested */}
-                        <div className="ai-status-badge" style={{ marginTop: 'auto', marginBottom: '1rem' }}>
-                            <span className="speaking-indicator"></span>{aiStatus}
-                        </div>
-                    </div>
-                </div>
-
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
-                    <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
-                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
-                            </div>
-
-                            {timeLeft !== null && (
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px',
-                                    background: timeLeft < 300 ? '#fff5f5' : '#f0f4ff',
-                                    padding: '4px 10px',
-                                    borderRadius: '8px',
-                                    color: timeLeft < 300 ? '#e53e3e' : '#667eea',
-                                    fontWeight: 'bold',
-                                    fontSize: '0.8rem',
-                                    border: `1px solid ${timeLeft < 300 ? '#feb2b2' : '#c3dafe'}`
-                                }}>
-                                    <i className="fa-solid fa-clock"></i>
-                                    <span>{formatTime(timeLeft)}</span>
-                                </div>
-                            )}
-
-                            <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#ebf8ff' : '#fffbec') : '#f0fff4') : '#fff5f5',
-                                padding: '4px 10px',
-                                borderRadius: '8px',
-                                color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#3182ce' : '#b7791f') : '#38a169') : '#e53e3e',
+                                padding: '1rem 2.5rem',
+                                borderRadius: '12px',
+                                fontSize: '1.1rem',
                                 fontWeight: 'bold',
-                                fontSize: '0.8rem',
-                                border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#bee3f8' : '#f6e05e') : '#c6f6d5') : '#feb2b2'}`
-                            }}>
-                                <i className={`fa-solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'fa-microphone-lines' : 'fa-hourglass-half') : 'fa-check-circle') : 'fa-microphone-slash'}`}></i>
-                                <span>{sttReady ? (silenceCountdown ? `Indu Waiting (${silenceCountdown})` : 'AssemblyAI Live') : 'Mic Offline'}</span>
-                            </div>
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Enter Full Screen
+                        </button>
+                    ) : (
+                        <button
+                            onClick={startScreenShare}
+                            className="resume-integrity-btn"
+                            style={{
+                                background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                                color: 'white',
+                                border: 'none',
+                                padding: '1rem 2.5rem',
+                                borderRadius: '12px',
+                                fontSize: '1.1rem',
+                                fontWeight: 'bold',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Restart Screen Sharing
+                        </button>
+                    )}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        !isPermissionsGranted && !isCompleted && (
+            <div style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                zIndex: 20000,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                padding: '2rem'
+            }}>
+                <div style={{ maxWidth: '600px', background: 'white', padding: '3rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>👋</div>
+                    <h1 style={{ fontSize: '2rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>Ready to meet Indu?</h1>
+                    <p style={{ color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
+                        To ensure a fair and secure interview process, we require access to your <b>Camera</b> and <b>Entire Screen Share</b>.
+                    </p>
+                    <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '2.5rem', textAlign: 'left' }}>
+                        <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                            <i className="fa-solid fa-camera" style={{ color: '#6366f1', marginTop: '4px' }}></i>
+                            <span><b>Webcam:</b> Used for face and phone detection.</span>
                         </div>
-                        <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
-                        <button onClick={() => completeInterview("You have chosen to end the interview early. Thank you for your time today.")} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
-                    </div>
-
-                    <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
-                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#667eea', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
-                            <div style={{ fontSize: '1rem', fontWeight: 600, color: '#1a202c', flex: 1 }}>
-                                {questions[currentQuestionIndex] ? (
-                                    typeof questions[currentQuestionIndex] === 'object'
-                                        ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
-                                        : questions[currentQuestionIndex]
-                                ) : 'Initializing...'}
-                            </div>
+                        <div style={{ display: 'flex', gap: '12px' }}>
+                            <i className="fa-solid fa-desktop" style={{ color: '#6366f1', marginTop: '4px' }}></i>
+                            <span><b>Screen:</b> Used for tab-switch monitoring. Please choose "Entire Screen".</span>
                         </div>
                     </div>
+                    <button
+                        onClick={handleStartInterview}
+                        className="start-session-btn"
+                        style={{
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            color: 'white',
+                            border: 'none',
+                            padding: '1rem 3rem',
+                            borderRadius: '50px',
+                            fontSize: '1.2rem',
+                            fontWeight: '700',
+                            cursor: 'pointer',
+                            transition: 'transform 0.2s',
+                            boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                        Start Interview
+                    </button>
+                </div>
+            </div>
+        )
+    }
+    {
+        showQuotaWarning && (
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#667eea', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                ⏳ Indu is taking a moment to think (AI Busy). Please wait, your answer is being saved and will process automatically...
+            </div>
+        )
+    }
 
-                    <div ref={chatContainerRef} className="chat-container">
-                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
-                        {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
+    <div className="ai-session-container">
+        <div className="ai-sidebar">
+            <div className="camera-container">
+                <video ref={videoRef} autoPlay playsInline muted id="candidateVideo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                <div className="ai-scan-bar"></div>
+                {integrityBreech.active && <div className="integrity-overlay"><span>{integrityBreech.text}</span></div>}
+                {aiToast.active && <div className={`ai-event-toast ${aiToast.urgent ? 'urgent' : ''}`}>{aiToast.text}</div>}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
+                <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
+
+                {/* Local Mic Visualizer */}
+                <div style={{ width: '150px', height: '30px', background: '#f8fafc', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-5px' }}>
+                    <canvas ref={canvasRef} width="150" height="30" style={{ width: '100%', height: '100%' }}></canvas>
+                </div>
+
+                {/* Status Message moved to bottom as requested */}
+                <div className="ai-status-badge" style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                    <span className="speaking-indicator"></span>{aiStatus}
+                </div>
+            </div>
+        </div>
+
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
+            <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
+                        <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
                     </div>
 
-                    {/* Live Transcript Display - Restored below chat */}
-                    {isRecording && aiStatus.startsWith('Heard:') && (
-                        <div className="live-transcript-bubble">
-                            <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
-                            {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
+                    {timeLeft !== null && (
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            background: timeLeft < 300 ? '#fff5f5' : '#f0f4ff',
+                            padding: '4px 10px',
+                            borderRadius: '8px',
+                            color: timeLeft < 300 ? '#e53e3e' : '#667eea',
+                            fontWeight: 'bold',
+                            fontSize: '0.8rem',
+                            border: `1px solid ${timeLeft < 300 ? '#feb2b2' : '#c3dafe'}`
+                        }}>
+                            <i className="fa-solid fa-clock"></i>
+                            <span>{formatTime(timeLeft)}</span>
                         </div>
                     )}
 
-                    <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        {userInputMode === 'audio' ? (
-                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <button
-                                    onClick={toggleRecording}
-                                    disabled={isProcessing}
-                                    className={`mic-btn ${isRecording ? 'listening' : ''}`}
-                                    style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.6 : 1 }}
-                                >
-                                    <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
-                                </button>
-                                <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
-                            </div>
-                        ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: '#f8fafc', padding: '8px', borderRadius: '8px' }}>
-                                <textarea
-                                    className="response-textarea"
-                                    style={{
-                                        flex: 1,
-                                        border: '1px solid #cbd5e0',
-                                        borderRadius: '8px',
-                                        padding: '8px 12px',
-                                        fontSize: '0.85rem',
-                                        outline: 'none',
-                                        minHeight: '40px',
-                                        maxHeight: '150px',
-                                        resize: 'vertical',
-                                        fontFamily: 'monospace'
-                                    }}
-                                    value={responseInput}
-                                    onChange={(e) => setResponseInput(e.target.value)}
-                                    placeholder="Type answer or code here... (Enter for new line)"
-                                />
-                                <button
-                                    onClick={() => handleAnswerSubmission(responseInput)}
-                                    disabled={isProcessing || !responseInput.trim()}
-                                    style={{
-                                        background: '#667eea',
-                                        color: 'white',
-                                        border: 'none',
-                                        width: '40px',
-                                        height: '40px',
-                                        borderRadius: '8px',
-                                        fontSize: '1rem',
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}
-                                    title="Send Answer"
-                                >
-                                    <i className="fa-solid fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        )}
-                        <button
-                            onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
-                            style={{ background: '#edf2f7', border: 'none', color: '#4a5568', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
-                        >
-                            <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>
-                            {userInputMode === 'audio' ? "Keys" : "Voice"}
-                        </button>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#ebf8ff' : '#fffbec') : '#f0fff4') : '#fff5f5',
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#3182ce' : '#b7791f') : '#38a169') : '#e53e3e',
+                        fontWeight: 'bold',
+                        fontSize: '0.8rem',
+                        border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#bee3f8' : '#f6e05e') : '#c6f6d5') : '#feb2b2'}`
+                    }}>
+                        <i className={`fa-solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'fa-microphone-lines' : 'fa-hourglass-half') : 'fa-check-circle') : 'fa-microphone-slash'}`}></i>
+                        <span>{sttReady ? (silenceCountdown ? `Indu Waiting (${silenceCountdown})` : 'AssemblyAI Live') : 'Mic Offline'}</span>
+                    </div>
+                </div>
+                <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
+                <button onClick={() => completeInterview("You have chosen to end the interview early. Thank you for your time today.")} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
+            </div>
+
+            <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#667eea', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
+                    <div style={{ fontSize: '1rem', fontWeight: 600, color: '#1a202c', flex: 1 }}>
+                        {questions[currentQuestionIndex] ? (
+                            typeof questions[currentQuestionIndex] === 'object'
+                                ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
+                                : questions[currentQuestionIndex]
+                        ) : 'Initializing...'}
                     </div>
                 </div>
             </div>
 
-            {/* Success Completion Overlay */}
-            {isCompleted && (
-                <div className="completion-overlay">
-                    <div className="completion-card">
-                        <div className="completion-icon-wrap">
-                            <i className="fa-solid fa-circle-check"></i>
-                        </div>
-                        <h2 className="completion-title">Interview Completed!</h2>
-                        <p className="completion-text">
-                            Thank you, <strong>{candidateName}</strong>. Your interview session has been successfully recorded and submitted for review.
-                        </p>
-                        <div className="completion-next-steps">
-                            <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
-                        </div>
-                    </div>
+            <div ref={chatContainerRef} className="chat-container">
+                {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
+                {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
+            </div>
+
+            {/* Live Transcript Display - Restored below chat */}
+            {isRecording && aiStatus.startsWith('Heard:') && (
+                <div className="live-transcript-bubble">
+                    <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
+                    {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
                 </div>
             )}
+
+            <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                {userInputMode === 'audio' ? (
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <button
+                            onClick={toggleRecording}
+                            disabled={isProcessing}
+                            className={`mic-btn ${isRecording ? 'listening' : ''}`}
+                            style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.6 : 1 }}
+                        >
+                            <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
+                        </button>
+                        <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
+                    </div>
+                ) : (
+                    <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: '#f8fafc', padding: '8px', borderRadius: '8px' }}>
+                        <textarea
+                            className="response-textarea"
+                            style={{
+                                flex: 1,
+                                border: '1px solid #cbd5e0',
+                                borderRadius: '8px',
+                                padding: '8px 12px',
+                                fontSize: '0.85rem',
+                                outline: 'none',
+                                minHeight: '40px',
+                                maxHeight: '150px',
+                                resize: 'vertical',
+                                fontFamily: 'monospace'
+                            }}
+                            value={responseInput}
+                            onChange={(e) => setResponseInput(e.target.value)}
+                            placeholder="Type answer or code here... (Enter for new line)"
+                        />
+                        <button
+                            onClick={() => handleAnswerSubmission(responseInput)}
+                            disabled={isProcessing || !responseInput.trim()}
+                            style={{
+                                background: '#667eea',
+                                color: 'white',
+                                border: 'none',
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '8px',
+                                fontSize: '1rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                            title="Send Answer"
+                        >
+                            <i className="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                )}
+                <button
+                    onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
+                    style={{ background: '#edf2f7', border: 'none', color: '#4a5568', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+                >
+                    <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>
+                    {userInputMode === 'audio' ? "Keys" : "Voice"}
+                </button>
+            </div>
         </div>
+    </div>
+
+    {/* Success Completion Overlay */ }
+    {
+        isCompleted && (
+            <div className="completion-overlay">
+                <div className="completion-card">
+                    <div className="completion-icon-wrap">
+                        <i className="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h2 className="completion-title">Interview Completed!</h2>
+                    <p className="completion-text">
+                        Thank you, <strong>{candidateName}</strong>. Your interview session has been successfully recorded and submitted for review.
+                    </p>
+                    <div className="completion-next-steps">
+                        <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+        </div >
     );
 };
 
