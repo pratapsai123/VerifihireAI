@@ -56,21 +56,24 @@ axios.interceptors.request.use(
     const token = localStorage.getItem('authToken');
     if (token) {
       // List of public API paths that should not have the Authorization header
-      // This prevents 401 errors if an expired token exists in localStorage (e.g. from a recruiter session)
-      const publicApiPaths = [
-        '/invitations/public/',
-        '/candidate-details/',
-        '/ai/public/',
-        '/ai/submit/',
-        '/ai/submission/',
-        '/ai/execute/',
-        '/api/ai-candidates/',
-        '/users/invite/',
-        '/users/accept-invite/',
-        '/interviews/slots/'
+      // This prevents 401 errors if an expired token exists in localStorage
+      const publicApiPatterns = [
+        /^\/api\/invitations\/public\//,
+        /^\/api\/candidate-details\//,
+        /^\/api\/ai\/public\//,
+        /^\/api\/ai\/submit\//,
+        /^\/api\/ai\/submission\//,
+        /^\/api\/ai\/execute\//,
+        /^\/api\/ai-candidates\/[0-9a-fA-F-]{36}/, // Matches UUID token paths
+        /^\/api\/ai-candidates\/tts\//,
+        /^\/api\/ai-candidates\/process-answer\//,
+        /^\/api\/users\/accept-invite\//,
+        /^\/api\/users\/invite\/[0-9a-fA-F-]{36}/, // Matches UUID token paths for getting invite
+        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/ // Matches UUID token paths
       ];
 
-      const isPublicApi = publicApiPaths.some(path => config.url && config.url.includes(path));
+      const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
+      const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
 
       if (!isPublicApi) {
         config.headers.Authorization = `Bearer ${token}`;
