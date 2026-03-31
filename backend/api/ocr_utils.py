@@ -1,7 +1,10 @@
 import io
 import re
+import io
 import numpy as np
 import fitz  # PyMuPDF
+import logging
+import traceback
 from PIL import Image
 
 # Global variable for the reader
@@ -134,7 +137,108 @@ def extract_text_from_pdf(pdf_file, target_pan=None):
         doc.close()
         return full_text_log, False
     except Exception as e:
+        if 'doc' in locals() and doc:
+            try: doc.close()
+            except: pass
         return f"PDF Extraction Failed: {str(e)}", False
+
+def pdf_page_to_png_bytes(pdf_content, page_num=0, zoom=2.0):
+    """
+    Convert a specific page of a PDF to PNG bytes for reporting, with auto-cropping.
+    """
+    try:
+        doc = fitz.open(stream=pdf_content, filetype="pdf")
+        if page_num >= len(doc):
+            doc.close()
+            return None
+            
+        page = doc[page_num]
+        
+        # Auto-crop logic: Find the bounding box of all content (text and images)
+        # We use page.get_text("dict") which includes both text and image blocks
+        text_dict = page.get_text("dict")
+        all_blocks = text_dict.get("blocks", [])
+        
+        # Also check for images explicitly if blocks seem empty
+        if not all_blocks:
+            image_info = page.get_image_info()
+            if image_info:
+                all_blocks = [img for img in image_info if "bbox" in img]
+
+        if all_blocks:
+            # Initialize with first block
+            first_bbox = all_blocks[0].get("bbox", (0, 0, 0, 0))
+            if not any(first_bbox): # Handle cases where bbox might be (0,0,0,0)
+                 x0, y0, x1, y1 = page.rect
+            else:
+                 x0, y0, x1, y1 = first_bbox
+
+            for b in all_blocks:
+                b_bbox = b.get("bbox", (x0, y0, x1, y1))
+                x0 = min(x0, b_bbox[0])
+                y0 = min(y0, b_bbox[1])
+                x1 = max(x1, b_bbox[2])
+                y1 = max(y1, b_bbox[3])
+            
+            # Add some padding (15 pts) for a better visual look
+            padding = 15
+            x0 = max(0, x0 - padding)
+            y0 = max(0, y0 - padding)
+            x1 = min(page.rect.width, x1 + padding)
+            y1 = min(page.rect.height, y1 + padding)
+            
+            bbox = fitz.Rect(x0, y0, x1, y1)
+        else:
+            bbox = page.rect
+        
+        # If the resulting bbox is essentially the whole page, we might still have white space
+        # but at least we tried to crop based on PDF objects.
+        pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), clip=bbox)
+        png_bytes = pix.tobytes("png")
+        doc.close()
+        
+        # Secondary Crop using PIL to remove any remaining white space at the bitmap level
+        # This handles cases where the PDF objects themselves have white margins
+        try:
+            from PIL import Image as PILImage, ImageChops
+            img = PILImage.open(io.BytesIO(png_bytes))
+            
+            # Convert to RGB if not already
+            if img.mode != 'RGB':
+                img = img.convert('RGB')
+                
+            # Find the bbox of non-white content
+            # We use a threshold to be safe against slightly off-white pixels
+            bg = PILImage.new(img.mode, img.size, (255, 255, 255))
+            diff = ImageChops.difference(img, bg)
+            # Thresholding 
+            # diff = diff.convert('L').point(lambda x: 0 if x < 5 else 255, '1')
+            
+            bbox_pil = diff.getbbox()
+            if bbox_pil:
+                # Add a small margin of 2 pixels
+                w, h = img.size
+                bbox_pil = (
+                    max(0, bbox_pil[0] - 2),
+                    max(0, bbox_pil[1] - 2),
+                    min(w, bbox_pil[2] + 2),
+                    min(h, bbox_pil[3] + 2)
+                )
+                img = img.crop(bbox_pil)
+                
+            output = io.BytesIO()
+            img.save(output, format='PNG')
+            return output.getvalue()
+        except Exception as e:
+            print(f"Bitmap crop failed, returning original pixmap: {e}")
+            return png_bytes
+    except Exception as e:
+        print(f"Error converting PDF to PNG: {e}")
+        traceback.print_exc()
+        if 'doc' in locals() and doc:
+            try: doc.close()
+            except: pass
+        return None
 
 def extract_text_from_pdf_ocr(file_content):
     """

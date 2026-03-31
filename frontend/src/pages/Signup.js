@@ -302,454 +302,378 @@ function Signup() {
   const showPasswordHelper = (passwordFocused || password.length > 0);
 
   return (
-    <>
-      <main className="auth-page signup-page-enhanced">
-        <div className="container auth-container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="auth-card" data-aos="fade-up" style={{
-            maxWidth: '420px',
-            width: '100%',
-            padding: '0.5rem 1rem'
-          }}>
-            <div className="auth-logo-wrapper">
-              <div style={{
-                maxWidth: '450px',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <img
-                  src="/auth-logo-v7.png"
-                  alt="VerifiHireAI Logo"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: 'brightness(0.85) contrast(1.2) sepia(0.2) saturate(1.3)'
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="auth-content-wrapper">
-              <h2 style={{ textAlign: 'center', marginBottom: '0.25rem', fontWeight: '600', color: 'var(--gray-900)' }}>Create your account</h2>
-              <p style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--gray-600)', fontSize: '0.9rem', lineHeight: '1.4' }}>
-                Sign up to manage assessments, view reports, and monitor candidate sessions.
-              </p>
-              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '1rem' }}>Sign up</h3>
-              <form className="auth-form" onSubmit={handleSignup}>
-                {signupError && !Object.keys(fieldErrors).some(k => fieldErrors[k]) && (
-                  <div className="auth-error-message" style={{ marginBottom: '1rem' }}>{signupError}</div>
-                )}
-                {signupSuccess && (
-                  <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{signupSuccess}</div>
-                )}
-
-                <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                  <i className="fas fa-user auth-input-icon"></i>
-                  <label className="auth-floating-label">First Name *</label>
-                  <input
-                    type="text"
-                    className="auth-input-with-icon"
-                    placeholder="First Name *"
-                    value={fullName}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                      setFullName(value);
-                    }}
-                    onFocus={() => setFullNameFocused(true)}
-                    onBlur={() => setFullNameFocused(false)}
-                    required
-                    maxLength={50}
-                    disabled={signupLoading}
-                  />
-                </div>
-                {fieldErrors.fullName && (
-                  <div className="field-error-text">{fieldErrors.fullName}</div>
-                )}
-
-                <div className={`auth-input-icon-wrapper ${businessEmailFocused || businessEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                  <i className="fas fa-envelope auth-input-icon"></i>
-                  <label className="auth-floating-label">Business Email *</label>
-                  <input
-                    type="email"
-                    className="auth-input-with-icon"
-                    placeholder="Business Email *"
-                    value={businessEmail}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setBusinessEmail(value);
-                      
-                      // Clear validation error if corrected
-                      if (fieldErrors.businessEmail) {
-                        setFieldErrors(prev => {
-                          const newState = { ...prev };
-                          delete newState.businessEmail;
-                          return newState;
-                        });
-                      }
-
-                      // Reset verification if email changes
-                      if (emailVerified) {
-                        setEmailVerified(false);
-                        setOtpSent(false);
-                        setOtp('');
-                      }
-                    }}
-                    onFocus={() => setBusinessEmailFocused(true)}
-                    onBlur={() => {
-                      setBusinessEmailFocused(false);
-                      if (businessEmail) {
-                        const freeDomains = [
-                          'gmail.com', 'googlemail.com',
-                          'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
-                          'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
-                          'icloud.com', 'me.com', 'mac.com',
-                          'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
-                          'mail.com', 'email.com', 'post.com', 'usa.com',
-                          'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com',
-                          'tutanota.com', 'tuta.com'
-                        ];
-                        const domain = businessEmail.split('@')[1]?.toLowerCase();
-                        if (freeDomains.includes(domain)) {
-                          setFieldErrors(prev => ({ ...prev, businessEmail: 'Please use your business email address.' }));
-                        } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(businessEmail)) {
-                           // Clear format error if valid business email
-                           setFieldErrors(prev => {
-                             const newState = { ...prev };
-                             delete newState.businessEmail;
-                             return newState;
-                           });
-                        }
-                      }
-                    }}
-                    required
-                    maxLength={100}
-                    disabled={signupLoading}
-                    style={emailVerified ? { backgroundColor: '#f0fdf4', borderColor: '#16a34a' } : {}}
-                  />
-                </div>
-                {fieldErrors.businessEmail && (
-                  <div className="field-error-text">{fieldErrors.businessEmail}</div>
-                )}
-
-                {/* Email Verification Section */}
-                {businessEmail && !emailVerified && (
-                  <div style={{
-                    marginBottom: '1.5rem',
-                    padding: '1rem',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    backgroundColor: '#f9f9f9'
-                  }}>
-                    <div style={{ marginBottom: '0.5rem', fontSize: '14px', fontWeight: '500', color: '#333', textAlign: 'center' }}>
-                      Verify your email
-                    </div>
-
-                    {fieldErrors.otp && (
-                      <div className="field-error-text" style={{ marginBottom: '0.5rem', textAlign: 'center' }}>
-                        {fieldErrors.otp}
-                      </div>
-                    )}
-
-                    {/* OTP Success Message - removed for cleaner UI */}
-
-                    {!otpSent ? (
-                      <button
-                        type="button"
-                        onClick={handleSendOtp}
-                        disabled={sendingOtp || !businessEmail}
-                        style={{
-                          width: '100%',
-                          padding: '10px',
-                          backgroundColor: '#7c3aed',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: sendingOtp || !businessEmail ? 'not-allowed' : 'pointer',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          opacity: sendingOtp || !businessEmail ? 0.6 : 1
-                        }}
-                      >
-                        {sendingOtp ? 'Sending OTP...' : 'Send OTP'}
-                      </button>
-                    ) : (
-                      <div>
-                        <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`} style={{ marginBottom: '0.5rem' }}>
-                          <i className="fas fa-key auth-input-icon"></i>
-                          <label className="auth-floating-label">Enter 6-digit OTP</label>
-                          <input
-                            type="text"
-                            className="auth-input-with-icon"
-                            placeholder="Enter 6-digit OTP"
-                            value={otp}
-                            onChange={(e) => {
-                              const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                              setOtp(value);
-                              setFieldErrors(prev => ({ ...prev, otp: '' }));
-                            }}
-                            onFocus={() => setOtpFocused(true)}
-                            onBlur={() => setOtpFocused(false)}
-                            maxLength={6}
-                            disabled={verifyingOtp || emailVerified}
-                            style={{ textAlign: 'center', fontSize: '16px', letterSpacing: '4px' }}
-                          />
-                        </div>
-                        <OtpCountdown
-                          expiresAtMs={otpExpiresAtMs}
-                          onExpire={() => setOtpExpired(true)}
-                        />
-                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                          <button
-                            type="button"
-                            onClick={handleVerifyOtp}
-                            disabled={verifyingOtp || otp.length !== 6 || emailVerified || otpExpired}
-                            style={{
-                              flex: 1,
-                              padding: '10px',
-                              backgroundColor: '#7c3aed',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '6px',
-                              cursor: verifyingOtp || otp.length !== 6 || emailVerified ? 'not-allowed' : 'pointer',
-                              fontSize: '14px',
-                              fontWeight: '500',
-                              opacity: verifyingOtp || otp.length !== 6 || emailVerified ? 0.6 : 1
-                            }}
-                          >
-                            {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleSendOtp}
-                            disabled={isResendLocked}
-                            style={{
-                              padding: '10px 15px',
-                              backgroundColor: '#f5f5f5',
-                              color: '#333',
-                              border: '1px solid #ddd',
-                              borderRadius: '6px',
-                              cursor: isResendLocked ? 'not-allowed' : 'pointer',
-                              fontSize: '14px',
-                              fontWeight: '500',
-                              opacity: isResendLocked ? 0.6 : 1
-                            }}
-                          >
-                            {sendingOtp ? 'Resending...' : 'Resend'}
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Email Verified Banner - removed for cleaner UI as the field indicates success */}
-
-                {emailVerified && (
-                  <div className="registration-details-section" style={{ marginTop: '0.75rem' }} data-aos="fade-up">
-                    <div className={`auth-input-icon-wrapper ${organizationNameFocused || organizationName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                      <i className="fas fa-building auth-input-icon"></i>
-                      <label className="auth-floating-label">Organization Name *</label>
-                      <input
-                        type="text"
-                        className="auth-input-with-icon"
-                        placeholder="Organization Name *"
-                        value={organizationName}
-                        onChange={(e) => setOrganizationName(e.target.value)}
-                        onFocus={() => setOrganizationNameFocused(true)}
-                        onBlur={() => setOrganizationNameFocused(false)}
-                        required
-                        maxLength={100}
-                        disabled={signupLoading || !emailVerified}
-                      />
-                    </div>
-                    {fieldErrors.organizationName && (
-                      <div className="field-error-text">{fieldErrors.organizationName}</div>
-                    )}
-                  </div>
-                )}
-
-                <div className={`auth-input-icon-wrapper ${passwordFocused || password ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem', marginTop: emailVerified ? '0' : '0.75rem' }}>
-                  <i className="fas fa-lock auth-input-icon"></i>
-                  <label className="auth-floating-label">Password *</label>
-                  <div style={{ position: 'relative' }}>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="auth-input-with-icon"
-                      placeholder="Password *"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      minLength={6}
-                      maxLength={12}
-                      required
-                      disabled={signupLoading || !emailVerified}
-                      onFocus={() => {
-                        setPasswordFocused(true);
-                      }}
-                      onBlur={() => setPasswordFocused(false)}
-                      style={{ paddingRight: '45px' }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      disabled={signupLoading || !emailVerified}
-                      style={{
-                        position: 'absolute',
-                        right: '12px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                        cursor: (signupLoading || !emailVerified) ? 'not-allowed' : 'pointer',
-                        color: '#666',
-                        fontSize: '18px',
-                        padding: '5px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        opacity: (signupLoading || !emailVerified) ? 0.5 : 1
-                      }}
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                      <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                    </button>
-                  </div>
-                </div>
-                {fieldErrors.password && (
-                  <div className="field-error-text">{fieldErrors.password}</div>
-                )}
-
-                {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
-                  <div style={{
-                    marginTop: '0.5rem',
-                    marginBottom: '1rem',
-                    border: '1px solid #fee2e2',
-                    borderRadius: '8px',
-                    padding: '0.6rem 0.75rem',
-                    backgroundColor: '#fffafb'
-                  }}>
-                    <div style={{ color: '#e53e3e', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.25rem' }}>
-                      Password requirements:
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                      {unmetPasswordRequirements.map((req) => (
-                        <div
-                          key={req.id}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.35rem',
-                            color: '#e53e3e',
-                            fontSize: '0.8rem',
-                          }}
-                        >
-                          <span style={{ fontWeight: 700 }}>•</span>
-                          <span>{req.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                  <i className="fas fa-lock auth-input-icon"></i>
-                  <label className="auth-floating-label">Confirm Password *</label>
-                  <div style={{ position: 'relative' }}>
-                    <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      className="auth-input-with-icon"
-                      placeholder="Confirm Password *"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      minLength={6}
-                      maxLength={12}
-                      required
-                      disabled={signupLoading || !emailVerified}
-                      onFocus={() => setConfirmPasswordFocused(true)}
-                      onBlur={() => setConfirmPasswordFocused(false)}
-                      style={{ paddingRight: '45px' }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      disabled={signupLoading || !emailVerified}
-                      style={{
-                        position: 'absolute',
-                        right: '12px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                        cursor: (signupLoading || !emailVerified) ? 'not-allowed' : 'pointer',
-                        color: '#666',
-                        fontSize: '18px',
-                        padding: '5px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        opacity: (signupLoading || !emailVerified) ? 0.5 : 1
-                      }}
-                      aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-                    >
-                      <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                    </button>
-                  </div>
-                </div>
-                {(fieldErrors.confirmPassword || (confirmPassword && password !== confirmPassword)) && (
-                  <div className="field-error-text">
-                    {fieldErrors.confirmPassword || 'Passwords do not match'}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="auth-primary-btn"
-                  disabled={
-                    signupLoading ||
-                    !fullName ||
-                    !businessEmail ||
-                    !organizationName ||
-                    !password ||
-                    !confirmPassword ||
-                    password !== confirmPassword ||
-                    !passwordRegex.test(password) ||
-                    !emailVerified
-                  }
-                  style={{
-                    width: '100%',
-                    padding: '10px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
-                  }}
-                >
-                  {signupLoading ? 'Creating account...' : 'REGISTER'}
-                </button>
-
-                <div style={{ marginTop: '0.25rem', textAlign: 'center' }}>
-                  <p style={{ color: '#666', fontSize: '14px' }}>
-                    Already have an account?{' '}
-                    <Link
-                      to="/login"
-                      style={{
-                        color: '#7c3aed',
-                        textDecoration: 'none',
-                        fontWeight: '600',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      Login here
-                    </Link>
-                  </p>
-                </div>
-              </form>
+    <div className="auth-split-page">
+      {/* Left Side: Illustration and Intro */}
+      <div className="auth-left-side">
+        <div className="left-branded-header" data-aos="fade-down">
+          <div className="brand-logo-group">
+            <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+            <div className="brand-text-container">
+              <span className="brand-name-text">VerifiHireAI</span>
+              <p className="brand-tagline">Trust in Every Hire</p>
             </div>
           </div>
         </div>
-      </main>
-    </>
+
+        <div className="left-intro-content" data-aos="fade-right" style={{ marginTop: '0.5rem' }}>
+          <h1 className="left-intro-title">Create your account</h1>
+          <p className="left-intro-subtitle">
+            AI-Powered Hiring, Built on Trust and Precision.<br />
+            Sign up to manage assessments, view reports, and monitor candidate sessions.
+          </p>
+          <div className="left-intro-image-wrapper">
+            <img 
+              src="/register-illustration.png" 
+              alt="Hiring Illustration" 
+              className="left-intro-image"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side: Form */}
+      <div className="auth-right-side">
+        <div className="form-header-content" data-aos="fade-up">
+          <h2 className="form-header-title">Sign up</h2>
+          <p className="form-header-subtitle" style={{ marginBottom: '2.5rem' }}>Enter your account details</p>
+        </div>
+
+        <form className="auth-form" onSubmit={handleSignup} data-aos="fade-up" data-aos-delay="100">
+
+          {signupSuccess && (
+            <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{signupSuccess}</div>
+          )}
+
+          <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`}>
+            <i className="fas fa-user auth-input-icon"></i>
+            <input
+              type="text"
+              className="auth-input-with-icon"
+              placeholder="First Name *"
+              value={fullName}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                setFullName(value);
+              }}
+              onFocus={() => setFullNameFocused(true)}
+              onBlur={() => setFullNameFocused(false)}
+              required
+              maxLength={50}
+              disabled={signupLoading}
+            />
+            <label className="auth-floating-label">First Name *</label>
+          </div>
+          {fieldErrors.fullName && (
+            <div className="field-error-text">{fieldErrors.fullName}</div>
+          )}
+
+          <div className={`auth-input-icon-wrapper ${businessEmailFocused || businessEmail ? 'focused has-value' : ''}`}>
+            <i className="fas fa-envelope auth-input-icon"></i>
+            <input
+              type="email"
+              className="auth-input-with-icon"
+              placeholder="Business Email *"
+              value={businessEmail}
+              onChange={(e) => {
+                const value = e.target.value;
+                setBusinessEmail(value);
+                if (fieldErrors.businessEmail) {
+                  setFieldErrors(prev => {
+                    const newState = { ...prev };
+                    delete newState.businessEmail;
+                    return newState;
+                  });
+                }
+                if (emailVerified) {
+                  setEmailVerified(false);
+                  setOtpSent(false);
+                  setOtp('');
+                }
+              }}
+              onFocus={() => setBusinessEmailFocused(true)}
+              onBlur={() => {
+                setBusinessEmailFocused(false);
+                if (businessEmail) {
+                  const freeDomains = [
+                    'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.in', 'ymail.com', 'rocketmail.com',
+                    'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'icloud.com', 'me.com', 'mac.com',
+                    'aol.com', 'proton.me', 'protonmail.com', 'zoho.com', 'mail.com', 'email.com', 'post.com', 'usa.com',
+                    'yandex.com', 'gmx.com', 'gmx.net', 'fastmail.com', 'tutanota.com', 'tuta.com'
+                  ];
+                  const domain = businessEmail.split('@')[1]?.toLowerCase();
+                  if (freeDomains.includes(domain)) {
+                    setFieldErrors(prev => ({ ...prev, businessEmail: 'Please use your business email address.' }));
+                  }
+                }
+              }}
+              required
+              maxLength={100}
+              disabled={signupLoading}
+              style={emailVerified ? { backgroundColor: '#f0fdf4', borderColor: '#16a34a' } : {}}
+            />
+            <label className="auth-floating-label">Business Email *</label>
+          </div>
+          {fieldErrors.businessEmail && (
+            <div className="field-error-text">{fieldErrors.businessEmail}</div>
+          )}
+
+          {/* Email Verification Section */}
+          {businessEmail && !emailVerified && (
+            <div className="otp-verification-container" style={{
+              marginBottom: '1.5rem',
+              padding: '1.25rem',
+              border: '1px solid #edf2f7',
+              borderRadius: '12px',
+              backgroundColor: '#f8fafc'
+            }}>
+              <div style={{ marginBottom: '0.75rem', fontSize: '14px', fontWeight: '600', color: '#2d3748', textAlign: 'center' }}>
+                Verify your email
+              </div>
+
+              {fieldErrors.otp && (
+                <div className="field-error-text" style={{ marginBottom: '0.5rem', textAlign: 'center' }}>
+                  {fieldErrors.otp}
+                </div>
+              )}
+
+              {!otpSent ? (
+                <button
+                  type="button"
+                  className="auth-primary-btn"
+                  onClick={handleSendOtp}
+                  disabled={sendingOtp || !businessEmail}
+                  style={{ width: '100%', padding: '0.75rem' }}
+                >
+                  {sendingOtp ? 'Sending OTP...' : 'Send OTP'}
+                </button>
+              ) : (
+                <div>
+                  <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`} style={{ marginBottom: '0.5rem' }}>
+                    <i className="fas fa-key auth-input-icon"></i>
+                    <input
+                      type="text"
+                      className="auth-input-with-icon"
+                      placeholder="6-digit OTP"
+                      value={otp}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                        setOtp(value);
+                        setFieldErrors(prev => ({ ...prev, otp: '' }));
+                      }}
+                      onFocus={() => setOtpFocused(true)}
+                      onBlur={() => setOtpFocused(false)}
+                      maxLength={6}
+                      disabled={verifyingOtp || emailVerified}
+                      style={{ textAlign: 'center', fontSize: '1.25rem', letterSpacing: '4px' }}
+                    />
+                    <label className="auth-floating-label">Enter 6-digit OTP</label>
+                  </div>
+                  <OtpCountdown
+                    expiresAtMs={otpExpiresAtMs}
+                    onExpire={() => setOtpExpired(true)}
+                  />
+                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem' }}>
+                    <button
+                      type="button"
+                      className="auth-primary-btn"
+                      onClick={handleVerifyOtp}
+                      disabled={verifyingOtp || otp.length !== 6 || emailVerified || otpExpired}
+                      style={{ flex: 1, padding: '0.75rem' }}
+                    >
+                      {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-secondary-btn"
+                      onClick={handleSendOtp}
+                      disabled={isResendLocked}
+                      style={{ padding: '0.75rem 1rem' }}
+                    >
+                      {sendingOtp ? '...' : 'Resend'}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {emailVerified && (
+            <div className="registration-details-section" data-aos="fade-up">
+              <div className={`auth-input-icon-wrapper ${organizationNameFocused || organizationName ? 'focused has-value' : ''}`}>
+                <i className="fas fa-building auth-input-icon"></i>
+                <input
+                  type="text"
+                  className="auth-input-with-icon"
+                  placeholder="Organization Name *"
+                  value={organizationName}
+                  onChange={(e) => setOrganizationName(e.target.value)}
+                  onFocus={() => setOrganizationNameFocused(true)}
+                  onBlur={() => setOrganizationNameFocused(false)}
+                  required
+                  maxLength={100}
+                  disabled={signupLoading || !emailVerified}
+                />
+                <label className="auth-floating-label">Organization Name *</label>
+              </div>
+              {fieldErrors.organizationName && (
+                <div className="field-error-text">{fieldErrors.organizationName}</div>
+              )}
+            </div>
+          )}
+
+          <div className={`auth-input-icon-wrapper ${passwordFocused || password ? 'focused has-value' : ''}`}>
+            <i className="fas fa-lock auth-input-icon"></i>
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="auth-input-with-icon"
+                placeholder="Password *"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                maxLength={12}
+                required
+                disabled={signupLoading || !emailVerified}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+                style={{ paddingRight: '3rem' }}
+              />
+              <label className="auth-floating-label">Password *</label>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                disabled={signupLoading || !emailVerified}
+                className="password-toggle-btn"
+                style={{
+                  position: 'absolute',
+                  right: '0.75rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#9ca3af'
+                }}
+              >
+                <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
+          </div>
+          {fieldErrors.password && (
+            <div className="field-error-text">{fieldErrors.password}</div>
+          )}
+
+          {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
+            <div className="password-requirements-box" style={{
+              marginBottom: '1rem',
+              border: '1px solid #f1f5f9',
+              borderRadius: '12px',
+              padding: '0.875rem',
+              backgroundColor: '#f8fafc'
+            }}>
+              <div style={{ color: '#64748b', fontWeight: 600, fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                Password must include:
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.35rem' }}>
+                {unmetPasswordRequirements.map((req) => (
+                  <div key={req.id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    color: '#94a3b8',
+                    fontSize: '0.7rem',
+                  }}>
+                    <i className="fas fa-circle" style={{ fontSize: '0.5rem' }}></i>
+                    <span>{req.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`}>
+            <i className="fas fa-lock auth-input-icon"></i>
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                className="auth-input-with-icon"
+                placeholder="Confirm Password *"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                minLength={6}
+                maxLength={12}
+                required
+                disabled={signupLoading || !emailVerified}
+                onFocus={() => setConfirmPasswordFocused(true)}
+                onBlur={() => setConfirmPasswordFocused(false)}
+                style={{ paddingRight: '3rem' }}
+              />
+              <label className="auth-floating-label">Confirm Password *</label>
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                disabled={signupLoading || !emailVerified}
+                className="password-toggle-btn"
+                style={{
+                  position: 'absolute',
+                  right: '0.75rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#9ca3af'
+                }}
+              >
+                <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
+          </div>
+          {(fieldErrors.confirmPassword || (confirmPassword && password !== confirmPassword)) && (
+            <div className="field-error-text" style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.75rem', marginBottom: '1rem' }}>
+              {fieldErrors.confirmPassword || 'Passwords do not match'}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="auth-primary-btn"
+            disabled={
+              signupLoading ||
+              !fullName ||
+              !businessEmail ||
+              !organizationName ||
+              !password ||
+              !confirmPassword ||
+              password !== confirmPassword ||
+              !passwordRegex.test(password) ||
+              !emailVerified
+            }
+            style={{
+              width: '100%',
+              padding: '0.875rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+              marginTop: '1rem'
+            }}
+          >
+            {signupLoading ? 'Creating account...' : 'REGISTER'}
+          </button>
+          {signupError && (
+            <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{signupError}</div>
+          )}
+
+          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+            <p style={{ color: '#718096', fontSize: '0.9rem' }}>
+              Already have an account?{' '}
+              <Link to="/login" style={{ color: '#7c3aed', fontWeight: '700', textDecoration: 'none' }}>
+                Login here
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 

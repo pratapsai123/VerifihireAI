@@ -62,7 +62,6 @@ def send_custom_assessment_result_task(invitation_id):
             <div style="font-family: sans-serif; max-width: 600px;">
                 <h2 style="color: #2e7d32;">Congratulations, {inv.name}!</h2>
                 <p>You have successfully cleared the assessment for <strong>{inv.assessment.name}</strong>.</p>
-                <p><strong>Your Final Score:</strong> {submission.percentage}%</p>
                 <p>The next step is a live interview. Please use the button below to book your preferred slot:</p>
                 <div style="margin: 30px 0;">
                     <a href="{booking_link}" style="background-color: #4318FF; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Book Interview Slot</a>
@@ -135,7 +134,7 @@ def send_interview_confirmation_task(slot_id):
             logger.error(f"Slot {slot_id} has no invitation linked.")
             return
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         # Join links: /live-interview?token=<inv.token>
         candidate_link = f"{frontend_base}/live-interview?token={inv.token}"
         interviewer_link = f"{frontend_base}/live-interview-interviewer?token={inv.token}"
