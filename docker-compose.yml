@@ -1,40 +1,37 @@
-# docker-compose.yml
 version: '3.8'
 
 services:
-  # nginx:
-  #   image: public.ecr.aws/docker/library/nginx:1.25-alpine
-  #   container_name: verifyhire_nginx
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ./nginx/conf.d:/etc/nginx/conf.d
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #     - verifihireai_media:/app/media
-  #     # - ./backend/staticfiles:/app/staticfiles # Optional: map if collecting static locally
-  #   depends_on:
-  #     - redis
-  #   # Reload nginx every 6h to pick up new certs
-  #   command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  #   restart: unless-stopped
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
 
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: verifyhire_certbot
-  #   volumes:
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  nginx:
+    image: public.ecr.aws/docker/library/nginx:1.25-alpine
+    container_name: verifyhire_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./frontend/build:/usr/share/nginx/html   # 👈 important
+      - verifihireai_media:/app/media
+    depends_on:
+      - redis
+    restart: unless-stopped
+    command: /bin/sh -c "while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g 'daemon off;'"
+
+  certbot:
+    image: certbot/certbot
+    container_name: verifyhire_certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;"
 
   redis:
     image: public.ecr.aws/docker/library/redis:7-alpine
     container_name: verifyhire_redis
     ports:
-      - "6379:6379" # Exposed for local backend
+      - "6379:6379"
     restart: unless-stopped
 
   executor:
@@ -42,6 +39,8 @@ services:
       context: ./executor
     container_name: verifyhire_executor
     restart: unless-stopped
+    env_file:
+    - ./backend/.env
     environment:
       EXECUTOR_PORT: "4000"
       DEFAULT_TIME_LIMIT_MS: "3000"
@@ -63,8 +62,6 @@ services:
     volumes:
       - dind_data:/var/lib/docker
 
-
 volumes:
   verifihireai_media:
   dind_data:
-
