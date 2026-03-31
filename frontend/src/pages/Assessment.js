@@ -185,13 +185,13 @@ export default function Assessment() {
                 {pageItems.map((a) => {
                   const title = a.display_name || a.name || `Assessment #${a.id}`;
                   const roleText = (a.role || '').toString().trim();
-                  const shouldShowRole = roleText && roleText.toLowerCase() !== title.toString().trim().toLowerCase();
+                  const isManualPlaceholder = roleText.toLowerCase() === 'manual assessment';
+                  const shouldShowRole = roleText && !isManualPlaceholder && roleText.toLowerCase() !== title.toString().trim().toLowerCase();
                   const inviteLink = buildInviteLink(a.invite_token);
                   return (
                     <tr key={a.id}>
                       <td>
                         <div className="cell-title">{title}</div>
-                        {shouldShowRole ? <div className="cell-sub">{`Role: ${roleText}`}</div> : null}
                       </td>
                       <td>{(a.total_questions || 0) + (a.coding_question_count || 0)}</td>
                       <td>{a.total_time ?? '-'}</td>

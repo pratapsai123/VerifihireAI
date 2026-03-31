@@ -265,7 +265,8 @@
 }
 
 /* --- Action Buttons --- */
-.btn-report-dl, .btn-action-delete {
+.btn-report-dl,
+.btn-action-delete {
   background: white;
   border: 1px solid #E5E7EB;
   border-radius: 8px;
@@ -387,6 +388,7 @@
   inset: 0;
   background: rgba(17, 24, 39, 0.75);
   /* Darker overlay */
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
