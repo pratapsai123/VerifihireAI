@@ -18,29 +18,29 @@ function LiveInterview() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session';
-  
+
   const MY_ROLE = 'Candidate';
   const role = 'candidate';
   const sessionKey = `session_expired_${sessionId}`;
 
   const [candidateName] = useState('Candidate');
   const [interviewerName] = useState('Interviewer');
-  
+
   const [sessionExpired, setSessionExpired] = useState(false);
   const [bothPartiesConnected, setBothPartiesConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
-  
+
   const [chatPanelVisible, setChatPanelVisible] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatUnreadCount, setChatUnreadCount] = useState(0);
-  
+
   const [showThankYou, setShowThankYou] = useState(false);
   const [showFinalThankYou, setShowFinalThankYou] = useState(false);
   const [feedback, setFeedback] = useState('');
-  
+
   const [timer, setTimer] = useState('00:00:00');
   const startTimeRef = useRef(Date.now());
   const [cameraReady, setCameraReady] = useState(false);
@@ -104,10 +104,10 @@ function LiveInterview() {
         }
         break;
       case 'video_offer':
-        handleVideoOffer(data.offer);
+        handleVideoOffer(data.sdp);
         break;
       case 'video_answer':
-        handleVideoAnswer(data.answer);
+        handleVideoAnswer(data.sdp);
         break;
       case 'ice_candidate':
         handleIceCandidate(data.candidate);
@@ -151,17 +151,21 @@ function LiveInterview() {
         navigate(`/interview-terminated?session_id=${sessionId}&reason=${data.reason || 'Multiple violations'}`);
         break;
       case 'session_expired':
+        showSessionPopup(data.message || 'Session expired or already completed.', 'error');
         setSessionExpired(true);
         localStorage.setItem(sessionKey, 'true');
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
         break;
       default: break;
     }
   }, [interviewerName, chatPanelVisible, sessionId, sessionKey, navigate, showSessionPopup]);
 
-  const { socketRef, connectionStatus, connectionStatusText, setConnectionStatusText, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
+  const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
 
   const {
-    peerConnectionRef, localStreamRef, remoteStreamRef, 
+    peerConnectionRef, localStreamRef, remoteStreamRef,
     createPeerConnection, initLocalStream, addLocalTracksToPC,
     createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC
   } = useWebRTC(sendMessage);
@@ -184,6 +188,13 @@ function LiveInterview() {
     initLocalStream(true, true).then(stream => {
       setCameraReady(true);
       setMediaLoading(false);
+
+      // ✅ Fix: Assign local stream to video element
+      if (thumbnailVideoRef.current) {
+        console.log('🖼️ Setting local video srcObject');
+        thumbnailVideoRef.current.srcObject = stream;
+      }
+
       startDetection(showSessionPopup, () => {
         setShowThankYou(true);
         stopWebRTC();
@@ -194,26 +205,17 @@ function LiveInterview() {
           remoteVideoRef.current.srcObject = remoteStream;
         }
       });
-      
+
       pc.onconnectionstatechange = () => {
-        if (pc.connectionState === 'connected') setConnectionStatusText('Connected');
-        else if (pc.connectionState === 'failed') {
-          setConnectionStatusText('Connection failed');
-          setTimeout(() => {
-              if (peerConnectionRef.current?.connectionState === 'failed') {
-                  sendMessage({ type: 'request_offer' });
-              }
-          }, 2000);
-        }
+        // Status handled by ConnectionOverlay via connectionStatus
       };
 
       pc.oniceconnectionstatechange = () => {
         if (pc.iceConnectionState === 'failed' || pc.iceConnectionState === 'disconnected') {
-          setConnectionStatusText('Connection unstable - retrying...');
           setTimeout(() => {
-              if (peerConnectionRef.current?.iceConnectionState === 'failed' || peerConnectionRef.current?.iceConnectionState === 'disconnected') {
-                  sendMessage({ type: 'request_offer' });
-              }
+            if (peerConnectionRef.current?.iceConnectionState === 'failed' || peerConnectionRef.current?.iceConnectionState === 'disconnected') {
+              sendMessage({ type: 'request_offer' });
+            }
           }, 3000);
         }
       };
@@ -224,14 +226,14 @@ function LiveInterview() {
       setMediaError(true);
       showSessionPopup('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, startDetection, showSessionPopup, stopWebRTC, createPeerConnection, addLocalTracksToPC, sendMessage, setConnectionStatusText, peerConnectionRef]);
+  }, [initLocalStream, createPeerConnection, addLocalTracksToPC, sendMessage, showSessionPopup, peerConnectionRef, startDetection, stopWebRTC]);
 
   // Initialize WebRTC
   useEffect(() => {
     if (connectionStatus === 'Connected' && !localStreamRef.current && !sessionExpired && mediaLoading) {
       initializeMedia();
     }
-  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia]); 
+  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia]);
 
   // Handle chat sending
   const handleChatSend = useCallback((msgText) => {
@@ -257,10 +259,10 @@ function LiveInterview() {
     if (!localStreamRef.current) return;
     const newCameraOn = !isCameraOn;
     setIsCameraOn(newCameraOn);
-    
+
     // Explicitly toggle video tracks
     localStreamRef.current.getVideoTracks().forEach(track => {
-        track.enabled = newCameraOn;
+      track.enabled = newCameraOn;
     });
 
     if (newCameraOn) startDetection(showSessionPopup);
@@ -276,7 +278,7 @@ function LiveInterview() {
   }, [sendMessage, stopWebRTC]);
 
   const handleFeedbackSubmit = () => {
-    fetch(`${API_BASE_URL}/submit-interview-feedback/`, { 
+    fetch(`${API_BASE_URL}/submit-interview-feedback/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: sessionId, feedback, role: 'candidate' })
@@ -300,11 +302,11 @@ function LiveInterview() {
     };
 
     const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && ['c','v','a','z','y','f','p'].includes(e.key.toLowerCase())) {
+      if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'a', 'z', 'y', 'f', 'p'].includes(e.key.toLowerCase())) {
         e.preventDefault();
         showSessionPopup('⚠️ Keyboard shortcuts are disabled during interview.', 'error');
       }
-      if (['F12','F11','F10','F9'].includes(e.key)) {
+      if (['F11', 'F10', 'F9'].includes(e.key)) {
         e.preventDefault();
         showSessionPopup('⚠️ Function keys are disabled during interview.', 'error');
       }
@@ -345,22 +347,18 @@ function LiveInterview() {
 
   if (showThankYou) {
     return (
-      <div className="thank-you-screen">
-        <h2>Interview Completed!</h2>
-        <div className="feedback-form" style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
-            <textarea 
-                value={feedback} 
-                onChange={e => setFeedback(e.target.value)} 
-                placeholder="How was your experience?" 
-                rows="4"
-                style={{ width: '100%', padding: '10px', marginTop: '20px' }}
-            />
-            <button 
-                onClick={handleFeedbackSubmit}
-                style={{ padding: '10px 20px', marginTop: '10px', cursor: 'pointer' }}
-            >
-                Submit
-            </button>
+      <div className="feedback-overlay">
+        <div className="feedback-modal">
+          <h2>Interview Completed 🎉</h2>
+          <p>We’d love your feedback</p>
+          <textarea
+            value={feedback}
+            onChange={e => setFeedback(e.target.value)}
+            placeholder="How was your experience?"
+          />
+          <button className="btn-submit" onClick={handleFeedbackSubmit}>
+            Submit Feedback
+          </button>
         </div>
       </div>
     );
@@ -368,82 +366,82 @@ function LiveInterview() {
 
   return (
     <ErrorBoundary>
-    <div className={`live-interview ${chatPanelVisible ? 'chat-active' : ''}`}>
-      <div className="notifications-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 9999 }}>
-        {notifications.map(n => (
-          <div key={n.id} className={`session-popup ${n.severity}`} style={{ marginBottom: '10px', padding: '10px', background: '#333', color: '#fff', borderRadius: '5px' }}>
-            {n.message}
+      <div className={`live-interview ${chatPanelVisible ? 'chat-active' : ''}`}>
+        <div className="notifications-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 9999 }}>
+          {notifications.map(n => (
+            <div key={n.id} className={`session-popup ${n.severity}`} style={{ marginBottom: '10px', padding: '10px', background: '#333', color: '#fff', borderRadius: '5px' }}>
+              {n.message}
+            </div>
+          ))}
+        </div>
+
+        <header className="live-interview-header">
+          <div className="header-left"><h1>Live Interview</h1></div>
+          <div className="header-controls"><div className="timer">{timer}</div></div>
+        </header>
+
+        <div className="main-wrapper">
+          <div className="video-container">
+            <ConnectionOverlay status={connectionStatus} />
+
+            {mediaLoading && !mediaError && (
+              <div className="connection-overlay" style={{ background: 'rgba(0,0,0,0.8)', zIndex: 50 }}>
+                <i className="fas fa-video spinner"></i>
+                <h3>Accessing Camera & Microphone...</h3>
+                <p>Please allow permissions when prompted.</p>
+              </div>
+            )}
+
+            {mediaError && (
+              <div className="connection-overlay" style={{ background: 'rgba(15,23,42,0.95)', zIndex: 100 }}>
+                <i className="fas fa-exclamation-circle" style={{ color: '#ef4444', fontSize: '48px', marginBottom: '20px' }}></i>
+                <h3>Camera or Microphone Blocked</h3>
+                <p style={{ maxWidth: '400px', marginBottom: '20px' }}>We couldn't access your camera or microphone. Please check your browser permissions and try again.</p>
+                <button
+                  onClick={initializeMedia}
+                  style={{ padding: '10px 24px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}
+                >
+                  Retry Permissions
+                </button>
+              </div>
+            )}
+
+            <VideoPanel
+              remoteVideoRef={remoteVideoRef}
+              localVideoRef={thumbnailVideoRef}
+              isRemoteCameraOn={isRemoteCameraOn}
+              isRemoteScreenSharing={isRemoteScreenSharing}
+              bothPartiesConnected={bothPartiesConnected}
+              isCameraOn={isCameraOn}
+              remoteName={interviewerName}
+              localName={candidateName}
+            />
           </div>
-        ))}
-      </div>
 
-      <header className="live-interview-header">
-        <div className="header-left"><h1>Live Interview</h1></div>
-        <div className="header-controls"><div className="timer">{timer}</div></div>
-      </header>
-
-      <div className="main-wrapper">
-        <div className="video-container">
-          <ConnectionOverlay status={connectionStatus} statusText={connectionStatusText} />
-          
-          {mediaLoading && !mediaError && (
-            <div className="connection-overlay" style={{ background: 'rgba(0,0,0,0.8)', zIndex: 50 }}>
-              <i className="fas fa-video spinner"></i>
-              <h3>Accessing Camera & Microphone...</h3>
-              <p>Please allow permissions when prompted.</p>
-            </div>
-          )}
-
-          {mediaError && (
-            <div className="connection-overlay" style={{ background: 'rgba(15,23,42,0.95)', zIndex: 100 }}>
-              <i className="fas fa-exclamation-circle" style={{ color: '#ef4444', fontSize: '48px', marginBottom: '20px' }}></i>
-              <h3>Camera or Microphone Blocked</h3>
-              <p style={{ maxWidth: '400px', marginBottom: '20px' }}>We couldn't access your camera or microphone. Please check your browser permissions and try again.</p>
-              <button 
-                onClick={initializeMedia}
-                style={{ padding: '10px 24px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}
-              >
-                Retry Permissions
-              </button>
-            </div>
-          )}
-          
-          <VideoPanel 
-            remoteVideoRef={remoteVideoRef}
-            localVideoRef={thumbnailVideoRef}
-            isRemoteCameraOn={isRemoteCameraOn}
-            isRemoteScreenSharing={isRemoteScreenSharing}
-            bothPartiesConnected={bothPartiesConnected}
-            isCameraOn={isCameraOn}
-            remoteName={interviewerName}
-            localName={candidateName}
+          <ChatPanel
+            chatPanelVisible={chatPanelVisible}
+            setChatPanelVisible={setChatPanelVisible}
+            chatMessages={chatMessages}
+            onSendMessage={handleChatSend}
           />
         </div>
 
-        <ChatPanel 
+        <ControlBar
+          isMuted={isMuted}
+          isCameraOn={isCameraOn}
+          isScreenSharing={isScreenSharing}
           chatPanelVisible={chatPanelVisible}
+          chatUnreadCount={chatUnreadCount}
+          MY_ROLE={MY_ROLE}
+          screenShareLocked={screenShareLocked}
+          screenShareHolder={screenShareHolder}
+          toggleMic={toggleMic}
+          toggleCamera={toggleCamera}
+          toggleScreenShare={toggleScreenShare}
           setChatPanelVisible={setChatPanelVisible}
-          chatMessages={chatMessages}
-          onSendMessage={handleChatSend}
+          handleEndInterview={handleEndInterview}
         />
       </div>
-
-      <ControlBar 
-        isMuted={isMuted}
-        isCameraOn={isCameraOn}
-        isScreenSharing={isScreenSharing}
-        chatPanelVisible={chatPanelVisible}
-        chatUnreadCount={chatUnreadCount}
-        MY_ROLE={MY_ROLE}
-        screenShareLocked={screenShareLocked}
-        screenShareHolder={screenShareHolder}
-        toggleMic={toggleMic}
-        toggleCamera={toggleCamera}
-        toggleScreenShare={toggleScreenShare}
-        setChatPanelVisible={setChatPanelVisible}
-        handleEndInterview={handleEndInterview}
-      />
-    </div>
     </ErrorBoundary>
   );
 }
