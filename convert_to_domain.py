@@ -8,13 +8,17 @@ import re
 from pathlib import Path
 
 # Define files to modify
-FILES_TO_MODIFY = [
-    "backend/VerifiHireAI_backend/settings.py",
-    "backend/ai_candidates/views.py",
-    "backend/api/views",
-    "backend/ai_assessments/views.py",
-    "backend/README.md",
+TARGET_FILES = [
     "README.md",
+    "backend/README.md",
+    "backend/VerifiHireAI_backend/settings.py",
+    "backend/ai_assessments/views.py",
+    "backend/ai_candidates/views.py",
+    "backend/api/pipeline.py",
+    "backend/api/tasks.py",
+    "backend/api/views/candidate_assessment_views.py",
+    "backend/api/views/live_interview_views.py",
+    "backend/api/views/user_views.py",
     "frontend/README.md",
 ]
 
@@ -25,6 +29,8 @@ REPLACEMENTS = [
     ("http://localhost:3001", "https://verifihireai.com"),
     ("http://127.0.0.1:3001", "https://verifihireai.com"),
     ("http://192.168.1.22:3001", "https://verifihireai.com"),
+    # Handle www variant
+    ("http://localhost:3000", "https://www.verifihireai.com"),
 ]
 
 def convert_files(to_local=False):
@@ -43,15 +49,15 @@ def convert_files(to_local=False):
     
     # Expand directories if any
     all_files = []
-    for file_path in FILES_TO_MODIFY:
+    for file_path in TARGET_FILES:
         full_path = base_dir / file_path
         if not full_path.exists():
             print(f"File/Directory not found: {file_path}")
             continue
             
         if full_path.is_dir():
-            # Include all .py and .md files in the directory recursively
-            for ext in ['*.py', '*.md']:
+            # Include .py, .md and .js files in the directory recursively
+            for ext in ['*.py', '*.md', '*.js']:
                 for p in full_path.rglob(ext):
                     all_files.append(p.relative_to(base_dir).as_posix())
         else:
