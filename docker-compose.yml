@@ -39,8 +39,8 @@ services:
       context: ./executor
     container_name: verifyhire_executor
     restart: unless-stopped
-    env_file:
-    - ./backend/.env
+    # env_file:
+    # - ./backend/.env
     environment:
       EXECUTOR_PORT: "4000"
       DEFAULT_TIME_LIMIT_MS: "3000"
