@@ -17,17 +17,9 @@ def job_role_list_create_view(request):
     
     if request.method == 'GET':
         if user_profile and user_profile.company:
-            scoped_ids = get_scoped_user_ids(user_profile)
-            if scoped_ids is None:
-                # App Admin
-                roles = JobRole.objects.filter(company=user_profile.company, is_deleted=False)
-            else:
-                # Scoped: only roles created by users in this user's reporting hierarchy
-                roles = JobRole.objects.filter(
-                    company=user_profile.company,
-                    created_by_id__in=scoped_ids,
-                    is_deleted=False
-                )
+            # RELAXED VISIBILITY: Show all roles belonging to the company.
+            # This ensures that Recruiters and HR Managers can see roles created by administrators.
+            roles = JobRole.objects.filter(company=user_profile.company, is_deleted=False)
         else:
             roles = JobRole.objects.filter(is_deleted=False)
             

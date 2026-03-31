@@ -1068,7 +1068,7 @@ class ProcessAnswerView(APIView):
             # Strip any leaked category labels like "JD-Q1:", "RESUME-SKILL-Q2:", "PROJECT-Q1" etc.
             import re
             _label_pattern = re.compile(
-                r'\b(?:JD|RESUME[- ]?SKILL|PROJECT|SCENARIO|SYNTAX|INTRO)[- ]?Q?\d*[:\.\-—]*\s*',
+                r'\b(?:JD|RESUME[- ]?SKILL|PROJECT|SCENARIO|SYNTAX|INTRO)\b[- ]?Q?\d*[:\.\-—]*\s*',
                 re.IGNORECASE
             )
             for field in ('feedback', 'refined_next_question'):
