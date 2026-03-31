@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detection Demo Recording</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0B1F3A;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 480px;
+    height: 480px;
+    overflow: hidden;
+  }
+
+  .monitor {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #0B1F3A;
+  }
+
+  /* --- TOP BAR --- */
+  .topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 22px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 12px #10B981;
+    transition: all 0.5s ease;
+  }
+
+  .status-dot.red {
+    background: #DC2626;
+    box-shadow: 0 0 12px #DC2626;
+  }
+
+  .status-dot.yellow {
+    background: #F59E0B;
+    box-shadow: 0 0 12px #F59E0B;
+  }
+
+  .status-text {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #10B981;
+    transition: color 0.5s ease;
+  }
+
+  .topbar-right {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* --- CANDIDATE VIEW (simulated webcam) --- */
+  .cam-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .cam-view img {
+    width: 65%;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 30px rgba(37,99,235,0.3));
+  }
+
+  /* --- SCANNING OVERLAY --- */
+  .scan-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.6), transparent);
+    animation: scanDown 4s linear infinite;
+  }
+
+  @keyframes scanDown {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  /* --- FACE BOX --- */
+  .face-box {
+    position: absolute;
+    top: 18%;
+    left: 28%;
+    width: 44%;
+    height: 55%;
+    border: 2px solid rgba(16,185,129,0.5);
+    border-radius: 8px;
+    z-index: 10;
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+
+  .face-box.visible { opacity: 1; }
+  .face-box.alert { border-color: #DC2626; box-shadow: 0 0 20px rgba(220,38,38,0.3); }
+  .face-box.warning { border-color: #F59E0B; }
+
+  .face-label {
+    position: absolute;
+    top: -28px;
+    left: 0;
+    background: rgba(16,185,129,0.85);
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: background 0.5s ease;
+  }
+
+  .face-box.alert .face-label { background: rgba(220,38,38,0.85); }
+  .face-box.warning .face-label { background: rgba(245,158,11,0.85); }
+
+  /* --- SECOND FACE BOX (for multiple face detection) --- */
+  .face-box-2 {
+    position: absolute;
+    top: 35%;
+    right: 10%;
+    width: 20%;
+    height: 25%;
+    border: 2px solid #DC2626;
+    border-radius: 6px;
+    z-index: 10;
+    opacity: 0;
+    box-shadow: 0 0 15px rgba(220,38,38,0.3);
+    transition: opacity 0.5s ease;
+  }
+
+  .face-box-2-label {
+    position: absolute;
+    top: -22px;
+    left: 0;
+    background: rgba(220,38,38,0.9);
+    color: white;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  .face-box-2.visible { opacity: 1; }
+
+  /* --- PHONE ICON --- */
+  .phone-indicator {
+    position: absolute;
+    bottom: 36%;
+    right: 15%;
+    width: 48px;
+    height: 80px;
+    border: 3px solid #DC2626;
+    border-radius: 10px;
+    z-index: 12;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(220,38,38,0.4);
+    transition: opacity 0.6s ease;
+    background: rgba(220,38,38,0.05);
+  }
+
+  .phone-indicator.visible { opacity: 1; }
+
+  .phone-indicator::after {
+    content: '📱';
+    font-size: 22px;
+  }
+
+  .phone-label {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #DC2626;
+    color: white;
+    font-size: 8px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  /* --- TAB SWITCH OVERLAY --- */
+  .tab-switch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 14;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .tab-switch-overlay.visible { opacity: 1; }
+
+  .tab-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .tab-text {
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .tab-sub {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  /* --- ALERT BANNER --- */
+  .alert-banner {
+    position: absolute;
+    bottom: 70px;
+    left: 16px;
+    right: 16px;
+    z-index: 30;
+    padding: 16px 20px;
+    border-radius: 14px;
+    backdrop-filter: blur(15px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .alert-banner.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .alert-banner.danger {
+    background: rgba(220, 38, 38, 0.2);
+    border: 1px solid rgba(220, 38, 38, 0.5);
+  }
+
+  .alert-banner.warning {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+  }
+
+  .alert-banner.info {
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.4);
+  }
+
+  .alert-banner.success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+  }
+
+  .alert-title {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .alert-msg {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  /* --- BOTTOM BAR --- */
+  .bottombar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 22px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .metric {
+    text-align: center;
+  }
+
+  .metric-val {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .metric-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* --- INCIDENT COUNTER --- */
+  .incident-count {
+    transition: all 0.3s ease;
+  }
+
+  .incident-count.red {
+    color: #DC2626;
+  }
+</style>
+</head>
+<body>
+
+<div class="monitor">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="status-dot" id="statusDot"></div>
+      <span class="status-text" id="statusText">MONITORING</span>
+    </div>
+    <div class="topbar-right">VERIFIHIREAI MONITOR</div>
+  </div>
+
+  <!-- Candidate View -->
+  <div class="cam-view">
+    <img src="/hero-ai-persona.png" alt="AI Persona" id="camImg">
+  </div>
+
+  <!-- Scanning Line -->
+  <div class="scan-overlay">
+    <div class="scan-line"></div>
+  </div>
+
+  <!-- Face Detection Box -->
+  <div class="face-box" id="faceBox">
+    <span class="face-label" id="faceLabel">FACE DETECTED</span>
+  </div>
+
+  <!-- Second Face Box -->
+  <div class="face-box-2" id="faceBox2">
+    <span class="face-box-2-label">UNKNOWN</span>
+  </div>
+
+  <!-- Phone Indicator -->
+  <div class="phone-indicator" id="phoneInd">
+    <span class="phone-label">PHONE</span>
+  </div>
+
+  <!-- Tab Switch Overlay -->
+  <div class="tab-switch-overlay" id="tabOverlay">
+    <div class="tab-icon">🖥️</div>
+    <div class="tab-text">Tab Switch Detected</div>
+    <div class="tab-sub">Candidate left the interview window</div>
+  </div>
+
+  <!-- Alert Banner -->
+  <div class="alert-banner" id="alertBanner">
+    <span class="alert-title" id="alertTitle"></span>
+    <span class="alert-msg" id="alertMsg"></span>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottombar">
+    <div class="metric">
+      <span class="metric-val">98.7%</span>
+      <span class="metric-label">Accuracy</span>
+    </div>
+    <div class="metric">
+      <span class="metric-val">0.3s</span>
+      <span class="metric-label">Response</span>
+    </div>
+    <div class="metric">
+      <span class="metric-val incident-count" id="incidentCount">0</span>
+      <span class="metric-label">Incidents</span>
+    </div>
+    <div class="metric">
+      <span class="metric-val" id="timerVal">00:00</span>
+      <span class="metric-label">Elapsed</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const dot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const faceBox = document.getElementById('faceBox');
+  const faceLabel = document.getElementById('faceLabel');
+  const faceBox2 = document.getElementById('faceBox2');
+  const phoneInd = document.getElementById('phoneInd');
+  const tabOverlay = document.getElementById('tabOverlay');
+  const alertBanner = document.getElementById('alertBanner');
+  const alertTitle = document.getElementById('alertTitle');
+  const alertMsg = document.getElementById('alertMsg');
+  const incidentCount = document.getElementById('incidentCount');
+  const timerVal = document.getElementById('timerVal');
+  const camImg = document.getElementById('camImg');
+
+  let incidents = 0;
+
+  function resetAll() {
+    dot.className = 'status-dot';
+    statusText.style.color = '#10B981';
+    statusText.textContent = 'MONITORING';
+    faceBox.className = 'face-box';
+    faceLabel.textContent = 'FACE DETECTED';
+    faceBox2.className = 'face-box-2';
+    phoneInd.className = 'phone-indicator';
+    tabOverlay.className = 'tab-switch-overlay';
+    alertBanner.className = 'alert-banner';
+    camImg.style.opacity = '0.5';
+    camImg.style.transform = 'translateX(0)';
+  }
+
+  function showAlert(type, title, msg) {
+    alertBanner.className = `alert-banner ${type} visible`;
+    alertTitle.textContent = title;
+    alertMsg.textContent = msg;
+  }
+
+  function hideAlert() {
+    alertBanner.className = 'alert-banner';
+  }
+
+  function updateTimer(sec) {
+    const m = Math.floor(sec / 60).toString().padStart(2, '0');
+    const s = (sec % 60).toString().padStart(2, '0');
+    timerVal.textContent = `${m}:${s}`;
+  }
+
+  // Timeline of events (time in ms from start)
+  const timeline = [
+    // 0-4s: Normal monitoring, face detected
+    { t: 500, fn: () => {
+      faceBox.className = 'face-box visible';
+      faceLabel.textContent = 'FACE DETECTED';
+      showAlert('success', '✓ IDENTITY VERIFIED', 'Candidate face matched with registered photo.');
+    }},
+    { t: 3500, fn: () => hideAlert() },
+
+    // 4-9s: Phone detected
+    { t: 5000, fn: () => {
+      phoneInd.className = 'phone-indicator visible';
+      dot.className = 'status-dot red';
+      statusText.style.color = '#DC2626';
+      statusText.textContent = 'ALERT';
+      faceBox.className = 'face-box visible alert';
+      faceLabel.textContent = 'VIOLATION';
+      incidents++;
+      incidentCount.textContent = incidents;
+      incidentCount.className = 'metric-val incident-count red';
+      showAlert('danger', '⚠ PHONE DETECTED', 'Mobile device detected in camera frame. Incident flagged and recorded.');
+    }},
+    { t: 9000, fn: () => {
+      phoneInd.className = 'phone-indicator';
+      hideAlert();
+      dot.className = 'status-dot';
+      statusText.style.color = '#10B981';
+      statusText.textContent = 'MONITORING';
+      faceBox.className = 'face-box visible';
+      faceLabel.textContent = 'FACE DETECTED';
+    }},
+
+    // 10-14s: Looking away
+    { t: 10500, fn: () => {
+      camImg.style.transform = 'translateX(40px) rotate(8deg)';
+      camImg.style.transition = 'all 0.8s ease';
+      dot.className = 'status-dot yellow';
+      statusText.style.color = '#F59E0B';
+      statusText.textContent = 'WARNING';
+      faceBox.className = 'face-box visible warning';
+      faceLabel.textContent = 'LOOK AWAY';
+      showAlert('warning', '👁 CANDIDATE LOOKING AWAY', 'Please face the camera directly to continue the interview.');
+    }},
+    { t: 14000, fn: () => {
+      camImg.style.transform = 'translateX(0) rotate(0)';
+      hideAlert();
+      dot.className = 'status-dot';
+      statusText.style.color = '#10B981';
+      statusText.textContent = 'MONITORING';
+      faceBox.className = 'face-box visible';
+      faceLabel.textContent = 'FACE DETECTED';
+    }},
+
+    // 15-20s: Tab switch
+    { t: 16000, fn: () => {
+      tabOverlay.className = 'tab-switch-overlay visible';
+      dot.className = 'status-dot red';
+      statusText.style.color = '#DC2626';
+      statusText.textContent = 'ALERT';
+      incidents++;
+      incidentCount.textContent = incidents;
+      showAlert('danger', '🖥 TAB SWITCH DETECTED', 'Candidate switched browser tab. Incident logged and reported.');
+    }},
+    { t: 20000, fn: () => {
+      tabOverlay.className = 'tab-switch-overlay';
+      hideAlert();
+      dot.className = 'status-dot';
+      statusText.style.color = '#10B981';
+      statusText.textContent = 'MONITORING';
+    }},
+
+    // 21-26s: Multiple faces
+    { t: 22000, fn: () => {
+      faceBox2.className = 'face-box-2 visible';
+      dot.className = 'status-dot red';
+      statusText.style.color = '#DC2626';
+      statusText.textContent = 'ALERT';
+      faceBox.className = 'face-box visible alert';
+      faceLabel.textContent = 'PRIMARY';
+      incidents++;
+      incidentCount.textContent = incidents;
+      showAlert('danger', '👥 MULTIPLE FACES DETECTED', 'Second person detected in frame. Proxy attempt suspected.');
+    }},
+    { t: 26000, fn: () => {
+      faceBox2.className = 'face-box-2';
+      hideAlert();
+      dot.className = 'status-dot';
+      statusText.style.color = '#10B981';
+      statusText.textContent = 'MONITORING';
+      faceBox.className = 'face-box visible';
+      faceLabel.textContent = 'FACE DETECTED';
+    }},
+
+    // 27-30s: All clear
+    { t: 27500, fn: () => {
+      showAlert('success', '✓ INTERVIEW INTEGRITY REPORT', `Session completed. ${incidents} incidents detected and logged.`);
+      incidentCount.className = 'metric-val incident-count';
+    }},
+  ];
+
+  // Start timer
+  let elapsed = 0;
+  const timerInterval = setInterval(() => {
+    elapsed++;
+    updateTimer(elapsed);
+    if (elapsed >= 30) {
+      clearInterval(timerInterval);
+      // Reset and loop
+      setTimeout(() => {
+        resetAll();
+        incidents = 0;
+        incidentCount.textContent = '0';
+        incidentCount.className = 'metric-val incident-count';
+        elapsed = 0;
+        startTimeline();
+      }, 2000);
+    }
+  }, 1000);
+
+  function startTimeline() {
+    const timerInt = setInterval(() => {
+      elapsed++;
+      updateTimer(elapsed);
+      if (elapsed >= 30) clearInterval(timerInt);
+    }, 1000);
+
+    timeline.forEach(event => {
+      setTimeout(event.fn, event.t);
+    });
+  }
+
+  // Kick off
+  timeline.forEach(event => {
+    setTimeout(event.fn, event.t);
+  });
+</script>
+
+</body>
+</html>

@@ -122,250 +122,289 @@ export default function AcceptInvite() {
     }
   };
 
-  return (
-    <>
-      {/* <MainHeader /> */}
-      <main className="auth-page">
-        <div className="container auth-container">
-          <div className="auth-card" style={{ maxWidth: 520, width: '100%' }}>
-            <div className="auth-logo-wrapper">
-              <div style={{
-                maxWidth: '450px',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <img
-                  src="/auth-logo-v7.png"
-                  alt="VerifiHireAI Logo"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: 'brightness(0.85) contrast(1.2) sepia(0.2) saturate(1.3)'
-                  }}
-                />
-              </div>
+  const getRoleContent = () => {
+    const roleVal = invite?.role?.toLowerCase() || '';
+    if (roleVal.includes('interviewer')) {
+      return {
+        title: 'Interviewer Invitation',
+        subtitle: 'You\'ve been invited to join the interview team. Set your password to start evaluating candidates.',
+        image: '/interviewer_role_illustration_v2_1774866264626.png'
+      };
+    } else if (roleVal.includes('manager')) {
+      return {
+        title: 'HR Manager Invitation',
+        subtitle: 'Your management account is ready. Complete your profile to manage teams and hiring strategies.',
+        image: '/hr_manager_role_illustration_v2_1774866294446.png'
+      };
+    } else {
+      return {
+        title: 'HR Recruiter Invitation',
+        subtitle: 'Join as a Recruiter. Set up your access to source talent and manage assessments.',
+        image: '/hr_recruiter_role_illustration_v2_1774866319365.png'
+      };
+    }
+  };
+
+  const roleContent = getRoleContent();
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: '#f8fafc' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <i className="fas fa-circle-notch fa-spin" style={{ fontSize: '2.5rem', color: '#4f46e5' }}></i>
+          <div style={{ color: '#64748b', fontSize: '1.1rem', fontWeight: 500 }}>Verifying invitation...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!invite && (success || error)) {
+    const isSuccess = Boolean(success);
+    return (
+      <div className="auth-split-page" style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        background: '#f8fafc'
+      }}>
+        <div style={{
+          background: 'white',
+          padding: '3rem 2.5rem',
+          borderRadius: '24px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
+          textAlign: 'center',
+          maxWidth: '440px',
+          width: '90%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          margin: '2rem'
+        }}>
+          {isSuccess ? (
+            <div style={{
+              width: '80px',
+              height: '80px',
+              background: '#ecfdf5',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '2rem',
+              boxShadow: '0 10px 25px rgba(16, 185, 129, 0.15)'
+            }}>
+              <i className="fas fa-check" style={{ fontSize: '3rem', color: '#10b981' }}></i>
             </div>
-            <h2 className="auth-title" style={{ textAlign: 'center', marginTop: 0 }}>Accept Invitation</h2>
-            <p className="auth-subtitle" style={{ textAlign: 'center' }}>
-              Set your password to activate your account.
-            </p>
+          ) : (
+             <div style={{
+              width: '80px',
+              height: '80px',
+              background: '#fef2f2',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '2rem',
+              boxShadow: '0 10px 25px rgba(239, 68, 68, 0.15)'
+            }}>
+              <i className="fas fa-exclamation-triangle" style={{ fontSize: '2.5rem', color: '#ef4444' }}></i>
+            </div>
+          )}
+          
+          <h2 style={{ 
+            fontSize: '1.75rem', 
+            color: '#1e293b', 
+            fontWeight: '700', 
+            marginBottom: '1rem', 
+            fontFamily: "'Plus Jakarta Sans', sans-serif" 
+          }}>
+            {isSuccess ? 'Invite Accepted' : 'Invalid Link'}
+          </h2>
+          <p style={{ color: '#64748b', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: '1.6' }}>
+            {isSuccess 
+              ? 'You have already accepted this invitation. You can proceed to login to access your dashboard.' 
+              : error}
+          </p>
+          <Link to="/login" className="auth-primary-btn" style={{ 
+            padding: '1rem 2.5rem', 
+            textDecoration: 'none', 
+            borderRadius: '12px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            width: '100%',
+            display: 'inline-block'
+          }}>
+            Back to Login
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
-            {loading && <div style={{ textAlign: 'center', margin: '1rem 0' }}>Loading invitation...</div>}
-            {error && <div className="auth-error-message" style={{ textAlign: 'center', margin: '1rem 0' }}>{error}</div>}
-            {success && <div className="auth-success-message" style={{ textAlign: 'center', margin: '1rem 0' }}>{success}</div>}
-
-            {!loading && invite && (
-              <>
-                <div style={{ marginBottom: '1.5rem', fontSize: 14, color: '#333', textAlign: 'center', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>
-                  <div style={{ marginBottom: '0.25rem' }}><strong>Company:</strong> {invite.company}</div>
-                  <div style={{ marginBottom: '0.25rem' }}><strong>Role:</strong> {invite.role}</div>
-                  <div><strong>Email:</strong> {invite.email}</div>
-                </div>
-
-                <form className="auth-form" onSubmit={handleSubmit}>
-                  <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                    <i className="fas fa-user auth-input-icon"></i>
-                    <label className="auth-floating-label">Full Name *</label>
-                    <input
-                      className="auth-input-with-icon"
-                      placeholder="Full Name *"
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      onFocus={() => setFullNameFocused(true)}
-                      onBlur={() => setFullNameFocused(false)}
-                      required
-                      disabled={submitting}
-                    />
-                  </div>
-
-                  <div className={`auth-input-icon-wrapper ${tempPasswordFocused || tempPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                    <i className="fas fa-lock auth-input-icon"></i>
-                    <label className="auth-floating-label">Temporary Password *</label>
-                    <div style={{ position: 'relative' }}>
-                      <input
-                        className="auth-input-with-icon"
-                        placeholder="Temporary Password *"
-                        type={showTempPassword ? "text" : "password"}
-                        value={tempPassword}
-                        onChange={(e) => setTempPassword(e.target.value)}
-                        onFocus={() => setTempPasswordFocused(true)}
-                        onBlur={() => setTempPasswordFocused(false)}
-                        required
-                        disabled={submitting}
-                        style={{ paddingRight: '45px' }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowTempPassword(!showTempPassword)}
-                        disabled={submitting}
-                        style={{
-                          position: 'absolute',
-                          right: '12px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          background: 'none',
-                          border: 'none',
-                          cursor: submitting ? 'not-allowed' : 'pointer',
-                          color: '#666',
-                          fontSize: '18px',
-                          padding: '5px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          opacity: submitting ? 0.5 : 1,
-                          zIndex: 10
-                        }}
-                      >
-                        <i className={showTempPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className={`auth-input-icon-wrapper ${newPasswordFocused || newPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                    <i className="fas fa-lock auth-input-icon"></i>
-                    <label className="auth-floating-label">New Password *</label>
-                    <div style={{ position: 'relative' }}>
-                      <input
-                        className="auth-input-with-icon"
-                        placeholder="New Password *"
-                        type={showNewPassword ? "text" : "password"}
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        onFocus={() => setNewPasswordFocused(true)}
-                        onBlur={() => setNewPasswordFocused(false)}
-                        required
-                        disabled={submitting}
-                        style={{ paddingRight: '45px' }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                        disabled={submitting}
-                        style={{
-                          position: 'absolute',
-                          right: '12px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          background: 'none',
-                          border: 'none',
-                          cursor: submitting ? 'not-allowed' : 'pointer',
-                          color: '#666',
-                          fontSize: '18px',
-                          padding: '5px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          opacity: submitting ? 0.5 : 1,
-                          zIndex: 10
-                        }}
-                      >
-                        <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
-                    <div style={{
-                      marginTop: '0rem',
-                      marginBottom: '1rem',
-                      border: '1px solid #fee2e2',
-                      borderRadius: '8px',
-                      padding: '0.6rem 0.75rem',
-                      backgroundColor: '#fffafb'
-                    }}>
-                      <div style={{ color: '#e53e3e', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.25rem' }}>
-                        Password requirements:
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                        {unmetPasswordRequirements.map((req) => (
-                          <div
-                            key={req.id}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '0.35rem',
-                              color: '#e53e3e',
-                              fontSize: '0.8rem',
-                            }}
-                          >
-                            <span style={{ fontWeight: 700 }}>•</span>
-                            <span>{req.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                    <i className="fas fa-lock auth-input-icon"></i>
-                    <label className="auth-floating-label">Confirm New Password *</label>
-                    <div style={{ position: 'relative' }}>
-                      <input
-                        className="auth-input-with-icon"
-                        placeholder="Confirm New Password *"
-                        type={showConfirmPassword ? "text" : "password"}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        onFocus={() => setConfirmPasswordFocused(true)}
-                        onBlur={() => setConfirmPasswordFocused(false)}
-                        required
-                        disabled={submitting}
-                        style={{ paddingRight: '45px' }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        disabled={submitting}
-                        style={{
-                          position: 'absolute',
-                          right: '12px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          background: 'none',
-                          border: 'none',
-                          cursor: submitting ? 'not-allowed' : 'pointer',
-                          color: '#666',
-                          fontSize: '18px',
-                          padding: '5px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          opacity: submitting ? 0.5 : 1,
-                          zIndex: 10
-                        }}
-                      >
-                        <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  {confirmPassword.length > 0 && newPassword !== confirmPassword && (
-                    <div style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.5rem', marginBottom: '0.75rem', fontWeight: 600 }}>
-                      <i className="fas fa-exclamation-circle" style={{ marginRight: '5px' }}></i>
-                      Passwords do not match
-                    </div>
-                  )}
-
-                  <button type="submit" className="auth-primary-btn" disabled={!canSubmit}>
-                    {submitting ? 'Activating...' : 'Activate Account'}
-                  </button>
-
-                  <div style={{ marginTop: 16, textAlign: 'center' }}>
-                    <Link to="/login" style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: 600 }}>
-                      Back to Login
-                    </Link>
-                  </div>
-                </form>
-              </>
-            )}
+  return (
+    <div className="auth-split-page">
+      {/* Left Side: Illustration and Intro */}
+      <div className="auth-left-side">
+        <div className="left-branded-header" style={{ marginBottom: '2rem' }}>
+          <div className="brand-logo-group">
+            <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+            <div className="brand-text-container">
+              <span className="brand-name-text">VerifiHireAI</span>
+              <p className="brand-tagline">Trust in Every Hire</p>
+            </div>
           </div>
         </div>
-      </main>
-      {/* <Footer /> */}
-    </>
+
+        <div className="left-intro-content" style={{ marginTop: '0.5rem' }}>
+          <h1 className="left-intro-title">{invite ? roleContent.title : 'Accept Invitation'}</h1>
+          <p className="left-intro-subtitle">
+            {invite ? roleContent.subtitle : 'Complete your registration to join your organization.'}
+          </p>
+          <div className="left-intro-image-wrapper">
+            <img 
+              src={invite ? roleContent.image : '/register-illustration.png'} 
+              alt="Role Illustration" 
+              className="left-intro-image"
+              style={{ maxWidth: invite?.role?.toLowerCase()?.includes('interviewer') ? '420px' : '450px' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side: Form */}
+      <div className="auth-right-side">
+        <div className="form-header-content">
+          <h2 className="form-header-title">Accept Invite</h2>
+          <p className="form-header-subtitle" style={{ marginBottom: '2.5rem' }}>
+            {invite ? `Joining ${invite.company} as ${invite.role}` : 'Set up your account password'}
+          </p>
+        </div>
+
+        {!loading && invite && (
+          <form className="auth-form" onSubmit={handleSubmit}>
+            {success && <div className="auth-success-message" style={{ marginBottom: '1.5rem' }}>{success}</div>}
+            
+            <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`}>
+              <i className="fas fa-user auth-input-icon"></i>
+              <input
+                type="text"
+                className="auth-input-with-icon"
+                placeholder="Full Name *"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                onFocus={() => setFullNameFocused(true)}
+                onBlur={() => setFullNameFocused(false)}
+                required
+                disabled={submitting}
+              />
+              <label className="auth-floating-label">Full Name *</label>
+            </div>
+
+            <div className={`auth-input-icon-wrapper ${tempPasswordFocused || tempPassword ? 'focused has-value' : ''}`}>
+              <i className="fas fa-key auth-input-icon"></i>
+              <input
+                type={showTempPassword ? "text" : "password"}
+                className="auth-input-with-icon"
+                placeholder="Temporary Password *"
+                value={tempPassword}
+                onChange={(e) => setTempPassword(e.target.value)}
+                onFocus={() => setTempPasswordFocused(true)}
+                onBlur={() => setTempPasswordFocused(false)}
+                required
+                style={{ paddingRight: '2.5rem' }}
+                disabled={submitting}
+              />
+              <label className="auth-floating-label">Temporary Password *</label>
+              <button type="button" onClick={() => setShowTempPassword(!showTempPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+                <i className={showTempPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
+
+            <div className={`auth-input-icon-wrapper ${newPasswordFocused || newPassword ? 'focused has-value' : ''}`}>
+              <i className="fas fa-lock auth-input-icon"></i>
+              <input
+                type={showNewPassword ? "text" : "password"}
+                className="auth-input-with-icon"
+                placeholder="New Password *"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                onFocus={() => setNewPasswordFocused(true)}
+                onBlur={() => setNewPasswordFocused(false)}
+                required
+                style={{ paddingRight: '2.5rem' }}
+                disabled={submitting}
+              />
+              <label className="auth-floating-label">New Password *</label>
+              <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+                <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
+
+            {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
+              <div className="password-requirements-box" style={{
+                marginBottom: '1rem',
+                border: '1px solid #f1f5f9',
+                borderRadius: '12px',
+                padding: '0.875rem',
+                backgroundColor: '#f8fafc'
+              }}>
+                <div style={{ color: '#64748b', fontWeight: 600, fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                  Password must include:
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.35rem' }}>
+                  {unmetPasswordRequirements.map((req) => (
+                    <div key={req.id} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      color: '#94a3b8',
+                      fontSize: '0.7rem',
+                    }}>
+                      <i className="fas fa-circle" style={{ fontSize: '0.5rem' }}></i>
+                      <span>{req.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`}>
+              <i className="fas fa-lock auth-input-icon"></i>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                className="auth-input-with-icon"
+                placeholder="Confirm New Password *"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onFocus={() => setConfirmPasswordFocused(true)}
+                onBlur={() => setConfirmPasswordFocused(false)}
+                required
+                style={{ paddingRight: '2.5rem' }}
+                disabled={submitting}
+              />
+              <label className="auth-floating-label">Confirm New Password *</label>
+              <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+                <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
+
+            {confirmPassword.length > 0 && newPassword !== confirmPassword && (
+              <div className="field-error-text" style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.75rem', marginBottom: '1.25rem' }}>
+                Passwords do not match
+              </div>
+            )}
+
+            <button type="submit" className="auth-primary-btn" disabled={!canSubmit} style={{ width: '100%', padding: '0.875rem', fontWeight: '600', fontSize: '1rem' }}>
+              {submitting ? 'Activating...' : 'Activate Account'}
+            </button>
+            {error && (
+              <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{error}</div>
+            )}
+          </form>
+        )}
+
+
+      </div>
+    </div>
   );
 }
 
