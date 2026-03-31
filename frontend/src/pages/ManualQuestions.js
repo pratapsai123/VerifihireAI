@@ -9,7 +9,11 @@ function ManualQuestions() {
 
   const handleBack = () => {
     if (assessmentContext) {
-      navigate('/review-assessment', { state: assessmentContext });
+      if (assessmentContext.source === 'manual_skip') {
+        navigate('/custom-assessment', { state: assessmentContext });
+      } else {
+        navigate('/review-assessment', { state: assessmentContext });
+      }
       return;
     }
     navigate(-1);
@@ -159,10 +163,39 @@ function ManualQuestions() {
           </div>
         </div>
 
+        {/* Proceed to Review Button (only if skipped AI) */}
+        {assessmentContext?.source === 'manual_skip' && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            <button
+              type="button"
+              className="proceed-review-btn"
+              onClick={() => navigate('/review-assessment', { state: assessmentContext })}
+              style={{
+                backgroundColor: '#2563eb',
+                color: 'white',
+                padding: '0.85rem 2.5rem',
+                borderRadius: '10px',
+                border: 'none',
+                fontWeight: '700',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(37, 99, 235, 0.2)',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              Proceed to Review Assessment
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default ManualQuestions;
-

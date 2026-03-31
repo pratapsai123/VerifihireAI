@@ -62,10 +62,6 @@ axios.interceptors.request.use(
         '/candidate-details/',
         '/ai/public/',
         '/ai/submit/',
-        '/ai/submission/',
-        '/ai/execute/',
-        '/api/ai-candidates/',
-        '/users/invite/',
         '/users/accept-invite/',
         '/interviews/slots/'
       ];

@@ -150,14 +150,14 @@ export default function InviteCandidates() {
       if (res.data.members) {
         // Filter to show ONLY the interviewer role for a focused experience
         const interviewerRoles = ['interviewer'];
-        const interviewers = res.data.members.filter(m => 
+        const interviewers = res.data.members.filter(m =>
           interviewerRoles.includes(m.role)
         ).sort((a, b) => {
           const nameA = a.first_name || a.email || '';
           const nameB = b.first_name || b.email || '';
           return nameA.localeCompare(nameB);
         });
-        
+
         setTeamMembers(interviewers);
       }
     } catch (err) {
@@ -226,11 +226,11 @@ export default function InviteCandidates() {
   // Load recently extracted candidate details if available
   useEffect(() => {
     if (!hydrated) return;
-    
+
     // Only pre-fill if current fields are empty
     if (!name) {
       const recentName = localStorage.getItem('recentCandidateName');
-      
+
       if (recentName) {
         setName(recentName);
         localStorage.removeItem('recentCandidateName'); // Clear after use
@@ -702,11 +702,11 @@ export default function InviteCandidates() {
               <button className="btn-secondary" type="button" onClick={downloadTemplate} style={{ whiteSpace: 'nowrap' }}>
                 Download CSV Template
               </button>
-              
+
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', color: '#374151', padding: '6px 10px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                <input 
-                  type="checkbox" 
-                  checked={isAutoSchedule} 
+                <input
+                  type="checkbox"
+                  checked={isAutoSchedule}
                   onChange={(e) => setIsAutoSchedule(e.target.checked)}
                   style={{ width: '16px', height: '16px', cursor: 'pointer' }}
                 />
@@ -755,7 +755,7 @@ export default function InviteCandidates() {
               >
                 Add
               </button>
-              
+
               {isAutoSchedule && (
                 <button
                   type="button"
@@ -792,8 +792,8 @@ export default function InviteCandidates() {
                 type="button"
                 onClick={shareInvites}
                 disabled={sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)}
-                style={{ 
-                  padding: '10px 32px', 
+                style={{
+                  padding: '10px 32px',
                   fontSize: '14px',
                   background: (sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)) ? '#cbd5e1' : '#4318FF',
                   borderColor: (sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)) ? '#cbd5e1' : '#4318FF'
@@ -855,18 +855,18 @@ export default function InviteCandidates() {
                 ✕
               </button>
             </div>
-            
+
             <div className="modal-body">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                 <p style={{ margin: 0, color: '#6b7280', fontSize: '0.85rem' }}>
                   Select interviewers for this assessment.
                 </p>
               </div>
-              
+
               <div style={{ maxHeight: '250px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px', background: '#fff' }}>
                 {teamMembers.length > 0 ? (
                   teamMembers.map(member => (
-                    <div 
+                    <div
                       key={member.id}
                       onClick={() => toggleInterviewer(member.id)}
                       style={{
@@ -880,10 +880,10 @@ export default function InviteCandidates() {
                         transition: 'all 0.2s'
                       }}
                     >
-                      <input 
-                        type="checkbox" 
-                        readOnly 
-                        checked={selectedInterviewerIds.includes(member.id)} 
+                      <input
+                        type="checkbox"
+                        readOnly
+                        checked={selectedInterviewerIds.includes(member.id)}
                         style={{ cursor: 'pointer', width: '16px', height: '16px' }}
                       />
                       <div style={{ flex: 1 }}>
@@ -905,16 +905,16 @@ export default function InviteCandidates() {
               </div>
             </div>
             <div className="modal-footer" style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', borderTop: '1px solid #f3f4f6', paddingTop: '1.5rem' }}>
-              <button 
-                onClick={() => setShowBookingModal(false)} 
-                className="btn-secondary" 
+              <button
+                onClick={() => setShowBookingModal(false)}
+                className="btn-secondary"
                 style={{ padding: '0.75rem 1.5rem' }}
               >
                 Cancel
               </button>
-              <button 
-                onClick={handleGenerateSlots} 
-                className="btn-primary" 
+              <button
+                onClick={handleGenerateSlots}
+                className="btn-primary"
                 disabled={generating || selectedInterviewerIds.length === 0}
                 style={{ padding: '0.75rem 1.5rem', minWidth: '160px' }}
               >

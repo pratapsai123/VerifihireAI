@@ -305,7 +305,7 @@ const CandidateDetails = ({ token, onComplete }) => {
       const currentPan = data.pan.toUpperCase().trim();
       const extracted = data.extractedPan.toUpperCase().trim();
       const isMatch = currentPan === extracted;
-      
+
       // Update state ONLY if mismatch state needs to change
       if (isMatch !== data.panMatch) {
         setData(prev => ({
@@ -812,12 +812,12 @@ const CandidateDetails = ({ token, onComplete }) => {
 
                           axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
                             headers: {
-                              // 'Content-Type': 'multipart/form-data', // Let the browser set the boundary
-                              'Authorization': `Bearer ${localStorage.getItem('token')}`
+                              // No auth header needed for public PAN verification
                             }
                           })
                             .then(response => {
                               const { verified, extracted_pan, message } = response.data;
+                              console.log("Backend verification response:", response.data);
 
                               setData(prev => ({
                                 ...prev,
@@ -908,7 +908,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {!data.isExtractingPan && data.panFileValid === true && data.extractedPan && data.panMatch === false && (
                   <div className="candidate-warning-box">
                     <div className="candidate-error-text">
-                      ❌ PAN Mismatch: You entered {data.pan.toUpperCase()} but the system read {data.extractedPan} from the document. Please upload a clear image.
+                      ❌ PAN Mismatch: The PAN number on the document does not match what you entered. Please re-check or upload a clear file.
                     </div>
                     <div style={{ marginTop: '10px' }}>
                       <label className="candidate-checkbox-label">
@@ -925,7 +925,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.extractionFailed && (
                   <div className="candidate-warning-box">
                     <div className="candidate-error-text" style={{ fontSize: '15px' }}>
-                      ❌ Automatic Verification Failed: Image is not clear or incorrect document uploaded. Please re-upload a clear image or PDF.
+                      ❌ Automatic Verification Failed: Image/PDF may not be clear or incorrect document uploaded. Please upload a clear image or PDF.
                     </div>
                     <div style={{ marginTop: '10px' }}>
                       <label className="candidate-checkbox-label">

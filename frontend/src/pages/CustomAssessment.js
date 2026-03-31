@@ -1632,6 +1632,7 @@ function CustomAssessment() {
       role: formData.role || 'Manual Assessment',
       experienceLevel: formData.experienceLevel || 'mid',
       customAssessmentId: savedAssessmentId || null,
+      source: 'manual_skip',
     };
 
     navigate('/manual-questions', { state: skipAssessmentData });
