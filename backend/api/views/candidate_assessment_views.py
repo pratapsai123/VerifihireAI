@@ -53,7 +53,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -2134,6 +2134,7 @@ def submit_objective_section(request, token):
         passed = True
         next_stage = 'coding' if has_coding else 'finish'
         message = "Objective section completed."
+        should_schedule_result_email = False
         
         if assessment.has_objective_cutoff:
             cutoff = assessment.min_objective_pass_percentage
@@ -2144,6 +2145,7 @@ def submit_objective_section(request, token):
                 # Mark as submitted/failed immediately
                 inv.status = 'submitted'
                 inv.save()
+                should_schedule_result_email = not has_coding
                 
                 # Update final result
                 submission.result = 'rejected'
@@ -2163,6 +2165,7 @@ def submit_objective_section(request, token):
                     # Mark as submitted immediately
                     inv.status = 'submitted'
                     inv.save()
+                    should_schedule_result_email = True
 
                 # Even if passed, update scoring so partial results are correct
                 _update_submission_scoring_logic(submission)
@@ -2175,6 +2178,7 @@ def submit_objective_section(request, token):
                 # Mark as submitted immediately
                 inv.status = 'submitted'
                 inv.save()
+                should_schedule_result_email = True
             else:
                 next_stage = 'coding'
                 message = "Objective section completed. Proceeding to coding section."
@@ -2184,6 +2188,10 @@ def submit_objective_section(request, token):
         
         # Reload to get updated fields from _update_submission_scoring_logic
         submission.refresh_from_db()
+
+        if should_schedule_result_email:
+            from api.tasks import send_custom_assessment_result_task
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
 
         return Response({
             'success': True,
