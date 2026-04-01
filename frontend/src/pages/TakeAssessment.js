@@ -326,7 +326,7 @@ export default function TakeAssessment() {
   const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
   const screenStreamRef = useRef(null);
   const screenCanvasRef = useRef(null);
-  const [screenShareError, setScreenShareError] = useState('');
+  const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -1314,6 +1314,7 @@ export default function TakeAssessment() {
       return;
     }
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon running
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -1350,6 +1351,7 @@ export default function TakeAssessment() {
     setShowSubmitConfirm(false);
     if (!activeCoding) return;
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon submitting
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -1444,7 +1446,9 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '70vh' }
+    ? (resultHeightPct > 30 
+        ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' } 
+        : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
 
   // Show a loading state to prevent CandidateDetails flicker
@@ -1478,7 +1482,7 @@ export default function TakeAssessment() {
   // Show window error BEFORE the candidate details form
   if (windowError) {
     const isNotStarted = windowError.toLowerCase().includes('not started yet');
-    const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    // const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
     const scheduleData = windowSchedule;
     return (
       <div className="take-page">
@@ -1566,7 +1570,7 @@ export default function TakeAssessment() {
                 The assessment is not yet active and will be available at the scheduled time below:
               </p>
               {scheduleInfo && (
-                <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
+                <div style={{ border: '1px solid #e5e7eb', borderRadius: 10, overflow: 'hidden', fontSize: 12, margin: '20px 0' }}>
                   <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                     <tbody>
                       {scheduleInfo.start_date && (
@@ -1772,15 +1776,9 @@ export default function TakeAssessment() {
             {/* Coding Section */}
             {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 ? (
               <div className="take-card coding-overview-card">
-                <div className="coding-header-row" style={{ marginBottom: 10 }}>
-                  <div>
-                    <div className="take-title">Coding Questions</div>
-                    <div className="take-sub">Solve coding problems in the Monaco editor.</div>
+                  <div className="coding-header-actions" style={{ alignItems: 'center', marginBottom: 6 }}>
+                    <span className="pill gray" style={{ fontSize: '10px' }}>{codingQuestionsOrdered.length} coding tasks</span>
                   </div>
-                  <div className="coding-header-actions" style={{ alignItems: 'center' }}>
-                    <span className="pill gray">{codingQuestionsOrdered.length} questions</span>
-                  </div>
-                </div>
                 <div className="coding-tablist">
                   {codingQuestionsOrdered.map((cq, idx) => {
                     const isActive = String(cq.id) === String(activeCoding?.id);
@@ -1911,7 +1909,7 @@ export default function TakeAssessment() {
                     </div>
                   ) : null}
 
-                  <div className="coding-editor-wrap" ref={codingEditorWrapRef}>
+                  <div className="coding-editor-wrap" ref={codingEditorWrapRef} onClick={() => setResultHeightPct(30)}>
                     <div className="coding-monaco">
                       <Suspense fallback={<div className="coding-monaco-loading">Loading editor…</div>}>
                         <MonacoEditor
