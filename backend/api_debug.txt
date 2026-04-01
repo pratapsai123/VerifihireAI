@@ -2268,3 +2268,202 @@ Traceback (most recent call last):
 groq.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Forbidden'}}
 
 RAW: No response received
+
+[2026-04-01 04:45:22.501733+00:00] ERROR in GenerateAssessmentView: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 340, in post
+    recovered_mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<4 lines>...
+        hard_required=pool_hard,
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 490, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<7 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 34, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 20, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.AuthenticationError: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+
+RAW: No response received
+
+[2026-04-01 05:11:54.018901+00:00] PUBLIC ACCESS: Token='b5615263-716e-4aad-80d7-9729b8a7033b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775020313697']}>
+Host: localhost:8001
+
+[2026-04-01 05:11:54.020317+00:00] PUBLIC ACCESS: Token='b5615263-716e-4aad-80d7-9729b8a7033b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775020313688']}>
+Host: localhost:8001
+
+[2026-04-01 06:20:15.869583+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "problem_statement": "Develop a Python function to optimize database query performance by caching frequently accessed data. Implement a Least Recently Used (LRU) cache eviction policy.",\n         "difficulty": "Medium",\n         "test_cases": [\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{}", "expected_output": "{}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\', \'key4\': \'value4\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\', \'key4\': \'value4\', \'key5\': \'value5\'}", "expected_output": "{\'key\': \'value\'}"}\n         ],\n         "starter_code": "",\n         "reference_solution": """\\nimport sys\\nfrom collections import OrderedDict\\n\\nclass LRUCache:\\n    def __init__(self, capacity):\\n        self.capacity = capacity\\n        self.cache = OrderedDict()\\n\\n    def get(self, key):\\n        if key in self.cache:\\n            value = self.cache.pop(key)\\n            self.cache[key] = value\\n            return value\\n        return None\\n\\n    def put(self, key, value):\\n        if key in self.cache:\\n            self.cache.pop(key)\\n        elif len(self.cache) >= self.capacity:\\n            self.cache.popitem(last=False)\\n        self.cache[key] = value\\n\\ndef optimize_database_query(input_data):\\n    cache = LRUCache(3)\\n    for key, value in input_data.items():\\n        cache.put(key, value)\\n    return dict(cache.cache)\\n\\ninput_data = eval(input())\\nprint(optimize_database_query(input_data))\\n"""\n      },\n      {\n         "problem_statement": "Design a Python function to integrate a REST API with a MySQL database. Implement a basic CRUD (Create, Read, Update, Delete) operation for a \'users\' table.",\n         "difficulty": "Medium",\n         "test_cases": [\n            {"input": "{\'name\': \'John Doe\', \'email\': \'john@example.com\'}", "expected_output": "1"},\n            {"input": "{\'name\': \'Jane Doe\', \'email\': \'jane@example.com\'}", "expected_output": "2"},\n            {"input": "{\'name\': \'Bob Smith\', \'email\': \'bob@example.com\'}", "expected_output": "3"},\n            {"input": "{\'name\': \'Alice Johnson\', \'email\': \'alice@example.com\'}", "expected_output": "4"},\n            {"input": "{\'name\': \'Mike Brown\', \'email\': \'mike@example.com\'}", "expected_output": "5"}\n         ],\n         "starter_code": """\\nCREATE TABLE users (\\n    id INT PRIMARY KEY AUTO_INCREMENT,\\n    name VARCHAR(255),\\n    email VARCHAR(255)\\n);\\n\\nINSERT INTO users (name, email) VALUES\\n    (\'John Doe\', \'john@example.com\'),\\n    (\'Jane Doe\', \'jane@example.com\'),\\n    (\'Bob Smith\', \'bob@example.com\'),\\n    (\'Alice Johnson\', \'alice@example.com\'),\\n    (\'Mike Brown\', \'mike@example.com\');\\n""",\n         "reference_solution": """\\nimport sys\\nimport mysql.connector\\n\\ndef create_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "INSERT INTO users (name, email) VALUES (%s, %s)"\\n    cursor.execute(query, (input_data[\'name\'], input_data[\'email\']))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.lastrowid\\n\\ndef read_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "SELECT * FROM users WHERE id = %s"\\n    cursor.execute(query, (input_data,))\\n    result = cursor.fetchone()\\n    cursor.close()\\n    db.close()\\n    return result\\n\\ndef update_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "UPDATE users SET name = %s, email = %s WHERE id = %s"\\n    cursor.execute(query, (input_data[\'name\'], input_data[\'email\'], input_data[\'id\']))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.rowcount\\n\\ndef delete_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "DELETE FROM users WHERE id = %s"\\n    cursor.execute(query, (input_data,))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.rowcount\\n\\ninput_data = eval(input())\\nif input_data[\'action\'] == \'create\':\\n    print(create_user(input_data))\\nelif input_data[\'action\'] == \'read\':\\n    print(read_user(input_data[\'id\']))\\nelif input_data[\'action\'] == \'update\':\\n    print(update_user(input_data))\\nelif input_data[\'action\'] == \'delete\':\\n    print(delete_user(input_data[\'id\']))\\n"""\n      }\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 354, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<4 lines>...
+        batch_size=2, # Small batches are safer
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 324, in _generate_coding_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<7 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 53, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 39, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "problem_statement": "Develop a Python function to optimize database query performance by caching frequently accessed data. Implement a Least Recently Used (LRU) cache eviction policy.",\n         "difficulty": "Medium",\n         "test_cases": [\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{}", "expected_output": "{}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\', \'key4\': \'value4\'}", "expected_output": "{\'key\': \'value\'}"},\n            {"input": "{\'key\': \'value\', \'key2\': \'value2\', \'key3\': \'value3\', \'key4\': \'value4\', \'key5\': \'value5\'}", "expected_output": "{\'key\': \'value\'}"}\n         ],\n         "starter_code": "",\n         "reference_solution": """\\nimport sys\\nfrom collections import OrderedDict\\n\\nclass LRUCache:\\n    def __init__(self, capacity):\\n        self.capacity = capacity\\n        self.cache = OrderedDict()\\n\\n    def get(self, key):\\n        if key in self.cache:\\n            value = self.cache.pop(key)\\n            self.cache[key] = value\\n            return value\\n        return None\\n\\n    def put(self, key, value):\\n        if key in self.cache:\\n            self.cache.pop(key)\\n        elif len(self.cache) >= self.capacity:\\n            self.cache.popitem(last=False)\\n        self.cache[key] = value\\n\\ndef optimize_database_query(input_data):\\n    cache = LRUCache(3)\\n    for key, value in input_data.items():\\n        cache.put(key, value)\\n    return dict(cache.cache)\\n\\ninput_data = eval(input())\\nprint(optimize_database_query(input_data))\\n"""\n      },\n      {\n         "problem_statement": "Design a Python function to integrate a REST API with a MySQL database. Implement a basic CRUD (Create, Read, Update, Delete) operation for a \'users\' table.",\n         "difficulty": "Medium",\n         "test_cases": [\n            {"input": "{\'name\': \'John Doe\', \'email\': \'john@example.com\'}", "expected_output": "1"},\n            {"input": "{\'name\': \'Jane Doe\', \'email\': \'jane@example.com\'}", "expected_output": "2"},\n            {"input": "{\'name\': \'Bob Smith\', \'email\': \'bob@example.com\'}", "expected_output": "3"},\n            {"input": "{\'name\': \'Alice Johnson\', \'email\': \'alice@example.com\'}", "expected_output": "4"},\n            {"input": "{\'name\': \'Mike Brown\', \'email\': \'mike@example.com\'}", "expected_output": "5"}\n         ],\n         "starter_code": """\\nCREATE TABLE users (\\n    id INT PRIMARY KEY AUTO_INCREMENT,\\n    name VARCHAR(255),\\n    email VARCHAR(255)\\n);\\n\\nINSERT INTO users (name, email) VALUES\\n    (\'John Doe\', \'john@example.com\'),\\n    (\'Jane Doe\', \'jane@example.com\'),\\n    (\'Bob Smith\', \'bob@example.com\'),\\n    (\'Alice Johnson\', \'alice@example.com\'),\\n    (\'Mike Brown\', \'mike@example.com\');\\n""",\n         "reference_solution": """\\nimport sys\\nimport mysql.connector\\n\\ndef create_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "INSERT INTO users (name, email) VALUES (%s, %s)"\\n    cursor.execute(query, (input_data[\'name\'], input_data[\'email\']))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.lastrowid\\n\\ndef read_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "SELECT * FROM users WHERE id = %s"\\n    cursor.execute(query, (input_data,))\\n    result = cursor.fetchone()\\n    cursor.close()\\n    db.close()\\n    return result\\n\\ndef update_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "UPDATE users SET name = %s, email = %s WHERE id = %s"\\n    cursor.execute(query, (input_data[\'name\'], input_data[\'email\'], input_data[\'id\']))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.rowcount\\n\\ndef delete_user(input_data):\\n    db = mysql.connector.connect(\\n        host=\'localhost\',\\n        user=\'username\',\\n        password=\'password\',\\n        database=\'database\'\\n    )\\n    cursor = db.cursor()\\n    query = "DELETE FROM users WHERE id = %s"\\n    cursor.execute(query, (input_data,))\\n    db.commit()\\n    cursor.close()\\n    db.close()\\n    return cursor.rowcount\\n\\ninput_data = eval(input())\\nif input_data[\'action\'] == \'create\':\\n    print(create_user(input_data))\\nelif input_data[\'action\'] == \'read\':\\n    print(read_user(input_data[\'id\']))\\nelif input_data[\'action\'] == \'update\':\\n    print(update_user(input_data))\\nelif input_data[\'action\'] == \'delete\':\\n    print(delete_user(input_data[\'id\']))\\n"""\n      }\n   ]\n}'}}
+
+RAW: No response received
+
+[2026-04-01 06:28:51.319494+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "inputs": [\n      {"json": "{}", "schema": "{}"},\n      {"json": "{\\"name\\":\\"john\\",\\"age\\":24,\\"city\\":\\"new york\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"age\\":{\\"type\\":\\"integer\\"},\\"city\\":{\\"type\\":\\"string\\"}" +\n      "\\"}"}},\n      {"json": "{\\"key\\":\\"value\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"key\\":{\\"type\\":\\"string\\"}" +\n      "}"}}",\\n      {"json": "{\\"key\\":\\"value\\"}", "schema": "{\\"type\\":\\"array\\"}"},\n\n      {"json": "{\\"key\\":{\\"type\\":\\"integer\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"key\\":{\\"type\\":\\"integer\\"}" +\n      "\\"}"}}\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 368, in post
+    generated_data['coding_challenges'] = _generate_execution_verified_test_cases(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        groq_client=local_groq_client,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        challenges=generated_data.get('coding_challenges', []),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_count=5
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 441, in _generate_execution_verified_test_cases
+    resp = _call_groq_with_backoff(groq_client, model="llama-3.1-8b-instant", messages=[{"role": "user", "content": prompt}], response_format={"type": "json_object"})
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 53, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 39, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "inputs": [\n      {"json": "{}", "schema": "{}"},\n      {"json": "{\\"name\\":\\"john\\",\\"age\\":24,\\"city\\":\\"new york\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"age\\":{\\"type\\":\\"integer\\"},\\"city\\":{\\"type\\":\\"string\\"}" +\n      "\\"}"}},\n      {"json": "{\\"key\\":\\"value\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"key\\":{\\"type\\":\\"string\\"}" +\n      "}"}}",\\n      {"json": "{\\"key\\":\\"value\\"}", "schema": "{\\"type\\":\\"array\\"}"},\n\n      {"json": "{\\"key\\":{\\"type\\":\\"integer\\"}", "schema": "{\\"type\\":\\"object\\",\\"properties\\":{\\"key\\":{\\"type\\":\\"integer\\"}" +\n      "\\"}"}}\n   ]\n}'}}
+
+RAW: No response received
+
+[2026-04-01 06:31:08.287514+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Optimize API Response with Caching",\n         "problem_statement": "Design a caching system to optimize API responses. The system should store API responses in a cache and return the cached response if it exists. If the response does not exist, make the API call, store the response in the cache, and return the response.",\n         "difficulty": "Medium",\n         "constraints": "The cache should have a maximum size of 1000 entries. The API call should be made with a timeout of 5 seconds.",\n         "example_input": [\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data2\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 10}",\n            "{\\"url\\": \\"https://api.example.com/data2\\", \\"timeout\\": 5}"\n         ],\n         "example_output": [],\n         "explanation": "The caching system should optimize API responses by storing responses in a cache and returning the cached response if it exists.",\n         "reference_solution": "import json\\nimport time\\nfrom collections import OrderedDict\\n\\nclass Cache:\\n    def __init__(self, max_size):\\n        self.max_size = max_size\\n        self.cache = OrderedDict()\\n\\n    def get(self, url):\\n        if url in self.cache:\\n            return self.cache[url]\\n        return None\\n\\n    def set(self, url, response):\\n        if url in self.cache:\\n            self.cache.pop(url)\\n        if len(self.cache) >= self.max_size:\\n            self.cache.popitem(last=False)\\n        self.cache[url] = response\\n\\ndef optimize_api_response(url, timeout):\\n    cache = Cache(1000)\\n    start_time = time.time()\\n    response = cache.get(url)\\n    if response is None:\\n        # Simulate API call\\n        time.sleep(timeout)\\n        response = f"API Response for {url}"\\n        cache.set(url, response)\\n    end_time = time.time()\\n    if end_time - start_time > timeout:\\n        print(f"Timeout: {end_time - start_time} seconds")\\n    return response\\n\\ndef main():\\n    for input_data in json.loads(sys.stdin.read()):\\n        url = input_data[\'url\']\\n        timeout = input_data[\'timeout\']\\n        print(optimize_api_response(url, timeout))\\n\\nif __name__ == \'__main__\':\\n    main()"\n      },\n      {\n         "title": "Database Schema Optimization",\n         "problem_statement": "Design a database schema to store information about customers, orders, and products. The schema should have the following tables:\\n\\n**customers**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique customer ID |\\n| name | varchar(255) | Customer name |\\n| email | varchar(255) | Customer email |\\n\\n**orders**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique order ID |\\n| customer_id | int | Foreign key referencing the customers table |\\n| order_date | date | Order date |\\n| total | decimal(10, 2) | Order total |\\n\\n**products**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique product ID |\\n| name | varchar(255) | Product name |\\n| price | decimal(10, 2) | Product price |\\n\\n**order_items**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique order item ID |\\n| order_id | int | Foreign key referencing the orders table |\\n| product_id | int | Foreign key referencing the products table |\\n| quantity | int | Order item quantity |\\n\\nThe schema should be optimized for querying customer information, order history, and product details.",\n         "difficulty": "Medium",\n         "constraints": "The schema should use foreign keys to establish relationships between tables.",\n         "example_input": [\n            "INSERT INTO customers (id, name, email) VALUES (1, \'John Doe\', \'john@example.com\');",\n            "INSERT INTO orders (id, customer_id, order_date, total) VALUES (1, 1, \'2022-01-01\', 100.00);",\n            "INSERT INTO products (id, name, price) VALUES (1, \'Product A\', 50.00);",\n            "INSERT INTO order_items (id, order_id, product_id, quantity) VALUES (1, 1, 1, 2);",\n            "SELECT * FROM customers WHERE id = 1;"\n         ],\n         "example_output": [],\n         "explanation": "The database schema should be optimized for querying customer information, order history, and product details.",\n         "reference_solution": "CREATE TABLE customers (\\n  id INT PRIMARY KEY,\\n  name VARCHAR(255),\\n  email VARCHAR(255)\\n);\\n\\nCREATE TABLE orders (\\n  id INT PRIMARY KEY,\\n  customer_id INT,\\n  order_date DATE,\\n  total DECIMAL(10, 2),\\n  FOREIGN KEY (customer_id) REFERENCES customers(id)\\n);\\n\\nCREATE TABLE products (\\n  id INT PRIMARY KEY,\\n  name VARCHAR(255),\\n  price DECIMAL(10, 2)\\n);\\n\\nCREATE TABLE order_items (\\n  id INT PRIMARY KEY,\\n  order_id INT,\\n  product_id INT,\\n  quantity INT,\\n  FOREIGN KEY (order_id) REFERENCES orders(id),\\n  FOREIGN KEY (product_id) REFERENCES products(id)\\n);"\n      }\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 354, in post
+    extra_coding = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<4 lines>...
+        batch_size=2, # Small batches are safer
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 328, in _generate_coding_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<7 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 53, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 39, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v1\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "coding_challenges": [\n      {\n         "title": "Optimize API Response with Caching",\n         "problem_statement": "Design a caching system to optimize API responses. The system should store API responses in a cache and return the cached response if it exists. If the response does not exist, make the API call, store the response in the cache, and return the response.",\n         "difficulty": "Medium",\n         "constraints": "The cache should have a maximum size of 1000 entries. The API call should be made with a timeout of 5 seconds.",\n         "example_input": [\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data2\\", \\"timeout\\": 5}",\n            "{\\"url\\": \\"https://api.example.com/data\\", \\"timeout\\": 10}",\n            "{\\"url\\": \\"https://api.example.com/data2\\", \\"timeout\\": 5}"\n         ],\n         "example_output": [],\n         "explanation": "The caching system should optimize API responses by storing responses in a cache and returning the cached response if it exists.",\n         "reference_solution": "import json\\nimport time\\nfrom collections import OrderedDict\\n\\nclass Cache:\\n    def __init__(self, max_size):\\n        self.max_size = max_size\\n        self.cache = OrderedDict()\\n\\n    def get(self, url):\\n        if url in self.cache:\\n            return self.cache[url]\\n        return None\\n\\n    def set(self, url, response):\\n        if url in self.cache:\\n            self.cache.pop(url)\\n        if len(self.cache) >= self.max_size:\\n            self.cache.popitem(last=False)\\n        self.cache[url] = response\\n\\ndef optimize_api_response(url, timeout):\\n    cache = Cache(1000)\\n    start_time = time.time()\\n    response = cache.get(url)\\n    if response is None:\\n        # Simulate API call\\n        time.sleep(timeout)\\n        response = f"API Response for {url}"\\n        cache.set(url, response)\\n    end_time = time.time()\\n    if end_time - start_time > timeout:\\n        print(f"Timeout: {end_time - start_time} seconds")\\n    return response\\n\\ndef main():\\n    for input_data in json.loads(sys.stdin.read()):\\n        url = input_data[\'url\']\\n        timeout = input_data[\'timeout\']\\n        print(optimize_api_response(url, timeout))\\n\\nif __name__ == \'__main__\':\\n    main()"\n      },\n      {\n         "title": "Database Schema Optimization",\n         "problem_statement": "Design a database schema to store information about customers, orders, and products. The schema should have the following tables:\\n\\n**customers**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique customer ID |\\n| name | varchar(255) | Customer name |\\n| email | varchar(255) | Customer email |\\n\\n**orders**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique order ID |\\n| customer_id | int | Foreign key referencing the customers table |\\n| order_date | date | Order date |\\n| total | decimal(10, 2) | Order total |\\n\\n**products**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique product ID |\\n| name | varchar(255) | Product name |\\n| price | decimal(10, 2) | Product price |\\n\\n**order_items**\\n\\n| Column Name | Data Type | Description |\\n| --- | --- | --- |\\n| id | int | Unique order item ID |\\n| order_id | int | Foreign key referencing the orders table |\\n| product_id | int | Foreign key referencing the products table |\\n| quantity | int | Order item quantity |\\n\\nThe schema should be optimized for querying customer information, order history, and product details.",\n         "difficulty": "Medium",\n         "constraints": "The schema should use foreign keys to establish relationships between tables.",\n         "example_input": [\n            "INSERT INTO customers (id, name, email) VALUES (1, \'John Doe\', \'john@example.com\');",\n            "INSERT INTO orders (id, customer_id, order_date, total) VALUES (1, 1, \'2022-01-01\', 100.00);",\n            "INSERT INTO products (id, name, price) VALUES (1, \'Product A\', 50.00);",\n            "INSERT INTO order_items (id, order_id, product_id, quantity) VALUES (1, 1, 1, 2);",\n            "SELECT * FROM customers WHERE id = 1;"\n         ],\n         "example_output": [],\n         "explanation": "The database schema should be optimized for querying customer information, order history, and product details.",\n         "reference_solution": "CREATE TABLE customers (\\n  id INT PRIMARY KEY,\\n  name VARCHAR(255),\\n  email VARCHAR(255)\\n);\\n\\nCREATE TABLE orders (\\n  id INT PRIMARY KEY,\\n  customer_id INT,\\n  order_date DATE,\\n  total DECIMAL(10, 2),\\n  FOREIGN KEY (customer_id) REFERENCES customers(id)\\n);\\n\\nCREATE TABLE products (\\n  id INT PRIMARY KEY,\\n  name VARCHAR(255),\\n  price DECIMAL(10, 2)\\n);\\n\\nCREATE TABLE order_items (\\n  id INT PRIMARY KEY,\\n  order_id INT,\\n  product_id INT,\\n  quantity INT,\\n  FOREIGN KEY (order_id) REFERENCES orders(id),\\n  FOREIGN KEY (product_id) REFERENCES products(id)\\n);"\n      }\n   ]\n}'}}
+
+RAW: No response received
+
+[2026-04-01 06:37:47.794081+00:00] ERROR in GenerateAssessmentView: AI could not satisfy requested counts. Expected pool MCQs=2, coding=2; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 419, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy requested counts. Expected pool MCQs=2, coding=2; got MCQs=2, coding=0.
+
+RAW: No response received
+
+[2026-04-01 07:32:54.859669+00:00] PUBLIC ACCESS: Token='eb8d9b4d-b3a4-40a8-bdbe-4dc65841e16b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775028774548']}>
+Host: localhost:8001
+
+[2026-04-01 07:32:54.874626+00:00] PUBLIC ACCESS: Token='eb8d9b4d-b3a4-40a8-bdbe-4dc65841e16b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775028774556']}>
+Host: localhost:8001
+
+[2026-04-01 08:59:50.293726+00:00] ERROR in GenerateAssessmentView: name '_is_raw_data' is not defined
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\views.py", line 387, in post
+    generated_data['coding_challenges'] = _generate_execution_verified_test_cases(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        groq_client=local_groq_client,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        challenges=generated_data.get('coding_challenges', []),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_count=5
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v1\backend\ai_assessments\ai_logic.py", line 530, in _generate_execution_verified_test_cases
+    if inp and len(inp) > 1 and _is_raw_data(inp) and inp not in seen_inputs:
+                                ^^^^^^^^^^^^
+NameError: name '_is_raw_data' is not defined
+
+RAW: No response received

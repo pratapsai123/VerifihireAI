@@ -124,9 +124,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihire_db'),
+        'NAME': os.environ.get('DB_NAME', 'user'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),
@@ -259,7 +259,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = config('GROQ_API_KEY', default='gsk_INVALID_KEY_PLACEHOLDER')
+GROQ_API_KEY = config('GROQ_API_KEY', default='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')
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta

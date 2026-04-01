@@ -28,7 +28,9 @@ from .ai_logic import (
     _generate_coding_pool_ai_only,
     _generate_mcq_pool_ai_only,
     pick_random_subset,
-    _enhance_coding_challenges_with_test_cases
+    _generate_execution_verified_test_cases,
+    _final_validation_gate,
+    _expert_assessment_refiner
 )
 import traceback
 import base64
@@ -335,22 +337,36 @@ class GenerateAssessmentView(APIView):
             generated_data = {"mcqs": [], "coding_challenges": []}
 
             # 1. GENERATE MCQ POOL (Dedicated AI Call)
+            blacklist_mcqs = []
+            blacklist_titles = []
+            
+            # Fetch last 20 assessments for this company to avoid replicates
+            recent_assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')[:20]
+            for old_asm in recent_assessments:
+                old_content = old_asm.generated_content or {}
+                for q in old_content.get('mcqs', []):
+                    blacklist_mcqs.append(q.get('question', '')[:100])
+                for challenge in old_content.get('coding_challenges', []):
+                    blacklist_titles.append(challenge.get('title'))
+
             if pool_mcq_total > 0:
-                logger.info(f"Step 1: Generating MCQ pool of {pool_mcq_total} questions...")
-                recovered_mcqs = _generate_mcq_pool_ai_only(
+                logger.info(f"Step 1: Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
+                mcqs = _generate_mcq_pool_ai_only(
                     groq_client=local_groq_client,
                     job_description=job_description,
                     required_skills=required_skills,
-                    easy_required=pool_easy,
-                    medium_required=pool_medium,
-                    hard_required=pool_hard,
+                    pool_mcq_total=pool_mcq_total,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    blacklist_qs=blacklist_mcqs
                 )
-                if recovered_mcqs:
-                    generated_data['mcqs'] = recovered_mcqs[:pool_mcq_total]
+                if mcqs:
+                    generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
             # 2. GENERATE CODING POOL (Dedicated AI Call)
             if pool_coding_total > 0:
-                logger.info(f"Step 2: Generating Coding pool of {pool_coding_total} challenges...")
+                logger.info(f"Step 2: Generating Coding pool of {pool_coding_total} challenges. Blacklist: {blacklist_titles}")
                 extra_coding = _generate_coding_pool_ai_only(
                     groq_client=local_groq_client,
                     job_description=job_description,
@@ -358,17 +374,26 @@ class GenerateAssessmentView(APIView):
                     difficulties=pool_coding_tasks,
                     total_required=pool_coding_total,
                     batch_size=2, # Small batches are safer
+                    blacklist_titles=blacklist_titles
                 )
                 if extra_coding:
                     generated_data['coding_challenges'] = extra_coding[:pool_coding_total]
 
+            # --- STEP 2.5: EXPERT REFINEMENT PASS (MCQs + Coding) ---
+            # This uses the high-reasoning model to clean, fix, and standardize everything.
+            logger.info("Expert Gate: Triggering High-Reasoning Refinement Pass...")
+            generated_data = _expert_assessment_refiner(
+                groq_client=local_groq_client,
+                raw_content=generated_data
+            )
+
             # 3. ENHANCE CODING CHALLENGES (Reach 10 Test Cases)
             if len(generated_data.get('coding_challenges', [])) > 0:
-                logger.info(f"Step 3: Enhancing coding challenges to reach 10 test cases each...")
-                generated_data['coding_challenges'] = _enhance_coding_challenges_with_test_cases(
+                logger.info(f"Step 3: Generating execution-verified test cases (5 each)...")
+                generated_data['coding_challenges'] = _generate_execution_verified_test_cases(
                     groq_client=local_groq_client,
                     challenges=generated_data.get('coding_challenges', []),
-                    target_count=10
+                    target_count=5
                 )
 
             final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
@@ -389,15 +414,13 @@ class GenerateAssessmentView(APIView):
             if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > pool_coding_total:
                 generated_data['coding_challenges'] = generated_data['coding_challenges'][:pool_coding_total]
 
-            # === ENFORCE 10 TEST CASES (Enhancement Pass) ===
-            # The initial pass only generates 2-3 test cases for stability.
-            # We now top them up to 10 if coding challenges are present.
-            if final_coding > 0:
-                logger.info(f"Enhancing {final_coding} coding challenges to reach 10 test cases each...")
-                generated_data['coding_challenges'] = _enhance_coding_challenges_with_test_cases(
+                # === FINAL VALIDATION GATE ===
+                # This ensures every challenge has 5 non-empty, non-fragmented cases.
+                logger.info(f"Final Gate: Performing last verification for {final_coding} coding challenges...")
+                generated_data['coding_challenges'] = _final_validation_gate(
                     groq_client=local_groq_client,
                     challenges=generated_data.get('coding_challenges', []),
-                    target_count=10
+                    target_count=5
                 )
 
             # If MCQ count is enough but labels are still skewed, rebalance labels over AI-generated MCQs.
