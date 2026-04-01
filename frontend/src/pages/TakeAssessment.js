@@ -260,6 +260,8 @@ export default function TakeAssessment() {
   // Pre-check: time window error shown BEFORE the candidate details form
   const [windowError, setWindowError] = useState('');
   const [windowSchedule, setWindowSchedule] = useState(null);
+  const [precheckLoading, setPrecheckLoading] = useState(true);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [codingQuestions, setCodingQuestions] = useState([]);
@@ -824,11 +826,13 @@ export default function TakeAssessment() {
   // doesn't waste time filling in details when the window is expired/not open.
   useEffect(() => {
     if (!token) return;
+    setPrecheckLoading(true);
     axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
       .then(() => {
         // Window is open — clear any prior error
         setWindowError('');
         setWindowSchedule(null);
+        setPrecheckLoading(false);
       })
       .catch((err) => {
         const status = err?.response?.status;
@@ -837,10 +841,11 @@ export default function TakeAssessment() {
           setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
           setWindowSchedule(err?.response?.data?.schedule || null);
         }
-        // 409 = already submitted — redirect to result
+        // 409 = already submitted — show popup instead of redirecting
         if (status === 409) {
-          navigate(`/result/${token}`, { replace: true });
+          setAlreadySubmitted(true);
         }
+        setPrecheckLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -942,7 +947,8 @@ export default function TakeAssessment() {
         const status = e?.response?.status;
         const message = e?.response?.data?.error || e?.message || 'Failed to load assessment';
         if (status === 409 && token) {
-          navigate(`/result/${token}`, { replace: true });
+          setAlreadySubmitted(true);
+          setLoading(false);
           return;
         }
         setScheduleInfo(e?.response?.data?.schedule || null);
@@ -1440,6 +1446,34 @@ export default function TakeAssessment() {
   const resultPaneStyle = showResultPanel && activeRunResult
     ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '70vh' }
     : { display: 'none' };
+
+  // Show a loading state to prevent CandidateDetails flicker
+  if (precheckLoading) {
+    return (
+      <div className="take-page">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '18px', color: '#64748b' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Show already submitted popup directly if precheck catches it
+  if (alreadySubmitted) {
+    return (
+      <div className="take-page" style={{ position: 'relative' }}>
+         <div className="take-shell" style={{ opacity: 0.5, pointerEvents: 'none', background: '#f8fafc', height: '100vh', width: '100vw' }}></div>
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999 }}>
+            <div style={{ background: '#fff', padding: '40px', borderRadius: '12px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                <h2 style={{ margin: '0 0 12px', color: '#1e293b' }}>Assessment Submitted</h2>
+                <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.5' }}>You have already submitted this assessment. You can safely close this window.</p>
+                <button onClick={() => window.close()} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer', fontWeight: '500' }}>Close</button>
+            </div>
+         </div>
+      </div>
+    );
+  }
 
   // Show window error BEFORE the candidate details form
   if (windowError) {
