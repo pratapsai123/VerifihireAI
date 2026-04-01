@@ -158,6 +158,20 @@
     transform: none !important;
 }
 
+.calendar-cell.outside-window {
+    background: transparent !important;
+    cursor: default;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.calendar-nav button.nav-btn-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: transparent !important;
+    color: #cbd5e1 !important;
+}
+
 .day-number {
     font-size: 0.8125rem;
     color: #64748b;
@@ -428,16 +442,16 @@
 
 .success-card {
     background: #ffffff;
-    max-width: 500px;
-    padding: 3rem;
-    border-radius: 32px;
+    max-width: 440px;
+    padding: 2.5rem 2rem;
+    border-radius: 28px;
     text-align: center;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
 .success-icon-wrapper {
-    margin-bottom: 1.5rem;
-    padding: 16px;
+    margin-bottom: 0.75rem;
+    padding: 12px;
     background: #f0fdf4;
     border-radius: 50%;
     display: inline-flex;
@@ -445,20 +459,23 @@
 
 .success-icon-svg { color: #10b981; }
 
-.success-title { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem; }
-.success-subtitle { color: #64748b; margin-bottom: 2rem; }
+.success-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem; }
+.success-subtitle { font-size: 0.875rem; color: #64748b; margin-bottom: 1.5rem; line-height: 1.4; }
 
 .booking-summary-box {
     background: #f8fafc;
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #f1f5f9;
 }
 
-.summary-item { display: flex; gap: 12px; margin-bottom: 1rem; }
-.summary-text label { display: block; font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
-.summary-text span { font-size: 1rem; font-weight: 700; color: #1e293b; }
+.summary-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 0.875rem; }
+.summary-item:last-child { margin-bottom: 0; }
+.summary-icon { margin-top: 2px; color: #64748b; }
+.summary-text label { display: block; font-size: 0.7rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
+.summary-text span { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
 
 .success-info-banner {
     display: inline-flex;
@@ -470,12 +487,12 @@
     background: #eff6ff;
     padding: 8px 16px;
     border-radius: 10px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .calendar-sync-block {
     border-top: 1px solid #f1f5f9;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
 }
 
 .calendar-sync-block p {
@@ -577,9 +594,9 @@
 
 /* Success Lottie Container */
 .lottie-success-container {
-    width: 250px;
-    height: 250px;
-    margin: -40px auto 0;
+    width: 140px;
+    height: 140px;
+    margin: -20px auto -10px;
 }
 
 @keyframes fadeInScale {

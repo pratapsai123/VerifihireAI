@@ -10,7 +10,8 @@ import {
   ChevronRight,
   ChevronLeft,
   Info,
-  RefreshCw
+  RefreshCw,
+  Building
 } from 'lucide-react';
 import { API_BASE_URL } from '../apiConfig';
 import Lottie from 'lottie-react';
@@ -30,6 +31,7 @@ const BookInterview = () => {
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [activeDate, setActiveDate] = useState(null);
     const [viewDate, setViewDate] = useState(new Date()); // For month navigation
+    const [windowInfo, setWindowInfo] = useState(null); // { window_start, window_end }
     const [reservationExpiry, setReservationExpiry] = useState(null);
     const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState(null);
@@ -71,12 +73,17 @@ const BookInterview = () => {
                 }
                 const fetchedSlots = res.data.slots;
                 setSlots(fetchedSlots);
+
+                // Capture the HR-defined booking window from the backend
+                if (res.data.window_info) {
+                    setWindowInfo(res.data.window_info);
+                }
                 
                 // Set initial active date if none selected
                 if (fetchedSlots.length > 0 && !activeDate) {
                     const firstDate = fetchedSlots[0].date;
                     setActiveDate(firstDate);
-                    setViewDate(new Date(firstDate));
+                    setViewDate(new Date(firstDate + 'T12:00:00')); // noon avoids timezone flip
                 }
             }
         } catch (err) {
@@ -181,11 +188,6 @@ const BookInterview = () => {
         const month = viewDate.getMonth();
         const daysInMonth = getDaysInMonth(year, month);
         const firstDay = getFirstDayOfMonth(year, month);
-        
-        // Lead time calculation (3 days)
-        const minBookingDate = new Date();
-        minBookingDate.setDate(minBookingDate.getDate() + 3);
-        minBookingDate.setHours(0, 0, 0, 0);
 
         const days = [];
         // Fill previous month padding
@@ -194,19 +196,62 @@ const BookInterview = () => {
         for (let i = 1; i <= daysInMonth; i++) {
             const currentCellDate = new Date(year, month, i);
             const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
-            
-            const isTooSoon = currentCellDate < minBookingDate;
-            
+
+            // A date is valid only if the backend returned it as an available slot date.
+            // All other dates (weekends, holidays, dates outside the 7-day window) are hidden.
+            const isInWindow = availableDates.includes(dateStr);
+
             days.push({
                 day: i,
                 dateStr,
-                hasSlots: availableDates.includes(dateStr) && !isTooSoon,
+                hasSlots: isInWindow,
                 isToday: new Date().toDateString() === currentCellDate.toDateString(),
-                isTooSoon
+                isOutsideWindow: !isInWindow,
             });
         }
         return days;
     }, [viewDate, availableDates]);
+
+    // ── Window-aware month navigation ─────────────────────────────────────────
+    // Derive the first and last months that contain valid booking dates.
+    // This covers all three scenarios the user described:
+    //   1) Window spans Jan→Feb  → backward from Feb and forward from Jan are allowed
+    //   2) Window all in March   → both arrows disabled (no adjacent months)
+    //   3) General case          → disable whichever boundary you've already reached
+    const windowMonths = useMemo(() => {
+        if (!windowInfo?.window_start || !windowInfo?.window_end) return null;
+        // Parse dates at noon to avoid timezone shift to previous day
+        const start = new Date(windowInfo.window_start + 'T12:00:00');
+        const end   = new Date(windowInfo.window_end   + 'T12:00:00');
+        return {
+            firstYear:  start.getFullYear(),
+            firstMonth: start.getMonth(), // 0-indexed
+            lastYear:   end.getFullYear(),
+            lastMonth:  end.getMonth(),
+        };
+    }, [windowInfo]);
+
+    const canGoPrev = useMemo(() => {
+        if (!windowMonths) return false;
+        const curYear  = viewDate.getFullYear();
+        const curMonth = viewDate.getMonth();
+        // Can go back only if there is a month BEFORE this one that is still within the window
+        return (
+            curYear > windowMonths.firstYear ||
+            (curYear === windowMonths.firstYear && curMonth > windowMonths.firstMonth)
+        );
+    }, [viewDate, windowMonths]);
+
+    const canGoNext = useMemo(() => {
+        if (!windowMonths) return false;
+        const curYear  = viewDate.getFullYear();
+        const curMonth = viewDate.getMonth();
+        // Can go forward only if there is a month AFTER this one that is still within the window
+        return (
+            curYear < windowMonths.lastYear ||
+            (curYear === windowMonths.lastYear && curMonth < windowMonths.lastMonth)
+        );
+    }, [viewDate, windowMonths]);
 
     const handleMonthChange = (offset) => {
         setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + offset, 1));
@@ -255,7 +300,7 @@ const BookInterview = () => {
                         <Lottie animationData={successLottie} loop={false} />
                     ) : (
                         <div className="success-icon-wrapper">
-                            <CheckCircle className="success-icon-svg" size={80} />
+                            <CheckCircle className="success-icon-svg" size={60} />
                         </div>
                     )}
                 </div>
@@ -264,26 +309,35 @@ const BookInterview = () => {
                 
                 <div className="booking-summary-box">
                     <div className="summary-item">
-                        <CalendarIcon size={20} className="summary-icon" />
+                        <CalendarIcon size={18} className="summary-icon" />
                         <div className="summary-text">
                             <label>Scheduled Date</label>
                             <span>{formatDateFull(bookingDetails.date)}</span>
                         </div>
                     </div>
                     <div className="summary-item">
-                        <Clock size={20} className="summary-icon" />
+                        <Clock size={18} className="summary-icon" />
                         <div className="summary-text">
                             <label>Time Slot</label>
                             <span>{bookingDetails.time}</span>
                         </div>
                     </div>
                     <div className="summary-item">
-                        <User size={20} className="summary-icon" />
+                        <User size={18} className="summary-icon" />
                         <div className="summary-text">
                             <label>Host</label>
                             <span>{bookingDetails.interviewer}</span>
                         </div>
                     </div>
+                    {bookingDetails.company && (
+                        <div className="summary-item">
+                            <Building size={18} className="summary-icon" />
+                            <div className="summary-text">
+                                <label>Organization</label>
+                                <span>{bookingDetails.company}</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="success-info-banner">
@@ -292,7 +346,6 @@ const BookInterview = () => {
                 </div>
 
                 <div className="calendar-sync-block">
-                    <p>Or sync manually to your calendar:</p>
                     <div className="calendar-sync-actions">
                         <a href={getCalendarLinks().google} target="_blank" rel="noopener noreferrer" className="sync-btn google-sync">
                             Google Calendar
@@ -326,8 +379,22 @@ const BookInterview = () => {
                         <div className="calendar-header">
                             <h3>{viewDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
                             <div className="calendar-nav">
-                                <button onClick={() => handleMonthChange(-1)}><ChevronLeft size={20} /></button>
-                                <button onClick={() => handleMonthChange(1)}><ChevronRight size={20} /></button>
+                                <button
+                                    onClick={() => canGoPrev && handleMonthChange(-1)}
+                                    disabled={!canGoPrev}
+                                    className={!canGoPrev ? 'nav-btn-disabled' : ''}
+                                    title={!canGoPrev ? 'No earlier dates in your booking window' : 'Previous month'}
+                                >
+                                    <ChevronLeft size={20} />
+                                </button>
+                                <button
+                                    onClick={() => canGoNext && handleMonthChange(1)}
+                                    disabled={!canGoNext}
+                                    className={!canGoNext ? 'nav-btn-disabled' : ''}
+                                    title={!canGoNext ? 'No later dates in your booking window' : 'Next month'}
+                                >
+                                    <ChevronRight size={20} />
+                                </button>
                             </div>
                         </div>
                         
@@ -345,8 +412,8 @@ const BookInterview = () => {
                                 return (
                                     <div 
                                         key={dateObj.dateStr} 
-                                        className={`calendar-cell ${dateObj.hasSlots ? 'has-slots' : ''} ${isActive ? 'active' : ''} ${dateObj.isToday ? 'today' : ''} ${dateObj.isTooSoon ? 'disabled' : ''}`}
-                                        onClick={() => dateObj.hasSlots && !dateObj.isTooSoon && setActiveDate(dateObj.dateStr)}
+                                        className={`calendar-cell ${dateObj.hasSlots ? 'has-slots' : ''} ${isActive ? 'active' : ''} ${dateObj.isToday ? 'today' : ''} ${dateObj.isOutsideWindow ? 'outside-window' : ''}`}
+                                        onClick={() => dateObj.hasSlots && setActiveDate(dateObj.dateStr)}
                                     >
                                         <span className="day-number">{dateObj.day}</span>
                                         {dateObj.hasSlots && <div className="slot-indicator"></div>}

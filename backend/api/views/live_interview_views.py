@@ -1066,19 +1066,29 @@ def generate_all_interviewer_slots_view(request):
 @permission_classes([AllowAny])
 def get_available_slots_view(request, token):
     """
-    Dynamically generates 45-minute slots based on interviewer availability windows.
-    Subtracts existing booked/reserved slots to show real-time "Effective Availability".
+    Dynamic rolling window slot fetcher.
+
+    Window logic (only applies when is_auto_schedule=True and
+    slot_booking_email_sent_at is stamped):
+      - Prep buffer  : email_sent_date + 3 calendar days  (candidate cannot book before this)
+      - Booking window: the first 7 DISTINCT calendar dates (from buffer_start onward)
+                        on which at least one interviewer slot exists.
+      - If the interviewer is on holiday / weekend and has no slots on a date,
+        that date is skipped and the window automatically extends forward until
+        7 real days-with-slots are found.
+
+    For non-auto-schedule invitations the old "3 days from now" behaviour is kept.
     """
     try:
         inv = CandidateInvitation.objects.get(token=token)
         assessment = inv.assessment
-        
-        # 1. Assigned Pool
-        interviewer_ids = assessment.assigned_interviewers.values_list('id', flat=True)
+        interviewer_ids = list(assessment.assigned_interviewers.values_list('id', flat=True))
         now = timezone.now()
-        
-        # Check if this invitation already has a confirmed booking
-        booked_slot = InterviewSlot.objects.filter(invitation=inv, status=InterviewSlot.STATUS_BOOKED).first()
+
+        # ── Already booked? Return early ──────────────────────────────────────
+        booked_slot = InterviewSlot.objects.filter(
+            invitation=inv, status=InterviewSlot.STATUS_BOOKED
+        ).first()
         if booked_slot:
             return Response({
                 'success': True,
@@ -1086,15 +1096,12 @@ def get_available_slots_view(request, token):
                 'booking_details': {
                     'date': booked_slot.slot_date.isoformat(),
                     'time': f"{booked_slot.start_time.strftime('%I:%M %p')} - {booked_slot.end_time.strftime('%I:%M %p')}",
-                    'interviewer': booked_slot.interviewer.first_name or booked_slot.interviewer.email
+                    'interviewer': booked_slot.interviewer.first_name or booked_slot.interviewer.email,
+                    'company': booked_slot.interviewer.company.name if booked_slot.interviewer.company else 'VerifiHire'
                 }
             })
-        
-        # Enforce 3-day lead time (72 hours prep buffer)
-        today = now.date()
-        min_booking_date = (now + datetime.timedelta(days=3)).date()
 
-        # 2. Reservation Cleanup
+        # ── Reservation cleanup (expired holds) ──────────────────────────────
         InterviewSlot.objects.filter(
             status=InterviewSlot.STATUS_RESERVED,
             reservation_expiry_time__lt=now
@@ -1104,35 +1111,101 @@ def get_available_slots_view(request, token):
             reservation_expiry_time=None
         )
 
-        # 3. Get Windows & Existing Slots
+        # ── Compute the booking window ────────────────────────────────────────
+        # For auto-schedule invitations with a stamped email time, we use the
+        # dynamic rolling window.  For anything else we fall back to the old
+        # "3 calendar days from today" rule.
+        PREP_BUFFER_DAYS = 3   # interviewer/candidate prep time
+        TARGET_AVAILABLE_DAYS = 7  # how many real working days the candidate sees
+
+        if inv.is_auto_schedule and inv.slot_booking_email_sent_at:
+            # Anchor is fixed: cannot be gamed by procrastinating candidates.
+            anchor_date = inv.slot_booking_email_sent_at.date()
+        else:
+            # Fallback for manual / non-auto-schedule invitations.
+            anchor_date = now.date()
+
+        # The earliest date the candidate is allowed to book (after prep buffer).
+        window_start = anchor_date + datetime.timedelta(days=PREP_BUFFER_DAYS)
+
+        # Ensure we never show dates in the past (safety net).
+        if window_start < now.date():
+            window_start = now.date()
+
+        # ── Hunt for 7 distinct dates with actual interviewer availability ────
+        # We look at InterviewerAvailability windows (the source-of-truth for
+        # when an interviewer is working) day-by-day from window_start forward,
+        # collecting distinct dates until we have TARGET_AVAILABLE_DAYS of them.
+        # Days with zero availability are automatically skipped (weekends,
+        # holidays, sick-leave etc.) – no special-casing needed.
+
+        # Fetch ALL future availability records for the assigned interviewers
+        # starting from window_start.  We look up to 60 days ahead to handle
+        # extreme holiday / sparse-schedule scenarios without an infinite loop.
+        MAX_SEARCH_DAYS = 60
+        search_end = window_start + datetime.timedelta(days=MAX_SEARCH_DAYS)
+
+        available_dates_qs = (
+            InterviewerAvailability.objects
+            .filter(
+                interviewer_id__in=interviewer_ids,
+                date__gte=window_start,
+                date__lte=search_end,
+            )
+            .order_by('date')
+            .values_list('date', flat=True)
+            .distinct()
+        )
+
+        # Collect the first TARGET_AVAILABLE_DAYS distinct dates.
+        valid_dates = []
+        for d in available_dates_qs:
+            if d not in valid_dates:
+                valid_dates.append(d)
+            if len(valid_dates) >= TARGET_AVAILABLE_DAYS:
+                break
+
+        if not valid_dates:
+            # No interviewer availability at all in the search window.
+            return Response({
+                'success': True,
+                'slots': [],
+                'window_info': {
+                    'message': 'No interviewer slots are currently available in your booking window. Please contact HR.',
+                    'window_start': window_start.isoformat(),
+                }
+            })
+
+        # The window ends on the last found date (inclusive).
+        window_end = valid_dates[-1]
+
+        # ── Fetch windows & real slots restricted to our computed window ──────
         windows = InterviewerAvailability.objects.filter(
             interviewer_id__in=interviewer_ids,
-            date__gte=min_booking_date
+            date__in=valid_dates,
         ).select_related('interviewer')
 
         all_real_slots = InterviewSlot.objects.filter(
             interviewer_id__in=interviewer_ids,
-            slot_date__gte=min_booking_date
+            slot_date__in=valid_dates,
         )
 
-        # 4. Generate Combined Map
-        # Key: (date_str, start_time_str) -> one slot object
+        # ── Build the slot map ────────────────────────────────────────────────
         slots_map = {}
+        slot_duration = 50   # minutes per interview
+        break_duration = 10  # buffer between slots
+        step = slot_duration + break_duration
 
         for win in windows:
             curr_dt = datetime.datetime.combine(win.date, win.start_time)
             end_dt = datetime.datetime.combine(win.date, win.end_time)
-            
-            slot_duration = 50
-            break_duration = 10
-            step = slot_duration + break_duration
 
             while curr_dt + datetime.timedelta(minutes=slot_duration) <= end_dt:
                 slot_date = curr_dt.date()
                 slot_start = curr_dt.time()
                 slot_end = (curr_dt + datetime.timedelta(minutes=slot_duration)).time()
-                
-                # Check overlapping slots that ARE booked or reserved (by others)
+
+                # Skip if another candidate already booked / reserved this slot.
                 is_busy = all_real_slots.filter(
                     interviewer=win.interviewer,
                     slot_date=slot_date,
@@ -1147,8 +1220,6 @@ def get_available_slots_view(request, token):
                 if not is_busy:
                     key = (slot_date.isoformat(), slot_start.strftime('%H:%M'))
                     if key not in slots_map:
-                        # Check if a REAL slot already exists for THIS specific start time
-                        # to reuse its ID (helps with frontend consistency)
                         existing = all_real_slots.filter(
                             interviewer=win.interviewer,
                             slot_date=slot_date,
@@ -1162,39 +1233,44 @@ def get_available_slots_view(request, token):
                             'start_time': slot_start.strftime('%I:%M %p'),
                             'end_time': slot_end.strftime('%I:%M %p'),
                             'status': 'available',
-                            'is_mine': False
+                            'is_mine': False,
                         }
-                
+
                 curr_dt += datetime.timedelta(minutes=step)
 
-        # 5. Overlay "My" reservations (so they show up even if busy or different time)
+        # ── Overlay *this candidate's* own reservations ───────────────────────
         for rs in all_real_slots:
-            is_mine = rs.reserved_by_token == str(token)
-            if is_mine:
+            if rs.reserved_by_token == str(token):
                 key = (rs.slot_date.isoformat(), rs.start_time.strftime('%H:%M'))
                 slots_map[key] = {
-                    'id': str(rs.id), 
+                    'id': str(rs.id),
                     'date': rs.slot_date.isoformat(),
                     'start_time': rs.start_time.strftime('%I:%M %p'),
                     'end_time': rs.end_time.strftime('%I:%M %p'),
                     'status': rs.status,
-                    'is_mine': True
+                    'is_mine': True,
                 }
 
-        # 6. Sort by date and time correctly using the keys (which are in 24h format)
-        sorted_keys = sorted(slots_map.keys())
-        sorted_slots = [slots_map[k] for k in sorted_keys]
+        sorted_slots = [slots_map[k] for k in sorted(slots_map.keys())]
 
         return Response({
             'success': True,
-            'slots': sorted_slots
+            'slots': sorted_slots,
+            'window_info': {
+                'window_start': window_start.isoformat(),
+                'window_end': window_end.isoformat(),
+                'available_days': len(valid_dates),
+            }
         })
-        
+
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invalid invitation'}, status=404)
     except Exception as e:
+        import traceback
         print(f"Error in dynamic slots: {e}")
+        print(traceback.format_exc())
         return Response({'error': str(e)}, status=500)
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -1230,13 +1306,19 @@ def reserve_interview_slot_view(request, token):
                 base_dt = datetime.datetime.combine(target_date, target_time)
                 target_end = (base_dt + timedelta(minutes=50)).time()
 
-                # Robust Lead Time check: must be at least 3 full days away from 'now.date()'
-                # If today is Mar 16, earliest allowed target_date is Mar 19.
-                min_booking_date = now.date() + timedelta(days=3)
-                
+                # ── Dynamic window check ────────────────────────────────────
+                # For auto-schedule invitations use the fixed email timestamp as
+                # anchor so procrastinating candidates cannot extend their window.
+                if inv.is_auto_schedule and inv.slot_booking_email_sent_at:
+                    anchor_date = inv.slot_booking_email_sent_at.date()
+                else:
+                    anchor_date = now.date()
+
+                min_booking_date = anchor_date + timedelta(days=3)
+
                 if target_date < min_booking_date:
                     return Response({
-                        'error': f'Booking too soon. Earliest available date is {min_booking_date.strftime("%B %d, %Y")}.',
+                        'error': f'Booking too soon. Your earliest available date is {min_booking_date.strftime("%B %d, %Y")} (3-day prep time).',
                         'code': 'LEAD_TIME_VIOLATION'
                     }, status=400)
 
@@ -1319,11 +1401,15 @@ def reserve_interview_slot_view(request, token):
             if not assessment.assigned_interviewers.filter(id=slot.interviewer_id).exists():
                 return Response({'error': 'Unauthorized slot'}, status=403)
 
-            # Validate 3-day lead time for static slots
-            min_booking_date = now.date() + timedelta(days=3)
+            # ── Dynamic window check for real slots ─────────────────────────
+            if inv.is_auto_schedule and inv.slot_booking_email_sent_at:
+                anchor_date = inv.slot_booking_email_sent_at.date()
+            else:
+                anchor_date = now.date()
+            min_booking_date = anchor_date + timedelta(days=3)
             if slot.slot_date < min_booking_date:
                 return Response({
-                    'error': f'This slot is no longer available. (3-day lead time required). Earliest allowed: {min_booking_date.isoformat()}',
+                    'error': f'This slot is outside your booking window. Earliest allowed: {min_booking_date.isoformat()}',
                     'code': 'LEAD_TIME_VIOLATION'
                 }, status=400)
 
@@ -1378,11 +1464,16 @@ def confirm_interview_booking_view(request, token):
         with transaction.atomic():
             slot = InterviewSlot.objects.select_for_update().get(id=slot_id)
             
-            # Verification: 3-day lead time
-            min_booking_date = now.date() + timedelta(days=3)
+            # ── Dynamic window check (final gate) ────────────────────────────
+            # Use the fixed email timestamp so the window cannot be extended by delay.
+            if inv.is_auto_schedule and inv.slot_booking_email_sent_at:
+                anchor_date = inv.slot_booking_email_sent_at.date()
+            else:
+                anchor_date = now.date()
+            min_booking_date = anchor_date + timedelta(days=3)
             if slot.slot_date < min_booking_date:
                 return Response({
-                    'error': f'Booking failed: 3-day lead time required. Earliest allowed: {min_booking_date.isoformat()}',
+                    'error': f'Booking failed: slot is outside your allowed booking window. Earliest allowed: {min_booking_date.isoformat()}',
                     'code': 'LEAD_TIME_VIOLATION'
                 }, status=400)
             if slot.status == InterviewSlot.STATUS_RESERVED and slot.reserved_by_token == str(token):
@@ -1447,7 +1538,8 @@ def confirm_interview_booking_view(request, token):
                 'booking_details': {
                     'date': slot.slot_date.isoformat(),
                     'time': f"{slot.start_time.strftime('%I:%M %p')} - {slot.end_time.strftime('%I:%M %p')}",
-                    'interviewer': slot.interviewer.first_name or slot.interviewer.email
+                    'interviewer': slot.interviewer.first_name or slot.interviewer.email,
+                    'company': slot.interviewer.company.name if slot.interviewer.company else 'VerifiHire'
                 }
             })
             
