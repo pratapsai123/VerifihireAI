@@ -264,6 +264,7 @@ export default function TakeAssessment() {
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const hasMcq = questions.length > 0;
   const [codingQuestions, setCodingQuestions] = useState([]);
   const [answersById, setAnswersById] = useState(() => {
     try {
@@ -351,6 +352,7 @@ export default function TakeAssessment() {
     return null;
   });
   const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
+  const [transitionTimer, setTransitionTimer] = useState(15);
 
   // New State for Exam Mode
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(() => {
@@ -744,7 +746,12 @@ export default function TakeAssessment() {
       // End test -> show result page (pass autoSubmit flag for timeout popup)
       navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
     } catch (e) {
-      setSubmitError(e?.response?.data?.error || e?.message || 'Submit failed');
+      const msg = e?.response?.data?.error || e?.message || 'Submit failed';
+      if (e?.response?.status === 403 || e?.response?.status === 409 || msg.toLowerCase().includes('time is over')) {
+        setError(msg);
+      } else {
+        setSubmitError(msg);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -771,6 +778,20 @@ export default function TakeAssessment() {
       window.removeEventListener('popstate', onPopState);
     };
   }, [submitted]);
+
+  // Auto-start coding section after 15 seconds
+  useEffect(() => {
+    let timer;
+    if (assessmentStage === 'transition' && transitionTimer > 0) {
+      timer = setInterval(() => {
+        setTransitionTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (assessmentStage === 'transition' && transitionTimer === 0) {
+      setAssessmentStage('coding');
+      window.scrollTo(0, 0);
+    }
+    return () => clearInterval(timer);
+  }, [assessmentStage, transitionTimer]);
 
   // Check if candidate details are already completed
   useEffect(() => {
@@ -1089,7 +1110,7 @@ export default function TakeAssessment() {
   }, []);
 
   useEffect(() => {
-    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
     startCamera();
 
@@ -1151,11 +1172,11 @@ export default function TakeAssessment() {
       window.removeEventListener('blur', handleBlur);
       stopCamera();
     };
-  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage]);
+  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage, error, windowError]);
 
   // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
   useEffect(() => {
-    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
     const bgInterval = setInterval(() => {
       // If candidate is actively looking at our tab, do nothing
@@ -1167,7 +1188,7 @@ export default function TakeAssessment() {
     }, 5000);
 
     return () => clearInterval(bgInterval);
-  }, [showAiEvent, submitted, assessmentStage]);
+  }, [showAiEvent, submitted, assessmentStage, error, windowError]);
 
   const startScreenShare = useCallback(async () => {
     try {
@@ -1658,8 +1679,6 @@ export default function TakeAssessment() {
     );
   }
 
-  const hasMcq = questions.length > 0;
-
 
 
   return (
@@ -1766,7 +1785,7 @@ export default function TakeAssessment() {
                       <strong>Coding Time Limit: {assessment?.coding_time_limit || 'As per total time'}</strong>
                     </p>
                     <button className="btn btn-primary" onClick={startCoding} style={{ fontSize: '1.2rem', padding: '12px 36px', borderRadius: '8px' }}>
-                      Start Coding Section
+                      Start Coding Section (starts in {transitionTimer})
                     </button>
                   </div>
                 )}

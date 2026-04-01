@@ -4,16 +4,31 @@ import './index.css';
 import App from './App';
 
 // Swallow noisy ResizeObserver loop errors to avoid user-facing popups
-const ignoreROError = (event) => {
-  const msg = event?.message || '';
-  if (msg.includes('ResizeObserver loop') || msg.includes('ResizeObserver loop completed')) {
+const isResizeObserverError = (msg) => {
+  return (
+    typeof msg === 'string' &&
+    (msg.includes('ResizeObserver loop') ||
+     msg.includes('ResizeObserver loop completed') ||
+     msg.includes('ResizeObserver loop limit exceeded'))
+  );
+};
+
+window.addEventListener('error', (event) => {
+  if (isResizeObserverError(event.message)) {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
-};
-window.addEventListener('error', ignoreROError, { capture: true });
+}, { capture: true });
+
+window.addEventListener('unhandledrejection', (event) => {
+  if (isResizeObserverError(event.reason?.message)) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+}, { capture: true });
+
 window.onerror = (message) => {
-  if (typeof message === 'string' && (message.includes('ResizeObserver loop') || message.includes('ResizeObserver loop completed'))) {
+  if (isResizeObserverError(message)) {
     return true; // swallow
   }
   return false;
