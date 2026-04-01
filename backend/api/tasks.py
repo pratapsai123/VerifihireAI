@@ -62,7 +62,6 @@ def send_custom_assessment_result_task(invitation_id):
             <div style="font-family: sans-serif; max-width: 600px;">
                 <h2 style="color: #2e7d32;">Congratulations, {inv.name}!</h2>
                 <p>You have successfully cleared the assessment for <strong>{inv.assessment.name}</strong>.</p>
-                <p><strong>Your Final Score:</strong> {submission.percentage}%</p>
                 <p>The next step is a live interview. Please use the button below to book your preferred slot:</p>
                 <div style="margin: 30px 0;">
                     <a href="{booking_link}" style="background-color: #4318FF; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Book Interview Slot</a>
