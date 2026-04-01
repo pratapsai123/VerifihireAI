@@ -342,8 +342,9 @@ def get_invitation_public_view(request, token):
         except CandidateInvitation.DoesNotExist:
             return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Single-use: if already submitted, block further access
-        if inv.status == 'submitted':
+        # Single-use: if already submitted or qualified (slot booking email sent), block further access.
+        # 'qualified' is set by send_custom_assessment_result_task AFTER 'submitted' — must block both.
+        if inv.status in ('submitted', 'qualified'):
             return Response({'error': 'Your exam has been completed.'}, status=status.HTTP_409_CONFLICT)
 
         assessment = inv.assessment
@@ -2074,7 +2075,7 @@ def submit_objective_section(request, token):
         except CandidateInvitation.DoesNotExist:
             return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        if inv.status == 'submitted':
+        if inv.status in ('submitted', 'qualified'):
             return Response({'error': 'Assessment already submitted.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Get answers: { "question_id": "A" ... }
@@ -2152,6 +2153,9 @@ def submit_objective_section(request, token):
                 # Recalculate final percentage using existing logic
                 _update_submission_scoring_logic(submission)
                 submission.save()
+                # Trigger slot booking mail task (objective-only, cutoff failed)
+                from api.tasks import send_custom_assessment_result_task
+                send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
             else:
                 passed = True
                 if has_coding:
@@ -2167,6 +2171,10 @@ def submit_objective_section(request, token):
                 # Even if passed, update scoring so partial results are correct
                 _update_submission_scoring_logic(submission)
                 submission.save()
+                if not has_coding:
+                    # Trigger slot booking mail task (objective-only, cutoff passed)
+                    from api.tasks import send_custom_assessment_result_task
+                    send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
         else:
             # If no cutoff, still update scoring for partial results
             if not has_coding:
@@ -2181,6 +2189,10 @@ def submit_objective_section(request, token):
 
             _update_submission_scoring_logic(submission)
             submission.save()
+            if not has_coding:
+                # Trigger slot booking mail task (objective-only, no cutoff configured)
+                from api.tasks import send_custom_assessment_result_task
+                send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
         
         # Reload to get updated fields from _update_submission_scoring_logic
         submission.refresh_from_db()
