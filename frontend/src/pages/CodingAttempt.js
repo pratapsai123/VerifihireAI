@@ -356,6 +356,7 @@ export default function CodingAttempt() {
     setError('');
     setResult(null);
     setLastAction('run');
+    setResultHeightPct(50); // Expand results area upon running
     try {
       const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/run/?mode=visible`, {
         code,
@@ -380,6 +381,7 @@ export default function CodingAttempt() {
     setError('');
     setResult(null);
     setLastAction('submit');
+    setResultHeightPct(50); // Expand results area upon submitting
     try {
       const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/submit/`, { code, language: selectedLanguage });
       setResult(resp.data);
@@ -432,7 +434,9 @@ export default function CodingAttempt() {
   };
 
   const resultPaneStyle = showResultPanel && result
-    ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '400px' }
+    ? (resultHeightPct > 30
+      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
+      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
 
   return (
@@ -544,7 +548,7 @@ export default function CodingAttempt() {
               </div>
             </div>
 
-            <div className="coding-editor-wrap" ref={editorWrapRef}>
+            <div className="coding-editor-wrap" ref={editorWrapRef} onClick={() => setResultHeightPct(30)}>
               <div className="coding-monaco">
                 <Suspense fallback={<div className="coding-monaco-loading">Loading editor…</div>}>
                   <MonacoEditor
