@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
-import './FeedbackPage.css';
+import '../styles/FeedbackPage.css';
 
 const FeedbackPage = () => {
     const [searchParams] = useSearchParams();

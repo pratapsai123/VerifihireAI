@@ -206,253 +206,205 @@ function Login() {
   };
 
   return (
-    <>
-      <main className="auth-page signup-page-enhanced">
-        <div className="container auth-container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="auth-card" data-aos="fade-up" style={{
-            maxWidth: '480px',
-            width: '100%',
-            padding: '0.5rem 1.25rem'
-          }}>
-            <div className="auth-logo-wrapper">
-              <div style={{
-                maxWidth: '450px',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <img
-                  src="/auth-logo-v7.png"
-                  alt="VerifiHireAI Logo"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: 'brightness(0.85) contrast(1.2) sepia(0.2) saturate(1.3)'
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="auth-content-wrapper">
-              <h2 style={{ textAlign: 'center', marginBottom: '0.25rem', fontWeight: '600', color: 'var(--gray-900)' }}>Welcome Back</h2>
-              <p style={{ textAlign: 'center', marginBottom: '0.5rem', color: 'var(--gray-600)', fontSize: '0.9rem', lineHeight: '1.4' }}>
-                Login to manage assessments, view reports, and monitor candidate sessions.
-              </p>
-              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                {showOtpStep ? 'Verify OTP' : 'Login'}
-              </h3>
-
-              {!showOtpStep ? (
-                // Step 1: Email and Password
-                <form className="auth-form" onSubmit={handleLogin}>
-
-
-                  <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                    <i className="fas fa-envelope auth-input-icon"></i>
-                    <input
-                      type="email"
-                      className="auth-input-with-icon"
-                      placeholder=" "
-                      value={loginEmail}
-                      onChange={(e) => setLoginEmail(e.target.value)}
-                      onFocus={() => setLoginEmailFocused(true)}
-                      onBlur={() => setLoginEmailFocused(false)}
-                      required
-                      maxLength={100}
-                      disabled={loginLoading}
-                    />
-                    <label className="auth-floating-label">Email *</label>
-                  </div>
-                  {fieldErrors.email && (
-                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.email}</div>
-                  )}
-                  <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                    <i className="fas fa-lock auth-input-icon"></i>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="auth-input-with-icon"
-                      placeholder=" "
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                      onFocus={() => setLoginPasswordFocused(true)}
-                      onBlur={() => setLoginPasswordFocused(false)}
-                      required
-                      maxLength={64}
-                      disabled={loginLoading}
-                      style={{ paddingRight: '2.5rem' }}
-                    />
-                    <label className="auth-floating-label">Password *</label>
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      style={{
-                        position: 'absolute',
-                        right: '0.75rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: '#6b7280',
-                        zIndex: 3,
-                        padding: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '1.5rem',
-                        width: '1.5rem',
-                      }}
-                      tabIndex="-1"
-                    >
-                      <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                    </button>
-                  </div>
-                  {fieldErrors.password && (
-                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.password}</div>
-                  )}
-
-                  {loginError && (
-                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{loginError}</div>
-                  )}
-
-                  <button
-                    type="submit"
-                    className="auth-primary-btn"
-                    disabled={loginLoading}
-                  >
-                    {loginLoading ? 'Verifying...' : 'Login'}
-                  </button>
-
-
-                  <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                      {loginError && (
-                        <Link
-                          to="/forgot-password"
-                          style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}
-                        >
-                          Forgot password?
-                        </Link>
-                      )}
-                    </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <p style={{ color: '#666', fontSize: '14px', margin: 0 }}>
-                        Don't have an account?{' '}
-                        <Link
-                          to="/signup"
-                          style={{
-                            color: '#7c3aed',
-                            textDecoration: 'none',
-                            fontWeight: '600',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          Sign up here
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </form>
-              ) : (
-                // Step 2: OTP Verification
-                <form className="auth-form" onSubmit={handleVerifyLoginOtp}>
-                  {fieldErrors.otp && (
-                    <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
-                  )}
-                  {otpSuccess && (
-                    <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{otpSuccess}</div>
-                  )}
-
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <p style={{ color: '#666', fontSize: '14px', textAlign: 'center', marginBottom: '1rem' }}>
-                      We've sent a verification code to <strong>{loginEmail}</strong>
-                    </p>
-                  </div>
-
-                  <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`}>
-                    <i className="fas fa-key auth-input-icon"></i>
-                    <label className="auth-floating-label">Enter OTP *</label>
-                    <input
-                      type="text"
-                      className="auth-input-with-icon"
-                      placeholder="Enter 6-digit OTP"
-                      value={otp}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                        setOtp(value);
-                      }}
-                      onFocus={() => setOtpFocused(true)}
-                      onBlur={() => setOtpFocused(false)}
-                      maxLength={6}
-                      disabled={verifyingOtp}
-                      style={{ textAlign: 'center', fontSize: '20px', letterSpacing: '8px' }}
-                    />
-                  </div>
-
-                  <OtpCountdown
-                    expiresAtMs={otpExpiresAtMs}
-                    onExpire={() => setOtpExpired(true)}
-                  />
-
-                  <button
-                    type="submit"
-                    className="auth-primary-btn"
-                    disabled={verifyingOtp || otp.length !== 6 || otpExpired}
-                    style={{
-                      width: '100%',
-                      marginBottom: '1rem'
-                    }}
-                  >
-                    {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
-                  </button>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowOtpStep(false);
-                        setOtp('');
-                        setOtpSuccess('');
-                        setOtpExpiresAtMs(null);
-                        setOtpExpired(false);
-                      }}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#7c3aed',
-                        cursor: 'pointer',
-                        fontSize: '14px',
-                        textDecoration: 'underline'
-                      }}
-                    >
-                      ← Back to Login
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleResendOtp}
-                      disabled={loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#7c3aed',
-                        cursor: loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired) ? 'not-allowed' : 'pointer',
-                        fontSize: '14px',
-                        textDecoration: 'underline',
-                        opacity: loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired) ? 0.6 : 1
-                      }}
-                    >
-                      Resend OTP
-                    </button>
-                  </div>
-                </form>
-              )}
+    <div className="auth-split-page">
+      {/* Left Side: Illustration and Intro */}
+      <div className="auth-left-side">
+        <div className="left-branded-header" data-aos="fade-down">
+          <div className="brand-logo-group">
+            <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+            <div className="brand-text-container">
+              <span className="brand-name-text">VerifiHireAI</span>
+              <p className="brand-tagline">Trust in Every Hire</p>
             </div>
           </div>
         </div>
-      </main>
-    </>
+
+        <div className="left-intro-content" data-aos="fade-right" style={{ marginTop: '0.5rem' }}>
+          <h1 className="left-intro-title">Welcome Back</h1>
+          <p className="left-intro-subtitle">
+            Login to manage assessments, view reports,<br />
+            and monitor candidate sessions.
+          </p>
+          <div className="left-intro-image-wrapper">
+            <img 
+              src="/login-illustration.png" 
+              alt="Login Illustration" 
+              className="left-intro-image"
+              style={{ maxWidth: '420px' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side: Form */}
+      <div className="auth-right-side">
+        <div className="form-header-content" data-aos="fade-up">
+          <h2 className="form-header-title">{showOtpStep ? 'Verify OTP' : 'Login'}</h2>
+          <p className="form-header-subtitle" style={{ marginBottom: '2.5rem' }}>Enter your account details</p>
+        </div>
+
+        {!showOtpStep ? (
+          <form className="auth-form" onSubmit={handleLogin} data-aos="fade-up" data-aos-delay="100">
+
+
+            <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`}>
+              <i className="fas fa-user auth-input-icon"></i>
+              <input
+                type="email"
+                className="auth-input-with-icon"
+                placeholder="Username *"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                onFocus={() => setLoginEmailFocused(true)}
+                onBlur={() => setLoginEmailFocused(false)}
+                required
+                maxLength={100}
+                disabled={loginLoading}
+              />
+              <label className="auth-floating-label">Username *</label>
+            </div>
+            {fieldErrors.email && (
+              <div className="field-error-text">{fieldErrors.email}</div>
+            )}
+
+            <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`}>
+              <i className="fas fa-lock auth-input-icon"></i>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="auth-input-with-icon"
+                  placeholder="Password *"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  maxLength={64}
+                  required
+                  disabled={loginLoading}
+                  onFocus={() => setLoginPasswordFocused(true)}
+                  onBlur={() => setLoginPasswordFocused(false)}
+                  style={{ paddingRight: '2.5rem' }}
+                />
+                <label className="auth-floating-label">Password *</label>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  disabled={loginLoading}
+                  className="password-toggle-btn"
+                  style={{
+                    position: 'absolute',
+                    right: '0.75rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#94a3b8'
+                  }}
+                >
+                  <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                </button>
+              </div>
+            </div>
+            {fieldErrors.password && (
+              <div className="field-error-text">{fieldErrors.password}</div>
+            )}
+
+
+
+            <button
+              type="submit"
+              className="auth-primary-btn"
+              disabled={loginLoading || !loginEmail || !loginPassword}
+              style={{ width: '100%', padding: '0.875rem', fontSize: '1rem', fontWeight: '600' }}
+            >
+              {loginLoading ? 'Verifying...' : 'Login'}
+            </button>
+            
+            {loginError && (
+              <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center' }}>{loginError}</div>
+            )}
+
+            <div style={{ marginTop: '2rem', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+              {loginError && (
+                <>
+                  <Link to="/forgot-password" style={{ color: '#2563eb', fontSize: '0.9rem', fontWeight: '600', textDecoration: 'none' }}>
+                    Forgot Password?
+                  </Link>
+                  <span style={{ color: '#cbd5e1' }}>|</span>
+                </>
+              )}
+              <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
+                Don't have an account?{' '}
+                <Link to="/signup" style={{ 
+                    color: '#2563eb', 
+                    fontWeight: '700', 
+                    marginLeft: '4px',
+                    textDecoration: 'none'
+                }}>
+                  Sign up
+                </Link>
+              </p>
+            </div>
+          </form>
+        ) : (
+          <form className="auth-form" onSubmit={handleVerifyLoginOtp} data-aos="fade-up" data-aos-delay="100">
+            {otpSuccess && (
+              <div className="auth-success-message" style={{ marginBottom: '1.5rem' }}>{otpSuccess}</div>
+            )}
+            
+            <p style={{ color: '#4a5568', fontSize: '0.9rem', textAlign: 'center', marginBottom: '1.5rem' }}>
+              We've sent a code to <strong>{loginEmail}</strong>
+            </p>
+
+            <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`}>
+              <i className="fas fa-key auth-input-icon"></i>
+              <input
+                type="text"
+                className="auth-input-with-icon"
+                placeholder="6-digit OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                onFocus={() => setOtpFocused(true)}
+                onBlur={() => setOtpFocused(false)}
+                maxLength={6}
+                required
+                disabled={verifyingOtp}
+                style={{ textAlign: 'center', fontSize: '1.25rem', letterSpacing: '4px' }}
+              />
+              <label className="auth-floating-label">Enter 6-digit OTP</label>
+            </div>
+            {fieldErrors.otp && (
+              <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
+            )}
+
+            <OtpCountdown
+              expiresAtMs={otpExpiresAtMs}
+              onExpire={() => setOtpExpired(true)}
+            />
+
+            <button
+              type="submit"
+              className="auth-primary-btn"
+              disabled={verifyingOtp || otp.length !== 6 || otpExpired}
+              style={{ width: '100%', padding: '0.875rem', marginTop: '1rem' }}
+            >
+              {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
+            </button>
+            {loginError && (
+              <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{loginError}</div>
+            )}
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
+              <button type="button" onClick={() => setShowOtpStep(false)} className="auth-secondary-btn" style={{ fontSize: '0.85rem' }}>
+                Back to Login
+              </button>
+              <button type="button" onClick={handleResendOtp} disabled={loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} className="auth-secondary-btn" style={{ fontSize: '0.85rem' }}>
+                Resend OTP
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }
 

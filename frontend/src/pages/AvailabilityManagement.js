@@ -11,7 +11,7 @@ import {
     ChevronRight,
     CheckCircle
 } from 'lucide-react';
-import './AvailabilityManagement.css';
+import '../styles/AvailabilityManagement.css';
 
 const AvailabilityManagement = () => {
     const [windows, setWindows] = useState([]);

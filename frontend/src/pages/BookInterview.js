@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { API_BASE_URL } from '../apiConfig';
 import Lottie from 'lottie-react';
-import './BookInterview.css';
+import '../styles/BookInterview.css';
 
 // Public Lottie Animation URL for success
 const SUCCESS_LOTTIE_URL = "https://lottie.host/5456f916-2495-48b4-933e-e64db8061eb0/rM6YclpB4U.json";

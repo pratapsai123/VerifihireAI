@@ -44,7 +44,7 @@ import BookInterview from './pages/BookInterview';
 import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 import ThankYou from './pages/ThankYou';
-import './App.css';
+import './styles/App.css';
 
 import Header from './components/Header';
 import { useLocation } from 'react-router-dom';
@@ -167,7 +167,8 @@ function AppContent() {
       <div className="app-scroll" style={isFullScreenPage ? {
         top: 0,
         height: '100vh',
-        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto'
+        overflowY: (location.pathname.startsWith('/ai-interview-session/') || location.pathname.startsWith('/live-interview')) ? 'hidden' : 'auto',
+        overflowX: 'hidden'
       } : {}}>
         <Routes>
           <Route path="/" element={<Home />} />
