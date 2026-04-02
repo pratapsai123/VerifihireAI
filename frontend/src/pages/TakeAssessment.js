@@ -978,8 +978,9 @@ export default function TakeAssessment() {
         setLoading(false);
       }
     };
-    if (token && candidateDetailsCompleted) load();
-  }, [token, navigate, candidateDetailsCompleted]);
+    // Only load assessment AFTER pre-check has completed and assessment is not already submitted
+    if (token && candidateDetailsCompleted && !precheckLoading && !alreadySubmitted) load();
+  }, [token, navigate, candidateDetailsCompleted, precheckLoading, alreadySubmitted]);
 
   // Fullscreen state listener
   useEffect(() => {
@@ -1503,18 +1504,21 @@ export default function TakeAssessment() {
   // Show window error BEFORE the candidate details form
   if (windowError) {
     const isNotStarted = windowError.toLowerCase().includes('not started yet');
-    // const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    const isCompleted = windowError === 'ALREADY_SUBMITTED' || windowError.toLowerCase().includes('completed');
     const scheduleData = windowSchedule;
     return (
       <div className="take-page">
         <div className="take-shell">
           <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <span style={{ fontSize: 48 }}>{isNotStarted ? '⏳' : '🔒'}</span>
+              <span style={{ fontSize: 48 }}>
+                {isNotStarted ? '⏳' : isCompleted ? '✅' : isExpired ? '⏰' : '🔒'}
+              </span>
               <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>
-                {isNotStarted ? 'Your Assessment Is Scheduled' : 'Assessment Window Closed'}
+                {isNotStarted ? 'Your Assessment Is Scheduled' : isCompleted ? 'Assessment Submitted' : isExpired ? 'Assessment Window Closed' : 'Access Denied'}
               </h2>
-              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError}</p>
+              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError === 'ALREADY_SUBMITTED' ? 'You have already submitted this assessment.' : windowError}</p>
             </div>
             {scheduleData && (
               <div style={{ background: '#f8fafc', borderRadius: 10, padding: '18px 20px', marginTop: 16 }}>

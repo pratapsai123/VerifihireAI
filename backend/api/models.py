@@ -1066,6 +1066,10 @@ class InterviewInvitation(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     last_error = models.TextField(blank=True, null=True)
 
+    # Live interview join/completion tracking (added in 0086)
+    has_joined = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False)
+
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
