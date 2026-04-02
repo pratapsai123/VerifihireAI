@@ -197,6 +197,16 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     }
                 )
             
+            # Handle WebRTC ready signal
+            elif message_type == 'ready_for_webrtc':
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        "type": "webrtc_ready",
+                        "sender": self.role,
+                    }
+                )
+            
             # Handle chat messages
             elif message_type == 'chat':
                 await self.channel_layer.group_send(
@@ -463,6 +473,15 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 'violation_count': event['violation_count'],
                 'violation_limit': event['violation_limit'],
                 'sender': event['sender'],
+            }))
+    
+    async def webrtc_ready(self, event):
+        """Send webrtc ready notification to WebSocket"""
+        if event["sender"] != self.role:
+            logger.info(f"READY signal from {event['sender']}")
+            await self.send(text_data=json.dumps({
+                "type": "ready_for_webrtc",
+                "sender": event["sender"],
             }))
     
     @database_sync_to_async

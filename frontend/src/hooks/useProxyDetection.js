@@ -112,7 +112,7 @@ export const useProxyDetection = (sessionId, cameraReady, isCameraOn, sendMessag
     if (streamIntervalRef.current || isDetectionPaused || !cameraReady || !isCameraOn) return;
     streamIntervalRef.current = setInterval(() => {
       sendFrame(showPopup, endInterviewCallback);
-    }, 1000);
+    }, 2000);
   }, [isDetectionPaused, cameraReady, isCameraOn, sendFrame]);
 
   const stopDetection = useCallback(() => {

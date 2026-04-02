@@ -59,6 +59,8 @@ function LiveInterviewInterviewer() {
   const [timer, setTimer] = useState('00:00:00');
   const startTimeRef = useRef(Date.now());
   const candidateHasJoinedRef = useRef(false);
+  const candidateReadyRef = useRef(false);
+  const interviewerReadyRef = useRef(false);
 
   const [notifications, setNotifications] = useState([]);
 
@@ -119,19 +121,40 @@ function LiveInterviewInterviewer() {
           showNotification(`${candidateName} joined the session`);
           setBothPartiesConnected(true);
           candidateHasJoinedRef.current = true;
-          // Trigger offer if PC is ready with explicit delay
-          setTimeout(() => {
-            if (peerConnectionRef.current && localStreamRef.current) {
-              console.log('🚀 Candidate joined, sending delayed offer (800ms)');
-              createVideoOffer();
-            }
-          }, 800);
+          // We wait for ready_for_webrtc signal before sending offer
         }
         break;
       case 'user_left':
         if (data.user === 'Candidate' || data.user.toLowerCase() === 'candidate') {
           candidateHasJoinedRef.current = false;
           showNotification(`${candidateName} left the session`, 'warning');
+        }
+        break;
+      case 'ready_for_webrtc':
+        console.log('✅ Received ready_for_webrtc from', data.sender);
+        if (data.sender === 'candidate') {
+          candidateReadyRef.current = true;
+        }
+        if (data.sender === 'interviewer') {
+          interviewerReadyRef.current = true;
+        }
+
+        if (
+          MY_ROLE === 'Interviewer' &&
+          candidateReadyRef.current &&
+          interviewerReadyRef.current
+        ) {
+          setTimeout(() => {
+            if (
+              peerConnectionRef.current &&
+              localStreamRef.current &&
+              localStreamRef.current.getTracks().length > 0 &&
+              peerConnectionRef.current.signalingState === 'stable'
+            ) {
+              console.log('🚀 Both ready. Sending video offer...');
+              createVideoOffer();
+            }
+          }, 500);
         }
         break;
       case 'chat':
@@ -270,16 +293,9 @@ function LiveInterviewInterviewer() {
 
       addLocalTracksToPC(pc, stream);
       
-      // Force offer if ready with explicit delay
-      if (candidateHasJoinedRef.current) {
-        setTimeout(() => {
-          if (peerConnectionRef.current && localStreamRef.current) {
-            console.log('🚀 Candidate already here, sending delayed offer (500ms)');
-            createVideoOffer();
-          }
-        }, 500);
-      }
-
+      console.log('🗣️ Sending ready_for_webrtc to candidate');
+      interviewerReadyRef.current = true;
+      sendMessage({ type: 'ready_for_webrtc' });
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);

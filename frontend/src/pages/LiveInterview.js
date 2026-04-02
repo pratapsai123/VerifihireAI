@@ -44,6 +44,9 @@ function LiveInterview() {
   const [timer, setTimer] = useState('00:00:00');
   const startTimeRef = useRef(Date.now());
   const [cameraReady, setCameraReady] = useState(false);
+  const candidateReadyRef = useRef(false);
+  const interviewerReadyRef = useRef(false);
+  const hasRequestedOfferRef = useRef(false);
 
   const [notifications, setNotifications] = useState([]);
 
@@ -103,8 +106,62 @@ function LiveInterview() {
           if (!chatPanelVisible) setChatUnreadCount(c => c + 1);
         }
         break;
+      case 'ready_for_webrtc':
+        console.log('✅ Received ready_for_webrtc from', data.sender);
+        if (data.sender === 'candidate') {
+          candidateReadyRef.current = true;
+        }
+        if (data.sender === 'interviewer') {
+          interviewerReadyRef.current = true;
+
+          if (!peerConnectionRef.current) {
+            console.warn('PeerConnection missing, creating fallback');
+            createPeerConnection((remoteStream) => {
+              if (remoteVideoRef.current) {
+                remoteVideoRef.current.srcObject = remoteStream;
+              }
+            });
+          }
+
+          if (localStreamRef.current && peerConnectionRef.current) {
+            localStreamRef.current.getTracks().forEach(track => {
+              const exists = peerConnectionRef.current
+                .getSenders()
+                .some(sender => sender.track === track);
+
+              if (!exists) {
+                peerConnectionRef.current.addTrack(track, localStreamRef.current);
+              }
+            });
+          }
+
+          // Removed redundant ontrack override as useWebRTC handles it
+        }
+
+        if (
+          candidateReadyRef.current &&
+          interviewerReadyRef.current &&
+          !hasRequestedOfferRef.current
+        ) {
+          hasRequestedOfferRef.current = true;
+          console.log('⚡ Both ready on candidate side');
+
+          if (
+            peerConnectionRef.current &&
+            localStreamRef.current &&
+            peerConnectionRef.current.signalingState === 'stable'
+          ) {
+            console.log('📩 Requesting offer from interviewer');
+            sendMessage({ type: 'request_offer' });
+          }
+        }
+        break;
       case 'video_offer':
-        handleVideoOffer(data.sdp);
+        if (data.sdp) {
+          handleVideoOffer(data.sdp);
+        } else {
+          console.warn('⚠️ Missing SDP in video_offer');
+        }
         break;
       case 'video_answer':
         handleVideoAnswer(data.sdp);
@@ -113,8 +170,15 @@ function LiveInterview() {
         handleIceCandidate(data.candidate);
         break;
       case 'request_offer':
-        // Candidate is expected to answer normally, but if interviewer failed:
-        createVideoOffer({ iceRestart: true });
+        console.log('📩 Interviewer requested restart');
+
+        if (
+          peerConnectionRef.current &&
+          peerConnectionRef.current.signalingState === 'stable' &&
+          !remoteStreamRef.current
+        ) {
+          sendMessage({ type: 'ready_for_webrtc' });
+        }
         break;
       case 'media_state':
         if (String(data.sender).toLowerCase() === 'interviewer') {
@@ -221,6 +285,10 @@ function LiveInterview() {
       };
 
       addLocalTracksToPC(pc, stream);
+
+      console.log('🗣️ Sending ready_for_webrtc to interviewer');
+      candidateReadyRef.current = true;
+      sendMessage({ type: 'ready_for_webrtc' });
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);

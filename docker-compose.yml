@@ -12,7 +12,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-      - ./frontend/build:/usr/share/nginx/html   # 👈 important
+      - ./frontend/build:/usr/share/nginx/html
       - verifihireai_media:/app/media
     depends_on:
       - redis
@@ -39,8 +39,6 @@ services:
       context: ./executor
     container_name: verifyhire_executor
     restart: unless-stopped
-    # env_file:
-    # - ./backend/.env
     environment:
       EXECUTOR_PORT: "4000"
       DEFAULT_TIME_LIMIT_MS: "3000"
@@ -61,6 +59,18 @@ services:
       DOCKER_TLS_CERTDIR: ""
     volumes:
       - dind_data:/var/lib/docker
+
+  # backend:
+  #   build: ./backend
+  #   working_dir: /app
+  #   container_name: verifyhire_backend
+  #   command: daphne -b 0.0.0.0 -p 8001 VerifiHireAI_backend.asgi:application
+  #   volumes:
+  #     - ./backend:/app
+  #   ports:
+  #     - "8001:8001"
+  #   env_file:
+  #     - ./frontend/.env   # 👈 moved here
 
 volumes:
   verifihireai_media:

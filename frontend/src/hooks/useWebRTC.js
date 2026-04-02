@@ -100,6 +100,10 @@ export const useWebRTC = (sendMessage) => {
 
   const createVideoOffer = useCallback(async (options = {}) => {
     if (!peerConnectionRef.current) return;
+    if (peerConnectionRef.current.signalingState !== 'stable') {
+      console.warn('Skipping offer, signaling not stable');
+      return;
+    }
     try {
       console.log('📤 Creating video offer...', options);
       const offer = await peerConnectionRef.current.createOffer({
@@ -135,9 +139,11 @@ export const useWebRTC = (sendMessage) => {
       if (localStreamRef.current) {
         console.log('🛤️ Adding local tracks before answer...');
         localStreamRef.current.getTracks().forEach(track => {
-          const senders = peerConnectionRef.current.getSenders();
-          const alreadyAdded = senders.some(s => s.track === track);
-          if (!alreadyAdded) {
+          const exists = peerConnectionRef.current
+            .getSenders()
+            .some(sender => sender.track === track);
+            
+          if (!exists) {
             peerConnectionRef.current.addTrack(track, localStreamRef.current);
             console.log(`✅ Added ${track.kind} track`);
           }
@@ -215,6 +221,11 @@ export const useWebRTC = (sendMessage) => {
   const stopWebRTC = useCallback(() => {
     if (localStreamRef.current) {
       localStreamRef.current.getTracks().forEach(track => track.stop());
+      localStreamRef.current = null;
+    }
+    if (remoteStreamRef.current) {
+      remoteStreamRef.current.getTracks().forEach(track => track.stop());
+      remoteStreamRef.current = null;
     }
     if (peerConnectionRef.current) {
       peerConnectionRef.current.close();

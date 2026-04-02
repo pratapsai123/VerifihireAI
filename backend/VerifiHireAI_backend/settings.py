@@ -24,7 +24,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
 
 
 # Application definition
@@ -201,13 +201,13 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://localhost:3000",
-    "http://localhost:3000",
+    "https://verifihireai.com",
+    "https://verifihireai.com",
     "http://20.205.31.46",
-    "http://localhost:3000",
+    "https://verifihireai.com",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -259,7 +259,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = config('GROQ_API_KEY', default='gsk_INVALID_KEY_PLACEHOLDER')
+GROQ_API_KEY = config('GROQ_API_KEY', default='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')
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta

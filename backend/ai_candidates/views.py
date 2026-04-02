@@ -148,7 +148,7 @@ class BulkInviteView(APIView):
                     company=company,
                     user_profile=user_profile
                 )
-                link = f"http://localhost:3000/interview-start/{candidate.id}"
+                link = f"https://verifihireai.com/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -392,7 +392,6 @@ class ResumeMatchView(APIView):
 
             # If it was a single candidate session (start interview flow), process synchronously
             if len(results) == 1 and (candidate_id or len(resume_files) == 1):
-                from .tasks import process_resume_batch_task
                 # Call synchronously (not as .delay)
                 process_resume_batch_task(
                     batch_id=batch_id,

@@ -195,7 +195,7 @@ def process_resume_passed(candidate_id):
                 
         # Send Email
         from urllib.parse import quote
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         link = f"{base_url}/take-ai-assessment/{assessment.share_token}?name={quote(candidate.full_name)}&email={quote(candidate.email)}"
         
         subject = f"Next Steps: Technical Assessment for {candidate.full_name}"
@@ -285,7 +285,7 @@ def process_assessment_passed(submission_id):
             candidate.status = 'Interview'
             candidate.save()
         
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         link = f"{base_url}/interview-start/{candidate.id}"
         
         subject = f"Final Step: AI Video Interview Invitation"

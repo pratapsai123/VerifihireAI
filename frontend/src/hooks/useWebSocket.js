@@ -9,6 +9,7 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
   const reconnectTimeoutRef = useRef(null);
   const heartbeatIntervalRef = useRef(null);
   const shouldReconnectRef = useRef(true);
+  const messageQueueRef = useRef([]);
 
   // ✅ Keep latest onMessage without re-triggering connect
   const onMessageRef = useRef(onMessage);
@@ -45,6 +46,12 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
       console.log("✅ WebSocket connected");
       setConnectionStatus("Connected");
       retryDelayRef.current = 3000;
+
+      if (messageQueueRef.current.length > 0) {
+        console.log(`🚀 Flushing ${messageQueueRef.current.length} queued messages`);
+        messageQueueRef.current.forEach(msg => socket.send(JSON.stringify(msg)));
+        messageQueueRef.current = [];
+      }
 
       // 🔥 Heartbeat (keep connection alive)
       if (heartbeatIntervalRef.current)
@@ -140,7 +147,8 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify(msg));
     } else {
-      console.warn("⚠️ Cannot send message, socket not open");
+      console.warn("⚠️ Cannot send message, socket not open. Queueing message.");
+      messageQueueRef.current.push(msg);
     }
   }, []);
 
