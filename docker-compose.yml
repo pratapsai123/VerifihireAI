@@ -22,8 +22,7 @@ services:
   #   extra_hosts:
   #     - "host.docker.internal:host-gateway"
 
-<<<<<<< Updated upstream
-=======
+
   # nginx:
   #   image: public.ecr.aws/docker/library/nginx:1.25-alpine
   #   container_name: verifyhire_nginx
@@ -41,18 +40,14 @@ services:
   #   restart: unless-stopped
   #   command: /bin/sh -c "while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g 'daemon off;'"
 
->>>>>>> Stashed changes
+
   # certbot:
   #   image: certbot/certbot
   #   container_name: verifyhire_certbot
   #   volumes:
   #     - ./certbot/conf:/etc/letsencrypt
   #     - ./certbot/www:/var/www/certbot
-<<<<<<< Updated upstream
-  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-=======
-  #   entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;"
->>>>>>> Stashed changes
+
 
   redis:
     image: public.ecr.aws/docker/library/redis:7-alpine
@@ -66,11 +61,7 @@ services:
       context: ./executor
     container_name: verifyhire_executor
     restart: unless-stopped
-<<<<<<< Updated upstream
-=======
-    env_file:
-      - ./backend/.env
->>>>>>> Stashed changes
+
     environment:
       EXECUTOR_PORT: "4000"
       DEFAULT_TIME_LIMIT_MS: "3000"
@@ -92,11 +83,8 @@ services:
     volumes:
       - dind_data:/var/lib/docker
 
-
 volumes:
   verifihireai_media:
   dind_data:
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
+
