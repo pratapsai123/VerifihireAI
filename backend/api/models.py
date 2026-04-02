@@ -517,6 +517,9 @@ class Assessment(models.Model):
     evaluated = models.IntegerField(default=0)
     shortlisted = models.IntegerField(default=0)
 
+    # Legacy constraints / workflows
+    is_auto_schedule = models.BooleanField(default=False, help_text="Automatically schedule an interview if the candidate passes")
+
     # Shareable candidate link token (one per assessment)
     invite_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
 
@@ -696,6 +699,14 @@ class CandidateInvitation(models.Model):
     token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_auto_schedule = models.BooleanField(default=False)
+    # Timestamp recorded *exactly* when the "Book Interview Slot" email is sent
+    # (i.e. after the 5-minute Celery delay fires).
+    # Used as the anchor for the dynamic 3-day prep buffer + 7-available-days window.
+    slot_booking_email_sent_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Timestamp when the slot-booking email was dispatched. Used to compute the candidate's booking window."
+    )
     last_error = models.TextField(blank=True, null=True)
 
     is_deleted = models.BooleanField(default=False)
