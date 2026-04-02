@@ -1,7 +1,7 @@
 import os
 import io
 import re
-import io
+import os
 import numpy as np
 import fitz  # PyMuPDF
 import logging
@@ -54,14 +54,36 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
     Extract text from an image using EasyOCR with multiple rotations.
     If target_pan is provided, it attempts to find and return it.
     """
+    from django.utils import timezone
+    from django.conf import settings
+    
+    log_file = os.path.join(settings.BASE_DIR, "ocr_debug.txt")
+    
+    def log(msg):
+        try:
+            with open(log_file, "a", encoding="utf-8") as f:
+                f.write(f"[{timezone.now()}] {msg}\n")
+        except:
+            pass
+
     try:
         if isinstance(image_file, (bytes, bytearray)):
             image = Image.open(io.BytesIO(image_file))
         elif isinstance(image_file, Image.Image):
             image = image_file
+        elif hasattr(image_file, 'temporary_file_path'):
+            image = Image.open(image_file.temporary_file_path())
+        elif hasattr(image_file, 'read'):
+            image_file.seek(0)
+            image = Image.open(io.BytesIO(image_file.read()))
+            image_file.seek(0)
         else:
             image = Image.open(image_file)
         
+        # Ensure image is in RGB mode for OCR
+        if image.mode != "RGB":
+            image = image.convert("RGB")
+            
         full_log = ""
         pan_pattern = re.compile(r'[A-Z]{5}[0-9]{4}[A-Z]{1}')
 
@@ -71,34 +93,44 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
                 image_np = np.array(rotated_image)
                 reader = _get_reader()
                 if not reader:
+                    log("EasyOCR reader not available")
                     continue
+                
+                log(f"Running OCR on rotation {rotation}")
                 results = reader.readtext(image_np, detail=0) 
                 text = " ".join(results).upper()
                 full_log += f" {text}"
 
                 # Direct match
-                if target_pan and target_pan in re.sub(r'[^A-Z0-9]', '', text):
+                clean_extracted_text = re.sub(r'[^A-Z0-9]', '', text)
+                if target_pan and target_pan in clean_extracted_text:
+                    log(f"Direct match found at rotation {rotation}")
                     return text, True
                 
                 # Robust match (no spaces)
                 text_nospaces = text.replace(" ", "")
                 if target_pan:
                     if target_pan in text_nospaces:
+                        log(f"No-spaces match found at rotation {rotation}")
                         return text, True
                     # Positional fuzzy check on slices
                     for i in range(len(text_nospaces) - 9):
                         if normalize_pan_format(text_nospaces[i:i+10]) == target_pan:
+                            log(f"Fuzzy slice match found at rotation {rotation}")
                             return text, True
                 
                 # Find any PAN if target_pan not explicitly found yet
                 match_raw = pan_pattern.search(text_nospaces)
                 if match_raw and target_pan and match_raw.group(0) == target_pan:
+                    log(f"Regex match found at rotation {rotation}")
                     return match_raw.group(0), True
                 
-            except:
+            except Exception as e:
+                log(f"Rotation {rotation} failed: {e}")
                 continue
         return full_log.strip(), False
     except Exception as e:
+        log(f"Image OCR Failed: {e}")
         return f"OCR Failed: {str(e)}", False
 
 def extract_text_from_pdf(pdf_file, target_pan=None):
@@ -334,13 +366,13 @@ def extract_text_from_pdf_ocr(file_content):
     Used for skills extraction where full content is needed.
     """
     try:
-        import os
         from django.utils import timezone
-        debug_log = os.path.join(os.path.dirname(os.path.dirname(__file__)), "ocr_debug_log.txt")
+        from django.conf import settings
+        log_file = os.path.join(settings.BASE_DIR, "ocr_debug.txt")
 
         def log(msg):
             try:
-                with open(debug_log, "a", encoding="utf-8") as f:
+                with open(log_file, "a", encoding="utf-8") as f:
                     f.write(f"[{timezone.now()}] {msg}\n")
             except:
                 pass
@@ -376,11 +408,4 @@ def extract_text_from_pdf_ocr(file_content):
         return all_text.strip()
 
     except Exception as e:
-        try:
-            import traceback
-            err_log = os.path.join(os.path.dirname(os.path.dirname(__file__)), "ocr_error.txt")
-            with open(err_log, "a") as f:
-                f.write(f"Critical OCR error: {str(e)}\n{traceback.format_exc()}\n")
-        except:
-            pass
         return ""

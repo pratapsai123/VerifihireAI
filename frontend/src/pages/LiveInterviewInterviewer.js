@@ -54,10 +54,13 @@ function LiveInterviewInterviewer() {
     { name: 'Communication', score: 0 }
   ]);
   const [editingSkills, setEditingSkills] = useState(false);
+  const [feedback, setFeedback] = useState('');
 
   const [timer, setTimer] = useState('00:00:00');
   const startTimeRef = useRef(Date.now());
   const candidateHasJoinedRef = useRef(false);
+  const candidateReadyRef = useRef(false);
+  const interviewerReadyRef = useRef(false);
 
   const [notifications, setNotifications] = useState([]);
 
@@ -118,16 +121,40 @@ function LiveInterviewInterviewer() {
           showNotification(`${candidateName} joined the session`);
           setBothPartiesConnected(true);
           candidateHasJoinedRef.current = true;
-          // Trigger offer if PC is ready
-          if (peerConnectionRef.current) {
-            createVideoOffer();
-          }
+          // We wait for ready_for_webrtc signal before sending offer
         }
         break;
       case 'user_left':
         if (data.user === 'Candidate' || data.user.toLowerCase() === 'candidate') {
           candidateHasJoinedRef.current = false;
           showNotification(`${candidateName} left the session`, 'warning');
+        }
+        break;
+      case 'ready_for_webrtc':
+        console.log('✅ Received ready_for_webrtc from', data.sender);
+        if (data.sender === 'candidate') {
+          candidateReadyRef.current = true;
+        }
+        if (data.sender === 'interviewer') {
+          interviewerReadyRef.current = true;
+        }
+
+        if (
+          MY_ROLE === 'Interviewer' &&
+          candidateReadyRef.current &&
+          interviewerReadyRef.current
+        ) {
+          setTimeout(() => {
+            if (
+              peerConnectionRef.current &&
+              localStreamRef.current &&
+              localStreamRef.current.getTracks().length > 0 &&
+              peerConnectionRef.current.signalingState === 'stable'
+            ) {
+              console.log('🚀 Both ready. Sending video offer...');
+              createVideoOffer();
+            }
+          }, 500);
         }
         break;
       case 'chat':
@@ -143,10 +170,10 @@ function LiveInterviewInterviewer() {
         }
         break;
       case 'video_offer':
-        await handleVideoOffer(data.offer);
+        await handleVideoOffer(data.sdp);
         break;
       case 'video_answer':
-        await handleVideoAnswer(data.answer);
+        await handleVideoAnswer(data.sdp);
         break;
       case 'ice_candidate':
         await handleIceCandidate(data.candidate);
@@ -199,14 +226,18 @@ function LiveInterviewInterviewer() {
         }, 1200);
         break;
       case 'session_expired':
+        showNotification(data.message || 'Session expired or already completed.', 'error');
         setSessionExpired(true);
         localStorage.setItem(sessionKey, 'true');
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
         break;
       default: break;
     }
   }, [candidateName, chatPanelVisible, sessionId, sessionKey, navigate, showNotification]);
 
-  const { socketRef, connectionStatus, connectionStatusText, setConnectionStatusText, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
+  const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
 
   const {
     peerConnectionRef, localStreamRef, remoteStreamRef, 
@@ -231,22 +262,29 @@ function LiveInterviewInterviewer() {
     
     initLocalStream(true, true).then(stream => {
       setMediaLoading(false);
+      
+      // ✅ Fix: Assign local stream to video element
+      if (selfVideoRef.current) {
+        console.log('🖼️ Setting local video srcObject');
+        selfVideoRef.current.srcObject = stream;
+      }
+
       const pc = createPeerConnection((remoteStream) => {
         if (remoteVideoRef.current) {
+          console.log('🖼️ Setting remote video srcObject');
           remoteVideoRef.current.srcObject = remoteStream;
         }
       });
       
       pc.onconnectionstatechange = () => {
-        if (pc.connectionState === 'connected') setConnectionStatusText('Connected');
-        else if (pc.connectionState === 'failed') setConnectionStatusText('Connection failed');
+        // Handled by ConnectionOverlay
       };
 
       pc.oniceconnectionstatechange = () => {
         if (pc.iceConnectionState === 'failed') {
-          setConnectionStatusText('Connection unstable - retrying...');
           setTimeout(() => {
             if (peerConnectionRef.current?.iceConnectionState === 'failed') {
+              console.log('🔄 ICE failed, restarting...');
               createVideoOffer({ iceRestart: true });
             }
           }, 1000);
@@ -255,16 +293,15 @@ function LiveInterviewInterviewer() {
 
       addLocalTracksToPC(pc, stream);
       
-      if (candidateHasJoinedRef.current) {
-        createVideoOffer();
-      }
-
+      console.log('🗣️ Sending ready_for_webrtc to candidate');
+      interviewerReadyRef.current = true;
+      sendMessage({ type: 'ready_for_webrtc' });
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);
       showNotification('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, createPeerConnection, setConnectionStatusText, createVideoOffer, addLocalTracksToPC, showNotification, peerConnectionRef]);
+  }, [initLocalStream, createPeerConnection, createVideoOffer, addLocalTracksToPC, showNotification, peerConnectionRef]);
 
   // Initialize WebRTC
   useEffect(() => {
@@ -375,14 +412,21 @@ function LiveInterviewInterviewer() {
     }
     setRatings(prev => ({ ...prev, hireRecommendation: status }));
     
-    // In actual implementation, send feedback via an API request to finalize
+    // Map frontend ratings/skills to backend expected fields
+    const technicalSkill = skills.find(s => s.name === 'Problem Solving')?.score || 0;
+    const communicationSkill = skills.find(s => s.name === 'Communication')?.score || 0;
+
     axios.post(`${API_BASE_URL}/submit-interview-feedback/`, {
         token: sessionId,
+        feedback: feedback,
+        rating: ratings.overallRating,
+        technical_rating: technicalSkill,
+        communication_rating: communicationSkill,
+        team_fit_rating: 5, // Default or derived if possible
+        role: 'interviewer',
         candidate: candidateName,
         interviewer: interviewerName,
         time: timer,
-        ratings,
-        skills,
         status: candidateHasJoinedRef.current ? 'joined' : 'not_joined'
     }).then(() => {
         setShowInterviewReport(false);
@@ -416,29 +460,44 @@ function LiveInterviewInterviewer() {
 
   if (showInterviewReport) {
     return (
-      <div className="interview-report-modal">
-        <div className="interview-report-content" style={{ padding: '30px', background: 'white', borderRadius: '8px', maxWidth: '600px', margin: '50px auto', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+      <div className="feedback-overlay">
+        <div className="feedback-modal" style={{ width: '600px', textAlign: 'left' }}>
           <h2>Interview Report</h2>
+          <p>Please provide your evaluation for {candidateName}</p>
+          
           <div className="ratings-section">
-            <h3>Overall Rating</h3>
+            <h3 style={{ color: 'white', marginBottom: '10px' }}>Overall Rating</h3>
             {[1, 2, 3, 4, 5].map(star => (
-              <i key={star} onClick={() => handleStarClick('overallRating', star)} className={`fas fa-star ${ratings.overallRating >= star ? 'active' : ''}`} style={{ cursor: 'pointer', color: ratings.overallRating >= star ? '#fbbf24' : '#d1d5db', fontSize: '24px' }}></i>
+              <i key={star} onClick={() => handleStarClick('overallRating', star)} className={`fas fa-star ${ratings.overallRating >= star ? 'active' : ''}`} style={{ cursor: 'pointer', color: ratings.overallRating >= star ? '#fbbf24' : '#475569', fontSize: '28px', marginRight: '8px' }}></i>
             ))}
           </div>
           
-          <div className="skills-section" style={{ marginTop: '20px' }}>
-            <h3>Skills Assessment</h3>
+          <div className="skills-section" style={{ marginTop: '24px' }}>
+            <h3 style={{ color: 'white', marginBottom: '12px' }}>Skills Assessment</h3>
             {skills.map((skill, idx) => (
-              <div key={idx} style={{ marginBottom: '10px' }}>
-                <label style={{ display: 'inline-block', width: '150px' }}>{skill.name}</label>
-                <input type="number" min="0" max="10" value={skill.score} onChange={e => handleSkillScoreChange(idx, e.target.value)} style={{ width: '60px', padding: '5px' }} /> / 10
+              <div key={idx} style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <label style={{ color: '#94a3b8' }}>{skill.name}</label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <input type="number" min="0" max="10" value={skill.score} onChange={e => handleSkillScoreChange(idx, e.target.value)} style={{ width: '60px', padding: '6px', background: '#0f172a', border: '1px solid #334155', color: 'white', borderRadius: '4px' }} />
+                  <span style={{ color: '#475569' }}>/ 10</span>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="actions-section" style={{ marginTop: '30px', display: 'flex', gap: '10px' }}>
-             <button onClick={() => confirmEndInterview('Qualified')} style={{ padding: '10px 20px', background: '#10b981', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Qualified</button>
-             <button onClick={() => confirmEndInterview('Rejected')} style={{ padding: '10px 20px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Rejected</button>
+          <div className="feedback-section" style={{ marginTop: '24px' }}>
+            <h3 style={{ color: 'white', marginBottom: '8px' }}>Detailed Feedback</h3>
+            <textarea 
+              value={feedback}
+              onChange={e => setFeedback(e.target.value)}
+              placeholder="Enter detailed feedback here..."
+              style={{ minHeight: '100px' }}
+            />
+          </div>
+
+          <div className="actions-section" style={{ marginTop: '30px', display: 'flex', gap: '12px' }}>
+             <button className="btn-submit" onClick={() => confirmEndInterview('Qualified')} style={{ background: '#10b981', flex: 1, marginTop: 0 }}>Qualified</button>
+             <button className="btn-submit" onClick={() => confirmEndInterview('Rejected')} style={{ background: '#ef4444', flex: 1, marginTop: 0 }}>Rejected</button>
           </div>
         </div>
       </div>
@@ -463,7 +522,7 @@ function LiveInterviewInterviewer() {
 
       <div className="main-wrapper">
         <div className="video-container">
-          <ConnectionOverlay status={connectionStatus} statusText={connectionStatusText} />
+          <ConnectionOverlay status={connectionStatus} />
 
           {mediaLoading && !mediaError && (
             <div className="connection-overlay" style={{ background: 'rgba(0,0,0,0.8)', zIndex: 50 }}>

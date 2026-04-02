@@ -342,11 +342,6 @@ def get_invitation_public_view(request, token):
         except CandidateInvitation.DoesNotExist:
             return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Single-use: if already submitted or qualified (slot booking email sent), block further access.
-        # 'qualified' is set by send_custom_assessment_result_task AFTER 'submitted' — must block both.
-        if inv.status in ('submitted', 'qualified'):
-            return Response({'error': 'Your exam has been completed.'}, status=status.HTTP_409_CONFLICT)
-
         assessment = inv.assessment
 
         def _hhmmss_to_seconds(value: str) -> int:
@@ -379,52 +374,53 @@ def get_invitation_public_view(request, token):
             grace_minutes = 0
         grace_minutes = max(0, grace_minutes)
 
-        # Start-time window enforcement:
-        # - If NOT started yet: candidate can open only between [start_time, start_time + grace]
-        # - If already started: do NOT block on grace (allows reconnect/refresh)
+        # Build schedule info for error responses
+        _tz = getattr(inv, 'time_zone', None) or ''
+        _schedule_info = {}
+        try:
+            from zoneinfo import ZoneInfo
+            _local_start = start_time.astimezone(ZoneInfo(_tz)) if _tz and start_time else start_time
+            _local_end = end_time.astimezone(ZoneInfo(_tz)) if _tz and end_time else end_time
+        except Exception:
+            _local_start = start_time
+            _local_end = end_time
+        if _local_start:
+            _schedule_info['start_date'] = _local_start.strftime('%B %d, %Y')
+            _schedule_info['start_time_display'] = _local_start.strftime('%I:%M %p')
+        if _local_end:
+            _schedule_info['end_date'] = _local_end.strftime('%B %d, %Y')
+            _schedule_info['end_time_display'] = _local_end.strftime('%I:%M %p')
+        if _tz:
+            _schedule_info['time_zone'] = _tz
+
+        # Window Enforcement (Run before submission check so expiry takes priority)
         now = timezone.now()
+        
+        # 1. Start window check (only if not started yet)
         if inv.started_at is None:
-            # Build schedule info for error responses
-            _tz = getattr(inv, 'time_zone', None) or ''
-            _schedule_info = {}
-            try:
-                from zoneinfo import ZoneInfo
-                _local_start = start_time.astimezone(ZoneInfo(_tz)) if _tz and start_time else start_time
-                _local_end = end_time.astimezone(ZoneInfo(_tz)) if _tz and end_time else end_time
-            except Exception:
-                _local_start = start_time
-                _local_end = end_time
-            if _local_start:
-                _schedule_info['start_date'] = _local_start.strftime('%B %d, %Y')
-                _schedule_info['start_time_display'] = _local_start.strftime('%I:%M %p')
-            if _local_end:
-                _schedule_info['end_date'] = _local_end.strftime('%B %d, %Y')
-                _schedule_info['end_time_display'] = _local_end.strftime('%I:%M %p')
-            if _tz:
-                _schedule_info['time_zone'] = _tz
-
-            # Compute the extended deadline: end_time + grace_minutes.
-            # last_valid_start = extended_deadline - assessment_duration.
-            # Only candidates who arrive before last_valid_start can get the full duration.
-            # Anyone arriving after last_valid_start is blocked entirely.
+            if start_time and now < start_time:
+                return Response({'error': 'This exam has not started yet.', 'schedule': _schedule_info}, status=status.HTTP_403_FORBIDDEN)
+            
+            # last_valid_start logic
             extended_deadline = (end_time + timedelta(minutes=grace_minutes)) if end_time and grace_minutes > 0 else end_time
-
-            # Compute the assessment duration for the cutoff check
             _entry_duration = _hhmmss_to_seconds(getattr(assessment, 'total_time', '') or '')
             if extended_deadline and _entry_duration > 0:
-                # Last moment a candidate can start and still get the full duration
                 last_valid_start = extended_deadline - timedelta(seconds=_entry_duration)
             else:
                 last_valid_start = extended_deadline
 
-            if start_time and now < start_time:
-                return Response({'error': 'This exam has not started yet.', 'schedule': _schedule_info}, status=status.HTTP_403_FORBIDDEN)
-            # Block if they can no longer get the full assessment duration
             if last_valid_start and now > last_valid_start:
                 return Response({'error': 'The start window for this exam has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
-            # Also block if there is no grace and we are past end_time
-            if end_time and not grace_minutes and now >= end_time:
-                return Response({'error': 'This assessment link has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
+
+        # 2. Hard expiry check (Run for everyone, even if submitted)
+        # If today > end_time + grace, it's definitely expired.
+        submit_deadline = (end_time + timedelta(minutes=grace_minutes)) if end_time and grace_minutes > 0 else end_time
+        if submit_deadline and now > submit_deadline:
+            return Response({'error': 'This assessment link has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
+
+        # 3. Submission check (If not expired, then check if already done)
+        if inv.status == 'submitted':
+            return Response({'error': 'Your exam has been completed.'}, status=status.HTTP_409_CONFLICT)
 
         # Compute the extended deadline (end_time + grace) used to cap expires_at.
         # This allows late starters (within grace window) to still use full assessment
@@ -432,7 +428,7 @@ def get_invitation_public_view(request, token):
         _raw_end_time = getattr(inv, 'end_time', None)
         _raw_end_time = _make_aware_if_needed(_raw_end_time)
         _grace = max(0, int(getattr(inv, 'start_grace_minutes', 0) or 0))
-        extended_deadline = (_raw_end_time + timedelta(minutes=_grace)) if _raw_end_time and _grace > 0 else _raw_end_time
+        extended_deadline_calc = (_raw_end_time + timedelta(minutes=_grace)) if _raw_end_time and _grace > 0 else _raw_end_time
 
         # Start timer on first access (persisted). Cap by the extended deadline.
         now = timezone.now()
@@ -453,16 +449,16 @@ def get_invitation_public_view(request, token):
                 # Cap by the extended deadline as a safety net (should equal now + duration for valid starters).
                 # Example: window 2:30-2:50, grace 30min -> extended deadline = 3:20.
                 # - Start at 2:30 -> expires at 2:50 (20 min). Start at 3:00 -> expires at 3:20 (20 min).
-                if extended_deadline:
-                    expires_at = min(expires_at, extended_deadline) if expires_at else extended_deadline
+                if extended_deadline_calc:
+                    expires_at = min(expires_at, extended_deadline_calc) if expires_at else extended_deadline_calc
                 inv.expires_at = expires_at
             else:
                 # Ensure existing expires_at is capped by extended deadline (in case schedule changed after start)
-                if extended_deadline:
-                    if inv.expires_at and inv.expires_at > extended_deadline:
-                        inv.expires_at = extended_deadline
+                if extended_deadline_calc:
+                    if inv.expires_at and inv.expires_at > extended_deadline_calc:
+                        inv.expires_at = extended_deadline_calc
                     elif inv.expires_at is None:
-                        inv.expires_at = extended_deadline
+                        inv.expires_at = extended_deadline_calc
 
         # If expired, block access
         # NOTE: Since the frontend implements a "transition" stage where the timer is paused between objective and coding, 
@@ -2135,6 +2131,7 @@ def submit_objective_section(request, token):
         passed = True
         next_stage = 'coding' if has_coding else 'finish'
         message = "Objective section completed."
+        should_schedule_result_email = False
         
         if assessment.has_objective_cutoff:
             cutoff = assessment.min_objective_pass_percentage
@@ -2145,6 +2142,7 @@ def submit_objective_section(request, token):
                 # Mark as submitted/failed immediately
                 inv.status = 'submitted'
                 inv.save()
+                should_schedule_result_email = not has_coding
                 
                 # Update final result
                 submission.result = 'rejected'
@@ -2167,6 +2165,7 @@ def submit_objective_section(request, token):
                     # Mark as submitted immediately
                     inv.status = 'submitted'
                     inv.save()
+                    should_schedule_result_email = True
 
                 # Even if passed, update scoring so partial results are correct
                 _update_submission_scoring_logic(submission)
@@ -2183,6 +2182,7 @@ def submit_objective_section(request, token):
                 # Mark as submitted immediately
                 inv.status = 'submitted'
                 inv.save()
+                should_schedule_result_email = True
             else:
                 next_stage = 'coding'
                 message = "Objective section completed. Proceeding to coding section."
@@ -2196,6 +2196,10 @@ def submit_objective_section(request, token):
         
         # Reload to get updated fields from _update_submission_scoring_logic
         submission.refresh_from_db()
+
+        if should_schedule_result_email:
+            from api.tasks import send_custom_assessment_result_task
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
 
         return Response({
             'success': True,
@@ -2471,6 +2475,16 @@ def verify_pan_backend_view(request):
         }, status=status.HTTP_200_OK)
 
     except Exception as e:
+        import traceback
+        from django.conf import settings
+        log_file = os.path.join(settings.BASE_DIR, "backend_errors.txt")
+        try:
+            with open(log_file, "a", encoding="utf-8") as f:
+                f.write(f"[{timezone.now()}] ERROR in verify_pan_backend_view: {str(e)}\n")
+                f.write(traceback.format_exc())
+                f.write("-" * 30 + "\n")
+        except:
+            pass
         print(f"Backend PAN Verification Error: {e}")
         return Response({
             'success': False,

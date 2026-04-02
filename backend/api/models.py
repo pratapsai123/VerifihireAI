@@ -1064,6 +1064,11 @@ class InterviewInvitation(models.Model):
 
     token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    
+    # Session lifecycle tracking
+    is_completed = models.BooleanField(default=False)
+    has_joined = models.BooleanField(default=False)
+    
     last_error = models.TextField(blank=True, null=True)
 
     # Live interview join/completion tracking (added in 0086)

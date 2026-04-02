@@ -4,14 +4,7 @@ Django settings for VerifiHireAI_backend project.
 
 import os
 from pathlib import Path
-
-
-def _env_list(key: str, default: list[str]) -> list[str]:
-    """Return a list from a comma-separated environment variable, falling back to default."""
-    value = os.environ.get(key)
-    if not value:
-        return default
-    return [item.strip() for item in value.split(",") if item.strip()]
+from decouple import config, Csv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,20 +17,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-change-this-in-production-12345")
+SECRET_KEY = config("DJANGO_SECRET_KEY", default="django-insecure-change-this-in-production-12345")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+#    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -94,14 +87,15 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [(os.environ.get('REDIS_HOST', '127.0.0.1'), int(os.environ.get('REDIS_PORT', 6379)))],
+            # Since Redis is in Docker but exposed to 6379, 127.0.0.1 works for local backend
+           "hosts": [("127.0.0.1", 6379)],
         },
     },
 }
 
 # Celery Configuration
-CELERY_BROKER_URL = f"redis://{os.environ.get('REDIS_HOST', '127.0.0.1')}:{os.environ.get('REDIS_PORT', 6379)}/0"
-CELERY_RESULT_BACKEND = f"redis://{os.environ.get('REDIS_HOST', '127.0.0.1')}:{os.environ.get('REDIS_PORT', 6379)}/0"
+CELERY_BROKER_URL = f"redis://{config('REDIS_HOST', default='127.0.0.1')}:{config('REDIS_PORT', default=6379, cast=int)}/0"
+CELERY_RESULT_BACKEND = f"redis://{config('REDIS_HOST', default='127.0.0.1')}:{config('REDIS_PORT', default=6379, cast=int)}/0"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -130,7 +124,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'user'),
+        'NAME': os.environ.get('DB_NAME', 'verifihire'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
@@ -174,7 +168,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/django-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (User uploaded files)
@@ -207,18 +201,19 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://localhost:3000",
-    "https://www.verifihireai.com",
+    "https://verifihireai.com",
+    "https://verifihireai.com",
     "http://20.205.31.46",
+    "https://verifihireai.com",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_ALLOW_WILD_CARD_HOST = True
 
-CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", default_cors_origins)
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default=",".join(default_cors_origins), cast=Csv())
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -246,7 +241,7 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # CSRF settings for API
-CSRF_TRUSTED_ORIGINS = _env_list("CSRF_TRUSTED_ORIGINS", default_cors_origins)
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default=",".join(default_cors_origins), cast=Csv())
 
 # CSRF cookie settings
 CSRF_COOKIE_HTTPONLY = False
@@ -258,14 +253,14 @@ SESSION_COOKIE_SECURE = True # Enforce HTTPS
 
 # Email Configuration for Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
-ASSEMBLYAI_API_KEY = os.environ.get('ASSEMBLYAI_API_KEY')
+GROQ_API_KEY = config('GROQ_API_KEY', default='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')
+ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta
 SIMPLE_JWT = {

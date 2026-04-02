@@ -305,7 +305,7 @@ const CandidateDetails = ({ token, onComplete }) => {
       const currentPan = data.pan.toUpperCase().trim();
       const extracted = data.extractedPan.toUpperCase().trim();
       const isMatch = currentPan === extracted;
-      
+
       // Update state ONLY if mismatch state needs to change
       if (isMatch !== data.panMatch) {
         setData(prev => ({
@@ -822,6 +822,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                           })
                             .then(response => {
                               const { verified, extracted_pan, message } = response.data;
+                              console.log("Backend verification response:", response.data);
 
                               setData(prev => ({
                                 ...prev,

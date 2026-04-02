@@ -4,6 +4,7 @@ import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
 import { API_BASE_URL } from '../apiConfig';
 
+
 const AiInterview = () => {
     const [jobDescription, setJobDescription] = useState('');
     const [file, setFile] = useState(null);

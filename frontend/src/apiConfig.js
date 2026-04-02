@@ -1,6 +1,6 @@
 /**
  * Centralized API configuration for VerifiHireAI
- * This ensures that the frontend uses the correct API URL regardless of the environment.
+ * Handles API + WebSocket URLs correctly for all environments
  */
 
 const getApiBaseUrl = () => {
@@ -8,48 +8,46 @@ const getApiBaseUrl = () => {
         const hostname = window.location.hostname;
         const protocol = window.location.protocol;
 
-        // If we are in development (localhost/127.0.0.1)
+        // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return `http://${hostname}:8001/api`;
         }
 
-        // If accessed via custom domain, Nginx handles the /api path.
-        // We use the same protocol and hostname as the frontend.
+        // ✅ PRODUCTION (NGINX handles routing)
         if (hostname === 'verifihireai.com' || hostname === 'www.verifihireai.com') {
             return `${protocol}//${hostname}/api`;
         }
 
-        // Fallback for other domains
+        // ✅ FALLBACK
         return `${protocol}//${hostname}:8001/api`;
     }
+
     return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 };
+
 
 const getWsBaseUrl = () => {
     if (typeof window !== 'undefined') {
         const hostname = window.location.hostname;
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
+        // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            return `ws://${hostname}:8001/ws`;
+            return `ws://${hostname}:8001/ws/interview`;
         }
 
+        // ✅ PRODUCTION (NGINX handles /ws → backend)
         if (hostname === 'verifihireai.com' || hostname === 'www.verifihireai.com') {
-            // Nginx handles the /ws path. Always use wss if the site is accessed via https.
-            // If the user is on port 3000, we still want to connect to the main domain's /ws
-            return `wss://${hostname}/ws`;
+            return `${protocol}//${hostname}/ws/interview`;
         }
 
-        // Default for other domains (e.g. public IP directly)
-        // If accessed via port 3000, we try to reach the backend on 8001 directly
-        if (window.location.port === '3000') {
-            return `${protocol}//${hostname}:8001/ws`;
-        }
-
-        return `${protocol}//${hostname}/ws`;
+        // ✅ FALLBACK
+        return `${protocol}//${hostname}:8001/ws/interview`;
     }
-    return process.env.REACT_APP_WS_BASE_URL || 'ws://localhost:8001/ws';
+
+    return process.env.REACT_APP_WS_BASE_URL || 'ws://localhost:8001/ws/interview';
 };
+
 
 export const API_BASE_URL = getApiBaseUrl();
 export const WS_BASE_URL = getWsBaseUrl();

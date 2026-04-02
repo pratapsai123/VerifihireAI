@@ -33,19 +33,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f'interview_{self.session_id}'
         
         try:
-            # Enforce 1:1 Connection
-            presence_key = f"interview_{self.session_id}_presence_{self.role}"
-            old_channel = await database_sync_to_async(cache.get)(presence_key)
-            if old_channel:
-                # Notify the old connection to close
-                await self.channel_layer.send(old_channel, {
-                    "type": "disconnect_duplicate",
-                    "close_code": 4001
-                })
-            # Register current connection
-            await database_sync_to_async(cache.set)(presence_key, self.channel_name, timeout=86400)
-
-            # Validate session ID (InterviewInvitation token), time, and status
+            # 🔥 1. Validate session FIRST
             is_valid, error_reason = await self.validate_session()
             
             if not is_valid:
@@ -60,11 +48,25 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 }
                 
                 await self.send(text_data=json.dumps({
-                    'type': 'error' if error_reason in ['invalid', 'not_started'] else 'session_expired',
+                    'type': 'session_expired',
+                    'reason': error_reason,
                     'message': messages.get(error_reason, 'Invalid session.')
                 }))
-                await self.close(code=4003 if error_reason in ['expired', 'completed'] else 4004)
+                await self.close(code=4003)
                 return
+
+            # 🔥 2. Handle presence and duplicate connections
+            presence_key = f"interview_{self.session_id}_presence_{self.role}"
+            old_channel = await database_sync_to_async(cache.get)(presence_key)
+            
+            if old_channel and old_channel != self.channel_name:
+                logger.info(f"Replacing old connection for {self.role} in {self.session_id}")
+
+            # Register current connection
+            await database_sync_to_async(cache.set)(presence_key, self.channel_name, timeout=86400)
+
+            # Mark as joined in DB
+            await self.update_invitation_usage(has_joined=True)
 
             # Join room group
             await self.channel_layer.group_add(
@@ -142,7 +144,6 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             current_channel = await database_sync_to_async(cache.get)(presence_key)
             
             if current_channel == self.channel_name:
-                await database_sync_to_async(cache.delete)(presence_key)
                 # Notify others that this user left (only if they are the primary)
                 await self.channel_layer.group_send(
                     self.room_group_name,
@@ -152,6 +153,9 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                         'session_id': self.session_id,
                     }
                 )
+
+                # 🔥 Check if this was the last user to leave
+                await self.check_and_finalize_interview()
 
             # Leave room group
             await self.channel_layer.group_discard(
@@ -190,6 +194,16 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                         'type': 'forward_message',
                         'message': data,
                         'sender': self.role,
+                    }
+                )
+            
+            # Handle WebRTC ready signal
+            elif message_type == 'ready_for_webrtc':
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        "type": "webrtc_ready",
+                        "sender": self.role,
                     }
                 )
             
@@ -322,6 +336,9 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             
             # Handle end interview
             elif message_type == 'end_interview':
+                # Mark as completed in DB
+                await self.update_invitation_usage(is_completed=True)
+                
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
@@ -458,6 +475,15 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 'sender': event['sender'],
             }))
     
+    async def webrtc_ready(self, event):
+        """Send webrtc ready notification to WebSocket"""
+        if event["sender"] != self.role:
+            logger.info(f"READY signal from {event['sender']}")
+            await self.send(text_data=json.dumps({
+                "type": "ready_for_webrtc",
+                "sender": event["sender"],
+            }))
+    
     @database_sync_to_async
     def validate_session(self):
         """
@@ -469,11 +495,14 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             if not invitation:
                 return False, 'invalid'
             
+            if invitation.is_completed:
+                return False, 'completed'
+
+            # Backward compatibility
             if invitation.status == 'completed':
                 return False, 'completed'
-            
+
             now = timezone.now()
-            
             if invitation.start_time and now < invitation.start_time:
                 return False, 'not_started'
                 
@@ -484,6 +513,43 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             logger.error(f"Error validating session: {e}", exc_info=True)
             return False, 'invalid'
+
+    @database_sync_to_async
+    def update_invitation_usage(self, has_joined=None, is_completed=None):
+        """Update invitation tracking fields."""
+        try:
+            invitation = InterviewInvitation.objects.filter(token=self.session_id).first()
+            if invitation:
+                if has_joined is not None:
+                    invitation.has_joined = has_joined
+                if is_completed is not None:
+                    invitation.is_completed = is_completed
+                    invitation.status = 'completed' if is_completed else invitation.status
+                invitation.save()
+        except Exception as e:
+            logger.error(f"Error updating invitation usage: {e}")
+
+    async def check_and_finalize_interview(self):
+        """Check if all participants have left and mark as completed if so."""
+        try:
+            # Check presence for both roles
+            roles = ['interviewer', 'candidate']
+            any_present = False
+            for r in roles:
+                presence_key = f"interview_{self.session_id}_presence_{r}"
+                if await database_sync_to_async(cache.get)(presence_key):
+                    any_present = True
+                    break
+            
+            if not any_present:
+                # Everyone has left, check if session was ever 'active' (has_joined=True)
+                # and mark as completed to prevent re-use of link.
+                invitation = await database_sync_to_async(lambda: InterviewInvitation.objects.filter(token=self.session_id).first())()
+                if invitation and invitation.has_joined:
+                    logger.info(f"All participants left session {self.session_id}. Marking as completed.")
+                    await self.update_invitation_usage(is_completed=True)
+        except Exception as e:
+            logger.error(f"Error finalizing interview: {e}")
 
     @database_sync_to_async
     def check_session_expired(self):

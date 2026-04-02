@@ -56,7 +56,7 @@ export const useScreenShare = (peerConnectionRef, localStreamRef, sendMessage, s
             // Must re-negotiate if adding new track
             const offer = await peerConnectionRef.current.createOffer();
             await peerConnectionRef.current.setLocalDescription(offer);
-            sendMessage({ type: 'video_offer', offer });
+            sendMessage({ type: 'video_offer', sdp: offer });
           }
         }
 

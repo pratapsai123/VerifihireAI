@@ -259,6 +259,7 @@ export default function TakeAssessment() {
   const [scheduleInfo, setScheduleInfo] = useState(null);
   // Pre-check: time window error shown BEFORE the candidate details form
   const [windowError, setWindowError] = useState('');
+  const [windowStatus, setWindowStatus] = useState(null);
   const [windowSchedule, setWindowSchedule] = useState(null);
   const [precheckLoading, setPrecheckLoading] = useState(true);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
@@ -857,6 +858,7 @@ export default function TakeAssessment() {
       })
       .catch((err) => {
         const status = err?.response?.status;
+        setWindowStatus(status);
         // 403 = not started yet, 410 = expired / window closed, 404 = invalid link
         if (status === 403 || status === 410 || status === 404) {
           setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
@@ -1054,8 +1056,8 @@ export default function TakeAssessment() {
         canvas.height = video.videoHeight || window.innerHeight || 720;
 
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        screenshot = canvas.toDataURL('image/jpeg', 0.5); 
-        
+        screenshot = canvas.toDataURL('image/jpeg', 0.5);
+
         video.pause();
         video.srcObject = null;
       } catch (e) {
@@ -1125,13 +1127,13 @@ export default function TakeAssessment() {
             if (now - lastDetectionTimeRef.current > 1500) {
               lastDetectionTimeRef.current = now;
               const preds = await detectorRef.current.detect(videoRef.current);
-              
+
               // Filter by confidence score
               const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
               const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
 
               if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
-              
+
               if (people.length > 1) {
                 showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
               } else if (people.length === 0) {
@@ -1520,32 +1522,6 @@ export default function TakeAssessment() {
               </h2>
               <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError === 'ALREADY_SUBMITTED' ? 'You have already submitted this assessment.' : windowError}</p>
             </div>
-            {scheduleData && (
-              <div style={{ background: '#f8fafc', borderRadius: 10, padding: '18px 20px', marginTop: 16 }}>
-                {scheduleData.start_date && (
-                  <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
-                    <span style={{ color: '#64748b', minWidth: 90 }}>📅 Start</span>
-                    <span style={{ color: '#1e293b', fontWeight: 600 }}>
-                      {scheduleData.start_date}{scheduleData.start_time_display ? ` at ${scheduleData.start_time_display}` : ''}
-                    </span>
-                  </div>
-                )}
-                {scheduleData.end_date && (
-                  <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
-                    <span style={{ color: '#64748b', minWidth: 90 }}>🏁 End</span>
-                    <span style={{ color: '#1e293b', fontWeight: 600 }}>
-                      {scheduleData.end_date}{scheduleData.end_time_display ? ` at ${scheduleData.end_time_display}` : ''}
-                    </span>
-                  </div>
-                )}
-                {scheduleData.time_zone && (
-                  <div style={{ display: 'flex', gap: 12 }}>
-                    <span style={{ color: '#64748b', minWidth: 90 }}>🌐 Zone</span>
-                    <span style={{ color: '#1e293b' }}>{scheduleData.time_zone}</span>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -1639,10 +1615,11 @@ export default function TakeAssessment() {
 
     // Expired / other error pages
     const title = (() => {
-      if (msg.toLowerCase().includes('start window')) return 'Start Window Expired';
-      if (msg.toLowerCase().includes('completed')) return 'Exam already completed';
-      if (msg.toLowerCase().includes('expired')) return 'Link Expired';
-      if (msg.toLowerCase().includes('time is over')) return 'Time is over';
+      const msgLower = msg.toLowerCase();
+      const isExpiredPage = msgLower.includes('expired') || msgLower.includes('window') || msgLower.includes('closed') || msgLower.includes('start window');
+      if (isExpiredPage) return 'Assessment Window Closed';
+      if (msg === 'ALREADY_SUBMITTED' || msgLower.includes('complete')) return 'Exam Completed';
+      if (msgLower.includes('time is over')) return 'Time is over';
       return 'Invalid or expired link';
     })();
     return (
@@ -1654,26 +1631,6 @@ export default function TakeAssessment() {
             </div>
             <div className="take-title" style={{ textAlign: 'center' }}>{title}</div>
             <div className="take-sub" style={{ textAlign: 'center', marginTop: 8 }}>{error}</div>
-            {scheduleInfo && (scheduleInfo.start_date || scheduleInfo.start_time_display) && (
-              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 10, padding: '16px 20px', margin: '20px 0' }}>
-                <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-                  <tbody>
-                    {scheduleInfo.start_date && (
-                      <tr>
-                        <td style={{ padding: '6px 12px 6px 0', fontWeight: 600, color: '#dc2626' }}>📅 Scheduled Date</td>
-                        <td style={{ padding: '6px 0', color: '#1e293b' }}>{scheduleInfo.start_date}</td>
-                      </tr>
-                    )}
-                    {scheduleInfo.start_time_display && (
-                      <tr>
-                        <td style={{ padding: '6px 12px 6px 0', fontWeight: 600, color: '#dc2626' }}>🕒 Scheduled Time</td>
-                        <td style={{ padding: '6px 0', color: '#1e293b' }}>{scheduleInfo.start_time_display}{scheduleInfo.time_zone ? ` (${scheduleInfo.time_zone})` : ''}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            )}
             <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: 13, marginTop: 16 }}>
               If you believe this is an error, please contact the assessment administrator.
             </p>
