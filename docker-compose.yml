@@ -39,6 +39,7 @@ services:
       context: ./executor
     container_name: verifyhire_executor
     restart: unless-stopped
+
     environment:
       EXECUTOR_PORT: "4000"
       DEFAULT_TIME_LIMIT_MS: "3000"

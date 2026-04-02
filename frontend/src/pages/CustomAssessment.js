@@ -1680,7 +1680,7 @@ function CustomAssessment() {
         organization_name: userData.organization_name || '',
       },
       assessment: {
-        role: formData.role || 'Manual Assessment',
+        role: formData.role || 'Untitled Assessment',
         experience_level: formData.experienceLevel || 'mid',
         number_of_questions: 10,
         time: '00:30:00',
@@ -1693,10 +1693,10 @@ function CustomAssessment() {
     // Prepare minimal assessment data to pass to manual pages
     const skipAssessmentData = {
       ...formData,
-      role: formData.role || 'Manual Assessment',
+      role: formData.role || 'Untitled Assessment',
       experienceLevel: formData.experienceLevel || 'mid',
       customAssessmentId: savedAssessmentId || null,
-      source: 'manual_skip',
+      fromSkip: true,
     };
 
     navigate('/manual-questions', { state: skipAssessmentData });

@@ -78,6 +78,17 @@ def send_custom_assessment_result_task(invitation_id):
                 html_message=html_message,
                 fail_silently=False
             )
+            
+            # ── CRITICAL: stamp the exact moment the email was sent ──
+            # This timestamp is the anchor for the dynamic booking window:
+            #   - 3-day prep buffer starts from here (candidate cannot book sooner)
+            #   - 7 actual available days are counted forward from the buffer end
+            # Even if the candidate opens the link 5 days later, the window is
+            # always calculated relative to THIS fixed timestamp.
+            from django.utils import timezone as tz
+            inv.slot_booking_email_sent_at = tz.now()
+            inv.save(update_fields=['slot_booking_email_sent_at'])
+            
             logger.info(f"Result email sent to {inv.email} for invitation {invitation_id}")
         else:
             # Optional: Send rejection email? 

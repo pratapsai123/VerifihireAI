@@ -80,7 +80,7 @@ const AvailabilityManagement = () => {
     // Generate Hourly Slots from 9 AM to 6 PM
     const dailySlots = useMemo(() => {
         const slots = [];
-        for (let h = 9; h <= 18; h++) {
+        for (let h = 0; h <= 23; h++) {
             slots.push(`${h.toString().padStart(2, '0')}:00`);
         }
         return slots;

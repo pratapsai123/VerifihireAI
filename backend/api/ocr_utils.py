@@ -1,3 +1,4 @@
+import os
 import io
 import re
 import os
@@ -242,8 +243,9 @@ def extract_text_from_pdf(pdf_file, target_pan=None):
         for page_num in range(min(len(doc), 3)):
             try:
                 page = doc[page_num]
-                # Render at 300 DPI for standard professional OCR
-                pix = page.get_pixmap(dpi=300, alpha=False)
+                # Render at 4x zoom for standard professional OCR
+                mat = fitz.Matrix(4, 4)
+                pix = page.get_pixmap(matrix=mat, alpha=False)
                 ocr_res, found = extract_text_from_image(pix.tobytes("png"), target_pan=target_pan)
                 full_text_log += f" {ocr_res}"
                 if found:

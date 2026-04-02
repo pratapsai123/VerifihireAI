@@ -21,7 +21,7 @@ function MainHeader() {
     color: '#CCD6F6',
     fontWeight: 600,
     textDecoration: 'none',
-    fontSize: '0.9rem',
+    fontSize: '0.81rem',
     transition: 'all 0.3s ease',
     letterSpacing: '0.05em',
     textTransform: 'uppercase',
@@ -42,7 +42,7 @@ function MainHeader() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '0.8rem 3%',
+        padding: '12px 2%',
         width: '100%',
         margin: '0 auto',
         boxSizing: 'border-box',
@@ -52,7 +52,7 @@ function MainHeader() {
           type="button"
           onClick={goHome}
           style={{
-            fontSize: '1.5rem',
+            fontSize: '1.35rem',
             fontWeight: 800,
             color: '#FFFFFF',
             letterSpacing: '-0.03em',
@@ -83,7 +83,7 @@ function MainHeader() {
             cursor: 'pointer',
             border: 'none',
             textDecoration: 'none',
-            fontSize: '0.95rem',
+            fontSize: '0.86rem',
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
           }}

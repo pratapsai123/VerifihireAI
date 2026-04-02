@@ -785,7 +785,7 @@ class AssessmentDetailView(APIView):
                     "status": sub.status,
                     "final_status": sub.status,
                     "integrity_score": sub.integrity_score,
-                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M") if sub.submitted_at else None,
+                    "submitted_at": timezone.localtime(sub.submitted_at).strftime("%Y-%m-%d %H:%M") if sub.submitted_at else None,
                     "candidate_questions": sub.candidate_questions,
                     "answers": sub.answers,
                     "integrity_screenshots": screenshots_data,

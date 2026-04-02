@@ -261,8 +261,11 @@ export default function TakeAssessment() {
   const [windowError, setWindowError] = useState('');
   const [windowStatus, setWindowStatus] = useState(null);
   const [windowSchedule, setWindowSchedule] = useState(null);
+  const [precheckLoading, setPrecheckLoading] = useState(true);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const hasMcq = questions.length > 0;
   const [codingQuestions, setCodingQuestions] = useState([]);
   const [answersById, setAnswersById] = useState(() => {
     try {
@@ -325,7 +328,7 @@ export default function TakeAssessment() {
   const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
   const screenStreamRef = useRef(null);
   const screenCanvasRef = useRef(null);
-  const [screenShareError, setScreenShareError] = useState('');
+  const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -350,6 +353,7 @@ export default function TakeAssessment() {
     return null;
   });
   const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
+  const [transitionTimer, setTransitionTimer] = useState(15);
 
   // New State for Exam Mode
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(() => {
@@ -743,7 +747,12 @@ export default function TakeAssessment() {
       // End test -> show result page (pass autoSubmit flag for timeout popup)
       navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
     } catch (e) {
-      setSubmitError(e?.response?.data?.error || e?.message || 'Submit failed');
+      const msg = e?.response?.data?.error || e?.message || 'Submit failed';
+      if (e?.response?.status === 403 || e?.response?.status === 409 || msg.toLowerCase().includes('time is over')) {
+        setError(msg);
+      } else {
+        setSubmitError(msg);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -770,6 +779,20 @@ export default function TakeAssessment() {
       window.removeEventListener('popstate', onPopState);
     };
   }, [submitted]);
+
+  // Auto-start coding section after 15 seconds
+  useEffect(() => {
+    let timer;
+    if (assessmentStage === 'transition' && transitionTimer > 0) {
+      timer = setInterval(() => {
+        setTransitionTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (assessmentStage === 'transition' && transitionTimer === 0) {
+      setAssessmentStage('coding');
+      window.scrollTo(0, 0);
+    }
+    return () => clearInterval(timer);
+  }, [assessmentStage, transitionTimer]);
 
   // Check if candidate details are already completed
   useEffect(() => {
@@ -825,11 +848,13 @@ export default function TakeAssessment() {
   // doesn't waste time filling in details when the window is expired/not open.
   useEffect(() => {
     if (!token) return;
+    setPrecheckLoading(true);
     axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
       .then(() => {
         // Window is open — clear any prior error
         setWindowError('');
         setWindowSchedule(null);
+        setPrecheckLoading(false);
       })
       .catch((err) => {
         const status = err?.response?.status;
@@ -839,9 +864,11 @@ export default function TakeAssessment() {
           setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
           setWindowSchedule(err?.response?.data?.schedule || null);
         }
+        // 409 = already submitted — show popup instead of redirecting
         if (status === 409) {
-          setWindowError('ALREADY_SUBMITTED');
+          setAlreadySubmitted(true);
         }
+        setPrecheckLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -943,7 +970,8 @@ export default function TakeAssessment() {
         const status = e?.response?.status;
         const message = e?.response?.data?.error || e?.message || 'Failed to load assessment';
         if (status === 409 && token) {
-          setError('ALREADY_SUBMITTED');
+          setAlreadySubmitted(true);
+          setLoading(false);
           return;
         }
         setScheduleInfo(e?.response?.data?.schedule || null);
@@ -952,8 +980,9 @@ export default function TakeAssessment() {
         setLoading(false);
       }
     };
-    if (token && candidateDetailsCompleted) load();
-  }, [token, navigate, candidateDetailsCompleted]);
+    // Only load assessment AFTER pre-check has completed and assessment is not already submitted
+    if (token && candidateDetailsCompleted && !precheckLoading && !alreadySubmitted) load();
+  }, [token, navigate, candidateDetailsCompleted, precheckLoading, alreadySubmitted]);
 
   // Fullscreen state listener
   useEffect(() => {
@@ -1084,7 +1113,7 @@ export default function TakeAssessment() {
   }, []);
 
   useEffect(() => {
-    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
     startCamera();
 
@@ -1146,11 +1175,11 @@ export default function TakeAssessment() {
       window.removeEventListener('blur', handleBlur);
       stopCamera();
     };
-  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage]);
+  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage, error, windowError]);
 
   // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
   useEffect(() => {
-    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
     const bgInterval = setInterval(() => {
       // If candidate is actively looking at our tab, do nothing
@@ -1162,7 +1191,7 @@ export default function TakeAssessment() {
     }, 5000);
 
     return () => clearInterval(bgInterval);
-  }, [showAiEvent, submitted, assessmentStage]);
+  }, [showAiEvent, submitted, assessmentStage, error, windowError]);
 
   const startScreenShare = useCallback(async () => {
     try {
@@ -1309,6 +1338,7 @@ export default function TakeAssessment() {
       return;
     }
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon running
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -1345,6 +1375,7 @@ export default function TakeAssessment() {
     setShowSubmitConfirm(false);
     if (!activeCoding) return;
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon submitting
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -1439,27 +1470,57 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '70vh' }
+    ? (resultHeightPct > 30 
+        ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' } 
+        : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
+
+  // Show a loading state to prevent CandidateDetails flicker
+  if (precheckLoading) {
+    return (
+      <div className="take-page">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '18px', color: '#64748b' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Show already submitted popup directly if precheck catches it
+  if (alreadySubmitted) {
+    return (
+      <div className="take-page" style={{ position: 'relative' }}>
+         <div className="take-shell" style={{ opacity: 0.5, pointerEvents: 'none', background: '#f8fafc', height: '100vh', width: '100vw' }}></div>
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999 }}>
+            <div style={{ background: '#fff', padding: '40px', borderRadius: '12px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                <h2 style={{ margin: '0 0 12px', color: '#1e293b' }}>Assessment Submitted</h2>
+                <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.5' }}>You have already submitted this assessment. You can safely close this window.</p>
+                <button onClick={() => window.close()} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer', fontWeight: '500' }}>Close</button>
+            </div>
+         </div>
+      </div>
+    );
+  }
 
   // Show window error BEFORE the candidate details form
   if (windowError) {
-    const isNotStarted = windowStatus === 403 || windowError.toLowerCase().includes('not started yet');
-    const isExpired = windowStatus === 410 || windowError.toLowerCase().includes('expire') || windowError.toLowerCase().includes('window') || windowError.toLowerCase().includes('closed');
-    const isCompleted = (windowStatus === 409 || windowError === 'ALREADY_SUBMITTED' || windowError.toLowerCase().includes('complete')) && !isExpired;
+    const isNotStarted = windowError.toLowerCase().includes('not started yet');
+    const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    const isCompleted = windowError === 'ALREADY_SUBMITTED' || windowError.toLowerCase().includes('completed');
     const scheduleData = windowSchedule;
     return (
       <div className="take-page">
         <div className="take-shell">
           <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <span style={{ fontSize: 48 }}>{isNotStarted ? '⏳' : (isExpired ? '🔒' : (isCompleted ? '✅' : '🔒'))}</span>
+              <span style={{ fontSize: 48 }}>
+                {isNotStarted ? '⏳' : isCompleted ? '✅' : isExpired ? '⏰' : '🔒'}
+              </span>
               <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>
-                {isNotStarted ? 'Your Assessment Is Scheduled' : (isExpired ? 'Assessment Window Closed' : (isCompleted ? 'Exam Completed' : 'Assessment Window Closed'))}
+                {isNotStarted ? 'Your Assessment Is Scheduled' : isCompleted ? 'Assessment Submitted' : isExpired ? 'Assessment Window Closed' : 'Access Denied'}
               </h2>
-              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>
-                {windowError === 'ALREADY_SUBMITTED' ? 'Your assessment has already been submitted.' : windowError}
-              </p>
+              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError === 'ALREADY_SUBMITTED' ? 'You have already submitted this assessment.' : windowError}</p>
             </div>
           </div>
         </div>
@@ -1510,7 +1571,7 @@ export default function TakeAssessment() {
                 The assessment is not yet active and will be available at the scheduled time below:
               </p>
               {scheduleInfo && (
-                <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
+                <div style={{ border: '1px solid #e5e7eb', borderRadius: 10, overflow: 'hidden', fontSize: 12, margin: '20px 0' }}>
                   <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                     <tbody>
                       {scheduleInfo.start_date && (
@@ -1578,8 +1639,6 @@ export default function TakeAssessment() {
       </div>
     );
   }
-
-  const hasMcq = questions.length > 0;
 
 
 
@@ -1687,7 +1746,7 @@ export default function TakeAssessment() {
                       <strong>Coding Time Limit: {assessment?.coding_time_limit || 'As per total time'}</strong>
                     </p>
                     <button className="btn btn-primary" onClick={startCoding} style={{ fontSize: '1.2rem', padding: '12px 36px', borderRadius: '8px' }}>
-                      Start Coding Section
+                      Start Coding Section (starts in {transitionTimer})
                     </button>
                   </div>
                 )}
@@ -1697,15 +1756,9 @@ export default function TakeAssessment() {
             {/* Coding Section */}
             {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 ? (
               <div className="take-card coding-overview-card">
-                <div className="coding-header-row" style={{ marginBottom: 10 }}>
-                  <div>
-                    <div className="take-title">Coding Questions</div>
-                    <div className="take-sub">Solve coding problems in the Monaco editor.</div>
+                  <div className="coding-header-actions" style={{ alignItems: 'center', marginBottom: 6 }}>
+                    <span className="pill gray" style={{ fontSize: '10px' }}>{codingQuestionsOrdered.length} coding tasks</span>
                   </div>
-                  <div className="coding-header-actions" style={{ alignItems: 'center' }}>
-                    <span className="pill gray">{codingQuestionsOrdered.length} questions</span>
-                  </div>
-                </div>
                 <div className="coding-tablist">
                   {codingQuestionsOrdered.map((cq, idx) => {
                     const isActive = String(cq.id) === String(activeCoding?.id);
@@ -1836,7 +1889,7 @@ export default function TakeAssessment() {
                     </div>
                   ) : null}
 
-                  <div className="coding-editor-wrap" ref={codingEditorWrapRef}>
+                  <div className="coding-editor-wrap" ref={codingEditorWrapRef} onClick={() => setResultHeightPct(30)}>
                     <div className="coding-monaco">
                       <Suspense fallback={<div className="coding-monaco-loading">Loading editor…</div>}>
                         <MonacoEditor

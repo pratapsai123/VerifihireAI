@@ -29,6 +29,7 @@ from pygments.styles import get_style_by_name
 import xml.sax.saxutils as saxutils
 
 from django.http import HttpResponse
+from django.utils import timezone
 
 from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
@@ -416,7 +417,7 @@ def generate_candidate_report(submission_id):
         _info_row('Assessment', assessment.display_name or assessment.name, styles),
         _info_row(
             'Submitted At',
-            submission.submitted_at.strftime('%d %b %Y, %I:%M %p') if submission.submitted_at else '-',
+            timezone.localtime(submission.submitted_at).strftime('%d %b %Y, %I:%M %p') if submission.submitted_at else '-',
             styles,
         ),
     ]
@@ -963,7 +964,7 @@ def generate_candidate_report(submission_id):
                         elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
                             img = _make_rl_image(snap.webcam_screenshot.path, 2.2 * inch, 1.6 * inch)
                         
-                        ts_str = snap.timestamp.strftime('%I:%M:%S %p')
+                        ts_str = timezone.localtime(snap.timestamp).strftime('%I:%M:%S %p')
                         from reportlab.lib.styles import ParagraphStyle
                         center_style = ParagraphStyle('CenterStyle', parent=styles['Normal'], alignment=1, fontSize=8, textColor=colors.HexColor('#64748b'))
                         text_row.append(Paragraph(f"{ts_str}", center_style))
