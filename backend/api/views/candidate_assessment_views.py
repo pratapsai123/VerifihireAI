@@ -2451,7 +2451,7 @@ def verify_pan_backend_view(request):
         if len(all_potential_pans) > 0:
             reason = 'mismatch'
             if is_likely_pan:
-                msg = f"Mismatch: Entered PAN ({pan_number}) doesn't match the card ({all_potential_pans[0]}). Please enter valid PAN card or fix details."
+                msg = "Mismatch: The PAN number on the document does not match your entry. Please enter a valid PAN or upload a clear card."
             else:
                 msg = "Incorrect Document: This document seems to have a PAN-like number but is not a valid PAN card. Please upload a genuine PAN card."
         else:
