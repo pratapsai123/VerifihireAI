@@ -1,3 +1,4 @@
+import os
 import io
 import re
 import io
@@ -102,44 +103,131 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
 
 def extract_text_from_pdf(pdf_file, target_pan=None):
     """
-    Extract text from a PDF. Tries selectable text first, then falls back to OCR.
-    Used for PAN verification and general extraction.
+    Extract text from a PDF. Tries selectable text (with multiple methods) first, 
+    then falls back to OCR.
     """
+    from django.utils import timezone
+    from django.conf import settings
+    
+    log_file = os.path.join(settings.BASE_DIR, "ocr_debug.txt")
+    
+    def log(msg):
+        try:
+            with open(log_file, "a", encoding="utf-8") as f:
+                f.write(f"[{timezone.now()}] {msg}\n")
+        except:
+            pass
+
+    log(f"Starting PDF Extraction for PAN: {target_pan}")
+    
     try:
-        if hasattr(pdf_file, 'read'):
+        # Load PDF content reliably
+        if hasattr(pdf_file, 'temporary_file_path'):
+            doc = fitz.open(pdf_file.temporary_file_path())
+            pdf_content = open(pdf_file.temporary_file_path(), 'rb').read()
+        elif hasattr(pdf_file, 'read'):
+            pdf_file.seek(0)
             pdf_content = pdf_file.read()
             pdf_file.seek(0)
+            doc = fitz.open(stream=pdf_content, filetype="pdf")
         else:
             pdf_content = pdf_file
+            doc = fitz.open(stream=pdf_content, filetype="pdf")
 
-        doc = fitz.open(stream=pdf_content, filetype="pdf")
         full_text_log = ""
+        log(f"Opened PDF with {len(doc)} pages")
         
         # Step 1: Try direct text extraction (selectable text)
         for page_num in range(len(doc)):
-            text = doc[page_num].get_text().upper()
-            full_text_log += f" {text}"
-            if target_pan and target_pan in re.sub(r'[^A-Z0-9]', '', text):
-                doc.close()
-                return text, True
-        
-        # Step 2: Fallback to OCR (scanned PDF) for first few pages or if target not found
-        for page_num in range(min(len(doc), 3)):
             page = doc[page_num]
-            zoom = 4.0 
-            pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
-            ocr_res, found = extract_text_from_image(pix.tobytes("png"), target_pan=target_pan)
-            full_text_log += f" {ocr_res}"
-            if found:
-                doc.close()
-                return ocr_res, True
+            
+            # Method 1: Simple PyMuPDF text
+            text = (page.get_text() or "").upper()
+            full_text_log += f" {text}"
+            
+            # Method 2: Word-based PyMuPDF
+            try:
+                words = page.get_text("words")
+                word_text = " ".join([w[4] for w in words]).upper()
+                full_text_log += f" {word_text}"
+            except: word_text = ""
+
+            # Method 3: Block-based PyMuPDF
+            try:
+                blocks = page.get_text("blocks")
+                block_text = " ".join([b[4] for b in blocks]).upper()
+                full_text_log += f" {block_text}"
+            except: block_text = ""
+
+            if target_pan:
+                clean_target = re.sub(r'[^A-Z0-9]', '', target_pan)
+                if clean_target in re.sub(r'[^A-Z0-9]', '', text) or \
+                   clean_target in re.sub(r'[^A-Z0-9]', '', word_text) or \
+                   clean_target in re.sub(r'[^A-Z0-9]', '', block_text):
+                    log(f"Match found in selectable text on page {page_num}")
+                    doc.close()
+                    return text + " " + word_text + " " + block_text, True
+
+        # Method 4: pdfplumber fallback
+        try:
+            import pdfplumber
+            with pdfplumber.open(io.BytesIO(pdf_content)) as pdf:
+                plumber_text = ""
+                for page in pdf.pages:
+                    p_text = (page.extract_text() or "").upper()
+                    plumber_text += " " + p_text
+                full_text_log += f" {plumber_text}"
+                log("pdfplumber extracted content")
+                if target_pan:
+                    clean_target = re.sub(r'[^A-Z0-9]', '', target_pan)
+                    if clean_target in re.sub(r'[^A-Z0-9]', '', plumber_text):
+                        log("Match found via pdfplumber")
+                        doc.close()
+                        return plumber_text, True
+        except Exception as e:
+            log(f"pdfplumber skipped: {e}")
+
+        # Method 5: PyPDF2 fallback
+        try:
+            import PyPDF2
+            reader = PyPDF2.PdfReader(io.BytesIO(pdf_content))
+            pypdf2_text = ""
+            for i in range(len(reader.pages)):
+                p_text = (reader.pages[i].extract_text() or "").upper()
+                pypdf2_text += " " + p_text
+            full_text_log += f" {pypdf2_text}"
+            log("PyPDF2 extracted content")
+            if target_pan:
+                clean_target = re.sub(r'[^A-Z0-9]', '', target_pan)
+                if clean_target in re.sub(r'[^A-Z0-9]', '', pypdf2_text):
+                    log("Match found via PyPDF2")
+                    doc.close()
+                    return pypdf2_text, True
+        except Exception as e:
+            log(f"PyPDF2 skipped: {e}")
+
+        # Step 2: Fallback to OCR (scanned PDF)
+        log("Falling back to OCR step (Scanned PDF)")
+        for page_num in range(min(len(doc), 3)):
+            try:
+                page = doc[page_num]
+                # Render at 4x zoom for standard professional OCR
+                mat = fitz.Matrix(4, 4)
+                pix = page.get_pixmap(matrix=mat, alpha=False)
+                ocr_res, found = extract_text_from_image(pix.tobytes("png"), target_pan=target_pan)
+                full_text_log += f" {ocr_res}"
+                if found:
+                    log(f"Match found via OCR on page {page_num}")
+                    doc.close()
+                    return ocr_res, True
+            except Exception as e:
+                log(f"Page {page_num} OCR failed: {e}")
                 
         doc.close()
+        log("No definitive match found")
         return full_text_log, False
     except Exception as e:
-        if 'doc' in locals() and doc:
-            try: doc.close()
-            except: pass
+        log(f"Critical PDF Error: {e}")
         return f"PDF Extraction Failed: {str(e)}", False
 
 def pdf_page_to_png_bytes(pdf_content, page_num=0, zoom=2.0):

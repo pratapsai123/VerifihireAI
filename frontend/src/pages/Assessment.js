@@ -191,7 +191,6 @@ export default function Assessment() {
                     <tr key={a.id}>
                       <td>
                         <div className="cell-title">{title}</div>
-                        {shouldShowRole ? <div className="cell-sub">{`Role: ${roleText}`}</div> : null}
                       </td>
                       <td>{(a.total_questions || 0) + (a.coding_question_count || 0)}</td>
                       <td>{a.total_time ?? '-'}</td>

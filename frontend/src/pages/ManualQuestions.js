@@ -8,6 +8,15 @@ function ManualQuestions() {
   const assessmentContext = location.state || null;
 
   const handleBack = () => {
+    if (assessmentContext?.fromReview) {
+      navigate('/review-assessment', { state: assessmentContext });
+      return;
+    }
+    if (assessmentContext?.fromSkip) {
+      navigate('/custom-assessment', { state: assessmentContext });
+      return;
+    }
+    // Fallback logic
     if (assessmentContext) {
       navigate('/review-assessment', { state: assessmentContext });
       return;

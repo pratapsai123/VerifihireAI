@@ -658,8 +658,10 @@ function ReviewPage() {
         if (assessmentName) {
           payload.name = assessmentName;
           payload.display_name = assessmentName;
+          payload.role = assessmentName; // Ensure role matches the name
+        } else if (assessmentData.role) {
+          payload.role = assessmentData.role;
         }
-        if (assessmentData.role) payload.role = assessmentData.role;
         if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
 
         const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
@@ -737,8 +739,10 @@ function ReviewPage() {
       if (assessmentName) {
         payload.name = assessmentName;
         payload.display_name = assessmentName;
+        payload.role = assessmentName; // Ensure role matches the name
+      } else if (assessmentData.role) {
+        payload.role = assessmentData.role;
       }
-      if (assessmentData.role) payload.role = assessmentData.role;
       if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
 
       // New fields
@@ -969,9 +973,9 @@ function ReviewPage() {
                   ) : (
                     <>
                       <span>
-                        {(assessmentName === 'Manual Assessment' ? (topics[0] || assessmentName) : assessmentName) || (assessmentData.role === 'other'
+                        {assessmentName || (assessmentData.role === 'other'
                           ? assessmentData.customRole
-                          : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()))}
+                          : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())) || 'Untitled Assessment'}
                       </span>
                       <button
                         onClick={() => setIsEditingRole(true)}
@@ -1506,7 +1510,7 @@ function ReviewPage() {
         <button
           type="button"
           className="btn-create-custom-questions"
-          onClick={() => navigate('/manual-questions', { state: getCurrentState() })}
+          onClick={() => navigate('/manual-questions', { state: { ...getCurrentState(), fromReview: true } })}
         >
           Create Custom Questions
         </button>
