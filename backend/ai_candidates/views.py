@@ -683,13 +683,17 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
         instance = self.get_object()
         
+        # Determine if this was an interview or just a resume screening based on progress
+        is_interview = instance.completed_at is not None or (isinstance(instance.interview_summary, list) and len(instance.interview_summary) > 0)
+        prefix = "AI Interview Session" if is_interview else "Resume Screening Result"
+        
         # Use centralized helper to handle policy and workflow
         response, handled = handle_deletion_request(
             user_profile=user_profile,
             company=user_profile.company,
             content_type='Candidate',
             object_id=instance.id,
-            object_repr=f"Candidate Profile: {instance.full_name} ({instance.email})",
+            object_repr=f"{prefix}: {instance.full_name} ({instance.email})",
             reason=request.data.get('reason')
         )
         

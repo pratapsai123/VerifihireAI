@@ -1617,16 +1617,19 @@ def results_overview_view(request):
         if scoped_ids is None:
             if company_id:
                 ai_qs = AIAssessmentSubmission.objects.filter(
-                    assessment__company_id=company_id
+                    assessment__company_id=company_id,
+                    is_deleted=False
                 ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
             else:
-                ai_qs = AIAssessmentSubmission.objects.all(
+                ai_qs = AIAssessmentSubmission.objects.filter(
+                    is_deleted=False
                 ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         elif scoped_ids:
             # HR Manager sees only submissions for assessments they or their direct-report HRs created
             # HR sees only submissions for assessments they created
             ai_qs = AIAssessmentSubmission.objects.filter(
-                assessment__user_profile_id__in=scoped_ids
+                assessment__user_profile_id__in=scoped_ids,
+                is_deleted=False
             ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         else:
             ai_qs = AIAssessmentSubmission.objects.none()
@@ -1935,7 +1938,7 @@ class CandidateSubmissionDeleteView(generics.DestroyAPIView):
             company=user_profile.company,
             content_type='CandidateSubmission',
             object_id=instance.id,
-            object_repr=f"Submission for {instance.invitation.name} ({instance.invitation.email})",
+            object_repr=f"Standard Assessment Submission: {instance.invitation.name} ({instance.invitation.email})",
             reason=request.data.get('reason')
         )
         

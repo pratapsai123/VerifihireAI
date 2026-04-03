@@ -165,7 +165,7 @@ const Settings = () => {
     return (
         <div className="dashboard-container">
             <Header />
-            <div className="page-container" style={{ maxWidth: '1100px', margin: '2rem auto', padding: '0 1rem' }}>
+            <div className="page-container" style={{ maxWidth: '1100px', margin: '5rem auto', padding: '0 1rem' }}>
                 <h1 style={{ marginBottom: '1.5rem', color: '#1d2686' }}>Settings & Workflows</h1>
 
                 {message && <div style={{ padding: '12px', backgroundColor: '#d1fae5', color: '#065f46', borderRadius: '8px', marginBottom: '1rem', fontWeight: '600' }}>{message}</div>}

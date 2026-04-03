@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
 import '../styles/ResultsAI.css';
 
 const ResultsAI = () => {
-    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'assessment');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
@@ -24,20 +23,15 @@ const ResultsAI = () => {
 
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [toast, setToast] = useState(null);
-    const [deletingIds, setDeletingIds] = useState(new Set());
     const [confirmDelete, setConfirmDelete] = useState(null); // { items: [...] }
     const [selected, setSelected] = useState(new Set()); // Set of _deleteKey strings
 
-    const [resumeResults, setResumeResults] = useState([]);
     const [aiAssessments, setAiAssessments] = useState([]);
-    const [aiInterviews, setAiInterviews] = useState([]);
     const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
     const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail' | 'transcript'
     const [selectedRole, setSelectedRole] = useState(null);
     const [showTranscriptDetail, setShowTranscriptDetail] = useState(null);
-    const [summaryModal, setSummaryModal] = useState(null); // Candidate object for interview
     const [viewedSubmission, setViewedSubmission] = useState(null); // Submission object for assessment
 
     const showToast = (type, message) => {
@@ -47,7 +41,6 @@ const ResultsAI = () => {
 
     const fetchData = useCallback(async () => {
         setLoading(true);
-        setError(null);
         setSelected(new Set());
         try {
             // Use unified results endpoint + roles list
@@ -88,9 +81,8 @@ const ResultsAI = () => {
                 // but could be added as a tab if desired.
             });
 
-            setResumeResults(resResults);
-            setAiInterviews(intResults);
-            
+            // State setters for categorized results are not needed as we use groupedData for UI
+            // but we keep aiAssessments for the submission detail lookup logic
             const sortedAssessments = assessResults
                 .sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
             setAiAssessments(sortedAssessments);
@@ -138,7 +130,7 @@ const ResultsAI = () => {
             setGroupedData(groups);
         } catch (err) {
             console.error('Error fetching AI results:', err);
-            setError('Failed to load results. Please ensure the backend is running.');
+            showToast('error', 'Failed to load results. Please ensure the backend is running.');
         } finally {
             setLoading(false);
         }
@@ -227,7 +219,6 @@ const ResultsAI = () => {
     const indexOfLastRow = currentPage * itemsPerPage;
     const indexOfFirstRow = indexOfLastRow - itemsPerPage;
     const paginatedRows = currentRows.slice(indexOfFirstRow, indexOfLastRow);
-    const totalPages = Math.ceil(currentRows.length / itemsPerPage);
 
     const allKeys = currentRows.map(r => r._deleteKey);
     const allSelected = allKeys.length > 0 && allKeys.every(k => selected.has(k));
@@ -249,12 +240,20 @@ const ResultsAI = () => {
         });
     };
 
-    const requestDelete = (items) => setConfirmDelete({ items });
+    const requestDelete = (items) => {
+        const isAdmin = myRole === 'company_admin' || myRole === 'application_admin';
+        if (isAdmin) {
+            if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
+                performDelete(items, 'Internal Admin Cleanup');
+            }
+        } else {
+            setConfirmDelete({ items });
+        }
+    };
     const cancelDelete = () => setConfirmDelete(null);
 
     const performDelete = async (items, reason) => {
         const ids = new Set(items.map(i => i._deleteKey));
-        setDeletingIds(prev => new Set([...prev, ...ids]));
 
         let successCount = 0;
         let failCount = 0;
@@ -279,19 +278,21 @@ const ResultsAI = () => {
             }
         }));
 
-        const deletedCandidateIds = new Set(items.filter(i => i._type === 'candidate').map(i => i.id));
-        const deletedAssessmentKeys = new Set(items.filter(i => i._type === 'ai_assessment').map(i => i.submission_id));
+
 
         // Only remove from UI if it was actually deleted (not just requested)
-        setDeletingIds(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
+        // Cleanup selection state
+        if (successCount > 0) {
+            setSelected(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
+        }
 
         if (requestMessage) {
             showToast('info', requestMessage);
         } else if (successCount > 0 && failCount === 0) {
-            setResumeResults(prev => prev.filter(r => !ids.has(r.submission_id)));
-            setAiInterviews(prev => prev.filter(r => !ids.has(r.submission_id)));
             setAiAssessments(prev => prev.filter(r => !ids.has(r.submission_id)));
-            setSelected(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
+            // data is kept in groupedData which is re-fetched on action or filtered locally
+            // We'll re-fetch to ensure consistency with backend hierarchical state
+            fetchData();
             showToast('success', `${successCount} result${successCount > 1 ? 's' : ''} deleted.`);
         } else if (failCount > 0) {
             showToast('error', `${failCount} deletion(s) failed.`);
@@ -319,7 +320,6 @@ const ResultsAI = () => {
     const handleBackToOverview = () => {
         setViewMode('overview');
         setSelectedRole(null);
-        setSummaryModal(null);
         setShowTranscriptDetail(null);
     };
 
@@ -484,7 +484,7 @@ const ResultsAI = () => {
 
             {toast && (
                 <div style={{
-                    position: 'fixed', top: '1.5rem', right: '1.5rem', zIndex: 9999,
+                    position: 'fixed', top: '6.5rem', right: '1.5rem', zIndex: 9999,
                     background: toast.type === 'success' ? '#ECFDF5' : '#FFF5F5',
                     border: `1px solid ${toast.type === 'success' ? '#6EE7B7' : '#FECACA'}`,
                     color: toast.type === 'success' ? '#065F46' : '#B91C1C',
@@ -1006,7 +1006,7 @@ const ResultsAI = () => {
                                         ))}
                                         <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
                                         {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
-                                        {canDelete && someSelected && activeTab !== 'interview' && (
+                                        {canDelete && someSelected && (
                                             <button
                                                 onClick={() => requestDelete(selectedItems)}
                                                 style={{
@@ -1035,9 +1035,7 @@ const ResultsAI = () => {
                                                     <thead>
                                                         <tr>
                                                             <th style={{ width: '40px', textAlign: 'center' }}>
-                                                                {activeTab === 'assessment' && (
-                                                                    <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
-                                                                )}
+                                                                <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
                                                             </th>
                                                             <th>Candidate Info</th>
                                                             <th>Result</th>
@@ -1055,9 +1053,7 @@ const ResultsAI = () => {
                                                             return (
                                                                 <tr key={r._deleteKey} className={isSelected ? 'selected' : ''}>
                                                                     <td style={{ textAlign: 'center' }}>
-                                                                        {activeTab === 'assessment' && (
-                                                                            <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                                                        )}
+                                                                        <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
                                                                     </td>
                                                                     <td>
                                                                         <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
@@ -1076,22 +1072,27 @@ const ResultsAI = () => {
                                                                         <div>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
                                                                     </td>
                                                                     <td>
-                                                                        <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                                            {getStatusLabel(r.status)}
-                                                                        </span>
+                                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                                            <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
+                                                                                {getStatusLabel(r.status)}
+                                                                            </span>
+                                                                            {r.delete_requested && (
+                                                                                <span title="Deletion pending approval" style={{ cursor: 'help' }}>⏳</span>
+                                                                            )}
+                                                                        </div>
                                                                     </td>
                                                                     <td>
-                                                                        {activeTab === 'interview' ? (
-                                                                            <button 
-                                                                                onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
-                                                                                style={{ 
-                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                    background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
-                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                }}
-                                                                            >Review</button>
-                                                                        ) : (
-                                                                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                                            {activeTab === 'interview' ? (
+                                                                                <button 
+                                                                                    onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
+                                                                                    style={{ 
+                                                                                        padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                        background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                    }}
+                                                                                >Review</button>
+                                                                            ) : (
                                                                                 <button 
                                                                                     onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
                                                                                     style={{ 
@@ -1100,21 +1101,21 @@ const ResultsAI = () => {
                                                                                         color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                     }}
                                                                                 >View</button>
-                                                                                {canDelete && (
-                                                                                    <button
-                                                                                        onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
-                                                                                        title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete' : 'Request deletion'}
-                                                                                        style={{
-                                                                                            padding: '0.4rem 0.6rem', borderRadius: '8px',
-                                                                                            border: '1px solid #ef4444', background: '#FFF5F5',
-                                                                                            color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem'
-                                                                                        }}
-                                                                                    >
-                                                                                        <i className="fa-solid fa-trash" />
-                                                                                    </button>
-                                                                                )}
-                                                                            </div>
-                                                                        )}
+                                                                            )}
+                                                                            {canDelete && (
+                                                                                <button
+                                                                                    onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
+                                                                                    title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete' : 'Request deletion'}
+                                                                                    style={{
+                                                                                        padding: '0.4rem 0.6rem', borderRadius: '8px',
+                                                                                        border: '1px solid #ef4444', background: '#FFF5F5',
+                                                                                        color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem'
+                                                                                    }}
+                                                                                >
+                                                                                    <i className="fa-solid fa-trash" />
+                                                                                </button>
+                                                                            )}
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                             );
@@ -1133,18 +1134,5 @@ const ResultsAI = () => {
         </div>
     );
 };
-
-const RowDeleteBtn = ({ item, isDeleting, onDelete }) => (
-    <button
-        onClick={onDelete}
-        disabled={isDeleting}
-        style={{
-            background: 'rgba(254, 226, 226, 0.6)', border: '1px solid #ef4444', color: '#ef4444',
-            borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: isDeleting ? 'not-allowed' : 'pointer', fontSize: '0.8rem'
-        }}
-    >
-        {isDeleting ? '...' : 'Delete'}
-    </button>
-);
 
 export default ResultsAI;

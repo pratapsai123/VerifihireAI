@@ -858,36 +858,10 @@ class AssessmentDetailView(APIView):
             return Response({
                 "message": "Assessment updated successfully",
                 "num_applicants": assessment.num_applicants,
-                "role_title": assessment.role_title
+                "role_title": assessment.required_skills
             }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    def delete(self, request, pk):
-        try:
-            user_profile = getattr(request.user, 'profile', None)
-            if not user_profile or not user_profile.company:
-                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-            
-            assessment = Assessment.objects.get(pk=pk, company=user_profile.company)
-            
-            # Use centralized helper to handle policy and workflow
-            response, handled = handle_deletion_request(
-                user_profile=user_profile,
-                company=user_profile.company,
-                content_type='Assessment',
-                object_id=assessment.id,
-                object_repr=f"AI Assessment: {assessment.required_skills}",
-                reason=request.data.get('reason')
-            )
-            
-            if handled:
-                return response
-
-            assessment.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Assessment.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def pick_random_subset(self, assessment, pool):
         return pick_random_subset(assessment, pool)
@@ -1272,7 +1246,7 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
             company=user_profile.company,
             content_type='AIAssessmentSubmission',
             object_id=instance.id,
-            object_repr=f"AI Submission for {instance.candidate_name} ({instance.candidate_email})",
+            object_repr=f"AI Assessment Submission: {instance.candidate_name} ({instance.candidate_email})",
             reason=request.data.get('reason')
         )
         
