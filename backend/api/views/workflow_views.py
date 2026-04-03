@@ -48,18 +48,18 @@ def list_deletion_requests_view(request):
     company = user_profile.company
     status_filter = request.query_params.get('status')
     
-    if role == UserProfile.ROLE_COMPANY_ADMIN or _is_application_admin_email(user_profile.email):
-        # Admin sees all requests in the company
+    from api._imports import get_scoped_user_ids
+    scoped_ids = get_scoped_user_ids(user_profile)
+
+    if scoped_ids is None:
+        # App Admin / Company Admin see all requests in the company
         qs = DeletionRequest.objects.filter(requester__company=company)
-    elif role == UserProfile.ROLE_HR_MANAGER:
-        # HRM sees their own requests + requests they need to approve/audit
-        qs = DeletionRequest.objects.filter(
-            models.Q(requester=user_profile) | models.Q(approver=user_profile) | 
-            models.Q(requester__invited_by_profile=user_profile) # See requests from their team
-        )
     else:
-        # HR sees only their own
-        qs = DeletionRequest.objects.filter(requester=user_profile)
+        # Scoped: HR Managers and HR see requests they made, requests made by their team, 
+        # plus any request they are assigned to approve.
+        qs = DeletionRequest.objects.filter(
+            models.Q(requester_id__in=scoped_ids) | models.Q(approver=user_profile)
+        )
     
     if status_filter:
         qs = qs.filter(status=status_filter)

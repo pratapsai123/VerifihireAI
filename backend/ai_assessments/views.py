@@ -1243,7 +1243,18 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
         company = user_profile.company if user_profile and user_profile.company else None
         if not company:
             return AIAssessmentSubmission.objects.none()
-        return AIAssessmentSubmission.objects.filter(assessment__company=company, is_deleted=False)
+            
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            return AIAssessmentSubmission.objects.filter(assessment__company=company, is_deleted=False)
+            
+        return AIAssessmentSubmission.objects.filter(
+            assessment__company=company, 
+            assessment__user_profile_id__in=scoped_ids, 
+            is_deleted=False
+        )
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

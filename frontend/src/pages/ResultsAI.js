@@ -18,9 +18,10 @@ const ResultsAI = () => {
         catch { return {}; }
     })();
     const myRole = (me?.role || '').toLowerCase();
-    const canDelete = myRole === 'application_admin' || (myRole !== 'company_admin'); 
-    // Note: HR can still see it (maybe they request deletion), 
-    // but the user specifically said "Admin" can't delete.
+    // All internal roles can trigger deletion — backend enforces the correct workflow per role:
+    // company_admin → direct delete (audit logged), hr_manager/hr → sends approval request upward
+    const canDelete = ['application_admin', 'company_admin', 'hr_manager', 'hr'].includes(myRole);
+
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -1004,6 +1005,22 @@ const ResultsAI = () => {
                                             }}>{f.label}</button>
                                         ))}
                                         <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
+                                        {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
+                                        {canDelete && someSelected && activeTab !== 'interview' && (
+                                            <button
+                                                onClick={() => requestDelete(selectedItems)}
+                                                style={{
+                                                    padding: '0.3rem 0.85rem', borderRadius: '10px',
+                                                    border: '1px solid #ef4444', background: '#FFF5F5',
+                                                    color: '#ef4444', fontWeight: '700', fontSize: '0.75rem',
+                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                }}
+                                                title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete selected' : 'Request deletion for selected'}
+                                            >
+                                                <i className="fa-solid fa-trash" />
+                                                Delete ({selectedCount})
+                                            </button>
+                                        )}
                                     </div>
 
                                     <div className="glass-table-card" style={{ marginBottom: '1rem' }}>
@@ -1074,14 +1091,29 @@ const ResultsAI = () => {
                                                                                 }}
                                                                             >Review</button>
                                                                         ) : (
-                                                                            <button 
-                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
-                                                                                style={{ 
-                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                    background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                }}
-                                                                            >View</button>
+                                                                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                                                <button 
+                                                                                    onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                                    style={{ 
+                                                                                        padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                        background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                    }}
+                                                                                >View</button>
+                                                                                {canDelete && (
+                                                                                    <button
+                                                                                        onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
+                                                                                        title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete' : 'Request deletion'}
+                                                                                        style={{
+                                                                                            padding: '0.4rem 0.6rem', borderRadius: '8px',
+                                                                                            border: '1px solid #ef4444', background: '#FFF5F5',
+                                                                                            color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem'
+                                                                                        }}
+                                                                                    >
+                                                                                        <i className="fa-solid fa-trash" />
+                                                                                    </button>
+                                                                                )}
+                                                                            </div>
                                                                         )}
                                                                     </td>
                                                                 </tr>

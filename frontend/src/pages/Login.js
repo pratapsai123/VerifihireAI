@@ -226,9 +226,9 @@ function Login() {
             and monitor candidate sessions.
           </p>
           <div className="left-intro-image-wrapper">
-            <img 
-              src="/login-illustration.png" 
-              alt="Login Illustration" 
+            <img
+              src="/login-illustration.png"
+              alt="Login Illustration"
               className="left-intro-image"
               style={{ maxWidth: '420px' }}
             />
@@ -252,7 +252,7 @@ function Login() {
               <input
                 type="email"
                 className="auth-input-with-icon"
-                placeholder="Username *"
+                placeholder="Email *"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 onFocus={() => setLoginEmailFocused(true)}
@@ -261,7 +261,7 @@ function Login() {
                 maxLength={100}
                 disabled={loginLoading}
               />
-              <label className="auth-floating-label">Username *</label>
+              <label className="auth-floating-label">Email *</label>
             </div>
             {fieldErrors.email && (
               <div className="field-error-text">{fieldErrors.email}</div>
@@ -318,7 +318,7 @@ function Login() {
             >
               {loginLoading ? 'Verifying...' : 'Login'}
             </button>
-            
+
             {loginError && (
               <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center' }}>{loginError}</div>
             )}
@@ -334,11 +334,11 @@ function Login() {
               )}
               <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
                 Don't have an account?{' '}
-                <Link to="/signup" style={{ 
-                    color: '#2563eb', 
-                    fontWeight: '700', 
-                    marginLeft: '4px',
-                    textDecoration: 'none'
+                <Link to="/signup" style={{
+                  color: '#2563eb',
+                  fontWeight: '700',
+                  marginLeft: '4px',
+                  textDecoration: 'none'
                 }}>
                   Sign up
                 </Link>
@@ -350,7 +350,7 @@ function Login() {
             {otpSuccess && (
               <div className="auth-success-message" style={{ marginBottom: '1.5rem' }}>{otpSuccess}</div>
             )}
-            
+
             <p style={{ color: '#4a5568', fontSize: '0.9rem', textAlign: 'center', marginBottom: '1.5rem' }}>
               We've sent a code to <strong>{loginEmail}</strong>
             </p>

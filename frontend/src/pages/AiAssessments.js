@@ -25,9 +25,15 @@ const AiAssessments = () => {
     const [editValue, setEditValue] = useState('');
     const [saving, setSaving] = useState(false);
     
-    // User role check
+    // User role check — unified role variable for RBAC enforcement
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
-    const isCompanyAdmin = userData?.role === 'company_admin';
+    const userRole = (userData?.role || '').toLowerCase();
+    const isCompanyAdmin = userRole === 'company_admin';
+    const isApplicationAdmin = userRole === 'application_admin';
+    const isHRManager = userRole === 'hr_manager';
+    const isHR = userRole === 'hr';
+    // All internal roles can request deletion (backend decides workflow: direct delete vs approval)
+    const canDeleteAssessment = isCompanyAdmin || isApplicationAdmin || isHRManager || isHR;
 
     useEffect(() => {
         const fetchAssessments = async () => {
@@ -377,10 +383,11 @@ const AiAssessments = () => {
                                                             </button>
                                                         );
                                                     })()}
-                                                    {!isCompanyAdmin && (
+                                                    {canDeleteAssessment && (
                                                         <button
                                                             className="action-btn"
                                                             onClick={() => setConfirmDeletion(assessment)}
+                                                            title={isCompanyAdmin || isApplicationAdmin ? 'Delete Assessment' : 'Request Deletion'}
                                                             style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', width: '34px', height: '34px', padding: 0, borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                         >
                                                             <i className="fa-solid fa-trash"></i>

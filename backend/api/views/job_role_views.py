@@ -17,11 +17,21 @@ def job_role_list_create_view(request):
     
     if request.method == 'GET':
         if user_profile and user_profile.company:
-            # RELAXED VISIBILITY: Show all roles belonging to the company.
-            # This ensures that Recruiters and HR Managers can see roles created by administrators.
-            roles = JobRole.objects.filter(company=user_profile.company, is_deleted=False)
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+            
+            if scoped_ids is None:
+                # App Admin / Company Admin see all company roles
+                roles = JobRole.objects.filter(company=user_profile.company, is_deleted=False).order_by('-created_at')
+            else:
+                # HR / HR Manager see only their own and their direct reports' created roles
+                roles = JobRole.objects.filter(
+                    company=user_profile.company,
+                    created_by_id__in=scoped_ids,
+                    is_deleted=False
+                ).order_by('-created_at')
         else:
-            roles = JobRole.objects.filter(is_deleted=False)
+            roles = JobRole.objects.filter(is_deleted=False).order_by('-created_at')
             
         serializer = JobRoleSerializer(roles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -88,6 +98,12 @@ def job_role_delete_view(request, pk):
 
     # Basic permission check: users from the same company can delete
     if role.company and user_profile.company != role.company:
+        return Response({'error': 'Not authorized to delete this role'}, status=status.HTTP_403_FORBIDDEN)
+        
+    # Strict RBAC: If user is scoped, ensure they can only delete roles in their hierarchy
+    from api._imports import get_scoped_user_ids
+    scoped_ids = get_scoped_user_ids(user_profile)
+    if scoped_ids is not None and role.created_by_id not in scoped_ids:
         return Response({'error': 'Not authorized to delete this role'}, status=status.HTTP_403_FORBIDDEN)
         
     # Use centralized helper to handle policy and workflow

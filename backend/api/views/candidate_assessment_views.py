@@ -1622,12 +1622,9 @@ def results_overview_view(request):
             else:
                 ai_qs = AIAssessmentSubmission.objects.all(
                 ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
-        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
-            # Broaden for corporate roles: see all in company
-            ai_qs = AIAssessmentSubmission.objects.filter(
-                assessment__company_id=company_id
-                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         elif scoped_ids:
+            # HR Manager sees only submissions for assessments they or their direct-report HRs created
+            # HR sees only submissions for assessments they created
             ai_qs = AIAssessmentSubmission.objects.filter(
                 assessment__user_profile_id__in=scoped_ids
             ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
@@ -1652,14 +1649,9 @@ def results_overview_view(request):
                     is_deleted=False,
                     status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
                 ).order_by('-submission_date')
-        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
-            # Broaden: see all in company, especially those with user_profile=None or created by others
-            ai_cand_qs = Candidate.objects.filter(
-                company_id=company_id,
-                is_deleted=False,
-                status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
-            ).order_by('-submission_date')
         elif scoped_ids:
+            # HR Manager sees candidates uploaded by themselves or their direct-report HRs
+            # HR sees only candidates they personally uploaded/invited
             ai_cand_qs = Candidate.objects.filter(
                 user_profile_id__in=scoped_ids,
                 is_deleted=False,
