@@ -1010,7 +1010,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
