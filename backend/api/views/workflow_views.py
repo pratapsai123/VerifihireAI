@@ -268,9 +268,8 @@ def restore_deletion_request_view(request, request_id):
 
     success, error_msg = _perform_restore(del_request)
     if success:
-        del_request.status = DeletionRequest.STATUS_PENDING
-        del_request.actioned_at = None
-        del_request.reason = f"[RESTORED on {timezone.now().strftime('%Y-%m-%d')}] {del_request.reason or ''}"
+        del_request.status = getattr(DeletionRequest, 'STATUS_RESTORED', 'restored')
+        del_request.reason = f"[RESTORED on {timezone.localtime().strftime('%Y-%m-%dT%H:%M:%S')}] Admin Restored | {del_request.reason or ''}"
         del_request.save()
         return Response({'message': f'"{del_request.object_repr}" has been successfully restored.'})
     else:

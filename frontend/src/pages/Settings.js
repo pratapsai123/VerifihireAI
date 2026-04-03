@@ -3,6 +3,59 @@ import axios from 'axios';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
 
+const cleanObjName = (repr) => {
+    if (!repr) return '';
+    let name = repr.replace(/^Submission for /i, '');
+    name = name.replace(/\bNone\b/gi, '').replace(/\s+/g, ' ').trim();
+    return name;
+};
+
+const cleanName = (name) => {
+    return name ? name.replace(/\bNone\b/gi, '').replace(/\s+/g, ' ').trim() : '';
+};
+
+const parseHistory = (req) => {
+    let history = [];
+    let rawReason = req.reason || '';
+    
+    const restoredRegex = /\[RESTORED on (.*?)\]/g;
+    let match;
+    let originalReason = rawReason;
+    while ((match = restoredRegex.exec(rawReason)) !== null) {
+        history.push({ 
+            action: 'Restored', 
+            date: new Date(match[1]), 
+            desc: `Restored` 
+        });
+        originalReason = originalReason.replace(match[0], '');
+    }
+    originalReason = originalReason.replace(/Admin Restored \| /g, '').trim();
+    
+    // Original request
+    history.push({ 
+        action: 'Request', 
+        date: new Date(req.created_at), 
+        desc: `Requested: ${originalReason || 'No reason specified'}` 
+    });
+    
+    if ((req.status === 'approved' || req.status === 'restored') && req.actioned_at) {
+        history.push({ 
+            action: 'Approved', 
+            date: new Date(req.actioned_at), 
+            desc: `Approved by ${cleanName(req.approver_name) || 'Unknown'}` 
+        });
+    } else if (req.status === 'rejected' && req.actioned_at) {
+        history.push({ 
+            action: 'Rejected', 
+            date: new Date(req.actioned_at), 
+            desc: `Rejected: ${req.rejection_reason || 'No reason'}` 
+        });
+    }
+
+    history.sort((a, b) => a.date - b.date);
+    return history;
+};
+
 const Settings = () => {
     const [user, setUser] = useState(null);
     const [settings, setSettings] = useState({ require_delete_permission: true });
@@ -11,6 +64,9 @@ const Settings = () => {
     const [tab, setTab] = useState('requests'); // 'requests' or 'config'
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const [filterStatus, setFilterStatus] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterDate, setFilterDate] = useState('');
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -86,6 +142,26 @@ const Settings = () => {
         }
     };
 
+    const filteredRequests = requests.filter(req => {
+        const matchesStatus = filterStatus === 'all' || req.status === filterStatus;
+        const searchLower = searchTerm.toLowerCase();
+        
+        const candidateName = cleanObjName(req.object_repr);
+        const reqName = cleanName(req.requester_name);
+        
+        const matchesSearch = 
+            (candidateName.toLowerCase().includes(searchLower)) ||
+            (reqName.toLowerCase().includes(searchLower));
+
+        let matchesDate = true;
+        if (filterDate) {
+            const reqDate = new Date(req.created_at).toISOString().split('T')[0];
+            matchesDate = reqDate === filterDate;
+        }
+
+        return matchesStatus && matchesSearch && matchesDate;
+    });
+
     return (
         <div className="dashboard-container">
             <Header />
@@ -139,122 +215,128 @@ const Settings = () => {
                 )}
 
                 {tab === 'requests' && (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '2rem' }}>
-                        {/* Pending Approvals Section */}
-                        <div>
-                            <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#92400e' }}>
-                                <i className="fa-solid fa-hourglass-half" style={{ color: '#f59e0b' }}></i>
-                                Pending Approvals
-                                {requests.filter(r => r.status === 'pending').length > 0 && (
-                                    <span style={{ background: '#f59e0b', color: 'white', borderRadius: '999px', padding: '2px 8px', fontSize: '0.75rem' }}>
-                                        {requests.filter(r => r.status === 'pending').length}
-                                    </span>
-                                )}
-                            </h3>
-                            {loading ? <p>Loading...</p> : (
-                                requests.filter(r => r.status === 'pending').length === 0 ?
-                                <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>✅ No pending requests.</p> : (
-                                    <div style={{ display: 'grid', gap: '1rem' }}>
-                                        {requests.filter(r => r.status === 'pending').map(req => (
-                                            <div key={req.id} style={{ background: '#fffbeb', padding: '1rem', borderRadius: '12px', border: '1px solid #fde68a', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                                                    <span style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: '700' }}>{req.content_type}</span>
-                                                    <span style={{ color: '#9ca3af', fontSize: '0.7rem' }}>{new Date(req.created_at).toLocaleString()}</span>
-                                                </div>
-                                                <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '0.25rem', color: '#1f2937' }}>
-                                                    {req.object_repr || `ID ${req.object_id}`}
-                                                </div>
-                                                <div style={{ fontSize: '0.8rem', color: '#374151', marginBottom: '0.25rem' }}>
-                                                    <strong>From:</strong> {req.requester_name} <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>({req.requester_role})</span>
-                                                </div>
-                                                {req.reason && (
-                                                    <div style={{ fontSize: '0.8rem', marginTop: '0.5rem', color: '#374151', background: '#fef9c3', padding: '6px 10px', borderRadius: '6px', borderLeft: '3px solid #fbbf24', fontStyle: 'italic' }}>
-                                                        <strong>Reason:</strong> "{req.reason}"
-                                                    </div>
-                                                )}
-
-                                                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-                                                    {(isCompanyAdmin || req.approver_email === user?.email) ? (
-                                                        <>
-                                                            <button
-                                                                onClick={() => handleAction(req.id, 'approve')}
-                                                                style={{ flex: 1, padding: '8px', background: '#d1fae5', color: '#065f46', border: '1px solid #6ee7b750', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '0.82rem' }}
-                                                            >✅ Approve & Delete</button>
-                                                            <button
-                                                                onClick={() => setRejectModal({ requestId: req.id })}
-                                                                style={{ flex: 1, padding: '8px', background: '#fee2e2', color: '#991b1b', border: '1px solid #fca5a550', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '0.82rem' }}
-                                                            >❌ Reject</button>
-                                                        </>
-                                                    ) : (
-                                                        <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic', paddingTop: '4px' }}>
-                                                            ⏳ Waiting for {req.approver_name}'s approval
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )
-                            )}
+                    <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+                        <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                <span style={{ fontWeight: '600', color: '#374151' }}>Filter:</span>
+                                <select
+                                    value={filterStatus}
+                                    onChange={e => setFilterStatus(e.target.value)}
+                                    style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: '#f9fafb', fontSize: '0.9rem' }}
+                                >
+                                    <option value="all">All Requests</option>
+                                    <option value="pending">⏳ Pending</option>
+                                    <option value="approved">🗑️ Deleted</option>
+                                    <option value="rejected">❌ Rejected</option>
+                                <option value="restored">↩️ Restored</option>
+</select>
+                            </div>
+                            <div style={{ flex: '1', minWidth: '200px', maxWidth: '400px' }}>
+                                <input 
+                                    type="text" 
+                                    placeholder="Search by name, email, requester..." 
+                                    value={searchTerm}
+                                    onChange={e => setSearchTerm(e.target.value)}
+                                    style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }}
+                                />
+                            </div>
+                            <div style={{ flex: '1', minWidth: '150px', maxWidth: '200px' }}>
+                                <input 
+                                    type="date" 
+                                    value={filterDate}
+                                    onChange={e => setFilterDate(e.target.value)}
+                                    style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }}
+                                />
+                            </div>
                         </div>
-
-                        {/* Recycle Bin / Audit Log Section */}
-                        <div style={{ borderLeft: '1px solid #f3f4f6', paddingLeft: '1.5rem' }}>
-                            <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#374151' }}>
-                                <i className="fa-solid fa-trash-can" style={{ color: '#6366f1' }}></i>
-                                Recycle Bin (Audit Log)
-                            </h3>
-                            {loading ? <p>Loading...</p> : (
-                                requests.filter(r => r.status !== 'pending').length === 0 ?
-                                <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>No deleted items in history.</p> : (
-                                    <div style={{ display: 'grid', gap: '1rem' }}>
-                                        {requests.filter(r => r.status !== 'pending').map(req => (
-                                            <div key={req.id} style={{
-                                                background: req.status === 'approved' ? '#f8faff' : '#fff8f8',
-                                                padding: '1rem', borderRadius: '12px',
-                                                border: `1px solid ${req.status === 'approved' ? '#c7d2fe' : '#fecaca'}`,
-                                            }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                                    <span style={{ color: '#6b7280', fontSize: '0.72rem' }}>
-                                                        {req.content_type} • {new Date(req.actioned_at || req.created_at).toLocaleDateString()}
-                                                    </span>
+                        
+                        <div style={{ overflowX: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+                                <thead style={{ background: '#f3f4f6', color: '#4b5563', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.05em' }}>
+                                    <tr>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb', minWidth: '350px' }}>Candidate Details & Timeline</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Requested By</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Status</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {loading ? (
+                                        <tr>
+                                            <td colSpan="4" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>Loading...</td>
+                                        </tr>
+                                    ) : filteredRequests.length === 0 ? (
+                                        <tr>
+                                            <td colSpan="4" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>
+                                               No requests found matching your filters.
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        filteredRequests.map(req => (
+                                            <tr key={req.id} style={{ borderBottom: '1px solid #e5e7eb', background: req.status === 'pending' ? '#fffbeb' : req.status === 'approved' ? '#f8faff' : '#fff8f8' }}>
+                                                <td style={{ padding: '12px 16px' }}>
+                                                    <div style={{ fontWeight: '700', color: '#111827', marginBottom: '8px', fontSize: '1rem' }}>
+                                                        <i className="fa-regular fa-user" style={{ marginRight: '6px', color: '#6b7280' }}></i>
+                                                        {cleanObjName(req.object_repr) || `ID ${req.object_id}`}
+                                                    </div>
+                                                    <div style={{ marginTop: '8px', fontSize: '0.75rem', color: '#374151' }}>
+                                                        <div style={{ fontWeight: '600', color: '#6b7280', marginBottom: '2px' }}>Timeline:</div>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                                                            {parseHistory(req).map((evt, idx) => (
+                                                                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 0' }}>
+                                                                    <span style={{ fontWeight: '500', color: evt.action === 'Request' ? '#3b82f6' : evt.action === 'Approved' ? '#10b981' : evt.action === 'Rejected' ? '#ef4444' : '#f59e0b' }}>
+                                                                        • {evt.desc}
+                                                                    </span>
+                                                                    <span style={{ color: '#9ca3af', whiteSpace: 'nowrap' }}>
+                                                                        {evt.date.toLocaleDateString()} {evt.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                                    </span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                    <div style={{ color: '#111827', fontWeight: '500' }}>{cleanName(req.requester_name)}</div>
+                                                    <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{req.requester_role}</div>
+                                                </td>
+                                                <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
                                                     <span style={{
-                                                        fontSize: '0.65rem', fontWeight: '800', padding: '2px 8px', borderRadius: '999px',
-                                                        background: req.status === 'approved' ? '#e0e7ff' : '#fee2e2',
-                                                        color: req.status === 'approved' ? '#3730a3' : '#dc2626',
-                                                        textTransform: 'uppercase'
+                                                        display: 'inline-flex', alignItems: 'center', padding: '4px 10px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase',
+                                                        background: req.status === 'pending' ? '#fef3c7' : req.status === 'approved' ? '#e0e7ff' :  req.status === 'rejected' ? '#fee2e2' : '#ede9fe',
+                                                        color: req.status === 'pending' ? '#92400e' : req.status === 'approved' ? '#3730a3' :  req.status === 'rejected' ? '#dc2626' : '#5b21b6'
                                                     }}>
-                                                        {req.status === 'approved' ? '🗑 Deleted' : '✖ Rejected'}
+                                                        {req.status === 'pending' ? '⏳ Pending' : req.status === 'approved' ? '🗑 Deleted' : req.status === 'rejected' ? '✖ Rejected' : req.status === 'restored' ? '↩ Restored' : req.status.toUpperCase()}
                                                     </span>
-                                                </div>
-                                                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: '#111827' }}>{req.object_repr}</div>
-                                                <div style={{ fontSize: '0.78rem', marginTop: '0.4rem', color: '#4b5563' }}>
-                                                    <div>Requested by: <strong>{req.requester_name}</strong> <span style={{ color: '#9ca3af' }}>({req.requester_role})</span></div>
-                                                    <div>Actioned by: <strong>{req.approver_name}</strong> <span style={{ color: '#9ca3af' }}>({req.approver_role})</span></div>
-                                                </div>
-                                                {req.reason && (
-                                                    <div style={{ fontSize: '0.75rem', marginTop: '0.4rem', color: '#374151', background: '#f3f4f6', padding: '5px 9px', borderRadius: '5px', fontStyle: 'italic' }}>
-                                                        Reason: "{req.reason}"
-                                                    </div>
-                                                )}
-                                                {req.rejection_reason && (
-                                                    <div style={{ fontSize: '0.75rem', marginTop: '0.4rem', color: '#991b1b', background: '#fef2f2', padding: '5px 9px', borderRadius: '5px' }}>
-                                                        Rejected: {req.rejection_reason}
-                                                    </div>
-                                                )}
-                                                {req.status === 'approved' && isCompanyAdmin && (
-                                                    <button
-                                                        onClick={() => handleRestore(req.id)}
-                                                        style={{ marginTop: '0.75rem', width: '100%', padding: '7px', background: '#ede9fe', color: '#5b21b6', border: '1px solid #c4b5fd', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '0.8rem' }}
-                                                    >
-                                                        ↩ Restore
-                                                    </button>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                )
-                            )}
+                                                    {req.status === 'rejected' && req.rejection_reason && (
+                                                        <div style={{ fontSize: '0.7rem', color: '#991b1b', marginTop: '4px', background: '#fef2f2', padding: '4px 8px', borderRadius: '4px' }}>{req.rejection_reason}</div>
+                                                    )}
+                                                    {req.status !== 'pending' && req.approver_name && (
+                                                        <div style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '4px' }}>By: {cleanName(req.approver_name)}</div>
+                                                    )}
+                                                </td>
+                                                <td style={{ padding: '12px 16px' }}>
+                                                    {req.status === 'pending' ? (
+                                                        (isCompanyAdmin || req.approver_email === user?.email) ? (
+                                                            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'row' }}>
+                                                                <button onClick={() => handleAction(req.id, 'approve')} style={{ padding: '6px 12px', background: '#d1fae5', color: '#065f46', border: '1px solid #6ee7b750', borderRadius: '6px', cursor: 'pointer', fontWeight: '700', fontSize: '0.75rem', flex: 1 }}>✅ Approve</button>
+                                                                <button onClick={() => setRejectModal({ requestId: req.id })} style={{ padding: '6px 12px', background: '#fee2e2', color: '#991b1b', border: '1px solid #fca5a550', borderRadius: '6px', cursor: 'pointer', fontWeight: '700', fontSize: '0.75rem', flex: 1 }}>❌ Reject</button>
+                                                            </div>
+                                                        ) : (
+                                                            <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Waiting for {cleanName(req.approver_name)}</span>
+                                                        )
+                                                    ) : (
+                                                        req.status === 'approved' && isCompanyAdmin ? (
+                                                            <button onClick={() => handleRestore(req.id)} style={{ padding: '6px 12px', background: '#ede9fe', color: '#5b21b6', border: '1px solid #c4b5fd', borderRadius: '6px', cursor: 'pointer', fontWeight: '700', fontSize: '0.75rem', width: '100%' }}>↩ Restore</button>
+                                                        ) : (
+                                                            <span style={{ color: '#9ca3af' }}>-</span>
+                                                        )
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 )}

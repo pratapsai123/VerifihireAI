@@ -1674,6 +1674,14 @@ def results_overview_view(request):
             ai_cand_qs = ai_cand_qs.filter(submission_date__date__lte=end_date)
 
         # Combine and limit
+        active_deletions = set()
+        try:
+            from ..models import DeletionRequest
+            for dr in DeletionRequest.objects.filter(status='pending'):
+                active_deletions.add(f"{dr.content_type}_{dr.object_id}")
+        except Exception:
+            pass
+
         results = []
         for s in qs[:5000]:
             inv = s.invitation
@@ -1707,6 +1715,7 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
 
                     'status': s.result,
+                    'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
                     'answers': getattr(s, 'answers', {}),
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
@@ -1770,7 +1779,8 @@ def results_overview_view(request):
                         'warning_logs': getattr(s, 'warning_logs', [])
                     },
                     'integrity_screenshots': screenshots_data,
-                    'is_resume_screening': False
+                    'is_resume_screening': False,
+                    'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
 
@@ -1807,6 +1817,7 @@ def results_overview_view(request):
 
                     'status': s.status,
                     'is_resume_screening': True,
+                    'delete_requested': f"Candidate_{s.id}" in active_deletions,
                     'interview_summary': s.interview_summary,
                     'total_questions': getattr(s, 'total_questions', 0),
                     'resume_score': getattr(s, 'resume_score', 0),
