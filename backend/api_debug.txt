@@ -280,3 +280,52 @@ Host: localhost:8001
 [2026-04-05 10:58:03.098341+00:00] PUBLIC ACCESS: Token='3e833956-8b30-4533-bdee-69c08d32b0da'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775386682776']}>
 Host: localhost:8001
+
+[2026-04-06 06:43:33.723418+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required counts. Expected pool MCQs=4, min coding=2; got MCQs=4, coding=1.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 500, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required counts. Expected pool MCQs=4, min coding=2; got MCQs=4, coding=1.
+
+RAW: No response received
+
+[2026-04-06 06:49:25.059464+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5952, Requested 1903. Please try again in 18.549999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 425, in post
+    new_challenges = _generate_coding_pool_ai_only(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 674, in _generate_coding_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 260, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 253, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5952, Requested 1903. Please try again in 18.549999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: No response received
+
+[2026-04-06 06:49:27.138879+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required counts. Expected pool MCQs=6, min coding=1; got MCQs=6, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 500, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required counts. Expected pool MCQs=6, min coding=1; got MCQs=6, coding=0.
+
+RAW: No response received
+
+[2026-04-06 07:15:44.321949+00:00] PUBLIC ACCESS: Token='21571f77-4a5b-49d8-930f-1d57e922fccc'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1775459744308']}>
+Host: localhost:8001
+
+[2026-04-06 07:15:44.494376+00:00] PUBLIC ACCESS: Token='21571f77-4a5b-49d8-930f-1d57e922fccc'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1775459744331']}>
+Host: localhost:8001

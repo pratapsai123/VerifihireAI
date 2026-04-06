@@ -254,3 +254,33 @@ EXEC FAILURE for input 0: Empty Stdout
 EXEC FAILURE for input 1: Empty Stdout
 EXEC FAILURE for input 3: Empty Stdout
 EXEC FAILURE for input 4: Empty Stdout
+
+--- DEBUG: Generating cases for 'Employee Management System' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'object', 'properties': [{'type': 'int', 'name': 'employee_id'}, {'type': 'string', 'name': 'name'}, {'type': 'int', 'name': 'salary'}]}}]
+Generated Input 0: 7
+Generated Input 1: 2
+Generated Input 2: 3
+Generated Input 3: 43
+Generated Input 4: 50
+Generated Input 5: 35
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Employee Performance Management' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 19 [NL] status port status item_15 item_52 item_46 link task host item_98 item_11 task node host link item_37 node host port
+Generated Input 1: 25 [NL] item_75 task task item_46 item_83 node item_36 value task task node host link link node value item_68 node host task item_95 item_75 link link item_50
+Generated Input 2: 46 [NL] node value host value task task task item_89 item_88 item_16 value value item_87 item_90 port port link item_31 link port status item_71 port task node item_34 port item_84 item_15 node
+Generated Input 3: 14 [NL] item_25 host node node host task item_51 node item_43 port host node item_22 task
+Generated Input 4: 41 [NL] item_25 host item_61 node item_32 item_15 node job item_43 node job value item_56 node item_53 status status item_47 item_81 port node task node item_93 host node item_89 value task host
+Generated Input 5: 27 [NL] node status port status job item_54 item_27 item_19 task task item_54 port host port task item_97 link item_16 port value status task value item_68 node job value
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Backend Dev: Duplicate Transaction Filter' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string', 'max': 32}}]
+Generated Input 0: 14 [NL] port task value item_81 port value port status link item_61 job item_38 task job
+Generated Input 1: 31 [NL] port value node item_58 status item_88 node item_92 item_51 item_83 port item_42 port job node job job task job node item_71 item_37 status port item_36 link node link job item_64
+Generated Input 2: 25 [NL] link value value port node job task link status link host node link item_54 item_47 item_43 host value host item_19 host job link host value
+Generated Input 3: 8 [NL] value port item_25 node value port node status
+Generated Input 4: 13 [NL] value task item_96 host item_80 status task item_12 job node status value node
+Generated Input 5: 9 [NL] task status item_75 item_90 item_25 node port link host
+SYNC SUCCESS for input 0

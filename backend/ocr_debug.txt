@@ -256,3 +256,17 @@
 [2026-04-02 11:32:00.614131+00:00] Running OCR on rotation 0
 [2026-04-02 11:32:38.052167+00:00] Direct match found at rotation 0
 [2026-04-02 11:32:38.058884+00:00] Match found via OCR on page 0
+[2026-04-06 06:51:50.261942+00:00] Starting PDF Extraction for PAN: ABCDE1234F
+[2026-04-06 06:51:50.263958+00:00] Opened PDF with 1 pages
+[2026-04-06 06:51:50.269274+00:00] pdfplumber skipped: No module named 'pdfplumber'
+[2026-04-06 06:51:50.272297+00:00] PyPDF2 extracted content
+[2026-04-06 06:51:50.274272+00:00] Falling back to OCR step (Scanned PDF)
+[2026-04-06 06:51:50.903760+00:00] Running OCR on rotation 0
+[2026-04-06 06:52:21.808134+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-04-06 06:52:21.830274+00:00] fitz opened PDF with 3 pages
+[2026-04-06 06:52:51.087749+00:00] Direct match found at rotation 0
+[2026-04-06 06:52:51.092275+00:00] Match found via OCR on page 0
+[2026-04-06 06:53:03.710262+00:00] Page 0: 1374 chars extracted
+[2026-04-06 06:53:42.047781+00:00] Page 1: 1624 chars extracted
+[2026-04-06 06:54:09.636254+00:00] Page 2: 703 chars extracted
+[2026-04-06 06:54:09.636254+00:00] OCR complete. Total chars: 3704
