@@ -259,7 +259,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = config('GROQ_API_KEY', default='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')
+GROQ_API_KEY = config('GROQ_API_KEY', default='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')
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta
