@@ -28,7 +28,9 @@ from .ai_logic import (
     _generate_coding_pool_ai_only,
     _generate_mcq_pool_ai_only,
     pick_random_subset,
-    _enhance_coding_challenges_with_test_cases
+    _verify_reference_solutions,
+    _expert_assessment_refiner,
+    _generate_execution_verified_test_cases
 )
 import traceback
 import base64
@@ -96,7 +98,7 @@ class SubmitAssessmentView(APIView):
                     # Also update email if it was overridden
                     if email and submission.candidate_email != email:
                         submission.candidate_email = email
-                    submission.save()
+                    
                     
                     # CROSS-UPDATE: Synchronize with the Candidate record if exists
                     try:
@@ -164,43 +166,87 @@ class SubmitAssessmentView(APIView):
                         score_fraction = passed / total_tc
                         candidate_coding_points += (score_fraction * weight)
 
-            candidate_total_points = candidate_mcq_points + candidate_coding_points
-            total_possible_points = possible_mcq_points + possible_coding_points
+            # ---------------------------------------------------------
+            # FINAL WEIGHTED SCORING (40% MCQ / 60% Coding)
+            # ---------------------------------------------------------
             
-            percentage = round((candidate_total_points / total_possible_points * 100)) if total_possible_points > 0 else 0
+            # Calculate individual percentages
+            mcq_percentage = (candidate_mcq_points / possible_mcq_points * 100) if possible_mcq_points > 0 else 0
+            coding_percentage = (candidate_coding_points / possible_coding_points * 100) if possible_coding_points > 0 else 0
+            
+            # Aggregate based on weightage
+            if possible_mcq_points > 0 and possible_coding_points > 0:
+                percentage = round((mcq_percentage * 0.4) + (coding_percentage * 0.6))
+            elif possible_mcq_points > 0:
+                # 100% MCQ if no coding challenges are present
+                percentage = round(mcq_percentage)
+            elif possible_coding_points > 0:
+                # 100% Coding if no MCQs are present
+                percentage = round(coding_percentage)
+            else:
+                percentage = 0
+
             pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 50 else 'rejected'
 
             submission.answers = answers
-            submission.mcq_score = round(candidate_mcq_points)
-            submission.coding_score = round(candidate_coding_points)
-            submission.score = round(candidate_total_points)
+            submission.mcq_score = round(mcq_percentage) # Store % for internal tracking
+            submission.coding_score = round(coding_percentage) # Store % for internal tracking
+            submission.score = percentage 
             submission.total_questions = len(mcqs) + len(coding_challenges)
             submission.percentage = percentage
             submission.status = pass_status
             submission.results_breakdown = {
-                "mcq": {"scored": round(candidate_mcq_points), "total": possible_mcq_points},
-                "coding": {"scored": round(candidate_coding_points), "total": possible_coding_points},
+                "mcq": {
+                    "scored_points": round(candidate_mcq_points), 
+                    "possible_points": possible_mcq_points,
+                    "accuracy": f"{int(mcq_percentage)}%",
+                    "weight": "40%"
+                },
+                "coding": {
+                    "scored_points": round(candidate_coding_points), 
+                    "possible_points": possible_coding_points,
+                    "accuracy": f"{int(coding_percentage)}%",
+                    "weight": "60%"
+                },
                 "coding_results": coding_results,
-                "total_possible": total_possible_points
+                "weighted_final": f"{percentage}%"
             }
             submission.submitted_at = timezone.now()
             submission.save()
 
-            # Status change to 'selected' will trigger handle_assessment_save signal (api/signals.py) 
-            # which schedules the interview link email with a 2-minute delay as requested.
-            logger.info(f"Assessment completed: submission={submission.id}, percentage={percentage}, pass_status={pass_status}")
+            # CROSS-UPDATE: Synchronize with the Candidate record
+            try:
+                candidate = Candidate.objects.filter(email__iexact=email).first()
+                if candidate:
+                    candidate.score = percentage
+                    candidate.status = 'Completed'
+                    candidate.completed_at = timezone.now()
+                    
+                    if not isinstance(candidate.interview_summary, list):
+                        candidate.interview_summary = []
+                    
+                    candidate.interview_summary.append({
+                        "type": "AI_ASSESSMENT",
+                        "assessment_id": assessment.id,
+                        "mcq_accuracy": f"{round(candidate_mcq_points/20)}/{len(mcqs)} ({int(mcq_percentage)}%)",
+                        "coding_accuracy": f"{int(coding_percentage)}%",
+                        "weighted_mcq": f"{(mcq_percentage * 0.4):.1f}%",
+                        "weighted_coding": f"{(coding_percentage * 0.6):.1f}%",
+                        "integrity_score": f"{int(submission.integrity_score)}%",
+                        "timestamp": timezone.now().isoformat()
+                    })
+                    candidate.save()
+            except Exception as sync_err:
+                logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
-            # After successful save, ensure we return no-cache headers to the submission confirmation
             response_data = {
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
-                "score": submission.score,
-                "mcq_score": submission.mcq_score,
-                "coding_score": submission.coding_score,
-                "total_possible_points": total_possible_points,
-                "percentage": percentage,
+                "final_score": percentage,
+                "mcq_score": int(mcq_percentage),
+                "coding_score": int(coding_percentage),
+                "weightage": "40/60 (MCQ/Coding)",
                 "status": pass_status,
-                "final_status": "Qualified" if pass_status == 'selected' else "Not Qualified",
                 "display_percentage": f"{percentage}%"
             }
             response = Response(response_data, status=status.HTTP_200_OK)
@@ -217,7 +263,7 @@ class SubmitAssessmentView(APIView):
 
 
 class GenerateAssessmentView(APIView):
-    PRIMARY_MODEL = "llama-3.3-70b-versatile"
+    PRIMARY_MODEL = "llama-3.1-8b-instant"
     FALLBACK_MODEL = "llama-3.1-8b-instant"
     _fallback_until = 0
 
@@ -331,77 +377,111 @@ class GenerateAssessmentView(APIView):
             logger.info(f"Generating Pool for {num_applicants} applicants: MCQs={pool_mcq_total}, Coding={pool_coding_total}")
             
             local_api_key = getattr(settings, 'GROQ_API_KEY', None)
-            local_groq_client = Groq(api_key=local_api_key)
+            local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
 
             # 1. GENERATE MCQ POOL (Dedicated AI Call)
+            blacklist_mcqs = []
+            blacklist_titles = []
+            
+            # Fetch last 20 assessments for this company to avoid replicates
+            recent_assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')[:20]
+            for old_asm in recent_assessments:
+                old_content = old_asm.generated_content or {}
+                for q in old_content.get('mcqs', []):
+                    blacklist_mcqs.append(q.get('question', '')[:100])
+                for challenge in old_content.get('coding_challenges', []):
+                    blacklist_titles.append(challenge.get('title'))
+
             if pool_mcq_total > 0:
-                logger.info(f"Step 1: Generating MCQ pool of {pool_mcq_total} questions...")
-                recovered_mcqs = _generate_mcq_pool_ai_only(
+                logger.info(f"Step 1: Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
+                mcqs = _generate_mcq_pool_ai_only(
                     groq_client=local_groq_client,
                     job_description=job_description,
                     required_skills=required_skills,
-                    easy_required=pool_easy,
-                    medium_required=pool_medium,
-                    hard_required=pool_hard,
+                    pool_mcq_total=pool_mcq_total,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    blacklist_qs=blacklist_mcqs,
+                    model=self.FALLBACK_MODEL
                 )
-                if recovered_mcqs:
-                    generated_data['mcqs'] = recovered_mcqs[:pool_mcq_total]
+                if mcqs:
+                    generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
-            # 2. GENERATE CODING POOL (Dedicated AI Call)
-            if pool_coding_total > 0:
-                logger.info(f"Step 2: Generating Coding pool of {pool_coding_total} challenges...")
-                extra_coding = _generate_coding_pool_ai_only(
+            # 2. GENERATE CODING POOL (Simplified: Question + Working Answer only, no test cases)
+            final_coding_challenges = []
+            coding_attempts = 0
+            max_coding_attempts = 3
+            blacklist_titles = list(blacklist_titles)
+
+            while len(final_coding_challenges) < pool_coding_total and coding_attempts < max_coding_attempts:
+                coding_attempts += 1
+                needed = pool_coding_total - len(final_coding_challenges)
+                logger.info(f"Step 2: Generating {needed} coding challenges (Attempt {coding_attempts}/{max_coding_attempts})")
+                
+                current_difficulties = pool_coding_tasks[len(final_coding_challenges):pool_coding_total]
+                
+                new_challenges = _generate_coding_pool_ai_only(
                     groq_client=local_groq_client,
                     job_description=job_description,
                     required_skills=required_skills,
-                    difficulties=pool_coding_tasks,
-                    total_required=pool_coding_total,
-                    batch_size=2, # Small batches are safer
+                    difficulties=current_difficulties,
+                    total_required=needed,
+                    batch_size=1,
+                    blacklist_titles=blacklist_titles + [c.get('title') for c in final_coding_challenges],
+                    model=self.PRIMARY_MODEL
                 )
-                if extra_coding:
-                    generated_data['coding_challenges'] = extra_coding[:pool_coding_total]
-
-            # 3. ENHANCE CODING CHALLENGES (Reach 10 Test Cases)
-            if len(generated_data.get('coding_challenges', [])) > 0:
-                logger.info(f"Step 3: Enhancing coding challenges to reach 10 test cases each...")
-                generated_data['coding_challenges'] = _enhance_coding_challenges_with_test_cases(
+                
+                if not new_challenges:
+                    continue
+                
+                # Verify reference solutions actually execute correctly
+                verified_batch = _verify_reference_solutions(
                     groq_client=local_groq_client,
-                    challenges=generated_data.get('coding_challenges', []),
-                    target_count=10
+                    challenges=new_challenges,
+                    model=self.PRIMARY_MODEL
+                )
+                
+                # ONLY ADD IF VERIFIED (NO N/A OUTPUTS)
+                for v in verified_batch:
+                    v_out = str(v.get('example_output', 'N/A')).strip()
+                    if v_out and v_out != "N/A":
+                        final_coding_challenges.append(v)
+                    else:
+                        logger.warning(f"Verification FAILED for '{v.get('title')}'. Trashing and regenerating...")
+                
+            # Finalize the coding pool
+            final_coding_challenges = final_coding_challenges[:pool_coding_total]
+            
+            if final_coding_challenges:
+                logger.info("Test Case Gate: Generating 5 execution-verified hidden test cases per challenge...")
+                final_coding_challenges = _generate_execution_verified_test_cases(
+                    groq_client=local_groq_client,
+                    challenges=final_coding_challenges,
+                    target_count=5,
+                    model=self.PRIMARY_MODEL
                 )
 
+            generated_data['coding_challenges'] = final_coding_challenges
+
+            # --- RESTORED ORIGINAL MCQ PASS ---
+            # Now we call the refiner on the MCQ pool that was generated in Step 1
+            if generated_data.get('mcqs'):
+                logger.info("Expert Gate: Cleaning and Refining MCQ pool as originally requested...")
+                mcq_refined_data = _expert_assessment_refiner(
+                    groq_client=local_groq_client,
+                    raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []}
+                )
+                generated_data['mcqs'] = mcq_refined_data.get('mcqs', [])
+
+            # RE-CALCULATE FINAL METRICS
             final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
             final_mcqs = len(generated_data.get('mcqs', []))
             final_coding = len(generated_data.get('coding_challenges', []))
 
-            # Logic Check
-            if final_mcqs < pool_mcq_total and pool_mcq_total > 0:
-                logger.warning(f"MCQ pool under-generated: got {final_mcqs}/{pool_mcq_total}")
-            if final_coding < pool_coding_total and pool_coding_total > 0:
-                logger.warning(f"Coding pool under-generated: got {final_coding}/{pool_coding_total}")
-
-            # === FINAL VALIDATION AND REBALANCING ===
-            # Ensure we have exactly what was requested for the total pool.
-            if 'mcqs' in generated_data and len(generated_data['mcqs']) > pool_mcq_total:
-                generated_data['mcqs'] = generated_data['mcqs'][:pool_mcq_total]
-
-            if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > pool_coding_total:
-                generated_data['coding_challenges'] = generated_data['coding_challenges'][:pool_coding_total]
-
-            # === ENFORCE 10 TEST CASES (Enhancement Pass) ===
-            # The initial pass only generates 2-3 test cases for stability.
-            # We now top them up to 10 if coding challenges are present.
-            if final_coding > 0:
-                logger.info(f"Enhancing {final_coding} coding challenges to reach 10 test cases each...")
-                generated_data['coding_challenges'] = _enhance_coding_challenges_with_test_cases(
-                    groq_client=local_groq_client,
-                    challenges=generated_data.get('coding_challenges', []),
-                    target_count=10
-                )
-
             # If MCQ count is enough but labels are still skewed, rebalance labels over AI-generated MCQs.
-            if final_mcqs >= pool_mcq_total and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+            if final_mcqs >= pool_mcq_total and pool_mcq_total > 0 and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
                 logger.warning(
                     f"Dedicated MCQ generation still skewed (got {final_easy}/{final_medium}/{final_hard}). "
                     "Rebalancing difficulty labels on AI-generated MCQs to match requested split."
@@ -412,14 +492,17 @@ class GenerateAssessmentView(APIView):
                     medium_required=pool_medium,
                     hard_required=pool_hard,
                 )
+                # Refresh metrics after rebalance
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
                 final_mcqs = len(generated_data.get('mcqs', []))
 
-            if final_mcqs < pool_mcq_total or final_coding < pool_coding_total:
+            if final_mcqs < pool_mcq_total or final_coding < coding_count:
                 raise Exception(
-                    f"AI could not satisfy requested counts. Expected pool MCQs={pool_mcq_total}, coding={pool_coding_total}; "
+                    f"AI could not satisfy minimum required counts. Expected pool MCQs={pool_mcq_total}, min coding={coding_count}; "
                     f"got MCQs={final_mcqs}, coding={final_coding}."
                 )
+            if final_coding >= coding_count and final_coding < pool_coding_total:
+                logger.warning(f"Coding pool smaller than requested ({final_coding} vs {pool_coding_total}), but sufficient for candidate ({coding_count}).")
             if final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard:
                 raise Exception(
                     f"AI could not satisfy requested MCQ difficulty split. Expected Easy/Medium/Hard="
@@ -453,7 +536,16 @@ class GenerateAssessmentView(APIView):
             if 'assessment' in locals() and assessment:
                 assessment.status = 'FAILED'
                 assessment.save()
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+            error_msg = str(e)
+            if "rate_limit_exceeded" in error_msg.lower():
+                user_msg = "AI Provider rate limit reached. Please wait a few minutes and try again."
+            elif "json_validate_failed" in error_msg.lower() or "badrequest" in error_msg.lower():
+                user_msg = "AI generation failed to produce a valid structure. Please try simplifying your Job Description or reducing question counts."
+            else:
+                user_msg = f"Generation failed: {error_msg}"
+
+            return Response({"error": error_msg, "message": user_msg}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CreateSubmissionView(APIView):
     def post(self, request):
@@ -858,36 +950,10 @@ class AssessmentDetailView(APIView):
             return Response({
                 "message": "Assessment updated successfully",
                 "num_applicants": assessment.num_applicants,
-                "role_title": assessment.role_title
+                "role_title": assessment.required_skills
             }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    def delete(self, request, pk):
-        try:
-            user_profile = getattr(request.user, 'profile', None)
-            if not user_profile or not user_profile.company:
-                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-            
-            assessment = Assessment.objects.get(pk=pk, company=user_profile.company)
-            
-            # Use centralized helper to handle policy and workflow
-            response, handled = handle_deletion_request(
-                user_profile=user_profile,
-                company=user_profile.company,
-                content_type='Assessment',
-                object_id=assessment.id,
-                object_repr=f"AI Assessment: {assessment.required_skills}",
-                reason=request.data.get('reason')
-            )
-            
-            if handled:
-                return response
-
-            assessment.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Assessment.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def pick_random_subset(self, assessment, pool):
         return pick_random_subset(assessment, pool)
@@ -1010,7 +1076,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -1199,8 +1265,21 @@ class ProxyCodeExecuteView(APIView):
                 payload["stdin"] = "" # SQL executor shouldn't parse stdin as SQL if it's JSON
 
             # Call internal executor
-            response = requests.post(f"{executor_base_url}/execute", json=payload, timeout=120)
-            result = response.json()
+            try:
+                response = requests.post(f"{executor_base_url}/execute", json=payload, timeout=120)
+                result = response.json()
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"ProxyCodeExecuteView executor timeout/error: {str(e)}")
+                return Response({
+                    "run": {
+                        "stdout": "",
+                        "stderr": f"Execution Service Timeout: {str(e)}",
+                        "code": 1,
+                        "output": f"The code execution service (port 4000) Timed Out after 120s. Please restart the executor or simplify your code."
+                    }
+                }, status=status.HTTP_200_OK)
 
             if not result.get('ok'):
                 return Response({
@@ -1243,7 +1322,18 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
         company = user_profile.company if user_profile and user_profile.company else None
         if not company:
             return AIAssessmentSubmission.objects.none()
-        return AIAssessmentSubmission.objects.filter(assessment__company=company, is_deleted=False)
+            
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            return AIAssessmentSubmission.objects.filter(assessment__company=company, is_deleted=False)
+            
+        return AIAssessmentSubmission.objects.filter(
+            assessment__company=company, 
+            assessment__user_profile_id__in=scoped_ids, 
+            is_deleted=False
+        )
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -1261,7 +1351,7 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
             company=user_profile.company,
             content_type='AIAssessmentSubmission',
             object_id=instance.id,
-            object_repr=f"AI Submission for {instance.candidate_name} ({instance.candidate_email})",
+            object_repr=f"AI Assessment Submission: {instance.candidate_name} ({instance.candidate_email})",
             reason=request.data.get('reason')
         )
         

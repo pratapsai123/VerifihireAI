@@ -130,20 +130,25 @@ def _call_executor(*, language: str, source_code: str, stdin: str | None, time_l
         payload["database_engine"] = database_engine
 
     try:
-        resp = requests.post(
-            f"{EXECUTOR_BASE_URL}/execute",
-            json=payload,
-            timeout=max(5, int(time_limit_ms / 1000) * (len(testcases) if testcases else 1) + 300),
-        )
-    except RequestException as e:
-        return {"ok": False, "error": f"Executor request failed: {str(e)}"}
-    try:
+        # Increase timeout buffer and ensure min 120s
+        timeout_val = max(120, int(time_limit_ms / 1000) * (len(testcases) if testcases else 1) + 60)
+        resp = requests.post(f"{EXECUTOR_BASE_URL}/execute", json=payload, timeout=timeout_val)
+        
+        if resp.status_code >= 400:
+             return {"ok": False, "error": f"Executor returned status {resp.status_code}"}
+        
         data = resp.json()
-    except Exception:
-        data = {"ok": False, "error": f"Non-JSON response from executor (status {resp.status_code})"}
-    if resp.status_code >= 400 or not data.get("ok"):
-        return {"ok": False, "error": data.get("error") or f"Executor error (status {resp.status_code})"}
-    return data
+        if not data.get("ok"):
+             return {"ok": False, "error": data.get("error") or "Executor Error"}
+        return data
+
+    except RequestException as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Executor Timeout/Request Error: {str(e)}")
+        return {"ok": False, "error": f"Execution Service Unavailable or Timed Out (Port 4000). Error: {str(e)}"}
+    except Exception as e:
+        return {"ok": False, "error": f"Unexpected Executor Call Failure: {str(e)}"}
 
 
 def _map_to_valid_language(lang: str) -> str:

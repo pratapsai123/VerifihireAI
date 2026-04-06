@@ -1309,11 +1309,13 @@ class DeletionRequest(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_APPROVED = 'approved'
     STATUS_REJECTED = 'rejected'
+    STATUS_RESTORED = 'restored'
 
     STATUS_CHOICES = [
         (STATUS_PENDING, 'Pending Approval'),
         (STATUS_APPROVED, 'Approved'),
         (STATUS_REJECTED, 'Rejected'),
+        (STATUS_RESTORED, 'Restored'),
     ]
 
     requester = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='deletion_requests')

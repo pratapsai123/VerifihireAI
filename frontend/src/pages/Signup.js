@@ -322,9 +322,9 @@ function Signup() {
             Sign up to manage assessments, view reports, and monitor candidate sessions.
           </p>
           <div className="left-intro-image-wrapper">
-            <img 
-              src="/register-illustration.png" 
-              alt="Hiring Illustration" 
+            <img
+              src="/register-illustration.png"
+              alt="Hiring Illustration"
               className="left-intro-image"
             />
           </div>
@@ -349,7 +349,7 @@ function Signup() {
             <input
               type="text"
               className="auth-input-with-icon"
-              placeholder="First Name *"
+              placeholder="Full Name *"
               value={fullName}
               onChange={(e) => {
                 const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
@@ -361,7 +361,7 @@ function Signup() {
               maxLength={50}
               disabled={signupLoading}
             />
-            <label className="auth-floating-label">First Name *</label>
+            <label className="auth-floating-label">Full Name *</label>
           </div>
           {fieldErrors.fullName && (
             <div className="field-error-text">{fieldErrors.fullName}</div>

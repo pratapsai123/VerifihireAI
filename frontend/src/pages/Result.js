@@ -384,9 +384,21 @@ export default function Result() {
                                             ) : (
                                                 <div style={{ width: '32px' }}></div>
                                             )}
-                                            <button
-                                                className="btn-action-delete"
-                                                title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
+                                            {r.delete_requested ? (
+                                                <div 
+                                                    style={{ 
+                                                        display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                                                        width: '36px', height: '36px', background: '#fffbeb', 
+                                                        borderRadius: '8px', border: '1px solid #fde68a', cursor: 'not-allowed'
+                                                    }} 
+                                                    title="Deletion Pending Approval"
+                                                >
+                                                    ⏳
+                                                </div>
+                                            ) : (
+                                                <button
+                                                    className="btn-action-delete"
+                                                    title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
                                                 onClick={async () => {
                                                     const role = JSON.parse(localStorage.getItem('user'))?.role;
                                                     const isAdmin = role === 'company_admin' || role === 'application_admin';
@@ -431,7 +443,8 @@ export default function Result() {
                                                 }}
                                             >
                                                 <Trash2 size={18} />
-                                            </button>
+                                                </button>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}

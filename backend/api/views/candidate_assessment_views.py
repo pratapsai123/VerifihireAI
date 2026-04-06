@@ -53,7 +53,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -1617,19 +1617,19 @@ def results_overview_view(request):
         if scoped_ids is None:
             if company_id:
                 ai_qs = AIAssessmentSubmission.objects.filter(
-                    assessment__company_id=company_id
+                    assessment__company_id=company_id,
+                    is_deleted=False
                 ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
             else:
-                ai_qs = AIAssessmentSubmission.objects.all(
-                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
-        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
-            # Broaden for corporate roles: see all in company
-            ai_qs = AIAssessmentSubmission.objects.filter(
-                assessment__company_id=company_id
+                ai_qs = AIAssessmentSubmission.objects.filter(
+                    is_deleted=False
                 ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         elif scoped_ids:
+            # HR Manager sees only submissions for assessments they or their direct-report HRs created
+            # HR sees only submissions for assessments they created
             ai_qs = AIAssessmentSubmission.objects.filter(
-                assessment__user_profile_id__in=scoped_ids
+                assessment__user_profile_id__in=scoped_ids,
+                is_deleted=False
             ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         else:
             ai_qs = AIAssessmentSubmission.objects.none()
@@ -1652,14 +1652,9 @@ def results_overview_view(request):
                     is_deleted=False,
                     status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
                 ).order_by('-submission_date')
-        elif company_id and user_profile and user_profile.role in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
-            # Broaden: see all in company, especially those with user_profile=None or created by others
-            ai_cand_qs = Candidate.objects.filter(
-                company_id=company_id,
-                is_deleted=False,
-                status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
-            ).order_by('-submission_date')
         elif scoped_ids:
+            # HR Manager sees candidates uploaded by themselves or their direct-report HRs
+            # HR sees only candidates they personally uploaded/invited
             ai_cand_qs = Candidate.objects.filter(
                 user_profile_id__in=scoped_ids,
                 is_deleted=False,
@@ -1674,6 +1669,14 @@ def results_overview_view(request):
             ai_cand_qs = ai_cand_qs.filter(submission_date__date__lte=end_date)
 
         # Combine and limit
+        active_deletions = set()
+        try:
+            from ..models import DeletionRequest
+            for dr in DeletionRequest.objects.filter(status='pending'):
+                active_deletions.add(f"{dr.content_type}_{dr.object_id}")
+        except Exception:
+            pass
+
         results = []
         for s in qs[:5000]:
             inv = s.invitation
@@ -1707,6 +1710,7 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
 
                     'status': s.result,
+                    'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
                     'answers': getattr(s, 'answers', {}),
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
@@ -1770,7 +1774,8 @@ def results_overview_view(request):
                         'warning_logs': getattr(s, 'warning_logs', [])
                     },
                     'integrity_screenshots': screenshots_data,
-                    'is_resume_screening': False
+                    'is_resume_screening': False,
+                    'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
 
@@ -1807,6 +1812,7 @@ def results_overview_view(request):
 
                     'status': s.status,
                     'is_resume_screening': True,
+                    'delete_requested': f"Candidate_{s.id}" in active_deletions,
                     'interview_summary': s.interview_summary,
                     'total_questions': getattr(s, 'total_questions', 0),
                     'resume_score': getattr(s, 'resume_score', 0),
@@ -1932,7 +1938,7 @@ class CandidateSubmissionDeleteView(generics.DestroyAPIView):
             company=user_profile.company,
             content_type='CandidateSubmission',
             object_id=instance.id,
-            object_repr=f"Submission for {instance.invitation.name} ({instance.invitation.email})",
+            object_repr=f"Standard Assessment Submission: {instance.invitation.name} ({instance.invitation.email})",
             reason=request.data.get('reason')
         )
         

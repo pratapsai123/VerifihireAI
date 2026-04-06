@@ -55,16 +55,42 @@ def extract_json(text):
                         return val
         return data
 
+    def _clean_json_str(s):
+        # 1. Remove trailing commas in lists/objects before ] or }
+        s = re.sub(r',\s*([\]\}])', r'\1', s)
+        
+        # 2. Fix truncation: count braces and append missing ones
+        open_b = s.count('{')
+        close_b = s.count('}')
+        if open_b > close_b:
+            s += '}' * (open_b - close_b)
+            
+        open_sq = s.count('[')
+        close_sq = s.count(']')
+        if open_sq > close_sq:
+            s += ']' * (open_sq - close_sq)
+            
+        return s
+
     try:
+        # Priority 1: Markdown code block
         match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
         if match:
-            return _unwrap_payload(json.loads(match.group(1)))
+            json_str = _clean_json_str(match.group(1))
+            return _unwrap_payload(json.loads(json_str, strict=False))
+        
+        # Priority 2: Bare braces
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
-            return _unwrap_payload(json.loads(match.group(0)))
-        return _unwrap_payload(json.loads(text.strip()))
+            json_str = _clean_json_str(match.group(0))
+            return _unwrap_payload(json.loads(json_str, strict=False))
+        
+        # Priority 3: Raw string
+        json_str = _clean_json_str(text.strip())
+        return _unwrap_payload(json.loads(json_str, strict=False))
     except Exception as e:
-        logger.error(f"JSON Extraction Error: {e}")
+        logger.error(f"JSON Extraction Failed: {e}")
+        # Final fallback: just return None
         return None
 
 class AssemblyAITokenView(APIView):
@@ -148,7 +174,7 @@ class BulkInviteView(APIView):
                     company=company,
                     user_profile=user_profile
                 )
-                link = f"https://verifihireai.com/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -683,13 +709,17 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
         instance = self.get_object()
         
+        # Determine if this was an interview or just a resume screening based on progress
+        is_interview = instance.completed_at is not None or (isinstance(instance.interview_summary, list) and len(instance.interview_summary) > 0)
+        prefix = "AI Interview Session" if is_interview else "Resume Screening Result"
+        
         # Use centralized helper to handle policy and workflow
         response, handled = handle_deletion_request(
             user_profile=user_profile,
             company=user_profile.company,
             content_type='Candidate',
             object_id=instance.id,
-            object_repr=f"Candidate Profile: {instance.full_name} ({instance.email})",
+            object_repr=f"{prefix}: {instance.full_name} ({instance.email})",
             reason=request.data.get('reason')
         )
         

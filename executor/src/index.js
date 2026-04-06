@@ -427,8 +427,9 @@ WORKDIR /tmp
       console.log("Building local-kotlin image...");
       const pack = tar.pack();
       // Use amazoncorretto:21 which is already available/cached and reliable
-      pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
-RUN yum install -y tar gzip unzip findutils shadow-utils \\
+      // Using openjdk:21-slim-bookworm for superior build stability with apt-get
+      pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/docker/library/openjdk:21-slim-bookworm
+RUN apt-get update && apt-get install -y curl unzip \\
     && curl -L https://github.com/JetBrains/kotlin/releases/download/v1.9.23/kotlin-compiler-1.9.23.zip -o kotlin.zip \\
     && unzip kotlin.zip -d /opt \\
     && rm kotlin.zip \\
@@ -511,8 +512,8 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
   const tl = Math.max(1000, toInt(time_limit_ms, 3000));
   let mem = Math.max(128, toInt(memory_mb, 512));
 
-  // Kotlin/Scala/C# compilers are memory-hungry; enforce a minimum of 1536 MB
-  const heavyLangs = ['local-kotlin', 'sbtscala/scala-sbt', 'mcr.microsoft.com/dotnet/sdk'];
+  // Kotlin/Scala/C#/Swift/Java compilers are memory-hungry; enforce a minimum of 1536 MB
+  const heavyLangs = ['local-kotlin', 'sbtscala/scala-sbt', 'mcr.microsoft.com/dotnet/sdk', 'swift:5.10', 'amazoncorretto'];
   if (heavyLangs.some(prefix => spec.image.startsWith(prefix))) {
     mem = Math.max(mem, 1536);
   }

@@ -1,0 +1,286 @@
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Subarray Sum' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 5
+21 2 37 13 58
+Generated Input 1: 6
+75 7 89 91 87 78
+Generated Input 2: 50
+90 40 89 62 43 24 48 28 66 64 53 89 13 27 18 64 99 83 79 53 32 48 83 95 28 84 24 63 37 75 28 55 84 94 76 32 67 12 64 100 69 100 72 26 19 12 34 34 29 76
+Generated Input 3: 41
+8 100 17 7 74 10 66 37 43 74 80 8 92 80 71 31 25 8 76 35 53 89 19 24 58 82 12 2 29 93 54 4 48 87 75 18 50 84 62 82 71
+Generated Input 4: 19
+17 63 33 55 11 11 43 5 41 15 15 86 60 66 69 24 24 69 61
+Generated Input 5: 17
+89 94 70 51 68 68 89 21 90 6 20 70 27 36 31 50 34
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Subarray Sum with Constraints' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 12
+60 8 19 71 87 64 24 59 51 56 48 6
+Generated Input 1: 49
+38 29 65 51 36 99 19 3 81 31 84 73 67 69 96 17 91 95 66 87 22 54 17 29 63 2 37 54 3 58 62 21 20 73 92 17 15 4 7 54 63 23 90 24 26 64 72 94 22
+Generated Input 2: 24
+24 38 74 58 4 30 62 72 5 68 86 89 33 9 22 91 68 97 56 17 55 19 28 16
+Generated Input 3: 29
+86 11 97 57 99 79 43 59 21 79 97 77 33 96 9 22 10 88 3 65 16 75 84 28 39 62 25 100 48
+Generated Input 4: 50
+3 93 80 52 75 89 58 7 100 84 47 37 38 92 29 88 53 42 71 72 97 52 58 54 47 88 59 77 76 96 23 63 99 27 49 41 89 13 50 49 53 3 71 39 62 99 78 13 29 57
+Generated Input 5: 35
+29 65 36 38 53 97 12 32 41 98 87 92 34 21 37 91 94 79 37 71 14 11 35 42 65 1 21 53 37 44 69 18 92 2 8
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Finding the Most Frequent Words in a Text' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'string', 'name': 'text', 'max': 32}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string', 'max': 32}}]
+Generated Input 0: 24
+uSPFgBOcOtUV
+HdrpS JkIQR tIbSNLiDyZB tKOIjjoSh lxrjJu GBXBpZyCHw anFnSq rtQAAkddEhh ElJBWpzxcHO MkzbBHA ZUbxbhIcSlj UosQIsCqar lnnznqql mkwihsUZgTt OOhSA SzvxXTSNIlD KGkkLUIfdAbV LQzjX FmnALfamX FWZeGjEjTq SfBuMK QZoWltkmz eUHzRNWqowkn IxbmFJn
+Generated Input 1: 26
+yvgsyDuAY
+dtlLRu syyz ZBZmvrYKZ OURGPERBohnu RNEVnv ATRbgnZN bBlINxeE rwdzpvRm xElkdraOvq bfetBiIBJX UkDkx GjjnXS BxUpMfVFpqN Xprqjv CAioswmsYfEz sHvj qNERhgIM WQguuN GIMKqXMMcMn HdJN CwadsnSCs xXAzTIwwyjX YhekEEzElCOD rEGxUW IFhxam Rnulxjv
+Generated Input 2: 46
+cnOheJhgPL
+wtMCxD cYSkizsVlGVu eQhNjVa yhmbvKdTD DkEeu jDFkCFnzjN KQilPmjV omHwIZQ ttqopHZj EGfmsBx uwnJKCo dwXooBpB NfhxYmXarl ocIoGYpab sODNmbmf nxfKxaiyY OGmCpFBeiDHL fcOz JTksOE BnUCjc xxHIL JcKFpO IGWGZzpvi onbgruKWPxW xrRJU sOgTASSQuUz StoR adUYWnYiNkzd cXYXRuBh FKSisZbhbS QFvtUdgrtR JSpXxVONMwPG pZXyqDWGDE fIotpoGnn Tdtx Lsxlk RUbhdkn Gmvjsvbte nSSIiT DvOVlFSR kGsylHMh drUDWdtw QgvDDiGL tJJJ TUVDhDgTs gZOXwUdNr
+Generated Input 3: 2
+hlcZZNcoJpqXoiHvx
+OJiF VykpH
+Generated Input 4: 7
+grnJFFkZTpoNtT
+zjsVplF GjjG GFgJpBihne NIAkBIe lzPy HoGHsvz CKWAFyiWvmL
+Generated Input 5: 11
+XSfClAnf
+MqZTN lJgONwHOgPBl PhlGMu hopq JPnq XemHqgHYRZ gQHGuByIm IndLBGHgqw OjXJrdCfkro pUdOucPmTPg KCYMaMiH
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Validating XML Data' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 33
+NqUuDmfGCE znjlGuWbKBz cJoN dOYIEXIwxTa ijlak KpffmRfg DeEaLw qmsvbmiQJbaT JabcpKWvRS LzcWkZvQAyF wFRZekb nrRtRv DMpuDsIwFtRc qDLFIGYJLMId rWhAy nnYeWE fgMYFsH HXtxXBMrHVU JYlEqAyWoh fkktGha yqRlbtIzkA cpDuuOCgxwbE tiNzj wmAXLGE PQvGMGGjCv dZyF XgZslQD Vkxo IquvMhSLhJI oROVvUNlgps IsSnitr uZKn FrEapRbcp
+Generated Input 1: 12
+ROijZ FrPJi meltIjxrLEZg Gyaqrigyj WZMjel yjWcDlAkzT kOeNggHH zBwOA tiiA IQEiJiHFwklx qPgEIkOG dpuFnyJdhSnx
+Generated Input 2: 9
+eghVDR YAbEcHUWaJGt ikcr aTQjRmR bYBX GvIkZFFSvs veYaWyFHbI QxjCjcVi iYqABrQ
+Generated Input 3: 44
+HMTa cuzLKLLUZu bdlg GNPmWiGKX kHjRJR RbvC qTJVZ MurX wzpHIDZ KlVTZgVQy NyVndLl BCSxV DKMhnHPzk QMWvQNDBS Aptllw hubWndZlx XjexWuFfyda NELnL ipQtouFu mauN AbFqHIDgMeG YxzvLwuLAw XmPgKPdGE TPYpVZOmfrG aDseQ UAxVGnzcOCHR exqFX StlsGmC OYgqd fhuyc DVZsaRxkhTV yndJGz HPTpKlVdYoUN VUtEnsgv ROqIlpXSa juFOkM WkzagAEvVFGI RbiRJ ohKcRyC YaxTUXLwePO xcgMVFcmmNRp YptFo lBCi UlNfijc
+Generated Input 4: 24
+jwIn EzVFymU gOEzOBxx TNItA bLxrzxSBzxa qdKFqJrm XMIBJfzy DBLuUXiglnP kSRpgzU mKothPZ WQLj PSLdA gVnTgPmqhjiz nsdJdOP BwqmTFNQE iUyIVeE gktpXp OzOlg vNoFSBTX eFJOZSuMG ElQGDwlel dwjwCdgZlJAn INan SfaKXyWmVE
+Generated Input 5: 45
+tHQu RaSaZFRdMfCd qVSM eRcwUnkCIIk GxTFLbpMp aVqBZldnhT VjRyJzVQAHL aJlqcpqtRhuV Hrfm ipuomaLxzH HdGZqQcFpzyz kAajRNVZYF hHlBZL yfVPR HRxZx zWRim YgqUhFh rWDrlo MhlFHm EOPz hBcexS HyZyzLBms XFAPNur hMhdQXvB xYPVrLo dLpTgZIfKWON FcbirPxbGOp VgfStK oGrn knJkekeWxg zlJLMg FTRDzuv wMEzyeogD MRlch mkxzhaKfye ZXORSEPcly nHgUPNhXi CUDYTlDbR WgQkrwvY Ezhjq UIFWojmOHk dRdqvFnAjYS INsm SPmTv JUmFZoExF
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Designing a Scalable RESTful API using Spring Boot' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 35
+VNshHjwsJ ISfgH FYNTnrOTL vNFA NoMSnQzmqpQb AVSMZ aUtQXXMsLdF PcIMZGv BwAZEEQeB VTvDijQk KwbfXHqvWUwS rYNDOtlnQAo epEWzcpn kTpxlYcoBCjZ kNduzu xfxzuVT ULDTiN klfjdgiy jNAKvgZF vaDdNAuOApP pxPlIxScO XqLFrCUmpik ojIOJhLsFSTT TEnAl SfcFLpM pGISnKDuRaS fLtCuiMNjPQU AEWqAnoMMMH tkVoHNvxLPT mclvuraNcdPy GsEBrRLhnN JtwNJEIInO EXePAZVHVL bfDdmun LFdkAUtfrGeT
+Generated Input 1: 3
+LKgxjt tkVox TAsJOJ
+Generated Input 2: 14
+kmjmxVCnlqxd CvOzkI yeZfOIi eIQLCbLc KQxPJCRRGwn KIGTntccGcj EgrGAVY NhGMPvUTrHJ XRrXx UkqCcwwGGLZ KhQHCyRqXim xxTonkeAOt YXEIIkgG NBrLyB
+Generated Input 3: 6
+YTvriW XHVDeQJewhY BcWkzKWtjTwR lTFYnn SJssUH HMXsitMI
+Generated Input 4: 12
+pjdgaHf wbcTaK vrlqMijPTtN niwgkYVs GnReULnQ CXmmNLCvz aILhkovOT WyAIdNqEQ vbodPB WMZkn vcVg ravb
+Generated Input 5: 46
+ZdzbQEso rTKtLTtC cPmWLfilm ILzlMU TZxuaM AfCHyXd BuYryUtKbsB DsblK yhJJB TTRqZ GPGu cozj TWhrYIssic edTTl aTaVCZoB sjAaNxFUclp GnHGPRfH CaQH gEJuNsPaOwR ocRWiJrRlJ kgKtqYs VOKzc PfvumEsBWQ PqTGl pdQNWUEwqWXP PEjfS lYKlmPii xnQBCsHytil fcHwc pBKFBTEpOdHt uJFG irDsax OuKkXomyKb lIHt Qwkduxsx trarPvMhEYX NDTc LhadLolNyvw RlGDGMJyeXPX QaFDBiu swhPTZF EBIUENSK ksgrRE JbryJtTGfc TLkG TxGqI
+EXEC FAILURE for input 0: Empty Stdout
+EXEC FAILURE for input 1: Empty Stdout
+EXEC FAILURE for input 2: Empty Stdout
+EXEC FAILURE for input 3: Empty Stdout
+EXEC FAILURE for input 4: Empty Stdout
+EXEC FAILURE for input 5: Empty Stdout
+
+--- DEBUG: Generating cases for 'Java Collections Framework: Merging Two Sorted Lists' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 7
+32 4 46 85 40 91 84
+36 64 42 94 29 18 43
+Generated Input 1: 45
+44 98 67 57 2 7 51 5 14 95 57 45 97 54 87 15 28 90 63 84 6 34 17 69 16 93 79 52 35 18 52 75 58 52 64 66 80 83 89 20 96 12 76 98 37
+8 50 47 85 45 1 38 30 12 2 42 95 68 8 36 24 99 92 81 62 33 13 47 17 59 46 100 66 41 41 30 99 47 9 91 40 33 40 79 48 42 91 88 8 13
+Generated Input 2: 44
+23 62 36 79 9 24 88 15 60 12 21 50 31 79 40 66 24 98 40 93 25 45 46 32 46 97 81 27 3 95 65 3 60 72 71 30 75 59 49 33 58 97 16 91
+85 53 68 100 41 17 48 99 36 23 23 38 80 97 81 27 83 77 6 25 30 48 56 59 49 6 92 78 75 35 91 34 87 6 13 88 48 30 46 98 53 2 70 3
+Generated Input 3: 33
+28 31 60 90 53 33 34 60 75 81 19 3 98 49 13 4 48 32 69 85 82 25 89 51 77 98 28 90 19 89 11 55 88
+46 24 6 47 19 34 36 84 48 91 47 34 63 28 59 99 15 27 5 17 10 14 98 45 75 9 11 58 94 6 40 63 54
+Generated Input 4: 36
+59 10 47 35 53 50 55 31 21 61 90 59 79 64 78 61 44 48 64 15 6 14 67 91 61 40 13 51 99 75 66 43 69 24 16 89
+58 21 81 100 71 68 89 86 33 46 64 33 17 53 26 60 93 59 67 100 23 21 4 93 39 35 8 50 5 35 91 93 27 53 72 3
+Generated Input 5: 43
+48 15 67 73 8 63 2 96 35 47 23 76 8 84 32 92 5 49 34 25 16 19 51 72 5 3 57 4 41 89 31 89 88 9 67 99 84 81 11 64 46 97 46
+61 79 44 90 78 23 90 4 19 47 58 41 20 46 47 21 97 70 24 81 92 10 67 79 4 73 30 45 48 25 57 45 29 39 82 95 12 77 59 10 100 82 51
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Finding the Most Frequent Words in a Text' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'string', 'name': 'text', 'min': 1, 'max': 32}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string', 'min': 1, 'max': 32}}]
+Generated Input 0: 39
+gxipCbpVDghPElYRfhwF
+oyrTUqk kcTpBGa vnuJba JfMFyV ewnVlHpaXKLi bCYsDeRqLXJl IpWbhk uglLahhwdW PedWDIKCDuZA NwHwAdpSx SAjDJLbsI bZyX cSLqpPTCRzhA kKBPtGAYQd UCIMvMe ozhbh ToCBI LVHA jqvpADEf ckHeIbvkkZuk FESHW IAGjOm DTyaQIAfdDd MNzO HLxvWMhP Admz TorWPSUDx LvahQDS IdAqtibOypoY JIRPvwWMzm
+Generated Input 1: 2
+FPxPrYIwl
+FSWnlkE pMSTzJa
+Generated Input 2: 37
+XrgqmQtJpMo
+pJfcoRknRs zsWdHaUXeH KfJTflJH sTLPtsOUM jAylupYIjxUP LgUApfUCOML gldVYNj tHLUWiO ogqsgJN locqjrVFd sFPGDBDA LsvPNQknIv wmqtNloFq FpWRg eStOGFagZJj KxHEVQiTHn PbiMipvKWnD lliKwDfql IuOCqdPuHt UCGa ZldpbwJ JtVfCLSHYj JpBMltJQ ebzi XXwACztycsTm ygmorMu WLZiLepWoz CNIAr QCFilx nglKdgBCa
+Generated Input 3: 31
+HQWddPtStH
+jbyDYX KNhiEX JnZLmljK vYGlJ JymdpVJ WSnLrz NGLzBSS kEKfN ywPuOeFlbUB FUem SHOmUu PLIPITDhXKTh fnRx vsRzPqlaz HnIZzlnFQIp TvNRF szPjGoJAX XczkOfLi AJxscs jbpQdh KRSb dTfkRKNp RuPdaaC lcWSBCkx cIWNnFrLz CVqpMZhHNqA yxUlWrsJnDX DzTPUDR pWxo osBJUhfNtW
+Generated Input 4: 30
+BCcfWBXrKJPoee
+PpqjRBIYgsj OyabIn iLlbrLf VFfxzNJ dddnkv cRKE FdPikWRG VEvjIvRi ZVlkrIvAw KLcFg CXvSNFpGE uPDTgqYsTVVP zSJC cdgti eDCsan dFOZAZReMe ZpNYMZ VugRxrEi JukzgwmsCZ MbdmPCwVcXe qGImvZMjCBD bAyfblhmbaH QbBmi Zpkgaw GPzAHVZKm hXQIm ZOqQj ahFuGyUMRp gyUlxlBMnR fryF
+Generated Input 5: 26
+EZApFmbCcrRXVn
+MzeTF nyjjNnGNGp JOyg langNLUi WUDhqGJ ytRAl HjumoF WCzg zKbZzdGiPS NgmPXqCMp GRdX QCWIN JaeDD hgJvSqlu MLiGMFUNx MwcXrFW npfKebTHG lbRMFuiTTUYt PQQeBXmZmEp bpmkjrVaJn Ixenoz EKlWhgYOgcq yeyUtPsZSizJ bmcarJzX egkgPym wLKfpvfDe
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Product Subarray' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 19
+81 88 98 92 57 46 42 60 40 70 80 31 30 52 87 60 93 14 40
+Generated Input 1: 40
+17 89 29 34 83 3 28 12 86 52 12 25 9 27 22 65 68 56 27 78 5 6 39 86 31 90 59 68 88 75
+Generated Input 2: 30
+38 87 15 2 35 55 27 81 36 85 53 46 37 1 25 49 27 67 35 66 8 16 30 70 72 19 39 14 18 47
+Generated Input 3: 20
+24 100 13 46 61 58 26 38 54 91 97 54 86 46 5 47 47 15 86 43
+Generated Input 4: 9
+51 9 82 93 24 64 82 43 64
+Generated Input 5: 35
+21 38 22 51 21 76 8 9 100 78 63 70 85 53 66 39 6 87 99 61 82 74 63 4 95 78 17 32 99 7
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'High-Performance Backend Service' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'string', 'name': 'input_str', 'min': 1, 'max': 32}]
+Generated Input 0: 12
+gateway
+Generated Input 1: 34
+DATA-232
+Generated Input 2: 26
+json
+Generated Input 3: 30
+user
+Generated Input 4: 6
+ITEM-789
+Generated Input 5: 11
+MSG-782
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Designing a Spring Boot Application's Logging Mechanism' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 35
+task item_14 job node item_45 item_16 node job task job task host item_99 status job item_29 item_60 port item_57 item_70 node link item_66 task port item_35 status port task item_27
+Generated Input 1: 40
+task item_37 job link task value task task item_28 node item_50 host node node host link value item_33 port value link task node item_81 port task port item_51 job status
+Generated Input 2: 30
+item_56 port host item_49 item_38 status status port item_31 status value port port job job port link port job port task item_30 task item_12 item_35 host host item_93 node link
+Generated Input 3: 1
+job
+Generated Input 4: 8
+task item_48 port link node task link item_78
+Generated Input 5: 13
+node job item_23 value item_88 item_89 host value item_32 value node node value
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Optimizing Matrix Rotation' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 38
+59 93 8 3 46 40 80 33 67 97 12 75 37 44 37 87 24 1 94 18 82 95 97 48 97 33 53 89 80 7
+Generated Input 1: 34
+85 48 20 72 73 20 26 68 17 38 46 74 95 89 89 94 54 53 78 58 5 71 62 86 87 32 61 1 73 12
+Generated Input 2: 4
+88 38 20 5
+Generated Input 3: 50
+8 31 80 51 100 8 27 82 37 40 61 26 23 60 10 36 58 29 22 54 19 91 31 23 78 83 38 27 62 80
+Generated Input 4: 10
+59 85 33 24 91 84 42 77 3 87
+Generated Input 5: 39
+41 21 20 2 62 10 17 52 83 24 84 48 67 100 39 38 67 5 35 50 76 12 23 25 58 51 27 10 3 6
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Median Salary of Employees' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 26
+20 54 88 64 28 80 90 20 12 84 50 95 46 30 28 31 21 14 93 4 59 92 30 72 12 11
+Generated Input 1: 48
+83 26 72 45 22 69 68 68 83 6 30 37 68 89 47 23 97 65 88 90 63 73 56 72 13 23 95 45 9 7
+Generated Input 2: 31
+90 45 9 11 46 14 14 5 44 90 75 98 65 45 3 44 76 33 25 20 56 44 50 60 40 51 39 58 2 43
+Generated Input 3: 43
+95 28 28 44 44 57 23 86 23 50 99 38 70 55 27 93 10 72 82 54 92 74 17 80 79 91 23 85 10 92
+Generated Input 4: 32
+67 69 76 73 50 17 67 92 21 30 77 12 39 33 66 31 14 15 8 83 15 2 6 99 28 9 29 48 51 25
+Generated Input 5: 13
+75 59 55 60 43 57 86 25 83 10 83 94 12
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Python Code for Large Data Processing' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 41
+45 37 98 79 62 91 2 47 25 90 67 21 33 40 29 16 66 67 66 12 16 92 99 68 99 16 16 42 45 99
+Generated Input 1: 32
+41 21 67 47 81 29 98 78 22 50 63 14 66 33 26 32 82 70 27 87 90 9 84 75 43 94 10 79 33 64
+Generated Input 2: 15
+25 27 83 16 95 4 2 49 7 51 50 98 36 10 78
+Generated Input 3: 40
+73 65 91 13 33 25 79 36 38 42 34 92 9 49 23 63 89 70 43 22 80 57 6 26 40 19 56 85 68 83
+Generated Input 4: 11
+59 98 28 6 85 6 36 24 34 42 92
+Generated Input 5: 1
+64
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Stock Portfolio Optimizer' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 50
+49 61 9 39 68 8 26 98 46 20 3 44 73 88 87 17 85 73 15 35 47 45 82 86 22 57 8 18 100 15
+40 77 51 3 36 21 60 78 89 39 67 18 70 19 25 78 63 78 59 86 63 91 37 1 9 73 8 2 30 39
+Generated Input 1: 34
+45 18 24 43 41 94 20 56 61 3 47 40 30 18 95 99 11 41 26 95 52 90 52 1 2 69 61 72 62 33
+61 70 26 10 48 21 19 16 8 15 37 26 30 59 4 23 50 36 32 63 36 50 96 80 59 85 78 64 51 62
+Generated Input 2: 16
+19 56 76 8 23 10 21 20 7 44 23 72 47 82 53 24
+91 48 88 99 18 88 60 19 13 25 58 64 4 25 87 85
+Generated Input 3: 44
+96 93 58 15 90 58 15 57 99 41 45 67 3 65 1 50 1 20 39 97 50 48 52 20 56 57 49 92 71 18
+9 83 49 89 47 98 21 37 7 41 40 78 35 69 3 8 73 24 58 15 89 81 77 16 16 45 6 21 47 12
+Generated Input 4: 47
+77 78 31 40 19 62 94 85 82 9 79 79 75 34 49 33 16 51 54 40 32 14 79 55 48 49 6 43 17 92
+20 60 85 16 88 94 48 92 73 83 50 31 16 38 52 96 69 2 100 48 23 84 47 79 6 2 40 81 79 97
+Generated Input 5: 11
+2 90 10 48 10 93 46 35 70 76 61
+3 61 97 50 76 93 68 13 69 27 91
+EXEC FAILURE for input 0: Empty Stdout
+EXEC FAILURE for input 1: Empty Stdout
+EXEC FAILURE for input 3: Empty Stdout
+EXEC FAILURE for input 4: Empty Stdout
+
+--- DEBUG: Generating cases for 'Employee Management System' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'object', 'properties': [{'type': 'int', 'name': 'employee_id'}, {'type': 'string', 'name': 'name'}, {'type': 'int', 'name': 'salary'}]}}]
+Generated Input 0: 7
+Generated Input 1: 2
+Generated Input 2: 3
+Generated Input 3: 43
+Generated Input 4: 50
+Generated Input 5: 35
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Employee Performance Management' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 19 [NL] status port status item_15 item_52 item_46 link task host item_98 item_11 task node host link item_37 node host port
+Generated Input 1: 25 [NL] item_75 task task item_46 item_83 node item_36 value task task node host link link node value item_68 node host task item_95 item_75 link link item_50
+Generated Input 2: 46 [NL] node value host value task task task item_89 item_88 item_16 value value item_87 item_90 port port link item_31 link port status item_71 port task node item_34 port item_84 item_15 node
+Generated Input 3: 14 [NL] item_25 host node node host task item_51 node item_43 port host node item_22 task
+Generated Input 4: 41 [NL] item_25 host item_61 node item_32 item_15 node job item_43 node job value item_56 node item_53 status status item_47 item_81 port node task node item_93 host node item_89 value task host
+Generated Input 5: 27 [NL] node status port status job item_54 item_27 item_19 task task item_54 port host port task item_97 link item_16 port value status task value item_68 node job value
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Backend Dev: Duplicate Transaction Filter' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string', 'max': 32}}]
+Generated Input 0: 14 [NL] port task value item_81 port value port status link item_61 job item_38 task job
+Generated Input 1: 31 [NL] port value node item_58 status item_88 node item_92 item_51 item_83 port item_42 port job node job job task job node item_71 item_37 status port item_36 link node link job item_64
+Generated Input 2: 25 [NL] link value value port node job task link status link host node link item_54 item_47 item_43 host value host item_19 host job link host value
+Generated Input 3: 8 [NL] value port item_25 node value port node status
+Generated Input 4: 13 [NL] value task item_96 host item_80 status task item_12 job node status value node
+Generated Input 5: 9 [NL] task status item_75 item_90 item_25 node port link host
+SYNC SUCCESS for input 0

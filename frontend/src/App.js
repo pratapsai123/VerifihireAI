@@ -62,7 +62,8 @@ axios.interceptors.request.use(
         /^\/api\/candidate-details\//,
         /^\/api\/ai\/public\//,
         /^\/api\/ai\/submit\//,
-        /^\/api\/ai\/submission\//,
+        /^\/api\/ai\/submission\/\d+\/integrity\//,
+        /^\/api\/ai\/submission\/\d+\/progress\//,
         /^\/api\/ai\/execute\//,
         /^\/api\/ai-candidates\/[0-9a-fA-F-]{36}/, // Matches UUID token paths
         /^\/api\/ai-candidates\/tts\//,

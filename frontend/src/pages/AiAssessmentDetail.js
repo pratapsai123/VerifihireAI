@@ -219,11 +219,82 @@ const AiAssessmentDetail = () => {
                                             <div key={i} style={{ padding: '1.5rem', background: '#F8F9FF', borderRadius: '20px', border: '1px solid #E0E5F2' }}>
                                                 <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{c.title}</p>
                                                 <p style={{ color: '#707EAE', fontSize: '0.95rem', marginBottom: '1rem' }}>{c.problem_statement}</p>
-                                                <div style={{ background: '#1B254B', color: '#05CD99', padding: '1rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                                                
+                                                {/* Starter Code Preview */}
+                                                <div style={{ background: '#1B254B', color: '#05CD99', padding: '1rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
                                                     {typeof c.starter_code === 'object' && c.starter_code
                                                         ? (c.starter_code.python || c.starter_code.javascript || '// Multiple language snippets available')
                                                         : (c.starter_code || '// Starter code not provided')}
                                                 </div>
+
+                                                {/* Example Input/Output */}
+                                                <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                                    <div style={{ background: '#F4F7FE', padding: '1rem', borderRadius: '12px' }}>
+                                                        <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Example Input</div>
+                                                        <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '0.85rem', color: '#1B254B', whiteSpace: 'pre-wrap' }}>{c.example_input || 'N/A'}</pre>
+                                                    </div>
+                                                    <div style={{ background: '#E6FBF5', padding: '1rem', borderRadius: '12px' }}>
+                                                        <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Expected Output</div>
+                                                        <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '0.85rem', color: '#05CD99', fontWeight: '700', whiteSpace: 'pre-wrap' }}>{c.example_output || 'N/A'}</pre>
+                                                    </div>
+                                                </div>
+
+                                                {/* Reference Solution (AI-Generated Answer) */}
+                                                {c.reference_solution && (
+                                                    <div style={{ marginTop: '1.5rem' }}>
+                                                        <h5 style={{ fontSize: '0.8rem', color: '#707EAE', textTransform: 'uppercase', marginBottom: '0.8rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                            <i className="fa-solid fa-check-double" style={{ color: '#05CD99' }}></i> Verified Reference Solution (Python)
+                                                        </h5>
+                                                        <div style={{ position: 'relative' }}>
+                                                            <div style={{
+                                                                position: 'absolute', top: '-10px', right: '16px',
+                                                                background: '#05CD99', color: 'white', padding: '3px 12px',
+                                                                borderRadius: '8px', fontSize: '0.65rem', fontWeight: '800', zIndex: 1,
+                                                                textTransform: 'uppercase', letterSpacing: '0.5px'
+                                                            }}>✓ Execution Verified</div>
+                                                            <div style={{
+                                                                background: '#0D1117', borderRadius: '16px',
+                                                                padding: '2rem 1.5rem 1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                                                                border: '1px solid #30363D'
+                                                            }}>
+                                                                <pre style={{
+                                                                    margin: 0, color: '#7EE787',
+                                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                    fontSize: '0.85rem', lineHeight: '1.7', whiteSpace: 'pre-wrap',
+                                                                    overflowX: 'auto'
+                                                                }}>
+                                                                    {c.reference_solution}
+                                                                </pre>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Generated Hidden Test Cases */}
+                                                {c.test_cases && c.test_cases.length > 0 && (
+                                                    <div style={{ marginTop: '1.5rem' }}>
+                                                        <h5 style={{ fontSize: '0.8rem', color: '#707EAE', textTransform: 'uppercase', marginBottom: '0.8rem', fontWeight: '800' }}>
+                                                            Execution-Verified Test Cases
+                                                        </h5>
+                                                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
+                                                            {c.test_cases.map((tc, j) => (
+                                                                <div key={j} style={{ background: 'white', borderRadius: '12px', padding: '1rem', border: '1px solid #E0E5F2' }}>
+                                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                                                        <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4318FF' }}>TEST CASE {j + 1}</div>
+                                                                        <div style={{ fontSize: '0.75rem', fontWeight: '800', color: tc.verified ? '#05CD99' : '#F59E0B' }}>
+                                                                            {tc.verified ? '✓ Executed' : '⚠ Fallback'}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style={{ fontSize: '0.8rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Input:</div>
+                                                                    <pre style={{ margin: '0 0 0.8rem 0', padding: '0.5rem', background: '#F8F9FF', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.input}</pre>
+                                                                    
+                                                                    <div style={{ fontSize: '0.8rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Expected Output:</div>
+                                                                    <pre style={{ margin: 0, padding: '0.5rem', background: '#F8F9FF', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.output}</pre>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         ))}
                                     </div>
@@ -572,6 +643,56 @@ const AiAssessmentDetail = () => {
                                                             </pre>
                                                         </div>
                                                     </div>
+
+                                                    {/* Reference Solution (Correct Answer) */}
+                                                    {c.reference_solution && (
+                                                        <div style={{ position: 'relative', marginTop: '1.5rem' }}>
+                                                            <div style={{
+                                                                position: 'absolute', top: '-14px', left: '24px',
+                                                                background: '#05CD99', color: 'white', padding: '4px 14px',
+                                                                borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
+                                                            }}>✓ REFERENCE SOLUTION (ANSWER KEY)</div>
+                                                            <div style={{
+                                                                background: '#0D1117', borderRadius: '20px',
+                                                                padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
+                                                                border: '1px solid #30363D'
+                                                            }}>
+                                                                <pre style={{
+                                                                    margin: 0, color: '#7EE787',
+                                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                    fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
+                                                                }}>
+                                                                    {c.reference_solution}
+                                                                </pre>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Generated Hidden Test Cases */}
+                                                    {c.test_cases && c.test_cases.length > 0 && (
+                                                        <div style={{ marginTop: '2rem' }}>
+                                                            <h5 style={{ color: '#1B254B', fontSize: '1rem', fontWeight: '800', marginBottom: '1rem', textTransform: 'uppercase' }}>
+                                                                Execution-Verified Test Cases
+                                                            </h5>
+                                                            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
+                                                                {c.test_cases.map((tc, j) => (
+                                                                    <div key={j} style={{ background: '#F4F7FE', borderRadius: '12px', padding: '1rem', border: '1px solid #E0E5F2' }}>
+                                                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                                                            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4318FF' }}>TEST CASE {j + 1}</div>
+                                                                            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: tc.verified ? '#05CD99' : '#F59E0B' }}>
+                                                                                {tc.verified ? '✓ Executed' : '⚠ Fallback'}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Input:</div>
+                                                                        <pre style={{ margin: '0 0 1rem 0', padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.input}</pre>
+                                                                        
+                                                                        <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Expected Output:</div>
+                                                                        <pre style={{ margin: 0, padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.output}</pre>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             );
                                         })}
