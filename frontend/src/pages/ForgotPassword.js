@@ -186,11 +186,11 @@ function ForgotPassword() {
             Follow the steps to regain access.
           </p>
           <div className="left-intro-image-wrapper">
-            <img 
-              src="/reset-password-illustration.png" 
-              alt="Security Illustration" 
+            <img
+              src="/reset-password-illustration.png"
+              alt="Security Illustration"
               className="left-intro-image"
-              style={{ maxWidth: '420px' }}
+            //  #   style={{ maxWidth: '420px' }}
             />
           </div>
         </div>
@@ -200,7 +200,7 @@ function ForgotPassword() {
       <div className="auth-right-side">
         <div className="forgot-password-card" data-aos="fade-up">
           <h2 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '1.5rem', fontWeight: '700', color: '#1e293b' }}>Forgot Password</h2>
-          
+
           {/* Stepper */}
           <div className="auth-stepper">
             <div className={`step-item ${step === 'email' ? 'active' : ''}`}>Step 1</div>
@@ -211,10 +211,10 @@ function ForgotPassword() {
           </div>
 
           <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#64748b', fontSize: '0.9rem' }}>
-            {step === 'email' 
-              ? 'Enter your email address to receive an OTP' 
-              : step === 'otp' 
-                ? `Enter the 6-digit OTP sent to your email` 
+            {step === 'email'
+              ? 'Enter your email address to receive an OTP'
+              : step === 'otp'
+                ? `Enter the 6-digit OTP sent to your email`
                 : 'Set a strong new password for your account'}
           </p>
 
@@ -275,9 +275,9 @@ function ForgotPassword() {
                   <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
                 )}
                 <OtpCountdown expiresAtMs={otpExpiresAtMs} onExpire={() => setOtpExpired(true)} />
-                
+
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-                   <button type="submit" className="auth-primary-btn" disabled={loading || otp.length !== 6 || otpExpired} style={{ flex: 2, padding: '0.875rem' }}>
+                  <button type="submit" className="auth-primary-btn" disabled={loading || otp.length !== 6 || otpExpired} style={{ flex: 2, padding: '0.875rem' }}>
                     {loading ? 'Verifying...' : 'Verify OTP'}
                   </button>
                   <button type="button" onClick={handleSendOtp} disabled={loading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} className="auth-secondary-btn" style={{ flex: 1, fontSize: '0.8rem' }}>

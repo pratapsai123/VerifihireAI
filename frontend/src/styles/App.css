@@ -627,21 +627,25 @@ body::-webkit-scrollbar {
 .auth-input-icon-wrapper {
     position: relative;
     width: 100%;
-    margin-bottom: 0.75rem; /* Reduced from 1rem */
+    margin-bottom: 0.75rem;
+    /* Reduced from 1rem */
 }
 
 .auth-input-with-icon {
     width: 100%;
-    padding: 0.55rem 0.75rem 0.55rem 2.5rem; /* Reduced from 0.75rem */
+    padding: 0.55rem 0.75rem 0.55rem 2.5rem;
+    /* Reduced from 0.75rem */
     border: 1px solid #e5e7eb;
     border-radius: 0.5rem;
-    font-size: 0.85rem; /* Smaller from 0.95rem */
+    font-size: 0.85rem;
+    /* Smaller from 0.95rem */
     background-color: var(--white);
     box-sizing: border-box;
     color: var(--gray-800);
     transition: all 0.2s ease;
     font-family: inherit;
-    height: 38px; /* Fixed smaller height */
+    height: 38px;
+    /* Fixed smaller height */
 }
 
 .auth-input-with-icon:focus {
@@ -705,7 +709,8 @@ body::-webkit-scrollbar {
 
 /* Split Auth Layout */
 /* Shared Split Auth Layout */
-html, body {
+html,
+body {
     max-width: 100%;
     overflow-x: hidden !important;
     margin: 0;
@@ -723,32 +728,42 @@ html, body {
     overflow-x: hidden !important;
     position: relative;
     box-sizing: border-box;
+    background-color: #f0f8ff;
+    /* Solid AliceBlue background */
 }
 
 .auth-left-side {
-    width: 50% !important;
-    flex: 0 0 50% !important;
-    background: #ffffff;
+    width: 58% !important;
+    flex: 0 0 58% !important;
+    background-color: #f1f7ff;
+    /* Consistent light blue */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    padding: 30px 1.5rem 10px;
+    align-items: flex-end;
+    /* Bring content to the right */
+    padding: 130px 4rem 10px 1.5rem;
+    /* Increased right padding for gap control */
     overflow: hidden !important;
     box-sizing: border-box;
+    position: relative;
 }
 
 .auth-right-side {
-    width: 50% !important;
-    flex: 0 0 50% !important;
-    background: #ffffff;
+    width: 42% !important;
+    flex: 0 0 42% !important;
+    background-color: #f1f7ff;
+    /* Consistent light blue */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    padding: 30px 1.5rem 10px;
+    align-items: flex-start;
+    /* Bring content to the left */
+    padding: 130px 1.5rem 10px 4rem;
+    /* Increased left padding for gap control */
     overflow: hidden !important;
     box-sizing: border-box;
+    position: relative;
 }
 
 .form-header-content,
@@ -758,12 +773,13 @@ html, body {
 }
 
 .left-intro-content {
-    max-width: 400px;
+    max-width: 580px;
+    /* Further increased to fill space */
     text-align: center;
 }
 
 .left-intro-title {
-    font-size: 2rem;
+    font-size: 2.25rem;
     font-weight: 700;
     color: #2d3748;
     margin-bottom: 0.75rem;
@@ -771,7 +787,7 @@ html, body {
 
 .left-intro-subtitle {
     color: #4a5568;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 1rem;
 }
@@ -779,20 +795,25 @@ html, body {
 .left-intro-image-wrapper {
     width: 100%;
     margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .left-intro-image {
-    width: 80%;
+    width: 100%;
     height: auto;
-    max-width: 380px; /* Slightly larger for Login illustration if needed */
+    max-width: 540px;
+    /* Further increased to fill space */
     object-fit: contain;
 }
 
 .left-branded-header {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    position: absolute;
+    top: 35px;
+    left: 2.5rem;
+    z-index: 20;
+    margin-bottom: 0;
+    width: auto;
 }
 
 .brand-logo-group {
@@ -855,16 +876,24 @@ html, body {
         max-width: 100%;
         overflow-x: hidden;
     }
+
     .auth-left-side {
         width: 100%;
         flex: 0 0 auto;
-        padding: 2rem 1.5rem;
+        padding: 8rem 1.5rem 2rem;
     }
+
     .auth-right-side {
         width: 100%;
         flex: 0 0 auto;
         padding: 2rem 1.5rem;
         min-width: 100%;
+    }
+
+    .left-branded-header {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 2rem;
     }
 }
 

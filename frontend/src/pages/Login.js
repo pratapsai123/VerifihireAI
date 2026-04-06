@@ -230,7 +230,7 @@ function Login() {
               src="/login-illustration.png"
               alt="Login Illustration"
               className="left-intro-image"
-              style={{ maxWidth: '420px' }}
+            // style={{ maxWidth: '420px' }}
             />
           </div>
         </div>
