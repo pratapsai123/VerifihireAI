@@ -801,6 +801,30 @@ const ResultsAI = () => {
                                                                 </pre>
                                                             </div>
                                                         </div>
+
+                                                        {/* Reference Solution (Correct Answer) */}
+                                                        {c.reference_solution && (
+                                                            <div style={{ position: 'relative', marginTop: '1.5rem' }}>
+                                                                <div style={{
+                                                                    position: 'absolute', top: '-14px', left: '24px',
+                                                                    background: '#05CD99', color: 'white', padding: '4px 14px',
+                                                                    borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
+                                                                }}>✓ REFERENCE SOLUTION (ANSWER KEY)</div>
+                                                                <div style={{
+                                                                    background: '#0D1117', borderRadius: '20px',
+                                                                    padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
+                                                                    border: '1px solid #30363D'
+                                                                }}>
+                                                                    <pre style={{
+                                                                        margin: 0, color: '#7EE787',
+                                                                        fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                        fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
+                                                                    }}>
+                                                                        {c.reference_solution}
+                                                                    </pre>
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 );
                                             })}

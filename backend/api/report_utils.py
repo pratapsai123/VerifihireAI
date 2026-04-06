@@ -269,7 +269,7 @@ def _run_code_against_testcases(code, language, testcases, schema_sql=None, data
         resp = requests.post(
             f"{EXECUTOR_BASE_URL}/execute",
             json=payload,
-            timeout=30,
+            timeout=120,
         )
         print(f"[report] Executor response status: {resp.status_code}")
         if resp.status_code < 400:
@@ -284,9 +284,11 @@ def _run_code_against_testcases(code, language, testcases, schema_sql=None, data
                 print(f"[report] Executor returned ok=False: {data.get('error')}")
         else:
              print(f"[report] Executor failed: {resp.text}")
+    except requests.exceptions.Timeout:
+        print(f"[report] Executor call TIMED OUT after 120s")
     except Exception as e:
         print(f"[report] Executor call failed: {e}")
-        traceback.print_exc()
+        # traceback.print_exc()
 
     return []
 
