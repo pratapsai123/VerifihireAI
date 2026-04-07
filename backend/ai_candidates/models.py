@@ -25,6 +25,17 @@ class Candidate(models.Model):
     available_from = models.DateTimeField(blank=True, null=True)
     available_until = models.DateTimeField(blank=True, null=True)
     job_description = models.TextField(blank=True, null=True)
+    experience_level = models.CharField(
+        max_length=20,
+        choices=[
+            ('fresher', 'Fresher'),
+            ('1-2', '1-2 Years'),
+            ('3-5', '3-5 Years'),
+            ('5+', '5+ Years'),
+        ],
+        blank=True, null=True,
+        help_text="Experience level for difficulty-adjusted interview questions"
+    )
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
     company = models.ForeignKey(
         'api.Company', 
