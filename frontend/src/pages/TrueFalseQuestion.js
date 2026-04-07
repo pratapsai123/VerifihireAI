@@ -160,7 +160,7 @@ function TrueFalseQuestion() {
     try {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: true } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error saving TF:', error);
