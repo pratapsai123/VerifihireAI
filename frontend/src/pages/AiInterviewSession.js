@@ -110,11 +110,20 @@ const AiInterviewSession = () => {
                 audio: false
             });
             const track = stream.getVideoTracks()[0];
-            if (track.getSettings().displaySurface !== 'monitor') {
-                track.stop();
-                alert('Please share your "Entire Screen" to proceed. Tab/Window sharing is prohibited.');
-                return false;
+
+            // Validate entire screen sharing (some browsers may not support displaySurface)
+            try {
+                const settings = track.getSettings();
+                if (settings.displaySurface && settings.displaySurface !== 'monitor') {
+                    track.stop();
+                    alert('Please share your "Entire Screen" to proceed. Tab/Window sharing is prohibited.');
+                    return false;
+                }
+            } catch (settingsErr) {
+                console.warn("Could not verify display surface (browser may not support it):", settingsErr);
+                // Continue anyway — screen is shared, just can't verify type
             }
+
             screenStreamRef.current = stream;
             setIsScreenSharing(true);
             track.onended = () => {
