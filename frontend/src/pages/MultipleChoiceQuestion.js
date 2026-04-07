@@ -135,7 +135,7 @@ function MultipleChoiceQuestion() {
       localStorage.getItem(STORAGE_KEYS.DRAFT_ID) ||
       localStorage.getItem('draftCustomAssessmentId') ||
       (JSON.parse(localStorage.getItem('temp_assessment_context') || '{}'))?.customAssessmentId;
-      
+
     if (!caid) {
       // eslint-disable-next-line no-alert
       alert(`Custom assessment ID not found (debug: state=${Boolean(location.state)} store=${Boolean(localStorage.getItem('draftCustomAssessmentId'))}). Please go back to the first page (Custom Assessment) and try again.`);
@@ -221,7 +221,7 @@ function MultipleChoiceQuestion() {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
       // go back to Review page so the saved question appears there
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: true } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error saving MCQ:', error);

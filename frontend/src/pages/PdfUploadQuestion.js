@@ -31,9 +31,9 @@ function PdfUploadQuestion() {
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-    const caid = assessmentContext?.customAssessmentId ||
-      assessmentContext?.id ||
-      localStorage.getItem(STORAGE_KEYS.DRAFT_ID);
+  const caid = assessmentContext?.customAssessmentId ||
+    assessmentContext?.id ||
+    localStorage.getItem(STORAGE_KEYS.DRAFT_ID);
   const canParse = Boolean(file) && Boolean(caid);
 
   const stats = useMemo(() => {
@@ -206,7 +206,7 @@ function PdfUploadQuestion() {
           ? `Saved ${created} questions. Some failed to save:\n\n${errors.slice(0, 20).join('\n')}${errors.length > 20 ? '\n...more' : ''}`
           : `Saved ${created} questions successfully.`
       );
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: true } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Save error:', error);

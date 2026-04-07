@@ -175,7 +175,16 @@ function ReviewPage() {
 
       // Restore questions if they exist in state
       if (state.questions && state.topics && !state.refreshManual) {
-        setQuestions(state.questions);
+        const removedIds = new Set(state.removedQuestionIds || []);
+        const filteredQ = {};
+        for (const [t, qs] of Object.entries(state.questions)) {
+          if (Array.isArray(qs)) {
+            filteredQ[t] = qs.filter(q => !removedIds.has(q.id));
+          } else {
+            filteredQ[t] = qs;
+          }
+        }
+        setQuestions(filteredQ);
         setTopics(state.topics);
         setLoading(false);
         return;
@@ -462,6 +471,9 @@ function ReviewPage() {
 
             console.log(`Skill: ${skill}, Required: ${requiredCount}, Found: ${skillQuestions.length}`);
 
+            const removedSet = new Set(data.removedQuestionIds || []);
+            skillQuestions = skillQuestions.filter(q => !removedSet.has(q.id));
+
             // Limit to required count
             if (requiredCount > 0) {
               questionsByTopic[skill] = skillQuestions.slice(0, requiredCount);
@@ -574,6 +586,7 @@ function ReviewPage() {
       objPassPercentage,
       objWeight,
       codingWeight,
+      removedQuestionIds: Array.from(removedQuestionIds),
     };
   };
 
@@ -1545,5 +1558,3 @@ function ReviewPage() {
 }
 
 export default ReviewPage;
-
-

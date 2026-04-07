@@ -244,12 +244,23 @@ export default function CodingQuestionForm() {
   const [tcExpected, setTcExpected] = useState('');
   const [tcHidden, setTcHidden] = useState(false);
   const [tcSaving, setTcSaving] = useState(false);
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
-  const langDropdownRef = useRef(null);
   const [timeInput, setTimeInput] = useState('');
   const [timeError, setTimeError] = useState('');
+  const [showLangs, setShowLangs] = useState(false);
+  const langsRef = useRef(null);
 
   const navAssessment = useMemo(() => location.state || null, [location.state]);
+
+  // Click outside to close language menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langsRef.current && !langsRef.current.contains(event.target)) {
+        setShowLangs(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const normalizeLanguages = useCallback((value, fallbackLanguage) => {
     const arr = Array.isArray(value) ? value : value ? [value] : [];
@@ -285,7 +296,9 @@ export default function CodingQuestionForm() {
       setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
       setTimeError('');
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
-      setTestcases(tcs.data?.results || []);
+      const results = tcs.data?.results || [];
+      setTestcases(results);
+      setTcHidden(results.length >= 2);
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to load question');
     } finally {
@@ -377,21 +390,7 @@ export default function CodingQuestionForm() {
     });
   };
 
-  const selectedLanguageLabels = useMemo(() => {
-    const map = LANG_OPTIONS.reduce((acc, cur) => ({ ...acc, [cur.value]: cur.label }), {});
-    return (form.languages || []).map((v) => map[v] || v);
-  }, [form.languages]);
 
-  useEffect(() => {
-    if (!langDropdownOpen) return undefined;
-    const handleClick = (e) => {
-      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target)) {
-        setLangDropdownOpen(false);
-      }
-    };
-    window.addEventListener('mousedown', handleClick);
-    return () => window.removeEventListener('mousedown', handleClick);
-  }, [langDropdownOpen]);
 
   // Auto-populate starter code when languages change (for new questions only)
   useEffect(() => {
@@ -503,9 +502,10 @@ export default function CodingQuestionForm() {
       });
       setTcStdin('');
       setTcExpected('');
-      setTcHidden(false);
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
-      setTestcases(tcs.data?.results || []);
+      const newList = tcs.data?.results || [];
+      setTestcases(newList);
+      setTcHidden(newList.length >= 2);
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to add testcase');
     } finally {
@@ -518,7 +518,11 @@ export default function CodingQuestionForm() {
     setError('');
     try {
       await axios.delete(`${API_BASE_URL}/coding/testcases/${testcaseId}/`);
-      setTestcases((prev) => prev.filter((t) => t.id !== testcaseId));
+      setTestcases((prev) => {
+        const after = prev.filter((t) => t.id !== testcaseId);
+        setTcHidden(after.length >= 2);
+        return after;
+      });
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to delete testcase');
     }
@@ -550,9 +554,6 @@ export default function CodingQuestionForm() {
                 Open Attempt Page
               </button>
             )}
-            <button type="button" className="btn btn-secondary" onClick={() => save({ redirectTo: '/coding/review' })} disabled={saving || loading}>
-              {saving ? 'Saving…' : 'Save & Review'}
-            </button>
             <button type="button" className="btn btn-primary" onClick={() => save()} disabled={saving || loading}>
               {saving ? 'Saving…' : 'Save'}
             </button>
@@ -574,15 +575,29 @@ export default function CodingQuestionForm() {
 
                 <label className="coding-field">
                   <div className="coding-label">Languages (select one or more)</div>
-                  <div className="coding-multiselect" ref={langDropdownRef}>
-                    <button
-                      type="button"
-                      className="btn btn-secondary coding-multiselect-trigger"
-                      onClick={() => setLangDropdownOpen((v) => !v)}
+                  <div className="coding-multiselect" ref={langsRef}>
+                    <div
+                      className="coding-multiselect-trigger"
+                      onClick={() => setShowLangs(!showLangs)}
                     >
-                      {selectedLanguageLabels.length > 0 ? selectedLanguageLabels.join(', ') : 'Select languages'}
-                    </button>
-                    {langDropdownOpen && (
+                      {form.languages.length === 0 ? (
+                        <span className="coding-muted">Select Languages...</span>
+                      ) : (
+                        <div className="coding-selected-tags">
+                          {form.languages.map(lang => {
+                            const opt = LANG_OPTIONS.find(o => o.value === lang);
+                            return (
+                              <span key={lang} className="coding-selected-tag">
+                                {opt ? opt.label : lang}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                      <span className="coding-trigger-arrow">{showLangs ? '▴' : '▾'}</span>
+                    </div>
+
+                    {showLangs && (
                       <div className="coding-multiselect-menu">
                         {LANG_OPTIONS.map((opt) => {
                           const checked = (form.languages || []).includes(opt.value);
@@ -737,10 +752,10 @@ export default function CodingQuestionForm() {
                       <textarea value={tcExpected} onChange={(e) => setTcExpected(e.target.value)} className="coding-textarea" rows={4} />
                     </label>
                     <label className="coding-field">
-                      <div className="coding-label">Hidden</div>
+                      <div className="coding-label">Test Case Visibility</div>
                       <select value={tcHidden ? 'yes' : 'no'} onChange={(e) => setTcHidden(e.target.value === 'yes')} className="coding-input">
-                        <option value="no">No (Run + Submit)</option>
-                        <option value="yes">Yes (Submit only)</option>
+                        <option value="no">Visible(Sample)</option>
+                        <option value="yes">Hidden</option>
                       </select>
                     </label>
                     <div className="coding-field">
@@ -754,21 +769,25 @@ export default function CodingQuestionForm() {
                   {testcases.length === 0 ? (
                     <div className="coding-muted">No testcases yet.</div>
                   ) : (
-                    <div className="coding-table">
+                    <div className={`coding-table ${form.language === 'sql' ? 'is-sql' : ''}`}>
                       <div className="coding-table-head">
                         <div>ID</div>
-                        <div>Hidden</div>
+                        <div>Visibility</div>
                         {form.language !== 'sql' && <div>stdin</div>}
                         <div>expected</div>
-                        <div></div>
+                        <div style={{ textAlign: 'right' }}>Actions</div>
                       </div>
                       {testcases.map((tc) => (
                         <div key={tc.id} className="coding-table-row">
                           <div>{tc.id}</div>
-                          <div>{tc.is_hidden ? 'Yes' : 'No'}</div>
+                          <div>
+                            <span className={tc.is_hidden ? 'coding-pill-hidden' : 'coding-pill-visible'}>
+                              {tc.is_hidden ? 'Hidden' : 'Visible(Sample)'}
+                            </span>
+                          </div>
                           {form.language !== 'sql' && <div className="coding-mono">{tc.stdin || '—'}</div>}
                           <div className="coding-mono">{tc.expected_stdout || '—'}</div>
-                          <div>
+                          <div style={{ textAlign: 'right' }}>
                             <button type="button" className="btn btn-secondary" onClick={() => deleteTestcase(tc.id)}>
                               Delete
                             </button>
