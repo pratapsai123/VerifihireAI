@@ -16,6 +16,7 @@ const AiInterview = () => {
     const [untilDate, setUntilDate] = useState('');
     const [untilTime, setUntilTime] = useState('');
     const [customRoleTitle, setCustomRoleTitle] = useState('');
+    const [experienceLevel, setExperienceLevel] = useState('');
 
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
@@ -93,6 +94,10 @@ const AiInterview = () => {
         }
         if (untilDate && untilTime) {
             formData.append('available_until', new Date(`${untilDate}T${untilTime}`).toISOString());
+        }
+
+        if (experienceLevel) {
+            formData.append('experience_level', experienceLevel);
         }
 
         try {
@@ -241,6 +246,27 @@ const AiInterview = () => {
                                             style={{ marginTop: '1rem', minHeight: '150px' }}
                                             required
                                         />
+                                    )}
+
+                                    {selectedRoleId && (
+                                        <div className="input-group" style={{ marginTop: '1rem' }}>
+                                            <label className="input-label">
+                                                <i className="fa-solid fa-layer-group" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                                Experience Level
+                                            </label>
+                                            <select
+                                                className="modern-input"
+                                                style={{ width: '100%', padding: '0.85rem', borderRadius: '12px', border: '1px solid #E2E8F0', outline: 'none', background: 'white' }}
+                                                value={experienceLevel}
+                                                onChange={(e) => setExperienceLevel(e.target.value)}
+                                            >
+                                                <option value="">-- Select Experience Level --</option>
+                                                <option value="fresher">Fresher (0 Years)</option>
+                                                <option value="1-2">1-2 Years</option>
+                                                <option value="3-5">3-5 Years</option>
+                                                <option value="5+">5+ Years</option>
+                                            </select>
+                                        </div>
                                     )}
                                 </div>
 

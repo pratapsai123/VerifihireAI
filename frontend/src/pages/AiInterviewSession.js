@@ -175,7 +175,7 @@ const AiInterviewSession = () => {
         setAiToast({ active: true, text, urgent });
         if (urgent) {
             setIntegrityBreech({ active: true, text });
-            // playAuditNotice(text); // AUDIBLE ALERT
+            // playAuditNotice(text); // AUDIBLE ALERT (Disabled - text alerts only)
             setTimeout(() => setIntegrityBreech({ active: false, text: '' }), 3000);
         }
 

@@ -128,6 +128,7 @@ class BulkInviteView(APIView):
             available_until = parse_datetime(available_until)
             
         batch_interview_time = request.data.get('interview_time') # Keep for legacy/compat
+        experience_level = request.data.get('experience_level', '').strip() or None
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -170,11 +171,12 @@ class BulkInviteView(APIView):
                     available_from=available_from if available_from else None,
                     available_until=available_until if available_until else None,
                     job_description=job_description,
+                    experience_level=experience_level,
                     status='Invited',
                     company=company,
                     user_profile=user_profile
                 )
-                link = f"https://verifihireai.com/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -862,6 +864,47 @@ class UpdateIntegrityView(APIView):
             return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class ProcessAnswerView(APIView):
+    @staticmethod
+    def _get_difficulty_instructions(experience_level):
+        """Return AI prompt instructions based on candidate experience level."""
+        mapping = {
+            'fresher': (
+                "CANDIDATE EXPERIENCE: Fresher (0 years)\n"
+                "DIFFICULTY: EASY. Ask basic, introductory-level questions.\n"
+                "- Focus on fundamentals, definitions, and simple concepts.\n"
+                "- For coding questions, ask simple problems (e.g., reverse a string, find max in array).\n"
+                "- Be encouraging and patient. Don't expect real-world project experience.\n"
+                "- Score generously if they show understanding of core concepts."
+            ),
+            '1-2': (
+                "CANDIDATE EXPERIENCE: 1-2 Years (Junior)\n"
+                "DIFFICULTY: MODERATE. Ask junior-level technical questions.\n"
+                "- Expect familiarity with common tools/frameworks but not deep expertise.\n"
+                "- For coding questions, ask moderate problems (e.g., basic algorithms, API usage).\n"
+                "- They should be able to describe at least one real project they worked on.\n"
+                "- Score fairly — they should know basics well, but gaps in advanced topics are okay."
+            ),
+            '3-5': (
+                "CANDIDATE EXPERIENCE: 3-5 Years (Mid-Level)\n"
+                "DIFFICULTY: INTERMEDIATE-HARD. Ask mid-level technical questions.\n"
+                "- Expect solid understanding of design patterns, debugging, and system thinking.\n"
+                "- For coding questions, ask problems involving data structures, optimization, or edge cases.\n"
+                "- They should articulate trade-offs and explain WHY they chose certain approaches.\n"
+                "- Score strictly — vague or surface-level answers should get lower scores."
+            ),
+            '5+': (
+                "CANDIDATE EXPERIENCE: 5+ Years (Senior)\n"
+                "DIFFICULTY: HARD. Ask senior-level, in-depth questions.\n"
+                "- Expect expertise in architecture, scalability, team leadership, and mentoring.\n"
+                "- For coding questions, ask complex problems involving system design or performance.\n"
+                "- Ask about technical decisions, trade-offs, and how they handled failures.\n"
+                "- Score strictly — a senior candidate should demonstrate depth, not just breadth."
+            ),
+        }
+        return mapping.get(experience_level, (
+            "No specific experience level set. Use a balanced, mid-level difficulty for questions."
+        ))
+
     def post(self, request):
         candidate_id = request.data.get('candidate_id')
         current_question = request.data.get('question')
@@ -897,6 +940,7 @@ class ProcessAnswerView(APIView):
         job_title = "Technical Professional"
         resume_context = "No resume available."
         jd_context = "No job description available."
+        experience_level = None
         
         if candidate_id:
             try:
@@ -907,6 +951,7 @@ class ProcessAnswerView(APIView):
                     candidate_name = candidate.full_name
                     job_title = candidate.job_title or job_title
                     jd_context = candidate.job_description or jd_context
+                    experience_level = getattr(candidate, 'experience_level', None)
                     if candidate.resume_text:
                          resume_context = candidate.resume_text
             except Exception as e:
@@ -967,6 +1012,9 @@ class ProcessAnswerView(APIView):
         
         ===== RESUME =====
         {resume_context[:3000]}
+        
+        ===== EXPERIENCE LEVEL & DIFFICULTY =====
+        {self._get_difficulty_instructions(experience_level)}
         
         ===== PERSONALITY & TONE RULES =====
         - You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
