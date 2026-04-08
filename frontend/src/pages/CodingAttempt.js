@@ -607,9 +607,18 @@ export default function CodingAttempt() {
                                 <span className="coding-test-name">Test {idx + 1}</span>
                               </div>
                               <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
-                              <div className="coding-mono">{(r.stdout || '').trim() || '—'}</div>
-                              <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
+                              {r.status === 'ERROR' && r.message ? (
+                                <div className="coding-mono coding-error-message" style={{ gridColumn: 'span 2', color: '#ff6b6b' }}>
+                                  {r.message}
+                                </div>
+                              ) : (
+                                <>
+                                  <div className="coding-mono">{(r.stdout || '').trim() || '—'}</div>
+                                  <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
+                                </>
+                              )}
                             </div>
+
                           );
                         })}
                       </div>

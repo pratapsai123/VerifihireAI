@@ -780,3 +780,119 @@ Host: localhost:8001
 [2026-04-07 18:31:52.410464+00:00] PUBLIC ACCESS: Token='1691b28d-38ca-41c4-add7-c4ea29b8712d'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775586712399']}>
 Host: localhost:8001
+
+[2026-04-08 11:10:11] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s: return\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    balanced = True\n    for char in s:\n        if char in '({[':\n            stack.append(char)\n        elif char in mapping:\n            if not stack or stack.pop() != mapping[char]:\n                balanced = False\n                break\n        else: continue # Ignore other chars\n    print(\"YES\" if balanced and not stack else \"NO\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "DATA-610",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:15] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s: return\n    char_map = {}\n    left = max_len = 0\n    for right in range(len(s)):\n        if s[right] in char_map and char_map[s[right]] >= left:\n            left = char_map[s[right]] + 1\n        char_map[s[right]] = right\n        max_len = max(max_len, right - left + 1)\n    print(max_len)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "LOG-674",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:19] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\nfrom collections import Counter\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    nums = [int(x) for x in input_data[1:]]\n    counts = Counter(nums)\n    res = sorted(nums, key=lambda x: (counts[x], x))\n    print(\" \".join(map(str, res)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n7 15 6 8 18 9",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:23] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    starts = [int(x) for x in input_data[1:n+1]]\n    ends = [int(x) for x in input_data[n+1:2*n+1]]\n    events = []\n    # FIX: Correct backward intervals and use +1 for start, -1 for end\n    for s, e in zip(starts, ends):\n        ts, te = min(s, e), max(s, e)\n        events.append((ts, 1))\n        events.append((te, -1))\n    \n    # FIX: Sort by time, then by type DESCENDING (1 before -1)\n    # This ensures intervals touching at a point are counted as overlapping.\n    events.sort(key=lambda x: (x[0], -x[1]))\n    \n    max_c = cur_c = 0\n    for t, delta in events:\n        cur_c += delta\n        max_c = max(max_c, cur_c)\n    print(max_c)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "17\n68 51 53 38 3 56 24 42 8 25 36 36 46 36 82 94 36\n20 22 64 62 32 72 53 33 93 22 100 19 76 68 43 39 67",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:46] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    prices = [int(x) for x in input_data[1:]]\n    if n < 2:\n        print(0)\n        return\n    min_p = float('inf')\n    max_prof = 0\n    for p in prices:\n        min_p = min(min_p, p)\n        max_prof = max(max_prof, p - min_p)\n    print(max_prof)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "8\n323 135 323 432 21 131 398 150",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:50] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    starts = [int(x) for x in input_data[1:n+1]]\n    ends = [int(x) for x in input_data[n+1:2*n+1]]\n    events = []\n    # FIX: Correct backward intervals and use +1 for start, -1 for end\n    for s, e in zip(starts, ends):\n        ts, te = min(s, e), max(s, e)\n        events.append((ts, 1))\n        events.append((te, -1))\n    \n    # FIX: Sort by time, then by type DESCENDING (1 before -1)\n    # This ensures intervals touching at a point are counted as overlapping.\n    events.sort(key=lambda x: (x[0], -x[1]))\n    \n    max_c = cur_c = 0\n    for t, delta in events:\n        cur_c += delta\n        max_c = max(max_c, cur_c)\n    print(max_c)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n55 99 73 40 5 34\n35 2 24 61 2 42",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:54] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    m = int(input_data[0])\n    # The system will generate M distinct numbers. To form the pattern (all twice except one thrice)\n    # We'll just take the data as provided and find the one that occurs once.\n    # Actually, the simple logic is XORing everything.\n    nums = [int(x) for x in input_data[1:]]\n    # For a real challenge, we expect (2n + 1) inputs. We will simulate this by using all but the last pair.\n    # Logic: XOR all input numbers.\n    res = 0\n    for x in nums:\n        res ^= x\n    print(res)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "7\n97 31 36 79 54 16 45",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:10:59] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s: return\n    char_map = {}\n    left = max_len = 0\n    for right in range(len(s)):\n        if s[right] in char_map and char_map[s[right]] >= left:\n            left = char_map[s[right]] + 1\n        char_map[s[right]] = right\n        max_len = max(max_len, right - left + 1)\n    print(max_len)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "TOKEN-418",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:11:17] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    m = int(input_data[0])\n    # The system will generate M distinct numbers. To form the pattern (all twice except one thrice)\n    # We'll just take the data as provided and find the one that occurs once.\n    # Actually, the simple logic is XORing everything.\n    nums = [int(x) for x in input_data[1:]]\n    # For a real challenge, we expect (2n + 1) inputs. We will simulate this by using all but the last pair.\n    # Logic: XOR all input numbers.\n    res = 0\n    for x in nums:\n        res ^= x\n    print(res)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "4\n45 85 87 85",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:11:21] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    matrix = []\n    idx = 1\n    for r in range(n):\n        matrix.append([int(x) for x in input_data[idx:idx+n]])\n        idx += n\n    res = [[0]*n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            res[j][n-1-i] = matrix[i][j]\n    for r in res:\n        print(\" \".join(map(str, r)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "4\n6 9 4\n1 7 8\n0 8 5\n3 7 0",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:11:25] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    prices = [int(x) for x in input_data[1:]]\n    if n < 2:\n        print(0)\n        return\n    min_p = float('inf')\n    max_prof = 0\n    for p in prices:\n        min_p = min(min_p, p)\n        max_prof = max(max_prof, p - min_p)\n    print(max_prof)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n285 404 156 215 122 331",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 11:11:29] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    starts = [int(x) for x in input_data[1:n+1]]\n    ends = [int(x) for x in input_data[n+1:2*n+1]]\n    intervals = sorted([[min(s,e), max(s,e)] for s,e in zip(starts, ends)])\n    merged = []\n    for curr in intervals:\n        if not merged or curr[0] > merged[-1][1]:\n            merged.append(curr)\n        else:\n            merged[-1][1] = max(merged[-1][1], curr[1])\n    for start, end in merged:\n        print(f\"{start} {end}\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n49 40 5 25 36 29\n15 37 38 41 47 8",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-08 05:42:54.555703+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=2, min coding=2; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 496, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=2, min coding=2; got MCQs=2, coding=0.
+
+RAW: No response received
