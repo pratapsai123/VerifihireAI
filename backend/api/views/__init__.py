@@ -96,3 +96,7 @@ from .workflow_views import (
     pending_deletion_requests_count_view,
     restore_deletion_request_view,
 )
+
+from .dashboard_views import (
+    dashboard_summary_view,
+)
