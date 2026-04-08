@@ -99,7 +99,21 @@ def _free_email_domains() -> set:
         'mail.com', 'yandex.com', 'msn.com', 'me.com',
         'ymail.com', 'rocketmail.com', 'mac.com', 'fastmail.com',
         'gmx.com', 'gmx.net', 'tutanota.com', 'tuta.com',
-        'email.com', 'post.com', 'usa.com'
+        'email.com', 'post.com', 'usa.com',
+        'yahoo.co.in', 'yahoo.co.uk', 'yahoo.ca', 'yahoo.com.au',
+        'outlook.in', 'outlook.co.uk',
+        'hushmail.com', 'runbox.com', 'mailfence.com',
+        'countermail.com', 'startmail.com',
+        'web.de',
+        'inbox.com',
+        'rediffmail.com',
+        'guerrillamail.com', 'mailinator.com', 'temp-mail.org',
+        '10minutemail.com',
+        'att.net', 'comcast.net', 'verizon.net',
+        'laposte.net', 'orange.fr', 'free.fr',
+        'seznam.cz', 'naver.com', 'daum.net',
+        'student.com',
+        'lycos.com', 'excite.com'
     }
     configured = getattr(settings, 'FREE_EMAIL_DOMAINS', None)
     if not configured:
