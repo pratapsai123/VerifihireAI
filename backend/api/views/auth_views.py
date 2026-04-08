@@ -286,13 +286,13 @@ def reset_password_view(request):
         if user_profile and user_profile.user:
             user_profile.user.set_password(new_password)
             user_profile.user.save()
-            # Keep deprecated plaintext field cleared going forward
+            # Capture current password to old_password before clearing it
             if user_profile.password:
                 user_profile.old_password = user_profile.password
                 user_profile.password = None
-                user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
+            user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
         elif user_profile:
-            # Backward compatibility for profiles that aren't linked to auth.User yet.
+            # Legacy profile update
             user_profile.old_password = user_profile.password
             user_profile.password = new_password
             user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
@@ -580,7 +580,8 @@ def login_view(request):
                     user_profile.old_password = user_profile.password
                     user_profile.password = None
                     user_profile.save(update_fields=['user', 'old_password', 'password', 'updated_at'])
-                except Exception:
+                except Exception as migrate_err:
+                    print(f"Migration error: {migrate_err}")
                     pass
 
             # Check if user and company are approved
@@ -740,6 +741,11 @@ def verify_login_otp_view(request):
             if not auth_user:
                 return Response({'error': 'Authentication user not found. Please contact support.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             refresh = RefreshToken.for_user(auth_user)
+
+            if user_profile:
+                from django.utils import timezone
+                user_profile.last_login_at = timezone.now()
+                user_profile.save(update_fields=['last_login_at'])
             
             # Return success response with user data and token
             return Response(

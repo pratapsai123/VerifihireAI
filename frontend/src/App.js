@@ -44,6 +44,7 @@ import BookInterview from './pages/BookInterview';
 import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 import ThankYou from './pages/ThankYou';
+import MyAccount from './pages/MyAccount';
 import './styles/App.css';
 
 import Header from './components/Header';
@@ -211,6 +212,7 @@ function AppContent() {
             <Route path="/setting" element={<Settings />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/manage-availability" element={<AvailabilityManagement />} />
+            <Route path="/my-account" element={<MyAccount />} />
           </Route>
 
           {/* Public / Candidate Routes */}

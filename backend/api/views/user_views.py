@@ -564,31 +564,84 @@ def team_members_view(request):
 
 
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET', 'POST','PUT'])
 @permission_classes([AllowAny])
 def profile_view(request):
-    """Return logged-in user profile. Query param: ?email=user@company.com"""
+    """
+    GET: Return logged-in user profile. Query param: ?email=user@company.com
+    POST/PUT: Update user profile.
+    """
     try:
-        email = _normalize_email(request.query_params.get('email', ''))
-        if not email:
-            return Response({'error': 'email is required.'}, status=status.HTTP_400_BAD_REQUEST)
-        profile = UserProfile.objects.select_related('company').filter(email=email).first()
-        if not profile:
-            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
-        return Response({
-            'id': profile.id,
-            'email': profile.email,
-            'first_name': profile.first_name,
-            'last_name': profile.last_name,
-            'role': profile.role,
-            'organization_name': profile.organization_name,
-            'company': {
-                'id': profile.company.id,
-                'name': profile.company.name,
-                'domain': profile.company.domain,
-            } if profile.company else None,
-        }, status=status.HTTP_200_OK)
+       # For GET, email comes from query params
+        if request.method == 'GET':
+            email = _normalize_email(request.query_params.get('email', ''))
+            if not email:
+                return Response({'error': 'email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            profile = UserProfile.objects.select_related('company').filter(email=email).first()
+            if not profile:
+                return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+            return Response({
+                'id': profile.id,
+                'email': profile.email,
+                'first_name': profile.first_name,
+                'last_name': profile.last_name,
+                'role': profile.role,
+                'organization_name': profile.organization_name,
+                'avatar': profile.avatar.url if profile.avatar else None,
+                'updated_at': profile.updated_at.isoformat() if profile.updated_at else None,
+                'company': {
+                    'id': profile.company.id,
+                    'name': profile.company.name,
+                    'domain': profile.company.domain,
+                } if profile.company else None,
+            }, status=status.HTTP_200_OK)
+
+        # For POST/PUT, email should be in the body or query params
+        else:
+            email = _normalize_email(request.data.get('email') or request.query_params.get('email'))
+            if not email:
+                return Response({'error': 'email is required for updates.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            profile = UserProfile.objects.filter(email=email).first()
+            if not profile:
+                return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+            # Extract fields
+            full_name = request.data.get('full_name')
+            organization_name = request.data.get('organization_name')
+            role = request.data.get('role')
+            avatar = request.FILES.get('avatar')
+
+            if full_name:
+                name_parts = full_name.strip().split(' ')
+                profile.first_name = name_parts[0]
+                profile.last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+            
+            if organization_name:
+                profile.organization_name = organization_name
+            
+            if role:
+                profile.role = role
+            
+            if avatar:
+                profile.avatar = avatar
+            elif request.data.get('delete_avatar') == 'true':
+                profile.avatar = None
+            
+            profile.save()
+
+            return Response({
+                'message': 'Profile updated successfully!',
+                'id': profile.id,
+                'email': profile.email,
+                'full_name': f"{profile.first_name} {profile.last_name}".strip(),
+                'avatar': profile.avatar.url if profile.avatar else None,
+            }, status=status.HTTP_200_OK)
     except Exception as e:
+        import traceback
+        print(f"Error in profile_view: {str(e)}")
+        print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 @csrf_exempt
 @api_view(['POST'])

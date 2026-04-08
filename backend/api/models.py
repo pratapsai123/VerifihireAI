@@ -73,6 +73,7 @@ class UserProfile(models.Model):
     password = models.CharField(max_length=50, blank=True, null=True)
     role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True, null=True)
     organization_name = models.CharField(max_length=50, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     # Audit timestamps
     registration_timestamp = models.DateTimeField(auto_now_add=True)
     last_login_at = models.DateTimeField(blank=True, null=True)

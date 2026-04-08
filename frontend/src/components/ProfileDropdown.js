@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 
@@ -16,16 +16,18 @@ const profileStyles = {
     fontWeight: 'bold',
   },
   profileAvatar: {
-    width: '28px',
-    height: '28px',
+    width: '32px',
+    height: '32px',
     borderRadius: '50%',
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#ffffff',
     color: '#1d2686',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '12px',
     textTransform: 'uppercase',
+    overflow: 'hidden',
+    border: '2px solid rgba(255, 255, 255, 0.2)'
   },
   profileDropdown: {
     position: 'absolute',
@@ -103,6 +105,7 @@ function ProfileDropdown() {
     email: '',
     organization_name: '',
     role: '',
+    avatar: null
   });
   const [profileOpen, setProfileOpen] = useState(false);
   const profileMenuRef = useRef(null);
@@ -120,12 +123,12 @@ function ProfileDropdown() {
     }
 
     const fetchPendingCount = async () => {
-        try {
-            const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
-            setPendingCount(res.data.count || 0);
-        } catch (err) {
-            console.error("Failed to fetch pending count");
-        }
+      try {
+        const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
+        setPendingCount(res.data.count || 0);
+      } catch (err) {
+        console.error("Failed to fetch pending count");
+      }
     };
     fetchPendingCount();
   }, []);
@@ -160,8 +163,16 @@ function ProfileDropdown() {
     return text.replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
-  const initials = `${(user.first_name || '').charAt(0)}${(user.last_name || '').charAt(0)}`.toUpperCase() || 'G';
+  const initials = useMemo(() => {
+    return `${(user.first_name || '').charAt(0)}${(user.last_name || '').charAt(0)}`.toUpperCase() || 'G';
+  }, [user.first_name, user.last_name]);
 
+  const avatarUrl = useMemo(() => {
+    if (!user.avatar) return null;
+    return user.avatar.startsWith('http')
+      ? user.avatar
+      : `${API_BASE_URL.replace('/api', '')}${user.avatar}`;
+  }, [user.avatar]);
   const canSeeTeamMembers = useMemo(() => {
     const r = String(user.role || '').toLowerCase();
     return r === 'company_admin' || r === 'hr_manager' || r === 'hr' || r === 'application_admin';
@@ -193,84 +204,89 @@ function ProfileDropdown() {
         style={profileStyles.profileMenuContainer}
         onClick={handleToggleDropdown}
       >
-        <div style={profileStyles.profileAvatar}>{initials || 'G'}</div>
-        <div style={profileOpen ? profileStyles.profileDropdownOpen : profileStyles.profileDropdown}>
+        <div style={profileStyles.profileAvatar}>
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+          ) : (
+            initials || 'G'
+          )}
+        </div>        <div style={profileOpen ? profileStyles.profileDropdownOpen : profileStyles.profileDropdown}>
           <div style={profileStyles.profileDropdownHeader}>
             <span style={profileStyles.profileDropdownHeaderSpan}>{user.first_name || 'Guest'}</span>
             <small style={profileStyles.profileDropdownHeaderSmall}>{user.email || 'Not Logged In'}</small>
             {user.role ? <small style={profileStyles.profileDropdownHeaderSmall}>{formatRole(user.role)}</small> : null}
             {user.organization_name ? <small style={profileStyles.profileDropdownHeaderSmall}>{user.organization_name}</small> : null}
           </div>
-            {user.role !== 'interviewer' && (
-              <>
-                <a href="/company-profile/" style={profileStyles.profileDropdownItem}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-                    <path d="M8 1L2 4v3c0 4.418 3.582 8 8 8s8-3.582 8-8V4L8 1z" fill="#2563eb"/>
-                    <path d="M8 1v14c4.418 0 8-3.582 8-8V4L8 1z" fill="#1d4ed8"/>
-                  </svg>
-                  Company Profile
-                </a>
-                <button type="button" style={profileStyles.profileDropdownItem}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-                    <rect x="2" y="3" width="12" height="10" rx="1" fill="#2563eb"/>
-                    <path d="M5 7h6M5 10h4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                  Plan Usage
-                </button>
-              </>
-            )}
-            {user.role !== 'interviewer' && (
-              <a href="/setting/" style={profileStyles.profileDropdownItem}>
+          {user.role !== 'interviewer' && (
+            <>
+              <Link to="/company-profile/" style={profileStyles.profileDropdownItem}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-                  <circle cx="8" cy="8" r="2" fill="#2563eb"/>
-                  <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M13.364 2.636l-1.414 1.414M4.05 11.95l-1.414 1.414M13.364 13.364l-1.414-1.414M4.05 4.05L2.636 2.636" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M8 1L2 4v3c0 4.418 3.582 8 8 8s8-3.582 8-8V4L8 1z" fill="#2563eb" />
+                  <path d="M8 1v14c4.418 0 8-3.582 8-8V4L8 1z" fill="#1d4ed8" />
                 </svg>
-                Setting Options
-                {pendingCount > 0 && (
-                  <span style={{
-                    marginLeft: 'auto',
-                    backgroundColor: '#ef4444',
-                    color: 'white',
-                    minWidth: '16px',
-                    height: '16px',
-                    borderRadius: '8px',
-                    fontSize: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0 4px',
-                    fontWeight: 'bold'
-                  }}>
-                    {pendingCount}
-                  </span>
-                )}
-              </a>
-            )}
+                Company Profile
+              </Link>
+              <button type="button" style={profileStyles.profileDropdownItem}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                  <rect x="2" y="3" width="12" height="10" rx="1" fill="#2563eb" />
+                  <path d="M5 7h6M5 10h4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                Plan Usage
+              </button>
+            </>
+          )}
+          {user.role !== 'interviewer' && (
+            <Link to="/setting/" style={profileStyles.profileDropdownItem}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                <circle cx="8" cy="8" r="2" fill="#2563eb" />
+                <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M13.364 2.636l-1.414 1.414M4.05 11.95l-1.414 1.414M13.364 13.364l-1.414-1.414M4.05 4.05L2.636 2.636" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              Setting Options
+              {pendingCount > 0 && (
+                <span style={{
+                  marginLeft: 'auto',
+                  backgroundColor: '#ef4444',
+                  color: 'white',
+                  minWidth: '16px',
+                  height: '16px',
+                  borderRadius: '8px',
+                  fontSize: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0 4px',
+                  fontWeight: 'bold'
+                }}>
+                  {pendingCount}
+                </span>
+              )}
+            </Link>
+          )}
 
-          <a href="/my-account/" style={profileStyles.profileDropdownItem}>
+          <Link to="/my-account/" style={profileStyles.profileDropdownItem}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-              <circle cx="8" cy="5" r="2.5" fill="#2563eb"/>
-              <path d="M3 13.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#2563eb" strokeWidth="1.5" fill="none"/>
+              <circle cx="8" cy="5" r="2.5" fill="#2563eb" />
+              <path d="M3 13.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#2563eb" strokeWidth="1.5" fill="none" />
             </svg>
             My Account
-          </a>
+          </Link>
 
           {canSeeTeamMembers ? (
-            <a href="/team-members" style={profileStyles.profileDropdownItem}>
+            <Link to="/team-members" style={profileStyles.profileDropdownItem}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-                <path d="M5.5 7a2 2 0 10-4 0 2 2 0 004 0zM14 7a2 2 0 10-4 0 2 2 0 004 0zM9.75 8.5a2.25 2.25 0 10-3.5 0" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M1.5 14c0-1.6 1.5-3 3-3s3 1.4 3 3M9.5 14c0-1.6 1.5-3 3-3s3 1.4 3 3M5.5 14c0-1.9 1.8-3.5 3.5-3.5S12.5 12.1 12.5 14" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5.5 7a2 2 0 10-4 0 2 2 0 004 0zM14 7a2 2 0 10-4 0 2 2 0 004 0zM9.75 8.5a2.25 2.25 0 10-3.5 0" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M1.5 14c0-1.6 1.5-3 3-3s3 1.4 3 3M9.5 14c0-1.6 1.5-3 3-3s3 1.4 3 3M5.5 14c0-1.9 1.8-3.5 3.5-3.5S12.5 12.1 12.5 14" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               Team Members
-            </a>
+            </Link>
           ) : null}
 
-          <a href="/logout/" onClick={handleLogout} style={profileStyles.profileDropdownItem}>
+          <Link to="/logout/" onClick={handleLogout} style={profileStyles.profileDropdownItem}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-              <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M10 12l4-4-4-4M14 8H6" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M10 12l4-4-4-4M14 8H6" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
             </svg>
             Logout
-          </a>
+          </Link>
         </div>
       </div>
     </>
