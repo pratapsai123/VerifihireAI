@@ -126,7 +126,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'user'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),
@@ -259,7 +259,13 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEY = config('GROQ_API_KEY', default='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')
+GROQ_API_KEYS = [
+    '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',
+    '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',
+    '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',
+]
+
+
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta

@@ -11,8 +11,32 @@ import groq
 from django.conf import settings
 from ai_candidates.views import extract_json
 from .code_generator import CodeGenerator
+from .coding_skeletons import CodingSkeletons
 
 logger = logging.getLogger(__name__)
+
+class GroqKeyManager:
+    _current_index = 0
+
+    @classmethod
+    def get_current_key(cls):
+        keys = getattr(settings, 'GROQ_API_KEYS', [])
+        if not keys:
+            # Fallback to the single legacy key if list is missing/empty
+            return getattr(settings, 'GROQ_API_KEY', None)
+        return keys[cls._current_index % len(keys)]
+
+    @classmethod
+    def rotate_key(cls):
+        keys = getattr(settings, 'GROQ_API_KEYS', [])
+        if keys and len(keys) > 1:
+            old_idx = cls._current_index
+            cls._current_index = (cls._current_index + 1) % len(keys)
+            logger.warning(f"GROQ ROTATION: Rate limit reached at index {old_idx}. Switched to key index {cls._current_index}")
+            return True
+        return False
+
+
 
 def _is_raw_data(s):
     """
@@ -196,7 +220,7 @@ Your task is to CLEAN, FIX, and STANDARDIZE the content so it is production-read
     - DATA FLATTENING EXAMPLE:
       - BEFORE: `students = [{"name": "Alice", "score": 90 }, {"name": "Bob", "score": 80 }]`
       - AFTER (SCHEMA): `[{"type": "int", "name": "N", "min": 1, "max": 5}, {"type": "array", "name": "students", "count_ref": "N", "item": {"type": "string"}}, {"type": "array", "name": "scores", "count_ref": "N", "item": {"type": "int"}}]`
-    - Generate EXACTLY 5 test cases per challenge.
+    - Generate EXACTLY 6 test cases per challenge.
     - EXAMPLES: The problem description MUST contain EXACTLY ONE example input/output pair.
     - CRITICAL: No variable names or JSON in the actual inputs. The backend generator handles that.
 3. LOGIC & METADATA check:
@@ -244,26 +268,55 @@ def _call_executor(*, language: str, source_code: str, stdin: str | None, time_l
         return {"ok": False, "error": error_msg}
 
 def _call_groq_with_backoff(groq_client, **kwargs):
-    """Wrapper for Groq API calls with exponential backoff for rate limits and connection resets."""
-    max_retries = 5
+    """Wrapper for Groq API calls with exponential backoff and API key rotation."""
+    max_retries = 10
     base_delay = 2
-    
-    for attempt in range(max_retries):
+    current_client = groq_client
+    attempt = 0
+    while attempt < max_retries:
         try:
-            return groq_client.chat.completions.create(**kwargs)
+            return current_client.chat.completions.create(**kwargs)
         except groq.RateLimitError as e:
+            # First, try rotating to a different account's API key
+            if GroqKeyManager.rotate_key():
+                new_key = GroqKeyManager.get_current_key()
+                # Create a new client with the next key
+                timeout = 60.0
+                try:
+                    timeout = getattr(current_client, '_timeout', 60.0)
+                except: pass
+                
+                current_client = groq.Groq(api_key=new_key, timeout=timeout)
+                logger.info(f"Retrying with rotated API key index {GroqKeyManager._current_index} (Attempt {attempt + 1}/{max_retries})")
+                
+                # IMPORTANT: If we rotated, we don't increment 'attempt' yet, 
+                # or we give it extra leeway to try the new account.
+                # We'll allow rotation to happen without consuming a "retry" slot.
+                continue 
+            
+            # If rotation is not possible, use exponential backoff and increment attempt
             if attempt < max_retries - 1:
-                delay = base_delay * (2 ** attempt)
-                logger.warning(f"Groq Rate Limit hit. Retrying in {delay}s... (Attempt {attempt + 1}/{max_retries})")
+                delay = base_delay * (2 ** (attempt % 3)) 
+                logger.warning(f"Groq Rate Limit hit across all keys. Retrying in {delay}s... (Attempt {attempt + 1}/{max_retries})")
                 time.sleep(delay)
+                attempt += 1
                 continue
             raise e
+        except groq.APIStatusError as e:
+            if e.status_code == 413:
+                if GroqKeyManager.rotate_key():
+                    new_key = GroqKeyManager.get_current_key()
+                    current_client = groq.Groq(api_key=new_key)
+                    continue 
+                logger.error(f"Groq Request Too Large (413): {e.message}")
+                raise e
+            raise e
         except (groq.APIConnectionError, groq.APITimeoutError) as e:
-            # This handles the specific 'Connection error' the user is seeing.
             if attempt < max_retries - 1:
-                delay = base_delay + attempt # Linear-ish escape for connections
+                delay = base_delay + attempt 
                 logger.warning(f"Groq Connection Error: {e}. Retrying in {delay}s... (Attempt {attempt + 1}/{max_retries})")
                 time.sleep(delay)
+                attempt += 1
                 continue
             raise e
         except Exception as e:
@@ -271,6 +324,7 @@ def _call_groq_with_backoff(groq_client, **kwargs):
             if "status_code=503" in err_msg or "overloaded" in err_msg:
                 if attempt < max_retries - 1:
                     time.sleep(base_delay)
+                    attempt += 1
                     continue
             
             logger.error(f"Groq API call failed: {e}")
@@ -411,11 +465,22 @@ def _normalize_generated_pool(payload):
             for lang in ['python', 'java', 'javascript', 'cpp', 'csharp']:
                 sc[lang] = CodeGenerator.generate_starter_code(lang, func_name, params, ret_type)
         
-        # Ensure test cases are normalized to 'test_cases'
+        # Ensure test cases are normalized to 'test_cases' with 'output' key
         tc = item.get('test_cases', item.get('testcases', item.get('cases', [])))
         if not isinstance(tc, list):
             tc = []
-        item['test_cases'] = tc
+        
+        # Internal normalization of test case keys
+        normalized_tc = []
+        for t in tc:
+            if not isinstance(t, dict): continue
+            t_norm = copy.deepcopy(t)
+            # Ensure 'output' exists if 'expected_output' was provided
+            if 'expected_output' in t_norm and 'output' not in t_norm:
+                t_norm['output'] = t_norm['expected_output']
+            normalized_tc.append(t_norm)
+        
+        item['test_cases'] = normalized_tc
         
         # Priority 2: Fill in or overwrite with normalized keys from existing sc (like SQL)
         item['starter_code'] = {str(k).lower(): v for k, v in sc.items()}
@@ -487,75 +552,69 @@ def _repair_pool_shortfall(
         missing_hard = max(0, pool_hard - hard_count)
         missing_coding = max(0, pool_coding_total - current_coding)
 
-        if (missing_easy + missing_medium + missing_hard + missing_coding) == 0:
+        missing_total = missing_easy + missing_medium + missing_hard + missing_coding
+        if missing_total == 0:
             break
 
-        repair_prompt_parts = []
+        # 1. REPAIR CODING (Skeleton-Based)
+        if missing_coding > 0:
+            needed_diffs = (coding_tasks or ['Medium'])[current_coding:current_coding + missing_coding]
+            if not needed_diffs:
+                needed_diffs = ['Medium'] * missing_coding
+                
+            logger.info(f"REPAIR: Rescuing {missing_coding} missing coding challenges.")
+            new_coding = _generate_execution_verified_coding_pool(
+                groq_client=groq_client,
+                job_description=job_description,
+                required_skills=required_skills,
+                difficulties=needed_diffs,
+                total_required=missing_coding,
+                model=model
+            )
+            repaired['coding_challenges'].extend(new_coding)
 
+        # 2. REPAIR MCQs (AI-Only)
         missing_mcqs = missing_easy + missing_medium + missing_hard
         if missing_mcqs > 0:
-            repair_prompt_parts.append(
-                "Generate ONLY missing MCQs as JSON objects with keys: "
-                "question, options (4), answer, difficulty. "
-                f"Required missing MCQs: Easy={missing_easy}, Medium={missing_medium}, Hard={missing_hard}."
-            )
+            repair_prompt = f"""
+            You are repairing an under-generated technical assessment pool.
+            Job Description: {job_description}
+            Required Skills: {required_skills}
 
-        if missing_coding > 0:
-            if coding_tasks:
-                needed_diffs = [
-                    _normalize_difficulty_label(coding_tasks[i % len(coding_tasks)], default='Medium')
-                    for i in range(missing_coding)
-                ]
-            else:
-                needed_diffs = ['Medium'] * missing_coding
-            repair_prompt_parts.append(
-                "Generate ONLY missing coding challenges. "
-                f"Required missing coding count={missing_coding}, difficulties={needed_diffs}. "
-                "Each coding challenge must include: title, problem_statement, difficulty, reference_solution, "
-                "input_generator_schema (e.g. [{\"type\": \"int\", \"name\": \"N\", \"min\": 1, \"max\": 10}, {\"type\": \"array\", \"count_ref\": \"N\", \"item\": {\"type\": \"int\"}}]), "
-                "and a function_meta object with keys: name (string), params (list of {name: str, type: str}), "
-                "return_type (string). No SQL or database problems allowed. "
-                "CRITICAL: Do NOT generate `example_input` or `test_cases`. The backend will generate them from the `input_generator_schema`.\n"
-            )
+            Generate ONLY missing MCQs as JSON objects with keys: 
+            question, options (4), answer, difficulty. 
+            Required missing MCQs: Easy={missing_easy}, Medium={missing_medium}, Hard={missing_hard}.
 
-        repair_prompt = f"""
-        You are repairing an under-generated technical assessment pool.
-        Job Description: {job_description}
-        Required Skills: {required_skills}
+            CRITICAL OVERRIDE:
+            - JSON ESCAPING: You MUST properly escape all internal double quotes (`\\"`) and newlines (`\\n`) inside string values! Returning unescaped double quotes inside a JSON string value will cause a syntax error.
 
-        {" ".join(repair_prompt_parts)}
+            Return ONLY valid JSON with root keys exactly:
+            - mcqs (list)
+            Include only newly generated items. Do not repeat previous items.
+            """
 
-        CRITICAL OVERRIDE:
-        - JSON ESCAPING: You MUST properly escape all internal double quotes (`\\"`) and newlines (`\\n`) inside string values! Returning unescaped double quotes inside a JSON string value will cause a syntax error.
+            try:
+                repair_response = _call_groq_with_backoff(
+                    groq_client,
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": "You output JSON only."},
+                        {"role": "user", "content": repair_prompt},
+                    ],
+                    max_tokens=4096,
+                    temperature=0.2,
+                )
+                repair_text = repair_response.choices[0].message.content or ""
+                repair_data = _normalize_generated_pool(extract_json(repair_text) or {})
 
-        Return ONLY valid JSON with root keys exactly:
-        - mcqs (list)
-        - coding_challenges (list)
-        Include only newly generated items. Do not repeat previous items.
-        """
+                if repair_data.get('mcqs'):
+                    repaired['mcqs'].extend(repair_data['mcqs'])
+                if repair_data.get('coding_challenges'):
+                    repaired['coding_challenges'].extend(repair_data['coding_challenges'])
 
-        try:
-            repair_response = _call_groq_with_backoff(
-                groq_client,
-                model=model,
-                messages=[
-                    {"role": "system", "content": "You output JSON only."},
-                    {"role": "user", "content": repair_prompt},
-                ],
-                max_tokens=4096,
-                temperature=0.2,
-            )
-            repair_text = repair_response.choices[0].message.content or ""
-            repair_data = _normalize_generated_pool(extract_json(repair_text) or {})
-
-            if repair_data.get('mcqs'):
-                repaired['mcqs'].extend(repair_data['mcqs'])
-            if repair_data.get('coding_challenges'):
-                repaired['coding_challenges'].extend(repair_data['coding_challenges'])
-
-        except Exception as repair_err:
-            logger.warning(f"Repair attempt {attempt + 1}/{max_attempts} failed: {repair_err}")
-            continue
+            except Exception as repair_err:
+                logger.warning(f"Repair attempt {attempt + 1}/{max_attempts} failed: {repair_err}")
+                continue
 
     # Trim to exact pool size after repair.
     target_mcq_total = pool_easy + pool_medium + pool_hard
@@ -571,519 +630,189 @@ def _generate_coding_pool_ai_only(
     required_skills,
     difficulties,
     total_required,
-    batch_size=1, # Reduced from 2 for better reliability in large 70b outputs
-    attempts_per_batch=4,
+    batch_size=1,
+    attempts_per_batch=3,
     blacklist_titles=None,
-    model="llama-3.1-8b-instant" # Switched from 70b for rate-limit stability
+    model="llama-3.1-8b-instant"
 ):
-    """Generate coding challenges via dedicated AI-only batched calls."""
+    """
+    SKELETON-BASED GENERATION:
+    1. Pick a proven math skeleton from coding_skeletons.py
+    2. Ask AI to write ONLY the professional story/scenario matching the JD
+    3. Use pre-verified solutions — NO AI code generation needed
+    """
     if total_required <= 0:
         return []
 
-    # Add a random salt to ensure diversity across sessions
-    salt = str(random.getrandbits(32))
     blacklist = blacklist_titles or []
-
+    
     desired = list(difficulties or [])
     if len(desired) < total_required:
         desired.extend(['Medium'] * (total_required - len(desired)))
     desired = desired[:total_required]
 
     generated = []
-    idx = 0
+    used_skeleton_ids = set()
 
-    while idx < total_required:
-        batch_diffs = desired[idx: idx + batch_size]
-        batch_count = len(batch_diffs)
+    for i in range(total_required):
+        diff = desired[i]
+        
+        # Pick a skeleton that hasn't been used yet (for uniqueness)
+        skeleton = None
+        for _ in range(20):  # Try up to 20 times to find a unique skeleton
+            candidate = CodingSkeletons.get_skeleton(difficulty=diff)
+            if candidate['id'] not in used_skeleton_ids:
+                skeleton = candidate
+                break
+            candidate = CodingSkeletons.get_skeleton()  # Try any difficulty
+            if candidate['id'] not in used_skeleton_ids:
+                skeleton = candidate
+                break
+        
+        if not skeleton:
+            # All skeletons used, allow repeats but AI will make unique stories
+            skeleton = CodingSkeletons.get_skeleton(difficulty=diff)
+        
+        used_skeleton_ids.add(skeleton['id'])
 
-        already_gen_titles = [c.get('title', '') for c in generated]
-        avoid_instr = f"\nCRITICAL: DO NOT generate challenges similar to these topics/titles: {already_gen_titles + blacklist}" if (already_gen_titles or blacklist) else ""
+        # Ask AI ONLY for the story — NO code generation
+        story_prompt = f"""You are a professional assessment writer. Create a coding challenge DESCRIPTION for a job candidate.
 
-        base_prompt = f"""
-        You are a coding question generator for an AI assessment platform.
-        Session ID: {salt}
-        JOB DESCRIPTION: {job_description}
-        REQUIRED SKILLS: {required_skills}
+JOB DESCRIPTION: {job_description[:1000]}
+REQUIRED SKILLS: {required_skills[:500] if required_skills else 'General Programming'}
 
-        Your task is to generate HIGH-QUALITY coding problems strictly following the format below.
-        Generate EXACTLY {batch_count} coding challenge(s).
-        REQUIRED DIFFICULTIES in order: {batch_diffs}
+MATHEMATICAL LOGIC TO USE (DO NOT CHANGE THE MATH):
+- Pattern: {skeleton['title_hint']}
+- Description: {skeleton['logic_desc']}
+- Difficulty: {skeleton['difficulty']}
 
-        {avoid_instr}
+ALREADY GENERATED TITLES (AVOID DUPLICATES): {[c.get('title','') for c in generated] + blacklist}
 
-        --------------------------------------
-        DIFFICULTY RULES (MANDATORY)
+YOUR TASK:
+Write a PROFESSIONAL problem statement that:
+1. Uses a real-world scenario from the Job Description
+2. Follows the EXACT mathematical logic described above
+3. Is clear and easy for a student to understand
 
-        Easy:
-        - Basic logic (loops, conditions)
-        - Small constraints (n <= 1000)
-        - Brute force acceptable
+RETURN THIS EXACT JSON FORMAT:
+{{
+    "title": "<Professional title related to JD, e.g. 'Optimizing API Response Times'>",
+    "problem_statement": "<3-5 sentences describing the scenario. MUST clearly explain: what the input represents, what to compute, and what to output.>",
+    "explanation": "<Step-by-step explanation of how to solve it>",
+    "constraints": "<e.g. 1 <= N <= 10^5>"
+}}
 
-        Medium:
-        - Requires optimization (HashMap, sorting, sliding window)
-        - Constraints up to n <= 10^5
-        - Brute force should NOT pass all cases
-
-        Hard:
-        - Advanced algorithms (DP, Graph, Backtracking)
-        - Large constraints (n <= 10^6 or complex states)
-        - Requires deep problem-solving
-
-        --------------------------------------
-        OUTPUT FORMAT (STRICT)
-
-        You MUST return a JSON object with a root key "coding_challenges" containing an array of EXACTLY {batch_count} problem objects.
-        Each problem object MUST have these exact keys:
-
-        "title": "<Short and clear problem name>"
-        "difficulty": "<Easy / Medium / Hard>"
-        "topic": "<Array / String / Hashing / DP / Graph / etc>"
-        "problem_statement": "<Clear and precise description. Avoid ambiguity. Keep it logical and easy to understand.>"
-        "constraints": "<Define constraints based on difficulty level (e.g. n <= 10^5)>"
-        "input_generator_schema": [ {{"type": "int", "name": "N", "min": 1, "max": 50}}, {{"type": "array", "count_ref": "N", "item": {{"type": "int"}}}} ]
-        "explanation": "<Clear step-by-step explanation>"
-        CRITICAL: Schema values MUST be small (max 50) for fast test execution, even if `constraints` are large.
-        CRITICAL: Input strings MUST be 1-32 characters long. Use correct types: numbers as `int`, alphabets as `string`.
-        "reference_solution": "<A COMPLETE, standalone Python 3 script. MUST read the raw text input from stdin using `sys.stdin.read()` or `input()`, and print the raw text output. Use standard logic. No external DB/APIs. STDLIB ONLY. MUST properly escape newlines and quotes.>"
-        "function_meta": {{ "name": "function_name", "params": [{{"name": "param_name", "type": "string"}}], "return_type": "string" }}
-
-        --------------------------------------
-        STRICT INSTRUCTIONS:
-        - JSON ESCAPING OVERRIDE: You MUST properly escape all internal double quotes (`\\"`) and newlines (`\\n`) inside string values! Returning unescaped double quotes inside a JSON string value will cause a syntax error (e.g. `Expecting ',' delimiter`). 
-        - Do NOT skip any section
-        - Ensure problem is logically correct and solvable
-        - Ensure examples match the problem perfectly
-        - EXACTLY ONE EXAMPLE: Provide only one example input/output pair in the problem description.
-        - Do NOT include test cases
-        - STRICT CP-STYLE INPUT: The text in `example_input` MUST NOT contain JSON, curly braces `{{}}`, array brackets `[]`, or string quotes. It MUST be pure competitive-programming raw text (only spaces, numbers, plain letters, and newlines). No key-value pairs or dictionaries.
-        - COMPLEX DATA HANDLING: If the problem scenario involves complex entities (like "Users", "ML Models", "Products"), you MUST flatten the input into parallel arrays or 2D matrices of integers/strings. NEVER use dictionaries to represent them.
-        - DATA FLATTENING EXAMPLE:
-          - BEFORE: `students = [{{ "name": "Alice", "score": 90 }}, {{ "name": "Bob", "score": 80 }}]`
-          - AFTER (CORRECT): `2\nAlice 90\nBob 80` (where 2 is the count, followed by space-separated attributes)
-        - JD-ROOTED: Challenges MUST be specifically rooted in the Job Description and Required Skills above.
-        - PROFESSIONAL SCENARIOS: Use real-world, enterprise-level scenarios related to the JD. Avoid generic "Hello World" or "Fibonacci" style problems.
-        - NO WEB SERVERS OR DATABASES: Problems must be purely ALGORITHMIC (e.g., arrays, data structures, math). Never generate questions about building APIs, REST endpoints, JSON parsing, database schemas, or SQL.
-        - STDIN/STDOUT: All problems must be solvable using standard input/output (stdin/stdout).
-        - Return JSON only. No markdown formatting outside of JSON strings.
-        """
-
-        batch_data = None
-        prompt = base_prompt
+RULES:
+- DO NOT include Any examples, test cases, or sample inputs/outputs in the problem_statement. These will be added automatically by the system.
+- MUST include a short **Input Format** section at the end of the `problem_statement` describing exactly what each line of the input represents (e.g. "The first line contains N, the second line contains...").
+- Return JSON ONLY. No markdown.
+- Title must be unique and related to the JD.
+- Problem statement must be clear enough for a student to understand in 30 seconds.
+"""
 
         for attempt in range(attempts_per_batch):
-            response = _call_groq_with_backoff(
-                groq_client,
-                model=model,
-                messages=[
-                    {"role": "system", "content": "You are a creative technical assessment architect. You output JSON only. Avoid repetitive logic at all costs."},
-                    {"role": "user", "content": prompt},
-                ],
-                max_tokens=4096,
-                temperature=0.8, # Increased from 0.2 for much higher variety
-            )
-            raw = response.choices[0].message.content or ""
-            parsed = _normalize_generated_pool(extract_json(raw) or {})
-            coding = parsed.get('coding_challenges', [])
+            try:
+                response = _call_groq_with_backoff(
+                    groq_client,
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": "You are a professional assessment writer. Return JSON only."},
+                        {"role": "user", "content": story_prompt}
+                    ],
+                    max_tokens=2048,
+                    temperature=0.8,
+                )
+                raw = response.choices[0].message.content or ""
+                data = extract_json(raw)
 
-            if len(coding) >= batch_count:
-                batch_data = coding[:batch_count]
-                break
-
-            prompt = (
-                base_prompt
-                + "\n\nCORRECTION: Previous attempt returned insufficient coding_challenges. "
-                + f"Expected {batch_count}, got {len(coding)}. Regenerate and return full count. ENSURE VARIETY."
-            )
-
-        if not batch_data:
-            break
-
-        for i, item in enumerate(batch_data):
-            item['difficulty'] = _normalize_difficulty_label(batch_diffs[i], default='Medium')
-
-        generated.extend(batch_data)
-        idx += batch_count
-        
-        # Small delay between batches to stay under TPM
-        if idx < total_required:
-            time.sleep(1)
+                if data and data.get('title') and data.get('problem_statement'):
+                    # Build the complete challenge by merging AI story + Skeleton math
+                    challenge = {
+                        "title": data['title'],
+                        "difficulty": skeleton['difficulty'],
+                        "topic": skeleton['title_hint'].split('/')[0].strip(),
+                        "problem_statement": data['problem_statement'],
+                        "constraints": data.get('constraints', 'N <= 10^5'),
+                        "explanation": data.get('explanation', ''),
+                        "input_generator_schema": skeleton['input_schema'],
+                        "reference_solution": skeleton['gold_solution'],
+                        "example_input": "N/A",  # Will be generated during verification
+                        "example_output": "N/A",
+                        "function_meta": {"name": "solve", "params": [{"name": "data", "type": "string"}], "return_type": "string"}
+                    }
+                    generated.append(challenge)
+                    logger.info(f"SKELETON: Generated '{challenge['title']}' using pattern '{skeleton['id']}' ({skeleton['difficulty']})")
+                    break
+                else:
+                    logger.warning(f"SKELETON: AI story attempt {attempt+1} returned incomplete JSON for '{skeleton['id']}'")
+            except Exception as e:
+                logger.error(f"SKELETON: Failed attempt {attempt+1} for '{skeleton['id']}': {e}")
 
     return generated[:total_required]
-
-def _verify_reference_solutions(*, groq_client, challenges, model="llama-3.1-8b-instant"):
+def _generate_execution_verified_coding_pool(*, groq_client, job_description, required_skills, difficulties, total_required, model="llama-3.1-8b-instant"):
     """
-    Simplified verification: runs each challenge's reference_solution with its
-    example_input through the executor. If the solution runs without errors,
-    the challenge is kept. If it fails, AI is asked to fix the solution (up to 2 retries).
-    No test cases are generated — only the question + working answer.
+    Entry point for skeleton-based generation.
+    1. Generates the pool using skeletons.
+    2. Runs each skeleton once to populate example_input/output.
     """
-    if not challenges:
-        return challenges
+    # 1. Generate story-wrapped skeletons
+    challenges = _generate_coding_pool_ai_only(
+        groq_client=groq_client,
+        job_description=job_description,
+        required_skills=required_skills,
+        difficulties=difficulties,
+        total_required=total_required,
+        model=model
+    )
 
-    verified = []
-    for challenge in challenges:
-        if not isinstance(challenge, dict):
-            continue
-
-        title = challenge.get('title', 'Unknown')
-        ref_sol = challenge.get('reference_solution', '')
-        example_input = str(challenge.get('example_input', '')).strip()
-
-        # SQL challenges: skip execution verification
-        if 'SELECT' in str(challenge.get('problem_statement', '')).upper():
-            challenge['test_cases'] = []  # no test cases
-            verified.append(challenge)
-            logger.info(f"Verify: '{title}' is SQL — skipped execution check.")
-            continue
-
-        # If no reference solution, ask AI to generate one
-        if not ref_sol:
-            prob = challenge.get('problem_statement', '')
-            prompt = f"""
-            Provide a COMPLETE, executable Python 3 script for this problem:
-            Title: {title}
-            Problem: {prob}
-
-            The script must:
-            1. Import `sys`.
-            2. Read the RAW TEXT input from stdin using `sys.stdin.read()` or `input()`.
-            3. Compute the result using logic only (NO external DB/API).
-            4. Print the final RAW TEXT result to stdout using `print()`.
-            Output the raw code only, no markdown.
-            """
-            try:
-                resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": prompt}], temperature=0)
-                ref_sol = resp.choices[0].message.content.strip().replace('```python', '').replace('```', '')
-                challenge['reference_solution'] = ref_sol
-            except Exception as e:
-                logger.error(f"Verify: Failed to generate reference solution for '{title}': {e}")
-                continue
-
-        # Try running the reference solution
-        # If example_input is "N/A" (placeholder), generate a real one from schema first
-        current_input = str(example_input).strip()
-        schema = challenge.get('input_generator_schema')
-        
-        if (current_input == "N/A" or not current_input) and schema:
-            try:
-                current_input = InputDataGenerator.generate(schema)
-                challenge['example_input'] = current_input # Early sync for verification
-                logger.info(f"Verify: Generated early input for '{title}' from schema.")
-            except: pass
-
-        solution_works = False
-        max_fix_attempts = 2
-
-        for attempt in range(max_fix_attempts + 1):
-            if not ref_sol.strip():
-                break
-
-            res = _call_executor(language='python', source_code=ref_sol, stdin=current_input)
-            stdout = str(res.get('stdout', '')).strip()
-            stderr = str(res.get('stderr', '')).strip()
-
-            if res.get('ok') and stdout is not None and not stderr:
-                solution_works = True
-                # CRITICAL: Overwrite AI hallucinated expected output with ACTUAL execution result!
-                challenge['example_output'] = stdout
-                logger.info(f"Verify: '{title}' reference solution PASSED (attempt {attempt + 1}). Output: {stdout[:50]}")
-                break
-            else:
-                error_info = stderr or res.get('error', 'Unknown error')
-                logger.warning(f"Verify: '{title}' reference solution FAILED (attempt {attempt + 1}): {error_info[:100]}")
-
-                if attempt < max_fix_attempts:
-                    # Ask AI to fix the solution
-                    fix_prompt = f"""
-                    The following Python 3 solution has an error. Fix it.
-                    
-                    Problem: {challenge.get('problem_statement', '')}
-                    Example Input: {example_input}
-                    
-                    Current Code:
-                    {ref_sol}
-                    
-                    Error:
-                    {error_info[:500]}
-                    
-                    Return ONLY the fixed Python code. No markdown, no explanation.
-                    The script MUST read RAW TEXT input from stdin and print RAW TEXT output to stdout using `print()`. Do NOT use json parsing on stdin unless explicitly required by the problem.
-                    MUST properly escape newlines and internal quotes.
-                    """
-                    try:
-                        fix_resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": fix_prompt}], temperature=0)
-                        ref_sol = fix_resp.choices[0].message.content.strip().replace('```python', '').replace('```', '')
-                        challenge['reference_solution'] = ref_sol
-                    except:
-                        break
-
-        if solution_works:
-            # Generate 5 unique test cases based on the schema
-            test_cases = []
-            for tc_idx in range(5):
-                tc_input = InputDataGenerator.generate(schema)
-                # Run the reference solution on this new input
-                tc_res = _call_executor(language='python', source_code=ref_sol, stdin=tc_input)
-                tc_output = str(tc_res.get('stdout', '')).strip()
-                
-                if tc_res.get('ok') and tc_output:
-                    test_cases.append({
-                        "id": f"tc_{tc_idx+1}",
-                        "input": tc_input,
-                        "expected_output": tc_output,
-                        "is_hidden": tc_idx > 0 # First one is public
-                    })
-            
-            challenge['test_cases'] = test_cases
-            
-            # Sync function_meta with the verified solution
-            import re
-            func_match = re.search(r'def\s+(\w+)\s*\(([^)]*)\)', ref_sol)
-            if func_match:
-                func_name = func_match.group(1)
-                raw_params = func_match.group(2).strip()
-                param_names = [p.strip().split(':')[0].strip().split('=')[0].strip() for p in raw_params.split(',')]
-                params = [{'name': p, 'type': 'any'} for p in param_names if p]
-                
-                challenge['function_meta'] = {'name': func_name, 'params': params, 'return_type': 'any'}
-                
-                starter_code = {}
-                for lang in ['python', 'java', 'javascript', 'cpp', 'csharp']:
-                    starter_code[lang] = CodeGenerator.generate_starter_code(lang, func_name, params, 'any')
-                challenge['starter_code'] = starter_code
-            
-            # ONLY add to verified list if it has working test cases and a valid example output
-            if len(test_cases) > 0 and challenge.get('example_output') != "N/A":
-                verified.append(challenge)
-            else:
-                logger.error(f"Verify: '{title}' DISCARDED — produced N/A or empty test cases.")
-        else:
-            logger.error(f"Verify: '{title}' DISCARDED — reference solution could not be fixed.")
-
-    return verified
-
-def _generate_execution_verified_test_cases(*, groq_client, challenges, target_count=5, model="llama-3.1-8b-instant"):
-    """
-    Enhances test cases by running a reference solution through the in-process executor.
-    This eliminates AI hallucinations by using actual execution results as 'Expected Output'.
-    """
-    if not challenges:
-        return challenges
-
+    # 2. POPULATE EXAMPLE DATA & TEST CASES
+    # Skeletons come with gold_solution and input_schema, but we need actual text for the UI.
     verified_challenges = []
     for challenge in challenges:
-        if not isinstance(challenge, dict):
-            verified_challenges.append(challenge)
-            continue
-
-        ref_sol = challenge.get('reference_solution')
-        test_cases = challenge.get('test_cases', [])
-        
-        # No longer handling SQL specially since we banned it
-        if 'SELECT ' in str(challenge.get('problem_statement', '')).upper():
-            verified_challenges.append(challenge)
-            continue
-
-        if not ref_sol:
-            # Fallback: Ask AI for reference solution if missing
-            title = challenge.get('title')
-            prob = challenge.get('problem_statement')
-            prompt = f"""
-            Provide a COMPLETE, executable Python 3 script for this problem:
-            Title: {title}
-            Problem: {prob}
+        try:
+            schema = challenge.get('input_generator_schema')
+            ref_sol = challenge.get('reference_solution')
             
-            The script must:
-            1. Read RAW TEXT input using `sys.stdin.read()` or `input()`.
-            2. Compute the result using logic only (NO external DB/API).
-            3. Print the final result back as RAW TEXT using `print()`. Do NOT output JSON.
-            CRITICAL: Use standard Python 3. Output the raw code only, no markdown.
-            """
-            resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": prompt}], temperature=0)
-            ref_sol = resp.choices[0].message.content.strip().replace('```python', '').replace('```', '')
-            challenge['reference_solution'] = ref_sol
-
-        unique_inputs = []
-        schema = challenge.get('input_generator_schema')
-        title = challenge.get('title', 'Unknown')
-        
-        with open('gen_debug.txt', 'a', encoding='utf-8') as f_log:
-            f_log.write(f"\n--- DEBUG: Generating cases for '{title}' ---\n")
-            f_log.write(f"Schema: {schema}\n")
-
-            # Generate 6 inputs (1 for Example, 5 for Hidden)
-            if schema and isinstance(schema, list):
-                logger.info(f"Generating 6 test cases for '{title}' using Backend Engine.")
-                for idx_g in range(6):
-                    try:
-                        new_inp = InputDataGenerator.generate(schema)
-                        unique_inputs.append(new_inp)
-                        # Fix SyntaxError: move backslash out of f-string
-                        formatted_inp = str(new_inp).replace('\n', ' [NL] ')
-                        f_log.write(f"Generated Input {idx_g}: {formatted_inp}\n")
-                    except Exception as e:
-                        logger.error(f"Input Generation Error: {e}")
-                        f_log.write(f"Gen Error {idx_g}: {e}\n")
-        
-            # FALLBACK: If schema generation failed or was empty, try to scavenge AI's example_input first
-            if not unique_inputs:
-                f_log.write("WARNING: No schema found. Attempting legacy scavenge.\n")
-                ai_ex = challenge.get('example_input')
-                if ai_ex and ai_ex != "N/A" and _is_raw_data(ai_ex):
-                    unique_inputs.append(ai_ex)
-                    f_log.write(f"Scavenged Example: {ai_ex}\n")
+            # Generate one real example for the UI
+            example_input = InputDataGenerator.generate(schema)
+            res = _call_executor(language='python', source_code=ref_sol, stdin=example_input)
+            
+            if res.get('ok') and res.get('stdout'):
+                challenge['example_input'] = example_input
+                challenge['example_output'] = str(res.get('stdout', '')).strip()
                 
-                test_cases = challenge.get('test_cases', [])
-                if isinstance(test_cases, str): test_cases = extract_json(test_cases) or []
-                for tc in test_cases:
-                    inp = str(tc.get('input', '')).strip() if isinstance(tc, dict) else str(tc).strip()
-                    if inp and _is_raw_data(inp) and inp not in unique_inputs:
-                        unique_inputs.append(inp)
-            
-            # We need at least 1 input to proceed
-            if not unique_inputs:
-                logger.warning(f"No inputs generated for '{title}'. Skipping execution verification.")
+                # Append formatted, verified example to description
+                challenge['problem_statement'] += (
+                    f"\n\n### Example 1:\n"
+                    f"**Input:**\n"
+                    f"```text\n{challenge['example_input']}\n```\n"
+                    f"**Output:**\n"
+                    f"```text\n{challenge['example_output']}\n```"
+                )
+                
+                # Generate 5 additional hidden test cases
+                test_cases = []
+                for idx in range(6):
+                    tc_input = InputDataGenerator.generate(schema)
+                    tc_res = _call_executor(language='python', source_code=ref_sol, stdin=tc_input)
+                    if tc_res.get('ok'):
+                        test_cases.append({
+                            "id": f"tc_{idx+1}",
+                            "input": tc_input,
+                            "output": str(tc_res.get('stdout', '')).strip(),
+                            "is_hidden": True
+                        })
+                
+                challenge['test_cases'] = test_cases
                 verified_challenges.append(challenge)
-                f_log.write("FAILED: No inputs found at all.\n")
-                continue
-
-            verified_test_cases = []
-            for i, inp in enumerate(unique_inputs):
-                # Run through executor
-                res = _call_executor(language='python', source_code=ref_sol, stdin=inp)
-                actual_stdout = str(res.get('stdout', '')).strip()
-                
-                if res.get('ok') and actual_stdout:
-                    tc_obj = {
-                        "input": str(inp),
-                        "output": actual_stdout,
-                        "verified": True
-                    }
-                    verified_test_cases.append(tc_obj)
-                    
-                    # If this is the FIRST successful execution, synchronize it into the Example fields
-                    # Ensure we overwrite "N/A"
-                    if i == 0 or challenge.get('example_input') == "N/A" or not challenge.get('example_input'):
-                        challenge['example_input'] = str(inp)
-                        challenge['example_output'] = actual_stdout
-                        
-                        # DYNAMIC INJECTION: Sync the textual problem statement with the first test case
-                        old_statement = challenge.get('problem_statement', '')
-                        challenge['problem_statement'] = _inject_example_into_statement(old_statement, str(inp), actual_stdout)
-                        
-                        logger.info(f"Sync: Updated Example Input/Output and Problem Statement for '{title}' from Backend Execution.")
-                        f_log.write(f"SYNC SUCCESS for input {i}\n")
-                else:
-                    err_msg = res.get('error', 'Empty Stdout')
-                    logger.warning(f"Execution Verifier: Failure for input {i} on '{title}': {err_msg}")
-                    f_log.write(f"EXEC FAILURE for input {i}: {err_msg}\n")
-
-            challenge['test_cases'] = verified_test_cases
-            verified_challenges.append(challenge)
+                logger.info(f"Verified Skeleton: '{challenge['title']}' with {len(test_cases)} cases.")
+            else:
+                logger.error(f"SKELETON FAILED VERIFICATION: '{challenge['title']}'. Error: {res.get('error')}")
+        except Exception as e:
+            logger.error(f"Error verifying skeleton '{challenge.get('title')}': {e}")
 
     return verified_challenges
 
-def _final_validation_gate(groq_client, challenges, target_count=6, model="llama-3.1-8b-instant"):
-    """
-    The ultimate logic check.
-    1. Audits input signatures (e.g. is 'k' missing?).
-    2. Performs 'Double-Blind' AI verification for EVERY test case.
-    3. Rescues failing challenges up to 2 times.
-    4. Discards challenges that can't meet strict accuracy bars.
-    """
-    if not challenges:
-        return []
-
-    high_quality_pool = []
-    
-    for challenge in challenges:
-        if not isinstance(challenge, dict):
-            continue
-
-        prob_title = challenge.get('title', 'Unknown')
-        prob_desc = challenge.get('problem_statement', '')
-        test_cases = challenge.get('test_cases', [])
-        valid_cases = []
-        
-        logger.info(f"Final Gate: Auditing logic for '{prob_title}'...")
-
-        # 1. DOUBLE-BLIND VERIFICATION for initial cases
-        for tc in test_cases:
-            if not isinstance(tc, dict): continue
-            
-            # Harmonize keys
-            if 'expected_output' in tc and 'output' not in tc:
-                tc['output'] = tc.pop('expected_output')
-            
-            inp = str(tc.get('input', '')).strip()
-            out = str(tc.get('output', '')).strip()
-            
-            # Basic Quality + Signature Audit
-            if not (inp and out and len(inp) > 1 and _is_raw_data(inp)):
-                continue
-            
-            if not _audit_signature(prob_desc, inp):
-                logger.warning(f"Final Gate: REJECTED signature for '{prob_title}' (Missing parameters in input: {inp[:30]})")
-                continue
-
-            # AI Second Opinion (Double-Blind)
-            try:
-                check_prompt = f"""
-                Problem: {prob_desc}
-                Input: {inp}
-                Claimed Output: {out}
-                
-                Is this output mathematically and logically 100% correct for the given input?
-                Reply ONLY with 'YES' or 'NO'. No explanation.
-                """
-                cc_resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": check_prompt}], temperature=0)
-                decision = cc_resp.choices[0].message.content.strip().upper()
-                
-                if "YES" in decision:
-                    valid_cases.append(tc)
-                else:
-                    logger.warning(f"Final Gate: REJECTED logic for '{prob_title}' (AI logic mismatch for output: {out[:20]})")
-            except Exception as e:
-                # If AI check fails, trust prior verification if it exists, else skip
-                if tc.get('verified'):
-                    valid_cases.append(tc)
-
-        # 2. MANDATORY RESCUE LOOP (Up to 3 Times)
-        rescue_attempt = 0
-        while len(valid_cases) < target_count and rescue_attempt < 3:
-            rescue_attempt += 1
-            needed = target_count - len(valid_cases)
-            logger.warning(f"Final Gate: '{prob_title}' needs rescue (only {len(valid_cases)} valid cases). Attempt {rescue_attempt}")
-            
-            rescue_prompt = f"""
-            Generate EXACTLY {needed} UNIQUE and ACCURATE test cases.
-            CRITICAL: Ensure inputs include ALL parameters mentioned (like 'k', etc.).
-            Return ONLY a JSON list: [{{"input": "...", "output": "..."}}]
-            """
-            try:
-                resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": rescue_prompt}])
-                repaired = extract_json(resp.choices[0].message.content or "[]")
-                if isinstance(repaired, list):
-                    for rtc in repaired:
-                        r_inp = str(rtc.get('input', '')).strip()
-                        r_out = str(rtc.get('output', '')).strip()
-                        if r_inp and r_out and _is_raw_data(r_inp) and _audit_signature(prob_desc, r_inp):
-                            # Verify rescued cases too
-                            v_prompt = f"Problem: {prob_desc}\nInput: {r_inp}\nIs Output: {r_out} correct? YES/NO."
-                            v_resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": v_prompt}], temperature=0)
-                            if "YES" in v_resp.choices[0].message.content.strip().upper():
-                                valid_cases.append({"input": r_inp, "output": r_out, "rescued": True})
-            except: pass
-
-        # 3. Final Decision: STRICT 6 or DISCARD
-        if len(valid_cases) >= target_count:
-            challenge['test_cases'] = valid_cases[:target_count]
-            high_quality_pool.append(challenge)
-            logger.info(f"Final Gate: '{prob_title}' PASSED with exactly {target_count} logic-checked cases.")
-        else:
-            logger.error(f"Final Gate: '{prob_title}' DISCARDED (Only {len(valid_cases)} cases found, need {target_count}).")
-
-    return high_quality_pool
 def _generate_mcq_pool_ai_only(
     *,
     groq_client,
@@ -1093,7 +822,7 @@ def _generate_mcq_pool_ai_only(
     pool_easy,
     pool_medium,
     pool_hard,
-    attempts_per_batch=4,
+    attempts_per_batch=20, # INCREASED: Maximum persistence for rotation
     blacklist_qs=None,
     model="llama-3.1-8b-instant" 
 ):
@@ -1115,74 +844,101 @@ def _generate_mcq_pool_ai_only(
             continue
 
         idx = 0
-        batch_size = 10
+        batch_size = 7 # High quality initial size, auto-scales down on 413 error
         while idx < total_count_for_diff:
             count = min(batch_size, total_count_for_diff - idx)
             
-            # Combine current batch and historical blacklist
-            combined_blacklist = (blacklist + [q.get('question', '')[:100] for q in generated])
-            avoid_instr = f"\nCRITICAL: DO NOT generate questions similar to these topics: {combined_blacklist}" if combined_blacklist else ""
-
-            base_prompt = f"""
-            Act as an expert technical recruiter and generate MCQs only.
-            Session ID: {salt}
-            Job Description: {job_description}
-            Required Skills: {required_skills}
-
-            TASK: Generate EXACTLY {count} {difficulty} MCQs.
-            Each MCQ object must include keys:
-            - question
-            - options (list of exactly 4 strings)
-            - answer (must match one option exactly)
-            - difficulty (must be exactly \"{difficulty}\")
-
-            CRITICAL:
-            - JSON ESCAPING OVERRIDE: You MUST properly escape all internal double quotes (`\\"`) and newlines (`\\n`) inside string values! Returning unescaped double quotes inside a JSON string value will cause a syntax error.
-            - JD-ROOTED: Questions MUST be specifically rooted in the Job Description and Required Skills above.
-            - Ensure VARIETY: Explore different facets, tools, and scenarios mentioned in the JD. Each question must cover a UNIQUE concept.
-            - Avoid DUPLICATION: Do not repeat similar concepts or questions.{avoid_instr}
-
-            Return JSON only with root key: mcqs.
+            # Compress instructions to save token overhead
+            avoid_list = (blacklist + [q.get('question', '')[:50] for q in generated])[:10]
+            avoid_txt = f"Exclude topics: {avoid_list}" if avoid_list else ""
+            
+            prompt = f"""
+            JD: {job_description} | Skills: {required_skills}
+            TASK: Generate {count} technical MCQs ({difficulty}).
+            JSON FORMAT: {{ "mcqs": [ {{ "question": "...", "options": ["A","B","C","D"], "answer": "matched_string", "difficulty": "{difficulty}" }} ] }}
+            CRITICAL: 
+            - ESCAPE QUOTES: Use `\\"` for all double-quotes inside JSON values.
+            - UNIQUE: Questions must be specific to JD facets. {avoid_txt}
             """
 
             batch_mcqs = None
-            prompt = base_prompt
 
             for attempt in range(attempts_per_batch):
-                response = _call_groq_with_backoff(
-                    groq_client,
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": "You output JSON only."},
-                        {"role": "user", "content": prompt},
-                    ],
-                    max_tokens=4096,
-                    temperature=0.2,
-                )
-                raw = response.choices[0].message.content or ""
-                parsed = _normalize_generated_pool(extract_json(raw) or {})
-                mcqs = parsed.get('mcqs', [])
-                same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
+                try:
+                    response = _call_groq_with_backoff(
+                        groq_client,
+                        model=model,
+                        messages=[
+                            {"role": "system", "content": "You output JSON only."},
+                            {"role": "user", "content": prompt},
+                        ],
+                        max_tokens=4096,
+                        temperature=0.2,
+                    )
+                    
+                    if not response or not hasattr(response, 'choices') or not response.choices:
+                        logger.warning(f"Empty/Invalid response on attempt {attempt + 1}")
+                        continue
 
-                if len(same_diff) >= count:
-                    batch_mcqs = same_diff[:count]
-                    break
+                    raw = response.choices[0].message.content or ""
+                    parsed = _normalize_generated_pool(extract_json(raw) or {})
+                    mcqs = parsed.get('mcqs', [])
+                    same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
-                prompt = (
-                    base_prompt
-                    + "\n\nCORRECTION: Previous attempt had wrong count or difficulty labels. "
-                    + f"Expected {count} MCQs with difficulty {difficulty}, got {len(same_diff)}. Regenerate correctly."
-                )
+                    if len(same_diff) >= count:
+                        batch_mcqs = same_diff[:count]
+                        break
+                        
+                    # Correction for next attempt in same batch
+                    prompt = prompt + f"\nRetry: Ensure exactly {count} {difficulty} MCQs are returned."
+
+                except groq.APIStatusError as e:
+                    if e.status_code == 413 and batch_size > 2:
+                        logger.warning(f"Batch {batch_size} too large (413). Auto-scaling down to {batch_size-2}...")
+                        batch_size -= 2
+                        # Reset this specific batch attempt to start over with smaller size
+                        break # Exits "attempts" loop but stays in "while idx" loop
+                    raise e
+                except Exception as e:
+                    logger.warning(f"MCQ Batch attempt {attempt + 1} failed: {e}")
+                    if attempt == attempts_per_batch - 1:
+                        # Final failure for this batch
+                        break
 
             if not batch_mcqs:
-                # If we fail a batch, break this difficulty loop
-                break
+                # RECOVERY: If a batch fails, log and continue to next batch instead of breaking the entire split
+                logger.error(f"MCQ Batch Request failed all {attempts_per_batch} attempts for {difficulty}. Skipping this batch.")
+                idx += count # Advance so we don't get stuck in a loop, but we accept the shortfall
+                continue
 
             for q in batch_mcqs:
                 q['difficulty'] = difficulty
             generated.extend(batch_mcqs)
             idx += count
             
+        # FINAL RESCUE: If we still have a shortfall, fill it one-by-one to avoid all limits
+        while len([q for q in generated if q.get('difficulty') == difficulty]) < total_count_for_diff:
+            shortfall = total_count_for_diff - len([q for q in generated if q.get('difficulty') == difficulty])
+            logger.info(f"MCQ Resilient Gap-Filler: Generating {shortfall} more {difficulty} MCQs one-by-one.")
+            
+            rescue_prompt = f"""
+            JD: {job_description} | Skills: {required_skills}
+            TASK: Generate EXACTLY 1 UNIQUE technical MCQ ({difficulty}).
+            JSON: {{ "mcqs": [ {{ "question": "...", "options": ["...","...","...","..."], "answer": "...", "difficulty": "{difficulty}" }} ] }}
+            Exclude previous: {[q.get('question', '')[:30] for q in generated][-10:]}
+            """
+            try:
+                resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": rescue_prompt}], max_tokens=1024)
+                rescue_mcqs = _normalize_generated_pool(extract_json(resp.choices[0].message.content) or {}).get('mcqs', [])
+                for rq in rescue_mcqs:
+                    rq['difficulty'] = difficulty
+                    generated.append(rq)
+                    if len([q for q in generated if q.get('difficulty') == difficulty]) >= total_count_for_diff:
+                        break
+            except Exception as e:
+                logger.error(f"Gap-Filler failed: {e}. Exiting relief loop.")
+                break
+
             # Increased delay to 2s to mitigate Groq Rate Limits (TPM/RPM)
             if idx < total_count_for_diff:
                 time.sleep(2)
