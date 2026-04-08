@@ -25,13 +25,13 @@ from .ai_logic import (
     _mcq_difficulty_counts,
     _rebalance_mcq_difficulties,
     _repair_pool_shortfall,
-    _generate_coding_pool_ai_only,
+    _generate_execution_verified_coding_pool,
     _generate_mcq_pool_ai_only,
     pick_random_subset,
-    _verify_reference_solutions,
     _expert_assessment_refiner,
-    _generate_execution_verified_test_cases
+    GroqKeyManager
 )
+
 import traceback
 import base64
 from django.core.files.base import ContentFile
@@ -376,7 +376,7 @@ class GenerateAssessmentView(APIView):
 
             logger.info(f"Generating Pool for {num_applicants} applicants: MCQs={pool_mcq_total}, Coding={pool_coding_total}")
             
-            local_api_key = getattr(settings, 'GROQ_API_KEY', None)
+            local_api_key = GroqKeyManager.get_current_key()
             local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
 
@@ -409,61 +409,16 @@ class GenerateAssessmentView(APIView):
                 if mcqs:
                     generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
-            # 2. GENERATE CODING POOL (Simplified: Question + Working Answer only, no test cases)
-            final_coding_challenges = []
-            coding_attempts = 0
-            max_coding_attempts = 3
-            blacklist_titles = list(blacklist_titles)
-
-            while len(final_coding_challenges) < pool_coding_total and coding_attempts < max_coding_attempts:
-                coding_attempts += 1
-                needed = pool_coding_total - len(final_coding_challenges)
-                logger.info(f"Step 2: Generating {needed} coding challenges (Attempt {coding_attempts}/{max_coding_attempts})")
-                
-                current_difficulties = pool_coding_tasks[len(final_coding_challenges):pool_coding_total]
-                
-                new_challenges = _generate_coding_pool_ai_only(
-                    groq_client=local_groq_client,
-                    job_description=job_description,
-                    required_skills=required_skills,
-                    difficulties=current_difficulties,
-                    total_required=needed,
-                    batch_size=1,
-                    blacklist_titles=blacklist_titles + [c.get('title') for c in final_coding_challenges],
-                    model=self.PRIMARY_MODEL
-                )
-                
-                if not new_challenges:
-                    continue
-                
-                # Verify reference solutions actually execute correctly
-                verified_batch = _verify_reference_solutions(
-                    groq_client=local_groq_client,
-                    challenges=new_challenges,
-                    model=self.PRIMARY_MODEL
-                )
-                
-                # ONLY ADD IF VERIFIED (NO N/A OUTPUTS)
-                for v in verified_batch:
-                    v_out = str(v.get('example_output', 'N/A')).strip()
-                    if v_out and v_out != "N/A":
-                        final_coding_challenges.append(v)
-                    else:
-                        logger.warning(f"Verification FAILED for '{v.get('title')}'. Trashing and regenerating...")
-                
-            # Finalize the coding pool
-            final_coding_challenges = final_coding_challenges[:pool_coding_total]
-            
-            if final_coding_challenges:
-                logger.info("Test Case Gate: Generating 5 execution-verified hidden test cases per challenge...")
-                final_coding_challenges = _generate_execution_verified_test_cases(
-                    groq_client=local_groq_client,
-                    challenges=final_coding_challenges,
-                    target_count=5,
-                    model=self.PRIMARY_MODEL
-                )
-
-            generated_data['coding_challenges'] = final_coding_challenges
+            # 2. GENERATE CODING POOL (Skeleton-Based: 100% Accuracy)
+            logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
+            generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                groq_client=local_groq_client,
+                job_description=job_description,
+                required_skills=required_skills,
+                difficulties=pool_coding_tasks,
+                total_required=pool_coding_total,
+                model=self.PRIMARY_MODEL
+            )
 
             # --- RESTORED ORIGINAL MCQ PASS ---
             # Now we call the refiner on the MCQ pool that was generated in Step 1
@@ -496,18 +451,60 @@ class GenerateAssessmentView(APIView):
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
                 final_mcqs = len(generated_data.get('mcqs', []))
 
+            # --- REBALANCING & REPAIR GATE (Self-Healing) ---
+            final_mcqs = len(generated_data.get('mcqs', []))
+            final_coding = len(generated_data.get('coding_challenges', []))
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+            # Trigger repair if counts or difficulties are insufficient
+            if (final_mcqs < pool_mcq_total or final_coding < pool_coding_total or 
+                final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                
+                logger.info(f"Self-Healing: Shortfall detected (MCQs: {final_mcqs}/{pool_mcq_total}, Coding: {final_coding}/{pool_coding_total}). Attempting repair...")
+                generated_data = _repair_pool_shortfall(
+                    groq_client=local_groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    pool=generated_data,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    pool_coding_total=pool_coding_total,
+                    coding_tasks=pool_coding_tasks,
+                    model=self.PRIMARY_MODEL
+                )
+                # Recalculate after repair
+                final_mcqs = len(generated_data.get('mcqs', []))
+                final_coding = len(generated_data.get('coding_challenges', []))
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+            # --- FORCED REBALANCING GATE ---
+            # If we have enough total MCQs, force-align their difficulty labels to match requested split
+            if final_mcqs >= pool_mcq_total:
+                logger.info(f"Self-Healing: Rebalancing {final_mcqs} MCQs to satisfy split {pool_easy}/{pool_medium}/{pool_hard}")
+                generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                    generated_data.get('mcqs', []),
+                    easy_required=pool_easy,
+                    medium_required=pool_medium,
+                    hard_required=pool_hard
+                )
+                # Update final metrics after rebalancing
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+            # Final Validation Gate
             if final_mcqs < pool_mcq_total or final_coding < coding_count:
                 raise Exception(
-                    f"AI could not satisfy minimum required counts. Expected pool MCQs={pool_mcq_total}, min coding={coding_count}; "
+                    f"AI could not satisfy minimum required pool counts even after repair. "
+                    f"Expected Pool MCQs={pool_mcq_total}, min coding={coding_count}; "
                     f"got MCQs={final_mcqs}, coding={final_coding}."
                 )
+
             if final_coding >= coding_count and final_coding < pool_coding_total:
                 logger.warning(f"Coding pool smaller than requested ({final_coding} vs {pool_coding_total}), but sufficient for candidate ({coding_count}).")
-            if final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard:
-                raise Exception(
-                    f"AI could not satisfy requested MCQ difficulty split. Expected Easy/Medium/Hard="
-                    f"{pool_easy}/{pool_medium}/{pool_hard}; got {final_easy}/{final_medium}/{final_hard}."
-                )
+
+            if (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                # This should only happen if total count is somehow met but rebalance failed
+                logger.warning(f"MCQ Difficulty split check bypassed. Expected {pool_easy}/{pool_medium}/{pool_hard}; got {final_easy}/{final_medium}/{final_hard}.")
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'

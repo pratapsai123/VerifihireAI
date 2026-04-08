@@ -340,3 +340,443 @@ Host: verifihireai.com
 [2026-04-06 07:15:44.494376+00:00] PUBLIC ACCESS: Token='21571f77-4a5b-49d8-930f-1d57e922fccc'
 Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1775459744331']}>
 Host: localhost:8001
+
+[2026-04-06 11:20:10.470337+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4737, Requested 1997. Please try again in 7.34s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 425, in post
+    new_challenges = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<6 lines>...
+        model=self.PRIMARY_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 674, in _generate_coding_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.8, # Increased from 0.2 for much higher variety
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 260, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 253, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4737, Requested 1997. Please try again in 7.34s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: No response received
+
+[2026-04-06 11:27:14.809995+00:00] ERROR in GenerateAssessmentView: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 398, in post
+    mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<7 lines>...
+        model=self.FALLBACK_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 1152, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 277, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 253, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.AuthenticationError: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+
+RAW: No response received
+
+[2026-04-06 12:08:27.536104+00:00] ERROR in GenerateAssessmentView: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kmzd3yqze4vsnvw6ygd0em2n` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5734, Requested 3050. Please try again in 27.84s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 398, in post
+    mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<7 lines>...
+        model=self.FALLBACK_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 1152, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 260, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 253, in _call_groq_with_backoff
+    return groq_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kmzd3yqze4vsnvw6ygd0em2n` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5734, Requested 3050. Please try again in 27.84s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: No response received
+
+[2026-04-07 04:13:37.674774+00:00] ERROR in GenerateAssessmentView: name 'GroqKeyManager' is not defined
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 379, in post
+    local_api_key = GroqKeyManager.get_current_key()
+                    ^^^^^^^^^^^^^^
+NameError: name 'GroqKeyManager' is not defined
+
+RAW: No response received
+
+[2026-04-07 04:14:18.419085+00:00] ERROR in GenerateAssessmentView: name 'GroqKeyManager' is not defined
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 379, in post
+    local_api_key = GroqKeyManager.get_current_key()
+                    ^^^^^^^^^^^^^^
+NameError: name 'GroqKeyManager' is not defined
+
+RAW: No response received
+
+[2026-04-07 04:15:38.281128+00:00] ERROR in GenerateAssessmentView: Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 6015, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 400, in post
+    mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<7 lines>...
+        model=self.FALLBACK_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 315, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 277, in _call_groq_with_backoff
+    return current_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.1-8b-instant` in organization `org_01kc1be8jzfyra3bwqyqqrzhsc` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 6015, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+
+RAW: No response received
+
+[2026-04-07 04:19:13.511892+00:00] ERROR in GenerateAssessmentView: 'NoneType' object has no attribute 'choices'
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 400, in post
+    mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<7 lines>...
+        model=self.FALLBACK_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 1212, in _generate_mcq_pool_ai_only
+    raw = response.choices[0].message.content or ""
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'choices'
+
+RAW: No response received
+
+[2026-04-07 04:21:52.983172+00:00] ERROR in GenerateAssessmentView: name 'max_retries' is not defined
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 400, in post
+    mcqs = _generate_mcq_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<7 lines>...
+        model=self.FALLBACK_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 1202, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.2,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 272, in _call_groq_with_backoff
+    while attempt < max_retries:
+                    ^^^^^^^^^^^
+NameError: name 'max_retries' is not defined
+
+RAW: No response received
+
+[2026-04-07 04:34:12.314227+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required counts. Expected pool MCQs=20, min coding=3; got MCQs=5, coding=5.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required counts. Expected pool MCQs=20, min coding=3; got MCQs=5, coding=5.
+
+RAW: No response received
+
+[2026-04-07 04:58:40.385074+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required counts for candidate. Expected MCQs=10, coding=3; got MCQs=8, coding=6. (Target Pool was 20)
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required counts for candidate. Expected MCQs=10, coding=3; got MCQs=8, coding=6. (Target Pool was 20)
+
+RAW: No response received
+
+[2026-04-07 05:52:05.594561+00:00] PUBLIC ACCESS: Token='f46d7c53-40bb-48cd-863b-fe5bfa10d894'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775541125257']}>
+Host: localhost:8001
+
+[2026-04-07 05:52:05.597019+00:00] PUBLIC ACCESS: Token='f46d7c53-40bb-48cd-863b-fe5bfa10d894'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775541125249']}>
+Host: localhost:8001
+
+[2026-04-07 07:36:00.212520+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+
+RAW: No response received
+
+[2026-04-07 07:51:03.897298+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+
+RAW: No response received
+
+[2026-04-07 08:44:31.970610+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+
+RAW: No response received
+
+[2026-04-07 09:12:07.745584+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 502, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts. Expected Pool MCQs=2, min coding=1; got MCQs=2, coding=0.
+
+RAW: No response received
+
+[2026-04-07 09:48:52.230823+00:00] PUBLIC ACCESS: Token='758e87fc-ec99-4c7e-acd4-b5123212cc54'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775555331922']}>
+Host: localhost:8001
+
+[2026-04-07 10:36:33.336981+00:00] ERROR in GenerateAssessmentView: Connection error.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\D-IT\AppData\Local\Programs\Python\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1003, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\D-IT\AppData\Local\Programs\Python\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 427, in post
+    new_challenges = _generate_coding_pool_ai_only(
+        groq_client=local_groq_client,
+    ...<6 lines>...
+        model=self.PRIMARY_MODEL
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 735, in _generate_coding_pool_ai_only
+    response = _call_groq_with_backoff(
+        groq_client,
+    ...<6 lines>...
+        temperature=0.8, # Increased from 0.2 for much higher variety
+    )
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 320, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\ai_logic.py", line 277, in _call_groq_with_backoff
+    return current_client.chat.completions.create(**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\v6\backend\venv\Lib\site-packages\groq\_base_client.py", line 1035, in request
+    raise APIConnectionError(request=request) from err
+groq.APIConnectionError: Connection error.
+
+RAW: No response received
+
+[2026-04-07 12:14:16.070204+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts. Expected Pool MCQs=20, min coding=1; got MCQs=17, coding=2.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 455, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts. Expected Pool MCQs=20, min coding=1; got MCQs=17, coding=2.
+
+RAW: No response received
+
+[2026-04-07 12:22:17.978072+00:00] PUBLIC ACCESS: Token='ff0e6fbc-1cb7-4157-a9bd-3b17e8e2525c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775564537664']}>
+Host: localhost:8001
+
+[2026-04-07 12:22:18.017499+00:00] PUBLIC ACCESS: Token='ff0e6fbc-1cb7-4157-a9bd-3b17e8e2525c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775564537698']}>
+Host: localhost:8001
+
+[2026-04-07 12:48:54.048447+00:00] PUBLIC ACCESS: Token='0d305a9e-2c5b-44a6-9c12-193caa6b4156'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775566134038']}>
+Host: localhost:8001
+
+[2026-04-07 12:48:54.112211+00:00] PUBLIC ACCESS: Token='0d305a9e-2c5b-44a6-9c12-193caa6b4156'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775566134039']}>
+Host: localhost:8001
+
+[2026-04-07 16:09:20.961670+00:00] ERROR in GenerateAssessmentView: AI could not satisfy requested MCQ difficulty split after repair. Expected Easy/Medium/Hard=10/6/4; got 9/11/0.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v6\backend\ai_assessments\views.py", line 493, in post
+    raise Exception(
+    ...<3 lines>...
+    )
+Exception: AI could not satisfy requested MCQ difficulty split after repair. Expected Easy/Medium/Hard=10/6/4; got 9/11/0.
+
+RAW: No response received
+
+[2026-04-07 16:20:09.650363+00:00] PUBLIC ACCESS: Token='bee60cac-4ebb-4e2a-9189-b02fa5f4dd1e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775578809307']}>
+Host: localhost:8001
+
+[2026-04-07 16:20:09.656179+00:00] PUBLIC ACCESS: Token='bee60cac-4ebb-4e2a-9189-b02fa5f4dd1e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775578809324']}>
+Host: localhost:8001
+
+[2026-04-07 17:59:07.315407+00:00] PUBLIC ACCESS: Token='a0455f56-364d-4a20-a37d-dfaecfbb3775'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775584747304']}>
+Host: localhost:8001
+
+[2026-04-07 17:59:07.448590+00:00] PUBLIC ACCESS: Token='a0455f56-364d-4a20-a37d-dfaecfbb3775'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775584747313']}>
+Host: localhost:8001
+
+[2026-04-07 18:31:52.409439+00:00] PUBLIC ACCESS: Token='1691b28d-38ca-41c4-add7-c4ea29b8712d'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775586712391']}>
+Host: localhost:8001
+
+[2026-04-07 18:31:52.410464+00:00] PUBLIC ACCESS: Token='1691b28d-38ca-41c4-add7-c4ea29b8712d'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775586712399']}>
+Host: localhost:8001

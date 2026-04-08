@@ -284,3 +284,274 @@ Generated Input 3: 8 [NL] value port item_25 node value port node status
 Generated Input 4: 13 [NL] value task item_96 host item_80 status task item_12 job node status value node
 Generated Input 5: 9 [NL] task status item_75 item_90 item_25 node port link host
 SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Identifying Duplicate Substrings' ---
+Schema: [{'type': 'string', 'name': 's', 'min': 1, 'max': 50}]
+Generated Input 0: token
+Generated Input 1: active
+Generated Input 2: sync
+Generated Input 3: ID-600
+Generated Input 4: VAL-524
+Generated Input 5: VAL-967
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Python Code for Data Compression' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 20 [NL] value task item_38 item_44 host status job value job node task item_46 host port task link node value link item_96
+Generated Input 1: 38 [NL] task port item_11 node item_28 status node status host status item_74 value item_56 link status port status node item_59 host link port node host host node item_56 item_52 item_20 value
+Generated Input 2: 34 [NL] task port host port status node link status host item_72 item_34 item_72 status item_29 node item_73 port status job port item_68 node status status port item_16 job status status item_98
+Generated Input 3: 5 [NL] host host job port item_65
+Generated Input 4: 40 [NL] item_29 value node item_56 value host job job item_59 status task port value item_96 item_61 item_61 port node item_96 status item_72 value status item_78 status item_19 status item_99 item_64 link
+Generated Input 5: 30 [NL] item_59 job task task item_52 job task node item_23 link task job value host port node job task item_87 item_83 job link node job status task task job job link
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Product of Three' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 10}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 1 [NL] 68
+Generated Input 1: 2 [NL] 19 94
+Generated Input 2: 3 [NL] 65 66 21
+Generated Input 3: 9 [NL] 14 32 94 32 14 82 68 80 33
+Generated Input 4: 7 [NL] 98 38 49 42 91 88 15
+Generated Input 5: 10 [NL] 7 35 33 89 67 24 8 88 76 66
+EXEC FAILURE for input 0: Empty Stdout
+EXEC FAILURE for input 1: Empty Stdout
+
+--- DEBUG: Generating cases for 'Optimizing Employee Shift Scheduling' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 7 [NL] 84 3 12 79 72 53 76
+Generated Input 1: 23 [NL] 66 7 58 34 42 80 72 76 21 80 23 94 95 47 72 8 84 96 66 60 11 18 80
+Generated Input 2: 7 [NL] 83 91 39 31 19 89 67
+Generated Input 3: 4 [NL] 98 74 77 22
+Generated Input 4: 4 [NL] 43 93 82 41
+Generated Input 5: 3 [NL] 78 43 66
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing City Metro Route Planning' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'array', 'count': 2, 'item': {'type': 'int'}}}]
+Generated Input 0: 31
+Generated Input 1: 9
+Generated Input 2: 15
+Generated Input 3: 39
+Generated Input 4: 25
+Generated Input 5: 14
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Validating ISBN Numbers' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 27 [NL] node item_94 node task item_63 item_27 node task host value item_85 link status value task item_77 task item_65 value value item_57 port value job node item_24 task
+Generated Input 1: 38 [NL] status port item_70 host port port item_88 host node host item_84 item_27 item_32 node task value value item_28 item_78 job value item_13 task port job task value task item_10 status
+Generated Input 2: 46 [NL] item_80 task item_83 item_27 value link host item_36 item_13 node item_51 item_47 item_34 item_28 task link link link status job node host port status task status job item_95 item_43 port
+Generated Input 3: 50 [NL] item_11 value item_50 task value job task item_90 task item_54 job link item_59 item_19 host host item_91 port link status value item_15 node link item_54 job job host item_31 item_44
+Generated Input 4: 22 [NL] host item_95 item_53 item_29 task status host node item_85 task status node job item_40 task node value item_53 value value node item_74
+Generated Input 5: 25 [NL] task host host item_32 port item_46 task item_71 item_75 task link item_13 value value status task value job host port link port status item_78 job
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Dynamic Code Optimization' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 40}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'array', 'count_ref': 'M', 'item': {'type': 'int'}}}, {'type': 'int', 'name': 'M', 'min': 1, 'max': 30}]
+Generated Input 0: 38 [NL] 13
+Generated Input 1: 20 [NL] 26
+Generated Input 2: 18 [NL] 3
+Generated Input 3: 20 [NL] 25
+Generated Input 4: 14 [NL] 27
+Generated Input 5: 32 [NL] 8
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Minimum Spanning Tree using Prim's Algorithm' ---
+Schema: [{'type': 'int', 'name': 'V', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'V', 'item': {'type': 'int'}}, {'type': 'array', 'count_ref': 'V', 'item': {'type': 'int'}}, {'type': 'array', 'count_ref': 'V', 'item': {'type': 'int'}}]
+Generated Input 0: 35 [NL] 49 66 35 8 46 20 9 82 65 7 53 15 30 48 61 90 37 2 3 5 32 60 96 51 35 61 23 26 56 89 [NL] 70 78 82 60 58 2 71 89 24 77 17 31 99 55 95 24 88 15 42 92 84 26 37 22 35 9 74 25 21 51 [NL] 2 92 41 33 61 80 93 50 23 54 49 79 40 8 97 72 62 95 70 1 69 37 15 37 47 82 71 26 92 73
+Generated Input 1: 24 [NL] 32 53 35 94 20 93 42 85 78 74 79 95 24 54 86 27 50 32 80 78 11 62 7 57 [NL] 96 5 3 53 65 99 10 35 61 94 20 12 21 30 8 59 10 34 30 15 86 36 4 59 [NL] 91 34 9 21 64 52 64 79 67 93 13 9 21 17 8 24 30 22 5 30 80 32 5 10
+Generated Input 2: 41 [NL] 78 59 39 84 70 43 71 66 40 22 81 44 28 19 75 91 100 40 34 18 74 91 67 33 83 85 33 9 65 37 [NL] 87 91 25 13 31 36 53 78 11 20 14 77 79 81 56 9 16 40 64 23 58 11 27 31 51 73 43 50 72 29 [NL] 37 74 16 82 73 20 40 90 42 46 55 80 84 31 70 8 13 97 59 50 74 23 18 61 60 9 51 59 45 58
+Generated Input 3: 30 [NL] 50 19 35 28 59 49 17 4 3 82 43 89 13 78 57 83 32 5 46 36 29 73 31 83 39 13 97 67 19 79 [NL] 19 28 14 36 17 65 3 61 58 59 61 80 54 77 20 64 53 6 23 48 5 66 99 36 41 37 79 60 15 63 [NL] 65 38 67 85 64 11 18 5 39 5 93 11 19 64 47 95 59 58 27 84 77 70 2 73 83 33 34 78 44 77
+Generated Input 4: 17 [NL] 37 4 41 82 7 40 67 5 17 91 25 60 65 36 51 16 38 [NL] 24 76 8 57 15 66 19 51 13 33 67 7 19 73 14 6 14 [NL] 92 85 47 80 89 50 37 45 47 56 76 79 26 63 15 37 12
+Generated Input 5: 14 [NL] 100 32 4 28 5 97 46 81 87 9 59 2 25 39 [NL] 32 97 13 13 61 98 43 97 45 28 10 25 39 13 [NL] 86 94 72 74 42 76 46 27 67 78 48 66 23 3
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Network Connectivity for Python Developers' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'array', 'count': 2, 'item': {'type': 'int'}}}]
+Generated Input 0: 46
+Generated Input 1: 33
+Generated Input 2: 43
+Generated Input 3: 43
+Generated Input 4: 1
+Generated Input 5: 16
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing a Web Crawler's URL Queue' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 2 [NL] value item_80
+Generated Input 1: 21 [NL] node item_37 item_86 job node value item_22 item_31 link link link item_53 node link item_29 job node value host task host
+Generated Input 2: 14 [NL] node job item_15 item_44 status value item_26 job value item_65 host host task value
+Generated Input 3: 7 [NL] job item_74 link item_25 item_16 link node
+Generated Input 4: 45 [NL] port value link task host item_19 node host host status status task status item_98 value host port host item_89 host task status task item_92 node task node host job item_40
+Generated Input 5: 16 [NL] item_91 port task value item_86 node port port link value link host item_40 job node port
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Python Code for Large Data Compression' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 5 [NL] item_11 node task host host
+Generated Input 1: 18 [NL] item_66 item_96 link host job node item_99 item_42 node host item_41 port item_36 item_32 task host host task
+Generated Input 2: 4 [NL] node value node job
+Generated Input 3: 47 [NL] status status link item_59 host item_22 link value status host port host item_82 item_57 host job job task link item_15 link task item_77 job host value task value host node
+Generated Input 4: 32 [NL] item_17 task value item_53 item_55 item_90 link link host host link task port item_12 item_66 link node item_94 task job job link task status node node item_51 job node status
+Generated Input 5: 26 [NL] task link item_72 node host job host port port link link value job item_88 host item_39 status link job value item_99 item_20 value item_43 host host
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Hotel Room Assignment' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 49 [NL] 97 19 25 86 32 75 42 93 69 46 8 80 56 63 99 47 19 87 20 31 75 81 4 83 77 88 60 33 55 65
+Generated Input 1: 19 [NL] 13 77 9 30 95 100 44 85 100 41 15 80 42 12 74 95 94 98 47
+Generated Input 2: 39 [NL] 34 67 66 51 67 35 63 21 40 53 12 85 2 48 99 57 51 71 84 59 79 100 20 64 29 80 87 6 1 10
+Generated Input 3: 28 [NL] 82 75 59 93 37 65 5 98 63 59 62 83 3 88 31 35 63 16 34 53 77 87 39 23 78 15 24 80
+Generated Input 4: 32 [NL] 46 39 44 77 28 59 40 9 41 43 95 13 31 15 50 7 28 56 30 82 28 45 9 63 37 53 66 36 71 24
+Generated Input 5: 6 [NL] 1 2 56 10 43 81
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Stock Gains' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int', 'min': 1, 'max': 1000}}]
+Generated Input 0: 31 [NL] 937 479 579 40 836 654 514 813 770 148 123 197 623 150 127 621 587 411 65 118 989 858 405 632 383 460 690 640 708 326
+Generated Input 1: 46 [NL] 488 315 282 621 37 106 794 574 515 915 254 971 991 594 331 738 920 409 90 191 591 715 104 643 487 547 94 592 987 774
+Generated Input 2: 19 [NL] 349 728 569 857 599 685 339 39 968 208 950 617 612 226 477 952 216 74 411
+Generated Input 3: 22 [NL] 883 447 816 33 943 763 141 997 157 162 645 362 704 611 436 858 235 967 322 527 146 52
+Generated Input 4: 48 [NL] 524 892 681 930 174 745 881 847 392 30 296 324 522 780 567 42 690 54 915 775 602 919 63 399 508 620 134 819 866 720
+Generated Input 5: 25 [NL] 241 227 782 17 450 396 540 141 777 539 984 231 752 502 621 658 861 225 695 154 75 8 943 360 850
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Python Code for Maximum Stock Trading Profits' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 47 [NL] 21 99 69 83 49 14 43 72 17 64 77 88 98 17 2 82 85 84 11 28 98 64 28 85 11 12 3 33 89 28
+Generated Input 1: 22 [NL] 52 18 41 87 85 53 67 83 9 40 98 39 94 94 83 1 80 17 97 77 72 46
+Generated Input 2: 10 [NL] 50 81 16 93 74 70 92 30 51 72
+Generated Input 3: 41 [NL] 15 30 91 4 16 11 11 1 45 42 47 8 75 33 27 90 1 48 91 59 75 53 77 23 71 6 78 41 52 82
+Generated Input 4: 23 [NL] 78 46 51 9 32 66 93 73 97 80 49 46 83 61 59 87 11 35 12 76 25 29 4
+Generated Input 5: 8 [NL] 76 57 98 75 33 59 51 86
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Python Developer: Maximum Island Expansion' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'int', 'name': 'M', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'array', 'count_ref': 'M', 'item': {'type': 'string'}}}]
+Generated Input 0: 10 [NL] 4
+Generated Input 1: 26 [NL] 8
+Generated Input 2: 5 [NL] 14
+Generated Input 3: 11 [NL] 48
+Generated Input 4: 7 [NL] 18
+Generated Input 5: 43 [NL] 29
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Elevator Ride Optimizer' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'array', 'length': 2, 'item': {'type': 'int'}}}]
+Generated Input 0: 49
+Generated Input 1: 7
+Generated Input 2: 11
+Generated Input 3: 15
+Generated Input 4: 8
+Generated Input 5: 49
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Project Dependencies' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 7 [NL] status port item_66 value item_16 value item_65
+Generated Input 1: 2 [NL] status item_20
+Generated Input 2: 1 [NL] value
+Generated Input 3: 34 [NL] item_92 host host item_71 item_43 item_63 status value port port task port item_47 node item_86 job task job value status task item_30 port link value item_74 item_35 item_17 link item_83
+Generated Input 4: 36 [NL] status item_92 port item_73 host item_16 item_23 item_60 value node item_80 status item_27 node link value value item_71 host item_71 item_28 value port link node link value task item_47 node
+Generated Input 5: 10 [NL] host host item_69 host task item_74 node task task job
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Student Project Grade Optimizer' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 25 [NL] value item_45 link value item_60 value job task item_51 task host task task node value item_59 item_54 item_25 port task link item_49 item_89 value task
+Generated Input 1: 50 [NL] task item_71 value node link task item_14 status node node task task link status host port value value value item_23 job port item_95 item_91 port job item_21 job value host
+Generated Input 2: 21 [NL] status node port job task value task value node link item_80 item_34 status task status port job link item_70 item_68 host
+Generated Input 3: 48 [NL] host link task item_43 value task item_25 item_81 host host item_67 item_21 node task link node item_39 port item_15 value value link item_52 item_26 link port link link status task
+Generated Input 4: 47 [NL] link task item_59 node task link link item_72 host item_69 item_64 value item_86 status host task status link job status link item_42 host port item_54 value status value value link
+Generated Input 5: 17 [NL] task item_45 item_72 value host value link item_62 item_77 item_62 node item_81 host job item_58 item_97 job
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Python Code for a Large Network Analysis' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 40 [NL] host value item_18 item_56 status status item_98 item_47 item_98 value item_53 task host task job node link item_51 link task item_73 link status host node item_15 job item_47 item_17 task
+Generated Input 1: 25 [NL] value item_44 item_17 item_64 item_73 job job task task item_81 value value status item_33 task host port item_50 port item_92 node link port task item_41
+Generated Input 2: 42 [NL] task status item_81 node node node status item_67 port link job link link status job status port job host item_64 item_20 item_50 status value port port item_49 task link item_64
+Generated Input 3: 42 [NL] item_65 task link job value item_73 value item_98 item_57 node item_74 status value status task value value task node item_80 job node value item_22 node status item_28 item_56 status item_54
+Generated Input 4: 37 [NL] item_43 node item_77 link item_77 node item_95 job node port link job node port item_29 item_31 item_33 port status job job status item_27 node value item_89 item_54 link value item_66
+Generated Input 5: 7 [NL] value link host item_80 job link job
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Java Developer: Counting Occurrences in Text' ---
+Schema: [{'type': 'string', 'name': 'text', 'min': 1, 'max': 500}]
+Generated Input 0: sync
+Generated Input 1: ID-786
+Generated Input 2: backend
+Generated Input 3: algorithm
+Generated Input 4: TOKEN-758
+Generated Input 5: client
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Java Developer: Optimizing Course Scheduling' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'string'}}]
+Generated Input 0: 4 [NL] node task item_64 port
+Generated Input 1: 15 [NL] item_97 status item_82 job item_53 node task job status item_61 node status item_53 port item_54
+Generated Input 2: 14 [NL] item_20 node item_62 item_33 item_14 task item_24 status item_36 value host status host node
+Generated Input 3: 25 [NL] node host value job node item_56 link host link item_17 item_89 value link node item_50 job status port job item_96 task job link item_51 host
+Generated Input 4: 27 [NL] status job item_42 link status item_97 port link node item_43 value host status link task task node node link status item_61 value value item_74 host value port
+Generated Input 5: 6 [NL] item_80 item_66 port job item_12 node
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Java-Based Microservices Architecture' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'object', 'properties': {'service_id': {'type': 'int'}, 'latency': {'type': 'int'}, 'dependencies': {'type': 'array', 'item': {'type': 'int'}}}}}]
+Generated Input 0: 44
+Generated Input 1: 9
+Generated Input 2: 10
+Generated Input 3: 19
+Generated Input 4: 19
+Generated Input 5: 2
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Optimizing Database Indexes' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 100}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}]
+Generated Input 0: 28 [NL] 39 14 9 82 16 74 87 70 92 98 77 96 52 91 31 65 98 32 97 70 61 49 15 2 86 64 73 15
+Generated Input 1: 43 [NL] 81 92 90 71 53 74 36 88 44 78 25 78 33 57 62 21 40 50 68 94 94 64 45 22 67 18 74 24 63 45
+Generated Input 2: 12 [NL] 66 30 8 82 11 57 76 60 20 69 13 89
+Generated Input 3: 95 [NL] 37 58 82 42 61 12 34 17 16 88 54 5 4 42 99 8 14 81 100 83 100 4 51 47 59 29 89 34 50 27
+Generated Input 4: 31 [NL] 59 65 12 29 52 87 100 57 5 35 90 6 24 40 7 15 77 61 15 74 31 94 92 100 99 52 69 63 97 95
+Generated Input 5: 86 [NL] 35 76 64 59 24 68 85 90 10 90 49 69 86 82 68 90 74 3 27 54 70 70 53 91 21 21 65 8 14 69
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Java Developer: Optimal Course Enrollment' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int', 'name': 'duration'}}]
+Generated Input 0: 26 [NL] 92 99 80 35 48 76 6 96 57 70 70 52 4 97 43 51 86 88 15 78 98 29 38 93 74 7
+Generated Input 1: 19 [NL] 92 39 7 34 51 64 80 13 18 55 23 70 49 30 1 7 37 87 37
+Generated Input 2: 29 [NL] 19 15 9 67 74 52 58 27 79 22 39 86 37 93 92 8 75 28 9 15 24 23 40 64 18 25 70 1 79
+Generated Input 3: 46 [NL] 91 53 37 77 42 64 62 53 96 85 14 52 24 94 53 100 67 5 23 49 49 72 56 48 76 66 21 66 53 66
+Generated Input 4: 26 [NL] 22 66 7 39 92 85 77 51 16 40 2 90 30 36 8 62 12 87 86 90 35 5 94 41 35 84
+Generated Input 5: 32 [NL] 13 5 45 26 60 13 72 68 5 62 32 40 76 68 5 4 6 88 54 56 77 92 32 32 28 37 56 100 30 8
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Database Query Optimizer' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int'}}, {'type': 'str', 'name': 'query', 'min': 1, 'max': 100}]
+Generated Input 0: 12 [NL] 69 26 18 48 82 32 6 12 33 55 6 62
+Generated Input 1: 24 [NL] 69 68 88 11 3 80 45 95 6 53 60 46 43 40 81 21 7 86 48 11 67 24 25 14
+Generated Input 2: 6 [NL] 39 76 20 34 86 60
+Generated Input 3: 31 [NL] 28 29 49 48 24 58 48 50 6 45 53 25 41 78 37 17 94 52 24 17 77 24 10 19 57 79 1 13 26 3
+Generated Input 4: 5 [NL] 64 56 50 73 37
+Generated Input 5: 12 [NL] 51 58 15 83 29 70 84 72 96 97 9 38
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Java Developer: Optimizing Server Allocation' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'int', 'name': 'M', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int', 'name': 'server_x', 'min': -1000000, 'max': 1000000}}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int', 'name': 'server_y', 'min': -1000000, 'max': 1000000}}, {'type': 'array', 'count_ref': 'M', 'item': {'type': 'int', 'name': 'center_x', 'min': -1000000, 'max': 1000000}}, {'type': 'array', 'count_ref': 'M', 'item': {'type': 'int', 'name': 'center_y', 'min': -1000000, 'max': 1000000}}]
+Generated Input 0: 35 [NL] 13 [NL] -467632 -634957 -933486 -298931 -479977 -104931 -884669 -321065 -80810 -386942 -968111 -913190 -804626 -445151 -771226 -819665 -119109 -721671 -540780 -319676 -347722 -964791 -113558 -90852 -824605 -765772 -538399 -391919 -794147 -940883 [NL] -888009 -216789 498 -793716 -189050 -724964 -351866
+Generated Input 1: 49 [NL] 42 [NL] -878707 -814567 -827920 -451469 -667573 -656349 -620797 -693065 -707224 -807049 -586720 -337510 -904510 -485503 -684470 -63433 -962187 -611411 -570079 -654126 -267573 -693046 -284767 -852935 -83989 -859584 -752453 -521016 -731171 -633658 [NL] -325851 -320082 -523627 -462721 -387171 -137263 -816592
+Generated Input 2: 37 [NL] 29 [NL] -33419 -491406 -415202 -521364 -574366 -925670 -433719 -820632 -937796 -449104 -863537 -455275 -216602 -4322 -521801 -788057 -746283 -712749 -649638 -379545 -389439 -190100 -822983 -421820 -423411 -945309 -749665 -347048 -123695 -618131 [NL] -640504 -592541 -502938 -31118 -710070 -655020 -787753
+Generated Input 3: 42 [NL] 6 [NL] -895669 -725264 -812335 -994117 -757471 -872278 -934081 -550710 -978917 -516390 -562601 -807747 -255099 -390528 -696938 -946959 -502604 -763629 -492290 -859457 -81135 -201026 -418682 -691266 -381643 -98867 -482236 -724708 -495018 -954920 [NL] -51840 -521563 -204578 -635159 -596924 -955926 -953202
+Generated Input 4: 24 [NL] 37 [NL] -665899 -327590 -669909 -278668 -925296 -253091 -276534 -260684 -193125 -906734 -520309 -760970 -343017 -333928 -228159 -252220 -749398 -329692 -298109 -335053 -915723 -60724 -166289 -437675 [NL] -970452 -613709 -260954 -140136 -945508 -756713 -35256 -473782 -743342 -134248 -85224 -451599 -731950
+Generated Input 5: 43 [NL] 48 [NL] -323612 -754187 -657302 -996395 -734802 -514456 -810514 -468328 -923429 -637128 -31360 -82304 -810132 -961456 -72968 -570150 -544794 -927714 -320720 -834042 -8714 -312355 -234846 -425701 -489080 -519554 -982000 -793779 -81227 -848211 [NL] -611904 -366522 -747197 -729032 -912173 -793103 -392968
+SYNC SUCCESS for input 0
+
+--- DEBUG: Generating cases for 'Load Balancer: Optimizing Server Allocation' ---
+Schema: [{'type': 'int', 'name': 'N', 'min': 1, 'max': 50}, {'type': 'array', 'count_ref': 'N', 'item': {'type': 'int', 'min': 1, 'max': 1000}}]
+Generated Input 0: 44 [NL] 2 988 786 853 147 783 985 70 892 758 723 422 10 701 218 39 404 393 833 928 752 322 189 130 802 706 883 153 28 58
+Generated Input 1: 22 [NL] 978 88 566 372 79 779 8 203 463 106 319 119 937 869 280 551 623 336 264 895 762 765
+Generated Input 2: 22 [NL] 990 264 628 856 931 914 881 346 746 146 607 761 292 121 51 291 678 296 872 30 107 818
+Generated Input 3: 1 [NL] 767
+Generated Input 4: 47 [NL] 877 371 930 454 393 997 678 703 96 663 253 491 138 369 374 110 61 691 694 990 98 810 475 940 444 963 416 437 731 35
+Generated Input 5: 29 [NL] 262 68 689 938 559 409 82 174 547 656 309 946 386 898 9 24 500 684 902 726 858 697 291 385 700 735 261 187 833
+SYNC SUCCESS for input 0
