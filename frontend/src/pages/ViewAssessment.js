@@ -196,9 +196,16 @@ export default function ViewAssessment() {
             )}
           </div>
 
-          <footer className="form-actions" style={{ justifyContent: 'center' }}>
+          <footer className="form-actions" style={{ justifyContent: 'center', gap: '15px' }}>
             <button className="btn btn-secondary" onClick={() => navigate('/assessments')}>
               Close View
+            </button>
+            <button 
+              className="btn btn-primary" 
+              onClick={() => navigate(`/invite-candidates/${id}`)}
+              style={{ backgroundColor: '#2563eb' }}
+            >
+              Invite
             </button>
           </footer>
         </div>
