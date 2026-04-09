@@ -467,16 +467,15 @@ export default function CodingQuestionForm() {
           questionPayload = detail.data;
         }
         if (!redirectTo) {
-          navigate(`/coding/questions/${targetId}/edit`);
+          navigate(`/coding/questions/${targetId}/edit`, { state: navAssessment });
           return;
         }
       }
 
-      if (redirectTo) {
+      if (redirectTo === '/review-assessment') {
+        navigate('/review-assessment', { state: { ...(navAssessment || {}), refreshManual: true, codingQuestions: questionPayload ? [questionPayload] : [] } });
+      } else if (redirectTo) {
         navigate(redirectTo, { state: { codingQuestions: questionPayload ? [questionPayload] : [] } });
-      } else if (navAssessment) {
-        // Return to Review Assessment with refresh flag if we came from there
-        navigate('/review-assessment', { state: { ...navAssessment, refreshManual: true } });
       } else if (editing) {
         await load();
       }
@@ -541,8 +540,8 @@ export default function CodingQuestionForm() {
           </div>
           <div className="coding-header-actions">
             <button type="button" className="btn btn-secondary" onClick={() => {
-              if (navAssessment) {
-                navigate('/review-assessment', { state: { ...navAssessment, refreshManual: true } });
+              if (location.pathname === '/coding-challenge-question' || navAssessment) {
+                navigate('/manual-questions', { state: navAssessment });
               } else {
                 navigate('/coding');
               }
@@ -552,6 +551,11 @@ export default function CodingQuestionForm() {
             {editing && (
               <button type="button" className="btn btn-secondary" onClick={() => navigate(`/coding/questions/${id}/attempt`)}>
                 Open Attempt Page
+              </button>
+            )}
+            {navAssessment && (
+              <button type="button" className="btn btn-primary" onClick={() => save({ redirectTo: '/review-assessment' })} disabled={saving || loading}>
+                {saving ? 'Saving…' : 'Save and add to review'}
               </button>
             )}
             <button type="button" className="btn btn-primary" onClick={() => save()} disabled={saving || loading}>
