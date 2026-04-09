@@ -203,9 +203,25 @@ def verify_otp_view(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            if email_otp.otp != otp:
+            # Check for brute-force attempts (Max 5)
+            if hasattr(email_otp, 'attempts') and email_otp.attempts >= 5:
+                # Mark as invalid/verified so it can no longer be used
+                email_otp.is_verified = True
+                email_otp.save()
                 return Response(
-                    {'error': 'Invalid OTP. Please try again.'},
+                    {'error': 'Too many failed attempts. This OTP is now locked. Please request a new one.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if email_otp.otp != otp:
+                # Increment attempts counter
+                if hasattr(email_otp, 'attempts'):
+                    email_otp.attempts += 1
+                    email_otp.save()
+                
+                remaining = 5 - email_otp.attempts if hasattr(email_otp, 'attempts') else 'few'
+                return Response(
+                    {'error': f'Invalid OTP. {remaining} attempts remaining.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
@@ -704,10 +720,26 @@ def verify_login_otp_view(request):
                     {'error': 'OTP has expired. Please login again.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
+
+            # Check for brute-force attempts (Max 5)
+            if hasattr(email_otp, 'attempts') and email_otp.attempts >= 5:
+                # Mark as invalid/verified so it can no longer be used
+                email_otp.is_verified = True
+                email_otp.save()
+                return Response(
+                    {'error': 'Too many failed attempts. This login session is locked. Please login again to request a new OTP.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             
             if email_otp.otp != otp:
+                # Increment attempts counter
+                if hasattr(email_otp, 'attempts'):
+                    email_otp.attempts += 1
+                    email_otp.save()
+                
+                remaining = 5 - email_otp.attempts if hasattr(email_otp, 'attempts') else 'few'
                 return Response(
-                    {'error': 'Invalid OTP. Please try again.'},
+                    {'error': f'Invalid OTP. {remaining} attempts remaining.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
             

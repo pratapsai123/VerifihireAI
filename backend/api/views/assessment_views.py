@@ -80,11 +80,15 @@ def get_questions_view(request):
                 'option_b': q.option_b,
                 'option_c': q.option_c,
                 'option_d': q.option_d,
-                'correct_answer': q.correct_answer,
-                'correct_answers': q.correct_answers if q.correct_answers else [],
                 'time_limit': q.time_limit,
                 'created_at': q.created_at.isoformat() if q.created_at else None,
             }
+
+            # SECURITY: Only return answers if the user is authenticated (Recruiters/Admins)
+            if hasattr(request, 'user') and request.user.is_authenticated:
+                question_data['correct_answer'] = q.correct_answer
+                question_data['correct_answers'] = q.correct_answers if q.correct_answers else []
+            
             questions_list.append(question_data)
         
         return Response(

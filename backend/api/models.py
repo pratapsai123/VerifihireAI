@@ -16,6 +16,7 @@ class EmailOTP(models.Model):
     otp = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)
+    attempts = models.IntegerField(default=0, help_text="Number of failed verification attempts")
     
     class Meta:
         verbose_name = "Email OTP"
