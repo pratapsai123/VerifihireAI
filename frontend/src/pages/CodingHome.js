@@ -15,6 +15,7 @@ export default function CodingHome() {
     const [diffFilter, setDiffFilter] = useState('');
     const [langDropdownOpen, setLangDropdownOpen] = useState(false);
     const langDropdownRef = useRef(null);
+    const [inactiveWarning, setInactiveWarning] = useState(null);
 
     const load = async () => {
         setLoading(true);
@@ -137,7 +138,14 @@ export default function CodingHome() {
                                 type="button"
                                 className="btn btn-primary"
                                 disabled={selectedItems.length === 0}
-                                onClick={() => navigate('/coding/review', { state: { codingQuestions: selectedItems } })}
+                                onClick={() => {
+                                    const inactiveQuestions = selectedItems.filter((q) => q.is_active === false);
+                                    if (inactiveQuestions.length > 0) {
+                                        setInactiveWarning(inactiveQuestions);
+                                        return;
+                                    }
+                                    navigate('/coding/review', { state: { codingQuestions: selectedItems } });
+                                }}
                             >
                                 Review Selected
                             </button>
@@ -259,9 +267,28 @@ export default function CodingHome() {
                     </div>
                 )}
             </div>
+
+            {inactiveWarning && (
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div className="coding-card" style={{ maxWidth: '500px', width: '90%', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
+                        <div className="coding-section-title" style={{ color: '#dc2626', marginBottom: '8px' }}>Warning: Inactive Questions Detected</div>
+                        <div className="coding-muted" style={{ marginBottom: '16px' }}>
+                            The following selected questions are inactive. You cannot review inactive questions.
+                        </div>
+                        <ul style={{ marginBottom: '24px', paddingLeft: '20px', color: '#374151', overflowY: 'auto', flex: 1 }}>
+                            {inactiveWarning.map(q => <li key={q.id} style={{ marginBottom: '4px' }}>{q.title}</li>)}
+                        </ul>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: 'auto' }}>
+                            <button className="btn btn-secondary" onClick={() => setInactiveWarning(null)}>Cancel</button>
+                            <button className="btn btn-primary" onClick={() => {
+                                const activeItems = selectedItems.filter(q => q.is_active !== false);
+                                setInactiveWarning(null);
+                                navigate('/coding/review', { state: { codingQuestions: activeItems } });
+                            }}>Proceed Without Them</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
-
-
-
