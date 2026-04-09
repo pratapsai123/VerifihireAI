@@ -165,11 +165,7 @@ export default function InterviewInvite() {
   // Fetch Profile and Existing Draft Candidates
   const fetchDraftsAndProfile = async () => {
     try {
-      const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-      const email = storedUser?.email || '';
-      const profileUrl = email
-        ? `${API_BASE_URL}/profile/?email=${encodeURIComponent(email)}`
-        : `${API_BASE_URL}/profile/`;
+      const profileUrl = `${API_BASE_URL}/profile/`;
       const [profileRes, draftsRes] = await Promise.all([
         axios.get(profileUrl),
         axios.get(`${API_BASE_URL}/interviews/draft-invites/`)

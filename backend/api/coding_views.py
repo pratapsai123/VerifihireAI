@@ -8,7 +8,7 @@ from django.db import transaction
 from django.utils import timezone
 from requests.exceptions import RequestException
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -428,7 +428,7 @@ def _get_email_from_request(request) -> str | None:
 
 
 @api_view(["GET", "POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def coding_questions_view(request):
     if request.method == "GET":
         try:
@@ -582,16 +582,21 @@ def _get_coding_question_or_error(request, question_id: int):
             if requested_org and q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
                 return None, Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
     else:
-        # Unauthenticated: fallback to strict org match if requested
+        # Unauthenticated or No Profile context:
+        # If the view is IsAuthenticated, this branch generally shouldn't be reached by external users.
+        # However, for safety, we MUST have a requested_org to allow access to a question.
         requested_org = _get_org_from_request(request)
-        if requested_org and q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
+        if not requested_org:
+            return None, Response({"error": "Unauthorized: No organization context provided"}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        if q.organization_name_snapshot and q.organization_name_snapshot.lower() != requested_org.lower():
             return None, Response({"error": "Coding question not found"}, status=status.HTTP_404_NOT_FOUND)
             
     return q, None
 
 
 @api_view(["GET", "PUT", "PATCH", "DELETE"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def coding_question_detail_view(request, question_id: int):
     q, error_response = _get_coding_question_or_error(request, question_id)
     if error_response:
@@ -671,7 +676,7 @@ def coding_question_detail_view(request, question_id: int):
 
 
 @api_view(["GET", "POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def coding_testcases_view(request, question_id: int):
     q, error_response = _get_coding_question_or_error(request, question_id)
     if error_response:
@@ -705,7 +710,7 @@ def coding_testcases_view(request, question_id: int):
 
 
 @api_view(["DELETE"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def coding_testcase_delete_view(request, testcase_id: int):
     tc = CodingTestCase.objects.filter(id=testcase_id).first()
     if not tc:
@@ -720,7 +725,7 @@ def coding_testcase_delete_view(request, testcase_id: int):
 
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def coding_invites_view(request):
     """
     Create a coding invite with one or more questions and an allowed language list.
