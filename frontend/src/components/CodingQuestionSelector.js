@@ -58,6 +58,9 @@ export default function CodingQuestionSelector({ onClose, onAdd, alreadySelected
             // Exclude already selected in the parent page (optional, but good UX)
             if (alreadySelectedIds.includes(q.id)) return false;
 
+            // Exclude inactive questions
+            if (q.is_active === false || q.status === 'inactive') return false;
+
             // Search Filter
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();

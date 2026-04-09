@@ -179,7 +179,7 @@ function ReviewPage() {
         const filteredQ = {};
         for (const [t, qs] of Object.entries(state.questions)) {
           if (Array.isArray(qs)) {
-            filteredQ[t] = qs.filter(q => !removedIds.has(q.id));
+            filteredQ[t] = qs.filter(q => !removedIds.has(q.id) && q.is_active !== false && q.status !== 'inactive');
           } else {
             filteredQ[t] = qs;
           }
@@ -215,8 +215,8 @@ function ReviewPage() {
               let manualList = manualResp.data?.results || [];
               console.log(`ReviewPage fetchLatestManual: Fetched ${manualList.length} questions before filtering.`);
 
-              // Filter out removed questions
-              manualList = manualList.filter(q => !removedSet.has(q.id));
+              // Filter out removed and inactive questions
+              manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
               console.log(`ReviewPage fetchLatestManual: ${manualList.length} questions after filtering.`);
 
               if (manualList.length > 0) {
@@ -359,9 +359,9 @@ function ReviewPage() {
             });
             let manualList = manualResp.data?.results || [];
 
-            // Filter out removed questions
+            // Filter out removed and inactive questions
             const removedSet = new Set(data.removedQuestionIds || []);
-            manualList = manualList.filter(q => !removedSet.has(q.id));
+            manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
 
             if (manualList.length > 0) {
               manualList.sort((a, b) => {
@@ -472,7 +472,7 @@ function ReviewPage() {
             console.log(`Skill: ${skill}, Required: ${requiredCount}, Found: ${skillQuestions.length}`);
 
             const removedSet = new Set(data.removedQuestionIds || []);
-            skillQuestions = skillQuestions.filter(q => !removedSet.has(q.id));
+            skillQuestions = skillQuestions.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
 
             // Limit to required count
             if (requiredCount > 0) {
@@ -494,9 +494,9 @@ function ReviewPage() {
               });
               let manualList = manualResp.data?.results || [];
 
-              // Filter out removed questions
+              // Filter out removed and inactive questions
               const removedSet = new Set(data.removedQuestionIds || []);
-              manualList = manualList.filter(q => !removedSet.has(q.id));
+              manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
 
               if (manualList.length > 0) {
                 // Sort so newest appears last
