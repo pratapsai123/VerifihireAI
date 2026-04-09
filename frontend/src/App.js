@@ -59,6 +59,12 @@ axios.interceptors.request.use(
       // List of public API paths that should not have the Authorization header
       // This prevents 401 errors if an expired token exists in localStorage
       const publicApiPatterns = [
+        /^\/api\/login\//,
+        /^\/api\/verify-login-otp\//,
+        /^\/api\/register\//,
+        /^\/api\/send-otp\//,
+        /^\/api\/verify-otp\//,
+        /^\/api\/reset-password\//,
         /^\/api\/invitations\/public\//,
         /^\/api\/candidate-details\//,
         /^\/api\/ai\/public\//,
