@@ -50,14 +50,23 @@ class Candidate(models.Model):
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # Ownership Tracking for RBAC
+    # Ownership Tracking for RBAC (current owner)
     user_profile = models.ForeignKey(
         'api.UserProfile',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='ai_candidates',
-        help_text="The user who created/owns this candidate record"
+        help_text="The user who currently owns this candidate record",
+    )
+    # Immutable audit field: original creator
+    created_by = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_ai_candidates',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
     )
 
     is_deleted = models.BooleanField(default=False)

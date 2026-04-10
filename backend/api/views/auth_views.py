@@ -600,6 +600,13 @@ def login_view(request):
                     print(f"Migration error: {migrate_err}")
                     pass
 
+            # Check if user has been deactivated
+            if not getattr(user_profile, 'is_active', True):
+                return Response(
+                    {'error': 'Your account has been deactivated. Please contact your company administrator.'},
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
             # Check if user and company are approved
             if not user_profile.is_approved:
                 return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)

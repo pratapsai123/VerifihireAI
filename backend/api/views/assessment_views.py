@@ -1104,6 +1104,7 @@ def create_custom_assessment_view(request):
         custom_assessment = _db_call_with_retry(
             lambda: CustomAssessment.objects.create(
                 user_profile=user_profile,
+                created_by=user_profile,
                 first_name=user_data.get('first_name') or None,
                 last_name=user_data.get('last_name') or None,
                 email=email,
@@ -1572,6 +1573,7 @@ def create_assessment_view(request):
         # Create Assessment
         assessment = Assessment.objects.create(
             user_profile=assessment_owner,
+            created_by=assessment_owner,
             custom_assessment=custom_assessment,
             role=explicit_role or (custom_assessment.role if custom_assessment else None),
             experience_level=explicit_experience_level or (custom_assessment.experience_level if custom_assessment else None),

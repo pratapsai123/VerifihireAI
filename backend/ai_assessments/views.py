@@ -360,7 +360,8 @@ class GenerateAssessmentView(APIView):
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
                 company=company,
-                user_profile=user_profile
+                user_profile=user_profile,
+                created_by=user_profile,
             )
 
             # Pool multipliers based on number of applicants (min 2x for randomization)

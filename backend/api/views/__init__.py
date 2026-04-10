@@ -102,3 +102,11 @@ from .workflow_views import (
 from .dashboard_views import (
     dashboard_summary_view,
 )
+
+from .hr_offboarding_views import (
+    transfer_preview_view,
+    transfer_ownership_view,
+    deactivate_user_view,
+    reactivate_user_view,
+    transfer_logs_view,
+)

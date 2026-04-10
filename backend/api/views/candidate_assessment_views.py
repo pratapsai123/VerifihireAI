@@ -90,6 +90,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
             invitation = CandidateInvitation.objects.create(
                 assessment=assessment,
                 user_profile=req_user_profile,
+                created_by=req_user_profile,
                 name=name,
                 email=email,
                 pan_number=pan_number,

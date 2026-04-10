@@ -38,6 +38,13 @@ urlpatterns = [
     path('interviews/availability/', views.get_interviewer_availability_view, name='interviewer_availability_list'),
     path('interviews/availability/manage/', views.manage_interviewer_availability_view, name='interviewer_availability_manage'),
 
+    # HR Offboarding: transfer / deactivate / reactivate
+    path('users/<int:user_id>/transfer-preview/', views.transfer_preview_view, name='transfer_preview'),
+    path('users/<int:user_id>/transfer-ownership/', views.transfer_ownership_view, name='transfer_ownership'),
+    path('users/<int:user_id>/deactivate/', views.deactivate_user_view, name='deactivate_user'),
+    path('users/<int:user_id>/reactivate/', views.reactivate_user_view, name='reactivate_user'),
+    path('users/transfer-logs/', views.transfer_logs_view, name='transfer_logs'),
+
     # Internal user invitations (HR Manager / HR)
     path('users/invite/', views.invite_user_view, name='invite_user'),
     path('users/invite/<uuid:token>/', views.get_invite_view, name='get_invite'),
