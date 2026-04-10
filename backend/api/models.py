@@ -124,7 +124,23 @@ class UserProfile(models.Model):
     
     # Approval tracking
     is_approved = models.BooleanField(default=False, help_text="Specific user approval from platform admin")
-    
+
+    # Offboarding: deactivated users cannot login but data remains for audit.
+    is_active = models.BooleanField(
+        default=True,
+        help_text="False = deactivated/offboarded. Cannot login but data preserved for audit.",
+    )
+    deactivated_at = models.DateTimeField(blank=True, null=True)
+    deactivated_by = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='deactivated_users',
+        help_text="Admin who deactivated this account",
+    )
+    deactivation_reason = models.TextField(blank=True, null=True)
+
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -136,6 +152,59 @@ class UserProfile(models.Model):
     def __str__(self):
         full_name = f"{self.first_name} {self.last_name}".strip() if self.last_name else self.first_name
         return f"{full_name} ({self.email}) - {self.organization_name}"
+
+
+class OwnershipTransferLog(models.Model):
+    """
+    Immutable audit log for ownership-transfer operations.
+    """
+    transferred_by = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_initiated',
+        help_text="Admin who performed this transfer",
+    )
+    transferred_from = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_from',
+        help_text="Leaving user whose ownership was reassigned",
+    )
+    transferred_to = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_to',
+        help_text="Replacement user who received ownership",
+    )
+    transferred_at = models.DateTimeField(auto_now_add=True)
+    transfer_reason = models.TextField(blank=True, null=True)
+    assessments_transferred = models.IntegerField(default=0)
+    custom_assessments_transferred = models.IntegerField(default=0)
+    candidate_invitations_transferred = models.IntegerField(default=0)
+    ai_assessments_transferred = models.IntegerField(default=0)
+    ai_candidates_transferred = models.IntegerField(default=0)
+    subordinates_reassigned = models.IntegerField(default=0)
+    from_name = models.CharField(max_length=255, blank=True, null=True)
+    from_email = models.EmailField(blank=True, null=True)
+    to_name = models.CharField(max_length=255, blank=True, null=True)
+    to_email = models.EmailField(blank=True, null=True)
+    by_name = models.CharField(max_length=255, blank=True, null=True)
+    by_email = models.EmailField(blank=True, null=True)
+    also_deactivated = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Ownership Transfer Log"
+        verbose_name_plural = "Ownership Transfer Logs"
+        ordering = ['-transferred_at']
+
+    def __str__(self):
+        return f"Transfer {self.from_email} -> {self.to_email} by {self.by_email}"
 
 
 class Company(models.Model):
@@ -418,6 +487,14 @@ class CustomAssessment(models.Model):
         blank=True,
         related_name='custom_assessments'
     )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_custom_assessments',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
+    )
 
     # Basic user / company info snapshot at the time of creation
     first_name = models.CharField(max_length=100, blank=True, null=True)
@@ -493,6 +570,14 @@ class Assessment(models.Model):
         null=True,
         blank=True,
         related_name='assessments',
+    )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_assessments',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
     )
     custom_assessment = models.ForeignKey(
         CustomAssessment,
@@ -676,7 +761,15 @@ class CandidateInvitation(models.Model):
         related_name='invited_candidates',
         null=True,
         blank=True,
-        help_text="The user who created this invitation"
+        help_text="The user who currently owns this invitation"
+    )
+    created_by = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_invitations',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
     )
 
     name = models.CharField(max_length=255)

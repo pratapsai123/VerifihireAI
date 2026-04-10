@@ -529,6 +529,9 @@ def team_members_view(request):
                 'organization_name': u.organization_name,
                 'company': (u.company.name if u.company else None),
                 'registration_timestamp': u.registration_timestamp.isoformat() if u.registration_timestamp else None,
+                'is_active': getattr(u, 'is_active', True),
+                'deactivated_at': u.deactivated_at.isoformat() if getattr(u, 'deactivated_at', None) else None,
+                'deactivation_reason': getattr(u, 'deactivation_reason', None),
             })
 
         invitations = []

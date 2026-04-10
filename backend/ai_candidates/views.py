@@ -174,7 +174,8 @@ class BulkInviteView(APIView):
                     experience_level=experience_level,
                     status='Invited',
                     company=company,
-                    user_profile=user_profile
+                    user_profile=user_profile,
+                    created_by=user_profile,
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
@@ -393,6 +394,7 @@ class ResumeMatchView(APIView):
                             job_description=job_description,
                             company=company,
                             user_profile=user_profile,
+                            created_by=user_profile,
                             batch_id=batch_id
                         )
                     results.append({"id": current_candidate.id, "name": current_candidate.full_name, "status": "Queued"})
