@@ -88,6 +88,8 @@ urlpatterns = [
     path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
     path('superadmin/users/', views.superadmin_users_view, name='superadmin_users'),
     path('superadmin/users/<int:user_id>/approve/', views.superadmin_approve_user_view, name='superadmin_approve_user'),
+    path('superadmin/restricted-domains/', views.superadmin_restricted_domains_view, name='superadmin_restricted_domains'),
+    path('superadmin/restricted-domains/<int:domain_id>/', views.superadmin_delete_restricted_domain_view, name='superadmin_delete_restricted_domain'),
 
     # Workflow / Settings
     path('settings/deletion/', views.company_deletion_settings_view, name='company_deletion_settings'),

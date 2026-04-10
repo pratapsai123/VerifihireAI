@@ -87,6 +87,8 @@ from .superadmin_views import (
     superadmin_reject_company_view,
     superadmin_users_view,
     superadmin_approve_user_view,
+    superadmin_restricted_domains_view,
+    superadmin_delete_restricted_domain_view,
 )
 
 from .workflow_views import (

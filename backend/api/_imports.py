@@ -50,6 +50,7 @@ from .models import (
     DeletionRequest,
     InterviewSlot,
     InterviewerAvailability,
+    RestrictedDomain,
 )
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
@@ -115,6 +116,16 @@ def _free_email_domains() -> set:
         'student.com',
         'lycos.com', 'excite.com'
     }
+    
+    # Try fetching from database first
+    try:
+        db_domains = set(RestrictedDomain.objects.values_list('domain', flat=True))
+        if db_domains:
+            return {d.lower() for d in db_domains}
+    except Exception:
+        # Fallback to defaults if table doesn't exist yet or other DB error
+        pass
+
     configured = getattr(settings, 'FREE_EMAIL_DOMAINS', None)
     if not configured:
         return default

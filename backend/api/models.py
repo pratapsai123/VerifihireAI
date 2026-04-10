@@ -211,6 +211,31 @@ class ApplicationAdmin(models.Model):
         return f"ApplicationAdmin({self.user.email or self.user.username})"
 
 
+class RestrictedDomain(models.Model):
+    """
+    Model to store email domains that are restricted for registration.
+    Typically used to block generic/free email providers (gmail, yahoo, etc.)
+    for company-level accounts.
+    """
+    domain = models.CharField(max_length=255, unique=True, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_restricted_domains'
+    )
+
+    class Meta:
+        verbose_name = "Restricted Domain"
+        verbose_name_plural = "Restricted Domains"
+        ordering = ['domain']
+
+    def __str__(self):
+        return self.domain
+
+
 class JobRole(models.Model):
     """
     Stores reusable job roles with titles and descriptions.

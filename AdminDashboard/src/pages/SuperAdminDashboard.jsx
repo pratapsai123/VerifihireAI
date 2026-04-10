@@ -8,6 +8,7 @@ const STATUS_TABS = [
     { key: 'all_companies', label: 'Organization Index', icon: '📋' },
     { key: 'pending_users', label: 'User Requests', icon: '👥' },
     { key: 'all_users', label: 'User Index', icon: '👤' },
+    { key: 'restricted_domains', label: 'Restricted Domains', icon: '🚫' },
 ];
 
 const STATUS_COLORS = {
@@ -157,25 +158,74 @@ function UserRequestCard({ user, onApprove, actionLoading }) {
     );
 }
 
+function RestrictedDomainCard({ domain, onDelete, actionLoading }) {
+    const isLoading = actionLoading === `domain-${domain.id}`;
+    return (
+        <div style={{
+            background: '#fff', borderRadius: 20, padding: '20px',
+            display: 'flex', alignItems: 'center', gap: '20px',
+            boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
+            animation: 'slideIn 0.4s ease-out'
+        }}>
+            <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: 'linear-gradient(135deg, #EE5D50, #FFB547)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', fontWeight: 800, fontSize: '1.2rem'
+            }}>🚫</div>
+
+            <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#2B3674' }}>{domain.domain}</span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '4px 20px' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>📅 Added: {new Date(domain.created_at).toLocaleDateString()}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>👤 By: {domain.created_by || 'System'}</div>
+                </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: 10 }}>
+                <button
+                    disabled={isLoading}
+                    onClick={() => {
+                        if (window.confirm(`Are you sure you want to remove ${domain.domain} from restricted list?`)) {
+                            onDelete(domain.id);
+                        }
+                    }}
+                    style={{
+                        padding: '10px 20px', borderRadius: 12, border: '1px solid #EE5D50',
+                        background: 'transparent', color: '#EE5D50', fontWeight: 700,
+                        cursor: isLoading ? 'wait' : 'pointer', fontSize: '0.8rem'
+                    }}
+                >Remove</button>
+            </div>
+        </div>
+    );
+}
+
 function SuperAdminDashboard() {
     const location = useLocation();
     const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'pending_companies');
     const [companies, setCompanies] = useState([]);
     const [users, setUsers] = useState([]);
+    const [restrictedDomains, setRestrictedDomains] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
     const [toast, setToast] = useState(null);
     const [search, setSearch] = useState('');
+    const [newDomain, setNewDomain] = useState('');
 
     const fetchData = useCallback(async (silent = false) => {
         if (!silent) setLoading(true);
         try {
-            const [compRes, userRes] = await Promise.all([
+            const [compRes, userRes, domainRes] = await Promise.all([
                 axios.get(`${API_BASE_URL}/superadmin/companies/`),
-                axios.get(`${API_BASE_URL}/superadmin/users/`)
+                axios.get(`${API_BASE_URL}/superadmin/users/`),
+                axios.get(`${API_BASE_URL}/superadmin/restricted-domains/`)
             ]);
             setCompanies(compRes.data.companies || []);
             setUsers(userRes.data.users || []);
+            setRestrictedDomains(domainRes.data.domains || []);
         } catch (err) {
             setToast({ type: 'error', message: 'Failed to sync data.' });
         } finally {
@@ -228,10 +278,41 @@ function SuperAdminDashboard() {
         } finally { setActionLoading(null); }
     };
 
+    const handleAddDomain = async (e) => {
+        e.preventDefault();
+        if (!newDomain.trim()) return;
+        setActionLoading('add-domain');
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/restricted-domains/`, { domain: newDomain });
+            setToast({ type: 'success', message: 'Domain added successfully.' });
+            setNewDomain('');
+            fetchData(true);
+        } catch (err) {
+            setToast({ type: 'error', message: err.response?.data?.error || 'Failed to add domain.' });
+        } finally { setActionLoading(null); }
+    };
+
+    const handleDeleteDomain = async (id) => {
+        setActionLoading(`domain-${id}`);
+        try {
+            await axios.delete(`${API_BASE_URL}/superadmin/restricted-domains/${id}/`);
+            setToast({ type: 'success', message: 'Domain removed.' });
+            fetchData(true);
+        } catch (err) {
+            setToast({ type: 'error', message: 'Failed to remove domain.' });
+        } finally { setActionLoading(null); }
+    };
+
     const isCompanyTab = activeTab.includes('companies');
-    const displayItems = isCompanyTab ? companies : users;
+    const isUserTab = activeTab.includes('users');
+    const isDomainTab = activeTab === 'restricted_domains';
+    
+    const displayItems = isCompanyTab ? companies : (isUserTab ? users : restrictedDomains);
 
     const filteredItems = displayItems.filter(item => {
+        if (isDomainTab) {
+            return item.domain.toLowerCase().includes(search.toLowerCase());
+        }
         const name = isCompanyTab ? item.name : `${item.first_name} ${item.last_name}`;
         const matchesSearch = name.toLowerCase().includes(search.toLowerCase()) || 
                             (item.email && item.email.toLowerCase().includes(search.toLowerCase()));
@@ -251,7 +332,9 @@ function SuperAdminDashboard() {
             
             <div style={{ marginBottom: '2rem' }}>
                 <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#2B3674' }}>Platform Approvals</h1>
-                <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>Process and manage organization and user access requests.</p>
+                <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>
+                    {isDomainTab ? 'Manage email domains restricted from standard registration.' : 'Process and manage organization and user access requests.'}
+                </p>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#fff', padding: 10, borderRadius: 16 }}>
@@ -266,23 +349,53 @@ function SuperAdminDashboard() {
                     ))}
                 </div>
                 <input
-                    type="text" placeholder="Search requests..." value={search} onChange={e => setSearch(e.target.value)}
+                    type="text" placeholder={isDomainTab ? "Search domains..." : "Search requests..."} value={search} onChange={e => setSearch(e.target.value)}
                     style={{ padding: '12px 18px', borderRadius: 12, border: '1px solid #f0f3f8', fontSize: '0.85rem', width: 260, background: '#F4F7FE', outline: 'none' }}
                 />
             </div>
+
+            {isDomainTab && (
+                <div style={{ marginBottom: '2rem', padding: '20px', background: '#fff', borderRadius: 20, boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)' }}>
+                    <form onSubmit={handleAddDomain} style={{ display: 'flex', gap: '12px' }}>
+                        <input
+                            type="text"
+                            placeholder="Add new restricted domain (e.g. example.com)"
+                            value={newDomain}
+                            onChange={(e) => setNewDomain(e.target.value)}
+                            style={{ 
+                                flex: 1, padding: '12px 18px', borderRadius: 12, 
+                                border: '1px solid #E0E5F2', outline: 'none', background: '#F4F7FE'
+                            }}
+                        />
+                        <button
+                            type="submit"
+                            disabled={actionLoading === 'add-domain' || !newDomain.trim()}
+                            style={{
+                                padding: '12px 24px', borderRadius: 12, border: 'none',
+                                background: '#4318FF', color: '#fff', fontWeight: 700,
+                                cursor: 'pointer', opacity: (actionLoading === 'add-domain' || !newDomain.trim()) ? 0.6 : 1
+                            }}
+                        >
+                            {actionLoading === 'add-domain' ? 'Adding...' : 'Add Domain'}
+                        </button>
+                    </form>
+                </div>
+            )}
 
             {loading ? (
                 <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing Directory...</div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
                     {filteredItems.length === 0 ? (
-                        <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No {activeTab.includes('companies') ? 'companies' : 'users'} found.</p>
+                        <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No {activeTab.includes('companies') ? 'companies' : (isUserTab ? 'users' : 'restricted domains')} found.</p>
                     ) : filteredItems.map(item => (
                         isCompanyTab ? (
                             <CompanyRequestCard key={item.id} company={item} onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} />
-                        ) : (
+                        ) : (isUserTab ? (
                             <UserRequestCard key={item.id} user={item} onApprove={handleApproveUser} actionLoading={actionLoading} />
-                        )
+                        ) : (
+                            <RestrictedDomainCard key={item.id} domain={item} onDelete={handleDeleteDomain} actionLoading={actionLoading} />
+                        ))
                     ))}
                 </div>
             )}

@@ -1664,9 +1664,9 @@ def results_overview_view(request):
             ai_cand_qs = Candidate.objects.none()
             
         if start_date:
-            ai_cand_qs = ai_cand_qs.filter(submission_date__date__gte=start_date)
+            ai_cand_qs = ai_cand_qs.filter(submission_date__gte=start_date)
         if end_date:
-            ai_cand_qs = ai_cand_qs.filter(submission_date__date__lte=end_date)
+            ai_cand_qs = ai_cand_qs.filter(submission_date__lte=end_date)
 
         # Combine and limit
         active_deletions = set()

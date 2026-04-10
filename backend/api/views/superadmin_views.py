@@ -236,3 +236,67 @@ def superadmin_approve_user_view(request, user_id):
         'user_id': profile.id,
         'is_approved': True,
     }, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def superadmin_restricted_domains_view(request):
+    """
+    GET /api/superadmin/restricted-domains/ - List all restricted domains.
+    POST /api/superadmin/restricted-domains/ - Add a new restricted domain.
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    if request.method == 'GET':
+        domains = RestrictedDomain.objects.all().order_by('domain')
+        result = [{
+            'id': d.id,
+            'domain': d.domain,
+            'created_at': d.created_at.isoformat(),
+            'created_by': d.created_by.email if d.created_by else None
+        } for d in domains]
+        return Response({'domains': result, 'total': len(result)}, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        domain_name = request.data.get('domain', '').strip().lower()
+        if not domain_name:
+            return Response({'error': 'Domain name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Simple validation: must look like a domain (has a dot, no @)
+        if '@' in domain_name or '.' not in domain_name:
+            return Response({'error': 'Invalid domain format. Use example.com format.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if RestrictedDomain.objects.filter(domain=domain_name).exists():
+            return Response({'error': f'Domain {domain_name} is already restricted.'}, status=status.HTTP_409_CONFLICT)
+
+        domain_obj = RestrictedDomain.objects.create(
+            domain=domain_name,
+            created_by=auth_user
+        )
+
+        return Response({
+            'message': f'Domain {domain_name} added to restriction list.',
+            'id': domain_obj.id,
+            'domain': domain_obj.domain
+        }, status=status.HTTP_201_CREATED)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def superadmin_delete_restricted_domain_view(request, domain_id):
+    """
+    DELETE /api/superadmin/restricted-domains/<id>/ - Remove a restricted domain.
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    try:
+        domain_obj = RestrictedDomain.objects.get(pk=domain_id)
+        domain_name = domain_obj.domain
+        domain_obj.delete()
+        return Response({'message': f'Domain {domain_name} removed from restricted list.'}, status=status.HTTP_200_OK)
+    except RestrictedDomain.DoesNotExist:
+        return Response({'error': 'Restricted domain not found.'}, status=status.HTTP_404_NOT_FOUND)
