@@ -230,7 +230,7 @@ function LiveInterviewInterviewer() {
         setSessionExpired(true);
         localStorage.setItem(sessionKey, 'true');
         setTimeout(() => {
-          navigate('/');
+          navigate('/live-interview-list');
         }, 3000);
         break;
       default: break;
@@ -255,6 +255,16 @@ function LiveInterviewInterviewer() {
 
   const [mediaLoading, setMediaLoading] = useState(true);
   const [mediaError, setMediaError] = useState(false);
+  const [showMediaHint, setShowMediaHint] = useState(false);
+
+  useEffect(() => {
+    if (!mediaLoading || mediaError) {
+      setShowMediaHint(false);
+      return;
+    }
+    const t = setTimeout(() => setShowMediaHint(true), 7000);
+    return () => clearTimeout(t);
+  }, [mediaLoading, mediaError]);
 
   const initializeMedia = useCallback(() => {
     setMediaLoading(true);
@@ -400,7 +410,9 @@ function LiveInterviewInterviewer() {
   const handleSkillScoreChange = (index, value) => {
     setSkills(prev => {
       const newSkills = [...prev];
-      newSkills[index] = { ...newSkills[index], score: parseInt(value) || 0 };
+      const parsed = parseInt(value, 10);
+      const safeScore = Number.isNaN(parsed) ? 0 : Math.min(10, Math.max(0, parsed));
+      newSkills[index] = { ...newSkills[index], score: safeScore };
       return newSkills;
     });
   };
@@ -413,8 +425,14 @@ function LiveInterviewInterviewer() {
     setRatings(prev => ({ ...prev, hireRecommendation: status }));
     
     // Map frontend ratings/skills to backend expected fields
-    const technicalSkill = skills.find(s => s.name === 'Problem Solving')?.score || 0;
-    const communicationSkill = skills.find(s => s.name === 'Communication')?.score || 0;
+    const normalizeScore = (n) => {
+      const val = parseInt(n, 10);
+      if (Number.isNaN(val)) return 0;
+      return Math.min(10, Math.max(0, val));
+    };
+
+    const technicalSkill = normalizeScore(skills.find(s => s.name === 'Problem Solving')?.score || 0);
+    const communicationSkill = normalizeScore(skills.find(s => s.name === 'Communication')?.score || 0);
 
     axios.post(`${API_BASE_URL}/submit-interview-feedback/`, {
         token: sessionId,
@@ -431,7 +449,6 @@ function LiveInterviewInterviewer() {
     }).then(() => {
         setShowInterviewReport(false);
         setShowFeedbackSuccess(true);
-        setTimeout(() => navigate('/dashboard'), 2000);
     }).catch(err => {
         console.error('Submit feedback failed:', err);
         showNotification('Failed to submit feedback. Retrying...', 'error');
@@ -446,58 +463,80 @@ function LiveInterviewInterviewer() {
     return (
       <div className="session-expired-modal">
         <div className="session-expired-content">
-          <h3>Session Completed</h3>
-          <p>This interview session has already been completed.</p>
-          <button onClick={() => navigate('/live-interview-list')}>Close</button>
+          <div className="session-expired-icon">✓</div>
+          <h3 className="session-expired-title">Session Completed</h3>
+          <p className="session-expired-message">This interview session has already been completed.</p>
+          <button className="btn-close-window" onClick={() => navigate('/live-interview-list')}>Close</button>
         </div>
       </div>
     );
   }
 
   if (showFeedbackSuccess) {
-    return <div className="thank-you-screen"><h2>Feedback Submitted Successfully! Redirecting...</h2></div>;
+    return (
+      <div className="thank-you-screen">
+        <div className="thank-you-card">
+          <div className="thank-you-card-icon">✓</div>
+          <h2>Feedback Submitted Successfully</h2>
+          <p>Thank you. You can close this tab when ready.</p>
+        </div>
+      </div>
+    );
   }
 
   if (showInterviewReport) {
     return (
       <div className="feedback-overlay">
-        <div className="feedback-modal" style={{ width: '600px', textAlign: 'left' }}>
+        <div className="feedback-modal interview-report-modal">
           <h2>Interview Report</h2>
           <p>Please provide your evaluation for {candidateName}</p>
           
-          <div className="ratings-section">
-            <h3 style={{ color: 'white', marginBottom: '10px' }}>Overall Rating</h3>
+          <div className="ratings-section report-section">
+            <h3 className="report-section-title">Overall Rating</h3>
             {[1, 2, 3, 4, 5].map(star => (
-              <i key={star} onClick={() => handleStarClick('overallRating', star)} className={`fas fa-star ${ratings.overallRating >= star ? 'active' : ''}`} style={{ cursor: 'pointer', color: ratings.overallRating >= star ? '#fbbf24' : '#475569', fontSize: '28px', marginRight: '8px' }}></i>
+              <i
+                key={star}
+                onClick={() => handleStarClick('overallRating', star)}
+                className={`fas fa-star ${ratings.overallRating >= star ? 'active' : ''}`}
+                style={{ cursor: 'pointer', color: ratings.overallRating >= star ? '#fbbf24' : '#475569', fontSize: '28px', marginRight: '8px' }}
+              ></i>
             ))}
           </div>
           
-          <div className="skills-section" style={{ marginTop: '24px' }}>
-            <h3 style={{ color: 'white', marginBottom: '12px' }}>Skills Assessment</h3>
+          <div className="skills-section report-section">
+            <h3 className="report-section-title">Skills Assessment</h3>
             {skills.map((skill, idx) => (
-              <div key={idx} style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <label style={{ color: '#94a3b8' }}>{skill.name}</label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input type="number" min="0" max="10" value={skill.score} onChange={e => handleSkillScoreChange(idx, e.target.value)} style={{ width: '60px', padding: '6px', background: '#0f172a', border: '1px solid #334155', color: 'white', borderRadius: '4px' }} />
-                  <span style={{ color: '#475569' }}>/ 10</span>
+              <div key={idx} className="report-skill-row">
+                <label className="report-skill-label">{skill.name}</label>
+                <div className="report-skill-input-wrap">
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    value={skill.score}
+                    onChange={e => handleSkillScoreChange(idx, e.target.value)}
+                    onBlur={e => handleSkillScoreChange(idx, e.target.value)}
+                    className="report-skill-input"
+                  />
+                  <span className="report-skill-max">/ 10</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="feedback-section" style={{ marginTop: '24px' }}>
-            <h3 style={{ color: 'white', marginBottom: '8px' }}>Detailed Feedback</h3>
+          <div className="feedback-section report-section">
+            <h3 className="report-section-title">Detailed Feedback</h3>
             <textarea 
               value={feedback}
               onChange={e => setFeedback(e.target.value)}
               placeholder="Enter detailed feedback here..."
-              style={{ minHeight: '100px' }}
+              className="report-feedback-textarea"
             />
           </div>
 
-          <div className="actions-section" style={{ marginTop: '30px', display: 'flex', gap: '12px' }}>
-             <button className="btn-submit" onClick={() => confirmEndInterview('Qualified')} style={{ background: '#10b981', flex: 1, marginTop: 0 }}>Qualified</button>
-             <button className="btn-submit" onClick={() => confirmEndInterview('Rejected')} style={{ background: '#ef4444', flex: 1, marginTop: 0 }}>Rejected</button>
+          <div className="actions-section report-actions">
+             <button className="btn-submit report-btn-qualified" onClick={() => confirmEndInterview('Qualified')}>Qualified</button>
+             <button className="btn-submit report-btn-rejected" onClick={() => confirmEndInterview('Rejected')}>Rejected</button>
           </div>
         </div>
       </div>
@@ -507,9 +546,9 @@ function LiveInterviewInterviewer() {
   return (
     <ErrorBoundary>
     <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
-      <div className="notifications-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 9999 }}>
+      <div className="li-notifications-container">
         {notifications.map(n => (
-          <div key={n.id} className={`session-popup ${n.severity}`} style={{ marginBottom: '10px', padding: '10px', background: '#333', color: '#fff', borderRadius: '5px' }}>
+          <div key={n.id} className={`li-notification ${n.severity}`}>
             {n.message}
           </div>
         ))}
@@ -522,13 +561,18 @@ function LiveInterviewInterviewer() {
 
       <div className="main-wrapper">
         <div className="video-container">
-          <ConnectionOverlay status={connectionStatus} />
+          {!mediaLoading && !mediaError && <ConnectionOverlay status={connectionStatus} />}
 
           {mediaLoading && !mediaError && (
-            <div className="connection-overlay" style={{ background: 'rgba(0,0,0,0.8)', zIndex: 50 }}>
-              <i className="fas fa-video spinner"></i>
-              <h3>Accessing Camera & Microphone...</h3>
-              <p>Please allow permissions when prompted.</p>
+            <div className="connection-overlay media-loading-overlay" style={{ zIndex: 50 }}>
+              <div className="media-loading-card" role="status" aria-live="polite" aria-atomic="true">
+                <i className="fas fa-circle-notch media-rotate-icon"></i>
+                <h3>Connecting...</h3>
+                <p>Please allow camera and microphone permissions in your browser prompt.</p>
+                {showMediaHint && (
+                  <p className="media-loading-hint">Still connecting. If no popup appears, check browser permission icon near URL bar.</p>
+                )}
+              </div>
             </div>
           )}
 

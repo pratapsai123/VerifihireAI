@@ -4,31 +4,31 @@ import axios from 'axios';
 import '../styles/LiveInterviewList.css';
 import { API_BASE_URL } from '../apiConfig';
 
-function fmtDate(iso) {
-  if (!iso) return '-';
+function fmtSchedule(startIso, endIso) {
+  if (!startIso) return null;
   try {
-    return new Date(iso).toLocaleString();
+    const start = new Date(startIso);
+    const fmtDate = (d) => d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const fmtTime = (d) => {
+      const h = d.getHours(), m = d.getMinutes(), ampm = h >= 12 ? 'PM' : 'AM';
+      return `${String(h % 12 || 12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+    };
+    if (endIso) {
+      const end = new Date(endIso);
+      return { date: fmtDate(start), time: `${fmtTime(start)} – ${fmtTime(end)}` };
+    }
+    return { date: fmtDate(start), time: fmtTime(start) };
   } catch {
-    return iso;
+    return null;
   }
 }
 
-function fmtDateOnly(iso) {
-  if (!iso) return '-';
-  try {
-    return new Date(iso).toLocaleDateString();
-  } catch {
-    return iso;
-  }
-}
-
-function fmtTime(iso) {
-  if (!iso) return '-';
-  try {
-    return new Date(iso).toLocaleTimeString();
-  } catch {
-    return iso;
-  }
+function getInitials(name) {
+  if (!name) return '?';
+  const parts = name.trim().split(' ');
+  return parts.length >= 2
+    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    : name[0].toUpperCase();
 }
 
 export default function LiveInterviewList() {
@@ -55,6 +55,7 @@ export default function LiveInterviewList() {
 
   useEffect(() => {
     load();
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
   const filtered = useMemo(() => {
@@ -68,10 +69,14 @@ export default function LiveInterviewList() {
     });
   }, [items, search]);
 
-  useEffect(() => {
-    // reset page when search changes
-    setPage(1);
-  }, [search]);
+  useEffect(() => { setPage(1); }, [search]);
+
+  const stats = useMemo(() => ({
+    total: items.length,
+    invited: items.filter(i => i.status === 'sent').length,
+    accepted: items.filter(i => i.status === 'accepted').length,
+    completed: items.filter(i => i.status === 'completed' || i.status === 'submitted').length,
+  }), [items]);
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(filtered.length / pageSize)), [filtered.length]);
   const currentPage = Math.min(page, totalPages);
@@ -81,7 +86,6 @@ export default function LiveInterviewList() {
   }, [filtered, currentPage]);
 
   const pageButtons = useMemo(() => {
-    // show up to 5 numbers around current page
     const maxButtons = 5;
     const half = Math.floor(maxButtons / 2);
     let start = Math.max(1, currentPage - half);
@@ -92,56 +96,27 @@ export default function LiveInterviewList() {
     return nums;
   }, [currentPage, totalPages]);
 
-  const getStatusClass = (status) => {
+  const getStatusMeta = (status) => {
     switch (status) {
-      case 'sent':
-        return 'ok';
-      case 'accepted':
-        return 'ok';
-      case 'completed':
-        return 'ok';
-      case 'submitted':
-        return 'ok';
-      case 'failed':
-        return 'bad';
-      default:
-        return 'bad';
-    }
-  };
-
-  const getStatusLabel = (status) => {
-    switch (status) {
-      case 'draft':
-        return 'Draft';
-      case 'sent':
-        return 'Invited';
-      case 'accepted':
-        return 'Accepted';
-      case 'completed':
-        return 'Completed';
-      case 'submitted':
-        return 'Submitted';
-      case 'failed':
-        return 'Failed';
-      default:
-        return status || 'Pending';
+      case 'sent':       return { label: 'Invited',   cls: 'pill-blue' };
+      case 'accepted':   return { label: 'Accepted',  cls: 'pill-green' };
+      case 'completed':  return { label: 'Completed', cls: 'pill-teal' };
+      case 'submitted':  return { label: 'Submitted', cls: 'pill-teal' };
+      case 'failed':     return { label: 'Failed',    cls: 'pill-red' };
+      case 'draft':      return { label: 'Draft',     cls: 'pill-gray' };
+      default:           return { label: status || 'Pending', cls: 'pill-gray' };
     }
   };
 
   const renderStars = (rating) => {
     const r = parseFloat(rating || 0);
+    if (r <= 0) return <span className="lil-dash">–</span>;
     return (
-      <div className="list-rating-stars">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <i
-            key={star}
-            className={`${star <= Math.round(r) ? 'fas' : 'far'} fa-star`}
-            style={{ color: star <= Math.round(r) ? '#f59e0b' : '#cbd5e1', fontSize: '12px', marginRight: '2px' }}
-          ></i>
+      <div className="lil-stars">
+        {[1,2,3,4,5].map(s => (
+          <span key={s} className={`lil-star ${s <= Math.round(r) ? 'filled' : ''}`}>★</span>
         ))}
-        <span style={{ marginLeft: '4px', fontSize: '12px', fontWeight: 600, color: '#475569' }}>
-          {r > 0 ? r.toFixed(1) : '-'}
-        </span>
+        <span className="lil-score">{r.toFixed(1)}</span>
       </div>
     );
   };
@@ -151,184 +126,221 @@ export default function LiveInterviewList() {
   };
 
   return (
-    <div className="live-interview-list-page">
-      <div className="live-interview-list-shell">
-        <div className="live-interview-list-top">
-          <div>
-            <div className="live-interview-list-title">Live Interview Candidates</div>
-            <div className="live-interview-list-sub">All candidates invited for live interviews</div>
+    <div className="lil-page">
+      <div className="lil-shell">
+
+        {/* ── Header ── */}
+        <div className="lil-header">
+          <div className="lil-header-left">
+            <div className="lil-icon-wrap">
+              {/* Video / live interview icon */}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="23 7 16 12 23 17 23 7"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+            </div>
+            <div>
+              <h1 className="lil-title">Live Interview Candidates</h1>
+              <p className="lil-sub">Manage and join scheduled live interview sessions</p>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>
+          <div className="lil-header-actions">
+            <button className="lil-btn-back" type="button" onClick={() => navigate('/dashboard')}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
               Back
             </button>
-            <button className="btn-secondary" type="button" onClick={load}>
+            <button className="lil-btn-refresh" type="button" onClick={load}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
               Refresh
             </button>
           </div>
         </div>
 
-        <div className="live-interview-list-toolbar">
-          <input
-            className="live-interview-list-search"
-            placeholder="Search by name / email / interview"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        {/* ── Stats bar ── */}
+        <div className="lil-stats-bar">
+          <div className="lil-stat">
+            <span className="lil-stat-val">{stats.total}</span>
+            <span className="lil-stat-lbl">Total</span>
+          </div>
+          <div className="lil-stat-div"/>
+          <div className="lil-stat">
+            <span className="lil-stat-val blue">{stats.invited}</span>
+            <span className="lil-stat-lbl">Invited</span>
+          </div>
+          <div className="lil-stat-div"/>
+          <div className="lil-stat">
+            <span className="lil-stat-val green">{stats.accepted}</span>
+            <span className="lil-stat-lbl">Accepted</span>
+          </div>
+          <div className="lil-stat-div"/>
+          <div className="lil-stat">
+            <span className="lil-stat-val teal">{stats.completed}</span>
+            <span className="lil-stat-lbl">Completed</span>
+          </div>
         </div>
 
+        {/* ── Search ── */}
+        <div className="lil-toolbar">
+          <div className="lil-search-wrap">
+            <svg className="lil-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input
+              className="lil-search"
+              placeholder="Search by name, email or interview…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {search && (
+              <button className="lil-search-clear" type="button" onClick={() => setSearch('')}>✕</button>
+            )}
+          </div>
+        </div>
+
+        {/* ── Content ── */}
         {loading ? (
-          <div className="card">Loading…</div>
+          <div className="lil-state-card">
+            <div className="lil-spinner"/>
+            <p>Loading interview candidates…</p>
+          </div>
         ) : error ? (
-          <div className="card error">
-            <div className="live-interview-list-title">Couldn't load interview candidates</div>
-            <div className="live-interview-list-sub">{error}</div>
+          <div className="lil-state-card lil-state-error">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p className="lil-state-title">Could not load candidates</p>
+            <p className="lil-state-sub">{error}</p>
+            <button className="lil-btn-refresh" type="button" onClick={load}>Retry</button>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="card">No interview candidates found.</div>
+          <div className="lil-state-card">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="23 7 16 12 23 17 23 7"/>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+            <p className="lil-state-title">{search ? 'No results found' : 'No interviews yet'}</p>
+            <p className="lil-state-sub">{search ? 'Try a different search term.' : 'Invite candidates to get started.'}</p>
+          </div>
         ) : (
-          <div className="table-card">
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Candidate</th>
-                    <th>Interviewer</th>
-                    <th>Interview</th>
-                    <th>Status</th>
-                    <th>Rating</th>
-                    <th>Scheduled Start</th>
-                    <th>Scheduled End</th>
-                    <th>Created</th>
-                    <th style={{ textAlign: 'right' }}>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pageItems.map((inv) => (
-                    <tr key={inv.id}>
-                      <td>
-                        <div className="cell-title">{inv.name || '-'}</div>
-                        <div className="cell-sub">{inv.email || '-'}</div>
-                        {inv.phone && <div className="cell-sub" style={{ fontSize: '12px', color: '#64748b' }}>{inv.phone}</div>}
-                      </td>
-                      <td>
-                        <div className="cell-title">{inv.interviewer_name || '-'}</div>
-                        <div className="cell-sub">{inv.interviewer_email || '-'}</div>
-                      </td>
-                      <td>{inv.interview?.name || '-'}</td>
-                      <td>
-                        <span className={`pill ${getStatusClass(inv.status)}`}>
-                          {getStatusLabel(inv.status)}
-                        </span>
-                      </td>
-                      <td>
-                        {inv.feedback ? (
+          <div className="lil-table-card">
+            <table className="lil-table">
+              <thead>
+                <tr>
+                  <th className="col-candidate">Candidate</th>
+                  <th className="col-interviewer">Interviewer</th>
+                  <th className="col-interview">Interview</th>
+                  <th className="col-status">Status</th>
+                  <th className="col-rating">Rating</th>
+                  <th className="col-schedule">Schedule</th>
+                  <th className="col-action">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pageItems.map((inv) => {
+                  const { label, cls } = getStatusMeta(inv.status);
+                  const sched = fmtSchedule(inv.start_time, inv.end_time);
+                  const isDone = inv.status === 'completed' || inv.status === 'submitted';
+                  const isFailed = inv.status === 'failed';
+                  return (
+                    <tr key={inv.id} className="lil-row">
+                      <td className="col-candidate">
+                        <div className="lil-person">
+                          <div className="lil-avatar">{getInitials(inv.name)}</div>
                           <div>
+                            <div className="lil-name">{inv.name || '–'}</div>
+                            <div className="lil-email">{inv.email || '–'}</div>
+                            {inv.phone && <div className="lil-phone">{inv.phone}</div>}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="col-interviewer">
+                        <div className="lil-person">
+                          <div className="lil-avatar lil-avatar-teal">{getInitials(inv.interviewer_name)}</div>
+                          <div>
+                            <div className="lil-name">{inv.interviewer_name || '–'}</div>
+                            <div className="lil-email">{inv.interviewer_email || '–'}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="col-interview">
+                        <span className="lil-interview-name">{inv.interview?.name || '–'}</span>
+                      </td>
+                      <td className="col-status">
+                        <span className={`lil-pill ${cls}`}>{label}</span>
+                      </td>
+                      <td className="col-rating">
+                        {inv.feedback ? (
+                          <div className="lil-rating-cell">
                             {renderStars(inv.feedback.interviewer_average_rating || inv.feedback.interviewer_rating)}
                             <button
-                              className="btn-secondary"
-                              style={{ padding: '2px 8px', fontSize: '12px', marginTop: '4px' }}
+                              className="lil-view-btn"
                               onClick={() => navigate('/feedback-details', { state: { inv } })}
                             >
-                              View Details
+                              View
                             </button>
                           </div>
-                        ) : (
-                          <span style={{ color: '#94a3b8' }}>-</span>
-                        )}
+                        ) : renderStars(0)}
                       </td>
-                      <td>
-                        {inv.start_time ? (
-                          <>
-                            <div>{fmtDateOnly(inv.start_time)}</div>
-                            <div className="cell-sub">{fmtTime(inv.start_time)}</div>
-                          </>
-                        ) : (
-                          '-'
-                        )}
+                      <td className="col-schedule">
+                        {sched ? (
+                          <div className="lil-schedule">
+                            <span className="lil-sched-date">{sched.date}</span>
+                            <span className="lil-sched-time">{sched.time}</span>
+                          </div>
+                        ) : <span className="lil-dash">–</span>}
                       </td>
-                      <td>
-                        {inv.end_time ? (
-                          <>
-                            <div>{fmtDateOnly(inv.end_time)}</div>
-                            <div className="cell-sub">{fmtTime(inv.end_time)}</div>
-                          </>
+                      <td className="col-action">
+                        {isDone ? (
+                          <span className="lil-done-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Done
+                          </span>
                         ) : (
-                          '-'
+                          <button
+                            className="lil-join-btn"
+                            type="button"
+                            onClick={() => handleStartInterview(inv.token)}
+                            disabled={isFailed}
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Start
+                          </button>
                         )}
-                      </td>
-                      <td>{fmtDate(inv.created_at)}</td>
-                      <td style={{ textAlign: 'right' }}>
-                        <button
-                          className={inv.status === 'completed' || inv.status === 'submitted' ? 'btn-secondary' : 'btn-primary'}
-                          type="button"
-                          onClick={() => handleStartInterview(inv.token)}
-                          disabled={inv.status === 'failed' || inv.status === 'completed' || inv.status === 'submitted'}
-                        >
-                          {inv.status === 'completed' || inv.status === 'submitted' ? 'Completed' : 'Start Interview'}
-                        </button>
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  );
+                })}
+              </tbody>
+            </table>
 
-            <div className="pager">
-              <div className="pager-left">
-                Showing {(filtered.length === 0) ? 0 : ((currentPage - 1) * pageSize + 1)}-
-                {Math.min(currentPage * pageSize, filtered.length)} of {filtered.length}
+            {/* ── Pagination ── */}
+            <div className="lil-pager">
+              <div className="lil-pager-info">
+                Showing <strong>{filtered.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}</strong>–<strong>{Math.min(currentPage * pageSize, filtered.length)}</strong> of <strong>{filtered.length}</strong>
               </div>
-
-              <div className="pager-right">
-                <button
-                  className="pager-btn"
-                  type="button"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage <= 1}
-                >
-                  ‹
-                </button>
-
-                {pageButtons[0] > 1 ? (
-                  <>
-                    <button className={`pager-num ${currentPage === 1 ? 'active' : ''}`} type="button" onClick={() => setPage(1)}>1</button>
-                    {pageButtons[0] > 2 ? <span className="pager-dots">…</span> : null}
-                  </>
-                ) : null}
-
-                {pageButtons.map((n) => (
-                  <button
-                    key={n}
-                    className={`pager-num ${currentPage === n ? 'active' : ''}`}
-                    type="button"
-                    onClick={() => setPage(n)}
-                  >
-                    {n}
-                  </button>
+              <div className="lil-pager-btns">
+                <button className="lil-pg-btn" type="button" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={currentPage <= 1}>‹</button>
+                {pageButtons[0] > 1 && <>
+                  <button className={`lil-pg-num ${currentPage === 1 ? 'active' : ''}`} type="button" onClick={() => setPage(1)}>1</button>
+                  {pageButtons[0] > 2 && <span className="lil-pg-dots">…</span>}
+                </>}
+                {pageButtons.map(n => (
+                  <button key={n} className={`lil-pg-num ${currentPage === n ? 'active' : ''}`} type="button" onClick={() => setPage(n)}>{n}</button>
                 ))}
-
-                {pageButtons[pageButtons.length - 1] < totalPages ? (
-                  <>
-                    {pageButtons[pageButtons.length - 1] < totalPages - 1 ? <span className="pager-dots">…</span> : null}
-                    <button
-                      className={`pager-num ${currentPage === totalPages ? 'active' : ''}`}
-                      type="button"
-                      onClick={() => setPage(totalPages)}
-                    >
-                      {totalPages}
-                    </button>
-                  </>
-                ) : null}
-
-                <button
-                  className="pager-btn"
-                  type="button"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={currentPage >= totalPages}
-                >
-                  ›
-                </button>
+                {pageButtons[pageButtons.length - 1] < totalPages && <>
+                  {pageButtons[pageButtons.length - 1] < totalPages - 1 && <span className="lil-pg-dots">…</span>}
+                  <button className={`lil-pg-num ${currentPage === totalPages ? 'active' : ''}`} type="button" onClick={() => setPage(totalPages)}>{totalPages}</button>
+                </>}
+                <button className="lil-pg-btn" type="button" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={currentPage >= totalPages}>›</button>
               </div>
             </div>
           </div>

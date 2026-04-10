@@ -67,7 +67,7 @@ export const ControlBar = ({
         </button>
 
         <button 
-          className="control-btn end-call" 
+          className="control-btn end-call end-call-danger" 
           onClick={() => handleEndInterview(true)}
           title="End Interview"
         >

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/InterviewInvite.css';
 
-const INTERVIEW_INVITE_DRAFT_KEY_PREFIX = 'interviewInviteDraft:';
+const DRAFT_KEY = 'interviewInviteDraft:schedule';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((email || '').trim());
@@ -22,50 +22,23 @@ function normalizeHeader(h) {
 
 function parseCSV(text) {
   const rows = [];
-  let row = [];
-  let cell = '';
-  let inQuotes = false;
-
-  const pushCell = () => {
-    row.push(cell);
-    cell = '';
-  };
-
+  let row = [], cell = '', inQuotes = false;
+  const pushCell = () => { row.push(cell); cell = ''; };
   const pushRow = () => {
-    const isEmpty = row.every((c) => !String(c || '').trim());
-    if (!isEmpty) rows.push(row);
+    if (!row.every((c) => !String(c || '').trim())) rows.push(row);
     row = [];
   };
-
-  for (let i = 0; i < text.length; i += 1) {
+  for (let i = 0; i < text.length; i++) {
     const ch = text[i];
     if (inQuotes) {
-      if (ch === '"') {
-        const next = text[i + 1];
-        if (next === '"') {
-          cell += '"';
-          i += 1;
-        } else {
-          inQuotes = false;
-        }
-      } else {
-        cell += ch;
-      }
-    } else if (ch === '"') {
-      inQuotes = true;
-    } else if (ch === ',') {
-      pushCell();
-    } else if (ch === '\n') {
-      pushCell();
-      pushRow();
-    } else if (ch === '\r') {
-      // ignore
-    } else {
-      cell += ch;
-    }
+      if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else inQuotes = false; }
+      else cell += ch;
+    } else if (ch === '"') inQuotes = true;
+    else if (ch === ',') pushCell();
+    else if (ch === '\n') { pushCell(); pushRow(); }
+    else if (ch !== '\r') cell += ch;
   }
-  pushCell();
-  pushRow();
+  pushCell(); pushRow();
   return rows;
 }
 
@@ -73,17 +46,24 @@ function downloadTextFile(filename, text) {
   const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
 }
+
+function getInitials(name) {
+  const parts = (name || '').trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return (parts[0] || '?')[0].toUpperCase();
+}
+
+// Default interview duration: 1 hour
+const INTERVIEW_DURATION_SEC = 3600;
 
 export default function InterviewInvite() {
   const navigate = useNavigate();
 
+  // Add-form fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [interviewerName, setInterviewerName] = useState('');
@@ -91,146 +71,152 @@ export default function InterviewInvite() {
   const [pan, setPan] = useState('');
   const [phone, setPhone] = useState('');
 
+  // Schedule (exact_window only)
+  const [scheduleDate, setScheduleDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');   // editable; auto-filled from startTime + 1hr
+  const [scheduleError, setScheduleError] = useState('');
+
   const [candidates, setCandidates] = useState([]);
   const [sending, setSending] = useState(false);
   const [importMsg, setImportMsg] = useState('');
-  const fileRef = useRef(null);
-
   const [userProfile, setUserProfile] = useState(null);
-
-  // Scheduling / validity controls
-  const [validityMode, setValidityMode] = useState('exact_window');
-  const [scheduleDate, setScheduleDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [scheduleError, setScheduleError] = useState('');
-
-  const handlePanChange = (e) => {
-    let val = e.target.value.toUpperCase();
-    // Enforce strict format: 5 letters, 4 numbers, 1 letter
-    val = val.replace(/[^A-Z0-9]/g, '');
-    if (val.length > 10) return; // Max 10 chars
-    let newVal = '';
-    for (let i = 0; i < val.length; i++) {
-      const char = val[i];
-      if (i < 5) {
-        // First 5 must be letters
-        if (/[A-Z]/.test(char)) newVal += char;
-      } else if (i < 9) {
-        // Next 4 must be numbers
-        if (/[0-9]/.test(char)) newVal += char;
-      } else if (i === 9) {
-        // Last 1 must be letter
-        if (/[A-Z]/.test(char)) newVal += char;
-      }
-    }
-    setPan(newVal);
-  };
-  const handlePhoneChange = (e) => {
-    const val = e.target.value.replace(/\D/g, ''); // Remove non-digits
-    if (val.length <= 10) {
-      setPhone(val);
-    }
-  };
-
-
-  const draftKey = INTERVIEW_INVITE_DRAFT_KEY_PREFIX;
-
-  const canAdd = useMemo(() => {
-    const n = name.trim();
-    const e = email.trim();
-    const intN = interviewerName.trim();
-    const intE = interviewerEmail.trim();
-    const p = pan.trim();
-    if (!n) return false;
-    if (!isValidEmail(e)) return false;
-    if (!isValidEmail(intE)) return false;
-    if (!intN) return false;
-    if (!isValidPAN(p)) return false;
-
-    if (validityMode === 'exact_window') {
-      if (!scheduleDate || !startTime) return false;
-    } else {
-      if (!scheduleDate) return false;
-    }
-
-    return true;
-  }, [name, email, interviewerName, interviewerEmail, pan, validityMode, scheduleDate, startTime]);
+  const fileRef = useRef(null);
 
   const userDomain = useMemo(() => {
     if (!userProfile?.email) return '';
     return userProfile.email.split('@')[1] || '';
   }, [userProfile]);
 
-  // Fetch Profile and Existing Draft Candidates
-  const fetchDraftsAndProfile = async () => {
-    try {
-      const profileUrl = `${API_BASE_URL}/profile/`;
-      const [profileRes, draftsRes] = await Promise.all([
-        axios.get(profileUrl),
-        axios.get(`${API_BASE_URL}/interviews/draft-invites/`)
-      ]);
-      setUserProfile(profileRes.data);
-      if (draftsRes.data?.results) {
-        setCandidates(draftsRes.data.results);
-      }
-    } catch (err) {
-      console.error('Failed to load profile or drafts', err);
-    } finally {
-      // hydration complete
-    }
-  };
+  const canAdd = useMemo(() => {
+    if (!name.trim()) return false;
+    if (!isValidEmail(email.trim())) return false;
+    if (!interviewerName.trim()) return false;
+    if (!isValidEmail(interviewerEmail.trim())) return false;
+    if (!isValidPAN(pan.trim())) return false;
+    if (!scheduleDate || !startTime) return false;
+    return true;
+  }, [name, email, interviewerName, interviewerEmail, pan, scheduleDate, startTime]);
 
+  // Track whether the user has manually edited endTime
+  const endTimeManualRef = useRef(false);
+
+  // ── Auto-fill endTime when startTime changes ──
+  // Only overrides if the user hasn't manually edited it yet
   useEffect(() => {
-    fetchDraftsAndProfile();
+    if (!startTime || endTimeManualRef.current) return;
+    const [h, m] = startTime.split(':').map(Number);
+    if (isNaN(h) || isNaN(m)) return;
+    const d = new Date(2000, 0, 1, h, m);
+    d.setTime(d.getTime() + INTERVIEW_DURATION_SEC * 1000);
+    setEndTime(`${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`);
+  }, [startTime]);
+
+  // ── Computed schedule display for table/stats bar ──
+  const scheduleDisplay = (() => {
+    if (!scheduleDate || !startTime) return null;
+    const start = new Date(`${scheduleDate}T${startTime}:00`);
+    if (Number.isNaN(start.getTime())) return null;
+    // Use editable endTime if present, otherwise fall back to auto +1hr
+    let endDisplay = endTime;
+    if (!endDisplay) {
+      const autoEnd = new Date(start.getTime() + INTERVIEW_DURATION_SEC * 1000);
+      endDisplay = `${String(autoEnd.getHours()).padStart(2, '0')}:${String(autoEnd.getMinutes()).padStart(2, '0')}`;
+    }
+    const fmtDate = (d) => d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const fmtTime12 = (hhmm) => {
+      const [h, m] = hhmm.split(':').map(Number);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      return `${String(h % 12 || 12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+    };
+    return `${fmtDate(start)} · ${fmtTime12(startTime)} – ${fmtTime12(endDisplay)}`;
+  })();
+
+  // ── Start window label (30-min grace) ──
+  const startWindowLabel = (() => {
+    if (!scheduleDate || !startTime) return '';
+    const start = new Date(`${scheduleDate}T${startTime}:00`);
+    if (Number.isNaN(start.getTime())) return '';
+    const fmtTime = (d) => {
+      const h = d.getHours(), m = d.getMinutes(), ampm = h >= 12 ? 'PM' : 'AM';
+      return `${String(h % 12 || 12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+    };
+    return `${fmtTime(start)} – ${fmtTime(new Date(start.getTime() + 30 * 60000))}`;
+  })();
+
+  // ── Persist schedule to localStorage ──
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ scheduleDate, startTime, endTime, endTimeManual: endTimeManualRef.current, updated_at: Date.now() }));
+    } catch { /* ignore */ }
+  }, [scheduleDate, startTime, endTime]);
+
+  // ── Restore schedule on mount ──
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (p?.scheduleDate) setScheduleDate(p.scheduleDate);
+        if (p?.startTime) setStartTime(p.startTime);
+        if (p?.endTime) {
+          setEndTime(p.endTime);
+          if (p?.endTimeManual) endTimeManualRef.current = true;
+        }
+      }
+    } catch { /* ignore */ }
+
+    // Fetch profile + existing draft candidates
+    const init = async () => {
+      try {
+        const [profileRes, draftsRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/profile/`),
+          axios.get(`${API_BASE_URL}/interviews/draft-invites/`),
+        ]);
+        setUserProfile(profileRes.data);
+        if (draftsRes.data?.results) setCandidates(draftsRes.data.results);
+      } catch (err) {
+        console.error('Failed to load profile or drafts', err);
+      }
+    };
+    init();
   }, []);
 
+  const handlePanChange = (e) => {
+    let val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (val.length > 10) return;
+    let out = '';
+    for (let i = 0; i < val.length; i++) {
+      const ch = val[i];
+      if (i < 5 && /[A-Z]/.test(ch)) out += ch;
+      else if (i >= 5 && i < 9 && /[0-9]/.test(ch)) out += ch;
+      else if (i === 9 && /[A-Z]/.test(ch)) out += ch;
+    }
+    setPan(out);
+  };
+
+  const handlePhoneChange = (e) => {
+    const val = e.target.value.replace(/\D/g, '');
+    if (val.length <= 10) setPhone(val);
+  };
+
   const addCandidate = async () => {
-    const n = name.trim();
-    const e = email.trim().toLowerCase();
-    const intN = interviewerName.trim();
-    const intE = interviewerEmail.trim().toLowerCase();
-    const p = pan.trim().toUpperCase();
-    const ph = phone.trim();
-
-    if (!n) return;
-    if (!isValidEmail(e)) return;
-    if (!isValidPAN(p)) return;
-
-    if (!intN) return;
-    if (!isValidEmail(intE)) return;
-
+    const n = name.trim(), e = email.trim().toLowerCase();
+    const intN = interviewerName.trim(), intE = interviewerEmail.trim().toLowerCase();
+    const p = pan.trim().toUpperCase(), ph = phone.trim();
+    if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p)) return;
     if (userDomain && !intE.endsWith(`@${userDomain}`)) {
-      alert(`Interviewer email must belong to your company domain (@${userDomain}).`);
-      return;
+      alert(`Interviewer email must belong to your company domain (@${userDomain}).`); return;
     }
-
     const dupe = candidates.some((c) => c.email.toLowerCase() === e || (p && c.pan_number && c.pan_number === p));
-    if (dupe) {
-      alert('This candidate email or PAN already exists in the list.');
-      return;
-    }
-
+    if (dupe) { alert('This candidate email or PAN already exists in the list.'); return; }
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, {
-        name: n,
-        email: e,
-        interviewer_name: intN,
-        interviewer_email: intE,
-        pan_number: p || null,
-        phone: ph || null,
+        name: n, email: e, interviewer_name: intN, interviewer_email: intE,
+        pan_number: p || null, phone: ph || null,
       });
-
-      if (resp.data?.results) {
-        setCandidates((prev) => [...prev, ...resp.data.results]);
-      }
-
-      setName('');
-      setEmail('');
-      setInterviewerName('');
-      setInterviewerEmail('');
-      setPan('');
-      setPhone('');
+      if (resp.data?.results) setCandidates((prev) => [...prev, ...resp.data.results]);
+      setName(''); setEmail(''); setInterviewerName(''); setInterviewerEmail(''); setPan(''); setPhone('');
     } catch (err) {
       alert(err?.response?.data?.error || 'Failed to save draft candidate.');
     }
@@ -239,21 +225,17 @@ export default function InterviewInvite() {
   const removeCandidate = async (idx) => {
     const c = candidates[idx];
     const label = `${c?.name || 'Candidate'}${c?.email ? ` (${c.email})` : ''}`;
-    const ok = window.confirm(`Remove ${label}?`);
-    if (!ok) return;
-
+    if (!window.confirm(`Remove ${label}?`)) return;
     try {
       await axios.delete(`${API_BASE_URL}/interviews/draft-invites/${c.id}/`);
       setCandidates((prev) => prev.filter((_, i) => i !== idx));
-    } catch (err) {
-      alert('Failed to remove draft candidate.');
-    }
+    } catch { alert('Failed to remove draft candidate.'); }
   };
 
   const downloadTemplate = () => {
     const sample = [
       ['name', 'email', 'interviewer_name', 'interviewer_email', 'pan_number', 'phone'].join(','),
-      ['John Doe', 'john@example.com', 'Jane Smith', 'jane@iit.org.in', 'ABCDE1234F', '9999999999'].join(','),
+      ['John Doe', 'john@example.com', 'Jane Smith', 'jane@company.com', 'ABCDE1234F', '9999999999'].join(','),
     ].join('\n');
     downloadTextFile('interview_invite_template.csv', sample);
   };
@@ -261,396 +243,507 @@ export default function InterviewInvite() {
   const importFromCSVText = async (csvText) => {
     setImportMsg('');
     const rows = parseCSV(csvText || '');
-    if (!rows.length) {
-      setImportMsg('CSV is empty.');
-      return;
-    }
-
+    if (!rows.length) { setImportMsg('CSV is empty.'); return; }
     const first = rows[0].map((c) => normalizeHeader(c));
     const hasHeader = first.includes('email') || first.includes('name');
-
-    let header = null;
-    let dataRows = rows;
-    if (hasHeader) {
-      header = first;
-      dataRows = rows.slice(1);
-    }
+    let header = null, dataRows = rows;
+    if (hasHeader) { header = first; dataRows = rows.slice(1); }
 
     const mapRow = (cells) => {
-      const get = (key, idxFallback) => {
-        if (header) {
-          const idx = header.indexOf(key);
-          if (idx >= 0) return (cells[idx] ?? '').toString().trim();
-          return '';
-        }
-        return (cells[idxFallback] ?? '').toString().trim();
+      const get = (key, fb) => {
+        if (header) { const i = header.indexOf(key); if (i >= 0) return (cells[i] ?? '').toString().trim(); return ''; }
+        return (cells[fb] ?? '').toString().trim();
       };
-
-      const n = get('name', 0);
-      const e = get('email', 1).toLowerCase();
-      const intN = get('interviewer_name', 2);
-      const intE = get('interviewer_email', 3).toLowerCase();
-      const pRaw = get('pan_number', 4) || get('pan', 4);
-      const phRaw = get('phone', 5) || get('phone_number', 5) || get('mobile', 5);
-      const p = (pRaw || '').trim().toUpperCase();
-      const ph = (phRaw || '').trim();
-
       return {
-        name: n,
-        email: e,
-        interviewer_name: intN || n,
-        interviewer_email: intE || '',
-        pan_number: p || null,
-        phone: ph || null,
+        name: get('name', 0),
+        email: get('email', 1).toLowerCase(),
+        interviewer_name: get('interviewer_name', 2),
+        interviewer_email: get('interviewer_email', 3).toLowerCase(),
+        pan_number: (get('pan_number', 4) || get('pan', 4)).trim().toUpperCase() || null,
+        phone: (get('phone', 5) || '').trim() || null,
       };
     };
 
     const existingEmails = new Set(candidates.map((c) => (c.email || '').toLowerCase()));
     const existingPANs = new Set(candidates.map((c) => (c.pan_number || '').toUpperCase()).filter(Boolean));
-
-    let invalidDomain = 0;
-    let dupes = 0;
-    let invalid = 0;
+    let dupes = 0, invalid = 0, invalidDomain = 0;
     const toUpload = [];
 
     dataRows.forEach((cells) => {
       const r = mapRow(cells);
-      const n = (r.name || '').trim();
-      const e = (r.email || '').trim();
       const p = (r.pan_number || '').trim().toUpperCase();
-      const intE = (r.interviewer_email || '').trim().toLowerCase();
-
-      if (!n || !isValidEmail(e) || !isValidPAN(p) || !isValidEmail(intE)) {
-        invalid += 1;
-        return;
-      }
-
-      if (userDomain && !intE.endsWith(`@${userDomain}`)) {
-        invalidDomain += 1;
-        return;
-      }
-
-      const emailKey = e.toLowerCase();
-      if (existingEmails.has(emailKey) || (p && existingPANs.has(p))) {
-        dupes += 1;
-        return;
-      }
-
-      existingEmails.add(emailKey);
+      if (!r.name || !isValidEmail(r.email) || !isValidPAN(p) || !isValidEmail(r.interviewer_email)) { invalid++; return; }
+      if (userDomain && !r.interviewer_email.endsWith(`@${userDomain}`)) { invalidDomain++; return; }
+      if (existingEmails.has(r.email) || (p && existingPANs.has(p))) { dupes++; return; }
+      existingEmails.add(r.email);
       if (p) existingPANs.add(p);
       toUpload.push(r);
     });
 
-    if (toUpload.length === 0) {
-      setImportMsg(`No valid candidates imported. Skipped duplicates: ${dupes}. Invalid format: ${invalid}. Invalid Domain: ${invalidDomain}.`);
-      return;
+    if (!toUpload.length) {
+      setImportMsg(`No valid candidates. Duplicates: ${dupes}, Invalid: ${invalid}, Wrong domain: ${invalidDomain}.`); return;
     }
-
     try {
-      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, {
-        candidates: toUpload
-      });
+      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, { candidates: toUpload });
       if (resp.data?.results) {
         setCandidates((prev) => [...prev, ...resp.data.results]);
-        setImportMsg(`Imported ${resp.data.results.length}. Skipped duplicates: ${dupes}. Invalid format: ${invalid}. Invalid domain: ${invalidDomain}.`);
+        setImportMsg(`Imported ${resp.data.results.length}${dupes ? ` · ${dupes} duplicates skipped` : ''}${invalid ? ` · ${invalid} invalid` : ''}${invalidDomain ? ` · ${invalidDomain} wrong domain` : ''}`);
       }
-    } catch (err) {
-      setImportMsg('Failed to save imported drafts to server.');
-    }
+    } catch { setImportMsg('Failed to save imported drafts.'); }
   };
 
   const handleCSVUpload = async (file) => {
     if (!file) return;
     setImportMsg('');
-    try {
-      const text = await file.text();
-      importFromCSVText(text);
-    } catch {
-      setImportMsg('Could not read the CSV file.');
-    } finally {
-      if (fileRef.current) fileRef.current.value = '';
-    }
+    try { const text = await file.text(); importFromCSVText(text); }
+    catch { setImportMsg('Could not read the CSV file.'); }
+    finally { if (fileRef.current) fileRef.current.value = ''; }
   };
 
   const shareInvites = async () => {
-    if (candidates.length === 0) {
-      alert('Please add at least one candidate.');
-      return;
-    }
-
-    const tz = (() => {
-      try {
-        return Intl.DateTimeFormat().resolvedOptions().timeZone || null;
-      } catch {
-        return null;
-      }
+    if (candidates.length === 0) { alert('Please add at least one candidate.'); return; }
+    if (!scheduleDate || !startTime) { setScheduleError('Please select date and start time.'); alert('Please select date and start time.'); return; }
+    const startIso = (() => { const d = new Date(`${scheduleDate}T${startTime}:00`); return Number.isNaN(d.getTime()) ? null : d.toISOString(); })();
+    if (!startIso) { setScheduleError('Invalid start time.'); return; }
+    if (new Date(startIso).getTime() < Date.now()) { setScheduleError('Start time cannot be in the past.'); alert('Start time cannot be in the past.'); return; }
+    const tz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || null; } catch { return null; } })();
+    // Use manually-edited endTime if available, otherwise auto-compute start + 1hr
+    const resolvedEndTime = endTime || (() => {
+      const d = new Date(new Date(startIso).getTime() + INTERVIEW_DURATION_SEC * 1000);
+      return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     })();
-
-    const toISOFromLocal = (dateStr, timeStr) => {
-      const d = new Date(`${dateStr}T${timeStr}:00`);
-      if (Number.isNaN(d.getTime())) return null;
-      return d.toISOString();
-    };
-
-    const buildSchedule = () => {
-      setScheduleError('');
-      if (validityMode === 'date_anytime') {
-        if (!scheduleDate) return { ok: false, error: 'Please select a start date for "Whole day".' };
-        const startIso = toISOFromLocal(scheduleDate, '00:00');
-        const endD = endDate || scheduleDate;
-        const endLocal = new Date(`${endD}T23:59:59`);
-        if (!startIso || Number.isNaN(endLocal.getTime())) return { ok: false, error: 'Invalid date.' };
-        if (endLocal.getTime() < new Date(startIso).getTime()) {
-          return { ok: false, error: 'End date must be same or after start date.' };
-        }
-        return { ok: true, start_time: startIso, end_time: endLocal.toISOString() };
-      }
-      if (validityMode === 'one_week') {
-        if (!scheduleDate) return { ok: false, error: 'Please select a start date for "1 week".' };
-        const startIso = toISOFromLocal(scheduleDate, '00:00');
-        if (!startIso) return { ok: false, error: 'Invalid start date.' };
-        const start = new Date(startIso);
-        const end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-        const endYMD = `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
-        const endLocal = new Date(`${endYMD}T23:59:59`);
-        return { ok: true, start_time: start.toISOString(), end_time: endLocal.toISOString() };
-      }
-      // exact_window
-      if (!scheduleDate || !startTime) return { ok: false, error: 'Please select date and start time.' };
-      const startIso = toISOFromLocal(scheduleDate, startTime);
-      if (!startIso) return { ok: false, error: 'Invalid start time.' };
-
-      // For interview invites, duration is optional - use a default if not provided
-      const durationSeconds = 3600; // Default 1 hour for interviews
-
-      const end = new Date(new Date(startIso).getTime() + durationSeconds * 1000);
-      const endIso = end.toISOString();
-
-      const DEFAULT_START_GRACE_MINUTES = 30;
-      return { ok: true, start_time: startIso, end_time: endIso, start_grace_minutes: DEFAULT_START_GRACE_MINUTES };
-    };
-
-    const sched = buildSchedule();
-    if (!sched.ok) {
-      setScheduleError(sched.error);
-      alert(sched.error);
-      return;
-    }
-
+    const endIso = (() => {
+      const d = new Date(`${scheduleDate}T${resolvedEndTime}:00`);
+      return Number.isNaN(d.getTime()) ? new Date(new Date(startIso).getTime() + INTERVIEW_DURATION_SEC * 1000).toISOString() : d.toISOString();
+    })();
+    setScheduleError('');
     setSending(true);
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/invite/`, {
         draft_ids: candidates.map(c => c.id),
         interview_name: 'Interview Invitation',
-        start_time: sched.start_time,
-        end_time: sched.end_time,
+        start_time: startIso,
+        end_time: endIso,
         time_zone: tz,
-        validity_mode: validityMode,
-        start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
+        validity_mode: 'exact_window',
+        start_grace_minutes: 30,
       });
-
       const { sent, failed, results } = resp.data || {};
-
-
       if (failed > 0) {
-        const failedEmails = results.filter(r => r.status === 'failed').map(r => r.email).join(', ');
-        alert(`Sent ${sent} invite(s). Failed to send ${failed} invite(s): ${failedEmails}`);
+        const failedEmails = (results || []).filter(r => r.status === 'failed').map(r => r.email).join(', ');
+        alert(`Sent ${sent} invite(s). Failed: ${failed} — ${failedEmails}`);
       } else {
         alert(`Successfully sent interview invites to ${sent} candidate(s).`);
       }
-
-      // Clear draft ONLY after Share completes successfully
-      try {
-        localStorage.removeItem(draftKey);
-      } catch {
-        // ignore
-      }
-      setCandidates([]);
-      setName('');
-      setEmail('');
-      setPan('');
-      setPhone('');
-      setImportMsg('');
-      setScheduleDate('');
-      setEndDate('');
-      setStartTime('');
+      try { localStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
+      setCandidates([]); setName(''); setEmail(''); setPan(''); setPhone('');
+      setInterviewerName(''); setInterviewerEmail('');
+      setScheduleDate(''); setStartTime(''); setEndTime(''); endTimeManualRef.current = false; setImportMsg('');
     } catch (e) {
-      const errorMsg = e?.response?.data?.error || e?.message || 'Failed to send interview invites';
-      alert(errorMsg);
-    } finally {
-      setSending(false);
-    }
+      alert(e?.response?.data?.error || e?.message || 'Failed to send interview invites');
+    } finally { setSending(false); }
   };
 
+  const isShareDisabled = sending || candidates.length === 0;
+
+  // ── Progress steps ──
+  const scheduleReady = !!(scheduleDate && startTime);
+  const candidatesReady = candidates.length > 0;
+
   return (
-    <div className="interview-invite-page">
+    <div className="ii-page">
       <Header />
 
-      <div className="interview-invite-shell">
-        <div className="interview-invite-top">
-          <div>
-            <div className="interview-invite-title">Invite Candidates</div>
-          </div>
-          <div className="interview-invite-actions">
-            <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>Back</button>
+      <div className="ii-shell">
 
+        {/* ── Page Header ── */}
+        <div className="ii-top">
+          <div className="ii-top-left">
+            <div className="ii-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div className="ii-title">Invite for Live Interview</div>
+              <div className="ii-meta">
+                <span className="ii-meta-chip">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  Default duration: 1 hour
+                </span>
+                <span className="ii-meta-sep">·</span>
+                <span className="ii-meta-chip">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                  Live Interview
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="ii-actions">
+            <button className="ii-btn-back" type="button" onClick={() => navigate('/dashboard')}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              Back
+            </button>
           </div>
         </div>
 
-        <div className="card">
-          <div className="card-title">Schedule / Link Validity</div>
-          <div className="form-grid" style={{ marginBottom: 8 }}>
-            <div className="field">
-              <label>Validity Type</label>
-              <select
-                className="select"
-                value={validityMode}
+        {/* ── Progress Stepper ── */}
+        <div className="ii-stepper">
+          {[
+            { label: 'Set Schedule', desc: 'Choose date & time', done: scheduleReady,
+              active: !scheduleReady,
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+            { label: 'Add Candidates', desc: `${candidates.length} added`, done: candidatesReady,
+              active: scheduleReady && !candidatesReady,
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg> },
+            { label: 'Send Invites', desc: 'Email all candidates', done: false,
+              active: scheduleReady && candidatesReady,
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> },
+          ].map((step, i, arr) => (
+            <React.Fragment key={step.label}>
+              <div className={`ii-step${step.done ? ' done' : step.active ? ' active' : ''}`}>
+                <div className="ii-step-circle">
+                  {step.done
+                    ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    : step.icon}
+                </div>
+                <div className="ii-step-text">
+                  <span className="ii-step-label">{step.label}</span>
+                  <span className="ii-step-desc">{step.desc}</span>
+                </div>
+              </div>
+              {i < arr.length - 1 && <div className={`ii-step-connector${step.done ? ' done' : ''}`} />}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* ── Schedule Card ── */}
+        <div className="ii-card">
+          <div className="ii-card-header">
+            <div className="ii-card-icon blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <span className="ii-card-title">Schedule / Link Validity</span>
+            <span className="ii-card-subtitle">Particular date + time window only</span>
+          </div>
+
+          <div className="ii-grid ii-grid-4">
+            <div className="ii-field">
+              <label className="ii-label">Start Date <span className="ii-required">*</span></label>
+              <input
+                type="date"
+                className="ii-input"
+                value={scheduleDate}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => { setScheduleDate(e.target.value); setScheduleError(''); }}
+              />
+            </div>
+            <div className="ii-field">
+              <label className="ii-label">Start Time <span className="ii-required">*</span></label>
+              <input
+                type="time"
+                className="ii-input"
+                value={startTime}
+                onChange={(e) => { setStartTime(e.target.value); setScheduleError(''); }}
+              />
+            </div>
+            <div className="ii-field">
+              <label className="ii-label">End Time <span className="ii-hint-inline">(auto · editable)</span></label>
+              <input
+                type="time"
+                className="ii-input"
+                value={endTime}
                 onChange={(e) => {
-                  setValidityMode(e.target.value);
+                  endTimeManualRef.current = true;
+                  setEndTime(e.target.value);
                   setScheduleError('');
                 }}
-              >
-                <option value="exact_window">Particular date + time window</option>
-                <option value="date_anytime">Particular date (whole day / date range)</option>
-                <option value="one_week">1 week from start</option>
-              </select>
+                placeholder="Auto-computed"
+              />
+              <span className="ii-hint">Auto-filled as Start + 1 hr · change if needed</span>
             </div>
-            <div className="field">
-              <label>Start Date</label>
-              <input type="date" value={scheduleDate} onChange={(e) => setScheduleDate(e.target.value)} />
+            <div className="ii-field">
+              <label className="ii-label">Start Window (auto)</label>
+              <input
+                type="text"
+                className="ii-input"
+                value={startWindowLabel}
+                readOnly
+                placeholder="Auto-computed"
+              />
+              <span className="ii-hint">30-minute entry window</span>
             </div>
-            {validityMode === 'date_anytime' ? (
-              <div className="field">
-                <label>End Date (optional)</label>
-                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                <div className="hint">Leave empty to allow only the start date.</div>
-              </div>
-            ) : validityMode === 'one_week' ? (
-              <div className="field">
-                <label>End Date (auto)</label>
+          </div>
+
+          {scheduleError && <p className="ii-error" style={{ marginTop: '0.75rem' }}>{scheduleError}</p>}
+
+          <div className="ii-schedule-note">
+            <span className="ii-note-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </span>
+            If a candidate starts within the allowed start window, they can refresh or reconnect and continue until the interview end time.
+          </div>
+        </div>
+
+        {/* ── Add Candidate Card ── */}
+        <div className="ii-card">
+          <div className="ii-card-header">
+            <div className="ii-card-icon teal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+              </svg>
+            </div>
+            <span className="ii-card-title">Add Candidates</span>
+            <span className="ii-card-subtitle">Fill manually or import from CSV</span>
+          </div>
+
+          {/* Toolbar */}
+          <div className="ii-toolbar">
+            <div className="ii-toolbar-left">
+              <button className="ii-btn-secondary" type="button" onClick={downloadTemplate}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download CSV Template
+              </button>
+            </div>
+            <div className="ii-toolbar-right">
+              {importMsg && (
+                <span className="ii-import-msg">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  {importMsg}
+                </span>
+              )}
+              <label className="ii-file-pill" htmlFor="interviewInviteCsv">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                Upload CSV
                 <input
-                  type="date"
-                  value={(() => {
-                    if (!scheduleDate) return '';
-                    const start = new Date(`${scheduleDate}T00:00:00`);
-                    if (Number.isNaN(start.getTime())) return '';
-                    const end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-                    return `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
-                  })()}
-                  readOnly
+                  id="interviewInviteCsv"
+                  ref={fileRef}
+                  type="file"
+                  accept=".csv,text/csv"
+                  style={{ display: 'none' }}
+                  onChange={(e) => handleCSVUpload(e.target.files?.[0])}
                 />
+              </label>
+            </div>
+          </div>
+
+          {/* Two-row form: Candidate fields + Interviewer fields */}
+          <div className="ii-form-section-label">Candidate Details</div>
+          <div className="ii-add-row">
+            <div className="ii-field">
+              <label className="ii-label">Name <span className="ii-required">*</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${name.trim() ? ' ii-valid' : ''}`}
+                  value={name}
+                  onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder="Candidate full name"
+                  maxLength={100}
+                />
+                {name.trim() && <span className="ii-tick">✓</span>}
               </div>
-            ) : (
-              <>
-                <div className="field">
-                  <label>Start Time</label>
-                  <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-                  <div className="hint">Grace period is automatically applied.</div>
-                </div>
-                <div className="field">
-                  <label>End Time (auto)</label>
-                  <input
-                    type="text"
-                    value={(() => {
-                      // Default interview duration: 1 hour (3600 seconds)
-                      const durationSeconds = 3600;
-                      if (!scheduleDate || !startTime || !durationSeconds) return '';
-                      const start = new Date(`${scheduleDate}T${startTime}:00`);
-                      if (Number.isNaN(start.getTime())) return '';
-                      const end = new Date(start.getTime() + durationSeconds * 1000);
-                      const hh = String(end.getHours()).padStart(2, '0');
-                      const mm = String(end.getMinutes()).padStart(2, '0');
-                      return `${hh}:${mm}`;
-                    })()}
-                    readOnly
-                    placeholder="Auto"
-                  />
-                  <div className="hint">Calculated using default interview duration: <span className="mono">01:00:00</span></div>
-                </div>
-              </>
+            </div>
+            <div className="ii-field">
+              <label className="ii-label">Email <span className="ii-required">*</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${email ? (isValidEmail(email) ? ' ii-valid' : ' ii-invalid') : ''}`}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder="candidate@email.com"
+                  maxLength={100}
+                />
+                {email && <span className={isValidEmail(email) ? 'ii-tick' : 'ii-cross'}>{isValidEmail(email) ? '✓' : '✕'}</span>}
+              </div>
+            </div>
+            <div className="ii-field">
+              <label className="ii-label">PAN <span className="ii-label-opt">(optional)</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${pan ? (isValidPAN(pan) ? (pan.length === 10 ? ' ii-valid' : '') : ' ii-invalid') : ''}`}
+                  value={pan}
+                  onChange={handlePanChange}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder="ABCDE1234F"
+                  maxLength={10}
+                />
+                {pan.length === 10 && isValidPAN(pan) && <span className="ii-tick">✓</span>}
+                {pan && !isValidPAN(pan) && <span className="ii-cross">✕</span>}
+              </div>
+            </div>
+            <div className="ii-field">
+              <label className="ii-label">Phone <span className="ii-label-opt">(optional)</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${phone.length === 10 ? ' ii-valid' : ''}`}
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder="10-digit number"
+                />
+                {phone.length === 10 && <span className="ii-tick">✓</span>}
+              </div>
+            </div>
+          </div>
+
+          <div className="ii-form-section-label" style={{ marginTop: '1rem' }}>Interviewer Details</div>
+          <div className="ii-add-row">
+            <div className="ii-field">
+              <label className="ii-label">Interviewer Name <span className="ii-required">*</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${interviewerName.trim() ? ' ii-valid' : ''}`}
+                  value={interviewerName}
+                  onChange={(e) => setInterviewerName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder="Interviewer full name"
+                  maxLength={100}
+                />
+                {interviewerName.trim() && <span className="ii-tick">✓</span>}
+              </div>
+            </div>
+            <div className="ii-field" style={{ flex: '1.5' }}>
+              <label className="ii-label">
+                Interviewer Email <span className="ii-required">*</span>
+                {userDomain && <span className="ii-label-opt"> (@{userDomain})</span>}
+              </label>
+              <div className="ii-input-wrap">
+                <input
+                  className={`ii-input${interviewerEmail ? (isValidEmail(interviewerEmail) ? ' ii-valid' : ' ii-invalid') : ''}`}
+                  value={interviewerEmail}
+                  onChange={(e) => setInterviewerEmail(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  placeholder={`e.g. interviewer@${userDomain || 'company.com'}`}
+                  maxLength={100}
+                />
+                {interviewerEmail && <span className={isValidEmail(interviewerEmail) ? 'ii-tick' : 'ii-cross'}>{isValidEmail(interviewerEmail) ? '✓' : '✕'}</span>}
+              </div>
+            </div>
+            <div className="ii-add-actions">
+              <button className="ii-btn-tertiary" type="button" onClick={addCandidate} disabled={!canAdd}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Add
+              </button>
+              <button type="button" onClick={shareInvites} disabled={isShareDisabled} className="ii-btn-share">
+                {sending ? (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'ii-spin 1s linear infinite' }}>
+                      <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+                    </svg>
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    Send Invites
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Candidates Table Card ── */}
+        <div className="ii-card">
+          <div className="ii-card-header">
+            <div className="ii-card-icon violet">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <span className="ii-card-title">Candidates</span>
+            {candidates.length > 0 && (
+              <span className="ii-card-subtitle">{candidates.length} {candidates.length === 1 ? 'candidate' : 'candidates'} added</span>
             )}
           </div>
-          {scheduleError ? <div className="hint error-text">{scheduleError}</div> : null}
-          <div className="hint">
-            Note: If a candidate starts within the allowed start window, they can refresh/reconnect and continue until the interview end time.
-          </div>
-        </div>
 
-        <div className="card">
-          <div className="card-title">Add Candidate
-            <button className="btn-primary" type="button" onClick={shareInvites} disabled={sending || candidates.length === 0}>
-              {sending ? 'Sharing…' : 'Share'}
-            </button>
-          </div>
+          {/* Stats bar */}
+          {candidates.length > 0 && (
+            <div className="ii-stats-bar">
+              <div className="ii-stat">
+                <span className="ii-stat-val">{candidates.length}</span>
+                <span className="ii-stat-label">Total</span>
+              </div>
+              <div className="ii-stat">
+                <span className="ii-stat-val">{candidates.filter(c => c.pan_number).length}</span>
+                <span className="ii-stat-label">With PAN</span>
+              </div>
+              <div className="ii-stat">
+                <span className="ii-stat-val">{candidates.filter(c => c.phone).length}</span>
+                <span className="ii-stat-label">With Phone</span>
+              </div>
+              {scheduleDisplay && (
+                <div className="ii-stat ii-stat-schedule">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  <span className="ii-stat-schedule-val">{scheduleDisplay}</span>
+                </div>
+              )}
+              <div className="ii-stat-actions">
+                <button
+                  type="button"
+                  className="ii-btn-clear"
+                  onClick={async () => {
+                    if (!window.confirm(`Remove all ${candidates.length} candidates?`)) return;
+                    try {
+                      await Promise.all(candidates.map(c => axios.delete(`${API_BASE_URL}/interviews/draft-invites/${c.id}/`)));
+                      setCandidates([]);
+                    } catch { alert('Failed to clear some candidates.'); }
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
+                    <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+                  </svg>
+                  Clear All
+                </button>
+              </div>
+            </div>
+          )}
 
-          <div className="bulk-row">
-            <button className="btn-secondary" type="button" onClick={downloadTemplate}>
-              Download CSV Template
-            </button>
-            <label className="file-pill" htmlFor="interviewInviteCsv">
-              Upload CSV
-              <input
-                id="interviewInviteCsv"
-                ref={fileRef}
-                className="file-input"
-                type="file"
-                accept=".csv,text/csv"
-                onChange={(e) => handleCSVUpload(e.target.files?.[0])}
-              />
-            </label>
-            <div className="hint">
-              Columns: <span className="mono">name,email,pan_number,phone</span> (PAN/Phone optional)
-            </div>
-
-          </div>
-          {importMsg ? <div className="hint">{importMsg}</div> : null}
-          <div className="form-grid add-inline">
-            <div className="field">
-              <label>Candidate Name *</label>
-              <input value={name} onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }} placeholder="Candidate name" maxLength={100} />
-            </div>
-            <div className="field">
-              <label>Candidate Email *</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
-            </div>
-            <div className="field">
-              <label>Candidate Phone (Optional)</label>
-              <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" maxLength={10} />
-            </div>
-            <div className="field">
-              <label>Interviewer Name *</label>
-              <input value={interviewerName} onChange={(e) => setInterviewerName(e.target.value)} placeholder="Interviewer Name" maxLength={100} />
-            </div>
-            <div className="field">
-              <label>Interviewer Email *</label>
-              <input value={interviewerEmail} onChange={(e) => setInterviewerEmail(e.target.value)} placeholder={`e.g. user@${userDomain || 'company.com'}`} maxLength={100} />
-            </div>
-            <div className="field">
-              <label>Candidate PAN (Optional)</label>
-              <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
-              {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
-            </div>
-          </div>
-          <div className="add-action-row">
-            <button className="btn-primary" type="button" onClick={addCandidate} disabled={!canAdd} style={{ padding: '0.75rem 2.5rem', fontSize: '1rem', marginTop: '1.5rem' }}>
-              Add Candidate
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-title">Candidates</div>
           {candidates.length === 0 ? (
-            <div className="empty">No candidates added yet.</div>
+            <div className="ii-empty">
+              <div className="ii-empty-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+              </div>
+              <div className="ii-empty-title">No candidates added yet</div>
+              <div className="ii-empty-text">Fill in the form above or upload a CSV file to add candidates to this interview batch.</div>
+            </div>
           ) : (
-            <div className="table-wrap">
-              <table className="table">
+            <div className="ii-table-wrap">
+              <table className="ii-table">
                 <thead>
                   <tr>
-                    <th>Candidate Name</th>
+                    <th>#</th>
+                    <th>Candidate</th>
                     <th>Candidate Email</th>
-                    <th>Interviewer Name</th>
+                    <th>Interviewer</th>
                     <th>Interviewer Email</th>
+                    <th>Scheduled</th>
                     <th>PAN</th>
                     <th>Phone</th>
                     <th style={{ textAlign: 'right' }}>Action</th>
@@ -659,14 +752,38 @@ export default function InterviewInvite() {
                 <tbody>
                   {candidates.map((c, idx) => (
                     <tr key={`${c.email}-${idx}`}>
-                      <td>{c.name}</td>
-                      <td className="mono">{c.email}</td>
-                      <td>{c.interviewer_name}</td>
-                      <td className="mono">{c.interviewer_email}</td>
-                      <td className="mono">{c.pan_number || '-'}</td>
-                      <td className="mono">{c.phone || '-'}</td>
+                      <td className="ii-td-num">{idx + 1}</td>
+                      <td>
+                        <div className="ii-cand-cell">
+                          <div className="ii-avatar ii-avatar-blue">{getInitials(c.name)}</div>
+                          <span className="ii-cand-name">{c.name}</span>
+                        </div>
+                      </td>
+                      <td><span className="ii-mono">{c.email}</span></td>
+                      <td>
+                        <div className="ii-cand-cell">
+                          <div className="ii-avatar ii-avatar-violet">{getInitials(c.interviewer_name || c.interviewer_email)}</div>
+                          <span className="ii-cand-name">{c.interviewer_name || '—'}</span>
+                        </div>
+                      </td>
+                      <td><span className="ii-mono">{c.interviewer_email}</span></td>
+                      <td>
+                        {scheduleDisplay
+                          ? <span className="ii-badge-schedule">{scheduleDisplay}</span>
+                          : <span className="ii-badge-warn">Not set</span>}
+                      </td>
+                      <td>
+                        {c.pan_number
+                          ? <span className="ii-badge-pan">{c.pan_number}</span>
+                          : <span className="ii-badge-dash">—</span>}
+                      </td>
+                      <td>
+                        {c.phone
+                          ? <span className="ii-mono">{c.phone}</span>
+                          : <span className="ii-badge-dash">—</span>}
+                      </td>
                       <td style={{ textAlign: 'right' }}>
-                        <button className="btn-danger" type="button" onClick={() => removeCandidate(idx)}>Remove</button>
+                        <button className="ii-btn-danger" type="button" onClick={() => removeCandidate(idx)}>Remove</button>
                       </td>
                     </tr>
                   ))}
@@ -677,6 +794,8 @@ export default function InterviewInvite() {
         </div>
 
       </div>
+
+      <style>{`@keyframes ii-spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
