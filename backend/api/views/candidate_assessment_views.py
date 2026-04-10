@@ -1678,10 +1678,32 @@ def results_overview_view(request):
         except Exception:
             pass
 
+        # Optimization: Fetch results into a list and pre-build a map for candidate details
+        results_slice = list(qs[:5000])
+        inv_ids = [s.invitation_id for s in results_slice]
+        
+        details_map = {}
+        if inv_ids:
+            # Fetch most recent details for each invitation in one query
+            details_qs = CandidateDetails.objects.filter(invitation_id__in=inv_ids).order_by('id')
+            for d in details_qs:
+                details_map[d.invitation_id] = d
+
         results = []
-        for s in qs[:5000]:
+        for s in results_slice:
             inv = s.invitation
             a = inv.assessment
+
+            # Fetch PAN and Phone from mapped CandidateDetails, fallback to invitation
+            latest_details = details_map.get(inv.id)
+            
+            pan = latest_details.pan_number if latest_details else inv.pan_number
+            phone = latest_details.phone if latest_details else inv.phone
+
+            # Ensure empty strings instead of null for CSV compatibility
+            pan = pan or ""
+            phone = phone or ""
+
             results.append(
                 {
                     'submission_id': s.id,
@@ -1690,6 +1712,8 @@ def results_overview_view(request):
                     'candidate': {
                         'name': inv.name,
                         'email': inv.email,
+                        'pan_number': pan,
+                        'phone': phone,
                     },
                     'assessment': {
                         'id': a.id,

@@ -30,8 +30,7 @@
 
 /* --- Filter Specifics --- */
 .search-input {
-  flex: 1 1 300px;
-  /* Grow to fill space */
+  flex: 1 1 200px;
 }
 
 .search-select {
@@ -39,7 +38,7 @@
 }
 
 .search-date {
-  width: auto;
+  width: 160px;
 }
 
 .date-filter {

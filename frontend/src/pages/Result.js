@@ -115,6 +115,37 @@ export default function Result() {
         }
     }, [isOverview, token, fromDate, toDate]);
 
+    const downloadCSV = () => {
+        if (!filtered || filtered.length === 0) {
+            alert("No data available to download.");
+            return;
+        }
+
+        // Format: name,email,pan_number,phone
+        const headers = ["name", "email", "pan_number", "phone"];
+        const rows = filtered.map(r => [
+            r.candidate?.name || "",
+            r.candidate?.email || "",
+            r.candidate?.pan_number || "",
+            r.candidate?.phone || ""
+        ]);
+
+        const csvString = [
+            headers.join(","),
+            ...rows.map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(","))
+        ].join("\n");
+
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", `results_${new Date().toISOString().slice(0, 10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
+
     useEffect(() => {
         load();
     }, [load]);
@@ -284,6 +315,9 @@ export default function Result() {
                             onChange={(e) => setToDate(e.target.value)}
                         />
                     </div>
+                    <button className="btn-secondary" type="button" onClick={downloadCSV} title="Download CSV" style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', flexShrink: 0, height: '42px', padding: '0 1rem' }}>
+                        <Download size={16} /> .csv
+                    </button>
                 </div>
 
                 {loading ? (
