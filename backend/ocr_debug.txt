@@ -270,3 +270,9 @@
 [2026-04-06 06:53:42.047781+00:00] Page 1: 1624 chars extracted
 [2026-04-06 06:54:09.636254+00:00] Page 2: 703 chars extracted
 [2026-04-06 06:54:09.636254+00:00] OCR complete. Total chars: 3704
+[2026-04-10 09:02:26.284365+00:00] Starting Full PDF OCR (Skills Extraction)
+[2026-04-10 09:03:30.595174+00:00] fitz opened PDF with 3 pages
+[2026-04-10 09:04:31.828194+00:00] Page 0: 1374 chars extracted
+[2026-04-10 09:05:03.655704+00:00] Page 1: 1624 chars extracted
+[2026-04-10 09:05:25.722172+00:00] Page 2: 703 chars extracted
+[2026-04-10 09:05:25.728702+00:00] OCR complete. Total chars: 3704

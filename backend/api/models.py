@@ -503,6 +503,10 @@ class CustomAssessment(models.Model):
         ('senior', 'Senior (5-10 years)'),
         ('expert', 'Expert (10+ years)'),
     ]
+    ASSESSMENT_MODE_CHOICES = [
+        ('single', 'Single'),
+        ('multiple', 'Multiple'),
+    ]
 
     # Link to the registered user, if available
     user_profile = models.ForeignKey(
@@ -528,6 +532,12 @@ class CustomAssessment(models.Model):
     organization_name = models.CharField(max_length=255, blank=True, null=True)
 
     # Role configuration
+    assessment_mode = models.CharField(
+        max_length=20,
+        choices=ASSESSMENT_MODE_CHOICES,
+        default='single',
+        help_text="Single = resume-based flow, Multiple = role/sub-role based flow",
+    )
     role = models.CharField(max_length=150)
     sub_roles = models.JSONField(default=list, blank=True, help_text="Array of selected sub-roles")
     custom_role = models.CharField(max_length=255, blank=True, null=True)

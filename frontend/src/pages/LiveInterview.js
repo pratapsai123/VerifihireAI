@@ -50,6 +50,21 @@ function LiveInterview() {
 
   const [notifications, setNotifications] = useState([]);
 
+  const closeCandidateTab = useCallback(() => {
+    try {
+      window.open('', '_self');
+      window.close();
+    } catch (e) {
+      // ignore and use fallback below
+    }
+    setTimeout(() => {
+      // Fallback for browsers that block window.close on non-script-opened tabs
+      if (!window.closed) {
+        window.location.replace('about:blank');
+      }
+    }, 120);
+  }, []);
+
   // Check if session is expired
   useEffect(() => {
     if (localStorage.getItem(sessionKey) === 'true') {
@@ -218,13 +233,10 @@ function LiveInterview() {
         showSessionPopup(data.message || 'Session expired or already completed.', 'error');
         setSessionExpired(true);
         localStorage.setItem(sessionKey, 'true');
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
         break;
       default: break;
     }
-  }, [interviewerName, chatPanelVisible, sessionId, sessionKey, navigate, showSessionPopup]);
+  }, [interviewerName, chatPanelVisible, sessionId, sessionKey, showSessionPopup]);
 
   const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
 
@@ -245,6 +257,16 @@ function LiveInterview() {
 
   const [mediaLoading, setMediaLoading] = useState(true);
   const [mediaError, setMediaError] = useState(false);
+  const [showMediaHint, setShowMediaHint] = useState(false);
+
+  useEffect(() => {
+    if (!mediaLoading || mediaError) {
+      setShowMediaHint(false);
+      return;
+    }
+    const t = setTimeout(() => setShowMediaHint(true), 7000);
+    return () => clearTimeout(t);
+  }, [mediaLoading, mediaError]);
 
   const initializeMedia = useCallback(() => {
     setMediaLoading(true);
@@ -401,16 +423,28 @@ function LiveInterview() {
     return (
       <div className="session-expired-modal">
         <div className="session-expired-content">
-          <h3>Session Completed</h3>
-          <p>This interview session has already been completed.</p>
-          <button onClick={() => navigate('/')}>Close</button>
+          <div className="session-expired-icon">✓</div>
+          <h3 className="session-expired-title">Session Completed</h3>
+          <p className="session-expired-message">This interview session has already been completed.</p>
+          <button className="btn-close-window" onClick={closeCandidateTab}>Close</button>
         </div>
       </div>
     );
   }
 
   if (showFinalThankYou) {
-    return <div className="thank-you-screen"><h2>Thank You!</h2></div>;
+    return (
+      <div className="li-final-thanks-screen">
+        <div className="li-final-thanks-card">
+          <div className="li-final-thanks-icon">✓</div>
+          <h2>Feedback Submitted</h2>
+          <p>Thank you for your response. You can now close this tab.</p>
+          <button type="button" className="li-final-thanks-close" onClick={closeCandidateTab}>
+            Close Tab
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (showThankYou) {
@@ -435,9 +469,9 @@ function LiveInterview() {
   return (
     <ErrorBoundary>
       <div className={`live-interview ${chatPanelVisible ? 'chat-active' : ''}`}>
-        <div className="notifications-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 9999 }}>
+        <div className="li-notifications-container">
           {notifications.map(n => (
-            <div key={n.id} className={`session-popup ${n.severity}`} style={{ marginBottom: '10px', padding: '10px', background: '#333', color: '#fff', borderRadius: '5px' }}>
+            <div key={n.id} className={`li-notification ${n.severity}`}>
               {n.message}
             </div>
           ))}
@@ -450,13 +484,18 @@ function LiveInterview() {
 
         <div className="main-wrapper">
           <div className="video-container">
-            <ConnectionOverlay status={connectionStatus} />
+            {!mediaLoading && !mediaError && <ConnectionOverlay status={connectionStatus} />}
 
             {mediaLoading && !mediaError && (
-              <div className="connection-overlay" style={{ background: 'rgba(0,0,0,0.8)', zIndex: 50 }}>
-                <i className="fas fa-video spinner"></i>
-                <h3>Accessing Camera & Microphone...</h3>
-                <p>Please allow permissions when prompted.</p>
+              <div className="connection-overlay media-loading-overlay" style={{ zIndex: 50 }}>
+                <div className="media-loading-card" role="status" aria-live="polite" aria-atomic="true">
+                  <i className="fas fa-circle-notch media-rotate-icon"></i>
+                  <h3>Connecting...</h3>
+                  <p>Please allow camera and microphone permissions in your browser prompt.</p>
+                  {showMediaHint && (
+                    <p className="media-loading-hint">Still connecting. If no popup appears, check browser permission icon near URL bar.</p>
+                  )}
+                </div>
               </div>
             )}
 

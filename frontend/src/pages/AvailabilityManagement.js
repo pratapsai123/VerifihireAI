@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import { useNavigate } from 'react-router-dom';
 import { 
     Calendar, 
     Clock, 
@@ -14,15 +15,24 @@ import {
 import '../styles/AvailabilityManagement.css';
 
 const AvailabilityManagement = () => {
+    const navigate = useNavigate();
     const [windows, setWindows] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null); // ID of slot being toggled
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const [viewDate, setViewDate] = useState(new Date());
+    const [toast, setToast] = useState(null);
+    const [showClearDayModal, setShowClearDayModal] = useState(false);
+    const [clearDayLoading, setClearDayLoading] = useState(false);
 
     useEffect(() => {
         fetchAvailability();
     }, []);
+
+    const showToast = (message, type = 'info') => {
+        setToast({ message, type });
+        setTimeout(() => setToast(null), 2600);
+    };
 
     const fetchAvailability = async () => {
         try {
@@ -71,20 +81,31 @@ const AvailabilityManagement = () => {
             await fetchAvailability();
         } catch (err) {
             const errorMsg = err.response?.data?.error || "Error updating slot.";
-            alert(errorMsg);
+            showToast(errorMsg, 'error');
         } finally {
             setActionLoading(null);
         }
     };
 
-    // Generate Hourly Slots from 9 AM to 6 PM
+    // Generate interview slots for the day (06:00 → 23:00)
     const dailySlots = useMemo(() => {
         const slots = [];
-        for (let h = 0; h <= 23; h++) {
+        for (let h = 6; h <= 23; h++) {
             slots.push(`${h.toString().padStart(2, '0')}:00`);
         }
         return slots;
     }, []);
+
+    const groupedSlots = useMemo(() => {
+        const groups = { morning: [], afternoon: [], evening: [] };
+        dailySlots.forEach((slot) => {
+            const hour = parseInt(slot.split(':')[0], 10);
+            if (hour < 12) groups.morning.push(slot);
+            else if (hour < 17) groups.afternoon.push(slot);
+            else groups.evening.push(slot);
+        });
+        return groups;
+    }, [dailySlots]);
 
     const formatTime = (timeStr) => {
         const [h, m] = timeStr.split(':');
@@ -134,13 +155,77 @@ const AvailabilityManagement = () => {
         </div>
     );
 
+    const selectedDateCount = windows.filter(w => w.date === selectedDate).length;
+    const selectedDateBookedCount = windows.filter(w => w.date === selectedDate && w.is_booked).length;
+    const totalBookedCount = windows.filter(w => w.is_booked).length;
+
+    const clearDaySlots = async () => {
+        try {
+            setClearDayLoading(true);
+            const unbooked = windows.filter(w => w.date === selectedDate && !w.is_booked);
+            if (unbooked.length === 0) {
+                showToast('No unbooked slots available to clear on this date.', 'info');
+                return;
+            }
+            const token = localStorage.getItem('token');
+            for (const slot of unbooked) {
+                await axios.delete(`${API_BASE_URL}/interviews/availability/manage/`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    data: { id: slot.id }
+                });
+            }
+            await fetchAvailability();
+            showToast(`Cleared ${unbooked.length} slot(s) for selected day.`, 'success');
+        } catch (err) {
+            showToast(err.response?.data?.error || 'Failed to clear selected day slots.', 'error');
+        } finally {
+            setClearDayLoading(false);
+            setShowClearDayModal(false);
+        }
+    };
+
     return (
         <div className="availability-mgmt-container">
-            <div className="mgmt-header">
-                <h1>Manage Your Availability</h1>
-            </div>
+            <div className="mgmt-shell">
+                <div className="mgmt-header">
+                    <div className="mgmt-header-left">
+                        <div className="mgmt-header-icon">
+                            <Calendar size={24} />
+                        </div>
+                        <div>
+                            <h1>Manage Your Availability</h1>
+                            <p>Pick interview slots for your upcoming live interviews</p>
+                        </div>
+                    </div>
+                    <button className="mgmt-btn-back" type="button" onClick={() => navigate('/dashboard')}>
+                        <ChevronLeft size={16} />
+                        Back
+                    </button>
+                </div>
 
-            <div className="mgmt-upper-layout triple">
+                <div className="mgmt-stats-row">
+                    <div className="mgmt-stat">
+                        <span className="mgmt-stat-value">{selectedDateCount}</span>
+                        <span className="mgmt-stat-label">Slots on Selected Day</span>
+                    </div>
+                    <div className="mgmt-stat-divider" />
+                    <div className="mgmt-stat">
+                        <span className="mgmt-stat-value">{selectedDateBookedCount}</span>
+                        <span className="mgmt-stat-label">Booked on Selected Day</span>
+                    </div>
+                    <div className="mgmt-stat-divider" />
+                    <div className="mgmt-stat">
+                        <span className="mgmt-stat-value">{windows.length}</span>
+                        <span className="mgmt-stat-label">Total Active Slots</span>
+                    </div>
+                    <div className="mgmt-stat-divider" />
+                    <div className="mgmt-stat">
+                        <span className="mgmt-stat-value">{totalBookedCount}</span>
+                        <span className="mgmt-stat-label">Total Booked Slots</span>
+                    </div>
+                </div>
+
+                <div className="mgmt-upper-layout triple">
                 {/* Column 1: Calendar */}
                 <div className="mgmt-card calendar-side glass-card compact">
                     <div className="card-header">
@@ -149,8 +234,16 @@ const AvailabilityManagement = () => {
                             <span className="text-sm">Select Date</span>
                         </div>
                         <div className="cal-nav">
-                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() - 1)))}><ChevronLeft size={16} /></button>
-                            <button onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() + 1)))}><ChevronRight size={16} /></button>
+                                <button
+                                    onClick={() => setViewDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}
+                                >
+                                    <ChevronLeft size={16} />
+                                </button>
+                                <button
+                                    onClick={() => setViewDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}
+                                >
+                                    <ChevronRight size={16} />
+                                </button>
                         </div>
                     </div>
                     
@@ -188,27 +281,22 @@ const AvailabilityManagement = () => {
                             </div>
                             <button 
                                 className="clear-day-btn"
-                                onClick={async () => {
-                                    if (window.confirm("Clear all unbooked slots for this day? Booked slots will remain and cannot be removed.")) {
-                                        const unbooked = windows.filter(w => w.date === selectedDate && !w.is_booked);
-                                        const token = localStorage.getItem('token');
-                                        for (const slot of unbooked) {
-                                            await axios.delete(`${API_BASE_URL}/interviews/availability/manage/`, {
-                                                headers: { 'Authorization': `Bearer ${token}` },
-                                                data: { id: slot.id }
-                                            });
-                                        }
-                                        await fetchAvailability();
-                                    }
-                                }}
+                                onClick={() => setShowClearDayModal(true)}
                             >
                                 Clear Day
                             </button>
                         </div>
                     </div>
 
-                    <div className="slots-picker-grid mini">
-                        {dailySlots.map(time => {
+                    {[
+                        { key: 'morning', title: 'Morning', slots: groupedSlots.morning },
+                        { key: 'afternoon', title: 'Afternoon', slots: groupedSlots.afternoon },
+                        { key: 'evening', title: 'Evening', slots: groupedSlots.evening },
+                    ].map(group => (
+                        <div className="slot-group" key={group.key}>
+                            <div className="slot-group-title">{group.title}</div>
+                            <div className="slots-picker-grid mini">
+                                {group.slots.map(time => {
                             const window = windows.find(w => w.date === selectedDate && w.start_time === time);
                             const isSelected = !!window;
                             const isBooked = window?.is_booked;
@@ -239,10 +327,12 @@ const AvailabilityManagement = () => {
                                 </button>
                             );
                         })}
-                    </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                {/* Column 3: Rules & Stats */}
+                {/* Column 3: Rules & Highlights */}
                 <div className="mgmt-card info-side glass-card compact">
                     <div className="section-title text-sm">
                         <Info size={18} className="text-indigo-600" />
@@ -274,14 +364,47 @@ const AvailabilityManagement = () => {
                     </div>
 
                     <div className="stats-spacer"></div>
-
                     <div className="stat-card mini">
-                        <div className="mini-title text-xxs">Active Slots</div>
-                        <div className="big-count sm">{windows.length}</div>
+                        <div className="mini-title text-xxs">Selected Date</div>
+                        <div className="big-count sm">{new Date(selectedDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short' })}</div>
+                        <p>{selectedDateCount} active · {selectedDateBookedCount} booked</p>
                     </div>
                 </div>
             </div>
+            </div>
 
+            {toast && (
+                <div className={`mgmt-toast ${toast.type}`}>
+                    {toast.message}
+                </div>
+            )}
+
+            {showClearDayModal && (
+                <div className="mgmt-confirm-overlay" onClick={() => !clearDayLoading && setShowClearDayModal(false)}>
+                    <div className="mgmt-confirm-card" onClick={(e) => e.stopPropagation()}>
+                        <h3>Clear Selected Day Slots?</h3>
+                        <p>Only unbooked slots will be removed. Booked slots remain protected.</p>
+                        <div className="mgmt-confirm-actions">
+                            <button
+                                className="mgmt-confirm-cancel"
+                                type="button"
+                                disabled={clearDayLoading}
+                                onClick={() => setShowClearDayModal(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="mgmt-confirm-danger"
+                                type="button"
+                                disabled={clearDayLoading}
+                                onClick={clearDaySlots}
+                            >
+                                {clearDayLoading ? 'Clearing...' : 'Clear Day'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

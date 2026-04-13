@@ -1030,6 +1030,7 @@ def create_custom_assessment_view(request):
             "organization_name": "..."
         },
         "assessment": {
+            "assessment_mode": "single|multiple",
             "role": "...",
             "sub_roles": [...],
             "custom_role": "...",
@@ -1056,6 +1057,10 @@ def create_custom_assessment_view(request):
         assessment_data = request.data.get('assessment', {}) or {}
 
         # Basic required fields validation
+        assessment_mode = (assessment_data.get('assessment_mode') or 'single').strip().lower()
+        if assessment_mode not in ['single', 'multiple']:
+            assessment_mode = 'single'
+
         role = assessment_data.get('role', '').strip()
         number_of_questions = assessment_data.get('number_of_questions', None)
         time_value = assessment_data.get('time', '').strip()
@@ -1109,6 +1114,7 @@ def create_custom_assessment_view(request):
                 last_name=user_data.get('last_name') or None,
                 email=email,
                 organization_name=user_data.get('organization_name') or None,
+                assessment_mode=assessment_mode,
                 role=role,
                 sub_roles=assessment_data.get('sub_roles') or [],
                 custom_role=assessment_data.get('custom_role') or None,
@@ -1181,6 +1187,10 @@ def update_custom_assessment_view(request, custom_assessment_id):
         if 'organization_name' in user_data: custom_assessment.organization_name = user_data.get('organization_name')
         
         # Update assessment config
+        if 'assessment_mode' in assessment_data:
+            incoming_mode = (assessment_data.get('assessment_mode') or '').strip().lower()
+            if incoming_mode in ['single', 'multiple']:
+                custom_assessment.assessment_mode = incoming_mode
         if 'role' in assessment_data: custom_assessment.role = assessment_data.get('role')
         if 'sub_roles' in assessment_data: custom_assessment.sub_roles = assessment_data.get('sub_roles')
         if 'custom_role' in assessment_data: custom_assessment.custom_role = assessment_data.get('custom_role')
@@ -1284,6 +1294,7 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
                 'id': ca.id,
                 'created_at': ca.created_at.isoformat() if ca.created_at else None,
                 'updated_at': ca.updated_at.isoformat() if getattr(ca, 'updated_at', None) else None,
+                'assessment_mode': ca.assessment_mode,
                 'role': ca.role,
                 'custom_role': ca.custom_role,
                 'sub_roles': ca.sub_roles or [],
