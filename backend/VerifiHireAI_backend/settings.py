@@ -124,7 +124,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihir'),
+        'NAME': os.environ.get('DB_NAME', 'user'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
@@ -264,6 +264,8 @@ GROQ_API_KEYS = [
     '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',
     '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',
 ]
+# Legacy fallback: Some views reference GROQ_API_KEY (singular). Point to first key.
+GROQ_API_KEY = GROQ_API_KEYS[0]
 
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)

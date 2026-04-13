@@ -40,9 +40,12 @@ function parseCSV(text) {
         const next = text[i + 1];
         if (next === '"') { cell += '"'; i += 1; } else { inQuotes = false; }
       } else { cell += ch; }
-    } else if (ch === '"') { inQuotes = true;
-    } else if (ch === ',') { pushCell();
-    } else if (ch === '\n') { pushCell(); pushRow();
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ',') {
+      pushCell();
+    } else if (ch === '\n') {
+      pushCell(); pushRow();
     } else if (ch === '\r') { // ignore
     } else { cell += ch; }
   }
@@ -225,7 +228,7 @@ export default function InviteCandidates() {
       // ignore
     }
   }, [assessmentId, draftKey, hydrated, candidates, name, email, pan, phone,
-      validityMode, scheduleDate, endDate, startTime, isAutoSchedule]);
+    validityMode, scheduleDate, endDate, startTime, isAutoSchedule]);
 
   const handlePanChange = (e) => {
     const val = e.target.value.toUpperCase();
@@ -521,8 +524,8 @@ export default function InviteCandidates() {
             <div className="invite-icon-wrap">
               {/* Invitation / Send envelope icon */}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 2 11 13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                <path d="M22 2 11 13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
             </div>
             <div>
@@ -533,12 +536,12 @@ export default function InviteCandidates() {
                 </span>
                 <span className="invite-meta-sep">·</span>
                 <span className="invite-meta-chip">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
                   {assessment?.total_time ?? '—'}
                 </span>
                 <span className="invite-meta-sep">·</span>
                 <span className="invite-meta-chip">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg>
                   {assessment?.total_questions ?? '—'} questions
                 </span>
               </div>
@@ -546,7 +549,7 @@ export default function InviteCandidates() {
           </div>
           <div className="invite-actions">
             <button className="btn-back" type="button" onClick={() => navigate('/assessments')}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
               Back
             </button>
           </div>
@@ -557,22 +560,28 @@ export default function InviteCandidates() {
           const scheduleReady = scheduleDate && (validityMode !== 'exact_window' || startTime);
           const candidatesReady = candidates.length > 0;
           const steps = [
-            { label: 'Set Schedule', desc: 'Choose date & validity', done: scheduleReady, icon: (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            )},
-            { label: 'Add Candidates', desc: `${candidates.length} added`, done: candidatesReady, icon: (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
-              </svg>
-            )},
-            { label: 'Share Invites', desc: 'Send to all candidates', done: false, icon: (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
-            )},
+            {
+              label: 'Set Schedule', desc: 'Choose date & validity', done: scheduleReady, icon: (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              )
+            },
+            {
+              label: 'Add Candidates', desc: `${candidates.length} added`, done: candidatesReady, icon: (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" />
+                  <line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" />
+                </svg>
+              )
+            },
+            {
+              label: 'Share Invites', desc: 'Send to all candidates', done: false, icon: (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              )
+            },
           ];
           return (
             <div className="ic-stepper">
@@ -581,7 +590,7 @@ export default function InviteCandidates() {
                   <div className={`ic-step${step.done ? ' done' : i === 0 && !scheduleReady ? ' active' : i === 1 && scheduleReady && !candidatesReady ? ' active' : i === 2 && scheduleReady && candidatesReady ? ' active' : ''}`}>
                     <div className="ic-step-circle">
                       {step.done
-                        ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                         : step.icon}
                     </div>
                     <div className="ic-step-text">
@@ -601,9 +610,9 @@ export default function InviteCandidates() {
           <div className="ic-card-header">
             <div className="ic-card-icon blue">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
             </div>
             <span className="ic-card-title">Schedule / Link Validity</span>
@@ -725,7 +734,7 @@ export default function InviteCandidates() {
           <div className="schedule-note">
             <span className="schedule-note-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </span>
             If a candidate starts within the allowed start window, they can refresh or reconnect and continue until the exam end time.
@@ -737,9 +746,9 @@ export default function InviteCandidates() {
           <div className="ic-card-header">
             <div className="ic-card-icon teal">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" />
               </svg>
             </div>
             <span className="ic-card-title">Add Candidates</span>
@@ -751,7 +760,7 @@ export default function InviteCandidates() {
             <div className="ic-toolbar-left">
               <button className="btn-secondary" type="button" onClick={downloadTemplate}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
                 Download CSV Template
               </button>
@@ -773,13 +782,13 @@ export default function InviteCandidates() {
             <div className="ic-toolbar-right">
               {importMsg && (
                 <span className="import-msg">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
                   {importMsg}
                 </span>
               )}
               <label className="file-pill" htmlFor="inviteCsv">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
                 Upload CSV
                 <input
@@ -865,7 +874,7 @@ export default function InviteCandidates() {
                 disabled={!canAdd}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                  <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
                 Add
               </button>
@@ -878,8 +887,8 @@ export default function InviteCandidates() {
                   className={selectedInterviewerIds.length > 0 ? 'btn-schedule scheduled' : 'btn-schedule'}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" />
                   </svg>
                   {selectedInterviewerIds.length > 0 ? `Scheduled (${selectedInterviewerIds.length})` : 'Schedule Interview'}
                 </button>
@@ -894,14 +903,14 @@ export default function InviteCandidates() {
                 {sending ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}>
-                      <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+                      <polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
                     </svg>
                     Sending…
                   </>
                 ) : (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
                     </svg>
                     Share Invites
                   </>
@@ -916,9 +925,9 @@ export default function InviteCandidates() {
           <div className="ic-card-header">
             <div className="ic-card-icon violet">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
               </svg>
             </div>
             <span className="ic-card-title">Candidates</span>
@@ -944,8 +953,8 @@ export default function InviteCandidates() {
               {scheduleDisplay && (
                 <div className="ic-stat ic-stat-schedule">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
                   </svg>
                   <span className="ic-stat-schedule-val">{scheduleDisplay}</span>
                 </div>
@@ -957,8 +966,8 @@ export default function InviteCandidates() {
                   onClick={() => { if (window.confirm(`Remove all ${candidates.length} candidates?`)) setCandidates([]); }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
-                    <path d="M9 6V4h6v2"/>
+                    <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14H6L5 6" /><path d="M10 11v6" /><path d="M14 11v6" />
+                    <path d="M9 6V4h6v2" />
                   </svg>
                   Clear All
                 </button>
@@ -970,9 +979,9 @@ export default function InviteCandidates() {
             <div className="ic-empty">
               <div className="ic-empty-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
                 </svg>
               </div>
               <div className="ic-empty-title">No candidates added yet</div>
@@ -1041,9 +1050,9 @@ export default function InviteCandidates() {
               <div className="ic-modal-head-left">
                 <div className="ic-modal-head-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
                   </svg>
                 </div>
                 <div>

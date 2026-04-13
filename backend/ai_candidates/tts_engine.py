@@ -9,7 +9,7 @@ import edge_tts
 
 logger = logging.getLogger(__name__)
 
-# Using Microsoft's neural voice - 'Ava' is very natural and clear
+# Using Microsoft's neural voice - 'Ava' is very natural and matches the suman_ai branch
 DEFAULT_VOICE = "en-US-AvaNeural"
 
 class EdgeTTSEngine:

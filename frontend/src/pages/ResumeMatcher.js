@@ -5,6 +5,7 @@ import '../styles/Dashboard.css';
 import '../styles/ResumeMatcher.css';
 
 const MAX_CODING_TASKS = 50;
+const STORAGE_KEY = 'resume_screening_form_data';
 
 const ResumeMatcher = () => {
     const [files, setFiles] = useState([]);
@@ -20,6 +21,8 @@ const ResumeMatcher = () => {
 
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
+
+
 
     React.useEffect(() => {
         const fetchRoles = async () => {
@@ -42,11 +45,22 @@ const ResumeMatcher = () => {
                     const response = await axios.get(`${API_BASE_URL}/ai-candidates/batch-progress/${batchId}/`);
                     const data = response.data;
                     setProgress({ processed: data.processed, total: data.total });
-                    
+
+                    // Live Console Feedback for Browser
+                    console.log(`📊 Batch Progress: ${data.processed}/${data.total} candidates processed.`);
+                    if (data.results && data.results.length > 0) {
+                        const lastResult = data.results[data.results.length - 1];
+                        if (lastResult.candidate_name) {
+                            console.log(`✅ Latest screened: ${lastResult.candidate_name} (Score: ${lastResult.match_percentage}%)`);
+                        }
+                    }
+
                     if (data.is_complete) {
+                        console.log("✨ BATCH COMPLETE! Rendering results...");
                         setResults(data.results);
                         setBatchId(null);
                         setIsAnalyzing(false);
+                        sessionStorage.removeItem(STORAGE_KEY); // Full clear once complete
                         clearInterval(interval);
                     }
                 } catch (err) {
@@ -72,6 +86,59 @@ const ResumeMatcher = () => {
     const [interviewStartTime, setInterviewStartTime] = useState('');
     const [interviewEndDate, setInterviewEndDate] = useState('');
     const [interviewEndTime, setInterviewEndTime] = useState('');
+
+    // --- Persistence Logic ---
+    const isDirty = React.useRef(false);
+    const isInitialRender = React.useRef(true);
+
+    // 1. Initial Load / Hydration
+    React.useEffect(() => {
+        // Start completely fresh on page reload
+        sessionStorage.removeItem(STORAGE_KEY);
+        isDirty.current = false;
+        window._matcher_init = true;
+    }, []);
+
+    // 2. Active Sync to sessionStorage
+    // GUARD: Skip the very first render (mount with defaults) to prevent
+    // writing empty/default data before the user fills anything in.
+    // After that, only save if the form has been marked as dirty
+    // (either by hydration restoring data, or by user interaction).
+    const initialDataHash = React.useRef(null);
+    if (!initialDataHash.current) {
+        initialDataHash.current = JSON.stringify({
+            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+            duration, mcqCount, codingCount, passThreshold, codingChallenges,
+            assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
+            interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
+            batchId, isAnalyzing
+        });
+    }
+
+    React.useEffect(() => {
+        const formData = {
+            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+            duration, mcqCount, codingCount, passThreshold, codingChallenges,
+            assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
+            interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
+            batchId, isAnalyzing // Persist active session state
+        };
+        const currentDataStr = JSON.stringify(formData);
+
+        if (!isDirty.current && currentDataStr === initialDataHash.current) {
+            return;
+        }
+
+        // Any state divergence from the defaults means user interaction or hydration — mark dirty and save
+        isDirty.current = true;
+        sessionStorage.setItem(STORAGE_KEY, currentDataStr);
+    }, [
+        jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+        duration, mcqCount, codingCount, passThreshold, codingChallenges,
+        assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
+        interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
+        batchId, isAnalyzing
+    ]);
 
     const handleCodingCountChange = (val) => {
         const count = Math.min(Math.max(parseInt(val) || 0, 0), MAX_CODING_TASKS);
@@ -125,15 +192,30 @@ const ResumeMatcher = () => {
     };
 
     const handleMatch = async () => {
-        if (files.length === 0 || !jobDescription) {
-            alert('Please provide at least one resume and a job description.');
+        if (files.length === 0) {
+            alert('Please upload at least one resume.');
+            return;
+        }
+        if (!jobDescription.trim()) {
+            alert('Please provide a job description.');
             return;
         }
 
+        if (matchMode === 'automatic') {
+            if (!assessmentStartDate || !assessmentStartTime || !assessmentEndDate || !assessmentEndTime) {
+                alert('Please fill in ALL Assessment scheduling details (Start Date/Time and End Date/Time).');
+                return;
+            }
+            if (!interviewStartDate || !interviewStartTime || !interviewEndDate || !interviewEndTime) {
+                alert('Please fill in ALL Interview scheduling details (Start Date/Time and End Date/Time).');
+                return;
+            }
+        }
+
         setIsAnalyzing(true);
-        setResults(null); 
+        setResults(null);
         setProgress({ processed: 0, total: files.length });
-        
+
         const formData = new FormData();
         files.forEach(file => {
             formData.append('resume', file);
@@ -212,6 +294,7 @@ const ResumeMatcher = () => {
 
         setIsRetrying(true);
         try {
+            console.log(`🔄 Retrying extraction for ${failedIds.length} candidates...`);
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/retry-extraction/`, {
                 candidate_ids: failedIds,
                 job_description: jobDescription,
@@ -512,7 +595,7 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -522,7 +605,7 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -536,7 +619,7 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -546,7 +629,7 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -569,27 +652,30 @@ const ResumeMatcher = () => {
                     </div>
                 </div>
 
-                {isAnalyzing && progress.total > 0 && (
+                {isAnalyzing && (
                     <div className="section-container" style={{ marginTop: '2rem', textAlign: 'center' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                             <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#4B5563' }}>
-                                Processing Resumes...
+                                {progress.total > 0 ? 'Processing Resumes...' : 'Initializing Analysis...'}
                             </span>
                             <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#6366F1' }}>
-                                {progress.processed} of {progress.total}
+                                {progress.total > 0 ? `${progress.processed} of ${progress.total}` : 'Please wait'}
                             </span>
                         </div>
                         <div style={{ width: '100%', height: '10px', background: '#E5E7EB', borderRadius: '5px', overflow: 'hidden' }}>
-                            <div style={{ 
-                                width: `${(progress.processed / progress.total) * 100}%`, 
-                                height: '100%', 
+                            <div style={{
+                                width: progress.total > 0 ? `${(progress.processed / progress.total) * 100}%` : '10%',
+                                height: '100%',
                                 background: 'linear-gradient(90deg, #6366F1, #A855F7)',
                                 transition: 'width 0.5s ease-out'
                             }}></div>
                         </div>
                         <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#6B7280', fontStyle: 'italic' }}>
                             <i className="fa-solid fa-circle-info" style={{ marginRight: '5px' }}></i>
-                            Sequential processing active to respect API limits. This may take a few minutes for large batches.
+                            {progress.total > 0
+                                ? "Sequential processing active to respect API limits. This may take a few minutes for large batches."
+                                : "Connecting to server and preparing files. Do not close this tab."
+                            }
                         </p>
                     </div>
                 )}

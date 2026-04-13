@@ -487,7 +487,7 @@ const AiInterviewSession = () => {
                 };
 
                 audio.onerror = (event) => {
-                    console.error("Audio playback error:", event);
+                    console.error("Audio playback error (Edge TTS):", event);
                     clearTimeout(watchdog);
                     URL.revokeObjectURL(audioUrl);
                     // Fallback to browser speech
@@ -499,6 +499,7 @@ const AiInterviewSession = () => {
                         console.log("Audio play interrupted by pause (intentional for fullscreen exit).");
                         return;
                     }
+                    console.error("Audio play failed (Edge TTS - likely Autoplay blocked):", err);
                     // Autoplay blocked — fallback to browser TTS
                     currentAudioRef.current = null;
                     URL.revokeObjectURL(audioUrl);
@@ -506,7 +507,7 @@ const AiInterviewSession = () => {
                 });
 
             } catch (err) {
-                console.warn("Coqui TTS failed, falling back to browser speech:", err.message);
+                console.error("Backend TTS Endpoint Error:", err.response?.data || err.message);
                 fallbackBrowserSpeak(text, watchdog, resolve);
             }
         });
@@ -944,7 +945,10 @@ const AiInterviewSession = () => {
                 recognitionRef.current = assemblyAIRef.current;
 
             } catch (e) {
-                console.error("AssemblyAI start error:", e);
+                console.error("AssemblyAI start error (startListening):", e);
+                if (e instanceof TypeError) {
+                    console.error("TypeError caught in startListening:", e.message, e.stack);
+                }
                 setIsRecording(false);
                 isRecordingRef.current = false;
             }
@@ -1219,10 +1223,16 @@ const AiInterviewSession = () => {
                 return;
             }
 
-            // Show AI failure popup
+            // Show AI failure inline (NO blocking alert — keeps the session alive)
             const errorMessage = err.response?.data?.error || err.message || "Unknown error";
-            setAiStatus("Connection Issue");
-            alert(`AI is having trouble connecting. Please try again.\nError: ${errorMessage}`);
+            console.error("AI submission error:", errorMessage);
+            setAiStatus("Connection Issue — Retrying...");
+
+            const recoveryMsg = "I apologize, I'm having a brief connectivity issue. Please try repeating your answer or click the microphone to continue.";
+            addMessage('ai', recoveryMsg);
+            await speak(recoveryMsg);
+
+            setAiStatus("Indu is Online");
 
             // Automatically try to restart the mic to help the user
             if (userInputMode === 'audio') {
@@ -1293,15 +1303,19 @@ const AiInterviewSession = () => {
             console.warn("Initial fullscreen request failed/denied:", err);
         }
 
-        setAiStatus("Requesting Permissions...");
-
+        console.log("Requesting Screen Share...");
         const screenSuccess = await startScreenShare();
-        if (!screenSuccess) return;
+        if (!screenSuccess) {
+            console.warn("Screen share denied or failed.");
+            return;
+        }
 
+        console.log("Requesting Camera...");
         await startCamera();
 
+        console.log("Permissions granted successfully.");
         setIsPermissionsGranted(true);
-        isFullscreenRef.current = true; // Assume success if code reaches here after await
+        isFullscreenRef.current = true;
         setAiStatus("Preparing Indu...");
 
         const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);

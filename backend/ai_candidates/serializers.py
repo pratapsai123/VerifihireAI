@@ -1,5 +1,18 @@
 from rest_framework import serializers
-from .models import Candidate, InterviewIntegrityLog
+from django.utils import timezone
+from .models import Candidate, InterviewIntegrityLog, PipelineLog
+
+class PipelineLogSerializer(serializers.ModelSerializer):
+    timestamp_formatted = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PipelineLog
+        fields = ['id', 'event_type', 'status', 'message', 'details', 'timestamp', 'timestamp_formatted']
+
+    def get_timestamp_formatted(self, obj):
+        # Convert UTC to local time (configured in settings.TIME_ZONE)
+        local_time = timezone.localtime(obj.timestamp)
+        return local_time.strftime('%B %d, %Y at %I:%M %p')
 
 class InterviewIntegrityLogSerializer(serializers.ModelSerializer):
     class Meta:

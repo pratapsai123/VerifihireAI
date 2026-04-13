@@ -102,3 +102,31 @@ class InterviewIntegrityLog(models.Model):
 
     def __str__(self):
         return f"Violation: {self.event_type} - {self.candidate.full_name}"
+
+class PipelineLog(models.Model):
+    EVENT_CHOICES = [
+        ('TASK_SCHEDULED', 'Task Scheduled'),
+        ('AI_GENERATION', 'AI Generation'),
+        ('EMAIL_SENT', 'Email Sent'),
+        ('STATUS_CHANGE', 'Status Change'),
+        ('ERROR', 'Error'),
+    ]
+    STATUS_CHOICES = [
+        ('INFO', 'Information'),
+        ('SUCCESS', 'Success'),
+        ('WARNING', 'Warning'),
+        ('FAILURE', 'Failure'),
+    ]
+
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='pipeline_logs')
+    event_type = models.CharField(max_length=50, choices=EVENT_CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='INFO')
+    message = models.TextField()
+    details = models.JSONField(default=dict, blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"{self.candidate.full_name} - {self.event_type} ({self.status})"

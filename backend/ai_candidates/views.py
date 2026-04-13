@@ -12,8 +12,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog
-from .serializers import CandidateSerializer
+from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog, PipelineLog
+from .serializers import CandidateSerializer, PipelineLogSerializer
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
 import traceback
@@ -281,18 +281,48 @@ class ResumeMatchView(APIView):
         except:
             threshold = 70
 
-        # Handle single candidate flow (Legacy support for interview start)
-        if candidate_id and not resume_files:
-             try:
+        # Single candidate "Start Interview" Flow
+        if candidate_id:
+            try:
                 candidate = Candidate.objects.get(id=candidate_id)
-                if not job_description:
-                    job_description = candidate.job_description or "General requirements and responsibilities for this role."
-                if not candidate.resume:
-                    return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
-                resume_files = [candidate.resume]
-             except Candidate.DoesNotExist:
-                 return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+            except Candidate.DoesNotExist:
+                return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
+            if not job_description:
+                job_description = candidate.job_description or "General requirements and responsibilities for this role."
+
+            if resume_files:
+                candidate.resume = resume_files[0]
+            elif not candidate.resume:
+                return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            batch_id = str(uuid.uuid4())
+            candidate.batch_id = batch_id
+            candidate.status = 'New'
+            candidate.save()
+
+            # Execute synchronously for immediate UI feedback
+            try:
+                process_resume_batch_task(
+                    batch_id=batch_id,
+                    job_description=job_description,
+                    threshold=threshold,
+                    is_fully_automatic=False, # CHANGED: Single-file matching should be manual by default
+                    automation_settings={}
+                )
+                
+                candidate.refresh_from_db()
+                if not candidate.interview_questions:
+                    return Response({"error": "Failed to generate interview questions. The AI may have been unable to parse the resume."}, status=status.HTTP_400_BAD_REQUEST)
+                    
+                return Response({
+                    "interview_questions": candidate.interview_questions
+                }, status=status.HTTP_200_OK)
+            except Exception as e:
+                logger.error(f"Synchronous processing failed: {e}")
+                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Bulk Upload Flow (100% Asynchronous)
         if not job_description:
             job_description = "General requirements and responsibilities for this role."
 
@@ -303,105 +333,33 @@ class ResumeMatchView(APIView):
         batch_id = str(uuid.uuid4())
         
         try:
-            # 1. Extract text and create Candidate records instantly
+            # INSTANT SAVE: Create Candidate records without waiting for OCR
             for resume_file in resume_files:
-                try:
-                    resume_text = ""
-                    if hasattr(resume_file, 'open'):
-                        with resume_file.open('rb') as f:
-                            file_bytes = f.read()
-                    else:
-                        resume_file.seek(0)
-                        file_bytes = resume_file.read()
+                job_title = request.data.get('job_title') or request.data.get('role_title')
+                if job_title:
+                    ensure_role_exists(job_title, job_description, user=request.user)
 
-                    # 1. Primary Attempt: PyMuPDF (fitz) - Best for modern PDFs
-                    try:
-                        doc = fitz.open(stream=file_bytes, filetype="pdf")
-                        for page in doc:
-                            resume_text += page.get_text()
-                        doc.close()
-                    except Exception as e:
-                        logger.warning(f"PyMuPDF extraction failed for {resume_file.name}: {e}")
+                user_profile = getattr(request.user, 'profile', None)
+                company = user_profile.company if user_profile else None
+                candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
+                
+                # Create the candidate record
+                # We save the file itself; the background task will read it later
+                new_candidate = Candidate.objects.create(
+                    full_name=candidate_name,
+                    email="pending@example.com",
+                    job_title=job_title or "Applicant",
+                    resume=resume_file, # Save the actual file
+                    resume_text=None,   # To be extracted in background
+                    status='New',
+                    job_description=job_description,
+                    company=company,
+                    user_profile=user_profile,
+                    batch_id=batch_id
+                )
+                results.append({"id": new_candidate.id, "name": candidate_name, "status": "Queued"})
 
-                    # 2. Fallback Attempt: PyPDF2 - If PyMuPDF failed or returned very little text
-                    if len(resume_text.strip()) < 100:
-                        try:
-                            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-                            pypdf_text = ""
-                            for page in pdf_reader.pages:
-                                pypdf_text += (page.extract_text() or "")
-                            if len(pypdf_text.strip()) > len(resume_text.strip()):
-                                resume_text = pypdf_text
-                        except Exception as e:
-                            logger.warning(f"PyPDF2 fallback failed for {resume_file.name}: {e}")
-
-                    # 3. OCR Fallback: EasyOCR - For image-based PDFs
-                    if len(resume_text.strip()) < 100:
-                        try:
-                            logger.info(f"Attempting OCR fallback for {resume_file.name}")
-                            reader = _get_reader()
-                            if reader:
-                                # Use fitz to get the first page as an image (best for PDF OCR)
-                                doc = fitz.open(stream=file_bytes, filetype="pdf")
-                                if doc.page_count > 0:
-                                    page = doc.load_page(0)
-                                    pix = page.get_pixmap()
-                                    img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-                                    ocr_res = reader.readtext(np.array(img), detail=0)
-                                    ocr_text = " ".join(ocr_res)
-                                    if len(ocr_text.strip()) > len(resume_text.strip()):
-                                        resume_text = ocr_text
-                                        logger.info(f"OCR extracted {len(ocr_text)} characters")
-                                doc.close()
-                        except Exception as e:
-                            logger.warning(f"OCR fallback failed for {resume_file.name}: {e}")
-
-                    logger.info(f"Final extraction complete for {resume_file.name}. Total characters: {len(resume_text)}")
-                    if len(resume_text.strip()) < 50:
-                        logger.error(f"CRITICAL: Extraction returned nearly empty text for {resume_file.name}!")
-
-                    job_title = request.data.get('job_title') or request.data.get('role_title')
-                    if job_title:
-                        ensure_role_exists(job_title, job_description, user=request.user)
-
-                    user_profile = getattr(request.user, 'profile', None)
-                    company = user_profile.company if user_profile else None
-                    candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
-                    
-                    current_candidate = None
-                    if candidate_id:
-                        try:
-                            current_candidate = Candidate.objects.get(id=candidate_id)
-                            current_candidate.resume_text = resume_text
-                            current_candidate.batch_id = batch_id
-                            current_candidate.status = 'New'
-                            current_candidate.job_description = job_description
-                            # Also update company/profile if missing
-                            if not current_candidate.company: current_candidate.company = company
-                            if not current_candidate.user_profile: current_candidate.user_profile = user_profile
-                            current_candidate.save()
-                        except Candidate.DoesNotExist:
-                            pass
-
-                    if not current_candidate:
-                        current_candidate = Candidate.objects.create(
-                            full_name=candidate_name,
-                            email="pending@example.com",
-                            job_title=job_title or "Applicant",
-                            resume=None if hasattr(resume_file, 'open') else resume_file,
-                            resume_text=resume_text,
-                            status='New',
-                            job_description=job_description,
-                            company=company,
-                            user_profile=user_profile,
-                            created_by=user_profile,
-                            batch_id=batch_id
-                        )
-                    results.append({"id": current_candidate.id, "name": current_candidate.full_name, "status": "Queued"})
-                except Exception as e:
-                    logger.error(f"Early extraction error: {e}")
-
-            # 2. Trigger processing (Synchronous for single candidate flow, Asynchronous for bulk)
+            # 2. Trigger processing as a background task
             is_auto = False
             raw_is_auto = request.data.get('is_fully_automatic')
             if raw_is_auto:
@@ -417,25 +375,10 @@ class ResumeMatchView(APIView):
                 'assessment_available_from': request.data.get('assessment_available_from'),
                 'assessment_available_until': request.data.get('assessment_available_until'),
                 'interview_available_from': request.data.get('interview_available_from'),
-                'interview_available_until': request.data.get('interview_available_until')
+                'interview_available_until': request.data.get('interview_available_until'),
+                'is_fully_automatic': is_auto  # PERSIST FLAG FOR DOWNSTREAM SIGNALS
             }
 
-            # If it was a single candidate session (start interview flow), process synchronously
-            if len(results) == 1 and (candidate_id or len(resume_files) == 1):
-                # Call synchronously (not as .delay)
-                process_resume_batch_task(
-                    batch_id=batch_id,
-                    job_description=job_description,
-                    threshold=threshold,
-                    is_fully_automatic=is_auto,
-                    automation_settings=automation_settings
-                )
-                
-                # Fetch updated candidate and return full data
-                final_candidate = Candidate.objects.get(id=results[0]['id'])
-                return Response(CandidateSerializer(final_candidate).data, status=status.HTTP_200_OK)
-
-            # Bulk flow: trigger as background task
             process_resume_batch_task.delay(
                 batch_id=batch_id,
                 job_description=job_description,
@@ -507,16 +450,27 @@ class RetryFailedExtractionsView(APIView):
         if not candidate_ids:
             return Response({"error": "No candidate IDs provided."}, status=status.HTTP_400_BAD_REQUEST)
 
-        local_api_key = getattr(settings, 'GROQ_API_KEY', None)
-        local_groq_client = Groq(api_key=local_api_key)
+        # Fix: Use Key Rotation list
+        api_keys = getattr(settings, 'GROQ_API_KEYS', [])
+        if not api_keys:
+            single_key = getattr(settings, 'GROQ_API_KEY', None)
+            api_keys = [single_key] if single_key else []
+
+        if not api_keys:
+            return Response({"error": "No API keys configured."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        print(f"\n🔄 RETRYING EXTRACTION: {len(candidate_ids)} candidates")
+        print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
         results = []
         for cid in candidate_ids:
             try:
                 candidate = Candidate.objects.get(id=cid)
+                print(f"📄 Retrying: {candidate.full_name or 'Unknown'}")
 
                 # Skip already-screened candidates
                 if candidate.status == 'Resume Passed' and candidate.full_name != 'Extraction Failed':
+                    print("   ℹ️ Already screened — skipping.")
                     results.append({
                         "candidate_id": candidate.id,
                         "candidate_name": candidate.full_name,
@@ -532,6 +486,7 @@ class RetryFailedExtractionsView(APIView):
 
                 resume_text = candidate.resume_text
                 if not resume_text or len(resume_text.strip()) < 50:
+                    print("   ❌ No readable resume text found.")
                     results.append({
                         "candidate_id": candidate.id,
                         "candidate_name": None,
@@ -574,33 +529,40 @@ class RetryFailedExtractionsView(APIView):
                 Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "summary", "interview_questions".
                 """
 
-                # Retry with backoff (using 70b model with fallback to 8b)
+                # Retry with Key Rotation
                 match_result = None
                 current_model = "llama-3.3-70b-versatile"
-                max_attempts = 3
-                for attempt in range(max_attempts):
+                
+                for key_index in range(len(api_keys)):
                     try:
-                        response = local_groq_client.chat.completions.create(
+                        temp_client = Groq(api_key=api_keys[key_index % len(api_keys)])
+                        print(f"   🤖 Calling AI ({current_model})...", end="", flush=True)
+                        
+                        response = temp_client.chat.completions.create(
                             model=current_model,
                             messages=[{"role": "user", "content": prompt}],
                             response_format={"type": "json_object"},
                             temperature=0.0
                         )
                         raw_text = response.choices[0].message.content
+                        print(" Done!") # No streaming in retry view yet to keep it simple, but visible
                         match_result = extract_json(raw_text)
                         if match_result:
                             break
-                        logger.warning(f"Retry attempt {attempt+1}: JSON extraction failed for candidate {cid}")
                     except Exception as e:
                         error_msg = str(e).lower()
-                        if ("429" in error_msg or "rate limit" in error_msg or "quota" in error_msg) and current_model == "llama-3.3-70b-versatile":
-                            logger.warning(f"Quota reached for 70b in retry view. Falling back to 8b for candidate {cid}.")
-                            current_model = "llama-3.1-8b-instant"
-                            continue # Immediate retry with 8b
-
-                        logger.warning(f"Retry attempt {attempt+1}/{max_attempts} failed for candidate {cid}: {e}")
-                        if attempt < max_attempts - 1:
-                            time.sleep(2)
+                        if ("429" in error_msg or "rate limit" in error_msg or "quota" in error_msg):
+                            if key_index < len(api_keys) - 1:
+                                print(f"\n   🔄 Key {key_index+1} limit reached. Rotating...")
+                                continue
+                            elif current_model == "llama-3.3-70b-versatile":
+                                print(f"\n   📉 All keys hit 70b limit. Using 8b fallback...")
+                                current_model = "llama-3.1-8b-instant"
+                                key_index = -1
+                                continue
+                        
+                        print(f"\n   ❌ Error: {str(e)}")
+                        break
                 
                 if match_result:
                     extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
@@ -1093,13 +1055,14 @@ class ProcessAnswerView(APIView):
         }}
         """
 
-            # Lazy-load Groq for ProcessAnswerView
-            local_api_key = getattr(settings, 'GROQ_API_KEY', None)
+            # Lazy-load Groq for ProcessAnswerView using GroqKeyManager for key rotation
+            from ai_assessments.ai_logic import GroqKeyManager
+            import time as _time
+
+            local_api_key = GroqKeyManager.get_current_key()
             local_groq_client = Groq(api_key=local_api_key)
 
-            # --- AUTO MODEL FALLBACK ---
-            # Use module-level cooldown to remember when 70b was rate-limited
-            import time as _time
+            # --- AUTO MODEL FALLBACK WITH KEY ROTATION ---
             PRIMARY_MODEL = "llama-3.3-70b-versatile"
             FALLBACK_MODEL = "llama-3.1-8b-instant"
             COOLDOWN_SECONDS = 60
@@ -1123,12 +1086,31 @@ class ProcessAnswerView(APIView):
                 )
             except Exception as model_err:
                 error_str = str(model_err).lower()
-                if ("rate limit" in error_str or "429" in error_str) and chosen_model == PRIMARY_MODEL:
-                    # 70b hit rate limit → activate cooldown and retry with 8b immediately
-                    ProcessAnswerView._fallback_until = _time.time() + COOLDOWN_SECONDS
-                    logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
+                if ("rate limit" in error_str or "429" in error_str):
+                    # Rotate to next key first
+                    GroqKeyManager.rotate_key()
+                    rotated_key = GroqKeyManager.get_current_key()
+                    local_groq_client = Groq(api_key=rotated_key)
+
+                    if chosen_model == PRIMARY_MODEL:
+                        # 70b hit rate limit → activate cooldown and retry with 8b immediately
+                        ProcessAnswerView._fallback_until = _time.time() + COOLDOWN_SECONDS
+                        logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
+                    
                     response = local_groq_client.chat.completions.create(
                         model=FALLBACK_MODEL,
+                        messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7,
+                        response_format={"type": "json_object"}
+                    )
+                elif "api_key" in error_str or "authentication" in error_str:
+                    # Bad key — rotate and retry once
+                    GroqKeyManager.rotate_key()
+                    rotated_key = GroqKeyManager.get_current_key()
+                    local_groq_client = Groq(api_key=rotated_key)
+                    logger.warning(f"Bad API key detected, rotated to next key")
+                    response = local_groq_client.chat.completions.create(
+                        model=chosen_model,
                         messages=[{"role": "user", "content": prompt}],
                         temperature=0.7,
                         response_format={"type": "json_object"}
@@ -1253,3 +1235,51 @@ class TTSView(APIView):
         except Exception as e:
             logger.error(f"TTS Error: {str(e)}")
             return Response({"error": f"TTS synthesis failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateTimelineView(APIView):
+    """
+    Fetches the history (PipelineLog) for a specific candidate.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+            
+            logs = candidate.pipeline_logs.all().order_by('timestamp')
+            serializer = PipelineLogSerializer(logs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class LatestActiveBatchView(APIView):
+    """
+    Allows the frontend to recover the most recent batch ID if the page was refreshed
+    before the ID could be saved to local state.
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        # Look for candidates created in the last 15 minutes that are still 'New'
+        threshold_time = timezone.now() - timedelta(minutes=15)
+        user_profile = getattr(request.user, 'userprofile', None)
+
+        candidates = Candidate.objects.filter(
+            status='New',
+            created_at__gte=threshold_time
+        ).exclude(batch_id__isnull=True).exclude(batch_id='')
+
+        if user_profile:
+            candidates = candidates.filter(user_profile=user_profile)
+
+        latest_candidate = candidates.order_by('-created_at').first()
+
+        if latest_candidate:
+            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
+
+        return Response({"batch_id": None}, status=status.HTTP_200_OK)

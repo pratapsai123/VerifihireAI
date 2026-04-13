@@ -14,15 +14,21 @@ logger = logging.getLogger(__name__)
 #     groq_client = Groq(api_key=groq_api_key)
 
 def process_resume_passed(candidate_id):
+    from ai_assessments.ai_logic import _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool, _mcq_difficulty_counts, _generate_coding_pool_ai_only
+    from ai_candidates.utils import log_automation_event
+
     try:
-        # Local Groq client for lazy loading
-        local_groq_key = getattr(settings, 'GROQ_API_KEY', None)
-        local_groq_client = Groq(api_key=local_groq_key) if local_groq_key else None
         candidate = Candidate.objects.get(id=candidate_id)
         if candidate.status != 'Resume Passed':
             return
             
         logger.info(f"Pipeline: Generating Assessment for {candidate.full_name}")
+        log_automation_event(
+            candidate, 
+            'AI_GENERATION', 
+            'INFO', 
+            "Starting AI-powered technical assessment generation."
+        )
         
         job_desc = candidate.job_description or "General Software Engineering Role"
         settings_data = candidate.automation_settings or {}
@@ -44,7 +50,6 @@ def process_resume_passed(candidate_id):
         # Generate Assessment Database Record
         assessment = Assessment()
         assessment.job_description = job_desc
-        # Sync naming with Candidate's job_title for better grouping in Results dashboard
         assessment.required_skills = candidate.job_title or "Technical Assessment"
         assessment.mcq_count = mcq_count
         assessment.coding_count = coding_count
@@ -55,7 +60,6 @@ def process_resume_passed(candidate_id):
         assessment.available_from = assessment_from
         assessment.available_until = assessment_until
         
-        # Ownership fields
         user_prof = getattr(candidate, 'user_profile', None)
         assessment.user_profile = user_prof
         assessment.created_by = user_prof
@@ -67,131 +71,77 @@ def process_resume_passed(candidate_id):
         assessment.mcq_hard = 2
         assessment.total_points = 100
         assessment.save()
-        # Sync Automated Logic with Manual Assessment Logic
-        from ai_assessments.ai_logic import (
-            _normalize_difficulty_label,
-            _normalize_generated_pool,
-            _mcq_difficulty_counts,
-            _rebalance_mcq_difficulties,
-            _repair_pool_shortfall,
-            _generate_coding_pool_ai_only,
-            _generate_mcq_pool_ai_only
-        )
-        
-        # Pool multipliers - generate 2x the requested amount for randomization
-        # This matches the logic in GenerateAssessmentView to ensure accuracy
+
+        # Pool multipliers
         pool_mcq_total = mcq_count * 2
         pool_coding_total = coding_count * 2 if coding_count <= 10 else coding_count
         
-        # MCQs split logic (matching Assessment model defaults/GenerateAssessmentView)
         pool_easy = int(pool_mcq_total * 0.5)
         pool_medium = int(pool_mcq_total * 0.3)
         pool_hard = max(0, pool_mcq_total - pool_easy - pool_medium)
         
-        mcq_prompt = f"TASK 1: Generate a POOL of {pool_mcq_total} Multiple Choice Questions (MCQs).\n"
-        mcq_prompt += f"- {pool_easy} Easy questions\n"
-        mcq_prompt += f"- {pool_medium} Medium questions\n"
-        mcq_prompt += f"- {pool_hard} Hard questions\n"
-        mcq_prompt += "Each MCQ object must have: 'question', 'options' (list of 4), 'answer', and 'difficulty' (Easy/Medium/Hard)."
+        mcq_prompt = f"TASK 1: Generate a POOL of {pool_mcq_total} MCQs.\n"
+        mcq_prompt += f"- {pool_easy} Easy, {pool_medium} Medium, {pool_hard} Hard.\n"
+        mcq_prompt += "Each MCQ must have: 'question', 'options' (list of 4), 'answer', and 'difficulty'."
 
         coding_prompt = ""
         keys_expected = '"mcqs"'
         if coding_count > 0:
             coding_prompt = f"TASK 2: Generate a POOL of {pool_coding_total} Coding Challenges.\n"
             coding_prompt += (
-                "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', "
+                "Each challenge must have: 'title', 'problem_statement', 'input_format', 'output_format', "
                 "'constraints', 'example_input', 'example_output', 'explanation', 'starter_code', 'difficulty', and 'test_cases'.\n"
             )
-            coding_prompt += "CRITICAL: 'starter_code' MUST be a JSON object mapping these exact keys: python, java, javascript, cpp, csharp, kotlin, swift, sql.\n"
-            coding_prompt += "CRITICAL: Generate EXACTLY 10 test_cases for each challenge.\n"
+            # SIMPLIFIED: Only request Python and Javascript for reliability, can expand locally if needed
+            coding_prompt += "CRITICAL: 'starter_code' MUST be a JSON mapping keys 'python' and 'javascript' ONLY.\n"
+            coding_prompt += "CRITICAL: Generate EXACTLY 5 test_cases for each challenge.\n"
             keys_expected = '"mcqs", "coding_challenges"'
 
         main_prompt = f"""
-        Act as an expert technical recruiter. Create a comprehensive technical assessment.
-        Job Description: {job_desc}
+        Act as an expert technical recruiter. Create an assessment for: {job_desc}
         
         {mcq_prompt}
         
         {coding_prompt}
         
-        CRITICAL FORMATTING INSTRUCTION: 
-        You MUST return a single JSON object where the root keys are EXACTLY: {keys_expected}.
-        DO NOT wrap the output in any outer keys like "assessment" or "data".
+        Return a single JSON object with keys: {keys_expected}. Output valid JSON only.
         """
         
-        generated_data = {}
-        if local_groq_client:
-            attempts = 0
-            max_attempts = 3
-            current_prompt = main_prompt
+        # Use robust caller with backoff and key rotation
+        system_msg = "You are a detailed assessment generator. Always return valid JSON matching the schema."
+        raw_result = _call_groq_with_backoff(prompt=main_prompt, system_msg=system_msg, is_json=True)
+        
+        if not raw_result:
+            raise Exception("AI failed to provide a valid response after multiple retries.")
 
-            while attempts < max_attempts:
-                attempts += 1
-                logger.info(f"AI Pipeline Attempt {attempts}/{max_attempts} for candidate {candidate_id}")
-                
-                response = local_groq_client.chat.completions.create(
-                    model="llama-3.1-8b-instant",
-                    messages=[
-                        {"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only. ALWAYS provide the EXACT counts requested."}, 
-                        {"role": "user", "content": current_prompt}
-                    ],
-                    response_format={"type": "json_object"},
-                    temperature=0.1 if attempts == 1 else 0.2
-                )
-                raw_text = response.choices[0].message.content
-                if not raw_text: continue
+        generated_data = _normalize_generated_pool(raw_result)
+        
+        # Repair if needed
+        generated_data = _repair_pool_shortfall(
+            groq_client=None, # _repair_pool_shortfall will use its own internal caller logic if we adapt it or pass None
+            job_description=job_desc,
+            required_skills="Technical Assessment",
+            pool=generated_data,
+            pool_easy=pool_easy,
+            pool_medium=pool_medium,
+            pool_hard=pool_hard,
+            pool_coding_total=pool_coding_total,
+            coding_tasks=['Medium'] * pool_coding_total,
+            max_attempts=2,
+        )
 
-                generated_data = _normalize_generated_pool(extract_json(raw_text) or {})
-                if not generated_data: continue
-
-                # Validation
-                act_mcqs = len(generated_data.get('mcqs', []))
-                act_coding = len(generated_data.get('coding_challenges', []))
-                
-                e, m, h = _mcq_difficulty_counts(generated_data.get('mcqs', []))
-                mcq_ok = (act_mcqs >= pool_mcq_total) and (e >= pool_easy) and (m >= pool_medium) and (h >= pool_hard)
-                coding_ok = (act_coding >= pool_coding_total)
-
-                if mcq_ok and coding_ok:
-                    break
-                else:
-                    error_msg = f"Generated {act_mcqs} MCQs and {act_coding} coding challenges. Need {pool_mcq_total} MCQs and {pool_coding_total} Coding. RETRY."
-                    current_prompt = main_prompt + "\n\nCORRECTION:\n" + error_msg
-
-            # Repair/Finish Logic (Sync with views.py)
-            generated_data = _repair_pool_shortfall(
-                groq_client=local_groq_client,
-                job_description=job_desc,
-                required_skills="Technical Assessment",
-                pool=generated_data,
-                pool_easy=pool_easy,
-                pool_medium=pool_medium,
-                pool_hard=pool_hard,
-                pool_coding_total=pool_coding_total,
-                coding_tasks=['Medium'] * pool_coding_total,
-                max_attempts=3,
+        if generated_data:
+            assessment.generated_content = generated_data
+            assessment.status = 'SCHEDULED'
+            assessment.save()
+            log_automation_event(
+                candidate, 
+                'AI_GENERATION', 
+                'SUCCESS', 
+                f"Assessment generated successfully ({len(generated_data.get('mcqs', []))} MCQs, {len(generated_data.get('coding_challenges', []))} Coding challenges)."
             )
-
-            # Dedicated recovery if still short
-            final_coding = len(generated_data.get('coding_challenges', []))
-            if coding_count > 0 and final_coding < pool_coding_total:
-                extra = _generate_coding_pool_ai_only(
-                    groq_client=local_groq_client,
-                    job_description=job_desc,
-                    required_skills="Technical Assessment",
-                    difficulties=['Medium'] * (pool_coding_total - final_coding),
-                    total_required=pool_coding_total - final_coding
-                )
-                if extra:
-                    generated_data['coding_challenges'] = (generated_data.get('coding_challenges', []) + extra)[:pool_coding_total]
-
-            if generated_data:
-                assessment.generated_content = generated_data
-                assessment.status = 'SCHEDULED'
-                assessment.save()
-                print(f"DEBUG: AI Generation Complete for assessment {assessment.id}")
-            else:
-                raise Exception("Failed to generate assessment content after multiple attempts")
+        else:
+            raise Exception("Critical failure: Could not generate valid assessment structure.")
                 
         # Send Email
         from urllib.parse import quote
@@ -248,14 +198,34 @@ def process_resume_passed(candidate_id):
             send_mail(subject, message, from_email, [candidate.email], fail_silently=False, html_message=html_message)
             print(f"PIPELINE SUCCESS: Assessment email sent to {candidate.email}")
             logger.info(f"Pipeline: Assessment email sent to {candidate.email}")
+            log_automation_event(
+                candidate, 
+                'EMAIL_SENT', 
+                'SUCCESS', 
+                f"Assessment invitation email sent to {candidate.email}."
+            )
         except Exception as e:
             print(f"PIPELINE EMAIL FAILED: {e}")
             logger.error(f"Pipeline: Failed to send assessment email to {candidate.email}: {str(e)}")
+            log_automation_event(
+                candidate, 
+                'EMAIL_SENT', 
+                'FAILURE', 
+                f"Failed to send invitation email: {str(e)}"
+            )
             
     except Exception as e:
+        error_msg = str(e)
+        logger.error(f"Pipeline Error (Resume): {error_msg}")
+        # Log to the new timeline
+        try:
+            candidate = Candidate.objects.get(id=candidate_id)
+            log_automation_event(candidate, 'ERROR', 'FAILURE', f"Pipeline generation failed: {error_msg}")
+        except:
+            pass
+        
         print(f"PIPELINE ERROR (Resume): {e}")
         print(tb.format_exc())
-        logger.error(f"Pipeline Error (Resume): {e}")
 
 
 def process_assessment_passed(submission_id):

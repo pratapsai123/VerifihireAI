@@ -20,11 +20,8 @@ const AiAssessments = () => {
     const [inviteFile, setInviteFile] = useState(null);
     const [inviting, setInviting] = useState(false);
     
-    // Inline Edit States
-    const [editingId, setEditingId] = useState(null);
-    const [editValue, setEditValue] = useState('');
-    const [saving, setSaving] = useState(false);
     
+
 
 
 
@@ -131,29 +128,6 @@ const AiAssessments = () => {
         }
     };
     
-    const startEditing = (assessment) => {
-        setEditingId(assessment.id);
-        setEditValue(assessment.num_applicants || 1);
-    };
-
-    const cancelEditing = () => {
-        setEditingId(null);
-        setEditValue('');
-    };
-
-    const saveApplicants = async (id) => {
-        setSaving(true);
-        try {
-            await axios.patch(`${API_BASE_URL}/ai/${id}/`, { num_applicants: parseInt(editValue) || 1 });
-            setAssessments(prev => prev.map(a => a.id === id ? { ...a, num_applicants: parseInt(editValue) || 1 } : a));
-            setEditingId(null);
-        } catch (err) {
-            console.error('Update Error:', err);
-            alert('Failed to update applicant count.');
-        } finally {
-            setSaving(false);
-        }
-    };
 
 
 
@@ -272,38 +246,9 @@ const AiAssessments = () => {
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', color: '#1B254B', fontSize: '0.9rem' }}>
-                                                {editingId === assessment.id ? (
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                                        <input 
-                                                            type="number" 
-                                                            value={editValue} 
-                                                            onChange={(e) => setEditValue(e.target.value)}
-                                                            style={{ width: '60px', padding: '4px 8px', borderRadius: '6px', border: '1px solid #4318FF' }}
-                                                            autoFocus
-                                                        />
-                                                        <button 
-                                                            onClick={() => saveApplicants(assessment.id)} 
-                                                            disabled={saving}
-                                                            style={{ border: 'none', background: '#05CD99', color: 'white', borderRadius: '4px', padding: '4px 8px', cursor: 'pointer' }}
-                                                        >
-                                                            {saving ? '...' : '✓'}
-                                                        </button>
-                                                        <button 
-                                                            onClick={cancelEditing} 
-                                                            style={{ border: 'none', background: '#EE5D50', color: 'white', borderRadius: '4px', padding: '4px 8px', cursor: 'pointer' }}
-                                                        >×</button>
-                                                    </div>
-                                                ) : (
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                        <span style={{ fontWeight: '700' }}>{assessment.num_applicants || 0}</span>
-                                                        <i 
-                                                            className="fa-solid fa-pen-to-square" 
-                                                            style={{ fontSize: '0.8rem', color: '#A3AED0', cursor: 'pointer' }}
-                                                            onClick={() => startEditing(assessment)}
-                                                            title="Edit Applicants"
-                                                        ></i>
-                                                    </div>
-                                                )}
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                    <span style={{ fontWeight: '700' }}>{assessment.invited_count || 0}</span>
+                                                </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', fontWeight: '500', color: '#1B254B' }}>
                                                 <div

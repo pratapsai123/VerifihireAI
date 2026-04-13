@@ -896,3 +896,157 @@ Traceback (most recent call last):
 Exception: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=2, min coding=2; got MCQs=2, coding=0.
 
 RAW: No response received
+
+[2026-04-08 11:36:33.375973+00:00] PUBLIC ACCESS: Token='98b9bca0-64e5-480e-b997-5cb3fb209c87'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775648193047']}>
+Host: localhost:8001
+
+[2026-04-08 11:36:33.389685+00:00] PUBLIC ACCESS: Token='98b9bca0-64e5-480e-b997-5cb3fb209c87'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775648193070']}>
+Host: localhost:8001
+
+[2026-04-09 02:12:04.246157+00:00] PUBLIC ACCESS: Token='8bb774ad-01f1-4738-8f30-b17c482f2f3b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775700723909']}>
+Host: localhost:8001
+
+[2026-04-09 02:12:04.255807+00:00] PUBLIC ACCESS: Token='8bb774ad-01f1-4738-8f30-b17c482f2f3b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775700723926']}>
+Host: localhost:8001
+
+[2026-04-09 06:39:43.318591+00:00] PUBLIC ACCESS: Token='d14ababe-f68e-4987-a0e3-cb3a3727bb5f'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775716782951']}>
+Host: localhost:8001
+
+[2026-04-09 06:39:43.334571+00:00] PUBLIC ACCESS: Token='d14ababe-f68e-4987-a0e3-cb3a3727bb5f'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775716783009']}>
+Host: localhost:8001
+
+[2026-04-09 06:42:12.597209+00:00] PUBLIC ACCESS: Token='d14ababe-f68e-4987-a0e3-cb3a3727bb5f'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775716932585']}>
+Host: localhost:8001
+
+[2026-04-09 06:43:18.397725+00:00] PUBLIC ACCESS: Token='d14ababe-f68e-4987-a0e3-cb3a3727bb5f'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775716998384']}>
+Host: localhost:8001
+
+[2026-04-09 06:43:18.524168+00:00] PUBLIC ACCESS: Token='d14ababe-f68e-4987-a0e3-cb3a3727bb5f'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775716998403']}>
+Host: localhost:8001
+
+[2026-04-09 06:47:06.912198+00:00] PUBLIC ACCESS: Token='73226145-5cbe-449e-9196-2fe73ba592cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775717226864']}>
+Host: localhost:8001
+
+[2026-04-09 06:47:07.073683+00:00] PUBLIC ACCESS: Token='73226145-5cbe-449e-9196-2fe73ba592cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775717226911']}>
+Host: localhost:8001
+
+[2026-04-09 07:16:59.807387+00:00] PUBLIC ACCESS: Token='6649c3c1-c940-4a82-a61c-663974f189ad'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775719019472']}>
+Host: localhost:8001
+
+[2026-04-09 07:16:59.822497+00:00] PUBLIC ACCESS: Token='6649c3c1-c940-4a82-a61c-663974f189ad'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775719019497']}>
+Host: localhost:8001
+
+[2026-04-09 07:21:19.439354+00:00] PUBLIC ACCESS: Token='6649c3c1-c940-4a82-a61c-663974f189ad'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775719279072']}>
+Host: localhost:8001
+
+[2026-04-09 07:21:19.459448+00:00] PUBLIC ACCESS: Token='6649c3c1-c940-4a82-a61c-663974f189ad'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775719279115']}>
+Host: localhost:8001
+
+[2026-04-09 09:41:20.319405+00:00] PUBLIC ACCESS: Token='3d8657b8-f64b-4d9c-8c7b-6f8666d4f8b7'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775727680310']}>
+Host: localhost:8001
+
+[2026-04-09 09:41:20.322784+00:00] PUBLIC ACCESS: Token='3d8657b8-f64b-4d9c-8c7b-6f8666d4f8b7'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775727680319']}>
+Host: localhost:8001
+
+[2026-04-09 09:45:08.587431+00:00] PUBLIC ACCESS: Token='3d8657b8-f64b-4d9c-8c7b-6f8666d4f8b7'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775727908545']}>
+Host: localhost:8001
+
+[2026-04-09 09:45:08.595860+00:00] PUBLIC ACCESS: Token='3d8657b8-f64b-4d9c-8c7b-6f8666d4f8b7'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775727908585']}>
+Host: localhost:8001
+
+[2026-04-09 10:42:26.799259+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=19, coding=2.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v7\backend\ai_assessments\views.py", line 496, in post
+    raise Exception(
+    ...<3 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=19, coding=2.
+
+RAW: No response received
+
+[2026-04-09 10:59:04.010639+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=10, coding=2.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v7\backend\ai_assessments\views.py", line 496, in post
+    raise Exception(
+    ...<3 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=10, coding=2.
+
+RAW: No response received
+
+[2026-04-09 11:04:04.655469+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=16, coding=2.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v7\backend\ai_assessments\views.py", line 496, in post
+    raise Exception(
+    ...<3 lines>...
+    )
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected Pool MCQs=20, min coding=1; got MCQs=16, coding=2.
+
+RAW: No response received
+
+[2026-04-09 11:58:57.482235+00:00] PUBLIC ACCESS: Token='d28d84f8-5f7f-436c-a391-64e17bfe0dbf'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775735937162']}>
+Host: localhost:8001
+
+[2026-04-09 11:58:57.485043+00:00] PUBLIC ACCESS: Token='d28d84f8-5f7f-436c-a391-64e17bfe0dbf'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1775735937171']}>
+Host: localhost:8001
+
+[2026-04-10 05:33:04.055121+00:00] ERROR in GenerateAssessmentView: _generate_execution_verified_coding_pool() got an unexpected keyword argument 'cancel_token'
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\v7\backend\ai_assessments\views.py", line 418, in post
+    generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        groq_client=local_groq_client,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        cancel_token=cancel_token
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: _generate_execution_verified_coding_pool() got an unexpected keyword argument 'cancel_token'
+
+RAW: No response received
+
+[2026-04-13 06:10:30.016496+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 505, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+
+RAW: No response received
+
+[2026-04-13 06:15:22.642494+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 505, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+
+RAW: No response received
+
+[2026-04-13 10:33:35.315177+00:00] PUBLIC ACCESS: Token='f8808789-42c8-4e21-bdc7-b31f5eb49517'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776076415301']}>
+Host: localhost:8001
+
+[2026-04-13 10:33:35.425254+00:00] PUBLIC ACCESS: Token='f8808789-42c8-4e21-bdc7-b31f5eb49517'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776076415335']}>
+Host: localhost:8001

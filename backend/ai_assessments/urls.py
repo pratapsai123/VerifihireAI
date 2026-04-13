@@ -4,11 +4,13 @@ from .views import (
     PublicAssessmentView, SubmitAssessmentView, CreateSubmissionView, 
     UpdateAssessmentIntegrityView, InviteAssessmentCandidatesView, 
     ProxyCodeExecuteView, AIAssessmentSubmissionDetailView,
-    SaveAssessmentProgressView, AIAssessmentAssignmentView, AIAssessmentAvailableInterviewersView
+    SaveAssessmentProgressView, AIAssessmentAssignmentView, AIAssessmentAvailableInterviewersView,
+    CancelGenerationView
 )
 
 urlpatterns = [
     path('generate/', GenerateAssessmentView.as_view(), name='generate-assessment'),
+    path('cancel-generation/', CancelGenerationView.as_view(), name='cancel-generation'),
     path('', AssessmentListView.as_view(), name='list-assessments'),
     path('<int:pk>/', AssessmentDetailView.as_view(), name='assessment-detail'),
     path('<int:pk>/assign-interviewers/', AIAssessmentAssignmentView.as_view(), name='assign-interviewers'),

@@ -849,7 +849,7 @@ function CustomAssessment() {
       setAutoTime('');
     }
   }, [formData.numberOfQuestions]);
-  
+
   // Auto-save form data to localStorage whenever important state changes
   useEffect(() => {
     saveFormDataToLocalStorage();
@@ -1445,7 +1445,7 @@ function CustomAssessment() {
         // If the draft ID was not found (e.g. backend was reset), clear it and move to creation.
         if (err.response?.status === 404) {
           clearDraft();
-          draftId = null; 
+          draftId = null;
         } else {
           // If it's a network error or other server error, we still return the draftId to allow
           // the flow to continue if possible, or fail gracefully later.

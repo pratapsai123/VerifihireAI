@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
 import { API_BASE_URL } from '../apiConfig';
+const STORAGE_KEY = 'ai_interview_create_form_data';
 
 
 const AiInterview = () => {
@@ -21,6 +22,67 @@ const AiInterview = () => {
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
+
+    // --- Persistence Logic ---
+    const isDirty = React.useRef(false);
+
+    React.useEffect(() => {
+        // window level variables are wiped on refresh/reload
+        const isRefresh = window._interview_init === undefined;
+
+        if (isRefresh) {
+            const savedData = sessionStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                try {
+                    const parsed = JSON.parse(savedData);
+                    let hasRestoredData = false;
+                    if (parsed.jobDescription) { setJobDescription(parsed.jobDescription); hasRestoredData = true; }
+                    if (parsed.customRoleTitle) { setCustomRoleTitle(parsed.customRoleTitle); hasRestoredData = true; }
+                    if (parsed.experienceLevel) { setExperienceLevel(parsed.experienceLevel); hasRestoredData = true; }
+                    if (parsed.selectedRoleId) { setSelectedRoleId(parsed.selectedRoleId); hasRestoredData = true; }
+                    if (parsed.fromDate) { setFromDate(parsed.fromDate); hasRestoredData = true; }
+                    if (parsed.fromTime) { setFromTime(parsed.fromTime); hasRestoredData = true; }
+                    if (parsed.untilDate) { setUntilDate(parsed.untilDate); hasRestoredData = true; }
+                    if (parsed.untilTime) { setUntilTime(parsed.untilTime); hasRestoredData = true; }
+                    if (hasRestoredData) isDirty.current = true;
+                } catch (e) {
+                    console.error("Error hydrating interview form:", e);
+                }
+            }
+        } else {
+            // Internal navigation - clear saved data
+            sessionStorage.removeItem(STORAGE_KEY);
+            isDirty.current = false;
+        }
+
+        window._interview_init = true;
+    }, []);
+
+    const initialDataHash = React.useRef(null);
+    if (!initialDataHash.current) {
+        initialDataHash.current = JSON.stringify({
+            jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
+            fromDate, fromTime, untilDate, untilTime
+        });
+    }
+
+    React.useEffect(() => {
+        const dataToSave = {
+            jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
+            fromDate, fromTime, untilDate, untilTime
+        };
+        const currentDataStr = JSON.stringify(dataToSave);
+
+        if (!isDirty.current && currentDataStr === initialDataHash.current) {
+            return;
+        }
+
+        isDirty.current = true;
+        sessionStorage.setItem(STORAGE_KEY, currentDataStr);
+    }, [
+        jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
+        fromDate, fromTime, untilDate, untilTime
+    ]);
 
     React.useEffect(() => {
         const fetchRoles = async () => {
@@ -71,6 +133,21 @@ const AiInterview = () => {
 
         if (!jobDescription || jobDescription.trim().length < 20) {
             setError('Please provide a detailed Job Description (at least 20 characters) for the AI to analyze.');
+            return;
+        }
+
+        if (!experienceLevel) {
+            setError('Please select an Experience Level.');
+            return;
+        }
+
+        // Mandatory Scheduling Validation
+        if (!fromDate || !fromTime) {
+            setError('Please provide a complete starting Date and Time for the interviews.');
+            return;
+        }
+        if (!untilDate || !untilTime) {
+            setError('Please provide a complete ending Date and Time for the interviews.');
             return;
         }
 
@@ -351,6 +428,7 @@ const AiInterview = () => {
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                                             <input
                                                 type="date"
+                                                min={new Date().toISOString().split('T')[0]}
                                                 value={fromDate}
                                                 onChange={(e) => setFromDate(e.target.value)}
                                                 style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}
@@ -371,6 +449,7 @@ const AiInterview = () => {
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                                             <input
                                                 type="date"
+                                                min={new Date().toISOString().split('T')[0]}
                                                 value={untilDate}
                                                 onChange={(e) => setUntilDate(e.target.value)}
                                                 style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}

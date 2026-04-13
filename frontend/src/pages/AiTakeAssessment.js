@@ -103,7 +103,7 @@ const AiTakeAssessment = () => {
     };
     const [customInput, setCustomInput] = useState('');
     const [executionResult, setExecutionResult] = useState(null);
-    const [codingResults, setCodingResults] = useState({}); // { qId: { passed, total } }
+    const [coding_results, setCodingResults] = useState({}); // { qId: { passed, total } }
 
     const supportedLanguages = [
         { id: 'javascript', name: 'JavaScript', version: '18.15.0' },
@@ -226,28 +226,30 @@ const AiTakeAssessment = () => {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
             });
-            const { submission_id, time_left, answers: savedAnswers, current_question_index, codingResults: savedResults, codeDrafts: savedDrafts } = res.data;
+            const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts } = res.data;
 
             setSubmissionId(submission_id);
             if (savedResults) setCodingResults(savedResults);
             if (savedDrafts) setCodeDrafts(savedDrafts);
+            
+            // Sync timer
+            setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
+
+            // Directly start assessment (no mandatory fullscreen)
             setIsStarted(true);
 
             // Restore session if resumed
             if (savedAnswers && Object.keys(savedAnswers).length > 0) {
                 setAnswers(savedAnswers);
 
-                // Rebuild answeredQs and visitedQs from saved answer keys
-                // Keys are like 'mcq_0', 'mcq_3', 'coding_0' — extract the index from the key
                 const mcqsArr = assessment?.generated_content?.mcqs || [];
                 const totalMcqs = mcqsArr.length;
-
                 const restoredAnswered = new Set();
                 const restoredVisited = new Set();
 
                 Object.keys(savedAnswers).forEach(key => {
                     const val = savedAnswers[key];
-                    if (!val) return; // skip empty/null answers
+                    if (!val) return;
                     let globalIdx = null;
                     if (key.startsWith('mcq_')) {
                         const i = parseInt(key.replace('mcq_', ''), 10);
@@ -273,14 +275,21 @@ const AiTakeAssessment = () => {
                 setVisitedQs(prev => new Set([...prev, current_question_index]));
             }
 
-            // Sync timer
-            setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
-
-            // Mandatory Screen Share
+            // Start Proctoring
             const success = await startScreenShare();
             if (!success) {
                 setIsStarted(false);
                 return;
+            }
+
+            // Enter Fullscreen immediately after screen share is granted
+            try {
+                if (document.documentElement.requestFullscreen) {
+                    await document.documentElement.requestFullscreen();
+                    setIsFullscreen(true);
+                }
+            } catch (err) {
+                console.error("Fullscreen request failed", err);
             }
 
             await startCamera();
@@ -312,7 +321,7 @@ const AiTakeAssessment = () => {
             };
             return true;
         } catch (err) {
-            alert('Screen sharing (Entire Screen) is required to start the test.');
+            // alert('Screen sharing (Entire Screen) is required to start the test.');
             return false;
         }
     };
@@ -581,17 +590,27 @@ const AiTakeAssessment = () => {
         };
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
         const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'window_switch');
+        const onFullscreenChange = () => {
+            const isNowFullscreen = !!document.fullscreenElement;
+            setIsFullscreen(isNowFullscreen);
+            if (!isNowFullscreen && isStarted && !submitted) {
+                showAiEvent('FULLSCREEN EXITED', true, 'fullscreen_exit');
+            }
+        };
+
         document.addEventListener('visibilitychange', onHide);
         window.addEventListener('blur', onBlur);
+        document.addEventListener('fullscreenchange', onFullscreenChange);
 
         initMonitoring();
         return () => {
             clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', onHide);
             window.removeEventListener('blur', onBlur);
+            document.removeEventListener('fullscreenchange', onFullscreenChange);
             stopCamera();
         };
-    }, [isStarted, submissionId, showAiEvent]);
+    }, [isStarted, submissionId, showAiEvent, submitted]);
 
     // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
     useEffect(() => {
@@ -620,7 +639,7 @@ const AiTakeAssessment = () => {
                 await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
                     answers,
                     current_question_index: currentQuestionIdx,
-                    codingResults: codingResults,
+                    coding_results,
                     codeDrafts: codeDrafts
                 });
             } catch (err) {
@@ -629,7 +648,7 @@ const AiTakeAssessment = () => {
         };
 
         // Store reference so unload handler can call it
-        saveProgressRef.current = { answers, currentQuestionIdx, submissionId, codingResults };
+        saveProgressRef.current = { answers, currentQuestionIdx, submissionId, coding_results };
 
         const timer = setTimeout(saveProgress, 1000); // 1-second debounce (reduced from 3s)
         return () => clearTimeout(timer);
@@ -646,7 +665,7 @@ const AiTakeAssessment = () => {
             const payload = JSON.stringify({
                 answers: ctx.answers,
                 current_question_index: ctx.currentQuestionIdx,
-                codingResults: ctx.codingResults,
+                coding_results: ctx.coding_results,
                 codeDrafts: ctx.codeDrafts
             });
             navigator.sendBeacon(
@@ -755,7 +774,7 @@ const AiTakeAssessment = () => {
             axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
                 answers,
                 current_question_index: idx,
-                codingResults: codingResults,
+                coding_results,
                 codeDrafts: codeDrafts
             }).catch(() => { });
         }
@@ -797,7 +816,7 @@ const AiTakeAssessment = () => {
                 name: candidateName,
                 email: candidateEmail,
                 answers,
-                codingResults // Added to send test case results
+                coding_results // Added to send test case results
             });
             // Mark as completed locally to prevent re-opening link later
             localStorage.setItem(`assessment_completed_${token}`, 'true');
@@ -1016,9 +1035,6 @@ const AiTakeAssessment = () => {
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600 }}>
                             Question type: <span style={{ color: '#1a5276' }}>{currentQ.type === 'mcq' ? 'Multiple Choice' : 'Coding Challenge'}</span>
                         </span>
-                        <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600 }}>
-                            Marks for Correct Answer <span style={{ color: '#16a34a', fontWeight: 700 }}>1.00</span>
-                        </span>
                     </div>
 
                     {/* Question Body */}
@@ -1060,17 +1076,6 @@ const AiTakeAssessment = () => {
                                         <div style={{ marginBottom: '1rem' }}>
                                             <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', margin: '0 0 0.5rem', display: 'flex', alignItems: 'center', gap: 10 }}>
                                                 {currentQ.title || `Challenge ${currentQ.id + 1}`}
-                                                <span style={{ 
-                                                    fontSize: '0.75rem', 
-                                                    padding: '2px 10px', 
-                                                    borderRadius: '12px', 
-                                                    fontWeight: 600,
-                                                    background: currentQ.difficulty?.toLowerCase() === 'easy' ? '#def7ec' : currentQ.difficulty?.toLowerCase() === 'hard' ? '#fde2e2' : '#fef3c7',
-                                                    color: currentQ.difficulty?.toLowerCase() === 'easy' ? '#03543f' : currentQ.difficulty?.toLowerCase() === 'hard' ? '#9b1c1c' : '#92400e',
-                                                    textTransform: 'capitalize'
-                                                }}>
-                                                    {currentQ.difficulty || 'Medium'}
-                                                </span>
                                             </h2>
                                             
                                             <div style={{ display: 'flex', gap: 8, marginBottom: '1.2rem' }}>

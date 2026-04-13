@@ -9,7 +9,7 @@ import sys
 import time
 import groq
 from django.conf import settings
-from ai_candidates.views import extract_json
+from django.core.cache import cache
 from .code_generator import CodeGenerator
 from .coding_skeletons import CodingSkeletons
 
@@ -37,6 +37,64 @@ class GroqKeyManager:
         return False
 
 
+def extract_json(text):
+    """
+    Robustly extracts and repairs JSON from AI responses.
+    Handles unescaped quotes, trailing commas, and markdown blocks.
+    """
+    if not text:
+        return None
+        
+    # 1. Basic Markdown Cleaning
+    cleaned = text.strip()
+    if cleaned.startswith("```json"):
+        cleaned = cleaned[7:]
+    if cleaned.startswith("```"):
+        cleaned = cleaned[3:]
+    if cleaned.endswith("```"):
+        cleaned = cleaned[:-3]
+    cleaned = cleaned.strip()
+
+    # 2. Extract first-level object/array
+    try:
+        start = cleaned.find('{')
+        end = cleaned.rfind('}')
+        if start != -1 and end != -1:
+            json_str = cleaned[start:end+1]
+            
+            # 3. ADVANCED REPAIR: Fix unescaped internal quotes
+            # This complex regex targets quotes that aren't preceded by {[: or followed by ,:]}
+            # Helps solve "Expecting ',' delimiter" errors at line X column Y.
+            import re
+            
+            # A. Fix trailing commas
+            json_str = re.sub(r',\s*([\]}])', r'\1', json_str)
+            
+            # B. Escape internal double quotes that aren't delimiters
+            # Look for quotes that are between other word characters or aren't next to structural JSON chars
+            # This is a heuristic that works for most descriptive fields
+            def escape_internal_quotes(match):
+                body = match.group(0)
+                # If it's "key": "value", it's likely a delimiter and should stay
+                # We target quotes that are surrounded by text
+                return body.replace('"', '\\"')
+
+            # Heuristic: Find content between actual delimiters and escape internal quotes
+            # But let's start with a simpler one: fix "He said "Hello"" issues
+            # We look for a quote preceded by an alphabetical char and followed by an alphabetical char
+            json_str = re.sub(r'(?<=[a-zA-Z0-9])"(?=[a-zA-Z0-9])', r'\"', json_str)
+            
+            try:
+                return json.loads(json_str, strict=False)
+            except json.JSONDecodeError:
+                # If still failing, try one last desperation: remove newlines inside quotes
+                # (Some models break strings across lines)
+                pass
+            
+            return json.loads(json_str, strict=False)
+    except Exception as e:
+        logger.error(f"JSON extraction error in ai_logic: {e}")
+    return None
 
 def _is_raw_data(s):
     """
@@ -267,42 +325,102 @@ def _call_executor(*, language: str, source_code: str, stdin: str | None, time_l
         logger.error(f"Executor exception: {error_msg}")
         return {"ok": False, "error": error_msg}
 
-def _call_groq_with_backoff(groq_client, **kwargs):
-    """Wrapper for Groq API calls with exponential backoff and API key rotation."""
+def _call_groq_with_backoff(groq_client=None, prompt=None, system_msg=None, is_json=True, **kwargs):
+    """Wrapper for Groq API calls with exponential backoff, account rotation, and model fallback."""
     max_retries = 10
-    base_delay = 2
+    base_delay = 5
+    
+    # 1. Initialize Client if needed
+    if groq_client is None:
+        key = GroqKeyManager.get_current_key()
+        groq_client = groq.Groq(api_key=key, timeout=60.0)
+    
     current_client = groq_client
     attempt = 0
+    rotations_this_attempt = 0
+    keys_count = len(getattr(settings, 'GROQ_API_KEYS', [])) or 1
+    
+    # Prepare messages
+    messages = kwargs.pop('messages', [])
+    if not messages and prompt:
+        messages = []
+        if system_msg:
+            messages.append({"role": "system", "content": system_msg})
+        messages.append({"role": "user", "content": prompt})
+
+    # Prepare response format
+    response_format = kwargs.pop('response_format', None)
+    if not response_format and is_json:
+        response_format = {"type": "json_object"}
+
+    # 70b -> 8b Fallback tracking
+    original_model = kwargs.get('model', 'llama-3.1-8b-instant')
+    powerful_model = "llama-3.3-70b-versatile"
+    fast_model = "llama-3.1-8b-instant"
+    current_model = original_model
+    model_fallback_active = False
+
     while attempt < max_retries:
+        # Use the current model (possibly downgraded)
+        kwargs['model'] = current_model
         try:
-            return current_client.chat.completions.create(**kwargs)
-        except groq.RateLimitError as e:
-            # First, try rotating to a different account's API key
-            if GroqKeyManager.rotate_key():
-                new_key = GroqKeyManager.get_current_key()
-                # Create a new client with the next key
-                timeout = 60.0
+            resp = current_client.chat.completions.create(
+                messages=messages,
+                response_format=response_format,
+                **kwargs
+            )
+            content = resp.choices[0].message.content
+            if is_json:
+                from .views import extract_json # circular import? use local or ensure views handled
+                # Better to use a non-circular extract_json or just json.loads
+                import json
                 try:
+                    return json.loads(content)
+                except:
+                    # Fallback to local extract_json if available
+                    from ai_candidates.views import extract_json
+                    return extract_json(content)
+            return content
+        except groq.RateLimitError as e:
+            # 1. Try rotating to a different account's API key
+            if keys_count > 1 and rotations_this_attempt < keys_count:
+                if GroqKeyManager.rotate_key():
+                    time.sleep(1) # Breathe
+                    new_key = GroqKeyManager.get_current_key()
                     timeout = getattr(current_client, '_timeout', 60.0)
-                except: pass
-                
-                current_client = groq.Groq(api_key=new_key, timeout=timeout)
-                logger.info(f"Retrying with rotated API key index {GroqKeyManager._current_index} (Attempt {attempt + 1}/{max_retries})")
-                
-                # IMPORTANT: If we rotated, we don't increment 'attempt' yet, 
-                # or we give it extra leeway to try the new account.
-                # We'll allow rotation to happen without consuming a "retry" slot.
-                continue 
+                    current_client = groq.Groq(api_key=new_key, timeout=timeout)
+                    logger.info(f"Retrying with rotated API key index {GroqKeyManager._current_index} (Attempt {attempt + 1}/{max_retries})")
+                    rotations_this_attempt += 1
+                    continue 
             
-            # If rotation is not possible, use exponential backoff and increment attempt
+            # 2. Try falling back to a lighter model if using the powerful one
+            if current_model == powerful_model and not model_fallback_active:
+                logger.warning(f"70b Model Rate Limited on all keys. Falling back to 8b-instant...")
+                current_model = fast_model
+                model_fallback_active = True
+                rotations_this_attempt = 0 # Try all keys again with the lighter model
+                continue
+
+            # 3. Both models/all keys exhausted: Full exponential backoff
             if attempt < max_retries - 1:
-                delay = base_delay * (2 ** (attempt % 3)) 
-                logger.warning(f"Groq Rate Limit hit across all keys. Retrying in {delay}s... (Attempt {attempt + 1}/{max_retries})")
+                delay = min(base_delay * (2 ** attempt), 120)
+                logger.warning(f"All Groq paths exhausted. Cooling down for {delay}s... (Attempt {attempt + 1}/{max_retries})")
                 time.sleep(delay)
                 attempt += 1
+                rotations_this_attempt = 0 
+                model_fallback_active = False
+                current_model = original_model # Try the powerful model again after a long sleep
                 continue
             raise e
         except groq.APIStatusError as e:
+            if e.status_code == 429:
+                 if keys_count > 1 and rotations_this_attempt < keys_count:
+                     if GroqKeyManager.rotate_key():
+                        time.sleep(1)
+                        new_key = GroqKeyManager.get_current_key()
+                        current_client = groq.Groq(api_key=new_key)
+                        rotations_this_attempt += 1
+                        continue
             if e.status_code == 413:
                 if GroqKeyManager.rotate_key():
                     new_key = GroqKeyManager.get_current_key()
@@ -435,11 +553,37 @@ def _normalize_generated_pool(payload):
         coding = []
 
     normalized_mcqs = []
+    import re
+    def clean_ans(s):
+        if not s: return ""
+        return re.sub(r'^(?:choice\s+)?[a-z0-9][\.\)\:\s-]+\s*', '', str(s).lower()).strip()
+
     for q in mcqs:
         if not isinstance(q, dict):
             continue
         item = copy.deepcopy(q)
         item['difficulty'] = _normalize_difficulty_label(item.get('difficulty'), default='Medium')
+        
+        # Consolidate answer fields
+        raw_ans = item.get('answer') or item.get('correct_answer') or item.get('ans') or item.get('correct_option') or ''
+        
+        options = item.get('options', [])
+        if isinstance(options, list) and raw_ans:
+            cleaned_raw = clean_ans(raw_ans)
+            matched = False
+            for opt in options:
+                if clean_ans(opt) == cleaned_raw:
+                    item['answer'] = opt
+                    matched = True
+                    break
+            if not matched:
+                item['answer'] = str(raw_ans).strip()
+        else:
+            item['answer'] = str(raw_ans).strip()
+            
+        for k in ['correct_answer', 'ans', 'correct_option']:
+            item.pop(k, None)
+
         normalized_mcqs.append(item)
 
     normalized_coding = []
@@ -538,12 +682,16 @@ def _repair_pool_shortfall(
     pool_coding_total,
     coding_tasks,
     max_attempts=5,
-    model="llama-3.1-8b-instant"
+    model="llama-3.1-8b-instant",
+    cancel_token=None
 ):
     """Top up missing MCQ/coding items when model under-generates in initial pass."""
     repaired = _normalize_generated_pool(pool)
 
     for attempt in range(max_attempts):
+        if cancel_token and cache.get(f"abort_{cancel_token}"):
+            raise Exception("Generation Aborted by User")
+            
         easy_count, medium_count, hard_count = _mcq_difficulty_counts(repaired.get('mcqs', []))
         current_coding = len(repaired.get('coding_challenges', []))
 
@@ -569,51 +717,38 @@ def _repair_pool_shortfall(
                 required_skills=required_skills,
                 difficulties=needed_diffs,
                 total_required=missing_coding,
-                model=model
+                model=model,
+                cancel_token=cancel_token
             )
             repaired['coding_challenges'].extend(new_coding)
 
         # 2. REPAIR MCQs (AI-Only)
         missing_mcqs = missing_easy + missing_medium + missing_hard
         if missing_mcqs > 0:
-            repair_prompt = f"""
-            You are repairing an under-generated technical assessment pool.
-            Job Description: {job_description}
-            Required Skills: {required_skills}
-
-            Generate ONLY missing MCQs as JSON objects with keys: 
-            question, options (4), answer, difficulty. 
-            Required missing MCQs: Easy={missing_easy}, Medium={missing_medium}, Hard={missing_hard}.
-
-            CRITICAL OVERRIDE:
-            - JSON ESCAPING: You MUST properly escape all internal double quotes (`\\"`) and newlines (`\\n`) inside string values! Returning unescaped double quotes inside a JSON string value will cause a syntax error.
-
-            Return ONLY valid JSON with root keys exactly:
-            - mcqs (list)
-            Include only newly generated items. Do not repeat previous items.
-            """
-
+            logger.info(f"REPAIR: Rescuing {missing_mcqs} missing MCQs (E:{missing_easy}, M:{missing_medium}, H:{missing_hard}).")
+            
+            # Use the highly resilient, batch-based generator instead of a single brittle prompt
+            # It already has a "one-by-one" gap filler built in, guaranteeing we hit the count.
+            blacklist_qs = [q.get('question', '')[:100] for q in repaired.get('mcqs', [])]
+            
             try:
-                repair_response = _call_groq_with_backoff(
-                    groq_client,
+                new_mcqs = _generate_mcq_pool_ai_only(
+                    groq_client=groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    pool_mcq_total=missing_mcqs,
+                    pool_easy=missing_easy,
+                    pool_medium=missing_medium,
+                    pool_hard=missing_hard,
+                    attempts_per_batch=5,  # We are already in a retry loop
+                    blacklist_qs=blacklist_qs,
                     model=model,
-                    messages=[
-                        {"role": "system", "content": "You output JSON only."},
-                        {"role": "user", "content": repair_prompt},
-                    ],
-                    max_tokens=4096,
-                    temperature=0.2,
+                    cancel_token=cancel_token
                 )
-                repair_text = repair_response.choices[0].message.content or ""
-                repair_data = _normalize_generated_pool(extract_json(repair_text) or {})
-
-                if repair_data.get('mcqs'):
-                    repaired['mcqs'].extend(repair_data['mcqs'])
-                if repair_data.get('coding_challenges'):
-                    repaired['coding_challenges'].extend(repair_data['coding_challenges'])
-
+                if new_mcqs:
+                    repaired['mcqs'].extend(new_mcqs)
             except Exception as repair_err:
-                logger.warning(f"Repair attempt {attempt + 1}/{max_attempts} failed: {repair_err}")
+                logger.warning(f"Repair attempt {attempt + 1}/{max_attempts} for MCQs failed: {repair_err}")
                 continue
 
     # Trim to exact pool size after repair.
@@ -633,7 +768,8 @@ def _generate_coding_pool_ai_only(
     batch_size=1,
     attempts_per_batch=3,
     blacklist_titles=None,
-    model="llama-3.1-8b-instant"
+    model="llama-3.1-8b-instant",
+    cancel_token=None
 ):
     """
     SKELETON-BASED GENERATION:
@@ -653,27 +789,65 @@ def _generate_coding_pool_ai_only(
 
     generated = []
     used_skeleton_ids = set()
+    used_categories = set()
 
     for i in range(total_required):
+        if cancel_token and cache.get(f"abort_{cancel_token}"):
+            raise Exception("Generation Aborted by User")
+            
         diff = desired[i]
         
-        # Pick a skeleton that hasn't been used yet (for uniqueness)
-        skeleton = None
-        for _ in range(20):  # Try up to 20 times to find a unique skeleton
-            candidate = CodingSkeletons.get_skeleton(difficulty=diff)
-            if candidate['id'] not in used_skeleton_ids:
-                skeleton = candidate
-                break
-            candidate = CodingSkeletons.get_skeleton()  # Try any difficulty
-            if candidate['id'] not in used_skeleton_ids:
-                skeleton = candidate
-                break
+        # 1. STRICT: Filter skeletons strictly by required difficulty
+        available_for_diff = [s for s in CodingSkeletons.SKELETONS if s.get('difficulty') == diff]
+        if not available_for_diff:
+            # Fallback if no skeletons exist for this difficulty at all
+            available_for_diff = CodingSkeletons.SKELETONS
+
+        # 2. DIVERSITY FILTER: Try to pick a completely new logic category
+        unused_cat_candidates = [s for s in available_for_diff if s.get('category') not in used_categories and s['id'] not in used_skeleton_ids]
         
-        if not skeleton:
-            # All skeletons used, allow repeats but AI will make unique stories
-            skeleton = CodingSkeletons.get_skeleton(difficulty=diff)
+        if unused_cat_candidates:
+            skeleton = random.choice(unused_cat_candidates)
+        else:
+            # 3. If we ran out of unique categories for this difficulty, relax category rule but keep puzzle unique
+            unused_id_candidates = [s for s in available_for_diff if s['id'] not in used_skeleton_ids]
+            if unused_id_candidates:
+                skeleton = random.choice(unused_id_candidates)
+            else:
+                # 4. Absolute fallback: just pick any for this difficulty to avoid crashing
+                skeleton = random.choice(available_for_diff)
         
         used_skeleton_ids.add(skeleton['id'])
+        if skeleton.get('category'):
+            used_categories.add(skeleton['category'])
+
+        format_override = ""
+        if diff == 'Easy':
+            format_override = """
+CRITICAL OVERRIDE FOR EASY QUESTIONS:
+- Do NOT write a long, complicated real-world scenario.
+- Write the problem EXACTLY like a classic LeetCode problem.
+- Start directly with the core requirement (e.g., "Given an array of integers `nums` and an integer `k`, return...").
+- Ensure the student understands instantly that this is a straightforward, purely algorithmic question.
+"""
+        elif diff == 'Medium':
+            format_override = """
+CRITICAL OVERRIDE FOR MEDIUM QUESTIONS:
+- Do NOT write a long, complicated real-world scenario.
+- Write the problem EXACTLY like a classic LeetCode Medium problem.
+- Provide a clear, technical definition of the problem (e.g., "You are given an integer array... Find... Return...").
+- State any "Notice" or edge case rules clearly (e.g., "Notice that you may not slant the container.").
+- Keep the language purely technical, algorithmic, and free of unnecessary background story.
+"""
+        elif diff == 'Hard':
+            format_override = """
+CRITICAL OVERRIDE FOR HARD QUESTIONS:
+- Do NOT write a long, complicated real-world scenario.
+- Write the problem EXACTLY like a classic LeetCode Hard problem.
+- Provide a rigorous, highly technical definition of the problem (e.g., "Given an input string `s` and a pattern `p`, implement...").
+- State complex edge cases, matching rules, or strict conditions clearly.
+- Keep the language purely technical, algorithmic, and mathematics-focused.
+"""
 
         # Ask AI ONLY for the story — NO code generation
         story_prompt = f"""You are a professional assessment writer. Create a coding challenge DESCRIPTION for a job candidate.
@@ -687,12 +861,12 @@ MATHEMATICAL LOGIC TO USE (DO NOT CHANGE THE MATH):
 - Difficulty: {skeleton['difficulty']}
 
 ALREADY GENERATED TITLES (AVOID DUPLICATES): {[c.get('title','') for c in generated] + blacklist}
-
+{format_override}
 YOUR TASK:
 Write a PROFESSIONAL problem statement that:
-1. Uses a real-world scenario from the Job Description
-2. Follows the EXACT mathematical logic described above
-3. Is clear and easy for a student to understand
+1. Is purely technical, algorithmic, and follows a strict LeetCode style (Do NOT invent background stories or real-world scenarios).
+2. Follows the EXACT mathematical logic described above.
+3. Is clear and easy for a student to understand, while respecting the difficulty level.
 
 RETURN THIS EXACT JSON FORMAT:
 {{
@@ -706,24 +880,25 @@ RULES:
 - DO NOT include Any examples, test cases, or sample inputs/outputs in the problem_statement. These will be added automatically by the system.
 - MUST include a short **Input Format** section at the end of the `problem_statement` describing exactly what each line of the input represents (e.g. "The first line contains N, the second line contains...").
 - Return JSON ONLY. No markdown.
+- CRITICAL: You MUST escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure valid JSON!
 - Title must be unique and related to the JD.
 - Problem statement must be clear enough for a student to understand in 30 seconds.
 """
 
         for attempt in range(attempts_per_batch):
             try:
-                response = _call_groq_with_backoff(
+                result = _call_groq_with_backoff(
                     groq_client,
                     model=model,
                     messages=[
                         {"role": "system", "content": "You are a professional assessment writer. Return JSON only."},
                         {"role": "user", "content": story_prompt}
                     ],
+                    response_format={"type": "json_object"},
                     max_tokens=2048,
                     temperature=0.8,
                 )
-                raw = response.choices[0].message.content or ""
-                data = extract_json(raw)
+                data = result if isinstance(result, dict) else extract_json(result)
 
                 if data and data.get('title') and data.get('problem_statement'):
                     # Build the complete challenge by merging AI story + Skeleton math
@@ -749,7 +924,7 @@ RULES:
                 logger.error(f"SKELETON: Failed attempt {attempt+1} for '{skeleton['id']}': {e}")
 
     return generated[:total_required]
-def _generate_execution_verified_coding_pool(*, groq_client, job_description, required_skills, difficulties, total_required, model="llama-3.1-8b-instant"):
+def _generate_execution_verified_coding_pool(*, groq_client, job_description, required_skills, difficulties, total_required, model="llama-3.1-8b-instant", cancel_token=None):
     """
     Entry point for skeleton-based generation.
     1. Generates the pool using skeletons.
@@ -762,13 +937,16 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
         required_skills=required_skills,
         difficulties=difficulties,
         total_required=total_required,
-        model=model
+        model=model,
+        cancel_token=cancel_token
     )
 
     # 2. POPULATE EXAMPLE DATA & TEST CASES
     # Skeletons come with gold_solution and input_schema, but we need actual text for the UI.
     verified_challenges = []
     for challenge in challenges:
+        if cancel_token and cache.get(f"abort_{cancel_token}"):
+            raise Exception("Generation Aborted by User")
         try:
             schema = challenge.get('input_generator_schema')
             ref_sol = challenge.get('reference_solution')
@@ -793,6 +971,8 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
                 # Generate 5 additional hidden test cases
                 test_cases = []
                 for idx in range(6):
+                    if cancel_token and cache.get(f"abort_{cancel_token}"):
+                        raise Exception("Generation Aborted by User")
                     tc_input = InputDataGenerator.generate(schema)
                     tc_res = _call_executor(language='python', source_code=ref_sol, stdin=tc_input)
                     if tc_res.get('ok'):
@@ -824,7 +1004,8 @@ def _generate_mcq_pool_ai_only(
     pool_hard,
     attempts_per_batch=20, # INCREASED: Maximum persistence for rotation
     blacklist_qs=None,
-    model="llama-3.1-8b-instant" 
+    model="llama-3.1-8b-instant",
+    cancel_token=None
 ):
     """Generate MCQs via dedicated AI-only calls per difficulty to satisfy strict split."""
     # Add a random salt to ensure diversity across sessions
@@ -844,8 +1025,11 @@ def _generate_mcq_pool_ai_only(
             continue
 
         idx = 0
-        batch_size = 7 # High quality initial size, auto-scales down on 413 error
+        batch_size = 15 # TURBO: Increased batch size for faster large-pool generation (scales down on 413)
         while idx < total_count_for_diff:
+            if cancel_token and cache.get(f"abort_{cancel_token}"):
+                raise Exception("Generation Aborted by User")
+            
             count = min(batch_size, total_count_for_diff - idx)
             
             # Compress instructions to save token overhead
@@ -872,16 +1056,16 @@ def _generate_mcq_pool_ai_only(
                             {"role": "system", "content": "You output JSON only."},
                             {"role": "user", "content": prompt},
                         ],
+                        response_format={"type": "json_object"},
                         max_tokens=4096,
                         temperature=0.2,
                     )
                     
-                    if not response or not hasattr(response, 'choices') or not response.choices:
+                    if not response:
                         logger.warning(f"Empty/Invalid response on attempt {attempt + 1}")
                         continue
 
-                    raw = response.choices[0].message.content or ""
-                    parsed = _normalize_generated_pool(extract_json(raw) or {})
+                    parsed = _normalize_generated_pool(response if isinstance(response, dict) else (extract_json(response) or {}))
                     mcqs = parsed.get('mcqs', [])
                     same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
@@ -918,6 +1102,9 @@ def _generate_mcq_pool_ai_only(
             
         # FINAL RESCUE: If we still have a shortfall, fill it one-by-one to avoid all limits
         while len([q for q in generated if q.get('difficulty') == difficulty]) < total_count_for_diff:
+            if cancel_token and cache.get(f"abort_{cancel_token}"):
+                raise Exception("Generation Aborted by User")
+                
             shortfall = total_count_for_diff - len([q for q in generated if q.get('difficulty') == difficulty])
             logger.info(f"MCQ Resilient Gap-Filler: Generating {shortfall} more {difficulty} MCQs one-by-one.")
             
@@ -928,8 +1115,14 @@ def _generate_mcq_pool_ai_only(
             Exclude previous: {[q.get('question', '')[:30] for q in generated][-10:]}
             """
             try:
-                resp = _call_groq_with_backoff(groq_client, model=model, messages=[{"role": "user", "content": rescue_prompt}], max_tokens=1024)
-                rescue_mcqs = _normalize_generated_pool(extract_json(resp.choices[0].message.content) or {}).get('mcqs', [])
+                resp = _call_groq_with_backoff(
+                    groq_client, 
+                    model=model, 
+                    messages=[{"role": "user", "content": rescue_prompt}], 
+                    response_format={"type": "json_object"},
+                    max_tokens=1024
+                )
+                rescue_mcqs = _normalize_generated_pool((resp if isinstance(resp, dict) else extract_json(resp)) or {}).get('mcqs', [])
                 for rq in rescue_mcqs:
                     rq['difficulty'] = difficulty
                     generated.append(rq)
@@ -945,11 +1138,14 @@ def _generate_mcq_pool_ai_only(
 
     return generated
 
-def _expert_assessment_refiner(groq_client, raw_content):
+def _expert_assessment_refiner(groq_client, raw_content, cancel_token=None):
     """
     Uses a high-reasoning model to clean, fix, and standardize the generated pool
     according to strict production-ready requirements.
     """
+    if cancel_token and cache.get(f"abort_{cancel_token}"):
+        raise Exception("Generation Aborted by User")
+
     if not raw_content or (not raw_content.get('mcqs') and not raw_content.get('coding_challenges')):
         return raw_content
 
@@ -962,17 +1158,18 @@ def _expert_assessment_refiner(groq_client, raw_content):
         # Call Groq with the high-reasoning model (Llama 3.3 70B)
         response = _call_groq_with_backoff(
             groq_client,
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             messages=[
-                {"role": "system", "content": EXPERT_VALIDATOR_PROMPT},
+                {"role": "system", "content": "You are a professional recruiter. Return JSON only."},
                 {"role": "user", "content": f"INPUT:\n{input_json_str}"}
             ],
+            response_format={"type": "json_object"},
             max_tokens=8192,
-            temperature=0.1 # Low temperature for consistency
+            temperature=0.0,
+            seed=42
         )
         
-        refined_text = response.choices[0].message.content or ""
-        refined_data = extract_json(refined_text)
+        refined_data = response if isinstance(response, dict) else extract_json(response)
         
         if refined_data and (refined_data.get('mcqs') or refined_data.get('coding_challenges')):
             logger.info("Expert Validator: Refinement SUCCESSFUL.")

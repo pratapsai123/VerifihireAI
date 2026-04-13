@@ -984,15 +984,34 @@ export default function TakeAssessment() {
     if (token && candidateDetailsCompleted && !precheckLoading && !alreadySubmitted) load();
   }, [token, navigate, candidateDetailsCompleted, precheckLoading, alreadySubmitted]);
 
-  // Fullscreen state listener
+  // Fullscreen state listener & violation logging
   useEffect(() => {
     const update = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement));
+      const isFs = Boolean(
+        document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement || 
+        document.msFullscreenElement
+      );
+      setIsFullscreen(isFs);
+      
+      // Log violation if they exit mid-exam
+      if (!isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
+        showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
+      }
     };
     update();
     document.addEventListener('fullscreenchange', update);
-    return () => document.removeEventListener('fullscreenchange', update);
-  }, []);
+    document.addEventListener('webkitfullscreenchange', update);
+    document.addEventListener('mozfullscreenchange', update);
+    document.addEventListener('MSFullscreenChange', update);
+    return () => {
+      document.removeEventListener('fullscreenchange', update);
+      document.removeEventListener('webkitfullscreenchange', update);
+      document.removeEventListener('mozfullscreenchange', update);
+      document.removeEventListener('MSFullscreenChange', update);
+    };
+  }, [candidateDetailsCompleted, submitted, assessmentStage, showAiEvent]);
 
   // Integrity Tracking: Tab Switches / Leaving Window & Camera
   const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
@@ -1230,21 +1249,44 @@ export default function TakeAssessment() {
   }, [showAiEvent]);
 
   const requestFullscreen = async () => {
+    const elem = document.documentElement;
     try {
       setFsError('');
 
-      // 1. Mandatory Screen Share
-      if (!screenStreamRef.current || !screenStreamRef.current.active) {
-        const success = await startScreenShare();
-        if (!success) return;
+      // 1. Fullscreen request (MUST be first for gesture sensitivity)
+      if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        await elem.webkitRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        await elem.mozRequestFullScreen();
+      } else if (elem.msRequestFullscreen) {
+        await elem.msRequestFullscreen();
       }
 
-      // 2. Fullscreen
-      const root = document.documentElement;
-      if (root.requestFullscreen) await root.requestFullscreen();
+      // Verify success
+      const isFsNow = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      if (!isFsNow) {
+        throw new Error("Fullscreen request denied by browser.");
+      }
+
+      // 2. Mandatory Screen Share
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // Exit fullscreen if they don't agree to screen share
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
+          return;
+        }
+      }
+
+      // 3. Camera (already started mostly, but ensure success)
+      await startCamera();
+
     } catch (err) {
       console.error('Fullscreen error:', err);
-      setFsError('Fullscreen permission is required to start the exam.');
+      setFsError('Fullscreen mode is required. Please ensure browser permissions are allowed and try again.');
     }
   };
 

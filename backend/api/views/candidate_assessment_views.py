@@ -1620,18 +1620,18 @@ def results_overview_view(request):
                 ai_qs = AIAssessmentSubmission.objects.filter(
                     assessment__company_id=company_id,
                     is_deleted=False
-                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+                ).select_related('assessment').order_by('-submitted_at')
             else:
                 ai_qs = AIAssessmentSubmission.objects.filter(
                     is_deleted=False
-                ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+                ).select_related('assessment').order_by('-submitted_at')
         elif scoped_ids:
             # HR Manager sees only submissions for assessments they or their direct-report HRs created
             # HR sees only submissions for assessments they created
             ai_qs = AIAssessmentSubmission.objects.filter(
                 assessment__user_profile_id__in=scoped_ids,
                 is_deleted=False
-            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+            ).select_related('assessment').order_by('-submitted_at')
         else:
             ai_qs = AIAssessmentSubmission.objects.none()
         
@@ -1646,7 +1646,6 @@ def results_overview_view(request):
                 ai_cand_qs = Candidate.objects.filter(
                     company_id=company_id,
                     is_deleted=False,
-                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
                 ).order_by('-submission_date')
             else:
                 ai_cand_qs = Candidate.objects.filter(
@@ -1659,7 +1658,6 @@ def results_overview_view(request):
             ai_cand_qs = Candidate.objects.filter(
                 user_profile_id__in=scoped_ids,
                 is_deleted=False,
-                status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
             ).order_by('-submission_date')
         else:
             ai_cand_qs = Candidate.objects.none()
@@ -1762,7 +1760,7 @@ def results_overview_view(request):
                 {
                     'id': s.id,
                     'submission_id': f"ai_{s.id}",
-                    'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else None,
+                    'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else (s.started_at.isoformat() if getattr(s, 'started_at', None) else None),
                     'full_name': getattr(s, 'candidate_name', 'Unknown'),
                     'email': getattr(s, 'candidate_email', 'Unknown'),
                     'candidate': {
@@ -1805,7 +1803,7 @@ def results_overview_view(request):
             )
 
         for s in ai_cand_qs[:5000]:
-            submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.submission_date.isoformat() if getattr(s, 'submission_date', None) else None)
+            submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.created_at.isoformat() if getattr(s, 'created_at', None) else None)
             results.append(
                 {
                     'submission_id': f"aicand_{s.id}",
@@ -1841,6 +1839,7 @@ def results_overview_view(request):
                     'interview_summary': s.interview_summary,
                     'total_questions': getattr(s, 'total_questions', 0),
                     'resume_score': getattr(s, 'resume_score', 0),
+                    'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False),
                     'integrity': {
                         'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                         'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Download, Trash2 } from 'lucide-react';
+import { Download, Trash2, TableProperties } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -10,6 +10,38 @@ function fmtPercent(v) {
     const n = Number(v);
     if (Number.isNaN(n)) return '0%';
     return `${n.toFixed(1)}%`;
+}
+
+function hasValue(v) {
+    return v !== null && v !== undefined && String(v).trim() !== '';
+}
+
+function getStatusMeta(status) {
+    if (status === 'selected' || status === 'COMPLETED') {
+        return { label: 'Qualified', className: 'ok' };
+    }
+    if (status === 'rejected') {
+        return { label: 'Not Qualified', className: 'bad' };
+    }
+    if (status === 'sent') {
+        return { label: 'Sent', className: 'info' };
+    }
+    if (status === 'not_attempted') {
+        return { label: 'Not Attempted', className: 'neutral' };
+    }
+    return { label: status || '-', className: 'neutral' };
+}
+
+function getSortValue(row, key) {
+    if (key === 'candidate') return (row.candidate?.name || '').toLowerCase();
+    if (key === 'details') return (row.assessment?.display_name || row.assessment?.name || '').toLowerCase();
+    if (key === 'submitted') return row.submitted_at ? new Date(row.submitted_at).getTime() : 0;
+    if (key === 'objective') return Number(row.objective_percentage) || 0;
+    if (key === 'coding') return Number(row.coding_percentage) || 0;
+    if (key === 'final') return Number(row.percentage) || 0;
+    if (key === 'integrity') return Number(row.integrity?.integrity_score) || 0;
+    if (key === 'status') return (row.status || '').toLowerCase();
+    return '';
 }
 
 export default function Result() {
@@ -37,6 +69,11 @@ export default function Result() {
     const [statusFilter, setStatusFilter] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [segment, setSegment] = useState('all');
+    const [sortConfig, setSortConfig] = useState({ key: 'submitted', direction: 'desc' });
+    const [quickViewRow, setQuickViewRow] = useState(null);
 
     useEffect(() => {
         if (isOverview) return;
@@ -78,6 +115,96 @@ export default function Result() {
         return list;
     }, [overview, search, statusFilter]);
 
+    const overviewMetrics = useMemo(() => {
+        const total = filtered.length;
+        const qualified = filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED').length;
+        const notQualified = filtered.filter((r) => r.status === 'rejected').length;
+        const attempted = filtered.filter((r) => r.status !== 'not_attempted' && r.status !== 'sent').length;
+        return { total, qualified, notQualified, attempted };
+    }, [filtered]);
+
+    const segmentedResults = useMemo(() => {
+        if (segment === 'qualified') return filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED');
+        if (segment === 'not_qualified') return filtered.filter((r) => r.status === 'rejected');
+        if (segment === 'not_attempted') return filtered.filter((r) => r.status === 'not_attempted');
+        return filtered;
+    }, [filtered, segment]);
+
+    const analytics = useMemo(() => {
+        const dataset = filtered;
+        const explainability = [];
+
+        dataset.forEach((r) => {
+            const score = Number(r.percentage) || 0;
+            const integrity = Number(r.integrity?.integrity_score) || 0;
+            const status = r.status;
+
+            if (status === 'rejected') {
+                const reasons = [];
+                if (score < 50) reasons.push('Low final score');
+                if (integrity < 60) reasons.push('Integrity concerns');
+                if ((Number(r.objective_percentage) || 0) < 45) reasons.push('Low objective performance');
+                if ((Number(r.coding_percentage) || 0) < 45) reasons.push('Low coding performance');
+                explainability.push({
+                    id: r.submission_id || r.invitation_id,
+                    reason: reasons.length > 0 ? reasons.join(', ') : 'Did not meet qualification threshold',
+                });
+            }
+        });
+        return { explainability };
+    }, [filtered]);
+
+    const sortedResults = useMemo(() => {
+        const cloned = [...segmentedResults];
+        cloned.sort((a, b) => {
+            const av = getSortValue(a, sortConfig.key);
+            const bv = getSortValue(b, sortConfig.key);
+            if (av < bv) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (av > bv) return sortConfig.direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+        return cloned;
+    }, [segmentedResults, sortConfig]);
+
+    const pageSize = Number(rowsPerPage) || 10;
+    const totalPages = Math.max(1, Math.ceil(sortedResults.length / pageSize));
+    const paginatedResults = useMemo(() => {
+        const start = (currentPage - 1) * pageSize;
+        return sortedResults.slice(start, start + pageSize);
+    }, [sortedResults, currentPage, pageSize]);
+
+    const paginationPages = useMemo(() => {
+        const pages = [];
+        const start = Math.max(1, currentPage - 2);
+        const end = Math.min(totalPages, start + 4);
+        for (let p = start; p <= end; p += 1) pages.push(p);
+        return pages;
+    }, [currentPage, totalPages]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, statusFilter, fromDate, toDate, segment, rowsPerPage]);
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        }
+    }, [currentPage, totalPages]);
+
+    const handleSort = (key) => {
+        setSortConfig((prev) => {
+            if (prev.key === key) {
+                return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
+            }
+            return { key, direction: 'asc' };
+        });
+    };
+
+    const sortMarker = (key) => {
+        if (sortConfig.key !== key) return '↕';
+        return sortConfig.direction === 'asc' ? '↑' : '↓';
+    };
+
     const load = useCallback(async () => {
         setLoading(true);
         setError('');
@@ -116,34 +243,33 @@ export default function Result() {
     }, [isOverview, token, fromDate, toDate]);
 
     const downloadCSV = () => {
-        if (!filtered || filtered.length === 0) {
-            alert("No data available to download.");
+        const data = filtered;
+        if (data.length === 0) {
+            alert("No data to download.");
             return;
         }
 
-        // Format: name,email,pan_number,phone
         const headers = ["name", "email", "pan_number", "phone"];
-        const rows = filtered.map(r => [
+        const rows = data.map(r => [
             r.candidate?.name || "",
             r.candidate?.email || "",
             r.candidate?.pan_number || "",
             r.candidate?.phone || ""
         ]);
 
-        const csvString = [
+        const csvContent = [
             headers.join(","),
             ...rows.map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(","))
         ].join("\n");
 
-        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.setAttribute("href", url);
-        link.setAttribute("download", `results_${new Date().toISOString().slice(0, 10)}.csv`);
+        link.setAttribute("download", "candidate_results.csv");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        URL.revokeObjectURL(url);
     };
 
     useEffect(() => {
@@ -273,9 +399,9 @@ export default function Result() {
                         <div className="title">Results Overview</div>
                         <div className="sub">Latest submitted assessments (auto-checked).</div>
                     </div>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <button className="btn-secondary" type="button" onClick={load}>Refresh</button>
-                        <button className="btn-secondary" type="button" onClick={() => navigate('/assessments')}>Back to Assessments</button>
+                    <div className="top-actions">
+                        <button className="btn-top-primary" type="button" onClick={load}>Refresh</button>
+                        <button className="btn-top-secondary" type="button" onClick={() => navigate('/assessments')}>Back to Assessments</button>
                     </div>
                 </div>
 
@@ -315,13 +441,42 @@ export default function Result() {
                             onChange={(e) => setToDate(e.target.value)}
                         />
                     </div>
-                    <button className="btn-secondary" type="button" onClick={downloadCSV} title="Download CSV" style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', flexShrink: 0, height: '42px', padding: '0 1rem' }}>
-                        <Download size={16} /> .csv
+                    <button className="search" type="button" onClick={downloadCSV} title="Download CSV" style={{ display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap', flexShrink: 0, cursor: 'pointer', fontWeight: '700', color: '#64748b' }}>
+                        <Download size={14} /> .csv
                     </button>
                 </div>
 
+                <div className="metrics-grid">
+                    <div className="metric-card">
+                        <div className="metric-label">Total Results</div>
+                        <div className="metric-value">{overviewMetrics.total}</div>
+                    </div>
+                    <div className="metric-card">
+                        <div className="metric-label">Qualified</div>
+                        <div className="metric-value success">{overviewMetrics.qualified}</div>
+                    </div>
+                    <div className="metric-card">
+                        <div className="metric-label">Not Qualified</div>
+                        <div className="metric-value danger">{overviewMetrics.notQualified}</div>
+                    </div>
+                    <div className="metric-card">
+                        <div className="metric-label">Attempted</div>
+                        <div className="metric-value">{overviewMetrics.attempted}</div>
+                    </div>
+                </div>
+
+
+
                 {loading ? (
-                    <div className="card">Loading results…</div>
+                    <div className="card skeleton-wrap">
+                        <div className="skeleton-line w40"></div>
+                        <div className="skeleton-line w65"></div>
+                        <div className="skeleton-table">
+                            {Array.from({ length: 6 }).map((_, idx) => (
+                                <div key={idx} className="skeleton-row"></div>
+                            ))}
+                        </div>
+                    </div>
                 ) : error ? (
                     <div className="card error">
                         <div className="title">Couldn’t load results</div>
@@ -330,163 +485,264 @@ export default function Result() {
                 ) : filtered.length === 0 ? (
                     <div className="card">No results found yet. Submit an assessment once and it will appear here.</div>
                 ) : (
-                    <div className="table-card">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Details</th>
-                                    <th>Submitted</th>
-                                    <th>Objective</th>
-                                    <th>Coding</th>
-                                    <th>Final Score</th>
-                                    <th>Integrity Score</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filtered.map((r) => (
-                                    <tr key={r.submission_id || `inv_${r.invitation_id}`}>
-                                        <td>
-                                            <div className="cell-title">{r.candidate?.name || '-'}</div>
-                                            <div className="cell-sub">{r.candidate?.email || '-'}</div>
-                                        </td>
-                                        <td>{r.assessment?.display_name || r.assessment?.name || '-'}</td>
-                                        <td>
-                                            <div className="cell-title">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '-'}</div>
-                                            <div className="cell-sub">{r.submitted_at ? new Date(r.submitted_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</div>
-                                        </td>
-                                        <td>
-                                            <div className="cell-title">{r.objective_score} / {r.objective_total}</div>
-                                            <div className="cell-sub">{fmtPercent(r.objective_percentage)}</div>
-                                            {r.assessment?.weightage_objective !== undefined && r.assessment.weightage_objective !== 50 && (
-                                                <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_objective}%</div>
-                                            )}
-                                        </td>
-                                        <td>
-                                            <div className="cell-title">{r.coding_score} / {r.coding_total}</div>
-                                            <div className="cell-sub">{fmtPercent(r.coding_percentage)}</div>
-                                            {r.assessment?.weightage_coding !== undefined && r.assessment.weightage_coding !== 50 && (
-                                                <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_coding}%</div>
-                                            )}
-                                        </td>
-                                        <td>
-                                            <div className="cell-title" style={{ fontWeight: 'bold' }}>{fmtPercent(r.percentage)}</div>
-                                            <div className="cell-sub">Weighted</div>
-                                        </td>
-                                        <td>
-                                            <div className="cell-title" style={{ fontWeight: 'bold' }}>
-                                                {r.integrity?.integrity_score !== undefined && r.integrity?.integrity_score !== null ? `${r.integrity.integrity_score}%` : '-'}
-                                            </div>
-                                            {r.integrity?.warning_logs?.length > 0 && (
-                                                <div className="cell-sub" style={{ color: '#ef4444' }}>
-                                                    {r.integrity.warning_logs.length} Warnings
-                                                </div>
-                                            )}
-                                        </td>
-                                        <td>
-                                            <span className={`pill ${r.status === 'selected' || r.status === 'COMPLETED' ? 'ok' : r.status === 'sent' ? 'info' : r.status === 'not_attempted' ? 'neutral' : 'bad'}`}>
-                                                {r.status === 'selected' || r.status === 'COMPLETED' ? 'Qualified' : r.status === 'rejected' ? 'Not Qualified' : r.status === 'sent' ? 'Sent' : r.status === 'not_attempted' ? 'Not Attempted' : r.status}
-                                            </span>
-                                        </td>
-                                        <td style={{ display: 'flex', gap: '8px' }}>
-                                            {r.submission_id ? (
-                                                <button
-                                                    className="btn-report-dl"
-                                                    title="Download Report"
-                                                    onClick={async () => {
-                                                        const url = `${API_BASE_URL}/results/${r.submission_id}/report/`;
-                                                        try {
-                                                            const resp = await axios.get(url, { responseType: 'blob' });
-                                                            const blob = new Blob([resp.data], { type: 'application/pdf' });
-                                                            const durl = window.URL.createObjectURL(blob);
-                                                            const link = document.createElement('a');
-                                                            link.href = durl;
-                                                            link.setAttribute('download', `Report_${r.candidate?.name || r.submission_id}.pdf`);
-                                                            document.body.appendChild(link);
-                                                            link.click();
-                                                            link.remove();
-                                                            window.URL.revokeObjectURL(durl);
-                                                        } catch (err) {
-                                                            alert("Failed to download report.");
-                                                        }
-                                                    }}
-                                                >
-                                                    <Download size={18} />
-                                                </button>
-                                            ) : (
-                                                <div style={{ width: '32px' }}></div>
-                                            )}
-                                            {r.delete_requested ? (
-                                                <div 
-                                                    style={{ 
-                                                        display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                                                        width: '36px', height: '36px', background: '#fffbeb', 
-                                                        borderRadius: '8px', border: '1px solid #fde68a', cursor: 'not-allowed'
-                                                    }} 
-                                                    title="Deletion Pending Approval"
-                                                >
-                                                    ⏳
-                                                </div>
-                                            ) : (
-                                                <button
-                                                    className="btn-action-delete"
-                                                    title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
-                                                onClick={async () => {
-                                                    const role = JSON.parse(localStorage.getItem('user'))?.role;
-                                                    const isAdmin = role === 'company_admin' || role === 'application_admin';
-
-                                                    const delId = r.submission_id;
-                                                    if (!delId) {
-                                                        alert("Cannot delete a pending invitation from this view yet.");
-                                                        return;
-                                                    }
-
-                                                    const isAI = String(delId).startsWith('ai_');
-                                                    const realId = isAI ? String(delId).replace('ai_', '') : delId;
-                                                    const endpoint = isAI ? `${API_BASE_URL}/ai-assessments/submission/${realId}/` : `${API_BASE_URL}/submissions/${realId}/`;
-
-                                                    if (isAdmin) {
-                                                        if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
-                                                            try {
-                                                                await axios.delete(endpoint, {
-                                                                    data: { confirm_permanent_delete: true }
-                                                                });
-                                                                alert("Deleted successfully.");
-                                                                load();
-                                                            } catch (err) {
-                                                                console.error("Delete Error:", err.response || err);
-                                                                alert("Failed to delete. " + (err.response?.data?.error || err.message));
-                                                            }
-                                                        }
-                                                    } else {
-                                                        const reason = prompt("Enter reason for deletion request:");
-                                                        if (reason) {
-                                                            try {
-                                                                await axios.delete(endpoint, {
-                                                                    data: { reason }
-                                                                });
-                                                                alert("Deletion request sent.");
-                                                                load();
-                                                            } catch (err) {
-                                                                alert(err.response?.data?.error || "Failed to request deletion.");
-                                                            }
-                                                        }
-                                                    }
-                                                }}
-                                            >
-                                                <Trash2 size={18} />
-                                                </button>
-                                            )}
-                                        </td>
+                    <>
+                        <div className="table-card">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th onClick={() => handleSort('candidate')} className="sortable-th">Candidate {sortMarker('candidate')}</th>
+                                        <th onClick={() => handleSort('details')} className="sortable-th">Details {sortMarker('details')}</th>
+                                        <th onClick={() => handleSort('submitted')} className="sortable-th">Submitted {sortMarker('submitted')}</th>
+                                        <th onClick={() => handleSort('objective')} className="sortable-th">Objective {sortMarker('objective')}</th>
+                                        <th onClick={() => handleSort('coding')} className="sortable-th">Coding {sortMarker('coding')}</th>
+                                        <th onClick={() => handleSort('final')} className="sortable-th">Final Score {sortMarker('final')}</th>
+                                        <th onClick={() => handleSort('integrity')} className="sortable-th">Integrity Score {sortMarker('integrity')}</th>
+                                        <th onClick={() => handleSort('status')} className="sortable-th">Status {sortMarker('status')}</th>
+                                        <th className="center-col">Actions</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    {paginatedResults.map((r) => {
+                                        const statusMeta = getStatusMeta(r.status);
+                                        return (
+                                            <tr key={r.submission_id || `inv_${r.invitation_id}`}>
+                                                <td>
+                                                    <div className="cell-title">{r.candidate?.name || '-'}</div>
+                                                    <div className="cell-sub">{r.candidate?.email || '-'}</div>
+                                                </td>
+                                                <td>{r.assessment?.display_name || r.assessment?.name || '-'}</td>
+                                                <td>
+                                                    <div className="cell-title">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '-'}</div>
+                                                    <div className="cell-sub">{r.submitted_at ? new Date(r.submitted_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="cell-title">{r.objective_score} / {r.objective_total}</div>
+                                                    <div className="cell-sub">{fmtPercent(r.objective_percentage)}</div>
+                                                    {r.assessment?.weightage_objective !== undefined && r.assessment.weightage_objective !== 50 && (
+                                                        <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_objective}%</div>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    <div className="cell-title">{r.coding_score} / {r.coding_total}</div>
+                                                    <div className="cell-sub">{fmtPercent(r.coding_percentage)}</div>
+                                                    {r.assessment?.weightage_coding !== undefined && r.assessment.weightage_coding !== 50 && (
+                                                        <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_coding}%</div>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    <div className="cell-title" style={{ fontWeight: 'bold' }}>{fmtPercent(r.percentage)}</div>
+                                                    <div className="cell-sub">Weighted</div>
+                                                    <div className="progress-track">
+                                                        <div className="progress-fill" style={{ width: `${Math.max(0, Math.min(100, Number(r.percentage) || 0))}%` }} />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div className="cell-title" style={{ fontWeight: 'bold' }}>
+                                                        {r.integrity?.integrity_score !== undefined && r.integrity?.integrity_score !== null ? `${r.integrity.integrity_score}%` : '-'}
+                                                    </div>
+                                                    {r.integrity?.warning_logs?.length > 0 && (
+                                                        <div className="cell-sub" style={{ color: '#ef4444' }}>
+                                                            {r.integrity.warning_logs.length} Warnings
+                                                        </div>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    <span className={`pill ${statusMeta.className}`}>
+                                                        <span className="pill-dot" />
+                                                        {statusMeta.label}
+                                                    </span>
+                                                </td>
+                                                <td className="center-col">
+                                                    <div className="action-buttons">
+                                                        <button
+                                                            className="btn-report-dl"
+                                                            title="Quick View"
+                                                            onClick={() => setQuickViewRow(r)}
+                                                        >
+                                                            <TableProperties size={16} />
+                                                        </button>
+                                                        {r.submission_id ? (
+                                                            <button
+                                                                className="btn-report-dl"
+                                                                title="Download Report"
+                                                                onClick={async () => {
+                                                                    const url = `${API_BASE_URL}/results/${r.submission_id}/report/`;
+                                                                    try {
+                                                                        const resp = await axios.get(url, { responseType: 'blob' });
+                                                                        const blob = new Blob([resp.data], { type: 'application/pdf' });
+                                                                        const durl = window.URL.createObjectURL(blob);
+                                                                        const link = document.createElement('a');
+                                                                        link.href = durl;
+                                                                        link.setAttribute('download', `Report_${r.candidate?.name || r.submission_id}.pdf`);
+                                                                        document.body.appendChild(link);
+                                                                        link.click();
+                                                                        link.remove();
+                                                                        window.URL.revokeObjectURL(durl);
+                                                                    } catch (err) {
+                                                                        alert("Failed to download report.");
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Download size={18} />
+                                                            </button>
+                                                        ) : (
+                                                            <div style={{ width: '31px' }}></div>
+                                                        )}
+                                                        {r.delete_requested ? (
+                                                            <div className="delete-pending" title="Deletion Pending Approval">⏳</div>
+                                                        ) : (
+                                                            <button
+                                                                className="btn-action-delete"
+                                                                title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
+                                                                onClick={async () => {
+                                                                    const role = JSON.parse(localStorage.getItem('user'))?.role;
+                                                                    const isAdmin = role === 'company_admin' || role === 'application_admin';
+
+                                                                    const delId = r.submission_id;
+                                                                    if (!delId) {
+                                                                        alert("Cannot delete a pending invitation from this view yet.");
+                                                                        return;
+                                                                    }
+
+                                                                    const isAI = String(delId).startsWith('ai_');
+                                                                    const realId = isAI ? String(delId).replace('ai_', '') : delId;
+                                                                    const endpoint = isAI ? `${API_BASE_URL}/ai-assessments/submission/${realId}/` : `${API_BASE_URL}/submissions/${realId}/`;
+
+                                                                    if (isAdmin) {
+                                                                        if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
+                                                                            try {
+                                                                                await axios.delete(endpoint, {
+                                                                                    data: { confirm_permanent_delete: true }
+                                                                                });
+                                                                                alert("Deleted successfully.");
+                                                                                load();
+                                                                            } catch (err) {
+                                                                                console.error("Delete Error:", err.response || err);
+                                                                                alert("Failed to delete. " + (err.response?.data?.error || err.message));
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        const reason = prompt("Enter reason for deletion request:");
+                                                                        if (reason) {
+                                                                            try {
+                                                                                await axios.delete(endpoint, {
+                                                                                    data: { reason }
+                                                                                });
+                                                                                alert("Deletion request sent.");
+                                                                                load();
+                                                                            } catch (err) {
+                                                                                alert(err.response?.data?.error || "Failed to request deletion.");
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Trash2 size={18} />
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="pagination-wrap">
+                            <div className="pagination-summary">
+                                Showing {sortedResults.length === 0 ? 0 : ((currentPage - 1) * pageSize) + 1}-
+                                {Math.min(currentPage * pageSize, sortedResults.length)} of {sortedResults.length}
+                            </div>
+                            <div className="pagination-controls">
+                                <select
+                                    className="search pagination-size"
+                                    value={rowsPerPage}
+                                    onChange={(e) => setRowsPerPage(Number(e.target.value))}
+                                >
+                                    <option value={10}>10 / page</option>
+                                    <option value={25}>25 / page</option>
+                                    <option value={50}>50 / page</option>
+                                </select>
+                                <button
+                                    type="button"
+                                    className="pagination-btn"
+                                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                                    disabled={currentPage === 1}
+                                >
+                                    Prev
+                                </button>
+                                {paginationPages.map((page) => (
+                                    <button
+                                        key={page}
+                                        type="button"
+                                        className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                                        onClick={() => setCurrentPage(page)}
+                                    >
+                                        {page}
+                                    </button>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                <button
+                                    type="button"
+                                    className="pagination-btn"
+                                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </>
                 )}
             </div>
+
+            {quickViewRow && (
+                <div className="quickview-overlay" onClick={() => setQuickViewRow(null)}>
+                    <div className="quickview-panel" onClick={(e) => e.stopPropagation()}>
+                        <div className="quickview-head">
+                            <h3>Candidate Data Details</h3>
+                            <button type="button" className="quickview-close" onClick={() => setQuickViewRow(null)}>✕</button>
+                        </div>
+                        <div className="quickview-subhead">
+                            <strong>{quickViewRow.candidate?.name || quickViewRow.full_name || 'Candidate'}</strong>
+                            <span>{quickViewRow.candidate?.email || quickViewRow.email || 'No email'}</span>
+                        </div>
+                        <div className="quickview-grid">
+                            {[
+                                { label: 'ID: Submission ID', value: quickViewRow.submission_id },
+                                { label: 'ID: Invitation ID', value: quickViewRow.invitation_id },
+                                { label: 'ID: Candidate ID', value: quickViewRow.candidate?.id || quickViewRow.candidate_id },
+                                { label: 'Workflow: Raw Status', value: quickViewRow.status },
+                                { label: 'Workflow: Delete Requested', value: quickViewRow.delete_requested ? 'Yes' : 'No' },
+                                { label: 'Workflow: Report Available', value: quickViewRow.submission_id ? 'Yes' : 'No' },
+                                { label: 'Scoring: Objective Weightage', value: hasValue(quickViewRow.assessment?.weightage_objective) ? `${quickViewRow.assessment.weightage_objective}%` : null },
+                                { label: 'Scoring: Coding Weightage', value: hasValue(quickViewRow.assessment?.weightage_coding) ? `${quickViewRow.assessment.weightage_coding}%` : null },
+                                { label: 'Scoring: Objective Marks Missing', value: hasValue(quickViewRow.objective_total) && hasValue(quickViewRow.objective_score) ? `${Math.max(0, Number(quickViewRow.objective_total) - Number(quickViewRow.objective_score))}` : null },
+                                { label: 'Scoring: Coding Marks Missing', value: hasValue(quickViewRow.coding_total) && hasValue(quickViewRow.coding_score) ? `${Math.max(0, Number(quickViewRow.coding_total) - Number(quickViewRow.coding_score))}` : null },
+                                { label: 'Integrity: Warnings Count', value: quickViewRow.integrity?.warning_logs?.length ? `${quickViewRow.integrity.warning_logs.length}` : '0' },
+                                {
+                                    label: 'Integrity: Warning Types', value: Array.isArray(quickViewRow.integrity?.warning_logs) && quickViewRow.integrity.warning_logs.length > 0
+                                        ? [...new Set(quickViewRow.integrity.warning_logs.map((w) => w?.event_type || w?.type).filter(Boolean))].join(', ')
+                                        : null
+                                },
+                                { label: 'Meta: Created At', value: quickViewRow.created_at ? new Date(quickViewRow.created_at).toLocaleString() : null },
+                                { label: 'Meta: Updated At', value: quickViewRow.updated_at ? new Date(quickViewRow.updated_at).toLocaleString() : null },
+                            ]
+                                .filter((item) => hasValue(item.value))
+                                .map((item) => (
+                                    <div key={item.label}>
+                                        <span>{item.label}</span>
+                                        <strong>{item.value}</strong>
+                                    </div>
+                                ))}
+                        </div>
+                        <div className="quickview-footer">
+                            <button type="button" className="quickview-close-btn" onClick={() => setQuickViewRow(null)}>
+                                Close Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

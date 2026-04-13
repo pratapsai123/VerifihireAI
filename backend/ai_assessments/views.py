@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.db import models
+from django.core.cache import cache
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -59,7 +60,7 @@ class SubmitAssessmentView(APIView):
         name = data.get('name')
         email = data.get('email', '').strip().lower()
         answers = data.get('answers', {})
-        coding_results = data.get('codingResults', {}) # Captured test case results
+        coding_results = data.get('coding_results', {}) # Captured test case results
 
         if not token or not name or not email:
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -261,6 +262,25 @@ class SubmitAssessmentView(APIView):
             logger.error(f"SUMBISSION ERROR: {str(e)}\n{traceback.format_exc()}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class CancelGenerationView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    def post(self, request):
+        try:
+            # sendBeacon might send raw text or JSON
+            if request.content_type == 'text/plain':
+                data = json.loads(request.body)
+            else:
+                data = request.data
+            token = data.get('cancel_token') or data.get('token')
+            if token:
+                logger.warning(f"Frontend sent abort signal for generation token: {token}")
+                cache.set(f"abort_{token}", True, timeout=300)
+                return Response({"status": "aborted"})
+            return Response({"error": "No token"}, status=400)
+        except Exception as e:
+            logger.error(f"Cancel error: {e}")
+            return Response({"error": "Invalid format"}, status=400)
 
 class GenerateAssessmentView(APIView):
     PRIMARY_MODEL = "llama-3.1-8b-instant"
@@ -271,6 +291,7 @@ class GenerateAssessmentView(APIView):
         data = request.data
         job_description = data.get('job_description')
         required_skills = data.get('required_skills')
+        cancel_token = data.get('cancel_token')
         
         # Robust Question Count Extraction
         # 1. MCQs: Priority to Granular (if they have non-zero sum) > Total count
@@ -344,28 +365,9 @@ class GenerateAssessmentView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             company = user_profile.company if user_profile else None
 
-            assessment = Assessment.objects.create(
-                job_description=job_description,
-                required_skills=required_skills,
-                mcq_count=mcq_count,
-                mcq_easy=mcq_easy,
-                mcq_medium=mcq_medium,
-                mcq_hard=mcq_hard,
-                coding_count=coding_count,
-                coding_difficulty_list=coding_tasks,
-                duration_minutes=duration,
-                total_points=total_possible_points,
-                num_applicants=int(data.get('num_applicants', 0)),
-                available_from=data.get('available_from'),
-                available_until=data.get('available_until'),
-                pass_threshold=data.get('pass_threshold', 60),
-                company=company,
-                user_profile=user_profile,
-                created_by=user_profile,
-            )
-
+            # Delayed Assessment creation: We do not touch DB until AI succeeds
             # Pool multipliers based on number of applicants (min 2x for randomization)
-            num_applicants = assessment.num_applicants or 2
+            num_applicants = int(data.get('num_applicants', 0)) or 2
             pool_multiplier = max(2, num_applicants)
 
             pool_easy = mcq_easy * pool_multiplier
@@ -405,7 +407,8 @@ class GenerateAssessmentView(APIView):
                     pool_medium=pool_medium,
                     pool_hard=pool_hard,
                     blacklist_qs=blacklist_mcqs,
-                    model=self.FALLBACK_MODEL
+                    model=self.FALLBACK_MODEL,
+                    cancel_token=cancel_token
                 )
                 if mcqs:
                     generated_data['mcqs'] = mcqs[:pool_mcq_total]
@@ -418,18 +421,23 @@ class GenerateAssessmentView(APIView):
                 required_skills=required_skills,
                 difficulties=pool_coding_tasks,
                 total_required=pool_coding_total,
-                model=self.PRIMARY_MODEL
+                model=self.PRIMARY_MODEL,
+                cancel_token=cancel_token
             )
 
             # --- RESTORED ORIGINAL MCQ PASS ---
             # Now we call the refiner on the MCQ pool that was generated in Step 1
             if generated_data.get('mcqs'):
-                logger.info("Expert Gate: Cleaning and Refining MCQ pool as originally requested...")
-                mcq_refined_data = _expert_assessment_refiner(
-                    groq_client=local_groq_client,
-                    raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []}
-                )
-                generated_data['mcqs'] = mcq_refined_data.get('mcqs', [])
+                if len(generated_data['mcqs']) > 25:
+                    logger.info(f"Expert Gate BYPASSED: Pool size ({len(generated_data['mcqs'])}) is large. Bypassing refiner to avoid 3-minute latency.")
+                else:
+                    logger.info("Expert Gate: Cleaning and Refining MCQ pool as originally requested...")
+                    mcq_refined_data = _expert_assessment_refiner(
+                        groq_client=local_groq_client,
+                        raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
+                        cancel_token=cancel_token
+                    )
+                    generated_data['mcqs'] = mcq_refined_data.get('mcqs', [])
 
             # RE-CALCULATE FINAL METRICS
             final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
@@ -493,12 +501,15 @@ class GenerateAssessmentView(APIView):
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
 
             # Final Validation Gate
-            if final_mcqs < pool_mcq_total or final_coding < coding_count:
+            if final_mcqs < mcq_count or final_coding < coding_count:
                 raise Exception(
                     f"AI could not satisfy minimum required pool counts even after repair. "
-                    f"Expected Pool MCQs={pool_mcq_total}, min coding={coding_count}; "
-                    f"got MCQs={final_mcqs}, coding={final_coding}."
+                    f"Expected MINIMUM MCQs={mcq_count}, min coding={coding_count}; "
+                    f"got MCQs={final_mcqs}, coding={final_coding}. (Buffer Pool target was {pool_mcq_total})"
                 )
+
+            if final_mcqs >= mcq_count and final_mcqs < pool_mcq_total:
+                logger.warning(f"MCQ pool smaller than requested ({final_mcqs} vs {pool_mcq_total}), but sufficient for candidate ({mcq_count}).")
 
             if final_coding >= coding_count and final_coding < pool_coding_total:
                 logger.warning(f"Coding pool smaller than requested ({final_coding} vs {pool_coding_total}), but sufficient for candidate ({coding_count}).")
@@ -507,9 +518,26 @@ class GenerateAssessmentView(APIView):
                 # This should only happen if total count is somehow met but rebalance failed
                 logger.warning(f"MCQ Difficulty split check bypassed. Expected {pool_easy}/{pool_medium}/{pool_hard}; got {final_easy}/{final_medium}/{final_hard}.")
 
-            assessment.generated_content = generated_data
-            assessment.status = 'SCHEDULED'
-            assessment.save()
+            assessment = Assessment.objects.create(
+                job_description=job_description,
+                required_skills=required_skills,
+                mcq_count=mcq_count,
+                mcq_easy=mcq_easy,
+                mcq_medium=mcq_medium,
+                mcq_hard=mcq_hard,
+                coding_count=coding_count,
+                coding_difficulty_list=coding_tasks,
+                duration_minutes=duration,
+                total_points=total_possible_points,
+                num_applicants=int(data.get('num_applicants', 0)),
+                available_from=data.get('available_from'),
+                available_until=data.get('available_until'),
+                pass_threshold=data.get('pass_threshold', 60),
+                company=company,
+                user_profile=user_profile,
+                generated_content=generated_data,
+                status='SCHEDULED'
+            )
 
             return Response({
                 "id": assessment.id,
@@ -531,10 +559,8 @@ class GenerateAssessmentView(APIView):
 
             
             logger.error(f"ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}")
-            if 'assessment' in locals() and assessment:
-                assessment.status = 'FAILED'
-                assessment.save()
-            
+            # If assessment fails, we simply return an error. Since we moved DB creation to the end, 
+            # there is no orphaned database row to mark as 'FAILED' or 'is_deleted'.
             error_msg = str(e)
             if "rate_limit_exceeded" in error_msg.lower():
                 user_msg = "AI Provider rate limit reached. Please wait a few minutes and try again."
@@ -633,7 +659,7 @@ class CreateSubmissionView(APIView):
                 "time_left": time_left,
                 "answers": submission.answers,
                 "current_question_index": submission.current_question_index,
-                "codingResults": (submission.results_breakdown or {}).get('coding_progress', {}),
+                "coding_results": (submission.results_breakdown or {}).get('coding_results', {}),
                 "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {})
             }, status=status.HTTP_201_CREATED)
         except Assessment.DoesNotExist:
@@ -739,7 +765,7 @@ class SaveAssessmentProgressView(APIView):
             
             answers = request.data.get('answers')
             index = request.data.get('current_question_index')
-            coding_results = request.data.get('codingResults')
+            coding_results = request.data.get('coding_results')
             code_drafts = request.data.get('codeDrafts')
             
             if answers is not None:
@@ -751,7 +777,7 @@ class SaveAssessmentProgressView(APIView):
                 submission.results_breakdown = {}
                 
             if coding_results is not None:
-                submission.results_breakdown['coding_progress'] = coding_results
+                submission.results_breakdown['coding_results'] = coding_results
             if code_drafts is not None:
                 submission.results_breakdown['code_drafts'] = code_drafts
             
@@ -780,14 +806,14 @@ class AssessmentListView(APIView):
                 assessments = Assessment.objects.filter(
                     models.Q(company=company) | models.Q(company__isnull=True, user_profile=user_profile),
                     is_deleted=False
-                ).order_by('-created_at')
+                ).exclude(status='FAILED').order_by('-created_at')
             else:
                 # Scoped: only assessments created by users in this user's reporting hierarchy
                 assessments = Assessment.objects.filter(
                     company=company, 
                     user_profile_id__in=scoped_ids, 
                     is_deleted=False
-                ).order_by('-created_at')
+                ).exclude(status='FAILED').order_by('-created_at')
 
             data = []
             for assessment in assessments:
@@ -1029,6 +1055,13 @@ class PublicAssessmentView(APIView):
                     # We don't create the submission here to keep CreateSubmissionView as the source of truth for "Starting"
                     # However, we need to ensure CreateSubmissionView also locks it in or reuses this logic.
                     # BETTER: Always use a helper to get/create consistent set.
+
+            # Prevent Answer Leakage: Strip MCQ answers from the public payload
+            if isinstance(final_content, dict) and 'mcqs' in final_content:
+                for mcq in final_content['mcqs']:
+                    if isinstance(mcq, dict):
+                        mcq.pop('answer', None)
+                        mcq.pop('correct_answer', None)
 
             data = {
                 "id": assessment.id,

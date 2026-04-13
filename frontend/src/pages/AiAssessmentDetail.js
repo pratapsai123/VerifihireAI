@@ -219,7 +219,7 @@ const AiAssessmentDetail = () => {
                                             <div key={i} style={{ padding: '1.5rem', background: '#F8F9FF', borderRadius: '20px', border: '1px solid #E0E5F2' }}>
                                                 <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{c.title}</p>
                                                 <p style={{ color: '#707EAE', fontSize: '0.95rem', marginBottom: '1rem' }}>{c.problem_statement}</p>
-                                                
+
                                                 {/* Starter Code Preview */}
                                                 <div style={{ background: '#1B254B', color: '#05CD99', padding: '1rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
                                                     {typeof c.starter_code === 'object' && c.starter_code
@@ -287,7 +287,7 @@ const AiAssessmentDetail = () => {
                                                                     </div>
                                                                     <div style={{ fontSize: '0.8rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Input:</div>
                                                                     <pre style={{ margin: '0 0 0.8rem 0', padding: '0.5rem', background: '#F8F9FF', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.input}</pre>
-                                                                    
+
                                                                     <div style={{ fontSize: '0.8rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Expected Output:</div>
                                                                     <pre style={{ margin: 0, padding: '0.5rem', background: '#F8F9FF', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.output}</pre>
                                                                 </div>
@@ -465,12 +465,12 @@ const AiAssessmentDetail = () => {
                                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
                                             <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
                                             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {selectedSubmission.results_breakdown?.mcq?.total > 0
-                                                    ? Math.round((selectedSubmission.mcq_score / selectedSubmission.results_breakdown.mcq.total) * 100)
+                                                {selectedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                    ? Math.round((selectedSubmission.results_breakdown.mcq.scored_points / selectedSubmission.results_breakdown.mcq.possible_points) * 100)
                                                     : 0}%
                                             </div>
                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {Math.round(selectedSubmission.mcq_score / MCQ_WEIGHT)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
+                                                {Math.round((selectedSubmission.results_breakdown?.mcq?.scored_points || 0) / 20)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
                                             </div>
                                         </div>
 
@@ -478,12 +478,12 @@ const AiAssessmentDetail = () => {
                                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
                                             <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
                                             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {selectedSubmission.results_breakdown?.coding?.total > 0
-                                                    ? Math.round((selectedSubmission.coding_score / selectedSubmission.results_breakdown.coding.total) * 100)
+                                                {selectedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                    ? Math.round((selectedSubmission.results_breakdown.coding.scored_points / selectedSubmission.results_breakdown.coding.possible_points) * 100)
                                                     : 0}%
                                             </div>
                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {selectedSubmission.coding_score} / {selectedSubmission.results_breakdown?.coding?.total || 0} pts
+                                                {selectedSubmission.results_breakdown?.coding?.scored_points || 0} / {selectedSubmission.results_breakdown?.coding?.possible_points || 0} pts
                                             </div>
                                         </div>
 
@@ -514,182 +514,85 @@ const AiAssessmentDetail = () => {
 
                             {!selectedSubmission.is_resume_screening && (
                                 <>
-                                <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> MCQ Answer Verification
-                                </h4>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
-                                    {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).map((q, i) => {
-                                        const candAns = selectedSubmission.answers[`mcq_${i}`];
-                                        const isCorrect = candAns === q.answer;
-                                        return (
-                                            <div key={i} style={{ 
-                                                padding: '2rem', borderRadius: '30px', 
-                                                border: '1px solid #E0E5F2', background: 'white', 
-                                                boxShadow: '0 10px 30px rgba(0,0,0,0.02)' 
-                                            }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                                                    <div style={{ flex: 1 }}>
-                                                        <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
-                                                        <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0', lineHeight: 1.5 }}>{q.question}</p>
-                                                    </div>
-                                                    <div style={{ 
-                                                        padding: '0.5rem 1rem', borderRadius: '12px', 
-                                                        background: isCorrect ? '#E6FBF5' : '#FFF5F5', 
-                                                        color: isCorrect ? '#05CD99' : '#EE5D50', 
-                                                        fontWeight: '800', fontSize: '0.75rem', 
-                                                        display: 'flex', alignItems: 'center', gap: '6px',
-                                                        border: `1px solid ${isCorrect ? '#05CD9944' : '#EE5D5044'}`
-                                                    }}>
-                                                        <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
-                                                        {isCorrect ? 'CORRECT' : 'INCORRECT'}
-                                                    </div>
-                                                </div>
- 
-                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                                                    {q.options.map((opt, oi) => {
-                                                        const isSelected = opt === candAns;
-                                                        const isAnswer = opt === q.answer;
- 
-                                                        let bg = 'white';
-                                                        let border = '1px solid #E0E5F2';
-                                                        let color = '#1B254B';
-                                                        let icon = null;
- 
-                                                        if (isAnswer) {
-                                                            bg = '#E6FBF5';
-                                                            border = '2px solid #05CD99';
-                                                            color = '#05CD99';
-                                                            icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
-                                                        } else if (isSelected && !isCorrect) {
-                                                            bg = '#FFF5F5';
-                                                            border = '2px solid #EE5D50';
-                                                            color = '#EE5D50';
-                                                            icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
-                                                        }
- 
-                                                        return (
-                                                            <div key={oi} style={{
-                                                                padding: '1rem 1.25rem', background: bg, borderRadius: '16px', border,
-                                                                color: color, fontWeight: (isAnswer || isSelected) ? '700' : '500',
-                                                                fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '10px'
-                                                            }}>
-                                                                <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
-                                                                <span style={{ flex: 1 }}>{opt}</span>
-                                                                {icon}
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                                
-                                                {!isCorrect && (
-                                                    <div style={{ 
-                                                        marginTop: '1.25rem', padding: '1rem 1.5rem', 
-                                                        background: 'linear-gradient(135deg, #E6FBF5, #D1F7ED)', 
-                                                        borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px',
-                                                        border: '1px solid #05CD9933'
-                                                    }}>
-                                                        <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.2rem' }} />
-                                                        <div>
-                                                            <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase' }}>Correct Solution</div>
-                                                            <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>{q.answer}</div>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                                <div style={{ marginBottom: '4rem' }}>
                                     <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Verification
+                                        <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> MCQ Answer Verification
                                     </h4>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-                                        {(selectedSubmission.candidate_questions?.coding_challenges || assessment?.generated_content?.coding_challenges || []).map((c, i) => {
-                                            const candCode = selectedSubmission.answers[`coding_${i}`];
-                                            const res = selectedSubmission.results_breakdown?.coding_results?.[i] || selectedSubmission.results_breakdown?.coding_results?.[String(i)] || {};
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                                        {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).map((q, i) => {
+                                            const actualAnswer = q.answer || q.correct_answer || q.ans || q.correct_option;
+                                            const candAns = selectedSubmission.answers[`mcq_${i}`];
+                                            const isCorrect = candAns === actualAnswer;
                                             return (
-                                                <div key={i} style={{ background: 'white', borderRadius: '30px', padding: '2rem', border: '1px solid #E0E5F2', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-                                                    <div style={{ marginBottom: '2rem' }}>
-                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                                                            <div>
-                                                                <h5 style={{ color: '#1B254B', fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem 0' }}>{c.title}</h5>
-                                                                <p style={{ color: '#707EAE', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>{c.problem_statement}</p>
-                                                            </div>
-                                                            <div style={{ textAlign: 'right', background: '#F4F7FE', padding: '0.5rem 1rem', borderRadius: '12px' }}>
-                                                                <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#A3AED0', textTransform: 'uppercase' }}>Passed Tests</div>
-                                                                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: res.pass_count === res.total_count ? '#05CD99' : '#F59E0B' }}>
-                                                                    {res.pass_count || 0}/{res.total_count || 10}
-                                                                </div>
-                                                            </div>
+                                                <div key={i} style={{
+                                                    padding: '2rem', borderRadius: '30px',
+                                                    border: '1px solid #E0E5F2', background: 'white',
+                                                    boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
+                                                }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                                        <div style={{ flex: 1 }}>
+                                                            <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
+                                                            <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0', lineHeight: 1.5 }}>{q.question}</p>
                                                         </div>
-                                                    </div>
- 
-                                                    <div style={{ position: 'relative' }}>
                                                         <div style={{
-                                                            position: 'absolute', top: '-14px', left: '24px',
-                                                            background: '#4318FF', color: 'white', padding: '4px 14px',
-                                                            borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
-                                                        }}>CANDIDATE SUBMISSION</div>
-                                                        <div style={{
-                                                            background: '#1B254B', borderRadius: '20px',
-                                                            padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
+                                                            padding: '0.5rem 1rem', borderRadius: '12px',
+                                                            background: isCorrect ? '#E6FBF5' : '#FFF5F5',
+                                                            color: isCorrect ? '#05CD99' : '#EE5D50',
+                                                            fontWeight: '800', fontSize: '0.75rem',
+                                                            display: 'flex', alignItems: 'center', gap: '6px',
+                                                            border: `1px solid ${isCorrect ? '#05CD9944' : '#EE5D5044'}`
                                                         }}>
-                                                            <pre style={{
-                                                                margin: 0, color: '#05CD99',
-                                                                fontFamily: "'Fira Code', 'Courier New', monospace",
-                                                                fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
-                                                            }}>
-                                                                {candCode || '// No code submitted'}
-                                                            </pre>
+                                                            <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
+                                                            {isCorrect ? 'CORRECT' : 'INCORRECT'}
                                                         </div>
                                                     </div>
 
-                                                    {/* Reference Solution (Correct Answer) */}
-                                                    {c.reference_solution && (
-                                                        <div style={{ position: 'relative', marginTop: '1.5rem' }}>
-                                                            <div style={{
-                                                                position: 'absolute', top: '-14px', left: '24px',
-                                                                background: '#05CD99', color: 'white', padding: '4px 14px',
-                                                                borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
-                                                            }}>✓ REFERENCE SOLUTION (ANSWER KEY)</div>
-                                                            <div style={{
-                                                                background: '#0D1117', borderRadius: '20px',
-                                                                padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                                                                border: '1px solid #30363D'
-                                                            }}>
-                                                                <pre style={{
-                                                                    margin: 0, color: '#7EE787',
-                                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
-                                                                    fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
-                                                                }}>
-                                                                    {c.reference_solution}
-                                                                </pre>
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                                                        {q.options.map((opt, oi) => {
+                                                            const isSelected = opt === candAns;
+                                                            const isAnswer = opt === actualAnswer;
 
-                                                    {/* Generated Hidden Test Cases */}
-                                                    {c.test_cases && c.test_cases.length > 0 && (
-                                                        <div style={{ marginTop: '2rem' }}>
-                                                            <h5 style={{ color: '#1B254B', fontSize: '1rem', fontWeight: '800', marginBottom: '1rem', textTransform: 'uppercase' }}>
-                                                                Execution-Verified Test Cases
-                                                            </h5>
-                                                            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
-                                                                {c.test_cases.map((tc, j) => (
-                                                                    <div key={j} style={{ background: '#F4F7FE', borderRadius: '12px', padding: '1rem', border: '1px solid #E0E5F2' }}>
-                                                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                                                                            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4318FF' }}>TEST CASE {j + 1}</div>
-                                                                            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: tc.verified ? '#05CD99' : '#F59E0B' }}>
-                                                                                {tc.verified ? '✓ Executed' : '⚠ Fallback'}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Input:</div>
-                                                                        <pre style={{ margin: '0 0 1rem 0', padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.input}</pre>
-                                                                        
-                                                                        <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Expected Output:</div>
-                                                                        <pre style={{ margin: 0, padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.output}</pre>
-                                                                    </div>
-                                                                ))}
+                                                            let bg = 'white';
+                                                            let border = '1px solid #E0E5F2';
+                                                            let color = '#1B254B';
+                                                            let icon = null;
+
+                                                            if (isAnswer) {
+                                                                bg = '#E6FBF5';
+                                                                border = '2px solid #05CD99';
+                                                                color = '#05CD99';
+                                                                icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
+                                                            } else if (isSelected && !isCorrect) {
+                                                                bg = '#FFF5F5';
+                                                                border = '2px solid #EE5D50';
+                                                                color = '#EE5D50';
+                                                                icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
+                                                            }
+
+                                                            return (
+                                                                <div key={oi} style={{
+                                                                    padding: '1rem 1.25rem', background: bg, borderRadius: '16px', border,
+                                                                    color: color, fontWeight: (isAnswer || isSelected) ? '700' : '500',
+                                                                    fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '10px'
+                                                                }}>
+                                                                    <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
+                                                                    <span style={{ flex: 1 }}>{opt}</span>
+                                                                    {icon}
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+
+                                                    {!isCorrect && (
+                                                        <div style={{
+                                                            marginTop: '1.25rem', padding: '1rem 1.5rem',
+                                                            background: 'linear-gradient(135deg, #E6FBF5, #D1F7ED)',
+                                                            borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px',
+                                                            border: '1px solid #05CD9933'
+                                                        }}>
+                                                            <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.2rem' }} />
+                                                            <div>
+                                                                <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase' }}>Correct Solution</div>
+                                                                <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>{actualAnswer}</div>
                                                             </div>
                                                         </div>
                                                     )}
@@ -697,159 +600,258 @@ const AiAssessmentDetail = () => {
                                             );
                                         })}
                                     </div>
-                                </div>
-                                </>
-                    )}
-
-                    {/* Integrity Violations Log */}
-                    {selectedSubmission.integrity_screenshots && selectedSubmission.integrity_screenshots.length > 0 && (
-                        <div style={{ marginTop: '4rem' }}>
-                            <h4 style={{ color: '#1B254B', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
-                            </h4>
-                            <p style={{ color: '#707EAE', marginBottom: '2rem', fontSize: '0.95rem' }}>
-                                The following screenshots were captured automatically when integrity warnings were triggered.
-                            </p>
-
-                            {(() => {
-                                // Group by event type
-                                const groups = selectedSubmission.integrity_screenshots.reduce((acc, snap) => {
-                                    let groupName = snap.event_type;
-                                    const evt = snap.event_type;
-                                    if (['window_switch', 'window_blur'].includes(evt)) groupName = 'Window Switch';
-                                    else if (['face_detection_lost', 'face_detection_lost_rechecked'].includes(evt)) groupName = 'No Face Detection';
-                                    else if (evt === 'multiface_detection') groupName = 'Multipeople Detection';
-                                    else if (evt === 'tab_switch') groupName = 'Tab Switch';
-                                    else if (evt === 'phone_detection') groupName = 'Phone Detection';
-                                    else groupName = evt.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-                                    if (!acc[groupName]) acc[groupName] = [];
-                                    acc[groupName].push(snap);
-                                    return acc;
-                                }, {});
-
-                                return Object.entries(groups).map(([groupName, snaps], idx) => (
-                                    <div key={idx} style={{ marginBottom: '3rem' }}>
-                                        <h5 style={{ color: '#1B254B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <span style={{ color: '#EE5D50' }}>Warning:</span> {groupName}
-                                        </h5>
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-                                            {snaps.map((snap, sIdx) => (
-                                                <div key={sIdx} style={{ background: '#F8F9FF', borderRadius: '15px', padding: '10px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
-                                                    <div style={{ width: '100%', height: '140px', background: '#e2e8f0', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px', position: 'relative' }}>
-                                                        <img
-                                                            src={snap.screenshot_url || snap.webcam_screenshot_url}
-                                                            alt={snap.event_type}
-                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                            onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=Image+Not+Found'; }}
-                                                        />
-                                                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.7)', color: 'white', fontSize: '0.7rem', padding: '4px' }}>
-                                                            {snap.screenshot_url ? 'Screen View' : 'Webcam View'}
+                                    <div style={{ marginBottom: '4rem' }}>
+                                        <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Verification
+                                        </h4>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+                                            {(selectedSubmission.candidate_questions?.coding_challenges || assessment?.generated_content?.coding_challenges || []).map((c, i) => {
+                                                const candCode = selectedSubmission.answers[`coding_${i}`];
+                                                const resultsObj = selectedSubmission.results_breakdown?.coding_results || {};
+                                                const res = resultsObj[i] || resultsObj[String(i)] || {};
+                                                return (
+                                                    <div key={i} style={{ background: 'white', borderRadius: '30px', padding: '2rem', border: '1px solid #E0E5F2', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                                                        <div style={{ marginBottom: '2rem' }}>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                                                <div>
+                                                                    <h5 style={{ color: '#1B254B', fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem 0' }}>{c.title}</h5>
+                                                                    <p style={{ color: '#707EAE', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>{c.problem_statement}</p>
+                                                                </div>
+                                                                <div style={{ textAlign: 'right', background: '#F4F7FE', padding: '0.5rem 1rem', borderRadius: '12px' }}>
+                                                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#A3AED0', textTransform: 'uppercase' }}>Passed Tests</div>
+                                                                    <div style={{ fontSize: '1.2rem', fontWeight: '900', color: (res.passed || 0) === (res.total || c.test_cases?.length || 0) ? '#05CD99' : '#F59E0B' }}>
+                                                                        {res.passed || 0}/{res.total || c.test_cases?.length || 0}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
+                                                        <div style={{ position: 'relative' }}>
+                                                            <div style={{
+                                                                position: 'absolute', top: '-14px', left: '24px',
+                                                                background: '#4318FF', color: 'white', padding: '4px 14px',
+                                                                borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
+                                                            }}>CANDIDATE SUBMISSION</div>
+                                                            <div style={{
+                                                                background: '#1B254B', borderRadius: '20px',
+                                                                padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
+                                                            }}>
+                                                                <pre style={{
+                                                                    margin: 0, color: '#05CD99',
+                                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                    fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
+                                                                }}>
+                                                                    {candCode || '// No code submitted'}
+                                                                </pre>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Reference Solution (Correct Answer) */}
+                                                        {c.reference_solution && (
+                                                            <div style={{ position: 'relative', marginTop: '1.5rem' }}>
+                                                                <div style={{
+                                                                    position: 'absolute', top: '-14px', left: '24px',
+                                                                    background: '#05CD99', color: 'white', padding: '4px 14px',
+                                                                    borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', zIndex: 1
+                                                                }}>✓ REFERENCE SOLUTION (ANSWER KEY)</div>
+                                                                <div style={{
+                                                                    background: '#0D1117', borderRadius: '20px',
+                                                                    padding: '2.5rem 2rem 2rem', boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
+                                                                    border: '1px solid #30363D'
+                                                                }}>
+                                                                    <pre style={{
+                                                                        margin: 0, color: '#7EE787',
+                                                                        fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                                        fontSize: '0.95rem', lineHeight: '1.6', whiteSpace: 'pre-wrap'
+                                                                    }}>
+                                                                        {c.reference_solution}
+                                                                    </pre>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Generated Hidden Test Cases */}
+                                                        {c.test_cases && c.test_cases.length > 0 && (
+                                                            <div style={{ marginTop: '2rem' }}>
+                                                                <h5 style={{ color: '#1B254B', fontSize: '1rem', fontWeight: '800', marginBottom: '1rem', textTransform: 'uppercase' }}>
+                                                                    Execution-Verified Test Cases
+                                                                </h5>
+                                                                <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
+                                                                    {c.test_cases.map((tc, j) => (
+                                                                        <div key={j} style={{ background: '#F4F7FE', borderRadius: '12px', padding: '1rem', border: '1px solid #E0E5F2' }}>
+                                                                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4318FF' }}>TEST CASE {j + 1}</div>
+                                                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: tc.verified ? '#05CD99' : '#F59E0B' }}>
+                                                                                    {tc.verified ? '✓ Executed' : '⚠ Fallback'}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Input:</div>
+                                                                            <pre style={{ margin: '0 0 1rem 0', padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.input}</pre>
+
+                                                                            <div style={{ fontSize: '0.85rem', color: '#707EAE', marginBottom: '0.25rem', fontWeight: 'bold' }}>Expected Output:</div>
+                                                                            <pre style={{ margin: 0, padding: '0.5rem', background: 'white', borderRadius: '8px', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{tc.output}</pre>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <div style={{ color: '#707EAE', fontSize: '0.75rem', fontWeight: '600' }}>
-                                                        {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                                                    </div>
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                ));
-                            })()}
+                                </>
+                            )}
+
+                            {/* Integrity Violations Log */}
+                            {selectedSubmission.integrity_screenshots && selectedSubmission.integrity_screenshots.length > 0 && (
+                                <div style={{ marginTop: '4rem' }}>
+                                    <h4 style={{ color: '#1B254B', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
+                                    </h4>
+                                    <p style={{ color: '#707EAE', marginBottom: '2rem', fontSize: '0.95rem' }}>
+                                        The following screenshots were captured automatically when integrity warnings were triggered.
+                                    </p>
+
+                                    {(() => {
+                                        // Group by event type
+                                        const groups = selectedSubmission.integrity_screenshots.reduce((acc, snap) => {
+                                            let groupName = snap.event_type;
+                                            const evt = snap.event_type;
+                                            if (['window_switch', 'window_blur'].includes(evt)) groupName = 'Window Switch';
+                                            else if (['face_detection_lost', 'face_detection_lost_rechecked'].includes(evt)) groupName = 'No Face Detection';
+                                            else if (evt === 'multiface_detection') groupName = 'Multipeople Detection';
+                                            else if (evt === 'tab_switch') groupName = 'Tab Switch';
+                                            else if (evt === 'phone_detection') groupName = 'Phone Detection';
+                                            else groupName = evt.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                                            if (!acc[groupName]) acc[groupName] = [];
+                                            acc[groupName].push(snap);
+                                            return acc;
+                                        }, {});
+
+                                        return Object.entries(groups).map(([groupName, snaps], idx) => (
+                                            <div key={idx} style={{ marginBottom: '3rem' }}>
+                                                <h5 style={{ color: '#1B254B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                    <span style={{ color: '#EE5D50' }}>Warning:</span> {groupName}
+                                                </h5>
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                                                    {snaps.map((snap, sIdx) => (
+                                                        <div key={sIdx} style={{ background: '#F8F9FF', borderRadius: '15px', padding: '10px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
+                                                            <div style={{ width: '100%', height: '140px', background: '#e2e8f0', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px', position: 'relative' }}>
+                                                                <img
+                                                                    src={snap.screenshot_url || snap.webcam_screenshot_url}
+                                                                    alt={snap.event_type}
+                                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                    onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=Image+Not+Found'; }}
+                                                                />
+                                                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.7)', color: 'white', fontSize: '0.7rem', padding: '4px' }}>
+                                                                    {snap.screenshot_url ? 'Screen View' : 'Webcam View'}
+                                                                </div>
+                                                            </div>
+                                                            <div style={{ color: '#707EAE', fontSize: '0.75rem', fontWeight: '600' }}>
+                                                                {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ));
+                                    })()}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {activeTab === 'interviewers' && (
+                        <div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ color: '#1B254B', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <i className="fa-solid fa-user-tie" style={{ color: '#4318FF' }}></i> Interviewer Assignment Pool
+                                </h3>
+                                <p style={{ color: '#707EAE', fontSize: '0.95rem' }}>
+                                    Assign team members who will be available to conduct live interviews for candidates of this assessment.
+                                    Candidates will book slots based on the aggregate availability of this pool.
+                                </p>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
+                                {loadingInterviewers ? (
+                                    <p>Loading team members...</p>
+                                ) : availableInterviewers.length === 0 ? (
+                                    <p>No team members found. Invite them first in the Team Members page.</p>
+                                ) : (
+                                    availableInterviewers.map(member => {
+                                        const isAssigned = assessment.assigned_interviewers.some(i => i.id === member.id);
+                                        return (
+                                            <div
+                                                key={member.id}
+                                                style={{
+                                                    padding: '1.5rem',
+                                                    borderRadius: '20px',
+                                                    border: '2px solid',
+                                                    borderColor: isAssigned ? '#4318FF' : '#E0E5F2',
+                                                    background: isAssigned ? '#F4F7FE' : 'white',
+                                                    transition: 'all 0.2s',
+                                                    position: 'relative',
+                                                    opacity: assigning ? 0.7 : 1,
+                                                    pointerEvents: assigning ? 'none' : 'auto'
+                                                }}
+                                            >
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                                                    <div style={{
+                                                        width: '45px', height: '45px', borderRadius: '12px', background: isAssigned ? '#4318FF' : '#F4F7FE',
+                                                        color: isAssigned ? 'white' : '#4318FF', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                        fontSize: '1.2rem', fontWeight: '800'
+                                                    }}>
+                                                        {member.name.charAt(0)}
+                                                    </div>
+                                                    <button
+                                                        onClick={() => handleToggleInterviewer(member.id)}
+                                                        style={{
+                                                            padding: '0.4rem 1rem', borderRadius: '10px', border: 'none',
+                                                            background: isAssigned ? '#EE5D50' : '#4318FF',
+                                                            color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                        }}
+                                                    >
+                                                        {isAssigned ? 'Remove' : 'Assign'}
+                                                    </button>
+                                                </div>
+                                                <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '1rem' }}>{member.name}</div>
+                                                <div style={{ color: '#707EAE', fontSize: '0.85rem' }}>{member.email}</div>
+                                                <div style={{
+                                                    display: 'inline-block', marginTop: '0.8rem', padding: '2px 8px',
+                                                    borderRadius: '6px', background: '#E0E5F2', color: '#1B254B',
+                                                    fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase'
+                                                }}>
+                                                    {member.role.replace('ROLE_', '').replace('_', ' ')}
+                                                </div>
+                                                {isAssigned && (
+                                                    <div style={{ position: 'absolute', top: '10px', right: '10px', color: '#4318FF' }}>
+                                                        <i className="fa-solid fa-circle-check"></i>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                )}
+                            </div>
+
+                            {assessment.assigned_interviewers.length > 0 && (
+                                <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#E6FBF5', borderRadius: '15px', border: '1px solid #05CD99' }}>
+                                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', color: '#05CD99', fontWeight: '700' }}>
+                                        <i className="fa-solid fa-circle-info"></i>
+                                        <span>Candidate View Ready</span>
+                                    </div>
+                                    <p style={{ color: '#1B254B', fontSize: '0.9rem', marginTop: '0.5rem', margin: 0 }}>
+                                        Candidates can now book interview slots based on the combined availability of these {assessment.assigned_interviewers.length} interviewers.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
-                    )}
-
-                {activeTab === 'interviewers' && (
-                    <div>
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ color: '#1B254B', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <i className="fa-solid fa-user-tie" style={{ color: '#4318FF' }}></i> Interviewer Assignment Pool
-                            </h3>
-                            <p style={{ color: '#707EAE', fontSize: '0.95rem' }}>
-                                Assign team members who will be available to conduct live interviews for candidates of this assessment.
-                                Candidates will book slots based on the aggregate availability of this pool.
-                            </p>
-                        </div>
-
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                            {loadingInterviewers ? (
-                                <p>Loading team members...</p>
-                            ) : availableInterviewers.length === 0 ? (
-                                <p>No team members found. Invite them first in the Team Members page.</p>
-                            ) : (
-                                availableInterviewers.map(member => {
-                                    const isAssigned = assessment.assigned_interviewers.some(i => i.id === member.id);
-                                    return (
-                                        <div
-                                            key={member.id}
-                                            style={{
-                                                padding: '1.5rem',
-                                                borderRadius: '20px',
-                                                border: '2px solid',
-                                                borderColor: isAssigned ? '#4318FF' : '#E0E5F2',
-                                                background: isAssigned ? '#F4F7FE' : 'white',
-                                                transition: 'all 0.2s',
-                                                position: 'relative',
-                                                opacity: assigning ? 0.7 : 1,
-                                                pointerEvents: assigning ? 'none' : 'auto'
-                                            }}
-                                        >
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                                                <div style={{
-                                                    width: '45px', height: '45px', borderRadius: '12px', background: isAssigned ? '#4318FF' : '#F4F7FE',
-                                                    color: isAssigned ? 'white' : '#4318FF', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    fontSize: '1.2rem', fontWeight: '800'
-                                                }}>
-                                                    {member.name.charAt(0)}
-                                                </div>
-                                                <button
-                                                    onClick={() => handleToggleInterviewer(member.id)}
-                                                    style={{
-                                                        padding: '0.4rem 1rem', borderRadius: '10px', border: 'none',
-                                                        background: isAssigned ? '#EE5D50' : '#4318FF',
-                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                    }}
-                                                >
-                                                    {isAssigned ? 'Remove' : 'Assign'}
-                                                </button>
-                                            </div>
-                                            <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '1rem' }}>{member.name}</div>
-                                            <div style={{ color: '#707EAE', fontSize: '0.85rem' }}>{member.email}</div>
-                                            <div style={{
-                                                display: 'inline-block', marginTop: '0.8rem', padding: '2px 8px',
-                                                borderRadius: '6px', background: '#E0E5F2', color: '#1B254B',
-                                                fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase'
-                                            }}>
-                                                {member.role.replace('ROLE_', '').replace('_', ' ')}
-                                            </div>
-                                            {isAssigned && (
-                                                <div style={{ position: 'absolute', top: '10px', right: '10px', color: '#4318FF' }}>
-                                                    <i className="fa-solid fa-circle-check"></i>
-                                                </div>
-                                            )}
-                                        </div>
-                                    );
-                                })
-                            )}
-                        </div>
-
-                        {assessment.assigned_interviewers.length > 0 && (
-                            <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#E6FBF5', borderRadius: '15px', border: '1px solid #05CD99' }}>
-                                <div style={{ display: 'flex', gap: '10px', alignItems: 'center', color: '#05CD99', fontWeight: '700' }}>
-                                    <i className="fa-solid fa-circle-info"></i>
-                                    <span>Candidate View Ready</span>
-                                </div>
-                                <p style={{ color: '#1B254B', fontSize: '0.9rem', marginTop: '0.5rem', margin: 0 }}>
-                                    Candidates can now book interview slots based on the combined availability of these {assessment.assigned_interviewers.length} interviewers.
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                )}
             </div>
-        </div>
         </div >
 
     );

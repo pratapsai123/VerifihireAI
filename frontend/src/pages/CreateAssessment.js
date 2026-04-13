@@ -5,6 +5,7 @@ import { API_BASE_URL } from '../apiConfig';
 import '../styles/CreateAssessment.css';
 
 const MAX_CODING_TASKS = 50;
+const STORAGE_KEY = 'ai_assessment_create_form_data';
 
 const CreateAssessment = () => {
     const navigate = useNavigate();
@@ -29,6 +30,67 @@ const CreateAssessment = () => {
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
 
+    // --- Persistence Logic ---
+    const isDirty = React.useRef(false);
+    const isInitialRender = React.useRef(true);
+
+    // --- Ghost Generation Abort Logic ---
+    const cancelTokenRef = React.useRef(null);
+    const isGeneratingRef = React.useRef(false);
+
+    React.useEffect(() => {
+        const handleBeforeUnload = (e) => {
+            if (isGeneratingRef.current && cancelTokenRef.current) {
+                // Send synchronous beacon to abort
+                const url = `${API_BASE_URL}/ai/cancel-generation/`;
+                const payload = JSON.stringify({ cancel_token: cancelTokenRef.current });
+                navigator.sendBeacon(url, payload);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            // Also handle SPA unmount
+            if (isGeneratingRef.current && cancelTokenRef.current) {
+                const url = `${API_BASE_URL}/ai/cancel-generation/`;
+                const payload = JSON.stringify({ cancel_token: cancelTokenRef.current });
+                navigator.sendBeacon(url, payload);
+            }
+        };
+    }, []);
+
+    React.useEffect(() => {
+        // Never restore data on refresh per user request
+        sessionStorage.removeItem(STORAGE_KEY);
+        isDirty.current = false;
+        window._assessment_init = true;
+
+    }, []);
+
+    const initialDataHash = React.useRef(null);
+    if (!initialDataHash.current) {
+        initialDataHash.current = JSON.stringify({
+            formData, selectedRoleId
+        });
+    }
+
+    React.useEffect(() => {
+        const dataToSave = {
+            formData: { ...formData },
+            selectedRoleId
+        };
+        const currentDataStr = JSON.stringify(dataToSave);
+
+        if (!isDirty.current && currentDataStr === initialDataHash.current) {
+            return;
+        }
+
+        isDirty.current = true;
+        sessionStorage.setItem(STORAGE_KEY, currentDataStr);
+    }, [formData, selectedRoleId]);
+
     React.useEffect(() => {
         const fetchRoles = async () => {
             try {
@@ -43,7 +105,12 @@ const CreateAssessment = () => {
 
     const handleChange = (id, value) => {
         if (id === 'num_coding') {
-            const count = parseInt(value) || 0;
+            if (value === '' || value === null || value === undefined) {
+                setFormData(prev => ({ ...prev, num_coding: '' }));
+                return;
+            }
+            const count = parseInt(value);
+            if (isNaN(count)) return;
             const limitedCount = Math.min(Math.max(count, 0), MAX_CODING_TASKS);
 
             setFormData(prev => {
@@ -109,13 +176,43 @@ const CreateAssessment = () => {
             alert('Please enter Target Skills before generating.');
             return;
         }
+        if (!formData.num_mcqs && formData.num_mcqs !== 0) {
+            alert('Please enter a valid number of MCQ questions.');
+            return;
+        }
+        if (!formData.num_coding && formData.num_coding !== 0) {
+            alert('Please enter a valid number of Coding tasks.');
+            return;
+        }
+        if (!formData.coding_time) {
+            alert('Please enter a valid Total Time (Duration).');
+            return;
+        }
+        if (!formData.num_applicants) {
+            alert('Please enter the number of applicants.');
+            return;
+        }
+
+        // Mandatory Scheduling Validation
+        if (!formData.start_date || !formData.start_time) {
+            alert('Please provide a complete starting Date and Time for the assessment.');
+            return;
+        }
+        if (!formData.end_date || !formData.end_time) {
+            alert('Please provide a complete ending Date and Time for the assessment.');
+            return;
+        }
 
         setLoading(true);
+        const currentToken = Date.now().toString() + Math.random().toString(36).substring(2, 11);
+        cancelTokenRef.current = currentToken;
+        isGeneratingRef.current = true;
 
         const mcqMix = calculateMcqMix(formData.num_mcqs);
         const payload = {
             job_description: formData.job_description,
             required_skills: formData.skills,
+            cancel_token: currentToken,
 
             // Include Job Title for persistence
             role_title: selectedRoleId === 'custom' ? formData.customRoleTitle : (jobRoles.find(r => r.id.toString() === selectedRoleId)?.title || formData.skills),
@@ -139,6 +236,7 @@ const CreateAssessment = () => {
 
             if (response.status === 200 || response.status === 201) {
                 alert('Assessment Generated Successfully!');
+                sessionStorage.removeItem(STORAGE_KEY); // Explicitly wipe data upon clean completion
                 navigate('/ai-assessments');
             }
         } catch (error) {
@@ -147,6 +245,7 @@ const CreateAssessment = () => {
             alert(`Generation failed: ${errMsg}`);
         } finally {
             setLoading(false);
+            isGeneratingRef.current = false;
         }
     };
 
@@ -227,7 +326,15 @@ const CreateAssessment = () => {
                                 <input
                                     type="number" min="0" max="50"
                                     value={formData.num_mcqs}
-                                    onChange={(e) => handleChange('num_mcqs', parseInt(e.target.value) || 0)}
+                                    onChange={(e) => {
+                                        const val = e.target.value;
+                                        if (val === '') {
+                                            handleChange('num_mcqs', '');
+                                        } else {
+                                            handleChange('num_mcqs', parseInt(val) || 0);
+                                        }
+                                    }}
+                                    onBlur={() => { if (formData.num_mcqs === '') handleChange('num_mcqs', 10); }}
                                 />
                                 <span className="marker">{formData.num_mcqs}</span>
                             </div>
@@ -239,6 +346,7 @@ const CreateAssessment = () => {
                                     type="number" min="0" max={MAX_CODING_TASKS}
                                     value={formData.num_coding}
                                     onChange={(e) => handleChange('num_coding', e.target.value)}
+                                    onBlur={() => { if (formData.num_coding === '') handleChange('num_coding', 1); }}
                                 />
                                 <span className="marker">{formData.num_coding}</span>
                             </div>
@@ -339,6 +447,7 @@ const CreateAssessment = () => {
                                 <div className="datetime-row">
                                     <input
                                         type="date"
+                                        min={new Date().toISOString().split('T')[0]}
                                         value={formData.start_date}
                                         onChange={(e) => handleChange('start_date', e.target.value)}
                                     />
@@ -354,6 +463,7 @@ const CreateAssessment = () => {
                                 <div className="datetime-row">
                                     <input
                                         type="date"
+                                        min={new Date().toISOString().split('T')[0]}
                                         value={formData.end_date}
                                         onChange={(e) => handleChange('end_date', e.target.value)}
                                     />

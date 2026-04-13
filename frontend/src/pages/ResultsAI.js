@@ -33,6 +33,9 @@ const ResultsAI = () => {
     const [selectedRole, setSelectedRole] = useState(null);
     const [showTranscriptDetail, setShowTranscriptDetail] = useState(null);
     const [viewedSubmission, setViewedSubmission] = useState(null); // Submission object for assessment
+    const [timelineCandidate, setTimelineCandidate] = useState(null);
+    const [timelineLogs, setTimelineLogs] = useState([]);
+    const [loadingTimeline, setLoadingTimeline] = useState(false);
 
     const showToast = (type, message) => {
         setToast({ type, message });
@@ -71,10 +74,11 @@ const ResultsAI = () => {
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
+                    // Always include in Resume tab to ensure full visibility of all screened candidates
+                    resResults.push(r);
+                    // Also include in Interview tab if the interview process has actually started
                     if (r.total_questions > 0) {
                         intResults.push(r);
-                    } else {
-                        resResults.push(r);
                     }
                 }
                 // 'man_' (manual) results are ignored for AI Results page for now, 
@@ -137,6 +141,29 @@ const ResultsAI = () => {
     }, []);
 
     useEffect(() => { fetchData(); }, [fetchData]);
+
+    const fetchTimeline = async (candidate) => {
+        if (!candidate) return;
+        setTimelineCandidate(candidate);
+        setLoadingTimeline(true);
+        // Don't clear logs immediately to allow 'refresh' feel, 
+        // but for a NEW candidate selection, we should.
+        if (timelineCandidate?.submission_id !== candidate.submission_id) {
+            setTimelineLogs([]);
+        }
+
+        try {
+            const sid = String(candidate.submission_id || '');
+            const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+            const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
+            setTimelineLogs(resp.data);
+        } catch (err) {
+            console.error('Error fetching timeline:', err);
+            showToast('error', 'Failed to load timeline history.');
+        } finally {
+            setLoadingTimeline(false);
+        }
+    };
 
     useEffect(() => {
         const sid = searchParams.get('subId');
@@ -208,12 +235,15 @@ const ResultsAI = () => {
 
     const allRows = viewMode === 'detail' ? getDataForActiveContext() : [];
 
-    const currentRows = statusFilter === 'all'
-        ? allRows
-        : allRows.filter(r => {
-            const pass = isPass(r, activeTab);
-            return statusFilter === 'pass' ? pass : !pass;
-        });
+    const currentRows = (() => {
+        let rows = statusFilter === 'all'
+            ? allRows
+            : allRows.filter(r => {
+                const pass = isPass(r, activeTab);
+                return statusFilter === 'pass' ? pass : !pass;
+            });
+        return rows;
+    })();
 
     const itemsPerPage = 10;
     const indexOfLastRow = currentPage * itemsPerPage;
@@ -618,12 +648,12 @@ const ResultsAI = () => {
                                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
                                             <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
                                             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {viewedSubmission.results_breakdown?.mcq?.total > 0
-                                                    ? Math.round((viewedSubmission.mcq_score / viewedSubmission.results_breakdown.mcq.total) * 100)
+                                                {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                    ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
                                                     : 0}%
                                             </div>
                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {viewedSubmission.mcq_score / 20} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
+                                                {Math.round((viewedSubmission.results_breakdown?.mcq?.scored_points || 0) / 20)} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
                                             </div>
                                         </div>
 
@@ -631,12 +661,12 @@ const ResultsAI = () => {
                                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
                                             <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
                                             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {viewedSubmission.results_breakdown?.coding?.total > 0
-                                                    ? Math.round((viewedSubmission.coding_score / viewedSubmission.results_breakdown.coding.total) * 100)
+                                                {viewedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                    ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
                                                     : 0}%
                                             </div>
                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {viewedSubmission.coding_score} / {viewedSubmission.results_breakdown?.coding?.total || 0} pts
+                                                {viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts
                                             </div>
                                         </div>
 
@@ -776,8 +806,8 @@ const ResultsAI = () => {
                                                                 </div>
                                                                 <div style={{ textAlign: 'right', background: '#F4F7FE', padding: '0.5rem 1rem', borderRadius: '12px' }}>
                                                                     <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#A3AED0', textTransform: 'uppercase' }}>Passed Tests</div>
-                                                                    <div style={{ fontSize: '1.2rem', fontWeight: '900', color: res.pass_count === res.total_count ? '#05CD99' : '#F59E0B' }}>
-                                                                        {res.pass_count || 0}/{res.total_count || 10}
+                                                                    <div style={{ fontSize: '1.2rem', fontWeight: '900', color: (res.passed || 0) === (res.total || c.test_cases?.length || 0) ? '#05CD99' : '#F59E0B' }}>
+                                                                        {res.passed || 0}/{res.total || c.test_cases?.length || 0}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1017,35 +1047,38 @@ const ResultsAI = () => {
                                         </div>
                                     </div>
 
-                                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'center' }}>
-                                        <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#9CA3AF' }}>FILTER:</span>
-                                        {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
-                                            <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
-                                                padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
-                                                fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
-                                                borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
-                                                background: statusFilter === f.key ? '#EEF2FF' : 'white',
-                                                color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
-                                            }}>{f.label}</button>
-                                        ))}
-                                        <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
-                                        {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
-                                        {canDelete && someSelected && (
-                                            <button
-                                                onClick={() => requestDelete(selectedItems)}
-                                                style={{
-                                                    padding: '0.3rem 0.85rem', borderRadius: '10px',
-                                                    border: '1px solid #ef4444', background: '#FFF5F5',
-                                                    color: '#ef4444', fontWeight: '700', fontSize: '0.75rem',
-                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
-                                                }}
-                                                title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete selected' : 'Request deletion for selected'}
-                                            >
-                                                <i className="fa-solid fa-trash" />
-                                                Delete ({selectedCount})
-                                            </button>
-                                        )}
-                                    </div>
+                                        <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9CA3AF', textTransform: 'uppercase' }}>Type:</span>
+                                                {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
+                                                    <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
+                                                        padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
+                                                        fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
+                                                        borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
+                                                        background: statusFilter === f.key ? '#EEF2FF' : 'white',
+                                                        color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
+                                                    }}>{f.label}</button>
+                                                ))}
+                                            </div>
+
+                                            <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF', fontWeight: '700' }}>{currentRows.length} results</span>
+                                            {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
+                                            {canDelete && someSelected && (
+                                                <button
+                                                    onClick={() => requestDelete(selectedItems)}
+                                                    style={{
+                                                        padding: '0.3rem 0.85rem', borderRadius: '10px',
+                                                        border: '1px solid #ef4444', background: '#FFF5F5',
+                                                        color: '#ef4444', fontWeight: '700', fontSize: '0.75rem',
+                                                        cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                    }}
+                                                    title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete selected' : 'Request deletion for selected'}
+                                                >
+                                                    <i className="fa-solid fa-trash" />
+                                                    Delete ({selectedCount})
+                                                </button>
+                                            )}
+                                        </div>
 
                                     <div className="glass-table-card" style={{ marginBottom: '1rem' }}>
                                         {loading ? (
@@ -1080,7 +1113,10 @@ const ResultsAI = () => {
                                                                         <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
                                                                     </td>
                                                                     <td>
-                                                                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
+                                                                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                                            <span style={{ fontSize: '1rem' }} title={r.is_fully_automatic ? "Fully Automatic Screening" : "Manual Screening"}>
+                                                                                {r.is_fully_automatic ? '⚡' : '✋'}
+                                                                            </span>
                                                                             {r.full_name || r.candidate?.name || 'Candidate'}
                                                                         </div>
                                                                         <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
@@ -1092,14 +1128,28 @@ const ResultsAI = () => {
                                                                             activeTab === 'assessment' ? `${r.percentage ?? 0}%` :
                                                                                 `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
                                                                     </td>
-                                                                    <td style={{ fontSize: '0.85rem' }}>
-                                                                        <div>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
+                                                                    <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
+                                                                        <div style={{ fontWeight: '700', color: '#1B254B' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
+                                                                        <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: '600' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                                                                     </td>
                                                                     <td>
                                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                                                             <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
                                                                                 {getStatusLabel(r.status)}
                                                                             </span>
+                                                                            {activeTab !== 'assessment' && (
+                                                                                <button 
+                                                                                    onClick={(e) => { e.stopPropagation(); fetchTimeline(r); }}
+                                                                                    title="View Automation History"
+                                                                                    style={{ 
+                                                                                        background: 'none', border: 'none', cursor: 'pointer', 
+                                                                                        color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
+                                                                                        display: 'flex', alignItems: 'center'
+                                                                                    }}
+                                                                                >
+                                                                                    <i className="fa-solid fa-clock-rotate-left"></i>
+                                                                                </button>
+                                                                            )}
                                                                             {r.delete_requested && (
                                                                                 <span title="Deletion pending approval" style={{ cursor: 'help' }}>⏳</span>
                                                                             )}
@@ -1116,7 +1166,7 @@ const ResultsAI = () => {
                                                                                         color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                     }}
                                                                                 >Review</button>
-                                                                            ) : (
+                                                                            ) : activeTab === 'assessment' ? (
                                                                                 <button 
                                                                                     onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
                                                                                     style={{ 
@@ -1125,7 +1175,7 @@ const ResultsAI = () => {
                                                                                         color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                     }}
                                                                                 >View</button>
-                                                                            )}
+                                                                            ) : null}
                                                                             {canDelete && (
                                                                                 <button
                                                                                     onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
@@ -1148,6 +1198,47 @@ const ResultsAI = () => {
                                                 </table>
                                             </div>
                                         )}
+                                        
+                                        {/* Pagination Footer */}
+                                        {!loading && currentRows.length > itemsPerPage && (
+                                            <div style={{ 
+                                                padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9', 
+                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center' 
+                                            }}>
+                                                <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
+                                                    Showing <span style={{ color: '#1B254B' }}>{indexOfFirstRow + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastRow, currentRows.length)}</span> of <span style={{ color: '#1B254B' }}>{currentRows.length}</span> entries
+                                                </div>
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <button 
+                                                        disabled={currentPage === 1}
+                                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                                        style={{ 
+                                                            padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                            background: 'white', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                                                            fontSize: '0.8rem', fontWeight: '700', color: currentPage === 1 ? '#CBD5E1' : '#4F46E5',
+                                                            display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                        }}
+                                                    >
+                                                        <i className="fa-solid fa-chevron-left" /> Prev
+                                                    </button>
+                                                    <div style={{ display: 'flex', alignItems: 'center', px: '0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
+                                                        {currentPage}
+                                                    </div>
+                                                    <button 
+                                                        disabled={indexOfLastRow >= currentRows.length}
+                                                        onClick={() => setCurrentPage(p => p + 1)}
+                                                        style={{ 
+                                                            padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                            background: 'white', cursor: indexOfLastRow >= currentRows.length ? 'not-allowed' : 'pointer',
+                                                            fontSize: '0.8rem', fontWeight: '700', color: indexOfLastRow >= currentRows.length ? '#CBD5E1' : '#4F46E5',
+                                                            display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                        }}
+                                                    >
+                                                        Next <i className="fa-solid fa-chevron-right" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </>
                             )}
@@ -1155,6 +1246,80 @@ const ResultsAI = () => {
                     )}
                 </div>
             </div>
+            {/* Timeline Modal */}
+            {timelineCandidate && (
+                <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
+                    <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                            <div>
+                                <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
+                                <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <button 
+                                    onClick={() => fetchTimeline(timelineCandidate)} 
+                                    disabled={loadingTimeline}
+                                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4318FF', fontSize: '1.1rem', transition: 'transform 0.2s' }}
+                                    title="Refresh history"
+                                >
+                                    <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
+                                </button>
+                                <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        {loadingTimeline ? (
+                            <div style={{ textAlign: 'center', padding: '2rem' }}>
+                                <div className="spinner" style={{ margin: '0 auto 1rem' }}></div>
+                                <p style={{ color: '#707EAE', fontSize: '0.9rem' }}>Fetching logs...</p>
+                            </div>
+                        ) : timelineLogs.length === 0 ? (
+                            <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>
+                                <i className="fa-solid fa-list-ul" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                                <p>No logs found for this candidate yet.</p>
+                            </div>
+                        ) : (
+                            <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scrollbar">
+                                <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem' }}>
+                                    <div style={{ position: 'absolute', left: '7px', top: '5px', bottom: '5px', width: '2px', background: '#E2E8F0' }}></div>
+                                    {timelineLogs.map((log, i) => {
+                                        const isError = log.status === 'FAILURE';
+                                        const isSuccess = log.status === 'SUCCESS';
+                                        return (
+                                            <div key={log.id} style={{ position: 'relative', marginBottom: '1.8rem' }}>
+                                                <div style={{ 
+                                                    position: 'absolute', left: '-2rem', top: '0', width: '16px', height: '16px', 
+                                                    borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
+                                                    border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
+                                                }}></div>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
+                                                    {log.timestamp_formatted}
+                                                </div>
+                                                <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
+                                                    {log.message}
+                                                </div>
+                                                {log.details && Object.keys(log.details).length > 0 && (
+                                                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontStyle: 'italic', background: '#F4F7FE', padding: '0.5rem', borderRadius: '8px' }}>
+                                                        {JSON.stringify(log.details)}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                            <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
