@@ -18,6 +18,7 @@ const ResumeMatcher = () => {
     const [progress, setProgress] = useState({ processed: 0, total: 0 });
     const [matchMode, setMatchMode] = useState('automatic');
     const [customRoleTitle, setCustomRoleTitle] = useState('');
+    const [sameQuestionsForAll, setSameQuestionsForAll] = useState(false);
 
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
@@ -119,6 +120,7 @@ const ResumeMatcher = () => {
         const formData = {
             jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
             duration, mcqCount, codingCount, passThreshold, codingChallenges,
+            sameQuestionsForAll,
             assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
             interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
             batchId, isAnalyzing // Persist active session state
@@ -237,6 +239,7 @@ const ResumeMatcher = () => {
             formData.append('coding_count', codingCount);
             formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
             formData.append('pass_threshold', passThreshold);
+            formData.append('same_questions_for_all', sameQuestionsForAll);
             formData.append('is_fully_automatic', true);
 
             if (assessmentStartDate && assessmentStartTime) {
@@ -570,7 +573,7 @@ const ResumeMatcher = () => {
                                 </div>
                             )}
 
-                            <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
+                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>Assessment Pass Threshold ({passThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                     <input type="range" min="0" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
@@ -578,6 +581,39 @@ const ResumeMatcher = () => {
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
                             </div>
+
+                            {/* Same questions for all toggle */}
+                            {files.length > 1 && (
+                                <div style={{ 
+                                    marginBottom: '1.5rem', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    gap: '0.75rem', 
+                                    background: 'rgba(99, 102, 241, 0.03)', 
+                                    padding: '1rem', 
+                                    borderRadius: '12px', 
+                                    border: '1px solid #E0E7FF' 
+                                }}>
+                                    <div className="modern-toggle">
+                                        <input
+                                            type="checkbox"
+                                            id="same_questions_for_all"
+                                            checked={sameQuestionsForAll}
+                                            onChange={(e) => setSameQuestionsForAll(e.target.checked)}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                        <label htmlFor="same_questions_for_all"></label>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="same_questions_for_all" style={{ margin: 0, fontWeight: '600', color: '#1E293B', fontSize: '0.85rem', cursor: 'pointer' }}>
+                                            Same questions for all candidates
+                                        </label>
+                                        <p style={{ margin: 0, fontSize: '0.7rem', color: '#64748B' }}>
+                                            All screened candidates will receive the exact same question set instead of unique randomized ones.
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
 
                             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>

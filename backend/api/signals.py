@@ -14,8 +14,13 @@ logger = logging.getLogger(__name__)
 def handle_candidate_save(sender, instance, created, **kwargs):
     if instance.status == 'Resume Passed':
         # ONLY trigger auto-assessment if part of a fully automatic AI flow
+        # NEW: Skip if it's a batch-processed flow, as the batch task handles it at the end
         if not instance.automation_settings or not instance.automation_settings.get('is_fully_automatic'):
             logger.info(f"Signal: Candidate {instance.id} passed resume screening (Manual). Skipping auto-scheduling.")
+            return
+
+        if instance.batch_id:
+            logger.info(f"Signal: Candidate {instance.id} is part of a batch ({instance.batch_id}). Batch task will handle group assessment. Skipping.")
             return
 
         # 1. Check if already scheduled or assessment exists

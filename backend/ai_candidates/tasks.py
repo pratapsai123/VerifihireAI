@@ -263,3 +263,12 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             )
 
     print(f"\n✨ BATCH COMPLETE: Processed {total} candidates.")
+
+    if is_fully_automatic:
+        passed_count = Candidate.objects.filter(batch_id=batch_id, status='Resume Passed').count()
+        if passed_count > 0:
+            print(f"🚀 Triggering automated assessment for {passed_count} passed candidates...")
+            from api.tasks import trigger_batch_assessment_task
+            trigger_batch_assessment_task.delay(batch_id)
+        else:
+            print("ℹ️ No candidates passed. Skipping automated assessment.")

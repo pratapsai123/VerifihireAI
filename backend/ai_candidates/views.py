@@ -381,16 +381,24 @@ class ResumeMatchView(APIView):
                 if isinstance(raw_is_auto, str): is_auto = raw_is_auto.lower() == 'true'
                 else: is_auto = bool(raw_is_auto)
 
+            same_q = False
+            raw_same_q = request.data.get('same_questions_for_all')
+            if raw_same_q:
+                if isinstance(raw_same_q, str): same_q = raw_same_q.lower() == 'true'
+                else: same_q = bool(raw_same_q)
+
             automation_settings = {
                 'difficulty': request.data.get('difficulty', 'Medium'),
                 'duration': int(request.data.get('duration', 60)),
                 'mcq_count': int(request.data.get('mcq_count', 10)),
                 'coding_count': int(request.data.get('coding_count', 1)),
                 'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                'same_questions_for_all': same_q,
                 'assessment_available_from': request.data.get('assessment_available_from'),
                 'assessment_available_until': request.data.get('assessment_available_until'),
                 'interview_available_from': request.data.get('interview_available_from'),
                 'interview_available_until': request.data.get('interview_available_until'),
+                'coding_tasks': request.data.get('coding_tasks'), # JSON string of difficulties
                 'is_fully_automatic': is_auto  # PERSIST FLAG FOR DOWNSTREAM SIGNALS
             }
 

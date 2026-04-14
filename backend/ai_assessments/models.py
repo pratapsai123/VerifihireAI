@@ -34,6 +34,7 @@ class Assessment(models.Model):
     available_until = models.DateTimeField(blank=True, null=True)
     invited_count = models.IntegerField(default=0)
     num_applicants = models.IntegerField(default=0)
+    same_questions_for_all = models.BooleanField(default=False, help_text="If True, all candidates receive identical questions instead of unique randomized sets")
     company = models.ForeignKey(
         'api.Company', 
         on_delete=models.CASCADE, 

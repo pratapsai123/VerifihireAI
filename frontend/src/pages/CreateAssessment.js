@@ -23,8 +23,10 @@ const CreateAssessment = () => {
         end_time: '',
         pass_threshold: 60,
         customRoleTitle: '',
-        num_applicants: 1
+        num_applicants: 1,
+        same_questions_for_all: false
     });
+
 
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
@@ -225,9 +227,11 @@ const CreateAssessment = () => {
             pass_threshold: formData.pass_threshold,
             total_possible_points: calculateTotalPoints(),
             num_applicants: formData.num_applicants,
+            same_questions_for_all: formData.same_questions_for_all,
             available_from: (formData.start_date && formData.start_time) ? new Date(`${formData.start_date}T${formData.start_time}`).toISOString() : null,
             available_until: (formData.end_date && formData.end_time) ? new Date(`${formData.end_date}T${formData.end_time}`).toISOString() : null
         };
+
 
         try {
             const response = await axios.post(`${API_BASE_URL}/ai/generate/`, payload, {
@@ -373,7 +377,10 @@ const CreateAssessment = () => {
                                         if (val === '') {
                                             handleChange('num_applicants', '');
                                         } else {
-                                            handleChange('num_applicants', parseInt(val) || 1);
+                                            const n = parseInt(val) || 1;
+                                            handleChange('num_applicants', n);
+                                            // Reset toggle if applicants = 1
+                                            if (n <= 1) handleChange('same_questions_for_all', false);
                                         }
                                     }}
                                 />
@@ -381,6 +388,50 @@ const CreateAssessment = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Case 3 Toggle: Same questions for all */}
+                    {formData.num_applicants > 1 && (
+                        <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8FAFC', padding: '1rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                            <div className="modern-toggle">
+                                <input
+                                    type="checkbox"
+                                    id="same_questions_for_all"
+                                    checked={formData.same_questions_for_all}
+                                    onChange={(e) => handleChange('same_questions_for_all', e.target.checked)}
+                                    style={{ display: 'none' }}
+                                />
+                                <label 
+                                    htmlFor="same_questions_for_all"
+                                    style={{
+                                        position: 'relative',
+                                        display: 'inline-block',
+                                        width: '44px',
+                                        height: '24px',
+                                        background: formData.same_questions_for_all ? '#6366F1' : '#CBD5E1',
+                                        borderRadius: '20px',
+                                        cursor: 'pointer',
+                                        transition: 'background 0.3s'
+                                    }}
+                                >
+                                    <span style={{
+                                        position: 'absolute',
+                                        top: '2px',
+                                        left: formData.same_questions_for_all ? '22px' : '2px',
+                                        width: '20px',
+                                        height: '20px',
+                                        background: 'white',
+                                        borderRadius: '50%',
+                                        transition: 'left 0.3s'
+                                    }} />
+                                </label>
+                            </div>
+                            <div>
+                                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '600', color: '#1E293B' }}>Same questions for all candidates</h4>
+                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748B' }}>Every candidate will receive the exact same assessment pool instead of unique randomized sets.</p>
+                            </div>
+                        </div>
+                    )}
+
 
                     {/* Dynamic Complexity Detail (only if tasks > 0) */}
                     {formData.num_coding > 0 && (

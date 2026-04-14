@@ -368,10 +368,18 @@ class GenerateAssessmentView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             company = user_profile.company if user_profile else None
 
-            # Delayed Assessment creation: We do not touch DB until AI succeeds
-            # Pool multipliers based on number of applicants (min 2x for randomization)
-            num_applicants = int(data.get('num_applicants', 0)) or 2
-            pool_multiplier = max(2, num_applicants)
+            # Read new flag
+            same_questions_for_all = bool(data.get('same_questions_for_all', False))
+            num_applicants = int(data.get('num_applicants', 0)) or 1
+
+            # Case 1: Single candidate — generate exactly required count (1x)
+            # Case 3: Same questions for all — generate exactly required count (1x)
+            # Case 2: Multiple candidates, unique — generate num_applicants * required_count
+            if num_applicants <= 1 or same_questions_for_all:
+                pool_multiplier = 1
+            else:
+                pool_multiplier = num_applicants
+
 
             pool_easy = mcq_easy * pool_multiplier
             pool_medium = mcq_medium * pool_multiplier
@@ -380,7 +388,8 @@ class GenerateAssessmentView(APIView):
             pool_coding_total = coding_count * pool_multiplier
             pool_coding_tasks = coding_tasks * pool_multiplier
 
-            logger.info(f"Generating Pool for {num_applicants} applicants: MCQs={pool_mcq_total}, Coding={pool_coding_total}")
+            logger.info(f"Generating Pool (Case {'3' if same_questions_for_all else ('1' if num_applicants <= 1 else '2')}) for {num_applicants} applicants: Multiplier={pool_multiplier}")
+
             
             local_api_key = GroqKeyManager.get_current_key()
             local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
@@ -532,16 +541,19 @@ class GenerateAssessmentView(APIView):
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
-                num_applicants=int(data.get('num_applicants', 0)),
+                num_applicants=num_applicants,
+                same_questions_for_all=same_questions_for_all,
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
                 company=company,
                 user_profile=user_profile,
+                generated_content=generated_data,
                 batch_id=generate_batch_id(),
                 batch_name=generate_batch_name(job_title),
                 status='SCHEDULED'
             )
+
 
             return Response({
                 "id": assessment.id,
@@ -632,24 +644,13 @@ class CreateSubmissionView(APIView):
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
-                # Lock in randomized questions upon first creation
-                if not submission.candidate_questions:
-                    gen_content = assessment.generated_content or {}
-                    if isinstance(gen_content, str):
-                        try:
-                            gen_content = json.loads(gen_content)
-                        except:
-                            pass
-                    
-                    # Unwrap if nested
-                    if isinstance(gen_content, dict) and 'mcqs' not in gen_content and 'coding_challenges' not in gen_content:
-                        for val in gen_content.values():
-                            if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
-                                gen_content = val
-                                break
+                # Shuffled Distribution: 
+                # Even for 'same questions for all', we use pick_random_subset 
+                # to ensure candidates get the same set but in a jumbled (shuffled) order.
+                # (seed=email ensures different shuffle per user)
+                submission.candidate_questions = pick_random_subset(assessment, gen_content, seed=email)
+                submission.save(update_fields=['candidate_questions'])
 
-                    submission.candidate_questions = pick_random_subset(assessment, gen_content, seed=email)
-                    submission.save(update_fields=['candidate_questions'])
              
             # Calculate time left
             elapsed = timezone.now() - submission.started_at
@@ -1049,18 +1050,21 @@ class PublicAssessmentView(APIView):
                     if submission.candidate_questions:
                         final_content = submission.candidate_questions
                     else:
-                        # Case: Submission exists but no questions locked yet (e.g. legacy/error)
-                        # Pick a subset now and lock it
-                        final_content = pick_random_subset(assessment, gen_content, seed=email_param)
+                        # Case 1 & 3 Bypass
+                        if assessment.num_applicants <= 1 or assessment.same_questions_for_all:
+                            final_content = _normalize_generated_pool(gen_content)
+                        else:
+                            final_content = pick_random_subset(assessment, gen_content, seed=email_param)
                         submission.candidate_questions = final_content
                         submission.save(update_fields=['candidate_questions'])
                 else:
                     # No submission yet, but we have an email. 
-                    # We can pick the set now so it's consistent even before they "start"
-                    final_content = pick_random_subset(assessment, gen_content, seed=email_param)
-                    # We don't create the submission here to keep CreateSubmissionView as the source of truth for "Starting"
-                    # However, we need to ensure CreateSubmissionView also locks it in or reuses this logic.
-                    # BETTER: Always use a helper to get/create consistent set.
+                    # Consistent set for the UI
+                    if assessment.num_applicants <= 1 or assessment.same_questions_for_all:
+                        final_content = _normalize_generated_pool(gen_content)
+                    else:
+                        final_content = pick_random_subset(assessment, gen_content, seed=email_param)
+
 
             # Prevent Answer Leakage: Strip MCQ answers from the public payload
             if isinstance(final_content, dict) and 'mcqs' in final_content:

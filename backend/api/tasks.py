@@ -1,8 +1,13 @@
 from celery import shared_task
-from .pipeline import process_resume_passed, process_assessment_passed
+from .pipeline import process_resume_passed, process_assessment_passed, process_batch_assessment
 import logging
 
 logger = logging.getLogger(__name__)
+
+@shared_task
+def trigger_batch_assessment_task(batch_id):
+    logger.info(f"Executing trigger_batch_assessment_task for batch {batch_id}")
+    process_batch_assessment(batch_id)
 
 @shared_task
 def send_assessment_link_task(candidate_id):
