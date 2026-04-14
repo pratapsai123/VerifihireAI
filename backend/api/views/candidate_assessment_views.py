@@ -1,6 +1,7 @@
 from .._imports import *
 from ai_candidates.models import Candidate
 from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
+from api.utils.batch_utils import generate_batch_id, generate_batch_name
 from ..models import CandidateSubmission
 
 
@@ -58,6 +59,10 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         results = []
         sent_count = 0
         fail_count = 0
+        
+        # Unique batch for this invitation event
+        batch_id = generate_batch_id()
+        batch_name = generate_batch_name(assessment.display_name or assessment.name)
 
         for idx, c in enumerate(candidates, start=1):
             payload = dict(c or {})
@@ -101,6 +106,8 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                 start_grace_minutes=start_grace_minutes,
                 status='draft',
                 is_auto_schedule=is_auto_schedule,
+                batch_id=batch_id,
+                batch_name=batch_name
             )
 
             start_link = f"{frontend_base.rstrip('/')}/take-assessment/{invitation.token}"
@@ -1731,6 +1738,8 @@ def results_overview_view(request):
                     'coding_score': s.coding_score,
                     'coding_total': s.coding_total,
                     'coding_percentage': s.coding_percentage,
+                    'batch_id': inv.batch_id,
+                    'batch_name': inv.batch_name,
 
                     'status': s.result,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
@@ -1798,6 +1807,8 @@ def results_overview_view(request):
                     },
                     'integrity_screenshots': screenshots_data,
                     'is_resume_screening': False,
+                    'batch_id': s.batch_id,
+                    'batch_name': s.batch_name,
                     'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
@@ -1840,6 +1851,8 @@ def results_overview_view(request):
                     'total_questions': getattr(s, 'total_questions', 0),
                     'resume_score': getattr(s, 'resume_score', 0),
                     'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False),
+                    'batch_id': s.batch_id,
+                    'batch_name': s.batch_name,
                     'integrity': {
                         'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                         'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []

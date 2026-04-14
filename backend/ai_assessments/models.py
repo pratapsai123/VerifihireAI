@@ -24,6 +24,8 @@ class Assessment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     pass_threshold = models.IntegerField(default=60)
     total_points = models.IntegerField(default=0)  # Dynamic based on difficulty weights
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
+    batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True)
 
     # New Fields
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='SCHEDULED')
@@ -83,6 +85,8 @@ class AIAssessmentSubmission(models.Model):
     monitoring_logs = models.JSONField(default=list, blank=True)
     results_breakdown = models.JSONField(default=dict, blank=True) # Detailed scoring info
     candidate_questions = models.JSONField(default=dict, blank=True) # Locked-in randomized subset
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
+    batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True)
 
     started_at = models.DateTimeField(default=timezone.now)
     submitted_at = models.DateTimeField(blank=True, null=True)

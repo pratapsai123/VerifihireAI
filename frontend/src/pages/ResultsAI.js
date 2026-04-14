@@ -107,29 +107,30 @@ const ResultsAI = () => {
             };
 
             const groups = {};
-            // Initialize with all valid job roles so they appear even if empty
-            rolesList.forEach(r => {
-                const name = normalizeRoleName(r.title);
-                if (!groups[name]) {
-                    groups[name] = { resume: [], assessment: [], interview: [], total: 0 };
+            
+            const addToGroup = (item, type) => {
+                const rawRole = item.assessment?.role || item.assessment?.display_name || item.assessment?.name || item.job_title || 'General';
+                // Priority: Explicit batch_name > JD_Date_Time format
+                const batchLabel = item.batch_name || `${normalizeRoleName(rawRole)}_Archive`;
+                
+                if (!groups[batchLabel]) {
+                    groups[batchLabel] = { 
+                        resume: [], 
+                        assessment: [], 
+                        interview: [], 
+                        total: 0,
+                        role: rawRole,
+                        batch_name: batchLabel,
+                        is_fully_automatic: item.is_fully_automatic
+                    };
                 }
-            });
-
-            const addToGroup = (role, item, type) => {
-                const name = normalizeRoleName(role);
-                if (!groups[name]) {
-                    groups[name] = { resume: [], assessment: [], interview: [], total: 0 };
-                }
-                groups[name][type].push(item);
-                groups[name].total += 1;
+                groups[batchLabel][type].push(item);
+                groups[batchLabel].total += 1;
             };
 
-            resResults.forEach(r => addToGroup(r.job_title || r.assessment?.display_name, r, 'resume'));
-            intResults.forEach(r => addToGroup(r.job_title || r.assessment?.display_name, r, 'interview'));
-            sortedAssessments.forEach(s => {
-                const roleName = s.assessment?.role || s.assessment?.display_name || s.assessment?.name || 'General Assessment';
-                addToGroup(roleName, s, 'assessment');
-            });
+            resResults.forEach(r => addToGroup(r, 'resume'));
+            intResults.forEach(r => addToGroup(r, 'interview'));
+            sortedAssessments.forEach(s => addToGroup(s, 'assessment'));
 
             setGroupedData(groups);
         } catch (err) {
@@ -955,36 +956,30 @@ const ResultsAI = () => {
                             }}>
                                 <i className="fa-solid fa-arrow-left" /> Back to Archive
                             </button>
-                            
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                                <div>
-                                    <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                                        {selectedRole} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Results</span>
-                                    </h1>
-                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
-                                            <i className="fa-solid fa-calendar-plus" />
-                                            <span style={{ color: '#94A3B8' }}>Start:</span>
-                                            <span>{paginatedRows[0]?.available_from ? new Date(paginatedRows[0].available_from).toLocaleDateString() : 'N/A'}</span>
+                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                        <div>
+                                            <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
+                                                {selectedRole.split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
+                                            </h1>
+                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
+                                                    <i className="fa-solid fa-layer-group" />
+                                                    <span style={{ color: '#94A3B8' }}>Batch:</span>
+                                                    <span>{selectedRole}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#E11D48' }}>
-                                            <i className="fa-solid fa-calendar-xmark" />
-                                            <span style={{ color: '#94A3B8' }}>End:</span>
-                                            <span>{paginatedRows[0]?.available_until ? new Date(paginatedRows[0].available_until).toLocaleDateString() : 'N/A'}</span>
+                                        <div style={{ 
+                                            background: 'white', padding: '1rem 2rem', borderRadius: '18px', 
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textAlign: 'center',
+                                            border: '1px solid #F1F5F9'
+                                        }}>
+                                            <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase' }}>Submissions</div>
+                                            <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ 
-                                    background: 'white', padding: '1rem 2rem', borderRadius: '18px', 
-                                    boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textAlign: 'center',
-                                    border: '1px solid #F1F5F9'
-                                }}>
-                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase' }}>Submissions</div>
-                                    <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                            )}
 
                     {viewMode === 'transcript' ? renderTranscriptReport(showTranscriptDetail) : (
                         <>
@@ -999,25 +994,41 @@ const ResultsAI = () => {
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                         {Object.entries(groupedData).map(([roleName, data]) => (
-                                            <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
-                                                padding: '1rem 1.5rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                                                transition: 'all 0.2s', borderLeft: '4px solid transparent'
+                                                <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
+                                                padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                                transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
                                             }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                                    <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'rgba(79, 70, 229, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5' }}>
-                                                        <i className="fa-solid fa-briefcase" />
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4318FF, #9333ea)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', boxShadow: '0 8px 15px rgba(67, 24, 255, 0.2)' }}>
+                                                        <i className="fa-solid fa-layer-group" />
                                                     </div>
                                                     <div>
-                                                        <h3 style={{ fontSize: '1rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>{roleName}</h3>
-                                                        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.15rem' }}>
-                                                            <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: '600' }}>
-                                                                {data.total} Submission{data.total !== 1 ? 's' : ''}
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                            <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{roleName}</h3>
+                                                            <span style={{ 
+                                                                padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
+                                                                background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
+                                                                color: data.is_fully_automatic ? '#4F46E5' : '#707EAE',
+                                                                border: `1px solid ${data.is_fully_automatic ? '#4F46E533' : '#707EAE33'}`,
+                                                                textTransform: 'uppercase', letterSpacing: '0.05em'
+                                                            }}>
+                                                                {data.is_fully_automatic ? 'Automatic' : 'Manual'}
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
+                                                            <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
+                                                                {data.total} Candidate{data.total !== 1 ? 's' : ''}
+                                                            </span>
+                                                            <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
+                                                                {data.assessment.length + data.resume.length + data.interview.length} Total Results
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style={{ color: '#94A3B8' }} className="arrow-icon">
-                                                    <i className="fa-solid fa-angle-right" />
+                                                <div style={{ color: '#4318FF', fontSize: '1.2rem' }} className="arrow-icon">
+                                                    <i className="fa-solid fa-circle-chevron-right" />
                                                 </div>
                                             </div>
                                         ))}
@@ -1114,9 +1125,6 @@ const ResultsAI = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                                            <span style={{ fontSize: '1rem' }} title={r.is_fully_automatic ? "Fully Automatic Screening" : "Manual Screening"}>
-                                                                                {r.is_fully_automatic ? '⚡' : '✋'}
-                                                                            </span>
                                                                             {r.full_name || r.candidate?.name || 'Candidate'}
                                                                         </div>
                                                                         <div style={{ fontSize: '0.75rem', color: '#64748b' }}>

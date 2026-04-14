@@ -798,6 +798,8 @@ class CandidateInvitation(models.Model):
         blank=True,
         help_text="The user who currently owns this invitation"
     )
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
+    batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True)
     created_by = models.ForeignKey(
         'UserProfile',
         on_delete=models.SET_NULL,

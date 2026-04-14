@@ -38,6 +38,7 @@ import base64
 from django.core.files.base import ContentFile
 from api.models import UserProfile, DeletionRequest
 from api._imports import _is_application_admin_email, handle_deletion_request
+from api.utils.batch_utils import generate_batch_id, generate_batch_name
 
 
 # Helper functions moved to ai_logic.py
@@ -90,7 +91,9 @@ class SubmitAssessmentView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
-                    status='ONGOING'
+                    status='ONGOING',
+                    batch_id=assessment.batch_id,
+                    batch_name=assessment.batch_name
                 )
             else:
                 # If the candidate provided a real name to override an auto-generated one (like "Extraction Failed"), update it
@@ -535,7 +538,8 @@ class GenerateAssessmentView(APIView):
                 pass_threshold=data.get('pass_threshold', 60),
                 company=company,
                 user_profile=user_profile,
-                generated_content=generated_data,
+                batch_id=generate_batch_id(),
+                batch_name=generate_batch_name(job_title),
                 status='SCHEDULED'
             )
 
@@ -613,7 +617,9 @@ class CreateSubmissionView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
-                    status='ONGOING'
+                    status='ONGOING',
+                    batch_id=assessment.batch_id,
+                    batch_name=assessment.batch_name
                 )
                 
                 # CROSS-UPDATE: Synchronize with the Candidate record if exists

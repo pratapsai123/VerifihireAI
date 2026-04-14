@@ -20,6 +20,8 @@ import traceback
 import time
 import re
 import logging
+import uuid
+from api.utils.batch_utils import generate_batch_id, generate_batch_name
 import requests
 from api.ocr_utils import _get_reader
 
@@ -134,6 +136,10 @@ class BulkInviteView(APIView):
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
+            batch_id = generate_batch_id()
+            job_title_for_batch = request.data.get('job_title') or request.data.get('role_title') or "Interview"
+            batch_name = generate_batch_name(job_title_for_batch)
+            
             logger.info(f"Processing bulk invite file: {file.name}, Batch Time: {batch_interview_time}")
             if file.name.lower().endswith('.csv'):
                 df = pd.read_csv(file)
@@ -176,6 +182,8 @@ class BulkInviteView(APIView):
                     company=company,
                     user_profile=user_profile,
                     created_by=user_profile,
+                    batch_id=batch_id,
+                    batch_name=batch_name,
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
@@ -296,8 +304,10 @@ class ResumeMatchView(APIView):
             elif not candidate.resume:
                 return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
             
-            batch_id = str(uuid.uuid4())
+            batch_id = generate_batch_id()
+            batch_name = generate_batch_name(candidate.job_title or job_description[:20])
             candidate.batch_id = batch_id
+            candidate.batch_name = batch_name
             candidate.status = 'New'
             candidate.save()
 
@@ -330,7 +340,11 @@ class ResumeMatchView(APIView):
             return Response({"error": "No resumes uploaded"}, status=status.HTTP_400_BAD_REQUEST)
 
         results = []
-        batch_id = str(uuid.uuid4())
+        batch_id = generate_batch_id()
+        batch_name = "Bulk Screening" # Placeholder, will update per job title if available
+        first_job_title = request.data.get('job_title') or request.data.get('role_title')
+        if first_job_title:
+            batch_name = generate_batch_name(first_job_title)
         
         try:
             # INSTANT SAVE: Create Candidate records without waiting for OCR
@@ -355,7 +369,8 @@ class ResumeMatchView(APIView):
                     job_description=job_description,
                     company=company,
                     user_profile=user_profile,
-                    batch_id=batch_id
+                    batch_id=batch_id,
+                    batch_name=batch_name
                 )
                 results.append({"id": new_candidate.id, "name": candidate_name, "status": "Queued"})
 
