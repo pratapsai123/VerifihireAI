@@ -1278,8 +1278,8 @@ class ProxyCodeExecuteView(APIView):
                 stdin = str(stdin)
             code = files[0]['content'] if files else ''
             
-            # Get executor URL from environment or fallback to localhost:4000
-            executor_base_url = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
+            # Get executor URL from environment or fallback to localhost:4001
+            executor_base_url = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4001").rstrip("/")
             
             # Prepare payload for internal executor
             payload = {

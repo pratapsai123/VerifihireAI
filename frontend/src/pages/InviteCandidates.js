@@ -406,6 +406,15 @@ export default function InviteCandidates() {
     }
   };
 
+  // ── Computed auto-end date for one_week mode ──
+  const oneWeekEndDate = (() => {
+    if (validityMode !== 'one_week' || !scheduleDate) return '';
+    const start = new Date(`${scheduleDate}T00:00:00`);
+    if (Number.isNaN(start.getTime())) return '';
+    const end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+    return `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
+  })();
+
   // ── Computed schedule display label (for table + stats bar) ──
   const scheduleDisplay = (() => {
     if (!scheduleDate) return null;
@@ -456,15 +465,6 @@ export default function InviteCandidates() {
     }
 
     return fmtDate(scheduleDate);
-  })();
-
-  // ── Computed auto-end date for one_week mode ──
-  const oneWeekEndDate = (() => {
-    if (validityMode !== 'one_week' || !scheduleDate) return '';
-    const start = new Date(`${scheduleDate}T00:00:00`);
-    if (Number.isNaN(start.getTime())) return '';
-    const end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-    return `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
   })();
 
   // ── Computed start window for exact mode ──

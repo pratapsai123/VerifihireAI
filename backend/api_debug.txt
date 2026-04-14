@@ -1050,3 +1050,19 @@ Host: localhost:8001
 [2026-04-13 10:33:35.425254+00:00] PUBLIC ACCESS: Token='f8808789-42c8-4e21-bdc7-b31f5eb49517'
 Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776076415335']}>
 Host: localhost:8001
+
+[2026-04-13 11:49:47.728789+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+Traceback (most recent call last):
+  File "C:\VerifiHireAi\VerifiHireAI\backend\ai_assessments\views.py", line 505, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+
+RAW: No response received
+
+[2026-04-13 11:54:31.779970+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+Traceback (most recent call last):
+  File "C:\VerifiHireAi\VerifiHireAI\backend\ai_assessments\views.py", line 505, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+
+RAW: No response received
