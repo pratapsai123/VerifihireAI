@@ -30,6 +30,7 @@ from .ai_logic import (
     _generate_mcq_pool_ai_only,
     pick_random_subset,
     _expert_assessment_refiner,
+    _validate_mcq_structure,
     GroqKeyManager
 )
 
@@ -481,7 +482,19 @@ class GenerateAssessmentView(APIView):
             if (final_mcqs < pool_mcq_total or final_coding < pool_coding_total or 
                 final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
                 
-                logger.info(f"Self-Healing: Shortfall detected (MCQs: {final_mcqs}/{pool_mcq_total}, Coding: {final_coding}/{pool_coding_total}). Attempting repair...")
+                shortfall_details = []
+                if final_mcqs < pool_mcq_total:
+                    shortfall_details.append(f"MCQs: {final_mcqs}/{pool_mcq_total}")
+                if final_coding < pool_coding_total:
+                    shortfall_details.append(f"Coding: {final_coding}/{pool_coding_total}")
+                if final_easy < pool_easy:
+                    shortfall_details.append(f"Easy: {final_easy}/{pool_easy}")
+                if final_medium < pool_medium:
+                    shortfall_details.append(f"Medium: {final_medium}/{pool_medium}")
+                if final_hard < pool_hard:
+                    shortfall_details.append(f"Hard: {final_hard}/{pool_hard}")
+                
+                logger.info(f"\n🔧 SELF-HEALING REPAIR TRIGGERED:\n   Shortfalls detected: {', '.join(shortfall_details)}\n   Starting repair cycle...")
                 generated_data = _repair_pool_shortfall(
                     groq_client=local_groq_client,
                     job_description=job_description,
@@ -498,6 +511,8 @@ class GenerateAssessmentView(APIView):
                 final_mcqs = len(generated_data.get('mcqs', []))
                 final_coding = len(generated_data.get('coding_challenges', []))
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                
+                logger.info(f"\n✅ REPAIR CYCLE COMPLETE:\n   Final MCQs: {final_mcqs} ({final_easy}E/{final_medium}M/{final_hard}H)\n   Final Coding: {final_coding}")
 
             # --- FORCED REBALANCING GATE ---
             # If we have enough total MCQs, force-align their difficulty labels to match requested split
@@ -512,8 +527,196 @@ class GenerateAssessmentView(APIView):
                 # Update final metrics after rebalancing
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
 
+            # --- FINAL PASS: CLEAN ALL MCQs FOR 100% ACCURACY ---
+            logger.info("\n🔍 FINAL PASS: Validating all MCQs for quality assurance...")
+            all_mcqs = generated_data.get('mcqs', [])
+            valid_mcqs = []
+            invalid_count = 0
+            
+            for mcq in all_mcqs:
+                is_valid, error_msg = _validate_mcq_structure(mcq)
+                if is_valid:
+                    valid_mcqs.append(mcq)
+                else:
+                    invalid_count += 1
+                    logger.warning(
+                        f"   ⚠️ INVALID MCQ REMOVED: {error_msg}. "
+                        f"Question: {mcq.get('question', '')[:40]}..."
+                    )
+            
+            logger.info(
+                f"\n📊 FINAL PASS RESULTS:\n"
+                f"   Input pool: {len(all_mcqs)} MCQs\n"
+                f"   Valid MCQs: {len(valid_mcqs)}\n"
+                f"   Removed (invalid): {invalid_count}\n"
+                f"   {f'⚠️  WARNING: {invalid_count} invalid MCQs removed!' if invalid_count > 0 else '✅ All MCQs valid!'}"
+            )
+            
+            # Update pool with only valid MCQs
+            generated_data['mcqs'] = valid_mcqs
+            final_mcqs = len(valid_mcqs)
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs)
+            
+            # Check if shortfall created by removing invalid MCQs
+            if invalid_count > 0 and final_mcqs < pool_mcq_total:
+                logger.warning(
+                    f"\n⚠️  SHORTFALL AFTER CLEANUP: Removed {invalid_count} invalid MCQs.\n"
+                    f"   Current: {final_mcqs} valid MCQs\n"
+                    f"   Required pool: {pool_mcq_total}\n"
+                    f"   Shortfall: {pool_mcq_total - final_mcqs}\n"
+                    f"   Triggering repair to fill gap..."
+                )
+                
+                # Trigger repair for the shortfall
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_description,
+                        required_skills=required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=self.PRIMARY_MODEL
+                    )
+                    
+                    # Use repaired data
+                    generated_data = repair_generated
+                    
+                    # Validate REPAIRED MCQs too (recursive validation)
+                    all_mcqs_after_repair = generated_data.get('mcqs', [])
+                    valid_mcqs_after_repair = []
+                    for mcq in all_mcqs_after_repair:
+                        is_valid, _ = _validate_mcq_structure(mcq)
+                        if is_valid:
+                            valid_mcqs_after_repair.append(mcq)
+                    
+                    generated_data['mcqs'] = valid_mcqs_after_repair
+                    final_mcqs = len(valid_mcqs_after_repair)
+                    final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs_after_repair)
+                    
+                    logger.info(
+                        f"✅ Repair completed. MCQs now: {final_mcqs} valid ({final_easy}E/{final_medium}M/{final_hard}H)"
+                    )
+                except Exception as repair_e:
+                    logger.error(f"❌ Repair failed during post-cleanup: {repair_e}")
+                    raise
+            
+            # Check minimum still met after cleaning (and repair if triggered)
+            if final_mcqs < mcq_count:
+                logger.error(
+                    f"\n❌ FINAL PASS FAILED: Not enough valid MCQs after cleaning!\n"
+                    f"   Required minimum: {mcq_count}, After cleanup: {final_mcqs}\n"
+                    f"   Removed {invalid_count} invalid MCQs during final pass.\n"
+                    f"   Cannot meet minimum requirement. Assessment rejected."
+                )
+                raise Exception(
+                    f"All MCQs failed final quality check. After removing {invalid_count} invalid MCQs, "
+                    f"only {final_mcqs} valid MCQs remain but {mcq_count} required."
+                )
+
+            # --- FINAL PASS: CLEAN ALL CODING CHALLENGES FOR 100% ACCURACY ---
+            logger.info("\n🔍 FINAL PASS: Validating all coding challenges...")
+            all_coding = generated_data.get('coding_challenges', [])
+            valid_coding = []
+            removed_coding = 0
+            MIN_TC = 4
+            MAX_TC = 6
+            
+            for challenge in all_coding:
+                test_cases = challenge.get('test_cases', [])
+                tc_count = len(test_cases)
+                
+                if tc_count < MIN_TC:
+                    removed_coding += 1
+                    logger.warning(
+                        f"   ⚠️ CODING CHALLENGE REMOVED: '{challenge.get('title', 'Unknown')}' has {tc_count}/{MIN_TC}-{MAX_TC} test cases. "
+                        f"Minimum {MIN_TC} required."
+                    )
+                else:
+                    valid_coding.append(challenge)
+                    logger.info(f"   ✅ Challenge '{challenge.get('title', 'Unknown')}' valid ({tc_count} test cases)")
+            
+            logger.info(
+                f"\n📊 CODING VALIDATION RESULTS:\n"
+                f"   Input pool: {len(all_coding)} challenges\n"
+                f"   Valid challenges: {len(valid_coding)} ({min(4, len(valid_coding))} tests)\n"
+                f"   Removed (insufficient test cases): {removed_coding}\n"
+                f"   {f'⚠️  WARNING: {removed_coding} challenges removed!' if removed_coding > 0 else '✅ All challenges valid!'}"
+            )
+            
+            # Update pool with only valid coding challenges
+            generated_data['coding_challenges'] = valid_coding
+            final_coding = len(valid_coding)
+            
+            # Check if shortfall created by removing insufficient coding challenges
+            if removed_coding > 0 and final_coding < pool_coding_total:
+                logger.warning(
+                    f"\n⚠️  SHORTFALL AFTER CLEANUP: Removed {removed_coding} coding challenges.\n"
+                    f"   Current: {final_coding} valid challenges\n"
+                    f"   Required pool: {pool_coding_total}\n"
+                    f"   Shortfall: {pool_coding_total - final_coding}\n"
+                    f"   Triggering repair to fill gap..."
+                )
+                
+                # Trigger repair for coding shortfall
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_description,
+                        required_skills=required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=self.PRIMARY_MODEL
+                    )
+                    
+                    # Use repaired data
+                    generated_data = repair_generated
+                    
+                    # Validate REPAIRED coding challenges too (check test cases)
+                    all_coding_after_repair = generated_data.get('coding_challenges', [])
+                    valid_coding_after_repair = []
+                    for challenge in all_coding_after_repair:
+                        tc_count = len(challenge.get('test_cases', []))
+                        if tc_count >= MIN_TC:
+                            valid_coding_after_repair.append(challenge)
+                    
+                    generated_data['coding_challenges'] = valid_coding_after_repair
+                    final_coding = len(valid_coding_after_repair)
+                    
+                    logger.info(f"✅ Coding repair completed. Challenges now: {final_coding} valid")
+                except Exception as repair_e:
+                    logger.error(f"❌ Repair failed during post-cleanup (coding): {repair_e}")
+                    raise
+            
+            # Check minimum still met after cleaning (and repair if triggered)
+            if final_coding < coding_count:
+                logger.error(
+                    f"\n❌ CODING VALIDATION FAILED: Not enough valid challenges!\n"
+                    f"   Required minimum: {coding_count}, After cleaning: {final_coding}\n"
+                    f"   Removed {removed_coding} challenges with insufficient test cases.\n"
+                    f"   Cannot meet minimum requirement. Assessment rejected."
+                )
+                raise Exception(
+                    f"All coding challenges failed final quality check (insufficient test cases). "
+                    f"After removing {removed_coding} invalid challenges, only {final_coding} valid challenges remain but {coding_count} required."
+                )
+
             # Final Validation Gate
             if final_mcqs < mcq_count or final_coding < coding_count:
+                logger.error(
+                    f"\n❌ FINAL VALIDATION FAILED:\n"
+                    f"   Required minimum - MCQs: {mcq_count}, Coding: {coding_count}\n"
+                    f"   Got - MCQs: {final_mcqs}, Coding: {final_coding}\n"
+                    f"   Buffer pool target was MCQs: {pool_mcq_total}, Coding: {pool_coding_total}\n"
+                    f"   Assessment generation ABORTED."
+                )
                 raise Exception(
                     f"AI could not satisfy minimum required pool counts even after repair. "
                     f"Expected MINIMUM MCQs={mcq_count}, min coding={coding_count}; "
@@ -554,6 +757,14 @@ class GenerateAssessmentView(APIView):
                 status='SCHEDULED'
             )
 
+            logger.info(
+                f"\n✨ ASSESSMENT CREATED SUCCESSFULLY (ID: {assessment.id}):\n"
+                f"   Skills: {required_skills}\n"
+                f"   Questions: {final_mcqs} MCQs ({final_easy}E/{final_medium}M/{final_hard}H) + {final_coding} Coding\n"
+                f"   Candidates: {num_applicants} ({'same questions' if same_questions_for_all else 'unique questions'})\n"
+                f"   Status: {assessment.status}\n"
+                f"   Share Token: {assessment.share_token}"
+            )
 
             return Response({
                 "id": assessment.id,
@@ -648,7 +859,7 @@ class CreateSubmissionView(APIView):
                 # Even for 'same questions for all', we use pick_random_subset 
                 # to ensure candidates get the same set but in a jumbled (shuffled) order.
                 # (seed=email ensures different shuffle per user)
-                submission.candidate_questions = pick_random_subset(assessment, gen_content, seed=email)
+                submission.candidate_questions = pick_random_subset(assessment, assessment.generated_content, seed=email)
                 submission.save(update_fields=['candidate_questions'])
 
              
