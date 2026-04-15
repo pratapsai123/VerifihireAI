@@ -1,6 +1,34 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { 
+    Save, 
+    ArrowLeft, 
+    ExternalLink, 
+    Plus, 
+    Trash2, 
+    Clock, 
+    Cpu, 
+    Globe, 
+    Layout, 
+    Code, 
+    CheckCircle,
+    BarChart,
+    ChevronUp,
+    ChevronDown,
+    Search,
+    Database,
+    AlertCircle,
+    FileText,
+    Languages,
+    TrendingUp,
+    AlignLeft,
+    Timer,
+    ShieldCheck,
+    Hash,
+    Eye,
+    EyeOff
+} from 'lucide-react';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/Coding.css';
@@ -533,33 +561,31 @@ export default function CodingQuestionForm() {
       <div className="page-container coding-form-page">
         <div className="coding-header-row">
           <div>
-            <h2 className="page-title">{editing ? `Edit Coding Question #${id}` : 'New Coding Question'}</h2>
-            <p className="page-subtitle">
-              {editing ? 'Update question + testcases.' : 'Create a question, then add testcases.'}
-            </p>
+            <h2 className="page-title">{editing ? `Edit Question` : 'New Coding Question'}</h2>
+            <div className="coding-muted">
+              {editing ? `Updating question #${id}` : 'Create a robust coding challenge with testcases.'}
+            </div>
           </div>
           <div className="coding-header-actions">
-            <button type="button" className="btn btn-secondary" onClick={() => {
+            <button type="button" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => {
               if (location.pathname === '/coding-challenge-question' || navAssessment) {
                 navigate('/manual-questions', { state: navAssessment });
               } else {
                 navigate('/coding');
               }
             }}>
+              <ArrowLeft size={18} />
               Back
             </button>
             {editing && (
-              <button type="button" className="btn btn-secondary" onClick={() => navigate(`/coding/questions/${id}/attempt`)}>
-                Open Attempt Page
+              <button type="button" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => navigate(`/coding/questions/${id}/attempt`)}>
+                <ExternalLink size={18} />
+                Preview
               </button>
             )}
-            {navAssessment && (
-              <button type="button" className="btn btn-primary" onClick={() => save({ redirectTo: '/review-assessment' })} disabled={saving || loading}>
-                {saving ? 'Saving…' : 'Save and add to review'}
-              </button>
-            )}
-            <button type="button" className="btn btn-primary" onClick={() => save()} disabled={saving || loading}>
-              {saving ? 'Saving…' : 'Save'}
+            <button type="button" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => save()} disabled={saving || loading}>
+              <Save size={18} />
+              {saving ? 'Saving…' : 'Save Question'}
             </button>
           </div>
         </div>
@@ -572,16 +598,17 @@ export default function CodingQuestionForm() {
 
             <div className="coding-card">
               <div className="coding-form-grid">
-                <label className="coding-field">
-                  <div className="coding-label">Title *</div>
-                  <input value={form.title} onChange={(e) => update('title', e.target.value)} className="coding-input" />
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><FileText size={16} style={{marginRight: '6px'}}/> Title *</div>
+                  <input value={form.title} onChange={(e) => update('title', e.target.value)} className="coding-input" style={{ height: '48px' }} placeholder="Question title" />
                 </label>
 
-                <label className="coding-field">
-                  <div className="coding-label">Languages (select one or more)</div>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><Languages size={16} style={{marginRight: '6px'}}/> Languages *</div>
                   <div className="coding-multiselect" ref={langsRef}>
                     <div
                       className="coding-multiselect-trigger"
+                      style={{ height: '48px' }}
                       onClick={() => setShowLangs(!showLangs)}
                     >
                       {form.languages.length === 0 ? (
@@ -621,12 +648,13 @@ export default function CodingQuestionForm() {
                   </div>
                 </label>
 
-                <label className="coding-field">
-                  <div className="coding-label">Difficulty Level *</div>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level *</div>
                   <select
                     value={form.difficulty || 'easy'}
                     onChange={(e) => update('difficulty', e.target.value)}
                     className="coding-input"
+                    style={{ height: '48px' }}
                     required
                   >
                     {DIFFICULTY_OPTIONS.map((opt) => (
@@ -641,24 +669,25 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-wide">
-                  <div className="coding-label">Description</div>
+                  <div className="coding-label"><AlignLeft size={16} style={{marginRight: '6px'}}/> Description</div>
                   <textarea value={form.description || ''} onChange={(e) => update('description', e.target.value)} className="coding-textarea" rows={4} />
                 </label>
 
                 <label className="coding-field coding-field-wide">
-                  <div className="coding-label">Starter code (editor default)</div>
+                  <div className="coding-label"><Code size={16} style={{marginRight: '6px'}}/> Starter code (editor default)</div>
                   <textarea value={form.starter_code || ''} onChange={(e) => update('starter_code', e.target.value)} className="coding-textarea" rows={8} />
                 </label>
 
                 {/* SQL Specific Fields */}
                 {(form.languages || []).includes('sql') && (
                   <>
-                    <label className="coding-field">
-                      <div className="coding-label">Database Engine</div>
+                    <label className="coding-field coding-field-short">
+                      <div className="coding-label"><Database size={16} style={{marginRight: '6px'}}/> Database Engine</div>
                       <select
                         value={form.database_engine || 'postgres'}
                         onChange={(e) => update('database_engine', e.target.value)}
                         className="coding-input"
+                        style={{ height: '48px' }}
                       >
                         <option value="postgres">PostgreSQL</option>
                         <option value="mysql">MySQL</option>
@@ -667,8 +696,8 @@ export default function CodingQuestionForm() {
                     </label>
 
                     <label className="coding-field coding-field-wide">
-                      <div className="coding-label">Schema SQL (Setup command)</div>
-                      <div className="coding-help-text" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '4px' }}>
+                      <div className="coding-label"><Database size={16} style={{marginRight: '6px'}}/> Schema SQL (Setup command)</div>
+                      <div className="coding-help-text" style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>
                         Define tables and insert initial data. Runs before each test case.
                       </div>
                       <textarea
@@ -682,13 +711,14 @@ export default function CodingQuestionForm() {
                   </>
                 )}
 
-                <label className="coding-field">
-                  <div className="coding-label">Custom Assessment ID (snapshot)</div>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><Hash size={16} style={{marginRight: '6px'}}/> Custom Assessment ID</div>
                   <input
                     value={form.custom_assessment_id ?? ''}
                     onChange={(e) => update('custom_assessment_id', e.target.value ? Number(e.target.value) : null)}
                     className="coding-input"
-                    placeholder="optional"
+                    style={{ height: '48px' }}
+                    placeholder="optional snapshot id"
                   />
                 </label>
               </div>
@@ -696,8 +726,8 @@ export default function CodingQuestionForm() {
 
             <div className="coding-card">
               <div className="coding-form-grid">
-                <label className="coding-field">
-                  <div className="coding-label">Time limit (HH:MM:SS) *</div>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><Timer size={16} style={{marginRight: '6px'}}/> Time limit (HH:MM:SS) *</div>
                   <input
                     type="text"
                     value={timeInput}
@@ -705,6 +735,7 @@ export default function CodingQuestionForm() {
                     placeholder="00:00:00"
                     maxLength={8}
                     className="coding-input"
+                    style={{ height: '48px' }}
                     required
                   />
                   {timeError && (
@@ -714,21 +745,28 @@ export default function CodingQuestionForm() {
                   )}
                 </label>
 
-                <label className="coding-field">
-                  <div className="coding-label">Memory (MB) *</div>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Memory (MB) *</div>
                   <input
                     type="number"
                     value={form.memory_limit_mb}
                     onChange={(e) => update('memory_limit_mb', Number(e.target.value))}
                     className="coding-input"
+                    style={{ height: '48px' }}
                     min={32}
                     required
                   />
                 </label>
 
-                <label className="coding-field">
-                  <div className="coding-label">Active *</div>
-                  <select value={form.is_active ? 'yes' : 'no'} onChange={(e) => update('is_active', e.target.value === 'yes')} className="coding-input" required>
+                <label className="coding-field coding-field-short">
+                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Active Status *</div>
+                  <select 
+                    value={form.is_active ? 'yes' : 'no'} 
+                    onChange={(e) => update('is_active', e.target.value === 'yes')} 
+                    className="coding-input" 
+                    style={{ height: '48px' }}
+                    required
+                  >
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
@@ -755,25 +793,37 @@ export default function CodingQuestionForm() {
                       <div className="coding-label">expected stdout</div>
                       <textarea value={tcExpected} onChange={(e) => setTcExpected(e.target.value)} className="coding-textarea" rows={4} />
                     </label>
-                    <label className="coding-field">
-                      <div className="coding-label">Test Case Visibility</div>
-                      <select value={tcHidden ? 'yes' : 'no'} onChange={(e) => setTcHidden(e.target.value === 'yes')} className="coding-input">
+                    <label className="coding-field coding-field-short">
+                      <div className="coding-label"><Eye size={16} style={{marginRight: '6px'}}/> Test Case Visibility</div>
+                      <select 
+                        value={tcHidden ? 'yes' : 'no'} 
+                        onChange={(e) => setTcHidden(e.target.value === 'yes')} 
+                        className="coding-input"
+                        style={{ height: '48px' }}
+                      >
                         <option value="no">Visible(Sample)</option>
                         <option value="yes">Hidden</option>
                       </select>
                     </label>
                     <div className="coding-field">
                       <div className="coding-label">&nbsp;</div>
-                      <button type="button" className="btn btn-primary" onClick={addTestcase} disabled={tcSaving}>
-                        {tcSaving ? 'Adding…' : '+ Add Testcase'}
+                      <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        style={{ display: 'flex', alignItems: 'center', gap: '8px', height: '48px' }} 
+                        onClick={addTestcase} 
+                        disabled={tcSaving}
+                      >
+                        <Plus size={18} />
+                        {tcSaving ? 'Adding…' : 'Add Testcase'}
                       </button>
                     </div>
                   </div>
 
                   {testcases.length === 0 ? (
-                    <div className="coding-muted">No testcases yet.</div>
+                    <div className="coding-muted" style={{ marginTop: '20px' }}>No testcases yet.</div>
                   ) : (
-                    <div className={`coding-table ${form.language === 'sql' ? 'is-sql' : ''}`}>
+                    <div className={`coding-table ${form.language === 'sql' ? 'is-sql' : ''}`} style={{ marginTop: '32px' }}>
                       <div className="coding-table-head">
                         <div>ID</div>
                         <div>Visibility</div>

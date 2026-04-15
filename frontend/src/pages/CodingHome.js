@@ -1,6 +1,18 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { 
+    RefreshCw, 
+    Plus, 
+    Clock, 
+    BarChart, 
+    CheckCircle, 
+    Search,
+    ChevronDown,
+    ChevronUp,
+    AlertCircle,
+    Play
+} from 'lucide-react';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/Coding.css';
@@ -38,17 +50,13 @@ export default function CodingHome() {
             const resp = await axios.get(`${API_BASE_URL}/coding/questions/`, { params });
             let results = resp.data?.results || [];
 
-            // Fallback: If we filtered by org and got nothing, try fetching all public/allowed questions
-            // This fixes issues where the user's stored org name might be stale or slightly mismatched
             if (results.length === 0 && orgName) {
                 try {
                     const fallbackResp = await axios.get(`${API_BASE_URL}/coding/questions/`);
                     if ((fallbackResp.data?.results || []).length > 0) {
                         results = fallbackResp.data?.results || [];
                     }
-                } catch (ignore) {
-                    // If fallback fails, just stick with the empty results from the first call
-                }
+                } catch (ignore) {}
             }
 
             setItems(results);
@@ -84,26 +92,25 @@ export default function CodingHome() {
 
     const filteredItems = useMemo(() => {
         return items.filter((q) => {
-            // Language filter: if any of the question's languages match selected filters
-            // Or if the primary language matches
             if (langFilters.length > 0) {
                 const qLangs = q.languages || [q.language];
                 if (!qLangs.some(l => langFilters.includes(l))) return false;
             }
-            // Difficulty filter
             if (diffFilter && q.difficulty !== diffFilter) return false;
             return true;
         });
     }, [items, langFilters, diffFilter]);
 
-    const selectedItems = useMemo(() => filteredItems.filter((q) => selectedIds.includes(q.id)), [filteredItems, selectedIds]);
+    const selectedItems = useMemo(() => items.filter((q) => selectedIds.includes(q.id)), [items, selectedIds]);
 
     const formatTime = (ms) => {
         const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
-        return [hours, minutes, seconds].map((v) => String(v).padStart(2, '0')).join(':');
+        
+        if (hours > 0) return `${hours}h ${minutes}m`;
+        return `${minutes}:${String(seconds).padStart(2, '0')}`;
     };
 
     return (
@@ -112,32 +119,40 @@ export default function CodingHome() {
             <div className="page-container">
                 <div className="coding-header-row">
                     <div>
-                        <h2 className="page-title">Coding</h2>
+                        <h2 className="page-title">Coding Library</h2>
+                        <div className="coding-muted">Manage and curate coding questions for your assessments.</div>
                     </div>
                     <div className="coding-header-actions">
-                        <button type="button" className="btn btn-secondary" onClick={load} disabled={loading}>
+                        <button type="button" className="btn btn-secondary" onClick={load} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
                             Refresh
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={() => navigate('/coding/questions/new')}>
-                            + New Question
+                        <button type="button" className="btn btn-primary" onClick={() => navigate('/coding/questions/new')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Plus size={18} />
+                            New Question
                         </button>
                     </div>
                 </div>
 
-                <div className="coding-card" style={{ marginBottom: '16px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="coding-card">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
                         <div>
-                            <div className="coding-section-title" style={{ marginBottom: '4px' }}>Selection</div>
+                            <div className="coding-section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <CheckCircle size={20} color="var(--blue-accent)" />
+                                Assessment Selection
+                            </div>
                             <div className="coding-muted">
-                                Choose one or more coding questions, then review and create an assessment.
+                                Select questions to bundle into a new technical assessment.
                             </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <div className="coding-pill coding-pill-primary">{selectedItems.length} selected</div>
+                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                            <div className="coding-pill coding-pill-primary">
+                                {selectedIds.length} questions selected
+                            </div>
                             <button
                                 type="button"
                                 className="btn btn-primary"
-                                disabled={selectedItems.length === 0}
+                                disabled={selectedIds.length === 0}
                                 onClick={() => {
                                     const inactiveQuestions = selectedItems.filter((q) => q.is_active === false);
                                     if (inactiveQuestions.length > 0) {
@@ -146,63 +161,65 @@ export default function CodingHome() {
                                     }
                                     navigate('/coding/review', { state: { codingQuestions: selectedItems } });
                                 }}
+                                style={{ padding: '10px 24px', borderRadius: '12px' }}
                             >
-                                Review Selected
+                                Review & Create
                             </button>
                         </div>
                     </div>
                 </div>
 
-                {items.length > 0 && (
-                <div className="coding-card" style={{ marginBottom: '16px' }}>
-                    <div className="coding-form-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-                        <div className="coding-field">
-                            <div className="coding-label">Filter by Languages</div>
-                            <div className="coding-multiselect" style={{ width: '100%' }} ref={langDropdownRef}>
+                <div className="coding-card" style={{ padding: '16px 24px' }}>
+                    <div className="coding-form-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+                        <div className="coding-field coding-field-short">
+                            <div className="coding-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <Search size={16} /> Filter by Languages
+                            </div>
+                            <div className="coding-multiselect" ref={langDropdownRef}>
                                 <button
                                     type="button"
-                                    className="btn btn-secondary coding-multiselect-trigger"
-                                    style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                                    className="coding-multiselect-trigger"
                                     onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                                 >
                                     <span>
-                                        {langFilters.length === 0
-                                            ? 'All Languages'
-                                            : `${langFilters.length} Selected`}
+                                        {langFilters.length === 0 ? 'All Languages' : `${langFilters.length} Selected`}
                                     </span>
-                                    <span>{langDropdownOpen ? '▴' : '▾'}</span>
+                                    {langDropdownOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                                 </button>
                                 {langDropdownOpen && (
-                                    <div className="coding-multiselect-menu" style={{ width: '100%', maxHeight: '300px', overflowY: 'auto' }}>
-                                        {Array.from(new Set(items.flatMap(q => q.languages || [q.language]))).sort().map(lang => (
-                                            <label key={lang} className="coding-checkbox-pill" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={langFilters.includes(lang)}
-                                                    onChange={() => {
-                                                        setLangFilters(prev =>
-                                                            prev.includes(lang) ? prev.filter(l => l !== lang) : [...prev, lang]
-                                                        );
-                                                    }}
-                                                />
-                                                <span style={{ fontSize: '14px' }}>{lang}</span>
-                                            </label>
-                                        ))}
-                                        {items.length > 0 && (
-                                            <div style={{ borderTop: '1px solid #eee', marginTop: '12px', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
-                                                <button className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '14px', flex: 1 }} onClick={() => setLangFilters([])}>Clear</button>
-                                                <button className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '14px', flex: 1 }} onClick={() => setLangDropdownOpen(false)}>Done</button>
-                                            </div>
-                                        )}
+                                    <div className="coding-multiselect-menu">
+                                        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                                            {Array.from(new Set(items.flatMap(q => q.languages || [q.language]))).sort().map(lang => (
+                                                <label key={lang} className="coding-checkbox-pill">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={langFilters.includes(lang)}
+                                                        onChange={() => {
+                                                            setLangFilters(prev =>
+                                                                prev.includes(lang) ? prev.filter(l => l !== lang) : [...prev, lang]
+                                                            );
+                                                        }}
+                                                    />
+                                                    <span style={{ fontSize: '14px' }}>{lang}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                        <div style={{ borderTop: '1px solid #f1f5f9', marginTop: '12px', paddingTop: '12px', display: 'flex', gap: '8px' }}>
+                                            <button className="btn btn-secondary" style={{ flex: 1, height: '36px', fontSize: '13px' }} onClick={() => setLangFilters([])}>Clear</button>
+                                            <button className="btn btn-primary" style={{ flex: 1, height: '36px', fontSize: '13px' }} onClick={() => setLangDropdownOpen(false)}>Done</button>
+                                        </div>
                                     </div>
                                 )}
                             </div>
                         </div>
 
-                        <div className="coding-field">
-                            <div className="coding-label">Filter by Difficulty</div>
+                        <div className="coding-field coding-field-short">
+                            <div className="coding-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <BarChart size={16} /> Filter by Difficulty
+                            </div>
                             <select
                                 className="coding-input"
+                                style={{ height: '48px' }}
                                 value={diffFilter}
                                 onChange={(e) => setDiffFilter(e.target.value)}
                             >
@@ -214,51 +231,66 @@ export default function CodingHome() {
                         </div>
                     </div>
                 </div>
-                )}
 
                 {loading ? (
-                    <div className="coding-card">Loading…</div>
+                    <div className="coding-card" style={{ textAlign: 'center', padding: '60px' }}>
+                        <RefreshCw size={40} className="animate-spin" style={{ color: 'var(--blue-accent)', marginBottom: '16px' }} />
+                        <div className="coding-muted">Loading questions...</div>
+                    </div>
                 ) : error ? (
-                    <div className="coding-card coding-error">{error}</div>
+                    <div className="coding-card coding-error" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <AlertCircle size={24} />
+                        {error}
+                    </div>
                 ) : filteredItems.length === 0 ? (
-                    <div className="coding-card">No coding questions match your filters.</div>
+                    <div className="coding-card" style={{ textAlign: 'center', padding: '60px' }}>
+                        <div className="coding-muted">No coding questions match your current filters.</div>
+                        <button className="btn btn-secondary" style={{ marginTop: '16px' }} onClick={() => { setLangFilters([]); setDiffFilter(''); }}>
+                            Clear All Filters
+                        </button>
+                    </div>
                 ) : (
                     <div className="coding-list">
                         {filteredItems.map((q) => (
                             <div key={q.id} className="coding-item">
-                                <div className="coding-item-main" style={{ display: 'flex', gap: '12px' }}>
+                                <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', flex: 1 }}>
                                     <input
                                         type="checkbox"
                                         checked={selectedIds.includes(q.id)}
                                         onChange={() => toggleSelect(q.id)}
-                                        style={{ marginTop: '6px' }}
+                                        style={{ width: '20px', height: '20px', marginTop: '4px', cursor: 'pointer', accentColor: 'var(--blue-accent)' }}
                                     />
                                     <div>
                                         <div className="coding-item-title">
-                                            {q.title}{' '}
+                                            {q.title}
                                             <span className={`coding-pill ${q.difficulty === 'easy' ? 'coding-pill-success' :
                                                 q.difficulty === 'hard' ? 'coding-pill-danger' :
                                                     'coding-pill-muted'
-                                                }`} style={{
-                                                    textTransform: 'capitalize',
-                                                    backgroundColor: q.difficulty === 'easy' ? '#dcfce7' : q.difficulty === 'hard' ? '#fee2e2' : '#f3f4f6',
-                                                    color: q.difficulty === 'easy' ? '#166534' : q.difficulty === 'hard' ? '#991b1b' : '#374151',
-                                                    borderColor: q.difficulty === 'easy' ? '#bbf7d0' : q.difficulty === 'hard' ? '#fecaca' : '#e5e7eb'
-                                                }}>
+                                                }`}>
                                                 {q.difficulty}
                                             </span>
                                             {q.time_limit_ms != null && (
-                                                <span className="coding-pill coding-pill-muted">⏱ {formatTime(q.time_limit_ms)}</span>
+                                                <span className="coding-pill coding-pill-muted">
+                                                    <Clock size={12} /> {formatTime(q.time_limit_ms)}
+                                                </span>
                                             )}
                                         </div>
-                                        <div className="coding-item-desc">{q.description || '—'}</div>
+                                        <div className="coding-item-desc">{q.description || 'No description provided for this question.'}</div>
+                                        <div style={{ marginTop: '12px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                            {(q.languages || [q.language]).map(lang => (
+                                                <span key={lang} style={{ fontSize: '11px', background: '#f8fafc', color: '#64748b', padding: '2px 8px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                                                    {lang}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="coding-item-actions">
-                                    <Link className="btn btn-secondary" to={`/coding/questions/${q.id}/edit`}>
+                                    <Link className="btn btn-secondary" to={`/coding/questions/${q.id}/edit`} style={{ padding: '8px 16px', borderRadius: '8px' }}>
                                         Edit
                                     </Link>
-                                    <Link className="btn btn-primary" to={`/coding/questions/${q.id}/attempt`}>
+                                    <Link className="btn btn-primary" to={`/coding/questions/${q.id}/attempt`} style={{ padding: '8px 16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <Play size={14} fill="currentColor" />
                                         Open
                                     </Link>
                                 </div>
@@ -269,22 +301,29 @@ export default function CodingHome() {
             </div>
 
             {inactiveWarning && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="coding-card" style={{ maxWidth: '500px', width: '90%', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
-                        <div className="coding-section-title" style={{ color: '#dc2626', marginBottom: '8px' }}>Warning: Inactive Questions Detected</div>
-                        <div className="coding-muted" style={{ marginBottom: '16px' }}>
-                            The following selected questions are inactive. You cannot review inactive questions.
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(10, 25, 47, 0.6)', backdropFilter: 'blur(4px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+                    <div className="coding-card" style={{ maxWidth: '500px', width: '100%', maxHeight: '80vh', display: 'flex', flexDirection: 'column', padding: '32px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', color: '#dc2626' }}>
+                            <AlertCircle size={28} />
+                            <div className="coding-section-title" style={{ margin: 0, color: '#dc2626' }}>Inactive Questions</div>
                         </div>
-                        <ul style={{ marginBottom: '24px', paddingLeft: '20px', color: '#374151', overflowY: 'auto', flex: 1 }}>
-                            {inactiveWarning.map(q => <li key={q.id} style={{ marginBottom: '4px' }}>{q.title}</li>)}
-                        </ul>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: 'auto' }}>
+                        <div className="coding-muted" style={{ marginBottom: '20px' }}>
+                            You have selected some questions that are currently inactive. These cannot be used in a live assessment.
+                        </div>
+                        <div style={{ background: '#fef2f2', border: '1px solid #fee2e2', borderRadius: '12px', padding: '16px', marginBottom: '24px', overflowY: 'auto', flex: 1 }}>
+                            {inactiveWarning.map(q => (
+                                <div key={q.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#991b1b', fontSize: '14px', fontWeight: 500 }}>
+                                    • {q.title}
+                                </div>
+                            ))}
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                             <button className="btn btn-secondary" onClick={() => setInactiveWarning(null)}>Cancel</button>
-                            <button className="btn btn-primary" onClick={() => {
+                            <button className="btn btn-primary" style={{ background: '#dc2626', borderColor: '#dc2626' }} onClick={() => {
                                 const activeItems = selectedItems.filter(q => q.is_active !== false);
                                 setInactiveWarning(null);
                                 navigate('/coding/review', { state: { codingQuestions: activeItems } });
-                            }}>Proceed Without Them</button>
+                            }}>Proceed (Active Only)</button>
                         </div>
                     </div>
                 </div>

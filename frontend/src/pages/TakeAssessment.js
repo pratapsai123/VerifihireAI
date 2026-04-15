@@ -984,35 +984,6 @@ export default function TakeAssessment() {
     if (token && candidateDetailsCompleted && !precheckLoading && !alreadySubmitted) load();
   }, [token, navigate, candidateDetailsCompleted, precheckLoading, alreadySubmitted]);
 
-  // Fullscreen state listener & violation logging
-  useEffect(() => {
-    const update = () => {
-      const isFs = Boolean(
-        document.fullscreenElement || 
-        document.webkitFullscreenElement || 
-        document.mozFullScreenElement || 
-        document.msFullscreenElement
-      );
-      setIsFullscreen(isFs);
-      
-      // Log violation if they exit mid-exam
-      if (!isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
-        showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
-      }
-    };
-    update();
-    document.addEventListener('fullscreenchange', update);
-    document.addEventListener('webkitfullscreenchange', update);
-    document.addEventListener('mozfullscreenchange', update);
-    document.addEventListener('MSFullscreenChange', update);
-    return () => {
-      document.removeEventListener('fullscreenchange', update);
-      document.removeEventListener('webkitfullscreenchange', update);
-      document.removeEventListener('mozfullscreenchange', update);
-      document.removeEventListener('MSFullscreenChange', update);
-    };
-  }, [candidateDetailsCompleted, submitted, assessmentStage, showAiEvent]);
-
   // Integrity Tracking: Tab Switches / Leaving Window & Camera
   const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
     setAiToast({ active: true, text, urgent });
@@ -1131,6 +1102,115 @@ export default function TakeAssessment() {
     }
   }, []);
 
+  const startScreenShare = useCallback(async () => {
+    try {
+      setFsError('');
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { displaySurface: 'monitor' },
+        audio: false
+      });
+
+      const track = stream.getVideoTracks()[0];
+      const settings = track.getSettings();
+
+      // Enforce "Entire Screen" (monitor)
+      if (settings.displaySurface !== 'monitor') {
+        track.stop();
+        setFsError('Please share your "Entire Screen" to proceed. Tab or Individual Window sharing is not allowed for security.');
+        return false;
+      }
+
+      screenStreamRef.current = stream;
+
+      // If user stops sharing manually
+      track.onended = () => {
+        showAiEvent('SCREEN SHARING STOPPED', true, 'window_switch');
+        // Do not force exit fullscreen immediately to avoid jarring experience,
+        // but set error to force them to click "Resume" which retriggers requestFullscreen
+        setFsError('Screen sharing stopped. You must restart screen sharing to continue.');
+      };
+
+      return true;
+    } catch (err) {
+      console.error('Screen share error:', err);
+      setFsError('Screen sharing permission (Entire Screen) is mandatory to take this assessment.');
+      return false;
+    }
+  }, [showAiEvent]);
+
+  const requestFullscreen = async () => {
+    const elem = document.documentElement;
+    try {
+      setFsError('');
+
+      // 1. Fullscreen request (MUST be first for gesture sensitivity)
+      if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        await elem.webkitRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        await elem.mozRequestFullScreen();
+      } else if (elem.msRequestFullscreen) {
+        await elem.msRequestFullscreen();
+      }
+
+      // Verify success
+      const isFsNow = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      if (!isFsNow) {
+        throw new Error("Fullscreen request denied by browser.");
+      }
+
+      // 2. Mandatory Screen Share
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // Exit fullscreen if they don't agree to screen share
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
+          return;
+        }
+      }
+
+      // 3. Camera (already started mostly, but ensure success)
+      await startCamera();
+
+    } catch (err) {
+      console.error('Fullscreen error:', err);
+      setFsError('Fullscreen mode is required. Please ensure browser permissions are allowed and try again.');
+    }
+  };
+
+  // Fullscreen state listener & violation logging
+  useEffect(() => {
+    const update = () => {
+      const isFs = Boolean(
+        document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement || 
+        document.msFullscreenElement
+      );
+      setIsFullscreen(isFs);
+      
+      // Log violation if they exit mid-exam
+      if (!isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
+        showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
+      }
+    };
+    update();
+    document.addEventListener('fullscreenchange', update);
+    document.addEventListener('webkitfullscreenchange', update);
+    document.addEventListener('mozfullscreenchange', update);
+    document.addEventListener('MSFullscreenChange', update);
+    return () => {
+      document.removeEventListener('fullscreenchange', update);
+      document.removeEventListener('webkitfullscreenchange', update);
+      document.removeEventListener('mozfullscreenchange', update);
+      document.removeEventListener('MSFullscreenChange', update);
+    };
+  }, [candidateDetailsCompleted, submitted, assessmentStage, showAiEvent]);
+
+
+
   useEffect(() => {
     if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
@@ -1212,83 +1292,7 @@ export default function TakeAssessment() {
     return () => clearInterval(bgInterval);
   }, [showAiEvent, submitted, assessmentStage, error, windowError]);
 
-  const startScreenShare = useCallback(async () => {
-    try {
-      setFsError('');
-      const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: { displaySurface: 'monitor' },
-        audio: false
-      });
 
-      const track = stream.getVideoTracks()[0];
-      const settings = track.getSettings();
-
-      // Enforce "Entire Screen" (monitor)
-      if (settings.displaySurface !== 'monitor') {
-        track.stop();
-        setFsError('Please share your "Entire Screen" to proceed. Tab or Individual Window sharing is not allowed for security.');
-        return false;
-      }
-
-      screenStreamRef.current = stream;
-
-      // If user stops sharing manually
-      track.onended = () => {
-        showAiEvent('SCREEN SHARING STOPPED', true, 'window_switch');
-        // Do not force exit fullscreen immediately to avoid jarring experience,
-        // but set error to force them to click "Resume" which retriggers requestFullscreen
-        setFsError('Screen sharing stopped. You must restart screen sharing to continue.');
-      };
-
-      return true;
-    } catch (err) {
-      console.error('Screen share error:', err);
-      setFsError('Screen sharing permission (Entire Screen) is mandatory to take this assessment.');
-      return false;
-    }
-  }, [showAiEvent]);
-
-  const requestFullscreen = async () => {
-    const elem = document.documentElement;
-    try {
-      setFsError('');
-
-      // 1. Fullscreen request (MUST be first for gesture sensitivity)
-      if (elem.requestFullscreen) {
-        await elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) {
-        await elem.webkitRequestFullscreen();
-      } else if (elem.mozRequestFullScreen) {
-        await elem.mozRequestFullScreen();
-      } else if (elem.msRequestFullscreen) {
-        await elem.msRequestFullscreen();
-      }
-
-      // Verify success
-      const isFsNow = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
-      if (!isFsNow) {
-        throw new Error("Fullscreen request denied by browser.");
-      }
-
-      // 2. Mandatory Screen Share
-      if (!screenStreamRef.current || !screenStreamRef.current.active) {
-        const success = await startScreenShare();
-        if (!success) {
-          // Exit fullscreen if they don't agree to screen share
-          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
-          return;
-        }
-      }
-
-      // 3. Camera (already started mostly, but ensure success)
-      await startCamera();
-
-    } catch (err) {
-      console.error('Fullscreen error:', err);
-      setFsError('Fullscreen mode is required. Please ensure browser permissions are allowed and try again.');
-    }
-  };
 
   // Countdown timer (starts when candidate opens the link)
   useEffect(() => {

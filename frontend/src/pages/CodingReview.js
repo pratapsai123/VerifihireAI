@@ -261,7 +261,7 @@ export default function CodingReview() {
           <h3 className="page-title-centered">Review Coding Assessment</h3>
 
           <div className="summary-section">
-            <div className="summary-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+            <div className="summary-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
               <div className="summary-item">
                 <span className="summary-label">Assessment Name</span>
                 <input
@@ -269,7 +269,6 @@ export default function CodingReview() {
                   value={assessmentName}
                   onChange={(e) => setAssessmentName(e.target.value)}
                   placeholder="Enter assessment name"
-                  style={{ width: '100%', marginTop: '6px' }}
                 />
               </div>
               <div className="summary-item">
@@ -279,17 +278,16 @@ export default function CodingReview() {
                   value={allowedLanguages}
                   onChange={(e) => setAllowedLanguages(e.target.value)}
                   placeholder="e.g. python, javascript"
-                  style={{ width: '100%', marginTop: '6px' }}
                 />
               </div>
 
               {/* Added Assessment Fields */}
               <div className="summary-item">
                 <span className="summary-label">Questions Count</span>
-                <span className="summary-value" style={{ fontSize: '1.2rem', marginTop: '6px', display: 'block' }}>{totalQuestions}</span>
+                <span className="summary-value">{totalQuestions}</span>
               </div>
               <div className="summary-item">
-                <span className="summary-label">Min Pass % (Default 60%)</span>
+                <span className="summary-label">Min Pass %</span>
                 <input
                   type="number"
                   className="coding-input"
@@ -307,21 +305,22 @@ export default function CodingReview() {
                   }}
                   min="0"
                   max="100"
-                  style={{ width: '100%', marginTop: '6px' }}
                 />
               </div>
               <div className="summary-item">
                 <span className="summary-label">Total Possible Points</span>
-                <span className="summary-value" style={{ fontSize: '1.2rem', marginTop: '6px', display: 'block', color: '#007bff' }}>{totalPoints}</span>
+                <span className="summary-value" style={{ color: 'var(--blue-accent)' }}>{totalPoints}</span>
               </div>
               <div className="summary-item">
                 <span className="summary-label">Total Assessment Time</span>
-                <span className="summary-value" style={{ fontSize: '1.2rem', marginTop: '6px', display: 'block', color: '#16a34a', fontWeight: 900 }}>
-                  {msToHHMMSS(totalCodingTimeSeconds * 1000)}
-                </span>
-                <span style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px', display: 'block' }}>
-                  (Sum of all question times)
-                </span>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span className="summary-value" style={{ color: '#16a34a' }}>
+                    {msToHHMMSS(totalCodingTimeSeconds * 1000)}
+                  </span>
+                  <span className="coding-muted" style={{ fontSize: '11px' }}>
+                    (Sum of all question times)
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -383,39 +382,41 @@ export default function CodingReview() {
                         </div>
 
                         {/* 2: Difficulty Level */}
-                        <div style={{ marginRight: '3rem' }}>
-                          <label style={{ fontSize: '0.75rem', color: '#6b7280', display: 'block', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.025em', fontWeight: '600' }}>Difficulty Level</label>
+                        <div style={{ flex: 1 }}>
+                          <label style={{ fontSize: '11px', color: '#64748b', display: 'block', marginBottom: '8px', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>Difficulty Level</label>
                           <select
                             className="coding-input"
-                            style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                            style={{ width: '100%', padding: '0 12px' }}
                             value={q.difficulty}
                             onChange={(e) => updateQuestion(idx, 'difficulty', e.target.value)}
                           >
-                            <option value="easy">Easy (1x)</option>
-                            <option value="medium">Medium (2x)</option>
-                            <option value="hard">Hard (3x)</option>
+                            <option value="easy">Easy (1x weight)</option>
+                            <option value="medium">Medium (2x weight)</option>
+                            <option value="hard">Hard (3x weight)</option>
                           </select>
                         </div>
 
                         {/* 3: Original Time */}
-                        <div>
-                          <label style={{ fontSize: '0.75rem', color: '#6b7280', display: 'block', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.025em', fontWeight: '600' }}>Original Time</label>
-                          <div style={{ fontWeight: '500', padding: '6px 0', fontSize: '0.95rem' }}>{msToHHMMSS(q.originalTimeMs)}</div>
+                        <div style={{ padding: '0 12px' }}>
+                          <label style={{ fontSize: '11px', color: '#64748b', display: 'block', marginBottom: '8px', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>Original Time</label>
+                          <div style={{ fontWeight: '700', color: 'var(--navy-primary)', fontSize: '16px', height: '48px', display: 'flex', alignItems: 'center' }}>
+                            {msToHHMMSS(q.originalTimeMs)}
+                          </div>
                         </div>
 
                         {/* 4: Time Allocation */}
-                        <div>
-                          <label style={{ fontSize: '0.75rem', color: '#6b7280', display: 'block', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.025em', fontWeight: '600' }}>Time Allocation</label>
+                        <div style={{ width: '160px' }}>
+                          <label style={{ fontSize: '11px', color: '#64748b', display: 'block', marginBottom: '8px', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>Time Allocation</label>
                           <input
                             className="coding-input"
-                            style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100px', height: '36px', borderColor: q.timeError ? '#dc3545' : undefined }}
+                            style={{ width: '100%', borderColor: q.timeError ? '#ef4444' : undefined }}
                             value={q.timeInput}
                             placeholder="HH:MM:SS"
                             maxLength={8}
                             onChange={(e) => updateQuestion(idx, 'timeInput', e.target.value)}
                           />
                           {q.timeError && (
-                            <div style={{ color: '#dc3545', fontSize: '0.7rem', marginTop: '4px', fontWeight: '500' }}>{q.timeError}</div>
+                            <div style={{ color: '#ef4444', fontSize: '11px', marginTop: '6px', fontWeight: '600' }}>{q.timeError}</div>
                           )}
                         </div>
 
