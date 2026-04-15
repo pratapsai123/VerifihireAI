@@ -1182,3 +1182,92 @@ Traceback (most recent call last):
 Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
 
 RAW: No response received
+
+[2026-04-15 10:32:04.805942+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with databases using Python code",\\n            "To create web applications quickly and easily",\\n            "To handle user authentication and authorization",\\n            "To generate automatic API documentation"\\n         ],\\n         "answer": "To interact with databases using Python code",\\n         "difficulty": "Medium"\\n      }\\n   ]\\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with databases using Python code",\\n            "To create web applications quickly and easily",\\n            "To handle user authentication and authorization",\\n            "To generate automatic API documentation"\\n         ],\\n         "answer": "To interact with databases using Python code",\\n         "difficulty": "Medium"\\n      }\\n   ]\\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:32:50.774794+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is Django used for in Python development?\\",\\n         "options": [\\n            "A web framework for building web applications",\\n            "A database management system for storing data",\\n            "A testing library for unit testing",\\n            "A package manager for installing dependencies"\\n         ],\\n         "answer": "A web framework for building web applications",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary purpose of using an ORM library like SQLAlchemy?",\n         "options": [\n            "To interact with databases using SQL queries",\n            "To build web applications using a high-level interface",\n            "To manage dependencies in a Python project",\n            "To create unit tests for a Python application"\n         ],\n         "answer": "To interact with databases using SQL queries",\n         "difficulty": "Easy"\n      },\n      {\n         "question": \\"What is the main benefit of using a RESTful API design?",\n         "options": [\n            "To improve the performance of a web application",\n            "To simplify the development of a web application",\n            "To enable communication between different systems",\n            "To reduce the complexity of a web application"\n         ],\n         "answer": "To enable communication between different systems",\n         "difficulty": "Easy"\n      }\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is Django used for in Python development?\\",\\n         "options": [\\n            "A web framework for building web applications",\\n            "A database management system for storing data",\\n            "A testing library for unit testing",\\n            "A package manager for installing dependencies"\\n         ],\\n         "answer": "A web framework for building web applications",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary purpose of using an ORM library like SQLAlchemy?",\n         "options": [\n            "To interact with databases using SQL queries",\n            "To build web applications using a high-level interface",\n            "To manage dependencies in a Python project",\n            "To create unit tests for a Python application"\n         ],\n         "answer": "To interact with databases using SQL queries",\n         "difficulty": "Easy"\n      },\n      {\n         "question": \\"What is the main benefit of using a RESTful API design?",\n         "options": [\n            "To improve the performance of a web application",\n            "To simplify the development of a web application",\n            "To enable communication between different systems",\n            "To reduce the complexity of a web application"\n         ],\n         "answer": "To enable communication between different systems",\n         "difficulty": "Easy"\n      }\n   ]\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:34:24.588623+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with the database using Python code",\\n            "To create web applications quickly and easily",\\n            "To manage data in a NoSQL database",\\n            "To handle user authentication and authorization"\\n         ],\\n         "answer": "To interact with the database using Python code",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the main difference between Flask and FastAPI?\\",\\n         "options": [\\n            "Flask is a microframework, while FastAPI is a full-featured framework",\\n            "FastAPI is built on top of Flask",\\n            "Flask is designed for web development, while FastAPI is for microservices",\\n            "FastAPI is faster than Flask"\\n         ],\\n         "answer": "Flask is a microframework, while FastAPI is a full-featured framework",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary benefit of using a RESTful API design?\\",\\n         "options": [\\n            "Improved scalability and flexibility",\\n            "Simplified data exchange between systems",\\n            "Enhanced security through authentication and authorization",\\n            "Faster development and deployment"\\n         ],\\n         "answer": "Improved scalability and flexibility",\\n         "difficulty": "Easy"\\n      }\\n   ]\\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with the database using Python code",\\n            "To create web applications quickly and easily",\\n            "To manage data in a NoSQL database",\\n            "To handle user authentication and authorization"\\n         ],\\n         "answer": "To interact with the database using Python code",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the main difference between Flask and FastAPI?\\",\\n         "options": [\\n            "Flask is a microframework, while FastAPI is a full-featured framework",\\n            "FastAPI is built on top of Flask",\\n            "Flask is designed for web development, while FastAPI is for microservices",\\n            "FastAPI is faster than Flask"\\n         ],\\n         "answer": "Flask is a microframework, while FastAPI is a full-featured framework",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary benefit of using a RESTful API design?\\",\\n         "options": [\\n            "Improved scalability and flexibility",\\n            "Simplified data exchange between systems",\\n            "Enhanced security through authentication and authorization",\\n            "Faster development and deployment"\\n         ],\\n         "answer": "Improved scalability and flexibility",\\n         "difficulty": "Easy"\\n      }\\n   ]\\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:41:25.064759+00:00] PUBLIC ACCESS: Token='a10b83ab-dbca-424f-a372-fb93ef395a6e'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776249685035']}>
+Host: localhost:8001
+
+[2026-04-15 10:41:25.314802+00:00] PUBLIC ACCESS: Token='a10b83ab-dbca-424f-a372-fb93ef395a6e'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776249685068']}>
+Host: localhost:8001

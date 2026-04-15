@@ -343,9 +343,9 @@ class GenerateAssessmentView(APIView):
             coding_count = input_coding_count
             coding_tasks = ['Medium'] * coding_count
         else:
-            # Absolute default fallback
-            coding_count = 2
-            coding_tasks = ['Medium', 'Hard']
+            # Respect user's coding_count=0 - don't force a default
+            coding_count = 0
+            coding_tasks = []
 
         # Log for debugging
         logger.info(f"Generated Assessment Config: MCQs={mcq_count} ({mcq_easy}/{mcq_medium}/{mcq_hard}), Coding={coding_count} ({coding_tasks})")
@@ -427,16 +427,20 @@ class GenerateAssessmentView(APIView):
                     generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
             # 2. GENERATE CODING POOL (Skeleton-Based: 100% Accuracy)
-            logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
-            generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
-                groq_client=local_groq_client,
-                job_description=job_description,
-                required_skills=required_skills,
-                difficulties=pool_coding_tasks,
-                total_required=pool_coding_total,
-                model=self.PRIMARY_MODEL,
-                cancel_token=cancel_token
-            )
+            if pool_coding_total > 0:
+                logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
+                generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                    groq_client=local_groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    difficulties=pool_coding_tasks,
+                    total_required=pool_coding_total,
+                    model=self.PRIMARY_MODEL,
+                    cancel_token=cancel_token
+                )
+            else:
+                logger.info(f"Step 2: Skipping coding pool generation (coding_count=0)")
+                generated_data['coding_challenges'] = []
 
             # --- RESTORED ORIGINAL MCQ PASS ---
             # Now we call the refiner on the MCQ pool that was generated in Step 1
@@ -1326,6 +1330,11 @@ class InviteAssessmentCandidatesView(APIView):
         invite_type = request.data.get('type')  # 'individual' or 'bulk'
         invited_candidates = []
         
+        # Check if max candidates reached
+        from .models import InvitedCandidate
+        already_invited = InvitedCandidate.objects.filter(assessment=assessment).count()
+        max_allowed = assessment.max_candidates_allowed
+        
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
@@ -1337,10 +1346,21 @@ class InviteAssessmentCandidatesView(APIView):
             if not name or not email:
                 return Response({"error": "Name and Email are required"}, status=status.HTTP_400_BAD_REQUEST)
             
+            # Check if max reached
+            if already_invited >= max_allowed:
+                return Response({"error": f"Maximum {max_allowed} candidates allowed. Already invited {already_invited}."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Check if already invited
+            if InvitedCandidate.objects.filter(assessment=assessment, email=email).exists():
+                return Response({"error": f"Candidate {email} already invited."}, status=status.HTTP_400_BAD_REQUEST)
+            
             # Append name and email
             encoded_name = urllib.parse.quote(name)
             encoded_email = urllib.parse.quote(email)
             link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+            
+            # Save invited candidate
+            InvitedCandidate.objects.create(assessment=assessment, name=name, email=email)
             
             # Increment invited count
             assessment.invited_count += 1
@@ -1415,16 +1435,39 @@ class InviteAssessmentCandidatesView(APIView):
                 if 'name' not in df.columns or 'email' not in df.columns:
                     return Response({"error": "File must have 'name' and 'email' columns"}, status=status.HTTP_400_BAD_REQUEST)
 
-                assessment.invited_count += len(df)
-                assessment.save(update_fields=['invited_count'])
+                # Check capacity
+                max_allowed = assessment.max_candidates_allowed
+                available_slots = max_allowed - already_invited
+                num_to_invite = min(len(df), available_slots)
+                
+                if num_to_invite == 0:
+                    return Response(
+                        {"error": f"No available slots. Max {max_allowed} allowed, {already_invited} already invited."},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                
+                invitation_count = 0
+                skipped_count = 0
 
-                for _, row in df.iterrows():
+                for idx, row in df.iterrows():
+                    if invitation_count >= num_to_invite:
+                        break
+                        
                     name = str(row['name']).strip()
                     email = str(row['email']).strip()
+                    
+                    # Check if already invited
+                    if InvitedCandidate.objects.filter(assessment=assessment, email=email).exists():
+                        skipped_count += 1
+                        continue
                     
                     encoded_name = urllib.parse.quote(name)
                     encoded_email = urllib.parse.quote(email)
                     link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+                    
+                    # Save invited candidate
+                    InvitedCandidate.objects.create(assessment=assessment, name=name, email=email)
+                    invitation_count += 1
                     
                     invited_candidates.append({"name": name, "email": email, "link": link})
                     
@@ -1471,11 +1514,68 @@ class InviteAssessmentCandidatesView(APIView):
                         logger.error(f"Bulk email error for {email}: {mail_err}")
             except Exception as e:
                 return Response({"error": f"Error parsing file: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Update assessment invited count to match invited candidates count
+        assessment.invited_count = InvitedCandidate.objects.filter(assessment=assessment).count()
+        assessment.save(update_fields=['invited_count'])
+        
+        # Calculate remaining spots
+        remaining_spots = max(0, assessment.max_candidates_allowed - assessment.invited_count)
 
         return Response({
             "message": f"Successfully invited {len(invited_candidates)} candidates",
-            "count": len(invited_candidates)
+            "count": len(invited_candidates),
+            "total_invited": assessment.invited_count,
+            "max_allowed": assessment.max_candidates_allowed,
+            "remaining_spots": remaining_spots
         }, status=status.HTTP_200_OK)
+
+class GetInvitedCandidatesView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, assessment_id):
+        """Get list of invited candidates for an assessment"""
+        try:
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.get(pk=assessment_id, company=company)
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        from .models import InvitedCandidate
+        invited = InvitedCandidate.objects.filter(assessment=assessment).values('name', 'email', 'invited_at', 'status')
+        
+        # Calculate candidate points (10 MCQs + 1 coding)
+        mcq_count = assessment.mcq_count if hasattr(assessment, 'mcq_count') else 20
+        coding_count = assessment.coding_count if hasattr(assessment, 'coding_count') else 2
+        
+        candidate_mcq_count = max(1, mcq_count // 2)  # Half of pool
+        candidate_coding_count = max(1, coding_count // 2)  # Half of pool
+        
+        # Scoring: 20 pts per MCQ + weighted coding
+        mcq_points = candidate_mcq_count * 20
+        coding_points = candidate_coding_count * 200  # Assuming medium difficulty
+        total_candidate_points = mcq_points + coding_points
+        
+        remaining_spots = max(0, assessment.max_candidates_allowed - invited.count())
+        
+        return Response({
+            "invited_candidates": list(invited),
+            "total_invited": invited.count(),
+            "max_allowed": assessment.max_candidates_allowed,
+            "remaining_spots": remaining_spots,
+            "can_invite_more": remaining_spots > 0,
+            "candidate_points": {
+                "mcq_count": candidate_mcq_count,
+                "mcq_points": mcq_points,
+                "coding_count": candidate_coding_count,
+                "coding_points": coding_points,
+                "total_points": total_candidate_points
+            }
+        }, status=status.HTTP_200_OK)
+
 import requests
 
 from rest_framework.permissions import AllowAny

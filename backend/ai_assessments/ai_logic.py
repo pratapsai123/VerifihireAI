@@ -417,6 +417,18 @@ def _call_groq_with_backoff(groq_client=None, prompt=None, system_msg=None, is_j
                 current_model = original_model # Try the powerful model again after a long sleep
                 continue
             raise e
+        except groq.BadRequestError as e:
+            # Handle JSON validation errors - retry with simpler prompt
+            error_msg = str(e)
+            if 'json_validate_failed' in error_msg or 'Failed to generate JSON' in error_msg:
+                logger.warning(f"Groq JSON Validation Failed: Retrying... (Attempt {attempt + 1}/{max_retries})")
+                if attempt < max_retries - 1:
+                    time.sleep(1)
+                    attempt += 1
+                    continue
+            # Other bad requests - usually unrecoverable
+            logger.error(f"Groq Bad Request (400): {error_msg}")
+            raise e
         except groq.APIStatusError as e:
             if e.status_code == 429:
                  if keys_count > 1 and rotations_this_attempt < keys_count:
@@ -1130,12 +1142,13 @@ def _generate_mcq_pool_ai_only(
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate {count} technical MCQs ({difficulty}).
             JSON FORMAT: {{ "mcqs": [ {{ "question": "What is Django?", "options": ["A web framework for Python", "A database management system", "A testing library", "A package manager"], "answer": "A web framework for Python", "difficulty": "{difficulty}" }} ] }}
-            CRITICAL RULES:
-            - ESCAPE QUOTES: Use `\\"` for all double-quotes inside JSON values.
+            RULES:
+            - Generate valid JSON only (do NOT use escape sequences)
             - UNIQUE: Questions must be specific to JD facets. {avoid_txt}
-            - OPTIONS MUST BE ACTUAL ANSWERS: Each option MUST be SHORT (under 15 words) and meaningful, NOT just letters like "A", "B", "C", "D".
-            - ANSWER FIELD: The answer MUST be the complete text from one of the options, NOT just a letter.
-            - NO PLACEHOLDERS: Do NOT generate options like ["A", "B", "C", "D"] or ["Option A", "Option B", "Option C", "Option D"].
+            - OPTIONS MUST BE ACTUAL ANSWERS: Each option MUST be SHORT (under 15 words) and meaningful, NOT just letters like "A", "B", "C", "D"
+            - ANSWER FIELD: The answer MUST be the exact text from one of the options, NOT just a letter
+            - NO PLACEHOLDERS: Do NOT generate options like ["A", "B", "C", "D"]
+            - Each question gets exactly 4 options and 1 correct answer
             """
 
             batch_mcqs = None
@@ -1220,9 +1233,11 @@ def _generate_mcq_pool_ai_only(
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate EXACTLY 1 UNIQUE technical MCQ ({difficulty}).
             JSON: {{ "mcqs": [ {{ "question": "What is REST?", "options": ["Representational State Transfer architecture", "A testing framework", "A database query language", "A version control system"], "answer": "Representational State Transfer architecture", "difficulty": "{difficulty}" }} ] }}
-            CRITICAL: OPTIONS MUST be SHORT (under 15 words), actual answer text (NOT placeholder letters like "A", "B", "C", "D").
-            The answer field MUST be the complete text from one of the options.
-            Exclude previous: {[q.get('question', '')[:30] for q in generated][-10:]}
+            RULES:
+            - Generate valid JSON only (no escape sequences needed)
+            - OPTIONS MUST be SHORT (under 15 words), actual answer text (NOT placeholder letters)
+            - The answer field MUST be the exact text from one of the options
+            - Exclude topics: {[q.get('question', '')[:30] for q in generated][-10:]}
             """
             try:
                 resp = _call_groq_with_backoff(
