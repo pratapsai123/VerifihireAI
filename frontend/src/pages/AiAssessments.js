@@ -20,7 +20,11 @@ const AiAssessments = () => {
     const [inviteFile, setInviteFile] = useState(null);
     const [inviting, setInviting] = useState(false);
     
-    
+    // Applicants Modal States
+    const [showApplicantsModal, setShowApplicantsModal] = useState(false);
+    const [applicantsLoading, setApplicantsLoading] = useState(false);
+    const [applicantsData, setApplicantsData] = useState([]);
+    const [selectedPoolName, setSelectedPoolName] = useState('');
 
 
 
@@ -68,7 +72,12 @@ const AiAssessments = () => {
             return { type: 'ONGOING', label, isExpired: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin', isOngoing: true };
         }
 
-        // 4. Default State (Fresh link)
+        // 4. Capacity-based (Max candidates reached)
+        if (invited >= (assessment.max_candidates_allowed || 1)) {
+            return { type: 'COMPLETED', label: 'Full', isExpired: true, color: '#05CD99', bg: '#E6FBF5', icon: 'fa-user-check' };
+        }
+
+        // 5. Default State (Fresh link)
         return { type: 'SCHEDULED', label: 'Share', isExpired: false, color: 'white', bg: '#10b981', icon: 'fa-link' };
     };
 
@@ -125,6 +134,20 @@ const AiAssessments = () => {
             alert(`❌ ${errMsg}`);
         } finally {
             setInviting(false);
+        }
+    };
+
+    const fetchInvitedCandidates = async (assessment) => {
+        setApplicantsLoading(true);
+        setSelectedPoolName(assessment.batch_name || assessment.required_skills);
+        setShowApplicantsModal(true);
+        try {
+            const response = await axios.get(`${API_BASE_URL}/ai/${assessment.id}/invited-candidates/`);
+            setApplicantsData(response.data.invited_candidates || []);
+        } catch (err) {
+            console.error('Error fetching invited candidates:', err);
+        } finally {
+            setApplicantsLoading(false);
         }
     };
     
@@ -216,9 +239,11 @@ const AiAssessments = () => {
                                                         fontWeight: '700', fontSize: '0.7rem', marginRight: '0.8rem'
                                                     }}>AI</div>
                                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontWeight: '700' }}>{assessment.job_description ? (assessment.job_description.substring(0, 30) + '...') : 'Untitled Assessment'}</span>
+                                                        <span style={{ fontWeight: '700' }}>
+                                                            {assessment.batch_name || assessment.required_skills}
+                                                        </span>
                                                         <span style={{ fontSize: '0.65rem', color: '#707EAE' }}>
-                                                            {assessment.duration_minutes} mins | {assessment.required_skills}
+                                                            {assessment.duration_minutes} mins | {assessment.job_description ? (assessment.job_description.substring(0, 30) + '...') : 'No Description'}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -246,8 +271,11 @@ const AiAssessments = () => {
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', color: '#1B254B', fontSize: '0.9rem' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                    <span style={{ fontWeight: '700' }}>{assessment.invited_count || 0}</span>
+                                                <div 
+                                                    style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+                                                    onClick={() => fetchInvitedCandidates(assessment)}
+                                                >
+                                                    <span style={{ fontWeight: '700', color: '#4318FF', textDecoration: 'underline' }}>{assessment.invited_count || 0}</span>
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', fontWeight: '500', color: '#1B254B' }}>
@@ -441,6 +469,75 @@ const AiAssessments = () => {
                                 {inviting ? 'Sending Invites...' : 'Send Invitations'}
                             </button>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Applicants List Modal */}
+            {showApplicantsModal && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                    background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)'
+                }}>
+                    <div style={{
+                        background: 'white', padding: '2rem', borderRadius: '24px',
+                        width: '600px', maxWidth: '90%', maxHeight: '80vh', overflow: 'hidden',
+                        display: 'flex', flexDirection: 'column',
+                        position: 'relative', animation: 'slideUp 0.3s ease-out'
+                    }}>
+                        <button
+                            onClick={() => setShowApplicantsModal(false)}
+                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#A3AED0' }}
+                        ><i className="fa-solid fa-xmark"></i></button>
+
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1B254B', marginBottom: '0.2rem' }}>Invited Candidates</h2>
+                        <p style={{ color: '#707EAE', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{selectedPoolName}</p>
+
+                        <div style={{ flex: 1, overflowY: 'auto', marginTop: '1rem' }}>
+                            {applicantsLoading ? (
+                                <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>Loading applicants...</div>
+                            ) : applicantsData.length === 0 ? (
+                                <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>No candidates invited yet.</div>
+                            ) : (
+                                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                    <thead>
+                                        <tr style={{ textAlign: 'left', borderBottom: '2px solid #F4F7FE' }}>
+                                            <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Name</th>
+                                            <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Email</th>
+                                            <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {applicantsData.map((cand, idx) => (
+                                            <tr key={idx} style={{ borderBottom: '1px solid #F4F7FE' }}>
+                                                <td style={{ padding: '0.8rem', fontSize: '0.9rem', color: '#1B254B', fontWeight: '600' }}>{cand.name}</td>
+                                                <td style={{ padding: '0.8rem', fontSize: '0.85rem', color: '#707EAE' }}>{cand.email}</td>
+                                                <td style={{ padding: '0.8rem' }}>
+                                                    <span style={{ 
+                                                        padding: '0.3rem 0.6rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '700',
+                                                        background: cand.status === 'completed' ? '#E6FBF5' : '#F4F7FE',
+                                                        color: cand.status === 'completed' ? '#05CD99' : '#A3AED0'
+                                                    }}>
+                                                        {cand.status.charAt(0).toUpperCase() + cand.status.slice(1)}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+
+                        <button
+                            onClick={() => setShowApplicantsModal(false)}
+                            style={{
+                                width: '100%', marginTop: '2.5rem', padding: '0.8rem', background: '#F4F7FE', color: '#4318FF',
+                                border: 'none', borderRadius: '12px', fontWeight: '700', cursor: 'pointer'
+                            }}
+                        >
+                            Close
+                        </button>
                     </div>
                 </div>
             )}

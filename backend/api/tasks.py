@@ -6,8 +6,36 @@ logger = logging.getLogger(__name__)
 
 @shared_task
 def trigger_batch_assessment_task(batch_id):
-    logger.info(f"Executing trigger_batch_assessment_task for batch {batch_id}")
+    from ai_candidates.models import Candidate
+    from ai_candidates.utils import log_automation_event
+
+    logger.info(f"=== trigger_batch_assessment_task started for batch {batch_id} ===")
+
+    # Log a summary of who passed before entering the pipeline
+    passed_qs = Candidate.objects.filter(batch_id=batch_id, status='Resume Passed')
+    total_batch = Candidate.objects.filter(batch_id=batch_id).count()
+    num_passed = passed_qs.count()
+
+    logger.info(
+        f"Batch {batch_id}: {total_batch} total candidates, "
+        f"{num_passed} passed resume screening, "
+        f"{total_batch - num_passed} did not pass."
+    )
+
+    if num_passed == 0:
+        logger.info(f"Batch {batch_id}: No candidates passed. Assessment pool will NOT be generated.")
+        return
+
+    logger.info(f"Batch {batch_id}: Proceeding to generate shared assessment pool for {num_passed} candidate(s).")
+    for c in passed_qs:
+        log_automation_event(
+            c, 'TASK_SCHEDULED', 'INFO',
+            f"Batch assessment task triggered. {num_passed} candidate(s) passed in this batch. Generating shared pool.",
+            details={'batch_id': batch_id, 'num_passed': num_passed, 'total_in_batch': total_batch}
+        )
+
     process_batch_assessment(batch_id)
+    logger.info(f"=== trigger_batch_assessment_task completed for batch {batch_id} ===")
 
 @shared_task
 def send_assessment_link_task(candidate_id):

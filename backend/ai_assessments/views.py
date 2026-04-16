@@ -740,15 +740,16 @@ class GenerateAssessmentView(APIView):
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,
-                mcq_count=mcq_count,
-                mcq_easy=mcq_easy,
-                mcq_medium=mcq_medium,
-                mcq_hard=mcq_hard,
-                coding_count=coding_count,
+                mcq_count=final_mcqs,
+                mcq_easy=final_easy,
+                mcq_medium=final_medium,
+                mcq_hard=final_hard,
+                coding_count=final_coding,
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
                 num_applicants=num_applicants,
+                max_candidates_allowed=num_applicants,
                 same_questions_for_all=same_questions_for_all,
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
@@ -1058,6 +1059,8 @@ class AssessmentListView(APIView):
                     "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
                     "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                     "status": assessment.status,
+                    "batch_name": assessment.batch_name,
+                    "max_candidates_allowed": assessment.max_candidates_allowed,
                     "share_token": str(assessment.share_token),
                     "candidate_count": count,
                     "completed_count": completed_count,
@@ -1145,8 +1148,10 @@ class AssessmentDetailView(APIView):
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M") if assessment.created_at else None,
                 "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
+                "batch_name": assessment.batch_name,
                 "share_token": str(assessment.share_token),
                 "num_applicants": assessment.num_applicants,
+                "max_candidates_allowed": assessment.max_candidates_allowed,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
                 "submissions": submission_data,
@@ -1540,30 +1545,46 @@ class GetInvitedCandidatesView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             company = user_profile.company if user_profile else None
             
-            assessment = Assessment.objects.get(pk=assessment_id, company=company)
+            assessment = Assessment.objects.filter(pk=assessment_id, company=company).first()
+            if not assessment:
+                assessment = Assessment.objects.filter(pk=assessment_id, user_profile=user_profile).first()
+            
+            if not assessment:
+                raise Assessment.DoesNotExist
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
         
         from .models import InvitedCandidate
-        invited = InvitedCandidate.objects.filter(assessment=assessment).values('name', 'email', 'invited_at', 'status')
+        invited_qs = InvitedCandidate.objects.filter(assessment=assessment).order_by('-invited_at')
         
-        # Calculate candidate points (10 MCQs + 1 coding)
-        mcq_count = assessment.mcq_count if hasattr(assessment, 'mcq_count') else 20
-        coding_count = assessment.coding_count if hasattr(assessment, 'coding_count') else 2
+        invited_list = []
+        for cand in invited_qs:
+            invited_list.append({
+                "name": cand.name,
+                "email": cand.email,
+                "status": cand.status,
+                "invited_at": cand.invited_at.strftime("%Y-%m-%d %H:%M") if cand.invited_at else None
+            })
         
-        candidate_mcq_count = max(1, mcq_count // 2)  # Half of pool
-        candidate_coding_count = max(1, coding_count // 2)  # Half of pool
+        # Calculate candidate points (Division based on num_applicants vs same_questions)
+        divisor = max(1, assessment.num_applicants) if not assessment.same_questions_for_all else 1
         
-        # Scoring: 20 pts per MCQ + weighted coding
+        mcq_pool_size = assessment.mcq_count if hasattr(assessment, 'mcq_count') else 0
+        coding_pool_size = assessment.coding_count if hasattr(assessment, 'coding_count') else 0
+        
+        candidate_mcq_count = mcq_pool_size // divisor
+        candidate_coding_count = coding_pool_size // divisor
+        
+        # Scoring: 20 pts per MCQ + weighted coding (fallback calculation for UI)
         mcq_points = candidate_mcq_count * 20
-        coding_points = candidate_coding_count * 200  # Assuming medium difficulty
+        coding_points = candidate_coding_count * 20
         total_candidate_points = mcq_points + coding_points
         
-        remaining_spots = max(0, assessment.max_candidates_allowed - invited.count())
+        remaining_spots = max(0, assessment.max_candidates_allowed - invited_qs.count())
         
         return Response({
-            "invited_candidates": list(invited),
-            "total_invited": invited.count(),
+            "invited_candidates": invited_list,
+            "total_invited": invited_qs.count(),
             "max_allowed": assessment.max_candidates_allowed,
             "remaining_spots": remaining_spots,
             "can_invite_more": remaining_spots > 0,

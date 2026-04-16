@@ -1271,3 +1271,15 @@ Host: localhost:8001
 [2026-04-15 10:41:25.314802+00:00] PUBLIC ACCESS: Token='a10b83ab-dbca-424f-a372-fb93ef395a6e'
 Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776249685068']}>
 Host: localhost:8001
+
+[2026-04-16 04:35:41.334498+00:00] PUBLIC ACCESS: Token='ad8fcfc8-52a4-4d96-8440-9c543a16be12'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776314140986']}>
+Host: localhost:8001
+
+[2026-04-16 05:04:46.279314+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 710, in post
+    raise Exception(
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+
+RAW: No response received

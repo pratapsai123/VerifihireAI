@@ -334,12 +334,21 @@ const AiAssessmentDetail = () => {
                                         <div style={{ fontSize: '0.8rem', color: '#4318FF', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Per Candidate Assessment</div>
                                         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', marginBottom: '0.8rem' }}>
                                             <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>
-                                                {candidatePointsInfo?.total_points || (mcqs.length / 2) * MCQ_WEIGHT + (coding.length / 2) * 200}
+                                                {(() => {
+                                                    const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
+                                                    return candidatePointsInfo?.total_points || 
+                                                        (Math.floor(mcqs.length / divisor) * 20) + (Math.floor(coding.length / divisor) * 20);
+                                                })()}
                                             </div>
                                             <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
                                         </div>
                                         <div style={{ fontSize: '0.75rem', color: '#707EAE' }}>
-                                            {candidatePointsInfo?.mcq_count || Math.ceil(mcqs.length / 2)} MCQs × 20 pts + {candidatePointsInfo?.coding_count || Math.ceil(coding.length / 2)} Coding Task
+                                            {(() => {
+                                                const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
+                                                const cMcqs = candidatePointsInfo?.mcq_count || Math.floor(mcqs.length / divisor);
+                                                const cCoding = candidatePointsInfo?.coding_count || Math.floor(coding.length / divisor);
+                                                return `${cMcqs} MCQs × 20 pts + ${cCoding} Coding Task`;
+                                            })()}
                                         </div>
                                     </div>
 
