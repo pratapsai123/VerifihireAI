@@ -68,10 +68,10 @@ def send_otp_view(request):
             domain = _email_domain(email)
             if domain:
                 company = Company.objects.filter(domain=domain).first()
-                if company and UserProfile.objects.filter(company=company).count() >= 10:
+                if company and UserProfile.objects.filter(company=company, role=UserProfile.ROLE_COMPANY_ADMIN).count() >= 10:
                     return Response(
                         {
-                            'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],
+                            'businessEmail': ['This organization already has 10 registered admins. Please request an invitation from your Company Admin.'],
                             'organizationName': ['This organization has reached its admin limit.']
                         },
                         status=status.HTTP_400_BAD_REQUEST
@@ -294,12 +294,13 @@ def reset_password_view(request):
             return Response({'error': 'Invalid OTP. Please try again.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Update user password (prefer Django auth user hashing)
-        try:
-            user_profile = UserProfile.objects.get(email=email)
-        except UserProfile.DoesNotExist:
-            user_profile = None
+        user_profile = UserProfile.objects.filter(email=email).first()
 
         if user_profile and user_profile.user:
+            # Security check: Prevent password reuse (check current hashed password and legacy plaintext)
+            if user_profile.user.check_password(new_password) or user_profile.password == new_password or user_profile.old_password == new_password:
+                return Response({'error': 'This password has already been used. Please choose a new password.'}, status=status.HTTP_400_BAD_REQUEST)
+            
             user_profile.user.set_password(new_password)
             user_profile.user.save()
             # Capture current password to old_password before clearing it
@@ -309,6 +310,9 @@ def reset_password_view(request):
             user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
         elif user_profile:
             # Legacy profile update
+            if user_profile.password == new_password or user_profile.old_password == new_password:
+                 return Response({'error': 'This password has already been used. Please choose a new password.'}, status=status.HTTP_400_BAD_REQUEST)
+            
             user_profile.old_password = user_profile.password
             user_profile.password = new_password
             user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
@@ -317,6 +321,11 @@ def reset_password_view(request):
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
             if not auth_user:
                 return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+            # Security check: Prevent password reuse
+            if auth_user.check_password(new_password):
+                return Response({'error': 'This password has already been used. Please choose a new password.'}, status=status.HTTP_400_BAD_REQUEST)
+            
             auth_user.set_password(new_password)
             auth_user.save()
 
@@ -466,10 +475,10 @@ def register_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        if UserProfile.objects.filter(company=company).count() >= 10:
+        if UserProfile.objects.filter(company=company, role=UserProfile.ROLE_COMPANY_ADMIN).count() >= 10:
             return Response(
                 {
-                    'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],
+                    'businessEmail': ['This organization already has 10 registered admins. Please request an invitation from your Company Admin.'],
                     'organizationName': ['This organization has reached its admin limit.']
                 },
                 status=status.HTTP_400_BAD_REQUEST

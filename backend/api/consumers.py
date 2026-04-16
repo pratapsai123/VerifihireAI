@@ -52,6 +52,11 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     'reason': error_reason,
                     'message': messages.get(error_reason, 'Invalid session.')
                 }))
+                
+                if error_reason == 'not_started':
+                    logger.info(f"Keeping WebSocket open for 'not_started' state: session {self.session_id}")
+                    return
+                
                 await self.close(code=4003)
                 return
 

@@ -113,7 +113,7 @@ def process_batch_assessment(batch_id):
                 raise Exception("Could not generate valid pool.")
 
         # ── 2. LOOP AND SEND EMAILS ──
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         from django.utils import timezone
 
         for candidate in passed_candidates:
@@ -199,7 +199,7 @@ def process_resume_passed(candidate_id):
             assessment.status = 'SCHEDULED'
             assessment.save()
             
-            base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+            base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
             link = f"{base_url}/take-ai-assessment/{assessment.share_token}?name={quote(candidate.full_name)}&email={quote(candidate.email)}"
             html_message = f"<div>Invite for {candidate.full_name}. <a href='{link}'>Link</a></div>"
             send_mail("Assessment Invitation", "", settings.DEFAULT_FROM_EMAIL, [candidate.email], html_message=html_message)
@@ -228,7 +228,7 @@ def process_assessment_passed(submission_id):
         else:
             candidate = candidates.first(); candidate.status = 'Interview'; candidate.save()
         
-        link = f"{getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')}/interview-start/{candidate.id}"
+        link = f"{getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')}/interview-start/{candidate.id}"
         send_mail("Interview Invitation", f"Clear link: {link}", settings.DEFAULT_FROM_EMAIL, [candidate.email])
         logger.info(f"Pipeline: Interview email sent to {candidate.email}")
     except Exception as e:

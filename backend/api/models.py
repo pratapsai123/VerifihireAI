@@ -190,6 +190,7 @@ class OwnershipTransferLog(models.Model):
     ai_assessments_transferred = models.IntegerField(default=0)
     ai_candidates_transferred = models.IntegerField(default=0)
     subordinates_reassigned = models.IntegerField(default=0)
+    detailed_counts = models.JSONField(default=dict, blank=True, help_text="Detailed JSON breakdown of all entities transferred")
     from_name = models.CharField(max_length=255, blank=True, null=True)
     from_email = models.EmailField(blank=True, null=True)
     to_name = models.CharField(max_length=255, blank=True, null=True)
@@ -831,6 +832,13 @@ class CandidateInvitation(models.Model):
     token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_auto_schedule = models.BooleanField(default=False)
+    claimed_session_id = models.CharField(
+        max_length=255, 
+        blank=True, 
+        null=True, 
+        db_index=True,
+        help_text="Session lock ID to prevent multiple openers for the same token."
+    )
     # Timestamp recorded *exactly* when the "Book Interview Slot" email is sent
     # (i.e. after the 5-minute Celery delay fires).
     # Used as the anchor for the dynamic 3-day prep buffer + 7-available-days window.
