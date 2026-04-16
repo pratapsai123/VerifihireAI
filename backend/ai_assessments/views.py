@@ -142,11 +142,11 @@ class SubmitAssessmentView(APIView):
                 # Strip common choice prefixes like "a) ", "1. ", "Choice A: "
                 return re.sub(r'^(?:choice\s+)?[a-z0-9][\.\)\:\s-]+\s*', '', s.lower()).strip()
 
-            # 1. MCQ Scoring - Flat 20 points each
+            # 1. MCQ Scoring - 1 point each
             possible_mcq_points = 0
             candidate_mcq_points = 0
             for i, mcq in enumerate(mcqs):
-                weight = 20
+                weight = 1  # 1 point per MCQ question
                 possible_mcq_points += weight
                 
                 correct_ans = str(mcq.get('answer') or mcq.get('correct_answer') or '').strip()
@@ -172,16 +172,19 @@ class SubmitAssessmentView(APIView):
                         candidate_coding_points += (score_fraction * weight)
 
             # ---------------------------------------------------------
-            # FINAL WEIGHTED SCORING (40% MCQ / 60% Coding)
+            # FINAL WEIGHTED SCORING (configurable MCQ% / Coding%)
+            # Defaults to 40% MCQ / 60% Coding if not set
             # ---------------------------------------------------------
-            
+            mcq_w = (getattr(assessment, 'mcq_weight', 40) or 40) / 100
+            coding_w = 1 - mcq_w
+
             # Calculate individual percentages
             mcq_percentage = (candidate_mcq_points / possible_mcq_points * 100) if possible_mcq_points > 0 else 0
             coding_percentage = (candidate_coding_points / possible_coding_points * 100) if possible_coding_points > 0 else 0
             
             # Aggregate based on weightage
             if possible_mcq_points > 0 and possible_coding_points > 0:
-                percentage = round((mcq_percentage * 0.4) + (coding_percentage * 0.6))
+                percentage = round((mcq_percentage * mcq_w) + (coding_percentage * coding_w))
             elif possible_mcq_points > 0:
                 # 100% MCQ if no coding challenges are present
                 percentage = round(mcq_percentage)
@@ -205,13 +208,13 @@ class SubmitAssessmentView(APIView):
                     "scored_points": round(candidate_mcq_points), 
                     "possible_points": possible_mcq_points,
                     "accuracy": f"{int(mcq_percentage)}%",
-                    "weight": "40%"
+                    "weight": f"{round(mcq_w * 100)}%"
                 },
                 "coding": {
                     "scored_points": round(candidate_coding_points), 
                     "possible_points": possible_coding_points,
                     "accuracy": f"{int(coding_percentage)}%",
-                    "weight": "60%"
+                    "weight": f"{round(coding_w * 100)}%"
                 },
                 "coding_results": coding_results,
                 "weighted_final": f"{percentage}%"
@@ -233,10 +236,10 @@ class SubmitAssessmentView(APIView):
                     candidate.interview_summary.append({
                         "type": "AI_ASSESSMENT",
                         "assessment_id": assessment.id,
-                        "mcq_accuracy": f"{round(candidate_mcq_points/20)}/{len(mcqs)} ({int(mcq_percentage)}%)",
+                        "mcq_accuracy": f"{round(candidate_mcq_points)}/{len(mcqs)} ({int(mcq_percentage)}%)",
                         "coding_accuracy": f"{int(coding_percentage)}%",
-                        "weighted_mcq": f"{(mcq_percentage * 0.4):.1f}%",
-                        "weighted_coding": f"{(coding_percentage * 0.6):.1f}%",
+                        "weighted_mcq": f"{(mcq_percentage * mcq_w):.1f}%",
+                        "weighted_coding": f"{(coding_percentage * coding_w):.1f}%",
                         "integrity_score": f"{int(submission.integrity_score)}%",
                         "timestamp": timezone.now().isoformat()
                     })
@@ -751,6 +754,7 @@ class GenerateAssessmentView(APIView):
                 num_applicants=num_applicants,
                 max_candidates_allowed=num_applicants,
                 same_questions_for_all=same_questions_for_all,
+                mcq_weight=int(data.get('mcq_weight', 40)),
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
@@ -860,11 +864,32 @@ class CreateSubmissionView(APIView):
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
-                # Shuffled Distribution: 
-                # Even for 'same questions for all', we use pick_random_subset 
-                # to ensure candidates get the same set but in a jumbled (shuffled) order.
-                # (seed=email ensures different shuffle per user)
-                submission.candidate_questions = pick_random_subset(assessment, assessment.generated_content, seed=email)
+                # Unique MCQ Distribution:
+                # Resolve this candidate's 0-based index within the batch so pick_random_subset
+                # can assign a non-overlapping slice of the MCQ pool (partitioned mode).
+                # For same_questions_for_all, candidate_index is not used (sampling mode).
+                candidate_index = None
+                if not assessment.same_questions_for_all:
+                    try:
+                        # Index = position of this candidate's submission among all ONGOING/submitted
+                        # submissions for this assessment, ordered by creation time.
+                        all_subs = list(
+                            AIAssessmentSubmission.objects.filter(
+                                assessment=assessment
+                            ).order_by('id').values_list('id', flat=True)
+                        )
+                        if submission.id in all_subs:
+                            candidate_index = all_subs.index(submission.id)
+                        else:
+                            candidate_index = len(all_subs)  # fallback: append to end
+                    except Exception as idx_err:
+                        logger.warning(f"Could not resolve candidate_index for {email}: {idx_err}")
+
+                submission.candidate_questions = pick_random_subset(
+                    assessment, assessment.generated_content,
+                    seed=email,
+                    candidate_index=candidate_index
+                )
                 submission.save(update_fields=['candidate_questions'])
 
              
@@ -1145,6 +1170,8 @@ class AssessmentDetailView(APIView):
                 "difficulty_level": assessment.difficulty_level,
                 "total_points": assessment.total_points,
                 "pass_threshold": assessment.pass_threshold,
+                "mcq_weight": getattr(assessment, 'mcq_weight', 40) or 40,
+                "coding_weight": 100 - (getattr(assessment, 'mcq_weight', 40) or 40),
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M") if assessment.created_at else None,
                 "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
@@ -1152,6 +1179,7 @@ class AssessmentDetailView(APIView):
                 "share_token": str(assessment.share_token),
                 "num_applicants": assessment.num_applicants,
                 "max_candidates_allowed": assessment.max_candidates_allowed,
+                "same_questions_for_all": assessment.same_questions_for_all,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
                 "submissions": submission_data,

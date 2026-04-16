@@ -131,12 +131,16 @@ const AiAssessmentDetail = () => {
     const totalPages = Math.ceil(submissions.length / itemsPerPage);
 
     // Calculate points based on backend logic (SubmitAssessmentView)
-    const MCQ_WEIGHT = 20;
+    const MCQ_WEIGHT = 1;  // 1 point per MCQ
     const codingWeights = { 'Easy': 100, 'Medium': 200, 'Hard': 300 };
 
     const possibleMcqPoints = mcqs.length * MCQ_WEIGHT;
     const possibleCodingPoints = coding.reduce((sum, c) => sum + (codingWeights[c.difficulty] || 200), 0);
     const totalPossiblePoints = possibleMcqPoints + possibleCodingPoints;
+
+    // Scoring weights from assessment (default 40/60)
+    const mcqWeight = assessment.mcq_weight || 40;
+    const codingWeight = assessment.coding_weight || (100 - mcqWeight);
 
     const getStatusStyle = (status) => {
         const s = status?.toLowerCase();
@@ -336,8 +340,13 @@ const AiAssessmentDetail = () => {
                                             <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>
                                                 {(() => {
                                                     const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
-                                                    return candidatePointsInfo?.total_points || 
-                                                        (Math.floor(mcqs.length / divisor) * 20) + (Math.floor(coding.length / divisor) * 20);
+                                                    const cMcqs = candidatePointsInfo?.mcq_count || Math.floor(mcqs.length / divisor);
+                                                    const cCoding = candidatePointsInfo?.coding_count || Math.floor(coding.length / divisor);
+                                                    // Correct per-candidate coding points: use difficulty-based weights
+                                                    const perCandidateCodingPts = coding
+                                                        .slice(0, cCoding)
+                                                        .reduce((s, c) => s + (codingWeights[c.difficulty] || 200), 0);
+                                                    return candidatePointsInfo?.total_points || (cMcqs * 1 + perCandidateCodingPts);
                                                 })()}
                                             </div>
                                             <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
@@ -347,7 +356,8 @@ const AiAssessmentDetail = () => {
                                                 const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
                                                 const cMcqs = candidatePointsInfo?.mcq_count || Math.floor(mcqs.length / divisor);
                                                 const cCoding = candidatePointsInfo?.coding_count || Math.floor(coding.length / divisor);
-                                                return `${cMcqs} MCQs × 20 pts + ${cCoding} Coding Task`;
+                                                const codingDesc = coding.slice(0, cCoding).map(c => `${c.difficulty}(${codingWeights[c.difficulty] || 200}pts)`).join(', ');
+                                                return `${cMcqs} MCQs × 1pt${cCoding > 0 ? ` + Coding: ${codingDesc}` : ''}`;
                                             })()}
                                         </div>
                                     </div>
@@ -377,6 +387,22 @@ const AiAssessmentDetail = () => {
                                         </div>
                                         <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
                                             Total allocated assessment duration
+                                        </div>
+                                    </div>
+
+                                    {/* Scoring Weight Card */}
+                                    <div style={{ background: 'linear-gradient(135deg, #EEF2FF, #F5F3FF)', padding: '1.5rem', borderRadius: '20px', border: '1px solid #E0E7FF' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#6366F1', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Score Weighting</div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.85rem', color: '#1B254B', fontWeight: '600' }}>MCQ</span>
+                                                <span style={{ fontSize: '1rem', fontWeight: '800', color: '#6366F1' }}>{mcqWeight}%</span>
+                                            </div>
+                                            <div style={{ height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #E0E7FF ${mcqWeight}%)` }} />
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.85rem', color: '#1B254B', fontWeight: '600' }}>Coding</span>
+                                                <span style={{ fontSize: '1rem', fontWeight: '800', color: '#8B5CF6' }}>{codingWeight}%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -576,8 +602,8 @@ const AiAssessmentDetail = () => {
                                                     ? Math.round((selectedSubmission.results_breakdown.mcq.scored_points / selectedSubmission.results_breakdown.mcq.possible_points) * 100)
                                                     : 0}%
                                             </div>
-                                            <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {Math.round((selectedSubmission.results_breakdown?.mcq?.scored_points || 0) / 20)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
+                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                                {Math.round(selectedSubmission.results_breakdown?.mcq?.scored_points || 0)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
                                             </div>
                                         </div>
 

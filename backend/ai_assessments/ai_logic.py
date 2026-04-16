@@ -1314,26 +1314,43 @@ def _expert_assessment_refiner(groq_client, raw_content, cancel_token=None):
         logger.error(f"Expert Validator: Refinement FAILED: {e}")
         return raw_content
 
-def pick_random_subset(assessment, pool, seed=None):
-    """Randomly selects a subset of questions from the pool based on assessment targets."""
+def pick_random_subset(assessment, pool, seed=None, candidate_index=None):
+    """
+    Selects a subset of questions from the pool for a specific candidate.
+
+    Uniqueness Strategy:
+    - If `candidate_index` is provided AND `same_questions_for_all` is False:
+        MCQs are distributed using a PARTITIONED approach — the pool is shuffled
+        with a deterministic batch-level seed (assessment.batch_id), then sliced
+        so each candidate gets a non-overlapping slice. Like dealing cards from
+        a shuffled deck.
+    - Otherwise (same_questions_for_all=True or no index given):
+        Questions are randomly sampled with the email-based seed (reproducible
+        but may overlap between candidates).
+
+    Coding challenges are always unique — they are removed from the pool after
+    selection, so no two candidates receive the same coding challenge
+    (when same_questions_for_all=False).
+    """
     if not pool:
         return {}
-        
+
     local_random = random.Random(seed) if seed else random.Random()
     subset = {"mcqs": [], "coding_challenges": []}
-    
+
     normalized_pool = _normalize_generated_pool(pool)
     pool_mcqs = list(normalized_pool.get('mcqs', []))
     pool_coding = copy.deepcopy(normalized_pool.get('coding_challenges', []))
-    
-    # 1. Select MCQs
+
+    # Determine question target counts and difficulty breakdown
     target_mcq_count = getattr(assessment, 'mcq_count', 10)
+    same_for_all = getattr(assessment, 'same_questions_for_all', True)
+
     target_mcqs = [
-        ('Easy', getattr(assessment, 'mcq_easy', 0)), 
-        ('Medium', getattr(assessment, 'mcq_medium', 0)), 
+        ('Easy', getattr(assessment, 'mcq_easy', 0)),
+        ('Medium', getattr(assessment, 'mcq_medium', 0)),
         ('Hard', getattr(assessment, 'mcq_hard', 0))
     ]
-    
     if sum(t for _, t in target_mcqs) == 0:
         target_mcqs = [
             ('Easy', target_mcq_count // 2),
@@ -1341,26 +1358,65 @@ def pick_random_subset(assessment, pool, seed=None):
             ('Hard', max(0, target_mcq_count - target_mcq_count // 2 - (target_mcq_count * 3) // 10))
         ]
 
-    selected_mcq_ids = set()
-    for diff, target in target_mcqs:
-        diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff and id(q) not in selected_mcq_ids]
-        if diff_pool:
-            sample_size = min(len(diff_pool), target)
-            chosen = local_random.sample(diff_pool, sample_size)
-            subset['mcqs'].extend(chosen)
-            selected_mcq_ids.update(id(q) for q in chosen)
-    
-    if len(subset['mcqs']) < target_mcq_count:
-        remaining = [q for q in pool_mcqs if id(q) not in selected_mcq_ids]
-        needed = target_mcq_count - len(subset['mcqs'])
-        if remaining:
-            fill = local_random.sample(remaining, min(len(remaining), needed))
-            subset['mcqs'].extend(fill)
+    # ── 1. SELECT MCQs ──────────────────────────────────────────────────────────
+    use_partitioned = (
+        candidate_index is not None
+        and not same_for_all
+        and len(pool_mcqs) >= target_mcq_count
+    )
 
-    # 2. Select Coding Challenges
+    if use_partitioned:
+        # Partitioned mode: shuffle entire pool with a stable batch-level seed,
+        # then assign each candidate a non-overlapping slice per difficulty tier.
+        batch_seed = str(getattr(assessment, 'batch_id', '') or getattr(assessment, 'id', ''))
+        batch_random = random.Random(batch_seed)
+
+        for diff, target in target_mcqs:
+            if target == 0:
+                continue
+            diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff]
+            # Deterministically shuffle this tier's pool using batch seed
+            batch_random_tier = random.Random(batch_seed + diff)
+            batch_random_tier.shuffle(diff_pool)
+            # Slice: candidate i gets indices [i*target : (i+1)*target]
+            start = candidate_index * target
+            end = start + target
+            slice_qs = diff_pool[start:end]
+            if slice_qs:
+                subset['mcqs'].extend(slice_qs)
+
+        # Backfill if slice didn't yield enough (pool smaller than expected)
+        if len(subset['mcqs']) < target_mcq_count:
+            selected_ids = {id(q) for q in subset['mcqs']}
+            remaining = [q for q in pool_mcqs if id(q) not in selected_ids]
+            needed = target_mcq_count - len(subset['mcqs'])
+            if remaining:
+                fill = local_random.sample(remaining, min(len(remaining), needed))
+                subset['mcqs'].extend(fill)
+    else:
+        # Sampling mode (same_for_all or no index): email-seeded random sample
+        selected_mcq_ids = set()
+        for diff, target in target_mcqs:
+            diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff and id(q) not in selected_mcq_ids]
+            if diff_pool:
+                sample_size = min(len(diff_pool), target)
+                chosen = local_random.sample(diff_pool, sample_size)
+                subset['mcqs'].extend(chosen)
+                selected_mcq_ids.update(id(q) for q in chosen)
+
+        if len(subset['mcqs']) < target_mcq_count:
+            selected_mcq_ids = {id(q) for q in subset['mcqs']}
+            remaining = [q for q in pool_mcqs if id(q) not in selected_mcq_ids]
+            needed = target_mcq_count - len(subset['mcqs'])
+            if remaining:
+                fill = local_random.sample(remaining, min(len(remaining), needed))
+                subset['mcqs'].extend(fill)
+
+    # ── 2. SELECT CODING CHALLENGES ─────────────────────────────────────────────
+    # Coding is always unique: chosen items are removed from pool after selection
     target_coding_count = getattr(assessment, 'coding_count', 2)
     targets = getattr(assessment, 'coding_difficulty_list', None) or ['Medium'] * target_coding_count
-    
+
     for diff in targets:
         diff_pool = [c for c in pool_coding if c.get('difficulty') == diff]
         if not diff_pool and pool_coding:
@@ -1370,7 +1426,7 @@ def pick_random_subset(assessment, pool, seed=None):
             subset['coding_challenges'].append(choice)
             if choice in pool_coding:
                 pool_coding.remove(choice)
-    
+
     if len(subset['coding_challenges']) < target_coding_count:
         needed = target_coding_count - len(subset['coding_challenges'])
         if pool_coding:

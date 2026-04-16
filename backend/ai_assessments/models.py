@@ -36,6 +36,7 @@ class Assessment(models.Model):
     num_applicants = models.IntegerField(default=0)
     max_candidates_allowed = models.IntegerField(default=1, help_text="Maximum number of candidates that can be invited to this assessment")
     same_questions_for_all = models.BooleanField(default=False, help_text="If True, all candidates receive identical questions instead of unique randomized sets")
+    mcq_weight = models.IntegerField(default=40, help_text="MCQ contribution % toward final score (coding weight = 100 - mcq_weight). Default: 40% MCQ, 60% Coding")
     company = models.ForeignKey(
         'api.Company', 
         on_delete=models.CASCADE, 

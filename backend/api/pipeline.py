@@ -80,7 +80,8 @@ def process_batch_assessment(batch_id):
                 mcq_easy=5,
                 mcq_medium=3,
                 mcq_hard=2,
-                total_points=100
+                total_points=100,
+                mcq_weight=int(settings_data.get('mcq_weight', 40))
             )
             logger.info(f"Pipeline[{batch_id}]: Assessment record created (id={assessment.id}). Calling AI...")
 

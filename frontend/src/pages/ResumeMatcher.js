@@ -76,6 +76,7 @@ const ResumeMatcher = () => {
     const [mcqCount, setMcqCount] = useState(10);
     const [codingCount, setCodingCount] = useState(1);
     const [passThreshold, setPassThreshold] = useState(60);
+    const [mcqWeight, setMcqWeight] = useState(40);
     const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
 
     const [assessmentStartDate, setAssessmentStartDate] = useState('');
@@ -161,7 +162,7 @@ const ResumeMatcher = () => {
     };
 
     const calculateTotalPoints = () => {
-        const mcqPts = mcqCount * 20;
+        const mcqPts = mcqCount * 1; // 1 pt per MCQ
         const codingPts = codingChallenges.reduce((sum, c) => {
             return sum + (c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300);
         }, 0);
@@ -239,6 +240,7 @@ const ResumeMatcher = () => {
             formData.append('coding_count', codingCount);
             formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
             formData.append('pass_threshold', passThreshold);
+            formData.append('mcq_weight', mcqWeight);
             formData.append('same_questions_for_all', sameQuestionsForAll);
             formData.append('is_fully_automatic', true);
 
@@ -614,6 +616,51 @@ const ResumeMatcher = () => {
                                     </div>
                                 </div>
                             )}
+
+                            {/* Scoring Weight Slider */}
+                            <div style={{ marginBottom: '1.5rem', background: 'rgba(99,102,241,0.04)', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid #E0E7FF' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                                    <div>
+                                        <label style={{ fontSize: '0.85rem', fontWeight: '600', color: '#1E293B', display: 'block', marginBottom: '2px' }}>Scoring Weights</label>
+                                        <span style={{ fontSize: '0.75rem', color: '#64748B' }}>How MCQ and Coding contribute to the final score</span>
+                                    </div>
+                                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#6366F1', background: '#EEF2FF', padding: '2px 8px', borderRadius: '20px' }}>MCQ {mcqWeight}%</span>
+                                        <span style={{ fontSize: '0.7rem', color: '#94A3B8' }}>+</span>
+                                        <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#8B5CF6', background: '#F5F3FF', padding: '2px 8px', borderRadius: '20px' }}>Coding {100 - mcqWeight}%</span>
+                                    </div>
+                                </div>
+                                <div style={{ position: 'relative', height: '6px', marginBottom: '0.4rem', display: 'flex', alignItems: 'center' }}>
+                                    <div style={{ flex: 1, position: 'relative', height: '6px' }}>
+                                        <div style={{ position: 'absolute', inset: 0, height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #8B5CF6 ${mcqWeight}%)` }} />
+                                        {/* The "Ball" */}
+                                        <div style={{ 
+                                            position: 'absolute', 
+                                            top: '50%', 
+                                            left: `${mcqWeight}%`, 
+                                            transform: 'translate(-50%, -50%)', 
+                                            width: '14px', 
+                                            height: '14px', 
+                                            borderRadius: '50%', 
+                                            background: '#FFFFFF', 
+                                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)', 
+                                            border: '2px solid #6366F1',
+                                            zIndex: 1,
+                                            pointerEvents: 'none',
+                                            transition: 'left 0.1s ease-out'
+                                        }} />
+                                        <input
+                                            type="range" min="0" max="100" step="5"
+                                            value={mcqWeight}
+                                            onChange={(e) => setMcqWeight(parseInt(e.target.value))}
+                                            style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: 'pointer', height: '100%', zIndex: 2 }}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: '#94A3B8', fontWeight: '600' }}>
+                                    <span>MCQ Only</span><span>Coding Only</span>
+                                </div>
+                            </div>
 
                             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
