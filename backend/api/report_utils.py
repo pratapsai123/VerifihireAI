@@ -10,6 +10,7 @@ import base64
 import os
 import traceback
 import requests
+from datetime import datetime
 
 from PIL import Image as PILImage
 
@@ -34,7 +35,7 @@ from django.utils import timezone
 from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
-    CandidateIntegrity, IntegrityScreenshot
+    CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog
 )
 from .ocr_utils import pdf_page_to_png_bytes
 
@@ -122,6 +123,23 @@ def _info_row(label, value, styles):
         Paragraph(label, styles['InfoLabel']),
         Paragraph(str(value) if value else '-', styles['InfoValue']),
     ]
+
+
+def _parse_timestamp(ts):
+    if not ts or not isinstance(ts, str):
+        return None
+    try:
+        if ts.endswith('Z'):
+            ts = ts[:-1] + '+00:00'
+        return datetime.fromisoformat(ts)
+    except Exception:
+        return None
+
+
+def _is_typing_key(key):
+    if not isinstance(key, str):
+        return False
+    return len(key) == 1 and key.isprintable()
 
 
 def _safe(text):
@@ -899,6 +917,166 @@ def generate_candidate_report(submission_id):
 
     story.append(_kv_table(results_data, styles))
     story.append(Spacer(1, 12))
+
+    # ════════════════════════════════════════════════════════════════════════
+    # 4.5. TYPING GAP ANALYSIS
+    # ════════════════════════════════════════════════════════════════════════
+    try:
+        # Get all keystroke logs for this invitation
+        keystroke_logs = KeystrokeLog.objects.filter(invitation=inv)
+        
+        story.append(Paragraph('Typing Gap Analysis', styles['SectionHeader']))
+        
+        if keystroke_logs.exists():
+            print(f"[report] Typing analysis logs found: {keystroke_logs.count()} for invitation {inv.id}")
+            total_keystrokes = 0
+            total_time_diffs = []
+            long_pauses = 0
+            burst_events = 0
+            backspace_count = 0
+            first_timestamp = None
+            last_timestamp = None
+            rhythm_records = 0
+            rhythm_sample_count = 0
+            pause_details = []
+            
+            for log in keystroke_logs:
+                events = log.events or []
+                total_keystrokes += len(events)
+                
+                for event in events:
+                    time_diff = event.get('time_diff', 0)
+                    ts = event.get('timestamp')
+                    if ts:
+                        if first_timestamp is None:
+                            first_timestamp = ts
+                        last_timestamp = ts
+                    if time_diff > 0:
+                        total_time_diffs.append(time_diff)
+                        if time_diff > 20000:  # 20 seconds
+                            long_pauses += 1
+                            if len(pause_details) < 3:
+                                pause_details.append((ts or '-', time_diff))
+                    if event.get('key') == 'Backspace':
+                        backspace_count += 1
+                
+                if len(events) > 80:
+                    burst_events += 1
+                if log.rhythm:
+                    rhythm_records += 1
+                    rhythm_sample_count += int(log.rhythm.get('sample_count', 0) or 0)
+            
+            avg_typing_speed = 0
+            avg_time_diff = 0
+            if total_time_diffs:
+                avg_time_diff = sum(total_time_diffs) / len(total_time_diffs)
+                if avg_time_diff > 0:
+                    chars_per_ms = 1000 / avg_time_diff
+                    avg_typing_speed = chars_per_ms * 60
+
+            all_timestamps = []
+            typing_events = []
+            for log in keystroke_logs:
+                for event in log.events or []:
+                    ts = _parse_timestamp(event.get('timestamp'))
+                    if ts is not None:
+                        all_timestamps.append(ts)
+                        if _is_typing_key(event.get('key')):
+                            typing_events.append({'timestamp': ts, 'key': event.get('key')})
+
+            first_ts = min(all_timestamps) if all_timestamps else None
+            last_ts = max(all_timestamps) if all_timestamps else None
+            total_duration_ms = int((last_ts - first_ts).total_seconds() * 1000) if first_ts and last_ts else 0
+            coding_minutes = total_duration_ms / 60000.0 if total_duration_ms > 0 else 0
+            coding_time_display = f"{coding_minutes:.1f} min" if coding_minutes > 0 else '-'
+            overall_average_speed = 0
+            if coding_minutes > 0 and typing_events:
+                overall_average_speed = len(typing_events) / coding_minutes
+
+            # Split duration into 2 or 3 sections for reporting
+            section_rows = []
+            if total_duration_ms > 0 and typing_events:
+                section_count = 3 if total_duration_ms >= 20 * 60 * 1000 else 2
+                section_boundaries = []
+                base_ms = total_duration_ms // section_count
+                extra = total_duration_ms % section_count
+                current_ms = 0
+                for i in range(section_count):
+                    current_ms += base_ms + (1 if i < extra else 0)
+                    section_boundaries.append(current_ms)
+
+                section_counts = [0] * section_count
+                section_chars = [0] * section_count
+                for event in typing_events:
+                    elapsed = int((event['timestamp'] - first_ts).total_seconds() * 1000)
+                    section_index = next((idx for idx, boundary in enumerate(section_boundaries) if elapsed <= boundary), section_count - 1)
+                    section_chars[section_index] += 1
+
+                section_start = 0
+                for idx, boundary in enumerate(section_boundaries):
+                    section_ms = boundary - section_start
+                    section_minutes = section_ms / 60000.0 if section_ms > 0 else 0
+                    chars = section_chars[idx]
+                    speed = chars / section_minutes if section_minutes > 0 else 0
+                    section_rows.append(
+                        f"Section {idx + 1}: {chars} chars in {section_minutes:.1f} min = {speed:.1f} chars/min"
+                    )
+                    section_start = boundary
+
+            typing_data = [
+                _info_row('Typing Log Batches', f"{keystroke_logs.count()}", styles),
+                _info_row('Total Keystrokes', f"{total_keystrokes}", styles),
+                _info_row('Rhythm Records', f"{rhythm_records}", styles),
+                _info_row('Rhythm Sample Count', f"{rhythm_sample_count}", styles),
+                _info_row('Average Time Diff', f"{avg_time_diff:.1f} ms", styles),
+                _info_row('Average Typing Speed', f"{avg_typing_speed:.1f} chars/min", styles),
+                _info_row('Coding Time', coding_time_display, styles),
+                _info_row('Overall Average Typing Speed', f"{overall_average_speed:.1f} chars/min" if overall_average_speed else '-', styles),
+                _info_row('Long Pauses (>20s)', f"{long_pauses}", styles),
+                _info_row('Burst Typing Batches', f"{burst_events}", styles),
+                _info_row('Backspace Count', f"{backspace_count}", styles),
+                _info_row('First Keystroke Timestamp', first_ts.isoformat().replace('+00:00', 'Z') if first_ts else '-', styles),
+                _info_row('Last Keystroke Timestamp', last_ts.isoformat().replace('+00:00', 'Z') if last_ts else '-', styles),
+            ]
+
+            story.append(_kv_table(typing_data, styles))
+            story.append(Spacer(1, 12))
+
+            if section_rows:
+                story.append(Paragraph('Coding Time Section Breakdown', styles['InfoLabel']))
+                for row in section_rows:
+                    story.append(Paragraph(row, styles['Normal']))
+                story.append(Spacer(1, 6))
+                story.append(Paragraph('Calculation Notes:', styles['InfoLabel']))
+                story.append(Paragraph(
+                    f'Overall Average Typing Speed is calculated using total printable typed characters ' \
+                    f'({len(typing_events)}) divided by the total coding duration ({coding_minutes:.1f} min).',
+                    styles['Normal']
+                ))
+                story.append(Paragraph(
+                    f'Example: {len(typing_events)} chars ÷ {coding_minutes:.1f} min = {overall_average_speed:.1f} chars/min.',
+                    styles['Normal']
+                ))
+                story.append(Paragraph(
+                    'Section speeds are calculated by splitting the total coding duration into equal time segments, ' \
+                    'counting chars typed in each segment, and then computing chars per minute for each section.',
+                    styles['Normal']
+                ))
+                story.append(Spacer(1, 12))
+
+            if pause_details:
+                story.append(Paragraph('Long Pause Samples', styles['InfoLabel']))
+                for pause_ts, pause_ms in pause_details:
+                    story.append(Paragraph(f'- {pause_ts} : {pause_ms} ms', styles['Normal']))
+                story.append(Spacer(1, 12))
+        else:
+            print(f"[report] No keystroke logs found for invitation {inv.id}")
+            story.append(Paragraph('No typing logs were recorded for this candidate.', styles['Normal']))
+            story.append(Spacer(1, 12))
+    except Exception as e:
+        print(f"Error generating typing analysis for report: {e}")
+        import traceback
+        traceback.print_exc()
 
     # ════════════════════════════════════════════════════════════════════════
     # 5. CANDIDATE FEEDBACK

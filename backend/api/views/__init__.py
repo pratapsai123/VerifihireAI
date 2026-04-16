@@ -110,3 +110,7 @@ from .hr_offboarding_views import (
     reactivate_user_view,
     transfer_logs_view,
 )
+
+from .malpractice_views import (
+    track_events_view,
+)

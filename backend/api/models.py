@@ -910,7 +910,13 @@ class CandidateIntegrity(models.Model):
     no_face_detections = models.IntegerField(default=0)
     integrity_score = models.FloatField(default=100.0)
     warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
+    
+    # New Malpractice Detection Fields
+    suspicion_score = models.IntegerField(default=0)
+    suspicion_reasons = models.JSONField(default=list, blank=True)
+    
     last_updated = models.DateTimeField(auto_now=True)
+
     class Meta:
         db_table = 'api_candidate_integrity'
         verbose_name = "Candidate Integrity"
@@ -1568,3 +1574,33 @@ class InterviewerAvailability(models.Model):
 
     def __str__(self):
         return f"{self.interviewer.email} - {self.date} ({self.start_time} to {self.end_time})"
+
+class KeystrokeLog(models.Model):
+    """
+    Stores batched letter-to-letter timing (rhythm) data.
+    """
+    invitation = models.ForeignKey(CandidateInvitation, on_delete=models.CASCADE, related_name='keystroke_logs')
+    events = models.JSONField(default=list, help_text="List of keystroke events with timing")
+    rhythm = models.JSONField(default=dict, blank=True, help_text="Calculated typing rhythm/fingerprint")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'api_keystrokelog'
+        verbose_name = "Keystroke Log"
+        verbose_name_plural = "Keystroke Logs"
+
+
+class BehaviorLog(models.Model):
+    """
+    Flags suspicious activities and periodic code snapshots.
+    """
+    invitation = models.ForeignKey(CandidateInvitation, on_delete=models.CASCADE, related_name='behavior_logs')
+    type = models.CharField(max_length=100) 
+    value = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'api_behaviorlog'
+        verbose_name = "Behavior Log"
+        verbose_name_plural = "Behavior Logs"
+

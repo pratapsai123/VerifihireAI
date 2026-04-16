@@ -1,6 +1,7 @@
 """
-Django settings for VerifiHireAI_backend project.
+Django settings for VerifiHireAI_backend project. # Reload trigger
 """
+
 
 import os
 from pathlib import Path
@@ -124,7 +125,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'AI'),
+        'NAME': os.environ.get('DB_NAME', 'postgres'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
