@@ -4,7 +4,9 @@ from . import coding_views
 from .views.user_views import add_team_member_view
 
 urlpatterns = [
+    path('track-events/', views.track_events_view, name='track_events'),
     path('login/', views.login_view, name='login'),
+
     path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
     path('register/', views.register_view, name='register'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
@@ -105,5 +107,6 @@ urlpatterns = [
     path('workflow/deletion-requests/<int:request_id>/action/', views.action_deletion_request_view, name='action_deletion_request'),
     path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
     path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
+
 ]
 

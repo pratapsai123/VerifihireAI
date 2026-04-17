@@ -1,6 +1,7 @@
 """
-Django settings for VerifiHireAI_backend project.
+Django settings for VerifiHireAI_backend project. # Reload trigger
 """
+
 
 import os
 from pathlib import Path

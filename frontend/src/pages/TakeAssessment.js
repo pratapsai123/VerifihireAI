@@ -6,6 +6,8 @@ import CandidateDetails from './CandidateDetails';
 import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
 import { API_BASE_URL } from '../apiConfig';
+import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
+
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -452,7 +454,9 @@ export default function TakeAssessment() {
     }
   }, [activeQuestionIndex, questions]);
 
+
   const handleNext = () => {
+
     if (activeQuestionIndex < questions.length - 1) {
       setActiveQuestionIndex((prev) => prev + 1);
     }
@@ -567,6 +571,13 @@ export default function TakeAssessment() {
     if (codingState.currentId == null) return codingQuestionsOrdered[0];
     return codingQuestionsOrdered.find((q) => String(q.id) === String(codingState.currentId)) || codingQuestionsOrdered[0];
   }, [codingQuestionsOrdered, codingState.currentId]);
+
+  // Integrated Malpractice Detection Module
+  const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
+    token, 
+    activeCoding ? codingState.codeById[String(activeCoding.id)] : ''
+  );
+
 
   const formatHHMMSS = (secs) => {
     const s = Math.max(0, Number(secs) || 0);
@@ -1288,25 +1299,32 @@ export default function TakeAssessment() {
       showAiEvent('WINDOW BLURRED', true, 'window_switch');
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('blur', handleBlur);
+    document.addEventListener('visibilitychange', handleVisibilityChange, { capture: true });
+    window.addEventListener('blur', handleBlur, { capture: true });
 
-    // Disable Copy/Paste/Right-click
+    // Disable Copy/Paste/Right-click (Enhanced with capture phase)
     const preventAction = (e) => {
       e.preventDefault();
+      e.stopPropagation();
       showAiEvent('ACTION PROHIBITED', true);
+      return false;
     };
-    document.addEventListener('copy', preventAction);
-    document.addEventListener('cut', preventAction);
-    document.addEventListener('paste', preventAction);
-    document.addEventListener('contextmenu', preventAction);
+    document.addEventListener('copy', preventAction, { capture: true });
+    document.addEventListener('cut', preventAction, { capture: true });
+    document.addEventListener('paste', preventAction, { capture: true });
+    document.addEventListener('contextmenu', preventAction, { capture: true });
 
     return () => {
       clearInterval(detectInterval);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('visibilitychange', handleVisibilityChange, { capture: true });
+      window.removeEventListener('blur', handleBlur, { capture: true });
+      document.removeEventListener('copy', preventAction, { capture: true });
+      document.removeEventListener('cut', preventAction, { capture: true });
+      document.removeEventListener('paste', preventAction, { capture: true });
+      document.removeEventListener('contextmenu', preventAction, { capture: true });
       stopCamera();
     };
+
   }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage, error, windowError]);
 
   // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
@@ -1977,7 +1995,17 @@ export default function TakeAssessment() {
                           defaultLanguage={monacoLanguage(activeLanguage)}
                           language={monacoLanguage(activeLanguage)}
                           value={activeCode}
+                          options={{
+                            contextmenu: false,
+                            fontSize: 14,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false,
+                            automaticLayout: true,
+                            readOnly: !!codingState.submittedIds[String(activeCoding.id)],
+                            domReadOnly: !!codingState.submittedIds[String(activeCoding.id)],
+                          }}
                           onChange={(v) => {
+
                             const value = v ?? '';
                             setCodingState((prev) => ({
                               ...prev,
