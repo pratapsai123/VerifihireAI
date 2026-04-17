@@ -393,6 +393,7 @@ class ResumeMatchView(APIView):
                 'mcq_count': int(request.data.get('mcq_count', 10)),
                 'coding_count': int(request.data.get('coding_count', 1)),
                 'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                'mcq_weight': int(request.data.get('mcq_weight', 40)),
                 'same_questions_for_all': same_q,
                 'assessment_available_from': request.data.get('assessment_available_from'),
                 'assessment_available_until': request.data.get('assessment_available_until'),

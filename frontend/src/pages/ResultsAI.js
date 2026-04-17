@@ -654,7 +654,7 @@ const ResultsAI = () => {
                                                     : 0}%
                                             </div>
                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {Math.round((viewedSubmission.results_breakdown?.mcq?.scored_points || 0) / 20)} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
+                                                {viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
                                             </div>
                                         </div>
 
@@ -674,11 +674,11 @@ const ResultsAI = () => {
                                         {/* Integrity Card */}
                                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
                                             <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity_score || 0) >= 50 ? '#05CD99' : '#EE5D50' }}>
-                                                {viewedSubmission.integrity_score || 0}%
+                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50' }}>
+                                                {viewedSubmission.integrity?.integrity_score ?? 100}%
                                             </div>
-                                            <div style={{ color: (viewedSubmission.integrity_score || 0) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                                                {(viewedSubmission.integrity_score || 0) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
+                                            <div style={{ color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                                                {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
                                             </div>
                                         </div>
                                     </div>

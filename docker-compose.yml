@@ -48,7 +48,7 @@ services:
       DOCKER_HOST: tcp://dind:2375
       DOCKER_TLS_VERIFY: "0"
     ports:
-      - "4001:4000"
+      - "4000:4000"
     depends_on:
       dind:
         condition: service_healthy

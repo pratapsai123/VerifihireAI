@@ -40,7 +40,7 @@ from .models import (
 from .ocr_utils import pdf_page_to_png_bytes
 
 MAX_PAGES = 20
-EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4001").rstrip("/")
+EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
 
 
 # ─── Styles ──────────────────────────────────────────────────────────────────
