@@ -66,9 +66,7 @@ def invite_user_view(request):
         if UserProfile.objects.filter(email=invitee_email).exists():
             return Response({'email': ['A user with this email already exists.']}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Enforce max 5 HR_MANAGER per company
-        if role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER).count() >= 5:
-            return Response({'role': ['Maximum of 5 HR Managers allowed per company.']}, status=status.HTTP_409_CONFLICT)
+
 
         # Prevent multiple pending invites
         existing_pending = UserInvitation.objects.filter(company=company, email=invitee_email, status=UserInvitation.STATUS_PENDING).first()
@@ -344,9 +342,7 @@ def accept_invite_view(request):
         if UserProfile.objects.filter(email=email).exists():
             return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_409_CONFLICT)
 
-        # Enforce max 5 HR_MANAGER per company
-        if inv.role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=inv.company, role=UserProfile.ROLE_HR_MANAGER).count() >= 5:
-            return Response({'error': 'Maximum of 5 HR Managers allowed per company.'}, status=status.HTTP_409_CONFLICT)
+
 
         name_parts = full_name.split(' ', 1)
         first_name = name_parts[0].strip()

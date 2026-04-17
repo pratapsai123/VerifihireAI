@@ -909,7 +909,7 @@ def draft_interview_invitations_view(request, draft_id=None):
                 # InterviewInvitation has no company field; isolate via the Interview's company.
                 # Also cover legacy data where interview.created_by is in this company.
                 qs = InterviewInvitation.objects.filter(
-                    models.Q(status='draft') &
+                    models.Q(status='draft') & models.Q(is_deleted=False) &
                     (
                         models.Q(interview__company_id=company_id) |
                         models.Q(interview__created_by__company_id=company_id) |
@@ -999,9 +999,17 @@ def draft_interview_invitations_view(request, draft_id=None):
             if draft_id is None:
                 return Response({'error': 'Draft ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
                 
-            draft = InterviewInvitation.objects.filter(id=draft_id, status='draft', interview__company_id=company_id).first()
+            # Allow finding drafts in the user's company OR orphan drafts that haven't been assigned yet
+            draft = InterviewInvitation.objects.filter(
+                models.Q(id=draft_id, status='draft') &
+                (models.Q(interview__company_id=company_id) | models.Q(interview__isnull=True))
+            ).first()
+
             if not draft:
                 return Response({'error': 'Draft not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+            if not user_profile:
+                return Response({'error': 'Authentication required to delete drafts.'}, status=status.HTTP_401_UNAUTHORIZED)
                 
             # Use centralized helper to handle policy and workflow
             response, handled = handle_deletion_request(

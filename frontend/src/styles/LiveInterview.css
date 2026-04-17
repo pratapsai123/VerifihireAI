@@ -999,3 +999,128 @@
 .li-final-thanks-close:hover {
     opacity: 0.93;
 }
+/* ===========================
+   WAITING SCREEN
+   =========================== */
+.li-waiting-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a202c 0%, #0f172a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+}
+
+.li-waiting-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: waitingFadeIn 0.5s ease-out;
+}
+
+@keyframes waitingFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.li-waiting-pulse {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulse-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #0b5cff;
+    opacity: 0.2;
+    animation: waitingPulse 2s infinite;
+}
+
+@keyframes waitingPulse {
+    0% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.2; }
+}
+
+.waiting-icon {
+    font-size: 32px;
+    color: #0b5cff;
+    z-index: 2;
+}
+
+.waiting-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.waiting-message {
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.waiting-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.btn-refresh-waiting {
+    background: rgba(255, 255, 255, 0.05);
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.btn-refresh-waiting:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-refresh-waiting i {
+    font-size: 0.875rem;
+}

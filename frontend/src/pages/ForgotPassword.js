@@ -346,7 +346,25 @@ function ForgotPassword() {
                     className="auth-input-with-icon"
                     placeholder="Confirm Password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (fieldErrors.confirmPassword) {
+                        setFieldErrors(prev => {
+                          const newState = { ...prev };
+                          delete newState.confirmPassword;
+                          return newState;
+                        });
+                      }
+                    }}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      setFieldErrors(prev => ({
+                        ...prev,
+                        confirmPassword: 'Copy and paste is not allowed. Please re-enter your password manually.'
+                      }));
+                    }}
+                    onCopy={(e) => e.preventDefault()}
+                    onCut={(e) => e.preventDefault()}
                     onFocus={() => setConfirmPasswordFocused(true)}
                     onBlur={() => setConfirmPasswordFocused(false)}
                     required

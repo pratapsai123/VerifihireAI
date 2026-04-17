@@ -7,7 +7,7 @@ import {
   ClipboardList, Target, Mail, Brain, User, Users,
   ArrowRightLeft, UserPlus, Search, Filter, ChevronLeft,
   ChevronRight, Send, XCircle, Shield, Building2, Clock,
-  UserCheck, UserX, RotateCcw,
+  UserCheck, UserX, RotateCcw, Code, Video, Trash2, History, FileText,
 } from 'lucide-react';
 
 function safeParseUser() {
@@ -210,14 +210,24 @@ function TransferModal({ member, onClose, onSuccess, authHeader }) {
 
               {/* Data pills */}
               <div style={{ marginBottom: 18 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Data to Transfer</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Full Data Ownership Transfer</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  <StatPill label="Assessments" value={counts.assessments || 0} Icon={ClipboardList} />
-                  <StatPill label="Custom Assessments" value={counts.custom_assessments || 0} Icon={Target} />
-                  <StatPill label="Invitations" value={counts.candidate_invitations || 0} Icon={Mail} />
-                  <StatPill label="AI Assessments" value={counts.ai_assessments || 0} Icon={Brain} />
-                  <StatPill label="AI Candidates" value={counts.ai_candidates || 0} Icon={User} />
-                  <StatPill label="Subordinates" value={counts.subordinates || 0} Icon={Users} />
+                  <StatPill label="Assessments" value={counts.assessments} Icon={ClipboardList} />
+                  <StatPill label="Custom Assessments" value={counts.custom_assessments} Icon={Target} />
+                  <StatPill label="Invitations" value={counts.candidate_invitations} Icon={Mail} />
+                  <StatPill label="Job Roles" value={counts.job_roles} Icon={Building2} />
+                  <StatPill label="Questions" value={counts.questions} Icon={FileText} />
+                  <StatPill label="Users Invited" value={counts.user_invitations} Icon={UserPlus} />
+                  <StatPill label="Interviews" value={counts.interviews} Icon={Video} />
+                  <StatPill label="Interview Requests" value={counts.interview_invitations} Icon={CheckCircle2} />
+                  <StatPill label="Subordinates" value={counts.subordinates} Icon={Users} />
+                  <StatPill label="Deletion Req." value={counts.deletion_requests} Icon={Trash2} />
+                  <StatPill label="Calendar Slots" value={counts.interview_slots} Icon={Clock} />
+                  <StatPill label="Availability" value={counts.interviewer_availability} Icon={Clock} />
+                  <StatPill label="AI Assessments" value={counts.ai_assessments} Icon={Brain} />
+                  <StatPill label="AI Candidates" value={counts.ai_candidates} Icon={User} />
+                  <StatPill label="Coding Qs" value={counts.coding_questions} Icon={Code} />
+                  <StatPill label="Coding Invites" value={counts.coding_invites} Icon={Mail} />
                 </div>
               </div>
 
@@ -326,7 +336,26 @@ export default function TeamMembers() {
   const canAccess = useMemo(() => ['company_admin', 'hr', 'hr_manager', 'application_admin'].includes(myRole), [myRole]);
   const canInvite = useMemo(() => myRole === 'company_admin' || myRole === 'hr_manager' || myRole === 'hr', [myRole]);
 
-  const [tab, setTab] = useState(canInvite ? 'invite' : 'overview');
+  const [tab, setTab] = useState(canInvite ? 'invite' : 'overview'); // overview, invite, history
+  const [logs, setLogs] = useState([]);
+  const [loadingLogs, setLoadingLogs] = useState(false);
+
+  const loadLogs = async () => {
+    setLoadingLogs(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/users/transfer-logs/`, { headers: authHeader() });
+      setLogs(res.data.logs || []);
+    } catch (e) {
+      console.error('Failed to load transfer logs', e);
+    } finally {
+      setLoadingLogs(false);
+    }
+  };
+
+  useEffect(() => {
+    if (tab === 'history') loadLogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [data, setData] = useState({ scope: '', members: [], invitations: [] });
@@ -611,6 +640,19 @@ export default function TeamMembers() {
               >
                 <Users size={14} /> Members & Invites
               </button>
+              <button
+                onClick={() => setTab('history')}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8, minWidth: 170,
+                  padding: '9px 14px', borderRadius: 10, cursor: 'pointer',
+                  fontSize: 13, fontWeight: 600,
+                  border: tab === 'history' ? '1px solid #c7d2fe' : '1px solid #e5e7eb',
+                  background: tab === 'history' ? '#eef2ff' : '#fff',
+                  color: tab === 'history' ? '#4338ca' : '#4b5563',
+                }}
+              >
+                <History size={14} /> Transfer History
+              </button>
             </div>
 
             {/* Global error */}
@@ -717,6 +759,77 @@ export default function TeamMembers() {
                     </>
                   )}
                 </div>
+              </div>
+            )}
+
+            {/* ══ HISTORY TAB ══ */}
+            {!loading && tab === 'history' && (
+              <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+                <div style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 8, background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <History size={15} color="#64748b" strokeWidth={2.2} />
+                  </div>
+                  <span style={{ fontWeight: 700, fontSize: 15, color: '#111827' }}>Ownership Transfer History</span>
+                </div>
+
+                {loadingLogs ? (
+                  <div style={{ padding: '40px 0', textAlign: 'center', color: '#6b7280' }}>
+                    <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', marginBottom: 8 }} />
+                    <div style={{ fontSize: 13 }}>Loading history...</div>
+                  </div>
+                ) : logs.length === 0 ? (
+                  <div style={{ padding: '60px 20px', textAlign: 'center' }}>
+                    <div style={{ width: 48, height: 48, borderRadius: '50%', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+                      <History size={24} color="#cbd5e1" />
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: '#374151' }}>No transfer history found</div>
+                    <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 4 }}>History of team member replacements will appear here</div>
+                  </div>
+                ) : (
+                  <div style={{ overflowX: 'auto' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                      <thead>
+                        <tr style={{ background: '#f8fafc' }}>
+                          <th style={{ textAlign: 'left', padding: '10px 20px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Date</th>
+                          <th style={{ textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Transferred From</th>
+                          <th style={{ textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Transferred To</th>
+                          <th style={{ textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Transferred By</th>
+                          <th style={{ textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Status</th>
+                          <th style={{ textAlign: 'left', padding: '10px 20px', fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Reason</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {logs.map(log => (
+                          <tr key={log.id} style={{ borderBottom: '1px solid #f3f4f6' }}>
+                            <td style={{ padding: '12px 20px', whiteSpace: 'nowrap' }}>
+                              <div style={{ fontSize: 13, fontWeight: 600, color: '#111827' }}>{formatDate(log.transferred_at)}</div>
+                              <div style={{ fontSize: 11, color: '#9ca3af' }}>{new Date(log.transferred_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                            </td>
+                            <td style={{ padding: '12px 16px' }}>
+                              <div style={{ fontSize: 13, color: '#374151', fontWeight: 500 }}>{log.from_name}</div>
+                              <div style={{ fontSize: 11, color: '#6b7280' }}>{log.from_email}</div>
+                            </td>
+                            <td style={{ padding: '12px 16px' }}>
+                              <div style={{ fontSize: 13, color: '#374151', fontWeight: 500 }}>{log.to_name}</div>
+                              <div style={{ fontSize: 11, color: '#6b7280' }}>{log.to_email}</div>
+                            </td>
+                            <td style={{ padding: '12px 16px' }}>
+                              <div style={{ fontSize: 12, color: '#6b7280' }}>{log.by_name}</div>
+                            </td>
+                            <td style={{ padding: '12px 16px' }}>
+                              {log.also_deactivated && (
+                                <span style={{ padding: '2px 8px', borderRadius: 4, background: '#fee2e2', color: '#991b1b', fontSize: 11, fontWeight: 600 }}>Deactivated</span>
+                              )}
+                            </td>
+                            <td style={{ padding: '12px 20px', fontSize: 12, color: '#6b7280', maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {log.transfer_reason || '—'}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             )}
 

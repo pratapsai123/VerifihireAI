@@ -253,6 +253,30 @@ function formatDuration(ms) {
 export default function TakeAssessment() {
   const navigate = useNavigate();
   const { token } = useParams();
+
+  // Create or load Session ID and configure Axios interceptor
+  useEffect(() => {
+    if (!token) return;
+    let localSessionId = localStorage.getItem(`assessment_session_id_${token}`);
+    if (!localSessionId) {
+      localSessionId = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now();
+      localStorage.setItem(`assessment_session_id_${token}`, localSessionId);
+    }
+    
+    // Add request interceptor to attach session ID to all relevant requests
+    const reqInterceptor = axios.interceptors.request.use((config) => {
+      if (config.url && (config.url.includes('/invitations/public/') || config.url.includes('/candidate-details/'))) {
+        if (!config.headers) config.headers = {};
+        config.headers['X-Session-ID'] = localSessionId;
+      }
+      return config;
+    });
+
+    return () => {
+      axios.interceptors.request.eject(reqInterceptor);
+    };
+  }, [token]);
+
   const [candidateDetailsCompleted, setCandidateDetailsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -864,9 +888,14 @@ export default function TakeAssessment() {
           setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
           setWindowSchedule(err?.response?.data?.schedule || null);
         }
-        // 409 = already submitted — show popup instead of redirecting
+        // 409 = already submitted or session locked
         if (status === 409) {
-          setAlreadySubmitted(true);
+          const errMsg = err?.response?.data?.error;
+          if (errMsg && errMsg.includes('already in use')) {
+             setWindowError(errMsg);
+          } else {
+             setAlreadySubmitted(true);
+          }
         }
         setPrecheckLoading(false);
       });
@@ -970,7 +999,11 @@ export default function TakeAssessment() {
         const status = e?.response?.status;
         const message = e?.response?.data?.error || e?.message || 'Failed to load assessment';
         if (status === 409 && token) {
-          setAlreadySubmitted(true);
+          if (message.includes('already in use')) {
+            setError(message);
+          } else {
+            setAlreadySubmitted(true);
+          }
           setLoading(false);
           return;
         }

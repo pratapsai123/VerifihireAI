@@ -20,6 +20,7 @@ export default function AcceptInvite() {
   const [tempPassword, setTempPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [showTempPassword, setShowTempPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -374,24 +375,42 @@ export default function AcceptInvite() {
                 className="auth-input-with-icon"
                 placeholder="Confirm New Password *"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                onFocus={() => setConfirmPasswordFocused(true)}
-                onBlur={() => setConfirmPasswordFocused(false)}
-                required
-                style={{ paddingRight: '2.5rem' }}
-                disabled={submitting}
-              />
-              <label className="auth-floating-label">Confirm New Password *</label>
-              <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: '#94a3b8' }}>
-                <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-              </button>
-            </div>
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (fieldErrors.confirmPassword) {
+                  setFieldErrors(prev => {
+                    const newState = { ...prev };
+                    delete newState.confirmPassword;
+                    return newState;
+                  });
+                }
+              }}
+              onPaste={(e) => {
+                e.preventDefault();
+                setFieldErrors(prev => ({
+                  ...prev,
+                  confirmPassword: 'Copy and paste is not allowed. Please re-enter your password manually.'
+                }));
+              }}
+              onCopy={(e) => e.preventDefault()}
+              onCut={(e) => e.preventDefault()}
+              onFocus={() => setConfirmPasswordFocused(true)}
+              onBlur={() => setConfirmPasswordFocused(false)}
+              required
+              style={{ paddingRight: '2.5rem' }}
+              disabled={submitting}
+            />
+            <label className="auth-floating-label">Confirm New Password *</label>
+            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+              <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+            </button>
+          </div>
 
-            {confirmPassword.length > 0 && newPassword !== confirmPassword && (
-              <div className="field-error-text" style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.75rem', marginBottom: '1.25rem' }}>
-                Passwords do not match
-              </div>
-            )}
+          {(fieldErrors.confirmPassword || (confirmPassword.length > 0 && newPassword !== confirmPassword)) && (
+            <div className="field-error-text" style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.75rem', marginBottom: '1.25rem' }}>
+              {fieldErrors.confirmPassword || 'Passwords do not match'}
+            </div>
+          )}
 
             <button type="submit" className="auth-primary-btn" disabled={!canSubmit} style={{ width: '100%', padding: '0.875rem', fontWeight: '600', fontSize: '1rem' }}>
               {submitting ? 'Activating...' : 'Activate Account'}

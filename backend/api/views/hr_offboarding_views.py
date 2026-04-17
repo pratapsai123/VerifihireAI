@@ -30,15 +30,35 @@ def _can_manage(actor, target):
 
 
 def _preview_counts(from_user):
-    from ..models import Assessment, CustomAssessment, CandidateInvitation
+    from ..models import (
+        Assessment, CustomAssessment, CandidateInvitation,
+        JobRole, Question, UserInvitation,
+        Interview, InterviewInvitation,
+        DeletionRequest, InterviewSlot, InterviewerAvailability,
+        CodingQuestion, CodingInvite
+    )
 
     data = {
         "assessments": Assessment.objects.filter(user_profile=from_user, is_deleted=False).count(),
         "custom_assessments": CustomAssessment.objects.filter(user_profile=from_user).count(),
         "candidate_invitations": CandidateInvitation.objects.filter(user_profile=from_user).count(),
+        "job_roles": JobRole.objects.filter(created_by=from_user).count(),
+        "questions": Question.objects.filter(created_by=from_user).count(),
+        "user_invitations": UserInvitation.objects.filter(invited_by=from_user).count(),
+        "interviews": Interview.objects.filter(created_by=from_user).count(),
+        "interview_invitations": InterviewInvitation.objects.filter(interviewer_email=from_user.email).count(),
         "ai_assessments": 0,
         "ai_candidates": 0,
         "subordinates": UserProfile.objects.filter(manager=from_user).count(),
+        "deletion_requests": DeletionRequest.objects.filter(
+            models.Q(requester=from_user) | models.Q(approver=from_user)
+        ).count(),
+        "interview_slots": InterviewSlot.objects.filter(interviewer=from_user).count(),
+        "interviewer_availability": InterviewerAvailability.objects.filter(interviewer=from_user).count(),
+        "coding_questions": CodingQuestion.objects.filter(created_by_email=from_user.email).count(),
+        "coding_invites": CodingInvite.objects.filter(
+            models.Q(created_by_email=from_user.email) | models.Q(invited_by_email=from_user.email)
+        ).count(),
     }
 
     try:
@@ -49,7 +69,7 @@ def _preview_counts(from_user):
 
     try:
         from ai_candidates.models import Candidate as AICandidate
-        data["ai_candidates"] = AICandidate.objects.filter(user_profile=from_user, is_deleted=False).count()
+        data["ai_candidates"] = AICandidate.objects.filter(user_profile=from_user).count()
     except Exception:
         pass
 
@@ -133,47 +153,75 @@ def transfer_ownership_view(request, user_id):
         if to_user.id == from_user.id:
             return Response({"error": "Cannot transfer ownership to same user."}, status=status.HTTP_400_BAD_REQUEST)
 
-        from ..models import Assessment, CustomAssessment, CandidateInvitation, OwnershipTransferLog
+        from ..models import (
+            Assessment, CustomAssessment, CandidateInvitation,
+            JobRole, Question, UserInvitation,
+            Interview, InterviewInvitation,
+            DeletionRequest, InterviewSlot, InterviewerAvailability,
+            CodingQuestion, CodingInvite, OwnershipTransferLog
+        )
 
-        counts = {
-            "assessments": 0,
-            "custom_assessments": 0,
-            "candidate_invitations": 0,
-            "ai_assessments": 0,
-            "ai_candidates": 0,
-            "subordinates": 0,
-        }
+        counts = _preview_counts(from_user)
 
         with transaction.atomic():
-            counts["assessments"] = Assessment.objects.filter(user_profile=from_user).update(user_profile=to_user)
-            counts["custom_assessments"] = CustomAssessment.objects.filter(user_profile=from_user).update(user_profile=to_user)
-            counts["candidate_invitations"] = CandidateInvitation.objects.filter(user_profile=from_user).update(user_profile=to_user)
+            # Update ForeignKeys
+            Assessment.objects.filter(user_profile=from_user).update(user_profile=to_user, updated_at=timezone.now())
+            CustomAssessment.objects.filter(user_profile=from_user).update(user_profile=to_user, updated_at=timezone.now())
+            CandidateInvitation.objects.filter(user_profile=from_user).update(user_profile=to_user, updated_at=timezone.now())
+            JobRole.objects.filter(created_by=from_user).update(created_by=to_user, updated_at=timezone.now())
+            Question.objects.filter(created_by=from_user).update(created_by=to_user)
+            UserInvitation.objects.filter(invited_by=from_user).update(invited_by=to_user)
+            Interview.objects.filter(created_by=from_user).update(created_by=to_user, updated_at=timezone.now())
+            UserProfile.objects.filter(manager=from_user).update(manager=to_user, updated_at=timezone.now())
+            DeletionRequest.objects.filter(requester=from_user).update(requester=to_user)
+            DeletionRequest.objects.filter(approver=from_user).update(approver=to_user)
+            InterviewSlot.objects.filter(interviewer=from_user).update(interviewer=to_user, updated_at=timezone.now())
+            InterviewerAvailability.objects.filter(interviewer=from_user).update(interviewer=to_user)
 
+            # Update email-based fields
+            InterviewInvitation.objects.filter(interviewer_email=from_user.email).update(
+                interviewer_email=to_user.email,
+                interviewer_name=f"{to_user.first_name or ''} {to_user.last_name or ''}".strip(),
+                updated_at=timezone.now()
+            )
+
+            # Update coding platform email fields
+            CodingQuestion.objects.filter(created_by_email=from_user.email).update(
+                created_by_email=to_user.email, updated_at=timezone.now()
+            )
+            CodingInvite.objects.filter(created_by_email=from_user.email).update(
+                created_by_email=to_user.email, updated_at=timezone.now()
+            )
+            CodingInvite.objects.filter(invited_by_email=from_user.email).update(
+                invited_by_email=to_user.email, updated_at=timezone.now()
+            )
+
+            # Update AI Assessments/Candidates if apps are present
             try:
                 from ai_assessments.models import Assessment as AIAssessment
-                counts["ai_assessments"] = AIAssessment.objects.filter(user_profile=from_user).update(user_profile=to_user)
+                AIAssessment.objects.filter(user_profile=from_user).update(user_profile=to_user)
             except Exception:
                 pass
 
             try:
                 from ai_candidates.models import Candidate as AICandidate
-                counts["ai_candidates"] = AICandidate.objects.filter(user_profile=from_user).update(user_profile=to_user)
+                AICandidate.objects.filter(user_profile=from_user).update(user_profile=to_user)
             except Exception:
                 pass
 
-            counts["subordinates"] = UserProfile.objects.filter(manager=from_user).update(manager=to_user)
-
+            # Create granular log
             OwnershipTransferLog.objects.create(
                 transferred_by=actor,
                 transferred_from=from_user,
                 transferred_to=to_user,
                 transfer_reason=transfer_reason,
-                assessments_transferred=counts["assessments"],
-                custom_assessments_transferred=counts["custom_assessments"],
-                candidate_invitations_transferred=counts["candidate_invitations"],
-                ai_assessments_transferred=counts["ai_assessments"],
-                ai_candidates_transferred=counts["ai_candidates"],
-                subordinates_reassigned=counts["subordinates"],
+                assessments_transferred=counts.get("assessments", 0),
+                custom_assessments_transferred=counts.get("custom_assessments", 0),
+                candidate_invitations_transferred=counts.get("candidate_invitations", 0),
+                ai_assessments_transferred=counts.get("ai_assessments", 0),
+                ai_candidates_transferred=counts.get("ai_candidates", 0),
+                subordinates_reassigned=counts.get("subordinates", 0),
+                detailed_counts=counts,
                 from_name=f"{from_user.first_name or ''} {from_user.last_name or ''}".strip(),
                 from_email=from_user.email,
                 to_name=f"{to_user.first_name or ''} {to_user.last_name or ''}".strip(),
@@ -307,7 +355,7 @@ def transfer_logs_view(request):
                 "by_email": log.by_email,
                 "transfer_reason": log.transfer_reason,
                 "also_deactivated": log.also_deactivated,
-                "counts": {
+                "counts": log.detailed_counts or {
                     "assessments": log.assessments_transferred,
                     "custom_assessments": log.custom_assessments_transferred,
                     "candidate_invitations": log.candidate_invitations_transferred,
