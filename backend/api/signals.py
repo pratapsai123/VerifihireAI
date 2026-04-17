@@ -59,7 +59,34 @@ def handle_candidate_save(sender, instance, created, **kwargs):
 @receiver(post_save, sender=AIAssessmentSubmission)
 def handle_assessment_save(sender, instance, created, **kwargs):
     if instance.status == 'selected':
-        logger.info(f"Signal: Assessment {instance.id} passed. Scheduling interview task in 120 seconds.")
+        logger.info(
+            f"Signal: Assessment submission {instance.id} PASSED "
+            f"({instance.candidate_name} — {instance.percentage}%). "
+            f"Scheduling interview invite task (120s delay)."
+        )
+
+        # Log this event in the candidate's pipeline timeline so it appears on the Results page
+        try:
+            from ai_candidates.models import Candidate as AICand
+            cand_qs = AICand.objects.filter(
+                email=instance.candidate_email,
+                company=instance.assessment.company
+            ).order_by('-id')
+            if cand_qs.exists():
+                log_automation_event(
+                    cand_qs.first(),
+                    'TASK_SCHEDULED', 'SUCCESS',
+                    f"Assessment passed with {instance.percentage}% score. "
+                    f"Interview invitation email scheduled (2-minute delay).",
+                    details={
+                        'submission_id': instance.id,
+                        'score': instance.percentage,
+                        'status': instance.status,
+                    }
+                )
+        except Exception as log_err:
+            logger.warning(f"Signal: Could not write PipelineLog for assessment pass event: {log_err}")
+
         def schedule_interview():
             try:
                 send_interview_link_task.apply_async(args=[instance.id], countdown=120)

@@ -111,8 +111,12 @@ export default function InviteCandidates() {
     if (!n) return false;
     if (!isValidEmail(e)) return false;
     if (!isValidPAN(p)) return false;
+    
+    if (validityMode === 'exact_window' && (!scheduleDate || !startTime)) return false;
+    if ((validityMode === 'date_anytime' || validityMode === 'one_week') && !scheduleDate) return false;
+    
     return true;
-  }, [name, email, pan]);
+  }, [name, email, pan, validityMode, scheduleDate, startTime]);
 
   const loadAssessment = async () => {
     setLoading(true);

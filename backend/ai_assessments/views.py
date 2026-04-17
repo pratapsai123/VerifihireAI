@@ -30,6 +30,7 @@ from .ai_logic import (
     _generate_mcq_pool_ai_only,
     pick_random_subset,
     _expert_assessment_refiner,
+    _validate_mcq_structure,
     GroqKeyManager
 )
 
@@ -141,11 +142,11 @@ class SubmitAssessmentView(APIView):
                 # Strip common choice prefixes like "a) ", "1. ", "Choice A: "
                 return re.sub(r'^(?:choice\s+)?[a-z0-9][\.\)\:\s-]+\s*', '', s.lower()).strip()
 
-            # 1. MCQ Scoring - Flat 20 points each
+            # 1. MCQ Scoring - 1 point each
             possible_mcq_points = 0
             candidate_mcq_points = 0
             for i, mcq in enumerate(mcqs):
-                weight = 20
+                weight = 1  # 1 point per MCQ question
                 possible_mcq_points += weight
                 
                 correct_ans = str(mcq.get('answer') or mcq.get('correct_answer') or '').strip()
@@ -171,16 +172,19 @@ class SubmitAssessmentView(APIView):
                         candidate_coding_points += (score_fraction * weight)
 
             # ---------------------------------------------------------
-            # FINAL WEIGHTED SCORING (40% MCQ / 60% Coding)
+            # FINAL WEIGHTED SCORING (configurable MCQ% / Coding%)
+            # Defaults to 40% MCQ / 60% Coding if not set
             # ---------------------------------------------------------
-            
+            mcq_w = (getattr(assessment, 'mcq_weight', 40) or 40) / 100
+            coding_w = 1 - mcq_w
+
             # Calculate individual percentages
             mcq_percentage = (candidate_mcq_points / possible_mcq_points * 100) if possible_mcq_points > 0 else 0
             coding_percentage = (candidate_coding_points / possible_coding_points * 100) if possible_coding_points > 0 else 0
             
             # Aggregate based on weightage
             if possible_mcq_points > 0 and possible_coding_points > 0:
-                percentage = round((mcq_percentage * 0.4) + (coding_percentage * 0.6))
+                percentage = round((mcq_percentage * mcq_w) + (coding_percentage * coding_w))
             elif possible_mcq_points > 0:
                 # 100% MCQ if no coding challenges are present
                 percentage = round(mcq_percentage)
@@ -204,13 +208,13 @@ class SubmitAssessmentView(APIView):
                     "scored_points": round(candidate_mcq_points), 
                     "possible_points": possible_mcq_points,
                     "accuracy": f"{int(mcq_percentage)}%",
-                    "weight": "40%"
+                    "weight": f"{round(mcq_w * 100)}%"
                 },
                 "coding": {
                     "scored_points": round(candidate_coding_points), 
                     "possible_points": possible_coding_points,
                     "accuracy": f"{int(coding_percentage)}%",
-                    "weight": "60%"
+                    "weight": f"{round(coding_w * 100)}%"
                 },
                 "coding_results": coding_results,
                 "weighted_final": f"{percentage}%"
@@ -232,10 +236,10 @@ class SubmitAssessmentView(APIView):
                     candidate.interview_summary.append({
                         "type": "AI_ASSESSMENT",
                         "assessment_id": assessment.id,
-                        "mcq_accuracy": f"{round(candidate_mcq_points/20)}/{len(mcqs)} ({int(mcq_percentage)}%)",
+                        "mcq_accuracy": f"{round(candidate_mcq_points)}/{len(mcqs)} ({int(mcq_percentage)}%)",
                         "coding_accuracy": f"{int(coding_percentage)}%",
-                        "weighted_mcq": f"{(mcq_percentage * 0.4):.1f}%",
-                        "weighted_coding": f"{(coding_percentage * 0.6):.1f}%",
+                        "weighted_mcq": f"{(mcq_percentage * mcq_w):.1f}%",
+                        "weighted_coding": f"{(coding_percentage * coding_w):.1f}%",
                         "integrity_score": f"{int(submission.integrity_score)}%",
                         "timestamp": timezone.now().isoformat()
                     })
@@ -342,9 +346,9 @@ class GenerateAssessmentView(APIView):
             coding_count = input_coding_count
             coding_tasks = ['Medium'] * coding_count
         else:
-            # Absolute default fallback
-            coding_count = 2
-            coding_tasks = ['Medium', 'Hard']
+            # Respect user's coding_count=0 - don't force a default
+            coding_count = 0
+            coding_tasks = []
 
         # Log for debugging
         logger.info(f"Generated Assessment Config: MCQs={mcq_count} ({mcq_easy}/{mcq_medium}/{mcq_hard}), Coding={coding_count} ({coding_tasks})")
@@ -426,16 +430,20 @@ class GenerateAssessmentView(APIView):
                     generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
             # 2. GENERATE CODING POOL (Skeleton-Based: 100% Accuracy)
-            logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
-            generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
-                groq_client=local_groq_client,
-                job_description=job_description,
-                required_skills=required_skills,
-                difficulties=pool_coding_tasks,
-                total_required=pool_coding_total,
-                model=self.PRIMARY_MODEL,
-                cancel_token=cancel_token
-            )
+            if pool_coding_total > 0:
+                logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
+                generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                    groq_client=local_groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    difficulties=pool_coding_tasks,
+                    total_required=pool_coding_total,
+                    model=self.PRIMARY_MODEL,
+                    cancel_token=cancel_token
+                )
+            else:
+                logger.info(f"Step 2: Skipping coding pool generation (coding_count=0)")
+                generated_data['coding_challenges'] = []
 
             # --- RESTORED ORIGINAL MCQ PASS ---
             # Now we call the refiner on the MCQ pool that was generated in Step 1
@@ -481,7 +489,19 @@ class GenerateAssessmentView(APIView):
             if (final_mcqs < pool_mcq_total or final_coding < pool_coding_total or 
                 final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
                 
-                logger.info(f"Self-Healing: Shortfall detected (MCQs: {final_mcqs}/{pool_mcq_total}, Coding: {final_coding}/{pool_coding_total}). Attempting repair...")
+                shortfall_details = []
+                if final_mcqs < pool_mcq_total:
+                    shortfall_details.append(f"MCQs: {final_mcqs}/{pool_mcq_total}")
+                if final_coding < pool_coding_total:
+                    shortfall_details.append(f"Coding: {final_coding}/{pool_coding_total}")
+                if final_easy < pool_easy:
+                    shortfall_details.append(f"Easy: {final_easy}/{pool_easy}")
+                if final_medium < pool_medium:
+                    shortfall_details.append(f"Medium: {final_medium}/{pool_medium}")
+                if final_hard < pool_hard:
+                    shortfall_details.append(f"Hard: {final_hard}/{pool_hard}")
+                
+                logger.info(f"\n🔧 SELF-HEALING REPAIR TRIGGERED:\n   Shortfalls detected: {', '.join(shortfall_details)}\n   Starting repair cycle...")
                 generated_data = _repair_pool_shortfall(
                     groq_client=local_groq_client,
                     job_description=job_description,
@@ -498,6 +518,8 @@ class GenerateAssessmentView(APIView):
                 final_mcqs = len(generated_data.get('mcqs', []))
                 final_coding = len(generated_data.get('coding_challenges', []))
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                
+                logger.info(f"\n✅ REPAIR CYCLE COMPLETE:\n   Final MCQs: {final_mcqs} ({final_easy}E/{final_medium}M/{final_hard}H)\n   Final Coding: {final_coding}")
 
             # --- FORCED REBALANCING GATE ---
             # If we have enough total MCQs, force-align their difficulty labels to match requested split
@@ -512,8 +534,196 @@ class GenerateAssessmentView(APIView):
                 # Update final metrics after rebalancing
                 final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
 
+            # --- FINAL PASS: CLEAN ALL MCQs FOR 100% ACCURACY ---
+            logger.info("\n🔍 FINAL PASS: Validating all MCQs for quality assurance...")
+            all_mcqs = generated_data.get('mcqs', [])
+            valid_mcqs = []
+            invalid_count = 0
+            
+            for mcq in all_mcqs:
+                is_valid, error_msg = _validate_mcq_structure(mcq)
+                if is_valid:
+                    valid_mcqs.append(mcq)
+                else:
+                    invalid_count += 1
+                    logger.warning(
+                        f"   ⚠️ INVALID MCQ REMOVED: {error_msg}. "
+                        f"Question: {mcq.get('question', '')[:40]}..."
+                    )
+            
+            logger.info(
+                f"\n📊 FINAL PASS RESULTS:\n"
+                f"   Input pool: {len(all_mcqs)} MCQs\n"
+                f"   Valid MCQs: {len(valid_mcqs)}\n"
+                f"   Removed (invalid): {invalid_count}\n"
+                f"   {f'⚠️  WARNING: {invalid_count} invalid MCQs removed!' if invalid_count > 0 else '✅ All MCQs valid!'}"
+            )
+            
+            # Update pool with only valid MCQs
+            generated_data['mcqs'] = valid_mcqs
+            final_mcqs = len(valid_mcqs)
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs)
+            
+            # Check if shortfall created by removing invalid MCQs
+            if invalid_count > 0 and final_mcqs < pool_mcq_total:
+                logger.warning(
+                    f"\n⚠️  SHORTFALL AFTER CLEANUP: Removed {invalid_count} invalid MCQs.\n"
+                    f"   Current: {final_mcqs} valid MCQs\n"
+                    f"   Required pool: {pool_mcq_total}\n"
+                    f"   Shortfall: {pool_mcq_total - final_mcqs}\n"
+                    f"   Triggering repair to fill gap..."
+                )
+                
+                # Trigger repair for the shortfall
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_description,
+                        required_skills=required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=self.PRIMARY_MODEL
+                    )
+                    
+                    # Use repaired data
+                    generated_data = repair_generated
+                    
+                    # Validate REPAIRED MCQs too (recursive validation)
+                    all_mcqs_after_repair = generated_data.get('mcqs', [])
+                    valid_mcqs_after_repair = []
+                    for mcq in all_mcqs_after_repair:
+                        is_valid, _ = _validate_mcq_structure(mcq)
+                        if is_valid:
+                            valid_mcqs_after_repair.append(mcq)
+                    
+                    generated_data['mcqs'] = valid_mcqs_after_repair
+                    final_mcqs = len(valid_mcqs_after_repair)
+                    final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs_after_repair)
+                    
+                    logger.info(
+                        f"✅ Repair completed. MCQs now: {final_mcqs} valid ({final_easy}E/{final_medium}M/{final_hard}H)"
+                    )
+                except Exception as repair_e:
+                    logger.error(f"❌ Repair failed during post-cleanup: {repair_e}")
+                    raise
+            
+            # Check minimum still met after cleaning (and repair if triggered)
+            if final_mcqs < mcq_count:
+                logger.error(
+                    f"\n❌ FINAL PASS FAILED: Not enough valid MCQs after cleaning!\n"
+                    f"   Required minimum: {mcq_count}, After cleanup: {final_mcqs}\n"
+                    f"   Removed {invalid_count} invalid MCQs during final pass.\n"
+                    f"   Cannot meet minimum requirement. Assessment rejected."
+                )
+                raise Exception(
+                    f"All MCQs failed final quality check. After removing {invalid_count} invalid MCQs, "
+                    f"only {final_mcqs} valid MCQs remain but {mcq_count} required."
+                )
+
+            # --- FINAL PASS: CLEAN ALL CODING CHALLENGES FOR 100% ACCURACY ---
+            logger.info("\n🔍 FINAL PASS: Validating all coding challenges...")
+            all_coding = generated_data.get('coding_challenges', [])
+            valid_coding = []
+            removed_coding = 0
+            MIN_TC = 4
+            MAX_TC = 6
+            
+            for challenge in all_coding:
+                test_cases = challenge.get('test_cases', [])
+                tc_count = len(test_cases)
+                
+                if tc_count < MIN_TC:
+                    removed_coding += 1
+                    logger.warning(
+                        f"   ⚠️ CODING CHALLENGE REMOVED: '{challenge.get('title', 'Unknown')}' has {tc_count}/{MIN_TC}-{MAX_TC} test cases. "
+                        f"Minimum {MIN_TC} required."
+                    )
+                else:
+                    valid_coding.append(challenge)
+                    logger.info(f"   ✅ Challenge '{challenge.get('title', 'Unknown')}' valid ({tc_count} test cases)")
+            
+            logger.info(
+                f"\n📊 CODING VALIDATION RESULTS:\n"
+                f"   Input pool: {len(all_coding)} challenges\n"
+                f"   Valid challenges: {len(valid_coding)} ({min(4, len(valid_coding))} tests)\n"
+                f"   Removed (insufficient test cases): {removed_coding}\n"
+                f"   {f'⚠️  WARNING: {removed_coding} challenges removed!' if removed_coding > 0 else '✅ All challenges valid!'}"
+            )
+            
+            # Update pool with only valid coding challenges
+            generated_data['coding_challenges'] = valid_coding
+            final_coding = len(valid_coding)
+            
+            # Check if shortfall created by removing insufficient coding challenges
+            if removed_coding > 0 and final_coding < pool_coding_total:
+                logger.warning(
+                    f"\n⚠️  SHORTFALL AFTER CLEANUP: Removed {removed_coding} coding challenges.\n"
+                    f"   Current: {final_coding} valid challenges\n"
+                    f"   Required pool: {pool_coding_total}\n"
+                    f"   Shortfall: {pool_coding_total - final_coding}\n"
+                    f"   Triggering repair to fill gap..."
+                )
+                
+                # Trigger repair for coding shortfall
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_description,
+                        required_skills=required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=self.PRIMARY_MODEL
+                    )
+                    
+                    # Use repaired data
+                    generated_data = repair_generated
+                    
+                    # Validate REPAIRED coding challenges too (check test cases)
+                    all_coding_after_repair = generated_data.get('coding_challenges', [])
+                    valid_coding_after_repair = []
+                    for challenge in all_coding_after_repair:
+                        tc_count = len(challenge.get('test_cases', []))
+                        if tc_count >= MIN_TC:
+                            valid_coding_after_repair.append(challenge)
+                    
+                    generated_data['coding_challenges'] = valid_coding_after_repair
+                    final_coding = len(valid_coding_after_repair)
+                    
+                    logger.info(f"✅ Coding repair completed. Challenges now: {final_coding} valid")
+                except Exception as repair_e:
+                    logger.error(f"❌ Repair failed during post-cleanup (coding): {repair_e}")
+                    raise
+            
+            # Check minimum still met after cleaning (and repair if triggered)
+            if final_coding < coding_count:
+                logger.error(
+                    f"\n❌ CODING VALIDATION FAILED: Not enough valid challenges!\n"
+                    f"   Required minimum: {coding_count}, After cleaning: {final_coding}\n"
+                    f"   Removed {removed_coding} challenges with insufficient test cases.\n"
+                    f"   Cannot meet minimum requirement. Assessment rejected."
+                )
+                raise Exception(
+                    f"All coding challenges failed final quality check (insufficient test cases). "
+                    f"After removing {removed_coding} invalid challenges, only {final_coding} valid challenges remain but {coding_count} required."
+                )
+
             # Final Validation Gate
             if final_mcqs < mcq_count or final_coding < coding_count:
+                logger.error(
+                    f"\n❌ FINAL VALIDATION FAILED:\n"
+                    f"   Required minimum - MCQs: {mcq_count}, Coding: {coding_count}\n"
+                    f"   Got - MCQs: {final_mcqs}, Coding: {final_coding}\n"
+                    f"   Buffer pool target was MCQs: {pool_mcq_total}, Coding: {pool_coding_total}\n"
+                    f"   Assessment generation ABORTED."
+                )
                 raise Exception(
                     f"AI could not satisfy minimum required pool counts even after repair. "
                     f"Expected MINIMUM MCQs={mcq_count}, min coding={coding_count}; "
@@ -533,16 +743,18 @@ class GenerateAssessmentView(APIView):
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,
-                mcq_count=mcq_count,
-                mcq_easy=mcq_easy,
-                mcq_medium=mcq_medium,
-                mcq_hard=mcq_hard,
-                coding_count=coding_count,
+                mcq_count=final_mcqs,
+                mcq_easy=final_easy,
+                mcq_medium=final_medium,
+                mcq_hard=final_hard,
+                coding_count=final_coding,
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
                 num_applicants=num_applicants,
+                max_candidates_allowed=num_applicants,
                 same_questions_for_all=same_questions_for_all,
+                mcq_weight=int(data.get('mcq_weight', 40)),
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
@@ -554,6 +766,14 @@ class GenerateAssessmentView(APIView):
                 status='SCHEDULED'
             )
 
+            logger.info(
+                f"\n✨ ASSESSMENT CREATED SUCCESSFULLY (ID: {assessment.id}):\n"
+                f"   Skills: {required_skills}\n"
+                f"   Questions: {final_mcqs} MCQs ({final_easy}E/{final_medium}M/{final_hard}H) + {final_coding} Coding\n"
+                f"   Candidates: {num_applicants} ({'same questions' if same_questions_for_all else 'unique questions'})\n"
+                f"   Status: {assessment.status}\n"
+                f"   Share Token: {assessment.share_token}"
+            )
 
             return Response({
                 "id": assessment.id,
@@ -644,11 +864,32 @@ class CreateSubmissionView(APIView):
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
-                # Shuffled Distribution: 
-                # Even for 'same questions for all', we use pick_random_subset 
-                # to ensure candidates get the same set but in a jumbled (shuffled) order.
-                # (seed=email ensures different shuffle per user)
-                submission.candidate_questions = pick_random_subset(assessment, gen_content, seed=email)
+                # Unique MCQ Distribution:
+                # Resolve this candidate's 0-based index within the batch so pick_random_subset
+                # can assign a non-overlapping slice of the MCQ pool (partitioned mode).
+                # For same_questions_for_all, candidate_index is not used (sampling mode).
+                candidate_index = None
+                if not assessment.same_questions_for_all:
+                    try:
+                        # Index = position of this candidate's submission among all ONGOING/submitted
+                        # submissions for this assessment, ordered by creation time.
+                        all_subs = list(
+                            AIAssessmentSubmission.objects.filter(
+                                assessment=assessment
+                            ).order_by('id').values_list('id', flat=True)
+                        )
+                        if submission.id in all_subs:
+                            candidate_index = all_subs.index(submission.id)
+                        else:
+                            candidate_index = len(all_subs)  # fallback: append to end
+                    except Exception as idx_err:
+                        logger.warning(f"Could not resolve candidate_index for {email}: {idx_err}")
+
+                submission.candidate_questions = pick_random_subset(
+                    assessment, assessment.generated_content,
+                    seed=email,
+                    candidate_index=candidate_index
+                )
                 submission.save(update_fields=['candidate_questions'])
 
              
@@ -843,6 +1084,8 @@ class AssessmentListView(APIView):
                     "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
                     "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                     "status": assessment.status,
+                    "batch_name": assessment.batch_name,
+                    "max_candidates_allowed": assessment.max_candidates_allowed,
                     "share_token": str(assessment.share_token),
                     "candidate_count": count,
                     "completed_count": completed_count,
@@ -927,11 +1170,16 @@ class AssessmentDetailView(APIView):
                 "difficulty_level": assessment.difficulty_level,
                 "total_points": assessment.total_points,
                 "pass_threshold": assessment.pass_threshold,
+                "mcq_weight": getattr(assessment, 'mcq_weight', 40) or 40,
+                "coding_weight": 100 - (getattr(assessment, 'mcq_weight', 40) or 40),
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M") if assessment.created_at else None,
                 "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
+                "batch_name": assessment.batch_name,
                 "share_token": str(assessment.share_token),
                 "num_applicants": assessment.num_applicants,
+                "max_candidates_allowed": assessment.max_candidates_allowed,
+                "same_questions_for_all": assessment.same_questions_for_all,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
                 "submissions": submission_data,
@@ -1115,6 +1363,11 @@ class InviteAssessmentCandidatesView(APIView):
         invite_type = request.data.get('type')  # 'individual' or 'bulk'
         invited_candidates = []
         
+        # Check if max candidates reached
+        from .models import InvitedCandidate
+        already_invited = InvitedCandidate.objects.filter(assessment=assessment).count()
+        max_allowed = assessment.max_candidates_allowed
+        
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
@@ -1126,10 +1379,21 @@ class InviteAssessmentCandidatesView(APIView):
             if not name or not email:
                 return Response({"error": "Name and Email are required"}, status=status.HTTP_400_BAD_REQUEST)
             
+            # Check if max reached
+            if already_invited >= max_allowed:
+                return Response({"error": f"Maximum {max_allowed} candidates allowed. Already invited {already_invited}."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Check if already invited
+            if InvitedCandidate.objects.filter(assessment=assessment, email=email).exists():
+                return Response({"error": f"Candidate {email} already invited."}, status=status.HTTP_400_BAD_REQUEST)
+            
             # Append name and email
             encoded_name = urllib.parse.quote(name)
             encoded_email = urllib.parse.quote(email)
             link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+            
+            # Save invited candidate
+            InvitedCandidate.objects.create(assessment=assessment, name=name, email=email)
             
             # Increment invited count
             assessment.invited_count += 1
@@ -1204,16 +1468,39 @@ class InviteAssessmentCandidatesView(APIView):
                 if 'name' not in df.columns or 'email' not in df.columns:
                     return Response({"error": "File must have 'name' and 'email' columns"}, status=status.HTTP_400_BAD_REQUEST)
 
-                assessment.invited_count += len(df)
-                assessment.save(update_fields=['invited_count'])
+                # Check capacity
+                max_allowed = assessment.max_candidates_allowed
+                available_slots = max_allowed - already_invited
+                num_to_invite = min(len(df), available_slots)
+                
+                if num_to_invite == 0:
+                    return Response(
+                        {"error": f"No available slots. Max {max_allowed} allowed, {already_invited} already invited."},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                
+                invitation_count = 0
+                skipped_count = 0
 
-                for _, row in df.iterrows():
+                for idx, row in df.iterrows():
+                    if invitation_count >= num_to_invite:
+                        break
+                        
                     name = str(row['name']).strip()
                     email = str(row['email']).strip()
+                    
+                    # Check if already invited
+                    if InvitedCandidate.objects.filter(assessment=assessment, email=email).exists():
+                        skipped_count += 1
+                        continue
                     
                     encoded_name = urllib.parse.quote(name)
                     encoded_email = urllib.parse.quote(email)
                     link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+                    
+                    # Save invited candidate
+                    InvitedCandidate.objects.create(assessment=assessment, name=name, email=email)
+                    invitation_count += 1
                     
                     invited_candidates.append({"name": name, "email": email, "link": link})
                     
@@ -1260,11 +1547,84 @@ class InviteAssessmentCandidatesView(APIView):
                         logger.error(f"Bulk email error for {email}: {mail_err}")
             except Exception as e:
                 return Response({"error": f"Error parsing file: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Update assessment invited count to match invited candidates count
+        assessment.invited_count = InvitedCandidate.objects.filter(assessment=assessment).count()
+        assessment.save(update_fields=['invited_count'])
+        
+        # Calculate remaining spots
+        remaining_spots = max(0, assessment.max_candidates_allowed - assessment.invited_count)
 
         return Response({
             "message": f"Successfully invited {len(invited_candidates)} candidates",
-            "count": len(invited_candidates)
+            "count": len(invited_candidates),
+            "total_invited": assessment.invited_count,
+            "max_allowed": assessment.max_candidates_allowed,
+            "remaining_spots": remaining_spots
         }, status=status.HTTP_200_OK)
+
+class GetInvitedCandidatesView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, assessment_id):
+        """Get list of invited candidates for an assessment"""
+        try:
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.filter(pk=assessment_id, company=company).first()
+            if not assessment:
+                assessment = Assessment.objects.filter(pk=assessment_id, user_profile=user_profile).first()
+            
+            if not assessment:
+                raise Assessment.DoesNotExist
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        from .models import InvitedCandidate
+        invited_qs = InvitedCandidate.objects.filter(assessment=assessment).order_by('-invited_at')
+        
+        invited_list = []
+        for cand in invited_qs:
+            invited_list.append({
+                "name": cand.name,
+                "email": cand.email,
+                "status": cand.status,
+                "invited_at": cand.invited_at.strftime("%Y-%m-%d %H:%M") if cand.invited_at else None
+            })
+        
+        # Calculate candidate points (Division based on num_applicants vs same_questions)
+        divisor = max(1, assessment.num_applicants) if not assessment.same_questions_for_all else 1
+        
+        mcq_pool_size = assessment.mcq_count if hasattr(assessment, 'mcq_count') else 0
+        coding_pool_size = assessment.coding_count if hasattr(assessment, 'coding_count') else 0
+        
+        candidate_mcq_count = mcq_pool_size // divisor
+        candidate_coding_count = coding_pool_size // divisor
+        
+        # Scoring: 20 pts per MCQ + weighted coding (fallback calculation for UI)
+        mcq_points = candidate_mcq_count * 20
+        coding_points = candidate_coding_count * 20
+        total_candidate_points = mcq_points + coding_points
+        
+        remaining_spots = max(0, assessment.max_candidates_allowed - invited_qs.count())
+        
+        return Response({
+            "invited_candidates": invited_list,
+            "total_invited": invited_qs.count(),
+            "max_allowed": assessment.max_candidates_allowed,
+            "remaining_spots": remaining_spots,
+            "can_invite_more": remaining_spots > 0,
+            "candidate_points": {
+                "mcq_count": candidate_mcq_count,
+                "mcq_points": mcq_points,
+                "coding_count": candidate_coding_count,
+                "coding_points": coding_points,
+                "total_points": total_candidate_points
+            }
+        }, status=status.HTTP_200_OK)
+
 import requests
 
 from rest_framework.permissions import AllowAny

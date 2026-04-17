@@ -34,7 +34,9 @@ class Assessment(models.Model):
     available_until = models.DateTimeField(blank=True, null=True)
     invited_count = models.IntegerField(default=0)
     num_applicants = models.IntegerField(default=0)
+    max_candidates_allowed = models.IntegerField(default=1, help_text="Maximum number of candidates that can be invited to this assessment")
     same_questions_for_all = models.BooleanField(default=False, help_text="If True, all candidates receive identical questions instead of unique randomized sets")
+    mcq_weight = models.IntegerField(default=40, help_text="MCQ contribution % toward final score (coding weight = 100 - mcq_weight). Default: 40% MCQ, 60% Coding")
     company = models.ForeignKey(
         'api.Company', 
         on_delete=models.CASCADE, 
@@ -112,3 +114,20 @@ class AIAssessmentIntegrityScreenshot(models.Model):
     
     class Meta:
         db_table = 'ai_assessment_integrity_screenshot'
+
+class InvitedCandidate(models.Model):
+    """Track candidates invited to assessment"""
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='invited_candidates')
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    invited_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, default='invited', choices=[
+        ('invited', 'Invited'),
+        ('started', 'Started'),
+        ('completed', 'Completed'),
+        ('declined', 'Declined')
+    ])
+    
+    class Meta:
+        db_table = 'ai_invited_candidate'
+        unique_together = ('assessment', 'email')  # Prevent duplicate invites to same email

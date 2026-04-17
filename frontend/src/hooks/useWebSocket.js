@@ -68,12 +68,12 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
       try {
         const data = JSON.parse(event.data);
 
-        // 🔥 Stop reconnect on termination
+        // 🔥 Stop reconnect only on terminal states
         if (
           data.type === "end_interview" ||
-          data.type === "session_expired"
+          (data.type === "session_expired" && (data.reason === "completed" || data.reason === "expired"))
         ) {
-          console.log("🛑 Interview ended. Stopping reconnect.");
+          console.log("🛑 Final session state reached. Stopping reconnect.");
           shouldReconnectRef.current = false;
         }
 

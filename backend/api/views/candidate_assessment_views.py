@@ -3,6 +3,7 @@ from ai_candidates.models import Candidate
 from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
 from ..models import CandidateSubmission
+from .assessment_views import _is_valid_pan
 
 
 @csrf_exempt
@@ -345,10 +346,30 @@ def get_invitation_public_view(request, token):
     Public endpoint for candidates: fetch assessment + questions using a CandidateInvitation token.
     """
     try:
-        try:
-            inv = CandidateInvitation.objects.select_related('assessment').get(token=token)
-        except CandidateInvitation.DoesNotExist:
-            return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+        session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
+        check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
+
+        if not check_only and session_id:
+            with transaction.atomic():
+                try:
+                    inv = CandidateInvitation.objects.select_for_update().select_related('assessment').get(token=token)
+                except CandidateInvitation.DoesNotExist:
+                    return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+                
+                if inv.claimed_session_id and inv.claimed_session_id != session_id:
+                    return Response({'error': 'This assessment is already in use. If this is not you, please contact our support team.'}, status=status.HTTP_409_CONFLICT)
+                
+                if not inv.claimed_session_id:
+                    inv.claimed_session_id = session_id
+                    inv.save(update_fields=['claimed_session_id'])
+        else:
+            try:
+                inv = CandidateInvitation.objects.select_related('assessment').get(token=token)
+            except CandidateInvitation.DoesNotExist:
+                return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+                
+            if inv.claimed_session_id and session_id and inv.claimed_session_id != session_id:
+                return Response({'error': 'This assessment is already in use. If this is not you, please contact our support team.'}, status=status.HTTP_409_CONFLICT)
 
         assessment = inv.assessment
 
@@ -2282,6 +2303,7 @@ def save_all_candidate_details_view(request):
     """
     try:
         token = request.data.get('token')
+        session_id = request.data.get('session_id') or request.headers.get('X-Session-ID')
         if not token:
             return Response(
                 {'error': 'Token is required'},
@@ -2289,13 +2311,21 @@ def save_all_candidate_details_view(request):
             )
 
         # Validate token exists in CandidateInvitation
-        try:
-            invitation = CandidateInvitation.objects.get(token=token)
-        except CandidateInvitation.DoesNotExist:
-            return Response(
-                {'error': 'Invalid token'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+        with transaction.atomic():
+            try:
+                invitation = CandidateInvitation.objects.select_for_update().get(token=token)
+            except CandidateInvitation.DoesNotExist:
+                return Response(
+                    {'error': 'Invalid token'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+                
+            if invitation.claimed_session_id and session_id and invitation.claimed_session_id != session_id:
+                return Response({'error': 'This assessment is already in use. If this is not you, please contact our support team.'}, status=status.HTTP_409_CONFLICT)
+                
+            if not invitation.claimed_session_id and session_id:
+                invitation.claimed_session_id = session_id
+                invitation.save(update_fields=['claimed_session_id'])
 
         # Extract data
         full_name = request.data.get('full_name', '').strip()

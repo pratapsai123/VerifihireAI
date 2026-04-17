@@ -133,19 +133,7 @@ axios.interceptors.response.use(
 
 function AppContent() {
   const location = useLocation();
-  const [showCookieBanner, setShowCookieBanner] = useState(false);
 
-  useEffect(() => {
-    const consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-      setShowCookieBanner(true);
-    }
-  }, []);
-
-  const handleAcceptCookies = () => {
-    localStorage.setItem('cookieConsent', 'true');
-    setShowCookieBanner(false);
-  };
 
   // List of routes that should have the global header hidden for a full-screen experience
   const fullScreenRoutes = [
@@ -236,34 +224,7 @@ function AppContent() {
           <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
 
-        {/* Cookie Consent Banner */}
-        <div
-          id="cookie-banner"
-          style={{
-            transform: showCookieBanner ? 'translateY(0)' : 'translateY(100%)',
-          }}
-        >
-          <div className="cookie-content">
-            <p className="cookie-text">
-              We use cookies to enhance your experience. By continuing to visit
-              this site you agree to our use of cookies.
-            </p>
-            <div className="cookie-buttons">
-              <button
-                onClick={() => handleAcceptCookies()}
-                className="cookie-btn cookie-accept-btn"
-              >
-                Accept
-              </button>
-              <button
-                onClick={() => setShowCookieBanner(false)}
-                className="cookie-btn cookie-decline-btn"
-              >
-                Decline
-              </button>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );

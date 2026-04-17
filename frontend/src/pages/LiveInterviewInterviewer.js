@@ -27,6 +27,7 @@ function LiveInterviewInterviewer() {
   const [interviewerName] = useState('Interviewer');
   
   const [sessionExpired, setSessionExpired] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
   const [bothPartiesConnected, setBothPartiesConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(true);
@@ -226,12 +227,16 @@ function LiveInterviewInterviewer() {
         }, 1200);
         break;
       case 'session_expired':
-        showNotification(data.message || 'Session expired or already completed.', 'error');
-        setSessionExpired(true);
-        localStorage.setItem(sessionKey, 'true');
-        setTimeout(() => {
-          navigate('/live-interview-list');
-        }, 3000);
+        if (data.reason === 'not_started') {
+          setIsWaiting(true);
+        } else {
+          showNotification(data.message || 'Session expired or already completed.', 'error');
+          setSessionExpired(true);
+          localStorage.setItem(sessionKey, 'true');
+          setTimeout(() => {
+            navigate('/live-interview-list');
+          }, 3000);
+        }
         break;
       default: break;
     }
@@ -467,6 +472,30 @@ function LiveInterviewInterviewer() {
           <h3 className="session-expired-title">Session Completed</h3>
           <p className="session-expired-message">This interview session has already been completed.</p>
           <button className="btn-close-window" onClick={() => navigate('/live-interview-list')}>Close</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isWaiting) {
+    return (
+      <div className="li-waiting-screen">
+        <div className="li-waiting-card">
+          <div className="li-waiting-pulse">
+            <div className="pulse-circle"></div>
+            <i className="fas fa-clock waiting-icon"></i>
+          </div>
+          <h2 className="waiting-title">Waiting for Interview</h2>
+          <p className="waiting-message">
+            The interview session hasn't started yet. <br />
+            As the interviewer, you can wait here or come back at the scheduled time.
+          </p>
+          <div className="waiting-status">
+            <span className="status-dot"></span> Socket Connected
+          </div>
+          <button className="btn-refresh-waiting" onClick={() => window.location.reload()}>
+            <i className="fas fa-sync-alt"></i> Check Again
+          </button>
         </div>
       </div>
     );

@@ -24,7 +24,8 @@ const CreateAssessment = () => {
         pass_threshold: 60,
         customRoleTitle: '',
         num_applicants: 1,
-        same_questions_for_all: false
+        same_questions_for_all: false,
+        mcq_weight: 40
     });
 
 
@@ -159,7 +160,7 @@ const CreateAssessment = () => {
     };
 
     const calculateTotalPoints = () => {
-        const mcqPoints = formData.num_mcqs * 20;
+        const mcqPoints = formData.num_mcqs * 1; // 1 pt per MCQ
         const codingPoints = formData.coding_challenges.reduce((sum, c) => {
             const weight = c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300;
             return sum + weight;
@@ -228,6 +229,7 @@ const CreateAssessment = () => {
             total_possible_points: calculateTotalPoints(),
             num_applicants: formData.num_applicants,
             same_questions_for_all: formData.same_questions_for_all,
+            mcq_weight: formData.mcq_weight,
             available_from: (formData.start_date && formData.start_time) ? new Date(`${formData.start_date}T${formData.start_time}`).toISOString() : null,
             available_until: (formData.end_date && formData.end_time) ? new Date(`${formData.end_date}T${formData.end_time}`).toISOString() : null
         };
@@ -432,6 +434,52 @@ const CreateAssessment = () => {
                         </div>
                     )}
 
+
+                    {/* Scoring Weight Slider */}
+                    <div style={{ marginBottom: '2rem', background: '#F8FAFC', padding: '1.25rem 1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <div>
+                                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '600', color: '#1E293B' }}>Scoring Weights</h4>
+                                <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748B' }}>Adjust how MCQ and Coding scores contribute to the final result.</p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#6366F1', background: '#EEF2FF', padding: '3px 10px', borderRadius: '20px' }}>MCQ {formData.mcq_weight}%</span>
+                                <span style={{ fontSize: '0.8rem', color: '#94A3B8' }}>+</span>
+                                <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#8B5CF6', background: '#F5F3FF', padding: '3px 10px', borderRadius: '20px' }}>Coding {100 - formData.mcq_weight}%</span>
+                            </div>
+                        </div>
+                        <div style={{ position: 'relative', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
+                            <div style={{ flex: 1, position: 'relative', height: '8px' }}>
+                                <div style={{ position: 'absolute', inset: 0, height: '8px', borderRadius: '8px', background: `linear-gradient(to right, #6366F1 ${formData.mcq_weight}%, #8B5CF6 ${formData.mcq_weight}%)` }} />
+                                {/* The "Ball" */}
+                                <div style={{ 
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: `${formData.mcq_weight}%`, 
+                                    transform: 'translate(-50%, -50%)', 
+                                    width: '16px', 
+                                    height: '16px', 
+                                    borderRadius: '50%', 
+                                    background: '#FFFFFF', 
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)', 
+                                    border: '3px solid #6366F1',
+                                    zIndex: 1,
+                                    pointerEvents: 'none',
+                                    transition: 'left 0.1s ease-out'
+                                 }} />
+                                <input
+                                    type="range" min="0" max="100" step="5"
+                                    value={formData.mcq_weight}
+                                    onChange={(e) => handleChange('mcq_weight', parseInt(e.target.value))}
+                                    style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: 'pointer', height: '100%', margin: 0, zIndex: 2 }}
+                                />
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#94A3B8', fontWeight: '600' }}>
+                            <span>MCQ Only (100%)</span>
+                            <span>Coding Only (100%)</span>
+                        </div>
+                    </div>
 
                     {/* Dynamic Complexity Detail (only if tasks > 0) */}
                     {formData.num_coding > 0 && (
