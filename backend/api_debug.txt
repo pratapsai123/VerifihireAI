@@ -1066,3 +1066,75 @@ Traceback (most recent call last):
 Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
 
 RAW: No response received
+
+[2026-04-16 12:11:14.436878+00:00] PUBLIC ACCESS: Token='7c0a3c0e-53e5-40d5-a311-cb31d1d39ff0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776341472616']}>
+Host: verifihireai.com
+
+[2026-04-16 12:11:14.438596+00:00] PUBLIC ACCESS: Token='7c0a3c0e-53e5-40d5-a311-cb31d1d39ff0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776341472631']}>
+Host: verifihireai.com
+
+[2026-04-16 12:46:56.333996+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343614568']}>
+Host: verifihireai.com
+
+[2026-04-16 12:46:56.335320+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343614583']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:06.793046+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343626675']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:06.799242+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343626668']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:07.472289+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343627338']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:07.503669+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343627346']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:53.273872+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343671508']}>
+Host: verifihireai.com
+
+[2026-04-16 12:47:53.274156+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343671485']}>
+Host: verifihireai.com
+
+[2026-04-16 12:48:08.283972+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343688164']}>
+Host: verifihireai.com
+
+[2026-04-16 12:48:08.303799+00:00] PUBLIC ACCESS: Token='f6a3b12b-1275-423c-a59a-75b905436ca5'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343688156']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:14.819749+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343933049']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:14.820017+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343933069']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:24.248870+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343944122']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:24.251804+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343944118']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:25.743681+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343945592']}>
+Host: verifihireai.com
+
+[2026-04-16 12:52:25.773713+00:00] PUBLIC ACCESS: Token='d8ffdf7e-ed86-400a-984a-923d0a51a340'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776343945602']}>
+Host: verifihireai.com

@@ -389,3 +389,22 @@
 [2026-04-16 10:23:40.356705+00:00] Running OCR on rotation 270
 [2026-04-16 10:24:01.914283+00:00] Direct match found at rotation 270
 [2026-04-16 10:24:01.927716+00:00] Match found via OCR on page 0
+[2026-04-16 10:38:17.255947+00:00] Starting PDF Extraction for PAN: ANEPY3924A
+[2026-04-16 10:38:17.257408+00:00] Opened PDF with 1 pages
+[2026-04-16 10:38:17.264860+00:00] pdfplumber skipped: No module named 'pdfplumber'
+[2026-04-16 10:38:17.266075+00:00] PyPDF2 extracted content
+[2026-04-16 10:38:17.266432+00:00] Falling back to OCR step (Scanned PDF)
+[2026-04-16 10:38:17.586753+00:00] Running OCR on rotation 0
+[2026-04-16 10:38:40.291465+00:00] Direct match found at rotation 0
+[2026-04-16 10:38:40.302072+00:00] Match found via OCR on page 0
+[2026-04-16 10:51:30.108768+00:00] Starting PDF Extraction for PAN: JJBPS0859C
+[2026-04-16 10:51:30.109927+00:00] Opened PDF with 1 pages
+[2026-04-16 10:51:30.112527+00:00] pdfplumber skipped: No module named 'pdfplumber'
+[2026-04-16 10:51:30.113832+00:00] PyPDF2 extracted content
+[2026-04-16 10:51:30.114249+00:00] Falling back to OCR step (Scanned PDF)
+[2026-04-16 10:51:31.109250+00:00] Running OCR on rotation 0
+[2026-04-16 10:51:53.581655+00:00] Running OCR on rotation 180
+[2026-04-16 10:52:15.878499+00:00] Running OCR on rotation 90
+[2026-04-16 10:52:38.391000+00:00] Running OCR on rotation 270
+[2026-04-16 10:53:00.760047+00:00] Direct match found at rotation 270
+[2026-04-16 10:53:00.773718+00:00] Match found via OCR on page 0
