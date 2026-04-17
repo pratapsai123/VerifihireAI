@@ -98,13 +98,13 @@ export default function LiveInterviewList() {
 
   const getStatusMeta = (status) => {
     switch (status) {
-      case 'sent':       return { label: 'Invited',   cls: 'pill-blue' };
-      case 'accepted':   return { label: 'Accepted',  cls: 'pill-green' };
-      case 'completed':  return { label: 'Completed', cls: 'pill-teal' };
-      case 'submitted':  return { label: 'Submitted', cls: 'pill-teal' };
-      case 'failed':     return { label: 'Failed',    cls: 'pill-red' };
-      case 'draft':      return { label: 'Draft',     cls: 'pill-gray' };
-      default:           return { label: status || 'Pending', cls: 'pill-gray' };
+      case 'sent': return { label: 'Invited', cls: 'pill-blue' };
+      case 'accepted': return { label: 'Accepted', cls: 'pill-green' };
+      case 'completed': return { label: 'Completed', cls: 'pill-teal' };
+      case 'submitted': return { label: 'Submitted', cls: 'pill-teal' };
+      case 'failed': return { label: 'Failed', cls: 'pill-red' };
+      case 'draft': return { label: 'Draft', cls: 'pill-gray' };
+      default: return { label: status || 'Pending', cls: 'pill-gray' };
     }
   };
 
@@ -113,7 +113,7 @@ export default function LiveInterviewList() {
     if (r <= 0) return <span className="lil-dash">–</span>;
     return (
       <div className="lil-stars">
-        {[1,2,3,4,5].map(s => (
+        {[1, 2, 3, 4, 5].map(s => (
           <span key={s} className={`lil-star ${s <= Math.round(r) ? 'filled' : ''}`}>★</span>
         ))}
         <span className="lil-score">{r.toFixed(1)}</span>
@@ -122,7 +122,7 @@ export default function LiveInterviewList() {
   };
 
   const handleStartInterview = (token) => {
-    navigate(`/live-interview-interviewer?token=${token}`);
+    window.open(`/live-interview-interviewer?token=${token}`, '_blank');
   };
 
   return (
@@ -135,8 +135,8 @@ export default function LiveInterviewList() {
             <div className="lil-icon-wrap">
               {/* Video / live interview icon */}
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="23 7 16 12 23 17 23 7"/>
-                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                <polygon points="23 7 16 12 23 17 23 7" />
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
               </svg>
             </div>
             <div>
@@ -147,14 +147,14 @@ export default function LiveInterviewList() {
           <div className="lil-header-actions">
             <button className="lil-btn-back" type="button" onClick={() => navigate('/dashboard')}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
+                <polyline points="15 18 9 12 15 6" />
               </svg>
               Back
             </button>
             <button className="lil-btn-refresh" type="button" onClick={load}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="23 4 23 10 17 10"/>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                <polyline points="23 4 23 10 17 10" />
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
               </svg>
               Refresh
             </button>
@@ -167,17 +167,17 @@ export default function LiveInterviewList() {
             <span className="lil-stat-val">{stats.total}</span>
             <span className="lil-stat-lbl">Total</span>
           </div>
-          <div className="lil-stat-div"/>
+          <div className="lil-stat-div" />
           <div className="lil-stat">
             <span className="lil-stat-val blue">{stats.invited}</span>
             <span className="lil-stat-lbl">Invited</span>
           </div>
-          <div className="lil-stat-div"/>
+          <div className="lil-stat-div" />
           <div className="lil-stat">
             <span className="lil-stat-val green">{stats.accepted}</span>
             <span className="lil-stat-lbl">Accepted</span>
           </div>
-          <div className="lil-stat-div"/>
+          <div className="lil-stat-div" />
           <div className="lil-stat">
             <span className="lil-stat-val teal">{stats.completed}</span>
             <span className="lil-stat-lbl">Completed</span>
@@ -188,7 +188,7 @@ export default function LiveInterviewList() {
         <div className="lil-toolbar">
           <div className="lil-search-wrap">
             <svg className="lil-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <input
               className="lil-search"
@@ -205,13 +205,13 @@ export default function LiveInterviewList() {
         {/* ── Content ── */}
         {loading ? (
           <div className="lil-state-card">
-            <div className="lil-spinner"/>
+            <div className="lil-spinner" />
             <p>Loading interview candidates…</p>
           </div>
         ) : error ? (
           <div className="lil-state-card lil-state-error">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
             <p className="lil-state-title">Could not load candidates</p>
             <p className="lil-state-sub">{error}</p>
@@ -220,8 +220,8 @@ export default function LiveInterviewList() {
         ) : filtered.length === 0 ? (
           <div className="lil-state-card">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              <polygon points="23 7 16 12 23 17 23 7" />
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
             </svg>
             <p className="lil-state-title">{search ? 'No results found' : 'No interviews yet'}</p>
             <p className="lil-state-sub">{search ? 'Try a different search term.' : 'Invite candidates to get started.'}</p>
@@ -298,7 +298,7 @@ export default function LiveInterviewList() {
                         {isDone ? (
                           <span className="lil-done-badge">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="20 6 9 17 4 12"/>
+                              <polyline points="20 6 9 17 4 12" />
                             </svg>
                             Done
                           </span>
@@ -310,7 +310,7 @@ export default function LiveInterviewList() {
                             disabled={isFailed}
                           >
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <polygon points="5 3 19 12 5 21 5 3"/>
+                              <polygon points="5 3 19 12 5 21 5 3" />
                             </svg>
                             Start
                           </button>

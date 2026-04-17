@@ -1,3 +1,5 @@
+
+/certbot/
 # Sync .project/sourceTexts/ folder (source text files)
 
 # Don't sync user-specific SQLite databases
@@ -46,4 +48,4 @@ copilot-messages.log
 
 # System files
 .DS_Store
-.project/attachments/files/**
+.project/attachments/files/**certbot/

@@ -155,13 +155,17 @@ function ReviewPage() {
     if (state) {
       // Restore all state fields
       setAssessmentData(state);
-      if (state.assessmentName) {
-        setAssessmentName(state.assessmentName);
-        setEditedRole(state.assessmentName);
-      } else if (state.role) {
-        const resolved = state.role === 'other' ? state.customRole : state.role.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        setAssessmentName(resolved);
-        setEditedRole(resolved);
+      const fallbackRoleLabel = state.role === 'other'
+        ? state.customRole
+        : state.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const exactRoleLabel = state.roleLabel || fallbackRoleLabel || '';
+      // Prefer exact dropdown label when available; keep edited assessmentName if it is custom.
+      const roleToShow = state.assessmentName && state.assessmentName !== fallbackRoleLabel
+        ? state.assessmentName
+        : exactRoleLabel;
+      if (roleToShow) {
+        setAssessmentName(roleToShow);
+        setEditedRole(roleToShow);
       }
       if (state.minPassPercentage !== undefined) setMinPassPercentage(state.minPassPercentage);
       if (state.timeLimit) setTimeLimit(state.timeLimit);
@@ -632,6 +636,37 @@ function ReviewPage() {
       return;
     }
 
+    const parseTimeToSeconds = (timeValue) => {
+      if (!timeValue || typeof timeValue !== 'string') return 0;
+      const parts = timeValue.split(':').map(Number);
+      if (parts.length !== 3 || parts.some(Number.isNaN)) return 0;
+      const [h, m, s] = parts;
+      return (h * 3600) + (m * 60) + s;
+    };
+
+    const totalSec = parseTimeToSeconds(timeLimit);
+    const objSec = parseTimeToSeconds(objectiveTime);
+    const codSec = parseTimeToSeconds(codingTime);
+
+    const objectiveCount = Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+    const codingCount = (questions['Coding'] || []).length || (Array.isArray(assessmentData.codingQuestions) ? assessmentData.codingQuestions.length : 0);
+
+    if (totalSec <= 0) {
+      alert('Total Time must be greater than 00:00:00.');
+      return;
+    }
+    if (objectiveCount > 0 && objSec <= 0) {
+      alert('Objective Time must be greater than 00:00:00 when objective questions exist.');
+      return;
+    }
+    if (codingCount > 0 && codSec <= 0) {
+      alert('Coding Time must be greater than 00:00:00 when coding questions exist.');
+      return;
+    }
+
     try {
       // Check if we have coding questions from state (coding-only assessment)
       const codingQuestionsFromState = Array.isArray(assessmentData.codingQuestions) ? assessmentData.codingQuestions : [];
@@ -986,9 +1021,12 @@ function ReviewPage() {
                   ) : (
                     <>
                       <span>
-                        {assessmentName || (assessmentData.role === 'other'
-                          ? assessmentData.customRole
-                          : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())) || 'Untitled Assessment'}
+                        {assessmentName ||
+                          assessmentData.roleLabel ||
+                          (assessmentData.role === 'other'
+                            ? assessmentData.customRole
+                            : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())) ||
+                          'Untitled Assessment'}
                       </span>
                       <button
                         onClick={() => setIsEditingRole(true)}

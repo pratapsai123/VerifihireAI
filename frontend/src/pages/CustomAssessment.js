@@ -1149,66 +1149,6 @@ function CustomAssessment() {
     setSuggestedSkills([]);
   };
 
-  const handleTimeChange = (e) => {
-    let value = e.target.value;
-
-    // Remove any non-digit and non-colon characters
-    value = value.replace(/[^\d:]/g, '');
-
-    // Auto-format as user types (HH:MM:SS)
-    // Split by colons to handle existing format
-    const parts = value.split(':');
-
-    if (parts.length === 1) {
-      // No colons yet - user is typing digits
-      if (value.length <= 2) {
-        // Just hours (0-23)
-        setFormData({ ...formData, time: value });
-      } else if (value.length === 3) {
-        // Add first colon: HH:M
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2) });
-      } else if (value.length === 4) {
-        // HH:MM
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2) });
-      } else if (value.length === 5) {
-        // Add second colon: HH:MM:S
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2, 4) + ':' + value.slice(4) });
-      } else {
-        // HH:MM:SS
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2, 4) + ':' + value.slice(4, 6) });
-      }
-    } else if (parts.length === 2) {
-      // Has one colon (HH:MM)
-      if (parts[1].length <= 2) {
-        setFormData({ ...formData, time: value });
-      } else if (parts[1].length === 3) {
-        // Add second colon: HH:MM:S
-        setFormData({ ...formData, time: parts[0] + ':' + parts[1].slice(0, 2) + ':' + parts[1].slice(2) });
-      } else {
-        // HH:MM:SS
-        setFormData({ ...formData, time: parts[0] + ':' + parts[1].slice(0, 2) + ':' + parts[1].slice(2, 4) });
-      }
-    } else if (parts.length === 3) {
-      // Already has both colons (HH:MM:SS)
-      // Limit each part: HH (0-23), MM (0-59), SS (0-59)
-      let hours = parts[0].slice(0, 2);
-      let minutes = parts[1].slice(0, 2);
-      let seconds = parts[2].slice(0, 2);
-
-      // Validate hours (0-23)
-      if (hours.length === 2 && parseInt(hours) > 23) {
-        hours = '23';
-      }
-
-      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds}` });
-    } else {
-      // Too many colons, keep only first 3 parts
-      setFormData({ ...formData, time: parts.slice(0, 3).join(':') });
-    }
-
-    setErrors({ ...errors, time: '' });
-  };
-
   const formatSecondsToHHMMSS = (totalSeconds) => {
     const hrs = Math.floor(totalSeconds / 3600);
     const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -1378,6 +1318,13 @@ function CustomAssessment() {
     } finally {
       setIsValidatingQuestions(false);
     }
+  };
+
+  const getRoleLabel = () => {
+    if (!formData.role) return '';
+    if (formData.role === 'other') return formData.customRole || '';
+    const option = document.querySelector(`#role option[value="${formData.role}"]`);
+    return option ? option.textContent : formData.role;
   };
 
   // Handle cancel/navigation with unsaved changes check
@@ -1565,6 +1512,7 @@ function CustomAssessment() {
       autoTime,
       resumeFileName,
       role: formData.role,
+      roleLabel: getRoleLabel(),
       subRoles: formData.subRoles,
       customRole: formData.customRole,
       experienceLevel: formData.experienceLevel,
@@ -1646,6 +1594,7 @@ function CustomAssessment() {
       autoTime,
       resumeFileName,
       role: formData.role,
+      roleLabel: getRoleLabel(),
       subRoles: formData.subRoles,
       customRole: formData.customRole,
       experienceLevel: formData.experienceLevel,
@@ -2359,15 +2308,18 @@ function CustomAssessment() {
                 type="text"
                 id="time"
                 name="time"
-                value={formData.time}
-                onChange={handleTimeChange}
-                placeholder="HH:MM:SS (e.g., 01:30:00)"
-                maxLength="8"
-                className={`form-input ${errors.time ? 'error' : ''}`}
+                value={formData.time || autoTime || '00:00:00'}
+                readOnly
+                placeholder="HH:MM:SS"
+                className="form-input"
+                title="Auto-calculated based on number of questions (2 minutes/question)"
+                onFocus={(e) => e.target.blur()}
+                onMouseDown={(e) => e.preventDefault()}
+                style={{ cursor: 'not-allowed', caretColor: 'transparent' }}
               />
               {errors.time && <span className="error-message">{errors.time}</span>}
               <p className="form-hint" style={{ paddingLeft: '0.7rem' }}>
-                Format: Hours:Minutes:Seconds (e.g., 01:30:00). Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
+                Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
               </p>
             </div>
 
