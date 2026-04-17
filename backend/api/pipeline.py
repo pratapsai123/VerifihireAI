@@ -100,7 +100,8 @@ def process_batch_assessment(batch_id):
                 total_points=100,
                 mcq_weight=int(settings_data.get('mcq_weight', 40)),
                 max_candidates_allowed=num_passed,
-                invited_count=num_passed
+                invited_count=num_passed,
+                creation_type='automatic'
             )
             logger.info(f"Pipeline[{batch_id}]: Assessment record created (id={assessment.id}). Calling AI...")
 
@@ -351,7 +352,8 @@ def process_resume_passed(candidate_id):
             mcq_medium=mcq_medium_per_candidate, 
             mcq_hard=mcq_hard_per_candidate, 
             total_points=100,
-            mcq_weight=int(settings_data.get('mcq_weight', 40))
+            mcq_weight=int(settings_data.get('mcq_weight', 40)),
+            creation_type='automatic'
         )
 
         raw_result = _call_groq_with_backoff(

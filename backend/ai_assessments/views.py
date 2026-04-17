@@ -763,7 +763,8 @@ class GenerateAssessmentView(APIView):
                 generated_content=generated_data,
                 batch_id=generate_batch_id(),
                 batch_name=generate_batch_name(job_title),
-                status='SCHEDULED'
+                status='SCHEDULED',
+                creation_type='manual'
             )
 
             logger.info(
@@ -1087,6 +1088,7 @@ class AssessmentListView(APIView):
                     "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                     "status": assessment.status,
                     "batch_name": assessment.batch_name,
+                    "creation_type": assessment.creation_type,
                     "max_candidates_allowed": assessment.max_candidates_allowed,
                     "share_token": str(assessment.share_token),
                     "candidate_count": count,
@@ -1178,6 +1180,7 @@ class AssessmentDetailView(APIView):
                 "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
                 "batch_name": assessment.batch_name,
+                "creation_type": assessment.creation_type,
                 "share_token": str(assessment.share_token),
                 "num_applicants": assessment.num_applicants,
                 "max_candidates_allowed": assessment.max_candidates_allowed,

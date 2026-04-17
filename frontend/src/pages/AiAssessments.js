@@ -207,7 +207,7 @@ const AiAssessments = () => {
                         <table className="data-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                             <thead>
                                 <tr>
-                                    {['Assessment Title', 'Available From', 'Availability End', 'Applicants', 'Attempts', 'Actions'].map((head, i) => (
+                                    {['Assessment Title', 'Type', 'Available From', 'Availability End', 'Applicants', 'Attempts', 'Actions'].map((head, i) => (
                                         <th key={i} style={{ padding: '1rem 1.2rem', background: '#F8F9FF', color: '#A3AED0', fontWeight: '700', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px', borderBottom: '2px solid #E2E8F0' }}>{head}</th>
                                     ))}
                                 </tr>
@@ -215,18 +215,18 @@ const AiAssessments = () => {
                             <tbody>
                                 {loading ? (
                                     <tr>
-                                        <td colSpan="5" style={{ textAlign: 'center', padding: '2rem' }}>Loading assessments...</td>
+                                        <td colSpan="7" style={{ textAlign: 'center', padding: '2rem' }}>Loading assessments...</td>
                                     </tr>
                                 ) : error ? (
                                     <tr>
-                                        <td colSpan="5" style={{ textAlign: 'center', color: '#EE5D50', padding: '2rem' }}>
+                                        <td colSpan="7" style={{ textAlign: 'center', color: '#EE5D50', padding: '2rem' }}>
                                             <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.5rem', marginBottom: '0.5rem', display: 'block' }}></i>
                                             {error}
                                         </td>
                                     </tr>
                                 ) : currentAssessments.length === 0 ? (
                                     <tr>
-                                        <td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>No assessments found.</td>
+                                        <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>No assessments found.</td>
                                     </tr>
                                 ) : (
                                     currentAssessments.map(assessment => (
@@ -246,6 +246,20 @@ const AiAssessments = () => {
                                                             {assessment.duration_minutes} mins | {assessment.job_description ? (assessment.job_description.substring(0, 30) + '...') : 'No Description'}
                                                         </span>
                                                     </div>
+                                                </div>
+                                            </td>
+                                            <td style={{ padding: '1rem 1.2rem', fontSize: '0.75rem' }}>
+                                                <div style={{
+                                                    display: 'inline-block',
+                                                    padding: '0.35rem 0.8rem',
+                                                    borderRadius: '6px',
+                                                    fontWeight: '700',
+                                                    textTransform: 'capitalize',
+                                                    background: assessment.creation_type === 'automatic' ? '#E6FBF5' : '#F4F7FE',
+                                                    color: assessment.creation_type === 'automatic' ? '#05CD99' : '#4318FF',
+                                                    border: `1px solid ${assessment.creation_type === 'automatic' ? '#05CD99' : '#4318FF'}`
+                                                }}>
+                                                    {assessment.creation_type || 'manual'}
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', color: '#4318FF', fontSize: '0.8rem' }}>

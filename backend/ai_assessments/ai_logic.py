@@ -593,8 +593,30 @@ def _normalize_generated_pool(payload):
                     item['answer'] = opt
                     matched = True
                     break
+            
             if not matched:
-                item['answer'] = str(raw_ans).strip()
+                # FALLBACK: Try mapping if answer is a numeric index or a single letter (A, B, C, D)
+                raw_ans_str = str(raw_ans).strip().upper()
+                mapped = False
+                
+                # Case 1: Numeric index string (e.g. "1", "2")
+                if raw_ans_str.isdigit():
+                    try:
+                        idx = int(raw_ans_str) - 1
+                        if 0 <= idx < len(options):
+                            item['answer'] = options[idx]
+                            mapped = True
+                    except: pass
+                
+                # Case 2: Letter index (A, B, C, D)
+                if not mapped and len(raw_ans_str) == 1 and 'A' <= raw_ans_str <= 'D':
+                    idx = ord(raw_ans_str) - ord('A')
+                    if 0 <= idx < len(options):
+                        item['answer'] = options[idx]
+                        mapped = True
+
+                if not mapped:
+                    item['answer'] = str(raw_ans).strip()
         else:
             item['answer'] = str(raw_ans).strip()
             
