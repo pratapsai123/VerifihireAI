@@ -22,6 +22,11 @@ const AiAssessmentDetail = () => {
     const [availableInterviewers, setAvailableInterviewers] = useState([]);
     const [loadingInterviewers, setLoadingInterviewers] = useState(false);
     const [assigning, setAssigning] = useState(false);
+    
+    // Invited Candidates State
+    const [invitedCandidates, setInvitedCandidates] = useState([]);
+    const [candidatePointsInfo, setCandidatePointsInfo] = useState(null);
+    const [loadingInvited, setLoadingInvited] = useState(false);
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -65,6 +70,26 @@ const AiAssessmentDetail = () => {
         }
     }, [id, activeTab]);
 
+    // Fetch invited candidates data
+    useEffect(() => {
+        const fetchInvitedCandidates = async () => {
+            setLoadingInvited(true);
+            try {
+                const response = await axios.get(`${API_BASE_URL}/ai/${id}/invited-candidates/`);
+                setInvitedCandidates(response.data.invited_candidates || []);
+                setCandidatePointsInfo(response.data.candidate_points || null);
+            } catch (err) {
+                console.error('Error fetching invited candidates:', err);
+            } finally {
+                setLoadingInvited(false);
+            }
+        };
+        
+        if (assessment) {
+            fetchInvitedCandidates();
+        }
+    }, [id, assessment]);
+
     const handleToggleInterviewer = async (interviewerId) => {
         const currentlyAssigned = assessment.assigned_interviewers.map(i => i.id);
         let newIds;
@@ -106,12 +131,16 @@ const AiAssessmentDetail = () => {
     const totalPages = Math.ceil(submissions.length / itemsPerPage);
 
     // Calculate points based on backend logic (SubmitAssessmentView)
-    const MCQ_WEIGHT = 20;
+    const MCQ_WEIGHT = 1;  // 1 point per MCQ
     const codingWeights = { 'Easy': 100, 'Medium': 200, 'Hard': 300 };
 
     const possibleMcqPoints = mcqs.length * MCQ_WEIGHT;
     const possibleCodingPoints = coding.reduce((sum, c) => sum + (codingWeights[c.difficulty] || 200), 0);
     const totalPossiblePoints = possibleMcqPoints + possibleCodingPoints;
+
+    // Scoring weights from assessment (default 40/60)
+    const mcqWeight = assessment.mcq_weight || 40;
+    const codingWeight = assessment.coding_weight || (100 - mcqWeight);
 
     const getStatusStyle = (status) => {
         const s = status?.toLowerCase();
@@ -302,28 +331,132 @@ const AiAssessmentDetail = () => {
                             )}
 
                             {/* Scoring Footer */}
-                            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #E0E5F2', display: 'flex', gap: '2rem', justifyContent: 'flex-start' }}>
-                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
-                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Total Possible Points</div>
-                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{totalPossiblePoints}</div>
-                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
+                            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #E0E5F2' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+                                    {/* Candidate Points Card */}
+                                    <div style={{ background: '#E6F7FF', padding: '1.5rem', borderRadius: '20px', borderLeft: '4px solid #4318FF' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#4318FF', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Per Candidate Assessment</div>
+                                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', marginBottom: '0.8rem' }}>
+                                            <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>
+                                                {(() => {
+                                                    const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
+                                                    const cMcqs = candidatePointsInfo?.mcq_count || Math.floor(mcqs.length / divisor);
+                                                    const cCoding = candidatePointsInfo?.coding_count || Math.floor(coding.length / divisor);
+                                                    // Correct per-candidate coding points: use difficulty-based weights
+                                                    const perCandidateCodingPts = coding
+                                                        .slice(0, cCoding)
+                                                        .reduce((s, c) => s + (codingWeights[c.difficulty] || 200), 0);
+                                                    return candidatePointsInfo?.total_points || (cMcqs * 1 + perCandidateCodingPts);
+                                                })()}
+                                            </div>
+                                            <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: '#707EAE' }}>
+                                            {(() => {
+                                                const divisor = assessment.same_questions_for_all ? 1 : (assessment.num_applicants || 1);
+                                                const cMcqs = candidatePointsInfo?.mcq_count || Math.floor(mcqs.length / divisor);
+                                                const cCoding = candidatePointsInfo?.coding_count || Math.floor(coding.length / divisor);
+                                                const codingDesc = coding.slice(0, cCoding).map(c => `${c.difficulty}(${codingWeights[c.difficulty] || 200}pts)`).join(', ');
+                                                return `${cMcqs} MCQs × 1pt${cCoding > 0 ? ` + Coding: ${codingDesc}` : ''}`;
+                                            })()}
+                                        </div>
                                     </div>
-                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
-                                        ({mcqs.length} MCQs × {MCQ_WEIGHT} pts + {coding.length} Coding Tasks)
+
+                                    {/* Invited Candidates Card */}
+                                    <div style={{ background: '#FFF4E6', padding: '1.5rem', borderRadius: '20px', borderLeft: '4px solid #FF9500' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#FF9500', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Invited Candidates</div>
+                                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', marginBottom: '0.8rem' }}>
+                                            <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>
+                                                {invitedCandidates.length} / {assessment.max_candidates_allowed || 1}
+                                            </div>
+                                            <div style={{ fontSize: '0.9rem', color: '#FF9500', paddingBottom: '4px' }}>candidates</div>
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: '#707EAE' }}>
+                                            {assessment.max_candidates_allowed - invitedCandidates.length > 0 
+                                                ? `${assessment.max_candidates_allowed - invitedCandidates.length} slot(s) available`
+                                                : '🔒 No more slots available'}
+                                        </div>
+                                    </div>
+
+                                    {/* Duration Card */}
+                                    <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Assessment Duration</div>
+                                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+                                            <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{assessment.duration_minutes}</div>
+                                            <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>mins</div>
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
+                                            Total allocated assessment duration
+                                        </div>
+                                    </div>
+
+                                    {/* Scoring Weight Card */}
+                                    <div style={{ background: 'linear-gradient(135deg, #EEF2FF, #F5F3FF)', padding: '1.5rem', borderRadius: '20px', border: '1px solid #E0E7FF' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#6366F1', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Score Weighting</div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.85rem', color: '#1B254B', fontWeight: '600' }}>MCQ</span>
+                                                <span style={{ fontSize: '1rem', fontWeight: '800', color: '#6366F1' }}>{mcqWeight}%</span>
+                                            </div>
+                                            <div style={{ height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #E0E7FF ${mcqWeight}%)` }} />
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.85rem', color: '#1B254B', fontWeight: '600' }}>Coding</span>
+                                                <span style={{ fontSize: '1rem', fontWeight: '800', color: '#8B5CF6' }}>{codingWeight}%</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
-                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Time</div>
-                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{assessment.duration_minutes}</div>
-                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>mins</div>
+                                {/* Invited Candidates List */}
+                                {invitedCandidates.length > 0 && (
+                                    <div style={{ marginTop: '2.5rem' }}>
+                                        <h4 style={{ color: '#1B254B', fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-envelope" style={{ color: '#FF9500' }}></i> 
+                                            Invited Candidates ({invitedCandidates.length})
+                                        </h4>
+                                        <div style={{ background: '#F8F9FF', borderRadius: '15px', overflow: 'hidden', border: '1px solid #E0E5F2' }}>
+                                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                                <thead>
+                                                    <tr style={{ background: '#E6F7FF', borderBottom: '2px solid #D0E1FF' }}>
+                                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#4318FF', fontWeight: '700', fontSize: '0.9rem' }}>Sn.</th>
+                                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#4318FF', fontWeight: '700', fontSize: '0.9rem' }}>Name</th>
+                                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#4318FF', fontWeight: '700', fontSize: '0.9rem' }}>Email</th>
+                                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#4318FF', fontWeight: '700', fontSize: '0.9rem' }}>Invited At</th>
+                                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#4318FF', fontWeight: '700', fontSize: '0.9rem' }}>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {invitedCandidates.map((candidate, idx) => (
+                                                        <tr key={idx} style={{ borderBottom: '1px solid #E0E5F2', background: idx % 2 === 0 ? 'white' : '#F9FAFB' }}>
+                                                            <td style={{ padding: '1rem', color: '#707EAE', fontSize: '0.9rem', fontWeight: '700' }}>{idx + 1}</td>
+                                                            <td style={{ padding: '1rem', color: '#1B254B', fontSize: '0.9rem', fontWeight: '600' }}>{candidate.name}</td>
+                                                            <td style={{ padding: '1rem' }}>
+                                                                <a href={`mailto:${candidate.email}`} style={{ color: '#4318FF', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>
+                                                                    {candidate.email}
+                                                                </a>
+                                                            </td>
+                                                            <td style={{ padding: '1rem', color: '#707EAE', fontSize: '0.85rem' }}>
+                                                                {new Date(candidate.invited_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                                            </td>
+                                                            <td style={{ padding: '1rem' }}>
+                                                                <span style={{
+                                                                    padding: '0.4rem 0.8rem',
+                                                                    borderRadius: '20px',
+                                                                    fontSize: '0.8rem',
+                                                                    fontWeight: '700',
+                                                                    background: candidate.status === 'invited' ? '#E6FBF5' : candidate.status === 'completed' ? '#E6FBF5' : '#FFF5F5',
+                                                                    color: candidate.status === 'invited' ? '#FF9500' : candidate.status === 'completed' ? '#05CD99' : '#EE5D50'
+                                                                }}>
+                                                                    {candidate.status.charAt(0).toUpperCase() + candidate.status.slice(1)}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
-                                        Total allocated assessment duration
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     )}
@@ -469,8 +602,8 @@ const AiAssessmentDetail = () => {
                                                     ? Math.round((selectedSubmission.results_breakdown.mcq.scored_points / selectedSubmission.results_breakdown.mcq.possible_points) * 100)
                                                     : 0}%
                                             </div>
-                                            <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {Math.round((selectedSubmission.results_breakdown?.mcq?.scored_points || 0) / 20)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
+                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                                {Math.round(selectedSubmission.results_breakdown?.mcq?.scored_points || 0)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
                                             </div>
                                         </div>
 

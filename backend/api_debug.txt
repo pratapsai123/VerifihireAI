@@ -1067,6 +1067,222 @@ Exception: AI could not satisfy minimum required pool counts even after repair. 
 
 RAW: No response received
 
+[2026-04-15 12:32:08] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    print(len(set(nums)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "18\n19 12 15 5 17 3 19 15 7 11 15 16 15 14 11 3 17 6",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:32:12] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    prices = [int(x) for x in input_data[1:]]\n    max_profit = 0\n    for i in range(1, len(prices)):\n        if prices[i] > prices[i-1]:\n            max_profit += prices[i] - prices[i-1]\n    print(max_profit)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "16\n51 38 30 100 33 22 57 45 85 14 7 43 86 67 87 63",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:32:35] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if len(input_data) < 2: return\n    n = int(input_data[0])\n    nums = [int(x) for x in input_data[1:]]\n    count = 0\n    candidate = None\n    for num in nums:\n        if count == 0:\n            candidate = num\n        count += (1 if num == candidate else -1)\n    print(candidate)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "20\n9 4 6 9 6 1 6 3 9 7 5 6 3 3 1 2 3 9 8 2",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:32:39] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    count = 0\n    max_from_right = float('-inf')\n    for i in range(len(nums) - 1, -1, -1):\n        if nums[i] >= max_from_right:\n            count += 1\n            max_from_right = nums[i]\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "16\n65 76 24 41 30 16 79 58 29 77 31 42 23 53 22 15",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:32:58] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    x_coords = [int(x) for x in input_data[1:n+1]]\n    y_coords = [int(x) for x in input_data[n+1:2*n+1]]\n    if n <= 2:\n        print(\"true\")\n        return\n    x0, y0 = x_coords[0], y_coords[0]\n    x1, y1 = x_coords[1], y_coords[1]\n    for i in range(2, n):\n        x, y = x_coords[i], y_coords[i]\n        if (y1 - y0) * (x - x0) != (y - y0) * (x1 - x0):\n            print(\"false\")\n            return\n    print(\"true\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "9\n7 1 1 2 6 2 10 4 3\n8 8 4 10 1 10 10 10 2",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:02] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s: return\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    balanced = True\n    for char in s:\n        if char in '({[':\n            stack.append(char)\n        elif char in mapping:\n            if not stack or stack.pop() != mapping[char]:\n                balanced = False\n                break\n        else: continue # Ignore other chars\n    print(\"YES\" if balanced and not stack else \"NO\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "MSG-699",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:26] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    unique = sorted(set(nums), reverse=True)\n    print(unique[2] if len(unique) >= 3 else unique[0])\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "3\n11 48 20",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:30] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    if n <= 0:\n        print(\"false\")\n    elif (n & (n - 1)) == 0:\n        print(\"true\")\n    else:\n        print(\"false\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "68",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:36] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    n = int(sys.stdin.read().strip())\n    print(sum(int(d) for d in str(abs(n))))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "294",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:40] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    print(\" \".join(map(str, nums[::-1])))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "13\n99 73 90 95 79 57 62 5 5 54 38 31 61",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:33:56] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    n = int(sys.stdin.read().strip())\n    print(sum(i for i in range(n) if i % 3 == 0 or i % 5 == 0))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "48",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 12:34:00] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4001): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4001): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    m = int(input_data[0])\n    # The system will generate M distinct numbers. To form the pattern (all twice except one thrice)\n    # We'll just take the data as provided and find the one that occurs once.\n    # Actually, the simple logic is XORing everything.\n    nums = [int(x) for x in input_data[1:]]\n    # For a real challenge, we expect (2n + 1) inputs. We will simulate this by using all but the last pair.\n    # Logic: XOR all input numbers.\n    res = 0\n    for x in nums:\n        res ^= x\n    print(res)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "2\n73 59",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-15 07:04:00.401158+00:00] ERROR in GenerateAssessmentView: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 538, in post
+    raise Exception(
+Exception: AI could not satisfy minimum required pool counts even after repair. Expected MINIMUM MCQs=10, min coding=1; got MCQs=20, coding=0. (Buffer Pool target was 20)
+
+RAW: No response received
+
+[2026-04-15 10:32:04.805942+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with databases using Python code",\\n            "To create web applications quickly and easily",\\n            "To handle user authentication and authorization",\\n            "To generate automatic API documentation"\\n         ],\\n         "answer": "To interact with databases using Python code",\\n         "difficulty": "Medium"\\n      }\\n   ]\\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with databases using Python code",\\n            "To create web applications quickly and easily",\\n            "To handle user authentication and authorization",\\n            "To generate automatic API documentation"\\n         ],\\n         "answer": "To interact with databases using Python code",\\n         "difficulty": "Medium"\\n      }\\n   ]\\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:32:50.774794+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is Django used for in Python development?\\",\\n         "options": [\\n            "A web framework for building web applications",\\n            "A database management system for storing data",\\n            "A testing library for unit testing",\\n            "A package manager for installing dependencies"\\n         ],\\n         "answer": "A web framework for building web applications",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary purpose of using an ORM library like SQLAlchemy?",\n         "options": [\n            "To interact with databases using SQL queries",\n            "To build web applications using a high-level interface",\n            "To manage dependencies in a Python project",\n            "To create unit tests for a Python application"\n         ],\n         "answer": "To interact with databases using SQL queries",\n         "difficulty": "Easy"\n      },\n      {\n         "question": \\"What is the main benefit of using a RESTful API design?",\n         "options": [\n            "To improve the performance of a web application",\n            "To simplify the development of a web application",\n            "To enable communication between different systems",\n            "To reduce the complexity of a web application"\n         ],\n         "answer": "To enable communication between different systems",\n         "difficulty": "Easy"\n      }\n   ]\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is Django used for in Python development?\\",\\n         "options": [\\n            "A web framework for building web applications",\\n            "A database management system for storing data",\\n            "A testing library for unit testing",\\n            "A package manager for installing dependencies"\\n         ],\\n         "answer": "A web framework for building web applications",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary purpose of using an ORM library like SQLAlchemy?",\n         "options": [\n            "To interact with databases using SQL queries",\n            "To build web applications using a high-level interface",\n            "To manage dependencies in a Python project",\n            "To create unit tests for a Python application"\n         ],\n         "answer": "To interact with databases using SQL queries",\n         "difficulty": "Easy"\n      },\n      {\n         "question": \\"What is the main benefit of using a RESTful API design?",\n         "options": [\n            "To improve the performance of a web application",\n            "To simplify the development of a web application",\n            "To enable communication between different systems",\n            "To reduce the complexity of a web application"\n         ],\n         "answer": "To enable communication between different systems",\n         "difficulty": "Easy"\n      }\n   ]\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:34:24.588623+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with the database using Python code",\\n            "To create web applications quickly and easily",\\n            "To manage data in a NoSQL database",\\n            "To handle user authentication and authorization"\\n         ],\\n         "answer": "To interact with the database using Python code",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the main difference between Flask and FastAPI?\\",\\n         "options": [\\n            "Flask is a microframework, while FastAPI is a full-featured framework",\\n            "FastAPI is built on top of Flask",\\n            "Flask is designed for web development, while FastAPI is for microservices",\\n            "FastAPI is faster than Flask"\\n         ],\\n         "answer": "Flask is a microframework, while FastAPI is a full-featured framework",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary benefit of using a RESTful API design?\\",\\n         "options": [\\n            "Improved scalability and flexibility",\\n            "Simplified data exchange between systems",\\n            "Enhanced security through authentication and authorization",\\n            "Faster development and deployment"\\n         ],\\n         "answer": "Improved scalability and flexibility",\\n         "difficulty": "Easy"\\n      }\\n   ]\\n}'}}
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 414, in post
+    mcqs = _generate_mcq_pool_ai_only(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1190, in _generate_mcq_pool_ai_only
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 1145, in _generate_mcq_pool_ai_only
+    response = _call_groq_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 436, in _call_groq_with_backoff
+    raise e
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\ai_logic.py", line 372, in _call_groq_with_backoff
+    resp = current_client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\n  "mcqs": [\n      {\n         "question": \\"What is the primary purpose of using Django\'s ORM?\\",\\n         "options": [\\n            "To interact with the database using Python code",\\n            "To create web applications quickly and easily",\\n            "To manage data in a NoSQL database",\\n            "To handle user authentication and authorization"\\n         ],\\n         "answer": "To interact with the database using Python code",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the main difference between Flask and FastAPI?\\",\\n         "options": [\\n            "Flask is a microframework, while FastAPI is a full-featured framework",\\n            "FastAPI is built on top of Flask",\\n            "Flask is designed for web development, while FastAPI is for microservices",\\n            "FastAPI is faster than Flask"\\n         ],\\n         "answer": "Flask is a microframework, while FastAPI is a full-featured framework",\\n         "difficulty": "Easy"\\n      },\\n      {\\n         "question": \\"What is the primary benefit of using a RESTful API design?\\",\\n         "options": [\\n            "Improved scalability and flexibility",\\n            "Simplified data exchange between systems",\\n            "Enhanced security through authentication and authorization",\\n            "Faster development and deployment"\\n         ],\\n         "answer": "Improved scalability and flexibility",\\n         "difficulty": "Easy"\\n      }\\n   ]\\n}'}}
+
+RAW: No response received
+
+[2026-04-15 10:41:25.064759+00:00] PUBLIC ACCESS: Token='a10b83ab-dbca-424f-a372-fb93ef395a6e'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776249685035']}>
+Host: localhost:8001
+
+[2026-04-15 10:41:25.314802+00:00] PUBLIC ACCESS: Token='a10b83ab-dbca-424f-a372-fb93ef395a6e'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1776249685068']}>
+Host: localhost:8001
+
+[2026-04-16 04:35:41.334498+00:00] PUBLIC ACCESS: Token='ad8fcfc8-52a4-4d96-8440-9c543a16be12'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@gmail.com'], '_t': ['1776314140986']}>
+Host: localhost:8001
+
+[2026-04-16 05:04:46.279314+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 710, in post
+    raise Exception(
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+
+RAW: No response received
 [2026-04-16 12:11:14.436878+00:00] PUBLIC ACCESS: Token='7c0a3c0e-53e5-40d5-a311-cb31d1d39ff0'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776341472616']}>
 Host: verifihireai.com

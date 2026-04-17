@@ -259,7 +259,12 @@ You will be given AI-generated assessment content in JSON format.
 Your task is to CLEAN, FIX, and STANDARDIZE the content so it is production-ready.
 
 🔧 TASK REQUIREMENTS:
-1. MCQ VALIDATION: One correct answer, no duplicates, clear language.
+1. MCQ VALIDATION: 
+   - One correct answer, no duplicates, clear language.
+   - CRITICAL: Each option MUST be actual descriptive answer text (NOT just "A", "B", "C", "D" or placeholder letters).
+   - The `answer` field MUST contain the complete text of one of the options, NOT just a letter.
+   - Example GOOD: {"question": "What is Django?", "options": ["A web framework", "A database", "A testing tool", "A package manager"], "answer": "A web framework"}
+   - Example BAD: {"question": "What is Django?", "options": ["A", "B", "C", "D"], "answer": "A"}
 2. CODING CHALLENGE FIXES:
     - Convert vague inputs into pure competitive-programming RAW TEXT formats (numbers and strings separated by spaces).
     - PURGE ALL JSON: If the problem input contains dictionaries `{}`, lists `[]`, or quotes, you MUST completely rewrite the problem to use simple space/newline separated text instead.
@@ -411,6 +416,18 @@ def _call_groq_with_backoff(groq_client=None, prompt=None, system_msg=None, is_j
                 model_fallback_active = False
                 current_model = original_model # Try the powerful model again after a long sleep
                 continue
+            raise e
+        except groq.BadRequestError as e:
+            # Handle JSON validation errors - retry with simpler prompt
+            error_msg = str(e)
+            if 'json_validate_failed' in error_msg or 'Failed to generate JSON' in error_msg:
+                logger.warning(f"Groq JSON Validation Failed: Retrying... (Attempt {attempt + 1}/{max_retries})")
+                if attempt < max_retries - 1:
+                    time.sleep(1)
+                    attempt += 1
+                    continue
+            # Other bad requests - usually unrecoverable
+            logger.error(f"Groq Bad Request (400): {error_msg}")
             raise e
         except groq.APIStatusError as e:
             if e.status_code == 429:
@@ -669,6 +686,55 @@ def _rebalance_mcq_difficulties(mcqs, *, easy_required, medium_required, hard_re
     for idx, q in enumerate(balanced):
         q['difficulty'] = labels[idx]
     return balanced
+
+def _validate_mcq_structure(mcq):
+    """
+    Validates that an MCQ has all required fields with correct structure.
+    Returns (is_valid: bool, error_msg: str)
+    """
+    if not mcq.get('question') or not isinstance(mcq.get('question'), str):
+        return False, "Missing or empty 'question' field"
+    
+    if not isinstance(mcq.get('options'), list) or len(mcq.get('options', [])) != 4:
+        return False, f"Must have exactly 4 options, got {len(mcq.get('options', []))}"
+    
+    # Check that each option is non-empty AND meaningful (not just placeholder letters)
+    options = mcq.get('options', [])
+    for idx, opt in enumerate(options):
+        opt_str = str(opt).strip()
+        if not opt_str:
+            return False, f"Option {idx+1} is empty or whitespace"
+        
+        # CRITICAL: Reject placeholder letters like "A", "B", "C", "D" or "A)", "B)", etc.
+        # Options must be actual answer text (>3 chars, meaningful content)
+        cleaned_opt = opt_str.rstrip(')').rstrip(':').strip()
+        if len(cleaned_opt) <= 1:
+            return False, f"Option {idx+1} is placeholder letter '{opt_str}' (not actual answer text)"
+        
+        # Reject if option is ONLY a single letter choice (unless it's meaningful like "SQL" or "API")
+        # But "A" or "B" followed by punctuation should be rejected
+        if opt_str in ('A', 'B', 'C', 'D') or opt_str in ('A)', 'B)', 'C)', 'D)') or opt_str in ('A.', 'B.', 'C.', 'D.'):
+            return False, f"Option {idx+1} '{opt_str}' is a placeholder (missing actual answer text)"
+        
+        # Check option is not too long (should be under 15 words for readability)
+        word_count = len(opt_str.split())
+        if word_count > 15:
+            return False, f"Option {idx+1} is too long ({word_count} words, max 15)"
+    
+    answer = mcq.get('answer')
+    if not answer:
+        return False, "Missing or empty 'answer' field"
+    
+    # Check answer matches one of options (case-insensitive)
+    answer_lower = str(answer).lower().strip()
+    options_lower = [str(opt).lower().strip() for opt in mcq.get('options', [])]
+    if answer_lower not in options_lower:
+        return False, f"Answer '{answer}' doesn't match any option: {mcq.get('options')}"
+    
+    if mcq.get('difficulty') not in ('Easy', 'Medium', 'Hard'):
+        return False, f"Invalid difficulty: {mcq.get('difficulty')}"
+    
+    return True, "Valid"
 
 def _repair_pool_shortfall(
     *,
@@ -968,9 +1034,13 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
                     f"```text\n{challenge['example_output']}\n```"
                 )
                 
-                # Generate 5 additional hidden test cases
+                # Generate test cases (4-6 required, targeting 6)
+                MIN_TEST_CASES = 4
+                MAX_TEST_CASES = 6
+                MAX_REPAIR_ATTEMPTS = 2
+                
                 test_cases = []
-                for idx in range(6):
+                for idx in range(MAX_TEST_CASES):
                     if cancel_token and cache.get(f"abort_{cancel_token}"):
                         raise Exception("Generation Aborted by User")
                     tc_input = InputDataGenerator.generate(schema)
@@ -983,9 +1053,41 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
                             "is_hidden": True
                         })
                 
+                # Check initial test case count
+                if len(test_cases) < MIN_TEST_CASES:
+                    # Repair attempt: Retry test case generation (0 tokens)
+                    for repair_attempt in range(MAX_REPAIR_ATTEMPTS):
+                        logger.info(f"[Repair {repair_attempt+1}/{MAX_REPAIR_ATTEMPTS}] Retrying test case generation for '{challenge['title']}'...")
+                        test_cases = []
+                        
+                        for idx in range(MAX_TEST_CASES):
+                            if cancel_token and cache.get(f"abort_{cancel_token}"):
+                                raise Exception("Generation Aborted by User")
+                            tc_input = InputDataGenerator.generate(schema)
+                            tc_res = _call_executor(language='python', source_code=ref_sol, stdin=tc_input)
+                            if tc_res.get('ok'):
+                                test_cases.append({
+                                    "id": f"tc_{idx+1}",
+                                    "input": tc_input,
+                                    "output": str(tc_res.get('stdout', '')).strip(),
+                                    "is_hidden": True
+                                })
+                        
+                        if len(test_cases) >= MIN_TEST_CASES:
+                            logger.info(f"✅ [Repair {repair_attempt+1}] SUCCESS! Generated {len(test_cases)} test cases.")
+                            break
+                    else:
+                        # All repair attempts failed
+                        logger.error(
+                            f"❌ TEST CASE COMPLETENESS FAILED: '{challenge['title']}'. "
+                            f"Generated {len(test_cases)}/{MIN_TEST_CASES}-{MAX_TEST_CASES} test cases after {MAX_REPAIR_ATTEMPTS} repair attempts. "
+                            f"Minimum {MIN_TEST_CASES} required. Challenge REJECTED and will be replaced via repair pool."
+                        )
+                        continue  # Skip this challenge, counts as shortfall
+                
                 challenge['test_cases'] = test_cases
                 verified_challenges.append(challenge)
-                logger.info(f"Verified Skeleton: '{challenge['title']}' with {len(test_cases)} cases.")
+                logger.info(f"✅ Verified Skeleton: '{challenge['title']}' with {len(test_cases)}/{MAX_TEST_CASES} test cases.")
             else:
                 logger.error(f"SKELETON FAILED VERIFICATION: '{challenge['title']}'. Error: {res.get('error')}")
         except Exception as e:
@@ -1039,10 +1141,14 @@ def _generate_mcq_pool_ai_only(
             prompt = f"""
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate {count} technical MCQs ({difficulty}).
-            JSON FORMAT: {{ "mcqs": [ {{ "question": "...", "options": ["A","B","C","D"], "answer": "matched_string", "difficulty": "{difficulty}" }} ] }}
-            CRITICAL: 
-            - ESCAPE QUOTES: Use `\\"` for all double-quotes inside JSON values.
+            JSON FORMAT: {{ "mcqs": [ {{ "question": "What is Django?", "options": ["A web framework for Python", "A database management system", "A testing library", "A package manager"], "answer": "A web framework for Python", "difficulty": "{difficulty}" }} ] }}
+            RULES:
+            - Generate valid JSON only (do NOT use escape sequences)
             - UNIQUE: Questions must be specific to JD facets. {avoid_txt}
+            - OPTIONS MUST BE ACTUAL ANSWERS: Each option MUST be SHORT (under 15 words) and meaningful, NOT just letters like "A", "B", "C", "D"
+            - ANSWER FIELD: The answer MUST be the exact text from one of the options, NOT just a letter
+            - NO PLACEHOLDERS: Do NOT generate options like ["A", "B", "C", "D"]
+            - Each question gets exactly 4 options and 1 correct answer
             """
 
             batch_mcqs = None
@@ -1069,12 +1175,24 @@ def _generate_mcq_pool_ai_only(
                     mcqs = parsed.get('mcqs', [])
                     same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
-                    if len(same_diff) >= count:
-                        batch_mcqs = same_diff[:count]
+                    # VALIDATE each MCQ structure before accepting
+                    validated_mcqs = []
+                    for q in same_diff:
+                        is_valid, error_msg = _validate_mcq_structure(q)
+                        if is_valid:
+                            validated_mcqs.append(q)
+                        else:
+                            logger.debug(f"MCQ VALIDATION FAILED: {error_msg}. Question: {q.get('question', '')[:40]}...")
+
+                    if len(validated_mcqs) >= count:
+                        batch_mcqs = validated_mcqs[:count]
+                        logger.info(f"MCQ Batch attempt {attempt + 1}: Generated {len(validated_mcqs)} valid {difficulty} MCQs")
                         break
+                    elif len(same_diff) > 0:
+                        logger.warning(f"MCQ Batch attempt {attempt + 1}: Generated {len(same_diff)} MCQs, only {len(validated_mcqs)} valid")
                         
                     # Correction for next attempt in same batch
-                    prompt = prompt + f"\nRetry: Ensure exactly {count} {difficulty} MCQs are returned."
+                    prompt = prompt + f"\nRetry: Ensure exactly {count} {difficulty} MCQs are returned. CRITICAL: Each MCQ MUST have all fields: question, 4 options, answer (matched to option), difficulty."
 
                 except groq.APIStatusError as e:
                     if e.status_code == 413 and batch_size > 2:
@@ -1090,8 +1208,11 @@ def _generate_mcq_pool_ai_only(
                         break
 
             if not batch_mcqs:
-                # RECOVERY: If a batch fails, log and continue to next batch instead of breaking the entire split
-                logger.error(f"MCQ Batch Request failed all {attempts_per_batch} attempts for {difficulty}. Skipping this batch.")
+                # RECOVERY: If a batch fails, log and retry with single regeneration
+                logger.error(
+                    f"❌ MCQ Batch VALIDATION FAILED all {attempts_per_batch} attempts for {difficulty} ({count} questions). "
+                    f"Will be replaced via repair pool shortfall mechanism."
+                )
                 idx += count # Advance so we don't get stuck in a loop, but we accept the shortfall
                 continue
 
@@ -1111,8 +1232,12 @@ def _generate_mcq_pool_ai_only(
             rescue_prompt = f"""
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate EXACTLY 1 UNIQUE technical MCQ ({difficulty}).
-            JSON: {{ "mcqs": [ {{ "question": "...", "options": ["...","...","...","..."], "answer": "...", "difficulty": "{difficulty}" }} ] }}
-            Exclude previous: {[q.get('question', '')[:30] for q in generated][-10:]}
+            JSON: {{ "mcqs": [ {{ "question": "What is REST?", "options": ["Representational State Transfer architecture", "A testing framework", "A database query language", "A version control system"], "answer": "Representational State Transfer architecture", "difficulty": "{difficulty}" }} ] }}
+            RULES:
+            - Generate valid JSON only (no escape sequences needed)
+            - OPTIONS MUST be SHORT (under 15 words), actual answer text (NOT placeholder letters)
+            - The answer field MUST be the exact text from one of the options
+            - Exclude topics: {[q.get('question', '')[:30] for q in generated][-10:]}
             """
             try:
                 resp = _call_groq_with_backoff(
@@ -1124,8 +1249,15 @@ def _generate_mcq_pool_ai_only(
                 )
                 rescue_mcqs = _normalize_generated_pool((resp if isinstance(resp, dict) else extract_json(resp)) or {}).get('mcqs', [])
                 for rq in rescue_mcqs:
+                    # Validate each rescue MCQ
+                    is_valid, error_msg = _validate_mcq_structure(rq)
+                    if not is_valid:
+                        logger.warning(f"Gap-Filler MCQ validation failed: {error_msg}")
+                        continue
+                    
                     rq['difficulty'] = difficulty
                     generated.append(rq)
+                    logger.info(f"✅ Gap-Filler added 1 {difficulty} MCQ. Total {difficulty}: {len([q for q in generated if q.get('difficulty') == difficulty])}/{total_count_for_diff}")
                     if len([q for q in generated if q.get('difficulty') == difficulty]) >= total_count_for_diff:
                         break
             except Exception as e:
@@ -1182,26 +1314,43 @@ def _expert_assessment_refiner(groq_client, raw_content, cancel_token=None):
         logger.error(f"Expert Validator: Refinement FAILED: {e}")
         return raw_content
 
-def pick_random_subset(assessment, pool, seed=None):
-    """Randomly selects a subset of questions from the pool based on assessment targets."""
+def pick_random_subset(assessment, pool, seed=None, candidate_index=None):
+    """
+    Selects a subset of questions from the pool for a specific candidate.
+
+    Uniqueness Strategy:
+    - If `candidate_index` is provided AND `same_questions_for_all` is False:
+        MCQs are distributed using a PARTITIONED approach — the pool is shuffled
+        with a deterministic batch-level seed (assessment.batch_id), then sliced
+        so each candidate gets a non-overlapping slice. Like dealing cards from
+        a shuffled deck.
+    - Otherwise (same_questions_for_all=True or no index given):
+        Questions are randomly sampled with the email-based seed (reproducible
+        but may overlap between candidates).
+
+    Coding challenges are always unique — they are removed from the pool after
+    selection, so no two candidates receive the same coding challenge
+    (when same_questions_for_all=False).
+    """
     if not pool:
         return {}
-        
+
     local_random = random.Random(seed) if seed else random.Random()
     subset = {"mcqs": [], "coding_challenges": []}
-    
+
     normalized_pool = _normalize_generated_pool(pool)
     pool_mcqs = list(normalized_pool.get('mcqs', []))
     pool_coding = copy.deepcopy(normalized_pool.get('coding_challenges', []))
-    
-    # 1. Select MCQs
+
+    # Determine question target counts and difficulty breakdown
     target_mcq_count = getattr(assessment, 'mcq_count', 10)
+    same_for_all = getattr(assessment, 'same_questions_for_all', True)
+
     target_mcqs = [
-        ('Easy', getattr(assessment, 'mcq_easy', 0)), 
-        ('Medium', getattr(assessment, 'mcq_medium', 0)), 
+        ('Easy', getattr(assessment, 'mcq_easy', 0)),
+        ('Medium', getattr(assessment, 'mcq_medium', 0)),
         ('Hard', getattr(assessment, 'mcq_hard', 0))
     ]
-    
     if sum(t for _, t in target_mcqs) == 0:
         target_mcqs = [
             ('Easy', target_mcq_count // 2),
@@ -1209,26 +1358,65 @@ def pick_random_subset(assessment, pool, seed=None):
             ('Hard', max(0, target_mcq_count - target_mcq_count // 2 - (target_mcq_count * 3) // 10))
         ]
 
-    selected_mcq_ids = set()
-    for diff, target in target_mcqs:
-        diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff and id(q) not in selected_mcq_ids]
-        if diff_pool:
-            sample_size = min(len(diff_pool), target)
-            chosen = local_random.sample(diff_pool, sample_size)
-            subset['mcqs'].extend(chosen)
-            selected_mcq_ids.update(id(q) for q in chosen)
-    
-    if len(subset['mcqs']) < target_mcq_count:
-        remaining = [q for q in pool_mcqs if id(q) not in selected_mcq_ids]
-        needed = target_mcq_count - len(subset['mcqs'])
-        if remaining:
-            fill = local_random.sample(remaining, min(len(remaining), needed))
-            subset['mcqs'].extend(fill)
+    # ── 1. SELECT MCQs ──────────────────────────────────────────────────────────
+    use_partitioned = (
+        candidate_index is not None
+        and not same_for_all
+        and len(pool_mcqs) >= target_mcq_count
+    )
 
-    # 2. Select Coding Challenges
+    if use_partitioned:
+        # Partitioned mode: shuffle entire pool with a stable batch-level seed,
+        # then assign each candidate a non-overlapping slice per difficulty tier.
+        batch_seed = str(getattr(assessment, 'batch_id', '') or getattr(assessment, 'id', ''))
+        batch_random = random.Random(batch_seed)
+
+        for diff, target in target_mcqs:
+            if target == 0:
+                continue
+            diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff]
+            # Deterministically shuffle this tier's pool using batch seed
+            batch_random_tier = random.Random(batch_seed + diff)
+            batch_random_tier.shuffle(diff_pool)
+            # Slice: candidate i gets indices [i*target : (i+1)*target]
+            start = candidate_index * target
+            end = start + target
+            slice_qs = diff_pool[start:end]
+            if slice_qs:
+                subset['mcqs'].extend(slice_qs)
+
+        # Backfill if slice didn't yield enough (pool smaller than expected)
+        if len(subset['mcqs']) < target_mcq_count:
+            selected_ids = {id(q) for q in subset['mcqs']}
+            remaining = [q for q in pool_mcqs if id(q) not in selected_ids]
+            needed = target_mcq_count - len(subset['mcqs'])
+            if remaining:
+                fill = local_random.sample(remaining, min(len(remaining), needed))
+                subset['mcqs'].extend(fill)
+    else:
+        # Sampling mode (same_for_all or no index): email-seeded random sample
+        selected_mcq_ids = set()
+        for diff, target in target_mcqs:
+            diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff and id(q) not in selected_mcq_ids]
+            if diff_pool:
+                sample_size = min(len(diff_pool), target)
+                chosen = local_random.sample(diff_pool, sample_size)
+                subset['mcqs'].extend(chosen)
+                selected_mcq_ids.update(id(q) for q in chosen)
+
+        if len(subset['mcqs']) < target_mcq_count:
+            selected_mcq_ids = {id(q) for q in subset['mcqs']}
+            remaining = [q for q in pool_mcqs if id(q) not in selected_mcq_ids]
+            needed = target_mcq_count - len(subset['mcqs'])
+            if remaining:
+                fill = local_random.sample(remaining, min(len(remaining), needed))
+                subset['mcqs'].extend(fill)
+
+    # ── 2. SELECT CODING CHALLENGES ─────────────────────────────────────────────
+    # Coding is always unique: chosen items are removed from pool after selection
     target_coding_count = getattr(assessment, 'coding_count', 2)
     targets = getattr(assessment, 'coding_difficulty_list', None) or ['Medium'] * target_coding_count
-    
+
     for diff in targets:
         diff_pool = [c for c in pool_coding if c.get('difficulty') == diff]
         if not diff_pool and pool_coding:
@@ -1238,7 +1426,7 @@ def pick_random_subset(assessment, pool, seed=None):
             subset['coding_challenges'].append(choice)
             if choice in pool_coding:
                 pool_coding.remove(choice)
-    
+
     if len(subset['coding_challenges']) < target_coding_count:
         needed = target_coding_count - len(subset['coding_challenges'])
         if pool_coding:

@@ -1309,8 +1309,13 @@ const ResultsAI = () => {
                                                     {log.message}
                                                 </div>
                                                 {log.details && Object.keys(log.details).length > 0 && (
-                                                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontStyle: 'italic', background: '#F4F7FE', padding: '0.5rem', borderRadius: '8px' }}>
-                                                        {JSON.stringify(log.details)}
+                                                    <div style={{ fontSize: '0.78rem', color: '#707EAE', background: '#F4F7FE', padding: '0.5rem 0.75rem', borderRadius: '8px', marginTop: '0.3rem' }}>
+                                                        {Object.entries(log.details).map(([k, v]) => (
+                                                            <div key={k} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.1rem' }}>
+                                                                <span style={{ fontWeight: '800', color: '#4318FF', minWidth: '90px', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}:</span>
+                                                                <span style={{ wordBreak: 'break-all' }}>{String(v)}</span>
+                                                            </div>
+                                                        ))}
                                                     </div>
                                                 )}
                                             </div>
