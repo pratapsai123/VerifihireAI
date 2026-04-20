@@ -11,6 +11,7 @@ from .models import (
     CodingTestCase,
     CodingSubmission,
     OwnershipTransferLog,
+    ContactSubmission,
 )
 
 
@@ -115,3 +116,12 @@ class OwnershipTransferLogAdmin(admin.ModelAdmin):
         'ai_assessments_transferred', 'ai_candidates_transferred',
         'subordinates_reassigned',
     )
+
+
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'company', 'subject', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('full_name', 'email', 'company', 'subject', 'message')
+    readonly_fields = ('created_at',)
+    ordering = ['-created_at']

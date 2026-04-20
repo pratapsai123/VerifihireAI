@@ -107,6 +107,7 @@ urlpatterns = [
     path('workflow/deletion-requests/<int:request_id>/action/', views.action_deletion_request_view, name='action_deletion_request'),
     path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
     path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
+    path('contact/', views.contact_us_view, name='contact_us'),
 
 ]
 

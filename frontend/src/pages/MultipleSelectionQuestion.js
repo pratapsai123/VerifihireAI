@@ -173,9 +173,9 @@ function MultipleSelectionQuestion() {
     }
 
     const correctLabels = filledAnswers.filter((a) => a.isCorrect).map((a) => a.label);
-    if (correctLabels.length === 0) {
+    if (correctLabels.length < 2) {
       // eslint-disable-next-line no-alert
-      alert('Please select at least one correct answer.');
+      alert('Please select at least two correct answers for a multiple selection question.');
       return;
     }
 

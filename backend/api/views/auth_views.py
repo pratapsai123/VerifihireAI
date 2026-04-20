@@ -629,11 +629,21 @@ def login_view(request):
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
-            if not auth_user or not auth_user.check_password(password):
-                return Response({'email': ['Invalid email or password.']}, status=status.HTTP_401_UNAUTHORIZED)
+            if not auth_user:
+                return Response(
+                    {'error': 'Your account is not registered with us.'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            if not auth_user.check_password(password):
+                return Response(
+                    {'error': 'Incorrect password. Please try again.'},
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
             if not ApplicationAdmin.objects.filter(user=auth_user).exists():
-                return Response({'email': ['Invalid email or password.']}, status=status.HTTP_401_UNAUTHORIZED)
-
+                return Response(
+                    {'error': 'Your account is not registered with us.'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
         # Generate and send OTP for 2-step verification
         otp = EmailOTP.generate_otp()
         expires_in = _otp_expiry_seconds()

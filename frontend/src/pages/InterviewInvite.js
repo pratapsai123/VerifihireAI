@@ -16,40 +16,7 @@ function isValidPAN(pan) {
   return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test((pan || '').trim().toUpperCase());
 }
 
-function normalizeHeader(h) {
-  return (h || '').toString().trim().toLowerCase().replace(/\s+/g, '_');
-}
 
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cell = '', inQuotes = false;
-  const pushCell = () => { row.push(cell); cell = ''; };
-  const pushRow = () => {
-    if (!row.every((c) => !String(c || '').trim())) rows.push(row);
-    row = [];
-  };
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (inQuotes) {
-      if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else inQuotes = false; }
-      else cell += ch;
-    } else if (ch === '"') inQuotes = true;
-    else if (ch === ',') pushCell();
-    else if (ch === '\n') { pushCell(); pushRow(); }
-    else if (ch !== '\r') cell += ch;
-  }
-  pushCell(); pushRow();
-  return rows;
-}
-
-function downloadTextFile(filename, text) {
-  const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a); URL.revokeObjectURL(url);
-}
 
 function getInitials(name) {
   const parts = (name || '').trim().split(/\s+/);
@@ -79,9 +46,7 @@ export default function InterviewInvite() {
 
   const [candidates, setCandidates] = useState([]);
   const [sending, setSending] = useState(false);
-  const [importMsg, setImportMsg] = useState('');
   const [userProfile, setUserProfile] = useState(null);
-  const fileRef = useRef(null);
 
   const userDomain = useMemo(() => {
     if (!userProfile?.email) return '';
@@ -232,73 +197,11 @@ export default function InterviewInvite() {
     } catch { alert('Failed to remove draft candidate.'); }
   };
 
-  const downloadTemplate = () => {
-    const sample = [
-      ['name', 'email', 'interviewer_name', 'interviewer_email', 'pan_number', 'phone'].join(','),
-      ['John Doe', 'john@example.com', 'Jane Smith', 'jane@company.com', 'ABCDE1234F', '9999999999'].join(','),
-    ].join('\n');
-    downloadTextFile('interview_invite_template.csv', sample);
-  };
 
-  const importFromCSVText = async (csvText) => {
-    setImportMsg('');
-    const rows = parseCSV(csvText || '');
-    if (!rows.length) { setImportMsg('CSV is empty.'); return; }
-    const first = rows[0].map((c) => normalizeHeader(c));
-    const hasHeader = first.includes('email') || first.includes('name');
-    let header = null, dataRows = rows;
-    if (hasHeader) { header = first; dataRows = rows.slice(1); }
 
-    const mapRow = (cells) => {
-      const get = (key, fb) => {
-        if (header) { const i = header.indexOf(key); if (i >= 0) return (cells[i] ?? '').toString().trim(); return ''; }
-        return (cells[fb] ?? '').toString().trim();
-      };
-      return {
-        name: get('name', 0),
-        email: get('email', 1).toLowerCase(),
-        interviewer_name: get('interviewer_name', 2),
-        interviewer_email: get('interviewer_email', 3).toLowerCase(),
-        pan_number: (get('pan_number', 4) || get('pan', 4)).trim().toUpperCase() || null,
-        phone: (get('phone', 5) || '').trim() || null,
-      };
-    };
 
-    const existingEmails = new Set(candidates.map((c) => (c.email || '').toLowerCase()));
-    const existingPANs = new Set(candidates.map((c) => (c.pan_number || '').toUpperCase()).filter(Boolean));
-    let dupes = 0, invalid = 0, invalidDomain = 0;
-    const toUpload = [];
 
-    dataRows.forEach((cells) => {
-      const r = mapRow(cells);
-      const p = (r.pan_number || '').trim().toUpperCase();
-      if (!r.name || !isValidEmail(r.email) || !isValidPAN(p) || !isValidEmail(r.interviewer_email)) { invalid++; return; }
-      if (userDomain && !r.interviewer_email.endsWith(`@${userDomain}`)) { invalidDomain++; return; }
-      if (existingEmails.has(r.email) || (p && existingPANs.has(p))) { dupes++; return; }
-      existingEmails.add(r.email);
-      if (p) existingPANs.add(p);
-      toUpload.push(r);
-    });
 
-    if (!toUpload.length) {
-      setImportMsg(`No valid candidates. Duplicates: ${dupes}, Invalid: ${invalid}, Wrong domain: ${invalidDomain}.`); return;
-    }
-    try {
-      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, { candidates: toUpload });
-      if (resp.data?.results) {
-        setCandidates((prev) => [...prev, ...resp.data.results]);
-        setImportMsg(`Imported ${resp.data.results.length}${dupes ? ` · ${dupes} duplicates skipped` : ''}${invalid ? ` · ${invalid} invalid` : ''}${invalidDomain ? ` · ${invalidDomain} wrong domain` : ''}`);
-      }
-    } catch { setImportMsg('Failed to save imported drafts.'); }
-  };
-
-  const handleCSVUpload = async (file) => {
-    if (!file) return;
-    setImportMsg('');
-    try { const text = await file.text(); importFromCSVText(text); }
-    catch { setImportMsg('Could not read the CSV file.'); }
-    finally { if (fileRef.current) fileRef.current.value = ''; }
-  };
 
   const shareInvites = async () => {
     if (candidates.length === 0) { alert('Please add at least one candidate.'); return; }
@@ -338,7 +241,7 @@ export default function InterviewInvite() {
       try { localStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
       setCandidates([]); setName(''); setEmail(''); setPan(''); setPhone('');
       setInterviewerName(''); setInterviewerEmail('');
-      setScheduleDate(''); setStartTime(''); setEndTime(''); endTimeManualRef.current = false; setImportMsg('');
+      setScheduleDate(''); setStartTime(''); setEndTime(''); endTimeManualRef.current = false;
     } catch (e) {
       alert(e?.response?.data?.error || e?.message || 'Failed to send interview invites');
     } finally { setSending(false); }
@@ -361,21 +264,21 @@ export default function InterviewInvite() {
           <div className="ii-top-left">
             <div className="ii-icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
               </svg>
             </div>
             <div>
               <div className="ii-title">Invite for Live Interview</div>
               <div className="ii-meta">
                 <span className="ii-meta-chip">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
                   Default duration: 1 hour
                 </span>
                 <span className="ii-meta-sep">·</span>
                 <span className="ii-meta-chip">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg>
                   Live Interview
                 </span>
               </div>
@@ -383,7 +286,7 @@ export default function InterviewInvite() {
           </div>
           <div className="ii-actions">
             <button className="ii-btn-back" type="button" onClick={() => navigate('/dashboard')}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
               Back
             </button>
           </div>
@@ -392,21 +295,27 @@ export default function InterviewInvite() {
         {/* ── Progress Stepper ── */}
         <div className="ii-stepper">
           {[
-            { label: 'Set Schedule', desc: 'Choose date & time', done: scheduleReady,
+            {
+              label: 'Set Schedule', desc: 'Choose date & time', done: scheduleReady,
               active: !scheduleReady,
-              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
-            { label: 'Add Candidates', desc: `${candidates.length} added`, done: candidatesReady,
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+            },
+            {
+              label: 'Add Candidates', desc: `${candidates.length} added`, done: candidatesReady,
               active: scheduleReady && !candidatesReady,
-              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg> },
-            { label: 'Send Invites', desc: 'Email all candidates', done: false,
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" /></svg>
+            },
+            {
+              label: 'Send Invites', desc: 'Email all candidates', done: false,
               active: scheduleReady && candidatesReady,
-              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> },
+              icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+            },
           ].map((step, i, arr) => (
             <React.Fragment key={step.label}>
               <div className={`ii-step${step.done ? ' done' : step.active ? ' active' : ''}`}>
                 <div className="ii-step-circle">
                   {step.done
-                    ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                     : step.icon}
                 </div>
                 <div className="ii-step-text">
@@ -424,8 +333,8 @@ export default function InterviewInvite() {
           <div className="ii-card-header">
             <div className="ii-card-icon blue">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
               </svg>
             </div>
             <span className="ii-card-title">Schedule / Link Validity</span>
@@ -485,7 +394,7 @@ export default function InterviewInvite() {
           <div className="ii-schedule-note">
             <span className="ii-note-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </span>
             If a candidate starts within the allowed start window, they can refresh or reconnect and continue until the interview end time.
@@ -497,46 +406,12 @@ export default function InterviewInvite() {
           <div className="ii-card-header">
             <div className="ii-card-icon teal">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" />
+                <line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" />
               </svg>
             </div>
             <span className="ii-card-title">Add Candidates</span>
-            <span className="ii-card-subtitle">Fill manually or import from CSV</span>
-          </div>
-
-          {/* Toolbar */}
-          <div className="ii-toolbar">
-            <div className="ii-toolbar-left">
-              <button className="ii-btn-secondary" type="button" onClick={downloadTemplate}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Download CSV Template
-              </button>
-            </div>
-            <div className="ii-toolbar-right">
-              {importMsg && (
-                <span className="ii-import-msg">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  {importMsg}
-                </span>
-              )}
-              <label className="ii-file-pill" htmlFor="interviewInviteCsv">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-                Upload CSV
-                <input
-                  id="interviewInviteCsv"
-                  ref={fileRef}
-                  type="file"
-                  accept=".csv,text/csv"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleCSVUpload(e.target.files?.[0])}
-                />
-              </label>
-            </div>
+            <span className="ii-card-subtitle">Fill manually</span>
           </div>
 
           {/* Two-row form: Candidate fields + Interviewer fields */}
@@ -636,7 +511,7 @@ export default function InterviewInvite() {
             <div className="ii-add-actions">
               <button className="ii-btn-tertiary" type="button" onClick={addCandidate} disabled={!canAdd}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                  <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
                 Add
               </button>
@@ -644,14 +519,14 @@ export default function InterviewInvite() {
                 {sending ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'ii-spin 1s linear infinite' }}>
-                      <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+                      <polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
                     </svg>
                     Sending…
                   </>
                 ) : (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
                     </svg>
                     Send Invites
                   </>
@@ -666,8 +541,8 @@ export default function InterviewInvite() {
           <div className="ii-card-header">
             <div className="ii-card-icon violet">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
               </svg>
             </div>
             <span className="ii-card-title">Candidates</span>
@@ -694,8 +569,8 @@ export default function InterviewInvite() {
               {scheduleDisplay && (
                 <div className="ii-stat ii-stat-schedule">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
                   </svg>
                   <span className="ii-stat-schedule-val">{scheduleDisplay}</span>
                 </div>
@@ -713,8 +588,8 @@ export default function InterviewInvite() {
                   }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
-                    <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+                    <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14H6L5 6" />
+                    <path d="M10 11v6" /><path d="M14 11v6" /><path d="M9 6V4h6v2" />
                   </svg>
                   Clear All
                 </button>
@@ -726,12 +601,12 @@ export default function InterviewInvite() {
             <div className="ii-empty">
               <div className="ii-empty-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
                 </svg>
               </div>
               <div className="ii-empty-title">No candidates added yet</div>
-              <div className="ii-empty-text">Fill in the form above or upload a CSV file to add candidates to this interview batch.</div>
+              <div className="ii-empty-text">Fill in the form above to add candidates to this interview batch.</div>
             </div>
           ) : (
             <div className="ii-table-wrap">

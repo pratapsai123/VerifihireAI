@@ -114,3 +114,7 @@ from .hr_offboarding_views import (
 from .malpractice_views import (
     track_events_view,
 )
+
+from .contact_views import (
+    contact_us_view,
+)

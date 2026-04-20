@@ -92,6 +92,8 @@ function Login() {
         // 403 = company pending/rejected
         if (error.response.status === 403) {
           setLoginError(errorData.error || 'Your account is not authorized to log in at this time.');
+        } else if (error.response.status === 404) {
+          setLoginError(errorData.error || 'Your account is not registered with us.');
         } else if (error.response.status === 401) {
           setLoginError(errorData.error || (errorData.email && errorData.email[0]) || 'Invalid email or password.');
         } else if (errorData.email) {
