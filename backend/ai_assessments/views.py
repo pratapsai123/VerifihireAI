@@ -786,7 +786,8 @@ class GenerateAssessmentView(APIView):
                 generated_content=generated_data,
                 batch_id=generate_batch_id(),
                 batch_name=generate_batch_name(job_title),
-                status='SCHEDULED'
+                status='SCHEDULED',
+                creation_type='manual'
             )
 
             logger.info(
@@ -887,6 +888,8 @@ class CreateSubmissionView(APIView):
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
+            # Only pick and lock questions if they haven't been locked yet
+            if not submission.candidate_questions:
                 # Unique MCQ Distribution:
                 # Resolve this candidate's 0-based index within the batch so pick_random_subset
                 # can assign a non-overlapping slice of the MCQ pool (partitioned mode).
@@ -1108,6 +1111,7 @@ class AssessmentListView(APIView):
                     "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                     "status": assessment.status,
                     "batch_name": assessment.batch_name,
+                    "creation_type": assessment.creation_type,
                     "max_candidates_allowed": assessment.max_candidates_allowed,
                     "share_token": str(assessment.share_token),
                     "candidate_count": count,
@@ -1199,6 +1203,7 @@ class AssessmentDetailView(APIView):
                 "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
                 "batch_name": assessment.batch_name,
+                "creation_type": assessment.creation_type,
                 "share_token": str(assessment.share_token),
                 "num_applicants": assessment.num_applicants,
                 "max_candidates_allowed": assessment.max_candidates_allowed,
@@ -1325,12 +1330,21 @@ class PublicAssessmentView(APIView):
                         if assessment.num_applicants <= 1 or assessment.same_questions_for_all:
                             final_content = _normalize_generated_pool(gen_content)
                         else:
-                            final_content = pick_random_subset(assessment, gen_content, seed=email_param)
+                            # Use consistent index logic even in preview if submission exists
+                            candidate_index = None
+                            try:
+                                all_subs = list(AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('id').values_list('id', flat=True))
+                                if submission.id in all_subs:
+                                    candidate_index = all_subs.index(submission.id)
+                            except: pass
+                            final_content = pick_random_subset(assessment, gen_content, seed=email_param, candidate_index=candidate_index)
+                            
                         submission.candidate_questions = final_content
                         submission.save(update_fields=['candidate_questions'])
                 else:
                     # No submission yet, but we have an email. 
-                    # Consistent set for the UI
+                    # Consistent set for the UI. Since there is no submission ID yet, 
+                    # we use a fallback that will be reconciled when the submission is created.
                     if assessment.num_applicants <= 1 or assessment.same_questions_for_all:
                         final_content = _normalize_generated_pool(gen_content)
                     else:

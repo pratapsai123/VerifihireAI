@@ -19,10 +19,22 @@ def process_batch_assessment(batch_id):
     from ai_candidates.utils import log_automation_event
 
     try:
-        passed_candidates = list(Candidate.objects.filter(batch_id=batch_id, status='Resume Passed'))
+        raw_passed_candidates = list(Candidate.objects.filter(batch_id=batch_id, status='Resume Passed').order_by('id'))
+        
+        passed_candidates = []
+        seen_emails = set()
+        
+        for candidate in raw_passed_candidates:
+            email = (candidate.email or "").strip().lower()
+            if email and email not in seen_emails:
+                seen_emails.add(email)
+                passed_candidates.append(candidate)
+            elif not email:
+                passed_candidates.append(candidate)
+                
         num_passed = len(passed_candidates)
 
-        logger.info(f"Pipeline[{batch_id}]: Batch assessment triggered. Found {num_passed} passed candidates.")
+        logger.info(f"Pipeline[{batch_id}]: Batch assessment triggered. Found {num_passed} unique passed candidates (out of {len(raw_passed_candidates)} total passed).")
 
         if num_passed == 0:
             logger.info(f"Pipeline[{batch_id}]: No candidates passed. Skipping assessment generation.")
@@ -58,6 +70,11 @@ def process_batch_assessment(batch_id):
             assessment_from = parse_datetime(a_from_str) if a_from_str else None
             assessment_until = parse_datetime(a_until_str) if a_until_str else None
 
+            # Calculate per-candidate difficulty breakdown
+            mcq_easy_per_candidate = mcq_count // 2
+            mcq_medium_per_candidate = (mcq_count * 3) // 10
+            mcq_hard_per_candidate = max(0, mcq_count - mcq_easy_per_candidate - mcq_medium_per_candidate)
+
             # Create Assessment Record
             assessment = Assessment.objects.create(
                 job_description=job_desc,
@@ -77,11 +94,14 @@ def process_batch_assessment(batch_id):
                 user_profile=getattr(trigger_candidate, 'user_profile', None),
                 created_by=getattr(trigger_candidate, 'user_profile', None),
                 company=getattr(trigger_candidate, 'company', None),
-                mcq_easy=5,
-                mcq_medium=3,
-                mcq_hard=2,
+                mcq_easy=mcq_easy_per_candidate,
+                mcq_medium=mcq_medium_per_candidate,
+                mcq_hard=mcq_hard_per_candidate,
                 total_points=100,
-                mcq_weight=int(settings_data.get('mcq_weight', 40))
+                mcq_weight=int(settings_data.get('mcq_weight', 40)),
+                max_candidates_allowed=num_passed,
+                invited_count=num_passed,
+                creation_type='automatic'
             )
             logger.info(f"Pipeline[{batch_id}]: Assessment record created (id={assessment.id}). Calling AI...")
 
@@ -248,6 +268,14 @@ def process_batch_assessment(batch_id):
                     details={'assessment_id': assessment.id, 'link': link}
                 )
 
+                # Update InvitedCandidate list
+                from ai_assessments.models import InvitedCandidate
+                InvitedCandidate.objects.get_or_create(
+                    assessment=assessment,
+                    email=candidate.email,
+                    defaults={'name': candidate.full_name or "Unknown"}
+                )
+
             except Exception as mail_err:
                 emails_failed += 1
                 logger.error(
@@ -297,10 +325,15 @@ def process_resume_passed(candidate_id):
         assessment_from = parse_datetime(a_from_str) if a_from_str else None
         assessment_until = parse_datetime(a_until_str) if a_until_str else None
 
+        mcq_count = settings_data.get('mcq_count', 10)
+        mcq_easy_per_candidate = mcq_count // 2
+        mcq_medium_per_candidate = (mcq_count * 3) // 10
+        mcq_hard_per_candidate = max(0, mcq_count - mcq_easy_per_candidate - mcq_medium_per_candidate)
+
         assessment = Assessment.objects.create(
             job_description=candidate.job_description or "Technical Role",
             required_skills=candidate.job_title or "Technical Assessment",
-            mcq_count=settings_data.get('mcq_count', 10),
+            mcq_count=mcq_count,
             coding_count=settings_data.get('coding_count', 1),
             duration_minutes=settings_data.get('duration', 60),
             difficulty_level=settings_data.get('difficulty', 'Medium'),
@@ -312,7 +345,15 @@ def process_resume_passed(candidate_id):
             user_profile=getattr(candidate, 'user_profile', None),
             created_by=getattr(candidate, 'user_profile', None),
             same_questions_for_all=same_questions,
-            mcq_easy=5, mcq_medium=3, mcq_hard=2, total_points=100
+            max_candidates_allowed=1,
+            invited_count=1,
+            num_applicants=1,
+            mcq_easy=mcq_easy_per_candidate, 
+            mcq_medium=mcq_medium_per_candidate, 
+            mcq_hard=mcq_hard_per_candidate, 
+            total_points=100,
+            mcq_weight=int(settings_data.get('mcq_weight', 40)),
+            creation_type='automatic'
         )
 
         raw_result = _call_groq_with_backoff(
@@ -365,6 +406,14 @@ def process_resume_passed(candidate_id):
             candidate, 'EMAIL_SENT', 'SUCCESS',
             f"Individual assessment invitation email sent to {candidate.email}.",
             details={'assessment_id': assessment.id, 'link': link}
+        )
+
+        # Update InvitedCandidate list
+        from ai_assessments.models import InvitedCandidate
+        InvitedCandidate.objects.get_or_create(
+            assessment=assessment,
+            email=candidate.email,
+            defaults={'name': candidate.full_name or "Unknown"}
         )
 
     except Exception as e:
