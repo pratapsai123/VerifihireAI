@@ -194,7 +194,30 @@ class SubmitAssessmentView(APIView):
             else:
                 percentage = 0
 
-            pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 50 else 'rejected'
+            # --- RIGOROUS HIRING STANDARDS ---
+            # Enforce minimum thresholds for individual sections: MCQ 60%, Coding 50%, Integrity 70%
+            MIN_MCQ_THRESHOLD = 60.0
+            MIN_CODING_THRESHOLD = 50.0
+            MIN_INTEGRITY_THRESHOLD = 70.0
+
+            passed_overall = percentage >= assessment.pass_threshold
+            passed_mcq = mcq_percentage >= MIN_MCQ_THRESHOLD
+            passed_coding = coding_percentage >= MIN_CODING_THRESHOLD
+            passed_integrity = submission.integrity_score >= MIN_INTEGRITY_THRESHOLD
+
+            # Selection Logic based on user requirement:
+            # 1. Integrity < 70% -> HOLD
+            # 2. Performance < Threshold -> HOLD (per latest request)
+            # 3. All Pass -> SELECTED
+            
+            if not passed_integrity:
+                pass_status = 'hold'
+            elif (possible_mcq_points > 0 and not passed_mcq) or (possible_coding_points > 0 and not passed_coding):
+                pass_status = 'hold'
+            elif not passed_overall:
+                pass_status = 'hold'
+            else:
+                pass_status = 'selected'
 
             submission.answers = answers
             submission.mcq_score = round(mcq_percentage) # Store % for internal tracking
@@ -1648,8 +1671,8 @@ class ProxyCodeExecuteView(APIView):
                 stdin = str(stdin)
             code = files[0]['content'] if files else ''
             
-            # Get executor URL from environment or fallback to localhost:4001
-            executor_base_url = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4001").rstrip("/")
+            # Get executor URL from environment or fallback to localhost:4000
+            executor_base_url = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
             
             # Prepare payload for internal executor
             payload = {

@@ -15,7 +15,7 @@ from rest_framework import status
 from .models import CodingInvite, CodingInviteQuestion, CodingQuestion, CodingTestCase, CodingSubmission
 
 
-EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4001").rstrip("/")
+EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
 
 DEFAULT_LANGS = [
     "cpp",

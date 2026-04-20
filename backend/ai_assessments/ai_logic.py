@@ -299,7 +299,7 @@ Your task is to CLEAN, FIX, and STANDARDIZE the content so it is production-read
 - No explanations. No placeholders.
 """
 
-EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4001").rstrip("/")
+EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
 
 def _call_executor(*, language: str, source_code: str, stdin: str | None, time_limit_ms: int = 5000, memory_mb: int = 256) -> dict:
     """Helper to call the internal code executor."""
