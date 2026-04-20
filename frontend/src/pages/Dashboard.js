@@ -203,13 +203,12 @@ const Dashboard = () => {
           path: '#',
           role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
           nestedItems: [
-            { label: 'Start Session', path: '/ai-interview' },
-            { label: 'Result', path: '/results-ai?tab=interview' }
+            { label: 'Start Session', path: '/ai-interview' }
           ]
         }
       ]
     },
-    { icon: BarChart3, label: 'Results', path: '/results', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
+
     { 
       icon: SettingsIcon, 
       label: 'Settings', 
@@ -483,6 +482,7 @@ const Dashboard = () => {
                   <div className="card-actions">
                     <button className="btn-premium btn-fill" onClick={() => navigate('/resume-matcher')}>Analyze Resumes</button>
                     <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=resume')}>Results</button>
+                    <button className="btn-premium btn-outline" style={{ borderColor: '#6366f1', color: '#6366f1' }} onClick={() => navigate('/results-ai?tab=fully_automatic')}>Fully Automatic Results</button>
                   </div>
                 </div>
 
@@ -585,16 +585,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="glass-card" style={{ justifyContent: 'center', cursor: 'pointer' }} onClick={() => navigate('/results')}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div className="card-icon"><BarChart3 size={24} /></div>
-                    <div>
-                      <h3 style={{ margin: 0 }}>Results</h3>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748b' }}>View selection outcomes</p>
-                    </div>
-                    <ChevronRight style={{ marginLeft: 'auto', color: '#ccd6e0' }} />
-                  </div>
-                </div>
+
               </div>
 
               {/* Bottom Row: Detailed Insights */}

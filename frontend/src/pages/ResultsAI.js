@@ -218,6 +218,31 @@ const ResultsAI = () => {
         return map[rawStatus] || rawStatus;
     };
 
+    const unifyAutomaticResults = (roleData) => {
+        const candidateMap = {};
+        const processGroup = (items, type) => {
+            items.forEach(item => {
+                const email = item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`;
+                if (!candidateMap[email]) {
+                    candidateMap[email] = {
+                        email,
+                        full_name: item.full_name || item.candidate?.name || 'Candidate',
+                        resume: null, assessment: null, interview: null
+                    };
+                }
+                candidateMap[email][type] = item;
+            });
+        };
+        processGroup(roleData.resume, 'resume');
+        processGroup(roleData.assessment, 'assessment');
+        processGroup(roleData.interview, 'interview');
+        return Object.values(candidateMap).map(c => ({
+            ...c,
+            _type: 'fully_automatic_candidate',
+            _deleteKey: c.email
+        }));
+    };
+
     const isPass = (r, type) => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
@@ -228,6 +253,7 @@ const ResultsAI = () => {
     const getDataForActiveContext = () => {
         if (!selectedRole || !groupedData[selectedRole]) return [];
         const roleData = groupedData[selectedRole];
+        if (activeTab === 'fully_automatic') return unifyAutomaticResults(roleData);
         if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
         if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
@@ -934,7 +960,10 @@ const ResultsAI = () => {
                 {viewMode !== 'transcript' && (
                     <header style={{ marginBottom: '1rem', textAlign: 'center', flexShrink: 0, paddingTop: '1rem' }}>
                         <h1 style={{ fontSize: '2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                            AI <span style={{ color: '#4F46E5' }}>Results</span>
+                            {activeTab === 'resume' ? 'Resume Screening' : 
+                             activeTab === 'assessment' ? 'AI Assessment' : 
+                             activeTab === 'interview' ? 'AI Interview' : 
+                             activeTab === 'fully_automatic' ? 'Fully Automatic' : 'AI'} <span style={{ color: '#4F46E5' }}>Results</span>
                         </h1>
                     </header>
                 )}
@@ -987,13 +1016,27 @@ const ResultsAI = () => {
                                 <div style={{ maxWidth: '800px', margin: '0 auto', marginTop: '1rem' }}>
                                     <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                         <div style={{ width: '4px', height: '20px', background: '#4F46E5', borderRadius: '2px' }} />
-                                        <h2 style={{ fontSize: '1.2rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Candidate Performance</h2>
+                                        <h2 style={{ fontSize: '1.2rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>{activeTab.replace('_', ' ').toUpperCase()} Archive</h2>
                                         <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: '600', marginLeft: 'auto' }}>
-                                            {Object.keys(groupedData).length} Roles Found
+                                            {Object.entries(groupedData).filter(([_, d]) => {
+                                                if (activeTab === 'resume') return d.resume.length > 0 && !d.is_fully_automatic;
+                                                if (activeTab === 'assessment') return d.assessment.length > 0 && !d.is_fully_automatic;
+                                                if (activeTab === 'interview') return d.interview.length > 0 && !d.is_fully_automatic;
+                                                if (activeTab === 'fully_automatic') return d.is_fully_automatic;
+                                                return true;
+                                            }).length} Batches Found
                                         </span>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                        {Object.entries(groupedData).map(([roleName, data]) => (
+                                        {Object.entries(groupedData)
+                                            .filter(([_, data]) => {
+                                                if (activeTab === 'resume') return data.resume.length > 0 && !data.is_fully_automatic;
+                                                if (activeTab === 'assessment') return data.assessment.length > 0 && !data.is_fully_automatic;
+                                                if (activeTab === 'interview') return data.interview.length > 0 && !data.is_fully_automatic;
+                                                if (activeTab === 'fully_automatic') return data.is_fully_automatic;
+                                                return true;
+                                            })
+                                            .map(([roleName, data]) => (
                                                 <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
                                                 padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                                                 transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
@@ -1038,25 +1081,36 @@ const ResultsAI = () => {
 
                             {viewMode === 'detail' && (
                                 <>
-                                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
-                                        <div style={{ display: 'flex', gap: '0.4rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '10px' }}>
-                                            {[
-                                                { id: 'resume', label: 'Resume', icon: 'fa-file-magnifying-glass' },
-                                                { id: 'assessment', label: 'Assessments', icon: 'fa-brain' },
-                                                { id: 'interview', label: 'Interviews', icon: 'fa-microphone-lines' }
-                                            ].map(tab => (
-                                                <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
-                                                    background: activeTab === tab.id ? 'white' : 'transparent',
-                                                    border: 'none', padding: '0.5rem 1rem', borderRadius: '8px',
-                                                    fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
-                                                    cursor: 'pointer', fontSize: '0.85rem'
-                                                }}>
-                                                    <i className={`fa-solid ${tab.icon}`} style={{ marginRight: '0.4rem' }} />
-                                                    {tab.label}
-                                                </button>
-                                            ))}
+                                    {!groupedData[selectedRole]?.is_fully_automatic && (
+                                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                            <div style={{ display: 'flex', gap: '0.4rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '10px' }}>
+                                                {[
+                                                    { id: 'resume', label: 'Resume', icon: 'fa-file-magnifying-glass' },
+                                                    { id: 'assessment', label: 'Assessments', icon: 'fa-brain' },
+                                                    { id: 'interview', label: 'Interviews', icon: 'fa-microphone-lines' }
+                                                ].filter(tab => {
+                                                    const d = groupedData[selectedRole];
+                                                    if (!d) return false;
+                                                    // This part is redundant now since we hide for automatic, but keeping for safety
+                                                    if (d.is_fully_automatic) return true;
+                                                    if (activeTab === 'resume' && tab.id === 'resume') return true;
+                                                    if (activeTab === 'assessment' && tab.id === 'assessment') return true;
+                                                    if (activeTab === 'interview' && tab.id === 'interview') return true;
+                                                    return false;
+                                                }).map(tab => (
+                                                    <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
+                                                        background: activeTab === tab.id ? 'white' : 'transparent',
+                                                        border: 'none', padding: '0.5rem 1rem', borderRadius: '8px',
+                                                        fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
+                                                        cursor: 'pointer', fontSize: '0.85rem'
+                                                    }}>
+                                                        <i className={`fa-solid ${tab.icon}`} style={{ marginRight: '0.4rem' }} />
+                                                        {tab.label}
+                                                    </button>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
 
                                         <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -1106,8 +1160,16 @@ const ResultsAI = () => {
                                                                 <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
                                                             </th>
                                                             <th>Candidate Info</th>
-                                                            <th>Result</th>
-                                                            <th>Date</th>
+                                                            {activeTab === 'fully_automatic' ? (
+                                                                <>
+                                                                    <th style={{ minWidth: '400px' }}>Pipeline Status</th>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <th>Result</th>
+                                                                    <th>Date</th>
+                                                                </>
+                                                            )}
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -1131,67 +1193,129 @@ const ResultsAI = () => {
                                                                             {r.email || r.candidate?.email || 'N/A'}
                                                                         </div>
                                                                     </td>
-                                                                    <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
-                                                                        {activeTab === 'resume' ? `${r.resume_score || 0}%` :
-                                                                            activeTab === 'assessment' ? `${r.percentage ?? 0}%` :
-                                                                                `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
-                                                                    </td>
-                                                                    <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
-                                                                        <div style={{ fontWeight: '700', color: '#1B254B' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
-                                                                        <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: '600' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                                                                    </td>
+                                                                    {activeTab === 'fully_automatic' ? (
+                                                                        <td style={{ padding: '1rem' }}>
+                                                                            <div style={{ display: 'flex', gap: '1.2rem', alignItems: 'flex-start' }}>
+                                                                                {[
+                                                                                    { label: 'Resume', data: r.resume, scoreKey: 'resume_score' },
+                                                                                    { label: 'Assessment', data: r.assessment, scoreKey: 'percentage' },
+                                                                                    { label: 'Interview', data: r.interview, scoreKey: 'score', isInt: true }
+                                                                                ].map((stage, idx) => {
+                                                                                    const hasData = !!stage.data;
+                                                                                    const score = stage.isInt 
+                                                                                        ? (stage.data?.score != null ? Math.round((stage.data.score / ((stage.data.interview_summary?.length || 13) * 10)) * 100) : 0)
+                                                                                        : (stage.data?.[stage.scoreKey] || 0);
+                                                                                    const date = stage.data?.created_at || stage.data?.submitted_at || stage.data?.completed_at;
+                                                                                    return (
+                                                                                        <div key={idx} style={{ flex: 1, minWidth: '110px' }}>
+                                                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                                                                                                <i className={`fa-solid ${hasData ? 'fa-square-check' : 'fa-square'}`} 
+                                                                                                   style={{ color: hasData ? '#05CD99' : '#CBD5E1', fontSize: '0.9rem' }} />
+                                                                                                <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase' }}>{stage.label}</span>
+                                                                                            </div>
+                                                                                            {hasData ? (
+                                                                                                <div style={{ paddingLeft: '18px' }}>
+                                                                                                    <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#4F46E5' }}>{score}%</div>
+                                                                                                    <div style={{ fontSize: '0.62rem', color: '#94A3B8', fontWeight: '600' }}>{new Date(date).toLocaleDateString()}</div>
+                                                                                                </div>
+                                                                                            ) : (
+                                                                                                <div style={{ paddingLeft: '18px', fontSize: '0.62rem', color: '#CBD5E1', fontStyle: 'italic' }}>Pending</div>
+                                                                                            )}
+                                                                                        </div>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </td>
+                                                                    ) : (
+                                                                        <>
+                                                                            <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
+                                                                                {activeTab === 'resume' ? `${r.resume_score || 0}%` :
+                                                                                    activeTab === 'assessment' ? `${r.percentage ?? 0}%` :
+                                                                                        `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
+                                                                            </td>
+                                                                            <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
+                                                                                <div style={{ fontWeight: '700', color: '#1B254B' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
+                                                                                <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: '600' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                                                                            </td>
+                                                                        </>
+                                                                    )}
                                                                     <td>
                                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                                            <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                                                {getStatusLabel(r.status)}
+                                                                            <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status) }}>
+                                                                                {getStatusLabel(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status)}
                                                                             </span>
-                                                                            {activeTab !== 'assessment' && (
-                                                                                <button 
-                                                                                    onClick={(e) => { e.stopPropagation(); fetchTimeline(r); }}
-                                                                                    title="View Automation History"
-                                                                                    style={{ 
-                                                                                        background: 'none', border: 'none', cursor: 'pointer', 
-                                                                                        color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
-                                                                                        display: 'flex', alignItems: 'center'
-                                                                                    }}
-                                                                                >
-                                                                                    <i className="fa-solid fa-clock-rotate-left"></i>
-                                                                                </button>
-                                                                            )}
+                                                                            <button 
+                                                                                onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
+                                                                                title="View Automation History"
+                                                                                style={{ 
+                                                                                    background: 'none', border: 'none', cursor: 'pointer', 
+                                                                                    color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
+                                                                                    display: 'flex', alignItems: 'center'
+                                                                                }}
+                                                                            >
+                                                                                <i className="fa-solid fa-clock-rotate-left"></i>
+                                                                            </button>
                                                                             {r.delete_requested && (
                                                                                 <span title="Deletion pending approval" style={{ cursor: 'help' }}>⏳</span>
                                                                             )}
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                                                            {activeTab === 'interview' ? (
-                                                                                <button 
-                                                                                    onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
-                                                                                    style={{ 
-                                                                                        padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                        background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
-                                                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                    }}
-                                                                                >Review</button>
-                                                                            ) : activeTab === 'assessment' ? (
-                                                                                <button 
-                                                                                    onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
-                                                                                    style={{ 
-                                                                                        padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                        background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                    }}
-                                                                                >View</button>
-                                                                            ) : null}
+                                                                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                                                                            {activeTab === 'fully_automatic' ? (
+                                                                                <>
+                                                                                    {r.assessment && (
+                                                                                        <button 
+                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.assessment.id || r.assessment.candidate_id }); }}
+                                                                                            title="View Assessment"
+                                                                                            style={{ 
+                                                                                                padding: '0.4rem 0.6rem', borderRadius: '8px', border: 'none',
+                                                                                                background: '#EEF2FF', color: '#4F46E5', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer'
+                                                                                            }}
+                                                                                        >Quiz</button>
+                                                                                    )}
+                                                                                    {r.interview && (
+                                                                                        <button 
+                                                                                            onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r.interview); setViewMode('transcript'); }}
+                                                                                            title="View Interview Transcript"
+                                                                                            style={{ 
+                                                                                                padding: '0.4rem 0.6rem', borderRadius: '8px', border: 'none',
+                                                                                                background: '#E6FBF5', color: '#05CD99', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer'
+                                                                                            }}
+                                                                                        >Log</button>
+                                                                                    )}
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    {activeTab === 'interview' ? (
+                                                                                        <button 
+                                                                                            onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
+                                                                                            style={{ 
+                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                            }}
+                                                                                        >Review</button>
+                                                                                    ) : activeTab === 'assessment' ? (
+                                                                                        <button 
+                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                                            style={{ 
+                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                            }}
+                                                                                        >View</button>
+                                                                                    ) : null}
+                                                                                </>
+                                                                            )}
                                                                             {canDelete && (
                                                                                 <button
-                                                                                    onClick={(e) => { e.stopPropagation(); requestDelete([r]); }}
+                                                                                    onClick={(e) => { e.stopPropagation(); requestDelete(activeTab === 'fully_automatic' ? [r.resume, r.assessment, r.interview].filter(Boolean) : [r]); }}
                                                                                     title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete' : 'Request deletion'}
                                                                                     style={{
-                                                                                        padding: '0.4rem 0.6rem', borderRadius: '8px',
+                                                                                        padding: '0.4rem 0.5rem', borderRadius: '8px',
                                                                                         border: '1px solid #ef4444', background: '#FFF5F5',
-                                                                                        color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem'
+                                                                                        color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem'
                                                                                     }}
                                                                                 >
                                                                                     <i className="fa-solid fa-trash" />
