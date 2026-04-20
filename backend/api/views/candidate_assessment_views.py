@@ -55,7 +55,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -835,20 +835,13 @@ def submit_invitation_answers_view(request, token):
         # If cod-only: w_obj=0, w_cod=100.
         # So the formula (obj% * w_obj + cod% * w_cod) / 100 works for all if weights are set correctly.
         
-        final_percent = (obj_term + cod_term) / 100.0
-            
-        submission.score = submission.objective_score + submission.coding_score
-        submission.total = submission.objective_total + submission.coding_total
-        submission.percentage = round(final_percent)
-        submission.final_percentage = final_percent
-        
-        min_pass = (inv.assessment.min_pass_percentage or 60.0)
-        submission.is_qualified = submission.percentage >= min_pass
-        submission.result = 'selected' if submission.is_qualified else 'rejected'
+        # Use helper for centralized scoring logic
+        _update_submission_scoring_logic(submission)
         
         submission.save(update_fields=[
             'answers', 
             'objective_score', 'objective_total', 'objective_percentage',
+            'coding_score', 'coding_total', 'coding_percentage',
             'score', 'total', 'percentage', 'final_percentage', 
             'is_qualified', 'result'
         ])
@@ -920,20 +913,26 @@ def update_standard_integrity_view(request, token):
         penalty = 0
         if event_type == 'tab_switch':
             integrity.tab_switches += 1
-            penalty = 10
+            # 1st switch = 5% penalty, 2nd switch = +20% penalty (75% total)
+            if integrity.tab_switches == 1:
+                penalty = 5
+            elif integrity.tab_switches == 2:
+                penalty = 20 
+            else:
+                penalty = 10 
         elif event_type == 'phone_detection':
             integrity.phone_detections += 1
-            penalty = 30
+            penalty = 10 # 10% penalty as per new guidance
         elif event_type == 'multiface_detection':
             integrity.multiface_detections += 1
-            penalty = 15
+            penalty = 10 # 10% penalty for multiple faces
         elif event_type in ['no_face_detection', 'face_detection_lost']:
             integrity.no_face_detections += 1
-            penalty = 5
+            penalty = 5 # 5% penalty for missing face (after 5s delay)
         else:
             return Response({'error': 'Unknown event type'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Grace system: first 3 warnings are logged but forgiven
+        # Revised: Removed grace system for first 3 logs to ensure score matches warnings
         logs = integrity.warning_logs if isinstance(integrity.warning_logs, list) else []
         logs.append({
             'event_type': event_type,
@@ -941,10 +940,6 @@ def update_standard_integrity_view(request, token):
             'penalty_applied': penalty
         })
         integrity.warning_logs = logs
-
-        if len(logs) <= 3:
-            # Forgive penalty for first three violations
-            penalty = 0
 
         if penalty > 0:
             integrity.integrity_score = max(0.0, integrity.integrity_score - penalty)
@@ -1085,9 +1080,51 @@ def _update_submission_scoring_logic(submission):
     submission.percentage = final_percentage_rounded
     submission.final_percentage = final_percentage
     
+    # --- RIGOROUS HIRING STANDARDS ---
+    # Enforce minimum thresholds for individual sections
+    MIN_MCQ_THRESHOLD = 60.0
+    MIN_CODING_THRESHOLD = 50.0
+    MIN_INTEGRITY_THRESHOLD = 70.0
+
     min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
-    submission.is_qualified = final_percentage_rounded >= min_pass
-    submission.result = 'selected' if submission.is_qualified else 'rejected'
+    
+    # 7. Get Integrity Score
+    integrity_score = 100.0
+    try:
+        if hasattr(inv, 'integrity') and inv.integrity:
+             integrity_score = float(inv.integrity.integrity_score)
+    except Exception:
+        pass
+
+    # 8. Check Section Pass/Fail
+    # Candidate must pass BOTH the overall threshold AND section-specific minimums
+    passed_overall = final_percentage_rounded >= min_pass
+    passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
+    passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
+    passed_integrity = integrity_score >= MIN_INTEGRITY_THRESHOLD
+
+    has_mcq = (submission.objective_total > 0)
+    has_coding = (submission.coding_total > 0)
+    
+    # Qualification is only true if ALL section thresholds are met AND overall percentage passes.
+    # If Integrity is low, status is ALWAYS 'hold'
+    # If Integrity is high but performance is low, status is 'rejected' (or 'hold' if requested)
+    
+    if not passed_integrity:
+        submission.is_qualified = False
+        submission.result = 'hold'
+    elif has_mcq and not passed_mcq:
+        submission.is_qualified = False
+        submission.result = 'hold'
+    elif has_coding and not passed_coding:
+        submission.is_qualified = False
+        submission.result = 'hold'
+    elif not passed_overall:
+        submission.is_qualified = False
+        submission.result = 'hold'
+    else:
+        submission.is_qualified = True
+        submission.result = 'selected'
 
 
 def _acq_allowed_languages(acq):
@@ -2191,72 +2228,59 @@ def submit_objective_section(request, token):
         from api.models import AssessmentCodingQuestion
         has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
 
-        # Check Cutoff
-        passed = True
-        next_stage = 'coding' if has_coding else 'finish'
-        message = "Objective section completed."
+        # --- NEW GATING LOGIC ---
+        # Fixed thresholds as per user requirement: MCQ 60%, Integrity 70%
+        MIN_MCQ_GATE = 60.0
+        MIN_INTEGRITY_GATE = 70.0
         should_schedule_result_email = False
         
-        if assessment.has_objective_cutoff:
-            cutoff = assessment.min_objective_pass_percentage
-            if percentage < cutoff:
-                passed = False
-                message = "You did not meet the minimum requirement for the objective section."
-                next_stage = 'finish'
-                # Mark as submitted/failed immediately
-                inv.status = 'submitted'
-                inv.save()
-                should_schedule_result_email = not has_coding
-                
-                # Update final result
-                submission.result = 'rejected'
-                submission.is_qualified = False
-                
-                # Recalculate final percentage using existing logic
-                _update_submission_scoring_logic(submission)
-                submission.save()
-                # Trigger slot booking mail task (objective-only, cutoff failed)
-                from api.tasks import send_custom_assessment_result_task
-                send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+        # Fetch Integrity Score for gating
+        integrity_score = 100.0
+        try:
+            if hasattr(inv, 'integrity') and inv.integrity:
+                 integrity_score = float(inv.integrity.integrity_score)
+        except Exception:
+            pass
+        
+        passed_mcq = percentage >= MIN_MCQ_GATE
+        passed_integrity = integrity_score >= MIN_INTEGRITY_GATE
+        
+        # If they fail either MCQ or Integrity, they are STOPPED and put on HOLD
+        if not passed_mcq or not passed_integrity:
+            passed = False 
+            next_stage = 'finish'
+            if not passed_mcq:
+                message = "You did not meet the minimum requirement for the objective section. Your assessment is now complete."
             else:
-                passed = True
-                if has_coding:
-                    message = "Objective cutoff passed. Proceeding to coding section."
-                    next_stage = 'coding'
-                else:
-                    message = "Objective section completed."
-                    next_stage = 'finish'
-                    # Mark as submitted immediately
-                    inv.status = 'submitted'
-                    inv.save()
-                    should_schedule_result_email = True
-
-                # Even if passed, update scoring so partial results are correct
-                _update_submission_scoring_logic(submission)
-                submission.save()
-                if not has_coding:
-                    # Trigger slot booking mail task (objective-only, cutoff passed)
-                    from api.tasks import send_custom_assessment_result_task
-                    send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+                message = "Your assessment is complete. High violation count detected; your application is under review."
+            
+            # Finalize immediately
+            inv.status = 'submitted'
+            inv.save()
+            
+            # Recalculate and set to HOLD
+            _update_submission_scoring_logic(submission)
+            submission.result = 'hold' 
+            submission.is_qualified = False
+            submission.save()
+            
+            # Schedule result email/report
+            should_schedule_result_email = True
         else:
-            # If no cutoff, still update scoring for partial results
-            if not has_coding:
+            # They passed both
+            passed = True
+            if has_coding:
+                message = "Objective section passed. Proceeding to coding section."
+                next_stage = 'coding'
+            else:
+                message = "Objective section completed successfully."
                 next_stage = 'finish'
-                message = "Objective section completed."
-                # Mark as submitted immediately
                 inv.status = 'submitted'
                 inv.save()
                 should_schedule_result_email = True
-            else:
-                next_stage = 'coding'
-                message = "Objective section completed. Proceeding to coding section."
-
+            
             _update_submission_scoring_logic(submission)
             submission.save()
-            if not has_coding:
-                # Trigger slot booking mail task (objective-only, no cutoff configured)
-                from api.tasks import send_custom_assessment_result_task
-                send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
         
         # Reload to get updated fields from _update_submission_scoring_logic
         submission.refresh_from_db()

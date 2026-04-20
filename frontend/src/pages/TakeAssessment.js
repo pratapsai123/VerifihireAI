@@ -264,7 +264,7 @@ export default function TakeAssessment() {
       localSessionId = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now();
       localStorage.setItem(`assessment_session_id_${token}`, localSessionId);
     }
-    
+
     // Add request interceptor to attach session ID to all relevant requests
     const reqInterceptor = axios.interceptors.request.use((config) => {
       if (config.url && (config.url.includes('/invitations/public/') || config.url.includes('/candidate-details/'))) {
@@ -574,7 +574,7 @@ export default function TakeAssessment() {
 
   // Integrated Malpractice Detection Module
   const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
-    token, 
+    token,
     activeCoding ? codingState.codeById[String(activeCoding.id)] : ''
   );
 
@@ -903,9 +903,9 @@ export default function TakeAssessment() {
         if (status === 409) {
           const errMsg = err?.response?.data?.error;
           if (errMsg && errMsg.includes('already in use')) {
-             setWindowError(errMsg);
+            setWindowError(errMsg);
           } else {
-             setAlreadySubmitted(true);
+            setAlreadySubmitted(true);
           }
         }
         setPrecheckLoading(false);
@@ -1209,8 +1209,8 @@ export default function TakeAssessment() {
         const success = await startScreenShare();
         if (!success) {
           // Exit fullscreen if they don't agree to screen share
-          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => { });
           return;
         }
       }
@@ -1228,13 +1228,13 @@ export default function TakeAssessment() {
   useEffect(() => {
     const update = () => {
       const isFs = Boolean(
-        document.fullscreenElement || 
-        document.webkitFullscreenElement || 
-        document.mozFullScreenElement || 
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
         document.msFullscreenElement
       );
       setIsFullscreen(isFs);
-      
+
       // Log violation if they exit mid-exam
       if (!isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
         showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
@@ -1567,9 +1567,9 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? (resultHeightPct > 30 
-        ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' } 
-        : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
+    ? (resultHeightPct > 30
+      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
+      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
 
   // Show a loading state to prevent CandidateDetails flicker
@@ -1587,15 +1587,15 @@ export default function TakeAssessment() {
   if (alreadySubmitted) {
     return (
       <div className="take-page" style={{ position: 'relative' }}>
-         <div className="take-shell" style={{ opacity: 0.5, pointerEvents: 'none', background: '#f8fafc', height: '100vh', width: '100vw' }}></div>
-         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999 }}>
-            <div style={{ background: '#fff', padding: '40px', borderRadius: '12px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-                <h2 style={{ margin: '0 0 12px', color: '#1e293b' }}>Assessment Submitted</h2>
-                <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.5' }}>You have already submitted this assessment. You can safely close this window.</p>
-                <button onClick={() => window.close()} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer', fontWeight: '500' }}>Close</button>
-            </div>
-         </div>
+        <div className="take-shell" style={{ opacity: 0.5, pointerEvents: 'none', background: '#f8fafc', height: '100vh', width: '100vw' }}></div>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999 }}>
+          <div style={{ background: '#fff', padding: '40px', borderRadius: '12px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+            <h2 style={{ margin: '0 0 12px', color: '#1e293b' }}>Assessment Submitted</h2>
+            <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.5' }}>You have already submitted this assessment. You can safely close this window.</p>
+            <button onClick={() => window.close()} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer', fontWeight: '500' }}>Close</button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -1853,9 +1853,9 @@ export default function TakeAssessment() {
             {/* Coding Section */}
             {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 ? (
               <div className="take-card coding-overview-card">
-                  <div className="coding-header-actions" style={{ alignItems: 'center', marginBottom: 6 }}>
-                    <span className="pill gray" style={{ fontSize: '10px' }}>{codingQuestionsOrdered.length} coding tasks</span>
-                  </div>
+                <div className="coding-header-actions" style={{ alignItems: 'center', marginBottom: 6 }}>
+                  <span className="pill gray" style={{ fontSize: '10px' }}>{codingQuestionsOrdered.length} coding tasks</span>
+                </div>
                 <div className="coding-tablist">
                   {codingQuestionsOrdered.map((cq, idx) => {
                     const isActive = String(cq.id) === String(activeCoding?.id);

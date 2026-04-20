@@ -880,13 +880,21 @@ def generate_candidate_report(submission_id):
 
     pct = submission.final_percentage if submission.final_percentage is not None else submission.percentage
     
-    # Custom score display: show split scores if both are available
-    if submission.objective_total > 0 and submission.coding_total > 0:
+    # Check if coding was actually attempted for score display purposes
+    actual_coding_attempts = [
+        k for k in coding_keys 
+        if isinstance(answers.get(k), dict) and answers[k].get('submitted_code')
+    ]
+
+    # Custom score display: show split scores if both are available and coding was reached
+    if submission.objective_total > 0 and submission.coding_total > 0 and actual_coding_attempts:
         score_display = f"Objective: {submission.objective_score}/{submission.objective_total}, Coding: {submission.coding_score}/{submission.coding_total}"
     elif submission.objective_total > 0:
-        score_display = f"{submission.objective_score} / {submission.objective_total}"
+        score_display = f"Objective: {submission.objective_score} / {submission.objective_total}"
+        if submission.coding_total > 0 and not actual_coding_attempts:
+            score_display += " (Coding Gated/Not Reached)"
     elif submission.coding_total > 0:
-        score_display = f"{submission.coding_score} / {submission.coding_total}"
+        score_display = f"Coding: {submission.coding_score} / {submission.coding_total}"
     else:
         score_display = f"{submission.score} / {submission.total}"
 
@@ -919,164 +927,410 @@ def generate_candidate_report(submission_id):
     story.append(Spacer(1, 12))
 
     # ════════════════════════════════════════════════════════════════════════
-    # 4.5. TYPING GAP ANALYSIS
+    # 4. TYPING GAP ANALYSIS
     # ════════════════════════════════════════════════════════════════════════
-    try:
-        # Get all keystroke logs for this invitation
-        keystroke_logs = KeystrokeLog.objects.filter(invitation=inv)
-        
-        story.append(Paragraph('Typing Gap Analysis', styles['SectionHeader']))
-        
-        if keystroke_logs.exists():
-            print(f"[report] Typing analysis logs found: {keystroke_logs.count()} for invitation {inv.id}")
-            total_keystrokes = 0
-            total_time_diffs = []
-            long_pauses = 0
-            burst_events = 0
-            backspace_count = 0
-            first_timestamp = None
-            last_timestamp = None
-            rhythm_records = 0
-            rhythm_sample_count = 0
-            pause_details = []
-            
-            for log in keystroke_logs:
-                events = log.events or []
-                total_keystrokes += len(events)
+    # Check if the assessment includes coding questions
+    coding_questions = AssessmentCodingQuestion.objects.filter(assessment=assessment)
+    # Only show typing analysis if there were actual attempts at coding:
+    actual_attempts = False
+    if coding_questions.exists():
+        sub = getattr(inv, 'submission', None)
+        if sub and sub.answers:
+            actual_attempts = any(k.startswith('acq_') for k in sub.answers.keys())
+    
+    # Only show the in-depth forensic behavioral report if there were actual coding attempts.
+    # We ignore raw logs for purely objective (MCQ) exams to keep the report clean.
+    if actual_attempts:
+        try:
+            # Main Section Heading
+            story.append(Paragraph('AI Coding Behavior & Malpractice Analysis', styles['SectionHeader']))
+            story.append(Paragraph('Exhaustive behavioral audit using complexity-adjusted timing and fingerprint analysis to detect automation or AI-assisted drafting.', styles['Normal']))
+            story.append(Spacer(1, 15))
+
+            logs_qs = KeystrokeLog.objects.filter(invitation=inv).order_by('created_at')
+            keystroke_logs = list(logs_qs)
+            if keystroke_logs:
+                print(f"[report] Typing analysis logs found: {len(keystroke_logs)} for invitation {inv.id}")
+                total_keystrokes = 0
+                total_time_diffs = []
+                long_pauses = 0
+                burst_events = 0
+                backspace_count = 0
+                first_timestamp = None
+                last_timestamp = None
+                rhythm_records = 0
+                rhythm_sample_count = 0
+                pause_details = []
                 
-                for event in events:
-                    time_diff = event.get('time_diff', 0)
-                    ts = event.get('timestamp')
-                    if ts:
-                        if first_timestamp is None:
-                            first_timestamp = ts
-                        last_timestamp = ts
-                    if time_diff > 0:
-                        total_time_diffs.append(time_diff)
-                        if time_diff > 20000:  # 20 seconds
-                            long_pauses += 1
-                            if len(pause_details) < 3:
-                                pause_details.append((ts or '-', time_diff))
-                    if event.get('key') == 'Backspace':
-                        backspace_count += 1
+                for log in keystroke_logs:
+                    events = log.events or []
+                    total_keystrokes += len(events)
+                    
+                    for event in events:
+                        time_diff = event.get('time_diff', 0)
+                        ts = event.get('timestamp')
+                        if ts:
+                            if first_timestamp is None:
+                                first_timestamp = ts
+                            last_timestamp = ts
+                        if time_diff > 0:
+                            total_time_diffs.append(time_diff)
+                            if time_diff > 20000:  # 20 seconds
+                                long_pauses += 1
+                                if len(pause_details) < 3:
+                                    pause_details.append((ts or '-', time_diff))
+                        if event.get('key') == 'Backspace':
+                            backspace_count += 1
+                    
+                    if len(events) > 80:
+                        burst_events += 1
+                    if log.rhythm:
+                        rhythm_records += 1
+                        rhythm_sample_count += int(log.rhythm.get('sample_count', 0) or 0)
                 
-                if len(events) > 80:
-                    burst_events += 1
-                if log.rhythm:
-                    rhythm_records += 1
-                    rhythm_sample_count += int(log.rhythm.get('sample_count', 0) or 0)
-            
-            avg_typing_speed = 0
-            avg_time_diff = 0
-            if total_time_diffs:
-                avg_time_diff = sum(total_time_diffs) / len(total_time_diffs)
-                if avg_time_diff > 0:
-                    chars_per_ms = 1000 / avg_time_diff
-                    avg_typing_speed = chars_per_ms * 60
+                avg_typing_speed = 0
+                avg_time_diff = 0
+                if total_time_diffs:
+                    avg_time_diff = sum(total_time_diffs) / len(total_time_diffs)
+                    if avg_time_diff > 0:
+                        chars_per_ms = 1000 / avg_time_diff
+                        avg_typing_speed = chars_per_ms * 60
 
-            all_timestamps = []
-            typing_events = []
-            for log in keystroke_logs:
-                for event in log.events or []:
-                    ts = _parse_timestamp(event.get('timestamp'))
-                    if ts is not None:
-                        all_timestamps.append(ts)
-                        if _is_typing_key(event.get('key')):
-                            typing_events.append({'timestamp': ts, 'key': event.get('key')})
+                all_timestamps = []
+                typing_events = []
+                for log in keystroke_logs:
+                    for event in log.events or []:
+                        ts = _parse_timestamp(event.get('timestamp'))
+                        if ts is not None:
+                            all_timestamps.append(ts)
+                            if _is_typing_key(event.get('key')):
+                                typing_events.append({'timestamp': ts, 'key': event.get('key')})
 
-            first_ts = min(all_timestamps) if all_timestamps else None
-            last_ts = max(all_timestamps) if all_timestamps else None
-            total_duration_ms = int((last_ts - first_ts).total_seconds() * 1000) if first_ts and last_ts else 0
-            coding_minutes = total_duration_ms / 60000.0 if total_duration_ms > 0 else 0
-            coding_time_display = f"{coding_minutes:.1f} min" if coding_minutes > 0 else '-'
-            overall_average_speed = 0
-            if coding_minutes > 0 and typing_events:
-                overall_average_speed = len(typing_events) / coding_minutes
+                first_ts = min(all_timestamps) if all_timestamps else None
+                last_ts = max(all_timestamps) if all_timestamps else None
+                total_duration_ms = int((last_ts - first_ts).total_seconds() * 1000) if first_ts and last_ts else 0
+                coding_minutes = total_duration_ms / 60000.0 if total_duration_ms > 0 else 0
+                coding_time_display = f"{coding_minutes:.1f} min" if coding_minutes > 0 else '-'
+                overall_average_speed = 0
+                if coding_minutes > 0 and typing_events:
+                    overall_average_speed = len(typing_events) / coding_minutes
 
-            # Split duration into 2 or 3 sections for reporting
-            section_rows = []
-            if total_duration_ms > 0 and typing_events:
-                section_count = 3 if total_duration_ms >= 20 * 60 * 1000 else 2
-                section_boundaries = []
-                base_ms = total_duration_ms // section_count
-                extra = total_duration_ms % section_count
-                current_ms = 0
-                for i in range(section_count):
-                    current_ms += base_ms + (1 if i < extra else 0)
-                    section_boundaries.append(current_ms)
+                # Fingerprint match coverage
+                rhythm_coverage = (rhythm_sample_count / total_keystrokes * 100) if total_keystrokes > 0 else 0
 
-                section_counts = [0] * section_count
-                section_chars = [0] * section_count
-                for event in typing_events:
-                    elapsed = int((event['timestamp'] - first_ts).total_seconds() * 1000)
-                    section_index = next((idx for idx, boundary in enumerate(section_boundaries) if elapsed <= boundary), section_count - 1)
-                    section_chars[section_index] += 1
+                # Split duration into 2 or 3 sections for analysis
+                section_data = []
+                if total_duration_ms > 0 and typing_events:
+                    section_count = 3 if total_duration_ms >= 20 * 60 * 1000 else 2
+                    section_boundaries = []
+                    base_ms = total_duration_ms // section_count
+                    extra = total_duration_ms % section_count
+                    current_ms = 0
+                    for i in range(section_count):
+                        current_ms += base_ms + (1 if i < extra else 0)
+                        section_boundaries.append(current_ms)
 
-                section_start = 0
-                for idx, boundary in enumerate(section_boundaries):
-                    section_ms = boundary - section_start
-                    section_minutes = section_ms / 60000.0 if section_ms > 0 else 0
-                    chars = section_chars[idx]
-                    speed = chars / section_minutes if section_minutes > 0 else 0
-                    section_rows.append(
-                        f"Section {idx + 1}: {chars} chars in {section_minutes:.1f} min = {speed:.1f} chars/min"
-                    )
-                    section_start = boundary
+                    section_chars = [0] * section_count
+                    for event in typing_events:
+                        elapsed = int((event['timestamp'] - first_ts).total_seconds() * 1000)
+                        section_index = next((idx for idx, boundary in enumerate(section_boundaries) if elapsed <= boundary), section_count - 1)
+                        section_chars[section_index] += 1
 
-            typing_data = [
-                _info_row('Typing Log Batches', f"{keystroke_logs.count()}", styles),
-                _info_row('Total Keystrokes', f"{total_keystrokes}", styles),
-                _info_row('Rhythm Records', f"{rhythm_records}", styles),
-                _info_row('Rhythm Sample Count', f"{rhythm_sample_count}", styles),
-                _info_row('Average Time Diff', f"{avg_time_diff:.1f} ms", styles),
-                _info_row('Average Typing Speed', f"{avg_typing_speed:.1f} chars/min", styles),
-                _info_row('Coding Time', coding_time_display, styles),
-                _info_row('Overall Average Typing Speed', f"{overall_average_speed:.1f} chars/min" if overall_average_speed else '-', styles),
-                _info_row('Long Pauses (>20s)', f"{long_pauses}", styles),
-                _info_row('Burst Typing Batches', f"{burst_events}", styles),
-                _info_row('Backspace Count', f"{backspace_count}", styles),
-                _info_row('First Keystroke Timestamp', first_ts.isoformat().replace('+00:00', 'Z') if first_ts else '-', styles),
-                _info_row('Last Keystroke Timestamp', last_ts.isoformat().replace('+00:00', 'Z') if last_ts else '-', styles),
-            ]
+                    section_start = 0
+                    for idx, boundary in enumerate(section_boundaries):
+                        section_ms = boundary - section_start
+                        section_minutes = section_ms / 60000.0 if section_ms > 0 else 0
+                        chars = section_chars[idx]
+                        speed = chars / section_minutes if section_minutes > 0 else 0
+                        section_data.append({
+                            'id': idx + 1,
+                            'chars': chars,
+                            'minutes': section_minutes,
+                            'speed': speed
+                        })
+                        section_start = boundary
 
-            story.append(_kv_table(typing_data, styles))
-            story.append(Spacer(1, 12))
+                # ───── Consolidated Unified Interpretation Table ─────
+                unified_rows = []
 
-            if section_rows:
-                story.append(Paragraph('Coding Time Section Breakdown', styles['InfoLabel']))
-                for row in section_rows:
-                    story.append(Paragraph(row, styles['Normal']))
-                story.append(Spacer(1, 6))
-                story.append(Paragraph('Calculation Notes:', styles['InfoLabel']))
-                story.append(Paragraph(
-                    f'Overall Average Typing Speed is calculated using total printable typed characters ' \
-                    f'({len(typing_events)}) divided by the total coding duration ({coding_minutes:.1f} min).',
-                    styles['Normal']
-                ))
-                story.append(Paragraph(
-                    f'Example: {len(typing_events)} chars ÷ {coding_minutes:.1f} min = {overall_average_speed:.1f} chars/min.',
-                    styles['Normal']
-                ))
-                story.append(Paragraph(
-                    'Section speeds are calculated by splitting the total coding duration into equal time segments, ' \
-                    'counting chars typed in each segment, and then computing chars per minute for each section.',
-                    styles['Normal']
-                ))
+                # A. Difficulty Adjustment Logic
+                difficulty_factor = 1.0 
+                try:
+                    coding_ids = [int(k.replace('acq_', '')) for k in coding_keys if k.replace('acq_', '').isdigit()]
+                    difficulties = list(AssessmentCodingQuestion.objects.filter(id__in=coding_ids).values_list('difficulty', flat=True))
+                    if 'hard' in difficulties: difficulty_factor = 0.8 
+                    elif 'easy' in difficulties and 'medium' not in difficulties and 'hard' not in difficulties: 
+                        difficulty_factor = 1.2 
+                except: pass
+                
+                # 1. Basic Metadata
+                unified_rows.append(["Total Coding Time", coding_time_display, "Session duration", "Low", f"The candidate spent a total of {coding_time_display} strictly focused on the coding challenge."])
+                unified_rows.append(["Typing Log Batches", f"{len(keystroke_logs)}", "Save frequency", "Low", f"Behavioral patterns were captured across {len(keystroke_logs)} distinct data batches for analysis."])
+                unified_rows.append(["First Keystroke", first_ts.strftime('%H:%M:%S  %d-%m-%Y') if first_ts else "-", "Start timestamp", "Low", "The exact chronological start of the candidate's implementation phase."])
+                unified_rows.append(["Last Keystroke", last_ts.strftime('%H:%M:%S  %d-%m-%Y') if last_ts else "-", "End timestamp", "Low", "The exact chronological completion and submission of the code logic."])
+
+                # Phase Performance Audit
+                base_threshold = 300 * difficulty_factor
+                for s in section_data:
+                    s_lvl = "Low"
+                    observation = f"{s['chars']} chars in {s['minutes']:.1f} min"
+                    s_desc = f"Phase {s['id']} show steady, believable progress with a pace of {s['speed']:.1f} CPM."
+                    if s['speed'] > base_threshold * 2.2:
+                        s_lvl = "High"
+                        s_desc = f"Velocity surge ({s['speed']:.1f} CPM) in Phase {s['id']} is anomalous; could indicate a code dump in this window."
+                    elif s['speed'] < 10 and s['minutes'] > 4:
+                        s_lvl = "Medium"
+                        s_desc = f"Phase {s['id']} was nearly stagnant for {s['minutes']:.1f} minutes; suggests a significant distraction or halt."
+                    unified_rows.append([f"Phase {s['id']} Auditor", observation, f"Phase {s['id']} activity", s_lvl, s_desc])
+
+                # 1. Identity Fingerprint
+                finger_risk = "Low"
+                finger_msg = "Single User: Consistent typing pattern confirms same person throughout."
+                
+                if rhythm_coverage >= 90:
+                    finger_risk = "Low"
+                    finger_msg = "Single User: Consistent typing pattern; strongly indicates same person throughout."
+                elif rhythm_coverage >= 60:
+                    finger_risk = "Medium"
+                    finger_msg = "Minor Variation: Slight rhythm inconsistencies; possible distractions or context switching."
+                else:
+                    finger_risk = "High"
+                    finger_msg = "Multiple Patterns: Inconsistent typing rhythm; indicates potential multiple users or automation."
+                
+                # Handle special case of no fingerprint data with high volume
+                if rhythm_records == 0 and total_keystrokes > 300:
+                    finger_risk = "High"
+                    finger_msg = "Identity Anomaly: Signature not found; consistent with automated drafting tools."
+
+                unified_rows.append(["Identity Fingerprint", f"{rhythm_coverage:.0f}% coverage", "Identity audit", finger_risk, finger_msg])
+
+                # 2. Typing Rhythm (Avg Time Gap)
+                rhythm_lvl = "Low"
+                rhythm_desc = f"With a {avg_time_diff:.1f}ms gap, the typing rhythm is fluid and consistent with human logic formulation."
+                if avg_time_diff > 1200:
+                    rhythm_lvl = "Medium"
+                    rhythm_desc = "Higher time gaps suggest significant deliberation or potential search for external syntax help."
+                unified_rows.append(["Typing Rhythm (Avg Time Gap)", f"{avg_time_diff:.1f} ms", "Raw key delay", rhythm_lvl, rhythm_desc])
+
+                # 3. Active Typing Speed
+                active_lvl = "Low"
+                active_desc = f"An active speed of {avg_typing_speed:.1f} CPM shows a steady and believable pace during coding bursts."
+                if avg_typing_speed > 450:
+                    active_lvl = "High"
+                    active_desc = "Extreme activity peaks detected; suggests high-speed typing or batch pasting of pre-written logic."
+                unified_rows.append(["Active Typing Speed", f"{avg_typing_speed:.1f} chars/min", "Burst velocity", active_lvl, active_desc])
+
+                # 4. Overall Drafting Speed
+                overall_lvl = "Low"
+                overall_desc = "Normal Speed: Standard human typing speed; ideal coding behavior."
+                if overall_average_speed < 20:
+                    overall_lvl = "Low"
+                    overall_desc = "Slow Typing: Beginner pace or deep logical formulation."
+                elif overall_average_speed <= 60:
+                    overall_lvl = "Low"
+                    overall_desc = "Normal Speed: Standard human typing speed; ideal coding behavior."
+                elif overall_average_speed <= 120:
+                    overall_lvl = "Medium"
+                    overall_desc = "Fast Typing: Above average speed; suggests an experienced or confident coder."
+                else:
+                    overall_lvl = "High"
+                    overall_desc = "Very Fast: Unusually high speed; possible automation or external reference usage."
+                unified_rows.append(["Overall Drafting Speed", f"{overall_average_speed:.1f} CPM", "Aggregate velocity", overall_lvl, overall_desc])
+
+                # 5. Total Keystrokes
+                unified_rows.append(["Total Keystrokes", f"{total_keystrokes}", "Total volume", "Low", f"A total of {total_keystrokes} keystrokes were recorded, verifying the amount of manual effort applied."])
+
+
+
+                precision_lvl = "Low"
+                error_rate = (backspace_count / total_keystrokes * 100) if total_keystrokes > 0 else 0
+                
+                precision_lvl = "Low"
+                precision_desc = "Natural Behavior: Balanced correction rate; strong indicator of genuine human coding."
+                
+                if error_rate < 2.0 and total_keystrokes > 100:
+                    precision_lvl = "High"
+                    precision_desc = "Too Perfect: Almost no corrections observed. Candidate may be copying or referencing external solution."
+                elif error_rate < 5.0:
+                    precision_lvl = "Low"
+                    precision_desc = "Efficient Typing: Minimal corrections, likely an experienced coder or typing carefully."
+                elif error_rate <= 15.0:
+                    precision_lvl = "Low"
+                    precision_desc = "Natural Behavior: Balanced correction rate matches human coding benchmarks."
+                elif error_rate <= 30.0:
+                    precision_lvl = "Medium"
+                    precision_desc = "High Corrections: Candidate is refining logic or struggling with syntax."
+                else:
+                    precision_lvl = "High"
+                    precision_desc = "Excessive Errors: Very high correction activity suggests unstable coding or lack of clarity."
+                
+                unified_rows.append(["Forensic Precision", f"{error_rate:.1f}% Error", "Correction ratio", precision_lvl, precision_desc])
+
+                # 8. Forensic Summary Logic (Aggregate Risk Scoring)
+                medium_count = sum(1 for r in unified_rows if r[3] == "Medium")
+                high_count = sum(1 for r in unified_rows if r[3] == "High")
+
+                risk_status = "Low"
+                verdict_title = "Organic Flow"
+                interpretation_text = "Candidate behavior matches benchmarks for authentic manual coding; no significant anomalies detected."
+
+                if high_count > 0:
+                    risk_status = "High"
+                    verdict_title = "High Risk Detected"
+                    interpretation_text = "Forensic patterns strongly suggest potential malpractice. While identity may be consistent, the drafting method (velocity/precision) flags high-risk anomalies."
+                elif medium_count >= 2:
+                    risk_status = "Medium"
+                    verdict_title = "Behavioral Caution"
+                    interpretation_text = "Multiple inconsistencies detected across rhythm and precision. (Note: 100% Authenticity confirms it's the same person, but their workflow is unusual for manual coding.)"
+                elif medium_count == 1:
+                    risk_status = "Medium"
+                    verdict_title = "Atypical Pattern"
+                    interpretation_text = "A single behavioral anomaly identified. Authenticity remains high (consistent user), but specific implementation metrics deviate from the norm."
+
+                # Override with specific high-priority alerts if triggered
+                if overall_average_speed > 120:
+                    risk_status = "High"
+                    verdict_title = "High Velocity Alert"
+                    interpretation_text = "Unusually high drafting speed (>120 CPM) detected. Pace exceeds natural human benchmarks; indicative of external automation."
+                elif error_rate < 2.0 and total_keystrokes > 200:
+                    risk_status = "High"
+                    verdict_title = "Precision Anomaly"
+                    interpretation_text = "Abnormally high precision detected. Near-perfect typing (<2% error) suggests code re-drafting from a secondary source."
+                elif long_pauses > 8:
+                    # Only upgrade to Context Switching if it's the primary risk
+                    if risk_status != "High":
+                        risk_status = "Medium"
+                        verdict_title = "Context Switching"
+                        interpretation_text = "Frequent long idle periods followed by rapid drafting suggest candidate researched or generated solutions externally."
+
+                # --- Recruiter-Friendly Summary Card ---
+                card_bg = "#f0fdf4" # Green bg
+                border_color = "#16a34a"
+                if risk_status == "Medium":
+                    card_bg = "#fefce8" ; border_color = "#eab308"
+                elif risk_status == "High":
+                    card_bg = "#fef2f2" ; border_color = "#dc2626"
+
+                summary_data = [
+                    [Paragraph(f'<b>Forensic Integrity Verdict: <font color="{border_color}">{verdict_title}</font></b>', styles['InfoLabel'])],
+                    [Paragraph(interpretation_text, styles['Normal'])],
+                    [_kv_table([
+                        [_info_row('Risk Status', f'<font color="{border_color}">{risk_status}</font>', styles), _info_row('Authenticity', f"{rhythm_coverage:.0f}% Coverage", styles)],
+                    ], styles)]
+                ]
+                
+                summary_tbl = Table(summary_data, colWidths=[7.2 * inch])
+                summary_tbl.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor(card_bg)),
+                    ('BOX', (0, 0), (-1, -1), 1, colors.HexColor(border_color)),
+                    ('TOPPADDING', (0, 0), (-1, -1), 12),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+                    ('LEFTPADDING', (0, 0), (-1, -1), 15),
+                    ('RIGHTPADDING', (0, 0), (-1, -1), 15),
+                ]))
+                story.append(summary_tbl)
+                story.append(Spacer(1, 25))
+
+                # Unified Data Table
+                story.append(Paragraph('<b>Detailed Behavioral Audit</b>', styles['InfoLabel']))
+                story.append(Spacer(1, 5))
+
+                # 6. Backspace Count
+                bs_lvl = "Low"
+                bs_desc = f"{backspace_count} backspaces were used, reflecting a healthy, natural cycle of error correction and logic refinement."
+                if total_keystrokes > 100:
+                    bs_ratio = (backspace_count / total_keystrokes) * 100
+                    if bs_ratio < 1.0:
+                        bs_lvl = "High"
+                        bs_desc = "Perfect typing with near-zero errors is highly suspicious; suggests code was dumped rather than drafted."
+                    elif bs_ratio < 2.5:
+                        bs_lvl = "Medium"
+                        bs_desc = "Lower than average error correction noticed, showing high confidence or meticulous pre-planning."
+                unified_rows.append(["Backspace Count", f"{backspace_count}", "Correction rate", bs_lvl, bs_desc])
+
+                # 7. Long Pauses (>20s)
+                if long_pauses >= 8:
+                    pause_lvl = "High"
+                    pause_desc = f"Candidate had {long_pauses} long idle gaps. This frequent disruption suggests possible context switching (AI/help)."
+                elif long_pauses >= 4:
+                    pause_lvl = "Medium"
+                    pause_desc = f"{long_pauses} significant pauses found; slightly unusual for a focused session, suggesting external consultation."
+                else:
+                    pause_lvl = "Low"
+                    pause_desc = f"Normal thinking rhythm ({long_pauses} gaps) with standard periods of logical deliberation."
+                unified_rows.append(["Long Pauses", f"{long_pauses} (>20s)", "Idle cycles", pause_lvl, pause_desc])
+
+                # 8. Burst Typing (Paste Events)
+                burst_lvl = "None Detected"
+                burst_desc = "No abnormal code injections detected; the solution was built incrementally line-by-line."
+                if burst_events > 0:
+                    burst_lvl = "Medium"
+                    burst_desc = f"{burst_events} sudden large injections found; suggests pasting of boilerplate code or small snippets."
+                if burst_events > 3:
+                    burst_lvl = "High"
+                    burst_desc = "Frequent large bursts detected; indicates that logic was likely copied and pasted in large chunks."
+                unified_rows.append(["Burst Typing", f"{burst_events}", "Bulk injections", burst_lvl, burst_desc])
+
+                # 9. Behavioral Pattern Analysis
+                pattern = "Steady"
+                pattern_guidance = "Candidate showed a consistent flow, maintaining a similar rhythm throughout the session."
+                if len(section_data) >= 2:
+                    s1_speed = section_data[0]['speed']
+                    s_last_speed = section_data[-1]['speed']
+                    if s1_speed < 30 and s_last_speed > 100:
+                        pattern = "Think -> Type"
+                        pattern_guidance = "Natural pattern: Intial planning phase followed by active coding implementation."
+                    elif s1_speed > 400 and s_last_speed < 100:
+                        pattern = "Dump -> Edit"
+                        pattern_guidance = "Potential Risk: High-volume initial injection followed only by minor refinements."
+                unified_rows.append(["Behavioral Pattern", pattern, "Workflow rhythm", "Low", pattern_guidance])
+
+
+                header_labels = ["Metric Analyzed", "Observed Value", "What It Means", "Risk Status", "Forensic Guidance"]
+                headers = [Paragraph(f'<b>{h}</b>', styles['InfoLabel']) for h in header_labels]
+                
+                tbl_data = [headers]
+                for row in unified_rows:
+                    risk = row[3]
+                    risk_color = "#16a34a" # Green (Low)
+                    if risk == "Medium": risk_color = "#eab308"
+                    if risk == "High": risk_color = "#dc2626"
+                    
+                    tbl_data.append([
+                        Paragraph(row[0], styles['Normal']),
+                        Paragraph(row[1], styles['Normal']),
+                        Paragraph(row[2], styles['Normal']),
+                        Paragraph(f'<b><font color="{risk_color}">{risk}</font></b>', styles['Normal']),
+                        Paragraph(row[4], styles['Normal'])
+                    ])
+                
+                # Optimized table design to fit A4 margins and wider status text
+                col_ws = [1.1*inch, 1.0*inch, 1.1*inch, 1.1*inch, 2.8*inch]
+                unified_tbl = Table(tbl_data, colWidths=col_ws)
+                unified_tbl.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f8fafc')),
+                    ('LINEBELOW', (0,0), (-1,0), 1, colors.HexColor('#cbd5e1')),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('TOPPADDING', (0,0), (-1,-1), 10),
+                    ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+                    ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#f1f5f9')),
+                ]))
+                story.append(unified_tbl)
+                story.append(Spacer(1, 20))
+
+                if pause_details:
+                    story.append(Paragraph('Long Pause Samples', styles['InfoLabel']))
+                    for pause_ts, pause_ms in pause_details:
+                        story.append(Paragraph(f'- {pause_ts} : {pause_ms} ms', styles['Normal']))
+                    story.append(Spacer(1, 12))
+            else:
+                print(f"[report] No keystroke logs found for invitation {inv.id}")
+                story.append(Paragraph('No typing logs were recorded for this candidate.', styles['Normal']))
                 story.append(Spacer(1, 12))
-
-            if pause_details:
-                story.append(Paragraph('Long Pause Samples', styles['InfoLabel']))
-                for pause_ts, pause_ms in pause_details:
-                    story.append(Paragraph(f'- {pause_ts} : {pause_ms} ms', styles['Normal']))
-                story.append(Spacer(1, 12))
-        else:
-            print(f"[report] No keystroke logs found for invitation {inv.id}")
-            story.append(Paragraph('No typing logs were recorded for this candidate.', styles['Normal']))
-            story.append(Spacer(1, 12))
-    except Exception as e:
-        print(f"Error generating typing analysis for report: {e}")
-        import traceback
-        traceback.print_exc()
+        except Exception as e:
+            print(f"Error generating typing analysis for report: {e}")
+            import traceback
+            traceback.print_exc()
 
     # ════════════════════════════════════════════════════════════════════════
     # 5. CANDIDATE FEEDBACK

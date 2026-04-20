@@ -238,8 +238,8 @@ def _create_question_from_payload(
         allowed = {'A', 'B', 'C', 'D'}
         correct_answers = [x for x in correct_answers if x in allowed]
         correct_answers = list(dict.fromkeys(correct_answers))  # unique preserve order
-        if len(correct_answers) == 0:
-            raise ValueError('correct_answers must be a non-empty array for MSQ.')
+        if len(correct_answers) < 2:
+            raise ValueError('correct_answers must contain at least two options for MSQ.')
         correct_answer = None
 
     # Link manual questions to CustomAssessment (separate from company_id)

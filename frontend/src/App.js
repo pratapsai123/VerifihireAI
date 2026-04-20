@@ -45,6 +45,7 @@ import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 import ThankYou from './pages/ThankYou';
 import MyAccount from './pages/MyAccount';
+import Contact from './pages/Contact';
 import './styles/App.css';
 
 import Header from './components/Header';
@@ -145,6 +146,7 @@ function AppContent() {
     '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
     '/accept-invite',
     '/feedback-page',
+    '/contact',
   ];
 
   const isFullScreenPage =
@@ -222,6 +224,7 @@ function AppContent() {
           <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
           <Route path="/book-interview/:token" element={<BookInterview />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
 
 

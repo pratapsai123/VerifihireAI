@@ -1612,3 +1612,23 @@ class BehaviorLog(models.Model):
         verbose_name = "Behavior Log"
         verbose_name_plural = "Behavior Logs"
 
+
+class ContactSubmission(models.Model):
+    """
+    Model to store "Book a Demo" / Contact Us form submissions.
+    """
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    company = models.CharField(max_length=255, blank=True, null=True)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Contact Submission"
+        verbose_name_plural = "Contact Submissions"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.full_name} - {self.subject} ({self.created_at.strftime('%Y-%m-%d %H:%M')})"
+
