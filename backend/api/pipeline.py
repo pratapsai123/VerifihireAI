@@ -81,10 +81,14 @@ def process_batch_assessment(batch_id):
             mcq_medium_per_candidate = (mcq_count * 3) // 10
             mcq_hard_per_candidate = max(0, mcq_count - mcq_easy_per_candidate - mcq_medium_per_candidate)
 
-            # Create Assessment Record
+            # Create Assessment Record with clearer naming/ownership for visibility
+            assessment_name = f"[Pipeline] {trigger_candidate.job_title or 'Technical Test'}"
+            if trigger_candidate.batch_name:
+                assessment_name = f"{assessment_name} - {trigger_candidate.batch_name}"
+
             assessment = Assessment.objects.create(
                 job_description=job_desc,
-                required_skills=trigger_candidate.job_title or "Technical Assessment",
+                required_skills=assessment_name, # Clearly identifiable title
                 mcq_count=mcq_count,
                 coding_count=coding_count,
                 duration_minutes=duration,
@@ -97,6 +101,7 @@ def process_batch_assessment(batch_id):
                 batch_name=trigger_candidate.batch_name,
                 same_questions_for_all=same_questions,
                 num_applicants=num_passed,
+                # Explicitly link to the recruiter who triggered this batch
                 user_profile=getattr(trigger_candidate, 'user_profile', None),
                 created_by=getattr(trigger_candidate, 'user_profile', None),
                 company=getattr(trigger_candidate, 'company', None),
@@ -847,7 +852,12 @@ def process_assessment_passed(submission_id):
         if candidates.exists():
             candidate = candidates.first()
             candidate.status = 'Interview'
-            candidate.save(update_fields=['status'])
+            # Synchronize batch info from submission to candidate if it doesn't exist
+            if not candidate.batch_id:
+                candidate.batch_id = submission.batch_id
+            if not candidate.batch_name:
+                candidate.batch_name = submission.batch_name
+            candidate.save(update_fields=['status', 'batch_id', 'batch_name'])
             logger.info(f"Pipeline: Updated existing candidate {candidate.id} status to 'Interview'.")
         else:
             candidate = Candidate.objects.create(
@@ -856,11 +866,13 @@ def process_assessment_passed(submission_id):
                 job_title=submission.assessment.required_skills or "Applicant",
                 job_description=submission.assessment.job_description,
                 status='Interview',
+                batch_id=submission.batch_id,
+                batch_name=submission.batch_name,
                 company=submission.assessment.company,
                 user_profile=getattr(submission.assessment, 'user_profile', None),
                 created_by=getattr(submission.assessment, 'user_profile', None),
             )
-            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage.")
+            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage and linked to batch {submission.batch_id}.")
 
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         link = f"{base_url}/interview-start/{candidate.id}"

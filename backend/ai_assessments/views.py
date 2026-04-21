@@ -250,7 +250,9 @@ class SubmitAssessmentView(APIView):
                 candidate = Candidate.objects.filter(email__iexact=email).first()
                 if candidate:
                     candidate.score = percentage
-                    candidate.status = 'Completed'
+                    # For Fully Automatic flows, move them to 'Assessment Passed' 
+                    # so they show up correctly before the interview is sent.
+                    candidate.status = 'Assessment Passed'
                     candidate.completed_at = timezone.now()
                     
                     if not isinstance(candidate.interview_summary, list):
@@ -267,6 +269,17 @@ class SubmitAssessmentView(APIView):
                         "timestamp": timezone.now().isoformat()
                     })
                     candidate.save()
+
+                    # ── TRIGGER NEXT STAGE ──
+                    # If they passed, automatically trigger the AI Interview invitation
+                    if pass_status == 'selected':
+                        try:
+                            from api.pipeline import process_assessment_passed
+                            # This handles generating the interview link and sending the email
+                            process_assessment_passed(submission.id)
+                        except Exception as pipe_err:
+                            logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
@@ -1585,7 +1598,7 @@ class InviteAssessmentCandidatesView(APIView):
         remaining_spots = max(0, assessment.max_candidates_allowed - assessment.invited_count)
 
         return Response({
-            "message": f"Successfully invited {len(invited_candidates)} candidates",
+            "message": f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}",
             "count": len(invited_candidates),
             "total_invited": assessment.invited_count,
             "max_allowed": assessment.max_candidates_allowed,

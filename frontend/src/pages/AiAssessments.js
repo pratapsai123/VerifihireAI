@@ -53,6 +53,11 @@ const AiAssessments = () => {
         const completed = assessment.completed_count || 0;
         const started = assessment.candidate_count || 0;
         const isBulk = invited > 1;
+
+        // 0. Explicit Generation State (from Pipeline)
+        if (assessment.status === 'GENERATING') {
+            return { type: 'SCHEDULED', label: 'AI Generating...', isGenerating: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin' };
+        }
         
         // 1. Time-based Expiry (Absolute deadline)
         if (until && now > until) {
@@ -318,8 +323,8 @@ const AiAssessments = () => {
                                                     >View</button>
                                                     {(() => {
                                                         const status = getStatusInfo(assessment);
-                                                        // If it's Expired or Ongoing, we hide the Share button and show the Badge
-                                                        if (status.isExpired || status.isOngoing) {
+                                                        // If it's Expired, Ongoing, or currently Generating, we hide the Share button and show the Badge
+                                                        if (status.isExpired || status.isOngoing || status.isGenerating) {
                                                             return (
                                                                 <div style={{
                                                                     background: status.bg,

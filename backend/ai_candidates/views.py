@@ -271,7 +271,7 @@ class BulkInviteView(APIView):
                         f.write(f"{timezone.now()} - {error_msg}\n")
                 
             return Response({
-                "message": f"Successfully invited {len(invited_candidates)} candidates.",
+                "message": f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}.",
                 "candidates": invited_candidates
             }, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -279,8 +279,8 @@ class BulkInviteView(APIView):
             return Response({"error": f"Error processing file: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ResumeMatchView(APIView):
-    permission_classes = [AllowAny]
-    authentication_classes = []
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')

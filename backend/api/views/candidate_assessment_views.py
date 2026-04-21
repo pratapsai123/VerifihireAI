@@ -1715,7 +1715,7 @@ def results_overview_view(request):
             else:
                 ai_cand_qs = Candidate.objects.filter(
                     is_deleted=False,
-                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed', 'Assessment Passed', 'Interview']
                 ).order_by('-submission_date')
         elif scoped_ids:
             # HR Manager sees candidates uploaded by themselves or their direct-report HRs
