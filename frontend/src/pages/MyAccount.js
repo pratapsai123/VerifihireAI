@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Camera, Check, AlertCircle, Loader2, X, Eye, EyeOff, Plus } from 'lucide-react';
-import OtpCountdown from '../components/OtpCountdown';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/MyAccount.css';
 
 const MyAccount = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -22,17 +23,16 @@ const MyAccount = () => {
 
     // Password Change Modal State
     const [showPwdModal, setShowPwdModal] = useState(false);
-    const [pwdStep, setPwdStep] = useState('otp'); // otp -> reset
+    const [pwdStep, setPwdStep] = useState('current'); // current -> new
     const [pwdLoading, setPwdLoading] = useState(false);
     const [pwdError, setPwdError] = useState('');
     const [pwdSuccess, setPwdSuccess] = useState('');
-    const [otp, setOtp] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
-    const [otpExpired, setOtpExpired] = useState(false);
 
     // Photo Edit State
     const [showPhotoOptions, setShowPhotoOptions] = useState(false);
@@ -137,68 +137,46 @@ const MyAccount = () => {
         setShowPwdModal(true);
         setPwdError('');
         setPwdSuccess('');
-        setOtp('');
+        setPwdStep('current');
+        setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
-        setPwdStep('email');
+        setShowCurrentPassword(false);
+        setShowNewPassword(false);
+        setShowConfirmPassword(false);
     };
 
-    const handleSendOtp = async (e) => {
-        if (e) e.preventDefault();
-        setPwdError('');
-        setPwdSuccess('');
-        setPwdLoading(true);
-
-        try {
-            const res = await axios.post(`${API_BASE_URL}/send-otp/`, {
-                email: user.email,
-                context: 'forgot_password'
-            });
-            setPwdSuccess(res.data.message || 'OTP sent to your email.');
-            const expiresIn = Number(res.data?.expires_in) || 120;
-            setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
-            setOtpExpired(false);
-            setPwdStep('otp');
-        } catch (err) {
-            setPwdError('Failed to send OTP. Please try again.');
-        } finally {
-            setPwdLoading(false);
-        }
-    };
-
-    const handleVerifyOtp = async (e) => {
+    const handleVerifyCurrentPassword = async (e) => {
         e.preventDefault();
-        if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
-            setPwdError('OTP has expired. Please request a new OTP.');
-            return;
-        }
-        if (!otp || otp.length !== 6) {
-            setPwdError('Enter a valid 6-digit OTP.');
-            return;
-        }
-        setPwdLoading(true);
         setPwdError('');
         setPwdSuccess('');
+
+        if (!currentPassword) {
+            setPwdError('Current password is required.');
+            return;
+        }
+
+        setPwdLoading(true);
         try {
-            const res = await axios.post(`${API_BASE_URL}/verify-otp/`, { email: user.email, otp });
-            setPwdSuccess(res.data.message || 'OTP verified. Set your new password.');
-            setOtpExpiresAtMs(null);
-            setOtpExpired(false);
-            setPwdStep('reset');
+            await axios.post(`${API_BASE_URL}/verify-current-password/`, {
+                email: user.email,
+                password: currentPassword,
+            });
+            setPwdStep('new');
         } catch (err) {
-            setPwdError(err.response?.data?.error || 'Invalid OTP. Please try again.');
+            setPwdError(err.response?.data?.error || 'Incorrect current password.');
         } finally {
             setPwdLoading(false);
         }
     };
 
-    const handleResetPassword = async (e) => {
+    const handleChangePassword = async (e) => {
         e.preventDefault();
         setPwdError('');
         setPwdSuccess('');
 
         if (!passwordRegex.test(newPassword)) {
-            setPwdError('Password must meet all requirements.');
+            setPwdError('New password must meet all requirements.');
             return;
         }
         if (newPassword !== confirmPassword) {
@@ -208,26 +186,23 @@ const MyAccount = () => {
 
         setPwdLoading(true);
         try {
-            const res = await axios.post(`${API_BASE_URL}/reset-password/`, {
+            const res = await axios.post(`${API_BASE_URL}/change-password/`, {
                 email: user.email,
-                otp,
+                current_password: currentPassword,
                 new_password: newPassword,
                 confirm_password: confirmPassword,
             });
             setPwdSuccess(res.data.message || 'Password updated successfully!');
+            
+            // Clear session and redirect to login
             setTimeout(() => {
-                setShowPwdModal(false);
-                window.location.reload();
-            }, 1500);
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                navigate('/login');
+            }, 2000);
         } catch (err) {
             const errorMsg = err.response?.data?.error || 'Failed to update password.';
             setPwdError(errorMsg);
-            
-            // If the OTP expired while they were typing their new password, send them back to the OTP step
-            if (errorMsg.toLowerCase().includes('expire') || errorMsg.toLowerCase().includes('invalid otp')) {
-                setPwdStep('otp');
-                setOtpExpired(true);
-            }
         } finally {
             setPwdLoading(false);
         }
@@ -457,74 +432,51 @@ const MyAccount = () => {
                         {pwdSuccess && <div className="inline-alert success"><Check size={16} /> {pwdSuccess}</div>}
                         {pwdError && <div className="inline-alert error"><AlertCircle size={16} /> {pwdError}</div>}
 
-                        {pwdStep === 'email' && (
-                            <form onSubmit={handleSendOtp} className="pwd-modal-form">
-                                <p className="pwd-modal-subtitle">Confirm your email address to receive an OTP.</p>
-                                <div className="form-group disabled">
-                                    <label>Email Address</label>
-                                    <input
-                                        type="email"
-                                        value={user?.email || ''}
-                                        disabled
-                                        className="readonly-input"
-                                    />
+                        {pwdStep === 'current' ? (
+                            <form onSubmit={handleVerifyCurrentPassword} className="pwd-modal-form">
+                                <p className="pwd-modal-subtitle">Verify your current password to proceed.</p>
+                                
+                                <div className="form-group">
+                                    <label>Current Password</label>
+                                    <div style={{ position: 'relative' }}>
+                                        <input
+                                            type={showCurrentPassword ? "text" : "password"}
+                                            placeholder="Enter current password"
+                                            value={currentPassword}
+                                            onChange={(e) => setCurrentPassword(e.target.value)}
+                                            disabled={pwdLoading}
+                                            style={{ paddingRight: '2.5rem', width: '100%' }}
+                                        />
+                                        <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="pwd-eye-btn">
+                                            {showCurrentPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
-                                <button type="submit" className="save-btn" style={{ width: '100%', justifyContent: 'center', marginTop: '1.5rem' }} disabled={pwdLoading}>
+
+                                <button type="submit" className="save-btn" style={{ width: '100%', justifyContent: 'center', marginTop: '1.5rem' }} disabled={pwdLoading || !currentPassword}>
                                     {pwdLoading ? <Loader2 className="spinner" size={18} /> : null}
-                                    {pwdLoading ? 'Sending...' : 'Proceed'}
+                                    {pwdLoading ? 'Verifying...' : 'Continue'}
                                 </button>
                             </form>
-                        )}
-
-                        {pwdStep === 'otp' && (
-                            <form onSubmit={handleVerifyOtp} className="pwd-modal-form">
-                                <p className="pwd-modal-subtitle">We sent a 6-digit OTP to your email.</p>
-                                <div className="form-group">
-                                    <label>Enter OTP</label>
-                                    <input
-                                        type="text"
-                                        placeholder="6-digit OTP"
-                                        value={otp}
-                                        onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                                        disabled={pwdLoading}
-                                        style={{ textAlign: 'center', letterSpacing: '4px', fontSize: '1.2rem' }}
-                                    />
-                                </div>
-                                <OtpCountdown expiresAtMs={otpExpiresAtMs} onExpire={() => setOtpExpired(true)} />
-                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-                                    <button type="submit" className="save-btn" style={{ flex: 2, justifyContent: 'center', padding: '0.8rem 1rem' }} disabled={pwdLoading || otp.length !== 6 || otpExpired}>
-                                        {pwdLoading ? <Loader2 className="spinner" size={18} /> : null}
-                                        {pwdLoading ? 'Verifying...' : 'Verify OTP'}
-                                    </button>
-                                    <button 
-                                        type="button" 
-                                        onClick={handleSendOtp} 
-                                        disabled={pwdLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} 
-                                        style={{ flex: 1, background: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0', borderRadius: '8px', fontWeight: '600', cursor: (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired) ? 'not-allowed' : 'pointer' }}
-                                    >
-                                        Resend
-                                    </button>
-                                </div>
-                            </form>
-                        )}
-
-                        {pwdStep === 'reset' && (
-                            <form onSubmit={handleResetPassword} className="pwd-modal-form">
+                        ) : (
+                            <form onSubmit={handleChangePassword} className="pwd-modal-form">
                                 <p className="pwd-modal-subtitle">Set your new strong password.</p>
                                 
-                                <div className="form-group" style={{ position: 'relative' }}>
+                                <div className="form-group">
                                     <label>New Password</label>
-                                    <input
-                                        type={showNewPassword ? "text" : "password"}
-                                        placeholder="New Password"
-                                        value={newPassword}
-                                        onChange={(e) => setNewPassword(e.target.value)}
-                                        disabled={pwdLoading}
-                                        style={{ paddingRight: '2.5rem' }}
-                                    />
-                                    <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="pwd-eye-btn">
-                                        {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                    </button>
+                                    <div style={{ position: 'relative' }}>
+                                        <input
+                                            type={showNewPassword ? "text" : "password"}
+                                            placeholder="Enter new password"
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            disabled={pwdLoading}
+                                            style={{ paddingRight: '2.5rem', width: '100%' }}
+                                        />
+                                        <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="pwd-eye-btn">
+                                            {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
 
                                 {newPassword.length > 0 && unmetPasswordRequirements.length > 0 && (
@@ -536,21 +488,23 @@ const MyAccount = () => {
                                     </div>
                                 )}
 
-                                <div className="form-group" style={{ position: 'relative', marginTop: '1rem' }}>
+                                <div className="form-group" style={{ marginTop: '1rem' }}>
                                     <label>Confirm Password</label>
-                                    <input
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        placeholder="Confirm Password"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        onPaste={(e) => e.preventDefault()}
-                                        onCopy={(e) => e.preventDefault()}
-                                        disabled={pwdLoading}
-                                        style={{ paddingRight: '2.5rem' }}
-                                    />
-                                    <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="pwd-eye-btn">
-                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                    </button>
+                                    <div style={{ position: 'relative' }}>
+                                        <input
+                                            type={showConfirmPassword ? "text" : "password"}
+                                            placeholder="Confirm new password"
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            onPaste={(e) => e.preventDefault()}
+                                            onCopy={(e) => e.preventDefault()}
+                                            disabled={pwdLoading}
+                                            style={{ paddingRight: '2.5rem', width: '100%' }}
+                                        />
+                                        <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="pwd-eye-btn">
+                                            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
                                 
                                 {confirmPassword.length > 0 && newPassword !== confirmPassword && (
@@ -559,10 +513,12 @@ const MyAccount = () => {
                                     </div>
                                 )}
 
-                                <button type="submit" className="save-btn" style={{ width: '100%', justifyContent: 'center', marginTop: '1.5rem' }} disabled={pwdLoading || !newPassword || newPassword !== confirmPassword || unmetPasswordRequirements.length > 0}>
-                                    {pwdLoading ? <Loader2 className="spinner" size={18} /> : null}
-                                    {pwdLoading ? 'Resetting...' : 'Reset Password'}
-                                </button>
+                                <div style={{ marginTop: '1.5rem' }}>
+                                    <button type="submit" className="save-btn" style={{ width: '100%', justifyContent: 'center' }} disabled={pwdLoading || !newPassword || newPassword !== confirmPassword || unmetPasswordRequirements.length > 0}>
+                                        {pwdLoading ? <Loader2 className="spinner" size={18} /> : null}
+                                        {pwdLoading ? 'Updating...' : 'Change Password'}
+                                    </button>
+                                </div>
                             </form>
                         )}
                     </div>

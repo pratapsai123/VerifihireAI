@@ -1407,7 +1407,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -1640,9 +1640,19 @@ class GetInvitedCandidatesView(APIView):
         candidate_mcq_count = mcq_pool_size // divisor
         candidate_coding_count = coding_pool_size // divisor
         
-        # Scoring: 20 pts per MCQ + weighted coding (fallback calculation for UI)
-        mcq_points = candidate_mcq_count * 20
-        coding_points = candidate_coding_count * 20
+        # Scoring: 1 pt per MCQ + weighted coding (matching actual scoring engine)
+        mcq_points = candidate_mcq_count * 1
+        
+        # Calculate coding points based on difficulty weights of challenges in the pool
+        coding_points = 0
+        generated_content = assessment.generated_content or {}
+        coding_pool = generated_content.get('coding_challenges', [])
+        weight_map = {'Easy': 100, 'Medium': 200, 'Hard': 300}
+        
+        for i in range(min(len(coding_pool), candidate_coding_count)):
+            difficulty = coding_pool[i].get('difficulty', 'Medium')
+            coding_points += weight_map.get(difficulty, 200)
+            
         total_candidate_points = mcq_points + coding_points
         
         remaining_spots = max(0, assessment.max_candidates_allowed - invited_qs.count())

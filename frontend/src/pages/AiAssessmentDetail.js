@@ -346,7 +346,7 @@ const AiAssessmentDetail = () => {
                                                     const perCandidateCodingPts = coding
                                                         .slice(0, cCoding)
                                                         .reduce((s, c) => s + (codingWeights[c.difficulty] || 200), 0);
-                                                    return candidatePointsInfo?.total_points || (cMcqs * 1 + perCandidateCodingPts);
+                                                    return (cMcqs * 1 + perCandidateCodingPts);
                                                 })()}
                                             </div>
                                             <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>

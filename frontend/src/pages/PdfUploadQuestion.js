@@ -23,7 +23,7 @@ function PdfUploadQuestion() {
   const assessmentOptions = SHARED_ROLES;
 
   const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
-  const [experienceLevel, setExperienceLevel] = useState(assessmentContext?.experienceLevel || '');
+  const [experienceLevel, setExperienceLevel] = useState('');
   const [topicSkill, setTopicSkill] = useState(''); // optional default topic if missing in PDF
   const [file, setFile] = useState(null);
   const [parsedQuestions, setParsedQuestions] = useState([]);
@@ -206,7 +206,7 @@ function PdfUploadQuestion() {
           ? `Saved ${created} questions. Some failed to save:\n\n${errors.slice(0, 20).join('\n')}${errors.length > 20 ? '\n...more' : ''}`
           : `Saved ${created} questions successfully.`
       );
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: false } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Save error:', error);
@@ -286,7 +286,7 @@ function PdfUploadQuestion() {
                   value={experienceLevel}
                   onChange={(e) => setExperienceLevel(e.target.value)}
                 >
-                  <option value="">Select experience level</option>
+                  <option value="" disabled hidden>Select experience level</option>
                   <option value="entry">Entry Level (0-2 years)</option>
                   <option value="mid">Mid Level (2-5 years)</option>
                   <option value="senior">Senior Level (5-10 years)</option>

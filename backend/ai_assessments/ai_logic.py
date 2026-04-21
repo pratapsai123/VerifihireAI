@@ -261,10 +261,10 @@ Your task is to CLEAN, FIX, and STANDARDIZE the content so it is production-read
 🔧 TASK REQUIREMENTS:
 1. MCQ VALIDATION: 
    - One correct answer, no duplicates, clear language.
-   - CRITICAL: Each option MUST be actual descriptive answer text (NOT just "A", "B", "C", "D" or placeholder letters).
+   - CRITICAL: Each option MUST be actual descriptive answer text (NOT just "A", "B", "C", "D", "Option A", "Choice 1", or placeholder letters).
    - The `answer` field MUST contain the complete text of one of the options, NOT just a letter.
    - Example GOOD: {"question": "What is Django?", "options": ["A web framework", "A database", "A testing tool", "A package manager"], "answer": "A web framework"}
-   - Example BAD: {"question": "What is Django?", "options": ["A", "B", "C", "D"], "answer": "A"}
+   - Example BAD: {"question": "What is Django?", "options": ["Option A", "Option B", "Option C", "Option D"], "answer": "Option A"}
 2. CODING CHALLENGE FIXES:
     - Convert vague inputs into pure competitive-programming RAW TEXT formats (numbers and strings separated by spaces).
     - PURGE ALL JSON: If the problem input contains dictionaries `{}`, lists `[]`, or quotes, you MUST completely rewrite the problem to use simple space/newline separated text instead.
@@ -729,15 +729,20 @@ def _validate_mcq_structure(mcq):
         
         # CRITICAL: Reject placeholder letters like "A", "B", "C", "D" or "A)", "B)", etc.
         # Options must be actual answer text (>3 chars, meaningful content)
-        cleaned_opt = opt_str.rstrip(')').rstrip(':').strip()
+        import re
+        cleaned_opt = opt_str.rstrip(')').rstrip(':').rstrip('.').strip()
+        
         if len(cleaned_opt) <= 1:
             return False, f"Option {idx+1} is placeholder letter '{opt_str}' (not actual answer text)"
         
-        # Reject if option is ONLY a single letter choice (unless it's meaningful like "SQL" or "API")
-        # But "A" or "B" followed by punctuation should be rejected
-        if opt_str in ('A', 'B', 'C', 'D') or opt_str in ('A)', 'B)', 'C)', 'D)') or opt_str in ('A.', 'B.', 'C.', 'D.'):
-            return False, f"Option {idx+1} '{opt_str}' is a placeholder (missing actual answer text)"
-        
+        # Reject if option is ONLY a single letter choice
+        if cleaned_opt.upper() in ('A', 'B', 'C', 'D'):
+            return False, f"Option {idx+1} '{opt_str}' is a single letter placeholder"
+            
+        # Reject "Option A", "Choice B", "Answer 1", etc.
+        if re.match(r'^(Option|Choice|Answer|Selection)\s*[A-D0-9]?$', cleaned_opt, re.IGNORECASE):
+            return False, f"Option {idx+1} '{opt_str}' is a generic placeholder (e.g. 'Option A')"
+
         # Check option is not too long (should be under 15 words for readability)
         word_count = len(opt_str.split())
         if word_count > 15:
@@ -1167,10 +1172,12 @@ def _generate_mcq_pool_ai_only(
             RULES:
             - Generate valid JSON only (do NOT use escape sequences)
             - UNIQUE: Questions must be specific to JD facets. {avoid_txt}
-            - OPTIONS MUST BE ACTUAL ANSWERS: Each option MUST be SHORT (under 15 words) and meaningful, NOT just letters like "A", "B", "C", "D"
-            - ANSWER FIELD: The answer MUST be the exact text from one of the options, NOT just a letter
-            - NO PLACEHOLDERS: Do NOT generate options like ["A", "B", "C", "D"]
-            - Each question gets exactly 4 options and 1 correct answer
+            - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be a short (under 15 words) sentence or phrase that actually describes a possible answer.
+            - NO PLACEHOLDERS: NEVER use options like "Option A", "Option B", "Choice 1", or simply "A", "B", "C", "D".
+            - NEGATIVE EXAMPLE (DO NOT DO THIS): {{ "options": ["Option A", "Option B", "Option C", "Option D"] }}
+            - POSITIVE EXAMPLE: {{ "options": ["A high-level programming language", "A low-level assembly language", "A database system", "A web browser"] }}
+            - ANSWER FIELD: The answer MUST be the exact text from one of the options.
+            - Each question gets exactly 4 options and 1 correct answer.
             """
 
             batch_mcqs = None
@@ -1256,9 +1263,10 @@ def _generate_mcq_pool_ai_only(
             TASK: Generate EXACTLY 1 UNIQUE technical MCQ ({difficulty}).
             JSON: {{ "mcqs": [ {{ "question": "What is REST?", "options": ["Representational State Transfer architecture", "A testing framework", "A database query language", "A version control system"], "answer": "Representational State Transfer architecture", "difficulty": "{difficulty}" }} ] }}
             RULES:
-            - Generate valid JSON only (no escape sequences needed)
-            - OPTIONS MUST be SHORT (under 15 words), actual answer text (NOT placeholder letters)
-            - The answer field MUST be the exact text from one of the options
+            - Return JSON only.
+            - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be actual answer text (NOT placeholder letters like "A", "B" or "Option A").
+            - NO PLACEHOLDERS: NEVER use "Option A", "Choice 1", etc.
+            - The answer field MUST be the exact text from one of the options.
             - Exclude topics: {[q.get('question', '')[:30] for q in generated][-10:]}
             """
             try:

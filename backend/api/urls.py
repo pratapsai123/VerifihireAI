@@ -8,10 +8,14 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
 
     path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
+    path('heartbeat/', views.heartbeat_view, name='heartbeat'),
+
     path('register/', views.register_view, name='register'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     path('reset-password/', views.reset_password_view, name='reset_password'),
+    path('change-password/', views.change_password_view, name='change_password'),
+    path('verify-current-password/', views.verify_current_password_view, name='verify_current_password'),
     path('extract-skills/', views.extract_skills_from_resume_view, name='extract_skills'),
     path('questions/', views.get_questions_view, name='get_questions'),
     path('questions/create/', views.create_question_view, name='create_question'),

@@ -138,7 +138,7 @@ const Dashboard = () => {
       }
     };
     fetchPendingCount();
-    
+
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API_BASE_URL}/dashboard/summary/`);
@@ -210,12 +210,12 @@ const Dashboard = () => {
       ]
     },
     { icon: BarChart3, label: 'Results', path: '/results', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
-    { 
-      icon: SettingsIcon, 
-      label: 'Settings', 
-      path: '/setting', 
+    {
+      icon: SettingsIcon,
+      label: 'Settings',
+      path: '/setting',
       role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
-      badge: pendingCount > 0 ? pendingCount : null 
+      badge: pendingCount > 0 ? pendingCount : null
     },
     { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 }, role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
   ];
@@ -428,8 +428,8 @@ const Dashboard = () => {
                 <p style={{ color: '#64748b', marginBottom: '2rem', maxWidth: '400px' }}>
                   Set your preferred working hours and 50-minute slots. Candidates will be able to book sessions during these times.
                 </p>
-                <button 
-                  className="btn-premium btn-fill" 
+                <button
+                  className="btn-premium btn-fill"
                   style={{ padding: '1rem 2rem', fontSize: '1rem' }}
                   onClick={() => navigate('/manage-availability')}
                 >
@@ -447,8 +447,8 @@ const Dashboard = () => {
                   View your upcoming scheduled sessions and join live technical interviews with candidates.
                 </p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                  <button 
-                    className="btn-premium btn-fill" 
+                  <button
+                    className="btn-premium btn-fill"
                     style={{ padding: '1rem 2rem', fontSize: '1rem' }}
                     onClick={() => navigate('/live-interview-list')}
                   >
@@ -483,6 +483,7 @@ const Dashboard = () => {
                   <div className="card-actions">
                     <button className="btn-premium btn-fill" onClick={() => navigate('/resume-matcher')}>Analyze Resumes</button>
                     <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=resume')}>Results</button>
+                    <button className="btn-premium btn-outline" style={{ borderColor: '#6366f1', color: '#6366f1' }} onClick={() => navigate('/results-ai?tab=fully_automatic')}>Fully Automatic Results</button>
                   </div>
                 </div>
 
@@ -598,109 +599,109 @@ const Dashboard = () => {
               </div>
 
               {/* Bottom Row: Detailed Insights */}
-            <div className="dashboard-grid-wide">
-              {/* Candidates Section */}
-              <div className="glass-card">
-                <div className="chart-header">
-                  <h3>Candidates</h3>
-                </div>
-                <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
-                  <div className="stat-item">
-                    <span className="stat-label">Total Candidates</span>
-                    <span className="stat-value">{data.stats.totalCandidates}</span>
+              <div className="dashboard-grid-wide">
+                {/* Candidates Section */}
+                <div className="glass-card">
+                  <div className="chart-header">
+                    <h3>Candidates</h3>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">In Pipeline</span>
-                    <span className="stat-value">{data.stats.inPipeline}</span>
+                  <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
+                    <div className="stat-item">
+                      <span className="stat-label">Total Candidates</span>
+                      <span className="stat-value">{data.stats.totalCandidates}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">In Pipeline</span>
+                      <span className="stat-value">{data.stats.inPipeline}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">Hired</span>
+                      <span className="stat-value">{data.stats.hired}</span>
+                    </div>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">Hired</span>
-                    <span className="stat-value">{data.stats.hired}</span>
-                  </div>
-                </div>
 
-                <div className="candidate-list">
-                  <h4 style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Recent Candidates</h4>
-                  {data.recentCandidates.length > 0 ? data.recentCandidates.map((cand, i) => (
-                    <div key={i} className="candidate-row">
-                      <div className="candidate-info">
-                        <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
-                        <div>
-                          <div className="cand-name">{cand.candidate?.name || 'Anonymous'}</div>
-                          <div className="cand-email">{cand.candidate?.email}</div>
+                  <div className="candidate-list">
+                    <h4 style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Recent Candidates</h4>
+                    {data.recentCandidates.length > 0 ? data.recentCandidates.map((cand, i) => (
+                      <div key={i} className="candidate-row">
+                        <div className="candidate-info">
+                          <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
+                          <div>
+                            <div className="cand-name">{cand.candidate?.name || 'Anonymous'}</div>
+                            <div className="cand-email">{cand.candidate?.email}</div>
+                          </div>
                         </div>
+                        <span className={`status-badge ${cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'status-hired' : 'status-in-pipeline'}`}>
+                          {cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'Qualified' : cand.status === 'sent' ? 'Sent' : 'In Pipeline'}
+                        </span>
                       </div>
-                      <span className={`status-badge ${cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'status-hired' : 'status-in-pipeline'}`}>
-                        {cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'Qualified' : cand.status === 'sent' ? 'Sent' : 'In Pipeline'}
-                      </span>
-                    </div>
-                  )) : (
-                    <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '2rem' }}>No recent candidates found</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Results Chart Section */}
-              <div className="glass-card">
-                <div className="chart-header">
-                  <h3>Results</h3>
-                  <div className="chart-filters">
-                    <select className="filter-select"><option>Month</option></select>
-                    <select className="filter-select"><option>Analytics</option></select>
+                    )) : (
+                      <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '2rem' }}>No recent candidates found</p>
+                    )}
                   </div>
                 </div>
-                <div className="chart-container" style={{ height: '300px', minHeight: '300px' }}>
-                  <ResponsiveContainer width="100%" height="100%" debounce={100}>
-                    <AreaChart data={data.trendsTotal}>
-                      <defs>
-                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                      <Tooltip content={<CustomTooltip />} />
-                      <Area type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
-                  <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
-                    <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
-                    <div style={{ height: '100px', width: '100%', minHeight: '100px' }}>
-                      <ResponsiveContainer width="100%" height="100%" debounce={100}>
-                        <BarChart data={data.successRate}>
-                          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                          <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                          <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
-                        </BarChart>
-                      </ResponsiveContainer>
+                {/* Results Chart Section */}
+                <div className="glass-card">
+                  <div className="chart-header">
+                    <h3>Results</h3>
+                    <div className="chart-filters">
+                      <select className="filter-select"><option>Month</option></select>
+                      <select className="filter-select"><option>Analytics</option></select>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Selection Today</span>
-                      <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
+                  <div className="chart-container" style={{ height: '300px', minHeight: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%" debounce={100}>
+                      <AreaChart data={data.trendsTotal}>
+                        <defs>
+                          <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                        <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Area type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
+                    <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
+                      <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
+                      <div style={{ height: '100px', width: '100%', minHeight: '100px' }}>
+                        <ResponsiveContainer width="100%" height="100%" debounce={100}>
+                          <BarChart data={data.successRate}>
+                            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                            <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                            <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
-                      <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
-                      <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Selection Today</span>
+                        <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
+                        <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
+                        <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </>
-        )}
-      </div>
-    </main>
+            </>
+          )}
+        </div>
+      </main>
       {/* Job Role Modal */}
       {isRoleModalOpen && (
         <div

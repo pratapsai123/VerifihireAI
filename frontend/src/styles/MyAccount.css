@@ -432,8 +432,9 @@
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: var(--primary);
+    border-color: #2563eb;
     background: white;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .readonly-input {
@@ -506,7 +507,8 @@
 .pwd-eye-btn {
     position: absolute;
     right: 1rem;
-    top: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
@@ -514,6 +516,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 }
 
 .pwd-requirements {

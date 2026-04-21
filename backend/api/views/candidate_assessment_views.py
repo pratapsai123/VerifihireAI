@@ -52,6 +52,14 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
         data = request.data or {}
         candidates = data.get('candidates', [])
+
+        # Enforce Single Mode restriction: cannot invite if invited > 0 or if more than 1 candidate in request
+        if getattr(assessment, 'assessment_mode', 'multiple') == 'single':
+            if int(getattr(assessment, 'invited', 0) or 0) > 0:
+                return Response({'error': 'This is a single-candidate assessment and an invitation has already been sent.'}, status=status.HTTP_400_BAD_REQUEST)
+            if len(candidates) > 1:
+                return Response({'error': 'Single Mode assessment: Only one candidate can be invited at a time.'}, status=status.HTTP_400_BAD_REQUEST)
+
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -1108,10 +1116,16 @@ def _update_submission_scoring_logic(submission):
         pass
 
     # 8. Check Section Pass/Fail
+    # Candidate must pass BOTH the overall threshold AND section-specific minimums
+    
+    # 9. Determine Result (Status)
+    is_malpractice = (integrity_score < 70)
+    
+    # 10. Check Qualification
     passed_overall = final_percentage_rounded >= min_pass
     passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
     passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
-    passed_integrity = integrity_score >= MIN_INTEGRITY_THRESHOLD
+    passed_integrity = (integrity_score >= MIN_INTEGRITY_THRESHOLD)
 
     has_mcq = (submission.objective_total > 0)
     has_coding = (submission.coding_total > 0)
@@ -1129,7 +1143,7 @@ def _update_submission_scoring_logic(submission):
         submission.result = 'hold'
     elif not passed_overall:
         submission.is_qualified = False
-        submission.result = 'hold'
+        submission.result = 'rejected'
     else:
         submission.is_qualified = True
         submission.result = 'selected'
