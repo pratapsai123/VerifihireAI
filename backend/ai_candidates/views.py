@@ -280,7 +280,6 @@ class BulkInviteView(APIView):
 
 class ResumeMatchView(APIView):
     permission_classes = [AllowAny]
-    authentication_classes = []
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')
@@ -307,6 +306,13 @@ class ResumeMatchView(APIView):
             elif not candidate.resume:
                 return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
             
+            # Ensure candidate has a company/profile link if missing (e.g. from public link)
+            # but don't overwrite if it already has one.
+            if not candidate.user_profile and request.user.is_authenticated:
+                candidate.user_profile = getattr(request.user, 'profile', None)
+                if not candidate.company and candidate.user_profile:
+                    candidate.company = candidate.user_profile.company
+
             batch_id = generate_batch_id()
             batch_name = generate_batch_name(candidate.job_title or job_description[:20])
             candidate.batch_id = batch_id
@@ -320,7 +326,7 @@ class ResumeMatchView(APIView):
                     batch_id=batch_id,
                     job_description=job_description,
                     threshold=threshold,
-                    is_fully_automatic=False, # CHANGED: Single-file matching should be manual by default
+                    is_fully_automatic=False, 
                     automation_settings={}
                 )
                 
@@ -353,21 +359,20 @@ class ResumeMatchView(APIView):
             # INSTANT SAVE: Create Candidate records without waiting for OCR
             for resume_file in resume_files:
                 job_title = request.data.get('job_title') or request.data.get('role_title')
-                if job_title:
+                if job_title and request.user.is_authenticated:
                     ensure_role_exists(job_title, job_description, user=request.user)
 
-                user_profile = getattr(request.user, 'profile', None)
+                user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
                 company = user_profile.company if user_profile else None
                 candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
                 
                 # Create the candidate record
-                # We save the file itself; the background task will read it later
                 new_candidate = Candidate.objects.create(
                     full_name=candidate_name,
                     email="pending@example.com",
                     job_title=job_title or "Applicant",
-                    resume=resume_file, # Save the actual file
-                    resume_text=None,   # To be extracted in background
+                    resume=resume_file, 
+                    resume_text=None,   
                     status='New',
                     job_description=job_description,
                     company=company,

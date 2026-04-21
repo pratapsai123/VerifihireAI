@@ -829,7 +829,7 @@ const AiInterviewSession = () => {
         if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
         if (dfWsRef.current) { dfWsRef.current.close(); dfWsRef.current = null; }
         if (dfSessionIdRef.current) {
-            axios.post(`${DEEPFACE_BASE_URL}/session/${dfSessionIdRef.current}/stop`).catch(() => {});
+            axios.post(`${DEEPFACE_BASE_URL}/session/${dfSessionIdRef.current}/end`).catch(() => {});
         }
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
@@ -1596,8 +1596,7 @@ const AiInterviewSession = () => {
 
             const regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                 person_id: String(candidate.id),
-                image_base64: b64,
-                label: candidate.full_name
+                image_base64: b64
             });
             
             if (regRes.data && regRes.data.success) {

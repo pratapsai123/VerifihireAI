@@ -748,11 +748,17 @@ def process_resume_passed(candidate_id):
 
         # 10. FINAL VALIDATION GATE
         if final_mcqs < mcq_count or final_coding < coding_count:
-            logger.error(f"Pipeline[individual-{candidate_id}]: ❌ FINAL VALIDATION FAILED")
-            raise Exception(
-                f"AI could not satisfy minimum required pool counts. "
-                f"Expected MCQs={mcq_count}, coding={coding_count}; got MCQs={final_mcqs}, coding={final_coding}."
+            logger.warning(
+                f"Pipeline[individual-{candidate_id}]: ⚠️ FINAL GATE WARNING — "
+                f"AI could not satisfy minimum required pool counts exactly. "
+                f"Expected MCQs={mcq_count}, coding={coding_count}; "
+                f"Got MCQs={final_mcqs}, coding={final_coding}. "
+                "Proceeding with best-effort pool."
             )
+            # We enforce a MINIMUM requirement only: at least 1 MCQ or 1 coding challenge
+            if final_mcqs == 0 and final_coding == 0:
+                raise Exception("CRITICAL: AI failed to generate ANY valid questions (MCQs=0, Coding=0). Aborting assessment.")
+
 
         if not generated_data:
             raise Exception("AI pool generation produced no valid content after all quality gates.")

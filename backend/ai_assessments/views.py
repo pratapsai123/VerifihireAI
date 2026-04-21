@@ -950,7 +950,13 @@ class UpdateAssessmentIntegrityView(APIView):
                 submission.tab_switches += 1
             elif event_type == 'phone_detection':
                 submission.phone_warnings += 1
-            elif event_type == 'face_detection_lost':
+            elif event_type in ['face_detection_lost', 'no_face_detection', 'no_face']:
+                submission.face_warnings += 1
+            elif event_type in ['multiface_detection', 'multiple_faces', 'multi_person']:
+                submission.face_warnings += 1
+            elif event_type in ['looking_away', 'head_yaw_exceeded', 'head_pitch_exceeded']:
+                submission.face_warnings += 1
+            elif event_type in ['face_mismatch', 'verification_failed']:
                 submission.face_warnings += 1
             
             # Simple metadata log
@@ -963,23 +969,8 @@ class UpdateAssessmentIntegrityView(APIView):
             if len(submission.warning_logs) < 3:
                 submission.warning_logs.append(event_type)
 
-            weights = {
-                'tab_switch': 10,
-                'phone_detection': 30,
-                'face_detection_lost': 5
-            }
-
-            # Simple penalty system
-            total_raw_penalty = (
-                submission.tab_switches * weights['tab_switch'] + 
-                submission.phone_warnings * weights['phone_detection'] + 
-                submission.face_warnings * weights['face_detection_lost']
-            )
-
-            # Subtract the "free" penalty from the first 3 warnings
-            free_penalty = sum(weights.get(w, 0) for w in submission.warning_logs)
-
-            submission.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
+            # Per user request: DO NOT cut marks for integrity issues. 
+            submission.integrity_score = 100.0
             
             # Handle Screenshot
             screenshot_b64 = request.data.get('screenshot')

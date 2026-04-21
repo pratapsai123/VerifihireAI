@@ -1219,7 +1219,9 @@ const ResultsAI = () => {
                                                                                     { label: 'Assessment', data: r.assessment, scoreKey: 'percentage' },
                                                                                     { label: 'Interview', data: r.interview, scoreKey: 'score', isInt: true }
                                                                                 ].map((stage, idx) => {
-                                                                                    const hasData = !!stage.data;
+                                                                                    const hasData = stage.isInt
+                                                                                        ? (!!stage.data && !['New', 'Invited', 'Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(stage.data.status))
+                                                                                        : !!stage.data;
                                                                                     const score = stage.isInt
                                                                                         ? (stage.data?.score != null ? Math.round((stage.data.score / ((stage.data.interview_summary?.length || 13) * 10)) * 100) : 0)
                                                                                         : (stage.data?.[stage.scoreKey] || 0);

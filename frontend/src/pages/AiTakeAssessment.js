@@ -5,15 +5,21 @@ import Editor from "@monaco-editor/react";
 import '../styles/Dashboard.css';
 import { API_BASE_URL } from '../apiConfig';
 
+const DEEPFACE_BASE_URL = 'http://localhost:8500/api/v1';
+
 const AiTakeAssessment = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [assessment, setAssessment] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [answers, setAnswers] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [isRegistering, setIsRegistering] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [answers, setAnswers] = useState({});
+
+
 
     // Intake
     const [candidateName, setCandidateName] = useState('');
@@ -127,13 +133,294 @@ const AiTakeAssessment = () => {
 
     const videoRef = useRef(null);
     const streamRef = useRef(null);
-    const detectorRef = useRef(null);
-    const lastDetectionTimeRef = useRef(0);
     const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
     const screenStreamRef = useRef(null);
     const screenCanvasRef = useRef(null);
     const timerRef = useRef(null);
     const handleSubmitRef = useRef(null); // always points to latest handleSubmit
+
+    // ══════════════════════════════════════
+    // DEEPFACE STATE & REFS
+    // ══════════════════════════════════════
+    const [dfSessionId, setDfSessionId] = useState(null);
+
+    const [dfFacePresent, setDfFacePresent] = useState(false);
+    const [dfFaceCount, setDfFaceCount] = useState(0);
+    const [dfEngagement, setDfEngagement] = useState(0);
+    const [dfVerified, setDfVerified] = useState(null);
+    const [dfHeadDir, setDfHeadDir] = useState('FORWARD');
+    const [dfFps, setDfFps] = useState(0);
+
+    const dfWsRef = useRef(null);
+    const dfSessionIdRef = useRef(null);
+    const dfCanvasRef = useRef(null);
+    const dfAwaitingRef = useRef(false);
+    const dfSendIntervalRef = useRef(null);
+    const dfLastUiUpdateRef = useRef(0);
+    const dfFpsRef = useRef({ count: 0, last: Date.now() });
+
+    // ══════════════════════════════════════
+    // INTEGRITY & VIOLATION LOGGING
+    // ══════════════════════════════════════
+    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
+        if (!submissionId) return;
+        try {
+            await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/integrity/`, {
+                event_type: eventType,
+                screenshot: screenshot,
+                webcam_screenshot: webcamScreenshot
+            });
+        } catch { }
+    }, [submissionId]);
+
+    const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
+        setAiToast({ active: true, text, urgent });
+
+        let screenshot = null;
+        let webcamScreenshot = null;
+
+        if (eventType) {
+            const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
+            if (isScreenEvent) {
+                const now = Date.now();
+                if (now - lastCaptureTimeRef.current < 2000) return;
+                lastCaptureTimeRef.current = now;
+            }
+
+            if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
+                try {
+                    const video = document.createElement('video');
+                    video.srcObject = screenStreamRef.current;
+                    video.muted = true;
+                    video.playsInline = true;
+
+                    await new Promise((resolve) => {
+                        let resolved = false;
+                        const fallback = setTimeout(() => { if (!resolved) { resolved = true; resolve(); } }, 300);
+                        video.onloadedmetadata = () => {
+                            video.play().then(() => {
+                                if (!resolved) { resolved = true; clearTimeout(fallback); setTimeout(resolve, 50); }
+                            }).catch(() => { if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); } });
+                        };
+                        video.onerror = () => { if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); } };
+                    });
+
+                    const canvas = screenCanvasRef.current;
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = video.videoWidth || window.innerWidth || 1280;
+                    canvas.height = video.videoHeight || window.innerHeight || 720;
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    // Burn label into snapshot
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                    ctx.fillRect(0, canvas.height - 40, canvas.width, 40);
+                    ctx.fillStyle = urgent ? '#ef4444' : '#f59e0b';
+                    ctx.font = 'bold 16px Poppins, Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`AI ALERT: ${text}`, canvas.width / 2, canvas.height - 15);
+
+                    screenshot = canvas.toDataURL('image/jpeg', 0.5);
+                    video.pause();
+                    video.srcObject = null;
+                } catch (e) {
+                    console.error('Failed to capture AI integrity snapshot', e);
+                }
+            }
+
+            if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'face_mismatch', 'looking_away'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+                try {
+                    const camCanvas = document.createElement('canvas');
+                    camCanvas.width = videoRef.current.videoWidth || 640;
+                    camCanvas.height = videoRef.current.videoHeight || 480;
+                    const ctx = camCanvas.getContext('2d');
+                    ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+
+                    // Burn label into webcam snapshot
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                    ctx.fillRect(0, camCanvas.height - 30, camCanvas.width, 30);
+                    ctx.fillStyle = urgent ? '#ef4444' : '#f59e0b';
+                    ctx.font = 'bold 14px Poppins, Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`${text}`, camCanvas.width / 2, camCanvas.height - 10);
+
+                    webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+                } catch (e) {
+                    console.error('Failed to capture AI webcam snapshot', e);
+                }
+            }
+
+            reportViolation(eventType, screenshot, webcamScreenshot);
+        }
+
+        setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+    }, [reportViolation]);
+
+    // ══════════════════════════════════════
+    // DEEPFACE PROCTORING LOGIC
+    // ══════════════════════════════════════
+    const sendDeepfaceFrame = useCallback(() => {
+        if (!dfWsRef.current || dfWsRef.current.readyState !== WebSocket.OPEN) return;
+        if (!videoRef.current || !videoRef.current.videoWidth) return;
+        if (dfAwaitingRef.current) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 480;
+        const ctx = canvas.getContext('2d');
+        // Apply brightness and contrast enhancement before sending to backend (matches app.js:466)
+        ctx.filter = 'brightness(1.15) contrast(1.2)';
+        ctx.drawImage(videoRef.current, 0, 0, 640, 480);
+        ctx.filter = 'none';
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+        const b64 = dataUrl.split(',')[1];
+        dfAwaitingRef.current = true;
+        dfWsRef.current.send(JSON.stringify({ frame: b64 }));
+
+        // FPS Tracking
+        const f = dfFpsRef.current;
+        f.count++;
+        const now = Date.now();
+        if (now - f.last > 1000) {
+            setDfFps(f.count);
+            f.count = 0;
+            f.last = now;
+        }
+    }, []);
+
+    const drawDeepfaceOverlay = useCallback((result) => {
+        const canvas = dfCanvasRef.current;
+        if (!canvas || !videoRef.current) return;
+
+        const vw = videoRef.current.clientWidth || 640;
+        const vh = videoRef.current.clientHeight || 480;
+        if (canvas.width !== vw || canvas.height !== vh) {
+            canvas.width = vw;
+            canvas.height = vh;
+        }
+
+        const ctx = canvas.getContext('2d');
+        const sourceW = result.frame_width || 640;
+        const sourceH = result.frame_height || 480;
+        const scaleX = vw / sourceW;
+        const scaleY = vh / sourceH;
+
+        ctx.clearRect(0, 0, vw, vh);
+
+        // Mirror for HUD
+        ctx.save();
+        ctx.translate(vw, 0);
+        ctx.scale(-1, 1);
+
+        if (Array.isArray(result.face_boxes)) {
+            const isVerified = result.verification?.verified === true;
+            result.face_boxes.forEach((box, idx) => {
+                if (!box) return;
+                const x = (box.x || box.xmin || 0) * scaleX;
+                const y = (box.y || box.ymin || 0) * scaleY;
+                const w = (box.width || 0) * scaleX;
+                const h = (box.height || 0) * scaleY;
+                if (w < 5 || h < 5) return; // Adjusted for tiny feed
+
+                let color = idx === 0 ? (isVerified ? '#22c55e' : '#ef4444') : '#f59e0b';
+                let label = idx === 0 ? (isVerified ? 'VERIFIED' : 'UNAUTHORIZED') : 'SUSPECT';
+
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2.5; // Slightly thicker for small feed visibility
+                ctx.strokeRect(x, y, w, h);
+
+                // Brackets
+                const bLen = Math.min(w, h) * 0.25;
+                ctx.beginPath(); ctx.moveTo(x, y + bLen); ctx.lineTo(x, y); ctx.lineTo(x + bLen, y); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x + w - bLen, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + bLen); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x, y + h - bLen); ctx.lineTo(x, y + h); ctx.lineTo(x + bLen, y + h); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x + w - bLen, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - bLen); ctx.stroke();
+
+            });
+        }
+        ctx.restore();
+    }, []);
+
+    const handleDeepfaceResult = useCallback((result) => {
+        drawDeepfaceOverlay(result);
+        const now = Date.now();
+        if (now - dfLastUiUpdateRef.current > 500) {
+            dfLastUiUpdateRef.current = now;
+            setDfFacePresent(result.face_present ?? false);
+            setDfFaceCount(result.face_count ?? 0);
+            setDfEngagement(result.engagement_score ?? 0);
+            if (result.verification) setDfVerified(result.verification.verified);
+            if (result.head_pose) {
+                const yaw = result.head_pose.yaw || 0;
+                const pitch = result.head_pose.pitch || 0;
+                let dir = 'FORWARD';
+                if (Math.abs(yaw) > 15 || Math.abs(pitch) > 12) {
+                    const parts = [];
+                    if (pitch < -12) parts.push('UP');
+                    else if (pitch > 12) parts.push('DOWN');
+                    if (yaw < -15) parts.push('RIGHT');
+                    else if (yaw > 15) parts.push('LEFT');
+                    dir = parts.length > 0 ? parts.join('-') : 'FORWARD';
+                }
+                setDfHeadDir(dir);
+            }
+        }
+
+        if (result.alerts && result.alerts.length > 0) {
+            result.alerts.forEach(a => {
+                let eventType = a.type;
+                if (a.type === 'verification_failed' || a.type === 'verification_failed_not_matched') eventType = 'face_mismatch';
+                if (a.type === 'no_face') eventType = 'no_face_detection';
+                if (a.type === 'multiple_faces') eventType = 'multiface_detection';
+                if (a.type === 'head_yaw_exceeded' || a.type === 'head_pitch_exceeded' || a.type === 'looking_away_detected') eventType = 'looking_away';
+                
+                // Alert throttling: don't spam the same event type every frame
+                showAiEvent(a.message.toUpperCase(), a.severity === 'HIGH' || a.severity === 'CRITICAL', eventType);
+            });
+        }
+        dfAwaitingRef.current = false;
+    }, [drawDeepfaceOverlay, showAiEvent]);
+
+    const startDeepfaceMonitoring = useCallback(async (candidateId) => {
+        try {
+            const res = await axios.post(`${DEEPFACE_BASE_URL}/session/start`, {
+                person_id: String(candidateId)
+            });
+            const sessionId = res.data.session_id;
+            setDfSessionId(sessionId);
+            dfSessionIdRef.current = sessionId;
+
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const hostname = window.location.hostname;
+            const wsUrl = `${wsProtocol}//${hostname}:8500/api/v1/ws/monitor/${sessionId}`;
+            const ws = new WebSocket(wsUrl);
+            dfWsRef.current = ws;
+
+            ws.onopen = () => {
+                console.log('DeepFace WS connected for assessment:', sessionId);
+                dfAwaitingRef.current = false;
+                dfSendIntervalRef.current = setInterval(sendDeepfaceFrame, 40); // 25fps
+            };
+            ws.onmessage = (e) => handleDeepfaceResult(JSON.parse(e.data));
+            ws.onclose = () => clearInterval(dfSendIntervalRef.current);
+        } catch (e) {
+            console.error('DeepFace Init Failed:', e);
+        }
+    }, [sendDeepfaceFrame, handleDeepfaceResult]);
+
+    const stopDeepfaceMonitoring = useCallback(async () => {
+        if (dfWsRef.current) dfWsRef.current.close();
+        if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
+        
+        // Finalize session on backend
+        if (dfSessionIdRef.current) {
+            try {
+                await axios.post(`${DEEPFACE_BASE_URL}/session/${dfSessionIdRef.current}/end`);
+            } catch (e) {
+                console.error("Failed to end DeepFace session:", e);
+            }
+        }
+    }, []);
     const mcqSection = React.useMemo(() => {
         const raw = assessment?.generated_content?.mcqs;
         return Array.isArray(raw) ? raw : [];
@@ -220,8 +507,15 @@ const AiTakeAssessment = () => {
         setAnsweredQs(prev => new Set([...prev, currentQuestionIdx]));
     };
 
-    const startAssessment = async () => {
+    const startAssessment = async (bypassReg = false) => {
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
+        
+        // DeepFace Requirement: Ensure face is registered first
+        if (!isRegistered && !bypassReg) {
+            setIsRegistering(true);
+            return;
+        }
+
         try {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
@@ -232,26 +526,20 @@ const AiTakeAssessment = () => {
             if (savedResults) setCodingResults(savedResults);
             if (savedDrafts) setCodeDrafts(savedDrafts);
             
-            // Critical Fix: Sync the UI's question pool with the exact subset generated for this candidate
             if (candidate_questions) {
                 setAssessment(prev => ({ ...prev, generated_content: candidate_questions }));
             }
             
-            // Sync timer
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
-
-            // Directly start assessment (no mandatory fullscreen)
             setIsStarted(true);
 
-            // Restore session if resumed
+            // Restore session
             if (savedAnswers && Object.keys(savedAnswers).length > 0) {
                 setAnswers(savedAnswers);
-
                 const mcqsArr = assessment?.generated_content?.mcqs || [];
                 const totalMcqs = mcqsArr.length;
                 const restoredAnswered = new Set();
                 const restoredVisited = new Set();
-
                 Object.keys(savedAnswers).forEach(key => {
                     const val = savedAnswers[key];
                     if (!val) return;
@@ -268,7 +556,6 @@ const AiTakeAssessment = () => {
                         restoredVisited.add(globalIdx);
                     }
                 });
-
                 if (restoredAnswered.size > 0) {
                     setAnsweredQs(restoredAnswered);
                     setVisitedQs(prev => new Set([...prev, ...restoredVisited]));
@@ -280,24 +567,20 @@ const AiTakeAssessment = () => {
                 setVisitedQs(prev => new Set([...prev, current_question_index]));
             }
 
-            // Start Proctoring
-            const success = await startScreenShare();
-            if (!success) {
-                setIsStarted(false);
-                return;
-            }
-
-            // Enter Fullscreen immediately after screen share is granted
+            // Start Proctoring (Replacement for old monitor)
+            await startScreenShare();
+            
             try {
                 if (document.documentElement.requestFullscreen) {
                     await document.documentElement.requestFullscreen();
                     setIsFullscreen(true);
                 }
-            } catch (err) {
-                console.error("Fullscreen request failed", err);
-            }
+            } catch (err) { }
 
+            // DeepFace Initialization
             await startCamera();
+            await startDeepfaceMonitoring(candidateEmail);
+
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
             alert(msg);
@@ -466,133 +749,11 @@ const AiTakeAssessment = () => {
         if (streamRef.current) { streamRef.current.getTracks().forEach(t => t.stop()); streamRef.current = null; }
     };
 
-    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
-        if (!submissionId) return;
-        try {
-            await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/integrity/`, {
-                event_type: eventType,
-                screenshot: screenshot,
-                webcam_screenshot: webcamScreenshot
-            });
-        } catch { }
-    }, [submissionId]);
 
-    const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
-        setAiToast({ active: true, text, urgent });
-
-        let screenshot = null;
-        let webcamScreenshot = null;
-
-        if (eventType) {
-            // Throttling for screen-based events (tab_switch, window_blur)
-            const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
-            if (isScreenEvent) {
-                const now = Date.now();
-                if (now - lastCaptureTimeRef.current < 2000) {
-                    console.log(`Throttling duplicate integrity event: ${eventType}`);
-                    return;
-                }
-                lastCaptureTimeRef.current = now;
-            }
-
-            // Capture Screen
-            if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
-                try {
-                    // Quick draw from the live stream track using ImageCapture if available,
-                    // otherwise rely on a pre-existing background video element.
-                    // For maximum compatibility and speed, we create a quick video element, 
-                    // but we don't wait for loadedmetadata if it takes too long.
-                    const video = document.createElement('video');
-                    video.srcObject = screenStreamRef.current;
-                    video.muted = true;
-                    video.playsInline = true;
-
-                    await new Promise((resolve) => {
-                        let resolved = false;
-                        // Fallback timeout because loadedmetadata might not fire if tab is fully backgrounded
-                        const fallback = setTimeout(() => {
-                            if (!resolved) { resolved = true; resolve(); }
-                        }, 300);
-
-                        video.onloadedmetadata = () => {
-                            video.play().then(() => {
-                                if (!resolved) {
-                                    resolved = true;
-                                    clearTimeout(fallback);
-                                    setTimeout(resolve, 50); // slight delay to paint
-                                }
-                            }).catch(() => {
-                                if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
-                            });
-                        };
-                        video.onerror = () => {
-                            if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
-                        };
-                    });
-
-                    const canvas = screenCanvasRef.current;
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = video.videoWidth || window.innerWidth || 1280;
-                    canvas.height = video.videoHeight || window.innerHeight || 720;
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    screenshot = canvas.toDataURL('image/jpeg', 0.5);
-
-                    video.pause();
-                    video.srcObject = null;
-                } catch (e) {
-                    console.error('Failed to capture AI integrity snapshot', e);
-                }
-            }
-
-            // Capture Webcam
-            if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
-                try {
-                    const camCanvas = document.createElement('canvas');
-                    camCanvas.width = videoRef.current.videoWidth || 640;
-                    camCanvas.height = videoRef.current.videoHeight || 480;
-                    const ctx = camCanvas.getContext('2d');
-                    ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
-                    webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
-                } catch (e) {
-                    console.error('Failed to capture AI webcam snapshot', e);
-                }
-            }
-
-            reportViolation(eventType, screenshot, webcamScreenshot);
-        }
-
-        setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
-    }, [reportViolation]);
 
     useEffect(() => {
         if (!isStarted || !submissionId) return;
-        let detectInterval;
-        const initMonitoring = async () => {
-            if (window.cocoSsd) {
-                detectorRef.current = await window.cocoSsd.load();
-                detectInterval = setInterval(async () => {
-                    if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
-                        const now = Date.now();
-                        if (now - lastDetectionTimeRef.current > 1500) {
-                            lastDetectionTimeRef.current = now;
-                            const preds = await detectorRef.current.detect(videoRef.current);
-                            
-                            // Filter by confidence score
-                            const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
-                            const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
-
-                            if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
-                            
-                            if (people.length > 1) {
-                                showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-                            } else if (people.length === 0) {
-                                showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
-                            }
-                        }
-                    }
-                }, 800);
-            }
-        };
+        
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
         const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'window_switch');
         const onFullscreenChange = () => {
@@ -607,9 +768,7 @@ const AiTakeAssessment = () => {
         window.addEventListener('blur', onBlur);
         document.addEventListener('fullscreenchange', onFullscreenChange);
 
-        initMonitoring();
         return () => {
-            clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', onHide);
             window.removeEventListener('blur', onBlur);
             document.removeEventListener('fullscreenchange', onFullscreenChange);
@@ -845,7 +1004,158 @@ const AiTakeAssessment = () => {
         return `${m}:${s < 10 ? '0' : ''}${s}`;
     };
 
+    // ══════════════════════════════════════
+    // INTERNAL COMPONENTS
+    // ══════════════════════════════════════
+    const RegistrationWizard = ({ onComplete, onCancel }) => {
+        const localVideoRef = useRef(null);
+        const [capturedImg, setCapturedImg] = useState(null);
+        const [wizardStep, setWizardStep] = useState(0); // 0: Capture, 1: Analyzing, 2: Success
+        const [regError, setRegError] = useState('');
+
+        useEffect(() => {
+            const startRegCamera = async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+                    if (localVideoRef.current) localVideoRef.current.srcObject = stream;
+                } catch (e) { setRegError("Camera access denied. Biometric verification is required for this assessment."); }
+            };
+            startRegCamera();
+            return () => {
+                if (localVideoRef.current?.srcObject) localVideoRef.current.srcObject.getTracks().forEach(t => t.stop());
+            };
+        }, []);
+
+        const handleRegisterFace = async () => {
+            if (!localVideoRef.current && !capturedImg) return;
+            
+            let finalImage = capturedImg;
+            if (!finalImage) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 640; canvas.height = 480;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(localVideoRef.current, 0, 0, 640, 480);
+                finalImage = canvas.toDataURL('image/jpeg', 0.9);
+                setCapturedImg(finalImage);
+            }
+
+            setWizardStep(1); // Analyzing
+            setRegError('');
+            
+            try {
+                const personId = candidateEmail || `temp_${Date.now()}`;
+                await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                    person_id: personId,
+                    image_base64: finalImage.split(',')[1]
+                });
+                
+                setWizardStep(2); // Success
+                setTimeout(() => {
+                    setIsRegistered(true);
+                    onComplete();
+                }, 1500);
+            } catch (e) {
+                setRegError("Registration failed. Please ensure your face is clearly visible.");
+                setWizardStep(0);
+                setCapturedImg(null);
+            }
+        };
+
+        return (
+            <div style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(255, 255, 255, 0.98)',
+                zIndex: 100000,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                padding: '2rem',
+                fontFamily: 'Poppins'
+            }}>
+                <div style={{ maxWidth: '600px', width: '100%', background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
+                    <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>AI Face Registration</h2>
+                    <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
+                        Please look directly at the camera. We need to register your face for our AI proctoring system.
+                    </p>
+                    
+                    <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
+                        {capturedImg ? (
+                            <img src={capturedImg} alt="Captured face" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                        ) : (
+                            <video ref={localVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                        )}
+                        
+                        {/* Overlay guides */}
+                        <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                        
+                        {wizardStep === 1 && (
+                            <>
+                                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                                    Analyzing face...
+                                </div>
+                                <div style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    height: '4px',
+                                    background: '#6366f1',
+                                    boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)',
+                                    animation: 'ai-scan 1.5s ease-in-out infinite'
+                                }}></div>
+                                <style>{`
+                                    @keyframes ai-scan {
+                                        0% { top: 0%; }
+                                        50% { top: 100%; }
+                                        100% { top: 0%; }
+                                    }
+                                `}</style>
+                            </>
+                        )}
+                        {wizardStep === 2 && (
+                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(34,197,94,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                                ✓ Registered
+                            </div>
+                        )}
+                    </div>
+
+                    {regError && <div style={{ color: '#ef4444', marginBottom: '1.5rem', fontWeight: 600 }}>{regError}</div>}
+
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                        <button
+                            onClick={onCancel}
+                            style={{ background: 'white', color: '#4a5568', border: '1px solid #e2e8f0', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1rem', fontWeight: '600', cursor: 'pointer' }}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleRegisterFace}
+                            disabled={wizardStep === 1 || wizardStep === 2}
+                            style={{
+                                background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2) ? 'not-allowed' : 'pointer',
+                                opacity: (wizardStep === 1) ? 0.7 : 1, transition: 'all 0.2s',
+                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                            }}
+                        >
+                            {wizardStep === 1 ? 'Please Wait...' : wizardStep === 2 ? 'Registration Complete!' : 'Capture & Register'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    if (isRegistering) {
+        return <RegistrationWizard onComplete={() => { setIsRegistering(false); setIsRegistered(true); startAssessment(true); }} onCancel={() => setIsRegistering(false)} />;
+    }
+
     if (loading) return (
+
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#F4F7FE' }}>
             <div style={{ textAlign: 'center' }}>
                 <p style={{ color: '#4318FF', fontWeight: 600 }}>Loading assessment...</p>
@@ -1002,13 +1312,101 @@ const AiTakeAssessment = () => {
                         <div style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: 700, textTransform: 'uppercase' }}>Time Left</div>
                         <div style={{ fontSize: '1.1rem', fontWeight: 800, color: timeLeft < 300 ? '#dc2626' : '#1a5276' }}>{formatTime(timeLeft)}</div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 25, padding: '4px 12px 4px 4px' }}>
-                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#1a5276', overflow: 'hidden', flexShrink: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,0.8)', border: '1px solid #e0e7ff', borderRadius: 40, padding: '4px 14px 4px 6px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', backdropFilter: 'blur(8px)' }}>
+                        <div style={{ 
+                            position: 'relative', 
+                            width: 52, 
+                            height: 52, 
+                            borderRadius: '50%', 
+                            overflow: 'hidden', 
+                            border: `2.5px solid ${
+                                dfVerified === null ? '#6366f1' :
+                                dfVerified === false ? '#ef4444' :
+                                dfHeadDir !== 'FORWARD' ? '#f59e0b' : '#22c55e'
+                            }`,
+                            boxShadow: `0 0 12px ${
+                                dfVerified === null ? 'rgba(99,102,241,0.3)' :
+                                dfVerified === false ? 'rgba(239,68,68,0.5)' :
+                                dfHeadDir !== 'FORWARD' ? 'rgba(245,158,11,0.4)' : 'rgba(34,197,94,0.3)'
+                            }`,
+                            transition: 'all 0.3s ease',
+                            animation: dfVerified === false ? 'pulse-error 1s infinite' : 'none'
+                        }}>
                             <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                            <canvas ref={dfCanvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none' }} />
+                            
+                            {/* Scanning Animation */}
+                            <div style={{
+                                position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#6366f1',
+                                boxShadow: '0 0 8px 2px rgba(99, 102, 241, 0.6)', animation: 'ai-scan 2s ease-in-out infinite', zIndex: 11
+                            }}></div>
                         </div>
-                        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#374151' }}>{candidateName}</span>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1B254B', lineHeight: 1.1 }}>{candidateName}</span>
+                            <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+                                {dfSessionId ? (
+                                    <>
+                                        <div style={{ 
+                                            background: dfVerified === true ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)', 
+                                            color: dfVerified === true ? '#16a34a' : '#dc2626',
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            border: `1px solid ${dfVerified === true ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
+                                            display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
+                                        }}>
+                                            <i className={`fa-solid ${dfVerified === true ? 'fa-check-circle' : 'fa-circle-xmark'}`}></i>
+                                            {dfVerified === true ? 'VERIFIED' : 'MISMATCH'}
+                                        </div>
+                                        <div style={{ 
+                                            background: 'rgba(99, 102, 241, 0.15)', color: '#4f46e5',
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            border: '1px solid rgba(99, 102, 241, 0.3)',
+                                            display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
+                                        }}>
+                                            <i className="fa-solid fa-bolt"></i>
+                                            {Math.round(dfEngagement)}%
+                                        </div>
+                                        <div style={{ 
+                                            background: 'rgba(75, 85, 99, 0.1)', color: '#4b5563',
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            border: '1px solid rgba(75, 85, 99, 0.2)',
+                                            display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
+                                        }}>
+                                            <i className="fa-solid fa-compass"></i>
+                                            {dfHeadDir}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                        <div className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#6366f1' }}></div>
+                                        <span style={{ fontSize: '0.62rem', color: '#6366f1', fontWeight: 800, letterSpacing: 0.5 }}>SECURE FEED INITIALIZING...</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <style>{`
+                    @keyframes ai-scan {
+                        0% { top: 0%; opacity: 0.2; }
+                        50% { top: 100%; opacity: 1; }
+                        100% { top: 0%; opacity: 0.2; }
+                    }
+                    .pulse-dot {
+                        animation: pulse-ai 1.5s infinite;
+                    }
+                    @keyframes pulse-ai {
+                        0% { transform: scale(1); opacity: 1; }
+                        50% { transform: scale(1.5); opacity: 0.5; }
+                        100% { transform: scale(1); opacity: 1; }
+                    }
+                    @keyframes pulse-error {
+                        0% { border-color: #ef4444; box-shadow: 0 0 0px rgba(239,68,68,0.7); }
+                        50% { border-color: #7f1d1d; box-shadow: 0 0 15px rgba(239,68,68,0.9); }
+                        100% { border-color: #ef4444; box-shadow: 0 0 0px rgba(239,68,68,0.7); }
+                    }
+                `}</style>
             </div>
 
             {/* SECTION TABS */}
