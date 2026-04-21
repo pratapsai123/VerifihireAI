@@ -280,6 +280,7 @@ class BulkInviteView(APIView):
 
 class ResumeMatchView(APIView):
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')
