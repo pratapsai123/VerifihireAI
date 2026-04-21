@@ -74,11 +74,13 @@ const ResultsAI = () => {
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
-                    // Always include in Resume tab to ensure full visibility of all screened candidates
-                    resResults.push(r);
-                    // Also include in Interview tab if the interview process has actually started
-                    if (r.total_questions > 0) {
-                        intResults.push(r);
+                    // ALWAYS include in Interview tab since this is an AI Interview candidate
+                    intResults.push(r);
+                    
+                    // Also include in Resume tab ONLY IF they have actually uploaded a resume
+                    // (prevents 'Invited' candidates from confusingly showing up as a Resume analysis)
+                    if (r.status !== 'New' && r.status !== 'Invited') {
+                        resResults.push(r);
                     }
                 }
                 // 'man_' (manual) results are ignored for AI Results page for now, 
@@ -403,23 +405,25 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Integrity Evidence Gallery */}
-                        {data.integrity_logs?.length > 0 && (
+                        {data.integrity_screenshots?.length > 0 && (
                             <div className="sidebar-card">
                                 <span className="sidebar-label">Integrity Evidence</span>
                                 <div className="integrity-gallery-scroll">
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                                        {data.integrity_logs.map((log, lIdx) => {
+                                        {data.integrity_screenshots.map((log, lIdx) => {
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
                                             const displayImg = isScreenEvent 
-                                                ? (log.screenshot_base64 || log.webcam_screenshot_base64)
-                                                : (log.webcam_screenshot_base64 || log.screenshot_base64);
+                                                ? (log.screenshot_url || log.webcam_screenshot_url)
+                                                : (log.webcam_screenshot_url || log.screenshot_url);
 
                                             return (
                                                 <div key={lIdx} style={{ 
                                                     position: 'relative', borderRadius: '12px', overflow: 'hidden', 
                                                     border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
                                                     cursor: 'pointer'
-                                                }} onClick={() => window.open(displayImg, '_blank')}>
+                                                }} onClick={() => {
+                                                    if (displayImg) window.open(displayImg, '_blank');
+                                                }}>
                                                     <img 
                                                         src={displayImg || 'https://placehold.co/100x100?text=No+Data'} 
                                                         alt={log.event_type}
@@ -432,7 +436,7 @@ const ResultsAI = () => {
                                                         fontSize: '9px', padding: '4px 2px', textAlign: 'center',
                                                         fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px'
                                                     }}>
-                                                        {log.event_type.replace('_', ' ')}
+                                                        {log.event_type.replace(/_/g, ' ')}
                                                     </div>
                                                 </div>
                                             );
@@ -1165,7 +1169,7 @@ const ResultsAI = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                                                            {activeTab === 'interview' ? (
+                                                                            {activeTab === 'interview' || (activeTab === 'resume' && r.total_questions > 0) ? (
                                                                                 <button 
                                                                                     onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
                                                                                     style={{ 
@@ -1183,6 +1187,15 @@ const ResultsAI = () => {
                                                                                         color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                     }}
                                                                                 >View</button>
+                                                                            ) : (activeTab === 'resume') ? (
+                                                                                <button 
+                                                                                    onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                                    style={{ 
+                                                                                        padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                        background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                        color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                    }}
+                                                                                >Details</button>
                                                                             ) : null}
                                                                             {canDelete && (
                                                                                 <button

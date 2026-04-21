@@ -96,6 +96,8 @@ def extract_json(text):
         return None
 
 class AssemblyAITokenView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def get(self, request):
         api_key = getattr(settings, 'ASSEMBLYAI_API_KEY', None)
         if not api_key:
@@ -185,7 +187,7 @@ class BulkInviteView(APIView):
                     batch_id=batch_id,
                     batch_name=batch_name,
                 )
-                link = f"https://verifihireai.com/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -278,6 +280,7 @@ class BulkInviteView(APIView):
 
 class ResumeMatchView(APIView):
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')
@@ -665,8 +668,8 @@ INTERVIEW_LINK_TTL_MINUTES = 60 # Back to 60 minutes as requested
 
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CandidateSerializer
-    from rest_framework.permissions import AllowAny
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -753,6 +756,8 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CandidateStatusUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def patch(self, request, pk):
         try:
             user_profile = getattr(request.user, 'profile', None)
@@ -784,6 +789,8 @@ class CandidateStatusUpdateView(APIView):
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
 
 class UpdateIntegrityView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request, pk):
         try:
             candidate = Candidate.objects.get(pk=pk)
@@ -852,6 +859,8 @@ class UpdateIntegrityView(APIView):
             return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class ProcessAnswerView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     @staticmethod
     def _get_difficulty_instructions(experience_level):
         """Return AI prompt instructions based on candidate experience level."""
@@ -1229,6 +1238,7 @@ class TTSView(APIView):
     POST {"text": "Hello!"} → returns audio/wav binary response.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         text = request.data.get('text', '').strip()
@@ -1287,6 +1297,7 @@ class LatestActiveBatchView(APIView):
     before the ID could be saved to local state.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def get(self, request):
         # Look for candidates created in the last 15 minutes that are still 'New'

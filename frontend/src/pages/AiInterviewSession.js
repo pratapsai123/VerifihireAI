@@ -6,7 +6,7 @@ import { RealtimeTranscriber } from 'assemblyai';
 import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL, DEEPFACE_BASE_URL } from '../apiConfig';
 
 const AiInterviewSession = () => {
     const { token } = useParams();
@@ -33,6 +33,20 @@ const AiInterviewSession = () => {
     const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isScreenSharing, setIsScreenSharing] = useState(false);
+
+    // ── Registration State ──
+    const [isFaceRegistered, setIsFaceRegistered] = useState(false);
+    const [wizardStep, setWizardStep] = useState(0); 
+    const [capturedImage, setCapturedImage] = useState(null);
+    const regVideoRef = useRef(null);
+
+    // ── DeepFace Proctoring State ──
+    const [dfSessionId, setDfSessionId] = useState(null);
+    const [dfVerified, setDfVerified] = useState(null);
+    const [dfEngagement, setDfEngagement] = useState(0);
+    const [dfFaceCount, setDfFaceCount] = useState(0);
+    const [dfFacePresent, setDfFacePresent] = useState(false);
+    const [dfHeadDir, setDfHeadDir] = useState('FORWARD');
 
     // Refs
     const videoRef = useRef(null);
@@ -72,6 +86,13 @@ const AiInterviewSession = () => {
     const currentAudioRef = useRef(null);
     const isStartingMicRef = useRef(false);
     const isNoticePlayingRef = useRef(false);
+    // DeepFace refs
+    const dfWsRef = useRef(null);
+    const dfCanvasRef = useRef(null);
+    const dfSendIntervalRef = useRef(null);
+    const dfSessionIdRef = useRef(null);
+    const dfAwaitingRef = useRef(false);
+    const dfLastUiUpdateRef = useRef(0); // Throttle HUD state updates to avoid re-render thrashing
 
     // 1. Load Voices
     useEffect(() => {
@@ -95,6 +116,10 @@ const AiInterviewSession = () => {
                 videoRef.current.srcObject = stream;
                 // Force play to ensure visibility across all browsers
                 videoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
+            }
+            if (regVideoRef.current) {
+                regVideoRef.current.srcObject = stream;
+                regVideoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
             }
             streamRef.current = stream;
         } catch (err) {
@@ -198,94 +223,54 @@ const AiInterviewSession = () => {
             let screenshot = null;
             let webcamScreenshot = null;
 
-            // Capture Screen (if screen event)
-            if (['tab_switch', 'window_blur', 'screen_stop'].includes(eventType) && screenStreamRef.current) {
+            // Capture Screen (if screen or environmental event)
+            if (['tab_switch', 'window_blur', 'screen_stop', 'face_mismatch', 'looking_away', 'multi_person', 'no_face'].includes(eventType) && screenStreamRef.current) {
                 try {
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
-                    // Add catch to prevent "play() interrupted by pause()" runtime error
-                    video.play().catch(e => console.warn("Screenshot capture play interrupted:", e));
-                    await new Promise(r => setTimeout(r, 100)); // Brief wait for stream to render
+                    await video.play().catch(() => {});
+                    
+                    // Simple wait
+                    if (video.readyState < 2) {
+                        await new Promise(r => setTimeout(r, 400));
+                    }
 
                     const canvas = document.createElement('canvas');
                     canvas.width = video.videoWidth || 1280;
                     canvas.height = video.videoHeight || 720;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(video, 0, 0);
-                    screenshot = canvas.toDataURL('image/jpeg', 0.3); // Lower quality for screen (it's large)
+                    screenshot = canvas.toDataURL('image/jpeg', 0.6);
                     video.pause();
+                    video.srcObject = null;
                 } catch (e) { console.warn("Screen capture failed:", e); }
             }
 
             // Always capture Webcam for context
-            if (videoRef.current && videoRef.current.readyState === 4) {
+            if (videoRef.current && videoRef.current.readyState >= 2) {
                 try {
                     const canvas = document.createElement('canvas');
                     canvas.width = videoRef.current.videoWidth;
                     canvas.height = videoRef.current.videoHeight;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(videoRef.current, 0, 0);
-                    webcamScreenshot = canvas.toDataURL('image/jpeg', 0.5);
+                    webcamScreenshot = canvas.toDataURL('image/jpeg', 0.7);
                 } catch (e) { console.warn("Webcam capture failed:", e); }
             }
 
-            reportViolation(eventType, screenshot, webcamScreenshot);
+            if (screenshot || webcamScreenshot) {
+                reportViolation(eventType, screenshot, webcamScreenshot);
+            }
         }
 
         setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
     }, [reportViolation]);
 
     useEffect(() => {
-        let detectInterval;
-        const initAiMonitoring = async () => {
-            setAiStatus('Initializing AI Safeguards...');
-            try {
-                const cocoSsd = window.cocoSsd;
-                if (!cocoSsd) {
-                    let retryCount = 0;
-                    const waitForCoco = setInterval(async () => {
-                        retryCount++;
-                        if (window.cocoSsd) {
-                            clearInterval(waitForCoco);
-                            setupDetector();
-                        } else if (retryCount > 10) {
-                            clearInterval(waitForCoco);
-                            setAiStatus('AI Monitoring Limited');
-                        }
-                    }, 1000);
-                    return;
-                }
-                setupDetector();
-            } catch (err) {
-                console.error("AI Monitor Init error:", err);
-                setAiStatus('Safeguards Partially Active');
-            }
-        };
-
-        const setupDetector = async () => {
-            detectorRef.current = await window.cocoSsd.load();
-            setAiStatus('AI Monitoring Active');
-
-            detectInterval = setInterval(async () => {
-                if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
-                    const now = Date.now();
-                    if (now - lastDetectionTimeRef.current > 2000) {
-                        lastDetectionTimeRef.current = now;
-                        try {
-                            const predictions = await detectorRef.current.detect(videoRef.current);
-                            const phone = predictions.find(p => p.class === 'cell phone');
-                            if (phone) showAiEvent("CELL PHONE DETECTED", true, 'phone_detection');
-
-                            const people = predictions.filter(p => p.class === 'person');
-                            if (people.length > 1) showAiEvent("MULTIPLE PEOPLE DETECTED", true, 'multiface_detection');
-                            else if (people.length === 0) showAiEvent("CANDIDATE NOT DETECTED", true, 'no_face_detection');
-                        } catch (e) {
-                            console.error("Detection loop error:", e);
-                        }
-                    }
-                }
-            }, 1000);
-        };
+        // AI Monitoring: DeepFace handles ALL proctoring (face detection, verification,
+        // multi-face, head pose). COCO-SSD/TensorFlow.js removed to eliminate GPU
+        // contention that was causing laggy face tracking and poor recognition accuracy.
+        setAiStatus('AI Monitoring Active');
 
         const handleVisibilityChange = () => {
             if (document.hidden || document.visibilityState === 'hidden') {
@@ -299,8 +284,6 @@ const AiInterviewSession = () => {
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
         window.addEventListener('blur', handleBlur);
-        initAiMonitoring();
-        const sc = startCamera; // Reference for cleanup if needed
 
         const handleFullscreenChange = () => {
             const isFS = !!document.fullscreenElement;
@@ -372,7 +355,6 @@ const AiInterviewSession = () => {
         document.addEventListener('fullscreenchange', handleFullscreenChange);
 
         return () => {
-            if (detectInterval) clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('blur', handleBlur);
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
@@ -397,6 +379,261 @@ const AiInterviewSession = () => {
             return () => clearInterval(hammer);
         }
     }, [isFullscreen, isPermissionsGranted, isCompleted]);
+
+    // ══════════════════════════════════════
+    // DEEPFACE PROCTORING
+    // ══════════════════════════════════════
+    const sendDeepfaceFrame = useCallback(() => {
+        if (!dfWsRef.current || dfWsRef.current.readyState !== WebSocket.OPEN) return;
+        if (!videoRef.current || !videoRef.current.videoWidth) return;
+        if (dfAwaitingRef.current) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 480;
+        const ctx = canvas.getContext('2d');
+        // Apply brightness and contrast enhancement before sending to backend
+        ctx.filter = 'brightness(1.15) contrast(1.2)';
+        ctx.drawImage(videoRef.current, 0, 0, 640, 480);
+        ctx.filter = 'none';
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+        const b64 = dataUrl.split(',')[1];
+        dfAwaitingRef.current = true;
+        dfWsRef.current.send(JSON.stringify({ frame: b64 }));
+    }, []);
+
+    const drawDeepfaceOverlay = useCallback((result) => {
+        const canvas = dfCanvasRef.current;
+        if (!canvas || !videoRef.current) return;
+
+        const vw = videoRef.current.clientWidth || 640;
+        const vh = videoRef.current.clientHeight || 480;
+        if (canvas.width !== vw || canvas.height !== vh) {
+            canvas.width = vw;
+            canvas.height = vh;
+        }
+
+        const ctx = canvas.getContext('2d');
+        const sourceW = result.frame_width || 640;
+        const sourceH = result.frame_height || 480;
+        const scaleX = vw / sourceW;
+        const scaleY = vh / sourceH;
+
+        ctx.clearRect(0, 0, vw, vh);
+
+        // Mirror the canvas drawing to match the scaleX(-1) on the video
+        ctx.save();
+        ctx.translate(vw, 0);
+        ctx.scale(-1, 1);
+
+        // Face bounding boxes
+        if (Array.isArray(result.face_boxes)) {
+            const isVerified = result.verification?.verified === true;
+            const verSkipped = result.verification?.verified === 'skipped';
+
+            result.face_boxes.forEach((box, idx) => {
+                if (!box) return;
+                let rawX = box.x ?? box.xmin;
+                let rawY = box.y ?? box.ymin;
+                let rawW = box.width;
+                let rawH = box.height;
+                if (rawX == null || rawY == null || rawW == null || rawH == null) return;
+
+                rawX = Number(rawX); rawY = Number(rawY);
+                rawW = Number(rawW); rawH = Number(rawH);
+                if (!Number.isFinite(rawX) || !Number.isFinite(rawY)) return;
+
+                const looksNormalized = rawW <= 1.2 && rawH <= 1.2;
+                const xPx = looksNormalized ? (rawX * sourceW) : rawX;
+                const yPx = looksNormalized ? (rawY * sourceH) : rawY;
+                const wPx = looksNormalized ? (rawW * sourceW) : rawW;
+                const hPx = looksNormalized ? (rawH * sourceH) : rawH;
+
+                const x = Math.max(0, xPx * scaleX);
+                const y = Math.max(0, yPx * scaleY);
+                const w = Math.max(0, wPx * scaleX);
+                const h = Math.max(0, hPx * scaleY);
+                if (w < 6 || h < 6) return;
+
+                let boxColor, label;
+                if (result.face_count > 1) {
+                    boxColor = '#f59e0b'; label = `FACE ${idx + 1}`;
+                } else if (verSkipped) {
+                    boxColor = '#f59e0b'; label = '';
+                } else if (isVerified) {
+                    boxColor = '#22c55e'; label = '✓ VERIFIED';
+                } else {
+                    boxColor = '#ef4444'; label = '✗ NOT MATCHED';
+                }
+
+                // Draw corner brackets
+                ctx.strokeStyle = boxColor;
+                ctx.lineWidth = 2.5;
+                ctx.shadowColor = boxColor;
+                ctx.shadowBlur = 6;
+                const cornerLen = Math.min(w, h) * 0.25;
+                ctx.beginPath(); ctx.moveTo(x, y + cornerLen); ctx.lineTo(x, y); ctx.lineTo(x + cornerLen, y); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x + w - cornerLen, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + cornerLen); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x, y + h - cornerLen); ctx.lineTo(x, y + h); ctx.lineTo(x + cornerLen, y + h); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x + w - cornerLen, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - cornerLen); ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Label above face — un-mirror so text reads correctly
+                if (label) {
+                    ctx.save();
+                    // Flip back to normal for text rendering
+                    const centerX = x + w / 2;
+                    ctx.translate(centerX, 0);
+                    ctx.scale(-1, 1);
+                    ctx.translate(-centerX, 0);
+
+                    ctx.font = '700 11px Inter, sans-serif';
+                    ctx.textBaseline = 'top';
+                    const tw = ctx.measureText(label).width + 12;
+                    const th = 18;
+                    const tx = x + (w - tw) / 2;
+                    const ty = y > th + 6 ? y - th - 4 : y + h + 4;
+                    ctx.fillStyle = boxColor;
+                    ctx.beginPath();
+                    if (ctx.roundRect) ctx.roundRect(tx, ty, tw, th, 3);
+                    else ctx.fillRect(tx, ty, tw, th);
+                    ctx.fill();
+                    ctx.fillStyle = '#fff';
+                    ctx.fillText(label, tx + 6, ty + 3);
+                    ctx.restore();
+                }
+            });
+        }
+
+        // Restore from the mirror transform before drawing centered text
+        ctx.restore();
+
+        // No face / multi-face warning overlay (drawn in normal orientation)
+        if (!result.face_present || result.face_count === 0) {
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+            ctx.fillRect(0, 0, vw, vh);
+            ctx.font = '700 14px Inter, sans-serif';
+            ctx.fillStyle = '#ef4444';
+            ctx.textAlign = 'center';
+            ctx.fillText('⚠ NO FACE DETECTED', vw / 2, vh - 16);
+            ctx.textAlign = 'start';
+        } else if (result.face_count > 1) {
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+            ctx.fillRect(0, 0, vw, vh);
+            ctx.font = '700 14px Inter, sans-serif';
+            ctx.fillStyle = '#f59e0b';
+            ctx.textAlign = 'center';
+            ctx.fillText(`⚠ ${result.face_count} FACES DETECTED`, vw / 2, vh - 16);
+            ctx.textAlign = 'start';
+        }
+    }, []);
+
+    const handleDeepfaceResult = useCallback((result) => {
+        // PERFORMANCE: Draw overlay every frame for real-time feel (cheap canvas op)
+        drawDeepfaceOverlay(result);
+
+        // PERFORMANCE: Throttle React state updates to every 500ms
+        // This prevents 25+ re-renders/sec which was causing jank and input lag
+        const now = Date.now();
+        if (now - dfLastUiUpdateRef.current > 500) {
+            dfLastUiUpdateRef.current = now;
+            setDfFacePresent(result.face_present ?? false);
+            setDfFaceCount(result.face_count ?? 0);
+            setDfEngagement(result.engagement_score ?? 0);
+            if (result.verification) {
+                setDfVerified(result.verification.verified);
+            }
+            if (result.head_pose) {
+                const yaw = result.head_pose.yaw || 0;
+                const pitch = result.head_pose.pitch || 0;
+                let dir = 'FORWARD';
+                if (Math.abs(yaw) > 15 || Math.abs(pitch) > 12) {
+                    const parts = [];
+                    if (pitch < -12) parts.push('UP');
+                    else if (pitch > 12) parts.push('DOWN');
+                    if (yaw < -15) parts.push('RIGHT');
+                    else if (yaw > 15) parts.push('LEFT');
+                    dir = parts.length > 0 ? parts.join('-') : 'FORWARD';
+                }
+                setDfHeadDir(dir);
+            }
+        }
+
+        // Alerts are always processed immediately (they are rare events, not per-frame)
+        if (result.alerts && result.alerts.length > 0) {
+            result.alerts.forEach(a => {
+                let eventType = a.type;
+                let message = a.message.toUpperCase();
+                
+                if (a.type === 'verification_failed') eventType = 'face_mismatch';
+                if (a.type === 'no_face') eventType = 'no_face_detection';
+                if (a.type === 'multiple_faces') eventType = 'multiface_detection';
+                if (a.type === 'head_yaw_exceeded' || a.type === 'head_pitch_exceeded') {
+                    eventType = 'looking_away';
+                    message = 'LOOKING AWAY DETECTED';
+                }
+
+                showAiEvent(message, a.severity === 'HIGH', eventType);
+            });
+        }
+    }, [showAiEvent, drawDeepfaceOverlay]);
+
+    const startDeepfaceMonitoring = useCallback(async (candidateId) => {
+        try {
+            const res = await axios.post(`${DEEPFACE_BASE_URL}/session/start`, {
+                person_id: String(candidateId)
+            });
+            const sessionId = res.data.session_id;
+            setDfSessionId(sessionId);
+            dfSessionIdRef.current = sessionId;
+
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const hostname = window.location.hostname;
+            const wsUrl = `${wsProtocol}//${hostname}:8500/api/v1/ws/monitor/${sessionId}`;
+            const ws = new WebSocket(wsUrl);
+            dfWsRef.current = ws;
+
+            ws.onopen = () => {
+                console.log('DeepFace WS connected for session:', sessionId);
+                dfAwaitingRef.current = false;
+                dfSendIntervalRef.current = setInterval(() => {
+                    sendDeepfaceFrame();
+                }, 200); // 5 FPS to match exactly with deepface dashboard avoiding queue bloat
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    dfAwaitingRef.current = false;
+                    const r = JSON.parse(event.data);
+                    if (r.error) return;
+                    handleDeepfaceResult(r);
+                } catch (e) { }
+            };
+
+            ws.onclose = () => {
+                console.log('DeepFace WS closed');
+                if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
+            };
+
+            ws.onerror = (e) => {
+                console.error('DeepFace WS error:', e);
+                dfAwaitingRef.current = false;
+            };
+
+            console.log('DeepFace proctoring session started:', sessionId);
+        } catch (e) {
+            console.warn('DeepFace monitoring unavailable (server offline?):', e.message);
+        }
+    }, [sendDeepfaceFrame, handleDeepfaceResult]);
+
+    // Cleanup DeepFace on unmount
+    useEffect(() => {
+        return () => {
+            if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
+            if (dfWsRef.current) { dfWsRef.current.close(); dfWsRef.current = null; }
+        };
+    }, []);
 
     // 4. Speech and Interactions
     const unlockSpeech = useCallback(() => {
@@ -588,6 +825,12 @@ const AiInterviewSession = () => {
         isCompletedRef.current = true;
         setIsCompleted(true);
         stopCamera();
+        // Stop DeepFace proctoring session
+        if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
+        if (dfWsRef.current) { dfWsRef.current.close(); dfWsRef.current = null; }
+        if (dfSessionIdRef.current) {
+            axios.post(`${DEEPFACE_BASE_URL}/session/${dfSessionIdRef.current}/stop`).catch(() => {});
+        }
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
         await speak(finishMessage);
@@ -1316,10 +1559,71 @@ const AiInterviewSession = () => {
         console.log("Permissions granted successfully.");
         setIsPermissionsGranted(true);
         isFullscreenRef.current = true;
+        setAiStatus("Starting Registration...");
+        setWizardStep(0); 
+
+        // Important: Link the video stream to regVideoRef manually right after getting permissions
+        // because the ref might be null during startCamera if it hasn't rendered yet
+        setTimeout(() => {
+            if (regVideoRef.current && streamRef.current) {
+                regVideoRef.current.srcObject = streamRef.current;
+                regVideoRef.current.play().catch(e => console.warn("regVideo auto-play prevented:", e));
+            }
+        }, 500);
+    };
+
+    const handleRegisterFace = async () => {
+        const videoElement = regVideoRef.current || videoRef.current;
+        if (!videoElement || videoElement.readyState < 2) return;
+        setWizardStep(1); // 'verifying'
+
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width = 640;
+            canvas.height = 480;
+            const ctx = canvas.getContext('2d');
+            // Apply brightness and contrast enhancement before registration
+            ctx.filter = 'brightness(1.15) contrast(1.2)';
+            ctx.drawImage(videoElement, 0, 0, 640, 480);
+            ctx.filter = 'none';
+            
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            const b64 = dataUrl.split(',')[1];
+            setCapturedImage(dataUrl); // Set the frozen image
+            
+            const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
+            const candidate = res.data;
+
+            const regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                person_id: String(candidate.id),
+                image_base64: b64,
+                label: candidate.full_name
+            });
+            
+            if (regRes.data && regRes.data.success) {
+                setWizardStep(2); // 'success'
+                setTimeout(() => {
+                    setIsFaceRegistered(true);
+                    finalizeInterviewStart(candidate);
+                }, 1500);
+            } else {
+                setWizardStep(3); // 'error'
+                setCapturedImage(null); // Clear image on failure so video resumes
+                alert(regRes.data?.message || 'Face registration failed. Please ensure your face is clearly visible.');
+            }
+        } catch (err) {
+            console.error("Registration error:", err);
+            setWizardStep(3); // 'error'
+            setCapturedImage(null); // Clear image on failure
+            alert('Failed to connect to DeepFace registration service. ' + (err.response?.data?.detail || err.message));
+        }
+    };
+
+    const finalizeInterviewStart = async (candidate) => {
         setAiStatus("Preparing Indu...");
 
-        const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
-        const candidate = res.data;
+        // Start DeepFace proctoring session (uses candidate.id as person_id)
+        await startDeepfaceMonitoring(candidate.id);
 
         if (candidate.interview_summary && candidate.interview_summary.length > 0) {
             console.log("Resuming session...");
@@ -1665,6 +1969,87 @@ const AiInterviewSession = () => {
                     </div>
                 )
             }
+
+            {
+                isPermissionsGranted && !isFaceRegistered && !isCompleted && (
+                    <div style={{
+                        position: 'fixed',
+                        inset: 0,
+                        background: 'rgba(255, 255, 255, 0.98)',
+                        zIndex: 15000,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        padding: '2rem'
+                    }}>
+                        <div style={{ maxWidth: '600px', width: '100%', background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
+                            <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>AI Face Registration</h2>
+                            <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
+                                Please look directly at the camera. We need to register your face for our AI proctoring system.
+                            </p>
+                            
+                            <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
+                                {capturedImage ? (
+                                    <img src={capturedImage} alt="Captured face" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                                ) : (
+                                    <video ref={regVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                                )}
+                                
+                                {/* Overlay guides */}
+                                <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                                
+                                {wizardStep === 1 && (
+                                    <>
+                                        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                                            Analyzing face...
+                                        </div>
+                                        {/* CSS AI Scanning Animation Line */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            height: '4px',
+                                            background: '#6366f1',
+                                            boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)',
+                                            animation: 'ai-scan 1.5s ease-in-out infinite'
+                                        }}></div>
+                                        <style>{`
+                                            @keyframes ai-scan {
+                                                0% { top: 0%; }
+                                                50% { top: 100%; }
+                                                100% { top: 0%; }
+                                            }
+                                        `}</style>
+                                    </>
+                                )}
+                                {wizardStep === 2 && (
+                                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(34,197,94,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                                        ✓ Registered
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                onClick={handleRegisterFace}
+                                disabled={wizardStep === 1 || wizardStep === 2}
+                                style={{
+                                    background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                    color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                    fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2) ? 'not-allowed' : 'pointer',
+                                    opacity: (wizardStep === 1) ? 0.7 : 1, transition: 'all 0.2s',
+                                    boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                                }}
+                            >
+                                {wizardStep === 1 ? 'Please Wait...' : wizardStep === 2 ? 'Registration Complete!' : wizardStep === 3 ? 'Retry Capture' : 'Capture & Register'}
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+
             {
                 showQuotaWarning && (
                     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#667eea', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
@@ -1675,11 +2060,42 @@ const AiInterviewSession = () => {
 
             <div className="ai-session-container">
                 <div className="ai-sidebar">
-                    <div className="camera-container">
+                    <div className="camera-container" style={{ position: 'relative' }}>
                         <video ref={videoRef} autoPlay playsInline muted id="candidateVideo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                        <canvas ref={dfCanvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
                         <div className="ai-scan-bar"></div>
                         {integrityBreech.active && <div className="integrity-overlay"><span>{integrityBreech.text}</span></div>}
                         {aiToast.active && <div className={`ai-event-toast ${aiToast.urgent ? 'urgent' : ''}`}>{aiToast.text}</div>}
+                        {/* DeepFace Proctoring HUD */}
+                        {dfSessionId && (
+                            <div style={{
+                                position: 'absolute', bottom: '4px', left: '4px', right: '4px',
+                                display: 'flex', gap: '4px', justifyContent: 'center',
+                                pointerEvents: 'none', zIndex: 5
+                            }}>
+                                <span style={{
+                                    background: dfVerified === true ? 'rgba(34,197,94,0.9)' : dfVerified === false ? 'rgba(239,68,68,0.9)' : 'rgba(245,158,11,0.9)',
+                                    color: '#fff', fontSize: '0.55rem', fontWeight: 700, padding: '2px 5px', borderRadius: '4px',
+                                    backdropFilter: 'blur(4px)'
+                                }}>
+                                    {dfVerified === true ? '✓ Verified' : dfVerified === false ? '✗ Mismatch' : '— Away'}
+                                </span>
+                                <span style={{
+                                    background: dfEngagement >= 70 ? 'rgba(34,197,94,0.9)' : dfEngagement >= 40 ? 'rgba(245,158,11,0.9)' : 'rgba(239,68,68,0.9)',
+                                    color: '#fff', fontSize: '0.55rem', fontWeight: 700, padding: '2px 5px', borderRadius: '4px',
+                                    backdropFilter: 'blur(4px)'
+                                }}>
+                                    ⚡ {Math.round(dfEngagement)}%
+                                </span>
+                                <span style={{
+                                    background: dfHeadDir === 'FORWARD' ? 'rgba(34,197,94,0.9)' : 'rgba(245,158,11,0.9)',
+                                    color: '#fff', fontSize: '0.55rem', fontWeight: 700, padding: '2px 5px', borderRadius: '4px',
+                                    backdropFilter: 'blur(4px)'
+                                }}>
+                                    🧭 {dfHeadDir}
+                                </span>
+                            </div>
+                        )}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
                         <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
