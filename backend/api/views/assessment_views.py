@@ -1404,6 +1404,7 @@ def create_assessment_view(request):
                         'evaluated': getattr(a, 'evaluated', 0),
                         'shortlisted': getattr(a, 'shortlisted', 0),
                         'on_proctoring': getattr(a, 'on_proctoring', False),
+                        'assessment_mode': getattr(a, 'assessment_mode', 'multiple'),
                         'invite_token': str(getattr(a, 'invite_token', '')) if getattr(a, 'invite_token', None) else None,
                         'created_at': a.created_at.isoformat() if a.created_at else None,
                     }
@@ -1601,6 +1602,8 @@ def create_assessment_view(request):
             min_objective_pass_percentage=min_objective_pass_percentage,
             weightage_objective=weightage_objective,
             weightage_coding=weightage_coding,
+
+            assessment_mode=getattr(custom_assessment, 'assessment_mode', 'multiple'),
 
             total_points=int(request.data.get('total_points') or 0),
             status='draft',
@@ -1967,6 +1970,7 @@ def get_assessment_detail_view(request, assessment_id: int):
                 'min_objective_pass_percentage': a.min_objective_pass_percentage,
                 'weightage_objective': a.weightage_objective,
                 'weightage_coding': a.weightage_coding,
+                'assessment_mode': getattr(a, 'assessment_mode', 'multiple'),
                 'invite_token': str(a.invite_token) if getattr(a, 'invite_token', None) else None,
                 'created_at': a.created_at.isoformat() if a.created_at else None,
                 'questions': questions,

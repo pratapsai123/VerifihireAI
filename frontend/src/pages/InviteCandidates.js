@@ -118,6 +118,10 @@ export default function InviteCandidates() {
     return true;
   }, [name, email, pan, validityMode, scheduleDate, startTime]);
 
+  const isSingleLimitReached = useMemo(() => {
+    return assessment?.assessment_mode === 'single' && (candidates.length >= 1 || assessment.invited > 0);
+  }, [assessment, candidates.length]);
+
   const loadAssessment = async () => {
     setLoading(true);
     setError('');
@@ -247,6 +251,16 @@ export default function InviteCandidates() {
   };
 
   const addCandidate = () => {
+    if (assessment?.assessment_mode === 'single') {
+      if (candidates.length >= 1) {
+        alert('Single Mode assessment: Only one candidate can be invited.');
+        return;
+      }
+      if (assessment.invited > 0) {
+        alert('Invitation already sent for this Single Mode assessment.');
+        return;
+      }
+    }
     const n = name.trim();
     const e = email.trim().toLowerCase();
     const p = pan.trim().toUpperCase();
@@ -302,6 +316,9 @@ export default function InviteCandidates() {
     const next = [...candidates];
 
     dataRows.forEach((cells) => {
+      if (assessment?.assessment_mode === 'single') {
+        if (next.length >= 1 || assessment.invited > 0) return;
+      }
       const r = mapRow(cells);
       const n = (r.name || '').trim();
       const e = (r.email || '').trim();
@@ -514,7 +531,11 @@ export default function InviteCandidates() {
     );
   }
 
-  const isShareDisabled = sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0);
+  const isShareDisabled = 
+    sending || 
+    candidates.length === 0 || 
+    (isAutoSchedule && selectedInterviewerIds.length === 0) ||
+    (assessment?.assessment_mode === 'single' && assessment.invited > 0);
 
   return (
     <div className="invite-page">
@@ -560,6 +581,17 @@ export default function InviteCandidates() {
         </div>
 
         {/* ── Progress Stepper ── */}
+        {assessment?.assessment_mode === 'single' && assessment.invited > 0 && (
+          <div className="state-card info" style={{ marginBottom: '1.5rem', background: '#F8FAFC', border: '1px solid #E2E8F0', padding: '1rem', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ background: '#4318FF', color: 'white', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>!</div>
+              <div>
+                <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.9rem' }}>Invitation Already Sent</div>
+                <div style={{ color: '#64748b', fontSize: '0.8rem' }}>This is a single-candidate assessment. You cannot send more invitations.</div>
+              </div>
+            </div>
+          </div>
+        )}
         {(() => {
           const scheduleReady = scheduleDate && (validityMode !== 'exact_window' || startTime);
           const candidatesReady = candidates.length > 0;
@@ -790,7 +822,12 @@ export default function InviteCandidates() {
                   {importMsg}
                 </span>
               )}
-              <label className="file-pill" htmlFor="inviteCsv">
+              <label 
+                className={`file-pill${isSingleLimitReached ? ' disabled' : ''}`} 
+                htmlFor="inviteCsv"
+                style={isSingleLimitReached ? { opacity: 0.48, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
+                title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : "Upload CSV"}
+              >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
@@ -802,6 +839,7 @@ export default function InviteCandidates() {
                   type="file"
                   accept=".csv,text/csv"
                   onChange={(e) => handleCSVUpload(e.target.files?.[0])}
+                  disabled={isSingleLimitReached}
                 />
               </label>
             </div>
@@ -819,6 +857,8 @@ export default function InviteCandidates() {
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="Full name"
                   maxLength={100}
+                  disabled={isSingleLimitReached}
+                  title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : ""}
                 />
                 {name.trim() && <span className="ic-input-tick">✓</span>}
               </div>
@@ -833,6 +873,8 @@ export default function InviteCandidates() {
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="candidate@email.com"
                   maxLength={100}
+                  disabled={isSingleLimitReached}
+                  title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : ""}
                 />
                 {email && (
                   <span className={isValidEmail(email) ? 'ic-input-tick' : 'ic-input-cross'}>
@@ -851,6 +893,8 @@ export default function InviteCandidates() {
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="ABCDE1234F"
                   maxLength={10}
+                  disabled={isSingleLimitReached}
+                  title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : ""}
                 />
                 {pan.length === 10 && isValidPAN(pan) && <span className="ic-input-tick">✓</span>}
                 {pan && !isValidPAN(pan) && <span className="ic-input-cross">✕</span>}
@@ -865,6 +909,8 @@ export default function InviteCandidates() {
                   onChange={handlePhoneChange}
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="10-digit number"
+                  disabled={isSingleLimitReached}
+                  title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : ""}
                 />
                 {phone.length === 10 && <span className="ic-input-tick">✓</span>}
               </div>
@@ -875,7 +921,8 @@ export default function InviteCandidates() {
                 className="btn-tertiary"
                 type="button"
                 onClick={addCandidate}
-                disabled={!canAdd}
+                disabled={!canAdd || isSingleLimitReached}
+                title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : "Add Candidate"}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />

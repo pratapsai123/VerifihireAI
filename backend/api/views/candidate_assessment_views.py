@@ -52,6 +52,14 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
         data = request.data or {}
         candidates = data.get('candidates', [])
+
+        # Enforce Single Mode restriction: cannot invite if invited > 0 or if more than 1 candidate in request
+        if getattr(assessment, 'assessment_mode', 'multiple') == 'single':
+            if int(getattr(assessment, 'invited', 0) or 0) > 0:
+                return Response({'error': 'This is a single-candidate assessment and an invitation has already been sent.'}, status=status.HTTP_400_BAD_REQUEST)
+            if len(candidates) > 1:
+                return Response({'error': 'Single Mode assessment: Only one candidate can be invited at a time.'}, status=status.HTTP_400_BAD_REQUEST)
+
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -11,6 +11,7 @@ from .auth_views import (
     register_view,
     login_view,
     verify_login_otp_view,
+    heartbeat_view,
 )
 
 from .user_views import (

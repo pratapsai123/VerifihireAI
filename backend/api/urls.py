@@ -8,6 +8,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
 
     path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
+    path('heartbeat/', views.heartbeat_view, name='heartbeat'),
+
     path('register/', views.register_view, name='register'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),

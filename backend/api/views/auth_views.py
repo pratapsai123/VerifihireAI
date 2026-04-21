@@ -925,6 +925,12 @@ def verify_login_otp_view(request):
             if not auth_user:
                 return Response({'error': 'Authentication user not found. Please contact support.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             refresh = RefreshToken.for_user(auth_user)
+            # Add database identifier to token to force logout if DB context changes
+            db_conf = settings.DATABASES['default']
+            db_id = f"{db_conf.get('HOST', '127.0.0.1')}:{db_conf.get('PORT', '5432')}/{db_conf.get('NAME', 'postgres')}"
+            refresh['db_name'] = db_id
+
+
 
             if user_profile:
                 from django.utils import timezone
@@ -964,5 +970,18 @@ def verify_login_otp_view(request):
             {'error': f'An error occurred: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def heartbeat_view(request):
+    """
+    Lightweight endpoint for proactive session validation.
+    The custom DBContextJWTAuthentication already checks the DB context.
+    Returns 200 if the token is valid for the current database context.
+    Returns 401 via middleware/auth-class if context has changed.
+    """
+    return Response({'status': 'ok', 'db_name': settings.DATABASES['default']['NAME']}, status=status.HTTP_200_OK)
+
 
 

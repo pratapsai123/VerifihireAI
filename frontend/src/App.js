@@ -51,6 +51,8 @@ import './styles/App.css';
 import Header from './components/Header';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from './apiConfig';
+
 
 // Global Axios Interceptors for JWT Authentication
 axios.interceptors.request.use(
@@ -159,8 +161,43 @@ function AppContent() {
     location.pathname.startsWith('/result/') ||
     location.pathname.endsWith('/attempt');
 
+  // Proactive Session Validation (Heartbeat)
+  // Polls the backend periodically to detect if the database context has changed.
+  // If the DB context changes (e.g., backend restarted with new DB), the next poll will fail with 401,
+  // triggering the global axios interceptor to log out the user immediately.
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (!token) return;
+
+    // Skip polling on public candidate/invite pages
+    const publicRoutes = [
+      '/login', '/signup', '/forgot-password', '/take-assessment/', 
+      '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
+      '/result/', '/live-interview', '/ai-interview', '/book-interview/', '/accept-invite'
+    ];
+    const isPublicPage = publicRoutes.some(path => location.pathname.startsWith(path));
+    if (isPublicPage) return;
+
+    const intervalId = setInterval(async () => {
+      try {
+        // Use the lightweight heartbeat endpoint
+        await axios.get(`${API_BASE_URL}/heartbeat/`);
+      } catch (err) {
+        // 401 errors are handled by the global interceptor (logs out user)
+        // We ignore other errors (like network down) to prevent premature logout 
+        // while the backend is restarting.
+        if (err.response && err.response.status === 401) {
+          console.warn("Heartbeat failed: Database context mismatch or session expired.");
+        }
+      }
+    }, 15000); // Check every 15 seconds for proactive logout
+
+    return () => clearInterval(intervalId);
+  }, [location.pathname]);
+
   return (
     <div className="app-container">
+
       {!isFullScreenPage && <Header />}
       <div className="app-scroll" style={isFullScreenPage ? {
         top: 0,
