@@ -1798,6 +1798,7 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
                     'batch_id': inv.batch_id,
                     'batch_name': inv.batch_name,
+                    'is_fully_automatic': False,
 
                     'status': s.result,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
@@ -1867,6 +1868,7 @@ def results_overview_view(request):
                     'is_resume_screening': False,
                     'batch_id': s.batch_id,
                     'batch_name': s.batch_name,
+                    'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
                     'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
