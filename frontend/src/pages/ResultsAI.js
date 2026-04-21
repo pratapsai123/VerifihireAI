@@ -59,6 +59,7 @@ const ResultsAI = () => {
             const resResults = [];
             const assessResults = [];
             const intResults = [];
+            const manResults = [];
 
             allResults.forEach(r => {
                 const sid = String(r.submission_id || '');
@@ -80,9 +81,17 @@ const ResultsAI = () => {
                     if (r.total_questions > 0) {
                         intResults.push(r);
                     }
+                } else {
+                    // Collect standard/manual assessment results
+                    manResults.push({
+                        ...r,
+                        _type: 'manual_assessment',
+                        assessment: r.assessment || { 
+                            display_name: r.full_name || 'Standard Assessment',
+                            name: r.full_name || 'Standard Assessment' 
+                        }
+                    });
                 }
-                // 'man_' (manual) results are ignored for AI Results page for now, 
-                // but could be added as a tab if desired.
             });
 
             // State setters for categorized results are not needed as we use groupedData for UI
@@ -118,6 +127,7 @@ const ResultsAI = () => {
                         resume: [], 
                         assessment: [], 
                         interview: [], 
+                        standard: [],
                         total: 0,
                         role: rawRole,
                         batch_name: batchLabel,
@@ -131,6 +141,7 @@ const ResultsAI = () => {
             resResults.forEach(r => addToGroup(r, 'resume'));
             intResults.forEach(r => addToGroup(r, 'interview'));
             sortedAssessments.forEach(s => addToGroup(s, 'assessment'));
+            manResults.forEach(m => addToGroup(m, 'standard'));
 
             setGroupedData(groups);
         } catch (err) {
@@ -257,6 +268,7 @@ const ResultsAI = () => {
         if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
         if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };
 
@@ -1086,7 +1098,8 @@ const ResultsAI = () => {
                                             <div style={{ display: 'flex', gap: '0.4rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '10px' }}>
                                                 {[
                                                     { id: 'resume', label: 'Resume', icon: 'fa-file-magnifying-glass' },
-                                                    { id: 'assessment', label: 'Assessments', icon: 'fa-brain' },
+                                                    { id: 'assessment', label: 'AI Assess', icon: 'fa-brain' },
+                                                    { id: 'standard', label: 'Standard', icon: 'fa-vial-circle-check' },
                                                     { id: 'interview', label: 'Interviews', icon: 'fa-microphone-lines' }
                                                 ].filter(tab => {
                                                     const d = groupedData[selectedRole];
@@ -1096,6 +1109,7 @@ const ResultsAI = () => {
                                                     if (activeTab === 'resume' && tab.id === 'resume') return true;
                                                     if (activeTab === 'assessment' && tab.id === 'assessment') return true;
                                                     if (activeTab === 'interview' && tab.id === 'interview') return true;
+                                                    if (activeTab === 'standard' && tab.id === 'standard') return true;
                                                     return false;
                                                 }).map(tab => (
                                                     <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
@@ -1230,7 +1244,7 @@ const ResultsAI = () => {
                                                                         <>
                                                                             <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
                                                                                 {activeTab === 'resume' ? `${r.resume_score || 0}%` :
-                                                                                    activeTab === 'assessment' ? `${r.percentage ?? 0}%` :
+                                                                                    activeTab === 'assessment' || activeTab === 'standard' ? `${r.percentage ?? 0}%` :
                                                                                         `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
                                                                             </td>
                                                                             <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
@@ -1296,9 +1310,9 @@ const ResultsAI = () => {
                                                                                                 color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                             }}
                                                                                         >Review</button>
-                                                                                    ) : activeTab === 'assessment' ? (
+                                                                                    ) : activeTab === 'assessment' || activeTab === 'standard' ? (
                                                                                         <button 
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id }); }}
+                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
                                                                                             style={{ 
                                                                                                 padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
                                                                                                 background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
