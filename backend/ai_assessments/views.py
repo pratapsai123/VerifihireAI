@@ -766,11 +766,11 @@ class GenerateAssessmentView(APIView):
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,
-                mcq_count=final_mcqs,
-                mcq_easy=final_easy,
-                mcq_medium=final_medium,
-                mcq_hard=final_hard,
-                coding_count=final_coding,
+                mcq_count=mcq_count,
+                mcq_easy=mcq_easy,
+                mcq_medium=mcq_medium,
+                mcq_hard=mcq_hard,
+                coding_count=coding_count,
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
@@ -934,7 +934,8 @@ class CreateSubmissionView(APIView):
                 "answers": submission.answers,
                 "current_question_index": submission.current_question_index,
                 "coding_results": (submission.results_breakdown or {}).get('coding_results', {}),
-                "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {})
+                "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {}),
+                "candidate_questions": submission.candidate_questions
             }, status=status.HTTP_201_CREATED)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)

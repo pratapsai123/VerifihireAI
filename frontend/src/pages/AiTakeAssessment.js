@@ -226,11 +226,16 @@ const AiTakeAssessment = () => {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
             });
-            const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts } = res.data;
+            const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts, candidate_questions } = res.data;
 
             setSubmissionId(submission_id);
             if (savedResults) setCodingResults(savedResults);
             if (savedDrafts) setCodeDrafts(savedDrafts);
+            
+            // Critical Fix: Sync the UI's question pool with the exact subset generated for this candidate
+            if (candidate_questions) {
+                setAssessment(prev => ({ ...prev, generated_content: candidate_questions }));
+            }
             
             // Sync timer
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
