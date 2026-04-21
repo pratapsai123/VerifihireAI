@@ -171,7 +171,12 @@ const ResumeMatcher = () => {
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            setFiles(Array.from(e.target.files));
+            setFiles(prevFiles => {
+                const newFiles = Array.from(e.target.files);
+                const existingNames = new Set(prevFiles.map(f => f.name));
+                const uniqueNewFiles = newFiles.filter(f => !existingNames.has(f.name));
+                return [...prevFiles, ...uniqueNewFiles];
+            });
         }
     };
 
@@ -179,7 +184,12 @@ const ResumeMatcher = () => {
         e.preventDefault();
         e.stopPropagation();
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            setFiles(Array.from(e.dataTransfer.files));
+             setFiles(prevFiles => {
+                const newFiles = Array.from(e.dataTransfer.files);
+                const existingNames = new Set(prevFiles.map(f => f.name));
+                const uniqueNewFiles = newFiles.filter(f => !existingNames.has(f.name));
+                return [...prevFiles, ...uniqueNewFiles];
+            });
         }
     };
 
