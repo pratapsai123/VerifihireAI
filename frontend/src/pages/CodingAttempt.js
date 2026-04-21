@@ -435,9 +435,7 @@ export default function CodingAttempt() {
   };
 
   const resultPaneStyle = showResultPanel && result
-    ? (resultHeightPct > 30
-      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
-      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
+    ? { flex: '0 0 auto', display: 'block' }
     : { display: 'none' };
 
   return (

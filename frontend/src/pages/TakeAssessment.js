@@ -1568,9 +1568,7 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? (resultHeightPct > 30
-      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
-      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
+    ? { flex: '0 0 auto', display: 'block' }
     : { display: 'none' };
 
   // Show a loading state to prevent CandidateDetails flicker

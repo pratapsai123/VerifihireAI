@@ -316,8 +316,6 @@
   font-size: 11.5px;
   line-height: 1.5;
   color: #475569;
-  max-height: 120px;
-  overflow-y: auto;
   padding: 4px;
 }
 
