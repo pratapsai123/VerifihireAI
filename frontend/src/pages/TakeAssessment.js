@@ -7,6 +7,7 @@ import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
 import { API_BASE_URL } from '../apiConfig';
 import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
+import { Eye, EyeOff } from 'lucide-react';
 
 
 const DEFAULT_LANGS = [
@@ -1567,9 +1568,7 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? (resultHeightPct > 30
-      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
-      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
+    ? { flex: '0 0 auto', display: 'block' }
     : { display: 'none' };
 
   // Show a loading state to prevent CandidateDetails flicker
@@ -2044,22 +2043,21 @@ export default function TakeAssessment() {
                               {formatDuration(activeRunResult.execution_time_ms)}{' '}
                               {activeRunResult.submission_id ? `• Submission #${activeRunResult.submission_id}` : ''}
                             </div>
-                            <div className="coding-table">
+                            <div className={`coding-table is-results ${!(activeRunResult.results || []).some(r => (r.stderr || '').trim()) ? 'hide-stderr' : ''}`}>
                               <div className="coding-table-head">
                                 <div>Test</div>
                                 <div>Status</div>
                                 <div>stdout</div>
-                                <div>stderr</div>
+                                {(activeRunResult.results || []).some(r => (r.stderr || '').trim()) && <div>stderr</div>}
                               </div>
                               {activeRunResult.results.map((r, idx) => {
                                 const isHidden = r.is_hidden ?? r.hidden ?? false;
+                                const hasAnyStderr = (activeRunResult.results || []).some(res => (res.stderr || '').trim());
                                 return (
                                   <div key={r.testcase_id ?? idx} className="coding-table-row">
-                                    <div className="coding-test-label">
-                                      <span className={isHidden ? 'coding-pill-hidden' : 'coding-pill-visible'}>
-                                        {isHidden ? 'Hidden' : 'Visible'}
-                                      </span>
-                                      <span className="coding-test-name">Test {idx + 1}</span>
+                                    <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
+                                      {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
+                                      <span className="coding-test-name">{idx + 1}</span>
                                     </div>
                                     <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
                                     <div className="coding-mono">
@@ -2069,7 +2067,7 @@ export default function TakeAssessment() {
                                         (r.stdout || '').trim() || '—'
                                       )}
                                     </div>
-                                    <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
+                                    {hasAnyStderr && <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>}
                                   </div>
                                 );
                               })}

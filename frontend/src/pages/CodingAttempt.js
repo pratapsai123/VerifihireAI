@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import '../styles/Coding.css';
 import '../styles/CodingAttempt.css';
 import { API_BASE_URL } from '../apiConfig';
+import { Eye, EyeOff } from 'lucide-react';
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -434,9 +435,7 @@ export default function CodingAttempt() {
   };
 
   const resultPaneStyle = showResultPanel && result
-    ? (resultHeightPct > 30
-      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
-      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
+    ? { flex: '0 0 auto', display: 'block' }
     : { display: 'none' };
 
   return (
@@ -589,32 +588,30 @@ export default function CodingAttempt() {
                         {lastAction === 'submit' && result.submission_id ? `• Submission #${result.submission_id}` : ''}
                         {lastAction === 'run' ? ' • (visible tests only)' : ''}
                       </div>
-                      <div className="coding-table">
+                      <div className={`coding-table is-results ${!(result.results || []).some(r => (r.stderr || '').trim()) ? 'hide-stderr' : ''}`}>
                         <div className="coding-table-head">
                           <div>Test</div>
                           <div>Status</div>
                           <div>stdout</div>
-                          <div>stderr</div>
+                          {(result.results || []).some(r => (r.stderr || '').trim()) && <div>stderr</div>}
                         </div>
                         {result.results.map((r, idx) => {
                           const isHidden = r.is_hidden ?? r.hidden ?? false;
                           return (
                             <div key={r.testcase_id ?? idx} className="coding-table-row">
-                              <div className="coding-test-label">
-                                <span className={isHidden ? 'coding-pill-hidden' : 'coding-pill-visible'}>
-                                  {isHidden ? 'Hidden' : 'Visible'}
-                                </span>
-                                <span className="coding-test-name">Test {idx + 1}</span>
-                              </div>
+                            <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
+                              {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
+                              <span className="coding-test-name">{idx + 1}</span>
+                            </div>
                               <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
                               {r.status === 'ERROR' && r.message ? (
-                                <div className="coding-mono coding-error-message" style={{ gridColumn: 'span 2', color: '#ff6b6b' }}>
+                                <div className="coding-mono coding-error-message" style={{ gridColumn: (result.results || []).some(res => (res.stderr || '').trim()) ? 'span 2' : 'span 1', color: '#ff6b6b' }}>
                                   {r.message}
                                 </div>
                               ) : (
                                 <>
                                   <div className="coding-mono">{(r.stdout || '').trim() || '—'}</div>
-                                  <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
+                                  {(result.results || []).some(res => (res.stderr || '').trim()) && <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>}
                                 </>
                               )}
                             </div>
