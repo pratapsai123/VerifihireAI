@@ -341,6 +341,132 @@ def reset_password_view(request):
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
+def verify_current_password_view(request):
+    """
+    Verify current password for an authenticated user.
+    Expected request body:
+    {
+        "email": "user@company.com",
+        "password": "currentpassword123"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        password = request.data.get('password', '')
+
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not password:
+            return Response({'error': 'Password is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Find user
+        user_profile = UserProfile.objects.filter(email=email).first()
+        auth_user = None
+
+        if user_profile and user_profile.user:
+            auth_user = user_profile.user
+        else:
+            auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+
+        if not auth_user:
+            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Verify password
+        if not auth_user.check_password(password):
+            # Check legacy profile password if it exists
+            if user_profile and user_profile.password == password:
+                pass # Proceed
+            else:
+                return Response({'error': 'Incorrect current password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'message': 'Password verified successfully!'}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def change_password_view(request):
+    """
+    Change password for an authenticated user.
+    Expected request body:
+    {
+        "email": "user@company.com",
+        "current_password": "oldpassword123",
+        "new_password": "password123",
+        "confirm_password": "password123"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        current_password = request.data.get('current_password', '')
+        new_password = request.data.get('new_password', '')
+        confirm_password = request.data.get('confirm_password', '')
+
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not current_password:
+            return Response({'error': 'Current password is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not new_password:
+            return Response({'error': 'New password is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not confirm_password:
+            return Response({'error': 'Confirm password is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if new_password != confirm_password:
+            return Response({'error': 'Passwords do not match.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if len(new_password) < 6:
+            return Response({'error': 'Password must be at least 6 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Find user
+        user_profile = UserProfile.objects.filter(email=email).first()
+        auth_user = None
+
+        if user_profile and user_profile.user:
+            auth_user = user_profile.user
+        else:
+            auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+
+        if not auth_user:
+            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Verify current password
+        if not auth_user.check_password(current_password):
+            # Check legacy profile password if it exists
+            if user_profile and user_profile.password == current_password:
+                pass # Proceed
+            else:
+                return Response({'error': 'Incorrect current password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Security check: Prevent password reuse
+        if auth_user.check_password(new_password):
+            return Response({'error': 'New password cannot be the same as the current password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update password
+        auth_user.set_password(new_password)
+        auth_user.save()
+
+        # Sync with UserProfile if needed
+        if user_profile:
+            user_profile.old_password = current_password
+            user_profile.password = None
+            user_profile.updated_at = timezone.now()
+            user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
+
+        return Response({'message': 'Password updated successfully!'}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in change_password_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def register_view(request):
     """
     Register a new user with ALL signup form fields.
