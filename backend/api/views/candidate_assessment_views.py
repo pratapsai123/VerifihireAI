@@ -1080,14 +1080,25 @@ def _update_submission_scoring_logic(submission):
     submission.percentage = final_percentage_rounded
     submission.final_percentage = final_percentage
     
-    # --- RIGOROUS HIRING STANDARDS ---
-    # Enforce minimum thresholds for individual sections
-    MIN_MCQ_THRESHOLD = 60.0
-    MIN_CODING_THRESHOLD = 50.0
+    # --- CONFIGURABLE HIRING STANDARDS ---
+    # Read thresholds from assessment settings (not hardcoded)
+
+    # Overall pass minimum — set by recruiter (e.g. 5%, 10%, 60%)
+    min_pass = float(getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0)
+
+    # Objective section minimum:
+    #   ONLY use min_objective_pass_percentage if the cutoff flag is ON (has_objective_cutoff=True).
+    #   Otherwise, fall back to the overall min_pass_percentage.
+    has_obj_cutoff = getattr(inv.assessment, 'has_objective_cutoff', False)
+    _obj_cutoff = float(getattr(inv.assessment, 'min_objective_pass_percentage', 0.0) or 0.0)
+    MIN_MCQ_THRESHOLD = _obj_cutoff if (has_obj_cutoff and _obj_cutoff > 0) else min_pass
+
+    # Coding section minimum: use the overall min_pass_percentage
+    MIN_CODING_THRESHOLD = min_pass
+
+    # Integrity threshold: fixed at 70% (security requirement)
     MIN_INTEGRITY_THRESHOLD = 70.0
 
-    min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
-    
     # 7. Get Integrity Score
     integrity_score = 100.0
     try:
@@ -1097,7 +1108,6 @@ def _update_submission_scoring_logic(submission):
         pass
 
     # 8. Check Section Pass/Fail
-    # Candidate must pass BOTH the overall threshold AND section-specific minimums
     passed_overall = final_percentage_rounded >= min_pass
     passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
     passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
@@ -1105,11 +1115,9 @@ def _update_submission_scoring_logic(submission):
 
     has_mcq = (submission.objective_total > 0)
     has_coding = (submission.coding_total > 0)
-    
-    # Qualification is only true if ALL section thresholds are met AND overall percentage passes.
-    # If Integrity is low, status is ALWAYS 'hold'
-    # If Integrity is high but performance is low, status is 'rejected' (or 'hold' if requested)
-    
+
+    # Determine final result:
+    # All gates must pass — integrity first, then section minimums, then overall.
     if not passed_integrity:
         submission.is_qualified = False
         submission.result = 'hold'
@@ -2228,12 +2236,16 @@ def submit_objective_section(request, token):
         from api.models import AssessmentCodingQuestion
         has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
 
-        # --- NEW GATING LOGIC ---
-        # Fixed thresholds as per user requirement: MCQ 60%, Integrity 70%
-        MIN_MCQ_GATE = 60.0
+        # --- CONFIGURABLE GATING LOGIC ---
+        # Read MCQ gate from assessment settings (not hardcoded)
+        has_gate_cutoff = getattr(inv.assessment, 'has_objective_cutoff', False)
+        _gate_obj_cutoff = float(getattr(inv.assessment, 'min_objective_pass_percentage', 0.0) or 0.0)
+        _gate_overall = float(getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0)
+        # Use objective-specific cutoff ONLY if enabled, otherwise fall back to overall pass %
+        MIN_MCQ_GATE = _gate_obj_cutoff if (has_gate_cutoff and _gate_obj_cutoff > 0) else _gate_overall
         MIN_INTEGRITY_GATE = 70.0
         should_schedule_result_email = False
-        
+
         # Fetch Integrity Score for gating
         integrity_score = 100.0
         try:
@@ -2241,7 +2253,7 @@ def submit_objective_section(request, token):
                  integrity_score = float(inv.integrity.integrity_score)
         except Exception:
             pass
-        
+
         passed_mcq = percentage >= MIN_MCQ_GATE
         passed_integrity = integrity_score >= MIN_INTEGRITY_GATE
         

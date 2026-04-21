@@ -16,6 +16,11 @@ function isValidPAN(pan) {
   return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test((pan || '').trim().toUpperCase());
 }
 
+function isValidPhone(phone) {
+  if (!phone) return true;
+  return /^[6-9][0-9]{9}$/.test((phone || '').trim());
+}
+
 function normalizeHeader(h) {
   return (h || '').toString().trim().toLowerCase().replace(/\s+/g, '_');
 }
@@ -114,6 +119,7 @@ export default function InviteCandidates() {
     
     if (validityMode === 'exact_window' && (!scheduleDate || !startTime)) return false;
     if ((validityMode === 'date_anytime' || validityMode === 'one_week') && !scheduleDate) return false;
+    if (phone && !isValidPhone(phone)) return false;
     
     return true;
   }, [name, email, pan, validityMode, scheduleDate, startTime]);
@@ -187,8 +193,7 @@ export default function InviteCandidates() {
         const parsed = JSON.parse(raw);
         // Candidate list
         if (parsed && Array.isArray(parsed.candidates)) setCandidates(parsed.candidates);
-        // Add-form fields
-        if (parsed && typeof parsed.name === 'string') setName(parsed.name);
+        // Add-form fields (Name is excluded from restoration to ensure it remains empty by default)
         if (parsed && typeof parsed.email === 'string') setEmail(parsed.email);
         if (parsed && typeof parsed.pan === 'string') setPan(parsed.pan);
         if (parsed && typeof parsed.phone === 'string') setPhone(parsed.phone);
@@ -207,16 +212,6 @@ export default function InviteCandidates() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assessmentId]);
 
-  useEffect(() => {
-    if (!hydrated) return;
-    if (!name) {
-      const recentName = localStorage.getItem('recentCandidateName');
-      if (recentName) {
-        setName(recentName);
-        localStorage.removeItem('recentCandidateName');
-      }
-    }
-  }, [hydrated, name]);
 
   useEffect(() => {
     if (!assessmentId || !hydrated) return;
@@ -251,7 +246,7 @@ export default function InviteCandidates() {
     const e = email.trim().toLowerCase();
     const p = pan.trim().toUpperCase();
     const ph = phone.trim();
-    if (!n || !isValidEmail(e) || !isValidPAN(p)) return;
+    if (!n || !isValidEmail(e) || !isValidPAN(p) || (ph && !isValidPhone(ph))) return;
     const dupe = candidates.some((c) => c.email.toLowerCase() === e || (p && c.pan_number && c.pan_number === p));
     if (dupe) { alert('This candidate email or PAN already exists in the list.'); return; }
     setCandidates((prev) => [...prev, { name: n, email: e, pan_number: p || null, phone: ph || null }]);
@@ -306,7 +301,8 @@ export default function InviteCandidates() {
       const n = (r.name || '').trim();
       const e = (r.email || '').trim();
       const p = (r.pan_number || '').trim().toUpperCase();
-      if (!n || !isValidEmail(e) || !isValidPAN(p)) { invalid += 1; return; }
+      const ph = (r.phone || '').trim();
+      if (!n || !isValidEmail(e) || !isValidPAN(p) || (ph && !isValidPhone(ph))) { invalid += 1; return; }
       if (existingEmails.has(e.toLowerCase()) || (p && existingPANs.has(p))) { dupes += 1; return; }
       existingEmails.add(e.toLowerCase());
       if (p) existingPANs.add(p);
@@ -856,18 +852,22 @@ export default function InviteCandidates() {
                 {pan && !isValidPAN(pan) && <span className="ic-input-cross">✕</span>}
               </div>
             </div>
-            <div className="ic-field">
+            <div className="ic-field" style={{ position: 'relative' }}>
               <label className="ic-label">Phone <span className="ic-label-opt">(optional)</span></label>
               <div className="ic-input-wrap">
                 <input
-                  className={`ic-input${phone.length === 10 ? ' ic-input-valid' : ''}`}
+                  className={`ic-input${phone ? (isValidPhone(phone) ? ' ic-input-valid' : ' ic-input-invalid') : ''}`}
                   value={phone}
                   onChange={handlePhoneChange}
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="10-digit number"
                 />
-                {phone.length === 10 && <span className="ic-input-tick">✓</span>}
+                {phone && isValidPhone(phone) && <span className="ic-input-tick">✓</span>}
+                {phone && !isValidPhone(phone) && <span className="ic-input-cross">✕</span>}
               </div>
+              {phone && !/^[6-9]/.test(phone) && (
+                <div style={{ position: 'absolute', top: '100%', left: 0, color: '#ef4444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>Enter valid phone number (must start with 6, 7, 8 or 9)</div>
+              )}
             </div>
 
             <div className="ic-add-actions">
