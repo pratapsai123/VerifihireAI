@@ -632,6 +632,12 @@ class Assessment(models.Model):
     display_name = models.CharField(max_length=255, blank=True, null=True)
     assessment_type = models.CharField(max_length=20, choices=ASSESSMENT_TYPE_CHOICES, default='tech')
     on_proctoring = models.BooleanField(default=False)
+    assessment_mode = models.CharField(
+        max_length=20,
+        choices=[('single', 'Single'), ('multiple', 'Multiple')],
+        default='multiple',
+        help_text="Single = one candidate only, Multiple = many candidates",
+    )
 
     # Simple counters (can be updated later from invitation/submission flows)
     total_candidates = models.IntegerField(default=0)

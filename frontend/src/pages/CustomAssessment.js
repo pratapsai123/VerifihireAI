@@ -1023,6 +1023,22 @@ function CustomAssessment() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      const allowedExtensions = ['.pdf', '.doc', '.docx'];
+      const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      
+      if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExt)) {
+        setErrors({ ...errors, resume: 'Invalid file format. Only PDF, DOC, and DOCX are allowed.' });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+      
+      if (file.size > 10 * 1024 * 1024) {
+        setErrors({ ...errors, resume: 'File size exceeds 10MB limit.' });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
       // CLEAR stale storage data when a NEW resume is uploaded to ensure a fresh assessment context.
       // This prevents the "same review questions" issue reported by users.
       try {
@@ -1105,12 +1121,31 @@ function CustomAssessment() {
   };
 
   const handleWeightChange = (name, value) => {
-    const num = Math.max(0, Math.min(100, parseInt(value) || 0));
+    if (value === '') {
+      setWeights((prev) => ({ ...prev, [name]: '' }));
+      return;
+    }
+    const num = Math.max(0, Math.min(100, parseInt(value, 10) || 0));
     setWeights((prev) => ({ ...prev, [name]: num }));
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'numberOfQuestions') {
+      if (value === '') {
+        setFormData({ ...formData, [name]: '' });
+      } else {
+        const num = parseInt(value, 10);
+        if (isNaN(num) || num < 1 || num > 150) {
+          // Reject invalid or huge numbers (max 150 to prevent overflow/time calculation issues)
+          return;
+        }
+        setFormData({ ...formData, [name]: String(num) });
+      }
+      setErrors({ ...errors, [name]: '' });
+      return;
+    }
 
     // If role is changed, clear subRole and customRole
     if (name === 'role') {
@@ -2022,7 +2057,7 @@ function CustomAssessment() {
                 onChange={handleInputChange}
                 className={`form-select ${errors.experienceLevel ? 'error' : ''}`}
               >
-                <option value="">Select experience level</option>
+                <option value="" disabled hidden>Select experience level</option>
                 <option value="entry">Entry Level (0-2 years)</option>
                 <option value="mid">Mid Level (2-5 years)</option>
                 <option value="senior">Senior Level (5-10 years)</option>
@@ -2097,6 +2132,7 @@ function CustomAssessment() {
                 placeholder="Enter number of questions"
                 className={`form-input ${errors.numberOfQuestions ? 'error' : ''}`}
               />
+              <p className="form-hint" style={{ marginTop: '0.5rem' }}>Allow questions upto 0 to 150</p>
               {errors.numberOfQuestions && <span className="error-message">{errors.numberOfQuestions}</span>}
 
               {/* Question Distribution Breakdown */}

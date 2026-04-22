@@ -212,7 +212,9 @@ export default function Assessment() {
                             type="button"
                             className="btn-invite"
                             onClick={() => navigate(`/invite-candidates/${a.id}`)}
-                            title="Invite candidates"
+                            title={a.assessment_mode === 'single' && a.invited > 0 ? "Invitation already sent (Single Mode)" : "Invite candidates"}
+                            disabled={a.assessment_mode === 'single' && a.invited > 0}
+                            style={a.assessment_mode === 'single' && a.invited > 0 ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
                           >
                             Invite
                           </button>

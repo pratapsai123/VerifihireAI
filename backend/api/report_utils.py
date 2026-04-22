@@ -10,6 +10,8 @@ import base64
 import os
 import traceback
 import requests
+import difflib
+import re
 from datetime import datetime
 
 from PIL import Image as PILImage
@@ -35,7 +37,8 @@ from django.utils import timezone
 from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
-    CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog
+    CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog,
+    CodingSubmission
 )
 from .ocr_utils import pdf_page_to_png_bytes
 
@@ -83,6 +86,10 @@ def _build_styles():
     styles.add(ParagraphStyle(
         'NotQualifiedBadge', parent=styles['Normal'],
         fontSize=12, fontName='Helvetica-Bold', textColor=colors.HexColor('#dc2626'),
+    ))
+    styles.add(ParagraphStyle(
+        'WarningBadge', parent=styles['Normal'],
+        fontSize=12, fontName='Helvetica-Bold', textColor=colors.HexColor('#eab308'),
     ))
     return styles
 
@@ -310,7 +317,6 @@ def _run_code_against_testcases(code, language, testcases, schema_sql=None, data
         # traceback.print_exc()
 
     return []
-
 
 class PageCounter:
     def __init__(self):
@@ -875,10 +881,15 @@ def generate_candidate_report(submission_id):
     # ════════════════════════════════════════════════════════════════════════
     story.append(Paragraph('Results Summary', styles['SectionHeader']))
 
-    status_style = styles['QualifiedBadge'] if submission.is_qualified else styles['NotQualifiedBadge']
-    status_text = 'Qualified' if submission.is_qualified else 'Not Qualified'
-
     pct = submission.final_percentage if submission.final_percentage is not None else submission.percentage
+    
+    # User Request: If score is 100%, show Qualified status regardless of malpractice hold
+    if pct >= 100.0:
+        status_style = styles['QualifiedBadge']
+        status_text = 'Qualified'
+    else:
+        status_style = styles['QualifiedBadge'] if submission.is_qualified else styles['NotQualifiedBadge']
+        status_text = 'Qualified' if submission.is_qualified else 'Not Qualified'
     
     # Check if coding was actually attempted for score display purposes
     actual_coding_attempts = [
@@ -898,30 +909,40 @@ def generate_candidate_report(submission_id):
     else:
         score_display = f"{submission.score} / {submission.total}"
 
+    # ── Fetch Integrity Score ──
+    integrity_score = 100.0
+    violations = 0
+    integrity = None
+    try:
+        integrity = CandidateIntegrity.objects.get(invitation=inv)
+        integrity_score = integrity.integrity_score
+        violations = (integrity.tab_switches or 0) + (integrity.phone_detections or 0) + (integrity.multiface_detections or 0) + (integrity.no_face_detections or 0)
+    except CandidateIntegrity.DoesNotExist:
+        pass
+
+    # ── Determine Dynamic Result Status ──
+    # User Requirement: integrity < 70 => Hold
+    final_result_text = submission.result or '-'
+    result_style = styles['InfoValue']
+    
+    if integrity_score < 70:
+        final_result_text = 'HOLD'
+        result_style = styles['NotQualifiedBadge'] # Reuse red bold style
+
     results_data = [
         _info_row('Score', score_display, styles),
         _info_row('Percentage', f"{pct:.1f}%", styles),
         [Paragraph('Status', styles['InfoLabel']), Paragraph(status_text, status_style)],
-        _info_row('Result', submission.result or '-', styles),
+        [Paragraph('Result', styles['InfoLabel']), Paragraph(final_result_text, result_style)],
     ]
 
-    # Add Integrity Score if available
-    try:
-        integrity = CandidateIntegrity.objects.get(invitation=inv)
-        
-        # Color coding the integrity score based on value (e.g. < 70 is warning)
-        int_score = integrity.integrity_score
-        int_color = colors.HexColor('#16a34a') if int_score >= 80 else (colors.HexColor('#eab308') if int_score >= 50 else colors.HexColor('#dc2626'))
-        
-        # Formatting total violations
-        violations = integrity.tab_switches + integrity.phone_detections + integrity.multiface_detections + integrity.no_face_detections
-        
+    # Add Integrity Score row
+    if integrity:
+        int_color = colors.HexColor('#16a34a') if integrity_score >= 80 else (colors.HexColor('#eab308') if integrity_score >= 50 else colors.HexColor('#dc2626'))
         results_data.append([
             Paragraph('Integrity Score', styles['InfoLabel']),
-            Paragraph(f'<font color="{int_color}">{int_score:.1f}%</font> ({violations} Violations)', styles['InfoValue'])
+            Paragraph(f'<font color="{int_color}">{integrity_score:.1f}%</font> ({violations} Violations)', styles['InfoValue'])
         ])
-    except CandidateIntegrity.DoesNotExist:
-        pass
 
     story.append(_kv_table(results_data, styles))
     story.append(Spacer(1, 12))
@@ -943,8 +964,8 @@ def generate_candidate_report(submission_id):
     if actual_attempts:
         try:
             # Main Section Heading
-            story.append(Paragraph('AI Coding Behavior & Malpractice Analysis', styles['SectionHeader']))
-            story.append(Paragraph('Exhaustive behavioral audit using complexity-adjusted timing and fingerprint analysis to detect automation or AI-assisted drafting.', styles['Normal']))
+            story.append(Paragraph('Coding Behavior & Malpractice Analysis', styles['SectionHeader']))
+            story.append(Paragraph('Exhaustive behavioral audit using complexity-adjusted timing and fingerprint analysis to detect automation or assisted drafting.', styles['Normal']))
             story.append(Spacer(1, 15))
 
             logs_qs = KeystrokeLog.objects.filter(invitation=inv).order_by('created_at')
@@ -1140,8 +1161,6 @@ def generate_candidate_report(submission_id):
                 # 5. Total Keystrokes
                 unified_rows.append(["Total Keystrokes", f"{total_keystrokes}", "Total volume", "Low", f"A total of {total_keystrokes} keystrokes were recorded, verifying the amount of manual effort applied."])
 
-
-
                 precision_lvl = "Low"
                 error_rate = (backspace_count / total_keystrokes * 100) if total_keystrokes > 0 else 0
                 
@@ -1251,7 +1270,7 @@ def generate_candidate_report(submission_id):
                 # 7. Long Pauses (>20s)
                 if long_pauses >= 8:
                     pause_lvl = "High"
-                    pause_desc = f"Candidate had {long_pauses} long idle gaps. This frequent disruption suggests possible context switching (AI/help)."
+                    pause_desc = f"Candidate had {long_pauses} long idle gaps. This frequent disruption suggests possible context switching (research/help)."
                 elif long_pauses >= 4:
                     pause_lvl = "Medium"
                     pause_desc = f"{long_pauses} significant pauses found; slightly unusual for a focused session, suggesting external consultation."

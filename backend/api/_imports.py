@@ -58,6 +58,7 @@ from .ocr_utils import extract_text_from_image, extract_text_from_pdf, normalize
 from .report_utils import generate_candidate_report
 
 import re
+import difflib
 import os
 import random
 import json

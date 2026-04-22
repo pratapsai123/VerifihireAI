@@ -16,6 +16,11 @@ function isValidPAN(pan) {
   return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test((pan || '').trim().toUpperCase());
 }
 
+function isValidPhone(phone) {
+  if (!phone) return true;
+  return /^[6-9][0-9]{9}$/.test((phone || '').trim());
+}
+
 
 
 function getInitials(name) {
@@ -59,9 +64,10 @@ export default function InterviewInvite() {
     if (!interviewerName.trim()) return false;
     if (!isValidEmail(interviewerEmail.trim())) return false;
     if (!isValidPAN(pan.trim())) return false;
+    if (phone && !isValidPhone(phone.trim())) return false;
     if (!scheduleDate || !startTime) return false;
     return true;
-  }, [name, email, interviewerName, interviewerEmail, pan, scheduleDate, startTime]);
+  }, [name, email, interviewerName, interviewerEmail, pan, phone, scheduleDate, startTime]);
 
   // Track whether the user has manually edited endTime
   const endTimeManualRef = useRef(false);
@@ -169,7 +175,7 @@ export default function InterviewInvite() {
     const n = name.trim(), e = email.trim().toLowerCase();
     const intN = interviewerName.trim(), intE = interviewerEmail.trim().toLowerCase();
     const p = pan.trim().toUpperCase(), ph = phone.trim();
-    if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p)) return;
+    if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p) || (ph && !isValidPhone(ph))) return;
     if (userDomain && !intE.endsWith(`@${userDomain}`)) {
       alert(`Interviewer email must belong to your company domain (@${userDomain}).`); return;
     }
@@ -425,6 +431,7 @@ export default function InterviewInvite() {
                   value={name}
                   onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  autoComplete="off"
                   placeholder="Candidate full name"
                   maxLength={100}
                 />
@@ -460,18 +467,22 @@ export default function InterviewInvite() {
                 {pan && !isValidPAN(pan) && <span className="ii-cross">✕</span>}
               </div>
             </div>
-            <div className="ii-field">
+            <div className="ii-field" style={{ position: 'relative' }}>
               <label className="ii-label">Phone <span className="ii-label-opt">(optional)</span></label>
               <div className="ii-input-wrap">
                 <input
-                  className={`ii-input${phone.length === 10 ? ' ii-valid' : ''}`}
+                  className={`ii-input${phone ? (isValidPhone(phone) ? ' ii-valid' : ' ii-invalid') : ''}`}
                   value={phone}
                   onChange={handlePhoneChange}
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
                   placeholder="10-digit number"
                 />
-                {phone.length === 10 && <span className="ii-tick">✓</span>}
+                {phone && isValidPhone(phone) && <span className="ii-tick">✓</span>}
+                {phone && !isValidPhone(phone) && <span className="ii-cross">✕</span>}
               </div>
+              {phone && !/^[6-9]/.test(phone) && (
+                <div style={{ position: 'absolute', top: '100%', left: 0, color: '#ef4444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>Enter valid phone number (must start with 6, 7, 8 or 9)</div>
+              )}
             </div>
           </div>
 
@@ -485,6 +496,7 @@ export default function InterviewInvite() {
                   value={interviewerName}
                   onChange={(e) => setInterviewerName(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter' && canAdd) addCandidate(); }}
+                  autoComplete="off"
                   placeholder="Interviewer full name"
                   maxLength={100}
                 />

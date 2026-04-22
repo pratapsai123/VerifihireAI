@@ -1339,36 +1339,42 @@ function ReviewPage() {
                                   <span className="question-number">Q{globalIndex + 1}</span>
                                   <div style={{ flex: 1 }}>
                                     <span className="question-title">{question.title || question.question}</span>
-                                    {/* Difficulty Editor for Coding Questions */}
-                                    {isCoding && (
-                                      <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>Difficulty:</span>
-                                        <select
-                                          value={question.difficulty || 'medium'}
-                                          onChange={(e) => {
-                                            const newDifficulty = e.target.value;
-                                            setQuestions(prev => {
-                                              const codingList = prev['Coding'] || [];
-                                              const updatedList = codingList.map(q =>
-                                                q.id === question.id ? { ...q, difficulty: newDifficulty } : q
-                                              );
-                                              return { ...prev, 'Coding': updatedList };
-                                            });
-                                          }}
-                                          style={{
-                                            padding: '2px 6px',
-                                            fontSize: '0.85rem',
-                                            borderRadius: '4px',
-                                            borderColor: '#d1d5db',
-                                            cursor: 'pointer'
-                                          }}
-                                        >
-                                          <option value="easy">Easy</option>
-                                          <option value="medium">Medium</option>
-                                          <option value="hard">Hard</option>
-                                        </select>
-                                      </div>
-                                    )}
+                                    {/* Difficulty Editor for Questions */}
+                                    <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                      <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>Experience Level:</span>
+                                      <select
+                                        value={question.experience_level || question.difficulty || 'medium'}
+                                        onChange={(e) => {
+                                          const newLevel = e.target.value;
+                                          setQuestions(prev => {
+                                            const updatedQuestions = { ...prev };
+                                            const topic = question._topic || MANUAL_TOPIC_LABEL;
+                                            const list = updatedQuestions[topic] || [];
+                                            const updatedList = list.map(q =>
+                                              q.id === question.id ? { ...q, experience_level: newLevel, difficulty: newLevel } : q
+                                            );
+                                            updatedQuestions[topic] = updatedList;
+                                            return updatedQuestions;
+                                          });
+                                        }}
+                                        style={{
+                                          padding: '2px 6px',
+                                          fontSize: '0.85rem',
+                                          borderRadius: '4px',
+                                          borderColor: '#d1d5db',
+                                          cursor: 'pointer'
+                                        }}
+                                      >
+                                        <option value="entry">Entry</option>
+                                        <option value="mid">Mid</option>
+                                        <option value="senior">Senior</option>
+                                        <option value="expert">Expert</option>
+                                        {/* For backward compatibility with 'easy/medium/hard' tags if they exist */}
+                                        <option value="easy" hidden>Easy</option>
+                                        <option value="medium" hidden>Medium</option>
+                                        <option value="hard" hidden>Hard</option>
+                                      </select>
+                                    </div>
                                   </div>
                                 </div>
                                 <button

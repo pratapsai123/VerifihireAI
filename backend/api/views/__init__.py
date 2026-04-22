@@ -6,9 +6,12 @@ from .auth_views import (
     send_otp_view,
     verify_otp_view,
     reset_password_view,
+    change_password_view,
+    verify_current_password_view,
     register_view,
     login_view,
     verify_login_otp_view,
+    heartbeat_view,
 )
 
 from .user_views import (

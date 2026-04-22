@@ -32,7 +32,7 @@ function MultipleChoiceQuestion() {
   const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
   const [topicSkill, setTopicSkill] = useState('');
   const [answers, setAnswers] = useState(initialAnswers);
-  const [experienceLevel, setExperienceLevel] = useState(assessmentContext?.experienceLevel || '');
+  const [experienceLevel, setExperienceLevel] = useState('');
   const [timeToAnswer, setTimeToAnswer] = useState('');
   const [timeError, setTimeError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -221,7 +221,7 @@ function MultipleChoiceQuestion() {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
       // go back to Review page so the saved question appears there
-      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, assessmentName, experienceLevel, onlyManual: false } });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error saving MCQ:', error);
@@ -391,7 +391,7 @@ function MultipleChoiceQuestion() {
                   value={experienceLevel}
                   onChange={(e) => setExperienceLevel(e.target.value)}
                 >
-                  <option value="">Select experience level</option>
+                  <option value="" disabled hidden>Select experience level</option>
                   <option value="entry">Entry Level (0-2 years)</option>
                   <option value="mid">Mid Level (2-5 years)</option>
                   <option value="senior">Senior Level (5-10 years)</option>

@@ -12,7 +12,7 @@ const validateField = (field, value) => {
     case "email":
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     case "phone":
-      return /^[0-9]{10}$/.test(value);
+      return /^[6-9][0-9]{9}$/.test(value);
     case "pan":
       return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
     default:
@@ -48,6 +48,10 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
             val = val.replace(/[^a-zA-Z]/g, '');
           } else if (field === "phone") {
             val = val.replace(/[^0-9]/g, "").slice(0, 10);
+            // Block first digit if not 6-9
+            if (val.length > 0 && !/^[6-9]/.test(val)) {
+              val = '';
+            }
           } else if (field === "pan") {
             val = val.toUpperCase();
 
@@ -739,14 +743,21 @@ const CandidateDetails = ({ token, onComplete }) => {
                   </div>
                 )}
               </div>
-              <FloatingInput
-                label="Phone Number"
-                type="tel"
-                field="phone"
-                value={data.phone}
-                errorEmpty={submitted && !data.phone}
-                onChange={(v) => setData({ ...data, phone: v })}
-              />
+              <div style={{ position: 'relative' }}>
+                <FloatingInput
+                  label="Phone Number"
+                  type="tel"
+                  field="phone"
+                  value={data.phone}
+                  errorEmpty={submitted && !data.phone}
+                  onChange={(v) => setData({ ...data, phone: v })}
+                />
+                {data.phone && !/^[6-9]/.test(data.phone) && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, color: '#ef4444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>
+                    Enter valid phone number (must start with 6, 7, 8 or 9)
+                  </div>
+                )}
+              </div>
             </div>
           </section>
 

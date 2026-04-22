@@ -295,10 +295,14 @@ function languageSpec(language, sourceCode, dbEngine) {
     case "typescript":
     case "ts":
       return {
-        image: "local-typescript:stable",
-        workdir: "/tmp",
+        image: "local-typescript:v2",
+        workdir: "/app",
         files: [{ name: "main.ts", contentName: "source_code" }],
-        cmd: ["sh", "-c", "tsc /tmp/main.ts && node /tmp/main.js"],
+        cmd: [
+          "sh",
+          "-c",
+          "tsc main.ts --target ESNext --module CommonJS --lib ESNext --skipLibCheck --esModuleInterop --types node --typeRoots /app/node_modules/@types && node main.js"
+        ],
       };
     case "sql":
       const engine = (dbEngine || "sqlite").toLowerCase();
@@ -457,7 +461,7 @@ RUN apt-get update && apt-get install -y curl unzip \\
     }
   }
 
-  const imageName = "local-typescript:stable";
+  const imageName = "local-typescript:v2";
   if (image === "local-typescript" || image === imageName) {
     try {
       await docker.getImage(imageName).inspect();
@@ -465,11 +469,11 @@ RUN apt-get update && apt-get install -y curl unzip \\
     } catch (_) {
       console.log(`Building ${imageName} image...`);
       const pack = tar.pack();
-      // Install in /tmp so it merges with user code. tsc will find node_modules in current dir.
+      // Install in /app so it merges with user code.
       pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/docker/library/node:20-alpine
-WORKDIR /tmp
+WORKDIR /app
 RUN npm init -y && npm install typescript @types/node
-ENV PATH /tmp/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 `);
       pack.finalize();
 
@@ -533,7 +537,7 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
     if (hasStdin && Array.isArray(spec.cmd) && spec.cmd.length >= 3 && spec.cmd[0] === 'sh') {
       // Wrap the original command to pipe stdin from file
       const origScript = spec.cmd[spec.cmd.length - 1];
-      finalCmd = ['sh', spec.cmd[1], `${origScript} < /tmp/stdin.txt`];
+      finalCmd = ['sh', spec.cmd[1], `${origScript} < ${spec.workdir}/stdin.txt`];
     }
 
     container = await docker.createContainer({
@@ -563,10 +567,12 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
     const filesToWrite = spec.files.map((f) => {
       if (f.contentName === "source_code") return { name: f.name, content: code };
       if (f.contentName === "schema_sql") return { name: f.name, content: normalizeNewlines(schema_sql || "") };
-      if (f.contentName === "csproj") {
-        const defaultCsproj = `<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup></Project>`;
-        return { name: f.name, content: spec.extra?.csproj || defaultCsproj };
+      
+      // Handle generic "extra" files from the language spec
+      if (spec.extra && spec.extra[f.contentName]) {
+        return { name: f.name, content: spec.extra[f.contentName] };
       }
+
       return { name: f.name, content: "" };
     });
 
