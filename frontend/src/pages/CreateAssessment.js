@@ -197,12 +197,28 @@ const CreateAssessment = () => {
         }
 
         // Mandatory Scheduling Validation
+        const now = new Date();
         if (!formData.start_date || !formData.start_time) {
             alert('Please provide a complete starting Date and Time for the assessment.');
             return;
         }
+        const startDateTime = new Date(`${formData.start_date}T${formData.start_time}`);
+        if (startDateTime < now) {
+            alert('The assessment start date and time cannot be in the past.');
+            return;
+        }
+
         if (!formData.end_date || !formData.end_time) {
             alert('Please provide a complete ending Date and Time for the assessment.');
+            return;
+        }
+        const endDateTime = new Date(`${formData.end_date}T${formData.end_time}`);
+        if (endDateTime < now) {
+            alert('The assessment end date and time cannot be in the past.');
+            return;
+        }
+        if (endDateTime <= startDateTime) {
+            alert('The end date and time must be after the start date and time.');
             return;
         }
 

@@ -647,6 +647,20 @@ const AiInterviewSession = () => {
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
 
+        // 0. STOP PREVIOUS AUDIO IMMEDIATELY to prevent overlaps
+        if (currentAudioRef.current) {
+            try {
+                currentAudioRef.current.pause();
+                currentAudioRef.current.currentTime = 0;
+            } catch (e) {
+                console.error("Error stopping current audio:", e);
+            }
+            currentAudioRef.current = null;
+        }
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
+
         if (!isFullscreenRef.current && isPermissionsGranted) {
             console.log("Speak blocked: Not in full screen.");
             return Promise.resolve();
@@ -1532,38 +1546,15 @@ const AiInterviewSession = () => {
     }, [token]);
 
     const handleStartInterview = async () => {
-        // 1. Request Fullscreen IMMEDIATELY on click (strict browser requirement)
-        try {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                await elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-                await elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                await elem.msRequestFullscreen();
-            }
-        } catch (err) {
-            console.warn("Initial fullscreen request failed/denied:", err);
-        }
-
-        console.log("Requesting Screen Share...");
-        const screenSuccess = await startScreenShare();
-        if (!screenSuccess) {
-            console.warn("Screen share denied or failed.");
-            return;
-        }
-
+        // Step 1: Just request Camera for face registration
         console.log("Requesting Camera...");
         await startCamera();
 
-        console.log("Permissions granted successfully.");
+        console.log("Basic permissions (Camera) granted.");
         setIsPermissionsGranted(true);
-        isFullscreenRef.current = true;
         setAiStatus("Starting Registration...");
         setWizardStep(0); 
 
-        // Important: Link the video stream to regVideoRef manually right after getting permissions
-        // because the ref might be null during startCamera if it hasn't rendered yet
         setTimeout(() => {
             if (regVideoRef.current && streamRef.current) {
                 regVideoRef.current.srcObject = streamRef.current;
@@ -1582,14 +1573,13 @@ const AiInterviewSession = () => {
             canvas.width = 640;
             canvas.height = 480;
             const ctx = canvas.getContext('2d');
-            // Apply brightness and contrast enhancement before registration
             ctx.filter = 'brightness(1.15) contrast(1.2)';
             ctx.drawImage(videoElement, 0, 0, 640, 480);
             ctx.filter = 'none';
             
             const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
             const b64 = dataUrl.split(',')[1];
-            setCapturedImage(dataUrl); // Set the frozen image
+            setCapturedImage(dataUrl); 
             
             const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
             const candidate = res.data;
@@ -1602,19 +1592,67 @@ const AiInterviewSession = () => {
             if (regRes.data && regRes.data.success) {
                 setWizardStep(2); // 'success'
                 setTimeout(() => {
-                    setIsFaceRegistered(true);
-                    finalizeInterviewStart(candidate);
+                    // Transition to Environment Setup instead of starting interview
+                    setWizardStep(4); // Environment Checks
                 }, 1500);
             } else {
                 setWizardStep(3); // 'error'
-                setCapturedImage(null); // Clear image on failure so video resumes
+                setCapturedImage(null); 
                 alert(regRes.data?.message || 'Face registration failed. Please ensure your face is clearly visible.');
             }
         } catch (err) {
             console.error("Registration error:", err);
             setWizardStep(3); // 'error'
-            setCapturedImage(null); // Clear image on failure
+            setCapturedImage(null);
             alert('Failed to connect to DeepFace registration service. ' + (err.response?.data?.detail || err.message));
+        }
+    };
+
+    const handleEnvironmentSetup = async () => {
+        setAiStatus("Setting up environment...");
+        
+        // 1. Request Fullscreen
+        try {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                await elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                await elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                await elem.msRequestFullscreen();
+            }
+            setIsFullscreen(true);
+            isFullscreenRef.current = true;
+        } catch (err) {
+            console.warn("Fullscreen request failed during setup:", err);
+            alert("Fullscreen mode is required for this interview.");
+            return;
+        }
+
+        // 2. Request Screen Share
+        console.log("Requesting Screen Share...");
+        const screenSuccess = await startScreenShare();
+        if (!screenSuccess) {
+            console.warn("Screen share denied during setup.");
+            return;
+        }
+
+        // If both done, wizard step stays 4 but shows checklist completion
+    };
+
+    const handleBeginInterview = async () => {
+        if (!isFullscreen || !isScreenSharing) {
+            alert("Please enable Fullscreen and Screen Sharing to begin.");
+            return;
+        }
+        
+        try {
+            const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
+            setIsFaceRegistered(true); // This hides the overlay
+            finalizeInterviewStart(res.data);
+        } catch (err) {
+            console.error("Final start error:", err);
+            alert("Error retrieving candidate data. Please refresh.");
         }
     };
 
@@ -1984,66 +2022,148 @@ const AiInterviewSession = () => {
                         padding: '2rem'
                     }}>
                         <div style={{ maxWidth: '600px', width: '100%', background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
-                            <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>AI Face Registration</h2>
-                            <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
-                                Please look directly at the camera. We need to register your face for our AI proctoring system.
-                            </p>
-                            
-                            <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
-                                {capturedImage ? (
-                                    <img src={capturedImage} alt="Captured face" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
-                                ) : (
-                                    <video ref={regVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
-                                )}
-                                
-                                {/* Overlay guides */}
-                                <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
-                                
-                                {wizardStep === 1 && (
-                                    <>
-                                        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
-                                            Analyzing face...
-                                        </div>
-                                        {/* CSS AI Scanning Animation Line */}
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            right: 0,
-                                            height: '4px',
-                                            background: '#6366f1',
-                                            boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)',
-                                            animation: 'ai-scan 1.5s ease-in-out infinite'
-                                        }}></div>
-                                        <style>{`
-                                            @keyframes ai-scan {
-                                                0% { top: 0%; }
-                                                50% { top: 100%; }
-                                                100% { top: 0%; }
-                                            }
-                                        `}</style>
-                                    </>
-                                )}
-                                {wizardStep === 2 && (
-                                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(34,197,94,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
-                                        ✓ Registered
-                                    </div>
-                                )}
-                            </div>
+                            {wizardStep === 4 ? (
+                                <>
+                                    <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>Environment Setup</h2>
+                                    <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2.5rem' }}>
+                                        Final check before we begin. Please ensure you are in the secure environment.
+                                    </p>
 
-                            <button
-                                onClick={handleRegisterFace}
-                                disabled={wizardStep === 1 || wizardStep === 2}
-                                style={{
-                                    background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                    color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
-                                    fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2) ? 'not-allowed' : 'pointer',
-                                    opacity: (wizardStep === 1) ? 0.7 : 1, transition: 'all 0.2s',
-                                    boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
-                                }}
-                            >
-                                {wizardStep === 1 ? 'Please Wait...' : wizardStep === 2 ? 'Registration Complete!' : wizardStep === 3 ? 'Retry Capture' : 'Capture & Register'}
-                            </button>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem', textAlign: 'left', background: '#f8fafc', padding: '2rem', borderRadius: '20px' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#22c55e', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>✓</div>
+                                                <span style={{ fontWeight: '600', color: '#2d3748' }}>Identity Verified</span>
+                                            </div>
+                                            <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>READY</span>
+                                        </div>
+
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isFullscreen ? '#22c55e' : '#cbd5e1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>
+                                                    {isFullscreen ? '✓' : '2'}
+                                                </div>
+                                                <span style={{ fontWeight: '600', color: isFullscreen ? '#2d3748' : '#718096' }}>Full Screen Mode</span>
+                                            </div>
+                                            {isFullscreen ? (
+                                                <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>ACTIVE</span>
+                                            ) : (
+                                                <button onClick={handleEnvironmentSetup} style={{ background: '#6366f1', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>Enable</button>
+                                            )}
+                                        </div>
+
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isScreenSharing ? '#22c55e' : '#cbd5e1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>
+                                                    {isScreenSharing ? '✓' : '3'}
+                                                </div>
+                                                <span style={{ fontWeight: '600', color: isScreenSharing ? '#2d3748' : '#718096' }}>Screen Sharing</span>
+                                            </div>
+                                            {isScreenSharing ? (
+                                                <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>ACTIVE</span>
+                                            ) : (
+                                                <button onClick={handleEnvironmentSetup} style={{ background: '#6366f1', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>Start Share</button>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {(isFullscreen && isScreenSharing) ? (
+                                        <button
+                                            onClick={handleBeginInterview}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                                                color: 'white', border: 'none', padding: '1.2rem 4rem', borderRadius: '50px',
+                                                fontSize: '1.2rem', fontWeight: '800', cursor: 'pointer',
+                                                boxShadow: '0 10px 25px rgba(34, 197, 94, 0.3)',
+                                                animation: 'pulse-green 2s infinite'
+                                            }}
+                                        >
+                                            Begin Interview
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={handleEnvironmentSetup}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                                fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer'
+                                            }}
+                                        >
+                                            Continue Setup
+                                        </button>
+                                    )}
+                                    <style>{`
+                                        @keyframes pulse-green {
+                                            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); }
+                                            50% { transform: scale(1.03); box-shadow: 0 15px 35px rgba(34, 197, 100, 0.4); }
+                                            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); }
+                                        }
+                                    `}</style>
+                                </>
+                            ) : (
+                                <>
+                                    <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>AI Face Registration</h2>
+                                    <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
+                                        Please look directly at the camera. We need to register your face for our AI proctoring system.
+                                    </p>
+                                    
+                                    <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
+                                        {capturedImage ? (
+                                            <img src={capturedImage} alt="Captured face" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                                        ) : (
+                                            <video ref={regVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                                        )}
+                                        
+                                        {/* Overlay guides */}
+                                        <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                                        
+                                        {wizardStep === 1 && (
+                                            <>
+                                                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                                                    Analyzing face...
+                                                </div>
+                                                {/* CSS AI Scanning Animation Line */}
+                                                <div style={{
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    height: '4px',
+                                                    background: '#6366f1',
+                                                    boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)',
+                                                    animation: 'ai-scan 1.5s ease-in-out infinite'
+                                                }}></div>
+                                                <style>{`
+                                                    @keyframes ai-scan {
+                                                        0% { top: 0%; }
+                                                        50% { top: 100%; }
+                                                        100% { top: 0%; }
+                                                    }
+                                                `}</style>
+                                            </>
+                                        )}
+                                        {wizardStep === 2 && (
+                                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(34,197,94,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                                                ✓ Registered
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <button
+                                        onClick={handleRegisterFace}
+                                        disabled={wizardStep === 1 || wizardStep === 2}
+                                        style={{
+                                            background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                            color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                            fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2) ? 'not-allowed' : 'pointer',
+                                            opacity: (wizardStep === 1) ? 0.7 : 1, transition: 'all 0.2s',
+                                            boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                                        }}
+                                    >
+                                        {wizardStep === 1 ? 'Please Wait...' : wizardStep === 2 ? 'Registration Complete!' : wizardStep === 3 ? 'Retry Capture' : 'Capture & Register'}
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 )

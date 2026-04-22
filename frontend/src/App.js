@@ -73,18 +73,34 @@ axios.interceptors.request.use(
         /^\/api\/ai\/submission\/\d+\/integrity\//,
         /^\/api\/ai\/submission\/\d+\/progress\//,
         /^\/api\/ai\/execute\//,
-        /^\/api\/ai-candidates\/[0-9a-fA-F-]{36}/, // Matches UUID token paths
+        /^\/api\/ai-candidates\/[0-9a-fA-F-]{36}/,
         /^\/api\/ai-candidates\/tts\//,
         /^\/api\/ai-candidates\/process-answer\//,
         /^\/api\/users\/accept-invite\//,
-        /^\/api\/users\/invite\/[0-9a-fA-F-]{36}/, // Matches UUID token paths for getting invite
-        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/ // Matches UUID token paths
+        /^\/api\/users\/invite\/[0-9a-fA-F-]{36}/,
+        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/
+      ];
+
+      // List of candidate-facing routes that should NEVER send a recruiter token
+      const publicRoutes = [
+        '/take-assessment/',
+        '/take-ai-assessment/',
+        '/ai-interview-session/',
+        '/interview-start/',
+        '/result/',
+        '/live-interview',
+        '/ai-interview',
+        '/book-interview/',
+        '/accept-invite'
       ];
 
       const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
       const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
+      const isOnPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
 
-      if (!isPublicApi) {
+      // 🛡️ SECURITY: Only attach token if NOT a public API and NOT on a public candidate page.
+      // This prevents "401 Unauthorized" errors when a candidate has an old/expired recruiter token in their browser.
+      if (!isPublicApi && !isOnPublicPage) {
         config.headers.Authorization = `Bearer ${token}`;
       }
     }

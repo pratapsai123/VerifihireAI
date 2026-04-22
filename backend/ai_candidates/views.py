@@ -279,12 +279,18 @@ class BulkInviteView(APIView):
             return Response({"error": f"Error processing file: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ResumeMatchView(APIView):
-    from rest_framework.permissions import IsAuthenticated
-    permission_classes = [IsAuthenticated]
+    from rest_framework.permissions import AllowAny
+    permission_classes = [AllowAny]
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')
         candidate_id = request.data.get('candidate_id')
+        
+        # 🔒 SECURITY LOCK: Only allow unauthenticated access for individual candidate interview starts.
+        # Bulk uploads MUST be authenticated to ensure proper ownership.
+        if not candidate_id and not request.user.is_authenticated:
+            return Response({"error": "Authentication required for bulk upload operations."}, status=status.HTTP_401_UNAUTHORIZED)
+
         job_description = request.data.get('job_description')
         threshold = request.data.get('threshold', 70)
         try:
@@ -1088,7 +1094,7 @@ class ProcessAnswerView(APIView):
             "is_exit": false,
             "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer (NEVER generic praise)",
             "refined_next_question": "Your next question — MUST match the category for Turn #{current_turn_number + 1}",
-            "requires_code_input": false,
+            "requires_code_input": false, // Set to TRUE ONLY IF Turn #{current_turn_number + 1} is a SYNTAX Turn (12-13)
             "score": 0,
             "score_reason": "1-sentence justification for the score"
         }}
