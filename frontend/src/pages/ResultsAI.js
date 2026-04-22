@@ -10,10 +10,10 @@ const ResultsAI = () => {
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'assessment');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
     const [currentPage, setCurrentPage] = useState(1);
-    
+
     // Auth context
     const me = (() => {
-        try { return JSON.parse(localStorage.getItem('user') || '{}'); } 
+        try { return JSON.parse(localStorage.getItem('user') || '{}'); }
         catch { return {}; }
     })();
     const myRole = (me?.role || '').toLowerCase();
@@ -69,26 +69,28 @@ const ResultsAI = () => {
                         ...r,
                         total_possible: r.total || r.total_possible || 100,
                         // Ensure it has nested assessment object for compatibility if not fully unified
-                        assessment: r.assessment || { 
+                        assessment: r.assessment || {
                             display_name: r.full_name || 'AI Assessment',
-                            name: r.full_name || 'AI Assessment' 
+                            name: r.full_name || 'AI Assessment'
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
-                    // Always include in Resume tab to ensure full visibility of all screened candidates
-                    resResults.push(r);
-                    // Also include in Interview tab if the interview process has actually started
-                    if (r.total_questions > 0) {
-                        intResults.push(r);
+                    // ALWAYS include in Interview tab since this is an AI Interview candidate
+                    intResults.push(r);
+
+                    // Also include in Resume tab ONLY IF they have actually uploaded a resume
+                    // (prevents 'Invited' candidates from confusingly showing up as a Resume analysis)
+                    if (r.status !== 'New' && r.status !== 'Invited') {
+                        resResults.push(r);
                     }
                 } else {
                     // Collect standard/manual assessment results
                     manResults.push({
                         ...r,
                         _type: 'manual_assessment',
-                        assessment: r.assessment || { 
+                        assessment: r.assessment || {
                             display_name: r.full_name || 'Standard Assessment',
-                            name: r.full_name || 'Standard Assessment' 
+                            name: r.full_name || 'Standard Assessment'
                         }
                     });
                 }
@@ -107,26 +109,26 @@ const ResultsAI = () => {
                     .replace(/role[:\s]+/g, '')
                     .replace(/job title[:\s]+/g, '')
                     .trim();
-                
+
                 // Common aliases to catch fuzzy matches
                 if (normalized.includes('python') && normalized.includes('developer')) return 'python developer';
                 if (normalized.includes('java') && normalized.includes('developer')) return 'java developer';
-                
+
                 return normalized || 'Other';
             };
 
             const groups = {};
-            
+
             const addToGroup = (item, type) => {
                 const rawRole = item.assessment?.role || item.assessment?.display_name || item.assessment?.name || item.job_title || 'General';
                 // Priority: Explicit batch_name > JD_Date_Time format
                 const batchLabel = item.batch_name || `${normalizeRoleName(rawRole)}_Archive`;
-                
+
                 if (!groups[batchLabel]) {
-                    groups[batchLabel] = { 
-                        resume: [], 
-                        assessment: [], 
-                        interview: [], 
+                    groups[batchLabel] = {
+                        resume: [],
+                        assessment: [],
+                        interview: [],
                         standard: [],
                         total: 0,
                         role: rawRole,
@@ -441,36 +443,38 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Integrity Evidence Gallery */}
-                        {data.integrity_logs?.length > 0 && (
+                        {data.integrity_screenshots?.length > 0 && (
                             <div className="sidebar-card">
                                 <span className="sidebar-label">Integrity Evidence</span>
                                 <div className="integrity-gallery-scroll">
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                                        {data.integrity_logs.map((log, lIdx) => {
+                                        {data.integrity_screenshots.map((log, lIdx) => {
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
-                                            const displayImg = isScreenEvent 
-                                                ? (log.screenshot_base64 || log.webcam_screenshot_base64)
-                                                : (log.webcam_screenshot_base64 || log.screenshot_base64);
+                                            const displayImg = isScreenEvent
+                                                ? (log.screenshot_url || log.webcam_screenshot_url)
+                                                : (log.webcam_screenshot_url || log.screenshot_url);
 
                                             return (
-                                                <div key={lIdx} style={{ 
-                                                    position: 'relative', borderRadius: '12px', overflow: 'hidden', 
+                                                <div key={lIdx} style={{
+                                                    position: 'relative', borderRadius: '12px', overflow: 'hidden',
                                                     border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
                                                     cursor: 'pointer'
-                                                }} onClick={() => window.open(displayImg, '_blank')}>
-                                                    <img 
-                                                        src={displayImg || 'https://placehold.co/100x100?text=No+Data'} 
+                                                }} onClick={() => {
+                                                    if (displayImg) window.open(displayImg, '_blank');
+                                                }}>
+                                                    <img
+                                                        src={displayImg || 'https://placehold.co/100x100?text=No+Data'}
                                                         alt={log.event_type}
                                                         style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block' }}
                                                         onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
                                                     />
-                                                    <div style={{ 
-                                                        position: 'absolute', bottom: 0, left: 0, right: 0, 
-                                                        background: 'rgba(27, 37, 75, 0.85)', color: 'white', 
+                                                    <div style={{
+                                                        position: 'absolute', bottom: 0, left: 0, right: 0,
+                                                        background: 'rgba(27, 37, 75, 0.85)', color: 'white',
                                                         fontSize: '9px', padding: '4px 2px', textAlign: 'center',
                                                         fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px'
                                                     }}>
-                                                        {log.event_type.replace('_', ' ')}
+                                                        {log.event_type.replace(/_/g, ' ')}
                                                     </div>
                                                 </div>
                                             );
@@ -505,13 +509,13 @@ const ResultsAI = () => {
                             ) : (
                                 data.interview_summary.map((turn, i) => (
                                     <div key={i} className="timeline-turn">
-                                        <div className="marks-badge" style={{ 
+                                        <div className="marks-badge" style={{
                                             background: (turn.score || turn.marks) >= 7 ? '#ecfdf5' : (turn.score || turn.marks) >= 4 ? '#fffbeb' : '#fff1f2',
                                             color: (turn.score || turn.marks) >= 7 ? '#059669' : (turn.score || turn.marks) >= 4 ? '#b45309' : '#e11d48'
                                         }}>
                                             {(turn.score || turn.marks)}/10 Points
                                         </div>
-                                        
+
                                         <div className="ai-prompt">
                                             <div className="ai-icon">
                                                 <i className="fa-solid fa-robot"></i>
@@ -578,10 +582,10 @@ const ResultsAI = () => {
                                 ? <>This will initiate a deletion request for <strong>{confirmDelete.items[0].full_name || confirmDelete.items[0].candidate?.name || 'this candidate'}</strong>.</>
                                 : <>This will initiate a deletion request for <strong>{confirmDelete.items.length} selected results</strong>.</>}
                         </p>
-                        
+
                         <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
                             <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748b', display: 'block', marginBottom: '0.5rem' }}>Reason for Deletion (Required)</label>
-                            <textarea 
+                            <textarea
                                 id="delete-reason-input"
                                 style={{ width: '100%', borderRadius: '8px', border: '1px solid #e2e8f0', padding: '0.75rem', fontSize: '0.9rem', minHeight: '80px', fontFamily: 'inherit' }}
                                 placeholder="Please provide a valid reason..."
@@ -591,7 +595,7 @@ const ResultsAI = () => {
 
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #cbd5e1', borderRadius: '12px', background: 'white', cursor: 'pointer', fontWeight: '700' }}>Cancel</button>
-                            <button 
+                            <button
                                 onClick={() => {
                                     const reason = document.getElementById('delete-reason-input')?.value;
                                     if (!reason || reason.trim().length < 5) {
@@ -599,7 +603,7 @@ const ResultsAI = () => {
                                         return;
                                     }
                                     confirmAndDelete(reason);
-                                }} 
+                                }}
                                 style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}
                             >
                                 Submit Request
@@ -612,13 +616,13 @@ const ResultsAI = () => {
 
             {viewedSubmission && (
                 <div className="glass-modal-overlay" style={{ zIndex: 10000, background: 'rgba(27, 37, 75, 0.4)', backdropFilter: 'blur(8px)' }}>
-                    <div className="glass-modal-content" style={{ 
-                        width: '95%', maxWidth: '1200px', height: '90vh', 
+                    <div className="glass-modal-content" style={{
+                        width: '95%', maxWidth: '1200px', height: '90vh',
                         display: 'flex', flexDirection: 'column', padding: 0,
                         background: '#F4F7FE', borderRadius: '30px'
                     }}>
                         {/* Modal Header */}
-                        <div style={{ 
+                        <div style={{
                             padding: '1.5rem 2.5rem', background: 'white', borderBottom: '1px solid #E2E8F0',
                             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                             borderTopLeftRadius: '30px', borderTopRightRadius: '30px'
@@ -633,14 +637,14 @@ const ResultsAI = () => {
                                     Submitted {new Date(viewedSubmission.submitted_at).toLocaleString()}
                                 </p>
                             </div>
-                            <button 
+                            <button
                                 onClick={() => {
                                     const newParams = new URLSearchParams(searchParams);
                                     newParams.delete('subId');
                                     setSearchParams(newParams);
                                 }}
-                                style={{ 
-                                    background: '#F4F7FE', border: 'none', borderRadius: '50%', 
+                                style={{
+                                    background: '#F4F7FE', border: 'none', borderRadius: '50%',
                                     width: '44px', height: '44px', cursor: 'pointer',
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
@@ -653,9 +657,9 @@ const ResultsAI = () => {
                         {/* Modal Body */}
                         <div style={{ flex: 1, overflowY: 'auto', padding: '2.5rem' }}>
                             <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                                
+
                                 {/* 3-Card Summary (Matching AiAssessmentDetail.js) */}
-                                
+
                                 {viewedSubmission.is_resume_screening ? (
                                     <div style={{ marginBottom: '3rem' }}>
                                         <div style={{ background: '#F8F9FF', padding: '2.5rem', borderRadius: '30px', border: '1px solid #4318FF44' }}>
@@ -663,165 +667,165 @@ const ResultsAI = () => {
                                                 <i className="fa-solid fa-file-lines" style={{ color: '#4318FF' }}></i>
                                                 Candidate Written Paper (Interview Feedback)
                                             </h4>
-                                            <div style={{ 
-                                                background: 'white', 
-                                                padding: '2rem', 
-                                                borderRadius: '20px', 
-                                                color: '#1B254B', 
-                                                lineHeight: '1.8', 
+                                            <div style={{
+                                                background: 'white',
+                                                padding: '2rem',
+                                                borderRadius: '20px',
+                                                color: '#1B254B',
+                                                lineHeight: '1.8',
                                                 fontSize: '1rem',
                                                 whiteSpace: 'pre-wrap',
                                                 boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
                                                 border: '1px solid #E2E8F0'
                                             }}>
-                                                {typeof viewedSubmission.interview_summary === 'string' 
-                                                    ? viewedSubmission.interview_summary 
+                                                {typeof viewedSubmission.interview_summary === 'string'
+                                                    ? viewedSubmission.interview_summary
                                                     : JSON.stringify(viewedSubmission.interview_summary || viewedSubmission.results_breakdown?.interview_summary, null, 2)}
                                             </div>
                                         </div>
                                     </div>
                                 ) : (
                                     <>
-                                    {/* MCQ Card */}
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                    ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                    : 0}%
+                                        {/* MCQ Card */}
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
+                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                                    {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                        ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
+                                                        : 0}%
+                                                </div>
+                                                <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                                    {viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
+                                                </div>
                                             </div>
-                                            <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
+
+                                            {/* Coding Card */}
+                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
+                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                                    {viewedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                        ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
+                                                        : 0}%
+                                                </div>
+                                                <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
+                                                    {viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts
+                                                </div>
+                                            </div>
+
+                                            {/* Integrity Card */}
+                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
+                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
+                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50' }}>
+                                                    {viewedSubmission.integrity?.integrity_score ?? 100}%
+                                                </div>
+                                                <div style={{ color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                                                    {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
+                                                </div>
                                             </div>
                                         </div>
 
-                                        {/* Coding Card */}
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {viewedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                    ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                    : 0}%
-                                            </div>
-                                            <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts
-                                            </div>
+                                        {/* Overall Result Banner */}
+                                        <div style={{
+                                            background: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#E6FBF5' : '#FFF5F5',
+                                            padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem',
+                                            border: `1px solid ${(viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50'}`
+                                        }}>
+                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.3rem' }}>Overall Result</div>
+                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50' }}>{viewedSubmission.percentage}%</div>
+                                            <div style={{ color: '#1B254B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{viewedSubmission.status}</div>
                                         </div>
-
-                                        {/* Integrity Card */}
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50' }}>
-                                                {viewedSubmission.integrity?.integrity_score ?? 100}%
-                                            </div>
-                                            <div style={{ color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                                                {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Overall Result Banner */}
-                                    <div style={{ 
-                                        background: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#E6FBF5' : '#FFF5F5', 
-                                        padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem',
-                                        border: `1px solid ${(viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50'}`
-                                    }}>
-                                        <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.3rem' }}>Overall Result</div>
-                                        <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50' }}>{viewedSubmission.percentage}%</div>
-                                        <div style={{ color: '#1B254B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{viewedSubmission.status}</div>
-                                    </div>
                                     </>
                                 )}
 
                                 {!viewedSubmission.is_resume_screening && (
                                     <>
-                                    {/* Answer Verification (MCQs) */}
-                                    <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> MCQ Answer Verification
-                                    </h4>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
-                                        {viewedSubmission.candidate_questions?.mcqs?.map((q, i) => {
-                                            const candAns = viewedSubmission.answers[`mcq_${i}`];
-                                            const isCorrect = candAns === q.answer;
-                                            return (
-                                                <div key={i} style={{ 
-                                                    padding: '2rem', borderRadius: '30px', 
-                                                    border: '1px solid #E0E5F2', background: 'white', 
-                                                    boxShadow: '0 10px 30px rgba(0,0,0,0.02)' 
-                                                }}>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                                                        <div style={{ flex: 1 }}>
-                                                            <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
-                                                            <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0', lineHeight: 1.5 }}>{q.question}</p>
-                                                        </div>
-                                                        <div style={{ 
-                                                            padding: '0.5rem 1rem', borderRadius: '12px', 
-                                                            background: isCorrect ? '#E6FBF5' : '#FFF5F5', 
-                                                            color: isCorrect ? '#05CD99' : '#EE5D50', 
-                                                            fontWeight: '800', fontSize: '0.75rem', 
-                                                            display: 'flex', alignItems: 'center', gap: '6px',
-                                                            border: `1px solid ${isCorrect ? '#05CD9944' : '#EE5D5044'}`
-                                                        }}>
-                                                            <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
-                                                            {isCorrect ? 'CORRECT' : 'INCORRECT'}
-                                                        </div>
-                                                    </div>
-
-                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                                                        {q.options.map((opt, oi) => {
-                                                            const isSelected = opt === candAns;
-                                                            const isAnswer = opt === q.answer;
-
-                                                            let bg = 'white';
-                                                            let border = '1px solid #E0E5F2';
-                                                            let color = '#1B254B';
-                                                            let icon = null;
-
-                                                            if (isAnswer) {
-                                                                bg = '#E6FBF5';
-                                                                border = '2px solid #05CD99';
-                                                                color = '#05CD99';
-                                                                icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
-                                                            } else if (isSelected && !isCorrect) {
-                                                                bg = '#FFF5F5';
-                                                                border = '2px solid #EE5D50';
-                                                                color = '#EE5D50';
-                                                                icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
-                                                            }
-
-                                                            return (
-                                                                <div key={oi} style={{
-                                                                    padding: '1rem 1.25rem', background: bg, borderRadius: '16px', border,
-                                                                    color: color, fontWeight: (isAnswer || isSelected) ? '700' : '500',
-                                                                    fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '10px'
-                                                                }}>
-                                                                    <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
-                                                                    <span style={{ flex: 1 }}>{opt}</span>
-                                                                    {icon}
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                    
-                                                    {!isCorrect && (
-                                                        <div style={{ 
-                                                            marginTop: '1.25rem', padding: '1rem 1.5rem', 
-                                                            background: 'linear-gradient(135deg, #E6FBF5, #D1F7ED)', 
-                                                            borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px',
-                                                            border: '1px solid #05CD9933'
-                                                        }}>
-                                                            <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.2rem' }} />
-                                                            <div>
-                                                                <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase' }}>Correct Solution</div>
-                                                                <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>{q.answer}</div>
+                                        {/* Answer Verification (MCQs) */}
+                                        <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> MCQ Answer Verification
+                                        </h4>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                                            {viewedSubmission.candidate_questions?.mcqs?.map((q, i) => {
+                                                const candAns = viewedSubmission.answers[`mcq_${i}`];
+                                                const isCorrect = candAns === q.answer;
+                                                return (
+                                                    <div key={i} style={{
+                                                        padding: '2rem', borderRadius: '30px',
+                                                        border: '1px solid #E0E5F2', background: 'white',
+                                                        boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
+                                                    }}>
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                                            <div style={{ flex: 1 }}>
+                                                                <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
+                                                                <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0', lineHeight: 1.5 }}>{q.question}</p>
+                                                            </div>
+                                                            <div style={{
+                                                                padding: '0.5rem 1rem', borderRadius: '12px',
+                                                                background: isCorrect ? '#E6FBF5' : '#FFF5F5',
+                                                                color: isCorrect ? '#05CD99' : '#EE5D50',
+                                                                fontWeight: '800', fontSize: '0.75rem',
+                                                                display: 'flex', alignItems: 'center', gap: '6px',
+                                                                border: `1px solid ${isCorrect ? '#05CD9944' : '#EE5D5044'}`
+                                                            }}>
+                                                                <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
+                                                                {isCorrect ? 'CORRECT' : 'INCORRECT'}
                                                             </div>
                                                         </div>
-                                                    )}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                                                            {q.options.map((opt, oi) => {
+                                                                const isSelected = opt === candAns;
+                                                                const isAnswer = opt === q.answer;
+
+                                                                let bg = 'white';
+                                                                let border = '1px solid #E0E5F2';
+                                                                let color = '#1B254B';
+                                                                let icon = null;
+
+                                                                if (isAnswer) {
+                                                                    bg = '#E6FBF5';
+                                                                    border = '2px solid #05CD99';
+                                                                    color = '#05CD99';
+                                                                    icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
+                                                                } else if (isSelected && !isCorrect) {
+                                                                    bg = '#FFF5F5';
+                                                                    border = '2px solid #EE5D50';
+                                                                    color = '#EE5D50';
+                                                                    icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
+                                                                }
+
+                                                                return (
+                                                                    <div key={oi} style={{
+                                                                        padding: '1rem 1.25rem', background: bg, borderRadius: '16px', border,
+                                                                        color: color, fontWeight: (isAnswer || isSelected) ? '700' : '500',
+                                                                        fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '10px'
+                                                                    }}>
+                                                                        <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
+                                                                        <span style={{ flex: 1 }}>{opt}</span>
+                                                                        {icon}
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+
+                                                        {!isCorrect && (
+                                                            <div style={{
+                                                                marginTop: '1.25rem', padding: '1rem 1.5rem',
+                                                                background: 'linear-gradient(135deg, #E6FBF5, #D1F7ED)',
+                                                                borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px',
+                                                                border: '1px solid #05CD9933'
+                                                            }}>
+                                                                <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.2rem' }} />
+                                                                <div>
+                                                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase' }}>Correct Solution</div>
+                                                                    <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>{q.answer}</div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </>
                                 )}
 
@@ -911,13 +915,13 @@ const ResultsAI = () => {
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                                             {viewedSubmission.integrity_screenshots.map((snap, sIdx) => (
                                                 <div key={sIdx} style={{ background: 'white', borderRadius: '20px', padding: '12px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
-                                                    <div style={{ 
-                                                        width: '100%', height: '160px', background: '#F4F7FE', 
-                                                        borderRadius: '15px', overflow: 'hidden', marginBottom: '10px', 
+                                                    <div style={{
+                                                        width: '100%', height: '160px', background: '#F4F7FE',
+                                                        borderRadius: '15px', overflow: 'hidden', marginBottom: '10px',
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
-                                                        <img 
-                                                            src={snap.screenshot_url || snap.webcam_screenshot_url} 
+                                                        <img
+                                                            src={snap.screenshot_url || snap.webcam_screenshot_url}
                                                             alt={snap.event_type}
                                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                             onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
@@ -938,18 +942,18 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Modal Footer */}
-                        <div style={{ 
+                        <div style={{
                             padding: '1.5rem 2.5rem', background: 'white', borderTop: '1px solid #E2E8F0',
                             textAlign: 'right', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px'
                         }}>
-                            <button 
+                            <button
                                 onClick={() => {
                                     const newParams = new URLSearchParams(searchParams);
                                     newParams.delete('subId');
                                     setSearchParams(newParams);
                                 }}
-                                style={{ 
-                                    padding: '0.8rem 2.5rem', background: '#4318FF', color: 'white', 
+                                style={{
+                                    padding: '0.8rem 2.5rem', background: '#4318FF', color: 'white',
                                     border: 'none', borderRadius: '15px', fontWeight: '800', cursor: 'pointer',
                                     boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)', fontSize: '0.95rem'
                                 }}
@@ -962,65 +966,65 @@ const ResultsAI = () => {
             )}
 
             {/* Main Application Container */}
-            <div className="dashboard-main" style={{ 
-                width: '100%', 
+            <div className="dashboard-main" style={{
+                width: '100%',
                 height: '100%',
-                display: 'flex', flexDirection: 'column', 
+                display: 'flex', flexDirection: 'column',
                 overflow: 'hidden'
             }}>
                 {/* Global Dashboard Header (Only on overview/detail) */}
                 {viewMode !== 'transcript' && (
                     <header style={{ marginBottom: '1rem', textAlign: 'center', flexShrink: 0, paddingTop: '1rem' }}>
                         <h1 style={{ fontSize: '2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                            {activeTab === 'resume' ? 'Resume Screening' : 
-                             activeTab === 'assessment' ? 'AI Assessment' : 
-                             activeTab === 'interview' ? 'AI Interview' : 
-                             activeTab === 'fully_automatic' ? 'Fully Automatic' : 'AI'} <span style={{ color: '#4F46E5' }}>Results</span>
+                            {activeTab === 'resume' ? 'Resume Screening' :
+                                activeTab === 'assessment' ? 'AI Assessment' :
+                                    activeTab === 'interview' ? 'AI Interview' :
+                                        activeTab === 'fully_automatic' ? 'Fully Automatic' : 'AI'} <span style={{ color: '#4F46E5' }}>Results</span>
                         </h1>
                     </header>
                 )}
 
-                <div style={{ 
-                    flex: 1, 
+                <div style={{
+                    flex: 1,
                     display: viewMode === 'transcript' ? 'flex' : 'block',
                     flexDirection: 'column',
-                    overflow: viewMode === 'transcript' ? 'hidden' : 'auto', 
-                    padding: viewMode === 'transcript' ? '0' : '0 2rem 3rem' 
+                    overflow: viewMode === 'transcript' ? 'hidden' : 'auto',
+                    padding: viewMode === 'transcript' ? '0' : '0 2rem 3rem'
                 }}>
                     {viewMode === 'detail' && (
                         <div style={{ marginTop: '1rem' }}>
-                            <button onClick={handleBackToOverview} style={{ 
-                                background: 'none', border: 'none', padding: '0', 
-                                cursor: 'pointer', fontWeight: '800', color: '#4F46E5', 
+                            <button onClick={handleBackToOverview} style={{
+                                background: 'none', border: 'none', padding: '0',
+                                cursor: 'pointer', fontWeight: '800', color: '#4F46E5',
                                 display: 'flex', alignItems: 'center', gap: '0.5rem',
                                 marginBottom: '1rem', fontSize: '0.9rem'
                             }}>
                                 <i className="fa-solid fa-arrow-left" /> Back to Archive
                             </button>
-                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                                        <div>
-                                            <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                                                {selectedRole.split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
-                                            </h1>
-                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
-                                                    <i className="fa-solid fa-layer-group" />
-                                                    <span style={{ color: '#94A3B8' }}>Batch:</span>
-                                                    <span>{selectedRole}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style={{ 
-                                            background: 'white', padding: '1rem 2rem', borderRadius: '18px', 
-                                            boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textAlign: 'center',
-                                            border: '1px solid #F1F5F9'
-                                        }}>
-                                            <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase' }}>Submissions</div>
-                                            <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                <div>
+                                    <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
+                                        {selectedRole.split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
+                                    </h1>
+                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
+                                            <i className="fa-solid fa-layer-group" />
+                                            <span style={{ color: '#94A3B8' }}>Batch:</span>
+                                            <span>{selectedRole}</span>
                                         </div>
                                     </div>
                                 </div>
-                            )}
+                                <div style={{
+                                    background: 'white', padding: '1rem 2rem', borderRadius: '18px',
+                                    boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textAlign: 'center',
+                                    border: '1px solid #F1F5F9'
+                                }}>
+                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase' }}>Submissions</div>
+                                    <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#4F46E5' }}>{currentRows.length}</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {viewMode === 'transcript' ? renderTranscriptReport(showTranscriptDetail) : (
                         <>
@@ -1050,43 +1054,43 @@ const ResultsAI = () => {
                                             })
                                             .map(([roleName, data]) => (
                                                 <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
-                                                padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                                                transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
-                                            }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
-                                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4318FF, #9333ea)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', boxShadow: '0 8px 15px rgba(67, 24, 255, 0.2)' }}>
-                                                        <i className="fa-solid fa-layer-group" />
+                                                    padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                                    transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
+                                                }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                                                        <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4318FF, #9333ea)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', boxShadow: '0 8px 15px rgba(67, 24, 255, 0.2)' }}>
+                                                            <i className="fa-solid fa-layer-group" />
+                                                        </div>
+                                                        <div>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{roleName}</h3>
+                                                                <span style={{
+                                                                    padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
+                                                                    background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
+                                                                    color: data.is_fully_automatic ? '#4F46E5' : '#707EAE',
+                                                                    border: `1px solid ${data.is_fully_automatic ? '#4F46E533' : '#707EAE33'}`,
+                                                                    textTransform: 'uppercase', letterSpacing: '0.05em'
+                                                                }}>
+                                                                    {data.is_fully_automatic ? 'Automatic' : 'Manual'}
+                                                                </span>
+                                                            </div>
+                                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
+                                                                <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                    <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
+                                                                    {data.total} Candidate{data.total !== 1 ? 's' : ''}
+                                                                </span>
+                                                                <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                    <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
+                                                                    {data.assessment.length + data.resume.length + data.interview.length} Total Results
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                            <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{roleName}</h3>
-                                                            <span style={{ 
-                                                                padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
-                                                                background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
-                                                                color: data.is_fully_automatic ? '#4F46E5' : '#707EAE',
-                                                                border: `1px solid ${data.is_fully_automatic ? '#4F46E533' : '#707EAE33'}`,
-                                                                textTransform: 'uppercase', letterSpacing: '0.05em'
-                                                            }}>
-                                                                {data.is_fully_automatic ? 'Automatic' : 'Manual'}
-                                                            </span>
-                                                        </div>
-                                                        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
-                                                            <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                                <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
-                                                                {data.total} Candidate{data.total !== 1 ? 's' : ''}
-                                                            </span>
-                                                            <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                                <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
-                                                                {data.assessment.length + data.resume.length + data.interview.length} Total Results
-                                                            </span>
-                                                        </div>
+                                                    <div style={{ color: '#4318FF', fontSize: '1.2rem' }} className="arrow-icon">
+                                                        <i className="fa-solid fa-circle-chevron-right" />
                                                     </div>
                                                 </div>
-                                                <div style={{ color: '#4318FF', fontSize: '1.2rem' }} className="arrow-icon">
-                                                    <i className="fa-solid fa-circle-chevron-right" />
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
                                     </div>
                                 </div>
                             )}
@@ -1126,38 +1130,38 @@ const ResultsAI = () => {
                                         </div>
                                     )}
 
-                                        <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9CA3AF', textTransform: 'uppercase' }}>Type:</span>
-                                                {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
-                                                    <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
-                                                        padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
-                                                        fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
-                                                        borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
-                                                        background: statusFilter === f.key ? '#EEF2FF' : 'white',
-                                                        color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
-                                                    }}>{f.label}</button>
-                                                ))}
-                                            </div>
-
-                                            <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF', fontWeight: '700' }}>{currentRows.length} results</span>
-                                            {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
-                                            {canDelete && someSelected && (
-                                                <button
-                                                    onClick={() => requestDelete(selectedItems)}
-                                                    style={{
-                                                        padding: '0.3rem 0.85rem', borderRadius: '10px',
-                                                        border: '1px solid #ef4444', background: '#FFF5F5',
-                                                        color: '#ef4444', fontWeight: '700', fontSize: '0.75rem',
-                                                        cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
-                                                    }}
-                                                    title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete selected' : 'Request deletion for selected'}
-                                                >
-                                                    <i className="fa-solid fa-trash" />
-                                                    Delete ({selectedCount})
-                                                </button>
-                                            )}
+                                    <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                            <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9CA3AF', textTransform: 'uppercase' }}>Type:</span>
+                                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
+                                                <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
+                                                    padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
+                                                    fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
+                                                    borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
+                                                    background: statusFilter === f.key ? '#EEF2FF' : 'white',
+                                                    color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
+                                                }}>{f.label}</button>
+                                            ))}
                                         </div>
+
+                                        <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF', fontWeight: '700' }}>{currentRows.length} results</span>
+                                        {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
+                                        {canDelete && someSelected && (
+                                            <button
+                                                onClick={() => requestDelete(selectedItems)}
+                                                style={{
+                                                    padding: '0.3rem 0.85rem', borderRadius: '10px',
+                                                    border: '1px solid #ef4444', background: '#FFF5F5',
+                                                    color: '#ef4444', fontWeight: '700', fontSize: '0.75rem',
+                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                }}
+                                                title={myRole === 'company_admin' || myRole === 'application_admin' ? 'Delete selected' : 'Request deletion for selected'}
+                                            >
+                                                <i className="fa-solid fa-trash" />
+                                                Delete ({selectedCount})
+                                            </button>
+                                        )}
+                                    </div>
 
                                     <div className="glass-table-card" style={{ marginBottom: '1rem' }}>
                                         {loading ? (
@@ -1215,16 +1219,18 @@ const ResultsAI = () => {
                                                                                     { label: 'Assessment', data: r.assessment, scoreKey: 'percentage' },
                                                                                     { label: 'Interview', data: r.interview, scoreKey: 'score', isInt: true }
                                                                                 ].map((stage, idx) => {
-                                                                                    const hasData = !!stage.data;
-                                                                                    const score = stage.isInt 
+                                                                                    const hasData = stage.isInt
+                                                                                        ? (!!stage.data && !['New', 'Invited', 'Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(stage.data.status))
+                                                                                        : !!stage.data;
+                                                                                    const score = stage.isInt
                                                                                         ? (stage.data?.score != null ? Math.round((stage.data.score / ((stage.data.interview_summary?.length || 13) * 10)) * 100) : 0)
                                                                                         : (stage.data?.[stage.scoreKey] || 0);
                                                                                     const date = stage.data?.created_at || stage.data?.submitted_at || stage.data?.completed_at;
                                                                                     return (
                                                                                         <div key={idx} style={{ flex: 1, minWidth: '110px' }}>
                                                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-                                                                                                <i className={`fa-solid ${hasData ? 'fa-square-check' : 'fa-square'}`} 
-                                                                                                   style={{ color: hasData ? '#05CD99' : '#CBD5E1', fontSize: '0.9rem' }} />
+                                                                                                <i className={`fa-solid ${hasData ? 'fa-square-check' : 'fa-square'}`}
+                                                                                                    style={{ color: hasData ? '#05CD99' : '#CBD5E1', fontSize: '0.9rem' }} />
                                                                                                 <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase' }}>{stage.label}</span>
                                                                                             </div>
                                                                                             {hasData ? (
@@ -1258,11 +1264,11 @@ const ResultsAI = () => {
                                                                             <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status) }}>
                                                                                 {getStatusLabel(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status)}
                                                                             </span>
-                                                                            <button 
+                                                                            <button
                                                                                 onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
                                                                                 title="View Automation History"
-                                                                                style={{ 
-                                                                                    background: 'none', border: 'none', cursor: 'pointer', 
+                                                                                style={{
+                                                                                    background: 'none', border: 'none', cursor: 'pointer',
                                                                                     color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
                                                                                     display: 'flex', alignItems: 'center'
                                                                                 }}
@@ -1279,20 +1285,20 @@ const ResultsAI = () => {
                                                                             {activeTab === 'fully_automatic' ? (
                                                                                 <>
                                                                                     {r.assessment && (
-                                                                                        <button 
+                                                                                        <button
                                                                                             onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.assessment.id || r.assessment.candidate_id }); }}
                                                                                             title="View Assessment"
-                                                                                            style={{ 
+                                                                                            style={{
                                                                                                 padding: '0.4rem 0.6rem', borderRadius: '8px', border: 'none',
                                                                                                 background: '#EEF2FF', color: '#4F46E5', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer'
                                                                                             }}
                                                                                         >Quiz</button>
                                                                                     )}
                                                                                     {r.interview && (
-                                                                                        <button 
+                                                                                        <button
                                                                                             onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r.interview); setViewMode('transcript'); }}
                                                                                             title="View Interview Transcript"
-                                                                                            style={{ 
+                                                                                            style={{
                                                                                                 padding: '0.4rem 0.6rem', borderRadius: '8px', border: 'none',
                                                                                                 background: '#E6FBF5', color: '#05CD99', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer'
                                                                                             }}
@@ -1301,24 +1307,33 @@ const ResultsAI = () => {
                                                                                 </>
                                                                             ) : (
                                                                                 <>
-                                                                                    {activeTab === 'interview' ? (
-                                                                                        <button 
+                                                                                    {activeTab === 'interview' || (activeTab === 'resume' && r.total_questions > 0) ? (
+                                                                                        <button
                                                                                             onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
-                                                                                            style={{ 
+                                                                                            style={{
                                                                                                 padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
                                                                                                 background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
                                                                                                 color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                             }}
                                                                                         >Review</button>
                                                                                     ) : activeTab === 'assessment' || activeTab === 'standard' ? (
-                                                                                        <button 
+                                                                                        <button
                                                                                             onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
-                                                                                            style={{ 
+                                                                                            style={{
                                                                                                 padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
                                                                                                 background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
                                                                                                 color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
                                                                                             }}
                                                                                         >View</button>
+                                                                                    ) : activeTab === 'resume' ? (
+                                                                                        <button
+                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
+                                                                                            style={{
+                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                            }}
+                                                                                        >Details</button>
                                                                                     ) : null}
                                                                                 </>
                                                                             )}
@@ -1336,142 +1351,146 @@ const ResultsAI = () => {
                                                                                 </button>
                                                                             )}
                                                                         </div>
-                                                                    </td>
-                                                                </tr>
+    </td>
+                                                                </tr >
                                                             );
                                                         })}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tbody >
+                                                </table >
+                                            </div >
                                         )}
-                                        
-                                        {/* Pagination Footer */}
-                                        {!loading && currentRows.length > itemsPerPage && (
-                                            <div style={{ 
-                                                padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9', 
-                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center' 
-                                            }}>
-                                                <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
-                                                    Showing <span style={{ color: '#1B254B' }}>{indexOfFirstRow + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastRow, currentRows.length)}</span> of <span style={{ color: '#1B254B' }}>{currentRows.length}</span> entries
-                                                </div>
-                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                    <button 
-                                                        disabled={currentPage === 1}
-                                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                                        style={{ 
-                                                            padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
-                                                            background: 'white', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                                                            fontSize: '0.8rem', fontWeight: '700', color: currentPage === 1 ? '#CBD5E1' : '#4F46E5',
-                                                            display: 'flex', alignItems: 'center', gap: '0.4rem'
-                                                        }}
-                                                    >
-                                                        <i className="fa-solid fa-chevron-left" /> Prev
-                                                    </button>
-                                                    <div style={{ display: 'flex', alignItems: 'center', px: '0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
-                                                        {currentPage}
-                                                    </div>
-                                                    <button 
-                                                        disabled={indexOfLastRow >= currentRows.length}
-                                                        onClick={() => setCurrentPage(p => p + 1)}
-                                                        style={{ 
-                                                            padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
-                                                            background: 'white', cursor: indexOfLastRow >= currentRows.length ? 'not-allowed' : 'pointer',
-                                                            fontSize: '0.8rem', fontWeight: '700', color: indexOfLastRow >= currentRows.length ? '#CBD5E1' : '#4F46E5',
-                                                            display: 'flex', alignItems: 'center', gap: '0.4rem'
-                                                        }}
-                                                    >
-                                                        Next <i className="fa-solid fa-chevron-right" />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
+
+{/* Pagination Footer */ }
+{
+    !loading && currentRows.length > itemsPerPage && (
+        <div style={{
+            padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+        }}>
+            <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
+                Showing <span style={{ color: '#1B254B' }}>{indexOfFirstRow + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastRow, currentRows.length)}</span> of <span style={{ color: '#1B254B' }}>{currentRows.length}</span> entries
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    style={{
+                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                        background: 'white', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                        fontSize: '0.8rem', fontWeight: '700', color: currentPage === 1 ? '#CBD5E1' : '#4F46E5',
+                        display: 'flex', alignItems: 'center', gap: '0.4rem'
+                    }}
+                >
+                    <i className="fa-solid fa-chevron-left" /> Prev
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', px: '0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
+                    {currentPage}
+                </div>
+                <button
+                    disabled={indexOfLastRow >= currentRows.length}
+                    onClick={() => setCurrentPage(p => p + 1)}
+                    style={{
+                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                        background: 'white', cursor: indexOfLastRow >= currentRows.length ? 'not-allowed' : 'pointer',
+                        fontSize: '0.8rem', fontWeight: '700', color: indexOfLastRow >= currentRows.length ? '#CBD5E1' : '#4F46E5',
+                        display: 'flex', alignItems: 'center', gap: '0.4rem'
+                    }}
+                >
+                    Next <i className="fa-solid fa-chevron-right" />
+                </button>
+            </div>
+        </div>
+    )
+}
+                                    </div >
                                 </>
                             )}
                         </>
                     )}
-                </div>
-            </div>
-            {/* Timeline Modal */}
-            {timelineCandidate && (
-                <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
-                    <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                            <div>
-                                <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
-                                <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
-                            </div>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <button 
-                                    onClick={() => fetchTimeline(timelineCandidate)} 
-                                    disabled={loadingTimeline}
-                                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4318FF', fontSize: '1.1rem', transition: 'transform 0.2s' }}
-                                    title="Refresh history"
-                                >
-                                    <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
-                                </button>
-                                <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
-                                    <i className="fa-solid fa-xmark"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        {loadingTimeline ? (
-                            <div style={{ textAlign: 'center', padding: '2rem' }}>
-                                <div className="spinner" style={{ margin: '0 auto 1rem' }}></div>
-                                <p style={{ color: '#707EAE', fontSize: '0.9rem' }}>Fetching logs...</p>
-                            </div>
-                        ) : timelineLogs.length === 0 ? (
-                            <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>
-                                <i className="fa-solid fa-list-ul" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}></i>
-                                <p>No logs found for this candidate yet.</p>
-                            </div>
-                        ) : (
-                            <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scrollbar">
-                                <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem' }}>
-                                    <div style={{ position: 'absolute', left: '7px', top: '5px', bottom: '5px', width: '2px', background: '#E2E8F0' }}></div>
-                                    {timelineLogs.map((log, i) => {
-                                        const isError = log.status === 'FAILURE';
-                                        const isSuccess = log.status === 'SUCCESS';
-                                        return (
-                                            <div key={log.id} style={{ position: 'relative', marginBottom: '1.8rem' }}>
-                                                <div style={{ 
-                                                    position: 'absolute', left: '-2rem', top: '0', width: '16px', height: '16px', 
-                                                    borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
-                                                    border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
-                                                }}></div>
-                                                <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
-                                                    {log.timestamp_formatted}
-                                                </div>
-                                                <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
-                                                    {log.message}
-                                                </div>
-                                                {log.details && Object.keys(log.details).length > 0 && (
-                                                    <div style={{ fontSize: '0.78rem', color: '#707EAE', background: '#F4F7FE', padding: '0.5rem 0.75rem', borderRadius: '8px', marginTop: '0.3rem' }}>
-                                                        {Object.entries(log.details).map(([k, v]) => (
-                                                            <div key={k} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.1rem' }}>
-                                                                <span style={{ fontWeight: '800', color: '#4318FF', minWidth: '90px', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}:</span>
-                                                                <span style={{ wordBreak: 'break-all' }}>{String(v)}</span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        )}
-
-                        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                            <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
-                                Close
-                            </button>
-                        </div>
+                </div >
+            </div >
+    {/* Timeline Modal */ }
+{
+    timelineCandidate && (
+        <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
+            <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                    <div>
+                        <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
+                        <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button
+                            onClick={() => fetchTimeline(timelineCandidate)}
+                            disabled={loadingTimeline}
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4318FF', fontSize: '1.1rem', transition: 'transform 0.2s' }}
+                            title="Refresh history"
+                        >
+                            <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
+                        </button>
+                        <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
                 </div>
-            )}
+
+                {loadingTimeline ? (
+                    <div style={{ textAlign: 'center', padding: '2rem' }}>
+                        <div className="spinner" style={{ margin: '0 auto 1rem' }}></div>
+                        <p style={{ color: '#707EAE', fontSize: '0.9rem' }}>Fetching logs...</p>
+                    </div>
+                ) : timelineLogs.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>
+                        <i className="fa-solid fa-list-ul" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                        <p>No logs found for this candidate yet.</p>
+                    </div>
+                ) : (
+                    <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scrollbar">
+                        <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem' }}>
+                            <div style={{ position: 'absolute', left: '7px', top: '5px', bottom: '5px', width: '2px', background: '#E2E8F0' }}></div>
+                            {timelineLogs.map((log, i) => {
+                                const isError = log.status === 'FAILURE';
+                                const isSuccess = log.status === 'SUCCESS';
+                                return (
+                                    <div key={log.id} style={{ position: 'relative', marginBottom: '1.8rem' }}>
+                                        <div style={{
+                                            position: 'absolute', left: '-2rem', top: '0', width: '16px', height: '16px',
+                                            borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
+                                            border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
+                                        }}></div>
+                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
+                                            {log.timestamp_formatted}
+                                        </div>
+                                        <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
+                                            {log.message}
+                                        </div>
+                                        {log.details && Object.keys(log.details).length > 0 && (
+                                            <div style={{ fontSize: '0.78rem', color: '#707EAE', background: '#F4F7FE', padding: '0.5rem 0.75rem', borderRadius: '8px', marginTop: '0.3rem' }}>
+                                                {Object.entries(log.details).map(([k, v]) => (
+                                                    <div key={k} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.1rem' }}>
+                                                        <span style={{ fontWeight: '800', color: '#4318FF', minWidth: '90px', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}:</span>
+                                                        <span style={{ wordBreak: 'break-all' }}>{String(v)}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                    <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
+    )
+}
+        </div >
     );
 };
 

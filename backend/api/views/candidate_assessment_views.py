@@ -63,7 +63,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -1737,7 +1737,7 @@ def results_overview_view(request):
             else:
                 ai_cand_qs = Candidate.objects.filter(
                     is_deleted=False,
-                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
+                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed', 'Assessment Passed', 'Interview']
                 ).order_by('-submission_date')
         elif scoped_ids:
             # HR Manager sees candidates uploaded by themselves or their direct-report HRs
@@ -1820,6 +1820,7 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
                     'batch_id': inv.batch_id,
                     'batch_name': inv.batch_name,
+                    'is_fully_automatic': False,
 
                     'status': s.result,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
@@ -1889,6 +1890,7 @@ def results_overview_view(request):
                     'is_resume_screening': False,
                     'batch_id': s.batch_id,
                     'batch_name': s.batch_name,
+                    'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
                     'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
@@ -1925,7 +1927,7 @@ def results_overview_view(request):
                     'coding_percentage': s.score,
 
                     'status': s.status,
-                    'is_resume_screening': True,
+                    'is_resume_screening': s.total_questions == 0,
                     'delete_requested': f"Candidate_{s.id}" in active_deletions,
                     'interview_summary': s.interview_summary,
                     'total_questions': getattr(s, 'total_questions', 0),
@@ -1937,11 +1939,11 @@ def results_overview_view(request):
                         'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                         'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
                     },
-                    'integrity_logs': [
+                    'integrity_screenshots': [
                         {
                             'event_type': log.event_type,
-                            'screenshot_base64': log.screenshot_base64,
-                            'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                            'screenshot_url': log.screenshot_base64,
+                            'webcam_screenshot_url': log.webcam_screenshot_base64,
                             'timestamp': log.timestamp.isoformat() if log.timestamp else None
                         } for log in s.integrity_logs.all()
                     ]

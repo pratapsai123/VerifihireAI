@@ -53,6 +53,11 @@ const AiAssessments = () => {
         const completed = assessment.completed_count || 0;
         const started = assessment.candidate_count || 0;
         const isBulk = invited > 1;
+
+        // 0. Explicit Generation State (from Pipeline)
+        if (assessment.status === 'GENERATING') {
+            return { type: 'SCHEDULED', label: 'AI Generating...', isGenerating: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin' };
+        }
         
         // 1. Time-based Expiry (Absolute deadline)
         if (until && now > until) {
@@ -149,6 +154,20 @@ const AiAssessments = () => {
         } finally {
             setApplicantsLoading(false);
         }
+    };
+
+    const downloadSampleCSV = () => {
+        const headers = "name,email\n";
+        const sampleData = "John Doe,john@example.com\nJane Smith,jane@example.com";
+        const csvContent = headers + sampleData;
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "bulk_invite_sample.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
     
 
@@ -318,8 +337,8 @@ const AiAssessments = () => {
                                                     >View</button>
                                                     {(() => {
                                                         const status = getStatusInfo(assessment);
-                                                        // If it's Expired or Ongoing, we hide the Share button and show the Badge
-                                                        if (status.isExpired || status.isOngoing) {
+                                                        // If it's Expired, Ongoing, or currently Generating, we hide the Share button and show the Badge
+                                                        if (status.isExpired || status.isOngoing || status.isGenerating) {
                                                             return (
                                                                 <div style={{
                                                                     background: status.bg,
@@ -464,7 +483,16 @@ const AiAssessments = () => {
                                     <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.9rem', margin: 0 }}>
                                         {inviteFile ? inviteFile.name : 'Click to upload CSV or Excel'}
                                     </p>
-                                    <p style={{ color: '#A3AED0', fontSize: '0.75rem', marginTop: '0.4rem' }}>Must contain 'name' and 'email' columns</p>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', marginTop: '0.4rem' }}>
+                                        <p style={{ color: '#A3AED0', fontSize: '0.75rem', margin: 0 }}>Must contain 'name' and 'email' columns</p>
+                                        <button 
+                                            type="button"
+                                            onClick={(e) => { e.stopPropagation(); downloadSampleCSV(); }}
+                                            style={{ background: 'none', border: 'none', color: '#4318FF', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                                        >
+                                            Download Sample CSV
+                                        </button>
+                                    </div>
                                     <input
                                         type="file" id="bulk-file" hidden accept=".csv,.xlsx,.xls"
                                         onChange={(e) => setInviteFile(e.target.files[0])}

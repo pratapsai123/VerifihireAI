@@ -96,6 +96,8 @@ def extract_json(text):
         return None
 
 class AssemblyAITokenView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def get(self, request):
         api_key = getattr(settings, 'ASSEMBLYAI_API_KEY', None)
         if not api_key:
@@ -269,7 +271,7 @@ class BulkInviteView(APIView):
                         f.write(f"{timezone.now()} - {error_msg}\n")
                 
             return Response({
-                "message": f"Successfully invited {len(invited_candidates)} candidates.",
+                "message": f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}.",
                 "candidates": invited_candidates
             }, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -277,11 +279,18 @@ class BulkInviteView(APIView):
             return Response({"error": f"Error processing file: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ResumeMatchView(APIView):
+    from rest_framework.permissions import AllowAny
     permission_classes = [AllowAny]
 
     def post(self, request):
         resume_files = request.FILES.getlist('resume')
         candidate_id = request.data.get('candidate_id')
+        
+        # 🔒 SECURITY LOCK: Only allow unauthenticated access for individual candidate interview starts.
+        # Bulk uploads MUST be authenticated to ensure proper ownership.
+        if not candidate_id and not request.user.is_authenticated:
+            return Response({"error": "Authentication required for bulk upload operations."}, status=status.HTTP_401_UNAUTHORIZED)
+
         job_description = request.data.get('job_description')
         threshold = request.data.get('threshold', 70)
         try:
@@ -304,6 +313,13 @@ class ResumeMatchView(APIView):
             elif not candidate.resume:
                 return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
             
+            # Ensure candidate has a company/profile link if missing (e.g. from public link)
+            # but don't overwrite if it already has one.
+            if not candidate.user_profile and request.user.is_authenticated:
+                candidate.user_profile = getattr(request.user, 'profile', None)
+                if not candidate.company and candidate.user_profile:
+                    candidate.company = candidate.user_profile.company
+
             batch_id = generate_batch_id()
             batch_name = generate_batch_name(candidate.job_title or job_description[:20])
             candidate.batch_id = batch_id
@@ -317,7 +333,7 @@ class ResumeMatchView(APIView):
                     batch_id=batch_id,
                     job_description=job_description,
                     threshold=threshold,
-                    is_fully_automatic=False, # CHANGED: Single-file matching should be manual by default
+                    is_fully_automatic=False, 
                     automation_settings={}
                 )
                 
@@ -350,21 +366,20 @@ class ResumeMatchView(APIView):
             # INSTANT SAVE: Create Candidate records without waiting for OCR
             for resume_file in resume_files:
                 job_title = request.data.get('job_title') or request.data.get('role_title')
-                if job_title:
+                if job_title and request.user.is_authenticated:
                     ensure_role_exists(job_title, job_description, user=request.user)
 
-                user_profile = getattr(request.user, 'profile', None)
+                user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
                 company = user_profile.company if user_profile else None
                 candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
                 
                 # Create the candidate record
-                # We save the file itself; the background task will read it later
                 new_candidate = Candidate.objects.create(
                     full_name=candidate_name,
                     email="pending@example.com",
                     job_title=job_title or "Applicant",
-                    resume=resume_file, # Save the actual file
-                    resume_text=None,   # To be extracted in background
+                    resume=resume_file, 
+                    resume_text=None,   
                     status='New',
                     job_description=job_description,
                     company=company,
@@ -665,8 +680,8 @@ INTERVIEW_LINK_TTL_MINUTES = 60 # Back to 60 minutes as requested
 
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CandidateSerializer
-    from rest_framework.permissions import AllowAny
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -753,6 +768,8 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CandidateStatusUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def patch(self, request, pk):
         try:
             user_profile = getattr(request.user, 'profile', None)
@@ -784,6 +801,8 @@ class CandidateStatusUpdateView(APIView):
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
 
 class UpdateIntegrityView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request, pk):
         try:
             candidate = Candidate.objects.get(pk=pk)
@@ -852,6 +871,8 @@ class UpdateIntegrityView(APIView):
             return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class ProcessAnswerView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     @staticmethod
     def _get_difficulty_instructions(experience_level):
         """Return AI prompt instructions based on candidate experience level."""
@@ -1073,7 +1094,7 @@ class ProcessAnswerView(APIView):
             "is_exit": false,
             "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer (NEVER generic praise)",
             "refined_next_question": "Your next question — MUST match the category for Turn #{current_turn_number + 1}",
-            "requires_code_input": false,
+            "requires_code_input": false, // Set to TRUE ONLY IF Turn #{current_turn_number + 1} is a SYNTAX Turn (12-13)
             "score": 0,
             "score_reason": "1-sentence justification for the score"
         }}
@@ -1229,6 +1250,7 @@ class TTSView(APIView):
     POST {"text": "Hello!"} → returns audio/wav binary response.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         text = request.data.get('text', '').strip()
@@ -1287,6 +1309,7 @@ class LatestActiveBatchView(APIView):
     before the ID could be saved to local state.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def get(self, request):
         # Look for candidates created in the last 15 minutes that are still 'New'

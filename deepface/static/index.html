@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFace Proctoring — Test Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header class="topbar">
+        <div class="topbar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+                </svg>
+            </div>
+            <span class="brand-name">DeepFace Proctoring</span>
+            <span class="brand-badge">TEST DASHBOARD</span>
+        </div>
+        <div class="topbar-status">
+            <div class="status-dot" id="serverDot"></div>
+            <span id="serverStatus">Connecting...</span>
+        </div>
+    </header>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="main-content">
+
+        <!-- ──── STEP 1: REGISTRATION ──── -->
+        <section class="panel registration-panel" id="registrationPanel">
+            <div class="panel-header">
+                <h2><span class="step-num">01</span> Face Registration</h2>
+                <p class="panel-subtitle">Capture or upload a reference photo to register the candidate.</p>
+            </div>
+
+            <div class="reg-layout">
+                <!-- Left: Camera / Upload -->
+                <div class="reg-camera-section">
+                    <div class="camera-preview-box" id="regCameraBox">
+                        <video id="regVideo" autoplay muted playsinline></video>
+                        <canvas id="regCanvas" style="display:none;"></canvas>
+                        <img id="regSnapshot" class="snapshot-preview" style="display:none;" alt="snapshot">
+                        <div class="camera-overlay" id="regOverlay">
+                            <svg class="face-guide" viewBox="0 0 200 250">
+                                <ellipse cx="100" cy="115" rx="70" ry="90" fill="none" stroke="rgba(60,227,106,0.6)" stroke-width="2.5" stroke-dasharray="8 4"/>
+                            </svg>
+                            <span class="guide-text" id="regGuideText">⚠ Keep your face inside the oval — only the oval area will be captured</span>
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <button class="btn btn-secondary" id="btnStartRegCam">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            Open Camera
+                        </button>
+                        <button class="btn btn-primary" id="btnCaptureReg" disabled>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                            Capture Photo
+                        </button>
+                        <button class="btn btn-ghost" id="btnRetakeReg" style="display:none;">Retake</button>
+                    </div>
+                </div>
+
+                <!-- Right: Registration Form -->
+                <div class="reg-form-section">
+                    <div class="form-group">
+                        <label for="personIdInput">Person ID</label>
+                        <input type="text" id="personIdInput" placeholder="e.g. candidate_001" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="labelInput">Candidate Name</label>
+                        <input type="text" id="labelInput" placeholder="e.g. John Doe" autocomplete="off">
+                    </div>
+                    <button class="btn btn-accent btn-block" id="btnRegister" disabled>
+                        Register Face
+                    </button>
+
+                    <!-- Registration Result -->
+                    <div class="result-card" id="regResult" style="display:none;">
+                        <div class="result-icon" id="regResultIcon"></div>
+                        <div class="result-body">
+                            <h4 id="regResultTitle"></h4>
+                            <p id="regResultMessage"></p>
+                            <div class="result-meta" id="regResultMeta"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──── STEP 2: LIVE MONITORING ──── -->
+        <section class="panel monitoring-panel" id="monitoringPanel">
+            <div class="panel-header">
+                <h2><span class="step-num">02</span> Live Monitoring Session</h2>
+                <p class="panel-subtitle">Start a proctoring session to see all 19 features in real-time.</p>
+            </div>
+
+            <!-- Session Controls Bar -->
+            <div class="session-bar">
+                <div class="session-bar-left">
+                    <div class="form-group form-group-inline">
+                        <label for="sessionPersonId">Person ID</label>
+                        <input type="text" id="sessionPersonId" placeholder="candidate_001">
+                    </div>
+                </div>
+                <div class="session-bar-right">
+                    <button class="btn btn-accent" id="btnStartSession">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Start Session
+                    </button>
+                    <button class="btn btn-danger" id="btnStopSession" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                        Stop Session
+                    </button>
+                    <button class="btn btn-secondary" id="btnDownloadReport" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Monitoring Grid -->
+            <div class="monitor-grid">
+                <!-- Left: Video Feed -->
+                <div class="video-section">
+                    <div class="video-container" id="videoContainer">
+                        <video id="monitorVideo" autoplay muted playsinline></video>
+                        <canvas id="monitorCanvas"></canvas>
+                        <div class="video-hud" id="videoHud" style="display:none;">
+                            <div class="hud-top-left">
+                                <span class="hud-label">SESSION</span>
+                                <span class="hud-value" id="hudSessionId">—</span>
+                            </div>
+                            <div class="hud-top-right">
+                                <span class="hud-label">FRAME</span>
+                                <span class="hud-value" id="hudFrameCount">0</span>
+                            </div>
+                            <div class="hud-bottom-left">
+                                <span class="hud-fps" id="hudFps">0 FPS</span>
+                            </div>
+                            <div class="hud-bottom-right">
+                                <div class="hud-timer" id="hudTimer">00:00</div>
+                            </div>
+                        </div>
+                        <div class="video-placeholder" id="videoPlaceholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                            <p>Start a session to begin monitoring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Analytics Dashboard -->
+                <div class="analytics-section">
+                    <!-- Engagement Gauge -->
+                    <div class="analytics-card card-engagement">
+                        <div class="card-title">Engagement Score</div>
+                        <div class="gauge-container">
+                            <svg class="gauge-svg" viewBox="0 0 120 70">
+                                <path class="gauge-bg" d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke-width="8"/>
+                                <path class="gauge-fill" id="engagementArc" d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke-width="8" stroke-dasharray="157" stroke-dashoffset="157"/>
+                            </svg>
+                            <div class="gauge-value" id="engagementValue">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Micro-Violation Score -->
+                    <div class="analytics-card card-violations">
+                        <div class="card-title">Micro-Violation Score</div>
+                        <div class="violation-bar-container">
+                            <div class="violation-bar">
+                                <div class="violation-bar-fill" id="violationBarFill"></div>
+                            </div>
+                            <div class="violation-value" id="violationValue">0.0</div>
+                            <div class="violation-limit">/ 25.0</div>
+                        </div>
+                    </div>
+
+                    <!-- Face Status -->
+                    <div class="analytics-card card-face">
+                        <div class="card-title">Face Detection</div>
+                        <div class="face-status-grid">
+                            <div class="status-item">
+                                <span class="status-label">Present</span>
+                                <span class="status-badge" id="facePresent">—</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Count</span>
+                                <span class="status-badge" id="faceCount">—</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Verified</span>
+                                <span class="status-badge" id="faceVerified">—</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Liveness</span>
+                                <span class="status-badge" id="faceLiveness">—</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Head Pose -->
+                    <div class="analytics-card card-pose">
+                        <div class="card-title">Head Pose</div>
+                        <div class="pose-display">
+                            <div class="pose-axis">
+                                <span class="pose-label">Yaw</span>
+                                <div class="pose-meter">
+                                    <div class="pose-indicator" id="yawIndicator"></div>
+                                </div>
+                                <span class="pose-value" id="yawValue">0°</span>
+                            </div>
+                            <div class="pose-axis">
+                                <span class="pose-label">Pitch</span>
+                                <div class="pose-meter">
+                                    <div class="pose-indicator" id="pitchIndicator"></div>
+                                </div>
+                                <span class="pose-value" id="pitchValue">0°</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <!-- Alert Feed -->
+            <div class="alert-feed" id="alertFeed">
+                <div class="alert-feed-header">
+                    <h3>Live Alerts</h3>
+                    <span class="alert-count" id="alertCount">0</span>
+                </div>
+                <div class="alert-feed-list" id="alertList">
+                    <div class="alert-empty">No alerts yet. Start a session to begin monitoring.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/js/app.js?v=1.7"></script>
+</body>
+</html>

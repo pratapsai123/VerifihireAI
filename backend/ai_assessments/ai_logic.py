@@ -1,4 +1,5 @@
 import os
+from difflib import SequenceMatcher
 import requests
 import logging
 import copy
@@ -1122,6 +1123,39 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
 
     return verified_challenges
 
+def _is_duplicate_mcq(new_question, existing_questions, threshold=0.92):
+    """
+    HARD DEDUP: Check if a new MCQ is a near-exact duplicate of another in the CURRENT session.
+    Only checks within-assessment uniqueness (not cross-assessment).
+    Threshold 0.92 = catches only true repeats/rephrases.
+    Returns (is_duplicate: bool, matched_question: str or None)
+    """
+    if not new_question or not existing_questions:
+        return False, None
+
+    new_clean = new_question.lower().strip()[:150]
+    if len(new_clean) < 10:
+        return False, None
+
+    for existing in existing_questions:
+        if not existing:
+            continue
+        existing_clean = existing.lower().strip()[:150]
+        if len(existing_clean) < 10:
+            continue
+
+        # Fast pre-check: exact match
+        if new_clean == existing_clean:
+            return True, existing
+
+        # Similarity check — 0.92 catches only true repeats
+        ratio = SequenceMatcher(None, new_clean, existing_clean).ratio()
+        if ratio >= threshold:
+            return True, existing
+
+    return False, None
+
+
 def _generate_mcq_pool_ai_only(
     *,
     groq_client,
@@ -1162,20 +1196,27 @@ def _generate_mcq_pool_ai_only(
             count = min(batch_size, total_count_for_diff - idx)
             
             # Compress instructions to save token overhead
-            avoid_list = (blacklist + [q.get('question', '')[:50] for q in generated])[:10]
+            avoid_list = (blacklist + [q.get('question', '')[:80] for q in generated])[:50]
             avoid_txt = f"Exclude topics: {avoid_list}" if avoid_list else ""
             
             prompt = f"""
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate {count} technical MCQs ({difficulty}).
-            JSON FORMAT: {{ "mcqs": [ {{ "question": "What is Django?", "options": ["A web framework for Python", "A database management system", "A testing library", "A package manager"], "answer": "A web framework for Python", "difficulty": "{difficulty}" }} ] }}
+            IMPORTANT: Each question MUST test a DIFFERENT specific concept or sub-topic.
+            Do NOT generate generic questions like "What is X?" — instead ask about:
+            - How specific features work internally
+            - Edge cases and gotchas
+            - Best practices and anti-patterns
+            - Comparisons between similar concepts
+            - Real-world debugging scenarios
+            - Configuration and setup details
+            - Performance implications
+            JSON FORMAT: {{ "mcqs": [ {{ "question": "What happens when a Django middleware raises an exception during process_response?", "options": ["The response is returned as-is", "A 500 error is raised and remaining middleware is skipped", "The exception is silently logged", "The request is retried"], "answer": "A 500 error is raised and remaining middleware is skipped", "difficulty": "{difficulty}" }} ] }}
             RULES:
             - Generate valid JSON only (do NOT use escape sequences)
-            - UNIQUE: Questions must be specific to JD facets. {avoid_txt}
+            - UNIQUE: Every question must cover a DIFFERENT sub-topic. {avoid_txt}
             - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be a short (under 15 words) sentence or phrase that actually describes a possible answer.
             - NO PLACEHOLDERS: NEVER use options like "Option A", "Option B", "Choice 1", or simply "A", "B", "C", "D".
-            - NEGATIVE EXAMPLE (DO NOT DO THIS): {{ "options": ["Option A", "Option B", "Option C", "Option D"] }}
-            - POSITIVE EXAMPLE: {{ "options": ["A high-level programming language", "A low-level assembly language", "A database system", "A web browser"] }}
             - ANSWER FIELD: The answer MUST be the exact text from one of the options.
             - Each question gets exactly 4 options and 1 correct answer.
             """
@@ -1188,12 +1229,12 @@ def _generate_mcq_pool_ai_only(
                         groq_client,
                         model=model,
                         messages=[
-                            {"role": "system", "content": "You output JSON only."},
+                            {"role": "system", "content": "You are a senior technical interviewer. Generate specific, deep questions that test real knowledge — not surface-level definitions. Output JSON only."},
                             {"role": "user", "content": prompt},
                         ],
                         response_format={"type": "json_object"},
                         max_tokens=4096,
-                        temperature=0.2,
+                        temperature=0.7,
                     )
                     
                     if not response:
@@ -1204,18 +1245,25 @@ def _generate_mcq_pool_ai_only(
                     mcqs = parsed.get('mcqs', [])
                     same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
-                    # VALIDATE each MCQ structure before accepting
+                    # VALIDATE each MCQ structure + WITHIN-SESSION DEDUP before accepting
                     validated_mcqs = []
+                    session_qs = [q.get('question', '') for q in generated]
                     for q in same_diff:
                         is_valid, error_msg = _validate_mcq_structure(q)
-                        if is_valid:
-                            validated_mcqs.append(q)
-                        else:
+                        if not is_valid:
                             logger.debug(f"MCQ VALIDATION FAILED: {error_msg}. Question: {q.get('question', '')[:40]}...")
+                            continue
+                        # WITHIN-SESSION DEDUP: Only check against current assessment's questions
+                        is_dup, matched = _is_duplicate_mcq(q.get('question', ''), session_qs)
+                        if is_dup:
+                            logger.warning(f"MCQ DUPLICATE REJECTED: '{q.get('question', '')[:50]}...'")
+                            continue
+                        validated_mcqs.append(q)
+                        session_qs.append(q.get('question', ''))
 
                     if len(validated_mcqs) >= count:
                         batch_mcqs = validated_mcqs[:count]
-                        logger.info(f"MCQ Batch attempt {attempt + 1}: Generated {len(validated_mcqs)} valid {difficulty} MCQs")
+                        logger.info(f"MCQ Batch attempt {attempt + 1}: Generated {len(validated_mcqs)} valid UNIQUE {difficulty} MCQs")
                         break
                     elif len(same_diff) > 0:
                         logger.warning(f"MCQ Batch attempt {attempt + 1}: Generated {len(same_diff)} MCQs, only {len(validated_mcqs)} valid")
@@ -1251,13 +1299,18 @@ def _generate_mcq_pool_ai_only(
             idx += count
             
         # FINAL RESCUE: If we still have a shortfall, fill it one-by-one to avoid all limits
-        while len([q for q in generated if q.get('difficulty') == difficulty]) < total_count_for_diff:
+        gap_attempts = 0
+        MAX_GAP_ATTEMPTS = 30  # Safety cap to prevent infinite loops when dedup rejects many
+        while len([q for q in generated if q.get('difficulty') == difficulty]) < total_count_for_diff and gap_attempts < MAX_GAP_ATTEMPTS:
+            gap_attempts += 1
             if cancel_token and cache.get(f"abort_{cancel_token}"):
                 raise Exception("Generation Aborted by User")
                 
             shortfall = total_count_for_diff - len([q for q in generated if q.get('difficulty') == difficulty])
-            logger.info(f"MCQ Resilient Gap-Filler: Generating {shortfall} more {difficulty} MCQs one-by-one.")
+            logger.info(f"MCQ Resilient Gap-Filler (attempt {gap_attempts}/{MAX_GAP_ATTEMPTS}): Generating {shortfall} more {difficulty} MCQs one-by-one.")
             
+            # Expanded exclude list for better AI awareness of existing questions
+            existing_topics = [q.get('question', '')[:60] for q in generated][-30:]
             rescue_prompt = f"""
             JD: {job_description} | Skills: {required_skills}
             TASK: Generate EXACTLY 1 UNIQUE technical MCQ ({difficulty}).
@@ -1267,7 +1320,8 @@ def _generate_mcq_pool_ai_only(
             - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be actual answer text (NOT placeholder letters like "A", "B" or "Option A").
             - NO PLACEHOLDERS: NEVER use "Option A", "Choice 1", etc.
             - The answer field MUST be the exact text from one of the options.
-            - Exclude topics: {[q.get('question', '')[:30] for q in generated][-10:]}
+            - CRITICAL: Generate a completely UNIQUE question. Do NOT repeat or rephrase any of these existing questions:
+              {existing_topics}
             """
             try:
                 resp = _call_groq_with_backoff(
@@ -1278,25 +1332,34 @@ def _generate_mcq_pool_ai_only(
                     max_tokens=1024
                 )
                 rescue_mcqs = _normalize_generated_pool((resp if isinstance(resp, dict) else extract_json(resp)) or {}).get('mcqs', [])
+                session_qs = [q.get('question', '') for q in generated]
                 for rq in rescue_mcqs:
                     # Validate each rescue MCQ
                     is_valid, error_msg = _validate_mcq_structure(rq)
                     if not is_valid:
                         logger.warning(f"Gap-Filler MCQ validation failed: {error_msg}")
                         continue
+                    # WITHIN-SESSION DEDUP: Only check against current assessment's questions
+                    is_dup, matched = _is_duplicate_mcq(rq.get('question', ''), session_qs)
+                    if is_dup:
+                        logger.warning(f"Gap-Filler DUPLICATE REJECTED: '{rq.get('question', '')[:50]}...'")
+                        continue
                     
                     rq['difficulty'] = difficulty
                     generated.append(rq)
-                    logger.info(f"✅ Gap-Filler added 1 {difficulty} MCQ. Total {difficulty}: {len([q for q in generated if q.get('difficulty') == difficulty])}/{total_count_for_diff}")
+                    session_qs.append(rq.get('question', ''))
+                    logger.info(f"✅ Gap-Filler added 1 UNIQUE {difficulty} MCQ. Total {difficulty}: {len([q for q in generated if q.get('difficulty') == difficulty])}/{total_count_for_diff}")
                     if len([q for q in generated if q.get('difficulty') == difficulty]) >= total_count_for_diff:
                         break
             except Exception as e:
-                logger.error(f"Gap-Filler failed: {e}. Exiting relief loop.")
-                break
+                logger.error(f"Gap-Filler failed (attempt {gap_attempts}): {e}. Retrying...")
 
-            # Increased delay to 2s to mitigate Groq Rate Limits (TPM/RPM)
-            if idx < total_count_for_diff:
-                time.sleep(2)
+            # Delay to mitigate Groq Rate Limits (TPM/RPM)
+            time.sleep(2)
+        
+        if gap_attempts >= MAX_GAP_ATTEMPTS:
+            final_count = len([q for q in generated if q.get('difficulty') == difficulty])
+            logger.warning(f"Gap-Filler reached max attempts ({MAX_GAP_ATTEMPTS}). {difficulty}: {final_count}/{total_count_for_diff}")
 
     return generated
 

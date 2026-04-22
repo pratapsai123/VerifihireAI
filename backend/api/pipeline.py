@@ -15,7 +15,13 @@ def process_batch_assessment(batch_id):
     Generates ONE assessment pool for the entire batch based on who actually passed.
     Sends individual assessment invitation emails to each passed candidate.
     """
-    from ai_assessments.ai_logic import _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool
+    from groq import Groq
+    from ai_assessments.ai_logic import (
+        _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool,
+        _generate_mcq_pool_ai_only, _generate_execution_verified_coding_pool,
+        _expert_assessment_refiner, _validate_mcq_structure,
+        _mcq_difficulty_counts, _rebalance_mcq_difficulties, GroqKeyManager
+    )
     from ai_candidates.utils import log_automation_event
 
     try:
@@ -75,10 +81,14 @@ def process_batch_assessment(batch_id):
             mcq_medium_per_candidate = (mcq_count * 3) // 10
             mcq_hard_per_candidate = max(0, mcq_count - mcq_easy_per_candidate - mcq_medium_per_candidate)
 
-            # Create Assessment Record
+            # Create Assessment Record with clearer naming/ownership for visibility
+            assessment_name = f"[Pipeline] {trigger_candidate.job_title or 'Technical Test'}"
+            if trigger_candidate.batch_name:
+                assessment_name = f"{assessment_name} - {trigger_candidate.batch_name}"
+
             assessment = Assessment.objects.create(
                 job_description=job_desc,
-                required_skills=trigger_candidate.job_title or "Technical Assessment",
+                required_skills=assessment_name, # Clearly identifiable title
                 mcq_count=mcq_count,
                 coding_count=coding_count,
                 duration_minutes=duration,
@@ -91,6 +101,7 @@ def process_batch_assessment(batch_id):
                 batch_name=trigger_candidate.batch_name,
                 same_questions_for_all=same_questions,
                 num_applicants=num_passed,
+                # Explicitly link to the recruiter who triggered this batch
                 user_profile=getattr(trigger_candidate, 'user_profile', None),
                 created_by=getattr(trigger_candidate, 'user_profile', None),
                 company=getattr(trigger_candidate, 'company', None),
@@ -114,44 +125,216 @@ def process_batch_assessment(batch_id):
             pool_medium = int(pool_mcq_total * 0.3)
             pool_hard = max(0, pool_mcq_total - pool_easy - pool_medium)
 
-            mcq_prompt = (
-                f"TASK 1: Generate a POOL of {pool_mcq_total} MCQs.\n"
-                f"- {pool_easy} Easy, {pool_medium} Medium, {pool_hard} Hard.\n"
-                "Each MCQ must have: 'question', 'options' (list of 4), 'answer', and 'difficulty'."
-            )
-            keys_expected = '"mcqs"'
-            coding_prompt = ""
-            if coding_count > 0:
-                coding_prompt = (
-                    f"TASK 2: Generate a POOL of {pool_coding_total} Coding Challenges.\n"
-                    "CRITICAL: 'starter_code' MUST be a JSON mapping keys 'python' and 'javascript' ONLY.\n"
+            # --- FULL MANUAL-GRADE GENERATION PIPELINE ---
+            coding_tasks_list = [difficulty] * coding_count
+            pool_coding_tasks = coding_tasks_list * multiplier
+
+            local_api_key = GroqKeyManager.get_current_key()
+            local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
+            generated_data = {"mcqs": [], "coding_challenges": []}
+            AI_MODEL = "llama-3.1-8b-instant"
+
+            # 1. BLACKLIST: Fetch last 20 assessments to avoid duplicate questions
+            blacklist_mcqs = []
+            blacklist_titles = []
+            recent_assessments_bl = Assessment.objects.filter(company=assessment.company, is_deleted=False).order_by('-created_at')[:20]
+            for old_asm in recent_assessments_bl:
+                old_content = old_asm.generated_content or {}
+                for q in old_content.get('mcqs', []):
+                    blacklist_mcqs.append(q.get('question', '')[:100])
+                for challenge in old_content.get('coding_challenges', []):
+                    blacklist_titles.append(challenge.get('title'))
+
+            # 2. GENERATE MCQ POOL (Dedicated AI Call)
+            if pool_mcq_total > 0:
+                logger.info(f"Pipeline[{batch_id}]: Step 1 — Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
+                mcqs = _generate_mcq_pool_ai_only(
+                    groq_client=local_groq_client,
+                    job_description=job_desc,
+                    required_skills=assessment.required_skills,
+                    pool_mcq_total=pool_mcq_total,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    blacklist_qs=blacklist_mcqs,
+                    model=AI_MODEL,
+                    cancel_token=None
                 )
-                keys_expected = '"mcqs", "coding_challenges"'
+                if mcqs:
+                    generated_data['mcqs'] = mcqs[:pool_mcq_total]
 
-            main_prompt = (
-                f"Create assessment for: {job_desc}\n{mcq_prompt}\n{coding_prompt}\n"
-                f"Return JSON with keys: {keys_expected}."
-            )
-            raw_result = _call_groq_with_backoff(prompt=main_prompt, system_msg="Return valid JSON schema.", is_json=True)
+            # 3. GENERATE CODING POOL (Skeleton-Based: 100% Accuracy)
+            if pool_coding_total > 0:
+                logger.info(f"Pipeline[{batch_id}]: Step 2 — Generating {pool_coding_total} execution-verified coding challenges.")
+                generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                    groq_client=local_groq_client,
+                    job_description=job_desc,
+                    required_skills=assessment.required_skills,
+                    difficulties=pool_coding_tasks,
+                    total_required=pool_coding_total,
+                    model=AI_MODEL,
+                    cancel_token=None
+                )
+            else:
+                generated_data['coding_challenges'] = []
 
-            if not raw_result:
-                raise Exception("AI generation returned empty result.")
+            # 4. EXPERT REFINER GATE
+            if generated_data.get('mcqs'):
+                if len(generated_data['mcqs']) > 25:
+                    logger.info(f"Pipeline[{batch_id}]: Expert Gate BYPASSED — Pool size ({len(generated_data['mcqs'])}) is large.")
+                else:
+                    logger.info(f"Pipeline[{batch_id}]: Expert Gate — Cleaning and Refining MCQ pool...")
+                    mcq_refined_data = _expert_assessment_refiner(
+                        groq_client=local_groq_client,
+                        raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
+                        cancel_token=None
+                    )
+                    generated_data['mcqs'] = mcq_refined_data.get('mcqs', [])
 
-            generated_data = _normalize_generated_pool(raw_result)
-            generated_data = _repair_pool_shortfall(
-                groq_client=None,
-                job_description=job_desc,
-                required_skills=assessment.required_skills,
-                pool=generated_data,
-                pool_easy=pool_easy,
-                pool_medium=pool_medium,
-                pool_hard=pool_hard,
-                pool_coding_total=pool_coding_total,
-                coding_tasks=['Medium'] * pool_coding_total
-            )
+            # 5. INITIAL DIFFICULTY REBALANCING
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+            final_mcqs = len(generated_data.get('mcqs', []))
+            final_coding = len(generated_data.get('coding_challenges', []))
+
+            if final_mcqs >= pool_mcq_total and pool_mcq_total > 0 and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                logger.warning(f"Pipeline[{batch_id}]: MCQ difficulty skewed ({final_easy}/{final_medium}/{final_hard}). Rebalancing...")
+                generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                    generated_data.get('mcqs', []),
+                    easy_required=pool_easy,
+                    medium_required=pool_medium,
+                    hard_required=pool_hard,
+                )
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                final_mcqs = len(generated_data.get('mcqs', []))
+
+            # 6. SELF-HEALING REPAIR GATE
+            final_mcqs = len(generated_data.get('mcqs', []))
+            final_coding = len(generated_data.get('coding_challenges', []))
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+            if (final_mcqs < pool_mcq_total or final_coding < pool_coding_total or
+                final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                logger.info(f"Pipeline[{batch_id}]: 🔧 SELF-HEALING REPAIR TRIGGERED")
+                generated_data = _repair_pool_shortfall(
+                    groq_client=local_groq_client,
+                    job_description=job_desc,
+                    required_skills=assessment.required_skills,
+                    pool=generated_data,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    pool_coding_total=pool_coding_total,
+                    coding_tasks=pool_coding_tasks,
+                    model=AI_MODEL
+                )
+                final_mcqs = len(generated_data.get('mcqs', []))
+                final_coding = len(generated_data.get('coding_challenges', []))
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                logger.info(f"Pipeline[{batch_id}]: ✅ REPAIR COMPLETE — MCQs: {final_mcqs} ({final_easy}E/{final_medium}M/{final_hard}H), Coding: {final_coding}")
+
+            # 7. FORCED REBALANCING GATE
+            if final_mcqs >= pool_mcq_total:
+                generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                    generated_data.get('mcqs', []),
+                    easy_required=pool_easy,
+                    medium_required=pool_medium,
+                    hard_required=pool_hard
+                )
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+            # 8. FINAL MCQ VALIDATION PASS
+            logger.info(f"Pipeline[{batch_id}]: 🔍 FINAL PASS — Validating all MCQs...")
+            all_mcqs = generated_data.get('mcqs', [])
+            valid_mcqs = []
+            invalid_count = 0
+            for mcq in all_mcqs:
+                is_valid, error_msg = _validate_mcq_structure(mcq)
+                if is_valid:
+                    valid_mcqs.append(mcq)
+                else:
+                    invalid_count += 1
+                    logger.warning(f"Pipeline[{batch_id}]: ⚠️ INVALID MCQ REMOVED: {error_msg}")
+            generated_data['mcqs'] = valid_mcqs
+            final_mcqs = len(valid_mcqs)
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs)
+
+            # Post-cleanup MCQ repair
+            if invalid_count > 0 and final_mcqs < pool_mcq_total:
+                logger.warning(f"Pipeline[{batch_id}]: MCQ shortfall after cleanup ({final_mcqs}/{pool_mcq_total}). Triggering repair...")
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_desc,
+                        required_skills=assessment.required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=AI_MODEL
+                    )
+                    generated_data = repair_generated
+                    all_mcqs_after_repair = generated_data.get('mcqs', [])
+                    valid_mcqs_after_repair = [mcq for mcq in all_mcqs_after_repair if _validate_mcq_structure(mcq)[0]]
+                    generated_data['mcqs'] = valid_mcqs_after_repair
+                    final_mcqs = len(valid_mcqs_after_repair)
+                    final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs_after_repair)
+                    logger.info(f"Pipeline[{batch_id}]: ✅ MCQ repair completed. Now: {final_mcqs} valid")
+                except Exception as repair_e:
+                    logger.error(f"Pipeline[{batch_id}]: ❌ MCQ repair failed: {repair_e}")
+                    raise
+
+            # 9. FINAL CODING VALIDATION PASS
+            logger.info(f"Pipeline[{batch_id}]: 🔍 FINAL PASS — Validating coding challenges...")
+            all_coding = generated_data.get('coding_challenges', [])
+            valid_coding = []
+            removed_coding = 0
+            MIN_TC = 4
+            for challenge in all_coding:
+                if len(challenge.get('test_cases', [])) >= MIN_TC:
+                    valid_coding.append(challenge)
+                else:
+                    removed_coding += 1
+                    logger.warning(f"Pipeline[{batch_id}]: ⚠️ CODING REMOVED: '{challenge.get('title', 'Unknown')}' — insufficient test cases")
+            generated_data['coding_challenges'] = valid_coding
+            final_coding = len(valid_coding)
+
+            # Post-cleanup coding repair
+            if removed_coding > 0 and final_coding < pool_coding_total:
+                logger.warning(f"Pipeline[{batch_id}]: Coding shortfall after cleanup ({final_coding}/{pool_coding_total}). Triggering repair...")
+                try:
+                    repair_generated = _repair_pool_shortfall(
+                        groq_client=local_groq_client,
+                        job_description=job_desc,
+                        required_skills=assessment.required_skills,
+                        pool=generated_data,
+                        pool_easy=pool_easy,
+                        pool_medium=pool_medium,
+                        pool_hard=pool_hard,
+                        pool_coding_total=pool_coding_total,
+                        coding_tasks=pool_coding_tasks,
+                        model=AI_MODEL
+                    )
+                    generated_data = repair_generated
+                    valid_coding_after_repair = [c for c in generated_data.get('coding_challenges', []) if len(c.get('test_cases', [])) >= MIN_TC]
+                    generated_data['coding_challenges'] = valid_coding_after_repair
+                    final_coding = len(valid_coding_after_repair)
+                    logger.info(f"Pipeline[{batch_id}]: ✅ Coding repair completed. Now: {final_coding} valid")
+                except Exception as repair_e:
+                    logger.error(f"Pipeline[{batch_id}]: ❌ Coding repair failed: {repair_e}")
+                    raise
+
+            # 10. FINAL VALIDATION GATE
+            if final_mcqs < mcq_count or final_coding < coding_count:
+                logger.error(f"Pipeline[{batch_id}]: ❌ FINAL VALIDATION FAILED — MCQs: {final_mcqs}/{mcq_count}, Coding: {final_coding}/{coding_count}")
+                raise Exception(
+                    f"AI could not satisfy minimum required pool counts. "
+                    f"Expected MCQs={mcq_count}, coding={coding_count}; got MCQs={final_mcqs}, coding={final_coding}."
+                )
 
             if not generated_data:
-                raise Exception("AI pool generation produced no valid content after repair.")
+                raise Exception("AI pool generation produced no valid content after all quality gates.")
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
@@ -301,7 +484,13 @@ def process_resume_passed(candidate_id):
     """
     Fallback for single/non-batch fully-automatic flows.
     """
-    from ai_assessments.ai_logic import _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool
+    from groq import Groq
+    from ai_assessments.ai_logic import (
+        _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool,
+        _generate_mcq_pool_ai_only, _generate_execution_verified_coding_pool,
+        _expert_assessment_refiner, _validate_mcq_structure,
+        _mcq_difficulty_counts, _rebalance_mcq_difficulties, GroqKeyManager
+    )
     from ai_candidates.utils import log_automation_event
 
     try:
@@ -356,15 +545,229 @@ def process_resume_passed(candidate_id):
             creation_type='automatic'
         )
 
-        raw_result = _call_groq_with_backoff(
-            prompt=f"Generate {assessment.mcq_count} MCQs for: {assessment.job_description}",
-            is_json=True
-        )
+        # --- FULL MANUAL-GRADE GENERATION PIPELINE ---
+        coding_count = settings_data.get('coding_count', 1)
+        difficulty = settings_data.get('difficulty', 'Medium')
+        pool_mcq_total = mcq_count
+        pool_easy = mcq_easy_per_candidate
+        pool_medium = mcq_medium_per_candidate
+        pool_hard = mcq_hard_per_candidate
+        pool_coding_total = coding_count
+        coding_tasks_list = [difficulty] * coding_count
 
-        if not raw_result:
-            raise Exception("AI returned empty result for individual assessment.")
+        local_api_key = GroqKeyManager.get_current_key()
+        local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
+        generated_data = {"mcqs": [], "coding_challenges": []}
+        AI_MODEL = "llama-3.1-8b-instant"
 
-        generated_data = _normalize_generated_pool(raw_result)
+        # 1. BLACKLIST: Fetch last 20 assessments to avoid duplicate questions
+        blacklist_mcqs = []
+        blacklist_titles = []
+        recent_assessments_bl = Assessment.objects.filter(company=candidate.company, is_deleted=False).order_by('-created_at')[:20]
+        for old_asm in recent_assessments_bl:
+            old_content = old_asm.generated_content or {}
+            for q in old_content.get('mcqs', []):
+                blacklist_mcqs.append(q.get('question', '')[:100])
+            for challenge in old_content.get('coding_challenges', []):
+                blacklist_titles.append(challenge.get('title'))
+
+        # 2. GENERATE MCQ POOL (Dedicated AI Call)
+        if pool_mcq_total > 0:
+            logger.info(f"Pipeline[individual-{candidate_id}]: Step 1 — Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
+            mcqs = _generate_mcq_pool_ai_only(
+                groq_client=local_groq_client,
+                job_description=assessment.job_description,
+                required_skills=assessment.required_skills,
+                pool_mcq_total=pool_mcq_total,
+                pool_easy=pool_easy,
+                pool_medium=pool_medium,
+                pool_hard=pool_hard,
+                blacklist_qs=blacklist_mcqs,
+                model=AI_MODEL,
+                cancel_token=None
+            )
+            if mcqs:
+                generated_data['mcqs'] = mcqs[:pool_mcq_total]
+
+        # 3. GENERATE CODING POOL (Skeleton-Based: 100% Accuracy)
+        if pool_coding_total > 0:
+            logger.info(f"Pipeline[individual-{candidate_id}]: Step 2 — Generating {pool_coding_total} execution-verified coding challenges.")
+            generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
+                groq_client=local_groq_client,
+                job_description=assessment.job_description,
+                required_skills=assessment.required_skills,
+                difficulties=coding_tasks_list,
+                total_required=pool_coding_total,
+                model=AI_MODEL,
+                cancel_token=None
+            )
+        else:
+            generated_data['coding_challenges'] = []
+
+        # 4. EXPERT REFINER GATE
+        if generated_data.get('mcqs'):
+            if len(generated_data['mcqs']) > 25:
+                logger.info(f"Pipeline[individual-{candidate_id}]: Expert Gate BYPASSED — Pool size ({len(generated_data['mcqs'])}) is large.")
+            else:
+                logger.info(f"Pipeline[individual-{candidate_id}]: Expert Gate — Cleaning and Refining MCQ pool...")
+                mcq_refined_data = _expert_assessment_refiner(
+                    groq_client=local_groq_client,
+                    raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
+                    cancel_token=None
+                )
+                generated_data['mcqs'] = mcq_refined_data.get('mcqs', [])
+
+        # 5. INITIAL DIFFICULTY REBALANCING
+        final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+        final_mcqs = len(generated_data.get('mcqs', []))
+        final_coding = len(generated_data.get('coding_challenges', []))
+
+        if final_mcqs >= pool_mcq_total and pool_mcq_total > 0 and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+            logger.warning(f"Pipeline[individual-{candidate_id}]: MCQ difficulty skewed. Rebalancing...")
+            generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                generated_data.get('mcqs', []),
+                easy_required=pool_easy,
+                medium_required=pool_medium,
+                hard_required=pool_hard,
+            )
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+            final_mcqs = len(generated_data.get('mcqs', []))
+
+        # 6. SELF-HEALING REPAIR GATE
+        final_mcqs = len(generated_data.get('mcqs', []))
+        final_coding = len(generated_data.get('coding_challenges', []))
+        final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+        if (final_mcqs < pool_mcq_total or final_coding < pool_coding_total or
+            final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+            logger.info(f"Pipeline[individual-{candidate_id}]: 🔧 SELF-HEALING REPAIR TRIGGERED")
+            generated_data = _repair_pool_shortfall(
+                groq_client=local_groq_client,
+                job_description=assessment.job_description,
+                required_skills=assessment.required_skills,
+                pool=generated_data,
+                pool_easy=pool_easy,
+                pool_medium=pool_medium,
+                pool_hard=pool_hard,
+                pool_coding_total=pool_coding_total,
+                coding_tasks=coding_tasks_list,
+                model=AI_MODEL
+            )
+            final_mcqs = len(generated_data.get('mcqs', []))
+            final_coding = len(generated_data.get('coding_challenges', []))
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+            logger.info(f"Pipeline[individual-{candidate_id}]: ✅ REPAIR COMPLETE — MCQs: {final_mcqs}, Coding: {final_coding}")
+
+        # 7. FORCED REBALANCING GATE
+        if final_mcqs >= pool_mcq_total:
+            generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                generated_data.get('mcqs', []),
+                easy_required=pool_easy,
+                medium_required=pool_medium,
+                hard_required=pool_hard
+            )
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+
+        # 8. FINAL MCQ VALIDATION PASS
+        logger.info(f"Pipeline[individual-{candidate_id}]: 🔍 FINAL PASS — Validating all MCQs...")
+        all_mcqs = generated_data.get('mcqs', [])
+        valid_mcqs = []
+        invalid_count = 0
+        for mcq in all_mcqs:
+            is_valid, error_msg = _validate_mcq_structure(mcq)
+            if is_valid:
+                valid_mcqs.append(mcq)
+            else:
+                invalid_count += 1
+                logger.warning(f"Pipeline[individual-{candidate_id}]: ⚠️ INVALID MCQ REMOVED: {error_msg}")
+        generated_data['mcqs'] = valid_mcqs
+        final_mcqs = len(valid_mcqs)
+        final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs)
+
+        # Post-cleanup MCQ repair
+        if invalid_count > 0 and final_mcqs < pool_mcq_total:
+            logger.warning(f"Pipeline[individual-{candidate_id}]: MCQ shortfall after cleanup. Triggering repair...")
+            try:
+                repair_generated = _repair_pool_shortfall(
+                    groq_client=local_groq_client,
+                    job_description=assessment.job_description,
+                    required_skills=assessment.required_skills,
+                    pool=generated_data,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    pool_coding_total=pool_coding_total,
+                    coding_tasks=coding_tasks_list,
+                    model=AI_MODEL
+                )
+                generated_data = repair_generated
+                all_mcqs_after_repair = generated_data.get('mcqs', [])
+                valid_mcqs_after_repair = [mcq for mcq in all_mcqs_after_repair if _validate_mcq_structure(mcq)[0]]
+                generated_data['mcqs'] = valid_mcqs_after_repair
+                final_mcqs = len(valid_mcqs_after_repair)
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(valid_mcqs_after_repair)
+                logger.info(f"Pipeline[individual-{candidate_id}]: ✅ MCQ repair completed. Now: {final_mcqs} valid")
+            except Exception as repair_e:
+                logger.error(f"Pipeline[individual-{candidate_id}]: ❌ MCQ repair failed: {repair_e}")
+                raise
+
+        # 9. FINAL CODING VALIDATION PASS
+        logger.info(f"Pipeline[individual-{candidate_id}]: 🔍 FINAL PASS — Validating coding challenges...")
+        all_coding = generated_data.get('coding_challenges', [])
+        valid_coding = []
+        removed_coding = 0
+        MIN_TC = 4
+        for challenge in all_coding:
+            if len(challenge.get('test_cases', [])) >= MIN_TC:
+                valid_coding.append(challenge)
+            else:
+                removed_coding += 1
+                logger.warning(f"Pipeline[individual-{candidate_id}]: ⚠️ CODING REMOVED: '{challenge.get('title', 'Unknown')}'")
+        generated_data['coding_challenges'] = valid_coding
+        final_coding = len(valid_coding)
+
+        # Post-cleanup coding repair
+        if removed_coding > 0 and final_coding < pool_coding_total:
+            logger.warning(f"Pipeline[individual-{candidate_id}]: Coding shortfall after cleanup. Triggering repair...")
+            try:
+                repair_generated = _repair_pool_shortfall(
+                    groq_client=local_groq_client,
+                    job_description=assessment.job_description,
+                    required_skills=assessment.required_skills,
+                    pool=generated_data,
+                    pool_easy=pool_easy,
+                    pool_medium=pool_medium,
+                    pool_hard=pool_hard,
+                    pool_coding_total=pool_coding_total,
+                    coding_tasks=coding_tasks_list,
+                    model=AI_MODEL
+                )
+                generated_data = repair_generated
+                valid_coding_after_repair = [c for c in generated_data.get('coding_challenges', []) if len(c.get('test_cases', [])) >= MIN_TC]
+                generated_data['coding_challenges'] = valid_coding_after_repair
+                final_coding = len(valid_coding_after_repair)
+                logger.info(f"Pipeline[individual-{candidate_id}]: ✅ Coding repair completed. Now: {final_coding} valid")
+            except Exception as repair_e:
+                logger.error(f"Pipeline[individual-{candidate_id}]: ❌ Coding repair failed: {repair_e}")
+                raise
+
+        # 10. FINAL VALIDATION GATE
+        if final_mcqs < mcq_count or final_coding < coding_count:
+            logger.warning(
+                f"Pipeline[individual-{candidate_id}]: ⚠️ FINAL GATE WARNING — "
+                f"AI could not satisfy minimum required pool counts exactly. "
+                f"Expected MCQs={mcq_count}, coding={coding_count}; "
+                f"Got MCQs={final_mcqs}, coding={final_coding}. "
+                "Proceeding with best-effort pool."
+            )
+            # We enforce a MINIMUM requirement only: at least 1 MCQ or 1 coding challenge
+            if final_mcqs == 0 and final_coding == 0:
+                raise Exception("CRITICAL: AI failed to generate ANY valid questions (MCQs=0, Coding=0). Aborting assessment.")
+
+
+        if not generated_data:
+            raise Exception("AI pool generation produced no valid content after all quality gates.")
+
         assessment.generated_content = generated_data
         assessment.status = 'SCHEDULED'
         assessment.save()
@@ -449,7 +852,12 @@ def process_assessment_passed(submission_id):
         if candidates.exists():
             candidate = candidates.first()
             candidate.status = 'Interview'
-            candidate.save(update_fields=['status'])
+            # Synchronize batch info from submission to candidate if it doesn't exist
+            if not candidate.batch_id:
+                candidate.batch_id = submission.batch_id
+            if not candidate.batch_name:
+                candidate.batch_name = submission.batch_name
+            candidate.save(update_fields=['status', 'batch_id', 'batch_name'])
             logger.info(f"Pipeline: Updated existing candidate {candidate.id} status to 'Interview'.")
         else:
             candidate = Candidate.objects.create(
@@ -458,11 +866,13 @@ def process_assessment_passed(submission_id):
                 job_title=submission.assessment.required_skills or "Applicant",
                 job_description=submission.assessment.job_description,
                 status='Interview',
+                batch_id=submission.batch_id,
+                batch_name=submission.batch_name,
                 company=submission.assessment.company,
                 user_profile=getattr(submission.assessment, 'user_profile', None),
                 created_by=getattr(submission.assessment, 'user_profile', None),
             )
-            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage.")
+            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage and linked to batch {submission.batch_id}.")
 
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         link = f"{base_url}/interview-start/{candidate.id}"

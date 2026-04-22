@@ -250,7 +250,9 @@ class SubmitAssessmentView(APIView):
                 candidate = Candidate.objects.filter(email__iexact=email).first()
                 if candidate:
                     candidate.score = percentage
-                    candidate.status = 'Completed'
+                    # For Fully Automatic flows, move them to 'Assessment Passed' 
+                    # so they show up correctly before the interview is sent.
+                    candidate.status = 'Assessment Passed'
                     candidate.completed_at = timezone.now()
                     
                     if not isinstance(candidate.interview_summary, list):
@@ -267,6 +269,17 @@ class SubmitAssessmentView(APIView):
                         "timestamp": timezone.now().isoformat()
                     })
                     candidate.save()
+
+                    # ── TRIGGER NEXT STAGE ──
+                    # If they passed, automatically trigger the AI Interview invitation
+                    if pass_status == 'selected':
+                        try:
+                            from api.pipeline import process_assessment_passed
+                            # This handles generating the interview link and sending the email
+                            process_assessment_passed(submission.id)
+                        except Exception as pipe_err:
+                            logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
@@ -766,11 +779,11 @@ class GenerateAssessmentView(APIView):
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,
-                mcq_count=final_mcqs,
-                mcq_easy=final_easy,
-                mcq_medium=final_medium,
-                mcq_hard=final_hard,
-                coding_count=final_coding,
+                mcq_count=mcq_count,
+                mcq_easy=mcq_easy,
+                mcq_medium=mcq_medium,
+                mcq_hard=mcq_hard,
+                coding_count=coding_count,
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
@@ -934,7 +947,8 @@ class CreateSubmissionView(APIView):
                 "answers": submission.answers,
                 "current_question_index": submission.current_question_index,
                 "coding_results": (submission.results_breakdown or {}).get('coding_results', {}),
-                "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {})
+                "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {}),
+                "candidate_questions": submission.candidate_questions
             }, status=status.HTTP_201_CREATED)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -949,7 +963,13 @@ class UpdateAssessmentIntegrityView(APIView):
                 submission.tab_switches += 1
             elif event_type == 'phone_detection':
                 submission.phone_warnings += 1
-            elif event_type == 'face_detection_lost':
+            elif event_type in ['face_detection_lost', 'no_face_detection', 'no_face']:
+                submission.face_warnings += 1
+            elif event_type in ['multiface_detection', 'multiple_faces', 'multi_person']:
+                submission.face_warnings += 1
+            elif event_type in ['looking_away', 'head_yaw_exceeded', 'head_pitch_exceeded']:
+                submission.face_warnings += 1
+            elif event_type in ['face_mismatch', 'verification_failed']:
                 submission.face_warnings += 1
             
             # Simple metadata log
@@ -962,23 +982,8 @@ class UpdateAssessmentIntegrityView(APIView):
             if len(submission.warning_logs) < 3:
                 submission.warning_logs.append(event_type)
 
-            weights = {
-                'tab_switch': 10,
-                'phone_detection': 30,
-                'face_detection_lost': 5
-            }
-
-            # Simple penalty system
-            total_raw_penalty = (
-                submission.tab_switches * weights['tab_switch'] + 
-                submission.phone_warnings * weights['phone_detection'] + 
-                submission.face_warnings * weights['face_detection_lost']
-            )
-
-            # Subtract the "free" penalty from the first 3 warnings
-            free_penalty = sum(weights.get(w, 0) for w in submission.warning_logs)
-
-            submission.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
+            # Per user request: DO NOT cut marks for integrity issues. 
+            submission.integrity_score = 100.0
             
             # Handle Screenshot
             screenshot_b64 = request.data.get('screenshot')
@@ -1593,7 +1598,7 @@ class InviteAssessmentCandidatesView(APIView):
         remaining_spots = max(0, assessment.max_candidates_allowed - assessment.invited_count)
 
         return Response({
-            "message": f"Successfully invited {len(invited_candidates)} candidates",
+            "message": f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}",
             "count": len(invited_candidates),
             "total_invited": assessment.invited_count,
             "max_allowed": assessment.max_candidates_allowed,
