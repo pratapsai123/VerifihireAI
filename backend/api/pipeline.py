@@ -875,7 +875,7 @@ def process_assessment_passed(submission_id):
             logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage and linked to batch {submission.batch_id}.")
 
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
-        link = f"{base_url}/interview-start/{candidate.id}"
+        link = f"{base_url}/interview-start/{candidate.public_token}"
 
         role_name = submission.assessment.required_skills or "the role"
         subject = f"Congratulations! You're invited for an Interview — {role_name}"

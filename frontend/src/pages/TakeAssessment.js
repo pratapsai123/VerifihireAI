@@ -357,6 +357,7 @@ export default function TakeAssessment() {
   const screenCanvasRef = useRef(null);
   const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
 
+
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
   const [objectiveSeconds, setObjectiveSeconds] = useState(() => {
@@ -1101,7 +1102,7 @@ export default function TakeAssessment() {
     }
 
     let webcamScreenshot = null;
-    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'face_mismatch', 'looking_away'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
       try {
         const camCanvas = document.createElement('canvas');
         camCanvas.width = videoRef.current.videoWidth || 640;

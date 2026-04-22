@@ -94,6 +94,7 @@ def register_face(
     Returns:
         Dict with success status, quality score, and embedding count.
     """
+    person_id = person_id.strip().lower()
     DeepFace = _get_deepface()
 
     try:
@@ -224,12 +225,14 @@ def get_registered_embeddings(person_id: str, model: Optional[str] = None) -> Li
 
 def is_registered(person_id: str) -> bool:
     """Check if a person has any registered face embeddings."""
+    person_id = person_id.strip().lower()
     return _count_embeddings(person_id) > 0
 
 
 def delete_registration(person_id: str) -> bool:
     """Delete all registered face data for a person."""
     import shutil
+    person_id = person_id.strip().lower()
     person_dir = REGISTERED_FACES_DIR / person_id
     if person_dir.exists():
         shutil.rmtree(person_dir)

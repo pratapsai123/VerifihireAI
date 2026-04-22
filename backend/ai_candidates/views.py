@@ -16,7 +16,6 @@ from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog, Pipeli
 from .serializers import CandidateSerializer, PipelineLogSerializer
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
-import traceback
 import time
 import re
 import logging
@@ -187,7 +186,8 @@ class BulkInviteView(APIView):
                     batch_id=batch_id,
                     batch_name=batch_name,
                 )
-                link = f"http://localhost:3000/interview-start/{candidate.id}"
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+                link = f"{frontend_base}/interview-start/{candidate.public_token}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -678,6 +678,26 @@ class CandidateListCreateView(generics.ListCreateAPIView):
 
 INTERVIEW_LINK_TTL_MINUTES = 60 # Back to 60 minutes as requested
 
+
+def _resolve_public_candidate(public_token):
+    """
+    Backward compatible resolver for public interview links.
+    Supports both new UUID public_token and legacy numeric candidate id links.
+    """
+    token_str = str(public_token).strip()
+    # New format: UUID token
+    try:
+        parsed = uuid.UUID(token_str)
+        return Candidate.objects.get(public_token=parsed, is_deleted=False)
+    except Exception:
+        pass
+
+    # Legacy format: integer candidate id
+    if token_str.isdigit():
+        return Candidate.objects.get(pk=int(token_str), is_deleted=False)
+
+    raise Candidate.DoesNotExist()
+
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CandidateSerializer
     permission_classes = [AllowAny]
@@ -735,32 +755,73 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
     def get(self, request, *args, **kwargs):
+        try:
+            candidate = self.get_object()
+            now = timezone.now()
+
+            # Prevent retaking if already completed or if they failed screening
+            if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
+                return Response(
+                    {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+
+
+            # First access — stamp the time
+            if not candidate.link_opened_at:
+                candidate.link_opened_at = now
+                candidate.save(update_fields=['link_opened_at'])
+            else:
+                # Check if link has expired
+                elapsed = now - candidate.link_opened_at
+                if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
+                    return Response(
+                        {'error': 'Interview link has expired.', 'link_expired': True},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+
+            response = self.retrieve(request, *args, **kwargs)
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
+        except Exception as e:
+            logger.error(f"Error in CandidateDetailView.get: {str(e)}", exc_info=True)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CandidatePublicDetailView(generics.RetrieveAPIView):
+    serializer_class = CandidateSerializer
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    def get_object(self):
+        return _resolve_public_candidate(self.kwargs.get('public_token'))
+
+    def get(self, request, *args, **kwargs):
         candidate = self.get_object()
         now = timezone.now()
 
-        # Prevent retaking if already completed
         if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
-            from rest_framework.response import Response as DRFResponse
-            return DRFResponse(
+            return Response(
                 {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
-                status=403
+                status=status.HTTP_403_FORBIDDEN
             )
 
-        # First access — stamp the time
+
+
         if not candidate.link_opened_at:
             candidate.link_opened_at = now
             candidate.save(update_fields=['link_opened_at'])
         else:
-            # Check if link has expired
             elapsed = now - candidate.link_opened_at
             if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
-                from rest_framework.response import Response as DRFResponse
-                return DRFResponse(
+                return Response(
                     {'error': 'Interview link has expired.', 'link_expired': True},
-                    status=403
+                    status=status.HTTP_403_FORBIDDEN
                 )
 
-        response = super().get(request, *args, **kwargs)
+        response = self.retrieve(request, *args, **kwargs)
         response["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response["Pragma"] = "no-cache"
         response["Expires"] = "0"
@@ -785,6 +846,10 @@ class CandidateStatusUpdateView(APIView):
             
             new_status = request.data.get('status')
             if new_status in dict(Candidate.STATUS_CHOICES):
+                # Security hardening: unauthenticated candidate link flow should only be
+                # able to mark itself Completed (not Hired/Rejected/etc.).
+                if not request.user.is_authenticated and new_status != 'Completed':
+                    return Response({'error': 'Unauthenticated status updates are restricted.'}, status=status.HTTP_403_FORBIDDEN)
                 candidate.status = new_status
                 if new_status in ['Completed', 'Hired', 'Rejected', 'Resume Failed']:
                     candidate.resume_text = None
@@ -799,6 +864,33 @@ class CandidateStatusUpdateView(APIView):
             return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CandidatePublicStatusUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def patch(self, request, public_token):
+        try:
+            candidate = _resolve_public_candidate(public_token)
+            new_status = request.data.get('status')
+            if new_status not in dict(Candidate.STATUS_CHOICES):
+                return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
+            if new_status != 'Completed':
+                return Response({'error': 'Only completion status is allowed for public links.'}, status=status.HTTP_403_FORBIDDEN)
+
+            candidate.status = new_status
+            candidate.completed_at = timezone.now()
+            candidate.resume_text = None
+            candidate.save()
+            response = Response({'status': 'success', 'new_status': candidate.status})
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class UpdateIntegrityView(APIView):
     permission_classes = [AllowAny]
@@ -870,6 +962,69 @@ class UpdateIntegrityView(APIView):
         except Candidate.DoesNotExist:
             return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
+
+class CandidatePublicIntegrityUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, public_token):
+        try:
+            candidate = _resolve_public_candidate(public_token)
+            integrity, created = InterviewIntegrity.objects.get_or_create(candidate=candidate)
+
+            event_type = request.data.get('event_type')
+            screenshot_b64 = request.data.get('screenshot')
+            webcam_b64 = request.data.get('webcam_screenshot')
+
+            if event_type == 'tab_switch':
+                integrity.tab_switches += 1
+            elif event_type == 'phone_detection':
+                integrity.phone_detections += 1
+            elif event_type == 'multiface_detection':
+                integrity.multiface_detections += 1
+            elif event_type in ['no_face_detection', 'face_detection_lost']:
+                integrity.no_face_detections += 1
+
+            InterviewIntegrityLog.objects.create(
+                candidate=candidate,
+                event_type=event_type,
+                screenshot_base64=screenshot_b64,
+                webcam_screenshot_base64=webcam_b64
+            )
+
+            if len(integrity.warning_logs) < 3:
+                integrity.warning_logs.append(event_type)
+
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'multiface_detection': 15,
+                'no_face_detection': 5,
+                'face_detection_lost': 5
+            }
+            total_raw_penalty = (
+                integrity.tab_switches * weights['tab_switch'] +
+                integrity.phone_detections * weights['phone_detection'] +
+                integrity.multiface_detections * weights['multiface_detection'] +
+                integrity.no_face_detections * weights['no_face_detection']
+            )
+            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
+            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
+            integrity.save()
+
+            return Response({
+                "status": "success",
+                "integrity_score": integrity.integrity_score,
+                "violations": {
+                    "tab_switches": integrity.tab_switches,
+                    "phone_detections": integrity.phone_detections,
+                    "multiface_detections": integrity.multiface_detections,
+                    "no_face_detections": integrity.no_face_detections
+                }
+            })
+        except Candidate.DoesNotExist:
+            return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+
 class ProcessAnswerView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
@@ -916,17 +1071,13 @@ class ProcessAnswerView(APIView):
 
     def post(self, request):
         candidate_id = request.data.get('candidate_id')
+        candidate_token = request.data.get('candidate_token')
         current_question = request.data.get('question')
         answer = request.data.get('answer')
         remaining_questions = request.data.get('remaining_questions', [])
         chat_history = request.data.get('chat_history', []) 
         
-        # DEBUG LOGGING
-        with open('debug_ai.log', 'a') as f:
-            f.write(f"\n--- New Request {datetime.now()} ---\n")
-            f.write(f"Candidate ID: {candidate_id}\n")
-            f.write(f"Question: {current_question}\n")
-            f.write(f"Answer: {answer}\n")
+        logger.debug("ProcessAnswer request received for candidate_id=%s", candidate_id)
         
         # Fallback if question is missing due to frontend race condition
         if not current_question and chat_history:
@@ -942,6 +1093,10 @@ class ProcessAnswerView(APIView):
         if not answer:
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Public caller security: require unguessable token for unauthenticated requests.
+        if not request.user.is_authenticated and not candidate_token:
+            return Response({'error': 'candidate_token is required for public requests.'}, status=status.HTTP_400_BAD_REQUEST)
+
         # 1. Synchronize Turn Number with Frontend
         current_turn_number = request.data.get('turn_number')
         
@@ -951,21 +1106,29 @@ class ProcessAnswerView(APIView):
         jd_context = "No job description available."
         experience_level = None
         
-        if candidate_id:
+        candidate = None
+        if candidate_token:
+            try:
+                candidate = _resolve_public_candidate(candidate_token)
+                candidate_id = candidate.id
+            except Candidate.DoesNotExist:
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        elif candidate_id:
             try:
                 if isinstance(candidate_id, str) and not candidate_id.isdigit():
-                    pass
-                else:
-                    candidate = Candidate.objects.get(pk=candidate_id)
-                    candidate_name = candidate.full_name
-                    job_title = candidate.job_title or job_title
-                    jd_context = candidate.job_description or jd_context
-                    experience_level = getattr(candidate, 'experience_level', None)
-                    if candidate.resume_text:
-                         resume_context = candidate.resume_text
+                    return Response({'error': 'Invalid candidate_id'}, status=status.HTTP_400_BAD_REQUEST)
+                candidate = Candidate.objects.get(pk=candidate_id)
             except Exception as e:
-                with open('debug_ai.log', 'a') as f:
-                    f.write(f"Lookup Error: {str(e)}\n")
+                logger.debug("Candidate lookup error in ProcessAnswerView: %s", str(e))
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if candidate:
+            candidate_name = candidate.full_name
+            job_title = candidate.job_title or job_title
+            jd_context = candidate.job_description or jd_context
+            experience_level = getattr(candidate, 'experience_level', None)
+            if candidate.resume_text:
+                resume_context = candidate.resume_text
 
         try:
             # Construct Chat History context with safety
@@ -1196,29 +1359,26 @@ class ProcessAnswerView(APIView):
             # -----------------------------------------------
 
             # Scoring Update (Silent)
-            if candidate_id and data.get('score') is not None and not data.get('is_clarification'):
+            if candidate and data.get('score') is not None and not data.get('is_clarification'):
                  try:
-                    if not isinstance(candidate_id, str) or candidate_id.isdigit():
-                        candidate = Candidate.objects.get(pk=candidate_id)
-                        
-                        # Update score
-                        q_score = int(data.get('score', 0))
-                        candidate.score += q_score
-                        candidate.total_questions += 1
-                        
-                        # Store per-question summary for "Details" button
-                        if not isinstance(candidate.interview_summary, list):
-                            candidate.interview_summary = []
-                        
-                        candidate.interview_summary.append({
-                            "question": current_question,
-                            "answer": answer,
-                            "feedback": data.get('feedback', ''),
-                            "score": q_score,
-                            "reason": data.get('score_reason', 'No reasoning provided.')
-                        })
-                        
-                        candidate.save()
+                    # Update score
+                    q_score = int(data.get('score', 0))
+                    candidate.score += q_score
+                    candidate.total_questions += 1
+
+                    # Store per-question summary for "Details" button
+                    if not isinstance(candidate.interview_summary, list):
+                        candidate.interview_summary = []
+
+                    candidate.interview_summary.append({
+                        "question": current_question,
+                        "answer": answer,
+                        "feedback": data.get('feedback', ''),
+                        "score": q_score,
+                        "reason": data.get('score_reason', 'No reasoning provided.')
+                    })
+
+                    candidate.save()
                  except: pass
 
             return Response(data, status=status.HTTP_200_OK)
@@ -1227,11 +1387,10 @@ class ProcessAnswerView(APIView):
             error_msg = str(e)
             is_rate_limit = "rate limit" in error_msg.lower() or "429" in error_msg
             is_connection = "connection" in error_msg.lower() or "timeout" in error_msg.lower()
-            
-            with open('debug_ai.log', 'a') as f:
-                f.write(f"PROCESS ERROR: {error_msg}\n")
-                if not (is_rate_limit or is_connection):
-                    f.write(traceback.format_exc())
+            if is_rate_limit or is_connection:
+                logger.warning("Retryable ProcessAnswer error: %s", error_msg)
+            else:
+                logger.exception("ProcessAnswer failure")
             
             # Treat connection errors as temporary (retryable) just like rate limits
             if is_rate_limit or is_connection:

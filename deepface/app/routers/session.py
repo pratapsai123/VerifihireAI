@@ -26,6 +26,7 @@ router = APIRouter(prefix="/session", tags=["Session Management"])
 @router.post("/start")
 async def start_session(request: SessionStartRequest):
     """Start a new monitoring session with initial ArcFace verification."""
+    logger.info(f"Session start request for person_id: {request.person_id}")
     try:
         result = await session_manager.start_session(
             person_id=request.person_id,

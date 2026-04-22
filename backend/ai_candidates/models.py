@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 class Candidate(models.Model):
@@ -77,6 +78,7 @@ class Candidate(models.Model):
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Internal UUID for the bulk session")
     batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True, help_text="Descriptive name (JD_date_time)")
+    public_token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"

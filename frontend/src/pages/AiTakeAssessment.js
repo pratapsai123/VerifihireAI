@@ -3,9 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
 import '../styles/Dashboard.css';
-import { API_BASE_URL } from '../apiConfig';
-
-const DEEPFACE_BASE_URL = 'http://localhost:8500/api/v1';
+import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
 
 const AiTakeAssessment = () => {
     const { token } = useParams();
@@ -86,12 +84,12 @@ const AiTakeAssessment = () => {
                         const foundKey = Object.keys(q.starter_code).find(k => k.toLowerCase() === lang.toLowerCase());
                         if (foundKey) nextCode = formatCode(q.starter_code[foundKey]);
                     }
-                    
+
                     if (nextCode === undefined && q[`starter_code_${lang}`]) {
                         nextCode = formatCode(q[`starter_code_${lang}`]);
                     }
                 }
-                
+
                 if (nextCode === undefined) {
                     nextCode = DEFAULT_BOILERPLATES[lang] || '# Write logic here\n';
                 }
@@ -150,6 +148,22 @@ const AiTakeAssessment = () => {
     const [dfVerified, setDfVerified] = useState(null);
     const [dfHeadDir, setDfHeadDir] = useState('FORWARD');
     const [dfFps, setDfFps] = useState(0);
+    const [isDeepfaceActive, setIsDeepfaceActive] = useState(false);
+
+    const getDeepfacePersonId = useCallback(() => {
+        return String((candidateEmail || token || '')).trim().toLowerCase();
+    }, [candidateEmail, token]);
+
+    const checkDeepfaceRegistration = useCallback(async () => {
+        const personId = getDeepfacePersonId();
+        if (!personId) return false;
+        try {
+            const res = await axios.get(`${DEEPFACE_BASE_URL}/registration/registered/${encodeURIComponent(personId)}`);
+            return res?.data?.registered === true;
+        } catch (e) {
+            return false;
+        }
+    }, [DEEPFACE_BASE_URL, getDeepfacePersonId]);
 
     const dfWsRef = useRef(null);
     const dfSessionIdRef = useRef(null);
@@ -373,7 +387,7 @@ const AiTakeAssessment = () => {
                 if (a.type === 'no_face') eventType = 'no_face_detection';
                 if (a.type === 'multiple_faces') eventType = 'multiface_detection';
                 if (a.type === 'head_yaw_exceeded' || a.type === 'head_pitch_exceeded' || a.type === 'looking_away_detected') eventType = 'looking_away';
-                
+
                 // Alert throttling: don't spam the same event type every frame
                 showAiEvent(a.message.toUpperCase(), a.severity === 'HIGH' || a.severity === 'CRITICAL', eventType);
             });
@@ -382,36 +396,62 @@ const AiTakeAssessment = () => {
     }, [drawDeepfaceOverlay, showAiEvent]);
 
     const startDeepfaceMonitoring = useCallback(async (candidateId) => {
+        const normalizedEmail = String(candidateId).trim().toLowerCase();
         try {
             const res = await axios.post(`${DEEPFACE_BASE_URL}/session/start`, {
-                person_id: String(candidateId)
+                person_id: normalizedEmail
             });
             const sessionId = res.data.session_id;
             setDfSessionId(sessionId);
             dfSessionIdRef.current = sessionId;
 
-            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const hostname = window.location.hostname;
-            const wsUrl = `${wsProtocol}//${hostname}:8500/api/v1/ws/monitor/${sessionId}`;
-            const ws = new WebSocket(wsUrl);
-            dfWsRef.current = ws;
+            const wsUrl = `${DEEPFACE_WS_URL}/ws/monitor/${sessionId}`;
+            const wsReady = await new Promise((resolve) => {
+                const ws = new WebSocket(wsUrl);
+                dfWsRef.current = ws;
 
-            ws.onopen = () => {
-                console.log('DeepFace WS connected for assessment:', sessionId);
-                dfAwaitingRef.current = false;
-                dfSendIntervalRef.current = setInterval(sendDeepfaceFrame, 40); // 25fps
-            };
-            ws.onmessage = (e) => handleDeepfaceResult(JSON.parse(e.data));
-            ws.onclose = () => clearInterval(dfSendIntervalRef.current);
+                const openTimeout = setTimeout(() => {
+                    try { ws.close(); } catch (e) { }
+                    resolve(false);
+                }, 7000);
+
+                ws.onopen = () => {
+                    clearTimeout(openTimeout);
+                    console.log('DeepFace WS connected for assessment:', sessionId);
+                    dfAwaitingRef.current = false;
+                    setIsDeepfaceActive(true);
+                    // Production-safe cadence (~5 FPS). This matches DeepFace guidance and prevents CPU/network overload.
+                    dfSendIntervalRef.current = setInterval(sendDeepfaceFrame, 200);
+                    resolve(true);
+                };
+                ws.onmessage = (e) => handleDeepfaceResult(JSON.parse(e.data));
+                ws.onclose = () => {
+                    clearTimeout(openTimeout);
+                    clearInterval(dfSendIntervalRef.current);
+                    setIsDeepfaceActive(false);
+                };
+                ws.onerror = () => {
+                    clearTimeout(openTimeout);
+                    resolve(false);
+                };
+            });
+            return wsReady;
         } catch (e) {
             console.error('DeepFace Init Failed:', e);
+            if (e?.response?.status === 403) {
+                // DeepFace backend says not registered.
+                setIsRegistered(false);
+            }
+            setIsDeepfaceActive(false);
+            return false;
         }
     }, [sendDeepfaceFrame, handleDeepfaceResult]);
 
     const stopDeepfaceMonitoring = useCallback(async () => {
         if (dfWsRef.current) dfWsRef.current.close();
         if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
-        
+        setIsDeepfaceActive(false);
+
         // Finalize session on backend
         if (dfSessionIdRef.current) {
             try {
@@ -442,10 +482,10 @@ const AiTakeAssessment = () => {
         const params = new URLSearchParams(window.location.search);
         const nameParam = params.get('name');
         const emailParam = params.get('email');
-        
+
         const isNameValid = nameParam && nameParam !== 'Extraction Failed';
         const isEmailValid = emailParam && emailParam !== 'Extraction Failed';
-        
+
         if (isNameValid || isEmailValid) {
             if (isNameValid) setCandidateName(nameParam);
             if (isEmailValid) setCandidateEmail(emailParam);
@@ -509,9 +549,19 @@ const AiTakeAssessment = () => {
 
     const startAssessment = async (bypassReg = false) => {
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
-        
+        const personId = getDeepfacePersonId();
+        if (!personId) { alert('Invalid candidate identity for DeepFace registration.'); return; }
+
         // DeepFace Requirement: Ensure face is registered first
         if (!isRegistered && !bypassReg) {
+            setIsRegistering(true);
+            return;
+        }
+
+        // Re-check against DeepFace backend to avoid stale local UI state.
+        const stillRegistered = await checkDeepfaceRegistration();
+        if (!stillRegistered) {
+            setIsRegistered(false);
             setIsRegistering(true);
             return;
         }
@@ -525,13 +575,12 @@ const AiTakeAssessment = () => {
             setSubmissionId(submission_id);
             if (savedResults) setCodingResults(savedResults);
             if (savedDrafts) setCodeDrafts(savedDrafts);
-            
+
             if (candidate_questions) {
                 setAssessment(prev => ({ ...prev, generated_content: candidate_questions }));
             }
-            
+
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
-            setIsStarted(true);
 
             // Restore session
             if (savedAnswers && Object.keys(savedAnswers).length > 0) {
@@ -569,7 +618,7 @@ const AiTakeAssessment = () => {
 
             // Start Proctoring (Replacement for old monitor)
             await startScreenShare();
-            
+
             try {
                 if (document.documentElement.requestFullscreen) {
                     await document.documentElement.requestFullscreen();
@@ -579,7 +628,23 @@ const AiTakeAssessment = () => {
 
             // DeepFace Initialization
             await startCamera();
-            await startDeepfaceMonitoring(candidateEmail);
+            const deepfaceOk = await startDeepfaceMonitoring(personId);
+            if (!deepfaceOk) {
+                const regNow = await checkDeepfaceRegistration();
+                if (!regNow) {
+                    setIsRegistered(false);
+                    setIsRegistering(true);
+                } else {
+                    alert('DeepFace monitoring failed to start. Please try again.');
+                }
+                stopCamera();
+                if (screenStreamRef.current) {
+                    screenStreamRef.current.getTracks().forEach(t => t.stop());
+                    screenStreamRef.current = null;
+                }
+                return;
+            }
+            setIsStarted(true);
 
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
@@ -606,6 +671,7 @@ const AiTakeAssessment = () => {
             track.onended = () => {
                 showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
                 setIsStarted(false); // End session or force re-auth
+                setIsRegistered(false); // Require fresh face registration before restarting
             };
             return true;
         } catch (err) {
@@ -641,11 +707,11 @@ const AiTakeAssessment = () => {
                         });
                         const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
                         const exp = String(tcOutput).trim();
-                        
+
                         // Robust comparison: check for exact match OR normalized match
                         const normalize = (s) => s.replace(/\s+/g, '').replace(/'/g, '"').toLowerCase();
                         let passed = out === exp || normalize(out) === normalize(exp);
-                        
+
                         // Further fallback: if it looks like a JSON wrap issue (e.g. expected {'result': ...} but got ...)
                         if (!passed && normalize(exp).includes(normalize(out))) {
                             passed = true; // Partial match if the core data is present
@@ -753,7 +819,7 @@ const AiTakeAssessment = () => {
 
     useEffect(() => {
         if (!isStarted || !submissionId) return;
-        
+
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
         const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'window_switch');
         const onFullscreenChange = () => {
@@ -772,9 +838,10 @@ const AiTakeAssessment = () => {
             document.removeEventListener('visibilitychange', onHide);
             window.removeEventListener('blur', onBlur);
             document.removeEventListener('fullscreenchange', onFullscreenChange);
+            stopDeepfaceMonitoring();
             stopCamera();
         };
-    }, [isStarted, submissionId, showAiEvent, submitted]);
+    }, [isStarted, submissionId, showAiEvent, submitted, stopDeepfaceMonitoring]);
 
     // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
     useEffect(() => {
@@ -879,7 +946,7 @@ const AiTakeAssessment = () => {
 
             assessment.generated_content.coding_challenges.forEach((q, idx) => {
                 const qKey = `coding_${idx}`;
-                
+
                 // Use supported languages to bootstrap all possible defaults
                 supportedLanguages.forEach(sl => {
                     const dKey = `${qKey}_${sl.id}`;
@@ -890,7 +957,7 @@ const AiTakeAssessment = () => {
                         const foundKey = Object.keys(q.starter_code).find(k => k.toLowerCase() === sl.id.toLowerCase());
                         if (foundKey) starter = formatCode(q.starter_code[foundKey]);
                     }
-                    
+
                     if (starter === undefined && q[`starter_code_${sl.id}`]) {
                         starter = formatCode(q[`starter_code_${sl.id}`]);
                     }
@@ -985,7 +1052,9 @@ const AiTakeAssessment = () => {
             // Mark as completed locally to prevent re-opening link later
             localStorage.setItem(`assessment_completed_${token}`, 'true');
             setSubmitted(true);
+            await stopDeepfaceMonitoring();
             stopCamera();
+            setIsRegistered(false);
             if (screenStreamRef.current) {
                 screenStreamRef.current.getTracks().forEach(t => t.stop());
                 screenStreamRef.current = null;
@@ -1028,7 +1097,7 @@ const AiTakeAssessment = () => {
 
         const handleRegisterFace = async () => {
             if (!localVideoRef.current && !capturedImg) return;
-            
+
             let finalImage = capturedImg;
             if (!finalImage) {
                 const canvas = document.createElement('canvas');
@@ -1041,14 +1110,22 @@ const AiTakeAssessment = () => {
 
             setWizardStep(1); // Analyzing
             setRegError('');
-            
+
             try {
-                const personId = candidateEmail || `temp_${Date.now()}`;
-                await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
+                const personId = normalizedEmail || `temp_${Date.now()}`;
+                const res = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                     person_id: personId,
                     image_base64: finalImage.split(',')[1]
                 });
-                
+
+                if (!res.data.success) {
+                    setRegError(res.data.message || "Registration failed. Please ensure your face is clearly visible.");
+                    setWizardStep(0);
+                    setCapturedImg(null);
+                    return;
+                }
+
                 setWizardStep(2); // Success
                 setTimeout(() => {
                     setIsRegistered(true);
@@ -1080,17 +1157,17 @@ const AiTakeAssessment = () => {
                     <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
                         Please look directly at the camera. We need to register your face for our AI proctoring system.
                     </p>
-                    
+
                     <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
                         {capturedImg ? (
                             <img src={capturedImg} alt="Captured face" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                         ) : (
                             <video ref={localVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                         )}
-                        
+
                         {/* Overlay guides */}
                         <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
-                        
+
                         {wizardStep === 1 && (
                             <>
                                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
@@ -1313,28 +1390,26 @@ const AiTakeAssessment = () => {
                         <div style={{ fontSize: '1.1rem', fontWeight: 800, color: timeLeft < 300 ? '#dc2626' : '#1a5276' }}>{formatTime(timeLeft)}</div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,0.8)', border: '1px solid #e0e7ff', borderRadius: 40, padding: '4px 14px 4px 6px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', backdropFilter: 'blur(8px)' }}>
-                        <div style={{ 
-                            position: 'relative', 
-                            width: 52, 
-                            height: 52, 
-                            borderRadius: '50%', 
-                            overflow: 'hidden', 
-                            border: `2.5px solid ${
-                                dfVerified === null ? '#6366f1' :
-                                dfVerified === false ? '#ef4444' :
-                                dfHeadDir !== 'FORWARD' ? '#f59e0b' : '#22c55e'
-                            }`,
-                            boxShadow: `0 0 12px ${
-                                dfVerified === null ? 'rgba(99,102,241,0.3)' :
-                                dfVerified === false ? 'rgba(239,68,68,0.5)' :
-                                dfHeadDir !== 'FORWARD' ? 'rgba(245,158,11,0.4)' : 'rgba(34,197,94,0.3)'
-                            }`,
+                        <div style={{
+                            position: 'relative',
+                            width: 52,
+                            height: 52,
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            border: `2.5px solid ${dfVerified === null ? '#6366f1' :
+                                    dfVerified === false ? '#ef4444' :
+                                        dfHeadDir !== 'FORWARD' ? '#f59e0b' : '#22c55e'
+                                }`,
+                            boxShadow: `0 0 12px ${dfVerified === null ? 'rgba(99,102,241,0.3)' :
+                                    dfVerified === false ? 'rgba(239,68,68,0.5)' :
+                                        dfHeadDir !== 'FORWARD' ? 'rgba(245,158,11,0.4)' : 'rgba(34,197,94,0.3)'
+                                }`,
                             transition: 'all 0.3s ease',
                             animation: dfVerified === false ? 'pulse-error 1s infinite' : 'none'
                         }}>
                             <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                             <canvas ref={dfCanvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none' }} />
-                            
+
                             {/* Scanning Animation */}
                             <div style={{
                                 position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#6366f1',
@@ -1347,33 +1422,49 @@ const AiTakeAssessment = () => {
                             <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                                 {dfSessionId ? (
                                     <>
-                                        <div style={{ 
-                                            background: dfVerified === true ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)', 
+                                        <div style={{
+                                            background: dfVerified === true ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)',
                                             color: dfVerified === true ? '#16a34a' : '#dc2626',
-                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800,
                                             border: `1px solid ${dfVerified === true ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
                                             display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
                                         }}>
                                             <i className={`fa-solid ${dfVerified === true ? 'fa-check-circle' : 'fa-circle-xmark'}`}></i>
                                             {dfVerified === true ? 'VERIFIED' : 'MISMATCH'}
                                         </div>
-                                        <div style={{ 
+                                        <div style={{
                                             background: 'rgba(99, 102, 241, 0.15)', color: '#4f46e5',
-                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800,
                                             border: '1px solid rgba(99, 102, 241, 0.3)',
                                             display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
                                         }}>
                                             <i className="fa-solid fa-bolt"></i>
                                             {Math.round(dfEngagement)}%
                                         </div>
-                                        <div style={{ 
+                                        <div style={{
                                             background: 'rgba(75, 85, 99, 0.1)', color: '#4b5563',
-                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800, 
+                                            padding: '2px 8px', borderRadius: 6, fontSize: '0.62rem', fontWeight: 800,
                                             border: '1px solid rgba(75, 85, 99, 0.2)',
                                             display: 'flex', alignItems: 'center', gap: 4, backdropFilter: 'blur(4px)'
                                         }}>
                                             <i className="fa-solid fa-compass"></i>
                                             {dfHeadDir}
+                                        </div>
+                                        <div style={{
+                                            background: isDeepfaceActive ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)',
+                                            color: isDeepfaceActive ? '#16a34a' : '#dc2626',
+                                            padding: '2px 8px',
+                                            borderRadius: 6,
+                                            fontSize: '0.62rem',
+                                            fontWeight: 800,
+                                            border: `1px solid ${isDeepfaceActive ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 4,
+                                            backdropFilter: 'blur(4px)'
+                                        }}>
+                                            <i className={`fa-solid ${isDeepfaceActive ? 'fa-shield-halved' : 'fa-triangle-exclamation'}`}></i>
+                                            {isDeepfaceActive ? 'MONITORING ON' : 'MONITORING OFF'}
                                         </div>
                                     </>
                                 ) : (
@@ -1480,7 +1571,7 @@ const AiTakeAssessment = () => {
                                             <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', margin: '0 0 0.5rem', display: 'flex', alignItems: 'center', gap: 10 }}>
                                                 {currentQ.title || `Challenge ${currentQ.id + 1}`}
                                             </h2>
-                                            
+
                                             <div style={{ display: 'flex', gap: 8, marginBottom: '1.2rem' }}>
                                                 <div style={{ fontSize: '0.7rem', padding: '3px 10px', background: '#f3f4f6', borderRadius: 15, color: '#4b5563', fontWeight: 600 }}>Topics</div>
                                                 <div style={{ fontSize: '0.7rem', padding: '3px 10px', background: '#f3f4f6', borderRadius: 15, color: '#4b5563', fontWeight: 600 }}>Companies</div>
@@ -1502,10 +1593,10 @@ const AiTakeAssessment = () => {
                                                 ).map((tc, idx) => (
                                                     <div key={idx} style={{ marginBottom: '1.2rem' }}>
                                                         <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#111827', marginBottom: 8 }}>Example {idx + 1}:</div>
-                                                        <div style={{ 
-                                                            background: '#f8f9fa', 
-                                                            borderLeft: '2px solid #e5e7eb', 
-                                                            padding: '10px 15px', 
+                                                        <div style={{
+                                                            background: '#f8f9fa',
+                                                            borderLeft: '2px solid #e5e7eb',
+                                                            padding: '10px 15px',
                                                             fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
                                                             fontSize: '0.85rem'
                                                         }}>

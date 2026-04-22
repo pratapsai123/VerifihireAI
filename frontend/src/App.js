@@ -91,7 +91,6 @@ axios.interceptors.request.use(
         '/interview-start/',
         '/result/',
         '/live-interview',
-        '/ai-interview',
         '/book-interview/',
         '/accept-invite'
       ];
@@ -124,7 +123,6 @@ axios.interceptors.response.use(
         '/interview-start/',
         '/result/',
         '/live-interview',
-        '/ai-interview',
         '/book-interview/',
         '/accept-invite'
       ];
@@ -189,7 +187,7 @@ function AppContent() {
     const publicRoutes = [
       '/login', '/signup', '/forgot-password', '/take-assessment/', 
       '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
-      '/result/', '/live-interview', '/ai-interview', '/book-interview/', '/accept-invite'
+      '/result/', '/live-interview', '/book-interview/', '/accept-invite'
     ];
     const isPublicPage = publicRoutes.some(path => location.pathname.startsWith(path));
     if (isPublicPage) return;
@@ -250,6 +248,7 @@ function AppContent() {
             <Route path="/coding-challenge-question" element={<CodingQuestionForm />} />
             {/* Interviewer View */}
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
+            <Route path="/ai-interview" element={<AiInterview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />
             <Route path="/resume-matcher" element={<ResumeMatcher />} />
@@ -271,7 +270,6 @@ function AppContent() {
           <Route path="/accept-invite" element={<AcceptInvite />} />
           <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
           <Route path="/live-interview" element={<LiveInterview />} />
-          <Route path="/ai-interview" element={<AiInterview />} />
           <Route path="/interview-start/:token" element={<InterviewStart />} />
           <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
           <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />

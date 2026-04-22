@@ -29,11 +29,15 @@ router = APIRouter(prefix="/registration", tags=["Face Registration"])
 @router.post("/register", response_model=FaceRegisterResponse)
 async def register_face_endpoint(request: FaceRegisterRequest):
     """Register a face for a person using ArcFace (high accuracy)."""
+    logger.info(f"Registering face for person_id: {request.person_id}")
     result = register_face(
         person_id=request.person_id,
         image_base64=request.image_base64,
         label=request.label,
     )
+
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["message"])
 
     return FaceRegisterResponse(
         success=result["success"],

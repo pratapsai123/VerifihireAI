@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView
 
 urlpatterns = [
     path('', CandidateListCreateView.as_view(), name='candidate-list-create'),
@@ -7,6 +7,9 @@ urlpatterns = [
     path('<int:pk>/status/', CandidateStatusUpdateView.as_view(), name='candidate-status-update'),
     path('<int:pk>/timeline/', CandidateTimelineView.as_view(), name='candidate-timeline'),
     path('<int:pk>/integrity/', UpdateIntegrityView.as_view(), name='candidate-integrity-update'),
+    path('public/<str:public_token>/', CandidatePublicDetailView.as_view(), name='candidate-public-detail'),
+    path('public/<str:public_token>/status/', CandidatePublicStatusUpdateView.as_view(), name='candidate-public-status-update'),
+    path('public/<str:public_token>/integrity/', CandidatePublicIntegrityUpdateView.as_view(), name='candidate-public-integrity-update'),
     path('match/', ResumeMatchView.as_view(), name='resume-match'),
     path('latest-active-batch/', LatestActiveBatchView.as_view(), name='latest-active-batch'),
     path('batch-progress/<str:batch_id>/', BatchProgressView.as_view(), name='batch-progress'),
