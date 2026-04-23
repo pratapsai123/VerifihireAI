@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView
+from django.urls import path
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView
 
 urlpatterns = [
     path('', CandidateListCreateView.as_view(), name='candidate-list-create'),
@@ -18,5 +19,6 @@ urlpatterns = [
     path('process-answer/', ProcessAnswerView.as_view(), name='process-answer'),
     path('assemblyai-token/', AssemblyAITokenView.as_view(), name='assemblyai-token'),
     path('tts/', TTSView.as_view(), name='tts'),
+    path('<int:pk>/download-report/', CandidateReportDownloadView.as_view(), name='candidate-report-download'),
 ]
 

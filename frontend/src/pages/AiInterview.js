@@ -119,9 +119,18 @@ const AiInterview = () => {
         setFile(null);
     };
 
-
-
-
+    const downloadTemplate = () => {
+        const headers = "name,email\n";
+        const blob = new Blob([headers], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "ai_interview_template.csv");
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -414,6 +423,15 @@ const AiInterview = () => {
                                         <p style={{ fontSize: '0.75rem', color: '#94A3B8', marginTop: '1rem', lineHeight: '1.5' }}>
                                             Ensure column headers are <b>name</b> and <b>email</b>.
                                         </p>
+                                        <button 
+                                            type="button" 
+                                            onClick={downloadTemplate} 
+                                            style={{ marginTop: '1rem', background: 'white', color: '#6366f1', border: '1px solid #cbd5e1', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'all 0.2s', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
+                                            onMouseOver={(e) => { e.currentTarget.style.borderColor = '#6366f1'; e.currentTarget.style.background = '#f8fafc'; }}
+                                            onMouseOut={(e) => { e.currentTarget.style.borderColor = '#cbd5e1'; e.currentTarget.style.background = 'white'; }}
+                                        >
+                                            <i className="fa-solid fa-download"></i> Download Template
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -1489,3 +1489,281 @@ class LatestActiveBatchView(APIView):
             return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
 
         return Response({"batch_id": None}, status=status.HTTP_200_OK)
+
+
+class CandidateReportDownloadView(APIView):
+    """
+    Generates a comprehensive PDF report for an AI interview session.
+    Includes candidate details, identity verification photo, full transcript,
+    and integrity violation snapshots.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            
+            # RBAC: Ensure user belongs to the same company or is a superuser
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not request.user.is_superuser):
+                return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Generate PDF in memory
+            buffer = io.BytesIO()
+            from reportlab.lib.pagesizes import A4
+            from reportlab.lib import colors
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, PageBreak
+            from reportlab.lib.units import inch
+            import base64
+
+            doc = SimpleDocTemplate(
+                buffer, 
+                pagesize=A4,
+                rightMargin=50,
+                leftMargin=50,
+                topMargin=50,
+                bottomMargin=50
+            )
+            styles = getSampleStyleSheet()
+            elements = []
+
+            # 1. Header & Title
+            header_style = ParagraphStyle(
+                'HeaderStyle', 
+                parent=styles['Heading1'], 
+                fontSize=26, 
+                spaceAfter=20, 
+                textColor=colors.HexColor("#4338ca"),
+                alignment=1 # Center
+            )
+            elements.append(Paragraph("VerifiHireAI — Interview Report", header_style))
+            elements.append(Paragraph(f"Candidate: {candidate.full_name}", styles['Heading2']))
+            elements.append(Spacer(1, 15))
+
+            # Define custom styles if not already present
+            if 'Small' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Small',
+                    parent=styles['Normal'],
+                    fontSize=8,
+                    leading=10,
+                    textColor=colors.grey
+                ))
+            if 'Italic' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Italic',
+                    parent=styles['Normal'],
+                    fontName='Helvetica-Oblique'
+                ))
+
+            # 2. Candidate Information (Photo on Left, Details on Right)
+            elements.append(Paragraph("Candidate Information", styles['Heading3']))
+            
+            # Identity Verification (Face Registration)
+            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+            # Try multiple path variations to be safe (case sensitivity, etc.)
+            email_normalized = candidate.email.strip()
+            path_options = [
+                os.path.join(deepface_data_dir, email_normalized, "face_0.jpg"),
+                os.path.join(deepface_data_dir, email_normalized.lower(), "face_0.jpg"),
+                os.path.join(deepface_data_dir, email_normalized.split('@')[0], "face_0.jpg"), # Try just username
+            ]
+            
+            person_img_path = None
+            for p in path_options:
+                if os.path.exists(p):
+                    person_img_path = p
+                    break
+
+            # Left side: Image
+            if person_img_path:
+                try:
+                    img_elem = RLImage(person_img_path, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            else:
+                img_elem = Paragraph("<i>No registered identity photo found in the proctoring database.</i>", styles['Normal'])
+
+            # Right side: Summary Table
+            info_data = [
+                ["Full Name", candidate.full_name],
+                ["Email", candidate.email],
+                ["Job Title", candidate.job_title or "N/A"],
+                ["Final Score", f"{candidate.score} / {candidate.total_questions * 10 if candidate.total_questions else 100}"],
+                ["Status", candidate.status],
+                ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
+            ]
+            
+            summary_table = Table(info_data, colWidths=[1.2*inch, 3.0*inch])
+            summary_table.setStyle(TableStyle([
+                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
+                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#475569")),
+                ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
+                ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e2e8f0")),
+                ('PADDING', (0,0), (-1,-1), 6),
+            ]))
+
+            # Combine in a layout table
+            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
+            layout_table.setStyle(TableStyle([
+                ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                ('ALIGN', (0,0), (0,0), 'LEFT'),
+                ('ALIGN', (1,0), (1,0), 'LEFT'),
+            ]))
+            elements.append(layout_table)
+            elements.append(Spacer(1, 25))
+
+            # 3. Interview Transcript
+            elements.append(Paragraph("Conversation Transcript", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            if isinstance(candidate.interview_summary, list) and candidate.interview_summary:
+                for i, turn in enumerate(candidate.interview_summary, 1):
+                    # Question Header
+                    elements.append(Paragraph(f"Question #{i}", styles['Heading4']))
+                    elements.append(Paragraph(f"<b>Q:</b> {turn.get('question', 'N/A')}", styles['Normal']))
+                    elements.append(Spacer(1, 5))
+                    
+                    # Answer
+                    elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 5))
+                    
+                    # AI Analysis
+                    elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
+                    elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
+                    
+                    # Score
+                    score = turn.get('score', 0)
+                    score_color = colors.darkgreen if score >= 7 else (colors.darkorange if score >= 4 else colors.red)
+                    elements.append(Paragraph(f"<b>Score: <font color={score_color.hexval()}>{score}/10</font></b> — {turn.get('reason', '')}", styles['Normal']))
+                    
+                    elements.append(Spacer(1, 15))
+                    elements.append(Paragraph('<hr color="#e2e8f0"/>', styles['Normal']))
+                    elements.append(Spacer(1, 10))
+            else:
+                elements.append(Paragraph("No interview transcript data recorded for this session.", styles['Italic']))
+
+            # 4. Integrity Violations & Snapshots
+            elements.append(PageBreak())
+            elements.append(Paragraph("Proctoring & Integrity Evidence", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            logs = candidate.integrity_logs.all().order_by('timestamp')
+            if logs.exists():
+                elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
+                elements.append(Spacer(1, 15))
+                
+                for log in logs:
+                    elements.append(Paragraph(f"<b>Violation:</b> {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})", styles['Normal']))
+                    elements.append(Spacer(1, 5))
+                    
+                    # Add snapshots
+                    img_row = []
+                    # Process Webcam Snapshot
+                    if log.webcam_screenshot_base64:
+                        try:
+                            b64 = log.webcam_screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=2.8*inch, height=2.1*inch)
+                            img_row.append(rl_img)
+                        except: pass
+                    
+                    # Process Desktop Snapshot
+                    if log.screenshot_base64:
+                        try:
+                            b64 = log.screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=2.8*inch, height=2.1*inch)
+                            img_row.append(rl_img)
+                        except: pass
+                    
+                    if img_row:
+                        # Ensure alignment by always using a 2-column table even if 1 image
+                        while len(img_row) < 2:
+                            img_row.append(Paragraph("", styles['Normal'])) # Empty cell
+                        
+                        t_img = Table([img_row], colWidths=[3.1*inch, 3.1*inch])
+                        t_img.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                            ('LEFTPADDING', (0,0), (-1,-1), 0),
+                        ]))
+                        elements.append(t_img)
+                    else:
+                        elements.append(Paragraph("[No visual evidence captured for this violation]", styles['Small']))
+                    
+                    elements.append(Spacer(1, 20))
+            else:
+                elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
+
+            # Build PDF
+            doc.build(elements)
+            buffer.seek(0)
+            
+            # Prepare Response
+            from django.http import HttpResponse
+            response = HttpResponse(buffer, content_type='application/pdf')
+            safe_name = "".join([c for c in candidate.full_name if c.isalnum() or c==' ']).rstrip().replace(' ', '_')
+            filename = f"VerifiHire_Report_{safe_name}_{candidate.id}.pdf"
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"Error generating PDF report for candidate {pk}: {str(e)}", exc_info=True)
+            return Response({'error': f"Critical failure during report generation: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateTimelineView(APIView):
+    """
+    Fetches the history (PipelineLog) for a specific candidate.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+            
+            logs = candidate.pipeline_logs.all().order_by('timestamp')
+            serializer = PipelineLogSerializer(logs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class LatestActiveBatchView(APIView):
+    """
+    Allows the frontend to recover the most recent batch ID if the page was refreshed
+    before the ID could be saved to local state.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        # Look for candidates created in the last 15 minutes that are still 'New'
+        threshold_time = timezone.now() - timedelta(minutes=15)
+        user_profile = getattr(request.user, 'userprofile', None)
+
+        candidates = Candidate.objects.filter(
+            status='New',
+            created_at__gte=threshold_time
+        ).exclude(batch_id__isnull=True).exclude(batch_id='')
+
+        if user_profile:
+            candidates = candidates.filter(user_profile=user_profile)
+
+        latest_candidate = candidates.order_by('-created_at').first()
+
+        if latest_candidate:
+            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
+
+        return Response({"batch_id": None}, status=status.HTTP_200_OK)

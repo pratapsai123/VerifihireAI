@@ -552,16 +552,8 @@ const AiTakeAssessment = () => {
         const personId = getDeepfacePersonId();
         if (!personId) { alert('Invalid candidate identity for DeepFace registration.'); return; }
 
-        // DeepFace Requirement: Ensure face is registered first
-        if (!isRegistered && !bypassReg) {
-            setIsRegistering(true);
-            return;
-        }
-
-        // Re-check against DeepFace backend to avoid stale local UI state.
-        const stillRegistered = await checkDeepfaceRegistration();
-        if (!stillRegistered) {
-            setIsRegistered(false);
+        // DeepFace Requirement: Ensure face is registered first for every new entry
+        if (!bypassReg) {
             setIsRegistering(true);
             return;
         }
@@ -630,13 +622,7 @@ const AiTakeAssessment = () => {
             await startCamera();
             const deepfaceOk = await startDeepfaceMonitoring(personId);
             if (!deepfaceOk) {
-                const regNow = await checkDeepfaceRegistration();
-                if (!regNow) {
-                    setIsRegistered(false);
-                    setIsRegistering(true);
-                } else {
-                    alert('DeepFace monitoring failed to start. Please try again.');
-                }
+                alert('DeepFace monitoring failed to start. Please try again.');
                 stopCamera();
                 if (screenStreamRef.current) {
                     screenStreamRef.current.getTracks().forEach(t => t.stop());

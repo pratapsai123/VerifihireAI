@@ -8,7 +8,11 @@ Endpoints:
   GET  /session/{id}/violations  — Get violations for a session
 """
 
+import logging
+
 from fastapi import APIRouter, HTTPException
+
+logger = logging.getLogger(__name__)
 
 from app.models.schemas import (
     SessionStartRequest,

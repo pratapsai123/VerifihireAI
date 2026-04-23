@@ -36,10 +36,43 @@ const ResultsAI = () => {
     const [timelineCandidate, setTimelineCandidate] = useState(null);
     const [timelineLogs, setTimelineLogs] = useState([]);
     const [loadingTimeline, setLoadingTimeline] = useState(false);
+    const [downloadingId, setDownloadingId] = useState(null);
 
     const showToast = (type, message) => {
         setToast({ type, message });
         setTimeout(() => setToast(null), 3500);
+    };
+
+    const handleDownloadReport = async (candidate) => {
+        if (!candidate) return;
+        const sid = String(candidate.submission_id || '');
+        const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+        
+        setDownloadingId(realId);
+        try {
+            const response = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/download-report/`, {
+                responseType: 'blob',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+            
+            const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+            const link = document.createElement('a');
+            link.href = url;
+            const safeName = (candidate.full_name || 'Candidate').replace(/\s+/g, '_');
+            link.setAttribute('download', `VerifiHire_Report_${safeName}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+            showToast('success', 'Report downloaded successfully!');
+        } catch (err) {
+            console.error('Error downloading report:', err);
+            showToast('error', 'Failed to generate report. Please try again.');
+        } finally {
+            setDownloadingId(null);
+        }
     };
 
     const fetchData = useCallback(async () => {
@@ -75,8 +108,11 @@ const ResultsAI = () => {
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
-                    // ALWAYS include in Interview tab since this is an AI Interview candidate
-                    intResults.push(r);
+                    // Only include in Interview tab if they have actually started/completed the interview
+                    const pendingStatuses = ['New', 'Invited', 'Resume Passed', 'Resume Failed', 'Extraction Failed', 'Interviewing'];
+                    if (!pendingStatuses.includes(r.status)) {
+                        intResults.push(r);
+                    }
 
                     // Also include in Resume tab ONLY IF they have actually uploaded a resume
                     // (prevents 'Invited' candidates from confusingly showing up as a Resume analysis)
@@ -409,6 +445,26 @@ const ResultsAI = () => {
                         <h1 style={{ fontSize: '1.4rem', fontWeight: '900', color: '#1e293b', margin: 0 }}>Interview Report</h1>
                         <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0, fontWeight: '600', opacity: 0.8 }}>Performance breakdown & transcript</p>
                     </div>
+
+                    <button 
+                        onClick={() => handleDownloadReport(data)}
+                        disabled={downloadingId !== null}
+                        className="download-report-btn"
+                        style={{
+                            background: '#4F46E5', color: 'white', border: 'none',
+                            padding: '0.7rem 1.4rem', borderRadius: '12px', fontWeight: '800',
+                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                            transition: 'all 0.2s'
+                        }}
+                    >
+                        {downloadingId !== null ? (
+                            <i className="fa-solid fa-spinner fa-spin"></i>
+                        ) : (
+                            <i className="fa-solid fa-file-pdf"></i>
+                        )}
+                        {downloadingId !== null ? 'Generating PDF...' : 'Download Full PDF Report'}
+                    </button>
                 </div>
 
                 <div className="report-grid">
@@ -1077,11 +1133,11 @@ const ResultsAI = () => {
                                                             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
-                                                                    {data.total} Candidate{data.total !== 1 ? 's' : ''}
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total)} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total) !== 1 ? 's' : ''}
                                                                 </span>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
-                                                                    {data.assessment.length + data.resume.length + data.interview.length} Total Results
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.assessment.length + data.resume.length + data.interview.length))} Total Results
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -1308,14 +1364,32 @@ const ResultsAI = () => {
                                                                             ) : (
                                                                                 <>
                                                                                     {activeTab === 'interview' || (activeTab === 'resume' && r.total_questions > 0) ? (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
-                                                                                            style={{
-                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                                background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
-                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                            }}
-                                                                                        >Review</button>
+                                                                                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
+                                                                                                style={{
+                                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                    background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                                }}
+                                                                                            >Review</button>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); handleDownloadReport(r); }}
+                                                                                                disabled={downloadingId !== null}
+                                                                                                title="Download PDF Report"
+                                                                                                style={{
+                                                                                                    width: '36px', height: '36px', borderRadius: '10px', border: '1px solid #E2E8F0',
+                                                                                                    background: 'white', color: '#4318FF', fontSize: '1rem', cursor: 'pointer',
+                                                                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                                                    boxShadow: '0 4px 10px rgba(0,0,0,0.03)', transition: 'all 0.2s',
+                                                                                                    padding: 0
+                                                                                                }}
+                                                                                            >
+                                                                                                {downloadingId === String(r.submission_id || '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                    <i className="fa-solid fa-file-pdf" />}
+                                                                                            </button>
+                                                                                        </div>
                                                                                     ) : activeTab === 'assessment' || activeTab === 'standard' ? (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}

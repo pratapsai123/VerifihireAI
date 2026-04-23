@@ -1756,33 +1756,35 @@ const AiInterviewSession = () => {
     const handleEnvironmentSetup = async () => {
         setAiStatus("Setting up environment...");
         
-        // 1. Request Fullscreen
-        try {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                await elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-                await elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                await elem.msRequestFullscreen();
+        // 1. Request Screen Share FIRST if not already active
+        if (!isScreenSharing) {
+            console.log("Requesting Screen Share...");
+            const screenSuccess = await startScreenShare();
+            if (!screenSuccess) {
+                console.warn("Screen share denied during setup.");
+                return;
             }
-            setIsFullscreen(true);
-            isFullscreenRef.current = true;
-        } catch (err) {
-            console.warn("Fullscreen request failed during setup:", err);
-            alert("Fullscreen mode is required for this interview.");
-            return;
         }
 
-        // 2. Request Screen Share
-        console.log("Requesting Screen Share...");
-        const screenSuccess = await startScreenShare();
-        if (!screenSuccess) {
-            console.warn("Screen share denied during setup.");
-            return;
+        // 2. Request Fullscreen SECOND if not already active
+        if (!isFullscreen) {
+            try {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    await elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    await elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    await elem.msRequestFullscreen();
+                }
+                setIsFullscreen(true);
+                isFullscreenRef.current = true;
+            } catch (err) {
+                console.warn("Fullscreen request failed during setup:", err);
+                alert("Fullscreen mode is required for this interview.");
+                return;
+            }
         }
-
-        // If both done, wizard step stays 4 but shows checklist completion
     };
 
     const handleBeginInterview = async () => {

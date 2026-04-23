@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import pickle
+import cv2
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -148,6 +149,10 @@ def register_face(
                 "model": REGISTRATION_MODEL,
                 "label": label_str,
             }, f)
+
+        # Save the actual image for report generation
+        image_path = person_dir / f"{label_str}.jpg"
+        cv2.imwrite(str(image_path), img)
 
         # Also store model-specific copies for later verification.
         _save_embedding(person_dir, REGISTRATION_MODEL, label_str, embedding)

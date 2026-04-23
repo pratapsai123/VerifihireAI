@@ -8,7 +8,11 @@ Endpoints:
   DELETE /registered/{id} — Remove registration
 """
 
+import logging
+
 from fastapi import APIRouter, HTTPException
+
+logger = logging.getLogger(__name__)
 
 from app.models.schemas import (
     FaceRegisterRequest,
