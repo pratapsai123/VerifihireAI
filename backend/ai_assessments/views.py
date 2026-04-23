@@ -40,6 +40,8 @@ from django.core.files.base import ContentFile
 from api.models import UserProfile, DeletionRequest
 from api._imports import _is_application_admin_email, handle_deletion_request
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
+import requests
+from api._imports import DEEPFACE_BASE_URL
 
 
 # Helper functions moved to ai_logic.py
@@ -844,11 +846,35 @@ class GenerateAssessmentView(APIView):
 
             return Response({"error": error_msg, "message": user_msg}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+def _register_face_with_deepface(person_id, snapshot_b64):
+    """
+    Calls the DeepFace microservice to register/update the candidate's face.
+    Ensures biometric data is persisted so that the proctoring session can start.
+    """
+    try:
+        url = f"{DEEPFACE_BASE_URL}/registration/register"
+        payload = {
+            "person_id": person_id,
+            "image_base64": snapshot_b64,
+            "label": "registration_snapshot"
+        }
+        resp = requests.post(url, json=payload, timeout=15)
+        if resp.status_code == 200:
+            print(f"DeepFace registration successful for {person_id}")
+            return True
+        else:
+            print(f"DeepFace registration failed for {person_id}: {resp.text}")
+            return False
+    except Exception as e:
+        print(f"DeepFace registration error for {person_id}: {str(e)}")
+        return False
+
 class CreateSubmissionView(APIView):
     def post(self, request):
         token = request.data.get('share_token')
         name = request.data.get('candidate_name')
         email = request.data.get('candidate_email', '').strip().lower()
+        snapshot = request.data.get('snapshot')
 
         if not all([token, name, email]):
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -890,6 +916,10 @@ class CreateSubmissionView(APIView):
                     batch_id=assessment.batch_id,
                     batch_name=assessment.batch_name
                 )
+                
+                # --- DEEPFACE REGISTRATION ---
+                if snapshot:
+                    _register_face_with_deepface(email, snapshot)
                 
                 # CROSS-UPDATE: Synchronize with the Candidate record if exists
                 try:

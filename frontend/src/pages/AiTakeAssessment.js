@@ -13,8 +13,10 @@ const AiTakeAssessment = () => {
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false);
+    const [registrationSnapshot, setRegistrationSnapshot] = useState(null);
     const [isRegistering, setIsRegistering] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isCheckingRegistration, setIsCheckingRegistration] = useState(true);
     const [answers, setAnswers] = useState({});
 
 
@@ -536,6 +538,18 @@ const AiTakeAssessment = () => {
         fetchAssessment();
     }, [token, candidateEmail]);
 
+    useEffect(() => {
+        if (candidateEmail && DEEPFACE_BASE_URL) {
+            setIsCheckingRegistration(true);
+            checkDeepfaceRegistration().then(registered => {
+                if (registered) setIsRegistered(true);
+                setIsCheckingRegistration(false);
+            }).catch(() => {
+                setIsCheckingRegistration(false);
+            });
+        }
+    }, [candidateEmail, checkDeepfaceRegistration, DEEPFACE_BASE_URL]);
+
     const handleAnswerChange = (key, val) => {
         setAnswers(prev => ({ ...prev, [key]: val }));
 
@@ -552,15 +566,18 @@ const AiTakeAssessment = () => {
         const personId = getDeepfacePersonId();
         if (!personId) { alert('Invalid candidate identity for DeepFace registration.'); return; }
 
-        // DeepFace Requirement: Ensure face is registered first for every new entry
-        if (!bypassReg) {
+        // DeepFace Requirement: Ensure face is registered first
+        if (!bypassReg && !isRegistered) {
             setIsRegistering(true);
             return;
         }
 
         try {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
-                share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
+                share_token: token, 
+                candidate_name: candidateName, 
+                candidate_email: candidateEmail,
+                snapshot: registrationSnapshot
             });
             const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts, candidate_questions } = res.data;
 
@@ -618,18 +635,8 @@ const AiTakeAssessment = () => {
                 }
             } catch (err) { }
 
-            // DeepFace Initialization
-            await startCamera();
-            const deepfaceOk = await startDeepfaceMonitoring(personId);
-            if (!deepfaceOk) {
-                alert('DeepFace monitoring failed to start. Please try again.');
-                stopCamera();
-                if (screenStreamRef.current) {
-                    screenStreamRef.current.getTracks().forEach(t => t.stop());
-                    screenStreamRef.current = null;
-                }
-                return;
-            }
+            // Set started state - camera and DeepFace will be initialized in useEffect
+            // after the video element is rendered
             setIsStarted(true);
 
         } catch (err) {
@@ -803,8 +810,35 @@ const AiTakeAssessment = () => {
 
 
 
+    // Initialize camera and DeepFace when assessment starts
     useEffect(() => {
         if (!isStarted || !submissionId) return;
+
+        const initMonitoring = async () => {
+            const personId = getDeepfacePersonId();
+            if (!personId) return;
+            
+            // Start camera first (gives video element time to mount)
+            await startCamera();
+            
+            // Small delay to ensure video element is ready
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Start DeepFace monitoring
+            const deepfaceOk = await startDeepfaceMonitoring(personId);
+            if (!deepfaceOk) {
+                // DeepFace failed - show registration wizard
+                stopCamera();
+                if (screenStreamRef.current) {
+                    screenStreamRef.current.getTracks().forEach(t => t.stop());
+                    screenStreamRef.current = null;
+                }
+                setIsRegistering(true);
+                setIsStarted(false); // Reset started state
+            }
+        };
+        
+        initMonitoring();
 
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
         const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'window_switch');
@@ -827,7 +861,7 @@ const AiTakeAssessment = () => {
             stopDeepfaceMonitoring();
             stopCamera();
         };
-    }, [isStarted, submissionId, showAiEvent, submitted, stopDeepfaceMonitoring]);
+    }, [isStarted, submissionId, showAiEvent, submitted, stopDeepfaceMonitoring, getDeepfacePersonId, startDeepfaceMonitoring]);
 
     // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
     useEffect(() => {
@@ -1115,7 +1149,7 @@ const AiTakeAssessment = () => {
                 setWizardStep(2); // Success
                 setTimeout(() => {
                     setIsRegistered(true);
-                    onComplete();
+                    onComplete(finalImage.split(',')[1]);
                 }, 1500);
             } catch (e) {
                 setRegError("Registration failed. Please ensure your face is clearly visible.");
@@ -1214,7 +1248,12 @@ const AiTakeAssessment = () => {
     };
 
     if (isRegistering) {
-        return <RegistrationWizard onComplete={() => { setIsRegistering(false); setIsRegistered(true); startAssessment(true); }} onCancel={() => setIsRegistering(false)} />;
+        return <RegistrationWizard onComplete={(img) => { 
+            setRegistrationSnapshot(img);
+            setIsRegistering(false); 
+            setIsRegistered(true); 
+            startAssessment(true); 
+        }} onCancel={() => setIsRegistering(false)} />;
     }
 
     if (loading) return (
@@ -1288,8 +1327,9 @@ const AiTakeAssessment = () => {
                         <strong>⚠️ Warning:</strong> This test uses AI video monitoring. Switching tabs or leaving the window will be flagged as malpractice.
                     </div>
                     <button onClick={startAssessment}
-                        style={{ width: '100%', padding: '0.9rem', background: '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
-                        Start Test
+                        disabled={isCheckingRegistration}
+                        style={{ width: '100%', padding: '0.9rem', background: isCheckingRegistration ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: isCheckingRegistration ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
+                        {isCheckingRegistration ? 'Checking Registration...' : 'Start Test'}
                     </button>
                 </div>
             </div>

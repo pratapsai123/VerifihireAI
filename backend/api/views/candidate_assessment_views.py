@@ -2335,10 +2335,36 @@ def submit_objective_section(request, token):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+
+def _register_face_with_deepface(person_id, snapshot_b64):
+    """
+    Calls the DeepFace microservice to register/update the candidate's face.
+    Ensures biometric data is persisted so that the proctoring session can start.
+    """
+    try:
+        url = f"{DEEPFACE_BASE_URL}/registration/register"
+        payload = {
+            "person_id": person_id,
+            "image_base64": snapshot_b64,
+            "label": "registration_snapshot"
+        }
+        resp = requests.post(url, json=payload, timeout=15)
+        if resp.status_code == 200:
+            print(f"DeepFace registration successful for {person_id}")
+            return True
+        else:
+            print(f"DeepFace registration failed for {person_id}: {resp.text}")
+            return False
+    except Exception as e:
+        print(f"DeepFace registration error for {person_id}: {str(e)}")
+        return False
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @csrf_exempt
 def save_all_candidate_details_view(request):
+
     """
     Save candidate details before starting the assessment.
     Expected payload:
@@ -2469,6 +2495,12 @@ def save_all_candidate_details_view(request):
                 'entered_with_consent': entered_with_consent,
             }
         )
+        
+        # --- DEEPFACE INTEGRATION ---
+        # Automatically register the candidate's face with the DeepFace microservice
+        # This ensures they can successfully call /session/start later.
+        if snapshot:
+            _register_face_with_deepface(email, snapshot)
 
         return Response({
             'success': True,
