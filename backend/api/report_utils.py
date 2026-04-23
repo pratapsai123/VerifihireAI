@@ -916,7 +916,15 @@ def generate_candidate_report(submission_id):
     try:
         integrity = CandidateIntegrity.objects.get(invitation=inv)
         integrity_score = integrity.integrity_score
-        violations = (integrity.tab_switches or 0) + (integrity.phone_detections or 0) + (integrity.multiface_detections or 0) + (integrity.no_face_detections or 0)
+        
+        tab_v = integrity.tab_switches or 0
+        phone_v = integrity.phone_detections or 0
+        multi_v = integrity.multiface_detections or 0
+        no_face_v = integrity.no_face_detections or 0
+        
+        # First 3 no-face events are warnings (0 penalty)
+        no_face_penalty = max(0, no_face_v - 3)
+        violations = tab_v + phone_v + multi_v + no_face_penalty
     except CandidateIntegrity.DoesNotExist:
         pass
 
@@ -1189,38 +1197,68 @@ def generate_candidate_report(submission_id):
                 medium_count = sum(1 for r in unified_rows if r[3] == "Medium")
                 high_count = sum(1 for r in unified_rows if r[3] == "High")
 
+                # Integrity Violation Data
+                tab_switches = (integrity.tab_switches or 0) if integrity else 0
+                phone_hits = (integrity.phone_detections or 0) if integrity else 0
+                multi_face = (integrity.multiface_detections or 0) if integrity else 0
+
+                # --- Dynamic Interpretation Logic ---
+                dynamic_notes = []
+                if multi_face > 1: dynamic_notes.append("Multiple individuals detected in frame")
+                elif multi_face == 1: dynamic_notes.append("Another individual appeared briefly in the background")
+                
+                no_face_v = (integrity.no_face_detections or 0) if integrity else 0
+                if no_face_v > 3: 
+                    dynamic_notes.append("Frequent face visibility interruptions")
+                
+                if phone_hits > 0: dynamic_notes.append("Potential mobile phone usage")
+                
+                if tab_switches >= 3: dynamic_notes.append("Repeated tab switching suggests external searching")
+                elif tab_switches > 0: dynamic_notes.append("Occasional tab switching")
+                
+                if long_pauses >= 10: dynamic_notes.append("Frequent long pauses suggest external assistance")
+                elif long_pauses >= 4: dynamic_notes.append("Unusual pausing patterns detected")
+                
+                if burst_events > 0: dynamic_notes.append("Rapid bulk text insertion suggests copy-paste behavior")
+                
+                if overall_average_speed > 120: dynamic_notes.append("Drafting velocity exceeds natural human benchmarks")
+                elif error_rate < 2.0 and total_keystrokes > 200: dynamic_notes.append("Abnormally high precision suggests pre-drafted content")
+
+                # Determine Risk Status and Verdict
                 risk_status = "Low"
                 verdict_title = "Organic Flow"
-                interpretation_text = "Candidate behavior matches benchmarks for authentic manual coding; no significant anomalies detected."
-
-                if high_count > 0:
+                
+                # --- 1. High Risk Criteria (Critical Malpractice Evidence) ---
+                if (multi_face > 1 or phone_hits > 0 or tab_switches >= 3 or burst_events >= 3 or
+                    overall_average_speed > 180 or (error_rate < 0.5 and total_keystrokes > 400)):
                     risk_status = "High"
                     verdict_title = "High Risk Detected"
-                    interpretation_text = "Forensic patterns strongly suggest potential malpractice. While identity may be consistent, the drafting method (velocity/precision) flags high-risk anomalies."
-                elif medium_count >= 2:
+                    notes_str = ". ".join(dynamic_notes) if dynamic_notes else "Critical behavioral anomalies"
+                    interpretation_text = f"Significant anomalies detected: {notes_str}. [Recommendation: Hold / Reject]"
+
+                # --- 2. Medium Risk Criteria (Requires at least one suspicious indicator) ---
+                elif (tab_switches >= 1 or multi_face == 1 or no_face_v > 3 or long_pauses > 3 or burst_events > 0):
                     risk_status = "Medium"
                     verdict_title = "Behavioral Caution"
-                    interpretation_text = "Multiple inconsistencies detected across rhythm and precision. (Note: 100% Authenticity confirms it's the same person, but their workflow is unusual for manual coding.)"
-                elif medium_count == 1:
-                    risk_status = "Medium"
-                    verdict_title = "Atypical Pattern"
-                    interpretation_text = "A single behavioral anomaly identified. Authenticity remains high (consistent user), but specific implementation metrics deviate from the norm."
+                    notes_str = ". ".join(dynamic_notes) if dynamic_notes else "Atypical patterns detected"
+                    interpretation_text = f"Atypical patterns detected: {notes_str}. [Recommendation: Manual Review]"
 
-                # Override with specific high-priority alerts if triggered
-                if overall_average_speed > 120:
-                    risk_status = "High"
-                    verdict_title = "High Velocity Alert"
-                    interpretation_text = "Unusually high drafting speed (>120 CPM) detected. Pace exceeds natural human benchmarks; indicative of external automation."
-                elif error_rate < 2.0 and total_keystrokes > 200:
-                    risk_status = "High"
-                    verdict_title = "Precision Anomaly"
-                    interpretation_text = "Abnormally high precision detected. Near-perfect typing (<2% error) suggests code re-drafting from a secondary source."
-                elif long_pauses > 8:
-                    # Only upgrade to Context Switching if it's the primary risk
-                    if risk_status != "High":
-                        risk_status = "Medium"
-                        verdict_title = "Context Switching"
-                        interpretation_text = "Frequent long idle periods followed by rapid drafting suggest candidate researched or generated solutions externally."
+                # --- 3. Low Risk (Default - For natural or high-performance coding) ---
+                else:
+                    risk_status = "Low"
+                    verdict_title = "Organic Flow"
+                    if dynamic_notes:
+                        notes_str = ", ".join(dynamic_notes)
+                        interpretation_text = f"Minor anomalies detected ({notes_str}), but overall behavior remains within acceptable risk thresholds. [Recommendation: Selected]"
+                    else:
+                        interpretation_text = "Candidate behavior matches benchmarks for authentic manual coding; no significant anomalies or violations detected. [Recommendation: Selected]"
+
+                # User Request: Ensure "Manual Review Required" is at the START of the interpretation
+                if integrity_score < 70:
+                    verdict_title = "HOLD - Manual Review Required"
+                    interpretation_text = "<b>[Manual Review Required]</b> This assessment is on HOLD. " + interpretation_text
+                elif risk_status != "Low":
+                    interpretation_text = "<b>[Manual Review Required]</b> " + interpretation_text
 
                 # --- Recruiter-Friendly Summary Card ---
                 card_bg = "#f0fdf4" # Green bg
@@ -1230,13 +1268,86 @@ def generate_candidate_report(submission_id):
                 elif risk_status == "High":
                     card_bg = "#fef2f2" ; border_color = "#dc2626"
 
+                # --- Enhanced Metrics for Summary Card ---
+                tech_skill = "Low"
+                if pct >= 80: tech_skill = "Strong"
+                elif pct >= 50: tech_skill = "Medium"
+
+                integrity_lvl = "Low"
+                if integrity_score >= 85: integrity_lvl = "High"
+                elif integrity_score >= 70: integrity_lvl = "Medium"
+
+                # Build integrity explanation for Medium/Low scores
+                violation_details = []
+                total_violations = 0
+                if integrity:
+                    if (integrity.tab_switches or 0) > 0:
+                        violation_details.append(f"tab switching ({integrity.tab_switches})")
+                        total_violations += integrity.tab_switches
+                    # Hide first 3 no-face events entirely; only count/show from 4th onwards
+                    if (integrity.no_face_detections or 0) > 3:
+                        penalty_count = integrity.no_face_detections - 3
+                        violation_details.append(f"no face detected ({penalty_count})")
+                        total_violations += penalty_count
+                    if (integrity.multiface_detections or 0) > 0:
+                        violation_details.append(f"multiple faces ({integrity.multiface_detections})")
+                        total_violations += integrity.multiface_detections
+                    if (integrity.phone_detections or 0) > 0:
+                        violation_details.append(f"phone detection ({integrity.phone_detections})")
+                        total_violations += integrity.phone_detections
+                
+                violation_summary = ""
+                if violation_details:
+                    violation_summary = f"{total_violations} Violation{'s' if total_violations > 1 else ''} : " + ", ".join(violation_details)
+                elif integrity_lvl != "High":
+                    violation_summary = f"Behavioral anomalies detected (Backspace count: {backspace_count})"
+
+                # --- Recruiter-Friendly Summary Card ---
+                card_bg = "#f0fdf4" # Green bg
+                border_color = "#16a34a"
+                if risk_status == "Medium":
+                    card_bg = "#fefce8" ; border_color = "#eab308"
+                elif risk_status == "High":
+                    card_bg = "#fef2f2" ; border_color = "#dc2626"
+
+                # Determine Recommendation based on Risk
+                recommendation = "Selected"
+                rec_color = "#16a34a" # Green
+                if risk_status == "High":
+                    recommendation = "Hold / Reject"
+                    rec_color = "#dc2626" # Red
+                elif risk_status == "Medium":
+                    recommendation = "Manual Review"
+                    rec_color = "#eab308" # Yellow
+
+                # Create a balanced grid for metrics (3 columns)
+                metrics_table = Table([
+                    [_info_row('Risk Status', f'<font color="{border_color}">{risk_status}</font>', styles), 
+                     _info_row('Authenticity', f"{rhythm_coverage:.0f}% Coverage", styles),
+                     _info_row('Technical Skill', tech_skill, styles)],
+                    [_info_row('Integrity Score', integrity_lvl, styles),
+                     _info_row('Recommendation', f'<font color="{rec_color}">{recommendation}</font>', styles),
+                     _info_row('Long Pauses', f"{long_pauses} times", styles)],
+                    [_info_row('Backspaces', f"{backspace_count}", styles), "", ""]
+                ], colWidths=[2.3 * inch, 2.3 * inch, 2.3 * inch])
+                
+                metrics_table.setStyle(TableStyle([
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                    ('TOPPADDING', (0, 0), (-1, -1), 12), # Increased for space between 1st and 2nd line
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+                    ('LEFTPADDING', (0, 0), (-1, -1), 0),
+                ]))
+
                 summary_data = [
                     [Paragraph(f'<b>Forensic Integrity Verdict: <font color="{border_color}">{verdict_title}</font></b>', styles['InfoLabel'])],
                     [Paragraph(interpretation_text, styles['Normal'])],
-                    [_kv_table([
-                        [_info_row('Risk Status', f'<font color="{border_color}">{risk_status}</font>', styles), _info_row('Authenticity', f"{rhythm_coverage:.0f}% Coverage", styles)],
-                    ], styles)]
+                    [metrics_table]
                 ]
+
+                if violation_summary:
+                    summary_data.append([Spacer(1, 2)]) # Decreased space before violations
+                    summary_data.append([Paragraph(f"<b>Integrity Violations</b>", styles['InfoLabel'])])
+                    summary_data.append([Paragraph(violation_summary, styles['Normal'])])
                 
                 summary_tbl = Table(summary_data, colWidths=[7.2 * inch])
                 summary_tbl.setStyle(TableStyle([
@@ -1383,22 +1494,30 @@ def generate_candidate_report(submission_id):
 
             from collections import defaultdict
             groups = defaultdict(list)
+            no_face_skip_count = 0
+            
             for snap in integrity_screenshots:
-                evt = str(snap.event_type)
-                if evt in ['window_switch', 'window_blur']:
+                evt = str(snap.event_type).lower().strip()
+                group_name = ""
+                
+                if evt in ['window_switch', 'window_blur', 'blur', 'focus_lost']:
                     group_name = 'Window Switch'
-                elif evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked']:
+                elif evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'no_face']:
+                    no_face_skip_count += 1
+                    if no_face_skip_count <= 3:
+                        continue # Hide first 3 face warnings from screenshots too
                     group_name = 'No Face Detection'
-                elif evt == 'multiface_detection':
+                elif evt in ['multiface_detection', 'multiple_faces', 'multi_face']:
                     group_name = 'Multipeople Detection'
-                elif evt == 'tab_switch':
+                elif evt in ['tab_switch', 'tab_switched', 'visibility_hidden']:
                     group_name = 'Tab Switch'
-                elif evt == 'phone_detection':
+                elif evt in ['phone_detection', 'cell_phone', 'phone']:
                     group_name = 'Phone Detection'
                 else:
                     group_name = evt.replace('_', ' ').title()
                 
-                groups[group_name].append(snap)
+                if group_name:
+                    groups[group_name].append(snap)
 
             for group_name, snaps in groups.items():
                 story.append(Paragraph(f"<b>Warning: {group_name}</b>", styles['InfoValue']))

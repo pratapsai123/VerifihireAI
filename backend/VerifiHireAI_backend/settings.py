@@ -263,9 +263,9 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.co
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
 GROQ_API_KEYS = [
-    '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',
-    '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',
-    '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',
+    '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',
+    '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',
+    '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',
 ]
 # Legacy fallback: Some views reference GROQ_API_KEY (singular). Point to first key.
 GROQ_API_KEY = GROQ_API_KEYS[0]

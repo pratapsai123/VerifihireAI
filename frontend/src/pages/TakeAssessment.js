@@ -7,7 +7,6 @@ import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
 import { API_BASE_URL } from '../apiConfig';
 import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
-import { Eye, EyeOff } from 'lucide-react';
 
 
 const DEFAULT_LANGS = [
@@ -352,11 +351,10 @@ export default function TakeAssessment() {
   const streamRef = useRef(null);
   const detectorRef = useRef(null);
   const lastDetectionTimeRef = useRef(0);
-  const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
+  const lastCaptureTimeRef = useRef({ time: 0, type: null }); // For throttling tab_switch/window_blur
   const screenStreamRef = useRef(null);
   const screenCanvasRef = useRef(null);
   const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
-
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -1044,11 +1042,12 @@ export default function TakeAssessment() {
     const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
     if (isScreenEvent) {
       const now = Date.now();
-      if (now - lastCaptureTimeRef.current < 2000) {
+      // Only throttle if it's the SAME event type within 2 seconds
+      if (lastCaptureTimeRef.current.type === eventType && (now - lastCaptureTimeRef.current.time < 2000)) {
         console.log(`Throttling duplicate integrity event: ${eventType}`);
         return;
       }
-      lastCaptureTimeRef.current = now;
+      lastCaptureTimeRef.current = { time: now, type: eventType };
     }
 
     let screenshot = null;
@@ -1102,7 +1101,7 @@ export default function TakeAssessment() {
     }
 
     let webcamScreenshot = null;
-    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'face_mismatch', 'looking_away'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
       try {
         const camCanvas = document.createElement('canvas');
         camCanvas.width = videoRef.current.videoWidth || 640;
@@ -1274,14 +1273,19 @@ export default function TakeAssessment() {
               const preds = await detectorRef.current.detect(videoRef.current);
 
               // Filter by confidence score
-              const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.65);
+              const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.70);
               const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
 
-              if (phones.length > 0) showAiEvent('PHONE DETECTED', true, 'phone_detection');
+              let phoneActive = phones.length > 0;
+
+              if (phoneActive) {
+                showAiEvent('PHONE DETECTED', true, 'phone_detection');
+              }
 
               if (people.length > 1) {
                 showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-              } else if (people.length === 0) {
+              } else if (people.length === 0 && !phoneActive) {
+                // Only trigger face lost if no phone is obscuring the view
                 showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
               }
             }
@@ -1569,7 +1573,9 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? { flex: '0 0 auto', display: 'block' }
+    ? (resultHeightPct > 30
+      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
+      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
 
   // Show a loading state to prevent CandidateDetails flicker
@@ -2044,21 +2050,22 @@ export default function TakeAssessment() {
                               {formatDuration(activeRunResult.execution_time_ms)}{' '}
                               {activeRunResult.submission_id ? `• Submission #${activeRunResult.submission_id}` : ''}
                             </div>
-                            <div className={`coding-table is-results ${!(activeRunResult.results || []).some(r => (r.stderr || '').trim()) ? 'hide-stderr' : ''}`}>
+                            <div className="coding-table">
                               <div className="coding-table-head">
                                 <div>Test</div>
                                 <div>Status</div>
                                 <div>stdout</div>
-                                {(activeRunResult.results || []).some(r => (r.stderr || '').trim()) && <div>stderr</div>}
+                                <div>stderr</div>
                               </div>
                               {activeRunResult.results.map((r, idx) => {
                                 const isHidden = r.is_hidden ?? r.hidden ?? false;
-                                const hasAnyStderr = (activeRunResult.results || []).some(res => (res.stderr || '').trim());
                                 return (
                                   <div key={r.testcase_id ?? idx} className="coding-table-row">
-                                    <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
-                                      {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
-                                      <span className="coding-test-name">{idx + 1}</span>
+                                    <div className="coding-test-label">
+                                      <span className={isHidden ? 'coding-pill-hidden' : 'coding-pill-visible'}>
+                                        {isHidden ? 'Hidden' : 'Visible'}
+                                      </span>
+                                      <span className="coding-test-name">Test {idx + 1}</span>
                                     </div>
                                     <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
                                     <div className="coding-mono">
@@ -2068,7 +2075,7 @@ export default function TakeAssessment() {
                                         (r.stdout || '').trim() || '—'
                                       )}
                                     </div>
-                                    {hasAnyStderr && <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>}
+                                    <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
                                   </div>
                                 );
                               })}
@@ -2212,4 +2219,3 @@ export default function TakeAssessment() {
     </div>
   );
 }
-

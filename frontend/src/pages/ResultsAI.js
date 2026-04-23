@@ -46,11 +46,23 @@ const ResultsAI = () => {
     const handleDownloadReport = async (candidate) => {
         if (!candidate) return;
         const sid = String(candidate.submission_id || '');
-        const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+        
+        let endpoint = '';
+        let realId = '';
+        
+        if (sid.startsWith('ai_')) {
+            // AI Assessment Submission
+            realId = sid.replace('ai_', '');
+            endpoint = `${API_BASE_URL}/ai/submission/${realId}/download-report/`;
+        } else {
+            // AI Interview / Candidate Report
+            realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+            endpoint = `${API_BASE_URL}/ai-candidates/${realId}/download-report/`;
+        }
         
         setDownloadingId(realId);
         try {
-            const response = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/download-report/`, {
+            const response = await axios.get(endpoint, {
                 responseType: 'blob',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -74,6 +86,7 @@ const ResultsAI = () => {
             setDownloadingId(null);
         }
     };
+
 
     const fetchData = useCallback(async () => {
         setLoading(true);
@@ -693,21 +706,40 @@ const ResultsAI = () => {
                                     Submitted {new Date(viewedSubmission.submitted_at).toLocaleString()}
                                 </p>
                             </div>
-                            <button
-                                onClick={() => {
-                                    const newParams = new URLSearchParams(searchParams);
-                                    newParams.delete('subId');
-                                    setSearchParams(newParams);
-                                }}
-                                style={{
-                                    background: '#F4F7FE', border: 'none', borderRadius: '50%',
-                                    width: '44px', height: '44px', cursor: 'pointer',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                                }}
-                            >
-                                <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
-                            </button>
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                    <button
+                                        onClick={() => handleDownloadReport({ ...viewedSubmission, submission_id: `ai_${viewedSubmission.id}`, full_name: viewedSubmission.candidate_name })}
+                                        disabled={downloadingId !== null}
+                                        style={{
+                                            padding: '0.6rem 1.2rem', background: 'white', color: '#4318FF',
+                                            border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: '800',
+                                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                                            boxShadow: '0 4px 10px rgba(0,0,0,0.03)', fontSize: '0.85rem'
+                                        }}
+                                    >
+                                        {downloadingId === String(viewedSubmission.id) ? (
+                                            <i className="fa-solid fa-spinner fa-spin" />
+                                        ) : (
+                                            <i className="fa-solid fa-file-pdf" />
+                                        )}
+                                        {downloadingId === String(viewedSubmission.id) ? 'Generating...' : 'Download Report'}
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            const newParams = new URLSearchParams(searchParams);
+                                            newParams.delete('subId');
+                                            setSearchParams(newParams);
+                                        }}
+                                        style={{
+                                            background: '#F4F7FE', border: 'none', borderRadius: '50%',
+                                            width: '44px', height: '44px', cursor: 'pointer',
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                        }}
+                                    >
+                                        <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
+                                    </button>
+                                </div>
                         </div>
 
                         {/* Modal Body */}
@@ -1385,20 +1417,38 @@ const ResultsAI = () => {
                                                                                                     padding: 0
                                                                                                 }}
                                                                                             >
-                                                                                                {downloadingId === String(r.submission_id || '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
                                                                                                     <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>
                                                                                         </div>
                                                                                     ) : activeTab === 'assessment' || activeTab === 'standard' ? (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
-                                                                                            style={{
-                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                                background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                            }}
-                                                                                        >View</button>
+                                                                                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
+                                                                                                style={{
+                                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                    background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                                }}
+                                                                                            >View</button>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); handleDownloadReport(r); }}
+                                                                                                disabled={downloadingId !== null}
+                                                                                                title="Download PDF Report"
+                                                                                                style={{
+                                                                                                    width: '36px', height: '36px', borderRadius: '10px', border: '1px solid #E2E8F0',
+                                                                                                    background: 'white', color: '#4318FF', fontSize: '1rem', cursor: 'pointer',
+                                                                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                                                    boxShadow: '0 4px 10px rgba(0,0,0,0.03)', transition: 'all 0.2s',
+                                                                                                    padding: 0
+                                                                                                }}
+                                                                                            >
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                    <i className="fa-solid fa-file-pdf" />}
+                                                                                            </button>
+                                                                                        </div>
                                                                                     ) : activeTab === 'resume' ? (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}

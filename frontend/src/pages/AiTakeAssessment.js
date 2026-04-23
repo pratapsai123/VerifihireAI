@@ -539,16 +539,13 @@ const AiTakeAssessment = () => {
     }, [token, candidateEmail]);
 
     useEffect(() => {
+        // NOTE: We don't check or set isRegistered here.
+        // For AI assessments, we ALWAYS require fresh registration to replace any old face.
+        // This ensures a new face is captured each time the candidate opens the assessment.
         if (candidateEmail && DEEPFACE_BASE_URL) {
-            setIsCheckingRegistration(true);
-            checkDeepfaceRegistration().then(registered => {
-                if (registered) setIsRegistered(true);
-                setIsCheckingRegistration(false);
-            }).catch(() => {
-                setIsCheckingRegistration(false);
-            });
+            setIsCheckingRegistration(false);
         }
-    }, [candidateEmail, checkDeepfaceRegistration, DEEPFACE_BASE_URL]);
+    }, [candidateEmail, DEEPFACE_BASE_URL]);
 
     const handleAnswerChange = (key, val) => {
         setAnswers(prev => ({ ...prev, [key]: val }));

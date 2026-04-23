@@ -6,6 +6,27 @@ from ..models import CandidateSubmission
 from .assessment_views import _is_valid_pan
 
 
+def _get_filtered_warning_logs(warning_logs):
+    """
+    Filters warning logs to align with report_utils logic:
+    Hides the first 3 face detection lost events.
+    """
+    if not isinstance(warning_logs, list):
+        return []
+    
+    filtered = []
+    face_lost_count = 0
+    for log in warning_logs:
+        # Handle both dict (from API response/JSONField) and potentially other formats
+        evt = log.get('event_type') if isinstance(log, dict) else str(log)
+        if evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked']:
+            face_lost_count += 1
+            if face_lost_count <= 3:
+                continue
+        filtered.append(log)
+    return filtered
+
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -63,7 +84,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -936,7 +957,11 @@ def update_standard_integrity_view(request, token):
             penalty = 10 # 10% penalty for multiple faces
         elif event_type in ['no_face_detection', 'face_detection_lost']:
             integrity.no_face_detections += 1
-            penalty = 5 # 5% penalty for missing face (after 5s delay)
+            # First 3 are grace warnings (0 penalty)
+            if integrity.no_face_detections > 3:
+                penalty = 5
+            else:
+                penalty = 0
         else:
             return Response({'error': 'Unknown event type'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -1088,25 +1113,14 @@ def _update_submission_scoring_logic(submission):
     submission.percentage = final_percentage_rounded
     submission.final_percentage = final_percentage
     
-    # --- CONFIGURABLE HIRING STANDARDS ---
-    # Read thresholds from assessment settings (not hardcoded)
-
-    # Overall pass minimum — set by recruiter (e.g. 5%, 10%, 60%)
-    min_pass = float(getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0)
-
-    # Objective section minimum:
-    #   ONLY use min_objective_pass_percentage if the cutoff flag is ON (has_objective_cutoff=True).
-    #   Otherwise, fall back to the overall min_pass_percentage.
-    has_obj_cutoff = getattr(inv.assessment, 'has_objective_cutoff', False)
-    _obj_cutoff = float(getattr(inv.assessment, 'min_objective_pass_percentage', 0.0) or 0.0)
-    MIN_MCQ_THRESHOLD = _obj_cutoff if (has_obj_cutoff and _obj_cutoff > 0) else min_pass
-
-    # Coding section minimum: use the overall min_pass_percentage
-    MIN_CODING_THRESHOLD = min_pass
-
-    # Integrity threshold: fixed at 70% (security requirement)
+    # --- RIGOROUS HIRING STANDARDS ---
+    # Enforce minimum thresholds for individual sections
+    MIN_MCQ_THRESHOLD = 60.0
+    MIN_CODING_THRESHOLD = 50.0
     MIN_INTEGRITY_THRESHOLD = 70.0
 
+    min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
+    
     # 7. Get Integrity Score
     integrity_score = 100.0
     try:
@@ -1129,9 +1143,7 @@ def _update_submission_scoring_logic(submission):
 
     has_mcq = (submission.objective_total > 0)
     has_coding = (submission.coding_total > 0)
-
-    # Determine final result:
-    # All gates must pass — integrity first, then section minimums, then overall.
+    
     if not passed_integrity:
         submission.is_qualified = False
         submission.result = 'hold'
@@ -1647,7 +1659,7 @@ def get_invitation_result_view(request, token):
                 },
                 'integrity': {
                     'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
-                    'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
+                    'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                 }
             },
             status=status.HTTP_200_OK
@@ -1737,7 +1749,7 @@ def results_overview_view(request):
             else:
                 ai_cand_qs = Candidate.objects.filter(
                     is_deleted=False,
-                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed', 'Assessment Passed', 'Interview']
+                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
                 ).order_by('-submission_date')
         elif scoped_ids:
             # HR Manager sees candidates uploaded by themselves or their direct-report HRs
@@ -1820,14 +1832,13 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
                     'batch_id': inv.batch_id,
                     'batch_name': inv.batch_name,
-                    'is_fully_automatic': False,
 
                     'status': s.result,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
                     'answers': getattr(s, 'answers', {}),
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
-                        'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
+                        'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                     }
                 }
             )
@@ -1890,7 +1901,6 @@ def results_overview_view(request):
                     'is_resume_screening': False,
                     'batch_id': s.batch_id,
                     'batch_name': s.batch_name,
-                    'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
                     'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
@@ -1927,7 +1937,7 @@ def results_overview_view(request):
                     'coding_percentage': s.score,
 
                     'status': s.status,
-                    'is_resume_screening': s.total_questions == 0,
+                    'is_resume_screening': True,
                     'delete_requested': f"Candidate_{s.id}" in active_deletions,
                     'interview_summary': s.interview_summary,
                     'total_questions': getattr(s, 'total_questions', 0),
@@ -1939,11 +1949,11 @@ def results_overview_view(request):
                         'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                         'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
                     },
-                    'integrity_screenshots': [
+                    'integrity_logs': [
                         {
                             'event_type': log.event_type,
-                            'screenshot_url': log.screenshot_base64,
-                            'webcam_screenshot_url': log.webcam_screenshot_base64,
+                            'screenshot_base64': log.screenshot_base64,
+                            'webcam_screenshot_base64': log.webcam_screenshot_base64,
                             'timestamp': log.timestamp.isoformat() if log.timestamp else None
                         } for log in s.integrity_logs.all()
                     ]
@@ -2252,16 +2262,12 @@ def submit_objective_section(request, token):
         from api.models import AssessmentCodingQuestion
         has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
 
-        # --- CONFIGURABLE GATING LOGIC ---
-        # Read MCQ gate from assessment settings (not hardcoded)
-        has_gate_cutoff = getattr(inv.assessment, 'has_objective_cutoff', False)
-        _gate_obj_cutoff = float(getattr(inv.assessment, 'min_objective_pass_percentage', 0.0) or 0.0)
-        _gate_overall = float(getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0)
-        # Use objective-specific cutoff ONLY if enabled, otherwise fall back to overall pass %
-        MIN_MCQ_GATE = _gate_obj_cutoff if (has_gate_cutoff and _gate_obj_cutoff > 0) else _gate_overall
+        # --- NEW GATING LOGIC ---
+        # Fixed thresholds as per user requirement: MCQ 60%, Integrity 70%
+        MIN_MCQ_GATE = 60.0
         MIN_INTEGRITY_GATE = 70.0
         should_schedule_result_email = False
-
+        
         # Fetch Integrity Score for gating
         integrity_score = 100.0
         try:
@@ -2269,7 +2275,7 @@ def submit_objective_section(request, token):
                  integrity_score = float(inv.integrity.integrity_score)
         except Exception:
             pass
-
+        
         passed_mcq = percentage >= MIN_MCQ_GATE
         passed_integrity = integrity_score >= MIN_INTEGRITY_GATE
         
@@ -2335,36 +2341,10 @@ def submit_objective_section(request, token):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-
-def _register_face_with_deepface(person_id, snapshot_b64):
-    """
-    Calls the DeepFace microservice to register/update the candidate's face.
-    Ensures biometric data is persisted so that the proctoring session can start.
-    """
-    try:
-        url = f"{DEEPFACE_BASE_URL}/registration/register"
-        payload = {
-            "person_id": person_id,
-            "image_base64": snapshot_b64,
-            "label": "registration_snapshot"
-        }
-        resp = requests.post(url, json=payload, timeout=15)
-        if resp.status_code == 200:
-            print(f"DeepFace registration successful for {person_id}")
-            return True
-        else:
-            print(f"DeepFace registration failed for {person_id}: {resp.text}")
-            return False
-    except Exception as e:
-        print(f"DeepFace registration error for {person_id}: {str(e)}")
-        return False
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @csrf_exempt
 def save_all_candidate_details_view(request):
-
     """
     Save candidate details before starting the assessment.
     Expected payload:
@@ -2495,12 +2475,6 @@ def save_all_candidate_details_view(request):
                 'entered_with_consent': entered_with_consent,
             }
         )
-        
-        # --- DEEPFACE INTEGRATION ---
-        # Automatically register the candidate's face with the DeepFace microservice
-        # This ensures they can successfully call /session/start later.
-        if snapshot:
-            _register_face_with_deepface(email, snapshot)
 
         return Response({
             'success': True,
@@ -2647,4 +2621,3 @@ def verify_pan_backend_view(request):
             'success': False,
             'error': f'Failed to verify PAN: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-

@@ -15,6 +15,21 @@
 .project/localProjectSwap.json
 copilot-messages.log
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Debug/Logs
+*.log
+backend/api_debug.txt
+backend/ocr_debug.txt
+
 # Archive formats
 *.zip
 *.rar
