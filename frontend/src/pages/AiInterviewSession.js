@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
-import { RealtimeTranscriber } from 'assemblyai';
 import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
@@ -24,7 +23,7 @@ const AiInterviewSession = () => {
     const [progress, setProgress] = useState(0);
     const [showQuotaWarning, setShowQuotaWarning] = useState(false);
     const [responseInput, setResponseInput] = useState('');
-    const [integrityBreech, setIntegrityBreech] = useState({ active: false, text: '' });
+    const [integrityBreach, setIntegrityBreach] = useState({ active: false, text: '' });
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
     const [isCompleted, setIsCompleted] = useState(false);
     const [timeLeft, setTimeLeft] = useState(null); // Timer in seconds
@@ -213,9 +212,9 @@ const AiInterviewSession = () => {
     const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
         setAiToast({ active: true, text, urgent });
         if (urgent) {
-            setIntegrityBreech({ active: true, text });
+            setIntegrityBreach({ active: true, text });
             // playAuditNotice(text); // AUDIBLE ALERT (Disabled - text alerts only)
-            setTimeout(() => setIntegrityBreech({ active: false, text: '' }), 3000);
+            setTimeout(() => setIntegrityBreach({ active: false, text: '' }), 3000);
         }
 
         if (eventType) {
@@ -1756,7 +1755,7 @@ const AiInterviewSession = () => {
     const handleEnvironmentSetup = async () => {
         setAiStatus("Setting up environment...");
         
-        // 1. Request Screen Share FIRST if not already active
+        // STEP 1: Request Screen Share FIRST (if not already active)
         if (!isScreenSharing) {
             console.log("Requesting Screen Share...");
             const screenSuccess = await startScreenShare();
@@ -1764,9 +1763,11 @@ const AiInterviewSession = () => {
                 console.warn("Screen share denied during setup.");
                 return;
             }
+            // Screen share granted successfully - now automatically trigger fullscreen
+            console.log("Screen share active. Auto-triggering fullscreen...");
         }
 
-        // 2. Request Fullscreen SECOND if not already active
+        // STEP 2: Auto-trigger Fullscreen after screen share is granted (if not already active)
         if (!isFullscreen) {
             try {
                 const elem = document.documentElement;
@@ -1779,9 +1780,10 @@ const AiInterviewSession = () => {
                 }
                 setIsFullscreen(true);
                 isFullscreenRef.current = true;
+                console.log("Fullscreen activated automatically after screen share.");
             } catch (err) {
                 console.warn("Fullscreen request failed during setup:", err);
-                alert("Fullscreen mode is required for this interview.");
+                alert("Fullscreen mode is required for this interview. Please click 'Enable Fullscreen' to continue.");
                 return;
             }
         }
@@ -2230,36 +2232,85 @@ const AiInterviewSession = () => {
                                             <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>READY</span>
                                         </div>
 
+                                        {/* STEP 1: Screen Share (User must click this first) */}
                                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isFullscreen ? '#22c55e' : '#cbd5e1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>
-                                                    {isFullscreen ? '✓' : '2'}
+                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isScreenSharing ? '#22c55e' : '#6366f1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: '700' }}>
+                                                    {isScreenSharing ? '✓' : '1'}
                                                 </div>
-                                                <span style={{ fontWeight: '600', color: isFullscreen ? '#2d3748' : '#718096' }}>Full Screen Mode</span>
-                                            </div>
-                                            {isFullscreen ? (
-                                                <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>ACTIVE</span>
-                                            ) : (
-                                                <button onClick={handleEnvironmentSetup} style={{ background: '#6366f1', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>Enable</button>
-                                            )}
-                                        </div>
-
-                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isScreenSharing ? '#22c55e' : '#cbd5e1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>
-                                                    {isScreenSharing ? '✓' : '3'}
-                                                </div>
-                                                <span style={{ fontWeight: '600', color: isScreenSharing ? '#2d3748' : '#718096' }}>Screen Sharing</span>
+                                                <span style={{ fontWeight: '600', color: isScreenSharing ? '#2d3748' : '#1e293b' }}>Screen Sharing</span>
+                                                {!isScreenSharing && <span style={{ fontSize: '0.7rem', color: '#6366f1', background: '#eef2ff', padding: '2px 8px', borderRadius: '4px' }}>Click below</span>}
                                             </div>
                                             {isScreenSharing ? (
                                                 <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>ACTIVE</span>
                                             ) : (
-                                                <button onClick={handleEnvironmentSetup} style={{ background: '#6366f1', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>Start Share</button>
+                                                <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>Required</span>
+                                            )}
+                                        </div>
+
+                                        {/* STEP 2: Fullscreen (Auto-triggered after screen share) */}
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', opacity: isScreenSharing ? 1 : 0.5 }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: isFullscreen ? '#22c55e' : isScreenSharing ? '#f59e0b' : '#cbd5e1', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: '700' }}>
+                                                    {isFullscreen ? '✓' : isScreenSharing ? '...' : '2'}
+                                                </div>
+                                                <span style={{ fontWeight: '600', color: isFullscreen ? '#2d3748' : isScreenSharing ? '#1e293b' : '#718096' }}>Full Screen Mode</span>
+                                                {isScreenSharing && !isFullscreen && <span style={{ fontSize: '0.7rem', color: '#f59e0b', background: '#fffbeb', padding: '2px 8px', borderRadius: '4px' }}>Auto-starting...</span>}
+                                            </div>
+                                            {isFullscreen ? (
+                                                <span style={{ color: '#22c55e', fontWeight: '700', fontSize: '0.9rem' }}>ACTIVE</span>
+                                            ) : (
+                                                <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{isScreenSharing ? 'Please allow...' : 'Waiting...'}</span>
+                                            )}
+                                        </div>
+
+                                        {/* Progress indicator */}
+                                        <div style={{ marginTop: '1rem', padding: '1rem', background: '#f8fafc', borderRadius: '12px', textAlign: 'center' }}>
+                                            {!isScreenSharing ? (
+                                                <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem' }}>
+                                                    <strong>Step 1 of 2:</strong> Click "Start Screen Share" below to begin
+                                                </p>
+                                            ) : !isFullscreen ? (
+                                                <p style={{ margin: 0, color: '#f59e0b', fontSize: '0.9rem' }}>
+                                                    <strong>Step 2 of 2:</strong> Please allow fullscreen mode when prompted...
+                                                </p>
+                                            ) : (
+                                                <p style={{ margin: 0, color: '#22c55e', fontSize: '0.9rem' }}>
+                                                    <strong>✓ All set!</strong> You can now begin the interview
+                                                </p>
                                             )}
                                         </div>
                                     </div>
 
-                                    {(isFullscreen && isScreenSharing) ? (
+                                    {/* Show appropriate button based on state */}
+                                    {!isScreenSharing ? (
+                                        /* STEP 1: Start Screen Share */
+                                        <button
+                                            onClick={handleEnvironmentSetup}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                                color: 'white', border: 'none', padding: '1.2rem 3rem', borderRadius: '50px',
+                                                fontSize: '1.1rem', fontWeight: '800', cursor: 'pointer',
+                                                boxShadow: '0 10px 25px rgba(102, 126, 234, 0.3)'
+                                            }}
+                                        >
+                                            Start Screen Share
+                                        </button>
+                                    ) : !isFullscreen ? (
+                                        /* STEP 2: Waiting for fullscreen (user may need manual button if auto fails) */
+                                        <button
+                                            onClick={handleEnvironmentSetup}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                                                color: 'white', border: 'none', padding: '1.2rem 3rem', borderRadius: '50px',
+                                                fontSize: '1.1rem', fontWeight: '800', cursor: 'pointer',
+                                                animation: 'pulse-amber 1.5s infinite'
+                                            }}
+                                        >
+                                            Enable Fullscreen
+                                        </button>
+                                    ) : (
+                                        /* Both ready - Begin Interview */
                                         <button
                                             onClick={handleBeginInterview}
                                             style={{
@@ -2272,23 +2323,17 @@ const AiInterviewSession = () => {
                                         >
                                             Begin Interview
                                         </button>
-                                    ) : (
-                                        <button
-                                            onClick={handleEnvironmentSetup}
-                                            style={{
-                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
-                                                fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer'
-                                            }}
-                                        >
-                                            Continue Setup
-                                        </button>
                                     )}
                                     <style>{`
                                         @keyframes pulse-green {
                                             0% { transform: scale(1); box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); }
                                             50% { transform: scale(1.03); box-shadow: 0 15px 35px rgba(34, 197, 100, 0.4); }
                                             100% { transform: scale(1); box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); }
+                                        }
+                                        @keyframes pulse-amber {
+                                            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3); }
+                                            50% { transform: scale(1.03); box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4); }
+                                            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3); }
                                         }
                                     `}</style>
                                 </>
@@ -2375,7 +2420,7 @@ const AiInterviewSession = () => {
                         <video ref={videoRef} autoPlay playsInline muted id="candidateVideo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                         <canvas ref={dfCanvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
                         <div className="ai-scan-bar"></div>
-                        {integrityBreech.active && <div className="integrity-overlay"><span>{integrityBreech.text}</span></div>}
+                        {integrityBreach.active && <div className="integrity-overlay"><span>{integrityBreach.text}</span></div>}
                         {aiToast.active && <div className={`ai-event-toast ${aiToast.urgent ? 'urgent' : ''}`}>{aiToast.text}</div>}
                         {/* DeepFace Proctoring HUD */}
                         {dfSessionId && (

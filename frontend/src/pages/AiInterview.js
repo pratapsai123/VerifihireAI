@@ -96,9 +96,24 @@ const AiInterview = () => {
         fetchRoles();
     }, []);
 
+    const validateFile = (file) => {
+        const validTypes = ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        const validExtensions = ['.csv', '.xls', '.xlsx'];
+        const fileExtension = file.name.toLowerCase().slice(file.name.lastIndexOf('.'));
+        
+        if (!validTypes.includes(file.type) && !validExtensions.includes(fileExtension)) {
+            setError('Please upload a valid CSV or Excel file (.csv, .xls, .xlsx)');
+            return false;
+        }
+        return true;
+    };
+
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
-            setFile(e.target.files[0]);
+            const selectedFile = e.target.files[0];
+            if (validateFile(selectedFile)) {
+                setFile(selectedFile);
+            }
         }
     };
 
@@ -106,7 +121,10 @@ const AiInterview = () => {
         e.preventDefault();
         e.stopPropagation();
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            setFile(e.dataTransfer.files[0]);
+            const droppedFile = e.dataTransfer.files[0];
+            if (validateFile(droppedFile)) {
+                setFile(droppedFile);
+            }
         }
     };
 
@@ -140,9 +158,20 @@ const AiInterview = () => {
             return;
         }
 
-        if (!jobDescription || jobDescription.trim().length < 20) {
-            setError('Please provide a detailed Job Description (at least 20 characters) for the AI to analyze.');
+        if (!jobDescription || jobDescription.trim().length < 50) {
+            setError('Please provide a detailed Job Description (at least 50 characters) for the AI to generate meaningful interview questions.');
             return;
+        }
+
+        if (selectedRoleId === 'custom') {
+            if (!customRoleTitle || !customRoleTitle.trim()) {
+                setError('Please enter a custom role title.');
+                return;
+            }
+            if (customRoleTitle.trim().length < 3) {
+                setError('Custom role title must be at least 3 characters long.');
+                return;
+            }
         }
 
         if (!experienceLevel) {
@@ -231,8 +260,8 @@ const AiInterview = () => {
                                 marginBottom: '3rem', textAlign: 'left', border: '1px solid rgba(226, 232, 240, 0.6)'
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                                    <h4 style={{ fontSize: '0.9rem', color: '#1E293B', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Generated Session Links</h4>
-                                    <span style={{ fontSize: '0.8rem', color: '#64748B', background: '#E2E8F0', padding: '0.3rem 0.8rem', borderRadius: '8px' }}>{result.candidates.length} Tasks</span>
+                                    <h4 style={{ fontSize: '0.9rem', color: '#1E293B', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Generated Session {result.candidates.length === 1 ? 'Link' : 'Links'}</h4>
+                                    <span style={{ fontSize: '0.8rem', color: '#64748B', background: '#E2E8F0', padding: '0.3rem 0.8rem', borderRadius: '8px' }}>{result.candidates.length} Candidate{result.candidates.length !== 1 ? 's' : ''}</span>
                                 </div>
 
                                 {result.candidates.map((c, index) => (

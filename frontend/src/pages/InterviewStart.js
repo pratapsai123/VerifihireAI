@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import '../styles/InterviewStart.css';
 import { API_BASE_URL } from '../apiConfig';
+import { ROUTES, generatePath } from '../routes';
 
 // Parse time string like "10:00 AM", "10 AM", "14:30" into a Date object (today)
 function parseScheduledTime(timeStr) {
@@ -182,7 +182,7 @@ const InterviewStart = () => {
                 status: 'interview_started'
             };
             sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
-            navigate(`/ai-interview-session/${token}`);
+            navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
         } catch (err) {
             if (err.response?.data?.time_locked) {
                 setError(err.response.data.error);
