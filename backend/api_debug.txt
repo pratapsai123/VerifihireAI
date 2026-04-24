@@ -1797,3 +1797,35 @@ Traceback (most recent call last):
 Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
 
 RAW: No response received
+
+[2026-04-24 06:23:56.913953+00:00] PUBLIC ACCESS: Token='78a95ffe-b7c7-46cd-9962-b6bc27e5a4eb'
+Query Params: <QueryDict: {'email': ['22r21a67d5@mlrit.ac.in'], '_t': ['1777011836897']}>
+Host: localhost:8001
+
+[2026-04-24 06:23:56.955118+00:00] PUBLIC ACCESS: Token='78a95ffe-b7c7-46cd-9962-b6bc27e5a4eb'
+Query Params: <QueryDict: {'email': ['22r21a67d5@mlrit.ac.in'], '_t': ['1777011836950']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:26.228304+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012106221']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:26.776383+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012106770']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:58.398701+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012138388']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:58.401833+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012138391']}>
+Host: localhost:8001
+
+[2026-04-24 07:10:08.315387+00:00] PUBLIC ACCESS: Token='05071d77-41f2-436f-ada7-7c1c73cb627a'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777014608304']}>
+Host: localhost:8001
+
+[2026-04-24 07:10:08.315910+00:00] PUBLIC ACCESS: Token='05071d77-41f2-436f-ada7-7c1c73cb627a'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777014608306']}>
+Host: localhost:8001

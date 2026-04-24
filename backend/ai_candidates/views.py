@@ -617,8 +617,16 @@ class RetryFailedExtractionsView(APIView):
                     extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
                     extracted_email = match_result.get('candidate_email') or match_result.get('email') or match_result.get('email_address') or "Extraction Failed"
                     
-                    candidate.full_name = extracted_name
-                    candidate.email = extracted_email
+                    # Only overwrite identity if it's missing or a placeholder.
+                    # This prevents valid recruiter-entered data from being replaced by AI extraction errors.
+                    is_placeholder_email = not candidate.email or any(p in candidate.email.lower() for p in ['pending', 'extraction', 'unknown'])
+                    is_placeholder_name = not candidate.full_name or any(p in candidate.full_name.lower() for p in ['extraction', 'unknown', 'pending'])
+
+                    if is_placeholder_name and extracted_name != "Extraction Failed":
+                        candidate.full_name = extracted_name
+                    
+                    if is_placeholder_email and extracted_email != "Extraction Failed":
+                        candidate.email = extracted_email
                     
                     percentage = match_result.get('match_percentage', 0)
                     try:

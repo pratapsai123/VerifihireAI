@@ -207,9 +207,19 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 # Only overwrite identity if it's a new placeholder record (Bulk Upload flow)
                 # This prevents invited candidates from accidentally (or maliciously) changing their identity
                 # by uploading a resume with different contact details.
-                if not candidate.email or "pending@example.com" in candidate.email:
-                    candidate.full_name = match_result.get('candidate_name', candidate.full_name)
-                    candidate.email = match_result.get('candidate_email', candidate.email)
+                # Only overwrite identity if it's missing or a placeholder.
+                # This prevents valid recruiter-entered data from being replaced by AI extraction errors.
+                is_placeholder_email = not candidate.email or any(p in candidate.email.lower() for p in ['pending', 'extraction', 'unknown'])
+                is_placeholder_name = not candidate.full_name or any(p in candidate.full_name.lower() for p in ['extraction', 'unknown', 'pending'])
+
+                ext_name = match_result.get('candidate_name')
+                ext_email = match_result.get('candidate_email')
+
+                if is_placeholder_name and ext_name and ext_name != "Extraction Failed":
+                    candidate.full_name = ext_name
+                
+                if is_placeholder_email and ext_email and ext_email != "Extraction Failed":
+                    candidate.email = ext_email
                 candidate.resume_score = percentage
                 is_eligible = (percentage >= threshold)
                 candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'

@@ -263,8 +263,14 @@ class SubmitAssessmentView(APIView):
 
             # CROSS-UPDATE: Synchronize with the Candidate record
             try:
-                candidate = Candidate.objects.filter(email__iexact=email).first()
+                # Use iexact and prioritize the same batch if possible
+                candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
+                candidate = candidates.filter(batch_id=assessment.batch_id).first()
+                if not candidate:
+                    candidate = candidates.first()
+
                 if candidate:
+                    logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
                     # For Fully Automatic flows, move them to 'Assessment Passed' 
                     # so they show up correctly before the interview is sent.
@@ -277,6 +283,7 @@ class SubmitAssessmentView(APIView):
                     candidate.interview_summary.append({
                         "type": "AI_ASSESSMENT",
                         "assessment_id": assessment.id,
+                        "submission_id": submission.id,
                         "mcq_accuracy": f"{round(candidate_mcq_points)}/{len(mcqs)} ({int(mcq_percentage)}%)",
                         "coding_accuracy": f"{int(coding_percentage)}%",
                         "weighted_mcq": f"{(mcq_percentage * mcq_w):.1f}%",
@@ -285,6 +292,8 @@ class SubmitAssessmentView(APIView):
                         "timestamp": timezone.now().isoformat()
                     })
                     candidate.save()
+                else:
+                    logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
 
                     # ── TRIGGER NEXT STAGE ──
                     # If they passed, automatically trigger the AI Interview invitation
@@ -937,11 +946,19 @@ class CreateSubmissionView(APIView):
                 
                 # CROSS-UPDATE: Synchronize with the Candidate record if exists
                 try:
-                    candidate = Candidate.objects.filter(email__iexact=email).first()
+                    # Use iexact and prioritize the same batch if possible
+                    candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
+                    candidate = candidates.filter(batch_id=assessment.batch_id).first()
+                    if not candidate:
+                        candidate = candidates.first()
+
                     if candidate:
+                        logger.info(f"CreateSubmission: Reconciled candidate {candidate.id} for {email} in assessment {assessment.id}")
                         if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
                             candidate.full_name = name
                             candidate.save(update_fields=['full_name'])
+                    else:
+                        logger.info(f"CreateSubmission: No matching Candidate record found for {email}")
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 

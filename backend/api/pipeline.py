@@ -848,13 +848,24 @@ def process_assessment_passed(submission_id):
         )
 
         # Find or create the candidate record
+        # CRITICAL FIX: Use iexact for case-insensitive matching to avoid duplicates (e.g. Surya@... vs surya@...)
+        # We also filter by company to ensure multi-tenant isolation.
         candidates = Candidate.objects.filter(
-            email=submission.candidate_email,
+            email__iexact=submission.candidate_email,
             company=submission.assessment.company
         ).order_by('-id')
 
         if candidates.exists():
-            candidate = candidates.first()
+            # If multiple records exist for this email, prioritize the one in the same batch
+            candidate = candidates.filter(batch_id=submission.batch_id).first()
+            if not candidate:
+                candidate = candidates.first() # Fallback to newest record
+
+            logger.info(
+                f"Pipeline: Reconciled submission {submission_id} to existing candidate {candidate.id} "
+                f"({candidate.full_name}, Batch={candidate.batch_id})"
+            )
+            
             candidate.status = 'Interview'
             # Synchronize batch info from submission to candidate if it doesn't exist
             if not candidate.batch_id:
@@ -862,11 +873,10 @@ def process_assessment_passed(submission_id):
             if not candidate.batch_name:
                 candidate.batch_name = submission.batch_name
             candidate.save(update_fields=['status', 'batch_id', 'batch_name'])
-            logger.info(f"Pipeline: Updated existing candidate {candidate.id} status to 'Interview'.")
         else:
             candidate = Candidate.objects.create(
                 full_name=submission.candidate_name,
-                email=submission.candidate_email,
+                email=submission.candidate_email.lower(), # Normalize to lowercase on creation
                 job_title=submission.assessment.required_skills or "Applicant",
                 job_description=submission.assessment.job_description,
                 status='Interview',
@@ -876,7 +886,7 @@ def process_assessment_passed(submission_id):
                 user_profile=getattr(submission.assessment, 'user_profile', None),
                 created_by=getattr(submission.assessment, 'user_profile', None),
             )
-            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage and linked to batch {submission.batch_id}.")
+            logger.info(f"Pipeline: Created NEW candidate record {candidate.id} for interview stage.")
 
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         link = f"{base_url}/interview-start/{candidate.public_token}"
