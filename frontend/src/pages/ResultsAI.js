@@ -219,7 +219,25 @@ const ResultsAI = () => {
             const sid = String(candidate.submission_id || '');
             const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
             const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
-            setTimelineLogs(resp.data);
+            
+            // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
+            let filteredLogs = resp.data;
+            if (candidate.batch_id) {
+                filteredLogs = resp.data.filter(log => !log.batch_id || log.batch_id === candidate.batch_id);
+            }
+
+            // Enhanced Phase Inference for legacy logs (where phase is GENERAL)
+            filteredLogs = filteredLogs.map(log => {
+                if (log.phase === 'GENERAL') {
+                    const msg = log.message.toLowerCase();
+                    if (msg.includes('resume') || msg.includes('screening')) return { ...log, phase: 'RESUME' };
+                    if (msg.includes('assessment') || msg.includes('pool') || msg.includes('quiz')) return { ...log, phase: 'ASSESSMENT' };
+                    if (msg.includes('interview')) return { ...log, phase: 'INTERVIEW' };
+                }
+                return log;
+            });
+
+            setTimelineLogs(filteredLogs);
         } catch (err) {
             console.error('Error fetching timeline:', err);
             showToast('error', 'Failed to load timeline history.');
@@ -308,7 +326,7 @@ const ResultsAI = () => {
     const isPass = (r, type) => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
-        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 100) >= 0.5);
+        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 130) >= 0.5);
         return false;
     };
 
@@ -445,8 +463,16 @@ const ResultsAI = () => {
 
     const renderTranscriptReport = (data) => {
         if (!data) return null;
-        const totalPossible = (data.interview_summary?.length || 13) * 10;
-        const calculatedPercentage = data.score != null ? Math.round((data.score / totalPossible) * 100) : 0;
+        // Total possible marks based on 13 planned questions
+        const totalPlannedQuestions = 13;
+        const totalPossible = totalPlannedQuestions * 10;
+        const baseScore = data.score || 0;
+        const basePercentage = Math.round((baseScore / totalPossible) * 100);
+        
+        // Integrity Penalty Calculation
+        const integrityScore = data.integrity?.integrity_score ?? 100;
+        const integrityPenalty = Math.max(0, 100 - integrityScore);
+        const finalPercentage = Math.max(0, basePercentage - Math.round(integrityPenalty));
 
         return (
             <div className="report-container">
@@ -497,10 +523,16 @@ const ResultsAI = () => {
 
                         <div className="sidebar-card">
                             <span className="sidebar-label">Overall Performance</span>
-                            <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#4F46E5', lineHeight: 1 }}>{calculatedPercentage}%</div>
+                            <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#4F46E5', lineHeight: 1 }}>{finalPercentage}%</div>
                             <div style={{ width: '100%', height: '6px', background: '#f1f5f9', borderRadius: '3px', marginTop: '0.6rem', overflow: 'hidden' }}>
-                                <div style={{ width: `${calculatedPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
+                                <div style={{ width: `${finalPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
                             </div>
+                            {integrityPenalty > 0 && (
+                                <p style={{ fontSize: '0.7rem', color: '#EE5D50', marginTop: '0.5rem', fontWeight: '700' }}>
+                                    <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: '4px' }}></i>
+                                    Includes -{Math.round(integrityPenalty)}% integrity penalty
+                                </p>
+                            )}
                         </div>
 
                         <div className="sidebar-card">
@@ -512,16 +544,16 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Integrity Evidence Gallery */}
-                        {data.integrity_screenshots?.length > 0 && (
+                        {(data.integrity_screenshots?.length > 0 || data.integrity_logs?.length > 0) && (
                             <div className="sidebar-card">
                                 <span className="sidebar-label">Integrity Evidence</span>
                                 <div className="integrity-gallery-scroll">
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                                        {data.integrity_screenshots.map((log, lIdx) => {
+                                        {(data.integrity_screenshots || data.integrity_logs || []).map((log, lIdx) => {
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
                                             const displayImg = isScreenEvent
-                                                ? (log.screenshot_url || log.webcam_screenshot_url)
-                                                : (log.webcam_screenshot_url || log.screenshot_url);
+                                                ? (log.screenshot_url || log.webcam_screenshot_url || log.screenshot_base64 || log.webcam_screenshot_base64)
+                                                : (log.webcam_screenshot_url || log.screenshot_url || log.webcam_screenshot_base64 || log.screenshot_base64);
 
                                             return (
                                                 <div key={lIdx} style={{
@@ -995,13 +1027,13 @@ const ResultsAI = () => {
                                 )}
 
                                 {/* Integrity Violations */}
-                                {viewedSubmission.integrity_screenshots?.length > 0 && (
+                                {(viewedSubmission.integrity_screenshots?.length > 0 || viewedSubmission.integrity_logs?.length > 0) && (
                                     <div style={{ marginTop: '4rem' }}>
                                         <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
                                         </h4>
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-                                            {viewedSubmission.integrity_screenshots.map((snap, sIdx) => (
+                                            {(viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []).map((snap, sIdx) => (
                                                 <div key={sIdx} style={{ background: 'white', borderRadius: '20px', padding: '12px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
                                                     <div style={{
                                                         width: '100%', height: '160px', background: '#F4F7FE',
@@ -1009,7 +1041,7 @@ const ResultsAI = () => {
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
                                                         <img
-                                                            src={snap.screenshot_url || snap.webcam_screenshot_url}
+                                                            src={snap.screenshot_url || snap.webcam_screenshot_url || snap.screenshot_base64 || snap.webcam_screenshot_base64}
                                                             alt={snap.event_type}
                                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                             onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
@@ -1582,8 +1614,20 @@ const ResultsAI = () => {
                                             borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
                                             border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
                                         }}></div>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
-                                            {log.timestamp_formatted}
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
+                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase' }}>
+                                                {log.timestamp_formatted}
+                                            </div>
+                                            {log.phase && log.phase !== 'GENERAL' && (
+                                                <span style={{
+                                                    fontSize: '0.6rem', fontWeight: '800', padding: '0.1rem 0.4rem', borderRadius: '4px',
+                                                    background: log.phase === 'RESUME' ? '#E0E7FF' : log.phase === 'ASSESSMENT' ? '#FEF3C7' : '#D1FAE5',
+                                                    color: log.phase === 'RESUME' ? '#4318FF' : log.phase === 'ASSESSMENT' ? '#D97706' : '#059669',
+                                                    textTransform: 'uppercase'
+                                                }}>
+                                                    {log.phase.replace('_', ' ')}
+                                                </span>
+                                            )}
                                         </div>
                                         <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
                                             {log.message}

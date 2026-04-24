@@ -204,8 +204,12 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     percentage = int(float(match_result.get('match_percentage', 0)))
                 except: percentage = 0
                 
-                candidate.full_name = match_result.get('candidate_name', candidate.full_name)
-                candidate.email = match_result.get('candidate_email', candidate.email)
+                # Only overwrite identity if it's a new placeholder record (Bulk Upload flow)
+                # This prevents invited candidates from accidentally (or maliciously) changing their identity
+                # by uploading a resume with different contact details.
+                if not candidate.email or "pending@example.com" in candidate.email:
+                    candidate.full_name = match_result.get('candidate_name', candidate.full_name)
+                    candidate.email = match_result.get('candidate_email', candidate.email)
                 candidate.resume_score = percentage
                 is_eligible = (percentage >= threshold)
                 candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
@@ -216,6 +220,9 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     candidate.automation_settings = automation_settings
                     # Explicitly save the flag for UI distinction
                     candidate.automation_settings['is_fully_automatic'] = is_fully_automatic
+                    
+                    # Set interview pass threshold from automation settings
+                    candidate.interview_pass_threshold = automation_settings.get('interview_pass_threshold', 50)
                     
                     i_from = automation_settings.get('interview_available_from')
                     i_until = automation_settings.get('interview_available_until')
@@ -231,7 +238,8 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     candidate, 
                     'STATUS_CHANGE', 
                     'SUCCESS' if is_eligible else 'WARNING', 
-                    f"Resume screening complete. Score: {percentage}%. Status: {candidate.status}"
+                    f"Resume screening complete. Score: {percentage}%. Status: {candidate.status}",
+                    phase='RESUME'
                 )
             else:
                 candidate.status = 'Extraction Failed'
@@ -241,7 +249,8 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     candidate, 
                     'ERROR', 
                     'FAILURE', 
-                    "AI Analysis failed: model could not extract valid candidate data after multiple attempts."
+                    "AI Analysis failed: model could not extract valid candidate data after multiple attempts.",
+                    phase='RESUME'
                 )
 
             # Cooldown (Minimal because of key rotation and fast model)
@@ -259,7 +268,8 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 candidate, 
                 'ERROR', 
                 'FAILURE', 
-                f"Critical failure during resume processing: {str(e)}"
+                f"Critical failure during resume processing: {str(e)}",
+                phase='RESUME'
             )
 
     print(f"\n✨ BATCH COMPLETE: Processed {total} candidates.")

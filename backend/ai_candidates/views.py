@@ -31,6 +31,7 @@ import pandas as pd
 # Setup Logger
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
+TOTAL_INTERVIEW_QUESTIONS = 13
 
 from api.views import ensure_role_exists
 from api.models import UserProfile
@@ -132,6 +133,12 @@ class BulkInviteView(APIView):
             
         batch_interview_time = request.data.get('interview_time') # Keep for legacy/compat
         experience_level = request.data.get('experience_level', '').strip() or None
+        interview_pass_threshold = request.data.get('interview_pass_threshold', 50)
+        try:
+            interview_pass_threshold = int(interview_pass_threshold)
+        except:
+            interview_pass_threshold = 50
+
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -185,7 +192,9 @@ class BulkInviteView(APIView):
                     created_by=user_profile,
                     batch_id=batch_id,
                     batch_name=batch_name,
+                    interview_pass_threshold=interview_pass_threshold,
                 )
+
                 frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
                 link = f"{frontend_base}/interview-start/{candidate.public_token}"
                 
@@ -408,6 +417,7 @@ class ResumeMatchView(APIView):
                 'mcq_count': int(request.data.get('mcq_count', 10)),
                 'coding_count': int(request.data.get('coding_count', 1)),
                 'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                'interview_pass_threshold': int(request.data.get('interview_pass_threshold', 50)),
                 'mcq_weight': int(request.data.get('mcq_weight', 40)),
                 'same_questions_for_all': same_q,
                 'assessment_available_from': request.data.get('assessment_available_from'),
@@ -813,6 +823,16 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
         if not candidate.link_opened_at:
             candidate.link_opened_at = now
             candidate.save(update_fields=['link_opened_at'])
+            
+            # Log interview start
+            from .utils import log_automation_event
+            log_automation_event(
+                candidate, 
+                'STATUS_CHANGE', 
+                'SUCCESS', 
+                f"AI Interview session started. Candidate accessed the link.",
+                phase='INTERVIEW'
+            )
         else:
             elapsed = now - candidate.link_opened_at
             if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
@@ -879,10 +899,31 @@ class CandidatePublicStatusUpdateView(APIView):
             if new_status != 'Completed':
                 return Response({'error': 'Only completion status is allowed for public links.'}, status=status.HTTP_403_FORBIDDEN)
 
-            candidate.status = new_status
+            # Calculate final score percentage
+            total_possible = candidate.total_questions * 10 if candidate.total_questions > 0 else 100
+            score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
+
+            # Determine pass/fail based on threshold
+            threshold = candidate.interview_pass_threshold or 50
+            if score_percentage >= threshold:
+                candidate.status = 'Hired'
+            else:
+                candidate.status = 'Rejected'
+
             candidate.completed_at = timezone.now()
             candidate.resume_text = None
             candidate.save()
+
+            # Log interview completion
+            from .utils import log_automation_event
+            log_automation_event(
+                candidate, 
+                'STATUS_CHANGE', 
+                'SUCCESS' if candidate.status == 'Hired' else 'WARNING', 
+                f"AI Interview completed. Final Status: {candidate.status}. Score: {score_percentage}%",
+                phase='INTERVIEW'
+            )
+
             response = Response({'status': 'success', 'new_status': candidate.status})
             response["Cache-Control"] = "no-cache, no-store, must-revalidate"
             response["Pragma"] = "no-cache"
@@ -928,11 +969,11 @@ class UpdateIntegrityView(APIView):
             
             # Define weights
             weights = {
-                'tab_switch': 10,
-                'phone_detection': 30,
-                'multiface_detection': 15,
-                'no_face_detection': 5,
-                'face_detection_lost': 5
+                'tab_switch': 2,
+                'phone_detection': 2,
+                'multiface_detection': 2,
+                'no_face_detection': 2,
+                'face_detection_lost': 2
             }
 
             # Simple penalty system
@@ -996,11 +1037,11 @@ class CandidatePublicIntegrityUpdateView(APIView):
                 integrity.warning_logs.append(event_type)
 
             weights = {
-                'tab_switch': 10,
-                'phone_detection': 30,
-                'multiface_detection': 15,
-                'no_face_detection': 5,
-                'face_detection_lost': 5
+                'tab_switch': 2,
+                'phone_detection': 2,
+                'multiface_detection': 2,
+                'no_face_detection': 2,
+                'face_detection_lost': 2
             }
             total_raw_penalty = (
                 integrity.tab_switches * weights['tab_switch'] +
@@ -1561,20 +1602,32 @@ class CandidateReportDownloadView(APIView):
             elements.append(Paragraph("Candidate Information", styles['Heading3']))
             
             # Identity Verification (Face Registration)
-            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
-            # Try multiple path variations to be safe (case sensitivity, etc.)
-            email_normalized = candidate.email.strip()
-            path_options = [
-                os.path.join(deepface_data_dir, email_normalized, "face_0.jpg"),
-                os.path.join(deepface_data_dir, email_normalized.lower(), "face_0.jpg"),
-                os.path.join(deepface_data_dir, email_normalized.split('@')[0], "face_0.jpg"), # Try just username
-            ]
-            
+            # First try deepface directory using public token (which is what the frontend uses for registration)
             person_img_path = None
+            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+            person_id = str(candidate.public_token).lower() if candidate.public_token else None
+            path_options = []
+            
+            if person_id:
+                path_options = [
+                    os.path.join(deepface_data_dir, person_id, "face_0.jpg"),
+                ]
+            
             for p in path_options:
                 if os.path.exists(p):
                     person_img_path = p
                     break
+
+            # Fallback: Use first webcam screenshot from integrity logs
+            fallback_img_data = None
+            if not person_img_path:
+                first_log = candidate.integrity_logs.filter(webcam_screenshot_base64__isnull=False).order_by('timestamp').first()
+                if first_log and first_log.webcam_screenshot_base64:
+                    try:
+                        b64 = first_log.webcam_screenshot_base64.split(',')[-1]
+                        fallback_img_data = base64.b64decode(b64)
+                    except:
+                        pass
 
             # Left side: Image
             if person_img_path:
@@ -1582,15 +1635,33 @@ class CandidateReportDownloadView(APIView):
                     img_elem = RLImage(person_img_path, width=2.0*inch, height=1.5*inch)
                 except:
                     img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            elif fallback_img_data:
+                try:
+                    img_io = io.BytesIO(fallback_img_data)
+                    img_elem = RLImage(img_io, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
             else:
-                img_elem = Paragraph("<i>No registered identity photo found in the proctoring database.</i>", styles['Normal'])
+                img_elem = Paragraph("<i>No candidate photo available.</i>", styles['Normal'])
+
+            # Score & Penalty Calculation
+            total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
+            base_score_pct = (candidate.score / total_possible_marks * 100) if total_possible_marks > 0 else 0
+            
+            integrity_obj = getattr(candidate, 'integrity', None)
+            integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
+            integrity_penalty = max(0, 100.0 - integrity_score)
+            
+            final_performance_pct = max(0, round(base_score_pct - integrity_penalty, 1))
 
             # Right side: Summary Table
             info_data = [
                 ["Full Name", candidate.full_name],
                 ["Email", candidate.email],
                 ["Job Title", candidate.job_title or "N/A"],
-                ["Final Score", f"{candidate.score} / {candidate.total_questions * 10 if candidate.total_questions else 100}"],
+                ["Interview Score", f"{candidate.score} / {total_possible_marks}"],
+                ["Integrity Penalty", f"-{integrity_penalty:.1f}%"],
+                ["Final Performance", f"{final_performance_pct}%"],
                 ["Status", candidate.status],
                 ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
             ]
@@ -1621,28 +1692,52 @@ class CandidateReportDownloadView(APIView):
             
             if isinstance(candidate.interview_summary, list) and candidate.interview_summary:
                 for i, turn in enumerate(candidate.interview_summary, 1):
-                    # Question Header
-                    elements.append(Paragraph(f"Question #{i}", styles['Heading4']))
-                    elements.append(Paragraph(f"<b>Q:</b> {turn.get('question', 'N/A')}", styles['Normal']))
-                    elements.append(Spacer(1, 5))
+                    # Question Header with background
+                    q_header_style = ParagraphStyle(
+                        'QHeader',
+                        parent=styles['Heading4'],
+                        fontSize=11,
+                        textColor=colors.HexColor("#4338ca"),
+                        spaceBefore=15,
+                        spaceAfter=8,
+                        backColor=colors.HexColor("#f8fafc"),
+                        borderPadding=8,
+                        borderWidth=1,
+                        borderColor=colors.HexColor("#e2e8f0"),
+                        borderRadius=5
+                    )
+                    elements.append(Paragraph(f"Question #{i}", q_header_style))
+                    
+                    # Question text
+                    elements.append(Paragraph(f"<b>Question:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('question', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 8))
                     
                     # Answer
                     elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
                     elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
-                    elements.append(Spacer(1, 5))
+                    elements.append(Spacer(1, 8))
                     
                     # AI Analysis
                     elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
                     elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
+                    elements.append(Spacer(1, 8))
                     
-                    # Score
+                    # Score with color coding
                     score = turn.get('score', 0)
                     score_color = colors.darkgreen if score >= 7 else (colors.darkorange if score >= 4 else colors.red)
-                    elements.append(Paragraph(f"<b>Score: <font color={score_color.hexval()}>{score}/10</font></b> — {turn.get('reason', '')}", styles['Normal']))
+                    score_style = ParagraphStyle(
+                        'ScoreStyle',
+                        parent=styles['Normal'],
+                        fontSize=10,
+                        textColor=score_color,
+                        spaceBefore=5,
+                        spaceAfter=15
+                    )
+                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {turn.get('reason', '')}", score_style))
                     
-                    elements.append(Spacer(1, 15))
-                    elements.append(Paragraph('<hr color="#e2e8f0"/>', styles['Normal']))
-                    elements.append(Spacer(1, 10))
+                    elements.append(Paragraph('<hr color="#e2e8f0" thickness="1"/>', styles['Normal']))
+                    elements.append(Spacer(1, 12))
             else:
                 elements.append(Paragraph("No interview transcript data recorded for this session.", styles['Italic']))
 
@@ -1656,20 +1751,17 @@ class CandidateReportDownloadView(APIView):
                 elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
                 elements.append(Spacer(1, 15))
                 
+                # Collect all images across all logs for 4-per-row layout
+                all_images = []
                 for log in logs:
-                    elements.append(Paragraph(f"<b>Violation:</b> {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})", styles['Normal']))
-                    elements.append(Spacer(1, 5))
-                    
-                    # Add snapshots
-                    img_row = []
                     # Process Webcam Snapshot
                     if log.webcam_screenshot_base64:
                         try:
                             b64 = log.webcam_screenshot_base64.split(',')[-1]
                             img_data = base64.b64decode(b64)
                             img_io = io.BytesIO(img_data)
-                            rl_img = RLImage(img_io, width=2.8*inch, height=2.1*inch)
-                            img_row.append(rl_img)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
                         except: pass
                     
                     # Process Desktop Snapshot
@@ -1678,26 +1770,40 @@ class CandidateReportDownloadView(APIView):
                             b64 = log.screenshot_base64.split(',')[-1]
                             img_data = base64.b64decode(b64)
                             img_io = io.BytesIO(img_data)
-                            rl_img = RLImage(img_io, width=2.8*inch, height=2.1*inch)
-                            img_row.append(rl_img)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
                         except: pass
+                
+                if all_images:
+                    # Display images in 4-per-row grid
+                    img_grid = []
+                    row = []
+                    for img, caption in all_images:
+                        # Each cell will contain both the image and the caption text
+                        row.append([img, Paragraph(caption, styles['Small'])])
+                        if len(row) == 4:
+                            img_grid.append(row)
+                            row = []
+                    if row:  # Add remaining images
+                        while len(row) < 4:
+                            row.append("")
+                        img_grid.append(row)
                     
-                    if img_row:
-                        # Ensure alignment by always using a 2-column table even if 1 image
-                        while len(img_row) < 2:
-                            img_row.append(Paragraph("", styles['Normal'])) # Empty cell
-                        
-                        t_img = Table([img_row], colWidths=[3.1*inch, 3.1*inch])
+                    for grid_row in img_grid:
+                        # Passing [grid_row] creates a single table row with 4 columns
+                        t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
                         t_img.setStyle(TableStyle([
-                            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                             ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                            ('LEFTPADDING', (0,0), (-1,-1), 0),
+                            ('LEFTPADDING', (0,0), (-1,-1), 2),
+                            ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                            ('TOPPADDING', (0,0), (-1,-1), 5),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 5),
                         ]))
                         elements.append(t_img)
-                    else:
-                        elements.append(Paragraph("[No visual evidence captured for this violation]", styles['Small']))
-                    
-                    elements.append(Spacer(1, 20))
+                        elements.append(Spacer(1, 10))
+                else:
+                    elements.append(Paragraph("[No visual evidence captured for violations]", styles['Small']))
             else:
                 elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
 

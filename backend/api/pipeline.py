@@ -360,7 +360,8 @@ def process_batch_assessment(batch_id):
                         'num_passed': num_passed,
                         'mcq_generated': mcq_count_gen,
                         'coding_generated': coding_count_gen,
-                    }
+                    },
+                    phase='ASSESSMENT'
                 )
 
         # ── 2. SEND INVITATION EMAILS ──
@@ -448,7 +449,8 @@ def process_batch_assessment(batch_id):
                 log_automation_event(
                     candidate, 'EMAIL_SENT', 'SUCCESS',
                     f"Assessment invitation email sent successfully to {candidate.email}.",
-                    details={'assessment_id': assessment.id, 'link': link}
+                    details={'assessment_id': assessment.id, 'link': link},
+                    phase='ASSESSMENT'
                 )
 
                 # Update InvitedCandidate list
@@ -467,7 +469,8 @@ def process_batch_assessment(batch_id):
                 log_automation_event(
                     candidate, 'EMAIL_SENT', 'FAILURE',
                     f"Failed to send assessment invitation email: {str(mail_err)}",
-                    details={'assessment_id': assessment.id, 'error': str(mail_err)}
+                    details={'assessment_id': assessment.id, 'error': str(mail_err)},
+                    phase='ASSESSMENT'
                 )
 
         logger.info(
@@ -808,7 +811,8 @@ def process_resume_passed(candidate_id):
         log_automation_event(
             candidate, 'EMAIL_SENT', 'SUCCESS',
             f"Individual assessment invitation email sent to {candidate.email}.",
-            details={'assessment_id': assessment.id, 'link': link}
+            details={'assessment_id': assessment.id, 'link': link},
+            phase='ASSESSMENT'
         )
 
         # Update InvitedCandidate list
@@ -927,7 +931,8 @@ def process_assessment_passed(submission_id):
         log_automation_event(
             candidate, 'EMAIL_SENT', 'SUCCESS',
             f"Interview invitation email sent after passing assessment with {submission.percentage}%.",
-            details={'submission_id': submission_id, 'score': submission.percentage, 'link': link}
+            details={'submission_id': submission_id, 'score': submission.percentage, 'link': link},
+            phase='INTERVIEW'
         )
 
     except Exception as e:

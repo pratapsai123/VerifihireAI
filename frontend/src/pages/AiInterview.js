@@ -18,6 +18,8 @@ const AiInterview = () => {
     const [untilTime, setUntilTime] = useState('');
     const [customRoleTitle, setCustomRoleTitle] = useState('');
     const [experienceLevel, setExperienceLevel] = useState('');
+    const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
+
 
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
@@ -44,7 +46,9 @@ const AiInterview = () => {
                     if (parsed.fromTime) { setFromTime(parsed.fromTime); hasRestoredData = true; }
                     if (parsed.untilDate) { setUntilDate(parsed.untilDate); hasRestoredData = true; }
                     if (parsed.untilTime) { setUntilTime(parsed.untilTime); hasRestoredData = true; }
+                    if (parsed.interviewPassThreshold) { setInterviewPassThreshold(parsed.interviewPassThreshold); hasRestoredData = true; }
                     if (hasRestoredData) isDirty.current = true;
+
                 } catch (e) {
                     console.error("Error hydrating interview form:", e);
                 }
@@ -62,15 +66,17 @@ const AiInterview = () => {
     if (!initialDataHash.current) {
         initialDataHash.current = JSON.stringify({
             jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime
+            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
         });
+
     }
 
     React.useEffect(() => {
         const dataToSave = {
             jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime
+            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
         };
+
         const currentDataStr = JSON.stringify(dataToSave);
 
         if (!isDirty.current && currentDataStr === initialDataHash.current) {
@@ -81,8 +87,9 @@ const AiInterview = () => {
         sessionStorage.setItem(STORAGE_KEY, currentDataStr);
     }, [
         jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-        fromDate, fromTime, untilDate, untilTime
+        fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
     ]);
+
 
     React.useEffect(() => {
         const fetchRoles = async () => {
@@ -214,6 +221,8 @@ const AiInterview = () => {
         if (experienceLevel) {
             formData.append('experience_level', experienceLevel);
         }
+        formData.append('interview_pass_threshold', interviewPassThreshold);
+
 
         try {
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/bulk-invite/`, formData, {
@@ -511,6 +520,40 @@ const AiInterview = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Card 4: Threshold Settings */}
+                            <div className="glass-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
+                                        <i className="fa-solid fa-sliders"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Interview Settings</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: '0.2rem 0 0' }}>Configure passing benchmarks.</p>
+                                    </div>
+                                </div>
+
+                                <div className="input-group" style={{ marginBottom: 0 }}>
+                                    <label className="input-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span>AI Interview Pass Threshold</span>
+                                        <span style={{ color: '#6366F1', fontWeight: '700' }}>{interviewPassThreshold}%</span>
+                                    </label>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.5rem' }}>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={interviewPassThreshold}
+                                            onChange={(e) => setInterviewPassThreshold(parseInt(e.target.value))}
+                                            style={{ flex: 1, accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
+                                        />
+                                    </div>
+                                    <p style={{ color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.75rem' }}>
+                                        Candidates scoring below this in the AI interview will be automatically rejected.
+                                    </p>
+                                </div>
+                            </div>
+
 
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                                 {error && (

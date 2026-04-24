@@ -7,7 +7,7 @@ class PipelineLogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PipelineLog
-        fields = ['id', 'event_type', 'status', 'message', 'details', 'timestamp', 'timestamp_formatted']
+        fields = ['id', 'event_type', 'status', 'phase', 'batch_id', 'message', 'details', 'timestamp', 'timestamp_formatted']
 
     def get_timestamp_formatted(self, obj):
         # Convert UTC to local time (configured in settings.TIME_ZONE)

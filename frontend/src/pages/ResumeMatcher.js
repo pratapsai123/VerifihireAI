@@ -76,6 +76,7 @@ const ResumeMatcher = () => {
     const [mcqCount, setMcqCount] = useState(10);
     const [codingCount, setCodingCount] = useState(1);
     const [passThreshold, setPassThreshold] = useState(60);
+    const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
     const [mcqWeight, setMcqWeight] = useState(40);
     const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
 
@@ -250,6 +251,7 @@ const ResumeMatcher = () => {
             formData.append('coding_count', codingCount);
             formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
             formData.append('pass_threshold', passThreshold);
+            formData.append('interview_pass_threshold', interviewPassThreshold);
             formData.append('mcq_weight', mcqWeight);
             formData.append('same_questions_for_all', sameQuestionsForAll);
             formData.append('is_fully_automatic', true);
@@ -592,6 +594,15 @@ const ResumeMatcher = () => {
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
+                            </div>
+
+                            <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
+                                <label>AI Interview Pass Threshold ({interviewPassThreshold}%)</label>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <input type="range" min="0" max="100" value={interviewPassThreshold} onChange={(e) => setInterviewPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
+                                    <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{interviewPassThreshold}%</span>
+                                </div>
+                                <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this in the AI interview will be automatically rejected.</p>
                             </div>
 
                             {/* Same questions for all toggle */}
