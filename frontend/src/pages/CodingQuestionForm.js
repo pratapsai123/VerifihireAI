@@ -274,6 +274,7 @@ export default function CodingQuestionForm() {
   const [tcSaving, setTcSaving] = useState(false);
   const [timeInput, setTimeInput] = useState('');
   const [timeError, setTimeError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [showLangs, setShowLangs] = useState(false);
   const langsRef = useRef(null);
 
@@ -290,21 +291,13 @@ export default function CodingQuestionForm() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const normalizeLanguages = useCallback((value, fallbackLanguage) => {
+  const normalizeLanguages = useCallback((value) => {
     const arr = Array.isArray(value) ? value : value ? [value] : [];
     const cleaned = arr
       .map((v) => (v || '').toString().trim().toLowerCase())
       .filter((v) => LANG_OPTIONS.some((opt) => opt.value === v));
 
-    const normalized = cleaned.filter((v, idx) => cleaned.indexOf(v) === idx);
-    // If we have a fallback and the result is empty, use it.
-    // BUT only if fallback is valid.
-    if (normalized.length === 0 && fallbackLanguage) {
-      // Check if fallback is valid option to prevent phantom languages
-      const isFallbackValid = LANG_OPTIONS.some(o => o.value === fallbackLanguage);
-      if (isFallbackValid) return [fallbackLanguage];
-    }
-    return normalized;
+    return cleaned.filter((v, idx) => cleaned.indexOf(v) === idx);
   }, []);
 
   const load = useCallback(async () => {
@@ -313,12 +306,12 @@ export default function CodingQuestionForm() {
     setError('');
     try {
       const resp = await axios.get(`${API_BASE_URL}/coding/questions/${id}/`);
-      const langs = normalizeLanguages(resp.data?.languages, resp.data?.language || DEFAULT_LANGS[0]);
+      const langs = normalizeLanguages(resp.data?.languages);
       setForm({
         ...emptyForm,
         ...resp.data,
         languages: langs,
-        language: langs[0] || resp.data?.language || DEFAULT_LANGS[0],
+        language: langs.length > 0 ? langs[0] : (resp.data?.language || ''),
       });
       setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
       setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
@@ -412,7 +405,7 @@ export default function CodingQuestionForm() {
       return {
         ...prev,
         languages: next,
-        language: next.length > 0 ? next[0] : prev.language || '',
+        language: next.length > 0 ? next[0] : '',
         starter_code: newStarterCode,
       };
     });
@@ -423,7 +416,7 @@ export default function CodingQuestionForm() {
   // Auto-populate starter code when languages change (for new questions only)
   useEffect(() => {
     if (editing) return; // Don't auto-populate when editing existing question
-    const langs = normalizeLanguages(form.languages, form.language);
+    const langs = normalizeLanguages(form.languages);
     // Only update if languages are actually selected
     if (langs.length > 0) {
       const newStarterCode = generateStarterCodeForLanguages(langs);
@@ -450,22 +443,33 @@ export default function CodingQuestionForm() {
   const save = async ({ redirectTo } = {}) => {
     setSaving(true);
     setError('');
+    setFieldErrors({});
+
     try {
-      if (timeError) {
+      const errors = {};
+      if (!form.title?.trim()) errors.title = 'Title is required';
+      if (!form.languages?.length) errors.languages = 'Select at least one language';
+      
+      if (!timeInput) {
+        errors.time_limit_ms = 'Time limit is required';
+      } else if (timeError) {
+        errors.time_limit_ms = timeError;
+      } else if (form.time_limit_ms == null) {
+        errors.time_limit_ms = 'Invalid time format';
+      }
+
+      if (form.memory_limit_mb == null || form.memory_limit_mb < 32) {
+        errors.memory_limit_mb = 'Memory limit must be at least 32MB';
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
+        setError('Please fix the required fields below.');
         setSaving(false);
         return;
       }
-      if (!timeInput || form.time_limit_ms == null) {
-        setTimeError('Enter time as HH:MM:SS');
-        setSaving(false);
-        return;
-      }
-      const langs = normalizeLanguages(form.languages, form.language || DEFAULT_LANGS[0]);
-      if (!langs.length) {
-        setError('Please select at least one language');
-        setSaving(false);
-        return;
-      }
+
+      const langs = normalizeLanguages(form.languages);
 
       const user = getStoredUser();
       const orgName = getOrgFromUser(user);
@@ -505,7 +509,11 @@ export default function CodingQuestionForm() {
       } else if (redirectTo) {
         navigate(redirectTo, { state: { codingQuestions: questionPayload ? [questionPayload] : [] } });
       } else if (editing) {
-        await load();
+        if (location.pathname === '/coding-challenge-question' || navAssessment) {
+          navigate('/manual-questions', { state: navAssessment });
+        } else {
+          navigate('/coding');
+        }
       }
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to save question');
@@ -599,17 +607,46 @@ export default function CodingQuestionForm() {
             <div className="coding-card">
               <div className="coding-form-grid">
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><FileText size={16} style={{marginRight: '6px'}}/> Title *</div>
+                  <div className="coding-label"><FileText size={16} style={{marginRight: '6px'}}/> Title <span className="required-star">*</span></div>
                   <input value={form.title} onChange={(e) => update('title', e.target.value)} className="coding-input" style={{ height: '48px' }} placeholder="Question title" />
+                  {fieldErrors.title && <span className="field-error-message">{fieldErrors.title}</span>}
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Languages size={16} style={{marginRight: '6px'}}/> Languages *</div>
+                  <div className="coding-label"><Languages size={16} style={{marginRight: '6px'}}/> Languages <span className="required-star">*</span></div>
                   <div className="coding-multiselect" ref={langsRef}>
                     <div
                       className="coding-multiselect-trigger"
                       style={{ height: '48px' }}
-                      onClick={() => setShowLangs(!showLangs)}
+                      onClick={() => {
+                        const opening = !showLangs;
+                        setShowLangs(opening);
+                        
+                        setForm(prev => {
+                          const hasCpp = (prev.languages || []).includes('cpp');
+                          let nextLangs = [...(prev.languages || [])];
+                          
+                          if (opening) {
+                            // On opening, ensure C++ is selected
+                            if (!hasCpp) {
+                              nextLangs = [...nextLangs.filter(l => l !== 'sql'), 'cpp'];
+                            }
+                          } else {
+                            // On closing, ensure C++ is deselected
+                            if (hasCpp) {
+                              nextLangs = nextLangs.filter(l => l !== 'cpp');
+                            }
+                          }
+                          
+                          const newStarterCode = nextLangs.length > 0 ? generateStarterCodeForLanguages(nextLangs) : '';
+                          return {
+                            ...prev,
+                            languages: nextLangs,
+                            language: nextLangs.length > 0 ? nextLangs[0] : '',
+                            starter_code: newStarterCode
+                          };
+                        });
+                      }}
                     >
                       {form.languages.length === 0 ? (
                         <span className="coding-muted">Select Languages...</span>
@@ -646,10 +683,11 @@ export default function CodingQuestionForm() {
                       </div>
                     )}
                   </div>
+                  {fieldErrors.languages && <span className="field-error-message">{fieldErrors.languages}</span>}
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level *</div>
+                  <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level <span className="required-star">*</span></div>
                   <select
                     value={form.difficulty || 'easy'}
                     onChange={(e) => update('difficulty', e.target.value)}
@@ -727,7 +765,7 @@ export default function CodingQuestionForm() {
             <div className="coding-card">
               <div className="coding-form-grid">
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Timer size={16} style={{marginRight: '6px'}}/> Time limit (HH:MM:SS) *</div>
+                  <div className="coding-label"><Timer size={16} style={{marginRight: '6px'}}/> Time limit (HH:MM:SS) <span className="required-star">*</span></div>
                   <input
                     type="text"
                     value={timeInput}
@@ -738,15 +776,15 @@ export default function CodingQuestionForm() {
                     style={{ height: '48px' }}
                     required
                   />
-                  {timeError && (
-                    <div style={{ color: 'red', fontSize: '0.9rem', marginTop: '4px' }}>
-                      {timeError}
-                    </div>
+                  {fieldErrors.time_limit_ms && (
+                    <span className="field-error-message">
+                      {fieldErrors.time_limit_ms}
+                    </span>
                   )}
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Memory (MB) *</div>
+                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Memory (MB) <span className="required-star">*</span></div>
                   <input
                     type="number"
                     value={form.memory_limit_mb}
@@ -756,10 +794,11 @@ export default function CodingQuestionForm() {
                     min={32}
                     required
                   />
+                  {fieldErrors.memory_limit_mb && <span className="field-error-message">{fieldErrors.memory_limit_mb}</span>}
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Active Status *</div>
+                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Active Status <span className="required-star">*</span></div>
                   <select 
                     value={form.is_active ? 'yes' : 'no'} 
                     onChange={(e) => update('is_active', e.target.value === 'yes')} 

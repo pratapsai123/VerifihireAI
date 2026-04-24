@@ -1350,9 +1350,8 @@ export default function TakeAssessment() {
 
 
 
-  // Countdown timer (starts when candidate opens the link)
   useEffect(() => {
-    if (submitted || submitting || codingState.running) return;
+    if (submitted || submitting) return;
 
     // We don't want to reset the interval every second, so we DON'T include remainingSeconds in deps.
     let lastTick = Date.now();
