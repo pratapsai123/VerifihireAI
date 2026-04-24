@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'ai_assessments',
     'ai_candidates',
     'rest_framework_simplejwt',
+    'deepface_proctoring',
 ]
 
 # Trust Nginx to handle SSL and Host headers

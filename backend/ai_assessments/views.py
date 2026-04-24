@@ -2237,40 +2237,45 @@ class AIAssessmentReportDownloadView(APIView):
             
             screenshots = submission.screenshots.all().order_by('timestamp')
             if screenshots.exists():
-                # Display in a grid-like fashion (2 images per row)
+                # Display in a grid-like fashion (4 images per row)
                 shots_list = list(screenshots)
-                for i in range(0, len(shots_list), 2):
-                    row_shots = shots_list[i:i+2]
-                    img_row = []
-                    label_row = []
+                img_grid = []
+                current_row = []
+                
+                for shot in shots_list:
+                    # Prioritize webcam or desktop as per UI
+                    img_path = None
+                    if shot.webcam_screenshot: img_path = shot.webcam_screenshot.path
+                    elif shot.screenshot: img_path = shot.screenshot.path
                     
-                    for shot in row_shots:
-                        # Prioritize webcam or desktop as per UI
-                        img_path = None
-                        if shot.webcam_screenshot: img_path = shot.webcam_screenshot.path
-                        elif shot.screenshot: img_path = shot.screenshot.path
-                        
-                        try:
-                            if img_path:
-                                img_row.append(RLImage(img_path, width=2.5*inch, height=1.8*inch))
-                            else:
-                                img_row.append(Paragraph("No Image", styles['Normal']))
-                        except:
-                            img_row.append(Paragraph("Error Loading Image", styles['Normal']))
-                            
-                        label = f"{shot.event_type.replace('_', ' ').upper()}\n{shot.timestamp.strftime('%I:%M:%S %p')}"
-                        label_row.append(Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey)))
+                    try:
+                        if img_path:
+                            rl_img = RLImage(img_path, width=1.5*inch, height=1.1*inch)
+                            label = f"{shot.event_type.replace('_', ' ').upper()} ({shot.timestamp.strftime('%I:%M:%S %p')})"
+                            current_row.append([rl_img, Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey))])
+                        else:
+                            current_row.append(Paragraph("No Image", styles['Normal']))
+                    except:
+                        current_row.append(Paragraph("Error Loading Image", styles['Normal']))
 
-                    # Pad row if single image
-                    while len(img_row) < 2:
-                        img_row.append(Paragraph("", styles['Normal']))
-                        label_row.append(Paragraph("", styles['Normal']))
+                    if len(current_row) == 4:
+                        img_grid.append(current_row)
+                        current_row = []
 
-                    t = Table([img_row, label_row], colWidths=[2.7*inch, 2.7*inch])
+                if current_row:
+                    while len(current_row) < 4:
+                        current_row.append("")
+                    img_grid.append(current_row)
+
+                for grid_row in img_grid:
+                    t = Table([grid_row], colWidths=[1.6*inch, 1.6*inch, 1.6*inch, 1.6*inch])
                     t.setStyle(TableStyle([
                         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                        ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+                        ('LEFTPADDING', (0,0), (-1,-1), 2),
+                        ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                        ('TOPPADDING', (0,0), (-1,-1), 5),
+                        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
                     ]))
                     elements.append(t)
                     elements.append(Spacer(1, 10))
