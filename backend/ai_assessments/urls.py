@@ -23,7 +23,7 @@ urlpatterns = [
     path('submission/<int:pk>/integrity/', UpdateAssessmentIntegrityView.as_view(), name='update-integrity'),
     path('submission/<int:pk>/progress/', SaveAssessmentProgressView.as_view(), name='save-progress'),
     path('submission/<int:pk>/download-report/', AIAssessmentReportDownloadView.as_view(), name='ai-submission-report-download'),
-    path('submission/<int:pk>//', AIAssessmentSubmissionDetailView.as_view(), name='submission-detail'),
+    path('submission/<int:pk>/', AIAssessmentSubmissionDetailView.as_view(), name='submission-detail'),
     path('execute/', ProxyCodeExecuteView.as_view(), name='proxy-execute'),
 ]
 
