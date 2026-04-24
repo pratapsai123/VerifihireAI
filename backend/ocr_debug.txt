@@ -475,3 +475,11 @@
 [2026-04-21 08:53:01.692162+00:00] fitz opened PDF with 1 pages
 [2026-04-21 08:53:13.263327+00:00] Page 0: 831 chars extracted
 [2026-04-21 08:53:13.263917+00:00] OCR complete. Total chars: 832
+[2026-04-24 07:47:44.350542+00:00] Running OCR on rotation 0
+[2026-04-24 07:47:49.222753+00:00] Running OCR on rotation 180
+[2026-04-24 07:47:53.746275+00:00] Running OCR on rotation 90
+[2026-04-24 07:47:58.532330+00:00] Running OCR on rotation 270
+[2026-04-24 07:48:15.797264+00:00] Running OCR on rotation 0
+[2026-04-24 07:48:24.476615+00:00] Running OCR on rotation 180
+[2026-04-24 07:48:32.265518+00:00] Running OCR on rotation 90
+[2026-04-24 07:48:40.704719+00:00] Running OCR on rotation 270

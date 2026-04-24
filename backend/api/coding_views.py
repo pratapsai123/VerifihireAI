@@ -1196,6 +1196,9 @@ def coding_submit_view(request, question_id: int):
 
     evaluation = _evaluate_question(q=q, user_code=code, include_hidden=True, exec_language=exec_lang)
 
+    if data.get("skip_save") is True:
+        return Response(evaluation, status=status.HTTP_200_OK)  
+
     sub = CodingSubmission.objects.create(
         question_id=q.id,
         user_email=data.get("user_email"),
