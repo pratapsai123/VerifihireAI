@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 class Candidate(models.Model):
@@ -46,6 +47,7 @@ class Candidate(models.Model):
     )
     score = models.IntegerField(default=0)
     resume_score = models.IntegerField(default=0, help_text="Resume match percentage from AI screening")
+    interview_pass_threshold = models.IntegerField(default=50, help_text="Minimum score percentage to pass the interview")
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -77,6 +79,7 @@ class Candidate(models.Model):
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Internal UUID for the bulk session")
     batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True, help_text="Descriptive name (JD_date_time)")
+    public_token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
@@ -118,10 +121,18 @@ class PipelineLog(models.Model):
         ('WARNING', 'Warning'),
         ('FAILURE', 'Failure'),
     ]
+    PHASE_CHOICES = [
+        ('RESUME', 'Resume Screening'),
+        ('ASSESSMENT', 'AI Assessment'),
+        ('INTERVIEW', 'AI Interview'),
+        ('GENERAL', 'General'),
+    ]
 
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='pipeline_logs')
     event_type = models.CharField(max_length=50, choices=EVENT_CHOICES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='INFO')
+    phase = models.CharField(max_length=20, choices=PHASE_CHOICES, default='GENERAL')
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
     message = models.TextField()
     details = models.JSONField(default=dict, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)

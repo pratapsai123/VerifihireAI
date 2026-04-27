@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import pickle
+import cv2
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -94,6 +95,7 @@ def register_face(
     Returns:
         Dict with success status, quality score, and embedding count.
     """
+    person_id = person_id.strip().lower()
     DeepFace = _get_deepface()
 
     try:
@@ -147,6 +149,10 @@ def register_face(
                 "model": REGISTRATION_MODEL,
                 "label": label_str,
             }, f)
+
+        # Save the actual image for report generation
+        image_path = person_dir / f"{label_str}.jpg"
+        cv2.imwrite(str(image_path), img)
 
         # Also store model-specific copies for later verification.
         _save_embedding(person_dir, REGISTRATION_MODEL, label_str, embedding)
@@ -224,12 +230,14 @@ def get_registered_embeddings(person_id: str, model: Optional[str] = None) -> Li
 
 def is_registered(person_id: str) -> bool:
     """Check if a person has any registered face embeddings."""
+    person_id = person_id.strip().lower()
     return _count_embeddings(person_id) > 0
 
 
 def delete_registration(person_id: str) -> bool:
     """Delete all registered face data for a person."""
     import shutil
+    person_id = person_id.strip().lower()
     person_dir = REGISTERED_FACES_DIR / person_id
     if person_dir.exists():
         shutil.rmtree(person_dir)

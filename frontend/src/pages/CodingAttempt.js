@@ -384,7 +384,11 @@ export default function CodingAttempt() {
     setLastAction('submit');
     setResultHeightPct(50); // Expand results area upon submitting
     try {
-      const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/submit/`, { code, language: selectedLanguage });
+      const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/submit/`, {
+        code,
+        language: selectedLanguage,
+        skip_save: true
+      });
       setResult(resp.data);
       setTimeout(() => {
         if (resultRef.current) {
@@ -599,10 +603,10 @@ export default function CodingAttempt() {
                           const isHidden = r.is_hidden ?? r.hidden ?? false;
                           return (
                             <div key={r.testcase_id ?? idx} className="coding-table-row">
-                            <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
-                              {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
-                              <span className="coding-test-name">{idx + 1}</span>
-                            </div>
+                              <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
+                                {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
+                                <span className="coding-test-name">{idx + 1}</span>
+                              </div>
                               <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
                               {r.status === 'ERROR' && r.message ? (
                                 <div className="coding-mono coding-error-message" style={{ gridColumn: (result.results || []).some(res => (res.stderr || '').trim()) ? 'span 2' : 'span 1', color: '#ff6b6b' }}>

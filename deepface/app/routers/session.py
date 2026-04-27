@@ -8,7 +8,11 @@ Endpoints:
   GET  /session/{id}/violations  — Get violations for a session
 """
 
+import logging
+
 from fastapi import APIRouter, HTTPException
+
+logger = logging.getLogger(__name__)
 
 from app.models.schemas import (
     SessionStartRequest,
@@ -26,6 +30,7 @@ router = APIRouter(prefix="/session", tags=["Session Management"])
 @router.post("/start")
 async def start_session(request: SessionStartRequest):
     """Start a new monitoring session with initial ArcFace verification."""
+    logger.info(f"Session start request for person_id: {request.person_id}")
     try:
         result = await session_manager.start_session(
             person_id=request.person_id,

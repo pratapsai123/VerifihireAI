@@ -16,7 +16,6 @@ from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog, Pipeli
 from .serializers import CandidateSerializer, PipelineLogSerializer
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
-import traceback
 import time
 import re
 import logging
@@ -32,6 +31,7 @@ import pandas as pd
 # Setup Logger
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
+TOTAL_INTERVIEW_QUESTIONS = 13
 
 from api.views import ensure_role_exists
 from api.models import UserProfile
@@ -133,6 +133,12 @@ class BulkInviteView(APIView):
             
         batch_interview_time = request.data.get('interview_time') # Keep for legacy/compat
         experience_level = request.data.get('experience_level', '').strip() or None
+        interview_pass_threshold = request.data.get('interview_pass_threshold', 50)
+        try:
+            interview_pass_threshold = int(interview_pass_threshold)
+        except:
+            interview_pass_threshold = 50
+
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -186,8 +192,11 @@ class BulkInviteView(APIView):
                     created_by=user_profile,
                     batch_id=batch_id,
                     batch_name=batch_name,
+                    interview_pass_threshold=interview_pass_threshold,
                 )
-                link = f"http://localhost:3000/interview-start/{candidate.id}"
+
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+                link = f"{frontend_base}/interview-start/{candidate.public_token}"
                 
                 # Format time info for email
                 time_range_info = ""
@@ -408,6 +417,7 @@ class ResumeMatchView(APIView):
                 'mcq_count': int(request.data.get('mcq_count', 10)),
                 'coding_count': int(request.data.get('coding_count', 1)),
                 'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                'interview_pass_threshold': int(request.data.get('interview_pass_threshold', 50)),
                 'mcq_weight': int(request.data.get('mcq_weight', 40)),
                 'same_questions_for_all': same_q,
                 'assessment_available_from': request.data.get('assessment_available_from'),
@@ -607,8 +617,16 @@ class RetryFailedExtractionsView(APIView):
                     extracted_name = match_result.get('candidate_name') or match_result.get('full_name') or match_result.get('name') or "Extraction Failed"
                     extracted_email = match_result.get('candidate_email') or match_result.get('email') or match_result.get('email_address') or "Extraction Failed"
                     
-                    candidate.full_name = extracted_name
-                    candidate.email = extracted_email
+                    # Only overwrite identity if it's missing or a placeholder.
+                    # This prevents valid recruiter-entered data from being replaced by AI extraction errors.
+                    is_placeholder_email = not candidate.email or any(p in candidate.email.lower() for p in ['pending', 'extraction', 'unknown'])
+                    is_placeholder_name = not candidate.full_name or any(p in candidate.full_name.lower() for p in ['extraction', 'unknown', 'pending'])
+
+                    if is_placeholder_name and extracted_name != "Extraction Failed":
+                        candidate.full_name = extracted_name
+                    
+                    if is_placeholder_email and extracted_email != "Extraction Failed":
+                        candidate.email = extracted_email
                     
                     percentage = match_result.get('match_percentage', 0)
                     try:
@@ -678,6 +696,26 @@ class CandidateListCreateView(generics.ListCreateAPIView):
 
 INTERVIEW_LINK_TTL_MINUTES = 60 # Back to 60 minutes as requested
 
+
+def _resolve_public_candidate(public_token):
+    """
+    Backward compatible resolver for public interview links.
+    Supports both new UUID public_token and legacy numeric candidate id links.
+    """
+    token_str = str(public_token).strip()
+    # New format: UUID token
+    try:
+        parsed = uuid.UUID(token_str)
+        return Candidate.objects.get(public_token=parsed, is_deleted=False)
+    except Exception:
+        pass
+
+    # Legacy format: integer candidate id
+    if token_str.isdigit():
+        return Candidate.objects.get(pk=int(token_str), is_deleted=False)
+
+    raise Candidate.DoesNotExist()
+
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CandidateSerializer
     permission_classes = [AllowAny]
@@ -735,32 +773,83 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
     def get(self, request, *args, **kwargs):
+        try:
+            candidate = self.get_object()
+            now = timezone.now()
+
+            # Prevent retaking if already completed or if they failed screening
+            if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
+                return Response(
+                    {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+
+
+            # First access — stamp the time
+            if not candidate.link_opened_at:
+                candidate.link_opened_at = now
+                candidate.save(update_fields=['link_opened_at'])
+            else:
+                # Check if link has expired
+                elapsed = now - candidate.link_opened_at
+                if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
+                    return Response(
+                        {'error': 'Interview link has expired.', 'link_expired': True},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+
+            response = self.retrieve(request, *args, **kwargs)
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
+        except Exception as e:
+            logger.error(f"Error in CandidateDetailView.get: {str(e)}", exc_info=True)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CandidatePublicDetailView(generics.RetrieveAPIView):
+    serializer_class = CandidateSerializer
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    def get_object(self):
+        return _resolve_public_candidate(self.kwargs.get('public_token'))
+
+    def get(self, request, *args, **kwargs):
         candidate = self.get_object()
         now = timezone.now()
 
-        # Prevent retaking if already completed
         if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
-            from rest_framework.response import Response as DRFResponse
-            return DRFResponse(
+            return Response(
                 {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
-                status=403
+                status=status.HTTP_403_FORBIDDEN
             )
 
-        # First access — stamp the time
+
+
         if not candidate.link_opened_at:
             candidate.link_opened_at = now
             candidate.save(update_fields=['link_opened_at'])
+            
+            # Log interview start
+            from .utils import log_automation_event
+            log_automation_event(
+                candidate, 
+                'STATUS_CHANGE', 
+                'SUCCESS', 
+                f"AI Interview session started. Candidate accessed the link.",
+                phase='INTERVIEW'
+            )
         else:
-            # Check if link has expired
             elapsed = now - candidate.link_opened_at
             if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
-                from rest_framework.response import Response as DRFResponse
-                return DRFResponse(
+                return Response(
                     {'error': 'Interview link has expired.', 'link_expired': True},
-                    status=403
+                    status=status.HTTP_403_FORBIDDEN
                 )
 
-        response = super().get(request, *args, **kwargs)
+        response = self.retrieve(request, *args, **kwargs)
         response["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response["Pragma"] = "no-cache"
         response["Expires"] = "0"
@@ -785,6 +874,10 @@ class CandidateStatusUpdateView(APIView):
             
             new_status = request.data.get('status')
             if new_status in dict(Candidate.STATUS_CHOICES):
+                # Security hardening: unauthenticated candidate link flow should only be
+                # able to mark itself Completed (not Hired/Rejected/etc.).
+                if not request.user.is_authenticated and new_status != 'Completed':
+                    return Response({'error': 'Unauthenticated status updates are restricted.'}, status=status.HTTP_403_FORBIDDEN)
                 candidate.status = new_status
                 if new_status in ['Completed', 'Hired', 'Rejected', 'Resume Failed']:
                     candidate.resume_text = None
@@ -799,6 +892,54 @@ class CandidateStatusUpdateView(APIView):
             return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CandidatePublicStatusUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def patch(self, request, public_token):
+        try:
+            candidate = _resolve_public_candidate(public_token)
+            new_status = request.data.get('status')
+            if new_status not in dict(Candidate.STATUS_CHOICES):
+                return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
+            if new_status != 'Completed':
+                return Response({'error': 'Only completion status is allowed for public links.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Calculate final score percentage
+            total_possible = candidate.total_questions * 10 if candidate.total_questions > 0 else 100
+            score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
+
+            # Determine pass/fail based on threshold
+            threshold = candidate.interview_pass_threshold or 50
+            if score_percentage >= threshold:
+                candidate.status = 'Hired'
+            else:
+                candidate.status = 'Rejected'
+
+            candidate.completed_at = timezone.now()
+            candidate.resume_text = None
+            candidate.save()
+
+            # Log interview completion
+            from .utils import log_automation_event
+            log_automation_event(
+                candidate, 
+                'STATUS_CHANGE', 
+                'SUCCESS' if candidate.status == 'Hired' else 'WARNING', 
+                f"AI Interview completed. Final Status: {candidate.status}. Score: {score_percentage}%",
+                phase='INTERVIEW'
+            )
+
+            response = Response({'status': 'success', 'new_status': candidate.status})
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class UpdateIntegrityView(APIView):
     permission_classes = [AllowAny]
@@ -836,11 +977,11 @@ class UpdateIntegrityView(APIView):
             
             # Define weights
             weights = {
-                'tab_switch': 10,
-                'phone_detection': 30,
-                'multiface_detection': 15,
-                'no_face_detection': 5,
-                'face_detection_lost': 5
+                'tab_switch': 2,
+                'phone_detection': 2,
+                'multiface_detection': 2,
+                'no_face_detection': 2,
+                'face_detection_lost': 2
             }
 
             # Simple penalty system
@@ -857,6 +998,69 @@ class UpdateIntegrityView(APIView):
             integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             integrity.save()
             
+            return Response({
+                "status": "success",
+                "integrity_score": integrity.integrity_score,
+                "violations": {
+                    "tab_switches": integrity.tab_switches,
+                    "phone_detections": integrity.phone_detections,
+                    "multiface_detections": integrity.multiface_detections,
+                    "no_face_detections": integrity.no_face_detections
+                }
+            })
+        except Candidate.DoesNotExist:
+            return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CandidatePublicIntegrityUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, public_token):
+        try:
+            candidate = _resolve_public_candidate(public_token)
+            integrity, created = InterviewIntegrity.objects.get_or_create(candidate=candidate)
+
+            event_type = request.data.get('event_type')
+            screenshot_b64 = request.data.get('screenshot')
+            webcam_b64 = request.data.get('webcam_screenshot')
+
+            if event_type == 'tab_switch':
+                integrity.tab_switches += 1
+            elif event_type == 'phone_detection':
+                integrity.phone_detections += 1
+            elif event_type == 'multiface_detection':
+                integrity.multiface_detections += 1
+            elif event_type in ['no_face_detection', 'face_detection_lost']:
+                integrity.no_face_detections += 1
+
+            InterviewIntegrityLog.objects.create(
+                candidate=candidate,
+                event_type=event_type,
+                screenshot_base64=screenshot_b64,
+                webcam_screenshot_base64=webcam_b64
+            )
+
+            if len(integrity.warning_logs) < 3:
+                integrity.warning_logs.append(event_type)
+
+            weights = {
+                'tab_switch': 2,
+                'phone_detection': 2,
+                'multiface_detection': 2,
+                'no_face_detection': 2,
+                'face_detection_lost': 2
+            }
+            total_raw_penalty = (
+                integrity.tab_switches * weights['tab_switch'] +
+                integrity.phone_detections * weights['phone_detection'] +
+                integrity.multiface_detections * weights['multiface_detection'] +
+                integrity.no_face_detections * weights['no_face_detection']
+            )
+            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
+            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
+            integrity.save()
+
             return Response({
                 "status": "success",
                 "integrity_score": integrity.integrity_score,
@@ -916,17 +1120,13 @@ class ProcessAnswerView(APIView):
 
     def post(self, request):
         candidate_id = request.data.get('candidate_id')
+        candidate_token = request.data.get('candidate_token')
         current_question = request.data.get('question')
         answer = request.data.get('answer')
         remaining_questions = request.data.get('remaining_questions', [])
         chat_history = request.data.get('chat_history', []) 
         
-        # DEBUG LOGGING
-        with open('debug_ai.log', 'a') as f:
-            f.write(f"\n--- New Request {datetime.now()} ---\n")
-            f.write(f"Candidate ID: {candidate_id}\n")
-            f.write(f"Question: {current_question}\n")
-            f.write(f"Answer: {answer}\n")
+        logger.debug("ProcessAnswer request received for candidate_id=%s", candidate_id)
         
         # Fallback if question is missing due to frontend race condition
         if not current_question and chat_history:
@@ -942,6 +1142,10 @@ class ProcessAnswerView(APIView):
         if not answer:
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Public caller security: require unguessable token for unauthenticated requests.
+        if not request.user.is_authenticated and not candidate_token:
+            return Response({'error': 'candidate_token is required for public requests.'}, status=status.HTTP_400_BAD_REQUEST)
+
         # 1. Synchronize Turn Number with Frontend
         current_turn_number = request.data.get('turn_number')
         
@@ -951,21 +1155,29 @@ class ProcessAnswerView(APIView):
         jd_context = "No job description available."
         experience_level = None
         
-        if candidate_id:
+        candidate = None
+        if candidate_token:
+            try:
+                candidate = _resolve_public_candidate(candidate_token)
+                candidate_id = candidate.id
+            except Candidate.DoesNotExist:
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        elif candidate_id:
             try:
                 if isinstance(candidate_id, str) and not candidate_id.isdigit():
-                    pass
-                else:
-                    candidate = Candidate.objects.get(pk=candidate_id)
-                    candidate_name = candidate.full_name
-                    job_title = candidate.job_title or job_title
-                    jd_context = candidate.job_description or jd_context
-                    experience_level = getattr(candidate, 'experience_level', None)
-                    if candidate.resume_text:
-                         resume_context = candidate.resume_text
+                    return Response({'error': 'Invalid candidate_id'}, status=status.HTTP_400_BAD_REQUEST)
+                candidate = Candidate.objects.get(pk=candidate_id)
             except Exception as e:
-                with open('debug_ai.log', 'a') as f:
-                    f.write(f"Lookup Error: {str(e)}\n")
+                logger.debug("Candidate lookup error in ProcessAnswerView: %s", str(e))
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if candidate:
+            candidate_name = candidate.full_name
+            job_title = candidate.job_title or job_title
+            jd_context = candidate.job_description or jd_context
+            experience_level = getattr(candidate, 'experience_level', None)
+            if candidate.resume_text:
+                resume_context = candidate.resume_text
 
         try:
             # Construct Chat History context with safety
@@ -1196,29 +1408,26 @@ class ProcessAnswerView(APIView):
             # -----------------------------------------------
 
             # Scoring Update (Silent)
-            if candidate_id and data.get('score') is not None and not data.get('is_clarification'):
+            if candidate and data.get('score') is not None and not data.get('is_clarification'):
                  try:
-                    if not isinstance(candidate_id, str) or candidate_id.isdigit():
-                        candidate = Candidate.objects.get(pk=candidate_id)
-                        
-                        # Update score
-                        q_score = int(data.get('score', 0))
-                        candidate.score += q_score
-                        candidate.total_questions += 1
-                        
-                        # Store per-question summary for "Details" button
-                        if not isinstance(candidate.interview_summary, list):
-                            candidate.interview_summary = []
-                        
-                        candidate.interview_summary.append({
-                            "question": current_question,
-                            "answer": answer,
-                            "feedback": data.get('feedback', ''),
-                            "score": q_score,
-                            "reason": data.get('score_reason', 'No reasoning provided.')
-                        })
-                        
-                        candidate.save()
+                    # Update score
+                    q_score = int(data.get('score', 0))
+                    candidate.score += q_score
+                    candidate.total_questions += 1
+
+                    # Store per-question summary for "Details" button
+                    if not isinstance(candidate.interview_summary, list):
+                        candidate.interview_summary = []
+
+                    candidate.interview_summary.append({
+                        "question": current_question,
+                        "answer": answer,
+                        "feedback": data.get('feedback', ''),
+                        "score": q_score,
+                        "reason": data.get('score_reason', 'No reasoning provided.')
+                    })
+
+                    candidate.save()
                  except: pass
 
             return Response(data, status=status.HTTP_200_OK)
@@ -1227,11 +1436,10 @@ class ProcessAnswerView(APIView):
             error_msg = str(e)
             is_rate_limit = "rate limit" in error_msg.lower() or "429" in error_msg
             is_connection = "connection" in error_msg.lower() or "timeout" in error_msg.lower()
-            
-            with open('debug_ai.log', 'a') as f:
-                f.write(f"PROCESS ERROR: {error_msg}\n")
-                if not (is_rate_limit or is_connection):
-                    f.write(traceback.format_exc())
+            if is_rate_limit or is_connection:
+                logger.warning("Retryable ProcessAnswer error: %s", error_msg)
+            else:
+                logger.exception("ProcessAnswer failure")
             
             # Treat connection errors as temporary (retryable) just like rate limits
             if is_rate_limit or is_connection:
@@ -1281,6 +1489,349 @@ class TTSView(APIView):
         except Exception as e:
             logger.error(f"TTS Error: {str(e)}")
             return Response({"error": f"TTS synthesis failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateTimelineView(APIView):
+    """
+    Fetches the history (PipelineLog) for a specific candidate.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+            
+            logs = candidate.pipeline_logs.all().order_by('timestamp')
+            serializer = PipelineLogSerializer(logs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class LatestActiveBatchView(APIView):
+    """
+    Allows the frontend to recover the most recent batch ID if the page was refreshed
+    before the ID could be saved to local state.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        # Look for candidates created in the last 15 minutes that are still 'New'
+        threshold_time = timezone.now() - timedelta(minutes=15)
+        user_profile = getattr(request.user, 'userprofile', None)
+
+        candidates = Candidate.objects.filter(
+            status='New',
+            created_at__gte=threshold_time
+        ).exclude(batch_id__isnull=True).exclude(batch_id='')
+
+        if user_profile:
+            candidates = candidates.filter(user_profile=user_profile)
+
+        latest_candidate = candidates.order_by('-created_at').first()
+
+        if latest_candidate:
+            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
+
+        return Response({"batch_id": None}, status=status.HTTP_200_OK)
+
+
+class CandidateReportDownloadView(APIView):
+    """
+    Generates a comprehensive PDF report for an AI interview session.
+    Includes candidate details, identity verification photo, full transcript,
+    and integrity violation snapshots.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            
+            # RBAC: Ensure user belongs to the same company or is a superuser
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not request.user.is_superuser):
+                return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Generate PDF in memory
+            buffer = io.BytesIO()
+            from reportlab.lib.pagesizes import A4
+            from reportlab.lib import colors
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, PageBreak
+            from reportlab.lib.units import inch
+            import base64
+
+            doc = SimpleDocTemplate(
+                buffer, 
+                pagesize=A4,
+                rightMargin=50,
+                leftMargin=50,
+                topMargin=50,
+                bottomMargin=50
+            )
+            styles = getSampleStyleSheet()
+            elements = []
+
+            # 1. Header & Title
+            header_style = ParagraphStyle(
+                'HeaderStyle', 
+                parent=styles['Heading1'], 
+                fontSize=26, 
+                spaceAfter=20, 
+                textColor=colors.HexColor("#4338ca"),
+                alignment=1 # Center
+            )
+            elements.append(Paragraph("VerifiHireAI — Interview Report", header_style))
+            elements.append(Paragraph(f"Candidate: {candidate.full_name}", styles['Heading2']))
+            elements.append(Spacer(1, 15))
+
+            # Define custom styles if not already present
+            if 'Small' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Small',
+                    parent=styles['Normal'],
+                    fontSize=8,
+                    leading=10,
+                    textColor=colors.grey
+                ))
+            if 'Italic' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Italic',
+                    parent=styles['Normal'],
+                    fontName='Helvetica-Oblique'
+                ))
+
+            # 2. Candidate Information (Photo on Left, Details on Right)
+            elements.append(Paragraph("Candidate Information", styles['Heading3']))
+            
+            # Identity Verification (Face Registration)
+            # First try deepface directory using public token (which is what the frontend uses for registration)
+            person_img_path = None
+            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+            person_id = str(candidate.public_token).lower() if candidate.public_token else None
+            path_options = []
+            
+            if person_id:
+                path_options = [
+                    os.path.join(deepface_data_dir, person_id, "face_0.jpg"),
+                ]
+            
+            for p in path_options:
+                if os.path.exists(p):
+                    person_img_path = p
+                    break
+
+            # Fallback: Use first webcam screenshot from integrity logs
+            fallback_img_data = None
+            if not person_img_path:
+                first_log = candidate.integrity_logs.filter(webcam_screenshot_base64__isnull=False).order_by('timestamp').first()
+                if first_log and first_log.webcam_screenshot_base64:
+                    try:
+                        b64 = first_log.webcam_screenshot_base64.split(',')[-1]
+                        fallback_img_data = base64.b64decode(b64)
+                    except:
+                        pass
+
+            # Left side: Image
+            if person_img_path:
+                try:
+                    img_elem = RLImage(person_img_path, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            elif fallback_img_data:
+                try:
+                    img_io = io.BytesIO(fallback_img_data)
+                    img_elem = RLImage(img_io, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            else:
+                img_elem = Paragraph("<i>No candidate photo available.</i>", styles['Normal'])
+
+            # Score & Penalty Calculation
+            total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
+            base_score_pct = (candidate.score / total_possible_marks * 100) if total_possible_marks > 0 else 0
+            
+            integrity_obj = getattr(candidate, 'integrity', None)
+            integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
+            integrity_penalty = max(0, 100.0 - integrity_score)
+            
+            final_performance_pct = max(0, round(base_score_pct - integrity_penalty, 1))
+
+            # Right side: Summary Table
+            info_data = [
+                ["Full Name", candidate.full_name],
+                ["Email", candidate.email],
+                ["Job Title", candidate.job_title or "N/A"],
+                ["Interview Score", f"{candidate.score} / {total_possible_marks}"],
+                ["Integrity Penalty", f"-{integrity_penalty:.1f}%"],
+                ["Final Performance", f"{final_performance_pct}%"],
+                ["Status", candidate.status],
+                ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
+            ]
+            
+            summary_table = Table(info_data, colWidths=[1.2*inch, 3.0*inch])
+            summary_table.setStyle(TableStyle([
+                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
+                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#475569")),
+                ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
+                ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e2e8f0")),
+                ('PADDING', (0,0), (-1,-1), 6),
+            ]))
+
+            # Combine in a layout table
+            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
+            layout_table.setStyle(TableStyle([
+                ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                ('ALIGN', (0,0), (0,0), 'LEFT'),
+                ('ALIGN', (1,0), (1,0), 'LEFT'),
+            ]))
+            elements.append(layout_table)
+            elements.append(Spacer(1, 25))
+
+            # 3. Interview Transcript
+            elements.append(Paragraph("Conversation Transcript", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            if isinstance(candidate.interview_summary, list) and candidate.interview_summary:
+                for i, turn in enumerate(candidate.interview_summary, 1):
+                    # Question Header with background
+                    q_header_style = ParagraphStyle(
+                        'QHeader',
+                        parent=styles['Heading4'],
+                        fontSize=11,
+                        textColor=colors.HexColor("#4338ca"),
+                        spaceBefore=15,
+                        spaceAfter=8,
+                        backColor=colors.HexColor("#f8fafc"),
+                        borderPadding=8,
+                        borderWidth=1,
+                        borderColor=colors.HexColor("#e2e8f0"),
+                        borderRadius=5
+                    )
+                    elements.append(Paragraph(f"Question #{i}", q_header_style))
+                    
+                    # Question text
+                    elements.append(Paragraph(f"<b>Question:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('question', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # Answer
+                    elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # AI Analysis
+                    elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
+                    elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # Score with color coding
+                    score = turn.get('score', 0)
+                    score_color = colors.darkgreen if score >= 7 else (colors.darkorange if score >= 4 else colors.red)
+                    score_style = ParagraphStyle(
+                        'ScoreStyle',
+                        parent=styles['Normal'],
+                        fontSize=10,
+                        textColor=score_color,
+                        spaceBefore=5,
+                        spaceAfter=15
+                    )
+                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {turn.get('reason', '')}", score_style))
+                    
+                    elements.append(Paragraph('<hr color="#e2e8f0" thickness="1"/>', styles['Normal']))
+                    elements.append(Spacer(1, 12))
+            else:
+                elements.append(Paragraph("No interview transcript data recorded for this session.", styles['Italic']))
+
+            # 4. Integrity Violations & Snapshots
+            elements.append(PageBreak())
+            elements.append(Paragraph("Proctoring & Integrity Evidence", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            logs = candidate.integrity_logs.all().order_by('timestamp')
+            if logs.exists():
+                elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
+                elements.append(Spacer(1, 15))
+                
+                # Collect all images across all logs for 4-per-row layout
+                all_images = []
+                for log in logs:
+                    # Process Webcam Snapshot
+                    if log.webcam_screenshot_base64:
+                        try:
+                            b64 = log.webcam_screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        except: pass
+                    
+                    # Process Desktop Snapshot
+                    if log.screenshot_base64:
+                        try:
+                            b64 = log.screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        except: pass
+                
+                if all_images:
+                    # Display images in 4-per-row grid
+                    img_grid = []
+                    row = []
+                    for img, caption in all_images:
+                        # Each cell will contain both the image and the caption text
+                        row.append([img, Paragraph(caption, styles['Small'])])
+                        if len(row) == 4:
+                            img_grid.append(row)
+                            row = []
+                    if row:  # Add remaining images
+                        while len(row) < 4:
+                            row.append("")
+                        img_grid.append(row)
+                    
+                    for grid_row in img_grid:
+                        # Passing [grid_row] creates a single table row with 4 columns
+                        t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
+                        t_img.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                            ('LEFTPADDING', (0,0), (-1,-1), 2),
+                            ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                            ('TOPPADDING', (0,0), (-1,-1), 5),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                        ]))
+                        elements.append(t_img)
+                        elements.append(Spacer(1, 10))
+                else:
+                    elements.append(Paragraph("[No visual evidence captured for violations]", styles['Small']))
+            else:
+                elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
+
+            # Build PDF
+            doc.build(elements)
+            buffer.seek(0)
+            
+            # Prepare Response
+            from django.http import HttpResponse
+            response = HttpResponse(buffer, content_type='application/pdf')
+            safe_name = "".join([c for c in candidate.full_name if c.isalnum() or c==' ']).rstrip().replace(' ', '_')
+            filename = f"VerifiHire_Report_{safe_name}_{candidate.id}.pdf"
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"Error generating PDF report for candidate {pk}: {str(e)}", exc_info=True)
+            return Response({'error': f"Critical failure during report generation: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CandidateTimelineView(APIView):
     """

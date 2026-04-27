@@ -360,7 +360,8 @@ def process_batch_assessment(batch_id):
                         'num_passed': num_passed,
                         'mcq_generated': mcq_count_gen,
                         'coding_generated': coding_count_gen,
-                    }
+                    },
+                    phase='ASSESSMENT'
                 )
 
         # ── 2. SEND INVITATION EMAILS ──
@@ -448,7 +449,8 @@ def process_batch_assessment(batch_id):
                 log_automation_event(
                     candidate, 'EMAIL_SENT', 'SUCCESS',
                     f"Assessment invitation email sent successfully to {candidate.email}.",
-                    details={'assessment_id': assessment.id, 'link': link}
+                    details={'assessment_id': assessment.id, 'link': link},
+                    phase='ASSESSMENT'
                 )
 
                 # Update InvitedCandidate list
@@ -467,7 +469,8 @@ def process_batch_assessment(batch_id):
                 log_automation_event(
                     candidate, 'EMAIL_SENT', 'FAILURE',
                     f"Failed to send assessment invitation email: {str(mail_err)}",
-                    details={'assessment_id': assessment.id, 'error': str(mail_err)}
+                    details={'assessment_id': assessment.id, 'error': str(mail_err)},
+                    phase='ASSESSMENT'
                 )
 
         logger.info(
@@ -808,7 +811,8 @@ def process_resume_passed(candidate_id):
         log_automation_event(
             candidate, 'EMAIL_SENT', 'SUCCESS',
             f"Individual assessment invitation email sent to {candidate.email}.",
-            details={'assessment_id': assessment.id, 'link': link}
+            details={'assessment_id': assessment.id, 'link': link},
+            phase='ASSESSMENT'
         )
 
         # Update InvitedCandidate list
@@ -844,13 +848,24 @@ def process_assessment_passed(submission_id):
         )
 
         # Find or create the candidate record
+        # CRITICAL FIX: Use iexact for case-insensitive matching to avoid duplicates (e.g. Surya@... vs surya@...)
+        # We also filter by company to ensure multi-tenant isolation.
         candidates = Candidate.objects.filter(
-            email=submission.candidate_email,
+            email__iexact=submission.candidate_email,
             company=submission.assessment.company
         ).order_by('-id')
 
         if candidates.exists():
-            candidate = candidates.first()
+            # If multiple records exist for this email, prioritize the one in the same batch
+            candidate = candidates.filter(batch_id=submission.batch_id).first()
+            if not candidate:
+                candidate = candidates.first() # Fallback to newest record
+
+            logger.info(
+                f"Pipeline: Reconciled submission {submission_id} to existing candidate {candidate.id} "
+                f"({candidate.full_name}, Batch={candidate.batch_id})"
+            )
+            
             candidate.status = 'Interview'
             # Synchronize batch info from submission to candidate if it doesn't exist
             if not candidate.batch_id:
@@ -858,11 +873,10 @@ def process_assessment_passed(submission_id):
             if not candidate.batch_name:
                 candidate.batch_name = submission.batch_name
             candidate.save(update_fields=['status', 'batch_id', 'batch_name'])
-            logger.info(f"Pipeline: Updated existing candidate {candidate.id} status to 'Interview'.")
         else:
             candidate = Candidate.objects.create(
                 full_name=submission.candidate_name,
-                email=submission.candidate_email,
+                email=submission.candidate_email.lower(), # Normalize to lowercase on creation
                 job_title=submission.assessment.required_skills or "Applicant",
                 job_description=submission.assessment.job_description,
                 status='Interview',
@@ -872,10 +886,10 @@ def process_assessment_passed(submission_id):
                 user_profile=getattr(submission.assessment, 'user_profile', None),
                 created_by=getattr(submission.assessment, 'user_profile', None),
             )
-            logger.info(f"Pipeline: Created new candidate record {candidate.id} for interview stage and linked to batch {submission.batch_id}.")
+            logger.info(f"Pipeline: Created NEW candidate record {candidate.id} for interview stage.")
 
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
-        link = f"{base_url}/interview-start/{candidate.id}"
+        link = f"{base_url}/interview-start/{candidate.public_token}"
 
         role_name = submission.assessment.required_skills or "the role"
         subject = f"Congratulations! You're invited for an Interview — {role_name}"
@@ -927,7 +941,8 @@ def process_assessment_passed(submission_id):
         log_automation_event(
             candidate, 'EMAIL_SENT', 'SUCCESS',
             f"Interview invitation email sent after passing assessment with {submission.percentage}%.",
-            details={'submission_id': submission_id, 'score': submission.percentage, 'link': link}
+            details={'submission_id': submission_id, 'score': submission.percentage, 'link': link},
+            phase='INTERVIEW'
         )
 
     except Exception as e:

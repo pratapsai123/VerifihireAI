@@ -593,54 +593,239 @@ const AiAssessmentDetail = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                                        {/* MCQ Card */}
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {selectedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                    ? Math.round((selectedSubmission.results_breakdown.mcq.scored_points / selectedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                    : 0}%
-                                            </div>
-                                             <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {Math.round(selectedSubmission.results_breakdown?.mcq?.scored_points || 0)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct
-                                            </div>
-                                        </div>
-
-                                        {/* Coding Card */}
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                {selectedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                    ? Math.round((selectedSubmission.results_breakdown.coding.scored_points / selectedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                    : 0}%
-                                            </div>
-                                            <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                {selectedSubmission.results_breakdown?.coding?.scored_points || 0} / {selectedSubmission.results_breakdown?.coding?.possible_points || 0} pts
-                                            </div>
-                                        </div>
-
-                                        {/* Integrity Card */}
-                                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (selectedSubmission.integrity_score || 0) >= 50 ? '#05CD99' : '#EE5D50' }}>
-                                                {selectedSubmission.integrity_score || 0}%
-                                            </div>
-                                            <div style={{ color: (selectedSubmission.integrity_score || 0) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                                                {(selectedSubmission.integrity_score || 0) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
-                                            </div>
-                                        </div>
+                                    {/* Assessment Report Header - Interview Report Style */}
+                                    <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                                        <h1 style={{ 
+                                            color: '#4F46E5', 
+                                            fontSize: '2rem', 
+                                            fontWeight: '700', 
+                                            margin: '0 0 0.5rem 0' 
+                                        }}>
+                                            VerifiHireAI — Assessment Report
+                                        </h1>
+                                        <h2 style={{ 
+                                            color: '#1B254B', 
+                                            fontSize: '1.25rem', 
+                                            fontWeight: '600', 
+                                            margin: 0 
+                                        }}>
+                                            Candidate: {selectedSubmission.candidate_name}
+                                        </h2>
                                     </div>
 
-                                    {/* Overall Result Banner */}
-                                    <div style={{
-                                        background: (selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' || selectedSubmission.status === 'Resume Passed') ? '#E6FBF5' : '#FFF5F5',
-                                        padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem',
-                                        border: `1px solid ${(selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' || selectedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50'}`
-                                    }}>
-                                        <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.3rem' }}>Overall Result</div>
-                                        <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' || selectedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50' }}>{selectedSubmission.percentage}%</div>
-                                        <div style={{ color: '#1B254B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{selectedSubmission.status}</div>
+                                    {/* Candidate Information Section */}
+                                    <div style={{ marginBottom: '3rem' }}>
+                                        <h3 style={{ 
+                                            color: '#1B254B', 
+                                            fontSize: '1.1rem', 
+                                            fontWeight: '700', 
+                                            fontStyle: 'italic',
+                                            marginBottom: '1rem' 
+                                        }}>
+                                            Candidate Information
+                                        </h3>
+
+                                        {(() => {
+                                            // Get candidate photo from integrity logs (webcam screenshot)
+                                            const logs = selectedSubmission.integrity_screenshots || selectedSubmission.integrity_logs || selectedSubmission.monitoring_logs || [];
+                                            const firstWebcam = logs.find(log => log.webcam_screenshot_url || log.webcam_screenshot_base64 || log.webcam_image);
+                                            const candidatePhoto = firstWebcam
+                                                ? (firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64 || firstWebcam.webcam_image)
+                                                : null;
+                                            return (
+                                        <div style={{
+                                            display: 'flex',
+                                            gap: '2rem',
+                                            alignItems: 'flex-start'
+                                        }}>
+                                            {/* Candidate Photo */}
+                                            <div style={{
+                                                width: '180px',
+                                                height: '180px',
+                                                background: '#F4F7FE',
+                                                borderRadius: '12px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                border: '1px solid #E0E5F2',
+                                                flexShrink: 0,
+                                                overflow: 'hidden'
+                                            }}>
+                                                {candidatePhoto ? (
+                                                    <img
+                                                        src={candidatePhoto}
+                                                        alt="Candidate"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            objectFit: 'cover'
+                                                        }}
+                                                        onError={(e) => {
+                                                            e.target.style.display = 'none';
+                                                            e.target.nextSibling.style.display = 'flex';
+                                                        }}
+                                                    />
+                                                ) : null}
+                                                <div style={{
+                                                    display: candidatePhoto ? 'none' : 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    width: '100%',
+                                                    height: '100%'
+                                                }}>
+                                                    <i className="fa-solid fa-user" style={{
+                                                        fontSize: '4rem',
+                                                        color: '#A3AED0'
+                                                    }}></i>
+                                                </div>
+                                            </div>
+
+                                            {/* Information Table */}
+                                            <div style={{ flex: 1 }}>
+                                                <table style={{ 
+                                                    width: '100%', 
+                                                    borderCollapse: 'collapse',
+                                                    background: 'white',
+                                                    border: '1px solid #E0E5F2',
+                                                    borderRadius: '12px',
+                                                    overflow: 'hidden'
+                                                }}>
+                                                    <tbody>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B',
+                                                                width: '35%'
+                                                            }}>Full Name</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B' 
+                                                            }}>{selectedSubmission.candidate_name}</td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Email</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B' 
+                                                            }}>{selectedSubmission.candidate_email || 'N/A'}</td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Job Title</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B' 
+                                                            }}>{assessment?.required_skills || assessment?.role_title || 'N/A'}</td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>MCQ Score</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B',
+                                                                fontWeight: '700'
+                                                            }}>
+                                                                {selectedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                                    ? Math.round((selectedSubmission.results_breakdown.mcq.scored_points / selectedSubmission.results_breakdown.mcq.possible_points) * 100)
+                                                                    : 0}% ({Math.round(selectedSubmission.results_breakdown?.mcq?.scored_points || 0)} / {(selectedSubmission.candidate_questions?.mcqs || assessment?.generated_content?.mcqs || []).length} Correct)
+                                                            </td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Coding Score</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B',
+                                                                fontWeight: '700'
+                                                            }}>
+                                                                {selectedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                                    ? Math.round((selectedSubmission.results_breakdown.coding.scored_points / selectedSubmission.results_breakdown.coding.possible_points) * 100)
+                                                                    : 0}% ({selectedSubmission.results_breakdown?.coding?.scored_points || 0} / {selectedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
+                                                            </td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Integrity Score</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: (selectedSubmission.integrity_score || 0) >= 50 ? '#05CD99' : '#EE5D50',
+                                                                fontWeight: '700'
+                                                            }}>
+                                                                {selectedSubmission.integrity_score || 0}% {(selectedSubmission.integrity_score || 0) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
+                                                            </td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Overall Result</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: (selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' || selectedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
+                                                                fontWeight: '800'
+                                                            }}>
+                                                                {selectedSubmission.percentage}%
+                                                            </td>
+                                                        </tr>
+                                                        <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Status</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B',
+                                                                fontWeight: '700',
+                                                                textTransform: 'uppercase'
+                                                            }}>
+                                                                {selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' ? 'Assessment Passed' : (selectedSubmission.status === 'rejected' || selectedSubmission.status === 'hold') ? 'Not Qualified' : selectedSubmission.status}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                background: '#F8F9FF',
+                                                                fontWeight: '600',
+                                                                color: '#1B254B'
+                                                            }}>Submission Date</td>
+                                                            <td style={{ 
+                                                                padding: '0.75rem 1rem', 
+                                                                color: '#1B254B' 
+                                                            }}>{selectedSubmission.submitted_at}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        );
+                                    })()}
                                     </div>
                                 </>
                             )}

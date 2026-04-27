@@ -918,11 +918,13 @@ function CustomAssessment() {
       // In multiple mode, allocation should come only from role/sub-role skills.
       allocateQuestions(suggestedSkills, totalQuestions);
     } else {
-      // In single mode, distribute by weights over available buckets only.
+      // In single mode, distribute by buckets. 
+      // We use inclusive pools for Role and Resume weights as per user request to ensure
+      // common skills are not excluded when weight is shifted to Role or Resume sliders.
       const buckets = [
         { skills: commonSkills, weight: weights.common || 0 },
-        { skills: roleOnlySkills, weight: weights.role || 0 },
-        { skills: resumeOnlySkills, weight: weights.resume || 0 },
+        { skills: suggestedSkills, weight: weights.role || 0 },
+        { skills: extractedSkills, weight: weights.resume || 0 },
       ].filter((bucket) => bucket.skills.length > 0);
 
       if (buckets.length === 0) {
@@ -1026,13 +1028,13 @@ function CustomAssessment() {
       const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
       const allowedExtensions = ['.pdf', '.doc', '.docx'];
       const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-      
+
       if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExt)) {
         setErrors({ ...errors, resume: 'Invalid file format. Only PDF, DOC, and DOCX are allowed.' });
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-      
+
       if (file.size > 10 * 1024 * 1024) {
         setErrors({ ...errors, resume: 'File size exceeds 10MB limit.' });
         if (fileInputRef.current) fileInputRef.current.value = '';
@@ -2304,7 +2306,7 @@ function CustomAssessment() {
                   <p className="form-hint" style={{ marginTop: '0.75rem', fontSize: '0.75rem' }}>
                     {isMultipleMode
                       ? 'Questions are distributed using role and sub-role skills only. You can edit question counts for each skill or remove skills.'
-                      : 'Questions are distributed based on the selected percentages: Common (yellow), Role (green), Resume (blue). You can edit question counts for each skill or remove skills. Questions from removed/zero-count skills are automatically redistributed to common skills.'}
+                      : 'Questions are distributed based on selected percentages. Note: "Role" and "Resume" pools include shared common skills. You can edit counts below or remove skills to redistribute questions.'}
                   </p>
 
                   {/* Removed skills with restore option */}

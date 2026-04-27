@@ -5,7 +5,7 @@ from .views import (
     UpdateAssessmentIntegrityView, InviteAssessmentCandidatesView, GetInvitedCandidatesView,
     ProxyCodeExecuteView, AIAssessmentSubmissionDetailView,
     SaveAssessmentProgressView, AIAssessmentAssignmentView, AIAssessmentAvailableInterviewersView,
-    CancelGenerationView
+    CancelGenerationView, AIAssessmentReportDownloadView
 )
 
 urlpatterns = [
@@ -22,6 +22,8 @@ urlpatterns = [
     path('submit/create/', CreateSubmissionView.as_view(), name='create-submission'),
     path('submission/<int:pk>/integrity/', UpdateAssessmentIntegrityView.as_view(), name='update-integrity'),
     path('submission/<int:pk>/progress/', SaveAssessmentProgressView.as_view(), name='save-progress'),
+    path('submission/<int:pk>/download-report/', AIAssessmentReportDownloadView.as_view(), name='ai-submission-report-download'),
     path('submission/<int:pk>/', AIAssessmentSubmissionDetailView.as_view(), name='submission-detail'),
     path('execute/', ProxyCodeExecuteView.as_view(), name='proxy-execute'),
 ]
+

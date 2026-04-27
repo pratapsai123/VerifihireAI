@@ -36,11 +36,57 @@ const ResultsAI = () => {
     const [timelineCandidate, setTimelineCandidate] = useState(null);
     const [timelineLogs, setTimelineLogs] = useState([]);
     const [loadingTimeline, setLoadingTimeline] = useState(false);
+    const [downloadingId, setDownloadingId] = useState(null);
 
     const showToast = (type, message) => {
         setToast({ type, message });
         setTimeout(() => setToast(null), 3500);
     };
+
+    const handleDownloadReport = async (candidate) => {
+        if (!candidate) return;
+        const sid = String(candidate.submission_id || '');
+        
+        let endpoint = '';
+        let realId = '';
+        
+        if (sid.startsWith('ai_')) {
+            // AI Assessment Submission
+            realId = sid.replace('ai_', '');
+            endpoint = `${API_BASE_URL}/ai/submission/${realId}/download-report/`;
+        } else {
+            // AI Interview / Candidate Report
+            realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+            endpoint = `${API_BASE_URL}/ai-candidates/${realId}/download-report/`;
+        }
+        
+        setDownloadingId(realId);
+        try {
+            const response = await axios.get(endpoint, {
+                responseType: 'blob',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+            
+            const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+            const link = document.createElement('a');
+            link.href = url;
+            const safeName = (candidate.full_name || 'Candidate').replace(/\s+/g, '_');
+            link.setAttribute('download', `VerifiHire_Report_${safeName}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+            showToast('success', 'Report downloaded successfully!');
+        } catch (err) {
+            console.error('Error downloading report:', err);
+            showToast('error', 'Failed to generate report. Please try again.');
+        } finally {
+            setDownloadingId(null);
+        }
+    };
+
 
     const fetchData = useCallback(async () => {
         setLoading(true);
@@ -75,12 +121,19 @@ const ResultsAI = () => {
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
-                    // ALWAYS include in Interview tab since this is an AI Interview candidate
-                    intResults.push(r);
+                    // Define which statuses belong to which stage
+                    const resumeStatuses = ['Resume Passed', 'Resume Failed', 'Extraction Failed'];
+                    const interviewStatuses = ['Interview Passed', 'Interview Failed', 'Interview Completed', 'Selected', 'Rejected'];
+                    const pendingStatuses = ['New', 'Invited', 'Interviewing'];
 
-                    // Also include in Resume tab ONLY IF they have actually uploaded a resume
-                    // (prevents 'Invited' candidates from confusingly showing up as a Resume analysis)
-                    if (r.status !== 'New' && r.status !== 'Invited') {
+                    // Only include in Interview tab for completed interview statuses
+                    if (interviewStatuses.includes(r.status) || (!pendingStatuses.includes(r.status) && !resumeStatuses.includes(r.status))) {
+                        intResults.push(r);
+                    }
+
+                    // Only include in Resume tab for resume-specific statuses
+                    // This prevents interview results from showing in resume tab
+                    if (resumeStatuses.includes(r.status)) {
                         resResults.push(r);
                     }
                 } else {
@@ -170,7 +223,25 @@ const ResultsAI = () => {
             const sid = String(candidate.submission_id || '');
             const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
             const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
-            setTimelineLogs(resp.data);
+            
+            // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
+            let filteredLogs = resp.data;
+            if (candidate.batch_id) {
+                filteredLogs = resp.data.filter(log => !log.batch_id || log.batch_id === candidate.batch_id);
+            }
+
+            // Enhanced Phase Inference for legacy logs (where phase is GENERAL)
+            filteredLogs = filteredLogs.map(log => {
+                if (log.phase === 'GENERAL') {
+                    const msg = log.message.toLowerCase();
+                    if (msg.includes('resume') || msg.includes('screening')) return { ...log, phase: 'RESUME' };
+                    if (msg.includes('assessment') || msg.includes('pool') || msg.includes('quiz')) return { ...log, phase: 'ASSESSMENT' };
+                    if (msg.includes('interview')) return { ...log, phase: 'INTERVIEW' };
+                }
+                return log;
+            });
+
+            setTimelineLogs(filteredLogs);
         } catch (err) {
             console.error('Error fetching timeline:', err);
             showToast('error', 'Failed to load timeline history.');
@@ -259,7 +330,7 @@ const ResultsAI = () => {
     const isPass = (r, type) => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
-        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 100) >= 0.5);
+        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 130) >= 0.5);
         return false;
     };
 
@@ -396,8 +467,16 @@ const ResultsAI = () => {
 
     const renderTranscriptReport = (data) => {
         if (!data) return null;
-        const totalPossible = (data.interview_summary?.length || 13) * 10;
-        const calculatedPercentage = data.score != null ? Math.round((data.score / totalPossible) * 100) : 0;
+        // Total possible marks based on 13 planned questions
+        const totalPlannedQuestions = 13;
+        const totalPossible = totalPlannedQuestions * 10;
+        const baseScore = data.score || 0;
+        const basePercentage = Math.round((baseScore / totalPossible) * 100);
+        
+        // Integrity Penalty Calculation
+        const integrityScore = data.integrity?.integrity_score ?? 100;
+        const integrityPenalty = Math.max(0, 100 - integrityScore);
+        const finalPercentage = Math.max(0, basePercentage - Math.round(integrityPenalty));
 
         return (
             <div className="report-container">
@@ -409,6 +488,26 @@ const ResultsAI = () => {
                         <h1 style={{ fontSize: '1.4rem', fontWeight: '900', color: '#1e293b', margin: 0 }}>Interview Report</h1>
                         <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0, fontWeight: '600', opacity: 0.8 }}>Performance breakdown & transcript</p>
                     </div>
+
+                    <button 
+                        onClick={() => handleDownloadReport(data)}
+                        disabled={downloadingId !== null}
+                        className="download-report-btn"
+                        style={{
+                            background: '#4F46E5', color: 'white', border: 'none',
+                            padding: '0.7rem 1.4rem', borderRadius: '12px', fontWeight: '800',
+                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                            transition: 'all 0.2s'
+                        }}
+                    >
+                        {downloadingId !== null ? (
+                            <i className="fa-solid fa-spinner fa-spin"></i>
+                        ) : (
+                            <i className="fa-solid fa-file-pdf"></i>
+                        )}
+                        {downloadingId !== null ? 'Generating PDF...' : 'Download Full PDF Report'}
+                    </button>
                 </div>
 
                 <div className="report-grid">
@@ -428,10 +527,16 @@ const ResultsAI = () => {
 
                         <div className="sidebar-card">
                             <span className="sidebar-label">Overall Performance</span>
-                            <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#4F46E5', lineHeight: 1 }}>{calculatedPercentage}%</div>
+                            <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#4F46E5', lineHeight: 1 }}>{finalPercentage}%</div>
                             <div style={{ width: '100%', height: '6px', background: '#f1f5f9', borderRadius: '3px', marginTop: '0.6rem', overflow: 'hidden' }}>
-                                <div style={{ width: `${calculatedPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
+                                <div style={{ width: `${finalPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
                             </div>
+                            {integrityPenalty > 0 && (
+                                <p style={{ fontSize: '0.7rem', color: '#EE5D50', marginTop: '0.5rem', fontWeight: '700' }}>
+                                    <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: '4px' }}></i>
+                                    Includes -{Math.round(integrityPenalty)}% integrity penalty
+                                </p>
+                            )}
                         </div>
 
                         <div className="sidebar-card">
@@ -443,16 +548,16 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Integrity Evidence Gallery */}
-                        {data.integrity_screenshots?.length > 0 && (
+                        {(data.integrity_screenshots?.length > 0 || data.integrity_logs?.length > 0) && (
                             <div className="sidebar-card">
                                 <span className="sidebar-label">Integrity Evidence</span>
                                 <div className="integrity-gallery-scroll">
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                                        {data.integrity_screenshots.map((log, lIdx) => {
+                                        {(data.integrity_screenshots || data.integrity_logs || []).map((log, lIdx) => {
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
                                             const displayImg = isScreenEvent
-                                                ? (log.screenshot_url || log.webcam_screenshot_url)
-                                                : (log.webcam_screenshot_url || log.screenshot_url);
+                                                ? (log.screenshot_url || log.webcam_screenshot_url || log.screenshot_base64 || log.webcam_screenshot_base64)
+                                                : (log.webcam_screenshot_url || log.screenshot_url || log.webcam_screenshot_base64 || log.screenshot_base64);
 
                                             return (
                                                 <div key={lIdx} style={{
@@ -637,21 +742,40 @@ const ResultsAI = () => {
                                     Submitted {new Date(viewedSubmission.submitted_at).toLocaleString()}
                                 </p>
                             </div>
-                            <button
-                                onClick={() => {
-                                    const newParams = new URLSearchParams(searchParams);
-                                    newParams.delete('subId');
-                                    setSearchParams(newParams);
-                                }}
-                                style={{
-                                    background: '#F4F7FE', border: 'none', borderRadius: '50%',
-                                    width: '44px', height: '44px', cursor: 'pointer',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                                }}
-                            >
-                                <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
-                            </button>
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                    <button
+                                        onClick={() => handleDownloadReport({ ...viewedSubmission, submission_id: `ai_${viewedSubmission.id}`, full_name: viewedSubmission.candidate_name })}
+                                        disabled={downloadingId !== null}
+                                        style={{
+                                            padding: '0.6rem 1.2rem', background: 'white', color: '#4318FF',
+                                            border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: '800',
+                                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                                            boxShadow: '0 4px 10px rgba(0,0,0,0.03)', fontSize: '0.85rem'
+                                        }}
+                                    >
+                                        {downloadingId === String(viewedSubmission.id) ? (
+                                            <i className="fa-solid fa-spinner fa-spin" />
+                                        ) : (
+                                            <i className="fa-solid fa-file-pdf" />
+                                        )}
+                                        {downloadingId === String(viewedSubmission.id) ? 'Generating...' : 'Download Report'}
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            const newParams = new URLSearchParams(searchParams);
+                                            newParams.delete('subId');
+                                            setSearchParams(newParams);
+                                        }}
+                                        style={{
+                                            background: '#F4F7FE', border: 'none', borderRadius: '50%',
+                                            width: '44px', height: '44px', cursor: 'pointer',
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                        }}
+                                    >
+                                        <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
+                                    </button>
+                                </div>
                         </div>
 
                         {/* Modal Body */}
@@ -686,54 +810,239 @@ const ResultsAI = () => {
                                     </div>
                                 ) : (
                                     <>
-                                        {/* MCQ Card */}
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
-                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                    {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                        ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                        : 0}%
-                                                </div>
-                                                <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                    {viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct
-                                                </div>
-                                            </div>
-
-                                            {/* Coding Card */}
-                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
-                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
-                                                    {viewedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                        ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                        : 0}%
-                                                </div>
-                                                <div style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.9rem' }}>
-                                                    {viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts
-                                                </div>
-                                            </div>
-
-                                            {/* Integrity Card */}
-                                            <div style={{ background: 'white', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #E0E5F2' }}>
-                                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity</div>
-                                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50' }}>
-                                                    {viewedSubmission.integrity?.integrity_score ?? 100}%
-                                                </div>
-                                                <div style={{ color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                                                    {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
-                                                </div>
-                                            </div>
+                                        {/* Assessment Report Header - Interview Report Style */}
+                                        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                                            <h1 style={{
+                                                color: '#4F46E5',
+                                                fontSize: '2rem',
+                                                fontWeight: '700',
+                                                margin: '0 0 0.5rem 0'
+                                            }}>
+                                                VerifiHireAI — Assessment Report
+                                            </h1>
+                                            <h2 style={{
+                                                color: '#1B254B',
+                                                fontSize: '1.25rem',
+                                                fontWeight: '600',
+                                                margin: 0
+                                            }}>
+                                                Candidate: {viewedSubmission.candidate_name}
+                                            </h2>
                                         </div>
 
-                                        {/* Overall Result Banner */}
-                                        <div style={{
-                                            background: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#E6FBF5' : '#FFF5F5',
-                                            padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem',
-                                            border: `1px solid ${(viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50'}`
-                                        }}>
-                                            <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.3rem' }}>Overall Result</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50' }}>{viewedSubmission.percentage}%</div>
-                                            <div style={{ color: '#1B254B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{viewedSubmission.status}</div>
+                                        {/* Candidate Information Section */}
+                                        <div style={{ marginBottom: '3rem' }}>
+                                            <h3 style={{
+                                                color: '#1B254B',
+                                                fontSize: '1.1rem',
+                                                fontWeight: '700',
+                                                fontStyle: 'italic',
+                                                marginBottom: '1rem'
+                                            }}>
+                                                Candidate Information
+                                            </h3>
+
+                                            {(() => {
+                                                // Get candidate photo from integrity logs (webcam screenshot)
+                                                const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
+                                                const firstWebcam = logs.find(log => log.webcam_screenshot_url || log.webcam_screenshot_base64);
+                                                const candidatePhoto = firstWebcam
+                                                    ? (firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64)
+                                                    : null;
+                                                return (
+                                            <div style={{
+                                                display: 'flex',
+                                                gap: '2rem',
+                                                alignItems: 'flex-start'
+                                            }}>
+                                                {/* Candidate Photo */}
+                                                <div style={{
+                                                    width: '180px',
+                                                    height: '180px',
+                                                    background: '#F4F7FE',
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    border: '1px solid #E0E5F2',
+                                                    flexShrink: 0,
+                                                    overflow: 'hidden'
+                                                }}>
+                                                    {candidatePhoto ? (
+                                                        <img
+                                                            src={candidatePhoto}
+                                                            alt="Candidate"
+                                                            style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                objectFit: 'cover'
+                                                            }}
+                                                            onError={(e) => {
+                                                                e.target.style.display = 'none';
+                                                                e.target.nextSibling.style.display = 'flex';
+                                                            }}
+                                                        />
+                                                    ) : null}
+                                                    <div style={{
+                                                        display: candidatePhoto ? 'none' : 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        width: '100%',
+                                                        height: '100%'
+                                                    }}>
+                                                        <i className="fa-solid fa-user" style={{
+                                                            fontSize: '4rem',
+                                                            color: '#A3AED0'
+                                                        }}></i>
+                                                    </div>
+                                                </div>
+
+                                                {/* Information Table */}
+                                                <div style={{ flex: 1 }}>
+                                                    <table style={{
+                                                        width: '100%',
+                                                        borderCollapse: 'collapse',
+                                                        background: 'white',
+                                                        border: '1px solid #E0E5F2',
+                                                        borderRadius: '12px',
+                                                        overflow: 'hidden'
+                                                    }}>
+                                                        <tbody>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B',
+                                                                    width: '35%'
+                                                                }}>Full Name</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B'
+                                                                }}>{viewedSubmission.candidate_name}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Email</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B'
+                                                                }}>{viewedSubmission.candidate_email || 'N/A'}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Job Title</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B'
+                                                                }}>{viewedSubmission.job_title || viewedSubmission.role || viewedSubmission.role_title || viewedSubmission.required_skills || 'N/A'}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>MCQ Score</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B',
+                                                                    fontWeight: '700'
+                                                                }}>
+                                                                    {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                                        ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
+                                                                        : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
+                                                                </td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Coding Score</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B',
+                                                                    fontWeight: '700'
+                                                                }}>
+                                                                    {viewedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                                        ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
+                                                                        : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
+                                                                </td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Integrity Score</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50',
+                                                                    fontWeight: '700'
+                                                                }}>
+                                                                    {viewedSubmission.integrity?.integrity_score ?? 100}% {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
+                                                                </td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Overall Result</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
+                                                                    fontWeight: '800'
+                                                                }}>
+                                                                    {viewedSubmission.percentage}%
+                                                                </td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Status</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B',
+                                                                    fontWeight: '700',
+                                                                    textTransform: 'uppercase'
+                                                                }}>
+                                                                    {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Submission Date</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B'
+                                                                }}>{viewedSubmission.submitted_at}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            );
+                                        })()}
                                         </div>
                                     </>
                                 )}
@@ -907,13 +1216,13 @@ const ResultsAI = () => {
                                 )}
 
                                 {/* Integrity Violations */}
-                                {viewedSubmission.integrity_screenshots?.length > 0 && (
+                                {(viewedSubmission.integrity_screenshots?.length > 0 || viewedSubmission.integrity_logs?.length > 0) && (
                                     <div style={{ marginTop: '4rem' }}>
                                         <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
                                         </h4>
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-                                            {viewedSubmission.integrity_screenshots.map((snap, sIdx) => (
+                                            {(viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []).map((snap, sIdx) => (
                                                 <div key={sIdx} style={{ background: 'white', borderRadius: '20px', padding: '12px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
                                                     <div style={{
                                                         width: '100%', height: '160px', background: '#F4F7FE',
@@ -921,7 +1230,7 @@ const ResultsAI = () => {
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
                                                         <img
-                                                            src={snap.screenshot_url || snap.webcam_screenshot_url}
+                                                            src={snap.screenshot_url || snap.webcam_screenshot_url || snap.screenshot_base64 || snap.webcam_screenshot_base64}
                                                             alt={snap.event_type}
                                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                             onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
@@ -1077,11 +1386,11 @@ const ResultsAI = () => {
                                                             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
-                                                                    {data.total} Candidate{data.total !== 1 ? 's' : ''}
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total)} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total) !== 1 ? 's' : ''}
                                                                 </span>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
-                                                                    {data.assessment.length + data.resume.length + data.interview.length} Total Results
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.assessment.length + data.resume.length + data.interview.length))} Total Results
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -1308,23 +1617,59 @@ const ResultsAI = () => {
                                                                             ) : (
                                                                                 <>
                                                                                     {activeTab === 'interview' || (activeTab === 'resume' && r.total_questions > 0) ? (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
-                                                                                            style={{
-                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                                background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
-                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                            }}
-                                                                                        >Review</button>
+                                                                                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); setShowTranscriptDetail(r); setViewMode('transcript'); }}
+                                                                                                style={{
+                                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                    background: 'linear-gradient(135deg, #05CD99 0%, #04b082 100%)',
+                                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                                }}
+                                                                                            >Review</button>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); handleDownloadReport(r); }}
+                                                                                                disabled={downloadingId !== null}
+                                                                                                title="Download PDF Report"
+                                                                                                style={{
+                                                                                                    width: '36px', height: '36px', borderRadius: '10px', border: '1px solid #E2E8F0',
+                                                                                                    background: 'white', color: '#4318FF', fontSize: '1rem', cursor: 'pointer',
+                                                                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                                                    boxShadow: '0 4px 10px rgba(0,0,0,0.03)', transition: 'all 0.2s',
+                                                                                                    padding: 0
+                                                                                                }}
+                                                                                            >
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                    <i className="fa-solid fa-file-pdf" />}
+                                                                                            </button>
+                                                                                        </div>
                                                                                     ) : activeTab === 'assessment' || activeTab === 'standard' ? (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
-                                                                                            style={{
-                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                                background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                            }}
-                                                                                        >View</button>
+                                                                                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
+                                                                                                style={{
+                                                                                                    padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
+                                                                                                    background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
+                                                                                                    color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                                                                }}
+                                                                                            >View</button>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); handleDownloadReport(r); }}
+                                                                                                disabled={downloadingId !== null}
+                                                                                                title="Download PDF Report"
+                                                                                                style={{
+                                                                                                    width: '36px', height: '36px', borderRadius: '10px', border: '1px solid #E2E8F0',
+                                                                                                    background: 'white', color: '#4318FF', fontSize: '1rem', cursor: 'pointer',
+                                                                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                                                    boxShadow: '0 4px 10px rgba(0,0,0,0.03)', transition: 'all 0.2s',
+                                                                                                    padding: 0
+                                                                                                }}
+                                                                                            >
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                    <i className="fa-solid fa-file-pdf" />}
+                                                                                            </button>
+                                                                                        </div>
                                                                                     ) : activeTab === 'resume' ? (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
@@ -1458,8 +1803,20 @@ const ResultsAI = () => {
                                             borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
                                             border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
                                         }}></div>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
-                                            {log.timestamp_formatted}
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
+                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase' }}>
+                                                {log.timestamp_formatted}
+                                            </div>
+                                            {log.phase && log.phase !== 'GENERAL' && (
+                                                <span style={{
+                                                    fontSize: '0.6rem', fontWeight: '800', padding: '0.1rem 0.4rem', borderRadius: '4px',
+                                                    background: log.phase === 'RESUME' ? '#E0E7FF' : log.phase === 'ASSESSMENT' ? '#FEF3C7' : '#D1FAE5',
+                                                    color: log.phase === 'RESUME' ? '#4318FF' : log.phase === 'ASSESSMENT' ? '#D97706' : '#059669',
+                                                    textTransform: 'uppercase'
+                                                }}>
+                                                    {log.phase.replace('_', ' ')}
+                                                </span>
+                                            )}
                                         </div>
                                         <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
                                             {log.message}

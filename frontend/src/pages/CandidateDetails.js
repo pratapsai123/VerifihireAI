@@ -149,7 +149,12 @@ const detectFace = async (imageSrc) => {
     });
 
     faceDetection.onResults((results) => {
-      resolve(results.detections && results.detections.length > 0);
+      try {
+        resolve(results.detections && results.detections.length > 0);
+      } catch (err) {
+        console.warn('Face detection error:', err);
+        resolve(false);
+      }
     });
 
     const img = new Image();
@@ -397,144 +402,150 @@ const CandidateDetails = ({ token, onComplete }) => {
         });
 
         faceDetection.onResults((results) => {
-          const detections = results.detections || [];
-          const count = detections.length;
-          setPeopleCount(count);
-          const hasFace = count > 0;
-          setFaceDetected(hasFace);
+          try {
+            const detections = results.detections || [];
+            const count = detections.length;
+            setPeopleCount(count);
+            const hasFace = count > 0;
+            setFaceDetected(hasFace);
 
-          let halfFace = false;
-          let isAlignedFrame = false;
+            let halfFace = false;
+            let isAlignedFrame = false;
 
-          // Helper variables for alignment checks
-          let isCenteredX = false;
-          let isCenteredY = false;
-          let isGoodSize = false;
-          let isContainedX = false;
-          let isContainedY = false;
+            // Helper variables for alignment checks
+            let isCenteredX = false;
+            let isCenteredY = false;
+            let isGoodSize = false;
+            let isContainedX = false;
+            let isContainedY = false;
 
-          if (hasFace) {
-            const bbox = detections[0].boundingBox;
-            // boundingBox is relative [0, 1]
-            let x, y;
-            if (bbox.xmin !== undefined) {
-              x = bbox.xmin;
-              y = bbox.ymin;
-            } else {
-              x = bbox.xCenter - bbox.width / 2;
-              y = bbox.yCenter - bbox.height / 2;
-            }
-
-            const width = bbox.width;
-            const height = bbox.height;
-            const xCenter = x + width / 2;
-            const yCenter = y + height / 2;
-
-            // If the face is too close to the edges, consider it half face
-            // Using a small margin like 0.01 or 1%
-            if (x < 0.01 ||
-              y < 0.01 ||
-              x + width > 0.99 ||
-              y + height > 0.99) {
-              halfFace = true;
-            }
-
-            // Check if face is inside the oval/box overlay
-            // Overlay is centered: width 140px (0.4375), height 180px (0.75)
-            // Oval Bounds (Normalized):
-            // X: 0.28 to 0.72
-            // Y: 0.125 to 0.875
-
-            // We define "Full face in oval" as:
-            // 1. Center must be close to frame center
-            // 2. Face edges must be largely within the oval bounds (with slight tolerance)
-            // 3. Face must be large enough to fill the oval somewhat
-
-            const ovalMinX = 0.25; // slightly wider tolerance than 0.28
-            const ovalMaxX = 0.75; // slightly wider tolerance than 0.72
-            const ovalMinY = 0.10; // slightly wider than 0.125
-            const ovalMaxY = 0.90; // slightly wider than 0.875
-
-            const faceLeft = x;
-            const faceRight = x + width;
-            const faceTop = y;
-            const faceBottom = y + height;
-
-            // Strict containment checks
-            isContainedX = faceLeft > ovalMinX - 0.1 && faceRight < ovalMaxX + 0.1; // Allow 10% spill
-            isContainedY = faceTop > ovalMinY - 0.05 && faceBottom < ovalMaxY + 0.05; // Allow 5% spill
-
-            // Center check
-            isCenteredX = Math.abs(xCenter - 0.5) < 0.15;
-            isCenteredY = Math.abs(yCenter - 0.5) < 0.15;
-
-            // Size check: Face shouldn't be tiny
-            isGoodSize = width > 0.25 && height > 0.35;
-
-            isAlignedFrame = isContainedX && isContainedY && isCenteredX && isCenteredY && isGoodSize && !halfFace;
-
-            setIsAligned(isAlignedFrame);
-          } else {
-            setIsAligned(false);
-          }
-          // Store alignment details in ref for async callback
-          alignmentStatusRef.current = {
-            isCenteredX, isCenteredY, isGoodSize, isContainedX, isContainedY, isAlignedFrame, hasFace, halfFace, count
-          };
-
-          setIsHalfFace(halfFace);
-
-          // Detect blur and brightness
-          if (webcamRef.current && webcamRef.current.video) {
-            const video = webcamRef.current.video;
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0);
-
-            const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageDataObj.data;
-            const imageDataUrl = canvas.toDataURL('image/jpeg');
-
-            // Brightness check
-            const brightness = calculateBrightness(data);
-            const dark = brightness < 60; // Threshold for dark environment
-            setIsDark(dark);
-
-            detectBlur(imageDataUrl).then((notBlurry) => {
-              setIsBlurry(!notBlurry);
-
-              // Get latest status from ref
-              const status = alignmentStatusRef.current;
-              // If status is not yet available (rare race condition), skip update or use defaults
-              if (!status) return;
-
-              // Update status message
-              if (status.count === 0) {
-                setCaptureStatus('No face detected. Please position yourself in front of the camera.');
-              } else if (status.count > 1) {
-                setCaptureStatus('Multiple people detected. Only one person is allowed.');
-              } else if (status.halfFace) {
-                setCaptureStatus('Face not fully visible. Please center your face.');
-              } else if (status.hasFace && !status.isAlignedFrame) {
-                if (!status.isCenteredX || !status.isCenteredY) {
-                  setCaptureStatus('Please center your face.');
-                } else if (!status.isGoodSize) { // Too small
-                  setCaptureStatus('Please move closer to the camera.');
-                } else if (!status.isContainedX || !status.isContainedY) { // Too big / spilling out
-                  setCaptureStatus('Please move back slightly.');
-                } else {
-                  setCaptureStatus('Please position your face clearly.');
-                }
-              } else if (dark) {
-                setCaptureStatus('Environment is too dark. Please ensure better lighting.');
-              } else if (!notBlurry) {
-                setCaptureStatus('Image is blurry. Please hold still.');
+            if (hasFace) {
+              const bbox = detections[0].boundingBox;
+              // boundingBox is relative [0, 1]
+              let x, y;
+              if (bbox.xmin !== undefined) {
+                x = bbox.xmin;
+                y = bbox.ymin;
               } else {
-                setCaptureStatus('Perfect! Face detected and clear. Ready to capture.');
+                x = bbox.xCenter - bbox.width / 2;
+                y = bbox.yCenter - bbox.height / 2;
               }
-            });
+
+              const width = bbox.width;
+              const height = bbox.height;
+              const xCenter = x + width / 2;
+              const yCenter = y + height / 2;
+
+              // If the face is too close to the edges, consider it half face
+              // Using a small margin like 0.01 or 1%
+              if (x < 0.01 ||
+                y < 0.01 ||
+                x + width > 0.99 ||
+                y + height > 0.99) {
+                halfFace = true;
+              }
+
+              // Check if face is inside the oval/box overlay
+              // Overlay is centered: width 140px (0.4375), height 180px (0.75)
+              // Oval Bounds (Normalized):
+              // X: 0.28 to 0.72
+              // Y: 0.125 to 0.875
+
+              // We define "Full face in oval" as:
+              // 1. Center must be close to frame center
+              // 2. Face edges must be largely within the oval bounds (with slight tolerance)
+              // 3. Face must be large enough to fill the oval somewhat
+
+              const ovalMinX = 0.25; // slightly wider tolerance than 0.28
+              const ovalMaxX = 0.75; // slightly wider tolerance than 0.72
+              const ovalMinY = 0.10; // slightly wider than 0.125
+              const ovalMaxY = 0.90; // slightly wider than 0.875
+
+              const faceLeft = x;
+              const faceRight = x + width;
+              const faceTop = y;
+              const faceBottom = y + height;
+
+              // Strict containment checks
+              isContainedX = faceLeft > ovalMinX - 0.1 && faceRight < ovalMaxX + 0.1; // Allow 10% spill
+              isContainedY = faceTop > ovalMinY - 0.05 && faceBottom < ovalMaxY + 0.05; // Allow 5% spill
+
+              // Center check
+              isCenteredX = Math.abs(xCenter - 0.5) < 0.15;
+              isCenteredY = Math.abs(yCenter - 0.5) < 0.15;
+
+              // Size check: Face shouldn't be tiny
+              isGoodSize = width > 0.25 && height > 0.35;
+
+              isAlignedFrame = isContainedX && isContainedY && isCenteredX && isCenteredY && isGoodSize && !halfFace;
+
+              setIsAligned(isAlignedFrame);
+            } else {
+              setIsAligned(false);
+            }
+            // Store alignment details in ref for async callback
+            alignmentStatusRef.current = {
+              isCenteredX, isCenteredY, isGoodSize, isContainedX, isContainedY, isAlignedFrame, hasFace, halfFace, count
+            };
+
+            setIsHalfFace(halfFace);
+
+            // Detect blur and brightness
+            if (webcamRef.current && webcamRef.current.video) {
+              const video = webcamRef.current.video;
+              const canvas = document.createElement('canvas');
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(video, 0, 0);
+
+              const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
+              const data = imageDataObj.data;
+              const imageDataUrl = canvas.toDataURL('image/jpeg');
+
+              // Brightness check
+              const brightness = calculateBrightness(data);
+              const dark = brightness < 60; // Threshold for dark environment
+              setIsDark(dark);
+
+              detectBlur(imageDataUrl).then((notBlurry) => {
+                setIsBlurry(!notBlurry);
+
+                // Get latest status from ref
+                const status = alignmentStatusRef.current;
+                // If status is not yet available (rare race condition), skip update or use defaults
+                if (!status) return;
+
+                // Update status message
+                if (status.count === 0) {
+                  setCaptureStatus('No face detected. Please position yourself in front of the camera.');
+                } else if (status.count > 1) {
+                  setCaptureStatus('Multiple people detected. Only one person is allowed.');
+                } else if (status.halfFace) {
+                  setCaptureStatus('Face not fully visible. Please center your face.');
+                } else if (status.hasFace && !status.isAlignedFrame) {
+                  if (!status.isCenteredX || !status.isCenteredY) {
+                    setCaptureStatus('Please center your face.');
+                  } else if (!status.isGoodSize) { // Too small
+                    setCaptureStatus('Please move closer to the camera.');
+                  } else if (!status.isContainedX || !status.isContainedY) { // Too big / spilling out
+                    setCaptureStatus('Please move back slightly.');
+                  } else {
+                    setCaptureStatus('Please position your face clearly.');
+                  }
+                } else if (dark) {
+                  setCaptureStatus('Environment is too dark. Please ensure better lighting.');
+                } else if (!notBlurry) {
+                  setCaptureStatus('Image is blurry. Please hold still.');
+                } else {
+                  setCaptureStatus('Perfect! Face detected and clear. Ready to capture.');
+                }
+              });
+            }
+          } catch (err) {
+            console.warn('Face detection processing error:', err);
+          } finally {
+            // Ensure the try-catch block is properly closed
           }
         });
 
@@ -542,7 +553,12 @@ const CandidateDetails = ({ token, onComplete }) => {
         if (webcamRef.current && webcamRef.current.video) {
           const detectionInterval = setInterval(async () => {
             if (webcamRef.current && webcamRef.current.video && webcamRef.current.video.readyState === 4) {
-              await faceDetection.send({ image: webcamRef.current.video });
+              try {
+                await faceDetection.send({ image: webcamRef.current.video });
+              } catch (err) {
+                // Silently ignore MediaPipe WASM errors - they don't affect functionality
+                console.warn('Face detection frame error:', err);
+              }
             }
           }, 1000);
 

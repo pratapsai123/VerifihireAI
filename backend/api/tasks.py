@@ -31,7 +31,8 @@ def trigger_batch_assessment_task(batch_id):
         log_automation_event(
             c, 'TASK_SCHEDULED', 'INFO',
             f"Batch assessment task triggered. {num_passed} candidate(s) passed in this batch. Generating shared pool.",
-            details={'batch_id': batch_id, 'num_passed': num_passed, 'total_in_batch': total_batch}
+            details={'batch_id': batch_id, 'num_passed': num_passed, 'total_in_batch': total_batch},
+            phase='ASSESSMENT'
         )
 
     process_batch_assessment(batch_id)

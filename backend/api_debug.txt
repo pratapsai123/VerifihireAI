@@ -1681,3 +1681,222 @@ Host: verifihireai.com
 [2026-04-24 10:32:40.578972+00:00] PUBLIC ACCESS: Token='97cda84e-4fef-4388-89a0-f114f48d4aee'
 Query Params: <QueryDict: {'email': ['kethireddysaipratapreddy@gmail.com'], '_t': ['1777026758682']}>
 Host: verifihireai.com
+[2026-04-22 10:06:45.779167+00:00] PUBLIC ACCESS: Token='2501e312-f3df-45e6-aaf4-31ec65b028b3'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776852405450']}>
+Host: localhost:8001
+
+[2026-04-22 10:06:45.785759+00:00] PUBLIC ACCESS: Token='2501e312-f3df-45e6-aaf4-31ec65b028b3'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776852405467']}>
+Host: localhost:8001
+
+[2026-04-22 10:56:19.940923+00:00] PUBLIC ACCESS: Token='1258bb9b-5368-40d2-bba5-bdeef2e7b4f1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776855379930']}>
+Host: localhost:8001
+
+[2026-04-22 10:56:19.945887+00:00] PUBLIC ACCESS: Token='1258bb9b-5368-40d2-bba5-bdeef2e7b4f1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1776855379938']}>
+Host: localhost:8001
+
+[2026-04-22 10:58:25.969851+00:00] PUBLIC ACCESS: Token='1258bb9b-5368-40d2-bba5-bdeef2e7b4f1'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776855505959']}>
+Host: localhost:8001
+
+[2026-04-22 10:58:25.975486+00:00] PUBLIC ACCESS: Token='1258bb9b-5368-40d2-bba5-bdeef2e7b4f1'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776855505969']}>
+Host: localhost:8001
+
+[2026-04-22 11:05:37.809717+00:00] PUBLIC ACCESS: Token='dc700256-08a9-443c-8971-19992f5ed127'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776855937801']}>
+Host: localhost:8001
+
+[2026-04-22 11:05:37.810414+00:00] PUBLIC ACCESS: Token='dc700256-08a9-443c-8971-19992f5ed127'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776855937803']}>
+Host: localhost:8001
+
+[2026-04-22 11:12:52.646685+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856372628']}>
+Host: localhost:8001
+
+[2026-04-22 11:12:52.649922+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856372645']}>
+Host: localhost:8001
+
+[2026-04-22 11:13:12.236527+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856392227']}>
+Host: localhost:8001
+
+[2026-04-22 11:13:12.236897+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856392232']}>
+Host: localhost:8001
+
+[2026-04-22 11:15:44.034204+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856544028']}>
+Host: localhost:8001
+
+[2026-04-22 11:15:44.034475+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856544030']}>
+Host: localhost:8001
+
+[2026-04-22 11:16:37.035050+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856597027']}>
+Host: localhost:8001
+
+[2026-04-22 11:18:13.036780+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856693033']}>
+Host: localhost:8001
+
+[2026-04-22 11:18:30.442851+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856710425']}>
+Host: localhost:8001
+
+[2026-04-22 11:18:30.460603+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776856710443']}>
+Host: localhost:8001
+
+[2026-04-22 11:25:58.053005+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776857158043']}>
+Host: localhost:8001
+
+[2026-04-22 11:27:22.162837+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776857242151']}>
+Host: localhost:8001
+
+[2026-04-22 11:27:22.165832+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776857242159']}>
+Host: localhost:8001
+
+[2026-04-22 11:34:55.472156+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776857695460']}>
+Host: localhost:8001
+
+[2026-04-22 11:34:55.477283+00:00] PUBLIC ACCESS: Token='40944133-9d0e-4320-abfc-f31298ba5385'
+Query Params: <QueryDict: {'email': ['balichaksumann@gmail.com'], '_t': ['1776857695472']}>
+Host: localhost:8001
+
+[2026-04-24 07:16:55] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s:\n        print(0)\n        return\n    n = len(s)\n    max_len = 1\n    for i in range(n):\n        l, r = i, i\n        while l >= 0 and r < n and s[l] == s[r]:\n            max_len = max(max_len, r - l + 1)\n            l -= 1\n            r += 1\n        l, r = i, i + 1\n        while l >= 0 and r < n and s[l] == s[r]:\n            max_len = max(max_len, r - l + 1)\n            l -= 1\n            r += 1\n    print(max_len)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "auth",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 07:17:26] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    a = [int(x) for x in data[1:n+1]]\n    b = [int(x) for x in data[n+1:2*n+1]]\n    pairs = sorted(zip(a, b), key=lambda x: x[1])\n    count = 0\n    cur_end = float('-inf')\n    for s, e in pairs:\n        if s > cur_end:\n            count += 1\n            cur_end = e\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "10\n15 18 30 39 1 50 1 1 38 37\n97 78 95 79 52 87 88 92 62 87",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 07:17:34] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    if not nums:\n        print(0)\n        return\n    max_p = min_p = result = nums[0]\n    for i in range(1, len(nums)):\n        if nums[i] < 0:\n            max_p, min_p = min_p, max_p\n        max_p = max(nums[i], max_p * nums[i])\n        min_p = min(nums[i], min_p * nums[i])\n        result = max(result, max_p)\n    print(result)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "10\n4 4 3 2 -3 5 2 -2 5 1",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 07:17:42] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if len(input_data) < 3: return\n    amount = int(input_data[0])\n    n = int(input_data[1])\n    coins = [int(x) for x in input_data[2:n+2]]\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for coin in coins:\n        for x in range(coin, amount + 1):\n            dp[x] = min(dp[x], dp[x - coin] + 1)\n    print(dp[amount] if dp[amount] != float('inf') else -1)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "12\n3\n4 5 2",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 07:17:51] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    temps = [int(x) for x in input_data[1:]]\n    res = [0] * n\n    stack = []\n    for i, t in enumerate(temps):\n        while stack and temps[stack[-1]] < t:\n            prev_idx = stack.pop()\n            res[prev_idx] = i - prev_idx\n        stack.append(i)\n    print(\" \".join(map(str, res)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "15\n80 38 30 84 44 87 76 62 93 52 43 31 98 47 52",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 07:17:57] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s:\n        print(0)\n        return\n    n = len(s)\n    count = 0\n    for i in range(n):\n        l, r = i, i\n        while l >= 0 and r < n and s[l] == s[r]:\n            count += 1\n            l -= 1\n            r += 1\n        l, r = i, i + 1\n        while l >= 0 and r < n and s[l] == s[r]:\n            count += 1\n            l -= 1\n            r += 1\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "USER-743",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-04-24 01:47:57.973664+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+Traceback (most recent call last):
+  File "C:\Users\surya\Desktop\iit\VerifiHireAI\backend\ai_assessments\views.py", line 765, in post
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+
+RAW: No response received
+
+[2026-04-24 06:23:56.913953+00:00] PUBLIC ACCESS: Token='78a95ffe-b7c7-46cd-9962-b6bc27e5a4eb'
+Query Params: <QueryDict: {'email': ['22r21a67d5@mlrit.ac.in'], '_t': ['1777011836897']}>
+Host: localhost:8001
+
+[2026-04-24 06:23:56.955118+00:00] PUBLIC ACCESS: Token='78a95ffe-b7c7-46cd-9962-b6bc27e5a4eb'
+Query Params: <QueryDict: {'email': ['22r21a67d5@mlrit.ac.in'], '_t': ['1777011836950']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:26.228304+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012106221']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:26.776383+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012106770']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:58.398701+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012138388']}>
+Host: localhost:8001
+
+[2026-04-24 06:28:58.401833+00:00] PUBLIC ACCESS: Token='ddeda639-656f-46bf-bb1d-462745e9af22'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777012138391']}>
+Host: localhost:8001
+
+[2026-04-24 07:10:08.315387+00:00] PUBLIC ACCESS: Token='05071d77-41f2-436f-ada7-7c1c73cb627a'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777014608304']}>
+Host: localhost:8001
+
+[2026-04-24 07:10:08.315910+00:00] PUBLIC ACCESS: Token='05071d77-41f2-436f-ada7-7c1c73cb627a'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777014608306']}>
+Host: localhost:8001
+
+[2026-04-24 08:01:02.136106+00:00] PUBLIC ACCESS: Token='9b1d5f89-e0c7-4053-bdf9-3ff59edb5abf'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777017662127']}>
+Host: localhost:8001
+
+[2026-04-24 08:01:02.137505+00:00] PUBLIC ACCESS: Token='9b1d5f89-e0c7-4053-bdf9-3ff59edb5abf'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777017662129']}>
+Host: localhost:8001
+
+[2026-04-24 10:26:54.400014+00:00] PUBLIC ACCESS: Token='9579f84d-d306-4a7f-a082-7f271c1ec21e'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777026414391']}>
+Host: localhost:8001
+
+[2026-04-24 10:26:54.701765+00:00] PUBLIC ACCESS: Token='9579f84d-d306-4a7f-a082-7f271c1ec21e'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777026414698']}>
+Host: localhost:8001
+
+[2026-04-24 11:23:20.899033+00:00] PUBLIC ACCESS: Token='7e8016d9-6d09-49f0-b8ba-ec3ccd947acc'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777029800889']}>
+Host: localhost:8001
+
+[2026-04-24 11:23:20.900762+00:00] PUBLIC ACCESS: Token='7e8016d9-6d09-49f0-b8ba-ec3ccd947acc'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777029800892']}>
+Host: localhost:8001
+
+[2026-04-24 11:27:13.309659+00:00] PUBLIC ACCESS: Token='f2f65550-0197-4903-afed-26675a62bfe5'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777030033303']}>
+Host: localhost:8001
+
+[2026-04-24 11:27:13.310177+00:00] PUBLIC ACCESS: Token='f2f65550-0197-4903-afed-26675a62bfe5'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777030033304']}>
+Host: localhost:8001

@@ -71,6 +71,8 @@ from typing import Optional
 from datetime import timedelta
 
 EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
+DEEPFACE_BASE_URL = os.environ.get("DEEPFACE_BASE_URL", "http://localhost:8500/api/v1").rstrip("/")
+
 
 
 # ---------------------------------------------------------------------------

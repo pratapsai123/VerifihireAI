@@ -18,6 +18,8 @@ const AiInterview = () => {
     const [untilTime, setUntilTime] = useState('');
     const [customRoleTitle, setCustomRoleTitle] = useState('');
     const [experienceLevel, setExperienceLevel] = useState('');
+    const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
+
 
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
@@ -44,7 +46,9 @@ const AiInterview = () => {
                     if (parsed.fromTime) { setFromTime(parsed.fromTime); hasRestoredData = true; }
                     if (parsed.untilDate) { setUntilDate(parsed.untilDate); hasRestoredData = true; }
                     if (parsed.untilTime) { setUntilTime(parsed.untilTime); hasRestoredData = true; }
+                    if (parsed.interviewPassThreshold) { setInterviewPassThreshold(parsed.interviewPassThreshold); hasRestoredData = true; }
                     if (hasRestoredData) isDirty.current = true;
+
                 } catch (e) {
                     console.error("Error hydrating interview form:", e);
                 }
@@ -62,15 +66,17 @@ const AiInterview = () => {
     if (!initialDataHash.current) {
         initialDataHash.current = JSON.stringify({
             jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime
+            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
         });
+
     }
 
     React.useEffect(() => {
         const dataToSave = {
             jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime
+            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
         };
+
         const currentDataStr = JSON.stringify(dataToSave);
 
         if (!isDirty.current && currentDataStr === initialDataHash.current) {
@@ -81,8 +87,9 @@ const AiInterview = () => {
         sessionStorage.setItem(STORAGE_KEY, currentDataStr);
     }, [
         jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-        fromDate, fromTime, untilDate, untilTime
+        fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
     ]);
+
 
     React.useEffect(() => {
         const fetchRoles = async () => {
@@ -96,9 +103,24 @@ const AiInterview = () => {
         fetchRoles();
     }, []);
 
+    const validateFile = (file) => {
+        const validTypes = ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        const validExtensions = ['.csv', '.xls', '.xlsx'];
+        const fileExtension = file.name.toLowerCase().slice(file.name.lastIndexOf('.'));
+        
+        if (!validTypes.includes(file.type) && !validExtensions.includes(fileExtension)) {
+            setError('Please upload a valid CSV or Excel file (.csv, .xls, .xlsx)');
+            return false;
+        }
+        return true;
+    };
+
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
-            setFile(e.target.files[0]);
+            const selectedFile = e.target.files[0];
+            if (validateFile(selectedFile)) {
+                setFile(selectedFile);
+            }
         }
     };
 
@@ -106,7 +128,10 @@ const AiInterview = () => {
         e.preventDefault();
         e.stopPropagation();
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            setFile(e.dataTransfer.files[0]);
+            const droppedFile = e.dataTransfer.files[0];
+            if (validateFile(droppedFile)) {
+                setFile(droppedFile);
+            }
         }
     };
 
@@ -119,9 +144,18 @@ const AiInterview = () => {
         setFile(null);
     };
 
-
-
-
+    const downloadTemplate = () => {
+        const headers = "name,email\n";
+        const blob = new Blob([headers], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "ai_interview_template.csv");
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -131,9 +165,20 @@ const AiInterview = () => {
             return;
         }
 
-        if (!jobDescription || jobDescription.trim().length < 20) {
-            setError('Please provide a detailed Job Description (at least 20 characters) for the AI to analyze.');
+        if (!jobDescription || jobDescription.trim().length < 50) {
+            setError('Please provide a detailed Job Description (at least 50 characters) for the AI to generate meaningful interview questions.');
             return;
+        }
+
+        if (selectedRoleId === 'custom') {
+            if (!customRoleTitle || !customRoleTitle.trim()) {
+                setError('Please enter a custom role title.');
+                return;
+            }
+            if (customRoleTitle.trim().length < 3) {
+                setError('Custom role title must be at least 3 characters long.');
+                return;
+            }
         }
 
         if (!experienceLevel) {
@@ -176,6 +221,8 @@ const AiInterview = () => {
         if (experienceLevel) {
             formData.append('experience_level', experienceLevel);
         }
+        formData.append('interview_pass_threshold', interviewPassThreshold);
+
 
         try {
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/bulk-invite/`, formData, {
@@ -222,8 +269,8 @@ const AiInterview = () => {
                                 marginBottom: '3rem', textAlign: 'left', border: '1px solid rgba(226, 232, 240, 0.6)'
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                                    <h4 style={{ fontSize: '0.9rem', color: '#1E293B', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Generated Session Links</h4>
-                                    <span style={{ fontSize: '0.8rem', color: '#64748B', background: '#E2E8F0', padding: '0.3rem 0.8rem', borderRadius: '8px' }}>{result.candidates.length} Tasks</span>
+                                    <h4 style={{ fontSize: '0.9rem', color: '#1E293B', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Generated Session {result.candidates.length === 1 ? 'Link' : 'Links'}</h4>
+                                    <span style={{ fontSize: '0.8rem', color: '#64748B', background: '#E2E8F0', padding: '0.3rem 0.8rem', borderRadius: '8px' }}>{result.candidates.length} Candidate{result.candidates.length !== 1 ? 's' : ''}</span>
                                 </div>
 
                                 {result.candidates.map((c, index) => (
@@ -414,6 +461,15 @@ const AiInterview = () => {
                                         <p style={{ fontSize: '0.75rem', color: '#94A3B8', marginTop: '1rem', lineHeight: '1.5' }}>
                                             Ensure column headers are <b>name</b> and <b>email</b>.
                                         </p>
+                                        <button 
+                                            type="button" 
+                                            onClick={downloadTemplate} 
+                                            style={{ marginTop: '1rem', background: 'white', color: '#6366f1', border: '1px solid #cbd5e1', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'all 0.2s', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
+                                            onMouseOver={(e) => { e.currentTarget.style.borderColor = '#6366f1'; e.currentTarget.style.background = '#f8fafc'; }}
+                                            onMouseOut={(e) => { e.currentTarget.style.borderColor = '#cbd5e1'; e.currentTarget.style.background = 'white'; }}
+                                        >
+                                            <i className="fa-solid fa-download"></i> Download Template
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -464,6 +520,40 @@ const AiInterview = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Card 4: Threshold Settings */}
+                            <div className="glass-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
+                                        <i className="fa-solid fa-sliders"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Interview Settings</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: '0.2rem 0 0' }}>Configure passing benchmarks.</p>
+                                    </div>
+                                </div>
+
+                                <div className="input-group" style={{ marginBottom: 0 }}>
+                                    <label className="input-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span>AI Interview Pass Threshold</span>
+                                        <span style={{ color: '#6366F1', fontWeight: '700' }}>{interviewPassThreshold}%</span>
+                                    </label>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.5rem' }}>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={interviewPassThreshold}
+                                            onChange={(e) => setInterviewPassThreshold(parseInt(e.target.value))}
+                                            style={{ flex: 1, accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
+                                        />
+                                    </div>
+                                    <p style={{ color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.75rem' }}>
+                                        Candidates scoring below this in the AI interview will be automatically rejected.
+                                    </p>
+                                </div>
+                            </div>
+
 
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                                 {error && (

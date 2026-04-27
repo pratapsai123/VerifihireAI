@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import '../styles/InterviewStart.css';
 import { API_BASE_URL } from '../apiConfig';
+import { ROUTES, generatePath } from '../routes';
 
 // Parse time string like "10:00 AM", "10 AM", "14:30" into a Date object (today)
 function parseScheduledTime(timeStr) {
@@ -87,22 +87,12 @@ const InterviewStart = () => {
                 return;
             }
             try {
-                const response = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/`);
+                const response = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/`);
                 setCandidate(response.data);
                 setLoading(false);
 
-                // REDIRECT LOGIC: If candidate already has questions, go straight to session
-                if (response.data.interview_questions && response.data.interview_questions.length > 0) {
-                    console.log("Candidate has existing questions. Redirecting to session...");
-                    const sessionData = {
-                        candidateId: response.data.id,
-                        candidateName: response.data.full_name,
-                        questions: response.data.interview_questions,
-                        status: 'interview_started'
-                    };
-                    sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
-                    navigate(`/ai-interview-session/${token}`);
-                }
+                // Keep candidate on this page even when questions already exist.
+                // This ensures the same pre-start UX (timing visibility + explicit start action).
             } catch (err) {
                 if (err.response?.status === 403 && err.response?.data?.link_expired) {
                     setLinkExpired(true);
@@ -192,7 +182,7 @@ const InterviewStart = () => {
                 status: 'interview_started'
             };
             sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
-            navigate(`/ai-interview-session/${token}`);
+            navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
         } catch (err) {
             if (err.response?.data?.time_locked) {
                 setError(err.response.data.error);
@@ -227,16 +217,103 @@ const InterviewStart = () => {
         </div>
     );
 
-    if (error && !candidate) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
-            <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem', background: 'white', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '3rem', color: '#e53e3e', marginBottom: '1rem' }}></i>
-                <h2 style={{ color: '#2d3748' }}>Interview Link Error</h2>
-                <p style={{ color: '#718096' }}>{error}</p>
-                <button onClick={() => navigate('/')} style={{ marginTop: '1.5rem', padding: '0.8rem 2rem', background: '#667eea', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer' }}>Return Home</button>
+    if (error && !candidate) {
+        const isExpired = error.toLowerCase().includes('expired');
+        const isCompleted = error.toLowerCase().includes('completed');
+
+        return (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontFamily: 'Inter, Poppins, sans-serif',
+                background: 'linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%)',
+                padding: '20px'
+            }}>
+                <div style={{
+                    textAlign: 'center',
+                    maxWidth: '450px',
+                    width: '100%',
+                    padding: '3.5rem 2.5rem',
+                    background: 'white',
+                    borderRadius: '32px',
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
+                    border: '1px solid #E2E8F0'
+                }}>
+                    <div style={{
+                        width: '88px',
+                        height: '88px',
+                        background: isExpired || isCompleted ? '#FFF5F5' : '#F0F9FF',
+                        borderRadius: '24px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto 2rem',
+                        transform: 'rotate(-5deg)'
+                    }}>
+                        {isExpired ? (
+                            <i className="fa-solid fa-hourglass-end" style={{ fontSize: '2.5rem', color: '#EF4444' }}></i>
+                        ) : isCompleted ? (
+                            <i className="fa-solid fa-circle-check" style={{ fontSize: '2.5rem', color: '#10B981' }}></i>
+                        ) : (
+                            <i className="fa-solid fa-link-slash" style={{ fontSize: '2.5rem', color: '#3B82F6' }}></i>
+                        )}
+                    </div>
+
+                    <h2 style={{
+                        color: '#1E293B',
+                        fontSize: '1.75rem',
+                        fontWeight: '800',
+                        marginBottom: '1rem',
+                        letterSpacing: '-0.02em'
+                    }}>
+                        {isExpired ? 'Link Expired' : isCompleted ? 'Interview Completed' : 'Link Access Issue'}
+                    </h2>
+
+                    <p style={{
+                        color: '#64748B',
+                        fontSize: '1.05rem',
+                        lineHeight: '1.6',
+                        marginBottom: '2.5rem'
+                    }}>
+                        {error}
+                    </p>
+
+                    <button
+                        onClick={() => navigate('/')}
+                        style={{
+                            width: '100%',
+                            padding: '1rem 2rem',
+                            background: '#1E293B',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '16px',
+                            fontWeight: '700',
+                            fontSize: '1rem',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                        onMouseOver={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.backgroundColor = '#0F172A';
+                        }}
+                        onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.backgroundColor = '#1E293B';
+                        }}
+                    >
+                        Go to Homepage
+                    </button>
+                    
+                    <p style={{ marginTop: '1.5rem', color: '#94A3B8', fontSize: '0.875rem' }}>
+                        Need help? Please contact your hiring manager.
+                    </p>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 
     return (
         <div style={{ background: '#f4f6f8', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', fontFamily: 'Poppins' }}>
@@ -267,40 +344,84 @@ const InterviewStart = () => {
                     )}
                 </div>
 
-                {/* Time Lock Banner */}
+                {/* Availability Status Banner */}
                 {candidate?.interview_time && !timeAllowed && (
                     <div style={{
-                        background: pastWindow ? '#fff5f5' : '#fffbeb',
-                        border: `1px solid ${pastWindow ? '#fed7d7' : '#fbd38d'}`,
-                        borderRadius: '16px', padding: '1.2rem', marginBottom: '2rem'
+                        background: pastWindow ? '#FFF5F5' : '#FFFBEB',
+                        border: pastWindow ? '1px solid #FECACA' : '1px solid #FDE68A',
+                        borderRadius: '20px',
+                        padding: '1.5rem',
+                        marginBottom: '2rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1.25rem',
+                        textAlign: 'left',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
                     }}>
-                        <i className={`fa-solid ${pastWindow ? 'fa-ban' : 'fa-hourglass-half'}`}
-                            style={{ fontSize: '1.5rem', color: pastWindow ? '#e53e3e' : '#d69e2e', marginBottom: '0.5rem' }}></i>
-                        {pastWindow ? (
-                            <>
-                                <p style={{ margin: '0.5rem 0 0', fontWeight: '700', color: '#c53030' }}>Interview Window Closed</p>
-                                <p style={{ margin: '0.25rem 0 0', color: '#718096', fontSize: '0.85rem' }}>
-                                    The availability window for this interview has passed. Please contact HR.
-                                </p>
-                            </>
-                        ) : (
-                            <>
-                                <p style={{ margin: '0.5rem 0 0', fontWeight: '700', color: '#b7791f' }}>Interview Not Yet Available</p>
-                                <p style={{ margin: '0.25rem 0 0', color: '#718096', fontSize: '0.85rem' }}>
-                                    Your interview starts at <strong>{candidate.available_from ? new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : candidate.interview_time}</strong>. Come back then!
-                                </p>
-                                <p style={{ margin: '0.5rem 0 0', fontSize: '1.4rem', fontWeight: '800', color: '#d69e2e', letterSpacing: '0.05em' }}>
-                                    {formatCountdown(countdown)}
-                                </p>
-                            </>
-                        )}
+                        <div style={{
+                            background: 'white',
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '12px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                        }}>
+                            {pastWindow ? (
+                                <i className="fa-solid fa-calendar-xmark" style={{ color: '#EF4444', fontSize: '1.5rem' }}></i>
+                            ) : (
+                                <i className="fa-solid fa-clock-rotate-left" style={{ color: '#D97706', fontSize: '1.5rem' }}></i>
+                            )}
+                        </div>
+                        <div>
+                            <p style={{ 
+                                margin: 0, 
+                                fontWeight: '800', 
+                                color: pastWindow ? '#991B1B' : '#92400E', 
+                                fontSize: '1.1rem' 
+                            }}>
+                                {pastWindow ? 'Interview Window Closed' : 'Interview Not Yet Available'}
+                            </p>
+                            <p style={{ 
+                                margin: '0.25rem 0 0', 
+                                color: pastWindow ? '#B91C1C' : '#B45309', 
+                                fontSize: '0.95rem', 
+                                lineHeight: '1.4' 
+                            }}>
+                                {pastWindow ? (
+                                    'The availability window for this interview has passed. Please contact your hiring manager for assistance.'
+                                ) : (
+                                    <>
+                                        This session is scheduled for <strong style={{ color: '#78350F' }}>{candidate.available_from ? new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : candidate.interview_time}</strong>.
+                                        <div style={{ marginTop: '0.5rem', fontSize: '1.25rem', fontWeight: '800', letterSpacing: '0.05em' }}>
+                                            {formatCountdown(countdown)}
+                                        </div>
+                                    </>
+                                )}
+                            </p>
+                        </div>
                     </div>
                 )}
 
                 {/* Error Banner */}
                 {error && (
-                    <div style={{ background: '#fff5f5', border: '1px solid #fed7d7', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem', color: '#c53030', fontSize: '0.9rem' }}>
-                        <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: '8px' }}></i>{error}
+                    <div style={{
+                        background: '#FEF2F2',
+                        border: '1px solid #FCA5A5',
+                        borderRadius: '14px',
+                        padding: '0.8rem 1.2rem',
+                        marginBottom: '1.5rem',
+                        color: '#991B1B',
+                        fontSize: '0.9rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
+                    }}>
+                        <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
+                        <span style={{ fontWeight: '500' }}>{error}</span>
                     </div>
                 )}
 
