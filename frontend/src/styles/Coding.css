@@ -401,6 +401,8 @@
   padding: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   animation: slideIn 0.2s ease-out;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 @keyframes slideIn {
@@ -471,6 +473,18 @@
   .coding-table-row > :nth-child(n+4) {
     display: none;
   }
+}
+
+.required-star {
+  color: #ef4444;
+  margin-left: 2px;
+  font-weight: bold;
+}
+.field-error-message {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
 }
 
 .animate-spin {

@@ -343,6 +343,10 @@ def generate_candidate_report(submission_id):
     inv = submission.invitation
     assessment = inv.assessment
 
+    # Block report generation for pending assessments
+    if submission.result == 'pending':
+        return None
+
     # Find candidate details - try token first, then email
     candidate_detail = None
     try:

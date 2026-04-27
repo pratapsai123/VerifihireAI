@@ -821,13 +821,24 @@ def submit_invitation_answers_view(request, token):
 
         submission, created = CandidateSubmission.objects.get_or_create(
             invitation=inv,
+            defaults={
+                "is_qualified": False,
+                "result": "pending",
+            }
         )
         
-        # Store Objective Scores
-        submission.objective_score = score
-        submission.objective_total = total
-        submission.objective_percentage = percentage
+        # Store intermediate stats in answers instead of main fields to hide from dashboard
         submission.answers = cleaned
+        submission.answers['_objective_stats'] = {
+            'score': score,
+            'total': total,
+            'percentage': percentage
+        }
+        
+        # Main fields stay at 0 until finalization
+        submission.objective_score = 0
+        submission.objective_total = 0
+        submission.objective_percentage = 0.0
 
         # Combine with Coding Scores (preserve existing coding score if present)
         # coding_score defaults to 0 if not set
@@ -864,8 +875,10 @@ def submit_invitation_answers_view(request, token):
         # If cod-only: w_obj=0, w_cod=100.
         # So the formula (obj% * w_obj + cod% * w_cod) / 100 works for all if weights are set correctly.
         
-        # Use helper for centralized scoring logic
-        _update_submission_scoring_logic(submission)
+        # Centralized scoring logic
+        from api.models import AssessmentCodingQuestion
+        has_coding_final = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
+        _update_submission_scoring_logic(submission, finalize=not has_coding_final)
         
         submission.save(update_fields=[
             'answers', 
@@ -1036,7 +1049,7 @@ def update_standard_integrity_view(request, token):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-def _update_submission_scoring_logic(submission):
+def _update_submission_scoring_logic(submission, finalize=False):
     """
     Recalculates coding score and updates submission fields based on stored answers.
     Doesn't save the submission object (caller should save).
@@ -1082,16 +1095,20 @@ def _update_submission_scoring_logic(submission):
     else:
         coding_percentage = 0.0
     
-    # 4. Update coding fields
-    submission.coding_score = int(candidate_total_points)
-    submission.coding_total = int(total_possible_points)
-    submission.coding_percentage = coding_percentage
+    # 4. Handle Objective Stats (from answers if hidden)
+    obj_stats = submission_answers.get('_objective_stats', {})
+    if obj_stats:
+        current_obj_score = obj_stats.get('score', 0)
+        current_obj_total = obj_stats.get('total', 0)
+        current_obj_perc = obj_stats.get('percentage', 0.0)
+    else:
+        # Fallback to current fields (for legacy or finalize-only assessments)
+        current_obj_score = submission.objective_score
+        current_obj_total = submission.objective_total
+        current_obj_perc = submission.objective_percentage
 
-    # 5. Combine with Objective (if any)
-    # Objective score is already stored in fields (or 0 if none)
+    # 5. Combined Percentage Calculation
     assessment = inv.assessment
-    
-    # Weighted Scoring Logic
     w_obj = assessment.weightage_objective if assessment.weightage_objective is not None else 50
     w_cod = assessment.weightage_coding if assessment.weightage_coding is not None else 50
     
@@ -1099,66 +1116,88 @@ def _update_submission_scoring_logic(submission):
         w_obj = 50
         w_cod = 50
 
-    # Calculate final percentage using weights
-    obj_term = (submission.objective_percentage * w_obj)
-    cod_term = (submission.coding_percentage * w_cod)
+    obj_term = (current_obj_perc * w_obj)
+    cod_term = (coding_percentage * w_cod)
     
     final_percentage = (obj_term + cod_term) / 100.0
-
     final_percentage_rounded = round(final_percentage)
-    
-    # 6. Update aggregate fields
-    submission.score = submission.objective_score + submission.coding_score
-    submission.total = submission.objective_total + submission.coding_total
-    submission.percentage = final_percentage_rounded
-    submission.final_percentage = final_percentage
-    
-    # --- RIGOROUS HIRING STANDARDS ---
-    # Enforce minimum thresholds for individual sections
-    MIN_MCQ_THRESHOLD = 60.0
-    MIN_CODING_THRESHOLD = 50.0
-    MIN_INTEGRITY_THRESHOLD = 70.0
 
-    min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
-    
-    # 7. Get Integrity Score
-    integrity_score = 100.0
-    try:
-        if hasattr(inv, 'integrity') and inv.integrity:
-             integrity_score = float(inv.integrity.integrity_score)
-    except Exception:
-        pass
+    # 6. Final Assignment to Submission (Only if finalizing)
+    if finalize:
+        submission.objective_score = current_obj_score
+        submission.objective_total = current_obj_total
+        submission.objective_percentage = current_obj_perc
 
-    # 8. Check Section Pass/Fail
-    # Candidate must pass BOTH the overall threshold AND section-specific minimums
-    
-    # 9. Determine Result (Status)
-    is_malpractice = (integrity_score < 70)
-    
-    # 10. Check Qualification
-    passed_overall = final_percentage_rounded >= min_pass
-    passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
-    passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
-    passed_integrity = (integrity_score >= MIN_INTEGRITY_THRESHOLD)
+        submission.coding_score = int(candidate_total_points)
+        submission.coding_total = int(total_possible_points)
+        submission.coding_percentage = coding_percentage
 
-    has_mcq = (submission.objective_total > 0)
-    has_coding = (submission.coding_total > 0)
-    
-    if not passed_integrity:
-        submission.is_qualified = False
-        submission.result = 'hold'
-    elif has_mcq and not passed_mcq:
-        submission.is_qualified = False
-        submission.result = 'hold'
-    elif has_coding and not passed_coding:
-        submission.is_qualified = False
-        submission.result = 'hold'
-    elif not passed_overall:
-        submission.is_qualified = False
-        submission.result = 'rejected'
+        submission.score = submission.objective_score + submission.coding_score
+        submission.total = submission.objective_total + submission.coding_total
+        submission.percentage = final_percentage_rounded
+        submission.final_percentage = final_percentage
     else:
-        submission.is_qualified = True
-        submission.result = 'selected'
+        # Hide progress from dashboard
+        submission.coding_score = 0
+        submission.coding_percentage = 0.0
+        submission.score = 0
+        submission.percentage = 0
+        submission.final_percentage = 0.0
+        submission.result = 'pending'
+    
+    if finalize:
+        # --- RIGOROUS HIRING STANDARDS ---
+        # Enforce minimum thresholds for individual sections
+        MIN_MCQ_THRESHOLD = 60.0
+        MIN_CODING_THRESHOLD = 50.0
+        MIN_INTEGRITY_THRESHOLD = 70.0
+
+        min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
+        
+        # 7. Get Integrity Score
+        integrity_score = 100.0
+        try:
+            if hasattr(inv, 'integrity') and inv.integrity:
+                 integrity_score = float(inv.integrity.integrity_score)
+        except Exception:
+            pass
+
+        # 8. Check Section Pass/Fail
+        # Candidate must pass BOTH the overall threshold AND section-specific minimums
+        
+        # 9. Determine Result (Status)
+        is_malpractice = (integrity_score < 70)
+        
+        # 10. Check Qualification
+        passed_overall = final_percentage_rounded >= min_pass
+        passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
+        passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
+        passed_integrity = (integrity_score >= MIN_INTEGRITY_THRESHOLD)
+
+        has_mcq = (submission.objective_total > 0)
+        has_coding = (submission.coding_total > 0)
+        
+        if not passed_integrity:
+            submission.is_qualified = False
+            submission.result = 'hold'
+        elif has_mcq and not passed_mcq:
+            submission.is_qualified = False
+            submission.result = 'hold'
+        elif has_coding and not passed_coding:
+            submission.is_qualified = False
+            submission.result = 'hold'
+        elif not passed_overall:
+            submission.is_qualified = False
+            submission.result = 'rejected'
+        else:
+            submission.is_qualified = True
+            submission.result = 'selected'
+    else:
+        # Default intermediate status if not already set
+        if submission.is_qualified is None:
+            submission.is_qualified = False
+        if not submission.result or submission.result in ('selected', 'rejected', 'hold'):
+            submission.result = 'pending'
 
 
 def _acq_allowed_languages(acq):
@@ -1211,6 +1250,7 @@ def _evaluate_coding_question(acq, code, lang):
                 "id": tc.id,
                 "stdin": tc.stdin or "",
                 "expected_stdout": tc.expected_stdout or "",
+                "is_hidden": tc.is_hidden,
             })
 
     result = _call_executor(
@@ -1223,6 +1263,13 @@ def _evaluate_coding_question(acq, code, lang):
         database_engine=database_engine,
         testcases=tcs,
     )
+
+    # Attach is_hidden from input tcs to output results for frontend redaction
+    if result.get("ok") and "results" in result:
+        for i, res in enumerate(result["results"]):
+            if i < len(tcs):
+                res["is_hidden"] = tcs[i].get("is_hidden", False)
+
     return result
 
 
@@ -1381,10 +1428,6 @@ def invitation_coding_submit_view(request, token):
         if inv.status == 'submitted':
             return Response({'error': 'Your exam has been completed.'}, status=status.HTTP_409_CONFLICT)
 
-        # Check if this specific question was already submitted
-        submission = getattr(inv, 'submission', None)
-        if submission and submission.answers and f"acq_{acq.id}" in submission.answers:
-             return Response({'error': 'This question has already been submitted.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Persistence logic
         if result.get("ok"):
@@ -1398,7 +1441,7 @@ def invitation_coding_submit_view(request, token):
                     "percentage": 0,
                     "final_percentage": 0.0,
                     "is_qualified": False,
-                    "result": "selected",
+                    "result": "pending",
                 },
             )
             
@@ -1434,11 +1477,21 @@ def invitation_coding_submit_view(request, token):
                 if created:
                     assessment.submitted = int(getattr(assessment, 'submitted', 0) or 0) + 1
                     assessment.evaluated = int(getattr(assessment, 'evaluated', 0) or 0) + 1
-                    assessment.shortlisted = int(getattr(assessment, 'shortlisted', 0) or 0) + 1
-                    assessment.save(update_fields=['submitted', 'evaluated', 'shortlisted'])
+                    # shortlisted is ONLY updated during finalization
+                    assessment.save(update_fields=['submitted', 'evaluated'])
             except Exception:
                 pass
             result["submission_id"] = submission.id
+
+        # Redact hidden test cases for the candidate response
+        if "results" in result:
+            for r in result["results"]:
+                if r.get("is_hidden"):
+                    # Only keep status and message, redact raw details
+                    r["stdin"] = "REDACTED"
+                    r["stdout"] = "REDACTED"
+                    r["stderr"] = "REDACTED"
+                    r["expected_stdout"] = "REDACTED"
 
         status_code = status.HTTP_200_OK if result.get('ok') else status.HTTP_400_BAD_REQUEST
         return Response(result, status=status_code)
@@ -1513,7 +1566,7 @@ def invitation_coding_finalize_view(request, token):
                 "percentage": 0,
                 "final_percentage": 0.0,
                 "is_qualified": False,
-                "result": "selected",
+                "result": "pending",
             },
         )
         
@@ -1560,8 +1613,8 @@ def invitation_coding_finalize_view(request, token):
                 submission.answers = submission_answers
                 submission.save(update_fields=['answers'])
 
-        # Use helper for scoring
-        _update_submission_scoring_logic(submission)
+        # Use helper for scoring (Finalize is True here as this is the final finish)
+        _update_submission_scoring_logic(submission, finalize=True)
         submission.save()
 
         is_qualified = submission.is_qualified
@@ -2060,6 +2113,15 @@ class CandidateSubmissionDeleteView(generics.DestroyAPIView):
             return super().destroy(request, *args, **kwargs)
 
         instance = self.get_object()
+
+        # Block deletion for pending assessments
+        if instance.result == 'pending':
+            from rest_framework.response import Response
+            from rest_framework import status
+            return Response(
+                {'error': 'Cannot delete a pending assessment. Please wait for the candidate to finish or time out.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
         # Use centralized helper to handle policy and workflow
         response, handled = handle_deletion_request(
@@ -2252,11 +2314,25 @@ def submit_objective_section(request, token):
         percentage = (score / total_obj_questions * 100.0) if total_obj_questions > 0 else 0.0
         
         # Save to Submission
-        submission, created = CandidateSubmission.objects.get_or_create(invitation=inv)
-        submission.objective_score = score
-        submission.objective_total = total_obj_questions
-        submission.objective_percentage = round(percentage, 2)
+        submission, created = CandidateSubmission.objects.get_or_create(
+            invitation=inv,
+            defaults={
+                "is_qualified": False,
+                "result": "pending",
+            }
+        )
+        # Store intermediate stats in answers to hide from dashboard
         submission.answers = answers # Store current state
+        submission.answers['_objective_stats'] = {
+            'score': score,
+            'total': total_obj_questions,
+            'percentage': round(percentage, 2)
+        }
+        
+        # Main fields stay at 0 until finalization
+        submission.objective_score = 0
+        submission.objective_total = 0
+        submission.objective_percentage = 0.0
         submission.save()
         
         from api.models import AssessmentCodingQuestion
@@ -2293,9 +2369,7 @@ def submit_objective_section(request, token):
             inv.save()
             
             # Recalculate and set to HOLD
-            _update_submission_scoring_logic(submission)
-            submission.result = 'hold' 
-            submission.is_qualified = False
+            _update_submission_scoring_logic(submission, finalize=True)
             submission.save()
             
             # Schedule result email/report
@@ -2313,7 +2387,8 @@ def submit_objective_section(request, token):
                 inv.save()
                 should_schedule_result_email = True
             
-            _update_submission_scoring_logic(submission)
+            # If they passed both but have coding, finalize=False. If no coding, finalize=True.
+            _update_submission_scoring_logic(submission, finalize=(next_stage == 'finish'))
             submission.save()
         
         # Reload to get updated fields from _update_submission_scoring_logic

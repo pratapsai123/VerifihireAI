@@ -29,6 +29,9 @@ function getStatusMeta(status) {
     if (status === 'not_attempted') {
         return { label: 'Not Attempted', className: 'neutral' };
     }
+    if (status === 'pending') {
+        return { label: 'Pending', className: 'neutral' };
+    }
     return { label: status || '-', className: 'neutral' };
 }
 
@@ -564,8 +567,14 @@ export default function Result() {
                                                         {r.submission_id ? (
                                                             <button
                                                                 className="btn-report-dl"
-                                                                title="Download Report"
+                                                                title={r.status === 'pending' ? "Report unavailable while pending" : "Download Report"}
+                                                                disabled={r.status === 'pending'}
+                                                                style={{ 
+                                                                    opacity: r.status === 'pending' ? 0.5 : 1,
+                                                                    cursor: r.status === 'pending' ? 'not-allowed' : 'pointer'
+                                                                }}
                                                                 onClick={async () => {
+                                                                    if (r.status === 'pending') return;
                                                                     const url = `${API_BASE_URL}/results/${r.submission_id}/report/`;
                                                                     try {
                                                                         const resp = await axios.get(url, { responseType: 'blob' });
@@ -593,8 +602,14 @@ export default function Result() {
                                                         ) : (
                                                             <button
                                                                 className="btn-action-delete"
-                                                                title={JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
+                                                                title={r.status === 'pending' ? "Cannot delete pending assessment" : (JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete')}
+                                                                disabled={r.status === 'pending'}
+                                                                style={{ 
+                                                                    opacity: r.status === 'pending' ? 0.5 : 1,
+                                                                    cursor: r.status === 'pending' ? 'not-allowed' : 'pointer'
+                                                                }}
                                                                 onClick={async () => {
+                                                                    if (r.status === 'pending') return;
                                                                     const role = JSON.parse(localStorage.getItem('user'))?.role;
                                                                     const isAdmin = role === 'company_admin' || role === 'application_admin';
 

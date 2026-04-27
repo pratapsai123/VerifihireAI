@@ -338,7 +338,6 @@ export default function TakeAssessment() {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fsError, setFsError] = useState('');
-  const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [leftWidth, setLeftWidth] = useState(44);
   const [lastExpandedWidth, setLastExpandedWidth] = useState(44);
@@ -1351,9 +1350,8 @@ export default function TakeAssessment() {
 
 
 
-  // Countdown timer (starts when candidate opens the link)
   useEffect(() => {
-    if (submitted || submitting || codingState.running) return;
+    if (submitted || submitting) return;
 
     // We don't want to reset the interval every second, so we DON'T include remainingSeconds in deps.
     let lastTick = Date.now();
@@ -1471,11 +1469,10 @@ export default function TakeAssessment() {
       setCodingState((prev) => ({ ...prev, runError: 'Time is over. The exam has ended.' }));
       return;
     }
-    setShowSubmitConfirm(true);
+    executeSubmitCode();
   };
 
   const executeSubmitCode = async () => {
-    setShowSubmitConfirm(false);
     if (!activeCoding) return;
     const key = String(activeCoding.id);
     setResultHeightPct(50); // Expand results area upon submitting
@@ -1497,12 +1494,6 @@ export default function TakeAssessment() {
         running: false,
         submittedIds: { ...prev.submittedIds, [String(activeCoding.id)]: true },
       }));
-      // Move to next coding question if exists
-      const idx = codingQuestionsOrdered.findIndex((q) => String(q.id) === String(activeCoding.id));
-      const next = codingQuestionsOrdered[idx + 1];
-      if (next) {
-        setCodingState((prev) => ({ ...prev, currentId: next.id, runError: '' }));
-      }
     } catch (e) {
       setCodingState((prev) => ({ ...prev, running: false, runError: e?.response?.data?.error || e?.message || 'Submit failed' }));
     }
@@ -1774,24 +1765,7 @@ export default function TakeAssessment() {
           </div>
         ) : null}
 
-        {showSubmitConfirm && (
-          <div className="fs-gate" style={{ zIndex: 9999 }}>
-            <div className="fs-card" style={{ padding: '30px' }}>
-              <div className="fs-title" style={{ color: '#1e293b' }}>Confirm Submission</div>
-              <div className="fs-sub" style={{ color: '#475569', marginBottom: '20px' }}>
-                Are you sure you want to submit your code? You cannot edit it after submission.
-              </div>
-              <div className="fs-actions" style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-                <button className="btn btn-secondary" onClick={() => setShowSubmitConfirm(false)}>
-                  Cancel
-                </button>
-                <button className="fs-primary" onClick={executeSubmitCode}>
-                  Submit
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+
 
         {/* Floating Timer (Restored for ALL modes) */}
         {/* Floating Timer (Stage Based) */}
@@ -1932,7 +1906,7 @@ export default function TakeAssessment() {
                         <select
                           className="coding-input coding-language-select"
                           value={activeLanguage || activeCodingLanguages[0] || ''}
-                          disabled={!!codingState.submittedIds[String(activeCoding.id)]}
+                          disabled={false}
                           onChange={(e) => {
                             const newLang = e.target.value;
                             setCodingState((prev) => {
@@ -1977,11 +1951,11 @@ export default function TakeAssessment() {
                       >
                         Test Cases
                       </button>
-                      <button type="button" className="btn btn-secondary" onClick={runCode} disabled={codingState.running || loading || !!codingState.submittedIds[String(activeCoding.id)]}>
+                      <button type="button" className="btn btn-secondary" onClick={runCode} disabled={codingState.running || loading}>
                         {codingState.running ? 'Running…' : 'Run'}
                       </button>
-                      <button type="button" className="btn btn-primary" onClick={submitCode} disabled={codingState.running || loading || !!codingState.submittedIds[String(activeCoding.id)]}>
-                        {codingState.running ? 'Submitting…' : (codingState.submittedIds[String(activeCoding.id)] ? 'Submitted' : 'Submit Answer')}
+                      <button type="button" className="btn btn-primary" onClick={submitCode} disabled={codingState.running || loading}>
+                        {codingState.running ? 'Submitting…' : (codingState.submittedIds[String(activeCoding.id)] ? 'Resubmit Answer' : 'Submit Answer')}
                       </button>
                     </div>
                   </div>
@@ -2007,8 +1981,8 @@ export default function TakeAssessment() {
                             minimap: { enabled: false },
                             scrollBeyondLastLine: false,
                             automaticLayout: true,
-                            readOnly: !!codingState.submittedIds[String(activeCoding.id)],
-                            domReadOnly: !!codingState.submittedIds[String(activeCoding.id)],
+                            readOnly: false,
+                            domReadOnly: false,
                           }}
                           onChange={(v) => {
 
@@ -2025,7 +1999,7 @@ export default function TakeAssessment() {
                             automaticLayout: true,
                             scrollBeyondLastLine: false,
                             wordWrap: 'on',
-                            readOnly: !!codingState.submittedIds[String(activeCoding.id)],
+                            readOnly: false,
                           }}
                         />
                       </Suspense>
