@@ -303,16 +303,7 @@ export default function TakeAssessment() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [remainingSeconds, setRemainingSeconds] = useState(() => {
-    try {
-      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.remainingSeconds !== undefined) return parsed.remainingSeconds;
-      }
-    } catch { }
-    return null;
-  });
+  const [remainingSeconds, setRemainingSeconds] = useState(null);
   const [codingState, setCodingState] = useState(() => {
     const initialState = {
       currentId: null,
@@ -357,25 +348,21 @@ export default function TakeAssessment() {
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
-  const [objectiveSeconds, setObjectiveSeconds] = useState(() => {
+  const [objectiveSeconds, setObjectiveSeconds] = useState(null);
+  const [codingSeconds, setCodingSeconds] = useState(null);
+  // Track when each stage started to calculate elapsed time on refresh
+  const [stageStartTimes, setStageStartTimes] = useState(() => {
     try {
       const saved = localStorage.getItem(`take_assessment_progress_${token}`);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.objectiveSeconds !== undefined) return parsed.objectiveSeconds;
+        return {
+          objective: parsed.objectiveStartTime || null,
+          coding: parsed.codingStartTime || null
+        };
       }
     } catch { }
-    return null;
-  });
-  const [codingSeconds, setCodingSeconds] = useState(() => {
-    try {
-      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.codingSeconds !== undefined) return parsed.codingSeconds;
-      }
-    } catch { }
-    return null;
+    return { objective: null, coding: null };
   });
   const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
   const [transitionTimer, setTransitionTimer] = useState(15);
@@ -436,12 +423,14 @@ export default function TakeAssessment() {
         remainingSeconds,
         objectiveSeconds,
         codingSeconds,
+        objectiveStartTime: stageStartTimes.objective,
+        codingStartTime: stageStartTimes.coding,
       };
       localStorage.setItem(`take_assessment_progress_${token}`, JSON.stringify(progress));
     } catch (e) {
       console.error('Failed to autosave progress', e);
     }
-  }, [token, answersById, codingState.codeById, codingState.languageById, submitted, assessmentStage, activeQuestionIndex, markedReviewIds, visitedIds, remainingSeconds, objectiveSeconds, codingSeconds]);
+  }, [token, answersById, codingState.codeById, codingState.languageById, submitted, assessmentStage, activeQuestionIndex, markedReviewIds, visitedIds, remainingSeconds, objectiveSeconds, codingSeconds, stageStartTimes]);
 
   useEffect(() => {
     // Mark current question as visited whenever index changes
@@ -974,21 +963,37 @@ export default function TakeAssessment() {
 
         setAssessmentStage(initialStage);
 
-        // Only set timers from backend if we didn't restore them from localStorage
-        setObjectiveSeconds(prev => prev !== null ? prev : objTimeLimit);
-        setCodingSeconds(prev => prev !== null ? prev : codTimeLimit);
+        // Record start times if not already set
+        const nowMs = Date.now();
+        let currentObjStart = stageStartTimes.objective;
+        let currentCodStart = stageStartTimes.coding;
 
-        // Initialize timer based on remaining_seconds from backend (Total expiry)
-        // If we are strict, we should respect the backend `expires_at`.
-        // If `remaining_seconds` is small, we might clamp our local timers.
+        if (initialStage === 'objective' && !currentObjStart) {
+          currentObjStart = nowMs;
+          setStageStartTimes(prev => ({ ...prev, objective: nowMs }));
+        } else if (initialStage === 'coding' && !currentCodStart) {
+          currentCodStart = nowMs;
+          setStageStartTimes(prev => ({ ...prev, coding: nowMs }));
+        }
+
+        // Calculate remaining seconds for each stage based on elapsed time
+        if (initialStage === 'objective' && currentObjStart) {
+          const elapsed = Math.floor((nowMs - currentObjStart) / 1000);
+          setObjectiveSeconds(Math.max(0, objTimeLimit - elapsed));
+        } else {
+          setObjectiveSeconds(objTimeLimit);
+        }
+
+        if (initialStage === 'coding' && currentCodStart) {
+          const elapsed = Math.floor((nowMs - currentCodStart) / 1000);
+          setCodingSeconds(Math.max(0, codTimeLimit - elapsed));
+        } else {
+          setCodingSeconds(codTimeLimit);
+        }
+
+        // Initialize global timer from backend (Total expiry) - ALWAYS trust backend for global time
         if (typeof data.remaining_seconds === 'number') {
-          const totalRem = data.remaining_seconds;
-          setRemainingSeconds(prev => prev !== null ? prev : totalRem);
-          if (initialStage === 'objective') {
-            setObjectiveSeconds(prev => prev !== null ? prev : (objTimeLimit > totalRem ? totalRem : objTimeLimit));
-          } else if (initialStage === 'coding') {
-            setCodingSeconds(prev => prev !== null ? prev : (codTimeLimit > totalRem ? totalRem : codTimeLimit));
-          }
+          setRemainingSeconds(data.remaining_seconds);
         }
 
         // Restore partial coding state
@@ -1525,6 +1530,8 @@ export default function TakeAssessment() {
         navigate(`/result/${token}`, { replace: true });
       } else {
         setAssessmentStage('transition');
+        // Record coding start time when transitioning (will be used once stage becomes 'coding')
+        setStageStartTimes(prev => ({ ...prev, coding: Date.now() }));
       }
     } catch (e) {
       setSubmitError(e?.response?.data?.error || e?.message || 'Failed to submit objective section');
