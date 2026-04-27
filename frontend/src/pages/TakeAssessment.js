@@ -345,6 +345,7 @@ export default function TakeAssessment() {
   const screenStreamRef = useRef(null);
   const screenCanvasRef = useRef(null);
   const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
+  const wasFsRef = useRef(false);
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -1218,6 +1219,13 @@ export default function TakeAssessment() {
           else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => { });
           return;
         }
+
+        // Re-check fullscreen - screen share often causes an exit
+        const isFsAfterShare = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+        if (!isFsAfterShare) {
+          if (elem.requestFullscreen) await elem.requestFullscreen();
+          else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+        }
       }
 
       // 3. Camera (already started mostly, but ensure success)
@@ -1240,12 +1248,22 @@ export default function TakeAssessment() {
       );
       setIsFullscreen(isFs);
 
-      // Log violation if they exit mid-exam
-      if (!isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
+      // Log violation ONLY if they were previously in fullscreen and just exited
+      if (wasFsRef.current && !isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
         showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
       }
+      wasFsRef.current = isFs;
     };
-    update();
+
+    // Initial check without violation
+    const initialFs = Boolean(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+    setIsFullscreen(initialFs);
+    wasFsRef.current = initialFs;
     document.addEventListener('fullscreenchange', update);
     document.addEventListener('webkitfullscreenchange', update);
     document.addEventListener('mozfullscreenchange', update);
