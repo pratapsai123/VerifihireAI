@@ -8,6 +8,7 @@ import '../styles/AiInterviewSession.css';
 import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
 
 const AiInterviewSession = () => {
+    const VIOLATION_COOLDOWN_MS = 10000;
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
@@ -86,6 +87,7 @@ const AiInterviewSession = () => {
     const screenStreamRef = useRef(null);
     const screenCanvasRef = useRef(null);
     const lastCaptureTimeRef = useRef({}); // Store timestamps per eventType for cooldowns
+    const violationCooldownsRef = useRef({}); // Cooldown tracker for violations (10 sec)
     const isFullscreenRef = useRef(false);
     const currentAudioRef = useRef(null);
     const isStartingMicRef = useRef(false);
@@ -180,6 +182,18 @@ const AiInterviewSession = () => {
     };
 
     const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
+        const now = Date.now();
+        const lastReported = violationCooldownsRef.current[eventType] || 0;
+        
+        // Check if this violation type is still in cooldown
+        if (now - lastReported < VIOLATION_COOLDOWN_MS) {
+            // Same violation type reported recently - skip this duplicate
+            return;
+        }
+        
+        // Update cooldown tracker
+        violationCooldownsRef.current[eventType] = now;
+        
         try {
             await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/integrity/`, {
                 event_type: eventType,
@@ -917,19 +931,6 @@ const AiInterviewSession = () => {
             } catch (e) {}
             currentAudioRef.current = null;
         }
-        const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
-        addMessage('ai', finishMessage);
-        await speak(finishMessage);
-        axios.patch(`${API_BASE_URL}/ai-candidates/public/${token}/status/`, { status: 'Completed' }).catch(console.error);
-
-        // Mark as completed locally to prevent re-opening link
-        localStorage.setItem(`interview_completed_${token}`, 'true');
-
-        setIsProcessing(true);
-        setAiStatus("Session Finished");
-    }, [token, speak, addMessage]);
-
-    const startSilenceWatchdog = useCallback((delay) => {
         if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
         lastSpokenTimeRef.current = Date.now(); // Baseline reset
         globalSilenceTimerRef.current = setInterval(async () => {
@@ -1687,6 +1688,47 @@ const AiInterviewSession = () => {
         return () => clearInterval(autoSaveInterval);
     }, [token, chatMessages, currentQuestionIndex, questions, isCompleted, candidateName]);
 
+    // FIX: Restore interview progress from localStorage on page load
+    useEffect(() => {
+        if (!token || isInitializedRef.current) return;
+        
+        const savedProgress = localStorage.getItem(`interview_progress_${token}`);
+        if (savedProgress) {
+            try {
+                const progressData = JSON.parse(savedProgress);
+                // Only restore if it's for the same candidate and interview not completed
+                if (progressData.token === token && !isCompleted) {
+                    console.log("🔄 [Restore] Found saved interview progress, restoring...");
+                    
+                    // Restore state
+                    if (progressData.currentQuestionIndex > 0) {
+                        setCurrentQuestionIndex(progressData.currentQuestionIndex);
+                    }
+                    if (progressData.questions && progressData.questions.length > 0) {
+                        setQuestions(progressData.questions);
+                        setMaxQuestions(Math.min(progressData.questions.length, 13));
+                    }
+                    if (progressData.chatMessages && progressData.chatMessages.length > 0) {
+                        setChatMessages(progressData.chatMessages);
+                    }
+                    if (progressData.chatHistory && progressData.chatHistory.length > 0) {
+                        chatHistoryRef.current = progressData.chatHistory;
+                    }
+                    if (progressData.candidateName) {
+                        setCandidateName(progressData.candidateName);
+                    }
+                    
+                    console.log("✅ [Restore] Interview progress restored successfully");
+                    
+                    // Clear saved progress after successful submission/completion
+                    // This prevents stale data on re-interview
+                }
+            } catch (e) {
+                console.error("[Restore] Failed to parse saved progress:", e);
+            }
+        }
+    }, [token]); // Only run once on mount
+
     const handleStartInterview = async () => {
         // Step 1: Just request Camera for face registration
         console.log("Requesting Camera...");
@@ -1841,19 +1883,43 @@ const AiInterviewSession = () => {
             const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
             const introQ = "To get started, please introduce yourself and your professional background.";
 
-            // FIX: Only add intro if backend questions don't already include it
-            // AND if adding it won't exceed maxQuestions
+            // FIX: Strictly enforce 13 questions total to prevent count mismatch
+            // Backend provides 13 questions, frontend should NOT add intro if already at limit
             let finalQs = [...qList];
+            const TOTAL_QUESTIONS_LIMIT = 13;
+            
+            // Check if backend already has an intro-style question
             const backendHasIntro = finalQs.length > 0 && 
                 (finalQs[0].toLowerCase().includes('introduce') || 
+                 finalQs[0].toLowerCase().includes('background') ||
                  finalQs[0] === introQ);
             
-            if (!backendHasIntro && finalQs.length < maxQuestions) {
+            // Only add intro if:
+            // 1. Backend doesn't already have an intro question AND
+            // 2. Adding it won't exceed the 13 question limit
+            if (!backendHasIntro && finalQs.length < TOTAL_QUESTIONS_LIMIT) {
+                // Add intro but keep total at 13 by removing last question if needed
                 finalQs = [introQ, ...finalQs];
+                if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
+                    finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
+                }
                 setQuestions(finalQs);
-                setMaxQuestions(Math.min(finalQs.length, 13)); // Cap at 13
+                setMaxQuestions(finalQs.length);
+                console.log(`[Question Fix] Added intro question. Total: ${finalQs.length}`);
+            } else if (!backendHasIntro && finalQs.length >= TOTAL_QUESTIONS_LIMIT) {
+                // Backend already has 13 questions, replace first with intro
+                finalQs = [introQ, ...finalQs.slice(1)];
+                setQuestions(finalQs);
+                setMaxQuestions(TOTAL_QUESTIONS_LIMIT);
+                console.log(`[Question Fix] Replaced first question with intro. Total: ${finalQs.length}`);
             } else {
+                // Backend already has intro, use as-is but cap at 13
+                if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
+                    finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
+                }
                 setQuestions(finalQs);
+                setMaxQuestions(finalQs.length);
+                console.log(`[Question Fix] Using backend questions. Total: ${finalQs.length}`);
             }
 
             const combinedStart = `${welcome} ${introQ}`;
@@ -1929,6 +1995,12 @@ const AiInterviewSession = () => {
             if (timeSinceActivity < 2000) {
                 secondsRemaining = 5;
                 setSilenceCountdown("Listening...");
+                // FIX: Reset consecutive silence counter if candidate speaks during countdown
+                // This prevents false positives when AssemblyAI delivers delayed transcripts
+                if (consecutiveSilenceRef.current > 0) {
+                    consecutiveSilenceRef.current = 0;
+                    console.log("🎤 [Silence Fix] Candidate spoke during silence countdown, resetting silence counter");
+                }
                 return;
             }
 

@@ -222,16 +222,16 @@ class SubmitAssessmentView(APIView):
             passed_integrity = submission.integrity_score >= MIN_INTEGRITY_THRESHOLD
 
             # Selection Logic based on user requirement:
-            # 1. Integrity < 70% -> HOLD
-            # 2. Performance < Threshold -> HOLD (per latest request)
+            # 1. Integrity < 70% -> REJECTED
+            # 2. Performance < Threshold -> REJECTED
             # 3. All Pass -> SELECTED
             
             if not passed_integrity:
-                pass_status = 'hold'
+                pass_status = 'rejected'
             elif (possible_mcq_points > 0 and not passed_mcq) or (possible_coding_points > 0 and not passed_coding):
-                pass_status = 'hold'
+                pass_status = 'rejected'
             elif not passed_overall:
-                pass_status = 'hold'
+                pass_status = 'rejected'
             else:
                 pass_status = 'selected'
 
@@ -370,6 +370,10 @@ class GenerateAssessmentView(APIView):
         
         granular_sum = input_easy + input_medium + input_hard
         
+        # Check if mcq_count or granular fields were explicitly provided
+        mcq_count_provided = 'mcq_count' in data
+        mcq_granular_provided = 'mcq_easy' in data or 'mcq_medium' in data or 'mcq_hard' in data
+        
         if granular_sum > 0:
             mcq_count = granular_sum
             mcq_easy = input_easy
@@ -380,8 +384,20 @@ class GenerateAssessmentView(APIView):
             mcq_easy = mcq_count // 2
             mcq_medium = (mcq_count * 3) // 10
             mcq_hard = max(0, mcq_count - mcq_easy - mcq_medium)
+        elif mcq_count_provided and input_mcq_total == 0:
+            # User explicitly set 0 MCQs via mcq_count field
+            mcq_count = 0
+            mcq_easy = 0
+            mcq_medium = 0
+            mcq_hard = 0
+        elif mcq_granular_provided and granular_sum == 0:
+            # User explicitly set 0 MCQs via all granular fields being 0
+            mcq_count = 0
+            mcq_easy = 0
+            mcq_medium = 0
+            mcq_hard = 0
         else:
-            # Absolute default fallback
+            # Absolute default fallback (only when not explicitly provided)
             mcq_count = 10
             mcq_easy = 5
             mcq_medium = 3
@@ -1040,11 +1056,41 @@ class UpdateAssessmentIntegrityView(APIView):
             })
             
             # Grace Warning System Phase 2: Handle First 3 as Warnings
-            if len(submission.warning_logs) < 3:
+            is_warning = len(submission.warning_logs) < 3
+            if is_warning:
                 submission.warning_logs.append(event_type)
 
-            # Per user request: DO NOT cut marks for integrity issues. 
-            submission.integrity_score = 100.0
+            # Calculate integrity score based on violations
+            # Start at 100, deduct penalties for actual violations (after grace period)
+            if not is_warning:
+                # Define penalties for different violation types
+                penalties = {
+                    'tab_switch': 3,
+                    'window_blur': 2,
+                    'screen_stop': 2,
+                    'phone_detection': 10,
+                    'face_detection_lost': 5,
+                    'no_face_detection': 5,
+                    'no_face': 5,
+                    'multiface_detection': 10,
+                    'multiple_faces': 10,
+                    'multi_person': 10,
+                    'looking_away': 3,
+                    'head_yaw_exceeded': 3,
+                    'head_pitch_exceeded': 3,
+                    'face_mismatch': 10,
+                    'verification_failed': 10,
+                }
+                
+                # Get penalty for this event (default to 5 if not specified)
+                penalty = penalties.get(event_type, 5)
+                
+                # Apply penalty
+                submission.integrity_score = max(0, submission.integrity_score - penalty)
+            
+            # If this is the first violation being recorded, ensure we start from 100
+            if submission.integrity_score is None or submission.integrity_score == 0:
+                submission.integrity_score = 100.0
             
             # Handle Screenshot
             screenshot_b64 = request.data.get('screenshot')
@@ -1236,6 +1282,9 @@ class AssessmentDetailView(APIView):
                     "submission_id": f"ai_{sub.id}",
                     "candidate_name": sub.candidate_name,
                     "candidate_email": sub.candidate_email,
+                    "job_title": assessment.required_skills,
+                    "role": assessment.required_skills,
+                    "assessment_name": assessment.required_skills,
                     "score": sub.score,
                     "mcq_score": sub.mcq_score,
                     "coding_score": sub.coding_score,
@@ -2091,12 +2140,7 @@ class AIAssessmentReportDownloadView(APIView):
 
             elements = []
 
-            # 1. Title & Header
-            elements.append(Paragraph(f"{submission.candidate_name} Review", styles['Heading1']))
-            elements.append(Paragraph(f"Assessment: {assessment.required_skills} | Submitted {submission.submitted_at.strftime('%m/%d/%Y, %I:%M %p') if submission.submitted_at else 'N/A'}", styles['SubHeader']))
-            elements.append(Spacer(1, 15))
-
-            # 2. Score Cards (MCQ, Coding, Integrity)
+            # Calculate scores
             res_brk = submission.results_breakdown or {}
             mcq_scored = res_brk.get('mcq', {}).get('scored_points', 0)
             mcq_total = res_brk.get('mcq', {}).get('possible_points', submission.total_questions or 10)
@@ -2107,46 +2151,173 @@ class AIAssessmentReportDownloadView(APIView):
             coding_pct = round((coding_scored / coding_total * 100)) if coding_total > 0 else 0
 
             integrity_score = submission.integrity_score
-            integrity_label = "RELIABLE" if integrity_score >= 50 else "SUSPICIOUS"
+            integrity_label = "✓ Reliable" if integrity_score >= 50 else "⚠ Suspicious"
             integrity_color = colors.HexColor("#05CD99") if integrity_score >= 50 else colors.HexColor("#EE5D50")
 
-            card_data = [
-                [
-                    [Paragraph("MCQ SCORE", styles['CardLabel']), Paragraph(f"{mcq_pct}%", styles['CardValue']), Paragraph(f"{mcq_scored} / {mcq_total} Correct", styles['CardSubValue'])],
-                    [Paragraph("CODING SCORE", styles['CardLabel']), Paragraph(f"{coding_pct}%", styles['CardValue']), Paragraph(f"{coding_scored} / {coding_total} pts", styles['CardSubValue'])],
-                    [Paragraph("INTEGRITY", styles['CardLabel']), Paragraph(f"{integrity_score}%", styles['CardValue']), Paragraph(f"✓ {integrity_label}", styles['BadgeCorrect'] if integrity_score >= 50 else styles['BadgeIncorrect'])]
-                ]
-            ]
-            card_table = Table(card_data, colWidths=[1.8*inch, 1.8*inch, 1.8*inch])
-            card_table.setStyle(TableStyle([
-                ('GRID', (0,0), (-1,-1), 1, colors.HexColor("#E0E5F2")),
-                ('BACKGROUND', (0,0), (-1,-1), colors.white),
-                ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 15),
-                ('TOPPADDING', (0,0), (-1,-1), 15),
-            ]))
-            elements.append(card_table)
-            elements.append(Spacer(1, 20))
+            # Status display
+            status_display = "Assessment Passed" if submission.status == 'selected' else "Not Qualified" if submission.status in ['rejected', 'hold'] else submission.status.upper()
+            status_color = colors.HexColor("#05CD99") if submission.status == 'selected' else colors.HexColor("#EE5D50")
 
-            # 3. Overall Result Banner
-            banner_bg = colors.HexColor("#E6FBF5") if submission.status == 'selected' else colors.HexColor("#FFF5F5")
-            banner_border = colors.HexColor("#05CD99") if submission.status == 'selected' else colors.HexColor("#EE5D50")
+            # 1. Report Header - Interview Report Style
+            elements.append(Paragraph("VerifiHireAI — Assessment Report", ParagraphStyle(
+                'ReportHeader',
+                parent=styles['Heading1'],
+                fontSize=18,
+                textColor=colors.HexColor("#4F46E5"),
+                alignment=1,  # Center
+                spaceAfter=6
+            )))
+            elements.append(Paragraph(f"Candidate: {submission.candidate_name}", ParagraphStyle(
+                'CandidateSubHeader',
+                parent=styles['Normal'],
+                fontSize=12,
+                textColor=colors.HexColor("#1B254B"),
+                alignment=1,
+                spaceAfter=20
+            )))
+
+            # 2. Candidate Information Section
+            elements.append(Paragraph("Candidate Information", ParagraphStyle(
+                'SectionTitleItalic',
+                parent=styles['Heading2'],
+                fontSize=12,
+                textColor=colors.HexColor("#1B254B"),
+                fontName='Helvetica-BoldOblique',
+                spaceAfter=10
+            )))
+
+            # Get candidate photo - try DeepFace registered face first
+            candidate_img = None
+            person_id = submission.candidate_email.lower().strip() if submission.candidate_email else None
             
-            banner_content = [
-                [Paragraph("OVERALL RESULT", styles['BannerLabel'])],
-                [Paragraph(f"{submission.percentage}%", styles['BannerValue'])],
-                [Paragraph(submission.status.upper(), styles['BannerStatus'])]
+            if person_id:
+                try:
+                    # Try to fetch registered face from DeepFace service
+                    from pathlib import Path
+                    import requests
+                    
+                    # Check if deepface has a registered face endpoint to retrieve image
+                    deepface_img_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}"
+                    resp = requests.get(deepface_img_url, timeout=5)
+                    if resp.status_code == 200 and resp.json().get('registered'):
+                        # Try to find the registered face image file
+                        # DeepFace stores at: data/registered_faces/{person_id}/registration_snapshot.jpg
+                        deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+                        person_face_dir = deepface_data_dir / person_id
+                        if person_face_dir.exists():
+                            # Look for the registration snapshot
+                            for img_file in person_face_dir.glob('*.jpg'):
+                                try:
+                                    candidate_img = RLImage(str(img_file), width=1.4*inch, height=1.4*inch)
+                                    break
+                                except:
+                                    continue
+                except Exception as e:
+                    pass  # Fall back to screenshots
+            
+            # Fallback: Get from integrity screenshots (prefer webcam, avoid face_not_detected events)
+            if not candidate_img:
+                screenshots_qs = submission.screenshots.all().order_by('timestamp')
+                for shot in screenshots_qs:
+                    # Skip frames with no face detected
+                    if shot.event_type and 'face_not_detected' in shot.event_type.lower():
+                        continue
+                    if shot.webcam_screenshot:
+                        try:
+                            candidate_img = RLImage(shot.webcam_screenshot.path, width=1.4*inch, height=1.4*inch)
+                            break
+                        except:
+                            continue
+                    elif shot.screenshot:
+                        try:
+                            candidate_img = RLImage(shot.screenshot.path, width=1.4*inch, height=1.4*inch)
+                            break
+                        except:
+                            continue
+
+            # Info table data
+            info_data = [
+                ['Full Name', submission.candidate_name],
+                ['Email', submission.candidate_email or 'N/A'],
+                ['Job Title', assessment.required_skills or 'N/A'],
+                ['MCQ Score', f"{mcq_pct}% ({mcq_scored} / {mcq_total} Correct)"],
+                ['Coding Score', f"{coding_pct}% ({coding_scored} / {coding_total} pts)"],
+                ['Integrity Score', f"{integrity_score}% {integrity_label}"],
+                ['Overall Result', f"{submission.percentage}%"],
+                ['Status', status_display],
+                ['Submission Date', submission.submitted_at.strftime('%B %d, %Y %I:%M %p') if submission.submitted_at else 'N/A'],
             ]
-            banner_table = Table(banner_content, colWidths=[5.4*inch])
-            banner_table.setStyle(TableStyle([
-                ('BACKGROUND', (0,0), (-1,-1), banner_bg),
-                ('BOX', (0,0), (-1,-1), 1.5, banner_border),
-                ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+
+            # Style the info table
+            info_table = Table(info_data, colWidths=[1.8*inch, 3.6*inch])
+            info_table.setStyle(TableStyle([
+                ('GRID', (0,0), (-1,-1), 1, colors.HexColor("#E0E5F2")),
+                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#F8F9FF")),  # Left column background
+                ('BACKGROUND', (0,0), (-1,-1), colors.white),
+                ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
+                ('FONTSIZE', (0,0), (-1,-1), 9),
+                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#1B254B")),
+                ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor("#1B254B")),
+                ('ALIGN', (0,0), (0,-1), 'LEFT'),
+                ('ALIGN', (1,0), (1,-1), 'LEFT'),
                 ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('TOPPADDING', (0,0), (-1,-1), 20),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 20),
+                ('LEFTPADDING', (0,0), (-1,-1), 10),
+                ('RIGHTPADDING', (0,0), (-1,-1), 10),
+                ('TOPPADDING', (0,0), (-1,-1), 8),
+                ('BOTTOMPADDING', (0,0), (-1,-1), 8),
+                # Color coding for specific rows
+                ('TEXTCOLOR', (1,5), (1,5), integrity_color),  # Integrity score color
+                ('FONTNAME', (1,5), (1,5), 'Helvetica-Bold'),
+                ('TEXTCOLOR', (1,6), (1,6), status_color),  # Overall result color
+                ('FONTNAME', (1,6), (1,6), 'Helvetica-Bold'),
+                ('TEXTCOLOR', (1,7), (1,7), status_color),  # Status color
+                ('FONTNAME', (1,7), (1,7), 'Helvetica-Bold'),
             ]))
-            elements.append(banner_table)
+
+            # Create photo + table layout - improved alignment
+            # Calculate table height based on rows (9 rows * ~20pts each + padding)
+            table_height = len(info_data) * 22
+            
+            if candidate_img:
+                # Create photo cell with proper sizing to match table height
+                photo_label = Paragraph("Candidate Photo", ParagraphStyle('PhotoLabel', parent=styles['Normal'], fontSize=8, alignment=1, textColor=colors.HexColor("#707EAE")))
+                photo_cell = [[candidate_img], [photo_label]]
+                photo_table = Table(photo_cell, colWidths=[1.5*inch], rowHeights=[1.4*inch, 20])
+                photo_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (0,0), 'CENTER'),
+                    ('VALIGN', (0,0), (0,0), 'MIDDLE'),
+                    ('ALIGN', (0,1), (0,1), 'CENTER'),
+                    ('VALIGN', (0,1), (0,1), 'TOP'),
+                    ('TOPPADDING', (0,1), (0,1), 6),
+                ]))
+                combined_data = [[photo_table, info_table]]
+                combined_table = Table(combined_data, colWidths=[1.7*inch, 4.3*inch])
+                combined_table.setStyle(TableStyle([
+                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                    ('ALIGN', (0,0), (0,0), 'CENTER'),
+                    ('LEFTPADDING', (0,0), (0,0), 0),
+                    ('RIGHTPADDING', (0,0), (0,0), 15),
+                ]))
+                elements.append(combined_table)
+            else:
+                # No photo available - just show table with placeholder
+                no_photo_text = Paragraph("No candidate<br/>photo available", ParagraphStyle('NoPhoto', parent=styles['Normal'], fontSize=9, alignment=1, textColor=colors.grey))
+                photo_placeholder = Table([[no_photo_text]], colWidths=[1.5*inch], rowHeights=[table_height])
+                photo_placeholder.setStyle(TableStyle([
+                    ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#F4F7FE")),
+                    ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#E0E5F2")),
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                ]))
+                combined_data = [[photo_placeholder, info_table]]
+                combined_table = Table(combined_data, colWidths=[1.7*inch, 4.3*inch])
+                combined_table.setStyle(TableStyle([
+                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                    ('LEFTPADDING', (0,0), (0,0), 0),
+                    ('RIGHTPADDING', (0,0), (0,0), 15),
+                ]))
+                elements.append(combined_table)
+
             elements.append(Spacer(1, 30))
 
             # 4. MCQ Section
