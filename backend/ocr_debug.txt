@@ -475,3 +475,14 @@
 [2026-04-21 08:53:01.692162+00:00] fitz opened PDF with 1 pages
 [2026-04-21 08:53:13.263327+00:00] Page 0: 831 chars extracted
 [2026-04-21 08:53:13.263917+00:00] OCR complete. Total chars: 832
+[2026-04-23 06:21:08.151652+00:00] Starting PDF Extraction for PAN: JJBPS0859C
+[2026-04-23 06:21:08.154145+00:00] Opened PDF with 1 pages
+[2026-04-23 06:21:08.159806+00:00] pdfplumber skipped: No module named 'pdfplumber'
+[2026-04-23 06:21:08.161486+00:00] PyPDF2 extracted content
+[2026-04-23 06:21:08.162530+00:00] Falling back to OCR step (Scanned PDF)
+[2026-04-23 06:21:20.003560+00:00] Running OCR on rotation 0
+[2026-04-23 06:21:49.051419+00:00] Running OCR on rotation 180
+[2026-04-23 06:22:11.530664+00:00] Running OCR on rotation 90
+[2026-04-23 06:22:31.166021+00:00] Running OCR on rotation 270
+[2026-04-23 06:22:51.206547+00:00] Direct match found at rotation 270
+[2026-04-23 06:22:51.207885+00:00] Match found via OCR on page 0

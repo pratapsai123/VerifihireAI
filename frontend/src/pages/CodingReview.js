@@ -169,6 +169,7 @@ export default function CodingReview() {
     const body = {
       user: {},
       assessment: {
+        assesment_mode: 'multiple',
         role: 'coding',
         number_of_questions: totalQuestions,
         time: msToHHMMSS(totalCodingTimeSeconds * 1000),

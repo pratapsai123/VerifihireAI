@@ -175,7 +175,7 @@ function MultipleChoiceQuestion() {
     }
     if (!filledAnswers[0]?.text || !filledAnswers[1]?.text) {
       // eslint-disable-next-line no-alert
-      alert('Please fill at least option A and option B.');
+      alert('All options must be filled. Please complete the missing ones.');
       return;
     }
     const correct = filledAnswers.find((a) => a.isCorrect);

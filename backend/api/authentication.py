@@ -21,9 +21,8 @@ class DBContextJWTAuthentication(JWTAuthentication):
             
             # Force logout if database identifier doesn't match OR if it's missing (legacy tokens)
             if token_db_id != current_db_id:
-
                 raise InvalidToken({
-                    "detail": "Database context mismatch. Please login again.",
+                    "detail": f"Database context mismatch (Token: {token_db_id}, Server: {current_db_id}). Please login again.",
                     "code": "db_mismatch"
                 })
 

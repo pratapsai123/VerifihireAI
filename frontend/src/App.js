@@ -98,7 +98,12 @@ axios.interceptors.request.use(
 
       const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
       const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
-      const isOnPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
+      const isOnPublicPage = publicRoutes.some(path => {
+        if (['/live-interview', '/ai-interview', '/accept-invite'].includes(path)) {
+          return window.location.pathname === path;
+        }
+        return window.location.pathname.startsWith(path);
+      });
 
       // 🛡️ SECURITY: Only attach token if NOT a public API and NOT on a public candidate page.
       // This prevents "401 Unauthorized" errors when a candidate has an old/expired recruiter token in their browser.
@@ -128,7 +133,12 @@ axios.interceptors.response.use(
         '/book-interview/',
         '/accept-invite'
       ];
-      const isPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
+      const isPublicPage = publicRoutes.some(path => {
+        if (['/live-interview', '/ai-interview', '/accept-invite'].includes(path)) {
+          return window.location.pathname === path;
+        }
+        return window.location.pathname.startsWith(path);
+      });
 
       // ONLY logout and redirect if NOT on a public candidate page
       if (!isPublicPage) {
