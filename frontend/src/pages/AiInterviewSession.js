@@ -932,39 +932,22 @@ const AiInterviewSession = () => {
             currentAudioRef.current = null;
         }
         if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
-        lastSpokenTimeRef.current = Date.now(); // Baseline reset
-        globalSilenceTimerRef.current = setInterval(async () => {
-            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) {
-                lastSpokenTimeRef.current = Date.now(); // Move baseline forward while busy
-                return;
-            }
 
-            if (Date.now() - lastSpokenTimeRef.current > delay) {
-                clearInterval(globalSilenceTimerRef.current);
-                if (nudgeCountRef.current === 0) {
-                    // First nudge
-                    nudgeCountRef.current = 1;
-                    const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
-                    addMessage('ai', nudgeText);
-                    try {
-                        if (assemblyAIRef.current) assemblyAIRef.current.stop();
-                        await speak(nudgeText);
-                        if (startListeningRef.current) startListeningRef.current(); // Restart with a fresh 15s timer via ref
-                    } catch (e) { }
-                } else {
-                    // Second nudge = AUTO SKIP
-                    const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
-                    addMessage('ai', skipText);
-                    try {
-                        if (assemblyAIRef.current) assemblyAIRef.current.stop();
-                        await speak(skipText);
-                        // Force submission with a "skipped" tag
-                        if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
-                    } catch (e) { }
-                }
-            }
-        }, 1000);
-    }, [addMessage, speak]);
+        const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
+        addMessage('ai', finishMessage);
+        await speak(finishMessage);
+        axios.patch(`${API_BASE_URL}/ai-candidates/public/${token}/status/`, { status: 'Completed' }).catch(console.error);
+
+        // Mark as completed locally to prevent re-opening link
+        localStorage.setItem(`interview_completed_${token}`, 'true');
+        
+        // Clear saved progress to prevent stale data on re-interview
+        localStorage.removeItem(`interview_progress_${token}`);
+        console.log("✅ [Cleanup] Interview progress cleared from localStorage");
+
+        setIsProcessing(true);
+        setAiStatus("Session Finished");
+    }, [token, speak, addMessage]);
 
     const startListening = useCallback(async () => {
         if (userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
@@ -1293,7 +1276,7 @@ const AiInterviewSession = () => {
                 try { assemblyAIRef.current.stop(); } catch (e) { }
             }
         };
-    }, [userInputMode, startSilenceWatchdog]);
+    }, [userInputMode]);
 
     const handleAnswerSubmission = useCallback(async (answer, retryCount = 0) => {
         if (!isFullscreenRef.current) {
