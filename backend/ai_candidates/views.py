@@ -187,7 +187,7 @@ class BulkInviteView(APIView):
                     batch_id=batch_id,
                     batch_name=batch_name,
                 )
-                link = f"https://verifihireai.com/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
