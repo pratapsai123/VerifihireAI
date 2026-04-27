@@ -375,6 +375,9 @@ export default function CodingQuestionForm() {
     if (ms == null) {
       setTimeError('Invalid time (max 23:59:59)');
       update('time_limit_ms', null);
+    } else if (ms < 300000) {
+      setTimeError('Time limit must be at least 00:05:00');
+      update('time_limit_ms', ms);
     } else {
       setTimeError('');
       update('time_limit_ms', ms);
@@ -456,6 +459,8 @@ export default function CodingQuestionForm() {
         errors.time_limit_ms = timeError;
       } else if (form.time_limit_ms == null) {
         errors.time_limit_ms = 'Invalid time format';
+      } else if (form.time_limit_ms < 300000) {
+        errors.time_limit_ms = 'Time limit must be at least 00:05:00';
       }
 
       if (form.memory_limit_mb == null || form.memory_limit_mb < 32) {
@@ -749,16 +754,7 @@ export default function CodingQuestionForm() {
                   </>
                 )}
 
-                <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Hash size={16} style={{marginRight: '6px'}}/> Custom Assessment ID</div>
-                  <input
-                    value={form.custom_assessment_id ?? ''}
-                    onChange={(e) => update('custom_assessment_id', e.target.value ? Number(e.target.value) : null)}
-                    className="coding-input"
-                    style={{ height: '48px' }}
-                    placeholder="optional snapshot id"
-                  />
-                </label>
+
               </div>
             </div>
 
@@ -784,7 +780,7 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Memory (MB) <span className="required-star">*</span></div>
+                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Execution RAM Limit (MB) <span className="required-star">*</span></div>
                   <input
                     type="number"
                     value={form.memory_limit_mb}
@@ -798,7 +794,7 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Active Status <span className="required-star">*</span></div>
+                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Ready for Use <span className="required-star">*</span></div>
                   <select 
                     value={form.is_active ? 'yes' : 'no'} 
                     onChange={(e) => update('is_active', e.target.value === 'yes')} 
@@ -806,8 +802,8 @@ export default function CodingQuestionForm() {
                     style={{ height: '48px' }}
                     required
                   >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option value="yes">Yes (Live)</option>
+                    <option value="no">No (Draft)</option>
                   </select>
                 </label>
               </div>

@@ -662,8 +662,8 @@ function ReviewPage() {
       alert('Objective Time must be greater than 00:00:00 when objective questions exist.');
       return;
     }
-    if (codingCount > 0 && codSec <= 0) {
-      alert('Coding Time must be greater than 00:00:00 when coding questions exist.');
+    if (codingCount > 0 && codSec < 300) {
+      alert('Coding Time must be at least 00:05:00 when coding questions exist.');
       return;
     }
 

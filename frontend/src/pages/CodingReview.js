@@ -153,6 +153,9 @@ export default function CodingReview() {
           if (ms == null) {
             item.timeError = 'Invalid time (max 23:59:59)';
             item.time_limit_ms = null;
+          } else if (ms < 300000) {
+            item.timeError = 'Min 5 minutes (00:05:00)';
+            item.time_limit_ms = ms;
           } else {
             item.timeError = '';
             item.time_limit_ms = ms;
@@ -192,8 +195,8 @@ export default function CodingReview() {
       setError('No coding questions selected.');
       return;
     }
-    if (questions.some(q => q.timeError || !q.time_limit_ms)) {
-      setError('Please fix the errors in time allocation before proceeding.');
+    if (questions.some(q => q.timeError || !q.time_limit_ms || q.time_limit_ms < 300000)) {
+      setError('Each coding question must have at least 5 minutes allocated.');
       return;
     }
 
