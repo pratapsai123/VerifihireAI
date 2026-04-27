@@ -20,7 +20,7 @@ function getStatusMeta(status) {
     if (status === 'selected' || status === 'COMPLETED') {
         return { label: 'Qualified', className: 'ok' };
     }
-    if (status === 'rejected') {
+    if (status === 'rejected' || status === 'hold' || status === 'HOLD') {
         return { label: 'Not Qualified', className: 'bad' };
     }
     if (status === 'sent') {
@@ -38,6 +38,7 @@ function getStatusMeta(status) {
 function getSortValue(row, key) {
     if (key === 'candidate') return (row.candidate?.name || '').toLowerCase();
     if (key === 'details') return (row.assessment?.display_name || row.assessment?.name || '').toLowerCase();
+    if (key === 'sent') return row.created_at ? new Date(row.created_at).getTime() : 0;
     if (key === 'submitted') return row.submitted_at ? new Date(row.submitted_at).getTime() : 0;
     if (key === 'objective') return Number(row.objective_percentage) || 0;
     if (key === 'coding') return Number(row.coding_percentage) || 0;
@@ -111,6 +112,9 @@ export default function Result() {
                 if (statusFilter === 'selected') {
                     return r.status === 'selected' || r.status === 'COMPLETED';
                 }
+                if (statusFilter === 'rejected') {
+                    return r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD';
+                }
                 return r.status === statusFilter;
             });
         }
@@ -121,14 +125,14 @@ export default function Result() {
     const overviewMetrics = useMemo(() => {
         const total = filtered.length;
         const qualified = filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED').length;
-        const notQualified = filtered.filter((r) => r.status === 'rejected').length;
+        const notQualified = filtered.filter((r) => r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD').length;
         const attempted = filtered.filter((r) => r.status !== 'not_attempted' && r.status !== 'sent').length;
         return { total, qualified, notQualified, attempted };
     }, [filtered]);
 
     const segmentedResults = useMemo(() => {
         if (segment === 'qualified') return filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED');
-        if (segment === 'not_qualified') return filtered.filter((r) => r.status === 'rejected');
+        if (segment === 'not_qualified') return filtered.filter((r) => r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD');
         if (segment === 'not_attempted') return filtered.filter((r) => r.status === 'not_attempted');
         return filtered;
     }, [filtered, segment]);
@@ -142,7 +146,7 @@ export default function Result() {
             const integrity = Number(r.integrity?.integrity_score) || 0;
             const status = r.status;
 
-            if (status === 'rejected') {
+            if (status === 'rejected' || status === 'hold' || status === 'HOLD') {
                 const reasons = [];
                 if (score < 50) reasons.push('Low final score');
                 if (integrity < 60) reasons.push('Integrity concerns');
@@ -495,6 +499,7 @@ export default function Result() {
                                     <tr>
                                         <th onClick={() => handleSort('candidate')} className="sortable-th">Candidate {sortMarker('candidate')}</th>
                                         <th onClick={() => handleSort('details')} className="sortable-th">Details {sortMarker('details')}</th>
+                                        <th onClick={() => handleSort('sent')} className="sortable-th">Sent {sortMarker('sent')}</th>
                                         <th onClick={() => handleSort('submitted')} className="sortable-th">Submitted {sortMarker('submitted')}</th>
                                         <th onClick={() => handleSort('objective')} className="sortable-th">Objective {sortMarker('objective')}</th>
                                         <th onClick={() => handleSort('coding')} className="sortable-th">Coding {sortMarker('coding')}</th>
@@ -515,8 +520,12 @@ export default function Result() {
                                                 </td>
                                                 <td>{r.assessment?.display_name || r.assessment?.name || '-'}</td>
                                                 <td>
-                                                    <div className="cell-title">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '-'}</div>
-                                                    <div className="cell-sub">{r.submitted_at ? new Date(r.submitted_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</div>
+                                                    <div className="cell-title">{r.created_at ? new Date(r.created_at).toLocaleDateString() : '-'}</div>
+                                                    <div className="cell-sub">{r.created_at ? new Date(r.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="cell-title">{(r.status === 'pending' || !r.submitted_at) ? '-' : new Date(r.submitted_at).toLocaleDateString()}</div>
+                                                    <div className="cell-sub">{(r.status === 'pending' || !r.submitted_at) ? '' : new Date(r.submitted_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                                                 </td>
                                                 <td>
                                                     <div className="cell-title">{r.objective_score} / {r.objective_total}</div>

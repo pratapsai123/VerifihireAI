@@ -1892,7 +1892,8 @@ def results_overview_view(request):
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                         'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
-                    }
+                    },
+                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
                 }
             )
 
