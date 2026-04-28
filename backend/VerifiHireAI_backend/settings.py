@@ -126,7 +126,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'db'),
+        'NAME': os.environ.get('DB_NAME', 'saipratapreddy'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
@@ -289,3 +289,50 @@ SIMPLE_JWT = {
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
 }
+
+SECURITY_SIGNATURE_RULES = [
+    {
+        "label": "AnyDesk",
+        "signatures": ["anydesk"],
+        "pathSignatures": ["anydesk.exe", "/anydesk", "com.philandro.anydesk"],
+        "serviceProcesses": ["ad_svc.exe", "anydesk service"],
+        "activeIndicators": {
+            "listenPorts": [7070],
+            "activeConnectionKeywords": ["anydesk"],
+            "windowTitles": ["anydesk"],
+        },
+    },
+    {
+        "label": "TeamViewer",
+        "signatures": ["teamviewer"],
+        "pathSignatures": ["teamviewer.exe", "/teamviewer", "com.teamviewer"],
+        "serviceProcesses": ["teamviewer_service.exe", "tv_x64.exe"],
+        "activeIndicators": {
+            "listenPorts": [5938],
+            "activeConnectionKeywords": ["teamviewer"],
+            "windowTitles": ["teamviewer"],
+        },
+    },
+    {
+        "label": "UltraViewer",
+        "signatures": ["ultraviewer"],
+        "pathSignatures": ["ultraviewer.exe", "/ultraviewer"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "listenPorts": [],
+            "activeConnectionKeywords": ["ultraviewer"],
+            "windowTitles": ["ultraviewer"],
+        },
+    },
+    {
+        "label": "Chrome Remote Desktop",
+        "signatures": ["remoting_host", "chromoting"],
+        "pathSignatures": ["remoting_host.exe", "/chrome-remote-desktop", "chromoting"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "listenPorts": [],
+            "activeConnectionKeywords": ["remoting_host", "chromoting"],
+            "windowTitles": ["chrome remote desktop"],
+        },
+    },
+]

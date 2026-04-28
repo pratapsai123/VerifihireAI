@@ -9,6 +9,7 @@ import Editor from "@monaco-editor/react";
 import '../styles/Dashboard.css';
 
 import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
+import { logCandidateActivity } from '../utils/activityLogger';
 
 
 
@@ -1267,6 +1268,7 @@ const AiTakeAssessment = () => {
             // after the video element is rendered
 
             setIsStarted(true);
+            logCandidateActivity(token, 'AI Assessment Started', 'Candidate started the AI-proctored assessment.');
 
 
 
@@ -2130,6 +2132,8 @@ const AiTakeAssessment = () => {
 
             });
 
+            logCandidateActivity(token, 'AI Assessment Submitted', 'AI Assessment completed and submitted successfully.');
+
             // Mark as completed locally to prevent re-opening link later
 
             localStorage.setItem(`assessment_completed_${token}`, 'true');
@@ -2285,6 +2289,8 @@ const AiTakeAssessment = () => {
 
 
                 setWizardStep(2); // Success
+
+                logCandidateActivity(token, 'AI Interview Started', 'Candidate passed proctoring check and started the AI Interview.');
 
                 setTimeout(() => {
 

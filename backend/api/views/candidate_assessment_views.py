@@ -1892,7 +1892,8 @@ def results_overview_view(request):
                     'integrity': {
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                         'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
-                    }
+                    },
+                    'activity_logs': inv.activity_logs
                 }
             )
 
@@ -2068,7 +2069,8 @@ def results_overview_view(request):
                     'integrity': {
                         'integrity_score': None,
                         'warning_logs': []
-                    }
+                    },
+                    'activity_logs': inv.activity_logs
                 })
 
         # Re-sort combined results by submitted_at (fallback to created_at for invites)
@@ -2696,3 +2698,29 @@ def verify_pan_backend_view(request):
             'success': False,
             'error': f'Failed to verify PAN: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def log_candidate_activity_view(request, token):
+    try:
+        invitation = CandidateInvitation.objects.get(token=token, is_deleted=False)
+        action = request.data.get('action')
+        details = request.data.get('details', '')
+        
+        if action:
+            log_entry = {
+                'timestamp': timezone.now().isoformat(),
+                'action': action,
+                'details': details
+            }
+            logs = list(invitation.activity_logs) if isinstance(invitation.activity_logs, list) else []
+            logs.append(log_entry)
+            invitation.activity_logs = logs
+            invitation.save(update_fields=['activity_logs'])
+            
+        return Response({'status': 'logged'})
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invalid token'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

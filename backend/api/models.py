@@ -855,6 +855,8 @@ class CandidateInvitation(models.Model):
     )
     last_error = models.TextField(blank=True, null=True)
 
+    activity_logs = models.JSONField(default=list, blank=True, help_text="List of candidate activities (opened link, precheck passed, etc.)")
+
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -1637,4 +1639,47 @@ class ContactSubmission(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.subject} ({self.created_at.strftime('%Y-%m-%d %H:%M')})"
+
+
+class SecuritySession(models.Model):
+    SESSION_TYPE_CHOICES = [
+        ('assessment', 'Assessment'),
+        ('interview', 'Interview'),
+        ('ai_assessment', 'AI Assessment'),
+        ('ai_interview', 'AI Interview'),
+    ]
+    STATUS_CHOICES = [
+        ('SAFE', 'SAFE'),
+        ('VIOLATION', 'VIOLATION'),
+    ]
+    ACTION_CHOICES = [
+        ('CONTINUE', 'CONTINUE'),
+        ('STOP', 'STOP'),
+    ]
+
+    session_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
+    token = models.CharField(max_length=128, db_index=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True, db_index=True)
+    session_type = models.CharField(max_length=32, choices=SESSION_TYPE_CHOICES, default='assessment')
+    status = models.CharField(max_length=16, choices=STATUS_CHOICES, default='SAFE')
+    action = models.CharField(max_length=16, choices=ACTION_CHOICES, default='CONTINUE')
+    blocked_app = models.CharField(max_length=128, blank=True, null=True)
+    blocked_process_name = models.CharField(max_length=255, blank=True, null=True)
+    blocked_app_path = models.TextField(blank=True, null=True)
+    reason = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    last_heartbeat = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['token']),
+            models.Index(fields=['user_id']),
+            models.Index(fields=['session_type', 'created_at']),
+        ]
+
+    def __str__(self):
+        return f"SecuritySession({self.session_id}, {self.session_type}, {self.action})"
 

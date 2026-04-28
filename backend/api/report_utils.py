@@ -38,7 +38,7 @@ from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
     CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog,
-    CodingSubmission
+    CodingSubmission, SecuritySession
 )
 from .ocr_utils import pdf_page_to_png_bytes
 
@@ -958,6 +958,27 @@ def generate_candidate_report(submission_id):
 
     story.append(_kv_table(results_data, styles))
     story.append(Spacer(1, 12))
+
+    # ════════════════════════════════════════════════════════════════════════
+    # Desktop Security Monitoring
+    # ════════════════════════════════════════════════════════════════════════
+    if inv and inv.token:
+        security_session = SecuritySession.objects.filter(token=str(inv.token)).order_by('-created_at').first()
+        story.append(Paragraph('Desktop Security Monitoring', styles['SectionHeader']))
+        if security_session:
+            sec_data = [
+                _info_row('Agent Session ID', str(security_session.session_id), styles),
+                _info_row('Final Action', security_session.action, styles),
+                _info_row('Last Security Status', security_session.status, styles),
+                _info_row('Detected Remote Tool', security_session.blocked_app or '-', styles),
+                _info_row('Detected Process', security_session.blocked_process_name or '-', styles),
+                _info_row('Detected Path', security_session.blocked_app_path or '-', styles),
+                _info_row('Policy Decision Reason', security_session.reason or '-', styles),
+            ]
+            story.append(_kv_table(sec_data, styles))
+        else:
+            story.append(Paragraph('No desktop monitoring session recorded for this submission.', styles['Normal']))
+        story.append(Spacer(1, 12))
 
     # ════════════════════════════════════════════════════════════════════════
     # 4. TYPING GAP ANALYSIS

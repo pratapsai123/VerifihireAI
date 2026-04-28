@@ -7,6 +7,10 @@ export const ROUTES = {
   AI_INTERVIEW_SESSION: '/ai-interview-session/:token',
   TAKE_AI_ASSESSMENT: '/take-ai-assessment/:token',
   TAKE_ASSESSMENT: '/take-assessment/:token',
+  PRECHECK: '/precheck/:token',
+  INVITE: '/invite/:token',
+  INTERVIEW_INVITE: '/interview/:token',
+  SESSION_TERMINATED: '/session-terminated',
   RESULT: '/result/:token',
   
   // Protected Routes

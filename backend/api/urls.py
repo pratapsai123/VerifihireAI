@@ -67,6 +67,7 @@ urlpatterns = [
     path('invitations/public/<uuid:token>/result/', views.get_invitation_result_view, name='get_invitation_result'),
     path('invitations/public/<uuid:token>/rating/', views.submit_rating_view, name='submit_rating'),
     path('invitations/public/<uuid:token>/integrity/', views.update_standard_integrity_view, name='update_standard_integrity'),
+    path('invitations/public/<uuid:token>/log/', views.log_candidate_activity_view, name='log_candidate_activity'),
     path('candidate-details/', views.save_all_candidate_details_view, name='save_candidate_details'),
     path('candidate-details/verify-pan/', views.verify_pan_backend_view, name='verify_pan_backend'),
     path('candidate-details/<str:token>/', views.get_candidate_details_view, name='get_candidate_details'),
@@ -112,6 +113,11 @@ urlpatterns = [
     path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
     path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
     path('contact/', views.contact_us_view, name='contact_us'),
+    path('security-session/start', views.start_security_session_view, name='security_session_start'),
+    path('security-check', views.security_check_view, name='security_check'),
+    path('security-heartbeat', views.security_heartbeat_view, name='security_heartbeat'),
+    path('security-session/<uuid:session_id>/status', views.security_session_status_view, name='security_session_status'),
+    path('security-signatures', views.security_signatures_view, name='security_signatures'),
 
 ]
 

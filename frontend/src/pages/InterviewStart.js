@@ -182,6 +182,9 @@ const InterviewStart = () => {
                 status: 'interview_started'
             };
             sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
+            import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+                logCandidateActivity(token, 'Live Interview Started', 'Candidate started the live/AI interview session.');
+            });
             navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
         } catch (err) {
             if (err.response?.data?.time_locked) {

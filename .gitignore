@@ -1,5 +1,3 @@
-
-/certbot/
 # Sync .project/sourceTexts/ folder (source text files)
 
 # Don't sync user-specific SQLite databases
@@ -14,21 +12,6 @@
 .project/localProjectSettings.json
 .project/localProjectSwap.json
 copilot-messages.log
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.env
-
-# Debug/Logs
-*.log
-backend/api_debug.txt
-backend/ocr_debug.txt
 
 # Archive formats
 *.zip
@@ -63,4 +46,4 @@ backend/ocr_debug.txt
 
 # System files
 .DS_Store
-.project/attachments/files/**certbot/
+.project/attachments/files/**

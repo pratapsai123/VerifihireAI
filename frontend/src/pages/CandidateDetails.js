@@ -708,6 +708,11 @@ const CandidateDetails = ({ token, onComplete }) => {
             };
             localStorage.setItem(`candidate_details_${token}`, JSON.stringify(leanData));
 
+            // Log activity before proceeding
+            import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+              logCandidateActivity(token, 'Assessment Started', 'Candidate submitted details and started the assessment.');
+            });
+
             // Call onComplete callback to proceed to exam
             if (onComplete) {
               onComplete({ ...data, snapshot, token, id: response.data.id });

@@ -77,6 +77,7 @@ export default function Result() {
     const [segment, setSegment] = useState('all');
     const [sortConfig, setSortConfig] = useState({ key: 'submitted', direction: 'desc' });
     const [quickViewRow, setQuickViewRow] = useState(null);
+    const [isShowingLogs, setIsShowingLogs] = useState(false);
 
     useEffect(() => {
         if (isOverview) return;
@@ -208,8 +209,8 @@ export default function Result() {
         return sortConfig.direction === 'asc' ? '↑' : '↓';
     };
 
-    const load = useCallback(async () => {
-        setLoading(true);
+    const load = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
         setError('');
         try {
             if (isOverview) {
@@ -239,9 +240,9 @@ export default function Result() {
                 }
             }
         } catch (e) {
-            setError(e?.response?.data?.error || e?.message || 'Failed to load');
+            if (!silent) setError(e?.response?.data?.error || e?.message || 'Failed to load');
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
         }
     }, [isOverview, token, fromDate, toDate]);
 
@@ -278,6 +279,29 @@ export default function Result() {
     useEffect(() => {
         load();
     }, [load]);
+
+    // Auto-refresh when viewing logs to show "instant" updates
+    useEffect(() => {
+        if (!isOverview || !isShowingLogs || !quickViewRow) return;
+
+        const pollTimer = setInterval(() => {
+            load(true);
+        }, 5000); // Poll every 5 seconds
+
+        return () => clearInterval(pollTimer);
+    }, [isOverview, isShowingLogs, quickViewRow, load]);
+
+    // Sync quickViewRow with the latest data from overview when it refreshes
+    useEffect(() => {
+        if (!quickViewRow) return;
+        const updatedRow = overview.find(r => 
+            (r.invitation_id && r.invitation_id === quickViewRow.invitation_id) || 
+            (r.id && r.id === quickViewRow.id)
+        );
+        if (updatedRow && JSON.stringify(updatedRow.activity_logs) !== JSON.stringify(quickViewRow.activity_logs)) {
+            setQuickViewRow(updatedRow);
+        }
+    }, [overview, quickViewRow]);
 
     if (!isOverview) {
         return (
@@ -714,45 +738,143 @@ export default function Result() {
                 <div className="quickview-overlay" onClick={() => setQuickViewRow(null)}>
                     <div className="quickview-panel" onClick={(e) => e.stopPropagation()}>
                         <div className="quickview-head">
-                            <h3>Candidate Data Details</h3>
-                            <button type="button" className="quickview-close" onClick={() => setQuickViewRow(null)}>✕</button>
+                            <h3>{isShowingLogs ? 'Activity Logs' : 'Candidate Data Details'}</h3>
+                            <button type="button" className="quickview-close" onClick={() => { setQuickViewRow(null); setIsShowingLogs(false); }}>✕</button>
                         </div>
                         <div className="quickview-subhead">
                             <strong>{quickViewRow.candidate?.name || quickViewRow.full_name || 'Candidate'}</strong>
                             <span>{quickViewRow.candidate?.email || quickViewRow.email || 'No email'}</span>
                         </div>
-                        <div className="quickview-grid">
-                            {[
-                                { label: 'ID: Submission ID', value: quickViewRow.submission_id },
-                                { label: 'ID: Invitation ID', value: quickViewRow.invitation_id },
-                                { label: 'ID: Candidate ID', value: quickViewRow.candidate?.id || quickViewRow.candidate_id },
-                                { label: 'Workflow: Raw Status', value: quickViewRow.status },
-                                { label: 'Workflow: Delete Requested', value: quickViewRow.delete_requested ? 'Yes' : 'No' },
-                                { label: 'Workflow: Report Available', value: quickViewRow.submission_id ? 'Yes' : 'No' },
-                                { label: 'Scoring: Objective Weightage', value: hasValue(quickViewRow.assessment?.weightage_objective) ? `${quickViewRow.assessment.weightage_objective}%` : null },
-                                { label: 'Scoring: Coding Weightage', value: hasValue(quickViewRow.assessment?.weightage_coding) ? `${quickViewRow.assessment.weightage_coding}%` : null },
-                                { label: 'Scoring: Objective Marks Missing', value: hasValue(quickViewRow.objective_total) && hasValue(quickViewRow.objective_score) ? `${Math.max(0, Number(quickViewRow.objective_total) - Number(quickViewRow.objective_score))}` : null },
-                                { label: 'Scoring: Coding Marks Missing', value: hasValue(quickViewRow.coding_total) && hasValue(quickViewRow.coding_score) ? `${Math.max(0, Number(quickViewRow.coding_total) - Number(quickViewRow.coding_score))}` : null },
-                                { label: 'Integrity: Warnings Count', value: quickViewRow.integrity?.warning_logs?.length ? `${quickViewRow.integrity.warning_logs.length}` : '0' },
-                                {
-                                    label: 'Integrity: Warning Types', value: Array.isArray(quickViewRow.integrity?.warning_logs) && quickViewRow.integrity.warning_logs.length > 0
-                                        ? [...new Set(quickViewRow.integrity.warning_logs.map((w) => w?.event_type || w?.type).filter(Boolean))].join(', ')
-                                        : null
-                                },
-                                { label: 'Meta: Created At', value: quickViewRow.created_at ? new Date(quickViewRow.created_at).toLocaleString() : null },
-                                { label: 'Meta: Updated At', value: quickViewRow.updated_at ? new Date(quickViewRow.updated_at).toLocaleString() : null },
-                            ]
-                                .filter((item) => hasValue(item.value))
-                                .map((item) => (
-                                    <div key={item.label}>
-                                        <span>{item.label}</span>
-                                        <strong>{item.value}</strong>
+                        
+                        {isShowingLogs ? (
+                            <div className="quickview-logs" style={{ padding: '0 24px', flex: 1, overflowY: 'auto' }}>
+                                {quickViewRow.activity_logs && quickViewRow.activity_logs.length > 0 ? (
+                                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+                                        {quickViewRow.activity_logs.map((log, i) => {
+                                            const isBlocked = log.action?.toLowerCase().includes('blocked');
+                                            const isPassed = log.action?.toLowerCase().includes('passed') || log.action?.toLowerCase().includes('submitted');
+                                            const isViolation = log.action?.toLowerCase().includes('violation') || log.action?.toLowerCase().includes('alert');
+                                            
+                                            let icon = '🔵';
+                                            let bgColor = '#f8fafc';
+                                            let textColor = '#1e293b';
+                                            let borderColor = '#e2e8f0';
+
+                                            if (isBlocked || isViolation) {
+                                                icon = '⚠️';
+                                                bgColor = '#fef2f2';
+                                                textColor = '#991b1b';
+                                                borderColor = '#fecaca';
+                                            } else if (isPassed) {
+                                                icon = '✅';
+                                                bgColor = '#f0fdf4';
+                                                textColor = '#166534';
+                                                borderColor = '#bbf7d0';
+                                            } else if (log.action === 'Opened Link') {
+                                                icon = '🔗';
+                                            }
+
+                                            return (
+                                                <li key={i} style={{ 
+                                                    padding: '14px', 
+                                                    marginBottom: '12px',
+                                                    borderRadius: '8px',
+                                                    background: bgColor,
+                                                    border: `1px solid ${borderColor}`,
+                                                    boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                                                }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                                                        <span style={{ fontSize: '11px', fontWeight: '600', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                                                            {new Date(log.timestamp).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
+                                                        </span>
+                                                        <span style={{ fontSize: '16px' }}>{icon}</span>
+                                                    </div>
+                                                    <strong style={{ display: 'block', color: textColor, fontSize: '14px' }}>{log.action}</strong>
+                                                    {log.details && (
+                                                        <div style={{ 
+                                                            fontSize: '13px', 
+                                                            color: isBlocked || isViolation ? '#b91c1c' : '#475569', 
+                                                            marginTop: '6px',
+                                                            paddingTop: '6px',
+                                                            borderTop: `1px dashed ${borderColor}`
+                                                        }}>
+                                                            {log.details}
+                                                        </div>
+                                                    )}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                ) : (
+                                    <div style={{ padding: '40px 0', color: '#64748b', textAlign: 'center' }}>
+                                        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📋</div>
+                                        <div style={{ fontWeight: '500' }}>No activity logs found for this candidate.</div>
                                     </div>
-                                ))}
-                        </div>
-                        <div className="quickview-footer">
-                            <button type="button" className="quickview-close-btn" onClick={() => setQuickViewRow(null)}>
-                                Close Details
+                                )}
+                            </div>
+                        ) : (
+                            <div className="quickview-grid">
+                                {[
+                                    { label: 'ID: Submission ID', value: quickViewRow.submission_id },
+                                    { label: 'ID: Invitation ID', value: quickViewRow.invitation_id },
+                                    { label: 'ID: Candidate ID', value: quickViewRow.candidate?.id || quickViewRow.candidate_id },
+                                    { label: 'Workflow: Raw Status', value: quickViewRow.status },
+                                    { label: 'Workflow: Delete Requested', value: quickViewRow.delete_requested ? 'Yes' : 'No' },
+                                    { label: 'Workflow: Report Available', value: quickViewRow.submission_id ? 'Yes' : 'No' },
+                                    { label: 'Scoring: Objective Weightage', value: hasValue(quickViewRow.assessment?.weightage_objective) ? `${quickViewRow.assessment.weightage_objective}%` : null },
+                                    { label: 'Scoring: Coding Weightage', value: hasValue(quickViewRow.assessment?.weightage_coding) ? `${quickViewRow.assessment.weightage_coding}%` : null },
+                                    { label: 'Scoring: Objective Marks Missing', value: hasValue(quickViewRow.objective_total) && hasValue(quickViewRow.objective_score) ? `${Math.max(0, Number(quickViewRow.objective_total) - Number(quickViewRow.objective_score))}` : null },
+                                    { label: 'Scoring: Coding Marks Missing', value: hasValue(quickViewRow.coding_total) && hasValue(quickViewRow.coding_score) ? `${Math.max(0, Number(quickViewRow.coding_total) - Number(quickViewRow.coding_score))}` : null },
+                                    { label: 'Integrity: Warnings Count', value: quickViewRow.integrity?.warning_logs?.length ? `${quickViewRow.integrity.warning_logs.length}` : '0' },
+                                    {
+                                        label: 'Integrity: Warning Types', value: Array.isArray(quickViewRow.integrity?.warning_logs) && quickViewRow.integrity.warning_logs.length > 0
+                                            ? [...new Set(quickViewRow.integrity.warning_logs.map((w) => w?.event_type || w?.type).filter(Boolean))].join(', ')
+                                            : null
+                                    },
+                                    { label: 'Meta: Created At', value: quickViewRow.created_at ? new Date(quickViewRow.created_at).toLocaleString() : null },
+                                    { label: 'Meta: Updated At', value: quickViewRow.updated_at ? new Date(quickViewRow.updated_at).toLocaleString() : null },
+                                ]
+                                    .filter((item) => hasValue(item.value))
+                                    .map((item) => (
+                                        <div key={item.label}>
+                                            <span>{item.label}</span>
+                                            <strong>{item.value}</strong>
+                                        </div>
+                                    ))}
+                            </div>
+                        )}
+                        <div className="quickview-footer" style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 24px', borderTop: '1px solid #e2e8f0' }}>
+                            <button 
+                                type="button" 
+                                className="quickview-close-btn" 
+                                style={{ 
+                                    background: '#eff6ff', 
+                                    color: '#1d4ed8', 
+                                    border: '1px solid #bfdbfe',
+                                    fontWeight: '600',
+                                    padding: '8px 16px',
+                                    borderRadius: '6px'
+                                }} 
+                                onClick={() => setIsShowingLogs(!isShowingLogs)}
+                            >
+                                {isShowingLogs ? '📊 View Data Details' : '📋 View Activity Logs'}
+                            </button>
+                            <button 
+                                type="button" 
+                                className="quickview-close-btn" 
+                                style={{ 
+                                    background: '#fee2e2', 
+                                    color: '#b91c1c', 
+                                    border: '2px solid #ef4444',
+                                    fontWeight: '700',
+                                    padding: '8px 24px',
+                                    borderRadius: '6px',
+                                    textTransform: 'uppercase',
+                                    fontSize: '13px'
+                                }}
+                                onClick={() => { setQuickViewRow(null); setIsShowingLogs(false); }}
+                            >
+                                Close
                             </button>
                         </div>
                     </div>
