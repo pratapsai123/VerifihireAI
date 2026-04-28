@@ -1,11 +1,13 @@
-import os
-import io
 import re
 import os
+import io
 import numpy as np
 import fitz  # PyMuPDF
 import logging
 import traceback
+import cv2
+import requests
+import base64
 from PIL import Image
 
 # Global variable for the reader
@@ -97,7 +99,9 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
                     continue
                 
                 log(f"Running OCR on rotation {rotation}")
-                results = reader.readtext(image_np, detail=0) 
+                # We use detail=1 to get bounding boxes, which might help in name extraction
+                results_with_detail = reader.readtext(image_np)
+                results = [res[1] for res in results_with_detail]
                 text = " ".join(results).upper()
                 full_log += f" {text}"
 
@@ -132,6 +136,189 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
     except Exception as e:
         log(f"Image OCR Failed: {e}")
         return f"OCR Failed: {str(e)}", False
+
+def detect_face_in_image(image_file):
+    """
+    Detects human face in the given image file.
+    Accepts file path, bytes, or PIL Image.
+    Returns (bool, int) -> (is_face_detected, face_count)
+    """
+    import cv2
+    import numpy as np
+    from PIL import Image
+    import io
+
+    try:
+        if isinstance(image_file, (bytes, bytearray)):
+            image = Image.open(io.BytesIO(image_file))
+        elif isinstance(image_file, Image.Image):
+            image = image_file
+        elif hasattr(image_file, 'temporary_file_path'):
+            image = Image.open(image_file.temporary_file_path())
+        elif hasattr(image_file, 'read'):
+            image_file.seek(0)
+            image = Image.open(io.BytesIO(image_file.read()))
+            image_file.seek(0)
+        else:
+            image = Image.open(image_file)
+
+        # Convert to BGR for OpenCV
+        if image.mode != "RGB":
+            image = image.convert("RGB")
+        image_np = np.array(image)
+        image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+        gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
+
+        # Load Haar Cascade
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        
+        # Detect faces
+        faces = face_cascade.detectMultiScale(
+            gray,
+            scaleFactor=1.1,
+            minNeighbors=5,
+            minSize=(50, 50) # Increased minSize to ensure face is clear
+        )
+
+        if len(faces) > 0:
+            return True, len(faces)
+        return False, 0
+    except Exception as e:
+        print(f"Face Detection Error: {e}")
+        return False, 0
+
+def register_face_with_deepface(person_id, image_data):
+    """
+    Registers a face with DeepFace DIRECTLY in the backend (no microservice needed).
+    """
+    try:
+        from deepface import DeepFace
+        from django.conf import settings
+        import shutil
+
+        # Setup directory for identity storage
+        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
+        if os.path.exists(identities_dir):
+            shutil.rmtree(identities_dir)
+        os.makedirs(identities_dir, exist_ok=True)
+
+        # Process image data
+        if hasattr(image_data, 'read'):
+            image_data.seek(0)
+            img_bytes = image_data.read()
+            image_data.seek(0)
+            img_path = os.path.join(identities_dir, "canonical.jpg")
+            with open(img_path, "wb") as f:
+                f.write(img_bytes)
+        elif isinstance(image_data, str) and image_data.startswith('data:image'):
+            img_b64 = image_data.split(',', 1)[1]
+            img_bytes = base64.b64decode(img_b64)
+            img_path = os.path.join(identities_dir, "canonical.jpg")
+            with open(img_path, "wb") as f:
+                f.write(img_bytes)
+        else:
+            # Assume it's a file path or bytes
+            img_path = image_data
+
+        # We don't actually need to "register" in a DB here, just ensure a face exists
+        # and we can use it as a reference later.
+        objs = DeepFace.extract_faces(
+            img_path = img_path, 
+            detector_backend = 'retinaface',
+            enforce_detection = True,
+            align = True
+        )
+        
+        if not objs:
+            return {"success": False, "message": "No face detected in the image."}
+
+        return {"success": True, "message": "Face identity established internally."}
+    except Exception as e:
+        print(f"Internal DeepFace Registration Error: {e}")
+        return {"success": False, "message": str(e)}
+
+def verify_face_with_deepface(person_id, snapshot_base64):
+    """
+    Verifies a snapshot against a registered identity DIRECTLY in the backend.
+    """
+    try:
+        from deepface import DeepFace
+        from django.conf import settings
+        
+        # Reference image path
+        ref_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
+        if not os.path.exists(ref_path):
+            return {"verified": False, "message": "No registered identity found for this person."}
+
+        # Current snapshot
+        if ',' in snapshot_base64:
+            snapshot_base64 = snapshot_base64.split(',', 1)[1]
+        
+        snapshot_bytes = base64.b64decode(snapshot_base64)
+        
+        # Save temp snapshot for DeepFace
+        temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_snap_path = os.path.join(temp_dir, f"snap_{person_id}.jpg")
+        with open(temp_snap_path, "wb") as f:
+            f.write(snapshot_bytes)
+
+        # Verification using ArcFace (High accuracy)
+        result = DeepFace.verify(
+            img1_path = ref_path,
+            img2_path = temp_snap_path,
+            model_name = "ArcFace",
+            detector_backend = "retinaface",
+            enforce_detection = True,
+            align = True
+        )
+        
+        # Cleanup temp file
+        if os.path.exists(temp_snap_path):
+            os.remove(temp_snap_path)
+
+        return {
+            "verified": result["verified"],
+            "distance": result["distance"],
+            "threshold": result["threshold"],
+            "model": result["model"],
+            "detector": result["detector_backend"]
+        }
+    except Exception as e:
+        print(f"Internal DeepFace Verification Error: {e}")
+        return {"verified": False, "message": str(e)}
+
+def extract_name_from_text(text):
+    """
+    Heuristic to extract name from PAN card text.
+    PAN text usually follows:
+    INCOME TAX DEPARTMENT
+    NAME
+    FATHER'S NAME
+    DOB
+    PAN
+    """
+    lines = [line.strip() for line in text.split('\n') if line.strip()]
+    if not lines:
+        lines = [line.strip() for line in text.split(' ') if line.strip()]
+
+    # Look for keywords and try to find the line after them
+    keywords = ["INCOME", "TAX", "DEPARTMENT", "GOVT", "INDIA"]
+    
+    # Filter out lines that are just keywords
+    potential_names = []
+    for line in lines:
+        is_keyword = any(kw in line for kw in keywords)
+        is_pan = bool(re.match(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$', line.replace(" ", "")))
+        is_dob = bool(re.search(r'\d{2}/\d{2}/\d{4}', line))
+        
+        if not is_keyword and not is_pan and not is_dob and len(line) > 3:
+            potential_names.append(line)
+
+    if potential_names:
+        # Usually the first non-keyword line is the name
+        return potential_names[0]
+    return "Unknown"
 
 def extract_text_from_pdf(pdf_file, target_pan=None):
     """
