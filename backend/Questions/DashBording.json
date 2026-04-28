@@ -1,1903 +1,2081 @@
-{ 
-  "skill": "DashBording", 
+{
+  "skill": "Dashboarding",
   "questions": [
     {
-    "question": "What is the primary goal of a business dashboard?",
-    "options": {
-      "A": "To show as much data as possible on a single screen.",
-      "B": "To provide a visual overview of key performance indicators (KPIs) for quick decision-making.",
-      "C": "To act as a storage backup for raw Excel files.",
-      "D": "To replace the need for an internet connection."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Using 3D effects on bar and pie charts is highly recommended because it makes the data look more professional.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of the following chart types is best suited for showing a trend over a continuous period of time?",
-    "options": {
-      "A": "Pie Chart",
-      "B": "Line Chart",
-      "C": "Scatter Plot",
-      "D": "Treemap"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which elements are considered 'Chart Junk' that can clutter a dashboard? (Select all that apply)",
-    "options": {
-      "A": "Heavy gridlines",
-      "B": "Unnecessary background images",
-      "C": "Decorative borders",
-      "D": "Clear axes labels"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What does the term 'Data-Ink Ratio' refer to in visualization design?",
-    "options": {
-      "A": "The physical cost of printer ink for a report.",
-      "B": "The ratio of non-redundant data-ink to the total ink used in a graphic.",
-      "C": "The number of colors used in a dashboard.",
-      "D": "The size of the font compared to the size of the chart."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Heat Map' uses color to represent the magnitude of a value across a two-dimensional surface.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are popular 'BI Dashboarding' platforms? (Select all that apply)",
-    "options": {
-      "A": "Tableau",
-      "B": "Power BI",
-      "C": "Google Looker Studio",
-      "D": "Microsoft Word"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is the 'F-Pattern' in the context of dashboard layout?",
-    "options": {
-      "A": "A pattern where the dashboard fails to load.",
-      "B": "The natural way users scan a screen, starting at the top-left and moving across and down.",
-      "C": "A specialized sorting algorithm for data.",
-      "D": "Using only five colors in a dashboard."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which chart type is most effective for comparing the parts of a whole (at a high level)?",
-    "options": {
-      "A": "Scatter Plot",
-      "B": "Pie Chart",
-      "C": "Gantt Chart",
-      "D": "Histogram"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Interactivity' in a dashboard refers to the ability of a user to filter or drill down into the data.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is a 'Slicer' in a dashboard context?",
-    "options": {
-      "A": "A tool for cutting physical paper reports.",
-      "B": "An on-screen button or list used to filter data across multiple visuals.",
-      "C": "A script that deletes old data.",
-      "D": "A way to increase the brightness of the monitor."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Best Practices' for choosing dashboard colors? (Select all that apply)",
-    "options": {
-      "A": "Using high-contrast colors for accessibility (e.g., color blindness)",
-      "B": "Using a single color palette for consistency",
-      "C": "Using bright neon colors for every data point",
-      "D": "Using red/green only for 'bad/good' indicators"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is the purpose of a 'Tooltip'?",
-    "options": {
-      "A": "To fix a technical bug in the software.",
-      "B": "To provide additional context or data when a user hovers over a data point.",
-      "C": "To provide tips on how to use the computer.",
-      "D": "To show the developer's name."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Bullet Graph' is a variation of a bar chart designed to show progress toward a target in a compact space.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'Drill-through' mean in dashboarding?",
-    "options": {
-      "A": "Using a physical drill to access a server rack.",
-      "B": "Clicking a data point to navigate to a separate, detailed report page.",
-      "C": "Scanning the dashboard for errors.",
-      "D": "A way to delete data rows."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these is a risk of having 'Too Many Visuals' on a single dashboard page? (Select all that apply)",
-    "options": {
-      "A": "Information overload for the user",
-      "B": "Slower page loading times",
-      "C": "Decreased visual clarity",
-      "D": "Automatic deletion of the dashboard"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'White Space' (or Negative Space) in design?",
-    "options": {
-      "A": "An area of the dashboard that contains no data or visuals, used to improve readability.",
-      "B": "A screen that fails to load any data.",
-      "C": "A specialized data type for text.",
-      "D": "A hidden folder on the server."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Most dashboards should be designed for the 'Top-Left' corner to hold the most important metric.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is a 'KPI Card' (or Scorecard)?",
-    "options": {
-      "A": "A physical card given to employees.",
-      "B": "A visual that displays a single, high-level number and its comparison to a goal.",
-      "C": "A security ID for the data center.",
-      "D": "A way to count the number of users."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of the following is a 'Categorical' dimension? (Select all that apply)",
-    "options": {
-      "A": "Region",
-      "B": "Product Category",
-      "C": "Customer Name",
-      "D": "Total Sales Amount"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is the primary function of a 'Scatter Plot'?",
-    "options": {
-      "A": "To show a sequence of steps.",
-      "B": "To show the correlation or relationship between two numerical variables.",
-      "C": "To list all items in alphabetical order.",
-      "D": "To show the percentage of a whole."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Treemap' is useful for showing hierarchical data using nested rectangles.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'Dashboard Latency' refer to?",
-    "options": {
-      "A": "The age of the designer.",
-      "B": "The delay between a user interaction (like a filter) and the data updating.",
-      "C": "The total number of columns in the dataset.",
-      "D": "The speed of the network cable."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are common 'Dashboard Personas'? (Select all that apply)",
-    "options": {
-      "A": "Executive (High-level summary)",
-      "B": "Operational (Real-time monitoring)",
-      "C": "Analytical (Exploratory deep-dive)",
-      "D": "Historical (Fiction writer)"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is a 'Contextual Cue' in a dashboard?",
-    "options": {
-      "A": "A loud alarm that sounds when data is low.",
-      "B": "Visual indicators like arrows or color changes that tell the user if a metric is good or bad.",
-      "C": "A specialized software for architects.",
-      "D": "Hiring a person to explain the charts."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: It is best practice to always start the Y-axis of a bar chart at zero.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Visual Hierarchy'?",
-    "options": {
-      "A": "The ranking of employees in the design department.",
-      "B": "The arrangement of visual elements to imply importance (e.g., size, placement, color).",
-      "C": "A security scan of the data visuals.",
-      "D": "A way to count the number of pixels."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which chart type is best for showing a 'Process' flow or drop-off rates between stages?",
-    "options": {
-      "A": "Pie Chart",
-      "B": "Funnel Chart",
-      "C": "Donut Chart",
-      "D": "Line Chart"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Using 'Red' for positive growth and 'Green' for decline is a common best practice.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'Self-Service BI' allow business users to do?",
-    "options": {
-      "A": "Fix their own computer hardware.",
-      "B": "Create and modify their own reports and dashboards without deep technical skills.",
-      "C": "Order their own lunch in the office.",
-      "D": "Write raw SQL code from scratch."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Gestalt Principles' of visual perception? (Select all that apply)",
-    "options": {
-      "A": "Proximity",
-      "B": "Similarity",
-      "C": "Enclosure",
-      "D": "Randomness"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Data Storytelling'?",
-    "options": {
-      "A": "Writing a fictional novel using numbers.",
-      "B": "The practice of building a narrative around data to help users understand context and take action.",
-      "C": "A specialized security scan.",
-      "D": "Hiring a professional actor to read a report."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Gauge Chart' (Speedometer style) is highly space-efficient for dashboards.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which feature allows a user to move from a 'Year' view to a 'Month' view within the same chart?",
-    "options": {
-      "A": "Slicing",
-      "B": "Drill-down",
-      "C": "Pivoting",
-      "D": "Filtering"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'Responsive Design' in dashboards?",
-    "options": {
-      "A": "To ensure the dashboard responds quickly to mouse clicks.",
-      "B": "To ensure the dashboard layout adjusts automatically for different screen sizes (Mobile vs. Desktop).",
-      "C": "To create a dashboard that answers every question automatically.",
-      "D": "To increase the speed of the internet connection."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of the following describes 'Big Data' visualization? (Select all that apply)",
-    "options": {
-      "A": "Using aggregations to summarize millions of rows",
-      "B": "Utilizing real-time streaming data",
-      "C": "Showing every individual data point on a single small chart",
-      "D": "Using sampling to represent a dataset"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is a 'Dashboard Landing Page'?",
-    "options": {
-      "A": "The page where an airplane pilot logs data.",
-      "B": "The initial entry point that provides a high-level summary before navigating to detailed reports.",
-      "C": "A specialized software for architects.",
-      "D": "A page that only appears when a dashboard crashes."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Donut Chart' is essentially a pie chart with a hole in the middle.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Accessibility' features for dashboards? (Select all that apply)",
-    "options": {
-      "A": "High-contrast color modes",
-      "B": "Alt-text for images and charts",
-      "C": "Keyboard navigation support",
-      "D": "Using very small font sizes to fit more data"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Dashboard Governance'?",
-    "options": {
-      "A": "A group of politicians who use BI tools.",
-      "B": "The framework of rules and processes for creating, managing, and securing dashboards.",
-      "C": "A security firewall for graphics.",
-      "D": "Hiring a new manager for the project."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In dashboarding, what is 'Drill-up'?",
-    "options": {
-      "A": "Drilling a hole in the ceiling.",
-      "B": "The process of moving from detailed data back to a higher-level summary.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Scatter plots are excellent for showing trends over time for a single category.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary advantage of 'Linked Filtering' (Cross-filtering)?",
-    "options": {
-      "A": "It creates a link to an external website.",
-      "B": "Selecting a value in one chart automatically filters all other charts on the page.",
-      "C": "It speeds up the database query.",
-      "D": "It deletes duplicate data automatically."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Time' dimensions? (Select all that apply)",
-    "options": {
-      "A": "Fiscal Year",
-      "B": "Quarter",
-      "C": "Month",
-      "D": "Employee ID"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is a 'Sparkline'?",
-    "options": {
-      "A": "A line of actual sparks from a machine.",
-      "B": "A small, simple line graph without axes, usually drawn inside a table cell to show a trend.",
-      "C": "A specialized software for poets.",
-      "D": "A way to backup the SQL code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Legend titles should always be included, even if the chart labels are already clear.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Color Encoding'?",
-    "options": {
-      "A": "Using colors to represent a secret password.",
-      "B": "Using colors to represent data values or categories (e.g., darker shades for higher numbers).",
-      "C": "A security scan of the dashboard.",
-      "D": "Hiring a professional artist."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these describe 'Exploratory' visualization? (Select all that apply)",
-    "options": {
-      "A": "Used to find hidden patterns or insights",
-      "B": "Often used by data analysts",
-      "C": "Meant for quick viewing by a busy CEO",
-      "D": "Typically features many interactive filters"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is a 'Geographic Heat Map'?",
-    "options": {
-      "A": "A map showing the temperature of different countries.",
-      "B": "A map that uses color to show the density or magnitude of data points by location.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "A way to count the number of users."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Pie charts are best used when you have 15 or more categories to compare.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Dashboard Information Density'?",
-    "options": {
-      "A": "The physical weight of the monitor.",
-      "B": "The amount of information provided per unit of screen area.",
-      "C": "A specialized software for architects.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Comparison' chart types? (Select all that apply)",
-    "options": {
-      "A": "Bar Chart",
-      "B": "Column Chart",
-      "C": "Clustered Bar Chart",
-      "D": "Waterfall Chart"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is a 'Static' dashboard?",
-    "options": {
-      "A": "A dashboard that has a lot of electronic noise.",
-      "B": "A fixed report that does not allow for filtering or real-time updates.",
-      "C": "A security scan of the database.",
-      "D": "Hiring a professional actor to read reports."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Sankey Diagrams' are used to visualize the flow of data or resources between stages.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Hover Text' (Alt-text)?",
-    "options": {
-      "A": "Text that literally hovers in the air.",
-      "B": "A description of a visual that is read by screen readers to help visually impaired users.",
-      "C": "A specialized software for poets.",
-      "D": "A way to backup the SQL code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Distribution' chart types? (Select all that apply)",
-    "options": {
-      "A": "Histogram",
-      "B": "Box Plot",
-      "C": "Pie Chart",
-      "D": "Area Chart"
-    },
-    "answer": ["A", "B"]
-  },
-  {
-    "question": "What is 'Dashboard Refresh Rate'?",
-    "options": {
-      "A": "How often the user drinks water while viewing.",
-      "B": "How frequently the dashboard updates to show the most recent data.",
-      "C": "The speed at which the screen flickers.",
-      "D": "The number of hours a team worked."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Dashboard' should ideally answer the user's most important questions in under 10 seconds.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'White Label' dashboarding?",
-    "options": {
-      "A": "Reporting that uses only white paper.",
-      "B": "Software that allows you to remove the developer's branding and add your own.",
-      "C": "A specialized tool for measuring light.",
-      "D": "Hiring a new manager."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In dashboarding, what is 'Drill-down' vs 'Filter'?",
-    "options": {
-      "A": "They are exactly the same thing.",
-      "B": "Drill-down changes the level of detail; Filter hides data that doesn't meet criteria.",
-      "C": "Filter is for beginners; Drill-down for experts.",
-      "D": "Drill-down is 100x faster."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Line charts should never have more than five lines to ensure readability.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these describe 'Automated Insights' in BI tools? (Select all that apply)",
-    "options": {
-      "A": "Using AI to highlight anomalies in data",
-      "B": "Natural Language Generation (NLG) to summarize a chart",
-      "C": "Hiring 100 extra analysts",
-      "D": "Predictive forecasting features"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is a 'Dashboard Widget'?",
-    "options": {
-      "A": "A physical machine in a factory.",
-      "B": "A small, self-contained visual element on a dashboard.",
-      "C": "A security scan for database viruses.",
-      "D": "A way to count the number of characters."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'User Adoption' metric?",
-    "options": {
-      "A": "Adopting a pet for the office.",
-      "B": "The percentage of intended users who actually use the dashboard regularly.",
-      "C": "A specialized software for architects.",
-      "D": "Increasing the speed of the network."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Dashboard' should include every single data point available in the database.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Operational' dashboard characteristics? (Select all that apply)",
-    "options": {
-      "A": "Focus on real-time data",
-      "B": "Used by front-line staff",
-      "C": "Features long-term historical trends",
-      "D": "Monitors active business processes"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "Which Gestalt principle explains why we perceive items placed close to each other as belonging to the same group?",
-    "options": {
-      "A": "Enclosure",
-      "B": "Similarity",
-      "C": "Proximity",
-      "D": "Continuity"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: In a 'Star Schema' data model, the fact table should ideally be hidden from the end-user, and only dimension tables should be used for filtering.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of the following scenarios is best suited for a 'Dual-Axis' chart?",
-    "options": {
-      "A": "Comparing two variables with completely different scales, such as Revenue (Millions) and Profit Margin (%).",
-      "B": "Showing the distribution of a single variable across categories.",
-      "C": "Visualizing a hierarchy of product categories.",
-      "D": "Displaying the ranking of sales reps alphabetically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary risk of using 'Diverging' color scales on a dashboard?",
-    "options": {
-      "A": "They are only visible on high-end monitors.",
-      "B": "If the midpoint is not meaningful (e.g., zero or an average), it can lead to misinterpretation of the data.",
-      "C": "They automatically double the query processing time.",
-      "D": "They force the user to zoom in to see the numbers."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these describe 'Cross-Highlighting' in a BI tool like Power BI?",
-    "options": {
-      "A": "Selecting a data point in one visual filters out all other data in the second visual.",
-      "B": "Selecting a data point in one visual dims the non-related data in the second visual while keeping the total context visible.",
-      "C": "Highlighting a physical piece of paper with a marker.",
-      "D": "Deleting duplicate visuals on the same page."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Small Multiples' chart (Trellis chart) is more effective for comparing trends across 20 categories than a single line chart with 20 overlapping lines.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these factors most significantly impacts dashboard 'Rendering' performance? (Select all that apply)",
-    "options": {
-      "A": "The number of high-cardinality visuals on a single page",
-      "B": "Complex measures or calculated fields being computed on the fly",
-      "C": "The physical weight of the server hosting the database",
-      "D": "Using extremely large uncompressed images as backgrounds"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What does 'Cognitive Load' refer to in dashboard design?",
-    "options": {
-      "A": "The amount of electricity used by the brain to view a screen.",
-      "B": "The total amount of mental effort being used in the working memory to process the dashboard information.",
-      "C": "The speed at which a user can type a SQL query.",
-      "D": "The number of colors used in a single chart."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "When should you use a 'Box Plot' over a 'Histogram'?",
-    "options": {
-      "A": "When you want to see the exact frequency of every single data point.",
-      "B": "When you need to compare the distribution and identify outliers across multiple groups side-by-side.",
-      "C": "When you only have one numerical variable and no categories.",
-      "D": "When you want to show a simple part-to-whole relationship."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Sequential' color scales are best used for categorical data where there is no inherent order between items.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which feature allows a dashboard to 'remember' a specific set of filters applied by a user for future visits?",
-    "options": {
-      "A": "Slicers",
-      "B": "Bookmarks (or Personal Views)",
-      "C": "Drill-through",
-      "D": "Refresh rate"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary benefit of using 'Parameters' in a dashboard?",
-    "options": {
-      "A": "To measure the distance between two charts.",
-      "B": "To allow users to dynamically change inputs in a calculation or filter (e.g., 'What-if' analysis).",
-      "C": "To set the admin password for the report.",
-      "D": "To increase the number of rows the dashboard can display."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In a 'Waterfall' chart, what does the final 'Total' bar represent?",
-    "options": {
-      "A": "The average of all the intermediate changes.",
-      "B": "The net value after all positive and negative increments have been applied to the starting value.",
-      "C": "The total number of hours worked by the team.",
-      "D": "The amount of water remaining in a system."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Using a 'Logarithmic' scale is appropriate when the data has a very narrow range with small differences.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which elements are part of the 'Visual Encoding' process? (Select all that apply)",
-    "options": {
-      "A": "Position",
-      "B": "Length",
-      "C": "Color Hue",
-      "D": "Data Cleaning"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Dashboard Bloat'?",
-    "options": {
-      "A": "When the dashboard physically expands off the monitor.",
-      "B": "The gradual accumulation of too many metrics and charts over time, making the dashboard difficult to use.",
-      "C": "A specialized software for compressing data.",
-      "D": "Hiring too many developers for one project."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of a 'Z-Pattern' in layout design?",
-    "options": {
-      "A": "To sort data from A to Z.",
-      "B": "To follow the eye's path on pages that are not text-heavy, moving from top-left to top-right, then down-left to down-right.",
-      "C": "A specialized security scan for visuals.",
-      "D": "Using only zigzag lines in line charts."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Self-Service BI' can lead to 'Data Silos' if different departments create their own versions of the same metric.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of the following are components of 'Storytelling with Data'? (Select all that apply)",
-    "options": {
-      "A": "The Data",
-      "B": "The Visuals",
-      "C": "The Narrative",
-      "D": "The Database Schema"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What does a 'Bullet Graph' use to provide context to a single measure?",
-    "options": {
-      "A": "A circular gauge with a needle.",
-      "B": "A feature bar, a target line, and qualitative ranges (e.g., poor, good, excellent).",
-      "C": "A scatter plot of all historical data points.",
-      "D": "A pie chart showing the percentage of the goal achieved."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In dashboarding, what is 'Drill-up' intended for?",
-    "options": {
-      "A": "Drilling a hole in the top of the server.",
-      "B": "Aggregating granular data back into a higher-level summary (e.g., from Days to Months).",
-      "C": "A specialized tool for measuring distance.",
-      "D": "Increasing the size of the font for senior management."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: An 'Analytical' dashboard typically requires fewer interactive filters than an 'Executive' dashboard.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Accessibility' best practices? (Select all that apply)",
-    "options": {
-      "A": "Providing a high-contrast mode",
-      "B": "Avoiding reliance on color alone to convey meaning (e.g., using icons)",
-      "C": "Adding descriptive alt-text for screen readers",
-      "D": "Using the smallest font size possible to fit more charts"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Latent' data in a dashboard context?",
-    "options": {
-      "A": "Data that is hidden behind a drill-through or tooltip.",
-      "B": "Data that has been deleted from the database.",
-      "C": "Data that is only visible in the dark mode UI.",
-      "D": "Hiring a new manager to find hidden patterns."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'Rule of Thirds' in dashboard composition?",
-    "options": {
-      "A": "Ensuring only 1/3 of the charts are pie charts.",
-      "B": "Dividing the screen into a 3x3 grid and placing key elements along the lines or intersections.",
-      "C": "Updating the data every three hours.",
-      "D": "Spending 30% of the budget on colors."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Sankey Diagram' is best used for showing how values are distributed across different nodes in a flow.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'White Labeling' in a BI software context?",
-    "options": {
-      "A": "Using only white labels on physical filing cabinets.",
-      "B": "The ability to remove the software vendor's branding and replace it with your own company's branding.",
-      "C": "A security bridge for data transfers.",
-      "D": "A specialized software for architects."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which chart type is best for showing 'Part-to-Whole' across different categories simultaneously?",
-    "options": {
-      "A": "Simple Bar Chart",
-      "B": "100% Stacked Bar Chart",
-      "C": "Scatter Plot",
-      "D": "Treemap"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Using 'Red' for negative and 'Green' for positive is a universal best practice that works in every culture.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'DirectQuery' mean for dashboard interactivity?",
-    "options": {
-      "A": "The user must type a SQL query directly into the visual.",
-      "B": "The dashboard sends a new query to the database for every filter or interaction, rather than using cached data.",
-      "C": "The dashboard connects directly to the user's brain.",
-      "D": "Hiring a new manager."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Preattentive Attributes'? (Select all that apply)",
-    "options": {
-      "A": "Length",
-      "B": "Width",
-      "C": "Orientation",
-      "D": "SQL Syntax"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Data Scent'?",
-    "options": {
-      "A": "The physical smell of the computer server.",
-      "B": "Visual cues that lead a user to believe that following a certain interactive path will result in finding relevant information.",
-      "C": "A specialized software for poets.",
-      "D": "A security scan of the database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Sparkline' should always include a Y-axis with clear labels to be effective.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which feature helps avoid 'Visual Overload' by allowing users to switch between different visuals in the same space?",
-    "options": {
-      "A": "Bookmarks/Page Navigators",
-      "B": "Custom tooltips",
-      "C": "Drill-down",
-      "D": "Auto-refresh"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of 'Responsiveness' testing for dashboards?",
-    "options": {
-      "A": "To check if the dashboard responds to voice commands.",
-      "B": "To ensure visuals and layouts resize correctly for different devices (phone vs tablet vs monitor).",
-      "C": "To calculate the speed of light in the data center.",
-      "D": "To increase the internet speed of the user."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of the following describes 'Big Data' visualization constraints? (Select all that apply)",
-    "options": {
-      "A": "Overplotting (too many points overlapping)",
-      "B": "High latency during data retrieval",
-      "C": "Information density exceeding screen resolution",
-      "D": "The file color being too dark"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is a 'Metric Selection' bias?",
-    "options": {
-      "A": "When the metric is written in a slanted font.",
-      "B": "Choosing only the KPIs that make the company's performance look good while ignoring negative ones.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "Hiring a person named Metric."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Tree Map' is generally better than a 'Pie Chart' for showing a breakdown of 50 different product categories.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these describe 'Gestalt' principle of 'Enclosure'? (Select all that apply)",
-    "options": {
-      "A": "Putting related charts inside a border or shaded box",
-      "B": "Grouping items using a common background color",
-      "C": "Organizing data alphabetically",
-      "D": "Perceiving items within the same boundary as a group"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is 'Dashboard Governance' primarily concerned with?",
-    "options": {
-      "A": "Ensuring the dashboard visuals use the government's official colors.",
-      "B": "Managing who can create, view, and share dashboards to ensure data security and a 'single version of the truth'.",
-      "C": "A security firewall for graphics.",
-      "D": "The physical speed of the CPU."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In dashboarding, what is 'Drill-through' context?",
-    "options": {
-      "A": "The physical context of the room where the drill is used.",
-      "B": "The specific data filters (e.g., 'Region=West', 'Year=2023') that are passed from the summary page to the detail page.",
-      "C": "A specialized tool for measuring light.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: In a line chart, it is best practice to always start the Y-axis at zero to avoid exaggerating small changes.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Interactivity' features? (Select all that apply)",
-    "options": {
-      "A": "Dynamic sorting on table headers",
-      "B": "On-click filtering",
-      "C": "Tooltips with secondary charts",
-      "D": "Physical buttons on the monitor"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is a 'Metric' 'Canonical' definition?",
-    "options": {
-      "A": "A definition that uses a physical canon.",
-      "B": "A single, standardized formula for a KPI that is used consistently across all dashboards in an organization.",
-      "C": "A security scan for database viruses.",
-      "D": "Hiring a mathematician to count leads."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Tufte’s Lie Factor'?",
-    "options": {
-      "A": "A factor that determines if a person is lying.",
-      "B": "A value that describes the ratio of the size of an effect shown in a graphic to the actual size of the effect in the data.",
-      "C": "A specialized software for architects.",
-      "D": "Increasing the frame rate of a video."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Dashboard' should ideally present information starting from high-level summaries and ending with granular details.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Geospatial' visualization types? (Select all that apply)",
-    "options": {
-      "A": "Choropleth Map",
-      "B": "Dot Map",
-      "C": "Bubble Map",
-      "D": "Pie Map"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'User Feedback Loop' in dashboard design?",
-    "options": {
-      "A": "A loop in the SQL code.",
-      "B": "The iterative process of showing dashboard drafts to end-users and refining them based on their actual needs.",
-      "C": "A specialized tool for measuring light.",
-      "D": "A way to backup the SQL code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'Metric' 'Normalization'?",
-    "options": {
-      "A": "Hiring a person to normalize the metrics.",
-      "B": "Adjusting metrics so they can be compared on a similar scale (e.g., converting everything to a 0-1 range).",
-      "C": "A security scan of the database.",
-      "D": "The physical speed of the keyboard."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Color Blindness' affects approximately 8% of men, making it critical to avoid 'Red/Green' as the only way to distinguish data.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Functional' dashboard requirements? (Select all that apply)",
-    "options": {
-      "A": "Data accuracy",
-      "B": "Mobile compatibility",
-      "C": "Filter speed",
-      "D": "The color of the office carpet"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Visual' 'Encoding' 'Efficiency'?",
-    "options": {
-      "A": "Hiring a person who is very efficient.",
-      "B": "How quickly and accurately a user can decode information from a visual based on the chosen encoding (e.g., position is usually better than area).",
-      "C": "A specialized software for architects.",
-      "D": "Increasing the speed of light."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'Real-time' 'Dashboard' 'Latency'?",
-    "options": {
-      "A": "The age of the developer.",
-      "B": "The delay between a real-world event and that event being reflected in the dashboard visuals.",
-      "C": "A security scan for computer viruses.",
-      "D": "The speed of the network bandwidth."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Dashboard' should use as many different font types as possible to look unique.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these are 'Dashboard' 'Layout' 'Best' 'Practices'? (Select all that apply)",
-    "options": {
-      "A": "Placing related items together (proximity)",
-      "B": "Using alignment to create a sense of order",
-      "C": "Putting the most important KPI in the bottom-right corner",
-      "D": "Using consistent spacing"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is 'Self-Service' 'BI' 'Governance'?",
-    "options": {
-      "A": "Ordering your own lunch in the BI department.",
-      "B": "Setting up permissions and sandboxes so users can build reports without breaking production data.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "A way to count the number of users."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'Metric' 'Precision'?",
-    "options": {
-      "A": "The speed of the metric button.",
-      "B": "The level of detail in a numeric value (e.g., 2 decimal places vs. whole numbers).",
-      "C": "A security scan of the database.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Gauge' chart is more informative than a 'Bullet' graph for comparing performance against multiple thresholds.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these describe 'Analytical' 'Intelligence' 'Augmentation' (AI)? (Select all that apply)",
-    "options": {
-      "A": "Auto-clustering users into groups on a scatter plot",
-      "B": "Smart narratives that describe what is happening in a chart",
-      "C": "Predictive trend lines",
-      "D": "Hiring 100 extra analysts"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Dashboard' 'Maintainability'?",
-    "options": {
-      "A": "Hiring a janitor for the office.",
-      "B": "How easy it is to update the dashboard when the underlying data source or business requirements change.",
-      "C": "A specialized software for architects.",
-      "D": "A way to count the number of characters."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'Metadata' 'Documentation' for dashboards?",
-    "options": {
-      "A": "Data that only exists in the 'Metaverse'.",
-      "B": "Written explanations of where the data comes from and how metrics are calculated, often accessible via a 'Help' icon.",
-      "C": "A security scan for database viruses.",
-      "D": "The total number of pixels in a result."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Waterfall' chart is commonly used for financial analysis to show the 'bridge' between two different time periods.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Dashboard' 'UX' 'Testing' metrics? (Select all that apply)",
-    "options": {
-      "A": "Time to find an insight",
-      "B": "Error rate in interpreting a visual",
-      "C": "User satisfaction score",
-      "D": "The weight of the mouse"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Color' 'Encoding' 'Quantization'?",
-    "options": {
-      "A": "Using colors to represent a secret code.",
-      "B": "Grouping continuous numerical data into discrete color 'bins' or buckets for easier comparison.",
-      "C": "A specialized software for poets.",
-      "D": "The physical speed of the light."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Dashboarding', what is 'Cross-filtering' logic?",
-    "options": {
-      "A": "Filtering a physical coffee with a paper filter.",
-      "B": "When selecting a category in one visual (e.g., Bar Chart) automatically filters all other related visuals on the same page.",
-      "C": "A specialized software for historians.",
-      "D": "Increasing the speed of the CPU."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Every chart on a dashboard should have a clear, descriptive title to reduce user confusion.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which cognitive psychology concept explains why a user may fail to notice a significant change in a dashboard visual if it occurs during an interactive transition?",
-    "options": {
-      "A": "Change Blindness",
-      "B": "Pre-attentive Overload",
-      "C": "Hick's Law",
-      "D": "Fitts's Law"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a high-performance BI environment, 'Visual Folding' refers to the ability of the frontend to stop rendering elements that are currently outside the user's viewport to save CPU resources.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of the following are 'Listwise' or advanced geospatial visualization techniques for high-density data? (Select all that apply)",
-    "options": {
-      "A": "Hexagonal Binning",
-      "B": "Isochrone Maps (Travel time contours)",
-      "C": "Cartograms (Area distorted by value)",
-      "D": "Standard Pie Chart overlays"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is the primary technical purpose of using 'Parallel Coordinates' plots in a multi-dimensional dashboard?",
-    "options": {
-      "A": "To show the geographical parallel of the user's location.",
-      "B": "To visualize high-dimensional data and identify multivariate patterns or clusters across many numerical variables.",
-      "C": "To ensure that all charts are perfectly aligned in parallel on the UI.",
-      "D": "To increase the encryption strength of the data connection."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Visual Query Theory', what are 'Visual Search' patterns primarily determined by?",
-    "options": {
-      "A": "The alphabetical order of the chart legends.",
-      "B": "The saliency of pre-attentive features like color, size, and orientation combined with the user's specific goal.",
-      "C": "The total number of rows in the SQL database.",
-      "D": "The physical weight of the computer monitor."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Moiré Effects' in visualization occur when patterns of lines or dots overlap, creating distracting optical illusions that degrade data clarity.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'Advanced Interactivity' logic allows a dashboard to trigger a write-back action to a database? (Select all that apply)",
-    "options": {
-      "A": "Power Apps integration in Power BI",
-      "B": "Custom API webhooks via JavaScript extensions",
-      "C": "Standard 'Drill-down' filters",
-      "D": "Tableau Write-Back extensions"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is 'Overplotting' and which technique is best used to mitigate it in a scatter plot with 1 million points?",
-    "options": {
-      "A": "When the data is plotted in a slanted font; fixed by rotating the screen.",
-      "B": "When points overlap so much they hide density; fixed by using 'Alpha Blending' (transparency) or 'Jittering'.",
-      "C": "A security scan that checks for duplicate pixels.",
-      "D": "Hiring a professional mathematician to delete random points."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the 'Anscombe's Quartet' lesson for dashboard designers?",
-    "options": {
-      "A": "Four different ways to write a SQL query.",
-      "B": "That datasets with identical statistical properties (mean, variance) can have vastly different distributions when visualized.",
-      "C": "A specialized software for architects to draw buildings.",
-      "D": "Increasing the frame rate of a video by 4x."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Semantic Zoom' refers to the technique where zooming into a visual not only increases the size of elements but also increases the level of detail or the type of information displayed.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Human-Centered Design' (HCD) stages for dashboard development? (Select all that apply)",
-    "options": {
-      "A": "Contextual Inquiry (Observation)",
-      "B": "Iterative Prototyping",
-      "C": "Summative Usability Testing",
-      "D": "Writing the SQL source code first"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Brushing and Linking' in a multi-chart interactive environment?",
-    "options": {
-      "A": "Brushing the physical dust off the server.",
-      "B": "The process where selecting a range of data in one visual automatically highlights the same subset in all other visuals on the dashboard.",
-      "C": "A specialized software for poets.",
-      "D": "Increasing the speed of the CPU."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Data Storytelling', what is the purpose of the 'Martini Glass' structure?",
-    "options": {
-      "A": "To provide alcoholic beverages during the presentation.",
-      "B": "A narrative flow that starts with a narrow author-led story, then opens up to wider user-led interactive exploration.",
-      "C": "A specialized tool for measuring liquid volume.",
-      "D": "Hiring a professional actor to read reports."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Cleveland's Hierarchy' of graphical perception suggests that humans are more accurate at decoding information from 'Area' than from 'Position on a Common Scale'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which factors can cause 'Dashboard Drift' in an enterprise environment? (Select all that apply)",
-    "options": {
-      "A": "Changes in business KPIs that are not reflected in the visual logic",
-      "B": "Source schema changes that break specific calculated fields",
-      "C": "Gradual user disengagement due to stale insights",
-      "D": "The physical speed of the keyboard"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Perceptual Scalability' in large-scale visualization?",
-    "options": {
-      "A": "The amount of space left on the hard drive.",
-      "B": "The ability of a visualization to be accurately interpreted by a human as the number of data points increases toward infinity.",
-      "C": "A security scan for database viruses.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI Architecture', what is the specific role of a 'DirectQuery' optimization with 'Dual Mode' tables?",
-    "options": {
-      "A": "To show the dashboard in two different languages.",
-      "B": "To allow tables to act as either 'Imported' (for speed) or 'Direct' (for real-time) depending on the query context to maximize performance.",
-      "C": "A specialized software for architects.",
-      "D": "A way to backup the SQL code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Color Constancy' is a human visual phenomenon where colors appear different depending on the surrounding colors, which can lead to misinterpretation in complex dashboards.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Advanced' visualization 'Anti-patterns'? (Select all that apply)",
-    "options": {
-      "A": "Rainbow color maps for continuous data",
-      "B": "Truncating the Y-axis on bar charts",
-      "C": "Circular layouts for hierarchical data (without clear reason)",
-      "D": "Using consistent spacing"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Visual Analytics' vs 'Standard Reporting'?",
-    "options": {
-      "A": "They are exactly the same thing.",
-      "B": "Visual Analytics is an iterative process of discovery through interactive visuals; Reporting is the communication of pre-defined metrics.",
-      "C": "Reporting is for experts; Visual Analytics for beginners.",
-      "D": "Visual Analytics is 100x faster to build."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Cognitive Science', what is the 'Attention Bottleneck' in dashboarding?",
-    "options": {
-      "A": "A physical bottleneck in the server room.",
-      "B": "The limited capacity of a human to process more than a few visual items at a time, requiring the use of 'Pop-out' effects.",
-      "C": "A security scan of the database.",
-      "D": "Increasing the speed of light."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Scagnostics' (Scatterplot Diagnostics) is a set of measures used to characterize the statistical properties of a scatterplot (e.g., Clumpy, Striated, Convex) for automated analysis.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Low-Latency' dashboard data formats? (Select all that apply)",
-    "options": {
-      "A": "Apache Arrow",
-      "B": "Parquet",
-      "C": "Protocol Buffers",
-      "D": "Raw physical paper"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Dashboard Latency' 'Cold' vs 'Warm' cache?",
-    "options": {
-      "A": "The temperature of the server room.",
-      "B": "Cold cache requires fetching data from the source; Warm cache serves data previously stored in memory for faster response.",
-      "C": "A specialized software for architects.",
-      "D": "Hiring a new manager for the project."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Visual' 'Encoding', what is 'Channel' 'Interference'?",
-    "options": {
-      "A": "Interference from a local radio station.",
-      "B": "When the use of one visual channel (e.g., color) makes it harder to perceive information from another (e.g., shape).",
-      "C": "A security scan for computer viruses.",
-      "D": "The physical speed of the mouse."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Pre-attentive' processing occurs in the sensory memory and is much faster than conscious 'Serial' processing.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Enterprise' 'BI' 'deployment' patterns? (Select all that apply)",
-    "options": {
-      "A": "Hub-and-Spoke (Centralized governance, decentralized creation)",
-      "B": "Centralized (IT-led only)",
-      "C": "Decentralized (Laissez-faire)",
-      "D": "Circular (No management)"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Tufte's' 'Shrink' 'Principle'?",
-    "options": {
-      "A": "Shrinking the physical monitor to save desk space.",
-      "B": "Maximizing data density by reducing the size of visuals without losing clarity, allowing for more comparisons on a single screen.",
-      "C": "A specialized software for historians.",
-      "D": "A way to count the number of users."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'Calculated' 'Column' 'Bloat'?",
-    "options": {
-      "A": "When columns physically swell up.",
-      "B": "The performance degradation caused by creating too many static columns in the data model instead of using query-time measures.",
-      "C": "A security scan of the database.",
-      "D": "Hiring a professional actor to read reports."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A 'Horizon Chart' is used to visualize many time-series data in a small space by slicing and layering them over each other.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these describe 'Predictive' 'Visual' 'Analytics'? (Select all that apply)",
-    "options": {
-      "A": "Monte Carlo simulation visualizations",
-      "B": "Prophet-based forecasting lines with uncertainty bands",
-      "C": "What-if parameter sliders",
-      "D": "Deleting historical data"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Aesthetic' 'Usability' 'Effect'?",
-    "options": {
-      "A": "Hiring a person who is very aesthetic.",
-      "B": "The phenomenon where users perceive more attractive dashboards as being easier to use and more reliable.",
-      "C": "A specialized tool for measuring light.",
-      "D": "A security scan for database viruses."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'User' 'Segmentation' 'Mapping' for dashboards?",
-    "options": {
-      "A": "Drawing a physical map of where users live.",
-      "B": "Developing different dashboard layouts and levels of detail tailored specifically to different user personas (e.g., Developer vs. CFO).",
-      "C": "A specialized software for architects.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The 'Weber-Fechner Law' suggests that our ability to perceive a difference between two visual elements is proportional to the magnitude of those elements.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Dashboard' 'Interactivity' 'Performance' 'Optimization' methods? (Select all that apply)",
-    "options": {
-      "A": "Request Debouncing (waiting until the user stops typing)",
-      "B": "Result Set Caching",
-      "C": "Frontend Virtualization",
-      "D": "Adding more colorful borders"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Visual' 'Clutter' 'Metric'?",
-    "options": {
-      "A": "The weight of the monitor on a scale.",
-      "B": "Numerical measures (like Feature Congestion) used to objectively determine if a dashboard is too crowded.",
-      "C": "A specialized software for architects.",
-      "D": "The physical speed of the CPU."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'Multi-level' 'Drill-through' 'Consistency'?",
-    "options": {
-      "A": "Ensuring the drill is always the same size.",
-      "B": "Maintaining the state and filter context as a user navigates through multiple layers of detailed reports.",
-      "C": "A security scan for computer viruses.",
-      "D": "Increasing the speed of the CPU."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Mismatched' 'Visual' 'Encoding' occurs when the data type (e.g., Nominal) is mapped to a channel better suited for another type (e.g., Ordered).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Advanced' 'Filter' 'Logic' types? (Select all that apply)",
-    "options": {
-      "A": "Cross-Join filtering",
-      "B": "Regex-based text filtering",
-      "C": "Dynamic Top-N with parameter tie-breakers",
-      "D": "The SQL query parser"
-    },
-    "answer": ["B", "C"]
-  },
-  {
-    "question": "What is 'Data' 'Provenance' in a reporting dashboard?",
-    "options": {
-      "A": "Hiring a person named Provenance.",
-      "B": "The metadata that documents the history, transformations, and origin of every data point shown in a visual.",
-      "C": "A specialized software for poets.",
-      "D": "A security scan of the database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'User' 'Experience' (UX) 'Heuristic' 'Evaluation'?",
-    "options": {
-      "A": "Evaluating the performance of the CEO.",
-      "B": "A method for finding usability problems in a dashboard by comparing it against a list of established design principles.",
-      "C": "A specialized software for historians.",
-      "D": "Hiring a mathematician to count leads."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Interactive' 'Latency' of less than 100ms is required for a user to feel that a dashboard is responding instantaneously.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Dashboard' 'Security' 'Protocols'? (Select all that apply)",
-    "options": {
-      "A": "Row-Level Security (RLS)",
-      "B": "Object-Level Security (OLS)",
-      "C": "Multi-Factor Authentication (MFA) for access",
-      "D": "Sharing the root password in the UI"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Information' 'Scent' 'Logic'?",
-    "options": {
-      "A": "The smell of physical paper.",
-      "B": "Providing enough context in a visual to allow a user to predict if a drill-down will contain the information they need.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "Hiring a professional actor to read reports."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'Dashboard' 'Interoperability'?",
-    "options": {
-      "A": "The ability for a dashboard to work in zero gravity.",
-      "B": "The ability of a dashboard or its components to share data and state with other applications or platforms (e.g., via iframe or API).",
-      "C": "A specialized software for poets.",
-      "D": "Increasing the speed of light."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Mismatched' 'Visual' 'Resolution' occurs when the grain of the visual (e.g., Monthly) is finer than the grain of the available data (e.g., Yearly).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which of these describe 'Automated' 'Reporting' 'Distribution'? (Select all that apply)",
-    "options": {
-      "A": "Report Bursting to 1000s of email recipients",
-      "B": "Mobile push notifications based on KPI thresholds",
-      "C": "Automatic Slack/Teams channel updates",
-      "D": "Hand-delivering paper reports"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Visual' 'Clutter' 'Ratio'?",
-    "options": {
-      "A": "The weight of the monitor.",
-      "B": "The ratio of descriptive pixels to total screen pixels.",
-      "C": "A specialized software for architects.",
-      "D": "A way to count the number of characters."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Dashboarding', what is 'Parameter' 'State' 'Persistence'?",
-    "options": {
-      "A": "Ensuring the parameter is persistent.",
-      "B": "The ability of a dashboard to maintain the user's selected parameters across different sessions or browser tabs.",
-      "C": "A security scan for computer viruses.",
-      "D": "Hiring a mathematician to count leads."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Small' 'Multiples' (Trellis) are generally more effective than a 'Grouped' bar chart when comparing more than 10 categories over time.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Advanced' 'Dashboard' 'Navigation' features? (Select all that apply)",
-    "options": {
-      "A": "Breadcrumb trails",
-      "B": "Cross-report drill-through",
-      "C": "Menu-driven page switching",
-      "D": "Hiding the mouse cursor"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Data' 'Storytelling' 'Linearity'?",
-    "options": {
-      "A": "Hiring a person to walk in a straight line.",
-      "B": "The degree to which a narrative guides a user through a specific sequence of insights versus allowing random exploration.",
-      "C": "A specialized software for architects.",
-      "D": "A way to backup data in the sky."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'Dashboard' 'Localization'?",
-    "options": {
-      "A": "Putting the dashboard in a box.",
-      "B": "Adapting dashboard language, date formats, and currency symbols based on the user's regional settings.",
-      "C": "A security scan of the database.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Mismatched' 'Visual' 'Scale' (e.g., using a linear scale for exponential growth) is a common form of 'lying with data'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these describe 'Adaptive' 'Dashboard' 'Design'? (Select all that apply)",
-    "options": {
-      "A": "Layouts that change based on screen resolution",
-      "B": "Visuals that change detail level based on available space",
-      "C": "Filters that update based on user role",
-      "D": "Deleting data to fit on a mobile screen"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Cognitive' 'Load' 'Optimization'?",
-    "options": {
-      "A": "Hiring a person named Optimizer.",
-      "B": "The design practice of reducing unnecessary visual complexity to allow the user to focus on key insights.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "A security scan for computer viruses."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Dashboarding', what is 'Data' 'Aggregation' 'Latency'?",
-    "options": {
-      "A": "The delay in the CEO's response.",
-      "B": "The time it takes for the database to summarize raw rows into the metrics shown on the dashboard.",
-      "C": "A specialized software for poets.",
-      "D": "Increasing the frame rate of a video."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Sankey' 'Diagrams' must always have the same total value entering the system as the total value leaving it to be valid.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Dashboard' 'Access' 'Logs' used for? (Select all that apply)",
-    "options": {
-      "A": "Monitoring user engagement",
-      "B": "Auditing sensitive data access",
-      "C": "Optimizing server resource allocation",
-      "D": "Checking the developer's social media"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Visual' 'Grammar' (e.g., ggplot2 approach)?",
-    "options": {
-      "A": "Checking the grammar of a chart title.",
-      "B": "A framework that breaks visualizations into a set of standard components (Aesthetics, Geometries, Scales, etc.) to allow for complex builds.",
-      "C": "A specialized software for architects.",
-      "D": "Hiring a professional actor to read reports."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'BI', what is 'Dashboard' 'State' 'Management'?",
-    "options": {
-      "A": "Hiring a person named State.",
-      "B": "The technical handling of interactive inputs (filters, parameters, selections) to ensure they are synchronized across all dashboard components.",
-      "C": "A security scan for database viruses.",
-      "D": "Increasing the size of the font."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Mismatched' 'Visual' 'Semantics' occur when a visual metaphor (like a map) is used for data that is not geographic in nature.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these are 'Advanced' 'Dashboard' 'Component' types? (Select all that apply)",
-    "options": {
-      "A": "Dynamic SVG images",
-      "B": "D3.js custom visuals",
-      "C": "Embedded video tutorials",
-      "D": "Physical office furniture"
-    },
-    "answer": ["A", "B", "C"]
-  },
-  {
-    "question": "What is 'Tufte's' 'Small' 'Multiples' 'Benefit'?",
-    "options": {
-      "A": "Doing many small things at once.",
-      "B": "Enabling high-capacity comparison of similar data across different categories by using identical scales and axes in a series of small charts.",
-      "C": "A specialized software for historians.",
-      "D": "A security scan of the database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Reporting', what is 'Visual' 'Interactivity' 'Lag'?",
-    "options": {
-      "A": "The time it takes to click the mouse.",
-      "B": "The delay between a user action (like a filter) and the visual representation being updated on the screen.",
-      "C": "A specialized software for poets.",
-      "D": "Increasing the frame rate of a video."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: 'Gestalt' 'Psychology' principles are used by dashboard designers to influence how users naturally group and prioritize information.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which of these describe 'Automated' 'Insights' 'Algorithm' significance? (Select all that apply)",
-    "options": {
-      "A": "Reducing time-to-insight for non-experts",
-      "B": "Scaling data discovery across thousands of variables",
-      "C": "Providing 100% correct interpretations every time",
-      "D": "Highlighting statistically significant drivers of change"
-    },
-    "answer": ["A", "B", "D"]
-  },
-  {
-    "question": "What is 'Dashboard' 'Metadata' 'Repository'?",
-    "options": {
-      "A": "A physical box full of data.",
-      "B": "A database that stores descriptions of dashboard elements, calculations, and data sources for easy search and documentation.",
-      "C": "A security scan of the database.",
-      "D": "Hiring a new manager for the project."
-    },
-    "answer": "B"
-  }
+      "question": "What is the primary goal of a business dashboard?",
+      "options": {
+        "A": "To show as much data as possible on a single screen.",
+        "B": "To provide a visual overview of key performance indicators (KPIs) for quick decision-making.",
+        "C": "To act as a storage backup for raw Excel files.",
+        "D": "To replace the need for an internet connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 3D effects on bar and pie charts is highly recommended because it makes the data look more professional.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following chart types is best suited for showing a trend over a continuous period of time?",
+      "options": {
+        "A": "Pie Chart",
+        "B": "Line Chart",
+        "C": "Scatter Plot",
+        "D": "Treemap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which elements are considered 'Chart Junk' that can clutter a dashboard? (Select all that apply)",
+      "options": {
+        "A": "Heavy gridlines",
+        "B": "Unnecessary background images",
+        "C": "Decorative borders",
+        "D": "Clear axes labels"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does the term 'Data-Ink Ratio' refer to in visualization design?",
+      "options": {
+        "A": "The physical cost of printer ink for a report.",
+        "B": "The ratio of non-redundant data-ink to the total ink used in a graphic.",
+        "C": "The number of colors used in a dashboard.",
+        "D": "The size of the font compared to the size of the chart."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Heat Map' uses color to represent the magnitude of a value across a two-dimensional surface.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are popular 'BI Dashboarding' platforms? (Select all that apply)",
+      "options": {
+        "A": "Tableau",
+        "B": "Power BI",
+        "C": "Google Looker Studio",
+        "D": "Microsoft Word"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the 'F-Pattern' in the context of dashboard layout?",
+      "options": {
+        "A": "A pattern where the dashboard fails to load.",
+        "B": "The natural way users scan a screen, starting at the top-left and moving across and down.",
+        "C": "A specialized sorting algorithm for data.",
+        "D": "Using only five colors in a dashboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart type is most effective for comparing the parts of a whole (at a high level)?",
+      "options": {
+        "A": "Scatter Plot",
+        "B": "Pie Chart",
+        "C": "Gantt Chart",
+        "D": "Histogram"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Interactivity' in a dashboard refers to the ability of a user to filter or drill down into the data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Slicer' in a dashboard context?",
+      "options": {
+        "A": "A tool for cutting physical paper reports.",
+        "B": "An on-screen button or list used to filter data across multiple visuals.",
+        "C": "A script that deletes old data.",
+        "D": "A way to increase the brightness of the monitor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Best Practices' for choosing dashboard colors? (Select all that apply)",
+      "options": {
+        "A": "Using high-contrast colors for accessibility (e.g., color blindness)",
+        "B": "Using a single color palette for consistency",
+        "C": "Using bright neon colors for every data point",
+        "D": "Using red/green only for 'bad/good' indicators"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the purpose of a 'Tooltip'?",
+      "options": {
+        "A": "To fix a technical bug in the software.",
+        "B": "To provide additional context or data when a user hovers over a data point.",
+        "C": "To provide tips on how to use the computer.",
+        "D": "To show the developer's name."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Bullet Graph' is a variation of a bar chart designed to show progress toward a target in a compact space.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Drill-through' mean in dashboarding?",
+      "options": {
+        "A": "Using a physical drill to access a server rack.",
+        "B": "Clicking a data point to navigate to a separate, detailed report page.",
+        "C": "Scanning the dashboard for errors.",
+        "D": "A way to delete data rows."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a risk of having 'Too Many Visuals' on a single dashboard page? (Select all that apply)",
+      "options": {
+        "A": "Information overload for the user",
+        "B": "Slower page loading times",
+        "C": "Decreased visual clarity",
+        "D": "Automatic deletion of the dashboard"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'White Space' (or Negative Space) in design?",
+      "options": {
+        "A": "An area of the dashboard that contains no data or visuals, used to improve readability.",
+        "B": "A screen that fails to load any data.",
+        "C": "A specialized data type for text.",
+        "D": "A hidden folder on the server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Most dashboards should be designed for the 'Top-Left' corner to hold the most important metric.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'KPI Card' (or Scorecard)?",
+      "options": {
+        "A": "A physical card given to employees.",
+        "B": "A visual that displays a single, high-level number and its comparison to a goal.",
+        "C": "A security ID for the data center.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Categorical' dimension? (Select all that apply)",
+      "options": {
+        "A": "Region",
+        "B": "Product Category",
+        "C": "Customer Name",
+        "D": "Total Sales Amount"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the primary function of a 'Scatter Plot'?",
+      "options": {
+        "A": "To show a sequence of steps.",
+        "B": "To show the correlation or relationship between two numerical variables.",
+        "C": "To list all items in alphabetical order.",
+        "D": "To show the percentage of a whole."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Treemap' is useful for showing hierarchical data using nested rectangles.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Dashboard Latency' refer to?",
+      "options": {
+        "A": "The age of the designer.",
+        "B": "The delay between a user interaction (like a filter) and the data updating.",
+        "C": "The total number of columns in the dataset.",
+        "D": "The speed of the network cable."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are common 'Dashboard Personas'? (Select all that apply)",
+      "options": {
+        "A": "Executive (High-level summary)",
+        "B": "Operational (Real-time monitoring)",
+        "C": "Analytical (Exploratory deep-dive)",
+        "D": "Historical (Fiction writer)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Contextual Cue' in a dashboard?",
+      "options": {
+        "A": "A loud alarm that sounds when data is low.",
+        "B": "Visual indicators like arrows or color changes that tell the user if a metric is good or bad.",
+        "C": "A specialized software for architects.",
+        "D": "Hiring a person to explain the charts."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: It is best practice to always start the Y-axis of a bar chart at zero.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Visual Hierarchy'?",
+      "options": {
+        "A": "The ranking of employees in the design department.",
+        "B": "The arrangement of visual elements to imply importance (e.g., size, placement, color).",
+        "C": "A security scan of the data visuals.",
+        "D": "A way to count the number of pixels."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart type is best for showing a 'Process' flow or drop-off rates between stages?",
+      "options": {
+        "A": "Pie Chart",
+        "B": "Funnel Chart",
+        "C": "Donut Chart",
+        "D": "Line Chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'Red' for positive growth and 'Green' for decline is a common best practice.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Self-Service BI' allow business users to do?",
+      "options": {
+        "A": "Fix their own computer hardware.",
+        "B": "Create and modify their own reports and dashboards without deep technical skills.",
+        "C": "Order their own lunch in the office.",
+        "D": "Write raw SQL code from scratch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Gestalt Principles' of visual perception? (Select all that apply)",
+      "options": {
+        "A": "Proximity",
+        "B": "Similarity",
+        "C": "Enclosure",
+        "D": "Randomness"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Data Storytelling'?",
+      "options": {
+        "A": "Writing a fictional novel using numbers.",
+        "B": "The practice of building a narrative around data to help users understand context and take action.",
+        "C": "A specialized security scan.",
+        "D": "Hiring a professional actor to read a report."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Gauge Chart' (Speedometer style) is highly space-efficient for dashboards.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows a user to move from a 'Year' view to a 'Month' view within the same chart?",
+      "options": {
+        "A": "Slicing",
+        "B": "Drill-down",
+        "C": "Pivoting",
+        "D": "Filtering"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Responsive Design' in dashboards?",
+      "options": {
+        "A": "To ensure the dashboard responds quickly to mouse clicks.",
+        "B": "To ensure the dashboard layout adjusts automatically for different screen sizes (Mobile vs. Desktop).",
+        "C": "To create a dashboard that answers every question automatically.",
+        "D": "To increase the speed of the internet connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes 'Big Data' visualization? (Select all that apply)",
+      "options": {
+        "A": "Using aggregations to summarize millions of rows",
+        "B": "Utilizing real-time streaming data",
+        "C": "Showing every individual data point on a single small chart",
+        "D": "Using sampling to represent a dataset"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is a 'Dashboard Landing Page'?",
+      "options": {
+        "A": "The page where an airplane pilot logs data.",
+        "B": "The initial entry point that provides a high-level summary before navigating to detailed reports.",
+        "C": "A specialized software for architects.",
+        "D": "A page that only appears when a dashboard crashes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Donut Chart' is essentially a pie chart with a hole in the middle.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Accessibility' features for dashboards? (Select all that apply)",
+      "options": {
+        "A": "High-contrast color modes",
+        "B": "Alt-text for images and charts",
+        "C": "Keyboard navigation support",
+        "D": "Using very small font sizes to fit more data"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard Governance'?",
+      "options": {
+        "A": "A group of politicians who use BI tools.",
+        "B": "The framework of rules and processes for creating, managing, and securing dashboards.",
+        "C": "A security firewall for graphics.",
+        "D": "Hiring a new manager for the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In dashboarding, what is 'Drill-up'?",
+      "options": {
+        "A": "Drilling a hole in the ceiling.",
+        "B": "The process of moving from detailed data back to a higher-level summary.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Scatter plots are excellent for showing trends over time for a single category.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary advantage of 'Linked Filtering' (Cross-filtering)?",
+      "options": {
+        "A": "It creates a link to an external website.",
+        "B": "Selecting a value in one chart automatically filters all other charts on the page.",
+        "C": "It speeds up the database query.",
+        "D": "It deletes duplicate data automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Time' dimensions? (Select all that apply)",
+      "options": {
+        "A": "Fiscal Year",
+        "B": "Quarter",
+        "C": "Month",
+        "D": "Employee ID"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Sparkline'?",
+      "options": {
+        "A": "A line of actual sparks from a machine.",
+        "B": "A small, simple line graph without axes, usually drawn inside a table cell to show a trend.",
+        "C": "A specialized software for poets.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Legend titles should always be included, even if the chart labels are already clear.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Color Encoding'?",
+      "options": {
+        "A": "Using colors to represent a secret password.",
+        "B": "Using colors to represent data values or categories (e.g., darker shades for higher numbers).",
+        "C": "A security scan of the dashboard.",
+        "D": "Hiring a professional artist."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'Exploratory' visualization? (Select all that apply)",
+      "options": {
+        "A": "Used to find hidden patterns or insights",
+        "B": "Often used by data analysts",
+        "C": "Meant for quick viewing by a busy CEO",
+        "D": "Typically features many interactive filters"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is a 'Geographic Heat Map'?",
+      "options": {
+        "A": "A map showing the temperature of different countries.",
+        "B": "A map that uses color to show the density or magnitude of data points by location.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Pie charts are best used when you have 15 or more categories to compare.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dashboard Information Density'?",
+      "options": {
+        "A": "The physical weight of the monitor.",
+        "B": "The amount of information provided per unit of screen area.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Comparison' chart types? (Select all that apply)",
+      "options": {
+        "A": "Bar Chart",
+        "B": "Column Chart",
+        "C": "Clustered Bar Chart",
+        "D": "Waterfall Chart"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Static' dashboard?",
+      "options": {
+        "A": "A dashboard that has a lot of electronic noise.",
+        "B": "A fixed report that does not allow for filtering or real-time updates.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Sankey Diagrams' are used to visualize the flow of data or resources between stages.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Hover Text' (Alt-text)?",
+      "options": {
+        "A": "Text that literally hovers in the air.",
+        "B": "A description of a visual that is read by screen readers to help visually impaired users.",
+        "C": "A specialized software for poets.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Distribution' chart types? (Select all that apply)",
+      "options": {
+        "A": "Histogram",
+        "B": "Box Plot",
+        "C": "Pie Chart",
+        "D": "Area Chart"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard Refresh Rate'?",
+      "options": {
+        "A": "How often the user drinks water while viewing.",
+        "B": "How frequently the dashboard updates to show the most recent data.",
+        "C": "The speed at which the screen flickers.",
+        "D": "The number of hours a team worked."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Dashboard' should ideally answer the user's most important questions in under 10 seconds.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'White Label' dashboarding?",
+      "options": {
+        "A": "Reporting that uses only white paper.",
+        "B": "Software that allows you to remove the developer's branding and add your own.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Hiring a new manager."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In dashboarding, what is 'Drill-down' vs 'Filter'?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Drill-down changes the level of detail; Filter hides data that doesn't meet criteria.",
+        "C": "Filter is for beginners; Drill-down for experts.",
+        "D": "Drill-down is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Line charts should never have more than five lines to ensure readability.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated Insights' in BI tools? (Select all that apply)",
+      "options": {
+        "A": "Using AI to highlight anomalies in data",
+        "B": "Natural Language Generation (NLG) to summarize a chart",
+        "C": "Hiring 100 extra analysts",
+        "D": "Predictive forecasting features"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is a 'Dashboard Widget'?",
+      "options": {
+        "A": "A physical machine in a factory.",
+        "B": "A small, self-contained visual element on a dashboard.",
+        "C": "A security scan for database viruses.",
+        "D": "A way to count the number of characters."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'User Adoption' metric?",
+      "options": {
+        "A": "Adopting a pet for the office.",
+        "B": "The percentage of intended users who actually use the dashboard regularly.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Dashboard' should include every single data point available in the database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Operational' dashboard characteristics? (Select all that apply)",
+      "options": {
+        "A": "Focus on real-time data",
+        "B": "Used by front-line staff",
+        "C": "Features long-term historical trends",
+        "D": "Monitors active business processes"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "Which Gestalt principle explains why we perceive items placed close to each other as belonging to the same group?",
+      "options": {
+        "A": "Enclosure",
+        "B": "Similarity",
+        "C": "Proximity",
+        "D": "Continuity"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In a 'Star Schema' data model, the fact table should ideally be hidden from the end-user, and only dimension tables should be used for filtering.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following scenarios is best suited for a 'Dual-Axis' chart?",
+      "options": {
+        "A": "Comparing two variables with completely different scales, such as Revenue (Millions) and Profit Margin (%).",
+        "B": "Showing the distribution of a single variable across categories.",
+        "C": "Visualizing a hierarchy of product categories.",
+        "D": "Displaying the ranking of sales reps alphabetically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary risk of using 'Diverging' color scales on a dashboard?",
+      "options": {
+        "A": "They are only visible on high-end monitors.",
+        "B": "If the midpoint is not meaningful (e.g., zero or an average), it can lead to misinterpretation of the data.",
+        "C": "They automatically double the query processing time.",
+        "D": "They force the user to zoom in to see the numbers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'Cross-Highlighting' in a BI tool like Power BI?",
+      "options": {
+        "A": "Selecting a data point in one visual filters out all other data in the second visual.",
+        "B": "Selecting a data point in one visual dims the non-related data in the second visual while keeping the total context visible.",
+        "C": "Highlighting a physical piece of paper with a marker.",
+        "D": "Deleting duplicate visuals on the same page."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Small Multiples' chart (Trellis chart) is more effective for comparing trends across 20 categories than a single line chart with 20 overlapping lines.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these factors most significantly impacts dashboard 'Rendering' performance? (Select all that apply)",
+      "options": {
+        "A": "The number of high-cardinality visuals on a single page",
+        "B": "Complex measures or calculated fields being computed on the fly",
+        "C": "The physical weight of the server hosting the database",
+        "D": "Using extremely large uncompressed images as backgrounds"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What does 'Cognitive Load' refer to in dashboard design?",
+      "options": {
+        "A": "The amount of electricity used by the brain to view a screen.",
+        "B": "The total amount of mental effort being used in the working memory to process the dashboard information.",
+        "C": "The speed at which a user can type a SQL query.",
+        "D": "The number of colors used in a single chart."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When should you use a 'Box Plot' over a 'Histogram'?",
+      "options": {
+        "A": "When you want to see the exact frequency of every single data point.",
+        "B": "When you need to compare the distribution and identify outliers across multiple groups side-by-side.",
+        "C": "When you only have one numerical variable and no categories.",
+        "D": "When you want to show a simple part-to-whole relationship."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Sequential' color scales are best used for categorical data where there is no inherent order between items.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows a dashboard to 'remember' a specific set of filters applied by a user for future visits?",
+      "options": {
+        "A": "Slicers",
+        "B": "Bookmarks (or Personal Views)",
+        "C": "Drill-through",
+        "D": "Refresh rate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of using 'Parameters' in a dashboard?",
+      "options": {
+        "A": "To measure the distance between two charts.",
+        "B": "To allow users to dynamically change inputs in a calculation or filter (e.g., 'What-if' analysis).",
+        "C": "To set the admin password for the report.",
+        "D": "To increase the number of rows the dashboard can display."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Waterfall' chart, what does the final 'Total' bar represent?",
+      "options": {
+        "A": "The average of all the intermediate changes.",
+        "B": "The net value after all positive and negative increments have been applied to the starting value.",
+        "C": "The total number of hours worked by the team.",
+        "D": "The amount of water remaining in a system."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using a 'Logarithmic' scale is appropriate when the data has a very narrow range with small differences.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which elements are part of the 'Visual Encoding' process? (Select all that apply)",
+      "options": {
+        "A": "Position",
+        "B": "Length",
+        "C": "Color Hue",
+        "D": "Data Cleaning"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard Bloat'?",
+      "options": {
+        "A": "When the dashboard physically expands off the monitor.",
+        "B": "The gradual accumulation of too many metrics and charts over time, making the dashboard difficult to use.",
+        "C": "A specialized software for compressing data.",
+        "D": "Hiring too many developers for one project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Z-Pattern' in layout design?",
+      "options": {
+        "A": "To sort data from A to Z.",
+        "B": "To follow the eye's path on pages that are not text-heavy, moving from top-left to top-right, then down-left to down-right.",
+        "C": "A specialized security scan for visuals.",
+        "D": "Using only zigzag lines in line charts."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Self-Service BI' can lead to 'Data Silos' if different departments create their own versions of the same metric.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are components of 'Storytelling with Data'? (Select all that apply)",
+      "options": {
+        "A": "The Data",
+        "B": "The Visuals",
+        "C": "The Narrative",
+        "D": "The Database Schema"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does a 'Bullet Graph' use to provide context to a single measure?",
+      "options": {
+        "A": "A circular gauge with a needle.",
+        "B": "A feature bar, a target line, and qualitative ranges (e.g., poor, good, excellent).",
+        "C": "A scatter plot of all historical data points.",
+        "D": "A pie chart showing the percentage of the goal achieved."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In dashboarding, what is 'Drill-up' intended for?",
+      "options": {
+        "A": "Drilling a hole in the top of the server.",
+        "B": "Aggregating granular data back into a higher-level summary (e.g., from Days to Months).",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the size of the font for senior management."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: An 'Analytical' dashboard typically requires fewer interactive filters than an 'Executive' dashboard.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Accessibility' best practices? (Select all that apply)",
+      "options": {
+        "A": "Providing a high-contrast mode",
+        "B": "Avoiding reliance on color alone to convey meaning (e.g., using icons)",
+        "C": "Adding descriptive alt-text for screen readers",
+        "D": "Using the smallest font size possible to fit more charts"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Latent' data in a dashboard context?",
+      "options": {
+        "A": "Data that is hidden behind a drill-through or tooltip.",
+        "B": "Data that has been deleted from the database.",
+        "C": "Data that is only visible in the dark mode UI.",
+        "D": "Hiring a new manager to find hidden patterns."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Rule of Thirds' in dashboard composition?",
+      "options": {
+        "A": "Ensuring only 1/3 of the charts are pie charts.",
+        "B": "Dividing the screen into a 3x3 grid and placing key elements along the lines or intersections.",
+        "C": "Updating the data every three hours.",
+        "D": "Spending 30% of the budget on colors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Sankey Diagram' is best used for showing how values are distributed across different nodes in a flow.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'White Labeling' in a BI software context?",
+      "options": {
+        "A": "Using only white labels on physical filing cabinets.",
+        "B": "The ability to remove the software vendor's branding and replace it with your own company's branding.",
+        "C": "A security bridge for data transfers.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart type is best for showing 'Part-to-Whole' across different categories simultaneously?",
+      "options": {
+        "A": "Simple Bar Chart",
+        "B": "100% Stacked Bar Chart",
+        "C": "Scatter Plot",
+        "D": "Treemap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'Red' for negative and 'Green' for positive is a universal best practice that works in every culture.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'DirectQuery' mean for dashboard interactivity?",
+      "options": {
+        "A": "The user must type a SQL query directly into the visual.",
+        "B": "The dashboard sends a new query to the database for every filter or interaction, rather than using cached data.",
+        "C": "The dashboard connects directly to the user's brain.",
+        "D": "Hiring a new manager."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Preattentive Attributes'? (Select all that apply)",
+      "options": {
+        "A": "Length",
+        "B": "Width",
+        "C": "Orientation",
+        "D": "SQL Syntax"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Data Scent'?",
+      "options": {
+        "A": "The physical smell of the computer server.",
+        "B": "Visual cues that lead a user to believe that following a certain interactive path will result in finding relevant information.",
+        "C": "A specialized software for poets.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Sparkline' should always include a Y-axis with clear labels to be effective.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature helps avoid 'Visual Overload' by allowing users to switch between different visuals in the same space?",
+      "options": {
+        "A": "Bookmarks/Page Navigators",
+        "B": "Custom tooltips",
+        "C": "Drill-down",
+        "D": "Auto-refresh"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Responsiveness' testing for dashboards?",
+      "options": {
+        "A": "To check if the dashboard responds to voice commands.",
+        "B": "To ensure visuals and layouts resize correctly for different devices (phone vs tablet vs monitor).",
+        "C": "To calculate the speed of light in the data center.",
+        "D": "To increase the internet speed of the user."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes 'Big Data' visualization constraints? (Select all that apply)",
+      "options": {
+        "A": "Overplotting (too many points overlapping)",
+        "B": "High latency during data retrieval",
+        "C": "Information density exceeding screen resolution",
+        "D": "The file color being too dark"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Metric Selection' bias?",
+      "options": {
+        "A": "When the metric is written in a slanted font.",
+        "B": "Choosing only the KPIs that make the company's performance look good while ignoring negative ones.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Hiring a person named Metric."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Tree Map' is generally better than a 'Pie Chart' for showing a breakdown of 50 different product categories.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Gestalt' principle of 'Enclosure'? (Select all that apply)",
+      "options": {
+        "A": "Putting related charts inside a border or shaded box",
+        "B": "Grouping items using a common background color",
+        "C": "Organizing data alphabetically",
+        "D": "Perceiving items within the same boundary as a group"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard Governance' primarily concerned with?",
+      "options": {
+        "A": "Ensuring the dashboard visuals use the government's official colors.",
+        "B": "Managing who can create, view, and share dashboards to ensure data security and a 'single version of the truth'.",
+        "C": "A security firewall for graphics.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In dashboarding, what is 'Drill-through' context?",
+      "options": {
+        "A": "The physical context of the room where the drill is used.",
+        "B": "The specific data filters (e.g., 'Region=West', 'Year=2023') that are passed from the summary page to the detail page.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a line chart, it is best practice to always start the Y-axis at zero to avoid exaggerating small changes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Interactivity' features? (Select all that apply)",
+      "options": {
+        "A": "Dynamic sorting on table headers",
+        "B": "On-click filtering",
+        "C": "Tooltips with secondary charts",
+        "D": "Physical buttons on the monitor"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Metric' 'Canonical' definition?",
+      "options": {
+        "A": "A definition that uses a physical canon.",
+        "B": "A single, standardized formula for a KPI that is used consistently across all dashboards in an organization.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tufte’s Lie Factor'?",
+      "options": {
+        "A": "A factor that determines if a person is lying.",
+        "B": "A value that describes the ratio of the size of an effect shown in a graphic to the actual size of the effect in the data.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Dashboard' should ideally present information starting from high-level summaries and ending with granular details.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Geospatial' visualization types? (Select all that apply)",
+      "options": {
+        "A": "Choropleth Map",
+        "B": "Dot Map",
+        "C": "Bubble Map",
+        "D": "Pie Map"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'User Feedback Loop' in dashboard design?",
+      "options": {
+        "A": "A loop in the SQL code.",
+        "B": "The iterative process of showing dashboard drafts to end-users and refining them based on their actual needs.",
+        "C": "A specialized tool for measuring light.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Metric' 'Normalization'?",
+      "options": {
+        "A": "Hiring a person to normalize the metrics.",
+        "B": "Adjusting metrics so they can be compared on a similar scale (e.g., converting everything to a 0-1 range).",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Color Blindness' affects approximately 8% of men, making it critical to avoid 'Red/Green' as the only way to distinguish data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Functional' dashboard requirements? (Select all that apply)",
+      "options": {
+        "A": "Data accuracy",
+        "B": "Mobile compatibility",
+        "C": "Filter speed",
+        "D": "The color of the office carpet"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Visual' 'Encoding' 'Efficiency'?",
+      "options": {
+        "A": "Hiring a person who is very efficient.",
+        "B": "How quickly and accurately a user can decode information from a visual based on the chosen encoding (e.g., position is usually better than area).",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'Real-time' 'Dashboard' 'Latency'?",
+      "options": {
+        "A": "The age of the developer.",
+        "B": "The delay between a real-world event and that event being reflected in the dashboard visuals.",
+        "C": "A security scan for computer viruses.",
+        "D": "The speed of the network bandwidth."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Dashboard' should use as many different font types as possible to look unique.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Dashboard' 'Layout' 'Best' 'Practices'? (Select all that apply)",
+      "options": {
+        "A": "Placing related items together (proximity)",
+        "B": "Using alignment to create a sense of order",
+        "C": "Putting the most important KPI in the bottom-right corner",
+        "D": "Using consistent spacing"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Self-Service' 'BI' 'Governance'?",
+      "options": {
+        "A": "Ordering your own lunch in the BI department.",
+        "B": "Setting up permissions and sandboxes so users can build reports without breaking production data.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Metric' 'Precision'?",
+      "options": {
+        "A": "The speed of the metric button.",
+        "B": "The level of detail in a numeric value (e.g., 2 decimal places vs. whole numbers).",
+        "C": "A security scan of the database.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Gauge' chart is more informative than a 'Bullet' graph for comparing performance against multiple thresholds.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'Analytical' 'Intelligence' 'Augmentation' (AI)? (Select all that apply)",
+      "options": {
+        "A": "Auto-clustering users into groups on a scatter plot",
+        "B": "Smart narratives that describe what is happening in a chart",
+        "C": "Predictive trend lines",
+        "D": "Hiring 100 extra analysts"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard' 'Maintainability'?",
+      "options": {
+        "A": "Hiring a janitor for the office.",
+        "B": "How easy it is to update the dashboard when the underlying data source or business requirements change.",
+        "C": "A specialized software for architects.",
+        "D": "A way to count the number of characters."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'Metadata' 'Documentation' for dashboards?",
+      "options": {
+        "A": "Data that only exists in the 'Metaverse'.",
+        "B": "Written explanations of where the data comes from and how metrics are calculated, often accessible via a 'Help' icon.",
+        "C": "A security scan for database viruses.",
+        "D": "The total number of pixels in a result."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Waterfall' chart is commonly used for financial analysis to show the 'bridge' between two different time periods.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Dashboard' 'UX' 'Testing' metrics? (Select all that apply)",
+      "options": {
+        "A": "Time to find an insight",
+        "B": "Error rate in interpreting a visual",
+        "C": "User satisfaction score",
+        "D": "The weight of the mouse"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Color' 'Encoding' 'Quantization'?",
+      "options": {
+        "A": "Using colors to represent a secret code.",
+        "B": "Grouping continuous numerical data into discrete color 'bins' or buckets for easier comparison.",
+        "C": "A specialized software for poets.",
+        "D": "The physical speed of the light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Dashboarding', what is 'Cross-filtering' logic?",
+      "options": {
+        "A": "Filtering a physical coffee with a paper filter.",
+        "B": "When selecting a category in one visual (e.g., Bar Chart) automatically filters all other related visuals on the same page.",
+        "C": "A specialized software for historians.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Every chart on a dashboard should have a clear, descriptive title to reduce user confusion.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which cognitive psychology concept explains why a user may fail to notice a significant change in a dashboard visual if it occurs during an interactive transition?",
+      "options": {
+        "A": "Change Blindness",
+        "B": "Pre-attentive Overload",
+        "C": "Hick's Law",
+        "D": "Fitts's Law"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a high-performance BI environment, 'Visual Folding' refers to the ability of the frontend to stop rendering elements that are currently outside the user's viewport to save CPU resources.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are 'Listwise' or advanced geospatial visualization techniques for high-density data? (Select all that apply)",
+      "options": {
+        "A": "Hexagonal Binning",
+        "B": "Isochrone Maps (Travel time contours)",
+        "C": "Cartograms (Area distorted by value)",
+        "D": "Standard Pie Chart overlays"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the primary technical purpose of using 'Parallel Coordinates' plots in a multi-dimensional dashboard?",
+      "options": {
+        "A": "To show the geographical parallel of the user's location.",
+        "B": "To visualize high-dimensional data and identify multivariate patterns or clusters across many numerical variables.",
+        "C": "To ensure that all charts are perfectly aligned in parallel on the UI.",
+        "D": "To increase the encryption strength of the data connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Visual Query Theory', what are 'Visual Search' patterns primarily determined by?",
+      "options": {
+        "A": "The alphabetical order of the chart legends.",
+        "B": "The saliency of pre-attentive features like color, size, and orientation combined with the user's specific goal.",
+        "C": "The total number of rows in the SQL database.",
+        "D": "The physical weight of the computer monitor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Moiré Effects' in visualization occur when patterns of lines or dots overlap, creating distracting optical illusions that degrade data clarity.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'Advanced Interactivity' logic allows a dashboard to trigger a write-back action to a database? (Select all that apply)",
+      "options": {
+        "A": "Power Apps integration in Power BI",
+        "B": "Custom API webhooks via JavaScript extensions",
+        "C": "Standard 'Drill-down' filters",
+        "D": "Tableau Write-Back extensions"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Overplotting' and which technique is best used to mitigate it in a scatter plot with 1 million points?",
+      "options": {
+        "A": "When the data is plotted in a slanted font; fixed by rotating the screen.",
+        "B": "When points overlap so much they hide density; fixed by using 'Alpha Blending' (transparency) or 'Jittering'.",
+        "C": "A security scan that checks for duplicate pixels.",
+        "D": "Hiring a professional mathematician to delete random points."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Anscombe's Quartet' lesson for dashboard designers?",
+      "options": {
+        "A": "Four different ways to write a SQL query.",
+        "B": "That datasets with identical statistical properties (mean, variance) can have vastly different distributions when visualized.",
+        "C": "A specialized software for architects to draw buildings.",
+        "D": "Increasing the frame rate of a video by 4x."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Semantic Zoom' refers to the technique where zooming into a visual not only increases the size of elements but also increases the level of detail or the type of information displayed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Human-Centered Design' (HCD) stages for dashboard development? (Select all that apply)",
+      "options": {
+        "A": "Contextual Inquiry (Observation)",
+        "B": "Iterative Prototyping",
+        "C": "Summative Usability Testing",
+        "D": "Writing the SQL source code first"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Brushing and Linking' in a multi-chart interactive environment?",
+      "options": {
+        "A": "Brushing the physical dust off the server.",
+        "B": "The process where selecting a range of data in one visual automatically highlights the same subset in all other visuals on the dashboard.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Data Storytelling', what is the purpose of the 'Martini Glass' structure?",
+      "options": {
+        "A": "To provide alcoholic beverages during the presentation.",
+        "B": "A narrative flow that starts with a narrow author-led story, then opens up to wider user-led interactive exploration.",
+        "C": "A specialized tool for measuring liquid volume.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Cleveland's Hierarchy' of graphical perception suggests that humans are more accurate at decoding information from 'Area' than from 'Position on a Common Scale'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which factors can cause 'Dashboard Drift' in an enterprise environment? (Select all that apply)",
+      "options": {
+        "A": "Changes in business KPIs that are not reflected in the visual logic",
+        "B": "Source schema changes that break specific calculated fields",
+        "C": "Gradual user disengagement due to stale insights",
+        "D": "The physical speed of the keyboard"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Perceptual Scalability' in large-scale visualization?",
+      "options": {
+        "A": "The amount of space left on the hard drive.",
+        "B": "The ability of a visualization to be accurately interpreted by a human as the number of data points increases toward infinity.",
+        "C": "A security scan for database viruses.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI Architecture', what is the specific role of a 'DirectQuery' optimization with 'Dual Mode' tables?",
+      "options": {
+        "A": "To show the dashboard in two different languages.",
+        "B": "To allow tables to act as either 'Imported' (for speed) or 'Direct' (for real-time) depending on the query context to maximize performance.",
+        "C": "A specialized software for architects.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Color Constancy' is a human visual phenomenon where colors appear different depending on the surrounding colors, which can lead to misinterpretation in complex dashboards.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Advanced' visualization 'Anti-patterns'? (Select all that apply)",
+      "options": {
+        "A": "Rainbow color maps for continuous data",
+        "B": "Truncating the Y-axis on bar charts",
+        "C": "Circular layouts for hierarchical data (without clear reason)",
+        "D": "Using consistent spacing"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Visual Analytics' vs 'Standard Reporting'?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Visual Analytics is an iterative process of discovery through interactive visuals; Reporting is the communication of pre-defined metrics.",
+        "C": "Reporting is for experts; Visual Analytics for beginners.",
+        "D": "Visual Analytics is 100x faster to build."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Cognitive Science', what is the 'Attention Bottleneck' in dashboarding?",
+      "options": {
+        "A": "A physical bottleneck in the server room.",
+        "B": "The limited capacity of a human to process more than a few visual items at a time, requiring the use of 'Pop-out' effects.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Scagnostics' (Scatterplot Diagnostics) is a set of measures used to characterize the statistical properties of a scatterplot (e.g., Clumpy, Striated, Convex) for automated analysis.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Low-Latency' dashboard data formats? (Select all that apply)",
+      "options": {
+        "A": "Apache Arrow",
+        "B": "Parquet",
+        "C": "Protocol Buffers",
+        "D": "Raw physical paper"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard Latency' 'Cold' vs 'Warm' cache?",
+      "options": {
+        "A": "The temperature of the server room.",
+        "B": "Cold cache requires fetching data from the source; Warm cache serves data previously stored in memory for faster response.",
+        "C": "A specialized software for architects.",
+        "D": "Hiring a new manager for the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Visual' 'Encoding', what is 'Channel' 'Interference'?",
+      "options": {
+        "A": "Interference from a local radio station.",
+        "B": "When the use of one visual channel (e.g., color) makes it harder to perceive information from another (e.g., shape).",
+        "C": "A security scan for computer viruses.",
+        "D": "The physical speed of the mouse."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Pre-attentive' processing occurs in the sensory memory and is much faster than conscious 'Serial' processing.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'BI' 'deployment' patterns? (Select all that apply)",
+      "options": {
+        "A": "Hub-and-Spoke (Centralized governance, decentralized creation)",
+        "B": "Centralized (IT-led only)",
+        "C": "Decentralized (Laissez-faire)",
+        "D": "Circular (No management)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Tufte's' 'Shrink' 'Principle'?",
+      "options": {
+        "A": "Shrinking the physical monitor to save desk space.",
+        "B": "Maximizing data density by reducing the size of visuals without losing clarity, allowing for more comparisons on a single screen.",
+        "C": "A specialized software for historians.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Calculated' 'Column' 'Bloat'?",
+      "options": {
+        "A": "When columns physically swell up.",
+        "B": "The performance degradation caused by creating too many static columns in the data model instead of using query-time measures.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Horizon Chart' is used to visualize many time-series data in a small space by slicing and layering them over each other.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Predictive' 'Visual' 'Analytics'? (Select all that apply)",
+      "options": {
+        "A": "Monte Carlo simulation visualizations",
+        "B": "Prophet-based forecasting lines with uncertainty bands",
+        "C": "What-if parameter sliders",
+        "D": "Deleting historical data"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Aesthetic' 'Usability' 'Effect'?",
+      "options": {
+        "A": "Hiring a person who is very aesthetic.",
+        "B": "The phenomenon where users perceive more attractive dashboards as being easier to use and more reliable.",
+        "C": "A specialized tool for measuring light.",
+        "D": "A security scan for database viruses."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'User' 'Segmentation' 'Mapping' for dashboards?",
+      "options": {
+        "A": "Drawing a physical map of where users live.",
+        "B": "Developing different dashboard layouts and levels of detail tailored specifically to different user personas (e.g., Developer vs. CFO).",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Weber-Fechner Law' suggests that our ability to perceive a difference between two visual elements is proportional to the magnitude of those elements.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Dashboard' 'Interactivity' 'Performance' 'Optimization' methods? (Select all that apply)",
+      "options": {
+        "A": "Request Debouncing (waiting until the user stops typing)",
+        "B": "Result Set Caching",
+        "C": "Frontend Virtualization",
+        "D": "Adding more colorful borders"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Visual' 'Clutter' 'Metric'?",
+      "options": {
+        "A": "The weight of the monitor on a scale.",
+        "B": "Numerical measures (like Feature Congestion) used to objectively determine if a dashboard is too crowded.",
+        "C": "A specialized software for architects.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Multi-level' 'Drill-through' 'Consistency'?",
+      "options": {
+        "A": "Ensuring the drill is always the same size.",
+        "B": "Maintaining the state and filter context as a user navigates through multiple layers of detailed reports.",
+        "C": "A security scan for computer viruses.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Visual' 'Encoding' occurs when the data type (e.g., Nominal) is mapped to a channel better suited for another type (e.g., Ordered).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Advanced' 'Filter' 'Logic' types? (Select all that apply)",
+      "options": {
+        "A": "Cross-Join filtering",
+        "B": "Regex-based text filtering",
+        "C": "Dynamic Top-N with parameter tie-breakers",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Data' 'Provenance' in a reporting dashboard?",
+      "options": {
+        "A": "Hiring a person named Provenance.",
+        "B": "The metadata that documents the history, transformations, and origin of every data point shown in a visual.",
+        "C": "A specialized software for poets.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'User' 'Experience' (UX) 'Heuristic' 'Evaluation'?",
+      "options": {
+        "A": "Evaluating the performance of the CEO.",
+        "B": "A method for finding usability problems in a dashboard by comparing it against a list of established design principles.",
+        "C": "A specialized software for historians.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Interactive' 'Latency' of less than 100ms is required for a user to feel that a dashboard is responding instantaneously.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Dashboard' 'Security' 'Protocols'? (Select all that apply)",
+      "options": {
+        "A": "Row-Level Security (RLS)",
+        "B": "Object-Level Security (OLS)",
+        "C": "Multi-Factor Authentication (MFA) for access",
+        "D": "Sharing the root password in the UI"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Information' 'Scent' 'Logic'?",
+      "options": {
+        "A": "The smell of physical paper.",
+        "B": "Providing enough context in a visual to allow a user to predict if a drill-down will contain the information they need.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'Dashboard' 'Interoperability'?",
+      "options": {
+        "A": "The ability for a dashboard to work in zero gravity.",
+        "B": "The ability of a dashboard or its components to share data and state with other applications or platforms (e.g., via iframe or API).",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Visual' 'Resolution' occurs when the grain of the visual (e.g., Monthly) is finer than the grain of the available data (e.g., Yearly).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Reporting' 'Distribution'? (Select all that apply)",
+      "options": {
+        "A": "Report Bursting to 1000s of email recipients",
+        "B": "Mobile push notifications based on KPI thresholds",
+        "C": "Automatic Slack/Teams channel updates",
+        "D": "Hand-delivering paper reports"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Visual' 'Clutter' 'Ratio'?",
+      "options": {
+        "A": "The weight of the monitor.",
+        "B": "The ratio of descriptive pixels to total screen pixels.",
+        "C": "A specialized software for architects.",
+        "D": "A way to count the number of characters."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Dashboarding', what is 'Parameter' 'State' 'Persistence'?",
+      "options": {
+        "A": "Ensuring the parameter is persistent.",
+        "B": "The ability of a dashboard to maintain the user's selected parameters across different sessions or browser tabs.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Small' 'Multiples' (Trellis) are generally more effective than a 'Grouped' bar chart when comparing more than 10 categories over time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Advanced' 'Dashboard' 'Navigation' features? (Select all that apply)",
+      "options": {
+        "A": "Breadcrumb trails",
+        "B": "Cross-report drill-through",
+        "C": "Menu-driven page switching",
+        "D": "Hiding the mouse cursor"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Data' 'Storytelling' 'Linearity'?",
+      "options": {
+        "A": "Hiring a person to walk in a straight line.",
+        "B": "The degree to which a narrative guides a user through a specific sequence of insights versus allowing random exploration.",
+        "C": "A specialized software for architects.",
+        "D": "A way to backup data in the sky."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'Dashboard' 'Localization'?",
+      "options": {
+        "A": "Putting the dashboard in a box.",
+        "B": "Adapting dashboard language, date formats, and currency symbols based on the user's regional settings.",
+        "C": "A security scan of the database.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Visual' 'Scale' (e.g., using a linear scale for exponential growth) is a common form of 'lying with data'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Adaptive' 'Dashboard' 'Design'? (Select all that apply)",
+      "options": {
+        "A": "Layouts that change based on screen resolution",
+        "B": "Visuals that change detail level based on available space",
+        "C": "Filters that update based on user role",
+        "D": "Deleting data to fit on a mobile screen"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Cognitive' 'Load' 'Optimization'?",
+      "options": {
+        "A": "Hiring a person named Optimizer.",
+        "B": "The design practice of reducing unnecessary visual complexity to allow the user to focus on key insights.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "A security scan for computer viruses."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Dashboarding', what is 'Data' 'Aggregation' 'Latency'?",
+      "options": {
+        "A": "The delay in the CEO's response.",
+        "B": "The time it takes for the database to summarize raw rows into the metrics shown on the dashboard.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Sankey' 'Diagrams' must always have the same total value entering the system as the total value leaving it to be valid.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Dashboard' 'Access' 'Logs' used for? (Select all that apply)",
+      "options": {
+        "A": "Monitoring user engagement",
+        "B": "Auditing sensitive data access",
+        "C": "Optimizing server resource allocation",
+        "D": "Checking the developer's social media"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Visual' 'Grammar' (e.g., ggplot2 approach)?",
+      "options": {
+        "A": "Checking the grammar of a chart title.",
+        "B": "A framework that breaks visualizations into a set of standard components (Aesthetics, Geometries, Scales, etc.) to allow for complex builds.",
+        "C": "A specialized software for architects.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'BI', what is 'Dashboard' 'State' 'Management'?",
+      "options": {
+        "A": "Hiring a person named State.",
+        "B": "The technical handling of interactive inputs (filters, parameters, selections) to ensure they are synchronized across all dashboard components.",
+        "C": "A security scan for database viruses.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Visual' 'Semantics' occur when a visual metaphor (like a map) is used for data that is not geographic in nature.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Advanced' 'Dashboard' 'Component' types? (Select all that apply)",
+      "options": {
+        "A": "Dynamic SVG images",
+        "B": "D3.js custom visuals",
+        "C": "Embedded video tutorials",
+        "D": "Physical office furniture"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Tufte's' 'Small' 'Multiples' 'Benefit'?",
+      "options": {
+        "A": "Doing many small things at once.",
+        "B": "Enabling high-capacity comparison of similar data across different categories by using identical scales and axes in a series of small charts.",
+        "C": "A specialized software for historians.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Visual' 'Interactivity' 'Lag'?",
+      "options": {
+        "A": "The time it takes to click the mouse.",
+        "B": "The delay between a user action (like a filter) and the visual representation being updated on the screen.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Gestalt' 'Psychology' principles are used by dashboard designers to influence how users naturally group and prioritize information.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Insights' 'Algorithm' significance? (Select all that apply)",
+      "options": {
+        "A": "Reducing time-to-insight for non-experts",
+        "B": "Scaling data discovery across thousands of variables",
+        "C": "Providing 100% correct interpretations every time",
+        "D": "Highlighting statistically significant drivers of change"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Dashboard' 'Metadata' 'Repository'?",
+      "options": {
+        "A": "A physical box full of data.",
+        "B": "A database that stores descriptions of dashboard elements, calculations, and data sources for easy search and documentation.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a new manager for the project."
+      },
+      "answer": "B"
+    }
   ]
 }

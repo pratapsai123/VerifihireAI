@@ -49,6 +49,17 @@ function ReviewPage() {
     }, 0);
   }, [questions]);
 
+  const objectiveCount = useMemo(() => {
+    return Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+  }, [questions]);
+
+  const codingCount = useMemo(() => {
+    return (questions['Coding'] || []).length;
+  }, [questions]);
+
   // State Persistence Effect
   useEffect(() => {
     if (!loading && assessmentData) {
@@ -1048,21 +1059,22 @@ function ReviewPage() {
                   {assessmentData.experienceLevel?.replace(/\b\w/g, l => l.toUpperCase())}
                 </span>
               </div>
-              <div className="summary-item">
-                <span className="summary-label">Obj Questions:</span>
-                <span className="summary-value">
-                  {Object.entries(questions).reduce((sum, [topic, list]) => {
-                    if (topic === 'Coding') return sum;
-                    return sum + (list || []).length;
-                  }, 0)}
-                </span>
-              </div>
-              <div className="summary-item">
-                <span className="summary-label">Coding Questions:</span>
-                <span className="summary-value">
-                  {(questions['Coding'] || []).length}
-                </span>
-              </div>
+              {objectiveCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Obj Questions:</span>
+                  <span className="summary-value">
+                    {objectiveCount}
+                  </span>
+                </div>
+              )}
+              {codingCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Coding Questions:</span>
+                  <span className="summary-value">
+                    {codingCount}
+                  </span>
+                </div>
+              )}
               <div className="summary-item">
                 <span className="summary-label">Time Limit (HH:MM:SS):</span>
 
@@ -1104,49 +1116,53 @@ function ReviewPage() {
                 />
               </div>
 
-              <div className="summary-item">
-                <span className="summary-label">Obj Time (HH:MM:SS):</span>
-                <input
-                  type="text"
-                  className="summary-input"
-                  value={objectiveTime}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    const formatted = formatInputTime(val);
-                    setObjectiveTime(formatted);
-                    setIsTimeEdited(true);
-                    // Update Total Time
-                    const objS = parseSeconds(formatted);
-                    const codS = parseSeconds(codingTime);
-                    setTimeLimit(formatHHMMSS(objS + codS));
-                  }}
-                  placeholder="00:00:00"
-                  maxLength={8}
-                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
-                />
-              </div>
+              {objectiveCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Obj Time (HH:MM:SS):</span>
+                  <input
+                    type="text"
+                    className="summary-input"
+                    value={objectiveTime}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const formatted = formatInputTime(val);
+                      setObjectiveTime(formatted);
+                      setIsTimeEdited(true);
+                      // Update Total Time
+                      const objS = parseSeconds(formatted);
+                      const codS = parseSeconds(codingTime);
+                      setTimeLimit(formatHHMMSS(objS + codS));
+                    }}
+                    placeholder="00:00:00"
+                    maxLength={8}
+                    style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                  />
+                </div>
+              )}
 
-              <div className="summary-item">
-                <span className="summary-label">Coding Time (HH:MM:SS):</span>
-                <input
-                  type="text"
-                  className="summary-input"
-                  value={codingTime}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    const formatted = formatInputTime(val);
-                    setCodingTime(formatted);
-                    setIsTimeEdited(true);
-                    // Update Total Time
-                    const objS = parseSeconds(objectiveTime);
-                    const codS = parseSeconds(formatted);
-                    setTimeLimit(formatHHMMSS(objS + codS));
-                  }}
-                  placeholder="00:00:00"
-                  maxLength={8}
-                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
-                />
-              </div>
+              {codingCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Coding Time (HH:MM:SS):</span>
+                  <input
+                    type="text"
+                    className="summary-input"
+                    value={codingTime}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const formatted = formatInputTime(val);
+                      setCodingTime(formatted);
+                      setIsTimeEdited(true);
+                      // Update Total Time
+                      const objS = parseSeconds(objectiveTime);
+                      const codS = parseSeconds(formatted);
+                      setTimeLimit(formatHHMMSS(objS + codS));
+                    }}
+                    placeholder="00:00:00"
+                    maxLength={8}
+                    style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                  />
+                </div>
+              )}
 
               {(questions['Coding'] || []).length > 0 && (
                 <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>

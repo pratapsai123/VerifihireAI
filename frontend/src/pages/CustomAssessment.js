@@ -96,7 +96,9 @@ function CustomAssessment() {
       'Kubernetes Specialist',
       'Docker Specialist',
       'CI/CD Engineer',
-      'Infrastructure Engineer'
+      'Infrastructure Engineer',
+      'Practices',
+      'Operations'
     ],
     'cloud-engineer': [
       'AWS Cloud Engineer',
@@ -104,7 +106,8 @@ function CustomAssessment() {
       'GCP Cloud Engineer',
       'Multi-cloud Engineer',
       'Cloud Architect',
-      'Cloud Security Engineer'
+      'Cloud Security Engineer',
+      'Architecture'
     ],
     'system-administrator': [
       'Linux Systems Administrator',
@@ -327,6 +330,17 @@ function CustomAssessment() {
       'Software / Engineering Technical Writer',
       'Cloud / DevOps Technical Writer',
       'Senior Technical Writer'
+    ],
+    // New roles
+    'ai-engineering': [
+      'Core AI'
+    ],
+    'data-ai': [
+      'Data Engineering',
+      'Governance'
+    ],
+    'finops': [
+      'Cost Management'
     ]
   };
 
@@ -768,7 +782,24 @@ function CustomAssessment() {
     'Product Documentation Writer': ['User Guides', 'Technical Writing', 'Product Documentation', 'Release Notes', 'Confluence', 'UX Writing'],
     'Software / Engineering Technical Writer': ['Technical Writing', 'Software Documentation', 'Markdown', 'Git', 'Agile', 'SDLC'],
     'Cloud / DevOps Technical Writer': ['Cloud Documentation', 'AWS', 'Azure', 'GCP', 'DevOps', 'CI/CD', 'Technical Writing'],
-    'Senior Technical Writer': ['Technical Writing Leadership', 'Documentation Strategy', 'Information Architecture', 'Mentoring', 'Style Guides', 'API Documentation']
+    'Senior Technical Writer': ['Technical Writing Leadership', 'Documentation Strategy', 'Information Architecture', 'Mentoring', 'Style Guides', 'API Documentation'],
+
+    // AI Engineering sub-roles
+    'Core AI': ['Large Language Models Understanding', 'Generative AI', 'Prompt Engineering', 'AI Agents', 'LLM Workflows', 'Fine-tuning Techniques', 'Model Evaluation', 'Model Monitoring', 'AI Safety', 'Feature Engineering'],
+
+    // Cloud Engineer (Architecture) sub-roles
+    'Architecture': ['System Design', 'Scalability Design', 'Infrastructure as Code', 'Reliability Engineering', 'Observability', 'Security Engineering'],
+
+    // DevOps sub-roles
+    'Practices': ['GitOps Practices', 'Workflow Orchestration Concepts', 'Troubleshooting'],
+    'Operations': ['Incident Management', 'Performance Optimization'],
+
+    // Data & AI sub-roles
+    'Data Engineering': ['Data Pipelines Design', 'Data Quality Management'],
+    'Governance': ['Data Governance'],
+
+    // FinOps sub-roles
+    'Cost Management': ['FinOps']
   }), []);
 
   useEffect(() => {
@@ -1893,7 +1924,7 @@ function CustomAssessment() {
                   <option value="full-stack-developer">Full Stack Developer</option>
                   <option value="mobile-developer">Mobile Developer (iOS/Android)</option>
                 </optgroup>
-                <optgroup label="DevOps & Infrastructure">
+                <optgroup label="DevOps &amp; Infrastructure">
                   <option value="devops-engineer">DevOps Engineer</option>
                   <option value="cloud-engineer">Cloud Engineer</option>
                   <option value="system-administrator">System Administrator</option>
@@ -1938,6 +1969,15 @@ function CustomAssessment() {
                   <option value="scrum-master">Scrum Master</option>
                   <option value="project-manager">Project Manager</option>
                   <option value="technical-project-manager">Technical Project Manager</option>
+                </optgroup>
+                <optgroup label="AI Engineering">
+                  <option value="ai-engineering">AI Engineering</option>
+                </optgroup>
+                <optgroup label="Data &amp; AI">
+                  <option value="data-ai">Data &amp; AI</option>
+                </optgroup>
+                <optgroup label="FinOps">
+                  <option value="finops">FinOps</option>
                 </optgroup>
                 <optgroup label="Other">
                   <option value="support-engineer">Support Engineer</option>

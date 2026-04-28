@@ -1,5 +1,5 @@
 {
-  "skill": "Algorithm",
+  "skill": "Algorithms",
   "questions": [
     {
       "question": "What is the time complexity of binary search on a sorted array?",

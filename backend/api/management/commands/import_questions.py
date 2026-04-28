@@ -1,4 +1,4 @@
-import json
+﻿import json
 import os
 import re
 from django.core.management.base import BaseCommand
@@ -185,13 +185,14 @@ class Command(BaseCommand):
                 total_skipped += skipped
                 
                 self.stdout.write(self.style.SUCCESS(
-                    f"✓ Imported {file_count} | Skipped {skipped} (Easy: {difficulty_stats['easy']}, "
+                    f"[OK] Imported {file_count} | Skipped {skipped} (Easy: {difficulty_stats['easy']}, "
                     f"Medium: {difficulty_stats['medium']}, Hard: {difficulty_stats['hard']})"
                 ))
 
             except Exception as e:
-                self.stdout.write(self.style.ERROR(f"✗ Error processing {filename}: {e}"))
+                self.stdout.write(self.style.ERROR(f" Error processing {filename}: {e}"))
 
         self.stdout.write(self.style.SUCCESS(
-            f"\n✨ Complete! Total imported: {total_created} | Total skipped: {total_skipped}"
+            f"\n Complete! Total imported: {total_created} | Total skipped: {total_skipped}"
         ))
+
