@@ -84,7 +84,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -2540,6 +2540,53 @@ def save_all_candidate_details_view(request):
         if isinstance(entered_with_consent, str):
             entered_with_consent = entered_with_consent.lower() == 'true'
 
+        # Identity Linkage and Verification
+        # Link email + PAN as a single identity and verify face consistency
+        norm_email = email.lower().strip()
+        norm_pan = pan_number.strip().upper()
+        person_id = f"{norm_email}_{norm_pan}"
+        
+        identity_link = IdentityLink.objects.filter(email=norm_email, pan_number=norm_pan).first()
+        
+        verify_status = False
+        match_score = 0.0
+        
+        if identity_link:
+            # Verification: Compare current snapshot with the registered identity face
+            verify_result = verify_face_with_deepface(person_id, snapshot)
+            verify_status = verify_result.get('verified', False)
+            # Distance: usually 0 is perfect match, threshold is ~0.4 for ArcFace
+            # We convert it to a score where 1.0 is perfect and >0.6 is match
+            distance = verify_result.get('distance', 1.0)
+            match_score = max(0.0, 1.0 - distance)
+
+            # If verify fails (verified is False), or if there was an error in verification
+            if verify_status == False:
+                # Save the mismatch status even if we reject, for audit trails if possible
+                # But since we return 403, the update_or_create below won't run.
+                # However, the user wants to "stop assessment", so returning 403 is correct.
+                return Response({
+                    'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
+                }, status=status.HTTP_403_FORBIDDEN)
+        else:
+            # Linkage: Register the candidate's face as the canonical identity for this Email + PAN
+            reg_result = register_face_with_deepface(person_id, snapshot)
+            if reg_result.get('success'):
+                IdentityLink.objects.create(
+                    email=norm_email,
+                    pan_number=norm_pan,
+                    pan_image=pan_file,
+                )
+                verify_status = True
+                match_score = 1.0
+            else:
+                # CRITICAL: If we can't register the identity (e.g. service down or no face),
+                # we MUST NOT allow the candidate to proceed, otherwise the identity check is bypassed.
+                error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
+                return Response({
+                    'error': f"Identity Verification System Error: {error_msg}"
+                }, status=status.HTTP_400_BAD_REQUEST)
+
         # Create or update candidate details
         candidate_details, created = CandidateDetails.objects.update_or_create(
             token=token,
@@ -2553,6 +2600,10 @@ def save_all_candidate_details_view(request):
                 'snapshot': snapshot,
                 'pan_file': pan_file,
                 'entered_with_consent': entered_with_consent,
+                'identity_mismatch_detected': not verify_status if identity_link else False,
+                'face_match_score': match_score,
+                'identity_mismatch': not verify_status if identity_link else False,
+                'mismatch_score': match_score,
             }
         )
 
@@ -2604,14 +2655,44 @@ def verify_pan_backend_view(request):
         if not (is_image or is_pdf):
             return Response({'error': 'File must be an image or PDF for OCR verification'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Perform OCR / Extraction
+        # 1. Face Detection Check (Mandatory)
+        # If PDF, convert first page to image for face detection
+        face_check_file = pan_file
+        if is_pdf:
+            from .ocr_utils import pdf_page_to_png_bytes
+            # Extract PDF content
+            if hasattr(pan_file, 'temporary_file_path'):
+                pdf_content = open(pan_file.temporary_file_path(), 'rb').read()
+            else:
+                pan_file.seek(0)
+                pdf_content = pan_file.read()
+                pan_file.seek(0)
+            
+            face_check_file = pdf_page_to_png_bytes(pdf_content, page_num=0)
+            if not face_check_file:
+                 return Response({'error': 'Could not process PDF for face detection'}, status=status.HTTP_400_BAD_REQUEST)
+
+        face_detected, face_count = detect_face_in_image(face_check_file)
+        if not face_detected:
+            return Response({
+                'success': True, 
+                'verified': False, 
+                'reason': 'no_face',
+                'message': 'Invalid Document: No human face detected in the PAN card. Please upload a clear image of your original PAN card showing your face photograph.',
+            }, status=status.HTTP_200_OK)
+
+        # 2. Perform OCR / Extraction
         if is_pdf:
             extracted_text, success = extract_text_from_pdf(pan_file, target_pan=pan_number)
         else:
             extracted_text, success = extract_text_from_image(pan_file, target_pan=pan_number)
+        
         # Clean extracted text for comparison
         clean_extracted = re.sub(r'[^A-Z0-9]', '', (extracted_text or "").upper())
         
+        # Extract Name
+        extracted_name = extract_name_from_text(extracted_text)
+
         # Find ALL potential PANs on the document (loose pattern)
         loose_pattern = re.compile(r'[A-Z0-9]{5}[0-9A-Z]{4}[A-Z0-9]{1}')
         raw_matches = re.findall(loose_pattern, clean_extracted)
@@ -2623,7 +2704,8 @@ def verify_pan_backend_view(request):
                 'success': True, 
                 'verified': True, 
                 'message': 'PAN verification successful',
-                'extracted_pan': pan_number
+                'extracted_pan': pan_number,
+                'extracted_name': extracted_name
             }, status=status.HTTP_200_OK)
 
         # Step 2: Advanced Fuzzy Window Search (Check every 10-char slice)
@@ -2652,7 +2734,8 @@ def verify_pan_backend_view(request):
                 'success': True, 
                 'verified': True, 
                 'message': 'PAN verification successful (Fuzzy)',
-                'extracted_pan': pan_number
+                'extracted_pan': pan_number,
+                'extracted_name': extracted_name
             }, status=status.HTTP_200_OK)
 
         # Step 3: Determine failure reason
@@ -2682,6 +2765,7 @@ def verify_pan_backend_view(request):
             'reason': reason,
             'message': msg,
             'extracted_pan': all_potential_pans[0] if all_potential_pans else None,
+            'extracted_name': extracted_name,
             'debug_info': clean_extracted[:100]
         }, status=status.HTTP_200_OK)
 

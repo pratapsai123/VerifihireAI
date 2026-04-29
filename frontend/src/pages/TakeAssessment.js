@@ -1187,7 +1187,19 @@ export default function TakeAssessment() {
     try {
       setFsError('');
 
-      // 1. Fullscreen request (MUST be first for gesture sensitivity)
+      // 1. Mandatory Screen Share FIRST
+      // We request screen share before fullscreen because the browser's screen share dialog 
+      // often forces the window out of fullscreen mode. By sharing first, we ensure 
+      // that the subsequent fullscreen request stays active.
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // If they don't agree to screen share, we can't proceed
+          return;
+        }
+      }
+
+      // 2. Fullscreen request (after screen share dialog is resolved)
       if (elem.requestFullscreen) {
         await elem.requestFullscreen();
       } else if (elem.webkitRequestFullscreen) {
@@ -1198,24 +1210,7 @@ export default function TakeAssessment() {
         await elem.msRequestFullscreen();
       }
 
-      // Verify success
-      const isFsNow = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
-      if (!isFsNow) {
-        throw new Error("Fullscreen request denied by browser.");
-      }
-
-      // 2. Mandatory Screen Share
-      if (!screenStreamRef.current || !screenStreamRef.current.active) {
-        const success = await startScreenShare();
-        if (!success) {
-          // Exit fullscreen if they don't agree to screen share
-          if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => { });
-          return;
-        }
-      }
-
-      // 3. Camera (already started mostly, but ensure success)
+      // 3. Camera (ensure it's active)
       await startCamera();
 
     } catch (err) {

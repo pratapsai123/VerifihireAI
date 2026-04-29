@@ -889,6 +889,20 @@ def generate_candidate_report(submission_id):
     # ════════════════════════════════════════════════════════════════════════
 
     story.append(Paragraph('Personal Information', styles['SectionHeader']))
+    # Identity Verification status
+    identity_status = "Verified"
+    match_score_str = "100%"
+    status_color = "#16a34a" # Green
+
+    if candidate_detail:
+        if candidate_detail.identity_mismatch_detected:
+            identity_status = "IDENTITY MISMATCH DETECTED"
+            status_color = "#dc2626" # Red
+        
+        # Format match score as percentage
+        score_val = candidate_detail.face_match_score or 0.0
+        # DeepFace match score is usually 1 - distance. We show it as percentage.
+        match_score_str = f"{min(100, round(score_val * 100, 1))}%"
 
     info_data = [
 
@@ -899,7 +913,11 @@ def generate_candidate_report(submission_id):
         _info_row('Phone', phone, styles),
 
         _info_row('PAN Number', pan_number, styles),
-
+        [
+            Paragraph('Identity Status', styles['InfoLabel']),
+            Paragraph(f'<b><font color="{status_color}">{identity_status}</font></b>', styles['InfoValue']),
+        ],
+        _info_row('Face Matching Score', match_score_str, styles),
         _info_row('Assessment', assessment.display_name or assessment.name, styles),
 
         _info_row(
