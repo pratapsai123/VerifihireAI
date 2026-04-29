@@ -1,2005 +1,2005 @@
-{ 
-  "skill": "Open CV", 
+{
+  "skill": "OpenCV",
   "questions": [
     {
-    "question": "Which function is used to read an image from a file in OpenCV?",
-    "options": {
-      "A": "cv2.open()",
-      "B": "cv2.imread()",
-      "C": "cv2.loadImage()",
-      "D": "cv2.read_file()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the default color space used when OpenCV loads a color image?",
-    "options": {
-      "A": "RGB",
-      "B": "HSV",
-      "C": "BGR",
-      "D": "CMYK"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "In OpenCV, which coordinate represents the top-left corner of an image?",
-    "options": {
-      "A": "(0, 0)",
-      "B": "(1, 1)",
-      "C": "(-1, -1)",
-      "D": "(Width, Height)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which function is used to display an image in a window?",
-    "options": {
-      "A": "cv2.show()",
-      "B": "cv2.display()",
-      "C": "cv2.imshow()",
-      "D": "cv2.view()"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "What does 'cv2.waitKey(0)' do in an OpenCV script?",
-    "options": {
-      "A": "It waits for 0 milliseconds and closes the window.",
-      "B": "It displays a timer at the bottom of the image.",
-      "C": "It pauses execution indefinitely until a key is pressed.",
-      "D": "It speeds up the image processing by 10%."
-    },
-    "answer": "C"
-  },
-  {
-    "question": "Which flag is used in 'cv2.imread()' to load an image in grayscale mode?",
-    "options": {
-      "A": "cv2.IMREAD_COLOR",
-      "B": "cv2.IMREAD_GRAYSCALE",
-      "C": "cv2.IMREAD_UNCHANGED",
-      "D": "cv2.GRAY_SCALE"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How do you access the dimensions (Height, Width, Channels) of an image stored as a NumPy array in Python?",
-    "options": {
-      "A": "image.size()",
-      "B": "image.dimensions",
-      "C": "image.shape",
-      "D": "image.get_dims()"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "Which function is used to save an image to the local disk?",
-    "options": {
-      "A": "cv2.save()",
-      "B": "cv2.imwrite()",
-      "C": "cv2.export()",
-      "D": "cv2.storeImage()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of 'cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)'?",
-    "options": {
-      "A": "It brightens the image.",
-      "B": "It converts a BGR image to grayscale.",
-      "C": "It adds a gray border around the image.",
-      "D": "It deletes the color channels permanently."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In OpenCV drawing functions, what does a thickness value of -1 usually signify?",
-    "options": {
-      "A": "A dotted line.",
-      "B": "A filled shape.",
-      "C": "A transparent line.",
-      "D": "An error in the code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to draw a straight line on an image?",
-    "options": {
-      "A": "cv2.drawLine()",
-      "B": "cv2.line()",
-      "C": "cv2.draw_path()",
-      "D": "cv2.segment()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.destroyAllWindows()'?",
-    "options": {
-      "A": "To delete all images from the hard drive.",
-      "B": "To close all open highgui windows.",
-      "C": "To crash the Python interpreter.",
-      "D": "To clear the metadata of the current image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to resize an image in OpenCV?",
-    "options": {
-      "A": "cv2.scale()",
-      "B": "cv2.resize()",
-      "C": "cv2.magnify()",
-      "D": "cv2.transform()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.flip(img, 1)' do to an image?",
-    "options": {
-      "A": "Flips it vertically.",
-      "B": "Flips it horizontally.",
-      "C": "Rotates it by 90 degrees.",
-      "D": "Inverts the colors."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to capture video from a camera?",
-    "options": {
-      "A": "cv2.VideoGet()",
-      "B": "cv2.VideoCapture()",
-      "C": "cv2.CameraStream()",
-      "D": "cv2.GrabFrame()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How can you draw a circle on an image in OpenCV?",
-    "options": {
-      "A": "cv2.ellipse(..., circle=True)",
-      "B": "cv2.circle()",
-      "C": "cv2.drawCircle()",
-      "D": "cv2.round()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the default data type of a standard 8-bit image loaded via OpenCV?",
-    "options": {
-      "A": "float32",
-      "B": "uint8",
-      "C": "int64",
-      "D": "double"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function allows you to get a single pixel's value at row 10 and column 20 in Python?",
-    "options": {
-      "A": "img.pixel(10, 20)",
-      "B": "img[10, 20]",
-      "C": "img.get(10, 20)",
-      "D": "img.loc[10, 20]"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.rectangle()'?",
-    "options": {
-      "A": "To crop an image into a rectangular shape.",
-      "B": "To draw a rectangle on a given image.",
-      "C": "To find rectangular objects in an image.",
-      "D": "To count the number of corners in an image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which method is used to check if a VideoCapture object was successfully opened?",
-    "options": {
-      "A": "cap.status()",
-      "B": "cap.isOpened()",
-      "C": "cap.check()",
-      "D": "cap.active()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What color is represented by (255, 0, 0) in OpenCV BGR format?",
-    "options": {
-      "A": "Red",
-      "B": "Blue",
-      "C": "Green",
-      "D": "White"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function puts text on an image?",
-    "options": {
-      "A": "cv2.drawText()",
-      "B": "cv2.putText()",
-      "C": "cv2.write()",
-      "D": "cv2.addLabel()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "To read a video file frame by frame, which method is called on a VideoCapture object?",
-    "options": {
-      "A": "cap.next()",
-      "B": "cap.read()",
-      "C": "cap.getFrame()",
-      "D": "cap.fetch()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.threshold()' used for?",
-    "options": {
-      "A": "To increase the brightness of the whole image.",
-      "B": "To convert a grayscale image to a binary image.",
-      "C": "To detect the edges of a circle.",
-      "D": "To rotate the image by a fixed angle."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How do you create a black image of size 512x512 with 3 channels in Python?",
-    "options": {
-      "A": "cv2.empty((512, 512, 3))",
-      "B": "np.zeros((512, 512, 3), np.uint8)",
-      "C": "np.ones((512, 512, 3)) * 0",
-      "D": "cv2.create(512, 512, 3)"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the function 'cv2.split()' do?",
-    "options": {
-      "A": "Splits a video into two separate files.",
-      "B": "Divides a multi-channel image into individual color planes.",
-      "C": "Divides an image into 4 equal quadrants.",
-      "D": "Separates the foreground from the background."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is the inverse of 'cv2.split()', combining color channels?",
-    "options": {
-      "A": "cv2.combine()",
-      "B": "cv2.merge()",
-      "C": "cv2.join()",
-      "D": "cv2.stack()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.copyMakeBorder()' used for?",
-    "options": {
-      "A": "To copy an image to the clipboard.",
-      "B": "To create a border (padding) around an image.",
-      "C": "To detect the boundaries of an object.",
-      "D": "To crop the edges of a photo."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which constant is used to flip an image both horizontally and vertically simultaneously?",
-    "options": {
-      "A": "1",
-      "B": "-1",
-      "C": "0",
-      "D": "2"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.putText()', which parameter controls the font style?",
-    "options": {
-      "A": "style",
-      "B": "fontFace",
-      "C": "fontName",
-      "D": "textType"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.getRotationMatrix2D()' help you calculate?",
-    "options": {
-      "A": "The brightness of a rotated pixel.",
-      "B": "The 2x3 transformation matrix for image rotation.",
-      "C": "The area of a rotated rectangle.",
-      "D": "The speed of the CPU during rotation."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.addWeighted()' primarily used for?",
-    "options": {
-      "A": "Calculating the file size of two images.",
-      "B": "Blending two images together with different weights.",
-      "C": "Adding a watermark to a video frame.",
-      "D": "Increasing the weight of the red channel."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to convert an image from BGR to HSV color space?",
-    "options": {
-      "A": "cv2.toHSV()",
-      "B": "cv2.cvtColor(img, cv2.COLOR_BGR2HSV)",
-      "C": "cv2.convert(img, 'HSV')",
-      "D": "cv2.extractHSV()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.namedWindow()'?",
-    "options": {
-      "A": "To rename an existing image file.",
-      "B": "To create a placeholder window with a specific name for displaying images.",
-      "C": "To find windows in a photo of a building.",
-      "D": "To record the name of the user."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'alpha' channel in an image represent?",
-    "options": {
-      "A": "Brightness",
-      "B": "Transparency",
-      "C": "Saturation",
-      "D": "Contrast"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which bitwise operation is commonly used to apply a mask to an image?",
-    "options": {
-      "A": "cv2.bitwise_or()",
-      "B": "cv2.bitwise_and()",
-      "C": "cv2.bitwise_xor()",
-      "D": "cv2.bitwise_not()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.absdiff()' used for?",
-    "options": {
-      "A": "Calculating the average difference between two images.",
-      "B": "Calculating the absolute difference between two images (useful for motion detection).",
-      "C": "Finding the absolute value of a single pixel.",
-      "D": "Rotating an image by an absolute angle."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.VideoCapture', what does the argument '0' usually refer to?",
-    "options": {
-      "A": "The first video file in the directory.",
-      "B": "The default built-in camera.",
-      "C": "Recording at 0 frames per second.",
-      "D": "Stopping the video capture immediately."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to create a trackbar on an OpenCV window?",
-    "options": {
-      "A": "cv2.addTrackbar()",
-      "B": "cv2.createTrackbar()",
-      "C": "cv2.setTrackbar()",
-      "D": "cv2.slider()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the maximum value of a pixel in a standard CV_8U grayscale image?",
-    "options": {
-      "A": "100",
-      "B": "255",
-      "C": "512",
-      "D": "1024"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function draws an ellipse on an image?",
-    "options": {
-      "A": "cv2.drawOval()",
-      "B": "cv2.ellipse()",
-      "C": "cv2.circle(..., oval=True)",
-      "D": "cv2.curve()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.IMREAD_UNCHANGED' do?",
-    "options": {
-      "A": "It prevents the image from being edited.",
-      "B": "It loads the image as is, including the alpha channel if present.",
-      "C": "It loads only the metadata of the image.",
-      "D": "It reloads the last image used in the session."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How do you convert an image to a NumPy array in OpenCV-Python?",
-    "options": {
-      "A": "np.asarray(img)",
-      "B": "OpenCV-Python already stores images as NumPy arrays by default.",
-      "C": "cv2.toNumPy(img)",
-      "D": "img.values"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the function of 'cv2.getTrackbarPos()'?",
-    "options": {
-      "A": "To set the position of a trackbar.",
-      "B": "To retrieve the current value/position of a specific trackbar.",
-      "C": "To count how many trackbars are in a window.",
-      "D": "To delete a trackbar from a window."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to draw polygons on an image?",
-    "options": {
-      "A": "cv2.drawPoly()",
-      "B": "cv2.polylines()",
-      "C": "cv2.shape()",
-      "D": "cv2.multiLine()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.setMouseCallback()'?",
-    "options": {
-      "A": "To change the physical color of the mouse cursor.",
-      "B": "To execute a specific function when a mouse event occurs on a window.",
-      "C": "To find the mouse in a photograph.",
-      "D": "To disable the mouse during image processing."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.BORDER_CONSTANT' specify in padding operations?",
-    "options": {
-      "A": "The border size never changes.",
-      "B": "A constant colored border is added around the image.",
-      "C": "The border reflects the pixels from the image edge.",
-      "D": "The border is transparent."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function can be used to perform an affine transformation on an image?",
-    "options": {
-      "A": "cv2.warpLinear()",
-      "B": "cv2.warpAffine()",
-      "C": "cv2.transformAffine()",
-      "D": "cv2.moveImage()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In OpenCV, which axis does the 'shape[0]' of a NumPy image array correspond to?",
-    "options": {
-      "A": "Width",
-      "B": "Height",
-      "C": "Color Channels",
-      "D": "Transparency"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.EVENT_LBUTTONDOWN' used for?",
-    "options": {
-      "A": "To draw a button on the image.",
-      "B": "To detect when the left mouse button is clicked.",
-      "C": "To move a window to the bottom of the screen.",
-      "D": "To decrease the volume of a video."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to create a structured element (kernel) for morphological operations?",
-    "options": {
-      "A": "cv2.kernel()",
-      "B": "cv2.getStructuringElement()",
-      "C": "cv2.createMatrix()",
-      "D": "cv2.morphKernel()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.LUT()' used for?",
-    "options": {
-      "A": "To light up a dark image.",
-      "B": "To perform a Look-Up Table transformation for intensity mapping.",
-      "C": "To translate the image by a fixed vector.",
-      "D": "To list all users in a specific role."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which constant represents the Hue-Saturation-Value color space in 'cv2.cvtColor'?",
-    "options": {
-      "A": "cv2.COLOR_BGR2RGB",
-      "B": "cv2.COLOR_BGR2HSV",
-      "C": "cv2.COLOR_RGB2GRAY",
-      "D": "cv2.COLOR_BGR2LAB"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.flip(img, 0)' result in?",
-    "options": {
-      "A": "Horizontal flip.",
-      "B": "Vertical flip.",
-      "C": "Both horizontal and vertical flip.",
-      "D": "No change to the image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the function of 'cv2.pyrUp()'?",
-    "options": {
-      "A": "To delete the top of a pyramid in a photo.",
-      "B": "To upsample an image by a factor of two.",
-      "C": "To increase the brightness of the center pixel.",
-      "D": "To rotate the image by 45 degrees."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.pyrDown()' used for?",
-    "options": {
-      "A": "To move an image to a lower directory.",
-      "B": "To downsample an image by a factor of two.",
-      "C": "To decrease the resolution of a video file.",
-      "D": "To find objects at the bottom of a frame."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function calculates the sum of all pixel values in an image?",
-    "options": {
-      "A": "cv2.total()",
-      "B": "cv2.sumElems()",
-      "C": "cv2.add()",
-      "D": "cv2.integrate()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.mean()' return for a 3-channel image?",
-    "options": {
-      "A": "A single average value for the whole image.",
-      "B": "A tuple of the average values for each channel.",
-      "C": "A new grayscale version of the image.",
-      "D": "The middle pixel of the image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.resizeWindow()'?",
-    "options": {
-      "A": "To change the size of the original image data.",
-      "B": "To change the dimensions of a named display window.",
-      "C": "To fit the image to the desktop wallpaper.",
-      "D": "To minimize all open windows."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which parameter in 'cv2.VideoCapture.set()' is used to change the frame width?",
-    "options": {
-      "A": "cv2.CAP_PROP_HEIGHT",
-      "B": "cv2.CAP_PROP_FRAME_WIDTH",
-      "C": "cv2.CAP_PROP_FPS",
-      "D": "cv2.CAP_PROP_POS_MSEC"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.inRange()' commonly used for?",
-    "options": {
-      "A": "To check if a file exists.",
-      "B": "To perform color filtering by creating a mask based on a range of HSV values.",
-      "C": "To count the number of pixels in a circle.",
-      "D": "To find the highest intensity pixel in an image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "How do you release a VideoCapture object 'cap' when finished?",
-    "options": {
-      "A": "cap.close()",
-      "B": "cap.release()",
-      "C": "cap.stop()",
-      "D": "del cap"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.getTextSize()' help you calculate?",
-    "options": {
-      "A": "The number of words in a text string.",
-      "B": "The width and height of a text string when rendered with a specific font.",
-      "C": "The font size that fits the image perfectly.",
-      "D": "The memory used to store a font file."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In OpenCV coordinate system, which direction is the positive Y-axis?",
-    "options": {
-      "A": "Upwards",
-      "B": "Downwards",
-      "C": "Leftwards",
-      "D": "Towards the viewer"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to convert an image to a different data type (e.g., from uint8 to float32) in Python?",
-    "options": {
-      "A": "cv2.convertScaleAbs()",
-      "B": "img.astype()",
-      "C": "cv2.toType()",
-      "D": "cv2.retype()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of 'cv2.imread()' if the file does not exist?",
-    "options": {
-      "A": "An exception is thrown.",
-      "B": "None is returned.",
-      "C": "A blank white image is returned.",
-      "D": "The program crashes immediately."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which specific function in OpenCV is used to find the edges of an image using the Canny algorithm?",
-    "options": {
-      "A": "cv2.findEdges()",
-      "B": "cv2.Canny()",
-      "C": "cv2.Sobel(edges=True)",
-      "D": "cv2.gradient()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary effect of applying 'cv2.GaussianBlur()' to an image?",
-    "options": {
-      "A": "It increases the sharpness of the edges.",
-      "B": "It reduces high-frequency noise and blurs the image.",
-      "C": "It converts the image into a 3D perspective.",
-      "D": "It highlights the primary colors in the BGR spectrum."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.findContours()', what does the 'cv2.RETR_EXTERNAL' retrieval mode do?",
-    "options": {
-      "A": "Retrieves all contours in a hierarchical tree.",
-      "B": "Retrieves only the extreme outer contours.",
-      "C": "Retrieves all contours without any parent-child relationship.",
-      "D": "Deletes the contours that touch the image border."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to calculate the area of a detected contour?",
-    "options": {
-      "A": "cv2.calcArea()",
-      "B": "cv2.contourArea()",
-      "C": "cv2.getSurface()",
-      "D": "cv2.measureContour()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the main purpose of 'cv2.dilate()' in morphological operations?",
-    "options": {
-      "A": "To make objects in the foreground thinner.",
-      "B": "To increase the size of the foreground object and fill small holes.",
-      "C": "To change the image resolution.",
-      "D": "To rotate the image by a random degree."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which interpolation method is generally recommended for zooming in (upscaling) an image in 'cv2.resize()'?",
-    "options": {
-      "A": "cv2.INTER_NEAREST",
-      "B": "cv2.INTER_CUBIC",
-      "C": "cv2.INTER_AREA",
-      "D": "cv2.INTER_BITS"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.Sobel()' calculate?",
-    "options": {
-      "A": "The color histogram of the image.",
-      "B": "Image gradients (first-order derivatives) in the x or y direction.",
-      "C": "The distance between two objects.",
-      "D": "The number of faces in a video frame."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function allows you to map a point from one 2D image to another using four pairs of points?",
-    "options": {
-      "A": "cv2.getRotationMatrix2D()",
-      "B": "cv2.getPerspectiveTransform()",
-      "C": "cv2.warpAffine()",
-      "D": "cv2.remap()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.medianBlur()' particularly effective at removing?",
-    "options": {
-      "A": "Motion blur.",
-      "B": "Salt-and-pepper noise.",
-      "C": "Gaussian noise.",
-      "D": "The background image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function is used to find the bounding rectangle of a contour?",
-    "options": {
-      "A": "cv2.getRect()",
-      "B": "cv2.boundingRect()",
-      "C": "cv2.rectangleContour()",
-      "D": "cv2.boxPoints()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of applying 'cv2.erode()'?",
-    "options": {
-      "A": "It makes the white regions (foreground) thicker.",
-      "B": "It thins the white regions (foreground) and removes small noise.",
-      "C": "It adds a color tint to the image.",
-      "D": "It mirrors the image vertically."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to perform a template matching operation?",
-    "options": {
-      "A": "cv2.findTemplate()",
-      "B": "cv2.matchTemplate()",
-      "C": "cv2.comparePattern()",
-      "D": "cv2.searchImage()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.Canny()', what do the two threshold values represent?",
-    "options": {
-      "A": "The minimum and maximum pixel brightness.",
-      "B": "The low and high thresholds for hysteresis edge linking.",
-      "C": "The width and height of the kernel.",
-      "D": "The red and blue color cutoffs."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.adaptiveThreshold()'?",
-    "options": {
-      "A": "To threshold an image using a single global value.",
-      "B": "To calculate the threshold for small regions, handling varying lighting conditions.",
-      "C": "To automatically change the threshold based on the user's input.",
-      "D": "To increase the frame rate of a live video."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to draw the contours found by 'cv2.findContours()'?",
-    "options": {
-      "A": "cv2.outline()",
-      "B": "cv2.drawContours()",
-      "C": "cv2.renderPaths()",
-      "D": "cv2.imshowContours()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'cv2.MORPH_OPEN' flag represent in 'cv2.morphologyEx()'?",
-    "options": {
-      "A": "Dilation followed by Erosion.",
-      "B": "Erosion followed by Dilation.",
-      "C": "Subtracting the original from the dilated image.",
-      "D": "Calculating the image gradient."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to calculate the center of mass (centroids) of a contour?",
-    "options": {
-      "A": "cv2.centroid()",
-      "B": "cv2.moments()",
-      "C": "cv2.getCenter()",
-      "D": "cv2.calculateMass()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary difference between 'cv2.warpAffine()' and 'cv2.warpPerspective()'?",
-    "options": {
-      "A": "Affine uses a 3x3 matrix; Perspective uses 2x3.",
-      "B": "Affine preserves parallel lines; Perspective does not.",
-      "C": "Affine is for video; Perspective is for still images.",
-      "D": "There is no difference between the two."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to approximate a contour shape with fewer vertices?",
-    "options": {
-      "A": "cv2.reducePoints()",
-      "B": "cv2.approxPolyDP()",
-      "C": "cv2.simplifyContour()",
-      "D": "cv2.arcLength()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.HoughLines()' detect in an image?",
-    "options": {
-      "A": "Circles and ovals.",
-      "B": "Straight lines using the Hough transform.",
-      "C": "Corner points in a checkerboard.",
-      "D": "Text characters for OCR."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.matchTemplate()', which method flag represents the Normalized Correlation Coefficient?",
-    "options": {
-      "A": "cv2.TM_SQDIFF",
-      "B": "cv2.TM_CCOEFF_NORMED",
-      "C": "cv2.TM_CCORR",
-      "D": "cv2.TM_MATCH_PERCENT"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.bilateralFilter()'?",
-    "options": {
-      "A": "To blur the image while increasing the noise.",
-      "B": "To reduce noise while keeping edges sharp.",
-      "C": "To apply the same filter twice to both sides of the image.",
-      "D": "To convert an image to a heat map."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to calculate the perimeter of a contour?",
-    "options": {
-      "A": "cv2.getPerimeter()",
-      "B": "cv2.arcLength()",
-      "C": "cv2.contourPath()",
-      "D": "cv2.measureLength()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.HoughCircles()' used for?",
-    "options": {
-      "A": "Drawing circles on an image.",
-      "B": "Detecting circular shapes in a grayscale image.",
-      "C": "Calculating the radius of a contour.",
-      "D": "Finding the center of a square."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which morphological operation is useful for extracting the outer boundary of an object?",
-    "options": {
-      "A": "cv2.MORPH_CLOSE",
-      "B": "cv2.MORPH_GRADIENT",
-      "C": "cv2.MORPH_TOPHAT",
-      "D": "cv2.MORPH_BLACKHAT"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.Laplacian()' help you detect?",
-    "options": {
-      "A": "The dominant color of an image.",
-      "B": "Regions of rapid intensity change (edges/second derivatives).",
-      "C": "The distance between the camera and the object.",
-      "D": "The number of layers in a TIFF file."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.findContours()', what is the purpose of the 'chain approximation' parameter?",
-    "options": {
-      "A": "To define the color of the contour line.",
-      "B": "To decide whether to store all boundary points or just compressed vertices.",
-      "C": "To link multiple images into a chain.",
-      "D": "To speed up the camera frame rate."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function creates a 1D or 2D histogram from an image?",
-    "options": {
-      "A": "cv2.makeHist()",
-      "B": "cv2.calcHist()",
-      "C": "cv2.getFrequency()",
-      "D": "cv2.plotPixels()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the function 'cv2.equalizeHist()' used for?",
-    "options": {
-      "A": "To make the image resolution equal on both sides.",
-      "B": "To improve the contrast of a grayscale image by spreading out intensity values.",
-      "C": "To delete duplicate pixels from the data.",
-      "D": "To align two different histograms."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV tool is typically used to normalize an image's pixel values to a specific range?",
-    "options": {
-      "A": "cv2.scale()",
-      "B": "cv2.normalize()",
-      "C": "cv2.standardize()",
-      "D": "cv2.rescale()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.filter2D()' used for?",
-    "options": {
-      "A": "To filter out 2D images from a 3D video.",
-      "B": "To convolve an image with a custom-defined kernel.",
-      "C": "To remove the second dimension of a matrix.",
-      "D": "To sort the pixels by their BGR values."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'cv2.MORPH_CLOSE' operation do?",
-    "options": {
-      "A": "Erosion followed by Dilation.",
-      "B": "Dilation followed by Erosion (useful for closing small holes inside objects).",
-      "C": "Closing the application window.",
-      "D": "Calculating the inverse of the image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to find the minimum area enclosing circle of a set of points?",
-    "options": {
-      "A": "cv2.getCircle()",
-      "B": "cv2.minEnclosingCircle()",
-      "C": "cv2.fitCircle()",
-      "D": "cv2.boundCircle()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.calcHist()', what is the 'mask' parameter used for?",
-    "options": {
-      "A": "To hide the identity of the person in the photo.",
-      "B": "To calculate the histogram for only a specific part of the image.",
-      "C": "To add a physical mask to a face in the image.",
-      "D": "To encrypt the histogram data."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.matchShapes()' used to compare?",
-    "options": {
-      "A": "The file sizes of two images.",
-      "B": "Two contours based on their Hu-moments (shape similarity).",
-      "C": "The color distribution of two polygons.",
-      "D": "The number of vertices in two shapes."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function calculates the distance from every pixel to the nearest binary boundary?",
-    "options": {
-      "A": "cv2.calcDistance()",
-      "B": "cv2.distanceTransform()",
-      "C": "cv2.getProximity()",
-      "D": "cv2.boundaryDist()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.Scharr()'?",
-    "options": {
-      "A": "To compress the image using the Scharr algorithm.",
-      "B": "To calculate image derivatives with a higher accuracy than the standard Sobel operator.",
-      "C": "To detect the rotation of a checkerboard.",
-      "D": "To change the background to black and white."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function finds the convex hull of a point set?",
-    "options": {
-      "A": "cv2.findHull()",
-      "B": "cv2.convexHull()",
-      "C": "cv2.outlineHull()",
-      "D": "cv2.wrapPoints()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.remap()' used for in OpenCV?",
-    "options": {
-      "A": "To rename all variables in a script.",
-      "B": "To apply a generic geometrical transformation to an image based on map arrays.",
-      "C": "To find a new path for a robot.",
-      "D": "To redo the mapping of a database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'cv2.CHAIN_APPROX_SIMPLE' flag do in 'cv2.findContours()'?",
-    "options": {
-      "A": "Retrieves only the horizontal points.",
-      "B": "Compresses horizontal, vertical, and diagonal segments and leaves only their end points.",
-      "C": "Stores every single point on the contour boundary.",
-      "D": "Calculates a simple average of the contour."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function is used to perform pyramid-based image blending?",
-    "options": {
-      "A": "cv2.blendPyramid()",
-      "B": "cv2.pyrUp() and cv2.pyrDown()",
-      "C": "cv2.mergeImages()",
-      "D": "cv2.combineScales()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.compareHist()' used for?",
-    "options": {
-      "A": "To merge two different histograms.",
-      "B": "To calculate the numerical similarity between two histograms.",
-      "C": "To find the highest peak in a histogram.",
-      "D": "To sort histograms by their bin count."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which flag is used in 'cv2.warpAffine()' to handle the inverse transformation?",
-    "options": {
-      "A": "cv2.WARP_BACKWARD",
-      "B": "cv2.WARP_INVERSE_MAP",
-      "C": "cv2.WARP_FLIP",
-      "D": "cv2.WARP_REVERSE"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of 'cv2.bitwise_not()' applied to a grayscale image?",
-    "options": {
-      "A": "The image becomes completely transparent.",
-      "B": "The pixel intensities are inverted (e.g., 0 becomes 255).",
-      "C": "The image is deleted from RAM.",
-      "D": "The edges of the image are sharpened."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function converts an image from the spatial domain to the frequency domain?",
-    "options": {
-      "A": "cv2.fft()",
-      "B": "cv2.dft()",
-      "C": "cv2.freq()",
-      "D": "cv2.spatialToFreq()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.grabCut()' primarily used for?",
-    "options": {
-      "A": "Extracting frames from a video file.",
-      "B": "Interactive foreground extraction/segmentation.",
-      "C": "Cutting an image into equal squares.",
-      "D": "Capturing a screenshot of the window."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.morphologyEx()', what does 'cv2.MORPH_TOPHAT' extract?",
-    "options": {
-      "A": "The bottom-hat of the image.",
-      "B": "The difference between the input image and its opening (bright spots smaller than the kernel).",
-      "C": "The largest object in the image.",
-      "D": "The metadata from the top of the file."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to calculate the integral image of a given image?",
-    "options": {
-      "A": "cv2.sumPixels()",
-      "B": "cv2.integral()",
-      "C": "cv2.calcIntegral()",
-      "D": "cv2.areaSum()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.connectedComponents()' return?",
-    "options": {
-      "A": "A list of all the cameras connected to the PC.",
-      "B": "A label map where each connected region in a binary image is assigned a unique integer.",
-      "C": "The number of users connected to the internet.",
-      "D": "A way to connect two different images."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which constant is used in 'cv2.Canny()' to indicate the aperture size for the Sobel operator?",
-    "options": {
-      "A": "ksize",
-      "B": "apertureSize",
-      "C": "sobel_width",
-      "D": "windowSize"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.boxFilter()' useful for?",
-    "options": {
-      "A": "Detecting boxes in a warehouse.",
-      "B": "Applying a simple linear average blur to an image.",
-      "C": "Drawing boxes around detected faces.",
-      "D": "Calculating the volume of a 3D box."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function calculates the Hu-moments of an image?",
-    "options": {
-      "A": "cv2.getHu()",
-      "B": "cv2.HuMoments()",
-      "C": "cv2.momentsHu()",
-      "D": "cv2.calcHu()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the effect of 'cv2.pyrMeanShiftFiltering()'?",
-    "options": {
-      "A": "It shifts the image mean to zero.",
-      "B": "It performs image segmentation by grouping similar pixels in color-spatial space.",
-      "C": "It shifts the pyramid level of the image.",
-      "D": "It moves the pixels to the left."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function provides a way to estimate the motion between two images using optical flow?",
-    "options": {
-      "A": "cv2.estimateMotion()",
-      "B": "cv2.calcOpticalFlowPyrLK()",
-      "C": "cv2.getFlow()",
-      "D": "cv2.trackPixels()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.setRNGSeed()' do?",
-    "options": {
-      "A": "It plants a seed for a physical garden.",
-      "B": "It sets the seed for the random number generator to ensure reproducible results.",
-      "C": "It generates a random image.",
-      "D": "It selects a random pixel from the center."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.threshold()', which type flag is used for Otsu’s binarization?",
-    "options": {
-      "A": "cv2.THRESH_BINARY",
-      "B": "cv2.THRESH_OTSU",
-      "C": "cv2.THRESH_AUTO",
-      "D": "cv2.THRESH_MEAN"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function allows you to calculate the rotation of a rectangle that is not aligned with the axes?",
-    "options": {
-      "A": "cv2.boundingRect()",
-      "B": "cv2.minAreaRect()",
-      "C": "cv2.getRotRect()",
-      "D": "cv2.fitBox()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.fillPoly()'?",
-    "options": {
-      "A": "To find all polygons in an image.",
-      "B": "To draw and fill the area inside one or more polygons.",
-      "C": "To calculate the area of a polygon.",
-      "D": "To rotate a polygon around its center."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to create a look-up table for 'cv2.LUT()'?",
-    "options": {
-      "A": "np.arange() or similar NumPy array creation.",
-      "B": "cv2.createLUT()",
-      "C": "cv2.makeTable()",
-      "D": "cv2.getMapping()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'cv2.convertScaleAbs()' do?",
-    "options": {
-      "A": "Converts an image to an absolute path string.",
-      "B": "Scales, calculates absolute values, and converts the result to 8-bit unsigned integer.",
-      "C": "Increases the absolute brightness of the image.",
-      "D": "Converts the image to a different file format."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function calculates the magnitude and angle of 2D vectors?",
-    "options": {
-      "A": "cv2.calcVector()",
-      "B": "cv2.cartToPolar()",
-      "C": "cv2.getMagAngle()",
-      "D": "cv2.vectorize()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.applyColorMap()' used for?",
-    "options": {
-      "A": "To create a map of all colors in the image.",
-      "B": "To apply a false-color palette to a grayscale image for visualization.",
-      "C": "To find the GPS coordinates of a color.",
-      "D": "To delete all color information."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.matchTemplate()', what is returned by the function?",
-    "options": {
-      "A": "The (x, y) coordinates of the match.",
-      "B": "A grayscale image where each pixel denotes how much the neighborhood matches the template.",
-      "C": "A boolean value (True/False).",
-      "D": "A list of all matching objects."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to normalize the light of an image using the CLAHE algorithm?",
-    "options": {
-      "A": "cv2.normLight()",
-      "B": "cv2.createCLAHE()",
-      "C": "cv2.equalizeLight()",
-      "D": "cv2.autoContrast()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.connectedComponentsWithStats()'?",
-    "options": {
-      "A": "To check the internet status of connected users.",
-      "B": "To find connected regions and return their area, bounding box, and centroids.",
-      "C": "To calculate the statistical mean of an image.",
-      "D": "To connect two different server nodes."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function performs an inverse discrete Fourier transform?",
-    "options": {
-      "A": "cv2.idft()",
-      "B": "cv2.ifft()",
-      "C": "cv2.backDFT()",
-      "D": "cv2.spatialTransform()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which patented (formerly) algorithm in OpenCV is known for being invariant to image scale and rotation while providing highly distinctive local descriptors?",
-    "options": {
-      "A": "HOG (Histogram of Oriented Gradients)",
-      "B": "SIFT (Scale-Invariant Feature Transform)",
-      "C": "Canny edge detection",
-      "D": "Bilateral filtering"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary purpose of the 'Camera Matrix' (Intrinsic Matrix) in camera calibration?",
-    "options": {
-      "A": "To define the physical weight of the camera hardware.",
-      "B": "To relate the pixel coordinates in the 2D image plane to 3D coordinates in the camera coordinate system.",
-      "C": "To calculate the rotation of the camera relative to the world origin.",
-      "D": "To adjust the ISO and shutter speed of a digital sensor automatically."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In Stereo Vision, what does the 'Disparity Map' represent?",
-    "options": {
-      "A": "The difference in color between two identical images.",
-      "B": "The difference in coordinates of similar pixels between the left and right stereo images.",
-      "C": "The error rate of the camera calibration process.",
-      "D": "The number of hidden layers in a deep neural network."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to calculate the Homography matrix 'H' between two planes given four or more point matches?",
-    "options": {
-      "A": "cv2.findPlanarMapping()",
-      "B": "cv2.findHomography()",
-      "C": "cv2.getAffineTransform()",
-      "D": "cv2.solvePnP()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'RANSAC' commonly used for in OpenCV feature matching?",
-    "options": {
-      "A": "To compress image data for faster transmission.",
-      "B": "To robustly estimate a model (like homography) by ignoring outliers in the matched points.",
-      "C": "To increase the brightness of a video frame.",
-      "D": "To calculate the color histogram of a specific region."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In the context of the OpenCV DNN module, what does 'cv2.dnn.blobFromImage' do?",
-    "options": {
-      "A": "It converts an image into a binary mask for thresholding.",
-      "B": "It preprocesses an image by resizing and mean subtraction to prepare it for input into a neural network.",
-      "C": "It finds all circular 'blobs' in a grayscale image.",
-      "D": "It saves the weights of a neural network to a .txt file."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the function of the 'Essential Matrix' (E) in epipolar geometry?",
-    "options": {
-      "A": "It stores the essential metadata of the image file.",
-      "B": "It relates corresponding points in two calibrated camera views.",
-      "C": "It identifies the essential primary colors in a BGR image.",
-      "D": "It provides a shortcut for rotating an image by 90 degrees."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which descriptor in OpenCV is designed to be a fast, binary alternative to SIFT and SURF?",
-    "options": {
-      "A": "FAST",
-      "B": "ORB (Oriented FAST and Rotated BRIEF)",
-      "C": "Harris",
-      "D": "Sobel"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.solvePnP()'?",
-    "options": {
-      "A": "To solve a puzzle in a computer game using AI.",
-      "B": "To estimate the pose (rotation and translation) of a calibrated camera given 3D points and their 2D projections.",
-      "C": "To print the coordinates of every pixel in a window.",
-      "D": "To connect a camera to a plug-and-play network device."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Optical Flow', what is the main assumption behind the Lucas-Kanade method?",
-    "options": {
-      "A": "The camera is always moving at a constant speed.",
-      "B": "Pixels in a small neighborhood have the same displacement (spatial coherence).",
-      "C": "All images in the sequence must be in color.",
-      "D": "The background of the video must be perfectly white."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function is used to rectify stereo images so that the epipolar lines are horizontal?",
-    "options": {
-      "A": "cv2.straighten()",
-      "B": "cv2.stereoRectify()",
-      "C": "cv2.alignStereo()",
-      "D": "cv2.calibrateRect()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the 'Fundamental Matrix' (F) used for when cameras are uncalibrated?",
-    "options": {
-      "A": "To find the fundamental frequency of the image sensor.",
-      "B": "To relate pixel coordinates in two views without needing intrinsic parameters.",
-      "C": "To calculate the area of the camera lens.",
-      "D": "To determine the file format of the input image."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.KalmanFilter' achieve in object tracking?",
-    "options": {
-      "A": "It filters out Gaussian noise from a single image.",
-      "B": "It estimates the state of a dynamic system (like an object's position) over time, accounting for measurement noise.",
-      "C": "It removes people from a video background.",
-      "D": "It increases the saturation of the object being tracked."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function is used to compute the 'Descriptor' for a set of keypoints?",
-    "options": {
-      "A": "cv2.findKeypoints()",
-      "B": "feature.compute()",
-      "C": "cv2.getDescriptor()",
-      "D": "cv2.match()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Radial Distortion' in the context of camera lenses?",
-    "options": {
-      "A": "When the camera sensor gets too hot.",
-      "B": "An effect where straight lines appear curved (barrel or pincushion distortion).",
-      "C": "When the image colors bleed into each other.",
-      "D": "A software bug that occurs during image resizing."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV tool is typically used to draw 'matches' between two images?",
-    "options": {
-      "A": "cv2.lineMatches()",
-      "B": "cv2.drawMatches()",
-      "C": "cv2.connectKeypoints()",
-      "D": "cv2.renderSimilarity()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the primary difference between 'Brute-Force Matcher' and 'FLANN Matcher'?",
-    "options": {
-      "A": "Brute-Force is faster for large datasets.",
-      "B": "FLANN (Fast Library for Approximate Nearest Neighbors) is optimized for high-dimensional feature matching in large datasets.",
-      "C": "Brute-Force only works on binary images.",
-      "D": "FLANN is used exclusively for video tracking."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.undistort()', what are the primary inputs needed?",
-    "options": {
-      "A": "The image and its file name.",
-      "B": "The distorted image, camera matrix, and distortion coefficients.",
-      "C": "The resolution and color depth of the image.",
-      "D": "The rotation angle and scaling factor."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'K-Nearest Neighbors' (KNN) matching in OpenCV?",
-    "options": {
-      "A": "A way to find people living in the same neighborhood.",
-      "B": "A matching strategy where for each descriptor, the 'k' best matches are returned.",
-      "C": "A specialized software for measuring distance.",
-      "D": "Hiring a mathematician to verify image pixels."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'MSER' (Maximally Stable Extremal Regions) primarily used for?",
-    "options": {
-      "A": "To measure the speed of the GPU.",
-      "B": "To detect blobs and stable regions in an image, often used for text detection.",
-      "C": "To rotate an image around a random axis.",
-      "D": "To increase the frame rate of a video stream."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'Homography' matrix 'H' represent geometrically?",
-    "options": {
-      "A": "The rotation of the camera.",
-      "B": "A 3x3 transformation that maps points from one plane to another.",
-      "C": "The distance from the lens to the sensor.",
-      "D": "The number of users connected to a network."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In OpenCV's 'BackgroundSubtractorMOG2', what does 'MOG' stand for?",
-    "options": {
-      "A": "Matrix of Gradients",
-      "B": "Mixture of Gaussians",
-      "C": "Metadata of Graphics",
-      "D": "Model of Grayscale"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.decomposeEssentialMat()'?",
-    "options": {
-      "A": "To delete the essential matrix permanently.",
-      "B": "To extract the relative rotation and translation between two camera poses from an Essential matrix.",
-      "C": "To change the file format from JPG to PNG.",
-      "D": "To count the number of pixels in a frame."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function is used for camera calibration with a chessboard pattern?",
-    "options": {
-      "A": "cv2.calibrate()",
-      "B": "cv2.calibrateCamera()",
-      "C": "cv2.findPatternMatrix()",
-      "D": "cv2.alignCamera()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Epipolar Line' in stereo geometry?",
-    "options": {
-      "A": "The line representing the horizon of the image.",
-      "B": "The intersection of the epipolar plane with the image plane; the line on which a corresponding point must lie.",
-      "C": "A physical wire connecting two stereo cameras.",
-      "D": "A security certificate for 3D data."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.matchTemplate()', what happens if the template is not found?",
-    "options": {
-      "A": "An error is thrown.",
-      "B": "The result matrix will still contain values, but the peak/minimum will be less distinctive.",
-      "C": "The program crashes immediately.",
-      "D": "The image is automatically deleted."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Integral Image' (Summed-Area Table) used for in feature detection like Haar cascades?",
-    "options": {
-      "A": "To find the sum of all pixels in the whole image once.",
-      "B": "To calculate the sum of pixel values in any rectangular area in constant time O(1).",
-      "C": "To integrate the camera with a cloud server.",
-      "D": "To backup the SQL schema."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function provides a way to estimate the 3D coordinates of points given their projections in two views?",
-    "options": {
-      "A": "cv2.3DPoint()",
-      "B": "cv2.triangulatePoints()",
-      "C": "cv2.reconstruct()",
-      "D": "cv2.projectPoints()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.computeRecall()' used to evaluate?",
-    "options": {
-      "A": "The speed of the computer memory.",
-      "B": "The performance of a feature detector in terms of how many correct points it found.",
-      "C": "The brightness level of the monitor.",
-      "D": "The number of high-resolution files on a drive."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.dnn.readNetFromCaffe()', what is the '.prototxt' file used for?",
-    "options": {
-      "A": "Storing the binary weights of the model.",
-      "B": "Defining the architecture and structure of the neural network.",
-      "C": "Storing the copyright information.",
-      "D": "A specialized software for poets."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the result of 'cv2.decomposeProjectionMatrix()'?",
-    "options": {
-      "A": "A smaller version of the projection matrix.",
-      "B": "Intrinsic and extrinsic camera parameters (K, R, t).",
-      "C": "A way to backup the storage layer.",
-      "D": "The speed of the network data flow."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV algorithm is used for sparse optical flow tracking of specific points?",
-    "options": {
-      "A": "Farneback",
-      "B": "Lucas-Kanade (PyrLK)",
-      "C": "Canny",
-      "D": "ORB"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Homography' Decomposition significant for?",
-    "options": {
-      "A": "Breaking a building into pieces.",
-      "B": "Extracting possible camera motions (R, t) and plane normals from a homography matrix.",
-      "C": "A specialized software for architects.",
-      "D": "A security scan of the database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Feature Matching', what is the 'Ratio Test' proposed by David Lowe?",
-    "options": {
-      "A": "Checking the aspect ratio of the image.",
-      "B": "Rejecting matches where the distance to the best match is not significantly smaller than the distance to the second-best match.",
-      "C": "Comparing the width to the height of a contour.",
-      "D": "The total number of users divided by the number of images."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.estimateAffinePartial2D()'?",
-    "options": {
-      "A": "Estimating only the first half of a matrix.",
-      "B": "Estimating an affine transformation that includes only rotation, translation, and scaling.",
-      "C": "A way to name a database table.",
-      "D": "Increasing the memory usage of a query."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which algorithm in OpenCV is used for Dense Optical Flow?",
-    "options": {
-      "A": "Lucas-Kanade",
-      "B": "Gunnar Farneback's algorithm",
-      "C": "Harris Corner",
-      "D": "Sobel Gradient"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does 'cv2.projectPoints()' do?",
-    "options": {
-      "A": "Projects a slide show onto a wall.",
-      "B": "Transforms 3D world points into 2D image coordinates using camera parameters.",
-      "C": "Deletes points that are outside the frame.",
-      "D": "A specialized software for architects."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Camera Calibration', what is 'Tangential Distortion' caused by?",
-    "options": {
-      "A": "The camera lens being dirty.",
-      "B": "The lens and the image plane not being perfectly parallel.",
-      "C": "Using a cheap digital sensor.",
-      "D": "The physical speed of the camera shutter."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.HoughLinesP()' compared to 'cv2.HoughLines()'?",
-    "options": {
-      "A": "It is only for vertical lines.",
-      "B": "It is the Probabilistic version which is more efficient and returns the endpoints of detected segments.",
-      "C": "It is 100x slower.",
-      "D": "It requires an internet connection."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.descriptorExtractor_create()' used for in older OpenCV versions?",
-    "options": {
-      "A": "Extracting files from a ZIP archive.",
-      "B": "Creating an object to compute descriptors for given keypoints.",
-      "C": "Finding keypoints in an image.",
-      "D": "A security scan of the code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function provides the 'Stitching' pipeline for creating panoramas?",
-    "options": {
-      "A": "cv2.merge()",
-      "B": "cv2.Stitcher_create()",
-      "C": "cv2.panoramic()",
-      "D": "cv2.joinImages()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.getOptimalNewCameraMatrix()' used for after calibration?",
-    "options": {
-      "A": "To buy a better camera from an online store.",
-      "B": "To refine the camera matrix to better handle image borders after undistortion.",
-      "C": "To calculate the price of the sensor.",
-      "D": "To rotate the matrix by 45 degrees."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Z-buffering' in a 3D context (related to OpenCV visualization)?",
-    "options": {
-      "A": "Buffering a video from a Z-drive.",
-      "B": "Managing image depth coordinates in 3D graphics to decide which objects are visible.",
-      "C": "A specialized tool for measuring distance.",
-      "D": "A security password."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Deep Learning' (DNN), what is a 'Layer' in OpenCV?",
-    "options": {
-      "A": "A layer of physical dust on the server.",
-      "B": "A processing node in the neural network that performs a specific mathematical operation.",
-      "C": "A folder in the directory tree.",
-      "D": "A specialized software for architects."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'cv2.cornerSubPix()'?",
-    "options": {
-      "A": "To find smaller corners.",
-      "B": "To refine corner locations with sub-pixel accuracy.",
-      "C": "To count the number of pixels in a corner.",
-      "D": "To delete zero-value tokens from memory."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV module is used for processing point clouds and 3D data?",
-    "options": {
-      "A": "cv2.3D",
-      "B": "viz (or 3D in newer versions)",
-      "C": "cv2.cloud",
-      "D": "cv2.points"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Homography' 'Warping' used for?",
-    "options": {
-      "A": "Warping a video to make it look like a cartoon.",
-      "B": "Applying the homography matrix to an image to change its perspective.",
-      "C": "Deleting data after it has been used.",
-      "D": "Hiring a professional artist to draw lines."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.drawChessboardCorners()'?",
-    "options": {
-      "A": "A way to play chess against the computer.",
-      "B": "A function that visualizes the detected corners on a calibration pattern.",
-      "C": "A specialized tool for cleaning monitors.",
-      "D": "Increasing the memory usage."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Feature Extraction', what is 'BRIEF'?",
-    "options": {
-      "A": "A very short research study.",
-      "B": "Binary Robust Independent Elementary Features: a binary descriptor algorithm.",
-      "C": "A way to speed up the network connection.",
-      "D": "A security scan of the database."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.decomposeHomographyMat()'?",
-    "options": {
-      "A": "Decomposing a physical plane.",
-      "B": "Obtaining relative camera pose (R, t) from a homography matrix.",
-      "C": "A way to backup the storage layer.",
-      "D": "Hiring multiple people to read code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Epipole' in epipolar geometry?",
-    "options": {
-      "A": "The highest point on the camera lens.",
-      "B": "The point where the line connecting two camera centers intersects the image plane.",
-      "C": "A specialized pole used for field research.",
-      "D": "A security certificate for digital photos."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'cv2.stereoCalibrate()', what is calculated besides individual camera matrices?",
-    "options": {
-      "A": "The color of the cameras.",
-      "B": "The rotation (R) and translation (T) between the two cameras.",
-      "C": "The internet speed of the cameras.",
-      "D": "The number of pixels in the frame."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Mean-Shift' algorithm used for in tracking?",
-    "options": {
-      "A": "Shifting the mean value of pixels to zero.",
-      "B": "An iterative process to find the mode of a distribution, used for tracking objects based on histograms.",
-      "C": "A specialized software for gardeners.",
-      "D": "Deleting data from the future."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'CamShift' (Continuously Adaptive Mean Shift)?",
-    "options": {
-      "A": "A camera that physically moves.",
-      "B": "An enhancement of Mean-Shift that adjusts the tracking window size and orientation.",
-      "C": "A way to backup the SQL code.",
-      "D": "A security bridge for data."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.estimateAffine3D()' used for?",
-    "options": {
-      "A": "Estimating a 3D model of a house.",
-      "B": "Calculating the 3D affine transformation between two sets of 3D points.",
-      "C": "A way to backup the SQL code.",
-      "D": "A list of all project managers."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Feature Matching', what is 'Cross-Checking'?",
-    "options": {
-      "A": "Crossing out incorrect matches with a pen.",
-      "B": "Ensuring a match (i, j) is only kept if 'i' matches 'j' and 'j' matches 'i' inversely.",
-      "C": "A security scan for computer viruses.",
-      "D": "A specialized software for novelists."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.initUndistortRectifyMap()' used for?",
-    "options": {
-      "A": "Initializing a map of the local area.",
-      "B": "Computing the transformation maps for undistortion and rectification in stereo vision.",
-      "C": "A specialized software for architects.",
-      "D": "Recording the sound of the lab."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which OpenCV function calculates the 'Fundamental Matrix' from 7 or 8 points?",
-    "options": {
-      "A": "cv2.getFMatrix()",
-      "B": "cv2.findFundamentalMat()",
-      "C": "cv2.calcBaseMatrix()",
-      "D": "cv2.solveEpipolar()"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.correctMatches()' used for in Stereo Vision?",
-    "options": {
-      "A": "Correcting the grammar in matched text.",
-      "B": "Refining coordinates of matched points to strictly satisfy the epipolar constraint.",
-      "C": "Deleting matches that are not accurate.",
-      "D": "A specialized software for poets."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'Deep Learning', what is 'Inference' in OpenCV DNN?",
-    "options": {
-      "A": "Guessing the name of the model.",
-      "B": "The process of feeding input data through a trained network to get a prediction (output).",
-      "C": "Hiring a professional mathematician to read the report.",
-      "D": "A way to backup the storage layer."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.fisheye' module used for?",
-    "options": {
-      "A": "Monitoring fish in an aquarium.",
-      "B": "Camera calibration and undistortion specifically for extreme wide-angle fisheye lenses.",
-      "C": "A specialized software for marine biologists.",
-      "D": "A security firewall for digital photos."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Bag of Words' (BoW) in the context of OpenCV?",
-    "options": {
-      "A": "A literal bag filled with printed words.",
-      "B": "A method to represent images as a histogram of visual features for categorization.",
-      "C": "A dictionary that contains every word in the world.",
-      "D": "A type of robot that can speak out loud."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.StereoBM' vs 'cv2.StereoSGBM'?",
-    "options": {
-      "A": "They are exactly the same thing.",
-      "B": "BM (Block Matching) is faster; SGBM (Semi-Global Block Matching) is more accurate but slower.",
-      "C": "BM is for color; SGBM for grayscale.",
-      "D": "StereoBM is 100x faster than SGBM."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'Fundamental' vs 'Essential' matrix?",
-    "options": {
-      "A": "They are identical terms.",
-      "B": "Fundamental is in pixel coordinates; Essential is in normalized camera coordinates.",
-      "C": "Essential is for beginners; Fundamental for experts.",
-      "D": "Fundamental is for text; Essential for images."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.stereoRectifyUncalibrated()'?",
-    "options": {
-      "A": "Rectifying a camera that has zero users.",
-      "B": "Computing rectification transforms for two views without knowing camera intrinsics.",
-      "C": "A way to count the number of characters.",
-      "D": "A specialized software for architects."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In 'OpenCV', what is 'Aruco' module used for?",
-    "options": {
-      "A": "Recording audio from the camera.",
-      "B": "Detection and pose estimation of square fiducial markers (Aruco markers).",
-      "C": "A specialized software for accountants.",
-      "D": "A way to backup the SQL code."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is 'cv2.triangulatePoints()' output?",
-    "options": {
-      "A": "A list of triangle shapes detected.",
-      "B": "A matrix containing the 4D homogeneous coordinates of the reconstructed 3D points.",
-      "C": "The speed of light in a vacuum.",
-      "D": "Hiring a translator for image processing."
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which function allows you to draw 3D axes on a 2D image for pose visualization?",
-    "options": {
-      "A": "cv2.drawAxes()",
-      "B": "cv2.drawFrameAxes()",
-      "C": "cv2.render3D()",
-      "D": "cv2.plotCoordinates()"
-    },
-    "answer": "B"
-  }
+      "question": "Which function is used to read an image from a file in OpenCV?",
+      "options": {
+        "A": "cv2.open()",
+        "B": "cv2.imread()",
+        "C": "cv2.loadImage()",
+        "D": "cv2.read_file()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default color space used when OpenCV loads a color image?",
+      "options": {
+        "A": "RGB",
+        "B": "HSV",
+        "C": "BGR",
+        "D": "CMYK"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In OpenCV, which coordinate represents the top-left corner of an image?",
+      "options": {
+        "A": "(0, 0)",
+        "B": "(1, 1)",
+        "C": "(-1, -1)",
+        "D": "(Width, Height)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to display an image in a window?",
+      "options": {
+        "A": "cv2.show()",
+        "B": "cv2.display()",
+        "C": "cv2.imshow()",
+        "D": "cv2.view()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'cv2.waitKey(0)' do in an OpenCV script?",
+      "options": {
+        "A": "It waits for 0 milliseconds and closes the window.",
+        "B": "It displays a timer at the bottom of the image.",
+        "C": "It pauses execution indefinitely until a key is pressed.",
+        "D": "It speeds up the image processing by 10%."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which flag is used in 'cv2.imread()' to load an image in grayscale mode?",
+      "options": {
+        "A": "cv2.IMREAD_COLOR",
+        "B": "cv2.IMREAD_GRAYSCALE",
+        "C": "cv2.IMREAD_UNCHANGED",
+        "D": "cv2.GRAY_SCALE"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you access the dimensions (Height, Width, Channels) of an image stored as a NumPy array in Python?",
+      "options": {
+        "A": "image.size()",
+        "B": "image.dimensions",
+        "C": "image.shape",
+        "D": "image.get_dims()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which function is used to save an image to the local disk?",
+      "options": {
+        "A": "cv2.save()",
+        "B": "cv2.imwrite()",
+        "C": "cv2.export()",
+        "D": "cv2.storeImage()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)'?",
+      "options": {
+        "A": "It brightens the image.",
+        "B": "It converts a BGR image to grayscale.",
+        "C": "It adds a gray border around the image.",
+        "D": "It deletes the color channels permanently."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In OpenCV drawing functions, what does a thickness value of -1 usually signify?",
+      "options": {
+        "A": "A dotted line.",
+        "B": "A filled shape.",
+        "C": "A transparent line.",
+        "D": "An error in the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to draw a straight line on an image?",
+      "options": {
+        "A": "cv2.drawLine()",
+        "B": "cv2.line()",
+        "C": "cv2.draw_path()",
+        "D": "cv2.segment()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.destroyAllWindows()'?",
+      "options": {
+        "A": "To delete all images from the hard drive.",
+        "B": "To close all open highgui windows.",
+        "C": "To crash the Python interpreter.",
+        "D": "To clear the metadata of the current image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to resize an image in OpenCV?",
+      "options": {
+        "A": "cv2.scale()",
+        "B": "cv2.resize()",
+        "C": "cv2.magnify()",
+        "D": "cv2.transform()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.flip(img, 1)' do to an image?",
+      "options": {
+        "A": "Flips it vertically.",
+        "B": "Flips it horizontally.",
+        "C": "Rotates it by 90 degrees.",
+        "D": "Inverts the colors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to capture video from a camera?",
+      "options": {
+        "A": "cv2.VideoGet()",
+        "B": "cv2.VideoCapture()",
+        "C": "cv2.CameraStream()",
+        "D": "cv2.GrabFrame()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you draw a circle on an image in OpenCV?",
+      "options": {
+        "A": "cv2.ellipse(..., circle=True)",
+        "B": "cv2.circle()",
+        "C": "cv2.drawCircle()",
+        "D": "cv2.round()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default data type of a standard 8-bit image loaded via OpenCV?",
+      "options": {
+        "A": "float32",
+        "B": "uint8",
+        "C": "int64",
+        "D": "double"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to get a single pixel's value at row 10 and column 20 in Python?",
+      "options": {
+        "A": "img.pixel(10, 20)",
+        "B": "img[10, 20]",
+        "C": "img.get(10, 20)",
+        "D": "img.loc[10, 20]"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.rectangle()'?",
+      "options": {
+        "A": "To crop an image into a rectangular shape.",
+        "B": "To draw a rectangle on a given image.",
+        "C": "To find rectangular objects in an image.",
+        "D": "To count the number of corners in an image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to check if a VideoCapture object was successfully opened?",
+      "options": {
+        "A": "cap.status()",
+        "B": "cap.isOpened()",
+        "C": "cap.check()",
+        "D": "cap.active()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What color is represented by (255, 0, 0) in OpenCV BGR format?",
+      "options": {
+        "A": "Red",
+        "B": "Blue",
+        "C": "Green",
+        "D": "White"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function puts text on an image?",
+      "options": {
+        "A": "cv2.drawText()",
+        "B": "cv2.putText()",
+        "C": "cv2.write()",
+        "D": "cv2.addLabel()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "To read a video file frame by frame, which method is called on a VideoCapture object?",
+      "options": {
+        "A": "cap.next()",
+        "B": "cap.read()",
+        "C": "cap.getFrame()",
+        "D": "cap.fetch()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.threshold()' used for?",
+      "options": {
+        "A": "To increase the brightness of the whole image.",
+        "B": "To convert a grayscale image to a binary image.",
+        "C": "To detect the edges of a circle.",
+        "D": "To rotate the image by a fixed angle."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you create a black image of size 512x512 with 3 channels in Python?",
+      "options": {
+        "A": "cv2.empty((512, 512, 3))",
+        "B": "np.zeros((512, 512, 3), np.uint8)",
+        "C": "np.ones((512, 512, 3)) * 0",
+        "D": "cv2.create(512, 512, 3)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the function 'cv2.split()' do?",
+      "options": {
+        "A": "Splits a video into two separate files.",
+        "B": "Divides a multi-channel image into individual color planes.",
+        "C": "Divides an image into 4 equal quadrants.",
+        "D": "Separates the foreground from the background."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is the inverse of 'cv2.split()', combining color channels?",
+      "options": {
+        "A": "cv2.combine()",
+        "B": "cv2.merge()",
+        "C": "cv2.join()",
+        "D": "cv2.stack()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.copyMakeBorder()' used for?",
+      "options": {
+        "A": "To copy an image to the clipboard.",
+        "B": "To create a border (padding) around an image.",
+        "C": "To detect the boundaries of an object.",
+        "D": "To crop the edges of a photo."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which constant is used to flip an image both horizontally and vertically simultaneously?",
+      "options": {
+        "A": "1",
+        "B": "-1",
+        "C": "0",
+        "D": "2"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.putText()', which parameter controls the font style?",
+      "options": {
+        "A": "style",
+        "B": "fontFace",
+        "C": "fontName",
+        "D": "textType"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.getRotationMatrix2D()' help you calculate?",
+      "options": {
+        "A": "The brightness of a rotated pixel.",
+        "B": "The 2x3 transformation matrix for image rotation.",
+        "C": "The area of a rotated rectangle.",
+        "D": "The speed of the CPU during rotation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.addWeighted()' primarily used for?",
+      "options": {
+        "A": "Calculating the file size of two images.",
+        "B": "Blending two images together with different weights.",
+        "C": "Adding a watermark to a video frame.",
+        "D": "Increasing the weight of the red channel."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to convert an image from BGR to HSV color space?",
+      "options": {
+        "A": "cv2.toHSV()",
+        "B": "cv2.cvtColor(img, cv2.COLOR_BGR2HSV)",
+        "C": "cv2.convert(img, 'HSV')",
+        "D": "cv2.extractHSV()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.namedWindow()'?",
+      "options": {
+        "A": "To rename an existing image file.",
+        "B": "To create a placeholder window with a specific name for displaying images.",
+        "C": "To find windows in a photo of a building.",
+        "D": "To record the name of the user."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'alpha' channel in an image represent?",
+      "options": {
+        "A": "Brightness",
+        "B": "Transparency",
+        "C": "Saturation",
+        "D": "Contrast"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which bitwise operation is commonly used to apply a mask to an image?",
+      "options": {
+        "A": "cv2.bitwise_or()",
+        "B": "cv2.bitwise_and()",
+        "C": "cv2.bitwise_xor()",
+        "D": "cv2.bitwise_not()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.absdiff()' used for?",
+      "options": {
+        "A": "Calculating the average difference between two images.",
+        "B": "Calculating the absolute difference between two images (useful for motion detection).",
+        "C": "Finding the absolute value of a single pixel.",
+        "D": "Rotating an image by an absolute angle."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.VideoCapture', what does the argument '0' usually refer to?",
+      "options": {
+        "A": "The first video file in the directory.",
+        "B": "The default built-in camera.",
+        "C": "Recording at 0 frames per second.",
+        "D": "Stopping the video capture immediately."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a trackbar on an OpenCV window?",
+      "options": {
+        "A": "cv2.addTrackbar()",
+        "B": "cv2.createTrackbar()",
+        "C": "cv2.setTrackbar()",
+        "D": "cv2.slider()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the maximum value of a pixel in a standard CV_8U grayscale image?",
+      "options": {
+        "A": "100",
+        "B": "255",
+        "C": "512",
+        "D": "1024"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function draws an ellipse on an image?",
+      "options": {
+        "A": "cv2.drawOval()",
+        "B": "cv2.ellipse()",
+        "C": "cv2.circle(..., oval=True)",
+        "D": "cv2.curve()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.IMREAD_UNCHANGED' do?",
+      "options": {
+        "A": "It prevents the image from being edited.",
+        "B": "It loads the image as is, including the alpha channel if present.",
+        "C": "It loads only the metadata of the image.",
+        "D": "It reloads the last image used in the session."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you convert an image to a NumPy array in OpenCV-Python?",
+      "options": {
+        "A": "np.asarray(img)",
+        "B": "OpenCV-Python already stores images as NumPy arrays by default.",
+        "C": "cv2.toNumPy(img)",
+        "D": "img.values"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of 'cv2.getTrackbarPos()'?",
+      "options": {
+        "A": "To set the position of a trackbar.",
+        "B": "To retrieve the current value/position of a specific trackbar.",
+        "C": "To count how many trackbars are in a window.",
+        "D": "To delete a trackbar from a window."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to draw polygons on an image?",
+      "options": {
+        "A": "cv2.drawPoly()",
+        "B": "cv2.polylines()",
+        "C": "cv2.shape()",
+        "D": "cv2.multiLine()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.setMouseCallback()'?",
+      "options": {
+        "A": "To change the physical color of the mouse cursor.",
+        "B": "To execute a specific function when a mouse event occurs on a window.",
+        "C": "To find the mouse in a photograph.",
+        "D": "To disable the mouse during image processing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.BORDER_CONSTANT' specify in padding operations?",
+      "options": {
+        "A": "The border size never changes.",
+        "B": "A constant colored border is added around the image.",
+        "C": "The border reflects the pixels from the image edge.",
+        "D": "The border is transparent."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function can be used to perform an affine transformation on an image?",
+      "options": {
+        "A": "cv2.warpLinear()",
+        "B": "cv2.warpAffine()",
+        "C": "cv2.transformAffine()",
+        "D": "cv2.moveImage()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In OpenCV, which axis does the 'shape[0]' of a NumPy image array correspond to?",
+      "options": {
+        "A": "Width",
+        "B": "Height",
+        "C": "Color Channels",
+        "D": "Transparency"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.EVENT_LBUTTONDOWN' used for?",
+      "options": {
+        "A": "To draw a button on the image.",
+        "B": "To detect when the left mouse button is clicked.",
+        "C": "To move a window to the bottom of the screen.",
+        "D": "To decrease the volume of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a structured element (kernel) for morphological operations?",
+      "options": {
+        "A": "cv2.kernel()",
+        "B": "cv2.getStructuringElement()",
+        "C": "cv2.createMatrix()",
+        "D": "cv2.morphKernel()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.LUT()' used for?",
+      "options": {
+        "A": "To light up a dark image.",
+        "B": "To perform a Look-Up Table transformation for intensity mapping.",
+        "C": "To translate the image by a fixed vector.",
+        "D": "To list all users in a specific role."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which constant represents the Hue-Saturation-Value color space in 'cv2.cvtColor'?",
+      "options": {
+        "A": "cv2.COLOR_BGR2RGB",
+        "B": "cv2.COLOR_BGR2HSV",
+        "C": "cv2.COLOR_RGB2GRAY",
+        "D": "cv2.COLOR_BGR2LAB"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.flip(img, 0)' result in?",
+      "options": {
+        "A": "Horizontal flip.",
+        "B": "Vertical flip.",
+        "C": "Both horizontal and vertical flip.",
+        "D": "No change to the image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of 'cv2.pyrUp()'?",
+      "options": {
+        "A": "To delete the top of a pyramid in a photo.",
+        "B": "To upsample an image by a factor of two.",
+        "C": "To increase the brightness of the center pixel.",
+        "D": "To rotate the image by 45 degrees."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.pyrDown()' used for?",
+      "options": {
+        "A": "To move an image to a lower directory.",
+        "B": "To downsample an image by a factor of two.",
+        "C": "To decrease the resolution of a video file.",
+        "D": "To find objects at the bottom of a frame."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function calculates the sum of all pixel values in an image?",
+      "options": {
+        "A": "cv2.total()",
+        "B": "cv2.sumElems()",
+        "C": "cv2.add()",
+        "D": "cv2.integrate()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.mean()' return for a 3-channel image?",
+      "options": {
+        "A": "A single average value for the whole image.",
+        "B": "A tuple of the average values for each channel.",
+        "C": "A new grayscale version of the image.",
+        "D": "The middle pixel of the image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.resizeWindow()'?",
+      "options": {
+        "A": "To change the size of the original image data.",
+        "B": "To change the dimensions of a named display window.",
+        "C": "To fit the image to the desktop wallpaper.",
+        "D": "To minimize all open windows."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which parameter in 'cv2.VideoCapture.set()' is used to change the frame width?",
+      "options": {
+        "A": "cv2.CAP_PROP_HEIGHT",
+        "B": "cv2.CAP_PROP_FRAME_WIDTH",
+        "C": "cv2.CAP_PROP_FPS",
+        "D": "cv2.CAP_PROP_POS_MSEC"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.inRange()' commonly used for?",
+      "options": {
+        "A": "To check if a file exists.",
+        "B": "To perform color filtering by creating a mask based on a range of HSV values.",
+        "C": "To count the number of pixels in a circle.",
+        "D": "To find the highest intensity pixel in an image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you release a VideoCapture object 'cap' when finished?",
+      "options": {
+        "A": "cap.close()",
+        "B": "cap.release()",
+        "C": "cap.stop()",
+        "D": "del cap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.getTextSize()' help you calculate?",
+      "options": {
+        "A": "The number of words in a text string.",
+        "B": "The width and height of a text string when rendered with a specific font.",
+        "C": "The font size that fits the image perfectly.",
+        "D": "The memory used to store a font file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In OpenCV coordinate system, which direction is the positive Y-axis?",
+      "options": {
+        "A": "Upwards",
+        "B": "Downwards",
+        "C": "Leftwards",
+        "D": "Towards the viewer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to convert an image to a different data type (e.g., from uint8 to float32) in Python?",
+      "options": {
+        "A": "cv2.convertScaleAbs()",
+        "B": "img.astype()",
+        "C": "cv2.toType()",
+        "D": "cv2.retype()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'cv2.imread()' if the file does not exist?",
+      "options": {
+        "A": "An exception is thrown.",
+        "B": "None is returned.",
+        "C": "A blank white image is returned.",
+        "D": "The program crashes immediately."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific function in OpenCV is used to find the edges of an image using the Canny algorithm?",
+      "options": {
+        "A": "cv2.findEdges()",
+        "B": "cv2.Canny()",
+        "C": "cv2.Sobel(edges=True)",
+        "D": "cv2.gradient()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary effect of applying 'cv2.GaussianBlur()' to an image?",
+      "options": {
+        "A": "It increases the sharpness of the edges.",
+        "B": "It reduces high-frequency noise and blurs the image.",
+        "C": "It converts the image into a 3D perspective.",
+        "D": "It highlights the primary colors in the BGR spectrum."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.findContours()', what does the 'cv2.RETR_EXTERNAL' retrieval mode do?",
+      "options": {
+        "A": "Retrieves all contours in a hierarchical tree.",
+        "B": "Retrieves only the extreme outer contours.",
+        "C": "Retrieves all contours without any parent-child relationship.",
+        "D": "Deletes the contours that touch the image border."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to calculate the area of a detected contour?",
+      "options": {
+        "A": "cv2.calcArea()",
+        "B": "cv2.contourArea()",
+        "C": "cv2.getSurface()",
+        "D": "cv2.measureContour()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main purpose of 'cv2.dilate()' in morphological operations?",
+      "options": {
+        "A": "To make objects in the foreground thinner.",
+        "B": "To increase the size of the foreground object and fill small holes.",
+        "C": "To change the image resolution.",
+        "D": "To rotate the image by a random degree."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which interpolation method is generally recommended for zooming in (upscaling) an image in 'cv2.resize()'?",
+      "options": {
+        "A": "cv2.INTER_NEAREST",
+        "B": "cv2.INTER_CUBIC",
+        "C": "cv2.INTER_AREA",
+        "D": "cv2.INTER_BITS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.Sobel()' calculate?",
+      "options": {
+        "A": "The color histogram of the image.",
+        "B": "Image gradients (first-order derivatives) in the x or y direction.",
+        "C": "The distance between two objects.",
+        "D": "The number of faces in a video frame."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to map a point from one 2D image to another using four pairs of points?",
+      "options": {
+        "A": "cv2.getRotationMatrix2D()",
+        "B": "cv2.getPerspectiveTransform()",
+        "C": "cv2.warpAffine()",
+        "D": "cv2.remap()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.medianBlur()' particularly effective at removing?",
+      "options": {
+        "A": "Motion blur.",
+        "B": "Salt-and-pepper noise.",
+        "C": "Gaussian noise.",
+        "D": "The background image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function is used to find the bounding rectangle of a contour?",
+      "options": {
+        "A": "cv2.getRect()",
+        "B": "cv2.boundingRect()",
+        "C": "cv2.rectangleContour()",
+        "D": "cv2.boxPoints()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of applying 'cv2.erode()'?",
+      "options": {
+        "A": "It makes the white regions (foreground) thicker.",
+        "B": "It thins the white regions (foreground) and removes small noise.",
+        "C": "It adds a color tint to the image.",
+        "D": "It mirrors the image vertically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to perform a template matching operation?",
+      "options": {
+        "A": "cv2.findTemplate()",
+        "B": "cv2.matchTemplate()",
+        "C": "cv2.comparePattern()",
+        "D": "cv2.searchImage()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.Canny()', what do the two threshold values represent?",
+      "options": {
+        "A": "The minimum and maximum pixel brightness.",
+        "B": "The low and high thresholds for hysteresis edge linking.",
+        "C": "The width and height of the kernel.",
+        "D": "The red and blue color cutoffs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.adaptiveThreshold()'?",
+      "options": {
+        "A": "To threshold an image using a single global value.",
+        "B": "To calculate the threshold for small regions, handling varying lighting conditions.",
+        "C": "To automatically change the threshold based on the user's input.",
+        "D": "To increase the frame rate of a live video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to draw the contours found by 'cv2.findContours()'?",
+      "options": {
+        "A": "cv2.outline()",
+        "B": "cv2.drawContours()",
+        "C": "cv2.renderPaths()",
+        "D": "cv2.imshowContours()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'cv2.MORPH_OPEN' flag represent in 'cv2.morphologyEx()'?",
+      "options": {
+        "A": "Dilation followed by Erosion.",
+        "B": "Erosion followed by Dilation.",
+        "C": "Subtracting the original from the dilated image.",
+        "D": "Calculating the image gradient."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to calculate the center of mass (centroids) of a contour?",
+      "options": {
+        "A": "cv2.centroid()",
+        "B": "cv2.moments()",
+        "C": "cv2.getCenter()",
+        "D": "cv2.calculateMass()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'cv2.warpAffine()' and 'cv2.warpPerspective()'?",
+      "options": {
+        "A": "Affine uses a 3x3 matrix; Perspective uses 2x3.",
+        "B": "Affine preserves parallel lines; Perspective does not.",
+        "C": "Affine is for video; Perspective is for still images.",
+        "D": "There is no difference between the two."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to approximate a contour shape with fewer vertices?",
+      "options": {
+        "A": "cv2.reducePoints()",
+        "B": "cv2.approxPolyDP()",
+        "C": "cv2.simplifyContour()",
+        "D": "cv2.arcLength()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.HoughLines()' detect in an image?",
+      "options": {
+        "A": "Circles and ovals.",
+        "B": "Straight lines using the Hough transform.",
+        "C": "Corner points in a checkerboard.",
+        "D": "Text characters for OCR."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.matchTemplate()', which method flag represents the Normalized Correlation Coefficient?",
+      "options": {
+        "A": "cv2.TM_SQDIFF",
+        "B": "cv2.TM_CCOEFF_NORMED",
+        "C": "cv2.TM_CCORR",
+        "D": "cv2.TM_MATCH_PERCENT"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.bilateralFilter()'?",
+      "options": {
+        "A": "To blur the image while increasing the noise.",
+        "B": "To reduce noise while keeping edges sharp.",
+        "C": "To apply the same filter twice to both sides of the image.",
+        "D": "To convert an image to a heat map."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to calculate the perimeter of a contour?",
+      "options": {
+        "A": "cv2.getPerimeter()",
+        "B": "cv2.arcLength()",
+        "C": "cv2.contourPath()",
+        "D": "cv2.measureLength()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.HoughCircles()' used for?",
+      "options": {
+        "A": "Drawing circles on an image.",
+        "B": "Detecting circular shapes in a grayscale image.",
+        "C": "Calculating the radius of a contour.",
+        "D": "Finding the center of a square."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which morphological operation is useful for extracting the outer boundary of an object?",
+      "options": {
+        "A": "cv2.MORPH_CLOSE",
+        "B": "cv2.MORPH_GRADIENT",
+        "C": "cv2.MORPH_TOPHAT",
+        "D": "cv2.MORPH_BLACKHAT"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.Laplacian()' help you detect?",
+      "options": {
+        "A": "The dominant color of an image.",
+        "B": "Regions of rapid intensity change (edges/second derivatives).",
+        "C": "The distance between the camera and the object.",
+        "D": "The number of layers in a TIFF file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.findContours()', what is the purpose of the 'chain approximation' parameter?",
+      "options": {
+        "A": "To define the color of the contour line.",
+        "B": "To decide whether to store all boundary points or just compressed vertices.",
+        "C": "To link multiple images into a chain.",
+        "D": "To speed up the camera frame rate."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function creates a 1D or 2D histogram from an image?",
+      "options": {
+        "A": "cv2.makeHist()",
+        "B": "cv2.calcHist()",
+        "C": "cv2.getFrequency()",
+        "D": "cv2.plotPixels()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function 'cv2.equalizeHist()' used for?",
+      "options": {
+        "A": "To make the image resolution equal on both sides.",
+        "B": "To improve the contrast of a grayscale image by spreading out intensity values.",
+        "C": "To delete duplicate pixels from the data.",
+        "D": "To align two different histograms."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV tool is typically used to normalize an image's pixel values to a specific range?",
+      "options": {
+        "A": "cv2.scale()",
+        "B": "cv2.normalize()",
+        "C": "cv2.standardize()",
+        "D": "cv2.rescale()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.filter2D()' used for?",
+      "options": {
+        "A": "To filter out 2D images from a 3D video.",
+        "B": "To convolve an image with a custom-defined kernel.",
+        "C": "To remove the second dimension of a matrix.",
+        "D": "To sort the pixels by their BGR values."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'cv2.MORPH_CLOSE' operation do?",
+      "options": {
+        "A": "Erosion followed by Dilation.",
+        "B": "Dilation followed by Erosion (useful for closing small holes inside objects).",
+        "C": "Closing the application window.",
+        "D": "Calculating the inverse of the image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to find the minimum area enclosing circle of a set of points?",
+      "options": {
+        "A": "cv2.getCircle()",
+        "B": "cv2.minEnclosingCircle()",
+        "C": "cv2.fitCircle()",
+        "D": "cv2.boundCircle()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.calcHist()', what is the 'mask' parameter used for?",
+      "options": {
+        "A": "To hide the identity of the person in the photo.",
+        "B": "To calculate the histogram for only a specific part of the image.",
+        "C": "To add a physical mask to a face in the image.",
+        "D": "To encrypt the histogram data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.matchShapes()' used to compare?",
+      "options": {
+        "A": "The file sizes of two images.",
+        "B": "Two contours based on their Hu-moments (shape similarity).",
+        "C": "The color distribution of two polygons.",
+        "D": "The number of vertices in two shapes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function calculates the distance from every pixel to the nearest binary boundary?",
+      "options": {
+        "A": "cv2.calcDistance()",
+        "B": "cv2.distanceTransform()",
+        "C": "cv2.getProximity()",
+        "D": "cv2.boundaryDist()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.Scharr()'?",
+      "options": {
+        "A": "To compress the image using the Scharr algorithm.",
+        "B": "To calculate image derivatives with a higher accuracy than the standard Sobel operator.",
+        "C": "To detect the rotation of a checkerboard.",
+        "D": "To change the background to black and white."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function finds the convex hull of a point set?",
+      "options": {
+        "A": "cv2.findHull()",
+        "B": "cv2.convexHull()",
+        "C": "cv2.outlineHull()",
+        "D": "cv2.wrapPoints()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.remap()' used for in OpenCV?",
+      "options": {
+        "A": "To rename all variables in a script.",
+        "B": "To apply a generic geometrical transformation to an image based on map arrays.",
+        "C": "To find a new path for a robot.",
+        "D": "To redo the mapping of a database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'cv2.CHAIN_APPROX_SIMPLE' flag do in 'cv2.findContours()'?",
+      "options": {
+        "A": "Retrieves only the horizontal points.",
+        "B": "Compresses horizontal, vertical, and diagonal segments and leaves only their end points.",
+        "C": "Stores every single point on the contour boundary.",
+        "D": "Calculates a simple average of the contour."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function is used to perform pyramid-based image blending?",
+      "options": {
+        "A": "cv2.blendPyramid()",
+        "B": "cv2.pyrUp() and cv2.pyrDown()",
+        "C": "cv2.mergeImages()",
+        "D": "cv2.combineScales()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.compareHist()' used for?",
+      "options": {
+        "A": "To merge two different histograms.",
+        "B": "To calculate the numerical similarity between two histograms.",
+        "C": "To find the highest peak in a histogram.",
+        "D": "To sort histograms by their bin count."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which flag is used in 'cv2.warpAffine()' to handle the inverse transformation?",
+      "options": {
+        "A": "cv2.WARP_BACKWARD",
+        "B": "cv2.WARP_INVERSE_MAP",
+        "C": "cv2.WARP_FLIP",
+        "D": "cv2.WARP_REVERSE"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'cv2.bitwise_not()' applied to a grayscale image?",
+      "options": {
+        "A": "The image becomes completely transparent.",
+        "B": "The pixel intensities are inverted (e.g., 0 becomes 255).",
+        "C": "The image is deleted from RAM.",
+        "D": "The edges of the image are sharpened."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function converts an image from the spatial domain to the frequency domain?",
+      "options": {
+        "A": "cv2.fft()",
+        "B": "cv2.dft()",
+        "C": "cv2.freq()",
+        "D": "cv2.spatialToFreq()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.grabCut()' primarily used for?",
+      "options": {
+        "A": "Extracting frames from a video file.",
+        "B": "Interactive foreground extraction/segmentation.",
+        "C": "Cutting an image into equal squares.",
+        "D": "Capturing a screenshot of the window."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.morphologyEx()', what does 'cv2.MORPH_TOPHAT' extract?",
+      "options": {
+        "A": "The bottom-hat of the image.",
+        "B": "The difference between the input image and its opening (bright spots smaller than the kernel).",
+        "C": "The largest object in the image.",
+        "D": "The metadata from the top of the file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to calculate the integral image of a given image?",
+      "options": {
+        "A": "cv2.sumPixels()",
+        "B": "cv2.integral()",
+        "C": "cv2.calcIntegral()",
+        "D": "cv2.areaSum()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.connectedComponents()' return?",
+      "options": {
+        "A": "A list of all the cameras connected to the PC.",
+        "B": "A label map where each connected region in a binary image is assigned a unique integer.",
+        "C": "The number of users connected to the internet.",
+        "D": "A way to connect two different images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which constant is used in 'cv2.Canny()' to indicate the aperture size for the Sobel operator?",
+      "options": {
+        "A": "ksize",
+        "B": "apertureSize",
+        "C": "sobel_width",
+        "D": "windowSize"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.boxFilter()' useful for?",
+      "options": {
+        "A": "Detecting boxes in a warehouse.",
+        "B": "Applying a simple linear average blur to an image.",
+        "C": "Drawing boxes around detected faces.",
+        "D": "Calculating the volume of a 3D box."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function calculates the Hu-moments of an image?",
+      "options": {
+        "A": "cv2.getHu()",
+        "B": "cv2.HuMoments()",
+        "C": "cv2.momentsHu()",
+        "D": "cv2.calcHu()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the effect of 'cv2.pyrMeanShiftFiltering()'?",
+      "options": {
+        "A": "It shifts the image mean to zero.",
+        "B": "It performs image segmentation by grouping similar pixels in color-spatial space.",
+        "C": "It shifts the pyramid level of the image.",
+        "D": "It moves the pixels to the left."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function provides a way to estimate the motion between two images using optical flow?",
+      "options": {
+        "A": "cv2.estimateMotion()",
+        "B": "cv2.calcOpticalFlowPyrLK()",
+        "C": "cv2.getFlow()",
+        "D": "cv2.trackPixels()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.setRNGSeed()' do?",
+      "options": {
+        "A": "It plants a seed for a physical garden.",
+        "B": "It sets the seed for the random number generator to ensure reproducible results.",
+        "C": "It generates a random image.",
+        "D": "It selects a random pixel from the center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.threshold()', which type flag is used for Otsu’s binarization?",
+      "options": {
+        "A": "cv2.THRESH_BINARY",
+        "B": "cv2.THRESH_OTSU",
+        "C": "cv2.THRESH_AUTO",
+        "D": "cv2.THRESH_MEAN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to calculate the rotation of a rectangle that is not aligned with the axes?",
+      "options": {
+        "A": "cv2.boundingRect()",
+        "B": "cv2.minAreaRect()",
+        "C": "cv2.getRotRect()",
+        "D": "cv2.fitBox()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.fillPoly()'?",
+      "options": {
+        "A": "To find all polygons in an image.",
+        "B": "To draw and fill the area inside one or more polygons.",
+        "C": "To calculate the area of a polygon.",
+        "D": "To rotate a polygon around its center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a look-up table for 'cv2.LUT()'?",
+      "options": {
+        "A": "np.arange() or similar NumPy array creation.",
+        "B": "cv2.createLUT()",
+        "C": "cv2.makeTable()",
+        "D": "cv2.getMapping()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'cv2.convertScaleAbs()' do?",
+      "options": {
+        "A": "Converts an image to an absolute path string.",
+        "B": "Scales, calculates absolute values, and converts the result to 8-bit unsigned integer.",
+        "C": "Increases the absolute brightness of the image.",
+        "D": "Converts the image to a different file format."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function calculates the magnitude and angle of 2D vectors?",
+      "options": {
+        "A": "cv2.calcVector()",
+        "B": "cv2.cartToPolar()",
+        "C": "cv2.getMagAngle()",
+        "D": "cv2.vectorize()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.applyColorMap()' used for?",
+      "options": {
+        "A": "To create a map of all colors in the image.",
+        "B": "To apply a false-color palette to a grayscale image for visualization.",
+        "C": "To find the GPS coordinates of a color.",
+        "D": "To delete all color information."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.matchTemplate()', what is returned by the function?",
+      "options": {
+        "A": "The (x, y) coordinates of the match.",
+        "B": "A grayscale image where each pixel denotes how much the neighborhood matches the template.",
+        "C": "A boolean value (True/False).",
+        "D": "A list of all matching objects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to normalize the light of an image using the CLAHE algorithm?",
+      "options": {
+        "A": "cv2.normLight()",
+        "B": "cv2.createCLAHE()",
+        "C": "cv2.equalizeLight()",
+        "D": "cv2.autoContrast()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.connectedComponentsWithStats()'?",
+      "options": {
+        "A": "To check the internet status of connected users.",
+        "B": "To find connected regions and return their area, bounding box, and centroids.",
+        "C": "To calculate the statistical mean of an image.",
+        "D": "To connect two different server nodes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function performs an inverse discrete Fourier transform?",
+      "options": {
+        "A": "cv2.idft()",
+        "B": "cv2.ifft()",
+        "C": "cv2.backDFT()",
+        "D": "cv2.spatialTransform()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which patented (formerly) algorithm in OpenCV is known for being invariant to image scale and rotation while providing highly distinctive local descriptors?",
+      "options": {
+        "A": "HOG (Histogram of Oriented Gradients)",
+        "B": "SIFT (Scale-Invariant Feature Transform)",
+        "C": "Canny edge detection",
+        "D": "Bilateral filtering"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of the 'Camera Matrix' (Intrinsic Matrix) in camera calibration?",
+      "options": {
+        "A": "To define the physical weight of the camera hardware.",
+        "B": "To relate the pixel coordinates in the 2D image plane to 3D coordinates in the camera coordinate system.",
+        "C": "To calculate the rotation of the camera relative to the world origin.",
+        "D": "To adjust the ISO and shutter speed of a digital sensor automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Stereo Vision, what does the 'Disparity Map' represent?",
+      "options": {
+        "A": "The difference in color between two identical images.",
+        "B": "The difference in coordinates of similar pixels between the left and right stereo images.",
+        "C": "The error rate of the camera calibration process.",
+        "D": "The number of hidden layers in a deep neural network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to calculate the Homography matrix 'H' between two planes given four or more point matches?",
+      "options": {
+        "A": "cv2.findPlanarMapping()",
+        "B": "cv2.findHomography()",
+        "C": "cv2.getAffineTransform()",
+        "D": "cv2.solvePnP()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RANSAC' commonly used for in OpenCV feature matching?",
+      "options": {
+        "A": "To compress image data for faster transmission.",
+        "B": "To robustly estimate a model (like homography) by ignoring outliers in the matched points.",
+        "C": "To increase the brightness of a video frame.",
+        "D": "To calculate the color histogram of a specific region."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of the OpenCV DNN module, what does 'cv2.dnn.blobFromImage' do?",
+      "options": {
+        "A": "It converts an image into a binary mask for thresholding.",
+        "B": "It preprocesses an image by resizing and mean subtraction to prepare it for input into a neural network.",
+        "C": "It finds all circular 'blobs' in a grayscale image.",
+        "D": "It saves the weights of a neural network to a .txt file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of the 'Essential Matrix' (E) in epipolar geometry?",
+      "options": {
+        "A": "It stores the essential metadata of the image file.",
+        "B": "It relates corresponding points in two calibrated camera views.",
+        "C": "It identifies the essential primary colors in a BGR image.",
+        "D": "It provides a shortcut for rotating an image by 90 degrees."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which descriptor in OpenCV is designed to be a fast, binary alternative to SIFT and SURF?",
+      "options": {
+        "A": "FAST",
+        "B": "ORB (Oriented FAST and Rotated BRIEF)",
+        "C": "Harris",
+        "D": "Sobel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.solvePnP()'?",
+      "options": {
+        "A": "To solve a puzzle in a computer game using AI.",
+        "B": "To estimate the pose (rotation and translation) of a calibrated camera given 3D points and their 2D projections.",
+        "C": "To print the coordinates of every pixel in a window.",
+        "D": "To connect a camera to a plug-and-play network device."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Optical Flow', what is the main assumption behind the Lucas-Kanade method?",
+      "options": {
+        "A": "The camera is always moving at a constant speed.",
+        "B": "Pixels in a small neighborhood have the same displacement (spatial coherence).",
+        "C": "All images in the sequence must be in color.",
+        "D": "The background of the video must be perfectly white."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to rectify stereo images so that the epipolar lines are horizontal?",
+      "options": {
+        "A": "cv2.straighten()",
+        "B": "cv2.stereoRectify()",
+        "C": "cv2.alignStereo()",
+        "D": "cv2.calibrateRect()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Fundamental Matrix' (F) used for when cameras are uncalibrated?",
+      "options": {
+        "A": "To find the fundamental frequency of the image sensor.",
+        "B": "To relate pixel coordinates in two views without needing intrinsic parameters.",
+        "C": "To calculate the area of the camera lens.",
+        "D": "To determine the file format of the input image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.KalmanFilter' achieve in object tracking?",
+      "options": {
+        "A": "It filters out Gaussian noise from a single image.",
+        "B": "It estimates the state of a dynamic system (like an object's position) over time, accounting for measurement noise.",
+        "C": "It removes people from a video background.",
+        "D": "It increases the saturation of the object being tracked."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function is used to compute the 'Descriptor' for a set of keypoints?",
+      "options": {
+        "A": "cv2.findKeypoints()",
+        "B": "feature.compute()",
+        "C": "cv2.getDescriptor()",
+        "D": "cv2.match()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Radial Distortion' in the context of camera lenses?",
+      "options": {
+        "A": "When the camera sensor gets too hot.",
+        "B": "An effect where straight lines appear curved (barrel or pincushion distortion).",
+        "C": "When the image colors bleed into each other.",
+        "D": "A software bug that occurs during image resizing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV tool is typically used to draw 'matches' between two images?",
+      "options": {
+        "A": "cv2.lineMatches()",
+        "B": "cv2.drawMatches()",
+        "C": "cv2.connectKeypoints()",
+        "D": "cv2.renderSimilarity()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'Brute-Force Matcher' and 'FLANN Matcher'?",
+      "options": {
+        "A": "Brute-Force is faster for large datasets.",
+        "B": "FLANN (Fast Library for Approximate Nearest Neighbors) is optimized for high-dimensional feature matching in large datasets.",
+        "C": "Brute-Force only works on binary images.",
+        "D": "FLANN is used exclusively for video tracking."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.undistort()', what are the primary inputs needed?",
+      "options": {
+        "A": "The image and its file name.",
+        "B": "The distorted image, camera matrix, and distortion coefficients.",
+        "C": "The resolution and color depth of the image.",
+        "D": "The rotation angle and scaling factor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'K-Nearest Neighbors' (KNN) matching in OpenCV?",
+      "options": {
+        "A": "A way to find people living in the same neighborhood.",
+        "B": "A matching strategy where for each descriptor, the 'k' best matches are returned.",
+        "C": "A specialized software for measuring distance.",
+        "D": "Hiring a mathematician to verify image pixels."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'MSER' (Maximally Stable Extremal Regions) primarily used for?",
+      "options": {
+        "A": "To measure the speed of the GPU.",
+        "B": "To detect blobs and stable regions in an image, often used for text detection.",
+        "C": "To rotate an image around a random axis.",
+        "D": "To increase the frame rate of a video stream."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Homography' matrix 'H' represent geometrically?",
+      "options": {
+        "A": "The rotation of the camera.",
+        "B": "A 3x3 transformation that maps points from one plane to another.",
+        "C": "The distance from the lens to the sensor.",
+        "D": "The number of users connected to a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In OpenCV's 'BackgroundSubtractorMOG2', what does 'MOG' stand for?",
+      "options": {
+        "A": "Matrix of Gradients",
+        "B": "Mixture of Gaussians",
+        "C": "Metadata of Graphics",
+        "D": "Model of Grayscale"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.decomposeEssentialMat()'?",
+      "options": {
+        "A": "To delete the essential matrix permanently.",
+        "B": "To extract the relative rotation and translation between two camera poses from an Essential matrix.",
+        "C": "To change the file format from JPG to PNG.",
+        "D": "To count the number of pixels in a frame."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function is used for camera calibration with a chessboard pattern?",
+      "options": {
+        "A": "cv2.calibrate()",
+        "B": "cv2.calibrateCamera()",
+        "C": "cv2.findPatternMatrix()",
+        "D": "cv2.alignCamera()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Epipolar Line' in stereo geometry?",
+      "options": {
+        "A": "The line representing the horizon of the image.",
+        "B": "The intersection of the epipolar plane with the image plane; the line on which a corresponding point must lie.",
+        "C": "A physical wire connecting two stereo cameras.",
+        "D": "A security certificate for 3D data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.matchTemplate()', what happens if the template is not found?",
+      "options": {
+        "A": "An error is thrown.",
+        "B": "The result matrix will still contain values, but the peak/minimum will be less distinctive.",
+        "C": "The program crashes immediately.",
+        "D": "The image is automatically deleted."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Integral Image' (Summed-Area Table) used for in feature detection like Haar cascades?",
+      "options": {
+        "A": "To find the sum of all pixels in the whole image once.",
+        "B": "To calculate the sum of pixel values in any rectangular area in constant time O(1).",
+        "C": "To integrate the camera with a cloud server.",
+        "D": "To backup the SQL schema."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function provides a way to estimate the 3D coordinates of points given their projections in two views?",
+      "options": {
+        "A": "cv2.3DPoint()",
+        "B": "cv2.triangulatePoints()",
+        "C": "cv2.reconstruct()",
+        "D": "cv2.projectPoints()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.computeRecall()' used to evaluate?",
+      "options": {
+        "A": "The speed of the computer memory.",
+        "B": "The performance of a feature detector in terms of how many correct points it found.",
+        "C": "The brightness level of the monitor.",
+        "D": "The number of high-resolution files on a drive."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.dnn.readNetFromCaffe()', what is the '.prototxt' file used for?",
+      "options": {
+        "A": "Storing the binary weights of the model.",
+        "B": "Defining the architecture and structure of the neural network.",
+        "C": "Storing the copyright information.",
+        "D": "A specialized software for poets."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'cv2.decomposeProjectionMatrix()'?",
+      "options": {
+        "A": "A smaller version of the projection matrix.",
+        "B": "Intrinsic and extrinsic camera parameters (K, R, t).",
+        "C": "A way to backup the storage layer.",
+        "D": "The speed of the network data flow."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV algorithm is used for sparse optical flow tracking of specific points?",
+      "options": {
+        "A": "Farneback",
+        "B": "Lucas-Kanade (PyrLK)",
+        "C": "Canny",
+        "D": "ORB"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Homography' Decomposition significant for?",
+      "options": {
+        "A": "Breaking a building into pieces.",
+        "B": "Extracting possible camera motions (R, t) and plane normals from a homography matrix.",
+        "C": "A specialized software for architects.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Feature Matching', what is the 'Ratio Test' proposed by David Lowe?",
+      "options": {
+        "A": "Checking the aspect ratio of the image.",
+        "B": "Rejecting matches where the distance to the best match is not significantly smaller than the distance to the second-best match.",
+        "C": "Comparing the width to the height of a contour.",
+        "D": "The total number of users divided by the number of images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.estimateAffinePartial2D()'?",
+      "options": {
+        "A": "Estimating only the first half of a matrix.",
+        "B": "Estimating an affine transformation that includes only rotation, translation, and scaling.",
+        "C": "A way to name a database table.",
+        "D": "Increasing the memory usage of a query."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which algorithm in OpenCV is used for Dense Optical Flow?",
+      "options": {
+        "A": "Lucas-Kanade",
+        "B": "Gunnar Farneback's algorithm",
+        "C": "Harris Corner",
+        "D": "Sobel Gradient"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'cv2.projectPoints()' do?",
+      "options": {
+        "A": "Projects a slide show onto a wall.",
+        "B": "Transforms 3D world points into 2D image coordinates using camera parameters.",
+        "C": "Deletes points that are outside the frame.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Camera Calibration', what is 'Tangential Distortion' caused by?",
+      "options": {
+        "A": "The camera lens being dirty.",
+        "B": "The lens and the image plane not being perfectly parallel.",
+        "C": "Using a cheap digital sensor.",
+        "D": "The physical speed of the camera shutter."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.HoughLinesP()' compared to 'cv2.HoughLines()'?",
+      "options": {
+        "A": "It is only for vertical lines.",
+        "B": "It is the Probabilistic version which is more efficient and returns the endpoints of detected segments.",
+        "C": "It is 100x slower.",
+        "D": "It requires an internet connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.descriptorExtractor_create()' used for in older OpenCV versions?",
+      "options": {
+        "A": "Extracting files from a ZIP archive.",
+        "B": "Creating an object to compute descriptors for given keypoints.",
+        "C": "Finding keypoints in an image.",
+        "D": "A security scan of the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function provides the 'Stitching' pipeline for creating panoramas?",
+      "options": {
+        "A": "cv2.merge()",
+        "B": "cv2.Stitcher_create()",
+        "C": "cv2.panoramic()",
+        "D": "cv2.joinImages()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.getOptimalNewCameraMatrix()' used for after calibration?",
+      "options": {
+        "A": "To buy a better camera from an online store.",
+        "B": "To refine the camera matrix to better handle image borders after undistortion.",
+        "C": "To calculate the price of the sensor.",
+        "D": "To rotate the matrix by 45 degrees."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Z-buffering' in a 3D context (related to OpenCV visualization)?",
+      "options": {
+        "A": "Buffering a video from a Z-drive.",
+        "B": "Managing image depth coordinates in 3D graphics to decide which objects are visible.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "A security password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Deep Learning' (DNN), what is a 'Layer' in OpenCV?",
+      "options": {
+        "A": "A layer of physical dust on the server.",
+        "B": "A processing node in the neural network that performs a specific mathematical operation.",
+        "C": "A folder in the directory tree.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'cv2.cornerSubPix()'?",
+      "options": {
+        "A": "To find smaller corners.",
+        "B": "To refine corner locations with sub-pixel accuracy.",
+        "C": "To count the number of pixels in a corner.",
+        "D": "To delete zero-value tokens from memory."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV module is used for processing point clouds and 3D data?",
+      "options": {
+        "A": "cv2.3D",
+        "B": "viz (or 3D in newer versions)",
+        "C": "cv2.cloud",
+        "D": "cv2.points"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Homography' 'Warping' used for?",
+      "options": {
+        "A": "Warping a video to make it look like a cartoon.",
+        "B": "Applying the homography matrix to an image to change its perspective.",
+        "C": "Deleting data after it has been used.",
+        "D": "Hiring a professional artist to draw lines."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.drawChessboardCorners()'?",
+      "options": {
+        "A": "A way to play chess against the computer.",
+        "B": "A function that visualizes the detected corners on a calibration pattern.",
+        "C": "A specialized tool for cleaning monitors.",
+        "D": "Increasing the memory usage."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Feature Extraction', what is 'BRIEF'?",
+      "options": {
+        "A": "A very short research study.",
+        "B": "Binary Robust Independent Elementary Features: a binary descriptor algorithm.",
+        "C": "A way to speed up the network connection.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.decomposeHomographyMat()'?",
+      "options": {
+        "A": "Decomposing a physical plane.",
+        "B": "Obtaining relative camera pose (R, t) from a homography matrix.",
+        "C": "A way to backup the storage layer.",
+        "D": "Hiring multiple people to read code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Epipole' in epipolar geometry?",
+      "options": {
+        "A": "The highest point on the camera lens.",
+        "B": "The point where the line connecting two camera centers intersects the image plane.",
+        "C": "A specialized pole used for field research.",
+        "D": "A security certificate for digital photos."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'cv2.stereoCalibrate()', what is calculated besides individual camera matrices?",
+      "options": {
+        "A": "The color of the cameras.",
+        "B": "The rotation (R) and translation (T) between the two cameras.",
+        "C": "The internet speed of the cameras.",
+        "D": "The number of pixels in the frame."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mean-Shift' algorithm used for in tracking?",
+      "options": {
+        "A": "Shifting the mean value of pixels to zero.",
+        "B": "An iterative process to find the mode of a distribution, used for tracking objects based on histograms.",
+        "C": "A specialized software for gardeners.",
+        "D": "Deleting data from the future."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CamShift' (Continuously Adaptive Mean Shift)?",
+      "options": {
+        "A": "A camera that physically moves.",
+        "B": "An enhancement of Mean-Shift that adjusts the tracking window size and orientation.",
+        "C": "A way to backup the SQL code.",
+        "D": "A security bridge for data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.estimateAffine3D()' used for?",
+      "options": {
+        "A": "Estimating a 3D model of a house.",
+        "B": "Calculating the 3D affine transformation between two sets of 3D points.",
+        "C": "A way to backup the SQL code.",
+        "D": "A list of all project managers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Feature Matching', what is 'Cross-Checking'?",
+      "options": {
+        "A": "Crossing out incorrect matches with a pen.",
+        "B": "Ensuring a match (i, j) is only kept if 'i' matches 'j' and 'j' matches 'i' inversely.",
+        "C": "A security scan for computer viruses.",
+        "D": "A specialized software for novelists."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.initUndistortRectifyMap()' used for?",
+      "options": {
+        "A": "Initializing a map of the local area.",
+        "B": "Computing the transformation maps for undistortion and rectification in stereo vision.",
+        "C": "A specialized software for architects.",
+        "D": "Recording the sound of the lab."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OpenCV function calculates the 'Fundamental Matrix' from 7 or 8 points?",
+      "options": {
+        "A": "cv2.getFMatrix()",
+        "B": "cv2.findFundamentalMat()",
+        "C": "cv2.calcBaseMatrix()",
+        "D": "cv2.solveEpipolar()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.correctMatches()' used for in Stereo Vision?",
+      "options": {
+        "A": "Correcting the grammar in matched text.",
+        "B": "Refining coordinates of matched points to strictly satisfy the epipolar constraint.",
+        "C": "Deleting matches that are not accurate.",
+        "D": "A specialized software for poets."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Deep Learning', what is 'Inference' in OpenCV DNN?",
+      "options": {
+        "A": "Guessing the name of the model.",
+        "B": "The process of feeding input data through a trained network to get a prediction (output).",
+        "C": "Hiring a professional mathematician to read the report.",
+        "D": "A way to backup the storage layer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.fisheye' module used for?",
+      "options": {
+        "A": "Monitoring fish in an aquarium.",
+        "B": "Camera calibration and undistortion specifically for extreme wide-angle fisheye lenses.",
+        "C": "A specialized software for marine biologists.",
+        "D": "A security firewall for digital photos."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bag of Words' (BoW) in the context of OpenCV?",
+      "options": {
+        "A": "A literal bag filled with printed words.",
+        "B": "A method to represent images as a histogram of visual features for categorization.",
+        "C": "A dictionary that contains every word in the world.",
+        "D": "A type of robot that can speak out loud."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.StereoBM' vs 'cv2.StereoSGBM'?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "BM (Block Matching) is faster; SGBM (Semi-Global Block Matching) is more accurate but slower.",
+        "C": "BM is for color; SGBM for grayscale.",
+        "D": "StereoBM is 100x faster than SGBM."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Fundamental' vs 'Essential' matrix?",
+      "options": {
+        "A": "They are identical terms.",
+        "B": "Fundamental is in pixel coordinates; Essential is in normalized camera coordinates.",
+        "C": "Essential is for beginners; Fundamental for experts.",
+        "D": "Fundamental is for text; Essential for images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.stereoRectifyUncalibrated()'?",
+      "options": {
+        "A": "Rectifying a camera that has zero users.",
+        "B": "Computing rectification transforms for two views without knowing camera intrinsics.",
+        "C": "A way to count the number of characters.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'OpenCV', what is 'Aruco' module used for?",
+      "options": {
+        "A": "Recording audio from the camera.",
+        "B": "Detection and pose estimation of square fiducial markers (Aruco markers).",
+        "C": "A specialized software for accountants.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'cv2.triangulatePoints()' output?",
+      "options": {
+        "A": "A list of triangle shapes detected.",
+        "B": "A matrix containing the 4D homogeneous coordinates of the reconstructed 3D points.",
+        "C": "The speed of light in a vacuum.",
+        "D": "Hiring a translator for image processing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to draw 3D axes on a 2D image for pose visualization?",
+      "options": {
+        "A": "cv2.drawAxes()",
+        "B": "cv2.drawFrameAxes()",
+        "C": "cv2.render3D()",
+        "D": "cv2.plotCoordinates()"
+      },
+      "answer": "B"
+    }
   ]
 }

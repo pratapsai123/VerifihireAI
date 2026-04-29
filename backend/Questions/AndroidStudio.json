@@ -1,5 +1,5 @@
 {
-  "skill": "AndroidStudio",
+  "skill": "Android Studio",
   "questions": [
     {
       "question": "Which build automation tool is used by default in Android Studio to manage dependencies and compile apps?",

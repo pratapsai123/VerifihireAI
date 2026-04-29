@@ -116,11 +116,11 @@ export default function InviteCandidates() {
     if (!n) return false;
     if (!isValidEmail(e)) return false;
     if (!isValidPAN(p)) return false;
-    
+
     if (validityMode === 'exact_window' && (!scheduleDate || !startTime)) return false;
     if ((validityMode === 'date_anytime' || validityMode === 'one_week') && !scheduleDate) return false;
     if (phone && !isValidPhone(phone)) return false;
-    
+
     return true;
   }, [name, email, pan, validityMode, scheduleDate, startTime]);
 
@@ -527,9 +527,9 @@ export default function InviteCandidates() {
     );
   }
 
-  const isShareDisabled = 
-    sending || 
-    candidates.length === 0 || 
+  const isShareDisabled =
+    sending ||
+    candidates.length === 0 ||
     (isAutoSchedule && selectedInterviewerIds.length === 0) ||
     (assessment?.assessment_mode === 'single' && assessment.invited > 0);
 
@@ -563,7 +563,7 @@ export default function InviteCandidates() {
                 <span className="invite-meta-sep">·</span>
                 <span className="invite-meta-chip">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg>
-                  {assessment?.total_questions ?? '—'} questions
+                  {(assessment?.total_questions || 0) + (assessment?.coding_question_count || 0) || '—'} questions
                 </span>
               </div>
             </div>
@@ -818,8 +818,8 @@ export default function InviteCandidates() {
                   {importMsg}
                 </span>
               )}
-              <label 
-                className={`file-pill${isSingleLimitReached ? ' disabled' : ''}`} 
+              <label
+                className={`file-pill${isSingleLimitReached ? ' disabled' : ''}`}
                 htmlFor="inviteCsv"
                 style={isSingleLimitReached ? { opacity: 0.48, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
                 title={isSingleLimitReached ? "Single Mode assessment: Only one candidate can be invited." : "Upload CSV"}
