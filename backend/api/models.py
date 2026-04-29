@@ -1651,21 +1651,24 @@ class SecuritySession(models.Model):
     STATUS_CHOICES = [
         ('SAFE', 'SAFE'),
         ('VIOLATION', 'VIOLATION'),
+        ('HARDWARE_VIOLATION', 'HARDWARE_VIOLATION'),
     ]
     ACTION_CHOICES = [
         ('CONTINUE', 'CONTINUE'),
         ('STOP', 'STOP'),
+        ('PAUSE', 'PAUSE'),
     ]
 
     session_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     token = models.CharField(max_length=128, db_index=True)
     user_id = models.CharField(max_length=128, blank=True, null=True, db_index=True)
     session_type = models.CharField(max_length=32, choices=SESSION_TYPE_CHOICES, default='assessment')
-    status = models.CharField(max_length=16, choices=STATUS_CHOICES, default='SAFE')
+    status = models.CharField(max_length=24, choices=STATUS_CHOICES, default='SAFE')
     action = models.CharField(max_length=16, choices=ACTION_CHOICES, default='CONTINUE')
     blocked_app = models.CharField(max_length=128, blank=True, null=True)
     blocked_process_name = models.CharField(max_length=255, blank=True, null=True)
     blocked_app_path = models.TextField(blank=True, null=True)
+    blocked_hardware = models.CharField(max_length=512, blank=True, null=True)
     reason = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     last_heartbeat = models.DateTimeField(blank=True, null=True)

@@ -280,13 +280,13 @@ export default function Result() {
         load();
     }, [load]);
 
-    // Auto-refresh when viewing logs to show "instant" updates
+    // Auto-refresh when viewing logs to show near-instant updates
     useEffect(() => {
         if (!isOverview || !isShowingLogs || !quickViewRow) return;
 
         const pollTimer = setInterval(() => {
             load(true);
-        }, 5000); // Poll every 5 seconds
+        }, 2000); // Poll every 2 seconds for near-instant log display
 
         return () => clearInterval(pollTimer);
     }, [isOverview, isShowingLogs, quickViewRow, load]);
@@ -750,7 +750,7 @@ export default function Result() {
                             <div className="quickview-logs" style={{ padding: '0 24px', flex: 1, overflowY: 'auto' }}>
                                 {quickViewRow.activity_logs && quickViewRow.activity_logs.length > 0 ? (
                                     <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                                        {quickViewRow.activity_logs.map((log, i) => {
+                                        {[...quickViewRow.activity_logs].reverse().map((log, i) => {
                                             const isBlocked = log.action?.toLowerCase().includes('blocked');
                                             const isPassed = log.action?.toLowerCase().includes('passed') || log.action?.toLowerCase().includes('submitted');
                                             const isViolation = log.action?.toLowerCase().includes('violation') || log.action?.toLowerCase().includes('alert');

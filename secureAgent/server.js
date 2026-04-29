@@ -3,12 +3,15 @@ const cors = require('cors');
 const { scanProcesses } = require('./processScanner');
 const { detectBlocked, loadBundledRules } = require('./detector');
 const { startMonitor, stopMonitor, getMonitorState } = require('./monitor');
+const { scanHardwareDevices, initBaseline, compareToBaseline } = require('./hardwareScanner');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 loadBundledRules();
+// Take hardware baseline at startup so built-in devices are whitelisted
+initBaseline().catch(err => console.error('[server] hardware baseline init error:', err.message));
 
 app.get('/status', (_req, res) => {
   res.json({
@@ -33,6 +36,23 @@ app.post('/scan', async (_req, res) => {
       detections: [],
       error: e.message || 'scan failed',
     });
+  }
+});
+
+app.post('/scan/hardware', async (_req, res) => {
+  try {
+    const current = await scanHardwareDevices();
+    const comparison = compareToBaseline(current);
+    return res.json({
+      safe: !comparison.hasNewViolation,
+      blocked: comparison.violationNames,
+      newDevices: comparison.newBlocked,
+      extraMonitors: comparison.extraMonitors,
+      monitorCount: current.monitorCount,
+      logOnly: current.logOnly,
+    });
+  } catch (e) {
+    return res.status(500).json({ safe: true, blocked: [], error: e.message || 'hardware scan failed' });
   }
 });
 

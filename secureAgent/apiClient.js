@@ -18,4 +18,10 @@ async function sendHeartbeat(apiBase, payload) {
   return res.data;
 }
 
-module.exports = { getSecuritySignatures, sendSecurityCheck, sendHeartbeat };
+async function logActivity(apiBase, token, action, details) {
+  if (!token) return;
+  const url = `${apiBase}/invitations/public/${token}/log/`;
+  await axios.post(url, { action, details }, { timeout: 4000 });
+}
+
+module.exports = { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logActivity };

@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   fetchAgentStatus,
   runLocalScan,
+  runLocalHardwareScan,
   startBackendSecuritySession,
   startLocalMonitor,
 } from '../security/securityApi';
@@ -28,6 +29,7 @@ export default function SecurePrecheck() {
   const [phase, setPhase] = useState('checking');
   const [statusMessage, setStatusMessage] = useState('Checking system...');
   const [detectedApps, setDetectedApps] = useState([]);
+  const [detectedHardware, setDetectedHardware] = useState([]);
   const [error, setError] = useState('');
 
   const targetRoute = useMemo(() => {
@@ -73,6 +75,22 @@ export default function SecurePrecheck() {
       return;
     }
 
+    // ── Step 2: Hardware scan (USB storage, extra monitors, cameras) ─────────
+    try {
+      setStatusMessage('Scanning for external devices...');
+      const hwResult = await runLocalHardwareScan();
+      if (!hwResult?.safe) {
+        const hwNames = hwResult?.blocked || [];
+        setPhase('blocked_hardware');
+        setDetectedHardware(hwNames);
+        setStatusMessage('Please disconnect external devices to continue');
+        logCandidateActivity(token, 'Precheck Blocked', `External hardware detected: ${hwNames.join(', ')}`);
+        return;
+      }
+    } catch (hwErr) {
+      console.warn('[SecurePrecheck] hardware scan unavailable:', hwErr?.message);
+    }
+
     try {
       setStatusMessage('Starting secure session...');
       const userId = token;
@@ -85,12 +103,7 @@ export default function SecurePrecheck() {
         started_at: new Date().toISOString(),
       });
       markPrecheckPassed(token, type);
-      
-      // We must import logCandidateActivity at the top. Let's do that in a separate edit or assume we can import it.
-      // Wait, I need to add the import to SecurePrecheck.js first. I will add it here, but I must also add the import at the top.
-      import('../utils/activityLogger').then(({ logCandidateActivity }) => {
-        logCandidateActivity(token, 'Precheck Passed', 'Secure Agent verified and session started.');
-      });
+      logCandidateActivity(token, 'Precheck Passed', 'Secure Agent verified and session started.');
 
       navigate(targetRoute, { replace: true });
     } catch (startErr) {
@@ -117,7 +130,7 @@ export default function SecurePrecheck() {
         </>
       );
     }
-    if (phase === 'not_running' || phase === 'blocked' || phase === 'error') {
+    if (phase === 'not_running' || phase === 'blocked' || phase === 'blocked_hardware' || phase === 'error') {
       return <button className="btn btn-primary" onClick={startSecureFlow}>Retry</button>;
     }
     return null;
@@ -134,6 +147,16 @@ export default function SecurePrecheck() {
             <ul style={{ margin: 0, paddingLeft: 20 }}>
               {detectedApps.map((app, i) => (
                 <li key={i} style={{ color: '#dc2626', fontWeight: 700, fontSize: '1rem' }}>{app}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+        {detectedHardware.length > 0 ? (
+          <div style={{ marginTop: 8, marginBottom: 4 }}>
+            <p style={{ color: '#b45309', fontWeight: 600, margin: '0 0 6px' }}>External devices detected — please disconnect:</p>
+            <ul style={{ margin: 0, paddingLeft: 20 }}>
+              {detectedHardware.map((dev, i) => (
+                <li key={i} style={{ color: '#b45309', fontWeight: 700, fontSize: '1rem' }}>{dev}</li>
               ))}
             </ul>
           </div>

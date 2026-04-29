@@ -91,6 +91,25 @@ def security_check_view(request):
         ])
         return Response({'action': 'STOP'})
 
+    if status_value == 'HARDWARE_VIOLATION':
+        # Pause the exam — do NOT stop it permanently; device can be removed to resume
+        session.status = 'HARDWARE_VIOLATION'
+        session.action = 'PAUSE'
+        session.blocked_hardware = app  # app field contains the device name(s)
+        session.reason = f'Hardware violation: {app or "external device connected"}'
+        session.save(update_fields=['status', 'action', 'blocked_hardware', 'reason', 'updated_at'])
+        return Response({'action': 'PAUSE', 'blocked_hardware': app})
+
+    if status_value == 'HARDWARE_SAFE':
+        # Device was removed — un-pause if we were paused due to hardware
+        if session.action == 'PAUSE':
+            session.status = 'SAFE'
+            session.action = 'CONTINUE'
+            session.blocked_hardware = None
+            session.reason = 'Hardware cleared — exam resumed'
+            session.save(update_fields=['status', 'action', 'blocked_hardware', 'reason', 'updated_at'])
+        return Response({'action': session.action})
+
     session.status = 'SAFE'
     session.save(update_fields=['status', 'updated_at'])
     return Response({'action': 'CONTINUE'})
@@ -129,6 +148,7 @@ def security_session_status_view(request, session_id):
         'blocked_app': session.blocked_app,
         'blocked_process_name': session.blocked_process_name,
         'blocked_app_path': session.blocked_app_path,
+        'blocked_hardware': session.blocked_hardware,
         'last_heartbeat': session.last_heartbeat.isoformat() if session.last_heartbeat else None,
     })
 
