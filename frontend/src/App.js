@@ -1,5 +1,5 @@
 // Main App entrance for VerifiHireAI
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -105,7 +105,9 @@ axios.interceptors.request.use(
 
       const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
       const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
-      const isOnPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
+      const isOnPublicPage = publicRoutes.some(path => 
+        window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
+      );
 
       // 🛡️ SECURITY: Only attach token if NOT a public API and NOT on a public candidate page.
       // This prevents "401 Unauthorized" errors when a candidate has an old/expired recruiter token in their browser.
@@ -138,7 +140,9 @@ axios.interceptors.response.use(
         '/book-interview/',
         '/accept-invite'
       ];
-      const isPublicPage = publicRoutes.some(path => window.location.pathname.startsWith(path));
+      const isPublicPage = publicRoutes.some(path => 
+        window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
+      );
 
       // ONLY logout and redirect if NOT on a public candidate page
       if (!isPublicPage) {
@@ -204,7 +208,9 @@ function AppContent() {
       '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
       '/result/', '/live-interview', '/book-interview/', '/accept-invite'
     ];
-    const isPublicPage = publicRoutes.some(path => location.pathname.startsWith(path));
+    const isPublicPage = publicRoutes.some(path => 
+      location.pathname === path || (path.endsWith('/') && location.pathname.startsWith(path))
+    );
     if (isPublicPage) return;
 
     const intervalId = setInterval(async () => {
