@@ -23,7 +23,9 @@ __pycache__/
 .Python
 env/
 venv/
+*venv*/
 .env
+.venv/
 
 # Debug/Logs
 *.log
