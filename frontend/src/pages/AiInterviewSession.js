@@ -6,6 +6,7 @@ import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
+import { logCandidateActivity } from '../utils/activityLogger';
 
 const AiInterviewSession = () => {
     const VIOLATION_COOLDOWN_MS = 10000;
@@ -916,6 +917,7 @@ const AiInterviewSession = () => {
         if (isCompletedRef.current) return;
         isCompletedRef.current = true;
         setIsCompleted(true);
+        logCandidateActivity(token, 'AI Interview Submitted', 'AI Interview completed and submitted.');
         stopCamera();
         // Stop DeepFace proctoring session
         if (dfSendIntervalRef.current) clearInterval(dfSendIntervalRef.current);
@@ -1763,6 +1765,7 @@ const AiInterviewSession = () => {
             
             if (regRes.data && regRes.data.success) {
                 setWizardStep(2); // 'success'
+                logCandidateActivity(token, 'AI Interview Started', 'Candidate passed proctoring check and started the AI Interview.');
                 setTimeout(() => {
                     // Transition to Environment Setup instead of starting interview
                     setWizardStep(4); // Environment Checks

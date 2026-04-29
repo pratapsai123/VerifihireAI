@@ -46,6 +46,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ThankYou from './pages/ThankYou';
 import MyAccount from './pages/MyAccount';
 import Contact from './pages/Contact';
+import SecurePrecheck from './pages/SecurePrecheck';
+import InviteRedirect from './pages/InviteRedirect';
+import SessionTerminated from './pages/SessionTerminated';
+import SecuritySessionGuard from './components/SecuritySessionGuard';
 import './styles/App.css';
 
 import Header from './components/Header';
@@ -85,6 +89,10 @@ axios.interceptors.request.use(
 
       // List of candidate-facing routes that should NEVER send a recruiter token
       const publicRoutes = [
+        '/precheck/',
+        '/session-terminated',
+        '/invite/',
+        '/interview/',
         '/take-assessment/',
         '/take-ai-assessment/',
         '/ai-interview-session/',
@@ -117,6 +125,10 @@ axios.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Check if the current page is a public candidate-facing page
       const publicRoutes = [
+        '/precheck/',
+        '/session-terminated',
+        '/invite/',
+        '/interview/',
         '/take-assessment/',
         '/take-ai-assessment/',
         '/ai-interview-session/',
@@ -163,11 +175,13 @@ function AppContent() {
     '/accept-invite',
     '/feedback-page',
     '/contact',
+    '/session-terminated',
   ];
 
   const isFullScreenPage =
     fullScreenRoutes.includes(location.pathname) ||
     location.pathname.startsWith('/interview-start/') ||
+    location.pathname.startsWith('/precheck/') ||
     location.pathname.startsWith('/take-assessment/') ||
     location.pathname.startsWith('/take-ai-assessment/') ||
     location.pathname.startsWith('/ai-interview-session/') ||
@@ -185,6 +199,7 @@ function AppContent() {
 
     // Skip polling on public candidate/invite pages
     const publicRoutes = [
+      '/precheck/', '/session-terminated', '/invite/', '/interview/',
       '/login', '/signup', '/forgot-password', '/take-assessment/', 
       '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
       '/result/', '/live-interview', '/book-interview/', '/accept-invite'
@@ -264,15 +279,21 @@ function AppContent() {
           </Route>
 
           {/* Public / Candidate Routes */}
+          <Route path="/invite/:token" element={<InviteRedirect type="assessment" />} />
+          <Route path="/interview/:token" element={<InviteRedirect type="interview" />} />
+          <Route path="/ai-assessment/:token" element={<InviteRedirect type="ai_assessment" />} />
+          <Route path="/ai-interview/:token" element={<InviteRedirect type="ai_interview" />} />
+          <Route path="/precheck/:token" element={<SecurePrecheck />} />
+          <Route path="/session-terminated" element={<SessionTerminated />} />
           <Route path="/result/:token" element={<Result />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/take-assessment/:token" element={<TakeAssessment />} />
+          <Route path="/take-assessment/:token" element={<SecuritySessionGuard sessionType="assessment"><TakeAssessment /></SecuritySessionGuard>} />
           <Route path="/accept-invite" element={<AcceptInvite />} />
           <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
           <Route path="/live-interview" element={<LiveInterview />} />
-          <Route path="/interview-start/:token" element={<InterviewStart />} />
-          <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
-          <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
+          <Route path="/interview-start/:token" element={<SecuritySessionGuard sessionType="interview"><InterviewStart /></SecuritySessionGuard>} />
+          <Route path="/take-ai-assessment/:token" element={<SecuritySessionGuard sessionType="ai_assessment"><AiTakeAssessment /></SecuritySessionGuard>} />
+          <Route path="/ai-interview-session/:token" element={<SecuritySessionGuard sessionType="ai_interview"><AiInterviewSession /></SecuritySessionGuard>} />
           <Route path="/book-interview/:token" element={<BookInterview />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />

@@ -61,6 +61,7 @@ from .candidate_assessment_views import (
     _acq_merge_code,
     update_standard_integrity_view,
     verify_pan_backend_view,
+    log_candidate_activity_view,
 )
 
 from .live_interview_views import (
@@ -120,4 +121,12 @@ from .malpractice_views import (
 
 from .contact_views import (
     contact_us_view,
+)
+
+from .security_views import (
+    start_security_session_view,
+    security_check_view,
+    security_heartbeat_view,
+    security_session_status_view,
+    security_signatures_view,
 )

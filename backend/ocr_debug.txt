@@ -483,6 +483,8 @@
 [2026-04-24 07:48:24.476615+00:00] Running OCR on rotation 180
 [2026-04-24 07:48:32.265518+00:00] Running OCR on rotation 90
 [2026-04-24 07:48:40.704719+00:00] Running OCR on rotation 270
+[2026-04-27 10:55:18.669583+00:00] Running OCR on rotation 0
+[2026-04-27 10:55:21.324965+00:00] Direct match found at rotation 0
 [2026-04-27 09:26:51.985724+00:00] Running OCR on rotation 0
 [2026-04-27 09:27:00.489692+00:00] Running OCR on rotation 180
 [2026-04-27 09:27:09.227617+00:00] Running OCR on rotation 90

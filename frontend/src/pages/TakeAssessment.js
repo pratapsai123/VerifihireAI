@@ -7,7 +7,7 @@ import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
 import { API_BASE_URL } from '../apiConfig';
 import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
-
+import { logCandidateActivity } from '../utils/activityLogger';
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -765,6 +765,8 @@ export default function TakeAssessment() {
           code_map: codeMap
         });
       }
+
+      logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
 
       setSubmitted(true);
       localStorage.removeItem(`take_assessment_progress_${token}`);
@@ -2020,9 +2022,9 @@ export default function TakeAssessment() {
                             automaticLayout: true,
                             readOnly: false,
                             domReadOnly: false,
+                            wordWrap: 'on'
                           }}
                           onChange={(v) => {
-
                             const value = v ?? '';
                             setCodingState((prev) => ({
                               ...prev,
@@ -2030,14 +2032,6 @@ export default function TakeAssessment() {
                             }));
                           }}
                           theme="vs-dark"
-                          options={{
-                            fontSize: 13,
-                            minimap: { enabled: false },
-                            automaticLayout: true,
-                            scrollBeyondLastLine: false,
-                            wordWrap: 'on',
-                            readOnly: false,
-                          }}
                         />
                       </Suspense>
                     </div>

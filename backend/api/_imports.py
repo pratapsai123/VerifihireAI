@@ -51,6 +51,7 @@ from .models import (
     InterviewSlot,
     InterviewerAvailability,
     RestrictedDomain,
+    SecuritySession,
     IdentityLink,
 )
 from asgiref.sync import async_to_sync
