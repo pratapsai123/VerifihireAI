@@ -266,32 +266,19 @@ class SubmitAssessmentView(APIView):
                 # Use iexact and prioritize the same batch if possible
                 candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
                 candidate = candidates.filter(batch_id=assessment.batch_id).first()
-                if not candidate:
-                    candidate = candidates.first()
 
                 if candidate:
                     logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
-                    # For Fully Automatic flows, move them to 'Assessment Passed' 
-                    # so they show up correctly before the interview is sent.
                     candidate.status = 'Assessment Passed'
-                    candidate.completed_at = timezone.now()
-                    
-                    if not isinstance(candidate.interview_summary, list):
-                        candidate.interview_summary = []
-                    
-                    candidate.interview_summary.append({
-                        "type": "AI_ASSESSMENT",
-                        "assessment_id": assessment.id,
-                        "submission_id": submission.id,
-                        "mcq_accuracy": f"{round(candidate_mcq_points)}/{len(mcqs)} ({int(mcq_percentage)}%)",
-                        "coding_accuracy": f"{int(coding_percentage)}%",
-                        "weighted_mcq": f"{(mcq_percentage * mcq_w):.1f}%",
-                        "weighted_coding": f"{(coding_percentage * coding_w):.1f}%",
-                        "integrity_score": f"{int(submission.integrity_score)}%",
-                        "timestamp": timezone.now().isoformat()
-                    })
-                    candidate.save()
+                    candidate.save(update_fields=['score', 'status'])
+
+                    # SYNC SUBMISSION BATCH: Ensure the raw submission record is in the same batch as the candidate record
+                    # This prevents the UI from showing a "duplicate" row or another batch for the same candidate.
+                    if candidate.batch_id and submission.batch_id != candidate.batch_id:
+                        submission.batch_id = candidate.batch_id
+                        submission.batch_name = candidate.batch_name
+                        submission.save(update_fields=['batch_id', 'batch_name'])
                 else:
                     logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
 
@@ -841,7 +828,10 @@ class GenerateAssessmentView(APIView):
                 batch_id=generate_batch_id(),
                 batch_name=generate_batch_name(job_title),
                 status='SCHEDULED',
-                creation_type='manual'
+                creation_type='manual',
+                has_mcq_cutoff=False,
+                min_mcq_pass_percentage=50,
+                min_coding_pass_percentage=50
             )
 
             logger.info(
@@ -962,19 +952,20 @@ class CreateSubmissionView(APIView):
                 
                 # CROSS-UPDATE: Synchronize with the Candidate record if exists
                 try:
-                    # Use iexact and prioritize the same batch if possible
+                    # Use iexact and prioritize the same batch
                     candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
                     candidate = candidates.filter(batch_id=assessment.batch_id).first()
-                    if not candidate:
-                        candidate = candidates.first()
-
+                    
+                    # ONLY update the name if the candidate belongs to the SAME batch.
+                    # Do not blindly fallback to candidates.first() for name updates, 
+                    # as that mutates records from other pipelines.
                     if candidate:
                         logger.info(f"CreateSubmission: Reconciled candidate {candidate.id} for {email} in assessment {assessment.id}")
                         if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
                             candidate.full_name = name
                             candidate.save(update_fields=['full_name'])
                     else:
-                        logger.info(f"CreateSubmission: No matching Candidate record found for {email}")
+                        logger.info(f"CreateSubmission: No matching Candidate record found for {email} in batch {assessment.batch_id}")
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
@@ -2249,74 +2240,73 @@ class AIAssessmentReportDownloadView(APIView):
             ]
 
             # Style the info table
-            info_table = Table(info_data, colWidths=[1.8*inch, 3.6*inch])
+            info_table = Table(info_data, colWidths=[1.4*inch, 3.0*inch])
             info_table.setStyle(TableStyle([
-                ('GRID', (0,0), (-1,-1), 1, colors.HexColor("#E0E5F2")),
-                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#F8F9FF")),  # Left column background
-                ('BACKGROUND', (0,0), (-1,-1), colors.white),
-                ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
-                ('FONTSIZE', (0,0), (-1,-1), 9),
-                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#1B254B")),
+                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#F8F9FF")),
+                ('FONTNAME', (0,0), (0,-1), 'Helvetica'),
+                ('FONTSIZE', (0,0), (0,-1), 9),
+                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#64748b")),
+                ('FONTNAME', (1,0), (1,-1), 'Helvetica-Bold'),
+                ('FONTSIZE', (1,0), (1,-1), 10),
                 ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor("#1B254B")),
-                ('ALIGN', (0,0), (0,-1), 'LEFT'),
-                ('ALIGN', (1,0), (1,-1), 'LEFT'),
+                ('ALIGN', (0,0), (-1,-1), 'LEFT'),
                 ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('LEFTPADDING', (0,0), (-1,-1), 10),
-                ('RIGHTPADDING', (0,0), (-1,-1), 10),
-                ('TOPPADDING', (0,0), (-1,-1), 8),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 8),
+                ('LEFTPADDING', (0,0), (0,-1), 10),
+                ('LEFTPADDING', (1,0), (1,-1), 10),
+                ('TOPPADDING', (0,0), (-1,-1), 7),
+                ('BOTTOMPADDING', (0,0), (-1,-1), 7),
+                ('LINEBELOW', (0,0), (-1,-2), 0.5, colors.HexColor("#E0E5F2")),
                 # Color coding for specific rows
-                ('TEXTCOLOR', (1,5), (1,5), integrity_color),  # Integrity score color
+                ('TEXTCOLOR', (1,5), (1,5), integrity_color),
                 ('FONTNAME', (1,5), (1,5), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,6), (1,6), status_color),  # Overall result color
+                ('TEXTCOLOR', (1,6), (1,6), status_color),
                 ('FONTNAME', (1,6), (1,6), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,7), (1,7), status_color),  # Status color
+                ('TEXTCOLOR', (1,7), (1,7), status_color),
                 ('FONTNAME', (1,7), (1,7), 'Helvetica-Bold'),
             ]))
 
-            # Create photo + table layout - improved alignment
-            # Calculate table height based on rows (9 rows * ~20pts each + padding)
-            table_height = len(info_data) * 22
-            
+            # Photo section
             if candidate_img:
-                # Create photo cell with proper sizing to match table height
                 photo_label = Paragraph("Candidate Photo", ParagraphStyle('PhotoLabel', parent=styles['Normal'], fontSize=8, alignment=1, textColor=colors.HexColor("#707EAE")))
                 photo_cell = [[candidate_img], [photo_label]]
-                photo_table = Table(photo_cell, colWidths=[1.5*inch], rowHeights=[1.4*inch, 20])
+                photo_table = Table(photo_cell, colWidths=[1.5*inch], rowHeights=[1.5*inch, 18])
                 photo_table.setStyle(TableStyle([
                     ('ALIGN', (0,0), (0,0), 'CENTER'),
                     ('VALIGN', (0,0), (0,0), 'MIDDLE'),
                     ('ALIGN', (0,1), (0,1), 'CENTER'),
                     ('VALIGN', (0,1), (0,1), 'TOP'),
-                    ('TOPPADDING', (0,1), (0,1), 6),
+                    ('TOPPADDING', (0,1), (0,1), 4),
                 ]))
-                combined_data = [[photo_table, info_table]]
-                combined_table = Table(combined_data, colWidths=[1.7*inch, 4.3*inch])
-                combined_table.setStyle(TableStyle([
-                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                    ('ALIGN', (0,0), (0,0), 'CENTER'),
-                    ('LEFTPADDING', (0,0), (0,0), 0),
-                    ('RIGHTPADDING', (0,0), (0,0), 15),
-                ]))
-                elements.append(combined_table)
             else:
-                # No photo available - just show table with placeholder
                 no_photo_text = Paragraph("No candidate<br/>photo available", ParagraphStyle('NoPhoto', parent=styles['Normal'], fontSize=9, alignment=1, textColor=colors.grey))
-                photo_placeholder = Table([[no_photo_text]], colWidths=[1.5*inch], rowHeights=[table_height])
-                photo_placeholder.setStyle(TableStyle([
+                photo_table = Table([[no_photo_text]], colWidths=[1.5*inch], rowHeights=[1.5*inch])
+                photo_table.setStyle(TableStyle([
                     ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#F4F7FE")),
-                    ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#E0E5F2")),
                     ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                     ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
                 ]))
-                combined_data = [[photo_placeholder, info_table]]
-                combined_table = Table(combined_data, colWidths=[1.7*inch, 4.3*inch])
-                combined_table.setStyle(TableStyle([
-                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                    ('LEFTPADDING', (0,0), (0,0), 0),
-                    ('RIGHTPADDING', (0,0), (0,0), 15),
-                ]))
-                elements.append(combined_table)
+
+            # Combine photo + info in a bordered container
+            page_width = A4[0] - 100  # Total usable width (50pt margins each side)
+            combined_data = [[photo_table, info_table]]
+            combined_table = Table(combined_data, colWidths=[1.8*inch, page_width - 1.8*inch])
+            combined_table.setStyle(TableStyle([
+                ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                ('ALIGN', (0,0), (0,0), 'CENTER'),
+                ('LEFTPADDING', (0,0), (0,0), 10),
+                ('RIGHTPADDING', (0,0), (0,0), 10),
+                ('LEFTPADDING', (1,0), (1,0), 5),
+                ('RIGHTPADDING', (1,0), (1,0), 5),
+                ('TOPPADDING', (0,0), (-1,-1), 10),
+                ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+                # Outer border box
+                ('BOX', (0,0), (-1,-1), 1.2, colors.HexColor("#D0D5E4")),
+                ('ROUNDEDCORNERS', [6, 6, 6, 6]),
+                ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FCFCFF")),
+                # Vertical divider between photo and info
+                ('LINEAFTER', (0,0), (0,-1), 0.5, colors.HexColor("#E0E5F2")),
+            ]))
+            elements.append(combined_table)
 
             elements.append(Spacer(1, 30))
 
@@ -2334,6 +2324,8 @@ class AIAssessmentReportDownloadView(APIView):
 
             if mcqs:
                 elements.append(Paragraph("MCQ Answer Verification", styles['SectionTitle']))
+                page_width = A4[0] - 100  # Usable width
+
                 for i, mcq in enumerate(mcqs):
                     q_text = mcq.get('question', 'N/A')
                     options = mcq.get('options', [])
@@ -2341,50 +2333,80 @@ class AIAssessmentReportDownloadView(APIView):
                     candidate_ans = str(answers.get(f'mcq_{i}') or '').strip()
                     is_correct = candidate_ans == correct_ans
 
-                    # Question Header with Badge
-                    q_header_table = Table([[Paragraph(f"QUESTION {i+1}", styles['QuestionHeader']), Paragraph("CORRECT" if is_correct else "INCORRECT", styles['BadgeCorrect'] if is_correct else styles['BadgeIncorrect'])]], colWidths=[4.0*inch, 1.4*inch])
+                    # Question Header with Badge — full width
+                    badge_text = "CORRECT" if is_correct else "INCORRECT"
+                    badge_style = styles['BadgeCorrect'] if is_correct else styles['BadgeIncorrect']
+                    q_header_table = Table(
+                        [[Paragraph(f"QUESTION {i+1}", styles['QuestionHeader']), Paragraph(badge_text, badge_style)]],
+                        colWidths=[page_width - 1.6*inch, 1.6*inch]
+                    )
+                    q_header_table.setStyle(TableStyle([
+                        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ('ALIGN', (1,0), (1,0), 'RIGHT'),
+                    ]))
                     elements.append(q_header_table)
                     elements.append(Paragraph(q_text, styles['QuestionText']))
-                    elements.append(Spacer(1, 10))
+                    elements.append(Spacer(1, 8))
 
-                    # Options Table
-                    opt_list = []
+                    # Options — stacked vertically, each as a full-width bordered row
                     for oi, opt in enumerate(options):
                         is_selected = opt == candidate_ans
                         is_ans = opt == correct_ans
                         
                         bg = colors.white
-                        border = colors.HexColor("#E0E5F2")
+                        border_color = colors.HexColor("#E0E5F2")
                         txt_color = colors.HexColor("#1B254B")
+                        marker = ""
                         
                         if is_ans:
                             bg = colors.HexColor("#E6FBF5")
-                            border = colors.HexColor("#05CD99")
+                            border_color = colors.HexColor("#05CD99")
                             txt_color = colors.HexColor("#05CD99")
+                            marker = " (Correct Answer)"
                         elif is_selected and not is_correct:
                             bg = colors.HexColor("#FFF5F5")
-                            border = colors.HexColor("#EE5D50")
+                            border_color = colors.HexColor("#EE5D50")
                             txt_color = colors.HexColor("#EE5D50")
+                            marker = " (Your Answer)"
+                        elif is_selected and is_correct:
+                            marker = " (Your Answer)"
                         
-                        prefix = f"{chr(65+oi)}. "
-                        opt_list.append([Paragraph(f"<b>{prefix}</b>{opt}", ParagraphStyle('Opt', parent=styles['Normal'], textColor=txt_color, fontSize=9))])
-                        
-                    # Build options as small card-like rows
-                    for row in opt_list:
-                        ot = Table([row], colWidths=[5.4*inch])
-                        # Calculate backgrounds/borders again for the table style
-                        # (Simpler to just use a bulleted list for PDF if grid is too complex, but let's try row styles)
-                        elements.append(ot)
-                        elements.append(Spacer(1, 2))
+                        prefix = f"{chr(65+oi)}."
+                        opt_para = Paragraph(
+                            f"<b>{prefix}</b> {opt}<font color='#94A3B8'>{marker}</font>",
+                            ParagraphStyle('OptStyle', parent=styles['Normal'], textColor=txt_color, fontSize=9, leading=13)
+                        )
+                        opt_table = Table([[opt_para]], colWidths=[page_width - 10])
+                        opt_table.setStyle(TableStyle([
+                            ('BACKGROUND', (0,0), (-1,-1), bg),
+                            ('BOX', (0,0), (-1,-1), 0.8, border_color),
+                            ('LEFTPADDING', (0,0), (-1,-1), 10),
+                            ('RIGHTPADDING', (0,0), (-1,-1), 10),
+                            ('TOPPADDING', (0,0), (-1,-1), 6),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ]))
+                        elements.append(opt_table)
+                        elements.append(Spacer(1, 3))
 
                     # Correct Solution Box if incorrect
                     if not is_correct:
-                        elements.append(Spacer(1, 8))
-                        sol_box = Table([[Paragraph("CORRECT SOLUTION", styles['QuestionHeader']), Paragraph(correct_ans, styles['SolutionBox'])]], colWidths=[1.5*inch, 3.9*inch])
-                        sol_box.setStyle(TableStyle([('BACKGROUND', (1,0), (1,0), colors.HexColor("#E6FBF5")), ('VALIGN', (0,0), (-1,-1), 'MIDDLE')]))
+                        elements.append(Spacer(1, 6))
+                        sol_box = Table(
+                            [[Paragraph("CORRECT ANSWER:", styles['QuestionHeader']), Paragraph(correct_ans, styles['SolutionBox'])]],
+                            colWidths=[1.5*inch, page_width - 1.5*inch]
+                        )
+                        sol_box.setStyle(TableStyle([
+                            ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#E6FBF5")),
+                            ('BOX', (0,0), (-1,-1), 0.8, colors.HexColor("#05CD99")),
+                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                            ('LEFTPADDING', (0,0), (-1,-1), 10),
+                            ('TOPPADDING', (0,0), (-1,-1), 6),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+                        ]))
                         elements.append(sol_box)
 
-                    elements.append(Spacer(1, 25))
+                    elements.append(Spacer(1, 20))
 
             # 5. Coding Section
             if coding_challenges:
@@ -2429,22 +2451,23 @@ class AIAssessmentReportDownloadView(APIView):
                 shots_list = list(screenshots)
                 img_grid = []
                 current_row = []
+                page_width = A4[0] - 100  # Usable width
+                col_w = page_width / 4
                 
                 for shot in shots_list:
-                    # Prioritize webcam or desktop as per UI
                     img_path = None
                     if shot.webcam_screenshot: img_path = shot.webcam_screenshot.path
                     elif shot.screenshot: img_path = shot.screenshot.path
                     
                     try:
                         if img_path:
-                            rl_img = RLImage(img_path, width=1.5*inch, height=1.1*inch)
-                            label = f"{shot.event_type.replace('_', ' ').upper()} ({shot.timestamp.strftime('%I:%M:%S %p')})"
-                            current_row.append([rl_img, Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey))])
+                            rl_img = RLImage(img_path, width=col_w - 12, height=(col_w - 12) * 0.75)
+                            label = f"{shot.event_type.replace('_', ' ').title()} ({shot.timestamp.strftime('%I:%M:%S %p')})"
+                            current_row.append([rl_img, Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey, leading=9))])
                         else:
                             current_row.append(Paragraph("No Image", styles['Normal']))
                     except:
-                        current_row.append(Paragraph("Error Loading Image", styles['Normal']))
+                        current_row.append(Paragraph("Error Loading", styles['Normal']))
 
                     if len(current_row) == 4:
                         img_grid.append(current_row)
@@ -2456,17 +2479,16 @@ class AIAssessmentReportDownloadView(APIView):
                     img_grid.append(current_row)
 
                 for grid_row in img_grid:
-                    t = Table([grid_row], colWidths=[1.6*inch, 1.6*inch, 1.6*inch, 1.6*inch])
+                    t = Table([grid_row], colWidths=[col_w] * 4)
                     t.setStyle(TableStyle([
                         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                        ('LEFTPADDING', (0,0), (-1,-1), 2),
-                        ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                        ('LEFTPADDING', (0,0), (-1,-1), 3),
+                        ('RIGHTPADDING', (0,0), (-1,-1), 3),
                         ('TOPPADDING', (0,0), (-1,-1), 5),
-                        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                        ('BOTTOMPADDING', (0,0), (-1,-1), 8),
                     ]))
                     elements.append(t)
-                    elements.append(Spacer(1, 10))
             else:
                 elements.append(Paragraph("No violations recorded. Candidate maintained full integrity.", styles['Italic']))
 
@@ -2487,3 +2509,66 @@ class AIAssessmentReportDownloadView(APIView):
             logger.error(f"Error generating PDF report for submission {pk}: {str(e)}", exc_info=True)
             return Response({'error': f"Critical failure: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class AIAssessmentSubmissionListView(APIView):
+    def get(self, request):
+        candidate_email = request.query_params.get('candidate_email')
+        batch_name = request.query_params.get('batch_name')
+        batch_id = request.query_params.get('batch_id')
+        submission_id = request.query_params.get('submission_id')
+        
+        if not candidate_email and not submission_id:
+            return Response({"error": "candidate_email or submission_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        qs = AIAssessmentSubmission.objects.all()
+        if candidate_email:
+            qs = qs.filter(candidate_email__iexact=candidate_email)
+        if batch_name:
+            qs = qs.filter(batch_name=batch_name)
+        if batch_id:
+            qs = qs.filter(batch_id=batch_id)
+        if submission_id:
+            qs = qs.filter(id=submission_id.replace('ai_', '') if str(submission_id).startswith('ai_') else submission_id)
+            
+        submissions = qs.order_by('-submitted_at')
+        
+        data = []
+        from django.utils import timezone
+        for sub in submissions:
+            integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=sub).order_by('timestamp')
+            screenshots_data = []
+            for snap in integrity_snapshots:
+                screenshots_data.append({
+                    "event_type": snap.event_type,
+                    "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                    "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                    "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                })
+
+            data.append({
+                "id": sub.id,
+                "submission_id": f"ai_{sub.id}",
+                "candidate_name": sub.candidate_name,
+                "candidate_email": sub.candidate_email,
+                "job_title": sub.assessment.required_skills,
+                "role": sub.assessment.required_skills,
+                "assessment_name": sub.assessment.required_skills,
+                "score": sub.score,
+                "mcq_score": sub.mcq_score,
+                "coding_score": sub.coding_score,
+                "results_breakdown": sub.results_breakdown,
+                "percentage": sub.percentage,
+                "status": sub.status,
+                "final_status": sub.status,
+                "integrity_score": sub.integrity_score,
+                "submitted_at": timezone.localtime(sub.submitted_at).strftime("%Y-%m-%d %H:%M") if sub.submitted_at else None,
+                "candidate_questions": sub.candidate_questions,
+                "answers": sub.answers,
+                "integrity_screenshots": screenshots_data,
+                "is_resume_screening": False,
+                "assessment": {
+                    "id": sub.assessment.id,
+                    "display_name": sub.assessment.required_skills,
+                    "name": sub.assessment.required_skills
+                }
+            })
+        return Response({"results": data}, status=status.HTTP_200_OK)

@@ -46,20 +46,20 @@ const ResultsAI = () => {
     const handleDownloadReport = async (candidate) => {
         if (!candidate) return;
         const sid = String(candidate.submission_id || '');
-        
+
         let endpoint = '';
         let realId = '';
-        
+
         if (sid.startsWith('ai_')) {
             // AI Assessment Submission
             realId = sid.replace('ai_', '');
             endpoint = `${API_BASE_URL}/ai/submission/${realId}/download-report/`;
         } else {
-            // AI Interview / Candidate Report
-            realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+            // AI Interview / Candidate Report — strip all suffixes to get pure numeric ID
+            realId = sid.replace('aicand_', '').replace('_resume', '').replace('_interview', '').replace('_assessment', '');
             endpoint = `${API_BASE_URL}/ai-candidates/${realId}/download-report/`;
         }
-        
+
         setDownloadingId(realId);
         try {
             const response = await axios.get(endpoint, {
@@ -68,7 +68,7 @@ const ResultsAI = () => {
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                 }
             });
-            
+
             const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
             const link = document.createElement('a');
             link.href = url;
@@ -121,20 +121,74 @@ const ResultsAI = () => {
                         }
                     });
                 } else if (sid.startsWith('aicand_')) {
-                    // Define which statuses belong to which stage
-                    const resumeStatuses = ['Resume Passed', 'Resume Failed', 'Extraction Failed'];
-                    const interviewStatuses = ['Interview Passed', 'Interview Failed', 'Interview Completed', 'Selected', 'Rejected'];
-                    const pendingStatuses = ['New', 'Invited', 'Interviewing'];
+                    // For aicand_ records, the SINGLE record contains data for ALL stages
+                    // We need to create separate stage entries that will be grouped by email
 
-                    // Only include in Interview tab for completed interview statuses
-                    if (interviewStatuses.includes(r.status) || (!pendingStatuses.includes(r.status) && !resumeStatuses.includes(r.status))) {
-                        intResults.push(r);
+                    const hasResume = r.resume_score > 0 || ['Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(r.status);
+                    const hasAssessment = (r.percentage != null && r.percentage > 0) || (r.score != null && r.score > 0) || r.total_questions > 0 || ['Assessment Passed', 'Assessment Failed', 'Qualified', 'Not Qualified', 'Selected', 'Rejected'].includes(r.status);
+                    const hasInterview = r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed'].includes(r.status);
+
+                    // ALWAYS add resume entry if we have resume data
+                    if (hasResume) {
+                        resResults.push({
+                            ...r,
+                            _type: 'resume',
+                            submission_id: `${sid}_resume`,
+                            resume_score: r.resume_score || 0,
+                            status: r.status === 'Resume Passed' || r.resume_score >= 70 ? 'Resume Passed' : 'Resume Failed'
+                        });
                     }
 
-                    // Only include in Resume tab for resume-specific statuses
-                    // This prevents interview results from showing in resume tab
-                    if (resumeStatuses.includes(r.status)) {
-                        resResults.push(r);
+                    // ALWAYS add assessment entry if we have assessment data
+                    if (hasAssessment) {
+                        assessResults.push({
+                            ...r,
+                            _type: 'ai_assessment',
+                            submission_id: `${sid}_assessment`,
+                            id: r.id, // Keep original candidate ID for Quiz button
+                            candidate_name: r.full_name || r.candidate?.name,
+                            candidate_email: r.email || r.candidate?.email,
+                            assessment_name: r.job_title || r.assessment?.display_name || 'AI Assessment',
+                            submitted_at: r.submitted_at || r.completed_at || r.created_at,
+                            percentage: r.percentage || r.score || 0,
+                            total_questions: r.total_questions,
+                            status: r.status === 'Completed' || r.status === 'Hired' ? 'selected' : (r.percentage >= 50 ? 'selected' : 'rejected'),
+                            assessment: r.assessment || {
+                                display_name: r.job_title || 'AI Assessment',
+                                name: r.job_title || 'AI Assessment',
+                                role: r.job_title || 'General'
+                            },
+                            answers: r.answers || {},
+                            results_breakdown: r.results_breakdown || {},
+                            is_resume_screening: false
+                        });
+                    }
+
+                    // ALWAYS add interview entry if we have interview data
+                    if (hasInterview) {
+                        intResults.push({
+                            ...r,
+                            _type: 'interview',
+                            submission_id: `${sid}_interview`,
+                            score: r.score || 0,
+                            interview_summary: r.interview_summary,
+                            status: ['Completed', 'Hired', 'Interview Passed'].includes(r.status) ? 'Completed' : 'Interviewing'
+                        });
+                    }
+
+                    // If no stages detected but has a status, put in appropriate bucket
+                    if (!hasResume && !hasAssessment && !hasInterview) {
+                        const resumeStatuses = ['Resume Passed', 'Resume Failed', 'Extraction Failed'];
+                        const interviewStatuses = ['Interview Passed', 'Interview Failed', 'Completed'];
+
+                        if (resumeStatuses.includes(r.status)) {
+                            resResults.push({ ...r, _type: 'resume', submission_id: `${sid}_resume` });
+                        } else if (interviewStatuses.includes(r.status)) {
+                            intResults.push({ ...r, _type: 'interview', submission_id: `${sid}_interview` });
+                        } else {
+                            // Default to resume for unknown
+                            resResults.push({ ...r, _type: 'resume', submission_id: `${sid}_resume` });
+                        }
                     }
                 } else {
                     // Collect standard/manual assessment results
@@ -186,8 +240,12 @@ const ResultsAI = () => {
                         total: 0,
                         role: rawRole,
                         batch_name: batchLabel,
-                        is_fully_automatic: item.is_fully_automatic
+                        is_fully_automatic: item.is_fully_automatic || false
                     };
+                }
+                // If ANY item in this group is fully automatic, mark the whole group as fully automatic
+                if (item.is_fully_automatic) {
+                    groups[batchLabel].is_fully_automatic = true;
                 }
                 groups[batchLabel][type].push(item);
                 groups[batchLabel].total += 1;
@@ -197,6 +255,17 @@ const ResultsAI = () => {
             intResults.forEach(r => addToGroup(r, 'interview'));
             sortedAssessments.forEach(s => addToGroup(s, 'assessment'));
             manResults.forEach(m => addToGroup(m, 'standard'));
+
+            Object.values(groups).forEach(g => {
+                if (g.is_fully_automatic) {
+                    const emails = new Set();
+                    [...g.resume, ...g.assessment, ...g.interview].forEach(item => {
+                        const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
+                        emails.add(email);
+                    });
+                    g.unique_candidates = emails.size;
+                }
+            });
 
             setGroupedData(groups);
         } catch (err) {
@@ -223,7 +292,7 @@ const ResultsAI = () => {
             const sid = String(candidate.submission_id || '');
             const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
             const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
-            
+
             // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
             let filteredLogs = resp.data;
             if (candidate.batch_id) {
@@ -247,6 +316,54 @@ const ResultsAI = () => {
             showToast('error', 'Failed to load timeline history.');
         } finally {
             setLoadingTimeline(false);
+        }
+    };
+
+    const fetchAssessmentByCandidateEmail = async (options) => {
+        try {
+            const params = {};
+            if (typeof options === 'string') {
+                params.candidate_email = options;
+            } else {
+                if (options.email) params.candidate_email = options.email;
+                if (options.batchName && options.batchName !== 'All Roles') params.batch_name = options.batchName;
+                if (options.batchId) params.batch_id = options.batchId;
+                if (options.subId && !options.subId.toString().startsWith('aicand_')) {
+                    params.submission_id = options.subId.toString().replace('ai_', '');
+                }
+            }
+            
+            const resp = await axios.get(`${API_BASE_URL}/ai/submissions/`, { params });
+            let submissions = resp.data?.results || resp.data || [];
+            
+            // If no results with batch filters, try email alone as fallback
+            if (submissions.length === 0 && params.candidate_email && (params.batch_name || params.batch_id)) {
+                const fallbackParams = { candidate_email: params.candidate_email };
+                const fallbackResp = await axios.get(`${API_BASE_URL}/ai/submissions/`, { params: fallbackParams });
+                submissions = fallbackResp.data?.results || fallbackResp.data || [];
+            }
+
+            if (submissions.length > 0) {
+                const sub = submissions[0];
+                const newSub = {
+                    ...sub,
+                    submission_id: `ai_${sub.id}`,
+                    candidate_name: sub.candidate_name,
+                    candidate_email: sub.candidate_email,
+                    assessment_name: sub.assessment?.display_name || sub.assessment?.name || 'AI Assessment'
+                };
+                setAiAssessments(prev => {
+                    if (!prev.find(a => a.id === newSub.id)) {
+                        return [...prev, newSub];
+                    }
+                    return prev;
+                });
+                return newSub;
+            }
+            return null;
+        } catch (err) {
+            console.error('Error fetching assessment by email:', err);
+            return null;
         }
     };
 
@@ -306,12 +423,21 @@ const ResultsAI = () => {
         const candidateMap = {};
         const processGroup = (items, type) => {
             items.forEach(item => {
-                const email = item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`;
+                const sid = String(item.submission_id || '');
+                // For Fully Automatic view, we only want to show the stages of the aicand_ records.
+                // This prevents manual AI assessments (ai_ prefixed) from appearing in the automatic pipeline.
+                if (type === 'assessment' && !sid.startsWith('aicand_')) return;
+                if (type === 'interview' && !sid.startsWith('aicand_')) return;
+                if (type === 'resume' && !sid.startsWith('aicand_')) return;
+
+                const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
                 if (!candidateMap[email]) {
                     candidateMap[email] = {
                         email,
                         full_name: item.full_name || item.candidate?.name || 'Candidate',
-                        resume: null, assessment: null, interview: null
+                        resume: null, assessment: null, interview: null,
+                        batch_id: item.batch_id,
+                        batch_name: item.batch_name
                     };
                 }
                 candidateMap[email][type] = item;
@@ -338,9 +464,9 @@ const ResultsAI = () => {
         if (!selectedRole || !groupedData[selectedRole]) return [];
         const roleData = groupedData[selectedRole];
         if (activeTab === 'fully_automatic') return unifyAutomaticResults(roleData);
-        if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
-        if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
-        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'resume') return roleData.resume.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'assessment') return roleData.assessment.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
+        if (activeTab === 'interview') return roleData.interview.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };
@@ -472,7 +598,7 @@ const ResultsAI = () => {
         const totalPossible = totalPlannedQuestions * 10;
         const baseScore = data.score || 0;
         const basePercentage = Math.round((baseScore / totalPossible) * 100);
-        
+
         // Integrity Penalty Calculation
         const integrityScore = data.integrity?.integrity_score ?? 100;
         const integrityPenalty = Math.max(0, 100 - integrityScore);
@@ -489,7 +615,7 @@ const ResultsAI = () => {
                         <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0, fontWeight: '600', opacity: 0.8 }}>Performance breakdown & transcript</p>
                     </div>
 
-                    <button 
+                    <button
                         onClick={() => handleDownloadReport(data)}
                         disabled={downloadingId !== null}
                         className="download-report-btn"
@@ -742,40 +868,40 @@ const ResultsAI = () => {
                                     Submitted {new Date(viewedSubmission.submitted_at).toLocaleString()}
                                 </p>
                             </div>
-                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    <button
-                                        onClick={() => handleDownloadReport({ ...viewedSubmission, submission_id: `ai_${viewedSubmission.id}`, full_name: viewedSubmission.candidate_name })}
-                                        disabled={downloadingId !== null}
-                                        style={{
-                                            padding: '0.6rem 1.2rem', background: 'white', color: '#4318FF',
-                                            border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: '800',
-                                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
-                                            boxShadow: '0 4px 10px rgba(0,0,0,0.03)', fontSize: '0.85rem'
-                                        }}
-                                    >
-                                        {downloadingId === String(viewedSubmission.id) ? (
-                                            <i className="fa-solid fa-spinner fa-spin" />
-                                        ) : (
-                                            <i className="fa-solid fa-file-pdf" />
-                                        )}
-                                        {downloadingId === String(viewedSubmission.id) ? 'Generating...' : 'Download Report'}
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            const newParams = new URLSearchParams(searchParams);
-                                            newParams.delete('subId');
-                                            setSearchParams(newParams);
-                                        }}
-                                        style={{
-                                            background: '#F4F7FE', border: 'none', borderRadius: '50%',
-                                            width: '44px', height: '44px', cursor: 'pointer',
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                                        }}
-                                    >
-                                        <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
-                                    </button>
-                                </div>
+                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                <button
+                                    onClick={() => handleDownloadReport({ ...viewedSubmission, submission_id: `ai_${viewedSubmission.id}`, full_name: viewedSubmission.candidate_name })}
+                                    disabled={downloadingId !== null}
+                                    style={{
+                                        padding: '0.6rem 1.2rem', background: 'white', color: '#4318FF',
+                                        border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: '800',
+                                        cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                                        boxShadow: '0 4px 10px rgba(0,0,0,0.03)', fontSize: '0.85rem'
+                                    }}
+                                >
+                                    {downloadingId === String(viewedSubmission.id) ? (
+                                        <i className="fa-solid fa-spinner fa-spin" />
+                                    ) : (
+                                        <i className="fa-solid fa-file-pdf" />
+                                    )}
+                                    {downloadingId === String(viewedSubmission.id) ? 'Generating...' : 'Download Report'}
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        const newParams = new URLSearchParams(searchParams);
+                                        newParams.delete('subId');
+                                        setSearchParams(newParams);
+                                    }}
+                                    style={{
+                                        background: '#F4F7FE', border: 'none', borderRadius: '50%',
+                                        width: '44px', height: '44px', cursor: 'pointer',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        color: '#4318FF', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                    }}
+                                >
+                                    <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Modal Body */}
@@ -843,206 +969,231 @@ const ResultsAI = () => {
                                             </h3>
 
                                             {(() => {
-                                                // Get candidate photo from integrity logs (webcam screenshot)
-                                                const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
-                                                const firstWebcam = logs.find(log => log.webcam_screenshot_url || log.webcam_screenshot_base64);
-                                                const candidatePhoto = firstWebcam
-                                                    ? (firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64)
-                                                    : null;
-                                                return (
-                                            <div style={{
-                                                display: 'flex',
-                                                gap: '2rem',
-                                                alignItems: 'flex-start'
-                                            }}>
-                                                {/* Candidate Photo */}
-                                                <div style={{
-                                                    width: '180px',
-                                                    height: '180px',
-                                                    background: '#F4F7FE',
-                                                    borderRadius: '12px',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    border: '1px solid #E0E5F2',
-                                                    flexShrink: 0,
-                                                    overflow: 'hidden'
-                                                }}>
-                                                    {candidatePhoto ? (
-                                                        <img
-                                                            src={candidatePhoto}
-                                                            alt="Candidate"
-                                                            style={{
-                                                                width: '100%',
-                                                                height: '100%',
-                                                                objectFit: 'cover'
-                                                            }}
-                                                            onError={(e) => {
-                                                                e.target.style.display = 'none';
-                                                                e.target.nextSibling.style.display = 'flex';
-                                                            }}
-                                                        />
-                                                    ) : null}
-                                                    <div style={{
-                                                        display: candidatePhoto ? 'none' : 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        width: '100%',
-                                                        height: '100%'
-                                                    }}>
-                                                        <i className="fa-solid fa-user" style={{
-                                                            fontSize: '4rem',
-                                                            color: '#A3AED0'
-                                                        }}></i>
-                                                    </div>
-                                                </div>
+                                                // Get candidate photo - try DeepFace registered photo first (same as PDF)
+                                                // Then fall back to first valid integrity screenshot
+                                                let candidatePhoto = null;
 
-                                                {/* Information Table */}
-                                                <div style={{ flex: 1 }}>
-                                                    <table style={{
-                                                        width: '100%',
-                                                        borderCollapse: 'collapse',
-                                                        background: 'white',
-                                                        border: '1px solid #E0E5F2',
-                                                        borderRadius: '12px',
-                                                        overflow: 'hidden'
+                                                // 1. Try DeepFace registered photo first
+                                                const personId = viewedSubmission.candidate_email?.toLowerCase().trim();
+                                                if (personId) {
+                                                    // DeepFace stores at: data/registered_faces/{person_id}/registration_snapshot.jpg
+                                                    // API endpoint or direct file path
+                                                    candidatePhoto = `http://127.0.0.1:8500/data/registered_faces/${personId}/registration_snapshot.jpg`;
+                                                }
+
+                                                // 2. Fall back to integrity screenshots if no registered photo
+                                                if (!candidatePhoto) {
+                                                    const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
+                                                    const sortedLogs = [...logs].sort((a, b) => {
+                                                        const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+                                                        const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+                                                        return timeA - timeB; // Earliest first
+                                                    });
+                                                    const firstWebcam = sortedLogs.find(log => {
+                                                        // Skip face_not_detected events
+                                                        if (log.event_type && log.event_type.toLowerCase().includes('face_not_detected')) {
+                                                            return false;
+                                                        }
+                                                        return log.webcam_screenshot_url || log.webcam_screenshot_base64;
+                                                    });
+                                                    if (firstWebcam) {
+                                                        candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64;
+                                                    }
+                                                }
+                                                return (
+                                                    <div style={{
+                                                        display: 'flex',
+                                                        gap: '2rem',
+                                                        alignItems: 'flex-start'
                                                     }}>
-                                                        <tbody>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B',
-                                                                    width: '35%'
-                                                                }}>Full Name</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.candidate_name}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Email</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.candidate_email || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Job Title</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.job_title || viewedSubmission.role || viewedSubmission.role_title || viewedSubmission.required_skills || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>MCQ Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                                        ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                                        : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Coding Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                                        ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                                        : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Integrity Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.integrity?.integrity_score ?? 100}% {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Overall Result</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
-                                                                    fontWeight: '800'
-                                                                }}>
-                                                                    {viewedSubmission.percentage}%
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Status</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700',
-                                                                    textTransform: 'uppercase'
-                                                                }}>
-                                                                    {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Submission Date</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.submitted_at}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            );
-                                        })()}
+                                                        {/* Candidate Photo */}
+                                                        <div style={{
+                                                            width: '180px',
+                                                            height: '180px',
+                                                            background: '#F4F7FE',
+                                                            borderRadius: '12px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            border: '1px solid #E0E5F2',
+                                                            flexShrink: 0,
+                                                            overflow: 'hidden'
+                                                        }}>
+                                                            {candidatePhoto ? (
+                                                                <img
+                                                                    src={candidatePhoto}
+                                                                    alt="Candidate"
+                                                                    style={{
+                                                                        width: '100%',
+                                                                        height: '100%',
+                                                                        objectFit: 'cover'
+                                                                    }}
+                                                                    onError={(e) => {
+                                                                        e.target.style.display = 'none';
+                                                                        e.target.nextSibling.style.display = 'flex';
+                                                                    }}
+                                                                />
+                                                            ) : null}
+                                                            <div style={{
+                                                                display: candidatePhoto ? 'none' : 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                width: '100%',
+                                                                height: '100%'
+                                                            }}>
+                                                                <i className="fa-solid fa-user" style={{
+                                                                    fontSize: '4rem',
+                                                                    color: '#A3AED0'
+                                                                }}></i>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Information Table */}
+                                                        <div style={{ flex: 1 }}>
+                                                            <table style={{
+                                                                width: '100%',
+                                                                borderCollapse: 'collapse',
+                                                                background: 'white',
+                                                                border: '1px solid #E0E5F2',
+                                                                borderRadius: '12px',
+                                                                overflow: 'hidden'
+                                                            }}>
+                                                                <tbody>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B',
+                                                                            width: '35%'
+                                                                        }}>Full Name</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B'
+                                                                        }}>{viewedSubmission.candidate_name}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Email</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B'
+                                                                        }}>{viewedSubmission.candidate_email || 'N/A'}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Job Title</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B'
+                                                                        }}>{viewedSubmission.assessment?.name || viewedSubmission.assessment?.display_name || viewedSubmission.job_title || viewedSubmission.required_skills || 'N/A'}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>MCQ Score</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B',
+                                                                            fontWeight: '700'
+                                                                        }}>
+                                                                            {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
+                                                                                ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
+                                                                                : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Coding Score</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B',
+                                                                            fontWeight: '700'
+                                                                        }}>
+                                                                            {viewedSubmission.results_breakdown?.coding?.possible_points > 0
+                                                                                ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
+                                                                                : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Integrity Score</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50',
+                                                                            fontWeight: '700'
+                                                                        }}>
+                                                                            {viewedSubmission.integrity?.integrity_score ?? 100}% {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Overall Result</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
+                                                                            fontWeight: '800'
+                                                                        }}>
+                                                                            {viewedSubmission.percentage}%
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Status</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B',
+                                                                            fontWeight: '700',
+                                                                            textTransform: 'uppercase'
+                                                                        }}>
+                                                                            {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            background: '#F8F9FF',
+                                                                            fontWeight: '600',
+                                                                            color: '#1B254B'
+                                                                        }}>Submission Date</td>
+                                                                        <td style={{
+                                                                            padding: '0.75rem 1rem',
+                                                                            color: '#1B254B'
+                                                                        }}>{viewedSubmission.submitted_at ? new Date(viewedSubmission.submitted_at).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'N/A'}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
                                         </div>
                                     </>
                                 )}
@@ -1386,11 +1537,11 @@ const ResultsAI = () => {
                                                             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
-                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total)} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : data.total) !== 1 ? 's' : ''}
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total))} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total)) !== 1 ? 's' : ''}
                                                                 </span>
                                                                 <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                                     <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
-                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.assessment.length + data.resume.length + data.interview.length))} Total Results
+                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : (data.assessment.length + data.resume.length + data.interview.length)))} Total Results
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -1530,9 +1681,9 @@ const ResultsAI = () => {
                                                                                 ].map((stage, idx) => {
                                                                                     const hasData = stage.isInt
                                                                                         ? (!!stage.data && !['New', 'Invited', 'Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(stage.data.status))
-                                                                                        : !!stage.data;
+                                                                                        : !!(stage.data && (stage.data.id || stage.data.submission_id || stage.data.status));
                                                                                     const score = stage.isInt
-                                                                                        ? (stage.data?.score != null ? Math.round((stage.data.score / ((stage.data.interview_summary?.length || 13) * 10)) * 100) : 0)
+                                                                                        ? (stage.data?.interview_summary?.length > 0 ? Math.round((stage.data.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (stage.data.interview_summary.length * 10)) * 100) : 0)
                                                                                         : (stage.data?.[stage.scoreKey] || 0);
                                                                                     const date = stage.data?.created_at || stage.data?.submitted_at || stage.data?.completed_at;
                                                                                     return (
@@ -1560,7 +1711,7 @@ const ResultsAI = () => {
                                                                             <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
                                                                                 {activeTab === 'resume' ? `${r.resume_score || 0}%` :
                                                                                     activeTab === 'assessment' || activeTab === 'standard' ? `${r.percentage ?? 0}%` :
-                                                                                        `${r.score != null ? Math.round((r.score / ((r.interview_summary?.length || 13) * 10)) * 100) : 0}%`}
+                                                                                        `${r.interview_summary?.length > 0 ? Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview_summary.length * 10)) * 100) : 0}%`}
                                                                             </td>
                                                                             <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
                                                                                 <div style={{ fontWeight: '700', color: '#1B254B' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
@@ -1595,7 +1746,25 @@ const ResultsAI = () => {
                                                                                 <>
                                                                                     {r.assessment && (
                                                                                         <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.assessment.id || r.assessment.candidate_id }); }}
+                                                                                            onClick={async (e) => {
+                                                                                                e.stopPropagation();
+                                                                                                const email = r.assessment.candidate_email || r.email || r.candidate?.email;
+                                                                                                if (email) {
+                                                                                                    const submission = await fetchAssessmentByCandidateEmail({
+                                                                                                        email: email,
+                                                                                                        batchName: selectedRole, // The group name is the batch_name for automatic records
+                                                                                                        subId: r.assessment?.submission_id || r.submission_id,
+                                                                                                        batchId: r.batch_id
+                                                                                                    });
+                                                                                                    if (submission) {
+                                                                                                        setSearchParams({ ...Object.fromEntries(searchParams), subId: submission.submission_id });
+                                                                                                    } else {
+                                                                                                        showToast('error', 'No assessment submission found for this candidate');
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    showToast('error', 'Candidate email not found');
+                                                                                                }
+                                                                                            }}
                                                                                             title="View Assessment"
                                                                                             style={{
                                                                                                 padding: '0.4rem 0.6rem', borderRadius: '8px', border: 'none',
@@ -1638,8 +1807,8 @@ const ResultsAI = () => {
                                                                                                     padding: 0
                                                                                                 }}
                                                                                             >
-                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
-                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ?
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> :
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>
                                                                                         </div>
@@ -1665,8 +1834,8 @@ const ResultsAI = () => {
                                                                                                     padding: 0
                                                                                                 }}
                                                                                             >
-                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ? 
-                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> : 
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ?
+                                                                                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> :
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>
                                                                                         </div>
@@ -1696,7 +1865,7 @@ const ResultsAI = () => {
                                                                                 </button>
                                                                             )}
                                                                         </div>
-    </td>
+                                                                    </td>
                                                                 </tr >
                                                             );
                                                         })}
@@ -1705,48 +1874,48 @@ const ResultsAI = () => {
                                             </div >
                                         )}
 
-{/* Pagination Footer */ }
-{
-    !loading && currentRows.length > itemsPerPage && (
-        <div style={{
-            padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-        }}>
-            <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
-                Showing <span style={{ color: '#1B254B' }}>{indexOfFirstRow + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastRow, currentRows.length)}</span> of <span style={{ color: '#1B254B' }}>{currentRows.length}</span> entries
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    style={{
-                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
-                        background: 'white', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                        fontSize: '0.8rem', fontWeight: '700', color: currentPage === 1 ? '#CBD5E1' : '#4F46E5',
-                        display: 'flex', alignItems: 'center', gap: '0.4rem'
-                    }}
-                >
-                    <i className="fa-solid fa-chevron-left" /> Prev
-                </button>
-                <div style={{ display: 'flex', alignItems: 'center', px: '0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
-                    {currentPage}
-                </div>
-                <button
-                    disabled={indexOfLastRow >= currentRows.length}
-                    onClick={() => setCurrentPage(p => p + 1)}
-                    style={{
-                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
-                        background: 'white', cursor: indexOfLastRow >= currentRows.length ? 'not-allowed' : 'pointer',
-                        fontSize: '0.8rem', fontWeight: '700', color: indexOfLastRow >= currentRows.length ? '#CBD5E1' : '#4F46E5',
-                        display: 'flex', alignItems: 'center', gap: '0.4rem'
-                    }}
-                >
-                    Next <i className="fa-solid fa-chevron-right" />
-                </button>
-            </div>
-        </div>
-    )
-}
+                                        {/* Pagination Footer */}
+                                        {
+                                            !loading && currentRows.length > itemsPerPage && (
+                                                <div style={{
+                                                    padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9',
+                                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                                                }}>
+                                                    <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
+                                                        Showing <span style={{ color: '#1B254B' }}>{indexOfFirstRow + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastRow, currentRows.length)}</span> of <span style={{ color: '#1B254B' }}>{currentRows.length}</span> entries
+                                                    </div>
+                                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                        <button
+                                                            disabled={currentPage === 1}
+                                                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                                            style={{
+                                                                padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                                background: 'white', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                                                                fontSize: '0.8rem', fontWeight: '700', color: currentPage === 1 ? '#CBD5E1' : '#4F46E5',
+                                                                display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                            }}
+                                                        >
+                                                            <i className="fa-solid fa-chevron-left" /> Prev
+                                                        </button>
+                                                        <div style={{ display: 'flex', alignItems: 'center', px: '0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
+                                                            {currentPage}
+                                                        </div>
+                                                        <button
+                                                            disabled={indexOfLastRow >= currentRows.length}
+                                                            onClick={() => setCurrentPage(p => p + 1)}
+                                                            style={{
+                                                                padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                                background: 'white', cursor: indexOfLastRow >= currentRows.length ? 'not-allowed' : 'pointer',
+                                                                fontSize: '0.8rem', fontWeight: '700', color: indexOfLastRow >= currentRows.length ? '#CBD5E1' : '#4F46E5',
+                                                                display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                            }}
+                                                        >
+                                                            Next <i className="fa-solid fa-chevron-right" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
                                     </div >
                                 </>
                             )}
@@ -1754,99 +1923,99 @@ const ResultsAI = () => {
                     )}
                 </div >
             </div >
-    {/* Timeline Modal */ }
-{
-    timelineCandidate && (
-        <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
-            <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                    <div>
-                        <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
-                        <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
-                    </div>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <button
-                            onClick={() => fetchTimeline(timelineCandidate)}
-                            disabled={loadingTimeline}
-                            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4318FF', fontSize: '1.1rem', transition: 'transform 0.2s' }}
-                            title="Refresh history"
-                        >
-                            <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
-                        </button>
-                        <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
-                            <i className="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                </div>
+            {/* Timeline Modal */}
+            {
+                timelineCandidate && (
+                    <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
+                        <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                <div>
+                                    <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
+                                    <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
+                                </div>
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <button
+                                        onClick={() => fetchTimeline(timelineCandidate)}
+                                        disabled={loadingTimeline}
+                                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4318FF', fontSize: '1.1rem', transition: 'transform 0.2s' }}
+                                        title="Refresh history"
+                                    >
+                                        <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
+                                    </button>
+                                    <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
+                                        <i className="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
 
-                {loadingTimeline ? (
-                    <div style={{ textAlign: 'center', padding: '2rem' }}>
-                        <div className="spinner" style={{ margin: '0 auto 1rem' }}></div>
-                        <p style={{ color: '#707EAE', fontSize: '0.9rem' }}>Fetching logs...</p>
-                    </div>
-                ) : timelineLogs.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>
-                        <i className="fa-solid fa-list-ul" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}></i>
-                        <p>No logs found for this candidate yet.</p>
-                    </div>
-                ) : (
-                    <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scrollbar">
-                        <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem' }}>
-                            <div style={{ position: 'absolute', left: '7px', top: '5px', bottom: '5px', width: '2px', background: '#E2E8F0' }}></div>
-                            {timelineLogs.map((log, i) => {
-                                const isError = log.status === 'FAILURE';
-                                const isSuccess = log.status === 'SUCCESS';
-                                return (
-                                    <div key={log.id} style={{ position: 'relative', marginBottom: '1.8rem' }}>
-                                        <div style={{
-                                            position: 'absolute', left: '-2rem', top: '0', width: '16px', height: '16px',
-                                            borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
-                                            border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
-                                        }}></div>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
-                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase' }}>
-                                                {log.timestamp_formatted}
-                                            </div>
-                                            {log.phase && log.phase !== 'GENERAL' && (
-                                                <span style={{
-                                                    fontSize: '0.6rem', fontWeight: '800', padding: '0.1rem 0.4rem', borderRadius: '4px',
-                                                    background: log.phase === 'RESUME' ? '#E0E7FF' : log.phase === 'ASSESSMENT' ? '#FEF3C7' : '#D1FAE5',
-                                                    color: log.phase === 'RESUME' ? '#4318FF' : log.phase === 'ASSESSMENT' ? '#D97706' : '#059669',
-                                                    textTransform: 'uppercase'
-                                                }}>
-                                                    {log.phase.replace('_', ' ')}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
-                                            {log.message}
-                                        </div>
-                                        {log.details && Object.keys(log.details).length > 0 && (
-                                            <div style={{ fontSize: '0.78rem', color: '#707EAE', background: '#F4F7FE', padding: '0.5rem 0.75rem', borderRadius: '8px', marginTop: '0.3rem' }}>
-                                                {Object.entries(log.details).map(([k, v]) => (
-                                                    <div key={k} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.1rem' }}>
-                                                        <span style={{ fontWeight: '800', color: '#4318FF', minWidth: '90px', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}:</span>
-                                                        <span style={{ wordBreak: 'break-all' }}>{String(v)}</span>
+                            {loadingTimeline ? (
+                                <div style={{ textAlign: 'center', padding: '2rem' }}>
+                                    <div className="spinner" style={{ margin: '0 auto 1rem' }}></div>
+                                    <p style={{ color: '#707EAE', fontSize: '0.9rem' }}>Fetching logs...</p>
+                                </div>
+                            ) : timelineLogs.length === 0 ? (
+                                <div style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>
+                                    <i className="fa-solid fa-list-ul" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                                    <p>No logs found for this candidate yet.</p>
+                                </div>
+                            ) : (
+                                <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scrollbar">
+                                    <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem' }}>
+                                        <div style={{ position: 'absolute', left: '7px', top: '5px', bottom: '5px', width: '2px', background: '#E2E8F0' }}></div>
+                                        {timelineLogs.map((log, i) => {
+                                            const isError = log.status === 'FAILURE';
+                                            const isSuccess = log.status === 'SUCCESS';
+                                            return (
+                                                <div key={log.id} style={{ position: 'relative', marginBottom: '1.8rem' }}>
+                                                    <div style={{
+                                                        position: 'absolute', left: '-2rem', top: '0', width: '16px', height: '16px',
+                                                        borderRadius: '50%', background: isError ? '#EE5D50' : isSuccess ? '#05CD99' : '#4318FF',
+                                                        border: '3px solid white', boxShadow: '0 0 0 2px #E2E8F0', zIndex: 1
+                                                    }}></div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
+                                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#A3AED0', textTransform: 'uppercase' }}>
+                                                            {log.timestamp_formatted}
+                                                        </div>
+                                                        {log.phase && log.phase !== 'GENERAL' && (
+                                                            <span style={{
+                                                                fontSize: '0.6rem', fontWeight: '800', padding: '0.1rem 0.4rem', borderRadius: '4px',
+                                                                background: log.phase === 'RESUME' ? '#E0E7FF' : log.phase === 'ASSESSMENT' ? '#FEF3C7' : '#D1FAE5',
+                                                                color: log.phase === 'RESUME' ? '#4318FF' : log.phase === 'ASSESSMENT' ? '#D97706' : '#059669',
+                                                                textTransform: 'uppercase'
+                                                            }}>
+                                                                {log.phase.replace('_', ' ')}
+                                                            </span>
+                                                        )}
                                                     </div>
-                                                ))}
-                                            </div>
-                                        )}
+                                                    <div style={{ fontSize: '0.95rem', fontWeight: '700', color: isError ? '#EE5D50' : '#1B254B', marginBottom: '0.2rem' }}>
+                                                        {log.message}
+                                                    </div>
+                                                    {log.details && Object.keys(log.details).length > 0 && (
+                                                        <div style={{ fontSize: '0.78rem', color: '#707EAE', background: '#F4F7FE', padding: '0.5rem 0.75rem', borderRadius: '8px', marginTop: '0.3rem' }}>
+                                                            {Object.entries(log.details).map(([k, v]) => (
+                                                                <div key={k} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.1rem' }}>
+                                                                    <span style={{ fontWeight: '800', color: '#4318FF', minWidth: '90px', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}:</span>
+                                                                    <span style={{ wordBreak: 'break-all' }}>{String(v)}</span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                );
-                            })}
+                                </div>
+                            )}
+
+                            <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                                <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
+                                    Close
+                                </button>
+                            </div>
                         </div>
                     </div>
-                )}
-
-                <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                    <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
-}
+                )
+            }
         </div >
     );
 };

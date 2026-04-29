@@ -1861,3 +1861,295 @@ Host: localhost:8001
 [2026-04-24 11:27:13.310177+00:00] PUBLIC ACCESS: Token='f2f65550-0197-4903-afed-26675a62bfe5'
 Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1777030033304']}>
 Host: localhost:8001
+
+[2026-04-27 09:35:41.214780+00:00] PUBLIC ACCESS: Token='2c958220-92b9-44f8-91ee-ba5dfb68f535'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777282541205']}>
+Host: localhost:8001
+
+[2026-04-27 09:35:41.332462+00:00] PUBLIC ACCESS: Token='2c958220-92b9-44f8-91ee-ba5dfb68f535'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777282541215']}>
+Host: localhost:8001
+
+[2026-04-27 09:38:10.461612+00:00] PUBLIC ACCESS: Token='232a9799-655f-47d0-8cd8-4941f6da74d3'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777282690452']}>
+Host: localhost:8001
+
+[2026-04-27 09:38:10.462138+00:00] PUBLIC ACCESS: Token='232a9799-655f-47d0-8cd8-4941f6da74d3'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777282690455']}>
+Host: localhost:8001
+
+[2026-04-27 09:49:22.142108+00:00] PUBLIC ACCESS: Token='c5be2138-96f7-46de-87df-128cf2c571c0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777283362133']}>
+Host: localhost:8001
+
+[2026-04-27 09:49:22.142661+00:00] PUBLIC ACCESS: Token='c5be2138-96f7-46de-87df-128cf2c571c0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777283362136']}>
+Host: localhost:8001
+
+[2026-04-27 10:01:36.371014+00:00] ERROR in GenerateAssessmentView: null value in column "has_mcq_cutoff" of relation "ai_assessments_assessment" violates not-null constraint
+DETAIL:  Failing row contains (1, ob Title: Python Developer
+
+Location: [Your Location]
+Experience..., python developer, 1, 1, 60, {"mcqs": [{"answer": "It executes the __enter__ method and then ..., 2026-04-27 10:01:36.266725+00, SCHEDULED, 1aa55d55-b63a-4a8f-9bf4-3af98706de04, Medium, 2026-04-27 10:02:00+00, 2026-04-28 10:00:00+00, 14, 201, 0, ["Medium"], 1, 0, 0, 1, f, 1, null, 1, a72f3e35-7681-4010-8cd3-2ad7b88ff7d0, python_developer_27-04-2026_15:31, f, 1, 40, manual, null, null, null).
+
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "has_mcq_cutoff" of relation "ai_assessments_assessment" violates not-null constraint
+DETAIL:  Failing row contains (1, ob Title: Python Developer
+
+Location: [Your Location]
+Experience..., python developer, 1, 1, 60, {"mcqs": [{"answer": "It executes the __enter__ method and then ..., 2026-04-27 10:01:36.266725+00, SCHEDULED, 1aa55d55-b63a-4a8f-9bf4-3af98706de04, Medium, 2026-04-27 10:02:00+00, 2026-04-28 10:00:00+00, 14, 201, 0, ["Medium"], 1, 0, 0, 1, f, 1, null, 1, a72f3e35-7681-4010-8cd3-2ad7b88ff7d0, python_developer_27-04-2026_15:31, f, 1, 40, manual, null, null, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\27\backend\ai_assessments\views.py", line 820, in post
+    assessment = Assessment.objects.create(
+        job_description=job_description,
+    ...<22 lines>...
+        creation_type='manual'
+    )
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\D-IT\Desktop\27\backend\venv\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "has_mcq_cutoff" of relation "ai_assessments_assessment" violates not-null constraint
+DETAIL:  Failing row contains (1, ob Title: Python Developer
+
+Location: [Your Location]
+Experience..., python developer, 1, 1, 60, {"mcqs": [{"answer": "It executes the __enter__ method and then ..., 2026-04-27 10:01:36.266725+00, SCHEDULED, 1aa55d55-b63a-4a8f-9bf4-3af98706de04, Medium, 2026-04-27 10:02:00+00, 2026-04-28 10:00:00+00, 14, 201, 0, ["Medium"], 1, 0, 0, 1, f, 1, null, 1, a72f3e35-7681-4010-8cd3-2ad7b88ff7d0, python_developer_27-04-2026_15:31, f, 1, 40, manual, null, null, null).
+
+
+RAW: No response received
+
+[2026-04-27 10:07:34.761681+00:00] PUBLIC ACCESS: Token='76ab4c5a-4143-4514-93dd-477e968414cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777284454751']}>
+Host: localhost:8001
+
+[2026-04-27 10:07:34.768148+00:00] PUBLIC ACCESS: Token='76ab4c5a-4143-4514-93dd-477e968414cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777284454761']}>
+Host: localhost:8001
+
+[2026-04-27 10:36:54.091391+00:00] PUBLIC ACCESS: Token='76ab4c5a-4143-4514-93dd-477e968414cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777286214080']}>
+Host: localhost:8001
+
+[2026-04-27 10:36:54.097720+00:00] PUBLIC ACCESS: Token='76ab4c5a-4143-4514-93dd-477e968414cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777286214089']}>
+Host: localhost:8001
+
+[2026-04-27 11:37:42.262649+00:00] PUBLIC ACCESS: Token='2b6bf3cc-a6a6-4e07-b222-91213cf0e872'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777289862253']}>
+Host: localhost:8001
+
+[2026-04-27 11:37:42.267780+00:00] PUBLIC ACCESS: Token='2b6bf3cc-a6a6-4e07-b222-91213cf0e872'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777289862259']}>
+Host: localhost:8001
+
+[2026-04-27 11:59:12.816301+00:00] PUBLIC ACCESS: Token='1dc89d25-5904-49c5-8c6e-5ab79d7fafaf'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777291152809']}>
+Host: localhost:8001
+
+[2026-04-27 11:59:12.819517+00:00] PUBLIC ACCESS: Token='1dc89d25-5904-49c5-8c6e-5ab79d7fafaf'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777291152815']}>
+Host: localhost:8001
+
+[2026-04-27 12:18:22.031873+00:00] PUBLIC ACCESS: Token='e1d706ac-d251-4c48-a51c-b7493856f75c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777292302021']}>
+Host: localhost:8001
+
+[2026-04-27 12:18:22.034827+00:00] PUBLIC ACCESS: Token='e1d706ac-d251-4c48-a51c-b7493856f75c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777292302028']}>
+Host: localhost:8001
+
+[2026-04-27 12:42:40.175121+00:00] PUBLIC ACCESS: Token='67c493ec-4d19-4776-b5ff-a6e6a608f617'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777293760165']}>
+Host: localhost:8001
+
+[2026-04-27 12:42:40.177819+00:00] PUBLIC ACCESS: Token='67c493ec-4d19-4776-b5ff-a6e6a608f617'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777293760172']}>
+Host: localhost:8001
+
+[2026-04-28 04:14:55.415559+00:00] PUBLIC ACCESS: Token='37c5c9be-d9f5-44f9-8424-4d4085b363fe'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777349695403']}>
+Host: localhost:8001
+
+[2026-04-28 04:14:55.420851+00:00] PUBLIC ACCESS: Token='37c5c9be-d9f5-44f9-8424-4d4085b363fe'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777349695411']}>
+Host: localhost:8001
+
+[2026-04-28 06:54:26.374066+00:00] PUBLIC ACCESS: Token='00cfff21-2103-4062-ad9a-9270e28c8e81'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359266354']}>
+Host: localhost:8001
+
+[2026-04-28 06:54:26.375093+00:00] PUBLIC ACCESS: Token='00cfff21-2103-4062-ad9a-9270e28c8e81'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359266367']}>
+Host: localhost:8001
+
+[2026-04-28 06:55:04.508847+00:00] PUBLIC ACCESS: Token='00cfff21-2103-4062-ad9a-9270e28c8e81'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359304493']}>
+Host: localhost:8001
+
+[2026-04-28 06:55:04.520245+00:00] PUBLIC ACCESS: Token='00cfff21-2103-4062-ad9a-9270e28c8e81'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359304508']}>
+Host: localhost:8001
+
+[2026-04-28 07:03:12.170126+00:00] PUBLIC ACCESS: Token='f3764da8-76b7-475e-808c-8838f23313c9'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359792157']}>
+Host: localhost:8001
+
+[2026-04-28 07:03:12.178703+00:00] PUBLIC ACCESS: Token='f3764da8-76b7-475e-808c-8838f23313c9'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777359792170']}>
+Host: localhost:8001
+
+[2026-04-28 07:20:01.455401+00:00] PUBLIC ACCESS: Token='05dc3974-a172-4e6c-a27f-bf7019624f07'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777360801438']}>
+Host: localhost:8001
+
+[2026-04-28 07:20:01.462787+00:00] PUBLIC ACCESS: Token='05dc3974-a172-4e6c-a27f-bf7019624f07'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777360801452']}>
+Host: localhost:8001
+
+[2026-04-28 07:42:51.857981+00:00] PUBLIC ACCESS: Token='57394cef-c917-47ef-b369-18aea7b705cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777362171845']}>
+Host: localhost:8001
+
+[2026-04-28 07:42:51.864972+00:00] PUBLIC ACCESS: Token='57394cef-c917-47ef-b369-18aea7b705cc'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777362171856']}>
+Host: localhost:8001
+
+[2026-04-28 07:57:30.326305+00:00] PUBLIC ACCESS: Token='1977d468-975b-4287-939c-a44f483071d6'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777363050293']}>
+Host: localhost:8001
+
+[2026-04-28 07:57:30.345605+00:00] PUBLIC ACCESS: Token='1977d468-975b-4287-939c-a44f483071d6'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777363050322']}>
+Host: localhost:8001
+
+[2026-04-28 08:49:40.274181+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366180258']}>
+Host: localhost:8001
+
+[2026-04-28 08:49:40.281368+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366180266']}>
+Host: localhost:8001
+
+[2026-04-28 08:50:39.517489+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366239506']}>
+Host: localhost:8001
+
+[2026-04-28 08:50:39.520812+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366239515']}>
+Host: localhost:8001
+
+[2026-04-28 08:52:53.937966+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366373927']}>
+Host: localhost:8001
+
+[2026-04-28 08:52:53.945509+00:00] PUBLIC ACCESS: Token='21d7764b-2d4a-4853-a758-76f21e820c89'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777366373936']}>
+Host: localhost:8001
+
+[2026-04-28 09:39:15.774774+00:00] PUBLIC ACCESS: Token='51cc2591-6a4d-4f89-abda-4845ea0f1aa1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777369155758']}>
+Host: localhost:8001
+
+[2026-04-28 09:39:15.780483+00:00] PUBLIC ACCESS: Token='51cc2591-6a4d-4f89-abda-4845ea0f1aa1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777369155770']}>
+Host: localhost:8001
+
+[2026-04-28 09:40:39.684441+00:00] PUBLIC ACCESS: Token='51cc2591-6a4d-4f89-abda-4845ea0f1aa1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777369239656']}>
+Host: localhost:8001
+
+[2026-04-28 09:40:39.893834+00:00] PUBLIC ACCESS: Token='51cc2591-6a4d-4f89-abda-4845ea0f1aa1'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777369239672']}>
+Host: localhost:8001
+
+[2026-04-28 10:00:41.564875+00:00] PUBLIC ACCESS: Token='76f54346-3e4e-4aeb-8c97-ebaf725bb6c9'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777370441555']}>
+Host: localhost:8001
+
+[2026-04-28 10:00:41.570214+00:00] PUBLIC ACCESS: Token='76f54346-3e4e-4aeb-8c97-ebaf725bb6c9'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777370441561']}>
+Host: localhost:8001
+
+[2026-04-28 10:11:45.155460+00:00] PUBLIC ACCESS: Token='a44af59c-a326-475d-a7d1-de1a88a4bf53'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777371105146']}>
+Host: localhost:8001
+
+[2026-04-28 10:11:45.158225+00:00] PUBLIC ACCESS: Token='a44af59c-a326-475d-a7d1-de1a88a4bf53'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777371105153']}>
+Host: localhost:8001
+
+[2026-04-28 10:17:22.896088+00:00] PUBLIC ACCESS: Token='868634b3-5d45-4bfa-9850-39cd0c48cd6e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777371442887']}>
+Host: localhost:8001
+
+[2026-04-28 10:17:22.902864+00:00] PUBLIC ACCESS: Token='868634b3-5d45-4bfa-9850-39cd0c48cd6e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1777371442895']}>
+Host: localhost:8001
