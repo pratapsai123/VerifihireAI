@@ -1915,8 +1915,10 @@ def results_overview_view(request):
                     'id': s.id,
                     'submission_id': f"ai_{s.id}",
                     'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else (s.started_at.isoformat() if getattr(s, 'started_at', None) else None),
-                    'full_name': getattr(s, 'candidate_name', 'Unknown'),
-                    'email': getattr(s, 'candidate_email', 'Unknown'),
+                    'candidate_name': getattr(s, 'candidate_name', 'Unknown'),
+                    'candidate_email': getattr(s, 'candidate_email', 'Unknown'),
+                    'full_name': getattr(s, 'candidate_name', 'Unknown'),  # Keep for backward compatibility
+                    'email': getattr(s, 'candidate_email', 'Unknown'),  # Keep for backward compatibility
                     'candidate': {
                         'name': getattr(s, 'candidate_name', 'Unknown'),
                         'email': getattr(s, 'candidate_email', 'Unknown'),
@@ -1953,7 +1955,8 @@ def results_overview_view(request):
                     'integrity_screenshots': screenshots_data,
                     'is_resume_screening': False,
                     'batch_id': s.batch_id,
-                    'batch_name': s.batch_name,
+                    'batch_name': s.batch_name or (a.batch_name if hasattr(a, 'batch_name') else None),
+                    'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
                     'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
                 }
             )
@@ -1964,8 +1967,10 @@ def results_overview_view(request):
                 {
                     'submission_id': f"aicand_{s.id}",
                     'submitted_at': submitted_date_iso,
-                    'full_name': s.full_name,
-                    'email': s.email,
+                    'candidate_name': s.full_name,
+                    'candidate_email': s.email,
+                    'full_name': s.full_name,  # Keep for backward compatibility
+                    'email': s.email,  # Keep for backward compatibility
                     'candidate': {
                         'name': s.full_name,
                         'email': s.email,

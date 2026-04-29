@@ -91,6 +91,7 @@ const AiInterviewSession = () => {
     const isFullscreenRef = useRef(false);
     const currentAudioRef = useRef(null);
     const isStartingMicRef = useRef(false);
+    const manualMuteRef = useRef(false); // Track if user manually muted mic to prevent auto-resume
     const isNoticePlayingRef = useRef(false);
     // DeepFace refs
     const dfWsRef = useRef(null);
@@ -1367,6 +1368,8 @@ const AiInterviewSession = () => {
                 setIsProcessing(false);
                 isProcessingRef.current = false;
                 setAiStatus("Indu is Online");
+                // Reset manual mute for new turn
+                manualMuteRef.current = false;
                 if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 return; // STOP HERE: Don't move to next question index
             }
@@ -1441,6 +1444,8 @@ const AiInterviewSession = () => {
 
                 // FIX: Add delay before mic starts to prevent feedback loop with speech
                 if (effectiveMode === 'audio' && !showQuotaWarning) {
+                    // Reset manual mute for new turn
+                    manualMuteRef.current = false;
                     setTimeout(() => {
                         if (!isCompletedRef.current && !isProcessingRef.current) {
                             startListening();
@@ -1505,6 +1510,8 @@ const AiInterviewSession = () => {
                 // Resume listening only if we are in audio mode AND not in a coding task
                 // FIX: Add delay before mic starts to prevent feedback loop
                 if (effectiveMode === 'audio' && !showQuotaWarning) {
+                    // Reset manual mute for new turn
+                    manualMuteRef.current = false;
                     setTimeout(() => {
                         if (!isCompletedRef.current && !isProcessingRef.current) {
                             startListening();
@@ -1619,10 +1626,6 @@ const AiInterviewSession = () => {
                 const res = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/?_t=${Date.now()}`);
                 const candidate = res.data;
                 setCandidateName(candidate.full_name);
-                
-                // DO NOT load questions yet - wait until face registration is complete
-                // const qList = candidate.interview_questions || [];
-                // setQuestions(qList);
 
                 if (candidate.status === 'Completed') {
                     setIsCompleted(true);
@@ -1931,8 +1934,13 @@ const AiInterviewSession = () => {
     // GUARD: Only auto-resume AFTER face registration is complete
     useEffect(() => {
         if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current && isFaceRegistered) {
+            // FIX: Respect manual mute — don't auto-resume if user explicitly turned mic off
+            if (manualMuteRef.current) {
+                console.log("Auto-resume skipped: User manually muted mic.");
+                return;
+            }
             const timer = setTimeout(() => {
-                if (!isRecordingRef.current) {
+                if (!isRecordingRef.current && !manualMuteRef.current) {
                     console.log("Auto-resuming mic via Effect...");
                     startListening();
                 }
@@ -2000,7 +2008,13 @@ const AiInterviewSession = () => {
                 console.log("Unified Watchdog: Maximum silence exceeded. Forcing submission.");
                 clearInterval(watchdog);
                 setSilenceCountdown(0);
+
+                // FIX: Immediately turn off mic icon BEFORE stopping AssemblyAI
+                setIsRecording(false);
+                isRecordingRef.current = false;
+
                 setIsProcessing(true);
+                isProcessingRef.current = true;
                 setAiStatus("Processing answer...");
 
                 if (assemblyAIRef.current) {
@@ -2034,6 +2048,9 @@ const AiInterviewSession = () => {
             // Capture any final speech before stopping
             const finalSubmission = (transcriptRef.current + interimTranscriptRef.current).trim();
 
+            // FIX: Mark as manually muted so auto-resume doesn't override user's choice
+            manualMuteRef.current = true;
+
             try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
             setIsRecording(false);
             isRecordingRef.current = false;
@@ -2051,6 +2068,8 @@ const AiInterviewSession = () => {
                 synthRef.current.cancel();
                 setIsSpeaking(false);
             }
+            // FIX: Clear manual mute since user is explicitly turning mic back on
+            manualMuteRef.current = false;
             startListening();
         }
     };
@@ -2097,6 +2116,7 @@ const AiInterviewSession = () => {
 
     return (
         <div className="ai-session-page">
+            {/* Fullscreen/Screen Share requirement overlay */}
             {isPermissionsGranted && (!isFullscreen || !isScreenSharing) && !isCompleted && (
                 <div
                     onClick={() => {
@@ -2147,7 +2167,6 @@ const AiInterviewSession = () => {
                                 ? 'Please enter Fullscreen mode to continue.'
                                 : 'Please restart Screen Sharing (Entire Screen) to continue.'}
                         </p>
-
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                             {!isFullscreen && (
                                 <button
@@ -2160,15 +2179,9 @@ const AiInterviewSession = () => {
                                     className="resume-integrity-btn"
                                     style={{
                                         background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '0.8rem 2rem',
-                                        borderRadius: '8px',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        flex: 1,
-                                        minWidth: '150px'
+                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
+                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
+                                        cursor: 'pointer', flex: 1, minWidth: '150px'
                                     }}
                                 >
                                     📺 Enter Full Screen
@@ -2180,15 +2193,9 @@ const AiInterviewSession = () => {
                                     className="resume-integrity-btn"
                                     style={{
                                         background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '0.8rem 2rem',
-                                        borderRadius: '8px',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        flex: 1,
-                                        minWidth: '150px'
+                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
+                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
+                                        cursor: 'pointer', flex: 1, minWidth: '150px'
                                     }}
                                 >
                                     🖥️ Share Screen
@@ -2197,11 +2204,11 @@ const AiInterviewSession = () => {
                         </div>
                     </div>
                 </div>
-            )
-            }
+            )}
 
+            {/* Welcome Screen - shown after registration but before camera */}
             {
-                !isPermissionsGranted && !isCompleted && (
+                !isPermissionsGranted && !isFaceRegistered && !isCompleted && (
                     <div style={{
                         position: 'fixed',
                         inset: 0,
@@ -2605,9 +2612,9 @@ const AiInterviewSession = () => {
                             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                 <button
                                     onClick={toggleRecording}
-                                    disabled={isProcessing || !isFullscreen}
+                                    disabled={!isFullscreen}
                                     className={`mic-btn ${isRecording ? 'listening' : ''}`}
-                                    style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: isProcessing || !isFullscreen ? 'not-allowed' : 'pointer', opacity: isProcessing || !isFullscreen ? 0.6 : 1 }}
+                                    style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: !isFullscreen ? 'not-allowed' : 'pointer', opacity: !isFullscreen ? 0.6 : 1 }}
                                     title={!isFullscreen ? 'Please enter fullscreen to use mic' : isProcessing ? 'Processing...' : isRecording ? 'Click to stop' : 'Click to speak'}
                                 >
                                     <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
