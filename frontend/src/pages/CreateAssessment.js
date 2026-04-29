@@ -128,10 +128,40 @@ const CreateAssessment = () => {
                     newChallenges = newChallenges.slice(0, limitedCount);
                 }
 
+                // Auto-adjust weight: if coding is 0, MCQ gets 100%
+                let newWeight = prev.mcq_weight;
+                if (limitedCount === 0) {
+                    newWeight = 100;
+                } else if (prev.num_mcqs === 0 && prev.mcq_weight === 100) {
+                    // Coding was just re-added while MCQ is still 0, keep at 0% MCQ
+                    newWeight = 0;
+                }
+
                 return {
                     ...prev,
                     num_coding: limitedCount,
-                    coding_challenges: newChallenges
+                    coding_challenges: newChallenges,
+                    mcq_weight: newWeight
+                };
+            });
+            return;
+        }
+
+        if (id === 'num_mcqs') {
+            const numVal = value === '' ? '' : (parseInt(value) || 0);
+            setFormData(prev => {
+                // Auto-adjust weight: if MCQs is 0, Coding gets 100%
+                let newWeight = prev.mcq_weight;
+                if (numVal === 0) {
+                    newWeight = 0;
+                } else if (prev.num_coding === 0 && prev.mcq_weight === 0) {
+                    // MCQ was just re-added while coding is still 0, keep at 100% MCQ
+                    newWeight = 100;
+                }
+                return {
+                    ...prev,
+                    num_mcqs: numVal,
+                    mcq_weight: newWeight
                 };
             });
             return;
@@ -487,7 +517,8 @@ const CreateAssessment = () => {
                                     type="range" min="0" max="100" step="5"
                                     value={formData.mcq_weight}
                                     onChange={(e) => handleChange('mcq_weight', parseInt(e.target.value))}
-                                    style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: 'pointer', height: '100%', margin: 0, zIndex: 2 }}
+                                    disabled={formData.num_mcqs === 0 || formData.num_coding === 0}
+                                    style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (formData.num_mcqs === 0 || formData.num_coding === 0) ? 'not-allowed' : 'pointer', height: '100%', margin: 0, zIndex: 2 }}
                                 />
                             </div>
                         </div>

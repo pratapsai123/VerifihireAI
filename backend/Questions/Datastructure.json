@@ -1,5 +1,5 @@
 {
-  "skill": "Datastructure",
+  "skill": "Data Structures",
   "questions": [
     {
       "question": "What is the time complexity to access an element in an array by its index?",

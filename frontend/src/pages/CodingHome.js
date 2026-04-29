@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { 
-    RefreshCw, 
-    Plus, 
-    Clock, 
-    BarChart, 
-    CheckCircle, 
+import {
+    RefreshCw,
+    Plus,
+    Clock,
+    BarChart,
+    CheckCircle,
     Search,
     ChevronDown,
     ChevronUp,
@@ -56,7 +56,7 @@ export default function CodingHome() {
                     if ((fallbackResp.data?.results || []).length > 0) {
                         results = fallbackResp.data?.results || [];
                     }
-                } catch (ignore) {}
+                } catch (ignore) { }
             }
 
             setItems(results);
@@ -108,7 +108,7 @@ export default function CodingHome() {
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
-        
+
         if (hours > 0) return `${hours}h ${minutes}m`;
         return `${minutes}:${String(seconds).padStart(2, '0')}`;
     };
@@ -120,7 +120,7 @@ export default function CodingHome() {
                 <div className="coding-header-row">
                     <div>
                         <h2 className="page-title">Coding Library</h2>
-                        <div className="coding-muted">Manage and curate coding questions for your assessments.</div>
+                        <div className="coding-muted">Manage and Create coding questions for your assessments.</div>
                     </div>
                     <div className="coding-header-actions">
                         <button type="button" className="btn btn-secondary" onClick={load} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

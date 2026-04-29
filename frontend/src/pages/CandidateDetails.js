@@ -303,9 +303,11 @@ const CandidateDetails = ({ token, onComplete }) => {
     isExtractingPan: false,
     extractionFailed: false, // New: track if all strategies failed
     extractionStatus: '',    // New: show current strategy/rotation
+    extractionReason: null,  // New: reason for failure from backend
     manualConfirmation: false, // New: user overrides validaton
     snapshotValid: false, // Whether captured snapshot has face and is not blurry
     invitedEmail: null, // Store the email they were invited with for validation
+    submissionError: null, // New: for identity mismatch or critical errors
   });
 
   // Live re-verification of PAN when input changes
@@ -583,14 +585,17 @@ const CandidateDetails = ({ token, onComplete }) => {
   React.useEffect(() => {
     if (data.pan && data.extractedPan) {
       const enteredPan = data.pan.toUpperCase().trim();
-      const panMatches = enteredPan === data.extractedPan;
+      // Strict check: match is only valid if no_face was NOT detected
+      const isNoFace = data.extractionReason === 'no_face';
+      const panMatches = enteredPan === data.extractedPan && !isNoFace;
+      
       setData(prev => ({
         ...prev,
         panMatch: panMatches,
-        panFileError: panMatches ? null : "PAN number doesn't match the PAN card image"
+        panFileError: isNoFace ? prev.extractionStatus : (panMatches ? null : "PAN number doesn't match the PAN card image")
       }));
     }
-  }, [data.pan, data.extractedPan]);
+  }, [data.pan, data.extractedPan, data.extractionReason]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -724,7 +729,12 @@ const CandidateDetails = ({ token, onComplete }) => {
         .catch((error) => {
           console.error('Error saving candidate details:', error);
           const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
-          alert('Error: ' + errorMessage);
+          
+          if (error?.response?.status === 403 && errorMessage.includes("Identity Mismatch")) {
+            setData(prev => ({ ...prev, submissionError: errorMessage }));
+          } else {
+            alert('Error: ' + errorMessage);
+          }
         });
     }
   };
@@ -734,7 +744,17 @@ const CandidateDetails = ({ token, onComplete }) => {
       <header className="candidate-header">Candidate Portal</header>
 
       <main className="candidate-container">
-        <form onSubmit={handleSubmit}>
+        {data.submissionError ? (
+          <div className="candidate-critical-error">
+            <div className="candidate-error-icon">🚫</div>
+            <h2>Access Denied</h2>
+            <p>{data.submissionError}</p>
+            <div className="candidate-error-footer">
+              Please contact the recruitment team if you believe this is an error.
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
           {/* GENERAL */}
           <section className="candidate-card">
             <div className="candidate-section-title">General Information</div>
@@ -846,14 +866,9 @@ const CandidateDetails = ({ token, onComplete }) => {
                           const formData = new FormData();
                           formData.append('pan_number', enteredPan);
                           formData.append('pan_file', targetFile);
-
-                          axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
-                            headers: {
-                              // No auth header needed for public PAN verification
-                            }
-                          })
+                          axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData)
                             .then(response => {
-                              const { verified, extracted_pan, message } = response.data;
+                              const { verified, extracted_pan, message, reason } = response.data;
                               console.log("Backend verification response:", response.data);
 
                               setData(prev => ({
@@ -862,6 +877,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                                 panMatch: verified === true,
                                 isExtractingPan: false,
                                 extractionFailed: !verified,
+                                extractionReason: reason || null,
                                 extractionStatus: verified ? 'Verified' : (message || 'Validation failed'),
                                 panFileError: null
                               }));
@@ -893,28 +909,8 @@ const CandidateDetails = ({ token, onComplete }) => {
                           manualConfirmation: false,
                         }));
 
-                        // Extract PAN logic
-                        if (isImage) {
-                          setData(prev => ({ ...prev, extractionStatus: 'Verifying...' }));
-
-                          extractPanFromImage(file).then((extractedPan) => {
-                            if (extractedPan && (data.pan || '').toUpperCase().trim() === extractedPan) {
-                              setData(prev => ({
-                                ...prev,
-                                extractedPan,
-                                panMatch: true,
-                                isExtractingPan: false,
-                                extractionFailed: false,
-                                extractionStatus: 'Verified',
-                              }));
-                              return;
-                            }
-                            triggerBackendVerification(file);
-                          }).catch(() => triggerBackendVerification(file));
-                        } else {
-                          // PDF -> Go straight to backend
-                          triggerBackendVerification(file);
-                        }
+                        // ALWAYS trigger backend verification to ensure face check is performed
+                        triggerBackendVerification(file);
                       } else {
                         // ❌ Reject invalid file with specific error message
                         let errorMsg = "Invalid file. ";
@@ -942,38 +938,28 @@ const CandidateDetails = ({ token, onComplete }) => {
                     ✅ PAN Card verified: PAN number matches ({data.extractedPan})
                   </div>
                 )}
-                {!data.isExtractingPan && data.panFileValid === true && data.extractedPan && data.panMatch === false && (
-                  <div className="candidate-warning-box">
-                    <div className="candidate-error-text">
-                      ❌ PAN Mismatch: The PAN number on the document does not match what you entered. Please re-check or upload a clear file.
-                    </div>
-                    <div style={{ marginTop: '10px' }}>
-                      <label className="candidate-checkbox-label">
-                        <input
-                          type="checkbox"
-                          checked={data.manualConfirmation}
-                          onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
-                        />
-                        <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
-                      </label>
-                    </div>
-                  </div>
-                )}
-                {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.extractionFailed && (
+                {!data.isExtractingPan && data.panFileValid === true && data.extractionFailed && (
                   <div className="candidate-warning-box">
                     <div className="candidate-error-text" style={{ fontSize: '15px' }}>
-                      ❌ Automatic Verification Failed: Image/PDF may not be clear or incorrect document uploaded. Please upload a clear image or PDF.
+                      ❌ {data.extractionStatus || 'Verification Failed'}
                     </div>
-                    <div style={{ marginTop: '10px' }}>
-                      <label className="candidate-checkbox-label">
-                        <input
-                          type="checkbox"
-                          checked={data.manualConfirmation}
-                          onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
-                        />
-                        <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
-                      </label>
-                    </div>
+                    {/* Only show manual confirmation if it's NOT a no_face error */}
+                    {data.extractionReason !== 'no_face' ? (
+                      <div style={{ marginTop: '10px' }}>
+                        <label className="candidate-checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={data.manualConfirmation}
+                            onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
+                          />
+                          <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
+                        </label>
+                      </div>
+                    ) : (
+                      <div className="candidate-hint-text" style={{ marginTop: '8px', color: '#ef4444', fontWeight: '500' }}>
+                        Please upload a clear, high-quality image of your PAN card that clearly shows your face and PAN details.
+                      </div>
+                    )}
                   </div>
                 )}
                 {data.panFileValid === false && data.panFileError && (
@@ -1130,6 +1116,7 @@ const CandidateDetails = ({ token, onComplete }) => {
             </div>
           )}
         </form>
+        )}
       </main>
     </div>
   );

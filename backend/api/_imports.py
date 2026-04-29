@@ -52,10 +52,19 @@ from .models import (
     InterviewerAvailability,
     RestrictedDomain,
     SecuritySession,
+    IdentityLink,
 )
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from .ocr_utils import extract_text_from_image, extract_text_from_pdf, normalize_pan_format
+from .ocr_utils import (
+    extract_text_from_image, 
+    extract_text_from_pdf, 
+    normalize_pan_format, 
+    detect_face_in_image, 
+    extract_name_from_text,
+    register_face_with_deepface,
+    verify_face_with_deepface
+)
 from .report_utils import generate_candidate_report
 
 import re

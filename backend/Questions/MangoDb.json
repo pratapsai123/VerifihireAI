@@ -1,5 +1,5 @@
 {
-  "skill": "MangoDb",
+  "skill": "MongoDB",
   "questions": [
     {
       "question": "What type of NoSQL database is MongoDB?",

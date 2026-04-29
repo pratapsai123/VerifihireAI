@@ -1354,6 +1354,26 @@ class CandidateDetails(models.Model):
         default=False, 
         help_text="True if the candidate bypassed PAN mismatch with manual confirmation"
     )
+
+    # Face Verification Results
+    identity_mismatch_detected = models.BooleanField(
+        default=False,
+        help_text="True if a face mismatch was detected during registration"
+    )
+    face_match_score = models.FloatField(
+        default=0.0,
+        help_text="Confidence score from face verification (0 to 1)"
+    )
+    identity_mismatch = models.BooleanField(
+        default=False,
+        help_text="Redundant field for identity mismatch status"
+    )
+    mismatch_score = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Detailed mismatch score if applicable"
+    )
+
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
@@ -1604,6 +1624,34 @@ class KeystrokeLog(models.Model):
         db_table = 'api_keystrokelog'
         verbose_name = "Keystroke Log"
         verbose_name_plural = "Keystroke Logs"
+
+class IdentityLink(models.Model):
+    """
+    Links PAN card, snapshot, and email as a single identity.
+    Used to prevent different people from using the same credentials.
+    """
+    email = models.EmailField()
+    pan_number = models.CharField(max_length=10)
+    pan_image = models.FileField(upload_to='identity/pan_cards/', null=True, blank=True)
+    snapshot_image = models.ImageField(upload_to='identity/snapshots/', null=True, blank=True)
+    
+    # Store face features for faster comparison if needed
+    face_features = models.JSONField(null=True, blank=True, help_text="Face embeddings or features for comparison")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'api_identity_link'
+        verbose_name = "Identity Link"
+        verbose_name_plural = "Identity Links"
+        unique_together = [['email', 'pan_number']]
+        indexes = [
+            models.Index(fields=['email', 'pan_number']),
+        ]
+
+    def __str__(self):
+        return f"Identity: {self.email} - {self.pan_number}"
 
 
 class BehaviorLog(models.Model):

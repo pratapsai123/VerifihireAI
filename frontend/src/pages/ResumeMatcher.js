@@ -80,6 +80,15 @@ const ResumeMatcher = () => {
     const [mcqWeight, setMcqWeight] = useState(40);
     const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
 
+    // Auto-adjust scoring weights when counts are 0
+    React.useEffect(() => {
+        if (mcqCount === 0 && codingCount > 0) {
+            setMcqWeight(0);
+        } else if (codingCount === 0 && mcqCount > 0) {
+            setMcqWeight(100);
+        }
+    }, [mcqCount, codingCount]);
+
     const [assessmentStartDate, setAssessmentStartDate] = useState('');
     const [assessmentStartTime, setAssessmentStartTime] = useState('');
     const [assessmentEndDate, setAssessmentEndDate] = useState('');
@@ -674,7 +683,8 @@ const ResumeMatcher = () => {
                                             type="range" min="0" max="100" step="5"
                                             value={mcqWeight}
                                             onChange={(e) => setMcqWeight(parseInt(e.target.value))}
-                                            style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: 'pointer', height: '100%', zIndex: 2 }}
+                                            disabled={mcqCount === 0 || codingCount === 0}
+                                            style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (mcqCount === 0 || codingCount === 0) ? 'not-allowed' : 'pointer', height: '100%', zIndex: 2 }}
                                         />
                                     </div>
                                 </div>

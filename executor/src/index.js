@@ -540,6 +540,10 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
       finalCmd = ['sh', spec.cmd[1], `${origScript} < ${spec.workdir}/stdin.txt`];
     }
 
+    const memoryBytes = mem * 1024 * 1024;
+    // Allow 30% extra as Swap (Total = 1.3 * Memory)
+    const totalMemoryBytes = Math.floor(memoryBytes * 1.3);
+
     container = await docker.createContainer({
       Image: spec.image,
       WorkingDir: spec.workdir,
@@ -554,7 +558,8 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
       NetworkDisabled: true,
       HostConfig: {
         AutoRemove: false,
-        Memory: mem * 1024 * 1024,
+        Memory: memoryBytes,
+        MemorySwap: totalMemoryBytes,
         PidsLimit: 256,
         Privileged: false,
         ReadonlyRootfs: false,

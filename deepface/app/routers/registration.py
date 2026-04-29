@@ -74,6 +74,25 @@ async def check_registration(person_id: str):
     }
 
 
+@router.get("/registered/{person_id}/photo")
+async def get_registered_photo(person_id: str):
+    """Serve the registered face photo as a JPEG image."""
+    from fastapi.responses import FileResponse
+    from app.config import REGISTERED_FACES_DIR
+
+    person_id = person_id.strip().lower()
+    person_dir = REGISTERED_FACES_DIR / person_id
+
+    if not person_dir.exists():
+        raise HTTPException(status_code=404, detail="Person not registered")
+
+    # Look for any jpg file in the person's directory
+    for img_file in person_dir.glob("*.jpg"):
+        return FileResponse(str(img_file), media_type="image/jpeg")
+
+    raise HTTPException(status_code=404, detail="No photo found for this person")
+
+
 @router.delete("/registered/{person_id}")
 async def remove_registration(person_id: str):
     """Delete all registered face data for a person."""

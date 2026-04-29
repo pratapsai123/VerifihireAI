@@ -270,7 +270,7 @@ export default function CodingQuestionForm() {
   const [testcases, setTestcases] = useState([]);
   const [tcStdin, setTcStdin] = useState('');
   const [tcExpected, setTcExpected] = useState('');
-  const [tcHidden, setTcHidden] = useState(false);
+  const [tcHidden, setTcHidden] = useState(null);
   const [tcSaving, setTcSaving] = useState(false);
   const [timeInput, setTimeInput] = useState('');
   const [timeError, setTimeError] = useState('');
@@ -319,7 +319,6 @@ export default function CodingQuestionForm() {
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
       const results = tcs.data?.results || [];
       setTestcases(results);
-      setTcHidden(results.length >= 2);
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to load question');
     } finally {
@@ -375,6 +374,9 @@ export default function CodingQuestionForm() {
     if (ms == null) {
       setTimeError('Invalid time (max 23:59:59)');
       update('time_limit_ms', null);
+    } else if (ms < 300000) {
+      setTimeError('Time limit must be at least 00:05:00');
+      update('time_limit_ms', ms);
     } else {
       setTimeError('');
       update('time_limit_ms', ms);
@@ -456,6 +458,8 @@ export default function CodingQuestionForm() {
         errors.time_limit_ms = timeError;
       } else if (form.time_limit_ms == null) {
         errors.time_limit_ms = 'Invalid time format';
+      } else if (form.time_limit_ms < 300000) {
+        errors.time_limit_ms = 'Time limit must be at least 00:05:00';
       }
 
       if (form.memory_limit_mb == null || form.memory_limit_mb < 32) {
@@ -529,18 +533,29 @@ export default function CodingQuestionForm() {
     }
     setTcSaving(true);
     setError('');
+
+    if (tcHidden === null) {
+      setError('Please select test case visibility (Visible or Hidden).');
+      setTcSaving(false);
+      return;
+    }
+
+    if (!tcExpected?.trim()) {
+      setError('Expected output is required.');
+      setTcSaving(false);
+      return;
+    }
     try {
       await axios.post(`${API_BASE_URL}/coding/questions/${id}/testcases/`, {
         stdin: tcStdin,
         expected_stdout: tcExpected,
-        is_hidden: tcHidden,
+        is_hidden: tcHidden === 'yes' || tcHidden === true,
       });
       setTcStdin('');
       setTcExpected('');
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
       const newList = tcs.data?.results || [];
       setTestcases(newList);
-      setTcHidden(newList.length >= 2);
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to add testcase');
     } finally {
@@ -555,7 +570,6 @@ export default function CodingQuestionForm() {
       await axios.delete(`${API_BASE_URL}/coding/testcases/${testcaseId}/`);
       setTestcases((prev) => {
         const after = prev.filter((t) => t.id !== testcaseId);
-        setTcHidden(after.length >= 2);
         return after;
       });
     } catch (e) {
@@ -749,16 +763,7 @@ export default function CodingQuestionForm() {
                   </>
                 )}
 
-                <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Hash size={16} style={{marginRight: '6px'}}/> Custom Assessment ID</div>
-                  <input
-                    value={form.custom_assessment_id ?? ''}
-                    onChange={(e) => update('custom_assessment_id', e.target.value ? Number(e.target.value) : null)}
-                    className="coding-input"
-                    style={{ height: '48px' }}
-                    placeholder="optional snapshot id"
-                  />
-                </label>
+
               </div>
             </div>
 
@@ -784,7 +789,7 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Memory (MB) <span className="required-star">*</span></div>
+                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Execution RAM Limit (MB) <span className="required-star">*</span></div>
                   <input
                     type="number"
                     value={form.memory_limit_mb}
@@ -798,7 +803,7 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Active Status <span className="required-star">*</span></div>
+                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Ready for Use <span className="required-star">*</span></div>
                   <select 
                     value={form.is_active ? 'yes' : 'no'} 
                     onChange={(e) => update('is_active', e.target.value === 'yes')} 
@@ -806,8 +811,8 @@ export default function CodingQuestionForm() {
                     style={{ height: '48px' }}
                     required
                   >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option value="yes">Yes (Live)</option>
+                    <option value="no">No (Draft)</option>
                   </select>
                 </label>
               </div>
@@ -825,24 +830,32 @@ export default function CodingQuestionForm() {
                     {form.language !== 'sql' && (
                       <label className="coding-field coding-field-wide">
                         <div className="coding-label">stdin</div>
-                        <textarea value={tcStdin} onChange={(e) => setTcStdin(e.target.value)} className="coding-textarea" rows={4} />
+                        <textarea value={tcStdin} onChange={(e) => { setTcStdin(e.target.value); setError(''); }} className="coding-textarea" rows={4} />
                       </label>
                     )}
                     <label className="coding-field coding-field-wide">
                       <div className="coding-label">expected stdout</div>
-                      <textarea value={tcExpected} onChange={(e) => setTcExpected(e.target.value)} className="coding-textarea" rows={4} />
+                      <textarea value={tcExpected} onChange={(e) => { setTcExpected(e.target.value); setError(''); }} className="coding-textarea" rows={4} />
+                      {error && error.toLowerCase().includes('expected') && (
+                        <span className="field-error-message">{error}</span>
+                      )}
                     </label>
                     <label className="coding-field coding-field-short">
                       <div className="coding-label"><Eye size={16} style={{marginRight: '6px'}}/> Test Case Visibility</div>
                       <select 
-                        value={tcHidden ? 'yes' : 'no'} 
-                        onChange={(e) => setTcHidden(e.target.value === 'yes')} 
+                        value={tcHidden === null ? "" : (tcHidden ? 'yes' : 'no')} 
+                        onChange={(e) => { setTcHidden(e.target.value === 'yes'); setError(''); }} 
                         className="coding-input"
                         style={{ height: '48px' }}
+                        required
                       >
+                        <option value="" disabled>Select Visibility</option>
                         <option value="no">Visible(Sample)</option>
                         <option value="yes">Hidden</option>
                       </select>
+                      {error && error.toLowerCase().includes('visibility') && (
+                        <span className="field-error-message">{error}</span>
+                      )}
                     </label>
                     <div className="coding-field">
                       <div className="coding-label">&nbsp;</div>
