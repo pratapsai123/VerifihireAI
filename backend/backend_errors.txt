@@ -1,0 +1,21 @@
+[2026-04-28 08:21:03.183595+00:00] ERROR in verify_pan_backend_view: name 'verify_face_in_pan' is not defined
+Traceback (most recent call last):
+  File "C:\VerifiHireAI\VerifiHireAI\backend\api\views\candidate_assessment_views.py", line 2614, in verify_pan_backend_view
+    face_found, face_count = verify_face_in_pan(pan_file)
+                             ^^^^^^^^^^^^^^^^^^
+NameError: name 'verify_face_in_pan' is not defined
+------------------------------
+[2026-04-28 08:22:01.429973+00:00] ERROR in verify_pan_backend_view: name 'verify_face_in_pan' is not defined
+Traceback (most recent call last):
+  File "C:\VerifiHireAI\VerifiHireAI\backend\api\views\candidate_assessment_views.py", line 2614, in verify_pan_backend_view
+    face_found, face_count = verify_face_in_pan(pan_file)
+                             ^^^^^^^^^^^^^^^^^^
+NameError: name 'verify_face_in_pan' is not defined
+------------------------------
+[2026-04-28 08:32:57.235775+00:00] ERROR in verify_pan_backend_view: name 'verify_face_in_pan' is not defined
+Traceback (most recent call last):
+  File "C:\VerifiHireAI\VerifiHireAI\backend\api\views\candidate_assessment_views.py", line 2614, in verify_pan_backend_view
+    face_found, face_count = verify_face_in_pan(pan_file)
+                             ^^^^^^^^^^^^^^^^^^
+NameError: name 'verify_face_in_pan' is not defined
+------------------------------

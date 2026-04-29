@@ -62,6 +62,11 @@ class Assessment(models.Model):
         related_name='ai_assessments_created'
     )
 
+    # Gating and Cutoff fields (Restored to match database)
+    has_mcq_cutoff = models.BooleanField(default=False)
+    min_mcq_pass_percentage = models.IntegerField(default=50)
+    min_coding_pass_percentage = models.IntegerField(default=50)
+
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"
 

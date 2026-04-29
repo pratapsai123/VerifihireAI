@@ -75,9 +75,12 @@ async def create_session(
     async with pool.acquire() as conn:
         await conn.execute(
             """INSERT INTO deepface_sessions
-               (session_id, person_id, started_at, config, camera_device)
-               VALUES ($1, $2, $3, $4, $5)""",
-            session_id, person_id, now, config_json, camera_device,
+               (session_id, person_id, status, started_at, config, camera_device,
+                total_frames, total_violations, verification_attempts, verification_successes,
+                engagement_sum, avg_engagement, min_engagement, max_engagement, micro_violation_score)
+               VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)""",
+            session_id, person_id, "active", now, config_json, camera_device,
+            0, 0, 0, 0, 0.0, 0.0, 100.0, 0.0, 0.0,
         )
 
     return {

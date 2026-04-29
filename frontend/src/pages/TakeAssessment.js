@@ -1193,7 +1193,19 @@ export default function TakeAssessment() {
     try {
       setFsError('');
 
-      // 1. Fullscreen request (MUST be first for gesture sensitivity)
+      // 1. Mandatory Screen Share FIRST
+      // We request screen share before fullscreen because the browser's screen share dialog 
+      // often forces the window out of fullscreen mode. By sharing first, we ensure 
+      // that the subsequent fullscreen request stays active.
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // If they don't agree to screen share, we can't proceed
+          return;
+        }
+      }
+
+      // 2. Fullscreen request (after screen share dialog is resolved)
       if (elem.requestFullscreen) {
         await elem.requestFullscreen();
       } else if (elem.webkitRequestFullscreen) {
