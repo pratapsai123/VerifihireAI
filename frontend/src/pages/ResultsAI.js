@@ -897,6 +897,48 @@ const ResultsAI = () => {
                                                     </div>
                                                 </div>
 
+                                                {/* PAN Card Photo */}
+                                                {viewedSubmission.pan_photo && (
+                                                    <div style={{
+                                                        width: '180px',
+                                                        height: '180px',
+                                                        background: '#F4F7FE',
+                                                        borderRadius: '12px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        border: '1px solid #E0E5F2',
+                                                        flexShrink: 0,
+                                                        overflow: 'hidden'
+                                                    }}>
+                                                        <img
+                                                            src={viewedSubmission.pan_photo}
+                                                            alt="PAN Card"
+                                                            style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                objectFit: 'cover'
+                                                            }}
+                                                            onError={(e) => {
+                                                                e.target.style.display = 'none';
+                                                                e.target.nextSibling.style.display = 'flex';
+                                                            }}
+                                                        />
+                                                        <div style={{
+                                                            display: 'none',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            width: '100%',
+                                                            height: '100%'
+                                                        }}>
+                                                            <i className="fa-solid fa-id-card" style={{
+                                                                fontSize: '4rem',
+                                                                color: '#A3AED0'
+                                                            }}></i>
+                                                        </div>
+                                                    </div>
+                                                )}
+
                                                 {/* Information Table */}
                                                 <div style={{ flex: 1 }}>
                                                     <table style={{
@@ -932,6 +974,44 @@ const ResultsAI = () => {
                                                                     padding: '0.75rem 1rem',
                                                                     color: '#1B254B'
                                                                 }}>{viewedSubmission.candidate_email || 'N/A'}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>Phone</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B'
+                                                                }}>{viewedSubmission.phone || 'N/A'}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>PAN Number</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: '#1B254B',
+                                                                    fontWeight: '700'
+                                                                }}>{viewedSubmission.pan_number || 'N/A'}</td>
+                                                            </tr>
+                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    background: '#F8F9FF',
+                                                                    fontWeight: '600',
+                                                                    color: '#1B254B'
+                                                                }}>PAN Verified</td>
+                                                                <td style={{
+                                                                    padding: '0.75rem 1rem',
+                                                                    color: viewedSubmission.pan_verified ? '#05CD99' : '#EE5D50',
+                                                                    fontWeight: '700'
+                                                                }}>{viewedSubmission.pan_verified ? '✓ Verified' : '✗ Not Verified'}</td>
                                                             </tr>
                                                             <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
                                                                 <td style={{
