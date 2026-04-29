@@ -41,43 +41,17 @@ import re
 import logging
 
 import uuid
-
-<<<<<<< HEAD
-=======
-logger = logging.getLogger(__name__)
-MAX_CODING_TASKS = 50
-TOTAL_INTERVIEW_QUESTIONS = 13
-
->>>>>>> origin/wed29
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
-
 import requests
-
 from api.ocr_utils import _get_reader
-
-
-
 from django.conf import settings
-
 from django.core.mail import send_mail
-
 import pandas as pd
 
-<<<<<<< HEAD
-
-
 # Setup Logger
-
 logger = logging.getLogger(__name__)
-
 MAX_CODING_TASKS = 50
-
 TOTAL_INTERVIEW_QUESTIONS = 13
-
-
-
-=======
->>>>>>> origin/wed29
 from api.views import ensure_role_exists
 
 from api.models import UserProfile
@@ -461,11 +435,7 @@ class BulkInviteView(APIView):
                 
 
                 try:
-<<<<<<< HEAD
-
-=======
                     logger.info(f"=== STARTING EMAIL SEND for {email} ===")
->>>>>>> origin/wed29
                     subject = "Invite to VerifiHireAI Interview Session"
 
                     
@@ -555,41 +525,22 @@ class BulkInviteView(APIView):
                     """
 
                     
-<<<<<<< HEAD
-
-                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
-
-                    logger.info(f"Email sent to {email}")
-
-                except Exception as mail_error:
-
-=======
-                    logger.info(f"Preparing to send email to {email} via {settings.EMAIL_HOST}:{settings.EMAIL_PORT}")
                     send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
                     logger.info(f"=== EMAIL SENT SUCCESSFULLY to {email} ===")
                 except Exception as mail_error:
                     import traceback
->>>>>>> origin/wed29
                     error_msg = f"Failed to send email to {email}: {str(mail_error)}"
 
                     logger.error(error_msg)
-<<<<<<< HEAD
-
-=======
                     logger.error(f"SMTP Error Details: {traceback.format_exc()}")
                     logger.error(f"Email Settings: HOST={settings.EMAIL_HOST}, PORT={settings.EMAIL_PORT}, TLS={settings.EMAIL_USE_TLS}, USER={settings.EMAIL_HOST_USER}")
->>>>>>> origin/wed29
                     # Temporary file logging for debugging
 
                     with open('email_errors.log', 'a') as f:
 
                         f.write(f"{timezone.now()} - {error_msg}\n")
-<<<<<<< HEAD
-
-=======
                         f.write(f"{timezone.now()} - SMTP Settings: {settings.EMAIL_HOST}:{settings.EMAIL_PORT} (TLS:{settings.EMAIL_USE_TLS})\n")
                         f.write(f"{timezone.now()} - Traceback: {traceback.format_exc()}\n\n")
->>>>>>> origin/wed29
                 
 
             return Response({
@@ -1672,15 +1623,8 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
         now = timezone.now()
 
-<<<<<<< HEAD
-
-
-        if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
-
-=======
         # Only block if interview is truly completed (has completed_at and status is final)
         if candidate.completed_at and candidate.status in ['Completed', 'Hired', 'Rejected']:
->>>>>>> origin/wed29
             return Response(
 
                 {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
@@ -3388,13 +3332,9 @@ class CandidateReportDownloadView(APIView):
                 ["Full Name", candidate.full_name],
 
                 ["Email", candidate.email],
-<<<<<<< HEAD
-
-=======
                 ["Phone", candidate.phone or "N/A"],
                 ["PAN Number", candidate.pan_number or "N/A"],
                 ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
->>>>>>> origin/wed29
                 ["Job Title", candidate.job_title or "N/A"],
 
                 ["Interview Score", f"{interview_total_score} / {total_possible_marks}"],
@@ -3465,9 +3405,6 @@ class CandidateReportDownloadView(APIView):
 
             elements.append(Spacer(1, 25))
 
-<<<<<<< HEAD
-
-=======
             # 2.5 Identity Documents Section - PAN Card
             if candidate.pan_photo:
                 elements.append(Paragraph("Identity Documents", styles['Heading3']))
@@ -3495,7 +3432,6 @@ class CandidateReportDownloadView(APIView):
                     elements.append(Paragraph(f"<i>Error loading PAN card image: {str(pan_error)}</i>", styles['Italic']))
                 
                 elements.append(Spacer(1, 25))
->>>>>>> origin/wed29
 
             # 3. Interview Transcript
 
@@ -3867,11 +3803,1009 @@ class LatestActiveBatchView(APIView):
 
             return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
 
-<<<<<<< HEAD
+        return Response({"batch_id": None}, status=status.HTTP_200_OK)
 
+class PanValidationView(APIView):
+    """
+    Validates PAN card photo using OCR and compares with entered PAN number.
+    Returns extracted PAN number from photo and match status.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request):
+        try:
+            pan_photo = request.FILES.get('pan_photo')
+            entered_pan = request.data.get('pan_number', '').upper().strip()
+
+            if not pan_photo:
+                return Response({'error': 'PAN photo is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if not entered_pan:
+                return Response({'error': 'PAN number is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Validate PAN format (5 letters + 4 digits + 1 letter)
+            pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
+            if not re.match(pan_pattern, entered_pan):
+                return Response({
+                    'error': 'Invalid PAN format. Expected format: ABCDE1234F',
+                    'is_valid': False
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Read and process image
+            image = Image.open(pan_photo)
+            
+            # Try using EasyOCR if available
+            extracted_text = ""
+            try:
+                reader = _get_reader()
+                if reader:
+                    img_array = np.array(image)
+                    result = reader.readtext(img_array, detail=0)
+                    extracted_text = ' '.join(result)
+                    logger.info(f"EasyOCR extracted text: {extracted_text}")
+            except Exception as ocr_error:
+                logger.warning(f"EasyOCR failed: {str(ocr_error)}")
+
+            # If EasyOCR fails, try using Groq Vision
+            if not extracted_text:
+                try:
+                    from groq import Groq
+                    groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+                    
+                    import base64
+                    buffered = io.BytesIO()
+                    image.save(buffered, format="JPEG")
+                    img_base64 = base64.b64encode(buffered.getvalue()).decode()
+                    
+                    response = groq_client.chat.completions.create(
+                        model="llama-3.2-11b-vision-preview",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": [
+                                    {"type": "text", "text": "Extract the PAN number from this PAN card image. The PAN number is 10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F). Return ONLY the PAN number, nothing else."},
+                                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_base64}"}}
+                                ]
+                            }
+                        ],
+                        max_tokens=20
+                    )
+                    extracted_text = response.choices[0].message.content.upper().strip()
+                    logger.info(f"Groq Vision extracted text: {extracted_text}")
+                except Exception as groq_error:
+                    logger.warning(f"Groq Vision failed: {str(groq_error)}")
+
+            # Extract PAN-like pattern from text
+            pan_from_photo = None
+            if extracted_text:
+                pan_matches = re.findall(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', extracted_text.upper())
+                if pan_matches:
+                    pan_from_photo = pan_matches[0]
+
+            # Compare entered PAN with extracted PAN
+            is_verified = False
+            if pan_from_photo:
+                is_verified = (entered_pan == pan_from_photo)
+
+            return Response({
+                'entered_pan': entered_pan,
+                'extracted_pan': pan_from_photo,
+                'is_verified': is_verified,
+                'extracted_text': extracted_text if settings.DEBUG else None,
+                'message': 'PAN verified successfully' if is_verified else 'PAN mismatch. Please check your PAN number and photo.'
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"PAN validation error: {str(e)}", exc_info=True)
+            return Response({
+                'error': f'Failed to validate PAN: {str(e)}',
+                'is_verified': False
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CandidateRegistrationUpdateView(APIView):
+    """
+    Updates candidate registration details (phone, PAN, resume) when they first open the interview link.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, public_token):
+        try:
+            candidate = Candidate.objects.get(public_token=public_token)
+
+            phone = request.data.get('phone')
+            if phone:
+                candidate.phone = phone
+
+            pan_number = request.data.get('pan_number')
+            if pan_number:
+                pan_number = pan_number.upper().strip()
+                pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
+                if not re.match(pan_pattern, pan_number):
+                    return Response({'error': 'Invalid PAN format. Expected: ABCDE1234F'}, status=status.HTTP_400_BAD_REQUEST)
+                candidate.pan_number = pan_number
+
+            pan_photo = request.FILES.get('pan_photo')
+            if pan_photo:
+                candidate.pan_photo = pan_photo
+
+            pan_verified = request.data.get('pan_verified')
+            if pan_verified is not None:
+                # Convert string to boolean
+                if isinstance(pan_verified, str):
+                    candidate.pan_verified = pan_verified.lower() == 'true'
+                else:
+                    candidate.pan_verified = bool(pan_verified)
+
+            resume = request.FILES.get('resume')
+            if resume:
+                candidate.resume = resume
+
+            full_name = request.data.get('full_name')
+            if full_name:
+                candidate.full_name = full_name
+
+            email = request.data.get('email')
+            if email:
+                candidate.email = email
+
+            candidate.save()
+
+            return Response({
+                'success': True,
+                'message': 'Registration details updated successfully',
+                'candidate': {
+                    'id': candidate.id,
+                    'full_name': candidate.full_name,
+                    'email': candidate.email,
+                    'phone': candidate.phone,
+                    'pan_number': candidate.pan_number,
+                    'pan_verified': candidate.pan_verified,
+                    'has_resume': bool(candidate.resume)
+                }
+            }, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class ProcessAnswerView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    @staticmethod
+    def _get_difficulty_instructions(experience_level):
+        """Return AI prompt instructions based on candidate experience level."""
+        mapping = {
+            'fresher': (
+                "CANDIDATE EXPERIENCE: Fresher (0 years)\n"
+                "DIFFICULTY: EASY. Ask basic, introductory-level questions.\n"
+                "- Focus on fundamentals, definitions, and simple concepts.\n"
+                "- For coding questions, ask simple problems (e.g., reverse a string, find max in array).\n"
+                "- Be encouraging and patient. Don't expect real-world project experience.\n"
+                "- Score generously if they show understanding of core concepts."
+            ),
+            '1-2': (
+                "CANDIDATE EXPERIENCE: 1-2 Years (Junior)\n"
+                "DIFFICULTY: MODERATE. Ask junior-level technical questions.\n"
+                "- Expect familiarity with common tools/frameworks but not deep expertise.\n"
+                "- For coding questions, ask moderate problems (e.g., basic algorithms, API usage).\n"
+                "- They should be able to describe at least one real project they worked on.\n"
+                "- Score fairly — they should know basics well, but gaps in advanced topics are okay."
+            ),
+            '3-5': (
+                "CANDIDATE EXPERIENCE: 3-5 Years (Mid-Level)\n"
+                "DIFFICULTY: INTERMEDIATE-HARD. Ask mid-level technical questions.\n"
+                "- Expect solid understanding of design patterns, debugging, and system thinking.\n"
+                "- For coding questions, ask problems involving data structures, optimization, or edge cases.\n"
+                "- They should articulate trade-offs and explain WHY they chose certain approaches.\n"
+                "- Score strictly — vague or surface-level answers should get lower scores."
+            ),
+            '5+': (
+                "CANDIDATE EXPERIENCE: 5+ Years (Senior)\n"
+                "DIFFICULTY: HARD. Ask senior-level, in-depth questions.\n"
+                "- Expect expertise in architecture, scalability, team leadership, and mentoring.\n"
+                "- For coding questions, ask complex problems involving system design or performance.\n"
+                "- Ask about technical decisions, trade-offs, and how they handled failures.\n"
+                "- Score strictly — a senior candidate should demonstrate depth, not just breadth."
+            ),
+        }
+        return mapping.get(experience_level, (
+            "No specific experience level set. Use a balanced, mid-level difficulty for questions."
+        ))
+
+    def post(self, request):
+        candidate_id = request.data.get('candidate_id')
+        candidate_token = request.data.get('candidate_token')
+        current_question = request.data.get('question')
+        answer = request.data.get('answer')
+        remaining_questions = request.data.get('remaining_questions', [])
+        chat_history = request.data.get('chat_history', []) 
+        
+        logger.debug("ProcessAnswer request received for candidate_id=%s", candidate_id)
+        
+        # Fallback if question is missing due to frontend race condition
+        if not current_question and chat_history:
+            for msg in reversed(chat_history):
+                role = msg.get('role') or msg.get('sender')
+                if role in ['assistant', 'ai']:
+                    current_question = msg.get('content') or msg.get('text')
+                    break
+        
+        if not current_question:
+            current_question = "Please introduce yourself and your background."
+
+        if not answer:
+             return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Public caller security: require unguessable token for unauthenticated requests.
+        if not request.user.is_authenticated and not candidate_token:
+            return Response({'error': 'candidate_token is required for public requests.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 1. Synchronize Turn Number with Frontend
+        current_turn_number = request.data.get('turn_number')
+        
+        candidate_name = "Candidate"
+        job_title = "Technical Professional"
+        resume_context = "No resume available."
+        jd_context = "No job description available."
+        experience_level = None
+        
+        candidate = None
+        if candidate_token:
+            try:
+                candidate = _resolve_public_candidate(candidate_token)
+                candidate_id = candidate.id
+            except Candidate.DoesNotExist:
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        elif candidate_id:
+            try:
+                if isinstance(candidate_id, str) and not candidate_id.isdigit():
+                    return Response({'error': 'Invalid candidate_id'}, status=status.HTTP_400_BAD_REQUEST)
+                candidate = Candidate.objects.get(pk=candidate_id)
+            except Exception as e:
+                logger.debug("Candidate lookup error in ProcessAnswerView: %s", str(e))
+                return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if candidate:
+            candidate_name = candidate.full_name
+            job_title = candidate.job_title or job_title
+            jd_context = candidate.job_description or jd_context
+            experience_level = getattr(candidate, 'experience_level', None)
+            if candidate.resume_text:
+                resume_context = candidate.resume_text
+
+        try:
+            # Construct Chat History context with safety
+            history_context = ""
+            if chat_history:
+                turns = []
+                # Fallback calculation if frontend didn't pass turn_number
+                if not current_turn_number:
+                    ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
+                    current_turn_number = ai_questions_count + 1 
+                
+                for h in chat_history[-10:]: # Show more history for better context
+                    role = h.get('role') or h.get('sender', 'unknown')
+                    content = h.get('content') or h.get('text', '')
+                    turns.append(f"{role.upper()}: {content}")
+                history_context = f"CURRENT QUESTION NUMBER: {current_turn_number} of 13\nCONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+            else:
+                if not current_turn_number:
+                    current_turn_number = 1
+                history_context = "This is the START of the interview. Question #1.\n"
+
+            # --- DYNAMIC CATEGORY INJECTION ---
+            category_map = {
+                1: ("INTRO", "Greet the candidate warmly and ask them to introduce themselves."),
+                2: ("JD-Q1", "Ask a question derived DIRECTLY from the Job Description requirements."),
+                3: ("JD-Q2", "Ask another question derived DIRECTLY from the Job Description requirements."),
+                4: ("JD-Q3", "Ask a third question derived DIRECTLY from the Job Description requirements."),
+                5: ("JD-Q4", "Ask a fourth question derived DIRECTLY from the Job Description requirements."),
+                6: ("RESUME-SKILL-Q1", "Ask about a SPECIFIC SKILL listed in the Resume that is relevant to the JD."),
+                7: ("RESUME-SKILL-Q2", "Ask about a DIFFERENT SPECIFIC SKILL from the Resume relevant to the JD."),
+                8: ("PROJECT-Q1", "Ask about a SPECIFIC PROJECT mentioned in the Resume (role, challenges, or architecture)."),
+                9: ("PROJECT-Q2", "Ask about a DIFFERENT PROJECT from the Resume (or deeper dive into the previous project)."),
+                10: ("SCENARIO-Q1", "Ask a 'Imagine you are...' or 'How would you handle...' hypothetical workplace scenario derived DIRECTLY from the Job Description requirements."),
+                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question, also derived DIRECTLY from the Job Description."),
+                12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc."),
+                13: ("SYNTAX-Q2", "Ask a DIFFERENT coding or syntax question.")
+            }
+            
+            # Get current turn instructions
+            target_category, target_instruction = category_map.get(current_turn_number, ("EXIT", "The interview is over. Say goodbye."))
+            # ----------------------------------
+
+            prompt = f"""
+        You are "Indu", a warm, sharp, and experienced technical interviewer conducting a live interview for the position of **{job_title}**.
+        Candidate Name: {candidate_name}
+        
+        ===== YOUR SPECIFIC MISSION FOR THIS TURN (TURN #{current_turn_number}) =====
+        CATEGORY: {target_category}
+        INSTRUCTION: {target_instruction} (STRICTLY FOLLOW THIS)
+        
+        ===== JOB DESCRIPTION =====
+        {jd_context[:1500]}
+        
+        ===== RESUME =====
+        {resume_context[:3000]}
+        
+        ===== EXPERIENCE LEVEL & DIFFICULTY =====
+        {self._get_difficulty_instructions(experience_level)}
+        
+        ===== PERSONALITY & TONE RULES =====
+        - You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
+        - NEVER use these banned phrases: "Your explanation was clear and concise", "Great answer", "That's a good point", "Well said", "That's not a great sign", "That's a concern". These sound robotic and repetitive.
+        - Instead, react SPECIFICALLY to what the candidate actually said. Reference their exact words. Examples:
+          * "Interesting that you chose React.memo for that — I've seen teams debate that approach..."
+          * "So you went with lazy loading — that makes sense for a dashboard with heavy data."
+          * "Hmm, that's a solid approach. Let me throw a curveball at you..."
+          * "Got it. I'd love to dig deeper into something you mentioned..."
+        - Keep feedback to 1-2 SHORT sentences max. Don't lecture or summarize their answer back to them.
+        - ⚠️ ABSOLUTE BAN: NEVER include ANY of these category tags in your spoken output: JD-Q1, JD-Q2, JD-Q3, JD-Q4, RESUME-SKILL-Q1, RESUME-SKILL-Q2, PROJECT-Q1, PROJECT-Q2, SCENARIO-Q1, SCENARIO-Q2, SYNTAX-Q1, SYNTAX-Q2, INTRO. These tags are ONLY for YOUR internal tracking. If the candidate hears them, the system is broken.
+        - NEVER announce or reference the question number, turn number, or category.
+        - NEVER repeat the same feedback phrasing twice in the same interview. Each response MUST be unique.
+        - When asking resume/project questions, START with a specific detail from the resume (e.g., "I noticed you worked on [specific project name]...", "Your resume mentions [specific skill]...").
+        - Use conversational fillers like "Hmm", "I see", "Got it", "Interesting", "Fair enough" occasionally to sound like you are listening.
+        - Vary your transitions naturally. Choose from these styles:
+            * Curiosity: "Now I'm curious about...", "I'd love to hear more about..."
+            * Shifting Gears: "Let's pivot slightly to...", "Alright, moving on to...", "Switching gears a bit..."
+            * Casual: "Okay, next up...", "So, tell me about...", "I want to ask you about..."
+            * Deep Dive: "Let's dig into...", "I want to focus on a particular area..."
+        - If the candidate gives a weak or wrong answer, gently note it: "That's not quite what I was looking for, but let's keep going."
+        - If they say "I don't know", say something like: "No worries, let's move on to something else."
+        - Avoid starting every response with "Great," "Alright," or "Okay." Mix it up.
+        
+        ===== CRITICAL ENFORCEMENT RULES =====
+        - You MUST ask a question matching the CATEGORY: {target_category}.
+        - For RESUME-SKILL questions: Pick a SPECIFIC skill from the resume.
+        - For PROJECT questions: Reference a SPECIFIC project from the resume by name.
+        - For SYNTAX questions (Turns 12-13): Ask actual coding problems, NOT conceptual questions.
+        - For SCENARIO questions (Turns 10-11): These MUST be hypothetical scenarios based on the Job Description's requirements or the challenges typical to the **{job_title}** role.
+        - Do NOT ask follow-up questions on the same topic. Each turn MUST move to the next category.
+        
+        ===== INPUT MODE =====
+        - Turns 1-11: Set "requires_code_input": false (audio/verbal mode)
+        - Turns 12-13: Set "requires_code_input": true (keyboard/coding mode)
+        
+        ===== INTERVIEW COMPLETION =====
+        - If target_category == "EXIT" or current_turn_number >= 14: The interview is OVER. Set "is_exit": true.
+        
+        ===== SPECIAL TRIGGERS =====
+        (A) CLARIFICATION: If candidate says "repeat that", "pardon", "what?", "I don't understand", or asks for clarification:
+            1. Set "is_clarification": true.
+            2. In "feedback", write a friendly 1-sentence acknowledgement.
+            3. In "refined_next_question", provide a simplified or rephrased version of the EXACT SAME topic (Turn #{current_turn_number}). Do NOT move to the next category.
+        (B) EXIT: If candidate says "end", "stop", "finish" → Set "is_exit": true, say goodbye.
+        
+        ===== SCORING GUIDES (0-10) =====
+        - 10: Perfect, comprehensive, and accurate answer.
+        - 8-9: Correct and clear answer, perhaps missing minor detail. (BEYOND SATISFACTORY)
+        - 6-7: Good attempt, mostly correct but a bit vague or lacks depth. (PASSABLE)
+        - 4-5: Weak or slightly incorrect answer, but shows basic effort/knowledge. (LENIENT PARTIAL CREDIT)
+        - 2-3: Very poor or largely incorrect answer, but they tried to speak.
+        - 0-1: Silent, "I don't know," or "Skip."
+        
+        *BE GENEROUS*: If the candidate shows they understand the core concept but struggle to articulate it perfectly, lean towards a 6 or 7.
+        
+        ===== CONVERSATION CONTEXT =====
+        {history_context}
+        
+        CURRENT TURN:
+        Last Question: "{current_question}"
+        Target Category for this next question: {target_category}
+        Candidate Answer: "{answer}"
+        
+        ===== RESPOND WITH THIS EXACT JSON =====
+        {{
+            "is_clarification": false,
+            "is_exit": false,
+            "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer (NEVER generic praise)",
+            "refined_next_question": "Your next question — MUST match the category for Turn #{current_turn_number + 1}",
+            "requires_code_input": false, // Set to TRUE ONLY IF Turn #{current_turn_number + 1} is a SYNTAX Turn (12-13)
+            "score": 0,
+            "score_reason": "1-sentence justification for the score"
+        }}
+        """
+
+            # Lazy-load Groq for ProcessAnswerView using GroqKeyManager for key rotation
+            from ai_assessments.ai_logic import GroqKeyManager
+            import time as _time
+
+            local_api_key = GroqKeyManager.get_current_key()
+            local_groq_client = Groq(api_key=local_api_key)
+
+            # --- AUTO MODEL FALLBACK WITH KEY ROTATION ---
+            PRIMARY_MODEL = "llama-3.3-70b-versatile"
+            FALLBACK_MODEL = "llama-3.1-8b-instant"
+            COOLDOWN_SECONDS = 60
+
+            # Check if we're currently in cooldown from a previous 70b rate limit
+            if not hasattr(ProcessAnswerView, '_fallback_until'):
+                ProcessAnswerView._fallback_until = 0
+
+            if _time.time() < ProcessAnswerView._fallback_until:
+                chosen_model = FALLBACK_MODEL
+                logger.info(f"Using fallback model {FALLBACK_MODEL} (70b cooldown active for {int(ProcessAnswerView._fallback_until - _time.time())}s more)")
+            else:
+                chosen_model = PRIMARY_MODEL
+
+            try:
+                response = local_groq_client.chat.completions.create(
+                    model=chosen_model,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.7,
+                    response_format={"type": "json_object"}
+                )
+            except Exception as model_err:
+                error_str = str(model_err).lower()
+                if ("rate limit" in error_str or "429" in error_str):
+                    # Rotate to next key first
+                    GroqKeyManager.rotate_key()
+                    rotated_key = GroqKeyManager.get_current_key()
+                    local_groq_client = Groq(api_key=rotated_key)
+
+                    if chosen_model == PRIMARY_MODEL:
+                        # 70b hit rate limit → activate cooldown and retry with 8b immediately
+                        ProcessAnswerView._fallback_until = _time.time() + COOLDOWN_SECONDS
+                        logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
+                    
+                    response = local_groq_client.chat.completions.create(
+                        model=FALLBACK_MODEL,
+                        messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7,
+                        response_format={"type": "json_object"}
+                    )
+                elif "api_key" in error_str or "authentication" in error_str:
+                    # Bad key — rotate and retry once
+                    GroqKeyManager.rotate_key()
+                    rotated_key = GroqKeyManager.get_current_key()
+                    local_groq_client = Groq(api_key=rotated_key)
+                    logger.warning(f"Bad API key detected, rotated to next key")
+                    response = local_groq_client.chat.completions.create(
+                        model=chosen_model,
+                        messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7,
+                        response_format={"type": "json_object"}
+                    )
+                else:
+                    raise  # Re-raise non-rate-limit errors
+            # --- END MODEL FALLBACK ---
+
+            raw_text = response.choices[0].message.content
+            data = extract_json(raw_text)
+            
+            if not data:
+                raise ValueError("AI returned invalid JSON structure")
+
+            # --- SERVER-SIDE LABEL SANITIZER ---
+            # Strip any leaked category labels like "JD-Q1:", "RESUME-SKILL-Q2:", "PROJECT-Q1" etc.
+            import re
+            _label_pattern = re.compile(
+                r'\b(?:JD|RESUME[- ]?SKILL|PROJECT|SCENARIO|SYNTAX|INTRO)\b[- ]?Q?\d*[:\.\-—]*\s*',
+                re.IGNORECASE
+            )
+            for field in ('feedback', 'refined_next_question'):
+                if data.get(field):
+                    data[field] = _label_pattern.sub('', data[field]).strip()
+            # -----------------------------------
+
+            # --- SAFETY GUARD: Prevent Question Looping ---
+            # If the candidate said "I don't know" or similar, and the AI tries to repeat the question 
+            # even while setting is_clarification=false, we force it to move on.
+            refined_q = data.get('refined_next_question')
+            if not data.get('is_clarification') and not data.get('is_exit'):
+                if refined_q == current_question or not refined_q:
+                    logger.warning(f"AI attempted to repeat question: {current_question}. Forcing move to next.")
+                    if remaining_questions:
+                        data['refined_next_question'] = remaining_questions[0]
+                    else:
+                        data['refined_next_question'] = "That's perfectly fine. Tell me about another project you've worked on recently."
+            # -----------------------------------------------
+
+            # Scoring Update (Silent)
+            if candidate and data.get('score') is not None and not data.get('is_clarification'):
+                 try:
+                    # Update score
+                    q_score = int(data.get('score', 0))
+                    candidate.score += q_score
+                    candidate.total_questions += 1
+
+                    # Store per-question summary for "Details" button
+                    if not isinstance(candidate.interview_summary, list):
+                        candidate.interview_summary = []
+
+                    candidate.interview_summary.append({
+                        "question": current_question,
+                        "answer": answer,
+                        "feedback": data.get('feedback', ''),
+                        "score": q_score,
+                        "reason": data.get('score_reason', 'No reasoning provided.')
+                    })
+
+                    candidate.save()
+                 except: pass
+
+            return Response(data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            error_msg = str(e)
+            is_rate_limit = "rate limit" in error_msg.lower() or "429" in error_msg
+            is_connection = "connection" in error_msg.lower() or "timeout" in error_msg.lower()
+            if is_rate_limit or is_connection:
+                logger.warning("Retryable ProcessAnswer error: %s", error_msg)
+            else:
+                logger.exception("ProcessAnswer failure")
+            
+            # Treat connection errors as temporary (retryable) just like rate limits
+            if is_rate_limit or is_connection:
+                status_code = status.HTTP_429_TOO_MANY_REQUESTS
+                msg = "Indu is taking a moment to think (AI Busy). Retrying automatically..."
+            else:
+                status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                msg = "AI is temporarily unavailable. Please try again or click the microphone to resume."
+
+            return Response({"error": msg, "retryable": (is_rate_limit or is_connection)}, status=status_code)
+
+
+class TTSView(APIView):
+    """
+    Text-to-Speech endpoint using Coqui TTS.
+    POST {"text": "Hello!"} → returns audio/wav binary response.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request):
+        text = request.data.get('text', '').strip()
+        if not text:
+            return Response({"error": "Missing 'text' field"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Safety: limit text length to prevent extremely long synthesis
+        if len(text) > 1500:
+            text = text[:1500]
+
+        try:
+            from .tts_engine import get_tts_engine
+            import asyncio
+            engine = get_tts_engine()
+            # edge-tts is better handled via asyncio.run for sync views
+            wav_bytes = asyncio.run(engine.synthesize(text))
+
+            if not wav_bytes:
+                return Response({"error": "Synthesis produced empty audio"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            from django.http import HttpResponse
+            # Edge-TTS produces mp3 by default, we'll return as audio/mpeg
+            response = HttpResponse(wav_bytes, content_type='audio/mpeg')
+            response['Content-Length'] = len(wav_bytes)
+            response['Cache-Control'] = 'no-cache'
+            return response
+
+        except Exception as e:
+            logger.error(f"TTS Error: {str(e)}")
+            return Response({"error": f"TTS synthesis failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateTimelineView(APIView):
+    """
+    Fetches the history (PipelineLog) for a specific candidate.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+            
+            logs = candidate.pipeline_logs.all().order_by('timestamp')
+            serializer = PipelineLogSerializer(logs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class LatestActiveBatchView(APIView):
+    """
+    Allows the frontend to recover the most recent batch ID if the page was refreshed
+    before the ID could be saved to local state.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        # Look for candidates created in the last 15 minutes that are still 'New'
+        threshold_time = timezone.now() - timedelta(minutes=15)
+        user_profile = getattr(request.user, 'userprofile', None)
+
+        candidates = Candidate.objects.filter(
+            status='New',
+            created_at__gte=threshold_time
+        ).exclude(batch_id__isnull=True).exclude(batch_id='')
+
+        if user_profile:
+            candidates = candidates.filter(user_profile=user_profile)
+
+        latest_candidate = candidates.order_by('-created_at').first()
+
+        if latest_candidate:
+            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
 
         return Response({"batch_id": None}, status=status.HTTP_200_OK)
-=======
+
+
+class CandidateReportDownloadView(APIView):
+    """
+    Generates a comprehensive PDF report for an AI interview session.
+    Includes candidate details, identity verification photo, full transcript,
+    and integrity violation snapshots.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            
+            # RBAC: Ensure user belongs to the same company or is a superuser
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not request.user.is_superuser):
+                return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Generate PDF in memory
+            buffer = io.BytesIO()
+            from reportlab.lib.pagesizes import A4
+            from reportlab.lib import colors
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, PageBreak
+            from reportlab.lib.units import inch
+            import base64
+
+            doc = SimpleDocTemplate(
+                buffer, 
+                pagesize=A4,
+                rightMargin=50,
+                leftMargin=50,
+                topMargin=50,
+                bottomMargin=50
+            )
+            styles = getSampleStyleSheet()
+            elements = []
+
+            # 1. Header & Title
+            header_style = ParagraphStyle(
+                'HeaderStyle', 
+                parent=styles['Heading1'], 
+                fontSize=26, 
+                spaceAfter=20, 
+                textColor=colors.HexColor("#4338ca"),
+                alignment=1 # Center
+            )
+            elements.append(Paragraph("VerifiHireAI — Interview Report", header_style))
+            elements.append(Paragraph(f"Candidate: {candidate.full_name}", styles['Heading2']))
+            elements.append(Spacer(1, 15))
+
+            # Define custom styles if not already present
+            if 'Small' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Small',
+                    parent=styles['Normal'],
+                    fontSize=8,
+                    leading=10,
+                    textColor=colors.grey
+                ))
+            if 'Italic' not in styles:
+                styles.add(ParagraphStyle(
+                    name='Italic',
+                    parent=styles['Normal'],
+                    fontName='Helvetica-Oblique'
+                ))
+
+            # 2. Candidate Information (Photo on Left, Details on Right)
+            elements.append(Paragraph("Candidate Information", styles['Heading3']))
+            
+            # Identity Verification (Face Registration)
+            # First try deepface directory using public token (which is what the frontend uses for registration)
+            person_img_path = None
+            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+            person_id = str(candidate.public_token).lower() if candidate.public_token else None
+            path_options = []
+            
+            if person_id:
+                path_options = [
+                    os.path.join(deepface_data_dir, person_id, "face_0.jpg"),
+                ]
+            
+            for p in path_options:
+                if os.path.exists(p):
+                    person_img_path = p
+                    break
+
+            # Fallback: Use first webcam screenshot from integrity logs
+            fallback_img_data = None
+            if not person_img_path:
+                first_log = candidate.integrity_logs.filter(webcam_screenshot_base64__isnull=False).order_by('timestamp').first()
+                if first_log and first_log.webcam_screenshot_base64:
+                    try:
+                        b64 = first_log.webcam_screenshot_base64.split(',')[-1]
+                        fallback_img_data = base64.b64decode(b64)
+                    except:
+                        pass
+
+            # Left side: Image
+            if person_img_path:
+                try:
+                    img_elem = RLImage(person_img_path, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            elif fallback_img_data:
+                try:
+                    img_io = io.BytesIO(fallback_img_data)
+                    img_elem = RLImage(img_io, width=2.0*inch, height=1.5*inch)
+                except:
+                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
+            else:
+                img_elem = Paragraph("<i>No candidate photo available.</i>", styles['Normal'])
+
+            # Score & Penalty Calculation
+            total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
+            base_score_pct = (candidate.score / total_possible_marks * 100) if total_possible_marks > 0 else 0
+            
+            integrity_obj = getattr(candidate, 'integrity', None)
+            integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
+            integrity_penalty = max(0, 100.0 - integrity_score)
+            
+            final_performance_pct = max(0, round(base_score_pct - integrity_penalty, 1))
+
+            # Right side: Summary Table
+            info_data = [
+                ["Full Name", candidate.full_name],
+                ["Email", candidate.email],
+                ["Phone", candidate.phone or "N/A"],
+                ["PAN Number", candidate.pan_number or "N/A"],
+                ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
+                ["Job Title", candidate.job_title or "N/A"],
+                ["Interview Score", f"{candidate.score} / {total_possible_marks}"],
+                ["Integrity Penalty", f"-{integrity_penalty:.1f}%"],
+                ["Final Performance", f"{final_performance_pct}%"],
+                ["Status", candidate.status],
+                ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
+            ]
+            
+            summary_table = Table(info_data, colWidths=[1.2*inch, 3.0*inch])
+            summary_table.setStyle(TableStyle([
+                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
+                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#475569")),
+                ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
+                ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e2e8f0")),
+                ('PADDING', (0,0), (-1,-1), 6),
+            ]))
+
+            # Combine in a layout table
+            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
+            layout_table.setStyle(TableStyle([
+                ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                ('ALIGN', (0,0), (0,0), 'LEFT'),
+                ('ALIGN', (1,0), (1,0), 'LEFT'),
+            ]))
+            elements.append(layout_table)
+            elements.append(Spacer(1, 25))
+
+            # 2.5 Identity Documents Section - PAN Card
+            if candidate.pan_photo:
+                elements.append(Paragraph("Identity Documents", styles['Heading3']))
+                elements.append(Spacer(1, 10))
+                
+                # PAN Card Image
+                try:
+                    pan_img_path = candidate.pan_photo.path
+                    if os.path.exists(pan_img_path):
+                        pan_img_elem = RLImage(pan_img_path, width=3.0*inch, height=2.0*inch)
+                        pan_caption = f"PAN Card: {candidate.pan_number or 'N/A'} (Verified: {'Yes' if candidate.pan_verified else 'No'})"
+                        
+                        pan_table = Table([
+                            [pan_img_elem],
+                            [Paragraph(pan_caption, styles['Small'])]
+                        ], colWidths=[3.0*inch])
+                        pan_table.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ]))
+                        elements.append(pan_table)
+                    else:
+                        elements.append(Paragraph("<i>PAN card image file not found on server.</i>", styles['Normal']))
+                except Exception as pan_error:
+                    elements.append(Paragraph(f"<i>Error loading PAN card image: {str(pan_error)}</i>", styles['Italic']))
+                
+                elements.append(Spacer(1, 25))
+
+            # 3. Interview Transcript
+            elements.append(Paragraph("Conversation Transcript", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            if isinstance(candidate.interview_summary, list) and candidate.interview_summary:
+                for i, turn in enumerate(candidate.interview_summary, 1):
+                    # Question Header with background
+                    q_header_style = ParagraphStyle(
+                        'QHeader',
+                        parent=styles['Heading4'],
+                        fontSize=11,
+                        textColor=colors.HexColor("#4338ca"),
+                        spaceBefore=15,
+                        spaceAfter=8,
+                        backColor=colors.HexColor("#f8fafc"),
+                        borderPadding=8,
+                        borderWidth=1,
+                        borderColor=colors.HexColor("#e2e8f0"),
+                        borderRadius=5
+                    )
+                    elements.append(Paragraph(f"Question #{i}", q_header_style))
+                    
+                    # Question text
+                    elements.append(Paragraph(f"<b>Question:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('question', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # Answer
+                    elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
+                    elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # AI Analysis
+                    elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
+                    elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
+                    elements.append(Spacer(1, 8))
+                    
+                    # Score with color coding
+                    score = turn.get('score', 0)
+                    score_color = colors.darkgreen if score >= 7 else (colors.darkorange if score >= 4 else colors.red)
+                    score_style = ParagraphStyle(
+                        'ScoreStyle',
+                        parent=styles['Normal'],
+                        fontSize=10,
+                        textColor=score_color,
+                        spaceBefore=5,
+                        spaceAfter=15
+                    )
+                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {turn.get('reason', '')}", score_style))
+                    
+                    elements.append(Paragraph('<hr color="#e2e8f0" thickness="1"/>', styles['Normal']))
+                    elements.append(Spacer(1, 12))
+            else:
+                elements.append(Paragraph("No interview transcript data recorded for this session.", styles['Italic']))
+
+            # 4. Integrity Violations & Snapshots
+            elements.append(PageBreak())
+            elements.append(Paragraph("Proctoring & Integrity Evidence", styles['Heading2']))
+            elements.append(Spacer(1, 10))
+            
+            logs = candidate.integrity_logs.all().order_by('timestamp')
+            if logs.exists():
+                elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
+                elements.append(Spacer(1, 15))
+                
+                # Collect all images across all logs for 4-per-row layout
+                all_images = []
+                for log in logs:
+                    # Process Webcam Snapshot
+                    if log.webcam_screenshot_base64:
+                        try:
+                            b64 = log.webcam_screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        except: pass
+                    
+                    # Process Desktop Snapshot
+                    if log.screenshot_base64:
+                        try:
+                            b64 = log.screenshot_base64.split(',')[-1]
+                            img_data = base64.b64decode(b64)
+                            img_io = io.BytesIO(img_data)
+                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                            all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        except: pass
+                
+                if all_images:
+                    # Display images in 4-per-row grid
+                    img_grid = []
+                    row = []
+                    for img, caption in all_images:
+                        # Each cell will contain both the image and the caption text
+                        row.append([img, Paragraph(caption, styles['Small'])])
+                        if len(row) == 4:
+                            img_grid.append(row)
+                            row = []
+                    if row:  # Add remaining images
+                        while len(row) < 4:
+                            row.append("")
+                        img_grid.append(row)
+                    
+                    for grid_row in img_grid:
+                        # Passing [grid_row] creates a single table row with 4 columns
+                        t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
+                        t_img.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                            ('LEFTPADDING', (0,0), (-1,-1), 2),
+                            ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                            ('TOPPADDING', (0,0), (-1,-1), 5),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                        ]))
+                        elements.append(t_img)
+                        elements.append(Spacer(1, 10))
+                else:
+                    elements.append(Paragraph("[No visual evidence captured for violations]", styles['Small']))
+            else:
+                elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
+
+            # Build PDF
+            doc.build(elements)
+            buffer.seek(0)
+            
+            # Prepare Response
+            from django.http import HttpResponse
+            response = HttpResponse(buffer, content_type='application/pdf')
+            safe_name = "".join([c for c in candidate.full_name if c.isalnum() or c==' ']).rstrip().replace(' ', '_')
+            filename = f"VerifiHire_Report_{safe_name}_{candidate.id}.pdf"
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"Error generating PDF report for candidate {pk}: {str(e)}", exc_info=True)
+            return Response({'error': f"Critical failure during report generation: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateTimelineView(APIView):
+    """
+    Fetches the history (PipelineLog) for a specific candidate.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+            
+            logs = candidate.pipeline_logs.all().order_by('timestamp')
+            serializer = PipelineLogSerializer(logs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class LatestActiveBatchView(APIView):
+    """
+    Allows the frontend to recover the most recent batch ID if the page was refreshed
+    before the ID could be saved to local state.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        # Look for candidates created in the last 15 minutes that are still 'New'
+        threshold_time = timezone.now() - timedelta(minutes=15)
+        user_profile = getattr(request.user, 'userprofile', None)
+
+        candidates = Candidate.objects.filter(
+            status='New',
+            created_at__gte=threshold_time
+        ).exclude(batch_id__isnull=True).exclude(batch_id='')
+
+        if user_profile:
+            candidates = candidates.filter(user_profile=user_profile)
+
+        latest_candidate = candidates.order_by('-created_at').first()
+
+        if latest_candidate:
+            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
+
         return Response({"batch_id": None}, status=status.HTTP_200_OK)
 
 class PanValidationView(APIView):
@@ -4041,4 +4975,3 @@ class CandidateRegistrationUpdateView(APIView):
         except Exception as e:
             logger.error(f"Registration update error: {str(e)}", exc_info=True)
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
->>>>>>> origin/wed29

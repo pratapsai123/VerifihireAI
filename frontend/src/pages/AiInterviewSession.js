@@ -1619,10 +1619,6 @@ const AiInterviewSession = () => {
                 const res = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/?_t=${Date.now()}`);
                 const candidate = res.data;
                 setCandidateName(candidate.full_name);
-                
-                // DO NOT load questions yet - wait until face registration is complete
-                // const qList = candidate.interview_questions || [];
-                // setQuestions(qList);
 
                 if (candidate.status === 'Completed') {
                     setIsCompleted(true);
@@ -2097,6 +2093,7 @@ const AiInterviewSession = () => {
 
     return (
         <div className="ai-session-page">
+            {/* Fullscreen/Screen Share requirement overlay */}
             {isPermissionsGranted && (!isFullscreen || !isScreenSharing) && !isCompleted && (
                 <div
                     onClick={() => {
@@ -2147,7 +2144,6 @@ const AiInterviewSession = () => {
                                 ? 'Please enter Fullscreen mode to continue.'
                                 : 'Please restart Screen Sharing (Entire Screen) to continue.'}
                         </p>
-
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                             {!isFullscreen && (
                                 <button
@@ -2160,15 +2156,9 @@ const AiInterviewSession = () => {
                                     className="resume-integrity-btn"
                                     style={{
                                         background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '0.8rem 2rem',
-                                        borderRadius: '8px',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        flex: 1,
-                                        minWidth: '150px'
+                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
+                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
+                                        cursor: 'pointer', flex: 1, minWidth: '150px'
                                     }}
                                 >
                                     📺 Enter Full Screen
@@ -2180,15 +2170,9 @@ const AiInterviewSession = () => {
                                     className="resume-integrity-btn"
                                     style={{
                                         background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '0.8rem 2rem',
-                                        borderRadius: '8px',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        flex: 1,
-                                        minWidth: '150px'
+                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
+                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
+                                        cursor: 'pointer', flex: 1, minWidth: '150px'
                                     }}
                                 >
                                     🖥️ Share Screen
@@ -2197,11 +2181,11 @@ const AiInterviewSession = () => {
                         </div>
                     </div>
                 </div>
-            )
-            }
+            )}
 
+            {/* Welcome Screen - shown after registration but before camera */}
             {
-                !isPermissionsGranted && !isCompleted && (
+                !isPermissionsGranted && !isFaceRegistered && !isCompleted && (
                     <div style={{
                         position: 'fixed',
                         inset: 0,
