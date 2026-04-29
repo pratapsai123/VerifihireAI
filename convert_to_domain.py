@@ -20,6 +20,7 @@ TARGET_FILES = [
     "backend/api/views/live_interview_views.py",
     "backend/api/views/user_views.py",
     "frontend/README.md",
+    "frontend/src/pages/SecurePrecheck.js",
 ]
 
 # Conversion mappings
@@ -31,6 +32,9 @@ REPLACEMENTS = [
     ("http://192.168.1.22:3001", "https://verifihireai.com"),
     # Handle www variant
     ("http://localhost:3000", "https://www.verifihireai.com"),
+    # Download URLs
+    ("http://localhost:3000", "https://downloads.verifihireai.com"),
+    ("http://localhost:3000", "https://downloads.local"),
 ]
 
 def convert_files(to_local=False):

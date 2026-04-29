@@ -139,6 +139,13 @@ async function detectBlocked(processes, windowTitles = new Map()) {
   const detections = [];
   const checkedPids = new Set(); 
 
+  // Fetch TCP connections once for active-session checks
+  const { getConnectionsByPid } = require('./processScanner');
+  let connectionsByPid = new Map();
+  try {
+    connectionsByPid = await getConnectionsByPid();
+  } catch { /* non-fatal */ }
+
   for (const p of processes || []) {
     const name = p.processName || '';
     const fullPath = p.processPath || '';
@@ -182,7 +189,15 @@ async function detectBlocked(processes, windowTitles = new Map()) {
         if (checkedPids.has(key)) continue;
         checkedPids.add(key);
 
-        console.log(`[detector] BLOCKED: ${rule.label} detected (Method: ${hitWindow ? 'WINDOW' : 'PROCESS'}) (PID: ${pid}, Session: ${sessionId})`);
+        // CRITICAL: Only block if the app has an ACTIVE remote session.
+        // Apps like AnyDesk can be installed and running idle — that is NOT cheating.
+        const active = await isActiveSession(name, pid, rule, connectionsByPid, windowTitles);
+        if (!active) {
+          console.log(`[detector] IDLE (no active session): ${rule.label} (PID: ${pid}, Session: ${sessionId}) — skipping`);
+          continue;
+        }
+
+        console.log(`[detector] BLOCKED: ${rule.label} ACTIVE session detected (Method: ${hitWindow ? 'WINDOW' : 'PROCESS'}) (PID: ${pid}, Session: ${sessionId})`);
         
         detections.push({
           app: rule.label,

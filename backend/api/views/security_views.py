@@ -2,7 +2,7 @@ from .._imports import *
 import uuid
 
 
-HEARTBEAT_TIMEOUT_SECONDS = 15
+HEARTBEAT_TIMEOUT_SECONDS = 60
 
 
 def _mark_timed_out(session):

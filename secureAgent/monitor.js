@@ -161,6 +161,8 @@ async function startMonitor({ token, sessionId, userId, backendApiBase }) {
   await refreshSignatures();
   // Use self-scheduling setTimeout (not setInterval) so scans never overlap.
   // Each scan starts 10s after the PREVIOUS one finishes.
+  // Fire first heartbeat immediately
+  sendAliveHeartbeat();
   heartbeatTimer = setInterval(sendAliveHeartbeat, 10000);
   signatureTimer = setInterval(refreshSignatures, 60000);
   // Fire first scan non-blocking so /monitor/start responds immediately.
