@@ -25,7 +25,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
 
 
 # Application definition
@@ -203,9 +203,9 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5173",
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5174",
     "http://20.205.31.46",
 ]
