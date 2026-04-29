@@ -998,221 +998,103 @@ const ResultsAI = () => {
                                                 // Then fall back to first valid integrity screenshot
                                                 let candidatePhoto = null;
 
-<<<<<<< HEAD
                                                 // 1. Try DeepFace registered photo first
                                                 const personId = viewedSubmission.candidate_email?.toLowerCase().trim();
                                                 if (personId) {
-                                                    // DeepFace stores at: data/registered_faces/{person_id}/registration_snapshot.jpg
-                                                    // API endpoint or direct file path
                                                     candidatePhoto = `http://127.0.0.1:8500/data/registered_faces/${personId}/registration_snapshot.jpg`;
                                                 }
 
-                                                // 2. Fall back to integrity screenshots if no registered photo
                                                 if (!candidatePhoto) {
                                                     const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
                                                     const sortedLogs = [...logs].sort((a, b) => {
                                                         const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
                                                         const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
-                                                        return timeA - timeB; // Earliest first
+                                                        return timeA - timeB;
                                                     });
                                                     const firstWebcam = sortedLogs.find(log => {
-                                                        // Skip face_not_detected events
-                                                        if (log.event_type && log.event_type.toLowerCase().includes('face_not_detected')) {
-                                                            return false;
-                                                        }
+                                                        if (log.event_type && log.event_type.toLowerCase().includes('face_not_detected')) return false;
                                                         return log.webcam_screenshot_url || log.webcam_screenshot_base64;
                                                     });
-                                                    if (firstWebcam) {
-                                                        candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64;
-                                                    }
+                                                    if (firstWebcam) candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64;
                                                 }
                                                 return (
-                                                    <div style={{
-                                                        display: 'flex',
-                                                        gap: '2rem',
-                                                        alignItems: 'flex-start'
-                                                    }}>
-                                                        {/* Candidate Photo */}
-                                                        <div style={{
-                                                            width: '180px',
-                                                            height: '180px',
-                                                            background: '#F4F7FE',
-                                                            borderRadius: '12px',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            border: '1px solid #E0E5F2',
-                                                            flexShrink: 0,
-                                                            overflow: 'hidden'
-                                                        }}>
+                                                    <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+                                                        <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', flexShrink: 0, overflow: 'hidden' }}>
                                                             {candidatePhoto ? (
-                                                                <img
-                                                                    src={candidatePhoto}
-                                                                    alt="Candidate"
-                                                                    style={{
-                                                                        width: '100%',
-                                                                        height: '100%',
-                                                                        objectFit: 'cover'
-                                                                    }}
-                                                                    onError={(e) => {
-                                                                        e.target.style.display = 'none';
-                                                                        e.target.nextSibling.style.display = 'flex';
-                                                                    }}
-                                                                />
+                                                                <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                                                             ) : null}
-                                                            <div style={{
-                                                                display: candidatePhoto ? 'none' : 'flex',
-                                                                alignItems: 'center',
-                                                                justifyContent: 'center',
-                                                                width: '100%',
-                                                                height: '100%'
-                                                            }}>
-                                                                <i className="fa-solid fa-user" style={{
-                                                                    fontSize: '4rem',
-                                                                    color: '#A3AED0'
-                                                                }}></i>
+                                                            <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
                                                             </div>
                                                         </div>
-
-                                                        {/* Information Table */}
+                                                        {viewedSubmission.pan_photo && (
+                                                            <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', flexShrink: 0, overflow: 'hidden' }}>
+                                                                <img src={viewedSubmission.pan_photo} alt="PAN Card" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                    <i className="fa-solid fa-id-card" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                         <div style={{ flex: 1 }}>
-                                                            <table style={{
-                                                                width: '100%',
-                                                                borderCollapse: 'collapse',
-                                                                background: 'white',
-                                                                border: '1px solid #E0E5F2',
-                                                                borderRadius: '12px',
-                                                                overflow: 'hidden'
-                                                            }}>
+                                                            <table style={{ width: '100%', borderCollapse: 'collapse', background: 'white', border: '1px solid #E0E5F2', borderRadius: '12px', overflow: 'hidden' }}>
                                                                 <tbody>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B',
-                                                                            width: '35%'
-                                                                        }}>Full Name</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B'
-                                                                        }}>{viewedSubmission.candidate_name}</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B', width: '35%' }}>Full Name</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B' }}>{viewedSubmission.candidate_name}</td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Email</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B'
-                                                                        }}>{viewedSubmission.candidate_email || 'N/A'}</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Email</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B' }}>{viewedSubmission.candidate_email || 'N/A'}</td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Job Title</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B'
-                                                                        }}>{viewedSubmission.assessment?.name || viewedSubmission.assessment?.display_name || viewedSubmission.job_title || viewedSubmission.required_skills || 'N/A'}</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Phone</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B' }}>{viewedSubmission.phone || 'N/A'}</td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>MCQ Score</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B',
-                                                                            fontWeight: '700'
-                                                                        }}>
-                                                                            {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                                                ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                                                : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>PAN Number</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700' }}>{viewedSubmission.pan_number || 'N/A'}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>PAN Verified</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: viewedSubmission.pan_verified ? '#05CD99' : '#EE5D50', fontWeight: '700' }}>{viewedSubmission.pan_verified ? '✓ Verified' : '✗ Not Verified'}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Job Title</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B' }}>{viewedSubmission.assessment?.name || viewedSubmission.assessment?.display_name || viewedSubmission.job_title || viewedSubmission.role || viewedSubmission.role_title || viewedSubmission.required_skills || 'N/A'}</td>
+                                                                    </tr>
+                                                                    <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>MCQ Score</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700' }}>
+                                                                            {viewedSubmission.results_breakdown?.mcq?.possible_points > 0 ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100) : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
                                                                         </td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Coding Score</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B',
-                                                                            fontWeight: '700'
-                                                                        }}>
-                                                                            {viewedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                                                ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                                                : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Coding Score</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700' }}>
+                                                                            {viewedSubmission.results_breakdown?.coding?.possible_points > 0 ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100) : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
                                                                         </td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Integrity Score</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50',
-                                                                            fontWeight: '700'
-                                                                        }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Integrity Score</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50', fontWeight: '700' }}>
                                                                             {viewedSubmission.integrity?.integrity_score ?? 100}% {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
                                                                         </td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Overall Result</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
-                                                                            fontWeight: '800'
-                                                                        }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Overall Result</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50', fontWeight: '800' }}>
                                                                             {viewedSubmission.percentage}%
                                                                         </td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Status</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B',
-                                                                            fontWeight: '700',
-                                                                            textTransform: 'uppercase'
-                                                                        }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Status</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700', textTransform: 'uppercase' }}>
                                                                             {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            background: '#F8F9FF',
-                                                                            fontWeight: '600',
-                                                                            color: '#1B254B'
-                                                                        }}>Submission Date</td>
-                                                                        <td style={{
-                                                                            padding: '0.75rem 1rem',
-                                                                            color: '#1B254B'
-                                                                        }}>{viewedSubmission.submitted_at ? new Date(viewedSubmission.submitted_at).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'N/A'}</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Submission Date</td>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B' }}>{viewedSubmission.submitted_at ? new Date(viewedSubmission.submitted_at).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'N/A'}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -1220,234 +1102,7 @@ const ResultsAI = () => {
                                                     </div>
                                                 );
                                             })()}
-=======
-                                                {/* PAN Card Photo */}
-                                                {viewedSubmission.pan_photo && (
-                                                    <div style={{
-                                                        width: '180px',
-                                                        height: '180px',
-                                                        background: '#F4F7FE',
-                                                        borderRadius: '12px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        border: '1px solid #E0E5F2',
-                                                        flexShrink: 0,
-                                                        overflow: 'hidden'
-                                                    }}>
-                                                        <img
-                                                            src={viewedSubmission.pan_photo}
-                                                            alt="PAN Card"
-                                                            style={{
-                                                                width: '100%',
-                                                                height: '100%',
-                                                                objectFit: 'cover'
-                                                            }}
-                                                            onError={(e) => {
-                                                                e.target.style.display = 'none';
-                                                                e.target.nextSibling.style.display = 'flex';
-                                                            }}
-                                                        />
-                                                        <div style={{
-                                                            display: 'none',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            width: '100%',
-                                                            height: '100%'
-                                                        }}>
-                                                            <i className="fa-solid fa-id-card" style={{
-                                                                fontSize: '4rem',
-                                                                color: '#A3AED0'
-                                                            }}></i>
-                                                        </div>
-                                                    </div>
-                                                )}
 
-                                                {/* Information Table */}
-                                                <div style={{ flex: 1 }}>
-                                                    <table style={{
-                                                        width: '100%',
-                                                        borderCollapse: 'collapse',
-                                                        background: 'white',
-                                                        border: '1px solid #E0E5F2',
-                                                        borderRadius: '12px',
-                                                        overflow: 'hidden'
-                                                    }}>
-                                                        <tbody>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B',
-                                                                    width: '35%'
-                                                                }}>Full Name</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.candidate_name}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Email</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.candidate_email || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Phone</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.phone || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>PAN Number</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700'
-                                                                }}>{viewedSubmission.pan_number || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>PAN Verified</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: viewedSubmission.pan_verified ? '#05CD99' : '#EE5D50',
-                                                                    fontWeight: '700'
-                                                                }}>{viewedSubmission.pan_verified ? '✓ Verified' : '✗ Not Verified'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Job Title</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.job_title || viewedSubmission.role || viewedSubmission.role_title || viewedSubmission.required_skills || 'N/A'}</td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>MCQ Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.results_breakdown?.mcq?.possible_points > 0
-                                                                        ? Math.round((viewedSubmission.results_breakdown.mcq.scored_points / viewedSubmission.results_breakdown.mcq.possible_points) * 100)
-                                                                        : 0}% ({viewedSubmission.results_breakdown?.mcq?.scored_points || 0} / {viewedSubmission.candidate_questions?.mcqs?.length || 0} Correct)
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Coding Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.results_breakdown?.coding?.possible_points > 0
-                                                                        ? Math.round((viewedSubmission.results_breakdown.coding.scored_points / viewedSubmission.results_breakdown.coding.possible_points) * 100)
-                                                                        : 0}% ({viewedSubmission.results_breakdown?.coding?.scored_points || 0} / {viewedSubmission.results_breakdown?.coding?.possible_points || 0} pts)
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Integrity Score</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: (viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '#05CD99' : '#EE5D50',
-                                                                    fontWeight: '700'
-                                                                }}>
-                                                                    {viewedSubmission.integrity?.integrity_score ?? 100}% {(viewedSubmission.integrity?.integrity_score ?? 100) >= 50 ? '✓ Reliable' : '⚠ Suspicious'}
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Overall Result</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
-                                                                    fontWeight: '800'
-                                                                }}>
-                                                                    {viewedSubmission.percentage}%
-                                                                </td>
-                                                            </tr>
-                                                            <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Status</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B',
-                                                                    fontWeight: '700',
-                                                                    textTransform: 'uppercase'
-                                                                }}>
-                                                                    {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    background: '#F8F9FF',
-                                                                    fontWeight: '600',
-                                                                    color: '#1B254B'
-                                                                }}>Submission Date</td>
-                                                                <td style={{
-                                                                    padding: '0.75rem 1rem',
-                                                                    color: '#1B254B'
-                                                                }}>{viewedSubmission.submitted_at}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            );
-                                        })()}
->>>>>>> origin/wed29
                                         </div>
                                     </>
                                 )}
