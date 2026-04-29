@@ -42,6 +42,13 @@ import logging
 
 import uuid
 
+<<<<<<< HEAD
+=======
+logger = logging.getLogger(__name__)
+MAX_CODING_TASKS = 50
+TOTAL_INTERVIEW_QUESTIONS = 13
+
+>>>>>>> origin/wed29
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
 
 import requests
@@ -56,6 +63,7 @@ from django.core.mail import send_mail
 
 import pandas as pd
 
+<<<<<<< HEAD
 
 
 # Setup Logger
@@ -68,6 +76,8 @@ TOTAL_INTERVIEW_QUESTIONS = 13
 
 
 
+=======
+>>>>>>> origin/wed29
 from api.views import ensure_role_exists
 
 from api.models import UserProfile
@@ -451,7 +461,11 @@ class BulkInviteView(APIView):
                 
 
                 try:
+<<<<<<< HEAD
 
+=======
+                    logger.info(f"=== STARTING EMAIL SEND for {email} ===")
+>>>>>>> origin/wed29
                     subject = "Invite to VerifiHireAI Interview Session"
 
                     
@@ -541,6 +555,7 @@ class BulkInviteView(APIView):
                     """
 
                     
+<<<<<<< HEAD
 
                     send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
 
@@ -548,16 +563,33 @@ class BulkInviteView(APIView):
 
                 except Exception as mail_error:
 
+=======
+                    logger.info(f"Preparing to send email to {email} via {settings.EMAIL_HOST}:{settings.EMAIL_PORT}")
+                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
+                    logger.info(f"=== EMAIL SENT SUCCESSFULLY to {email} ===")
+                except Exception as mail_error:
+                    import traceback
+>>>>>>> origin/wed29
                     error_msg = f"Failed to send email to {email}: {str(mail_error)}"
 
                     logger.error(error_msg)
+<<<<<<< HEAD
 
+=======
+                    logger.error(f"SMTP Error Details: {traceback.format_exc()}")
+                    logger.error(f"Email Settings: HOST={settings.EMAIL_HOST}, PORT={settings.EMAIL_PORT}, TLS={settings.EMAIL_USE_TLS}, USER={settings.EMAIL_HOST_USER}")
+>>>>>>> origin/wed29
                     # Temporary file logging for debugging
 
                     with open('email_errors.log', 'a') as f:
 
                         f.write(f"{timezone.now()} - {error_msg}\n")
+<<<<<<< HEAD
 
+=======
+                        f.write(f"{timezone.now()} - SMTP Settings: {settings.EMAIL_HOST}:{settings.EMAIL_PORT} (TLS:{settings.EMAIL_USE_TLS})\n")
+                        f.write(f"{timezone.now()} - Traceback: {traceback.format_exc()}\n\n")
+>>>>>>> origin/wed29
                 
 
             return Response({
@@ -1640,10 +1672,15 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
         now = timezone.now()
 
+<<<<<<< HEAD
 
 
         if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
 
+=======
+        # Only block if interview is truly completed (has completed_at and status is final)
+        if candidate.completed_at and candidate.status in ['Completed', 'Hired', 'Rejected']:
+>>>>>>> origin/wed29
             return Response(
 
                 {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
@@ -3351,7 +3388,13 @@ class CandidateReportDownloadView(APIView):
                 ["Full Name", candidate.full_name],
 
                 ["Email", candidate.email],
+<<<<<<< HEAD
 
+=======
+                ["Phone", candidate.phone or "N/A"],
+                ["PAN Number", candidate.pan_number or "N/A"],
+                ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
+>>>>>>> origin/wed29
                 ["Job Title", candidate.job_title or "N/A"],
 
                 ["Interview Score", f"{interview_total_score} / {total_possible_marks}"],
@@ -3422,7 +3465,37 @@ class CandidateReportDownloadView(APIView):
 
             elements.append(Spacer(1, 25))
 
+<<<<<<< HEAD
 
+=======
+            # 2.5 Identity Documents Section - PAN Card
+            if candidate.pan_photo:
+                elements.append(Paragraph("Identity Documents", styles['Heading3']))
+                elements.append(Spacer(1, 10))
+                
+                # PAN Card Image
+                try:
+                    pan_img_path = candidate.pan_photo.path
+                    if os.path.exists(pan_img_path):
+                        pan_img_elem = RLImage(pan_img_path, width=3.0*inch, height=2.0*inch)
+                        pan_caption = f"PAN Card: {candidate.pan_number or 'N/A'} (Verified: {'Yes' if candidate.pan_verified else 'No'})"
+                        
+                        pan_table = Table([
+                            [pan_img_elem],
+                            [Paragraph(pan_caption, styles['Small'])]
+                        ], colWidths=[3.0*inch])
+                        pan_table.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ]))
+                        elements.append(pan_table)
+                    else:
+                        elements.append(Paragraph("<i>PAN card image file not found on server.</i>", styles['Normal']))
+                except Exception as pan_error:
+                    elements.append(Paragraph(f"<i>Error loading PAN card image: {str(pan_error)}</i>", styles['Italic']))
+                
+                elements.append(Spacer(1, 25))
+>>>>>>> origin/wed29
 
             # 3. Interview Transcript
 
@@ -3794,6 +3867,178 @@ class LatestActiveBatchView(APIView):
 
             return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
 
+<<<<<<< HEAD
 
 
         return Response({"batch_id": None}, status=status.HTTP_200_OK)
+=======
+        return Response({"batch_id": None}, status=status.HTTP_200_OK)
+
+class PanValidationView(APIView):
+    """
+    Validates PAN card photo using OCR and compares with entered PAN number.
+    Returns extracted PAN number from photo and match status.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request):
+        try:
+            pan_photo = request.FILES.get('pan_photo')
+            entered_pan = request.data.get('pan_number', '').upper().strip()
+
+            if not pan_photo:
+                return Response({'error': 'PAN photo is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if not entered_pan:
+                return Response({'error': 'PAN number is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Validate PAN format (5 letters + 4 digits + 1 letter)
+            pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
+            if not re.match(pan_pattern, entered_pan):
+                return Response({
+                    'error': 'Invalid PAN format. Expected format: ABCDE1234F',
+                    'is_valid': False
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Read and process image
+            image = Image.open(pan_photo)
+            
+            # Try using EasyOCR if available
+            extracted_text = ""
+            try:
+                reader = _get_reader()
+                if reader:
+                    img_array = np.array(image)
+                    result = reader.readtext(img_array, detail=0)
+                    extracted_text = ' '.join(result)
+                    logger.info(f"EasyOCR extracted text: {extracted_text}")
+            except Exception as ocr_error:
+                logger.warning(f"EasyOCR failed: {str(ocr_error)}")
+
+            # If EasyOCR fails, try using Groq Vision
+            if not extracted_text:
+                try:
+                    from groq import Groq
+                    groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+                    
+                    import base64
+                    buffered = io.BytesIO()
+                    image.save(buffered, format="JPEG")
+                    img_base64 = base64.b64encode(buffered.getvalue()).decode()
+                    
+                    response = groq_client.chat.completions.create(
+                        model="llama-3.2-11b-vision-preview",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": [
+                                    {"type": "text", "text": "Extract the PAN number from this PAN card image. The PAN number is 10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F). Return ONLY the PAN number, nothing else."},
+                                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_base64}"}}
+                                ]
+                            }
+                        ],
+                        max_tokens=20
+                    )
+                    extracted_text = response.choices[0].message.content.upper().strip()
+                    logger.info(f"Groq Vision extracted text: {extracted_text}")
+                except Exception as groq_error:
+                    logger.warning(f"Groq Vision failed: {str(groq_error)}")
+
+            # Extract PAN-like pattern from text
+            pan_from_photo = None
+            if extracted_text:
+                pan_matches = re.findall(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', extracted_text.upper())
+                if pan_matches:
+                    pan_from_photo = pan_matches[0]
+
+            # Compare entered PAN with extracted PAN
+            is_verified = False
+            if pan_from_photo:
+                is_verified = (entered_pan == pan_from_photo)
+
+            return Response({
+                'entered_pan': entered_pan,
+                'extracted_pan': pan_from_photo,
+                'is_verified': is_verified,
+                'extracted_text': extracted_text if settings.DEBUG else None,
+                'message': 'PAN verified successfully' if is_verified else 'PAN mismatch. Please check your PAN number and photo.'
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"PAN validation error: {str(e)}", exc_info=True)
+            return Response({
+                'error': f'Failed to validate PAN: {str(e)}',
+                'is_verified': False
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CandidateRegistrationUpdateView(APIView):
+    """
+    Updates candidate registration details (phone, PAN, resume) when they first open the interview link.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, public_token):
+        try:
+            candidate = Candidate.objects.get(public_token=public_token)
+
+            phone = request.data.get('phone')
+            if phone:
+                candidate.phone = phone
+
+            pan_number = request.data.get('pan_number')
+            if pan_number:
+                pan_number = pan_number.upper().strip()
+                pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
+                if not re.match(pan_pattern, pan_number):
+                    return Response({'error': 'Invalid PAN format. Expected: ABCDE1234F'}, status=status.HTTP_400_BAD_REQUEST)
+                candidate.pan_number = pan_number
+
+            pan_photo = request.FILES.get('pan_photo')
+            if pan_photo:
+                candidate.pan_photo = pan_photo
+
+            pan_verified = request.data.get('pan_verified')
+            if pan_verified is not None:
+                # Convert string to boolean
+                if isinstance(pan_verified, str):
+                    candidate.pan_verified = pan_verified.lower() == 'true'
+                else:
+                    candidate.pan_verified = bool(pan_verified)
+
+            resume = request.FILES.get('resume')
+            if resume:
+                candidate.resume = resume
+
+            full_name = request.data.get('full_name')
+            if full_name:
+                candidate.full_name = full_name
+
+            email = request.data.get('email')
+            if email:
+                candidate.email = email
+
+            candidate.save()
+
+            return Response({
+                'success': True,
+                'message': 'Registration details updated successfully',
+                'candidate': {
+                    'id': candidate.id,
+                    'full_name': candidate.full_name,
+                    'email': candidate.email,
+                    'phone': candidate.phone,
+                    'pan_number': candidate.pan_number,
+                    'pan_verified': candidate.pan_verified,
+                    'has_resume': bool(candidate.resume)
+                }
+            }, status=status.HTTP_200_OK)
+
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"Registration update error: {str(e)}", exc_info=True)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+>>>>>>> origin/wed29
