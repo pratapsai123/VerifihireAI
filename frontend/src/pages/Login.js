@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
 import { API_BASE_URL } from '../apiConfig';
+import { setToken } from '../utils/authStorage';
 
 function Login() {
   const navigate = useNavigate();
@@ -71,13 +72,9 @@ function Login() {
         // Old flow - direct login (shouldn't happen with new implementation)
         // Success - save token if provided
         if (response.data.token) {
-          localStorage.setItem('authToken', response.data.token);
-        }
-        if (response.data.access) {
-          localStorage.setItem('accessToken', response.data.access);
-        }
-        if (response.data.refresh) {
-          localStorage.setItem('refreshToken', response.data.refresh);
+          setToken(response.data.token);
+        } else if (response.data.access) {
+          setToken(response.data.access);
         }
 
         // Redirect to dashboard after successful login
@@ -138,13 +135,9 @@ function Login() {
 
       // Success - save token if provided
       if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-      }
-      if (response.data.access) {
-        localStorage.setItem('accessToken', response.data.access);
-      }
-      if (response.data.refresh) {
-        localStorage.setItem('refreshToken', response.data.refresh);
+        setToken(response.data.token);
+      } else if (response.data.access) {
+        setToken(response.data.access);
       }
 
       // Save user data if provided
