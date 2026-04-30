@@ -273,12 +273,6 @@ class SubmitAssessmentView(APIView):
                     candidate.status = 'Assessment Passed'
                     candidate.save(update_fields=['score', 'status'])
 
-                    # SYNC SUBMISSION BATCH: Ensure the raw submission record is in the same batch as the candidate record
-                    # This prevents the UI from showing a "duplicate" row or another batch for the same candidate.
-                    if candidate.batch_id and submission.batch_id != candidate.batch_id:
-                        submission.batch_id = candidate.batch_id
-                        submission.batch_name = candidate.batch_name
-                        submission.save(update_fields=['batch_id', 'batch_name'])
                 else:
                     logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
 
