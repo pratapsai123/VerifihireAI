@@ -77,7 +77,7 @@ def send_custom_assessment_result_task(invitation_id):
             inv.save(update_fields=['status'])
             
             # Send 'Cleared' Email with slot booking link
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
             booking_link = f"{frontend_base}/book-interview/{inv.token}"
             
             subject = f"Congratulations! You've cleared the assessment for {inv.assessment.name}"
@@ -179,7 +179,7 @@ def send_interview_confirmation_task(slot_id):
             logger.error(f"Slot {slot_id} has no invitation linked.")
             return
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
         # Join links: /live-interview?token=<inv.token>
         candidate_link = f"{frontend_base}/live-interview?token={inv.token}"
         interviewer_link = f"{frontend_base}/live-interview-interviewer?token={inv.token}"

@@ -18,8 +18,8 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
-const MACOS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.dmg';
+const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
+const MACOS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.dmg';
 
 export default function SecurePrecheck() {
   const { token } = useParams();

@@ -3,12 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "main": "server.js",
+  "bin": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "pkg . --targets node18-win-x64 --output VerifiHireSecureAgent.exe && copy VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
+  },
+  "pkg": {
+    "assets": [
+      "blacklist.json"
+    ]
   },
   "dependencies": {
     "axios": "^1.13.1",
     "cors": "^2.8.5",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
   }
 }

@@ -25,7 +25,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
 
 
 # Application definition
@@ -126,9 +126,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifihireai'),
+        'NAME': os.environ.get('DB_NAME', 'verifi'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),
@@ -204,13 +204,13 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "http://localhost:3000",
+    "https://verifihireai.com",
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://localhost:3000",
-    "http://localhost:3000",
+    "https://verifihireai.com",
+    "https://verifihireai.com",
     "http://20.205.31.46",
-    "http://localhost:3000",
+    "https://verifihireai.com",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
