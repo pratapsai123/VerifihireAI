@@ -77,8 +77,25 @@ class SubmitAssessmentView(APIView):
         token = data.get('token')
         name = data.get('name')
         email = data.get('email', '').strip().lower()
-        answers = data.get('answers', {})
-        coding_results = data.get('coding_results', {}) # Captured test case results
+        phone = data.get('phone', '')
+        pan_number = data.get('pan_number', '')
+        pan_photo = request.FILES.get('pan_photo')
+        pan_verified_raw = data.get('pan_verified', False)
+        # Handle string 'true'/'false' from FormData
+        if isinstance(pan_verified_raw, str):
+            pan_verified = pan_verified_raw.lower() == 'true'
+        else:
+            pan_verified = bool(pan_verified_raw)
+        # Parse JSON strings from FormData
+        answers_raw = data.get('answers', '{}')
+        coding_results_raw = data.get('coding_results', '{}')
+        try:
+            import json
+            answers = json.loads(answers_raw) if isinstance(answers_raw, str) else answers_raw
+            coding_results = json.loads(coding_results_raw) if isinstance(coding_results_raw, str) else coding_results_raw
+        except json.JSONDecodeError:
+            answers = {}
+            coding_results = {}
 
         if not token or not name or not email:
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -108,6 +125,10 @@ class SubmitAssessmentView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
+                    phone=phone,
+                    pan_number=pan_number,
+                    pan_photo=pan_photo,
+                    pan_verified=pan_verified,
                     status='ONGOING',
                     batch_id=assessment.batch_id,
                     batch_name=assessment.batch_name
@@ -119,17 +140,24 @@ class SubmitAssessmentView(APIView):
                     # Also update email if it was overridden
                     if email and submission.candidate_email != email:
                         submission.candidate_email = email
-                    
-                    
-                    # CROSS-UPDATE: Synchronize with the Candidate record if exists
-                    try:
-                        candidate = Candidate.objects.filter(email__iexact=email).first()
-                        if candidate:
-                            if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
-                                candidate.full_name = name
-                                candidate.save(update_fields=['full_name'])
-                    except Exception as sync_err:
-                        logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
+                # Update PAN details if provided
+                if phone:
+                    submission.phone = phone
+                if pan_number:
+                    submission.pan_number = pan_number
+                if pan_photo:
+                    submission.pan_photo = pan_photo
+                submission.pan_verified = pan_verified
+
+                # CROSS-UPDATE: Synchronize with the Candidate record if exists
+                try:
+                    candidate = Candidate.objects.filter(email__iexact=email).first()
+                    if candidate:
+                        if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
+                            candidate.full_name = name
+                            candidate.save(update_fields=['full_name'])
+                except Exception as sync_err:
+                    logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
             # Use candidate_questions (the subset) instead of the whole pool
             generated_content = submission.candidate_questions or assessment.generated_content or {}
@@ -898,6 +926,15 @@ class CreateSubmissionView(APIView):
         name = request.data.get('candidate_name')
         email = request.data.get('candidate_email', '').strip().lower()
         snapshot = request.data.get('snapshot')
+        phone = request.data.get('phone', '')
+        pan_number = request.data.get('pan_number', '')
+        pan_photo = request.FILES.get('pan_photo')
+        pan_verified_raw = request.data.get('pan_verified', False)
+        # Handle string 'true'/'false' from FormData
+        if isinstance(pan_verified_raw, str):
+            pan_verified = pan_verified_raw.lower() == 'true'
+        else:
+            pan_verified = bool(pan_verified_raw)
 
         if not all([token, name, email]):
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -935,6 +972,10 @@ class CreateSubmissionView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
+                    phone=phone,
+                    pan_number=pan_number,
+                    pan_photo=pan_photo,
+                    pan_verified=pan_verified,
                     status='ONGOING',
                     batch_id=assessment.batch_id,
                     batch_name=assessment.batch_name
@@ -2221,9 +2262,17 @@ class AIAssessmentReportDownloadView(APIView):
                             continue
 
             # Info table data
+            # Handle old submissions without PAN data
+            if submission.pan_number:
+                pan_verified_text = "Yes ✓" if submission.pan_verified else "No ✗"
+            else:
+                pan_verified_text = "N/A"
             info_data = [
                 ['Full Name', submission.candidate_name],
                 ['Email', submission.candidate_email or 'N/A'],
+                ['Phone', submission.phone or 'N/A'],
+                ['PAN Number', submission.pan_number or 'N/A'],
+                ['PAN Verified', pan_verified_text],
                 ['Job Title', assessment.required_skills or 'N/A'],
                 ['MCQ Score', f"{mcq_pct}% ({mcq_scored} / {mcq_total} Correct)"],
                 ['Coding Score', f"{coding_pct}% ({coding_scored} / {coding_total} pts)"],

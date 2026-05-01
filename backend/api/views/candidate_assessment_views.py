@@ -1935,11 +1935,11 @@ def results_overview_view(request):
                     'score': getattr(s, 'score', 0),
                     'total': getattr(s, 'total_possible', 100),
                     'percentage': getattr(s, 'percentage', 0),
-                    
+
                     'objective_score': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('scored_points', 0),
                     'objective_total': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('possible_points', 0),
                     'objective_percentage': getattr(s, 'mcq_score', 0),
-                    
+
                     'coding_score': getattr(s, 'results_breakdown', {}).get('coding', {}).get('scored_points', 0),
                     'coding_total': getattr(s, 'results_breakdown', {}).get('coding', {}).get('possible_points', 0),
                     'coding_percentage': getattr(s, 'coding_score', 0),
@@ -1959,7 +1959,12 @@ def results_overview_view(request):
                     'batch_id': s.batch_id,
                     'batch_name': s.batch_name or (a.batch_name if hasattr(a, 'batch_name') else None),
                     'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
-                    'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
+                    'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions,
+                    # PAN authentication fields
+                    'phone': getattr(s, 'phone', None),
+                    'pan_number': getattr(s, 'pan_number', None),
+                    'pan_photo': request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None,
+                    'pan_verified': getattr(s, 'pan_verified', False)
                 }
             )
 
