@@ -131,4 +131,5 @@ from .security_views import (
     security_heartbeat_view,
     security_session_status_view,
     security_signatures_view,
+    check_violation_status_view,
 )

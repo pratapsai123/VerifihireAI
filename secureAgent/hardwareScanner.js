@@ -38,20 +38,13 @@ async function initBaseline() {
   try {
     const scan = await scanHardwareDevices();
     STARTUP_BASELINE = {
-      // Include BOTH blocked-class AND logOnly-class InstanceIds.
-      // This ensures built-in devices (laptop mouse, keyboard, bluetooth adapter)
-      // are whitelisted and never reported as "newly connected".
       instanceIds: new Set([
         ...(scan.blocked || []).map(d => d.instanceId),
         ...(scan.logOnly || []).map(d => d.instanceId),
       ]),
       monitorCount: scan.monitorCount || 1,
     };
-    console.log(
-      `[hardwareScanner] Startup baseline: ${STARTUP_BASELINE.instanceIds.size} device(s) whitelisted, ${STARTUP_BASELINE.monitorCount} monitor(s)`
-    );
-  } catch (err) {
-    console.error('[hardwareScanner] initBaseline error:', err.message);
+  } catch {
     STARTUP_BASELINE = { instanceIds: new Set(), monitorCount: 1 };
   }
 }
@@ -86,9 +79,7 @@ async function scanHardwareDevices() {
         logOnly.push({ class: cls, name, instanceId });
       }
     }
-  } catch (err) {
-    console.error('[hardwareScanner] PnP scan error:', err.message);
-  }
+  } catch { /* non-fatal */ }
 
   // Pass 2: Active displays — use Get-PnpDevice -Class Monitor (Win32_DesktopMonitor is unreliable)
   let monitorCount = 1;
@@ -108,9 +99,7 @@ async function scanHardwareDevices() {
       const out = await run(fallbackCmd);
       monitorCount = parseInt(out.trim(), 10) || 1;
       monitors = [`${monitorCount} screen(s) detected`];
-    } catch {
-      console.error('[hardwareScanner] Monitor scan error:', err.message);
-    }
+    } catch { /* non-fatal */ }
   }
 
   return { blocked, logOnly, monitorCount, monitors };

@@ -471,6 +471,7 @@ const ResultsAI = () => {
         if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
         if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };

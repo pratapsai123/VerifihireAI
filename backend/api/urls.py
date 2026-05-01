@@ -120,6 +120,7 @@ urlpatterns = [
     path('security-check', views.security_check_view, name='security_check'),
     path('security-heartbeat', views.security_heartbeat_view, name='security_heartbeat'),
     path('security-session/<uuid:session_id>/status', views.security_session_status_view, name='security_session_status'),
+    path('security-session/<uuid:token>/violation-status', views.check_violation_status_view, name='check_violation_status'),
     path('security-signatures', views.security_signatures_view, name='security_signatures'),
 
 ]

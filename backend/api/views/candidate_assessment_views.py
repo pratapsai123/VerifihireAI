@@ -402,6 +402,10 @@ def get_invitation_public_view(request, token):
     Public endpoint for candidates: fetch assessment + questions using a CandidateInvitation token.
     """
     try:
+        from api.models import SecuritySession
+        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+            return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
+
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
         check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
 

@@ -414,6 +414,13 @@ def get_interview_invitation_by_token_view(request, token):
     Get interview invitation details by token.
     """
     try:
+        from api.models import SecuritySession
+        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+            return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
+    except Exception:
+        pass
+
+    try:
         try:
             invitation = InterviewInvitation.objects.select_related('interview').get(token=token)
         except InterviewInvitation.DoesNotExist:
