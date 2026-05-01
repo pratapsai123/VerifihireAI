@@ -558,7 +558,10 @@ function LiveInterview() {
             chatPanelVisible={chatPanelVisible}
             setChatPanelVisible={setChatPanelVisible}
             chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
             onSendMessage={handleChatSend}
+            sessionId={sessionId}
+            localName={candidateName}
           />
         </div>
 

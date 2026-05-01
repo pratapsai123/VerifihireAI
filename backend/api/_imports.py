@@ -43,6 +43,7 @@ from .models import (
     CodingTestCase,
     Interview,
     InterviewInvitation,
+    InterviewChatMessage,
     LiveInterviewFeedback,
     JobRole,
     CandidateIntegrity,
