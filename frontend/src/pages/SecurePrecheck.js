@@ -6,6 +6,7 @@ import {
   runLocalHardwareScan,
   startBackendSecuritySession,
   startLocalMonitor,
+  checkViolationStatus,
 } from '../security/securityApi';
 import { markPrecheckPassed, writeSessionRecord } from '../security/sessionStorage';
 import { logCandidateActivity } from '../utils/activityLogger';
@@ -18,8 +19,8 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
-const MACOS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.dmg';
+const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
+const MACOS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.dmg';
 
 export default function SecurePrecheck() {
   const { token } = useParams();
@@ -39,6 +40,21 @@ export default function SecurePrecheck() {
 
   const startSecureFlow = async () => {
     if (!token) return;
+
+    try {
+      setPhase('checking');
+      setStatusMessage('Verifying exam policy status...');
+      const { is_violated } = await checkViolationStatus(token);
+      if (is_violated) {
+        setPhase('permanently_blocked');
+        setStatusMessage('Access Denied');
+        setError('You have violated our exam policy. Access to this exam has been permanently revoked.');
+        return;
+      }
+    } catch (err) {
+      console.warn('Failed to check violation status:', err);
+    }
+
     try {
       setError('');
       setPhase('checking');
@@ -107,8 +123,13 @@ export default function SecurePrecheck() {
 
       navigate(targetRoute, { replace: true });
     } catch (startErr) {
-      setPhase('error');
-      setError(startErr?.response?.data?.error || startErr?.message || 'Failed to start secure monitor');
+      if (startErr?.response?.data?.is_violated) {
+        setPhase('permanently_blocked');
+        setError(startErr.response.data.error || 'Access permanently revoked due to policy violation.');
+      } else {
+        setPhase('error');
+        setError(startErr?.response?.data?.error || startErr?.message || 'Failed to start secure monitor');
+      }
     }
   };
 
@@ -132,6 +153,9 @@ export default function SecurePrecheck() {
     }
     if (phase === 'not_running' || phase === 'blocked' || phase === 'blocked_hardware' || phase === 'error') {
       return <button className="btn btn-primary" onClick={startSecureFlow}>Retry</button>;
+    }
+    if (phase === 'permanently_blocked') {
+      return null; // No retry for permanent violation
     }
     return null;
   };

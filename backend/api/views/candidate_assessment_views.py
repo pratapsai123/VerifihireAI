@@ -84,7 +84,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -375,6 +375,10 @@ def get_invitation_public_view(request, token):
     Public endpoint for candidates: fetch assessment + questions using a CandidateInvitation token.
     """
     try:
+        from api.models import SecuritySession
+        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+            return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
+
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
         check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
 

@@ -1705,6 +1705,7 @@ class SecuritySession(models.Model):
         ('CONTINUE', 'CONTINUE'),
         ('STOP', 'STOP'),
         ('PAUSE', 'PAUSE'),
+        ('WARN', 'WARN'),
     ]
 
     session_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
@@ -1719,6 +1720,8 @@ class SecuritySession(models.Model):
     blocked_hardware = models.CharField(max_length=512, blank=True, null=True)
     reason = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    violation_count = models.IntegerField(default=0)
+    violation_start_time = models.DateTimeField(blank=True, null=True)
     last_heartbeat = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

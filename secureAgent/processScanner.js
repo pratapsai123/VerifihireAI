@@ -43,9 +43,7 @@ async function scanWindows() {
         sessionId: p.SessionId !== undefined ? p.SessionId : -1,
       });
     }
-  } catch (err) {
-    console.error('[processScanner] scanWindows pass1 error:', err.message);
-  }
+  } catch { /* non-fatal */ }
 
   // --- Pass 2: Get-CimInstance Win32_Process (catches ALL processes, including 32-bit) ---
   // Win32_Process is cross-bitness — it sees both 32-bit and 64-bit processes.
@@ -68,8 +66,7 @@ async function scanWindows() {
         sessionId: p.SessionId !== undefined ? p.SessionId : -1,
       });
     }
-  } catch (err) {
-    console.error('[processScanner] scanWindows pass2 error:', err.message);
+  } catch {
     // Final fallback: tasklist (name-only, no session info)
     try {
       const out = await run('tasklist /fo csv /nh');
@@ -146,9 +143,7 @@ async function getConnectionsByPidWindows() {
         remotePort: c.RemotePort || 0,
       });
     }
-  } catch (err) {
-    console.error('[processScanner] getConnectionsByPidWindows error:', err?.message || err);
-  }
+  } catch { /* non-fatal */ }
   return map;
 }
 
@@ -171,9 +166,7 @@ async function getWindowTitlesWindows() {
         });
       }
     }
-  } catch (err) {
-    console.error('[processScanner] getWindowTitlesWindows error:', err?.message || err);
-  }
+  } catch { /* non-fatal */ }
   return map;
 }
 

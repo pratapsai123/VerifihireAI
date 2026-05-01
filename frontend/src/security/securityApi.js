@@ -44,3 +44,8 @@ export const fetchSecuritySessionStatus = async (sessionId) => {
   const res = await axios.get(`${API_BASE_URL}/security-session/${sessionId}/status`, { timeout: 8000 });
   return res.data;
 };
+
+export const checkViolationStatus = async (token) => {
+  const res = await axios.get(`${API_BASE_URL}/security-session/${token}/violation-status`, { timeout: 8000 });
+  return res.data;
+};

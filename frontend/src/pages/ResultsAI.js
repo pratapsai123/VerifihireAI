@@ -491,7 +491,7 @@ const ResultsAI = () => {
         if (activeTab === 'fully_automatic') return unifyAutomaticResults(roleData);
         if (activeTab === 'resume') return roleData.resume.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
-        if (activeTab === 'interview') return roleData.interview.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, type: 'candidate', deleteKey: r.submission_id }));
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };
