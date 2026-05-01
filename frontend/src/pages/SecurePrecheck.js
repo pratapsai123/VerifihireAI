@@ -34,8 +34,11 @@ export default function SecurePrecheck() {
 
   const targetRoute = useMemo(() => {
     const builder = TARGET_ROUTE_MAP[type] || TARGET_ROUTE_MAP.assessment;
-    return token ? builder(token) : '/';
-  }, [type, token]);
+    const baseRoute = token ? builder(token) : '/';
+    // Preserve query parameters (name, email) when navigating
+    const queryParams = query.toString();
+    return queryParams ? `${baseRoute}?${queryParams}` : baseRoute;
+  }, [type, token, query]);
 
   const startSecureFlow = async () => {
     if (!token) return;

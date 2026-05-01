@@ -101,30 +101,8 @@ const ResultsAI = () => {
             const allResultsRaw = Array.isArray(resultsResp.data) ? resultsResp.data : (resultsResp.data?.results || []);
             const rolesList = Array.isArray(rolesResp.data) ? rolesResp.data : (rolesResp.data?.results || []);
 
-            // FIRST PASS: Map emails to their primary "Fully Automatic" batch info
-            const emailToBatch = {};
-            allResultsRaw.forEach(r => {
-                const sid = String(r.submission_id || '');
-                if (sid.startsWith('aicand_')) {
-                    const email = (r.email || r.candidate?.email || '').toLowerCase();
-                    if (email && r.batch_id) {
-                        emailToBatch[email] = { id: r.batch_id, name: r.batch_name };
-                    }
-                }
-            });
-
-            // SECOND PASS: Clean and categorize
-            const allResults = allResultsRaw.map(r => {
-                const sid = String(r.submission_id || '');
-                const email = (r.email || r.candidate_email || r.candidate?.email || '').toLowerCase();
-
-                // If this is a raw AI submission (ai_) but we have an aicand_ record for this email,
-                // force it into the same batch so they group together and don't create duplicates.
-                if (sid.startsWith('ai_') && emailToBatch[email]) {
-                    return { ...r, batch_id: emailToBatch[email].id, batch_name: emailToBatch[email].name };
-                }
-                return r;
-            });
+            // Categorize and clean results
+            const allResults = allResultsRaw.map(r => r);
 
             // Separate into types for UI tabs
             const resResults = [];
@@ -489,9 +467,9 @@ const ResultsAI = () => {
         if (!selectedRole || !groupedData[selectedRole]) return [];
         const roleData = groupedData[selectedRole];
         if (activeTab === 'fully_automatic') return unifyAutomaticResults(roleData);
-        if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, type: 'candidate', deleteKey: r.submission_id }));
-        if (activeTab === 'assessment') return roleData.assessment.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
-        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, type: 'candidate', deleteKey: r.submission_id }));
+        if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
+        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };
