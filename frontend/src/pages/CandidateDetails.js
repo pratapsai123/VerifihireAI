@@ -301,13 +301,14 @@ const CandidateDetails = ({ token, onComplete }) => {
     extractedPan: null,
     panMatch: null,
     isExtractingPan: false,
-    extractionFailed: false, // New: track if all strategies failed
-    extractionStatus: '',    // New: show current strategy/rotation
-    extractionReason: null,  // New: reason for failure from backend
-    manualConfirmation: false, // New: user overrides validaton
-    snapshotValid: false, // Whether captured snapshot has face and is not blurry
-    invitedEmail: null, // Store the email they were invited with for validation
-    submissionError: null, // New: for identity mismatch or critical errors
+    extractionFailed: false,
+    extractionStatus: '',
+    extractionReason: null,
+    manualConfirmation: false,
+    snapshotValid: false,
+    invitedEmail: null,
+    submissionError: null,
+    isVerifying: false,
   });
 
   // Live re-verification of PAN when input changes
@@ -692,6 +693,9 @@ const CandidateDetails = ({ token, onComplete }) => {
       }
 
       formData.append('entered_with_consent', data.manualConfirmation);
+      
+      // Set verifying state
+      setData(prev => ({ ...prev, isVerifying: true }));
 
       // Send to backend API
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
@@ -730,9 +734,11 @@ const CandidateDetails = ({ token, onComplete }) => {
           console.error('Error saving candidate details:', error);
           const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
           
-          if (error?.response?.status === 403 && errorMessage.includes("Identity Mismatch")) {
-            setData(prev => ({ ...prev, submissionError: errorMessage }));
+          // Display any 403 identity error in the premium "Access Denied" box
+          if (error?.response?.status === 403) {
+            setData(prev => ({ ...prev, submissionError: errorMessage, isVerifying: false }));
           } else {
+            setData(prev => ({ ...prev, isVerifying: false }));
             alert('Error: ' + errorMessage);
           }
         });
@@ -1098,10 +1104,15 @@ const CandidateDetails = ({ token, onComplete }) => {
           <div className="candidate-button-row">
             <button
               type="submit"
-              className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
-              disabled={!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)}
+              className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || data.isVerifying || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
+              disabled={!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || data.isVerifying || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)}
             >
-              Submit Application
+              {data.isVerifying ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <span className="candidate-spinner"></span>
+                  Verifying Identity...
+                </div>
+              ) : 'Submit Application'}
             </button>
           </div>
 

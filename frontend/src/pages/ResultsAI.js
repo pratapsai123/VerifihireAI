@@ -117,7 +117,7 @@ const ResultsAI = () => {
             const allResults = allResultsRaw.map(r => {
                 const sid = String(r.submission_id || '');
                 const email = (r.email || r.candidate_email || r.candidate?.email || '').toLowerCase();
-                
+
                 // If this is a raw AI submission (ai_) but we have an aicand_ record for this email,
                 // force it into the same batch so they group together and don't create duplicates.
                 if (sid.startsWith('ai_') && emailToBatch[email]) {
@@ -357,10 +357,10 @@ const ResultsAI = () => {
                     params.submission_id = options.subId.toString().replace('ai_', '');
                 }
             }
-            
+
             const resp = await axios.get(`${API_BASE_URL}/ai/submissions/`, { params });
             let submissions = resp.data?.results || resp.data || [];
-            
+
             // If no results with batch filters, try email alone as fallback
             if (submissions.length === 0 && params.candidate_email && (params.batch_name || params.batch_id)) {
                 const fallbackParams = { candidate_email: params.candidate_email };
@@ -489,9 +489,9 @@ const ResultsAI = () => {
         if (!selectedRole || !groupedData[selectedRole]) return [];
         const roleData = groupedData[selectedRole];
         if (activeTab === 'fully_automatic') return unifyAutomaticResults(roleData);
-        if (activeTab === 'resume') return roleData.resume.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, type: 'candidate', deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
-        if (activeTab === 'interview') return roleData.interview.filter(r => !String(r.submission_id || '').startsWith('aicand_')).map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
+        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, type: 'candidate', deleteKey: r.submission_id }));
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };

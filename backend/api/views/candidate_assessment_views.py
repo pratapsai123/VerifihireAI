@@ -4,6 +4,8 @@ from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityS
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
 from ..models import CandidateSubmission
 from .assessment_views import _is_valid_pan
+from django.core.files.base import ContentFile
+import base64
 
 
 def _get_filtered_warning_logs(warning_logs):
@@ -25,6 +27,31 @@ def _get_filtered_warning_logs(warning_logs):
                 continue
         filtered.append(log)
     return filtered
+
+
+def _save_identity_violation_screenshot(invitation, snapshot_base64, event_type):
+    """
+    Saves a base64 snapshot as an IntegrityScreenshot record.
+    """
+    try:
+        from ..models import IntegrityScreenshot
+        if not snapshot_base64 or not isinstance(snapshot_base64, str):
+            return
+            
+        if ',' in snapshot_base64:
+            snapshot_base64 = snapshot_base64.split(',', 1)[1]
+        
+        img_data = base64.b64decode(snapshot_base64)
+        filename = f"identity_violation_{invitation.id}_{int(timezone.now().timestamp())}.jpg"
+        
+        IntegrityScreenshot.objects.create(
+            invitation=invitation,
+            event_type=event_type,
+            webcam_screenshot=ContentFile(img_data, name=filename)
+        )
+        print(f"[Integrity] Saved {event_type} screenshot for invitation {invitation.id}")
+    except Exception as e:
+        print(f"Failed to save identity violation screenshot: {e}")
 
 
 @csrf_exempt
@@ -84,7 +111,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -2544,11 +2571,31 @@ def save_all_candidate_details_view(request):
             entered_with_consent = entered_with_consent.lower() == 'true'
 
         # Identity Linkage and Verification
-        # Link email + PAN as a single identity and verify face consistency
+        # 1. Normalize credentials
         norm_email = email.lower().strip()
         norm_pan = pan_number.strip().upper()
         person_id = f"{norm_email}_{norm_pan}"
         
+        # 2. Strict PAN Consistency Check (New Security Rule)
+        # Check if this email is already registered with a DIFFERENT PAN card
+        existing_by_email = IdentityLink.objects.filter(email=norm_email).first()
+        if existing_by_email and existing_by_email.pan_number != norm_pan:
+            # Capture Violation Screenshot
+            _save_identity_violation_screenshot(inv, snapshot, "Identity Fraud (PAN Mismatch)")
+            return Response({
+                'error': "Identity Fraud Detected: This email is already registered with a different PAN card. You cannot use a different PAN for this identity."
+            }, status=status.HTTP_403_FORBIDDEN)
+
+        # Check if this PAN is already registered with a DIFFERENT email
+        existing_by_pan = IdentityLink.objects.filter(pan_number=norm_pan).first()
+        if existing_by_pan and existing_by_pan.email != norm_email:
+            # Capture Violation Screenshot
+            _save_identity_violation_screenshot(inv, snapshot, "Identity Fraud (Email Swapping)")
+            return Response({
+                'error': "Identity Fraud Detected: This PAN card is already linked to another identity. Assessment has been stopped."
+            }, status=status.HTTP_403_FORBIDDEN)
+
+        # 3. Biometric Verification
         identity_link = IdentityLink.objects.filter(email=norm_email, pan_number=norm_pan).first()
         
         verify_status = False
@@ -2558,21 +2605,17 @@ def save_all_candidate_details_view(request):
             # Verification: Compare current snapshot with the registered identity face
             verify_result = verify_face_with_deepface(person_id, snapshot)
             verify_status = verify_result.get('verified', False)
-            # Distance: usually 0 is perfect match, threshold is ~0.4 for ArcFace
-            # We convert it to a score where 1.0 is perfect and >0.6 is match
             distance = verify_result.get('distance', 1.0)
             match_score = max(0.0, 1.0 - distance)
 
-            # If verify fails (verified is False), or if there was an error in verification
             if verify_status == False:
-                # Save the mismatch status even if we reject, for audit trails if possible
-                # But since we return 403, the update_or_create below won't run.
-                # However, the user wants to "stop assessment", so returning 403 is correct.
+                # Capture Violation Screenshot
+                _save_identity_violation_screenshot(inv, snapshot, "Identity Face Mismatch")
                 return Response({
                     'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
                 }, status=status.HTTP_403_FORBIDDEN)
         else:
-            # Linkage: Register the candidate's face as the canonical identity for this Email + PAN
+            # Linkage: Register the candidate's face for the first time
             reg_result = register_face_with_deepface(person_id, snapshot)
             if reg_result.get('success'):
                 IdentityLink.objects.create(
@@ -2583,8 +2626,6 @@ def save_all_candidate_details_view(request):
                 verify_status = True
                 match_score = 1.0
             else:
-                # CRITICAL: If we can't register the identity (e.g. service down or no face),
-                # we MUST NOT allow the candidate to proceed, otherwise the identity check is bypassed.
                 error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
                 return Response({
                     'error': f"Identity Verification System Error: {error_msg}"

@@ -25,7 +25,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
 
 
 # Application definition
@@ -126,9 +126,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'verifi'),
+        'NAME': os.environ.get('DB_NAME', 'PAN'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),
@@ -204,13 +204,13 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://verifihireai.com",
-    "https://verifihireai.com",
+    "http://localhost:3000",
+    "http://localhost:3000",
     "http://20.205.31.46",
-    "https://verifihireai.com",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -260,8 +260,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='edumala.rakesh@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='yuuh zsee mrdf ucdj')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
 GROQ_API_KEYS = [
     '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',
