@@ -688,17 +688,73 @@
 [2026-04-30 05:29:25.433256+00:00] Direct match found at rotation 0
 [2026-04-30 05:30:12.037183+00:00] Running OCR on rotation 0
 [2026-04-30 05:30:19.225196+00:00] Direct match found at rotation 0
-[2026-04-30 06:26:22.407655+00:00] Running OCR on rotation 0
-[2026-04-30 06:26:28.500971+00:00] Direct match found at rotation 0
-[2026-04-30 06:28:20.045877+00:00] Running OCR on rotation 0
-[2026-04-30 06:28:26.258138+00:00] Direct match found at rotation 0
-[2026-04-30 07:12:27.831688+00:00] Running OCR on rotation 0
-[2026-04-30 07:12:33.880493+00:00] Direct match found at rotation 0
-[2026-04-30 07:17:56.051296+00:00] Running OCR on rotation 0
-[2026-04-30 07:18:02.090175+00:00] Direct match found at rotation 0
-[2026-04-30 07:40:45.305404+00:00] Running OCR on rotation 0
-[2026-04-30 07:40:47.837446+00:00] Direct match found at rotation 0
-[2026-04-30 07:43:20.744249+00:00] Running OCR on rotation 0
-[2026-04-30 07:43:23.519900+00:00] Direct match found at rotation 0
-[2026-04-30 07:45:47.195820+00:00] Running OCR on rotation 0
-[2026-04-30 07:45:49.774651+00:00] Direct match found at rotation 0
+[2026-04-30 06:08:33.282895+00:00] Running OCR on rotation 0
+[2026-04-30 06:08:50.173455+00:00] Direct match found at rotation 0
+[2026-04-30 06:11:52.962368+00:00] Running OCR on rotation 0
+[2026-04-30 06:12:08.456779+00:00] Direct match found at rotation 0
+[2026-04-30 06:20:59.543772+00:00] Running OCR on rotation 0
+[2026-04-30 06:21:12.842732+00:00] Direct match found at rotation 0
+[2026-04-30 06:22:50.797171+00:00] Running OCR on rotation 0
+[2026-04-30 06:23:04.510846+00:00] Direct match found at rotation 0
+[2026-04-30 06:30:13.512483+00:00] Running OCR on rotation 0
+[2026-04-30 06:30:28.320522+00:00] Direct match found at rotation 0
+[2026-04-30 07:03:32.547598+00:00] Running OCR on rotation 0
+[2026-04-30 07:03:45.475821+00:00] Direct match found at rotation 0
+[2026-04-30 07:04:32.301190+00:00] Running OCR on rotation 0
+[2026-04-30 07:04:45.595081+00:00] Direct match found at rotation 0
+[2026-04-30 07:11:36.892790+00:00] Running OCR on rotation 0
+[2026-04-30 07:11:47.293203+00:00] Running OCR on rotation 180
+[2026-04-30 07:11:58.068112+00:00] Running OCR on rotation 90
+[2026-04-30 07:12:05.857621+00:00] Running OCR on rotation 270
+[2026-04-30 07:16:19.070297+00:00] Running OCR on rotation 0
+[2026-04-30 07:16:32.252951+00:00] Direct match found at rotation 0
+[2026-04-30 07:23:17.157106+00:00] Running OCR on rotation 0
+[2026-04-30 07:23:29.060437+00:00] Direct match found at rotation 0
+[2026-04-30 08:29:40.885593+00:00] Running OCR on rotation 0
+[2026-04-30 08:29:52.573730+00:00] Direct match found at rotation 0
+[2026-04-30 08:40:01.384038+00:00] Running OCR on rotation 0
+[2026-04-30 08:40:12.803290+00:00] Direct match found at rotation 0
+[2026-04-30 08:52:23.005814+00:00] Running OCR on rotation 0
+[2026-04-30 08:52:34.067044+00:00] Direct match found at rotation 0
+[2026-04-30 08:55:00.410780+00:00] Running OCR on rotation 0
+[2026-04-30 08:55:12.303003+00:00] Direct match found at rotation 0
+[2026-04-30 09:01:00.118659+00:00] Running OCR on rotation 0
+[2026-04-30 09:01:14.681731+00:00] Direct match found at rotation 0
+[2026-04-30 09:01:16.304762+00:00] Running OCR on rotation 0
+[2026-04-30 09:01:25.979716+00:00] Running OCR on rotation 180
+[2026-04-30 09:01:36.311294+00:00] Running OCR on rotation 90
+[2026-04-30 09:01:43.306963+00:00] Running OCR on rotation 270
+[2026-04-30 09:02:00.195659+00:00] Running OCR on rotation 0
+[2026-04-30 09:02:11.802862+00:00] Direct match found at rotation 0
+[2026-04-30 09:09:56.722135+00:00] Running OCR on rotation 0
+[2026-04-30 09:10:09.203614+00:00] Direct match found at rotation 0
+[2026-04-30 09:46:59.793987+00:00] Running OCR on rotation 0
+[2026-04-30 09:47:21.830263+00:00] Direct match found at rotation 0
+[2026-04-30 09:55:53.566726+00:00] Running OCR on rotation 0
+[2026-04-30 09:56:15.568146+00:00] Direct match found at rotation 0
+[2026-04-30 10:10:55.001603+00:00] Running OCR on rotation 0
+[2026-04-30 10:11:18.825745+00:00] Direct match found at rotation 0
+[2026-04-30 10:25:49.160504+00:00] Running OCR on rotation 0
+[2026-04-30 10:26:02.098740+00:00] Direct match found at rotation 0
+[2026-04-30 10:30:14.341068+00:00] Running OCR on rotation 0
+[2026-04-30 10:30:37.022561+00:00] Direct match found at rotation 0
+[2026-04-30 10:50:44.191367+00:00] Running OCR on rotation 0
+[2026-04-30 10:51:09.555378+00:00] Direct match found at rotation 0
+[2026-04-30 11:06:31.045806+00:00] Running OCR on rotation 0
+[2026-04-30 11:07:03.961200+00:00] Direct match found at rotation 0
+[2026-04-30 11:07:55.477057+00:00] Running OCR on rotation 0
+[2026-04-30 11:08:19.736127+00:00] Direct match found at rotation 0
+[2026-04-30 11:13:45.895361+00:00] Running OCR on rotation 0
+[2026-04-30 11:14:13.127048+00:00] Direct match found at rotation 0
+[2026-04-30 11:23:42.057198+00:00] Running OCR on rotation 0
+[2026-04-30 11:23:54.247320+00:00] Direct match found at rotation 0
+[2026-04-30 11:30:28.314897+00:00] Running OCR on rotation 0
+[2026-04-30 11:30:54.785720+00:00] Direct match found at rotation 0
+[2026-04-30 11:31:06.717254+00:00] Running OCR on rotation 0
+[2026-04-30 11:31:20.749204+00:00] Direct match found at rotation 0
+[2026-04-30 11:48:42.507936+00:00] Running OCR on rotation 0
+[2026-04-30 11:48:55.440844+00:00] Direct match found at rotation 0
+[2026-04-30 12:14:25.667013+00:00] Running OCR on rotation 0
+[2026-04-30 12:14:37.472593+00:00] Direct match found at rotation 0
+[2026-04-30 12:33:33.165629+00:00] Running OCR on rotation 0
+[2026-04-30 12:33:44.068268+00:00] Direct match found at rotation 0

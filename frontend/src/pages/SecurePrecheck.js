@@ -18,8 +18,8 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
-const MACOS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.dmg';
+const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
+const MACOS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.dmg';
 
 export default function SecurePrecheck() {
   const { token } = useParams();
@@ -34,8 +34,11 @@ export default function SecurePrecheck() {
 
   const targetRoute = useMemo(() => {
     const builder = TARGET_ROUTE_MAP[type] || TARGET_ROUTE_MAP.assessment;
-    return token ? builder(token) : '/';
-  }, [type, token]);
+    const baseRoute = token ? builder(token) : '/';
+    // Preserve query parameters (name, email) when navigating
+    const queryParams = query.toString();
+    return queryParams ? `${baseRoute}?${queryParams}` : baseRoute;
+  }, [type, token, query]);
 
   const startSecureFlow = async () => {
     if (!token) return;

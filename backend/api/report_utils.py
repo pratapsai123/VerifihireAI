@@ -3066,7 +3066,7 @@ def generate_candidate_report(submission_id):
 
                     if no_face_skip_count <= 3:
 
-                        continue # Hide first 3 face warnings from screenshots too
+                        continue # Hide first 3 face warnings from count and screenshots
 
                     group_name = 'No Face Detection'
 
