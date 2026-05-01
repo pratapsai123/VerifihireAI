@@ -77,6 +77,10 @@ class AIAssessmentSubmission(models.Model):
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='submissions')
     candidate_name = models.CharField(max_length=255)
     candidate_email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    pan_number = models.CharField(max_length=20, blank=True, null=True)
+    pan_photo = models.ImageField(upload_to='pan_photos/', blank=True, null=True)
+    pan_verified = models.BooleanField(default=False, help_text="Whether PAN number was verified from photo")
     answers = models.JSONField(default=dict)
     score = models.IntegerField(default=0)
     mcq_score = models.IntegerField(default=0)
@@ -84,7 +88,7 @@ class AIAssessmentSubmission(models.Model):
     total_questions = models.IntegerField(default=0)
     percentage = models.FloatField(default=0.0)
     status = models.CharField(max_length=20, default='rejected')  # 'selected' or 'rejected'
-    
+
     # Monitoring Data
     integrity_score = models.FloatField(default=100.0)
     tab_switches = models.IntegerField(default=0)

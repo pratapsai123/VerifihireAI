@@ -39,7 +39,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -1662,3 +1662,33 @@ def manage_interviewer_availability_view(request):
             return Response({'success': True, 'message': 'Availability removed.'})
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_interview_chat_view(request, session_id):
+    """
+    Get all chat messages for a specific interview session.
+    """
+    try:
+        messages = InterviewChatMessage.objects.filter(
+            session__token=session_id
+        ).order_by('timestamp')
+        
+        data = [
+            {
+                'sender': msg.sender,
+                'message': msg.message,
+                'timestamp': msg.timestamp.isoformat(),
+            }
+            for msg in messages
+        ]
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error fetching chat messages: {str(e)}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': 'Failed to fetch chat messages'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

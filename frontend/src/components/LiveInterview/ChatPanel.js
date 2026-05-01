@@ -1,8 +1,27 @@
 import React, { useRef, useEffect } from 'react';
+import axios from 'axios';
+import { API_BASE_URL } from '../../apiConfig';
 
-export const ChatPanel = ({ chatPanelVisible, setChatPanelVisible, chatMessages, onSendMessage }) => {
+export const ChatPanel = ({ chatPanelVisible, setChatPanelVisible, chatMessages, setChatMessages, onSendMessage, sessionId, localName }) => {
   const chatMessagesRef = useRef(null);
   const chatInputRef = useRef(null);
+
+  useEffect(() => {
+    if (sessionId && setChatMessages) {
+      axios.get(`${API_BASE_URL}/interviews/chat/${sessionId}/`)
+        .then(response => {
+          const formattedMessages = response.data.map((msg, index) => ({
+            id: msg.timestamp + index,
+            sender: msg.sender,
+            text: msg.message,
+            time: new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            isMine: msg.sender.toLowerCase() === (localName || '').toLowerCase()
+          }));
+          setChatMessages(formattedMessages);
+        })
+        .catch(err => console.error("Error fetching chat messages:", err));
+    }
+  }, [sessionId, setChatMessages, localName]);
 
   useEffect(() => {
     if (chatMessagesRef.current) {

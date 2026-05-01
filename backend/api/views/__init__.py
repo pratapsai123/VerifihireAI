@@ -79,6 +79,7 @@ from .live_interview_views import (
     confirm_interview_booking_view,
     get_interviewer_availability_view,
     manage_interviewer_availability_view,
+    get_interview_chat_view,
 )
 from .job_role_views import (
     job_role_list_create_view,
