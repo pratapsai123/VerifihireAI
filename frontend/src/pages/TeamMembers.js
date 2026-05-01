@@ -9,6 +9,7 @@ import {
   ChevronRight, Send, XCircle, Shield, Building2, Clock,
   UserCheck, UserX, RotateCcw, Code, Video, Trash2, History, FileText,
 } from 'lucide-react';
+import { getToken } from '../utils/authStorage';
 
 function safeParseUser() {
   const raw = localStorage.getItem('user');
@@ -399,7 +400,7 @@ export default function TeamMembers() {
   useEffect(() => { setMemberPage(1); setInvitePage(1); }, [q, companyFilter, invStatusFilter, invRoleFilter, memberRoleFilter]);
 
   const authHeader = () => {
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import { getToken } from '../utils/authStorage';
 import '../styles/Dashboard.css';
 import '../styles/ResultsAI.css';
 
@@ -65,7 +66,7 @@ const ResultsAI = () => {
             const response = await axios.get(endpoint, {
                 responseType: 'blob',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             });
 

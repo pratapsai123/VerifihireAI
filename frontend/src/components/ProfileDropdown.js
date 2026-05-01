@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import { clearToken } from '../utils/authStorage';
 
 
 // ProfileDropdown Styles - All in one file
@@ -181,9 +182,7 @@ function ProfileDropdown() {
   const handleLogout = (e) => {
     e.preventDefault();
     try {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      clearToken();
       localStorage.removeItem('user');
     } catch {
       // ignore

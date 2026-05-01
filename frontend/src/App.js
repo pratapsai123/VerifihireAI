@@ -56,12 +56,12 @@ import Header from './components/Header';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from './apiConfig';
-
+import { getToken, setToken, clearToken } from './utils/authStorage';
 
 // Global Axios Interceptors for JWT Authentication
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
     if (token) {
       // List of public API paths that should not have the Authorization header
       // This prevents 401 errors if an expired token exists in localStorage
@@ -84,7 +84,8 @@ axios.interceptors.request.use(
         /^\/api\/ai-candidates\/process-answer\//,
         /^\/api\/users\/accept-invite\//,
         /^\/api\/users\/invite\/[0-9a-fA-F-]{36}/,
-        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/
+        /^\/api\/interviews\/slots\/[0-9a-fA-F-]{36}/,
+        /^\/api\/token\/refresh\//
       ];
 
       // List of candidate-facing routes that should NEVER send a recruiter token
@@ -115,16 +116,83 @@ axios.interceptors.request.use(
         config.headers.Authorization = `Bearer ${token}`;
       }
     }
+
+    // 🛡️ SECURITY: Only send credentials (cookies) to our backend API.
+    // This prevents CORS issues with local agents (like localhost:5001) that don't support credentials.
+    if (config.url && config.url.startsWith(API_BASE_URL)) {
+      config.withCredentials = true;
+    }
+
     return config;
   },
   (error) => Promise.reject(error)
 );
 
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error, token = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
 axios.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Prevent infinite loop if the refresh token endpoint itself returns 401
+    if (originalRequest.url && originalRequest.url.includes('/token/refresh/')) {
+      return Promise.reject(error);
+    }
+
     // Check if error is 401 Unauthorized securely
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      
+      if (isRefreshing) {
+        return new Promise(function(resolve, reject) {
+          failedQueue.push({ resolve, reject });
+        }).then(token => {
+          originalRequest.headers['Authorization'] = `Bearer ${token}`;
+          originalRequest._retry = true;
+          return axios(originalRequest);
+        }).catch(err => {
+          return Promise.reject(err);
+        });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        // Attempt to refresh the token using the HttpOnly cookie
+        const refreshResponse = await axios.post(`${API_BASE_URL}/token/refresh/`, {}, {
+          withCredentials: true // Important for sending the cookie
+        });
+
+        if (refreshResponse.data && refreshResponse.data.token) {
+          const newToken = refreshResponse.data.token;
+          setToken(newToken);
+          
+          processQueue(null, newToken);
+          isRefreshing = false;
+
+          // Retry original request with new token
+          originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+          return axios(originalRequest);
+        }
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+        isRefreshing = false;
+        console.error("Token refresh failed", refreshError);
+      }
+
       // Check if the current page is a public candidate-facing page
       const publicRoutes = [
         '/precheck/',
@@ -147,9 +215,7 @@ axios.interceptors.response.use(
       // ONLY logout and redirect if NOT on a public candidate page
       if (!isPublicPage) {
         console.error('Session expired or unauthorized. Logging out.');
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        clearToken();
         localStorage.removeItem('user');
 
         // Redirect to login if not already there
@@ -198,7 +264,7 @@ function AppContent() {
   // If the DB context changes (e.g., backend restarted with new DB), the next poll will fail with 401,
   // triggering the global axios interceptor to log out the user immediately.
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
     if (!token) return;
 
     // Skip polling on public candidate/invite pages
