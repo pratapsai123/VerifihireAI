@@ -1247,6 +1247,29 @@ class InterviewInvitation(models.Model):
         return f"Interview Invitation #{self.id} - {self.email} (Interview {self.interview_id if self.interview else 'N/A'})"
 
 
+class InterviewChatMessage(models.Model):
+    """
+    Stores chat messages exchanged during a live interview session.
+    """
+    session = models.ForeignKey(
+        InterviewInvitation,
+        on_delete=models.CASCADE,
+        related_name='chat_messages',
+        to_field='token' # token is the session_id
+    )
+    sender = models.CharField(max_length=255)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Interview Chat Message"
+        verbose_name_plural = "Interview Chat Messages"
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return f"[{self.timestamp}] {self.sender}: {self.message[:50]}"
+
+
 class CodingInvite(models.Model):
     """
     Token-based coding invite that can include one or more coding questions.

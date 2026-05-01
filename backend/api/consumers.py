@@ -4,7 +4,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
 from django.core.cache import cache
-from .models import InterviewInvitation
+from .models import InterviewInvitation, InterviewChatMessage
 
 logger = logging.getLogger(__name__)
 
@@ -183,7 +183,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             logger.debug(f"Received message type: {message_type} from {self.role}")
             
             # Handle different message types
-            if message_type == 'client_ping':
+            if message_type in ['client_ping', 'ping']:
                 # Heartbeat - acknowledge to keep connection alive
                 await self.send(text_data=json.dumps({
                     'type': 'server_pong',
@@ -214,13 +214,19 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             
             # Handle chat messages
             elif message_type == 'chat':
+                msg_content = data.get('message', '')
+                original_sender = data.get('sender', self.role.capitalize())
+                
+                # Save to database
+                await self.save_chat_message(self.session_id, original_sender, msg_content)
+
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         'type': 'chat_message',
-                        'message': data.get('message', ''),
+                        'message': msg_content,
                         'sender': self.role,
-                        'original_sender': data.get('sender', self.role.capitalize()),
+                        'original_sender': original_sender,
                     }
                 )
             
@@ -571,3 +577,18 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             logger.error(f"Error checking session expiry: {e}")
             return False
+
+    @database_sync_to_async
+    def save_chat_message(self, session_id, sender, message):
+        """Save a chat message to the database"""
+        try:
+            invitation = InterviewInvitation.objects.filter(token=session_id).first()
+            if invitation and message:
+                InterviewChatMessage.objects.create(
+                    session=invitation,
+                    sender=sender,
+                    message=message
+                )
+        except Exception as e:
+            logger.error(f"Error saving chat message: {e}", exc_info=True)
+
