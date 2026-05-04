@@ -2417,7 +2417,7 @@ def save_all_candidate_details_view(request):
         existing_by_email = IdentityLink.objects.filter(email=norm_email).first()
         if existing_by_email and existing_by_email.pan_number != norm_pan:
             # Capture Violation Screenshot
-            _save_identity_violation_screenshot(inv, snapshot, "Identity Fraud (PAN Mismatch)")
+            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (PAN Mismatch)")
             return Response({
                 'error': "Identity Fraud Detected: This email is already registered with a different PAN card. You cannot use a different PAN for this identity."
             }, status=status.HTTP_403_FORBIDDEN)
@@ -2426,7 +2426,7 @@ def save_all_candidate_details_view(request):
         existing_by_pan = IdentityLink.objects.filter(pan_number=norm_pan).first()
         if existing_by_pan and existing_by_pan.email != norm_email:
             # Capture Violation Screenshot
-            _save_identity_violation_screenshot(inv, snapshot, "Identity Fraud (Email Swapping)")
+            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (Email Swapping)")
             return Response({
                 'error': "Identity Fraud Detected: This PAN card is already linked to another identity. Assessment has been stopped."
             }, status=status.HTTP_403_FORBIDDEN)
@@ -2446,7 +2446,7 @@ def save_all_candidate_details_view(request):
 
             if verify_status == False:
                 # Capture Violation Screenshot
-                _save_identity_violation_screenshot(inv, snapshot, "Identity Face Mismatch")
+                _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
                 return Response({
                     'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
                 }, status=status.HTTP_403_FORBIDDEN)

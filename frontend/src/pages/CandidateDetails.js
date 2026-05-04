@@ -441,10 +441,10 @@ const CandidateDetails = ({ token, onComplete }) => {
 
               // If the face is too close to the edges, consider it half face
               // Using a small margin like 0.01 or 1%
-              if (x < 0.01 ||
-                y < 0.01 ||
-                x + width > 0.99 ||
-                y + height > 0.99) {
+              if (x < 0.002 ||
+                y < 0.002 ||
+                x + width > 0.998 ||
+                y + height > 0.998) {
                 halfFace = true;
               }
 
@@ -469,16 +469,16 @@ const CandidateDetails = ({ token, onComplete }) => {
               const faceTop = y;
               const faceBottom = y + height;
 
-              // Strict containment checks
-              isContainedX = faceLeft > ovalMinX - 0.1 && faceRight < ovalMaxX + 0.1; // Allow 10% spill
-              isContainedY = faceTop > ovalMinY - 0.05 && faceBottom < ovalMaxY + 0.05; // Allow 5% spill
+              // Relaxed containment checks
+              isContainedX = faceLeft > ovalMinX - 0.2 && faceRight < ovalMaxX + 0.2; // Allow 20% spill
+              isContainedY = faceTop > ovalMinY - 0.15 && faceBottom < ovalMaxY + 0.15; // Allow 15% spill
 
               // Center check
-              isCenteredX = Math.abs(xCenter - 0.5) < 0.15;
-              isCenteredY = Math.abs(yCenter - 0.5) < 0.15;
+              isCenteredX = Math.abs(xCenter - 0.5) < 0.25;
+              isCenteredY = Math.abs(yCenter - 0.5) < 0.25;
 
               // Size check: Face shouldn't be tiny
-              isGoodSize = width > 0.25 && height > 0.35;
+              isGoodSize = width > 0.20 && height > 0.30;
 
               isAlignedFrame = isContainedX && isContainedY && isCenteredX && isCenteredY && isGoodSize && !halfFace;
 
