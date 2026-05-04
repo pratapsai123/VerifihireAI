@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor } from '../security/securityApi';
 import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord } from '../security/sessionStorage';
@@ -12,24 +12,58 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [paused, setPaused] = useState(false);
   const [pauseDevice, setPauseDevice] = useState('');
   const [warning, setWarning] = useState(false);
-  const [warningStartTime, setWarningStartTime] = useState(null);
   const [blockedApp, setBlockedApp] = useState('');
   const [timeLeft, setTimeLeft] = useState(180);
 
+  // FIX 1: Track whether the candidate has completed the details form.
+  // We only start aggressive polling AFTER the exam begins, not during the form.
+  const [examStarted, setExamStarted] = useState(false);
+
+  // FIX 2: Use a ref to reliably trigger navigation from inside setInterval.
+  // This avoids the stale closure bug where navigate() is captured at mount time.
+  const shouldTerminateRef = useRef(false);
+  const navigateRef = useRef(navigate);
+  useEffect(() => { navigateRef.current = navigate; }, [navigate]);
+
+  // Listen for a custom event from TakeAssessment/children indicating exam has started
+  useEffect(() => {
+    const handler = () => setExamStarted(true);
+    window.addEventListener('vh_exam_started', handler);
+    return () => window.removeEventListener('vh_exam_started', handler);
+  }, []);
+
+  // FIX 2: Separate effect to handle termination - not inside setInterval
   useEffect(() => {
     if (!warning) return;
+    if (timeLeft <= 0) {
+      // Terminate session
+      const sessionRecord = readSessionRecord(token);
+      logCandidateActivity(
+        token,
+        'Session Terminated',
+        `Grace period expired — auto-terminated. App: ${blockedApp}`
+      );
+      if (sessionRecord) {
+        stopLocalMonitor({ session_id: sessionRecord.session_id, user_id: sessionRecord.user_id })
+          .catch(() => {});
+      }
+      clearPrecheckRecord(token);
+      window.onbeforeunload = null; // Prevent TakeAssessment from blocking the termination
+      window.location.href = '/session-terminated';
+    }
+  }, [timeLeft, warning, token, blockedApp]);
+
+  // Countdown timer for warning — only ticks when warning is active
+  useEffect(() => {
+    if (!warning) return;
+    if (timeLeft <= 0) return;
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          navigate('/session-terminated', { replace: true });
-          return 0;
-        }
-        return prev - 1;
-      });
+      setTimeLeft(prev => prev - 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [warning, navigate]);
+  }, [warning, timeLeft]);
 
+  // Main security monitoring effect
   useEffect(() => {
     if (!token) {
       navigate('/', { replace: true });
@@ -48,11 +82,14 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       return;
     }
 
+    // FIX 1: Only run the entry-gate scan and start polling AFTER exam has started.
+    // While the candidate is filling in CandidateDetails, we do NOT poll,
+    // so a temporary network hiccup won't send them back to precheck.
+    if (!examStarted) return;
+
     let active = true;
 
-    // ── Entry gate scan (runs once on mount) ────────────────────────────────
-    // Catches candidates who passed precheck, opened a remote app or plugged in
-    // a USB device, then navigated directly to the exam URL.
+    // ── Entry gate scan (runs once when exam starts) ──────────────────────────
     const runEntryGateScan = async () => {
       try {
         const agentStatus = await fetchAgentStatus();
@@ -105,59 +142,50 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         if (!active) return;
 
         if (status?.action === 'STOP') {
-          // Permanent termination — remote app detected
-          const blockedApp = status.blocked_app || status.reason || 'Remote access tool';
+          const app = status.blocked_app || status.reason || 'Remote access tool';
           logCandidateActivity(
             token,
             'Session Terminated',
-            `Exam session was terminated mid-exam. Reason: ${blockedApp}`
+            `Exam session was terminated mid-exam. Reason: ${app}`
           );
           await stopLocalMonitor({ session_id: sessionRecord.session_id, user_id: sessionRecord.user_id });
-          navigate('/session-terminated', { replace: true });
+          window.onbeforeunload = null;
+          window.location.href = '/session-terminated';
           return;
         }
 
         if (status?.action === 'WARN') {
-          // Grace period warning
           setWarning(true);
-          setWarningStartTime(status.violation_start_time);
-          setBlockedApp(status.blocked_app || 'Remote access tool');
-          
           const start = new Date(status.violation_start_time).getTime();
-          const now = new Date().getTime();
+          const now = Date.now();
           const elapsed = Math.floor((now - start) / 1000);
           const remaining = Math.max(0, 180 - elapsed);
           setTimeLeft(remaining);
+          setBlockedApp(status.blocked_app || 'Remote access tool');
           return;
         }
 
-        // action === 'CONTINUE' or 'SAFE' — clear any active warning
+        // CONTINUE / SAFE — clear any active warning
         setWarning(false);
 
         if (status?.action === 'PAUSE') {
-          // Hardware violation — pause exam, wait for device removal
           const deviceName = status.blocked_hardware || 'External device';
           if (!paused) {
-            logCandidateActivity(
-              token,
-              'Exam Paused',
-              `External device connected mid-exam: ${deviceName}`
-            );
+            logCandidateActivity(token, 'Exam Paused', `External device connected mid-exam: ${deviceName}`);
           }
           setPauseDevice(deviceName);
           setPaused(true);
           return;
         }
 
-        // action === 'CONTINUE' — clear any active pause
         if (paused) {
           logCandidateActivity(token, 'Exam Resumed', 'External device removed — exam resumed automatically');
         }
         setPaused(false);
         setPauseDevice('');
       } catch (_err) {
-        if (!active) return;
-        navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+        // Silent fail during exam — don't redirect on transient errors
+        console.warn('[SecuritySessionGuard] Poll error (non-fatal):', _err?.message);
       }
     };
 
@@ -168,7 +196,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       clearInterval(id);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, token, sessionType]);
+  }, [navigate, token, sessionType, examStarted]);
 
   return (
     <>

@@ -834,6 +834,7 @@ export default function TakeAssessment() {
               .then((response) => {
                 if (response.data.success) {
                   setCandidateDetailsCompleted(true);
+                  window.dispatchEvent(new Event('vh_exam_started'));
                 } else {
                   setCandidateDetailsCompleted(false);
                 }
@@ -842,6 +843,7 @@ export default function TakeAssessment() {
                 // If backend check fails, use localStorage as fallback
                 if (data.firstName && data.lastName && data.email && data.phone && data.pan && data.snapshot) {
                   setCandidateDetailsCompleted(true);
+                  window.dispatchEvent(new Event('vh_exam_started'));
                 } else {
                   setCandidateDetailsCompleted(false);
                 }
@@ -859,6 +861,7 @@ export default function TakeAssessment() {
           .then((response) => {
             if (response.data.success) {
               setCandidateDetailsCompleted(true);
+              window.dispatchEvent(new Event('vh_exam_started'));
             }
           })
           .catch(() => {
@@ -1668,7 +1671,8 @@ export default function TakeAssessment() {
         token={token}
         onComplete={(candidateData) => {
           setCandidateDetailsCompleted(true);
-          // Optionally send candidate data to backend here
+          // Signal SecuritySessionGuard to begin monitoring now that exam is starting
+          window.dispatchEvent(new Event('vh_exam_started'));
         }}
       />
     );
