@@ -6,18 +6,12 @@ HEARTBEAT_TIMEOUT_SECONDS = 60
 
 
 def _mark_timed_out(session):
-    if not session or session.action == 'STOP':
-        return session
-    if not session.last_heartbeat:
-        return session
-    age = (timezone.now() - session.last_heartbeat).total_seconds()
-    if age > HEARTBEAT_TIMEOUT_SECONDS:
-        session.action = 'STOP'
-        session.status = 'VIOLATION'
-        session.reason = 'Heartbeat timeout'
-        session.is_active = False
-        session.save(update_fields=['action', 'status', 'reason', 'is_active', 'updated_at'])
+    """
+    Heartbeat timeout termination is disabled per user request.
+    Sessions should only terminate on actual malpractice detection (VIOLATION status).
+    """
     return session
+
 
 
 def _resolve_security_session(session_id=None, user_id=None):
@@ -42,6 +36,12 @@ def start_security_session_view(request):
 
     if not token:
         return Response({'error': 'token is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if SecuritySession.objects.filter(token=token, status='VIOLATION').exists():
+        return Response({
+            'error': 'Access permanently revoked due to policy violation.',
+            'is_violated': True
+        }, status=status.HTTP_403_FORBIDDEN)
 
     session = SecuritySession.objects.create(
         token=token,
@@ -78,17 +78,51 @@ def security_check_view(request):
         return Response({'action': 'STOP'})
 
     if status_value == 'VIOLATION':
+        # First time violation: Start 3-minute grace period
+        if session.violation_count == 0:
+            session.violation_count = 1
+            session.violation_start_time = timezone.now()
+            session.status = 'VIOLATION'
+            session.action = 'WARN'
+            session.blocked_app = app
+            session.blocked_process_name = process_name
+            session.blocked_app_path = app_path
+            session.reason = f'Warning: Remote access tool detected ({app}). Close it within 3 minutes or access will be revoked.'
+            session.save()
+            return Response({
+                'action': 'WARN', 
+                'violation_start_time': session.violation_start_time.isoformat(),
+                'blocked_app': app
+            })
+        
+        # If they already had a warning or are in grace period
+        # If they are currently in 'WARN' state, check if 3 minutes have passed
+        if session.action == 'WARN':
+            grace_seconds = (timezone.now() - session.violation_start_time).total_seconds()
+            if grace_seconds <= 180:
+                # Still in grace period
+                return Response({
+                    'action': 'WARN',
+                    'violation_start_time': session.violation_start_time.isoformat(),
+                    'blocked_app': app
+                })
+            else:
+                # Grace period EXPIRED -> Permanent STOP
+                session.reason = f'Policy violation: Remote access tool ({app}) not closed within grace period.'
+        else:
+            # They already closed it once (action was CONTINUE but violation_count is 1)
+            # This is the SECOND time -> Immediate STOP
+            session.violation_count += 1
+            session.reason = f'Policy violation: Second detection of remote access tool ({app}). Access revoked immediately.'
+
+        # Permanent STOP logic
         session.status = 'VIOLATION'
         session.action = 'STOP'
         session.blocked_app = app
         session.blocked_process_name = process_name
         session.blocked_app_path = app_path
-        session.reason = f'Policy violation: {app or process_name or "remote tool detected"}'
         session.is_active = False
-        session.save(update_fields=[
-            'status', 'action', 'blocked_app', 'blocked_process_name', 'blocked_app_path',
-            'reason', 'is_active', 'updated_at'
-        ])
+        session.save()
         return Response({'action': 'STOP'})
 
     if status_value == 'HARDWARE_VIOLATION':
@@ -111,7 +145,8 @@ def security_check_view(request):
         return Response({'action': session.action})
 
     session.status = 'SAFE'
-    session.save(update_fields=['status', 'updated_at'])
+    session.action = 'CONTINUE'
+    session.save(update_fields=['status', 'action', 'updated_at'])
     return Response({'action': 'CONTINUE'})
 
 
@@ -149,6 +184,8 @@ def security_session_status_view(request, session_id):
         'blocked_process_name': session.blocked_process_name,
         'blocked_app_path': session.blocked_app_path,
         'blocked_hardware': session.blocked_hardware,
+        'violation_count': session.violation_count,
+        'violation_start_time': session.violation_start_time.isoformat() if session.violation_start_time else None,
         'last_heartbeat': session.last_heartbeat.isoformat() if session.last_heartbeat else None,
     })
 
@@ -159,3 +196,12 @@ def security_session_status_view(request, session_id):
 def security_signatures_view(request):
     rules = getattr(settings, 'SECURITY_SIGNATURE_RULES', [])
     return Response({'version': '1', 'rules': rules})
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def check_violation_status_view(request, token):
+    is_violated = SecuritySession.objects.filter(token=token, status='VIOLATION').exists()
+    return Response({'is_violated': is_violated})
+

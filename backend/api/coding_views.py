@@ -805,6 +805,13 @@ def coding_invites_view(request):
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def coding_invite_detail_view(request, token):
+    try:
+        from api.models import SecuritySession
+        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+            return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
+    except Exception:
+        pass
+
     invite = CodingInvite.objects.filter(token=token).first()
     if not invite:
         return Response({"error": "Invite not found"}, status=status.HTTP_404_NOT_FOUND)

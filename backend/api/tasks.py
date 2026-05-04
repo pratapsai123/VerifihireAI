@@ -46,7 +46,24 @@ def send_assessment_link_task(candidate_id):
 @shared_task
 def send_interview_link_task(submission_id):
     logger.info(f"Executing send_interview_link_task for submission {submission_id}")
-    process_assessment_passed(submission_id)
+    try:
+        from ai_assessments.models import AIAssessmentSubmission
+        submission = AIAssessmentSubmission.objects.get(id=submission_id)
+        
+        if submission.status == 'selected':
+            logger.info(f"Celery: Candidate {submission.candidate_email} PASSED assessment with {submission.percentage}%. Sending interview invitation...")
+            process_assessment_passed(submission_id)
+            logger.info(f"Celery: ✅ Interview invitation email sent to {submission.candidate_email}")
+        else:
+            logger.info(f"Celery: Candidate {submission.candidate_email} status is '{submission.status}' (score: {submission.percentage}%). NOT sending interview invitation.")
+        
+        logger.info(f"Successfully completed send_interview_link_task for submission {submission_id}")
+    except AIAssessmentSubmission.DoesNotExist:
+        logger.error(f"Celery: Submission {submission_id} not found!")
+    except Exception as e:
+        logger.error(f"Error in send_interview_link_task for submission {submission_id}: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
 
 @shared_task
 def send_custom_assessment_result_task(invitation_id):
@@ -77,7 +94,7 @@ def send_custom_assessment_result_task(invitation_id):
             inv.save(update_fields=['status'])
             
             # Send 'Cleared' Email with slot booking link
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
             booking_link = f"{frontend_base}/book-interview/{inv.token}"
             
             subject = f"Congratulations! You've cleared the assessment for {inv.assessment.name}"
@@ -179,7 +196,7 @@ def send_interview_confirmation_task(slot_id):
             logger.error(f"Slot {slot_id} has no invitation linked.")
             return
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         # Join links: /live-interview?token=<inv.token>
         candidate_link = f"{frontend_base}/live-interview?token={inv.token}"
         interviewer_link = f"{frontend_base}/live-interview-interviewer?token={inv.token}"

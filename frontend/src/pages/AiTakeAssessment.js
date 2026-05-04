@@ -55,6 +55,16 @@ const AiTakeAssessment = () => {
 
     const [submissionId, setSubmissionId] = useState(null);
 
+    // PAN Authentication fields
+    const [phone, setPhone] = useState('');
+    const [panNumber, setPanNumber] = useState('');
+    const [panPhoto, setPanPhoto] = useState(null);
+    const [panPhotoPreview, setPanPhotoPreview] = useState(null);
+    const [panValidating, setPanValidating] = useState(false);
+    const [panVerified, setPanVerified] = useState(false);
+    const [panError, setPanError] = useState('');
+    const [formError, setFormError] = useState('');
+
     const [timeLeft, setTimeLeft] = useState(null);
 
     const [isStarted, setIsStarted] = useState(false);
@@ -971,13 +981,13 @@ const AiTakeAssessment = () => {
 
         const emailParam = params.get('email');
 
-
+        console.log('URL Params:', { nameParam, emailParam });
 
         const isNameValid = nameParam && nameParam !== 'Extraction Failed';
 
         const isEmailValid = emailParam && emailParam !== 'Extraction Failed';
 
-
+        console.log('Validation:', { isNameValid, isEmailValid });
 
         if (isNameValid || isEmailValid) {
 
@@ -1113,11 +1123,89 @@ const AiTakeAssessment = () => {
 
     };
 
+    // PAN Authentication handlers
+    const validatePanFormat = (pan) => {
+        const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+        return panPattern.test(pan.toUpperCase().trim());
+    };
+
+    const handlePanPhotoChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setPanPhoto(file);
+            setPanPhotoPreview(URL.createObjectURL(file));
+            setPanVerified(false);
+            setPanError('');
+        }
+    };
+
+    const handleValidatePan = async () => {
+        const pan = panNumber.toUpperCase().trim();
+
+        if (!validatePanFormat(pan)) {
+            setPanError('Invalid PAN format. Expected: ABCDE1234F (5 letters + 4 digits + 1 letter)');
+            return;
+        }
+        if (!panPhoto) {
+            setPanError('Please upload your PAN card photo first');
+            return;
+        }
+
+        setPanValidating(true);
+        setPanError('');
+
+        try {
+            const formPayload = new FormData();
+            formPayload.append('pan_photo', panPhoto);
+            formPayload.append('pan_number', pan);
+
+            const res = await axios.post(`${API_BASE_URL}/ai-candidates/validate-pan/`, formPayload, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
+            if (res.data.is_verified) {
+                setPanVerified(true);
+                setPanError('');
+            } else {
+                setPanVerified(false);
+                setPanError(res.data.message || 'PAN mismatch. The PAN number on your card does not match the entered number.');
+            }
+        } catch (err) {
+            const msg = err.response?.data?.error || err.response?.data?.message || 'Validation failed. Please try again.';
+            setPanError(msg);
+            setPanVerified(false);
+        } finally {
+            setPanValidating(false);
+        }
+    };
+
 
 
     const startAssessment = async (bypassReg = false) => {
 
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
+
+        // PAN Authentication validation
+        if (!phone.trim()) {
+            setFormError('Phone number is required');
+            return;
+        }
+        if (!panNumber.trim()) {
+            setFormError('PAN card number is required');
+            return;
+        }
+        if (!validatePanFormat(panNumber)) {
+            setFormError('Invalid PAN format. Expected: ABCDE1234F');
+            return;
+        }
+        if (!panPhoto) {
+            setFormError('Please upload your PAN card photo');
+            return;
+        }
+        if (!panVerified) {
+            setFormError('Please verify your PAN card before proceeding');
+            return;
+        }
 
         const personId = getDeepfacePersonId();
 
@@ -1139,16 +1227,22 @@ const AiTakeAssessment = () => {
 
         try {
 
-            const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
+            const formPayload = new FormData();
+            formPayload.append('share_token', token);
+            formPayload.append('candidate_name', candidateName);
+            formPayload.append('candidate_email', candidateEmail);
+            formPayload.append('phone', phone);
+            formPayload.append('pan_number', panNumber);
+            formPayload.append('pan_verified', panVerified);
+            if (panPhoto) {
+                formPayload.append('pan_photo', panPhoto);
+            }
+            if (registrationSnapshot) {
+                formPayload.append('snapshot', registrationSnapshot);
+            }
 
-                share_token: token, 
-
-                candidate_name: candidateName, 
-
-                candidate_email: candidateEmail,
-
-                snapshot: registrationSnapshot
-
+            const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, formPayload, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
 
             const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts, candidate_questions } = res.data;
@@ -2118,18 +2212,21 @@ const AiTakeAssessment = () => {
 
         try {
 
-            await axios.post(`${API_BASE_URL}/ai/submit/`, {
+            const formPayload = new FormData();
+            formPayload.append('token', token);
+            formPayload.append('name', candidateName);
+            formPayload.append('email', candidateEmail);
+            formPayload.append('phone', phone);
+            formPayload.append('pan_number', panNumber);
+            formPayload.append('pan_verified', panVerified);
+            if (panPhoto) {
+                formPayload.append('pan_photo', panPhoto);
+            }
+            formPayload.append('answers', JSON.stringify(answers));
+            formPayload.append('coding_results', JSON.stringify(coding_results));
 
-                token,
-
-                name: candidateName,
-
-                email: candidateEmail,
-
-                answers,
-
-                coding_results // Added to send test case results
-
+            await axios.post(`${API_BASE_URL}/ai/submit/`, formPayload, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
 
             logCandidateActivity(token, 'AI Assessment Submitted', 'AI Assessment completed and submitted successfully.');
@@ -2641,6 +2738,246 @@ const AiTakeAssessment = () => {
                                 style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B', background: isAutoFilled ? '#f8f9ff' : 'white', cursor: isAutoFilled ? 'not-allowed' : 'text' }} />
 
                         </div>
+
+                        {/* Phone Number */}
+                        <div>
+
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>Phone Number *</label>
+
+                            <input
+
+                                type="tel"
+
+                                value={phone}
+
+                                onChange={(e) => {
+
+                                    const value = e.target.value.replace(/\D/g, '');
+
+                                    if (value.length <= 10) setPhone(value);
+
+                                }}
+
+                                placeholder="Enter your phone number"
+
+                                maxLength={10}
+
+                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B' }}
+
+                            />
+
+                        </div>
+
+                        {/* PAN Card Number */}
+                        <div>
+
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>PAN Card Number *</label>
+
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+
+                                <input
+
+                                    type="text"
+
+                                    value={panNumber}
+
+                                    onChange={(e) => {
+
+                                        const value = e.target.value.toUpperCase();
+
+                                        const position = value.length - 1;
+
+                                        const lastChar = value[position];
+
+
+
+                                        if (position >= 0 && position < 5) {
+
+                                            if (!/^[A-Z]$/.test(lastChar)) return;
+
+                                        } else if (position >= 5 && position < 9) {
+
+                                            if (!/^[0-9]$/.test(lastChar)) return;
+
+                                        } else if (position === 9) {
+
+                                            if (!/^[A-Z]$/.test(lastChar)) return;
+
+                                        }
+
+
+
+                                        setPanNumber(value);
+
+                                        setPanVerified(false);
+
+                                        setPanError('');
+
+                                    }}
+
+                                    placeholder="e.g. ABCDE1234F"
+
+                                    maxLength={10}
+
+                                    style={{
+
+                                        flex: 1, padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2',
+
+                                        outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box',
+
+                                        textTransform: 'uppercase', letterSpacing: '0.05em', color: '#1B254B',
+
+                                        borderColor: panVerified ? '#22c55e' : panError ? '#ef4444' : '#E0E5F2'
+
+                                    }}
+
+                                />
+
+                                {panVerified && (
+
+                                    <span style={{ display: 'flex', alignItems: 'center', color: '#22c55e', fontWeight: '700', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+
+                                        <i className="fa-solid fa-circle-check" style={{ marginRight: '4px' }}></i>Verified
+
+                                    </span>
+
+                                )}
+
+                            </div>
+
+                            <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#707EAE' }}>Format: 5 letters + 4 digits + 1 letter (e.g. ABCDE1234F)</p>
+
+                        </div>
+
+                        {/* PAN Card Photo Upload */}
+
+                        <div>
+
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>PAN Card Photo *</label>
+
+                            <div
+
+                                onClick={() => document.getElementById('panPhotoInput').click()}
+
+                                style={{
+
+                                    border: '2px dashed #cbd5e0', borderRadius: 12, padding: '1rem', cursor: 'pointer',
+
+                                    transition: 'all 0.2s', background: panPhotoPreview ? '#f0fdf4' : 'transparent',
+
+                                    borderColor: panVerified ? '#22c55e' : panPhotoPreview ? '#38b2ac' : '#cbd5e0',
+
+                                    display: 'flex', alignItems: 'center', gap: '1rem'
+
+                                }}
+
+                            >
+
+                                <input type="file" id="panPhotoInput" accept="image/*" hidden onChange={handlePanPhotoChange} />
+
+                                {panPhotoPreview ? (
+
+                                    <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
+
+                                ) : (
+
+                                    <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#4318FF' }}></i>
+
+                                )}
+
+                                <div>
+
+                                    <p style={{ margin: '0 0 0.25rem', fontWeight: '600', color: '#1B254B', fontSize: '0.9rem' }}>
+
+                                        {panPhoto ? panPhoto.name : 'Upload PAN Card Photo'}
+
+                                    </p>
+
+                                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#707EAE' }}>Click to browse</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {/* Verify PAN Button */}
+
+                        {panNumber && panPhoto && !panVerified && (
+
+                            <button
+
+                                onClick={handleValidatePan}
+
+                                disabled={panValidating || !validatePanFormat(panNumber)}
+
+                                style={{
+
+                                    width: '100%', padding: '0.75rem', marginBottom: '1.5rem',
+
+                                    background: panValidating || !validatePanFormat(panNumber) ? '#cbd5e0' : 'linear-gradient(135deg, #4318FF 0%, #764ba2 100%)',
+
+                                    color: 'white', border: 'none', borderRadius: 12,
+
+                                    fontSize: '0.95rem', fontWeight: '600', cursor: panValidating || !validatePanFormat(panNumber) ? 'not-allowed' : 'pointer',
+
+                                    opacity: panValidating || !validatePanFormat(panNumber) ? 0.7 : 1
+
+                                }}
+
+                            >
+
+                                {panValidating ? <><i className="fa-solid fa-spinner fa-spin"></i> Verifying PAN...</> : 'Verify PAN Card'}
+
+                            </button>
+
+                        )}
+
+                        {/* PAN Error */}
+
+                        {panError && (
+
+                            <div style={{
+
+                                background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: 12,
+
+                                padding: '0.75rem 1rem', marginBottom: '1.5rem', color: '#991B1B',
+
+                                fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem'
+
+                            }}>
+
+                                <i className="fa-solid fa-circle-exclamation"></i>
+
+                                <span>{panError}</span>
+
+                            </div>
+
+                        )}
+
+                        {/* Form Error */}
+
+                        {formError && (
+
+                            <div style={{
+
+                                background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '14px',
+
+                                padding: '0.8rem 1.2rem', marginBottom: '1.5rem', color: '#991B1B',
+
+                                fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.75rem',
+
+                                boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
+
+                            }}>
+
+                                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
+
+                                <span style={{ fontWeight: '500' }}>{formError}</span>
+
+                            </div>
+
+                        )}
 
                     </div>
 

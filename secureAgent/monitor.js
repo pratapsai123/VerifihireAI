@@ -28,7 +28,6 @@ async function refreshSignatures() {
 async function scanAndReport() {
   if (!current) return;
   if (isScanning) {
-    console.log('[monitor] scan already running, skipping this cycle');
     return;
   }
   isScanning = true;
@@ -45,6 +44,7 @@ async function _doScan() {
     const windowTitles = await getWindowTitles();
     const verdict = await detectBlocked(processes, windowTitles);
     if (!verdict.safe) {
+      console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
       const response = await sendSecurityCheck(current.backendApiBase, {
         session_id: current.sessionId,
@@ -67,7 +67,8 @@ async function _doScan() {
       process_name: '',
       app_path: '',
     });
-  } catch {
+  } catch (err) {
+    console.error('[monitor] Process scan error:', err.message);
     // Do not silently bypass; heartbeat/status will force stop from backend timeout.
   }
 
