@@ -434,6 +434,9 @@ def process_batch_assessment(batch_id):
                 </div>
                 """
 
+                # Debug: Log email settings
+                logger.info(f"Email settings - HOST: {settings.EMAIL_HOST}, USER: {settings.EMAIL_HOST_USER}, PORT: {settings.EMAIL_PORT}")
+                
                 send_mail(
                     subject=subject,
                     message=plain_message,
@@ -835,8 +838,12 @@ def process_assessment_passed(submission_id):
     """
     from ai_candidates.utils import log_automation_event
 
+    logger.info(f"Pipeline: process_assessment_passed called for submission {submission_id}")
+    
     try:
         submission = AIAssessmentSubmission.objects.select_related('assessment').get(id=submission_id)
+        logger.info(f"Pipeline: Found submission {submission_id} with status '{submission.status}', score {submission.percentage}%")
+        
         if submission.status != 'selected':
             logger.info(f"Pipeline: Submission {submission_id} status is '{submission.status}', not 'selected'. Skipping.")
             return
@@ -928,6 +935,9 @@ def process_assessment_passed(submission_id):
         </div>
         """
 
+        # Debug: Log email settings for interview
+        logger.info(f"Pipeline: Interview email settings - HOST: {settings.EMAIL_HOST}, USER: {settings.EMAIL_HOST_USER}, TO: {candidate.email}")
+        
         send_mail(
             subject=subject,
             message=plain_message,

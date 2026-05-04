@@ -298,8 +298,31 @@ class SubmitAssessmentView(APIView):
                 if candidate:
                     logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
-                    candidate.status = 'Assessment Passed'
+                    
+                    # Set correct status based on pass/fail
+                    if pass_status == 'selected':
+                        candidate.status = 'Assessment Passed'
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED assessment with {percentage}% - status updated to 'Assessment Passed'")
+                    else:
+                        candidate.status = 'Assessment Failed'
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED assessment with {percentage}% - status updated to 'Assessment Failed'")
+                    
                     candidate.save(update_fields=['score', 'status'])
+                    
+                    # ── TRIGGER NEXT STAGE ──
+                    # If they passed, automatically trigger the AI Interview invitation
+                    if pass_status == 'selected':
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
+                        try:
+                            from api.pipeline import process_assessment_passed
+                            process_assessment_passed(submission.id)
+                            logger.info(f"SubmitAssessment: Successfully triggered interview invitation for {email}")
+                        except Exception as pipe_err:
+                            logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+                            import traceback
+                            logger.error(traceback.format_exc())
+                    else:
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
 
                 else:
                     logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
@@ -307,12 +330,18 @@ class SubmitAssessmentView(APIView):
                     # ── TRIGGER NEXT STAGE ──
                     # If they passed, automatically trigger the AI Interview invitation
                     if pass_status == 'selected':
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
                         try:
                             from api.pipeline import process_assessment_passed
                             # This handles generating the interview link and sending the email
                             process_assessment_passed(submission.id)
+                            logger.info(f"SubmitAssessment: Successfully triggered interview invitation for {email}")
                         except Exception as pipe_err:
                             logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+                            import traceback
+                            logger.error(traceback.format_exc())
+                    else:
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
 
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
