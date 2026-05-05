@@ -14,10 +14,12 @@ loadBundledRules();
 initBaseline().catch(err => console.error('[server] hardware baseline init error:', err.message));
 
 app.get('/status', (_req, res) => {
+  const monitorState = getMonitorState();
   res.json({
     installed: true,
     running: true,
-    monitor: getMonitorState().running,
+    monitor: monitorState.running,
+    monitorState: monitorState.current,
     platform: process.platform,
   });
 });
@@ -80,26 +82,19 @@ app.post('/monitor/stop', (_req, res) => {
 });
 
 const port = process.env.SECURE_AGENT_PORT || 5001;
-const server = app.listen(port, () => {
-  console.log(`[secureAgent] listening on http://localhost:${port}`);
-});
+const server = app.listen(port);
 
 server.on('error', (err) => {
-  console.error('[secureAgent] server error:', err?.message || err);
   process.exit(1);
 });
 
-process.on('unhandledRejection', (err) => {
-  console.error('[secureAgent] unhandledRejection:', err);
-});
+process.on('unhandledRejection', () => {});
 
-process.on('uncaughtException', (err) => {
-  console.error('[secureAgent] uncaughtException:', err);
+process.on('uncaughtException', () => {
   process.exit(1);
 });
 
 const shutdown = () => {
-  console.log('[secureAgent] shutting down...');
   stopMonitor();
   server.close(() => process.exit(0));
 };

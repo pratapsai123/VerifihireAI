@@ -1,9 +1,10 @@
 from .._imports import *
-from ai_candidates.models import Candidate
-from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
+from ai_assessments.results_helpers import get_ai_assessment_results, get_ai_candidate_results
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
 from ..models import CandidateSubmission
 from .assessment_views import _is_valid_pan
+from django.core.files.base import ContentFile
+import base64
 
 
 def _get_filtered_warning_logs(warning_logs):
@@ -25,6 +26,31 @@ def _get_filtered_warning_logs(warning_logs):
                 continue
         filtered.append(log)
     return filtered
+
+
+def _save_identity_violation_screenshot(invitation, snapshot_base64, event_type):
+    """
+    Saves a base64 snapshot as an IntegrityScreenshot record.
+    """
+    try:
+        from ..models import IntegrityScreenshot
+        if not snapshot_base64 or not isinstance(snapshot_base64, str):
+            return
+            
+        if ',' in snapshot_base64:
+            snapshot_base64 = snapshot_base64.split(',', 1)[1]
+        
+        img_data = base64.b64decode(snapshot_base64)
+        filename = f"identity_violation_{invitation.id}_{int(timezone.now().timestamp())}.jpg"
+        
+        IntegrityScreenshot.objects.create(
+            invitation=invitation,
+            event_type=event_type,
+            webcam_screenshot=ContentFile(img_data, name=filename)
+        )
+        print(f"[Integrity] Saved {event_type} screenshot for invitation {invitation.id}")
+    except Exception as e:
+        print(f"Failed to save identity violation screenshot: {e}")
 
 
 @csrf_exempt
@@ -84,7 +110,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -375,6 +401,10 @@ def get_invitation_public_view(request, token):
     Public endpoint for candidates: fetch assessment + questions using a CandidateInvitation token.
     """
     try:
+        from api.models import SecuritySession
+        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+            return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
+
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
         check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
 
@@ -1766,64 +1796,12 @@ def results_overview_view(request):
         if end_date:
             qs = qs.filter(submitted_at__date__lte=end_date)
         
-        # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
-        if scoped_ids is None:
-            if company_id:
-                ai_qs = AIAssessmentSubmission.objects.filter(
-                    assessment__company_id=company_id,
-                    is_deleted=False
-                ).select_related('assessment').order_by('-submitted_at')
-            else:
-                ai_qs = AIAssessmentSubmission.objects.filter(
-                    is_deleted=False
-                ).select_related('assessment').order_by('-submitted_at')
-        elif scoped_ids:
-            # HR Manager sees only submissions for assessments they or their direct-report HRs created
-            # HR sees only submissions for assessments they created
-            ai_qs = AIAssessmentSubmission.objects.filter(
-                assessment__user_profile_id__in=scoped_ids,
-                is_deleted=False
-            ).select_related('assessment').order_by('-submitted_at')
-        else:
-            ai_qs = AIAssessmentSubmission.objects.none()
-        
-        if start_date:
-            ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
-        if end_date:
-            ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
-
-        # Similar logic for AI Candidate interviews
-        if scoped_ids is None:
-            if company_id:
-                ai_cand_qs = Candidate.objects.filter(
-                    company_id=company_id,
-                    is_deleted=False,
-                ).order_by('-submission_date')
-            else:
-                ai_cand_qs = Candidate.objects.filter(
-                    is_deleted=False,
-                    status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
-                ).order_by('-submission_date')
-        elif scoped_ids:
-            # HR Manager sees candidates uploaded by themselves or their direct-report HRs
-            # HR sees only candidates they personally uploaded/invited
-            ai_cand_qs = Candidate.objects.filter(
-                user_profile_id__in=scoped_ids,
-                is_deleted=False,
-            ).order_by('-submission_date')
-        else:
-            ai_cand_qs = Candidate.objects.none()
-            
-        if start_date:
-            ai_cand_qs = ai_cand_qs.filter(submission_date__gte=start_date)
-        if end_date:
-            ai_cand_qs = ai_cand_qs.filter(submission_date__lte=end_date)
-
         # Combine and limit
         active_deletions = set()
         try:
             from ..models import DeletionRequest
             for dr in DeletionRequest.objects.filter(status='pending'):
+                active_deletions.add(f"CandidateSubmission_{dr.object_id}")
                 active_deletions.add(f"{dr.content_type}_{dr.object_id}")
         except Exception:
             pass
@@ -1898,127 +1876,12 @@ def results_overview_view(request):
                 }
             )
 
-        for s in ai_qs[:5000]:
-            a = s.assessment
-            
-            # Fetch integrity screenshots for this submission
-            integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=s).order_by('timestamp')
-            screenshots_data = []
-            for snap in integrity_snapshots:
-                screenshots_data.append({
-                    "event_type": snap.event_type,
-                    "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
-                    "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
-                    "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
-                })
-
-            results.append(
-                {
-                    'id': s.id,
-                    'submission_id': f"ai_{s.id}",
-                    'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else (s.started_at.isoformat() if getattr(s, 'started_at', None) else None),
-                    'candidate_name': getattr(s, 'candidate_name', 'Unknown'),
-                    'candidate_email': getattr(s, 'candidate_email', 'Unknown'),
-                    'full_name': getattr(s, 'candidate_name', 'Unknown'),  # Keep for backward compatibility
-                    'email': getattr(s, 'candidate_email', 'Unknown'),  # Keep for backward compatibility
-                    'candidate': {
-                        'name': getattr(s, 'candidate_name', 'Unknown'),
-                        'email': getattr(s, 'candidate_email', 'Unknown'),
-                    },
-                    'assessment': {
-                        'id': f"ai_{a.id}",
-                        'display_name': getattr(a, 'required_skills', str(a.id)),
-                        'name': getattr(a, 'required_skills', str(a.id)),
-                        'weightage_objective': getattr(a, 'mcq_weight', 40) or 40,
-                        'weightage_coding': 100 - (getattr(a, 'mcq_weight', 40) or 40),
-                    },
-                    'score': getattr(s, 'score', 0),
-                    'total': getattr(s, 'total_possible', 100),
-                    'percentage': getattr(s, 'percentage', 0),
-                    
-                    'objective_score': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('scored_points', 0),
-                    'objective_total': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('possible_points', 0),
-                    'objective_percentage': getattr(s, 'mcq_score', 0),
-                    
-                    'coding_score': getattr(s, 'results_breakdown', {}).get('coding', {}).get('scored_points', 0),
-                    'coding_total': getattr(s, 'results_breakdown', {}).get('coding', {}).get('possible_points', 0),
-                    'coding_percentage': getattr(s, 'coding_score', 0),
-
-                    'status': getattr(s, 'status', 'COMPLETED'),
-                    'total_questions': getattr(s, 'total_questions', 0),
-                    'candidate_questions': getattr(s, 'candidate_questions', None) or getattr(a, 'generated_content', {}),
-                    'answers': getattr(s, 'answers', {}),
-                    'results_breakdown': getattr(s, 'results_breakdown', {}),
-                    'mcq_score': getattr(s, 'mcq_score', 0),
-                    'integrity': {
-                        'integrity_score': getattr(s, 'integrity_score', 100.0),
-                        'warning_logs': getattr(s, 'warning_logs', [])
-                    },
-                    'integrity_screenshots': screenshots_data,
-                    'is_resume_screening': False,
-                    'batch_id': s.batch_id,
-                    'batch_name': s.batch_name or (a.batch_name if hasattr(a, 'batch_name') else None),
-                    'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
-                    'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions
-                }
-            )
-
-        for s in ai_cand_qs[:5000]:
-            submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.created_at.isoformat() if getattr(s, 'created_at', None) else None)
-            results.append(
-                {
-                    'submission_id': f"aicand_{s.id}",
-                    'submitted_at': submitted_date_iso,
-                    'candidate_name': s.full_name,
-                    'candidate_email': s.email,
-                    'full_name': s.full_name,  # Keep for backward compatibility
-                    'email': s.email,  # Keep for backward compatibility
-                    'candidate': {
-                        'name': s.full_name,
-                        'email': s.email,
-                    },
-                    'assessment': {
-                        'id': f"aicand_{s.id}",
-                        'display_name': s.job_title or "AI Interview",
-                        'name': s.job_title or "AI Interview",
-                        'weightage_objective': 0,
-                        'weightage_coding': 100,
-                    },
-                    'score': s.score,
-                    'total': 100,
-                    'percentage': s.score,
-                    
-                    'objective_score': 0,
-                    'objective_total': 0,
-                    'objective_percentage': 0,
-                    
-                    'coding_score': s.score,
-                    'coding_total': 100,
-                    'coding_percentage': s.score,
-
-                    'status': s.status,
-                    'is_resume_screening': True,
-                    'delete_requested': f"Candidate_{s.id}" in active_deletions,
-                    'interview_summary': s.interview_summary,
-                    'total_questions': getattr(s, 'total_questions', 0),
-                    'resume_score': getattr(s, 'resume_score', 0),
-                    'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False),
-                    'batch_id': s.batch_id,
-                    'batch_name': s.batch_name,
-                    'integrity': {
-                        'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
-                        'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
-                    },
-                    'integrity_logs': [
-                        {
-                            'event_type': log.event_type,
-                            'screenshot_base64': log.screenshot_base64,
-                            'webcam_screenshot_base64': log.webcam_screenshot_base64,
-                            'timestamp': log.timestamp.isoformat() if log.timestamp else None
-                        } for log in s.integrity_logs.all()
-                    ]
-                }
-            )
+        results.extend(get_ai_assessment_results(
+            scoped_ids, company_id, start_date, end_date, request, active_deletions
+        ))
+        results.extend(get_ai_candidate_results(
+            scoped_ids, company_id, start_date, end_date, active_deletions
+        ))
 
         # Also include non-submitted invitations (Standard Assessments)
         if company_id:
@@ -2544,11 +2407,31 @@ def save_all_candidate_details_view(request):
             entered_with_consent = entered_with_consent.lower() == 'true'
 
         # Identity Linkage and Verification
-        # Link email + PAN as a single identity and verify face consistency
+        # 1. Normalize credentials
         norm_email = email.lower().strip()
         norm_pan = pan_number.strip().upper()
         person_id = f"{norm_email}_{norm_pan}"
         
+        # 2. Strict PAN Consistency Check (New Security Rule)
+        # Check if this email is already registered with a DIFFERENT PAN card
+        existing_by_email = IdentityLink.objects.filter(email=norm_email).first()
+        if existing_by_email and existing_by_email.pan_number != norm_pan:
+            # Capture Violation Screenshot
+            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (PAN Mismatch)")
+            return Response({
+                'error': "Identity Fraud Detected: This email is already registered with a different PAN card. You cannot use a different PAN for this identity."
+            }, status=status.HTTP_403_FORBIDDEN)
+
+        # Check if this PAN is already registered with a DIFFERENT email
+        existing_by_pan = IdentityLink.objects.filter(pan_number=norm_pan).first()
+        if existing_by_pan and existing_by_pan.email != norm_email:
+            # Capture Violation Screenshot
+            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (Email Swapping)")
+            return Response({
+                'error': "Identity Fraud Detected: This PAN card is already linked to another identity. Assessment has been stopped."
+            }, status=status.HTTP_403_FORBIDDEN)
+
+        # 3. Biometric Verification
         identity_link = IdentityLink.objects.filter(email=norm_email, pan_number=norm_pan).first()
         
         verify_status = False
@@ -2558,21 +2441,17 @@ def save_all_candidate_details_view(request):
             # Verification: Compare current snapshot with the registered identity face
             verify_result = verify_face_with_deepface(person_id, snapshot)
             verify_status = verify_result.get('verified', False)
-            # Distance: usually 0 is perfect match, threshold is ~0.4 for ArcFace
-            # We convert it to a score where 1.0 is perfect and >0.6 is match
             distance = verify_result.get('distance', 1.0)
             match_score = max(0.0, 1.0 - distance)
 
-            # If verify fails (verified is False), or if there was an error in verification
             if verify_status == False:
-                # Save the mismatch status even if we reject, for audit trails if possible
-                # But since we return 403, the update_or_create below won't run.
-                # However, the user wants to "stop assessment", so returning 403 is correct.
+                # Capture Violation Screenshot
+                _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
                 return Response({
                     'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
                 }, status=status.HTTP_403_FORBIDDEN)
         else:
-            # Linkage: Register the candidate's face as the canonical identity for this Email + PAN
+            # Linkage: Register the candidate's face for the first time
             reg_result = register_face_with_deepface(person_id, snapshot)
             if reg_result.get('success'):
                 IdentityLink.objects.create(
@@ -2583,8 +2462,6 @@ def save_all_candidate_details_view(request):
                 verify_status = True
                 match_score = 1.0
             else:
-                # CRITICAL: If we can't register the identity (e.g. service down or no face),
-                # we MUST NOT allow the candidate to proceed, otherwise the identity check is bypassed.
                 error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
                 return Response({
                     'error': f"Identity Verification System Error: {error_msg}"

@@ -89,7 +89,55 @@ def handle_assessment_save(sender, instance, created, **kwargs):
 
         def schedule_interview():
             try:
-                send_interview_link_task.apply_async(args=[instance.id], countdown=120)
+                logger.info(f"Signal: Scheduling interview task for submission {instance.id} with 120s delay")
+                task_result = send_interview_link_task.apply_async(args=[instance.id], countdown=120)
+                logger.info(f"Signal: Interview task scheduled with task ID {task_result.id} for submission {instance.id}")
             except Exception as e:
                 logger.error(f"Failed to schedule interview task: {e}")
+                import traceback
+                logger.error(traceback.format_exc())
         transaction.on_commit(schedule_interview)
+    
+    elif instance.status == 'rejected':
+        logger.info(
+            f"Signal: Assessment submission {instance.id} NOT QUALIFIED "
+            f"({instance.candidate_name} — {instance.percentage}%). "
+            f"Candidate did not meet the required threshold."
+        )
+
+        # Also schedule Celery task so it logs the failure in Celery worker logs
+        def schedule_rejected_notification():
+            try:
+                logger.info(f"Signal: Scheduling rejection notification task for submission {instance.id}")
+                task_result = send_interview_link_task.apply_async(args=[instance.id], countdown=120)
+                logger.info(f"Signal: Rejection task scheduled with task ID {task_result.id} for submission {instance.id}")
+            except Exception as e:
+                logger.error(f"Failed to schedule rejection task: {e}")
+                import traceback
+                logger.error(traceback.format_exc())
+        transaction.on_commit(schedule_rejected_notification)
+
+        # Log this event in the candidate's pipeline timeline
+        try:
+            from ai_candidates.models import Candidate as AICand
+            cand_qs = AICand.objects.filter(
+                email=instance.candidate_email,
+                company=instance.assessment.company
+            ).order_by('-id')
+            if cand_qs.exists():
+                log_automation_event(
+                    cand_qs.first(),
+                    'ASSESSMENT_COMPLETED', 'FAILURE',
+                    f"Assessment failed with {instance.percentage}% score. "
+                    f"Candidate not qualified for interview.",
+                    details={
+                        'submission_id': instance.id,
+                        'score': instance.percentage,
+                        'status': instance.status,
+                    }
+                )
+        except Exception as log_err:
+            logger.warning(f"Signal: Could not write PipelineLog for assessment fail event: {log_err}")
+    
+    elif instance.status == 'ONGOING':
+        logger.info(f"Signal: Assessment submission {instance.id} is ONGOING ({instance.candidate_name}). Waiting for completion.")

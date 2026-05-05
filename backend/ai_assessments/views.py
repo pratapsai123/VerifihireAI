@@ -77,8 +77,25 @@ class SubmitAssessmentView(APIView):
         token = data.get('token')
         name = data.get('name')
         email = data.get('email', '').strip().lower()
-        answers = data.get('answers', {})
-        coding_results = data.get('coding_results', {}) # Captured test case results
+        phone = data.get('phone', '')
+        pan_number = data.get('pan_number', '')
+        pan_photo = request.FILES.get('pan_photo')
+        pan_verified_raw = data.get('pan_verified', False)
+        # Handle string 'true'/'false' from FormData
+        if isinstance(pan_verified_raw, str):
+            pan_verified = pan_verified_raw.lower() == 'true'
+        else:
+            pan_verified = bool(pan_verified_raw)
+        # Parse JSON strings from FormData
+        answers_raw = data.get('answers', '{}')
+        coding_results_raw = data.get('coding_results', '{}')
+        try:
+            import json
+            answers = json.loads(answers_raw) if isinstance(answers_raw, str) else answers_raw
+            coding_results = json.loads(coding_results_raw) if isinstance(coding_results_raw, str) else coding_results_raw
+        except json.JSONDecodeError:
+            answers = {}
+            coding_results = {}
 
         if not token or not name or not email:
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -108,6 +125,10 @@ class SubmitAssessmentView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
+                    phone=phone,
+                    pan_number=pan_number,
+                    pan_photo=pan_photo,
+                    pan_verified=pan_verified,
                     status='ONGOING',
                     batch_id=assessment.batch_id,
                     batch_name=assessment.batch_name
@@ -119,17 +140,24 @@ class SubmitAssessmentView(APIView):
                     # Also update email if it was overridden
                     if email and submission.candidate_email != email:
                         submission.candidate_email = email
-                    
-                    
-                    # CROSS-UPDATE: Synchronize with the Candidate record if exists
-                    try:
-                        candidate = Candidate.objects.filter(email__iexact=email).first()
-                        if candidate:
-                            if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
-                                candidate.full_name = name
-                                candidate.save(update_fields=['full_name'])
-                    except Exception as sync_err:
-                        logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
+                # Update PAN details if provided
+                if phone:
+                    submission.phone = phone
+                if pan_number:
+                    submission.pan_number = pan_number
+                if pan_photo:
+                    submission.pan_photo = pan_photo
+                submission.pan_verified = pan_verified
+
+                # CROSS-UPDATE: Synchronize with the Candidate record if exists
+                try:
+                    candidate = Candidate.objects.filter(email__iexact=email).first()
+                    if candidate:
+                        if name and (candidate.full_name == "Extraction Failed" or candidate.full_name != name):
+                            candidate.full_name = name
+                            candidate.save(update_fields=['full_name'])
+                except Exception as sync_err:
+                    logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
             # Use candidate_questions (the subset) instead of the whole pool
             generated_content = submission.candidate_questions or assessment.generated_content or {}
@@ -270,27 +298,50 @@ class SubmitAssessmentView(APIView):
                 if candidate:
                     logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
-                    candidate.status = 'Assessment Passed'
+                    
+                    # Set correct status based on pass/fail
+                    if pass_status == 'selected':
+                        candidate.status = 'Assessment Passed'
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED assessment with {percentage}% - status updated to 'Assessment Passed'")
+                    else:
+                        candidate.status = 'Assessment Failed'
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED assessment with {percentage}% - status updated to 'Assessment Failed'")
+                    
                     candidate.save(update_fields=['score', 'status'])
+                    
+                    # ── TRIGGER NEXT STAGE ──
+                    # If they passed, automatically trigger the AI Interview invitation
+                    if pass_status == 'selected':
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
+                        try:
+                            from api.pipeline import process_assessment_passed
+                            process_assessment_passed(submission.id)
+                            logger.info(f"SubmitAssessment: Successfully triggered interview invitation for {email}")
+                        except Exception as pipe_err:
+                            logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+                            import traceback
+                            logger.error(traceback.format_exc())
+                    else:
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
 
-                    # SYNC SUBMISSION BATCH: Ensure the raw submission record is in the same batch as the candidate record
-                    # This prevents the UI from showing a "duplicate" row or another batch for the same candidate.
-                    if candidate.batch_id and submission.batch_id != candidate.batch_id:
-                        submission.batch_id = candidate.batch_id
-                        submission.batch_name = candidate.batch_name
-                        submission.save(update_fields=['batch_id', 'batch_name'])
                 else:
                     logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
 
                     # ── TRIGGER NEXT STAGE ──
                     # If they passed, automatically trigger the AI Interview invitation
                     if pass_status == 'selected':
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
                         try:
                             from api.pipeline import process_assessment_passed
                             # This handles generating the interview link and sending the email
                             process_assessment_passed(submission.id)
+                            logger.info(f"SubmitAssessment: Successfully triggered interview invitation for {email}")
                         except Exception as pipe_err:
                             logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
+                            import traceback
+                            logger.error(traceback.format_exc())
+                    else:
+                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
 
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
@@ -904,6 +955,15 @@ class CreateSubmissionView(APIView):
         name = request.data.get('candidate_name')
         email = request.data.get('candidate_email', '').strip().lower()
         snapshot = request.data.get('snapshot')
+        phone = request.data.get('phone', '')
+        pan_number = request.data.get('pan_number', '')
+        pan_photo = request.FILES.get('pan_photo')
+        pan_verified_raw = request.data.get('pan_verified', False)
+        # Handle string 'true'/'false' from FormData
+        if isinstance(pan_verified_raw, str):
+            pan_verified = pan_verified_raw.lower() == 'true'
+        else:
+            pan_verified = bool(pan_verified_raw)
 
         if not all([token, name, email]):
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -941,6 +1001,10 @@ class CreateSubmissionView(APIView):
                     assessment=assessment,
                     candidate_name=name,
                     candidate_email=email,
+                    phone=phone,
+                    pan_number=pan_number,
+                    pan_photo=pan_photo,
+                    pan_verified=pan_verified,
                     status='ONGOING',
                     batch_id=assessment.batch_id,
                     batch_name=assessment.batch_name
@@ -1513,7 +1577,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -2227,9 +2291,17 @@ class AIAssessmentReportDownloadView(APIView):
                             continue
 
             # Info table data
+            # Handle old submissions without PAN data
+            if submission.pan_number:
+                pan_verified_text = "Yes ✓" if submission.pan_verified else "No ✗"
+            else:
+                pan_verified_text = "N/A"
             info_data = [
                 ['Full Name', submission.candidate_name],
                 ['Email', submission.candidate_email or 'N/A'],
+                ['Phone', submission.phone or 'N/A'],
+                ['PAN Number', submission.pan_number or 'N/A'],
+                ['PAN Verified', pan_verified_text],
                 ['Job Title', assessment.required_skills or 'N/A'],
                 ['MCQ Score', f"{mcq_pct}% ({mcq_scored} / {mcq_total} Correct)"],
                 ['Coding Score', f"{coding_pct}% ({coding_scored} / {coding_total} pts)"],

@@ -9,12 +9,12 @@ export const fetchAgentStatus = async () => {
 };
 
 export const runLocalScan = async () => {
-  const res = await axios.post(`${LOCAL_AGENT_BASE_URL}/scan`, {}, { timeout: 20000 });
+  const res = await axios.post(`${LOCAL_AGENT_BASE_URL}/scan`, {}, { timeout: 45000 });
   return res.data;
 };
 
 export const runLocalHardwareScan = async () => {
-  const res = await axios.post(`${LOCAL_AGENT_BASE_URL}/scan/hardware`, {}, { timeout: 10000 });
+  const res = await axios.post(`${LOCAL_AGENT_BASE_URL}/scan/hardware`, {}, { timeout: 30000 });
   return res.data;
 };
 
@@ -42,5 +42,10 @@ export const stopLocalMonitor = async ({ session_id, user_id }) => {
 
 export const fetchSecuritySessionStatus = async (sessionId) => {
   const res = await axios.get(`${API_BASE_URL}/security-session/${sessionId}/status`, { timeout: 8000 });
+  return res.data;
+};
+
+export const checkViolationStatus = async (token) => {
+  const res = await axios.get(`${API_BASE_URL}/security-session/${token}/violation-status`, { timeout: 20000 });
   return res.data;
 };

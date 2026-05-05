@@ -6,6 +6,7 @@ Django settings for VerifiHireAI_backend project. # Reload trigger
 import os
 from pathlib import Path
 from decouple import config, Csv
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
 
 
 # Application definition
@@ -203,14 +204,25 @@ REST_FRAMEWORK = {
     ],
 }
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
 default_cors_origins = [
-    "https://verifihireai.com",
+    "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://verifihireai.com",
-    "https://verifihireai.com",
+    "http://localhost:3000",
+    "http://localhost:3000",
     "http://20.205.31.46",
-    "https://verifihireai.com",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

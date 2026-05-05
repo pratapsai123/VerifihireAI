@@ -301,13 +301,14 @@ const CandidateDetails = ({ token, onComplete }) => {
     extractedPan: null,
     panMatch: null,
     isExtractingPan: false,
-    extractionFailed: false, // New: track if all strategies failed
-    extractionStatus: '',    // New: show current strategy/rotation
-    extractionReason: null,  // New: reason for failure from backend
-    manualConfirmation: false, // New: user overrides validaton
-    snapshotValid: false, // Whether captured snapshot has face and is not blurry
-    invitedEmail: null, // Store the email they were invited with for validation
-    submissionError: null, // New: for identity mismatch or critical errors
+    extractionFailed: false,
+    extractionStatus: '',
+    extractionReason: null,
+    manualConfirmation: false,
+    snapshotValid: false,
+    invitedEmail: null,
+    submissionError: null,
+    isVerifying: false,
   });
 
   // Live re-verification of PAN when input changes
@@ -440,10 +441,10 @@ const CandidateDetails = ({ token, onComplete }) => {
 
               // If the face is too close to the edges, consider it half face
               // Using a small margin like 0.01 or 1%
-              if (x < 0.01 ||
-                y < 0.01 ||
-                x + width > 0.99 ||
-                y + height > 0.99) {
+              if (x < 0.002 ||
+                y < 0.002 ||
+                x + width > 0.998 ||
+                y + height > 0.998) {
                 halfFace = true;
               }
 
@@ -468,16 +469,16 @@ const CandidateDetails = ({ token, onComplete }) => {
               const faceTop = y;
               const faceBottom = y + height;
 
-              // Strict containment checks
-              isContainedX = faceLeft > ovalMinX - 0.1 && faceRight < ovalMaxX + 0.1; // Allow 10% spill
-              isContainedY = faceTop > ovalMinY - 0.05 && faceBottom < ovalMaxY + 0.05; // Allow 5% spill
+              // Relaxed containment checks
+              isContainedX = faceLeft > ovalMinX - 0.2 && faceRight < ovalMaxX + 0.2; // Allow 20% spill
+              isContainedY = faceTop > ovalMinY - 0.15 && faceBottom < ovalMaxY + 0.15; // Allow 15% spill
 
               // Center check
-              isCenteredX = Math.abs(xCenter - 0.5) < 0.15;
-              isCenteredY = Math.abs(yCenter - 0.5) < 0.15;
+              isCenteredX = Math.abs(xCenter - 0.5) < 0.25;
+              isCenteredY = Math.abs(yCenter - 0.5) < 0.25;
 
               // Size check: Face shouldn't be tiny
-              isGoodSize = width > 0.25 && height > 0.35;
+              isGoodSize = width > 0.20 && height > 0.30;
 
               isAlignedFrame = isContainedX && isContainedY && isCenteredX && isCenteredY && isGoodSize && !halfFace;
 
@@ -692,6 +693,9 @@ const CandidateDetails = ({ token, onComplete }) => {
       }
 
       formData.append('entered_with_consent', data.manualConfirmation);
+      
+      // Set verifying state
+      setData(prev => ({ ...prev, isVerifying: true }));
 
       // Send to backend API
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
@@ -730,9 +734,11 @@ const CandidateDetails = ({ token, onComplete }) => {
           console.error('Error saving candidate details:', error);
           const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
           
-          if (error?.response?.status === 403 && errorMessage.includes("Identity Mismatch")) {
-            setData(prev => ({ ...prev, submissionError: errorMessage }));
+          // Display any 403 identity error in the premium "Access Denied" box
+          if (error?.response?.status === 403) {
+            setData(prev => ({ ...prev, submissionError: errorMessage, isVerifying: false }));
           } else {
+            setData(prev => ({ ...prev, isVerifying: false }));
             alert('Error: ' + errorMessage);
           }
         });
@@ -1098,10 +1104,15 @@ const CandidateDetails = ({ token, onComplete }) => {
           <div className="candidate-button-row">
             <button
               type="submit"
-              className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
-              disabled={!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)}
+              className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || data.isVerifying || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
+              disabled={!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || data.isVerifying || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)}
             >
-              Submit Application
+              {data.isVerifying ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <span className="candidate-spinner"></span>
+                  Verifying Identity...
+                </div>
+              ) : 'Submit Application'}
             </button>
           </div>
 

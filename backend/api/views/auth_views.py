@@ -938,11 +938,10 @@ def verify_login_otp_view(request):
                 user_profile.save(update_fields=['last_login_at'])
             
             # Return success response with user data and token
-            return Response(
+            response = Response(
                 {
                     'message': 'Login successful!',
                     'token': str(refresh.access_token),
-                    'refresh': str(refresh),
                     'user': {
                         'id': (user_profile.id if user_profile else app_admin.user_id),
                         'first_name': (user_profile.first_name if user_profile else (auth_user.first_name or '')),
@@ -955,6 +954,17 @@ def verify_login_otp_view(request):
                 },
                 status=status.HTTP_200_OK
             )
+            
+            from datetime import timedelta
+            response.set_cookie(
+                key='refresh_token',
+                value=str(refresh),
+                httponly=True,
+                secure=settings.SESSION_COOKIE_SECURE,
+                samesite='Lax',
+                max_age=int(timedelta(hours=12).total_seconds())
+            )
+            return response
             
         except Exception as e:
             return Response(
@@ -982,6 +992,48 @@ def heartbeat_view(request):
     Returns 401 via middleware/auth-class if context has changed.
     """
     return Response({'status': 'ok', 'db_name': settings.DATABASES['default']['NAME']}, status=status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def refresh_token_view(request):
+    """
+    Refresh the access token using the HTTP-only refresh_token cookie.
+    """
+    try:
+        from rest_framework_simplejwt.exceptions import TokenError
+        refresh_token = request.COOKIES.get('refresh_token')
+        
+        if not refresh_token:
+            return Response({'error': 'Refresh token missing.'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        try:
+            refresh = RefreshToken(refresh_token)
+            
+            # Ensure custom claims like db_name are copied to the new access token
+            # SimpleJWT access_token property generates a new AccessToken, but we manually
+            # inject db_name to ensure our custom DBContextJWTAuthentication passes.
+            access_token = refresh.access_token
+            if 'db_name' in refresh.payload:
+                access_token['db_name'] = refresh.payload['db_name']
+            
+            response = Response(
+                {
+                    'token': str(access_token)
+                },
+                status=status.HTTP_200_OK
+            )
+            return response
+            
+        except TokenError as e:
+            return Response({'error': 'Invalid or expired refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+    except Exception as e:
+        import traceback
+        print(f"Error in refresh_token_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 

@@ -11,6 +11,7 @@ from .auth_views import (
     register_view,
     login_view,
     verify_login_otp_view,
+    refresh_token_view,
     heartbeat_view,
 )
 
@@ -130,4 +131,5 @@ from .security_views import (
     security_heartbeat_view,
     security_session_status_view,
     security_signatures_view,
+    check_violation_status_view,
 )

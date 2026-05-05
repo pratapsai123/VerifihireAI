@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
 
     path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
+    path('token/refresh/', views.refresh_token_view, name='token_refresh'),
     path('heartbeat/', views.heartbeat_view, name='heartbeat'),
 
     path('register/', views.register_view, name='register'),
@@ -119,6 +120,7 @@ urlpatterns = [
     path('security-check', views.security_check_view, name='security_check'),
     path('security-heartbeat', views.security_heartbeat_view, name='security_heartbeat'),
     path('security-session/<uuid:session_id>/status', views.security_session_status_view, name='security_session_status'),
+    path('security-session/<uuid:token>/violation-status', views.check_violation_status_view, name='check_violation_status'),
     path('security-signatures', views.security_signatures_view, name='security_signatures'),
 
 ]
