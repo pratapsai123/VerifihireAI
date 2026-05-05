@@ -4,7 +4,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
 from django.core.cache import cache
-from .models import InterviewInvitation, InterviewChatMessage
+from .models import InterviewInvitation, InterviewChatMessage, InterviewParticipant
 
 logger = logging.getLogger(__name__)
 
@@ -23,13 +23,50 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     Handles WebRTC signaling, chat, screen sharing, and other interview features.
     """
     
+    @database_sync_to_async
+    def get_participant_data(self, token):
+        try:
+            participant = InterviewParticipant.objects.select_related('session').get(token=token)
+            participant.joined_at = timezone.now()
+            participant.save(update_fields=['joined_at'])
+            return {
+                'session_token': str(participant.session.token),
+                'role': participant.role,
+                'name': participant.name or participant.role.capitalize()
+            }
+        except InterviewParticipant.DoesNotExist:
+            return None
+
     async def connect(self):
         """
         Called when WebSocket connection is established.
-        URL pattern: /ws/interview/{session_id}/{role}/
+        Supports:
+        1. Legacy: /ws/interview/{session_id}/{role}/
+        2. New: /ws/interview/p/{participant_token}/
         """
-        self.session_id = self.scope['url_route']['kwargs']['session_id']
-        self.role = self.scope['url_route']['kwargs']['role']  # 'interviewer' or 'candidate'
+        participant_token = self.scope['url_route']['kwargs'].get('participant_token')
+        
+        if participant_token:
+            # New flow: get everything from participant token
+            participant_data = await self.get_participant_data(participant_token)
+            if not participant_data:
+                await self.accept()
+                await self.send(text_data=json.dumps({
+                    'type': 'session_expired',
+                    'message': 'Invalid participant token.'
+                }))
+                await self.close(code=4003)
+                return
+            
+            self.session_id = participant_data['session_token']
+            self.role = participant_data['role']
+            self.participant_name = participant_data['name']
+        else:
+            # Legacy flow
+            self.session_id = self.scope['url_route']['kwargs']['session_id']
+            self.role = self.scope['url_route']['kwargs']['role']
+            self.participant_name = self.role.capitalize()
+
         self.room_group_name = f'interview_{self.session_id}'
         
         try:
@@ -60,15 +97,26 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 await self.close(code=4003)
                 return
 
-            # 🔥 2. Handle presence and duplicate connections
-            presence_key = f"interview_{self.session_id}_presence_{self.role}"
-            old_channel = await database_sync_to_async(cache.get)(presence_key)
+            # 🔥 2. Assign unique User ID and handle presence
+            # We allow multiple participants per role now.
+            self.user_id = f"{self.role}_{self.channel_name.split('.')[-1]}"
             
-            if old_channel and old_channel != self.channel_name:
-                logger.info(f"Replacing old connection for {self.role} in {self.session_id}")
-
-            # Register current connection
+            presence_key = f"interview_{self.session_id}_presence_{self.user_id}"
             await database_sync_to_async(cache.set)(presence_key, self.channel_name, timeout=86400)
+
+            # Track all participants in this session
+            participants_key = f"interview_{self.session_id}_participants"
+            participants = await database_sync_to_async(cache.get)(participants_key) or []
+            
+            new_participant = {
+                'user_id': self.user_id,
+                'role': self.role,
+                'name': self.participant_name,
+                'channel_name': self.channel_name,
+                'joined_at': timezone.now().isoformat()
+            }
+            participants.append(new_participant)
+            await database_sync_to_async(cache.set)(participants_key, participants, timeout=86400)
 
             # Mark as joined in DB
             await self.update_invitation_usage(has_joined=True)
@@ -80,7 +128,29 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             )
             
             await self.accept()
-            logger.info(f"WebSocket connected: {self.role} for session {self.session_id}")
+            logger.info(f"WebSocket connected: {self.user_id} ({self.participant_name}) for session {self.session_id}")
+            
+            # 🔥 Send initial session info
+            await self.send(text_data=json.dumps({
+                'type': 'session_info',
+                'user_id': self.user_id,
+                'role': self.role,
+                'name': self.participant_name
+            }))
+
+            # 🔥 Notify room about new participant
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'forward_message',
+                    'message': {
+                        'type': 'user_joined',
+                        'user_id': self.user_id,
+                        'user': self.participant_name,
+                        'role': self.role
+                    }
+                }
+            )
             
             # Send current screen share state to new connection
             session_state = await get_screen_share_state(self.session_id)
@@ -98,20 +168,23 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 start_time = timezone.now().isoformat()
                 await database_sync_to_async(cache.set)(start_time_key, start_time, timeout=86400)
             
-            # Send session info including start time to the connecting client
+            # Send session info including start time and THEIR user_id to the connecting client
+            # Also send existing participants so they know who to connect to
             await self.send(text_data=json.dumps({
                 'type': 'session_info',
                 'start_time': start_time,
-                'role': self.role
+                'role': self.role,
+                'user_id': self.user_id,
+                'participants': [p for p in participants if p['user_id'] != self.user_id]
             }))
             
-            # Reconnection Sync: notify others
-            msg_type = 'user_rejoined' if old_channel else 'user_joined'
+            # Notify others
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': msg_type,
+                    'type': 'user_joined',
                     'user': self.role.capitalize(),
+                    'user_id': self.user_id,
                     'session_id': self.session_id,
                 }
             )
@@ -145,22 +218,28 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 )
             
             # Prevent firing user_left if this disconnecting channel is replaced
-            presence_key = f"interview_{self.session_id}_presence_{self.role}"
-            current_channel = await database_sync_to_async(cache.get)(presence_key)
-            
-            if current_channel == self.channel_name:
-                # Notify others that this user left (only if they are the primary)
-                await self.channel_layer.group_send(
-                    self.room_group_name,
-                    {
-                        'type': 'user_left',
-                        'user': self.role.capitalize(),
-                        'session_id': self.session_id,
-                    }
-                )
+            # Remove from presence and participants list
+            presence_key = f"interview_{self.session_id}_presence_{self.user_id}"
+            await database_sync_to_async(cache.delete)(presence_key)
 
-                # 🔥 Check if this was the last user to leave
-                await self.check_and_finalize_interview()
+            participants_key = f"interview_{self.session_id}_participants"
+            participants = await database_sync_to_async(cache.get)(participants_key) or []
+            participants = [p for p in participants if p['user_id'] != self.user_id]
+            await database_sync_to_async(cache.set)(participants_key, participants, timeout=86400)
+
+            # Notify others that this user left
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'user_left',
+                    'user': self.role.capitalize(),
+                    'user_id': self.user_id,
+                    'session_id': self.session_id,
+                }
+            )
+
+            # 🔥 Check if this was the last user to leave
+            await self.check_and_finalize_interview()
 
             # Leave room group
             await self.channel_layer.group_discard(
@@ -192,23 +271,28 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 return
             
             # Forward signaling messages to the other peer
+            # Forward signaling messages to the other peer(s)
             if message_type in ['video_offer', 'video_answer', 'ice_candidate', 'request_offer']:
+                # Targeted routing or broadcast
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         'type': 'forward_message',
                         'message': data,
-                        'sender': self.role,
+                        'sender_id': self.user_id,
+                        'target_id': data.get('target'), # Optional target field
                     }
                 )
             
+            # Handle WebRTC ready signal
             # Handle WebRTC ready signal
             elif message_type == 'ready_for_webrtc':
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         "type": "webrtc_ready",
-                        "sender": self.role,
+                        "sender_id": self.user_id,
+                        "role": self.role,
                     }
                 )
             
@@ -395,6 +479,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'type': 'user_joined',
             'user': event['user'],
+            'user_id': event['user_id'],
         }))
         
     async def user_rejoined(self, event):
@@ -410,11 +495,24 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'type': 'user_left',
             'user': event['user'],
+            'user_id': event['user_id'],
         }))
     
     async def forward_message(self, event):
-        """Forward signaling message to other peer (don't send back to sender)"""
-        if event['sender'] != self.role:
+        """Forward signaling message to targeted peer or broadcast"""
+        sender_id = event.get('sender_id')
+        target_id = event.get('target_id')
+        
+        # Don't send back to sender
+        if sender_id == self.user_id:
+            return
+            
+        # If targeted, only send to target
+        if target_id:
+            if target_id == self.user_id:
+                await self.send(text_data=json.dumps(event['message']))
+        else:
+            # Broadcast to all except sender
             await self.send(text_data=json.dumps(event['message']))
     
     async def chat_message(self, event):
@@ -488,11 +586,12 @@ class InterviewConsumer(AsyncWebsocketConsumer):
     
     async def webrtc_ready(self, event):
         """Send webrtc ready notification to WebSocket"""
-        if event["sender"] != self.role:
-            logger.info(f"READY signal from {event['sender']}")
+        if event["sender_id"] != self.user_id:
+            logger.info(f"READY signal from {event['sender_id']} ({event['role']})")
             await self.send(text_data=json.dumps({
                 "type": "ready_for_webrtc",
-                "sender": event["sender"],
+                "sender_id": event["sender_id"],
+                "role": event["role"],
             }))
     
     @database_sync_to_async

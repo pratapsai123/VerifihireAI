@@ -6,6 +6,7 @@ import { API_BASE_URL } from '../apiConfig';
 import '../styles/InterviewInvite.css';
 
 const DRAFT_KEY = 'interviewInviteDraft:schedule';
+const DRAFT_PANEL_KEY = 'interviewInviteDraft:panelMap';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((email || '').trim());
@@ -52,6 +53,17 @@ export default function InterviewInvite() {
   const [candidates, setCandidates] = useState([]);
   const [sending, setSending] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
+
+  // Additional Panelists for the current form
+  const [panelistName, setPanelistName] = useState('');
+  const [panelistEmail, setPanelistEmail] = useState('');
+  const [currentPanelMembers, setCurrentPanelMembers] = useState([]);
+  
+  // Mapping of draft candidate ID to their additional panel members
+  const [draftPanelMap, setDraftPanelMap] = useState({});
+  
+  // To track successfully created sessions for post-send management
+  const [sentSessions, setSentSessions] = useState([]);
 
   const userDomain = useMemo(() => {
     if (!userProfile?.email) return '';
@@ -122,6 +134,12 @@ export default function InterviewInvite() {
     } catch { /* ignore */ }
   }, [scheduleDate, startTime, endTime]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_PANEL_KEY, JSON.stringify(draftPanelMap));
+    } catch { /* ignore */ }
+  }, [draftPanelMap]);
+
   // ── Restore schedule on mount ──
   useEffect(() => {
     try {
@@ -135,6 +153,11 @@ export default function InterviewInvite() {
           if (p?.endTimeManual) endTimeManualRef.current = true;
         }
       }
+    } catch { /* ignore */ }
+
+    try {
+      const rawPanel = localStorage.getItem(DRAFT_PANEL_KEY);
+      if (rawPanel) setDraftPanelMap(JSON.parse(rawPanel));
     } catch { /* ignore */ }
 
     // Fetch profile + existing draft candidates
@@ -186,8 +209,23 @@ export default function InterviewInvite() {
         name: n, email: e, interviewer_name: intN, interviewer_email: intE,
         pan_number: p || null, phone: ph || null,
       });
-      if (resp.data?.results) setCandidates((prev) => [...prev, ...resp.data.results]);
+      
+      if (resp.data?.results) {
+        const newCandidates = resp.data.results;
+        setCandidates((prev) => [...prev, ...newCandidates]);
+        
+        // Save panel members for these new candidates
+        if (currentPanelMembers.length > 0) {
+          const newMap = { ...draftPanelMap };
+          newCandidates.forEach(cand => {
+            newMap[cand.id] = [...currentPanelMembers];
+          });
+          setDraftPanelMap(newMap);
+        }
+      }
+      
       setName(''); setEmail(''); setInterviewerName(''); setInterviewerEmail(''); setPan(''); setPhone('');
+      setCurrentPanelMembers([]);
     } catch (err) {
       alert(err?.response?.data?.error || 'Failed to save draft candidate.');
     }
@@ -238,6 +276,33 @@ export default function InterviewInvite() {
         start_grace_minutes: 30,
       });
       const { sent, failed, results } = resp.data || {};
+      
+      // Handle additional panelists for each created session
+      if (results && results.length > 0) {
+        for (const res of results) {
+          // Find original draft ID (this might be tricky if not returned, 
+          // but usually results match draft_ids order or have draft_id field)
+          // We'll try to find by email if draft_id is missing
+          const panelists = draftPanelMap[res.id] || []; // assuming res.id is what we need or mapped
+          
+          if (panelists.length > 0) {
+            console.log(`Adding ${panelists.length} panelists to session ${res.token}`);
+            for (const panelist of panelists) {
+              try {
+                await axios.post(`${API_BASE_URL}/interviews/add-participant/`, {
+                  session_id: res.token,
+                  email: panelist.email,
+                  name: panelist.name,
+                  role: 'interviewer'
+                });
+              } catch (pErr) {
+                console.error(`Failed to invite panelist ${panelist.email}:`, pErr);
+              }
+            }
+          }
+        }
+      }
+
       if (failed > 0) {
         const failedEmails = (results || []).filter(r => r.status === 'failed').map(r => r.email).join(', ');
         alert(`Sent ${sent} invite(s). Failed: ${failed} — ${failedEmails}`);
@@ -248,6 +313,8 @@ export default function InterviewInvite() {
       setCandidates([]); setName(''); setEmail(''); setPan(''); setPhone('');
       setInterviewerName(''); setInterviewerEmail('');
       setScheduleDate(''); setStartTime(''); setEndTime(''); endTimeManualRef.current = false;
+      setDraftPanelMap({});
+      setSentSessions(results || []);
     } catch (e) {
       alert(e?.response?.data?.error || e?.message || 'Failed to send interview invites');
     } finally { setSending(false); }
@@ -520,31 +587,82 @@ export default function InterviewInvite() {
                 {interviewerEmail && <span className={isValidEmail(interviewerEmail) ? 'ii-tick' : 'ii-cross'}>{isValidEmail(interviewerEmail) ? '✓' : '✕'}</span>}
               </div>
             </div>
+          </div>
+
+          <div className="ii-form-section-label" style={{ marginTop: '1rem' }}>Additional Panelists (Optional)</div>
+          <div className="ii-add-row" style={{ alignItems: 'flex-end' }}>
+            <div className="ii-field">
+              <label className="ii-label">Panelist Name</label>
+              <input
+                className="ii-input"
+                value={panelistName}
+                onChange={(e) => setPanelistName(e.target.value)}
+                placeholder="Enter name"
+              />
+            </div>
+            <div className="ii-field" style={{ flex: '1.5' }}>
+              <label className="ii-label">Panelist Email</label>
+              <input
+                className="ii-input"
+                value={panelistEmail}
+                onChange={(e) => setPanelistEmail(e.target.value)}
+                placeholder="Enter email"
+              />
+            </div>
             <div className="ii-add-actions">
-              <button className="ii-btn-tertiary" type="button" onClick={addCandidate} disabled={!canAdd}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-                Add
-              </button>
-              <button type="button" onClick={shareInvites} disabled={isShareDisabled} className="ii-btn-share">
-                {sending ? (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'ii-spin 1s linear infinite' }}>
-                      <polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
-                    </svg>
-                    Sending…
-                  </>
-                ) : (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
-                    Send Invites
-                  </>
-                )}
+              <button 
+                className="ii-btn-tertiary" 
+                type="button" 
+                onClick={() => {
+                  if (!panelistEmail || !isValidEmail(panelistEmail)) {
+                    alert('Valid email is required to add a panelist.');
+                    return;
+                  }
+                  setCurrentPanelMembers(prev => [...prev, { name: panelistName, email: panelistEmail }]);
+                  setPanelistName('');
+                  setPanelistEmail('');
+                }}
+              >
+                Add Panelist
               </button>
             </div>
+          </div>
+
+          {currentPanelMembers.length > 0 && (
+            <div className="ii-panel-list">
+              {currentPanelMembers.map((m, idx) => (
+                <div key={idx} className="ii-panel-chip">
+                  <span>{m.name || m.email} ({m.email})</span>
+                  <button onClick={() => setCurrentPanelMembers(prev => prev.filter((_, i) => i !== idx))}>×</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="ii-form-footer" style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+            <button className="ii-btn-tertiary" type="button" onClick={addCandidate} disabled={!canAdd}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add Candidate to List
+            </button>
+            <button type="button" onClick={shareInvites} disabled={isShareDisabled} className="ii-btn-share">
+              {sending ? (
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'ii-spin 1s linear infinite' }}>
+                    <polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+                  </svg>
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  Send All Invites
+                </>
+              )}
+            </button>
           </div>
         </div>
 
@@ -630,6 +748,7 @@ export default function InterviewInvite() {
                     <th>Candidate Email</th>
                     <th>Interviewer</th>
                     <th>Interviewer Email</th>
+                    <th>Panel</th>
                     <th>Scheduled</th>
                     <th>PAN</th>
                     <th>Phone</th>
@@ -654,6 +773,15 @@ export default function InterviewInvite() {
                         </div>
                       </td>
                       <td><span className="ii-mono">{c.interviewer_email}</span></td>
+                      <td>
+                        {draftPanelMap[c.id] && draftPanelMap[c.id].length > 0 ? (
+                          <span className="ii-badge-schedule" style={{ background: '#f5f3ff', borderColor: '#c4b5fd', color: '#5b21b6' }}>
+                            +{draftPanelMap[c.id].length} Panelists
+                          </span>
+                        ) : (
+                          <span className="ii-badge-dash">—</span>
+                        )}
+                      </td>
                       <td>
                         {scheduleDisplay
                           ? <span className="ii-badge-schedule">{scheduleDisplay}</span>
