@@ -1247,6 +1247,39 @@ class InterviewInvitation(models.Model):
         return f"Interview Invitation #{self.id} - {self.email} (Interview {self.interview_id if self.interview else 'N/A'})"
 
 
+class InterviewParticipant(models.Model):
+    """
+    Unique participant record for an interview session.
+    Allows multiple interviewers/panelists to join with unique links.
+    """
+    session = models.ForeignKey(
+        InterviewInvitation,
+        on_delete=models.CASCADE,
+        related_name='participants'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='interview_participations'
+    )
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    role = models.CharField(max_length=20, default='interviewer') # interviewer / candidate
+    token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    joined_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Interview Participant"
+        verbose_name_plural = "Interview Participants"
+
+    def __str__(self):
+        return f"{self.name or self.email} ({self.role}) - Session {self.session.token}"
+
+
 class InterviewChatMessage(models.Model):
     """
     Stores chat messages exchanged during a live interview session.

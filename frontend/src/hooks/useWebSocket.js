@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { WS_BASE_URL } from "../apiConfig";
 
-export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
+export const useWebSocket = (sessionId, role, sessionExpired, onMessage, participantToken = null) => {
   const socketRef = useRef(null);
   const [connectionStatus, setConnectionStatus] = useState("Connecting");
 
@@ -18,7 +18,8 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
   }, [onMessage]);
 
   const connect = useCallback(() => {
-    if (!sessionId || !role || sessionExpired) return;
+    if ((!sessionId || !role) && !participantToken) return;
+    if (sessionExpired) return;
     if (!shouldReconnectRef.current) return;
 
     // 🔥 Prevent duplicate connections
@@ -36,7 +37,14 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
       socketRef.current.close();
     }
 
-    const wsUrl = `${WS_BASE_URL}/${sessionId}/${role}/`;
+    // Determine URL
+    let wsUrl;
+    if (participantToken) {
+      wsUrl = `${WS_BASE_URL}/p/${participantToken}/`;
+    } else {
+      wsUrl = `${WS_BASE_URL}/${sessionId}/${role}/`;
+    }
+    
     console.log("🔌 Connecting to:", wsUrl);
 
     const socket = new WebSocket(wsUrl);
@@ -117,11 +125,11 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
         connect();
       }, retryDelayRef.current);
     };
-  }, [sessionId, role, sessionExpired]);
+  }, [sessionId, role, sessionExpired, participantToken]);
 
   // ✅ CLEAN + STABLE EFFECT
   useEffect(() => {
-    if (!sessionId || !role) return;
+    if ((!sessionId || !role) && !participantToken) return;
 
     shouldReconnectRef.current = true;
     connect();
@@ -141,7 +149,8 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage) => {
         socketRef.current.close();
       }
     };
-  }, [sessionId, role]); // 🔥 ONLY these deps
+  }, [sessionId, role, participantToken]); // 🔥 ONLY these deps
+
 
   const sendMessage = useCallback((msg) => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {

@@ -900,6 +900,158 @@ def submit_interview_feedback(request):
         print(f"Error submitting feedback: {e}")
         print(traceback.format_exc())
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def add_interview_participant_view(request):
+    """
+    Invite an additional participant (interviewer) to an existing session.
+    """
+    try:
+        data = request.data or {}
+        print(f"DEBUG: Received data: {data}")
+        session_id = data.get('session_id')
+        email = data.get('email')
+        name = data.get('name', 'Participant')
+        role = data.get('role', 'interviewer')
+        
+        if not session_id or not email:
+            return Response({'error': 'session_id and email are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        print(f"DEBUG: Looking for session: {session_id}")
+        try:
+            invitation = InterviewInvitation.objects.get(token=session_id)
+        except InterviewInvitation.DoesNotExist:
+            print(f"DEBUG: Session {session_id} not found")
+            return Response({'error': 'Interview session not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+        # Get or create user
+        print(f"DEBUG: Getting/Creating user for email: {email}")
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        try:
+            user, created = User.objects.get_or_create(
+                email=email,
+                defaults={'username': email, 'first_name': name}
+            )
+            print(f"DEBUG: User found/created: {user.id}, Created: {created}")
+        except Exception as user_err:
+            print(f"DEBUG: User get_or_create failed: {user_err}")
+            # Fallback to finding by email if username exists but different email
+            user = User.objects.filter(email=email).first()
+            if not user:
+                 user = User.objects.filter(username=email).first()
+            if not user:
+                raise user_err
+        
+        # Create participant
+        print(f"DEBUG: Creating participant record...")
+        participant = InterviewParticipant.objects.create(
+            session=invitation,
+            user=user,
+            email=email,
+            name=name,
+            role=role
+        )
+        print(f"DEBUG: Participant created: {participant.id} with token {participant.token}")
+        
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        
+        # Link changes based on role
+        if role == 'interviewer':
+            invite_link = f"{frontend_base.rstrip('/')}/live-interview-interviewer?participant_token={participant.token}"
+        else:
+            invite_link = f"{frontend_base.rstrip('/')}/live-interview?participant_token={participant.token}"
+            
+        # Send Email to Participant
+        try:
+            interview_name = invitation.interview.name if invitation.interview else "Interview"
+            candidate_name = invitation.name
+            
+            subject = f"Panel Interview Invitation - {interview_name}"
+            
+            # Basic schedule display
+            schedule_info = ""
+            if invitation.start_time:
+                from django.utils import timezone
+                st = invitation.start_time
+                if invitation.time_zone:
+                    try:
+                        from zoneinfo import ZoneInfo
+                        st = st.astimezone(ZoneInfo(invitation.time_zone))
+                    except: pass
+                schedule_info = f"<p><strong>Scheduled:</strong> {st.strftime('%B %d, %Y at %I:%M %p')} {invitation.time_zone or ''}</p>"
+
+            html_content = f"""
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 600px;">
+                <h2 style="color: #2563eb;">Panel Interview Invitation</h2>
+                <p>Hi <strong>{name or email}</strong>,</p>
+                <p>You have been invited to join an interview panel for <strong>{candidate_name}</strong>.</p>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                    <p style="margin: 8px 0;"><strong>Interview:</strong> {interview_name}</p>
+                    {schedule_info}
+                </div>
+                <p style="margin: 24px 0;">
+                    <a href="{invite_link}" target="_blank"
+                       style="background:#059669;color:#fff;padding:14px 24px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;">
+                    Join Interview Room
+                    </a>
+                </p>
+                <p style="font-size:12px;color:#64748b;">If the button doesn't work, copy this link: {invite_link}</p>
+            </div>
+            """
+            
+            text_content = f"Hi {name or email},\n\nYou have been invited to join an interview panel for {candidate_name}.\n\nJoin Link: {invite_link}"
+            
+            msg = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', None),
+                to=[email],
+            )
+            msg.attach_alternative(html_content, "text/html")
+            msg.send(fail_silently=False)
+            print(f"DEBUG: Email sent successfully to {email}")
+        except Exception as mail_err:
+            print(f"DEBUG: Failed to send email to participant: {mail_err}")
+
+        print(f"DEBUG: Returning link: {invite_link}")
+        return Response({
+            'message': 'Participant invited and email sent.',
+            'invite_link': invite_link,
+            'participant_token': str(participant.token)
+        }, status=status.HTTP_201_CREATED)
+        
+    except Exception as e:
+        import traceback
+        print(f"❌ Error adding participant: {e}")
+        print(traceback.format_exc())
+        return Response({'error': f"Internal server error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def validate_participant_token_view(request, token):
+    """
+    Validate a participant token and return session details.
+    """
+    try:
+        try:
+            participant = InterviewParticipant.objects.select_related('session').get(token=token)
+        except InterviewParticipant.DoesNotExist:
+            return Response({'error': 'Invalid participant token.'}, status=status.HTTP_404_NOT_FOUND)
+            
+        return Response({
+            'session_id': str(participant.session.token),
+            'role': participant.role,
+            'name': participant.name,
+            'email': participant.email,
+            'candidate_name': participant.session.name,
+            'interview_name': participant.session.interview.name if participant.session.interview else 'Interview'
+        }, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 @csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([AllowAny])

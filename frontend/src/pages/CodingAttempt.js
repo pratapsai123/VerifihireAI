@@ -473,18 +473,7 @@ export default function CodingAttempt() {
                 <div className="coding-pane-header">
                   <div>
                     <div className="coding-title">{q?.title || 'Untitled'}</div>
-                    <div className="coding-meta">
-                      {languages.length === 0 ? (
-                        <span className="coding-pill coding-pill-muted">—</span>
-                      ) : (
-                        languages.map((lang) => (
-                          <span key={lang} className="coding-pill coding-pill-muted">
-                            {lang}
-                          </span>
-                        ))
-                      )}
-                      <span className="coding-pill coding-pill-muted">{q?.mode || '—'}</span>
-                    </div>
+
                   </div>
                   <div className="coding-toolbar">
                     <button type="button" className="btn btn-secondary" onClick={() => navigate('/coding')}>
