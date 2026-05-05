@@ -73,6 +73,8 @@ const InterviewStart = () => {
     const [linkExpired, setLinkExpired] = useState(false);
     const [resumeFile, setResumeFile] = useState(null);
     const [isStarting, setIsStarting] = useState(false);
+    const [isResuming, setIsResuming] = useState(false);
+    const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
     // Registration fields
     const [phone, setPhone] = useState('');
@@ -98,7 +100,18 @@ const InterviewStart = () => {
             }
             try {
                 const response = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/`);
-                setCandidate(response.data);
+                const candidateData = response.data;
+                setCandidate(candidateData);
+                
+                // Check if candidate has already completed registration
+                if (candidateData.phone && candidateData.pan_number && candidateData.resume) {
+                    setIsAlreadyRegistered(true);
+                    // Pre-fill the form fields for display
+                    setPhone(candidateData.phone || '');
+                    setPanNumber(candidateData.pan_number || '');
+                    setPanVerified(true);
+                }
+                
                 setLoading(false);
 
                 // Keep candidate on this page even when questions already exist.
@@ -228,6 +241,43 @@ const InterviewStart = () => {
         }
     };
 
+    const handleResumeInterview = async () => {
+        setIsResuming(true);
+        setFormError('');
+
+        try {
+            // Re-fetch resume match to get questions (sessionStorage was cleared when tab closed)
+            const formData = new FormData();
+            formData.append('candidate_id', candidate.id);
+            // Note: resume is already on server, we just need to trigger match
+
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
+            if (!response.data.interview_questions) {
+                throw new Error('No questions generated');
+            }
+
+            const sessionData = {
+                candidateId: candidate.id,
+                candidateName: candidate.full_name,
+                questions: response.data.interview_questions,
+                status: 'interview_started'
+            };
+            sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
+
+            import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+                logCandidateActivity(token, 'Interview Resumed', 'Candidate resumed the AI interview after closing/reopening the link.');
+            });
+
+            navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
+        } catch (err) {
+            setFormError(err.response?.data?.error || err.message || 'Failed to resume interview. Please try again.');
+            setIsResuming(false);
+        }
+    };
+
     const handleStartInterview = async () => {
         // Validate required fields
         if (!phone.trim()) {
@@ -269,9 +319,17 @@ const InterviewStart = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
         } catch (err) {
-            setFormError(err.response?.data?.error || 'Failed to save registration details');
-            setIsStarting(false);
-            return;
+            const errorData = err.response?.data;
+            // If PAN requires face verification, store details and proceed to interview for face check
+            if (errorData?.requires_face_verification) {
+                sessionStorage.setItem('verify_against_person_id', errorData.verify_against_person_id || '');
+                sessionStorage.setItem('pending_pan', panNumber.toUpperCase().trim());
+                // Proceed to interview - face verification will happen there
+            } else {
+                setFormError(errorData?.error || 'Failed to save registration details');
+                setIsStarting(false);
+                return;
+            }
         }
 
         // Then proceed with resume matching
@@ -456,6 +514,69 @@ const InterviewStart = () => {
                     )}
                 </div>
 
+                {/* Already Registered - Resume Interview */}
+                {isAlreadyRegistered && (
+                    <div style={{
+                        background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+                        border: '2px solid #22c55e',
+                        borderRadius: '20px',
+                        padding: '2rem',
+                        marginBottom: '2rem',
+                        textAlign: 'center'
+                    }}>
+                        <div style={{
+                            width: '64px', height: '64px', background: '#22c55e', borderRadius: '50%',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            margin: '0 auto 1rem', color: 'white', fontSize: '1.75rem'
+                        }}>
+                            <i className="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h3 style={{ color: '#166534', margin: '0 0 0.5rem', fontWeight: '700' }}>
+                            Registration Complete
+                        </h3>
+                        <p style={{ color: '#15803d', margin: '0 0 1.5rem', fontSize: '0.95rem' }}>
+                            Your details are already on file. Click below to resume your interview.
+                        </p>
+                        <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem', textAlign: 'left' }}>
+                            <p style={{ margin: '0 0 0.5rem', color: '#374151', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-phone" style={{ marginRight: '8px', color: '#22c55e' }}></i>
+                                {candidate?.phone}
+                            </p>
+                            <p style={{ margin: '0 0 0.5rem', color: '#374151', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-id-card" style={{ marginRight: '8px', color: '#22c55e' }}></i>
+                                {candidate?.pan_number}
+                            </p>
+                            <p style={{ margin: '0', color: '#374151', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-file-pdf" style={{ marginRight: '8px', color: '#22c55e' }}></i>
+                                Resume uploaded
+                            </p>
+                        </div>
+                        <button
+                            onClick={handleResumeInterview}
+                            disabled={isResuming || !timeAllowed}
+                            style={{
+                                width: '100%', padding: '1.2rem', borderRadius: '14px', border: 'none',
+                                background: !timeAllowed ? '#cbd5e0' : 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                                color: 'white', fontSize: '1.1rem', fontWeight: '700', cursor: !timeAllowed ? 'not-allowed' : 'pointer',
+                                opacity: !timeAllowed ? 0.7 : 1, transition: 'transform 0.2s'
+                            }}
+                            onMouseOver={(e) => { if (timeAllowed) e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
+                        >
+                            {isResuming ? (
+                                <><i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '8px' }}></i> Loading Interview...</>
+                            ) : !timeAllowed ? (
+                                '⏳ Interview Not Yet Available'
+                            ) : (
+                                <><i className="fa-solid fa-play" style={{ marginRight: '8px' }}></i> Resume Interview</>
+                            )}
+                        </button>
+                    </div>
+                )}
+
+                {/* Registration Form - only show if not already registered */}
+                {!isAlreadyRegistered && (
+                    <>
                 {/* Phone Number */}
                 <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
                     <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
@@ -717,6 +838,8 @@ const InterviewStart = () => {
                         !timeAllowed ? (pastWindow ? '⛔ Window Closed' : `⏳ Opens at ${candidate.available_from ? new Date(candidate.available_from).toLocaleTimeString([], { timeStyle: 'short' }) : candidate.interview_time}`) :
                             'Start Interview Now'}
                 </button>
+                    </>
+                )}
             </div>
         </div>
     );

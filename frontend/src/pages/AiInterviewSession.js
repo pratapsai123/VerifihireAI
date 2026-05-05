@@ -13,6 +13,7 @@ const AiInterviewSession = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
+    const [candidateData, setCandidateData] = useState(null);
     const [maxQuestions, setMaxQuestions] = useState(13);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
@@ -34,6 +35,7 @@ const AiInterviewSession = () => {
     const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isScreenSharing, setIsScreenSharing] = useState(false);
+    const [isPaused, setIsPaused] = useState(false); // Pause timer during interruptions
 
     // ── Registration State ──
     const [isFaceRegistered, setIsFaceRegistered] = useState(false);
@@ -85,6 +87,7 @@ const AiInterviewSession = () => {
     const lastTranscriptStrRef = useRef("");
     const micStreamRef = useRef(null); // Holds the active MediaStream to physically mute/unmute mic hardware
     const consecutiveSilenceRef = useRef(0); // Track consecutive [Silent] answers to auto-exit if candidate leaves
+    const lastActivityTimeRef = useRef(Date.now()); // Track ANY candidate activity for grace period
     const screenStreamRef = useRef(null);
     const screenCanvasRef = useRef(null);
     const lastCaptureTimeRef = useRef({}); // Store timestamps per eventType for cooldowns
@@ -94,6 +97,7 @@ const AiInterviewSession = () => {
     const isStartingMicRef = useRef(false);
     const manualMuteRef = useRef(false); // Track if user manually muted mic to prevent auto-resume
     const isNoticePlayingRef = useRef(false);
+    const faceEmbeddingHashRef = useRef(null); // Store face embedding hash for duplicate detection
     // DeepFace refs
     const dfWsRef = useRef(null);
     const dfCanvasRef = useRef(null);
@@ -161,6 +165,7 @@ const AiInterviewSession = () => {
             setIsScreenSharing(true);
             track.onended = () => {
                 setIsScreenSharing(false);
+                setIsPaused(true); // Pause timer and interview progression
                 showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
             };
             return true;
@@ -294,11 +299,13 @@ const AiInterviewSession = () => {
 
         const handleVisibilityChange = () => {
             if (document.hidden || document.visibilityState === 'hidden') {
+                setIsPaused(true); // Pause timer and interview progression
                 showAiEvent("TAB SWITCHED", true, 'tab_switch');
             }
         };
 
         const handleBlur = () => {
+            setIsPaused(true); // Pause timer and interview progression
             showAiEvent("WINDOW BLURRED", true, 'tab_switch');
         };
 
@@ -312,14 +319,16 @@ const AiInterviewSession = () => {
 
             if (isFS && isPermissionsGranted && isScreenSharing) {
                 console.log("Integrity: Safe state restored. Resuming hardware...");
-                // 1. Unmute Hardware Tracks
+                // 1. Resume timer and interview progression
+                setIsPaused(false);
+                // 2. Unmute Hardware Tracks
                 if (micStreamRef.current) {
                     micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
                 }
                 if (streamRef.current) {
                     streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
                 }
-                // 2. Ensure video element is playing
+                // 3. Ensure video element is playing
                 if (videoRef.current) {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
@@ -328,6 +337,7 @@ const AiInterviewSession = () => {
 
             if (!isFS && isPermissionsGranted) {
                 showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
+                setIsPaused(true); // Pause timer and interview progression
                 pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
             }
@@ -368,6 +378,7 @@ const AiInterviewSession = () => {
 
         // NEW: Monitor Screen Sharing status for pausing
         if (!isScreenSharing && isPermissionsGranted && isInitializedRef.current && !isCompletedRef.current) {
+            setIsPaused(true); // Pause timer and interview progression
             pauseHardware();
             setAiStatus("Interview Paused (Screen Share Stopped)");
         }
@@ -900,6 +911,102 @@ const AiInterviewSession = () => {
         synthRef.current.speak(utterance);
     }, []);
 
+    // Helper: Record ANY candidate activity to prevent false silence detection
+    const recordActivity = useCallback(() => {
+        lastActivityTimeRef.current = Date.now();
+        if (consecutiveSilenceRef.current > 0) {
+            consecutiveSilenceRef.current = 0;
+            console.log("🎤 [Activity] Candidate activity detected, resetting silence counter");
+        }
+    }, []);
+
+    // Helper: Wait for speech synthesis to fully complete before starting mic
+    const waitForSpeechToFinish = useCallback(() => {
+        return new Promise((resolve) => {
+            // Check if browser TTS is still speaking
+            const checkSpeaking = () => {
+                if (!window.speechSynthesis.speaking && !currentAudioRef.current) {
+                    resolve();
+                } else {
+                    setTimeout(checkSpeaking, 100);
+                }
+            };
+            // Wait a bit first, then check
+            setTimeout(checkSpeaking, 200);
+        });
+    }, []);
+
+    // Helper: Validate answer before submission
+    const validateAnswer = useCallback((text) => {
+        if (text === "[Candidate remained silent/skipped]") {
+            return { valid: true, isSilence: true };
+        }
+        if (!text || text.trim().length < 10) {
+            return { valid: false, reason: "Answer too short (minimum 10 characters)" };
+        }
+        const words = text.trim().split(/\s+/).filter(w => w.length > 2);
+        if (words.length < 3) {
+            return { valid: false, reason: "Answer too brief (minimum 3 meaningful words)" };
+        }
+        // Check for repeated patterns (gibberish detection)
+        const repeatedPattern = /(\b\w{1,3}\b)\s+\1\s+\1/;
+        if (repeatedPattern.test(text)) {
+            return { valid: false, reason: "Answer appears to be repetitive/gibberish" };
+        }
+        return { valid: true };
+    }, []);
+
+    // Helper: Submit answer with retry logic
+    const submitAnswerWithRetry = useCallback(async (payload, retries = 3) => {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const response = await axios.post(`${API_BASE_URL}/ai-candidates/process-answer/`, payload, {
+                    timeout: 60000
+                });
+                return { success: true, data: response.data };
+            } catch (err) {
+                console.warn(`API call attempt ${i + 1} failed:`, err.message);
+                if (i === retries - 1) {
+                    throw err; // All retries exhausted
+                }
+                // Exponential backoff: wait 1s, 2s, 4s
+                await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)));
+            }
+        }
+    }, [token]);
+
+    // Helper: Check microphone quality before starting
+    const checkMicrophoneQuality = useCallback(async (stream) => {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioContext.createAnalyser();
+            const microphone = audioContext.createMediaStreamSource(stream);
+            microphone.connect(analyser);
+            analyser.fftSize = 256;
+
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+            let levels = [];
+
+            const checkInterval = setInterval(() => {
+                analyser.getByteFrequencyData(dataArray);
+                const avg = dataArray.reduce((a, b) => a + b) / dataArray.length;
+                levels.push(avg);
+            }, 100);
+
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    clearInterval(checkInterval);
+                    const avgLevel = levels.reduce((a, b) => a + b) / levels.length;
+                    console.log(`[Mic Quality] Average audio level: ${avgLevel.toFixed(2)}`);
+                    resolve(avgLevel > 5); // At least some audio activity
+                }, 2000);
+            });
+        } catch (e) {
+            console.warn("[Mic Quality] Check failed:", e);
+            return true; // Allow anyway if check fails
+        }
+    }, []);
+
     const addMessage = useCallback((sender, text) => {
         const displayText = typeof text === 'object' ? (text.question || JSON.stringify(text)) : text;
         const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -1292,6 +1399,18 @@ const AiInterviewSession = () => {
             return;
         }
 
+        // NEW: Validate answer before processing
+        const validation = validateAnswer(answer);
+        if (!validation.valid) {
+            console.log(`[Validation] Answer rejected: ${validation.reason}`);
+            // Don't block silence answers, but warn for others
+            if (!validation.isSilence) {
+                setAiToast({ active: true, text: validation.reason + ". Please provide a more detailed answer.", urgent: true });
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+                // Allow submission anyway but log it
+            }
+        }
+
         // 1. Immediate UI Lock & Reset Nudge
         setIsProcessing(true);
         isProcessingRef.current = true;
@@ -1307,16 +1426,26 @@ const AiInterviewSession = () => {
         setSilenceCountdown(0);
 
         // 3. Track Consecutive Silence (to end interview if candidate leaves)
+        // NEW: Improved with grace period and activity tracking
         if (answer === "[Candidate remained silent/skipped]") {
             consecutiveSilenceRef.current += 1;
         } else {
             consecutiveSilenceRef.current = 0;
+            recordActivity();
         }
 
+        // NEW: Check grace period before ending interview
         if (consecutiveSilenceRef.current >= 3) {
-            console.log("Consecutive silence limit reached (3). Ending interview.");
-            completeInterview("The interview has been ended due to lack of response. We will review the answers provided so far. Thank you.");
-            return;
+            const timeSinceActivity = Date.now() - lastActivityTimeRef.current;
+            const SILENCE_GRACE_PERIOD = 8000; // 8 seconds grace
+            if (timeSinceActivity > SILENCE_GRACE_PERIOD) {
+                console.log(`Consecutive silence limit reached (3). Time since activity: ${timeSinceActivity}ms. Ending interview.`);
+                completeInterview("The interview has been ended due to lack of response. We will review the answers provided so far. Thank you.");
+                return;
+            } else {
+                console.log(`Consecutive silence at 3, but grace period active (${timeSinceActivity}ms < ${SILENCE_GRACE_PERIOD}ms). Resetting counter.`);
+                consecutiveSilenceRef.current = 0;
+            }
         }
 
         addMessage('user', answer);
@@ -1327,21 +1456,23 @@ const AiInterviewSession = () => {
         interimTranscriptRef.current = "";
         lastTranscriptStrRef.current = "";
         lastSpokenTimeRef.current = Date.now();
+        recordActivity();
 
         console.log("Submitting answer turn...");
 
         try {
             const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
-            const response = await axios.post(`${API_BASE_URL}/ai-candidates/process-answer/`, {
+            const payload = {
                 candidate_token: token,
                 question: typeof currentQ === 'object' ? currentQ.question : currentQ,
                 answer: answer,
-                turn_number: currentQuestionIndex + 1, // Explicit Turn Number
+                turn_number: currentQuestionIndex + 1,
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
-            }, { timeout: 60000 }); // 60s for more complex reasoning (increased for stability)
-
-            const data = response.data;
+            };
+            // NEW: Use retry logic instead of single attempt
+            const result = await submitAnswerWithRetry(payload, 3);
+            const data = result.data;
             const isClarification = data.is_clarification === true;
             const isExit = data.is_exit === true;
             let fullFeedback = data.feedback || "";
@@ -1367,12 +1498,16 @@ const AiInterviewSession = () => {
                     console.error("Clarification speak error:", e);
                 }
 
+                // NEW: Wait for speech to fully complete before starting mic
+                await waitForSpeechToFinish();
                 setIsProcessing(false);
                 isProcessingRef.current = false;
                 setAiStatus("Indu is Online");
                 // Reset manual mute for new turn
                 manualMuteRef.current = false;
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                if (userInputMode === 'audio' && !showQuotaWarning) {
+                    setTimeout(() => startListening(), 300);
+                }
                 return; // STOP HERE: Don't move to next question index
             }
 
@@ -1441,18 +1576,20 @@ const AiInterviewSession = () => {
                 }
 
                 await speak(followUpText);
+                // NEW: Wait for speech to fully complete before starting mic
+                await waitForSpeechToFinish();
                 setIsProcessing(false);
                 isProcessingRef.current = false;
 
-                // FIX: Add delay before mic starts to prevent feedback loop with speech
                 if (effectiveMode === 'audio' && !showQuotaWarning) {
                     // Reset manual mute for new turn
                     manualMuteRef.current = false;
+                    // Additional small delay after speech fully completes
                     setTimeout(() => {
                         if (!isCompletedRef.current && !isProcessingRef.current) {
                             startListening();
                         }
-                    }, 600);
+                    }, 300);
                 }
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 if (fullTurnText) addMessage('ai', fullTurnText);
@@ -1591,7 +1728,7 @@ const AiInterviewSession = () => {
                 }, 800);
             }
         }
-    }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening, showQuotaWarning, userInputMode]);
+    }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening, showQuotaWarning, userInputMode, submitAnswerWithRetry, recordActivity, validateAnswer, waitForSpeechToFinish]);
 
     // 4. Lifecycle
     useEffect(() => {
@@ -1627,6 +1764,7 @@ const AiInterviewSession = () => {
 
                 const res = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/?_t=${Date.now()}`);
                 const candidate = res.data;
+                setCandidateData(candidate);
                 setCandidateName(candidate.full_name);
 
                 if (candidate.status === 'Completed') {
@@ -1758,23 +1896,129 @@ const AiInterviewSession = () => {
                 throw new Error('Missing interview token for DeepFace registration.');
             }
 
-            const regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
-                person_id: personId,
-                image_base64: b64
-            });
-            
-            if (regRes.data && regRes.data.success) {
-                setWizardStep(2); // 'success'
-                logCandidateActivity(token, 'AI Interview Started', 'Candidate passed proctoring check and started the AI Interview.');
-                setTimeout(() => {
-                    // Transition to Environment Setup instead of starting interview
-                    setWizardStep(4); // Environment Checks
-                }, 1500);
-            } else {
-                setWizardStep(3); // 'error'
-                setCapturedImage(null); 
-                alert(regRes.data?.message || 'Face registration failed. Please ensure your face is clearly visible.');
+            // Check if this is a PAN-recovery case (different person_id to verify against)
+            const verifyAgainstPersonId = sessionStorage.getItem('verify_against_person_id');
+            const pendingPan = sessionStorage.getItem('pending_pan');
+
+            // Step 1: Ask DeepFace if this person already has a registered face
+            // (Do NOT rely on candidateData - it may not be loaded yet due to race condition)
+            let hasExistingFace = false;
+            try {
+                const checkRes = await axios.get(`${DEEPFACE_BASE_URL}/registration/registered/${personId}`);
+                hasExistingFace = checkRes.data?.registered === true;
+                console.log(`[Face] DeepFace reports person ${personId} has existing face: ${hasExistingFace}`);
+            } catch (err) {
+                console.warn('[Face] Could not check registration status, assuming new:', err.message);
+                hasExistingFace = false;
             }
+
+            let regRes = null;
+            let verifyRes = null;
+            let embeddingHash = null;
+
+            // CASE A: Using a PAN that belongs to someone else (verify against original holder)
+            if (verifyAgainstPersonId) {
+                console.log(`[Face] PAN-recovery mode: verifying against original holder ${verifyAgainstPersonId}`);
+                verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
+                    person_id: verifyAgainstPersonId,
+                    image_base64: b64
+                });
+
+                if (verifyRes.data?.verified) {
+                    console.log('[Face] PAN-recovery: face matches original holder. Identity confirmed.');
+                    // Re-register under current token to update embeddings
+                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                        person_id: personId,
+                        image_base64: b64
+                    });
+                    embeddingHash = regRes.data?.embedding_hash;
+                } else {
+                    const msg = verifyRes.data?.message || 'Face does not match the registered photo.';
+                    console.error('[Face] PAN-recovery failed:', msg);
+                    setWizardStep(3);
+                    setCapturedImage(null);
+                    alert(`Identity verification failed: ${msg}\n\nThis PAN is registered to another person. Please use your own PAN.`);
+                    return;
+                }
+            }
+            // CASE B: Returning candidate (same token) with existing face
+            else if (hasExistingFace) {
+                console.log(`[Face] Returning candidate: verifying new photo against stored embeddings for ${personId}`);
+                verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
+                    person_id: personId,
+                    image_base64: b64
+                });
+
+                if (verifyRes.data?.verified) {
+                    console.log('[Face] Returning candidate verified. Same person.');
+                    // Re-register to update stored embeddings
+                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                        person_id: personId,
+                        image_base64: b64
+                    });
+                    embeddingHash = regRes.data?.embedding_hash;
+                } else {
+                    const msg = verifyRes.data?.message || 'Face does not match your previously registered photo.';
+                    console.error('[Face] Returning candidate verification failed:', msg);
+                    setWizardStep(3);
+                    setCapturedImage(null);
+                    alert(`Identity verification failed: ${msg}\n\nYou are using a different face than what was originally registered. If you believe this is an error, please ensure good lighting and face the camera directly.`);
+                    return;
+                }
+            }
+            // CASE C: Brand new candidate
+            else {
+                console.log(`[Face] New candidate: registering face for ${personId}`);
+                regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                    person_id: personId,
+                    image_base64: b64
+                });
+                embeddingHash = regRes.data?.embedding_hash;
+            }
+
+            // Validate registration result
+            const success = regRes?.data?.success || (verifyRes?.data?.verified && embeddingHash);
+            if (!success) {
+                setWizardStep(3);
+                setCapturedImage(null);
+                alert(regRes?.data?.message || 'Face registration failed. Please ensure your face is clearly visible.');
+                return;
+            }
+
+            // Send hash to backend
+            if (embeddingHash) {
+                faceEmbeddingHashRef.current = embeddingHash;
+                console.log('[Face] Embedding hash captured:', embeddingHash.substring(0, 16) + '...');
+                
+                const payload = { face_embedding_hash: embeddingHash };
+                if (verifyAgainstPersonId) {
+                    payload.face_verified = true;
+                }
+                if (pendingPan) {
+                    payload.pan_number = pendingPan;
+                }
+                
+                try {
+                    await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/register/`, payload);
+                    console.log('[Face] Face hash sent to backend successfully');
+                    sessionStorage.removeItem('verify_against_person_id');
+                    sessionStorage.removeItem('pending_pan');
+                } catch (hashErr) {
+                    console.error('[Face] Failed to send face hash:', hashErr);
+                    if (hashErr.response?.data?.duplicate_face) {
+                        setWizardStep(3);
+                        setCapturedImage(null);
+                        alert(hashErr.response.data.error || 'This face is already registered to another candidate.');
+                        return;
+                    }
+                }
+            }
+
+            setWizardStep(2); // 'success'
+            logCandidateActivity(token, 'AI Interview Started', 'Candidate passed proctoring check and started the AI Interview.');
+            setTimeout(() => {
+                setWizardStep(4); // Environment Checks
+            }, 1500);
         } catch (err) {
             console.error("Registration error:", err);
             setWizardStep(3); // 'error'
@@ -1785,13 +2029,16 @@ const AiInterviewSession = () => {
 
     const handleEnvironmentSetup = async () => {
         setAiStatus("Setting up environment...");
-        
+        // NEW: Pause timer during setup
+        setIsPaused(true);
+
         // STEP 1: Request Screen Share FIRST (if not already active)
         if (!isScreenSharing) {
             console.log("Requesting Screen Share...");
             const screenSuccess = await startScreenShare();
             if (!screenSuccess) {
                 console.warn("Screen share denied during setup.");
+                setIsPaused(false);
                 return;
             }
             // Screen share granted successfully - now automatically trigger fullscreen
@@ -1812,8 +2059,11 @@ const AiInterviewSession = () => {
                 setIsFullscreen(true);
                 isFullscreenRef.current = true;
                 console.log("Fullscreen activated automatically after screen share.");
+                // NEW: Resume timer after setup
+                setIsPaused(false);
             } catch (err) {
                 console.warn("Fullscreen request failed during setup:", err);
+                setIsPaused(false);
                 alert("Fullscreen mode is required for this interview. Please click 'Enable Fullscreen' to continue.");
                 return;
             }
@@ -1824,6 +2074,18 @@ const AiInterviewSession = () => {
         if (!isFullscreen || !isScreenSharing) {
             alert("Please enable Fullscreen and Screen Sharing to begin.");
             return;
+        }
+
+        // NEW: Check microphone quality before starting
+        try {
+            const testStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const micOk = await checkMicrophoneQuality(testStream);
+            testStream.getTracks().forEach(t => t.stop());
+            if (!micOk) {
+                console.warn("[Mic Check] Microphone quality check failed, but allowing interview to proceed.");
+            }
+        } catch (e) {
+            console.warn("[Mic Check] Could not test microphone:", e);
         }
         
         try {
@@ -1993,6 +2255,7 @@ const AiInterviewSession = () => {
                 // This prevents false positives when AssemblyAI delivers delayed transcripts
                 if (consecutiveSilenceRef.current > 0) {
                     consecutiveSilenceRef.current = 0;
+                    recordActivity();
                     console.log("🎤 [Silence Fix] Candidate spoke during silence countdown, resetting silence counter");
                 }
                 return;
@@ -2095,12 +2358,17 @@ const AiInterviewSession = () => {
             return;
         }
 
+        // NEW: Pause timer during interruptions (fullscreen requests, dialogs, etc.)
+        if (isPaused) {
+            return;
+        }
+
         const timer = setInterval(() => {
             setTimeLeft(prev => prev - 1);
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [timeLeft, isCompleted, completeInterview]);
+    }, [timeLeft, isCompleted, isPaused, completeInterview]);
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);

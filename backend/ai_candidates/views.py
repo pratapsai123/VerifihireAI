@@ -17,6 +17,7 @@ from PIL import Image
 from datetime import datetime, timedelta
 
 from django.utils import timezone
+from django.db import IntegrityError
 
 from rest_framework.views import APIView
 
@@ -1563,7 +1564,9 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
                 candidate.link_opened_at = now
 
-                candidate.save(update_fields=['link_opened_at'])
+                # Lock PAN when interview starts - prevents PAN swapping
+                candidate.pan_locked = True
+                candidate.save(update_fields=['link_opened_at', 'pan_locked'])
 
             else:
 
@@ -1643,7 +1646,9 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
             candidate.link_opened_at = now
 
-            candidate.save(update_fields=['link_opened_at'])
+            # Lock PAN when interview starts - prevents PAN swapping
+            candidate.pan_locked = True
+            candidate.save(update_fields=['link_opened_at', 'pan_locked'])
 
             
 
@@ -2886,50 +2891,27 @@ class ProcessAnswerView(APIView):
 
 
 class TTSView(APIView):
-
     """
-
-    Text-to-Speech endpoint using Coqui TTS.
-
-    POST {"text": "Hello!"} → returns audio/wav binary response.
-
+    Text-to-Speech endpoint using Edge TTS (Async).
+    POST {"text": "Hello!"} → returns audio/mpeg binary response.
     """
-
     permission_classes = [AllowAny]
-
     authentication_classes = []
 
-
-
-    def post(self, request):
-
+    async def post(self, request):
         text = request.data.get('text', '').strip()
-
         if not text:
-
             return Response({"error": "Missing 'text' field"}, status=status.HTTP_400_BAD_REQUEST)
 
-
-
         # Safety: limit text length to prevent extremely long synthesis
-
         if len(text) > 1500:
-
             text = text[:1500]
 
-
-
         try:
-
             from .tts_engine import get_tts_engine
-
-            import asyncio
-
             engine = get_tts_engine()
-
-            # edge-tts is better handled via asyncio.run for sync views
-
-            wav_bytes = asyncio.run(engine.synthesize(text))
+            # Async TTS - non-blocking
+            wav_bytes = await engine.synthesize(text)
 
 
 
@@ -3925,6 +3907,58 @@ class CandidateRegistrationUpdateView(APIView):
                 pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
                 if not re.match(pan_pattern, pan_number):
                     return Response({'error': 'Invalid PAN format. Expected: ABCDE1234F'}, status=status.HTTP_400_BAD_REQUEST)
+
+                # SECURITY CHECK 1: Prevent PAN changes after interview starts
+                if candidate.pan_locked:
+                    return Response({
+                        'error': 'PAN number cannot be changed once the interview has started.',
+                        'pan_locked': True
+                    }, status=status.HTTP_400_BAD_REQUEST)
+
+                # SECURITY CHECK 2: Prevent one person from using multiple PANs
+                if candidate.pan_number and candidate.pan_number != pan_number:
+                    return Response({
+                        'error': 'PAN number cannot be changed. You already registered with a different PAN.',
+                        'existing_pan': candidate.pan_number
+                    }, status=status.HTTP_400_BAD_REQUEST)
+
+                # SECURITY CHECK 3: Prevent multiple people from using same PAN
+                existing_pan_holder = Candidate.objects.filter(
+                    pan_number=pan_number
+                ).exclude(public_token=public_token).first()
+
+                if existing_pan_holder:
+                    # PAN already belongs to another candidate
+                    if existing_pan_holder.face_embedding_hash:
+                        # Original holder has a registered face - require face verification
+                        # Save the PAN temporarily so backend knows what to verify against
+                        candidate.pan_number = pan_number
+                        candidate.pan_verified = False  # Not verified yet
+                        candidate.save()
+                        return Response({
+                            'error': 'This PAN is already registered. Please verify your identity by capturing your face in the next step.',
+                            'duplicate': True,
+                            'requires_face_verification': True,
+                            'verify_against_person_id': existing_pan_holder.public_token,
+                            'registered_to': existing_pan_holder.full_name
+                        }, status=status.HTTP_400_BAD_REQUEST)
+                    else:
+                        # Original holder hasn't registered face yet - block to prevent race condition
+                        return Response({
+                            'error': 'This PAN number is already registered to another candidate. Each PAN can only be used by one person.',
+                            'duplicate': True,
+                            'registered_to': existing_pan_holder.full_name
+                        }, status=status.HTTP_400_BAD_REQUEST)
+
+                # Track PAN history for audit
+                if not candidate.pan_number:
+                    from django.utils import timezone
+                    candidate.pan_history = [{
+                        'action': 'registered',
+                        'pan': pan_number,
+                        'timestamp': timezone.now().isoformat()
+                    }]
+
                 candidate.pan_number = pan_number
 
             pan_photo = request.FILES.get('pan_photo')
@@ -3951,7 +3985,67 @@ class CandidateRegistrationUpdateView(APIView):
             if email:
                 candidate.email = email
 
-            candidate.save()
+            face_embedding_hash = request.data.get('face_embedding_hash')
+            face_verified = request.data.get('face_verified', False)
+            if face_embedding_hash:
+                # If face was verified by DeepFace against original holder, accept the verification
+                if face_verified:
+                    # DeepFace already verified this face matches the original PAN holder
+                    # Trust the verification result and save the new embedding
+                    candidate.face_embedding_hash = face_embedding_hash
+                    candidate.pan_verified = True  # Mark as verified since face matched
+                else:
+                    # Check if this candidate has a PAN that's already registered to someone with a different face
+                    if candidate.pan_number:
+                        existing_pan_holder = Candidate.objects.filter(
+                            pan_number=candidate.pan_number
+                        ).exclude(public_token=public_token).first()
+                        if existing_pan_holder and existing_pan_holder.face_embedding_hash:
+                            if existing_pan_holder.face_embedding_hash != face_embedding_hash:
+                                return Response({
+                                    'error': 'Face verification failed. This PAN is registered to another person. Please ensure you are using your own PAN.',
+                                    'duplicate': True,
+                                    'requires_face_verification': True,
+                                    'verify_against_person_id': existing_pan_holder.public_token,
+                                    'registered_to': existing_pan_holder.full_name
+                                }, status=status.HTTP_400_BAD_REQUEST)
+
+                    # Check if this face hash belongs to someone with a different PAN
+                    existing_face_holder = Candidate.objects.filter(
+                        face_embedding_hash=face_embedding_hash
+                    ).exclude(public_token=public_token).first()
+                    if existing_face_holder and existing_face_holder.pan_number:
+                        if existing_face_holder.pan_number != candidate.pan_number:
+                            return Response({
+                                'error': f'This face is already registered to another candidate ({existing_face_holder.full_name}). Each person can only register once.',
+                                'duplicate_face': True,
+                                'registered_to': existing_face_holder.full_name
+                            }, status=status.HTTP_400_BAD_REQUEST)
+
+                    candidate.face_embedding_hash = face_embedding_hash
+            
+            try:
+                candidate.save()
+            except IntegrityError as e:
+                error_msg = str(e)
+                # Check if it's a PAN unique constraint violation
+                if 'pan_number' in error_msg.lower() or 'ai_candidates_candidate_pan_number' in error_msg:
+                    return Response({
+                        'error': 'This PAN number is already registered to another candidate. Each PAN can only be used by one person.',
+                        'duplicate': True
+                    }, status=status.HTTP_400_BAD_REQUEST)
+                # Generic friendly message for other DB errors
+                logger.error(f"Database integrity error during registration: {error_msg}")
+                return Response({
+                    'error': 'Registration failed due to a data conflict. Please check your information and try again.',
+                    'detail': error_msg if settings.DEBUG else None
+                }, status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                logger.error(f"Unexpected error during registration save: {str(e)}")
+                return Response({
+                    'error': 'An unexpected error occurred while saving your registration. Please try again.',
+                    'detail': str(e) if settings.DEBUG else None
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             return Response({
                 'success': True,
@@ -4075,24 +4169,43 @@ class ProcessAnswerView(APIView):
                 resume_context = candidate.resume_text
 
         try:
-            # Construct Chat History context with safety
-            history_context = ""
+            # --- TOKEN-EFFICIENT CONTEXT BUILDING ---
+            # Use structured memory instead of full transcript
+            conversation_memory = candidate.conversation_memory if candidate else {}
+            
+            # Build compact memory context (only ~200 tokens)
+            memory_context = ""
+            if conversation_memory:
+                intro_facts = conversation_memory.get('intro_facts', [])
+                skills_mentioned = conversation_memory.get('skills_mentioned', [])
+                projects_discussed = conversation_memory.get('projects_discussed', [])
+                weak_areas = conversation_memory.get('weak_areas', [])
+                
+                if intro_facts:
+                    memory_context += f"Candidate mentioned: {', '.join(intro_facts[:5])}. "
+                if skills_mentioned:
+                    memory_context += f"Skills discussed: {', '.join(skills_mentioned[:5])}. "
+                if projects_discussed:
+                    memory_context += f"Projects: {', '.join(projects_discussed[:3])}. "
+                if weak_areas:
+                    memory_context += f"Struggled with: {', '.join(weak_areas[:3])}. "
+            
+            # Build minimal recent history (last 2 turns only for immediate context)
+            recent_history = ""
             if chat_history:
-                turns = []
                 # Fallback calculation if frontend didn't pass turn_number
                 if not current_turn_number:
                     ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
-                    current_turn_number = ai_questions_count + 1 
+                    current_turn_number = ai_questions_count + 1
                 
-                for h in chat_history[-10:]: # Show more history for better context
+                # Only last 2 exchanges for immediate context
+                for h in chat_history[-4:]:
                     role = h.get('role') or h.get('sender', 'unknown')
-                    content = h.get('content') or h.get('text', '')
-                    turns.append(f"{role.upper()}: {content}")
-                history_context = f"CURRENT QUESTION NUMBER: {current_turn_number} of 13\nCONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
+                    content = (h.get('content') or h.get('text', ''))[:200]  # Truncate each message
+                    recent_history += f"{role.upper()}: {content}\n"
             else:
                 if not current_turn_number:
                     current_turn_number = 1
-                history_context = "This is the START of the interview. Question #1.\n"
 
             # --- DYNAMIC CATEGORY INJECTION ---
             category_map = {
@@ -4115,97 +4228,64 @@ class ProcessAnswerView(APIView):
             target_category, target_instruction = category_map.get(current_turn_number, ("EXIT", "The interview is over. Say goodbye."))
             # ----------------------------------
 
-            prompt = f"""
-        You are "Indu", a warm, sharp, and experienced technical interviewer conducting a live interview for the position of **{job_title}**.
-        Candidate Name: {candidate_name}
-        
-        ===== YOUR SPECIFIC MISSION FOR THIS TURN (TURN #{current_turn_number}) =====
-        CATEGORY: {target_category}
-        INSTRUCTION: {target_instruction} (STRICTLY FOLLOW THIS)
-        
-        ===== JOB DESCRIPTION =====
-        {jd_context[:1500]}
-        
-        ===== RESUME =====
-        {resume_context[:3000]}
-        
-        ===== EXPERIENCE LEVEL & DIFFICULTY =====
-        {self._get_difficulty_instructions(experience_level)}
-        
-        ===== PERSONALITY & TONE RULES =====
-        - You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
-        - NEVER use these banned phrases: "Your explanation was clear and concise", "Great answer", "That's a good point", "Well said", "That's not a great sign", "That's a concern". These sound robotic and repetitive.
-        - Instead, react SPECIFICALLY to what the candidate actually said. Reference their exact words. Examples:
-          * "Interesting that you chose React.memo for that — I've seen teams debate that approach..."
-          * "So you went with lazy loading — that makes sense for a dashboard with heavy data."
-          * "Hmm, that's a solid approach. Let me throw a curveball at you..."
-          * "Got it. I'd love to dig deeper into something you mentioned..."
-        - Keep feedback to 1-2 SHORT sentences max. Don't lecture or summarize their answer back to them.
-        - ⚠️ ABSOLUTE BAN: NEVER include ANY of these category tags in your spoken output: JD-Q1, JD-Q2, JD-Q3, JD-Q4, RESUME-SKILL-Q1, RESUME-SKILL-Q2, PROJECT-Q1, PROJECT-Q2, SCENARIO-Q1, SCENARIO-Q2, SYNTAX-Q1, SYNTAX-Q2, INTRO. These tags are ONLY for YOUR internal tracking. If the candidate hears them, the system is broken.
-        - NEVER announce or reference the question number, turn number, or category.
-        - NEVER repeat the same feedback phrasing twice in the same interview. Each response MUST be unique.
-        - When asking resume/project questions, START with a specific detail from the resume (e.g., "I noticed you worked on [specific project name]...", "Your resume mentions [specific skill]...").
-        - Use conversational fillers like "Hmm", "I see", "Got it", "Interesting", "Fair enough" occasionally to sound like you are listening.
-        - Vary your transitions naturally. Choose from these styles:
-            * Curiosity: "Now I'm curious about...", "I'd love to hear more about..."
-            * Shifting Gears: "Let's pivot slightly to...", "Alright, moving on to...", "Switching gears a bit..."
-            * Casual: "Okay, next up...", "So, tell me about...", "I want to ask you about..."
-            * Deep Dive: "Let's dig into...", "I want to focus on a particular area..."
-        - If the candidate gives a weak or wrong answer, gently note it: "That's not quite what I was looking for, but let's keep going."
-        - If they say "I don't know", say something like: "No worries, let's move on to something else."
-        - Avoid starting every response with "Great," "Alright," or "Okay." Mix it up.
-        
-        ===== CRITICAL ENFORCEMENT RULES =====
-        - You MUST ask a question matching the CATEGORY: {target_category}.
-        - For RESUME-SKILL questions: Pick a SPECIFIC skill from the resume.
-        - For PROJECT questions: Reference a SPECIFIC project from the resume by name.
-        - For SYNTAX questions (Turns 12-13): Ask actual coding problems, NOT conceptual questions.
-        - For SCENARIO questions (Turns 10-11): These MUST be hypothetical scenarios based on the Job Description's requirements or the challenges typical to the **{job_title}** role.
-        - Do NOT ask follow-up questions on the same topic. Each turn MUST move to the next category.
-        
-        ===== INPUT MODE =====
-        - Turns 1-11: Set "requires_code_input": false (audio/verbal mode)
-        - Turns 12-13: Set "requires_code_input": true (keyboard/coding mode)
-        
-        ===== INTERVIEW COMPLETION =====
-        - If target_category == "EXIT" or current_turn_number >= 14: The interview is OVER. Set "is_exit": true.
-        
-        ===== SPECIAL TRIGGERS =====
-        (A) CLARIFICATION: If candidate says "repeat that", "pardon", "what?", "I don't understand", or asks for clarification:
-            1. Set "is_clarification": true.
-            2. In "feedback", write a friendly 1-sentence acknowledgement.
-            3. In "refined_next_question", provide a simplified or rephrased version of the EXACT SAME topic (Turn #{current_turn_number}). Do NOT move to the next category.
-        (B) EXIT: If candidate says "end", "stop", "finish" → Set "is_exit": true, say goodbye.
-        
-        ===== SCORING GUIDES (0-10) =====
-        - 10: Perfect, comprehensive, and accurate answer.
-        - 8-9: Correct and clear answer, perhaps missing minor detail. (BEYOND SATISFACTORY)
-        - 6-7: Good attempt, mostly correct but a bit vague or lacks depth. (PASSABLE)
-        - 4-5: Weak or slightly incorrect answer, but shows basic effort/knowledge. (LENIENT PARTIAL CREDIT)
-        - 2-3: Very poor or largely incorrect answer, but they tried to speak.
-        - 0-1: Silent, "I don't know," or "Skip."
-        
-        *BE GENEROUS*: If the candidate shows they understand the core concept but struggle to articulate it perfectly, lean towards a 6 or 7.
-        
-        ===== CONVERSATION CONTEXT =====
-        {history_context}
-        
-        CURRENT TURN:
-        Last Question: "{current_question}"
-        Target Category for this next question: {target_category}
-        Candidate Answer: "{answer}"
-        
-        ===== RESPOND WITH THIS EXACT JSON =====
-        {{
-            "is_clarification": false,
-            "is_exit": false,
-            "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer (NEVER generic praise)",
-            "refined_next_question": "Your next question — MUST match the category for Turn #{current_turn_number + 1}",
-            "requires_code_input": false, // Set to TRUE ONLY IF Turn #{current_turn_number + 1} is a SYNTAX Turn (12-13)
-            "score": 0,
-            "score_reason": "1-sentence justification for the score"
-        }}
-        """
+            # --- OPTIMIZED PROMPT (reliable JSON output) ---
+            # Pre-compute condensed contexts
+            jd_condensed = jd_context[:800] if jd_context else "No JD available"
+            resume_condensed = resume_context[:1200] if resume_context else "No resume available"
+            
+            prompt = f"""You are "Indu", a warm, sharp, and experienced technical interviewer conducting a live interview for the position of {job_title}.
+Candidate Name: {candidate_name}
+
+===== JOB DESCRIPTION =====
+{jd_condensed}
+
+===== RESUME =====
+{resume_condensed}
+
+===== CONVERSATION MEMORY =====
+{memory_context if memory_context else 'First turn - no memory yet.'}
+
+===== CURRENT TURN (Turn {current_turn_number}/13) =====
+Category: {target_category}
+Your Task: {target_instruction}
+
+===== RECENT CONVERSATION =====
+{recent_history if recent_history else 'START OF INTERVIEW'}
+
+Current Question: "{current_question}"
+Candidate Answer: "{answer}"
+
+===== PERSONALITY & TONE RULES =====
+- You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
+- NEVER use these banned phrases: "Your explanation was clear and concise", "Great answer", "That's a good point", "Well said". These sound robotic.
+- Instead, react SPECIFICALLY to what the candidate actually said. Reference their exact words.
+- Keep feedback to 1-2 SHORT sentences max. Don't lecture or summarize their answer back to them.
+- Use conversational fillers like "Hmm", "I see", "Got it", "Interesting" occasionally to sound human.
+
+===== SCORING GUIDE (0-10) =====
+- 10: Perfect, comprehensive, and accurate answer.
+- 8-9: Correct and clear answer, perhaps missing minor detail.
+- 6-7: Good attempt, mostly correct but a bit vague or lacks depth.
+- 4-5: Weak or slightly incorrect answer, but shows basic effort/knowledge.
+- 2-3: Very poor or largely incorrect answer, but they tried.
+- 0-1: Silent, "I don't know," or "Skip."
+BE GENEROUS: If the candidate shows they understand the core concept, lean towards 6 or 7.
+
+===== SPECIAL TRIGGERS =====
+- If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
+- If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
+- For turns 12-13 (SYNTAX) → Set "requires_code_input": true.
+
+===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
+{{
+    "is_clarification": false,
+    "is_exit": false,
+    "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer",
+    "refined_next_question": "Your next question matching the category for Turn {current_turn_number + 1}",
+    "requires_code_input": false,
+    "score": 0,
+    "score_reason": "1-sentence justification for the score"
+}}"""
 
             # Lazy-load Groq for ProcessAnswerView using GroqKeyManager for key rotation
             from ai_assessments.ai_logic import GroqKeyManager
@@ -4272,9 +4352,11 @@ class ProcessAnswerView(APIView):
             # --- END MODEL FALLBACK ---
 
             raw_text = response.choices[0].message.content
+            logger.info(f"AI Response (turn {current_turn_number}): {raw_text[:500]}")
             data = extract_json(raw_text)
             
             if not data:
+                logger.error(f"Invalid JSON from AI: {raw_text}")
                 raise ValueError("AI returned invalid JSON structure")
 
             # --- SERVER-SIDE LABEL SANITIZER ---
@@ -4321,6 +4403,56 @@ class ProcessAnswerView(APIView):
                         "score": q_score,
                         "reason": data.get('score_reason', 'No reasoning provided.')
                     })
+
+                    # --- UPDATE CONVERSATION MEMORY ---
+                    # Extract structured facts from this turn for future context
+                    memory = candidate.conversation_memory or {}
+                    
+                    # Initialize memory structure
+                    if not memory:
+                        memory = {
+                            'intro_facts': [],
+                            'skills_mentioned': [],
+                            'projects_discussed': [],
+                            'weak_areas': []
+                        }
+                    
+                    # Extract facts based on turn category
+                    target_category_upper = target_category.upper() if target_category else ""
+                    
+                    if target_category_upper == "INTRO" and answer:
+                        # Extract key facts from intro (experience, company, role)
+                        intro_facts = memory.get('intro_facts', [])
+                        # Simple extraction: look for years, company names, roles
+                        import re
+                        years_match = re.search(r'(\d+)\+?\s*(years?|yrs?)', answer, re.I)
+                        if years_match:
+                            intro_facts.append(f"{years_match.group(0)} experience")
+                        # Store first 50 chars as key intro fact
+                        if len(intro_facts) < 5:
+                            intro_facts.append(answer[:80].strip())
+                        memory['intro_facts'] = list(set(intro_facts))[:5]
+                    
+                    elif "RESUME-SKILL" in target_category_upper and answer:
+                        # Track skills mentioned
+                        skills = memory.get('skills_mentioned', [])
+                        # Extract skill names from answer (simple: first 30 chars)
+                        skills.append(answer[:50].strip())
+                        memory['skills_mentioned'] = list(set(skills))[:5]
+                    
+                    elif "PROJECT" in target_category_upper and answer:
+                        # Track projects discussed
+                        projects = memory.get('projects_discussed', [])
+                        projects.append(answer[:60].strip())
+                        memory['projects_discussed'] = list(set(projects))[:3]
+                    
+                    # Track weak areas based on low scores
+                    if q_score <= 4:
+                        weak = memory.get('weak_areas', [])
+                        weak.append(current_question[:50].strip())
+                        memory['weak_areas'] = list(set(weak))[:3]
+                    
+                    candidate.conversation_memory = memory
 
                     candidate.save()
                  except: pass
@@ -4975,3 +5107,23 @@ class CandidateRegistrationUpdateView(APIView):
         except Exception as e:
             logger.error(f"Registration update error: {str(e)}", exc_info=True)
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class HealthCheckView(APIView):
+    """
+    Health check endpoint for load balancers and monitoring.
+    GET /health/ → Returns system status
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        from .scaling_utils import get_system_health
+        from rest_framework import status
+        
+        health = get_system_health()
+        
+        if health['status'] == 'healthy':
+            return Response(health, status=status.HTTP_200_OK)
+        else:
+            return Response(health, status=status.HTTP_503_SERVICE_UNAVAILABLE)

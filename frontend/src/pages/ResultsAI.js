@@ -129,8 +129,8 @@ const ResultsAI = () => {
                     // We need to create separate stage entries that will be grouped by email
 
                     const hasResume = r.resume_score > 0 || ['Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(r.status);
-                    const hasAssessment = (r.percentage != null && r.percentage > 0) || (r.score != null && r.score > 0) || r.total_questions > 0 || ['Assessment Passed', 'Assessment Failed', 'Qualified', 'Not Qualified', 'Selected', 'Rejected'].includes(r.status);
-                    const hasInterview = r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed'].includes(r.status);
+                    const hasAssessment = (r.percentage != null && r.percentage > 0) || (r.score != null && r.score > 0) || r.total_questions > 0 || ['Assessment Passed', 'Assessment Failed', 'Qualified', 'Not Qualified', 'Selected'].includes(r.status);
+                    const hasInterview = r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected'].includes(r.status);
 
                     // ALWAYS add resume entry if we have resume data
                     if (hasResume) {
