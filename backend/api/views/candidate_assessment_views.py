@@ -2748,6 +2748,8 @@ def log_candidate_activity_view(request, token):
             invitation.activity_logs = logs
             invitation.save(update_fields=['activity_logs'])
             
+            # Print to server console for real-time application monitoring
+            print(f"[CANDIDATE_ACTIVITY] {invitation.email} | {action}: {details}")
         return Response({'status': 'logged'})
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invalid token'}, status=404)

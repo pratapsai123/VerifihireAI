@@ -1839,6 +1839,9 @@ const AiInterviewSession = () => {
     const finalizeInterviewStart = async (candidate) => {
         setAiStatus("Preparing Indu...");
 
+        // Signal SecuritySessionGuard to begin monitoring now that interview is starting
+        window.dispatchEvent(new Event('vh_exam_started'));
+
         // Load questions NOW (after face registration is confirmed)
         const qList = candidate.interview_questions || [];
         setQuestions(qList);
