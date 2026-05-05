@@ -43,6 +43,10 @@ async function _doScan() {
     const processes = await scanProcesses();
     const windowTitles = await getWindowTitles();
     const verdict = await detectBlocked(processes, windowTitles);
+    
+    // Safety check: monitor might have been stopped while we were scanning
+    if (!current) return;
+
     if (!verdict.safe) {
       console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
@@ -59,6 +63,10 @@ async function _doScan() {
       }
       return;
     }
+
+    // Safety check again before sending SAFE report
+    if (!current) return;
+    
     await sendSecurityCheck(current.backendApiBase, {
       session_id: current.sessionId,
       user_id: current.userId,
@@ -68,8 +76,9 @@ async function _doScan() {
       app_path: '',
     });
   } catch (err) {
-    console.error('[monitor] Process scan error:', err.message);
-    // Do not silently bypass; heartbeat/status will force stop from backend timeout.
+    if (current) {
+        console.error('[monitor] Process scan error:', err.message);
+    }
   }
 
   // ── Hardware scan (USB/HDMI/display check) ───────────────────────────────

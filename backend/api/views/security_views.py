@@ -6,10 +6,18 @@ HEARTBEAT_TIMEOUT_SECONDS = 60
 
 
 def _mark_timed_out(session):
-    """
-    Heartbeat timeout termination is disabled per user request.
-    Sessions should only terminate on actual malpractice detection (VIOLATION status).
-    """
+    if not session or session.action == 'STOP':
+        return session
+    
+    timeout = HEARTBEAT_TIMEOUT_SECONDS
+    if session.last_heartbeat:
+        elapsed = (timezone.now() - session.last_heartbeat).total_seconds()
+        if elapsed > timeout:
+            session.action = 'STOP'
+            session.reason = 'Policy violation: Secure Agent disconnected for more than 60 seconds.'
+            session.is_active = False
+            session.save(update_fields=['action', 'reason', 'is_active', 'updated_at'])
+            print(f"[SECURITY_TIMEOUT] Session {session.session_id} stopped due to Agent silence.")
     return session
 
 
@@ -123,6 +131,7 @@ def security_check_view(request):
         session.blocked_app_path = app_path
         session.is_active = False
         session.save()
+        print(f"[SECURITY_CHECK] STOP triggered for {session_id} - App: {app}")
         return Response({'action': 'STOP'})
 
     if status_value == 'HARDWARE_VIOLATION':
@@ -175,6 +184,7 @@ def security_session_status_view(request, session_id):
     if not session:
         return Response({'error': 'security session not found'}, status=status.HTTP_404_NOT_FOUND)
     _mark_timed_out(session)
+    print(f"[SECURITY_STATUS] Session {session_id} is {session.action}")
     return Response({
         'session_id': str(session.session_id),
         'action': session.action,

@@ -10,7 +10,7 @@ const getApiBaseUrl = () => {
 
         // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            return `http://${hostname}:8001/api`;
+            return `http://127.0.0.1:8001/api`;
         }
 
         // ✅ PRODUCTION (NGINX handles routing)
@@ -33,7 +33,7 @@ const getWsBaseUrl = () => {
 
         // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            return `ws://${hostname}:8001/ws/interview`;
+            return `ws://127.0.0.1:8001/ws/interview`;
         }
 
         // ✅ PRODUCTION (NGINX handles /ws → backend)
@@ -45,7 +45,7 @@ const getWsBaseUrl = () => {
         return `${protocol}//${hostname}:8001/ws/interview`;
     }
 
-    return process.env.REACT_APP_WS_BASE_URL || 'ws://localhost:8001/ws/interview';
+    return process.env.REACT_APP_WS_BASE_URL || 'ws://127.0.0.1:8001/ws/interview';
 };
 
 
@@ -56,7 +56,7 @@ const getDeepfaceBaseUrl = () => {
 
         // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            return `http://${hostname}:8500/api/v1`;
+            return `http://127.0.0.1:8500/api/v1`;
         }
 
         // ✅ PRODUCTION (NGINX proxies /deepface → deepface service)
@@ -78,7 +78,7 @@ const getDeepfaceWsUrl = () => {
 
         // ✅ LOCAL DEVELOPMENT
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            return `ws://${hostname}:8500/api/v1`;
+            return `ws://127.0.0.1:8500/api/v1`;
         }
 
         // ✅ PRODUCTION

@@ -280,6 +280,9 @@ function LiveInterview() {
       setCameraReady(true);
       setMediaLoading(false);
 
+      // Signal SecuritySessionGuard to begin monitoring now that interview is starting
+      window.dispatchEvent(new Event('vh_exam_started'));
+
       // ✅ Fix: Assign local stream to video element
       if (thumbnailVideoRef.current) {
         console.log('🖼️ Setting local video srcObject');
