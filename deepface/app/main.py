@@ -65,6 +65,7 @@ app = FastAPI(
     ),
     version="1.0.0",
     lifespan=lifespan,
+    root_path="/deepface",   # 🔥 THIS IS THE FIX
     docs_url=f"{API_PREFIX}/docs",
     redoc_url=f"{API_PREFIX}/redoc",
     openapi_url=f"{API_PREFIX}/openapi.json",

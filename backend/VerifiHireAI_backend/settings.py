@@ -127,8 +127,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': os.environ.get('DB_NAME', 'reddy'),
+        'NAME': os.environ.get('DB_NAME', 'ver'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
@@ -167,7 +166,7 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 
 USE_TZ = True
-
+getattr
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -273,7 +272,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
