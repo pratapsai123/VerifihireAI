@@ -1894,19 +1894,23 @@ def generate_candidate_report(submission_id):
 
     # ── Determine Dynamic Result Status ──
 
-    # User Requirement: integrity < 70 => Hold
+    # Priority: 1. Failure (Rejected) 2. Suspicion (Hold) 3. Standard Result
 
     final_result_text = submission.result or '-'
 
     result_style = styles['InfoValue']
 
-    
+    if not submission.is_qualified:
 
-    if integrity_score < 70:
+        final_result_text = 'REJECTED'
+
+        result_style = styles['NotQualifiedBadge']
+
+    elif integrity_score < 70:
 
         final_result_text = 'HOLD'
 
-        result_style = styles['NotQualifiedBadge'] # Reuse red bold style
+        result_style = styles['NotQualifiedBadge']
 
 
 
