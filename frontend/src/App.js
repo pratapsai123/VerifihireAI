@@ -1,5 +1,5 @@
 // Main App entrance for VerifiHireAI
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -232,6 +232,35 @@ axios.interceptors.response.use(
 
 function AppContent() {
   const location = useLocation();
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  // Proactive Session Recovery
+  // On page refresh, the in-memory access token is lost. This effect tries to 
+  // refresh it using the HttpOnly cookie before any other component starts fetching data.
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser && !getToken()) {
+        try {
+          // Silent refresh call
+          const response = await axios.post(`${API_BASE_URL}/token/refresh/`, {}, {
+            withCredentials: true
+          });
+          
+          if (response.data && response.data.token) {
+            setToken(response.data.token);
+            console.log("Session recovered successfully.");
+          }
+        } catch (err) {
+          console.warn("Session recovery failed or expired:", err.response?.status);
+          // If 401, the user is likely logged out, but we let ProtectedRoute handle redirection
+        }
+      }
+      setIsInitializing(false);
+    };
+
+    initializeAuth();
+  }, []);
 
 
   // List of routes that should have the global header hidden for a full-screen experience
@@ -295,6 +324,18 @@ function AppContent() {
 
     return () => clearInterval(intervalId);
   }, [location.pathname]);
+
+  if (isInitializing) {
+    return (
+      <div className="initial-loading-container">
+        <div className="loader-content">
+          <div className="loader-logo">VerifiHire<span>AI</span></div>
+          <div className="loader-spinner"></div>
+          <p>Recovering session...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
