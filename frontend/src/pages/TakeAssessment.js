@@ -1917,12 +1917,7 @@ export default function TakeAssessment() {
                       <div className="coding-pane-header">
                         <div>
                           <div className="coding-title">{activeCoding.title || 'Coding question'}</div>
-                          <div className="coding-meta">
-                            {activeCodingLanguages.map((lang) => (
-                              <span key={lang} className="coding-pill coding-pill-muted">{lang}</span>
-                            ))}
-                            {activeCoding.mode ? <span className="coding-pill coding-pill-muted">{activeCoding.mode}</span> : null}
-                          </div>
+
                         </div>
                         {/* Note: Using global assessment timer (top right) for all coding questions */}
                       </div>

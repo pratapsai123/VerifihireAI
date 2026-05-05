@@ -631,7 +631,7 @@ export default function CodingQuestionForm() {
                   <div className="coding-multiselect" ref={langsRef}>
                     <div
                       className="coding-multiselect-trigger"
-                      style={{ height: '48px' }}
+                      style={{ minHeight: '48px' }}
                       onClick={() => {
                         const opening = !showLangs;
                         setShowLangs(opening);

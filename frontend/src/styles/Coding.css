@@ -213,6 +213,7 @@
   padding: 2px 8px;
   border-radius: 6px;
   border: 1px solid #e5e7eb;
+  margin: 2px 0;
 }
 
 .coding-trigger-arrow {
@@ -374,7 +375,7 @@
   align-items: center;
   justify-content: space-between;
   min-height: 48px;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: var(--radius-md, 12px);
@@ -382,6 +383,7 @@
   transition: all 0.2s ease;
   font-size: 14px;
   color: var(--text-main);
+  gap: 8px;
 }
 
 .coding-multiselect-trigger:hover {
