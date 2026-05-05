@@ -178,7 +178,7 @@
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  grid-template-columns: repeat(5, minmax(140px, 1fr));
   gap: 0.55rem;
   margin-bottom: 0.6rem;
 }
@@ -360,6 +360,11 @@
   background: #f1f5f9;
   color: #475569;
   border: 1px solid #e2e8f0;
+}
+.pill.warning {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
 }
 
 .btn-report-dl,

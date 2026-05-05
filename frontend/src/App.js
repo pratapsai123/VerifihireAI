@@ -106,7 +106,7 @@ axios.interceptors.request.use(
 
       const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
       const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
-      const isOnPublicPage = publicRoutes.some(path => 
+      const isOnPublicPage = publicRoutes.some(path =>
         window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
       );
 
@@ -153,10 +153,32 @@ axios.interceptors.response.use(
     }
 
     // Check if error is 401 Unauthorized securely
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      
+    if (error.response && error.response.status === 401) {
+      // 🛡️ CRITICAL: If database mismatch is detected, logout IMMEDIATELY.
+      // A database mismatch cannot be fixed by refreshing tokens.
+      if (error.response.data && error.response.data.code === 'db_mismatch') {
+        console.error('Database context mismatch detected. Forced logout.');
+        clearToken();
+        localStorage.removeItem('user');
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return Promise.reject(error);
+      }
+
+      if (originalRequest._retry) {
+        // If we already tried refreshing and it failed again with 401, logout.
+        console.error('Unauthorized after retry. Logging out.');
+        clearToken();
+        localStorage.removeItem('user');
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return Promise.reject(error);
+      }
+
       if (isRefreshing) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
         }).then(token => {
           originalRequest.headers['Authorization'] = `Bearer ${token}`;
@@ -179,7 +201,7 @@ axios.interceptors.response.use(
         if (refreshResponse.data && refreshResponse.data.token) {
           const newToken = refreshResponse.data.token;
           setToken(newToken);
-          
+
           processQueue(null, newToken);
           isRefreshing = false;
 
@@ -208,7 +230,7 @@ axios.interceptors.response.use(
         '/book-interview/',
         '/accept-invite'
       ];
-      const isPublicPage = publicRoutes.some(path => 
+      const isPublicPage = publicRoutes.some(path =>
         window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
       );
 
@@ -299,11 +321,11 @@ function AppContent() {
     // Skip polling on public candidate/invite pages
     const publicRoutes = [
       '/precheck/', '/session-terminated', '/invite/', '/interview/',
-      '/login', '/signup', '/forgot-password', '/take-assessment/', 
-      '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
+      '/login', '/signup', '/forgot-password', '/take-assessment/',
+      '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/',
       '/result/', '/live-interview', '/book-interview/', '/accept-invite'
     ];
-    const isPublicPage = publicRoutes.some(path => 
+    const isPublicPage = publicRoutes.some(path =>
       location.pathname === path || (path.endsWith('/') && location.pathname.startsWith(path))
     );
     if (isPublicPage) return;
