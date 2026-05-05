@@ -16,12 +16,17 @@ function hasValue(v) {
     return v !== null && v !== undefined && String(v).trim() !== '';
 }
 
-function getStatusMeta(status) {
+function getStatusMeta(status, r = {}) {
+    const isZero = Number(r.percentage || 0) === 0 && (status === 'rejected' || status === 'hold' || status === 'HOLD');
+
     if (status === 'selected' || status === 'COMPLETED') {
         return { label: 'Qualified', className: 'ok' };
     }
-    if (status === 'rejected' || status === 'hold' || status === 'HOLD') {
+    if (status === 'rejected' || isZero) {
         return { label: 'Not Qualified', className: 'bad' };
+    }
+    if (status === 'hold' || status === 'HOLD') {
+        return { label: 'Hold', className: 'warning' };
     }
     if (status === 'sent') {
         return { label: 'Sent', className: 'info' };
@@ -114,7 +119,10 @@ export default function Result() {
                     return r.status === 'selected' || r.status === 'COMPLETED';
                 }
                 if (statusFilter === 'rejected') {
-                    return r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD';
+                    return r.status === 'rejected' || (Number(r.percentage || 0) === 0 && (r.status === 'hold' || r.status === 'HOLD'));
+                }
+                if (statusFilter === 'hold') {
+                    return (r.status === 'hold' || r.status === 'HOLD') && Number(r.percentage || 0) !== 0;
                 }
                 return r.status === statusFilter;
             });
@@ -126,14 +134,16 @@ export default function Result() {
     const overviewMetrics = useMemo(() => {
         const total = filtered.length;
         const qualified = filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED').length;
-        const notQualified = filtered.filter((r) => r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD').length;
+        const notQualified = filtered.filter((r) => r.status === 'rejected' || (Number(r.percentage || 0) === 0 && (r.status === 'hold' || r.status === 'HOLD'))).length;
+        const hold = filtered.filter((r) => (r.status === 'hold' || r.status === 'HOLD') && Number(r.percentage || 0) !== 0).length;
         const attempted = filtered.filter((r) => r.status !== 'not_attempted' && r.status !== 'sent').length;
-        return { total, qualified, notQualified, attempted };
+        return { total, qualified, notQualified, hold, attempted };
     }, [filtered]);
 
     const segmentedResults = useMemo(() => {
         if (segment === 'qualified') return filtered.filter((r) => r.status === 'selected' || r.status === 'COMPLETED');
-        if (segment === 'not_qualified') return filtered.filter((r) => r.status === 'rejected' || r.status === 'hold' || r.status === 'HOLD');
+        if (segment === 'not_qualified') return filtered.filter((r) => r.status === 'rejected' || (Number(r.percentage || 0) === 0 && (r.status === 'hold' || r.status === 'HOLD')));
+        if (segment === 'hold') return filtered.filter((r) => (r.status === 'hold' || r.status === 'HOLD') && Number(r.percentage || 0) !== 0);
         if (segment === 'not_attempted') return filtered.filter((r) => r.status === 'not_attempted');
         return filtered;
     }, [filtered, segment]);
@@ -213,12 +223,15 @@ export default function Result() {
         return sortConfig.direction === 'asc' ? '↑' : '↓';
     };
 
-    const load = useCallback(async (silent = false) => {
+    const load = useCallback(async (silentArg = false) => {
+        const silent = silentArg === true;
         if (!silent) setLoading(true);
         setError('');
         try {
             if (isOverview) {
-                const params = {};
+                const params = {
+                    _t: Date.now() // Prevent caching
+                };
                 if (fromDate) params.start_date = fromDate;
                 if (toDate) params.end_date = toDate;
                 const resp = await axios.get(`${API_BASE_URL}/results/`, { params });
@@ -431,7 +444,7 @@ export default function Result() {
                         <div className="sub">Latest submitted assessments (auto-checked).</div>
                     </div>
                     <div className="top-actions">
-                        <button className="btn-top-primary" type="button" onClick={load}>Refresh</button>
+                        <button className="btn-top-primary" type="button" onClick={() => load()}>Refresh</button>
                         <button className="btn-top-secondary" type="button" onClick={() => navigate('/assessments')}>Back to Assessments</button>
                     </div>
                 </div>
@@ -452,6 +465,7 @@ export default function Result() {
                         <option value="sent">Sent</option>
                         <option value="selected">Qualified</option>
                         <option value="rejected">Not Qualified</option>
+                        <option value="hold">Hold</option>
                         <option value="not_attempted">Not Attempted</option>
                     </select>
                     <div className="date-filter">
@@ -489,6 +503,10 @@ export default function Result() {
                     <div className="metric-card">
                         <div className="metric-label">Not Qualified</div>
                         <div className="metric-value danger">{overviewMetrics.notQualified}</div>
+                    </div>
+                    <div className="metric-card">
+                        <div className="metric-label">Hold</div>
+                        <div className="metric-value" style={{ color: '#92400e' }}>{overviewMetrics.hold}</div>
                     </div>
                     <div className="metric-card">
                         <div className="metric-label">Attempted</div>
@@ -535,7 +553,7 @@ export default function Result() {
                                 </thead>
                                 <tbody>
                                     {paginatedResults.map((r) => {
-                                        const statusMeta = getStatusMeta(r.status);
+                                        const statusMeta = getStatusMeta(r.status, r);
                                         return (
                                             <tr key={r.submission_id || `inv_${r.invitation_id}`}>
                                                 <td>
