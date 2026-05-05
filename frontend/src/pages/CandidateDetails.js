@@ -20,7 +20,7 @@ const validateField = (field, value) => {
   }
 };
 
-const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false, required = true }) => {
+const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field, readOnly = false, required = true, disabled = false }) => {
   const hasValue = String(value || '').trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
@@ -72,7 +72,8 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
           onChange(val);
         }}
         readOnly={readOnly}
-        className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''} ${readOnly ? 'read-only' : ''}`}
+        disabled={disabled}
+        className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''} ${readOnly ? 'read-only' : ''} ${disabled ? 'candidate-input-disabled' : ''}`}
       />
     </div>
   );
@@ -772,6 +773,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 errorEmpty={submitted && !data.fullName}
                 onChange={(v) => setData({ ...data, fullName: v })}
                 readOnly={true}
+                disabled={data.isVerifying}
               />
             </div>
             <div className="candidate-row">
@@ -783,6 +785,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                   value={data.email}
                   errorEmpty={submitted && data.email.trim() !== "" && data.invitedEmail && data.email.toLowerCase().trim() !== data.invitedEmail.toLowerCase().trim()}
                   onChange={(v) => setData({ ...data, email: v })}
+                  disabled={data.isVerifying}
                 />
                 {submitted && data.email.trim() !== "" && data.invitedEmail && data.email.toLowerCase().trim() !== data.invitedEmail.toLowerCase().trim() && (
                   <div className="candidate-error-text" style={{ textAlign: 'left', marginTop: '4px' }}>
@@ -798,6 +801,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                   value={data.phone}
                   errorEmpty={submitted && !data.phone}
                   onChange={(v) => setData({ ...data, phone: v })}
+                  disabled={data.isVerifying}
                 />
                 {data.phone && !/^[6-9]/.test(data.phone) && (
                   <div style={{ position: 'absolute', top: '100%', left: 0, color: '#ef4444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>
@@ -818,6 +822,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 value={data.pan}
                 errorEmpty={submitted && !data.pan}
                 onChange={(v) => setData({ ...data, pan: v })}
+                disabled={data.isVerifying}
               />
               <div className="candidate-input-group">
                 <div className="candidate-label-row">
@@ -828,7 +833,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
-                  disabled={!data.pan || data.pan.trim().length !== 10}
+                  disabled={!data.pan || data.pan.trim().length !== 10 || data.isVerifying}
                   className={`candidate-input ${submitted && !data.panFile ? 'candidate-input-error' : ''}`}
                   onChange={(e) => {
                     const file = e.target.files?.[0] || null;
@@ -956,6 +961,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                           <input
                             type="checkbox"
                             checked={data.manualConfirmation}
+                            disabled={data.isVerifying}
                             onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
                           />
                           <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
@@ -1071,7 +1077,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                           clearInterval(detectionIntervalRef.current);
                         }
                       }}
-                      disabled={!faceDetected || isBlurry || isDark || isHalfFace || peopleCount !== 1 || !isAligned || isDetecting || !modelsLoaded}
+                      disabled={!faceDetected || isBlurry || isDark || isHalfFace || peopleCount !== 1 || !isAligned || isDetecting || !modelsLoaded || data.isVerifying}
                     >
                       {isDetecting ? 'Processing...' : 'Take Snapshot'}
                     </button>
@@ -1084,6 +1090,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                     <button
                       type="button"
                       className="candidate-button-small"
+                      disabled={data.isVerifying}
                       onClick={() => {
                         setSnapshot(null);
                         setData(prev => ({ ...prev, snapshotValid: false }));

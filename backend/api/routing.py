@@ -1,4 +1,4 @@
-﻿"""
+"""
 WebSocket URL routing for interview signaling.
 """
 from django.urls import re_path
