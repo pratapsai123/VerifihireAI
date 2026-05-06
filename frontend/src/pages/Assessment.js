@@ -119,7 +119,8 @@ export default function Assessment() {
             <div className="assessments-title">Assessments</div>
             <div className="assessments-subtitle">Manage your created assessments and share candidate invite links.</div>
           </div>
-          <div className="assessments-actions">
+          <div className="assessments-actions" style={{ display: 'flex', gap: '8px' }}>
+            <button className="btn-secondary" onClick={() => navigate('/dashboard')} type="button">Back</button>
             <button className="btn-secondary" onClick={load} type="button">Refresh</button>
           </div>
         </div>

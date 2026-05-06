@@ -2,11 +2,11 @@
 Script to convert localhost URLs to domain URLs (https://verifihireai.com)
 Run this before deploying to production
 """
-
+ 
 import os
 import re
 from pathlib import Path
-
+ 
 # Define files to modify
 TARGET_FILES = [
     "README.md",
@@ -22,7 +22,7 @@ TARGET_FILES = [
     "frontend/README.md",
     "frontend/src/pages/SecurePrecheck.js",
 ]
-
+ 
 # Conversion mappings
 REPLACEMENTS = [
     ("http://localhost:3000", "https://verifihireai.com"),
@@ -36,7 +36,7 @@ REPLACEMENTS = [
     ("http://localhost:3000", "https://downloads.verifihireai.com"),
     ("http://localhost:3000", "https://downloads.local"),
 ]
-
+ 
 def convert_files(to_local=False):
     """Convert URLs between localhost and domain"""
     base_dir = Path(__file__).parent
@@ -93,7 +93,7 @@ def convert_files(to_local=False):
                 
         except Exception as e:
             print(f"Error processing {file_path}: {e}")
-
+ 
 if __name__ == "__main__":
     import sys
     to_local = "--local" in sys.argv

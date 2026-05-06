@@ -860,3 +860,49 @@
 [2026-05-05 12:07:58.385728+00:00] Direct match found at rotation 0
 [2026-05-06 04:17:30.843120+00:00] Running OCR on rotation 0
 [2026-05-06 04:17:37.571228+00:00] Direct match found at rotation 0
+[2026-05-06 06:35:28.627784+00:00] Running OCR on rotation 0
+[2026-05-06 06:35:42.139575+00:00] Direct match found at rotation 0
+[2026-05-06 06:38:02.286392+00:00] Running OCR on rotation 0
+[2026-05-06 06:38:13.398692+00:00] Direct match found at rotation 0
+[2026-05-06 06:42:04.692303+00:00] Running OCR on rotation 0
+[2026-05-06 06:42:16.494139+00:00] Direct match found at rotation 0
+[2026-05-06 06:47:11.271463+00:00] Running OCR on rotation 0
+[2026-05-06 06:47:22.957268+00:00] Direct match found at rotation 0
+[2026-05-06 06:48:16.020642+00:00] Running OCR on rotation 0
+[2026-05-06 06:48:36.574717+00:00] Direct match found at rotation 0
+[2026-05-06 07:06:45.419143+00:00] Running OCR on rotation 0
+[2026-05-06 07:06:56.994213+00:00] Direct match found at rotation 0
+[2026-05-06 07:12:46.289205+00:00] Running OCR on rotation 0
+[2026-05-06 07:12:58.828664+00:00] Direct match found at rotation 0
+[2026-05-06 07:22:52.258483+00:00] Running OCR on rotation 0
+[2026-05-06 07:23:05.018029+00:00] Direct match found at rotation 0
+[2026-05-06 07:24:18.915862+00:00] Running OCR on rotation 0
+[2026-05-06 07:24:46.488829+00:00] Direct match found at rotation 0
+[2026-05-06 07:31:36.198642+00:00] Running OCR on rotation 0
+[2026-05-06 07:31:50.137429+00:00] Direct match found at rotation 0
+[2026-05-06 07:38:01.044279+00:00] Running OCR on rotation 0
+[2026-05-06 07:38:15.859782+00:00] Direct match found at rotation 0
+[2026-05-06 09:35:17.199038+00:00] Running OCR on rotation 0
+[2026-05-06 09:35:28.575552+00:00] Direct match found at rotation 0
+[2026-05-06 09:41:03.885746+00:00] Running OCR on rotation 0
+[2026-05-06 09:41:15.112063+00:00] Direct match found at rotation 0
+[2026-05-06 09:43:50.411392+00:00] Running OCR on rotation 0
+[2026-05-06 09:44:02.470126+00:00] Direct match found at rotation 0
+[2026-05-06 10:07:58.143026+00:00] Resized image for OCR to (466, 1000)
+[2026-05-06 10:08:19.821589+00:00] Running OCR on rotation 0
+[2026-05-06 10:08:28.063956+00:00] Direct match found at rotation 0
+[2026-05-06 10:09:36.736982+00:00] Resized image for OCR to (466, 1000)
+[2026-05-06 10:09:36.740101+00:00] Running OCR on rotation 0
+[2026-05-06 10:09:45.199471+00:00] Direct match found at rotation 0
+[2026-05-06 10:11:19.888423+00:00] Running OCR on rotation 0
+[2026-05-06 10:11:34.587076+00:00] Direct match found at rotation 0
+[2026-05-06 11:07:05.374877+00:00] Running OCR on rotation 0
+[2026-05-06 11:07:18.440960+00:00] Running OCR on rotation 180
+[2026-05-06 11:07:22.351644+00:00] Running OCR on rotation 0
+[2026-05-06 11:07:36.896561+00:00] Running OCR on rotation 90
+[2026-05-06 11:07:39.400109+00:00] Running OCR on rotation 180
+[2026-05-06 11:07:50.925216+00:00] Running OCR on rotation 270
+[2026-05-06 11:07:57.381197+00:00] Running OCR on rotation 90
+[2026-05-06 11:08:09.152557+00:00] Running OCR on rotation 270
+[2026-05-06 11:09:14.272220+00:00] Running OCR on rotation 0
+[2026-05-06 11:09:27.286503+00:00] Direct match found at rotation 0

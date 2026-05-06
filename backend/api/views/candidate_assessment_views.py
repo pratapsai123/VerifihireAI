@@ -1068,7 +1068,7 @@ def update_standard_integrity_view(request, token):
         return Response({
             'message': 'Integrity logged',
             'integrity_score': integrity.integrity_score,
-            'warnings_used': len(logs)
+            'warnings_used': len(_get_filtered_warning_logs(logs))
         }, status=status.HTTP_200_OK)
 
     except CandidateInvitation.DoesNotExist:
@@ -2426,29 +2426,14 @@ def save_all_candidate_details_view(request):
         if len(norm_pan) == 10:
             norm_pan = normalize_pan_format(norm_pan)
         
-        person_id = f"{norm_email}_{norm_pan}"
+        person_id = f"{norm_pan}"
         
-        # 2. Strict PAN Consistency Check (New Security Rule)
-        # Check if this email is already registered with a DIFFERENT PAN card
-        existing_by_email = IdentityLink.objects.filter(email=norm_email).first()
-        if existing_by_email and existing_by_email.pan_number != norm_pan:
-            # Capture Violation Screenshot
-            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (PAN Mismatch)")
-            return Response({
-                'error': "Identity Fraud Detected: This email is already registered with a different PAN card. You cannot use a different PAN for this identity."
-            }, status=status.HTTP_403_FORBIDDEN)
+        # 2. PAN-to-Face Linkage (Decoupled from Email)
+        # We no longer block if the same email uses a different PAN or vice-versa,
+        # but we maintain the logic that one PAN belongs to one physical person (biometrics).
 
-        # Check if this PAN is already registered with a DIFFERENT email
-        existing_by_pan = IdentityLink.objects.filter(pan_number=norm_pan).first()
-        if existing_by_pan and existing_by_pan.email != norm_email:
-            # Capture Violation Screenshot
-            _save_identity_violation_screenshot(invitation, snapshot, "Identity Fraud (Email Swapping)")
-            return Response({
-                'error': "Identity Fraud Detected: This PAN card is already linked to another identity. Assessment has been stopped."
-            }, status=status.HTTP_403_FORBIDDEN)
-
-        # 3. Biometric Verification
-        identity_link = IdentityLink.objects.filter(email=norm_email, pan_number=norm_pan).first()
+        # 3. Biometric Verification (Lookup by PAN only)
+        identity_link = IdentityLink.objects.filter(pan_number=norm_pan).first()
         
         verify_status = False
         match_score = 0.0
