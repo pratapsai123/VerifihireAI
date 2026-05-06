@@ -95,7 +95,7 @@ def invite_user_view(request):
             # request.build_absolute_uri('/') gives http(s)://host/; trim trailing slash
             frontend_base = request.build_absolute_uri('/').rstrip('/')
         if not frontend_base:
-            frontend_base = 'https://verifihireai.com'
+            frontend_base = 'http://localhost:3000'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={invitation.token}"
 
         subject = f"{company.name} - Account Invitation"
@@ -219,7 +219,7 @@ def resend_invite_view(request, token):
         inv.expires_at = timezone.now() + timedelta(hours=48)
         inv.save(update_fields=['temp_password_hash', 'expires_at'])
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={inv.token}"
 
         subject = f"{inv.company.name} - Account Invitation (Resent)"

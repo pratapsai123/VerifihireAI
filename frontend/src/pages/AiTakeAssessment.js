@@ -1128,18 +1128,18 @@ const AiTakeAssessment = () => {
                 setPanError('File size exceeds 2.5MB limit');
                 return;
             }
-            
+
             // Check file type
             const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
             const validExtensions = ['.jpg', '.jpeg', '.png', '.pdf'];
-            const isValidType = validTypes.includes(file.type) || 
-                               validExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
-            
+            const isValidType = validTypes.includes(file.type) ||
+                validExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
+
             if (!isValidType) {
                 setPanError('Please upload a valid image (JPG, PNG) or PDF file');
                 return;
             }
-            
+
             setPanPhoto(file);
             // For PDFs, don't create preview
             if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
@@ -1741,19 +1741,19 @@ const AiTakeAssessment = () => {
 
             if (!personId) return;
 
-            
+
 
             // Start camera first (gives video element time to mount)
 
             await startCamera();
 
-            
+
 
             // Small delay to ensure video element is ready
 
             await new Promise(r => setTimeout(r, 500));
 
-            
+
 
             // Start DeepFace monitoring
 
@@ -1781,7 +1781,7 @@ const AiTakeAssessment = () => {
 
         };
 
-        
+
 
         initMonitoring();
 
@@ -2610,15 +2610,15 @@ const AiTakeAssessment = () => {
 
     if (isRegistering) {
 
-        return <RegistrationWizard onComplete={(img) => { 
+        return <RegistrationWizard onComplete={(img) => {
 
             setRegistrationSnapshot(img);
 
-            setIsRegistering(false); 
+            setIsRegistering(false);
 
-            setIsRegistered(true); 
+            setIsRegistered(true);
 
-            startAssessment(true); 
+            startAssessment(true);
 
         }} onCancel={() => setIsRegistering(false)} />;
 
@@ -3006,7 +3006,7 @@ const AiTakeAssessment = () => {
 
                     </div>
 
-                    <button onClick={startAssessment}
+                    <button onClick={() => startAssessment(false)}
 
                         disabled={isCheckingRegistration}
 
@@ -3200,17 +3200,17 @@ const AiTakeAssessment = () => {
 
                             border: `2.5px solid ${dfVerified === null ? '#6366f1' :
 
-                                    dfVerified === false ? '#ef4444' :
+                                dfVerified === false ? '#ef4444' :
 
-                                        dfHeadDir !== 'FORWARD' ? '#f59e0b' : '#22c55e'
+                                    dfHeadDir !== 'FORWARD' ? '#f59e0b' : '#22c55e'
 
                                 }`,
 
                             boxShadow: `0 0 12px ${dfVerified === null ? 'rgba(99,102,241,0.3)' :
 
-                                    dfVerified === false ? 'rgba(239,68,68,0.5)' :
+                                dfVerified === false ? 'rgba(239,68,68,0.5)' :
 
-                                        dfHeadDir !== 'FORWARD' ? 'rgba(245,158,11,0.4)' : 'rgba(34,197,94,0.3)'
+                                    dfHeadDir !== 'FORWARD' ? 'rgba(245,158,11,0.4)' : 'rgba(34,197,94,0.3)'
 
                                 }`,
 

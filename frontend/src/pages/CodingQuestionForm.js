@@ -314,7 +314,6 @@ export default function CodingQuestionForm() {
         language: langs.length > 0 ? langs[0] : (resp.data?.language || ''),
       });
       setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
-      setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
       setTimeError('');
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
       const results = tcs.data?.results || [];
@@ -553,6 +552,7 @@ export default function CodingQuestionForm() {
       });
       setTcStdin('');
       setTcExpected('');
+      setTcHidden(null);
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
       const newList = tcs.data?.results || [];
       setTestcases(newList);
@@ -626,41 +626,13 @@ export default function CodingQuestionForm() {
                   {fieldErrors.title && <span className="field-error-message">{fieldErrors.title}</span>}
                 </label>
 
-                <label className="coding-field coding-field-short">
+                <div className="coding-field coding-field-short">
                   <div className="coding-label"><Languages size={16} style={{marginRight: '6px'}}/> Languages <span className="required-star">*</span></div>
                   <div className="coding-multiselect" ref={langsRef}>
                     <div
                       className="coding-multiselect-trigger"
                       style={{ minHeight: '48px' }}
-                      onClick={() => {
-                        const opening = !showLangs;
-                        setShowLangs(opening);
-                        
-                        setForm(prev => {
-                          const hasCpp = (prev.languages || []).includes('cpp');
-                          let nextLangs = [...(prev.languages || [])];
-                          
-                          if (opening) {
-                            // On opening, ensure C++ is selected
-                            if (!hasCpp) {
-                              nextLangs = [...nextLangs.filter(l => l !== 'sql'), 'cpp'];
-                            }
-                          } else {
-                            // On closing, ensure C++ is deselected
-                            if (hasCpp) {
-                              nextLangs = nextLangs.filter(l => l !== 'cpp');
-                            }
-                          }
-                          
-                          const newStarterCode = nextLangs.length > 0 ? generateStarterCodeForLanguages(nextLangs) : '';
-                          return {
-                            ...prev,
-                            languages: nextLangs,
-                            language: nextLangs.length > 0 ? nextLangs[0] : '',
-                            starter_code: newStarterCode
-                          };
-                        });
-                      }}
+                      onClick={() => setShowLangs(!showLangs)}
                     >
                       {form.languages.length === 0 ? (
                         <span className="coding-muted">Select Languages...</span>
@@ -698,7 +670,7 @@ export default function CodingQuestionForm() {
                     )}
                   </div>
                   {fieldErrors.languages && <span className="field-error-message">{fieldErrors.languages}</span>}
-                </label>
+                </div>
 
                 <label className="coding-field coding-field-short">
                   <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level <span className="required-star">*</span></div>

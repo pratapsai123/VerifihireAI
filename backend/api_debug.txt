@@ -3808,3 +3808,131 @@ Host: verifihireai.com
 [2026-05-05 12:27:19.652068+00:00] PUBLIC ACCESS: Token='7d4cfb1f-7d2d-4651-88cf-f81cb7333cc5'
 Query Params: <QueryDict: {'_t': ['1777984039297']}>
 Host: verifihireai.com
+
+[2026-05-06 16:11:03] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    nums = [int(x) for x in input_data[1:]]\n    max_so_far = float('-inf')\n    current_max = 0\n    for num in nums:\n        current_max += num\n        if current_max > max_so_far:\n            max_so_far = current_max\n        if current_max < 0:\n            current_max = 0\n    print(max_so_far)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "12\n-42 -90 67 25 -87 -62 -87 -44 -5 26 -89 -99",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:11:08] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    matrix = []\n    idx = 1\n    for r in range(n):\n        matrix.append([int(x) for x in input_data[idx:idx+n]])\n        idx += n\n    res = [[0]*n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            res[j][n-1-i] = matrix[i][j]\n    for r in res:\n        print(\" \".join(map(str, r)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "5\n5 0 6\n1 9 7\n8 1 1\n5 9 5\n4 9 5",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:11:26] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    starts = [int(x) for x in input_data[1:n+1]]\n    ends = [int(x) for x in input_data[n+1:2*n+1]]\n    events = []\n    # FIX: Correct backward intervals and use +1 for start, -1 for end\n    for s, e in zip(starts, ends):\n        ts, te = min(s, e), max(s, e)\n        events.append((ts, 1))\n        events.append((te, -1))\n    \n    # FIX: Sort by time, then by type DESCENDING (1 before -1)\n    # This ensures intervals touching at a point are counted as overlapping.\n    events.sort(key=lambda x: (x[0], -x[1]))\n    \n    max_c = cur_c = 0\n    for t, delta in events:\n        cur_c += delta\n        max_c = max(max_c, cur_c)\n    print(max_c)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "15\n57 69 38 23 87 17 47 27 39 19 36 72 95 63 83\n51 47 52 6 83 9 85 98 59 72 97 73 63 31 43",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:11:31] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip()\n    if not s:\n        print(0)\n        return\n    n = len(s)\n    max_len = 1\n    for i in range(n):\n        l, r = i, i\n        while l >= 0 and r < n and s[l] == s[r]:\n            max_len = max(max_len, r - l + 1)\n            l -= 1\n            r += 1\n        l, r = i, i + 1\n        while l >= 0 and r < n and s[l] == s[r]:\n            max_len = max(max_len, r - l + 1)\n            l -= 1\n            r += 1\n    print(max_len)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "TASK-902",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:11:35] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if len(input_data) < 3: return\n    amount = int(input_data[0])\n    n = int(input_data[1])\n    coins = [int(x) for x in input_data[2:n+2]]\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for coin in coins:\n        for x in range(coin, amount + 1):\n            dp[x] = min(dp[x], dp[x - coin] + 1)\n    print(dp[amount] if dp[amount] != float('inf') else -1)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "39\n6\n7 5 5 5 7 5",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:11:49] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    nums = [int(x) for x in input_data[1:]]\n    max_so_far = float('-inf')\n    current_max = 0\n    for num in nums:\n        current_max += num\n        if current_max > max_so_far:\n            max_so_far = current_max\n        if current_max < 0:\n            current_max = 0\n    print(max_so_far)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n-67 -64 -73 77 -5 100",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 10:41:49.541429+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 828, in post
+    raise Exception(
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+
+RAW: No response received
+
+[2026-05-06 16:12:18] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    cost = [int(x) for x in data[1:n+1]]\n    if n <= 1:\n        print(0)\n        return\n    a, b = cost[0], cost[1]\n    for i in range(2, n):\n        a, b = b, cost[i] + min(a, b)\n    print(min(a, b))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "12\n83 3 72 67 91 20 73 3 12 26 84 80",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:12:22] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    count = 0\n    for i in range(len(nums)):\n        for j in range(i + 1, len(nums)):\n            if nums[i] > nums[j]:\n                count += 1\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "7\n48 44 26 11 15 11 30",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:12:27] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    idx = 1\n    matrix = []\n    for r in range(n):\n        row = [int(data[idx + c]) for c in range(n)]\n        idx += n\n        matrix.append(row)\n    res = []\n    top, bottom, left, right = 0, n - 1, 0, n - 1\n    while top <= bottom and left <= right:\n        for c in range(left, right + 1):\n            res.append(matrix[top][c])\n        top += 1\n        for r in range(top, bottom + 1):\n            res.append(matrix[r][right])\n        right -= 1\n        if top <= bottom:\n            for c in range(right, left - 1, -1):\n                res.append(matrix[bottom][c])\n            bottom -= 1\n        if left <= right:\n            for r in range(bottom, top - 1, -1):\n                res.append(matrix[r][left])\n            left += 1\n    print(\" \".join(map(str, res)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "2\n36 54 87\n52 78 2",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:12:32] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    cost = [int(x) for x in data[1:n+1]]\n    if n <= 1:\n        print(0)\n        return\n    a, b = cost[0], cost[1]\n    for i in range(2, n):\n        a, b = b, cost[i] + min(a, b)\n    print(min(a, b))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "3\n8 77 35",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:12:36] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    nums = set(int(x) for x in input_data[1:])\n    longest_streak = 0\n    for num in nums:\n        if num - 1 not in nums:\n            current_num = num\n            current_streak = 1\n            while current_num + 1 in nums:\n                current_num += 1\n                current_streak += 1\n            longest_streak = max(longest_streak, current_streak)\n    print(longest_streak)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "12\n89 48 167 42 139 8 46 195 93 150 23 110",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 16:12:41] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Max retries exceeded with url: /execute (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\nfrom collections import defaultdict\ndef main():\n    input_data = sys.stdin.read().split()\n    if len(input_data) < 3: return\n    k = int(input_data[0])\n    n = int(input_data[1])\n    nums = [int(x) for x in input_data[2:]]\n    count = 0\n    current_sum = 0\n    prefix_sums = defaultdict(int)\n    prefix_sums[0] = 1\n    for num in nums:\n        current_sum += num\n        if (current_sum - k) in prefix_sums:\n            count += prefix_sums[current_sum - k]\n        prefix_sums[current_sum] += 1\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "14\n13\n0 8 7 0 5 -4 0 2 0 2 7 5 0",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-06 10:42:41.735035+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+Traceback (most recent call last):
+  File "C:\Users\eduma\Desktop\VerifiHireAI\backend\ai_assessments\views.py", line 828, in post
+    raise Exception(
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 1 required.
+
+RAW: No response received
+
+[2026-05-06 10:48:10.580680+00:00] PUBLIC ACCESS: Token='6c420513-ad02-484e-8265-e48b7e798a6b'
+Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1778064490563']}>
+Host: 127.0.0.1:8001
