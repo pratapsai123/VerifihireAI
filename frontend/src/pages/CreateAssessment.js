@@ -362,6 +362,32 @@ const CreateAssessment = () => {
                                 placeholder="e.g. React, Node.js, Python, System Design..."
                                 value={formData.skills}
                                 onChange={(e) => handleChange('skills', e.target.value)}
+                                className="modern-input"
+                            />
+                        </div>
+                    )}
+
+                    {selectedRoleId && (
+                        <div className="form-group" style={{ marginTop: '1.5rem' }}>
+                            <label>Detailed Job Description</label>
+                            <textarea
+                                placeholder="Paste the full job description here. The AI will use this to generate precise questions."
+                                value={formData.job_description}
+                                onChange={(e) => handleChange('job_description', e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    minHeight: '150px',
+                                    padding: '1rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid #E2E8F0',
+                                    fontSize: '0.9rem',
+                                    lineHeight: '1.5',
+                                    outline: 'none',
+                                    transition: 'border-color 0.2s',
+                                    fontFamily: 'inherit',
+                                    resize: 'vertical',
+                                    background: 'white'
+                                }}
                             />
                         </div>
                     )}

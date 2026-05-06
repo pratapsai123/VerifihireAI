@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -973,35 +973,26 @@ const AiTakeAssessment = () => {
 
 
 
+    const [searchParams] = useSearchParams();
+
     useEffect(() => {
+        const nameParam = searchParams.get('name');
+        const emailParam = searchParams.get('email');
 
-        const params = new URLSearchParams(window.location.search);
+        console.log('URL Params from useSearchParams:', { nameParam, emailParam });
 
-        const nameParam = params.get('name');
-
-        const emailParam = params.get('email');
-
-        console.log('URL Params:', { nameParam, emailParam });
-
-        const isNameValid = nameParam && nameParam !== 'Extraction Failed';
-
-        const isEmailValid = emailParam && emailParam !== 'Extraction Failed';
+        const isNameValid = nameParam && nameParam !== 'Extraction Failed' && nameParam.trim() !== '';
+        const isEmailValid = emailParam && emailParam !== 'Extraction Failed' && emailParam.trim() !== '';
 
         console.log('Validation:', { isNameValid, isEmailValid });
 
         if (isNameValid || isEmailValid) {
-
-            if (isNameValid) setCandidateName(nameParam);
-
-            if (isEmailValid) setCandidateEmail(emailParam);
-
+            if (isNameValid) setCandidateName(decodeURIComponent(nameParam));
+            if (isEmailValid) setCandidateEmail(decodeURIComponent(emailParam));
             // Only lock inputs if we have a valid email to track them with
-
             if (isEmailValid) setIsAutoFilled(true);
-
         }
-
-    }, []);
+    }, [searchParams]);
 
 
 
@@ -1132,8 +1123,30 @@ const AiTakeAssessment = () => {
     const handlePanPhotoChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            // Check file size (2.5MB limit)
+            if (file.size > 2.5 * 1024 * 1024) {
+                setPanError('File size exceeds 2.5MB limit');
+                return;
+            }
+            
+            // Check file type
+            const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+            const validExtensions = ['.jpg', '.jpeg', '.png', '.pdf'];
+            const isValidType = validTypes.includes(file.type) || 
+                               validExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
+            
+            if (!isValidType) {
+                setPanError('Please upload a valid image (JPG, PNG) or PDF file');
+                return;
+            }
+            
             setPanPhoto(file);
-            setPanPhotoPreview(URL.createObjectURL(file));
+            // For PDFs, don't create preview
+            if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+                setPanPhotoPreview(null);
+            } else {
+                setPanPhotoPreview(URL.createObjectURL(file));
+            }
             setPanVerified(false);
             setPanError('');
         }
@@ -1158,6 +1171,10 @@ const AiTakeAssessment = () => {
             const formPayload = new FormData();
             formPayload.append('pan_photo', panPhoto);
             formPayload.append('pan_number', pan);
+            // Send email for identity fraud detection
+            if (candidateEmail) {
+                formPayload.append('email', candidateEmail);
+            }
 
             const res = await axios.post(`${API_BASE_URL}/ai-candidates/validate-pan/`, formPayload, {
                 headers: { 'Content-Type': 'multipart/form-data' }
@@ -2853,7 +2870,9 @@ const AiTakeAssessment = () => {
 
                         <div>
 
-                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>PAN Card Photo *</label>
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>
+                                PAN Card Photo * <span style={{ fontWeight: 400, fontSize: '0.75rem', color: '#707EAE' }}>(JPG, PNG, PDF, Max 2.5MB)</span>
+                            </label>
 
                             <div
 
@@ -2873,16 +2892,14 @@ const AiTakeAssessment = () => {
 
                             >
 
-                                <input type="file" id="panPhotoInput" accept="image/*" hidden onChange={handlePanPhotoChange} />
+                                <input type="file" id="panPhotoInput" accept=".jpg,.jpeg,.png,.pdf,image/*,application/pdf" hidden onChange={handlePanPhotoChange} />
 
                                 {panPhotoPreview ? (
-
                                     <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
-
+                                ) : panPhoto && (panPhoto.type === 'application/pdf' || panPhoto.name?.toLowerCase().endsWith('.pdf')) ? (
+                                    <i className="fa-solid fa-file-pdf" style={{ fontSize: '2rem', color: '#ef4444' }}></i>
                                 ) : (
-
                                     <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#4318FF' }}></i>
-
                                 )}
 
                                 <div>
