@@ -335,10 +335,10 @@ const ResultsAI = () => {
                     params.submission_id = options.subId.toString().replace('ai_', '');
                 }
             }
-            
+
             const resp = await axios.get(`${API_BASE_URL}/ai/submissions/`, { params });
             let submissions = resp.data?.results || resp.data || [];
-            
+
             // If no results with batch filters, try email alone as fallback
             if (submissions.length === 0 && params.candidate_email && (params.batch_name || params.batch_id)) {
                 const fallbackParams = { candidate_email: params.candidate_email };
