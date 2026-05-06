@@ -28,7 +28,6 @@ export default function InviteRedirect({ type }) {
 
     navigate(redirectUrl, { replace: true });
   }, [navigate, token, type, location.search]);
-
   return (
     <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#334155' }}>
       Redirecting to secure precheck...

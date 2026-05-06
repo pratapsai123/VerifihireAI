@@ -3007,7 +3007,6 @@ const AiTakeAssessment = () => {
                     </div>
 
                     <button onClick={() => startAssessment(false)}
-
                         disabled={isCheckingRegistration}
 
                         style={{ width: '100%', padding: '0.9rem', background: isCheckingRegistration ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: isCheckingRegistration ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
