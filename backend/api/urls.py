@@ -36,6 +36,8 @@ urlpatterns = [
     path('interviews/invitations/<uuid:token>/', views.get_interview_invitation_by_token_view, name='get_interview_invitation_by_token'),
     path('interviews/draft-invites/', views.draft_interview_invitations_view, name='draft_interview_invitations_list'),
     path('interviews/draft-invites/<int:draft_id>/', views.draft_interview_invitations_view, name='draft_interview_invitations_detail'),
+    path('interviews/add-participant/', views.add_interview_participant_view, name='add_interview_participant'),
+    path('interviews/participants/validate/<uuid:token>/', views.validate_participant_token_view, name='validate_participant_token'),
     
     # Slot Booking
     path('interviews/slots/generate/', views.generate_all_interviewer_slots_view, name='generate_slots'),

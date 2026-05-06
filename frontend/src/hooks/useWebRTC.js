@@ -1,12 +1,19 @@
 import { useRef, useCallback } from 'react';
 
 export const useWebRTC = (sendMessage) => {
-  const peerConnectionRef = useRef(null);
+  const peerConnectionsRef = useRef({}); // { userId: RTCPeerConnection }
   const localStreamRef = useRef(null);
-  const remoteStreamRef = useRef(null);
-  const remoteIceQueueRef = useRef([]);
+  const remoteStreamsRef = useRef({}); // { userId: MediaStream }
+  const remoteIceQueuesRef = useRef({}); // { userId: [RTCIceCandidate] }
 
-  const createPeerConnection = useCallback((onTrackCallback) => {
+  const createPeerConnection = useCallback((userId, onTrackCallback) => {
+    // 🔥 Cleanup existing connection for this user if any
+    if (peerConnectionsRef.current[userId]) {
+      console.log(`🧹 Cleaning up existing PC for ${userId}`);
+      peerConnectionsRef.current[userId].close();
+      delete peerConnectionsRef.current[userId];
+    }
+
     const configuration = {
       iceServers: [
         { urls: 'stun:stun.l.google.com:19302' },
@@ -21,11 +28,6 @@ export const useWebRTC = (sendMessage) => {
           urls: 'turn:openrelay.metered.ca:443',
           username: 'openrelayproject',
           credential: 'openrelayproject'
-        },
-        {
-          urls: 'turn:openrelay.metered.ca:443?transport=tcp',
-          username: 'openrelayproject',
-          credential: 'openrelayproject'
         }
       ],
       iceCandidatePoolSize: 10,
@@ -36,39 +38,40 @@ export const useWebRTC = (sendMessage) => {
     };
 
     const peerConnection = new RTCPeerConnection(configuration);
-    peerConnectionRef.current = peerConnection;
+    peerConnectionsRef.current[userId] = peerConnection;
+    remoteIceQueuesRef.current[userId] = [];
 
-    console.log('🏗️ PeerConnection created with state:', peerConnection.signalingState);
+    console.log(`🏗️ PC created for ${userId}. State:`, peerConnection.signalingState);
 
     peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        console.log('📡 Local ICE candidate:', event.candidate.candidate.substring(0, 40) + '...');
         sendMessage({
           type: 'ice_candidate',
-          candidate: event.candidate
+          candidate: event.candidate,
+          target: userId // 🔥 Targeted
         });
       }
     };
 
     peerConnection.ontrack = (event) => {
-      console.log('🎥 Received remote track!', event.track.kind, 'Stream count:', event.streams.length);
+      console.log(`🎥 Received track from ${userId}!`, event.track.kind);
       const remoteStream = event.streams[0];
       if (remoteStream) {
-        remoteStreamRef.current = remoteStream;
-        console.log('✅ Remote stream set successfully');
-        if (onTrackCallback) onTrackCallback(remoteStream);
-      } else {
-        console.warn('⚠️ ontrack event has no streams!');
+        remoteStreamsRef.current[userId] = remoteStream;
+        if (onTrackCallback) onTrackCallback(userId, remoteStream);
       }
     };
 
     peerConnection.oniceconnectionstatechange = () => {
-        console.log('❄️ ICE Connection State:', peerConnection.iceConnectionState);
+        console.log(`❄️ ICE Connection [${userId}]:`, peerConnection.iceConnectionState);
     };
 
-    peerConnection.onsignalingstatechange = () => {
-        console.log('📣 Signaling State:', peerConnection.signalingState);
-    };
+    // Auto-add local tracks if stream exists
+    if (localStreamRef.current) {
+        localStreamRef.current.getTracks().forEach(track => {
+            peerConnection.addTrack(track, localStreamRef.current);
+        });
+    }
 
     return peerConnection;
   }, [sendMessage]);
@@ -80,7 +83,6 @@ export const useWebRTC = (sendMessage) => {
         video: videoConstraints ? { width: { ideal: 1280, max: 1920 }, height: { ideal: 720, max: 1080 }, frameRate: { ideal: 30, max: 60 }, facingMode: 'user' } : false,
         audio: audioConstraints ? { echoCancellation: true, noiseSuppression: true, autoGainControl: true, sampleRate: 44100 } : false
       });
-      console.log('✅ Local stream obtained. Tracks:', localStream.getTracks().map(t => t.kind));
       localStreamRef.current = localStream;
       return localStream;
     } catch (error) {
@@ -89,132 +91,91 @@ export const useWebRTC = (sendMessage) => {
     }
   }, []);
 
-  const addLocalTracksToPC = useCallback((peerConnection, localStream) => {
-    if (!localStream || !peerConnection) return;
-    console.log('🛤️ Adding tracks to PeerConnection...');
-    localStream.getTracks().forEach(track => {
-      peerConnection.addTrack(track, localStream);
-    });
-    console.log('✅ Local tracks added successfully');
-  }, []);
-
-  const createVideoOffer = useCallback(async (options = {}) => {
-    if (!peerConnectionRef.current) return;
-    if (peerConnectionRef.current.signalingState !== 'stable') {
-      console.warn('Skipping offer, signaling not stable');
-      return;
-    }
+  const createVideoOffer = useCallback(async (userId, options = {}) => {
+    const pc = peerConnectionsRef.current[userId];
+    if (!pc) return;
+    
     try {
-      console.log('📤 Creating video offer...', options);
-      const offer = await peerConnectionRef.current.createOffer({
+      console.log(`📤 Creating offer for ${userId}`);
+      const offer = await pc.createOffer({
         offerToReceiveAudio: true,
         offerToReceiveVideo: true,
         ...options
       });
-      await peerConnectionRef.current.setLocalDescription(offer);
+      await pc.setLocalDescription(offer);
       sendMessage({
         type: 'video_offer',
-        sdp: offer
+        sdp: offer,
+        target: userId
       });
-      console.log('✅ Video offer sent');
     } catch (error) {
-      console.error('❌ Error creating video offer:', error);
+      console.error(`❌ Error creating offer for ${userId}:`, error);
     }
   }, [sendMessage]);
 
-  const handleVideoOffer = useCallback(async (description) => {
-    if (!peerConnectionRef.current) return;
+  const handleVideoOffer = useCallback(async (userId, description, onTrackCallback) => {
+    let pc = peerConnectionsRef.current[userId];
+    if (!pc) {
+        pc = createPeerConnection(userId, onTrackCallback);
+    }
+
     try {
-      console.log('📥 Handling video offer...', peerConnectionRef.current.signalingState);
+      console.log(`📥 Handling offer from ${userId}`);
+      await pc.setRemoteDescription(new RTCSessionDescription(description));
       
-      // Guard against stale offers during rapid signaling
-      if (peerConnectionRef.current.signalingState !== 'stable' && 
-          peerConnectionRef.current.signalingState !== 'have-local-offer') {
-          console.warn('⚠️ Unexpected signaling state for offer handler:', peerConnectionRef.current.signalingState);
-      }
-
-      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(description));
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
       
-      // ✅ Fix: Ensure local tracks are added BEFORE creating the answer
-      if (localStreamRef.current) {
-        console.log('🛤️ Adding local tracks before answer...');
-        localStreamRef.current.getTracks().forEach(track => {
-          const exists = peerConnectionRef.current
-            .getSenders()
-            .some(sender => sender.track === track);
-            
-          if (!exists) {
-            peerConnectionRef.current.addTrack(track, localStreamRef.current);
-            console.log(`✅ Added ${track.kind} track`);
-          }
-        });
-      }
-
-      const answer = await peerConnectionRef.current.createAnswer();
-      await peerConnectionRef.current.setLocalDescription(answer);
       sendMessage({
         type: 'video_answer',
-        sdp: answer
+        sdp: answer,
+        target: userId
       });
-      console.log('✅ Video answer sent with tracks');
 
       // Process queued ICE candidates
-      if (remoteIceQueueRef.current.length > 0) {
-        console.log(`🧊 Processing ${remoteIceQueueRef.current.length} queued ICE candidates`);
-        for (const candidate of remoteIceQueueRef.current) {
-          try {
-            await peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate));
-          } catch (e) {
-            console.warn('Failed to add queued ICE candidate:', e);
-          }
+      const queue = remoteIceQueuesRef.current[userId] || [];
+      if (queue.length > 0) {
+        for (const candidate of queue) {
+          await pc.addIceCandidate(new RTCIceCandidate(candidate)).catch(e => console.warn(e));
         }
-        remoteIceQueueRef.current = [];
+        remoteIceQueuesRef.current[userId] = [];
       }
     } catch (error) {
-      console.error('❌ Error handling video offer:', error);
+      console.error(`❌ Error handling offer from ${userId}:`, error);
     }
-  }, [sendMessage]);
+  }, [sendMessage, createPeerConnection]);
 
-  const handleVideoAnswer = useCallback(async (description) => {
-    if (!peerConnectionRef.current) return;
+  const handleVideoAnswer = useCallback(async (userId, description) => {
+    const pc = peerConnectionsRef.current[userId];
+    if (!pc) return;
     
-    console.log('📥 Handling video answer. Current state:', peerConnectionRef.current.signalingState);
-    if (peerConnectionRef.current.signalingState !== 'have-local-offer') {
-      console.warn('⚠️ Skipping handleVideoAnswer: signalingState is not have-local-offer');
-      return;
-    }
-
     try {
-      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(description));
-      console.log('✅ Remote description set with answer');
+      console.log(`📥 Handling answer from ${userId}`);
+      await pc.setRemoteDescription(new RTCSessionDescription(description));
       
-      if (remoteIceQueueRef.current.length > 0) {
-        console.log(`🧊 Processing ${remoteIceQueueRef.current.length} queued ICE candidates`);
-        for (const candidate of remoteIceQueueRef.current) {
-          try {
-            await peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate));
-          } catch (e) {
-            console.warn('Failed to add queued ICE candidate:', e);
-          }
+      const queue = remoteIceQueuesRef.current[userId] || [];
+      if (queue.length > 0) {
+        for (const candidate of queue) {
+          await pc.addIceCandidate(new RTCIceCandidate(candidate)).catch(e => console.warn(e));
         }
-        remoteIceQueueRef.current = [];
+        remoteIceQueuesRef.current[userId] = [];
       }
     } catch (error) {
-      console.error('❌ Error handling video answer:', error);
+      console.error(`❌ Error handling answer from ${userId}:`, error);
     }
   }, []);
 
-  const handleIceCandidate = useCallback(async (candidate) => {
-    if (!peerConnectionRef.current) return;
-    try {
-      if (!peerConnectionRef.current.remoteDescription) {
-        console.log('🧊 Queuing remote ICE candidate');
-        remoteIceQueueRef.current.push(candidate);
-      } else {
-        await peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate));
+  const handleIceCandidate = useCallback(async (userId, candidate) => {
+    const pc = peerConnectionsRef.current[userId];
+    if (!pc || !pc.remoteDescription) {
+      if (!remoteIceQueuesRef.current[userId]) remoteIceQueuesRef.current[userId] = [];
+      remoteIceQueuesRef.current[userId].push(candidate);
+    } else {
+      try {
+        await pc.addIceCandidate(new RTCIceCandidate(candidate));
+      } catch (e) {
+        console.warn(`🧊 ICE candidate error [${userId}]:`, e);
       }
-    } catch (e) {
-      console.warn('🧊 ICE candidate error:', e);
     }
   }, []);
 
@@ -223,24 +184,21 @@ export const useWebRTC = (sendMessage) => {
       localStreamRef.current.getTracks().forEach(track => track.stop());
       localStreamRef.current = null;
     }
-    if (remoteStreamRef.current) {
-      remoteStreamRef.current.getTracks().forEach(track => track.stop());
-      remoteStreamRef.current = null;
-    }
-    if (peerConnectionRef.current) {
-      peerConnectionRef.current.close();
-      peerConnectionRef.current = null;
-    }
+    
+    Object.keys(peerConnectionsRef.current).forEach(userId => {
+      peerConnectionsRef.current[userId].close();
+    });
+    peerConnectionsRef.current = {};
+    remoteStreamsRef.current = {};
+    remoteIceQueuesRef.current = {};
   }, []);
 
   return {
-    peerConnectionRef,
+    peerConnectionsRef,
     localStreamRef,
-    remoteStreamRef,
-    remoteIceQueueRef,
+    remoteStreamsRef,
     createPeerConnection,
     initLocalStream,
-    addLocalTracksToPC,
     createVideoOffer,
     handleVideoOffer,
     handleVideoAnswer,

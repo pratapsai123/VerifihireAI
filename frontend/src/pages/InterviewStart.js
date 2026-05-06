@@ -354,6 +354,8 @@ const InterviewStart = () => {
             import('../utils/activityLogger').then(({ logCandidateActivity }) => {
                 logCandidateActivity(token, 'Live Interview Started', 'Candidate started the live/AI interview session.');
             });
+            // Signal SecuritySessionGuard to begin monitoring
+            window.dispatchEvent(new Event('vh_exam_started'));
             navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
         } catch (err) {
             if (err.response?.data?.time_locked) {

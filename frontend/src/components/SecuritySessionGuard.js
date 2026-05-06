@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor } from '../security/securityApi';
-import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord } from '../security/sessionStorage';
+import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord, markExamStarted, isExamStarted } from '../security/sessionStorage';
 import { logCandidateActivity } from '../utils/activityLogger';
 
 export default function SecuritySessionGuard({ children, sessionType = 'assessment' }) {
@@ -28,7 +28,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
   // FIX 1: Track whether the candidate has completed the details form.
   // We only start aggressive polling AFTER the exam begins, not during the form.
-  const [examStarted, setExamStarted] = useState(false);
+  const [examStarted, setExamStarted] = useState(() => isExamStarted(token));
 
   // FIX 2: Use a ref to reliably trigger navigation from inside setInterval.
   // This avoids the stale closure bug where navigate() is captured at mount time.
@@ -38,10 +38,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
   // Listen for a custom event from TakeAssessment/children indicating exam has started
   useEffect(() => {
-    const handler = () => setExamStarted(true);
+    const handler = () => {
+      markExamStarted(token);
+      setExamStarted(true);
+    };
     window.addEventListener('vh_exam_started', handler);
     return () => window.removeEventListener('vh_exam_started', handler);
-  }, []);
+  }, [token]);
 
   // FIX 2: Separate effect to handle termination - not inside setInterval
   useEffect(() => {
@@ -112,20 +115,32 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           return;
         }
 
-        const scanResult = await runLocalScan();
-        if (!active) return;
-        if (!scanResult?.safe) {
-          const allApps = scanResult?.blocked?.length > 0
-            ? [...new Set(scanResult.blocked)]
-            : (scanResult?.detections || []).map(d => d.app).filter(Boolean);
-          logCandidateActivity(
-            token,
-            'Session Terminated',
-            `Remote app detected after precheck — session invalidated. Apps: ${allApps.join(', ') || 'Unknown'}`
-          );
-          clearPrecheckRecord(token);
-          navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
-          return;
+        // OPTIMIZATION: Check if we have a very recent precheck (e.g. within last 5 minutes)
+        // If the candidate just passed precheck, we don't need to run a full scan again
+        // immediately upon clicking 'Start'.
+        const lastPrecheck = readPrecheckRecord(token);
+        const PRECHECK_FRESHNESS_MS = 5 * 60 * 1000; // 5 minutes
+        const isFresh = lastPrecheck?.timestamp && (Date.now() - lastPrecheck.timestamp) < PRECHECK_FRESHNESS_MS;
+
+        if (isFresh && lastPrecheck?.passed) {
+          console.log('[SecuritySessionGuard] Recent precheck found, skipping redundant entry-gate scan.');
+        } else {
+          console.log('[SecuritySessionGuard] Running definitive entry-gate scan...');
+          const scanResult = await runLocalScan();
+          if (!active) return;
+          if (!scanResult?.safe) {
+            const allApps = scanResult?.blocked?.length > 0
+              ? [...new Set(scanResult.blocked)]
+              : (scanResult?.detections || []).map(d => d.app).filter(Boolean);
+            logCandidateActivity(
+              token,
+              'Session Terminated',
+              `Remote app detected after precheck — session invalidated. Apps: ${allApps.join(', ') || 'Unknown'}`
+            );
+            clearPrecheckRecord(token);
+            navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+            return;
+          }
         }
 
         // Restart monitor in case candidate navigated directly to URL

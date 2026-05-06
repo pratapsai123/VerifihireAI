@@ -17,14 +17,35 @@ import ErrorBoundary from '../components/LiveInterview/ErrorBoundary';
 function LiveInterview() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session';
+  const participantToken = searchParams.get('participant_token');
+  const [sessionId, setSessionId] = useState(searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session');
 
   const MY_ROLE = 'Candidate';
   const role = 'candidate';
   const sessionKey = `session_expired_${sessionId}`;
 
-  const [candidateName] = useState('Candidate');
-  const [interviewerName] = useState('Interviewer');
+  const [candidateName, setCandidateName] = useState('Candidate');
+  const [interviewerName, setInterviewerName] = useState('Interviewer');
+
+  // Load interview details
+  useEffect(() => {
+    const loadDetails = async () => {
+      try {
+        if (participantToken) {
+          const axios = (await import('axios')).default;
+          const resp = await axios.get(`${API_BASE_URL}/interviews/participants/validate/${participantToken}/`);
+          if (resp.data) {
+            setSessionId(resp.data.session_id);
+            setCandidateName(resp.data.name || 'Candidate');
+            setInterviewerName(resp.data.interviewer_name || 'Interviewer');
+          }
+        }
+      } catch (error) {
+        console.warn('Could not load interview details:', error);
+      }
+    };
+    loadDetails();
+  }, [participantToken]);
 
   const [sessionExpired, setSessionExpired] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -50,6 +71,9 @@ function LiveInterview() {
   const hasRequestedOfferRef = useRef(false);
 
   const [notifications, setNotifications] = useState([]);
+
+  const [remoteParticipants, setRemoteParticipants] = useState({}); // { userId: { stream, role, name, isCameraOn, isScreenSharing } }
+  const [myUserId, setMyUserId] = useState(null);
 
   const closeCandidateTab = useCallback(() => {
     try {
@@ -92,29 +116,57 @@ function LiveInterview() {
     }, 4000);
   }, []);
 
+  const sendMessageRef = useRef(null);
+  const stableSendMessage = useCallback((data) => {
+    if (sendMessageRef.current) sendMessageRef.current(data);
+  }, []);
+
+  const {
+    peerConnectionsRef, localStreamRef, remoteStreamsRef,
+    createPeerConnection, initLocalStream,
+    createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC
+  } = useWebRTC(stableSendMessage);
+
+  const {
+    isScreenSharing, screenShareLocked, setScreenShareLocked, screenShareHolder, setScreenShareHolder,
+    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied
+  } = useScreenShare(peerConnectionsRef, localStreamRef, stableSendMessage, showSessionPopup, MY_ROLE);
+
+  const handleEndInterview = useCallback(() => {
+    stableSendMessage({ type: 'end_interview' });
+    setShowThankYou(true);
+    stopWebRTC();
+  }, [stableSendMessage, stopWebRTC]);
+
   // Message Handler
   const handleMessage = useCallback((data) => {
     console.log('Received message:', data);
     switch (data.type) {
       case 'session_info':
         if (data.start_time) startTimeRef.current = new Date(data.start_time).getTime();
+        if (data.user_id) setMyUserId(data.user_id);
         break;
       case 'user_joined':
-        if (data.user === 'Interviewer' || data.user.toLowerCase() === 'interviewer') {
-          showSessionPopup(`${interviewerName} joined the session`);
-          setBothPartiesConnected(true);
-        }
+        showSessionPopup(`${data.user} joined the session`);
+        setBothPartiesConnected(true);
         break;
       case 'user_left':
-        if (data.user === 'Interviewer' || data.user.toLowerCase() === 'interviewer') {
-          showSessionPopup(`${interviewerName} left the session`, 'warning');
+        showSessionPopup(`${data.user} left the session`, 'warning');
+        setRemoteParticipants(prev => {
+          const next = { ...prev };
+          delete next[data.user_id];
+          return next;
+        });
+        if (peerConnectionsRef.current[data.user_id]) {
+            peerConnectionsRef.current[data.user_id].close();
+            delete peerConnectionsRef.current[data.user_id];
         }
         break;
       case 'chat':
-        if (String(data.sender).toLowerCase() !== 'candidate') {
+        if (data.sender_id !== myUserId) {
           setChatMessages(prev => [...prev, {
             id: Date.now() + Math.random(),
-            sender: interviewerName,
+            sender: data.sender || 'Participant',
             text: data.message,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             isMine: false
@@ -123,90 +175,55 @@ function LiveInterview() {
         }
         break;
       case 'ready_for_webrtc':
-        console.log('✅ Received ready_for_webrtc from', data.sender);
-        if (data.sender === 'candidate') {
-          candidateReadyRef.current = true;
-        }
-        if (data.sender === 'interviewer') {
-          interviewerReadyRef.current = true;
-
-          if (!peerConnectionRef.current) {
-            console.warn('PeerConnection missing, creating fallback');
-            createPeerConnection((remoteStream) => {
-              if (remoteVideoRef.current) {
-                remoteVideoRef.current.srcObject = remoteStream;
-              }
+        console.log(`✅ Received ready_for_webrtc from ${data.sender_id} (${data.role})`);
+        if (myUserId && myUserId < data.sender_id) {
+            console.log(`🚀 Initiating offer to ${data.sender_id}`);
+            createPeerConnection(data.sender_id, (userId, stream) => {
+                setRemoteParticipants(prev => ({
+                    ...prev,
+                    [userId]: { ...prev[userId], stream, name: data.user || 'Participant' }
+                }));
             });
-          }
-
-          if (localStreamRef.current && peerConnectionRef.current) {
-            localStreamRef.current.getTracks().forEach(track => {
-              const exists = peerConnectionRef.current
-                .getSenders()
-                .some(sender => sender.track === track);
-
-              if (!exists) {
-                peerConnectionRef.current.addTrack(track, localStreamRef.current);
-              }
-            });
-          }
-
-          // Removed redundant ontrack override as useWebRTC handles it
-        }
-
-        if (
-          candidateReadyRef.current &&
-          interviewerReadyRef.current &&
-          !hasRequestedOfferRef.current
-        ) {
-          hasRequestedOfferRef.current = true;
-          console.log('⚡ Both ready on candidate side');
-
-          if (
-            peerConnectionRef.current &&
-            localStreamRef.current &&
-            peerConnectionRef.current.signalingState === 'stable'
-          ) {
-            console.log('📩 Requesting offer from interviewer');
-            sendMessage({ type: 'request_offer' });
-          }
+            createVideoOffer(data.sender_id);
         }
         break;
       case 'video_offer':
-        if (data.sdp) {
-          handleVideoOffer(data.sdp);
-        } else {
-          console.warn('⚠️ Missing SDP in video_offer');
+        if (data.target === myUserId) {
+          handleVideoOffer(data.sender_id, data.sdp, (userId, stream) => {
+              setRemoteParticipants(prev => ({
+                  ...prev,
+                  [userId]: { ...prev[userId], stream, name: data.user || 'Participant' }
+              }));
+          });
         }
         break;
       case 'video_answer':
-        handleVideoAnswer(data.sdp);
+        if (data.target === myUserId) {
+          handleVideoAnswer(data.sender_id, data.sdp);
+        }
         break;
       case 'ice_candidate':
-        handleIceCandidate(data.candidate);
-        break;
-      case 'request_offer':
-        console.log('📩 Interviewer requested restart');
-
-        if (
-          peerConnectionRef.current &&
-          peerConnectionRef.current.signalingState === 'stable' &&
-          !remoteStreamRef.current
-        ) {
-          sendMessage({ type: 'ready_for_webrtc' });
+        if (data.target === myUserId) {
+          handleIceCandidate(data.sender_id, data.candidate);
         }
         break;
       case 'media_state':
-        if (String(data.sender).toLowerCase() === 'interviewer') {
-          if (data.media === 'camera') setIsRemoteCameraOn(data.enabled);
-          const what = data.media === 'mic' ? (data.enabled ? 'unmuted' : 'muted') : (data.enabled ? 'turned on camera' : 'turned off camera');
-          showSessionPopup(`${interviewerName} ${what}`, !data.enabled && data.media === 'camera' ? 'error' : 'info');
+        if (data.sender_id !== myUserId) {
+          setRemoteParticipants(prev => ({
+              ...prev,
+              [data.sender_id]: { 
+                  ...prev[data.sender_id], 
+                  isCameraOn: data.media === 'camera' ? data.enabled : prev[data.sender_id]?.isCameraOn 
+              }
+          }));
         }
         break;
       case 'screen_share_state':
-        if (String(data.sender).toLowerCase() !== 'candidate') {
-          setIsRemoteScreenSharing(!!data.active);
-          showSessionPopup(`${interviewerName} ${data.active ? 'started' : 'stopped'} screen sharing`);
+        if (data.sender_id !== myUserId) {
+          setRemoteParticipants(prev => ({
+              ...prev,
+              [data.sender_id]: { ...prev[data.sender_id], isScreenSharing: !!data.active }
+          }));
         }
         break;
       case 'screen_share_lock':
@@ -241,20 +258,14 @@ function LiveInterview() {
         break;
       default: break;
     }
-  }, [interviewerName, chatPanelVisible, sessionId, sessionKey, showSessionPopup]);
+  }, [myUserId, chatPanelVisible, sessionId, sessionKey, showSessionPopup, createPeerConnection, createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC, navigate, handleScreenShareGranted]);
 
-  const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage);
 
-  const {
-    peerConnectionRef, localStreamRef, remoteStreamRef,
-    createPeerConnection, initLocalStream, addLocalTracksToPC,
-    createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC
-  } = useWebRTC(sendMessage);
+  const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage, participantToken);
 
-  const {
-    isScreenSharing, screenShareLocked, setScreenShareLocked, screenShareHolder, setScreenShareHolder,
-    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied
-  } = useScreenShare(peerConnectionRef, localStreamRef, sendMessage, showSessionPopup, MY_ROLE);
+  useEffect(() => {
+    sendMessageRef.current = sendMessage;
+  }, [sendMessage]);
 
   const { thumbnailVideoRef, startDetection, stopDetection, pauseDetection } = useProxyDetection(sessionId, cameraReady, isCameraOn, sendMessage);
 
@@ -280,9 +291,11 @@ function LiveInterview() {
       setCameraReady(true);
       setMediaLoading(false);
 
+      // Signal SecuritySessionGuard to begin monitoring now that interview is starting
+      window.dispatchEvent(new Event('vh_exam_started'));
+
       // ✅ Fix: Assign local stream to video element
       if (thumbnailVideoRef.current) {
-        console.log('🖼️ Setting local video srcObject');
         thumbnailVideoRef.current.srcObject = stream;
       }
 
@@ -291,37 +304,14 @@ function LiveInterview() {
         stopWebRTC();
       });
 
-      const pc = createPeerConnection((remoteStream) => {
-        if (remoteVideoRef.current) {
-          remoteVideoRef.current.srcObject = remoteStream;
-        }
-      });
-
-      pc.onconnectionstatechange = () => {
-        // Status handled by ConnectionOverlay via connectionStatus
-      };
-
-      pc.oniceconnectionstatechange = () => {
-        if (pc.iceConnectionState === 'failed' || pc.iceConnectionState === 'disconnected') {
-          setTimeout(() => {
-            if (peerConnectionRef.current?.iceConnectionState === 'failed' || peerConnectionRef.current?.iceConnectionState === 'disconnected') {
-              sendMessage({ type: 'request_offer' });
-            }
-          }, 3000);
-        }
-      };
-
-      addLocalTracksToPC(pc, stream);
-
-      console.log('🗣️ Sending ready_for_webrtc to interviewer');
-      candidateReadyRef.current = true;
+      console.log('🗣️ Broadcasting ready_for_webrtc');
       sendMessage({ type: 'ready_for_webrtc' });
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);
       showSessionPopup('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, createPeerConnection, addLocalTracksToPC, sendMessage, showSessionPopup, peerConnectionRef, startDetection, stopWebRTC]);
+  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC]);
 
   // Initialize WebRTC
   useEffect(() => {
@@ -366,11 +356,7 @@ function LiveInterview() {
     sendMessage({ type: 'media_state', media: 'camera', enabled: newCameraOn });
   }, [isCameraOn, localStreamRef, startDetection, stopDetection, sendMessage, showSessionPopup]);
 
-  const handleEndInterview = useCallback(() => {
-    sendMessage({ type: 'end_interview' });
-    setShowThankYou(true);
-    stopWebRTC();
-  }, [sendMessage, stopWebRTC]);
+
 
   const handleFeedbackSubmit = () => {
     fetch(`${API_BASE_URL}/submit-interview-feedback/`, {
@@ -543,13 +529,12 @@ function LiveInterview() {
             )}
 
             <VideoPanel
-              remoteVideoRef={remoteVideoRef}
+              remoteParticipants={remoteParticipants}
               localVideoRef={thumbnailVideoRef}
               isRemoteCameraOn={isRemoteCameraOn}
               isRemoteScreenSharing={isRemoteScreenSharing}
               bothPartiesConnected={bothPartiesConnected}
               isCameraOn={isCameraOn}
-              remoteName={interviewerName}
               localName={candidateName}
             />
           </div>

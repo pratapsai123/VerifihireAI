@@ -1011,12 +1011,22 @@ def refresh_token_view(request):
         try:
             refresh = RefreshToken(refresh_token)
             
+            # 🛡️ SECURITY: Validate database context for the refresh token
+            db_conf = settings.DATABASES['default']
+            current_db_id = f"{db_conf.get('HOST', '127.0.0.1')}:{db_conf.get('PORT', '5432')}/{db_conf.get('NAME', 'postgres')}"
+            token_db_id = refresh.payload.get('db_name')
+
+            if token_db_id != current_db_id:
+                return Response({
+                    "detail": "Database context mismatch. Please login again.",
+                    "code": "db_mismatch"
+                }, status=status.HTTP_401_UNAUTHORIZED)
+
             # Ensure custom claims like db_name are copied to the new access token
-            # SimpleJWT access_token property generates a new AccessToken, but we manually
-            # inject db_name to ensure our custom DBContextJWTAuthentication passes.
+            
             access_token = refresh.access_token
-            if 'db_name' in refresh.payload:
-                access_token['db_name'] = refresh.payload['db_name']
+            
+            access_token['db_name'] = current_db_id
             
             response = Response(
                 {

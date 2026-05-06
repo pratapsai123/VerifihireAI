@@ -1,5 +1,5 @@
 // Main App entrance for VerifiHireAI
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -106,7 +106,7 @@ axios.interceptors.request.use(
 
       const urlPath = config.url ? new URL(config.url, window.location.origin).pathname : '';
       const isPublicApi = publicApiPatterns.some(pattern => pattern.test(urlPath));
-      const isOnPublicPage = publicRoutes.some(path => 
+      const isOnPublicPage = publicRoutes.some(path =>
         window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
       );
 
@@ -153,10 +153,32 @@ axios.interceptors.response.use(
     }
 
     // Check if error is 401 Unauthorized securely
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      
+    if (error.response && error.response.status === 401) {
+      // 🛡️ CRITICAL: If database mismatch is detected, logout IMMEDIATELY.
+      // A database mismatch cannot be fixed by refreshing tokens.
+      if (error.response.data && error.response.data.code === 'db_mismatch') {
+        console.error('Database context mismatch detected. Forced logout.');
+        clearToken();
+        localStorage.removeItem('user');
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return Promise.reject(error);
+      }
+
+      if (originalRequest._retry) {
+        // If we already tried refreshing and it failed again with 401, logout.
+        console.error('Unauthorized after retry. Logging out.');
+        clearToken();
+        localStorage.removeItem('user');
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return Promise.reject(error);
+      }
+
       if (isRefreshing) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
         }).then(token => {
           originalRequest.headers['Authorization'] = `Bearer ${token}`;
@@ -179,7 +201,7 @@ axios.interceptors.response.use(
         if (refreshResponse.data && refreshResponse.data.token) {
           const newToken = refreshResponse.data.token;
           setToken(newToken);
-          
+
           processQueue(null, newToken);
           isRefreshing = false;
 
@@ -208,7 +230,7 @@ axios.interceptors.response.use(
         '/book-interview/',
         '/accept-invite'
       ];
-      const isPublicPage = publicRoutes.some(path => 
+      const isPublicPage = publicRoutes.some(path =>
         window.location.pathname === path || (path.endsWith('/') && window.location.pathname.startsWith(path))
       );
 
@@ -232,6 +254,35 @@ axios.interceptors.response.use(
 
 function AppContent() {
   const location = useLocation();
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  // Proactive Session Recovery
+  // On page refresh, the in-memory access token is lost. This effect tries to 
+  // refresh it using the HttpOnly cookie before any other component starts fetching data.
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser && !getToken()) {
+        try {
+          // Silent refresh call
+          const response = await axios.post(`${API_BASE_URL}/token/refresh/`, {}, {
+            withCredentials: true
+          });
+          
+          if (response.data && response.data.token) {
+            setToken(response.data.token);
+            console.log("Session recovered successfully.");
+          }
+        } catch (err) {
+          console.warn("Session recovery failed or expired:", err.response?.status);
+          // If 401, the user is likely logged out, but we let ProtectedRoute handle redirection
+        }
+      }
+      setIsInitializing(false);
+    };
+
+    initializeAuth();
+  }, []);
 
 
   // List of routes that should have the global header hidden for a full-screen experience
@@ -270,11 +321,11 @@ function AppContent() {
     // Skip polling on public candidate/invite pages
     const publicRoutes = [
       '/precheck/', '/session-terminated', '/invite/', '/interview/',
-      '/login', '/signup', '/forgot-password', '/take-assessment/', 
-      '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/', 
+      '/login', '/signup', '/forgot-password', '/take-assessment/',
+      '/take-ai-assessment/', '/ai-interview-session/', '/interview-start/',
       '/result/', '/live-interview', '/book-interview/', '/accept-invite'
     ];
-    const isPublicPage = publicRoutes.some(path => 
+    const isPublicPage = publicRoutes.some(path =>
       location.pathname === path || (path.endsWith('/') && location.pathname.startsWith(path))
     );
     if (isPublicPage) return;
@@ -295,6 +346,18 @@ function AppContent() {
 
     return () => clearInterval(intervalId);
   }, [location.pathname]);
+
+  if (isInitializing) {
+    return (
+      <div className="initial-loading-container">
+        <div className="loader-content">
+          <div className="loader-logo">VerifiHire<span>AI</span></div>
+          <div className="loader-spinner"></div>
+          <p>Recovering session...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
@@ -362,8 +425,8 @@ function AppContent() {
           <Route path="/take-assessment/:token" element={<SecuritySessionGuard sessionType="assessment"><TakeAssessment /></SecuritySessionGuard>} />
           <Route path="/accept-invite" element={<AcceptInvite />} />
           <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
-          <Route path="/live-interview" element={<SecuritySessionGuard sessionType="interview"><LiveInterview /></SecuritySessionGuard>} />
-          <Route path="/interview-start/:token" element={<SecuritySessionGuard sessionType="interview"><InterviewStart /></SecuritySessionGuard>} />
+          <Route path="/live-interview" element={<LiveInterview />} />
+          <Route path="/interview-start/:token" element={<InterviewStart />} />
           <Route path="/take-ai-assessment/:token" element={<SecuritySessionGuard sessionType="ai_assessment"><AiTakeAssessment /></SecuritySessionGuard>} />
           <Route path="/ai-interview-session/:token" element={<SecuritySessionGuard sessionType="ai_interview"><AiInterviewSession /></SecuritySessionGuard>} />
           <Route path="/book-interview/:token" element={<BookInterview />} />

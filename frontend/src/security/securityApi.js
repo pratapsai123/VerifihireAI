@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 
-export const LOCAL_AGENT_BASE_URL = 'http://localhost:5001';
+export const LOCAL_AGENT_BASE_URL = 'http://127.0.0.1:5001';
 
 export const fetchAgentStatus = async () => {
   const res = await axios.get(`${LOCAL_AGENT_BASE_URL}/status`, { timeout: 4000 });

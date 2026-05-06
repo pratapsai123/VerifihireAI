@@ -20,7 +20,12 @@ export const writeSessionRecord = (token, value) => {
 export const markPrecheckPassed = (token, type) => {
   sessionStorage.setItem(
     getPrecheckKey(token),
-    JSON.stringify({ passed: true, type, at: new Date().toISOString() })
+    JSON.stringify({ 
+      passed: true, 
+      type, 
+      at: new Date().toISOString(),
+      timestamp: Date.now() 
+    })
   );
 };
 
@@ -36,4 +41,13 @@ export const readPrecheckRecord = (token) => {
 export const clearPrecheckRecord = (token) => {
   sessionStorage.removeItem(getPrecheckKey(token));
   sessionStorage.removeItem(getSecuritySessionKey(token));
+  sessionStorage.removeItem(`vh_exam_active_${token}`);
+};
+
+export const markExamStarted = (token) => {
+  sessionStorage.setItem(`vh_exam_active_${token}`, 'true');
+};
+
+export const isExamStarted = (token) => {
+  return sessionStorage.getItem(`vh_exam_active_${token}`) === 'true';
 };

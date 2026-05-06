@@ -110,7 +110,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -1178,11 +1178,17 @@ def _update_submission_scoring_logic(submission, finalize=False):
     if finalize:
         # --- RIGOROUS HIRING STANDARDS ---
         # Enforce minimum thresholds for individual sections
-        MIN_MCQ_THRESHOLD = 60.0
-        MIN_CODING_THRESHOLD = 50.0
-        MIN_INTEGRITY_THRESHOLD = 70.0
+        custom_min = getattr(inv.assessment, 'min_pass_percentage', None)
+        if custom_min is not None and float(custom_min) > 0:
+            MIN_MCQ_THRESHOLD = float(custom_min)
+            MIN_CODING_THRESHOLD = float(custom_min)
+            min_pass = float(custom_min)
+        else:
+            MIN_MCQ_THRESHOLD = 60.0
+            MIN_CODING_THRESHOLD = 50.0
+            min_pass = 60.0
 
-        min_pass = getattr(inv.assessment, 'min_pass_percentage', 60.0) or 60.0
+        MIN_INTEGRITY_THRESHOLD = 70.0
         
         # 7. Get Integrity Score
         integrity_score = 100.0
@@ -1207,13 +1213,18 @@ def _update_submission_scoring_logic(submission, finalize=False):
         has_mcq = (submission.objective_total > 0)
         has_coding = (submission.coding_total > 0)
         
-        if not passed_integrity:
+        is_zero_score = (final_percentage_rounded <= 0) or (submission.score == 0 and (has_mcq or has_coding))
+
+        if is_zero_score:
             submission.is_qualified = False
-            submission.result = 'hold'
+            submission.result = 'rejected'
         elif has_mcq and not passed_mcq:
             submission.is_qualified = False
             submission.result = 'hold'
         elif has_coding and not passed_coding:
+            submission.is_qualified = False
+            submission.result = 'hold'
+        elif not passed_integrity:
             submission.is_qualified = False
             submission.result = 'hold'
         elif not passed_overall:
@@ -1849,6 +1860,7 @@ def results_overview_view(request):
                         'name': a.name,
                         'weightage_objective': a.weightage_objective,
                         'weightage_coding': a.weightage_coding,
+                        'min_pass_percentage': a.min_pass_percentage,
                     },
                     'score': s.score,
                     'total': s.total,
@@ -1924,6 +1936,7 @@ def results_overview_view(request):
                         'name': a.name,
                         'weightage_objective': a.weightage_objective,
                         'weightage_coding': a.weightage_coding,
+                        'min_pass_percentage': a.min_pass_percentage,
                     },
                     'score': 0,
                     'total': 0,
@@ -2406,10 +2419,13 @@ def save_all_candidate_details_view(request):
         if isinstance(entered_with_consent, str):
             entered_with_consent = entered_with_consent.lower() == 'true'
 
-        # Identity Linkage and Verification
         # 1. Normalize credentials
         norm_email = email.lower().strip()
-        norm_pan = pan_number.strip().upper()
+        # Clean the input PAN of any spaces or junk for robust comparison
+        norm_pan = re.sub(r'[^A-Z0-9]', '', pan_number.strip().upper())
+        if len(norm_pan) == 10:
+            norm_pan = normalize_pan_format(norm_pan)
+        
         person_id = f"{norm_email}_{norm_pan}"
         
         # 2. Strict PAN Consistency Check (New Security Rule)
@@ -2440,6 +2456,38 @@ def save_all_candidate_details_view(request):
         if identity_link:
             # Verification: Compare current snapshot with the registered identity face
             verify_result = verify_face_with_deepface(person_id, snapshot)
+            
+            # RECOVERY: If reference face is missing from filesystem, attempt to restore it
+            if not verify_result.get('verified') and "No registered identity found" in str(verify_result.get('message', '')):
+                recovered = False
+                if identity_link.snapshot_image:
+                    try:
+                        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
+                        os.makedirs(identities_dir, exist_ok=True)
+                        with open(os.path.join(identities_dir, "canonical.jpg"), "wb") as f:
+                            f.write(identity_link.snapshot_image.read())
+                        # Retry verification
+                        verify_result = verify_face_with_deepface(person_id, snapshot)
+                        if verify_result.get('verified'):
+                            recovered = True
+                    except Exception as e:
+                        print(f"Face recovery failed for {person_id}: {e}")
+                
+                if not recovered:
+                    # Fallback: Re-register current face if reference is lost
+                    reg_result = register_face_with_deepface(person_id, snapshot)
+                    if reg_result.get('success'):
+                        verify_result = {'verified': True, 'distance': 0.0}
+                        # Also update the stored snapshot_image if it was missing
+                        try:
+                            if not identity_link.snapshot_image:
+                                if ',' in snapshot: snapshot_b64 = snapshot.split(',', 1)[1]
+                                else: snapshot_b64 = snapshot
+                                snapshot_data = base64.b64decode(snapshot_b64)
+                                identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                                identity_link.save(update_fields=['snapshot_image'])
+                        except: pass
+
             verify_status = verify_result.get('verified', False)
             distance = verify_result.get('distance', 1.0)
             match_score = max(0.0, 1.0 - distance)
@@ -2454,10 +2502,24 @@ def save_all_candidate_details_view(request):
             # Linkage: Register the candidate's face for the first time
             reg_result = register_face_with_deepface(person_id, snapshot)
             if reg_result.get('success'):
+                # Convert base64 snapshot to file for Django model
+                snapshot_file = None
+                if snapshot:
+                    try:
+                        if ',' in snapshot:
+                            header, snapshot_b64 = snapshot.split(',', 1)
+                        else:
+                            snapshot_b64 = snapshot
+                        snapshot_data = base64.b64decode(snapshot_b64)
+                        snapshot_file = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                    except Exception as e:
+                        print(f"Error decoding snapshot for IdentityLink: {e}")
+
                 IdentityLink.objects.create(
                     email=norm_email,
                     pan_number=norm_pan,
                     pan_image=pan_file,
+                    snapshot_image=snapshot_file,
                 )
                 verify_status = True
                 match_score = 1.0
@@ -2686,6 +2748,8 @@ def log_candidate_activity_view(request, token):
             invitation.activity_logs = logs
             invitation.save(update_fields=['activity_logs'])
             
+            # Print to server console for real-time application monitoring
+            print(f"[CANDIDATE_ACTIVITY] {invitation.email} | {action}: {details}")
         return Response({'status': 'logged'})
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invalid token'}, status=404)

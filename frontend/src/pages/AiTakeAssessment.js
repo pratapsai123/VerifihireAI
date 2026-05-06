@@ -1379,6 +1379,8 @@ const AiTakeAssessment = () => {
             // after the video element is rendered
 
             setIsStarted(true);
+            // Signal SecuritySessionGuard to begin monitoring now that assessment is starting
+            window.dispatchEvent(new Event('vh_exam_started'));
             logCandidateActivity(token, 'AI Assessment Started', 'Candidate started the AI-proctored assessment.');
 
 

@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 
-export const useScreenShare = (peerConnectionRef, localStreamRef, sendMessage, showNotification, MY_ROLE) => {
+export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, showNotification, MY_ROLE) => {
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
@@ -44,25 +44,28 @@ export const useScreenShare = (peerConnectionRef, localStreamRef, sendMessage, s
         setIsScreenSharing(true);
         if (showNotification) showNotification('Screen sharing started', 'success');
 
-        if (peerConnectionRef.current) {
-          const videoTrack = screenShareStream.getVideoTracks()[0];
-          const senders = peerConnectionRef.current.getSenders();
+        const videoTrack = screenShareStream.getVideoTracks()[0];
+        
+        // 🔥 Apply to ALL peer connections
+        const pcs = peerConnectionsRef.current || {};
+        for (const userId in pcs) {
+          const pc = pcs[userId];
+          const senders = pc.getSenders();
           const videoSender = senders.find(s => s.track && s.track.kind === 'video');
 
           if (videoSender) {
             await videoSender.replaceTrack(videoTrack);
           } else {
-            peerConnectionRef.current.addTrack(videoTrack, screenShareStream);
+            pc.addTrack(videoTrack, screenShareStream);
             // Must re-negotiate if adding new track
-            const offer = await peerConnectionRef.current.createOffer();
-            await peerConnectionRef.current.setLocalDescription(offer);
-            sendMessage({ type: 'video_offer', sdp: offer });
+            const offer = await pc.createOffer();
+            await pc.setLocalDescription(offer);
+            sendMessage({ type: 'video_offer', sdp: offer, target: userId });
           }
         }
 
         sendMessage({ type: 'screen_share_state', active: true });
 
-        const videoTrack = screenShareStream.getVideoTracks()[0];
         if (videoTrack) {
           videoTrack.onended = () => stopScreenSharing();
         }
@@ -74,7 +77,7 @@ export const useScreenShare = (peerConnectionRef, localStreamRef, sendMessage, s
     } else {
       stopScreenSharing();
     }
-  }, [isScreenSharing, screenShareLocked, screenShareHolder, MY_ROLE, sendMessage, showNotification, peerConnectionRef]);
+  }, [isScreenSharing, screenShareLocked, screenShareHolder, MY_ROLE, sendMessage, showNotification, peerConnectionsRef]);
 
   const stopScreenSharing = useCallback(async () => {
     if (screenShareStreamRef.current) {
@@ -89,23 +92,26 @@ export const useScreenShare = (peerConnectionRef, localStreamRef, sendMessage, s
     sendMessage({ type: 'screen_share_state', active: false });
     sendMessage({ type: 'screen_share_release' });
 
-    // Restore camera track
-    if (localStreamRef.current && peerConnectionRef.current) {
+    // Restore camera track for ALL peers
+    if (localStreamRef.current) {
       const videoTrack = localStreamRef.current.getVideoTracks()[0];
       if (videoTrack) {
-        try {
-          // ensure track is enabled
-          videoTrack.enabled = true;
-          const sender = peerConnectionRef.current.getSenders().find(s => s.track && s.track.kind === 'video');
-          if (sender) {
-            await sender.replaceTrack(videoTrack);
+        videoTrack.enabled = true;
+        const pcs = peerConnectionsRef.current || {};
+        for (const userId in pcs) {
+          const pc = pcs[userId];
+          try {
+            const sender = pc.getSenders().find(s => s.track && s.track.kind === 'video');
+            if (sender) {
+              await sender.replaceTrack(videoTrack);
+            }
+          } catch (e) {
+            console.warn(`Failed to restore camera for ${userId}:`, e);
           }
-        } catch (e) {
-          console.warn('Failed to restore camera after screen share:', e);
         }
       }
     }
-  }, [sendMessage, peerConnectionRef, localStreamRef]);
+  }, [sendMessage, peerConnectionsRef, localStreamRef]);
 
   // Handle incoming screen share granted message
   const handleScreenShareGranted = useCallback(() => {
