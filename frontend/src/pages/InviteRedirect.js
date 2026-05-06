@@ -28,14 +28,7 @@ export default function InviteRedirect({ type }) {
     
     navigate(redirectUrl, { replace: true });
   }, [navigate, token, type, location.search]);
-    // Live interviews skip precheck and go directly to the interview page
-    if (type === 'interview' || type === 'live_interview') {
-      navigate(`/live-interview?token=${token}`, { replace: true });
-    } else {
-      navigate(`/precheck/${token}?type=${encodeURIComponent(type)}`, { replace: true });
-    }
-  }, [navigate, token, type]);
-
+    
   return (
     <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#334155' }}>
       Redirecting to secure precheck...

@@ -71,6 +71,68 @@ from api.views import ensure_role_exists
 #     raise ValueError("GROQ_API_KEY must be set in settings.py")
 # groq_client = Groq(api_key=groq_api_key)
 
+def _get_candidate_photo_url(request, submission):
+    """
+    Helper to get the most reliable candidate photo URL.
+    Ensures Web View uses the EXACT SAME logic as PDF report:
+    1. Try to sync DeepFace folder image to IdentityLink if missing.
+    2. Serve from IdentityLink (Database backed ImageField).
+    3. Fallback to Integrity Screenshots.
+    """
+    email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+    if not email:
+        return None
+
+    try:
+        from api.models import IdentityLink
+        from pathlib import Path
+        from django.core.files import File
+        
+        identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
+        
+        # Auto-Sync: If photo is missing in DB but exists in DeepFace folder, sync it now.
+        # This makes the "First Captured Photo" available to the Web View.
+        if not identity or not identity.snapshot_image:
+            deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+            person_face_dir = deepface_data_dir / email
+            if person_face_dir.exists():
+                # If identity didn't exist, create it
+                if not identity:
+                    identity = IdentityLink.objects.create(
+                        email=email,
+                        pan_number=submission.pan_number or 'UNKNOWN'
+                    )
+                
+                # Try to find and save the first JPG from the registration folder
+                for img_file in person_face_dir.glob('*.jpg'):
+                    try:
+                        with open(img_file, 'rb') as f:
+                            identity.snapshot_image.save(img_file.name, File(f), save=True)
+                        break # Sync complete
+                    except:
+                        continue
+        
+        if identity and identity.snapshot_image:
+            return request.build_absolute_uri(identity.snapshot_image.url)
+    except Exception as e:
+        logger.warning(f"Photo sync/retrieval failed for {email}: {e}")
+        pass
+        
+    # Fallback to Integrity Screenshots (Proctoring frames)
+    try:
+        shots = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp')
+        for shot in shots:
+            if shot.event_type and 'face_not_detected' in shot.event_type.lower():
+                continue
+            if shot.webcam_screenshot:
+                return request.build_absolute_uri(shot.webcam_screenshot.url)
+            elif shot.screenshot:
+                return request.build_absolute_uri(shot.screenshot.url)
+    except Exception:
+        pass
+        
+    return None
+
 class SubmitAssessmentView(APIView):
     def post(self, request):
         data = request.data
@@ -1010,10 +1072,7 @@ class CreateSubmissionView(APIView):
                     batch_name=assessment.batch_name
                 )
                 
-                # --- DEEPFACE REGISTRATION ---
-                if snapshot:
-                    _register_face_with_deepface(email, snapshot)
-                
+
                 # CROSS-UPDATE: Synchronize with the Candidate record if exists
                 try:
                     # Use iexact and prioritize the same batch
@@ -1033,6 +1092,38 @@ class CreateSubmissionView(APIView):
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
                 
+
+            # --- DEEPFACE REGISTRATION & IDENTITY STORAGE ---
+            # Do this every time a snapshot is provided, even for ongoing sessions
+            if snapshot:
+                _register_face_with_deepface(email, snapshot)
+                
+                # Store Identity Link for the report
+                try:
+                    from api.models import IdentityLink
+                    import base64
+                    from django.core.files.base import ContentFile
+                    
+                    identity, created = IdentityLink.objects.get_or_create(
+                        email=email,
+                        pan_number=pan_number or 'UNKNOWN'
+                    )
+                    
+                    imgstr = snapshot
+                    ext = 'jpg'
+                    if ';' in snapshot and 'base64,' in snapshot:
+                        header, imgstr = snapshot.split(';base64,')
+                        ext = header.split('/')[-1]
+                        
+                    img_data = base64.b64decode(imgstr)
+                    cname = f"ai_reg_{email.replace('@','_')}_{int(timezone.now().timestamp())}.{ext}"
+                    identity.snapshot_image.save(cname, ContentFile(img_data), save=True)
+                    if pan_photo:
+                        identity.pan_image = pan_photo
+                        identity.save()
+                except Exception as e:
+                    logger.error(f"Failed to save IdentityLink in AI assessment: {e}")
+
             # Only pick and lock questions if they haven't been locked yet
             if not submission.candidate_questions:
                 # Unique MCQ Distribution:
@@ -1332,6 +1423,8 @@ class AssessmentDetailView(APIView):
                         "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
                     })
 
+                photo_url = _get_candidate_photo_url(request, sub)
+
                 submission_data.append({
                     "id": sub.id,
                     "submission_id": f"ai_{sub.id}",
@@ -1352,7 +1445,9 @@ class AssessmentDetailView(APIView):
                     "candidate_questions": sub.candidate_questions,
                     "answers": sub.answers,
                     "integrity_screenshots": screenshots_data,
-                    "is_resume_screening": False
+                    "is_resume_screening": False,
+                    "candidate_photo_url": photo_url,
+                    "pan_photo": request.build_absolute_uri(sub.pan_photo.url) if sub.pan_photo else None
                 })
 
 
@@ -1577,7 +1672,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -1954,7 +2049,52 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
         )
 
     def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+        instance = self.get_object()
+        
+        # Get integrity snapshots
+        integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=instance).order_by('timestamp')
+        screenshots_data = []
+        for snap in integrity_snapshots:
+            screenshots_data.append({
+                "event_type": snap.event_type,
+                "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+            })
+
+        # Get candidate photo using unified helper
+        photo_url = _get_candidate_photo_url(request, instance)
+
+        # Prepare detailed response data
+        data = {
+            "id": instance.id,
+            "submission_id": f"ai_{instance.id}",
+            "candidate_name": instance.candidate_name,
+            "candidate_email": instance.candidate_email,
+            "job_title": instance.assessment.required_skills,
+            "score": instance.score,
+            "mcq_score": instance.mcq_score,
+            "coding_score": instance.coding_score,
+            "results_breakdown": instance.results_breakdown,
+            "percentage": instance.percentage,
+            "status": instance.status,
+            "integrity_score": instance.integrity_score,
+            "submitted_at": instance.submitted_at.isoformat() if instance.submitted_at else None,
+            "candidate_questions": instance.candidate_questions,
+            "answers": instance.answers,
+            "integrity_screenshots": screenshots_data,
+            "candidate_photo_url": photo_url,
+            "pan_photo": request.build_absolute_uri(instance.pan_photo.url) if instance.pan_photo else None,
+            "pan_number": instance.pan_number,
+            "pan_verified": instance.pan_verified,
+            "phone": instance.phone,
+            "assessment": {
+                "id": instance.assessment.id,
+                "display_name": instance.assessment.required_skills,
+                "name": instance.assessment.required_skills
+            }
+        }
+        return Response(data)
 
     def delete(self, request, *args, **kwargs):
         user_profile = getattr(request.user, 'profile', None)
@@ -2270,9 +2410,19 @@ class AIAssessmentReportDownloadView(APIView):
                 except Exception as e:
                     pass  # Fall back to screenshots
             
-            # Fallback: Get from integrity screenshots (prefer webcam, avoid face_not_detected events)
+            # Fallback 1: Try IdentityLink snapshot
             if not candidate_img:
-                screenshots_qs = submission.screenshots.all().order_by('timestamp')
+                try:
+                    from api.models import IdentityLink
+                    identity = IdentityLink.objects.filter(email=submission.candidate_email).order_by('-updated_at').first()
+                    if identity and identity.snapshot_image:
+                        candidate_img = RLImage(identity.snapshot_image.path, width=1.4*inch, height=1.4*inch)
+                except Exception:
+                    pass
+
+            # Fallback 2: Get from integrity screenshots (prefer webcam, avoid face_not_detected events)
+            if not candidate_img:
+                screenshots_qs = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp')
                 for shot in screenshots_qs:
                     # Skip frames with no face detected
                     if shot.event_type and 'face_not_detected' in shot.event_type.lower():
@@ -2289,6 +2439,19 @@ class AIAssessmentReportDownloadView(APIView):
                             break
                         except:
                             continue
+
+            # Get PAN Card image
+            pan_img = None
+            if submission.pan_photo:
+                try:
+                    # Verify path exists before trying to create RLImage
+                    if os.path.exists(submission.pan_photo.path):
+                        pan_img = RLImage(submission.pan_photo.path, width=1.4*inch, height=1.0*inch)
+                    else:
+                        logger.warning(f"PAN photo path does not exist: {submission.pan_photo.path}")
+                except Exception as e:
+                    logger.error(f"Error loading PAN photo for PDF: {e}")
+                    pass
 
             # Info table data
             # Handle old submissions without PAN data
@@ -2337,25 +2500,44 @@ class AIAssessmentReportDownloadView(APIView):
                 ('FONTNAME', (1,7), (1,7), 'Helvetica-Bold'),
             ]))
 
-            # Photo section
+            # Photo section - Stacking Candidate Photo and PAN Card
+            photo_style = ParagraphStyle('PhotoLabel', parent=styles['Normal'], fontSize=8, alignment=1, textColor=colors.HexColor("#707EAE"))
+            photo_elements = []
+            
             if candidate_img:
-                photo_label = Paragraph("Candidate Photo", ParagraphStyle('PhotoLabel', parent=styles['Normal'], fontSize=8, alignment=1, textColor=colors.HexColor("#707EAE")))
-                photo_cell = [[candidate_img], [photo_label]]
-                photo_table = Table(photo_cell, colWidths=[1.5*inch], rowHeights=[1.5*inch, 18])
-                photo_table.setStyle(TableStyle([
-                    ('ALIGN', (0,0), (0,0), 'CENTER'),
-                    ('VALIGN', (0,0), (0,0), 'MIDDLE'),
-                    ('ALIGN', (0,1), (0,1), 'CENTER'),
-                    ('VALIGN', (0,1), (0,1), 'TOP'),
-                    ('TOPPADDING', (0,1), (0,1), 4),
-                ]))
-            else:
-                no_photo_text = Paragraph("No candidate<br/>photo available", ParagraphStyle('NoPhoto', parent=styles['Normal'], fontSize=9, alignment=1, textColor=colors.grey))
+                photo_elements.append([candidate_img])
+                photo_elements.append([Paragraph("Candidate Photo", photo_style)])
+            
+            if pan_img:
+                if photo_elements:
+                    photo_elements.append([Spacer(1, 10)])
+                photo_elements.append([pan_img])
+                photo_elements.append([Paragraph("PAN Card Photo", photo_style)])
+                
+            if not photo_elements:
+                no_photo_text = Paragraph("No photos<br/>available", ParagraphStyle('NoPhoto', parent=styles['Normal'], fontSize=9, alignment=1, textColor=colors.grey))
                 photo_table = Table([[no_photo_text]], colWidths=[1.5*inch], rowHeights=[1.5*inch])
                 photo_table.setStyle(TableStyle([
                     ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#F4F7FE")),
                     ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                     ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                ]))
+            else:
+                # Calculate row heights: images are 1.4/1.0 inch, labels are ~18pt, spacer is 10pt
+                row_heights = []
+                for row in photo_elements:
+                    if isinstance(row[0], RLImage):
+                        row_heights.append(row[0].drawHeight)
+                    elif isinstance(row[0], Spacer):
+                        row_heights.append(10)
+                    else:
+                        row_heights.append(18)
+                        
+                photo_table = Table(photo_elements, colWidths=[1.5*inch], rowHeights=row_heights)
+                photo_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('BOTTOMPADDING', (0,0), (-1,-1), 2),
                 ]))
 
             # Combine photo + info in a bordered container
@@ -2616,6 +2798,8 @@ class AIAssessmentSubmissionListView(APIView):
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
                 })
 
+            photo_url = _get_candidate_photo_url(request, sub)
+
             data.append({
                 "id": sub.id,
                 "submission_id": f"ai_{sub.id}",
@@ -2637,6 +2821,8 @@ class AIAssessmentSubmissionListView(APIView):
                 "answers": sub.answers,
                 "integrity_screenshots": screenshots_data,
                 "is_resume_screening": False,
+                "candidate_photo_url": photo_url,
+                "pan_photo": request.build_absolute_uri(sub.pan_photo.url) if sub.pan_photo else None,
                 "assessment": {
                     "id": sub.assessment.id,
                     "display_name": sub.assessment.required_skills,

@@ -626,18 +626,19 @@ const AiAssessmentDetail = () => {
                                         </h3>
 
                                         {(() => {
-                                            // Get candidate photo from integrity logs (webcam screenshot)
+                                            // Get candidate photo from identity link or integrity logs
                                             const logs = selectedSubmission.integrity_screenshots || selectedSubmission.integrity_logs || selectedSubmission.monitoring_logs || [];
                                             const firstWebcam = logs.find(log => log.webcam_screenshot_url || log.webcam_screenshot_base64 || log.webcam_image);
-                                            const candidatePhoto = firstWebcam
+                                            const candidatePhoto = selectedSubmission.candidate_photo_url || (firstWebcam
                                                 ? (firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64 || firstWebcam.webcam_image)
-                                                : null;
+                                                : null);
                                             return (
                                         <div style={{
                                             display: 'flex',
                                             gap: '2rem',
                                             alignItems: 'flex-start'
                                         }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
                                             {/* Candidate Photo */}
                                             <div style={{
                                                 width: '180px',
@@ -648,7 +649,6 @@ const AiAssessmentDetail = () => {
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                                 border: '1px solid #E0E5F2',
-                                                flexShrink: 0,
                                                 overflow: 'hidden'
                                             }}>
                                                 {candidatePhoto ? (
@@ -678,6 +678,48 @@ const AiAssessmentDetail = () => {
                                                         color: '#A3AED0'
                                                     }}></i>
                                                 </div>
+                                            </div>
+
+                                            {/* PAN Card Photo */}
+                                            {selectedSubmission.pan_photo && (
+                                                <div style={{
+                                                    width: '180px',
+                                                    height: '120px',
+                                                    background: '#F4F7FE',
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    border: '1px solid #E0E5F2',
+                                                    overflow: 'hidden'
+                                                }}>
+                                                    <img
+                                                        src={selectedSubmission.pan_photo}
+                                                        alt="PAN Card"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            objectFit: 'contain'
+                                                        }}
+                                                        onError={(e) => {
+                                                            e.target.style.display = 'none';
+                                                            e.target.nextSibling.style.display = 'flex';
+                                                        }}
+                                                    />
+                                                    <div style={{
+                                                        display: 'none',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        width: '100%',
+                                                        height: '100%'
+                                                    }}>
+                                                        <i className="fa-solid fa-id-card" style={{
+                                                            fontSize: '4rem',
+                                                            color: '#A3AED0'
+                                                        }}></i>
+                                                    </div>
+                                                </div>
+                                            )}
                                             </div>
 
                                             {/* Information Table */}

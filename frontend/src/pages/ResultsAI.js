@@ -974,15 +974,9 @@ const ResultsAI = () => {
                                             </h3>
 
                                             {(() => {
-                                                // Get candidate photo - try DeepFace registered photo first (same as PDF)
+                                                // Get candidate photo - use backend-provided URL first
                                                 // Then fall back to first valid integrity screenshot
-                                                let candidatePhoto = null;
-
-                                                // 1. Try DeepFace registered photo first
-                                                const personId = viewedSubmission.candidate_email?.toLowerCase().trim();
-                                                if (personId) {
-                                                    candidatePhoto = `http://127.0.0.1:8500/data/registered_faces/${personId}/registration_snapshot.jpg`;
-                                                }
+                                                let candidatePhoto = viewedSubmission.candidate_photo_url || null;
 
                                                 if (!candidatePhoto) {
                                                     const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
@@ -999,22 +993,24 @@ const ResultsAI = () => {
                                                 }
                                                 return (
                                                     <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-                                                        <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', flexShrink: 0, overflow: 'hidden' }}>
-                                                            {candidatePhoto ? (
-                                                                <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                                                            ) : null}
-                                                            <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                            </div>
-                                                        </div>
-                                                        {viewedSubmission.pan_photo && (
-                                                            <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', flexShrink: 0, overflow: 'hidden' }}>
-                                                                <img src={viewedSubmission.pan_photo} alt="PAN Card" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                                                                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                    <i className="fa-solid fa-id-card" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
+                                                            <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
+                                                                {candidatePhoto ? (
+                                                                    <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                ) : null}
+                                                                <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                    <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
                                                                 </div>
                                                             </div>
-                                                        )}
+                                                            {viewedSubmission.pan_photo && (
+                                                                <div style={{ width: '180px', height: '120px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
+                                                                    <img src={viewedSubmission.pan_photo} alt="PAN Card" style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                        <i className="fa-solid fa-id-card" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                         <div style={{ flex: 1 }}>
                                                             <table style={{ width: '100%', borderCollapse: 'collapse', background: 'white', border: '1px solid #E0E5F2', borderRadius: '12px', overflow: 'hidden' }}>
                                                                 <tbody>
