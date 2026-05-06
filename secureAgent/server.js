@@ -4,20 +4,72 @@ const { scanProcesses } = require('./processScanner');
 const { detectBlocked, loadBundledRules } = require('./detector');
 const { startMonitor, stopMonitor, getMonitorState } = require('./monitor');
 const { scanHardwareDevices, initBaseline, compareToBaseline } = require('./hardwareScanner');
+const { registerProtocol } = require('./protocolRegister');
+const { exec } = require('child_process');
+
+// Read version from package.json — used for frontend version checks
+const AGENT_VERSION = require('./package.json').version;
+
+/**
+ * Minimizes the current terminal window to the taskbar.
+ * Uses PowerShell to find the window associated with the current process ID.
+ */
+function minimizeTerminal() {
+  if (process.platform !== 'win32') return;
+
+  // We wait 1 second to ensure the window is fully rendered before minimizing
+  setTimeout(() => {
+    const script = `
+      $powershell = [PowerShell]::Create()
+      $powershell.AddScript('
+        Add-Type -TypeDefinition "
+          using System;
+          using System.Runtime.InteropServices;
+          public class WindowUtils {
+            [DllImport(\\"user32.dll\\")]
+            public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+            [DllImport(\\"user32.dll\\")]
+            public static extern IntPtr GetConsoleWindow();
+          }
+        "
+        $hwnd = [WindowUtils]::GetConsoleWindow()
+        if ($hwnd -ne [IntPtr]::Zero) {
+          [WindowUtils]::ShowWindow($hwnd, 6) # 6 = SW_MINIMIZE
+        }
+      ')
+      $powershell.Invoke()
+    `;
+    
+    // Simpler approach that usually works for console apps:
+    const simpleScript = `powershell -Command "(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class W { [DllImport(\\"user32.dll\\")] public static extern bool ShowWindow(IntPtr h, int n); }' -PassThru)::ShowWindow((Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class C { [DllImport(\\"kernel32.dll\\")] public static extern IntPtr GetConsoleWindow(); }' -PassThru)::GetConsoleWindow(), 6)"`;
+    
+    exec(simpleScript, (err) => {
+      if (err) console.error('[server] Failed to minimize terminal:', err.message);
+      else console.log('[server] Terminal minimized to taskbar');
+    });
+  }, 1000);
+}
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 loadBundledRules();
+// Register verifihire:// custom protocol so browsers can auto-launch the agent
+registerProtocol();
+// Auto-minimize terminal window to taskbar
+minimizeTerminal();
 // Take hardware baseline at startup so built-in devices are whitelisted
 initBaseline().catch(err => console.error('[server] hardware baseline init error:', err.message));
+
+console.log(`[server] VerifiHire Secure Agent v${AGENT_VERSION} starting...`);
 
 app.get('/status', (_req, res) => {
   const monitorState = getMonitorState();
   res.json({
     installed: true,
     running: true,
+    version: AGENT_VERSION,
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
@@ -78,7 +130,25 @@ app.post('/monitor/start', async (req, res) => {
 
 app.post('/monitor/stop', (_req, res) => {
   stopMonitor();
-  return res.json({ stopped: true });
+  res.json({ stopped: true });
+  // Auto-close: exit the agent after exam ends so the terminal window closes
+  console.log('[server] Monitor stopped — agent will exit in 2 seconds');
+  setTimeout(() => {
+    server.close(() => process.exit(0));
+    // Force exit if server.close hangs
+    setTimeout(() => process.exit(0), 3000);
+  }, 2000);
+});
+
+// Explicit shutdown endpoint (browser can call this as a fallback)
+app.post('/shutdown', (_req, res) => {
+  stopMonitor();
+  res.json({ shutdown: true });
+  console.log('[server] Shutdown requested — exiting');
+  setTimeout(() => {
+    server.close(() => process.exit(0));
+    setTimeout(() => process.exit(0), 3000);
+  }, 1000);
 });
 
 const port = process.env.SECURE_AGENT_PORT || 5001;
