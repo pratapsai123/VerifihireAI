@@ -4291,7 +4291,8 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             from ai_assessments.ai_logic import GroqKeyManager
             import time as _time
 
-            local_api_key = GroqKeyManager.get_current_key()
+            # Use least-used key for better load balancing with concurrent interviews
+            local_api_key = GroqKeyManager.get_least_used_key()
             local_groq_client = Groq(api_key=local_api_key)
 
             # --- AUTO MODEL FALLBACK WITH KEY ROTATION ---
