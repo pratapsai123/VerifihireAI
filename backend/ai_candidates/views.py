@@ -3940,6 +3940,7 @@ class CandidateRegistrationUpdateView(APIView):
                             'duplicate': True,
                             'requires_face_verification': True,
                             'verify_against_person_id': existing_pan_holder.public_token,
+                            'verify_against_person_pan': existing_pan_holder.pan_number,
                             'registered_to': existing_pan_holder.full_name
                         }, status=status.HTTP_400_BAD_REQUEST)
                     else:
@@ -4007,6 +4008,7 @@ class CandidateRegistrationUpdateView(APIView):
                                     'duplicate': True,
                                     'requires_face_verification': True,
                                     'verify_against_person_id': existing_pan_holder.public_token,
+                                    'verify_against_person_pan': existing_pan_holder.pan_number,
                                     'registered_to': existing_pan_holder.full_name
                                 }, status=status.HTTP_400_BAD_REQUEST)
 

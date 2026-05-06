@@ -6,6 +6,28 @@
 
 ---
 
+## 2026-05-06
+
+### 07:03 - [Frontend+Backend / PAN-Based DeepFace Identity]
+- **Changed DeepFace Identity from Token to PAN**: Face registration now uses PAN number instead of interview token as `person_id`
+- **Benefit**: Same person across different interview links is recognized, preventing duplicate registration
+- **Frontend `AiInterviewSession.js`**: `getDeepfacePersonId()` now returns `candidateData.pan_number` if available, fallback to token
+- **Backend `views.py`**: Returns `verify_against_person_pan` in addition to `verify_against_person_id` for DeepFace verification
+- **Frontend `InterviewStart.js`**: Stores `verify_against_person_pan` in sessionStorage for PAN-recovery cases
+- **Frontend `AiInterviewSession.js`**: Uses PAN for DeepFace verification when `verify_against_person_pan` is available
+- **Security Improvement**: Face is now permanently bound to PAN, not temporary interview token
+
+### 06:55 - [Backend / Thread-Safe Groq Key Management]
+- **Fixed Concurrent Interview Issue**: `GroqKeyManager` was not thread-safe, causing race conditions with multiple interviews
+- **Added Threading Lock**: `threading.Lock()` prevents simultaneous key index modification across Django workers
+- **Added Key Usage Tracking**: `_key_usage_count` dictionary tracks API calls per key index
+- **New Method `get_least_used_key()`**: Distributes load evenly across API keys for better concurrency
+- **New Method `get_usage_stats()`**: Returns usage statistics for monitoring key distribution
+- **Updated ProcessAnswerView**: Now uses `get_least_used_key()` instead of round-robin for load balancing
+- **Concurrent Capacity**: With 3 keys, can now handle ~90 requests/minute (30 per key) without race conditions
+
+---
+
 ## 2026-05-05
 
 ### 15:40 - [Frontend / Fix Race Condition in Face Registration]
@@ -151,4 +173,17 @@
 
 ---
 
-*Last updated: 2026-05-05 09:59*
+### 06:55 - [Backend / Thread-Safe Groq Key Management]
+- **Fixed Concurrent Interview Issue**: `GroqKeyManager` was not thread-safe, causing race conditions with multiple interviews
+- **Added Threading Lock**: `threading.Lock()` prevents simultaneous key index modification across Django workers
+- **Added Key Usage Tracking**: `_key_usage_count` dictionary tracks API calls per key index
+- **New Method `get_least_used_key()`**: Distributes load evenly across API keys for better concurrency
+- **New Method `get_usage_stats()`**: Returns usage statistics for monitoring key distribution
+- **Updated ProcessAnswerView**: Now uses `get_least_used_key()` instead of round-robin for load balancing
+- **Concurrent Capacity**: With 3 keys, can now handle ~90 requests/minute (30 per key) without race conditions
+
+---
+
+## 2026-05-06
+
+*Last updated: 2026-05-06 06:55*

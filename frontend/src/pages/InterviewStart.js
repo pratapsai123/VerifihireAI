@@ -322,7 +322,9 @@ const InterviewStart = () => {
             const errorData = err.response?.data;
             // If PAN requires face verification, store details and proceed to interview for face check
             if (errorData?.requires_face_verification) {
+                // Store both token (for backend reference) and PAN (for DeepFace verification)
                 sessionStorage.setItem('verify_against_person_id', errorData.verify_against_person_id || '');
+                sessionStorage.setItem('verify_against_person_pan', errorData.verify_against_person_pan || panNumber.toUpperCase().trim());
                 sessionStorage.setItem('pending_pan', panNumber.toUpperCase().trim());
                 // Proceed to interview - face verification will happen there
             } else {

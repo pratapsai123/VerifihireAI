@@ -52,9 +52,14 @@ const AiInterviewSession = () => {
     const [dfHeadDir, setDfHeadDir] = useState('FORWARD');
 
     const getDeepfacePersonId = useCallback(() => {
-        // Stable identity for DeepFace across registration and session start.
+        // Use PAN number as primary identity for DeepFace
+        // This ensures same person across different interview links
+        if (candidateData?.pan_number) {
+            return String(candidateData.pan_number).trim().toLowerCase();
+        }
+        // Fallback to token for candidates without PAN
         return String(token || '').trim().toLowerCase();
-    }, [token]);
+    }, [token, candidateData]);
 
     // Refs
     const videoRef = useRef(null);
@@ -1893,11 +1898,12 @@ const AiInterviewSession = () => {
             
             const personId = getDeepfacePersonId();
             if (!personId) {
-                throw new Error('Missing interview token for DeepFace registration.');
+                throw new Error('Missing PAN number for DeepFace registration. Please ensure PAN is verified before starting the interview.');
             }
 
             // Check if this is a PAN-recovery case (different person_id to verify against)
             const verifyAgainstPersonId = sessionStorage.getItem('verify_against_person_id');
+            const verifyAgainstPersonPan = sessionStorage.getItem('verify_against_person_pan');
             const pendingPan = sessionStorage.getItem('pending_pan');
 
             // Step 1: Ask DeepFace if this person already has a registered face
@@ -1917,10 +1923,12 @@ const AiInterviewSession = () => {
             let embeddingHash = null;
 
             // CASE A: Using a PAN that belongs to someone else (verify against original holder)
-            if (verifyAgainstPersonId) {
-                console.log(`[Face] PAN-recovery mode: verifying against original holder ${verifyAgainstPersonId}`);
+            // Use PAN number for DeepFace verification since face is now registered under PAN
+            const verifyTargetId = verifyAgainstPersonPan || verifyAgainstPersonId;
+            if (verifyTargetId) {
+                console.log(`[Face] PAN-recovery mode: verifying against original holder ${verifyTargetId}`);
                 verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
-                    person_id: verifyAgainstPersonId,
+                    person_id: verifyTargetId,
                     image_base64: b64
                 });
 
@@ -1991,7 +1999,7 @@ const AiInterviewSession = () => {
                 console.log('[Face] Embedding hash captured:', embeddingHash.substring(0, 16) + '...');
                 
                 const payload = { face_embedding_hash: embeddingHash };
-                if (verifyAgainstPersonId) {
+                if (verifyAgainstPersonId || verifyAgainstPersonPan) {
                     payload.face_verified = true;
                 }
                 if (pendingPan) {
@@ -2002,6 +2010,7 @@ const AiInterviewSession = () => {
                     await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/register/`, payload);
                     console.log('[Face] Face hash sent to backend successfully');
                     sessionStorage.removeItem('verify_against_person_id');
+                    sessionStorage.removeItem('verify_against_person_pan');
                     sessionStorage.removeItem('pending_pan');
                 } catch (hashErr) {
                     console.error('[Face] Failed to send face hash:', hashErr);
