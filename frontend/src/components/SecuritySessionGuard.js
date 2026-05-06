@@ -9,6 +9,17 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [searchParams] = useSearchParams();
   const token = params.token || searchParams.get('token');
   const navigate = useNavigate();
+  
+  // Helper to build precheck URL with preserved query params (name, email)
+  const buildPrecheckUrl = (token, sessionType) => {
+    const name = searchParams.get('name');
+    const email = searchParams.get('email');
+    let url = `/precheck/${token}?type=${encodeURIComponent(sessionType)}`;
+    if (name) url += `&name=${encodeURIComponent(name)}`;
+    if (email) url += `&email=${encodeURIComponent(email)}`;
+    console.log('SecuritySessionGuard - Redirecting to precheck:', url);
+    return url;
+  };
   const [paused, setPaused] = useState(false);
   const [pauseDevice, setPauseDevice] = useState('');
   const [warning, setWarning] = useState(false);
@@ -78,7 +89,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       sessionRecord?.session_id;
 
     if (!isPrecheckValid) {
-      navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+      navigate(buildPrecheckUrl(token, sessionType), { replace: true });
       return;
     }
 
@@ -96,7 +107,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         if (!agentStatus?.running) {
           if (active) {
             clearPrecheckRecord(token);
-            navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+            navigate(buildPrecheckUrl(token, sessionType), { replace: true });
           }
           return;
         }

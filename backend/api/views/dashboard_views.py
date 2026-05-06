@@ -65,10 +65,9 @@ def dashboard_summary_view(request):
             avg=Avg(Coalesce('final_percentage', 'percentage'))
         )['avg'] or 0
 
-        # Resumes Today (from Candidate model in ai_candidates - AI Resume Screening)
-        today = timezone.now().date()
+        # Resumes Analyzed (from Candidate model in ai_candidates - AI Resume Screening)
         # Exclude 'Invited' (different funnel stage), 'Extraction Failed', AND 'pending' shells that haven't been processed yet
-        resumes_today = ai_candidates_qs.filter(created_at__date=today).exclude(
+        resumes_analyzed = ai_candidates_qs.exclude(
             models.Q(status__in=['Invited', 'Extraction Failed']) | models.Q(email='pending@example.com')
         ).count()
 
@@ -199,7 +198,7 @@ def dashboard_summary_view(request):
                 'hired': hired_count,
                 'avgScoreAi': round(avg_score_ai_val, 1),
                 'avgScoreCustom': round(avg_score_custom_val, 1),
-                'resumesToday': resumes_today,
+                'resumesAnalyzed': resumes_analyzed,
                 'activeTestsAi': active_tests_ai_count,
                 'activeTestsCustom': active_tests_custom_count,
                 'scheduledInterviews': scheduled_interviews_count,

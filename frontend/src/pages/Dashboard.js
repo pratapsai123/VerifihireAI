@@ -117,7 +117,7 @@ const Dashboard = () => {
       activeTestsCustom: 0,
       avgScoreAi: 0,
       avgScoreCustom: 0,
-      resumesToday: 0,
+      resumesAnalyzed: 0,
       scheduledInterviews: 0
     },
     trendsAi: [],
@@ -471,8 +471,8 @@ const Dashboard = () => {
                   </div>
                   <div className="card-stat-row">
                     <div className="stat-item">
-                      <span className="stat-label">Resumes Analyzed Today</span>
-                      <span className="stat-value">{data.stats.resumesToday}</span>
+                      <span className="stat-label">Resumes Analyzed</span>
+                      <span className="stat-value">{data.stats.resumesAnalyzed}</span>
                     </div>
                   </div>
                   <div className="skills-tags" style={{ marginBottom: '1.5rem' }}>
