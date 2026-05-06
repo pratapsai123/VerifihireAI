@@ -183,11 +183,19 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 self.room_group_name,
                 {
                     'type': 'user_joined',
-                    'user': self.role.capitalize(),
+                    'user': self.participant_name,
                     'user_id': self.user_id,
+                    'role': self.role,
                     'session_id': self.session_id,
+                    'joined_at': new_participant['joined_at']
                 }
             )
+
+            # 🔥 Send existing participants to the joiner
+            await self.send(text_data=json.dumps({
+                'type': 'existing_participants',
+                'participants': [p for p in participants if p['user_id'] != self.user_id]
+            }))
         except Exception as e:
             logger.error(f"Error in WebSocket connect: {str(e)}", exc_info=True)
             try:
@@ -238,8 +246,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 }
             )
 
-            # 🔥 Check if this was the last user to leave
-            await self.check_and_finalize_interview()
+            # 🔥 Removed check_and_finalize_interview logic to prevent incorrect session completion on refresh
 
             # Leave room group
             await self.channel_layer.group_discard(
@@ -503,6 +510,11 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         sender_id = event.get('sender_id')
         target_id = event.get('target_id')
         
+        # Inject sender_id into the message payload so clients know who sent it
+        message = event.get('message', {})
+        if sender_id and 'sender_id' not in message:
+            message['sender_id'] = sender_id
+        
         # Don't send back to sender
         if sender_id == self.user_id:
             return
@@ -510,10 +522,10 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         # If targeted, only send to target
         if target_id:
             if target_id == self.user_id:
-                await self.send(text_data=json.dumps(event['message']))
+                await self.send(text_data=json.dumps(message))
         else:
             # Broadcast to all except sender
-            await self.send(text_data=json.dumps(event['message']))
+            await self.send(text_data=json.dumps(message))
     
     async def chat_message(self, event):
         """Send chat message to WebSocket - send to all participants"""
@@ -639,27 +651,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             logger.error(f"Error updating invitation usage: {e}")
 
-    async def check_and_finalize_interview(self):
-        """Check if all participants have left and mark as completed if so."""
-        try:
-            # Check presence for both roles
-            roles = ['interviewer', 'candidate']
-            any_present = False
-            for r in roles:
-                presence_key = f"interview_{self.session_id}_presence_{r}"
-                if await database_sync_to_async(cache.get)(presence_key):
-                    any_present = True
-                    break
-            
-            if not any_present:
-                # Everyone has left, check if session was ever 'active' (has_joined=True)
-                # and mark as completed to prevent re-use of link.
-                invitation = await database_sync_to_async(lambda: InterviewInvitation.objects.filter(token=self.session_id).first())()
-                if invitation and invitation.has_joined:
-                    logger.info(f"All participants left session {self.session_id}. Marking as completed.")
-                    await self.update_invitation_usage(is_completed=True)
-        except Exception as e:
-            logger.error(f"Error finalizing interview: {e}")
+
 
     @database_sync_to_async
     def check_session_expired(self):

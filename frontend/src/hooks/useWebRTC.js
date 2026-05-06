@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react';
 
-export const useWebRTC = (sendMessage) => {
+export const useWebRTC = (sendMessage, myUserId) => {
   const peerConnectionsRef = useRef({}); // { userId: RTCPeerConnection }
   const localStreamRef = useRef(null);
   const remoteStreamsRef = useRef({}); // { userId: MediaStream }
@@ -69,12 +69,26 @@ export const useWebRTC = (sendMessage) => {
     // Auto-add local tracks if stream exists
     if (localStreamRef.current) {
         localStreamRef.current.getTracks().forEach(track => {
-            peerConnection.addTrack(track, localStreamRef.current);
+            // Check if already added
+            const sender = peerConnection.getSenders().find(s => s.track === track);
+            if (!sender) {
+                peerConnection.addTrack(track, localStreamRef.current);
+            }
         });
     }
 
     return peerConnection;
-  }, [sendMessage]);
+  }, []);
+
+  const removePeerConnection = useCallback((userId) => {
+    if (peerConnectionsRef.current[userId]) {
+        console.log(`🗑️ Removing peer connection for ${userId}`);
+        peerConnectionsRef.current[userId].close();
+        delete peerConnectionsRef.current[userId];
+    }
+    delete remoteStreamsRef.current[userId];
+    delete remoteIceQueuesRef.current[userId];
+  }, []);
 
   const initLocalStream = useCallback(async (videoConstraints = true, audioConstraints = true) => {
     try {
@@ -120,8 +134,29 @@ export const useWebRTC = (sendMessage) => {
     }
 
     try {
-      console.log(`📥 Handling offer from ${userId}`);
-      await pc.setRemoteDescription(new RTCSessionDescription(description));
+      console.log(`📥 Handling offer from ${userId}. Current state: ${pc.signalingState}`);
+      
+      const isOfferCollision = (pc.signalingState !== 'stable');
+      const isImpolite = myUserId && userId && myUserId < userId;
+
+      if (isOfferCollision) {
+          if (isImpolite) {
+              console.warn(`[WebRTC] Collision detected. I am impolite, ignoring offer from ${userId}`);
+              return;
+          }
+          console.log(`[WebRTC] Collision detected. I am polite, rolling back and accepting offer from ${userId}`);
+          await Promise.all([
+              pc.setLocalDescription({type: "rollback"}),
+              pc.setRemoteDescription(new RTCSessionDescription(description))
+          ]);
+      } else {
+          await pc.setRemoteDescription(new RTCSessionDescription(description));
+      }
+      
+      if (pc.signalingState !== 'have-remote-offer') {
+          console.warn(`[WebRTC] Wrong state for answer: ${pc.signalingState}`);
+          return;
+      }
       
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
@@ -198,6 +233,7 @@ export const useWebRTC = (sendMessage) => {
     localStreamRef,
     remoteStreamsRef,
     createPeerConnection,
+    removePeerConnection,
     initLocalStream,
     createVideoOffer,
     handleVideoOffer,
