@@ -2,16 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import VideoPlaceholder from '../VideoPlaceholder';
 
 export const VideoPanel = ({
-  remoteParticipants, // { userId: { stream, name, isCameraOn, isScreenSharing } }
+  remoteParticipants, // { userId: { stream, name, isCameraOn, isScreenSharing, role } }
   localVideoRef,
+  localStreamRef,
   bothPartiesConnected,
   isCameraOn,
-  localName
+  localName,
+  localRole
 }) => {
-  const containerRef = useRef(null);
   const videoRefs = useRef({}); // { userId: HTMLVideoElement }
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
   // Sync streams to video elements
   useEffect(() => {
@@ -25,123 +24,115 @@ export const VideoPanel = ({
     });
   }, [remoteParticipants]);
 
-  const handleDragStart = (e) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
-      setDragOffset({
-        x: clientX - rect.left,
-        y: clientY - rect.top
-      });
-      setIsDragging(true);
+  // Sync local stream
+  useEffect(() => {
+    if (localVideoRef.current && localStreamRef?.current && localVideoRef.current.srcObject !== localStreamRef.current) {
+        localVideoRef.current.srcObject = localStreamRef.current;
     }
+  }, [localStreamRef]);
+
+  // 1. Combine local and remote into a list, FILTERING OUT remote participants without streams
+  const allParticipants = [
+    { id: 'local', name: localName, role: localRole?.toLowerCase(), isLocal: true, isCameraOn, stream: localStreamRef?.current },
+    ...Object.keys(remoteParticipants)
+        .map(uid => ({ id: uid, ...remoteParticipants[uid] }))
+        .filter(p => p.stream) // 🔥 REQUIRED FIX: Remove empty tiles (only if they have a stream)
+  ];
+
+  // 2. Stable Sort: Candidate > Interviewer > Panelist
+  const sortedParticipants = allParticipants.sort((a, b) => {
+    const getRolePriority = (role) => {
+        if (role === 'candidate') return 1;
+        if (role === 'interviewer') return 2;
+        return 3; // Panelists or other
+    };
+    const prioA = getRolePriority(a.role);
+    const prioB = getRolePriority(b.role);
+    if (prioA !== prioB) return prioA - prioB;
+    // Step 4: Stable ordering using joinedAt
+    const joinA = a.joinedAt || 0;
+    const joinB = b.joinedAt || 0;
+    if (joinA !== joinB) return joinA - joinB;
+    return a.id.localeCompare(b.id);
+  });
+
+  const totalCount = sortedParticipants.length;
+
+  const getGridLayout = () => {
+    if (totalCount === 1) return { gridTemplateColumns: '1fr', gridTemplateRows: '1fr' };
+    if (totalCount === 2) return { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr' };
+    if (totalCount <= 4) return { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr' };
+    return { gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gridTemplateRows: 'auto' };
   };
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (isDragging && containerRef.current) {
-        if (e.type !== 'mousemove') e.preventDefault();
-        const container = containerRef.current;
-        const parent = container.parentElement;
-        if (!parent) return;
-
-        const parentRect = parent.getBoundingClientRect();
-        const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
-        const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
-
-        const newLeft = clientX - parentRect.left - dragOffset.x;
-        const newTop = clientY - parentRect.top - dragOffset.y;
-
-        const maxLeft = parentRect.width - container.offsetWidth;
-        const maxTop = parentRect.height - container.offsetHeight;
-
-        container.style.left = `${Math.max(0, Math.min(newLeft, maxLeft))}px`;
-        container.style.top = `${Math.max(0, Math.min(newTop, maxTop))}px`;
-        container.style.bottom = 'auto';
-        container.style.right = 'auto';
-      }
-    };
-
-    const handleMouseUp = () => setIsDragging(false);
-
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove, { passive: false });
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchmove', handleMouseMove, { passive: false });
-      document.addEventListener('touchend', handleMouseUp);
-    }
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleMouseMove);
-      document.removeEventListener('touchend', handleMouseUp);
-    };
-  }, [isDragging, dragOffset]);
-
-  const participantIds = Object.keys(remoteParticipants);
-  const participantCount = participantIds.length;
-
-  // Grid logic: 1 user = full, 2 = 50/50 or stacked, 3-4 = 2x2
-  const gridClass = participantCount <= 1 ? 'grid-1' : participantCount === 2 ? 'grid-2' : 'grid-multi';
-
   return (
-    <div className={`video-grid-container ${gridClass}`} style={{ width: '100%', height: '100%', position: 'relative', display: 'grid', gap: '10px', padding: '10px', backgroundColor: '#0f172a' }}>
+    <div className="video-grid-container" style={{ 
+        width: '100%', 
+        height: '100%', 
+        display: 'grid', 
+        gap: '15px', 
+        padding: '15px', 
+        backgroundColor: '#0f172a',
+        alignContent: 'center',
+        justifyContent: 'center',
+        ...getGridLayout()
+    }}>
       
-      {participantIds.map(userId => {
-        const p = remoteParticipants[userId];
-        const showVideo = p.isCameraOn !== false || p.isScreenSharing;
+      {sortedParticipants.map(p => {
+        const isSelf = p.isLocal;
+        const showVideo = isSelf ? isCameraOn : (p.isCameraOn !== false || p.isScreenSharing);
 
         return (
-          <div key={userId} className="remote-video-wrapper" style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#1e293b' }}>
+          <div key={p.id} className={`video-tile ${isSelf ? 'local-tile' : 'remote-tile'}`} style={{ 
+            position: 'relative', 
+            borderRadius: '16px', 
+            overflow: 'hidden', 
+            backgroundColor: '#1e293b', 
+            border: isSelf ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.1)',
+            aspectRatio: '16/9',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+          }}>
             <video
-              ref={el => videoRefs.current[userId] = el}
-              className="remote-video"
+              ref={el => {
+                if (isSelf) localVideoRef.current = el;
+                else videoRefs.current[p.id] = el;
+              }}
+              className="video-element"
               autoPlay
+              muted={isSelf}
               playsInline
               style={{ width: '100%', height: '100%', objectFit: p.isScreenSharing ? 'contain' : 'cover', display: showVideo ? 'block' : 'none' }}
             />
             
             {!showVideo && (
-              <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+              <div className="video-placeholder-overlay" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
                 <VideoPlaceholder name={p.name || 'Participant'} />
               </div>
             )}
 
-            <div className="video-label" style={{ position: 'absolute', bottom: '15px', left: '15px', zIndex: 2, background: 'rgba(0,0,0,0.5)', padding: '4px 12px', borderRadius: '20px', color: 'white', fontSize: '13px' }}>
-              <span>{p.name || 'Participant'}</span>
-              <i className="fas fa-microphone" style={{ fontSize: '11px', marginLeft: '6px', color: '#10b981' }}></i>
+            <div className="video-label" style={{ 
+              position: 'absolute', 
+              bottom: '15px', 
+              left: '15px', 
+              zIndex: 2, 
+              background: 'rgba(15, 23, 42, 0.7)', 
+              backdropFilter: 'blur(4px)',
+              padding: '6px 14px', 
+              borderRadius: '10px', 
+              color: 'white', 
+              fontSize: '13px',
+              fontWeight: '500',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>{p.name}{isSelf ? ' (You)' : ''}</span>
+              {!isSelf && !p.isMuted && <i className="fas fa-microphone" style={{ fontSize: '11px', color: '#10b981' }}></i>}
+              {!isSelf && p.isMuted && <i className="fas fa-microphone-slash" style={{ fontSize: '11px', color: '#ef4444' }}></i>}
             </div>
           </div>
         );
       })}
-
-      {/* Local Video - Floating */}
-      <div 
-        className="self-video-container floating"
-        ref={containerRef}
-        onMouseDown={handleDragStart}
-        onTouchStart={handleDragStart}
-        style={{ position: 'absolute', bottom: '20px', right: '20px', width: '200px', height: '150px', zIndex: 100, borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', cursor: 'move', border: '2px solid rgba(255,255,255,0.1)' }}
-      >
-        <video
-          ref={localVideoRef}
-          className="self-video"
-          autoPlay
-          muted
-          playsInline
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: isCameraOn ? 'block' : 'none' }}
-        />
-        {!isCameraOn && (
-          <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
-            <VideoPlaceholder name="You" width="100%" height="100%" />
-          </div>
-        )}
-        <div className="video-label" style={{ position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.5)', padding: '2px 8px', borderRadius: '4px', color: 'white', fontSize: '11px' }}>
-          <span>{localName} (You)</span>
-        </div>
-      </div>
     </div>
   );
 };
