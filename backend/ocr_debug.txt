@@ -906,3 +906,7 @@
 [2026-05-06 11:08:09.152557+00:00] Running OCR on rotation 270
 [2026-05-06 11:09:14.272220+00:00] Running OCR on rotation 0
 [2026-05-06 11:09:27.286503+00:00] Direct match found at rotation 0
+[2026-05-06 07:02:43.275463+00:00] Running OCR on rotation 0
+[2026-05-06 07:03:35.397453+00:00] Direct match found at rotation 0
+[2026-05-06 09:26:47.522522+00:00] Running OCR on rotation 0
+[2026-05-06 09:27:38.683838+00:00] Direct match found at rotation 0

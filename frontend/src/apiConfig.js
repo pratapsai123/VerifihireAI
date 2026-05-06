@@ -22,7 +22,7 @@ const getApiBaseUrl = () => {
         return `${protocol}//${hostname}:8001/api`;
     }
 
-    return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+    return process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8001/api';
 };
 
 
@@ -68,7 +68,7 @@ const getDeepfaceBaseUrl = () => {
         return `${protocol}//${hostname}:8500/api/v1`;
     }
 
-    return process.env.REACT_APP_DEEPFACE_BASE_URL || 'http://localhost:8500/api/v1';
+    return process.env.REACT_APP_DEEPFACE_BASE_URL || 'http://127.0.0.1:8500/api/v1';
 };
 
 const getDeepfaceWsUrl = () => {
@@ -90,7 +90,7 @@ const getDeepfaceWsUrl = () => {
         return `${protocol}//${hostname}:8500/api/v1`;
     }
 
-    return process.env.REACT_APP_DEEPFACE_WS_URL || 'ws://localhost:8500/api/v1';
+    return process.env.REACT_APP_DEEPFACE_WS_URL || 'ws://127.0.0.1:8500/api/v1';
 };
 
 export const API_BASE_URL = getApiBaseUrl();

@@ -60,6 +60,8 @@ async function _doScan() {
       });
       if (response?.action === 'STOP') {
         stopMonitor();
+        console.log('[monitor] STOP action received — agent will exit');
+        setTimeout(() => process.exit(0), 2000);
       }
       return;
     }
@@ -158,6 +160,8 @@ async function sendAliveHeartbeat() {
     });
     if (response?.action === 'STOP') {
       stopMonitor();
+      console.log('[monitor] STOP action from heartbeat — agent will exit');
+      setTimeout(() => process.exit(0), 2000);
     }
   } catch {
     // Ignore transient network errors; backend timeout guard handles enforcement.
