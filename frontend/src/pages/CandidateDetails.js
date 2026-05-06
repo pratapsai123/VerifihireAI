@@ -1108,7 +1108,7 @@ const CandidateDetails = ({ token, onComplete }) => {
           </section>
 
           {/* SUBMIT */}
-          <div className="candidate-button-row">
+          <div className="candidate-button-row" style={{ flexDirection: 'column', alignItems: 'center' }}>
             <button
               type="submit"
               className={`candidate-button ${(!data.fullName || !data.email || !data.phone || !data.pan || !data.panFile || !snapshot || !data.snapshotValid || data.isExtractingPan || data.isVerifying || (data.panMatch === false && !data.manualConfirmation) || (data.extractionFailed && !data.manualConfirmation)) ? 'candidate-button-disabled' : ''}`}
@@ -1121,6 +1121,11 @@ const CandidateDetails = ({ token, onComplete }) => {
                 </div>
               ) : 'Submit Application'}
             </button>
+            {data.isVerifying && (
+              <div style={{ marginTop: '12px', fontSize: '14px', color: '#1d4ed8', fontWeight: '600', textAlign: 'center' }}>
+                ℹ️ Identity verification take 2 to 3 minutes time. Please wait...
+              </div>
+            )}
           </div>
 
           {showError && (

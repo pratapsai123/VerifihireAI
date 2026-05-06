@@ -1,5 +1,5 @@
-/**
- * Centralized API configuration for VerifiHireAI
+/*
+  Centralized API configuration for VerifiHireAI
  * Handles API + WebSocket URLs correctly for all environments
  */
 

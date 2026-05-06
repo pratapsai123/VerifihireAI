@@ -60,8 +60,8 @@ export default function ViewAssessment() {
       <Header />
       <div className="page-container">
         <div className="review-wrapper">
-          <div className="header-left" style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '2rem' }}>
-            <button className="back-button" onClick={() => navigate('/assessments')} style={{ background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '1rem', fontWeight: '600' }}>
+          <div className="view-assessment-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
+            <button className="back-button" onClick={() => navigate('/assessments')} style={{ position: 'absolute', left: 0, background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '1rem', fontWeight: '600' }}>
               ← Back
             </button>
             <h3 className="page-title-centered" style={{ margin: 0 }}>View Assessment</h3>
