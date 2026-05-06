@@ -9,7 +9,12 @@ export default function InviteRedirect({ type }) {
   useEffect(() => {
     if (!token) return;
     logCandidateActivity(token, 'Opened Link', `Assessment type: ${type}`);
-    navigate(`/precheck/${token}?type=${encodeURIComponent(type)}`, { replace: true });
+    // Live interviews skip precheck and go directly to the interview page
+    if (type === 'interview' || type === 'live_interview') {
+      navigate(`/live-interview?token=${token}`, { replace: true });
+    } else {
+      navigate(`/precheck/${token}?type=${encodeURIComponent(type)}`, { replace: true });
+    }
   }, [navigate, token, type]);
 
   return (

@@ -425,8 +425,8 @@ function AppContent() {
           <Route path="/take-assessment/:token" element={<SecuritySessionGuard sessionType="assessment"><TakeAssessment /></SecuritySessionGuard>} />
           <Route path="/accept-invite" element={<AcceptInvite />} />
           <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
-          <Route path="/live-interview" element={<SecuritySessionGuard sessionType="interview"><LiveInterview /></SecuritySessionGuard>} />
-          <Route path="/interview-start/:token" element={<SecuritySessionGuard sessionType="interview"><InterviewStart /></SecuritySessionGuard>} />
+          <Route path="/live-interview" element={<LiveInterview />} />
+          <Route path="/interview-start/:token" element={<InterviewStart />} />
           <Route path="/take-ai-assessment/:token" element={<SecuritySessionGuard sessionType="ai_assessment"><AiTakeAssessment /></SecuritySessionGuard>} />
           <Route path="/ai-interview-session/:token" element={<SecuritySessionGuard sessionType="ai_interview"><AiInterviewSession /></SecuritySessionGuard>} />
           <Route path="/book-interview/:token" element={<BookInterview />} />
