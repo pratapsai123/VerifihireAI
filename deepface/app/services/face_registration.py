@@ -5,6 +5,7 @@ Registers face embeddings for a person using ArcFace for maximum accuracy.
 Supports multiple reference images per person for robust matching.
 """
 
+import hashlib
 import json
 import logging
 import os
@@ -171,7 +172,9 @@ def register_face(
 
         new_count = _count_embeddings(person_id)
 
-        logger.info(f"Registered face for {person_id} ({label_str}). Total embeddings: {new_count}")
+        # Compute SHA-256 hash of the embedding for duplicate detection
+        embedding_hash = hashlib.sha256(np.array(embedding).tobytes()).hexdigest()
+        logger.info(f"Registered face for {person_id} ({label_str}). Total embeddings: {new_count}. Hash: {embedding_hash[:16]}...")
 
         return {
             "success": True,
@@ -179,6 +182,7 @@ def register_face(
             "message": f"Face registered successfully. Total reference images: {new_count}",
             "face_quality_score": quality_score,
             "embedding_count": new_count,
+            "embedding_hash": embedding_hash,
         }
 
     except Exception as e:

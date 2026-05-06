@@ -1,6 +1,6 @@
 from django.urls import path
-from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView
+from .pan_validation_enhanced import EnhancedPanValidationView
 
 urlpatterns = [
     path('', CandidateListCreateView.as_view(), name='candidate-list-create'),
@@ -20,7 +20,8 @@ urlpatterns = [
     path('assemblyai-token/', AssemblyAITokenView.as_view(), name='assemblyai-token'),
     path('tts/', TTSView.as_view(), name='tts'),
     path('<int:pk>/download-report/', CandidateReportDownloadView.as_view(), name='candidate-report-download'),
-    path('validate-pan/', PanValidationView.as_view(), name='validate-pan'),
+    path('validate-pan/', EnhancedPanValidationView.as_view(), name='validate-pan'),
     path('public/<str:public_token>/register/', CandidateRegistrationUpdateView.as_view(), name='candidate-registration-update'),
+    path('health/', HealthCheckView.as_view(), name='health-check'),
 ]
 

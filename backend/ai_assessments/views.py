@@ -2644,3 +2644,126 @@ class AIAssessmentSubmissionListView(APIView):
                 }
             })
         return Response({"results": data}, status=status.HTTP_200_OK)
+
+
+class AIAssessmentResultsView(APIView):
+    """
+    AI Assessment results overview with PAN authentication fields.
+    Separate endpoint to keep custom assessment logic untouched.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        from api.utils.role_utils import get_scoped_user_ids
+        
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+        scoped_ids = get_scoped_user_ids(user_profile) if user_profile else []
+        
+        # Query AI assessment submissions based on user role/scope
+        if scoped_ids is None:
+            # Application Admin: all results across ALL companies
+            if company_id:
+                ai_qs = AIAssessmentSubmission.objects.filter(
+                    assessment__company_id=company_id,
+                    is_deleted=False
+                ).select_related('assessment').order_by('-submitted_at')
+            else:
+                ai_qs = AIAssessmentSubmission.objects.filter(
+                    is_deleted=False
+                ).select_related('assessment').order_by('-submitted_at')
+        elif scoped_ids:
+            # Role-scoped: results for assessments created by this user's hierarchy
+            ai_qs = AIAssessmentSubmission.objects.filter(
+                assessment__user_profile_id__in=scoped_ids,
+                is_deleted=False
+            ).select_related('assessment').order_by('-submitted_at')
+        else:
+            ai_qs = AIAssessmentSubmission.objects.none()
+        
+        # Date filtering
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        
+        if start_date:
+            ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
+        if end_date:
+            ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
+        
+        # Active deletions tracking
+        active_deletions = set()
+        try:
+            from api.models import DeletionRequest
+            for dr in DeletionRequest.objects.filter(status='pending'):
+                active_deletions.add(f"AIAssessmentSubmission_{dr.object_id}")
+        except Exception:
+            pass
+        
+        results = []
+        
+        for s in ai_qs[:5000]:
+            a = s.assessment
+            
+            # Fetch integrity screenshots for this submission
+            integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=s).order_by('timestamp')
+            screenshots_data = []
+            for snap in integrity_snapshots:
+                screenshots_data.append({
+                    "event_type": snap.event_type,
+                    "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                    "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                    "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                })
+            
+            results.append({
+                'id': s.id,
+                'submission_id': f"ai_{s.id}",
+                'submitted_at': s.submitted_at.isoformat() if getattr(s, 'submitted_at', None) else (s.started_at.isoformat() if getattr(s, 'started_at', None) else None),
+                'candidate_name': getattr(s, 'candidate_name', 'Unknown'),
+                'candidate_email': getattr(s, 'candidate_email', 'Unknown'),
+                'full_name': getattr(s, 'candidate_name', 'Unknown'),
+                'email': getattr(s, 'candidate_email', 'Unknown'),
+                'candidate': {
+                    'name': getattr(s, 'candidate_name', 'Unknown'),
+                    'email': getattr(s, 'candidate_email', 'Unknown'),
+                },
+                'assessment': {
+                    'id': f"ai_{a.id}",
+                    'display_name': getattr(a, 'required_skills', str(a.id)),
+                    'name': getattr(a, 'required_skills', str(a.id)),
+                    'weightage_objective': getattr(a, 'mcq_weight', 40) or 40,
+                    'weightage_coding': 100 - (getattr(a, 'mcq_weight', 40) or 40),
+                },
+                'score': getattr(s, 'score', 0),
+                'total': getattr(s, 'total_possible', 100),
+                'percentage': getattr(s, 'percentage', 0),
+                'objective_score': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('scored_points', 0),
+                'objective_total': getattr(s, 'results_breakdown', {}).get('mcq', {}).get('possible_points', 0),
+                'objective_percentage': getattr(s, 'mcq_score', 0),
+                'coding_score': getattr(s, 'results_breakdown', {}).get('coding', {}).get('scored_points', 0),
+                'coding_total': getattr(s, 'results_breakdown', {}).get('coding', {}).get('possible_points', 0),
+                'coding_percentage': getattr(s, 'coding_score', 0),
+                'status': getattr(s, 'status', 'COMPLETED'),
+                'total_questions': getattr(s, 'total_questions', 0),
+                'candidate_questions': getattr(s, 'candidate_questions', None) or getattr(a, 'generated_content', {}),
+                'answers': getattr(s, 'answers', {}),
+                'results_breakdown': getattr(s, 'results_breakdown', {}),
+                'mcq_score': getattr(s, 'mcq_score', 0),
+                'integrity': {
+                    'integrity_score': getattr(s, 'integrity_score', 100.0),
+                    'warning_logs': getattr(s, 'warning_logs', [])
+                },
+                'integrity_screenshots': screenshots_data,
+                'is_resume_screening': False,
+                'batch_id': s.batch_id,
+                'batch_name': s.batch_name or (a.batch_name if hasattr(a, 'batch_name') else None),
+                'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
+                'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions,
+                # PAN authentication fields
+                'phone': getattr(s, 'phone', None),
+                'pan_number': getattr(s, 'pan_number', None),
+                'pan_photo': request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None,
+                'pan_verified': getattr(s, 'pan_verified', False)
+            })
+        
+        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)

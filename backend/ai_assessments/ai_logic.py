@@ -8,6 +8,7 @@ import json
 import re
 import sys
 import time
+import threading
 import groq
 from django.conf import settings
 from django.core.cache import cache
@@ -18,6 +19,8 @@ logger = logging.getLogger(__name__)
 
 class GroqKeyManager:
     _current_index = 0
+    _lock = threading.Lock()
+    _key_usage_count = {}  # Track usage per key index
 
     @classmethod
     def get_current_key(cls):
@@ -25,17 +28,47 @@ class GroqKeyManager:
         if not keys:
             # Fallback to the single legacy key if list is missing/empty
             return getattr(settings, 'GROQ_API_KEY', None)
-        return keys[cls._current_index % len(keys)]
+        with cls._lock:
+            key = keys[cls._current_index % len(keys)]
+            # Track usage for monitoring
+            cls._key_usage_count[cls._current_index] = cls._key_usage_count.get(cls._current_index, 0) + 1
+            return key
+
+    @classmethod
+    def get_least_used_key(cls):
+        """Get the key with lowest usage count for load balancing"""
+        keys = getattr(settings, 'GROQ_API_KEYS', [])
+        if not keys:
+            return getattr(settings, 'GROQ_API_KEY', None)
+        with cls._lock:
+            if not cls._key_usage_count:
+                return keys[0]
+            # Find key with minimum usage
+            min_idx = min(range(len(keys)), key=lambda i: cls._key_usage_count.get(i, 0))
+            cls._key_usage_count[min_idx] = cls._key_usage_count.get(min_idx, 0) + 1
+            return keys[min_idx]
 
     @classmethod
     def rotate_key(cls):
         keys = getattr(settings, 'GROQ_API_KEYS', [])
         if keys and len(keys) > 1:
-            old_idx = cls._current_index
-            cls._current_index = (cls._current_index + 1) % len(keys)
-            logger.warning(f"GROQ ROTATION: Rate limit reached at index {old_idx}. Switched to key index {cls._current_index}")
-            return True
+            with cls._lock:
+                old_idx = cls._current_index
+                cls._current_index = (cls._current_index + 1) % len(keys)
+                logger.warning(f"GROQ ROTATION: Rate limit reached at index {old_idx}. Switched to key index {cls._current_index}")
+                return True
         return False
+
+    @classmethod
+    def get_usage_stats(cls):
+        """Return usage statistics for monitoring"""
+        keys = getattr(settings, 'GROQ_API_KEYS', [])
+        with cls._lock:
+            return {
+                'total_keys': len(keys),
+                'current_index': cls._current_index,
+                'usage_per_key': {i: cls._key_usage_count.get(i, 0) for i in range(len(keys))}
+            }
 
 
 def extract_json(text):

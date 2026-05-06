@@ -49,6 +49,7 @@ async def register_face_endpoint(request: FaceRegisterRequest):
         message=result["message"],
         face_quality_score=result.get("face_quality_score"),
         embedding_count=result.get("embedding_count", 0),
+        embedding_hash=result.get("embedding_hash"),
     )
 
 

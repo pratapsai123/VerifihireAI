@@ -28,6 +28,7 @@ class FaceRegisterResponse(BaseModel):
     message: str
     face_quality_score: Optional[float] = Field(None, description="Face quality: sharpness, alignment, etc.")
     embedding_count: int = Field(0, description="Total embeddings stored for this person")
+    embedding_hash: Optional[str] = Field(None, description="SHA-256 hash of the face embedding for duplicate detection")
 
 
 # ──────────────────────────────────────────────

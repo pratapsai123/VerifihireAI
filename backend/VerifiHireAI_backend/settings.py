@@ -127,11 +127,12 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'ver'),
+        'NAME': os.environ.get('DB_NAME', 'new_db'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
+        'CONN_MAX_AGE': 600,  # Keep connections alive for 10 minutes (pooling)
         **({'OPTIONS': db_options} if db_options else {}),
     }
 }
@@ -280,6 +281,10 @@ GROQ_API_KEYS = [
     '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',
     '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',
     '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',
+    # Add more keys for scaling (30 req/min per key)
+    # 'gsk_YOUR_KEY_4_HERE',
+    # 'gsk_YOUR_KEY_5_HERE',
+    # 'gsk_YOUR_KEY_6_HERE',
 ]
 # Legacy fallback: Some views reference GROQ_API_KEY (singular). Point to first key.
 GROQ_API_KEY = GROQ_API_KEYS[0]
