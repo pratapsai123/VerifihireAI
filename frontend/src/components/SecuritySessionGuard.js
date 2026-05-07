@@ -3,8 +3,11 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor } from '../security/securityApi';
 import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord, markExamStarted, isExamStarted } from '../security/sessionStorage';
 import { logCandidateActivity } from '../utils/activityLogger';
+import ConnectionLostOverlay from './ConnectionLostOverlay';
+import useNetworkStatus from '../hooks/useNetworkStatus';
 
 export default function SecuritySessionGuard({ children, sessionType = 'assessment' }) {
+  const { isOnline } = useNetworkStatus();
   const params = useParams();
   const [searchParams] = useSearchParams();
   const token = params.token || searchParams.get('token');
@@ -25,6 +28,12 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [warning, setWarning] = useState(false);
   const [blockedApp, setBlockedApp] = useState('');
   const [timeLeft, setTimeLeft] = useState(180);
+
+  // Sync isOnline with a ref for use in setInterval
+  const isOnlineRef = useRef(isOnline);
+  useEffect(() => {
+    isOnlineRef.current = isOnline;
+  }, [isOnline]);
 
   // FIX 1: Track whether the candidate has completed the details form.
   // We only start aggressive polling AFTER the exam begins, not during the form.
@@ -152,6 +161,11 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           });
         } catch (_monitorErr) { /* non-fatal */ }
       } catch (_err) {
+        // If offline during entry-gate, don't redirect — just log and let overlay show
+        if (!navigator.onLine) {
+          console.warn('[SecuritySessionGuard] Entry-gate scan failed (offline). Will retry when online.');
+          return;
+        }
         if (active) {
           clearPrecheckRecord(token);
           navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
@@ -163,6 +177,12 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
     // ── Backend polling every 5s ─────────────────────────────────────────────
     const poll = async () => {
+      // ── NETWORK CHECK: Skip polling entirely when offline ──────────────
+      if (!isOnlineRef.current) {
+        console.log('[SecuritySessionGuard] Offline — skipping security poll');
+        return;
+      }
+
       try {
         const status = await fetchSecuritySessionStatus(sessionRecord.session_id);
         if (!active) return;
@@ -210,8 +230,14 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         setPaused(false);
         setPauseDevice('');
       } catch (_err) {
-        // Silent fail during exam — don't redirect on transient errors
-        console.warn('[SecuritySessionGuard] Poll error (non-fatal):', _err?.message);
+        // ── NETWORK-AWARE ERROR HANDLING ──────────────────────────────────
+        // If we're offline, this is expected — just log and wait for reconnect.
+        // If we're online but the request failed, it's a transient server error — also non-fatal.
+        if (!navigator.onLine) {
+          console.log('[SecuritySessionGuard] Poll failed (offline) — overlay is active, will retry when online');
+        } else {
+          console.warn('[SecuritySessionGuard] Poll error (non-fatal):', _err?.message);
+        }
       }
     };
 
@@ -226,6 +252,9 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
   return (
     <>
+      {/* ── Connection Lost Overlay (highest priority) ──────────────────── */}
+      {!isOnline && <ConnectionLostOverlay />}
+
       {paused && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 99999,

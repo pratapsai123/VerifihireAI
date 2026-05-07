@@ -8,6 +8,7 @@ let heartbeatTimer = null;
 let signatureTimer = null;
 let current = null;
 let isScanning = false; // mutex — prevents overlapping PowerShell processes
+let pendingViolation = null; // Buffers violations detected while offline
 // Map<instanceId, {name, class}> of logOnly devices seen in current session (not in startup baseline)
 let knownLogOnlyMap = new Map();
 
@@ -24,6 +25,35 @@ async function refreshSignatures() {
     loadBundledRules();
   }
 }
+
+/**
+ * Retries any violation that occurred while the network was down.
+ */
+async function flushPendingViolation() {
+  if (!pendingViolation || !current) return;
+  
+  try {
+    console.log('[monitor] Attempting to flush pending offline violation...');
+    const response = await sendSecurityCheck(current.backendApiBase, {
+      ...pendingViolation,
+      session_id: current.sessionId,
+      user_id: current.userId,
+    });
+    
+    if (response) {
+      console.log('[monitor] Pending violation flushed successfully.');
+      pendingViolation = null;
+      
+      if (response.action === 'STOP') {
+        stopMonitor();
+        setTimeout(() => process.exit(0), 2000);
+      }
+    }
+  } catch (err) {
+    console.warn('[monitor] Could not flush violation yet (still offline):', err.message);
+  }
+}
+
 
 async function scanAndReport() {
   if (!current) return;
@@ -50,20 +80,36 @@ async function _doScan() {
     if (!verdict.safe) {
       console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
-      const response = await sendSecurityCheck(current.backendApiBase, {
-        session_id: current.sessionId,
-        user_id: current.userId,
+      const violationData = {
         status: 'VIOLATION',
         app: allApps.join(', '),
         process_name: verdict.detections.map(d => d.processName).filter(Boolean).join(', '),
         app_path: verdict.detections[0]?.processPath || '',
-      });
-      if (response?.action === 'STOP') {
-        stopMonitor();
-        console.log('[monitor] STOP action received — agent will exit');
-        setTimeout(() => process.exit(0), 2000);
+      };
+
+      try {
+        const response = await sendSecurityCheck(current.backendApiBase, {
+          ...violationData,
+          session_id: current.sessionId,
+          user_id: current.userId,
+        });
+        pendingViolation = null; // Success, clear buffer
+        if (response?.action === 'STOP') {
+          stopMonitor();
+          console.log('[monitor] STOP action received — agent will exit');
+          setTimeout(() => process.exit(0), 2000);
+        }
+      } catch (err) {
+        console.warn('[monitor] Network down — buffering process violation for later reporting');
+        pendingViolation = violationData;
       }
       return;
+    }
+
+    // If we have a pending violation, try to flush it before reporting SAFE
+    if (pendingViolation) {
+      await flushPendingViolation();
+      if (pendingViolation) return; // Still offline, don't report SAFE yet
     }
 
     // Safety check again before sending SAFE report
@@ -88,24 +134,37 @@ async function _doScan() {
     const hwScan = await scanHardwareDevices();
     const hwResult = compareToBaseline(hwScan);
     if (hwResult.hasNewViolation) {
-      await sendSecurityCheck(current.backendApiBase, {
-        session_id: current.sessionId,
-        user_id: current.userId,
+      const hwViolation = {
         status: 'HARDWARE_VIOLATION',
         app: hwResult.violationNames.join(', '),
         process_name: '',
         app_path: '',
-      });
+      };
+      
+      try {
+        await sendSecurityCheck(current.backendApiBase, {
+          ...hwViolation,
+          session_id: current.sessionId,
+          user_id: current.userId,
+        });
+        pendingViolation = null;
+      } catch (err) {
+        console.warn('[monitor] Network down — buffering hardware violation');
+        pendingViolation = hwViolation;
+      }
     } else {
       // All hardware clean — signal HARDWARE_SAFE so backend can un-pause if needed
-      await sendSecurityCheck(current.backendApiBase, {
-        session_id: current.sessionId,
-        user_id: current.userId,
-        status: 'HARDWARE_SAFE',
-        app: '',
-        process_name: '',
-        app_path: '',
-      });
+      // But only if we don't have a pending violation
+      if (!pendingViolation) {
+        await sendSecurityCheck(current.backendApiBase, {
+          session_id: current.sessionId,
+          user_id: current.userId,
+          status: 'HARDWARE_SAFE',
+          app: '',
+          process_name: '',
+          app_path: '',
+        }).catch(() => {});
+      }
     }
 
     // ── Log-only devices (mouse, keyboard, bluetooth) ─────────────────────
@@ -150,23 +209,45 @@ async function _doScan() {
   }
 }
 
+let failedHeartbeats = 0;
+
 async function sendAliveHeartbeat() {
   if (!current) return;
+
+  // Prioritize flushing pending violations over sending a normal heartbeat
+  if (pendingViolation) {
+    await flushPendingViolation();
+  }
+
   try {
     const response = await sendHeartbeat(current.backendApiBase, {
       session_id: current.sessionId,
       user_id: current.userId,
       status: 'ALIVE',
     });
+    if (failedHeartbeats > 0) {
+      console.log(`[monitor] Heartbeat recovered after ${failedHeartbeats} failed attempts`);
+    }
+    failedHeartbeats = 0;
     if (response?.action === 'STOP') {
       stopMonitor();
       console.log('[monitor] STOP action from heartbeat — agent will exit');
       setTimeout(() => process.exit(0), 2000);
     }
   } catch {
-    // Ignore transient network errors; backend timeout guard handles enforcement.
+    failedHeartbeats++;
+    // When heartbeats fail (network down), retry faster (every 3s instead of 10s)
+    // so we refresh the backend timeout clock ASAP when connectivity returns.
+    if (failedHeartbeats === 1) {
+      console.warn('[monitor] Heartbeat failed — network may be down. Retrying faster...');
+    }
+    if (failedHeartbeats <= 3) {
+      // Schedule an extra retry in 3 seconds (in addition to the normal 10s interval)
+      setTimeout(sendAliveHeartbeat, 3000);
+    }
   }
 }
+
 
 async function startMonitor({ token, sessionId, userId, backendApiBase }) {
   stopMonitor();
@@ -192,6 +273,7 @@ function stopMonitor() {
   signatureTimer = null;
   current = null;
   isScanning = false;
+  failedHeartbeats = 0;
   knownLogOnlyMap = new Map(); // reset on stop
 }
 

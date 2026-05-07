@@ -7,9 +7,12 @@ import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
 import { logCandidateActivity } from '../utils/activityLogger';
+import useNetworkStatus from '../hooks/useNetworkStatus';
 
 const AiInterviewSession = () => {
+    const { isOnline } = useNetworkStatus();
     const VIOLATION_COOLDOWN_MS = 10000;
+
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');

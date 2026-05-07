@@ -337,6 +337,34 @@ export default function TakeAssessment() {
   const [resultHeightPct, setResultHeightPct] = useState(30);
   const [isResultDragging, setIsResultDragging] = useState(false);
   const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+  // ── Network connectivity — pause exam timer when offline ─────────────
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+  const isOnlineRef = useRef(navigator.onLine);
+
+  useEffect(() => {
+    const goOffline = () => {
+      setIsOnline(false);
+      isOnlineRef.current = false;
+      logCandidateActivity(token, 'Connection Lost', 'Candidate internet connection dropped — exam timer paused.');
+    };
+    const goOnline = () => {
+      setIsOnline(true);
+      isOnlineRef.current = true;
+      logCandidateActivity(token, 'Connection Restored', 'Candidate internet connection restored — exam timer resumed.');
+    };
+    window.addEventListener('vh_network_offline', goOffline);
+    window.addEventListener('vh_network_online', goOnline);
+    // Also listen to native events as fallback
+    window.addEventListener('offline', goOffline);
+    window.addEventListener('online', goOnline);
+    return () => {
+      window.removeEventListener('vh_network_offline', goOffline);
+      window.removeEventListener('vh_network_online', goOnline);
+      window.removeEventListener('offline', goOffline);
+      window.removeEventListener('online', goOnline);
+    };
+  }, [token]);
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const detectorRef = useRef(null);
