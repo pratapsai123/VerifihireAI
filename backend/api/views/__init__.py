@@ -43,6 +43,7 @@ from .assessment_views import (
     create_assessment_view,
     get_assessment_public_view,
     get_assessment_detail_view,
+    sample_questions_pdf_view,
 )
 
 from .candidate_assessment_views import (

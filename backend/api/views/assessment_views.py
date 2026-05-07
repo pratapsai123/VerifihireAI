@@ -1,6 +1,8 @@
 from .._imports import *
 from .._imports import _db_call_with_retry
 from api.utils.slot_utils import generate_slots_for_interviewer
+from api.utils.pdf_generators import generate_assessment_sample_pdf
+from django.http import FileResponse
 
 
 
@@ -598,8 +600,8 @@ def _parse_single_block(block: list[str], defaults: dict) -> tuple[Optional[dict
             qtype = m.group(1).upper()
             break
 
-    # Parse options (allow optional leading bullets like "• A)" or "- A)")
-    opt_re = re.compile(r'^[\s\-\*\u2022]*?(A|B|C|D)\s*[\).:\-]\s*(.+)$', re.IGNORECASE)
+    # Parse options (allow optional leading bullets like "• A)" or "- A)", and support "Option A")
+    opt_re = re.compile(r'^[\s\-\*\u2022]*?(?:option\s+)?(A|B|C|D)\s*[\).:\-]\s*(.+)$', re.IGNORECASE)
     options = {}
     for ln in text_lines:
         m = opt_re.match(ln)
@@ -645,12 +647,29 @@ def _parse_single_block(block: list[str], defaults: dict) -> tuple[Optional[dict
             for idx, m in enumerate(matches):
                 key = m.group(1).upper()
                 start = m.end()
+                # Find next marker or end of string
                 end = matches[idx + 1].start() if idx + 1 < len(matches) else len(raw_for_options)
                 value = raw_for_options[start:end].strip()
-                # Trim any trailing "Answer:" text that might appear in the same chunk (often mid-line)
+                # Trim any trailing "Answer:" text
                 value = re.split(r'\b(?:answer|correct(?:\s*answer)?)\s*[:\-]', value, maxsplit=1, flags=re.IGNORECASE)[0].strip()
+                # Trim trailing commas if they were used as separators
+                value = value.rstrip(',. ').strip()
                 if value:
                     options[key] = value
+        else:
+            # Try splitting by "Option A", "Option B" etc if no simple A) markers found
+            opt_word_marker = re.compile(r'\b(?:option\s+)([ABCD])\s*[:\-]\s*', re.IGNORECASE)
+            word_matches = list(opt_word_marker.finditer(raw_for_options))
+            if word_matches:
+                for idx, m in enumerate(word_matches):
+                    key = m.group(1).upper()
+                    start = m.end()
+                    end = word_matches[idx + 1].start() if idx + 1 < len(word_matches) else len(raw_for_options)
+                    value = raw_for_options[start:end].strip()
+                    value = re.split(r'\b(?:answer|correct(?:\s*answer)?)\s*[:\-]', value, maxsplit=1, flags=re.IGNORECASE)[0].strip()
+                    value = value.rstrip(',. ').strip()
+                    if value:
+                        options[key] = value
 
     # Infer type if missing
     if not qtype:
@@ -779,6 +798,12 @@ def parse_questions_document_view(request):
             else:
                 errors.append(f"Q{i}: Could not parse this block.")
 
+        if not questions:
+            return Response(
+                {'error': 'Invalid question format. The uploaded document does not contain any questions in the required format. Please refer to the "View Sample PDF" guide for the correct structure.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         return Response({'filename': filename, 'count': len(questions), 'questions': questions, 'errors': errors}, status=status.HTTP_200_OK)
 
     except Exception as e:
@@ -786,6 +811,29 @@ def parse_questions_document_view(request):
         print(f"Error in parse_questions_document_view: {str(e)}")
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while parsing: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def sample_questions_pdf_view(request):
+    """
+    Returns a sample PDF showing the correct format for question uploads.
+    """
+    try:
+        pdf_buffer = generate_assessment_sample_pdf()
+        return FileResponse(
+            pdf_buffer,
+            as_attachment=True,
+            filename="Assessment_Format_Sample.pdf",
+            content_type='application/pdf'
+        )
+    except Exception as e:
+        print(f"Error generating sample PDF: {str(e)}")
+        return Response(
+            {'error': 'Failed to generate sample PDF'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
 @csrf_exempt
@@ -1057,9 +1105,9 @@ def create_custom_assessment_view(request):
         assessment_data = request.data.get('assessment', {}) or {}
 
         # Basic required fields validation
-        assessment_mode = (assessment_data.get('assessment_mode') or 'single').strip().lower()
+        assessment_mode = (assessment_data.get('assessment_mode') or 'multiple').strip().lower()
         if assessment_mode not in ['single', 'multiple']:
-            assessment_mode = 'single'
+            assessment_mode = 'multiple'
 
         role = assessment_data.get('role', '').strip()
         number_of_questions = assessment_data.get('number_of_questions', None)

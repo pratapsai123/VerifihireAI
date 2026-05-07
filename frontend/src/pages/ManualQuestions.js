@@ -65,8 +65,10 @@ function ManualQuestions() {
         >
           ← Back
         </button>
-        <h2 className="page-title">Create Custom Questions</h2>
-        <p className="page-subtitle">Select a question type to get started</p>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h2 className="page-title">Create Custom Questions</h2>
+          <p className="page-subtitle">Select a question type to get started</p>
+        </div>
 
         <div className="question-types-grid">
           {/* Multiple Choice */}

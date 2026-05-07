@@ -14,7 +14,7 @@ function CustomAssessment() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const resumeSectionRef = useRef(null);
-  const [uploadMode, setUploadMode] = useState('resume'); // 'resume' or 'jd'
+  const [uploadMode, setUploadMode] = useState('jd'); // 'resume' or 'jd' — default to 'jd' (Multiple)
   const [formData, setFormData] = useState({
     resume: null,
     role: '',
@@ -415,9 +415,7 @@ function CustomAssessment() {
           }));
         }
 
-        if (parsed.uploadMode === 'resume' || parsed.uploadMode === 'jd') {
-          setUploadMode(parsed.uploadMode);
-        }
+        // Do NOT restore uploadMode from localStorage — always use the default ('jd' = Multiple)
 
         // Restore other state
         if (parsed.resumeFileName) setResumeFileName(parsed.resumeFileName);

@@ -147,6 +147,10 @@ function PdfUploadQuestion() {
     }
   };
 
+  const handleViewSample = () => {
+    window.open(`${API_BASE_URL}/questions/sample-pdf/`, '_blank');
+  };
+
   const handleSave = async () => {
     if (!caid) {
       // eslint-disable-next-line no-alert
@@ -237,6 +241,13 @@ function PdfUploadQuestion() {
             </button>
             <h1 className="pdfq-title">PDF Uploading</h1>
             <div className="pdfq-actions">
+              <button
+                type="button"
+                className="pdfq-btn pdfq-btn-secondary"
+                onClick={handleViewSample}
+              >
+                View Sample PDF
+              </button>
               <button
                 type="button"
                 className="pdfq-btn pdfq-btn-secondary"

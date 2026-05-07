@@ -24,6 +24,7 @@ urlpatterns = [
     path('questions/by-skills/', views.get_questions_by_skills_view, name='get_questions_by_skills'),
     path('questions/manual/', views.get_manual_questions_view, name='get_manual_questions'),
     path('questions/parse-document/', views.parse_questions_document_view, name='parse_questions_document'),
+    path('questions/sample-pdf/', views.sample_questions_pdf_view, name='sample_questions_pdf'),
     path('custom-assessments/', views.create_custom_assessment_view, name='create_custom_assessment'),
     path('custom-assessments/<int:custom_assessment_id>/', views.update_custom_assessment_view, name='update_custom_assessment'),
     path('custom-assessments/<int:custom_assessment_id>/get/', views.get_custom_assessment_view, name='get_custom_assessment'),
