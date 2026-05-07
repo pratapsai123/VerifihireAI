@@ -74,6 +74,10 @@ function LiveInterview() {
 
   const [remoteParticipants, setRemoteParticipants] = useState({}); // { userId: { stream, role, name, isCameraOn, isScreenSharing } }
   const [myUserId, setMyUserId] = useState(null);
+  // 🔥 FIX: Ref that is always synchronously up-to-date — safe to use inside handleMessage closures
+  const myUserIdRef = useRef(null);
+  // 🔥 FIX: Ref mirror of remoteParticipants so initializeMedia always reads fresh data
+  const remoteParticipantsRef = useRef({});
 
   const closeCandidateTab = useCallback(() => {
     try {
@@ -144,30 +148,37 @@ function LiveInterview() {
     switch (data.type) {
       case 'session_info':
         if (data.start_time) startTimeRef.current = new Date(data.start_time).getTime();
-        if (data.user_id) setMyUserId(data.user_id);
+        if (data.user_id) {
+          // 🔥 FIX: Set BOTH the ref (synchronously) and the state (for renders)
+          myUserIdRef.current = data.user_id;
+          setMyUserId(data.user_id);
+        }
         break;
       case 'existing_participants':
-        console.log(`👥 Connecting to ${data.participants.length} existing participants`);
+        console.log(`👥 ${data.participants.length} existing participants found`);
         data.participants.forEach(p => {
-            if (p.user_id !== myUserId) {
-                setRemoteParticipants(prev => ({
-                    ...prev,
-                    [p.user_id]: { 
-                        name: p.name || 'Participant', 
-                        role: p.role, 
-                        isCameraOn: true, 
-                        stream: null,
-                        joinedAt: p.joined_at || Date.now()
-                    }
-                }));
-                // Step 7: Auto connect to existing users
-                createPeerConnection(p.user_id, (userId, stream) => {
-                    setRemoteParticipants(prev => ({
-                        ...prev,
-                        [userId]: { ...prev[userId], stream }
-                    }));
-                });
-                createVideoOffer(p.user_id);
+            if (p.user_id !== myUserIdRef.current) {
+                const entry = { 
+                    name: p.name || 'Participant', 
+                    role: p.role, 
+                    isCameraOn: true, 
+                    stream: null,
+                    joinedAt: p.joined_at || Date.now()
+                };
+                remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [p.user_id]: entry };
+                setRemoteParticipants(prev => ({ ...prev, [p.user_id]: entry }));
+
+                // 🔥 FIX: Only create peer+offer NOW if local stream is already ready
+                if (localStreamRef.current) {
+                    console.log(`🚀 Local stream ready — connecting immediately to ${p.user_id}`);
+                    createPeerConnection(p.user_id, (userId, stream) => {
+                        remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
+                        setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
+                    });
+                    createVideoOffer(p.user_id);
+                } else {
+                    console.log(`⏳ Local stream not ready yet — deferring connection to ${p.user_id}`);
+                }
             }
         });
         break;
@@ -175,17 +186,16 @@ function LiveInterview() {
         showSessionPopup(`${data.user} joined the session`);
         setBothPartiesConnected(true);
         setRemoteParticipants(prev => {
-            if (prev[data.user_id]) return prev; // Already known
-            return {
-                ...prev,
-                [data.user_id]: { 
-                    name: data.user || 'Participant', 
-                    role: data.role,
-                    isCameraOn: true,
-                    stream: null,
-                    joinedAt: Date.now()
-                }
+            const entry = { 
+                ...(prev[data.user_id] || {}),
+                name: data.user || 'Participant', 
+                role: data.role,
+                isCameraOn: true,
+                stream: prev[data.user_id]?.stream || null,
+                joinedAt: Date.now()
             };
+            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [data.user_id]: entry };
+            return { ...prev, [data.user_id]: entry };
         });
         break;
       case 'user_left':
@@ -193,12 +203,13 @@ function LiveInterview() {
         setRemoteParticipants(prev => {
           const next = { ...prev };
           delete next[data.user_id];
+          delete remoteParticipantsRef.current[data.user_id];
           return next;
         });
         removePeerConnection(data.user_id);
         break;
       case 'chat':
-        if (data.sender_id !== myUserId) {
+        if (data.sender_id !== myUserIdRef.current) {
           setChatMessages(prev => [...prev, {
             id: Date.now() + Math.random(),
             sender: data.sender || 'Participant',
@@ -213,41 +224,42 @@ function LiveInterview() {
         console.log(`✅ ready_for_webrtc from ${data.sender_id}`);
         const remoteUserId = data.sender_id;
 
-        if (remoteUserId === myUserId) break;
+        if (remoteUserId === myUserIdRef.current) break;
 
-        if (peerConnectionsRef.current[remoteUserId]) {
-            console.log(`⚠️ Peer already exists for ${remoteUserId}`);
-            break;
+        // 🔥 FIX: Check both iceConnectionState AND live remote tracks
+        const existingPc = peerConnectionsRef.current[remoteUserId];
+        if (existingPc) {
+            const hasRemoteTracks = existingPc.getReceivers().some(r => r.track && r.track.readyState === 'live');
+            const isHealthy = ['connected', 'completed'].includes(existingPc.iceConnectionState) && hasRemoteTracks;
+            if (isHealthy) {
+                console.log(`⚠️ Healthy peer with live tracks for ${remoteUserId}, skipping.`);
+                break;
+            }
+            console.log(`🧹 Stale/empty peer for ${remoteUserId} (ice=${existingPc.iceConnectionState}, hasTracks=${hasRemoteTracks}), recreating.`);
         }
 
-        setRemoteParticipants(prev => ({
-            ...prev,
-            [remoteUserId]: {
-                ...prev[remoteUserId],
-                name: data.user || 'Participant',
-                role: data.role,
+        setRemoteParticipants(prev => {
+            const entry = {
+                ...(prev[remoteUserId] || {}),
+                name: data.user || prev[remoteUserId]?.name || 'Participant',
+                role: data.role || prev[remoteUserId]?.role,
                 stream: null,
                 joinedAt: prev[remoteUserId]?.joinedAt || Date.now()
-            }
-        }));
-
-        console.log(`🚀 Creating peer for ${remoteUserId}`);
-
-        createPeerConnection(remoteUserId, (userId, stream) => {
-            setRemoteParticipants(prev => ({
-                ...prev,
-                [userId]: {
-                    ...prev[userId],
-                    stream
-                }
-            }));
+            };
+            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [remoteUserId]: entry };
+            return { ...prev, [remoteUserId]: entry };
         });
 
+        console.log(`🚀 Creating peer for ${remoteUserId}`);
+        createPeerConnection(remoteUserId, (userId, stream) => {
+            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
+            setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
+        });
         createVideoOffer(remoteUserId);
         break;
       }
       case 'video_offer':
-        if (data.target === myUserId) {
+        if (data.target === myUserIdRef.current) {
           handleVideoOffer(data.sender_id, data.sdp, (userId, stream) => {
               setRemoteParticipants(prev => ({
                   ...prev,
@@ -257,17 +269,17 @@ function LiveInterview() {
         }
         break;
       case 'video_answer':
-        if (data.target === myUserId) {
+        if (data.target === myUserIdRef.current) {
           handleVideoAnswer(data.sender_id, data.sdp);
         }
         break;
       case 'ice_candidate':
-        if (data.target === myUserId) {
+        if (data.target === myUserIdRef.current) {
           handleIceCandidate(data.sender_id, data.candidate);
         }
         break;
       case 'media_state':
-        if (data.sender_id !== myUserId) {
+        if (data.sender_id !== myUserIdRef.current) {
           setRemoteParticipants(prev => ({
               ...prev,
               [data.sender_id]: { 
@@ -279,7 +291,7 @@ function LiveInterview() {
         }
         break;
       case 'screen_share_state':
-        if (data.sender_id !== myUserId) {
+        if (data.sender_id !== myUserIdRef.current) {
           setRemoteParticipants(prev => ({
               ...prev,
               [data.sender_id]: { ...prev[data.sender_id], isScreenSharing: !!data.active }
@@ -370,14 +382,15 @@ function LiveInterview() {
       setCameraReady(true);
       setMediaLoading(false);
 
-      // Signal SecuritySessionGuard to begin monitoring now that interview is starting
       window.dispatchEvent(new Event('vh_exam_started'));
 
-      // ✅ Fix: Assign local stream to video element
       if (thumbnailVideoRef.current) {
         thumbnailVideoRef.current.srcObject = stream;
       }
 
+      // 🔥 FIX: Only broadcast ready_for_webrtc. Do NOT proactively send offers here.
+      // Existing participants will receive ready_for_webrtc and respond with an offer.
+      // This ensures exactly ONE offer per pair (no glare / double-offer).
       console.log('🗣️ Broadcasting ready_for_webrtc');
       sendMessage({ type: 'ready_for_webrtc', user: candidateName, role: MY_ROLE });
 
@@ -386,25 +399,12 @@ function LiveInterview() {
         stopWebRTC();
       });
 
-      // Step 4: Proactive Offer Creation for existing participants
-      Object.keys(remoteParticipants).forEach(userId => {
-        if (!peerConnectionsRef.current[userId]) {
-            console.log(`🚀 Proactively connecting to ${userId}`);
-            createPeerConnection(userId, (uid, remoteStream) => {
-                setRemoteParticipants(prev => ({
-                    ...prev,
-                    [uid]: { ...prev[uid], stream: remoteStream }
-                }));
-            });
-            createVideoOffer(userId);
-        }
-      });
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);
       showSessionPopup('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC]);
+  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC, candidateName]);
 
   // Initialize WebRTC
   useEffect(() => {
