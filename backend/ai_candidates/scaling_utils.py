@@ -47,9 +47,10 @@ class RateLimiter:
         return max(0, self.max_requests - current)
 
 
-# Global rate limiters
-groq_limiter = RateLimiter("groq_api", max_requests=30, window_seconds=60)
-tts_limiter = RateLimiter("tts_api", max_requests=100, window_seconds=60)
+# Global rate limiters - scaled for 100+ concurrent interviews
+# Each key can handle 30 req/min, so with 3 keys = 90 req/min total
+groq_limiter = RateLimiter("groq_api", max_requests=90, window_seconds=60)
+tts_limiter = RateLimiter("tts_api", max_requests=200, window_seconds=60)
 
 
 def cache_ai_response(timeout=300):

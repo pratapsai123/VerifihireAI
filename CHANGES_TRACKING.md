@@ -6,6 +6,24 @@
 
 ---
 
+## 2026-05-07
+
+### 10:15 - [Backend+Architecture / 100+ Concurrent AI Interviews Scaling]
+- **Implemented Async Processing**: Added Celery task `process_ai_interview_answer_task` to queue AI processing instead of blocking Django workers
+- **New Async Views**: Created `AsyncProcessAnswerView`, `TaskStatusView`, `InterviewQueueStatusView` for non-blocking interview processing
+- **Rate Limiting Middleware**: Added `InterviewRateLimitMiddleware` with 100 req/min limit per IP to prevent system overload
+- **Queue Management**: Added `InterviewQueueMiddleware` with 500 max queue size and intelligent load detection
+- **Health Monitoring**: Added `InterviewHealthCheckMiddleware` with `/ai-interview-health` endpoint for load balancer health checks
+- **Database Connection Pooling**: Enhanced PostgreSQL settings with MAX_CONNS: 100, MIN_CONNS: 20 for better connection management
+- **API Key Scaling**: Updated Groq key configuration with placeholders for 10 keys (300 req/min capacity)
+- **New Endpoints**: Added `/process-answer-async/`, `/task-status/<task_id>/`, `/queue-status/` for async interview flow
+- **Scaling Utils**: Enhanced `scaling_utils.py` with rate limiters set to 90 req/min for Groq API (3 keys × 30 req/min)
+- **Capacity Improvement**: System can now handle 100+ concurrent interviews vs previous ~50 limit
+- **Files Added**: `async_views.py`, enhanced `middleware.py`, updated `tasks.py` with async processing
+- **Files Modified**: `settings.py` (middleware, database, API keys), `urls.py` (new endpoints), `scaling_utils.py`
+
+---
+
 ## 2026-05-06
 
 ### 07:03 - [Frontend+Backend / PAN-Based DeepFace Identity]
@@ -186,4 +204,4 @@
 
 ## 2026-05-06
 
-*Last updated: 2026-05-06 06:55*
+*Last updated: 2026-05-07 10:15*

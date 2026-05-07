@@ -16,7 +16,7 @@ from groq import Groq
 from .models import Candidate
 from .utils import log_automation_event
 from api.ocr_utils import _get_reader
-from ai_assessments.ai_logic import _call_groq_with_backoff
+from ai_assessments.ai_logic import _call_groq_with_backoff, GroqKeyManager
 
 logger = logging.getLogger(__name__)
 
@@ -292,3 +292,173 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             trigger_batch_assessment_task.delay(batch_id)
         else:
             print("ℹ️ No candidates passed. Skipping automated assessment.")
+
+
+@shared_task(bind=True, max_retries=3)
+def process_ai_interview_answer_task(self, candidate_id, answer_text, current_question, remaining_questions, conversation_memory, current_turn_number):
+    """
+    Async task to process AI interview answers for high concurrency
+    Handles 100+ concurrent interviews by queuing AI processing
+    """
+    from .models import Candidate, InterviewIntegrity
+    from ai_assessments.ai_logic import extract_json
+    import time as _time
+    import re
+    
+    try:
+        candidate = Candidate.objects.get(pk=candidate_id)
+    except Candidate.DoesNotExist:
+        logger.error(f"Candidate {candidate_id} not found in async task")
+        return {'error': 'Candidate not found'}
+    
+    # Get least-used API key for load balancing
+    api_key = GroqKeyManager.get_least_used_key()
+    local_groq_client = Groq(api_key=api_key)
+    
+    # Model configuration with fallback
+    PRIMARY_MODEL = "llama-3.3-70b-versatile"
+    FALLBACK_MODEL = "llama-3.1-8b-instant"
+    COOLDOWN_SECONDS = 60
+    
+    # Check cooldown status
+    if not hasattr(process_ai_interview_answer_task, '_fallback_until'):
+        process_ai_interview_answer_task._fallback_until = 0
+    
+    if _time.time() < process_ai_interview_answer_task._fallback_until:
+        chosen_model = FALLBACK_MODEL
+        logger.info(f"Using fallback model {FALLBACK_MODEL} (70b cooldown active)")
+    else:
+        chosen_model = PRIMARY_MODEL
+    
+    # Build prompt with conversation context
+    context_prompt = ""
+    if conversation_memory:
+        context_prompt = f"""
+CONVERSATION CONTEXT (for reference only - do NOT repeat this info):
+{json.dumps(conversation_memory, indent=2)}
+
+"""
+    
+    prompt = f"""{context_prompt}CURRENT INTERVIEW TURN:
+Candidate Answer: "{answer_text}"
+Current Question: "{current_question}"
+Turn Number: {current_turn_number}
+
+{candidate._get_difficulty_instructions(candidate.experience_level) if hasattr(candidate, '_get_difficulty_instructions') else ''}
+
+You must respond with a JSON object containing:
+{{
+    "is_clarification": true/false,
+    "is_exit": true/false,
+    "refined_next_question": "Next question if not clarification/exit",
+    "feedback": "Feedback on current answer",
+    "score": 0-100,
+    "score_reason": "1-sentence justification for the score"
+}}"""
+
+    try:
+        # Process with AI
+        response = local_groq_client.chat.completions.create(
+            model=chosen_model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            response_format={"type": "json_object"}
+        )
+        
+        raw_text = response.choices[0].message.content
+        data = extract_json(raw_text)
+        
+        if not data:
+            logger.error(f"Invalid JSON from AI: {raw_text}")
+            return {'error': 'Invalid AI response'}
+        
+        # Clean any leaked labels
+        _label_pattern = re.compile(
+            r'\b(?:JD|RESUME[- ]?SKILL|PROJECT|SCENARIO|SYNTAX|INTRO)\b[- ]?Q?\d*[:\.\-—]*\s*',
+            re.IGNORECASE
+        )
+        for field in ('feedback', 'refined_next_question'):
+            if data.get(field):
+                data[field] = _label_pattern.sub('', data[field]).strip()
+        
+        # Update candidate score silently
+        if data.get('score') is not None and not data.get('is_clarification'):
+            q_score = int(data.get('score', 0))
+            candidate.score += q_score
+            candidate.total_questions += 1
+            
+            # Store per-question summary
+            if not isinstance(candidate.interview_summary, list):
+                candidate.interview_summary = []
+            
+            candidate.interview_summary.append({
+                'question': current_question,
+                'answer': answer_text[:500],  # Truncate for storage
+                'feedback': data.get('feedback', ''),
+                'score': q_score,
+                'score_reason': data.get('score_reason', ''),
+                'turn_number': current_turn_number,
+                'is_clarification': data.get('is_clarification', False),
+                'processed_at': timezone.now().isoformat()
+            })
+            
+            # Update conversation memory
+            if not isinstance(candidate.conversation_memory, dict):
+                candidate.conversation_memory = {}
+            
+            # Extract key facts from answer for memory
+            if answer_text and len(answer_text.strip()) > 10:
+                memory_key = f"turn_{current_turn_number}"
+                candidate.conversation_memory[memory_key] = {
+                    'question': current_question,
+                    'answer_summary': answer_text[:200],
+                    'key_points': data.get('feedback', '')[:100]
+                }
+            
+            candidate.save()
+        
+        return {
+            'status': 'success',
+            'data': data,
+            'candidate_score': candidate.score,
+            'total_questions': candidate.total_questions
+        }
+        
+    except Exception as model_err:
+        error_str = str(model_err).lower()
+        if ("rate limit" in error_str or "429" in error_str):
+            # Rotate key and retry
+            GroqKeyManager.rotate_key()
+            rotated_key = GroqKeyManager.get_current_key()
+            local_groq_client = Groq(api_key=rotated_key)
+            
+            if chosen_model == PRIMARY_MODEL:
+                process_ai_interview_answer_task._fallback_until = _time.time() + COOLDOWN_SECONDS
+                logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL}")
+            
+            # Retry with fallback
+            response = local_groq_client.chat.completions.create(
+                model=FALLBACK_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7,
+                response_format={"type": "json_object"}
+            )
+            
+            raw_text = response.choices[0].message.content
+            data = extract_json(raw_text)
+            
+            if data:
+                return {'status': 'success', 'data': data, 'fallback_used': True}
+            else:
+                return {'error': 'AI processing failed after retry'}
+        else:
+            logger.error(f"AI processing error: {model_err}")
+            return {'error': 'AI processing failed'}
+    
+    except Exception as e:
+        logger.error(f"Task processing error: {e}")
+        if self.request.retries < self.max_retries:
+            # Exponential backoff retry
+            countdown = 2 ** self.request.retries
+            raise self.retry(countdown=countdown, exc=e)
+        return {'error': 'Task failed after retries'}
