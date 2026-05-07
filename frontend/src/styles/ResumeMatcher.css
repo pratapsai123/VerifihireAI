@@ -46,6 +46,58 @@
 }
 
 /* ── Solid Containers ───────────────────── */
+.duration-split-box {
+    display: flex;
+    background: white;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 44px;
+}
+
+.duration-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 10px;
+    position: relative;
+}
+
+.duration-col:first-child {
+    border-right: 1px solid #E2E8F0;
+}
+
+.duration-col label {
+    font-size: 0.65rem !important;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 0px !important;
+    font-weight: 700;
+}
+
+.duration-col input {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    color: #1e293b;
+}
+
+.duration-col .mini-marker {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: #4f46e5;
+    background: rgba(79, 70, 229, 0.1);
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
 .section-container {
     background: white;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);

@@ -18,7 +18,9 @@ class Assessment(models.Model):
     mcq_hard = models.IntegerField(default=2)
     coding_count = models.IntegerField(default=2)
     coding_difficulty_list = models.JSONField(default=list, blank=True) # e.g. ['Easy', 'Medium']
-    duration_minutes = models.IntegerField(default=60)
+    duration_minutes = models.IntegerField(default=60)  # Total (mcq + coding) for backward compat
+    mcq_duration_minutes = models.IntegerField(default=10, help_text="Minutes allocated for MCQ section")
+    coding_duration_minutes = models.IntegerField(default=30, help_text="Minutes allocated for Coding section")
     difficulty_level = models.CharField(max_length=20, default='Medium', choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')])
     generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
     created_at = models.DateTimeField(auto_now_add=True)
@@ -104,6 +106,10 @@ class AIAssessmentSubmission(models.Model):
     started_at = models.DateTimeField(default=timezone.now)
     submitted_at = models.DateTimeField(blank=True, null=True)
     current_question_index = models.IntegerField(default=0)
+    current_phase = models.CharField(max_length=20, default='mcq') # 'mcq' or 'coding'
+    mcq_time_spent = models.IntegerField(default=0) # Total seconds spent in MCQ phase
+    coding_time_spent = models.IntegerField(default=0) # Total seconds spent in coding phase
+    last_phase_switch = models.DateTimeField(default=timezone.now) # To calculate elapsed since last interaction
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):

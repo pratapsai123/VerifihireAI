@@ -626,12 +626,8 @@ const AiAssessmentDetail = () => {
                                         </h3>
 
                                         {(() => {
-                                            // Get candidate photo from identity link or integrity logs
-                                            const logs = selectedSubmission.integrity_screenshots || selectedSubmission.integrity_logs || selectedSubmission.monitoring_logs || [];
-                                            const firstWebcam = logs.find(log => log.webcam_screenshot_url || log.webcam_screenshot_base64 || log.webcam_image);
-                                            const candidatePhoto = selectedSubmission.candidate_photo_url || (firstWebcam
-                                                ? (firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64 || firstWebcam.webcam_image)
-                                                : null);
+                                            // Get candidate photo exclusively from the authorized registration
+                                            const candidatePhoto = selectedSubmission.candidate_photo_url;
                                             return (
                                         <div style={{
                                             display: 'flex',

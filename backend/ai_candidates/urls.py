@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView
 from .pan_validation_enhanced import EnhancedPanValidationView
+from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
 urlpatterns = [
     path('', CandidateListCreateView.as_view(), name='candidate-list-create'),
@@ -17,6 +18,9 @@ urlpatterns = [
     path('retry-extraction/', RetryFailedExtractionsView.as_view(), name='retry-failed-extractions'),
     path('bulk-invite/', BulkInviteView.as_view(), name='bulk-invite'),
     path('process-answer/', ProcessAnswerView.as_view(), name='process-answer'),
+    path('process-answer-async/', AsyncProcessAnswerView.as_view(), name='process-answer-async'),
+    path('task-status/<str:task_id>/', TaskStatusView.as_view(), name='task-status'),
+    path('queue-status/', InterviewQueueStatusView.as_view(), name='queue-status'),
     path('assemblyai-token/', AssemblyAITokenView.as_view(), name='assemblyai-token'),
     path('tts/', TTSView.as_view(), name='tts'),
     path('<int:pk>/download-report/', CandidateReportDownloadView.as_view(), name='candidate-report-download'),

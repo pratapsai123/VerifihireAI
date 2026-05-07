@@ -9,7 +9,13 @@ import re
 import sys
 import time
 import threading
-import groq
+from openai import APIStatusError
+from .llm_client import (
+    LLMKeyManager as GroqKeyManager,
+    call_llm_with_backoff as _call_llm_with_backoff,
+    create_llm_client,
+    get_default_model,
+)
 from django.conf import settings
 from django.core.cache import cache
 from .code_generator import CodeGenerator
@@ -17,58 +23,8 @@ from .coding_skeletons import CodingSkeletons
 
 logger = logging.getLogger(__name__)
 
-class GroqKeyManager:
-    _current_index = 0
-    _lock = threading.Lock()
-    _key_usage_count = {}  # Track usage per key index
-
-    @classmethod
-    def get_current_key(cls):
-        keys = getattr(settings, 'GROQ_API_KEYS', [])
-        if not keys:
-            # Fallback to the single legacy key if list is missing/empty
-            return getattr(settings, 'GROQ_API_KEY', None)
-        with cls._lock:
-            key = keys[cls._current_index % len(keys)]
-            # Track usage for monitoring
-            cls._key_usage_count[cls._current_index] = cls._key_usage_count.get(cls._current_index, 0) + 1
-            return key
-
-    @classmethod
-    def get_least_used_key(cls):
-        """Get the key with lowest usage count for load balancing"""
-        keys = getattr(settings, 'GROQ_API_KEYS', [])
-        if not keys:
-            return getattr(settings, 'GROQ_API_KEY', None)
-        with cls._lock:
-            if not cls._key_usage_count:
-                return keys[0]
-            # Find key with minimum usage
-            min_idx = min(range(len(keys)), key=lambda i: cls._key_usage_count.get(i, 0))
-            cls._key_usage_count[min_idx] = cls._key_usage_count.get(min_idx, 0) + 1
-            return keys[min_idx]
-
-    @classmethod
-    def rotate_key(cls):
-        keys = getattr(settings, 'GROQ_API_KEYS', [])
-        if keys and len(keys) > 1:
-            with cls._lock:
-                old_idx = cls._current_index
-                cls._current_index = (cls._current_index + 1) % len(keys)
-                logger.warning(f"GROQ ROTATION: Rate limit reached at index {old_idx}. Switched to key index {cls._current_index}")
-                return True
-        return False
-
-    @classmethod
-    def get_usage_stats(cls):
-        """Return usage statistics for monitoring"""
-        keys = getattr(settings, 'GROQ_API_KEYS', [])
-        with cls._lock:
-            return {
-                'total_keys': len(keys),
-                'current_index': cls._current_index,
-                'usage_per_key': {i: cls._key_usage_count.get(i, 0) for i in range(len(keys))}
-            }
+# GroqKeyManager and _call_llm_with_backoff are now imported from llm_client.py
+# They are aliased above for backward compatibility with all consumer code.
 
 
 def extract_json(text):
@@ -364,140 +320,8 @@ def _call_executor(*, language: str, source_code: str, stdin: str | None, time_l
         logger.error(f"Executor exception: {error_msg}")
         return {"ok": False, "error": error_msg}
 
-def _call_groq_with_backoff(groq_client=None, prompt=None, system_msg=None, is_json=True, **kwargs):
-    """Wrapper for Groq API calls with exponential backoff, account rotation, and model fallback."""
-    max_retries = 10
-    base_delay = 5
-    
-    # 1. Initialize Client if needed
-    if groq_client is None:
-        key = GroqKeyManager.get_current_key()
-        groq_client = groq.Groq(api_key=key, timeout=60.0)
-    
-    current_client = groq_client
-    attempt = 0
-    rotations_this_attempt = 0
-    keys_count = len(getattr(settings, 'GROQ_API_KEYS', [])) or 1
-    
-    # Prepare messages
-    messages = kwargs.pop('messages', [])
-    if not messages and prompt:
-        messages = []
-        if system_msg:
-            messages.append({"role": "system", "content": system_msg})
-        messages.append({"role": "user", "content": prompt})
-
-    # Prepare response format
-    response_format = kwargs.pop('response_format', None)
-    if not response_format and is_json:
-        response_format = {"type": "json_object"}
-
-    # 70b -> 8b Fallback tracking
-    original_model = kwargs.get('model', 'llama-3.1-8b-instant')
-    powerful_model = "llama-3.3-70b-versatile"
-    fast_model = "llama-3.1-8b-instant"
-    current_model = original_model
-    model_fallback_active = False
-
-    while attempt < max_retries:
-        # Use the current model (possibly downgraded)
-        kwargs['model'] = current_model
-        try:
-            resp = current_client.chat.completions.create(
-                messages=messages,
-                response_format=response_format,
-                **kwargs
-            )
-            content = resp.choices[0].message.content
-            if is_json:
-                from .views import extract_json # circular import? use local or ensure views handled
-                # Better to use a non-circular extract_json or just json.loads
-                import json
-                try:
-                    return json.loads(content)
-                except:
-                    # Fallback to local extract_json if available
-                    from ai_candidates.views import extract_json
-                    return extract_json(content)
-            return content
-        except groq.RateLimitError as e:
-            # 1. Try rotating to a different account's API key
-            if keys_count > 1 and rotations_this_attempt < keys_count:
-                if GroqKeyManager.rotate_key():
-                    time.sleep(1) # Breathe
-                    new_key = GroqKeyManager.get_current_key()
-                    timeout = getattr(current_client, '_timeout', 60.0)
-                    current_client = groq.Groq(api_key=new_key, timeout=timeout)
-                    logger.info(f"Retrying with rotated API key index {GroqKeyManager._current_index} (Attempt {attempt + 1}/{max_retries})")
-                    rotations_this_attempt += 1
-                    continue 
-            
-            # 2. Try falling back to a lighter model if using the powerful one
-            if current_model == powerful_model and not model_fallback_active:
-                logger.warning(f"70b Model Rate Limited on all keys. Falling back to 8b-instant...")
-                current_model = fast_model
-                model_fallback_active = True
-                rotations_this_attempt = 0 # Try all keys again with the lighter model
-                continue
-
-            # 3. Both models/all keys exhausted: Full exponential backoff
-            if attempt < max_retries - 1:
-                delay = min(base_delay * (2 ** attempt), 120)
-                logger.warning(f"All Groq paths exhausted. Cooling down for {delay}s... (Attempt {attempt + 1}/{max_retries})")
-                time.sleep(delay)
-                attempt += 1
-                rotations_this_attempt = 0 
-                model_fallback_active = False
-                current_model = original_model # Try the powerful model again after a long sleep
-                continue
-            raise e
-        except groq.BadRequestError as e:
-            # Handle JSON validation errors - retry with simpler prompt
-            error_msg = str(e)
-            if 'json_validate_failed' in error_msg or 'Failed to generate JSON' in error_msg:
-                logger.warning(f"Groq JSON Validation Failed: Retrying... (Attempt {attempt + 1}/{max_retries})")
-                if attempt < max_retries - 1:
-                    time.sleep(1)
-                    attempt += 1
-                    continue
-            # Other bad requests - usually unrecoverable
-            logger.error(f"Groq Bad Request (400): {error_msg}")
-            raise e
-        except groq.APIStatusError as e:
-            if e.status_code == 429:
-                 if keys_count > 1 and rotations_this_attempt < keys_count:
-                     if GroqKeyManager.rotate_key():
-                        time.sleep(1)
-                        new_key = GroqKeyManager.get_current_key()
-                        current_client = groq.Groq(api_key=new_key)
-                        rotations_this_attempt += 1
-                        continue
-            if e.status_code == 413:
-                if GroqKeyManager.rotate_key():
-                    new_key = GroqKeyManager.get_current_key()
-                    current_client = groq.Groq(api_key=new_key)
-                    continue 
-                logger.error(f"Groq Request Too Large (413): {e.message}")
-                raise e
-            raise e
-        except (groq.APIConnectionError, groq.APITimeoutError) as e:
-            if attempt < max_retries - 1:
-                delay = base_delay + attempt 
-                logger.warning(f"Groq Connection Error: {e}. Retrying in {delay}s... (Attempt {attempt + 1}/{max_retries})")
-                time.sleep(delay)
-                attempt += 1
-                continue
-            raise e
-        except Exception as e:
-            err_msg = str(e).lower()
-            if "status_code=503" in err_msg or "overloaded" in err_msg:
-                if attempt < max_retries - 1:
-                    time.sleep(base_delay)
-                    attempt += 1
-                    continue
-            
-            logger.error(f"Groq API call failed: {e}")
-            raise e
+# _call_llm_with_backoff is now imported from llm_client.py (aliased above)
+# It handles exponential backoff, key rotation, and error recovery for DeepSeek V4 Flash.
 
 def _normalize_difficulty_label(value, *, default='Medium'):
     if not isinstance(value, str):
@@ -799,7 +623,7 @@ def _validate_mcq_structure(mcq):
 
 def _repair_pool_shortfall(
     *,
-    groq_client,
+    llm_client,
     job_description,
     required_skills,
     pool,
@@ -809,7 +633,7 @@ def _repair_pool_shortfall(
     pool_coding_total,
     coding_tasks,
     max_attempts=5,
-    model="llama-3.1-8b-instant",
+    model="deepseek-v4-flash",
     cancel_token=None
 ):
     """Top up missing MCQ/coding items when model under-generates in initial pass."""
@@ -839,7 +663,7 @@ def _repair_pool_shortfall(
                 
             logger.info(f"REPAIR: Rescuing {missing_coding} missing coding challenges.")
             new_coding = _generate_execution_verified_coding_pool(
-                groq_client=groq_client,
+                llm_client=llm_client,
                 job_description=job_description,
                 required_skills=required_skills,
                 difficulties=needed_diffs,
@@ -860,7 +684,7 @@ def _repair_pool_shortfall(
             
             try:
                 new_mcqs = _generate_mcq_pool_ai_only(
-                    groq_client=groq_client,
+                    llm_client=llm_client,
                     job_description=job_description,
                     required_skills=required_skills,
                     pool_mcq_total=missing_mcqs,
@@ -887,7 +711,7 @@ def _repair_pool_shortfall(
 
 def _generate_coding_pool_ai_only(
     *,
-    groq_client,
+    llm_client,
     job_description,
     required_skills,
     difficulties,
@@ -895,7 +719,7 @@ def _generate_coding_pool_ai_only(
     batch_size=1,
     attempts_per_batch=3,
     blacklist_titles=None,
-    model="llama-3.1-8b-instant",
+    model="deepseek-v4-flash",
     cancel_token=None
 ):
     """
@@ -1014,8 +838,8 @@ RULES:
 
         for attempt in range(attempts_per_batch):
             try:
-                result = _call_groq_with_backoff(
-                    groq_client,
+                result = _call_llm_with_backoff(
+                    llm_client,
                     model=model,
                     messages=[
                         {"role": "system", "content": "You are a professional assessment writer. Return JSON only."},
@@ -1051,7 +875,7 @@ RULES:
                 logger.error(f"SKELETON: Failed attempt {attempt+1} for '{skeleton['id']}': {e}")
 
     return generated[:total_required]
-def _generate_execution_verified_coding_pool(*, groq_client, job_description, required_skills, difficulties, total_required, model="llama-3.1-8b-instant", cancel_token=None):
+def _generate_execution_verified_coding_pool(*, llm_client, job_description, required_skills, difficulties, total_required, model="deepseek-v4-flash", cancel_token=None):
     """
     Entry point for skeleton-based generation.
     1. Generates the pool using skeletons.
@@ -1059,7 +883,7 @@ def _generate_execution_verified_coding_pool(*, groq_client, job_description, re
     """
     # 1. Generate story-wrapped skeletons
     challenges = _generate_coding_pool_ai_only(
-        groq_client=groq_client,
+        llm_client=llm_client,
         job_description=job_description,
         required_skills=required_skills,
         difficulties=difficulties,
@@ -1191,7 +1015,7 @@ def _is_duplicate_mcq(new_question, existing_questions, threshold=0.92):
 
 def _generate_mcq_pool_ai_only(
     *,
-    groq_client,
+    llm_client,
     job_description,
     required_skills,
     pool_mcq_total,
@@ -1200,7 +1024,7 @@ def _generate_mcq_pool_ai_only(
     pool_hard,
     attempts_per_batch=20, # INCREASED: Maximum persistence for rotation
     blacklist_qs=None,
-    model="llama-3.1-8b-instant",
+    model="deepseek-v4-flash",
     cancel_token=None
 ):
     """Generate MCQs via dedicated AI-only calls per difficulty to satisfy strict split."""
@@ -1258,8 +1082,8 @@ def _generate_mcq_pool_ai_only(
 
             for attempt in range(attempts_per_batch):
                 try:
-                    response = _call_groq_with_backoff(
-                        groq_client,
+                    response = _call_llm_with_backoff(
+                        llm_client,
                         model=model,
                         messages=[
                             {"role": "system", "content": "You are a senior technical interviewer. Generate specific, deep questions that test real knowledge — not surface-level definitions. Output JSON only."},
@@ -1304,7 +1128,7 @@ def _generate_mcq_pool_ai_only(
                     # Correction for next attempt in same batch
                     prompt = prompt + f"\nRetry: Ensure exactly {count} {difficulty} MCQs are returned. CRITICAL: Each MCQ MUST have all fields: question, 4 options, answer (matched to option), difficulty."
 
-                except groq.APIStatusError as e:
+                except APIStatusError as e:
                     if e.status_code == 413 and batch_size > 2:
                         logger.warning(f"Batch {batch_size} too large (413). Auto-scaling down to {batch_size-2}...")
                         batch_size -= 2
@@ -1357,8 +1181,8 @@ def _generate_mcq_pool_ai_only(
               {existing_topics}
             """
             try:
-                resp = _call_groq_with_backoff(
-                    groq_client, 
+                resp = _call_llm_with_backoff(
+                    llm_client, 
                     model=model, 
                     messages=[{"role": "user", "content": rescue_prompt}], 
                     response_format={"type": "json_object"},
@@ -1396,7 +1220,7 @@ def _generate_mcq_pool_ai_only(
 
     return generated
 
-def _expert_assessment_refiner(groq_client, raw_content, cancel_token=None):
+def _expert_assessment_refiner(llm_client, raw_content, cancel_token=None):
     """
     Uses a high-reasoning model to clean, fix, and standardize the generated pool
     according to strict production-ready requirements.
@@ -1414,9 +1238,9 @@ def _expert_assessment_refiner(groq_client, raw_content, cancel_token=None):
         input_json_str = json.dumps(raw_content, indent=2)
         
         # Call Groq with the high-reasoning model (Llama 3.3 70B)
-        response = _call_groq_with_backoff(
-            groq_client,
-            model="llama-3.1-8b-instant",
+        response = _call_llm_with_backoff(
+            llm_client,
+            model="deepseek-v4-flash",
             messages=[
                 {"role": "system", "content": "You are a professional recruiter. Return JSON only."},
                 {"role": "user", "content": f"INPUT:\n{input_json_str}"}

@@ -255,8 +255,69 @@
 /* Grid Layouts */
 .parameters-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.duration-split-box {
+    display: flex;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.duration-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+}
+
+.duration-col:first-child {
+    border-right: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.duration-col label {
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 2px !important;
+}
+
+.duration-col input {
+    border: none !important;
+    padding: 0.4rem 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    width: 60% !important;
+}
+
+.duration-col .mini-marker {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #4f46e5;
+    background: rgba(79, 70, 229, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.parameters-grid .form-group input {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+}
+
+.parameters-grid .marker {
+    right: 0.75rem;
+    padding: 0.2rem 0.5rem;
 }
 
 .input-with-marker {

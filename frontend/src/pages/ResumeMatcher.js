@@ -72,7 +72,9 @@ const ResumeMatcher = () => {
         return () => clearInterval(interval);
     }, [batchId, isAnalyzing]);
 
-    const [duration, setDuration] = useState(60);
+    const [mcqDuration, setMcqDuration] = useState(10);
+    const [codingDuration, setCodingDuration] = useState(30);
+    const [mcqDurationManual, setMcqDurationManual] = useState(false);
     const [mcqCount, setMcqCount] = useState(10);
     const [codingCount, setCodingCount] = useState(1);
     const [passThreshold, setPassThreshold] = useState(60);
@@ -88,6 +90,13 @@ const ResumeMatcher = () => {
             setMcqWeight(100);
         }
     }, [mcqCount, codingCount]);
+
+    // Auto-calculate MCQ duration (1 min per Q)
+    React.useEffect(() => {
+        if (!mcqDurationManual) {
+            setMcqDuration(mcqCount || 0);
+        }
+    }, [mcqCount, mcqDurationManual]);
 
     const [assessmentStartDate, setAssessmentStartDate] = useState('');
     const [assessmentStartTime, setAssessmentStartTime] = useState('');
@@ -120,7 +129,7 @@ const ResumeMatcher = () => {
     if (!initialDataHash.current) {
         initialDataHash.current = JSON.stringify({
             jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
-            duration, mcqCount, codingCount, passThreshold, codingChallenges,
+            mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
             assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
             interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
             batchId, isAnalyzing
@@ -130,7 +139,7 @@ const ResumeMatcher = () => {
     React.useEffect(() => {
         const formData = {
             jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
-            duration, mcqCount, codingCount, passThreshold, codingChallenges,
+            mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
             sameQuestionsForAll,
             assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
             interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
@@ -147,7 +156,7 @@ const ResumeMatcher = () => {
         sessionStorage.setItem(STORAGE_KEY, currentDataStr);
     }, [
         jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
-        duration, mcqCount, codingCount, passThreshold, codingChallenges,
+        mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
         assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
         interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
         batchId, isAnalyzing
@@ -255,7 +264,8 @@ const ResumeMatcher = () => {
         formData.append('threshold', threshold);
 
         if (matchMode === 'automatic') {
-            formData.append('duration', duration);
+            formData.append('mcq_duration', mcqDuration);
+            formData.append('coding_duration', codingDuration);
             formData.append('mcq_count', mcqCount);
             formData.append('coding_count', codingCount);
             formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
@@ -559,7 +569,12 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                            <div style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(3, 1fr)', 
+                                gap: '1.25rem', 
+                                marginBottom: '1.5rem' 
+                            }}>
                                 <div className="setting-item">
                                     <label>MCQ Questions</label>
                                     <input type="number" value={mcqCount} onChange={(e) => setMcqCount(parseInt(e.target.value) || 0)} className="modern-input" min="0" max="30" />
@@ -569,8 +584,19 @@ const ResumeMatcher = () => {
                                     <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max={MAX_CODING_TASKS} />
                                 </div>
                                 <div className="setting-item">
-                                    <label>Total Time (Mins)</label>
-                                    <input type="number" value={duration} onChange={(e) => setDuration(parseInt(e.target.value) || 60)} className="modern-input" min="15" max="180" />
+                                    <label>Assessment Duration (Mins)</label>
+                                    <div className="duration-split-box">
+                                        <div className="duration-col" style={!mcqDurationManual ? { background: '#F0FDF4' } : {}}>
+                                            <label>MCQ</label>
+                                            <input type="number" value={mcqDuration} onChange={(e) => { setMcqDuration(parseInt(e.target.value) || 0); setMcqDurationManual(true); }} min="1" max="120" />
+                                            {!mcqDurationManual && <span className="mini-marker" style={{ background: '#22c55e', color: 'white' }}>AUTO</span>}
+                                        </div>
+                                        <div className="duration-col">
+                                            <label>Coding</label>
+                                            <input type="number" value={codingDuration} onChange={(e) => setCodingDuration(parseInt(e.target.value) || 30)} min="5" max="180" />
+                                            <span className="mini-marker">MIN</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

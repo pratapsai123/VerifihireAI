@@ -52,6 +52,7 @@ const AiTakeAssessment = () => {
     const [candidateEmail, setCandidateEmail] = useState('');
 
     const [isAutoFilled, setIsAutoFilled] = useState(false);
+    const [isRestored, setIsRestored] = useState(false);
 
     const [submissionId, setSubmissionId] = useState(null);
 
@@ -66,7 +67,9 @@ const AiTakeAssessment = () => {
     const [formError, setFormError] = useState('');
 
     const [timeLeft, setTimeLeft] = useState(null);
-
+    const [phase, setPhase] = useState('mcq'); // 'mcq' or 'coding'
+    const [mcqTimeLeft, setMcqTimeLeft] = useState(null);
+    const [codingTimeLeft, setCodingTimeLeft] = useState(null);
     const [isStarted, setIsStarted] = useState(false);
 
 
@@ -318,9 +321,9 @@ const AiTakeAssessment = () => {
 
 
     const getDeepfacePersonId = useCallback(() => {
-
-        return String((candidateEmail || token || '')).trim().toLowerCase();
-
+        const email = String(candidateEmail || '').trim().toLowerCase();
+        if (!email) return '';
+        return `${email}_${token}`;
     }, [candidateEmail, token]);
 
 
@@ -968,6 +971,11 @@ const AiTakeAssessment = () => {
     const currentQ = allQs[currentQuestionIdx] || allQs[0];
 
     const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
+    
+    const mcqSectionCount = mcqSection.length;
+    const isLastOfPhase = phase === 'mcq' 
+        ? currentQuestionIdx === mcqSectionCount - 1
+        : currentQuestionIdx === allQs.length - 1;
 
     const isLastQ = currentQuestionIdx === allQs.length - 1;
 
@@ -986,13 +994,33 @@ const AiTakeAssessment = () => {
 
         console.log('Validation:', { isNameValid, isEmailValid });
 
-        if (isNameValid || isEmailValid) {
-            if (isNameValid) setCandidateName(decodeURIComponent(nameParam));
-            if (isEmailValid) setCandidateEmail(decodeURIComponent(emailParam));
+        let urlName = isNameValid ? decodeURIComponent(nameParam) : '';
+        let urlEmail = isEmailValid ? decodeURIComponent(emailParam) : '';
+
+        // Restore from localStorage if candidate is reconnecting
+        const savedEmail = localStorage.getItem(`ai_candidate_email_${token}`);
+        const savedName = localStorage.getItem(`ai_candidate_name_${token}`);
+        const savedPhone = localStorage.getItem(`ai_candidate_phone_${token}`);
+        const savedPan = localStorage.getItem(`ai_candidate_pan_${token}`);
+
+        // If local storage exists and matches the URL email (or URL email is missing)
+        if (savedEmail && (!urlEmail || savedEmail === urlEmail)) {
+            setCandidateEmail(savedEmail);
+            setCandidateName(savedName || urlName);
+            if (savedPhone) setPhone(savedPhone);
+            if (savedPan) {
+                setPanNumber(savedPan);
+                setPanVerified(true);
+            }
+            setIsAutoFilled(true);
+            setIsRestored(true); // Flag to bypass PAN photo requirement on reconnect
+        } else if (isNameValid || isEmailValid) {
+            if (urlName) setCandidateName(urlName);
+            if (urlEmail) setCandidateEmail(urlEmail);
             // Only lock inputs if we have a valid email to track them with
             if (isEmailValid) setIsAutoFilled(true);
         }
-    }, [searchParams]);
+    }, [searchParams, token]);
 
 
 
@@ -1215,13 +1243,17 @@ const AiTakeAssessment = () => {
             setFormError('Invalid PAN format. Expected: ABCDE1234F');
             return;
         }
-        if (!panPhoto) {
-            setFormError('Please upload your PAN card photo');
-            return;
-        }
-        if (!panVerified) {
-            setFormError('Please verify your PAN card before proceeding');
-            return;
+        
+        // If they are reconnecting via localStorage, we bypass the photo upload since it's already saved on the backend
+        if (!isRestored) {
+            if (!panPhoto) {
+                setFormError('Please upload your PAN card photo');
+                return;
+            }
+            if (!panVerified) {
+                setFormError('Please verify your PAN card before proceeding');
+                return;
+            }
         }
 
         const personId = getDeepfacePersonId();
@@ -1243,6 +1275,11 @@ const AiTakeAssessment = () => {
 
 
         try {
+            // Save details to localStorage so they don't have to re-enter if they drop off
+            localStorage.setItem(`ai_candidate_email_${token}`, candidateEmail);
+            localStorage.setItem(`ai_candidate_name_${token}`, candidateName);
+            localStorage.setItem(`ai_candidate_phone_${token}`, phone);
+            localStorage.setItem(`ai_candidate_pan_${token}`, panNumber);
 
             const formPayload = new FormData();
             formPayload.append('share_token', token);
@@ -1262,26 +1299,33 @@ const AiTakeAssessment = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            const { submission_id, time_left, answers: savedAnswers, current_question_index, coding_results: savedResults, codeDrafts: savedDrafts, candidate_questions } = res.data;
-
-
+            const { 
+                submission_id, 
+                time_left, 
+                mcq_time_left, 
+                coding_time_left, 
+                current_phase, 
+                answers: savedAnswers, 
+                current_question_index, 
+                coding_results: savedResults, 
+                codeDrafts: savedDrafts, 
+                candidate_questions 
+            } = res.data;
 
             setSubmissionId(submission_id);
-
             if (savedResults) setCodingResults(savedResults);
-
             if (savedDrafts) setCodeDrafts(savedDrafts);
 
-
-
             if (candidate_questions) {
-
                 setAssessment(prev => ({ ...prev, generated_content: candidate_questions }));
-
             }
 
-
-
+            // Phase and timer initialization
+            if (current_phase) setPhase(current_phase);
+            if (mcq_time_left !== undefined) setMcqTimeLeft(mcq_time_left);
+            if (coding_time_left !== undefined) setCodingTimeLeft(coding_time_left);
+            
+            // Total wall clock time
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
 
 
@@ -1966,23 +2010,41 @@ const AiTakeAssessment = () => {
 
 
     useEffect(() => {
+        if (!isStarted) return;
 
-        if (isStarted && timeLeft > 0) {
+        timerRef.current = setInterval(() => {
+            // Master Wall Clock (Total Expiry)
+            setTimeLeft(p => (p > 0 ? p - 1 : 0));
 
-            timerRef.current = setInterval(() => setTimeLeft(p => p - 1), 1000);
-
-        } else if (timeLeft === 0 && isStarted) {
-
-            clearInterval(timerRef.current);
-
-            // Use ref to avoid stale closure — always submits with current answers
-
-            if (handleSubmitRef.current) handleSubmitRef.current();
-
-        }
+            if (phase === 'mcq') {
+                setMcqTimeLeft(p => {
+                    if (p <= 1) {
+                        // MCQ Timer Expired -> Switch to Coding
+                        setPhase('coding');
+                        return 0;
+                    }
+                    return p - 1;
+                });
+            } else if (phase === 'coding') {
+                setCodingTimeLeft(p => {
+                    if (p <= 1) {
+                        // Coding Timer Expired -> Auto Submit
+                        if (handleSubmitRef.current) handleSubmitRef.current();
+                        return 0;
+                    }
+                    return p - 1;
+                });
+            }
+        }, 1000);
 
         return () => clearInterval(timerRef.current);
+    }, [isStarted, phase]);
 
+    // Handle Total Expiry (Master Guard)
+    useEffect(() => {
+        if (isStarted && timeLeft === 0) {
+            if (handleSubmitRef.current) handleSubmitRef.current();
+        }
     }, [isStarted, timeLeft]);
 
 
@@ -2146,23 +2208,21 @@ const AiTakeAssessment = () => {
 
 
     const goToQuestion = (idx) => {
+        // Block going back to MCQ if already in coding phase
+        if (phase === 'coding' && idx < mcqSectionCount) {
+            setAiToast({ active: true, text: 'MCQ section is locked. You cannot go back.', urgent: true });
+            return;
+        }
 
         // Save progress immediately before navigating away from current question
-
         if (isStarted && submissionId && !submitted) {
-
             axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
-
                 answers,
-
                 current_question_index: idx,
-
+                current_phase: phase,
                 coding_results,
-
                 codeDrafts: codeDrafts
-
             }).catch(() => { });
-
         }
 
         setCurrentQuestionIdx(idx);
@@ -2174,11 +2234,33 @@ const AiTakeAssessment = () => {
 
 
     const handleSaveAndNext = () => {
+        if (isLastOfPhase) {
+            if (phase === 'mcq') {
+                // Moving from MCQ to Coding
+                handlePhaseSwitch('coding');
+            } else {
+                // Last coding question - the main submit button handles the final submission
+            }
+        } else {
+            goToQuestion(currentQuestionIdx + 1);
+        }
+    };
 
-        const total = (assessment?.generated_content?.mcqs?.length || 0) + (assessment?.generated_content?.coding_challenges?.length || 0);
+    const handlePhaseSwitch = (newPhase) => {
+        const nextIdx = newPhase === 'coding' ? mcqSectionCount : 0;
+        
+        // Save progress with phase switch
+        axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
+            answers,
+            current_question_index: nextIdx,
+            current_phase: newPhase,
+            coding_results,
+            codeDrafts
+        }).catch(() => {});
 
-        if (currentQuestionIdx < total - 1) goToQuestion(currentQuestionIdx + 1);
-
+        setPhase(newPhase);
+        setCurrentQuestionIdx(nextIdx);
+        setVisitedQs(prev => new Set([...prev, nextIdx]));
     };
 
 
@@ -2377,22 +2459,57 @@ const AiTakeAssessment = () => {
             try {
 
                 const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
+                if (!normalizedEmail) {
+                    setRegError("Candidate email is missing.");
+                    setWizardStep(0);
+                    return;
+                }
+                const personId = `${normalizedEmail}_${token}`;
 
-                const personId = normalizedEmail || `temp_${Date.now()}`;
+                
 
-                const res = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                // Check if already registered in DeepFace
+                const checkRes = await axios.get(`${DEEPFACE_BASE_URL}/registration/registered/${encodeURIComponent(personId)}`);
+                const isAlreadyRegistered = checkRes.data.registered;
 
-                    person_id: personId,
+                let success = false;
+                let errorMsg = "";
 
-                    image_base64: finalImage.split(',')[1]
+                if (isAlreadyRegistered) {
+                    console.log("Candidate already registered. Switching to Verification Mode for Hard Block.");
+                    // PERFORM VERIFICATION (HARD BLOCK CASE)
+                    const verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
+                        person_id: personId,
+                        image_base64: finalImage.split(',')[1]
+                    });
+                    
+                    if (verifyRes.data && verifyRes.data.verified === true) {
+                        success = true;
+                    } else {
+                        success = false;
+                        errorMsg = "IDENTITY MISMATCH: You are not the person who originally registered for this assessment. Entry is blocked for security.";
+                    }
+                } else {
+                    console.log("Candidate not registered. Registering fresh anchor face.");
+                    // PERFORM NEW REGISTRATION
+                    const regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                        person_id: personId,
+                        image_base64: finalImage.split(',')[1]
+                    });
+                    
+                    if (regRes.data && regRes.data.success === true) {
+                        success = true;
+                    } else {
+                        success = false;
+                        errorMsg = regRes.data.message || "Face registration failed. Please ensure you are in a well-lit area.";
+                    }
+                }
 
-                });
 
 
+                if (!success) {
 
-                if (!res.data.success) {
-
-                    setRegError(res.data.message || "Registration failed. Please ensure your face is clearly visible.");
+                    setRegError(errorMsg);
 
                     setWizardStep(0);
 
@@ -2701,8 +2818,13 @@ const AiTakeAssessment = () => {
                     <div style={{ textAlign: 'right', color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem' }}>
 
                         <div>Duration</div>
-
-                        <div style={{ color: 'white', fontWeight: 800, fontSize: '1.1rem' }}>{assessment?.duration_minutes} min</div>
+                        <div style={{ color: 'white', fontWeight: 800, fontSize: '1.1rem' }}>
+                            {assessment?.mcq_duration_minutes && assessment?.coding_duration_minutes ? (
+                                `${assessment.mcq_duration_minutes}m + ${assessment.coding_duration_minutes}m`
+                            ) : (
+                                `${assessment?.duration_minutes} min`
+                            )}
+                        </div>
 
                     </div>
 
@@ -2873,9 +2995,10 @@ const AiTakeAssessment = () => {
                         <div>
 
                             <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>
-                                PAN Card Photo * <span style={{ fontWeight: 400, fontSize: '0.75rem', color: '#707EAE' }}>(JPG, PNG, PDF, Max 2.5MB)</span>
+                                PAN Card Photo * {isRestored ? <span style={{ fontWeight: 600, fontSize: '0.75rem', color: '#22c55e' }}>(Already Uploaded & Verified)</span> : <span style={{ fontWeight: 400, fontSize: '0.75rem', color: '#707EAE' }}>(JPG, PNG, PDF, Max 2.5MB)</span>}
                             </label>
 
+                            {!isRestored && (
                             <div
 
                                 onClick={() => document.getElementById('panPhotoInput').click()}
@@ -2917,6 +3040,7 @@ const AiTakeAssessment = () => {
                                 </div>
 
                             </div>
+                            )}
 
                         </div>
 
@@ -3176,11 +3300,17 @@ const AiTakeAssessment = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 
                     <div style={{ textAlign: 'right' }}>
-
-                        <div style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: 700, textTransform: 'uppercase' }}>Time Left</div>
-
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: timeLeft < 300 ? '#dc2626' : '#1a5276' }}>{formatTime(timeLeft)}</div>
-
+                        <div style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: 700, textTransform: 'uppercase' }}>
+                            {phase === 'mcq' ? 'MCQ Section Timer' : 'Coding Section Timer'}
+                        </div>
+                        <div style={{ 
+                            fontSize: '1.2rem', 
+                            fontWeight: 900, 
+                            color: (phase === 'mcq' ? mcqTimeLeft : codingTimeLeft) < 180 ? '#dc2626' : '#1a5276',
+                            fontFamily: 'JetBrains Mono, monospace'
+                        }}>
+                            {formatTime(phase === 'mcq' ? mcqTimeLeft : codingTimeLeft)}
+                        </div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,0.8)', border: '1px solid #e0e7ff', borderRadius: 40, padding: '4px 14px 4px 6px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', backdropFilter: 'blur(8px)' }}>
@@ -3834,23 +3964,27 @@ const AiTakeAssessment = () => {
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 5 }}>
 
                                     {allQs.map((q, idx) => {
-
                                         if (q.type !== 'mcq') return null;
-
                                         const st = getQStatus(idx);
-
+                                        const isLocked = phase === 'coding';
                                         return (
-
-                                            <button key={idx} onClick={() => goToQuestion(idx)}
-
-                                                style={{ width: '100%', aspectRatio: '1', borderRadius: '50%', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', border: 'none', ...statusStyle(st) }}>
-
+                                            <button key={idx} 
+                                                onClick={() => !isLocked && goToQuestion(idx)}
+                                                disabled={isLocked}
+                                                style={{ 
+                                                    width: '100%', 
+                                                    aspectRatio: '1', 
+                                                    borderRadius: '50%', 
+                                                    fontWeight: 700, 
+                                                    fontSize: '0.72rem', 
+                                                    cursor: isLocked ? 'not-allowed' : 'pointer', 
+                                                    border: 'none', 
+                                                    opacity: isLocked ? 0.6 : 1,
+                                                    ...statusStyle(st) 
+                                                }}>
                                                 {idx + 1}
-
                                             </button>
-
                                         );
-
                                     })}
 
                                 </div>
@@ -3926,17 +4060,31 @@ const AiTakeAssessment = () => {
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-
                     {currentQuestionIdx > 0 && (
-
-                        <button onClick={() => goToQuestion(currentQuestionIdx - 1)}
-
-                            style={{ padding: '0.5rem 1rem', background: 'white', border: '1.5px solid #1a5276', color: '#1a5276', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Poppins' }}>
-
+                        <button 
+                            onClick={() => {
+                                const prevIdx = currentQuestionIdx - 1;
+                                // Prevention: Don't allow Previous to cross the MCQ boundary back from Coding
+                                if (phase === 'coding' && prevIdx < mcqSectionCount) {
+                                    return; // Just block it
+                                }
+                                goToQuestion(prevIdx);
+                            }}
+                            disabled={phase === 'coding' && currentQuestionIdx === mcqSectionCount}
+                            style={{ 
+                                padding: '0.5rem 1rem', 
+                                background: 'white', 
+                                border: '1.5px solid #1a5276', 
+                                color: '#1a5276', 
+                                borderRadius: 8, 
+                                fontWeight: 700, 
+                                fontSize: '0.82rem', 
+                                cursor: (phase === 'coding' && currentQuestionIdx === mcqSectionCount) ? 'not-allowed' : 'pointer', 
+                                fontFamily: 'Poppins',
+                                opacity: (phase === 'coding' && currentQuestionIdx === mcqSectionCount) ? 0.5 : 1
+                            }}>
                             Previous
-
                         </button>
-
                     )}
 
                     {!isLastQ && (
@@ -3945,7 +4093,7 @@ const AiTakeAssessment = () => {
 
                             style={{ padding: '0.5rem 1.2rem', background: '#1a5276', color: 'white', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Poppins' }}>
 
-                            Save &amp; Next
+                            {isLastOfPhase && phase === 'mcq' ? 'Save & Proceed to Coding →' : 'Save & Next'}
 
                         </button>
 

@@ -19,6 +19,7 @@ class FaceRegisterRequest(BaseModel):
     person_id: str = Field(..., description="Unique identifier for the person (e.g., candidate token)")
     image_base64: str = Field(..., description="Base64-encoded face image")
     label: Optional[str] = Field(None, description="Optional label (e.g., 'profile_photo')")
+    overwrite: bool = Field(False, description="If True, existing face data for this ID will be overwritten")
 
 
 class FaceRegisterResponse(BaseModel):

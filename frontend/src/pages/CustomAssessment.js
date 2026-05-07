@@ -785,13 +785,13 @@ function CustomAssessment() {
     'Senior Technical Writer': ['Technical Writing Leadership', 'Documentation Strategy', 'Information Architecture', 'Mentoring', 'Style Guides', 'API Documentation'],
 
     // AI Engineering sub-roles
-    'Core AI': ['Large Language Models Understanding', 'Generative AI', 'Prompt Engineering', 'AI Agents', 'LLM Workflows', 'Fine-tuning Techniques', 'Model Evaluation', 'Model Monitoring', 'AI Safety', 'Feature Engineering'],
+    'Core AI': ['LLMs', 'Generative AI', 'Prompt Engineering', 'AI Agents', 'Fine-tuning Techniques', 'Model Evaluation', 'Model Monitoring', 'AI Safety', 'Feature Engineering'],
 
     // Cloud Engineer (Architecture) sub-roles
     'Architecture': ['System Design', 'Scalability Design', 'Infrastructure as Code', 'Reliability Engineering', 'Observability', 'Security Engineering'],
 
     // DevOps sub-roles
-    'Practices': ['GitOps Practices', 'Workflow Orchestration Concepts', 'Troubleshooting'],
+    'Practices': ['GitOps', 'Workflow Orchestration', 'Troubleshooting'],
     'Operations': ['Incident Management', 'Performance Optimization'],
 
     // Data & AI sub-roles

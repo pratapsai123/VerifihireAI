@@ -223,16 +223,16 @@ class EnhancedPanValidationView(APIView):
             # Try Groq Vision as fallback
             if not extracted_text:
                 try:
-                    from groq import Groq
+                    from ai_assessments.llm_client import create_llm_client, get_default_model
                     import base64
-                    groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+                    llm_client = create_llm_client()
                     
                     buffered = io.BytesIO()
                     image.save(buffered, format="JPEG")
                     img_base64 = base64.b64encode(buffered.getvalue()).decode()
                     
-                    response = groq_client.chat.completions.create(
-                        model="llama-3.2-11b-vision-preview",
+                    response = llm_client.chat.completions.create(
+                        model=get_default_model(),
                         messages=[{
                             "role": "user",
                             "content": [
@@ -243,9 +243,9 @@ class EnhancedPanValidationView(APIView):
                         max_tokens=20
                     )
                     extracted_text = response.choices[0].message.content.upper().strip()
-                    logger.info(f"Groq extracted: {extracted_text}")
-                except Exception as groq_error:
-                    logger.warning(f"Groq failed: {str(groq_error)}")
+                    logger.info(f"DeepSeek extracted: {extracted_text}")
+                except Exception as ds_error:
+                    logger.warning(f"DeepSeek failed: {str(ds_error)}")
             
             return extracted_text, bool(extracted_text)
         except Exception as e:
