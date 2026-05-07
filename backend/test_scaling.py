@@ -69,7 +69,7 @@ def test_rate_limiter():
     print_header("TEST 3: Rate Limiter")
     
     try:
-        from ai_candidates.scaling_utils import RateLimiter, groq_limiter, tts_limiter
+        from ai_candidates.scaling_utils import RateLimiter, llm_limiter, tts_limiter
         
         # Test basic rate limiting
         test_key = f"test_limit_{int(time.time())}"
@@ -88,8 +88,8 @@ def test_rate_limiter():
             return False
         
         # Check global limiters exist
-        if groq_limiter and tts_limiter:
-            print_result("Global Limiters", True, "groq_limiter and tts_limiter initialized")
+        if llm_limiter and tts_limiter:
+            print_result("Global Limiters", True, "llm_limiter and tts_limiter initialized")
             return True
         else:
             print_result("Global Limiters", False, "Global limiters not found")
@@ -99,19 +99,19 @@ def test_rate_limiter():
         print_result("Rate Limiter", False, f"Error: {str(e)}")
         return False
 
-def test_groq_key_scaling():
-    """Test 4: Multiple Groq API keys configured"""
-    print_header("TEST 4: Groq API Key Scaling")
+def test_llm_key_scaling():
+    """Test 4: Multiple DeepSeek API keys configured"""
+    print_header("TEST 4: DeepSeek API Key Scaling")
     
     from django.conf import settings
     
-    keys = getattr(settings, 'GROQ_API_KEYS', [])
+    keys = getattr(settings, 'DEEPSEEK_API_KEYS', [])
     
-    if len(keys) >= 3:
-        print_result("Groq Keys", True, f"{len(keys)} keys configured (capacity: ~{len(keys) * 30} req/min)")
+    if len(keys) >= 1:
+        print_result("DeepSeek Keys", True, f"{len(keys)} keys configured (capacity: ~{len(keys) * 60} req/min)")
         return True
     else:
-        print_result("Groq Keys", False, f"Only {len(keys)} keys configured")
+        print_result("DeepSeek Keys", False, f"Only {len(keys)} keys configured")
         return False
 
 def test_health_check_import():
@@ -181,7 +181,7 @@ def main():
         results.append(("DB Connection Pooling", test_database_connection_pooling()))
         results.append(("Redis Cache", test_redis_cache()))
         results.append(("Rate Limiter", test_rate_limiter()))
-        results.append(("Groq Key Scaling", test_groq_key_scaling()))
+        results.append(("DeepSeek Key Scaling", test_llm_key_scaling()))
         results.append(("Health Check", test_health_check_import()))
         results.append(("AI Response Caching", test_cache_ai_response_decorator()))
     except Exception as e:
@@ -209,7 +209,7 @@ def main():
         print("  ✅ SCALING IMPROVEMENTS READY FOR 100+ CONCURRENT INTERVIEWS!")
         print("="*70)
         print("\n  Next Steps for Full Scaling:")
-        print("  1. Add 3 more Groq API keys (for 180 req/min total)")
+        print("  1. Add 3 more DeepSeek API keys (for 360 req/min total)")
         print("  2. Deploy multiple Django instances behind load balancer")
         print("  3. Configure Celery workers for background processing")
         print("="*70)

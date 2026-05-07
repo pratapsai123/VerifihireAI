@@ -6,7 +6,7 @@ import logging
 import traceback
 import copy
 from datetime import datetime, timedelta
-from groq import Groq
+from ai_assessments.llm_client import create_llm_client, LLMKeyManager, get_default_model
 from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
@@ -69,7 +69,7 @@ from api.views import ensure_role_exists
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
 # if not groq_api_key:
 #     raise ValueError("GROQ_API_KEY must be set in settings.py")
-# groq_client = Groq(api_key=groq_api_key)
+# LLM client is now created via create_llm_client() from llm_client.py
 
 def _get_candidate_photo_url(request, submission):
     """
@@ -451,8 +451,8 @@ class CancelGenerationView(APIView):
             return Response({"error": "Invalid format"}, status=400)
 
 class GenerateAssessmentView(APIView):
-    PRIMARY_MODEL = "llama-3.1-8b-instant"
-    FALLBACK_MODEL = "llama-3.1-8b-instant"
+    PRIMARY_MODEL = get_default_model()
+    FALLBACK_MODEL = get_default_model()
     _fallback_until = 0
 
     def post(self, request):
@@ -573,7 +573,7 @@ class GenerateAssessmentView(APIView):
 
             
             local_api_key = GroqKeyManager.get_current_key()
-            local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
+            local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
 
             # 1. GENERATE MCQ POOL (Dedicated AI Call)
@@ -592,7 +592,7 @@ class GenerateAssessmentView(APIView):
             if pool_mcq_total > 0:
                 logger.info(f"Step 1: Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
                 mcqs = _generate_mcq_pool_ai_only(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_description,
                     required_skills=required_skills,
                     pool_mcq_total=pool_mcq_total,
@@ -610,7 +610,7 @@ class GenerateAssessmentView(APIView):
             if pool_coding_total > 0:
                 logger.info(f"Step 2: Generating {pool_coding_total} execution-verified coding challenges using Skeleton-Based Engine.")
                 generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_description,
                     required_skills=required_skills,
                     difficulties=pool_coding_tasks,
@@ -630,7 +630,7 @@ class GenerateAssessmentView(APIView):
                 else:
                     logger.info("Expert Gate: Cleaning and Refining MCQ pool as originally requested...")
                     mcq_refined_data = _expert_assessment_refiner(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
                         cancel_token=cancel_token
                     )
@@ -680,7 +680,7 @@ class GenerateAssessmentView(APIView):
                 
                 logger.info(f"\n🔧 SELF-HEALING REPAIR TRIGGERED:\n   Shortfalls detected: {', '.join(shortfall_details)}\n   Starting repair cycle...")
                 generated_data = _repair_pool_shortfall(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_description,
                     required_skills=required_skills,
                     pool=generated_data,
@@ -754,7 +754,7 @@ class GenerateAssessmentView(APIView):
                 # Trigger repair for the shortfall
                 try:
                     repair_generated = _repair_pool_shortfall(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         job_description=job_description,
                         required_skills=required_skills,
                         pool=generated_data,
@@ -848,7 +848,7 @@ class GenerateAssessmentView(APIView):
                 # Trigger repair for coding shortfall
                 try:
                     repair_generated = _repair_pool_shortfall(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         job_description=job_description,
                         required_skills=required_skills,
                         pool=generated_data,

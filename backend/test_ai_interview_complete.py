@@ -165,26 +165,25 @@ def test_tts_engine():
         return False
 
 def test_ai_response_generation():
-    """Test Groq AI response generation"""
-    print_header("TEST 4: AI Response Generation (Groq)")
+    """Test DeepSeek AI response generation"""
+    print_header("TEST 4: AI Response Generation (DeepSeek)")
     
     try:
-        from ai_assessments.ai_logic import GroqKeyManager, extract_json
-        import groq
+        from ai_assessments.llm_client import LLMKeyManager, create_llm_client, get_default_model, extract_json
         
         # Check key rotation
-        key = GroqKeyManager.get_current_key()
+        key = LLMKeyManager.get_current_key()
         if key:
-            print_result("Groq Key Manager", True, f"Key available: {key[:20]}...")
+            print_result("LLM Key Manager", True, f"Key available: {key[:20]}...")
         else:
-            print_result("Groq Key Manager", False, "No key available")
+            print_result("LLM Key Manager", False, "No key available")
             return False
         
         # Test simple completion
-        client = groq.Client(api_key=key)
+        client = create_llm_client(api_key=key)
         
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",  # Use smaller model for test
+            model=get_default_model(),
             messages=[{"role": "user", "content": "Say 'test successful' in JSON format with key 'status'"}],
             temperature=0.1,
             max_tokens=50,

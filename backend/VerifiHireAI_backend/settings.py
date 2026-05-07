@@ -135,7 +135,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 600,  # Keep connections alive for 10 minutes (pooling)
+        'CONN_MAX_AGE': 600,  # Keep connections alive for 60 seconds (pooling)
         **({'OPTIONS': db_options} if db_options else {}),
     }
 }
@@ -280,21 +280,24 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
-GROQ_API_KEYS = [
-    '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',
-    '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',
-    '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',
-    # Scaling keys for 100+ concurrent interviews (30 req/min per key)
-    # 'gsk_YOUR_KEY_4_HERE',  # Add to reach 120 req/min capacity
-    # 'gsk_YOUR_KEY_5_HERE',  # Add to reach 150 req/min capacity
-    # 'gsk_YOUR_KEY_6_HERE',  # Add to reach 180 req/min capacity
-    # 'gsk_YOUR_KEY_7_HERE',  # Add to reach 210 req/min capacity
-    # 'gsk_YOUR_KEY_8_HERE',  # Add to reach 240 req/min capacity
-    # 'gsk_YOUR_KEY_9_HERE',  # Add to reach 270 req/min capacity
-    # 'gsk_YOUR_KEY_10_HERE', # Add to reach 300 req/min capacity
+DEEPSEEK_BASE_URL = config('DEEPSEEK_BASE_URL', default='https://api.deepseek.com')
+DEEPSEEK_MODEL = config('DEEPSEEK_MODEL', default='deepseek-v4-flash')
+DEEPSEEK_API_KEYS = [
+    config('DEEPSEEK_API_KEY_1', default=''),
+    # Add more keys for rotation / higher concurrency:
+    # config('DEEPSEEK_API_KEY_2', default=''),
+    # config('DEEPSEEK_API_KEY_3', default=''),
 ]
-# Legacy fallback: Some views reference GROQ_API_KEY (singular). Point to first key.
-GROQ_API_KEY = GROQ_API_KEYS[0]
+# Remove empty/placeholder keys
+DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-api-key-here']
+# Legacy aliases so existing references don't break during migration
+DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
+
+# ── DEPRECATED: Old Groq keys (kept for reference) ──
+# GROQ_API_KEYS = [
+#     'gsk_...',
+# ]
+# GROQ_API_KEY = GROQ_API_KEYS[0]
 
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)

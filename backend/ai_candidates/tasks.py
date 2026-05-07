@@ -12,11 +12,13 @@ from celery import shared_task
 from django.conf import settings
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
-from groq import Groq
+from ai_assessments.llm_client import create_llm_client, LLMKeyManager, call_llm_with_backoff, get_default_model
 from .models import Candidate
 from .utils import log_automation_event
 from api.ocr_utils import _get_reader
-from ai_assessments.ai_logic import _call_groq_with_backoff, GroqKeyManager
+# Backward-compatible aliases
+GroqKeyManager = LLMKeyManager
+_call_groq_with_backoff = call_llm_with_backoff
 
 logger = logging.getLogger(__name__)
 
@@ -66,19 +68,19 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
     total = candidates.count()
     
     # 0. Setup Keys
-    api_keys = getattr(settings, 'GROQ_API_KEYS', [])
+    api_keys = getattr(settings, 'DEEPSEEK_API_KEYS', [])
     if not api_keys:
-        single_key = getattr(settings, 'GROQ_API_KEY', None)
+        single_key = getattr(settings, 'DEEPSEEK_API_KEY', None)
         api_keys = [single_key] if single_key else []
     
     if not api_keys:
-        logger.error("No GROQ_API_KEYS found!")
+        logger.error("No DEEPSEEK_API_KEYS found!")
         return
 
 
-    # FAST MODEL first, powerful one as fallback
-    primary_model = "llama-3.1-8b-instant"
-    fallback_model = "llama-3.3-70b-versatile"
+    # DeepSeek V4 Flash - single model, no fallback needed
+    primary_model = get_default_model()
+    fallback_model = get_default_model()
 
     print(f"\n🚀 STARTING OPTIMIZED BATCH: {total} candidates")
     print(f"🔑 Using {len(api_keys)} API keys with rotation.")
@@ -181,7 +183,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             try:
                 print(f"   🧠 AI Analysis ({current_model})...", end="", flush=True)
                 # Initialize a dummy client for the first attempt; helper will rotate if needed
-                temp_client = Groq(api_key=api_keys[0]) 
+                temp_client = create_llm_client(api_key=api_keys[0]) 
                 
                 # _call_groq_with_backoff now returns the content/dict directly
                 result = _call_groq_with_backoff(
@@ -312,12 +314,12 @@ def process_ai_interview_answer_task(self, candidate_id, answer_text, current_qu
         return {'error': 'Candidate not found'}
     
     # Get least-used API key for load balancing
-    api_key = GroqKeyManager.get_least_used_key()
-    local_groq_client = Groq(api_key=api_key)
+    api_key = LLMKeyManager.get_least_used_key()
+    local_llm_client = create_llm_client(api_key=api_key)
     
-    # Model configuration with fallback
-    PRIMARY_MODEL = "llama-3.3-70b-versatile"
-    FALLBACK_MODEL = "llama-3.1-8b-instant"
+    # Model configuration - DeepSeek V4 Flash (single model)
+    PRIMARY_MODEL = get_default_model()
+    FALLBACK_MODEL = get_default_model()
     COOLDOWN_SECONDS = 60
     
     # Check cooldown status
@@ -358,7 +360,7 @@ You must respond with a JSON object containing:
 
     try:
         # Process with AI
-        response = local_groq_client.chat.completions.create(
+        response = local_llm_client.chat.completions.create(
             model=chosen_model,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7,
@@ -428,16 +430,16 @@ You must respond with a JSON object containing:
         error_str = str(model_err).lower()
         if ("rate limit" in error_str or "429" in error_str):
             # Rotate key and retry
-            GroqKeyManager.rotate_key()
-            rotated_key = GroqKeyManager.get_current_key()
-            local_groq_client = Groq(api_key=rotated_key)
+            LLMKeyManager.rotate_key()
+            rotated_key = LLMKeyManager.get_current_key()
+            local_llm_client = create_llm_client(api_key=rotated_key)
             
             if chosen_model == PRIMARY_MODEL:
                 process_ai_interview_answer_task._fallback_until = _time.time() + COOLDOWN_SECONDS
                 logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL}")
             
             # Retry with fallback
-            response = local_groq_client.chat.completions.create(
+            response = local_llm_client.chat.completions.create(
                 model=FALLBACK_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,

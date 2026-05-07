@@ -15,7 +15,7 @@ openpyxl
 reportlab
 Pillow
 
-groq
+openai
 easyocr
 pymupdf
 celery

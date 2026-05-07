@@ -4,7 +4,7 @@ import PyPDF2
 
 import fitz  # PyMuPDF
 
-from groq import Groq
+from ai_assessments.llm_client import create_llm_client, LLMKeyManager, get_default_model
 
 import os
 
@@ -69,7 +69,7 @@ from .tasks import process_resume_batch_task
 
 # Looking at views.py it is usually defined at top.
 
-# groq_client = Groq(api_key=groq_api_key)
+# LLM client is now created via create_llm_client() from llm_client.py
 
 
 
@@ -986,11 +986,11 @@ class RetryFailedExtractionsView(APIView):
 
         # Fix: Use Key Rotation list
 
-        api_keys = getattr(settings, 'GROQ_API_KEYS', [])
+        api_keys = getattr(settings, 'DEEPSEEK_API_KEYS', [])
 
         if not api_keys:
 
-            single_key = getattr(settings, 'GROQ_API_KEY', None)
+            single_key = getattr(settings, 'DEEPSEEK_API_KEY', None)
 
             api_keys = [single_key] if single_key else []
 
@@ -1146,7 +1146,7 @@ class RetryFailedExtractionsView(APIView):
 
                 match_result = None
 
-                current_model = "llama-3.3-70b-versatile"
+                current_model = get_default_model()
 
                 
 
@@ -1154,7 +1154,7 @@ class RetryFailedExtractionsView(APIView):
 
                     try:
 
-                        temp_client = Groq(api_key=api_keys[key_index % len(api_keys)])
+                        temp_client = create_llm_client(api_key=api_keys[key_index % len(api_keys)])
 
                         print(f"   🤖 Calling AI ({current_model})...", end="", flush=True)
 
@@ -1194,11 +1194,9 @@ class RetryFailedExtractionsView(APIView):
 
                                 continue
 
-                            elif current_model == "llama-3.3-70b-versatile":
+                            else:
 
-                                print(f"\n   📉 All keys hit 70b limit. Using 8b fallback...")
-
-                                current_model = "llama-3.1-8b-instant"
+                                print(f"\n   📉 All keys exhausted. Retrying...")
 
                                 key_index = -1
 
@@ -2612,25 +2610,23 @@ class ProcessAnswerView(APIView):
 
 
 
-            # Lazy-load Groq for ProcessAnswerView using GroqKeyManager for key rotation
+            # Lazy-load LLM client for ProcessAnswerView using key rotation
 
-            from ai_assessments.ai_logic import GroqKeyManager
+            from ai_assessments.llm_client import LLMKeyManager
 
             import time as _time
 
+            local_api_key = LLMKeyManager.get_current_key()
 
-
-            local_api_key = GroqKeyManager.get_current_key()
-
-            local_groq_client = Groq(api_key=local_api_key)
+            local_llm_client = create_llm_client(api_key=local_api_key)
 
 
 
             # --- AUTO MODEL FALLBACK WITH KEY ROTATION ---
 
-            PRIMARY_MODEL = "llama-3.3-70b-versatile"
+            DEEPSEEK_MODEL = get_default_model()
 
-            FALLBACK_MODEL = "llama-3.1-8b-instant"
+            FALLBACK_MODEL = get_default_model()
 
             COOLDOWN_SECONDS = 60
 
@@ -2652,13 +2648,13 @@ class ProcessAnswerView(APIView):
 
             else:
 
-                chosen_model = PRIMARY_MODEL
+                chosen_model = DEEPSEEK_MODEL
 
 
 
             try:
 
-                response = local_groq_client.chat.completions.create(
+                response = local_llm_client.chat.completions.create(
 
                     model=chosen_model,
 
@@ -2678,15 +2674,15 @@ class ProcessAnswerView(APIView):
 
                     # Rotate to next key first
 
-                    GroqKeyManager.rotate_key()
+                    LLMKeyManager.rotate_key()
 
-                    rotated_key = GroqKeyManager.get_current_key()
+                    rotated_key = LLMKeyManager.get_current_key()
 
-                    local_groq_client = Groq(api_key=rotated_key)
+                    local_llm_client = create_llm_client(api_key=rotated_key)
 
 
 
-                    if chosen_model == PRIMARY_MODEL:
+                    if chosen_model == DEEPSEEK_MODEL:
 
                         # 70b hit rate limit → activate cooldown and retry with 8b immediately
 
@@ -2696,7 +2692,7 @@ class ProcessAnswerView(APIView):
 
                     
 
-                    response = local_groq_client.chat.completions.create(
+                    response = local_llm_client.chat.completions.create(
 
                         model=FALLBACK_MODEL,
 
@@ -2712,15 +2708,15 @@ class ProcessAnswerView(APIView):
 
                     # Bad key — rotate and retry once
 
-                    GroqKeyManager.rotate_key()
+                    LLMKeyManager.rotate_key()
 
-                    rotated_key = GroqKeyManager.get_current_key()
+                    rotated_key = LLMKeyManager.get_current_key()
 
-                    local_groq_client = Groq(api_key=rotated_key)
+                    local_llm_client = create_llm_client(api_key=rotated_key)
 
                     logger.warning(f"Bad API key detected, rotated to next key")
 
-                    response = local_groq_client.chat.completions.create(
+                    response = local_llm_client.chat.completions.create(
 
                         model=chosen_model,
 
@@ -3829,19 +3825,18 @@ class PanValidationView(APIView):
             except Exception as ocr_error:
                 logger.warning(f"EasyOCR failed: {str(ocr_error)}")
 
-            # If EasyOCR fails, try using Groq Vision
+            # If EasyOCR fails, try using DeepSeek Vision
             if not extracted_text:
                 try:
-                    from groq import Groq
-                    groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+                    llm_client = create_llm_client()
                     
                     import base64
                     buffered = io.BytesIO()
                     image.save(buffered, format="JPEG")
                     img_base64 = base64.b64encode(buffered.getvalue()).decode()
                     
-                    response = groq_client.chat.completions.create(
-                        model="llama-3.2-11b-vision-preview",
+                    response = llm_client.chat.completions.create(
+                        model=get_default_model(),
                         messages=[
                             {
                                 "role": "user",
@@ -3854,9 +3849,9 @@ class PanValidationView(APIView):
                         max_tokens=20
                     )
                     extracted_text = response.choices[0].message.content.upper().strip()
-                    logger.info(f"Groq Vision extracted text: {extracted_text}")
-                except Exception as groq_error:
-                    logger.warning(f"Groq Vision failed: {str(groq_error)}")
+                    logger.info(f"DeepSeek Vision extracted text: {extracted_text}")
+                except Exception as ds_error:
+                    logger.warning(f"DeepSeek Vision failed: {str(ds_error)}")
 
             # Extract PAN-like pattern from text
             pan_from_photo = None
@@ -4194,12 +4189,17 @@ class ProcessAnswerView(APIView):
             
             # Build minimal recent history (last 2 turns only for immediate context)
             recent_history = ""
-            if chat_history:
-                # Fallback calculation if frontend didn't pass turn_number
-                if not current_turn_number:
+            # RELIABLE TURN COUNTING: Use database-backed state if possible, otherwise count history
+            if candidate:
+                current_turn_number = candidate.total_questions + 1
+            elif not current_turn_number:
+                if chat_history:
                     ai_questions_count = sum(1 for h in chat_history if h.get('role') in ('ai', 'assistant') or h.get('sender') in ('ai', 'assistant'))
                     current_turn_number = ai_questions_count + 1
-                
+                else:
+                    current_turn_number = 1
+
+            if chat_history:
                 # Only last 2 exchanges for immediate context
                 for h in chat_history[-4:]:
                     role = h.get('role') or h.get('sender', 'unknown')
@@ -4289,31 +4289,31 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
     "score_reason": "1-sentence justification for the score"
 }}"""
 
-            # Lazy-load Groq for ProcessAnswerView using GroqKeyManager for key rotation
-            from ai_assessments.ai_logic import GroqKeyManager
+            # Lazy-load LLM client for ProcessAnswerView using key rotation
+            from ai_assessments.llm_client import LLMKeyManager
             import time as _time
 
             # Use least-used key for better load balancing with concurrent interviews
-            local_api_key = GroqKeyManager.get_least_used_key()
-            local_groq_client = Groq(api_key=local_api_key)
+            local_api_key = LLMKeyManager.get_least_used_key()
+            local_llm_client = create_llm_client(api_key=local_api_key)
 
             # --- AUTO MODEL FALLBACK WITH KEY ROTATION ---
-            PRIMARY_MODEL = "llama-3.3-70b-versatile"
-            FALLBACK_MODEL = "llama-3.1-8b-instant"
+            DEEPSEEK_MODEL = get_default_model()
+            FALLBACK_MODEL = get_default_model()
             COOLDOWN_SECONDS = 60
 
-            # Check if we're currently in cooldown from a previous 70b rate limit
+            # Check if we're currently in cooldown from a previous rate limit
             if not hasattr(ProcessAnswerView, '_fallback_until'):
                 ProcessAnswerView._fallback_until = 0
 
             if _time.time() < ProcessAnswerView._fallback_until:
                 chosen_model = FALLBACK_MODEL
-                logger.info(f"Using fallback model {FALLBACK_MODEL} (70b cooldown active for {int(ProcessAnswerView._fallback_until - _time.time())}s more)")
+                logger.info(f"Using fallback model {FALLBACK_MODEL} (cooldown active for {int(ProcessAnswerView._fallback_until - _time.time())}s more)")
             else:
-                chosen_model = PRIMARY_MODEL
+                chosen_model = DEEPSEEK_MODEL
 
             try:
-                response = local_groq_client.chat.completions.create(
+                response = local_llm_client.chat.completions.create(
                     model=chosen_model,
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.7,
@@ -4323,16 +4323,15 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                 error_str = str(model_err).lower()
                 if ("rate limit" in error_str or "429" in error_str):
                     # Rotate to next key first
-                    GroqKeyManager.rotate_key()
-                    rotated_key = GroqKeyManager.get_current_key()
-                    local_groq_client = Groq(api_key=rotated_key)
+                    LLMKeyManager.rotate_key()
+                    rotated_key = LLMKeyManager.get_current_key()
+                    local_llm_client = create_llm_client(api_key=rotated_key)
 
-                    if chosen_model == PRIMARY_MODEL:
-                        # 70b hit rate limit → activate cooldown and retry with 8b immediately
+                    if chosen_model == DEEPSEEK_MODEL:
                         ProcessAnswerView._fallback_until = _time.time() + COOLDOWN_SECONDS
-                        logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL} for {COOLDOWN_SECONDS}s")
+                        logger.warning(f"Rate-limited! Cooling down for {COOLDOWN_SECONDS}s")
                     
-                    response = local_groq_client.chat.completions.create(
+                    response = local_llm_client.chat.completions.create(
                         model=FALLBACK_MODEL,
                         messages=[{"role": "user", "content": prompt}],
                         temperature=0.7,
@@ -4340,11 +4339,11 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     )
                 elif "api_key" in error_str or "authentication" in error_str:
                     # Bad key — rotate and retry once
-                    GroqKeyManager.rotate_key()
-                    rotated_key = GroqKeyManager.get_current_key()
-                    local_groq_client = Groq(api_key=rotated_key)
+                    LLMKeyManager.rotate_key()
+                    rotated_key = LLMKeyManager.get_current_key()
+                    local_llm_client = create_llm_client(api_key=rotated_key)
                     logger.warning(f"Bad API key detected, rotated to next key")
-                    response = local_groq_client.chat.completions.create(
+                    response = local_llm_client.chat.completions.create(
                         model=chosen_model,
                         messages=[{"role": "user", "content": prompt}],
                         temperature=0.7,
@@ -4374,17 +4373,20 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     data[field] = _label_pattern.sub('', data[field]).strip()
             # -----------------------------------
 
-            # --- SAFETY GUARD: Prevent Question Looping ---
-            # If the candidate said "I don't know" or similar, and the AI tries to repeat the question 
-            # even while setting is_clarification=false, we force it to move on.
-            refined_q = data.get('refined_next_question')
-            if not data.get('is_clarification') and not data.get('is_exit'):
-                if refined_q == current_question or not refined_q:
-                    logger.warning(f"AI attempted to repeat question: {current_question}. Forcing move to next.")
-                    if remaining_questions:
-                        data['refined_next_question'] = remaining_questions[0]
-                    else:
-                        data['refined_next_question'] = "That's perfectly fine. Tell me about another project you've worked on recently."
+            # -----------------------------------------------
+
+            # --- HARD-CODED CATEGORY TRIGGERS ---
+            # Force code input UI for turns 12-13 to ensure the editor appears
+            if current_turn_number in [12, 13]:
+                data['requires_code_input'] = True
+                # Ensure the AI didn't accidentally set is_exit=True too early
+                data['is_exit'] = False
+            
+            # If turn >= 14, force exit
+            if current_turn_number >= 14:
+                data['is_exit'] = True
+                data['refined_next_question'] = "Thank you for your time. The interview is now complete."
+            # ------------------------------------
             # -----------------------------------------------
 
             # Scoring Update (Silent)
@@ -4985,19 +4987,18 @@ class PanValidationView(APIView):
             except Exception as ocr_error:
                 logger.warning(f"EasyOCR failed: {str(ocr_error)}")
 
-            # If EasyOCR fails, try using Groq Vision
+            # If EasyOCR fails, try using DeepSeek Vision
             if not extracted_text:
                 try:
-                    from groq import Groq
-                    groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+                    llm_client = create_llm_client()
                     
                     import base64
                     buffered = io.BytesIO()
                     image.save(buffered, format="JPEG")
                     img_base64 = base64.b64encode(buffered.getvalue()).decode()
                     
-                    response = groq_client.chat.completions.create(
-                        model="llama-3.2-11b-vision-preview",
+                    response = llm_client.chat.completions.create(
+                        model=get_default_model(),
                         messages=[
                             {
                                 "role": "user",
@@ -5010,9 +5011,9 @@ class PanValidationView(APIView):
                         max_tokens=20
                     )
                     extracted_text = response.choices[0].message.content.upper().strip()
-                    logger.info(f"Groq Vision extracted text: {extracted_text}")
-                except Exception as groq_error:
-                    logger.warning(f"Groq Vision failed: {str(groq_error)}")
+                    logger.info(f"DeepSeek Vision extracted text: {extracted_text}")
+                except Exception as ds_error:
+                    logger.warning(f"DeepSeek Vision failed: {str(ds_error)}")
 
             # Extract PAN-like pattern from text
             pan_from_photo = None

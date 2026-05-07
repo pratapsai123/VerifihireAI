@@ -15,7 +15,7 @@ def process_batch_assessment(batch_id):
     Generates ONE assessment pool for the entire batch based on who actually passed.
     Sends individual assessment invitation emails to each passed candidate.
     """
-    from groq import Groq
+    from ai_assessments.llm_client import create_llm_client, LLMKeyManager, get_default_model
     from ai_assessments.ai_logic import (
         _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool,
         _generate_mcq_pool_ai_only, _generate_execution_verified_coding_pool,
@@ -130,9 +130,9 @@ def process_batch_assessment(batch_id):
             pool_coding_tasks = coding_tasks_list * multiplier
 
             local_api_key = GroqKeyManager.get_current_key()
-            local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
+            local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
-            AI_MODEL = "llama-3.1-8b-instant"
+            AI_MODEL = get_default_model()
 
             # 1. BLACKLIST: Fetch last 20 assessments to avoid duplicate questions
             blacklist_mcqs = []
@@ -149,7 +149,7 @@ def process_batch_assessment(batch_id):
             if pool_mcq_total > 0:
                 logger.info(f"Pipeline[{batch_id}]: Step 1 — Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
                 mcqs = _generate_mcq_pool_ai_only(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_desc,
                     required_skills=assessment.required_skills,
                     pool_mcq_total=pool_mcq_total,
@@ -167,7 +167,7 @@ def process_batch_assessment(batch_id):
             if pool_coding_total > 0:
                 logger.info(f"Pipeline[{batch_id}]: Step 2 — Generating {pool_coding_total} execution-verified coding challenges.")
                 generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_desc,
                     required_skills=assessment.required_skills,
                     difficulties=pool_coding_tasks,
@@ -185,7 +185,7 @@ def process_batch_assessment(batch_id):
                 else:
                     logger.info(f"Pipeline[{batch_id}]: Expert Gate — Cleaning and Refining MCQ pool...")
                     mcq_refined_data = _expert_assessment_refiner(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
                         cancel_token=None
                     )
@@ -216,7 +216,7 @@ def process_batch_assessment(batch_id):
                 final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
                 logger.info(f"Pipeline[{batch_id}]: 🔧 SELF-HEALING REPAIR TRIGGERED")
                 generated_data = _repair_pool_shortfall(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=job_desc,
                     required_skills=assessment.required_skills,
                     pool=generated_data,
@@ -263,7 +263,7 @@ def process_batch_assessment(batch_id):
                 logger.warning(f"Pipeline[{batch_id}]: MCQ shortfall after cleanup ({final_mcqs}/{pool_mcq_total}). Triggering repair...")
                 try:
                     repair_generated = _repair_pool_shortfall(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         job_description=job_desc,
                         required_skills=assessment.required_skills,
                         pool=generated_data,
@@ -305,7 +305,7 @@ def process_batch_assessment(batch_id):
                 logger.warning(f"Pipeline[{batch_id}]: Coding shortfall after cleanup ({final_coding}/{pool_coding_total}). Triggering repair...")
                 try:
                     repair_generated = _repair_pool_shortfall(
-                        groq_client=local_groq_client,
+                        llm_client=local_llm_client,
                         job_description=job_desc,
                         required_skills=assessment.required_skills,
                         pool=generated_data,
@@ -490,7 +490,7 @@ def process_resume_passed(candidate_id):
     """
     Fallback for single/non-batch fully-automatic flows.
     """
-    from groq import Groq
+    from ai_assessments.llm_client import create_llm_client, LLMKeyManager, get_default_model
     from ai_assessments.ai_logic import (
         _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool,
         _generate_mcq_pool_ai_only, _generate_execution_verified_coding_pool,
@@ -562,9 +562,9 @@ def process_resume_passed(candidate_id):
         coding_tasks_list = [difficulty] * coding_count
 
         local_api_key = GroqKeyManager.get_current_key()
-        local_groq_client = Groq(api_key=local_api_key, timeout=60.0)
+        local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
         generated_data = {"mcqs": [], "coding_challenges": []}
-        AI_MODEL = "llama-3.1-8b-instant"
+        AI_MODEL = get_default_model()
 
         # 1. BLACKLIST: Fetch last 20 assessments to avoid duplicate questions
         blacklist_mcqs = []
@@ -581,7 +581,7 @@ def process_resume_passed(candidate_id):
         if pool_mcq_total > 0:
             logger.info(f"Pipeline[individual-{candidate_id}]: Step 1 — Generating MCQ pool of {pool_mcq_total} questions. Blacklist: {len(blacklist_mcqs)}")
             mcqs = _generate_mcq_pool_ai_only(
-                groq_client=local_groq_client,
+                llm_client=local_llm_client,
                 job_description=assessment.job_description,
                 required_skills=assessment.required_skills,
                 pool_mcq_total=pool_mcq_total,
@@ -599,7 +599,7 @@ def process_resume_passed(candidate_id):
         if pool_coding_total > 0:
             logger.info(f"Pipeline[individual-{candidate_id}]: Step 2 — Generating {pool_coding_total} execution-verified coding challenges.")
             generated_data['coding_challenges'] = _generate_execution_verified_coding_pool(
-                groq_client=local_groq_client,
+                llm_client=local_llm_client,
                 job_description=assessment.job_description,
                 required_skills=assessment.required_skills,
                 difficulties=coding_tasks_list,
@@ -617,7 +617,7 @@ def process_resume_passed(candidate_id):
             else:
                 logger.info(f"Pipeline[individual-{candidate_id}]: Expert Gate — Cleaning and Refining MCQ pool...")
                 mcq_refined_data = _expert_assessment_refiner(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     raw_content={"mcqs": generated_data['mcqs'], "coding_challenges": []},
                     cancel_token=None
                 )
@@ -648,7 +648,7 @@ def process_resume_passed(candidate_id):
             final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
             logger.info(f"Pipeline[individual-{candidate_id}]: 🔧 SELF-HEALING REPAIR TRIGGERED")
             generated_data = _repair_pool_shortfall(
-                groq_client=local_groq_client,
+                llm_client=local_llm_client,
                 job_description=assessment.job_description,
                 required_skills=assessment.required_skills,
                 pool=generated_data,
@@ -695,7 +695,7 @@ def process_resume_passed(candidate_id):
             logger.warning(f"Pipeline[individual-{candidate_id}]: MCQ shortfall after cleanup. Triggering repair...")
             try:
                 repair_generated = _repair_pool_shortfall(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=assessment.job_description,
                     required_skills=assessment.required_skills,
                     pool=generated_data,
@@ -737,7 +737,7 @@ def process_resume_passed(candidate_id):
             logger.warning(f"Pipeline[individual-{candidate_id}]: Coding shortfall after cleanup. Triggering repair...")
             try:
                 repair_generated = _repair_pool_shortfall(
-                    groq_client=local_groq_client,
+                    llm_client=local_llm_client,
                     job_description=assessment.job_description,
                     required_skills=assessment.required_skills,
                     pool=generated_data,

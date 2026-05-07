@@ -49,7 +49,9 @@ class RateLimiter:
 
 # Global rate limiters - scaled for 100+ concurrent interviews
 # Each key can handle 30 req/min, so with 3 keys = 90 req/min total
-groq_limiter = RateLimiter("groq_api", max_requests=90, window_seconds=60)
+llm_limiter = RateLimiter("llm_api", max_requests=90, window_seconds=60)
+# Backward-compatible alias
+groq_limiter = llm_limiter
 tts_limiter = RateLimiter("tts_api", max_requests=200, window_seconds=60)
 
 
