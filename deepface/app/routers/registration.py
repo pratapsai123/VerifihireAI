@@ -38,6 +38,7 @@ async def register_face_endpoint(request: FaceRegisterRequest):
         person_id=request.person_id,
         image_base64=request.image_base64,
         label=request.label,
+        overwrite=request.overwrite,
     )
 
     if not result["success"]:

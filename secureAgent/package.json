@@ -6,7 +6,7 @@
   "bin": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "pkg . --targets node18-win-x64 --output VerifiHireSecureAgent.exe && copy VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
+    "build": "pkg . --targets node18-win-x64 --output VerifiHireSecureAgent.exe && if not exist ..\\frontend\\build mkdir ..\\frontend\\build && copy VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
   },
   "pkg": {
     "assets": [

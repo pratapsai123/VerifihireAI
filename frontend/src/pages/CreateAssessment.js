@@ -16,7 +16,9 @@ const CreateAssessment = () => {
         num_mcqs: 10,
         num_coding: 1,
         coding_challenges: [{ id: 1, difficulty: 'Medium' }],
-        coding_time: 60,
+        mcq_time: 10,       // Auto-calculated: 1 min per MCQ, overridable
+        coding_time: 30,    // Manually entered by recruiter
+        mcqTimeManual: false, // Track if recruiter manually overrode MCQ time
         start_date: '',
         start_time: '',
         end_date: '',
@@ -158,10 +160,14 @@ const CreateAssessment = () => {
                     // MCQ was just re-added while coding is still 0, keep at 100% MCQ
                     newWeight = 100;
                 }
+                // Auto-calculate MCQ time (1 min per question) unless manually overridden
+                const autoMcqTime = prev.mcqTimeManual ? prev.mcq_time : (numVal || 0);
                 return {
                     ...prev,
                     num_mcqs: numVal,
-                    mcq_weight: newWeight
+                    mcq_weight: newWeight,
+                    mcq_time: autoMcqTime,
+                    mcqTimeManual: prev.mcqTimeManual
                 };
             });
             return;
@@ -217,8 +223,12 @@ const CreateAssessment = () => {
             alert('Please enter a valid number of Coding tasks.');
             return;
         }
-        if (!formData.coding_time) {
-            alert('Please enter a valid Total Time (Duration).');
+        if (!formData.mcq_time && formData.num_mcqs > 0) {
+            alert('Please enter a valid MCQ Time.');
+            return;
+        }
+        if (!formData.coding_time && formData.num_coding > 0) {
+            alert('Please enter a valid Coding Time.');
             return;
         }
         if (!formData.num_applicants) {
@@ -270,7 +280,8 @@ const CreateAssessment = () => {
             mcq_medium: mcqMix.medium,
             mcq_hard: mcqMix.hard,
             coding_tasks: formData.coding_challenges.map(c => c.difficulty),
-            duration: formData.coding_time,
+            mcq_duration: formData.mcq_time,
+            coding_duration: formData.coding_time,
             pass_threshold: formData.pass_threshold,
             total_possible_points: calculateTotalPoints(),
             num_applicants: formData.num_applicants,
@@ -397,7 +408,7 @@ const CreateAssessment = () => {
                     <SectionHeader title="Structure & Difficulty" />
 
                     {/* Reverted Parameter Row (from screenshot) */}
-                    <div className="parameters-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                    <div className="parameters-grid">
                         <div className="form-group">
                             <label>MCQ Questions</label>
                             <div className="input-with-marker">
@@ -430,14 +441,31 @@ const CreateAssessment = () => {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label>Total Time (Mins)</label>
-                            <div className="input-with-marker">
-                                <input
-                                    type="number" min="10" max="180"
-                                    value={formData.coding_time}
-                                    onChange={(e) => handleChange('coding_time', parseInt(e.target.value) || 0)}
-                                />
-                                <span className="marker">⌛</span>
+                            <label>Assessment Duration (Mins)</label>
+                            <div className="duration-split-box">
+                                <div className="duration-col" style={!formData.mcqTimeManual ? { background: '#F0FDF4' } : {}}>
+                                    <label>MCQ</label>
+                                    <input
+                                        type="number" min="1" max="120"
+                                        value={formData.mcq_time}
+                                        onChange={(e) => {
+                                            const val = parseInt(e.target.value) || 0;
+                                            setFormData(prev => ({ ...prev, mcq_time: val, mcqTimeManual: true }));
+                                        }}
+                                    />
+                                    <span className="mini-marker" style={!formData.mcqTimeManual ? { background: '#22c55e', color: 'white' } : {}}>
+                                        {!formData.mcqTimeManual ? 'AUTO' : 'MIN'}
+                                    </span>
+                                </div>
+                                <div className="duration-col">
+                                    <label>Coding</label>
+                                    <input
+                                        type="number" min="5" max="180"
+                                        value={formData.coding_time}
+                                        onChange={(e) => handleChange('coding_time', parseInt(e.target.value) || 0)}
+                                    />
+                                    <span className="mini-marker">MIN</span>
+                                </div>
                             </div>
                         </div>
                         <div className="form-group">
