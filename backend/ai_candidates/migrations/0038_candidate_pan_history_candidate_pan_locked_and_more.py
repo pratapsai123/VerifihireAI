@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='candidate',
             name='pan_number',
-            field=models.CharField(blank=True, help_text='PAN card number (10 characters) - Must be unique per candidate', max_length=10, null=True, unique=True),
+            field=models.CharField(blank=True, help_text='PAN card number (10 characters) - Must be unique per candidate', max_length=10, null=True),
         ),
     ]
