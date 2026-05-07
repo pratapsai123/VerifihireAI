@@ -348,13 +348,23 @@ def accept_invite_view(request):
         first_name = name_parts[0].strip()
         last_name = name_parts[1].strip() if len(name_parts) > 1 else ''
 
-        user = User.objects.create_user(
+        # Use get_or_create to handle the case where an auth_user already exists
+        # (e.g., the person was previously added as an interview panel member,
+        # which creates an auth_user row without a UserProfile).
+        user, auth_created = User.objects.get_or_create(
             username=email,
-            email=email,
-            password=new_password,
-            first_name=first_name,
-            last_name=last_name,
+            defaults={
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+            }
         )
+        # Always set the real password (panel-member accounts have a random temp password)
+        user.set_password(new_password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
 
         profile = UserProfile.objects.create(
             first_name=first_name,
@@ -696,15 +706,27 @@ def add_team_member_view(request):
         first_name = name_parts[0].strip()
         last_name = name_parts[1].strip() if len(name_parts) > 1 else ''
 
-        # Use a random password as they might not log in yet
+        # Use get_or_create to handle the case where an auth_user already exists
+        # (e.g., the person was previously added as an interview panel member,
+        # which creates an auth_user row without a UserProfile).
         temp_password = _generate_temp_password(12)
-        user = User.objects.create_user(
+        user, auth_created = User.objects.get_or_create(
             username=email,
-            email=email,
-            password=temp_password,
-            first_name=first_name,
-            last_name=last_name,
+            defaults={
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+            }
         )
+        if auth_created:
+            user.set_password(temp_password)
+            user.save()
+        else:
+            # Reuse the existing auth_user; update display fields if needed
+            user.first_name = first_name
+            user.last_name = last_name
+            user.email = email
+            user.save(update_fields=['first_name', 'last_name', 'email'])
 
         new_profile = UserProfile.objects.create(
             user=user,
