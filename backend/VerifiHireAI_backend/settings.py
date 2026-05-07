@@ -135,7 +135,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 600,  # Keep connections alive for 60 seconds (pooling)
+        'CONN_MAX_AGE': 60,  # Keep connections alive for 60 seconds (pooling)
         **({'OPTIONS': db_options} if db_options else {}),
     }
 }

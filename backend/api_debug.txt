@@ -4881,3 +4881,27 @@ Host: 127.0.0.1:8001
 [2026-05-07 09:54:30.118020+00:00] PUBLIC ACCESS: Token='375d9a83-d3e0-4314-af38-c8408668179d'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778147670092']}>
 Host: 127.0.0.1:8001
+
+[2026-05-07 11:30:11.445124+00:00] ERROR in GenerateAssessmentView: No DeepSeek API key configured. Set DEEPSEEK_API_KEY_1 in your .env or settings.py
+Traceback (most recent call last):
+  File "C:\Users\surya\Desktop\iit\VerifiHireAI\backend\ai_assessments\views.py", line 584, in post
+    local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
+  File "C:\Users\surya\Desktop\iit\VerifiHireAI\backend\ai_assessments\llm_client.py", line 124, in create_llm_client
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: No DeepSeek API key configured. Set DEEPSEEK_API_KEY_1 in your .env or settings.py
+
+RAW: No response received
+
+[2026-05-07 11:42:16.895987+00:00] PUBLIC ACCESS: Token='b4317dc6-47c1-4707-a688-7ec9c10aa620'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1778154136877']}>
+Host: 127.0.0.1:8001
+
+[2026-05-07 11:42:29.319451+00:00] PUBLIC ACCESS: Token='b4317dc6-47c1-4707-a688-7ec9c10aa620'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1778154149285']}>
+Host: 127.0.0.1:8001
+
+[2026-05-07 11:42:29.320156+00:00] PUBLIC ACCESS: Token='b4317dc6-47c1-4707-a688-7ec9c10aa620'
+Query Params: <QueryDict: {'email': ['suryateja3623@gmail.com'], '_t': ['1778154149288']}>
+Host: 127.0.0.1:8001
