@@ -2,7 +2,7 @@ from .._imports import *
 import uuid
 
 
-HEARTBEAT_TIMEOUT_SECONDS = 60
+HEARTBEAT_TIMEOUT_SECONDS = 600
 
 
 def _mark_timed_out(session):
@@ -14,10 +14,10 @@ def _mark_timed_out(session):
         elapsed = (timezone.now() - session.last_heartbeat).total_seconds()
         if elapsed > timeout:
             session.action = 'STOP'
-            session.reason = 'Policy violation: Secure Agent disconnected for more than 60 seconds.'
+            session.reason = 'Security session timed out: Secure Agent connection lost for more than 10 minutes. Please ensure a stable internet connection.'
             session.is_active = False
             session.save(update_fields=['action', 'reason', 'is_active', 'updated_at'])
-            print(f"[SECURITY_TIMEOUT] Session {session.session_id} stopped due to Agent silence.")
+            print(f"[SECURITY_TIMEOUT] Session {session.session_id} stopped due to persistent Agent silence (10min+).")
     return session
 
 
