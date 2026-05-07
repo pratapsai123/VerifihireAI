@@ -57,8 +57,71 @@ from api.utils.batch_utils import generate_batch_id, generate_batch_name
 import requests
 from api._imports import DEEPFACE_BASE_URL
 
+from django.http import FileResponse, Http404
 
-# Helper functions moved to ai_logic.py
+class ServeDeepFaceFaceView(APIView):
+    """
+    Directly serve the registered anchor face from the DeepFace data directory.
+    This ensures the UI always shows the AUTHENTIC registration photo.
+    """
+    def get(self, request, person_id):
+        import logging
+        logger = logging.getLogger(__name__)
+        from pathlib import Path
+        deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+        person_face_dir = deepface_data_dir / person_id
+        
+        logger.info(f"Serving face for {person_id}. Path: {person_face_dir}")
+        
+        if not person_face_dir.exists():
+            logger.warning(f"Identity folder NOT FOUND: {person_face_dir}")
+            raise Http404("Identity folder not found")
+            
+        # Try preferred registration snapshot names
+        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+            face_path = person_face_dir / name
+            if face_path.exists():
+                logger.info(f"Serving master face: {face_path}")
+                return FileResponse(open(face_path, 'rb'), content_type='image/jpeg')
+        
+        # Fallback to any jpg
+        jpgs = list(person_face_dir.glob('*.jpg'))
+        if jpgs:
+            logger.info(f"Serving fallback face: {jpgs[0]}")
+            return FileResponse(open(jpgs[0], 'rb'), content_type='image/jpeg')
+            
+        logger.error(f"No JPG found in folder: {person_face_dir}")
+        raise Http404("No face image found in folder")
+
+def _get_candidate_photo_url(request, submission):
+    """
+    Returns a direct URL to the ServeDeepFaceFaceView.
+    This bypasses database caching and sync issues.
+    """
+    email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+    if not email:
+        return None
+    
+    # Construct the person_id used for the folder name
+    token = str(submission.assessment.share_token) if submission.assessment else None
+    person_id = f"{email}_{token}" if token else email
+    
+    # Check if folder exists before returning URL to avoid 404s in UI
+    from pathlib import Path
+    deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+    if not (deepface_data_dir / person_id).exists():
+        # Fallback to legacy email folder
+        if not (deepface_data_dir / email).exists():
+            # If no folder exists, fall back to integrity screenshot (Absolute last resort)
+            from .models import AIAssessmentIntegrityScreenshot
+            snap = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp').first()
+            if snap and snap.webcam_screenshot:
+                return request.build_absolute_uri(snap.webcam_screenshot.url)
+            return None
+        person_id = email
+    
+    # Use the new direct-serving view
+    return request.build_absolute_uri(f"/api/ai/registration/face/{person_id}/")
 
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
@@ -71,67 +134,9 @@ from api.views import ensure_role_exists
 #     raise ValueError("GROQ_API_KEY must be set in settings.py")
 # groq_client = Groq(api_key=groq_api_key)
 
-def _get_candidate_photo_url(request, submission):
-    """
-    Helper to get the most reliable candidate photo URL.
-    Ensures Web View uses the EXACT SAME logic as PDF report:
-    1. Try to sync DeepFace folder image to IdentityLink if missing.
-    2. Serve from IdentityLink (Database backed ImageField).
-    3. Fallback to Integrity Screenshots.
-    """
-    email = submission.candidate_email.lower().strip() if submission.candidate_email else None
-    if not email:
-        return None
 
-    try:
-        from api.models import IdentityLink
-        from pathlib import Path
-        from django.core.files import File
+# Redundant helper removed. New version is at the top of the file.
         
-        identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
-        
-        # Auto-Sync: If photo is missing in DB but exists in DeepFace folder, sync it now.
-        # This makes the "First Captured Photo" available to the Web View.
-        if not identity or not identity.snapshot_image:
-            deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
-            person_face_dir = deepface_data_dir / email
-            if person_face_dir.exists():
-                # If identity didn't exist, create it
-                if not identity:
-                    identity = IdentityLink.objects.create(
-                        email=email,
-                        pan_number=submission.pan_number or 'UNKNOWN'
-                    )
-                
-                # Try to find and save the first JPG from the registration folder
-                for img_file in person_face_dir.glob('*.jpg'):
-                    try:
-                        with open(img_file, 'rb') as f:
-                            identity.snapshot_image.save(img_file.name, File(f), save=True)
-                        break # Sync complete
-                    except:
-                        continue
-        
-        if identity and identity.snapshot_image:
-            return request.build_absolute_uri(identity.snapshot_image.url)
-    except Exception as e:
-        logger.warning(f"Photo sync/retrieval failed for {email}: {e}")
-        pass
-        
-    # Fallback to Integrity Screenshots (Proctoring frames)
-    try:
-        shots = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp')
-        for shot in shots:
-            if shot.event_type and 'face_not_detected' in shot.event_type.lower():
-                continue
-            if shot.webcam_screenshot:
-                return request.build_absolute_uri(shot.webcam_screenshot.url)
-            elif shot.screenshot:
-                return request.build_absolute_uri(shot.screenshot.url)
-    except Exception:
-        pass
-        
-    return None
 
 class SubmitAssessmentView(APIView):
     def post(self, request):
@@ -530,7 +535,10 @@ class GenerateAssessmentView(APIView):
         # Log for debugging
         logger.info(f"Generated Assessment Config: MCQs={mcq_count} ({mcq_easy}/{mcq_medium}/{mcq_hard}), Coding={coding_count} ({coding_tasks})")
         
-        duration = int(data.get('duration', 60))
+        # Parse separate MCQ and Coding durations
+        mcq_duration = int(data.get('mcq_duration', mcq_count))  # Default: 1 min per MCQ
+        coding_duration = int(data.get('coding_duration', 30))    # Default: 30 min
+        duration = mcq_duration + coding_duration  # Total for backward compat
         total_possible_points = int(data.get('total_possible_points', 1000))
 
         if not job_description or not required_skills:
@@ -927,6 +935,8 @@ class GenerateAssessmentView(APIView):
                 coding_count=coding_count,
                 coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
+                mcq_duration_minutes=mcq_duration,
+                coding_duration_minutes=coding_duration,
                 total_points=total_possible_points,
                 num_applicants=num_applicants,
                 max_candidates_allowed=num_applicants,
@@ -1011,6 +1021,28 @@ def _register_face_with_deepface(person_id, snapshot_b64):
         print(f"DeepFace registration error for {person_id}: {str(e)}")
         return False
 
+def _verify_face_with_deepface_microservice(person_id, snapshot_b64):
+    """
+    Calls the DeepFace microservice to verify the candidate's face during re-entry.
+    """
+    try:
+        url = f"{DEEPFACE_BASE_URL}/registration/verify"
+        payload = {
+            "person_id": person_id,
+            "image_base64": snapshot_b64,
+            "model": "ArcFace"
+        }
+        resp = requests.post(url, json=payload, timeout=15)
+        if resp.status_code == 200:
+            result = resp.json()
+            return result.get('verified', False)
+        else:
+            print(f"DeepFace verification failed for {person_id}: {resp.text}")
+            return False
+    except Exception as e:
+        print(f"DeepFace verification error for {person_id}: {str(e)}")
+        return False
+
 class CreateSubmissionView(APIView):
     def post(self, request):
         token = request.data.get('share_token')
@@ -1052,13 +1084,15 @@ class CreateSubmissionView(APIView):
                 )
 
             # If an ONGOING session exists, reconnect the user instead of spawning a new one
-            submission = AIAssessmentSubmission.objects.filter(
+            existing_submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
                 candidate_email__iexact=email,
                 status='ONGOING'
             ).order_by('-id').first()
 
-            if not submission:
+            is_reconnect = bool(existing_submission)
+
+            if not existing_submission:
                 submission = AIAssessmentSubmission.objects.create(
                     assessment=assessment,
                     candidate_name=name,
@@ -1091,38 +1125,87 @@ class CreateSubmissionView(APIView):
                         logger.info(f"CreateSubmission: No matching Candidate record found for {email} in batch {assessment.batch_id}")
                 except Exception as sync_err:
                     logger.warning(f"Failed to cross-update candidate {email} on creation: {sync_err}")
+            else:
+                submission = existing_submission
                 
 
             # --- DEEPFACE REGISTRATION & IDENTITY STORAGE ---
-            # Do this every time a snapshot is provided, even for ongoing sessions
             if snapshot:
-                _register_face_with_deepface(email, snapshot)
+                person_id = f"{email}_{token}"
                 
-                # Store Identity Link for the report
+                # Double-check registration status directly from microservice for absolute security
                 try:
-                    from api.models import IdentityLink
-                    import base64
-                    from django.core.files.base import ContentFile
+                    check_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}"
+                    check_resp = requests.get(check_url, timeout=5)
+                    is_actually_registered = check_resp.status_code == 200 and check_resp.json().get('registered', False)
+                except:
+                    is_actually_registered = False
+
+                if is_actually_registered:
+                    # ALREADY REGISTERED -> Must Verify (Hard Block)
+                    is_verified = _verify_face_with_deepface_microservice(person_id, snapshot)
                     
-                    identity, created = IdentityLink.objects.get_or_create(
-                        email=email,
-                        pan_number=pan_number or 'UNKNOWN'
-                    )
+                    if not is_verified:
+                        # Capture Violation Screenshot
+                        try:
+                            import base64
+                            from django.core.files.base import ContentFile
+                            
+                            imgstr = snapshot
+                            ext = 'jpg'
+                            if ';' in snapshot and 'base64,' in snapshot:
+                                header, imgstr = snapshot.split(';base64,')
+                                ext = header.split('/')[-1]
+                                
+                            img_data = base64.b64decode(imgstr)
+                            integrity_snap = AIAssessmentIntegrityScreenshot(
+                                submission=submission,
+                                event_type="face_mismatch_on_reentry",
+                                violation_text="Identity Fraud (Face Mismatch on Re-entry)"
+                            )
+                            fname = f"ai_integrity_{submission.id}_mismatch_{int(timezone.now().timestamp())}.{ext}"
+                            integrity_snap.screenshot.save(fname, ContentFile(img_data), save=True)
+                            
+                            # Deduct integrity score
+                            submission.integrity_score = max(0, getattr(submission, 'integrity_score', 100) - 50)
+                            submission.save(update_fields=['integrity_score'])
+                        except Exception as e:
+                            logger.error(f"Failed to save re-entry identity violation: {e}")
+                            
+                        # HARD BLOCK
+                        return Response({
+                            'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
+                        }, status=status.HTTP_403_FORBIDDEN)
+                else:
+                    # NEW SUBMISSION -> Register anchor face for THIS ASSESSMENT
+                    person_id = f"{email}_{token}"
+                    _register_face_with_deepface(person_id, snapshot)
                     
-                    imgstr = snapshot
-                    ext = 'jpg'
-                    if ';' in snapshot and 'base64,' in snapshot:
-                        header, imgstr = snapshot.split(';base64,')
-                        ext = header.split('/')[-1]
+                    # Store Identity Link for the report
+                    try:
+                        from api.models import IdentityLink
+                        import base64
+                        from django.core.files.base import ContentFile
                         
-                    img_data = base64.b64decode(imgstr)
-                    cname = f"ai_reg_{email.replace('@','_')}_{int(timezone.now().timestamp())}.{ext}"
-                    identity.snapshot_image.save(cname, ContentFile(img_data), save=True)
-                    if pan_photo:
-                        identity.pan_image = pan_photo
-                        identity.save()
-                except Exception as e:
-                    logger.error(f"Failed to save IdentityLink in AI assessment: {e}")
+                        identity, created = IdentityLink.objects.get_or_create(
+                            email=email,
+                            pan_number=pan_number or 'UNKNOWN'
+                        )
+                        
+                        imgstr = snapshot
+                        ext = 'jpg'
+                        if ';' in snapshot and 'base64,' in snapshot:
+                            header, imgstr = snapshot.split(';base64,')
+                            ext = header.split('/')[-1]
+                            
+                        img_data = base64.b64decode(imgstr)
+                        cname = f"ai_reg_{email.replace('@','_')}_{int(timezone.now().timestamp())}.{ext}"
+                        identity.snapshot_image.save(cname, ContentFile(img_data), save=True)
+                        if pan_photo:
+                            identity.pan_image = pan_photo
+                            identity.save()
+                    except Exception as e:
+                        logger.error(f"Failed to save IdentityLink in AI assessment: {e}")
 
             # Only pick and lock questions if they haven't been locked yet
             if not submission.candidate_questions:
@@ -1155,18 +1238,29 @@ class CreateSubmissionView(APIView):
                 submission.save(update_fields=['candidate_questions'])
 
              
-            # Calculate time left
-            elapsed = timezone.now() - submission.started_at
-            duration_seconds = assessment.duration_minutes * 60
-            time_left = max(0, duration_seconds - int(elapsed.total_seconds()))
+            # Calculate time left — phase-aware
+            total_duration = assessment.duration_minutes * 60
+            elapsed_since_start = (timezone.now() - submission.started_at).total_seconds()
             
-            if time_left <= 0:
+            if elapsed_since_start >= total_duration:
                 return Response({"error": "Assessment time has expired."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Calculate individual phase time left
+            mcq_total = (assessment.mcq_duration_minutes or 10) * 60
+            coding_total = (assessment.coding_duration_minutes or 30) * 60
+            
+            mcq_left = max(0, mcq_total - submission.mcq_time_spent)
+            coding_left = max(0, coding_total - submission.coding_time_spent)
 
             return Response({
                 "submission_id": submission.id,
                 "status": "success",
-                "time_left": time_left,
+                "time_left": int(total_duration - elapsed_since_start), # total wall clock left
+                "mcq_duration": mcq_total,
+                "coding_duration": coding_total,
+                "mcq_time_left": mcq_left,
+                "coding_time_left": coding_left,
+                "current_phase": submission.current_phase,
                 "answers": submission.answers,
                 "current_question_index": submission.current_question_index,
                 "coding_results": (submission.results_breakdown or {}).get('coding_results', {}),
@@ -1312,9 +1406,30 @@ class SaveAssessmentProgressView(APIView):
                 submission.results_breakdown['coding_results'] = coding_results
             if code_drafts is not None:
                 submission.results_breakdown['code_drafts'] = code_drafts
+
+            # Update time tracking
+            now = timezone.now()
+            elapsed = int((now - submission.last_phase_switch).total_seconds())
+            
+            if submission.current_phase == 'mcq':
+                submission.mcq_time_spent += elapsed
+            else:
+                submission.coding_time_spent += elapsed
+            
+            submission.last_phase_switch = now
+
+            # Handle phase switch if requested
+            new_phase = request.data.get('current_phase')
+            if new_phase and new_phase in ['mcq', 'coding']:
+                submission.current_phase = new_phase
             
             submission.save()
-            return Response({"status": "progress saved"})
+            return Response({
+                "status": "progress saved",
+                "mcq_time_spent": submission.mcq_time_spent,
+                "coding_time_spent": submission.coding_time_spent,
+                "current_phase": submission.current_phase
+            })
         except AIAssessmentSubmission.DoesNotExist:
             return Response({"error": "Submission not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -1364,6 +1479,8 @@ class AssessmentListView(APIView):
                     "mcq_count": assessment.mcq_count,
                     "coding_count": assessment.coding_count,
                     "duration_minutes": assessment.duration_minutes,
+                    "mcq_duration_minutes": assessment.mcq_duration_minutes,
+                    "coding_duration_minutes": assessment.coding_duration_minutes,
                     "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                     "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
                     "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
@@ -1459,6 +1576,8 @@ class AssessmentDetailView(APIView):
                 "mcq_count": assessment.mcq_count,
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
+                "mcq_duration_minutes": assessment.mcq_duration_minutes,
+                "coding_duration_minutes": assessment.coding_duration_minutes,
                 "difficulty_level": assessment.difficulty_level,
                 "total_points": assessment.total_points,
                 "pass_threshold": assessment.pass_threshold,
@@ -1630,6 +1749,8 @@ class PublicAssessmentView(APIView):
                 "mcq_count": assessment.mcq_count,
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
+                "mcq_duration_minutes": assessment.mcq_duration_minutes,
+                "coding_duration_minutes": assessment.coding_duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": final_content,
                 "status": assessment.status,
@@ -2381,64 +2502,38 @@ class AIAssessmentReportDownloadView(APIView):
                 spaceAfter=10
             )))
 
-            # Get candidate photo - try DeepFace registered face first
+            # Get candidate photo - Direct Source of Truth
             candidate_img = None
-            person_id = submission.candidate_email.lower().strip() if submission.candidate_email else None
+            person_id = f"{submission.candidate_email.lower().strip()}_{assessment.share_token}" if assessment.share_token else submission.candidate_email.lower().strip()
             
-            if person_id:
-                try:
-                    # Try to fetch registered face from DeepFace service
-                    from pathlib import Path
-                    import requests
+            try:
+                from pathlib import Path
+                deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+                person_face_dir = deepface_data_dir / person_id
+                
+                # Check for specific anchor files
+                target_file = None
+                for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                    if (person_face_dir / name).exists():
+                        target_file = person_face_dir / name
+                        break
+                
+                if not target_file:
+                    # Fallback to any JPG in the registration folder
+                    jpgs = list(person_face_dir.glob('*.jpg'))
+                    if jpgs: target_file = jpgs[0]
                     
-                    # Check if deepface has a registered face endpoint to retrieve image
-                    deepface_img_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}"
-                    resp = requests.get(deepface_img_url, timeout=5)
-                    if resp.status_code == 200 and resp.json().get('registered'):
-                        # Try to find the registered face image file
-                        # DeepFace stores at: data/registered_faces/{person_id}/registration_snapshot.jpg
-                        deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
-                        person_face_dir = deepface_data_dir / person_id
-                        if person_face_dir.exists():
-                            # Look for the registration snapshot
-                            for img_file in person_face_dir.glob('*.jpg'):
-                                try:
-                                    candidate_img = RLImage(str(img_file), width=1.4*inch, height=1.4*inch)
-                                    break
-                                except:
-                                    continue
-                except Exception as e:
-                    pass  # Fall back to screenshots
-            
-            # Fallback 1: Try IdentityLink snapshot
-            if not candidate_img:
-                try:
+                if target_file:
+                    candidate_img = RLImage(str(target_file), width=1.4*inch, height=1.4*inch)
+                else:
+                    # Final fallback: IdentityLink DB
                     from api.models import IdentityLink
-                    identity = IdentityLink.objects.filter(email=submission.candidate_email).order_by('-updated_at').first()
+                    identity = IdentityLink.objects.filter(email__iexact=submission.candidate_email).order_by('-updated_at').first()
                     if identity and identity.snapshot_image:
                         candidate_img = RLImage(identity.snapshot_image.path, width=1.4*inch, height=1.4*inch)
-                except Exception:
-                    pass
-
-            # Fallback 2: Get from integrity screenshots (prefer webcam, avoid face_not_detected events)
-            if not candidate_img:
-                screenshots_qs = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp')
-                for shot in screenshots_qs:
-                    # Skip frames with no face detected
-                    if shot.event_type and 'face_not_detected' in shot.event_type.lower():
-                        continue
-                    if shot.webcam_screenshot:
-                        try:
-                            candidate_img = RLImage(shot.webcam_screenshot.path, width=1.4*inch, height=1.4*inch)
-                            break
-                        except:
-                            continue
-                    elif shot.screenshot:
-                        try:
-                            candidate_img = RLImage(shot.screenshot.path, width=1.4*inch, height=1.4*inch)
-                            break
-                        except:
-                            continue
+            except Exception as e:
+                logger.error(f"PDF Photo error for {person_id}: {e}")
+                pass
 
             # Get PAN Card image
             pan_img = None
@@ -2491,13 +2586,13 @@ class AIAssessmentReportDownloadView(APIView):
                 ('TOPPADDING', (0,0), (-1,-1), 7),
                 ('BOTTOMPADDING', (0,0), (-1,-1), 7),
                 ('LINEBELOW', (0,0), (-1,-2), 0.5, colors.HexColor("#E0E5F2")),
-                # Color coding for specific rows
-                ('TEXTCOLOR', (1,5), (1,5), integrity_color),
-                ('FONTNAME', (1,5), (1,5), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,6), (1,6), status_color),
-                ('FONTNAME', (1,6), (1,6), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,7), (1,7), status_color),
-                ('FONTNAME', (1,7), (1,7), 'Helvetica-Bold'),
+                # Color coding for specific rows (Indices updated for PAN fields)
+                ('TEXTCOLOR', (1,8), (1,8), integrity_color),
+                ('FONTNAME', (1,8), (1,8), 'Helvetica-Bold'),
+                ('TEXTCOLOR', (1,9), (1,9), status_color),
+                ('FONTNAME', (1,9), (1,9), 'Helvetica-Bold'),
+                ('TEXTCOLOR', (1,10), (1,10), status_color),
+                ('FONTNAME', (1,10), (1,10), 'Helvetica-Bold'),
             ]))
 
             # Photo section - Stacking Candidate Photo and PAN Card
@@ -2945,6 +3040,7 @@ class AIAssessmentResultsView(APIView):
                 'batch_name': s.batch_name or (a.batch_name if hasattr(a, 'batch_name') else None),
                 'is_fully_automatic': getattr(a, 'creation_type', 'manual') == 'automatic',
                 'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions,
+                'candidate_photo_url': _get_candidate_photo_url(request, s),
                 # PAN authentication fields
                 'phone': getattr(s, 'phone', None),
                 'pan_number': getattr(s, 'pan_number', None),

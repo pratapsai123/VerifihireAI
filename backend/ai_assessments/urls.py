@@ -5,10 +5,12 @@ from .views import (
     UpdateAssessmentIntegrityView, InviteAssessmentCandidatesView, GetInvitedCandidatesView,
     ProxyCodeExecuteView, AIAssessmentSubmissionDetailView, AIAssessmentSubmissionListView,
     SaveAssessmentProgressView, AIAssessmentAssignmentView, AIAssessmentAvailableInterviewersView,
-    CancelGenerationView, AIAssessmentReportDownloadView, AIAssessmentResultsView
+    CancelGenerationView, AIAssessmentReportDownloadView, AIAssessmentResultsView,
+    ServeDeepFaceFaceView
 )
 
 urlpatterns = [
+    path('registration/face/<str:person_id>/', ServeDeepFaceFaceView.as_view(), name='serve-deepface-face'),
     path('generate/', GenerateAssessmentView.as_view(), name='generate-assessment'),
     path('cancel-generation/', CancelGenerationView.as_view(), name='cancel-generation'),
     path('', AssessmentListView.as_view(), name='list-assessments'),

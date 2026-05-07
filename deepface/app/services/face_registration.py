@@ -81,17 +81,19 @@ def register_face(
     person_id: str,
     image_base64: str,
     label: Optional[str] = None,
+    overwrite: bool = False,
 ) -> Dict:
     """
     Register a face for a person.
 
     Extracts the face embedding using ArcFace and stores it.
-    If the person_id already exists, it will replace their old picture.
+    By default, it will NOT replace an existing registration unless overwrite=True.
 
     Args:
         person_id: Unique identifier for the person.
         image_base64: Base64-encoded face image.
         label: Optional label for this particular image.
+        overwrite: If True, existing data for this person_id will be wiped.
 
     Returns:
         Dict with success status, quality score, and embedding count.
@@ -100,6 +102,16 @@ def register_face(
     DeepFace = _get_deepface()
 
     try:
+        # 1. SECURITY CHECK: Prevent accidental overwriting of an existing identity
+        if is_registered(person_id) and not overwrite:
+            logger.warning(f"Registration Blocked: Identity {person_id} already exists. Use overwrite=True to replace.")
+            return {
+                "success": False,
+                "person_id": person_id,
+                "message": "This candidate is already registered. Re-registration is not allowed for security reasons.",
+                "embedding_count": _count_embeddings(person_id),
+            }
+
         # Decode and preprocess image
         img = decode_base64_image(image_base64)
         img = resize_image(img, max_width=640, max_height=480)
@@ -133,7 +145,7 @@ def register_face(
                 "embedding_count": _count_embeddings(person_id),
             }
 
-        # Wipe existing face embeddings so we RE-REGISTER and REPLACE them.
+        # Wipe existing face embeddings ONLY if overwrite is explicitly requested.
         import shutil
         person_dir = _get_person_dir(person_id)
         if person_dir.exists():
