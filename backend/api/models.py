@@ -536,7 +536,7 @@ class CustomAssessment(models.Model):
     assessment_mode = models.CharField(
         max_length=20,
         choices=ASSESSMENT_MODE_CHOICES,
-        default='single',
+        default='multiple',
         help_text="Single = resume-based flow, Multiple = role/sub-role based flow",
     )
     role = models.CharField(max_length=150)
