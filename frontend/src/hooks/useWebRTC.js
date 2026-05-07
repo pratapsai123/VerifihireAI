@@ -185,6 +185,12 @@ export const useWebRTC = (sendMessage, myUserId) => {
     if (!pc) return;
     
     try {
+      // 🔥 FIX: If PC is already stable, this answer is stale (from a rolled-back negotiation).
+      // Ignore it silently to prevent InvalidStateError.
+      if (pc.signalingState === 'stable') {
+        console.warn(`[WebRTC] Ignoring stale answer from ${userId} — PC already in stable state (glare resolved).`);
+        return;
+      }
       console.log(`📥 Handling answer from ${userId}`);
       await pc.setRemoteDescription(new RTCSessionDescription(description));
       

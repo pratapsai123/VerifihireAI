@@ -107,7 +107,14 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             # Track all participants in this session
             participants_key = f"interview_{self.session_id}_participants"
             participants = await database_sync_to_async(cache.get)(participants_key) or []
-            
+
+            # 🔥 FIX: Clean any stale entries for this same channel or duplicate user_id
+            # This handles the case where disconnect() hasn't fully fired before connect() runs
+            participants = [
+                p for p in participants
+                if p['user_id'] != self.user_id and p['channel_name'] != self.channel_name
+            ]
+
             new_participant = {
                 'user_id': self.user_id,
                 'role': self.role,
@@ -129,29 +136,33 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             
             await self.accept()
             logger.info(f"WebSocket connected: {self.user_id} ({self.participant_name}) for session {self.session_id}")
-            
-            # 🔥 Send initial session info
+
+            # Initialize or get start time for synchronization
+            start_time_key = f"interview_{self.session_id}_start_time"
+            start_time = await database_sync_to_async(cache.get)(start_time_key)
+            if not start_time:
+                start_time = timezone.now().isoformat()
+                await database_sync_to_async(cache.set)(start_time_key, start_time, timeout=86400)
+
+            # 🔥 FIX: Send ONE combined session_info with all fields (user_id, role, name,
+            # start_time, and the list of existing participants EXCLUDING the joiner)
+            existing_others = [p for p in participants if p['user_id'] != self.user_id]
             await self.send(text_data=json.dumps({
                 'type': 'session_info',
                 'user_id': self.user_id,
                 'role': self.role,
-                'name': self.participant_name
+                'name': self.participant_name,
+                'start_time': start_time,
+                'participants': existing_others
             }))
 
-            # 🔥 Notify room about new participant
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    'type': 'forward_message',
-                    'message': {
-                        'type': 'user_joined',
-                        'user_id': self.user_id,
-                        'user': self.participant_name,
-                        'role': self.role
-                    }
-                }
-            )
-            
+            # 🔥 FIX: Also send existing_participants as its own dedicated message
+            # (kept for backward compat but now always after session_info)
+            await self.send(text_data=json.dumps({
+                'type': 'existing_participants',
+                'participants': existing_others
+            }))
+
             # Send current screen share state to new connection
             session_state = await get_screen_share_state(self.session_id)
             if session_state.get('locked'):
@@ -160,42 +171,23 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     'active': True,
                     'holder': session_state.get('holder'),
                 }))
-            
-            # Initialize or get start time for synchronization
-            start_time_key = f"interview_{self.session_id}_start_time"
-            start_time = await database_sync_to_async(cache.get)(start_time_key)
-            if not start_time:
-                start_time = timezone.now().isoformat()
-                await database_sync_to_async(cache.set)(start_time_key, start_time, timeout=86400)
-            
-            # Send session info including start time and THEIR user_id to the connecting client
-            # Also send existing participants so they know who to connect to
-            await self.send(text_data=json.dumps({
-                'type': 'session_info',
-                'start_time': start_time,
-                'role': self.role,
-                'user_id': self.user_id,
-                'participants': [p for p in participants if p['user_id'] != self.user_id]
-            }))
-            
-            # Notify others
+
+            # 🔥 FIX: Notify OTHERS about new participant — use forward_message so the
+            # joiner's own channel is skipped (forward_message already filters sender_id)
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': 'user_joined',
-                    'user': self.participant_name,
-                    'user_id': self.user_id,
-                    'role': self.role,
-                    'session_id': self.session_id,
-                    'joined_at': new_participant['joined_at']
+                    'type': 'forward_message',
+                    'message': {
+                        'type': 'user_joined',
+                        'user_id': self.user_id,
+                        'user': self.participant_name,
+                        'role': self.role,
+                        'joined_at': new_participant['joined_at']
+                    },
+                    'sender_id': self.user_id,  # This causes forward_message to skip the sender
                 }
             )
-
-            # 🔥 Send existing participants to the joiner
-            await self.send(text_data=json.dumps({
-                'type': 'existing_participants',
-                'participants': [p for p in participants if p['user_id'] != self.user_id]
-            }))
         except Exception as e:
             logger.error(f"Error in WebSocket connect: {str(e)}", exc_info=True)
             try:

@@ -21,8 +21,8 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'http://127.0.0.1:3000/VerifiHireSecureAgent.exe';
-const MACOS_DOWNLOAD_URL = 'http://127.0.0.1:3000/VerifiHireSecureAgent.dmg';
+const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
+const MACOS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.dmg';
 
 // ── Version enforcement ─────────────────────────────────────────────────────
 // Update this value whenever you release a new .exe that candidates MUST use.
