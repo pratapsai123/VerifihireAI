@@ -120,7 +120,9 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 'role': self.role,
                 'name': self.participant_name,
                 'channel_name': self.channel_name,
-                'joined_at': timezone.now().isoformat()
+                'joined_at': timezone.now().isoformat(),
+                'is_camera_on': True,
+                'is_muted': False,
             }
             participants.append(new_participant)
             await database_sync_to_async(cache.set)(participants_key, participants, timeout=86400)
@@ -171,6 +173,16 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     'active': True,
                     'holder': session_state.get('holder'),
                 }))
+                
+                # 🔥 Also send screen_share_state to trigger layout for new joiner
+                if session_state.get('user_id'):
+                    await self.send(text_data=json.dumps({
+                        'type': 'screen_share_state',
+                        'active': True,
+                        'sender': session_state.get('holder'),
+                        'sender_id': session_state.get('user_id'),
+                        'streamId': session_state.get('stream_id'), # 🔥 Added streamId for joiners
+                    }))
 
             # 🔥 FIX: Notify OTHERS about new participant — use forward_message so the
             # joiner's own channel is skipped (forward_message already filters sender_id)
@@ -309,19 +321,39 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                         'type': 'chat_message',
                         'message': msg_content,
                         'sender': self.role,
+                        'sender_id': self.user_id, # 🔥 Added sender_id
                         'original_sender': original_sender,
                     }
                 )
             
             # Handle media state changes
             elif message_type == 'media_state':
+                media = data.get('media')
+                enabled = data.get('enabled')
+                
+                # 🔥 Update persisted state in participants list
+                participants_key = f"interview_{self.session_id}_participants"
+                participants = await database_sync_to_async(cache.get)(participants_key) or []
+                updated = False
+                for p in participants:
+                    if p['user_id'] == self.user_id:
+                        if media == 'camera':
+                            p['is_camera_on'] = enabled
+                        elif media == 'mic':
+                            p['is_muted'] = not enabled
+                        updated = True
+                        break
+                if updated:
+                    await database_sync_to_async(cache.set)(participants_key, participants, timeout=86400)
+
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         'type': 'media_state_change',
-                        'media': data.get('media'),
-                        'enabled': data.get('enabled'),
+                        'media': media,
+                        'enabled': enabled,
                         'sender': self.role,
+                        'sender_id': self.user_id,
                     }
                 )
             
@@ -364,11 +396,15 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 if data.get('active', False):
                     session_state['locked'] = True
                     session_state['holder'] = self.role
+                    session_state['user_id'] = self.user_id 
+                    session_state['stream_id'] = data.get('streamId') # 🔥 Store streamId
                     await set_screen_share_state(self.session_id, session_state)
                 else:
                     if session_state.get('holder') == self.role:
                         session_state['locked'] = False
                         session_state['holder'] = None
+                        session_state['user_id'] = None
+                        session_state['stream_id'] = None
                         await set_screen_share_state(self.session_id, session_state)
                 
                 # Broadcast state to all participants
@@ -378,6 +414,8 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                         'type': 'screen_share_state',
                         'active': data.get('active', False),
                         'sender': self.role,
+                        'sender_id': self.user_id,
+                        'streamId': data.get('streamId'), # 🔥 Forward streamId
                     }
                 )
             
@@ -526,6 +564,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             'type': 'chat',
             'message': event['message'],
             'sender': event['original_sender'],
+            'sender_id': event.get('sender_id'), # 🔥 Send sender_id to client
         }))
     
     async def media_state_change(self, event):
@@ -535,6 +574,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             'media': event['media'],
             'enabled': event['enabled'],
             'sender': event['sender'],
+            'sender_id': event.get('sender_id'), # 🔥 Send sender_id to client
         }))
     
     async def screen_share_request(self, event):
@@ -547,6 +587,8 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             'type': 'screen_share_state',
             'active': event['active'],
             'sender': event.get('sender'),
+            'sender_id': event.get('sender_id'),
+            'streamId': event.get('streamId'), # 🔥 Send streamId to client
         }))
     
     async def screen_share_lock(self, event):

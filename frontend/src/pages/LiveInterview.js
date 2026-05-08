@@ -133,8 +133,8 @@ function LiveInterview() {
 
   const {
     isScreenSharing, screenShareLocked, setScreenShareLocked, screenShareHolder, setScreenShareHolder,
-    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied
-  } = useScreenShare(peerConnectionsRef, localStreamRef, stableSendMessage, showSessionPopup, MY_ROLE);
+    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied, screenShareStreamRef
+  } = useScreenShare(peerConnectionsRef, localStreamRef, stableSendMessage, showSessionPopup, MY_ROLE, createVideoOffer);
 
   const handleEndInterview = useCallback(() => {
     stableSendMessage({ type: 'end_interview' });
@@ -161,7 +161,8 @@ function LiveInterview() {
                 const entry = { 
                     name: p.name || 'Participant', 
                     role: p.role, 
-                    isCameraOn: true, 
+                    isCameraOn: p.is_camera_on !== false, 
+                    isMuted: p.is_muted || false,
                     stream: null,
                     joinedAt: p.joined_at || Date.now()
                 };
@@ -171,10 +172,10 @@ function LiveInterview() {
                 // 🔥 FIX: Only create peer+offer NOW if local stream is already ready
                 if (localStreamRef.current) {
                     console.log(`🚀 Local stream ready — connecting immediately to ${p.user_id}`);
+                    const screenStream = isScreenSharing ? screenShareStreamRef.current : null;
                     createPeerConnection(p.user_id, (userId, stream) => {
-                        remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
-                        setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
-                    });
+                        handleRemoteStream(userId, stream);
+                    }, [screenStream]);
                     createVideoOffer(p.user_id);
                 } else {
                     console.log(`⏳ Local stream not ready yet — deferring connection to ${p.user_id}`);
@@ -251,21 +252,19 @@ function LiveInterview() {
         });
 
         console.log(`🚀 Creating peer for ${remoteUserId}`);
+        const currentScreenStream = isScreenSharing ? screenShareStreamRef.current : null;
         createPeerConnection(remoteUserId, (userId, stream) => {
-            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
-            setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
-        });
+            handleRemoteStream(userId, stream);
+        }, [currentScreenStream]);
         createVideoOffer(remoteUserId);
         break;
       }
       case 'video_offer':
         if (data.target === myUserIdRef.current) {
+          const currentScreenStream = isScreenSharing ? screenShareStreamRef.current : null;
           handleVideoOffer(data.sender_id, data.sdp, (userId, stream) => {
-              setRemoteParticipants(prev => ({
-                  ...prev,
-                  [userId]: { ...prev[userId], stream }
-              }));
-          });
+              handleRemoteStream(userId, stream);
+          }, [currentScreenStream]);
         }
         break;
       case 'video_answer':
@@ -279,7 +278,8 @@ function LiveInterview() {
         }
         break;
       case 'media_state':
-        if (data.sender_id !== myUserIdRef.current) {
+        // 🔥 Safety check: ensure sender_id exists and we already have this participant
+        if (data.sender_id && data.sender_id !== myUserIdRef.current && remoteParticipantsRef.current[data.sender_id]) {
           setRemoteParticipants(prev => ({
               ...prev,
               [data.sender_id]: { 
@@ -292,10 +292,19 @@ function LiveInterview() {
         break;
       case 'screen_share_state':
         if (data.sender_id !== myUserIdRef.current) {
-          setRemoteParticipants(prev => ({
-              ...prev,
-              [data.sender_id]: { ...prev[data.sender_id], isScreenSharing: !!data.active }
-          }));
+          setRemoteParticipants(prev => {
+              const p = prev[data.sender_id];
+              const updated = { 
+                  ...p, 
+                  isScreenSharing: !!data.active,
+                  screenStreamId: data.active ? data.streamId : null
+              };
+              // If stopped, cleanup screen stream
+              if (!data.active) updated.screenStream = null;
+              
+              remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [data.sender_id]: updated };
+              return { ...prev, [data.sender_id]: updated };
+          });
         }
         break;
       case 'screen_share_lock':
@@ -332,6 +341,34 @@ function LiveInterview() {
     }
   }, [myUserId, chatPanelVisible, sessionId, sessionKey, showSessionPopup, createPeerConnection, createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC, navigate, handleScreenShareGranted]);
 
+
+  // 🔥 Centralized Stream Router
+  const handleRemoteStream = useCallback((userId, stream) => {
+    setRemoteParticipants(prev => {
+        const p = prev[userId];
+        if (!p) return prev;
+
+        // Identification Logic:
+        // 1. If ID matches signaled screenStreamId
+        // 2. If track is video-only (screen share usually has no audio in this app)
+        // 3. If we already have a primary stream and this is a new one
+        const signaledIdMatch = p.screenStreamId === stream.id;
+        const isVideoOnly = stream.getAudioTracks().length === 0 && stream.getVideoTracks().length > 0;
+        
+        // We prioritize the signaled ID, then fallback to video-only detection for screen
+        const isScreen = signaledIdMatch || (p.stream && p.stream.id !== stream.id && isVideoOnly);
+
+        console.log(`[Stream Router] User: ${userId}, StreamID: ${stream.id}, isScreen: ${isScreen} (SignalMatch: ${signaledIdMatch}, VideoOnly: ${isVideoOnly})`);
+
+        const updated = {
+            ...p,
+            stream: isScreen ? p.stream : stream,
+            screenStream: isScreen ? stream : p.screenStream
+        };
+        remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: updated };
+        return { ...prev, [userId]: updated };
+    });
+  }, []);
 
   const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage, participantToken);
 
@@ -625,10 +662,12 @@ function LiveInterview() {
               remoteParticipants={remoteParticipants}
               localVideoRef={thumbnailVideoRef}
               localStreamRef={localStreamRef}
+              localScreenStream={screenShareStreamRef.current}
               isRemoteCameraOn={isRemoteCameraOn}
               isRemoteScreenSharing={isRemoteScreenSharing}
               bothPartiesConnected={bothPartiesConnected}
               isCameraOn={isCameraOn}
+              isLocalScreenSharing={isScreenSharing}
               localName={candidateName}
               localRole={MY_ROLE}
             />
