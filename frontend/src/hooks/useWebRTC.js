@@ -6,7 +6,7 @@ export const useWebRTC = (sendMessage, myUserId) => {
   const remoteStreamsRef = useRef({}); // { userId: MediaStream }
   const remoteIceQueuesRef = useRef({}); // { userId: [RTCIceCandidate] }
 
-  const createPeerConnection = useCallback((userId, onTrackCallback) => {
+  const createPeerConnection = useCallback((userId, onTrackCallback, additionalStreams = []) => {
     // 🔥 Cleanup existing connection for this user if any
     if (peerConnectionsRef.current[userId]) {
       console.log(`🧹 Cleaning up existing PC for ${userId}`);
@@ -48,17 +48,19 @@ export const useWebRTC = (sendMessage, myUserId) => {
         sendMessage({
           type: 'ice_candidate',
           candidate: event.candidate,
-          target: userId // 🔥 Targeted
+          target: userId 
         });
       }
     };
 
     peerConnection.ontrack = (event) => {
-      console.log(`🎥 Received track from ${userId}!`, event.track.kind);
+      console.log(`🎥 Received track from ${userId}!`, event.track.kind, 'Stream ID:', event.streams[0]?.id);
       const remoteStream = event.streams[0];
       if (remoteStream) {
+        // Store the last received stream in the ref for generic access
         remoteStreamsRef.current[userId] = remoteStream;
-        if (onTrackCallback) onTrackCallback(userId, remoteStream);
+        // Pass more context to the callback
+        if (onTrackCallback) onTrackCallback(userId, remoteStream, event);
       }
     };
 
@@ -66,16 +68,17 @@ export const useWebRTC = (sendMessage, myUserId) => {
         console.log(`❄️ ICE Connection [${userId}]:`, peerConnection.iceConnectionState);
     };
 
-    // Auto-add local tracks if stream exists
-    if (localStreamRef.current) {
-        localStreamRef.current.getTracks().forEach(track => {
-            // Check if already added
+    // Add all provided streams (usually [localStream, screenShareStream])
+    const streamsToAdd = [localStreamRef.current, ...additionalStreams].filter(Boolean);
+    streamsToAdd.forEach(stream => {
+        stream.getTracks().forEach(track => {
             const sender = peerConnection.getSenders().find(s => s.track === track);
             if (!sender) {
-                peerConnection.addTrack(track, localStreamRef.current);
+                console.log(`📡 Adding track ${track.kind} (${track.label}) to PC for ${userId}`);
+                peerConnection.addTrack(track, stream);
             }
         });
-    }
+    });
 
     return peerConnection;
   }, []);

@@ -19,14 +19,14 @@ function LiveInterviewInterviewer() {
   const [searchParams] = useSearchParams();
   const participantToken = searchParams.get('participant_token');
   const [sessionId, setSessionId] = useState(searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session');
-  
+
   const MY_ROLE = 'Interviewer';
   const role = 'interviewer';
   const sessionKey = `session_expired_${sessionId}`;
 
   const [candidateName, setCandidateName] = useState('Candidate');
   const [interviewerName, setInterviewerName] = useState('Interviewer');
-  
+
   // New state for invite flow
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -40,11 +40,11 @@ function LiveInterviewInterviewer() {
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
-  
+
   const [chatPanelVisible, setChatPanelVisible] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatUnreadCount, setChatUnreadCount] = useState(0);
-  
+
   const [showInterviewReport, setShowInterviewReport] = useState(false);
   const [showFeedbackSuccess, setShowFeedbackSuccess] = useState(false);
   const [ratings, setRatings] = useState({
@@ -132,15 +132,15 @@ function LiveInterviewInterviewer() {
   }, []);
 
   const {
-    peerConnectionsRef, localStreamRef, remoteStreamsRef, 
+    peerConnectionsRef, localStreamRef, remoteStreamsRef,
     createPeerConnection, removePeerConnection, initLocalStream,
     createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC
   } = useWebRTC(stableSendMessage, myUserId);
 
   const {
     isScreenSharing, screenShareLocked, setScreenShareLocked, screenShareHolder, setScreenShareHolder,
-    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied
-  } = useScreenShare(peerConnectionsRef, localStreamRef, stableSendMessage, showNotification, MY_ROLE);
+    toggleScreenShare, stopScreenSharing, handleScreenShareGranted, handleScreenShareDenied, screenShareStreamRef
+  } = useScreenShare(peerConnectionsRef, localStreamRef, stableSendMessage, showNotification, MY_ROLE, createVideoOffer);
 
   const handleEndInterview = useCallback((shouldSend = true) => {
     if (shouldSend) {
@@ -150,7 +150,7 @@ function LiveInterviewInterviewer() {
     if (shouldSend) {
       stableSendMessage({ type: 'end_interview' });
     }
-    
+
     stopWebRTC();
     setSessionExpired(true);
     localStorage.setItem(sessionKey, 'true');
@@ -162,7 +162,7 @@ function LiveInterviewInterviewer() {
         isInterviewer: true,
         totalTime: timer,
         isDraft: true
-      }, { withCredentials: true }).catch(() => {});
+      }, { withCredentials: true }).catch(() => { });
     } catch (e) { console.warn('Failed to persist total time on end:', e); }
 
     setShowInterviewReport(true);
@@ -183,47 +183,48 @@ function LiveInterviewInterviewer() {
       case 'existing_participants':
         console.log(`👥 ${data.participants.length} existing participants found`);
         data.participants.forEach(p => {
-            if (p.user_id !== myUserIdRef.current) {
-                const entry = { 
-                    name: p.name || 'Participant', 
-                    role: p.role, 
-                    isCameraOn: true, 
-                    stream: null,
-                    joinedAt: p.joined_at || Date.now()
-                };
-                // 🔥 FIX: Always update the ref synchronously
-                remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [p.user_id]: entry };
-                setRemoteParticipants(prev => ({ ...prev, [p.user_id]: entry }));
+          if (p.user_id !== myUserIdRef.current) {
+            const entry = {
+              name: p.name || 'Participant',
+              role: p.role,
+              isCameraOn: p.is_camera_on !== false,
+              isMuted: p.is_muted || false,
+              stream: null,
+              joinedAt: p.joined_at || Date.now()
+            };
+            // 🔥 FIX: Always update the ref synchronously
+            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [p.user_id]: entry };
+            setRemoteParticipants(prev => ({ ...prev, [p.user_id]: entry }));
 
-                // 🔥 FIX: Only create peer+offer NOW if local stream is already ready.
-                // If not ready, initializeMedia() will handle it after the stream is obtained.
-                if (localStreamRef.current) {
-                    console.log(`🚀 Local stream ready — connecting immediately to ${p.user_id}`);
-                    createPeerConnection(p.user_id, (userId, stream) => {
-                        remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
-                        setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
-                    });
-                    createVideoOffer(p.user_id);
-                } else {
-                    console.log(`⏳ Local stream not ready yet — deferring connection to ${p.user_id}`);
-                }
+            // 🔥 FIX: Only create peer+offer NOW if local stream is already ready.
+            // If not ready, initializeMedia() will handle it after the stream is obtained.
+            if (localStreamRef.current) {
+              console.log(`🚀 Local stream ready — connecting immediately to ${p.user_id}`);
+              const screenStream = isScreenSharing ? screenShareStreamRef.current : null;
+              createPeerConnection(p.user_id, (userId, stream) => {
+                handleRemoteStream(userId, stream);
+              }, [screenStream]);
+              createVideoOffer(p.user_id);
+            } else {
+              console.log(`⏳ Local stream not ready yet — deferring connection to ${p.user_id}`);
             }
+          }
         });
         break;
       case 'user_joined':
         showNotification(`${data.user} joined the session`);
         setBothPartiesConnected(true);
         setRemoteParticipants(prev => {
-            const entry = { 
-                ...(prev[data.user_id] || {}),
-                name: data.user || 'Participant', 
-                role: data.role,
-                isCameraOn: true,
-                stream: prev[data.user_id]?.stream || null,
-                joinedAt: Date.now()
-            };
-            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [data.user_id]: entry };
-            return { ...prev, [data.user_id]: entry };
+          const entry = {
+            ...(prev[data.user_id] || {}),
+            name: data.user || 'Participant',
+            role: data.role,
+            isCameraOn: true,
+            stream: prev[data.user_id]?.stream || null,
+            joinedAt: Date.now()
+          };
+          remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [data.user_id]: entry };
+          return { ...prev, [data.user_id]: entry };
         });
         break;
       case 'user_left':
@@ -245,32 +246,32 @@ function LiveInterviewInterviewer() {
         // 🔥 FIX: Check peer health by iceConnectionState AND whether remote tracks exist
         const existingPc = peerConnectionsRef.current[remoteUserId];
         if (existingPc) {
-            const hasRemoteTracks = existingPc.getReceivers().some(r => r.track && r.track.readyState === 'live');
-            const isHealthy = ['connected', 'completed'].includes(existingPc.iceConnectionState) && hasRemoteTracks;
-            if (isHealthy) {
-                console.log(`⚠️ Healthy peer with live tracks for ${remoteUserId}, skipping.`);
-                break;
-            }
-            console.log(`🧹 Stale/empty peer for ${remoteUserId} (ice=${existingPc.iceConnectionState}, hasTracks=${hasRemoteTracks}), recreating.`);
+          const hasRemoteTracks = existingPc.getReceivers().some(r => r.track && r.track.readyState === 'live');
+          const isHealthy = ['connected', 'completed'].includes(existingPc.iceConnectionState) && hasRemoteTracks;
+          if (isHealthy) {
+            console.log(`⚠️ Healthy peer with live tracks for ${remoteUserId}, skipping.`);
+            break;
+          }
+          console.log(`🧹 Stale/empty peer for ${remoteUserId} (ice=${existingPc.iceConnectionState}, hasTracks=${hasRemoteTracks}), recreating.`);
         }
 
         setRemoteParticipants(prev => {
-            const entry = {
-                ...(prev[remoteUserId] || {}),
-                name: data.user || prev[remoteUserId]?.name || 'Participant',
-                role: data.role || prev[remoteUserId]?.role,
-                stream: null,
-                joinedAt: prev[remoteUserId]?.joinedAt || Date.now()
-            };
-            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [remoteUserId]: entry };
-            return { ...prev, [remoteUserId]: entry };
+          const entry = {
+            ...(prev[remoteUserId] || {}),
+            name: data.user || prev[remoteUserId]?.name || 'Participant',
+            role: data.role || prev[remoteUserId]?.role,
+            stream: null,
+            joinedAt: prev[remoteUserId]?.joinedAt || Date.now()
+          };
+          remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [remoteUserId]: entry };
+          return { ...prev, [remoteUserId]: entry };
         });
 
         console.log(`🚀 Creating peer for ${remoteUserId}`);
+        const currentScreenStream = isScreenSharing ? screenShareStreamRef.current : null;
         createPeerConnection(remoteUserId, (userId, stream) => {
-            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: { ...remoteParticipantsRef.current[userId], stream } };
-            setRemoteParticipants(prev => ({ ...prev, [userId]: { ...prev[userId], stream } }));
-        });
+          handleRemoteStream(userId, stream);
+        }, [currentScreenStream]);
         createVideoOffer(remoteUserId);
         break;
       }
@@ -288,12 +289,10 @@ function LiveInterviewInterviewer() {
         break;
       case 'video_offer':
         if (data.target === myUserIdRef.current) {
+          const currentScreenStream = isScreenSharing ? screenShareStreamRef.current : null;
           handleVideoOffer(data.sender_id, data.sdp, (userId, stream) => {
-              setRemoteParticipants(prev => ({
-                  ...prev,
-                  [userId]: { ...prev[userId], stream }
-              }));
-          });
+            handleRemoteStream(userId, stream);
+          }, [currentScreenStream]);
         }
         break;
       case 'video_answer':
@@ -307,23 +306,31 @@ function LiveInterviewInterviewer() {
         }
         break;
       case 'media_state':
-        if (data.sender_id !== myUserIdRef.current) {
+        if (data.sender_id && data.sender_id !== myUserIdRef.current && remoteParticipantsRef.current[data.sender_id]) {
           setRemoteParticipants(prev => ({
-              ...prev,
-              [data.sender_id]: { 
-                  ...prev[data.sender_id], 
-                  isCameraOn: data.media === 'camera' ? data.enabled : prev[data.sender_id]?.isCameraOn,
-                  isMuted: data.media === 'mic' ? !data.enabled : prev[data.sender_id]?.isMuted
-              }
+            ...prev,
+            [data.sender_id]: {
+              ...prev[data.sender_id],
+              isCameraOn: data.media === 'camera' ? data.enabled : prev[data.sender_id]?.isCameraOn,
+              isMuted: data.media === 'mic' ? !data.enabled : prev[data.sender_id]?.isMuted
+            }
           }));
         }
         break;
       case 'screen_share_state':
         if (data.sender_id !== myUserIdRef.current) {
-          setRemoteParticipants(prev => ({
-              ...prev,
-              [data.sender_id]: { ...prev[data.sender_id], isScreenSharing: !!data.active }
-          }));
+          setRemoteParticipants(prev => {
+            const p = prev[data.sender_id];
+            const updated = {
+              ...p,
+              isScreenSharing: !!data.active,
+              screenStreamId: data.active ? data.streamId : null
+            };
+            if (!data.active) updated.screenStream = null;
+
+            remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [data.sender_id]: updated };
+            return { ...prev, [data.sender_id]: updated };
+          });
         }
         break;
       case 'screen_share_lock':
@@ -356,6 +363,28 @@ function LiveInterviewInterviewer() {
     }
   }, [myUserId, chatPanelVisible, sessionId, sessionKey, navigate, showNotification, createPeerConnection, createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC, handleScreenShareGranted]);
 
+  // 🔥 Centralized Stream Router
+  const handleRemoteStream = useCallback((userId, stream) => {
+    setRemoteParticipants(prev => {
+      const p = prev[userId];
+      if (!p) return prev;
+
+      const signaledIdMatch = p.screenStreamId === stream.id;
+      const isVideoOnly = stream.getAudioTracks().length === 0 && stream.getVideoTracks().length > 0;
+      const isScreen = signaledIdMatch || (p.stream && p.stream.id !== stream.id && isVideoOnly);
+
+      console.log(`[Stream Router] User: ${userId}, StreamID: ${stream.id}, isScreen: ${isScreen} (SignalMatch: ${signaledIdMatch}, VideoOnly: ${isVideoOnly})`);
+
+      const updated = {
+        ...p,
+        stream: isScreen ? p.stream : stream,
+        screenStream: isScreen ? stream : p.screenStream
+      };
+      remoteParticipantsRef.current = { ...remoteParticipantsRef.current, [userId]: updated };
+      return { ...prev, [userId]: updated };
+    });
+  }, []);
+
   const { socketRef, connectionStatus, sendMessage } = useWebSocket(sessionId, role, sessionExpired, handleMessage, participantToken);
 
   useEffect(() => {
@@ -365,19 +394,19 @@ function LiveInterviewInterviewer() {
   // Reconnect Cleanup
   useEffect(() => {
     if (connectionStatus === 'Disconnected') {
-       console.log('🧹 Cleaning up WebRTC due to final disconnection');
-       stopWebRTC();
-       setBothPartiesConnected(false);
-       setRemoteParticipants(prev => {
-          const cleaned = {};
-          Object.keys(prev).forEach(userId => {
-              cleaned[userId] = {
-                  ...prev[userId],
-                  stream: null
-              };
-          });
-          return cleaned;
-       });
+      console.log('🧹 Cleaning up WebRTC due to final disconnection');
+      stopWebRTC();
+      setBothPartiesConnected(false);
+      setRemoteParticipants(prev => {
+        const cleaned = {};
+        Object.keys(prev).forEach(userId => {
+          cleaned[userId] = {
+            ...prev[userId],
+            stream: null
+          };
+        });
+        return cleaned;
+      });
     }
   }, [connectionStatus, stopWebRTC]);
 
@@ -400,10 +429,10 @@ function LiveInterviewInterviewer() {
   const initializeMedia = useCallback(() => {
     setMediaLoading(true);
     setMediaError(false);
-    
+
     initLocalStream(true, true).then(stream => {
       setMediaLoading(false);
-      
+
       if (selfVideoRef.current) {
         selfVideoRef.current.srcObject = stream;
       }
@@ -426,7 +455,7 @@ function LiveInterviewInterviewer() {
     if (connectionStatus === 'Connected' && !localStreamRef.current && !sessionExpired && mediaLoading) {
       initializeMedia();
     }
-  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia]); 
+  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia]);
 
   const handleChatSend = useCallback((msgText) => {
     sendMessage({ type: 'chat', sender: interviewerName, message: msgText });
@@ -480,7 +509,7 @@ function LiveInterviewInterviewer() {
       return;
     }
     setRatings(prev => ({ ...prev, hireRecommendation: status }));
-    
+
     // Map frontend ratings/skills to backend expected fields
     const normalizeScore = (n) => {
       const val = parseInt(n, 10);
@@ -492,23 +521,23 @@ function LiveInterviewInterviewer() {
     const communicationSkill = normalizeScore(skills.find(s => s.name === 'Communication')?.score || 0);
 
     axios.post(`${API_BASE_URL}/submit-interview-feedback/`, {
-        token: sessionId,
-        feedback: feedback,
-        rating: ratings.overallRating,
-        technical_rating: technicalSkill,
-        communication_rating: communicationSkill,
-        team_fit_rating: 5, // Default or derived if possible
-        role: 'interviewer',
-        candidate: candidateName,
-        interviewer: interviewerName,
-        time: timer,
-        status: candidateHasJoinedRef.current ? 'joined' : 'not_joined'
+      token: sessionId,
+      feedback: feedback,
+      rating: ratings.overallRating,
+      technical_rating: technicalSkill,
+      communication_rating: communicationSkill,
+      team_fit_rating: 5, // Default or derived if possible
+      role: 'interviewer',
+      candidate: candidateName,
+      interviewer: interviewerName,
+      time: timer,
+      status: candidateHasJoinedRef.current ? 'joined' : 'not_joined'
     }).then(() => {
-        setShowInterviewReport(false);
-        setShowFeedbackSuccess(true);
+      setShowInterviewReport(false);
+      setShowFeedbackSuccess(true);
     }).catch(err => {
-        console.error('Submit feedback failed:', err);
-        showNotification('Failed to submit feedback. Retrying...', 'error');
+      console.error('Submit feedback failed:', err);
+      showNotification('Failed to submit feedback. Retrying...', 'error');
     });
   }, [ratings, skills, candidateName, interviewerName, timer, sessionId, navigate, showNotification]);
 
@@ -591,7 +620,7 @@ function LiveInterviewInterviewer() {
         <div className="feedback-modal interview-report-modal">
           <h2>Interview Report</h2>
           <p>Please provide your evaluation for {candidateName}</p>
-          
+
           <div className="ratings-section report-section">
             <h3 className="report-section-title">Overall Rating</h3>
             {[1, 2, 3, 4, 5].map(star => (
@@ -603,7 +632,7 @@ function LiveInterviewInterviewer() {
               ></i>
             ))}
           </div>
-          
+
           <div className="skills-section report-section">
             <h3 className="report-section-title">Skills Assessment</h3>
             {skills.map((skill, idx) => (
@@ -627,7 +656,7 @@ function LiveInterviewInterviewer() {
 
           <div className="feedback-section report-section">
             <h3 className="report-section-title">Detailed Feedback</h3>
-            <textarea 
+            <textarea
               value={feedback}
               onChange={e => setFeedback(e.target.value)}
               placeholder="Enter detailed feedback here..."
@@ -636,8 +665,8 @@ function LiveInterviewInterviewer() {
           </div>
 
           <div className="actions-section report-actions">
-             <button className="btn-submit report-btn-qualified" onClick={() => confirmEndInterview('Qualified')}>Qualified</button>
-             <button className="btn-submit report-btn-rejected" onClick={() => confirmEndInterview('Rejected')}>Rejected</button>
+            <button className="btn-submit report-btn-qualified" onClick={() => confirmEndInterview('Qualified')}>Qualified</button>
+            <button className="btn-submit report-btn-rejected" onClick={() => confirmEndInterview('Rejected')}>Rejected</button>
           </div>
         </div>
       </div>
@@ -646,97 +675,99 @@ function LiveInterviewInterviewer() {
 
   return (
     <ErrorBoundary>
-    <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
-      <div className="li-notifications-container">
-        {notifications.map(n => (
-          <div key={n.id} className={`li-notification ${n.severity}`}>
-            {n.message}
-          </div>
-        ))}
-      </div>
-
-      <header className="live-interview-header">
-        <div className="header-left"><h1>Live Interview (Interviewer View)</h1></div>
-        <div className="header-controls">
-          <button className="btn-invite-panelist" onClick={() => setShowInviteModal(true)}>
-            <i className="fas fa-user-plus"></i> Invite Panelist
-          </button>
-          <div className="timer">{timer}</div>
+      <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
+        <div className="li-notifications-container">
+          {notifications.map(n => (
+            <div key={n.id} className={`li-notification ${n.severity}`}>
+              {n.message}
+            </div>
+          ))}
         </div>
-      </header>
 
-      <div className="main-wrapper">
-        <div className="video-container">
-          {!mediaLoading && !mediaError && <ConnectionOverlay status={connectionStatus} />}
+        <header className="live-interview-header">
+          <div className="header-left"><h1>Live Interview (Interviewer View)</h1></div>
+          <div className="header-controls">
+            <button className="btn-invite-panelist" onClick={() => setShowInviteModal(true)}>
+              <i className="fas fa-user-plus"></i> Invite Panelist
+            </button>
+            <div className="timer">{timer}</div>
+          </div>
+        </header>
 
-          {mediaLoading && !mediaError && (
-            <div className="connection-overlay media-loading-overlay" style={{ zIndex: 50 }}>
-              <div className="media-loading-card" role="status" aria-live="polite" aria-atomic="true">
-                <i className="fas fa-circle-notch media-rotate-icon"></i>
-                <h3>Connecting...</h3>
-                <p>Please allow camera and microphone permissions in your browser prompt.</p>
-                {showMediaHint && (
-                  <p className="media-loading-hint">Still connecting. If no popup appears, check browser permission icon near URL bar.</p>
-                )}
+        <div className="main-wrapper">
+          <div className="video-container">
+            {!mediaLoading && !mediaError && <ConnectionOverlay status={connectionStatus} />}
+
+            {mediaLoading && !mediaError && (
+              <div className="connection-overlay media-loading-overlay" style={{ zIndex: 50 }}>
+                <div className="media-loading-card" role="status" aria-live="polite" aria-atomic="true">
+                  <i className="fas fa-circle-notch media-rotate-icon"></i>
+                  <h3>Connecting...</h3>
+                  <p>Please allow camera and microphone permissions in your browser prompt.</p>
+                  {showMediaHint && (
+                    <p className="media-loading-hint">Still connecting. If no popup appears, check browser permission icon near URL bar.</p>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {mediaError && (
-            <div className="connection-overlay" style={{ background: 'rgba(15,23,42,0.95)', zIndex: 100 }}>
-              <i className="fas fa-exclamation-circle" style={{ color: '#ef4444', fontSize: '48px', marginBottom: '20px' }}></i>
-              <h3>Camera or Microphone Blocked</h3>
-              <p style={{ maxWidth: '400px', marginBottom: '20px' }}>We couldn't access your camera or microphone. Please check your browser permissions and try again.</p>
-              <button 
-                onClick={initializeMedia}
-                style={{ padding: '10px 24px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}
-              >
-                Retry Permissions
-              </button>
-            </div>
-          )}
-          
-          <VideoPanel 
-            remoteParticipants={remoteParticipants}
-            localVideoRef={selfVideoRef}
-            localStreamRef={localStreamRef}
-            isRemoteCameraOn={isRemoteCameraOn}
-            isRemoteScreenSharing={isRemoteScreenSharing}
-            bothPartiesConnected={bothPartiesConnected}
-            isCameraOn={isCameraOn}
+            {mediaError && (
+              <div className="connection-overlay" style={{ background: 'rgba(15,23,42,0.95)', zIndex: 100 }}>
+                <i className="fas fa-exclamation-circle" style={{ color: '#ef4444', fontSize: '48px', marginBottom: '20px' }}></i>
+                <h3>Camera or Microphone Blocked</h3>
+                <p style={{ maxWidth: '400px', marginBottom: '20px' }}>We couldn't access your camera or microphone. Please check your browser permissions and try again.</p>
+                <button
+                  onClick={initializeMedia}
+                  style={{ padding: '10px 24px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}
+                >
+                  Retry Permissions
+                </button>
+              </div>
+            )}
+
+            <VideoPanel
+              remoteParticipants={remoteParticipants}
+              localVideoRef={selfVideoRef}
+              localStreamRef={localStreamRef}
+              localScreenStream={screenShareStreamRef.current}
+              isRemoteCameraOn={isRemoteCameraOn}
+              isRemoteScreenSharing={isRemoteScreenSharing}
+              bothPartiesConnected={bothPartiesConnected}
+              isCameraOn={isCameraOn}
+              isLocalScreenSharing={isScreenSharing}
+              localName={interviewerName}
+              localRole={MY_ROLE}
+            />
+          </div>
+
+          <ChatPanel
+            chatPanelVisible={chatPanelVisible}
+            setChatPanelVisible={setChatPanelVisible}
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
+            onSendMessage={handleChatSend}
+            sessionId={sessionId}
             localName={interviewerName}
-            localRole={MY_ROLE}
           />
         </div>
 
-        <ChatPanel 
+        <ControlBar
+          isMuted={isMuted}
+          isCameraOn={isCameraOn}
+          isScreenSharing={isScreenSharing}
           chatPanelVisible={chatPanelVisible}
+          chatUnreadCount={chatUnreadCount}
+          MY_ROLE={MY_ROLE}
+          screenShareLocked={screenShareLocked}
+          screenShareHolder={screenShareHolder}
+          toggleMic={toggleMic}
+          toggleCamera={toggleCamera}
+          toggleScreenShare={toggleScreenShare}
           setChatPanelVisible={setChatPanelVisible}
-          chatMessages={chatMessages}
-          setChatMessages={setChatMessages}
-          onSendMessage={handleChatSend}
-          sessionId={sessionId}
-          localName={interviewerName}
+          handleEndInterview={handleEndInterview}
         />
+
       </div>
-
-      <ControlBar 
-        isMuted={isMuted}
-        isCameraOn={isCameraOn}
-        isScreenSharing={isScreenSharing}
-        chatPanelVisible={chatPanelVisible}
-        chatUnreadCount={chatUnreadCount}
-        MY_ROLE={MY_ROLE}
-        screenShareLocked={screenShareLocked}
-        screenShareHolder={screenShareHolder}
-        toggleMic={toggleMic}
-        toggleCamera={toggleCamera}
-        toggleScreenShare={toggleScreenShare}
-        setChatPanelVisible={setChatPanelVisible}
-        handleEndInterview={handleEndInterview}
-      />
-
-    </div>
     </ErrorBoundary>
   );
 }

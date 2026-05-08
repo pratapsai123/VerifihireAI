@@ -1,10 +1,11 @@
 import { useState, useCallback, useRef } from 'react';
 
-export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, showNotification, MY_ROLE) => {
+export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, showNotification, MY_ROLE, createVideoOffer) => {
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
   const screenShareStreamRef = useRef(null);
+  const screenShareSendersRef = useRef({}); // { userId: RTCRtpSender }
   const pendingScreenShareGrantResolverRef = useRef(null);
 
   const toggleScreenShare = useCallback(async () => {
@@ -46,25 +47,29 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
 
         const videoTrack = screenShareStream.getVideoTracks()[0];
         
-        // 🔥 Apply to ALL peer connections
+        // 🔥 ADD track to ALL peer connections (don't replace camera)
         const pcs = peerConnectionsRef.current || {};
         for (const userId in pcs) {
           const pc = pcs[userId];
-          const senders = pc.getSenders();
-          const videoSender = senders.find(s => s.track && s.track.kind === 'video');
-
-          if (videoSender) {
-            await videoSender.replaceTrack(videoTrack);
-          } else {
-            pc.addTrack(videoTrack, screenShareStream);
-            // Must re-negotiate if adding new track
-            const offer = await pc.createOffer();
-            await pc.setLocalDescription(offer);
-            sendMessage({ type: 'video_offer', sdp: offer, target: userId });
+          try {
+            const sender = pc.addTrack(videoTrack, screenShareStream);
+            screenShareSendersRef.current[userId] = sender;
+            
+            // 🔥 Trigger re-negotiation
+            if (createVideoOffer) {
+              await createVideoOffer(userId);
+            }
+          } catch (e) {
+            console.error(`Error adding screen track for ${userId}:`, e);
           }
         }
 
-        sendMessage({ type: 'screen_share_state', active: true });
+        // Broadcast state with stream ID so others can identify it
+        sendMessage({ 
+          type: 'screen_share_state', 
+          active: true, 
+          streamId: screenShareStream.id 
+        });
 
         if (videoTrack) {
           videoTrack.onended = () => stopScreenSharing();
@@ -77,7 +82,7 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
     } else {
       stopScreenSharing();
     }
-  }, [isScreenSharing, screenShareLocked, screenShareHolder, MY_ROLE, sendMessage, showNotification, peerConnectionsRef]);
+  }, [isScreenSharing, screenShareLocked, screenShareHolder, MY_ROLE, sendMessage, showNotification, peerConnectionsRef, createVideoOffer]);
 
   const stopScreenSharing = useCallback(async () => {
     if (screenShareStreamRef.current) {
@@ -92,26 +97,34 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
     sendMessage({ type: 'screen_share_state', active: false });
     sendMessage({ type: 'screen_share_release' });
 
-    // Restore camera track for ALL peers
-    if (localStreamRef.current) {
-      const videoTrack = localStreamRef.current.getVideoTracks()[0];
-      if (videoTrack) {
-        videoTrack.enabled = true;
-        const pcs = peerConnectionsRef.current || {};
-        for (const userId in pcs) {
-          const pc = pcs[userId];
-          try {
-            const sender = pc.getSenders().find(s => s.track && s.track.kind === 'video');
-            if (sender) {
-              await sender.replaceTrack(videoTrack);
-            }
-          } catch (e) {
-            console.warn(`Failed to restore camera for ${userId}:`, e);
+    // Remove screen track from ALL peers and re-negotiate
+    const pcs = peerConnectionsRef.current || {};
+    for (const userId in pcs) {
+      const pc = pcs[userId];
+      const sender = screenShareSendersRef.current[userId];
+      if (sender && pc.signalingState !== 'closed') {
+        try {
+          pc.removeTrack(sender);
+          delete screenShareSendersRef.current[userId];
+          
+          // Re-negotiate after removal
+          if (createVideoOffer) {
+            await createVideoOffer(userId);
           }
+        } catch (e) {
+          console.warn(`Failed to remove screen track for ${userId}:`, e);
         }
       }
     }
-  }, [sendMessage, peerConnectionsRef, localStreamRef]);
+
+    // Ensure camera track is still active and enabled
+    if (localStreamRef.current) {
+      const cameraTrack = localStreamRef.current.getVideoTracks()[0];
+      if (cameraTrack) {
+        cameraTrack.enabled = true;
+      }
+    }
+  }, [sendMessage, peerConnectionsRef, localStreamRef, createVideoOffer]);
 
   // Handle incoming screen share granted message
   const handleScreenShareGranted = useCallback(() => {
