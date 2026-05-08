@@ -9,7 +9,8 @@ import { API_BASE_URL } from '../apiConfig';
  * @param {string} token - Assessment invitation token.
  * @param {string} currentCode - Current code in the editor.
  */
-export const useMalpracticeDetection = (token, currentCode) => {
+export const useMalpracticeDetection = (token, currentCode, options = {}) => {
+  const { allowCopyPaste = false } = options;
   const [suspicionScore, setSuspicionScore] = useState(0);
   const [reasons, setReasons] = useState([]);
   
@@ -39,7 +40,7 @@ export const useMalpracticeDetection = (token, currentCode) => {
     if (e.key === 'Backspace') backspaceCount.current += 1;
 
     // Security: Block certain shortcuts
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
+    if (!allowCopyPaste && (e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
       e.preventDefault();
       behaviorBuffer.current.push({
         type: 'blocked_shortcut',
@@ -48,7 +49,7 @@ export const useMalpracticeDetection = (token, currentCode) => {
       });
       return false;
     }
-  }, []);
+  }, [allowCopyPaste]);
 
   // --- 2. Focus & Tab Monitoring ---
   const handleVisibilityChange = useCallback(() => {
@@ -183,10 +184,14 @@ export const useMalpracticeDetection = (token, currentCode) => {
     document.addEventListener('visibilitychange', handleVisibilityChange, { capture: true });
     window.addEventListener('blur', handleBlur, { capture: true });
     window.addEventListener('focus', handleFocus, { capture: true });
-    window.addEventListener('contextmenu', blockContextMenu, { capture: true });
-    window.addEventListener('copy', blockCopyPaste, { capture: true });
-    window.addEventListener('paste', blockCopyPaste, { capture: true });
-    window.addEventListener('cut', blockCopyPaste, { capture: true });
+    
+    if (!allowCopyPaste) {
+      window.addEventListener('contextmenu', blockContextMenu, { capture: true });
+      window.addEventListener('copy', blockCopyPaste, { capture: true });
+      window.addEventListener('paste', blockCopyPaste, { capture: true });
+      window.addEventListener('cut', blockCopyPaste, { capture: true });
+    }
+    
     document.addEventListener('fullscreenchange', handleFullscreenChange, { capture: true });
 
     batchInterval.current = setInterval(sendBatch, 7000); // Every 7 seconds
@@ -196,10 +201,14 @@ export const useMalpracticeDetection = (token, currentCode) => {
       document.removeEventListener('visibilitychange', handleVisibilityChange, { capture: true });
       window.removeEventListener('blur', handleBlur, { capture: true });
       window.removeEventListener('focus', handleFocus, { capture: true });
-      window.removeEventListener('contextmenu', blockContextMenu, { capture: true });
-      window.removeEventListener('copy', blockCopyPaste, { capture: true });
-      window.removeEventListener('paste', blockCopyPaste, { capture: true });
-      window.removeEventListener('cut', blockCopyPaste, { capture: true });
+      
+      if (!allowCopyPaste) {
+        window.removeEventListener('contextmenu', blockContextMenu, { capture: true });
+        window.removeEventListener('copy', blockCopyPaste, { capture: true });
+        window.removeEventListener('paste', blockCopyPaste, { capture: true });
+        window.removeEventListener('cut', blockCopyPaste, { capture: true });
+      }
+      
       document.removeEventListener('fullscreenchange', handleFullscreenChange, { capture: true });
       clearInterval(batchInterval.current);
 
@@ -208,7 +217,7 @@ export const useMalpracticeDetection = (token, currentCode) => {
       // Send final batch on unmount
       sendBatch();
     };
-  }, [handleKeyDown, handleVisibilityChange, handleBlur, handleFocus, sendBatch, handleFullscreenChange]);
+  }, [handleKeyDown, handleVisibilityChange, handleBlur, handleFocus, sendBatch, handleFullscreenChange, allowCopyPaste]);
 
 
   return { suspicionScore, reasons, requestFullscreen };

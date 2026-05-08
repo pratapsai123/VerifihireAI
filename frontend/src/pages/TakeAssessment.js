@@ -592,7 +592,8 @@ export default function TakeAssessment() {
   // Integrated Malpractice Detection Module
   const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
     token,
-    activeCoding ? codingState.codeById[String(activeCoding.id)] : ''
+    activeCoding ? codingState.codeById[String(activeCoding.id)] : '',
+    { allowCopyPaste: true } // Temporarily allow for standard assessments
   );
 
 
@@ -2042,7 +2043,7 @@ export default function TakeAssessment() {
                           language={monacoLanguage(activeLanguage)}
                           value={activeCode}
                           options={{
-                            contextmenu: false,
+                            contextmenu: true,
                             fontSize: 14,
                             minimap: { enabled: false },
                             scrollBeyondLastLine: false,

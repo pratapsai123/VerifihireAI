@@ -12,7 +12,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [searchParams] = useSearchParams();
   const token = params.token || searchParams.get('token');
   const navigate = useNavigate();
-  
+
   // Helper to build precheck URL with preserved query params (name, email)
   const buildPrecheckUrl = (token, sessionType) => {
     const name = searchParams.get('name');
@@ -68,7 +68,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       );
       if (sessionRecord) {
         stopLocalMonitor({ session_id: sessionRecord.session_id, user_id: sessionRecord.user_id })
-          .catch(() => {});
+          .catch(() => { });
       }
       clearPrecheckRecord(token);
       window.onbeforeunload = null; // Prevent TakeAssessment from blocking the termination
@@ -175,11 +175,32 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
     runEntryGateScan();
 
-    // ── Backend polling every 5s ─────────────────────────────────────────────
+    // ── Backend & Local Agent polling every 5s ─────────────────────────────
     const poll = async () => {
       // ── NETWORK CHECK: Skip polling entirely when offline ──────────────
       if (!isOnlineRef.current) {
         console.log('[SecuritySessionGuard] Offline — skipping security poll');
+        return;
+      }
+
+      // ── LOCAL AGENT CHECK: Ensure the terminal is still open ──────────
+      try {
+        const agentStatus = await fetchAgentStatus();
+        if (!agentStatus?.running) {
+          console.warn('[SecuritySessionGuard] Secure Agent terminal was closed mid-exam.');
+          if (active) {
+            clearPrecheckRecord(token);
+            navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+          }
+          return;
+        }
+      } catch (err) {
+        // If we can't reach the local agent while online, it means the terminal was closed.
+        console.error('[SecuritySessionGuard] Cannot reach Secure Agent (ECONNREFUSED). Redir to precheck.');
+        if (active) {
+          clearPrecheckRecord(token);
+          navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+        }
         return;
       }
 
@@ -289,16 +310,16 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           gap: 20, padding: 32, textAlign: 'center',
           backdropFilter: 'blur(8px)',
         }}>
-          <div style={{ 
-            width: 100, height: 100, borderRadius: '50%', 
-            background: 'rgba(239, 68, 68, 0.1)', 
+          <div style={{
+            width: 100, height: 100, borderRadius: '50%',
+            background: 'rgba(239, 68, 68, 0.1)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             border: '2px solid #ef4444',
             animation: 'pulse 2s infinite'
           }}>
             <div style={{ fontSize: 48 }}>⚠️</div>
           </div>
-          
+
           <div style={{ maxWidth: 500 }}>
             <h2 style={{ color: '#fff', fontSize: '2rem', marginBottom: 12 }}>Security Warning</h2>
             <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.6 }}>
@@ -315,7 +336,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             <p style={{ color: '#f87171', fontSize: '0.9rem', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>
               Access Revocation in
             </p>
-            <div style={{ 
+            <div style={{
               color: '#fff', fontSize: '4rem', fontWeight: 800, fontFamily: 'monospace',
               fontVariantNumeric: 'tabular-nums'
             }}>
