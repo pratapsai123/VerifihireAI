@@ -78,16 +78,16 @@ API_PREFIX = "/api/v1"
 REGISTRATION_MODEL = "ArcFace"
 REGISTRATION_DETECTOR = "opencv"
 REGISTRATION_DISTANCE_METRIC = "cosine"
-REGISTRATION_THRESHOLD = 0.45  # Cosine distance threshold for ArcFace (relaxed for webcam variance)
+REGISTRATION_THRESHOLD = 0.60  # Cosine distance threshold for ArcFace (relaxed for webcam/lighting variance)
 
 # SFace: High speed — used for continuous real-time monitoring
 MONITORING_MODEL = "SFace"
 MONITORING_DETECTOR = "opencv"
 MONITORING_DISTANCE_METRIC = "cosine"
-MONITORING_THRESHOLD = 0.42  # Balanced SFace threshold for live webcam variance (relaxed)
+MONITORING_THRESHOLD = 0.50  # Balanced SFace threshold for live webcam variance (more relaxed)
 
 # Low-confidence zone: between threshold and this value triggers a warning instead of hard fail
-LOW_CONFIDENCE_MARGIN = 0.10  # e.g., 0.42 - 0.52 is "uncertain"
+LOW_CONFIDENCE_MARGIN = 0.12  # e.g., 0.50 - 0.62 is "uncertain"
 
 # ──────────────────────────────────────────────
 # FACE DETECTION

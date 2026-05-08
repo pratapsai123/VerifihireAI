@@ -547,6 +547,12 @@ class GenerateAssessmentView(APIView):
                 "message": "Both fields are required to generate an assessment."
             }, status=status.HTTP_400_BAD_REQUEST)
 
+        if mcq_count == 0 and coding_count == 0:
+            return Response({
+                "error": "Assessment cannot be empty",
+                "message": "Please select at least one MCQ question or one Coding task."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             # Auto-persist role if title is provided
             # required_skills often contains the role title in this app's context
@@ -1173,9 +1179,53 @@ class CreateSubmissionView(APIView):
                             logger.error(f"Failed to save re-entry identity violation: {e}")
                             
                         # HARD BLOCK
-                        return Response({
-                            'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
-                        }, status=status.HTTP_403_FORBIDDEN)
+                        # FLAG: Identity mismatch detected but allow override
+                        submission.identity_mismatch_detected = True
+                        submission.identity_mismatch_details = {
+                            'mismatch_at': timezone.now().isoformat(),
+                            'person_id': person_id,
+                            'mismatch_type': 'face_mismatch_on_reentry_override'
+                        }
+                        
+                        # Capture the original photo for comparison
+                        try:
+                            from pathlib import Path
+                            from django.core.files import File
+                            from django.conf import settings
+                            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                            person_face_dir = deepface_data_dir / person_id
+                            
+                            target_file = None
+                            for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                                if (person_face_dir / name).exists():
+                                    target_file = person_face_dir / name
+                                    break
+                            
+                            if target_file:
+                                with open(target_file, 'rb') as f:
+                                    submission.original_identity_photo.save(
+                                        f"mismatch_{submission.id}_{int(timezone.now().timestamp())}.jpg",
+                                        File(f),
+                                        save=False
+                                    )
+                        except Exception as e:
+                            logger.error(f"Failed to capture original identity photo for override: {e}")
+
+                        # Do NOT block the candidate anymore. Allow them to proceed.
+                        submission.save()
+                        logger.warning(f"Identity mismatch override for AI Assessment submission {submission.id} ({email})")
+                        
+                        # UPDATE MASTER REGISTRATION: Overwrite the old face with the new one
+                        try:
+                            # Re-register using the same person_id (email_token)
+                            if snapshot:
+                                _register_face_with_deepface(person_id, snapshot)
+                                logger.info(f"Updated master face registration for assessment {person_id} to new appearance.")
+                        except Exception as e:
+                            logger.error(f"Failed to update master face registration in assessment override: {e}")
+
+                        # Continue flow... 
+                        pass
                 else:
                     # NEW SUBMISSION -> Register anchor face for THIS ASSESSMENT
                     person_id = f"{email}_{token}"
@@ -3045,7 +3095,11 @@ class AIAssessmentResultsView(APIView):
                 'phone': getattr(s, 'phone', None),
                 'pan_number': getattr(s, 'pan_number', None),
                 'pan_photo': request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None,
-                'pan_verified': getattr(s, 'pan_verified', False)
+                'pan_verified': getattr(s, 'pan_verified', False),
+                # Identity Override Fields
+                'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
+                'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
+                'identity_mismatch_details': getattr(s, 'identity_mismatch_details', {})
             })
         
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)

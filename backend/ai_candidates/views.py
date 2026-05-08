@@ -1562,9 +1562,8 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
                 candidate.link_opened_at = now
 
-                # Lock PAN when interview starts - prevents PAN swapping
-                candidate.pan_locked = True
-                candidate.save(update_fields=['link_opened_at', 'pan_locked'])
+                # candidate.pan_locked = True
+                candidate.save(update_fields=['link_opened_at'])
 
             else:
 
@@ -1644,9 +1643,8 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
             candidate.link_opened_at = now
 
-            # Lock PAN when interview starts - prevents PAN swapping
-            candidate.pan_locked = True
-            candidate.save(update_fields=['link_opened_at', 'pan_locked'])
+            # candidate.pan_locked = True
+            candidate.save(update_fields=['link_opened_at'])
 
             
 
@@ -2906,27 +2904,15 @@ class TTSView(APIView):
         try:
             from .tts_engine import get_tts_engine
             engine = get_tts_engine()
-            # Async TTS - non-blocking
-            wav_bytes = await engine.synthesize(text)
-
-
-
-            if not wav_bytes:
-
-                return Response({"error": "Synthesis produced empty audio"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-            from django.http import HttpResponse
-
-            # Edge-TTS produces mp3 by default, we'll return as audio/mpeg
-
-            response = HttpResponse(wav_bytes, content_type='audio/mpeg')
-
-            response['Content-Length'] = len(wav_bytes)
-
+            
+            # Use StreamingHttpResponse for real-time playback
+            from django.http import StreamingHttpResponse
+            
+            # Create a generator for the stream
+            audio_generator = engine.stream_synthesize(text)
+            
+            response = StreamingHttpResponse(audio_generator, content_type='audio/mpeg')
             response['Cache-Control'] = 'no-cache'
-
             return response
 
 
@@ -3380,8 +3366,53 @@ class CandidateReportDownloadView(APIView):
             ]))
 
             elements.append(layout_table)
+            elements.append(Spacer(1, 20))
 
-            elements.append(Spacer(1, 25))
+            # 2.2 Identity Warning Section (Mismatch detected but overridden)
+            if getattr(candidate, 'identity_mismatch_detected', False):
+                elements.append(Paragraph("⚠️ IDENTITY WARNING: Face Mismatch Detected", 
+                                          ParagraphStyle('WarnStyle', parent=styles['Heading3'], textColor=colors.red)))
+                elements.append(Paragraph("This candidate's face did not match the photo previously registered with this PAN card. The interview was allowed to proceed, but manual verification is required.", 
+                                          ParagraphStyle('WarnText', parent=styles['Normal'], textColor=colors.red, fontSize=9)))
+                elements.append(Spacer(1, 10))
+                
+                # Side-by-side comparison
+                mismatch_photos = []
+                
+                # New Photo (the one from step above)
+                new_photo_elem = img_elem # Already calculated above
+                
+                # Original Photo
+                old_photo_elem = None
+                if candidate.original_identity_photo:
+                    try:
+                        old_photo_path = candidate.original_identity_photo.path
+                        if os.path.exists(old_photo_path):
+                            old_photo_elem = RLImage(old_photo_path, width=2.0*inch, height=1.5*inch)
+                    except:
+                        pass
+                
+                if not old_photo_elem:
+                    old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
+                
+                comparison_table = Table([
+                    [old_photo_elem, new_photo_elem],
+                    [Paragraph("<b>Original Registered Face</b>", styles['Small']), 
+                     Paragraph("<b>Current Interview Face</b>", styles['Small'])]
+                ], colWidths=[3.25*inch, 3.25*inch])
+                
+                comparison_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('BOX', (0,0), (-1,-1), 1, colors.red),
+                    ('BACKGROUND', (0,1), (-1,1), colors.HexColor("#fee2e2")),
+                ]))
+                
+                elements.append(comparison_table)
+                elements.append(Spacer(1, 25))
+
+            else:
+                elements.append(Spacer(1, 5))
 
             # 2.5 Identity Documents Section - PAN Card
             if candidate.pan_photo:
@@ -3889,6 +3920,7 @@ class CandidateRegistrationUpdateView(APIView):
     authentication_classes = []
 
     def post(self, request, public_token):
+        logger.info(f"POST request to registration for token: {public_token}")
         try:
             candidate = Candidate.objects.get(public_token=public_token)
 
@@ -3901,10 +3933,12 @@ class CandidateRegistrationUpdateView(APIView):
                 pan_number = pan_number.upper().strip()
                 pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
                 if not re.match(pan_pattern, pan_number):
+                    logger.warning(f"Registration failed: Invalid PAN format '{pan_number}' for candidate {public_token}")
                     return Response({'error': 'Invalid PAN format. Expected: ABCDE1234F'}, status=status.HTTP_400_BAD_REQUEST)
 
                 # SECURITY CHECK 1: Prevent PAN changes after interview starts
                 if candidate.pan_locked:
+                    logger.warning(f"Registration failed: PAN locked for candidate {candidate.email}")
                     return Response({
                         'error': 'PAN number cannot be changed once the interview has started.',
                         'pan_locked': True
@@ -3912,6 +3946,7 @@ class CandidateRegistrationUpdateView(APIView):
 
                 # SECURITY CHECK 2: Prevent one person from using multiple PANs
                 if candidate.pan_number and candidate.pan_number != pan_number:
+                    logger.warning(f"Registration failed: PAN change attempted from {candidate.pan_number} to {pan_number} for candidate {candidate.email}")
                     return Response({
                         'error': 'PAN number cannot be changed. You already registered with a different PAN.',
                         'existing_pan': candidate.pan_number
@@ -3920,7 +3955,7 @@ class CandidateRegistrationUpdateView(APIView):
                 # SECURITY CHECK 3: Prevent multiple people from using same PAN
                 existing_pan_holder = Candidate.objects.filter(
                     pan_number=pan_number
-                ).exclude(public_token=public_token).first()
+                ).exclude(public_token=public_token).exclude(email=candidate.email).first()
 
                 if existing_pan_holder:
                     # PAN already belongs to another candidate
@@ -3948,7 +3983,6 @@ class CandidateRegistrationUpdateView(APIView):
 
                 # Track PAN history for audit
                 if not candidate.pan_number:
-                    from django.utils import timezone
                     candidate.pan_history = [{
                         'action': 'registered',
                         'pan': pan_number,
@@ -3983,36 +4017,109 @@ class CandidateRegistrationUpdateView(APIView):
 
             face_embedding_hash = request.data.get('face_embedding_hash')
             face_verified = request.data.get('face_verified', False)
+            identity_mismatch_override = request.data.get('identity_mismatch_override', False)
             if face_embedding_hash:
-                # If face was verified by DeepFace against original holder, accept the verification
-                if face_verified:
-                    # DeepFace already verified this face matches the original PAN holder
-                    # Trust the verification result and save the new embedding
+                # If frontend detected a returning-candidate face mismatch but allowed them to continue
+                if identity_mismatch_override:
+                    logger.warning(f"Identity mismatch override for candidate {candidate.email} (token: {public_token}). "
+                                   f"Face did not match previously registered photo but candidate was allowed to proceed.")
+                    candidate.identity_mismatch_detected = True
+                    candidate.identity_mismatch_details = {
+                        'mismatch_at': timezone.now().isoformat(),
+                        'mismatch_type': 'returning_candidate_face_mismatch',
+                        'original_person_id': str(candidate.pan_number or public_token),
+                        'note': 'Candidate face did not match their own previously registered photo. Allowed to continue with flag.'
+                    }
+                    # Capture the original registered photo for evidence
+                    try:
+                        from pathlib import Path
+                        from django.core.files import File
+                        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                        person_id_key = str(candidate.pan_number or public_token).strip().lower()
+                        person_face_dir = deepface_data_dir / person_id_key
+                        target_file = None
+                        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                            if (person_face_dir / name).exists():
+                                target_file = person_face_dir / name
+                                break
+                        if target_file:
+                            with open(target_file, 'rb') as f:
+                                candidate.original_identity_photo.save(
+                                    f'mismatch_{candidate.public_token}.jpg',
+                                    File(f),
+                                    save=False
+                                )
+                            logger.info(f"Captured original identity photo for mismatch evidence: {target_file}")
+                    except Exception as e:
+                        logger.error(f"Failed to capture original identity photo for returning candidate mismatch: {e}")
+
                     candidate.face_embedding_hash = face_embedding_hash
-                    candidate.pan_verified = True  # Mark as verified since face matched
+
+                # If face was verified by DeepFace against original holder, accept the verification
+                elif face_verified:
+                    candidate.face_embedding_hash = face_embedding_hash
+                    candidate.pan_verified = True
                 else:
-                    # Check if this candidate has a PAN that's already registered to someone with a different face
+                    # Check for mismatch with existing PAN holder
                     if candidate.pan_number:
                         existing_pan_holder = Candidate.objects.filter(
                             pan_number=candidate.pan_number
                         ).exclude(public_token=public_token).first()
                         if existing_pan_holder and existing_pan_holder.face_embedding_hash:
                             if existing_pan_holder.face_embedding_hash != face_embedding_hash:
-                                return Response({
-                                    'error': 'Face verification failed. This PAN is registered to another person. Please ensure you are using your own PAN.',
-                                    'duplicate': True,
-                                    'requires_face_verification': True,
-                                    'verify_against_person_id': existing_pan_holder.public_token,
-                                    'verify_against_person_pan': existing_pan_holder.pan_number,
-                                    'registered_to': existing_pan_holder.full_name
-                                }, status=status.HTTP_400_BAD_REQUEST)
+                                candidate.identity_mismatch_detected = True
+                                candidate.identity_mismatch_details = {
+                                    'mismatch_at': timezone.now().isoformat(),
+                                    'original_holder_token': str(existing_pan_holder.public_token),
+                                    'original_holder_name': existing_pan_holder.full_name,
+                                    'mismatch_type': 'face_mismatch_override'
+                                }
+                                
+                                # Capture the original photo
+                                try:
+                                    from pathlib import Path
+                                    from django.core.files import File
+                                    deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                                    person_face_dir = deepface_data_dir / str(existing_pan_holder.public_token)
+                                    target_file = None
+                                    for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                                        if (person_face_dir / name).exists():
+                                            target_file = person_face_dir / name
+                                            break
+                                    if target_file:
+                                        with open(target_file, 'rb') as f:
+                                            candidate.original_identity_photo.save(
+                                                f'mismatch_{candidate.public_token}.jpg',
+                                                File(f),
+                                                save=False
+                                            )
+                                except Exception as e:
+                                    logger.error(f"Failed to capture original identity photo for override: {e}")
+                                
+                                # Update master registration
+                                try:
+                                    master_person_id = str(existing_pan_holder.public_token)
+                                    snapshot_b64 = request.data.get('snapshot')
+                                    if snapshot_b64:
+                                        from .utils import _register_face_with_deepface
+                                        _register_face_with_deepface(master_person_id, snapshot_b64)
+                                        existing_pan_holder.face_embedding_hash = face_embedding_hash
+                                        existing_pan_holder.save(update_fields=['face_embedding_hash'])
+                                except Exception as e:
+                                    logger.error(f"Failed to update master face registration during override: {e}")
 
-                    # Check if this face hash belongs to someone with a different PAN
+                                pass 
+                            else:
+                                candidate.pan_verified = True
+                                candidate.identity_mismatch_detected = False
+
+                    # Check if face hash belongs to someone else
                     existing_face_holder = Candidate.objects.filter(
                         face_embedding_hash=face_embedding_hash
-                    ).exclude(public_token=public_token).first()
+                    ).exclude(public_token=public_token).exclude(email=candidate.email).first()
                     if existing_face_holder and existing_face_holder.pan_number:
                         if existing_face_holder.pan_number != candidate.pan_number:
+                            logger.warning(f"Registration failed: Face already registered to {existing_face_holder.full_name} with different PAN")
                             return Response({
                                 'error': f'This face is already registered to another candidate ({existing_face_holder.full_name}). Each person can only register once.',
                                 'duplicate_face': True,
@@ -4023,26 +4130,27 @@ class CandidateRegistrationUpdateView(APIView):
             
             try:
                 candidate.save()
+                
+                if resume:
+                    from .tasks import extract_resume_text_task
+                    extract_resume_text_task.delay(candidate.id)
+                    logger.info(f"Triggered resume extraction task for candidate {candidate.id}")
+                
+                # Lock PAN now that registration is complete
+                candidate.pan_locked = True
+                candidate.save(update_fields=['pan_locked'])
+                    
             except IntegrityError as e:
                 error_msg = str(e)
-                # Check if it's a PAN unique constraint violation
                 if 'pan_number' in error_msg.lower() or 'ai_candidates_candidate_pan_number' in error_msg:
                     return Response({
                         'error': 'This PAN number is already registered to another candidate. Each PAN can only be used by one person.',
                         'duplicate': True
                     }, status=status.HTTP_400_BAD_REQUEST)
-                # Generic friendly message for other DB errors
                 logger.error(f"Database integrity error during registration: {error_msg}")
                 return Response({
                     'error': 'Registration failed due to a data conflict. Please check your information and try again.',
-                    'detail': error_msg if settings.DEBUG else None
                 }, status=status.HTTP_400_BAD_REQUEST)
-            except Exception as e:
-                logger.error(f"Unexpected error during registration save: {str(e)}")
-                return Response({
-                    'error': 'An unexpected error occurred while saving your registration. Please try again.',
-                    'detail': str(e) if settings.DEBUG else None
-                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             return Response({
                 'success': True,
@@ -4057,8 +4165,12 @@ class CandidateRegistrationUpdateView(APIView):
                     'has_resume': bool(candidate.resume)
                 }
             }, status=status.HTTP_200_OK)
+
         except Candidate.DoesNotExist:
             return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"CRITICAL ERROR in CandidateRegistrationUpdateView: {str(e)}", exc_info=True)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ProcessAnswerView(APIView):
     permission_classes = [AllowAny]
@@ -4209,20 +4321,23 @@ class ProcessAnswerView(APIView):
                 if not current_turn_number:
                     current_turn_number = 1
 
-            # --- DYNAMIC CATEGORY INJECTION ---
+            # --- RESUME-AWARE CATEGORY MAPPING ---
+            # If resume is missing, we must skip specific resume/project questions
+            has_resume = bool(resume_context and "No resume available" not in resume_context and "Extraction Failed" not in resume_context)
+            
             category_map = {
-                1: ("INTRO", "Greet the candidate warmly and ask them to introduce themselves."),
-                2: ("JD-Q1", "Ask a question derived DIRECTLY from the Job Description requirements."),
-                3: ("JD-Q2", "Ask another question derived DIRECTLY from the Job Description requirements."),
-                4: ("JD-Q3", "Ask a third question derived DIRECTLY from the Job Description requirements."),
-                5: ("JD-Q4", "Ask a fourth question derived DIRECTLY from the Job Description requirements."),
-                6: ("RESUME-SKILL-Q1", "Ask about a SPECIFIC SKILL listed in the Resume that is relevant to the JD."),
-                7: ("RESUME-SKILL-Q2", "Ask about a DIFFERENT SPECIFIC SKILL from the Resume relevant to the JD."),
-                8: ("PROJECT-Q1", "Ask about a SPECIFIC PROJECT mentioned in the Resume (role, challenges, or architecture)."),
-                9: ("PROJECT-Q2", "Ask about a DIFFERENT PROJECT from the Resume (or deeper dive into the previous project)."),
-                10: ("SCENARIO-Q1", "Ask a 'Imagine you are...' or 'How would you handle...' hypothetical workplace scenario derived DIRECTLY from the Job Description requirements."),
-                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question, also derived DIRECTLY from the Job Description."),
-                12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc."),
+                1: ("INTRO", "Greet the candidate warmly and ask them to introduce themselves. ORAL ONLY - do NOT ask them to write anything."),
+                2: ("JD-Q1", "Ask a question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
+                3: ("JD-Q2", "Ask another question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
+                4: ("JD-Q3", "Ask a third question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
+                5: ("JD-Q4", "Ask a fourth question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
+                6: ("RESUME-SKILL-Q1", f"Ask about a SPECIFIC SKILL {'from the Resume' if has_resume else 'relevant to the role'}. ORAL ONLY - do NOT ask them to write or code."),
+                7: ("RESUME-SKILL-Q2", f"Ask about a DIFFERENT SPECIFIC SKILL {'from the Resume' if has_resume else 'relevant to the role'}. ORAL ONLY - do NOT ask them to write or code."),
+                8: ("PROJECT-Q1", f"Ask about a {'SPECIFIC PROJECT from the Resume' if has_resume else 'recent technical project they worked on'}. ORAL ONLY - do NOT ask them to write or code."),
+                9: ("PROJECT-Q2", f"Ask about {'a DIFFERENT PROJECT from the Resume' if has_resume else 'the architecture or tools they used in that same project'}. ORAL ONLY - do NOT ask them to write or code."),
+                10: ("SCENARIO-Q1", "Ask a hypothetical workplace scenario question derived from the Job Description. ORAL ONLY - do NOT ask them to write or code."),
+                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question. ORAL ONLY - do NOT ask them to write or code."),
+                12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc. This is the first turn where writing/code is allowed."),
                 13: ("SYNTAX-Q2", "Ask a DIFFERENT coding or syntax question.")
             }
             
@@ -4276,6 +4391,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 ===== SPECIAL TRIGGERS =====
 - If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
 - If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
+- FOR TURNS 1-11 (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
 - For turns 12-13 (SYNTAX) → Set "requires_code_input": true.
 
 ===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
@@ -4720,14 +4836,56 @@ class CandidateReportDownloadView(APIView):
             ]))
 
             # Combine in a layout table
-            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
-            layout_table.setStyle(TableStyle([
-                ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                ('ALIGN', (0,0), (0,0), 'LEFT'),
-                ('ALIGN', (1,0), (1,0), 'LEFT'),
-            ]))
             elements.append(layout_table)
-            elements.append(Spacer(1, 25))
+            elements.append(Spacer(1, 20))
+
+            # 2.2 Identity Warning Section (Mismatch detected but overridden)
+            if getattr(candidate, 'identity_mismatch_detected', False):
+                elements.append(Paragraph("⚠️ IDENTITY WARNING: Face Mismatch Detected", 
+                                          ParagraphStyle('WarnStyle', parent=styles['Heading3'], textColor=colors.red)))
+                
+                mismatch_info = candidate.identity_mismatch_details or {}
+                original_name = mismatch_info.get('original_holder_name', 'another person')
+                
+                elements.append(Paragraph(f"This candidate's face did not match the photo previously registered with this PAN card (originally used by {original_name}). The interview was allowed to proceed via manual override.", 
+                                          ParagraphStyle('WarnText', parent=styles['Normal'], textColor=colors.red, fontSize=9)))
+                elements.append(Spacer(1, 10))
+                
+                # Side-by-side comparison
+                # New Photo (the one from step above)
+                new_photo_elem = img_elem # Calculated in the photo section
+                
+                # Original Photo
+                old_photo_elem = None
+                if candidate.original_identity_photo:
+                    try:
+                        old_photo_path = candidate.original_identity_photo.path
+                        if os.path.exists(old_photo_path):
+                            old_photo_elem = RLImage(old_photo_path, width=2.0*inch, height=1.5*inch)
+                    except:
+                        pass
+                
+                if not old_photo_elem:
+                    old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
+                
+                comparison_table = Table([
+                    [old_photo_elem, new_photo_elem],
+                    [Paragraph("<b>Original Registered Face</b>", styles['Small']), 
+                     Paragraph("<b>Current Interview Face</b>", styles['Small'])]
+                ], colWidths=[3.25*inch, 3.25*inch])
+                
+                comparison_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('BOX', (0,0), (-1,-1), 1, colors.red),
+                    ('BACKGROUND', (0,1), (-1,1), colors.HexColor("#fee2e2")),
+                ]))
+                
+                elements.append(comparison_table)
+                elements.append(Spacer(1, 25))
+
+            else:
+                elements.append(Spacer(1, 10))
 
             # 2.5 Identity Documents Section - PAN Card
             if candidate.pan_photo:
@@ -4896,221 +5054,7 @@ class CandidateReportDownloadView(APIView):
             logger.error(f"Error generating PDF report for candidate {pk}: {str(e)}", exc_info=True)
             return Response({'error': f"Critical failure during report generation: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class CandidateTimelineView(APIView):
-    """
-    Fetches the history (PipelineLog) for a specific candidate.
-    """
-    from rest_framework.permissions import IsAuthenticated
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, pk):
-        try:
-            candidate = Candidate.objects.get(pk=pk)
-            # Permission check: ensure user belongs to same company
-            user_profile = getattr(request.user, 'profile', None)
-            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
-                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-            
-            logs = candidate.pipeline_logs.all().order_by('timestamp')
-            serializer = PipelineLogSerializer(logs, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Candidate.DoesNotExist:
-            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
-
-class LatestActiveBatchView(APIView):
-    """
-    Allows the frontend to recover the most recent batch ID if the page was refreshed
-    before the ID could be saved to local state.
-    """
-    permission_classes = [AllowAny]
-    authentication_classes = []
-
-    def get(self, request):
-        # Look for candidates created in the last 15 minutes that are still 'New'
-        threshold_time = timezone.now() - timedelta(minutes=15)
-        user_profile = getattr(request.user, 'userprofile', None)
-
-        candidates = Candidate.objects.filter(
-            status='New',
-            created_at__gte=threshold_time
-        ).exclude(batch_id__isnull=True).exclude(batch_id='')
-
-        if user_profile:
-            candidates = candidates.filter(user_profile=user_profile)
-
-        latest_candidate = candidates.order_by('-created_at').first()
-
-        if latest_candidate:
-            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
-
-        return Response({"batch_id": None}, status=status.HTTP_200_OK)
-
-class PanValidationView(APIView):
-    """
-    Validates PAN card photo using OCR and compares with entered PAN number.
-    Returns extracted PAN number from photo and match status.
-    """
-    permission_classes = [AllowAny]
-    authentication_classes = []
-
-    def post(self, request):
-        try:
-            pan_photo = request.FILES.get('pan_photo')
-            entered_pan = request.data.get('pan_number', '').upper().strip()
-
-            if not pan_photo:
-                return Response({'error': 'PAN photo is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-            if not entered_pan:
-                return Response({'error': 'PAN number is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-            # Validate PAN format (5 letters + 4 digits + 1 letter)
-            pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
-            if not re.match(pan_pattern, entered_pan):
-                return Response({
-                    'error': 'Invalid PAN format. Expected format: ABCDE1234F',
-                    'is_valid': False
-                }, status=status.HTTP_400_BAD_REQUEST)
-
-            # Read and process image
-            image = Image.open(pan_photo)
-            
-            # Try using EasyOCR if available
-            extracted_text = ""
-            try:
-                reader = _get_reader()
-                if reader:
-                    img_array = np.array(image)
-                    result = reader.readtext(img_array, detail=0)
-                    extracted_text = ' '.join(result)
-                    logger.info(f"EasyOCR extracted text: {extracted_text}")
-            except Exception as ocr_error:
-                logger.warning(f"EasyOCR failed: {str(ocr_error)}")
-
-            # If EasyOCR fails, try using DeepSeek Vision
-            if not extracted_text:
-                try:
-                    llm_client = create_llm_client()
-                    
-                    import base64
-                    buffered = io.BytesIO()
-                    image.save(buffered, format="JPEG")
-                    img_base64 = base64.b64encode(buffered.getvalue()).decode()
-                    
-                    response = llm_client.chat.completions.create(
-                        model=get_default_model(),
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": [
-                                    {"type": "text", "text": "Extract the PAN number from this PAN card image. The PAN number is 10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F). Return ONLY the PAN number, nothing else."},
-                                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_base64}"}}
-                                ]
-                            }
-                        ],
-                        max_tokens=20
-                    )
-                    extracted_text = response.choices[0].message.content.upper().strip()
-                    logger.info(f"DeepSeek Vision extracted text: {extracted_text}")
-                except Exception as ds_error:
-                    logger.warning(f"DeepSeek Vision failed: {str(ds_error)}")
-
-            # Extract PAN-like pattern from text
-            pan_from_photo = None
-            if extracted_text:
-                pan_matches = re.findall(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', extracted_text.upper())
-                if pan_matches:
-                    pan_from_photo = pan_matches[0]
-
-            # Compare entered PAN with extracted PAN
-            is_verified = False
-            if pan_from_photo:
-                is_verified = (entered_pan == pan_from_photo)
-
-            return Response({
-                'entered_pan': entered_pan,
-                'extracted_pan': pan_from_photo,
-                'is_verified': is_verified,
-                'extracted_text': extracted_text if settings.DEBUG else None,
-                'message': 'PAN verified successfully' if is_verified else 'PAN mismatch. Please check your PAN number and photo.'
-            }, status=status.HTTP_200_OK)
-
-        except Exception as e:
-            logger.error(f"PAN validation error: {str(e)}", exc_info=True)
-            return Response({
-                'error': f'Failed to validate PAN: {str(e)}',
-                'is_verified': False
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class CandidateRegistrationUpdateView(APIView):
-    """
-    Updates candidate registration details (phone, PAN, resume) when they first open the interview link.
-    """
-    permission_classes = [AllowAny]
-    authentication_classes = []
-
-    def post(self, request, public_token):
-        try:
-            candidate = Candidate.objects.get(public_token=public_token)
-
-            phone = request.data.get('phone')
-            if phone:
-                candidate.phone = phone
-
-            pan_number = request.data.get('pan_number')
-            if pan_number:
-                pan_number = pan_number.upper().strip()
-                pan_pattern = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$'
-                if not re.match(pan_pattern, pan_number):
-                    return Response({'error': 'Invalid PAN format. Expected: ABCDE1234F'}, status=status.HTTP_400_BAD_REQUEST)
-                candidate.pan_number = pan_number
-
-            pan_photo = request.FILES.get('pan_photo')
-            if pan_photo:
-                candidate.pan_photo = pan_photo
-
-            pan_verified = request.data.get('pan_verified')
-            if pan_verified is not None:
-                # Convert string to boolean
-                if isinstance(pan_verified, str):
-                    candidate.pan_verified = pan_verified.lower() == 'true'
-                else:
-                    candidate.pan_verified = bool(pan_verified)
-
-            resume = request.FILES.get('resume')
-            if resume:
-                candidate.resume = resume
-
-            full_name = request.data.get('full_name')
-            if full_name:
-                candidate.full_name = full_name
-
-            email = request.data.get('email')
-            if email:
-                candidate.email = email
-
-            candidate.save()
-
-            return Response({
-                'success': True,
-                'message': 'Registration details updated successfully',
-                'candidate': {
-                    'id': candidate.id,
-                    'full_name': candidate.full_name,
-                    'email': candidate.email,
-                    'phone': candidate.phone,
-                    'pan_number': candidate.pan_number,
-                    'pan_verified': candidate.pan_verified,
-                    'has_resume': bool(candidate.resume)
-                }
-            }, status=status.HTTP_200_OK)
-
-        except Candidate.DoesNotExist:
-            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            logger.error(f"Registration update error: {str(e)}", exc_info=True)
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+# --- END OF FILE ---
 
 
 class HealthCheckView(APIView):

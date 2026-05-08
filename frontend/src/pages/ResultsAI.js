@@ -129,8 +129,10 @@ const ResultsAI = () => {
                     // We need to create separate stage entries that will be grouped by email
 
                     const hasResume = r.resume_score > 0 || ['Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(r.status);
-                    const hasAssessment = (r.percentage != null && r.percentage > 0) || (r.score != null && r.score > 0) || r.total_questions > 0 || ['Assessment Passed', 'Assessment Failed', 'Qualified', 'Not Qualified', 'Selected'].includes(r.status);
-                    const hasInterview = r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected'].includes(r.status);
+                    // For aicand_ records, technical assessment data is provided by separate 'ai_' prefixed records.
+                    // We only create an assessment entry here if we have explicit MCQ/Coding data that isn't from the interview.
+                    const hasAssessment = r.is_fully_automatic && (r.mcq_score > 0 || r.coding_score > 0);
+                    const hasInterview = r.is_ai_interview || r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected'].includes(r.status);
 
                     // ALWAYS add resume entry if we have resume data
                     if (hasResume) {
@@ -172,7 +174,7 @@ const ResultsAI = () => {
                     if (hasInterview) {
                         intResults.push({
                             ...r,
-                            _type: 'interview',
+                            _type: 'ai_interview',
                             submission_id: `${sid}_interview`,
                             score: r.score || 0,
                             interview_summary: r.interview_summary,
@@ -209,9 +211,9 @@ const ResultsAI = () => {
 
             // State setters for categorized results are not needed as we use groupedData for UI
             // but we keep aiAssessments for the submission detail lookup logic
-            const sortedAssessments = assessResults
-                .sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
-            setAiAssessments(sortedAssessments);
+            const allSorted = [...resResults, ...assessResults, ...intResults, ...manResults]
+                .sort((a, b) => new Date(b.submitted_at || b.created_at || 0) - new Date(a.submitted_at || a.created_at || 0));
+            setAiAssessments(allSorted);
 
             const normalizeRoleName = (role) => {
                 if (!role) return 'Other';
@@ -232,32 +234,28 @@ const ResultsAI = () => {
 
             const addToGroup = (item, type) => {
                 const rawRole = item.assessment?.role || item.assessment?.display_name || item.assessment?.name || item.job_title || 'General';
-                // Priority: Explicit batch_name > JD_Date_Time format
-                const batchLabel = item.batch_name || `${normalizeRoleName(rawRole)}_Archive`;
+                const baseLabel = item.batch_name || `${normalizeRoleName(rawRole)}_Archive`;
+                const groupKey = item.is_fully_automatic ? `AUTO_${baseLabel}` : `MANUAL_${baseLabel}`;
 
-                if (!groups[batchLabel]) {
-                    groups[batchLabel] = {
+                if (!groups[groupKey]) {
+                    groups[groupKey] = {
                         resume: [],
                         assessment: [],
                         interview: [],
                         standard: [],
                         total: 0,
                         role: rawRole,
-                        batch_name: batchLabel,
+                        batch_name: baseLabel,
                         is_fully_automatic: item.is_fully_automatic || false
                     };
                 }
-                // If ANY item in this group is fully automatic, mark the whole group as fully automatic
-                if (item.is_fully_automatic) {
-                    groups[batchLabel].is_fully_automatic = true;
-                }
-                groups[batchLabel][type].push(item);
-                groups[batchLabel].total += 1;
+                groups[groupKey][type].push(item);
+                groups[groupKey].total += 1;
             };
 
             resResults.forEach(r => addToGroup(r, 'resume'));
             intResults.forEach(r => addToGroup(r, 'interview'));
-            sortedAssessments.forEach(s => addToGroup(s, 'assessment'));
+            assessResults.forEach(s => addToGroup(s, 'assessment'));
             manResults.forEach(m => addToGroup(m, 'standard'));
 
             Object.values(groups).forEach(g => {
@@ -330,7 +328,9 @@ const ResultsAI = () => {
                 params.candidate_email = options;
             } else {
                 if (options.email) params.candidate_email = options.email;
-                if (options.batchName && options.batchName !== 'All Roles') params.batch_name = options.batchName;
+                if (options.batchName && options.batchName !== 'All Roles') {
+                    params.batch_name = options.batchName.replace('AUTO_', '').replace('MANUAL_', '');
+                }
                 if (options.batchId) params.batch_id = options.batchId;
                 if (options.subId && !options.subId.toString().startsWith('aicand_')) {
                     params.submission_id = options.subId.toString().replace('ai_', '');
@@ -428,11 +428,7 @@ const ResultsAI = () => {
         const processGroup = (items, type) => {
             items.forEach(item => {
                 const sid = String(item.submission_id || '');
-                // For Fully Automatic view, we only want to show the stages of the aicand_ records.
-                // This prevents manual AI assessments (ai_ prefixed) from appearing in the automatic pipeline.
-                if (type === 'assessment' && !sid.startsWith('aicand_')) return;
-                if (type === 'interview' && !sid.startsWith('aicand_')) return;
-                if (type === 'resume' && !sid.startsWith('aicand_')) return;
+                // We removed the 'aicand_' check here because assessments are now properly generated as 'ai_' prefixed records.
 
                 const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
                 if (!candidateMap[email]) {
@@ -441,10 +437,16 @@ const ResultsAI = () => {
                         full_name: item.full_name || item.candidate?.name || 'Candidate',
                         resume: null, assessment: null, interview: null,
                         batch_id: item.batch_id,
-                        batch_name: item.batch_name
+                        batch_name: item.batch_name,
+                        identity_mismatch_detected: !!item.identity_mismatch_detected
                     };
                 }
-                candidateMap[email][type] = item;
+                if (item.identity_mismatch_detected) {
+                    candidateMap[email].identity_mismatch_detected = true;
+                }
+                if (!candidateMap[email][type]) {
+                    candidateMap[email][type] = item;
+                }
             });
         };
         processGroup(roleData.resume, 'resume');
@@ -652,6 +654,24 @@ const ResultsAI = () => {
                                 <div>
                                     <div className="sidebar-value">{data.full_name || data.candidate?.name || 'Extraction Failed'}</div>
                                     <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{data.email || data.candidate?.email || 'N/A'}</div>
+                                    {data.identity_mismatch_detected && (
+                                        <div style={{
+                                            marginTop: '0.5rem',
+                                            background: '#FFF5F5',
+                                            color: '#EE5D50',
+                                            padding: '0.3rem 0.6rem',
+                                            borderRadius: '8px',
+                                            fontSize: '0.7rem',
+                                            fontWeight: '800',
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '4px',
+                                            border: '1px solid #EE5D5033'
+                                        }}>
+                                            <i className="fa-solid fa-triangle-exclamation"></i>
+                                            Identity Mismatch
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -726,7 +746,7 @@ const ResultsAI = () => {
 
                         <div className="sidebar-card" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white' }}>
                             <span className="sidebar-label" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.6rem' }}>Applied Role</span>
-                            <div style={{ fontSize: '1rem', fontWeight: '800' }}>{selectedRole || data.job_title || 'General'}</div>
+                            <div style={{ fontSize: '1rem', fontWeight: '800' }}>{selectedRole ? selectedRole.replace('AUTO_', '').replace('MANUAL_', '') : (data.job_title || 'General')}</div>
                         </div>
                     </aside>
 
@@ -915,12 +935,12 @@ const ResultsAI = () => {
 
                                 {/* 3-Card Summary (Matching AiAssessmentDetail.js) */}
 
-                                {viewedSubmission.is_resume_screening ? (
+                                {viewedSubmission._type === 'ai_interview' ? (
                                     <div style={{ marginBottom: '3rem' }}>
                                         <div style={{ background: '#F8F9FF', padding: '2.5rem', borderRadius: '30px', border: '1px solid #4318FF44' }}>
                                             <h4 style={{ color: '#1B254B', marginTop: 0, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.2rem', fontWeight: '800' }}>
-                                                <i className="fa-solid fa-file-lines" style={{ color: '#4318FF' }}></i>
-                                                Candidate Written Paper (Interview Feedback)
+                                                <i className="fa-solid fa-microphone-lines" style={{ color: '#4318FF' }}></i>
+                                                AI Interview Transcript & Feedback
                                             </h4>
                                             <div style={{
                                                 background: 'white',
@@ -937,6 +957,35 @@ const ResultsAI = () => {
                                                     ? viewedSubmission.interview_summary
                                                     : JSON.stringify(viewedSubmission.interview_summary || viewedSubmission.results_breakdown?.interview_summary, null, 2)}
                                             </div>
+                                        </div>
+                                    </div>
+                                ) : viewedSubmission._type === 'resume' ? (
+                                    <div style={{ marginBottom: '3rem' }}>
+                                        <div style={{ background: '#F8F9FF', padding: '2.5rem', borderRadius: '30px', border: '1px solid #4318FF44' }}>
+                                            <h4 style={{ color: '#1B254B', marginTop: 0, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.2rem', fontWeight: '800' }}>
+                                                <i className="fa-solid fa-file-pdf" style={{ color: '#4318FF' }}></i>
+                                                Resume Screening Results
+                                            </h4>
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                                                <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid #E2E8F0', textAlign: 'center' }}>
+                                                    <div style={{ color: '#64748B', fontSize: '0.9rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Match Score</div>
+                                                    <div style={{ color: '#4318FF', fontSize: '2.5rem', fontWeight: '900' }}>{viewedSubmission.resume_score}%</div>
+                                                </div>
+                                                <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid #E2E8F0', textAlign: 'center' }}>
+                                                    <div style={{ color: '#64748B', fontSize: '0.9rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Status</div>
+                                                    <div style={{ color: viewedSubmission.resume_score >= 70 ? '#05CD99' : '#EE5D50', fontSize: '1.5rem', fontWeight: '800', marginTop: '0.5rem' }}>{viewedSubmission.status}</div>
+                                                </div>
+                                            </div>
+                                            {viewedSubmission.interview_questions?.length > 0 && (
+                                                <div style={{ background: 'white', padding: '2rem', borderRadius: '20px', border: '1px solid #E2E8F0' }}>
+                                                    <h5 style={{ margin: '0 0 1rem 0', color: '#1B254B', fontSize: '1.1rem', fontWeight: '700' }}>Generated Interview Questions</h5>
+                                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#334155', lineHeight: '1.8' }}>
+                                                        {viewedSubmission.interview_questions.map((q, idx) => (
+                                                            <li key={idx} style={{ marginBottom: '0.5rem' }}>{q}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ) : (
@@ -1349,7 +1398,7 @@ const ResultsAI = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <div>
                                     <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                                        {selectedRole.split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
+                                        {selectedRole.replace('AUTO_', '').replace('MANUAL_', '').split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
                                     </h1>
                                     <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>
@@ -1408,7 +1457,7 @@ const ResultsAI = () => {
                                                         </div>
                                                         <div>
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{roleName}</h3>
+                                                                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{data.batch_name}</h3>
                                                                 <span style={{
                                                                     padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
                                                                     background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
@@ -1551,6 +1600,9 @@ const ResultsAI = () => {
                                                                     <td>
                                                                         <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                                                             {r.full_name || r.candidate?.name || 'Candidate'}
+                                                                            {r.identity_mismatch_detected && (
+                                                                                <i className="fa-solid fa-triangle-exclamation" style={{ color: '#EE5D50' }} title="Identity mismatch detected during registration"></i>
+                                                                            )}
                                                                         </div>
                                                                         <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
                                                                             {r.email || r.candidate?.email || 'N/A'}

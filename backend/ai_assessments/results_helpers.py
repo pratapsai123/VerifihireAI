@@ -155,17 +155,9 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 },
                 'score': s.score,
                 'total': 100,
-                'percentage': s.score,
-
-                'objective_score': 0,
-                'objective_total': 0,
-                'objective_percentage': 0,
-
-                'coding_score': s.score,
-                'coding_total': 100,
-                'coding_percentage': s.score,
-
                 'status': s.status,
+                'is_ai_interview': bool(s.interview_summary or s.status in ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected']),
+                'is_ai_candidate': True,
                 'is_resume_screening': True,
                 'delete_requested': f"Candidate_{s.id}" in active_deletions,
                 'interview_summary': s.interview_summary,
@@ -185,7 +177,9 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                         'webcam_screenshot_base64': log.webcam_screenshot_base64,
                         'timestamp': log.timestamp.isoformat() if log.timestamp else None
                     } for log in s.integrity_logs.all()
-                ]
+                ],
+                'identity_mismatch_detected': s.identity_mismatch_detected,
+                'identity_mismatch_details': s.identity_mismatch_details
             }
         )
 

@@ -45,6 +45,25 @@ const AiInterviewSession = () => {
     const [wizardStep, setWizardStep] = useState(0); 
     const [capturedImage, setCapturedImage] = useState(null);
     const regVideoRef = useRef(null);
+    const [faceInOval, setFaceInOval] = useState(false);
+    
+    // Load MediaPipe on mount
+    useEffect(() => {
+        if (!document.getElementById('mediapipe-face-script')) {
+            const script = document.createElement('script');
+            script.id = 'mediapipe-face-script';
+            script.src = 'https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js';
+            script.crossOrigin = 'anonymous';
+            document.head.appendChild(script);
+        }
+    }, []);
+    const [blinkDetected, setBlinkDetected] = useState(false);
+    const [regInstruction, setRegInstruction] = useState('Position your face inside the oval');
+    const regCanvasRef = useRef(null);
+    const regDetectionRef = useRef(null);
+    const eyeHistoryRef = useRef([]);
+    const blinkCapturedRef = useRef(false);
+    const faceInOvalRef = useRef(false);
 
     // ── DeepFace Proctoring State ──
     const [dfSessionId, setDfSessionId] = useState(null);
@@ -307,18 +326,50 @@ const AiInterviewSession = () => {
 
         const handleVisibilityChange = () => {
             if (document.hidden || document.visibilityState === 'hidden') {
-                setIsPaused(true); // Pause timer and interview progression
+                setIsPaused(true);
+                pauseHardware();
+                setAiStatus("Interview Paused (Desktop Switched)");
                 showAiEvent("TAB SWITCHED", true, 'tab_switch');
+                reportViolation('tab_switch');
+            } else {
+                // Tab became visible again — resume only if still in fullscreen + screen sharing
+                if (isFullscreenRef.current && isScreenSharing) {
+                    setIsPaused(false);
+                    setAiStatus("Interview Resumed");
+                }
             }
         };
 
         const handleBlur = () => {
-            setIsPaused(true); // Pause timer and interview progression
-            showAiEvent("WINDOW BLURRED", true, 'tab_switch');
+            if (!isPermissionsGranted || isCompletedRef.current) return;
+            setIsPaused(true);
+            pauseHardware();
+            setAiStatus("Interview Paused (Window Switched)");
+            showAiEvent("WINDOW BLURRED", true, 'window_blur');
+            reportViolation('window_blur');
+        };
+
+        const handleFocus = () => {
+            // Window regained focus — resume only if still in fullscreen + screen sharing
+            if (isFullscreenRef.current && isScreenSharing && isPermissionsGranted && !isCompletedRef.current) {
+                setIsPaused(false);
+                // Re-enable hardware tracks
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
+                if (streamRef.current) {
+                    streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
+                }
+                if (videoRef.current) {
+                    videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
+                }
+                setAiStatus("Interview Resumed");
+            }
         };
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
         window.addEventListener('blur', handleBlur);
+        window.addEventListener('focus', handleFocus);
 
         const handleFullscreenChange = () => {
             const isFS = !!document.fullscreenElement;
@@ -396,6 +447,7 @@ const AiInterviewSession = () => {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('blur', handleBlur);
+            window.removeEventListener('focus', handleFocus);
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
         };
     }, [token, showAiEvent, isScreenSharing]);
@@ -802,9 +854,9 @@ const AiInterviewSession = () => {
                 const audioBlob = new Blob([res.data], { type: 'audio/mpeg' });
                 const audioUrl = URL.createObjectURL(audioBlob);
 
-                // SECONDARY GUARD: Ensure we didn't exit fullscreen while synthesis was occurring
-                if (!isFullscreenRef.current && isPermissionsGranted) {
-                    console.log("Speak aborted: Fullscreen exited during synthesis.");
+                // SECONDARY GUARD: Ensure we didn't exit fullscreen, switch tabs, or blur window during synthesis
+                if ((!isFullscreenRef.current || document.hidden || !document.hasFocus()) && isPermissionsGranted) {
+                    console.log("Speak aborted: Fullscreen exited or window lost focus during synthesis.");
                     URL.revokeObjectURL(audioUrl);
                     setIsSpeaking(false);
                     isSpeakingRef.current = false;
@@ -1872,16 +1924,219 @@ const AiInterviewSession = () => {
         setIsPermissionsGranted(true);
         setAiStatus("Starting Registration...");
         setWizardStep(0); 
+        blinkCapturedRef.current = false;
+        eyeHistoryRef.current = [];
+        setBlinkDetected(false);
+        setFaceInOval(false);
+        setRegInstruction('Position your face inside the oval');
 
         setTimeout(() => {
             if (regVideoRef.current && streamRef.current) {
                 regVideoRef.current.srcObject = streamRef.current;
                 regVideoRef.current.play().catch(e => console.warn("regVideo auto-play prevented:", e));
             }
+            // Start face position + blink detection loop
+            startRegDetection();
         }, 500);
     };
 
+    // ── Face-in-Oval + Blink Detection for Registration ──
+    const getEyeBrightness = useCallback((videoElement, eyeRegion) => {
+        // Extract average brightness of eye region from video frame
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoElement.videoWidth || 640;
+            canvas.height = videoElement.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            
+            const { x, y, w, h } = eyeRegion;
+            const imgData = ctx.getImageData(x, y, w, h);
+            const data = imgData.data;
+            let totalBrightness = 0;
+            const pixelCount = data.length / 4;
+            for (let i = 0; i < data.length; i += 4) {
+                // Luminance formula
+                totalBrightness += (data[i] * 0.299 + data[i+1] * 0.587 + data[i+2] * 0.114);
+            }
+            return totalBrightness / pixelCount;
+        } catch (e) {
+            return null;
+        }
+    }, []);
+
+    const startRegDetection = useCallback(() => {
+        // Clear any existing detection loop
+        if (regDetectionRef.current) {
+            cancelAnimationFrame(regDetectionRef.current);
+        }
+
+        const detectLoop = async () => {
+            const videoElement = regVideoRef.current;
+            if (!videoElement || blinkCapturedRef.current) {
+                return; // Stop if no video or already captured
+            }
+            
+            if (videoElement.readyState < 2) {
+                // Video not ready yet, try again soon
+                regDetectionRef.current = setTimeout(() => requestAnimationFrame(detectLoop), 100);
+                return;
+            }
+
+            const vw = videoElement.videoWidth || 640;
+            const vh = videoElement.videoHeight || 480;
+
+            // Define oval boundaries (matches the CSS oval: top 10%, bottom 15%, left 25%, right 25%)
+            const ovalCx = vw / 2;
+            const ovalCy = vh * 0.475; // center between 10% and 85%
+            const ovalRx = vw * 0.25;  // 25% from each side = 50% width / 2
+            const ovalRy = vh * 0.375; // (85% - 10%) / 2 = 37.5%
+
+            let faceDetected = false;
+            let faceBox = null;
+            let eyes = null;
+
+            // 1. Try MediaPipe FaceDetection (Robust & Precise)
+            if (window.FaceDetection && !window.mpFaceDetector) {
+                try {
+                    window.mpFaceDetector = new window.FaceDetection({locateFile: (file) => {
+                        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`;
+                    }});
+                    window.mpFaceDetector.setOptions({ model: 'short', minDetectionConfidence: 0.5 });
+                    window.mpFaceDetector.onResults((results) => { window.mpFaceResults = results; });
+                } catch(e) { console.warn("MediaPipe init failed:", e); }
+            }
+
+            if (window.mpFaceDetector) {
+                try {
+                    window.mpFaceResults = null; // Clear previous frame results to prevent instant false captures
+                    await window.mpFaceDetector.send({image: videoElement});
+                    if (window.mpFaceResults?.detections?.length > 0) {
+                        const detection = window.mpFaceResults.detections[0];
+                        const bb = detection.boundingBox;
+                        faceBox = {
+                            x: bb.xCenter * vw - (bb.width * vw) / 2,
+                            y: bb.yCenter * vh - (bb.height * vh) / 2,
+                            w: bb.width * vw,
+                            h: bb.height * vh
+                        };
+                        if (detection.landmarks && detection.landmarks.length >= 2) {
+                            eyes = [
+                                { x: detection.landmarks[0].x * vw, y: detection.landmarks[0].y * vh },
+                                { x: detection.landmarks[1].x * vw, y: detection.landmarks[1].y * vh }
+                            ];
+                        }
+                        faceDetected = true;
+                    }
+                } catch(e) {}
+            }
+
+            // Native window.FaceDetector fallback removed due to high false-positive rate on static backgrounds
+
+            if (faceDetected && faceBox) {
+                // Check if face center is inside the oval
+                const faceCx = faceBox.x + faceBox.w / 2;
+                const faceCy = faceBox.y + faceBox.h / 2;
+                
+                // Ellipse equation
+                const inOval = (
+                    Math.pow(faceCx - ovalCx, 2) / Math.pow(ovalRx, 2) +
+                    Math.pow(faceCy - ovalCy, 2) / Math.pow(ovalRy, 2)
+                ) <= 1.2;
+
+                // Also check face size
+                const faceArea = faceBox.w * faceBox.h;
+                const ovalArea = Math.PI * ovalRx * ovalRy;
+                const sizeOk = faceArea > ovalArea * 0.15 && faceArea < ovalArea * 2.5;
+
+                const isInOval = inOval && sizeOk;
+                faceInOvalRef.current = isInOval;
+                setFaceInOval(isInOval);
+
+                if (isInOval) {
+                    // Extract precise eye regions based on landmarks (or fallback to box estimations)
+                    const boxW = Math.max(10, vw * 0.08);
+                    const boxH = Math.max(10, vh * 0.05);
+                    const leftEye = eyes ? { x: eyes[0].x - boxW/2, y: eyes[0].y - boxH/2, w: boxW, h: boxH }
+                                         : { x: faceBox.x + faceBox.w * 0.15, y: faceBox.y + faceBox.h * 0.2, w: faceBox.w * 0.3, h: faceBox.h * 0.15 };
+                    const rightEye = eyes ? { x: eyes[1].x - boxW/2, y: eyes[1].y - boxH/2, w: boxW, h: boxH }
+                                          : { x: faceBox.x + faceBox.w * 0.55, y: faceBox.y + faceBox.h * 0.2, w: faceBox.w * 0.3, h: faceBox.h * 0.15 };
+
+                    const leftBrightness = getEyeBrightness(videoElement, leftEye);
+                    const rightBrightness = getEyeBrightness(videoElement, rightEye);
+
+                    if (leftBrightness !== null && rightBrightness !== null) {
+                        const avgBrightness = (leftBrightness + rightBrightness) / 2;
+                        eyeHistoryRef.current.push(avgBrightness);
+                        
+                        // Keep exactly 15 readings (~1 second at 15fps)
+                        if (eyeHistoryRef.current.length > 15) {
+                            eyeHistoryRef.current.shift();
+                        }
+
+                        // Require a full, stable buffer of 15 frames before allowing blink detection
+                        if (eyeHistoryRef.current.length === 15) {
+                            const recent = eyeHistoryRef.current;
+                            const baseline = recent.slice(0, 5).reduce((a, b) => a + b, 0) / 5;
+                            const current = recent.slice(-3).reduce((a, b) => a + b, 0) / 3;
+                            const dip = recent.slice(4, -3);
+                            const dipMin = dip.length > 0 ? Math.min(...dip) : baseline;
+                            const dropAmount = baseline - dipMin;
+
+                            // Strict Blink Criteria to prevent false positives:
+                            // 1. Drop must be at least 10 absolute units or 12% (whichever is higher) to ignore camera noise
+                            // 2. Current must recover back to near baseline (at least 92%)
+                            if (dropAmount > Math.max(10, baseline * 0.12) && current > baseline * 0.92) {
+                                if (!blinkCapturedRef.current) {
+                                    console.log('[Face Reg] Blink detected! Auto-capturing...');
+                                    setBlinkDetected(true);
+                                    blinkCapturedRef.current = true;
+                                    setRegInstruction('✓ Blink detected! Capturing photo...');
+                                    // Auto-trigger face capture after brief delay
+                                    setTimeout(() => {
+                                        handleRegisterFace();
+                                    }, 300);
+                                    return; // Stop detection loop
+                                }
+                            }
+                        }
+
+                        setRegInstruction(eyeHistoryRef.current.length < 15 ? 'Hold still...' : 'Face positioned correctly — please blink to capture');
+                    }
+                } else {
+                    eyeHistoryRef.current = []; // Clear history when out of oval to prevent movement-based false blinks
+                    setRegInstruction(
+                        !inOval ? 'Move your face to the center of the oval' 
+                        : 'Move closer to or further from the camera'
+                    );
+                }
+            } else {
+                eyeHistoryRef.current = []; // Clear history if no face
+                faceInOvalRef.current = false;
+                setFaceInOval(false);
+                setRegInstruction('No face detected — look directly at the camera');
+            }
+
+            // Continue detection loop (~15fps for efficiency)
+            regDetectionRef.current = setTimeout(() => {
+                requestAnimationFrame(detectLoop);
+            }, 66);
+        };
+
+        detectLoop();
+    }, [getEyeBrightness]);
+
+    const stopRegDetection = useCallback(() => {
+        if (regDetectionRef.current) {
+            clearTimeout(regDetectionRef.current);
+            cancelAnimationFrame(regDetectionRef.current);
+            regDetectionRef.current = null;
+        }
+    }, []);
+
     const handleRegisterFace = async () => {
+        stopRegDetection();
+        blinkCapturedRef.current = true; // Mark as captured so detection loop stops
         const videoElement = regVideoRef.current || videoRef.current;
         if (!videoElement || videoElement.readyState < 2) return;
         setWizardStep(1); // 'verifying'
@@ -1924,6 +2179,7 @@ const AiInterviewSession = () => {
             let regRes = null;
             let verifyRes = null;
             let embeddingHash = null;
+            let faceMismatchOverride = false;
 
             // CASE A: Using a PAN that belongs to someone else (verify against original holder)
             // Use PAN number for DeepFace verification since face is now registered under PAN
@@ -1969,12 +2225,16 @@ const AiInterviewSession = () => {
                     });
                     embeddingHash = regRes.data?.embedding_hash;
                 } else {
+                    // Face mismatch — allow candidate to continue but flag it for the report
                     const msg = verifyRes.data?.message || 'Face does not match your previously registered photo.';
-                    console.error('[Face] Returning candidate verification failed:', msg);
-                    setWizardStep(3);
-                    setCapturedImage(null);
-                    alert(`Identity verification failed: ${msg}\n\nYou are using a different face than what was originally registered. If you believe this is an error, please ensure good lighting and face the camera directly.`);
-                    return;
+                    console.warn('[Face] Returning candidate face mismatch detected. Allowing with flag:', msg);
+                    faceMismatchOverride = true;
+                    // Re-register with the new face so proctoring can work during the session
+                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                        person_id: personId,
+                        image_base64: b64
+                    });
+                    embeddingHash = regRes.data?.embedding_hash;
                 }
             }
             // CASE C: Brand new candidate
@@ -1987,8 +2247,8 @@ const AiInterviewSession = () => {
                 embeddingHash = regRes.data?.embedding_hash;
             }
 
-            // Validate registration result
-            const success = regRes?.data?.success || (verifyRes?.data?.verified && embeddingHash);
+            // Validate registration result (faceMismatchOverride also counts as success)
+            const success = regRes?.data?.success || (verifyRes?.data?.verified && embeddingHash) || (faceMismatchOverride && embeddingHash);
             if (!success) {
                 setWizardStep(3);
                 setCapturedImage(null);
@@ -2004,6 +2264,9 @@ const AiInterviewSession = () => {
                 const payload = { face_embedding_hash: embeddingHash };
                 if (verifyAgainstPersonId || verifyAgainstPersonPan) {
                     payload.face_verified = true;
+                }
+                if (faceMismatchOverride) {
+                    payload.identity_mismatch_override = true;
                 }
                 if (pendingPan) {
                     payload.pan_number = pendingPan;
@@ -2037,6 +2300,17 @@ const AiInterviewSession = () => {
             setCapturedImage(null);
             alert('Failed to connect to DeepFace registration service. ' + (err.response?.data?.detail || err.response?.data?.message || err.message));
         }
+    };
+
+    const handleRetryCapture = () => {
+        setWizardStep(0);
+        setCapturedImage(null);
+        setBlinkDetected(false);
+        setFaceInOval(false);
+        setRegInstruction('Position your face inside the oval');
+        blinkCapturedRef.current = false;
+        eyeHistoryRef.current = [];
+        startRegDetection();
     };
 
     const handleEnvironmentSetup = async () => {
@@ -2211,23 +2485,23 @@ const AiInterviewSession = () => {
     }, [handleAnswerSubmission]);
 
     // AUTO-RESUME MIC after Fullscreen restore
-    // GUARD: Only auto-resume AFTER face registration is complete
+    // GUARD: Only auto-resume AFTER face registration is complete and NOT paused
     useEffect(() => {
-        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current && isFaceRegistered) {
+        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current && isFaceRegistered && !isPaused && !document.hidden) {
             // FIX: Respect manual mute — don't auto-resume if user explicitly turned mic off
             if (manualMuteRef.current) {
                 console.log("Auto-resume skipped: User manually muted mic.");
                 return;
             }
             const timer = setTimeout(() => {
-                if (!isRecordingRef.current && !manualMuteRef.current) {
+                if (!isRecordingRef.current && !manualMuteRef.current && !isPaused && !document.hidden) {
                     console.log("Auto-resuming mic via Effect...");
                     startListening();
                 }
             }, 1000); // 1s buffer allowed for transition to settle
             return () => clearTimeout(timer);
         }
-    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening, isFaceRegistered]);
+    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening, isFaceRegistered, isPaused]);
 
     // (Native WebKit Speech Recognition removed in favor of AssemblyAI)
     useEffect(() => {
@@ -2408,9 +2682,13 @@ const AiInterviewSession = () => {
                     onClick={() => {
                         if (!isFullscreen) {
                             const elem = document.documentElement;
-                            if (elem.requestFullscreen) elem.requestFullscreen();
-                            else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-                            else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                            const fsPromise = elem.requestFullscreen ? elem.requestFullscreen()
+                                : elem.webkitRequestFullscreen ? elem.webkitRequestFullscreen()
+                                : elem.msRequestFullscreen ? elem.msRequestFullscreen()
+                                : Promise.reject(new Error('Fullscreen API not supported'));
+                            if (fsPromise && fsPromise.catch) {
+                                fsPromise.catch(err => console.warn('Fullscreen request denied:', err.message));
+                            }
                         }
                     }}
                     style={{
@@ -2458,9 +2736,13 @@ const AiInterviewSession = () => {
                                 <button
                                     onClick={() => {
                                         const elem = document.documentElement;
-                                        if (elem.requestFullscreen) elem.requestFullscreen();
-                                        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-                                        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                                        const fsPromise = elem.requestFullscreen ? elem.requestFullscreen()
+                                            : elem.webkitRequestFullscreen ? elem.webkitRequestFullscreen()
+                                            : elem.msRequestFullscreen ? elem.msRequestFullscreen()
+                                            : Promise.reject(new Error('Fullscreen API not supported'));
+                                        if (fsPromise && fsPromise.catch) {
+                                            fsPromise.catch(err => console.warn('Fullscreen request denied:', err.message));
+                                        }
                                     }}
                                     className="resume-integrity-btn"
                                     style={{
@@ -2700,7 +2982,16 @@ const AiInterviewSession = () => {
                                         )}
                                         
                                         {/* Overlay guides */}
-                                        <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '2px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                                        <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: `3px dashed ${faceInOval ? 'rgba(34,197,94,0.9)' : 'rgba(255,255,255,0.7)'}`, borderRadius: '50%', transition: 'border-color 0.3s ease' }}></div>
+                                        
+                                        {/* Instruction Overlay */}
+                                        {!capturedImage && wizardStep === 0 && (
+                                            <div style={{ position: 'absolute', bottom: '5%', left: '0', right: '0', textAlign: 'center' }}>
+                                                <span style={{ background: 'rgba(0,0,0,0.6)', color: faceInOval ? '#4ade80' : 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600', transition: 'color 0.3s ease' }}>
+                                                    {regInstruction}
+                                                </span>
+                                            </div>
+                                        )}
                                         
                                         {wizardStep === 1 && (
                                             <>
@@ -2735,7 +3026,7 @@ const AiInterviewSession = () => {
                                     </div>
 
                                     <button
-                                        onClick={handleRegisterFace}
+                                        onClick={wizardStep === 3 ? handleRetryCapture : handleRegisterFace}
                                         disabled={wizardStep === 1 || wizardStep === 2}
                                         style={{
                                             background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',

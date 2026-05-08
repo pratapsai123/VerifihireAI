@@ -15,12 +15,15 @@ def process_batch_assessment(batch_id):
     Generates ONE assessment pool for the entire batch based on who actually passed.
     Sends individual assessment invitation emails to each passed candidate.
     """
-    from ai_assessments.llm_client import create_llm_client, LLMKeyManager, get_default_model
+    from ai_assessments.llm_client import (
+        create_llm_client, LLMKeyManager, get_default_model,
+        _call_groq_with_backoff, GroqKeyManager
+    )
     from ai_assessments.ai_logic import (
-        _call_groq_with_backoff, _repair_pool_shortfall, _normalize_generated_pool,
+        _repair_pool_shortfall, _normalize_generated_pool,
         _generate_mcq_pool_ai_only, _generate_execution_verified_coding_pool,
         _expert_assessment_refiner, _validate_mcq_structure,
-        _mcq_difficulty_counts, _rebalance_mcq_difficulties, GroqKeyManager
+        _mcq_difficulty_counts, _rebalance_mcq_difficulties
     )
     from ai_candidates.utils import log_automation_event
 

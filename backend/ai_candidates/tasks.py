@@ -1,9 +1,9 @@
+import re
+import hashlib
 import time
 import logging
 import io
 import json
-import uuid
-import random
 import PyPDF2
 import fitz  # PyMuPDF
 import numpy as np
@@ -12,7 +12,12 @@ from celery import shared_task
 from django.conf import settings
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
-from ai_assessments.llm_client import create_llm_client, LLMKeyManager, call_llm_with_backoff, get_default_model
+from ai_assessments.llm_client import (
+    create_llm_client,
+    LLMKeyManager,
+    call_llm_with_backoff,
+    get_default_model
+)
 from .models import Candidate
 from .utils import log_automation_event
 from api.ocr_utils import _get_reader
@@ -49,7 +54,6 @@ def extract_json(text):
             
             # Simple repairs for common AI hallucinations
             # A. Remove trailing commas in objects/arrays
-            import re
             json_str = re.sub(r',\s*([\]}])', r'\1', json_str)
             
             # B. Try parsing
@@ -82,66 +86,86 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
     primary_model = get_default_model()
     fallback_model = get_default_model()
 
-    print(f"\n🚀 STARTING OPTIMIZED BATCH: {total} candidates")
-    print(f"🔑 Using {len(api_keys)} API keys with rotation.")
-    print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    print(f"\nSTARTING OPTIMIZED BATCH: {total} candidates")
+    print(f"Using {len(api_keys)} API keys with rotation.")
+    print("------------------------------------------------------------")
 
     # Log batch start for each candidate if needed, 
     # but usually we log per candidate's specific start
 
     for index, candidate in enumerate(candidates):
         progress = f"[{index + 1}/{total}]"
-        print(f"\n{progress} 📄 Processing: {candidate.full_name or 'Unknown'}")
+        print(f"\n{progress} Processing: {candidate.full_name or 'Unknown'}")
         
         try:
             candidate.refresh_from_db()
 
             # 1. TEXT EXTRACTION (Moved from View to Task)
-            if not candidate.resume_text and candidate.resume:
-                print(f"   📖 Reading file...", end="", flush=True)
+            if candidate.resume and not candidate.resume_text:
+                print(f"   Reading file...", end="", flush=True)
                 try:
                     file_bytes = candidate.resume.read()
-                    text = ""
                     
-                    # Try PyMuPDF
-                    try:
-                        doc = fitz.open(stream=file_bytes, filetype="pdf")
-                        for page in doc: text += page.get_text()
-                        doc.close()
-                    except: pass
+                    file_hash = hashlib.md5(file_bytes).hexdigest()
                     
-                    # Try PyPDF2 fallback
-                    if len(text.strip()) < 100:
+                    if candidate.resume_hash == file_hash and candidate.resume_text:
+                        print(f" Skipped (cached text reused)")
+                    else:
+                        text = ""
+                        
+                        # Try PyMuPDF
                         try:
-                            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-                            for page in pdf_reader.pages: text += (page.extract_text() or "")
-                        except: pass
-                    
-                    # Try OCR if still empty
-                    if len(text.strip()) < 100:
-                        print(" (OCR Fallback)...", end="", flush=True)
-                        try:
-                            reader = _get_reader()
-                            if reader:
-                                doc = fitz.open(stream=file_bytes, filetype="pdf")
-                                if doc.page_count > 0:
-                                    pix = doc.load_page(0).get_pixmap()
-                                    img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-                                    text = " ".join(reader.readtext(np.array(img), detail=0))
-                                doc.close()
-                        except: pass
-                    
-                    candidate.resume_text = text
-                    candidate.save()
-                    print(f" Done ({len(text)} chars)")
+                            doc = fitz.open(stream=file_bytes, filetype="pdf")
+                            for page in doc: text += page.get_text()
+                            doc.close()
+                        except fitz.FileDataError as e:
+                            logger.warning(f"PyMuPDF failed for {candidate.id}: {e}")
+                        except Exception as e:
+                            logger.error(f"Unexpected PyMuPDF error: {e}")
+                        
+                        # Try PyPDF2 fallback
+                        if len(text.strip()) < 100:
+                            try:
+                                pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                                for page in pdf_reader.pages:
+                                    text += (page.extract_text() or "")
+                            except Exception as e:
+                                logger.warning(f"PyPDF2 failed for {candidate.id}: {e}")
+                        
+                        # Try OCR if still empty
+                        if len(text.strip()) < 100:
+                            print(" (OCR Fallback)...", end="", flush=True)
+                            try:
+                                reader = _get_reader()
+                                if reader:
+                                    doc = fitz.open(stream=file_bytes, filetype="pdf")
+                                    if doc.page_count > 0:
+                                        pix = doc.load_page(0).get_pixmap()
+                                        img = Image.frombytes(
+                                            "RGB",
+                                            [pix.width, pix.height],
+                                            pix.samples
+                                        )
+                                        text = " ".join(
+                                            reader.readtext(np.array(img), detail=0)
+                                        )
+                                    doc.close()
+                            except Exception as e:
+                                logger.error(f"OCR failed for {candidate.id}: {e}")
+                        
+                        candidate.resume_text = text
+                        candidate.resume_hash = file_hash
+                        candidate.save()
+                        print(f" Done ({len(text)} chars)")
+
                 except Exception as e:
-                    print(f" ❌ Extraction failed: {e}")
+                    print(f" Extraction failed: {e}")
                     candidate.status = 'Extraction Failed'
                     candidate.save()
                     continue
 
             if not candidate.resume_text:
-                print("   ❌ No text found in resume. Skipping.")
+                print("   No text found in resume. Skipping.")
                 candidate.status = 'Extraction Failed'
                 candidate.save()
                 continue
@@ -181,7 +205,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
 
             # Centralized API call with exponential backoff and key rotation
             try:
-                print(f"   🧠 AI Analysis ({current_model})...", end="", flush=True)
+                print(f"   AI Analysis ({current_model})...", end="", flush=True)
                 # Initialize a dummy client for the first attempt; helper will rotate if needed
                 temp_client = create_llm_client(api_key=api_keys[0]) 
                 
@@ -197,7 +221,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 )
                 match_result = result if isinstance(result, dict) else extract_json(result)
             except Exception as e:
-                print(f"\n   ❌ AI Final Error: {e}")
+                print(f"\n   AI Final Error: {e}")
                 match_result = None
 
             # 3. SAVE RESULTS
@@ -242,8 +266,8 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     if i_until: candidate.available_until = parse_datetime(i_until)
 
                 candidate.save()
-                status_icon = "✅" if is_eligible else "❌"
-                print(f"\n   🏁 Done! Score: {percentage}% {status_icon}")
+                status_icon = "PASS" if is_eligible else "FAIL"
+                print(f"\n   Done! Score: {percentage}% {status_icon}")
 
                 # Log the screening result
                 log_automation_event(
@@ -256,7 +280,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             else:
                 candidate.status = 'Extraction Failed'
                 candidate.save()
-                print("\n   ❌ All AI attempts failed.")
+                print("\n   All AI attempts failed.")
                 log_automation_event(
                     candidate, 
                     'ERROR', 
@@ -268,7 +292,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             # Cooldown (Minimal because of key rotation and fast model)
             if index < total - 1:
                 wait = 3 if len(api_keys) > 1 else 10
-                print(f"   ⏳ Cooldown {wait}s...", end="", flush=True)
+                print(f"   Cooldown {wait}s...", end="", flush=True)
                 time.sleep(wait)
                 print("Ready!")
 
@@ -284,16 +308,16 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 phase='RESUME'
             )
 
-    print(f"\n✨ BATCH COMPLETE: Processed {total} candidates.")
+    print(f"\nBATCH COMPLETE: Processed {total} candidates.")
 
     if is_fully_automatic:
         passed_count = Candidate.objects.filter(batch_id=batch_id, status='Resume Passed').count()
         if passed_count > 0:
-            print(f"🚀 Triggering automated assessment for {passed_count} passed candidates...")
+            print(f"Triggering automated assessment for {passed_count} passed candidates...")
             from api.tasks import trigger_batch_assessment_task
             trigger_batch_assessment_task.delay(batch_id)
         else:
-            print("ℹ️ No candidates passed. Skipping automated assessment.")
+            print("No candidates passed. Skipping automated assessment.")
 
 
 @shared_task(bind=True, max_retries=3)
@@ -363,7 +387,8 @@ You must respond with a JSON object containing:
         response = local_llm_client.chat.completions.create(
             model=chosen_model,
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.7,
+            temperature=0.0,
+            seed=42,
             response_format={"type": "json_object"}
         )
         
@@ -426,41 +451,108 @@ You must respond with a JSON object containing:
             'total_questions': candidate.total_questions
         }
         
-    except Exception as model_err:
-        error_str = str(model_err).lower()
-        if ("rate limit" in error_str or "429" in error_str):
-            # Rotate key and retry
+    except Exception as e:
+        error_str = str(e).lower()
+        
+        if "rate limit" in error_str or "429" in error_str:
             LLMKeyManager.rotate_key()
             rotated_key = LLMKeyManager.get_current_key()
             local_llm_client = create_llm_client(api_key=rotated_key)
             
-            if chosen_model == PRIMARY_MODEL:
-                process_ai_interview_answer_task._fallback_until = _time.time() + COOLDOWN_SECONDS
-                logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL}")
-            
-            # Retry with fallback
-            response = local_llm_client.chat.completions.create(
-                model=FALLBACK_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
-                response_format={"type": "json_object"}
+            process_ai_interview_answer_task._fallback_until = (
+                _time.time() + COOLDOWN_SECONDS
             )
+            logger.warning(f"Rate limited. Switching to fallback model.")
             
-            raw_text = response.choices[0].message.content
-            data = extract_json(raw_text)
-            
-            if data:
-                return {'status': 'success', 'data': data, 'fallback_used': True}
-            else:
-                return {'error': 'AI processing failed after retry'}
+            try:
+                response = local_llm_client.chat.completions.create(
+                    model=FALLBACK_MODEL,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.0,
+                    seed=42,
+                    response_format={"type": "json_object"}
+                )
+                raw_text = response.choices[0].message.content
+                data = extract_json(raw_text)
+                if data:
+                    return {
+                        'status': 'success',
+                        'data': data,
+                        'fallback_used': True
+                    }
+                else:
+                    return {'error': 'AI processing failed after retry'}
+            except Exception as retry_err:
+                logger.error(f"Fallback also failed: {retry_err}")
+                return {'error': 'Both primary and fallback AI failed'}
+        
         else:
-            logger.error(f"AI processing error: {model_err}")
-            return {'error': 'AI processing failed'}
-    
+            logger.error(f"AI processing error: {e}")
+            if self.request.retries < self.max_retries:
+                countdown = 2 ** self.request.retries
+                raise self.retry(countdown=countdown, exc=e)
+            return {'error': 'Task failed after retries'}
+
+@shared_task(bind=True, max_retries=3)
+def extract_resume_text_task(self, candidate_id):
+    """
+    Extracts text from a single candidate's resume file.
+    """
+    try:
+        candidate = Candidate.objects.get(pk=candidate_id)
+        if not candidate.resume:
+            return {'status': 'ignored', 'message': 'No resume file found'}
+
+        file_bytes = candidate.resume.read()
+        text = ""
+        
+        # Try PyMuPDF
+        try:
+            import fitz
+            doc = fitz.open(stream=file_bytes, filetype="pdf")
+            for page in doc: text += page.get_text()
+            doc.close()
+        except Exception as e:
+            logger.warning(f"PyMuPDF failed for candidate {candidate_id}: {e}")
+        
+        # Try PyPDF2 fallback
+        if len(text.strip()) < 100:
+            try:
+                import PyPDF2
+                pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                for page in pdf_reader.pages: text += (page.extract_text() or "")
+            except Exception as e:
+                logger.warning(f"PyPDF2 failed for candidate {candidate_id}: {e}")
+        
+        # Try OCR if still empty
+        if len(text.strip()) < 100:
+            try:
+                from api.ocr_utils import _get_reader
+                from PIL import Image
+                import numpy as np
+                reader = _get_reader()
+                if reader:
+                    import fitz
+                    doc = fitz.open(stream=file_bytes, filetype="pdf")
+                    if doc.page_count > 0:
+                        pix = doc.load_page(0).get_pixmap()
+                        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                        text = " ".join(reader.readtext(np.array(img), detail=0))
+                    doc.close()
+            except Exception as e:
+                logger.warning(f"OCR failed for candidate {candidate_id}: {e}")
+        
+        if text.strip():
+            candidate.resume_text = text
+            candidate.save(update_fields=['resume_text'])
+            return {'status': 'success', 'length': len(text)}
+        else:
+            return {'status': 'failed', 'message': 'No text extracted'}
+
+    except Candidate.DoesNotExist:
+        return {'status': 'error', 'message': 'Candidate not found'}
     except Exception as e:
-        logger.error(f"Task processing error: {e}")
+        logger.error(f"Error in extract_resume_text_task: {e}")
         if self.request.retries < self.max_retries:
-            # Exponential backoff retry
-            countdown = 2 ** self.request.retries
-            raise self.retry(countdown=countdown, exc=e)
-        return {'error': 'Task failed after retries'}
+            raise self.retry(countdown=5, exc=e)
+        return {'status': 'error', 'message': str(e)}

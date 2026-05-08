@@ -17,7 +17,7 @@ class EdgeTTSEngine:
 
     async def synthesize(self, text: str) -> bytes:
         """
-        Synthesize text to WAV audio bytes using Edge TTS.
+        Synthesize text to WAV audio bytes using Edge TTS (Legacy full-buffer).
         """
         if not text or not text.strip():
             return b""
@@ -25,9 +25,6 @@ class EdgeTTSEngine:
         try:
             communicate = edge_tts.Communicate(text, DEFAULT_VOICE)
             buffer = io.BytesIO()
-            
-            # edge-tts generates MP3/Opus data by default, 
-            # we'll stream it into a buffer.
             async for chunk in communicate.stream():
                 if chunk["type"] == "audio":
                     buffer.write(chunk["data"])
@@ -36,6 +33,22 @@ class EdgeTTSEngine:
             return buffer.read()
         except Exception as e:
             logger.error(f"Edge TTS Synthesis Error: {str(e)}")
+            raise
+
+    async def stream_synthesize(self, text: str):
+        """
+        Generator that yields audio chunks for real-time streaming.
+        """
+        if not text or not text.strip():
+            return
+
+        try:
+            communicate = edge_tts.Communicate(text, DEFAULT_VOICE)
+            async for chunk in communicate.stream():
+                if chunk["type"] == "audio":
+                    yield chunk["data"]
+        except Exception as e:
+            logger.error(f"Edge TTS Streaming Error: {str(e)}")
             raise
 
 def get_tts_engine():

@@ -86,7 +86,13 @@ class Candidate(models.Model):
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Internal UUID for the bulk session")
     batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True, help_text="Descriptive name (JD_date_time)")
+    resume_hash = models.CharField(max_length=64, blank=True, null=True, help_text="MD5 hash of resume file for caching")
     public_token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
+    
+    # Identity Mismatch Tracking (Override Logic)
+    identity_mismatch_detected = models.BooleanField(default=False, help_text="True if face mismatch was detected but candidate was allowed to override")
+    original_identity_photo = models.ImageField(upload_to='identity_overrides/', blank=True, null=True, help_text="Snapshot of the previously registered face for comparison")
+    identity_mismatch_details = models.JSONField(default=dict, blank=True, help_text="Details about the mismatch (timestamp, old public_token, etc.)")
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"

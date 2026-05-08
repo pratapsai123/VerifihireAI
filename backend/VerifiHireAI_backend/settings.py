@@ -130,9 +130,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'ver'),
+        'NAME': os.environ.get('DB_NAME', 'rakeshdb1'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         'CONN_MAX_AGE': 60,  # Keep connections alive for 60 seconds (pooling)
@@ -283,7 +283,7 @@ DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
 DEEPSEEK_BASE_URL = config('DEEPSEEK_BASE_URL', default='https://api.deepseek.com')
 DEEPSEEK_MODEL = config('DEEPSEEK_MODEL', default='deepseek-v4-flash')
 DEEPSEEK_API_KEYS = [
-    config('DEEPSEEK_API_KEY_1', default=''),
+    config('DEEPSEEK_API_KEY_1', default='sk-6535c0f5ed654ee1a48ebf2a08efa1cd'),
     # Add more keys for rotation / higher concurrency:
     # config('DEEPSEEK_API_KEY_2', default=''),
     # config('DEEPSEEK_API_KEY_3', default=''),

@@ -111,6 +111,11 @@ class AIAssessmentSubmission(models.Model):
     coding_time_spent = models.IntegerField(default=0) # Total seconds spent in coding phase
     last_phase_switch = models.DateTimeField(default=timezone.now) # To calculate elapsed since last interaction
     is_deleted = models.BooleanField(default=False)
+    
+    # Identity Mismatch Tracking (Override Logic)
+    identity_mismatch_detected = models.BooleanField(default=False, help_text="True if face mismatch was detected but candidate was allowed to override")
+    original_identity_photo = models.ImageField(upload_to='identity_overrides/assessments/', blank=True, null=True, help_text="Snapshot of the previously registered face for comparison")
+    identity_mismatch_details = models.JSONField(default=dict, blank=True, help_text="Details about the mismatch (timestamp, old public_token, etc.)")
 
     def __str__(self):
         return f"AI Submission - {self.candidate_name} ({self.candidate_email})"

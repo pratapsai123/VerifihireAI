@@ -223,6 +223,10 @@ const CreateAssessment = () => {
             alert('Please enter a valid number of Coding tasks.');
             return;
         }
+        if (formData.num_mcqs === 0 && formData.num_coding === 0) {
+            alert('Cannot generate an empty assessment! Please add at least one MCQ or Coding task.');
+            return;
+        }
         if (!formData.mcq_time && formData.num_mcqs > 0) {
             alert('Please enter a valid MCQ Time.');
             return;
