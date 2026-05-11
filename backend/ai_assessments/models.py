@@ -89,7 +89,11 @@ class AIAssessmentSubmission(models.Model):
     coding_score = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
     percentage = models.FloatField(default=0.0)
-    status = models.CharField(max_length=20, default='rejected')  # 'selected' or 'rejected'
+    status = models.CharField(max_length=20, default='rejected', choices=[
+        ('selected', 'Selected'),
+        ('hold', 'Hold - Manual Review Required'),
+        ('rejected', 'Not Qualified')
+    ])
 
     # Monitoring Data
     integrity_score = models.FloatField(default=100.0)
