@@ -1893,23 +1893,18 @@ def generate_candidate_report(submission_id):
 
 
     # ── Determine Dynamic Result Status ──
-
-    # Priority: 1. Failure (Rejected) 2. Suspicion (Hold) 3. Standard Result
-
+    # Priority: 1. 100% Score Override (Selected) 2. Failure (Rejected) 3. Suspicion (Hold) 4. Standard Result
     final_result_text = submission.result or '-'
-
     result_style = styles['InfoValue']
 
-    if not submission.is_qualified:
-
+    if pct >= 100.0:
+        final_result_text = 'SELECTED'
+        result_style = styles['QualifiedBadge']
+    elif not submission.is_qualified:
         final_result_text = 'REJECTED'
-
         result_style = styles['NotQualifiedBadge']
-
     elif integrity_score < 70:
-
         final_result_text = 'HOLD'
-
         result_style = styles['NotQualifiedBadge']
 
 

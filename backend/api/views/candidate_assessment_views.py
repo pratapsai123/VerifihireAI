@@ -1028,18 +1028,19 @@ def update_standard_integrity_view(request, token):
         if penalty > 0:
             integrity.integrity_score = max(0.0, integrity.integrity_score - penalty)
         
-        # Handle Screenshot if provided
+        # Always create an IntegrityScreenshot record to ensure it appears in the report log,
+        # even if the visual snapshot is missing.
         screenshot_b64 = data.get('screenshot')
         webcam_b64 = data.get('webcam_screenshot')
         
-        if screenshot_b64 or webcam_b64:
-            try:
-                integrity_snap = IntegrityScreenshot(
-                    invitation=inv,
-                    event_type=event_type,
-                    timestamp=timezone.now()
-                )
-                
+        try:
+            integrity_snap = IntegrityScreenshot(
+                invitation=inv,
+                event_type=event_type,
+                timestamp=timezone.now()
+            )
+            
+            if screenshot_b64 or webcam_b64:
                 # Remove header if present (data:image/png;base64,...)
                 if screenshot_b64:
                     if ';' in screenshot_b64 and 'base64,' in screenshot_b64:
@@ -1065,11 +1066,11 @@ def update_standard_integrity_view(request, token):
                     cname = f"cam_{inv.id}_{event_type}_{int(timezone.now().timestamp())}.{ext}"
                     integrity_snap.webcam_screenshot.save(cname, ContentFile(webcam_data), save=False)
 
-                integrity_snap.save()
-            except Exception as se:
-                import traceback
-                print(f"Failed to save screenshot: {str(se)}")
-                print(traceback.format_exc())
+            integrity_snap.save()
+        except Exception as se:
+            import traceback
+            print(f"Failed to save screenshot: {str(se)}")
+            print(traceback.format_exc())
 
         integrity.save()
         
@@ -1226,18 +1227,18 @@ def _update_submission_scoring_logic(submission, finalize=False):
         if is_zero_score:
             submission.is_qualified = False
             submission.result = 'rejected'
-        elif has_mcq and not passed_mcq:
-            submission.is_qualified = False
-            submission.result = 'hold'
-        elif has_coding and not passed_coding:
-            submission.is_qualified = False
-            submission.result = 'hold'
-        elif not passed_integrity:
-            submission.is_qualified = False
-            submission.result = 'hold'
         elif not passed_overall:
             submission.is_qualified = False
             submission.result = 'rejected'
+        elif has_mcq and not passed_mcq:
+            submission.is_qualified = False
+            submission.result = 'rejected'
+        elif has_coding and not passed_coding:
+            submission.is_qualified = False
+            submission.result = 'rejected'
+        elif not passed_integrity:
+            submission.is_qualified = False
+            submission.result = 'hold'
         else:
             submission.is_qualified = True
             submission.result = 'selected'
@@ -2443,11 +2444,17 @@ def save_all_candidate_details_view(request):
         
         person_id = f"{norm_pan}"
         
-        # 2. PAN-to-Face Linkage (Decoupled from Email)
-        # We no longer block if the same email uses a different PAN or vice-versa,
-        # but we maintain the logic that one PAN belongs to one physical person (biometrics).
+        # 2. Strict Email-to-PAN Verification
+        # To prevent malpractice, we ensure that an email address cannot be used with a 
+        # different PAN if it has already been registered in the system.
+        existing_email_link = IdentityLink.objects.filter(email=norm_email).first()
+        if existing_email_link and existing_email_link.pan_number != norm_pan:
+            _save_identity_violation_screenshot(invitation, snapshot, "Email-PAN Mismatch")
+            return Response({
+                'error': 'Identity Violation: This email address is already linked to a different candidate identity. To ensure assessment integrity, you must use your original registered credentials.'
+            }, status=status.HTTP_403_FORBIDDEN)
 
-        # 3. Biometric Verification (Lookup by PAN only)
+        # 3. Biometric Verification (Lookup by PAN)
         identity_link = IdentityLink.objects.filter(pan_number=norm_pan).first()
         
         verify_status = False
