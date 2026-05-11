@@ -11,6 +11,8 @@ const ResultsAI = () => {
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'assessment');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortField, setSortField] = useState(null); // 'score' | 'name' | 'date' | null
+    const [sortDirection, setSortDirection] = useState('desc'); // 'asc' | 'desc'
 
     // Auth context
     const me = (() => {
@@ -395,6 +397,8 @@ const ResultsAI = () => {
         setSelected(new Set());
         setStatusFilter('all');
         setCurrentPage(1);
+        setSortField(null);
+        setSortDirection('desc');
     };
 
     const getStatusStyle = (rawStatus) => {
@@ -463,6 +467,70 @@ const ResultsAI = () => {
         return false;
     };
 
+    // ── Score extraction helper for sorting ──
+    const getScoreValue = (r) => {
+        if (activeTab === 'resume') return r.resume_score || 0;
+        if (activeTab === 'assessment' || activeTab === 'standard') return r.percentage ?? 0;
+        if (activeTab === 'interview') {
+            if (r.interview_summary?.length > 0) {
+                return Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview_summary.length * 10)) * 100);
+            }
+            return 0;
+        }
+        if (activeTab === 'fully_automatic') {
+            // Use best available stage score
+            if (r.interview?.interview_summary?.length > 0) {
+                return Math.round((r.interview.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview.interview_summary.length * 10)) * 100);
+            }
+            if (r.assessment) return r.assessment.percentage ?? 0;
+            if (r.resume) return r.resume.resume_score ?? 0;
+        }
+        return 0;
+    };
+
+    const handleSort = (field) => {
+        if (sortField === field) {
+            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortField(field);
+            setSortDirection('desc');
+        }
+        setCurrentPage(1);
+    };
+
+    // ── CSV export for selected candidates ──
+    const exportSelectedCSV = () => {
+        const items = currentRows.filter(r => selected.has(r._deleteKey));
+        if (items.length === 0) return;
+
+        const headers = ['Name', 'Email', 'Score (%)', 'Status', 'Date'];
+        const csvRows = [headers.join(',')];
+
+        items.forEach(r => {
+            const name = (r.full_name || r.candidate?.name || 'N/A').replace(/,/g, ' ');
+            const email = (r.email || r.candidate?.email || 'N/A').replace(/,/g, ' ');
+            const score = getScoreValue(r);
+            const status = activeTab === 'fully_automatic'
+                ? (r.interview?.status || r.assessment?.status || r.resume?.status || 'N/A')
+                : (r.status || 'N/A');
+            const date = new Date(r.created_at || r.submitted_at || r.completed_at || 0).toLocaleDateString();
+            csvRows.push([`"${name}"`, `"${email}"`, score, `"${status}"`, `"${date}"`].join(','));
+        });
+
+        const csvContent = csvRows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        const batchLabel = selectedRole ? selectedRole.replace('AUTO_', '').replace('MANUAL_', '') : 'results';
+        link.setAttribute('download', `VerifiHire_${batchLabel}_${new Date().toISOString().slice(0, 10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        showToast('success', `Exported ${items.length} candidate(s) to CSV.`);
+    };
+
     const getDataForActiveContext = () => {
         if (!selectedRole || !groupedData[selectedRole]) return [];
         const roleData = groupedData[selectedRole];
@@ -484,6 +552,26 @@ const ResultsAI = () => {
                 const pass = isPass(r, activeTab);
                 return statusFilter === 'pass' ? pass : !pass;
             });
+
+        // Apply sorting (only for AI Interview tab)
+        if (sortField && activeTab === 'interview') {
+            rows = [...rows].sort((a, b) => {
+                let cmp = 0;
+                if (sortField === 'score') {
+                    cmp = getScoreValue(a) - getScoreValue(b);
+                } else if (sortField === 'name') {
+                    const nameA = (a.full_name || a.candidate?.name || '').toLowerCase();
+                    const nameB = (b.full_name || b.candidate?.name || '').toLowerCase();
+                    cmp = nameA.localeCompare(nameB);
+                } else if (sortField === 'date') {
+                    const dateA = new Date(a.created_at || a.submitted_at || a.completed_at || 0).getTime();
+                    const dateB = new Date(b.created_at || b.submitted_at || b.completed_at || 0).getTime();
+                    cmp = dateA - dateB;
+                }
+                return sortDirection === 'asc' ? cmp : -cmp;
+            });
+        }
+
         return rows;
     })();
 
@@ -1536,6 +1624,24 @@ const ResultsAI = () => {
                                         </div>
 
                                         <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF', fontWeight: '700' }}>{currentRows.length} results</span>
+
+                                        {/* Export CSV — only on AI Interview tab when candidates are selected */}
+                                        {activeTab === 'interview' && someSelected && (
+                                            <button
+                                                onClick={exportSelectedCSV}
+                                                style={{
+                                                    padding: '0.3rem 0.85rem', borderRadius: '10px',
+                                                    border: '1px solid #059669', background: '#ECFDF5',
+                                                    color: '#059669', fontWeight: '700', fontSize: '0.75rem',
+                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                }}
+                                                title="Export selected candidates as CSV"
+                                            >
+                                                <i className="fa-solid fa-file-csv" />
+                                                Export CSV ({selectedCount})
+                                            </button>
+                                        )}
+
                                         {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
                                         {canDelete && someSelected && (
                                             <button
@@ -1568,10 +1674,49 @@ const ResultsAI = () => {
                                                             <th style={{ width: '40px', textAlign: 'center' }}>
                                                                 <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
                                                             </th>
-                                                            <th>Candidate Info</th>
+                                                            {activeTab === 'interview' ? (
+                                                                <th
+                                                                    style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                    onClick={() => handleSort('name')}
+                                                                    title="Sort by name"
+                                                                >
+                                                                    Candidate Info
+                                                                    {sortField === 'name' && (
+                                                                        <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                           style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                    )}
+                                                                </th>
+                                                            ) : (
+                                                                <th>Candidate Info</th>
+                                                            )}
                                                             {activeTab === 'fully_automatic' ? (
                                                                 <>
                                                                     <th style={{ minWidth: '400px' }}>Pipeline Status</th>
+                                                                </>
+                                                            ) : activeTab === 'interview' ? (
+                                                                <>
+                                                                    <th
+                                                                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                        onClick={() => handleSort('score')}
+                                                                        title="Sort by score"
+                                                                    >
+                                                                        Result
+                                                                        {sortField === 'score' && (
+                                                                            <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                        )}
+                                                                    </th>
+                                                                    <th
+                                                                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                        onClick={() => handleSort('date')}
+                                                                        title="Sort by date"
+                                                                    >
+                                                                        Date
+                                                                        {sortField === 'date' && (
+                                                                            <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                        )}
+                                                                    </th>
                                                                 </>
                                                             ) : (
                                                                 <>
