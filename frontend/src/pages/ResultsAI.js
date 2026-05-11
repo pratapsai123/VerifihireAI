@@ -371,24 +371,6 @@ const ResultsAI = () => {
         }
     };
 
-    useEffect(() => {
-        const sid = searchParams.get('subId');
-        if (sid) {
-            // Support both new prefixed IDs and legacy numeric IDs
-            const sub = aiAssessments.find(a => a.submission_id === sid || a.submission_id === `ai_${sid}` || a.id === parseInt(sid));
-            if (sub && sub !== viewedSubmission) {
-                setViewedSubmission(sub);
-            }
-        } else if (viewedSubmission) {
-            setViewedSubmission(null);
-        }
-    }, [searchParams, aiAssessments, viewedSubmission]);
-
-    useEffect(() => {
-        const tab = searchParams.get('tab');
-        if (tab && tab !== activeTab) setActiveTab(tab);
-    }, [searchParams, activeTab]);
-
     const handleTabChange = (tab) => {
         setActiveTab(tab);
         setSearchParams({ tab });
@@ -400,6 +382,7 @@ const ResultsAI = () => {
     const getStatusStyle = (rawStatus) => {
         const s = rawStatus?.toLowerCase();
         if (s === 'selected' || s === 'resume passed') return { background: '#E6FBF5', color: '#05CD99' };
+        if (s === 'hold') return { background: '#FFF8E1', color: '#F59E0B' };
         if (s === 'rejected' || s === 'resume failed') return { background: '#FFF5F5', color: '#EE5D50' };
         if (s === 'completed' || s === 'hired') return { background: '#E6FBF5', color: '#05CD99' };
         if (s === 'extraction failed') return { background: '#FFF5F5', color: '#EE5D50' };
@@ -408,11 +391,12 @@ const ResultsAI = () => {
 
     const getStatusLabel = (rawStatus) => {
         const map = {
-            'Resume Passed': 'Pass ✓',
-            'Resume Failed': 'Fail ✗',
-            'selected': 'Qualified ✓',
+            'Resume Passed': 'Pass ',
+            'Resume Failed': 'Fail ',
+            'selected': 'Qualified ',
+            'hold': 'Hold - Manual Review',
             'rejected': 'Not Qualified',
-            'Qualified': 'Qualified ✓',
+            'Qualified': 'Qualified ',
             'Not Qualified': 'Not Qualified',
             'Completed': 'Completed',
             'Hired': 'Hired',
@@ -428,8 +412,6 @@ const ResultsAI = () => {
         const processGroup = (items, type) => {
             items.forEach(item => {
                 const sid = String(item.submission_id || '');
-                // We removed the 'aicand_' check here because assessments are now properly generated as 'ai_' prefixed records.
-
                 const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
                 if (!candidateMap[email]) {
                     candidateMap[email] = {
@@ -470,7 +452,6 @@ const ResultsAI = () => {
         if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
         if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
         if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: r.submission_id }));
-
         if (activeTab === 'standard') return roleData.standard.map(r => ({ ...r, _type: 'manual_assessment', _deleteKey: r.submission_id }));
         return [];
     };
@@ -1111,7 +1092,7 @@ const ResultsAI = () => {
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
                                                                         <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Status</td>
                                                                         <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700', textTransform: 'uppercase' }}>
-                                                                            {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : (viewedSubmission.status === 'rejected' || viewedSubmission.status === 'hold') ? 'Not Qualified' : viewedSubmission.status}
+                                                                            {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : viewedSubmission.status === 'hold' ? 'Hold - Manual Review' : 'Not Qualified'}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

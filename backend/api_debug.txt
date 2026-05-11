@@ -5020,3 +5020,229 @@ Host: 127.0.0.1:8001
 [2026-05-10 12:24:46.454886+00:00] PUBLIC ACCESS: Token='14b02625-40a1-47c8-8313-0f9ece9600cb'
 Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778415886445']}>
 Host: 127.0.0.1:8001
+
+[2026-05-11 10:51:30] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    prices = [int(x) for x in input_data[1:]]\n    if n < 2:\n        print(0)\n        return\n    min_p = float('inf')\n    max_prof = 0\n    for p in prices:\n        min_p = min(min_p, p)\n        max_prof = max(max_prof, p - min_p)\n    print(max_prof)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "25\n470 48 355 117 211 498 448 306 319 341 374 371 79 175 244 175 81 131 273 338 111 196 46 88 27",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:51:30] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    gas = [int(x) for x in data[1:n+1]]\n    cost = [int(x) for x in data[n+1:2*n+1]]\n    total_gas = sum(gas)\n    total_cost = sum(cost)\n    if total_gas < total_cost:\n        print(-1)\n        return\n    start = tank = 0\n    for i in range(len(gas)):\n        tank += gas[i] - cost[i]\n        if tank < 0:\n            start = i + 1\n            tank = 0\n    print(start)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "3\n6 3 2\n4 1 5",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:51:30] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if len(input_data) < 3: return\n    m = int(input_data[0])\n    n = int(input_data[1])\n    k = int(input_data[2])\n    def enough(x):\n        count = 0\n        for i in range(1, m + 1):\n            count += min(x // i, n)\n        return count >= k\n    low, high = 1, m * n\n    while low < high:\n        mid = low + (high - low) // 2\n        if enough(mid):\n            high = mid\n        else:\n            low = mid + 1\n    print(low)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "8\n12\n25",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:52:16] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\nfrom collections import Counter\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    arr1 = [int(x) for x in data[1:n+1]]\n    m = int(data[n+1])\n    arr2 = [int(x) for x in data[n+2:n+2+m]]\n    freq = Counter(arr1)\n    result = []\n    for num in arr2:\n        result.extend([num] * freq[num])\n        del freq[num]\n    for num in sorted(freq.keys()):\n        result.extend([num] * freq[num])\n    print(\" \".join(map(str, result)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "4\n10 7 7 1\n4\n4 9 4 7",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:52:16] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    m = int(data[0])\n    n = int(data[1])\n    matrix = []\n    idx = 2\n    for i in range(m):\n        row = [int(x) for x in data[idx:idx+n]]\n        matrix.append(row)\n        idx += n\n    rows = set()\n    cols = set()\n    for i in range(m):\n        for j in range(n):\n            if matrix[i][j] == 0:\n                rows.add(i)\n                cols.add(j)\n    for i in range(m):\n        for j in range(n):\n            if i in rows or j in cols:\n                matrix[i][j] = 0\n    total = sum(sum(row) for row in matrix)\n    print(total)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "5\n3\n5 7 3 9 5",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:52:16] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef is_palindrome(s):\n    return s == s[::-1]\n\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    words = data[1:n+1]\n    count = 0\n    for i in range(n):\n        for j in range(n):\n            if i != j and is_palindrome(words[i] + words[j]):\n                count += 1\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "10\nlink host host node item_77 node task status node node",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:04] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if len(data) < 2: return\n    s, t = data[0], data[1]\n    if len(s) != len(t):\n        print(\"false\")\n        return\n    s_to_t = {}\n    t_to_s = {}\n    for c1, c2 in zip(s, t):\n        if c1 in s_to_t and s_to_t[c1] != c2:\n            print(\"false\")\n            return\n        if c2 in t_to_s and t_to_s[c2] != c1:\n            print(\"false\")\n            return\n        s_to_t[c1] = c2\n        t_to_s[c2] = c1\n    print(\"true\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "json\nTASK-795",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:04] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    a = [int(x) for x in data[1:n+1]]\n    b = [int(x) for x in data[n+1:2*n+1]]\n    pairs = sorted(zip(a, b), key=lambda x: x[1])\n    count = 0\n    cur_end = float('-inf')\n    for s, e in pairs:\n        if s > cur_end:\n            count += 1\n            cur_end = e\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "4\n41 30 12 20\n92 93 77 59",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:04] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef total_n_queens(n):\n    def is_safe(board, row, col):\n        for i in range(row):\n            if board[i] == col or abs(board[i] - col) == abs(i - row):\n                return False\n        return True\n    def backtrack(row):\n        if row == n:\n            return 1\n        count = 0\n        for col in range(n):\n            if is_safe(board, row, col):\n                board[row] = col\n                count += backtrack(row + 1)\n        return count\n    board = [-1] * n\n    return backtrack(0)\n\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    print(total_n_queens(n))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "7",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:46] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    s = sys.stdin.read().strip().lower()\n    alphabet = set('abcdefghijklmnopqrstuvwxyz')\n    print(\"true\" if alphabet.issubset(set(s)) else \"false\")\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "DATA-187",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:46] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    nums = [int(x) for x in input_data[1:]]\n    if not nums:\n        print(0)\n        return\n    if len(nums) <= 2:\n        print(max(nums))\n        return\n    prev1, prev2 = 0, 0\n    for num in nums:\n        temp = prev1\n        prev1 = max(prev2 + num, prev1)\n        prev2 = temp\n    print(prev1)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "11\n64 56 88 67 24 82 32 20 36 35 62",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:53:46] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    minProfit = int(data[1])\n    m = int(data[2])\n    group = [int(x) for x in data[3:3+m]]\n    profit = [int(x) for x in data[3+m:3+2*m]]\n    MOD = 10**9 + 7\n    dp = [[0] * (minProfit + 1) for _ in range(n + 1)]\n    dp[0][0] = 1\n    for i in range(m):\n        for j in range(n, group[i] - 1, -1):\n            for k in range(minProfit, -1, -1):\n                dp[j][k] = (dp[j][k] + dp[j - group[i]][max(0, k - profit[i])]) % MOD\n    ans = sum(dp[i][minProfit] for i in range(n + 1)) % MOD\n    print(ans)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "8\n2\n5\n5 2 3 4 3\n5 2 4 1 2",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:54:38] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if len(data) < 2: return\n    jewels, stones = data[0], data[1]\n    jewel_set = set(jewels)\n    count = sum(1 for s in stones if s in jewel_set)\n    print(count)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "token\nhandler",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:54:38] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    values = [int(x) for x in data[1:n+1]]\n    print(sum(values))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "8\n20 2 18 9 13 19 4 14",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:54:38] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    heights = [int(x) for x in data[1:n+1]]\n    q = int(data[n+1])\n    queries = [int(x) for x in data[n+2:n+2+q]]\n    res = []\n    for idx in queries:\n        idx = min(idx, n - 1)\n        res.append(str(max(heights[:idx+1])))\n    print(\" \".join(res))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n277 51 405 394 65 114\n4\n14 6 2 1",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:55:38] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    m = int(data[0])\n    n = int(data[1])\n    matrix = []\n    idx = 2\n    for i in range(m):\n        row = [int(x) for x in data[idx:idx+n]]\n        matrix.append(row)\n        idx += n\n    row_mins = [min(row) for row in matrix]\n    col_maxs = [max(matrix[i][j] for i in range(m)) for j in range(n)]\n    lucky = 0\n    for i in range(m):\n        for j in range(n):\n            if matrix[i][j] == row_mins[i] and matrix[i][j] == col_maxs[j]:\n                lucky += 1\n    print(lucky)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "2\n5\n4 9 1 14 14",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:55:38] EXECUTOR FAILURE: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    cost = [int(x) for x in data[1:n+1]]\n    if n <= 1:\n        print(0)\n        return\n    a, b = cost[0], cost[1]\n    for i in range(2, n):\n        a, b = b, cost[i] + min(a, b)\n    print(min(a, b))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "15\n99 51 77 46 13 5 22 1 20 98 92 65 9 96 93",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 10:55:38] EXECUTOR FAILURE: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    m = int(data[0])\n    nums1 = [int(x) for x in data[1:m+1]]\n    n = int(data[m+1])\n    nums2 = [int(x) for x in data[m+2:m+2+n]]\n    merged = sorted(nums1 + nums2)\n    mid = len(merged) // 2\n    if len(merged) % 2 == 1:\n        print(merged[mid])\n    else:\n        print((merged[mid-1] + merged[mid]) / 2)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "6\n45 21 23 36 10 9\n8\n43 36 7 41 5 19 19 3",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-11 05:25:38.532895+00:00] ERROR in GenerateAssessmentView: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\r8\backend\ai_assessments\views.py", line 904, in post
+    raise Exception(
+Exception: All coding challenges failed final quality check (insufficient test cases). After removing 0 invalid challenges, only 0 valid challenges remain but 3 required.
+
+RAW: No response received
+
+[2026-05-11 05:34:36.376156+00:00] PUBLIC ACCESS: Token='a42eee2c-3a13-4834-ba22-23b046632f66'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778477676350']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 05:34:53.656156+00:00] PUBLIC ACCESS: Token='a42eee2c-3a13-4834-ba22-23b046632f66'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778477693638']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 05:34:53.661912+00:00] PUBLIC ACCESS: Token='a42eee2c-3a13-4834-ba22-23b046632f66'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778477693637']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:15:29.323185+00:00] PUBLIC ACCESS: Token='51d78df1-f59b-4a17-8690-43203fc87568'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778480129308']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:15:32.874767+00:00] PUBLIC ACCESS: Token='51d78df1-f59b-4a17-8690-43203fc87568'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778480132861']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:15:32.883189+00:00] PUBLIC ACCESS: Token='51d78df1-f59b-4a17-8690-43203fc87568'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778480132862']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:37:13.336180+00:00] PUBLIC ACCESS: Token='51d78df1-f59b-4a17-8690-43203fc87568'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778481433327']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:37:13.350858+00:00] PUBLIC ACCESS: Token='51d78df1-f59b-4a17-8690-43203fc87568'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778481433337']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:41:51.838158+00:00] PUBLIC ACCESS: Token='3efa3634-1913-4b7b-8985-f5778cd0519b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778481711817']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:41:58.224655+00:00] PUBLIC ACCESS: Token='3efa3634-1913-4b7b-8985-f5778cd0519b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778481718218']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 06:41:58.235078+00:00] PUBLIC ACCESS: Token='3efa3634-1913-4b7b-8985-f5778cd0519b'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778481718221']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 09:51:02.759069+00:00] PUBLIC ACCESS: Token='e7066c43-1082-4d46-9ba2-3cc92bc6c7a8'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778493062731']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 09:51:39.562837+00:00] PUBLIC ACCESS: Token='e7066c43-1082-4d46-9ba2-3cc92bc6c7a8'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778493099546']}>
+Host: 127.0.0.1:8001
+
+[2026-05-11 09:51:39.569178+00:00] PUBLIC ACCESS: Token='e7066c43-1082-4d46-9ba2-3cc92bc6c7a8'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778493099547']}>
+Host: 127.0.0.1:8001

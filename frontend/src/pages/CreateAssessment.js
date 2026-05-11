@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/CreateAssessment.css';
 
-const MAX_CODING_TASKS = 50;
+const MAX_CODING_TASKS = 99;
 const STORAGE_KEY = 'ai_assessment_create_form_data';
 
 const CreateAssessment = () => {
@@ -417,14 +417,15 @@ const CreateAssessment = () => {
                             <label>MCQ Questions</label>
                             <div className="input-with-marker">
                                 <input
-                                    type="number" min="0" max="50"
+                                    type="number" min="0" max="999"
                                     value={formData.num_mcqs}
                                     onChange={(e) => {
                                         const val = e.target.value;
                                         if (val === '') {
                                             handleChange('num_mcqs', '');
                                         } else {
-                                            handleChange('num_mcqs', parseInt(val) || 0);
+                                            const num = Math.min(parseInt(val) || 0, 999);
+                                            handleChange('num_mcqs', num);
                                         }
                                     }}
                                     onBlur={() => { if (formData.num_mcqs === '') handleChange('num_mcqs', 10); }}
@@ -476,16 +477,15 @@ const CreateAssessment = () => {
                             <label>No. of Applicants</label>
                             <div className="input-with-marker">
                                 <input
-                                    type="number" min="1" max="1000"
+                                    type="number" min="1" max="999"
                                     value={formData.num_applicants || ''}
                                     onChange={(e) => {
                                         const val = e.target.value;
                                         if (val === '') {
                                             handleChange('num_applicants', '');
                                         } else {
-                                            const n = parseInt(val) || 1;
+                                            const n = Math.min(parseInt(val) || 1, 999);
                                             handleChange('num_applicants', n);
-                                            // Reset toggle if applicants = 1
                                             if (n <= 1) handleChange('same_questions_for_all', false);
                                         }
                                     }}

@@ -306,27 +306,27 @@ class SubmitAssessmentView(APIView):
                 percentage = 0
 
             # --- RIGOROUS HIRING STANDARDS ---
-            # Enforce minimum thresholds for individual sections: MCQ 60%, Coding 50%, Integrity 70%
+            # Enforce minimum thresholds for individual sections: MCQ 60%, Coding 50%, Integrity 50%
             MIN_MCQ_THRESHOLD = 60.0
             MIN_CODING_THRESHOLD = 50.0
-            MIN_INTEGRITY_THRESHOLD = 70.0
+            INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if performance passed
 
             passed_overall = percentage >= assessment.pass_threshold
             passed_mcq = mcq_percentage >= MIN_MCQ_THRESHOLD
             passed_coding = coding_percentage >= MIN_CODING_THRESHOLD
-            passed_integrity = submission.integrity_score >= MIN_INTEGRITY_THRESHOLD
+            passed_integrity = submission.integrity_score >= INTEGRITY_HOLD_THRESHOLD
 
             # Selection Logic based on user requirement:
-            # 1. Integrity < 70% -> REJECTED
-            # 2. Performance < Threshold -> REJECTED
+            # 1. Performance < Threshold -> REJECTED
+            # 2. All Performance Pass + Integrity < 50% -> HOLD (for manual review)
             # 3. All Pass -> SELECTED
-            
-            if not passed_integrity:
-                pass_status = 'rejected'
-            elif (possible_mcq_points > 0 and not passed_mcq) or (possible_coding_points > 0 and not passed_coding):
+
+            if (possible_mcq_points > 0 and not passed_mcq) or (possible_coding_points > 0 and not passed_coding):
                 pass_status = 'rejected'
             elif not passed_overall:
                 pass_status = 'rejected'
+            elif not passed_integrity:
+                pass_status = 'hold'  # Passed performance but failed integrity - needs review
             else:
                 pass_status = 'selected'
 
@@ -1288,9 +1288,14 @@ class CreateSubmissionView(APIView):
                 submission.save(update_fields=['candidate_questions'])
 
              
+            # Check if assessment has expired based on available_until
+            now = timezone.now()
+            if assessment.available_until and now > assessment.available_until:
+                return Response({"error": "This assessment has expired and is no longer available."}, status=status.HTTP_400_BAD_REQUEST)
+            
             # Calculate time left — phase-aware
             total_duration = assessment.duration_minutes * 60
-            elapsed_since_start = (timezone.now() - submission.started_at).total_seconds()
+            elapsed_since_start = (now - submission.started_at).total_seconds()
             
             if elapsed_since_start >= total_duration:
                 return Response({"error": "Assessment time has expired."}, status=status.HTTP_400_BAD_REQUEST)
@@ -1878,9 +1883,15 @@ class InviteAssessmentCandidatesView(APIView):
             try:
                 subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                 
-                # Format availability dates in local time
-                start_time = timezone.localtime(assessment.available_from).strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
-                end_time = timezone.localtime(assessment.available_until).strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+                # Format availability dates in UTC for consistency
+                if assessment.available_from:
+                    start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p UTC')
+                else:
+                    start_time = "Immediately"
+                if assessment.available_until:
+                    end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p UTC')
+                else:
+                    end_time = "No fixed deadline"
                 
                 jd_preview = (assessment.job_description or '')[:200]
                 
@@ -1980,8 +1991,14 @@ class InviteAssessmentCandidatesView(APIView):
                     try:
                         subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                         
-                        start_time = timezone.localtime(assessment.available_from).strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
-                        end_time = timezone.localtime(assessment.available_until).strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+                        if assessment.available_from:
+                            start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p UTC')
+                        else:
+                            start_time = "Immediately"
+                        if assessment.available_until:
+                            end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p UTC')
+                        else:
+                            end_time = "No fixed deadline"
 
                         message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment for the role: {assessment.required_skills}.\n\nTiming Details:\n- Available From: {start_time}\n- Available Until: {end_time}\n- Duration: {assessment.duration_minutes} minutes\n\nLink: {link}\n\nGood luck!"
                         

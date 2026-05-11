@@ -27,6 +27,14 @@ def extract_skills_from_resume_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Validate file size (max 2MB)
+        MAX_RESUME_SIZE = 2 * 1024 * 1024  # 2MB
+        if resume_file.size > MAX_RESUME_SIZE:
+            return Response(
+                {'error': 'File too large. Please upload a file smaller than 2MB.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         # Read file content
         file_content = resume_file.read()
         
@@ -155,8 +163,9 @@ def extract_skills_from_resume_view(request):
 
 
         # Find skills in the text
+        SHORT_SKILL_WHITELIST = {'go', 'c#', 'r', 'c'}
         for skill in common_skills:
-            if len(skill) <= 2:
+            if len(skill) <= 2 and skill.lower() not in SHORT_SKILL_WHITELIST:
                 continue
             if skill in extracted_skills:
                 continue

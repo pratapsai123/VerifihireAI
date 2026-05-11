@@ -86,29 +86,6 @@ def extract_json(text):
         logger.error(f"JSON extraction error in ai_logic: {e}")
     return None
 
-def _is_raw_data(s):
-    """
-    Helper to detect if a string is raw test data (numbers, simple text)
-    vs a descriptive fragment or complex JSON/Code snippet.
-    """
-    if not s:
-        return False
-    s_clean = str(s).lower().strip()
-    
-    # Strictly reject code assignments, brackets, or braces
-    if "=" in s_clean or "{" in s_clean or "[" in s_clean or "}" in s_clean or "]" in s_clean:
-        return False
-        
-    # If it's a single number or word, it's likely raw
-    if s_clean.isdigit() or len(s_clean.split()) == 1:
-        return True
-        
-    # If it has ":" or descriptive keywords, it's likely a description
-    if ":" in s_clean or "input:" in s_clean:
-        return False
-        
-    return True
-
 class InputDataGenerator:
     """
     Backend-native random data generator for coding challenges.
@@ -720,45 +697,163 @@ def _generate_input_format(schema):
     lines = []
     line_num = 1
     seen_params = set()
+    array_idx = 0  # Track array occurrence for descriptive naming
     
     for item in schema:
         item_type = item.get('type', '')
-        name = item.get('name', 'X')
+        name = item.get('name', '')
         
-        # Skip if we've already described this (e.g., arrays referenced by count)
-        if name in seen_params:
+        # For non-array items, skip duplicates by name
+        if item_type != 'array' and name in seen_params:
             continue
-        seen_params.add(name)
+        if name:
+            seen_params.add(name)
         
         if item_type == 'int':
-            lines.append(f"- Line {line_num}: An integer `{name.lower()}`, the value described above.")
+            lines.append(f"- Line {line_num}: An integer `{name.lower() or 'n'}`.")
             line_num += 1
         elif item_type == 'float':
-            lines.append(f"- Line {line_num}: A floating-point number `{name.lower()}`.")
+            lines.append(f"- Line {line_num}: A floating-point number `{name.lower() or 'x'}`.")
             line_num += 1
         elif item_type == 'string':
-            lines.append(f"- Line {line_num}: A string `{name.lower()}`.")
+            lines.append(f"- Line {line_num}: A string `{name.lower() or 's'}`.")
             line_num += 1
         elif item_type == 'array':
+            array_idx += 1
             count_ref = item.get('count_ref', '')
-            ref_name = count_ref.lower() if count_ref else 'the specified count'
+            # Parse count_ref like "N*2" -> "2*N"
+            ref_display = _describe_count_ref(count_ref) if count_ref else 'the specified count'
             item_inner = item.get('item', {})
             inner_type = item_inner.get('type', '')
             
-            if inner_type == 'int':
-                lines.append(f"- Line {line_num}: {ref_name} space-separated integers.")
-            elif inner_type == 'string':
-                lines.append(f"- Line {line_num}: {ref_name} space-separated strings.")
-            elif inner_type == 'float':
-                lines.append(f"- Line {line_num}: {ref_name} space-separated floating-point numbers.")
-            else:
-                lines.append(f"- Line {line_num}: {ref_name} space-separated values.")
+            # Generate descriptive label based on context
+            type_label = _get_type_label(inner_type)
+            
+            # If no name, generate descriptive one based on array index and schema context
+            array_label = name.lower() if name else _generate_array_label(schema, array_idx, item)
+            
+            lines.append(f"- Line {line_num}: {ref_display} space-separated {type_label} (`{array_label}`).")
             line_num += 1
     
     if not lines:
         return ""
     
-    return "\n\n**Input Format:**\n" + "\n".join(lines)
+    # Ensure proper markdown formatting with bullet points
+    formatted_lines = []
+    for line in lines:
+        # Ensure each line starts with a bullet point if it doesn't already
+        if not line.strip().startswith('-'):
+            formatted_lines.append(f"- {line}")
+        else:
+            formatted_lines.append(line)
+    
+    return "\n\n**Input Format:**\n" + "\n".join(formatted_lines)
+
+
+def _describe_count_ref(count_ref):
+    """Convert count_ref like 'N' or 'N*2' to human-readable description."""
+    if not count_ref:
+        return "the specified count"
+    count_ref = str(count_ref).strip()
+    if '*' in count_ref:
+        parts = count_ref.split('*')
+        if len(parts) == 2:
+            try:
+                multiplier = int(parts[1])
+                base = parts[0].lower()
+                return f"{multiplier}*{base}"
+            except ValueError:
+                pass
+    return count_ref.lower()
+
+
+def _get_type_label(inner_type):
+    """Get human-readable type label."""
+    labels = {
+        'int': 'integers',
+        'string': 'strings',
+        'float': 'floating-point numbers',
+    }
+    return labels.get(inner_type, 'values')
+
+
+def _generate_array_label(schema, array_idx, current_item):
+    """Generate a descriptive label for an unnamed array based on schema context."""
+    # Count how many arrays in the schema
+    total_arrays = sum(1 for s in schema if s.get('type') == 'array')
+    
+    # Check if this looks like an interval problem (2 arrays with same count)
+    if total_arrays == 2:
+        # Check if both arrays have the same count_ref
+        arrays = [s for s in schema if s.get('type') == 'array']
+        if len(arrays) == 2:
+            count1 = arrays[0].get('count_ref', '')
+            count2 = arrays[1].get('count_ref', '')
+            if count1 and count1 == count2:  # Same count reference suggests interval pairs
+                if array_idx == 1:
+                    return "start_times"
+                elif array_idx == 2:
+                    return "end_times"
+    
+    # Check for single array case
+    if total_arrays == 1:
+        # Look for context in other schema items
+        has_n = any(s.get('name', '').upper() == 'N' and s.get('type') == 'int' for s in schema)
+        if has_n:
+            return "array"
+    
+    # Default labeling for multiple arrays
+    if total_arrays == 2:
+        if array_idx == 1:
+            return "first_array"
+        elif array_idx == 2:
+            return "second_array"
+    elif total_arrays == 3:
+        if array_idx == 1:
+            return "first_array"
+        elif array_idx == 2:
+            return "second_array"
+        elif array_idx == 3:
+            return "third_array"
+    
+    return f"array_{array_idx}"
+
+
+def _strip_ai_examples(problem_statement):
+    """
+    Remove any examples, input format sections, or markdown code blocks that the AI
+    may have included in the problem statement, to prevent duplication with system-generated examples.
+    """
+    import re
+    if not problem_statement:
+        return problem_statement
+    
+    text = problem_statement
+    
+    # Remove markdown code blocks (``` ... ```)
+    text = re.sub(r'```[\s\S]*?```', '', text)
+    
+    # Remove "Input Format:" sections
+    text = re.sub(r'\*\*Input Format:\*\*[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Input Format:[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    
+    # Remove "Example" sections (Example 1:, Example 2:, etc.)
+    text = re.sub(r'\*\*Example \d+:\*\*[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'### Example \d+:[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Example \d+:[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\*\*Input:\*\*[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\*\*Output:\*\*[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\*\*Explanation:\*\*[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    
+    # Remove "Sample Input/Output" sections
+    text = re.sub(r'Sample Input[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Sample Output[\s\S]*?(?=\n\n|\Z)', '', text, flags=re.IGNORECASE)
+    
+    # Clean up extra whitespace
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = text.strip()
+    
+    return text
 
 
 def _generate_coding_pool_ai_only(
@@ -985,13 +1080,16 @@ def _generate_execution_verified_coding_pool(*, llm_client, job_description, req
                 challenge['example_input'] = example_input
                 challenge['example_output'] = str(res.get('stdout', '')).strip()
                 
+                # Strip any AI-included examples/input format to prevent duplication
+                challenge['problem_statement'] = _strip_ai_examples(challenge['problem_statement'])
+                
                 # Auto-generate Input Format from schema and append
                 input_format = _generate_input_format(schema)
                 challenge['problem_statement'] += input_format
                 
                 # Append formatted, verified example to description
                 challenge['problem_statement'] += (
-                    f"\n\n### Example 1:\n"
+                    f"\n\n---\n\n### Example 1:\n"
                     f"**Input:**\n"
                     f"```text\n{challenge['example_input']}\n```\n"
                     f"**Output:**\n"
