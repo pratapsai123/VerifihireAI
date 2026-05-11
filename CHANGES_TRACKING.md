@@ -6,6 +6,15 @@
 
 ---
 
+## 2026-05-11
+
+### 15:30 - [Dashboard / Results Management]
+- **Task 1: Added Sorting to AI Interviews**: Implemented client-side column sorting (by Name, Score, Date) exclusively on the AI Interview tab in `ResultsAI.js`. Added caret indicators to show the active sorting direction.
+- **Task 2: Added CSV Export**: Created an export function that generates a structured CSV (Name, Email, Score, Status, Date) for selected candidates on the AI Interview tab.
+- **Task 3: UX Scoping**: Scoped both the sorting interaction and the CSV Export button so they are hidden on the other pipeline tabs (Resume, Assessment, Standard, Fully Automatic) to prevent unintended behaviour.
+
+---
+
 ## 2026-05-08
 
 ### 16:20 - [AI Interview / Face Registration Integrity]

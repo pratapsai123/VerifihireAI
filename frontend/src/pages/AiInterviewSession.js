@@ -9,15 +9,27 @@ import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
 import { logCandidateActivity } from '../utils/activityLogger';
 import useNetworkStatus from '../hooks/useNetworkStatus';
 
+// ─────────────────────────────────────────────────────────────
+// FIX (Magic Numbers): All interview constants live here.
+// Change once → applies everywhere.
+// ─────────────────────────────────────────────────────────────
+const MAX_INTERVIEW_QUESTIONS = 13;         // Total questions per session
+const INTERVIEW_DURATION_SECONDS = 60 * 60; // 1 hour in seconds
+const DEEPFACE_FRAME_INTERVAL_MS  = 200;    // 5 FPS
+const DEEPFACE_JPEG_QUALITY       = 0.65;   // JPEG compression for frames
+const SILENCE_GRACE_PERIOD_MS     = 8000;   // Grace before ending on silence
+const PROGRESS_EXPIRY_MS          = 30 * 60 * 1000; // 30 min localStorage TTL
+const VIOLATION_COOLDOWN_MS_CONST = 10000;  // Integrity violation cooldown
+
 const AiInterviewSession = () => {
     const { isOnline } = useNetworkStatus();
-    const VIOLATION_COOLDOWN_MS = 10000;
+    const VIOLATION_COOLDOWN_MS = VIOLATION_COOLDOWN_MS_CONST;
 
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
     const [candidateData, setCandidateData] = useState(null);
-    const [maxQuestions, setMaxQuestions] = useState(13);
+    const [maxQuestions, setMaxQuestions] = useState(MAX_INTERVIEW_QUESTIONS);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [chatMessages, setChatMessages] = useState([]);
@@ -35,10 +47,14 @@ const AiInterviewSession = () => {
     const [timeLeft, setTimeLeft] = useState(null); // Timer in seconds
     const [sttReady, setSttReady] = useState(false); // New state for WS status
     const [silenceCountdown, setSilenceCountdown] = useState(0);
+    const [silenceWarningVisible, setSilenceWarningVisible] = useState(false); // FIX: Prominent silence warning
     const [isPermissionsGranted, setIsPermissionsGranted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isScreenSharing, setIsScreenSharing] = useState(false);
     const [isPaused, setIsPaused] = useState(false); // Pause timer during interruptions
+    // FIX (Network Failure): tracks failed submission payload for manual retry
+    const [failedSubmission, setFailedSubmission] = useState(null);
+    const [isNetworkPaused, setIsNetworkPaused] = useState(false);
 
     // ── Registration State ──
     const [isFaceRegistered, setIsFaceRegistered] = useState(false);
@@ -73,11 +89,12 @@ const AiInterviewSession = () => {
     const [dfFacePresent, setDfFacePresent] = useState(false);
     const [dfHeadDir, setDfHeadDir] = useState('FORWARD');
 
-    const getDeepfacePersonId = useCallback(() => {
+    const getDeepfacePersonId = useCallback((customData = null) => {
         // Use PAN number as primary identity for DeepFace
         // This ensures same person across different interview links
-        if (candidateData?.pan_number) {
-            return String(candidateData.pan_number).trim().toLowerCase();
+        const data = customData || candidateData;
+        if (data?.pan_number) {
+            return String(data.pan_number).trim().toLowerCase();
         }
         // Fallback to token for candidates without PAN
         return String(token || '').trim().toLowerCase();
@@ -784,6 +801,30 @@ const AiInterviewSession = () => {
         };
     }, []);
 
+    // FIX (DeepFace Memory Leak): Close DeepFace session when tab is closed/refreshed.
+    // React cleanup (above) only fires on React unmount, NOT on browser tab close.
+    // beforeunload fires synchronously, allowing the fetch to at least be dispatched.
+    useEffect(() => {
+        const handleTabClose = () => {
+            if (dfSessionIdRef.current) {
+                // Use sendBeacon for reliable fire-and-forget on page unload
+                const url = `${DEEPFACE_BASE_URL}/session/${dfSessionIdRef.current}/end`;
+                const sent = navigator.sendBeacon(url, JSON.stringify({}));
+                if (!sent) {
+                    // Fallback: synchronous XHR (sendBeacon may be blocked)
+                    try {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', url, false); // false = synchronous
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        xhr.send(JSON.stringify({}));
+                    } catch (e) { /* best-effort */ }
+                }
+            }
+        };
+        window.addEventListener('beforeunload', handleTabClose);
+        return () => window.removeEventListener('beforeunload', handleTabClose);
+    }, []);
+
     // 4. Speech and Interactions
     const unlockSpeech = useCallback(() => {
         if (!synthRef.current) return;
@@ -1147,15 +1188,28 @@ const AiInterviewSession = () => {
                 isRecordingRef.current = true;
                 setAiStatus("Connecting to AssemblyAI...");
 
-                const token = process.env.REACT_APP_ASSEMBLYAI_API_KEY;
-
-                if (!token) {
-                    console.error("Missing REACT_APP_ASSEMBLYAI_API_KEY");
-                    setAiStatus("Config Error - Missing Key");
+                // FIX (Security): Fetch short-lived token from backend instead of exposing API key
+                let assemblyToken = "";
+                try {
+                    const tokenRes = await axios.get(`${API_BASE_URL}/ai-candidates/assemblyai-token/`);
+                    assemblyToken = tokenRes.data.token;
+                } catch (tErr) {
+                    console.error("Failed to fetch AssemblyAI token:", tErr);
+                    setAiStatus("Config Error - Token Failed");
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
                     return;
                 }
 
-                const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&speech_model=u3-rt-pro&token=${token}`;
+                if (!assemblyToken) {
+                    console.error("Missing AssemblyAI Token");
+                    setAiStatus("Config Error - Empty Token");
+                    setIsRecording(false);
+                    isRecordingRef.current = false;
+                    return;
+                }
+
+                const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&speech_model=u3-rt-pro&token=${assemblyToken}`;
                 const ws = new WebSocket(wsUrl);
 
                 // Buffer to hold audio chunks while WebSocket is connecting
@@ -1494,16 +1548,15 @@ const AiInterviewSession = () => {
             recordActivity();
         }
 
-        // NEW: Check grace period before ending interview
+        // FIX (Magic Numbers): Use named constant for grace period
         if (consecutiveSilenceRef.current >= 3) {
             const timeSinceActivity = Date.now() - lastActivityTimeRef.current;
-            const SILENCE_GRACE_PERIOD = 8000; // 8 seconds grace
-            if (timeSinceActivity > SILENCE_GRACE_PERIOD) {
+            if (timeSinceActivity > SILENCE_GRACE_PERIOD_MS) {
                 console.log(`Consecutive silence limit reached (3). Time since activity: ${timeSinceActivity}ms. Ending interview.`);
                 completeInterview("The interview has been ended due to lack of response. We will review the answers provided so far. Thank you.");
                 return;
             } else {
-                console.log(`Consecutive silence at 3, but grace period active (${timeSinceActivity}ms < ${SILENCE_GRACE_PERIOD}ms). Resetting counter.`);
+                console.log(`Consecutive silence at 3, but grace period active (${timeSinceActivity}ms < ${SILENCE_GRACE_PERIOD_MS}ms). Resetting counter.`);
                 consecutiveSilenceRef.current = 0;
             }
         }
@@ -1576,7 +1629,8 @@ const AiInterviewSession = () => {
 
             // FIX: Better check - ensure we've answered enough questions AND haven't exceeded list
             // --- HARD STOP: end after maxQuestions ---
-            if (totalAnswered >= maxQuestions || nextIdx >= questions.length || totalAnswered >= 13) {
+            // FIX (Magic Numbers): use MAX_INTERVIEW_QUESTIONS constant
+            if (totalAnswered >= maxQuestions || nextIdx >= questions.length || totalAnswered >= MAX_INTERVIEW_QUESTIONS) {
                 let finalWords = "That concludes our interview questions today. Thank you for your time, we will be in touch soon. Goodbye!";
                 if (fullFeedback.trim()) {
                     finalWords = fullFeedback.trim() + ". " + finalWords;
@@ -1658,8 +1712,9 @@ const AiInterviewSession = () => {
             } else {
                 const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
-                // Calculate progress against the actual total questions intended
-                const totalQuestions = Math.max(1, Math.min(maxQuestions, questions.length || maxQuestions));
+                // FIX (Progress Bar Jump): Progress = questions COMPLETED (nextIdx = how many done).
+                // Using nextIdx/total means at question 1 we show 1/13 = 7.7%, not jumping to 15%.
+                const totalQuestions = Math.max(1, Math.min(maxQuestions, questions.length || MAX_INTERVIEW_QUESTIONS));
                 setProgress((nextIdx / totalQuestions) * 100);
 
                 setQuestions(prev => {
@@ -1726,34 +1781,28 @@ const AiInterviewSession = () => {
             isProcessingRef.current = false;
 
             if (err.response?.status === 429 || err.response?.data?.retryable) {
-                // Track retry count to prevent infinite loops
                 const currentRetry = retryCount || 0;
                 const maxRetries = 3;
 
                 if (currentRetry < maxRetries) {
-                    const backoffDelay = 8000 * Math.pow(2, currentRetry); // 8s, 16s, 32s
+                    const backoffDelay = 8000 * Math.pow(2, currentRetry);
                     const retryMsg = `AI is busy... retrying in ${backoffDelay / 1000}s (attempt ${currentRetry + 1}/${maxRetries})`;
                     setAiStatus(retryMsg);
                     setShowQuotaWarning(true);
-
                     setTimeout(() => {
                         setShowQuotaWarning(false);
                         handleAnswerSubmission(answer, currentRetry + 1);
                     }, backoffDelay);
                 } else {
-                    // Max retries exceeded — give up gracefully and move on
                     setShowQuotaWarning(false);
                     const sorryMsg = "I apologize, there seems to be a temporary issue on my end. Let's move on to the next question.";
                     addMessage('ai', sorryMsg);
                     await speak(sorryMsg);
                     setIsProcessing(false);
                     isProcessingRef.current = false;
-                    // FIX: Add delay before restarting mic
                     if (userInputMode === 'audio' && !showQuotaWarning) {
                         setTimeout(() => {
-                            if (!isCompletedRef.current && !isProcessingRef.current) {
-                                startListening();
-                            }
+                            if (!isCompletedRef.current && !isProcessingRef.current) startListening();
                         }, 600);
                     }
                     setAiStatus("Indu is Online");
@@ -1761,32 +1810,29 @@ const AiInterviewSession = () => {
                 return;
             }
 
-            // Show AI failure inline (NO blocking alert — keeps the session alive)
-            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
-            console.error("AI submission error:", errorMessage);
-            
-            // FIX: Better error handling for timeouts
-            if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
-                setAiStatus("⏱️ Processing timeout - Please wait...");
+            // FIX (Retry Button): Store the failed payload and show a Retry button
+            // in the UI instead of just speaking a recovery message.
+            const isTimeout = err.code === 'ECONNABORTED' || err.message?.includes('timeout');
+            const isNetworkErr = !err.response && !isTimeout;
+
+            if (isNetworkErr) {
+                setAiStatus("📡 Network error — check your connection");
+            } else if (isTimeout) {
+                setAiStatus("⏱️ AI timed out — you can retry below");
             } else {
-                setAiStatus("Connection Issue — Retrying...");
+                setAiStatus("⚠️ Submission failed — retry or speak again");
             }
 
-            const recoveryMsg = "I apologize, I'm having a brief connectivity issue. Please try repeating your answer or click the microphone to continue.";
+            // Store the failed answer payload so the Retry button can re-submit it
+            const failedPayload = {
+                answer,
+                retryCount: (retryCount || 0) + 1
+            };
+            setFailedSubmission(failedPayload);
+
+            const recoveryMsg = "I had trouble receiving your answer. You can click \"Retry\" below to resubmit, or speak your answer again.";
             addMessage('ai', recoveryMsg);
             await speak(recoveryMsg);
-
-            setAiStatus("Indu is Online");
-
-            // Automatically try to restart the mic to help the user
-            if (userInputMode === 'audio') {
-                // FIX: Add delay to ensure previous audio finishes
-                setTimeout(() => {
-                    if (!isCompletedRef.current && !isProcessingRef.current) {
-                        startListening();
-                    }
-                }, 800);
-            }
         }
     }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening, showQuotaWarning, userInputMode, submitAnswerWithRetry, recordActivity, validateAnswer, waitForSpeechToFinish]);
 
@@ -1809,7 +1855,8 @@ const AiInterviewSession = () => {
                     const saved = localStorage.getItem(`interview_progress_${token}`);
                     if (saved) {
                         const progress = JSON.parse(saved);
-                        if (progress && (Date.now() - progress.timestamp) < 30 * 60 * 1000) {
+                        // FIX (Magic Numbers): use named constant for localStorage TTL
+                        if (progress && (Date.now() - progress.timestamp) < PROGRESS_EXPIRY_MS) {
                             console.log('Restoring interview progress from localStorage');
                             if (progress.candidateName) setCandidateName(progress.candidateName);
                             if (Array.isArray(progress.chatMessages)) setChatMessages(progress.chatMessages);
@@ -1834,10 +1881,19 @@ const AiInterviewSession = () => {
 
                 if (candidate.link_opened_at) {
                     const startTime = new Date(candidate.link_opened_at).getTime();
-                    const now = new Date().getTime();
-                    const secondsElapsed = Math.floor((now - startTime) / 1000);
-                    const initialTimeLeft = Math.max(0, (60 * 60) - secondsElapsed);
+                    // FIX: Use server_time instead of client clock to prevent
+                    // candidates from gaining extra time by changing their system clock.
+                    // Falls back to client clock only if server_time is unavailable.
+                    const serverNow = candidate.server_time
+                        ? new Date(candidate.server_time).getTime()
+                        : Date.now();
+                    const secondsElapsed = Math.floor((serverNow - startTime) / 1000);
+                    const INTERVIEW_DURATION_SECONDS = 60 * 60;
+                    const initialTimeLeft = Math.max(0, INTERVIEW_DURATION_SECONDS - secondsElapsed);
                     setTimeLeft(initialTimeLeft);
+                    if (candidate.server_time) {
+                        console.log(`[Timer] Synced with server clock. Elapsed: ${secondsElapsed}s, Remaining: ${initialTimeLeft}s`);
+                    }
                 }
 
                 if (candidate.interview_summary && candidate.interview_summary.length > 0) {
@@ -1874,46 +1930,10 @@ const AiInterviewSession = () => {
         return () => clearInterval(autoSaveInterval);
     }, [token, chatMessages, currentQuestionIndex, questions, isCompleted, candidateName]);
 
-    // FIX: Restore interview progress from localStorage on page load
-    useEffect(() => {
-        if (!token || isInitializedRef.current) return;
-        
-        const savedProgress = localStorage.getItem(`interview_progress_${token}`);
-        if (savedProgress) {
-            try {
-                const progressData = JSON.parse(savedProgress);
-                // Only restore if it's for the same candidate and interview not completed
-                if (progressData.token === token && !isCompleted) {
-                    console.log("🔄 [Restore] Found saved interview progress, restoring...");
-                    
-                    // Restore state
-                    if (progressData.currentQuestionIndex > 0) {
-                        setCurrentQuestionIndex(progressData.currentQuestionIndex);
-                    }
-                    if (progressData.questions && progressData.questions.length > 0) {
-                        setQuestions(progressData.questions);
-                        setMaxQuestions(Math.min(progressData.questions.length, 13));
-                    }
-                    if (progressData.chatMessages && progressData.chatMessages.length > 0) {
-                        setChatMessages(progressData.chatMessages);
-                    }
-                    if (progressData.chatHistory && progressData.chatHistory.length > 0) {
-                        chatHistoryRef.current = progressData.chatHistory;
-                    }
-                    if (progressData.candidateName) {
-                        setCandidateName(progressData.candidateName);
-                    }
-                    
-                    console.log("✅ [Restore] Interview progress restored successfully");
-                    
-                    // Clear saved progress after successful submission/completion
-                    // This prevents stale data on re-interview
-                }
-            } catch (e) {
-                console.error("[Restore] Failed to parse saved progress:", e);
-            }
-        }
-    }, [token]); // Only run once on mount
+    // NOTE: Duplicate progress restore logic was removed here.
+    // The restore inside initSession() (above) handles everything correctly.
+    // This second useEffect was dead code — isInitializedRef.current is already
+    // set to true by initSession() before this effect could ever run.
 
     const handleStartInterview = async () => {
         // Step 1: Just request Camera for face registration
@@ -2386,6 +2406,7 @@ const AiInterviewSession = () => {
 
     const finalizeInterviewStart = async (candidate) => {
         setAiStatus("Preparing Indu...");
+        setCandidateData(candidate); // FIX: Ensure state is synced for child components
 
         // Signal SecuritySessionGuard to begin monitoring now that interview is starting
         window.dispatchEvent(new Event('vh_exam_started'));
@@ -2397,7 +2418,9 @@ const AiInterviewSession = () => {
         // Start DeepFace proctoring session (uses candidate.id as person_id)
         // Only start if not already running to prevent session leak
         if (!dfSessionIdRef.current) {
-            await startDeepfaceMonitoring(getDeepfacePersonId());
+            // FIX: Pass candidate data directly to ensure correct personId (PAN) is used immediately
+            const personId = getDeepfacePersonId(candidate);
+            await startDeepfaceMonitoring(personId);
         }
 
         if (candidate.interview_summary && candidate.interview_summary.length > 0) {
@@ -2521,6 +2544,7 @@ const AiInterviewSession = () => {
     useEffect(() => {
         if (!isRecording) {
             setSilenceCountdown(0);
+            setSilenceWarningVisible(false);
             return;
         }
 
@@ -2529,6 +2553,7 @@ const AiInterviewSession = () => {
             // Safety Guard: If mic is physically off, this interval MUST not proceed
             if (!isRecordingRef.current || isCompletedRef.current) {
                 clearInterval(watchdog);
+                setSilenceWarningVisible(false);
                 return;
             }
             if (isSpeakingRef.current || isProcessingRef.current) return;
@@ -2540,6 +2565,7 @@ const AiInterviewSession = () => {
             if (timeSinceActivity < 2000) {
                 secondsRemaining = 5;
                 setSilenceCountdown("Listening...");
+                setSilenceWarningVisible(false);
                 // FIX: Reset consecutive silence counter if candidate speaks during countdown
                 // This prevents false positives when AssemblyAI delivers delayed transcripts
                 if (consecutiveSilenceRef.current > 0) {
@@ -2553,16 +2579,22 @@ const AiInterviewSession = () => {
             // Otherwise, proceed with the visible countdown (5-4-3-2-1)
             secondsRemaining = 5 - Math.floor((timeSinceActivity - 2000) / 1000);
 
-            if (secondsRemaining > 0) {
+            if (secondsRemaining > 3) {
                 setSilenceCountdown(secondsRemaining + "s");
+                setSilenceWarningVisible(false);
+            } else if (secondsRemaining > 0) {
+                // FIX: Show prominent visual warning when ≤3 seconds remain
+                setSilenceCountdown(secondsRemaining + "s");
+                setSilenceWarningVisible(true);
             } else if (secondsRemaining === 0 || secondsRemaining === -1) {
-                // FIX: Add warning when countdown is critical
                 setSilenceCountdown("⚠️ 0s");
+                setSilenceWarningVisible(true);
             } else if (secondsRemaining <= -2) {
                 // TRUE EXPIRATION
                 console.log("Unified Watchdog: Maximum silence exceeded. Forcing submission.");
                 clearInterval(watchdog);
                 setSilenceCountdown(0);
+                setSilenceWarningVisible(false);
 
                 // FIX: Immediately turn off mic icon BEFORE stopping AssemblyAI
                 setIsRecording(false);
@@ -2585,7 +2617,7 @@ const AiInterviewSession = () => {
             }
         }, 1000);
 
-        return () => clearInterval(watchdog);
+        return () => { clearInterval(watchdog); setSilenceWarningVisible(false); };
     }, [isRecording]);
 
 
@@ -2647,8 +2679,10 @@ const AiInterviewSession = () => {
             return;
         }
 
-        // NEW: Pause timer during interruptions (fullscreen requests, dialogs, etc.)
-        if (isPaused) {
+        // Pause timer when interview is interrupted OR when offline
+        // FIX (Network Failure): !isOnline pauses the countdown so candidates
+        // don't lose time during a connection outage.
+        if (isPaused || !isOnline) {
             return;
         }
 
@@ -2675,7 +2709,35 @@ const AiInterviewSession = () => {
     }, []);
 
     return (
-        <div className="ai-session-page">
+        <div className={`ai-session-page ${silenceWarningVisible ? 'silence-warning-active' : ''}`}>
+            {/* FIX (Network Failure): Full-screen network lost overlay */}
+            {!isOnline && (
+                <div className="network-lost-overlay">
+                    <div className="network-lost-card">
+                        <div className="network-lost-spinner"></div>
+                        <h2 className="network-lost-title">Connection Lost</h2>
+                        <p className="network-lost-body">
+                            Your internet connection was interrupted. The interview timer is paused.
+                            Your progress is saved — please reconnect to continue.
+                        </p>
+                        <div className="network-lost-status">
+                            <i className="fa-solid fa-wifi-slash"></i>
+                            <span>Waiting for network…</span>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* FIX: Prominent silence auto-submit warning overlay */}
+            {silenceWarningVisible && (
+                <div className="silence-warning-bar">
+                    <div className="silence-warning-content">
+                        <i className="fa-solid fa-triangle-exclamation silence-warning-icon"></i>
+                        <span className="silence-warning-text">
+                            Your answer will be submitted in <strong>{silenceCountdown}</strong> — start speaking to cancel
+                        </span>
+                    </div>
+                </div>
+            )}
             {/* Fullscreen/Screen Share requirement overlay */}
             {isPermissionsGranted && (!isFullscreen || !isScreenSharing) && !isCompleted && (
                 <div
@@ -3181,6 +3243,43 @@ const AiInterviewSession = () => {
                         <div className="live-transcript-bubble">
                             <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
                             {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
+                        </div>
+                    )}
+
+                    {/* FIX (Retry Button): Show a manual retry button after a failed submission */}
+                    {failedSubmission && !isProcessing && !isCompleted && (
+                        <div style={{
+                            display: 'flex', alignItems: 'center', gap: '10px',
+                            background: '#fffbeb', border: '1px solid #f59e0b',
+                            borderRadius: '10px', padding: '8px 14px', margin: '0 0 4px 0'
+                        }}>
+                            <i className="fa-solid fa-triangle-exclamation" style={{ color: '#d97706' }}></i>
+                            <span style={{ flex: 1, fontSize: '0.8rem', color: '#92400e', fontWeight: 500 }}>
+                                Last answer failed to submit.
+                            </span>
+                            <button
+                                onClick={() => {
+                                    const { answer, retryCount } = failedSubmission;
+                                    setFailedSubmission(null);
+                                    setAiStatus('Retrying...');
+                                    handleAnswerSubmission(answer, retryCount);
+                                }}
+                                style={{
+                                    background: '#f59e0b', color: '#fff', border: 'none',
+                                    borderRadius: '6px', padding: '5px 14px',
+                                    fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem'
+                                }}
+                            >
+                                <i className="fa-solid fa-rotate-right" style={{ marginRight: '5px' }}></i>Retry
+                            </button>
+                            <button
+                                onClick={() => setFailedSubmission(null)}
+                                style={{
+                                    background: 'none', border: 'none',
+                                    color: '#9ca3af', cursor: 'pointer', fontSize: '1rem'
+                                }}
+                                title="Dismiss"
+                            >×</button>
                         </div>
                     )}
 
