@@ -255,6 +255,7 @@ function formatDuration(ms) {
 export default function TakeAssessment() {
   const navigate = useNavigate();
   const { token } = useParams();
+  const ALLOW_COPY_PASTE = true; // Set to true to allow copy-paste temporarily for testing
 
   // Create or load Session ID and configure Axios interceptor
   useEffect(() => {
@@ -593,7 +594,7 @@ export default function TakeAssessment() {
   const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
     token,
     activeCoding ? codingState.codeById[String(activeCoding.id)] : '',
-    { allowCopyPaste: true } // Temporarily allow for standard assessments
+    { allowCopyPaste: ALLOW_COPY_PASTE }
   );
 
 
@@ -1378,24 +1379,29 @@ export default function TakeAssessment() {
 
     // Disable Copy/Paste/Right-click (Enhanced with capture phase)
     const preventAction = (e) => {
+      if (ALLOW_COPY_PASTE) return; // Skip prevention if allowed
       e.preventDefault();
       e.stopPropagation();
       showAiEvent('ACTION PROHIBITED', true);
       return false;
     };
-    document.addEventListener('copy', preventAction, { capture: true });
-    document.addEventListener('cut', preventAction, { capture: true });
-    document.addEventListener('paste', preventAction, { capture: true });
-    document.addEventListener('contextmenu', preventAction, { capture: true });
+    if (!ALLOW_COPY_PASTE) {
+      document.addEventListener('copy', preventAction, { capture: true });
+      document.addEventListener('cut', preventAction, { capture: true });
+      document.addEventListener('paste', preventAction, { capture: true });
+      document.addEventListener('contextmenu', preventAction, { capture: true });
+    }
 
     return () => {
       clearInterval(detectInterval);
       document.removeEventListener('visibilitychange', handleVisibilityChange, { capture: true });
       window.removeEventListener('blur', handleBlur, { capture: true });
-      document.removeEventListener('copy', preventAction, { capture: true });
-      document.removeEventListener('cut', preventAction, { capture: true });
-      document.removeEventListener('paste', preventAction, { capture: true });
-      document.removeEventListener('contextmenu', preventAction, { capture: true });
+      if (!ALLOW_COPY_PASTE) {
+        document.removeEventListener('copy', preventAction, { capture: true });
+        document.removeEventListener('cut', preventAction, { capture: true });
+        document.removeEventListener('paste', preventAction, { capture: true });
+        document.removeEventListener('contextmenu', preventAction, { capture: true });
+      }
       stopCamera();
     };
 
@@ -2043,7 +2049,7 @@ export default function TakeAssessment() {
                           language={monacoLanguage(activeLanguage)}
                           value={activeCode}
                           options={{
-                            contextmenu: true,
+                            contextmenu: ALLOW_COPY_PASTE,
                             fontSize: 14,
                             minimap: { enabled: false },
                             scrollBeyondLastLine: false,

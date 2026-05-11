@@ -1,6 +1,0 @@
-MCQ Score: 0
-Coding Score: 100
-Integrity Score: 0.0
-Breakdown: {'mcq': {'weight': '40%', 'accuracy': '0%', 'scored_points': 0, 'possible_points': 20}, 'coding': {'weight': '60%', 'accuracy': '100%', 'scored_points': 200, 'possible_points': 200}, 'coding_results': {'0': {'total': 6, 'passed': 6}}, 'weighted_final': '60%'}
-Total Qs: 2
-Cand Qs: ['mcqs', 'coding_challenges']
