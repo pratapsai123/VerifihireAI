@@ -26,6 +26,7 @@ class Candidate(models.Model):
     job_title = models.CharField(max_length=255, blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     resume = models.FileField(upload_to='resumes/', blank=True, null=True)
+    resume_hash = models.CharField(max_length=64, blank=True, null=True, help_text="MD5 hash of resume file for caching")
     resume_text = models.TextField(blank=True, null=True, help_text="Cached text content of the resume to avoid re-parsing")
     cover_letter = models.TextField(blank=True, null=True)
     interview_time = models.CharField(max_length=100, blank=True, null=True, help_text="Scheduled time for the interview (e.g., 10 am - 11 am)")

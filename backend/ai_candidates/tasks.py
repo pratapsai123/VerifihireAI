@@ -5,7 +5,7 @@ import logging
 import io
 import json
 import PyPDF2
-import fitz  # PyMuPDF
+import fitz
 import numpy as np
 from PIL import Image
 from celery import shared_task
@@ -21,6 +21,7 @@ from ai_assessments.llm_client import (
 from .models import Candidate
 from .utils import log_automation_event
 from api.ocr_utils import _get_reader
+
 # Backward-compatible aliases
 GroqKeyManager = LLMKeyManager
 _call_groq_with_backoff = call_llm_with_backoff
@@ -113,7 +114,6 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     else:
                         text = ""
                         
-                        # Try PyMuPDF
                         try:
                             doc = fitz.open(stream=file_bytes, filetype="pdf")
                             for page in doc: text += page.get_text()
@@ -123,7 +123,6 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                         except Exception as e:
                             logger.error(f"Unexpected PyMuPDF error: {e}")
                         
-                        # Try PyPDF2 fallback
                         if len(text.strip()) < 100:
                             try:
                                 pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
@@ -132,7 +131,6 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                             except Exception as e:
                                 logger.warning(f"PyPDF2 failed for {candidate.id}: {e}")
                         
-                        # Try OCR if still empty
                         if len(text.strip()) < 100:
                             print(" (OCR Fallback)...", end="", flush=True)
                             try:
@@ -142,8 +140,8 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                                     if doc.page_count > 0:
                                         pix = doc.load_page(0).get_pixmap()
                                         img = Image.frombytes(
-                                            "RGB",
-                                            [pix.width, pix.height],
+                                            "RGB", 
+                                            [pix.width, pix.height], 
                                             pix.samples
                                         )
                                         text = " ".join(
@@ -203,26 +201,77 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             CRITICAL: You MUST properly escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure the JSON is perfectly valid and parsable.
             """
 
-            # Centralized API call with exponential backoff and key rotation
-            try:
-                print(f"   AI Analysis ({current_model})...", end="", flush=True)
-                # Initialize a dummy client for the first attempt; helper will rotate if needed
-                temp_client = create_llm_client(api_key=api_keys[0]) 
+            # 2. AI ANALYSIS (Cascading Fallback: 70B -> 8B -> Sleep -> Retry)
+            from openai import OpenAI
+            import random
+            groq_keys = list(getattr(settings, 'GROQ_API_KEYS', []))
+            match_result = None
+            
+            if not groq_keys:
+                logger.error("No GROQ_API_KEYS found in settings!")
+            else:
+                max_retries = 3
+                for attempt in range(max_retries):
+                    random.shuffle(groq_keys)
+                    
+                    # STEP 1: Exhaust all keys on 70B model first
+                    print(f"\n   --- Attempt {attempt+1}: Prioritizing High-Accuracy 70B ---")
+                    for key in groq_keys:
+                        try:
+                            print(f"   🤖 Trying 70B (llama-3.3-70b-versatile)... ", end="", flush=True)
+                            groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
+                            response = groq_client.chat.completions.create(
+                                model="llama-3.3-70b-versatile",
+                                messages=[{"role": "user", "content": prompt}],
+                                response_format={"type": "json_object"},
+                                temperature=0.0,
+                                seed=42
+                            )
+                            raw_text = response.choices[0].message.content
+                            match_result = extract_json(raw_text)
+                            if match_result:
+                                print("✅ Success!")
+                                break
+                        except Exception as e:
+                            print(f"❌ Rate limit/Error. Rotating key...")
+                            continue
+                    
+                    if match_result:
+                        break
+                    
+                    # STEP 2: Exhaust all keys on 8B model (Safety Net)
+                    print(f"   ⚠️ 70B Exhausted. Falling back to 8B Safety Net ---")
+                    for key in groq_keys:
+                        try:
+                            print(f"   🤖 Trying 8B (llama-3.1-8b-instant)... ", end="", flush=True)
+                            groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
+                            response = groq_client.chat.completions.create(
+                                model="llama-3.1-8b-instant",
+                                messages=[{"role": "user", "content": prompt}],
+                                response_format={"type": "json_object"},
+                                temperature=0.0,
+                                seed=42
+                            )
+                            raw_text = response.choices[0].message.content
+                            match_result = extract_json(raw_text)
+                            if match_result:
+                                print("✅ Success!")
+                                break
+                        except Exception as e:
+                            print(f"❌ Rate limit/Error. Rotating key...")
+                            continue
+                    
+                    if match_result:
+                        break
+                    
+                    # STEP 3: If both models failed across all keys, Sleep and Retry
+                    if attempt < max_retries - 1:
+                        sleep_time = 10 * (2 ** attempt)  # 10s, 20s
+                        print(f"   📉 All keys and models exhausted. Sleeping {sleep_time}s before full retry...")
+                        time.sleep(sleep_time)
                 
-                # _call_groq_with_backoff now returns the content/dict directly
-                result = _call_groq_with_backoff(
-                    temp_client,
-                    model=current_model,
-                    messages=[{"role": "user", "content": prompt}],
-                    response_format={"type": "json_object"},
-                    max_tokens=2048,
-                    temperature=0.0,
-                    seed=42
-                )
-                match_result = result if isinstance(result, dict) else extract_json(result)
-            except Exception as e:
-                print(f"\n   AI Final Error: {e}")
-                match_result = None
+                if not match_result:
+                    print(f"   🚨 CRITICAL: AI Analysis failed completely after {max_retries} full rotation cycles.")
 
             # 3. SAVE RESULTS
             if match_result:
@@ -459,12 +508,12 @@ You must respond with a JSON object containing:
             rotated_key = LLMKeyManager.get_current_key()
             local_llm_client = create_llm_client(api_key=rotated_key)
             
-            process_ai_interview_answer_task._fallback_until = (
-                _time.time() + COOLDOWN_SECONDS
-            )
-            logger.warning(f"Rate limited. Switching to fallback model.")
+            if chosen_model == PRIMARY_MODEL:
+                process_ai_interview_answer_task._fallback_until = _time.time() + COOLDOWN_SECONDS
+                logger.warning(f"70b rate-limited! Falling back to {FALLBACK_MODEL}")
             
             try:
+                # Retry with fallback
                 response = local_llm_client.chat.completions.create(
                     model=FALLBACK_MODEL,
                     messages=[{"role": "user", "content": prompt}],
@@ -472,87 +521,21 @@ You must respond with a JSON object containing:
                     seed=42,
                     response_format={"type": "json_object"}
                 )
+                
                 raw_text = response.choices[0].message.content
                 data = extract_json(raw_text)
+                
                 if data:
-                    return {
-                        'status': 'success',
-                        'data': data,
-                        'fallback_used': True
-                    }
+                    return {'status': 'success', 'data': data, 'fallback_used': True}
                 else:
                     return {'error': 'AI processing failed after retry'}
             except Exception as retry_err:
                 logger.error(f"Fallback also failed: {retry_err}")
                 return {'error': 'Both primary and fallback AI failed'}
-        
         else:
-            logger.error(f"AI processing error: {e}")
+            logger.error(f"AI processing error: {model_err}")
             if self.request.retries < self.max_retries:
+                # Exponential backoff retry
                 countdown = 2 ** self.request.retries
-                raise self.retry(countdown=countdown, exc=e)
+                raise self.retry(countdown=countdown, exc=model_err)
             return {'error': 'Task failed after retries'}
-
-@shared_task(bind=True, max_retries=3)
-def extract_resume_text_task(self, candidate_id):
-    """
-    Extracts text from a single candidate's resume file.
-    """
-    try:
-        candidate = Candidate.objects.get(pk=candidate_id)
-        if not candidate.resume:
-            return {'status': 'ignored', 'message': 'No resume file found'}
-
-        file_bytes = candidate.resume.read()
-        text = ""
-        
-        # Try PyMuPDF
-        try:
-            import fitz
-            doc = fitz.open(stream=file_bytes, filetype="pdf")
-            for page in doc: text += page.get_text()
-            doc.close()
-        except Exception as e:
-            logger.warning(f"PyMuPDF failed for candidate {candidate_id}: {e}")
-        
-        # Try PyPDF2 fallback
-        if len(text.strip()) < 100:
-            try:
-                import PyPDF2
-                pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-                for page in pdf_reader.pages: text += (page.extract_text() or "")
-            except Exception as e:
-                logger.warning(f"PyPDF2 failed for candidate {candidate_id}: {e}")
-        
-        # Try OCR if still empty
-        if len(text.strip()) < 100:
-            try:
-                from api.ocr_utils import _get_reader
-                from PIL import Image
-                import numpy as np
-                reader = _get_reader()
-                if reader:
-                    import fitz
-                    doc = fitz.open(stream=file_bytes, filetype="pdf")
-                    if doc.page_count > 0:
-                        pix = doc.load_page(0).get_pixmap()
-                        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-                        text = " ".join(reader.readtext(np.array(img), detail=0))
-                    doc.close()
-            except Exception as e:
-                logger.warning(f"OCR failed for candidate {candidate_id}: {e}")
-        
-        if text.strip():
-            candidate.resume_text = text
-            candidate.save(update_fields=['resume_text'])
-            return {'status': 'success', 'length': len(text)}
-        else:
-            return {'status': 'failed', 'message': 'No text extracted'}
-
-    except Candidate.DoesNotExist:
-        return {'status': 'error', 'message': 'Candidate not found'}
-    except Exception as e:
-        logger.error(f"Error in extract_resume_text_task: {e}")
-        if self.request.retries < self.max_retries:
-            raise self.retry(countdown=5, exc=e)
-        return {'status': 'error', 'message': str(e)}

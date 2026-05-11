@@ -293,12 +293,13 @@ DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-a
 # Legacy aliases so existing references don't break during migration
 DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
 
-# ── DEPRECATED: Old Groq keys (kept for reference) ──
-# GROQ_API_KEYS = [
-#     'gsk_...',
-# ]
-# GROQ_API_KEY = GROQ_API_KEYS[0]
-
+# ── GROQ Keys for Resume Screening Fallback ──
+GROQ_API_KEYS = [
+    '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',
+    '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',
+    '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',
+]
+GROQ_API_KEY = GROQ_API_KEYS[0]
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 

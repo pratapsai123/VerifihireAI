@@ -441,9 +441,6 @@ const ResultsAI = () => {
                         identity_mismatch_detected: !!item.identity_mismatch_detected
                     };
                 }
-                if (item.identity_mismatch_detected) {
-                    candidateMap[email].identity_mismatch_detected = true;
-                }
                 if (!candidateMap[email][type]) {
                     candidateMap[email][type] = item;
                 }

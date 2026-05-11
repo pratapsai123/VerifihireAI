@@ -709,6 +709,58 @@ def _repair_pool_shortfall(
 
     return repaired
 
+def _generate_input_format(schema):
+    """
+    Auto-generates an Input Format description based on the input_generator_schema.
+    Returns a human-readable markdown string describing each line of input.
+    """
+    if not schema:
+        return ""
+    
+    lines = []
+    line_num = 1
+    seen_params = set()
+    
+    for item in schema:
+        item_type = item.get('type', '')
+        name = item.get('name', 'X')
+        
+        # Skip if we've already described this (e.g., arrays referenced by count)
+        if name in seen_params:
+            continue
+        seen_params.add(name)
+        
+        if item_type == 'int':
+            lines.append(f"- Line {line_num}: An integer `{name.lower()}`, the value described above.")
+            line_num += 1
+        elif item_type == 'float':
+            lines.append(f"- Line {line_num}: A floating-point number `{name.lower()}`.")
+            line_num += 1
+        elif item_type == 'string':
+            lines.append(f"- Line {line_num}: A string `{name.lower()}`.")
+            line_num += 1
+        elif item_type == 'array':
+            count_ref = item.get('count_ref', '')
+            ref_name = count_ref.lower() if count_ref else 'the specified count'
+            item_inner = item.get('item', {})
+            inner_type = item_inner.get('type', '')
+            
+            if inner_type == 'int':
+                lines.append(f"- Line {line_num}: {ref_name} space-separated integers.")
+            elif inner_type == 'string':
+                lines.append(f"- Line {line_num}: {ref_name} space-separated strings.")
+            elif inner_type == 'float':
+                lines.append(f"- Line {line_num}: {ref_name} space-separated floating-point numbers.")
+            else:
+                lines.append(f"- Line {line_num}: {ref_name} space-separated values.")
+            line_num += 1
+    
+    if not lines:
+        return ""
+    
+    return "\n\n**Input Format:**\n" + "\n".join(lines)
+
+
 def _generate_coding_pool_ai_only(
     *,
     llm_client,
@@ -776,28 +828,31 @@ def _generate_coding_pool_ai_only(
         if diff == 'Easy':
             format_override = """
 CRITICAL OVERRIDE FOR EASY QUESTIONS:
-- Do NOT write a long, complicated real-world scenario.
-- Write the problem EXACTLY like a classic LeetCode problem.
-- Start directly with the core requirement (e.g., "Given an array of integers `nums` and an integer `k`, return...").
-- Ensure the student understands instantly that this is a straightforward, purely algorithmic question.
+- Write the problem EXACTLY like a classic LeetCode Easy problem.
+- NO story, NO scenario, NO real-world context. Start directly with the core requirement.
+- Format: "Given an array of integers `nums` and an integer `k`, return..."
+- Keep it purely technical, algorithmic, and instantly understandable.
+- Include an **Input Format** section at the end describing each line.
 """
         elif diff == 'Medium':
             format_override = """
 CRITICAL OVERRIDE FOR MEDIUM QUESTIONS:
-- Do NOT write a long, complicated real-world scenario.
-- Write the problem EXACTLY like a classic LeetCode Medium problem.
-- Provide a clear, technical definition of the problem (e.g., "You are given an integer array... Find... Return...").
-- State any "Notice" or edge case rules clearly (e.g., "Notice that you may not slant the container.").
-- Keep the language purely technical, algorithmic, and free of unnecessary background story.
+- Write the problem like a classic LeetCode Medium problem with ONE line of light context.
+- Start with exactly ONE sentence of real-world context related to the JOB DESCRIPTION (e.g., "You are processing a batch of API endpoint names.").
+- Then immediately state the technical requirement clearly (e.g., "Group the anagrams together and return the number of unique groups.").
+- Do NOT write more than 1-2 sentences of context. Keep the rest purely technical.
+- Include an **Input Format** section at the end describing each line.
 """
         elif diff == 'Hard':
             format_override = """
 CRITICAL OVERRIDE FOR HARD QUESTIONS:
-- Do NOT write a long, complicated real-world scenario.
-- Write the problem EXACTLY like a classic LeetCode Hard problem.
-- Provide a rigorous, highly technical definition of the problem (e.g., "Given an input string `s` and a pattern `p`, implement...").
-- State complex edge cases, matching rules, or strict conditions clearly.
-- Keep the language purely technical, algorithmic, and mathematics-focused.
+- Write a FULL real-world story that maps the algorithm to a professional scenario related to the JOB DESCRIPTION.
+- Include WHO (the role), WHERE (the company/department), and WHY (the business goal).
+- Map every variable to real meaning (e.g., n = number of jobs, m = number of servers, nums[i] = processing time).
+- State the business goal BEFORE the algorithm requirement.
+- Then provide the rigorous technical definition, edge cases, and constraints.
+- The story should make the algorithm feel natural and motivated.
+- Include an **Input Format** section at the end describing each line.
 """
 
         # Ask AI ONLY for the story — NO code generation
@@ -828,13 +883,33 @@ RETURN THIS EXACT JSON FORMAT:
 }}
 
 RULES:
-- DO NOT include Any examples, test cases, or sample inputs/outputs in the problem_statement. These will be added automatically by the system.
-- MUST include a short **Input Format** section at the end of the `problem_statement` describing exactly what each line of the input represents (e.g. "The first line contains N, the second line contains...").
+- DO NOT include any Input Format section, examples, test cases, or sample inputs/outputs in the problem_statement. These will be added automatically by the system.
+- Focus ONLY on describing the problem scenario, requirements, and what the candidate must compute.
 - Return JSON ONLY. No markdown.
 - CRITICAL: You MUST escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure valid JSON!
 - Title must be unique and related to the JD.
 - Problem statement must be clear enough for a student to understand in 30 seconds.
 """
+
+        # Check if skeleton has pre-defined problem statement — skip AI if so
+        if skeleton.get('problem_statement'):
+            # Use pre-defined problem statement directly (human-controlled story depth)
+            challenge = {
+                "title": skeleton.get('title_hint', skeleton['id']).split('/')[0].strip(),
+                "difficulty": skeleton['difficulty'],
+                "topic": skeleton['title_hint'].split('/')[0].strip(),
+                "problem_statement": skeleton['problem_statement'],
+                "constraints": skeleton.get('constraints', 'N <= 10^5'),
+                "explanation": skeleton.get('explanation', ''),
+                "input_generator_schema": skeleton['input_schema'],
+                "reference_solution": skeleton['gold_solution'],
+                "example_input": "N/A",  # Will be generated during verification
+                "example_output": "N/A",
+                "function_meta": {"name": "solve", "params": [{"name": "data", "type": "string"}], "return_type": "string"}
+            }
+            generated.append(challenge)
+            logger.info(f"SKELETON: Used PRE-DEFINED problem statement for '{skeleton['id']}' ({skeleton['difficulty']})")
+            continue
 
         for attempt in range(attempts_per_batch):
             try:
@@ -909,6 +984,10 @@ def _generate_execution_verified_coding_pool(*, llm_client, job_description, req
             if res.get('ok') and res.get('stdout'):
                 challenge['example_input'] = example_input
                 challenge['example_output'] = str(res.get('stdout', '')).strip()
+                
+                # Auto-generate Input Format from schema and append
+                input_format = _generate_input_format(schema)
+                challenge['problem_statement'] += input_format
                 
                 # Append formatted, verified example to description
                 challenge['problem_statement'] += (

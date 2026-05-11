@@ -1087,126 +1087,106 @@ class RetryFailedExtractionsView(APIView):
 
 
                 prompt = f"""
-
                 Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
-
                 
-
                 RESUME:
-
                 {resume_text}
-
                 
-
                 JOB DESCRIPTION:
-
                 {jd}
-
                 
-
                 SCORING RULES (Strict & Objective):
-
                 1. Start with a BASE SCORE of 100%.
-
                 2. For every CORE SKILL or TECHNOLOGY mentioned in the JD that is MISSING from the resume, SUBTRACT 15-20 points.
-
                 3. If the candidate has NO relevant industry experience for the role, the final score must be below 20%.
-
                 4. If the resume and JD are a 100% match, return 100%.
-
                 5. Be brutally honest. Do not "inflate" the score, but do not drop to 0% unless there is zero relevance.
-
                 
-
                 Please provide:
-
                 1. The candidate's full name. Look at the very top of the document. If missing, return "Extraction Failed".
-
                 2. The candidate's contact email. Look for email patterns. If missing, return "Extraction Failed".
-
                 3. A match percentage (0-100).
-
                 4. A brief 2-3 sentence summary of the fit. Explicitly mention any critical missing skills.
-
                 5. A list of 7 interview questions (5 technical/behavioral questions + 2 coding-specific challenges or deep-dives) based on their resume and the JD.
-
                 
-
                 CRITICAL: You MUST extract the name and email if they are present in ANY form. Do not be overly strict with formatting.
-
                 
-
                 Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "summary", "interview_questions".
-
                 """
 
 
 
-                # Retry with Key Rotation
-
+                # Retry with Key Rotation (Groq Cascading Fallback)
+                import time
+                from openai import OpenAI
+                import random
+                groq_keys = list(getattr(settings, 'GROQ_API_KEYS', []))
                 match_result = None
-
-                current_model = get_default_model()
-
                 
-
-                for key_index in range(len(api_keys)):
-
-                    try:
-
-                        temp_client = create_llm_client(api_key=api_keys[key_index % len(api_keys)])
-
-                        print(f"   🤖 Calling AI ({current_model})...", end="", flush=True)
-
+                if not groq_keys:
+                    print("   ❌ No GROQ_API_KEYS configured in settings.")
+                else:
+                    max_retries = 3
+                    for attempt in range(max_retries):
+                        random.shuffle(groq_keys)
                         
-
-                        response = temp_client.chat.completions.create(
-
-                            model=current_model,
-
-                            messages=[{"role": "user", "content": prompt}],
-
-                            response_format={"type": "json_object"},
-
-                            temperature=0.0
-
-                        )
-
-                        raw_text = response.choices[0].message.content
-
-                        print(" Done!") # No streaming in retry view yet to keep it simple, but visible
-
-                        match_result = extract_json(raw_text)
-
+                        # STEP 1: Exhaust 70B
+                        print(f"\n   --- Attempt {attempt+1}: Prioritizing High-Accuracy 70B ---")
+                        for key in groq_keys:
+                            try:
+                                print(f"   🤖 Trying 70B (llama-3.3-70b-versatile)... ", end="", flush=True)
+                                groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
+                                response = groq_client.chat.completions.create(
+                                    model="llama-3.3-70b-versatile",
+                                    messages=[{"role": "user", "content": prompt}],
+                                    response_format={"type": "json_object"},
+                                    temperature=0.0,
+                                    seed=42
+                                )
+                                raw_text = response.choices[0].message.content
+                                print(" ✅ Success!") 
+                                match_result = extract_json(raw_text)
+                                if match_result:
+                                    break
+                            except Exception as e:
+                                print(f"❌ Error/Rate Limit. Rotating...")
+                                continue
+                        
                         if match_result:
-
                             break
-
-                    except Exception as e:
-
-                        error_msg = str(e).lower()
-
-                        if ("429" in error_msg or "rate limit" in error_msg or "quota" in error_msg):
-
-                            if key_index < len(api_keys) - 1:
-
-                                print(f"\n   🔄 Key {key_index+1} limit reached. Rotating...")
-
+                            
+                        # STEP 2: Exhaust 8B
+                        print(f"   ⚠️ 70B Exhausted. Falling back to 8B Safety Net ---")
+                        for key in groq_keys:
+                            try:
+                                print(f"   🤖 Trying 8B (llama-3.1-8b-instant)... ", end="", flush=True)
+                                groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
+                                response = groq_client.chat.completions.create(
+                                    model="llama-3.1-8b-instant",
+                                    messages=[{"role": "user", "content": prompt}],
+                                    response_format={"type": "json_object"},
+                                    temperature=0.0,
+                                    seed=42
+                                )
+                                raw_text = response.choices[0].message.content
+                                print(" ✅ Success!") 
+                                match_result = extract_json(raw_text)
+                                if match_result:
+                                    break
+                            except Exception as e:
+                                print(f"❌ Error/Rate Limit. Rotating...")
                                 continue
+                                
+                        if match_result:
+                            break
+                            
+                        # STEP 3: Sleep and retry
+                        if attempt < max_retries - 1:
+                            sleep_time = 10 * (2 ** attempt)
+                            print(f"   📉 All keys exhausted. Sleeping {sleep_time}s...")
+                            time.sleep(sleep_time)
 
-                            else:
 
-                                print(f"\n   📉 All keys exhausted. Retrying...")
-
-                                key_index = -1
-
-                                continue
-
-                        
-
-                        print(f"\n   ❌ Error: {str(e)}")
-
-                        break
 
                 
 
