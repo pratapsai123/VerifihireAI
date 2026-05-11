@@ -937,9 +937,17 @@ def submit_invitation_answers_view(request, token):
         if not has_coding:
             inv.status = 'submitted'
             inv.save(update_fields=['status'])
-            # Trigger result email after 5 minutes (300 seconds)
-            from api.tasks import send_custom_assessment_result_task
-            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+            
+            # ── TRIGGER EMAILS ──
+            from api.tasks import send_custom_assessment_result_task, send_regret_email_task
+            
+            # 1. Qualified Email (5 min delay) - only if auto-schedule is ON
+            if submission.result == 'selected':
+                send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+            
+            # 2. Regret Email (24 hour delay) - ALWAYS send for rejected, regardless of flag
+            elif submission.result == 'rejected':
+                send_regret_email_task.apply_async(args=[inv.id], countdown=86400)
 
         return Response(
             {
@@ -1675,10 +1683,16 @@ def invitation_coding_finalize_view(request, token):
         inv.status = 'submitted'
         inv.save(update_fields=['status'])
 
-        # Trigger result email after 5 minutes (300 seconds)
-        from api.tasks import send_custom_assessment_result_task
-        # send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=3600)
-        send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+        # ── TRIGGER EMAILS ──
+        from api.tasks import send_custom_assessment_result_task, send_regret_email_task
+        
+        # 1. Qualified Email (5 min delay) - only if auto-schedule is ON
+        if submission.result == 'selected':
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+        
+        # 2. Regret Email (24 hour delay) - ALWAYS send for rejected, regardless of flag
+        elif submission.result == 'rejected':
+            send_regret_email_task.apply_async(args=[inv.id], countdown=86400)
 
         # Update submitted_at to the true final submission time (coding finalized)
         # For mixed assessments, the submission record was created during objective submit
@@ -1884,6 +1898,7 @@ def results_overview_view(request):
                         'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                     },
                     'activity_logs': inv.activity_logs,
+                    'regret_email_sent': s.regret_email_sent,
                     'created_at': inv.created_at.isoformat() if inv.created_at else None,
                 }
             )

@@ -142,14 +142,88 @@ def send_custom_assessment_result_task(invitation_id):
             
             logger.info(f"Result email sent to {inv.email} for invitation {invitation_id}")
         else:
-            # Optional: Send rejection email? 
-            # User specifically asked for 'cleard message and slot booking'.
-            logger.info(f"Candidate {inv.email} not qualified ({submission.percentage}%). No email sent.")
+            # If not qualified, check if it's a rejection (not 'hold')
+            if submission.result == 'rejected':
+                # Regret email is now handled by a separate task with 24h delay
+                # triggered from the view to ensure it always fires regardless of auto-schedule
+                logger.info(f"Candidate {inv.email} not qualified ({submission.percentage}%). Regret task should be scheduled.")
+            else:
+                logger.info(f"Candidate {inv.email} status is '{submission.result}' (score: {submission.percentage}%). No automatic email.")
             
     except CandidateInvitation.DoesNotExist:
         logger.error(f"Invitation {invitation_id} not found")
     except Exception as e:
         logger.error(f"Error in send_custom_assessment_result_task: {str(e)}")
+
+@shared_task
+def send_regret_email_task(invitation_id):
+    """
+    Sends a formal regret email to a candidate who did not qualify.
+    Triggered with a 24-hour delay.
+    """
+    from .models import CandidateInvitation
+    from django.core.mail import send_mail
+    from django.conf import settings
+    
+    logger.info(f"Executing send_regret_email_task for invitation {invitation_id}")
+    try:
+        inv = CandidateInvitation.objects.get(id=invitation_id)
+        submission = getattr(inv, 'submission', None)
+        
+        if not submission:
+            logger.warning(f"No submission found for invitation {invitation_id}")
+            return
+
+        # CRITICAL: Only send if status is STILL 'rejected'
+        # If the recruiter changed it to 'hold' or 'selected' during the 24h delay, skip.
+        if submission.result != 'rejected':
+            logger.info(f"Skipping regret email for {inv.email}: Result is currently '{submission.result}'")
+            return
+            
+        if submission.regret_email_sent:
+            logger.info(f"Regret email already sent to {inv.email}. Skipping.")
+            return
+
+        subject = f"Update regarding your assessment for {inv.assessment.name}"
+        
+        # Formal message that avoids direct "rejection/failed" terminology
+        message = (
+            f"Dear {inv.name},\n\n"
+            f"Thank you for the time and effort you invested in completing the assessment for the {inv.assessment.name} position.\n\n"
+            f"We have carefully reviewed your submission along with our current requirements. While we appreciate your interest in joining our team, we have decided to move forward with other candidates at this stage.\n\n"
+            f"We will keep your profile in our database for future opportunities that may be a better match for your skills. We wish you the very best in your professional journey.\n\n"
+            f"Best regards,\nThe VerifiHire Team"
+        )
+        
+        html_message = f"""
+        <div style="font-family: sans-serif; max-width: 600px; color: #333; line-height: 1.6;">
+            <p>Dear <strong>{inv.name}</strong>,</p>
+            <p>Thank you for the time and effort you invested in completing the assessment for the <strong>{inv.assessment.name}</strong> position.</p>
+            <p>We have carefully reviewed your submission along with our current requirements. While we appreciate your interest in joining our team, we have decided to move forward with other candidates at this stage.</p>
+            <p>We will keep your profile in our database for future opportunities that may be a better match for your skills. We wish you the very best in your professional journey.</p>
+            <br/>
+            <p>Best regards,<br/><strong>The VerifiHire Team</strong></p>
+        </div>
+        """
+        
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[inv.email],
+            html_message=html_message,
+            fail_silently=False
+        )
+        
+        submission.regret_email_sent = True
+        submission.save(update_fields=['regret_email_sent'])
+        
+        logger.info(f"Formal regret email sent to {inv.email} for invitation {invitation_id}")
+            
+    except CandidateInvitation.DoesNotExist:
+        logger.error(f"Invitation {invitation_id} not found")
+    except Exception as e:
+        logger.error(f"Error in send_regret_email_task: {str(e)}")
 
 @shared_task
 def cleanup_expired_reservations_task():

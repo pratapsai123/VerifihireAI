@@ -891,6 +891,7 @@ class CandidateSubmission(models.Model):
     final_percentage = models.FloatField(default=0.0) # Weighted score percentage
     is_qualified = models.BooleanField(default=False)
     result = models.CharField(max_length=20, default='rejected')  # selected | rejected
+    regret_email_sent = models.BooleanField(default=False)
     rating = models.IntegerField(blank=True, null=True)  # 1-5 stars
     feedback = models.TextField(blank=True, null=True)
     submitted_at = models.DateTimeField(default=timezone.now, help_text="Final submission time; updated on coding finalization for mixed assessments")

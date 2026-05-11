@@ -127,4 +127,3 @@ urlpatterns = [
     path('security-signatures', views.security_signatures_view, name='security_signatures'),
 
 ]
-
