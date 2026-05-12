@@ -887,13 +887,24 @@ def generate_candidate_report(submission_id):
     # ════════════════════════════════════════════════════════════════════════
 
     story.append(Paragraph('Personal Information', styles['SectionHeader']))
+
     # Identity Verification status
     identity_status = "Verified"
     match_score_str = "100%"
     status_color = "#16a34a" # Green
 
+    # Fetch Integrity Score earlier for identity check
+    integrity = CandidateIntegrity.objects.filter(invitation=inv).first()
+
     if candidate_detail:
-        if candidate_detail.identity_mismatch_detected:
+        # Initial check from CandidateDetails (baseline check)
+        is_mismatch = getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)
+        
+        # Continuous check from Integrity record
+        if integrity and not getattr(integrity, 'identity_verified', True):
+            is_mismatch = True
+
+        if is_mismatch:
             identity_status = "IDENTITY MISMATCH DETECTED"
             status_color = "#dc2626" # Red
         
@@ -1795,6 +1806,24 @@ def generate_candidate_report(submission_id):
     # ════════════════════════════════════════════════════════════════════════
 
     story.append(Paragraph('Results Summary', styles['SectionHeader']))
+
+
+
+    # ── Fetch Integrity Score ──
+
+    integrity_score = 100.0
+
+    violations = 0
+
+    
+
+    # integrity is already fetched at the top of generate_candidate_report
+
+    if integrity:
+
+        integrity_score = integrity.integrity_score
+
+        violations = (integrity.tab_switches or 0) + (integrity.phone_detections or 0) + (integrity.multiface_detections or 0) + max(0, (integrity.no_face_detections or 0) - 3)
 
 
 
@@ -3019,12 +3048,65 @@ def generate_candidate_report(submission_id):
 
     # ════════════════════════════════════════════════════════════════════════
 
-    # 6. INTEGRITY VIOLATIONS LOG
+    # ════════════════════════════════════════════════════════════════════════
+    # PERIODIC IDENTITY VERIFICATION
+    # ════════════════════════════════════════════════════════════════════════
+    if integrity and getattr(integrity, 'identity_verification_logs', []):
+        story.append(PageBreak())
+        story.append(Paragraph('Periodic Identity Verification', styles['SectionHeader']))
+        story.append(Paragraph('The following identity checks were performed automatically every 2 minutes during the assessment to ensure the candidate remained the same throughout the exam.', styles['Normal']))
+        story.append(Spacer(1, 12))
+        
+        table_data = [[
+            Paragraph('<b>Time</b>', styles['Normal']), 
+            Paragraph('<b>Status</b>', styles['Normal']), 
+            Paragraph('<b>Match Score</b>', styles['Normal'])
+        ]]
+        
+        for log in integrity.identity_verification_logs:
+            ts = log.get('timestamp', '')
+            if ts:
+                try:
+                    from datetime import datetime
+                    dt = datetime.fromisoformat(ts.replace('Z', '+00:00'))
+                    ts_str = timezone.localtime(dt).strftime('%I:%M %p')
+                except Exception:
+                    ts_str = ts
+            else:
+                ts_str = '-'
+            
+            is_v = log.get('verified', False)
+            status_text = "Verified" if is_v else "Mismatch"
+            status_color = "#16a34a" if is_v else "#dc2626"
+            
+            score = f"{log.get('match_score', 0)}%"
+            
+            table_data.append([
+                Paragraph(ts_str, styles['Normal']),
+                Paragraph(f'<b><font color="{status_color}">{status_text}</font></b>', styles['Normal']),
+                Paragraph(score, styles['Normal'])
+            ])
+        
+        if len(table_data) > 1:
+            t = Table(table_data, colWidths=[1.5*inch, 2*inch, 1.5*inch])
+            t.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#475569')),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#e2e8f0')),
+                ('TOPPADDING', (0, 0), (-1, -1), 8),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+                ('LEFTPADDING', (0, 0), (-1, -1), 12),
+            ]))
+            story.append(t)
+            
+        story.append(Spacer(1, 20))
 
     # ════════════════════════════════════════════════════════════════════════
-
+    # INTEGRITY VIOLATIONS LOG
+    # ════════════════════════════════════════════════════════════════════════
     try:
-
         integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
 
         if integrity_screenshots:

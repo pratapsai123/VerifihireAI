@@ -966,6 +966,71 @@ def submit_invitation_answers_view(request, token):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while submitting: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_identity_view(request, token):
+    """
+    Periodic identity check during assessment.
+    Compares current webcam snapshot against registered baseline in CandidateDetails.
+    """
+    try:
+        inv = CandidateInvitation.objects.get(token=token)
+        if inv.status == 'submitted':
+             return Response({'message': 'Exam already submitted'}, status=status.HTTP_200_OK)
+
+        snapshot = request.data.get('webcam_screenshot')
+        if not snapshot:
+            return Response({'error': 'Snapshot required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 1. Get the registered baseline identity
+        # We use CandidateDetails which was filled at the start.
+        details = CandidateDetails.objects.filter(token=token).first()
+        if not details:
+            return Response({'error': 'Candidate details not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        person_id = details.pan_number # Baseline is registered under PAN in DeepFace
+        
+        # 2. Verify with DeepFace
+        verify_result = verify_face_with_deepface(person_id, snapshot)
+        is_verified = verify_result.get('verified', False)
+        distance = verify_result.get('distance', 1.0)
+        match_score = max(0.0, 1.0 - distance)
+
+        # 3. Update Integrity Record
+        integrity, _ = CandidateIntegrity.objects.get_or_create(invitation=inv)
+        
+        # Append to identity logs
+        logs = integrity.identity_verification_logs if isinstance(integrity.identity_verification_logs, list) else []
+        logs.append({
+            'timestamp': timezone.now().isoformat(),
+            'verified': is_verified,
+            'match_score': round(match_score * 100, 2)
+        })
+        integrity.identity_verification_logs = logs
+        
+        # If mismatch detected, update the overall flag
+        if not is_verified:
+            integrity.identity_verified = False
+            # Save a violation screenshot for the report
+            _save_identity_violation_screenshot(inv, snapshot, "Identity Mismatch (Periodic)")
+        
+        integrity.save()
+
+        return Response({
+            'success': True,
+            'verified': is_verified,
+            'match_score': match_score
+        }, status=status.HTTP_200_OK)
+
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invitation not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        import traceback
+        print(f"Error in verify_identity_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @csrf_exempt
 @api_view(['POST'])
