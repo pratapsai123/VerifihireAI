@@ -1,6 +1,7 @@
 const { scanProcesses, getWindowTitles } = require('./processScanner');
 const { detectBlocked, loadBundledRules, setRules } = require('./detector');
 const { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logActivity } = require('./apiClient');
+const { selfDestruct } = require('./instanceManager');
 const { scanHardwareDevices, compareToBaseline, getStartupBaseline } = require('./hardwareScanner');
 
 let scanTimer = null;
@@ -46,7 +47,7 @@ async function flushPendingViolation() {
       
       if (response.action === 'STOP') {
         stopMonitor();
-        setTimeout(() => process.exit(0), 2000);
+        setTimeout(() => selfDestruct(0), 2000);
       }
     }
   } catch (err) {
@@ -96,8 +97,8 @@ async function _doScan() {
         pendingViolation = null; // Success, clear buffer
         if (response?.action === 'STOP') {
           stopMonitor();
-          console.log('[monitor] STOP action received — agent will exit');
-          setTimeout(() => process.exit(0), 2000);
+          console.log('[monitor] STOP action received — agent will self-destruct');
+          setTimeout(() => selfDestruct(0), 2000);
         }
       } catch (err) {
         console.warn('[monitor] Network down — buffering process violation for later reporting');
@@ -231,8 +232,8 @@ async function sendAliveHeartbeat() {
     failedHeartbeats = 0;
     if (response?.action === 'STOP') {
       stopMonitor();
-      console.log('[monitor] STOP action from heartbeat — agent will exit');
-      setTimeout(() => process.exit(0), 2000);
+      console.log('[monitor] STOP action from heartbeat — agent will self-destruct');
+      setTimeout(() => selfDestruct(0), 2000);
     }
   } catch {
     failedHeartbeats++;

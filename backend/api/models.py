@@ -1779,6 +1779,7 @@ class SecuritySession(models.Model):
     blocked_app_path = models.TextField(blank=True, null=True)
     blocked_hardware = models.CharField(max_length=512, blank=True, null=True)
     reason = models.TextField(blank=True, null=True)
+    agent_instance_id = models.CharField(max_length=128, blank=True, null=True, db_index=True)
     is_active = models.BooleanField(default=True)
     violation_count = models.IntegerField(default=0)
     violation_start_time = models.DateTimeField(blank=True, null=True)

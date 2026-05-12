@@ -51,10 +51,22 @@ def start_security_session_view(request):
             'is_violated': True
         }, status=status.HTTP_403_FORBIDDEN)
 
+    agent_id = (data.get('agent_instance_id') or '').strip()
+    if agent_id:
+        # Check if this agent ID was already used for a different token
+        # This prevents using the same .exe download for multiple distinct assessments.
+        if SecuritySession.objects.filter(agent_instance_id=agent_id).exclude(token=token).exists():
+            return Response({
+                'error': 'To maintain assessment integrity, this session requires a new instance of the Secure Agent.',
+                'agent_expired': True,
+                'action': 'STOP'
+            }, status=status.HTTP_403_FORBIDDEN)
+
     session = SecuritySession.objects.create(
         token=token,
         session_type=session_type,
         user_id=user_id or token,
+        agent_instance_id=agent_id,
         status='SAFE',
         action='CONTINUE',
         last_heartbeat=timezone.now(),

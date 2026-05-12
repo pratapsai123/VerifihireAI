@@ -267,6 +267,12 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     return () => {
       active = false;
       clearInterval(id);
+      // Ensure the local agent stops and the terminal auto-closes when the exam ends
+      // or the candidate navigates away from the guarded session.
+      const sessRecord = readSessionRecord(token);
+      if (sessRecord) {
+        stopLocalMonitor({ session_id: sessRecord.session_id, user_id: sessRecord.user_id }).catch(() => {});
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, token, sessionType, examStarted]);

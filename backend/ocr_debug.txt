@@ -989,3 +989,5 @@
 [2026-05-12 10:09:25.690077+00:00] Direct match found at rotation 0
 [2026-05-12 10:26:11.636063+00:00] Running OCR on rotation 0
 [2026-05-12 10:26:23.808938+00:00] Direct match found at rotation 0
+[2026-05-12 06:14:02.804232+00:00] Running OCR on rotation 0
+[2026-05-12 06:14:46.990854+00:00] Direct match found at rotation 0
