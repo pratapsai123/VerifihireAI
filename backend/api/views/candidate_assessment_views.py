@@ -2238,47 +2238,46 @@ def submit_objective_section(request, token):
         from api.models import AssessmentCodingQuestion
         has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
 
-        # --- NEW GATING LOGIC ---
-        # Fixed thresholds as per user requirement: MCQ 60%, Integrity 70%
-        MIN_MCQ_GATE = 60.0
-        MIN_INTEGRITY_GATE = 70.0
+        # --- ENHANCED GATING LOGIC ---
+        # Respect 'has_objective_cutoff' toggle and 'min_objective_pass_percentage'
+        is_cutoff_enforced = getattr(assessment, 'has_objective_cutoff', False)
+        # Use assessment's pass percentage, fallback to 60.0 if not set or 0
+        min_mcq_gate = float(getattr(assessment, 'min_objective_pass_percentage', 60.0) or 60.0)
+        if min_mcq_gate <= 0: min_mcq_gate = 60.0
+
         should_schedule_result_email = False
         
-        # Fetch Integrity Score for gating
-        integrity_score = 100.0
-        try:
-            if hasattr(inv, 'integrity') and inv.integrity:
-                 integrity_score = float(inv.integrity.integrity_score)
-        except Exception:
-            pass
+        # Determine MCQ pass status
+        if is_cutoff_enforced:
+            passed_mcq = percentage >= min_mcq_gate
+        else:
+            passed_mcq = True # Proceed regardless of score if toggle is OFF
+
+        # NOTE: Integrity check no longer stops the candidate early (Option 1)
+        # This allows candidates to finish the whole assessment even if flagged.
+        # The 'Hold' status will be applied at the very end of the final section.
         
-        passed_mcq = percentage >= MIN_MCQ_GATE
-        passed_integrity = integrity_score >= MIN_INTEGRITY_GATE
-        
-        # If they fail either MCQ or Integrity, they are STOPPED and put on HOLD
-        if not passed_mcq or not passed_integrity:
+        if not passed_mcq:
+            # Stopped only if MCQ cutoff is enabled and failed
             passed = False 
             next_stage = 'finish'
-            if not passed_mcq:
-                message = "You did not meet the minimum requirement for the objective section. Your assessment is now complete."
-            else:
-                message = "Your assessment is complete. High violation count detected; your application is under review."
+            message = "You did not meet the minimum requirement for the objective section. Your assessment is now complete."
             
             # Finalize immediately
             inv.status = 'submitted'
             inv.save()
             
-            # Recalculate and set to HOLD
+            # Recalculate (will likely set to 'rejected')
             _update_submission_scoring_logic(submission, finalize=True)
             submission.save()
             
             # Schedule result email/report
             should_schedule_result_email = True
         else:
-            # They passed both
+            # Proceed to next stage
             passed = True
             if has_coding:
-                message = "Objective section passed. Proceeding to coding section."
+                message = "Objective section completed. Proceeding to coding section."
                 next_stage = 'coding'
             else:
                 message = "Objective section completed successfully."
@@ -2287,7 +2286,8 @@ def submit_objective_section(request, token):
                 inv.save()
                 should_schedule_result_email = True
             
-            # If they passed both but have coding, finalize=False. If no coding, finalize=True.
+            # If they have coding, finalize=False (result stays 'pending')
+            # If no coding, finalize=True (result calculated now)
             _update_submission_scoring_logic(submission, finalize=(next_stage == 'finish'))
             submission.save()
         
