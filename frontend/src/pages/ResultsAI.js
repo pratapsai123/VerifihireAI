@@ -281,6 +281,30 @@ const ResultsAI = () => {
     }, []);
 
     useEffect(() => { fetchData(); }, [fetchData]);
+    
+    // Sync URL subId with viewedSubmission modal
+    useEffect(() => {
+        const subId = searchParams.get('subId');
+        if (subId) {
+            // Find in current loaded assessments
+            const found = aiAssessments.find(a => 
+                String(a.submission_id) === String(subId) || 
+                String(a.id) === String(subId) ||
+                String(a.submission_id) === `ai_${subId}`
+            );
+            
+            if (found) {
+                setViewedSubmission(found);
+            } else {
+                // If not found in aiAssessments, it might be a standard assessment in another state
+                // or a deep link that hasn't loaded yet.
+                // However, most buttons in this UI fetch/load data before setting subId.
+            }
+        } else {
+            setViewedSubmission(null);
+        }
+    }, [searchParams, aiAssessments]);
+
 
     const fetchTimeline = async (candidate) => {
         if (!candidate) return;

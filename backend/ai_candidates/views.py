@@ -910,7 +910,7 @@ class BatchProgressView(APIView):
 
                 "extraction_failed": (c.status == 'Extraction Failed'),
 
-                "summary": "Match calculated in background." if c.status != 'Extraction Failed' else f"Extraction failed for {c.full_name}."
+                "summary": c.resume_summary or "Match calculated in background." if c.status != 'Extraction Failed' else f"Extraction failed for {c.full_name}."
 
             })
 
@@ -1166,6 +1166,7 @@ class RetryFailedExtractionsView(APIView):
                     
 
                     candidate.resume_score = num_percentage
+                    candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
 
                     is_eligible = (num_percentage >= threshold)
 

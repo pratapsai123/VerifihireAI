@@ -13,6 +13,7 @@ const CreateAssessment = () => {
     const [formData, setFormData] = useState({
         job_description: '',
         skills: '',
+        experience_level: '',  // NEW: Add experience level to form data
         num_mcqs: 10,
         num_coding: 1,
         coding_challenges: [{ id: 1, difficulty: 'Medium' }],
@@ -275,6 +276,7 @@ const CreateAssessment = () => {
         const payload = {
             job_description: formData.job_description,
             required_skills: formData.skills,
+            experience_level: formData.experience_level,  // NEW: Include experience level in API payload
             cancel_token: currentToken,
 
             // Include Job Title for persistence
@@ -379,6 +381,60 @@ const CreateAssessment = () => {
                                 onChange={(e) => handleChange('skills', e.target.value)}
                                 className="modern-input"
                             />
+                        </div>
+                    )}
+
+                    {/* NEW: Experience Level Section */}
+                    {selectedRoleId && (
+                        <div className="form-group" style={{ marginTop: '1.5rem' }}>
+                            <label style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '0.5rem', 
+                                fontSize: '0.95rem', 
+                                fontWeight: '600', 
+                                color: '#374151', 
+                                marginBottom: '0.75rem' 
+                            }}>
+                                <i className="fa-solid fa-user-graduate" style={{ color: '#6366F1', fontSize: '0.9rem' }}></i>
+                                Experience Level
+                            </label>
+                            <select
+                                value={formData.experience_level}
+                                onChange={(e) => handleChange('experience_level', e.target.value)}
+                                className="modern-input"
+                                style={{
+                                    width: '100%',
+                                    padding: '0.85rem 1rem',
+                                    borderRadius: '10px',
+                                    border: '1px solid #E2E8F0',
+                                    outline: 'none',
+                                    background: 'white',
+                                    fontSize: '0.9rem',
+                                    color: '#374151',
+                                    cursor: 'pointer',
+                                    transition: 'border-color 0.2s, box-shadow 0.2s'
+                                }}
+                            >
+                                <option value="">Select candidate experience level...</option>
+                                <option value="fresher">Fresher (0 Years)</option>
+                                <option value="entry">Entry (0-2 years)</option>
+                                <option value="mid">Mid (2-5 years)</option>
+                                <option value="senior">Senior (5-10 years)</option>
+                                <option value="expert">Expert (10+ years)</option>
+                            </select>
+                            <p style={{ 
+                                fontSize: '0.8rem', 
+                                color: '#6B7280', 
+                                marginTop: '0.5rem', 
+                                marginBottom: 0,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.4rem'
+                            }}>
+                                <i className="fa-solid fa-lightbulb" style={{ color: '#F59E0B', fontSize: '0.75rem' }}></i>
+                                AI will generate questions appropriate for this experience level
+                            </p>
                         </div>
                     )}
 

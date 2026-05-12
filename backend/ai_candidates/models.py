@@ -55,6 +55,7 @@ class Candidate(models.Model):
     )
     score = models.IntegerField(default=0)
     resume_score = models.IntegerField(default=0, help_text="Resume match percentage from AI screening")
+    resume_summary = models.TextField(blank=True, null=True, help_text="AI-generated summary of the resume screening results")
     interview_pass_threshold = models.IntegerField(default=50, help_text="Minimum score percentage to pass the interview")
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)

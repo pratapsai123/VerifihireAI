@@ -596,3 +596,58 @@ def extract_text_from_pdf_ocr(file_content):
 
     except Exception as e:
         return ""
+
+def extract_text_from_docx_ocr(file_content):
+    """
+    Extract text from a DOCX file by iterating through its internal images and running OCR.
+    Useful for DOCX files that consist mainly of scanned images.
+    """
+    try:
+        from docx import Document
+        from django.utils import timezone
+        from django.conf import settings
+        log_file = os.path.join(settings.BASE_DIR, "ocr_debug.txt")
+
+        def log(msg):
+            try:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(f"[{timezone.now()}] {msg}\n")
+            except:
+                pass
+
+        log("Starting DOCX OCR (Skills Extraction)")
+
+        reader = _get_reader()
+        if not reader:
+            log("EasyOCR reader failed to initialize")
+            return ""
+
+        all_text = ""
+        doc = Document(io.BytesIO(file_content))
+        
+        # Iterate through all relations in the document to find images
+        image_count = 0
+        for rel in doc.part.rels.values():
+            if "image" in rel.target_ref:
+                try:
+                    image_count += 1
+                    image_data = rel.target_part.blob
+                    image_np = np.array(Image.open(io.BytesIO(image_data)))
+                    
+                    # Run OCR on the image
+                    results = reader.readtext(image_np, detail=0)
+                    image_text = " ".join(results)
+                    
+                    log(f"Image {image_count}: {len(image_text)} chars extracted")
+                    if image_text.strip():
+                        all_text += image_text + "\n"
+                except Exception as e:
+                    log(f"Error extracting/OCR-ing image {image_count}: {e}")
+
+        log(f"DOCX OCR complete. Processed {image_count} images. Total chars: {len(all_text)}")
+        return all_text.strip()
+
+    except Exception as e:
+        print(f"DOCX OCR Error: {e}")
+        return ""
+
