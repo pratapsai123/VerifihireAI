@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Download, Trash2, TableProperties } from 'lucide-react';
+import { Download, Trash2, TableProperties, UserCheck, UserX, Loader2 } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -84,6 +84,8 @@ export default function Result() {
     const [sortConfig, setSortConfig] = useState({ key: 'submitted', direction: 'desc' });
     const [quickViewRow, setQuickViewRow] = useState(null);
     const [isShowingLogs, setIsShowingLogs] = useState(false);
+    const [reviewPopup, setReviewPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '' });
+    const [downloadingIds, setDownloadingIds] = useState(new Set());
 
     useEffect(() => {
         if (isOverview) return;
@@ -97,6 +99,54 @@ export default function Result() {
         }, 800);
         return () => clearTimeout(timer);
     }, [isOverview, ratingSaved]);
+
+    const handleUpdateResult = (submission, newStatus) => {
+        setReviewPopup({
+            show: true,
+            submissionId: submission.submission_id,
+            status: newStatus,
+            candidateName: submission.candidate?.name || 'this candidate'
+        });
+    };
+
+    const confirmUpdateResult = async () => {
+        const { submissionId, status } = reviewPopup;
+        try {
+            const resp = await axios.post(`${API_BASE_URL}/results/${submissionId}/update-result/`, { result: status });
+            alert(resp.data.message);
+            setOverview(prev => prev.map(r => r.submission_id === submissionId ? { ...r, status: status } : r));
+            setReviewPopup({ show: false, submissionId: null, status: '', candidateName: '' });
+        } catch (err) {
+            alert(err.response?.data?.error || "Failed to update result.");
+        }
+    };
+
+    const handleDownloadReport = async (submissionId, candidateName) => {
+        if (downloadingIds.has(submissionId)) return;
+        
+        setDownloadingIds(prev => new Set(prev).add(submissionId));
+        const url = `${API_BASE_URL}/results/${submissionId}/report/`;
+        try {
+            const resp = await axios.get(url, { responseType: 'blob' });
+            const blob = new Blob([resp.data], { type: 'application/pdf' });
+            const durl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = durl;
+            link.setAttribute('download', `Report_${candidateName || submissionId}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(durl);
+        } catch (err) {
+            alert("Failed to download report.");
+        } finally {
+            setDownloadingIds(prev => {
+                const next = new Set(prev);
+                next.delete(submissionId);
+                return next;
+            });
+        }
+    };
 
     const filtered = useMemo(() => {
         let list = overview;
@@ -601,10 +651,30 @@ export default function Result() {
                                                     )}
                                                 </td>
                                                 <td>
-                                                    <span className={`pill ${statusMeta.className}`}>
-                                                        <span className="pill-dot" />
-                                                        {statusMeta.label}
-                                                    </span>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                        <span className={`pill ${statusMeta.className}`}>
+                                                            <span className="pill-dot" />
+                                                            {statusMeta.label}
+                                                        </span>
+                                                        {(r.status === 'hold' || r.status === 'HOLD') && r.submission_id && (
+                                                            <div className="status-actions" style={{ display: 'flex', gap: '4px' }}>
+                                                                <button 
+                                                                    onClick={() => handleUpdateResult(r, 'selected')}
+                                                                    title="Mark as Qualified"
+                                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#10b981', padding: 0 }}
+                                                                >
+                                                                    <UserCheck size={18} />
+                                                                </button>
+                                                                <button 
+                                                                    onClick={() => handleUpdateResult(r, 'rejected')}
+                                                                    title="Mark as Not Qualified"
+                                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#ef4444', padding: 0 }}
+                                                                >
+                                                                    <UserX size={18} />
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </td>
                                                 <td className="center-col">
                                                     <div className="action-buttons">
@@ -619,31 +689,33 @@ export default function Result() {
                                                             <button
                                                                 className="btn-report-dl"
                                                                 title={r.status === 'pending' ? "Report unavailable while pending" : "Download Report"}
-                                                                disabled={r.status === 'pending'}
+                                                                disabled={r.status === 'pending' || downloadingIds.has(r.submission_id)}
                                                                 style={{ 
-                                                                    opacity: r.status === 'pending' ? 0.5 : 1,
-                                                                    cursor: r.status === 'pending' ? 'not-allowed' : 'pointer'
+                                                                    opacity: (r.status === 'pending' || downloadingIds.has(r.submission_id)) ? 0.5 : 1,
+                                                                    cursor: (r.status === 'pending' || downloadingIds.has(r.submission_id)) ? 'not-allowed' : 'pointer',
+                                                                    transition: 'transform 0.1s ease',
                                                                 }}
-                                                                onClick={async () => {
-                                                                    if (r.status === 'pending') return;
-                                                                    const url = `${API_BASE_URL}/results/${r.submission_id}/report/`;
-                                                                    try {
-                                                                        const resp = await axios.get(url, { responseType: 'blob' });
-                                                                        const blob = new Blob([resp.data], { type: 'application/pdf' });
-                                                                        const durl = window.URL.createObjectURL(blob);
-                                                                        const link = document.createElement('a');
-                                                                        link.href = durl;
-                                                                        link.setAttribute('download', `Report_${r.candidate?.name || r.submission_id}.pdf`);
-                                                                        document.body.appendChild(link);
-                                                                        link.click();
-                                                                        link.remove();
-                                                                        window.URL.revokeObjectURL(durl);
-                                                                    } catch (err) {
-                                                                        alert("Failed to download report.");
+                                                                onMouseDown={(e) => {
+                                                                    if (r.status !== 'pending' && !downloadingIds.has(r.submission_id)) {
+                                                                        e.currentTarget.style.transform = 'scale(0.9)';
                                                                     }
                                                                 }}
+                                                                onMouseUp={(e) => {
+                                                                    e.currentTarget.style.transform = 'scale(1)';
+                                                                }}
+                                                                onMouseLeave={(e) => {
+                                                                    e.currentTarget.style.transform = 'scale(1)';
+                                                                }}
+                                                                onClick={() => {
+                                                                    if (r.status === 'pending' || downloadingIds.has(r.submission_id)) return;
+                                                                    handleDownloadReport(r.submission_id, r.candidate?.name);
+                                                                }}
                                                             >
-                                                                <Download size={18} />
+                                                                {downloadingIds.has(r.submission_id) ? (
+                                                                    <Loader2 size={18} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
+                                                                ) : (
+                                                                    <Download size={18} />
+                                                                )}
                                                             </button>
                                                         ) : (
                                                             <div style={{ width: '31px' }}></div>
@@ -903,6 +975,92 @@ export default function Result() {
                             >
                                 Close
                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {reviewPopup.show && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center',
+                    alignItems: 'center', zIndex: 2000, backdropFilter: 'blur(4px)'
+                }}>
+                    <div style={{
+                        backgroundColor: '#fff', padding: '32px', borderRadius: '16px',
+                        maxWidth: '450px', width: '90%', textAlign: 'center', 
+                        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                        border: '1px solid #e5e7eb'
+                    }}>
+                        <div style={{ 
+                            width: '56px', height: '56px', backgroundColor: '#fef3c7', 
+                            borderRadius: '50%', display: 'flex', alignItems: 'center', 
+                            justifyContent: 'center', margin: '0 auto 20px', color: '#d97706'
+                        }}>
+                            <TableProperties size={28} />
+                        </div>
+                        <h3 style={{ marginBottom: '12px', color: '#111827', fontSize: '1.5rem', fontWeight: '700' }}>Review Candidate Report</h3>
+                        <p style={{ marginBottom: '24px', color: '#4b5563', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                            Please review the candidate report before marking <strong>{reviewPopup.candidateName}</strong> as <strong>{reviewPopup.status === 'selected' ? 'Qualified' : 'Not Qualified'}</strong>.
+                        </p>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <button
+                                onClick={() => handleDownloadReport(reviewPopup.submissionId, reviewPopup.candidateName)}
+                                disabled={downloadingIds.has(reviewPopup.submissionId)}
+                                style={{
+                                    backgroundColor: downloadingIds.has(reviewPopup.submissionId) ? '#9ca3af' : '#4f46e5', 
+                                    color: '#fff', border: 'none',
+                                    padding: '14px', borderRadius: '10px', 
+                                    cursor: downloadingIds.has(reviewPopup.submissionId) ? 'not-allowed' : 'pointer',
+                                    fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                                    boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)',
+                                    transition: 'all 0.1s ease',
+                                }}
+                                onMouseDown={(e) => {
+                                    if (!downloadingIds.has(reviewPopup.submissionId)) {
+                                        e.currentTarget.style.transform = 'scale(0.96)';
+                                    }
+                                }}
+                                onMouseUp={(e) => {
+                                    e.currentTarget.style.transform = 'scale(1)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'scale(1)';
+                                }}
+                            >
+                                {downloadingIds.has(reviewPopup.submissionId) ? (
+                                    <>
+                                        <Loader2 size={20} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} /> 
+                                        Downloading...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Download size={20} /> Download Report
+                                    </>
+                                )}
+                            </button>
+                            
+                            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                                <button
+                                    onClick={() => setReviewPopup({ ...reviewPopup, show: false })}
+                                    style={{
+                                        flex: 1, backgroundColor: '#fff', color: '#374151',
+                                        border: '1px solid #d1d5db', padding: '12px', borderRadius: '10px', cursor: 'pointer', fontWeight: '600'
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={confirmUpdateResult}
+                                    style={{
+                                        flex: 1, backgroundColor: reviewPopup.status === 'selected' ? '#059669' : '#dc2626',
+                                        color: '#fff', border: 'none', padding: '12px', borderRadius: '10px', cursor: 'pointer', fontWeight: '600',
+                                        boxShadow: reviewPopup.status === 'selected' ? '0 4px 6px -1px rgba(5, 150, 105, 0.2)' : '0 4px 6px -1px rgba(220, 38, 38, 0.2)'
+                                    }}
+                                >
+                                    Confirm Update
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

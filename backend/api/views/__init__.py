@@ -64,6 +64,7 @@ from .candidate_assessment_views import (
     update_standard_integrity_view,
     verify_pan_backend_view,
     log_candidate_activity_view,
+    update_submission_result_view,
 )
 
 from .live_interview_views import (

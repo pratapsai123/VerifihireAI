@@ -2762,3 +2762,56 @@ def log_candidate_activity_view(request, token):
         return Response({'error': 'Invalid token'}, status=404)
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_submission_result_view(request, submission_id):
+    """
+    Manually updates the result of a submission (e.g., from 'hold' to 'selected' or 'rejected').
+    Triggers appropriate emails with a 5-minute delay if moving to 'rejected' or 'selected'.
+    """
+    try:
+        new_result = request.data.get('result')
+        if new_result not in ['selected', 'rejected', 'hold']:
+            return Response({'error': 'Invalid result status.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+        
+        try:
+            if not company_id:
+                submission = CandidateSubmission.objects.get(id=submission_id)
+            else:
+                submission = CandidateSubmission.objects.get(
+                    id=submission_id,
+                    invitation__assessment__user_profile__company_id=company_id
+                )
+        except CandidateSubmission.DoesNotExist:
+            return Response({'error': 'Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        old_result = submission.result
+        if old_result == new_result:
+            return Response({'message': f'Result is already {new_result}.'}, status=status.HTTP_200_OK)
+
+        submission.result = new_result
+        submission.save(update_fields=['result'])
+
+        inv = submission.invitation
+        from api.tasks import send_custom_assessment_result_task, send_regret_email_task
+
+        # Trigger emails based on new status
+        if new_result == 'selected':
+            # Send qualified email (5 min delay)
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+        elif new_result == 'rejected':
+            # Send regret email with 5 min delay as requested
+            send_regret_email_task.apply_async(args=[inv.id], countdown=300)
+
+        return Response({
+            'message': f'Submission result updated from {old_result} to {new_result}.',
+            'new_result': new_result
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
