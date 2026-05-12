@@ -69,10 +69,15 @@ def extract_skills_from_resume_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        if not text.strip() and file_name.endswith('.pdf'):
-            # Fallback to OCR for non-selectable PDFs
-            from ..ocr_utils import extract_text_from_pdf_ocr
-            text = extract_text_from_pdf_ocr(file_content)
+        if not text.strip():
+            if file_name.endswith('.pdf'):
+                # Fallback to OCR for non-selectable PDFs
+                from ..ocr_utils import extract_text_from_pdf_ocr
+                text = extract_text_from_pdf_ocr(file_content)
+            elif file_name.endswith('.docx'):
+                # Fallback to OCR for DOCX files that might contain images
+                from ..ocr_utils import extract_text_from_docx_ocr
+                text = extract_text_from_docx_ocr(file_content)
 
         # DEBUG: Log extracted text length
         print(f"DEBUG: Extracted text length: {len(text) if text else 0}")

@@ -163,6 +163,11 @@ const ResumeMatcher = () => {
     ]);
 
     const handleCodingCountChange = (val) => {
+        if (val === '') {
+            setCodingCount('');
+            setCodingChallenges([]);
+            return;
+        }
         const count = Math.min(Math.max(parseInt(val) || 0, 0), MAX_CODING_TASKS);
         let updated = [...codingChallenges];
         if (count > updated.length) {
@@ -577,7 +582,7 @@ const ResumeMatcher = () => {
                             }}>
                                 <div className="setting-item">
                                     <label>MCQ Questions</label>
-                                    <input type="number" value={mcqCount} onChange={(e) => setMcqCount(parseInt(e.target.value) || 0)} className="modern-input" min="0" max="30" />
+                                    <input type="number" value={mcqCount} onChange={(e) => setMcqCount(e.target.value === '' ? '' : parseInt(e.target.value))} className="modern-input" min="0" max="30" />
                                 </div>
                                 <div className="setting-item">
                                     <label>Coding Tasks</label>
@@ -588,12 +593,12 @@ const ResumeMatcher = () => {
                                     <div className="duration-split-box">
                                         <div className="duration-col" style={!mcqDurationManual ? { background: '#F0FDF4' } : {}}>
                                             <label>MCQ</label>
-                                            <input type="number" value={mcqDuration} onChange={(e) => { setMcqDuration(parseInt(e.target.value) || 0); setMcqDurationManual(true); }} min="1" max="120" />
+                                            <input type="number" value={mcqDuration} onChange={(e) => { setMcqDuration(e.target.value === '' ? '' : parseInt(e.target.value)); setMcqDurationManual(true); }} min="1" max="120" />
                                             {!mcqDurationManual && <span className="mini-marker" style={{ background: '#22c55e', color: 'white' }}>AUTO</span>}
                                         </div>
                                         <div className="duration-col">
                                             <label>Coding</label>
-                                            <input type="number" value={codingDuration} onChange={(e) => setCodingDuration(parseInt(e.target.value) || 30)} min="5" max="180" />
+                                            <input type="number" value={codingDuration} onChange={(e) => setCodingDuration(e.target.value === '' ? '' : parseInt(e.target.value))} min="5" max="180" />
                                             <span className="mini-marker">MIN</span>
                                         </div>
                                     </div>

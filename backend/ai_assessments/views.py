@@ -464,6 +464,7 @@ class GenerateAssessmentView(APIView):
         data = request.data
         job_description = data.get('job_description')
         required_skills = data.get('required_skills')
+        experience_level = data.get('experience_level')  # NEW: Capture experience level
         cancel_token = data.get('cancel_token')
         
         # Robust Question Count Extraction
@@ -546,6 +547,10 @@ class GenerateAssessmentView(APIView):
                 "error": "Missing job_description or required_skills",
                 "message": "Both fields are required to generate an assessment."
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Log experience level for debugging
+        if experience_level:
+            logger.info(f"Generating assessment for experience level: {experience_level}")
 
         if mcq_count == 0 and coding_count == 0:
             return Response({
@@ -613,6 +618,7 @@ class GenerateAssessmentView(APIView):
                     pool_easy=pool_easy,
                     pool_medium=pool_medium,
                     pool_hard=pool_hard,
+                    experience_level=experience_level,  # NEW: Pass experience level
                     blacklist_qs=blacklist_mcqs,
                     model=self.FALLBACK_MODEL,
                     cancel_token=cancel_token
@@ -703,6 +709,7 @@ class GenerateAssessmentView(APIView):
                     pool_hard=pool_hard,
                     pool_coding_total=pool_coding_total,
                     coding_tasks=pool_coding_tasks,
+                    experience_level=experience_level,  # NEW: Pass experience level
                     model=self.PRIMARY_MODEL
                 )
                 # Recalculate after repair
@@ -777,6 +784,7 @@ class GenerateAssessmentView(APIView):
                         pool_hard=pool_hard,
                         pool_coding_total=pool_coding_total,
                         coding_tasks=pool_coding_tasks,
+                        experience_level=experience_level,  # NEW: Pass experience level
                         model=self.PRIMARY_MODEL
                     )
                     
@@ -871,6 +879,7 @@ class GenerateAssessmentView(APIView):
                         pool_hard=pool_hard,
                         pool_coding_total=pool_coding_total,
                         coding_tasks=pool_coding_tasks,
+                        experience_level=experience_level,  # NEW: Pass experience level
                         model=self.PRIMARY_MODEL
                     )
                     
@@ -934,6 +943,7 @@ class GenerateAssessmentView(APIView):
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,
+                experience_level=experience_level,  # NEW: Store experience level
                 mcq_count=mcq_count,
                 mcq_easy=mcq_easy,
                 mcq_medium=mcq_medium,

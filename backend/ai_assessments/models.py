@@ -9,9 +9,24 @@ class Assessment(models.Model):
         ('COMPLETED', 'Completed'),
         ('FAILED', 'Failed'),
     ]
+    
+    EXPERIENCE_LEVEL_CHOICES = [
+        ('fresher', 'Fresher (0 Years)'),
+        ('entry', 'Entry (0-2 years)'),
+        ('mid', 'Mid (2-5 years)'),
+        ('senior', 'Senior (5-10 years)'),
+        ('expert', 'Expert (10+ years)'),
+    ]
 
     job_description = models.TextField()
     required_skills = models.CharField(max_length=500)
+    experience_level = models.CharField(
+        max_length=20, 
+        choices=EXPERIENCE_LEVEL_CHOICES, 
+        blank=True, 
+        null=True,
+        help_text="Experience level for generating appropriate questions"
+    )
     mcq_count = models.IntegerField(default=10)
     mcq_easy = models.IntegerField(default=5)
     mcq_medium = models.IntegerField(default=3)

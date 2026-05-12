@@ -106,7 +106,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 print(f"   Reading file...", end="", flush=True)
                 try:
                     file_bytes = candidate.resume.read()
-                    
+                    file_name = candidate.resume.name.lower()
                     file_hash = hashlib.md5(file_bytes).hexdigest()
                     
                     if candidate.resume_hash == file_hash and candidate.resume_text:
@@ -114,42 +114,48 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                     else:
                         text = ""
                         
-                        try:
-                            doc = fitz.open(stream=file_bytes, filetype="pdf")
-                            for page in doc: text += page.get_text()
-                            doc.close()
-                        except fitz.FileDataError as e:
-                            logger.warning(f"PyMuPDF failed for {candidate.id}: {e}")
-                        except Exception as e:
-                            logger.error(f"Unexpected PyMuPDF error: {e}")
-                        
-                        if len(text.strip()) < 100:
+                        if file_name.endswith('.pdf'):
+                            # Try standard PDF extraction
                             try:
-                                pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-                                for page in pdf_reader.pages:
-                                    text += (page.extract_text() or "")
+                                doc = fitz.open(stream=file_bytes, filetype="pdf")
+                                for page in doc: text += page.get_text()
+                                doc.close()
                             except Exception as e:
-                                logger.warning(f"PyPDF2 failed for {candidate.id}: {e}")
-                        
-                        if len(text.strip()) < 100:
-                            print(" (OCR Fallback)...", end="", flush=True)
+                                logger.warning(f"PyMuPDF failed for {candidate.id}: {e}")
+                            
+                            if len(text.strip()) < 250:
+                                try:
+                                    pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                                    for page in pdf_reader.pages:
+                                        text += (page.extract_text() or "")
+                                except Exception as e:
+                                    logger.warning(f"PyPDF2 failed for {candidate.id}: {e}")
+                            
+                            # Fallback to OCR if still no/little text
+                            if len(text.strip()) < 250:
+                                print(" (OCR Fallback)...", end="", flush=True)
+                                from api.ocr_utils import extract_text_from_pdf_ocr
+                                text = extract_text_from_pdf_ocr(file_bytes)
+
+                        elif file_name.endswith('.docx'):
+                            # Try standard DOCX extraction
                             try:
-                                reader = _get_reader()
-                                if reader:
-                                    doc = fitz.open(stream=file_bytes, filetype="pdf")
-                                    if doc.page_count > 0:
-                                        pix = doc.load_page(0).get_pixmap()
-                                        img = Image.frombytes(
-                                            "RGB", 
-                                            [pix.width, pix.height], 
-                                            pix.samples
-                                        )
-                                        text = " ".join(
-                                            reader.readtext(np.array(img), detail=0)
-                                        )
-                                    doc.close()
+                                from docx import Document
+                                doc = Document(io.BytesIO(file_bytes))
+                                for paragraph in doc.paragraphs:
+                                    text += paragraph.text + " "
+                                for table in doc.tables:
+                                    for row in table.rows:
+                                        for cell in row.cells:
+                                            text += cell.text + " "
                             except Exception as e:
-                                logger.error(f"OCR failed for {candidate.id}: {e}")
+                                logger.warning(f"python-docx failed for {candidate.id}: {e}")
+
+                            # Fallback to OCR for image-based DOCX
+                            if len(text.strip()) < 250:
+                                print(" (OCR Fallback)...", end="", flush=True)
+                                from api.ocr_utils import extract_text_from_docx_ocr
+                                text = extract_text_from_docx_ocr(file_bytes)
                         
                         candidate.resume_text = text
                         candidate.resume_hash = file_hash
@@ -296,6 +302,7 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 if is_placeholder_email and ext_email and ext_email != "Extraction Failed":
                     candidate.email = ext_email
                 candidate.resume_score = percentage
+                candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
                 is_eligible = (percentage >= threshold)
                 candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
                 candidate.interview_questions = match_result.get('interview_questions', [])

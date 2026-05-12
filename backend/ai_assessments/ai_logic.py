@@ -26,6 +26,97 @@ logger = logging.getLogger(__name__)
 # GroqKeyManager and _call_llm_with_backoff are now imported from llm_client.py
 # They are aliased above for backward compatibility with all consumer code.
 
+def _get_experience_guidelines(experience_level):
+    """
+    Returns experience-appropriate guidelines for MCQ generation.
+    Maps frontend experience levels to question complexity and topics.
+    """
+    guidelines = {
+        'fresher': {
+            'description': 'Fresher (0 Years)',
+            'focus': 'Basic syntax, fundamental concepts, simple problem-solving',
+            'avoid': 'Advanced frameworks, metaclasses, async programming, system design, performance optimization',
+            'topics': [
+                'Python basics (data types, loops, functions, lists, dictionaries)',
+                'Basic web concepts (HTTP methods, status codes)',
+                'Simple SQL queries (SELECT, INSERT, UPDATE, DELETE)',
+                'Git basics (add, commit, push, pull)',
+                'Basic programming concepts (variables, conditionals, loops)',
+                'Simple debugging and error handling',
+                'Basic object-oriented programming (classes, objects, methods)'
+            ],
+            'difficulty_distribution': {'easy': 0.70, 'medium': 0.25, 'hard': 0.05},
+            'prompt_guidance': 'Focus on fundamental concepts and basic syntax. Avoid complex scenarios or advanced patterns.'
+        },
+        'entry': {
+            'description': 'Entry (0-2 years)',
+            'focus': 'Framework basics, common patterns, debugging scenarios',
+            'avoid': 'Advanced optimization, system design, complex architecture patterns',
+            'topics': [
+                'Django/Flask basics (models, views, templates, routing)',
+                'REST API fundamentals (GET, POST, PUT, DELETE)',
+                'Database relationships (foreign keys, joins)',
+                'Basic testing concepts (unit tests, assertions)',
+                'Version control workflows (branching, merging)',
+                'Common debugging scenarios',
+                'Basic security concepts (authentication, validation)'
+            ],
+            'difficulty_distribution': {'easy': 0.60, 'medium': 0.30, 'hard': 0.10},
+            'prompt_guidance': 'Include framework fundamentals and common development patterns. Focus on practical scenarios.'
+        },
+        'mid': {
+            'description': 'Mid (2-5 years)',
+            'focus': 'Best practices, intermediate patterns, framework proficiency',
+            'avoid': 'System architecture, advanced performance tuning, leadership concepts',
+            'topics': [
+                'Advanced Django/Flask features (middleware, signals, custom managers)',
+                'API design patterns and best practices',
+                'Database optimization (indexing, query optimization)',
+                'Testing strategies (integration tests, mocking)',
+                'Code quality and refactoring',
+                'Security best practices',
+                'Performance considerations'
+            ],
+            'difficulty_distribution': {'easy': 0.50, 'medium': 0.35, 'hard': 0.15},
+            'prompt_guidance': 'Focus on best practices and intermediate patterns. Include real-world problem-solving scenarios.'
+        },
+        'senior': {
+            'description': 'Senior (5-10 years)',
+            'focus': 'Architecture decisions, optimization, complex problem-solving',
+            'avoid': 'Basic syntax questions, simple concepts',
+            'topics': [
+                'System architecture and design patterns',
+                'Performance optimization and profiling',
+                'Advanced database concepts (sharding, replication)',
+                'Scalability considerations',
+                'Code review and mentoring scenarios',
+                'Advanced testing strategies',
+                'Security architecture'
+            ],
+            'difficulty_distribution': {'easy': 0.40, 'medium': 0.40, 'hard': 0.20},
+            'prompt_guidance': 'Focus on architecture decisions and optimization. Include complex problem-solving scenarios.'
+        },
+        'expert': {
+            'description': 'Expert (10+ years)',
+            'focus': 'System design, advanced patterns, leadership and mentoring',
+            'avoid': 'Basic concepts, simple syntax questions',
+            'topics': [
+                'Distributed systems design',
+                'Advanced performance optimization',
+                'Technology strategy and decision-making',
+                'Team leadership and mentoring',
+                'Complex system integration',
+                'Advanced security and compliance',
+                'Innovation and emerging technologies'
+            ],
+            'difficulty_distribution': {'easy': 0.30, 'medium': 0.40, 'hard': 0.30},
+            'prompt_guidance': 'Focus on advanced concepts and strategic thinking. Include leadership and system design scenarios.'
+        }
+    }
+    
+    # Default to 'mid' if experience level not found
+    return guidelines.get(experience_level, guidelines['mid'])
+
 
 def extract_json(text):
     """
@@ -598,6 +689,215 @@ def _validate_mcq_structure(mcq):
     
     return True, "Valid"
 
+
+# =============================================================================
+# MCQ ACCURACY VERIFICATION LAYER (4-Layer AI Quality Check)
+# These functions run AFTER structure validation, BEFORE accepting a question.
+# They do NOT change generation flow — only filter out bad questions silently.
+# =============================================================================
+
+def _verify_mcq_answer(mcq, llm_client, model="deepseek-v4-flash"):
+    """
+    Layer 2: Self-Verify
+    Sends the question WITHOUT the answer back to AI in a fresh context.
+    Checks if AI independently picks the same answer.
+    Returns (passed: bool, ai_answer: str)
+    """
+    question = mcq.get('question', '')
+    options = mcq.get('options', [])
+    correct_answer = mcq.get('answer', '')
+
+    # Build options list as A/B/C/D for clean prompt
+    options_text = '\n'.join([f"{chr(65+i)}) {opt}" for i, opt in enumerate(options)])
+
+    verify_prompt = f"""You are a technical expert. Answer this question by selecting the correct option.
+
+Question: {question}
+
+Options:
+{options_text}
+
+Return ONLY a JSON object in this exact format:
+{{"correct_option": "the exact text of the correct option"}}
+
+Do not explain. Just return the JSON."""
+
+    try:
+        response = _call_llm_with_backoff(
+            llm_client,
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a precise technical expert. Answer questions accurately. Return only valid JSON."},
+                {"role": "user", "content": verify_prompt}
+            ],
+            response_format={"type": "json_object"},
+            max_tokens=200,
+            temperature=0.0,  # Zero temperature for deterministic answer
+        )
+
+        if not response:
+            return True, ""  # If verify fails, give benefit of doubt
+
+        # Parse response
+        if isinstance(response, dict):
+            ai_answer = response.get('correct_option', '').strip()
+        else:
+            parsed = extract_json(response)
+            ai_answer = (parsed or {}).get('correct_option', '').strip()
+
+        if not ai_answer:
+            return True, ""  # If can't parse, give benefit of doubt
+
+        # Compare AI's answer with original answer (case-insensitive)
+        ai_lower = ai_answer.lower().strip()
+        correct_lower = correct_answer.lower().strip()
+
+        # Direct match
+        if ai_lower == correct_lower:
+            return True, ai_answer
+
+        # Partial match (AI might return slightly different phrasing)
+        if ai_lower in correct_lower or correct_lower in ai_lower:
+            return True, ai_answer
+
+        # Check if AI answer matches any option that is the correct one
+        for opt in options:
+            if opt.lower().strip() == ai_lower and opt.lower().strip() == correct_lower:
+                return True, ai_answer
+
+        logger.debug(f"VERIFY MISMATCH: Original='{correct_answer[:50]}' AI='{ai_answer[:50]}'")
+        return False, ai_answer
+
+    except Exception as e:
+        logger.debug(f"Answer verify error (giving benefit of doubt): {e}")
+        return True, ""  # On error, give benefit of doubt
+
+
+def _verify_mcq_options(mcq, llm_client, model="deepseek-v4-flash"):
+    """
+    Layer 4: Option Quality Check
+    Verifies that the 3 wrong options are genuinely wrong (not accidentally correct).
+    Forces AI to PROVE each wrong option is wrong, not just agree.
+    Returns (passed: bool, reason: str)
+    """
+    question = mcq.get('question', '')
+    options = mcq.get('options', [])
+    correct_answer = mcq.get('answer', '')
+
+    # Build wrong options list
+    wrong_options = [opt for opt in options if opt.lower().strip() != correct_answer.lower().strip()]
+
+    if not wrong_options:
+        return True, "No wrong options to check"
+
+    wrong_options_text = '\n'.join([f"{i+1}. {opt}" for i, opt in enumerate(wrong_options)])
+
+    verify_prompt = f"""You are a strict technical expert reviewing a multiple choice question for accuracy.
+
+QUESTION: {question}
+MARKED CORRECT ANSWER: {correct_answer}
+
+WRONG OPTIONS TO EVALUATE:
+{wrong_options_text}
+
+YOUR TASK:
+For EACH wrong option above, you MUST do two things:
+1. Try your hardest to think of ANY scenario, context, or interpretation where that option could ALSO be correct
+2. If you find even ONE valid scenario where it is correct -- mark it CONTAMINATED
+
+IMPORTANT RULES:
+- If a wrong option is ALSO a valid correct answer (even in a different context) -- CONTAMINATED
+- If a wrong option is a deprecated but still working approach -- CONTAMINATED  
+- If a wrong option works in a newer version of the technology -- CONTAMINATED
+- Only mark CLEAN if you can PROVE with certainty each option is completely wrong
+
+Return ONLY this JSON:
+{{"verdict": "CLEAN", "analysis": "brief proof why each wrong option is definitely wrong"}}
+OR
+{{"verdict": "CONTAMINATED", "analysis": "which option number is also correct and why"}}"""
+
+    try:
+        response = _call_llm_with_backoff(
+            llm_client,
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a strict technical accuracy reviewer. "
+                        "Your job is to find problems with MCQ options. "
+                        "Be skeptical -- if a wrong option could be correct in ANY scenario, flag it. "
+                        "Return only valid JSON."
+                    )
+                },
+                {"role": "user", "content": verify_prompt}
+            ],
+            response_format={"type": "json_object"},
+            max_tokens=400,
+            temperature=0.0,
+        )
+
+        if not response:
+            return True, "Verify unavailable"
+
+        if isinstance(response, dict):
+            verdict = response.get('verdict', 'CLEAN').strip().upper()
+            analysis = response.get('analysis', '')
+        else:
+            parsed = extract_json(response)
+            verdict = (parsed or {}).get('verdict', 'CLEAN').strip().upper()
+            analysis = (parsed or {}).get('analysis', '')
+
+        if verdict == 'CONTAMINATED':
+            logger.warning(f"OPTION QUALITY FAILED: {analysis[:100]}")
+            return False, analysis
+
+        return True, "Clean"
+
+    except Exception as e:
+        logger.debug(f"Option verify error (giving benefit of doubt): {e}")
+        return True, "Verify unavailable"
+
+
+def _ai_verify_mcq(mcq, llm_client, model="deepseek-v4-flash"):
+    """
+    Master verification function combining Layer 2 + Layer 4.
+    Layer 2: Verify the correct answer is actually correct (with majority vote)
+    Layer 4: Verify wrong options are genuinely wrong
+
+    Returns (passed: bool, reason: str)
+    """
+    question_preview = mcq.get('question', '')[:60]
+
+    # --- LAYER 2: Answer Verification (with majority vote) ---
+    verify1_passed, ai_answer1 = _verify_mcq_answer(mcq, llm_client, model)
+
+    if not verify1_passed:
+        # First check failed — do a second check (majority vote)
+        verify2_passed, ai_answer2 = _verify_mcq_answer(mcq, llm_client, model)
+
+        if not verify2_passed:
+            # Both checks disagree with original answer — reject
+            logger.warning(
+                f"MCQ ANSWER REJECTED (2/2 disagree): '{question_preview}...' "
+                f"Original='{mcq.get('answer','')[:40]}' AI1='{ai_answer1[:40]}' AI2='{ai_answer2[:40]}'"
+            )
+            return False, f"Answer verification failed: AI consistently disagrees with provided answer"
+        else:
+            # 1 disagrees, 1 agrees — give benefit of doubt, accept
+            logger.debug(f"MCQ ANSWER: Split decision, accepting (1 agree, 1 disagree): '{question_preview}...'")
+
+    # --- LAYER 4: Option Quality Check ---
+    options_passed, options_reason = _verify_mcq_options(mcq, llm_client, model)
+
+    if not options_passed:
+        logger.warning(f"MCQ OPTIONS REJECTED: '{question_preview}...' Reason: {options_reason[:80]}")
+        return False, f"Option quality failed: {options_reason}"
+
+    logger.debug(f"MCQ VERIFIED OK: '{question_preview}...'")
+    return True, "Verified"
+
+
 def _repair_pool_shortfall(
     *,
     llm_client,
@@ -609,6 +909,7 @@ def _repair_pool_shortfall(
     pool_hard,
     pool_coding_total,
     coding_tasks,
+    experience_level=None,
     max_attempts=5,
     model="deepseek-v4-flash",
     cancel_token=None
@@ -668,6 +969,7 @@ def _repair_pool_shortfall(
                     pool_easy=missing_easy,
                     pool_medium=missing_medium,
                     pool_hard=missing_hard,
+                    experience_level=experience_level,
                     attempts_per_batch=5,  # We are already in a retry loop
                     blacklist_qs=blacklist_qs,
                     model=model,
@@ -873,7 +1175,7 @@ def _generate_coding_pool_ai_only(
     SKELETON-BASED GENERATION:
     1. Pick a proven math skeleton from coding_skeletons.py
     2. Ask AI to write ONLY the professional story/scenario matching the JD
-    3. Use pre-verified solutions — NO AI code generation needed
+    3. Use pre-verified solutions -- NO AI code generation needed
     """
     if total_required <= 0:
         return []
@@ -950,7 +1252,7 @@ CRITICAL OVERRIDE FOR HARD QUESTIONS:
 - Include an **Input Format** section at the end describing each line.
 """
 
-        # Ask AI ONLY for the story — NO code generation
+        # Ask AI ONLY for the story -- NO code generation
         story_prompt = f"""You are a professional assessment writer. Create a coding challenge DESCRIPTION for a job candidate.
 
 JOB DESCRIPTION: {job_description[:1000]}
@@ -986,7 +1288,7 @@ RULES:
 - Problem statement must be clear enough for a student to understand in 30 seconds.
 """
 
-        # Check if skeleton has pre-defined problem statement — skip AI if so
+        # Check if skeleton has pre-defined problem statement -- skip AI if so
         if skeleton.get('problem_statement'):
             # Use pre-defined problem statement directly (human-controlled story depth)
             challenge = {
@@ -1182,7 +1484,7 @@ def _is_duplicate_mcq(new_question, existing_questions, threshold=0.92):
         if new_clean == existing_clean:
             return True, existing
 
-        # Similarity check — 0.92 catches only true repeats
+        # Similarity check -- 0.92 catches only true repeats
         ratio = SequenceMatcher(None, new_clean, existing_clean).ratio()
         if ratio >= threshold:
             return True, existing
@@ -1199,6 +1501,7 @@ def _generate_mcq_pool_ai_only(
     pool_easy,
     pool_medium,
     pool_hard,
+    experience_level=None,
     attempts_per_batch=20, # INCREASED: Maximum persistence for rotation
     blacklist_qs=None,
     model="deepseek-v4-flash",
@@ -1208,6 +1511,19 @@ def _generate_mcq_pool_ai_only(
     # Add a random salt to ensure diversity across sessions
     salt = str(random.getrandbits(32))
     blacklist = blacklist_qs or []
+
+    # Get experience-level guidelines
+    exp_guidelines = _get_experience_guidelines(experience_level or 'mid')
+    
+    # EXPERIENCE-LEVEL AWARE DIFFICULTY ADJUSTMENT
+    if experience_level:
+        total_questions = pool_easy + pool_medium + pool_hard
+        if total_questions > 0:
+            dist = exp_guidelines['difficulty_distribution']
+            pool_easy = int(total_questions * dist['easy'])
+            pool_medium = int(total_questions * dist['medium'])
+            pool_hard = max(1, total_questions - pool_easy - pool_medium)  # At least 1 hard
+            logger.info(f"Experience-adjusted distribution for {experience_level}: Easy={pool_easy}, Medium={pool_medium}, Hard={pool_hard}")
 
     requirements = [
         ('Easy', max(0, int(pool_easy))),
@@ -1233,28 +1549,57 @@ def _generate_mcq_pool_ai_only(
             avoid_list = (blacklist + [q.get('question', '')[:80] for q in generated])[:50]
             avoid_txt = f"Exclude topics: {avoid_list}" if avoid_list else ""
             
+            # Build experience-specific guidance
+            exp_focus = exp_guidelines['focus']
+            exp_avoid = exp_guidelines['avoid']
+            exp_topics = '\n'.join([f"- {topic}" for topic in exp_guidelines['topics'][:8]])  # Limit to 8 topics
+            exp_prompt_guidance = exp_guidelines['prompt_guidance']
+            
             prompt = f"""
-            JD: {job_description} | Skills: {required_skills}
-            TASK: Generate {count} technical MCQs ({difficulty}).
-            IMPORTANT: Each question MUST test a DIFFERENT specific concept or sub-topic.
-            Do NOT generate generic questions like "What is X?" — instead ask about:
-            - How specific features work internally
-            - Edge cases and gotchas
-            - Best practices and anti-patterns
-            - Comparisons between similar concepts
-            - Real-world debugging scenarios
-            - Configuration and setup details
-            - Performance implications
-            JSON FORMAT: {{ "mcqs": [ {{ "question": "What happens when a Django middleware raises an exception during process_response?", "options": ["The response is returned as-is", "A 500 error is raised and remaining middleware is skipped", "The exception is silently logged", "The request is retried"], "answer": "A 500 error is raised and remaining middleware is skipped", "difficulty": "{difficulty}" }} ] }}
-            RULES:
+            JOB DESCRIPTION: {job_description[:800]}
+            REQUIRED SKILLS: {required_skills[:400] if required_skills else 'General Programming'}
+            EXPERIENCE LEVEL: {exp_guidelines['description']}
+
+            EXPERIENCE-LEVEL GUIDELINES:
+            FOCUS ON: {exp_focus}
+            AVOID: {exp_avoid}
+
+            APPROPRIATE TOPICS FOR THIS LEVEL:
+            {exp_topics}
+
+            TASK: Generate {count} technical MCQs for {difficulty} difficulty level.
+            {exp_prompt_guidance}
+
+            CHAIN-OF-THOUGHT REQUIREMENT (Layer 1 Accuracy):
+            Before writing each question, mentally:
+            1. Pick a specific concept from the JD/skills
+            2. Solve or reason through the correct answer yourself
+            3. Write the question based on your reasoning
+            4. Write 3 wrong options that are PROVABLY and CLEARLY wrong
+            5. Confirm the correct answer is 100% accurate
+
+            CRITICAL REQUIREMENTS:
+            1. EXPERIENCE-APPROPRIATE: Questions MUST match the {exp_guidelines['description']} level
+            2. JD-RELEVANT: Focus on skills mentioned in the job description
+            3. UNIQUE CONCEPTS: Each question MUST test a DIFFERENT specific concept
+            4. ACCURACY: Every correct answer must be factually correct. Every wrong option must be genuinely wrong.
+            5. WRONG OPTIONS: Must be plausible but clearly incorrect -- never accidentally correct
+
+            QUESTION COMPLEXITY BY DIFFICULTY:
+            - Easy: Basic concepts, syntax, fundamental usage
+            - Medium: Common patterns, best practices, debugging scenarios
+            - Hard: Complex scenarios, optimization, advanced concepts (but still appropriate for experience level)
+
+            JSON FORMAT: {{ "mcqs": [ {{ "question": "In Python, which method is used to add an element to the end of a list?", "options": ["append()", "add()", "insert()", "push()"], "answer": "append()", "difficulty": "{difficulty}" }} ] }}
+
+            STRICT RULES:
             - Generate valid JSON only (do NOT use escape sequences)
             - UNIQUE: Every question must cover a DIFFERENT sub-topic. {avoid_txt}
-            - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be a short (under 15 words) sentence or phrase that actually describes a possible answer.
-            - NO PLACEHOLDERS: NEVER use options like "Option A", "Option B", "Choice 1", or simply "A", "B", "C", "D".
-            - ANSWER FIELD: The answer MUST be the exact text from one of the options.
-            - Each question gets exactly 4 options and 1 correct answer.
+            - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be actual answer text (NOT just "A", "B", "C", "D")
+            - NO PLACEHOLDERS: NEVER use options like "Option A", "Option B", "Choice 1", etc.
+            - ANSWER FIELD: The answer MUST be the exact text from one of the options
+            - Each question gets exactly 4 options and 1 correct answer
             """
-
             batch_mcqs = None
 
             for attempt in range(attempts_per_batch):
@@ -1263,7 +1608,7 @@ def _generate_mcq_pool_ai_only(
                         llm_client,
                         model=model,
                         messages=[
-                            {"role": "system", "content": "You are a senior technical interviewer. Generate specific, deep questions that test real knowledge — not surface-level definitions. Output JSON only."},
+                            {"role": "system", "content": "You are a senior technical interviewer. Generate specific, deep questions that test real knowledge -- not surface-level definitions. Output JSON only."},
                             {"role": "user", "content": prompt},
                         ],
                         response_format={"type": "json_object"},
@@ -1291,6 +1636,11 @@ def _generate_mcq_pool_ai_only(
                         is_dup, matched = _is_duplicate_mcq(q.get('question', ''), session_qs)
                         if is_dup:
                             logger.warning(f"MCQ DUPLICATE REJECTED: '{q.get('question', '')[:50]}...'")
+                            continue
+                        # AI ACCURACY VERIFICATION (Layer 2 + Layer 4)
+                        ai_passed, ai_reason = _ai_verify_mcq(q, llm_client, model)
+                        if not ai_passed:
+                            logger.warning(f"MCQ AI-VERIFY REJECTED: '{q.get('question', '')[:50]}...' Reason: {ai_reason[:60]}")
                             continue
                         validated_mcqs.append(q)
                         session_qs.append(q.get('question', ''))
@@ -1378,7 +1728,12 @@ def _generate_mcq_pool_ai_only(
                     if is_dup:
                         logger.warning(f"Gap-Filler DUPLICATE REJECTED: '{rq.get('question', '')[:50]}...'")
                         continue
-                    
+                    # AI ACCURACY VERIFICATION (Layer 2 + Layer 4)
+                    ai_passed, ai_reason = _ai_verify_mcq(rq, llm_client, model)
+                    if not ai_passed:
+                        logger.warning(f"Gap-Filler AI-VERIFY REJECTED: '{rq.get('question', '')[:50]}...' Reason: {ai_reason[:60]}")
+                        continue
+
                     rq['difficulty'] = difficulty
                     generated.append(rq)
                     session_qs.append(rq.get('question', ''))
@@ -1447,7 +1802,7 @@ def pick_random_subset(assessment, pool, seed=None, candidate_index=None):
 
     Uniqueness Strategy:
     - If `candidate_index` is provided AND `same_questions_for_all` is False:
-        MCQs are distributed using a PARTITIONED approach — the pool is shuffled
+        MCQs are distributed using a PARTITIONED approach -- the pool is shuffled
         with a deterministic batch-level seed (assessment.batch_id), then sliced
         so each candidate gets a non-overlapping slice. Like dealing cards from
         a shuffled deck.
@@ -1455,7 +1810,7 @@ def pick_random_subset(assessment, pool, seed=None, candidate_index=None):
         Questions are randomly sampled with the email-based seed (reproducible
         but may overlap between candidates).
 
-    Coding challenges are always unique — they are removed from the pool after
+    Coding challenges are always unique -- they are removed from the pool after
     selection, so no two candidates receive the same coding challenge
     (when same_questions_for_all=False).
     """
