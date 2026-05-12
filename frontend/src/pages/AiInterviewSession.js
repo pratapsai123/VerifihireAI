@@ -1862,7 +1862,7 @@ const AiInterviewSession = () => {
                             if (Array.isArray(progress.chatMessages)) setChatMessages(progress.chatMessages);
                             if (Array.isArray(progress.chatHistory)) chatHistoryRef.current = progress.chatHistory;
                             if (typeof progress.currentQuestionIndex === 'number') setCurrentQuestionIndex(progress.currentQuestionIndex);
-                            if (Array.isArray(progress.questions)) setQuestions(progress.questions);
+                            // Questions are NOT restored from localStorage (security: prevents preview via DevTools)
                         }
                     }
                 } catch (e) {
@@ -1921,7 +1921,8 @@ const AiInterviewSession = () => {
                 currentQuestionIndex,
                 chatMessages,
                 chatHistory: chatHistoryRef.current,
-                questions,
+                // NOTE: questions intentionally excluded from localStorage to prevent
+                // candidates from previewing upcoming questions via DevTools
                 candidateName
             };
             localStorage.setItem(`interview_progress_${token}`, JSON.stringify(progressData));
@@ -2216,7 +2217,8 @@ const AiInterviewSession = () => {
                     // Re-register under current token to update embeddings
                     regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                         person_id: personId,
-                        image_base64: b64
+                        image_base64: b64,
+                        overwrite: true
                     });
                     embeddingHash = regRes.data?.embedding_hash;
                 } else {
@@ -2241,7 +2243,8 @@ const AiInterviewSession = () => {
                     // Re-register to update stored embeddings
                     regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                         person_id: personId,
-                        image_base64: b64
+                        image_base64: b64,
+                        overwrite: true
                     });
                     embeddingHash = regRes.data?.embedding_hash;
                 } else {
@@ -2252,7 +2255,8 @@ const AiInterviewSession = () => {
                     // Re-register with the new face so proctoring can work during the session
                     regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                         person_id: personId,
-                        image_base64: b64
+                        image_base64: b64,
+                        overwrite: true
                     });
                     embeddingHash = regRes.data?.embedding_hash;
                 }
@@ -2262,7 +2266,8 @@ const AiInterviewSession = () => {
                 console.log(`[Face] New candidate: registering face for ${personId}`);
                 regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
                     person_id: personId,
-                    image_base64: b64
+                    image_base64: b64,
+                    overwrite: true
                 });
                 embeddingHash = regRes.data?.embedding_hash;
             }
@@ -2443,51 +2448,24 @@ const AiInterviewSession = () => {
             if (userInputMode === 'audio') startListening();
         } else {
             const firstName = candidate.full_name.split(' ')[0];
-            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
-            const introQ = "To get started, please introduce yourself and your professional background.";
+            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today. To get started, please introduce yourself and your professional background.`;
 
-            // FIX: Strictly enforce 13 questions total to prevent count mismatch
-            // Backend provides 13 questions, frontend should NOT add intro if already at limit
+            // Use backend questions directly — the backend's category_map turn 1 handles
+            // the intro question via AI, so we don't add a separate frontend intro.
+            // This prevents the "double intro" bug where candidates get asked to introduce
+            // themselves twice (once from frontend, once from AI's turn-1 response).
             let finalQs = [...qList];
-            const TOTAL_QUESTIONS_LIMIT = 13;
+            const TOTAL_QUESTIONS_LIMIT = MAX_INTERVIEW_QUESTIONS;
             
-            // Check if backend already has an intro-style question
-            const backendHasIntro = finalQs.length > 0 && 
-                (finalQs[0].toLowerCase().includes('introduce') || 
-                 finalQs[0].toLowerCase().includes('background') ||
-                 finalQs[0] === introQ);
-            
-            // Only add intro if:
-            // 1. Backend doesn't already have an intro question AND
-            // 2. Adding it won't exceed the 13 question limit
-            if (!backendHasIntro && finalQs.length < TOTAL_QUESTIONS_LIMIT) {
-                // Add intro but keep total at 13 by removing last question if needed
-                finalQs = [introQ, ...finalQs];
-                if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
-                    finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
-                }
-                setQuestions(finalQs);
-                setMaxQuestions(finalQs.length);
-                console.log(`[Question Fix] Added intro question. Total: ${finalQs.length}`);
-            } else if (!backendHasIntro && finalQs.length >= TOTAL_QUESTIONS_LIMIT) {
-                // Backend already has 13 questions, replace first with intro
-                finalQs = [introQ, ...finalQs.slice(1)];
-                setQuestions(finalQs);
-                setMaxQuestions(TOTAL_QUESTIONS_LIMIT);
-                console.log(`[Question Fix] Replaced first question with intro. Total: ${finalQs.length}`);
-            } else {
-                // Backend already has intro, use as-is but cap at 13
-                if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
-                    finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
-                }
-                setQuestions(finalQs);
-                setMaxQuestions(finalQs.length);
-                console.log(`[Question Fix] Using backend questions. Total: ${finalQs.length}`);
+            if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
+                finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
             }
+            setQuestions(finalQs);
+            setMaxQuestions(Math.min(finalQs.length, TOTAL_QUESTIONS_LIMIT));
+            console.log(`[Questions] Using ${finalQs.length} backend questions directly.`);
 
-            const combinedStart = `${welcome} ${introQ}`;
-            addMessage('ai', combinedStart);
-            await speak(combinedStart);
+            addMessage('ai', welcome);
+            await speak(welcome);
             // FIX: Add delay before starting mic to prevent speech feedback loop
             if (userInputMode === 'audio') {
                 setTimeout(() => {

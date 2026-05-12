@@ -201,77 +201,28 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             CRITICAL: You MUST properly escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure the JSON is perfectly valid and parsable.
             """
 
-            # 2. AI ANALYSIS (Cascading Fallback: 70B -> 8B -> Sleep -> Retry)
-            from openai import OpenAI
-            import random
-            groq_keys = list(getattr(settings, 'GROQ_API_KEYS', []))
+            # 2. AI ANALYSIS (Using unified LLM client with backoff and key rotation)
             match_result = None
             
-            if not groq_keys:
-                logger.error("No GROQ_API_KEYS found in settings!")
-            else:
-                max_retries = 3
-                for attempt in range(max_retries):
-                    random.shuffle(groq_keys)
-                    
-                    # STEP 1: Exhaust all keys on 70B model first
-                    print(f"\n   --- Attempt {attempt+1}: Prioritizing High-Accuracy 70B ---")
-                    for key in groq_keys:
-                        try:
-                            print(f"   🤖 Trying 70B (llama-3.3-70b-versatile)... ", end="", flush=True)
-                            groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
-                            response = groq_client.chat.completions.create(
-                                model="llama-3.3-70b-versatile",
-                                messages=[{"role": "user", "content": prompt}],
-                                response_format={"type": "json_object"},
-                                temperature=0.0,
-                                seed=42
-                            )
-                            raw_text = response.choices[0].message.content
-                            match_result = extract_json(raw_text)
-                            if match_result:
-                                print("✅ Success!")
-                                break
-                        except Exception as e:
-                            print(f"❌ Rate limit/Error. Rotating key...")
-                            continue
-                    
-                    if match_result:
-                        break
-                    
-                    # STEP 2: Exhaust all keys on 8B model (Safety Net)
-                    print(f"   ⚠️ 70B Exhausted. Falling back to 8B Safety Net ---")
-                    for key in groq_keys:
-                        try:
-                            print(f"   🤖 Trying 8B (llama-3.1-8b-instant)... ", end="", flush=True)
-                            groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
-                            response = groq_client.chat.completions.create(
-                                model="llama-3.1-8b-instant",
-                                messages=[{"role": "user", "content": prompt}],
-                                response_format={"type": "json_object"},
-                                temperature=0.0,
-                                seed=42
-                            )
-                            raw_text = response.choices[0].message.content
-                            match_result = extract_json(raw_text)
-                            if match_result:
-                                print("✅ Success!")
-                                break
-                        except Exception as e:
-                            print(f"❌ Rate limit/Error. Rotating key...")
-                            continue
-                    
-                    if match_result:
-                        break
-                    
-                    # STEP 3: If both models failed across all keys, Sleep and Retry
-                    if attempt < max_retries - 1:
-                        sleep_time = 10 * (2 ** attempt)  # 10s, 20s
-                        print(f"   📉 All keys and models exhausted. Sleeping {sleep_time}s before full retry...")
-                        time.sleep(sleep_time)
-                
-                if not match_result:
-                    print(f"   🚨 CRITICAL: AI Analysis failed completely after {max_retries} full rotation cycles.")
+            try:
+                print(f"   🤖 Calling LLM ({get_default_model()})... ", end="", flush=True)
+                match_result = call_llm_with_backoff(
+                    prompt=prompt,
+                    is_json=True,
+                    model=get_default_model(),
+                    max_tokens=4096,
+                    temperature=0.0,
+                )
+                if match_result:
+                    print("✅ Success!")
+                else:
+                    print("❌ Empty response")
+            except Exception as llm_err:
+                print(f"❌ LLM Error: {llm_err}")
+                logger.error(f"LLM analysis failed for candidate {candidate.id}: {llm_err}")
+
+            if not match_result:
+                print(f"   🚨 CRITICAL: AI Analysis failed completely.")
 
             # 3. SAVE RESULTS
             if match_result:
@@ -368,6 +319,82 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
         else:
             print("No candidates passed. Skipping automated assessment.")
 
+@shared_task(bind=True, max_retries=2)
+def extract_resume_text_task(self, candidate_id):
+    """
+    Standalone async task to extract text from a single candidate's resume.
+    Used during the registration flow when a candidate uploads a resume.
+    Uses the same PyMuPDF → PyPDF2 → OCR cascade as the batch processor.
+    """
+    try:
+        candidate = Candidate.objects.get(pk=candidate_id)
+    except Candidate.DoesNotExist:
+        logger.error(f"extract_resume_text_task: Candidate {candidate_id} not found")
+        return
+
+    if not candidate.resume:
+        logger.info(f"extract_resume_text_task: Candidate {candidate_id} has no resume file. Skipping.")
+        return
+
+    if candidate.resume_text and len(candidate.resume_text.strip()) > 100:
+        logger.info(f"extract_resume_text_task: Candidate {candidate_id} already has extracted text. Skipping.")
+        return
+
+    logger.info(f"extract_resume_text_task: Starting extraction for candidate {candidate_id}")
+
+    try:
+        file_bytes = candidate.resume.read()
+        file_hash = hashlib.md5(file_bytes).hexdigest()
+
+        # Skip if hash matches (already processed)
+        if candidate.resume_hash == file_hash and candidate.resume_text:
+            logger.info(f"extract_resume_text_task: Hash match — reusing cached text for {candidate_id}")
+            return
+
+        text = ""
+
+        # Step 1: PyMuPDF
+        try:
+            doc = fitz.open(stream=file_bytes, filetype="pdf")
+            for page in doc:
+                text += page.get_text()
+            doc.close()
+        except Exception as e:
+            logger.warning(f"extract_resume_text_task: PyMuPDF failed for {candidate_id}: {e}")
+
+        # Step 2: PyPDF2 fallback
+        if len(text.strip()) < 100:
+            try:
+                pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                for page in pdf_reader.pages:
+                    text += (page.extract_text() or "")
+            except Exception as e:
+                logger.warning(f"extract_resume_text_task: PyPDF2 failed for {candidate_id}: {e}")
+
+        # Step 3: OCR fallback
+        if len(text.strip()) < 100:
+            try:
+                reader = _get_reader()
+                if reader:
+                    doc = fitz.open(stream=file_bytes, filetype="pdf")
+                    if doc.page_count > 0:
+                        pix = doc.load_page(0).get_pixmap()
+                        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                        text = " ".join(reader.readtext(np.array(img), detail=0))
+                    doc.close()
+            except Exception as e:
+                logger.error(f"extract_resume_text_task: OCR failed for {candidate_id}: {e}")
+
+        candidate.resume_text = text
+        candidate.resume_hash = file_hash
+        candidate.save(update_fields=['resume_text', 'resume_hash'])
+        logger.info(f"extract_resume_text_task: Extracted {len(text)} chars for candidate {candidate_id}")
+
+    except Exception as e:
+        logger.error(f"extract_resume_text_task: Critical error for {candidate_id}: {e}")
+        if self.request.retries < self.max_retries:
+            raise self.retry(countdown=5 * (self.request.retries + 1), exc=e)
+
 
 @shared_task(bind=True, max_retries=3)
 def process_ai_interview_answer_task(self, candidate_id, answer_text, current_question, remaining_questions, conversation_memory, current_turn_number):
@@ -460,8 +487,15 @@ You must respond with a JSON object containing:
         # Update candidate score silently
         if data.get('score') is not None and not data.get('is_clarification'):
             q_score = int(data.get('score', 0))
-            candidate.score += q_score
-            candidate.total_questions += 1
+            
+            # Use F() expressions to prevent race conditions with concurrent requests
+            from django.db.models import F
+            Candidate.objects.filter(pk=candidate_id).update(
+                score=F('score') + q_score,
+                total_questions=F('total_questions') + 1
+            )
+            # Refresh to get updated values
+            candidate.refresh_from_db()
             
             # Store per-question summary
             if not isinstance(candidate.interview_summary, list):
@@ -478,20 +512,38 @@ You must respond with a JSON object containing:
                 'processed_at': timezone.now().isoformat()
             })
             
-            # Update conversation memory
+            # Update conversation memory (aligned with sync ProcessAnswerView structure)
             if not isinstance(candidate.conversation_memory, dict):
                 candidate.conversation_memory = {}
             
+            memory = candidate.conversation_memory
+            if not memory.get('intro_facts'):
+                memory['intro_facts'] = []
+            if not memory.get('skills_mentioned'):
+                memory['skills_mentioned'] = []
+            if not memory.get('projects_discussed'):
+                memory['projects_discussed'] = []
+            if not memory.get('weak_areas'):
+                memory['weak_areas'] = []
+            
             # Extract key facts from answer for memory
             if answer_text and len(answer_text.strip()) > 10:
-                memory_key = f"turn_{current_turn_number}"
-                candidate.conversation_memory[memory_key] = {
-                    'question': current_question,
-                    'answer_summary': answer_text[:200],
-                    'key_points': data.get('feedback', '')[:100]
-                }
+                if current_turn_number == 1:
+                    memory['intro_facts'].append(answer_text[:80].strip())
+                    memory['intro_facts'] = list(set(memory['intro_facts']))[:5]
+                elif current_turn_number in [6, 7]:
+                    memory['skills_mentioned'].append(answer_text[:50].strip())
+                    memory['skills_mentioned'] = list(set(memory['skills_mentioned']))[:5]
+                elif current_turn_number in [8, 9]:
+                    memory['projects_discussed'].append(answer_text[:60].strip())
+                    memory['projects_discussed'] = list(set(memory['projects_discussed']))[:3]
+                
+                if q_score <= 4:
+                    memory['weak_areas'].append(current_question[:50].strip())
+                    memory['weak_areas'] = list(set(memory['weak_areas']))[:3]
             
-            candidate.save()
+            candidate.conversation_memory = memory
+            candidate.save(update_fields=['interview_summary', 'conversation_memory'])
         
         return {
             'status': 'success',
@@ -533,9 +585,9 @@ You must respond with a JSON object containing:
                 logger.error(f"Fallback also failed: {retry_err}")
                 return {'error': 'Both primary and fallback AI failed'}
         else:
-            logger.error(f"AI processing error: {model_err}")
+            logger.error(f"AI processing error: {e}")
             if self.request.retries < self.max_retries:
                 # Exponential backoff retry
                 countdown = 2 ** self.request.retries
-                raise self.retry(countdown=countdown, exc=model_err)
+                raise self.retry(countdown=countdown, exc=e)
             return {'error': 'Task failed after retries'}

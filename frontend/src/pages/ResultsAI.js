@@ -9,10 +9,10 @@ import '../styles/ResultsAI.css';
 const ResultsAI = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'assessment');
-    const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
+    const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail' | 'on-hold'
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortField, setSortField] = useState(null); // 'score' | 'name' | 'date' | null
-    const [sortDirection, setSortDirection] = useState('desc'); // 'asc' | 'desc'
+    const [sortField, setSortField] = useState('score'); // Default: sort by score
+    const [sortDirection, setSortDirection] = useState('desc'); // 'asc' | 'desc' (highest first)
 
     // Auth context
     const me = (() => {
@@ -379,14 +379,14 @@ const ResultsAI = () => {
         setSelected(new Set());
         setStatusFilter('all');
         setCurrentPage(1);
-        setSortField(null);
+        setSortField('score');
         setSortDirection('desc');
     };
 
     const getStatusStyle = (rawStatus) => {
         const s = rawStatus?.toLowerCase();
         if (s === 'selected' || s === 'resume passed') return { background: '#E6FBF5', color: '#05CD99' };
-        if (s === 'hold') return { background: '#FFF8E1', color: '#F59E0B' };
+        if (s === 'hold' || s === 'on-hold') return { background: '#FFF8E1', color: '#F59E0B' };
         if (s === 'rejected' || s === 'resume failed') return { background: '#FFF5F5', color: '#EE5D50' };
         if (s === 'completed' || s === 'hired') return { background: '#E6FBF5', color: '#05CD99' };
         if (s === 'extraction failed') return { background: '#FFF5F5', color: '#EE5D50' };
@@ -399,6 +399,7 @@ const ResultsAI = () => {
             'Resume Failed': 'Fail ',
             'selected': 'Qualified ',
             'hold': 'Hold - Manual Review',
+            'On-Hold': 'On-Hold ⚠️',
             'rejected': 'Not Qualified',
             'Qualified': 'Qualified ',
             'Not Qualified': 'Not Qualified',
@@ -495,7 +496,9 @@ const ResultsAI = () => {
             const status = activeTab === 'fully_automatic'
                 ? (r.interview?.status || r.assessment?.status || r.resume?.status || 'N/A')
                 : (r.status || 'N/A');
-            const date = new Date(r.created_at || r.submitted_at || r.completed_at || 0).toLocaleDateString();
+            // Use the most relevant date field available
+            const rawDate = r.completed_at || r.submitted_at || r.created_at || r.link_opened_at || r.submission_date || null;
+            const date = rawDate ? new Date(rawDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
             csvRows.push([`"${name}"`, `"${email}"`, score, `"${status}"`, `"${date}"`].join(','));
         });
 
@@ -530,12 +533,16 @@ const ResultsAI = () => {
         let rows = statusFilter === 'all'
             ? allRows
             : allRows.filter(r => {
+                if (statusFilter === 'on-hold') {
+                    return r.status === 'On-Hold';
+                }
                 const pass = isPass(r, activeTab);
-                return statusFilter === 'pass' ? pass : !pass;
+                if (statusFilter === 'pass') return pass && r.status !== 'On-Hold';
+                return !pass && r.status !== 'On-Hold';
             });
 
-        // Apply sorting (only for AI Interview tab)
-        if (sortField && activeTab === 'interview') {
+        // Apply sorting (works for all tabs)
+        if (sortField) {
             rows = [...rows].sort((a, b) => {
                 let cmp = 0;
                 if (sortField === 'score') {
@@ -1593,7 +1600,7 @@ const ResultsAI = () => {
                                     <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                             <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9CA3AF', textTransform: 'uppercase' }}>Type:</span>
-                                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }].map(f => (
+                                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }, ...(activeTab === 'interview' ? [{ key: 'on-hold', label: '⚠️ On-Hold' }] : [])].map(f => (
                                                 <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
                                                     padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
                                                     fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
@@ -1668,7 +1675,17 @@ const ResultsAI = () => {
                                                                     )}
                                                                 </th>
                                                             ) : (
-                                                                <th>Candidate Info</th>
+                                                                <th
+                                                                    style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                    onClick={() => handleSort('name')}
+                                                                    title="Sort by name"
+                                                                >
+                                                                    Candidate Info
+                                                                    {sortField === 'name' && (
+                                                                        <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                           style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                    )}
+                                                                </th>
                                                             )}
                                                             {activeTab === 'fully_automatic' ? (
                                                                 <>
@@ -1701,8 +1718,28 @@ const ResultsAI = () => {
                                                                 </>
                                                             ) : (
                                                                 <>
-                                                                    <th>Result</th>
-                                                                    <th>Date</th>
+                                                                    <th
+                                                                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                        onClick={() => handleSort('score')}
+                                                                        title="Sort by score"
+                                                                    >
+                                                                        Result
+                                                                        {sortField === 'score' && (
+                                                                            <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                        )}
+                                                                    </th>
+                                                                    <th
+                                                                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                                                                        onClick={() => handleSort('date')}
+                                                                        title="Sort by date"
+                                                                    >
+                                                                        Date
+                                                                        {sortField === 'date' && (
+                                                                            <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
+                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                        )}
+                                                                    </th>
                                                                 </>
                                                             )}
                                                             <th>Status</th>

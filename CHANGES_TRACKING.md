@@ -6,14 +6,18 @@
 
 ---
 
-## 2026-05-11
+## 2026-05-12
 
-### 15:30 - [Dashboard / Results Management]
-- **Task 1: Added Sorting to AI Interviews**: Implemented client-side column sorting (by Name, Score, Date) exclusively on the AI Interview tab in `ResultsAI.js`. Added caret indicators to show the active sorting direction.
-- **Task 2: Added CSV Export**: Created an export function that generates a structured CSV (Name, Email, Score, Status, Date) for selected candidates on the AI Interview tab.
-- **Task 3: UX Scoping**: Scoped both the sorting interaction and the CSV Export button so they are hidden on the other pipeline tabs (Resume, Assessment, Standard, Fully Automatic) to prevent unintended behaviour.
+### 11:40 - [Infrastructure / Pipeline Hardening]
+- **Task 1: PostgreSQL Connection Exhaustion Fix**: Changed `CONN_MAX_AGE` to `0` in `settings.py` to prevent the "FATAL: sorry, too many clients already" error caused by high-frequency heartbeat polling leaving idle database connections open.
+- **Task 2: Restored Missing Resume Extraction Task**: Created the standalone `extract_resume_text_task` celery task in `tasks.py` that was being imported by the registration view but didn't actually exist. This ensures resumes uploaded during AI interview registration are properly parsed using PyMuPDF → PyPDF2 → OCR fallback.
+- **Task 3: DeepFace Retry Hardening**: Added `overwrite: true` to all face registration API calls in `AiInterviewSession.js`. This prevents candidates from being hard-blocked with "Identity already exists" when attempting to restart the interview or if a previous partial registration attempt hung.
+
+### 09:40 - [AI Interview / On-Hold Status for Integrity-Penalized Candidates]
 
 ---
+
+
 
 ## 2026-05-08
 
