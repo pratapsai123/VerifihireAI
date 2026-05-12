@@ -87,6 +87,7 @@ export default function SecurePrecheck() {
   const [detectedHardware, setDetectedHardware] = useState([]);
   const [error, setError] = useState('');
   const [agentVersion, setAgentVersion] = useState('');
+  const [agentInstanceId, setAgentInstanceId] = useState('');
   const [showHelp, setShowHelp] = useState(false);
 
   // Track whether we've already attempted auto-launch via protocol
@@ -149,6 +150,7 @@ export default function SecurePrecheck() {
     // ── Version check: reject old/outdated agents ─────────────────────────────
     const runningVersion = status?.version || '0.0.0';
     setAgentVersion(runningVersion);
+    setAgentInstanceId(status?.instance_id || '');
     if (compareVersions(runningVersion, MINIMUM_AGENT_VERSION) < 0) {
       setPhase('outdated');
       setStatusMessage('Your Secure Agent is outdated and needs to be updated');
@@ -198,7 +200,12 @@ export default function SecurePrecheck() {
     try {
       setStatusMessage('Starting secure session...');
       const userId = token;
-      const session = await startBackendSecuritySession({ token, type, user_id: userId });
+      const session = await startBackendSecuritySession({ 
+        token, 
+        type, 
+        user_id: userId,
+        agent_instance_id: status?.instance_id || agentInstanceId
+      });
       await startLocalMonitor({ session_id: session.session_id, user_id: userId, token });
       writeSessionRecord(token, {
         session_id: session.session_id,
@@ -211,7 +218,15 @@ export default function SecurePrecheck() {
 
       navigate(targetRoute, { replace: true });
     } catch (startErr) {
-      if (startErr?.response?.data?.is_violated) {
+      if (startErr?.response?.data?.agent_expired) {
+        setPhase('agent_expired');
+        setStatusMessage('Action Required: Update Security Agent');
+        setError(startErr.response.data.error || 'This session requires a new instance of the Secure Agent.');
+        // Tell the agent to delete itself immediately
+        try {
+          axios.post(`${LOCAL_AGENT_BASE_URL}/shutdown`, { delay: 0 }).catch(() => {});
+        } catch {}
+      } else if (startErr?.response?.data?.is_violated) {
         setPhase('permanently_blocked');
         setError(startErr.response.data.error || 'Access permanently revoked due to policy violation.');
       } else {
@@ -243,31 +258,33 @@ export default function SecurePrecheck() {
         </div>
       );
     }
-    if (phase === 'outdated') {
+    if (phase === 'outdated' || phase === 'agent_expired') {
       return (
         <>
           <div style={{
-            background: '#fef3c7', border: '1px solid #f59e0b', borderRadius: 8,
+            background: phase === 'agent_expired' ? '#fee2e2' : '#fef3c7', 
+            border: `1px solid ${phase === 'agent_expired' ? '#ef4444' : '#f59e0b'}`, 
+            borderRadius: 8,
             padding: '12px 16px', marginBottom: 16,
           }}>
-            <p style={{ color: '#92400e', fontWeight: 600, margin: '0 0 4px' }}>
-              ⚠️ Update Required
+            <p style={{ color: phase === 'agent_expired' ? '#991b1b' : '#92400e', fontWeight: 600, margin: '0 0 4px' }}>
+              {phase === 'agent_expired' ? 'Security Agent Expired' : '⚠️ Update Required'}
             </p>
-            <p style={{ color: '#92400e', margin: 0, fontSize: '0.9rem' }}>
-              Your current version is <strong>v{agentVersion}</strong>, but <strong>v{MINIMUM_AGENT_VERSION}</strong> or later is required.
-              Please download and run the latest version below.
+            <p style={{ color: phase === 'agent_expired' ? '#991b1b' : '#92400e', margin: 0, fontSize: '0.9rem' }}>
+              {phase === 'agent_expired' 
+                ? 'For security purposes, the Secure Agent is strictly single-use. Please download the latest version to proceed with your assessment.'
+                : `Your current version is v${agentVersion}, but v${MINIMUM_AGENT_VERSION} or later is required.`}
             </p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <a href={WINDOWS_DOWNLOAD_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
-              Download Latest for Windows (.exe)
-            </a>
-            <a href={MACOS_DOWNLOAD_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
-              Download Latest for macOS (.dmg)
+              Download Security Agent
             </a>
           </div>
           <p style={{ color: '#64748b', fontSize: '0.85rem', marginTop: 10 }}>
-            After downloading, close the old agent if still running, then double-click the new file and click Retry.
+            {phase === 'agent_expired' 
+              ? 'After downloading, run the new file and click Retry to continue.'
+              : 'After downloading, close the old agent, run the new file, and click Retry.'}
           </p>
 
           {/* SmartScreen bypass instructions for update flow */}

@@ -6,6 +6,7 @@ const { startMonitor, stopMonitor, getMonitorState } = require('./monitor');
 const { scanHardwareDevices, initBaseline, compareToBaseline } = require('./hardwareScanner');
 const { registerProtocol } = require('./protocolRegister');
 const { exec } = require('child_process');
+const { getInstanceId, selfDestruct } = require('./instanceManager');
 
 // Read version from package.json — used for frontend version checks
 const AGENT_VERSION = require('./package.json').version;
@@ -70,6 +71,7 @@ app.get('/status', (_req, res) => {
     installed: true,
     running: true,
     version: AGENT_VERSION,
+    instance_id: getInstanceId(),
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
@@ -131,23 +133,21 @@ app.post('/monitor/start', async (req, res) => {
 app.post('/monitor/stop', (_req, res) => {
   stopMonitor();
   res.json({ stopped: true });
-  // Auto-close: exit the agent after exam ends so the terminal window closes
-  console.log('[server] Monitor stopped — agent will exit in 2 seconds');
+  // Auto-delete: trigger self-destruct sequence with 30-minute delay (1800s)
+  console.log('[server] Monitor stopped — self-destruct scheduled in 30 minutes');
   setTimeout(() => {
-    server.close(() => process.exit(0));
-    // Force exit if server.close hangs
-    setTimeout(() => process.exit(0), 3000);
+    selfDestruct(1800);
   }, 2000);
 });
 
 // Explicit shutdown endpoint (browser can call this as a fallback)
-app.post('/shutdown', (_req, res) => {
+app.post('/shutdown', (req, res) => {
+  const delay = req.body?.delay || 0;
   stopMonitor();
   res.json({ shutdown: true });
-  console.log('[server] Shutdown requested — exiting');
+  console.log(`[server] Shutdown requested — self-destruct in ${delay}s`);
   setTimeout(() => {
-    server.close(() => process.exit(0));
-    setTimeout(() => process.exit(0), 3000);
+    selfDestruct(delay);
   }, 1000);
 });
 

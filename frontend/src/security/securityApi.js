@@ -18,8 +18,8 @@ export const runLocalHardwareScan = async () => {
   return res.data;
 };
 
-export const startBackendSecuritySession = async ({ token, type, user_id }) => {
-  const res = await axios.post(`${API_BASE_URL}/security-session/start`, { token, type, user_id }, { timeout: 8000 });
+export const startBackendSecuritySession = async ({ token, type, user_id, agent_instance_id }) => {
+  const res = await axios.post(`${API_BASE_URL}/security-session/start`, { token, type, user_id, agent_instance_id }, { timeout: 8000 });
   return res.data;
 };
 
