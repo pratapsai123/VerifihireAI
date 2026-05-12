@@ -192,28 +192,10 @@ class AssemblyAITokenView(APIView):
             return Response({'error': 'ASSEMBLYAI_API_KEY is missing from configuration.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         
-
-        try:
-
-            response = requests.post(
-
-                "https://api.assemblyai.com/v2/realtime/token",
-
-                headers={"Authorization": api_key, "Content-Type": "application/json"},
-
-                json={"expires_in": 3600}
-
-            )
-
-            response.raise_for_status()
-
-            return Response(response.json())
-
-        except Exception as e:
-
-            logger.error(f"Failed to generate AssemblyAI token: {str(e)}")
-
-            return Response({'error': 'Failed to generate transcription token.'}, status=status.HTTP_502_BAD_GATEWAY)
+        # AssemblyAI v3 WebSocket accepts the API key directly as the token parameter.
+        # The v2 /realtime/token endpoint has been deprecated (returns 404).
+        # Frontend connects via: wss://streaming.assemblyai.com/v3/ws?token=<key>
+        return Response({'token': api_key})
 
 
 
@@ -1116,75 +1098,26 @@ class RetryFailedExtractionsView(APIView):
 
 
 
-                # Retry with Key Rotation (Groq Cascading Fallback)
-                import time
-                from openai import OpenAI
-                import random
-                groq_keys = list(getattr(settings, 'GROQ_API_KEYS', []))
+                # Retry with unified LLM client (handles key rotation and backoff internally)
+                from ai_assessments.llm_client import call_llm_with_backoff, get_default_model
                 match_result = None
                 
-                if not groq_keys:
-                    print("   ❌ No GROQ_API_KEYS configured in settings.")
-                else:
-                    max_retries = 3
-                    for attempt in range(max_retries):
-                        random.shuffle(groq_keys)
-                        
-                        # STEP 1: Exhaust 70B
-                        print(f"\n   --- Attempt {attempt+1}: Prioritizing High-Accuracy 70B ---")
-                        for key in groq_keys:
-                            try:
-                                print(f"   🤖 Trying 70B (llama-3.3-70b-versatile)... ", end="", flush=True)
-                                groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
-                                response = groq_client.chat.completions.create(
-                                    model="llama-3.3-70b-versatile",
-                                    messages=[{"role": "user", "content": prompt}],
-                                    response_format={"type": "json_object"},
-                                    temperature=0.0,
-                                    seed=42
-                                )
-                                raw_text = response.choices[0].message.content
-                                print(" ✅ Success!") 
-                                match_result = extract_json(raw_text)
-                                if match_result:
-                                    break
-                            except Exception as e:
-                                print(f"❌ Error/Rate Limit. Rotating...")
-                                continue
-                        
-                        if match_result:
-                            break
-                            
-                        # STEP 2: Exhaust 8B
-                        print(f"   ⚠️ 70B Exhausted. Falling back to 8B Safety Net ---")
-                        for key in groq_keys:
-                            try:
-                                print(f"   🤖 Trying 8B (llama-3.1-8b-instant)... ", end="", flush=True)
-                                groq_client = OpenAI(api_key=key, base_url="https://api.groq.com/openai/v1")
-                                response = groq_client.chat.completions.create(
-                                    model="llama-3.1-8b-instant",
-                                    messages=[{"role": "user", "content": prompt}],
-                                    response_format={"type": "json_object"},
-                                    temperature=0.0,
-                                    seed=42
-                                )
-                                raw_text = response.choices[0].message.content
-                                print(" ✅ Success!") 
-                                match_result = extract_json(raw_text)
-                                if match_result:
-                                    break
-                            except Exception as e:
-                                print(f"❌ Error/Rate Limit. Rotating...")
-                                continue
-                                
-                        if match_result:
-                            break
-                            
-                        # STEP 3: Sleep and retry
-                        if attempt < max_retries - 1:
-                            sleep_time = 10 * (2 ** attempt)
-                            print(f"   📉 All keys exhausted. Sleeping {sleep_time}s...")
-                            time.sleep(sleep_time)
+                try:
+                    print(f"   🤖 Calling LLM ({get_default_model()})... ", end="", flush=True)
+                    match_result = call_llm_with_backoff(
+                        prompt=prompt,
+                        is_json=True,
+                        model=get_default_model(),
+                        max_tokens=4096,
+                        temperature=0.0,
+                    )
+                    if match_result:
+                        print("✅ Success!")
+                    else:
+                        print("❌ Empty response")
+                except Exception as llm_err:
+                    print(f"❌ LLM Error: {llm_err}")
+                    logger.error(f"LLM retry failed for candidate {cid}: {llm_err}")
 
 
 
@@ -1791,18 +1724,24 @@ class CandidatePublicStatusUpdateView(APIView):
 
             score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
 
-
+            # Get integrity penalty
+            integrity_obj = getattr(candidate, 'integrity', None)
+            integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
+            integrity_penalty = max(0, 100.0 - integrity_score)
+            final_score = max(0, score_percentage - integrity_penalty)
 
             # Determine pass/fail based on threshold
 
             threshold = candidate.interview_pass_threshold or 50
 
-            if score_percentage >= threshold:
-
+            if final_score >= threshold:
+                # Passed even after integrity penalty
                 candidate.status = 'Hired'
-
+            elif score_percentage >= threshold and final_score < threshold:
+                # Raw score passed but integrity penalty dragged it below threshold
+                candidate.status = 'On-Hold'
             else:
-
+                # Raw score itself is below threshold
                 candidate.status = 'Rejected'
 
 
@@ -1827,7 +1766,7 @@ class CandidatePublicStatusUpdateView(APIView):
 
                 'SUCCESS' if candidate.status == 'Hired' else 'WARNING', 
 
-                f"AI Interview completed. Final Status: {candidate.status}. Score: {score_percentage}%",
+                f"AI Interview completed. Final Status: {candidate.status}. Raw Score: {score_percentage:.1f}%, Integrity Penalty: -{integrity_penalty:.1f}%, Final Score: {final_score:.1f}%",
 
                 phase='INTERVIEW'
 
@@ -2120,894 +2059,15 @@ class CandidatePublicIntegrityUpdateView(APIView):
 
 
 # NOTE: Dead duplicate ProcessAnswerView removed from here. Active class below at ProcessAnswerView (line ~4100).
-class CandidateTimelineView(APIView):
+# NOTE: CandidateTimelineView, LatestActiveBatchView, CandidateReportDownloadView are defined
+# later in this file (after TTSView). The duplicates that were here have been removed.
 
-    """
 
-    Fetches the history (PipelineLog) for a specific candidate.
 
-    """
 
-    from rest_framework.permissions import IsAuthenticated
 
-    permission_classes = [IsAuthenticated]
 
 
-
-    def get(self, request, pk):
-
-        try:
-
-            candidate = Candidate.objects.get(pk=pk)
-
-            # Permission check: ensure user belongs to same company
-
-            user_profile = getattr(request.user, 'profile', None)
-
-            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
-
-                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-
-            
-
-            logs = candidate.pipeline_logs.all().order_by('timestamp')
-
-            serializer = PipelineLogSerializer(logs, many=True)
-
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        except Candidate.DoesNotExist:
-
-            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
-
-
-
-class LatestActiveBatchView(APIView):
-
-    """
-
-    Allows the frontend to recover the most recent batch ID if the page was refreshed
-
-    before the ID could be saved to local state.
-
-    """
-
-    permission_classes = [AllowAny]
-
-    authentication_classes = []
-
-
-
-    def get(self, request):
-
-        # Look for candidates created in the last 15 minutes that are still 'New'
-
-        threshold_time = timezone.now() - timedelta(minutes=15)
-
-        user_profile = getattr(request.user, 'userprofile', None)
-
-
-
-        candidates = Candidate.objects.filter(
-
-            status='New',
-
-            created_at__gte=threshold_time
-
-        ).exclude(batch_id__isnull=True).exclude(batch_id='')
-
-
-
-        if user_profile:
-
-            candidates = candidates.filter(user_profile=user_profile)
-
-
-
-        latest_candidate = candidates.order_by('-created_at').first()
-
-
-
-        if latest_candidate:
-
-            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
-
-
-
-        return Response({"batch_id": None}, status=status.HTTP_200_OK)
-
-
-
-
-
-class CandidateReportDownloadView(APIView):
-
-    """
-
-    Generates a comprehensive PDF report for an AI interview session.
-
-    Includes candidate details, identity verification photo, full transcript,
-
-    and integrity violation snapshots.
-
-    """
-
-    permission_classes = [IsAuthenticated]
-
-
-
-    def get(self, request, pk):
-
-        try:
-
-            candidate = Candidate.objects.get(pk=pk)
-
-            
-
-            # RBAC: Ensure user belongs to the same company or is a superuser
-
-            user_profile = getattr(request.user, 'profile', None)
-
-            if not user_profile or (user_profile.company != candidate.company and not request.user.is_superuser):
-
-                return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
-
-
-
-            # Generate PDF in memory
-
-            buffer = io.BytesIO()
-
-            from reportlab.lib.pagesizes import A4
-
-            from reportlab.lib import colors
-
-            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-
-            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, PageBreak
-
-            from reportlab.lib.units import inch
-
-            import base64
-
-
-
-            doc = SimpleDocTemplate(
-
-                buffer, 
-
-                pagesize=A4,
-
-                rightMargin=50,
-
-                leftMargin=50,
-
-                topMargin=50,
-
-                bottomMargin=50
-
-            )
-
-            styles = getSampleStyleSheet()
-
-            elements = []
-
-
-
-            # 1. Header & Title
-
-            header_style = ParagraphStyle(
-
-                'HeaderStyle', 
-
-                parent=styles['Heading1'], 
-
-                fontSize=26, 
-
-                spaceAfter=20, 
-
-                textColor=colors.HexColor("#4338ca"),
-
-                alignment=1 # Center
-
-            )
-
-            elements.append(Paragraph("VerifiHireAI — Interview Report", header_style))
-
-            elements.append(Paragraph(f"Candidate: {candidate.full_name}", styles['Heading2']))
-
-            elements.append(Spacer(1, 15))
-
-
-
-            # Define custom styles if not already present
-
-            if 'Small' not in styles:
-
-                styles.add(ParagraphStyle(
-
-                    name='Small',
-
-                    parent=styles['Normal'],
-
-                    fontSize=8,
-
-                    leading=10,
-
-                    textColor=colors.grey
-
-                ))
-
-            if 'Italic' not in styles:
-
-                styles.add(ParagraphStyle(
-
-                    name='Italic',
-
-                    parent=styles['Normal'],
-
-                    fontName='Helvetica-Oblique'
-
-                ))
-
-
-
-            # 2. Candidate Information (Photo on Left, Details on Right)
-
-            elements.append(Paragraph("Candidate Information", styles['Heading3']))
-
-            
-
-            # Identity Verification (Face Registration)
-
-            # First try deepface directory using public token (which is what the frontend uses for registration)
-
-            person_img_path = None
-
-            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
-
-            person_id = str(candidate.public_token).lower() if candidate.public_token else None
-
-            path_options = []
-
-            
-
-            if person_id:
-
-                path_options = [
-
-                    os.path.join(deepface_data_dir, person_id, "face_0.jpg"),
-
-                ]
-
-            
-
-            for p in path_options:
-
-                if os.path.exists(p):
-
-                    person_img_path = p
-
-                    break
-
-
-
-            # Fallback: Use first webcam screenshot from integrity logs
-
-            fallback_img_data = None
-
-            if not person_img_path:
-
-                first_log = candidate.integrity_logs.filter(webcam_screenshot_base64__isnull=False).order_by('timestamp').first()
-
-                if first_log and first_log.webcam_screenshot_base64:
-
-                    try:
-
-                        b64 = first_log.webcam_screenshot_base64.split(',')[-1]
-
-                        fallback_img_data = base64.b64decode(b64)
-
-                    except:
-
-                        pass
-
-
-
-            # Left side: Image
-
-            if person_img_path:
-
-                try:
-
-                    img_elem = RLImage(person_img_path, width=2.0*inch, height=1.5*inch)
-
-                except:
-
-                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
-
-            elif fallback_img_data:
-
-                try:
-
-                    img_io = io.BytesIO(fallback_img_data)
-
-                    img_elem = RLImage(img_io, width=2.0*inch, height=1.5*inch)
-
-                except:
-
-                    img_elem = Paragraph("[Error loading photo]", styles['Italic'])
-
-            else:
-
-                img_elem = Paragraph("<i>No candidate photo available.</i>", styles['Normal'])
-
-
-
-            # Score & Penalty Calculation - Decoupled from assessment score
-
-            interview_summary = candidate.interview_summary or []
-
-            interview_total_score = 0
-
-            num_interview_questions = 0
-
-            if isinstance(interview_summary, list):
-
-                for turn in interview_summary:
-
-                    if turn.get('score') is not None:
-
-                        interview_total_score += int(turn.get('score'))
-
-                        num_interview_questions += 1
-
-            
-
-            # Use 13 questions as default if transcript is empty to avoid 0/0
-
-            total_possible_marks = (num_interview_questions if num_interview_questions > 0 else 13) * 10
-
-            base_score_pct = (interview_total_score / total_possible_marks * 100) if total_possible_marks > 0 else 0
-
-            
-
-            integrity_obj = getattr(candidate, 'integrity', None)
-
-            integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
-
-            integrity_penalty = max(0, 100.0 - integrity_score)
-
-            
-
-            final_performance_pct = max(0, round(base_score_pct - integrity_penalty, 1))
-
-
-
-            # Right side: Summary Table
-
-            info_data = [
-
-                ["Full Name", candidate.full_name],
-
-                ["Email", candidate.email],
-                ["Phone", candidate.phone or "N/A"],
-                ["PAN Number", candidate.pan_number or "N/A"],
-                ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
-                ["Job Title", candidate.job_title or "N/A"],
-
-                ["Interview Score", f"{interview_total_score} / {total_possible_marks}"],
-
-                ["Integrity Penalty", f"-{integrity_penalty:.1f}%"],
-
-                ["Final Performance", f"{final_performance_pct}%"],
-
-                ["Status", candidate.status],
-
-                ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
-
-            ]
-
-            
-
-            summary_table = Table(info_data, colWidths=[1.4*inch, 2.8*inch])
-
-            summary_table.setStyle(TableStyle([
-
-                ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
-
-                ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#64748b")),
-
-                ('FONTNAME', (0,0), (0,-1), 'Helvetica'),
-
-                ('FONTSIZE', (0,0), (0,-1), 10),
-
-                ('FONTNAME', (1,0), (1,-1), 'Helvetica-Bold'),
-
-                ('FONTSIZE', (1,0), (1,-1), 11),
-
-                ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor("#1e293b")),
-
-                ('ALIGN', (0,0), (-1,-1), 'LEFT'),
-
-                ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-
-                ('LINEBELOW', (0,0), (-1,-2), 0.5, colors.HexColor("#e2e8f0")),
-
-                ('TOPPADDING', (0,0), (-1,-1), 8),
-
-                ('BOTTOMPADDING', (0,0), (-1,-1), 8),
-
-                ('LEFTPADDING', (0,0), (0,-1), 12),
-
-                ('LEFTPADDING', (1,0), (1,-1), 12),
-
-            ]))
-
-
-
-            # Combine in a layout table
-
-            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
-
-            layout_table.setStyle(TableStyle([
-
-                ('VALIGN', (0,0), (-1,-1), 'TOP'),
-
-                ('ALIGN', (0,0), (0,0), 'LEFT'),
-
-                ('ALIGN', (1,0), (1,0), 'LEFT'),
-
-            ]))
-
-            elements.append(layout_table)
-            elements.append(Spacer(1, 20))
-
-            # 2.2 Identity Warning Section (Mismatch detected but overridden)
-            if getattr(candidate, 'identity_mismatch_detected', False):
-                elements.append(Paragraph("⚠️ IDENTITY WARNING: Face Mismatch Detected", 
-                                          ParagraphStyle('WarnStyle', parent=styles['Heading3'], textColor=colors.red)))
-                elements.append(Paragraph("This candidate's face did not match the photo previously registered with this PAN card. The interview was allowed to proceed, but manual verification is required.", 
-                                          ParagraphStyle('WarnText', parent=styles['Normal'], textColor=colors.red, fontSize=9)))
-                elements.append(Spacer(1, 10))
-                
-                # Side-by-side comparison
-                mismatch_photos = []
-                
-                # New Photo (the one from step above)
-                new_photo_elem = img_elem # Already calculated above
-                
-                # Original Photo
-                old_photo_elem = None
-                if candidate.original_identity_photo:
-                    try:
-                        old_photo_path = candidate.original_identity_photo.path
-                        if os.path.exists(old_photo_path):
-                            old_photo_elem = RLImage(old_photo_path, width=2.0*inch, height=1.5*inch)
-                    except:
-                        pass
-                
-                if not old_photo_elem:
-                    old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
-                
-                comparison_table = Table([
-                    [old_photo_elem, new_photo_elem],
-                    [Paragraph("<b>Original Registered Face</b>", styles['Small']), 
-                     Paragraph("<b>Current Interview Face</b>", styles['Small'])]
-                ], colWidths=[3.25*inch, 3.25*inch])
-                
-                comparison_table.setStyle(TableStyle([
-                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                    ('BOX', (0,0), (-1,-1), 1, colors.red),
-                    ('BACKGROUND', (0,1), (-1,1), colors.HexColor("#fee2e2")),
-                ]))
-                
-                elements.append(comparison_table)
-                elements.append(Spacer(1, 25))
-
-            else:
-                elements.append(Spacer(1, 5))
-
-            # 2.5 Identity Documents Section - PAN Card
-            if candidate.pan_photo:
-                elements.append(Paragraph("Identity Documents", styles['Heading3']))
-                elements.append(Spacer(1, 10))
-                
-                # PAN Card Image
-                try:
-                    pan_img_path = candidate.pan_photo.path
-                    if os.path.exists(pan_img_path):
-                        pan_img_elem = RLImage(pan_img_path, width=3.0*inch, height=2.0*inch)
-                        pan_caption = f"PAN Card: {candidate.pan_number or 'N/A'} (Verified: {'Yes' if candidate.pan_verified else 'No'})"
-                        
-                        pan_table = Table([
-                            [pan_img_elem],
-                            [Paragraph(pan_caption, styles['Small'])]
-                        ], colWidths=[3.0*inch])
-                        pan_table.setStyle(TableStyle([
-                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                        ]))
-                        elements.append(pan_table)
-                    else:
-                        elements.append(Paragraph("<i>PAN card image file not found on server.</i>", styles['Normal']))
-                except Exception as pan_error:
-                    elements.append(Paragraph(f"<i>Error loading PAN card image: {str(pan_error)}</i>", styles['Italic']))
-                
-                elements.append(Spacer(1, 25))
-
-            # 3. Interview Transcript
-
-            elements.append(Paragraph("Conversation Transcript", styles['Heading2']))
-
-            elements.append(Spacer(1, 10))
-
-            
-
-            if isinstance(candidate.interview_summary, list) and candidate.interview_summary:
-
-                for i, turn in enumerate(candidate.interview_summary, 1):
-
-                    # Question Header with background
-
-                    q_header_style = ParagraphStyle(
-
-                        'QHeader',
-
-                        parent=styles['Heading4'],
-
-                        fontSize=11,
-
-                        textColor=colors.HexColor("#4338ca"),
-
-                        spaceBefore=15,
-
-                        spaceAfter=8,
-
-                        backColor=colors.HexColor("#f8fafc"),
-
-                        borderPadding=8,
-
-                        borderWidth=1,
-
-                        borderColor=colors.HexColor("#e2e8f0"),
-
-                        borderRadius=5
-
-                    )
-
-                    elements.append(Paragraph(f"Question #{i}", q_header_style))
-
-                    
-
-                    # Question text
-
-                    elements.append(Paragraph(f"<b>Question:</b>", styles['Normal']))
-
-                    elements.append(Paragraph(turn.get('question', 'N/A'), styles['Normal']))
-
-                    elements.append(Spacer(1, 8))
-
-                    
-
-                    # Answer
-
-                    elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
-
-                    elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
-
-                    elements.append(Spacer(1, 8))
-
-                    
-
-                    # AI Analysis
-
-                    elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
-
-                    elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
-
-                    elements.append(Spacer(1, 8))
-
-                    
-
-                    # Score with color coding
-
-                    score = turn.get('score', 0)
-
-                    score_color = colors.darkgreen if score >= 7 else (colors.darkorange if score >= 4 else colors.red)
-
-                    score_style = ParagraphStyle(
-
-                        'ScoreStyle',
-
-                        parent=styles['Normal'],
-
-                        fontSize=10,
-
-                        textColor=score_color,
-
-                        spaceBefore=5,
-
-                        spaceAfter=15
-
-                    )
-
-                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {turn.get('reason', '')}", score_style))
-
-                    
-
-                    elements.append(Paragraph('<hr color="#e2e8f0" thickness="1"/>', styles['Normal']))
-
-                    elements.append(Spacer(1, 12))
-
-            else:
-
-                elements.append(Paragraph("No interview transcript data recorded for this session.", styles['Italic']))
-
-
-
-            # 4. Integrity Violations & Snapshots
-
-            elements.append(PageBreak())
-
-            elements.append(Paragraph("Proctoring & Integrity Evidence", styles['Heading2']))
-
-            elements.append(Spacer(1, 10))
-
-            
-
-            logs = candidate.integrity_logs.all().order_by('timestamp')
-
-            if logs.exists():
-
-                elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
-
-                elements.append(Spacer(1, 15))
-
-                
-
-                # Collect all images across all logs for 4-per-row layout
-
-                all_images = []
-
-                for log in logs:
-
-                    # Process Webcam Snapshot
-
-                    if log.webcam_screenshot_base64:
-
-                        try:
-
-                            b64 = log.webcam_screenshot_base64.split(',')[-1]
-
-                            img_data = base64.b64decode(b64)
-
-                            img_io = io.BytesIO(img_data)
-
-                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-
-                            all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-
-                        except: pass
-
-                    
-
-                    # Process Desktop Snapshot
-
-                    if log.screenshot_base64:
-
-                        try:
-
-                            b64 = log.screenshot_base64.split(',')[-1]
-
-                            img_data = base64.b64decode(b64)
-
-                            img_io = io.BytesIO(img_data)
-
-                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-
-                            all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-
-                        except: pass
-
-                
-
-                if all_images:
-
-                    # Display images in 4-per-row grid
-
-                    img_grid = []
-
-                    row = []
-
-                    for img, caption in all_images:
-
-                        # Each cell will contain both the image and the caption text
-
-                        row.append([img, Paragraph(caption, styles['Small'])])
-
-                        if len(row) == 4:
-
-                            img_grid.append(row)
-
-                            row = []
-
-                    if row:  # Add remaining images
-
-                        while len(row) < 4:
-
-                            row.append("")
-
-                        img_grid.append(row)
-
-                    
-
-                    for grid_row in img_grid:
-
-                        # Passing [grid_row] creates a single table row with 4 columns
-
-                        t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
-
-                        t_img.setStyle(TableStyle([
-
-                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-
-                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-
-                            ('LEFTPADDING', (0,0), (-1,-1), 2),
-
-                            ('RIGHTPADDING', (0,0), (-1,-1), 2),
-
-                            ('TOPPADDING', (0,0), (-1,-1), 5),
-
-                            ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-
-                        ]))
-
-                        elements.append(t_img)
-
-                        elements.append(Spacer(1, 10))
-
-                else:
-
-                    elements.append(Paragraph("[No visual evidence captured for violations]", styles['Small']))
-
-            else:
-
-                elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
-
-
-
-            # Build PDF
-
-            doc.build(elements)
-
-            buffer.seek(0)
-
-            
-
-            # Prepare Response
-
-            from django.http import HttpResponse
-
-            response = HttpResponse(buffer, content_type='application/pdf')
-
-            safe_name = "".join([c for c in candidate.full_name if c.isalnum() or c==' ']).rstrip().replace(' ', '_')
-
-            filename = f"VerifiHire_Report_{safe_name}_{candidate.id}.pdf"
-
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
-
-            return response
-
-
-
-        except Candidate.DoesNotExist:
-
-            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
-
-        except Exception as e:
-
-            logger.error(f"Error generating PDF report for candidate {pk}: {str(e)}", exc_info=True)
-
-            return Response({'error': f"Critical failure during report generation: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-class CandidateTimelineView(APIView):
-
-    """
-
-    Fetches the history (PipelineLog) for a specific candidate.
-
-    """
-
-    from rest_framework.permissions import IsAuthenticated
-
-    permission_classes = [IsAuthenticated]
-
-
-
-    def get(self, request, pk):
-
-        try:
-
-            candidate = Candidate.objects.get(pk=pk)
-
-            # Permission check: ensure user belongs to same company
-
-            user_profile = getattr(request.user, 'profile', None)
-
-            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
-
-                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-
-            
-
-            logs = candidate.pipeline_logs.all().order_by('timestamp')
-
-            serializer = PipelineLogSerializer(logs, many=True)
-
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        except Candidate.DoesNotExist:
-
-            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
-
-
-
-class LatestActiveBatchView(APIView):
-
-    """
-
-    Allows the frontend to recover the most recent batch ID if the page was refreshed
-
-    before the ID could be saved to local state.
-
-    """
-
-    permission_classes = [AllowAny]
-
-    authentication_classes = []
-
-
-
-    def get(self, request):
-
-        # Look for candidates created in the last 15 minutes that are still 'New'
-
-        threshold_time = timezone.now() - timedelta(minutes=15)
-
-        user_profile = getattr(request.user, 'userprofile', None)
-
-
-
-        candidates = Candidate.objects.filter(
-
-            status='New',
-
-            created_at__gte=threshold_time
-
-        ).exclude(batch_id__isnull=True).exclude(batch_id='')
-
-
-
-        if user_profile:
-
-            candidates = candidates.filter(user_profile=user_profile)
-
-
-
-        latest_candidate = candidates.order_by('-created_at').first()
-
-
-
-        if latest_candidate:
-
-            return Response({"batch_id": latest_candidate.batch_id}, status=status.HTTP_200_OK)
-
-        return Response({"batch_id": None}, status=status.HTTP_200_OK)
 
 class PanValidationView(APIView):
     """
@@ -3627,7 +2687,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                 response = local_llm_client.chat.completions.create(
                     model=chosen_model,
                     messages=[{"role": "user", "content": prompt}],
-                    temperature=0.7,
+                    temperature=0.0,
                     response_format={"type": "json_object"}
                 )
             except Exception as model_err:
@@ -3645,7 +2705,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     response = local_llm_client.chat.completions.create(
                         model=FALLBACK_MODEL,
                         messages=[{"role": "user", "content": prompt}],
-                        temperature=0.7,
+                        temperature=0.0,
                         response_format={"type": "json_object"}
                     )
                 elif "api_key" in error_str or "authentication" in error_str:
@@ -3657,7 +2717,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     response = local_llm_client.chat.completions.create(
                         model=chosen_model,
                         messages=[{"role": "user", "content": prompt}],
-                        temperature=0.7,
+                        temperature=0.0,
                         response_format={"type": "json_object"}
                     )
                 else:
@@ -3703,10 +2763,15 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             # Scoring Update (Silent)
             if candidate and data.get('score') is not None and not data.get('is_clarification'):
                  try:
-                    # Update score
+                    # Update score atomically to prevent race conditions
                     q_score = int(data.get('score', 0))
-                    candidate.score += q_score
-                    candidate.total_questions += 1
+                    from django.db.models import F
+                    Candidate.objects.filter(pk=candidate.id).update(
+                        score=F('score') + q_score,
+                        total_questions=F('total_questions') + 1
+                    )
+                    # Refresh to get updated values
+                    candidate.refresh_from_db()
 
                     # Store per-question summary for "Details" button
                     if not isinstance(candidate.interview_summary, list):
@@ -3770,7 +2835,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     
                     candidate.conversation_memory = memory
 
-                    candidate.save()
+                    candidate.save(update_fields=['interview_summary', 'conversation_memory'])
                  except: pass
 
             return Response(data, status=status.HTTP_200_OK)
@@ -4031,6 +3096,12 @@ class CandidateReportDownloadView(APIView):
             ]))
 
             # Combine in a layout table
+            layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
+            layout_table.setStyle(TableStyle([
+                ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                ('ALIGN', (0,0), (0,0), 'LEFT'),
+                ('ALIGN', (1,0), (1,0), 'LEFT'),
+            ]))
             elements.append(layout_table)
             elements.append(Spacer(1, 20))
 

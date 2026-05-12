@@ -3,8 +3,6 @@ import axios from 'axios';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
 import { API_BASE_URL } from '../apiConfig';
-const STORAGE_KEY = 'ai_interview_create_form_data';
-
 
 const AiInterview = () => {
     const [jobDescription, setJobDescription] = useState('');
@@ -24,72 +22,6 @@ const AiInterview = () => {
     // Job Roles State
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
-
-    // --- Persistence Logic ---
-    const isDirty = React.useRef(false);
-
-    React.useEffect(() => {
-        // window level variables are wiped on refresh/reload
-        const isRefresh = window._interview_init === undefined;
-
-        if (isRefresh) {
-            const savedData = sessionStorage.getItem(STORAGE_KEY);
-            if (savedData) {
-                try {
-                    const parsed = JSON.parse(savedData);
-                    let hasRestoredData = false;
-                    if (parsed.jobDescription) { setJobDescription(parsed.jobDescription); hasRestoredData = true; }
-                    if (parsed.customRoleTitle) { setCustomRoleTitle(parsed.customRoleTitle); hasRestoredData = true; }
-                    if (parsed.experienceLevel) { setExperienceLevel(parsed.experienceLevel); hasRestoredData = true; }
-                    if (parsed.selectedRoleId) { setSelectedRoleId(parsed.selectedRoleId); hasRestoredData = true; }
-                    if (parsed.fromDate) { setFromDate(parsed.fromDate); hasRestoredData = true; }
-                    if (parsed.fromTime) { setFromTime(parsed.fromTime); hasRestoredData = true; }
-                    if (parsed.untilDate) { setUntilDate(parsed.untilDate); hasRestoredData = true; }
-                    if (parsed.untilTime) { setUntilTime(parsed.untilTime); hasRestoredData = true; }
-                    if (parsed.interviewPassThreshold) { setInterviewPassThreshold(parsed.interviewPassThreshold); hasRestoredData = true; }
-                    if (hasRestoredData) isDirty.current = true;
-
-                } catch (e) {
-                    console.error("Error hydrating interview form:", e);
-                }
-            }
-        } else {
-            // Internal navigation - clear saved data
-            sessionStorage.removeItem(STORAGE_KEY);
-            isDirty.current = false;
-        }
-
-        window._interview_init = true;
-    }, []);
-
-    const initialDataHash = React.useRef(null);
-    if (!initialDataHash.current) {
-        initialDataHash.current = JSON.stringify({
-            jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
-        });
-
-    }
-
-    React.useEffect(() => {
-        const dataToSave = {
-            jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-            fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
-        };
-
-        const currentDataStr = JSON.stringify(dataToSave);
-
-        if (!isDirty.current && currentDataStr === initialDataHash.current) {
-            return;
-        }
-
-        isDirty.current = true;
-        sessionStorage.setItem(STORAGE_KEY, currentDataStr);
-    }, [
-        jobDescription, customRoleTitle, experienceLevel, selectedRoleId,
-        fromDate, fromTime, untilDate, untilTime, interviewPassThreshold
-    ]);
-
 
     React.useEffect(() => {
         const fetchRoles = async () => {
