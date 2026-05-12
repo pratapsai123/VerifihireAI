@@ -60,6 +60,7 @@ from .candidate_assessment_views import (
     backfill_assessment_questions_view,
     submit_objective_section,
     save_all_candidate_details_view,
+    verify_identity_view,
     _acq_merge_code,
     update_standard_integrity_view,
     verify_pan_backend_view,

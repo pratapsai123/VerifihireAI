@@ -1407,6 +1407,7 @@ export default function TakeAssessment() {
 
   }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage, error, windowError]);
 
+
   // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
   useEffect(() => {
     if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
@@ -1422,6 +1423,40 @@ export default function TakeAssessment() {
 
     return () => clearInterval(bgInterval);
   }, [showAiEvent, submitted, assessmentStage, error, windowError]);
+
+  // Periodic Identity Verification (every 2 minutes)
+  useEffect(() => {
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition' || !candidateDetailsCompleted) return;
+
+    const identityInterval = setInterval(async () => {
+      if (videoRef.current && videoRef.current.readyState >= 2) {
+        try {
+          const camCanvas = document.createElement('canvas');
+          camCanvas.width = videoRef.current.videoWidth || 640;
+          camCanvas.height = videoRef.current.videoHeight || 480;
+          const ctx = camCanvas.getContext('2d');
+          ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+          const webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+
+          // Send to backend for identity verification
+          const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/verify-identity/`, {
+            webcam_screenshot: webcamScreenshot,
+            timestamp: new Date().toISOString(),
+          });
+
+          if (resp.data && resp.data.verified === true) {
+            showAiEvent('IDENTITY VERIFIED', false);
+          } else if (resp.data && resp.data.verified === false) {
+            showAiEvent('IDENTITY MISMATCH DETECTED', true);
+          }
+        } catch (e) {
+          console.error('Failed to perform periodic identity verification', e);
+        }
+      }
+    }, 120000); // 120,000ms = 2 minutes
+
+    return () => clearInterval(identityInterval);
+  }, [token, submitted, assessmentStage, error, windowError, candidateDetailsCompleted]);
 
 
 
