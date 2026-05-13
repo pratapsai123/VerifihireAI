@@ -1005,3 +1005,5 @@
 [2026-05-13 06:33:10.713507+00:00] Direct match found at rotation 0
 [2026-05-13 06:42:33.311264+00:00] Running OCR on rotation 0
 [2026-05-13 06:42:46.107969+00:00] Direct match found at rotation 0
+[2026-05-13 06:26:09.497537+00:00] Running OCR on rotation 0
+[2026-05-13 06:26:19.053022+00:00] Direct match found at rotation 0
