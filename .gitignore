@@ -11,6 +11,10 @@ env/
 deepface/venv/
 .venv/
 
+# Environment variable files (NEVER commit credentials)
+**/.env
+!**/.env.example
+
 # Deepface Data
 deepface/data/registered_faces/
 

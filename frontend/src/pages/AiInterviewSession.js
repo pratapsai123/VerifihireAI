@@ -2814,7 +2814,7 @@ const AiInterviewSession = () => {
                 </div>
             )}
 
-            {/* Welcome Screen - shown after registration but before camera */}
+            {/* Welcome Screen - shown before camera */}
             {
                 !isPermissionsGranted && !isFaceRegistered && !isCompleted && (
                     <div style={{
@@ -2836,7 +2836,11 @@ const AiInterviewSession = () => {
                             <p style={{ color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
                                 To ensure a fair and secure interview process, we require access to your <b>Camera</b> and <b>Entire Screen Share</b>.
                             </p>
-                            <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '2.5rem', textAlign: 'left' }}>
+                            <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '1rem', textAlign: 'left' }}>
+                                <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                                    <i className="fa-solid fa-circle-check" style={{ color: '#22c55e', marginTop: '4px' }}></i>
+                                    <span><b>System Check:</b> Network, Mic & Camera verified ✓</span>
+                                </div>
                                 <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
                                     <i className="fa-solid fa-camera" style={{ color: '#6366f1', marginTop: '4px' }}></i>
                                     <span><b>Webcam:</b> Used for face and phone detection.</span>

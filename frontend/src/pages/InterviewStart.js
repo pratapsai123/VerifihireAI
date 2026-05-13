@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import { ROUTES, generatePath } from '../routes';
+import TechCheckWizard from '../components/TechCheckWizard';
 
 // Parse time string like "10:00 AM", "10 AM", "14:30" into a Date object (today)
 function parseScheduledTime(timeStr) {
@@ -85,6 +86,7 @@ const InterviewStart = () => {
     const [panVerified, setPanVerified] = useState(false);
     const [panError, setPanError] = useState('');
     const [formError, setFormError] = useState('');
+    const [techCheckPassed, setTechCheckPassed] = useState(false);
 
     // Time-lock state
     const [timeAllowed, setTimeAllowed] = useState(true);
@@ -366,6 +368,10 @@ const InterviewStart = () => {
             setIsStarting(false);
         }
     };
+
+    if (!techCheckPassed) {
+        return <TechCheckWizard onComplete={() => setTechCheckPassed(true)} />;
+    }
 
     if (loading) return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>

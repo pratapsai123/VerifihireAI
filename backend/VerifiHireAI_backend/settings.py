@@ -130,9 +130,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'rakeshdb1'),
+        'NAME': os.environ.get('DB_NAME', 'new_db'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         'CONN_MAX_AGE': 0,  # Set to 0 to close connection at the end of each request (prevents connection exhaustion in dev)
@@ -277,29 +277,29 @@ EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='aazm gwze vplo kehg')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
 DEEPSEEK_BASE_URL = config('DEEPSEEK_BASE_URL', default='https://api.deepseek.com')
 DEEPSEEK_MODEL = config('DEEPSEEK_MODEL', default='deepseek-v4-flash')
 DEEPSEEK_API_KEYS = [
-    config('DEEPSEEK_API_KEY_1', default='sk-6535c0f5ed654ee1a48ebf2a08efa1cd'),
-    # Add more keys for rotation / higher concurrency:
-    # config('DEEPSEEK_API_KEY_2', default=''),
-    # config('DEEPSEEK_API_KEY_3', default=''),
+    config('DEEPSEEK_API_KEY_1', default=''),
+    config('DEEPSEEK_API_KEY_2', default=''),
+    config('DEEPSEEK_API_KEY_3', default=''),
 ]
 # Remove empty/placeholder keys
 DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-api-key-here']
 # Legacy aliases so existing references don't break during migration
 DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
 
-# ── GROQ Keys for Resume Screening Fallback ──
+# ── Groq Keys for Resume Screening Fallback ──
 GROQ_API_KEYS = [
-    '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',
-    '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',
-    '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',
+    config('GROQ_API_KEY_1', default=''),
+    config('GROQ_API_KEY_2', default=''),
+    config('GROQ_API_KEY_3', default=''),
 ]
-GROQ_API_KEY = GROQ_API_KEYS[0]
+GROQ_API_KEYS = [k for k in GROQ_API_KEYS if k]
+GROQ_API_KEY = GROQ_API_KEYS[0] if GROQ_API_KEYS else None
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 

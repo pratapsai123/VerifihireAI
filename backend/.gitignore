@@ -23,6 +23,11 @@ wheels/
 .installed.cfg
 *.egg
 
+# Environment variables (NEVER commit)
+.env
+.env.*
+!.env.example
+
 # Django
 *.log
 local_settings.py
