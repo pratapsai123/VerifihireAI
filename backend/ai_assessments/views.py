@@ -61,66 +61,82 @@ from django.http import FileResponse, Http404
 
 class ServeDeepFaceFaceView(APIView):
     """
-    Directly serve the registered anchor face from the DeepFace data directory.
-    This ensures the UI always shows the AUTHENTIC registration photo.
+    Serve the registered face photo — uses IDENTICAL logic to the PDF report.
+    PDF reads: deepface/data/registered_faces/{email}_{token}/face_0.jpg
+    This view does the same, so result page and PDF always show the same photo.
     """
     def get(self, request, person_id):
         import logging
         logger = logging.getLogger(__name__)
         from pathlib import Path
+
         deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
         person_face_dir = deepface_data_dir / person_id
-        
-        logger.info(f"Serving face for {person_id}. Path: {person_face_dir}")
-        
-        if not person_face_dir.exists():
-            logger.warning(f"Identity folder NOT FOUND: {person_face_dir}")
-            raise Http404("Identity folder not found")
-            
-        # Try preferred registration snapshot names
-        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-            face_path = person_face_dir / name
-            if face_path.exists():
-                logger.info(f"Serving master face: {face_path}")
-                return FileResponse(open(face_path, 'rb'), content_type='image/jpeg')
-        
-        # Fallback to any jpg
-        jpgs = list(person_face_dir.glob('*.jpg'))
-        if jpgs:
-            logger.info(f"Serving fallback face: {jpgs[0]}")
-            return FileResponse(open(jpgs[0], 'rb'), content_type='image/jpeg')
-            
-        logger.error(f"No JPG found in folder: {person_face_dir}")
-        raise Http404("No face image found in folder")
+
+        # ── EXACT SAME LOGIC AS PDF ──────────────────────────────────────────
+        target_file = None
+
+        # Step 1: Check primary folder (email_token)
+        if person_face_dir.exists():
+            for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                if (person_face_dir / name).exists():
+                    target_file = person_face_dir / name
+                    break
+            if not target_file:
+                jpgs = list(person_face_dir.glob('*.jpg'))
+                if jpgs:
+                    target_file = jpgs[0]
+
+        # Step 2: Legacy email-only folder (strip token suffix)
+        if not target_file and '_' in person_id:
+            email_only = person_id.rsplit('_', 1)[0]
+            legacy_dir = deepface_data_dir / email_only
+            if legacy_dir.exists():
+                for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                    if (legacy_dir / name).exists():
+                        target_file = legacy_dir / name
+                        break
+                if not target_file:
+                    jpgs = list(legacy_dir.glob('*.jpg'))
+                    if jpgs:
+                        target_file = jpgs[0]
+
+        # Step 3: IdentityLink DB (same as PDF final fallback)
+        if not target_file:
+            try:
+                from api.models import IdentityLink
+                email_key = person_id.split('_')[0]
+                identity = IdentityLink.objects.filter(email__iexact=email_key).order_by('-updated_at').first()
+                if identity and identity.snapshot_image and identity.snapshot_image.name:
+                    import os
+                    if os.path.exists(identity.snapshot_image.path):
+                        target_file = Path(identity.snapshot_image.path)
+            except Exception as e:
+                logger.warning(f"IdentityLink lookup failed for {person_id}: {e}")
+
+        # ── SERVE THE FILE ───────────────────────────────────────────────────
+        if target_file and target_file.exists():
+            logger.info(f"Serving registered face: {target_file}")
+            return FileResponse(open(target_file, 'rb'), content_type='image/jpeg')
+
+        logger.warning(f"No registered face found for: {person_id}")
+        raise Http404("No registered face found")
 
 def _get_candidate_photo_url(request, submission):
     """
-    Returns a direct URL to the ServeDeepFaceFaceView.
-    This bypasses database caching and sync issues.
+    Returns the registered face URL — same source priority as the PDF report.
+    Always returns a URL (never None if email exists) — the serve endpoint
+    handles the full fallback chain identical to the PDF photo logic.
     """
     email = submission.candidate_email.lower().strip() if submission.candidate_email else None
     if not email:
         return None
-    
-    # Construct the person_id used for the folder name
+
     token = str(submission.assessment.share_token) if submission.assessment else None
     person_id = f"{email}_{token}" if token else email
-    
-    # Check if folder exists before returning URL to avoid 404s in UI
-    from pathlib import Path
-    deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
-    if not (deepface_data_dir / person_id).exists():
-        # Fallback to legacy email folder
-        if not (deepface_data_dir / email).exists():
-            # If no folder exists, fall back to integrity screenshot (Absolute last resort)
-            from .models import AIAssessmentIntegrityScreenshot
-            snap = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp').first()
-            if snap and snap.webcam_screenshot:
-                return request.build_absolute_uri(snap.webcam_screenshot.url)
-            return None
-        person_id = email
-    
-    # Use the new direct-serving view
+
+    # Always return the URL — ServeDeepFaceFaceView handles the same fallback
+    # chain as the PDF (face_0.jpg → registration_snapshot.jpg → any jpg → legacy folder → IdentityLink)
     return request.build_absolute_uri(f"/api/ai/registration/face/{person_id}/")
 
 logger = logging.getLogger(__name__)
@@ -305,28 +321,23 @@ class SubmitAssessmentView(APIView):
             else:
                 percentage = 0
 
-            # --- RIGOROUS HIRING STANDARDS ---
-            # Enforce minimum thresholds for individual sections: MCQ 60%, Coding 50%, Integrity 50%
-            MIN_MCQ_THRESHOLD = 60.0
-            MIN_CODING_THRESHOLD = 50.0
-            INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if performance passed
+            # --- PASS/FAIL LOGIC ---
+            # Only the configurable pass_threshold determines score-based pass/fail.
+            # Integrity check (proctoring) is the only additional gate.
+            INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if score passed
 
             passed_overall = percentage >= assessment.pass_threshold
-            passed_mcq = mcq_percentage >= MIN_MCQ_THRESHOLD
-            passed_coding = coding_percentage >= MIN_CODING_THRESHOLD
             passed_integrity = submission.integrity_score >= INTEGRITY_HOLD_THRESHOLD
 
-            # Selection Logic based on user requirement:
-            # 1. Performance < Threshold -> REJECTED
-            # 2. All Performance Pass + Integrity < 50% -> HOLD (for manual review)
-            # 3. All Pass -> SELECTED
+            # Selection Logic:
+            # 1. Final Score < pass_threshold -> REJECTED
+            # 2. Final Score >= pass_threshold + Integrity < 50% -> HOLD (manual review)
+            # 3. Final Score >= pass_threshold + Integrity >= 50% -> SELECTED
 
-            if (possible_mcq_points > 0 and not passed_mcq) or (possible_coding_points > 0 and not passed_coding):
-                pass_status = 'rejected'
-            elif not passed_overall:
+            if not passed_overall:
                 pass_status = 'rejected'
             elif not passed_integrity:
-                pass_status = 'hold'  # Passed performance but failed integrity - needs review
+                pass_status = 'hold'  # Passed score but failed integrity - needs review
             else:
                 pass_status = 'selected'
 
@@ -3130,3 +3141,73 @@ class AIAssessmentResultsView(APIView):
             })
         
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
+
+
+class OverrideSubmissionStatusView(APIView):
+    """
+    HR manually approves or rejects a Hold candidate.
+    PATCH /api/ai/submission/<pk>/override-status/
+    Body: { "action": "approve" | "reject", "reason": "optional note" }
+    """
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, pk):
+        try:
+            submission = AIAssessmentSubmission.objects.get(pk=pk)
+        except AIAssessmentSubmission.DoesNotExist:
+            return Response({'error': 'Submission not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        action = request.data.get('action', '').lower()
+        reason = request.data.get('reason', 'HR manual review override')
+
+        if action not in ('approve', 'reject'):
+            return Response(
+                {'error': 'Invalid action. Use "approve" or "reject".'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if submission.status != 'hold':
+            return Response(
+                {'error': f'Submission is not on hold (current status: {submission.status})'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if action == 'approve':
+            submission.status = 'selected'
+            submission.save(update_fields=['status'])
+            logger.info(
+                f"HR Override: Submission {pk} APPROVED by {request.user}. Reason: {reason}"
+            )
+
+            # Only trigger interview pipeline for AUTOMATIC assessments.
+            # For MANUAL assessments, HR approval = qualified only — no interview link sent.
+            is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic'
+            if is_automatic:
+                try:
+                    from api.pipeline import process_assessment_passed
+                    process_assessment_passed(submission.id)
+                    logger.info(f"HR Override: Pipeline triggered for submission {pk}")
+                except Exception as pipe_err:
+                    logger.error(f"HR Override: Pipeline trigger failed for {pk}: {pipe_err}")
+                message = 'Candidate approved. Interview invitation will be sent.'
+            else:
+                logger.info(f"HR Override: Manual assessment — candidate marked as selected, no interview link sent.")
+                message = 'Candidate approved and marked as qualified.'
+
+            return Response({
+                'message': message,
+                'status': 'selected',
+                'submission_id': pk
+            }, status=status.HTTP_200_OK)
+
+        else:  # reject
+            submission.status = 'rejected'
+            submission.save(update_fields=['status'])
+            logger.info(
+                f"HR Override: Submission {pk} REJECTED by {request.user}. Reason: {reason}"
+            )
+            return Response({
+                'message': 'Candidate rejected.',
+                'status': 'rejected',
+                'submission_id': pk
+            }, status=status.HTTP_200_OK)
