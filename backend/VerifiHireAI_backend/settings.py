@@ -130,11 +130,11 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'new_db'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
-        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'NAME': config('DB_NAME', default='new_db'),
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default='5432'),
         'CONN_MAX_AGE': 0,  # Set to 0 to close connection at the end of each request (prevents connection exhaustion in dev)
         **({'OPTIONS': db_options} if db_options else {}),
     }
