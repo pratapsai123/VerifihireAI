@@ -286,7 +286,34 @@ class InputDataGenerator:
                 val = matrix_lines
                 output_parts.append('\n'.join(matrix_lines))
             
-            elif b_type == 'raw':
+            elif b_type == 'word_break_input':
+                # Special generator for Word Break problem
+                # Generates a mix of true (segmentable) and false cases — ~50/50
+                import random as _rnd
+                dict_size = block.get('dict_size', 5)
+                base_words = ['cat', 'cats', 'and', 'sand', 'dog', 'app', 'apple', 'pen', 'code', 'node',
+                              'data', 'base', 'key', 'map', 'set', 'list', 'tree', 'heap', 'sort', 'find',
+                              'get', 'put', 'run', 'log', 'net', 'web', 'api', 'bus', 'job', 'tag']
+                chosen_words = _rnd.sample(base_words, min(dict_size, len(base_words)))
+                # 60% chance: build s from concatenating 2-3 words (true case)
+                # 40% chance: use a random string not in dict (false case)
+                if _rnd.random() < 0.6:
+                    # true case: s = concat of 2-3 words from dict
+                    num_words = _rnd.randint(2, 3)
+                    selected = _rnd.choices(chosen_words, k=num_words)
+                    s_val = ''.join(selected)
+                else:
+                    # false case: random string unlikely to be segmentable
+                    false_strings = ['handler', 'interface', 'database', 'runtime', 'gateway',
+                                     'backend', 'frontend', 'network', 'compiler', 'debugger']
+                    s_val = _rnd.choice(false_strings)
+                m_val = len(chosen_words)
+                output_parts.append(s_val)
+                output_parts.append(str(m_val))
+                output_parts.append(' '.join(chosen_words))
+                context['s'] = s_val
+                context['m'] = m_val
+                continue  # skip the normal context[b_name] = val at end
                 # Generate a paragraph of text
                 # Professional, technical, and common terms for "sensible" inputs
                 words = [
@@ -1223,33 +1250,60 @@ def _generate_coding_pool_ai_only(
 
         format_override = ""
         if diff == 'Easy':
-            format_override = """
-CRITICAL OVERRIDE FOR EASY QUESTIONS:
-- Write the problem EXACTLY like a classic LeetCode Easy problem.
-- NO story, NO scenario, NO real-world context. Start directly with the core requirement.
-- Format: "Given an array of integers `nums` and an integer `k`, return..."
-- Keep it purely technical, algorithmic, and instantly understandable.
-- Include an **Input Format** section at the end describing each line.
+            format_override = f"""
+DIFFICULTY: Easy
+STYLE: Pure algorithmic — exactly like LeetCode Easy. No story, no context.
+
+STRUCTURE TO FOLLOW:
+1. One direct sentence: "Given [input], return [output]."
+2. Optionally one clarifying sentence about edge cases or constraints.
+3. Nothing else.
+
+EXAMPLES OF PERFECT EASY PROBLEMS (follow this style exactly):
+- "Given an integer array nums, return true if any value appears at least twice, and false if every element is distinct."
+- "Given an array of integers nums and an integer target, return the indices of the two numbers that add up to target."
+- "Given a string s, find the length of the longest substring without repeating characters."
+
+VARIABLE NAMES: Use lowercase names that match the input schema fields exactly.
+The mathematical logic to implement: {skeleton['logic_desc']}
 """
         elif diff == 'Medium':
-            format_override = """
-CRITICAL OVERRIDE FOR MEDIUM QUESTIONS:
-- Write the problem like a classic LeetCode Medium problem with ONE line of light context.
-- Start with exactly ONE sentence of real-world context related to the JOB DESCRIPTION (e.g., "You are processing a batch of API endpoint names.").
-- Then immediately state the technical requirement clearly (e.g., "Group the anagrams together and return the number of unique groups.").
-- Do NOT write more than 1-2 sentences of context. Keep the rest purely technical.
-- Include an **Input Format** section at the end describing each line.
+            format_override = f"""
+DIFFICULTY: Medium
+STYLE: One sentence of professional context + clear algorithmic requirement. Like LeetCode Medium.
+
+STRUCTURE TO FOLLOW:
+1. ONE sentence of real-world context tied to the job role (e.g., "You are processing server logs for a distributed system.")
+2. ONE or TWO sentences stating the exact algorithmic requirement.
+3. Nothing else. No backstory, no company names, no character names.
+
+EXAMPLES OF PERFECT MEDIUM PROBLEMS (follow this style exactly):
+- "You are analyzing network packet timestamps. Given an array of n integers representing packet arrival times and n integers representing departure times, return the maximum number of packets being processed simultaneously."
+- "You are optimizing a caching system. Given an array of strings representing cache keys, group the keys that are anagrams of each other and return the number of unique groups."
+- "You are processing financial transactions. Given an integer array nums where nums[i] is the price of a stock on day i, return the maximum profit from a single buy-sell transaction."
+
+VARIABLE NAMES: Use lowercase names that match the input schema fields exactly.
+The mathematical logic to implement: {skeleton['logic_desc']}
 """
         elif diff == 'Hard':
-            format_override = """
-CRITICAL OVERRIDE FOR HARD QUESTIONS:
-- Write a FULL real-world story that maps the algorithm to a professional scenario related to the JOB DESCRIPTION.
-- Include WHO (the role), WHERE (the company/department), and WHY (the business goal).
-- Map every variable to real meaning (e.g., n = number of jobs, m = number of servers, nums[i] = processing time).
-- State the business goal BEFORE the algorithm requirement.
-- Then provide the rigorous technical definition, edge cases, and constraints.
-- The story should make the algorithm feel natural and motivated.
-- Include an **Input Format** section at the end describing each line.
+            format_override = f"""
+DIFFICULTY: Hard
+STYLE: 2-3 sentences of professional context that EXACTLY matches the input format. Like LeetCode Hard or HackerRank Hard.
+
+STRICT RULES:
+1. The story MUST describe the EXACT same computation as the mathematical logic below. Do NOT invent a different problem.
+2. If the input is an array of integers, the story must be about processing a list/sequence of values — NOT about designing a class or OOP.
+3. If the input has two values (N and K), both must appear naturally in the story.
+4. Keep it to 2-3 sentences maximum. No long backstories.
+5. End with a precise algorithmic requirement: "Return..." or "Find..." or "Compute..."
+
+EXAMPLES OF PERFECT HARD PROBLEMS (follow this style exactly):
+- "You are building a real-time analytics dashboard that monitors server response times. Given an array of n response times and a window size k, return the maximum response time in each sliding window of size k as the window moves from left to right."
+- "You are implementing a text diff tool for a code review system. Given two code snippets word1 and word2, return the minimum number of single-character edits (insert, delete, or replace) required to transform word1 into word2."
+- "You are designing a flood risk assessment system for a city. Given an elevation map represented as an array of n non-negative integers where each value represents the height of a terrain column, compute the total volume of rainwater that can be trapped between the columns."
+
+VARIABLE NAMES: Use lowercase names that match the input schema fields exactly.
+The mathematical logic to implement: {skeleton['logic_desc']}
 """
 
         # Ask AI ONLY for the story -- NO code generation
@@ -1266,22 +1320,26 @@ MATHEMATICAL LOGIC TO USE (DO NOT CHANGE THE MATH):
 ALREADY GENERATED TITLES (AVOID DUPLICATES): {[c.get('title','') for c in generated] + blacklist}
 {format_override}
 YOUR TASK:
-Write a PROFESSIONAL problem statement that:
-1. Is purely technical, algorithmic, and follows a strict LeetCode style (Do NOT invent background stories or real-world scenarios).
-2. Follows the EXACT mathematical logic described above.
-3. Is clear and easy for a student to understand, while respecting the difficulty level.
+Write a PROFESSIONAL problem statement following the difficulty style above.
+The problem statement must:
+1. Follow the exact style and structure defined in the DIFFICULTY section above.
+2. Implement the EXACT mathematical logic described — do not change the algorithm.
+3. Be instantly clear to a candidate — they should understand what to compute in 15 seconds.
+4. Use variable names that match the input schema fields.
 
 RETURN THIS EXACT JSON FORMAT:
 {{
     "title": "<Professional title related to JD, e.g. 'Optimizing API Response Times'>",
     "problem_statement": "<3-5 sentences describing the scenario. MUST clearly explain: what the input represents, what to compute, and what to output.>",
     "explanation": "<Step-by-step explanation of how to solve it>",
-    "constraints": "<e.g. 1 <= N <= 10^5>"
+    "constraints": "<Write EACH constraint on a separate line. e.g. 1 <= N <= 10^5\n-10^9 <= nums[i] <= 10^9>"
 }}
 
 RULES:
 - DO NOT include any Input Format section, examples, test cases, or sample inputs/outputs in the problem_statement. These will be added automatically by the system.
+- DO NOT use any markdown formatting — no ###, no **, no backticks, no ---, no bullet points with -.
 - Focus ONLY on describing the problem scenario, requirements, and what the candidate must compute.
+- Write in plain sentences only.
 - Return JSON ONLY. No markdown.
 - CRITICAL: You MUST escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure valid JSON!
 - Title must be unique and related to the JD.

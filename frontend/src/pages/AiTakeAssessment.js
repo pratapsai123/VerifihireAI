@@ -104,6 +104,18 @@ const AiTakeAssessment = () => {
 
     const [codeDrafts, setCodeDrafts] = useState({});
 
+    // Detect primary language from job role/skills
+    const detectLanguageFromRole = (roleText) => {
+        if (!roleText) return 'python';
+        const r = roleText.toLowerCase();
+        if (r.includes('java') && !r.includes('javascript')) return 'java';
+        if (r.includes('javascript') || r.includes('node') || r.includes('react') || r.includes('frontend') || r.includes('front-end')) return 'javascript';
+        if (r.includes('c++') || r.includes('cpp')) return 'cpp';
+        if (r.includes('c#') || r.includes('csharp') || r.includes('.net')) return 'csharp';
+        if (r.includes('python') || r.includes('django') || r.includes('flask') || r.includes('fastapi')) return 'python';
+        return 'python'; // default
+    };
+
 
 
     const DEFAULT_BOILERPLATES = {
@@ -272,7 +284,35 @@ const AiTakeAssessment = () => {
 
         }
 
-        return text.replace(/\n/g, '<br />');
+        // Convert markdown to clean HTML for professional display
+        let html = text;
+
+        // Remove raw markdown code fences (```text, ```, ~~~)
+        html = html.replace(/```[\w]*\n?/g, '');
+        html = html.replace(/~~~[\w]*\n?/g, '');
+
+        // Remove horizontal rules (---, ***)
+        html = html.replace(/^[-*]{3,}\s*$/gm, '<hr style="border:none;border-top:1px solid #e5e7eb;margin:12px 0"/>');
+
+        // Convert ### headings
+        html = html.replace(/^###\s+(.+)$/gm, '<h4 style="font-size:0.95rem;font-weight:700;color:#1a5276;margin:12px 0 6px 0">$1</h4>');
+        html = html.replace(/^##\s+(.+)$/gm, '<h3 style="font-size:1rem;font-weight:700;color:#1a5276;margin:14px 0 6px 0">$1</h3>');
+        html = html.replace(/^#\s+(.+)$/gm, '<h2 style="font-size:1.1rem;font-weight:800;color:#1a5276;margin:16px 0 8px 0">$1</h2>');
+
+        // Convert **bold**
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+        // Convert `inline code`
+        html = html.replace(/`([^`]+)`/g, '<code style="background:#f3f4f6;padding:1px 5px;border-radius:4px;font-family:monospace;font-size:0.85em">$1</code>');
+
+        // Convert bullet points (- item or * item)
+        html = html.replace(/^[-*]\s+(.+)$/gm, '<li style="margin:3px 0">$1</li>');
+        html = html.replace(/(<li[^>]*>.*<\/li>\n?)+/g, '<ul style="margin:6px 0;padding-left:20px">$&</ul>');
+
+        // Convert newlines to <br>
+        html = html.replace(/\n/g, '<br />');
+
+        return html;
 
     };
 
@@ -1061,6 +1101,10 @@ const AiTakeAssessment = () => {
                 const data = response.data;
 
                 setAssessment(data);
+
+                // Auto-select language based on job role
+                const detectedLang = detectLanguageFromRole(data.required_skills || data.job_description || '');
+                _setSelectedLanguage(detectedLang);
 
 
 
@@ -2019,9 +2063,7 @@ const AiTakeAssessment = () => {
             if (phase === 'mcq') {
                 setMcqTimeLeft(p => {
                     if (p <= 1) {
-                        // MCQ Timer Expired -> Switch to Coding
-                        setPhase('coding');
-                        return 0;
+                        return 0; // Phase switch handled by the useEffect below
                     }
                     return p - 1;
                 });
@@ -2039,6 +2081,13 @@ const AiTakeAssessment = () => {
 
         return () => clearInterval(timerRef.current);
     }, [isStarted, phase]);
+
+    // MCQ Timer Expired → Auto-switch to Coding section
+    useEffect(() => {
+        if (isStarted && phase === 'mcq' && mcqTimeLeft === 0) {
+            handlePhaseSwitch('coding');
+        }
+    }, [isStarted, mcqTimeLeft, phase]);
 
     // Handle Total Expiry (Master Guard)
     useEffect(() => {
@@ -3553,12 +3602,18 @@ const AiTakeAssessment = () => {
 
                 {codingSection.length > 0 && (
 
-                    <button onClick={() => goToQuestion(mcqSection.length)}
-
-                        style={{ padding: '4px 16px', borderRadius: 20, border: 'none', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', background: currentQ.type === 'coding' ? '#1a5276' : '#f3f4f6', color: currentQ.type === 'coding' ? 'white' : '#374151' }}>
-
-                        Coding ({codingSection.length})
-
+                    <button
+                        onClick={() => { if (phase !== 'mcq') goToQuestion(mcqSection.length); }}
+                        disabled={phase === 'mcq'}
+                        title={phase === 'mcq' ? 'Coding section unlocks after MCQ timer expires' : ''}
+                        style={{
+                            padding: '4px 16px', borderRadius: 20, border: 'none', fontWeight: 700, fontSize: '0.8rem',
+                            cursor: phase === 'mcq' ? 'not-allowed' : 'pointer',
+                            background: phase === 'mcq' ? '#e5e7eb' : currentQ.type === 'coding' ? '#1a5276' : '#f3f4f6',
+                            color: phase === 'mcq' ? '#9ca3af' : currentQ.type === 'coding' ? 'white' : '#374151',
+                            opacity: phase === 'mcq' ? 0.6 : 1
+                        }}>
+                        Coding ({codingSection.length}){phase === 'mcq' ? ' 🔒' : ''}
                     </button>
 
                 )}
@@ -3715,41 +3770,89 @@ const AiTakeAssessment = () => {
 
                                                     (currentQ.example_input ? [{ input: currentQ.example_input, output: currentQ.example_output, explanation: currentQ.explanation }] : [])
 
-                                                ).map((tc, idx) => (
+                                                ).map((tc, idx) => {
 
-                                                    <div key={idx} style={{ marginBottom: '1.2rem' }}>
+                                                    // Format raw input into labeled lines using input_generator_schema
+                                                    const formatInput = (rawInput, schema) => {
+                                                        if (!rawInput || !schema || !Array.isArray(schema)) {
+                                                            return String(rawInput || '').trim();
+                                                        }
+                                                        try {
+                                                            const tokens = String(rawInput).trim().split(/\s+/);
+                                                            let pos = 0;
+                                                            const lines = [];
+                                                            const resolvedCounts = {};
 
-                                                        <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#111827', marginBottom: 8 }}>Example {idx + 1}:</div>
+                                                            for (const field of schema) {
+                                                                if (field.type === 'int' || field.type === 'float') {
+                                                                    const val = tokens[pos++];
+                                                                    const label = field.name || 'n';
+                                                                    resolvedCounts[label] = parseInt(val);
+                                                                    lines.push(`${label} = ${val}`);
+                                                                } else if (field.type === 'string') {
+                                                                    const val = tokens[pos++];
+                                                                    const label = field.name || 's';
+                                                                    lines.push(`${label} = "${val}"`);
+                                                                } else if (field.type === 'array') {
+                                                                    const countKey = field.count_ref;
+                                                                    const count = resolvedCounts[countKey] || field.count || 0;
+                                                                    const arr = tokens.slice(pos, pos + count);
+                                                                    pos += count;
+                                                                    const label = field.name || 'nums';
+                                                                    lines.push(`${label} = [${arr.join(', ')}]`);
+                                                                } else if (field.type === 'matrix') {
+                                                                    const n = resolvedCounts[field.rows_ref] || 0;
+                                                                    const m = resolvedCounts[field.cols_ref] || n;
+                                                                    const rows = [];
+                                                                    for (let r = 0; r < n; r++) {
+                                                                        rows.push('[' + tokens.slice(pos, pos + m).join(', ') + ']');
+                                                                        pos += m;
+                                                                    }
+                                                                    lines.push(`grid = [${rows.join(', ')}]`);
+                                                                } else {
+                                                                    lines.push(tokens[pos++] || '');
+                                                                }
+                                                            }
+                                                            return lines.join('\n');
+                                                        } catch (e) {
+                                                            return String(rawInput || '').trim();
+                                                        }
+                                                    };
 
-                                                        <div style={{
+                                                    const schema = currentQ.input_generator_schema || currentQ.input_schema || null;
+                                                    const formattedInput = formatInput(tc.input, schema);
+                                                    const rawOutput = typeof tc.output === 'object' ? JSON.stringify(tc.output) : String(tc.output || '').trim();
 
-                                                            background: '#f8f9fa',
+                                                    return (
+                                                        <div key={idx} style={{ marginBottom: '1.2rem' }}>
 
-                                                            borderLeft: '2px solid #e5e7eb',
+                                                            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#111827', marginBottom: 8 }}>Example {idx + 1}:</div>
 
-                                                            padding: '10px 15px',
-
-                                                            fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
-
-                                                            fontSize: '0.85rem'
-
-                                                        }}>
-
-                                                            <div style={{ marginBottom: 4 }}><strong style={{ color: '#111827' }}>Input:</strong> {typeof tc.input === 'object' ? JSON.stringify(tc.input) : String(tc.input || '').trim()}</div>
-
-                                                            <div style={{ marginBottom: 4 }}><strong style={{ color: '#111827' }}>Output:</strong> {typeof tc.output === 'object' ? JSON.stringify(tc.output) : String(tc.output || '').trim()}</div>
-
-                                                            {tc.explanation && (
-
-                                                                <div><strong style={{ color: '#111827' }}>Explanation:</strong> {tc.explanation}</div>
-
-                                                            )}
+                                                            <div style={{
+                                                                background: '#f8f9fa',
+                                                                borderLeft: '3px solid #d1d5db',
+                                                                padding: '10px 15px',
+                                                                fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
+                                                                fontSize: '0.85rem',
+                                                                borderRadius: '0 6px 6px 0'
+                                                            }}>
+                                                                <div style={{ marginBottom: 4 }}>
+                                                                    <strong style={{ color: '#111827' }}>Input:</strong>
+                                                                    <pre style={{ margin: '4px 0 0 0', padding: 0, background: 'none', fontSize: '0.85rem', whiteSpace: 'pre-wrap' }}>{formattedInput}</pre>
+                                                                </div>
+                                                                <div style={{ marginBottom: tc.explanation ? 4 : 0 }}>
+                                                                    <strong style={{ color: '#111827' }}>Output:</strong> {rawOutput}
+                                                                </div>
+                                                                {tc.explanation && (
+                                                                    <div style={{ color: '#4b5563', fontFamily: 'inherit', fontStyle: 'italic' }}>
+                                                                        <strong style={{ color: '#111827', fontStyle: 'normal' }}>Explanation:</strong> {tc.explanation}
+                                                                    </div>
+                                                                )}
+                                                            </div>
 
                                                         </div>
-
-                                                    </div>
-
-                                                ))}
+                                                    );
+                                                })}
 
                                             </div>
 
@@ -3767,13 +3870,21 @@ const AiTakeAssessment = () => {
 
                                                 <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#111827', fontSize: '0.85rem', lineHeight: 1.6 }}>
 
-                                                    {Array.isArray(currentQ.constraints)
-
-                                                        ? currentQ.constraints.map((c, i) => <li key={i} style={{ marginBottom: 4 }}><code>{c}</code></li>)
-
-                                                        : <li style={{ marginBottom: 4 }}><code>{currentQ.constraints}</code></li>
-
-                                                    }
+                                                    {(() => {
+                                                        // Normalize constraints to array — split on comma or newline if string
+                                                        let items = currentQ.constraints;
+                                                        if (!Array.isArray(items)) {
+                                                            items = String(items)
+                                                                .split(/,\s*|\n/)
+                                                                .map(s => s.trim())
+                                                                .filter(s => s.length > 0);
+                                                        }
+                                                        return items.map((c, i) => (
+                                                            <li key={i} style={{ marginBottom: 4 }}>
+                                                                <code style={{ background: '#f3f4f6', padding: '1px 6px', borderRadius: 4, fontSize: '0.82rem' }}>{c}</code>
+                                                            </li>
+                                                        ));
+                                                    })()}
 
                                                 </ul>
 

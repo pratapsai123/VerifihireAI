@@ -278,9 +278,212 @@ def call_llm_with_backoff(
             raise e
 
 
-# ─── Backward Compatibility Aliases ──────────────────────────────────────────
-# These allow existing code that imports GroqKeyManager to continue working
-# during the migration period.
+# ─── Groq Key Manager (for Resume Screening) ─────────────────────────────────
 
-GroqKeyManager = LLMKeyManager
+class GroqKeyManager:
+    """
+    Thread-safe Groq API key manager with round-robin rotation.
+    Used exclusively for resume screening (fast, free-tier Groq).
+    Falls back to DeepSeek if all Groq keys are exhausted.
+    """
+    _current_index = 0
+    _lock = threading.Lock()
+    _key_usage_count = {}
+
+    @classmethod
+    def _get_keys(cls):
+        return getattr(settings, 'GROQ_API_KEYS', [])
+
+    @classmethod
+    def get_current_key(cls):
+        keys = cls._get_keys()
+        if not keys:
+            return None
+        with cls._lock:
+            key = keys[cls._current_index % len(keys)]
+            cls._key_usage_count[cls._current_index] = cls._key_usage_count.get(cls._current_index, 0) + 1
+            return key
+
+    @classmethod
+    def get_least_used_key(cls):
+        keys = cls._get_keys()
+        if not keys:
+            return None
+        with cls._lock:
+            if not cls._key_usage_count:
+                return keys[0]
+            min_idx = min(range(len(keys)), key=lambda i: cls._key_usage_count.get(i, 0))
+            cls._key_usage_count[min_idx] = cls._key_usage_count.get(min_idx, 0) + 1
+            return keys[min_idx]
+
+    @classmethod
+    def rotate_key(cls):
+        keys = cls._get_keys()
+        if keys and len(keys) > 1:
+            with cls._lock:
+                old_idx = cls._current_index
+                cls._current_index = (cls._current_index + 1) % len(keys)
+                logger.warning(
+                    f"GROQ KEY ROTATION: Rate limit at index {old_idx}. "
+                    f"Switched to key index {cls._current_index}"
+                )
+                return True
+        return False
+
+    @classmethod
+    def get_usage_stats(cls):
+        keys = cls._get_keys()
+        with cls._lock:
+            return {
+                'total_keys': len(keys),
+                'current_index': cls._current_index,
+                'usage_per_key': {i: cls._key_usage_count.get(i, 0) for i in range(len(keys))}
+            }
+
+
+def create_groq_client(api_key=None, timeout=60.0):
+    """
+    Create an OpenAI-compatible client pointing at Groq.
+    Used for resume screening — fast and free-tier friendly.
+    """
+    key = api_key or GroqKeyManager.get_current_key()
+    if not key:
+        raise ValueError(
+            "No Groq API key configured. "
+            "Set GROQ_API_KEYS in settings.py"
+        )
+    return OpenAI(
+        api_key=key,
+        base_url="https://api.groq.com/openai/v1",
+        timeout=timeout,
+    )
+
+
+def get_groq_model():
+    """Returns the primary Groq model (70b) for resume screening."""
+    return getattr(settings, 'GROQ_MODEL_PRIMARY', 'llama-3.3-70b-versatile')
+
+
+def get_groq_fallback_model():
+    """Returns the fallback Groq model (8b) when all 70b attempts fail."""
+    return getattr(settings, 'GROQ_MODEL_FALLBACK', 'llama3-8b-8192')
+
+
+def call_groq_with_backoff(
+    client=None,
+    prompt=None,
+    system_msg=None,
+    is_json=True,
+    **kwargs
+):
+    """
+    Groq-only wrapper with 2-phase model fallback + circular key rotation.
+    NO DeepSeek — Groq only.
+
+    Phase 1 (70b):  Key 1 → Key 2 → Key 3
+    Phase 2 (8b):   Key 1 → Key 2 → Key 3  (if ALL 70b attempts failed)
+
+    If Phase 2 also fully fails → raises RuntimeError.
+    """
+    keys = GroqKeyManager._get_keys()
+    if not keys:
+        raise ValueError("No GROQ_API_KEYS configured in settings.py")
+
+    primary_model  = get_groq_model()           # 70b
+    fallback_model = get_groq_fallback_model()  # 8b
+
+    # Pop model kwarg — we control the model internally
+    kwargs.pop('model', None)
+
+    # Build messages
+    messages = kwargs.pop('messages', [])
+    if not messages and prompt:
+        messages = []
+        if system_msg:
+            messages.append({"role": "system", "content": system_msg})
+        messages.append({"role": "user", "content": prompt})
+
+    response_format = kwargs.pop('response_format', None)
+    if not response_format and is_json:
+        response_format = {"type": "json_object"}
+
+    def _try_key(model, key_idx):
+        """Single attempt with a specific model + key. Returns result or raises."""
+        groq_key = keys[key_idx]
+        groq_client = create_groq_client(api_key=groq_key)
+        create_kwargs = {"model": model, "messages": messages, **kwargs}
+        if response_format:
+            create_kwargs["response_format"] = response_format
+        resp = groq_client.chat.completions.create(**create_kwargs)
+        content = resp.choices[0].message.content
+        if is_json:
+            try:
+                return json.loads(content)
+            except json.JSONDecodeError:
+                from ai_candidates.views import extract_json
+                return extract_json(content)
+        return content
+
+    def _is_rate_limit(e):
+        err = str(e).lower()
+        return isinstance(e, RateLimitError) or "429" in err or "rate" in err
+
+    # ── Phase 1: 70b across all 3 keys ──────────────────────────────────────
+    logger.info(f"Groq Phase 1: trying {primary_model} across {len(keys)} keys")
+    for key_idx in range(len(keys)):
+        try:
+            result = _try_key(primary_model, key_idx)
+            logger.info(f"Groq Phase 1 success: {primary_model} key {key_idx + 1}")
+            return result
+        except (RateLimitError, APIConnectionError, APITimeoutError) as e:
+            logger.warning(
+                f"Groq Phase 1 — {primary_model} key {key_idx + 1}/{len(keys)} failed: {type(e).__name__}. "
+                f"{'Trying next key...' if key_idx < len(keys) - 1 else 'All 70b keys exhausted.'}"
+            )
+            time.sleep(2)
+            continue
+        except Exception as e:
+            if _is_rate_limit(e):
+                logger.warning(f"Groq Phase 1 — {primary_model} key {key_idx + 1} rate-limited. Rotating...")
+                time.sleep(2)
+                continue
+            logger.error(f"Groq Phase 1 — {primary_model} key {key_idx + 1} error: {e}. Rotating...")
+            time.sleep(1)
+            continue
+
+    # ── Phase 2: 8b across all 3 keys (starting from Key 1 again) ───────────
+    logger.warning(
+        f"Groq Phase 1 fully exhausted ({primary_model}). "
+        f"Starting Phase 2 with {fallback_model} from Key 1."
+    )
+    for key_idx in range(len(keys)):
+        try:
+            result = _try_key(fallback_model, key_idx)
+            logger.info(f"Groq Phase 2 success: {fallback_model} key {key_idx + 1}")
+            return result
+        except (RateLimitError, APIConnectionError, APITimeoutError) as e:
+            logger.warning(
+                f"Groq Phase 2 — {fallback_model} key {key_idx + 1}/{len(keys)} failed: {type(e).__name__}. "
+                f"{'Trying next key...' if key_idx < len(keys) - 1 else 'All 8b keys exhausted.'}"
+            )
+            time.sleep(2)
+            continue
+        except Exception as e:
+            if _is_rate_limit(e):
+                logger.warning(f"Groq Phase 2 — {fallback_model} key {key_idx + 1} rate-limited. Rotating...")
+                time.sleep(2)
+                continue
+            logger.error(f"Groq Phase 2 — {fallback_model} key {key_idx + 1} error: {e}. Rotating...")
+            time.sleep(1)
+            continue
+
+    raise RuntimeError(
+        f"Groq resume screening failed completely. "
+        f"Phase 1 ({primary_model}) and Phase 2 ({fallback_model}) both exhausted all {len(keys)} keys."
+    )
+
+
+# ─── Backward Compatibility Aliases ──────────────────────────────────────────
+# These allow existing code that imports GroqKeyManager to continue working.
+
 _call_groq_with_backoff = call_llm_with_backoff

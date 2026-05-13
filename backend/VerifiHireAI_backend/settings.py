@@ -293,14 +293,16 @@ DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-a
 # Legacy aliases so existing references don't break during migration
 DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
 
-# ── GROQ Keys for Resume Screening Fallback ──
+# ── GROQ Keys for Resume Screening ──
 GROQ_API_KEYS = [
     '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',
     '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',
     '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',
 ]
 GROQ_API_KEY = GROQ_API_KEYS[0]
-
+GROQ_MODEL_PRIMARY = 'llama-3.3-70b-versatile'   # Phase 1: try all 3 keys with 70b
+GROQ_MODEL_FALLBACK = 'llama3-8b-8192'           # Phase 2: all 3 keys failed on 70b, retry with 8b
+GROQ_MODEL = GROQ_MODEL_PRIMARY                  # default alias
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
 from datetime import timedelta
