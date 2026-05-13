@@ -495,7 +495,7 @@ export default function Result() {
                     </div>
                     <div className="top-actions">
                         <button className="btn-top-primary" type="button" onClick={() => load()}>Refresh</button>
-                        <button className="btn-top-secondary" type="button" onClick={() => navigate('/assessments')}>Back to Assessments</button>
+                        <button className="btn-top-secondary" type="button" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
                     </div>
                 </div>
 

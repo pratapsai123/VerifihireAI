@@ -1266,9 +1266,19 @@ def _update_submission_scoring_logic(submission, finalize=False):
         
         # 7. Get Integrity Score
         integrity_score = 100.0
+        is_identity_mismatch = False
         try:
             if hasattr(inv, 'integrity') and inv.integrity:
                  integrity_score = float(inv.integrity.integrity_score)
+                 # Continuous Identity Check
+                 if not getattr(inv.integrity, 'identity_verified', True):
+                     is_identity_mismatch = True
+            
+            # Baseline Identity Check (from registration)
+            details = CandidateDetails.objects.filter(token=inv.token).first()
+            if details:
+                if getattr(details, 'identity_mismatch_detected', False) or getattr(details, 'identity_mismatch', False):
+                    is_identity_mismatch = True
         except Exception:
             pass
 
@@ -1301,7 +1311,7 @@ def _update_submission_scoring_logic(submission, finalize=False):
         elif has_coding and not passed_coding:
             submission.is_qualified = False
             submission.result = 'rejected'
-        elif not passed_integrity:
+        elif not passed_integrity or is_identity_mismatch:
             submission.is_qualified = False
             submission.result = 'hold'
         else:
