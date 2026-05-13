@@ -1371,7 +1371,13 @@ export default function TakeAssessment() {
     };
 
     const handleBlur = () => {
-      showAiEvent('WINDOW BLURRED', true, 'window_switch');
+      // Small timeout to filter out momentary focus shifts (like clicking radio buttons/checkboxes)
+      // and verify if the window is truly blurred via document.hasFocus()
+      setTimeout(() => {
+        if (!document.hasFocus()) {
+          showAiEvent('WINDOW BLURRED', true, 'window_switch');
+        }
+      }, 250);
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange, { capture: true });
@@ -2183,7 +2189,6 @@ export default function TakeAssessment() {
                     <div className="q-top">
                       <div className="q-num">Question {activeQuestionIndex + 1}</div>
                       <div className="q-meta">
-                        {currentQuestion.skill ? <span className="pill">{currentQuestion.skill}</span> : null}
                         {currentQuestion.question_type ? <span className="pill gray">{currentQuestion.question_type}</span> : null}
                       </div>
                     </div>

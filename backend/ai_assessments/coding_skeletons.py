@@ -432,7 +432,7 @@ if __name__ == "__main__":
             "logic_desc": "Return an array where each element is the product of all elements in the input array except itself. You cannot use division.",
             "difficulty": "Medium",
             "category": "Array",
-            "input_schema": [{"type": "int", "name": "N", "min": 2, "max": 15}, {"type": "array", "count_ref": "N", "item": {"type": "int", "min": 1, "max": 10}}],
+            "input_schema": [{"type": "int", "name": "n", "min": 2, "max": 6}, {"type": "array", "count_ref": "n", "item": {"type": "int", "min": 1, "max": 5}}],
             "gold_solution": """import sys
 def main():
     input_data = sys.stdin.read().split()
@@ -6793,7 +6793,10 @@ if __name__ == "__main__":
             "logic_desc": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words. Return true or false.",
             "difficulty": "Medium",
             "category": "Dynamic Programming",
-            "input_schema": [{"type": "string", "name": "S", "length": 15}, {"type": "int", "name": "M", "min": 2, "max": 5}, {"type": "array", "count_ref": "M", "item": {"type": "string", "length": 8}}],
+            "input_schema": [{"type": "word_break_input", "name": "s", "dict_size": 5, "word_len": 4}],
+            "problem_statement": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a sequence of one or more dictionary words, and false otherwise. The same dictionary word may be reused multiple times.",
+            "constraints": "1 <= s.length <= 20\n1 <= wordDict.length <= 5\n1 <= wordDict[i].length <= 8",
+            "explanation": "Use dynamic programming. dp[i] = true means s[0..i] can be segmented. For each position i, check all j < i: if dp[j] is true and s[j:i] is in the dictionary, set dp[i] = true.",
             "gold_solution": """import sys
 def main():
     data = sys.stdin.read().split()

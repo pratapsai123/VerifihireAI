@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build && powershell -Command \"if (Test-Path '../admin-build') { Remove-Item -Path '../admin-build/*' -Recurse -Force } else { New-Item -Path '../admin-build' -ItemType Directory }; Copy-Item -Path 'dist/*' -Destination '../admin-build' -Recurse -Force\"",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -361,7 +361,23 @@ def interview_invitations_overview_view(request):
         qs = qs[:500]
         results = []
         for inv in qs:
-            feedback = getattr(inv, 'feedback', None)
+            feedbacks_qs = inv.feedbacks.all()
+            feedbacks_list = []
+            for f in feedbacks_qs:
+                feedbacks_list.append({
+                    'participant_name': f.participant_name,
+                    'participant_email': f.participant_email,
+                    'interviewer_feedback': f.interviewer_feedback,
+                    'interviewer_rating': f.interviewer_rating,
+                    'interviewer_technical_rating': f.interviewer_technical_rating,
+                    'interviewer_communication_rating': f.interviewer_communication_rating,
+                    'interviewer_team_fit_rating': f.interviewer_team_fit_rating,
+                    'interviewer_average_rating': f.interviewer_average_rating,
+                    'candidate_feedback': f.candidate_feedback,
+                    'candidate_rating': f.candidate_rating,
+                    'updated_at': f.updated_at.isoformat() if f.updated_at else None,
+                })
+                
             results.append(
                 {
                     'id': inv.id,
@@ -384,17 +400,9 @@ def interview_invitations_overview_view(request):
                         'name': inv.interview.name if inv.interview else None,
                         'description': inv.interview.description if inv.interview else None,
                     } if inv.interview_id else None,
-                    'feedback': {
-                        'interviewer_feedback': feedback.interviewer_feedback,
-                        'interviewer_rating': feedback.interviewer_rating,
-                        'interviewer_technical_rating': feedback.interviewer_technical_rating,
-                        'interviewer_communication_rating': feedback.interviewer_communication_rating,
-                        'interviewer_team_fit_rating': feedback.interviewer_team_fit_rating,
-                        'interviewer_average_rating': feedback.interviewer_average_rating,
-                        'candidate_feedback': feedback.candidate_feedback,
-                        'candidate_rating': feedback.candidate_rating,
-                        'updated_at': feedback.updated_at.isoformat() if feedback.updated_at else None,
-                    } if feedback else None
+                    'feedbacks': feedbacks_list,
+                    # Keep legacy 'feedback' field for backward compatibility (pick first one)
+                    'feedback': feedbacks_list[0] if feedbacks_list else None
                 }
             )
 
@@ -838,20 +846,49 @@ def submit_interview_feedback(request):
         try:
             uuid_token = uuid.UUID(str(token))
         except ValueError:
-             print(f"DEBUG: Invalid token format: {token}")
              return Response({'error': 'Invalid token format.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Try finding invitation by token
+        # Try finding invitation by token (could be session token or participant token)
         invitation = InterviewInvitation.objects.filter(token=uuid_token).first()
+        participant = None
         
         if not invitation:
-            print(f"DEBUG: No invitation found for token: {token}")
-            return Response({'error': 'Invalid token.'}, status=status.HTTP_404_NOT_FOUND)
+            # Check if it's a participant token
+            participant = InterviewParticipant.objects.filter(token=uuid_token).select_related('session').first()
+            if participant:
+                invitation = participant.session
+            else:
+                return Response({'error': 'Invalid token.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Check if feedback object exists
+        # Check if participant_token was explicitly provided in data
+        participant_token = data.get('participant_token')
+        if participant_token and not participant:
+            try:
+                p_uuid = uuid.UUID(str(participant_token))
+                participant = InterviewParticipant.objects.filter(token=p_uuid).first()
+            except:
+                pass
+
+        # Check if feedback object exists for this participant/session
         from api.models import LiveInterviewFeedback
-        feedback_obj, created = LiveInterviewFeedback.objects.get_or_create(invitation=invitation)
-        print(f"DEBUG: Feedback object {'created' if created else 'found'}: {feedback_obj}")
+        
+        # Try to find existing feedback for this participant in this session
+        if participant:
+            feedback_obj, created = LiveInterviewFeedback.objects.get_or_create(
+                invitation=invitation,
+                participant=participant,
+                defaults={
+                    'participant_name': participant.name,
+                    'participant_email': participant.email
+                }
+            )
+        else:
+            # Fallback: find a feedback record for this session that has NO participant linked (legacy or generic)
+            # Or if it's a candidate and we don't have their participant record, create one for the session
+            feedback_obj, created = LiveInterviewFeedback.objects.get_or_create(
+                invitation=invitation,
+                participant=None
+            )
 
         if role == 'interviewer':
             feedback_obj.interviewer_feedback = feedback_text
@@ -884,14 +921,17 @@ def submit_interview_feedback(request):
                 except ValueError:
                     pass
         
+        # Ensure participant details are saved if we have them
+        if participant:
+            feedback_obj.participant_name = participant.name
+            feedback_obj.participant_email = participant.email
+
         feedback_obj.save()
-        print(f"DEBUG: Feedback saved successfully for role: {role}")
 
         # Mark the invitation as completed when the interviewer submits feedback
         if role == 'interviewer':
             invitation.status = 'completed'
             invitation.save(update_fields=['status', 'updated_at'])
-            print(f"DEBUG: Invitation {invitation.id} status updated to 'completed'")
 
         return Response({'success': True, 'message': 'Feedback submitted successfully.'}, status=status.HTTP_200_OK)
 
