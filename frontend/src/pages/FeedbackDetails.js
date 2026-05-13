@@ -47,62 +47,78 @@ export default function FeedbackDetails() {
                 <h1 style={{ marginTop: 0, marginBottom: '0.5rem', color: '#1e293b' }}>Interview Feedback</h1>
                 <p style={{ color: '#64748b', marginBottom: '2rem' }}>
                     <strong>Candidate:</strong> {inv.name || 'N/A'} &nbsp;|&nbsp;
-                    <strong>Interviewer:</strong> {inv.interviewer_name || 'N/A'} &nbsp;|&nbsp;
-                    <strong>Role:</strong> {inv.interview?.name || 'N/A'}
+                    <strong>Interview:</strong> {inv.interview?.name || 'N/A'}
                 </p>
 
-                {feedback ? (
+                {inv.feedbacks && inv.feedbacks.length > 0 ? (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
-                        {/* Interviewer Feedback Section */}
-                        <div style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #3b82f6' }}>
-                            <h2 style={{ marginTop: 0, color: '#0f172a', fontSize: '1.25rem' }}>Interviewer's Assessment</h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1rem 0' }}>
-                                <div>
-                                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Overall Rating</div>
-                                    {renderStars(feedback.interviewer_average_rating || feedback.interviewer_rating)}
+                        {/* Interviewer/Panelist Feedback */}
+                        {inv.feedbacks.filter(f => f.interviewer_feedback || f.interviewer_rating).map((f, idx) => (
+                            <div key={idx} style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #3b82f6', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                    <h2 style={{ margin: 0, color: '#0f172a', fontSize: '1.25rem' }}>
+                                        {f.participant_name ? `${f.participant_name}'s Feedback` : idx === 0 ? "Interviewer's Feedback" : `Panelist ${idx} Feedback`}
+                                    </h2>
+                                    {f.participant_email && (
+                                        <span style={{ fontSize: '0.875rem', color: '#64748b' }}>{f.participant_email}</span>
+                                    )}
                                 </div>
-                                {feedback.interviewer_technical_rating && (
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1rem 0' }}>
                                     <div>
-                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Technical Rating</div>
-                                        {renderStars(feedback.interviewer_technical_rating)}
+                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Overall Rating</div>
+                                        {renderStars(f.interviewer_average_rating || f.interviewer_rating)}
                                     </div>
-                                )}
-                                {feedback.interviewer_communication_rating && (
-                                    <div>
-                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Communication Rating</div>
-                                        {renderStars(feedback.interviewer_communication_rating)}
+                                    {f.interviewer_technical_rating && (
+                                        <div>
+                                            <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Technical Rating</div>
+                                            {renderStars(f.interviewer_technical_rating)}
+                                        </div>
+                                    )}
+                                    {f.interviewer_communication_rating && (
+                                        <div>
+                                            <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Communication Rating</div>
+                                            {renderStars(f.interviewer_communication_rating)}
+                                        </div>
+                                    )}
+                                    {f.interviewer_team_fit_rating && (
+                                        <div>
+                                            <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Team Fit Rating</div>
+                                            {renderStars(f.interviewer_team_fit_rating)}
+                                        </div>
+                                    )}
+                                </div>
+                                <div style={{ marginTop: '1rem' }}>
+                                    <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#334155' }}>Feedback Notes:</strong>
+                                    <div style={{ whiteSpace: 'pre-wrap', color: '#475569', lineHeight: '1.5', background: '#fff', padding: '1rem', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                                        {f.interviewer_feedback || 'No written feedback provided.'}
                                     </div>
-                                )}
-                                {feedback.interviewer_team_fit_rating && (
-                                    <div>
-                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Team Fit Rating</div>
-                                        {renderStars(feedback.interviewer_team_fit_rating)}
+                                </div>
+                                {f.updated_at && (
+                                    <div style={{ marginTop: '1rem', textAlign: 'right', fontSize: '0.75rem', color: '#94a3b8' }}>
+                                        Submitted on: {new Date(f.updated_at).toLocaleString()}
                                     </div>
                                 )}
                             </div>
-                            <div style={{ marginTop: '1rem' }}>
-                                <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#334155' }}>Feedback Notes:</strong>
-                                <div style={{ whiteSpace: 'pre-wrap', color: '#475569', lineHeight: '1.5', background: '#fff', padding: '1rem', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
-                                    {feedback.interviewer_feedback || 'No written feedback provided.'}
-                                </div>
-                            </div>
-                        </div>
+                        ))}
 
                         {/* Candidate Feedback Section */}
-                        <div style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #10b981' }}>
-                            <h2 style={{ marginTop: 0, color: '#0f172a', fontSize: '1.25rem' }}>Candidate's Experience</h2>
-                            <div style={{ margin: '1rem 0' }}>
-                                <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Candidate Rating</div>
-                                {renderStars(feedback.candidate_rating)}
-                            </div>
-                            <div style={{ marginTop: '1rem' }}>
-                                <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#334155' }}>Feedback Notes:</strong>
-                                <div style={{ whiteSpace: 'pre-wrap', color: '#475569', lineHeight: '1.5', background: '#fff', padding: '1rem', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
-                                    {feedback.candidate_feedback || 'No written feedback provided.'}
+                        {inv.feedbacks.filter(f => f.candidate_feedback || f.candidate_rating).map((f, idx) => (
+                            <div key={`cand-${idx}`} style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #10b981', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+                                <h2 style={{ marginTop: 0, color: '#0f172a', fontSize: '1.25rem' }}>Candidate's Experience</h2>
+                                <div style={{ margin: '1rem 0' }}>
+                                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem' }}>Candidate Rating</div>
+                                    {renderStars(f.candidate_rating)}
+                                </div>
+                                <div style={{ marginTop: '1rem' }}>
+                                    <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#334155' }}>Feedback Notes:</strong>
+                                    <div style={{ whiteSpace: 'pre-wrap', color: '#475569', lineHeight: '1.5', background: '#fff', padding: '1rem', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                                        {f.candidate_feedback || 'No written feedback provided.'}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ))}
 
                     </div>
                 ) : (

@@ -522,6 +522,7 @@ function LiveInterviewInterviewer() {
 
     axios.post(`${API_BASE_URL}/submit-interview-feedback/`, {
       token: sessionId,
+      participant_token: participantToken,
       feedback: feedback,
       rating: ratings.overallRating,
       technical_rating: technicalSkill,

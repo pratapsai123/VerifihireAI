@@ -1506,11 +1506,20 @@ class LiveInterviewFeedback(models.Model):
     """
     Stores feedback for live interviews from both interviewer and candidate.
     """
-    invitation = models.OneToOneField(
+    invitation = models.ForeignKey(
         'InterviewInvitation',
         on_delete=models.CASCADE,
-        related_name='feedback',
+        related_name='feedbacks',
     )
+    participant = models.ForeignKey(
+        'InterviewParticipant',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='feedbacks'
+    )
+    participant_name = models.CharField(max_length=255, blank=True, null=True)
+    participant_email = models.EmailField(blank=True, null=True)
     
     interviewer_feedback = models.TextField(blank=True, null=True)
     candidate_feedback = models.TextField(blank=True, null=True)
@@ -1530,6 +1539,7 @@ class LiveInterviewFeedback(models.Model):
         db_table = 'live_interview_feedback'
         verbose_name = "Live Interview Feedback"
         verbose_name_plural = "Live Interview Feedbacks"
+        unique_together = ('invitation', 'participant')
 
     def __str__(self):
         return f"Feedback for Invitation #{self.invitation_id}"
