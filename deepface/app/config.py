@@ -7,6 +7,7 @@ Modify these values to calibrate the system for your environment.
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # ──────────────────────────────────────────────
 # PATHS
@@ -19,45 +20,17 @@ REPORTS_DIR = BASE_DIR / "reports"
 DB_PATH = DATA_DIR / "proctoring.db"  # Legacy — kept for reference only
 
 # ──────────────────────────────────────────────
-# POSTGRESQL — reads from VerifiHireAI settings.py
+# POSTGRESQL — loads from backend .env (single source of truth)
 # ──────────────────────────────────────────────
-def _read_django_db_config() -> dict:
-    """
-    Parse the Django settings.py to extract DATABASES default values.
-    This ensures deepface always uses the same DB credentials as the
-    main backend — a single source of truth.
-    """
-    import re
-    settings_path = BASE_DIR.parent / "backend" / "VerifiHireAI_backend" / "settings.py"
+# Load the same .env file that the Django backend uses
+_env_path = BASE_DIR.parent / "backend" / ".env"
+load_dotenv(_env_path, override=False)  # won't override vars already set in the OS environment
 
-    defaults = {
-        "DB_NAME": "verifihir",
-        "DB_USER": "postgres",
-        "DB_PASSWORD": "1234",
-        "DB_HOST": "127.0.0.1",
-        "DB_PORT": "5432",
-    }
-
-    try:
-        text = settings_path.read_text(encoding="utf-8")
-        # Extract defaults from: os.environ.get('DB_NAME', 'verifihir')
-        for key in defaults:
-            pattern = rf"os\.environ\.get\(\s*['\"]({key})['\"].*?['\"](.+?)['\"]\s*\)"
-            match = re.search(pattern, text)
-            if match:
-                defaults[key] = match.group(2)
-    except Exception:
-        pass  # Fall back to hardcoded defaults if settings.py can't be read
-
-    # Environment variables always win (same vars as Django uses)
-    return {k: os.getenv(k, v) for k, v in defaults.items()}
-
-_pg = _read_django_db_config()
-PG_HOST = _pg["DB_HOST"]
-PG_PORT = int(_pg["DB_PORT"])
-PG_NAME = _pg["DB_NAME"]
-PG_USER = _pg["DB_USER"]
-PG_PASSWORD = _pg["DB_PASSWORD"]
+PG_HOST = os.getenv("DB_HOST", "127.0.0.1")
+PG_PORT = int(os.getenv("DB_PORT", "5432"))
+PG_NAME = os.getenv("DB_NAME", "")
+PG_USER = os.getenv("DB_USER", "postgres")
+PG_PASSWORD = os.getenv("DB_PASSWORD", "")
 
 # Ensure directories exist
 for d in [DATA_DIR, REGISTERED_FACES_DIR, LOGS_DIR, REPORTS_DIR]:

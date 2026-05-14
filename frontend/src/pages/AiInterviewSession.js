@@ -1187,6 +1187,7 @@ const AiInterviewSession = () => {
                 setIsRecording(true);
                 isRecordingRef.current = true;
                 setAiStatus("Connecting to AssemblyAI...");
+                lastSpokenTimeRef.current = Date.now();
 
                 // FIX (Security): Fetch short-lived token from backend instead of exposing API key
                 let assemblyToken = "";
