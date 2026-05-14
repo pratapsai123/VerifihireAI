@@ -370,3 +370,108 @@ def send_interview_confirmation_task(slot_id):
         logger.error(f"Error in send_interview_confirmation_task: {str(e)}")
         import traceback
         logger.error(traceback.format_exc())
+
+
+@shared_task
+def send_qualification_request_email_task(request_id):
+    from .models import QualificationRequest, UserProfile
+    from django.core.mail import send_mail
+    from django.conf import settings
+    
+    logger.info(f"Executing send_qualification_request_email_task for request {request_id}")
+    try:
+        qual_req = QualificationRequest.objects.select_related('requester').get(id=request_id)
+        requester = qual_req.requester
+        
+        if not requester or not requester.company:
+            return
+            
+        # Find company admins and app admins
+        admins = UserProfile.objects.filter(
+            company=requester.company,
+            role=UserProfile.ROLE_COMPANY_ADMIN
+        ).values_list('email', flat=True)
+        
+        app_admins = UserProfile.objects.filter(
+            role=UserProfile.ROLE_APPLICATION_ADMIN
+        ).values_list('email', flat=True)
+        
+        admin_emails = list(admins) + list(app_admins)
+        if not admin_emails:
+            logger.warning(f"No admins found for company {requester.company.name}")
+            return
+            
+        subject = f"New Qualification Request Pending Approval: {qual_req.candidate_name}"
+        message = f"""Hello Admin,
+
+A new qualification request has been submitted by {requester.first_name or requester.email} for candidate {qual_req.candidate_name}.
+
+Requested Status: {qual_req.requested_result}
+Reason: {qual_req.reason}
+
+Please log in to the dashboard and go to Settings to review and approve or reject this request.
+
+Best regards,
+VerifiHire Team"""
+        
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=admin_emails,
+            fail_silently=True
+        )
+        logger.info(f"Sent qualification request email to {len(admin_emails)} admins.")
+    except Exception as e:
+        logger.error(f"Error in send_qualification_request_email_task: {str(e)}")
+
+
+
+@shared_task
+def send_qualification_action_email_task(request_id, action, reason=None):
+    from .models import QualificationRequest
+    from django.core.mail import send_mail
+    from django.conf import settings
+    
+    logger.info(f"Executing send_qualification_action_email_task for request {request_id}")
+    try:
+        qual_req = QualificationRequest.objects.select_related('requester', 'actioned_by').get(id=request_id)
+        requester = qual_req.requester
+        
+        if not requester or not requester.email:
+            logger.warning(f"No email found for requester of request {request_id}")
+            return
+            
+        admin_name = qual_req.actioned_by.first_name or qual_req.actioned_by.email if qual_req.actioned_by else "an Admin"
+        
+        subject = f"Qualification Request {action.title()}: {qual_req.candidate_name}"
+        
+        if action == 'approved':
+            message = f"""Hello {requester.first_name or 'HR'},
+
+Your qualification request for candidate {qual_req.candidate_name} has been APPROVED by {admin_name}.
+The candidate's status has been successfully updated to '{qual_req.requested_result}'.
+
+Best regards,
+VerifiHire Team"""
+        else:
+            message = f"""Hello {requester.first_name or 'HR'},
+
+Your qualification request for candidate {qual_req.candidate_name} has been REJECTED by {admin_name}.
+
+Reason for rejection: {reason or qual_req.rejection_reason or 'No reason provided.'}
+
+Best regards,
+VerifiHire Team"""
+        
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[requester.email],
+            fail_silently=True
+        )
+        logger.info(f"Sent qualification action email to {requester.email}")
+    except Exception as e:
+        logger.error(f"Error in send_qualification_action_email_task: {str(e)}")
+

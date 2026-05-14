@@ -68,6 +68,14 @@ const Settings = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterDate, setFilterDate] = useState('');
 
+    // Qualification Requests state
+    const [qualRequests, setQualRequests] = useState([]);
+    const [qualLoading, setQualLoading] = useState(false);
+    const [qualReviewPopup, setQualReviewPopup] = useState(null); // { req }
+    const [qualRejectReason, setQualRejectReason] = useState('');
+    const [qualRejectMode, setQualRejectMode] = useState(false);
+    const [downloadingQualId, setDownloadingQualId] = useState(null);
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -75,6 +83,7 @@ const Settings = () => {
         }
         loadSettings();
         loadRequests();
+        loadQualRequests();
     }, []);
 
     const loadSettings = async () => {
@@ -92,9 +101,55 @@ const Settings = () => {
             const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/`);
             setRequests(res.data);
         } catch (err) {
-            setError("Failed to load deletion requests.");
+            setError('Failed to load deletion requests.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const loadQualRequests = async () => {
+        setQualLoading(true);
+        try {
+            const res = await axios.get(`${API_BASE_URL}/workflow/qualification-requests/`);
+            setQualRequests(res.data);
+        } catch (err) {
+            console.error('Failed to load qualification requests.');
+        } finally {
+            setQualLoading(false);
+        }
+    };
+
+    const handleQualAction = async (reqId, action, reason = '') => {
+        try {
+            await axios.post(`${API_BASE_URL}/workflow/qualification-requests/${reqId}/action/`, { action, reason });
+            setMessage(`Request ${action}ed successfully.`);
+            setQualReviewPopup(null);
+            setQualRejectMode(false);
+            setQualRejectReason('');
+            loadQualRequests();
+            setTimeout(() => setMessage(''), 3000);
+        } catch (err) {
+            setError(err.response?.data?.error || `Failed to ${action} request.`);
+        }
+    };
+
+    const handleDownloadQualReport = async (req) => {
+        if (!req.report_url) return;
+        setDownloadingQualId(req.id);
+        try {
+            const resp = await axios.get(`${API_BASE_URL}${req.report_url}`, { responseType: 'blob' });
+            const url = window.URL.createObjectURL(new Blob([resp.data], { type: 'application/pdf' }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `Report_${req.candidate_name || req.id}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (err) {
+            setError('Failed to download report.');
+        } finally {
+            setDownloadingQualId(null);
         }
     };
 
@@ -181,6 +236,21 @@ const Settings = () => {
                         }}
                     >
                         🗑️ Deletion Requests
+                    </button>
+                    <button
+                        onClick={() => { setTab('qualification'); loadQualRequests(); }}
+                        style={{
+                            padding: '10px 20px', border: 'none', background: 'none',
+                            borderBottom: tab === 'qualification' ? '3px solid #059669' : 'none',
+                            color: tab === 'qualification' ? '#059669' : '#6b7280', fontWeight: 'bold', cursor: 'pointer'
+                        }}
+                    >
+                        🏅 Qualification Requests
+                        {qualRequests.filter(r => r.status === 'pending').length > 0 && (
+                            <span style={{ marginLeft: '6px', background: '#dc2626', color: '#fff', borderRadius: '999px', padding: '1px 7px', fontSize: '0.72rem', fontWeight: '800' }}>
+                                {qualRequests.filter(r => r.status === 'pending').length}
+                            </span>
+                        )}
                     </button>
                     {isCompanyAdmin && (
                         <button
@@ -341,7 +411,149 @@ const Settings = () => {
                     </div>
                 )}
 
-                {/* Reject Modal */}
+                {/* ── Qualification Requests Tab ── */}
+                {tab === 'qualification' && (
+                    <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+                        <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                            <h3 style={{ margin: 0, color: '#059669', fontWeight: '800' }}>🏅 Qualification Requests</h3>
+                            <button onClick={loadQualRequests} style={{ padding: '6px 14px', border: '1px solid #d1d5db', borderRadius: '8px', background: '#f9fafb', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>🔄 Refresh</button>
+                        </div>
+                        <div style={{ overflowX: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left' }}>
+                                <thead style={{ background: '#f3f4f6', color: '#4b5563', textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.05em' }}>
+                                    <tr>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Candidate</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Requested Change</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Requested By</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Reason</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Status</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {qualLoading ? (
+                                        <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>Loading...</td></tr>
+                                    ) : qualRequests.length === 0 ? (
+                                        <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>No qualification requests found.</td></tr>
+                                    ) : qualRequests.map(req => (
+                                        <tr key={req.id} style={{ borderBottom: '1px solid #e5e7eb', background: req.status === 'pending' ? '#f0fdf4' : '#fff' }}>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <div style={{ fontWeight: '700', color: '#111827' }}>{req.candidate_name || '—'}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{req.candidate_email}</div>
+                                                <div style={{ fontSize: '0.7rem', color: '#9ca3af', marginTop: '2px' }}>{new Date(req.created_at).toLocaleDateString()}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <span style={{ fontWeight: '700', padding: '3px 10px', borderRadius: '999px', fontSize: '0.78rem', background: req.requested_result === 'selected' ? '#d1fae5' : '#fee2e2', color: req.requested_result === 'selected' ? '#065f46' : '#991b1b' }}>
+                                                    {req.requested_result === 'selected' ? '✅ Qualified' : '❌ Not Qualified'}
+                                                </span>
+                                                <div style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '4px' }}>{req.content_type === 'ai_assessment' ? 'AI Assessment' : 'Standard Assessment'}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <div style={{ fontWeight: '600' }}>{req.requester_name}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{req.requester_role}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top', maxWidth: '200px' }}>
+                                                <div style={{ fontSize: '0.82rem', color: '#374151', background: '#f9fafb', padding: '6px 10px', borderRadius: '6px', border: '1px solid #e5e7eb', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                                                    {req.reason}
+                                                </div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '700', background: req.status === 'pending' ? '#fef3c7' : req.status === 'approved' ? '#d1fae5' : '#fee2e2', color: req.status === 'pending' ? '#92400e' : req.status === 'approved' ? '#065f46' : '#991b1b' }}>
+                                                    {req.status === 'pending' ? '⏳ Pending' : req.status === 'approved' ? '✅ Approved' : '❌ Rejected'}
+                                                </span>
+                                                {req.status === 'rejected' && req.rejection_reason && (
+                                                    <div style={{ fontSize: '0.7rem', color: '#991b1b', marginTop: '4px', background: '#fef2f2', padding: '4px 8px', borderRadius: '4px' }}>{req.rejection_reason}</div>
+                                                )}
+                                                {req.status !== 'pending' && req.actioned_by_name && (
+                                                    <div style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '4px' }}>By: {req.actioned_by_name}</div>
+                                                )}
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                {req.status === 'pending' && isCompanyAdmin ? (
+                                                    <button
+                                                        onClick={() => { setQualReviewPopup({ req }); setQualRejectMode(false); setQualRejectReason(''); }}
+                                                        style={{ padding: '6px 14px', background: '#1d2686', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '0.8rem' }}
+                                                    >
+                                                        🔍 Review & Decide
+                                                    </button>
+                                                ) : req.status === 'pending' ? (
+                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting admin</span>
+                                                ) : (
+                                                    <span style={{ color: '#9ca3af' }}>—</span>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
+
+                {/* ── Qualification Review Popup ── */}
+                {qualReviewPopup && (
+                    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1300, backdropFilter: 'blur(4px)' }}>
+                        <div style={{ background: '#fff', borderRadius: '20px', padding: '36px', width: '100%', maxWidth: '520px', boxShadow: '0 30px 80px rgba(0,0,0,0.25)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827' }}>🔍 Review Qualification Request</h3>
+                                <button onClick={() => { setQualReviewPopup(null); setQualRejectMode(false); setQualRejectReason(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                            </div>
+
+                            <div style={{ background: '#f9fafb', borderRadius: '12px', padding: '16px', marginBottom: '16px', border: '1px solid #e5e7eb' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '0.85rem' }}>
+                                    <div><span style={{ color: '#6b7280', fontWeight: '600' }}>Candidate:</span><br/><strong>{qualReviewPopup.req.candidate_name}</strong><br/><span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>{qualReviewPopup.req.candidate_email}</span></div>
+                                    <div><span style={{ color: '#6b7280', fontWeight: '600' }}>Requested by:</span><br/><strong>{qualReviewPopup.req.requester_name}</strong><br/><span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>{qualReviewPopup.req.requester_role}</span></div>
+                                    <div style={{ gridColumn: '1/-1' }}><span style={{ color: '#6b7280', fontWeight: '600' }}>Change Requested:</span><br/>
+                                        <span style={{ fontWeight: '800', padding: '3px 12px', borderRadius: '999px', fontSize: '0.85rem', background: qualReviewPopup.req.requested_result === 'selected' ? '#d1fae5' : '#fee2e2', color: qualReviewPopup.req.requested_result === 'selected' ? '#065f46' : '#991b1b' }}>
+                                            {qualReviewPopup.req.requested_result === 'selected' ? '✅ Mark as Qualified' : '❌ Mark as Not Qualified'}
+                                        </span>
+                                    </div>
+                                    <div style={{ gridColumn: '1/-1' }}><span style={{ color: '#6b7280', fontWeight: '600' }}>Reason from HR:</span><br/>
+                                        <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', marginTop: '4px', fontSize: '0.85rem', color: '#374151', whiteSpace: 'pre-wrap' }}>{qualReviewPopup.req.reason}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {qualReviewPopup.req.report_url && (
+                                <button
+                                    onClick={() => handleDownloadQualReport(qualReviewPopup.req)}
+                                    disabled={downloadingQualId === qualReviewPopup.req.id}
+                                    style={{ width: '100%', padding: '12px', background: downloadingQualId === qualReviewPopup.req.id ? '#9ca3af' : '#4f46e5', color: '#fff', border: 'none', borderRadius: '10px', cursor: downloadingQualId === qualReviewPopup.req.id ? 'not-allowed' : 'pointer', fontWeight: '700', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                                >
+                                    {downloadingQualId === qualReviewPopup.req.id ? '⏳ Downloading...' : '📄 Download Candidate Report'}
+                                </button>
+                            )}
+
+                            {!qualRejectMode ? (
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <button onClick={() => setQualRejectMode(true)} style={{ flex: 1, padding: '12px', background: '#fee2e2', color: '#991b1b', border: '1px solid #fca5a5', borderRadius: '10px', cursor: 'pointer', fontWeight: '700' }}>❌ Reject</button>
+                                    <button onClick={() => handleQualAction(qualReviewPopup.req.id, 'approve')} style={{ flex: 1, padding: '12px', background: '#059669', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: '700' }}>✅ Approve</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <label style={{ display: 'block', fontWeight: '700', fontSize: '0.85rem', color: '#374151', marginBottom: '6px' }}>Rejection Reason <span style={{ color: '#ef4444' }}>*</span></label>
+                                    <textarea
+                                        value={qualRejectReason}
+                                        onChange={e => setQualRejectReason(e.target.value)}
+                                        placeholder="Explain why you are rejecting this request..."
+                                        rows={3}
+                                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', marginBottom: '10px' }}
+                                    />
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <button onClick={() => setQualRejectMode(false)} style={{ flex: 1, padding: '10px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600' }}>Back</button>
+                                        <button
+                                            onClick={() => { if (!qualRejectReason.trim()) { alert('Please provide a rejection reason.'); return; } handleQualAction(qualReviewPopup.req.id, 'reject', qualRejectReason); }}
+                                            disabled={!qualRejectReason.trim()}
+                                            style={{ flex: 1, padding: '10px', background: qualRejectReason.trim() ? '#dc2626' : '#9ca3af', color: '#fff', border: 'none', borderRadius: '10px', cursor: qualRejectReason.trim() ? 'pointer' : 'not-allowed', fontWeight: '700' }}
+                                        >Confirm Reject</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {/* Reject Modal (Deletion) */}
                 {rejectModal && (
                     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1200, backdropFilter: 'blur(4px)' }}>
                         <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', width: '400px', boxShadow: '0 20px 50px rgba(0,0,0,0.2)' }}>

@@ -108,6 +108,10 @@ from .workflow_views import (
     action_deletion_request_view,
     pending_deletion_requests_count_view,
     restore_deletion_request_view,
+    list_qualification_requests_view,
+    action_qualification_request_view,
+    pending_qualification_requests_count_view,
+    create_ai_qualification_request_view,
 )
 
 from .dashboard_views import (

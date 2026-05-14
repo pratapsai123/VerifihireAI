@@ -1588,6 +1588,94 @@ class DeletionRequest(models.Model):
         return f"Delete Request #{self.id} for {self.content_type}:{self.object_id} by {self.requester.email}"
 
 
+class QualificationRequest(models.Model):
+    """
+    Tracks HR/HR-Manager requests to mark a candidate as Qualified or Not Qualified.
+    Requires Company Admin approval before the CandidateSubmission.result is changed.
+
+    Works for both standard assessments (submission_id is an integer) and AI assessments
+    (ai_submission_id stores the AIAssessmentSubmission PK; content_type distinguishes them).
+    """
+    STATUS_PENDING  = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING,  'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
+    RESULT_SELECTED = 'selected'   # "Qualified"
+    RESULT_REJECTED = 'rejected'   # "Not Qualified"
+    RESULT_CHOICES  = [
+        (RESULT_SELECTED, 'Qualified'),
+        (RESULT_REJECTED, 'Not Qualified'),
+    ]
+
+    CONTENT_STANDARD = 'standard'
+    CONTENT_AI       = 'ai_assessment'
+    CONTENT_CHOICES  = [
+        (CONTENT_STANDARD, 'Standard Assessment'),
+        (CONTENT_AI,       'AI Assessment'),
+    ]
+
+    requester = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name='qualification_requests',
+    )
+
+    # Standard assessment submission (nullable — used when content_type == 'standard')
+    submission = models.ForeignKey(
+        'CandidateSubmission',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='qualification_requests',
+    )
+
+    # For AI assessments we store the numeric PK as a plain integer field
+    # so we don't need a hard cross-app FK.
+    ai_submission_id = models.IntegerField(
+        null=True,
+        blank=True,
+        help_text="AIAssessmentSubmission PK — used when content_type == 'ai_assessment'",
+    )
+
+    # Snapshot of candidate name/email for display in Settings even if submission is gone
+    candidate_name  = models.CharField(max_length=255, blank=True, null=True)
+    candidate_email = models.EmailField(blank=True, null=True)
+
+    content_type    = models.CharField(max_length=20, choices=CONTENT_CHOICES, default=CONTENT_STANDARD)
+    requested_result = models.CharField(max_length=20, choices=RESULT_CHOICES)
+    reason          = models.TextField(help_text="Reason provided by HR/HRM for this status change")
+
+    status          = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    actioned_by     = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='actioned_qualification_requests',
+    )
+    actioned_at      = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Qualification Request"
+        verbose_name_plural = "Qualification Requests"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return (
+            f"QualificationRequest #{self.id} → {self.requested_result} "
+            f"for {self.candidate_email} by {self.requester.email}"
+        )
+
+
 class InterviewSlot(models.Model):
     """
     Tracks availability and bookings for live interviews.

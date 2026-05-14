@@ -898,6 +898,15 @@ def process_assessment_passed(submission_id):
             )
             logger.info(f"Pipeline: Created NEW candidate record {candidate.id} for interview stage.")
 
+        # Check if this should be auto-scheduled for an interview
+        is_fully_automatic = False
+        if candidate and candidate.automation_settings:
+            is_fully_automatic = candidate.automation_settings.get('is_fully_automatic', False)
+            
+        if not is_fully_automatic:
+            logger.info(f"Pipeline: Flow is MANUAL for {candidate.email}. Candidate status updated to Interview but skipping auto-interview email.")
+            return
+
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
         link = f"{base_url}/interview-start/{candidate.public_token}"
 

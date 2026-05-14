@@ -86,6 +86,12 @@ export default function Result() {
     const [isShowingLogs, setIsShowingLogs] = useState(false);
     const [reviewPopup, setReviewPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '' });
     const [downloadingIds, setDownloadingIds] = useState(new Set());
+    const [qualReasonPopup, setQualReasonPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false });
+
+    // Derive user role from localStorage
+    const currentUser = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
+    const currentRole = (currentUser?.role || '').toLowerCase();
+    const isAdmin = currentRole === 'company_admin' || currentRole === 'application_admin';
 
     useEffect(() => {
         if (isOverview) return;
@@ -101,23 +107,59 @@ export default function Result() {
     }, [isOverview, ratingSaved]);
 
     const handleUpdateResult = (submission, newStatus) => {
-        setReviewPopup({
-            show: true,
-            submissionId: submission.submission_id,
-            status: newStatus,
-            candidateName: submission.candidate?.name || 'this candidate'
-        });
+        if (isAdmin) {
+            // Admin: show the existing review-report popup (direct update after report review)
+            setReviewPopup({
+                show: true,
+                submissionId: submission.submission_id,
+                status: newStatus,
+                candidateName: submission.candidate?.name || 'this candidate'
+            });
+        } else {
+            // HR / HR Manager: show reason modal → creates a pending approval request
+            setQualReasonPopup({
+                show: true,
+                submissionId: submission.submission_id,
+                status: newStatus,
+                candidateName: submission.candidate?.name || 'this candidate',
+                reason: '',
+                submitting: false
+            });
+        }
     };
 
+    // Admin path: direct update (called from the review-report popup)
     const confirmUpdateResult = async () => {
         const { submissionId, status } = reviewPopup;
         try {
             const resp = await axios.post(`${API_BASE_URL}/results/${submissionId}/update-result/`, { result: status });
-            alert(resp.data.message);
-            setOverview(prev => prev.map(r => r.submission_id === submissionId ? { ...r, status: status } : r));
+            if (resp.data?.pending) {
+                alert(resp.data.message);
+                setOverview(prev => prev.map(r => r.submission_id === submissionId ? { ...r, qual_pending: true } : r));
+            } else {
+                alert(resp.data.message || 'Status updated.');
+                setOverview(prev => prev.map(r => r.submission_id === submissionId ? { ...r, status } : r));
+            }
             setReviewPopup({ show: false, submissionId: null, status: '', candidateName: '' });
         } catch (err) {
-            alert(err.response?.data?.error || "Failed to update result.");
+            alert(err.response?.data?.error || 'Failed to update result.');
+        }
+    };
+
+    // HR/HRM path: submit qualification request with reason
+    const submitQualRequest = async () => {
+        const { submissionId, status, reason } = qualReasonPopup;
+        if (!reason.trim()) { alert('Please provide a reason for this qualification change.'); return; }
+        setQualReasonPopup(prev => ({ ...prev, submitting: true }));
+        try {
+            const resp = await axios.post(`${API_BASE_URL}/results/${submissionId}/update-result/`, { result: status, reason: reason.trim() });
+            alert(resp.data.message);
+            // Mark the row as pending locally so user sees feedback immediately
+            setOverview(prev => prev.map(r => r.submission_id === submissionId ? { ...r, qual_pending: true } : r));
+            setQualReasonPopup({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false });
+        } catch (err) {
+            alert(err.response?.data?.error || 'Failed to submit request.');
+            setQualReasonPopup(prev => ({ ...prev, submitting: false }));
         }
     };
 
@@ -656,7 +698,12 @@ export default function Result() {
                                                             <span className="pill-dot" />
                                                             {statusMeta.label}
                                                         </span>
-                                                        {(r.status === 'hold' || r.status === 'HOLD') && r.submission_id && (
+                                                        {r.qual_pending && (
+                                                            <span title="Qualification change pending admin approval" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.72rem', fontWeight: '700', background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', borderRadius: '999px', padding: '2px 8px' }}>
+                                                                ⏳ Pending Approval
+                                                            </span>
+                                                        )}
+                                                        {!r.qual_pending && (r.status === 'hold' || r.status === 'HOLD') && r.submission_id && (
                                                             <div className="status-actions" style={{ display: 'flex', gap: '4px' }}>
                                                                 <button 
                                                                     onClick={() => handleUpdateResult(r, 'selected')}
@@ -1061,6 +1108,75 @@ export default function Result() {
                                     Confirm Update
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ── HR/HRM Qualification Request Reason Modal ─────────────── */}
+            {qualReasonPopup.show && (
+                <div style={{
+                    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999
+                }}>
+                    <div style={{
+                        background: '#fff', borderRadius: '18px', padding: '36px',
+                        width: '100%', maxWidth: '460px', boxShadow: '0 25px 60px rgba(0,0,0,0.25)'
+                    }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                            <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827' }}>
+                                Request Qualification Change
+                            </h3>
+                            <button onClick={() => setQualReasonPopup({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false })}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                        </div>
+
+                        <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '20px', lineHeight: 1.5 }}>
+                            You are requesting to mark <strong style={{ color: '#111827' }}>{qualReasonPopup.candidateName}</strong> as{' '}
+                            <strong style={{ color: qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626' }}>
+                                {qualReasonPopup.status === 'selected' ? '✅ Qualified' : '❌ Not Qualified'}
+                            </strong>.
+                            This requires admin approval. Please provide a reason below.
+                        </p>
+
+                        <div style={{ background: '#f9fafb', borderRadius: '10px', padding: '12px 16px', marginBottom: '12px', border: '1px solid #e5e7eb' }}>
+                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#374151', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                Reason <span style={{ color: '#ef4444' }}>*</span>
+                            </label>
+                            <textarea
+                                value={qualReasonPopup.reason}
+                                onChange={e => setQualReasonPopup(prev => ({ ...prev, reason: e.target.value }))}
+                                placeholder="Explain why this candidate should be marked as Qualified / Not Qualified..."
+                                rows={4}
+                                style={{
+                                    width: '100%', border: 'none', background: 'transparent', outline: 'none',
+                                    resize: 'vertical', fontSize: '0.9rem', color: '#111827', fontFamily: 'inherit', boxSizing: 'border-box'
+                                }}
+                            />
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                            <button
+                                onClick={() => setQualReasonPopup({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false })}
+                                style={{ flex: 1, background: '#fff', color: '#374151', border: '1px solid #d1d5db', padding: '12px', borderRadius: '10px', cursor: 'pointer', fontWeight: '600' }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={submitQualRequest}
+                                disabled={qualReasonPopup.submitting || !qualReasonPopup.reason.trim()}
+                                style={{
+                                    flex: 1,
+                                    background: qualReasonPopup.submitting || !qualReasonPopup.reason.trim()
+                                        ? '#9ca3af'
+                                        : (qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626'),
+                                    color: '#fff', border: 'none', padding: '12px', borderRadius: '10px',
+                                    cursor: qualReasonPopup.submitting || !qualReasonPopup.reason.trim() ? 'not-allowed' : 'pointer',
+                                    fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
+                                }}
+                            >
+                                {qualReasonPopup.submitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
+                            </button>
                         </div>
                     </div>
                 </div>

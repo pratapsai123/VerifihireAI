@@ -84,7 +84,7 @@ from .ocr_utils import pdf_page_to_png_bytes
 
 
 
-MAX_PAGES = 20
+MAX_PAGES = 30
 
 EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
 
@@ -3275,7 +3275,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── Build PDF with page limit ──
+    # ── Build PDF ──
 
     doc.build(story, onFirstPage=page_counter.on_page, onLaterPages=page_counter.on_page)
 
@@ -3283,35 +3283,9 @@ def generate_candidate_report(submission_id):
 
 
 
-    if page_counter.page_count > MAX_PAGES:
 
-        buffer2 = io.BytesIO()
-
-        doc2 = SimpleDocTemplate(
-
-            buffer2, pagesize=A4,
-
-            rightMargin=40, leftMargin=40, topMargin=40, bottomMargin=40,
-
-        )
-
-        story.append(Paragraph(
-
-            f'<i>Note: Report truncated to {MAX_PAGES} pages.</i>',
-
-            styles['Normal'],
-
-        ))
-
-        doc2.build(story, onFirstPage=PageCounter().on_page, onLaterPages=PageCounter().on_page)
-
-        buffer2.seek(0)
-
-        pdf_data = buffer2.getvalue()
-
-    else:
-
-        pdf_data = buffer.getvalue()
+    pdf_data = buffer.getvalue()
+    print(f"[report] PDF built successfully: {page_counter.page_count} pages")
 
 
 

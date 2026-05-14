@@ -1,7 +1,8 @@
 from .._imports import *
+from .._imports import _is_application_admin_email
 from ai_assessments.results_helpers import get_ai_assessment_results, get_ai_candidate_results
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
-from ..models import CandidateSubmission
+from ..models import CandidateSubmission, QualificationRequest
 from .assessment_views import _is_valid_pan
 from django.core.files.base import ContentFile
 import base64
@@ -1907,6 +1908,26 @@ def results_overview_view(request):
         except Exception:
             pass
 
+        # Gather submission IDs with a pending qualification request
+        pending_qual_submission_ids = set()
+        pending_qual_ai_ids = set()
+        try:
+            pending_qual_submission_ids = set(
+                QualificationRequest.objects.filter(
+                    status=QualificationRequest.STATUS_PENDING,
+                    content_type=QualificationRequest.CONTENT_STANDARD,
+                ).values_list('submission_id', flat=True)
+            )
+            pending_qual_ai_ids = set(
+                QualificationRequest.objects.filter(
+                    status=QualificationRequest.STATUS_PENDING,
+                    content_type=QualificationRequest.CONTENT_AI,
+                ).values_list('ai_submission_id', flat=True)
+            )
+        except Exception:
+            pass
+
+
         # Optimization: Fetch results into a list and pre-build a map for candidate details
         results_slice = list(qs[:5000])
         inv_ids = [s.invitation_id for s in results_slice]
@@ -1967,6 +1988,7 @@ def results_overview_view(request):
                     'batch_name': inv.batch_name,
 
                     'status': s.result,
+                    'qual_pending': s.id in pending_qual_submission_ids,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
                     'answers': getattr(s, 'answers', {}),
                     'integrity': {
@@ -1980,10 +2002,10 @@ def results_overview_view(request):
             )
 
         results.extend(get_ai_assessment_results(
-            scoped_ids, company_id, start_date, end_date, request, active_deletions
+            scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids
         ))
         results.extend(get_ai_candidate_results(
-            scoped_ids, company_id, start_date, end_date, active_deletions
+            scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids
         ))
 
         # Also include non-submitted invitations (Standard Assessments)
@@ -2843,8 +2865,12 @@ def log_candidate_activity_view(request, token):
 @permission_classes([IsAuthenticated])
 def update_submission_result_view(request, submission_id):
     """
-    Manually updates the result of a submission (e.g., from 'hold' to 'selected' or 'rejected').
-    Triggers appropriate emails with a 5-minute delay if moving to 'rejected' or 'selected'.
+    Manually updates the result of a submission.
+
+    - Company Admin / App Admin: direct update (immediate effect).
+    - HR Manager / HR: creates a QualificationRequest pending admin approval.
+      The submission result stays unchanged until the admin approves.
+      A 'reason' field is REQUIRED for non-admin users.
     """
     try:
         new_result = request.data.get('result')
@@ -2853,18 +2879,65 @@ def update_submission_result_view(request, submission_id):
 
         user_profile = getattr(request.user, 'profile', None)
         company_id = user_profile.company_id if user_profile and user_profile.company else None
-        
+
         try:
             if not company_id:
-                submission = CandidateSubmission.objects.get(id=submission_id)
+                submission = CandidateSubmission.objects.select_related('invitation').get(id=submission_id)
             else:
-                submission = CandidateSubmission.objects.get(
+                submission = CandidateSubmission.objects.select_related('invitation').get(
                     id=submission_id,
                     invitation__assessment__user_profile__company_id=company_id
                 )
         except CandidateSubmission.DoesNotExist:
             return Response({'error': 'Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        is_admin = (
+            user_profile
+            and (
+                user_profile.role == UserProfile.ROLE_COMPANY_ADMIN
+                or _is_application_admin_email(user_profile.email)
+            )
+        )
+
+        # ── Non-admin path: create a qualification request ──────────────────
+        if not is_admin:
+            # 'hold' cannot be requested via approval workflow
+            if new_result == 'hold':
+                return Response({'error': 'Only admins can set a result to Hold directly.'}, status=status.HTTP_403_FORBIDDEN)
+
+            reason = (request.data.get('reason') or '').strip()
+            if not reason:
+                return Response({'error': 'A reason is required when requesting a qualification change.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Check for existing pending request to prevent duplicates
+            existing = QualificationRequest.objects.filter(
+                submission=submission,
+                status=QualificationRequest.STATUS_PENDING,
+            ).first()
+            if existing:
+                return Response({
+                    'message': 'A qualification request for this candidate is already pending admin approval.',
+                    'pending': True,
+                }, status=status.HTTP_200_OK)
+
+            inv = submission.invitation
+            qual_req = QualificationRequest.objects.create(
+                requester=user_profile,
+                submission=submission,
+                content_type=QualificationRequest.CONTENT_STANDARD,
+                requested_result=new_result,
+                reason=reason,
+                candidate_name=inv.name if inv else '',
+                candidate_email=inv.email if inv else '',
+            )
+            from api.tasks import send_qualification_request_email_task
+            send_qualification_request_email_task.apply_async(args=[qual_req.id])
+            return Response({
+                'message': 'Your qualification request has been submitted and is pending admin approval.',
+                'pending': True,
+            }, status=status.HTTP_201_CREATED)
+
+        # ── Admin path: direct update ────────────────────────────────────────
         old_result = submission.result
         if old_result == new_result:
             return Response({'message': f'Result is already {new_result}.'}, status=status.HTTP_200_OK)
@@ -2875,12 +2948,9 @@ def update_submission_result_view(request, submission_id):
         inv = submission.invitation
         from api.tasks import send_custom_assessment_result_task, send_regret_email_task
 
-        # Trigger emails based on new status
         if new_result == 'selected':
-            # Send qualified email (5 min delay)
             send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
         elif new_result == 'rejected':
-            # Send regret email with 5 min delay as requested
             send_regret_email_task.apply_async(args=[inv.id], countdown=300)
 
         return Response({
@@ -2890,3 +2960,4 @@ def update_submission_result_view(request, submission_id):
 
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

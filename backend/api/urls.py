@@ -119,6 +119,13 @@ urlpatterns = [
     path('workflow/deletion-requests/count/', views.pending_deletion_requests_count_view, name='pending_deletion_requests_count'),
     path('workflow/deletion-requests/<int:request_id>/action/', views.action_deletion_request_view, name='action_deletion_request'),
     path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
+
+    # Qualification Approval Workflow
+    path('workflow/qualification-requests/', views.list_qualification_requests_view, name='list_qualification_requests'),
+    path('workflow/qualification-requests/count/', views.pending_qualification_requests_count_view, name='pending_qualification_requests_count'),
+    path('workflow/qualification-requests/<int:request_id>/action/', views.action_qualification_request_view, name='action_qualification_request'),
+    path('workflow/qualification-requests/ai/', views.create_ai_qualification_request_view, name='create_ai_qualification_request'),
+
     path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
     path('contact/', views.contact_us_view, name='contact_us'),
     path('security-session/start', views.start_security_session_view, name='security_session_start'),

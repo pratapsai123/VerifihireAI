@@ -131,10 +131,15 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchPendingCount = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
-        setPendingCount(res.data.count || 0);
+        const [delRes, qualRes] = await Promise.all([
+            axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }),
+            axios.get(`${API_BASE_URL}/workflow/qualification-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+        ]);
+        const delCount = delRes.data.count || 0;
+        const qualCount = qualRes.data.count || 0;
+        setPendingCount(delCount + qualCount);
       } catch (err) {
-        console.error("Failed to fetch pending deletion count");
+        console.error("Failed to fetch pending requests counts");
       }
     };
     fetchPendingCount();

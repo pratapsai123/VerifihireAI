@@ -30,6 +30,38 @@ const ResultsAI = () => {
     const [confirmDelete, setConfirmDelete] = useState(null); // { items: [...] }
     const [selected, setSelected] = useState(new Set()); // Set of _deleteKey strings
 
+    // Qualification request state (HR/HRM approval flow)
+    const [qualReasonPopup, setQualReasonPopup] = useState(null); // { row, status, candidateName, aiSubmissionId }
+    const [qualReason, setQualReason] = useState('');
+    const [qualSubmitting, setQualSubmitting] = useState(false);
+
+    // Derive admin status from localStorage
+    const aiResultsCurrentUser = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
+    const aiResultsIsAdmin = ['company_admin', 'application_admin'].includes((aiResultsCurrentUser?.role || '').toLowerCase());
+
+    const submitQualAiRequest = async () => {
+        if (!qualReasonPopup || !qualReason.trim()) { showToast('error', 'Please provide a reason.'); return; }
+        setQualSubmitting(true);
+        try {
+            // AI assessments use ai_submission_id; we POST to the qualification-requests endpoint directly
+            const resp = await axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, {
+                ai_submission_id: qualReasonPopup.aiSubmissionId,
+                requested_result: qualReasonPopup.status,
+                reason: qualReason.trim(),
+                candidate_name: qualReasonPopup.candidateName,
+                candidate_email: qualReasonPopup.candidateEmail || '',
+            }, { headers: { Authorization: `Bearer ${getToken()}` } });
+            showToast('success', resp.data?.message || 'Qualification request submitted.');
+            setQualReasonPopup(null);
+            setQualReason('');
+            fetchData();
+        } catch (err) {
+            showToast('error', err.response?.data?.error || 'Failed to submit request.');
+        } finally {
+            setQualSubmitting(false);
+        }
+    };
+
     const [aiAssessments, setAiAssessments] = useState([]);
     const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
     const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail' | 'transcript'
@@ -1841,10 +1873,62 @@ const ResultsAI = () => {
                                                                         </>
                                                                     )}
                                                                     <td>
-                                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
                                                                             <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status) }}>
                                                                                 {getStatusLabel(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status)}
                                                                             </span>
+                                                                            {/* Pending qualification badge */}
+                                                                            {r.qual_pending && (
+                                                                                <span title="Qualification change pending admin approval" style={{ fontSize: '0.62rem', fontWeight: '800', background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', borderRadius: '999px', padding: '1px 6px', whiteSpace: 'nowrap' }}>⏳ Pending</span>
+                                                                            )}
+                                                                            {/* Qualify / Not Qualify buttons — shown for assessment & interview tabs */}
+                                                                            {!r.qual_pending && (String(r.status).toLowerCase().includes('hold')) && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
+                                                                                <>
+                                                                                    <button
+                                                                                        onClick={(e) => {
+                                                                                            e.stopPropagation();
+                                                                                            const sid = String(r.submission_id || '');
+                                                                                            const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
+                                                                                            if (aiResultsIsAdmin) {
+                                                                                                // Admin: direct update via standard endpoint
+                                                                                                if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Qualified?`)) {
+                                                                                                    axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'selected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
+                                                                                                        .then(() => { showToast('success', 'Marked as Qualified.'); fetchData(); })
+                                                                                                        .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
+                                                                                                }
+                                                                                            } else {
+                                                                                                setQualReason('');
+                                                                                                setQualReasonPopup({ row: r, status: 'selected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
+                                                                                            }
+                                                                                        }}
+                                                                                        title="Mark as Qualified"
+                                                                                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#05CD99', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
+                                                                                    >
+                                                                                        <i className="fa-solid fa-user-check" />
+                                                                                    </button>
+                                                                                    <button
+                                                                                        onClick={(e) => {
+                                                                                            e.stopPropagation();
+                                                                                            const sid = String(r.submission_id || '');
+                                                                                            const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
+                                                                                            if (aiResultsIsAdmin) {
+                                                                                                if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Not Qualified?`)) {
+                                                                                                    axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'rejected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
+                                                                                                        .then(() => { showToast('success', 'Marked as Not Qualified.'); fetchData(); })
+                                                                                                        .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
+                                                                                                }
+                                                                                            } else {
+                                                                                                setQualReason('');
+                                                                                                setQualReasonPopup({ row: r, status: 'rejected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
+                                                                                            }
+                                                                                        }}
+                                                                                        title="Mark as Not Qualified"
+                                                                                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EE5D50', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
+                                                                                    >
+                                                                                        <i className="fa-solid fa-user-xmark" />
+                                                                                    </button>
+                                                                                </>
+                                                                            )}
                                                                             <button
                                                                                 onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
                                                                                 title="View Automation History"
@@ -2137,7 +2221,46 @@ const ResultsAI = () => {
                     </div>
                 )
             }
-        </div >
+            {/* ── AI Qualification Request Reason Modal ── */}
+            {qualReasonPopup && (
+                <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, backdropFilter: 'blur(4px)' }}>
+                    <div style={{ background: '#fff', borderRadius: '20px', padding: '36px', width: '100%', maxWidth: '460px', boxShadow: '0 30px 80px rgba(0,0,0,0.25)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: '800', color: '#111827' }}>Request Qualification Change</h3>
+                            <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                        </div>
+                        <p style={{ color: '#6b7280', fontSize: '0.88rem', marginBottom: '18px', lineHeight: 1.5 }}>
+                            You are requesting to mark <strong style={{ color: '#111827' }}>{qualReasonPopup.candidateName}</strong> as{' '}
+                            <strong style={{ color: qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626' }}>
+                                {qualReasonPopup.status === 'selected' ? '✅ Qualified' : '❌ Not Qualified'}
+                            </strong>. This requires admin approval.
+                        </p>
+                        <div style={{ background: '#f9fafb', borderRadius: '10px', padding: '12px 14px', marginBottom: '16px', border: '1px solid #e5e7eb' }}>
+                            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '800', color: '#374151', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                Reason <span style={{ color: '#ef4444' }}>*</span>
+                            </label>
+                            <textarea
+                                value={qualReason}
+                                onChange={e => setQualReason(e.target.value)}
+                                placeholder="Explain why this candidate should be Qualified / Not Qualified..."
+                                rows={4}
+                                style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', resize: 'vertical', fontSize: '0.88rem', color: '#111827', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                            />
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ flex: 1, padding: '11px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', color: '#374151' }}>Cancel</button>
+                            <button
+                                onClick={submitQualAiRequest}
+                                disabled={qualSubmitting || !qualReason.trim()}
+                                style={{ flex: 1, padding: '11px', background: qualSubmitting || !qualReason.trim() ? '#9ca3af' : (qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626'), color: '#fff', border: 'none', borderRadius: '10px', cursor: qualSubmitting || !qualReason.trim() ? 'not-allowed' : 'pointer', fontWeight: '700' }}
+                            >
+                                {qualSubmitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

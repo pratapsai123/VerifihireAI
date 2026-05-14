@@ -2,7 +2,9 @@ from ai_candidates.models import Candidate
 from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
 
 
-def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions):
+def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None):
+    if pending_qual_ai_ids is None:
+        pending_qual_ai_ids = set()
     """
     Query and format AIAssessmentSubmission results for the results overview.
     Returns a list of dicts matching the unified results schema.
@@ -77,6 +79,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'coding_percentage': getattr(s, 'coding_score', 0),
 
                 'status': getattr(s, 'status', 'COMPLETED'),
+                'qual_pending': s.id in pending_qual_ai_ids,
                 'total_questions': getattr(s, 'total_questions', 0),
                 'candidate_questions': getattr(s, 'candidate_questions', None) or getattr(a, 'generated_content', {}),
                 'answers': getattr(s, 'answers', {}),
@@ -102,7 +105,9 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     return results
 
 
-def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions):
+def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids=None):
+    if pending_qual_ai_ids is None:
+        pending_qual_ai_ids = set()
     """
     Query and format AI Candidate (voice interview) results for the results overview.
     Returns a list of dicts matching the unified results schema.
@@ -156,6 +161,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'score': s.score,
                 'total': 100,
                 'status': s.status,
+                'qual_pending': s.id in pending_qual_ai_ids,
                 'is_ai_interview': bool(s.interview_summary or s.status in ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected']),
                 'is_ai_candidate': True,
                 'is_resume_screening': True,
