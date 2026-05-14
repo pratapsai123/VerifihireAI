@@ -537,25 +537,35 @@ const ResultsAI = () => {
         setCurrentPage(1);
     };
 
-    // ── CSV export for selected candidates ──
-    const exportSelectedCSV = () => {
-        const items = currentRows.filter(r => selected.has(r._deleteKey));
-        if (items.length === 0) return;
+    // ── CSV export for candidates (selected or all) ──
+    const exportResultsCSV = () => {
+        // If some items are selected, export only those. Otherwise, export all current filtered/sorted rows.
+        const items = selected.size > 0 
+            ? currentRows.filter(r => selected.has(r._deleteKey))
+            : currentRows;
 
-        const headers = ['Name', 'Email', 'Score (%)', 'Status', 'Date'];
+        if (items.length === 0) {
+            showToast('error', 'No candidates to export.');
+            return;
+        }
+
+        const headers = ['Name', 'Email', 'Role/Job Title', 'Score (%)', 'Status', 'Date'];
         const csvRows = [headers.join(',')];
 
         items.forEach(r => {
             const name = (r.full_name || r.candidate?.name || 'N/A').replace(/,/g, ' ');
             const email = (r.email || r.candidate?.email || 'N/A').replace(/,/g, ' ');
+            const role = (r.batch_name || r.job_title || r.assessment?.name || r.assessment?.display_name || 'N/A').replace(/,/g, ' ');
             const score = getScoreValue(r);
             const status = activeTab === 'fully_automatic'
                 ? (r.interview?.status || r.assessment?.status || r.resume?.status || 'N/A')
                 : (r.status || 'N/A');
+            
             // Use the most relevant date field available
             const rawDate = r.completed_at || r.submitted_at || r.created_at || r.link_opened_at || r.submission_date || null;
             const date = rawDate ? new Date(rawDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
-            csvRows.push([`"${name}"`, `"${email}"`, score, `"${status}"`, `"${date}"`].join(','));
+            
+            csvRows.push([`"${name}"`, `"${email}"`, `"${role}"`, score, `"${status}"`, `"${date}"`].join(','));
         });
 
         const csvContent = csvRows.join('\n');
@@ -1669,22 +1679,21 @@ const ResultsAI = () => {
 
                                         <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#9CA3AF', fontWeight: '700' }}>{currentRows.length} results</span>
 
-                                        {/* Export CSV — only on AI Interview tab when candidates are selected */}
-                                        {activeTab === 'interview' && someSelected && (
-                                            <button
-                                                onClick={exportSelectedCSV}
-                                                style={{
-                                                    padding: '0.3rem 0.85rem', borderRadius: '10px',
-                                                    border: '1px solid #059669', background: '#ECFDF5',
-                                                    color: '#059669', fontWeight: '700', fontSize: '0.75rem',
-                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem'
-                                                }}
-                                                title="Export selected candidates as CSV"
-                                            >
-                                                <i className="fa-solid fa-file-csv" />
-                                                Export CSV ({selectedCount})
-                                            </button>
-                                        )}
+                                        {/* Download/Export CSV — visible for all tabs in detail view */}
+                                        <button
+                                            onClick={exportResultsCSV}
+                                            style={{
+                                                padding: '0.3rem 0.85rem', borderRadius: '10px',
+                                                border: '1px solid #059669', background: '#ECFDF5',
+                                                color: '#059669', fontWeight: '700', fontSize: '0.75rem',
+                                                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem',
+                                                boxShadow: '0 2px 5px rgba(5, 150, 105, 0.1)'
+                                            }}
+                                            title={someSelected ? "Export selected candidates as CSV" : "Download all current results as CSV"}
+                                        >
+                                            <i className="fa-solid fa-file-csv" />
+                                            {someSelected ? `Export Selected (${selectedCount})` : "Download CSV"}
+                                        </button>
 
                                         {/* Bulk Delete — only visible to authorised roles when at least one row is selected */}
                                         {canDelete && someSelected && (
