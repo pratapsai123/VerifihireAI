@@ -361,10 +361,26 @@ const AiTakeAssessment = () => {
 
 
     const getDeepfacePersonId = useCallback(() => {
+        // Priority 1: Current state PAN
+        if (panNumber && panNumber.trim()) {
+            return String(panNumber).trim().toLowerCase();
+        }
+
+        // Priority 2: Session storage (from previous tabs or registration)
+        const pendingPan = sessionStorage.getItem('pending_pan');
+        if (pendingPan) {
+            return String(pendingPan).trim().toLowerCase();
+        }
+
+        // Priority 3: Email + Token (Legacy/fallback)
         const email = String(candidateEmail || '').trim().toLowerCase();
-        if (!email) return '';
-        return `${email}_${token}`;
-    }, [candidateEmail, token]);
+        if (email) {
+            return `${email}_${token}`;
+        }
+
+        // Priority 4: Pure token
+        return token;
+    }, [candidateEmail, token, panNumber]);
 
 
 
@@ -1011,9 +1027,9 @@ const AiTakeAssessment = () => {
     const currentQ = allQs[currentQuestionIdx] || allQs[0];
 
     const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
-    
+
     const mcqSectionCount = mcqSection.length;
-    const isLastOfPhase = phase === 'mcq' 
+    const isLastOfPhase = phase === 'mcq'
         ? currentQuestionIdx === mcqSectionCount - 1
         : currentQuestionIdx === allQs.length - 1;
 
@@ -1287,7 +1303,7 @@ const AiTakeAssessment = () => {
             setFormError('Invalid PAN format. Expected: ABCDE1234F');
             return;
         }
-        
+
         // If they are reconnecting via localStorage, we bypass the photo upload since it's already saved on the backend
         if (!isRestored) {
             if (!panPhoto) {
@@ -1343,17 +1359,17 @@ const AiTakeAssessment = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            const { 
-                submission_id, 
-                time_left, 
-                mcq_time_left, 
-                coding_time_left, 
-                current_phase, 
-                answers: savedAnswers, 
-                current_question_index, 
-                coding_results: savedResults, 
-                codeDrafts: savedDrafts, 
-                candidate_questions 
+            const {
+                submission_id,
+                time_left,
+                mcq_time_left,
+                coding_time_left,
+                current_phase,
+                answers: savedAnswers,
+                current_question_index,
+                coding_results: savedResults,
+                codeDrafts: savedDrafts,
+                candidate_questions
             } = res.data;
 
             setSubmissionId(submission_id);
@@ -1368,7 +1384,7 @@ const AiTakeAssessment = () => {
             if (current_phase) setPhase(current_phase);
             if (mcq_time_left !== undefined) setMcqTimeLeft(mcq_time_left);
             if (coding_time_left !== undefined) setCodingTimeLeft(coding_time_left);
-            
+
             // Total wall clock time
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
 
@@ -2297,7 +2313,7 @@ const AiTakeAssessment = () => {
 
     const handlePhaseSwitch = (newPhase) => {
         const nextIdx = newPhase === 'coding' ? mcqSectionCount : 0;
-        
+
         // Save progress with phase switch
         axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
             answers,
@@ -2305,7 +2321,7 @@ const AiTakeAssessment = () => {
             current_phase: newPhase,
             coding_results,
             codeDrafts
-        }).catch(() => {});
+        }).catch(() => { });
 
         setPhase(newPhase);
         setCurrentQuestionIdx(nextIdx);
@@ -2507,15 +2523,14 @@ const AiTakeAssessment = () => {
 
             try {
 
-                const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
-                if (!normalizedEmail) {
-                    setRegError("Candidate email is missing.");
+                const personId = getDeepfacePersonId();
+                if (!personId) {
+                    setRegError("Identity token is missing.");
                     setWizardStep(0);
                     return;
                 }
-                const personId = `${normalizedEmail}_${token}`;
 
-                
+
 
                 // Check if already registered in DeepFace
                 const checkRes = await axios.get(`${DEEPFACE_BASE_URL}/registration/registered/${encodeURIComponent(personId)}`);
@@ -2531,7 +2546,7 @@ const AiTakeAssessment = () => {
                         person_id: personId,
                         image_base64: finalImage.split(',')[1]
                     });
-                    
+
                     if (verifyRes.data && verifyRes.data.verified === true) {
                         success = true;
                     } else {
@@ -2545,7 +2560,7 @@ const AiTakeAssessment = () => {
                         person_id: personId,
                         image_base64: finalImage.split(',')[1]
                     });
-                    
+
                     if (regRes.data && regRes.data.success === true) {
                         success = true;
                     } else {
@@ -3048,47 +3063,47 @@ const AiTakeAssessment = () => {
                             </label>
 
                             {!isRestored && (
-                            <div
+                                <div
 
-                                onClick={() => document.getElementById('panPhotoInput').click()}
+                                    onClick={() => document.getElementById('panPhotoInput').click()}
 
-                                style={{
+                                    style={{
 
-                                    border: '2px dashed #cbd5e0', borderRadius: 12, padding: '1rem', cursor: 'pointer',
+                                        border: '2px dashed #cbd5e0', borderRadius: 12, padding: '1rem', cursor: 'pointer',
 
-                                    transition: 'all 0.2s', background: panPhotoPreview ? '#f0fdf4' : 'transparent',
+                                        transition: 'all 0.2s', background: panPhotoPreview ? '#f0fdf4' : 'transparent',
 
-                                    borderColor: panVerified ? '#22c55e' : panPhotoPreview ? '#38b2ac' : '#cbd5e0',
+                                        borderColor: panVerified ? '#22c55e' : panPhotoPreview ? '#38b2ac' : '#cbd5e0',
 
-                                    display: 'flex', alignItems: 'center', gap: '1rem'
+                                        display: 'flex', alignItems: 'center', gap: '1rem'
 
-                                }}
+                                    }}
 
-                            >
+                                >
 
-                                <input type="file" id="panPhotoInput" accept=".jpg,.jpeg,.png,.pdf,image/*,application/pdf" hidden onChange={handlePanPhotoChange} />
+                                    <input type="file" id="panPhotoInput" accept=".jpg,.jpeg,.png,.pdf,image/*,application/pdf" hidden onChange={handlePanPhotoChange} />
 
-                                {panPhotoPreview ? (
-                                    <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
-                                ) : panPhoto && (panPhoto.type === 'application/pdf' || panPhoto.name?.toLowerCase().endsWith('.pdf')) ? (
-                                    <i className="fa-solid fa-file-pdf" style={{ fontSize: '2rem', color: '#ef4444' }}></i>
-                                ) : (
-                                    <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#4318FF' }}></i>
-                                )}
+                                    {panPhotoPreview ? (
+                                        <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
+                                    ) : panPhoto && (panPhoto.type === 'application/pdf' || panPhoto.name?.toLowerCase().endsWith('.pdf')) ? (
+                                        <i className="fa-solid fa-file-pdf" style={{ fontSize: '2rem', color: '#ef4444' }}></i>
+                                    ) : (
+                                        <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#4318FF' }}></i>
+                                    )}
 
-                                <div>
+                                    <div>
 
-                                    <p style={{ margin: '0 0 0.25rem', fontWeight: '600', color: '#1B254B', fontSize: '0.9rem' }}>
+                                        <p style={{ margin: '0 0 0.25rem', fontWeight: '600', color: '#1B254B', fontSize: '0.9rem' }}>
 
-                                        {panPhoto ? panPhoto.name : 'Upload PAN Card Photo'}
+                                            {panPhoto ? panPhoto.name : 'Upload PAN Card Photo'}
 
-                                    </p>
+                                        </p>
 
-                                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#707EAE' }}>Click to browse</p>
+                                        <p style={{ margin: 0, fontSize: '0.75rem', color: '#707EAE' }}>Click to browse</p>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
                             )}
 
                         </div>
@@ -3352,9 +3367,9 @@ const AiTakeAssessment = () => {
                         <div style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: 700, textTransform: 'uppercase' }}>
                             {phase === 'mcq' ? 'MCQ Section Timer' : 'Coding Section Timer'}
                         </div>
-                        <div style={{ 
-                            fontSize: '1.2rem', 
-                            fontWeight: 900, 
+                        <div style={{
+                            fontSize: '1.2rem',
+                            fontWeight: 900,
                             color: (phase === 'mcq' ? mcqTimeLeft : codingTimeLeft) < 180 ? '#dc2626' : '#1a5276',
                             fontFamily: 'JetBrains Mono, monospace'
                         }}>
@@ -4079,19 +4094,19 @@ const AiTakeAssessment = () => {
                                         const st = getQStatus(idx);
                                         const isLocked = phase === 'coding';
                                         return (
-                                            <button key={idx} 
+                                            <button key={idx}
                                                 onClick={() => !isLocked && goToQuestion(idx)}
                                                 disabled={isLocked}
-                                                style={{ 
-                                                    width: '100%', 
-                                                    aspectRatio: '1', 
-                                                    borderRadius: '50%', 
-                                                    fontWeight: 700, 
-                                                    fontSize: '0.72rem', 
-                                                    cursor: isLocked ? 'not-allowed' : 'pointer', 
-                                                    border: 'none', 
+                                                style={{
+                                                    width: '100%',
+                                                    aspectRatio: '1',
+                                                    borderRadius: '50%',
+                                                    fontWeight: 700,
+                                                    fontSize: '0.72rem',
+                                                    cursor: isLocked ? 'not-allowed' : 'pointer',
+                                                    border: 'none',
                                                     opacity: isLocked ? 0.6 : 1,
-                                                    ...statusStyle(st) 
+                                                    ...statusStyle(st)
                                                 }}>
                                                 {idx + 1}
                                             </button>
@@ -4172,7 +4187,7 @@ const AiTakeAssessment = () => {
 
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     {currentQuestionIdx > 0 && (
-                        <button 
+                        <button
                             onClick={() => {
                                 const prevIdx = currentQuestionIdx - 1;
                                 // Prevention: Don't allow Previous to cross the MCQ boundary back from Coding
@@ -4182,15 +4197,15 @@ const AiTakeAssessment = () => {
                                 goToQuestion(prevIdx);
                             }}
                             disabled={phase === 'coding' && currentQuestionIdx === mcqSectionCount}
-                            style={{ 
-                                padding: '0.5rem 1rem', 
-                                background: 'white', 
-                                border: '1.5px solid #1a5276', 
-                                color: '#1a5276', 
-                                borderRadius: 8, 
-                                fontWeight: 700, 
-                                fontSize: '0.82rem', 
-                                cursor: (phase === 'coding' && currentQuestionIdx === mcqSectionCount) ? 'not-allowed' : 'pointer', 
+                            style={{
+                                padding: '0.5rem 1rem',
+                                background: 'white',
+                                border: '1.5px solid #1a5276',
+                                color: '#1a5276',
+                                borderRadius: 8,
+                                fontWeight: 700,
+                                fontSize: '0.82rem',
+                                cursor: (phase === 'coding' && currentQuestionIdx === mcqSectionCount) ? 'not-allowed' : 'pointer',
                                 fontFamily: 'Poppins',
                                 opacity: (phase === 'coding' && currentQuestionIdx === mcqSectionCount) ? 0.5 : 1
                             }}>

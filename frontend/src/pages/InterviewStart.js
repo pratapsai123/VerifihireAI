@@ -320,6 +320,8 @@ const InterviewStart = () => {
             await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/register/`, regFormData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
+            // Ensure DeepFace identity consistency even before AiInterviewSession fetches the updated candidate data
+            sessionStorage.setItem('pending_pan', panNumber.toUpperCase().trim());
         } catch (err) {
             const errorData = err.response?.data;
             // If PAN requires face verification, store details and proceed to interview for face check
