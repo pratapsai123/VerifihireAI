@@ -368,7 +368,7 @@ def process_batch_assessment(batch_id):
                 )
 
         # ── 2. SEND INVITATION EMAILS ──
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
         from django.utils import timezone as tz
 
         emails_sent = 0
@@ -781,7 +781,7 @@ def process_resume_passed(candidate_id):
         assessment.status = 'SCHEDULED'
         assessment.save()
 
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
         link = (
             f"{base_url}/take-ai-assessment/{assessment.share_token}"
             f"?name={quote(candidate.full_name or '')}"
@@ -898,7 +898,7 @@ def process_assessment_passed(submission_id):
             )
             logger.info(f"Pipeline: Created NEW candidate record {candidate.id} for interview stage.")
 
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
         link = f"{base_url}/interview-start/{candidate.public_token}"
 
         role_name = submission.assessment.required_skills or "the role"

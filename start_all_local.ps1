@@ -3,6 +3,10 @@
 
 Write-Host "🚀 Starting VerifiHire AI Suite (Local Mode)..." -ForegroundColor Cyan
 
+# 0. Ensure Local Configuration
+Write-Host "🔧 Converting configuration to Localhost..." -ForegroundColor Yellow
+python convert_to_local.py
+
 # 1. Start Docker Dependencies (Redis, Nginx, Executor, DinD)
 Write-Host "📡 Starting Docker dependencies..." -ForegroundColor Yellow
 cd "$PSScriptRoot"
