@@ -2089,6 +2089,59 @@ const AiTakeAssessment = () => {
         }
     }, [isStarted, mcqTimeLeft, phase]);
 
+    // ── Time Warning Toasts ──────────────────────────────────────────────────
+    // Fires once at 25% remaining and once at 60 seconds remaining per section.
+    const timeWarnFiredRef = useRef({ mcq_25: false, mcq_60: false, coding_25: false, coding_60: false });
+
+    useEffect(() => {
+        if (!isStarted) return;
+
+        const totalMcqSecs = assessment?.mcq_duration_minutes
+            ? assessment.mcq_duration_minutes * 60
+            : null;
+        const totalCodingSecs = assessment?.coding_duration_minutes
+            ? assessment.coding_duration_minutes * 60
+            : null;
+
+        if (phase === 'mcq' && mcqTimeLeft !== null && totalMcqSecs) {
+            const threshold25 = Math.floor(totalMcqSecs * 0.25); // 25% of total
+
+            // 25% warning — fire once
+            if (!timeWarnFiredRef.current.mcq_25 && mcqTimeLeft <= threshold25 && mcqTimeLeft > 60) {
+                timeWarnFiredRef.current.mcq_25 = true;
+                const mins = Math.floor(mcqTimeLeft / 60);
+                setAiToast({ active: true, text: `⏰ ${mins} minutes remaining in MCQ`, urgent: false });
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 4000);
+            }
+
+            // 60 seconds warning — fire once
+            if (!timeWarnFiredRef.current.mcq_60 && mcqTimeLeft <= 60 && mcqTimeLeft > 0) {
+                timeWarnFiredRef.current.mcq_60 = true;
+                setAiToast({ active: true, text: `⚠️ 1 minute left in MCQ!`, urgent: true });
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 5000);
+            }
+        }
+
+        if (phase === 'coding' && codingTimeLeft !== null && totalCodingSecs) {
+            const threshold25 = Math.floor(totalCodingSecs * 0.25);
+
+            // 25% warning — fire once
+            if (!timeWarnFiredRef.current.coding_25 && codingTimeLeft <= threshold25 && codingTimeLeft > 60) {
+                timeWarnFiredRef.current.coding_25 = true;
+                const mins = Math.floor(codingTimeLeft / 60);
+                setAiToast({ active: true, text: `⏰ ${mins} minutes remaining in Coding`, urgent: false });
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 4000);
+            }
+
+            // 60 seconds warning — fire once
+            if (!timeWarnFiredRef.current.coding_60 && codingTimeLeft <= 60 && codingTimeLeft > 0) {
+                timeWarnFiredRef.current.coding_60 = true;
+                setAiToast({ active: true, text: `⚠️ 1 minute left in Coding!`, urgent: true });
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 5000);
+            }
+        }
+    }, [isStarted, phase, mcqTimeLeft, codingTimeLeft, assessment]);
+
     // Handle Total Expiry (Master Guard)
     useEffect(() => {
         if (isStarted && timeLeft === 0) {
@@ -4117,15 +4170,23 @@ const AiTakeAssessment = () => {
                                         if (q.type !== 'coding') return null;
 
                                         const st = getQStatus(idx);
+                                        const isCodingLocked = phase === 'mcq';
 
                                         return (
 
-                                            <button key={idx} onClick={() => goToQuestion(idx)}
-
-                                                style={{ width: '100%', aspectRatio: '1', borderRadius: '50%', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', border: 'none', ...statusStyle(st) }}>
-
+                                            <button key={idx}
+                                                onClick={() => { if (!isCodingLocked) goToQuestion(idx); }}
+                                                disabled={isCodingLocked}
+                                                title={isCodingLocked ? 'Unlocks after MCQ section ends' : ''}
+                                                style={{
+                                                    width: '100%', aspectRatio: '1', borderRadius: '50%',
+                                                    fontWeight: 700, fontSize: '0.72rem',
+                                                    cursor: isCodingLocked ? 'not-allowed' : 'pointer',
+                                                    border: 'none',
+                                                    opacity: isCodingLocked ? 0.4 : 1,
+                                                    ...statusStyle(st)
+                                                }}>
                                                 {idx + 1}
-
                                             </button>
 
                                         );

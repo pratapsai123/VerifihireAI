@@ -1322,7 +1322,8 @@ class CreateSubmissionView(APIView):
                 return Response({"error": "Assessment time has expired."}, status=status.HTTP_400_BAD_REQUEST)
 
             # Calculate individual phase time left
-            mcq_total = (assessment.mcq_duration_minutes or 10) * 60
+            # Use actual saved duration; fall back to 1 min per MCQ question if not set
+            mcq_total = (assessment.mcq_duration_minutes or assessment.mcq_count or 10) * 60
             coding_total = (assessment.coding_duration_minutes or 30) * 60
             
             mcq_left = max(0, mcq_total - submission.mcq_time_spent)
