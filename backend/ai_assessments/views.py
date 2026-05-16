@@ -326,6 +326,16 @@ class SubmitAssessmentView(APIView):
             # Integrity check (proctoring) AND identity verification are additional gates.
             INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if score passed
 
+            # CRITICAL: Re-read the LATEST integrity data from DB to avoid race condition.
+            # The submission object was loaded at the start of this view, but integrity violations
+            # may have been recorded by UpdateAssessmentIntegrityView AFTER we loaded it.
+            fresh_data = AIAssessmentSubmission.objects.filter(pk=submission.pk).values(
+                'integrity_score', 'identity_mismatch_detected'
+            ).first()
+            if fresh_data:
+                submission.integrity_score = fresh_data['integrity_score']
+                submission.identity_mismatch_detected = fresh_data['identity_mismatch_detected']
+
             passed_overall = percentage >= assessment.pass_threshold
             passed_integrity = submission.integrity_score >= INTEGRITY_HOLD_THRESHOLD
             has_identity_mismatch = getattr(submission, 'identity_mismatch_detected', False)
@@ -366,7 +376,14 @@ class SubmitAssessmentView(APIView):
                 "weighted_final": f"{percentage}%"
             }
             submission.submitted_at = timezone.now()
-            submission.save()
+            # Use update_fields to avoid overwriting integrity_score/monitoring data
+            # that may be concurrently updated by UpdateAssessmentIntegrityView
+            submission.save(update_fields=[
+                'answers', 'mcq_score', 'coding_score', 'score',
+                'total_questions', 'percentage', 'status',
+                'results_breakdown', 'submitted_at',
+                'integrity_score', 'identity_mismatch_detected',
+            ])
 
             # CROSS-UPDATE: Synchronize with the Candidate record
             try:
@@ -1409,8 +1426,9 @@ class UpdateAssessmentIntegrityView(APIView):
                 # Apply penalty
                 submission.integrity_score = max(0, submission.integrity_score - penalty)
             
-            # If this is the first violation being recorded, ensure we start from 100
-            if submission.integrity_score is None or submission.integrity_score == 0:
+            # Initialize integrity_score only if it has never been set (None).
+            # Do NOT reset when score is 0 — that's a legitimate result after penalties!
+            if submission.integrity_score is None:
                 submission.integrity_score = 100.0
             
             # Handle Screenshot
