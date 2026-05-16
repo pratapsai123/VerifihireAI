@@ -2498,6 +2498,11 @@ const AiTakeAssessment = () => {
 
         const [regError, setRegError] = useState('');
 
+        // Identity mismatch override state
+        const [showOverrideOption, setShowOverrideOption] = useState(false);
+        const [mismatchSnapshot, setMismatchSnapshot] = useState(null);
+        const [isOverriding, setIsOverriding] = useState(false);
+
 
 
         useEffect(() => {
@@ -2578,8 +2583,8 @@ const AiTakeAssessment = () => {
                 let errorMsg = "";
 
                 if (isAlreadyRegistered) {
-                    console.log("Candidate already registered. Switching to Verification Mode for Hard Block.");
-                    // PERFORM VERIFICATION (HARD BLOCK CASE)
+                    console.log("Candidate already registered. Switching to Verification Mode.");
+                    // PERFORM VERIFICATION
                     const verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
                         person_id: personId,
                         image_base64: finalImage.split(',')[1]
@@ -2588,8 +2593,13 @@ const AiTakeAssessment = () => {
                     if (verifyRes.data && verifyRes.data.verified === true) {
                         success = true;
                     } else {
-                        success = false;
-                        errorMsg = "IDENTITY MISMATCH: You are not the person who originally registered for this assessment. Entry is blocked for security.";
+                        // Show override option instead of hard-blocking
+                        console.warn("Face mismatch detected. Offering Override & Continue option.");
+                        setRegError("⚠️ IDENTITY MISMATCH: Your face does not match the person who originally registered for this assessment. You may continue, but this will be flagged for HR review.");
+                        setShowOverrideOption(true);
+                        setMismatchSnapshot(finalImage);
+                        setWizardStep(0);
+                        return;
                     }
                 } else {
                     console.log("Candidate not registered. Registering fresh anchor face.");
@@ -2647,6 +2657,43 @@ const AiTakeAssessment = () => {
 
         };
 
+        // Handler for "Override & Continue" — re-registers the new face and flags for HR review
+        const handleOverrideContinue = async () => {
+            if (!mismatchSnapshot) return;
+            setIsOverriding(true);
+            setRegError('');
+
+            try {
+                const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
+                const personId = `${normalizedEmail}_${token}`;
+                const imageB64 = mismatchSnapshot.includes(',') ? mismatchSnapshot.split(',')[1] : mismatchSnapshot;
+
+                // Re-register the new face in DeepFace (overwrite the old anchor)
+                await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
+                    person_id: personId,
+                    image_base64: imageB64,
+                    overwrite: true
+                });
+
+                console.log("Override successful: new face registered. Mismatch will be flagged by backend.");
+                logCandidateActivity(token, 'Identity Override', 'Candidate used Override & Continue after face mismatch. Flagged for HR review.');
+
+                setWizardStep(2); // Show success
+                setShowOverrideOption(false);
+
+                setTimeout(() => {
+                    setIsRegistered(true);
+                    // Pass the snapshot so backend CreateSubmissionView can detect mismatch and flag it
+                    onComplete(imageB64);
+                }, 1500);
+
+            } catch (e) {
+                console.error("Override registration failed:", e);
+                setRegError("Override failed. Please ensure your face is clearly visible and try again.");
+            } finally {
+                setIsOverriding(false);
+            }
+        };
 
 
         return (
@@ -2771,7 +2818,48 @@ const AiTakeAssessment = () => {
 
 
 
-                    {regError && <div style={{ color: '#ef4444', marginBottom: '1.5rem', fontWeight: 600 }}>{regError}</div>}
+                    {regError && (
+                        <div style={{
+                            color: showOverrideOption ? '#b45309' : '#ef4444',
+                            background: showOverrideOption ? '#fef3c7' : '#fef2f2',
+                            border: showOverrideOption ? '1px solid #f59e0b' : '1px solid #fecaca',
+                            padding: '1rem 1.5rem',
+                            borderRadius: '12px',
+                            marginBottom: '1.5rem',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            lineHeight: 1.5
+                        }}>
+                            {regError}
+                        </div>
+                    )}
+
+                    {/* Override & Continue option for identity mismatch */}
+                    {showOverrideOption && (
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <button
+                                onClick={handleOverrideContinue}
+                                disabled={isOverriding}
+                                style={{
+                                    background: isOverriding ? '#9ca3af' : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                                    color: 'white',
+                                    border: 'none',
+                                    padding: '0.9rem 2.5rem',
+                                    borderRadius: '50px',
+                                    fontSize: '1rem',
+                                    fontWeight: '700',
+                                    cursor: isOverriding ? 'not-allowed' : 'pointer',
+                                    boxShadow: '0 8px 16px rgba(245, 158, 11, 0.3)',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {isOverriding ? 'Processing Override...' : '⚠️ Override & Continue (Flagged for Review)'}
+                            </button>
+                            <p style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+                                This action will be recorded and flagged in assessment results for HR review.
+                            </p>
+                        </div>
+                    )}
 
 
 

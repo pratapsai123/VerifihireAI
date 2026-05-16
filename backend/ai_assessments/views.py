@@ -323,21 +323,22 @@ class SubmitAssessmentView(APIView):
 
             # --- PASS/FAIL LOGIC ---
             # Only the configurable pass_threshold determines score-based pass/fail.
-            # Integrity check (proctoring) is the only additional gate.
+            # Integrity check (proctoring) AND identity verification are additional gates.
             INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if score passed
 
             passed_overall = percentage >= assessment.pass_threshold
             passed_integrity = submission.integrity_score >= INTEGRITY_HOLD_THRESHOLD
+            has_identity_mismatch = getattr(submission, 'identity_mismatch_detected', False)
 
             # Selection Logic:
             # 1. Final Score < pass_threshold -> REJECTED
-            # 2. Final Score >= pass_threshold + Integrity < 50% -> HOLD (manual review)
-            # 3. Final Score >= pass_threshold + Integrity >= 50% -> SELECTED
+            # 2. Final Score >= pass_threshold + (Integrity < 50% OR Identity Mismatch) -> HOLD (manual review)
+            # 3. Final Score >= pass_threshold + Integrity >= 50% + No Identity Mismatch -> SELECTED
 
             if not passed_overall:
                 pass_status = 'rejected'
-            elif not passed_integrity:
-                pass_status = 'hold'  # Passed score but failed integrity - needs review
+            elif not passed_integrity or has_identity_mismatch:
+                pass_status = 'hold'  # Passed score but failed integrity/identity - needs admin review
             else:
                 pass_status = 'selected'
 
@@ -377,10 +378,13 @@ class SubmitAssessmentView(APIView):
                     logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
                     
-                    # Set correct status based on pass/fail
+                    # Set correct status based on pass/fail/hold
                     if pass_status == 'selected':
                         candidate.status = 'Assessment Passed'
                         logger.info(f"SubmitAssessment: Candidate {email} PASSED assessment with {percentage}% - status updated to 'Assessment Passed'")
+                    elif pass_status == 'hold':
+                        candidate.status = 'Assessment On Hold'
+                        logger.info(f"SubmitAssessment: Candidate {email} ON HOLD (integrity={submission.integrity_score}%, mismatch={getattr(submission, 'identity_mismatch_detected', False)}) - requires admin review")
                     else:
                         candidate.status = 'Assessment Failed'
                         logger.info(f"SubmitAssessment: Candidate {email} FAILED assessment with {percentage}% - status updated to 'Assessment Failed'")
@@ -2560,8 +2564,15 @@ class AIAssessmentReportDownloadView(APIView):
             integrity_color = colors.HexColor("#05CD99") if integrity_score >= 50 else colors.HexColor("#EE5D50")
 
             # Status display
-            status_display = "Assessment Passed" if submission.status == 'selected' else "Not Qualified" if submission.status in ['rejected', 'hold'] else submission.status.upper()
-            status_color = colors.HexColor("#05CD99") if submission.status == 'selected' else colors.HexColor("#EE5D50")
+            if submission.status == 'selected':
+                status_display = "Assessment Passed"
+                status_color = colors.HexColor("#05CD99")
+            elif submission.status == 'hold':
+                status_display = "On Hold \u2014 Pending Admin Review"
+                status_color = colors.HexColor("#F59E0B")
+            else:
+                status_display = "Not Qualified"
+                status_color = colors.HexColor("#EE5D50")
 
             # 1. Report Header - Interview Report Style
             elements.append(Paragraph("VerifiHireAI — Assessment Report", ParagraphStyle(
