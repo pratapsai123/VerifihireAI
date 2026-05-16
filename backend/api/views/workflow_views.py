@@ -1,5 +1,7 @@
 from .._imports import *
 from .._imports import _is_application_admin_email
+import logging
+logger = logging.getLogger(__name__)
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -397,6 +399,22 @@ def action_qualification_request_view(request, request_id):
                 ai_sub.status = qual_req.requested_result
                 ai_sub.save(update_fields=['status'])
 
+                # CROSS-UPDATE: Synchronize with the Candidate record
+                try:
+                    from ai_candidates.models import Candidate
+                    email = ai_sub.candidate_email
+                    batch_id = ai_sub.batch_id
+                    candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
+                    candidate = candidates.filter(batch_id=batch_id).first() if batch_id else candidates.first()
+                    if candidate:
+                        if qual_req.requested_result == 'selected':
+                            candidate.status = 'Assessment Passed'
+                        else:
+                            candidate.status = 'Assessment Failed'
+                        candidate.save(update_fields=['status'])
+                except Exception as sync_err:
+                    logger.warning(f"Failed to cross-update candidate after qualification approval: {sync_err}")
+
         except Exception as e:
             return Response({'error': f'Failed to update submission: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -485,6 +503,35 @@ def create_ai_qualification_request_view(request):
             ai_sub = AIAssessmentSubmission.objects.get(id=ai_submission_id)
             ai_sub.status = requested_result
             ai_sub.save(update_fields=['status'])
+
+            # CROSS-UPDATE: Synchronize with the Candidate record
+            try:
+                from ai_candidates.models import Candidate
+                email = ai_sub.candidate_email
+                batch_id = ai_sub.batch_id
+                candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
+                candidate = candidates.filter(batch_id=batch_id).first() if batch_id else candidates.first()
+                if candidate:
+                    if requested_result == 'selected':
+                        candidate.status = 'Assessment Passed'
+                    else:
+                        candidate.status = 'Assessment Failed'
+                    candidate.save(update_fields=['status'])
+                    logger.info(f"Admin Override: Candidate {email} status updated to '{candidate.status}'")
+            except Exception as sync_err:
+                logger.warning(f"Failed to cross-update candidate after admin override: {sync_err}")
+
+            # If approved, trigger the interview pipeline for automatic assessments
+            if requested_result == 'selected':
+                is_automatic = getattr(ai_sub.assessment, 'creation_type', 'manual') == 'automatic'
+                if is_automatic:
+                    try:
+                        from api.pipeline import process_assessment_passed
+                        process_assessment_passed(ai_sub.id)
+                        logger.info(f"Admin Override: Pipeline triggered for AI submission {ai_sub.id}")
+                    except Exception as pipe_err:
+                        logger.error(f"Admin Override: Pipeline trigger failed for {ai_sub.id}: {pipe_err}")
+
             return Response({'message': f'Candidate marked as {requested_result}.', 'pending': False}, status=status.HTTP_200_OK)
         except AIAssessmentSubmission.DoesNotExist:
             return Response({'error': 'AI Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
