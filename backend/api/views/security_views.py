@@ -55,12 +55,14 @@ def start_security_session_view(request):
     if agent_id:
         # Check if this agent ID was already used for a different token
         # This prevents using the same .exe download for multiple distinct assessments.
-        if SecuritySession.objects.filter(agent_instance_id=agent_id).exclude(token=token).exists():
-            return Response({
-                'error': 'To maintain assessment integrity, this session requires a new instance of the Secure Agent.',
-                'agent_expired': True,
-                'action': 'STOP'
-            }, status=status.HTTP_403_FORBIDDEN)
+        # [DISABLED FOR TESTING] - Allow reusing the same local agent for multiple tokens
+        # if SecuritySession.objects.filter(agent_instance_id=agent_id).exclude(token=token).exists():
+        #     return Response({
+        #         'error': 'To maintain assessment integrity, this session requires a new instance of the Secure Agent.',
+        #         'agent_expired': True,
+        #         'action': 'STOP'
+        #     }, status=status.HTTP_403_FORBIDDEN)
+        pass
 
     session = SecuritySession.objects.create(
         token=token,

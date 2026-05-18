@@ -1161,6 +1161,29 @@ const ResultsAI = () => {
                                                 Candidate Information
                                             </h3>
 
+                                            {viewedSubmission.identity_mismatch_detected && (
+                                                <div style={{
+                                                    background: '#FEF2F2',
+                                                    border: '1px solid #F87171',
+                                                    borderRadius: '12px',
+                                                    padding: '1rem',
+                                                    marginBottom: '1.5rem',
+                                                    display: 'flex',
+                                                    alignItems: 'flex-start',
+                                                    gap: '1rem'
+                                                }}>
+                                                    <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626', fontSize: '1.5rem', marginTop: '4px' }}></i>
+                                                    <div>
+                                                        <h4 style={{ color: '#991B1B', margin: '0 0 0.5rem 0', fontWeight: 'bold' }}>IDENTITY MISMATCH DETECTED (HR REVIEW REQUIRED)</h4>
+                                                        <p style={{ color: '#7F1D1D', margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>
+                                                            The candidate failed the automated facial verification check when starting the assessment.
+                                                            They chose to "Override & Continue", meaning the assessment was completed using a <strong>different face</strong> than what was initially registered.
+                                                            Please compare the original face with the overriding assessment face below.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            )}
+
                                             {(() => {
                                                 // Get candidate photo - use backend-provided URL first
                                                 // Then fall back to first valid integrity screenshot
@@ -1182,14 +1205,84 @@ const ResultsAI = () => {
                                                 return (
                                                     <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
                                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
-                                                            <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
-                                                                {candidatePhoto ? (
-                                                                    <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                                                                ) : null}
-                                                                <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                    <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                            
+                                                            {/* Candidate Photo / Override Check */}
+                                                            {viewedSubmission.identity_mismatch_detected && (viewedSubmission.original_identity_photo_url || viewedSubmission.intruder_photo_url) ? (
+                                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '180px' }}>
+                                                                    {/* ORIGINAL FACE */}
+                                                                    <div style={{
+                                                                        width: '180px',
+                                                                        height: '180px',
+                                                                        background: '#F4F7FE',
+                                                                        borderRadius: '12px',
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'center',
+                                                                        border: '2px solid #EE5D50',
+                                                                        overflow: 'hidden',
+                                                                        position: 'relative'
+                                                                    }}>
+                                                                        <div style={{
+                                                                            position: 'absolute', top: 0, left: 0, right: 0,
+                                                                            background: '#EE5D50', color: 'white',
+                                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
+                                                                            fontWeight: 'bold', zIndex: 2
+                                                                        }}>
+                                                                            ORIGINAL FACE
+                                                                        </div>
+                                                                        <img
+                                                                            src={viewedSubmission.original_identity_photo_url}
+                                                                            alt="Original Candidate"
+                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                                        />
+                                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {/* OVERRIDE FACE */}
+                                                                    <div style={{
+                                                                        width: '180px',
+                                                                        height: '180px',
+                                                                        background: '#F4F7FE',
+                                                                        borderRadius: '12px',
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'center',
+                                                                        border: '2px dashed #F59E0B',
+                                                                        overflow: 'hidden',
+                                                                        position: 'relative'
+                                                                    }}>
+                                                                        <div style={{
+                                                                            position: 'absolute', top: 0, left: 0, right: 0,
+                                                                            background: '#F59E0B', color: 'white',
+                                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
+                                                                            fontWeight: 'bold', zIndex: 2
+                                                                        }}>
+                                                                            ASSESSMENT FACE
+                                                                        </div>
+                                                                        <img
+                                                                            src={viewedSubmission.intruder_photo_url || candidatePhoto}
+                                                                            alt="Assessment Candidate"
+                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                                        />
+                                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            ) : (
+                                                                <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
+                                                                    {candidatePhoto ? (
+                                                                        <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                    ) : null}
+                                                                    <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                        <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                             {viewedSubmission.pan_photo && (
                                                                 <div style={{ width: '180px', height: '120px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
                                                                     <img src={viewedSubmission.pan_photo} alt="PAN Card" style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
@@ -1246,14 +1339,19 @@ const ResultsAI = () => {
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
                                                                         <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Overall Result</td>
-                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' || viewedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50', fontWeight: '800' }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified') ? '#05CD99' : viewedSubmission.status === 'hold' ? '#F59E0B' : '#EE5D50', fontWeight: '800' }}>
                                                                             {viewedSubmission.percentage}%
                                                                         </td>
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
                                                                         <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Status</td>
-                                                                        <td style={{ padding: '0.75rem 1rem', color: '#1B254B', fontWeight: '700', textTransform: 'uppercase' }}>
-                                                                            {viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified' ? 'Assessment Passed' : viewedSubmission.status === 'hold' ? 'Hold - Manual Review' : 'Not Qualified'}
+                                                                        <td style={{ padding: '0.75rem 1rem', fontWeight: '700', textTransform: 'uppercase' }}>
+                                                                            {(() => {
+                                                                                const st = viewedSubmission.status;
+                                                                                if (st === 'selected' || st === 'Qualified') return <span style={{ color: '#05CD99' }}>✓ Assessment Passed</span>;
+                                                                                if (st === 'hold') return <span style={{ color: '#F59E0B' }}>⚠ HOLD — Manual Review Required</span>;
+                                                                                return <span style={{ color: '#EE5D50' }}>✗ Not Qualified</span>;
+                                                                            })()}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -1883,15 +1981,20 @@ const ResultsAI = () => {
                                                                     )}
                                                                     <td>
                                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-                                                                            <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status) }}>
-                                                                                {getStatusLabel(activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status)}
-                                                                            </span>
+                                                                            {(() => {
+                                                                                const rawStatus = activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status;
+                                                                                return (
+                                                                                    <span style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', ...getStatusStyle(rawStatus) }}>
+                                                                                        {getStatusLabel(rawStatus)}
+                                                                                    </span>
+                                                                                );
+                                                                            })()}
                                                                             {/* Pending qualification badge */}
                                                                             {r.qual_pending && (
                                                                                 <span title="Qualification change pending admin approval" style={{ fontSize: '0.62rem', fontWeight: '800', background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', borderRadius: '999px', padding: '1px 6px', whiteSpace: 'nowrap' }}>⏳ Pending</span>
                                                                             )}
-                                                                            {/* Qualify / Not Qualify buttons — shown for assessment & interview tabs */}
-                                                                            {!r.qual_pending && (String(r.status).toLowerCase().includes('hold')) && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
+                                                                            {/* Qualify / Not Qualify buttons — only shown when DB status is actually 'hold', not display-overridden */}
+                                                                            {!r.qual_pending && r.status === 'hold' && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
                                                                                 <>
                                                                                     <button
                                                                                         onClick={(e) => {

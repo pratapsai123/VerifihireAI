@@ -53,7 +53,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
 TOTAL_INTERVIEW_QUESTIONS = 13
-from api.views import ensure_role_exists
+from api.views.job_role_views import ensure_role_exists
 
 from api.models import UserProfile
 
@@ -569,7 +569,7 @@ class ResumeMatchView(APIView):
 
 
         job_description = request.data.get('job_description')
-
+        experience_level = request.data.get('experience_level', '').strip() or None
         threshold = request.data.get('threshold', 70)
 
         try:
@@ -756,7 +756,9 @@ class ResumeMatchView(APIView):
 
                     batch_id=batch_id,
 
-                    batch_name=batch_name
+                    batch_name=batch_name,
+
+                    experience_level=experience_level
 
                 )
 
@@ -968,11 +970,11 @@ class RetryFailedExtractionsView(APIView):
 
         # Fix: Use Key Rotation list
 
-        api_keys = getattr(settings, 'DEEPSEEK_API_KEYS', [])
+        api_keys = getattr(settings, 'GROQ_API_KEYS', [])
 
         if not api_keys:
 
-            single_key = getattr(settings, 'DEEPSEEK_API_KEY', None)
+            single_key = getattr(settings, 'GROQ_API_KEY', None)
 
             api_keys = [single_key] if single_key else []
 
@@ -1098,16 +1100,15 @@ class RetryFailedExtractionsView(APIView):
 
 
 
-                # Retry with unified LLM client (handles key rotation and backoff internally)
-                from ai_assessments.llm_client import call_llm_with_backoff, get_default_model
+                # Retry with Groq client (handles key rotation and backoff internally)
+                from ai_assessments.llm_client import call_groq_with_backoff, get_groq_model
                 match_result = None
                 
                 try:
-                    print(f"   🤖 Calling LLM ({get_default_model()})... ", end="", flush=True)
-                    match_result = call_llm_with_backoff(
+                    print(f"   🤖 Calling Groq ({get_groq_model()})... ", end="", flush=True)
+                    match_result = call_groq_with_backoff(
                         prompt=prompt,
                         is_json=True,
-                        model=get_default_model(),
                         max_tokens=4096,
                         temperature=0.0,
                     )

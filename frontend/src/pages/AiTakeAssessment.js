@@ -53,6 +53,7 @@ const AiTakeAssessment = () => {
 
     const [isAutoFilled, setIsAutoFilled] = useState(false);
     const [isRestored, setIsRestored] = useState(false);
+    const [identityMismatchOverride, setIdentityMismatchOverride] = useState(false);
 
     const [submissionId, setSubmissionId] = useState(null);
 
@@ -1286,7 +1287,7 @@ const AiTakeAssessment = () => {
 
 
 
-    const startAssessment = async (bypassReg = false) => {
+    const startAssessment = async (bypassReg = false, isOverride = false) => {
 
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
 
@@ -1353,6 +1354,9 @@ const AiTakeAssessment = () => {
             }
             if (registrationSnapshot) {
                 formPayload.append('snapshot', registrationSnapshot);
+            }
+            if (isOverride || identityMismatchOverride) {
+                formPayload.append('identity_mismatch_override', 'true');
             }
 
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, formPayload, {
@@ -2514,6 +2518,11 @@ const AiTakeAssessment = () => {
 
         const [regError, setRegError] = useState('');
 
+        // Identity mismatch override state
+        const [showOverrideOption, setShowOverrideOption] = useState(false);
+        const [mismatchSnapshot, setMismatchSnapshot] = useState(null);
+        const [isOverriding, setIsOverriding] = useState(false);
+
 
 
         useEffect(() => {
@@ -2593,8 +2602,8 @@ const AiTakeAssessment = () => {
                 let errorMsg = "";
 
                 if (isAlreadyRegistered) {
-                    console.log("Candidate already registered. Switching to Verification Mode for Hard Block.");
-                    // PERFORM VERIFICATION (HARD BLOCK CASE)
+                    console.log("Candidate already registered. Switching to Verification Mode.");
+                    // PERFORM VERIFICATION
                     const verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
                         person_id: personId,
                         image_base64: finalImage.split(',')[1]
@@ -2603,8 +2612,13 @@ const AiTakeAssessment = () => {
                     if (verifyRes.data && verifyRes.data.verified === true) {
                         success = true;
                     } else {
-                        success = false;
-                        errorMsg = "IDENTITY MISMATCH: You are not the person who originally registered for this assessment. Entry is blocked for security.";
+                        // Show override option instead of hard-blocking
+                        console.warn("Face mismatch detected. Offering Override & Continue option.");
+                        setRegError("⚠️ IDENTITY MISMATCH: Your face does not match the person who originally registered for this assessment. You may continue, but this will be flagged for HR review.");
+                        setShowOverrideOption(true);
+                        setMismatchSnapshot(finalImage);
+                        setWizardStep(0);
+                        return;
                     }
                 } else {
                     console.log("Candidate not registered. Registering fresh anchor face.");
@@ -2662,6 +2676,42 @@ const AiTakeAssessment = () => {
 
         };
 
+        // Handler for "Override & Continue" — flags for HR review WITHOUT overwriting the original face
+        const handleOverrideContinue = async () => {
+            if (!mismatchSnapshot) return;
+            setIsOverriding(true);
+            setRegError('');
+
+            try {
+                const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
+                const imageB64 = mismatchSnapshot.includes(',') ? mismatchSnapshot.split(',')[1] : mismatchSnapshot;
+
+                // DO NOT re-register in DeepFace here — the backend (CreateSubmissionView) will:
+                //   1. Save the original face to original_identity_photo
+                //   2. Save the intruder's face to intruder_photo
+                //   3. Set identity_mismatch_detected = True
+                //   4. Preserve the original registration (NOT overwrite it)
+                // Calling overwrite:true here would destroy the original face before the backend saves it.
+
+                console.log("Override initiated: backend will flag mismatch and preserve original face.");
+                logCandidateActivity(token, 'Identity Override', 'Candidate used Override & Continue after face mismatch. Flagged for HR review.');
+
+                setWizardStep(2); // Show success
+                setShowOverrideOption(false);
+
+                setTimeout(() => {
+                    setIsRegistered(true);
+                    // Pass identity_mismatch_override=true so backend knows to flag this
+                    onComplete(imageB64, true);
+                }, 1500);
+
+            } catch (e) {
+                console.error("Override failed:", e);
+                setRegError("Override failed. Please try again.");
+            } finally {
+                setIsOverriding(false);
+            }
+        };
 
 
         return (
@@ -2786,7 +2836,48 @@ const AiTakeAssessment = () => {
 
 
 
-                    {regError && <div style={{ color: '#ef4444', marginBottom: '1.5rem', fontWeight: 600 }}>{regError}</div>}
+                    {regError && (
+                        <div style={{
+                            color: showOverrideOption ? '#b45309' : '#ef4444',
+                            background: showOverrideOption ? '#fef3c7' : '#fef2f2',
+                            border: showOverrideOption ? '1px solid #f59e0b' : '1px solid #fecaca',
+                            padding: '1rem 1.5rem',
+                            borderRadius: '12px',
+                            marginBottom: '1.5rem',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            lineHeight: 1.5
+                        }}>
+                            {regError}
+                        </div>
+                    )}
+
+                    {/* Override & Continue option for identity mismatch */}
+                    {showOverrideOption && (
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <button
+                                onClick={handleOverrideContinue}
+                                disabled={isOverriding}
+                                style={{
+                                    background: isOverriding ? '#9ca3af' : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                                    color: 'white',
+                                    border: 'none',
+                                    padding: '0.9rem 2.5rem',
+                                    borderRadius: '50px',
+                                    fontSize: '1rem',
+                                    fontWeight: '700',
+                                    cursor: isOverriding ? 'not-allowed' : 'pointer',
+                                    boxShadow: '0 8px 16px rgba(245, 158, 11, 0.3)',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {isOverriding ? 'Processing Override...' : '⚠️ Override & Continue (Flagged for Review)'}
+                            </button>
+                            <p style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+                                This action will be recorded and flagged in assessment results for HR review.
+                            </p>
+                        </div>
+                    )}
 
 
 
@@ -2844,15 +2935,18 @@ const AiTakeAssessment = () => {
 
     if (isRegistering) {
 
-        return <RegistrationWizard onComplete={(img) => {
+        return <RegistrationWizard onComplete={(img, isOverride = false) => {
 
             setRegistrationSnapshot(img);
+            if (isOverride) {
+                setIdentityMismatchOverride(true);
+            }
 
             setIsRegistering(false);
 
             setIsRegistered(true);
 
-            startAssessment(true);
+            startAssessment(true, isOverride);
 
         }} onCancel={() => setIsRegistering(false)} />;
 
@@ -3389,6 +3483,54 @@ const AiTakeAssessment = () => {
             )}
 
             <canvas ref={screenCanvasRef} style={{ display: 'none' }} width="1280" height="720" />
+
+            {/* FULLSCREEN GATE — blocks exam when candidate exits fullscreen via ESC */}
+            {isStarted && !submitted && !isFullscreen && (
+                <div style={{
+                    position: 'fixed', inset: 0, zIndex: 999999,
+                    background: 'rgba(15, 23, 42, 0.97)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontFamily: 'Poppins'
+                }}>
+                    <div style={{
+                        background: 'white', borderRadius: '24px',
+                        padding: '3rem 2.5rem', maxWidth: '460px', width: '90%',
+                        textAlign: 'center', boxShadow: '0 25px 60px rgba(0,0,0,0.4)'
+                    }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
+                        <h2 style={{ color: '#1B254B', fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.75rem' }}>
+                            Fullscreen Required
+                        </h2>
+                        <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6, margin: '0 0 0.5rem' }}>
+                            You exited fullscreen mode. The exam is <strong>paused</strong> until you return to fullscreen.
+                        </p>
+                        <p style={{ color: '#ef4444', fontSize: '0.82rem', fontWeight: 600, margin: '0 0 2rem' }}>
+                            This exit has been recorded as a violation.
+                        </p>
+                        <button
+                            onClick={async () => {
+                                try {
+                                    await document.documentElement.requestFullscreen();
+                                    setIsFullscreen(true);
+                                } catch (e) {
+                                    setAiToast({ active: true, text: 'Could not enter fullscreen. Please allow it in your browser.', urgent: true });
+                                    setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 4000);
+                                }
+                            }}
+                            style={{
+                                background: 'linear-gradient(135deg, #4318FF 0%, #6366f1 100%)',
+                                color: 'white', border: 'none',
+                                padding: '0.9rem 2.5rem', borderRadius: '50px',
+                                fontSize: '1rem', fontWeight: 700, cursor: 'pointer',
+                                boxShadow: '0 8px 20px rgba(67,24,255,0.3)',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            🔲 Return to Fullscreen
+                        </button>
+                    </div>
+                </div>
+            )}
 
 
 

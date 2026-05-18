@@ -161,10 +161,11 @@ const AiAssessmentDetail = () => {
                     >
                         <i className="fa-solid fa-arrow-left"></i> Back to Archive
                     </button>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <div>
-                            <h1 style={{ color: '#1B254B', fontSize: '2.2rem', fontWeight: '800', margin: 0 }}>
-                                {assessment.required_skills} <span style={{ color: '#707EAE', fontWeight: '400', fontSize: '1.2rem' }}>Assessment Results</span>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
+                        <div style={{ flex: '1 1 min-content', minWidth: 0 }}>
+                            <div style={{ fontSize: '0.9rem', color: '#4318FF', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.4rem' }}>Assessment Results</div>
+                            <h1 style={{ color: '#1B254B', fontSize: '2.2rem', fontWeight: '800', margin: 0, wordBreak: 'break-word', overflowWrap: 'anywhere', lineHeight: '1.2' }}>
+                                {assessment.required_skills}
                             </h1>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', color: '#A3AED0', marginTop: '0.8rem', fontSize: '0.85rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -177,7 +178,7 @@ const AiAssessmentDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ background: 'white', padding: '1rem 1.5rem', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', textAlign: 'center' }}>
+                        <div style={{ background: 'white', padding: '1rem 1.5rem', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', textAlign: 'center', flexShrink: 0 }}>
                             <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase' }}>Submissions</div>
                             <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#4318FF' }}>{submissions.length}</div>
                         </div>
@@ -504,7 +505,12 @@ const AiAssessmentDetail = () => {
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
                                                         <span style={{ padding: '0.4rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', ...getStatusStyle(sub.status) }}>
-                                                            {sub.status}
+                                                            {(() => {
+                                                                const st = sub.status;
+                                                                if (st === 'selected' || st === 'Qualified') return '✓ PASSED';
+                                                                if (st === 'hold') return '⚠ HOLD';
+                                                                return '✗ ' + st;
+                                                            })()}
                                                         </span>
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
@@ -622,8 +628,30 @@ const AiAssessmentDetail = () => {
                                             fontStyle: 'italic',
                                             marginBottom: '1rem' 
                                         }}>
-                                            Candidate Information
                                         </h3>
+
+                                        {selectedSubmission.identity_mismatch_detected && (
+                                            <div style={{
+                                                background: '#FEF2F2',
+                                                border: '1px solid #F87171',
+                                                borderRadius: '12px',
+                                                padding: '1rem',
+                                                marginBottom: '1.5rem',
+                                                display: 'flex',
+                                                alignItems: 'flex-start',
+                                                gap: '1rem'
+                                            }}>
+                                                <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626', fontSize: '1.5rem', marginTop: '4px' }}></i>
+                                                <div>
+                                                    <h4 style={{ color: '#991B1B', margin: '0 0 0.5rem 0', fontWeight: 'bold' }}>IDENTITY MISMATCH DETECTED (HR REVIEW REQUIRED)</h4>
+                                                    <p style={{ color: '#7F1D1D', margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>
+                                                        The candidate failed the automated facial verification check when starting the assessment.
+                                                        They chose to "Override & Continue", meaning the assessment was completed using a <strong>different face</strong> than what was initially registered.
+                                                        Please compare the original face with the overriding assessment face below.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         {(() => {
                                             // Get candidate photo exclusively from the authorized registration
@@ -635,46 +663,114 @@ const AiAssessmentDetail = () => {
                                             alignItems: 'flex-start'
                                         }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
-                                            {/* Candidate Photo */}
-                                            <div style={{
-                                                width: '180px',
-                                                height: '180px',
-                                                background: '#F4F7FE',
-                                                borderRadius: '12px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                border: '1px solid #E0E5F2',
-                                                overflow: 'hidden'
-                                            }}>
-                                                {candidatePhoto ? (
-                                                    <img
-                                                        src={candidatePhoto}
-                                                        alt="Candidate"
-                                                        style={{
-                                                            width: '100%',
-                                                            height: '100%',
-                                                            objectFit: 'cover'
-                                                        }}
-                                                        onError={(e) => {
-                                                            e.target.style.display = 'none';
-                                                            e.target.nextSibling.style.display = 'flex';
-                                                        }}
-                                                    />
-                                                ) : null}
+                                            {/* Candidate Photo / Override Check */}
+                                            {selectedSubmission.identity_mismatch_detected && (selectedSubmission.original_identity_photo_url || selectedSubmission.intruder_photo_url) ? (
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '180px' }}>
+                                                    {/* ORIGINAL FACE */}
+                                                    <div style={{
+                                                        width: '180px',
+                                                        height: '180px',
+                                                        background: '#F4F7FE',
+                                                        borderRadius: '12px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        border: '2px solid #EE5D50',
+                                                        overflow: 'hidden',
+                                                        position: 'relative'
+                                                    }}>
+                                                        <div style={{
+                                                            position: 'absolute', top: 0, left: 0, right: 0,
+                                                            background: '#EE5D50', color: 'white',
+                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
+                                                            fontWeight: 'bold', zIndex: 2
+                                                        }}>
+                                                            ORIGINAL FACE
+                                                        </div>
+                                                        <img
+                                                            src={selectedSubmission.original_identity_photo_url}
+                                                            alt="Original Candidate"
+                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                        />
+                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* OVERRIDE FACE */}
+                                                    <div style={{
+                                                        width: '180px',
+                                                        height: '180px',
+                                                        background: '#F4F7FE',
+                                                        borderRadius: '12px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        border: '2px dashed #F59E0B',
+                                                        overflow: 'hidden',
+                                                        position: 'relative'
+                                                    }}>
+                                                        <div style={{
+                                                            position: 'absolute', top: 0, left: 0, right: 0,
+                                                            background: '#F59E0B', color: 'white',
+                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
+                                                            fontWeight: 'bold', zIndex: 2
+                                                        }}>
+                                                            ASSESSMENT FACE
+                                                        </div>
+                                                        <img
+                                                            src={selectedSubmission.intruder_photo_url || candidatePhoto}
+                                                            alt="Assessment Candidate"
+                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                        />
+                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) : (
                                                 <div style={{
-                                                    display: candidatePhoto ? 'none' : 'flex',
+                                                    width: '180px',
+                                                    height: '180px',
+                                                    background: '#F4F7FE',
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
-                                                    width: '100%',
-                                                    height: '100%'
+                                                    border: '1px solid #E0E5F2',
+                                                    overflow: 'hidden'
                                                 }}>
-                                                    <i className="fa-solid fa-user" style={{
-                                                        fontSize: '4rem',
-                                                        color: '#A3AED0'
-                                                    }}></i>
+                                                    {candidatePhoto ? (
+                                                        <img
+                                                            src={candidatePhoto}
+                                                            alt="Candidate"
+                                                            style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                objectFit: 'cover'
+                                                            }}
+                                                            onError={(e) => {
+                                                                e.target.style.display = 'none';
+                                                                e.target.nextSibling.style.display = 'flex';
+                                                            }}
+                                                        />
+                                                    ) : null}
+                                                    <div style={{
+                                                        display: candidatePhoto ? 'none' : 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        width: '100%',
+                                                        height: '100%'
+                                                    }}>
+                                                        <i className="fa-solid fa-user" style={{
+                                                            fontSize: '4rem',
+                                                            color: '#A3AED0'
+                                                        }}></i>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            )}
 
                                             {/* PAN Card Photo */}
                                             {selectedSubmission.pan_photo && (
@@ -824,7 +920,7 @@ const AiAssessmentDetail = () => {
                                                             }}>Overall Result</td>
                                                             <td style={{ 
                                                                 padding: '0.75rem 1rem', 
-                                                                color: (selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' || selectedSubmission.status === 'Resume Passed') ? '#05CD99' : '#EE5D50',
+                                                                color: (selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified') ? '#05CD99' : selectedSubmission.status === 'hold' ? '#F59E0B' : '#EE5D50',
                                                                 fontWeight: '800'
                                                             }}>
                                                                 {selectedSubmission.percentage}%
@@ -839,11 +935,15 @@ const AiAssessmentDetail = () => {
                                                             }}>Status</td>
                                                             <td style={{ 
                                                                 padding: '0.75rem 1rem', 
-                                                                color: '#1B254B',
                                                                 fontWeight: '700',
                                                                 textTransform: 'uppercase'
                                                             }}>
-                                                                {selectedSubmission.status === 'selected' || selectedSubmission.status === 'Qualified' ? 'Assessment Passed' : (selectedSubmission.status === 'rejected' || selectedSubmission.status === 'hold') ? 'Not Qualified' : selectedSubmission.status}
+                                                                {(() => {
+                                                                    const st = selectedSubmission.status;
+                                                                    if (st === 'selected' || st === 'Qualified') return <span style={{ color: '#05CD99' }}>✓ Assessment Passed</span>;
+                                                                    if (st === 'hold') return <span style={{ color: '#F59E0B' }}>⚠ HOLD — Manual Review Required</span>;
+                                                                    return <span style={{ color: '#EE5D50' }}>✗ Not Qualified</span>;
+                                                                })()}
                                                             </td>
                                                         </tr>
                                                         <tr>

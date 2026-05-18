@@ -142,7 +142,7 @@ def _get_candidate_photo_url(request, submission):
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
 
-from api.views import ensure_role_exists
+from api.views.job_role_views import ensure_role_exists
 
 # Configure Groq
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
@@ -323,21 +323,32 @@ class SubmitAssessmentView(APIView):
 
             # --- PASS/FAIL LOGIC ---
             # Only the configurable pass_threshold determines score-based pass/fail.
-            # Integrity check (proctoring) is the only additional gate.
+            # Integrity check (proctoring) AND identity verification are additional gates.
             INTEGRITY_HOLD_THRESHOLD = 50.0  # Below this = HOLD if score passed
+
+            # CRITICAL: Re-read the LATEST integrity data from DB to avoid race condition.
+            # The submission object was loaded at the start of this view, but integrity violations
+            # may have been recorded by UpdateAssessmentIntegrityView AFTER we loaded it.
+            fresh_data = AIAssessmentSubmission.objects.filter(pk=submission.pk).values(
+                'integrity_score', 'identity_mismatch_detected'
+            ).first()
+            if fresh_data:
+                submission.integrity_score = fresh_data['integrity_score']
+                submission.identity_mismatch_detected = fresh_data['identity_mismatch_detected']
 
             passed_overall = percentage >= assessment.pass_threshold
             passed_integrity = submission.integrity_score >= INTEGRITY_HOLD_THRESHOLD
+            has_identity_mismatch = getattr(submission, 'identity_mismatch_detected', False)
 
             # Selection Logic:
             # 1. Final Score < pass_threshold -> REJECTED
-            # 2. Final Score >= pass_threshold + Integrity < 50% -> HOLD (manual review)
-            # 3. Final Score >= pass_threshold + Integrity >= 50% -> SELECTED
+            # 2. Final Score >= pass_threshold + (Integrity < 50% OR Identity Mismatch) -> HOLD (manual review)
+            # 3. Final Score >= pass_threshold + Integrity >= 50% + No Identity Mismatch -> SELECTED
 
             if not passed_overall:
                 pass_status = 'rejected'
-            elif not passed_integrity:
-                pass_status = 'hold'  # Passed score but failed integrity - needs review
+            elif not passed_integrity or has_identity_mismatch:
+                pass_status = 'hold'  # Passed score but failed integrity/identity - needs admin review
             else:
                 pass_status = 'selected'
 
@@ -365,7 +376,37 @@ class SubmitAssessmentView(APIView):
                 "weighted_final": f"{percentage}%"
             }
             submission.submitted_at = timezone.now()
-            submission.save()
+            # Use update_fields to avoid overwriting integrity_score/monitoring data
+            # that may be concurrently updated by UpdateAssessmentIntegrityView
+            submission.save(update_fields=[
+                'answers', 'mcq_score', 'coding_score', 'score',
+                'total_questions', 'percentage', 'status',
+                'results_breakdown', 'submitted_at',
+                'integrity_score', 'identity_mismatch_detected',
+            ])
+
+            # POST-SAVE INTEGRITY CORRECTION:
+            # Violations can arrive slightly after submit (race condition).
+            # Wait briefly then re-read integrity and correct status if needed.
+            import time as _time
+            _time.sleep(0.5)
+            final_integrity = AIAssessmentSubmission.objects.filter(pk=submission.pk).values('integrity_score', 'identity_mismatch_detected').first()
+            if final_integrity:
+                final_int_score = final_integrity['integrity_score'] or 100.0
+                final_mismatch = final_integrity['identity_mismatch_detected']
+                # If integrity dropped below threshold after we set status=selected, correct to hold
+                if pass_status == 'selected' and (final_int_score < INTEGRITY_HOLD_THRESHOLD or final_mismatch):
+                    AIAssessmentSubmission.objects.filter(pk=submission.pk).update(
+                        status='hold',
+                        integrity_score=final_int_score
+                    )
+                    pass_status = 'hold'
+                    submission.status = 'hold'
+                    submission.integrity_score = final_int_score
+                    logger.warning(
+                        f"SubmitAssessment: Status corrected to HOLD for submission {submission.pk} "
+                        f"(integrity={final_int_score}%, mismatch={final_mismatch}) after post-save re-check."
+                    )
 
             # CROSS-UPDATE: Synchronize with the Candidate record
             try:
@@ -377,10 +418,13 @@ class SubmitAssessmentView(APIView):
                     logger.info(f"SubmitAssessment: Updating candidate {candidate.id} results for {email} (Submission ID={submission.id})")
                     candidate.score = percentage
                     
-                    # Set correct status based on pass/fail
+                    # Set correct status based on pass/fail/hold
                     if pass_status == 'selected':
                         candidate.status = 'Assessment Passed'
                         logger.info(f"SubmitAssessment: Candidate {email} PASSED assessment with {percentage}% - status updated to 'Assessment Passed'")
+                    elif pass_status == 'hold':
+                        candidate.status = 'Assessment On Hold'
+                        logger.info(f"SubmitAssessment: Candidate {email} ON HOLD (integrity={submission.integrity_score}%, mismatch={getattr(submission, 'identity_mismatch_detected', False)}) - requires admin review")
                     else:
                         candidate.status = 'Assessment Failed'
                         logger.info(f"SubmitAssessment: Candidate {email} FAILED assessment with {percentage}% - status updated to 'Assessment Failed'")
@@ -388,9 +432,11 @@ class SubmitAssessmentView(APIView):
                     candidate.save(update_fields=['score', 'status'])
                     
                     # ── TRIGGER NEXT STAGE ──
-                    # If they passed, automatically trigger the AI Interview invitation
-                    if pass_status == 'selected':
-                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
+                    # Only trigger interview pipeline for AUTOMATIC assessments.
+                    # For MANUAL assessments, passing = qualified only — HR reviews and decides next step.
+                    is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
+                    if pass_status == 'selected' and is_automatic:
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED automatic assessment, triggering interview invitation for submission {submission.id}")
                         try:
                             from api.pipeline import process_assessment_passed
                             process_assessment_passed(submission.id)
@@ -399,27 +445,32 @@ class SubmitAssessmentView(APIView):
                             logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
                             import traceback
                             logger.error(traceback.format_exc())
+                    elif pass_status == 'selected' and not is_automatic:
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED manual assessment — marked as qualified, no interview auto-sent.")
                     else:
-                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
+                        logger.info(f"SubmitAssessment: Candidate {email} status={pass_status}, score={percentage}% — NOT triggering interview")
 
                 else:
                     logger.info(f"SubmitAssessment: No matching Candidate record found for {email} to update results.")
 
                     # ── TRIGGER NEXT STAGE ──
-                    # If they passed, automatically trigger the AI Interview invitation
-                    if pass_status == 'selected':
-                        logger.info(f"SubmitAssessment: Candidate {email} PASSED (status={pass_status}), triggering interview invitation for submission {submission.id}")
+                    # Only trigger interview pipeline for AUTOMATIC assessments.
+                    # For MANUAL assessments, passing = qualified only — HR reviews and decides next step.
+                    is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
+                    if pass_status == 'selected' and is_automatic:
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED automatic assessment, triggering interview invitation for submission {submission.id}")
                         try:
                             from api.pipeline import process_assessment_passed
-                            # This handles generating the interview link and sending the email
                             process_assessment_passed(submission.id)
                             logger.info(f"SubmitAssessment: Successfully triggered interview invitation for {email}")
                         except Exception as pipe_err:
                             logger.error(f"Pipeline Automation Error: Failed to trigger interview for {email}: {pipe_err}")
                             import traceback
                             logger.error(traceback.format_exc())
+                    elif pass_status == 'selected' and not is_automatic:
+                        logger.info(f"SubmitAssessment: Candidate {email} PASSED manual assessment — marked as qualified, no interview auto-sent.")
                     else:
-                        logger.info(f"SubmitAssessment: Candidate {email} FAILED (status={pass_status}, score={percentage}%), NOT triggering interview")
+                        logger.info(f"SubmitAssessment: Candidate {email} status={pass_status}, score={percentage}% — NOT triggering interview")
 
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
@@ -602,7 +653,7 @@ class GenerateAssessmentView(APIView):
             logger.info(f"Generating Pool (Case {'3' if same_questions_for_all else ('1' if num_applicants <= 1 else '2')}) for {num_applicants} applicants: Multiplier={pool_multiplier}")
 
             
-            local_api_key = GroqKeyManager.get_current_key()
+            local_api_key = LLMKeyManager.get_current_key()
             local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
 
@@ -1080,11 +1131,16 @@ class CreateSubmissionView(APIView):
         pan_number = request.data.get('pan_number', '')
         pan_photo = request.FILES.get('pan_photo')
         pan_verified_raw = request.data.get('pan_verified', False)
-        # Handle string 'true'/'false' from FormData
         if isinstance(pan_verified_raw, str):
             pan_verified = pan_verified_raw.lower() == 'true'
         else:
             pan_verified = bool(pan_verified_raw)
+            
+        identity_mismatch_override_raw = request.data.get('identity_mismatch_override', False)
+        if isinstance(identity_mismatch_override_raw, str):
+            identity_mismatch_override = identity_mismatch_override_raw.lower() == 'true'
+        else:
+            identity_mismatch_override = bool(identity_mismatch_override_raw)
 
         if not all([token, name, email]):
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -1169,26 +1225,26 @@ class CreateSubmissionView(APIView):
                     is_actually_registered = False
 
                 if is_actually_registered:
-                    # ALREADY REGISTERED -> Must Verify (Hard Block)
+                    # ALREADY REGISTERED -> Must Verify (Hard Block) or Override
                     is_verified = _verify_face_with_deepface_microservice(person_id, snapshot)
                     
-                    if not is_verified:
-                        # Capture Violation Screenshot
+                    if not is_verified or identity_mismatch_override:
+                        import base64
+                        from django.core.files.base import ContentFile
+
+                        # Parse the intruder snapshot once
+                        imgstr = snapshot
+                        ext = 'jpg'
+                        if ';' in snapshot and 'base64,' in snapshot:
+                            header, imgstr = snapshot.split(';base64,')
+                            ext = header.split('/')[-1]
+                        img_data = base64.b64decode(imgstr)
+
+                        # 1. Save intruder's face as a dedicated integrity screenshot
                         try:
-                            import base64
-                            from django.core.files.base import ContentFile
-                            
-                            imgstr = snapshot
-                            ext = 'jpg'
-                            if ';' in snapshot and 'base64,' in snapshot:
-                                header, imgstr = snapshot.split(';base64,')
-                                ext = header.split('/')[-1]
-                                
-                            img_data = base64.b64decode(imgstr)
                             integrity_snap = AIAssessmentIntegrityScreenshot(
                                 submission=submission,
                                 event_type="face_mismatch_on_reentry",
-                                violation_text="Identity Fraud (Face Mismatch on Re-entry)"
                             )
                             fname = f"ai_integrity_{submission.id}_mismatch_{int(timezone.now().timestamp())}.{ext}"
                             integrity_snap.screenshot.save(fname, ContentFile(img_data), save=True)
@@ -1198,56 +1254,76 @@ class CreateSubmissionView(APIView):
                             submission.save(update_fields=['integrity_score'])
                         except Exception as e:
                             logger.error(f"Failed to save re-entry identity violation: {e}")
-                            
-                        # HARD BLOCK
-                        # FLAG: Identity mismatch detected but allow override
+
+                        # 2. Save intruder's face to the dedicated intruder_photo field
+                        #    (used by the result page as "ASSESSMENT FACE")
+                        try:
+                            intruder_fname = f"intruder_{submission.id}_{int(timezone.now().timestamp())}.{ext}"
+                            submission.intruder_photo.save(intruder_fname, ContentFile(img_data), save=False)
+                        except Exception as e:
+                            logger.error(f"Failed to save intruder photo: {e}")
+
+                        # 3. FLAG: Identity mismatch detected but allow override
                         submission.identity_mismatch_detected = True
                         submission.identity_mismatch_details = {
                             'mismatch_at': timezone.now().isoformat(),
                             'person_id': person_id,
-                            'mismatch_type': 'face_mismatch_on_reentry_override'
+                            'mismatch_type': 'face_mismatch_on_reentry_override' if not identity_mismatch_override else 'face_mismatch_override'
                         }
                         
-                        # Capture the original photo for comparison
-                        try:
-                            from pathlib import Path
-                            from django.core.files import File
-                            from django.conf import settings
-                            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                            person_face_dir = deepface_data_dir / person_id
-                            
-                            target_file = None
-                            for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-                                if (person_face_dir / name).exists():
-                                    target_file = person_face_dir / name
-                                    break
-                            
-                            if target_file:
-                                with open(target_file, 'rb') as f:
-                                    submission.original_identity_photo.save(
-                                        f"mismatch_{submission.id}_{int(timezone.now().timestamp())}.jpg",
-                                        File(f),
-                                        save=False
-                                    )
-                        except Exception as e:
-                            logger.error(f"Failed to capture original identity photo for override: {e}")
+                        # 4. Capture the ORIGINAL registered face for comparison
+                        #    Only save if not already captured (idempotent on reconnect)
+                        if not submission.original_identity_photo:
+                            try:
+                                from pathlib import Path
+                                from django.core.files import File
+                                from django.conf import settings
+                                deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                                person_face_dir = deepface_data_dir / person_id
+                                
+                                target_file = None
+                                for orig_name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                                    if (person_face_dir / orig_name).exists():
+                                        target_file = person_face_dir / orig_name
+                                        break
+                                if not target_file:
+                                    # Fallback: any jpg in the directory
+                                    for jpg_file in person_face_dir.glob('*.jpg'):
+                                        target_file = jpg_file
+                                        break
+                                
+                                if target_file:
+                                    with open(target_file, 'rb') as f:
+                                        submission.original_identity_photo.save(
+                                            f"original_{submission.id}_{int(timezone.now().timestamp())}.jpg",
+                                            File(f),
+                                            save=False
+                                        )
+                            except Exception as e:
+                                logger.error(f"Failed to capture original identity photo for override: {e}")
 
-                        # Do NOT block the candidate anymore. Allow them to proceed.
+                        # 5. Allow the candidate to proceed — do NOT re-register the new face.
+                        #    The original face registration is preserved so the mismatch remains
+                        #    detectable for the duration of the session.
                         submission.save()
-                        logger.warning(f"Identity mismatch override for AI Assessment submission {submission.id} ({email})")
-                        
-                        # UPDATE MASTER REGISTRATION: Overwrite the old face with the new one
-                        try:
-                            # Re-register using the same person_id (email_token)
-                            if snapshot:
-                                _register_face_with_deepface(person_id, snapshot)
-                                logger.info(f"Updated master face registration for assessment {person_id} to new appearance.")
-                        except Exception as e:
-                            logger.error(f"Failed to update master face registration in assessment override: {e}")
-
-                        # Continue flow... 
+                        logger.warning(
+                            f"Identity mismatch flagged for AI Assessment submission {submission.id} ({email}). "
+                            f"Original face preserved. Intruder photo saved."
+                        )
+                        # Continue flow...
                         pass
                 else:
+                    if identity_mismatch_override:
+                        # Sometimes the deepface service might have been wiped, but they are overriding from frontend state
+                        submission.identity_mismatch_detected = True
+                        submission.identity_mismatch_details = {
+                            'mismatch_at': timezone.now().isoformat(),
+                            'person_id': f"{email}_{token}",
+                            'mismatch_type': 'face_mismatch_override'
+                        }
+                        submission.save()
+                        logger.warning(f"Identity mismatch override flagged for AI Assessment submission {submission.id} ({email}) without deepface conflict")
+
                     # NEW SUBMISSION -> Register anchor face for THIS ASSESSMENT
                     person_id = f"{email}_{token}"
                     _register_face_with_deepface(person_id, snapshot)
@@ -1363,7 +1439,9 @@ class UpdateAssessmentIntegrityView(APIView):
                 submission.face_warnings += 1
             elif event_type in ['looking_away', 'head_yaw_exceeded', 'head_pitch_exceeded']:
                 submission.face_warnings += 1
-            elif event_type in ['face_mismatch', 'verification_failed']:
+            elif event_type in ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry']:
+                submission.face_warnings += 1
+            elif event_type in ['fullscreen_exit', 'liveness_failed']:
                 submission.face_warnings += 1
             
             # Simple metadata log
@@ -1397,6 +1475,9 @@ class UpdateAssessmentIntegrityView(APIView):
                     'head_pitch_exceeded': 3,
                     'face_mismatch': 10,
                     'verification_failed': 10,
+                    'fullscreen_exit': 10,
+                    'liveness_failed': 8,
+                    'face_mismatch_on_reentry': 20,
                 }
                 
                 # Get penalty for this event (default to 5 if not specified)
@@ -1405,8 +1486,9 @@ class UpdateAssessmentIntegrityView(APIView):
                 # Apply penalty
                 submission.integrity_score = max(0, submission.integrity_score - penalty)
             
-            # If this is the first violation being recorded, ensure we start from 100
-            if submission.integrity_score is None or submission.integrity_score == 0:
+            # Initialize integrity_score only if it has never been set (None).
+            # Do NOT reset when score is 0 — that's a legitimate result after penalties!
+            if submission.integrity_score is None:
                 submission.integrity_score = 100.0
             
             # Handle Screenshot
@@ -1641,7 +1723,12 @@ class AssessmentDetailView(APIView):
                     "integrity_screenshots": screenshots_data,
                     "is_resume_screening": False,
                     "candidate_photo_url": photo_url,
-                    "pan_photo": request.build_absolute_uri(sub.pan_photo.url) if sub.pan_photo else None
+                    "pan_photo": request.build_absolute_uri(sub.pan_photo.url) if sub.pan_photo else None,
+                    # Identity mismatch fields
+                    "identity_mismatch_detected": getattr(sub, 'identity_mismatch_detected', False),
+                    "original_identity_photo_url": request.build_absolute_uri(sub.original_identity_photo.url) if getattr(sub, 'original_identity_photo', None) else None,
+                    "intruder_photo_url": request.build_absolute_uri(sub.intruder_photo.url) if getattr(sub, 'intruder_photo', None) else None,
+                    "identity_mismatch_details": getattr(sub, 'identity_mismatch_details', {}),
                 })
 
 
@@ -2302,7 +2389,12 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
                 "id": instance.assessment.id,
                 "display_name": instance.assessment.required_skills,
                 "name": instance.assessment.required_skills
-            }
+            },
+            # Identity mismatch fields
+            "identity_mismatch_detected": getattr(instance, 'identity_mismatch_detected', False),
+            "original_identity_photo_url": request.build_absolute_uri(instance.original_identity_photo.url) if getattr(instance, 'original_identity_photo', None) else None,
+            "intruder_photo_url": request.build_absolute_uri(instance.intruder_photo.url) if getattr(instance, 'intruder_photo', None) else None,
+            "identity_mismatch_details": getattr(instance, 'identity_mismatch_details', {}),
         }
         return Response(data)
 
@@ -2560,8 +2652,15 @@ class AIAssessmentReportDownloadView(APIView):
             integrity_color = colors.HexColor("#05CD99") if integrity_score >= 50 else colors.HexColor("#EE5D50")
 
             # Status display
-            status_display = "Assessment Passed" if submission.status == 'selected' else "Not Qualified" if submission.status in ['rejected', 'hold'] else submission.status.upper()
-            status_color = colors.HexColor("#05CD99") if submission.status == 'selected' else colors.HexColor("#EE5D50")
+            if submission.status == 'selected':
+                status_display = "Assessment Passed"
+                status_color = colors.HexColor("#05CD99")
+            elif submission.status == 'hold':
+                status_display = "On Hold \u2014 Pending Admin Review"
+                status_color = colors.HexColor("#F59E0B")
+            else:
+                status_display = "Not Qualified"
+                status_color = colors.HexColor("#EE5D50")
 
             # 1. Report Header - Interview Report Style
             elements.append(Paragraph("VerifiHireAI — Assessment Report", ParagraphStyle(
@@ -3011,7 +3110,12 @@ class AIAssessmentSubmissionListView(APIView):
                     "id": sub.assessment.id,
                     "display_name": sub.assessment.required_skills,
                     "name": sub.assessment.required_skills
-                }
+                },
+                # Identity mismatch fields
+                "identity_mismatch_detected": getattr(sub, 'identity_mismatch_detected', False),
+                "original_identity_photo_url": request.build_absolute_uri(sub.original_identity_photo.url) if getattr(sub, 'original_identity_photo', None) else None,
+                "intruder_photo_url": request.build_absolute_uri(sub.intruder_photo.url) if getattr(sub, 'intruder_photo', None) else None,
+                "identity_mismatch_details": getattr(sub, 'identity_mismatch_details', {}),
             })
         return Response({"results": data}, status=status.HTTP_200_OK)
 
@@ -3138,6 +3242,7 @@ class AIAssessmentResultsView(APIView):
                 # Identity Override Fields
                 'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
                 'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
+                'intruder_photo_url': request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None,
                 'identity_mismatch_details': getattr(s, 'identity_mismatch_details', {})
             })
         

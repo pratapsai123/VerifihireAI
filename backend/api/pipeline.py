@@ -132,7 +132,7 @@ def process_batch_assessment(batch_id):
             coding_tasks_list = [difficulty] * coding_count
             pool_coding_tasks = coding_tasks_list * multiplier
 
-            local_api_key = GroqKeyManager.get_current_key()
+            local_api_key = LLMKeyManager.get_current_key()
             local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
             generated_data = {"mcqs": [], "coding_challenges": []}
             AI_MODEL = get_default_model()
@@ -159,6 +159,7 @@ def process_batch_assessment(batch_id):
                     pool_easy=pool_easy,
                     pool_medium=pool_medium,
                     pool_hard=pool_hard,
+                    experience_level=getattr(trigger_candidate, 'experience_level', None),
                     blacklist_qs=blacklist_mcqs,
                     model=AI_MODEL,
                     cancel_token=None
@@ -564,7 +565,7 @@ def process_resume_passed(candidate_id):
         pool_coding_total = coding_count
         coding_tasks_list = [difficulty] * coding_count
 
-        local_api_key = GroqKeyManager.get_current_key()
+        local_api_key = LLMKeyManager.get_current_key()
         local_llm_client = create_llm_client(api_key=local_api_key, timeout=60.0)
         generated_data = {"mcqs": [], "coding_challenges": []}
         AI_MODEL = get_default_model()
@@ -591,6 +592,7 @@ def process_resume_passed(candidate_id):
                 pool_easy=pool_easy,
                 pool_medium=pool_medium,
                 pool_hard=pool_hard,
+                experience_level=getattr(candidate, 'experience_level', None),
                 blacklist_qs=blacklist_mcqs,
                 model=AI_MODEL,
                 cancel_token=None

@@ -486,4 +486,4 @@ def call_groq_with_backoff(
 # ─── Backward Compatibility Aliases ──────────────────────────────────────────
 # These allow existing code that imports GroqKeyManager to continue working.
 
-_call_groq_with_backoff = call_llm_with_backoff
+_call_groq_with_backoff = call_groq_with_backoff

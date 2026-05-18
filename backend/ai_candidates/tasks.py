@@ -16,15 +16,17 @@ from ai_assessments.llm_client import (
     create_llm_client,
     LLMKeyManager,
     call_llm_with_backoff,
-    get_default_model
+    get_default_model,
+    GroqKeyManager,
+    call_groq_with_backoff,
+    get_groq_model
 )
 from .models import Candidate
 from .utils import log_automation_event
 from api.ocr_utils import _get_reader
 
 # Backward-compatible aliases
-GroqKeyManager = LLMKeyManager
-_call_groq_with_backoff = call_llm_with_backoff
+_call_groq_with_backoff = call_groq_with_backoff
 
 logger = logging.getLogger(__name__)
 
@@ -73,22 +75,21 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
     total = candidates.count()
     
     # 0. Setup Keys
-    api_keys = getattr(settings, 'DEEPSEEK_API_KEYS', [])
+    api_keys = getattr(settings, 'GROQ_API_KEYS', [])
     if not api_keys:
-        single_key = getattr(settings, 'DEEPSEEK_API_KEY', None)
+        single_key = getattr(settings, 'GROQ_API_KEY', None)
         api_keys = [single_key] if single_key else []
     
     if not api_keys:
-        logger.error("No DEEPSEEK_API_KEYS found!")
+        logger.error("No GROQ_API_KEYS found!")
         return
 
 
-    # DeepSeek V4 Flash - single model, no fallback needed
-    primary_model = get_default_model()
-    fallback_model = get_default_model()
+    primary_model = get_groq_model()
+    fallback_model = get_groq_model()
 
     print(f"\nSTARTING OPTIMIZED BATCH: {total} candidates")
-    print(f"Using {len(api_keys)} API keys with rotation.")
+    print(f"Using {len(api_keys)} Groq API keys with rotation.")
     print("------------------------------------------------------------")
 
     # Log batch start for each candidate if needed, 
@@ -211,11 +212,10 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             match_result = None
             
             try:
-                print(f"   🤖 Calling LLM ({get_default_model()})... ", end="", flush=True)
-                match_result = call_llm_with_backoff(
+                print(f"   🤖 Calling Groq ({get_groq_model()})... ", end="", flush=True)
+                match_result = call_groq_with_backoff(
                     prompt=prompt,
                     is_json=True,
-                    model=get_default_model(),
                     max_tokens=4096,
                     temperature=0.0,
                 )

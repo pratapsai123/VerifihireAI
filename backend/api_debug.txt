@@ -5449,3 +5449,182 @@ Exception: All coding challenges failed final quality check (insufficient test c
 
 RAW: No response received
 >>>>>>> origin/rishi14
+
+[2026-05-16 22:15:18] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Read timed out. (read timeout=300)
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    target = int(data[n+1])\n    left, right = 0, len(nums) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if nums[mid] == target:\n            print(mid)\n            return\n        if nums[left] <= nums[mid]:\n            if nums[left] <= target < nums[mid]:\n                right = mid - 1\n            else:\n                left = mid + 1\n        else:\n            if nums[mid] < target <= nums[right]:\n                left = mid + 1\n            else:\n                right = mid - 1\n    print(-1)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "8\n18 34 48 49 41 47 21 49\n17",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-16 22:20:50] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Read timed out. (read timeout=300)
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    data = sys.stdin.read().split()\n    if not data: return\n    n = int(data[0])\n    nums = [int(x) for x in data[1:n+1]]\n    jumps = 0\n    current_end = 0\n    farthest = 0\n    for i in range(len(nums) - 1):\n        farthest = max(farthest, i + nums[i])\n        if i == current_end:\n            jumps += 1\n            current_end = farthest\n    print(jumps)\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "3\n10 4 5",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-16 22:22:59] EXECUTOR FAILURE: HTTPConnectionPool(host='localhost', port=4000): Read timed out. (read timeout=300)
+PAYLOAD: {
+  "language": "python",
+  "source_code": "import sys\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    n = int(input_data[0])\n    matrix = []\n    idx = 1\n    for r in range(n):\n        matrix.append([int(x) for x in input_data[idx:idx+n]])\n        idx += n\n    res = [[0]*n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            res[j][n-1-i] = matrix[i][j]\n    for r in res:\n        print(\" \".join(map(str, r)))\nif __name__ == \"__main__\":\n    main()",
+  "stdin": "5\n4 9 1\n8 0 4\n1 4 8\n8 0 1\n4 6 0",
+  "time_limit_ms": 5000,
+  "memory_mb": 256
+}
+
+[2026-05-16 17:15:35.360856+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778951735336']}>
+Host: 127.0.0.1:8001
+
+[2026-05-16 17:15:52.555819+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778951752540']}>
+Host: 127.0.0.1:8001
+
+[2026-05-16 17:15:52.556876+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778951752544']}>
+Host: 127.0.0.1:8001
+
+[2026-05-16 17:21:09.360723+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778952069338']}>
+Host: 127.0.0.1:8001
+
+[2026-05-16 17:21:16.800572+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778952076758']}>
+Host: 127.0.0.1:8001
+
+[2026-05-16 17:21:16.815678+00:00] PUBLIC ACCESS: Token='b3057671-83a2-406f-bf7f-bf772c0d3ae0'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1778952076759']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 08:50:38.407707+00:00] PUBLIC ACCESS: Token='82d19567-9a04-4217-9db6-51e72453e167'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779007838391']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 08:55:06.877409+00:00] PUBLIC ACCESS: Token='82d19567-9a04-4217-9db6-51e72453e167'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779008106858']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 08:58:39.850693+00:00] PUBLIC ACCESS: Token='82d19567-9a04-4217-9db6-51e72453e167'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779008319793']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 09:06:00.033706+00:00] PUBLIC ACCESS: Token='82d19567-9a04-4217-9db6-51e72453e167'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779008760021']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 09:06:00.149048+00:00] PUBLIC ACCESS: Token='82d19567-9a04-4217-9db6-51e72453e167'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779008760031']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:54:33.739846+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022473730']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:54:51.830595+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022491821']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:54:51.832489+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022491822']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:58:46.985858+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022726967']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:59:07.854348+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022747843']}>
+Host: 127.0.0.1:8001
+
+[2026-05-17 12:59:07.860094+00:00] PUBLIC ACCESS: Token='9e029951-4d36-4412-9d32-af22be62697e'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779022747847']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:48:58.646125+00:00] PUBLIC ACCESS: Token='c0430693-9691-4168-a3f3-9df2f5937b58'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065338625']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:49:32.255587+00:00] PUBLIC ACCESS: Token='c0430693-9691-4168-a3f3-9df2f5937b58'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065372237']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:49:32.255587+00:00] PUBLIC ACCESS: Token='c0430693-9691-4168-a3f3-9df2f5937b58'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065372239']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:56:00.132642+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065760116']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:56:25.979861+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065785970']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 00:56:25.988519+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779065785979']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:01:29.862580+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779066089833']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:01:52.852500+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779066112833']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:01:52.855991+00:00] PUBLIC ACCESS: Token='a762c5f9-860c-4fd7-8dee-75eddbf2e8cb'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779066112836']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:46:53.020698+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068812994']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:47:13.430445+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068833411']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:47:13.433166+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068833417']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:49:06.898060+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068946875']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:49:28.455365+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068968439']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:49:28.463410+00:00] PUBLIC ACCESS: Token='a31e9460-84a6-4c37-8798-d5cac1338b85'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779068968441']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:58:41.055226+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069521030']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:59:02.539267+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069542528']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 01:59:02.540887+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069542526']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 02:00:42.509758+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069642492']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 02:01:02.754763+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069662737']}>
+Host: 127.0.0.1:8001
+
+[2026-05-18 02:01:02.754763+00:00] PUBLIC ACCESS: Token='834c3ada-827d-44af-9b5c-b7e546401a7c'
+Query Params: <QueryDict: {'email': ['anderishidarreddy@gmail.com'], '_t': ['1779069662739']}>
+Host: 127.0.0.1:8001
