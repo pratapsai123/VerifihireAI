@@ -146,10 +146,14 @@ def register_face(
             }
 
         # Wipe existing face embeddings ONLY if overwrite is explicitly requested.
-        import shutil
         person_dir = _get_person_dir(person_id)
-        if person_dir.exists():
-            shutil.rmtree(person_dir)
+        if overwrite and person_dir.exists():
+            for item in person_dir.glob("**/*"):
+                if item.is_file():
+                    try:
+                        item.unlink()
+                    except Exception as clean_err:
+                        logger.warning(f"Could not unlink {item}: {clean_err}")
 
         # Re-create directory and start fresh
         person_dir = _get_person_dir(person_id)

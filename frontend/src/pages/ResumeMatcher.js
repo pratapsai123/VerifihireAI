@@ -11,6 +11,7 @@ const ResumeMatcher = () => {
     const [files, setFiles] = useState([]);
     const [jobDescription, setJobDescription] = useState('');
     const [threshold, setThreshold] = useState(70);
+    const [experienceLevel, setExperienceLevel] = useState('mid');
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [isRetrying, setIsRetrying] = useState(false);
     const [results, setResults] = useState(null);
@@ -128,7 +129,7 @@ const ResumeMatcher = () => {
     const initialDataHash = React.useRef(null);
     if (!initialDataHash.current) {
         initialDataHash.current = JSON.stringify({
-            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId, experienceLevel,
             mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
             assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
             interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
@@ -138,7 +139,7 @@ const ResumeMatcher = () => {
 
     React.useEffect(() => {
         const formData = {
-            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+            jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId, experienceLevel,
             mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
             sameQuestionsForAll,
             assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
@@ -155,7 +156,7 @@ const ResumeMatcher = () => {
         isDirty.current = true;
         sessionStorage.setItem(STORAGE_KEY, currentDataStr);
     }, [
-        jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId,
+        jobDescription, threshold, matchMode, customRoleTitle, selectedRoleId, experienceLevel,
         mcqDuration, codingDuration, mcqCount, codingCount, passThreshold, codingChallenges,
         assessmentStartDate, assessmentStartTime, assessmentEndDate, assessmentEndTime,
         interviewStartDate, interviewStartTime, interviewEndDate, interviewEndTime,
@@ -267,6 +268,7 @@ const ResumeMatcher = () => {
         }
 
         formData.append('threshold', threshold);
+        formData.append('experience_level', experienceLevel);
 
         if (matchMode === 'automatic') {
             formData.append('mcq_duration', mcqDuration);
@@ -509,6 +511,30 @@ const ResumeMatcher = () => {
                                 </div>
                             )}
                         </div>
+                    </div>
+
+                    <div className="section-container">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                            <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                <i className="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Experience Level</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Select the target seniority for AI assessment generation.</p>
+                            </div>
+                        </div>
+                        <select
+                            className="modern-input"
+                            value={experienceLevel}
+                            onChange={(e) => setExperienceLevel(e.target.value)}
+                            style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC', color: '#1B254B', fontWeight: '500' }}
+                        >
+                            <option value="fresher">Fresher (0 Years)</option>
+                            <option value="entry">Entry Level (0-2 Years)</option>
+                            <option value="mid">Mid Level (2-5 Years)</option>
+                            <option value="senior">Senior Level (5-10 Years)</option>
+                            <option value="expert">Expert / Architect (10+ Years)</option>
+                        </select>
                     </div>
 
                     <div className="section-container">

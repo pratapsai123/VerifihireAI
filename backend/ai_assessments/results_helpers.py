@@ -1,5 +1,6 @@
 from ai_candidates.models import Candidate
 from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
+from ai_assessments.views import _get_candidate_photo_url
 
 
 def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None):
@@ -31,6 +32,21 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
         ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
     if end_date:
         ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
+
+    # Pre-fetch approved qualification requests for these submissions
+    # so we know which ones were explicitly reviewed by admin/HR
+    try:
+        from api.models import QualificationRequest
+        approved_ai_ids = set(
+            QualificationRequest.objects.filter(
+                content_type=QualificationRequest.CONTENT_AI,
+                status=QualificationRequest.STATUS_APPROVED,
+            ).values_list('ai_submission_id', flat=True)
+        )
+        # Convert to int set for comparison
+        approved_ai_ids = {int(x) for x in approved_ai_ids if x and str(x).isdigit()}
+    except Exception:
+        approved_ai_ids = set()
 
     results = []
     for s in ai_qs[:5000]:
@@ -80,6 +96,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
 
                 'status': getattr(s, 'status', 'COMPLETED'),
                 'qual_pending': s.id in pending_qual_ai_ids,
+                'was_approved': s.id in approved_ai_ids,
                 'total_questions': getattr(s, 'total_questions', 0),
                 'candidate_questions': getattr(s, 'candidate_questions', None) or getattr(a, 'generated_content', {}),
                 'answers': getattr(s, 'answers', {}),
@@ -89,6 +106,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                     'integrity_score': getattr(s, 'integrity_score', 100.0),
                     'warning_logs': getattr(s, 'warning_logs', [])
                 },
+                'integrity_score': getattr(s, 'integrity_score', 100.0),
                 'integrity_screenshots': screenshots_data,
                 'is_resume_screening': False,
                 'batch_id': s.batch_id,
@@ -98,7 +116,12 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'phone': getattr(s, 'phone', None),
                 'pan_number': getattr(s, 'pan_number', None),
                 'pan_photo': request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None,
-                'pan_verified': getattr(s, 'pan_verified', False)
+                'pan_verified': getattr(s, 'pan_verified', False),
+                'candidate_photo_url': _get_candidate_photo_url(request, s),
+                # Identity mismatch fields
+                'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
+                'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
+                'intruder_photo_url': request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None,
             }
         )
 
