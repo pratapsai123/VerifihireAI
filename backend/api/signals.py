@@ -59,10 +59,33 @@ def handle_candidate_save(sender, instance, created, **kwargs):
 @receiver(post_save, sender=AIAssessmentSubmission)
 def handle_assessment_save(sender, instance, created, **kwargs):
     if instance.status == 'selected':
+        # ── CHECK: Only auto-send interview link for FULLY AUTOMATIC pipeline flows ──
+        # Manual assessments should NOT trigger an automatic interview invite.
+        # The HR/Admin must send the interview link manually for manual assessments.
+        is_automatic_assessment = getattr(instance.assessment, 'creation_type', 'manual') == 'automatic'
+
+        # Also check the candidate's automation_settings
+        is_candidate_automatic = False
+        try:
+            from ai_candidates.models import Candidate as AICand
+            cand_qs = AICand.objects.filter(
+                email__iexact=instance.candidate_email,
+                company=instance.assessment.company
+            ).order_by('-id')
+            cand = cand_qs.first()
+            if cand and cand.automation_settings:
+                is_candidate_automatic = cand.automation_settings.get('is_fully_automatic', False)
+        except Exception:
+            pass
+
+        is_fully_automatic = is_automatic_assessment and is_candidate_automatic
+
         logger.info(
             f"Signal: Assessment submission {instance.id} PASSED "
             f"({instance.candidate_name} — {instance.percentage}%). "
-            f"Scheduling interview invite task (120s delay)."
+            f"is_automatic_assessment={is_automatic_assessment}, "
+            f"is_candidate_automatic={is_candidate_automatic}, "
+            f"is_fully_automatic={is_fully_automatic}."
         )
 
         # Log this event in the candidate's pipeline timeline so it appears on the Results page
@@ -77,7 +100,8 @@ def handle_assessment_save(sender, instance, created, **kwargs):
                     cand_qs.first(),
                     'TASK_SCHEDULED', 'SUCCESS',
                     f"Assessment passed with {instance.percentage}% score. "
-                    f"Interview invitation email scheduled (2-minute delay).",
+                    + (f"Interview invitation email scheduled (2-minute delay)." if is_fully_automatic
+                       else f"Manual flow — interview link NOT auto-sent."),
                     details={
                         'submission_id': instance.id,
                         'score': instance.percentage,
@@ -86,6 +110,13 @@ def handle_assessment_save(sender, instance, created, **kwargs):
                 )
         except Exception as log_err:
             logger.warning(f"Signal: Could not write PipelineLog for assessment pass event: {log_err}")
+
+        if not is_fully_automatic:
+            logger.info(
+                f"Signal: Assessment {instance.id} is MANUAL (creation_type={getattr(instance.assessment, 'creation_type', 'manual')}). "
+                f"Skipping automatic interview invite. HR must send interview link manually."
+            )
+            return
 
         def schedule_interview():
             try:

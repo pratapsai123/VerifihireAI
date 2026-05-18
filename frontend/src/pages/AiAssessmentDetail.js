@@ -645,16 +645,16 @@ const AiAssessmentDetail = () => {
                                                 <div>
                                                     <h4 style={{ color: '#991B1B', margin: '0 0 0.5rem 0', fontWeight: 'bold' }}>IDENTITY MISMATCH DETECTED (HR REVIEW REQUIRED)</h4>
                                                     <p style={{ color: '#7F1D1D', margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>
-                                                        The candidate failed the automated facial verification check when starting the assessment.
-                                                        They chose to "Override & Continue", meaning the assessment was completed using a <strong>different face</strong> than what was initially registered.
-                                                        Please compare the original face with the overriding assessment face below.
+                                                        {selectedSubmission.identity_mismatch_details?.mismatch_type?.includes('during_session')
+                                                            ? 'The AI proctoring system detected a different face during the assessment session. The person in front of the camera did not match the registered candidate.'
+                                                            : 'The candidate failed the automated facial verification check when starting the assessment. They chose to "Override & Continue", meaning the assessment was completed using a different face than what was initially registered.'}
+                                                        {(selectedSubmission.original_identity_photo_url || selectedSubmission.intruder_photo_url) && ' Please compare the faces in the Identity Evidence section below.'}
                                                     </p>
                                                 </div>
                                             </div>
                                         )}
 
                                         {(() => {
-                                            // Get candidate photo exclusively from the authorized registration
                                             const candidatePhoto = selectedSubmission.candidate_photo_url;
                                             return (
                                         <div style={{
@@ -663,114 +663,22 @@ const AiAssessmentDetail = () => {
                                             alignItems: 'flex-start'
                                         }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
-                                            {/* Candidate Photo / Override Check */}
-                                            {selectedSubmission.identity_mismatch_detected && (selectedSubmission.original_identity_photo_url || selectedSubmission.intruder_photo_url) ? (
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '180px' }}>
-                                                    {/* ORIGINAL FACE */}
-                                                    <div style={{
-                                                        width: '180px',
-                                                        height: '180px',
-                                                        background: '#F4F7FE',
-                                                        borderRadius: '12px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        border: '2px solid #EE5D50',
-                                                        overflow: 'hidden',
-                                                        position: 'relative'
-                                                    }}>
-                                                        <div style={{
-                                                            position: 'absolute', top: 0, left: 0, right: 0,
-                                                            background: '#EE5D50', color: 'white',
-                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
-                                                            fontWeight: 'bold', zIndex: 2
-                                                        }}>
-                                                            ORIGINAL FACE
-                                                        </div>
-                                                        <img
-                                                            src={selectedSubmission.original_identity_photo_url}
-                                                            alt="Original Candidate"
-                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                        />
-                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                        </div>
-                                                    </div>
-
-                                                    {/* OVERRIDE FACE */}
-                                                    <div style={{
-                                                        width: '180px',
-                                                        height: '180px',
-                                                        background: '#F4F7FE',
-                                                        borderRadius: '12px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        border: '2px dashed #F59E0B',
-                                                        overflow: 'hidden',
-                                                        position: 'relative'
-                                                    }}>
-                                                        <div style={{
-                                                            position: 'absolute', top: 0, left: 0, right: 0,
-                                                            background: '#F59E0B', color: 'white',
-                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
-                                                            fontWeight: 'bold', zIndex: 2
-                                                        }}>
-                                                            ASSESSMENT FACE
-                                                        </div>
-                                                        <img
-                                                            src={selectedSubmission.intruder_photo_url || candidatePhoto}
-                                                            alt="Assessment Candidate"
-                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                        />
-                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                        </div>
-                                                    </div>
+                                            {/* Always show single registered face photo at top */}
+                                            <div style={{
+                                                width: '180px', height: '180px', background: '#F4F7FE',
+                                                borderRadius: '12px', display: 'flex', alignItems: 'center',
+                                                justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden'
+                                            }}>
+                                                {candidatePhoto ? (
+                                                    <img src={candidatePhoto} alt="Candidate"
+                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                    />
+                                                ) : null}
+                                                <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                    <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
                                                 </div>
-                                            ) : (
-                                                <div style={{
-                                                    width: '180px',
-                                                    height: '180px',
-                                                    background: '#F4F7FE',
-                                                    borderRadius: '12px',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    border: '1px solid #E0E5F2',
-                                                    overflow: 'hidden'
-                                                }}>
-                                                    {candidatePhoto ? (
-                                                        <img
-                                                            src={candidatePhoto}
-                                                            alt="Candidate"
-                                                            style={{
-                                                                width: '100%',
-                                                                height: '100%',
-                                                                objectFit: 'cover'
-                                                            }}
-                                                            onError={(e) => {
-                                                                e.target.style.display = 'none';
-                                                                e.target.nextSibling.style.display = 'flex';
-                                                            }}
-                                                        />
-                                                    ) : null}
-                                                    <div style={{
-                                                        display: candidatePhoto ? 'none' : 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        width: '100%',
-                                                        height: '100%'
-                                                    }}>
-                                                        <i className="fa-solid fa-user" style={{
-                                                            fontSize: '4rem',
-                                                            color: '#A3AED0'
-                                                        }}></i>
-                                                    </div>
-                                                </div>
-                                            )}
+                                            </div>
 
                                             {/* PAN Card Photo */}
                                             {selectedSubmission.pan_photo && (
@@ -1214,6 +1122,74 @@ const AiAssessmentDetail = () => {
                                             </div>
                                         ));
                                     })()}
+                                </div>
+                            )}
+
+                            {/* ── IDENTITY EVIDENCE — Two-face comparison shown at bottom ── */}
+                            {selectedSubmission.identity_mismatch_detected && (
+                                <div style={{ marginTop: '3rem' }}>
+                                    <h4 style={{ color: '#991B1B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626' }}></i> Identity Evidence — Face Comparison
+                                    </h4>
+                                    <div style={{ background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '16px', padding: '1.5rem', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                                        {/* BOX 1: First registered face (deepface face_0.jpg for this assessment) */}
+                                        <div style={{ textAlign: 'center' }}>
+                                            <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E0E5F2', position: 'relative', marginBottom: '0.5rem' }}>
+                                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                    ✓ REGISTERED FACE
+                                                </div>
+                                                <img src={selectedSubmission.candidate_photo_url} alt="Registered Face"
+                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                />
+                                                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                    <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
+                                                </div>
+                                            </div>
+                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#065f46' }}>Original Candidate</div>
+                                        </div>
+
+                                        <div style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', color: '#DC2626', fontWeight: 'bold', paddingTop: '60px' }}>≠</div>
+
+                                        {/* BOX 2: Person who joined mid-exam (intruder_photo) */}
+                                        <div style={{ textAlign: 'center' }}>
+                                            <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '2px dashed #DC2626', position: 'relative', marginBottom: '0.5rem' }}>
+                                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#DC2626', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                    ⚠ DIFFERENT PERSON DETECTED
+                                                </div>
+                                                <img src={selectedSubmission.intruder_photo_url || (() => {
+                                                    const snaps = selectedSubmission.integrity_screenshots || selectedSubmission.integrity_logs || [];
+                                                    const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
+                                                    if (mismatchSnap) {
+                                                        return mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
+                                                    }
+                                                    if (snaps.length > 0) {
+                                                        const lastSnap = snaps[snaps.length - 1];
+                                                        return lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
+                                                    }
+                                                    return null;
+                                                })()} alt="Intruder Face"
+                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                />
+                                                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                    <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
+                                                </div>
+                                            </div>
+                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#991B1B' }}>Person During Assessment</div>
+                                        </div>
+
+                                        <div style={{ flex: 1, minWidth: '200px', paddingTop: '30px' }}>
+                                            <p style={{ color: '#7F1D1D', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                                                <strong>HR Action Required:</strong> The AI proctoring system detected that the person completing the assessment does not match the registered candidate. Please verify the candidate's identity before making a hiring decision.
+                                            </p>
+                                            {selectedSubmission.identity_mismatch_details?.mismatch_at && (
+                                                <p style={{ color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                                                    Detected at: {new Date(selectedSubmission.identity_mismatch_details.mismatch_at).toLocaleString()}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>

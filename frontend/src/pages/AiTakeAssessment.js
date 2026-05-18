@@ -2602,23 +2602,25 @@ const AiTakeAssessment = () => {
                 let errorMsg = "";
 
                 if (isAlreadyRegistered) {
-                    console.log("Candidate already registered. Switching to Verification Mode.");
-                    // PERFORM VERIFICATION
-                    const verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
-                        person_id: personId,
-                        image_base64: finalImage.split(',')[1]
-                    });
-
-                    if (verifyRes.data && verifyRes.data.verified === true) {
+                    console.log("Candidate already registered. Verifying face silently...");
+                    // PERFORM VERIFICATION — no override screen shown to candidate
+                    try {
+                        const verifyRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/verify`, {
+                            person_id: personId,
+                            image_base64: finalImage.split(',')[1]
+                        });
+                        if (verifyRes.data && verifyRes.data.verified === true) {
+                            success = true;
+                        } else {
+                            // Mismatch — proceed silently, backend will flag for HR review
+                            console.warn("Face mismatch detected — proceeding silently, backend will flag.");
+                            setMismatchSnapshot(finalImage);
+                            success = true;
+                        }
+                    } catch (verifyErr) {
+                        // Verification error — allow candidate to proceed
+                        console.warn("Verification error, proceeding:", verifyErr);
                         success = true;
-                    } else {
-                        // Show override option instead of hard-blocking
-                        console.warn("Face mismatch detected. Offering Override & Continue option.");
-                        setRegError("⚠️ IDENTITY MISMATCH: Your face does not match the person who originally registered for this assessment. You may continue, but this will be flagged for HR review.");
-                        setShowOverrideOption(true);
-                        setMismatchSnapshot(finalImage);
-                        setWizardStep(0);
-                        return;
                     }
                 } else {
                     console.log("Candidate not registered. Registering fresh anchor face.");
@@ -2653,15 +2655,13 @@ const AiTakeAssessment = () => {
 
 
                 setWizardStep(2); // Success
-
-                logCandidateActivity(token, 'AI Interview Started', 'Candidate passed proctoring check and started the AI Interview.');
+                logCandidateActivity(token, 'AI Assessment Started', 'Candidate passed proctoring check and started the AI Assessment.');
 
                 setTimeout(() => {
-
                     setIsRegistered(true);
-
-                    onComplete(finalImage.split(',')[1]);
-
+                    // Pass mismatchSnapshot as second arg if mismatch was detected silently
+                    const isMismatch = !!mismatchSnapshot && mismatchSnapshot !== finalImage;
+                    onComplete(finalImage.split(',')[1], isMismatch);
                 }, 1500);
 
             } catch (e) {
@@ -2838,9 +2838,9 @@ const AiTakeAssessment = () => {
 
                     {regError && (
                         <div style={{
-                            color: showOverrideOption ? '#b45309' : '#ef4444',
-                            background: showOverrideOption ? '#fef3c7' : '#fef2f2',
-                            border: showOverrideOption ? '1px solid #f59e0b' : '1px solid #fecaca',
+                            color: '#ef4444',
+                            background: '#fef2f2',
+                            border: '1px solid #fecaca',
                             padding: '1rem 1.5rem',
                             borderRadius: '12px',
                             marginBottom: '1.5rem',
@@ -2852,32 +2852,7 @@ const AiTakeAssessment = () => {
                         </div>
                     )}
 
-                    {/* Override & Continue option for identity mismatch */}
-                    {showOverrideOption && (
-                        <div style={{ marginBottom: '1.5rem' }}>
-                            <button
-                                onClick={handleOverrideContinue}
-                                disabled={isOverriding}
-                                style={{
-                                    background: isOverriding ? '#9ca3af' : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '0.9rem 2.5rem',
-                                    borderRadius: '50px',
-                                    fontSize: '1rem',
-                                    fontWeight: '700',
-                                    cursor: isOverriding ? 'not-allowed' : 'pointer',
-                                    boxShadow: '0 8px 16px rgba(245, 158, 11, 0.3)',
-                                    transition: 'all 0.2s'
-                                }}
-                            >
-                                {isOverriding ? 'Processing Override...' : '⚠️ Override & Continue (Flagged for Review)'}
-                            </button>
-                            <p style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                                This action will be recorded and flagged in assessment results for HR review.
-                            </p>
-                        </div>
-                    )}
+                    {/* Override & Continue option removed — mismatch is now handled silently by backend */}
 
 
 
