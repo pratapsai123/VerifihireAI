@@ -1,11 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor, triggerMonitorScan } from '../security/securityApi';
+import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor, triggerMonitorScan, terminateTerminalViolation } from '../security/securityApi';
 import { isValidPackagedAgent } from '../security/agentValidation';
 import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord, markExamStarted, isExamStarted } from '../security/sessionStorage';
+import {
+  TERMINAL_CLOSE_LIMIT,
+  incrementTerminalCloseCount,
+  setTerminalCloseWarning,
+  clearTerminalCloseCount,
+} from '../security/terminalCloseStrikes';
 import { logCandidateActivity } from '../utils/activityLogger';
+import {
+  finalizeTerminatedExam,
+  logSessionTerminated,
+  logTerminalCloseStrike,
+  TERMINATION_REASONS,
+} from '../utils/examTermination';
 import ConnectionLostOverlay from './ConnectionLostOverlay';
 import useNetworkStatus from '../hooks/useNetworkStatus';
+import { checkInvitationPublicAccess, isInvitationAlreadySubmitted } from '../utils/invitationAccess';
 
 export default function SecuritySessionGuard({ children, sessionType = 'assessment' }) {
   const { isOnline } = useNetworkStatus();
@@ -24,6 +37,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     console.log('SecuritySessionGuard - Redirecting to precheck:', url);
     return url;
   };
+  const [gateState, setGateState] = useState('pending'); // pending | submitted | redirecting | ready
   const [paused, setPaused] = useState(false);
   const [pauseDevice, setPauseDevice] = useState('');
   const [warning, setWarning] = useState(false);
@@ -33,6 +47,14 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   useEffect(() => {
     warningRef.current = warning;
   }, [warning]);
+
+  // FIX 1: Track whether the candidate has completed the details form.
+  // We only start aggressive polling AFTER the exam begins, not during the form.
+  const [examStarted, setExamStarted] = useState(() => isExamStarted(token));
+  const examStartedRef = useRef(examStarted);
+  useEffect(() => {
+    examStartedRef.current = examStarted;
+  }, [examStarted]);
 
   // Nudge the local agent to scan frequently while the warning overlay is shown
   useEffect(() => {
@@ -50,19 +72,14 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     isOnlineRef.current = isOnline;
   }, [isOnline]);
 
-  // FIX 1: Track whether the candidate has completed the details form.
-  // We only start aggressive polling AFTER the exam begins, not during the form.
-  const [examStarted, setExamStarted] = useState(() => isExamStarted(token));
-  const examStartedRef = useRef(examStarted);
-  useEffect(() => {
-    examStartedRef.current = examStarted;
-  }, [examStarted]);
-
   // FIX 2: Use a ref to reliably trigger navigation from inside setInterval.
   // This avoids the stale closure bug where navigate() is captured at mount time.
   const shouldTerminateRef = useRef(false);
   const navigateRef = useRef(navigate);
   useEffect(() => { navigateRef.current = navigate; }, [navigate]);
+
+  const terminalAbsentRef = useRef(false);
+  const handlingTerminalCloseRef = useRef(false);
 
   // Listen for a custom event from TakeAssessment/children indicating exam has started
   useEffect(() => {
@@ -78,25 +95,26 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   useEffect(() => {
     if (!warning) return;
     if (timeLeft <= 0) {
-      // Terminate session
       const sessionRecord = readSessionRecord(token);
-      logCandidateActivity(
-        token,
-        'Session Terminated',
-        `Grace period expired — auto-terminated. App: ${blockedApp}`
-      );
-      if (sessionRecord) {
-        stopLocalMonitor({
-          session_id: sessionRecord.session_id,
-          user_id: sessionRecord.user_id,
-          token,
-          agent_instance_id: sessionRecord.agent_instance_id,
-          immediate_shutdown: true,
-        }).catch(() => { });
-      }
-      clearPrecheckRecord(token);
-      window.onbeforeunload = null; // Prevent TakeAssessment from blocking the termination
-      window.location.href = '/session-terminated';
+      const graceDetail = `Remote access application not closed within grace period. App: ${blockedApp}`;
+      (async () => {
+        await finalizeTerminatedExam(token, {
+          reason: TERMINATION_REASONS.GRACE_EXPIRED,
+          detail: graceDetail,
+        });
+        if (sessionRecord) {
+          stopLocalMonitor({
+            session_id: sessionRecord.session_id,
+            user_id: sessionRecord.user_id,
+            token,
+            agent_instance_id: sessionRecord.agent_instance_id,
+            immediate_shutdown: true,
+          }).catch(() => {});
+        }
+        clearPrecheckRecord(token);
+        window.onbeforeunload = null;
+        window.location.href = '/session-terminated?reason=remote_access';
+      })();
     }
   }, [timeLeft, warning, token, blockedApp]);
 
@@ -110,22 +128,101 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     return () => clearInterval(timer);
   }, [warning, timeLeft]);
 
-  // Main security monitoring effect
+  const handleAgentTerminalClosed = async (sessionRecord) => {
+    if (handlingTerminalCloseRef.current) return;
+    handlingTerminalCloseRef.current = true;
+
+    const closeCount = incrementTerminalCloseCount(token);
+    const chancesLeft = Math.max(0, TERMINAL_CLOSE_LIMIT - closeCount);
+
+    await logTerminalCloseStrike(token, closeCount, chancesLeft);
+
+    if (closeCount >= TERMINAL_CLOSE_LIMIT) {
+      const terminalDetail = 'Secure Agent terminal was closed 3 times during the exam.';
+      try {
+        await terminateTerminalViolation({
+          session_id: sessionRecord?.session_id,
+          token,
+          user_id: sessionRecord?.user_id,
+        });
+      } catch (_err) { /* best effort */ }
+
+      await finalizeTerminatedExam(token, {
+        reason: TERMINATION_REASONS.TERMINAL_CLOSE,
+        detail: terminalDetail,
+      });
+
+      if (sessionRecord) {
+        await stopLocalMonitor({
+          session_id: sessionRecord.session_id,
+          user_id: sessionRecord.user_id,
+          token,
+          agent_instance_id: sessionRecord.agent_instance_id,
+          immediate_shutdown: true,
+        }).catch(() => {});
+      }
+      clearPrecheckRecord(token);
+      clearTerminalCloseCount(token);
+      window.onbeforeunload = null;
+      window.location.href = '/session-terminated?reason=terminal';
+      return;
+    }
+
+    setTerminalCloseWarning(token, { closeCount, chancesLeft });
+    clearPrecheckRecord(token);
+    navigateRef.current(buildPrecheckUrl(token, sessionType), { replace: true });
+  };
+
+  // Entry gate: submitted exams skip precheck; active exams require valid precheck session.
   useEffect(() => {
     if (!token) {
       navigate('/', { replace: true });
       return;
     }
 
-    const sessionRecord = readSessionRecord(token);
-    const precheckRecord = readPrecheckRecord(token);
-    const isPrecheckValid =
-      precheckRecord?.passed === true &&
-      precheckRecord?.type === sessionType &&
-      sessionRecord?.session_id;
+    let cancelled = false;
 
-    if (!isPrecheckValid) {
-      navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+    const resolveGate = async () => {
+      const access = await checkInvitationPublicAccess(token);
+      if (cancelled) return;
+
+      if (isInvitationAlreadySubmitted(access)) {
+        setGateState('submitted');
+        return;
+      }
+
+      const sessionRecord = readSessionRecord(token);
+      const precheckRecord = readPrecheckRecord(token);
+      const isPrecheckValid =
+        precheckRecord?.passed === true &&
+        precheckRecord?.type === sessionType &&
+        sessionRecord?.session_id;
+
+      if (!isPrecheckValid) {
+        setGateState('redirecting');
+        navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+        return;
+      }
+
+      setGateState('ready');
+    };
+
+    setGateState('pending');
+    resolveGate();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [token, sessionType, navigate, searchParams]);
+
+  // Main security monitoring effect
+  useEffect(() => {
+    if (!token || gateState !== 'ready') {
+      return;
+    }
+
+    const sessionRecord = readSessionRecord(token);
+    if (!sessionRecord?.session_id) {
       return;
     }
 
@@ -142,11 +239,11 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         const agentStatus = await fetchAgentStatus();
         if (!isValidPackagedAgent(agentStatus)) {
           if (active) {
-            clearPrecheckRecord(token);
-            navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+            await handleAgentTerminalClosed(sessionRecord);
           }
           return;
         }
+        terminalAbsentRef.current = false;
 
         // OPTIMIZATION: Check if we have a very recent precheck (e.g. within last 5 minutes)
         // If the candidate just passed precheck, we don't need to run a full scan again
@@ -165,11 +262,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             const allApps = scanResult?.blocked?.length > 0
               ? [...new Set(scanResult.blocked)]
               : (scanResult?.detections || []).map(d => d.app).filter(Boolean);
-            logCandidateActivity(
-              token,
-              'Session Terminated',
-              `Remote app detected after precheck — session invalidated. Apps: ${allApps.join(', ') || 'Unknown'}`
-            );
+            const remoteDetail = `Remote app detected after precheck. Apps: ${allApps.join(', ') || 'Unknown'}`;
+            await logSessionTerminated(token, TERMINATION_REASONS.REMOTE_APP_AFTER_PRECHECK, remoteDetail);
             clearPrecheckRecord(token);
             navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
             return;
@@ -190,9 +284,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           console.warn('[SecuritySessionGuard] Entry-gate scan failed (offline). Will retry when online.');
           return;
         }
-        if (active) {
-          clearPrecheckRecord(token);
-          navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+        if (active && navigator.onLine) {
+          await handleAgentTerminalClosed(sessionRecord);
         }
       }
     };
@@ -212,18 +305,19 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         const agentStatus = await fetchAgentStatus();
         if (!isValidPackagedAgent(agentStatus)) {
           console.warn('[SecuritySessionGuard] Valid packaged Secure Agent not running mid-exam.');
-          if (active) {
-            clearPrecheckRecord(token);
-            navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+          if (active && !terminalAbsentRef.current) {
+            terminalAbsentRef.current = true;
+            await handleAgentTerminalClosed(sessionRecord);
           }
           return;
         }
+        terminalAbsentRef.current = false;
       } catch (err) {
         // If we can't reach the local agent while online, it means the terminal was closed.
-        console.error('[SecuritySessionGuard] Cannot reach Secure Agent (ECONNREFUSED). Redir to precheck.');
-        if (active) {
-          clearPrecheckRecord(token);
-          navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+        console.error('[SecuritySessionGuard] Cannot reach Secure Agent (ECONNREFUSED).');
+        if (active && !terminalAbsentRef.current) {
+          terminalAbsentRef.current = true;
+          await handleAgentTerminalClosed(sessionRecord);
         }
         return;
       }
@@ -234,11 +328,11 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
         if (status?.action === 'STOP') {
           const app = status.blocked_app || status.reason || 'Remote access tool';
-          logCandidateActivity(
-            token,
-            'Session Terminated',
-            `Exam session was terminated mid-exam. Reason: ${app}`
-          );
+          const remoteDetail = `Remote access application detected during exam: ${app}`;
+          await finalizeTerminatedExam(token, {
+            reason: TERMINATION_REASONS.REMOTE_ACCESS,
+            detail: remoteDetail,
+          });
           await stopLocalMonitor({
             session_id: sessionRecord.session_id,
             user_id: sessionRecord.user_id,
@@ -271,7 +365,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         if (status?.action === 'PAUSE') {
           const deviceName = status.blocked_hardware || 'External device';
           if (!paused) {
-            logCandidateActivity(token, 'Exam Paused', `External device connected mid-exam: ${deviceName}`);
+            const isUsb = /usb|diskdrive|storage/i.test(deviceName);
+            logCandidateActivity(
+              token,
+              isUsb ? 'USB Device Connected' : 'External Device Connected',
+              `${deviceName} connected during exam (exam paused until removed).`,
+              { category: 'hardware' }
+            );
           }
           setPauseDevice(deviceName);
           setPaused(true);
@@ -331,12 +431,22 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, token, sessionType, examStarted]);
+  }, [navigate, token, sessionType, examStarted, gateState]);
+
+  if (gateState === 'pending' || gateState === 'redirecting') {
+    return (
+      <div
+        style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#64748b', fontSize: 16 }}
+      >
+        Checking assessment status...
+      </div>
+    );
+  }
 
   return (
     <>
       {/* ── Connection Lost Overlay (highest priority) ──────────────────── */}
-      {!isOnline && <ConnectionLostOverlay />}
+      {gateState === 'ready' && !isOnline && <ConnectionLostOverlay />}
 
       {paused && (
         <div style={{

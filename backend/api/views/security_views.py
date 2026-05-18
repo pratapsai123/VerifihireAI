@@ -327,3 +327,33 @@ def security_signatures_view(request):
 def check_violation_status_view(request, token):
     is_violated = SecuritySession.token_has_permanent_revocation(token)
     return Response({'is_violated': is_violated})
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def terminate_terminal_close_view(request):
+    """Final strike: candidate closed the Secure Agent terminal 3 times during the exam."""
+    data = request.data or {}
+    session_id = data.get('session_id')
+    user_id = data.get('user_id')
+    token = (data.get('token') or '').strip()
+
+    session = _resolve_security_session(session_id=session_id, user_id=user_id)
+    if not session and token:
+        session = SecuritySession.objects.filter(
+            token=token, is_active=True
+        ).order_by('-created_at').first()
+
+    if session:
+        session.status = 'VIOLATION'
+        session.action = 'STOP'
+        session.reason = (
+            'Exam terminated: Secure Agent terminal was closed 3 times during the exam.'
+        )
+        session.is_active = False
+        session.save(update_fields=['status', 'action', 'reason', 'is_active', 'updated_at'])
+        _consume_agent_instance(session.agent_instance_id, session=session)
+        print(f"[SECURITY_TERMINAL] Session {session.session_id} stopped after 3 terminal closes.")
+
+    return Response({'terminated': True}, status=status.HTTP_200_OK)

@@ -11,11 +11,17 @@ import {
 } from '../security/securityApi';
 import { markPrecheckPassed, writeSessionRecord } from '../security/sessionStorage';
 import {
+  readTerminalCloseWarning,
+  getTerminalCloseWarningMessage,
+  TERMINAL_CLOSE_LIMIT,
+} from '../security/terminalCloseStrikes';
+import {
   isValidPackagedAgent,
   getAgentInvalidReason,
   MINIMUM_AGENT_VERSION,
 } from '../security/agentValidation';
 import { logCandidateActivity } from '../utils/activityLogger';
+import { checkInvitationPublicAccess, isInvitationAlreadySubmitted } from '../utils/invitationAccess';
 
 const TARGET_ROUTE_MAP = {
   assessment: (token) => `/take-assessment/${token}`,
@@ -49,6 +55,15 @@ export default function SecurePrecheck() {
   const [error, setError] = useState('');
   const [agentVersion, setAgentVersion] = useState('');
   const [showHelp, setShowHelp] = useState(false);
+  const [terminalCloseWarning, setTerminalCloseWarning] = useState(() =>
+    token ? readTerminalCloseWarning(token) : null
+  );
+
+  useEffect(() => {
+    if (token) {
+      setTerminalCloseWarning(readTerminalCloseWarning(token));
+    }
+  }, [token]);
 
   const targetRoute = useMemo(() => {
     const builder = TARGET_ROUTE_MAP[type] || TARGET_ROUTE_MAP.assessment;
@@ -188,10 +203,31 @@ export default function SecurePrecheck() {
   };
 
   useEffect(() => {
-    logCandidateActivity(token, 'Precheck Started', `Verifying environment for ${type} assessment.`);
-    startSecureFlow();
+    if (!token) return;
+
+    let cancelled = false;
+
+    const run = async () => {
+      setPhase('checking');
+      setStatusMessage('Checking assessment status...');
+      const access = await checkInvitationPublicAccess(token);
+      if (cancelled) return;
+
+      if (isInvitationAlreadySubmitted(access)) {
+        navigate(targetRoute, { replace: true });
+        return;
+      }
+
+      logCandidateActivity(token, 'Precheck Started', `Verifying environment for ${type} assessment.`);
+      startSecureFlow();
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, type]);
+  }, [token, type, targetRoute, navigate]);
 
   const renderAction = () => {
     if (phase === 'outdated' || phase === 'agent_expired') {
@@ -359,6 +395,37 @@ export default function SecurePrecheck() {
     <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#f8fafc', padding: 16 }}>
       <div style={{ width: '100%', maxWidth: 680, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: 24 }}>
         <h2 style={{ marginTop: 0, color: '#0f172a' }}>Secure Precheck</h2>
+        {terminalCloseWarning?.chancesLeft > 0 ? (
+          <div
+            style={{
+              marginBottom: 16,
+              padding: '14px 16px',
+              borderRadius: 10,
+              background: terminalCloseWarning.chancesLeft === 1 ? '#fef2f2' : '#fffbeb',
+              border: `1px solid ${terminalCloseWarning.chancesLeft === 1 ? '#fecaca' : '#fde68a'}`,
+            }}
+          >
+            <p style={{
+              margin: '0 0 6px',
+              fontWeight: 700,
+              color: terminalCloseWarning.chancesLeft === 1 ? '#b91c1c' : '#b45309',
+              fontSize: '0.95rem',
+            }}>
+              Secure Agent terminal was closed
+              {terminalCloseWarning.closeCount > 0
+                ? ` (${terminalCloseWarning.closeCount}/${TERMINAL_CLOSE_LIMIT})`
+                : ''}
+            </p>
+            <p style={{
+              margin: 0,
+              color: terminalCloseWarning.chancesLeft === 1 ? '#991b1b' : '#92400e',
+              lineHeight: 1.5,
+              fontSize: '0.92rem',
+            }}>
+              {getTerminalCloseWarningMessage(terminalCloseWarning.chancesLeft)}
+            </p>
+          </div>
+        ) : null}
         <p style={{ color: '#334155' }}>{statusMessage}</p>
         {detectedApps.length > 0 ? (
           <div style={{ marginTop: 8, marginBottom: 4 }}>

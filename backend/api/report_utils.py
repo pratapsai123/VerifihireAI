@@ -1926,7 +1926,14 @@ def generate_candidate_report(submission_id):
     final_result_text = submission.result or '-'
     result_style = styles['InfoValue']
 
-    if pct >= 100.0:
+    termination_meta = {}
+    if isinstance(answers, dict):
+        termination_meta = answers.get('_termination') or {}
+
+    if submission.result == 'terminated':
+        final_result_text = 'TERMINATED'
+        result_style = styles['NotQualifiedBadge']
+    elif pct >= 100.0:
         final_result_text = 'SELECTED'
         result_style = styles['QualifiedBadge']
     elif not submission.is_qualified:
@@ -1949,6 +1956,13 @@ def generate_candidate_report(submission_id):
         [Paragraph('Result', styles['InfoLabel']), Paragraph(final_result_text, result_style)],
 
     ]
+
+    if submission.result == 'terminated' and termination_meta:
+        term_detail = termination_meta.get('detail') or termination_meta.get('reason') or 'Policy violation'
+        results_data.append([
+            Paragraph('Termination Reason', styles['InfoLabel']),
+            Paragraph(str(term_detail), styles['NotQualifiedBadge']),
+        ])
 
 
 

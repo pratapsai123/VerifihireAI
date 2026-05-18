@@ -112,3 +112,12 @@ export const checkViolationStatus = async (token) => {
   const res = await axios.get(`${API_BASE_URL}/security-session/${token}/violation-status`, { timeout: 20000 });
   return res.data;
 };
+
+export const terminateTerminalViolation = async ({ session_id, token, user_id }) => {
+  const res = await axios.post(
+    `${API_BASE_URL}/security-session/terminal-close-terminate`,
+    { session_id, token, user_id },
+    { timeout: 8000 }
+  );
+  return res.data;
+};

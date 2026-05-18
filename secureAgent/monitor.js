@@ -2,7 +2,7 @@ const { scanProcesses, getWindowTitles } = require('./processScanner');
 const { detectBlocked, loadBundledRules, setRules } = require('./detector');
 const { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logActivity } = require('./apiClient');
 const { selfDestruct } = require('./instanceManager');
-const { scanHardwareDevices, compareToBaseline, getStartupBaseline } = require('./hardwareScanner');
+const { scanHardwareDevices, compareToBaseline, getStartupBaseline, initBaseline } = require('./hardwareScanner');
 
 let scanTimer = null;
 let heartbeatTimer = null;
@@ -15,8 +15,10 @@ let pendingViolation = null; // Buffers violations detected while offline
 
 const SCAN_INTERVAL_SAFE_MS = 8000;
 const SCAN_INTERVAL_AFTER_VIOLATION_MS = 2500;
-// Map<instanceId, {name, class}> of logOnly devices seen in current session (not in startup baseline)
+// Map<instanceId, {name, class}> of logOnly devices seen in current session (not in exam baseline)
 let knownLogOnlyMap = new Map();
+// Map<instanceId, {name, class}> of blocked USB/high-risk devices logged during this exam
+let knownBlockedUsbMap = new Map();
 
 async function refreshSignatures() {
   if (!current?.backendApiBase) return;
@@ -204,14 +206,29 @@ async function _doScan() {
       }
     }
 
-    // ── Log-only devices (mouse, keyboard, bluetooth) ─────────────────────
-    // No exam pause — just write an audit trail entry when they connect/disconnect.
+    // ── Mid-exam USB / external device audit (only devices NEW since exam monitor started) ──
     const baseline = getStartupBaseline();
+    const newBlocked = (hwScan.blocked || []).filter(
+      d => !baseline.instanceIds.has(d.instanceId)
+    );
+    for (const dev of newBlocked) {
+      if (!knownBlockedUsbMap.has(dev.instanceId)) {
+        knownBlockedUsbMap.set(dev.instanceId, { name: dev.name, cls: dev.class });
+        try {
+          await logActivity(
+            current.backendApiBase,
+            current.token,
+            'USB Device Connected',
+            `${dev.name} (${dev.class}) connected during exam`
+          );
+        } catch { /* non-fatal */ }
+      }
+    }
+
     const newLogOnly = (hwScan.logOnly || []).filter(
       d => !baseline.instanceIds.has(d.instanceId)
     );
 
-    // Newly connected devices (not seen before in this session)
     for (const dev of newLogOnly) {
       if (!knownLogOnlyMap.has(dev.instanceId)) {
         knownLogOnlyMap.set(dev.instanceId, { name: dev.name, cls: dev.class });
@@ -219,7 +236,7 @@ async function _doScan() {
           await logActivity(
             current.backendApiBase,
             current.token,
-            'Device Connected',
+            'USB Device Connected',
             `${dev.name} (${dev.class}) connected during exam`
           );
         } catch { /* non-fatal */ }
@@ -290,6 +307,10 @@ async function startMonitor({ token, sessionId, userId, backendApiBase }) {
   stopMonitor();
   current = { token, sessionId, userId, backendApiBase };
   isScanning = false;
+  knownLogOnlyMap = new Map();
+  knownBlockedUsbMap = new Map();
+  // Baseline at exam start — devices already connected before the exam are not logged.
+  await initBaseline();
   await refreshSignatures();
   // Use self-scheduling setTimeout (not setInterval) so scans never overlap.
   // Each scan starts 10s after the PREVIOUS one finishes.
@@ -313,7 +334,8 @@ function stopMonitor() {
   scanRequested = false;
   lastScanWasViolation = false;
   failedHeartbeats = 0;
-  knownLogOnlyMap = new Map(); // reset on stop
+  knownLogOnlyMap = new Map();
+  knownBlockedUsbMap = new Map();
 }
 
 function getMonitorState() {
