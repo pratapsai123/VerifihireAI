@@ -562,7 +562,7 @@ function LiveInterviewInterviewer() {
       }
     } catch (error) {
       console.error('Invite failed:', error);
-      showNotification('Failed to generate invite link', 'error');
+      showNotification(error.response?.data?.error || 'Failed to generate invite link', 'error');
     }
   };
 
