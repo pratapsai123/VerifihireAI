@@ -90,27 +90,6 @@ async function scanWindows() {
   return allProcs;
 }
 
-async function scanMac() {
-  const out = await run('ps -axo pid=,user=,comm=,command=');
-  return out.split(/\r?\n/).filter(Boolean).map((line) => {
-    const trimmed = line.trim();
-    const parts = trimmed.split(/\s+/);
-    const pidStr = parts[0];
-    const user = parts[1];
-    const first = parts[2];
-    const rest = parts.slice(3);
-    return {
-      pid: parseInt(pidStr, 10) || 0,
-      processName: first || '',
-      processPath: first || '',
-      commandLine: rest.length ? `${first} ${rest.join(' ')}` : first || '',
-      description: '',
-      company: '',
-      sessionId: user === 'root' ? 0 : 1,
-    };
-  });
-}
-
 /**
  * Get TCP connections grouped by PID on Windows using PowerShell Get-NetTCPConnection.
  * Returns a Map<pid, { established: number, connections: Array }>
@@ -170,39 +149,13 @@ async function getWindowTitlesWindows() {
   return map;
 }
 
-/**
- * Get TCP connections grouped by PID on macOS.
- */
-async function getConnectionsByPidMac() {
-  const map = new Map();
-  try {
-    const out = await run('lsof -i TCP -sTCP:ESTABLISHED -nP 2>/dev/null');
-    const lines = out.split(/\r?\n/).filter(Boolean);
-    for (const line of lines) {
-      const cols = line.trim().split(/\s+/);
-      if (cols.length >= 2) {
-        const pid = parseInt(cols[1], 10) || 0;
-        if (!map.has(pid)) {
-          map.set(pid, { established: 0, connections: [], processName: cols[0] || '' });
-        }
-        map.get(pid).established++;
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return map;
-}
-
 async function scanProcesses() {
   if (process.platform === 'win32') return scanWindows();
-  if (process.platform === 'darwin') return scanMac();
   return [];
 }
 
 async function getConnectionsByPid() {
   if (process.platform === 'win32') return getConnectionsByPidWindows();
-  if (process.platform === 'darwin') return getConnectionsByPidMac();
   return new Map();
 }
 

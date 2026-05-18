@@ -2,27 +2,64 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 const crypto = require('crypto');
+const { unregisterProtocol } = require('./protocolRegister');
 
 const APPDATA_DIR = path.join(process.env.APPDATA || '', 'VerifiHireSecureAgent');
-const ID_FILE = path.join(APPDATA_DIR, 'instance.id');
+const LEGACY_ID_FILE = path.join(APPDATA_DIR, 'instance.id');
 
 /**
- * Generates or retrieves a persistent unique ID for this installation.
- * This ID is used to detect if the .exe is being reused for a second assessment.
+ * Packaged .exe: store instance id beside the binary so each download gets its own id.
+ * Dev (node server.js): fall back to APPDATA.
+ */
+function getInstanceIdPath() {
+  if (process.pkg) {
+    return path.join(path.dirname(process.execPath), '.verifihire-instance');
+  }
+  if (!fs.existsSync(APPDATA_DIR)) {
+    fs.mkdirSync(APPDATA_DIR, { recursive: true });
+  }
+  return LEGACY_ID_FILE;
+}
+
+function writeInstanceId(idPath, newId) {
+  fs.writeFileSync(idPath, newId, 'utf8');
+}
+
+/**
+ * Generates or retrieves a unique ID for this agent installation.
+ * Each downloaded .exe gets its own id file — never reuse legacy APPDATA ids.
  */
 function getInstanceId() {
+  const newId = crypto.randomUUID();
+
   try {
-    if (!fs.existsSync(APPDATA_DIR)) {
-      fs.mkdirSync(APPDATA_DIR, { recursive: true });
+    const idPath = getInstanceIdPath();
+
+    if (fs.existsSync(idPath)) {
+      const existing = fs.readFileSync(idPath, 'utf8').trim();
+      if (existing && !existing.startsWith('temp-')) {
+        return existing;
+      }
     }
-    
-    if (fs.existsSync(ID_FILE)) {
-      return fs.readFileSync(ID_FILE, 'utf8').trim();
+
+    try {
+      writeInstanceId(idPath, newId);
+      return newId;
+    } catch (writeErr) {
+      // Downloads folder may be read-only — fall back to APPDATA (fresh file per install attempt)
+      if (!fs.existsSync(APPDATA_DIR)) {
+        fs.mkdirSync(APPDATA_DIR, { recursive: true });
+      }
+      const fallbackPath = path.join(APPDATA_DIR, 'instance.id');
+      if (fs.existsSync(fallbackPath)) {
+        const existing = fs.readFileSync(fallbackPath, 'utf8').trim();
+        if (existing && !existing.startsWith('temp-')) {
+          return existing;
+        }
+      }
+      writeInstanceId(fallbackPath, newId);
+      return newId;
     }
-    
-    const newId = crypto.randomUUID();
-    fs.writeFileSync(ID_FILE, newId, 'utf8');
-    return newId;
   } catch (err) {
     console.error('[instance] Failed to manage instance ID:', err.message);
     return 'temp-' + Date.now();
@@ -31,8 +68,8 @@ function getInstanceId() {
 
 /**
  * Triggers the "Self-Destruct" sequence.
- * Creates a batch file that waits for a delay, deletes the .exe, and deletes itself.
- * @param {number} delaySeconds - Delay before deletion (e.g. 1800 for 30 minutes).
+ * Creates a batch file that waits for a delay, deletes the .exe, instance file, and itself.
+ * @param {number} delaySeconds - Delay before deletion (0 = immediate after process exit).
  */
 function selfDestruct(delaySeconds = 0) {
   if (process.platform !== 'win32') {
@@ -41,17 +78,13 @@ function selfDestruct(delaySeconds = 0) {
     return;
   }
 
-  // Use process.execPath to get the path to the current running .exe
-  const exePath = process.execPath;
-  const batPath = path.join(path.dirname(exePath), 'cleanup_verifihire.bat');
+  unregisterProtocol();
 
-  /**
-   * The batch script logic:
-   * 1. Wait for delaySeconds (using timeout)
-   * 2. Attempt to delete the .exe (retrying if still locked)
-   * 3. Delete the local ID folder to ensure no traces are left
-   * 4. Delete itself
-   */
+  const exePath = process.execPath;
+  const exeDir = path.dirname(exePath);
+  const batPath = path.join(exeDir, 'cleanup_verifihire.bat');
+  const instancePath = getInstanceIdPath();
+
   const batContent = `@echo off
 setlocal enabledelayedexpansion
 
@@ -71,8 +104,10 @@ if exist "${exePath}" (
   goto retry
 )
 
+if exist "${instancePath}" del /f /q "${instancePath}"
+if exist "${LEGACY_ID_FILE}" del /f /q "${LEGACY_ID_FILE}"
 echo Cleaning up local data...
-rmdir /s /q "${APPDATA_DIR}"
+if exist "${APPDATA_DIR}" rmdir /s /q "${APPDATA_DIR}"
 
 echo Cleanup complete.
 del /f /q "%~f0"
@@ -80,16 +115,14 @@ del /f /q "%~f0"
 
   try {
     fs.writeFileSync(batPath, batContent, 'utf8');
-    
-    // Launch the batch script minimized so it doesn't disturb the user
+
     spawn('cmd.exe', ['/c', 'start', '/min', 'cmd.exe', '/c', batPath], {
       detached: true,
-      stdio: 'ignore'
+      stdio: 'ignore',
     });
 
     console.log(`[instance] Agent scheduled for auto-deletion in ${delaySeconds}s. Goodbye!`);
-    
-    // Exit the current process quickly
+
     setTimeout(() => {
       process.exit(0);
     }, 1000);

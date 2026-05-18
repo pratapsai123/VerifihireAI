@@ -19,6 +19,14 @@ function hasValue(v) {
 function getStatusMeta(status, r = {}) {
     const isZero = Number(r.percentage || 0) === 0 && (status === 'rejected' || status === 'hold' || status === 'HOLD');
 
+    if (status === 'terminated') {
+        return {
+            label: 'Terminated',
+            className: 'bad',
+            subtitle: r.termination_detail || r.termination_reason || '',
+            isTerminated: true,
+        };
+    }
     if (status === 'selected' || status === 'COMPLETED') {
         return { label: 'Qualified', className: 'ok' };
     }
@@ -313,6 +321,32 @@ export default function Result() {
     const sortMarker = (key) => {
         if (sortConfig.key !== key) return '↕';
         return sortConfig.direction === 'asc' ? '↑' : '↓';
+    };
+
+    const fetchActivityLogsForRow = useCallback(async (row) => {
+        if (!row?.invitation_id) return Array.isArray(row?.activity_logs) ? row.activity_logs : [];
+        try {
+            const resp = await axios.get(
+                `${API_BASE_URL}/invitations/${row.invitation_id}/activity-logs/`,
+                { params: { _t: Date.now() } }
+            );
+            return resp.data?.activity_logs || [];
+        } catch (err) {
+            console.warn('Failed to fetch activity logs:', err?.message);
+            return Array.isArray(row?.activity_logs) ? row.activity_logs : [];
+        }
+    }, []);
+
+    const handleToggleActivityLogs = async () => {
+        if (isShowingLogs) {
+            setIsShowingLogs(false);
+            return;
+        }
+        if (quickViewRow?.invitation_id) {
+            const logs = await fetchActivityLogsForRow(quickViewRow);
+            setQuickViewRow((prev) => (prev ? { ...prev, activity_logs: logs } : prev));
+        }
+        setIsShowingLogs(true);
     };
 
     const load = useCallback(async (silentArg = false) => {
@@ -649,8 +683,15 @@ export default function Result() {
                                         return (
                                             <tr key={r.submission_id || `inv_${r.invitation_id}`}>
                                                 <td>
-                                                    <div className="cell-title">{r.candidate?.name || '-'}</div>
-                                                    <div className="cell-sub">{r.candidate?.email || '-'}</div>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                                        <div>
+                                                            <div className="cell-title">{r.candidate?.name || '-'}</div>
+                                                            <div className="cell-sub">{r.candidate?.email || '-'}</div>
+                                                        </div>
+                                                        {statusMeta.isTerminated ? (
+                                                            <span title="Exam terminated" style={{ flexShrink: 0, width: 26, height: 26, borderRadius: '50%', background: '#dc2626', color: '#fff', fontWeight: 800, fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #fecaca' }}>T</span>
+                                                        ) : null}
+                                                    </div>
                                                 </td>
                                                 <td>{r.assessment?.display_name || r.assessment?.name || '-'}</td>
                                                 <td>
@@ -694,7 +735,7 @@ export default function Result() {
                                                 </td>
                                                 <td>
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                        <span className={`pill ${statusMeta.className}`}>
+                                                        <span className={`pill ${statusMeta.className}`} style={statusMeta.isTerminated ? { background: '#fef2f2', color: '#b91c1c', border: '1px solid #fecaca' } : undefined}>
                                                             <span className="pill-dot" />
                                                             {statusMeta.label}
                                                         </span>
@@ -894,24 +935,45 @@ export default function Result() {
                         
                         {isShowingLogs ? (
                             <div className="quickview-logs" style={{ padding: '0 24px', flex: 1, overflowY: 'auto' }}>
+                                {quickViewRow.status === 'terminated' && (quickViewRow.termination_detail || quickViewRow.termination_reason) ? (
+                                    <div style={{ marginBottom: 16, padding: '14px 16px', borderRadius: 8, background: '#fef2f2', border: '1px solid #fecaca' }}>
+                                        <div style={{ fontWeight: 700, color: '#b91c1c', marginBottom: 6, fontSize: '0.9rem' }}>Exam terminated</div>
+                                        <div style={{ color: '#991b1b', fontSize: '0.88rem', lineHeight: 1.45 }}>{quickViewRow.termination_detail || quickViewRow.termination_reason}</div>
+                                    </div>
+                                ) : null}
+
                                 {quickViewRow.activity_logs && quickViewRow.activity_logs.length > 0 ? (
                                     <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                                         {[...quickViewRow.activity_logs].reverse().map((log, i) => {
                                             const isBlocked = log.action?.toLowerCase().includes('blocked');
                                             const isPassed = log.action?.toLowerCase().includes('passed') || log.action?.toLowerCase().includes('submitted');
                                             const isViolation = log.action?.toLowerCase().includes('violation') || log.action?.toLowerCase().includes('alert');
+                                            const isTerminated = log.action?.toLowerCase().includes('terminated');
+                                            const isTerminalClose = log.action?.toLowerCase().includes('terminal closed');
+                                            const isUsb = log.action?.toLowerCase().includes('usb');
+                                            const isStarted = log.action?.toLowerCase().includes('started') && !isTerminated;
                                             
                                             let icon = '🔵';
                                             let bgColor = '#f8fafc';
                                             let textColor = '#1e293b';
                                             let borderColor = '#e2e8f0';
 
-                                            if (isBlocked || isViolation) {
+                                            if (isTerminated) {
+                                                icon = '🛑';
+                                                bgColor = '#fef2f2';
+                                                textColor = '#991b1b';
+                                                borderColor = '#fecaca';
+                                            } else if (isBlocked || isViolation) {
                                                 icon = '⚠️';
                                                 bgColor = '#fef2f2';
                                                 textColor = '#991b1b';
                                                 borderColor = '#fecaca';
-                                            } else if (isPassed) {
+                                            } else if (isTerminalClose || isUsb) {
+                                                icon = '🔌';
+                                                bgColor = '#fffbeb';
+                                                textColor = '#92400e';
+                                                borderColor = '#fde68a';
+                                            } else if (isPassed || isStarted) {
                                                 icon = '✅';
                                                 bgColor = '#f0fdf4';
                                                 textColor = '#166534';
@@ -936,10 +998,13 @@ export default function Result() {
                                                         <span style={{ fontSize: '16px' }}>{icon}</span>
                                                     </div>
                                                     <strong style={{ display: 'block', color: textColor, fontSize: '14px' }}>{log.action}</strong>
+                                                    {log.termination_label ? (
+                                                        <div style={{ fontSize: '12px', color: '#b91c1c', fontWeight: 600, marginTop: 4 }}>Reason: {log.termination_label}</div>
+                                                    ) : null}
                                                     {log.details && (
                                                         <div style={{ 
                                                             fontSize: '13px', 
-                                                            color: isBlocked || isViolation ? '#b91c1c' : '#475569', 
+                                                            color: isTerminated || isBlocked || isViolation ? '#b91c1c' : '#475569', 
                                                             marginTop: '6px',
                                                             paddingTop: '6px',
                                                             borderTop: `1px dashed ${borderColor}`
@@ -1001,7 +1066,7 @@ export default function Result() {
                                     padding: '8px 16px',
                                     borderRadius: '6px'
                                 }} 
-                                onClick={() => setIsShowingLogs(!isShowingLogs)}
+                                onClick={handleToggleActivityLogs}
                             >
                                 {isShowingLogs ? '📊 View Data Details' : '📋 View Activity Logs'}
                             </button>

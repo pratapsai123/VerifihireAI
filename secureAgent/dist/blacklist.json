@@ -1,0 +1,93 @@
+[
+  {
+    "label": "AnyDesk",
+    "signatures": [
+      "anydesk"
+    ],
+    "pathSignatures": [
+      "anydesk.exe",
+      "/anydesk",
+      "com.philandro.anydesk"
+    ],
+    "serviceProcesses": [
+      "ad_svc.exe",
+      "anydesk service"
+    ],
+    "activeIndicators": {
+      "listenPorts": [],
+      "activeConnectionKeywords": [
+        "anydesk"
+      ],
+      "windowTitles": [
+        "anydesk"
+      ]
+    }
+  },
+  {
+    "label": "TeamViewer",
+    "signatures": [
+      "teamviewer"
+    ],
+    "pathSignatures": [
+      "teamviewer.exe",
+      "/teamviewer",
+      "com.teamviewer"
+    ],
+    "serviceProcesses": [
+      "teamviewer_service.exe",
+      "tv_x64.exe"
+    ],
+    "activeIndicators": {
+      "listenPorts": [],
+      "activeConnectionKeywords": [
+        "teamviewer"
+      ],
+      "windowTitles": [
+        "teamviewer"
+      ]
+    }
+  },
+  {
+    "label": "UltraViewer",
+    "signatures": [
+      "ultraviewer"
+    ],
+    "pathSignatures": [
+      "ultraviewer.exe",
+      "/ultraviewer"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "listenPorts": [],
+      "activeConnectionKeywords": [
+        "ultraviewer"
+      ],
+      "windowTitles": [
+        "ultraviewer"
+      ]
+    }
+  },
+  {
+    "label": "Chrome Remote Desktop",
+    "signatures": [
+      "remoting_host",
+      "chromoting"
+    ],
+    "pathSignatures": [
+      "remoting_host.exe",
+      "/chrome-remote-desktop",
+      "chromoting"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "listenPorts": [],
+      "activeConnectionKeywords": [
+        "remoting_host",
+        "chromoting"
+      ],
+      "windowTitles": [
+        "chrome remote desktop"
+      ]
+    }
+  }
+]

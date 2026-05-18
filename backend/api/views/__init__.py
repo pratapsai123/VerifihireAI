@@ -65,6 +65,8 @@ from .candidate_assessment_views import (
     update_standard_integrity_view,
     verify_pan_backend_view,
     log_candidate_activity_view,
+    invitation_activity_logs_view,
+    terminate_invitation_exam_view,
     update_submission_result_view,
 )
 
@@ -136,9 +138,11 @@ from .contact_views import (
 
 from .security_views import (
     start_security_session_view,
+    consume_agent_instance_view,
     security_check_view,
     security_heartbeat_view,
     security_session_status_view,
     security_signatures_view,
     check_violation_status_view,
+    terminate_terminal_close_view,
 )

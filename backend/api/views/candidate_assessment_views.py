@@ -403,7 +403,7 @@ def get_invitation_public_view(request, token):
     """
     try:
         from api.models import SecuritySession
-        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+        if SecuritySession.token_has_permanent_revocation(token):
             return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
 
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
@@ -1985,6 +1985,8 @@ def results_overview_view(request):
                     'batch_name': inv.batch_name,
 
                     'status': s.result,
+                    'termination_reason': (s.answers or {}).get('_termination', {}).get('reason') if isinstance(s.answers, dict) else None,
+                    'termination_detail': (s.answers or {}).get('_termination', {}).get('detail') if isinstance(s.answers, dict) else None,
                     'qual_pending': s.id in pending_qual_submission_ids,
                     'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
                     'answers': getattr(s, 'answers', {}),
@@ -1992,7 +1994,7 @@ def results_overview_view(request):
                         'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                         'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                     },
-                    'activity_logs': inv.activity_logs,
+                    'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
                     'regret_email_sent': s.regret_email_sent,
                     'created_at': inv.created_at.isoformat() if inv.created_at else None,
                 }
@@ -2829,6 +2831,36 @@ def verify_pan_backend_view(request):
             'error': f'Failed to verify PAN: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+def _append_invitation_activity_log(invitation, action, details='', **extra_fields):
+    """Append a structured activity log entry with optional metadata."""
+    log_entry = {
+        'timestamp': timezone.now().isoformat(),
+        'action': action,
+        'details': details or '',
+    }
+    for key in ('category', 'termination_reason', 'termination_label'):
+        val = extra_fields.get(key)
+        if val:
+            log_entry[key] = val
+    logs = list(invitation.activity_logs) if isinstance(invitation.activity_logs, list) else []
+    logs.append(log_entry)
+    invitation.activity_logs = logs
+    invitation.save(update_fields=['activity_logs'])
+    print(f"[CANDIDATE_ACTIVITY] {invitation.email} | {action}: {details}")
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def invitation_activity_logs_view(request, invitation_id):
+    """Recruiter: fetch fresh activity logs for an invitation (e.g. terminated exams)."""
+    try:
+        inv = CandidateInvitation.objects.get(id=invitation_id, is_deleted=False)
+        logs = list(inv.activity_logs) if isinstance(inv.activity_logs, list) else []
+        return Response({'activity_logs': logs})
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -2839,23 +2871,131 @@ def log_candidate_activity_view(request, token):
         details = request.data.get('details', '')
         
         if action:
-            log_entry = {
-                'timestamp': timezone.now().isoformat(),
-                'action': action,
-                'details': details
-            }
-            logs = list(invitation.activity_logs) if isinstance(invitation.activity_logs, list) else []
-            logs.append(log_entry)
-            invitation.activity_logs = logs
-            invitation.save(update_fields=['activity_logs'])
-            
-            # Print to server console for real-time application monitoring
-            print(f"[CANDIDATE_ACTIVITY] {invitation.email} | {action}: {details}")
+            _append_invitation_activity_log(
+                invitation,
+                action,
+                details,
+                category=request.data.get('category'),
+                termination_reason=request.data.get('termination_reason'),
+                termination_label=request.data.get('termination_label'),
+            )
         return Response({'status': 'logged'})
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invalid token'}, status=404)
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def terminate_invitation_exam_view(request, token):
+    """
+    Policy termination: save partial answers, mark submission as terminated, enable PDF in results.
+    """
+    try:
+        try:
+            inv = CandidateInvitation.objects.select_related('assessment').get(token=token, is_deleted=False)
+        except CandidateInvitation.DoesNotExist:
+            return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        data = request.data or {}
+        termination_reason = (data.get('termination_reason') or 'policy_violation').strip()
+        termination_detail = (data.get('termination_detail') or '').strip()
+        answers_in = data.get('answers') if isinstance(data.get('answers'), dict) else {}
+        code_map = data.get('code_map') if isinstance(data.get('code_map'), dict) else {}
+
+        submission = getattr(inv, 'submission', None)
+        if inv.status == 'submitted' and submission and submission.result == 'terminated':
+            return Response({
+                'ok': True,
+                'submission_id': submission.id,
+                'already_terminated': True,
+            }, status=status.HTTP_200_OK)
+
+        assessment = inv.assessment
+        valid_aq_ids = set(
+            AssessmentQuestion.objects.filter(assessment=assessment).values_list('id', flat=True)
+        )
+
+        cleaned = {}
+        for k, v in (answers_in or {}).items():
+            try:
+                aqid = int(k)
+            except Exception:
+                continue
+            if aqid in valid_aq_ids:
+                cleaned[str(aqid)] = v
+
+        submission, _created = CandidateSubmission.objects.get_or_create(
+            invitation=inv,
+            defaults={
+                'is_qualified': False,
+                'result': 'pending',
+            },
+        )
+
+        merged_answers = dict(submission.answers or {})
+        merged_answers.update(cleaned)
+
+        if code_map:
+            for acq_id_str, info in code_map.items():
+                if not isinstance(info, dict):
+                    continue
+                ans_key = f'acq_{acq_id_str}'
+                merged_answers[ans_key] = {
+                    'submitted_code': info.get('code') or '',
+                    'language': info.get('language') or 'python3',
+                    'terminated_partial': True,
+                }
+
+        merged_answers['_termination'] = {
+            'reason': termination_reason,
+            'detail': termination_detail,
+            'at': timezone.now().isoformat(),
+        }
+
+        submission.answers = merged_answers
+        _update_submission_scoring_logic(submission, finalize=True)
+        submission.result = 'terminated'
+        submission.is_qualified = False
+        submission.submitted_at = timezone.now()
+        submission.save()
+
+        inv.status = 'submitted'
+        inv.save(update_fields=['status', 'updated_at'])
+
+        label_map = {
+            'terminal_close': 'Secure Agent terminal closed (3 times)',
+            'remote_access': 'Remote access application detected',
+            'grace_expired': 'Remote access app not closed within grace period',
+            'remote_app_after_precheck': 'Remote app detected after precheck',
+        }
+        termination_label = label_map.get(
+            termination_reason,
+            termination_reason.replace('_', ' ').title(),
+        )
+        _append_invitation_activity_log(
+            inv,
+            'Session Terminated',
+            termination_detail or termination_label,
+            category='termination',
+            termination_reason=termination_reason,
+            termination_label=termination_label,
+        )
+
+        return Response({
+            'ok': True,
+            'submission_id': submission.id,
+            'result': 'terminated',
+            'termination_reason': termination_reason,
+            'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"terminate_invitation_exam_view error: {e}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @csrf_exempt
 @api_view(['POST'])

@@ -55,6 +55,7 @@ from .models import (
     InterviewerAvailability,
     RestrictedDomain,
     SecuritySession,
+    SecureAgentInstance,
     IdentityLink,
 )
 

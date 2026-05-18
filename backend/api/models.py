@@ -1896,3 +1896,29 @@ class SecuritySession(models.Model):
     def __str__(self):
         return f"SecuritySession({self.session_id}, {self.session_type}, {self.action})"
 
+    @classmethod
+    def token_has_permanent_revocation(cls, token):
+        """True only after a final STOP (not during WARN grace)."""
+        if not token:
+            return False
+        return cls.objects.filter(token=str(token), action='STOP').exists()
+
+
+class SecureAgentInstance(models.Model):
+    """
+    Tracks each VerifiHire Secure Agent installation (instance_id from the .exe).
+    Once consumed, that agent cannot start another assessment/interview.
+    """
+    instance_id = models.CharField(max_length=128, primary_key=True)
+    first_token = models.CharField(max_length=128, db_index=True)
+    consumed = models.BooleanField(default=False, db_index=True)
+    consumed_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        state = 'consumed' if self.consumed else 'active'
+        return f"SecureAgentInstance({self.instance_id}, {state})"
+

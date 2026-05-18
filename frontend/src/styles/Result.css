@@ -94,7 +94,8 @@
   line-height: 1.45;
 }
 
-.btn-secondary {
+/* Scoped to Results pages only — do not override .btn-secondary on Assessments etc. */
+.result-page .btn-secondary {
   background: #1e293b;
   border: 1px solid #1e293b;
   border-radius: 0.7rem;
@@ -107,14 +108,14 @@
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.16);
 }
 
-.btn-secondary:hover {
+.result-page .btn-secondary:hover {
   transform: translateY(-1px);
   background: #334155;
   border-color: #334155;
   color: #ffffff;
 }
 
-.btn-secondary:active {
+.result-page .btn-secondary:active {
   transform: translateY(0);
   background: #0f172a;
   border-color: #0f172a;

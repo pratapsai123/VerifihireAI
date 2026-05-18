@@ -1,8 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { scanProcesses } = require('./processScanner');
 const { detectBlocked, loadBundledRules } = require('./detector');
-const { startMonitor, stopMonitor, getMonitorState } = require('./monitor');
+const { startMonitor, stopMonitor, getMonitorState, triggerScanNow } = require('./monitor');
 const { scanHardwareDevices, initBaseline, compareToBaseline } = require('./hardwareScanner');
 const { registerProtocol } = require('./protocolRegister');
 const { exec } = require('child_process');
@@ -20,31 +19,9 @@ function minimizeTerminal() {
 
   // We wait 1 second to ensure the window is fully rendered before minimizing
   setTimeout(() => {
-    const script = `
-      $powershell = [PowerShell]::Create()
-      $powershell.AddScript('
-        Add-Type -TypeDefinition "
-          using System;
-          using System.Runtime.InteropServices;
-          public class WindowUtils {
-            [DllImport(\\"user32.dll\\")]
-            public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-            [DllImport(\\"user32.dll\\")]
-            public static extern IntPtr GetConsoleWindow();
-          }
-        "
-        $hwnd = [WindowUtils]::GetConsoleWindow()
-        if ($hwnd -ne [IntPtr]::Zero) {
-          [WindowUtils]::ShowWindow($hwnd, 6) # 6 = SW_MINIMIZE
-        }
-      ')
-      $powershell.Invoke()
-    `;
-    
-    // Simpler approach that usually works for console apps:
-    const simpleScript = `powershell -Command "(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class W { [DllImport(\\"user32.dll\\")] public static extern bool ShowWindow(IntPtr h, int n); }' -PassThru)::ShowWindow((Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class C { [DllImport(\\"kernel32.dll\\")] public static extern IntPtr GetConsoleWindow(); }' -PassThru)::GetConsoleWindow(), 6)"`;
-    
-    exec(simpleScript, (err) => {
+    const minimizeScript = `powershell -Command "(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class W { [DllImport(\\"user32.dll\\")] public static extern bool ShowWindow(IntPtr h, int n); }' -PassThru)::ShowWindow((Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class C { [DllImport(\\"kernel32.dll\\")] public static extern IntPtr GetConsoleWindow(); }' -PassThru)::GetConsoleWindow(), 6)"`;
+
+    exec(minimizeScript, (err) => {
       if (err) console.error('[server] Failed to minimize terminal:', err.message);
       else console.log('[server] Terminal minimized to taskbar');
     });
@@ -56,8 +33,10 @@ app.use(cors());
 app.use(express.json());
 
 loadBundledRules();
-// Register verifihire:// custom protocol so browsers can auto-launch the agent
-registerProtocol();
+// Register verifihire:// only for the packaged .exe (not Node dev mode)
+if (process.pkg) {
+  registerProtocol();
+}
 // Auto-minimize terminal window to taskbar
 minimizeTerminal();
 // Take hardware baseline at startup so built-in devices are whitelisted
@@ -67,11 +46,14 @@ console.log(`[server] VerifiHire Secure Agent v${AGENT_VERSION} starting...`);
 
 app.get('/status', (_req, res) => {
   const monitorState = getMonitorState();
+  const packaged = Boolean(process.pkg);
   res.json({
-    installed: true,
+    installed: packaged,
     running: true,
+    packaged,
     version: AGENT_VERSION,
     instance_id: getInstanceId(),
+    exe_path: packaged ? process.execPath : null,
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
@@ -130,14 +112,32 @@ app.post('/monitor/start', async (req, res) => {
   }
 });
 
-app.post('/monitor/stop', (_req, res) => {
+app.post('/monitor/scan-now', (_req, res) => {
+  const monitorState = getMonitorState();
+  if (!monitorState.running) {
+    return res.status(400).json({ error: 'monitor not running' });
+  }
+  triggerScanNow();
+  return res.json({ triggered: true });
+});
+
+app.post('/monitor/stop', (req, res) => {
   stopMonitor();
-  res.json({ stopped: true });
-  // Auto-delete: trigger self-destruct sequence with 30-minute delay (1800s)
-  console.log('[server] Monitor stopped — self-destruct scheduled in 30 minutes');
+  const body = req.body || {};
+  const rawDelay = Number(body.destruct_delay);
+  res.json({ stopped: true, destruct_delay: rawDelay });
+  // destruct_delay < 0 means stop monitoring only — keep agent running for precheck retry
+  if (Number.isFinite(rawDelay) && rawDelay < 0) {
+    console.log('[server] Monitor stopped — agent stays running (no self-destruct)');
+    return;
+  }
+  const destructDelay = Number.isFinite(rawDelay)
+    ? Math.max(0, Math.min(rawDelay, 300))
+    : 90;
+  console.log(`[server] Monitor stopped — self-destruct scheduled in ${destructDelay}s`);
   setTimeout(() => {
-    selfDestruct(1800);
-  }, 2000);
+    selfDestruct(destructDelay);
+  }, 1500);
 });
 
 // Explicit shutdown endpoint (browser can call this as a fallback)
@@ -155,13 +155,33 @@ const port = process.env.SECURE_AGENT_PORT || 5001;
 const server = app.listen(port);
 
 server.on('error', (err) => {
-  process.exit(1);
+  if (err && err.code === 'EADDRINUSE') {
+    console.log('');
+    console.log('============================================================');
+    console.log('  VerifiHire Secure Agent is ALREADY RUNNING.');
+    console.log('  Check your taskbar for a minimized terminal window.');
+    console.log('  Do not start a second copy — close the other one first.');
+    console.log('============================================================');
+    console.log('');
+    // Keep the window open so the user can read the message
+    setInterval(() => {}, 60000);
+    return;
+  }
+  console.error('[server] Failed to start:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
-process.on('unhandledRejection', () => {});
+process.on('unhandledRejection', (reason) => {
+  console.error('[server] Unhandled rejection:', reason);
+});
 
-process.on('uncaughtException', () => {
-  process.exit(1);
+process.on('uncaughtException', (err) => {
+  console.error('[server] Uncaught exception:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
 const shutdown = () => {

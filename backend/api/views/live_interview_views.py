@@ -423,7 +423,7 @@ def get_interview_invitation_by_token_view(request, token):
     """
     try:
         from api.models import SecuritySession
-        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+        if SecuritySession.token_has_permanent_revocation(token):
             return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
     except Exception:
         pass

@@ -2,16 +2,23 @@ const { scanProcesses, getWindowTitles } = require('./processScanner');
 const { detectBlocked, loadBundledRules, setRules } = require('./detector');
 const { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logActivity } = require('./apiClient');
 const { selfDestruct } = require('./instanceManager');
-const { scanHardwareDevices, compareToBaseline, getStartupBaseline } = require('./hardwareScanner');
+const { scanHardwareDevices, compareToBaseline, getStartupBaseline, initBaseline } = require('./hardwareScanner');
 
 let scanTimer = null;
 let heartbeatTimer = null;
 let signatureTimer = null;
 let current = null;
 let isScanning = false; // mutex — prevents overlapping PowerShell processes
+let scanRequested = false; // queue an immediate follow-up scan
+let lastScanWasViolation = false;
 let pendingViolation = null; // Buffers violations detected while offline
-// Map<instanceId, {name, class}> of logOnly devices seen in current session (not in startup baseline)
+
+const SCAN_INTERVAL_SAFE_MS = 8000;
+const SCAN_INTERVAL_AFTER_VIOLATION_MS = 2500;
+// Map<instanceId, {name, class}> of logOnly devices seen in current session (not in exam baseline)
 let knownLogOnlyMap = new Map();
+// Map<instanceId, {name, class}> of blocked USB/high-risk devices logged during this exam
+let knownBlockedUsbMap = new Map();
 
 async function refreshSignatures() {
   if (!current?.backendApiBase) return;
@@ -56,15 +63,43 @@ async function flushPendingViolation() {
 }
 
 
+function scheduleNextScan(delayMs) {
+  if (!current) return;
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = setTimeout(scanAndReport, delayMs);
+}
+
 async function scanAndReport() {
   if (!current) return;
   if (isScanning) {
+    scanRequested = true;
     return;
   }
   isScanning = true;
-  try { await _doScan(); } finally { isScanning = false; }
-  // Schedule next scan only after this one completes
-  if (current) scanTimer = setTimeout(scanAndReport, 10000);
+  try {
+    await _doScan();
+  } finally {
+    isScanning = false;
+    if (!current) return;
+    if (scanRequested) {
+      scanRequested = false;
+      scheduleNextScan(400);
+      return;
+    }
+    const delay = lastScanWasViolation ? SCAN_INTERVAL_AFTER_VIOLATION_MS : SCAN_INTERVAL_SAFE_MS;
+    scheduleNextScan(delay);
+  }
+}
+
+function triggerScanNow() {
+  if (!current) return;
+  if (isScanning) {
+    scanRequested = true;
+    return;
+  }
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = null;
+  scanAndReport();
 }
 
 async function _doScan() {
@@ -79,6 +114,7 @@ async function _doScan() {
     if (!current) return;
 
     if (!verdict.safe) {
+      lastScanWasViolation = true;
       console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
       const violationData = {
@@ -107,6 +143,8 @@ async function _doScan() {
       return;
     }
 
+    lastScanWasViolation = false;
+
     // If we have a pending violation, try to flush it before reporting SAFE
     if (pendingViolation) {
       await flushPendingViolation();
@@ -115,7 +153,7 @@ async function _doScan() {
 
     // Safety check again before sending SAFE report
     if (!current) return;
-    
+
     await sendSecurityCheck(current.backendApiBase, {
       session_id: current.sessionId,
       user_id: current.userId,
@@ -168,14 +206,29 @@ async function _doScan() {
       }
     }
 
-    // ── Log-only devices (mouse, keyboard, bluetooth) ─────────────────────
-    // No exam pause — just write an audit trail entry when they connect/disconnect.
+    // ── Mid-exam USB / external device audit (only devices NEW since exam monitor started) ──
     const baseline = getStartupBaseline();
+    const newBlocked = (hwScan.blocked || []).filter(
+      d => !baseline.instanceIds.has(d.instanceId)
+    );
+    for (const dev of newBlocked) {
+      if (!knownBlockedUsbMap.has(dev.instanceId)) {
+        knownBlockedUsbMap.set(dev.instanceId, { name: dev.name, cls: dev.class });
+        try {
+          await logActivity(
+            current.backendApiBase,
+            current.token,
+            'USB Device Connected',
+            `${dev.name} (${dev.class}) connected during exam`
+          );
+        } catch { /* non-fatal */ }
+      }
+    }
+
     const newLogOnly = (hwScan.logOnly || []).filter(
       d => !baseline.instanceIds.has(d.instanceId)
     );
 
-    // Newly connected devices (not seen before in this session)
     for (const dev of newLogOnly) {
       if (!knownLogOnlyMap.has(dev.instanceId)) {
         knownLogOnlyMap.set(dev.instanceId, { name: dev.name, cls: dev.class });
@@ -183,7 +236,7 @@ async function _doScan() {
           await logActivity(
             current.backendApiBase,
             current.token,
-            'Device Connected',
+            'USB Device Connected',
             `${dev.name} (${dev.class}) connected during exam`
           );
         } catch { /* non-fatal */ }
@@ -254,6 +307,10 @@ async function startMonitor({ token, sessionId, userId, backendApiBase }) {
   stopMonitor();
   current = { token, sessionId, userId, backendApiBase };
   isScanning = false;
+  knownLogOnlyMap = new Map();
+  knownBlockedUsbMap = new Map();
+  // Baseline at exam start — devices already connected before the exam are not logged.
+  await initBaseline();
   await refreshSignatures();
   // Use self-scheduling setTimeout (not setInterval) so scans never overlap.
   // Each scan starts 10s after the PREVIOUS one finishes.
@@ -274,12 +331,15 @@ function stopMonitor() {
   signatureTimer = null;
   current = null;
   isScanning = false;
+  scanRequested = false;
+  lastScanWasViolation = false;
   failedHeartbeats = 0;
-  knownLogOnlyMap = new Map(); // reset on stop
+  knownLogOnlyMap = new Map();
+  knownBlockedUsbMap = new Map();
 }
 
 function getMonitorState() {
   return { running: Boolean(scanTimer && heartbeatTimer), current };
 }
 
-module.exports = { startMonitor, stopMonitor, getMonitorState };
+module.exports = { startMonitor, stopMonitor, getMonitorState, triggerScanNow };
