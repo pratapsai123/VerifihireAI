@@ -781,8 +781,8 @@ def submit_invitation_answers_view(request, token):
 
         data = request.data or {}
         answers = data.get('answers', None)
-        if not isinstance(answers, dict) or len(answers.keys()) == 0:
-            return Response({'error': 'answers must be a non-empty object.'}, status=status.HTTP_400_BAD_REQUEST)
+        if answers is None or not isinstance(answers, dict):
+            return Response({'error': 'answers must be a dict.'}, status=status.HTTP_400_BAD_REQUEST)
 
         assessment = inv.assessment
         valid_aq_ids = set(
@@ -790,7 +790,7 @@ def submit_invitation_answers_view(request, token):
         )
         # Filter to only valid question ids
         cleaned = {}
-        for k, v in (answers or {}).items():
+        for k, v in answers.items():
             try:
                 aqid = int(k)
             except Exception:
@@ -798,9 +798,6 @@ def submit_invitation_answers_view(request, token):
             if aqid not in valid_aq_ids:
                 continue
             cleaned[str(aqid)] = v
-
-        if not cleaned:
-            return Response({'error': 'No valid answers provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Auto evaluate
         PASS_PERCENT = int(os.environ.get('PASS_PERCENT', '60') or 60)

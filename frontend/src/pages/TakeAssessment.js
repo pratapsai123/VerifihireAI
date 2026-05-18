@@ -424,6 +424,14 @@ export default function TakeAssessment() {
     return {};
   });
 
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [modalSubmitType, setModalSubmitType] = useState(''); // 'objective' or 'final'
+
+  const initiateSubmit = (type) => {
+    setModalSubmitType(type);
+    setShowSubmitModal(true);
+  };
+
   // Cleanup old/large localStorage items to stay within quota
   useEffect(() => {
     try {
@@ -763,12 +771,6 @@ export default function TakeAssessment() {
   const submit = async (isAutoSubmit = false) => {
     const auto = isAutoSubmit === true;
     setSubmitError('');
-    if (!auto && firstUnansweredId) {
-      setSubmitError('Please answer all questions before submitting.');
-      const el = document.getElementById(`q-${firstUnansweredId}`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
 
     setSubmitting(true);
     try {
@@ -1334,6 +1336,7 @@ export default function TakeAssessment() {
     const initMonitoring = async () => {
       if (window.cocoSsd) {
         detectorRef.current = await window.cocoSsd.load();
+        let consecutiveMisses = 0;
         detectInterval = setInterval(async () => {
           if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
             const now = Date.now();
@@ -1343,7 +1346,8 @@ export default function TakeAssessment() {
 
               // Filter by confidence score
               const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.70);
-              const people = preds.filter(p => p.class === 'person' && p.score > 0.55);
+              // Lower person threshold to 0.30 to accommodate close-up webcam views (head/neck only)
+              const people = preds.filter(p => p.class === 'person' && p.score > 0.30);
 
               let phoneActive = phones.length > 0;
 
@@ -1353,9 +1357,15 @@ export default function TakeAssessment() {
 
               if (people.length > 1) {
                 showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+                consecutiveMisses = 0;
+              } else if (people.length === 1) {
+                consecutiveMisses = 0;
               } else if (people.length === 0 && !phoneActive) {
-                // Only trigger face lost if no phone is obscuring the view
-                showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                consecutiveMisses++;
+                // Only trigger face lost warning after 6 consecutive misses (approx 9-10 seconds of continuous absence)
+                if (consecutiveMisses >= 6) {
+                  showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                }
               }
             }
           }
@@ -1623,12 +1633,6 @@ export default function TakeAssessment() {
   const submitObjective = async (isAutoSubmit = false) => {
     const auto = isAutoSubmit === true;
     setSubmitError('');
-    if (!auto && firstUnansweredId) {
-      setSubmitError('Please answer all questions before submitting.');
-      const el = document.getElementById(`q-${firstUnansweredId}`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
 
     setSubmitting(true);
     try {
@@ -1858,8 +1862,8 @@ export default function TakeAssessment() {
   return (
     <div className="take-page take-exam-mode">
       {aiToast.active && (
-        <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
-          <span style={{ fontSize: '1rem' }}>{aiToast.urgent ? '⚠️' : 'ℹ️'}</span>
+        <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.text.includes('VERIFIED') ? '#16a34a' : (aiToast.urgent ? '#dc2626' : '#1d4ed8'), color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
+          <span style={{ fontSize: '1rem' }}>{aiToast.text.includes('VERIFIED') ? '✅' : (aiToast.urgent ? '⚠️' : 'ℹ️')}</span>
           {aiToast.text}
         </div>
       )}
@@ -2174,7 +2178,7 @@ export default function TakeAssessment() {
             {/* Finish Assessment button for coding stage if needed (e.g. coding only or end of test) */}
             {assessmentStage === 'coding' && !submitted ? (
               <div className="take-footer">
-                <button className="submit-btn" type="button" onClick={() => submit(false)} disabled={submitting}>
+                <button className="submit-btn" type="button" onClick={() => initiateSubmit('final')} disabled={submitting}>
                   {submitting ? 'Submitting…' : 'Finish Assessment'}
                 </button>
               </div>
@@ -2234,17 +2238,16 @@ export default function TakeAssessment() {
                     <button className="btn-exam-action info" onClick={() => handleMarkForReview(currentQuestion.id)}>
                       {markedReviewIds[String(currentQuestion.id)] ? 'Unmark Review' : 'Mark for Review'}
                     </button>
-                    {activeQuestionIndex === questions.length - 1 ? (
-                      <div style={{ flex: 1, textAlign: 'right' }}>
-                        <button className="submit-btn" type="button" onClick={() => submitObjective(false)} disabled={submitting}>
-                          {submitting ? 'Submitting…' : (codingQuestionsOrdered.length > 0 ? 'Submit Objective Section' : 'Submit Assessment')}
+                    <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                      {activeQuestionIndex < questions.length - 1 && (
+                        <button className="btn-exam-action primary" onClick={handleNext}>
+                          Save & Next →
                         </button>
-                      </div>
-                    ) : (
-                      <button className="btn-exam-action primary" onClick={handleNext}>
-                        Save & Next →
+                      )}
+                      <button className="submit-btn" type="button" onClick={() => initiateSubmit('objective')} disabled={submitting}>
+                        {submitting ? 'Submitting…' : (codingQuestionsOrdered.length > 0 ? 'Submit Objective Section' : 'Submit Assessment')}
                       </button>
-                    )}
+                    </div>
                   </div>
                 </div>
 
@@ -2278,13 +2281,17 @@ export default function TakeAssessment() {
                     </div>
                   </div>
 
-                  {codingQuestionsOrdered.length === 0 && (
-                    <div className="sidebar-submit-section">
-                      <button className="submit-btn full-width" type="button" onClick={submit} disabled={submitting}>
+                  <div className="sidebar-submit-section">
+                    {codingQuestionsOrdered.length > 0 ? (
+                      <button className="submit-btn full-width" type="button" onClick={() => initiateSubmit('objective')} disabled={submitting}>
+                        {submitting ? 'Submitting…' : 'Submit Objective Section'}
+                      </button>
+                    ) : (
+                      <button className="submit-btn full-width" type="button" onClick={() => initiateSubmit('final')} disabled={submitting}>
                         {submitting ? 'Submitting…' : 'Submit Exam'}
                       </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             ) : null}
@@ -2295,6 +2302,105 @@ export default function TakeAssessment() {
           </>
         )}
       </div>
+
+      {showSubmitModal && (
+        <div className="confirm-modal-overlay">
+          <div className="confirm-modal-card">
+            <div className="confirm-modal-header">
+              <div className="confirm-modal-icon warning">⚠️</div>
+              <div className="confirm-modal-title">
+                {modalSubmitType === 'objective' ? 'Submit Objective Section?' : 'Submit Assessment?'}
+              </div>
+            </div>
+
+            <div className="confirm-modal-body">
+              <p style={{ margin: 0 }}>
+                {modalSubmitType === 'objective'
+                  ? 'Are you sure you want to submit the objective section and proceed?'
+                  : 'Are you sure you want to finish and submit your entire assessment?'}
+              </p>
+
+              <div className="confirm-modal-stats">
+                <div style={{ fontWeight: 800, marginBottom: '10px', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.03em', color: '#475569' }}>
+                  Your Summary
+                </div>
+
+                {hasMcq && (modalSubmitType === 'objective' || codingQuestionsOrdered.length === 0) && (
+                  <>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Total Objective Questions:</span>
+                      <span className="confirm-modal-stat-value">{questions.length}</span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Answered Questions:</span>
+                      <span className="confirm-modal-stat-value answered-color">
+                        {questions.filter(q => isAnswered(q)).length}
+                      </span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Unanswered Questions:</span>
+                      <span className="confirm-modal-stat-value unanswered-color">
+                        {questions.length - questions.filter(q => isAnswered(q)).length}
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                {modalSubmitType === 'final' && codingQuestionsOrdered.length > 0 && (
+                  <>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Total Coding Challenges:</span>
+                      <span className="confirm-modal-stat-value">{codingQuestionsOrdered.length}</span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Submitted Coding Answers:</span>
+                      <span className="confirm-modal-stat-value answered-color">
+                        {Object.keys(codingState.submittedIds).length}
+                      </span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Unsubmitted Coding Answers:</span>
+                      <span className="confirm-modal-stat-value unanswered-color">
+                        {codingQuestionsOrdered.length - Object.keys(codingState.submittedIds).length}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <p style={{ margin: '14px 0 0 0', fontStyle: 'italic', fontSize: '12px', color: '#64748b' }}>
+                Note: You will not be able to change your answers after submitting this section.
+              </p>
+            </div>
+
+            <div className="confirm-modal-buttons">
+              <button
+                type="button"
+                className="confirm-modal-btn cancel"
+                onClick={() => setShowSubmitModal(false)}
+                disabled={submitting}
+              >
+                No, Go Back
+              </button>
+              <button
+                type="button"
+                className="confirm-modal-btn confirm warning"
+                disabled={submitting}
+                onClick={async () => {
+                  setShowSubmitModal(false);
+                  if (modalSubmitType === 'objective') {
+                    await submitObjective(false);
+                  } else {
+                    await submit(false);
+                  }
+                }}
+              >
+                {submitting ? 'Submitting...' : 'Yes, Submit'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
