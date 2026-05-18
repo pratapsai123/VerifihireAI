@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import { getToken } from '../utils/authStorage';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import '../styles/Dashboard.css';
 import '../styles/ResultsAI.css';
 
@@ -72,7 +73,6 @@ const ResultsAI = () => {
     const [timelineLogs, setTimelineLogs] = useState([]);
     const [loadingTimeline, setLoadingTimeline] = useState(false);
     const [downloadingId, setDownloadingId] = useState(null);
-    const [hoveredMetricCard, setHoveredMetricCard] = useState(null);
     const [analyticsAnimateIn, setAnalyticsAnimateIn] = useState(false);
 
     const showToast = (type, message) => {
@@ -1789,14 +1789,29 @@ const ResultsAI = () => {
                                     {/* ═══ CINEMATIC BATCH ANALYTICS PANEL (Interview Tab Only) ═══ */}
                                     {activeTab === 'interview' && allRows.length > 0 && (() => {
                                         const metrics = computeBatchMetrics(allRows);
-                                        const cards = [
-                                            { label: 'Total Participants', value: metrics.total, icon: 'fa-users', color: '#60A5FA', bg: 'rgba(96, 165, 250, 0.15)' },
-                                            { label: 'Passed', value: metrics.passed, icon: 'fa-user-check', color: '#34D399', bg: 'rgba(52, 211, 153, 0.15)' },
-                                            { label: 'Failed', value: metrics.failed, icon: 'fa-user-xmark', color: '#F87171', bg: 'rgba(248, 113, 113, 0.15)' },
-                                            { label: 'On-Hold', value: metrics.onHold, icon: 'fa-user-clock', color: '#FBBF24', bg: 'rgba(251, 191, 36, 0.15)' },
-                                            { label: 'Avg Score', value: typeof metrics.avgScore === 'number' ? `${metrics.avgScore}%` : metrics.avgScore, icon: 'fa-chart-line', color: '#A78BFA', bg: 'rgba(167, 139, 250, 0.15)' },
-                                            { label: 'Completion', value: typeof metrics.completionRate === 'number' ? `${metrics.completionRate}%` : metrics.completionRate, icon: 'fa-circle-check', color: '#2DD4BF', bg: 'rgba(45, 212, 191, 0.15)' },
+                                        const pieData = [
+                                            { name: 'Passed', value: metrics.passed, fill: '#34D399' },
+                                            { name: 'Failed', value: metrics.failed, fill: '#F87171' },
+                                            { name: 'On-Hold', value: metrics.onHold, fill: '#FBBF24' },
+                                        ].filter(d => d.value > 0);
+
+                                        // Score distribution: group candidates into ranges
+                                        const scoreRanges = [
+                                            { range: '0-20%', min: 0, max: 20, fill: '#F87171' },
+                                            { range: '21-40%', min: 21, max: 40, fill: '#FB923C' },
+                                            { range: '41-60%', min: 41, max: 60, fill: '#FBBF24' },
+                                            { range: '61-80%', min: 61, max: 80, fill: '#60A5FA' },
+                                            { range: '81-100%', min: 81, max: 100, fill: '#34D399' },
                                         ];
+                                        const barData = scoreRanges.map(sr => ({
+                                            range: sr.range,
+                                            count: allRows.filter(r => {
+                                                const s = getScoreValue(r);
+                                                return s >= sr.min && s <= sr.max;
+                                            }).length,
+                                            fill: sr.fill
+                                        }));
+
                                         return (
                                             <div style={{
                                                 background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
@@ -1810,10 +1825,11 @@ const ResultsAI = () => {
                                                 position: 'relative',
                                                 overflow: 'hidden'
                                             }}>
-                                                {/* Decorative background orbs */}
+                                                {/* Decorative orbs */}
                                                 <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
                                                 <div style={{ position: 'absolute', bottom: '-60px', left: '-30px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
+                                                {/* Header */}
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
                                                     <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)' }}>
                                                         <i className="fa-solid fa-chart-pie" />
@@ -1824,60 +1840,90 @@ const ResultsAI = () => {
                                                     </span>
                                                 </div>
 
-                                                <style>{`
-                                                    @keyframes batchCardFloat {
-                                                        0%, 100% { transform: translateY(0px) rotateX(2deg); }
-                                                        50% { transform: translateY(-4px) rotateX(0deg); }
-                                                    }
-                                                `}</style>
+                                                {/* Stats Row */}
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                    {[
+                                                        { label: 'Total', value: metrics.total, color: '#60A5FA', icon: 'fa-users' },
+                                                        { label: 'Passed', value: metrics.passed, color: '#34D399', icon: 'fa-user-check' },
+                                                        { label: 'Failed', value: metrics.failed, color: '#F87171', icon: 'fa-user-xmark' },
+                                                        { label: 'On-Hold', value: metrics.onHold, color: '#FBBF24', icon: 'fa-user-clock' },
+                                                        { label: 'Avg Score', value: typeof metrics.avgScore === 'number' ? `${metrics.avgScore}%` : 'N/A', color: '#A78BFA', icon: 'fa-chart-line' },
+                                                        { label: 'Completion', value: typeof metrics.completionRate === 'number' ? `${metrics.completionRate}%` : 'N/A', color: '#2DD4BF', icon: 'fa-circle-check' },
+                                                    ].map((stat, i) => (
+                                                        <div key={stat.label} style={{ textAlign: 'center', padding: '0.6rem 0.4rem', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                                                            <i className={`fa-solid ${stat.icon}`} style={{ color: stat.color, fontSize: '0.8rem', marginBottom: '0.3rem', display: 'block' }} />
+                                                            <div style={{ fontSize: '1.2rem', fontWeight: '900', color: 'white' }}>{stat.value}</div>
+                                                            <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.5)', fontWeight: '700', textTransform: 'uppercase' }}>{stat.label}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
 
-                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(155px, 1fr))', gap: '1rem', perspective: '1000px', position: 'relative', zIndex: 1 }}>
-                                                    {cards.map((card, idx) => {
-                                                        const isHovered = hoveredMetricCard === idx;
-                                                        return (
-                                                            <div
-                                                                key={card.label}
-                                                                onMouseEnter={() => setHoveredMetricCard(idx)}
-                                                                onMouseLeave={() => setHoveredMetricCard(null)}
-                                                                style={{
-                                                                    background: isHovered ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.06)',
-                                                                    backdropFilter: 'blur(12px)',
-                                                                    border: `1px solid ${isHovered ? card.color + '80' : 'rgba(255, 255, 255, 0.1)'}`,
-                                                                    borderRadius: '16px',
-                                                                    padding: '1.25rem 1rem',
-                                                                    textAlign: 'center',
-                                                                    cursor: 'default',
-                                                                    transform: isHovered
-                                                                        ? 'rotateX(-5deg) rotateY(5deg) translateZ(20px) scale(1.05)'
-                                                                        : 'rotateX(2deg) translateZ(0) scale(1)',
-                                                                    transition: 'all 300ms cubic-bezier(0.23, 1, 0.32, 1)',
-                                                                    boxShadow: isHovered
-                                                                        ? `0 20px 40px rgba(0,0,0,0.3), 0 0 30px ${card.color}30, inset 0 1px 0 rgba(255,255,255,0.1)`
-                                                                        : '0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)',
-                                                                    animation: `batchCardFloat 3s ease-in-out infinite`,
-                                                                    animationDelay: `${idx * 0.3}s`,
-                                                                    opacity: analyticsAnimateIn ? 1 : 0,
-                                                                    transitionDelay: `${idx * 100}ms`,
-                                                                }}
-                                                            >
-                                                                <div style={{
-                                                                    width: '42px', height: '42px', borderRadius: '12px',
-                                                                    background: card.bg, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                                    margin: '0 auto 0.75rem', fontSize: '1.1rem', color: card.color,
-                                                                    boxShadow: isHovered ? `0 0 20px ${card.color}40` : 'none',
-                                                                    transition: 'box-shadow 300ms ease'
-                                                                }}>
-                                                                    <i className={`fa-solid ${card.icon}`} />
-                                                                </div>
-                                                                <div style={{ fontSize: '1.6rem', fontWeight: '900', color: 'white', lineHeight: 1, marginBottom: '0.3rem', textShadow: isHovered ? `0 0 10px ${card.color}60` : 'none' }}>
-                                                                    {card.value}
-                                                                </div>
-                                                                <div style={{ fontSize: '0.7rem', fontWeight: '700', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                                                    {card.label}
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
+                                                {/* Charts Row */}
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                    {/* Pie Chart - Pass/Fail Distribution */}
+                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                                        <h4 style={{ margin: '0 0 0.75rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                            <i className="fa-solid fa-chart-pie" style={{ marginRight: '6px', color: '#a78bfa' }} />Result Distribution
+                                                        </h4>
+                                                        <ResponsiveContainer width="100%" height={180}>
+                                                            <PieChart>
+                                                                <Pie
+                                                                    data={pieData}
+                                                                    cx="50%"
+                                                                    cy="50%"
+                                                                    innerRadius={45}
+                                                                    outerRadius={70}
+                                                                    paddingAngle={3}
+                                                                    dataKey="value"
+                                                                    stroke="none"
+                                                                >
+                                                                    {pieData.map((entry, index) => (
+                                                                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                                                                    ))}
+                                                                </Pie>
+                                                                <Tooltip
+                                                                    contentStyle={{ background: '#1e1b4b', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'white', fontSize: '0.8rem' }}
+                                                                    itemStyle={{ color: 'white' }}
+                                                                />
+                                                                <Legend
+                                                                    wrapperStyle={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)' }}
+                                                                    formatter={(value) => <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.7rem' }}>{value}</span>}
+                                                                />
+                                                            </PieChart>
+                                                        </ResponsiveContainer>
+                                                    </div>
+
+                                                    {/* Bar Chart - Score Distribution */}
+                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                                        <h4 style={{ margin: '0 0 0.75rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                            <i className="fa-solid fa-chart-bar" style={{ marginRight: '6px', color: '#60a5fa' }} />Score Distribution
+                                                        </h4>
+                                                        <ResponsiveContainer width="100%" height={180}>
+                                                            <BarChart data={barData} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
+                                                                <XAxis
+                                                                    dataKey="range"
+                                                                    tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 10 }}
+                                                                    axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                                                    tickLine={false}
+                                                                />
+                                                                <YAxis
+                                                                    tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 10 }}
+                                                                    axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                                                    tickLine={false}
+                                                                    allowDecimals={false}
+                                                                />
+                                                                <Tooltip
+                                                                    contentStyle={{ background: '#1e1b4b', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'white', fontSize: '0.8rem' }}
+                                                                    cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                                                                />
+                                                                <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+                                                                    {barData.map((entry, index) => (
+                                                                        <Cell key={`bar-${index}`} fill={entry.fill} />
+                                                                    ))}
+                                                                </Bar>
+                                                            </BarChart>
+                                                        </ResponsiveContainer>
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
