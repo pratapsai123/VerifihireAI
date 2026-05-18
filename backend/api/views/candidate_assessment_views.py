@@ -403,7 +403,7 @@ def get_invitation_public_view(request, token):
     """
     try:
         from api.models import SecuritySession
-        if SecuritySession.objects.filter(token=str(token), status='VIOLATION').exists():
+        if SecuritySession.token_has_permanent_revocation(token):
             return Response({'error': 'Access permanently revoked due to policy violation.'}, status=status.HTTP_403_FORBIDDEN)
 
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')

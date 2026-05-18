@@ -136,6 +136,7 @@ from .contact_views import (
 
 from .security_views import (
     start_security_session_view,
+    consume_agent_instance_view,
     security_check_view,
     security_heartbeat_view,
     security_session_status_view,

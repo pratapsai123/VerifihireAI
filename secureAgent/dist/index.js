@@ -40,7 +40,6 @@ module.exports = { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logA
 
 const fs = __nccwpck_require__(9896);
 const path = __nccwpck_require__(6928);
-const { getConnectionsByPid, getWindowTitles } = __nccwpck_require__(1599);
 
 const bundledPath = __nccwpck_require__.ab + "blacklist.json";
 let runtimeRules = [];
@@ -336,27 +335,64 @@ const fs = __nccwpck_require__(9896);
 const path = __nccwpck_require__(6928);
 const { spawn } = __nccwpck_require__(5317);
 const crypto = __nccwpck_require__(6982);
+const { unregisterProtocol } = __nccwpck_require__(3247);
 
 const APPDATA_DIR = path.join(process.env.APPDATA || '', 'VerifiHireSecureAgent');
-const ID_FILE = path.join(APPDATA_DIR, 'instance.id');
+const LEGACY_ID_FILE = path.join(APPDATA_DIR, 'instance.id');
 
 /**
- * Generates or retrieves a persistent unique ID for this installation.
- * This ID is used to detect if the .exe is being reused for a second assessment.
+ * Packaged .exe: store instance id beside the binary so each download gets its own id.
+ * Dev (node server.js): fall back to APPDATA.
+ */
+function getInstanceIdPath() {
+  if (process.pkg) {
+    return path.join(path.dirname(process.execPath), '.verifihire-instance');
+  }
+  if (!fs.existsSync(APPDATA_DIR)) {
+    fs.mkdirSync(APPDATA_DIR, { recursive: true });
+  }
+  return LEGACY_ID_FILE;
+}
+
+function writeInstanceId(idPath, newId) {
+  fs.writeFileSync(idPath, newId, 'utf8');
+}
+
+/**
+ * Generates or retrieves a unique ID for this agent installation.
+ * Each downloaded .exe gets its own id file — never reuse legacy APPDATA ids.
  */
 function getInstanceId() {
+  const newId = crypto.randomUUID();
+
   try {
-    if (!fs.existsSync(APPDATA_DIR)) {
-      fs.mkdirSync(APPDATA_DIR, { recursive: true });
+    const idPath = getInstanceIdPath();
+
+    if (fs.existsSync(idPath)) {
+      const existing = fs.readFileSync(idPath, 'utf8').trim();
+      if (existing && !existing.startsWith('temp-')) {
+        return existing;
+      }
     }
-    
-    if (fs.existsSync(ID_FILE)) {
-      return fs.readFileSync(ID_FILE, 'utf8').trim();
+
+    try {
+      writeInstanceId(idPath, newId);
+      return newId;
+    } catch (writeErr) {
+      // Downloads folder may be read-only — fall back to APPDATA (fresh file per install attempt)
+      if (!fs.existsSync(APPDATA_DIR)) {
+        fs.mkdirSync(APPDATA_DIR, { recursive: true });
+      }
+      const fallbackPath = path.join(APPDATA_DIR, 'instance.id');
+      if (fs.existsSync(fallbackPath)) {
+        const existing = fs.readFileSync(fallbackPath, 'utf8').trim();
+        if (existing && !existing.startsWith('temp-')) {
+          return existing;
+        }
+      }
+      writeInstanceId(fallbackPath, newId);
+      return newId;
     }
-    
-    const newId = crypto.randomUUID();
-    fs.writeFileSync(ID_FILE, newId, 'utf8');
-    return newId;
   } catch (err) {
     console.error('[instance] Failed to manage instance ID:', err.message);
     return 'temp-' + Date.now();
@@ -365,8 +401,8 @@ function getInstanceId() {
 
 /**
  * Triggers the "Self-Destruct" sequence.
- * Creates a batch file that waits for a delay, deletes the .exe, and deletes itself.
- * @param {number} delaySeconds - Delay before deletion (e.g. 1800 for 30 minutes).
+ * Creates a batch file that waits for a delay, deletes the .exe, instance file, and itself.
+ * @param {number} delaySeconds - Delay before deletion (0 = immediate after process exit).
  */
 function selfDestruct(delaySeconds = 0) {
   if (process.platform !== 'win32') {
@@ -375,17 +411,13 @@ function selfDestruct(delaySeconds = 0) {
     return;
   }
 
-  // Use process.execPath to get the path to the current running .exe
-  const exePath = process.execPath;
-  const batPath = path.join(path.dirname(exePath), 'cleanup_verifihire.bat');
+  unregisterProtocol();
 
-  /**
-   * The batch script logic:
-   * 1. Wait for delaySeconds (using timeout)
-   * 2. Attempt to delete the .exe (retrying if still locked)
-   * 3. Delete the local ID folder to ensure no traces are left
-   * 4. Delete itself
-   */
+  const exePath = process.execPath;
+  const exeDir = path.dirname(exePath);
+  const batPath = path.join(exeDir, 'cleanup_verifihire.bat');
+  const instancePath = getInstanceIdPath();
+
   const batContent = `@echo off
 setlocal enabledelayedexpansion
 
@@ -405,8 +437,10 @@ if exist "${exePath}" (
   goto retry
 )
 
+if exist "${instancePath}" del /f /q "${instancePath}"
+if exist "${LEGACY_ID_FILE}" del /f /q "${LEGACY_ID_FILE}"
 echo Cleaning up local data...
-rmdir /s /q "${APPDATA_DIR}"
+if exist "${APPDATA_DIR}" rmdir /s /q "${APPDATA_DIR}"
 
 echo Cleanup complete.
 del /f /q "%~f0"
@@ -414,16 +448,14 @@ del /f /q "%~f0"
 
   try {
     fs.writeFileSync(batPath, batContent, 'utf8');
-    
-    // Launch the batch script minimized so it doesn't disturb the user
+
     spawn('cmd.exe', ['/c', 'start', '/min', 'cmd.exe', '/c', batPath], {
       detached: true,
-      stdio: 'ignore'
+      stdio: 'ignore',
     });
 
     console.log(`[instance] Agent scheduled for auto-deletion in ${delaySeconds}s. Goodbye!`);
-    
-    // Exit the current process quickly
+
     setTimeout(() => {
       process.exit(0);
     }, 1000);
@@ -452,7 +484,12 @@ let heartbeatTimer = null;
 let signatureTimer = null;
 let current = null;
 let isScanning = false; // mutex — prevents overlapping PowerShell processes
+let scanRequested = false; // queue an immediate follow-up scan
+let lastScanWasViolation = false;
 let pendingViolation = null; // Buffers violations detected while offline
+
+const SCAN_INTERVAL_SAFE_MS = 8000;
+const SCAN_INTERVAL_AFTER_VIOLATION_MS = 2500;
 // Map<instanceId, {name, class}> of logOnly devices seen in current session (not in startup baseline)
 let knownLogOnlyMap = new Map();
 
@@ -499,15 +536,43 @@ async function flushPendingViolation() {
 }
 
 
+function scheduleNextScan(delayMs) {
+  if (!current) return;
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = setTimeout(scanAndReport, delayMs);
+}
+
 async function scanAndReport() {
   if (!current) return;
   if (isScanning) {
+    scanRequested = true;
     return;
   }
   isScanning = true;
-  try { await _doScan(); } finally { isScanning = false; }
-  // Schedule next scan only after this one completes
-  if (current) scanTimer = setTimeout(scanAndReport, 10000);
+  try {
+    await _doScan();
+  } finally {
+    isScanning = false;
+    if (!current) return;
+    if (scanRequested) {
+      scanRequested = false;
+      scheduleNextScan(400);
+      return;
+    }
+    const delay = lastScanWasViolation ? SCAN_INTERVAL_AFTER_VIOLATION_MS : SCAN_INTERVAL_SAFE_MS;
+    scheduleNextScan(delay);
+  }
+}
+
+function triggerScanNow() {
+  if (!current) return;
+  if (isScanning) {
+    scanRequested = true;
+    return;
+  }
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = null;
+  scanAndReport();
 }
 
 async function _doScan() {
@@ -522,6 +587,7 @@ async function _doScan() {
     if (!current) return;
 
     if (!verdict.safe) {
+      lastScanWasViolation = true;
       console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
       const violationData = {
@@ -550,6 +616,8 @@ async function _doScan() {
       return;
     }
 
+    lastScanWasViolation = false;
+
     // If we have a pending violation, try to flush it before reporting SAFE
     if (pendingViolation) {
       await flushPendingViolation();
@@ -558,7 +626,7 @@ async function _doScan() {
 
     // Safety check again before sending SAFE report
     if (!current) return;
-    
+
     await sendSecurityCheck(current.backendApiBase, {
       session_id: current.sessionId,
       user_id: current.userId,
@@ -717,6 +785,8 @@ function stopMonitor() {
   signatureTimer = null;
   current = null;
   isScanning = false;
+  scanRequested = false;
+  lastScanWasViolation = false;
   failedHeartbeats = 0;
   knownLogOnlyMap = new Map(); // reset on stop
 }
@@ -725,7 +795,7 @@ function getMonitorState() {
   return { running: Boolean(scanTimer && heartbeatTimer), current };
 }
 
-module.exports = { startMonitor, stopMonitor, getMonitorState };
+module.exports = { startMonitor, stopMonitor, getMonitorState, triggerScanNow };
 
 
 /***/ }),
@@ -7696,10 +7766,10 @@ module.exports = __nccwpck_require__(9192);
  */
 
 var finalhandler = __nccwpck_require__(8864);
-var Router = __nccwpck_require__(4455);
+var Router = __nccwpck_require__(8240);
 var methods = __nccwpck_require__(806);
-var middleware = __nccwpck_require__(9633);
-var query = __nccwpck_require__(5041);
+var middleware = __nccwpck_require__(791);
+var query = __nccwpck_require__(4321);
 var debug = __nccwpck_require__(8854)('express:application');
 var View = __nccwpck_require__(9123);
 var http = __nccwpck_require__(8611);
@@ -8367,8 +8437,8 @@ var bodyParser = __nccwpck_require__(6536)
 var EventEmitter = (__nccwpck_require__(4434).EventEmitter);
 var mixin = __nccwpck_require__(1339);
 var proto = __nccwpck_require__(5314);
-var Route = __nccwpck_require__(3629);
-var Router = __nccwpck_require__(4455);
+var Route = __nccwpck_require__(4049);
+var Router = __nccwpck_require__(8240);
 var req = __nccwpck_require__(81);
 var res = __nccwpck_require__(917);
 
@@ -8427,7 +8497,7 @@ exports.Router = Router;
  */
 
 exports.json = bodyParser.json
-exports.query = __nccwpck_require__(5041);
+exports.query = __nccwpck_require__(4321);
 exports.raw = bodyParser.raw
 exports["static"] = __nccwpck_require__(6004);
 exports.text = bodyParser.text
@@ -8465,6 +8535,112 @@ removedMiddlewares.forEach(function (name) {
     configurable: true
   });
 });
+
+
+/***/ }),
+
+/***/ 791:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module dependencies.
+ * @private
+ */
+
+var setPrototypeOf = __nccwpck_require__(1015)
+
+/**
+ * Initialization middleware, exposing the
+ * request and response to each other, as well
+ * as defaulting the X-Powered-By header field.
+ *
+ * @param {Function} app
+ * @return {Function}
+ * @api private
+ */
+
+exports.init = function(app){
+  return function expressInit(req, res, next){
+    if (app.enabled('x-powered-by')) res.setHeader('X-Powered-By', 'Express');
+    req.res = res;
+    res.req = req;
+    req.next = next;
+
+    setPrototypeOf(req, app.request)
+    setPrototypeOf(res, app.response)
+
+    res.locals = res.locals || Object.create(null);
+
+    next();
+  };
+};
+
+
+
+/***/ }),
+
+/***/ 4321:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module dependencies.
+ */
+
+var merge = __nccwpck_require__(1448)
+var parseUrl = __nccwpck_require__(3404);
+var qs = __nccwpck_require__(240);
+
+/**
+ * @param {Object} options
+ * @return {Function}
+ * @api public
+ */
+
+module.exports = function query(options) {
+  var opts = merge({}, options)
+  var queryparse = qs.parse;
+
+  if (typeof options === 'function') {
+    queryparse = options;
+    opts = undefined;
+  }
+
+  if (opts !== undefined && opts.allowPrototypes === undefined) {
+    // back-compat for qs module
+    opts.allowPrototypes = true;
+  }
+
+  return function query(req, res, next){
+    if (!req.query) {
+      var val = parseUrl(req).query;
+      req.query = queryparse(val, opts);
+    }
+
+    next();
+  };
+};
 
 
 /***/ }),
@@ -10175,6 +10351,1109 @@ function stringify (value, replacer, spaces, escape) {
 
   return json
 }
+
+
+/***/ }),
+
+/***/ 8240:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module dependencies.
+ * @private
+ */
+
+var Route = __nccwpck_require__(4049);
+var Layer = __nccwpck_require__(9177);
+var methods = __nccwpck_require__(806);
+var mixin = __nccwpck_require__(1448);
+var debug = __nccwpck_require__(8854)('express:router');
+var deprecate = __nccwpck_require__(95)('express');
+var flatten = __nccwpck_require__(9560);
+var parseUrl = __nccwpck_require__(3404);
+var setPrototypeOf = __nccwpck_require__(1015)
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var objectRegExp = /^\[object (\S+)\]$/;
+var slice = Array.prototype.slice;
+var toString = Object.prototype.toString;
+
+/**
+ * Initialize a new `Router` with the given `options`.
+ *
+ * @param {Object} [options]
+ * @return {Router} which is an callable function
+ * @public
+ */
+
+var proto = module.exports = function(options) {
+  var opts = options || {};
+
+  function router(req, res, next) {
+    router.handle(req, res, next);
+  }
+
+  // mixin Router class functions
+  setPrototypeOf(router, proto)
+
+  router.params = {};
+  router._params = [];
+  router.caseSensitive = opts.caseSensitive;
+  router.mergeParams = opts.mergeParams;
+  router.strict = opts.strict;
+  router.stack = [];
+
+  return router;
+};
+
+/**
+ * Map the given param placeholder `name`(s) to the given callback.
+ *
+ * Parameter mapping is used to provide pre-conditions to routes
+ * which use normalized placeholders. For example a _:user_id_ parameter
+ * could automatically load a user's information from the database without
+ * any additional code,
+ *
+ * The callback uses the same signature as middleware, the only difference
+ * being that the value of the placeholder is passed, in this case the _id_
+ * of the user. Once the `next()` function is invoked, just like middleware
+ * it will continue on to execute the route, or subsequent parameter functions.
+ *
+ * Just like in middleware, you must either respond to the request or call next
+ * to avoid stalling the request.
+ *
+ *  app.param('user_id', function(req, res, next, id){
+ *    User.find(id, function(err, user){
+ *      if (err) {
+ *        return next(err);
+ *      } else if (!user) {
+ *        return next(new Error('failed to load user'));
+ *      }
+ *      req.user = user;
+ *      next();
+ *    });
+ *  });
+ *
+ * @param {String} name
+ * @param {Function} fn
+ * @return {app} for chaining
+ * @public
+ */
+
+proto.param = function param(name, fn) {
+  // param logic
+  if (typeof name === 'function') {
+    deprecate('router.param(fn): Refactor to use path params');
+    this._params.push(name);
+    return;
+  }
+
+  // apply param functions
+  var params = this._params;
+  var len = params.length;
+  var ret;
+
+  if (name[0] === ':') {
+    deprecate('router.param(' + JSON.stringify(name) + ', fn): Use router.param(' + JSON.stringify(name.slice(1)) + ', fn) instead')
+    name = name.slice(1)
+  }
+
+  for (var i = 0; i < len; ++i) {
+    if (ret = params[i](name, fn)) {
+      fn = ret;
+    }
+  }
+
+  // ensure we end up with a
+  // middleware function
+  if ('function' !== typeof fn) {
+    throw new Error('invalid param() call for ' + name + ', got ' + fn);
+  }
+
+  (this.params[name] = this.params[name] || []).push(fn);
+  return this;
+};
+
+/**
+ * Dispatch a req, res into the router.
+ * @private
+ */
+
+proto.handle = function handle(req, res, out) {
+  var self = this;
+
+  debug('dispatching %s %s', req.method, req.url);
+
+  var idx = 0;
+  var protohost = getProtohost(req.url) || ''
+  var removed = '';
+  var slashAdded = false;
+  var sync = 0
+  var paramcalled = {};
+
+  // store options for OPTIONS request
+  // only used if OPTIONS request
+  var options = [];
+
+  // middleware and routes
+  var stack = self.stack;
+
+  // manage inter-router variables
+  var parentParams = req.params;
+  var parentUrl = req.baseUrl || '';
+  var done = restore(out, req, 'baseUrl', 'next', 'params');
+
+  // setup next layer
+  req.next = next;
+
+  // for options requests, respond with a default if nothing else responds
+  if (req.method === 'OPTIONS') {
+    done = wrap(done, function(old, err) {
+      if (err || options.length === 0) return old(err);
+      sendOptionsResponse(res, options, old);
+    });
+  }
+
+  // setup basic req values
+  req.baseUrl = parentUrl;
+  req.originalUrl = req.originalUrl || req.url;
+
+  next();
+
+  function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  }
+
+  function trim_prefix(layer, layerError, layerPath, path) {
+    if (layerPath.length !== 0) {
+      // Validate path is a prefix match
+      if (layerPath !== path.slice(0, layerPath.length)) {
+        next(layerError)
+        return
+      }
+
+      // Validate path breaks on a path separator
+      var c = path[layerPath.length]
+      if (c && c !== '/' && c !== '.') return next(layerError)
+
+      // Trim off the part of the url that matches the route
+      // middleware (.use stuff) needs to have the path stripped
+      debug('trim prefix (%s) from url %s', layerPath, req.url);
+      removed = layerPath;
+      req.url = protohost + req.url.slice(protohost.length + removed.length)
+
+      // Ensure leading slash
+      if (!protohost && req.url[0] !== '/') {
+        req.url = '/' + req.url;
+        slashAdded = true;
+      }
+
+      // Setup base URL (no trailing slash)
+      req.baseUrl = parentUrl + (removed[removed.length - 1] === '/'
+        ? removed.substring(0, removed.length - 1)
+        : removed);
+    }
+
+    debug('%s %s : %s', layer.name, layerPath, req.originalUrl);
+
+    if (layerError) {
+      layer.handle_error(layerError, req, res, next);
+    } else {
+      layer.handle_request(req, res, next);
+    }
+  }
+};
+
+/**
+ * Process any parameters for the layer.
+ * @private
+ */
+
+proto.process_params = function process_params(layer, called, req, res, done) {
+  var params = this.params;
+
+  // captured parameters from the layer, keys and values
+  var keys = layer.keys;
+
+  // fast track
+  if (!keys || keys.length === 0) {
+    return done();
+  }
+
+  var i = 0;
+  var name;
+  var paramIndex = 0;
+  var key;
+  var paramVal;
+  var paramCallbacks;
+  var paramCalled;
+
+  // process params in order
+  // param callbacks can be async
+  function param(err) {
+    if (err) {
+      return done(err);
+    }
+
+    if (i >= keys.length ) {
+      return done();
+    }
+
+    paramIndex = 0;
+    key = keys[i++];
+    name = key.name;
+    paramVal = req.params[name];
+    paramCallbacks = params[name];
+    paramCalled = called[name];
+
+    if (paramVal === undefined || !paramCallbacks) {
+      return param();
+    }
+
+    // param previously called with same value or error occurred
+    if (paramCalled && (paramCalled.match === paramVal
+      || (paramCalled.error && paramCalled.error !== 'route'))) {
+      // restore value
+      req.params[name] = paramCalled.value;
+
+      // next param
+      return param(paramCalled.error);
+    }
+
+    called[name] = paramCalled = {
+      error: null,
+      match: paramVal,
+      value: paramVal
+    };
+
+    paramCallback();
+  }
+
+  // single param callbacks
+  function paramCallback(err) {
+    var fn = paramCallbacks[paramIndex++];
+
+    // store updated value
+    paramCalled.value = req.params[key.name];
+
+    if (err) {
+      // store error
+      paramCalled.error = err;
+      param(err);
+      return;
+    }
+
+    if (!fn) return param();
+
+    try {
+      fn(req, res, paramCallback, paramVal, key.name);
+    } catch (e) {
+      paramCallback(e);
+    }
+  }
+
+  param();
+};
+
+/**
+ * Use the given middleware function, with optional path, defaulting to "/".
+ *
+ * Use (like `.all`) will run for any http METHOD, but it will not add
+ * handlers for those methods so OPTIONS requests will not consider `.use`
+ * functions even if they could respond.
+ *
+ * The other difference is that _route_ path is stripped and not visible
+ * to the handler function. The main effect of this feature is that mounted
+ * handlers can operate without any code changes regardless of the "prefix"
+ * pathname.
+ *
+ * @public
+ */
+
+proto.use = function use(fn) {
+  var offset = 0;
+  var path = '/';
+
+  // default path to '/'
+  // disambiguate router.use([fn])
+  if (typeof fn !== 'function') {
+    var arg = fn;
+
+    while (Array.isArray(arg) && arg.length !== 0) {
+      arg = arg[0];
+    }
+
+    // first arg is the path
+    if (typeof arg !== 'function') {
+      offset = 1;
+      path = fn;
+    }
+  }
+
+  var callbacks = flatten(slice.call(arguments, offset));
+
+  if (callbacks.length === 0) {
+    throw new TypeError('Router.use() requires a middleware function')
+  }
+
+  for (var i = 0; i < callbacks.length; i++) {
+    var fn = callbacks[i];
+
+    if (typeof fn !== 'function') {
+      throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
+    }
+
+    // add the middleware
+    debug('use %o %s', path, fn.name || '<anonymous>')
+
+    var layer = new Layer(path, {
+      sensitive: this.caseSensitive,
+      strict: false,
+      end: false
+    }, fn);
+
+    layer.route = undefined;
+
+    this.stack.push(layer);
+  }
+
+  return this;
+};
+
+/**
+ * Create a new Route for the given path.
+ *
+ * Each route contains a separate middleware stack and VERB handlers.
+ *
+ * See the Route api documentation for details on adding handlers
+ * and middleware to routes.
+ *
+ * @param {String} path
+ * @return {Route}
+ * @public
+ */
+
+proto.route = function route(path) {
+  var route = new Route(path);
+
+  var layer = new Layer(path, {
+    sensitive: this.caseSensitive,
+    strict: this.strict,
+    end: true
+  }, route.dispatch.bind(route));
+
+  layer.route = route;
+
+  this.stack.push(layer);
+  return route;
+};
+
+// create Router#VERB functions
+methods.concat('all').forEach(function(method){
+  proto[method] = function(path){
+    var route = this.route(path)
+    route[method].apply(route, slice.call(arguments, 1));
+    return this;
+  };
+});
+
+// append methods to a list of methods
+function appendMethods(list, addition) {
+  for (var i = 0; i < addition.length; i++) {
+    var method = addition[i];
+    if (list.indexOf(method) === -1) {
+      list.push(method);
+    }
+  }
+}
+
+// get pathname of request
+function getPathname(req) {
+  try {
+    return parseUrl(req).pathname;
+  } catch (err) {
+    return undefined;
+  }
+}
+
+// Get get protocol + host for a URL
+function getProtohost(url) {
+  if (typeof url !== 'string' || url.length === 0 || url[0] === '/') {
+    return undefined
+  }
+
+  var searchIndex = url.indexOf('?')
+  var pathLength = searchIndex !== -1
+    ? searchIndex
+    : url.length
+  var fqdnIndex = url.slice(0, pathLength).indexOf('://')
+
+  return fqdnIndex !== -1
+    ? url.substring(0, url.indexOf('/', 3 + fqdnIndex))
+    : undefined
+}
+
+// get type for error message
+function gettype(obj) {
+  var type = typeof obj;
+
+  if (type !== 'object') {
+    return type;
+  }
+
+  // inspect [[Class]] for objects
+  return toString.call(obj)
+    .replace(objectRegExp, '$1');
+}
+
+/**
+ * Match path to a layer.
+ *
+ * @param {Layer} layer
+ * @param {string} path
+ * @private
+ */
+
+function matchLayer(layer, path) {
+  try {
+    return layer.match(path);
+  } catch (err) {
+    return err;
+  }
+}
+
+// merge params with parent params
+function mergeParams(params, parent) {
+  if (typeof parent !== 'object' || !parent) {
+    return params;
+  }
+
+  // make copy of parent for base
+  var obj = mixin({}, parent);
+
+  // simple non-numeric merging
+  if (!(0 in params) || !(0 in parent)) {
+    return mixin(obj, params);
+  }
+
+  var i = 0;
+  var o = 0;
+
+  // determine numeric gaps
+  while (i in params) {
+    i++;
+  }
+
+  while (o in parent) {
+    o++;
+  }
+
+  // offset numeric indices in params before merge
+  for (i--; i >= 0; i--) {
+    params[i + o] = params[i];
+
+    // create holes for the merge when necessary
+    if (i < o) {
+      delete params[i];
+    }
+  }
+
+  return mixin(obj, params);
+}
+
+// restore obj props after function
+function restore(fn, obj) {
+  var props = new Array(arguments.length - 2);
+  var vals = new Array(arguments.length - 2);
+
+  for (var i = 0; i < props.length; i++) {
+    props[i] = arguments[i + 2];
+    vals[i] = obj[props[i]];
+  }
+
+  return function () {
+    // restore vals
+    for (var i = 0; i < props.length; i++) {
+      obj[props[i]] = vals[i];
+    }
+
+    return fn.apply(this, arguments);
+  };
+}
+
+// send an OPTIONS response
+function sendOptionsResponse(res, options, next) {
+  try {
+    var body = options.join(',');
+    res.set('Allow', body);
+    res.send(body);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// wrap a function
+function wrap(old, fn) {
+  return function proxy() {
+    var args = new Array(arguments.length + 1);
+
+    args[0] = old;
+    for (var i = 0, len = arguments.length; i < len; i++) {
+      args[i + 1] = arguments[i];
+    }
+
+    fn.apply(this, args);
+  };
+}
+
+
+/***/ }),
+
+/***/ 9177:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module dependencies.
+ * @private
+ */
+
+var pathRegexp = __nccwpck_require__(9455);
+var debug = __nccwpck_require__(8854)('express:router:layer');
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * Module exports.
+ * @public
+ */
+
+module.exports = Layer;
+
+function Layer(path, options, fn) {
+  if (!(this instanceof Layer)) {
+    return new Layer(path, options, fn);
+  }
+
+  debug('new %o', path)
+  var opts = options || {};
+
+  this.handle = fn;
+  this.name = fn.name || '<anonymous>';
+  this.params = undefined;
+  this.path = undefined;
+  this.regexp = pathRegexp(path, this.keys = [], opts);
+
+  // set fast path flags
+  this.regexp.fast_star = path === '*'
+  this.regexp.fast_slash = path === '/' && opts.end === false
+}
+
+/**
+ * Handle the error for the layer.
+ *
+ * @param {Error} error
+ * @param {Request} req
+ * @param {Response} res
+ * @param {function} next
+ * @api private
+ */
+
+Layer.prototype.handle_error = function handle_error(error, req, res, next) {
+  var fn = this.handle;
+
+  if (fn.length !== 4) {
+    // not a standard error handler
+    return next(error);
+  }
+
+  try {
+    fn(error, req, res, next);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Handle the request for the layer.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {function} next
+ * @api private
+ */
+
+Layer.prototype.handle_request = function handle(req, res, next) {
+  var fn = this.handle;
+
+  if (fn.length > 3) {
+    // not a standard request handler
+    return next();
+  }
+
+  try {
+    fn(req, res, next);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Check if this route matches `path`, if so
+ * populate `.params`.
+ *
+ * @param {String} path
+ * @return {Boolean}
+ * @api private
+ */
+
+Layer.prototype.match = function match(path) {
+  var match
+
+  if (path != null) {
+    // fast path non-ending match for / (any path matches)
+    if (this.regexp.fast_slash) {
+      this.params = {}
+      this.path = ''
+      return true
+    }
+
+    // fast path for * (everything matched in a param)
+    if (this.regexp.fast_star) {
+      this.params = {'0': decode_param(path)}
+      this.path = path
+      return true
+    }
+
+    // match the path
+    match = this.regexp.exec(path)
+  }
+
+  if (!match) {
+    this.params = undefined;
+    this.path = undefined;
+    return false;
+  }
+
+  // store values
+  this.params = {};
+  this.path = match[0]
+
+  var keys = this.keys;
+  var params = this.params;
+
+  for (var i = 1; i < match.length; i++) {
+    var key = keys[i - 1];
+    var prop = key.name;
+    var val = decode_param(match[i])
+
+    if (val !== undefined || !(hasOwnProperty.call(params, prop))) {
+      params[prop] = val;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Decode param value.
+ *
+ * @param {string} val
+ * @return {string}
+ * @private
+ */
+
+function decode_param(val) {
+  if (typeof val !== 'string' || val.length === 0) {
+    return val;
+  }
+
+  try {
+    return decodeURIComponent(val);
+  } catch (err) {
+    if (err instanceof URIError) {
+      err.message = 'Failed to decode param \'' + val + '\'';
+      err.status = err.statusCode = 400;
+    }
+
+    throw err;
+  }
+}
+
+
+/***/ }),
+
+/***/ 4049:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module dependencies.
+ * @private
+ */
+
+var debug = __nccwpck_require__(8854)('express:router:route');
+var flatten = __nccwpck_require__(9560);
+var Layer = __nccwpck_require__(9177);
+var methods = __nccwpck_require__(806);
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var slice = Array.prototype.slice;
+var toString = Object.prototype.toString;
+
+/**
+ * Module exports.
+ * @public
+ */
+
+module.exports = Route;
+
+/**
+ * Initialize `Route` with the given `path`,
+ *
+ * @param {String} path
+ * @public
+ */
+
+function Route(path) {
+  this.path = path;
+  this.stack = [];
+
+  debug('new %o', path)
+
+  // route handlers for various http methods
+  this.methods = {};
+}
+
+/**
+ * Determine if the route handles a given method.
+ * @private
+ */
+
+Route.prototype._handles_method = function _handles_method(method) {
+  if (this.methods._all) {
+    return true;
+  }
+
+  var name = method.toLowerCase();
+
+  if (name === 'head' && !this.methods['head']) {
+    name = 'get';
+  }
+
+  return Boolean(this.methods[name]);
+};
+
+/**
+ * @return {Array} supported HTTP methods
+ * @private
+ */
+
+Route.prototype._options = function _options() {
+  var methods = Object.keys(this.methods);
+
+  // append automatic head
+  if (this.methods.get && !this.methods.head) {
+    methods.push('head');
+  }
+
+  for (var i = 0; i < methods.length; i++) {
+    // make upper case
+    methods[i] = methods[i].toUpperCase();
+  }
+
+  return methods;
+};
+
+/**
+ * dispatch req, res into this route
+ * @private
+ */
+
+Route.prototype.dispatch = function dispatch(req, res, done) {
+  var idx = 0;
+  var stack = this.stack;
+  var sync = 0
+
+  if (stack.length === 0) {
+    return done();
+  }
+
+  var method = req.method.toLowerCase();
+  if (method === 'head' && !this.methods['head']) {
+    method = 'get';
+  }
+
+  req.route = this;
+
+  next();
+
+  function next(err) {
+    // signal to exit route
+    if (err && err === 'route') {
+      return done();
+    }
+
+    // signal to exit router
+    if (err && err === 'router') {
+      return done(err)
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    var layer = stack[idx++]
+
+    // end of layers
+    if (!layer) {
+      return done(err)
+    }
+
+    if (layer.method && layer.method !== method) {
+      next(err)
+    } else if (err) {
+      layer.handle_error(err, req, res, next);
+    } else {
+      layer.handle_request(req, res, next);
+    }
+
+    sync = 0
+  }
+};
+
+/**
+ * Add a handler for all HTTP verbs to this route.
+ *
+ * Behaves just like middleware and can respond or call `next`
+ * to continue processing.
+ *
+ * You can use multiple `.all` call to add multiple handlers.
+ *
+ *   function check_something(req, res, next){
+ *     next();
+ *   };
+ *
+ *   function validate_user(req, res, next){
+ *     next();
+ *   };
+ *
+ *   route
+ *   .all(validate_user)
+ *   .all(check_something)
+ *   .get(function(req, res, next){
+ *     res.send('hello world');
+ *   });
+ *
+ * @param {function} handler
+ * @return {Route} for chaining
+ * @api public
+ */
+
+Route.prototype.all = function all() {
+  var handles = flatten(slice.call(arguments));
+
+  for (var i = 0; i < handles.length; i++) {
+    var handle = handles[i];
+
+    if (typeof handle !== 'function') {
+      var type = toString.call(handle);
+      var msg = 'Route.all() requires a callback function but got a ' + type
+      throw new TypeError(msg);
+    }
+
+    var layer = Layer('/', {}, handle);
+    layer.method = undefined;
+
+    this.methods._all = true;
+    this.stack.push(layer);
+  }
+
+  return this;
+};
+
+methods.forEach(function(method){
+  Route.prototype[method] = function(){
+    var handles = flatten(slice.call(arguments));
+
+    for (var i = 0; i < handles.length; i++) {
+      var handle = handles[i];
+
+      if (typeof handle !== 'function') {
+        var type = toString.call(handle);
+        var msg = 'Route.' + method + '() requires a callback function but got a ' + type
+        throw new Error(msg);
+      }
+
+      debug('%s %o', method, this.path)
+
+      var layer = Layer('/', {}, handle);
+      layer.method = method;
+
+      this.methods[method] = true;
+      this.stack.push(layer);
+    }
+
+    return this;
+  };
+});
 
 
 /***/ }),
@@ -17505,6 +18784,231 @@ StripBOMWrapper.prototype.end = function() {
 
 /***/ }),
 
+/***/ 4939:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var Buffer = (__nccwpck_require__(181).Buffer);
+// Note: not polyfilled with safer-buffer on a purpose, as overrides Buffer
+
+// == Extend Node primitives to use iconv-lite =================================
+
+module.exports = function (iconv) {
+    var original = undefined; // Place to keep original methods.
+
+    // Node authors rewrote Buffer internals to make it compatible with
+    // Uint8Array and we cannot patch key functions since then.
+    // Note: this does use older Buffer API on a purpose
+    iconv.supportsNodeEncodingsExtension = !(Buffer.from || new Buffer(0) instanceof Uint8Array);
+
+    iconv.extendNodeEncodings = function extendNodeEncodings() {
+        if (original) return;
+        original = {};
+
+        if (!iconv.supportsNodeEncodingsExtension) {
+            console.error("ACTION NEEDED: require('iconv-lite').extendNodeEncodings() is not supported in your version of Node");
+            console.error("See more info at https://github.com/ashtuchkin/iconv-lite/wiki/Node-v4-compatibility");
+            return;
+        }
+
+        var nodeNativeEncodings = {
+            'hex': true, 'utf8': true, 'utf-8': true, 'ascii': true, 'binary': true, 
+            'base64': true, 'ucs2': true, 'ucs-2': true, 'utf16le': true, 'utf-16le': true,
+        };
+
+        Buffer.isNativeEncoding = function(enc) {
+            return enc && nodeNativeEncodings[enc.toLowerCase()];
+        }
+
+        // -- SlowBuffer -----------------------------------------------------------
+        var SlowBuffer = (__nccwpck_require__(181).SlowBuffer);
+
+        original.SlowBufferToString = SlowBuffer.prototype.toString;
+        SlowBuffer.prototype.toString = function(encoding, start, end) {
+            encoding = String(encoding || 'utf8').toLowerCase();
+
+            // Use native conversion when possible
+            if (Buffer.isNativeEncoding(encoding))
+                return original.SlowBufferToString.call(this, encoding, start, end);
+
+            // Otherwise, use our decoding method.
+            if (typeof start == 'undefined') start = 0;
+            if (typeof end == 'undefined') end = this.length;
+            return iconv.decode(this.slice(start, end), encoding);
+        }
+
+        original.SlowBufferWrite = SlowBuffer.prototype.write;
+        SlowBuffer.prototype.write = function(string, offset, length, encoding) {
+            // Support both (string, offset, length, encoding)
+            // and the legacy (string, encoding, offset, length)
+            if (isFinite(offset)) {
+                if (!isFinite(length)) {
+                    encoding = length;
+                    length = undefined;
+                }
+            } else {  // legacy
+                var swap = encoding;
+                encoding = offset;
+                offset = length;
+                length = swap;
+            }
+
+            offset = +offset || 0;
+            var remaining = this.length - offset;
+            if (!length) {
+                length = remaining;
+            } else {
+                length = +length;
+                if (length > remaining) {
+                    length = remaining;
+                }
+            }
+            encoding = String(encoding || 'utf8').toLowerCase();
+
+            // Use native conversion when possible
+            if (Buffer.isNativeEncoding(encoding))
+                return original.SlowBufferWrite.call(this, string, offset, length, encoding);
+
+            if (string.length > 0 && (length < 0 || offset < 0))
+                throw new RangeError('attempt to write beyond buffer bounds');
+
+            // Otherwise, use our encoding method.
+            var buf = iconv.encode(string, encoding);
+            if (buf.length < length) length = buf.length;
+            buf.copy(this, offset, 0, length);
+            return length;
+        }
+
+        // -- Buffer ---------------------------------------------------------------
+
+        original.BufferIsEncoding = Buffer.isEncoding;
+        Buffer.isEncoding = function(encoding) {
+            return Buffer.isNativeEncoding(encoding) || iconv.encodingExists(encoding);
+        }
+
+        original.BufferByteLength = Buffer.byteLength;
+        Buffer.byteLength = SlowBuffer.byteLength = function(str, encoding) {
+            encoding = String(encoding || 'utf8').toLowerCase();
+
+            // Use native conversion when possible
+            if (Buffer.isNativeEncoding(encoding))
+                return original.BufferByteLength.call(this, str, encoding);
+
+            // Slow, I know, but we don't have a better way yet.
+            return iconv.encode(str, encoding).length;
+        }
+
+        original.BufferToString = Buffer.prototype.toString;
+        Buffer.prototype.toString = function(encoding, start, end) {
+            encoding = String(encoding || 'utf8').toLowerCase();
+
+            // Use native conversion when possible
+            if (Buffer.isNativeEncoding(encoding))
+                return original.BufferToString.call(this, encoding, start, end);
+
+            // Otherwise, use our decoding method.
+            if (typeof start == 'undefined') start = 0;
+            if (typeof end == 'undefined') end = this.length;
+            return iconv.decode(this.slice(start, end), encoding);
+        }
+
+        original.BufferWrite = Buffer.prototype.write;
+        Buffer.prototype.write = function(string, offset, length, encoding) {
+            var _offset = offset, _length = length, _encoding = encoding;
+            // Support both (string, offset, length, encoding)
+            // and the legacy (string, encoding, offset, length)
+            if (isFinite(offset)) {
+                if (!isFinite(length)) {
+                    encoding = length;
+                    length = undefined;
+                }
+            } else {  // legacy
+                var swap = encoding;
+                encoding = offset;
+                offset = length;
+                length = swap;
+            }
+
+            encoding = String(encoding || 'utf8').toLowerCase();
+
+            // Use native conversion when possible
+            if (Buffer.isNativeEncoding(encoding))
+                return original.BufferWrite.call(this, string, _offset, _length, _encoding);
+
+            offset = +offset || 0;
+            var remaining = this.length - offset;
+            if (!length) {
+                length = remaining;
+            } else {
+                length = +length;
+                if (length > remaining) {
+                    length = remaining;
+                }
+            }
+
+            if (string.length > 0 && (length < 0 || offset < 0))
+                throw new RangeError('attempt to write beyond buffer bounds');
+
+            // Otherwise, use our encoding method.
+            var buf = iconv.encode(string, encoding);
+            if (buf.length < length) length = buf.length;
+            buf.copy(this, offset, 0, length);
+            return length;
+
+            // TODO: Set _charsWritten.
+        }
+
+
+        // -- Readable -------------------------------------------------------------
+        if (iconv.supportsStreams) {
+            var Readable = (__nccwpck_require__(2203).Readable);
+
+            original.ReadableSetEncoding = Readable.prototype.setEncoding;
+            Readable.prototype.setEncoding = function setEncoding(enc, options) {
+                // Use our own decoder, it has the same interface.
+                // We cannot use original function as it doesn't handle BOM-s.
+                this._readableState.decoder = iconv.getDecoder(enc, options);
+                this._readableState.encoding = enc;
+            }
+
+            Readable.prototype.collect = iconv._collect;
+        }
+    }
+
+    // Remove iconv-lite Node primitive extensions.
+    iconv.undoExtendNodeEncodings = function undoExtendNodeEncodings() {
+        if (!iconv.supportsNodeEncodingsExtension)
+            return;
+        if (!original)
+            throw new Error("require('iconv-lite').undoExtendNodeEncodings(): Nothing to undo; extendNodeEncodings() is not called.")
+
+        delete Buffer.isNativeEncoding;
+
+        var SlowBuffer = (__nccwpck_require__(181).SlowBuffer);
+
+        SlowBuffer.prototype.toString = original.SlowBufferToString;
+        SlowBuffer.prototype.write = original.SlowBufferWrite;
+
+        Buffer.isEncoding = original.BufferIsEncoding;
+        Buffer.byteLength = original.BufferByteLength;
+        Buffer.prototype.toString = original.BufferToString;
+        Buffer.prototype.write = original.BufferWrite;
+
+        if (iconv.supportsStreams) {
+            var Readable = (__nccwpck_require__(2203).Readable);
+
+            Readable.prototype.setEncoding = original.ReadableSetEncoding;
+            delete Readable.prototype.collect;
+        }
+
+        original = undefined;
+    }
+}
+
+
+/***/ }),
+
 /***/ 1748:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -17656,7 +19160,7 @@ if (nodeVer) {
     }
 
     // Load Node primitive extensions.
-    __nccwpck_require__(1125)(iconv);
+    __nccwpck_require__(4939)(iconv);
 }
 
 if (false) {}
@@ -21559,6 +23063,142 @@ function fresh (url, parsedUrl) {
     (Url === undefined || parsedUrl instanceof Url) &&
     parsedUrl._raw === url
 }
+
+
+/***/ }),
+
+/***/ 9455:
+/***/ ((module) => {
+
+/**
+ * Expose `pathtoRegexp`.
+ */
+
+module.exports = pathtoRegexp;
+
+/**
+ * Match matching groups in a regular expression.
+ */
+var MATCHING_GROUP_REGEXP = /\((?!\?)/g;
+
+/**
+ * Normalize the given path string,
+ * returning a regular expression.
+ *
+ * An empty array should be passed,
+ * which will contain the placeholder
+ * key names. For example "/user/:id" will
+ * then contain ["id"].
+ *
+ * @param  {String|RegExp|Array} path
+ * @param  {Array} keys
+ * @param  {Object} options
+ * @return {RegExp}
+ * @api private
+ */
+
+function pathtoRegexp(path, keys, options) {
+  options = options || {};
+  keys = keys || [];
+  var strict = options.strict;
+  var end = options.end !== false;
+  var flags = options.sensitive ? '' : 'i';
+  var extraOffset = 0;
+  var keysOffset = keys.length;
+  var i = 0;
+  var name = 0;
+  var m;
+
+  if (path instanceof RegExp) {
+    while (m = MATCHING_GROUP_REGEXP.exec(path.source)) {
+      keys.push({
+        name: name++,
+        optional: false,
+        offset: m.index
+      });
+    }
+
+    return path;
+  }
+
+  if (Array.isArray(path)) {
+    // Map array parts into regexps and return their source. We also pass
+    // the same keys and options instance into every generation to get
+    // consistent matching groups before we join the sources together.
+    path = path.map(function (value) {
+      return pathtoRegexp(value, keys, options).source;
+    });
+
+    return new RegExp('(?:' + path.join('|') + ')', flags);
+  }
+
+  path = ('^' + path + (strict ? '' : path[path.length - 1] === '/' ? '?' : '/?'))
+    .replace(/\/\(/g, '/(?:')
+    .replace(/([\/\.])/g, '\\$1')
+    .replace(/(\\\/)?(\\\.)?:(\w+)(\(.*?\))?(\*)?(\?)?/g, function (match, slash, format, key, capture, star, optional, offset) {
+      slash = slash || '';
+      format = format || '';
+      capture = capture || '([^\\/' + format + ']+?)';
+      optional = optional || '';
+
+      keys.push({
+        name: key,
+        optional: !!optional,
+        offset: offset + extraOffset
+      });
+
+      var result = ''
+        + (optional ? '' : slash)
+        + '(?:'
+        + format + (optional ? slash : '') + capture
+        + (star ? '((?:[\\/' + format + '].+?)?)' : '')
+        + ')'
+        + optional;
+
+      extraOffset += result.length - match.length;
+
+      return result;
+    })
+    .replace(/\*/g, function (star, index) {
+      var len = keys.length
+
+      while (len-- > keysOffset && keys[len].offset > index) {
+        keys[len].offset += 3; // Replacement length minus asterisk length.
+      }
+
+      return '(.*)';
+    });
+
+  // This is a workaround for handling unnamed matching groups.
+  while (m = MATCHING_GROUP_REGEXP.exec(path)) {
+    var escapeCount = 0;
+    var index = m.index;
+
+    while (path.charAt(--index) === '\\') {
+      escapeCount++;
+    }
+
+    // It's possible to escape the bracket.
+    if (escapeCount % 2 === 1) {
+      continue;
+    }
+
+    if (keysOffset + i === keys.length || keys[keysOffset + i].offset > m.index) {
+      keys.splice(keysOffset + i, 0, {
+        name: name++, // Unnamed matching groups must be consistently linear.
+        optional: false,
+        offset: m.index
+      });
+    }
+
+    i++;
+  }
+
+  // If the path is non-ending, match until the end or a slash.
+  path += (end ? '$' : (path[path.length - 1] === '/' ? '' : '(?=\\/|$)'));
+
+  return new RegExp(path, flags);
+};
 
 
 /***/ }),
@@ -26939,27 +28579,6 @@ async function scanWindows() {
   return allProcs;
 }
 
-async function scanMac() {
-  const out = await run('ps -axo pid=,user=,comm=,command=');
-  return out.split(/\r?\n/).filter(Boolean).map((line) => {
-    const trimmed = line.trim();
-    const parts = trimmed.split(/\s+/);
-    const pidStr = parts[0];
-    const user = parts[1];
-    const first = parts[2];
-    const rest = parts.slice(3);
-    return {
-      pid: parseInt(pidStr, 10) || 0,
-      processName: first || '',
-      processPath: first || '',
-      commandLine: rest.length ? `${first} ${rest.join(' ')}` : first || '',
-      description: '',
-      company: '',
-      sessionId: user === 'root' ? 0 : 1,
-    };
-  });
-}
-
 /**
  * Get TCP connections grouped by PID on Windows using PowerShell Get-NetTCPConnection.
  * Returns a Map<pid, { established: number, connections: Array }>
@@ -27019,39 +28638,13 @@ async function getWindowTitlesWindows() {
   return map;
 }
 
-/**
- * Get TCP connections grouped by PID on macOS.
- */
-async function getConnectionsByPidMac() {
-  const map = new Map();
-  try {
-    const out = await run('lsof -i TCP -sTCP:ESTABLISHED -nP 2>/dev/null');
-    const lines = out.split(/\r?\n/).filter(Boolean);
-    for (const line of lines) {
-      const cols = line.trim().split(/\s+/);
-      if (cols.length >= 2) {
-        const pid = parseInt(cols[1], 10) || 0;
-        if (!map.has(pid)) {
-          map.set(pid, { established: 0, connections: [], processName: cols[0] || '' });
-        }
-        map.get(pid).established++;
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return map;
-}
-
 async function scanProcesses() {
   if (process.platform === 'win32') return scanWindows();
-  if (process.platform === 'darwin') return scanMac();
   return [];
 }
 
 async function getConnectionsByPid() {
   if (process.platform === 'win32') return getConnectionsByPidWindows();
-  if (process.platform === 'darwin') return getConnectionsByPidMac();
   return new Map();
 }
 
@@ -27069,14 +28662,17 @@ module.exports = { scanProcesses, getConnectionsByPid, getWindowTitles };
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /**
- * Register the verifihire:// custom URL protocol on Windows.
- * This allows the browser to auto-launch VerifiHireSecureAgent.exe
- * when a candidate opens an assessment/interview link.
- *
- * Similar to how Zoom registers zoommtg:// or Teams registers msteams://
+ * Register / unregister the verifihire:// custom URL protocol on Windows.
+ * Only the packaged .exe should register — never Node dev mode.
  */
 const { execSync } = __nccwpck_require__(5317);
 const path = __nccwpck_require__(6928);
+
+const REG_BASE = 'HKCU\\Software\\Classes\\verifihire';
+
+function isPackagedAgent() {
+  return Boolean(process.pkg);
+}
 
 function registerProtocol() {
   if (process.platform !== 'win32') {
@@ -27084,82 +28680,42 @@ function registerProtocol() {
     return;
   }
 
+  if (!isPackagedAgent()) {
+    console.log('[protocol] Skipping registration (not a packaged .exe)');
+    return;
+  }
+
   try {
-    // Determine the executable path
-    // When compiled with pkg: process.execPath = path to the .exe
-    // When running with node: process.execPath = path to node.exe
-    const isPackaged = !process.execPath.toLowerCase().endsWith('node.exe') &&
-                       !process.execPath.toLowerCase().endsWith('node');
+    const launchCommand = `\\"${process.execPath}\\"`;
 
-    let launchCommand;
-    if (isPackaged) {
-      // Compiled .exe — just launch the exe directly
-      launchCommand = `\\"${process.execPath}\\"`;
-    } else {
-      // Running via node — need to call node with the server script
-      const serverPath = __nccwpck_require__.ab + "server.js";
-      launchCommand = `\\"${process.execPath}\\" \\"${serverPath}\\"`;
-    }
+    execSync(`reg add "${REG_BASE}" /ve /d "URL:VerifiHire Secure Agent Protocol" /f`, { stdio: 'ignore' });
+    execSync(`reg add "${REG_BASE}" /v "URL Protocol" /d "" /f`, { stdio: 'ignore' });
+    execSync(`reg add "${REG_BASE}\\shell\\open\\command" /ve /d "${launchCommand}" /f`, { stdio: 'ignore' });
 
-    const regBase = 'HKCU\\Software\\Classes\\verifihire';
-
-    // Set the protocol description
-    execSync(`reg add "${regBase}" /ve /d "URL:VerifiHire Secure Agent Protocol" /f`, { stdio: 'ignore' });
-
-    // Mark this key as a URL protocol handler
-    execSync(`reg add "${regBase}" /v "URL Protocol" /d "" /f`, { stdio: 'ignore' });
-
-    // Set the command to execute when verifihire:// is triggered
-    execSync(`reg add "${regBase}\\shell\\open\\command" /ve /d "${launchCommand}" /f`, { stdio: 'ignore' });
-
-    console.log('[protocol] verifihire:// protocol registered successfully');
+    console.log('[protocol] verifihire:// protocol registered');
     console.log('[protocol] Launch command:', launchCommand.replace(/\\"/g, '"'));
   } catch (err) {
     console.error('[protocol] Registration failed:', err.message);
   }
 }
 
-module.exports = { registerProtocol };
+function unregisterProtocol() {
+  if (process.platform !== 'win32') {
+    return;
+  }
 
+  try {
+    execSync(`reg delete "${REG_BASE}" /f`, { stdio: 'ignore' });
+    console.log('[protocol] verifihire:// protocol unregistered');
+  } catch (err) {
+    // Key may already be absent
+    if (!String(err.message || '').includes('unable to find')) {
+      console.warn('[protocol] Unregister failed:', err.message);
+    }
+  }
+}
 
-/***/ }),
-
-/***/ 1125:
-/***/ ((module) => {
-
-module.exports = eval("require")("./extend-node");
-
-
-/***/ }),
-
-/***/ 9633:
-/***/ ((module) => {
-
-module.exports = eval("require")("./middleware/init");
-
-
-/***/ }),
-
-/***/ 5041:
-/***/ ((module) => {
-
-module.exports = eval("require")("./middleware/query");
-
-
-/***/ }),
-
-/***/ 4455:
-/***/ ((module) => {
-
-module.exports = eval("require")("./router");
-
-
-/***/ }),
-
-/***/ 3629:
-/***/ ((module) => {
-
-module.exports = eval("require")("./router/route");
+module.exports = { registerProtocol, unregisterProtocol };
 
 
 /***/ }),
@@ -32413,7 +33969,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"100":"Continue","101":"Switching Pro
 /***/ ((module) => {
 
 "use strict";
-module.exports = {"rE":"2.0.0"};
+module.exports = {"rE":"2.1.2"};
 
 /***/ })
 
@@ -32470,9 +34026,8 @@ module.exports = {"rE":"2.0.0"};
 var __webpack_exports__ = {};
 const express = __nccwpck_require__(5152);
 const cors = __nccwpck_require__(4085);
-const { scanProcesses } = __nccwpck_require__(1599);
 const { detectBlocked, loadBundledRules } = __nccwpck_require__(532);
-const { startMonitor, stopMonitor, getMonitorState } = __nccwpck_require__(1386);
+const { startMonitor, stopMonitor, getMonitorState, triggerScanNow } = __nccwpck_require__(1386);
 const { scanHardwareDevices, initBaseline, compareToBaseline } = __nccwpck_require__(1394);
 const { registerProtocol } = __nccwpck_require__(3247);
 const { exec } = __nccwpck_require__(5317);
@@ -32490,31 +34045,9 @@ function minimizeTerminal() {
 
   // We wait 1 second to ensure the window is fully rendered before minimizing
   setTimeout(() => {
-    const script = `
-      $powershell = [PowerShell]::Create()
-      $powershell.AddScript('
-        Add-Type -TypeDefinition "
-          using System;
-          using System.Runtime.InteropServices;
-          public class WindowUtils {
-            [DllImport(\\"user32.dll\\")]
-            public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-            [DllImport(\\"user32.dll\\")]
-            public static extern IntPtr GetConsoleWindow();
-          }
-        "
-        $hwnd = [WindowUtils]::GetConsoleWindow()
-        if ($hwnd -ne [IntPtr]::Zero) {
-          [WindowUtils]::ShowWindow($hwnd, 6) # 6 = SW_MINIMIZE
-        }
-      ')
-      $powershell.Invoke()
-    `;
-    
-    // Simpler approach that usually works for console apps:
-    const simpleScript = `powershell -Command "(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class W { [DllImport(\\"user32.dll\\")] public static extern bool ShowWindow(IntPtr h, int n); }' -PassThru)::ShowWindow((Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class C { [DllImport(\\"kernel32.dll\\")] public static extern IntPtr GetConsoleWindow(); }' -PassThru)::GetConsoleWindow(), 6)"`;
-    
-    exec(simpleScript, (err) => {
+    const minimizeScript = `powershell -Command "(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class W { [DllImport(\\"user32.dll\\")] public static extern bool ShowWindow(IntPtr h, int n); }' -PassThru)::ShowWindow((Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class C { [DllImport(\\"kernel32.dll\\")] public static extern IntPtr GetConsoleWindow(); }' -PassThru)::GetConsoleWindow(), 6)"`;
+
+    exec(minimizeScript, (err) => {
       if (err) console.error('[server] Failed to minimize terminal:', err.message);
       else console.log('[server] Terminal minimized to taskbar');
     });
@@ -32526,8 +34059,10 @@ app.use(cors());
 app.use(express.json());
 
 loadBundledRules();
-// Register verifihire:// custom protocol so browsers can auto-launch the agent
-registerProtocol();
+// Register verifihire:// only for the packaged .exe (not Node dev mode)
+if (process.pkg) {
+  registerProtocol();
+}
 // Auto-minimize terminal window to taskbar
 minimizeTerminal();
 // Take hardware baseline at startup so built-in devices are whitelisted
@@ -32537,11 +34072,14 @@ console.log(`[server] VerifiHire Secure Agent v${AGENT_VERSION} starting...`);
 
 app.get('/status', (_req, res) => {
   const monitorState = getMonitorState();
+  const packaged = Boolean(process.pkg);
   res.json({
-    installed: true,
+    installed: packaged,
     running: true,
+    packaged,
     version: AGENT_VERSION,
     instance_id: getInstanceId(),
+    exe_path: packaged ? process.execPath : null,
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
@@ -32600,14 +34138,32 @@ app.post('/monitor/start', async (req, res) => {
   }
 });
 
-app.post('/monitor/stop', (_req, res) => {
+app.post('/monitor/scan-now', (_req, res) => {
+  const monitorState = getMonitorState();
+  if (!monitorState.running) {
+    return res.status(400).json({ error: 'monitor not running' });
+  }
+  triggerScanNow();
+  return res.json({ triggered: true });
+});
+
+app.post('/monitor/stop', (req, res) => {
   stopMonitor();
-  res.json({ stopped: true });
-  // Auto-delete: trigger self-destruct sequence with 30-minute delay (1800s)
-  console.log('[server] Monitor stopped — self-destruct scheduled in 30 minutes');
+  const body = req.body || {};
+  const rawDelay = Number(body.destruct_delay);
+  res.json({ stopped: true, destruct_delay: rawDelay });
+  // destruct_delay < 0 means stop monitoring only — keep agent running for precheck retry
+  if (Number.isFinite(rawDelay) && rawDelay < 0) {
+    console.log('[server] Monitor stopped — agent stays running (no self-destruct)');
+    return;
+  }
+  const destructDelay = Number.isFinite(rawDelay)
+    ? Math.max(0, Math.min(rawDelay, 300))
+    : 90;
+  console.log(`[server] Monitor stopped — self-destruct scheduled in ${destructDelay}s`);
   setTimeout(() => {
-    selfDestruct(1800);
-  }, 2000);
+    selfDestruct(destructDelay);
+  }, 1500);
 });
 
 // Explicit shutdown endpoint (browser can call this as a fallback)
@@ -32625,13 +34181,33 @@ const port = process.env.SECURE_AGENT_PORT || 5001;
 const server = app.listen(port);
 
 server.on('error', (err) => {
-  process.exit(1);
+  if (err && err.code === 'EADDRINUSE') {
+    console.log('');
+    console.log('============================================================');
+    console.log('  VerifiHire Secure Agent is ALREADY RUNNING.');
+    console.log('  Check your taskbar for a minimized terminal window.');
+    console.log('  Do not start a second copy — close the other one first.');
+    console.log('============================================================');
+    console.log('');
+    // Keep the window open so the user can read the message
+    setInterval(() => {}, 60000);
+    return;
+  }
+  console.error('[server] Failed to start:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
-process.on('unhandledRejection', () => {});
+process.on('unhandledRejection', (reason) => {
+  console.error('[server] Unhandled rejection:', reason);
+});
 
-process.on('uncaughtException', () => {
-  process.exit(1);
+process.on('uncaughtException', (err) => {
+  console.error('[server] Uncaught exception:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
 const shutdown = () => {

@@ -130,14 +130,23 @@ app.post('/monitor/start', async (req, res) => {
   }
 });
 
-app.post('/monitor/stop', (_req, res) => {
+app.post('/monitor/stop', (req, res) => {
   stopMonitor();
-  res.json({ stopped: true });
-  // Auto-delete: trigger self-destruct sequence with 30-minute delay (1800s)
-  console.log('[server] Monitor stopped — self-destruct scheduled in 30 minutes');
+  const body = req.body || {};
+  const rawDelay = Number(body.destruct_delay);
+  res.json({ stopped: true, destruct_delay: rawDelay });
+  // destruct_delay < 0 means stop monitoring only — keep agent running for precheck retry
+  if (Number.isFinite(rawDelay) && rawDelay < 0) {
+    console.log('[server] Monitor stopped — agent stays running (no self-destruct)');
+    return;
+  }
+  const destructDelay = Number.isFinite(rawDelay)
+    ? Math.max(0, Math.min(rawDelay, 300))
+    : 90;
+  console.log(`[server] Monitor stopped — self-destruct scheduled in ${destructDelay}s`);
   setTimeout(() => {
-    selfDestruct(1800);
-  }, 2000);
+    selfDestruct(destructDelay);
+  }, 1500);
 });
 
 // Explicit shutdown endpoint (browser can call this as a fallback)
@@ -155,13 +164,33 @@ const port = process.env.SECURE_AGENT_PORT || 5001;
 const server = app.listen(port);
 
 server.on('error', (err) => {
-  process.exit(1);
+  if (err && err.code === 'EADDRINUSE') {
+    console.log('');
+    console.log('============================================================');
+    console.log('  VerifiHire Secure Agent is ALREADY RUNNING.');
+    console.log('  Check your taskbar for a minimized terminal window.');
+    console.log('  Do not start a second copy — close the other one first.');
+    console.log('============================================================');
+    console.log('');
+    // Keep the window open so the user can read the message
+    setInterval(() => {}, 60000);
+    return;
+  }
+  console.error('[server] Failed to start:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
-process.on('unhandledRejection', () => {});
+process.on('unhandledRejection', (reason) => {
+  console.error('[server] Unhandled rejection:', reason);
+});
 
-process.on('uncaughtException', () => {
-  process.exit(1);
+process.on('uncaughtException', (err) => {
+  console.error('[server] Uncaught exception:', err.message);
+  console.log('Press any key to close...');
+  process.stdin.resume();
+  process.stdin.on('data', () => process.exit(1));
 });
 
 const shutdown = () => {

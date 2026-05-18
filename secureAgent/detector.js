@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { getConnectionsByPid, getWindowTitles } = require('./processScanner');
 
 const bundledPath = path.join(__dirname, 'blacklist.json');
 let runtimeRules = [];

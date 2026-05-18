@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import {
   fetchAgentStatus,
   runLocalScan,
@@ -8,11 +7,15 @@ import {
   startBackendSecuritySession,
   startLocalMonitor,
   checkViolationStatus,
-  LOCAL_AGENT_BASE_URL,
+  shutdownSecureAgent,
 } from '../security/securityApi';
 import { markPrecheckPassed, writeSessionRecord } from '../security/sessionStorage';
+import {
+  isValidPackagedAgent,
+  getAgentInvalidReason,
+  MINIMUM_AGENT_VERSION,
+} from '../security/agentValidation';
 import { logCandidateActivity } from '../utils/activityLogger';
-import { API_BASE_URL } from '../apiConfig';
 
 const TARGET_ROUTE_MAP = {
   assessment: (token) => `/take-assessment/${token}`,
@@ -22,57 +25,15 @@ const TARGET_ROUTE_MAP = {
 };
 
 const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
-const MACOS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.dmg';
-
-// ── Version enforcement ─────────────────────────────────────────────────────
-// Update this value whenever you release a new .exe that candidates MUST use.
-// Any agent running a version below this will be rejected during precheck.
-const MINIMUM_AGENT_VERSION = '2.0.0';
-
-/**
- * Compare two semver version strings (e.g. "1.0.0" vs "2.0.0").
- * Returns: -1 if a < b, 0 if equal, 1 if a > b
- */
-function compareVersions(a, b) {
-  const pa = (a || '0.0.0').split('.').map(Number);
-  const pb = (b || '0.0.0').split('.').map(Number);
-  for (let i = 0; i < 3; i++) {
-    const va = pa[i] || 0;
-    const vb = pb[i] || 0;
-    if (va < vb) return -1;
-    if (va > vb) return 1;
-  }
-  return 0;
-}
-
-/**
- * Attempt to launch the Secure Agent via the verifihire:// custom protocol.
- * Uses a hidden iframe so the current page is not navigated away.
- * The browser will show a one-time "Allow this site to open…?" prompt.
- */
-function triggerProtocolLaunch() {
-  try {
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'verifihire://start';
-    document.body.appendChild(iframe);
-    // Remove the iframe after the OS has had time to process the protocol
-    setTimeout(() => {
-      try { document.body.removeChild(iframe); } catch { }
-    }, 3000);
-  } catch {
-    // Protocol launch is best-effort; if it fails the user can start manually
-  }
-}
 
 /**
  * Tell the old agent to shut itself down so the new one can use port 5001.
  */
-async function shutdownOldAgent() {
+async function shutdownOldAgent(delaySeconds = 0) {
   try {
-    await axios.post(`${LOCAL_AGENT_BASE_URL}/shutdown`, {}, { timeout: 3000 });
+    await shutdownSecureAgent(delaySeconds);
   } catch {
-    // Best effort — old agent may not have /shutdown endpoint
+    // Best effort — old agent may not be running
   }
 }
 
@@ -87,11 +48,7 @@ export default function SecurePrecheck() {
   const [detectedHardware, setDetectedHardware] = useState([]);
   const [error, setError] = useState('');
   const [agentVersion, setAgentVersion] = useState('');
-  const [agentInstanceId, setAgentInstanceId] = useState('');
   const [showHelp, setShowHelp] = useState(false);
-
-  // Track whether we've already attempted auto-launch via protocol
-  const launchAttempted = useRef(false);
 
   const targetRoute = useMemo(() => {
     const builder = TARGET_ROUTE_MAP[type] || TARGET_ROUTE_MAP.assessment;
@@ -118,46 +75,39 @@ export default function SecurePrecheck() {
       console.warn('Failed to check violation status:', err);
     }
 
-    let status;
+    let status = null;
     try {
       setError('');
       setPhase('checking');
-      setStatusMessage('Checking system...');
+      setStatusMessage('Checking VerifiHire Secure Agent...');
       status = await fetchAgentStatus();
-      if (!status?.running) {
-        setPhase('not_running');
-        setStatusMessage('Please start VerifiHire Secure Agent to continue');
-        return;
-      }
     } catch (_err) {
-      // Agent not reachable — attempt auto-launch via verifihire:// protocol
-      if (!launchAttempted.current) {
-        launchAttempted.current = true;
-        setPhase('launching');
-        setStatusMessage('Launching Secure Agent — please allow the prompt if your browser asks...');
-        triggerProtocolLaunch();
-        logCandidateActivity(token, 'Agent Auto-Launch', 'Attempting to launch Secure Agent via verifihire:// protocol.');
-        // Wait for the agent to start up, then retry
-        setTimeout(() => startSecureFlow(), 5000);
-        return;
-      }
-      // Auto-launch was already attempted — show manual install/start UI
       setPhase('not_installed');
-      setStatusMessage('To continue, please install and start VerifiHire Secure Agent');
+      setStatusMessage('Download and run VerifiHire Secure Agent to continue');
+      setError('Secure Agent is not running on this computer.');
       return;
     }
 
-    // ── Version check: reject old/outdated agents ─────────────────────────────
-    const runningVersion = status?.version || '0.0.0';
-    setAgentVersion(runningVersion);
-    setAgentInstanceId(status?.instance_id || '');
-    if (compareVersions(runningVersion, MINIMUM_AGENT_VERSION) < 0) {
-      setPhase('outdated');
-      setStatusMessage('Your Secure Agent is outdated and needs to be updated');
-      logCandidateActivity(token, 'Agent Outdated',
-        `Running v${runningVersion}, minimum required v${MINIMUM_AGENT_VERSION}`);
-      // Shut down the old agent so it frees port 5001 for the new one
-      await shutdownOldAgent();
+    setAgentVersion(status?.version || '');
+
+    if (!isValidPackagedAgent(status)) {
+      const reason = getAgentInvalidReason(status);
+      if (status?.running && status.packaged !== true) {
+        await shutdownOldAgent(0);
+      }
+      if (status?.version && status.packaged === true) {
+        setPhase('outdated');
+        setStatusMessage('Your Secure Agent is outdated');
+        logCandidateActivity(
+          token,
+          'Agent Outdated',
+          `Running v${status.version}, minimum required v${MINIMUM_AGENT_VERSION}`
+        );
+      } else {
+        setPhase('not_installed');
+        setStatusMessage('Download and run VerifiHire Secure Agent to continue');
+      }
+      setError(reason);
       return;
     }
 
@@ -204,13 +154,14 @@ export default function SecurePrecheck() {
         token, 
         type, 
         user_id: userId,
-        agent_instance_id: status?.instance_id || agentInstanceId
+        agent_instance_id: status.instance_id,
       });
       await startLocalMonitor({ session_id: session.session_id, user_id: userId, token });
       writeSessionRecord(token, {
         session_id: session.session_id,
         user_id: userId,
         type,
+        agent_instance_id: status.instance_id,
         started_at: new Date().toISOString(),
       });
       markPrecheckPassed(token, type);
@@ -220,12 +171,12 @@ export default function SecurePrecheck() {
     } catch (startErr) {
       if (startErr?.response?.data?.agent_expired) {
         setPhase('agent_expired');
-        setStatusMessage('Action Required: Update Security Agent');
-        setError(startErr.response.data.error || 'This session requires a new instance of the Secure Agent.');
-        // Tell the agent to delete itself immediately
-        try {
-          axios.post(`${LOCAL_AGENT_BASE_URL}/shutdown`, { delay: 0 }).catch(() => {});
-        } catch {}
+        setStatusMessage('Action Required: Download a Fresh Security Agent');
+        setError(
+          startErr.response.data.error ||
+            'This security agent was already used. Download a new copy, run it, then click Retry.'
+        );
+        // Do not auto-close the agent — let the candidate read the message first
       } else if (startErr?.response?.data?.is_violated) {
         setPhase('permanently_blocked');
         setError(startErr.response.data.error || 'Access permanently revoked due to policy violation.');
@@ -243,21 +194,6 @@ export default function SecurePrecheck() {
   }, [token, type]);
 
   const renderAction = () => {
-    if (phase === 'launching') {
-      return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 20, height: 20, border: '3px solid #e2e8f0',
-            borderTopColor: '#3b82f6', borderRadius: '50%',
-            animation: 'spin 0.8s linear infinite',
-          }} />
-          <span style={{ color: '#64748b', fontSize: '0.9rem' }}>
-            Waiting for Secure Agent to start...
-          </span>
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-        </div>
-      );
-    }
     if (phase === 'outdated' || phase === 'agent_expired') {
       return (
         <>
@@ -277,13 +213,20 @@ export default function SecurePrecheck() {
             </p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href={WINDOWS_DOWNLOAD_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={async () => {
+                await shutdownOldAgent(0);
+                window.open(WINDOWS_DOWNLOAD_URL, '_blank', 'noreferrer');
+              }}
+            >
               Download Security Agent
-            </a>
+            </button>
           </div>
           <p style={{ color: '#64748b', fontSize: '0.85rem', marginTop: 10 }}>
-            {phase === 'agent_expired' 
-              ? 'After downloading, run the new file and click Retry to continue.'
+            {phase === 'agent_expired'
+              ? 'Close any old agent windows, download a fresh copy, run it, then click Retry.'
               : 'After downloading, close the old agent, run the new file, and click Retry.'}
           </p>
 
@@ -312,7 +255,7 @@ export default function SecurePrecheck() {
             )}
           </div>
 
-          <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => { launchAttempted.current = false; startSecureFlow(); }}>
+          <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => startSecureFlow()}>
             Retry
           </button>
         </>
@@ -322,11 +265,11 @@ export default function SecurePrecheck() {
       return (
         <>
           <p style={{ color: '#64748b', fontSize: '0.9rem', margin: '0 0 12px' }}>
-            If the agent didn't start automatically, please download and run it manually:
+            Download <strong>VerifiHireSecureAgent.exe</strong> (Windows only), run it once, then click Retry.
+            The exam cannot start without the official Secure Agent.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href={WINDOWS_DOWNLOAD_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">Download for Windows (.exe)</a>
-            <a href={MACOS_DOWNLOAD_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">Download for macOS (.dmg)</a>
+            <a href={WINDOWS_DOWNLOAD_URL} download className="btn btn-secondary">Download Secure Agent (.exe)</a>
           </div>
 
           {/* SmartScreen bypass instructions */}
@@ -397,11 +340,13 @@ export default function SecurePrecheck() {
             )}
           </div>
 
-          <button className="btn btn-primary" style={{ marginTop: 12 }} onClick={() => { launchAttempted.current = false; startSecureFlow(); }}>I have installed and started the agent</button>
+          <button className="btn btn-primary" style={{ marginTop: 12 }} onClick={() => startSecureFlow()}>
+            I have installed and started the agent
+          </button>
         </>
       );
     }
-    if (phase === 'not_running' || phase === 'blocked' || phase === 'blocked_hardware' || phase === 'error') {
+    if (phase === 'blocked' || phase === 'blocked_hardware' || phase === 'error') {
       return <button className="btn btn-primary" onClick={startSecureFlow}>Retry</button>;
     }
     if (phase === 'permanently_blocked') {

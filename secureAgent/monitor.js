@@ -9,7 +9,12 @@ let heartbeatTimer = null;
 let signatureTimer = null;
 let current = null;
 let isScanning = false; // mutex — prevents overlapping PowerShell processes
+let scanRequested = false; // queue an immediate follow-up scan
+let lastScanWasViolation = false;
 let pendingViolation = null; // Buffers violations detected while offline
+
+const SCAN_INTERVAL_SAFE_MS = 8000;
+const SCAN_INTERVAL_AFTER_VIOLATION_MS = 2500;
 // Map<instanceId, {name, class}> of logOnly devices seen in current session (not in startup baseline)
 let knownLogOnlyMap = new Map();
 
@@ -56,15 +61,43 @@ async function flushPendingViolation() {
 }
 
 
+function scheduleNextScan(delayMs) {
+  if (!current) return;
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = setTimeout(scanAndReport, delayMs);
+}
+
 async function scanAndReport() {
   if (!current) return;
   if (isScanning) {
+    scanRequested = true;
     return;
   }
   isScanning = true;
-  try { await _doScan(); } finally { isScanning = false; }
-  // Schedule next scan only after this one completes
-  if (current) scanTimer = setTimeout(scanAndReport, 10000);
+  try {
+    await _doScan();
+  } finally {
+    isScanning = false;
+    if (!current) return;
+    if (scanRequested) {
+      scanRequested = false;
+      scheduleNextScan(400);
+      return;
+    }
+    const delay = lastScanWasViolation ? SCAN_INTERVAL_AFTER_VIOLATION_MS : SCAN_INTERVAL_SAFE_MS;
+    scheduleNextScan(delay);
+  }
+}
+
+function triggerScanNow() {
+  if (!current) return;
+  if (isScanning) {
+    scanRequested = true;
+    return;
+  }
+  if (scanTimer) clearTimeout(scanTimer);
+  scanTimer = null;
+  scanAndReport();
 }
 
 async function _doScan() {
@@ -79,6 +112,7 @@ async function _doScan() {
     if (!current) return;
 
     if (!verdict.safe) {
+      lastScanWasViolation = true;
       console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
       const violationData = {
@@ -107,6 +141,8 @@ async function _doScan() {
       return;
     }
 
+    lastScanWasViolation = false;
+
     // If we have a pending violation, try to flush it before reporting SAFE
     if (pendingViolation) {
       await flushPendingViolation();
@@ -115,7 +151,7 @@ async function _doScan() {
 
     // Safety check again before sending SAFE report
     if (!current) return;
-    
+
     await sendSecurityCheck(current.backendApiBase, {
       session_id: current.sessionId,
       user_id: current.userId,
@@ -274,6 +310,8 @@ function stopMonitor() {
   signatureTimer = null;
   current = null;
   isScanning = false;
+  scanRequested = false;
+  lastScanWasViolation = false;
   failedHeartbeats = 0;
   knownLogOnlyMap = new Map(); // reset on stop
 }
@@ -282,4 +320,4 @@ function getMonitorState() {
   return { running: Boolean(scanTimer && heartbeatTimer), current };
 }
 
-module.exports = { startMonitor, stopMonitor, getMonitorState };
+module.exports = { startMonitor, stopMonitor, getMonitorState, triggerScanNow };

@@ -19,6 +19,9 @@ async function setIcon() {
     fs.writeFileSync(icoPath, buf);
 
     console.log('Injecting icon into VerifiHireSecureAgent.exe...');
+    console.warn(
+      'Warning: rcedit can corrupt pkg-built executables. Prefer "npm run build" without icon.'
+    );
     const { rcedit } = await import('rcedit');
     await rcedit(exePath, {
       icon: icoPath,

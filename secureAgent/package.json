@@ -1,12 +1,12 @@
 {
   "name": "verifihire-secure-agent",
-  "version": "2.0.0",
+  "version": "2.1.2",
   "private": true,
   "main": "server.js",
   "bin": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "npx ncc build server.js -o dist && npx pkg dist/index.js --targets node18-win-x64 --output VerifiHireSecureAgent.exe && node add-icon.js && (if not exist ..\\frontend\\build mkdir ..\\frontend\\build) && copy /y VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy /y VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
+    "build": "npx ncc build server.js -o dist && npx pkg dist/index.js --targets node18-win-x64 --output VerifiHireSecureAgent.exe && (if not exist ..\\frontend\\build mkdir ..\\frontend\\build) && copy /y VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy /y VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
   },
   "pkg": {
     "assets": [

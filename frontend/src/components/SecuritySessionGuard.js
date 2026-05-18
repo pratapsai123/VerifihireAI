@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor } from '../security/securityApi';
+import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor, triggerMonitorScan } from '../security/securityApi';
+import { isValidPackagedAgent } from '../security/agentValidation';
 import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord, markExamStarted, isExamStarted } from '../security/sessionStorage';
 import { logCandidateActivity } from '../utils/activityLogger';
 import ConnectionLostOverlay from './ConnectionLostOverlay';
@@ -28,6 +29,20 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [warning, setWarning] = useState(false);
   const [blockedApp, setBlockedApp] = useState('');
   const [timeLeft, setTimeLeft] = useState(180);
+  const warningRef = useRef(false);
+  useEffect(() => {
+    warningRef.current = warning;
+  }, [warning]);
+
+  // Nudge the local agent to scan frequently while the warning overlay is shown
+  useEffect(() => {
+    if (!warning || !examStarted) return;
+    triggerMonitorScan().catch(() => {});
+    const id = setInterval(() => {
+      triggerMonitorScan().catch(() => {});
+    }, 2500);
+    return () => clearInterval(id);
+  }, [warning, examStarted]);
 
   // Sync isOnline with a ref for use in setInterval
   const isOnlineRef = useRef(isOnline);
@@ -38,6 +53,10 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   // FIX 1: Track whether the candidate has completed the details form.
   // We only start aggressive polling AFTER the exam begins, not during the form.
   const [examStarted, setExamStarted] = useState(() => isExamStarted(token));
+  const examStartedRef = useRef(examStarted);
+  useEffect(() => {
+    examStartedRef.current = examStarted;
+  }, [examStarted]);
 
   // FIX 2: Use a ref to reliably trigger navigation from inside setInterval.
   // This avoids the stale closure bug where navigate() is captured at mount time.
@@ -67,8 +86,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         `Grace period expired — auto-terminated. App: ${blockedApp}`
       );
       if (sessionRecord) {
-        stopLocalMonitor({ session_id: sessionRecord.session_id, user_id: sessionRecord.user_id })
-          .catch(() => { });
+        stopLocalMonitor({
+          session_id: sessionRecord.session_id,
+          user_id: sessionRecord.user_id,
+          token,
+          agent_instance_id: sessionRecord.agent_instance_id,
+          immediate_shutdown: true,
+        }).catch(() => { });
       }
       clearPrecheckRecord(token);
       window.onbeforeunload = null; // Prevent TakeAssessment from blocking the termination
@@ -116,7 +140,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     const runEntryGateScan = async () => {
       try {
         const agentStatus = await fetchAgentStatus();
-        if (!agentStatus?.running) {
+        if (!isValidPackagedAgent(agentStatus)) {
           if (active) {
             clearPrecheckRecord(token);
             navigate(buildPrecheckUrl(token, sessionType), { replace: true });
@@ -186,8 +210,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       // ── LOCAL AGENT CHECK: Ensure the terminal is still open ──────────
       try {
         const agentStatus = await fetchAgentStatus();
-        if (!agentStatus?.running) {
-          console.warn('[SecuritySessionGuard] Secure Agent terminal was closed mid-exam.');
+        if (!isValidPackagedAgent(agentStatus)) {
+          console.warn('[SecuritySessionGuard] Valid packaged Secure Agent not running mid-exam.');
           if (active) {
             clearPrecheckRecord(token);
             navigate(buildPrecheckUrl(token, sessionType), { replace: true });
@@ -215,7 +239,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             'Session Terminated',
             `Exam session was terminated mid-exam. Reason: ${app}`
           );
-          await stopLocalMonitor({ session_id: sessionRecord.session_id, user_id: sessionRecord.user_id });
+          await stopLocalMonitor({
+            session_id: sessionRecord.session_id,
+            user_id: sessionRecord.user_id,
+            token,
+            agent_instance_id: sessionRecord.agent_instance_id,
+            immediate_shutdown: true,
+          });
           window.onbeforeunload = null;
           window.location.href = '/session-terminated';
           return;
@@ -233,6 +263,9 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
 
         // CONTINUE / SAFE — clear any active warning
+        if (warningRef.current) {
+          setTimeLeft(180);
+        }
         setWarning(false);
 
         if (status?.action === 'PAUSE') {
@@ -262,16 +295,39 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       }
     };
 
-    poll();
-    const id = setInterval(poll, 5000);
+    let pollTimer = null;
+    const schedulePoll = () => {
+      poll().finally(() => {
+        if (!active) return;
+        const intervalMs = warningRef.current ? 1500 : 5000;
+        pollTimer = setTimeout(schedulePoll, intervalMs);
+      });
+    };
+    schedulePoll();
     return () => {
       active = false;
-      clearInterval(id);
+      if (pollTimer) clearTimeout(pollTimer);
       // Ensure the local agent stops and the terminal auto-closes when the exam ends
       // or the candidate navigates away from the guarded session.
       const sessRecord = readSessionRecord(token);
-      if (sessRecord) {
-        stopLocalMonitor({ session_id: sessRecord.session_id, user_id: sessRecord.user_id }).catch(() => {});
+      if (sessRecord && examStartedRef.current) {
+        stopLocalMonitor({
+          session_id: sessRecord.session_id,
+          user_id: sessRecord.user_id,
+          token,
+          agent_instance_id: sessRecord.agent_instance_id,
+          destruct_delay: 90,
+          consume: true,
+        }).catch(() => {});
+      } else if (sessRecord) {
+        stopLocalMonitor({
+          session_id: sessRecord.session_id,
+          user_id: sessRecord.user_id,
+          token,
+          agent_instance_id: sessRecord.agent_instance_id,
+          consume: false,
+          destruct_delay: -1,
+        }).catch(() => {});
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
