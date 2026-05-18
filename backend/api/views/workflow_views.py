@@ -499,8 +499,25 @@ def create_ai_qualification_request_view(request):
 
     if is_admin:
         from ai_assessments.models import AIAssessmentSubmission
+        
+        # Try AI Assessment Submission first
+        ai_sub = None
+        candidate_obj = None
         try:
             ai_sub = AIAssessmentSubmission.objects.get(id=ai_submission_id)
+        except (AIAssessmentSubmission.DoesNotExist, ValueError):
+            pass
+        
+        # If not found as AI Assessment, try as AI Interview Candidate
+        if not ai_sub:
+            try:
+                from ai_candidates.models import Candidate
+                candidate_obj = Candidate.objects.get(id=ai_submission_id)
+            except (Candidate.DoesNotExist, ValueError):
+                return Response({'error': 'Submission/Candidate not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        if ai_sub:
+            # AI Assessment flow (existing)
             ai_sub.status = requested_result
             ai_sub.save(update_fields=['status'])
 
@@ -532,9 +549,16 @@ def create_ai_qualification_request_view(request):
                     except Exception as pipe_err:
                         logger.error(f"Admin Override: Pipeline trigger failed for {ai_sub.id}: {pipe_err}")
 
-            return Response({'message': f'Candidate marked as {requested_result}.', 'pending': False}, status=status.HTTP_200_OK)
-        except AIAssessmentSubmission.DoesNotExist:
-            return Response({'error': 'AI Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
+        elif candidate_obj:
+            # AI Interview Candidate flow (new)
+            if requested_result == 'selected':
+                candidate_obj.status = 'Hired'
+            else:
+                candidate_obj.status = 'Rejected'
+            candidate_obj.save(update_fields=['status'])
+            logger.info(f"Admin Override: AI Interview Candidate {candidate_obj.email} status updated to '{candidate_obj.status}'")
+
+        return Response({'message': f'Candidate marked as {requested_result}.', 'pending': False}, status=status.HTTP_200_OK)
 
     if not reason:
         return Response({'error': 'A reason is required.'}, status=status.HTTP_400_BAD_REQUEST)

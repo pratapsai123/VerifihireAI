@@ -2578,29 +2578,60 @@ class ProcessAnswerView(APIView):
                 if not current_turn_number:
                     current_turn_number = 1
 
-            # --- RESUME-AWARE CATEGORY MAPPING ---
-            # If resume is missing, we must skip specific resume/project questions
+            # --- RESUME-AWARE ADAPTIVE QUESTIONING ---
+            # Instead of a rigid category sequence, the LLM decides what to ask next
+            # based on the candidate's performance, gaps, and unexplored areas.
             has_resume = bool(resume_context and "No resume available" not in resume_context and "Extraction Failed" not in resume_context)
             
-            category_map = {
-                1: ("INTRO", "Greet the candidate warmly and ask them to introduce themselves. ORAL ONLY - do NOT ask them to write anything."),
-                2: ("JD-Q1", "Ask a question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
-                3: ("JD-Q2", "Ask another question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
-                4: ("JD-Q3", "Ask a third question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
-                5: ("JD-Q4", "Ask a fourth question derived DIRECTLY from the Job Description requirements. ORAL ONLY - do NOT ask them to write or code."),
-                6: ("RESUME-SKILL-Q1", f"Ask about a SPECIFIC SKILL {'from the Resume' if has_resume else 'relevant to the role'}. ORAL ONLY - do NOT ask them to write or code."),
-                7: ("RESUME-SKILL-Q2", f"Ask about a DIFFERENT SPECIFIC SKILL {'from the Resume' if has_resume else 'relevant to the role'}. ORAL ONLY - do NOT ask them to write or code."),
-                8: ("PROJECT-Q1", f"Ask about a {'SPECIFIC PROJECT from the Resume' if has_resume else 'recent technical project they worked on'}. ORAL ONLY - do NOT ask them to write or code."),
-                9: ("PROJECT-Q2", f"Ask about {'a DIFFERENT PROJECT from the Resume' if has_resume else 'the architecture or tools they used in that same project'}. ORAL ONLY - do NOT ask them to write or code."),
-                10: ("SCENARIO-Q1", "Ask a hypothetical workplace scenario question derived from the Job Description. ORAL ONLY - do NOT ask them to write or code."),
-                11: ("SCENARIO-Q2", "Ask a DIFFERENT hypothetical scenario-based question. ORAL ONLY - do NOT ask them to write or code."),
-                12: ("SYNTAX-Q1", "Ask a CODING or SYNTAX question: 'Write a function that...', 'What does this code output?', etc. This is the first turn where writing/code is allowed."),
-                13: ("SYNTAX-Q2", "Ask a DIFFERENT coding or syntax question.")
-            }
-            
-            # Get current turn instructions
-            target_category, target_instruction = category_map.get(current_turn_number, ("EXIT", "The interview is over. Say goodbye."))
-            # ----------------------------------
+            # Build adaptive context: what topics have been covered and how well
+            covered_topics = []
+            weak_topics = []
+            strong_topics = []
+            if candidate and isinstance(candidate.interview_summary, list):
+                for turn in candidate.interview_summary:
+                    q = turn.get('question', '')[:80]
+                    s = int(turn.get('score', 5))
+                    covered_topics.append(q)
+                    if s <= 4:
+                        weak_topics.append(q)
+                    elif s >= 8:
+                        strong_topics.append(q)
+
+            # Determine phase based on turn number (loose guidance, not rigid)
+            if current_turn_number == 1:
+                phase_guidance = "INTRO PHASE: Ask the candidate to introduce themselves and their background. Keep it warm and conversational."
+            elif current_turn_number <= 5:
+                phase_guidance = "CORE SKILLS PHASE: Focus on Job Description requirements. Ask about specific technologies, concepts, or methodologies mentioned in the JD."
+            elif current_turn_number <= 9:
+                phase_guidance = "DEEP DIVE PHASE: Probe deeper based on what the candidate has revealed. If they mentioned a project, ask architecture details. If they claimed a skill, test it with a scenario. Focus on WEAK AREAS if any were identified."
+            elif current_turn_number <= 11:
+                phase_guidance = "SCENARIO & PROBLEM-SOLVING PHASE: Present hypothetical workplace scenarios or system design problems relevant to the role."
+            else:
+                phase_guidance = "CODING PHASE: Ask a coding/syntax question. The candidate can type their answer. Set requires_code_input to true."
+
+            # Adaptive intelligence prompt section
+            adaptive_section = f"""===== ADAPTIVE QUESTIONING INTELLIGENCE =====
+Turn: {current_turn_number}/13
+Phase: {phase_guidance}
+
+TOPICS ALREADY COVERED ({len(covered_topics)} questions asked so far):
+{chr(10).join(f'  - {t}' for t in covered_topics[-6:]) if covered_topics else '  None yet (first question)'}
+
+CANDIDATE WEAK AREAS (scored ≤ 4/10):
+{chr(10).join(f'  ⚠️ {t}' for t in weak_topics) if weak_topics else '  None identified yet'}
+
+CANDIDATE STRENGTHS (scored ≥ 8/10):
+{chr(10).join(f'  ✓ {t}' for t in strong_topics) if strong_topics else '  None identified yet'}
+
+ADAPTIVE RULES:
+1. NEVER repeat a topic already covered above.
+2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
+3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
+4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
+5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
+6. For turns 1-11: ORAL ONLY — never ask them to write code or type anything.
+7. For turns 12-13: CODING — ask them to write a function or analyze code. Set "requires_code_input": true.
+"""
 
             # --- OPTIMIZED PROMPT (reliable JSON output) ---
             # Pre-compute condensed contexts
@@ -2619,9 +2650,7 @@ Candidate Name: {candidate_name}
 ===== CONVERSATION MEMORY =====
 {memory_context if memory_context else 'First turn - no memory yet.'}
 
-===== CURRENT TURN (Turn {current_turn_number}/13) =====
-Category: {target_category}
-Your Task: {target_instruction}
+{adaptive_section}
 
 ===== RECENT CONVERSATION =====
 {recent_history if recent_history else 'START OF INTERVIEW'}
@@ -2649,14 +2678,15 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 - If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
 - If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
 - FOR TURNS 1-11 (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
-- For turns 12-13 (SYNTAX) → Set "requires_code_input": true.
+- For turns 12-13 (CODING) → Set "requires_code_input": true.
+- YOUR NEXT QUESTION MUST BE DIFFERENT from all previously covered topics listed above.
 
 ===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
 {{
     "is_clarification": false,
     "is_exit": false,
     "feedback": "Your 1-2 sentence HUMAN-LIKE reaction to their answer",
-    "refined_next_question": "Your next question matching the category for Turn {current_turn_number + 1}",
+    "refined_next_question": "Your ADAPTIVE next question (based on gaps, weaknesses, and uncovered areas)",
     "requires_code_input": false,
     "score": 0,
     "score_reason": "1-sentence justification for the score"
