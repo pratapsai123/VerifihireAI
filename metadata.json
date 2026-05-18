@@ -16,8 +16,8 @@
         "normalization": "NFC",
         "comments": [],
         "requiredExtensions": {
-            "codexEditor": "0.25.0",
-            "frontierAuthentication": "0.5.0"
+            "codexEditor": "0.27.0",
+            "frontierAuthentication": "0.6.0"
         },
         "validationCount": 1,
         "validationCountAudio": 1,
@@ -159,8 +159,8 @@
     "users": [
         {
             "userName": "saipratap",
-            "codexVersion": "1.105.1",
-            "updatedAt": 1777281636093
+            "codexVersion": "3.4.17",
+            "updatedAt": 1779081674805
         }
     ]
 }
