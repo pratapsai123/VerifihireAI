@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path('<int:pk>/download-report/', CandidateReportDownloadView.as_view(), name='candidate-report-download'),
     path('validate-pan/', EnhancedPanValidationView.as_view(), name='validate-pan'),
     path('public/<str:public_token>/register/', CandidateRegistrationUpdateView.as_view(), name='candidate-registration-update'),
+    path('public/<str:public_token>/log/', LogCandidateActivityView.as_view(), name='candidate-public-log'),
     path('health/', HealthCheckView.as_view(), name='health-check'),
 ]
 

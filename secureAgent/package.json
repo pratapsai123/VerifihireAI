@@ -6,7 +6,7 @@
   "bin": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "pkg . --targets node18-win-x64 --output VerifiHireSecureAgent.exe && node add-icon.js && (if not exist ..\\frontend\\build mkdir ..\\frontend\\build) && copy /y VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy /y VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
+    "build": "npx ncc build server.js -o dist && npx pkg dist/index.js --targets node18-win-x64 --output VerifiHireSecureAgent.exe && node add-icon.js && (if not exist ..\\frontend\\build mkdir ..\\frontend\\build) && copy /y VerifiHireSecureAgent.exe ..\\frontend\\build\\VerifiHireSecureAgent.exe && copy /y VerifiHireSecureAgent.exe ..\\frontend\\public\\VerifiHireSecureAgent.exe"
   },
   "pkg": {
     "assets": [
@@ -17,9 +17,11 @@
   "dependencies": {
     "axios": "^1.13.1",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^4.18.2",
+    "resedit-cli": "^3.1.0"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.4",
     "pkg": "^5.8.1",
     "png-to-ico": "^3.0.1",
     "rcedit": "^5.0.2"

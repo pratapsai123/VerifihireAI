@@ -21,21 +21,56 @@ TARGET_FILES = [
     "backend/api/views/user_views.py",
     "frontend/README.md",
     "frontend/src/pages/SecurePrecheck.js",
+    "backend/.env",
 ]
  
-# Conversion mappings
+# Conversion mappings (Local -> Domain)
 REPLACEMENTS = [
     ("http://localhost:3000", "https://verifihireai.com"),
     ("http://127.0.0.1:3000", "https://verifihireai.com"),
     ("http://localhost:3001", "https://verifihireai.com"),
     ("http://127.0.0.1:3001", "https://verifihireai.com"),
     ("http://192.168.1.22:3001", "https://verifihireai.com"),
-    # Handle www variant
-    ("http://localhost:3000", "https://www.verifihireai.com"),
-    # Download URLs
-    ("http://localhost:3000", "https://downloads.verifihireai.com"),
-    ("http://localhost:3000", "https://downloads.local"),
+    ("http://localhost:5173", "https://verifihireai.com"),
+    ("http://localhost:5174", "https://verifihireai.com"),
 ]
+ 
+def update_env_file(full_path, to_local):
+    """Special handling for .env file to ensure specific variables are set correctly"""
+    try:
+        with open(full_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        
+        new_lines = []
+        for line in lines:
+            if line.startswith("DJANGO_DEBUG="):
+                new_lines.append(f"DJANGO_DEBUG={'True' if to_local else 'False'}\n")
+            elif line.startswith("FRONTEND_BASE_URL="):
+                new_lines.append(f"FRONTEND_BASE_URL={'http://localhost:3000' if to_local else 'https://verifihireai.com'}\n")
+            elif line.startswith("ALLOWED_HOSTS="):
+                new_lines.append(f"ALLOWED_HOSTS={'localhost,127.0.0.1' if to_local else 'verifihireai.com,api.verifihireai.com'}\n")
+            elif line.startswith("CORS_ALLOWED_ORIGINS="):
+                new_lines.append(f"CORS_ALLOWED_ORIGINS={'http://localhost:3000' if to_local else 'https://verifihireai.com'}\n")
+            elif line.startswith("CSRF_TRUSTED_ORIGINS="):
+                new_lines.append(f"CSRF_TRUSTED_ORIGINS={'http://localhost:3000' if to_local else 'https://verifihireai.com'}\n")
+            else:
+                # Apply general replacements to other lines in .env if any
+                processed_line = line
+                replacements = REPLACEMENTS
+                if to_local:
+                    replacements = [(new, old) for old, new in REPLACEMENTS]
+                
+                for old, new in replacements:
+                    processed_line = processed_line.replace(old, new)
+                new_lines.append(processed_line)
+        
+        content = "".join(new_lines)
+        with open(full_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"Updated (Special): {full_path.name}")
+        
+    except Exception as e:
+        print(f"Error updating .env file: {e}")
  
 def convert_files(to_local=False):
     """Convert URLs between localhost and domain"""
@@ -44,7 +79,15 @@ def convert_files(to_local=False):
     # Define replacements based on mode
     replacements = REPLACEMENTS
     if to_local:
-        replacements = [(new, old) for old, new in REPLACEMENTS]
+        # Reverse replacements for local mode
+        # We use a set to avoid duplicate reversals if any
+        unique_replacements = []
+        seen = set()
+        for old, new in REPLACEMENTS:
+            if (new, old) not in seen:
+                unique_replacements.append((new, old))
+                seen.add((new, old))
+        replacements = unique_replacements
         target_desc = "localhost"
     else:
         target_desc = "https://verifihireai.com"
@@ -61,7 +104,7 @@ def convert_files(to_local=False):
             
         if full_path.is_dir():
             # Include .py, .md and .js files in the directory recursively
-            for ext in ['*.py', '*.md', '*.js']:
+            for ext in ['*.py', '*.md', '*.js', '*.env']:
                 for p in full_path.rglob(ext):
                     all_files.append(p.relative_to(base_dir).as_posix())
         else:
@@ -73,6 +116,11 @@ def convert_files(to_local=False):
     for file_path in all_files:
         full_path = base_dir / file_path
         
+        # Special handling for .env
+        if full_path.name == ".env":
+            update_env_file(full_path, to_local)
+            continue
+            
         try:
             with open(full_path, 'r', encoding='utf-8') as f:
                 content = f.read()

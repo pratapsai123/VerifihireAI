@@ -3324,6 +3324,37 @@ class CandidateReportDownloadView(APIView):
 # --- END OF FILE ---
 
 
+class LogCandidateActivityView(APIView):
+    """
+    Public endpoint to log candidate activity during AI interviews.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, public_token):
+        try:
+            candidate = Candidate.objects.get(public_token=public_token, is_deleted=False)
+            action = request.data.get('action')
+            details = request.data.get('details', '')
+
+            if action:
+                from .utils import log_automation_event
+                log_automation_event(
+                    candidate,
+                    'STATUS_CHANGE',
+                    'INFO',
+                    f"[Activity] {action}: {details}",
+                    phase='INTERVIEW'
+                )
+                # Also print to server console for real-time monitoring
+                print(f"[AI_CANDIDATE_ACTIVITY] {candidate.email} | {action}: {details}")
+
+            return Response({'status': 'logged'})
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class HealthCheckView(APIView):
     """
     Health check endpoint for load balancers and monitoring.

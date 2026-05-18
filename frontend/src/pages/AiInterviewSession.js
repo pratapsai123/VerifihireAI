@@ -96,6 +96,18 @@ const AiInterviewSession = () => {
         if (data?.pan_number) {
             return String(data.pan_number).trim().toLowerCase();
         }
+
+        // NEW: Check sessionStorage for pending PAN being registered in this session
+        const pendingPan = sessionStorage.getItem('pending_pan');
+        if (pendingPan) {
+            return String(pendingPan).trim().toLowerCase();
+        }
+
+        const verifyPan = sessionStorage.getItem('verify_against_person_pan');
+        if (verifyPan) {
+            return String(verifyPan).trim().toLowerCase();
+        }
+
         // Fallback to token for candidates without PAN
         return String(token || '').trim().toLowerCase();
     }, [token, candidateData]);

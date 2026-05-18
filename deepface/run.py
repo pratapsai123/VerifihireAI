@@ -22,11 +22,11 @@ def main():
     args = parser.parse_args()
 
     print(f"""
-    ╔══════════════════════════════════════════════════╗
-    ║   DeepFace Proctoring Microservice               ║
-    ║   Starting on http://{args.host}:{args.port}          ║
-    ║   Docs: http://{args.host}:{args.port}/api/v1/docs    ║
-    ╚══════════════════════════════════════════════════╝
+    +--------------------------------------------------+
+    |   DeepFace Proctoring Microservice               |
+    |   Starting on http://{args.host}:{args.port}          |
+    |   Docs: http://{args.host}:{args.port}/api/v1/docs    |
+    +--------------------------------------------------+
     """)
 
     uvicorn.run(

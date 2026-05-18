@@ -6,8 +6,10 @@ Modify these values to calibrate the system for your environment.
 """
 
 import os
+import re
 from pathlib import Path
 from dotenv import load_dotenv
+from decouple import AutoConfig
 
 # ──────────────────────────────────────────────
 # PATHS
@@ -22,15 +24,53 @@ DB_PATH = DATA_DIR / "proctoring.db"  # Legacy — kept for reference only
 # ──────────────────────────────────────────────
 # POSTGRESQL — loads from backend .env (single source of truth)
 # ──────────────────────────────────────────────
-# Load the same .env file that the Django backend uses
-_env_path = BASE_DIR.parent / "backend" / ".env"
-load_dotenv(_env_path, override=False)  # won't override vars already set in the OS environment
+def _read_django_db_config() -> dict:
+    """
+    Parse the Django settings.py to extract DATABASES default values.
+    This ensures deepface always uses the same DB credentials as the
+    main backend — a single source of truth.
+    """
+    settings_path = BASE_DIR.parent / "backend" / "VerifiHireAI_backend" / "settings.py"
 
-PG_HOST = os.getenv("DB_HOST", "127.0.0.1")
-PG_PORT = int(os.getenv("DB_PORT", "5432"))
-PG_NAME = os.getenv("DB_NAME", "")
-PG_USER = os.getenv("DB_USER", "postgres")
-PG_PASSWORD = os.getenv("DB_PASSWORD", "")
+    defaults = {
+        "DB_NAME": "",
+        "DB_USER": "",
+        "DB_PASSWORD": "",
+        "DB_HOST": "127.0.0.1",
+        "DB_PORT": "5432",
+    }
+
+    try:
+        text = settings_path.read_text(encoding="utf-8")
+        # Extract defaults from: os.environ.get
+        for key in defaults:
+            # Pattern 1: os.environ.get('KEY', 'DEFAULT')
+            pattern1 = rf"os\.environ\.get\(\s*['\"]({key})['\"].*?['\"](.+?)['\"]\s*\)"
+            match1 = re.search(pattern1, text)
+            if match1:
+                defaults[key] = match1.group(2)
+            else:
+                # Pattern 2: config('KEY', default='DEFAULT') or config('KEY')
+                pattern2 = rf"config\(\s*['\"]({key})['\"](?:,\s*default=['\"](.+?)['\"])?\s*\)"
+                match2 = re.search(pattern2, text)
+                if match2 and match2.group(2):
+                    defaults[key] = match2.group(2)
+    except Exception:
+        pass  # Fall back to hardcoded defaults if settings.py can't be read
+
+    # Return defaults (which may have been updated by parsing settings.py)
+    return defaults
+
+# Load backend .env file
+env_path = BASE_DIR.parent / "backend"
+backend_config = AutoConfig(search_path=str(env_path)) if env_path.exists() else AutoConfig()
+
+_pg = _read_django_db_config()
+PG_HOST = backend_config('DB_HOST', default=_pg["DB_HOST"])
+PG_PORT = backend_config('DB_PORT', default=_pg["DB_PORT"], cast=int)
+PG_NAME = backend_config('DB_NAME', default=_pg["DB_NAME"])
+PG_USER = backend_config('DB_USER', default=_pg["DB_USER"])
+PG_PASSWORD = backend_config('DB_PASSWORD', default=_pg["DB_PASSWORD"])
 
 # Ensure directories exist
 for d in [DATA_DIR, REGISTERED_FACES_DIR, LOGS_DIR, REPORTS_DIR]:
