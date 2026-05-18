@@ -72,6 +72,8 @@ const ResultsAI = () => {
     const [timelineLogs, setTimelineLogs] = useState([]);
     const [loadingTimeline, setLoadingTimeline] = useState(false);
     const [downloadingId, setDownloadingId] = useState(null);
+    const [hoveredMetricCard, setHoveredMetricCard] = useState(null);
+    const [analyticsAnimateIn, setAnalyticsAnimateIn] = useState(false);
 
     const showToast = (type, message) => {
         setToast({ type, message });
@@ -313,6 +315,29 @@ const ResultsAI = () => {
     }, []);
 
     useEffect(() => { fetchData(); }, [fetchData]);
+
+    // Analytics panel entrance animation
+    useEffect(() => {
+        if (viewMode === 'detail' && activeTab === 'interview') {
+            setAnalyticsAnimateIn(false);
+            setTimeout(() => setAnalyticsAnimateIn(true), 50);
+        }
+    }, [viewMode, selectedRole, activeTab]);
+
+    // Compute batch metrics for the analytics panel
+    const computeBatchMetrics = (rows) => {
+        const total = rows.length;
+        if (total === 0) return { total: 0, passed: 0, failed: 0, onHold: 0, avgScore: 'N/A', completionRate: 'N/A' };
+        const onHold = rows.filter(r => r.status === 'On-Hold').length;
+        const passed = rows.filter(r => isPass(r, 'interview') && r.status !== 'On-Hold').length;
+        const failed = total - passed - onHold;
+        const scores = rows.map(r => getScoreValue(r));
+        const avgScore = Math.round(scores.reduce((sum, s) => sum + s, 0) / total);
+        const completed = rows.filter(r => r.completed_at || r.submitted_at).length;
+        const completionRate = Math.round((completed / total) * 100);
+        return { total, passed, failed, onHold, avgScore, completionRate };
+    };
+
     
     // Sync URL subId with viewedSubmission modal
     useEffect(() => {
@@ -1760,6 +1785,103 @@ const ResultsAI = () => {
                                             </div>
                                         </div>
                                     )}
+
+                                    {/* ═══ CINEMATIC BATCH ANALYTICS PANEL (Interview Tab Only) ═══ */}
+                                    {activeTab === 'interview' && allRows.length > 0 && (() => {
+                                        const metrics = computeBatchMetrics(allRows);
+                                        const cards = [
+                                            { label: 'Total Participants', value: metrics.total, icon: 'fa-users', color: '#60A5FA', bg: 'rgba(96, 165, 250, 0.15)' },
+                                            { label: 'Passed', value: metrics.passed, icon: 'fa-user-check', color: '#34D399', bg: 'rgba(52, 211, 153, 0.15)' },
+                                            { label: 'Failed', value: metrics.failed, icon: 'fa-user-xmark', color: '#F87171', bg: 'rgba(248, 113, 113, 0.15)' },
+                                            { label: 'On-Hold', value: metrics.onHold, icon: 'fa-user-clock', color: '#FBBF24', bg: 'rgba(251, 191, 36, 0.15)' },
+                                            { label: 'Avg Score', value: typeof metrics.avgScore === 'number' ? `${metrics.avgScore}%` : metrics.avgScore, icon: 'fa-chart-line', color: '#A78BFA', bg: 'rgba(167, 139, 250, 0.15)' },
+                                            { label: 'Completion', value: typeof metrics.completionRate === 'number' ? `${metrics.completionRate}%` : metrics.completionRate, icon: 'fa-circle-check', color: '#2DD4BF', bg: 'rgba(45, 212, 191, 0.15)' },
+                                        ];
+                                        return (
+                                            <div style={{
+                                                background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
+                                                borderRadius: '20px',
+                                                padding: '2rem',
+                                                marginBottom: '1.5rem',
+                                                opacity: analyticsAnimateIn ? 1 : 0,
+                                                transform: analyticsAnimateIn ? 'translateY(0)' : 'translateY(20px)',
+                                                transition: 'opacity 400ms ease, transform 400ms ease',
+                                                boxShadow: '0 20px 60px rgba(15, 12, 41, 0.4)',
+                                                position: 'relative',
+                                                overflow: 'hidden'
+                                            }}>
+                                                {/* Decorative background orbs */}
+                                                <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                                                <div style={{ position: 'absolute', bottom: '-60px', left: '-30px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                    <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)' }}>
+                                                        <i className="fa-solid fa-chart-pie" />
+                                                    </div>
+                                                    <h3 style={{ margin: 0, color: 'white', fontSize: '1.1rem', fontWeight: '800', letterSpacing: '-0.02em' }}>Batch Analytics</h3>
+                                                    <span style={{ marginLeft: 'auto', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: '600', background: 'rgba(255,255,255,0.08)', padding: '0.25rem 0.75rem', borderRadius: '20px' }}>
+                                                        <i className="fa-solid fa-sparkles" style={{ marginRight: '4px' }} />LIVE
+                                                    </span>
+                                                </div>
+
+                                                <style>{`
+                                                    @keyframes batchCardFloat {
+                                                        0%, 100% { transform: translateY(0px) rotateX(2deg); }
+                                                        50% { transform: translateY(-4px) rotateX(0deg); }
+                                                    }
+                                                `}</style>
+
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(155px, 1fr))', gap: '1rem', perspective: '1000px', position: 'relative', zIndex: 1 }}>
+                                                    {cards.map((card, idx) => {
+                                                        const isHovered = hoveredMetricCard === idx;
+                                                        return (
+                                                            <div
+                                                                key={card.label}
+                                                                onMouseEnter={() => setHoveredMetricCard(idx)}
+                                                                onMouseLeave={() => setHoveredMetricCard(null)}
+                                                                style={{
+                                                                    background: isHovered ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.06)',
+                                                                    backdropFilter: 'blur(12px)',
+                                                                    border: `1px solid ${isHovered ? card.color + '80' : 'rgba(255, 255, 255, 0.1)'}`,
+                                                                    borderRadius: '16px',
+                                                                    padding: '1.25rem 1rem',
+                                                                    textAlign: 'center',
+                                                                    cursor: 'default',
+                                                                    transform: isHovered
+                                                                        ? 'rotateX(-5deg) rotateY(5deg) translateZ(20px) scale(1.05)'
+                                                                        : 'rotateX(2deg) translateZ(0) scale(1)',
+                                                                    transition: 'all 300ms cubic-bezier(0.23, 1, 0.32, 1)',
+                                                                    boxShadow: isHovered
+                                                                        ? `0 20px 40px rgba(0,0,0,0.3), 0 0 30px ${card.color}30, inset 0 1px 0 rgba(255,255,255,0.1)`
+                                                                        : '0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)',
+                                                                    animation: `batchCardFloat 3s ease-in-out infinite`,
+                                                                    animationDelay: `${idx * 0.3}s`,
+                                                                    opacity: analyticsAnimateIn ? 1 : 0,
+                                                                    transitionDelay: `${idx * 100}ms`,
+                                                                }}
+                                                            >
+                                                                <div style={{
+                                                                    width: '42px', height: '42px', borderRadius: '12px',
+                                                                    background: card.bg, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                    margin: '0 auto 0.75rem', fontSize: '1.1rem', color: card.color,
+                                                                    boxShadow: isHovered ? `0 0 20px ${card.color}40` : 'none',
+                                                                    transition: 'box-shadow 300ms ease'
+                                                                }}>
+                                                                    <i className={`fa-solid ${card.icon}`} />
+                                                                </div>
+                                                                <div style={{ fontSize: '1.6rem', fontWeight: '900', color: 'white', lineHeight: 1, marginBottom: '0.3rem', textShadow: isHovered ? `0 0 10px ${card.color}60` : 'none' }}>
+                                                                    {card.value}
+                                                                </div>
+                                                                <div style={{ fontSize: '0.7rem', fontWeight: '700', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                                    {card.label}
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
 
                                     <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
