@@ -294,7 +294,13 @@ DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-a
 DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
 
 # ── GROQ Keys for Resume Screening Fallback ──
-GROQ_API_KEYS = config('GROQ_API_KEYS', default='', cast=Csv())
+GROQ_API_KEYS = [
+    config('GROQ_API_KEY_1', default=''),
+    config('GROQ_API_KEY_2', default=''),
+    config('GROQ_API_KEY_3', default=''),
+]
+# Remove empty/placeholder keys
+GROQ_API_KEYS = [k for k in GROQ_API_KEYS if k]
 GROQ_API_KEY = GROQ_API_KEYS[0] if GROQ_API_KEYS else None
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)

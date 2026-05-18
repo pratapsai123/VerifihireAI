@@ -1,9 +1,9 @@
 from ai_candidates.models import Candidate
 from ai_assessments.models import AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
-from ai_assessments.views import _get_candidate_photo_url
 
 
 def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None):
+    from ai_assessments.views import _get_candidate_photo_url
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
     """
@@ -128,7 +128,107 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     return results
 
 
-def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids=None):
+def _get_candidate_photo_url_for_candidate(request, candidate):
+    """
+    Returns the registered face URL for this candidate interview.
+    Prioritizes checking the unified IdentityLink for this candidate's email.
+    Otherwise prioritizes the candidate's PAN number folder if available.
+    Otherwise checks public_token folder.
+    Falls back to first non-empty webcam integrity screenshot if registration missing.
+    """
+    email = candidate.email.lower().strip() if candidate.email else None
+    
+    # Priority 1: Check unified IdentityLink
+    if email:
+        try:
+            from api.models import IdentityLink
+            identities = IdentityLink.objects.filter(email__iexact=email).order_by('-id')
+            for identity in identities:
+                if identity.snapshot_image and identity.snapshot_image.name:
+                    return request.build_absolute_uri(identity.snapshot_image.url) if request else identity.snapshot_image.url
+        except Exception:
+            pass
+
+    # Priority 2: Check deepface registered folders
+    from pathlib import Path
+    import os
+    deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+
+    # Try PAN
+    if getattr(candidate, 'pan_number', None):
+        pan_id = candidate.pan_number.lower().strip()
+        pan_face_dir = deepface_data_dir / pan_id
+        if pan_face_dir.exists() and any(pan_face_dir.glob('*.jpg')):
+            url_path = f"/api/ai/registration/face/{pan_id}/"
+            return request.build_absolute_uri(url_path) if request else url_path
+
+    # Try public token
+    if getattr(candidate, 'public_token', None):
+        token_id = str(candidate.public_token).lower().strip()
+        token_face_dir = deepface_data_dir / token_id
+        if token_face_dir.exists() and any(token_face_dir.glob('*.jpg')):
+            url_path = f"/api/ai/registration/face/{token_id}/"
+            return request.build_absolute_uri(url_path) if request else url_path
+
+    # Try email
+    if email:
+        email_face_dir = deepface_data_dir / email
+        if email_face_dir.exists() and any(email_face_dir.glob('*.jpg')):
+            url_path = f"/api/ai/registration/face/{email}/"
+            return request.build_absolute_uri(url_path) if request else url_path
+
+    # Fallback: first non-empty webcam screenshot from integrity logs
+    try:
+        logs = candidate.integrity_logs.filter(
+            webcam_screenshot_base64__isnull=False
+        ).exclude(
+            event_type__icontains='face_not_detected'
+        ).order_by('id')
+        for log in logs:
+            if len(log.webcam_screenshot_base64) > 1000:
+                base64_str = log.webcam_screenshot_base64
+                if not base64_str.startswith('data:image'):
+                    return f"data:image/jpeg;base64,{base64_str}"
+                return base64_str
+    except Exception:
+        pass
+
+    return None
+
+
+def _get_candidate_intruder_photo_url(candidate):
+    """
+    Extract the intruder's webcam base64 screenshot from mismatch event logs.
+    """
+    try:
+        logs = candidate.integrity_logs.filter(
+            event_type__in=['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'],
+            webcam_screenshot_base64__isnull=False
+        ).order_by('id')
+        for log in logs:
+            if len(log.webcam_screenshot_base64) > 1000:
+                base64_str = log.webcam_screenshot_base64
+                if not base64_str.startswith('data:image'):
+                    return f"data:image/jpeg;base64,{base64_str}"
+                return base64_str
+        
+        # Second fallback: any webcam snapshot containing mismatch
+        logs = candidate.integrity_logs.filter(
+            event_type__icontains='mismatch',
+            webcam_screenshot_base64__isnull=False
+        ).order_by('id')
+        for log in logs:
+            if len(log.webcam_screenshot_base64) > 1000:
+                base64_str = log.webcam_screenshot_base64
+                if not base64_str.startswith('data:image'):
+                    return f"data:image/jpeg;base64,{base64_str}"
+                return base64_str
+    except Exception:
+        pass
+    return None
+
+
+def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids=None, request=None):
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
     """
@@ -192,7 +292,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'interview_summary': s.interview_summary,
                 'total_questions': getattr(s, 'total_questions', 0),
                 'resume_score': getattr(s, 'resume_score', 0),
-                'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False),
+                'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False) if isinstance(s.automation_settings, dict) else False,
                 'batch_id': s.batch_id,
                 'batch_name': s.batch_name,
                 'integrity': {
@@ -208,7 +308,10 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                     } for log in s.integrity_logs.all()
                 ],
                 'identity_mismatch_detected': s.identity_mismatch_detected,
-                'identity_mismatch_details': s.identity_mismatch_details
+                'identity_mismatch_details': s.identity_mismatch_details,
+                'candidate_photo_url': _get_candidate_photo_url_for_candidate(request, s),
+                'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
+                'intruder_photo_url': _get_candidate_intruder_photo_url(s),
             }
         )
 

@@ -105,8 +105,14 @@ class ServeDeepFaceFaceView(APIView):
         if not target_file:
             try:
                 from api.models import IdentityLink
-                email_key = person_id.split('_')[0]
-                identity = IdentityLink.objects.filter(email__iexact=email_key).order_by('-updated_at').first()
+                from django.db.models import Q
+                if '_' in person_id:
+                    email_key = person_id.split('_')[0]
+                    identity = IdentityLink.objects.filter(email__iexact=email_key).order_by('-updated_at').first()
+                else:
+                    identity = IdentityLink.objects.filter(
+                        Q(pan_number__iexact=person_id) | Q(email__iexact=person_id)
+                    ).order_by('-updated_at').first()
                 if identity and identity.snapshot_image and identity.snapshot_image.name:
                     import os
                     if os.path.exists(identity.snapshot_image.path):
@@ -124,20 +130,103 @@ class ServeDeepFaceFaceView(APIView):
 
 def _get_candidate_photo_url(request, submission):
     """
-    Returns the registered face URL — same source priority as the PDF report.
-    Always returns a URL (never None if email exists) — the serve endpoint
-    handles the full fallback chain identical to the PDF photo logic.
+    Returns the registered face URL for this specific assessment only.
+    Prioritizes checking the unified IdentityLink for this candidate's email.
+    Otherwise prioritizes the candidate's PAN number folder if available (matches frontend getDeepfacePersonId).
+    Otherwise checks email_token folder.
+    Falls back to first non-empty webcam integrity screenshot if registration missing.
     """
     email = submission.candidate_email.lower().strip() if submission.candidate_email else None
-    if not email:
-        return None
+    
+    # Priority 1: Check unified IdentityLink for registered face snapshot
+    if email:
+        try:
+            from api.models import IdentityLink
+            identities = IdentityLink.objects.filter(email__iexact=email).order_by('-id')
+            for identity in identities:
+                if identity.snapshot_image and identity.snapshot_image.name:
+                    return request.build_absolute_uri(identity.snapshot_image.url) if request else identity.snapshot_image.url
+        except Exception as e:
+            logger.warning(f"Error checking IdentityLink in _get_candidate_photo_url: {e}")
 
-    token = str(submission.assessment.share_token) if submission.assessment else None
-    person_id = f"{email}_{token}" if token else email
+    from pathlib import Path
+    deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
 
-    # Always return the URL — ServeDeepFaceFaceView handles the same fallback
-    # chain as the PDF (face_0.jpg → registration_snapshot.jpg → any jpg → legacy folder → IdentityLink)
-    return request.build_absolute_uri(f"/api/ai/registration/face/{person_id}/")
+    # Priority 1: Check if lowercased PAN number folder exists and has face images
+    if getattr(submission, 'pan_number', None):
+        pan_id = submission.pan_number.lower().strip()
+        pan_face_dir = deepface_data_dir / pan_id
+        if pan_face_dir.exists() and any(pan_face_dir.glob('*.jpg')):
+            url_path = f"/api/ai/registration/face/{pan_id}/"
+            return request.build_absolute_uri(url_path) if request else url_path
+
+    # Priority 2: Check email_token folder
+    if email:
+        token = str(submission.assessment.share_token) if submission.assessment else None
+        person_id = f"{email}_{token}" if token else email
+        person_face_dir = deepface_data_dir / person_id
+        if person_face_dir.exists() and any(person_face_dir.glob('*.jpg')):
+            url_path = f"/api/ai/registration/face/{person_id}/"
+            return request.build_absolute_uri(url_path) if request else url_path
+
+    # Fallback: first non-empty webcam integrity screenshot (> 10KB = real face frame)
+    try:
+        from ai_assessments.models import AIAssessmentIntegrityScreenshot
+        import os as _os
+        snaps = AIAssessmentIntegrityScreenshot.objects.filter(
+            submission=submission,
+            webcam_screenshot__isnull=False
+        ).exclude(
+            event_type__icontains='face_not_detected'
+        ).order_by('timestamp')
+        for snap in snaps:
+            if snap.webcam_screenshot and snap.webcam_screenshot.name:
+                if _os.path.exists(snap.webcam_screenshot.path):
+                    if _os.path.getsize(snap.webcam_screenshot.path) > 10000:
+                        return request.build_absolute_uri(snap.webcam_screenshot.url)
+    except Exception:
+        pass
+
+    # No photo found — return None so frontend shows placeholder
+    return None
+
+def _get_unified_identity_mismatch_fields(request, submission):
+    """
+    Returns unified identity mismatch fields for an assessment submission.
+    If the submission itself doesn't have a mismatch, but the associated voice
+    interview Candidate does, it bubbles up the Candidate's mismatch info.
+    """
+    detected = getattr(submission, 'identity_mismatch_detected', False)
+    orig_url = request.build_absolute_uri(submission.original_identity_photo.url) if getattr(submission, 'original_identity_photo', None) else None
+    intruder_url = request.build_absolute_uri(submission.intruder_photo.url) if getattr(submission, 'intruder_photo', None) else None
+    details = getattr(submission, 'identity_mismatch_details', {})
+
+    if not detected and submission.candidate_email:
+        try:
+            from ai_candidates.models import Candidate
+            from ai_assessments.results_helpers import _get_candidate_intruder_photo_url
+            cand = Candidate.objects.filter(email__iexact=submission.candidate_email).order_by('-id').first()
+            if cand and getattr(cand, 'identity_mismatch_detected', False):
+                detected = True
+                details = getattr(cand, 'identity_mismatch_details', {})
+                if getattr(cand, 'original_identity_photo', None):
+                    try:
+                        orig_url = request.build_absolute_uri(cand.original_identity_photo.url)
+                    except Exception:
+                        pass
+                
+                intr_url = _get_candidate_intruder_photo_url(cand)
+                if intr_url:
+                    intruder_url = intr_url
+        except Exception as e:
+            pass
+
+    return {
+        "identity_mismatch_detected": detected,
+        "original_identity_photo_url": orig_url,
+        "intruder_photo_url": intruder_url,
+        "identity_mismatch_details": details,
+    }
 
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
@@ -1214,7 +1303,13 @@ class CreateSubmissionView(APIView):
 
             # --- DEEPFACE REGISTRATION & IDENTITY STORAGE ---
             if snapshot:
-                person_id = f"{email}_{token}"
+                # Prioritize lowercased PAN number as getDeepfacePersonId() in frontend
+                if pan_number and pan_number.strip():
+                    person_id = pan_number.lower().strip()
+                elif getattr(submission, 'pan_number', None):
+                    person_id = submission.pan_number.lower().strip()
+                else:
+                    person_id = f"{email}_{token}"
                 
                 # Double-check registration status directly from microservice for absolute security
                 try:
@@ -1318,14 +1413,19 @@ class CreateSubmissionView(APIView):
                         submission.identity_mismatch_detected = True
                         submission.identity_mismatch_details = {
                             'mismatch_at': timezone.now().isoformat(),
-                            'person_id': f"{email}_{token}",
+                            'person_id': person_id,
                             'mismatch_type': 'face_mismatch_override'
                         }
                         submission.save()
                         logger.warning(f"Identity mismatch override flagged for AI Assessment submission {submission.id} ({email}) without deepface conflict")
 
                     # NEW SUBMISSION -> Register anchor face for THIS ASSESSMENT
-                    person_id = f"{email}_{token}"
+                    if pan_number and pan_number.strip():
+                        person_id = pan_number.lower().strip()
+                    elif getattr(submission, 'pan_number', None):
+                        person_id = submission.pan_number.lower().strip()
+                    else:
+                        person_id = f"{email}_{token}"
                     _register_face_with_deepface(person_id, snapshot)
                     
                     # Store Identity Link for the report
@@ -1528,6 +1628,25 @@ class UpdateAssessmentIntegrityView(APIView):
                         integrity_snap.webcam_screenshot.save(cname, ContentFile(webcam_data), save=False)
 
                     integrity_snap.save()
+
+                    # If face_mismatch detected during session, flag identity_mismatch
+                    # and save webcam as intruder_photo if not already captured
+                    if event_type in ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry']:
+                        if not submission.identity_mismatch_detected:
+                            submission.identity_mismatch_detected = True
+                            submission.identity_mismatch_details = {
+                                'mismatch_at': timezone.now().isoformat(),
+                                'mismatch_type': f'{event_type}_during_session',
+                            }
+                        if not submission.intruder_photo and webcam_b64:
+                            try:
+                                submission.intruder_photo.save(
+                                    f"intruder_{submission.id}_{int(timezone.now().timestamp())}.jpg",
+                                    ContentFile(webcam_data),
+                                    save=False
+                                )
+                            except Exception as ip_err:
+                                logger.error(f"Failed to save intruder_photo from mismatch event: {ip_err}")
 
                 except Exception as se:
                     logger.error(f"Failed to save AI integrity screenshot: {str(se)}")
@@ -2391,10 +2510,7 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
                 "name": instance.assessment.required_skills
             },
             # Identity mismatch fields
-            "identity_mismatch_detected": getattr(instance, 'identity_mismatch_detected', False),
-            "original_identity_photo_url": request.build_absolute_uri(instance.original_identity_photo.url) if getattr(instance, 'original_identity_photo', None) else None,
-            "intruder_photo_url": request.build_absolute_uri(instance.intruder_photo.url) if getattr(instance, 'intruder_photo', None) else None,
-            "identity_mismatch_details": getattr(instance, 'identity_mismatch_details', {}),
+            **_get_unified_identity_mismatch_fields(request, instance),
         }
         return Response(data)
 
@@ -2690,38 +2806,61 @@ class AIAssessmentReportDownloadView(APIView):
                 spaceAfter=10
             )))
 
-            # Get candidate photo - Direct Source of Truth
+            # Get candidate photo — prioritizing PAN, then exact assessment token folder
             candidate_img = None
-            person_id = f"{submission.candidate_email.lower().strip()}_{assessment.share_token}" if assessment.share_token else submission.candidate_email.lower().strip()
             
             try:
                 from pathlib import Path
+                import os as _os
                 deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
-                person_face_dir = deepface_data_dir / person_id
                 
-                # Check for specific anchor files
                 target_file = None
-                for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-                    if (person_face_dir / name).exists():
-                        target_file = person_face_dir / name
-                        break
-                
+
+                # Step 1: Prioritize PAN folder
+                if getattr(submission, 'pan_number', None):
+                    pan_id = submission.pan_number.lower().strip()
+                    pan_face_dir = deepface_data_dir / pan_id
+                    if pan_face_dir.exists():
+                        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                            if (pan_face_dir / name).exists():
+                                target_file = pan_face_dir / name
+                                break
+                        if not target_file:
+                            jpgs = list(pan_face_dir.glob('*.jpg'))
+                            if jpgs:
+                                target_file = jpgs[0]
+
+                # Step 2: Fall back to exact email_token folder for this assessment only
                 if not target_file:
-                    # Fallback to any JPG in the registration folder
-                    jpgs = list(person_face_dir.glob('*.jpg'))
-                    if jpgs: target_file = jpgs[0]
-                    
+                    person_id = f"{submission.candidate_email.lower().strip()}_{assessment.share_token}" if assessment.share_token else submission.candidate_email.lower().strip()
+                    person_face_dir = deepface_data_dir / person_id
+                    for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                        if (person_face_dir / name).exists():
+                            target_file = person_face_dir / name
+                            break
+                    if not target_file and person_face_dir.exists():
+                        jpgs = list(person_face_dir.glob('*.jpg'))
+                        if jpgs:
+                            target_file = jpgs[0]
+
+                # Step 2: First non-empty webcam integrity screenshot (> 10KB)
+                if not target_file:
+                    snaps = AIAssessmentIntegrityScreenshot.objects.filter(
+                        submission=submission,
+                        webcam_screenshot__isnull=False
+                    ).exclude(event_type__icontains='face_not_detected').order_by('timestamp')
+                    for snap in snaps:
+                        if snap.webcam_screenshot and snap.webcam_screenshot.name:
+                            if _os.path.exists(snap.webcam_screenshot.path):
+                                if _os.path.getsize(snap.webcam_screenshot.path) > 10000:
+                                    target_file = Path(snap.webcam_screenshot.path)
+                                    break
+
                 if target_file:
                     candidate_img = RLImage(str(target_file), width=1.4*inch, height=1.4*inch)
-                else:
-                    # Final fallback: IdentityLink DB
-                    from api.models import IdentityLink
-                    identity = IdentityLink.objects.filter(email__iexact=submission.candidate_email).order_by('-updated_at').first()
-                    if identity and identity.snapshot_image:
-                        candidate_img = RLImage(identity.snapshot_image.path, width=1.4*inch, height=1.4*inch)
+
             except Exception as e:
                 logger.error(f"PDF Photo error for {person_id}: {e}")
-                pass
 
             # Get PAN Card image
             pan_img = None
@@ -3112,10 +3251,7 @@ class AIAssessmentSubmissionListView(APIView):
                     "name": sub.assessment.required_skills
                 },
                 # Identity mismatch fields
-                "identity_mismatch_detected": getattr(sub, 'identity_mismatch_detected', False),
-                "original_identity_photo_url": request.build_absolute_uri(sub.original_identity_photo.url) if getattr(sub, 'original_identity_photo', None) else None,
-                "intruder_photo_url": request.build_absolute_uri(sub.intruder_photo.url) if getattr(sub, 'intruder_photo', None) else None,
-                "identity_mismatch_details": getattr(sub, 'identity_mismatch_details', {}),
+                **_get_unified_identity_mismatch_fields(request, sub),
             })
         return Response({"results": data}, status=status.HTTP_200_OK)
 

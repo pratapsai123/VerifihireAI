@@ -81,6 +81,21 @@ const Settings = () => {
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
+
+        // Fetch fresh profile from the server to correct any stale user roles (like Rishidar made Admin)
+        const fetchFreshProfile = async () => {
+            try {
+                const res = await axios.get(`${API_BASE_URL}/profile/`);
+                if (res.data) {
+                    setUser(res.data);
+                    localStorage.setItem('user', JSON.stringify(res.data));
+                }
+            } catch (err) {
+                console.error("Failed to fetch fresh user profile:", err);
+            }
+        };
+        fetchFreshProfile();
+
         loadSettings();
         loadRequests();
         loadQualRequests();

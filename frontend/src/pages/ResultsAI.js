@@ -338,18 +338,18 @@ const ResultsAI = () => {
         return { total, passed, failed, onHold, avgScore, completionRate };
     };
 
-    
+
     // Sync URL subId with viewedSubmission modal
     useEffect(() => {
         const subId = searchParams.get('subId');
         if (subId) {
             // Find in current loaded assessments
-            const found = aiAssessments.find(a => 
-                String(a.submission_id) === String(subId) || 
+            const found = aiAssessments.find(a =>
+                String(a.submission_id) === String(subId) ||
                 String(a.id) === String(subId) ||
                 String(a.submission_id) === `ai_${subId}`
             );
-            
+
             if (found) {
                 setViewedSubmission(found);
             } else {
@@ -565,7 +565,7 @@ const ResultsAI = () => {
     // ── CSV export for candidates (selected or all) ──
     const exportResultsCSV = () => {
         // If some items are selected, export only those. Otherwise, export all current filtered/sorted rows.
-        const items = selected.size > 0 
+        const items = selected.size > 0
             ? currentRows.filter(r => selected.has(r._deleteKey))
             : currentRows;
 
@@ -585,11 +585,11 @@ const ResultsAI = () => {
             const status = activeTab === 'fully_automatic'
                 ? (r.interview?.status || r.assessment?.status || r.resume?.status || 'N/A')
                 : (r.status || 'N/A');
-            
+
             // Use the most relevant date field available
             const rawDate = r.completed_at || r.submitted_at || r.created_at || r.link_opened_at || r.submission_date || null;
             const date = rawDate ? new Date(rawDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
-            
+
             csvRows.push([`"${name}"`, `"${email}"`, `"${role}"`, score, `"${status}"`, `"${date}"`].join(','));
         });
 
@@ -1230,84 +1230,22 @@ const ResultsAI = () => {
                                                 return (
                                                     <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
                                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
-                                                            
-                                                            {/* Candidate Photo / Override Check */}
-                                                            {viewedSubmission.identity_mismatch_detected && (viewedSubmission.original_identity_photo_url || viewedSubmission.intruder_photo_url) ? (
-                                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '180px' }}>
-                                                                    {/* ORIGINAL FACE */}
-                                                                    <div style={{
-                                                                        width: '180px',
-                                                                        height: '180px',
-                                                                        background: '#F4F7FE',
-                                                                        borderRadius: '12px',
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        justifyContent: 'center',
-                                                                        border: '2px solid #EE5D50',
-                                                                        overflow: 'hidden',
-                                                                        position: 'relative'
-                                                                    }}>
-                                                                        <div style={{
-                                                                            position: 'absolute', top: 0, left: 0, right: 0,
-                                                                            background: '#EE5D50', color: 'white',
-                                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
-                                                                            fontWeight: 'bold', zIndex: 2
-                                                                        }}>
-                                                                            ORIGINAL FACE
-                                                                        </div>
-                                                                        <img
-                                                                            src={viewedSubmission.original_identity_photo_url}
-                                                                            alt="Original Candidate"
-                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                                        />
-                                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                                        </div>
-                                                                    </div>
 
-                                                                    {/* OVERRIDE FACE */}
-                                                                    <div style={{
-                                                                        width: '180px',
-                                                                        height: '180px',
-                                                                        background: '#F4F7FE',
-                                                                        borderRadius: '12px',
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        justifyContent: 'center',
-                                                                        border: '2px dashed #F59E0B',
-                                                                        overflow: 'hidden',
-                                                                        position: 'relative'
-                                                                    }}>
-                                                                        <div style={{
-                                                                            position: 'absolute', top: 0, left: 0, right: 0,
-                                                                            background: '#F59E0B', color: 'white',
-                                                                            fontSize: '0.7rem', padding: '2px', textAlign: 'center',
-                                                                            fontWeight: 'bold', zIndex: 2
-                                                                        }}>
-                                                                            ASSESSMENT FACE
-                                                                        </div>
-                                                                        <img
-                                                                            src={viewedSubmission.intruder_photo_url || candidatePhoto}
-                                                                            alt="Assessment Candidate"
-                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                                        />
-                                                                        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                            <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                                        </div>
-                                                                    </div>
+                                                            {/* Always show single registered face at top */}
+                                                            <div style={{
+                                                                width: '180px', height: '180px', background: '#F4F7FE',
+                                                                borderRadius: '12px', display: 'flex', alignItems: 'center',
+                                                                justifyContent: 'center', overflow: 'hidden',
+                                                                border: '1px solid #E0E5F2'
+                                                            }}>
+                                                                {candidatePhoto ? (
+                                                                    <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                ) : null}
+                                                                <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                    <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
                                                                 </div>
-                                                            ) : (
-                                                                <div style={{ width: '180px', height: '180px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
-                                                                    {candidatePhoto ? (
-                                                                        <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                                                                    ) : null}
-                                                                    <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                                        <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
-                                                                    </div>
-                                                                </div>
-                                                            )}
+                                                            </div>
+
                                                             {viewedSubmission.pan_photo && (
                                                                 <div style={{ width: '180px', height: '120px', background: '#F4F7FE', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #E0E5F2', overflow: 'hidden' }}>
                                                                     <img src={viewedSubmission.pan_photo} alt="PAN Card" style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
@@ -1596,6 +1534,78 @@ const ResultsAI = () => {
                                 )}
                             </div>
                         </div>
+
+                        {/* ── IDENTITY EVIDENCE — Two-face comparison at bottom of modal ── */}
+                        {viewedSubmission.identity_mismatch_detected && (
+                            <div style={{ padding: '0 2.5rem 2rem' }}>
+                                <h4 style={{ color: '#991B1B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626' }}></i> Identity Evidence — Face Comparison
+                                </h4>
+                                <div style={{ background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '16px', padding: '1.5rem', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                                    {/* BOX 1: First registered face (from deepface face_0.jpg) */}
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E0E5F2', position: 'relative', marginBottom: '0.5rem' }}>
+                                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                ✓ REGISTERED FACE
+                                            </div>
+                                            <img
+                                                src={viewedSubmission.candidate_photo_url}
+                                                alt="Registered Face"
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                            />
+                                            <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
+                                            </div>
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#065f46' }}>Original Candidate</div>
+                                    </div>
+
+                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', color: '#DC2626', fontWeight: 'bold', paddingTop: '60px' }}>≠</div>
+
+                                    {/* BOX 2: Person who joined mid-exam (intruder_photo) */}
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '2px dashed #DC2626', position: 'relative', marginBottom: '0.5rem' }}>
+                                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#DC2626', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                ⚠ DIFFERENT PERSON DETECTED
+                                            </div>
+                                            <img
+                                                src={viewedSubmission.intruder_photo_url || (() => {
+                                                    const snaps = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
+                                                    const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
+                                                    if (mismatchSnap) {
+                                                        return mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
+                                                    }
+                                                    if (snaps.length > 0) {
+                                                        const lastSnap = snaps[snaps.length - 1];
+                                                        return lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
+                                                    }
+                                                    return null;
+                                                })()}
+                                                alt="Intruder Face"
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                            />
+                                            <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
+                                            </div>
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#991B1B' }}>Person During Assessment</div>
+                                    </div>
+
+                                    <div style={{ flex: 1, minWidth: '200px', paddingTop: '30px' }}>
+                                        <p style={{ color: '#7F1D1D', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                                            <strong>HR Action Required:</strong> The AI proctoring system detected that the person completing the assessment does not match the registered candidate. Please verify identity before making a hiring decision.
+                                        </p>
+                                        {viewedSubmission.identity_mismatch_details?.mismatch_at && (
+                                            <p style={{ color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                                                Detected at: {new Date(viewedSubmission.identity_mismatch_details.mismatch_at).toLocaleString()}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Modal Footer */}
                         <div style={{
@@ -2002,7 +2012,7 @@ const ResultsAI = () => {
                                                                     Candidate Info
                                                                     {sortField === 'name' && (
                                                                         <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                           style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                            style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                     )}
                                                                 </th>
                                                             ) : (
@@ -2014,7 +2024,7 @@ const ResultsAI = () => {
                                                                     Candidate Info
                                                                     {sortField === 'name' && (
                                                                         <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                           style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                            style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                     )}
                                                                 </th>
                                                             )}
@@ -2032,7 +2042,7 @@ const ResultsAI = () => {
                                                                         Result
                                                                         {sortField === 'score' && (
                                                                             <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                                style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                         )}
                                                                     </th>
                                                                     <th
@@ -2043,7 +2053,7 @@ const ResultsAI = () => {
                                                                         Date
                                                                         {sortField === 'date' && (
                                                                             <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                                style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                         )}
                                                                     </th>
                                                                 </>
@@ -2057,7 +2067,7 @@ const ResultsAI = () => {
                                                                         Result
                                                                         {sortField === 'score' && (
                                                                             <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                                style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                         )}
                                                                     </th>
                                                                     <th
@@ -2068,7 +2078,7 @@ const ResultsAI = () => {
                                                                         Date
                                                                         {sortField === 'date' && (
                                                                             <i className={`fa-solid fa-caret-${sortDirection === 'asc' ? 'up' : 'down'}`}
-                                                                               style={{ marginLeft: '6px', color: '#4F46E5' }} />
+                                                                                style={{ marginLeft: '6px', color: '#4F46E5' }} />
                                                                         )}
                                                                     </th>
                                                                 </>
@@ -2161,54 +2171,57 @@ const ResultsAI = () => {
                                                                             {r.qual_pending && (
                                                                                 <span title="Qualification change pending admin approval" style={{ fontSize: '0.62rem', fontWeight: '800', background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', borderRadius: '999px', padding: '1px 6px', whiteSpace: 'nowrap' }}>⏳ Pending</span>
                                                                             )}
-                                                                            {/* Qualify / Not Qualify buttons — only shown when DB status is actually 'hold' or 'On-Hold', not display-overridden */}
-                                                                            {!r.qual_pending && (r.status === 'hold' || r.status === 'On-Hold') && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
-                                                                                <>
-                                                                                    <button
-                                                                                        onClick={(e) => {
-                                                                                            e.stopPropagation();
-                                                                                            const sid = String(r.submission_id || '');
-                                                                                            const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
-                                                                                            if (aiResultsIsAdmin) {
-                                                                                                // Admin: direct update via standard endpoint
-                                                                                                if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Qualified?`)) {
-                                                                                                    axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'selected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
-                                                                                                        .then(() => { showToast('success', 'Marked as Qualified.'); fetchData(); })
-                                                                                                        .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
-                                                                                                }
-                                                                                            } else {
-                                                                                                setQualReason('');
-                                                                                                setQualReasonPopup({ row: r, status: 'selected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
-                                                                                            }
-                                                                                        }}
-                                                                                        title="Mark as Qualified"
-                                                                                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#05CD99', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
-                                                                                    >
-                                                                                        <i className="fa-solid fa-user-check" />
-                                                                                    </button>
-                                                                                    <button
-                                                                                        onClick={(e) => {
-                                                                                            e.stopPropagation();
-                                                                                            const sid = String(r.submission_id || '');
-                                                                                            const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
-                                                                                            if (aiResultsIsAdmin) {
-                                                                                                if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Not Qualified?`)) {
-                                                                                                    axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'rejected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
-                                                                                                        .then(() => { showToast('success', 'Marked as Not Qualified.'); fetchData(); })
-                                                                                                        .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
-                                                                                                }
-                                                                                            } else {
-                                                                                                setQualReason('');
-                                                                                                setQualReasonPopup({ row: r, status: 'rejected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
-                                                                                            }
-                                                                                        }}
-                                                                                        title="Mark as Not Qualified"
-                                                                                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EE5D50', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
-                                                                                    >
-                                                                                        <i className="fa-solid fa-user-xmark" />
-                                                                                    </button>
-                                                                                </>
-                                                                            )}
+                                                                            {(() => {
+                                                                                const currentStatus = activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status;
+                                                                                const currentSubmissionId = activeTab === 'fully_automatic' ? (r.assessment?.submission_id || r.interview?.submission_id || r.resume?.submission_id) : r.submission_id;
+                                                                                if (!r.qual_pending && currentStatus === 'hold' && currentSubmissionId) {
+                                                                                    const sid = String(currentSubmissionId || '');
+                                                                                    const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
+                                                                                    return (
+                                                                                        <>
+                                                                                            <button
+                                                                                                onClick={(e) => {
+                                                                                                    e.stopPropagation();
+                                                                                                    if (aiResultsIsAdmin) {
+                                                                                                        if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Qualified?`)) {
+                                                                                                            axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'selected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
+                                                                                                                .then(() => { showToast('success', 'Marked as Qualified.'); fetchData(); })
+                                                                                                                .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
+                                                                                                        }
+                                                                                                    } else {
+                                                                                                        setQualReason('');
+                                                                                                        setQualReasonPopup({ row: r, status: 'selected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
+                                                                                                    }
+                                                                                                }}
+                                                                                                title="Mark as Qualified"
+                                                                                                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#05CD99', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
+                                                                                            >
+                                                                                                <i className="fa-solid fa-user-check" />
+                                                                                            </button>
+                                                                                            <button
+                                                                                                onClick={(e) => {
+                                                                                                    e.stopPropagation();
+                                                                                                    if (aiResultsIsAdmin) {
+                                                                                                        if (window.confirm(`Mark ${r.full_name || r.candidate?.name || 'this candidate'} as Not Qualified?`)) {
+                                                                                                            axios.post(`${API_BASE_URL}/workflow/qualification-requests/ai/`, { ai_submission_id: aiId, requested_result: 'rejected', reason: 'Admin Update', candidate_name: r.full_name || r.candidate?.name, candidate_email: r.email || r.candidate?.email }, { headers: { Authorization: `Bearer ${getToken()}` } })
+                                                                                                                .then(() => { showToast('success', 'Marked as Not Qualified.'); fetchData(); })
+                                                                                                                .catch(err => showToast('error', err.response?.data?.error || 'Failed.'));
+                                                                                                        }
+                                                                                                    } else {
+                                                                                                        setQualReason('');
+                                                                                                        setQualReasonPopup({ row: r, status: 'rejected', candidateName: r.full_name || r.candidate?.name || 'Candidate', candidateEmail: r.email || r.candidate?.email, aiSubmissionId: aiId });
+                                                                                                    }
+                                                                                                }}
+                                                                                                title="Mark as Not Qualified"
+                                                                                                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EE5D50', padding: '0.1rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center' }}
+                                                                                            >
+                                                                                                <i className="fa-solid fa-user-xmark" />
+                                                                                            </button>
+                                                                                        </>
+                                                                                    );
+                                                                                }
+                                                                                return null;
+                                                                            })()}
                                                                             <button
                                                                                 onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
                                                                                 title="View Automation History"
@@ -2220,11 +2233,13 @@ const ResultsAI = () => {
                                                                             >
                                                                                 <i className="fa-solid fa-clock-rotate-left"></i>
                                                                             </button>
-                                                                            {r.delete_requested && (
-                                                                                <span title="Deletion pending approval" style={{ cursor: 'help' }}>⏳</span>
-                                                                            )}
-                                                                        </div>
-                                                                    </td>
+                                                                            {
+                                                                                r.delete_requested && (
+                                                                                    <span title="Deletion pending approval" style={{ cursor: 'help' }}>⏳</span>
+                                                                                )
+                                                                            }
+                                                                        </div >
+                                                                    </td >
                                                                     <td>
                                                                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
                                                                             {activeTab === 'fully_automatic' ? (
@@ -2502,45 +2517,47 @@ const ResultsAI = () => {
                 )
             }
             {/* ── AI Qualification Request Reason Modal ── */}
-            {qualReasonPopup && (
-                <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, backdropFilter: 'blur(4px)' }}>
-                    <div style={{ background: '#fff', borderRadius: '20px', padding: '36px', width: '100%', maxWidth: '460px', boxShadow: '0 30px 80px rgba(0,0,0,0.25)' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: '800', color: '#111827' }}>Request Qualification Change</h3>
-                            <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
-                        </div>
-                        <p style={{ color: '#6b7280', fontSize: '0.88rem', marginBottom: '18px', lineHeight: 1.5 }}>
-                            You are requesting to mark <strong style={{ color: '#111827' }}>{qualReasonPopup.candidateName}</strong> as{' '}
-                            <strong style={{ color: qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626' }}>
-                                {qualReasonPopup.status === 'selected' ? '✅ Qualified' : '❌ Not Qualified'}
-                            </strong>. This requires admin approval.
-                        </p>
-                        <div style={{ background: '#f9fafb', borderRadius: '10px', padding: '12px 14px', marginBottom: '16px', border: '1px solid #e5e7eb' }}>
-                            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '800', color: '#374151', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                Reason <span style={{ color: '#ef4444' }}>*</span>
-                            </label>
-                            <textarea
-                                value={qualReason}
-                                onChange={e => setQualReason(e.target.value)}
-                                placeholder="Explain why this candidate should be Qualified / Not Qualified..."
-                                rows={4}
-                                style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', resize: 'vertical', fontSize: '0.88rem', color: '#111827', fontFamily: 'inherit', boxSizing: 'border-box' }}
-                            />
-                        </div>
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                            <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ flex: 1, padding: '11px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', color: '#374151' }}>Cancel</button>
-                            <button
-                                onClick={submitQualAiRequest}
-                                disabled={qualSubmitting || !qualReason.trim()}
-                                style={{ flex: 1, padding: '11px', background: qualSubmitting || !qualReason.trim() ? '#9ca3af' : (qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626'), color: '#fff', border: 'none', borderRadius: '10px', cursor: qualSubmitting || !qualReason.trim() ? 'not-allowed' : 'pointer', fontWeight: '700' }}
-                            >
-                                {qualSubmitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
-                            </button>
+            {
+                qualReasonPopup && (
+                    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, backdropFilter: 'blur(4px)' }}>
+                        <div style={{ background: '#fff', borderRadius: '20px', padding: '36px', width: '100%', maxWidth: '460px', boxShadow: '0 30px 80px rgba(0,0,0,0.25)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: '800', color: '#111827' }}>Request Qualification Change</h3>
+                                <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                            </div>
+                            <p style={{ color: '#6b7280', fontSize: '0.88rem', marginBottom: '18px', lineHeight: 1.5 }}>
+                                You are requesting to mark <strong style={{ color: '#111827' }}>{qualReasonPopup.candidateName}</strong> as{' '}
+                                <strong style={{ color: qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626' }}>
+                                    {qualReasonPopup.status === 'selected' ? '✅ Qualified' : '❌ Not Qualified'}
+                                </strong>. This requires admin approval.
+                            </p>
+                            <div style={{ background: '#f9fafb', borderRadius: '10px', padding: '12px 14px', marginBottom: '16px', border: '1px solid #e5e7eb' }}>
+                                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '800', color: '#374151', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                    Reason <span style={{ color: '#ef4444' }}>*</span>
+                                </label>
+                                <textarea
+                                    value={qualReason}
+                                    onChange={e => setQualReason(e.target.value)}
+                                    placeholder="Explain why this candidate should be Qualified / Not Qualified..."
+                                    rows={4}
+                                    style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', resize: 'vertical', fontSize: '0.88rem', color: '#111827', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <button onClick={() => { setQualReasonPopup(null); setQualReason(''); }} style={{ flex: 1, padding: '11px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', color: '#374151' }}>Cancel</button>
+                                <button
+                                    onClick={submitQualAiRequest}
+                                    disabled={qualSubmitting || !qualReason.trim()}
+                                    style={{ flex: 1, padding: '11px', background: qualSubmitting || !qualReason.trim() ? '#9ca3af' : (qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626'), color: '#fff', border: 'none', borderRadius: '10px', cursor: qualSubmitting || !qualReason.trim() ? 'not-allowed' : 'pointer', fontWeight: '700' }}
+                                >
+                                    {qualSubmitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 
