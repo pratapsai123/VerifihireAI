@@ -1993,8 +1993,8 @@ const ResultsAI = () => {
                                                                             {r.qual_pending && (
                                                                                 <span title="Qualification change pending admin approval" style={{ fontSize: '0.62rem', fontWeight: '800', background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', borderRadius: '999px', padding: '1px 6px', whiteSpace: 'nowrap' }}>⏳ Pending</span>
                                                                             )}
-                                                                            {/* Qualify / Not Qualify buttons — only shown when DB status is actually 'hold', not display-overridden */}
-                                                                            {!r.qual_pending && r.status === 'hold' && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
+                                                                            {/* Qualify / Not Qualify buttons — only shown when DB status is actually 'hold' or 'On-Hold', not display-overridden */}
+                                                                            {!r.qual_pending && (r.status === 'hold' || r.status === 'On-Hold') && (activeTab === 'assessment' || activeTab === 'interview' || activeTab === 'fully_automatic') && r.submission_id && (
                                                                                 <>
                                                                                     <button
                                                                                         onClick={(e) => {
