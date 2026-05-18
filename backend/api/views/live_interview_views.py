@@ -964,6 +964,22 @@ def add_interview_participant_view(request):
             print(f"DEBUG: Session {session_id} not found")
             return Response({'error': 'Interview session not found.'}, status=status.HTTP_404_NOT_FOUND)
             
+        # Enforce maximum limit of 4 members in total (1 candidate + 1 primary interviewer + 2 additional panelists)
+        if InterviewParticipant.objects.filter(session=invitation).count() >= 2:
+            return Response({'error': 'Maximum limit of 4 members (1 candidate and 3 interviewers) reached for this interview.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            
+        # Check for duplicates
+        if InterviewParticipant.objects.filter(session=invitation, email__iexact=email).exists():
+            return Response({'error': 'This participant has already been added to the interview.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        if invitation.interviewer_email and invitation.interviewer_email.lower() == email.lower():
+            return Response({'error': 'This email is already the primary interviewer for this session.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        if invitation.email and invitation.email.lower() == email.lower():
+            return Response({'error': 'Cannot add the candidate as a panel member.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
         # Get or create user
         print(f"DEBUG: Getting/Creating user for email: {email}")
         from django.contrib.auth import get_user_model

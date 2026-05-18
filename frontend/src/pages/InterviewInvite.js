@@ -618,6 +618,18 @@ export default function InterviewInvite() {
                     alert('Valid email is required to add a panelist.');
                     return;
                   }
+                  if (currentPanelMembers.length >= 2) {
+                    alert('Maximum of 4 members allowed in an interview (1 candidate + 3 interviewers). You can only add up to 2 additional panelists here.');
+                    return;
+                  }
+                  if (currentPanelMembers.some(p => p.email.toLowerCase() === panelistEmail.toLowerCase())) {
+                    alert('This panelist has already been added to the list.');
+                    return;
+                  }
+                  if (panelistEmail.toLowerCase() === interviewerEmail.toLowerCase()) {
+                    alert('This email is already assigned as the primary interviewer.');
+                    return;
+                  }
                   setCurrentPanelMembers(prev => [...prev, { name: panelistName, email: panelistEmail }]);
                   setPanelistName('');
                   setPanelistEmail('');
