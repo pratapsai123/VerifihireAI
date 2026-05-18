@@ -16,7 +16,8 @@ export default function AcceptInvite() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const [fullName, setFullName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [tempPassword, setTempPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -27,7 +28,8 @@ export default function AcceptInvite() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [passwordFocused, setPasswordFocused] = useState(false);
-  const [fullNameFocused, setFullNameFocused] = useState(false);
+  const [firstNameFocused, setFirstNameFocused] = useState(false);
+  const [lastNameFocused, setLastNameFocused] = useState(false);
   const [tempPasswordFocused, setTempPasswordFocused] = useState(false);
   const [newPasswordFocused, setNewPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
@@ -52,12 +54,13 @@ export default function AcceptInvite() {
   const canSubmit = useMemo(() => {
     return Boolean(
       token && 
-      fullName.trim() && 
+      firstName.trim() && 
+      lastName.trim() && 
       tempPassword && 
       passwordRegex.test(newPassword) && 
       newPassword === confirmPassword
     ) && !submitting;
-  }, [token, fullName, tempPassword, newPassword, confirmPassword, submitting]);
+  }, [token, firstName, lastName, tempPassword, newPassword, confirmPassword, submitting]);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,7 +111,7 @@ export default function AcceptInvite() {
     try {
       await axios.post(`${API_BASE_URL}/users/accept-invite/`, {
         token,
-        full_name: fullName,
+        full_name: `${firstName} ${lastName}`.trim(),
         temp_password: tempPassword,
         new_password: newPassword,
         confirm_password: confirmPassword,
@@ -284,20 +287,46 @@ export default function AcceptInvite() {
           <form className="auth-form" onSubmit={handleSubmit}>
             {success && <div className="auth-success-message" style={{ marginBottom: '1.5rem' }}>{success}</div>}
             
-            <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`}>
-              <i className="fas fa-user auth-input-icon"></i>
-              <input
-                type="text"
-                className="auth-input-with-icon"
-                placeholder="Full Name *"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                onFocus={() => setFullNameFocused(true)}
-                onBlur={() => setFullNameFocused(false)}
-                required
-                disabled={submitting}
-              />
-              <label className="auth-floating-label">Full Name *</label>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <div className={`auth-input-icon-wrapper ${firstNameFocused || firstName ? 'focused has-value' : ''}`} style={{ flex: 1 }}>
+                <i className="fas fa-user auth-input-icon"></i>
+                <input
+                  type="text"
+                  className="auth-input-with-icon"
+                  placeholder="First Name *"
+                  value={firstName}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                    setFirstName(value);
+                  }}
+                  onFocus={() => setFirstNameFocused(true)}
+                  onBlur={() => setFirstNameFocused(false)}
+                  required
+                  maxLength={50}
+                  disabled={submitting}
+                />
+                <label className="auth-floating-label">First Name *</label>
+              </div>
+
+              <div className={`auth-input-icon-wrapper ${lastNameFocused || lastName ? 'focused has-value' : ''}`} style={{ flex: 1 }}>
+                <i className="fas fa-user auth-input-icon"></i>
+                <input
+                  type="text"
+                  className="auth-input-with-icon"
+                  placeholder="Last Name *"
+                  value={lastName}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                    setLastName(value);
+                  }}
+                  onFocus={() => setLastNameFocused(true)}
+                  onBlur={() => setLastNameFocused(false)}
+                  required
+                  maxLength={50}
+                  disabled={submitting}
+                />
+                <label className="auth-floating-label">Last Name *</label>
+              </div>
             </div>
 
             <div className={`auth-input-icon-wrapper ${tempPasswordFocused || tempPassword ? 'focused has-value' : ''}`}>

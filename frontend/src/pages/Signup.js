@@ -22,7 +22,8 @@ function Signup() {
   }, []);
 
   // Signup form state
-  const [fullName, setFullName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [businessEmail, setBusinessEmail] = useState('');
   const [organizationName, setOrganizationName] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,8 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
-  const [fullNameFocused, setFullNameFocused] = useState(false);
+  const [firstNameFocused, setFirstNameFocused] = useState(false);
+  const [lastNameFocused, setLastNameFocused] = useState(false);
   const [businessEmailFocused, setBusinessEmailFocused] = useState(false);
   const [organizationNameFocused, setOrganizationNameFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
@@ -217,7 +219,7 @@ function Signup() {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/register/`, {
-        full_name: fullName,
+        full_name: `${firstName} ${lastName}`.trim(),
         email: businessEmail,
         organization_name: organizationName,
         password: password,
@@ -231,7 +233,8 @@ function Signup() {
         setSignupSuccess('Account created successfully! Redirecting to login...');
       }
       // Clear form
-      setFullName('');
+      setFirstName('');
+      setLastName('');
       setBusinessEmail('');
       setOrganizationName('');
       setPassword('');
@@ -344,27 +347,49 @@ function Signup() {
             <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{signupSuccess}</div>
           )}
 
-          <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`}>
-            <i className="fas fa-user auth-input-icon"></i>
-            <input
-              type="text"
-              className="auth-input-with-icon"
-              placeholder="Full Name *"
-              value={fullName}
-              onChange={(e) => {
-                const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                setFullName(value);
-              }}
-              onFocus={() => setFullNameFocused(true)}
-              onBlur={() => setFullNameFocused(false)}
-              required
-              maxLength={50}
-              disabled={signupLoading}
-            />
-            <label className="auth-floating-label">Full Name *</label>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className={`auth-input-icon-wrapper ${firstNameFocused || firstName ? 'focused has-value' : ''}`} style={{ flex: 1 }}>
+              <i className="fas fa-user auth-input-icon"></i>
+              <input
+                type="text"
+                className="auth-input-with-icon"
+                placeholder="First Name *"
+                value={firstName}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                  setFirstName(value);
+                }}
+                onFocus={() => setFirstNameFocused(true)}
+                onBlur={() => setFirstNameFocused(false)}
+                required
+                maxLength={50}
+                disabled={signupLoading}
+              />
+              <label className="auth-floating-label">First Name *</label>
+            </div>
+
+            <div className={`auth-input-icon-wrapper ${lastNameFocused || lastName ? 'focused has-value' : ''}`} style={{ flex: 1 }}>
+              <i className="fas fa-user auth-input-icon"></i>
+              <input
+                type="text"
+                className="auth-input-with-icon"
+                placeholder="Last Name *"
+                value={lastName}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                  setLastName(value);
+                }}
+                onFocus={() => setLastNameFocused(true)}
+                onBlur={() => setLastNameFocused(false)}
+                required
+                maxLength={50}
+                disabled={signupLoading}
+              />
+              <label className="auth-floating-label">Last Name *</label>
+            </div>
           </div>
-          {fieldErrors.fullName && (
-            <div className="field-error-text">{fieldErrors.fullName}</div>
+          {(fieldErrors.firstName || fieldErrors.lastName || fieldErrors.fullName) && (
+            <div className="field-error-text">{fieldErrors.firstName || fieldErrors.lastName || fieldErrors.fullName}</div>
           )}
 
           <div className={`auth-input-icon-wrapper ${businessEmailFocused || businessEmail ? 'focused has-value' : ''}`}>
@@ -658,7 +683,8 @@ function Signup() {
             className="auth-primary-btn"
             disabled={
               signupLoading ||
-              !fullName ||
+              !firstName ||
+              !lastName ||
               !businessEmail ||
               !organizationName ||
               !password ||
