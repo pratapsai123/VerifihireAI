@@ -1815,13 +1815,13 @@ const ResultsAI = () => {
                                         return (
                                             <div style={{
                                                 background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
-                                                borderRadius: '20px',
-                                                padding: '2rem',
-                                                marginBottom: '1.5rem',
+                                                borderRadius: '16px',
+                                                padding: '1.2rem 1.5rem',
+                                                marginBottom: '1rem',
                                                 opacity: analyticsAnimateIn ? 1 : 0,
-                                                transform: analyticsAnimateIn ? 'translateY(0)' : 'translateY(20px)',
-                                                transition: 'opacity 400ms ease, transform 400ms ease',
-                                                boxShadow: '0 20px 60px rgba(15, 12, 41, 0.4)',
+                                                transform: analyticsAnimateIn ? 'translateY(0)' : 'translateY(10px)',
+                                                transition: 'opacity 300ms ease, transform 300ms ease',
+                                                boxShadow: '0 10px 30px rgba(15, 12, 41, 0.3)',
                                                 position: 'relative',
                                                 overflow: 'hidden'
                                             }}>
@@ -1830,7 +1830,7 @@ const ResultsAI = () => {
                                                 <div style={{ position: 'absolute', bottom: '-60px', left: '-30px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
                                                 {/* Header */}
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
                                                     <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)' }}>
                                                         <i className="fa-solid fa-chart-pie" />
                                                     </div>
@@ -1841,7 +1841,7 @@ const ResultsAI = () => {
                                                 </div>
 
                                                 {/* Stats Row */}
-                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.5rem', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
                                                     {[
                                                         { label: 'Total', value: metrics.total, color: '#60A5FA', icon: 'fa-users' },
                                                         { label: 'Passed', value: metrics.passed, color: '#34D399', icon: 'fa-user-check' },
@@ -1859,20 +1859,20 @@ const ResultsAI = () => {
                                                 </div>
 
                                                 {/* Charts Row */}
-                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '1.5rem', position: 'relative', zIndex: 1 }}>
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '1rem', position: 'relative', zIndex: 1 }}>
                                                     {/* Pie Chart - Pass/Fail Distribution */}
-                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.08)' }}>
-                                                        <h4 style={{ margin: '0 0 0.75rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '12px', padding: '0.75rem 1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                                        <h4 style={{ margin: '0 0 0.4rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                                             <i className="fa-solid fa-chart-pie" style={{ marginRight: '6px', color: '#a78bfa' }} />Result Distribution
                                                         </h4>
-                                                        <ResponsiveContainer width="100%" height={180}>
+                                                        <ResponsiveContainer width="100%" height={120}>
                                                             <PieChart>
                                                                 <Pie
                                                                     data={pieData}
                                                                     cx="50%"
                                                                     cy="50%"
-                                                                    innerRadius={45}
-                                                                    outerRadius={70}
+                                                                    innerRadius={35}
+                                                                    outerRadius={52}
                                                                     paddingAngle={3}
                                                                     dataKey="value"
                                                                     stroke="none"
@@ -1894,11 +1894,11 @@ const ResultsAI = () => {
                                                     </div>
 
                                                     {/* Bar Chart - Score Distribution */}
-                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.08)' }}>
-                                                        <h4 style={{ margin: '0 0 0.75rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                    <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '12px', padding: '0.75rem 1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                                        <h4 style={{ margin: '0 0 0.4rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                                             <i className="fa-solid fa-chart-bar" style={{ marginRight: '6px', color: '#60a5fa' }} />Score Distribution
                                                         </h4>
-                                                        <ResponsiveContainer width="100%" height={180}>
+                                                        <ResponsiveContainer width="100%" height={120}>
                                                             <BarChart data={barData} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
                                                                 <XAxis
                                                                     dataKey="range"
