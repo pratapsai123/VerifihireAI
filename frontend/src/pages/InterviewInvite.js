@@ -58,6 +58,7 @@ export default function InterviewInvite() {
   const [panelistName, setPanelistName] = useState('');
   const [panelistEmail, setPanelistEmail] = useState('');
   const [currentPanelMembers, setCurrentPanelMembers] = useState([]);
+  const [resumeFile, setResumeFile] = useState(null);
   
   // Mapping of draft candidate ID to their additional panel members
   const [draftPanelMap, setDraftPanelMap] = useState({});
@@ -199,15 +200,26 @@ export default function InterviewInvite() {
     const intN = interviewerName.trim(), intE = interviewerEmail.trim().toLowerCase();
     const p = pan.trim().toUpperCase(), ph = phone.trim();
     if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p) || (ph && !isValidPhone(ph))) return;
+    if (intE.endsWith('@gmail.com')) {
+      alert('Gmail addresses are not allowed for panel members.'); return;
+    }
     if (userDomain && !intE.endsWith(`@${userDomain}`)) {
       alert(`Interviewer email must belong to your company domain (@${userDomain}).`); return;
     }
     const dupe = candidates.some((c) => c.email.toLowerCase() === e || (p && c.pan_number && c.pan_number === p));
     if (dupe) { alert('This candidate email or PAN already exists in the list.'); return; }
     try {
-      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, {
-        name: n, email: e, interviewer_name: intN, interviewer_email: intE,
-        pan_number: p || null, phone: ph || null,
+      const fd = new FormData();
+      fd.append('name', n);
+      fd.append('email', e);
+      fd.append('interviewer_name', intN);
+      fd.append('interviewer_email', intE);
+      if (p) fd.append('pan_number', p);
+      if (ph) fd.append('phone', ph);
+      if (resumeFile) fd.append('resume', resumeFile);
+
+      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, fd, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
       
       if (resp.data?.results) {
@@ -224,7 +236,7 @@ export default function InterviewInvite() {
         }
       }
       
-      setName(''); setEmail(''); setInterviewerName(''); setInterviewerEmail(''); setPan(''); setPhone('');
+      setName(''); setEmail(''); setInterviewerName(''); setInterviewerEmail(''); setPan(''); setPhone(''); setResumeFile(null);
       setCurrentPanelMembers([]);
     } catch (err) {
       alert(err?.response?.data?.error || 'Failed to save draft candidate.');
@@ -551,6 +563,19 @@ export default function InterviewInvite() {
                 <div style={{ position: 'absolute', top: '100%', left: 0, color: '#ef4444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>Enter valid phone number (must start with 6, 7, 8 or 9)</div>
               )}
             </div>
+            <div className="ii-field" style={{ position: 'relative' }}>
+              <label className="ii-label">Resume <span className="ii-label-opt">(optional)</span></label>
+              <div className="ii-input-wrap">
+                <input
+                  key={resumeFile ? resumeFile.name : 'empty'}
+                  type="file"
+                  className="ii-input"
+                  style={{ padding: '6px' }}
+                  onChange={(e) => setResumeFile(e.target.files[0] || null)}
+                  accept=".pdf,.doc,.docx"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="ii-form-section-label" style={{ marginTop: '1rem' }}>Interviewer Details</div>
@@ -616,6 +641,14 @@ export default function InterviewInvite() {
                 onClick={() => {
                   if (!panelistEmail || !isValidEmail(panelistEmail)) {
                     alert('Valid email is required to add a panelist.');
+                    return;
+                  }
+                  if (panelistEmail.toLowerCase().endsWith('@gmail.com')) {
+                    alert('Gmail addresses are not allowed for panel members.');
+                    return;
+                  }
+                  if (userDomain && !panelistEmail.toLowerCase().endsWith(`@${userDomain.toLowerCase()}`)) {
+                    alert(`Panelist email must belong to your company domain (@${userDomain}).`);
                     return;
                   }
                   if (currentPanelMembers.length >= 2) {

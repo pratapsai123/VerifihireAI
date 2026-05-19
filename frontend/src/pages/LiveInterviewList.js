@@ -40,12 +40,18 @@ export default function LiveInterviewList() {
   const [page, setPage] = useState(1);
   const pageSize = 10;
 
+  const [userProfile, setUserProfile] = useState(null);
+
   const load = async () => {
     setLoading(true);
     setError('');
     try {
-      const resp = await axios.get(`${API_BASE_URL}/interviews/invitations/`);
-      setItems(resp.data?.results || []);
+      const [profileResp, invResp] = await Promise.all([
+        axios.get(`${API_BASE_URL}/profile/`).catch(() => ({ data: null })),
+        axios.get(`${API_BASE_URL}/interviews/invitations/`)
+      ]);
+      setUserProfile(profileResp.data);
+      setItems(invResp.data?.results || []);
     } catch (e) {
       setError(e?.response?.data?.error || e?.message || 'Failed to load interview candidates');
     } finally {
@@ -246,6 +252,17 @@ export default function LiveInterviewList() {
                   const sched = fmtSchedule(inv.start_time, inv.end_time);
                   const isDone = inv.status === 'completed' || inv.status === 'submitted';
                   const isFailed = inv.status === 'failed';
+                  
+                  let canStart = false;
+                  const userEmail = userProfile?.email?.toLowerCase();
+                  if (userEmail) {
+                    if (inv.interviewer_email?.toLowerCase() === userEmail) {
+                      canStart = true;
+                    } else if (inv.participants && inv.participants.some(p => p.email?.toLowerCase() === userEmail)) {
+                      canStart = true;
+                    }
+                  }
+                  
                   return (
                     <tr key={inv.id} className="lil-row">
                       <td className="col-candidate">
@@ -274,9 +291,12 @@ export default function LiveInterviewList() {
                         <span className={`lil-pill ${cls}`}>{label}</span>
                       </td>
                       <td className="col-rating">
-                        {inv.feedback ? (
+                        {inv.feedbacks && inv.feedbacks.length > 0 ? (
                           <div className="lil-rating-cell">
-                            {renderStars(inv.feedback.interviewer_average_rating || inv.feedback.interviewer_rating)}
+                            {renderStars(
+                              inv.feedbacks.reduce((sum, f) => sum + (f.interviewer_average_rating || f.interviewer_rating || 0), 0) / 
+                              (inv.feedbacks.filter(f => f.interviewer_average_rating || f.interviewer_rating).length || 1)
+                            )}
                             <button
                               className="lil-view-btn"
                               onClick={() => navigate('/feedback-details', { state: { inv } })}
@@ -307,7 +327,8 @@ export default function LiveInterviewList() {
                             className="lil-join-btn"
                             type="button"
                             onClick={() => handleStartInterview(inv.token)}
-                            disabled={isFailed}
+                            disabled={isFailed || !canStart}
+                            title={!canStart ? "You are not assigned as an interviewer or panel member for this interview" : ""}
                           >
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                               <polygon points="5 3 19 12 5 21 5 3" />

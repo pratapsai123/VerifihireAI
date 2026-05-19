@@ -51,3 +51,7 @@ Thumbs.db
 venv/
 .venv/
 venv_*/
+
+#debug files
+*.log
+*.txt
