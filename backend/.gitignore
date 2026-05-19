@@ -47,3 +47,7 @@ db.sqlite3-journal
 .DS_Store
 Thumbs.db
 
+# Virtual environments
+venv/
+.venv/
+venv_*/

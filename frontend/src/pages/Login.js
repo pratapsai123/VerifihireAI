@@ -40,6 +40,73 @@ function Login() {
   const [otpFocused, setOtpFocused] = useState(false);
   const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
   const [otpExpired, setOtpExpired] = useState(false);
+  const [cooldownSeconds, setCooldownSeconds] = useState(0);
+  const [loginCooldownSeconds, setLoginCooldownSeconds] = useState(0);
+
+  useEffect(() => {
+    let interval = null;
+    if (cooldownSeconds > 0) {
+      interval = setInterval(() => {
+        setCooldownSeconds(prev => prev - 1);
+      }, 1000);
+    } else if (cooldownSeconds === 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [cooldownSeconds]);
+
+  useEffect(() => {
+    if (cooldownSeconds > 0) {
+      const minutes = Math.floor(cooldownSeconds / 60);
+      const seconds = cooldownSeconds % 60;
+      const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      const msg = `Please wait ${formattedTime} before requesting a new OTP.`;
+      if (showOtpStep) {
+        setFieldErrors(prev => ({ ...prev, otp: msg }));
+      } else {
+        setLoginError(msg);
+      }
+    } else if (cooldownSeconds === 0) {
+      if (showOtpStep) {
+        setFieldErrors(prev => {
+          if (prev.otp && prev.otp.includes("Please wait")) return { ...prev, otp: '' };
+          return prev;
+        });
+      } else {
+        setLoginError(prev => {
+          if (prev && prev.includes("Please wait")) return '';
+          return prev;
+        });
+      }
+    }
+  }, [cooldownSeconds, showOtpStep]);
+
+  useEffect(() => {
+    let interval = null;
+    if (loginCooldownSeconds > 0) {
+      interval = setInterval(() => {
+        setLoginCooldownSeconds(prev => prev - 1);
+      }, 1000);
+    } else if (loginCooldownSeconds === 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [loginCooldownSeconds]);
+
+  useEffect(() => {
+    if (loginCooldownSeconds > 0) {
+      const minutes = Math.floor(loginCooldownSeconds / 60);
+      const seconds = loginCooldownSeconds % 60;
+      const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      const msg = `Too many failed login attempts. Please try again in ${formattedTime}.`;
+      setLoginError(msg);
+    } else if (loginCooldownSeconds === 0) {
+      setLoginError(prev => {
+        if (prev && prev.includes("Too many failed login attempts")) return '';
+        return prev;
+      });
+    }
+  }, [loginCooldownSeconds]);
 
   // Handle Login - Step 1: Email and Password
   const handleLogin = async (e) => {
@@ -93,6 +160,17 @@ function Login() {
           setLoginError(errorData.error || 'Your account is not registered with us.');
         } else if (error.response.status === 401) {
           setLoginError(errorData.error || (errorData.email && errorData.email[0]) || 'Invalid email or password.');
+        } else if (error.response.status === 429) {
+          const match = errorData.error && errorData.error.match(/wait (\d+) seconds/);
+          if (match) {
+            if (errorData.error.includes("login attempts")) {
+              setLoginCooldownSeconds(parseInt(match[1]));
+            } else {
+              setCooldownSeconds(parseInt(match[1]));
+            }
+          } else {
+            setLoginError(errorData.error || 'Too many requests. Please try again later.');
+          }
         } else if (errorData.email) {
           setFieldErrors(prev => ({ ...prev, email: errorData.email[0] }));
         } else if (errorData.password) {
@@ -155,7 +233,17 @@ function Login() {
 
     } catch (error) {
       if (error.response) {
-        setFieldErrors(prev => ({ ...prev, otp: error.response.data.error || 'Invalid OTP. Please try again.' }));
+        const errorData = error.response.data;
+        if (error.response.status === 429) {
+          const match = errorData.error && errorData.error.match(/wait (\d+) seconds/);
+          if (match) {
+            setCooldownSeconds(parseInt(match[1]));
+          } else {
+            setFieldErrors(prev => ({ ...prev, otp: errorData.error || 'Too many requests. Please try again later.' }));
+          }
+        } else {
+          setFieldErrors(prev => ({ ...prev, otp: errorData.error || 'Invalid OTP. Please try again.' }));
+        }
       } else if (error.request) {
         setLoginError('Unable to connect to server.');
       } else {
@@ -193,7 +281,17 @@ function Login() {
       }
     } catch (error) {
       if (error.response) {
-        setFieldErrors(prev => ({ ...prev, otp: error.response.data.error || 'Failed to resend OTP. Please try again.' }));
+        const errorData = error.response.data;
+        if (error.response.status === 429) {
+          const match = errorData.error && errorData.error.match(/wait (\d+) seconds/);
+          if (match) {
+            setCooldownSeconds(parseInt(match[1]));
+          } else {
+            setFieldErrors(prev => ({ ...prev, otp: errorData.error || 'Too many requests. Please try again later.' }));
+          }
+        } else {
+          setFieldErrors(prev => ({ ...prev, otp: errorData.error || 'Failed to resend OTP. Please try again.' }));
+        }
       } else {
         setFieldErrors(prev => ({ ...prev, otp: 'Unable to connect to server. Please try again.' }));
       }
@@ -256,7 +354,7 @@ function Login() {
                 onBlur={() => setLoginEmailFocused(false)}
                 required
                 maxLength={100}
-                disabled={loginLoading}
+                disabled={loginLoading || loginCooldownSeconds > 0}
               />
               <label className="auth-floating-label">Email *</label>
             </div>
@@ -275,7 +373,7 @@ function Login() {
                   onChange={(e) => setLoginPassword(e.target.value)}
                   maxLength={64}
                   required
-                  disabled={loginLoading}
+                  disabled={loginLoading || loginCooldownSeconds > 0}
                   onFocus={() => setLoginPasswordFocused(true)}
                   onBlur={() => setLoginPasswordFocused(false)}
                   style={{ paddingRight: '2.5rem' }}
@@ -284,7 +382,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  disabled={loginLoading}
+                  disabled={loginLoading || loginCooldownSeconds > 0}
                   className="password-toggle-btn"
                   style={{
                     position: 'absolute',
@@ -310,7 +408,7 @@ function Login() {
             <button
               type="submit"
               className="auth-primary-btn"
-              disabled={loginLoading || !loginEmail || !loginPassword}
+              disabled={loginLoading || !loginEmail || !loginPassword || loginCooldownSeconds > 0}
               style={{ width: '100%', padding: '0.875rem', fontSize: '1rem', fontWeight: '600' }}
             >
               {loginLoading ? 'Verifying...' : 'Login'}
@@ -373,15 +471,17 @@ function Login() {
               <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
             )}
 
-            <OtpCountdown
-              expiresAtMs={otpExpiresAtMs}
-              onExpire={() => setOtpExpired(true)}
-            />
+            {cooldownSeconds <= 0 && (
+              <OtpCountdown
+                expiresAtMs={otpExpiresAtMs}
+                onExpire={() => setOtpExpired(true)}
+              />
+            )}
 
             <button
               type="submit"
               className="auth-primary-btn"
-              disabled={verifyingOtp || otp.length !== 6 || otpExpired}
+              disabled={verifyingOtp || otp.length !== 6 || otpExpired || cooldownSeconds > 0}
               style={{ width: '100%', padding: '0.875rem', marginTop: '1rem' }}
             >
               {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
@@ -394,7 +494,7 @@ function Login() {
               <button type="button" onClick={() => setShowOtpStep(false)} className="auth-secondary-btn" style={{ fontSize: '0.85rem' }}>
                 Back to Login
               </button>
-              <button type="button" onClick={handleResendOtp} disabled={loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} className="auth-secondary-btn" style={{ fontSize: '0.85rem' }}>
+              <button type="button" onClick={handleResendOtp} disabled={loginLoading || cooldownSeconds > 0 || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} className="auth-secondary-btn" style={{ fontSize: '0.85rem' }}>
                 Resend OTP
               </button>
             </div>

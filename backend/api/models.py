@@ -37,6 +37,43 @@ class EmailOTP(models.Model):
         return f"OTP for {self.email} - {self.otp}"
 
 
+class LoginAttemptLog(models.Model):
+    """
+    Model to track failed login attempts for rate limiting.
+    """
+    email = models.EmailField(db_index=True)
+    attempted_at = models.DateTimeField(auto_now_add=True)
+    succeeded = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Login Attempt Log"
+        verbose_name_plural = "Login Attempt Logs"
+        ordering = ['-attempted_at']
+
+    def __str__(self):
+        status = "Success" if self.succeeded else "Failed"
+        return f"{status} login attempt for {self.email} at {self.attempted_at}"
+
+
+class OtpAttemptLog(models.Model):
+    """
+    Model to track failed OTP attempts for rate limiting.
+    """
+    email = models.EmailField(db_index=True)
+    attempted_at = models.DateTimeField(auto_now_add=True)
+    succeeded = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "OTP Attempt Log"
+        verbose_name_plural = "OTP Attempt Logs"
+        ordering = ['-attempted_at']
+
+    def __str__(self):
+        status = "Success" if self.succeeded else "Failed"
+        return f"{status} OTP attempt for {self.email} at {self.attempted_at}"
+
+
+
 class UserProfile(models.Model):
     """
     User registration model to store ALL registration fields

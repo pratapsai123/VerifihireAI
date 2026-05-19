@@ -28,6 +28,8 @@ from ai_assessments.models import AIAssessmentSubmission
 from .models import (
     UserProfile,
     EmailOTP,
+    LoginAttemptLog,
+    OtpAttemptLog,
     Question,
     CustomAssessment,
     Assessment,
