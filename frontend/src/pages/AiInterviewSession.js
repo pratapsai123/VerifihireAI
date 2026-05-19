@@ -14,7 +14,6 @@ import useNetworkStatus from '../hooks/useNetworkStatus';
 // Change once → applies everywhere.
 // ─────────────────────────────────────────────────────────────
 const MAX_INTERVIEW_QUESTIONS = 13;         // Total questions per session
-const INTERVIEW_DURATION_SECONDS = 60 * 60; // 1 hour in seconds
 const DEEPFACE_FRAME_INTERVAL_MS = 200;    // 5 FPS
 const DEEPFACE_JPEG_QUALITY = 0.65;   // JPEG compression for frames
 const SILENCE_GRACE_PERIOD_MS = 8000;   // Grace before ending on silence

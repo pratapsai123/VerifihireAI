@@ -1825,8 +1825,7 @@ class UpdateIntegrityView(APIView):
             webcam_b64 = request.data.get('webcam_screenshot')
 
             
-
-            if event_type == 'tab_switch':
+            if event_type in ['tab_switch', 'tab_switch_return', 'window_blur']:
 
                 integrity.tab_switches += 1
 
@@ -1843,7 +1842,6 @@ class UpdateIntegrityView(APIView):
                 integrity.no_face_detections += 1
 
             
-
             # Create a detailed log entry with dual Base64 storage
 
             InterviewIntegrityLog.objects.create(
@@ -1975,7 +1973,7 @@ class CandidatePublicIntegrityUpdateView(APIView):
 
 
 
-            if event_type == 'tab_switch':
+            if event_type in ['tab_switch', 'tab_switch_return', 'window_blur']:
 
                 integrity.tab_switches += 1
 
@@ -3490,7 +3488,8 @@ class CandidateReportDownloadView(APIView):
                             img_io = io.BytesIO(img_data)
                             rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
                             all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-                        except: pass
+                        except Exception as webcam_err:
+                            logger.warning(f"[PDFReport] Failed to load webcam screenshot for log {log.id}: {webcam_err}")
                     
                     # Process Desktop Snapshot
                     if log.screenshot_base64:
@@ -3500,7 +3499,8 @@ class CandidateReportDownloadView(APIView):
                             img_io = io.BytesIO(img_data)
                             rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
                             all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-                        except: pass
+                        except Exception as desktop_err:
+                            logger.warning(f"[PDFReport] Failed to load desktop screenshot for log {log.id}: {desktop_err}")
                 
                 if all_images:
                     # Display images in 4-per-row grid
