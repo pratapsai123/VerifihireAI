@@ -19,7 +19,7 @@ const DEEPFACE_FRAME_INTERVAL_MS = 200;    // 5 FPS
 const DEEPFACE_JPEG_QUALITY = 0.65;   // JPEG compression for frames
 const SILENCE_GRACE_PERIOD_MS = 8000;   // Grace before ending on silence
 const PROGRESS_EXPIRY_MS = 30 * 60 * 1000; // 30 min localStorage TTL
-const VIOLATION_COOLDOWN_MS_CONST = 10000;  // Integrity violation cooldown
+const VIOLATION_COOLDOWN_MS_CONST = 2000;  // Integrity violation cooldown (2s — just prevents same-cycle duplicates)
 
 const AiInterviewSession = () => {
     const { isOnline } = useNetworkStatus();
@@ -148,6 +148,9 @@ const AiInterviewSession = () => {
     const screenCanvasRef = useRef(null);
     const lastCaptureTimeRef = useRef({}); // Store timestamps per eventType for cooldowns
     const violationCooldownsRef = useRef({}); // Cooldown tracker for violations (10 sec)
+    const consecutiveViolationCountRef = useRef({}); // Track consecutive occurrences per event type
+    const lastViolationTypeRef = useRef(null); // Last violation type seen (to detect consecutive)
+    const violationStartTimeRef = useRef({}); // Track when each violation type started (for duration-based penalty)
     const isFullscreenRef = useRef(false);
     const currentAudioRef = useRef(null);
     const isStartingMicRef = useRef(false);
@@ -244,7 +247,7 @@ const AiInterviewSession = () => {
         }
     };
 
-    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
+    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null, durationSec = null) => {
         const now = Date.now();
         const lastReported = violationCooldownsRef.current[eventType] || 0;
 
@@ -258,11 +261,15 @@ const AiInterviewSession = () => {
         violationCooldownsRef.current[eventType] = now;
 
         try {
-            await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/integrity/`, {
+            const payload = {
                 event_type: eventType,
                 screenshot: screenshot,
                 webcam_screenshot: webcamScreenshot
-            });
+            };
+            if (durationSec !== null) {
+                payload.duration_seconds = durationSec;
+            }
+            await axios.post(`${API_BASE_URL}/ai-candidates/public/${token}/integrity/`, payload);
         } catch (err) {
             console.error("Failed to report violation:", err);
         }
@@ -295,17 +302,38 @@ const AiInterviewSession = () => {
         }
 
         if (eventType) {
-            // Throttling: 5-second cooldown per event type to prevent flooding the DB/UI
+            // CONSECUTIVE-OCCURRENCE GATE: Only capture a screenshot and report
+            // to the backend if this violation type has occurred 2+ times in a row.
+            // This prevents flooding the results with one-off false positives
+            // (e.g., momentary angle change triggering a single face_mismatch).
+            if (lastViolationTypeRef.current === eventType) {
+                consecutiveViolationCountRef.current[eventType] = (consecutiveViolationCountRef.current[eventType] || 1) + 1;
+            } else {
+                // Different event type — reset counter for the new type
+                consecutiveViolationCountRef.current[eventType] = 1;
+                lastViolationTypeRef.current = eventType;
+            }
+
+            // Only proceed with screenshot capture on 2nd+ consecutive occurrence
+            if (consecutiveViolationCountRef.current[eventType] < 2) {
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+                return;
+            }
+
+            // Throttling: 2-second cooldown per event type to prevent same-cycle duplicates
             const now = Date.now();
             const lastTime = lastCaptureTimeRef.current[eventType] || 0;
-            if (now - lastTime < 5000) return;
+            if (now - lastTime < 2000) {
+                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+                return;
+            }
             lastCaptureTimeRef.current[eventType] = now;
 
             let screenshot = null;
             let webcamScreenshot = null;
 
             // Capture Screen (if screen or environmental event)
-            if (['tab_switch', 'window_blur', 'screen_stop', 'face_mismatch', 'looking_away', 'multi_person', 'no_face'].includes(eventType) && screenStreamRef.current) {
+            if (['tab_switch', 'window_blur', 'screen_stop', 'face_mismatch', 'looking_away', 'multi_person', 'no_face', 'no_face_detection', 'multiface_detection'].includes(eventType) && screenStreamRef.current) {
                 try {
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
@@ -359,9 +387,18 @@ const AiInterviewSession = () => {
                 pauseHardware();
                 setAiStatus("Interview Paused (Desktop Switched)");
                 showAiEvent("TAB SWITCHED", true, 'tab_switch');
+                // Track when the tab switch started
+                violationStartTimeRef.current['tab_switch'] = Date.now();
                 reportViolation('tab_switch');
             } else {
-                // Tab became visible again — resume only if still in fullscreen + screen sharing
+                // Tab became visible again — calculate duration and report
+                const startTime = violationStartTimeRef.current['tab_switch'];
+                if (startTime) {
+                    const durationSec = Math.round((Date.now() - startTime) / 1000);
+                    // Send duration to backend for penalty calculation
+                    reportViolation('tab_switch_return', null, null, durationSec);
+                    delete violationStartTimeRef.current['tab_switch'];
+                }
                 if (isFullscreenRef.current && isScreenSharing) {
                     setIsPaused(false);
                     setAiStatus("Interview Resumed");
@@ -705,6 +742,13 @@ const AiInterviewSession = () => {
                 }
                 setDfHeadDir(dir);
             }
+        }
+
+        // Reset consecutive violation counter when a clean frame arrives (no alerts).
+        // This ensures the "2 consecutive" gate resets between isolated events.
+        if (!result.alerts || result.alerts.length === 0) {
+            lastViolationTypeRef.current = null;
+            // Don't reset counts — they persist per-type until a different type fires
         }
 
         // Alerts are always processed immediately (they are rare events, not per-frame)
@@ -1918,7 +1962,9 @@ const AiInterviewSession = () => {
                         ? new Date(candidate.server_time).getTime()
                         : Date.now();
                     const secondsElapsed = Math.floor((serverNow - startTime) / 1000);
-                    const INTERVIEW_DURATION_SECONDS = 60 * 60;
+                    // Dynamic duration from automation_settings, fallback to 60 min
+                    const durationMinutes = candidate.automation_settings?.interview_duration_minutes || 60;
+                    const INTERVIEW_DURATION_SECONDS = durationMinutes * 60;
                     const initialTimeLeft = Math.max(0, INTERVIEW_DURATION_SECONDS - secondsElapsed);
                     setTimeLeft(initialTimeLeft);
                     if (candidate.server_time) {

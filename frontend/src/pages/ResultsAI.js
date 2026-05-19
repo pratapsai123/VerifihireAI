@@ -401,8 +401,7 @@ const ResultsAI = () => {
         }
 
         try {
-            const sid = String(candidate.submission_id || '');
-            const realId = sid.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+            const realId = candidate.ai_candidate_pk || String(candidate.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
             const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
 
             // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
@@ -2271,7 +2270,7 @@ const ResultsAI = () => {
                                                                             })()}
                                                                             <button
                                                                                 onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
-                                                                                title="View Automation History"
+                                                                                title="View Interview Logs"
                                                                                 style={{
                                                                                     background: 'none', border: 'none', cursor: 'pointer',
                                                                                     color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
@@ -2477,7 +2476,7 @@ const ResultsAI = () => {
                         <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                                 <div>
-                                    <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Automation History</h3>
+                                    <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Interview Logs</h3>
                                     <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>

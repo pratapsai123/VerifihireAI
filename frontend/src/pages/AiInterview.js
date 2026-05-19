@@ -17,6 +17,7 @@ const AiInterview = () => {
     const [customRoleTitle, setCustomRoleTitle] = useState('');
     const [experienceLevel, setExperienceLevel] = useState('');
     const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
+    const [interviewDuration, setInterviewDuration] = useState(60); // minutes
 
 
     // Job Roles State
@@ -154,6 +155,7 @@ const AiInterview = () => {
             formData.append('experience_level', experienceLevel);
         }
         formData.append('interview_pass_threshold', interviewPassThreshold);
+        formData.append('interview_duration_minutes', interviewDuration);
 
 
         try {
@@ -419,13 +421,15 @@ const AiInterview = () => {
                                                 min={new Date().toISOString().split('T')[0]}
                                                 value={fromDate}
                                                 onChange={(e) => setFromDate(e.target.value)}
-                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}
+                                                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
                                             />
                                             <input
                                                 type="time"
                                                 value={fromTime}
                                                 onChange={(e) => setFromTime(e.target.value)}
-                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}
+                                                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
                                             />
                                         </div>
                                     </div>
@@ -440,13 +444,15 @@ const AiInterview = () => {
                                                 min={new Date().toISOString().split('T')[0]}
                                                 value={untilDate}
                                                 onChange={(e) => setUntilDate(e.target.value)}
-                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}
+                                                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
                                             />
                                             <input
                                                 type="time"
                                                 value={untilTime}
                                                 onChange={(e) => setUntilTime(e.target.value)}
-                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem' }}
+                                                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
                                             />
                                         </div>
                                     </div>
@@ -482,6 +488,27 @@ const AiInterview = () => {
                                     </div>
                                     <p style={{ color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.75rem' }}>
                                         Candidates scoring below this in the AI interview will be automatically rejected.
+                                    </p>
+                                </div>
+
+                                <div className="input-group" style={{ marginTop: '1.5rem', marginBottom: 0 }}>
+                                    <label className="input-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span>Interview Duration</span>
+                                        <span style={{ color: '#6366F1', fontWeight: '700' }}>{interviewDuration} min</span>
+                                    </label>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.5rem' }}>
+                                        <input
+                                            type="range"
+                                            min="15"
+                                            max="120"
+                                            step="5"
+                                            value={interviewDuration}
+                                            onChange={(e) => setInterviewDuration(parseInt(e.target.value))}
+                                            style={{ flex: 1, accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
+                                        />
+                                    </div>
+                                    <p style={{ color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.75rem' }}>
+                                        Maximum time allowed for the candidate to complete the interview.
                                     </p>
                                 </div>
                             </div>

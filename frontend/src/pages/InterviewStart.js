@@ -296,8 +296,8 @@ const InterviewStart = () => {
             setFormError('Phone number is required');
             return;
         }
-        if (!/^[6-9]\d{9}$/.test(phone.trim())) {
-            setFormError('Enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.');
+        if (!/^\d{10}$/.test(phone.trim())) {
+            setFormError('Enter a valid 10-digit mobile number.');
             return;
         }
         if (!panNumber.trim()) {
@@ -665,35 +665,26 @@ const InterviewStart = () => {
                         inputMode="numeric"
                         value={phone}
                         onChange={(e) => {
-                            // Strip non-digits and enforce Indian mobile format:
-                            // first digit must be 6, 7, 8, or 9; total 10 digits.
                             let value = e.target.value.replace(/\D/g, '');
+                            // Silently enforce: first digit must be 6-9
                             if (value.length > 0 && !/^[6-9]/.test(value)) {
-                                // Drop any leading digit that isn't 6-9
                                 value = value.replace(/^[^6-9]+/, '');
                             }
                             if (value.length <= 10) setPhone(value);
                         }}
-                        placeholder="10-digit mobile (starts with 6/7/8/9)"
+                        placeholder="10-digit mobile number"
                         maxLength={10}
                         pattern="[6-9][0-9]{9}"
                         style={{
                             width: '100%', padding: '0.75rem 1rem',
-                            border: `1.5px solid ${phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#e2e8f0'}`,
+                            border: `1.5px solid ${phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}`,
                             borderRadius: '12px',
                             fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
                             boxSizing: 'border-box'
                         }}
                         onFocus={(e) => e.target.style.borderColor = '#667eea'}
-                        onBlur={(e) => e.target.style.borderColor = phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#e2e8f0'}
+                        onBlur={(e) => e.target.style.borderColor = phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}
                     />
-                    <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#a0aec0' }}>
-                        {phone && phone.length > 0 && !/^[6-9]/.test(phone)
-                            ? 'Phone number must start with 6, 7, 8, or 9.'
-                            : phone && phone.length > 0 && phone.length < 10
-                                ? `Enter ${10 - phone.length} more digit${10 - phone.length === 1 ? '' : 's'}.`
-                                : '10-digit Indian mobile starting with 6, 7, 8, or 9.'}
-                    </p>
                 </div>
 
                 {/* PAN Card Number */}
@@ -743,7 +734,7 @@ const InterviewStart = () => {
                             </span>
                         )}
                     </div>
-                    <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#a0aec0' }}>Format: 5 letters + 4 digits + 1 letter (e.g. ABCDE1234F)</p>
+                    <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#a0aec0' }}>e.g. ABCDE1234F</p>
                 </div>
 
                 {/* PAN Card Photo Upload */}

@@ -236,6 +236,7 @@ class BulkInviteView(APIView):
         experience_level = request.data.get('experience_level', '').strip() or None
 
         interview_pass_threshold = request.data.get('interview_pass_threshold', 50)
+        interview_duration_minutes = request.data.get('interview_duration_minutes', 60)
 
         try:
 
@@ -244,6 +245,11 @@ class BulkInviteView(APIView):
         except:
 
             interview_pass_threshold = 50
+
+        try:
+            interview_duration_minutes = int(interview_duration_minutes)
+        except:
+            interview_duration_minutes = 60
 
 
 
@@ -355,9 +361,9 @@ class BulkInviteView(APIView):
 
                     interview_pass_threshold=interview_pass_threshold,
 
+                    automation_settings={'interview_duration_minutes': interview_duration_minutes},
+
                 )
-
-
 
                 frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
 
@@ -1854,56 +1860,63 @@ class UpdateIntegrityView(APIView):
 
             
 
-            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            # Define duration-based penalty weights
+            # tab_switch and face_mismatch: penalty scales with duration
+            # multiple faces: flat 2% per occurrence
+            duration_seconds = request.data.get('duration_seconds', 0)
+            try:
+                duration_seconds = int(duration_seconds)
+            except (TypeError, ValueError):
+                duration_seconds = 0
 
+            def get_duration_penalty(dur):
+                """Duration-based penalty: <5s=1%, 5-10s=2%, 10-30s=3%, >30s=4%"""
+                if dur <= 5:
+                    return 1
+                elif dur <= 10:
+                    return 2
+                elif dur <= 30:
+                    return 3
+                else:
+                    return 4
+
+            # Calculate this event's penalty
+            if event_type == 'tab_switch_return':
+                # This is the "return" event with duration — apply duration-based penalty
+                event_penalty = get_duration_penalty(duration_seconds)
+            elif event_type in ['tab_switch', 'window_blur']:
+                # Initial tab switch event — minimal penalty (duration unknown yet)
+                event_penalty = 1
+            elif event_type == 'face_mismatch':
+                # Face mismatch — DeepFace fires every 30s, so each occurrence = 3%
+                event_penalty = 3
+            elif event_type in ['multiface_detection', 'phone_detection']:
+                # Flat 2% per occurrence
+                event_penalty = 2
+            elif event_type in ['no_face_detection', 'face_detection_lost']:
+                event_penalty = 2
+            else:
+                event_penalty = 1
+
+            # Accumulate penalty on the integrity object
+            if not hasattr(integrity, 'accumulated_penalty'):
+                # Calculate from existing data for backward compat
+                accumulated = (
+                    integrity.tab_switches * 1 +
+                    integrity.phone_detections * 2 +
+                    integrity.multiface_detections * 2 +
+                    integrity.no_face_detections * 1
+                )
+            else:
+                accumulated = 100 - integrity.integrity_score
+
+            # Grace Warning System: First 3 violations are free
             if len(integrity.warning_logs) < 3:
-
                 integrity.warning_logs.append(event_type)
+                event_penalty = 0  # Free pass
 
-            
-
-            # Define weights
-
-            weights = {
-
-                'tab_switch': 2,
-
-                'phone_detection': 2,
-
-                'multiface_detection': 2,
-
-                'no_face_detection': 2,
-
-                'face_detection_lost': 2
-
-            }
-
-
-
-            # Simple penalty system
-
-            total_raw_penalty = (
-
-                integrity.tab_switches * weights['tab_switch'] + 
-
-                integrity.phone_detections * weights['phone_detection'] + 
-
-                integrity.multiface_detections * weights['multiface_detection'] + 
-
-                integrity.no_face_detections * weights['no_face_detection']
-
-            )
-
-
-
-            # Subtract the "free" penalty from the first 3 warnings
-
-            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
-
-            
-
-            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
-
+            total_penalty = accumulated + event_penalty
+            integrity.integrity_score = max(0, 100 - total_penalty)
             integrity.save()
 
             
@@ -3016,7 +3029,8 @@ class TTSView(APIView):
 
 class CandidateTimelineView(APIView):
     """
-    Fetches the history (PipelineLog) for a specific candidate.
+    Fetches the interview activity logs for a specific candidate.
+    Only returns logs relevant to the CURRENT interview session (after link_opened_at).
     """
     from rest_framework.permissions import IsAuthenticated
     permission_classes = [IsAuthenticated]
@@ -3028,10 +3042,77 @@ class CandidateTimelineView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
                 return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
-            
-            logs = candidate.pipeline_logs.all().order_by('timestamp')
-            serializer = PipelineLogSerializer(logs, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+
+            logs = []
+
+            # Use link_opened_at as the session start boundary.
+            # Use completed_at as the session end boundary (if available).
+            # Only show logs from this interview session.
+            session_start = candidate.link_opened_at
+            session_end = candidate.completed_at
+
+            # 1. Key interview timestamps
+            if candidate.link_opened_at:
+                from django.utils import timezone as tz
+                local_opened = tz.localtime(candidate.link_opened_at)
+                logs.append({
+                    'id': 'ts_link_opened',
+                    'event_type': 'LINK_OPENED',
+                    'status': 'INFO',
+                    'phase': 'INTERVIEW',
+                    'batch_id': candidate.batch_id,
+                    'message': 'Candidate opened the interview link.',
+                    'details': {},
+                    'timestamp': candidate.link_opened_at.isoformat(),
+                    'timestamp_formatted': local_opened.strftime('%B %d, %Y at %I:%M %p'),
+                })
+            if candidate.completed_at:
+                local_completed = tz.localtime(candidate.completed_at)
+                logs.append({
+                    'id': 'ts_completed',
+                    'event_type': 'INTERVIEW_COMPLETED',
+                    'status': 'SUCCESS',
+                    'phase': 'INTERVIEW',
+                    'batch_id': candidate.batch_id,
+                    'message': f'Interview completed. Status: {candidate.status}. Score: {candidate.score}.',
+                    'details': {'status': candidate.status, 'score': candidate.score},
+                    'timestamp': candidate.completed_at.isoformat(),
+                    'timestamp_formatted': local_completed.strftime('%B %d, %Y at %I:%M %p'),
+                })
+
+            # 2. Integrity events — only from this session window
+            integrity_qs = candidate.integrity_logs.all().order_by('timestamp')
+            if session_start:
+                integrity_qs = integrity_qs.filter(timestamp__gte=session_start)
+            if session_end:
+                integrity_qs = integrity_qs.filter(timestamp__lte=session_end)
+            for ilog in integrity_qs:
+                local_ts = tz.localtime(ilog.timestamp) if ilog.timestamp else None
+                logs.append({
+                    'id': f'integrity_{ilog.id}',
+                    'event_type': ilog.event_type.upper(),
+                    'status': 'WARNING',
+                    'phase': 'INTEGRITY',
+                    'batch_id': candidate.batch_id,
+                    'message': f'Integrity event: {ilog.event_type.replace("_", " ").title()}',
+                    'details': {},
+                    'timestamp': ilog.timestamp.isoformat() if ilog.timestamp else None,
+                    'timestamp_formatted': local_ts.strftime('%B %d, %Y at %I:%M %p') if local_ts else '',
+                })
+
+            # 3. PipelineLog entries — only from this session window
+            pipeline_qs = candidate.pipeline_logs.all().order_by('timestamp')
+            if session_start:
+                pipeline_qs = pipeline_qs.filter(timestamp__gte=session_start)
+            if session_end:
+                pipeline_qs = pipeline_qs.filter(timestamp__lte=session_end)
+            serializer = PipelineLogSerializer(pipeline_qs, many=True)
+            logs.extend(serializer.data)
+
+            # Sort all logs by timestamp
+            logs.sort(key=lambda x: x.get('timestamp') or '')
+
+            return Response(logs, status=status.HTTP_200_OK)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
 
