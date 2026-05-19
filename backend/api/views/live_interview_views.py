@@ -328,6 +328,14 @@ def create_interview_invitations_and_send_email_view(request):
                         to=[interviewer_email],
                     )
                     msg_int.attach_alternative(int_html, "text/html")
+                    if invitation.resume:
+                        import os
+                        try:
+                            # Re-open or read from the start if read before
+                            invitation.resume.seek(0)
+                            msg_int.attach(os.path.basename(invitation.resume.name), invitation.resume.read())
+                        except Exception as e:
+                            print(f"DEBUG: Failed to attach resume: {e}")
                     msg_int.send(fail_silently=False)
 
                 invitation.status = 'sent'
@@ -1143,6 +1151,13 @@ def add_interview_participant_view(request):
                 to=[email],
             )
             msg.attach_alternative(html_content, "text/html")
+            if invitation.resume:
+                import os
+                try:
+                    invitation.resume.seek(0)
+                    msg.attach(os.path.basename(invitation.resume.name), invitation.resume.read())
+                except Exception as e:
+                    print(f"DEBUG: Failed to attach resume: {e}")
             msg.send(fail_silently=False)
             print(f"DEBUG: Email sent successfully to {email}")
         except Exception as mail_err:
@@ -1255,6 +1270,7 @@ def draft_interview_invitations_view(request, draft_id=None):
 
                 pan_number = (payload.get('pan_number') or payload.get('pan') or '').strip().upper() or None
                 phone = (payload.get('phone') or '').strip() or None
+                resume_file = payload.get('resume')
                 
                 # Time handling
                 start_time_raw = (payload.get('start_time') or '').strip() or None
@@ -1291,6 +1307,7 @@ def draft_interview_invitations_view(request, draft_id=None):
                     end_time=end_time,
                     time_zone=time_zone,
                     start_grace_minutes=max(0, start_grace_minutes),
+                    resume=resume_file,
                     status='draft',
                     # Note: InterviewInvitation has no company field directly;
                     # company isolation is via interview__company_id

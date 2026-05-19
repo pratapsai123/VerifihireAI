@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -1209,6 +1210,7 @@ class InterviewInvitation(models.Model):
     email = models.EmailField()
     pan_number = models.CharField(max_length=10, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
+    resume = models.FileField(upload_to='resumes/', blank=True, null=True)
 
     interviewer_name = models.CharField(max_length=255, blank=True, null=True)
     interviewer_email = models.EmailField(blank=True, null=True)
