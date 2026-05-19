@@ -63,6 +63,30 @@ const ResultsAI = () => {
         }
     };
 
+    const submitPhotoApproval = async () => {
+        if (!photoApprovalCandidate) return;
+        const pk = photoApprovalCandidate.ai_candidate_pk;
+        if (!pk) {
+            showToast('error', 'Missing candidate id; cannot approve photo.');
+            return;
+        }
+        setPhotoApprovalSubmitting(true);
+        try {
+            const resp = await axios.post(
+                `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`,
+                {},
+                { headers: { Authorization: `Bearer ${getToken()}` } }
+            );
+            showToast('success', resp.data?.message || 'Photo approved and updated.');
+            setPhotoApprovalCandidate(null);
+            fetchData();
+        } catch (err) {
+            showToast('error', err.response?.data?.error || 'Failed to approve photo.');
+        } finally {
+            setPhotoApprovalSubmitting(false);
+        }
+    };
+
     const [aiAssessments, setAiAssessments] = useState([]);
     const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
     const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail' | 'transcript'
@@ -74,6 +98,9 @@ const ResultsAI = () => {
     const [loadingTimeline, setLoadingTimeline] = useState(false);
     const [downloadingId, setDownloadingId] = useState(null);
     const [analyticsAnimateIn, setAnalyticsAnimateIn] = useState(false);
+    // Photo-approval workflow (per-candidate identity mismatch override)
+    const [photoApprovalCandidate, setPhotoApprovalCandidate] = useState(null);
+    const [photoApprovalSubmitting, setPhotoApprovalSubmitting] = useState(false);
 
     const showToast = (type, message) => {
         setToast({ type, message });
@@ -506,7 +533,12 @@ const ResultsAI = () => {
                         resume: null, assessment: null, interview: null,
                         batch_id: item.batch_id,
                         batch_name: item.batch_name,
-                        identity_mismatch_detected: !!item.identity_mismatch_detected
+                        identity_mismatch_detected: !!item.identity_mismatch_detected,
+                        photo_update_pending: !!item.photo_update_pending,
+                        ai_candidate_pk: item.ai_candidate_pk || null,
+                        pending_identity_photo_url: item.pending_identity_photo_url || null,
+                        original_identity_photo_url: item.original_identity_photo_url || null,
+                        master_photo_url: item.master_photo_url || null,
                     };
                 }
                 if (!candidateMap[email][type]) {
@@ -2099,10 +2131,25 @@ const ResultsAI = () => {
                                                                         <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
                                                                     </td>
                                                                     <td>
-                                                                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                                                                             {r.full_name || r.candidate?.name || 'Candidate'}
                                                                             {r.identity_mismatch_detected && (
                                                                                 <i className="fa-solid fa-triangle-exclamation" style={{ color: '#EE5D50' }} title="Identity mismatch detected during registration"></i>
+                                                                            )}
+                                                                            {r.photo_update_pending && r.ai_candidate_pk && (
+                                                                                <button
+                                                                                    onClick={(e) => { e.stopPropagation(); setPhotoApprovalCandidate(r); }}
+                                                                                    title="Review and approve the new identity photo"
+                                                                                    style={{
+                                                                                        padding: '0.2rem 0.55rem', borderRadius: '6px', border: '1px solid #f59e0b',
+                                                                                        background: '#FFFBEB', color: '#B45309',
+                                                                                        fontSize: '0.7rem', fontWeight: '700', cursor: 'pointer',
+                                                                                        display: 'inline-flex', alignItems: 'center', gap: '4px'
+                                                                                    }}
+                                                                                >
+                                                                                    <i className="fa-solid fa-user-check" />
+                                                                                    Update Photo
+                                                                                </button>
                                                                             )}
                                                                         </div>
                                                                         <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
@@ -2551,6 +2598,73 @@ const ResultsAI = () => {
                                     style={{ flex: 1, padding: '11px', background: qualSubmitting || !qualReason.trim() ? '#9ca3af' : (qualReasonPopup.status === 'selected' ? '#059669' : '#dc2626'), color: '#fff', border: 'none', borderRadius: '10px', cursor: qualSubmitting || !qualReason.trim() ? 'not-allowed' : 'pointer', fontWeight: '700' }}
                                 >
                                     {qualSubmitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+
+            {/* ── Photo Approval Modal (admin promotes pending identity photo) ── */}
+            {
+                photoApprovalCandidate && (
+                    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, backdropFilter: 'blur(6px)' }}>
+                        <div style={{ background: '#fff', borderRadius: '20px', padding: '32px', width: '100%', maxWidth: '720px', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <i className="fa-solid fa-id-badge" style={{ color: '#f59e0b' }} />
+                                    Identity Photo Update Required
+                                </h3>
+                                <button onClick={() => setPhotoApprovalCandidate(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                            </div>
+                            <p style={{ color: '#6b7280', fontSize: '0.88rem', marginBottom: '18px', lineHeight: 1.5 }}>
+                                <strong style={{ color: '#111827' }}>{photoApprovalCandidate.full_name || photoApprovalCandidate.candidate?.name || 'This candidate'}</strong>
+                                {' '}joined a session with a face that did not match the previously registered photo. The new photo is awaiting your approval. Approving will replace the master face used for proctoring on subsequent interviews.
+                            </p>
+                            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginBottom: '20px', flexWrap: 'wrap' }}>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div style={{ width: '180px', height: '180px', borderRadius: '14px', overflow: 'hidden', border: '2px solid #d1d5db', background: '#f3f4f6' }}>
+                                        {(photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url) ? (
+                                            <img src={photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url} alt="Currently registered" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        ) : (
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#9ca3af' }}>
+                                                <i className="fa-solid fa-user" style={{ fontSize: '3rem' }} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div style={{ marginTop: '8px', fontSize: '0.78rem', fontWeight: '700', color: '#374151' }}>Currently Registered</div>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.6rem', color: '#f59e0b', fontWeight: '900' }}>→</div>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div style={{ width: '180px', height: '180px', borderRadius: '14px', overflow: 'hidden', border: '2px dashed #f59e0b', background: '#fffbeb', position: 'relative' }}>
+                                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#f59e0b', color: 'white', fontSize: '0.65rem', padding: '3px', textAlign: 'center', fontWeight: '800', zIndex: 2 }}>
+                                            ⚠ AWAITING APPROVAL
+                                        </div>
+                                        {photoApprovalCandidate.pending_identity_photo_url ? (
+                                            <img src={photoApprovalCandidate.pending_identity_photo_url} alt="Pending" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        ) : (
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#9ca3af' }}>
+                                                <i className="fa-solid fa-camera" style={{ fontSize: '3rem' }} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div style={{ marginTop: '8px', fontSize: '0.78rem', fontWeight: '700', color: '#B45309' }}>New Photo (Pending)</div>
+                                </div>
+                            </div>
+                            <div style={{ background: '#fef3c7', borderRadius: '10px', padding: '12px 14px', marginBottom: '18px', border: '1px solid #fcd34d', fontSize: '0.82rem', color: '#78350f', lineHeight: 1.5 }}>
+                                <i className="fa-solid fa-circle-info" style={{ marginRight: '6px' }} />
+                                Approve only if the new photo clearly belongs to the same person. This action overwrites the registered face for this PAN and clears the mismatch flag.
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <button onClick={() => setPhotoApprovalCandidate(null)} style={{ flex: 1, padding: '12px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '700', color: '#374151' }}>
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={submitPhotoApproval}
+                                    disabled={photoApprovalSubmitting}
+                                    style={{ flex: 1, padding: '12px', background: photoApprovalSubmitting ? '#9ca3af' : '#059669', color: '#fff', border: 'none', borderRadius: '10px', cursor: photoApprovalSubmitting ? 'not-allowed' : 'pointer', fontWeight: '800' }}
+                                >
+                                    {photoApprovalSubmitting ? '⏳ Updating...' : '✅ Approve & Update'}
                                 </button>
                             </div>
                         </div>

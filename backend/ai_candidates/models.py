@@ -93,8 +93,11 @@ class Candidate(models.Model):
     
     # Identity Mismatch Tracking (Override Logic)
     identity_mismatch_detected = models.BooleanField(default=False, help_text="True if face mismatch was detected but candidate was allowed to override")
-    original_identity_photo = models.ImageField(upload_to='identity_overrides/', blank=True, null=True, help_text="Snapshot of the previously registered face for comparison")
+    registered_face_b64 = models.TextField(blank=True, null=True, help_text="Base64 JPEG of the face captured during THIS interview session")
+    master_face_b64 = models.TextField(blank=True, null=True, help_text="Base64 JPEG of the PAN's trusted master face (copied at registration time for report comparison)")
+    pending_face_b64 = models.TextField(blank=True, null=True, help_text="Base64 JPEG of new face awaiting admin approval when mismatch detected")
     identity_mismatch_details = models.JSONField(default=dict, blank=True, help_text="Details about the mismatch (timestamp, old public_token, etc.)")
+    photo_update_approved = models.BooleanField(default=False, help_text="True once admin approves the pending photo to become the active DeepFace face")
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"

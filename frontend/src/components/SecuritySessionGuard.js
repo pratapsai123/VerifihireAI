@@ -198,6 +198,16 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         precheckRecord?.type === sessionType &&
         sessionRecord?.session_id;
 
+      // ── DEV BYPASS ────────────────────────────────────────────────
+      // When REACT_APP_SKIP_PRECHECK=true, treat the entry gate as passed
+      // and skip the live security polling below. Re-enable by flipping
+      // the env var off.
+      if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
+        console.warn('[SecuritySessionGuard] Skipping precheck gate (TEMP BYPASS)');
+        setGateState('ready');
+        return;
+      }
+
       if (!isPrecheckValid) {
         setGateState('redirecting');
         navigate(buildPrecheckUrl(token, sessionType), { replace: true });
@@ -230,6 +240,15 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     // While the candidate is filling in CandidateDetails, we do NOT poll,
     // so a temporary network hiccup won't send them back to precheck.
     if (!examStarted) return;
+
+    // ── DEV BYPASS ────────────────────────────────────────────────
+    // When REACT_APP_SKIP_PRECHECK=true, do not run the post-start
+    // security polling either; otherwise it will redirect the user
+    // back to /precheck the moment the agent isn't found.
+    if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
+      console.warn('[SecuritySessionGuard] Skipping security polling (TEMP BYPASS)');
+      return;
+    }
 
     let active = true;
 

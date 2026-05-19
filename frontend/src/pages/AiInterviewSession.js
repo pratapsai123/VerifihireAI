@@ -728,12 +728,16 @@ const AiInterviewSession = () => {
 
     const startDeepfaceMonitoring = useCallback(async (candidateId) => {
         try {
-            const personId = String(candidateId || getDeepfacePersonId()).trim().toLowerCase();
-            console.log('🔍 [DeepFace] Starting proctoring session for candidate:', personId);
+            const basePersonId = String(candidateId || getDeepfacePersonId()).trim().toLowerCase();
+            // Live proctoring should verify against THIS interview's session anchor
+            // (<pan>/sessions/<token>/), not the PAN root. The session anchor is
+            // captured in the registration wizard above.
+            const sessionPersonId = `${basePersonId}/sessions/${String(token).trim().toLowerCase()}`;
+            console.log('🔍 [DeepFace] Starting proctoring session for:', sessionPersonId);
             console.log('🔍 [DeepFace] DEEPFACE_BASE_URL:', DEEPFACE_BASE_URL);
 
             const res = await axios.post(`${DEEPFACE_BASE_URL}/session/start`, {
-                person_id: personId
+                person_id: sessionPersonId
             });
 
             if (!res.data || !res.data.session_id) {
@@ -1887,9 +1891,22 @@ const AiInterviewSession = () => {
                 setCandidateData(candidate);
                 setCandidateName(candidate.full_name);
 
-                if (candidate.status === 'Completed') {
+                if (candidate.status === 'Completed' || candidate.status === 'Hired' || candidate.status === 'Rejected' || candidate.status === 'Interview Passed' || candidate.status === 'Interview Failed' || candidate.completed_at) {
                     setIsCompleted(true);
                     return;
+                }
+
+                // ── SKIP RE-REGISTRATION ON REFRESH ──────────────────────────────
+                // If this candidate already completed face registration earlier
+                // (face_embedding_hash is set), do NOT show the registration wizard
+                // again on refresh. Mark as already-registered so the UI jumps
+                // straight to the permissions/fullscreen overlay.
+                if (candidate.face_embedding_hash) {
+                    console.log('[Face] Candidate already registered, skipping face wizard.');
+                    setIsFaceRegistered(true);
+                    if (faceEmbeddingHashRef && 'current' in faceEmbeddingHashRef) {
+                        faceEmbeddingHashRef.current = candidate.face_embedding_hash;
+                    }
                 }
 
                 if (candidate.link_opened_at) {
@@ -1956,6 +1973,26 @@ const AiInterviewSession = () => {
 
         console.log("Basic permissions (Camera) granted.");
         setIsPermissionsGranted(true);
+
+        // If face was already registered earlier (we detected it on init), skip
+        // the registration wizard entirely. The user proceeds straight to the
+        // fullscreen / screen-share overlay → environment checks → interview.
+        // We re-check candidateData directly to avoid a stale-closure race when
+        // the button is clicked before the initial fetch resolves.
+        const alreadyRegistered = isFaceRegistered || !!candidateData?.face_embedding_hash;
+        if (alreadyRegistered) {
+            console.log('[Face] Skipping registration wizard (already registered).');
+            if (!isFaceRegistered) {
+                setIsFaceRegistered(true);
+                if (faceEmbeddingHashRef && 'current' in faceEmbeddingHashRef && candidateData?.face_embedding_hash) {
+                    faceEmbeddingHashRef.current = candidateData.face_embedding_hash;
+                }
+            }
+            setAiStatus('Resuming Session...');
+            setWizardStep(4); // Environment Checks
+            return;
+        }
+
         setAiStatus("Starting Registration...");
         setWizardStep(0);
         blinkCapturedRef.current = false;
@@ -2110,8 +2147,13 @@ const AiInterviewSession = () => {
                             eyeHistoryRef.current.shift();
                         }
 
-                        // Require a full, stable buffer of 15 frames before allowing blink detection
-                        if (eyeHistoryRef.current.length === 15) {
+                        // Require a full, stable buffer of 15 frames AND at least 3 seconds
+                        // since detection started (camera auto-exposure needs time to stabilize)
+                        const MIN_WARMUP_FRAMES = 45; // ~3 seconds at 15fps
+                        if (!eyeHistoryRef.current._totalFrames) eyeHistoryRef.current._totalFrames = 0;
+                        eyeHistoryRef.current._totalFrames++;
+
+                        if (eyeHistoryRef.current.length === 15 && eyeHistoryRef.current._totalFrames >= MIN_WARMUP_FRAMES) {
                             const recent = eyeHistoryRef.current;
                             const baseline = recent.slice(0, 5).reduce((a, b) => a + b, 0) / 5;
                             const current = recent.slice(-3).reduce((a, b) => a + b, 0) / 3;
@@ -2120,9 +2162,9 @@ const AiInterviewSession = () => {
                             const dropAmount = baseline - dipMin;
 
                             // Strict Blink Criteria to prevent false positives:
-                            // 1. Drop must be at least 10 absolute units or 12% (whichever is higher) to ignore camera noise
-                            // 2. Current must recover back to near baseline (at least 92%)
-                            if (dropAmount > Math.max(10, baseline * 0.12) && current > baseline * 0.92) {
+                            // 1. Drop must be at least 15 absolute units or 18% (whichever is higher) to ignore camera noise/auto-exposure
+                            // 2. Current must recover back to near baseline (at least 90%)
+                            if (dropAmount > Math.max(15, baseline * 0.18) && current > baseline * 0.90) {
                                 if (!blinkCapturedRef.current) {
                                     console.log('[Face Reg] Blink detected! Auto-capturing...');
                                     setBlinkDetected(true);
@@ -2228,14 +2270,26 @@ const AiInterviewSession = () => {
                 });
 
                 if (verifyRes.data?.verified) {
-                    console.log('[Face] PAN-recovery: face matches original holder. Identity confirmed.');
-                    // Re-register under current token to update embeddings
-                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
-                        person_id: personId,
-                        image_base64: b64,
-                        overwrite: true
-                    });
-                    embeddingHash = regRes.data?.embedding_hash;
+                    console.log('[Face] PAN-recovery: face matches original holder. Master DeepFace photo preserved.');
+                    // Do NOT overwrite the master face. The PAN root photo only
+                    // changes when an admin approves a new photo from the results
+                    // page. Compute / reuse a hash for backend bookkeeping.
+                    embeddingHash = verifyRes.data?.embedding_hash || null;
+                    if (!embeddingHash) {
+                        try {
+                            const buffer = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+                            const digest = await crypto.subtle.digest('SHA-256', buffer);
+                            embeddingHash = Array.from(new Uint8Array(digest))
+                                .map(byte => byte.toString(16).padStart(2, '0'))
+                                .join('');
+                        } catch (hashErr) {
+                            console.warn('[Face] Could not compute hash from image bytes:', hashErr.message);
+                        }
+                    }
+                    regRes = { data: { success: true, embedding_hash: embeddingHash } };
+
+                    // Backend will register the session-scoped anchor for live proctoring
+                    // when it receives the face_embedding_hash payload below.
                 } else {
                     const msg = verifyRes.data?.message || 'Face does not match the registered photo.';
                     console.error('[Face] PAN-recovery failed:', msg);
@@ -2254,26 +2308,89 @@ const AiInterviewSession = () => {
                 });
 
                 if (verifyRes.data?.verified) {
-                    console.log('[Face] Returning candidate verified. Same person.');
-                    // Re-register to update stored embeddings
-                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
-                        person_id: personId,
-                        image_base64: b64,
-                        overwrite: true
-                    });
-                    embeddingHash = regRes.data?.embedding_hash;
+                    console.log('[Face] Returning candidate verified. Same person. Master DeepFace photo preserved.');
+                    // Do NOT call register/overwrite here. The PAN root photo only
+                    // changes when an admin approves an updated photo from the
+                    // results page. We use the verify result's embedding hash (or
+                    // fall back to a SHA-256 of the captured JPEG) so the backend
+                    // still records this candidate's per-interview face hash.
+                    embeddingHash = verifyRes.data?.embedding_hash || null;
+                    if (!embeddingHash) {
+                        try {
+                            const buffer = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+                            const digest = await crypto.subtle.digest('SHA-256', buffer);
+                            embeddingHash = Array.from(new Uint8Array(digest))
+                                .map(byte => byte.toString(16).padStart(2, '0'))
+                                .join('');
+                        } catch (hashErr) {
+                            console.warn('[Face] Could not compute hash from image bytes:', hashErr.message);
+                        }
+                    }
+                    regRes = { data: { success: true, embedding_hash: embeddingHash } };
+
+                    // NOTE: The session-scoped DeepFace anchor (<pan>/sessions/<token>)
+                    // is registered server-side once the face_embedding_hash payload
+                    // reaches the backend. Doing it there avoids a double round-trip
+                    // and ensures we hold the same b64 bytes that landed on disk.
                 } else {
-                    // Face mismatch — allow candidate to continue but flag it for the report
+                    // Face mismatch — flag it, but DO NOT overwrite the master DeepFace
+                    // photo. The previous registered face stays so the next interview
+                    // continues to verify against the genuine registered person.
+                    // Live in-session proctoring still works because DeepFace keeps
+                    // matching against the same anchor (any frame from this candidate
+                    // will simply mismatch, which the proctoring layer handles as warnings).
                     const msg = verifyRes.data?.message || 'Face does not match your previously registered photo.';
-                    console.warn('[Face] Returning candidate face mismatch detected. Allowing with flag:', msg);
+                    console.warn('[Face] Returning candidate face mismatch. Flagging for admin approval; DeepFace anchor preserved:', msg);
                     faceMismatchOverride = true;
-                    // Re-register with the new face so proctoring can work during the session
-                    regRes = await axios.post(`${DEEPFACE_BASE_URL}/registration/register`, {
-                        person_id: personId,
-                        image_base64: b64,
-                        overwrite: true
-                    });
-                    embeddingHash = regRes.data?.embedding_hash;
+
+                    // Capture a snapshot of the current registered face for the report payload
+                    let originalFaceB64 = null;
+                    try {
+                        const origUrl = `${DEEPFACE_BASE_URL}/registration/registered/${personId}/photo`;
+                        console.log('[Face][Mismatch] Fetching current registered photo:', origUrl);
+                        const origFaceRes = await axios.get(origUrl, { responseType: 'blob' });
+                        const reader = new FileReader();
+                        originalFaceB64 = await new Promise((resolve, reject) => {
+                            reader.onloadend = () => {
+                                try { resolve(reader.result.split(',')[1]); } catch (e) { reject(e); }
+                            };
+                            reader.onerror = reject;
+                            reader.readAsDataURL(origFaceRes.data);
+                        });
+                        console.log('[Face][Mismatch] Captured registered photo, b64 length:', originalFaceB64?.length);
+                    } catch (origErr) {
+                        console.warn('[Face][Mismatch] Could not capture current registered photo:',
+                            origErr.response?.status, origErr.response?.data, origErr.message);
+                    }
+
+                    // We still need an embedding hash for downstream backend logic.
+                    // Use the verify result's hash if present; otherwise compute a
+                    // deterministic SHA-256 of the captured JPEG bytes. We deliberately
+                    // do NOT call DeepFace register here — that would either overwrite
+                    // the master face (bad) or pollute registered_faces/ with throwaway
+                    // <pan>_pending_<ts>/ folders (also bad).
+                    embeddingHash = verifyRes.data?.embedding_hash || null;
+                    if (!embeddingHash) {
+                        try {
+                            const buffer = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+                            const digest = await crypto.subtle.digest('SHA-256', buffer);
+                            embeddingHash = Array.from(new Uint8Array(digest))
+                                .map(byte => byte.toString(16).padStart(2, '0'))
+                                .join('');
+                            console.log('[Face][Mismatch] Computed pending hash from image bytes (SHA-256)');
+                        } catch (hashErr) {
+                            console.warn('[Face][Mismatch] Could not compute pending hash:', hashErr.message);
+                        }
+                    }
+                    regRes = { data: { success: true, embedding_hash: embeddingHash } };
+
+                    // Backend will register the session-scoped anchor for live proctoring
+                    // when it receives the face_embedding_hash payload below.
+
+                    // Store the captured registered photo to send to backend later
+                    if (originalFaceB64) {
+                        sessionStorage.setItem('original_face_b64', originalFaceB64);
+                    }
                 }
             }
             // CASE C: Brand new candidate
@@ -2285,6 +2402,9 @@ const AiInterviewSession = () => {
                     overwrite: true
                 });
                 embeddingHash = regRes.data?.embedding_hash;
+
+                // Backend will register the session-scoped anchor for live proctoring
+                // when it receives the face_embedding_hash payload below.
             }
 
             // Validate registration result (faceMismatchOverride also counts as success)
@@ -2302,11 +2422,26 @@ const AiInterviewSession = () => {
                 console.log('[Face] Embedding hash captured:', embeddingHash.substring(0, 16) + '...');
 
                 const payload = { face_embedding_hash: embeddingHash };
+                // ALWAYS send the captured snapshot so backend can persist the original photo
+                // for the AI interview report on the very first registration.
+                payload.snapshot_b64 = b64;
                 if (verifyAgainstPersonId || verifyAgainstPersonPan) {
                     payload.face_verified = true;
                 }
                 if (faceMismatchOverride) {
                     payload.identity_mismatch_override = true;
+                    // Include the original face photo captured before overwrite (best-effort).
+                    // Backend will only use this if it doesn't already have a stored original.
+                    const origFace = sessionStorage.getItem('original_face_b64');
+                    if (origFace) {
+                        payload.original_face_photo_b64 = origFace;
+                        sessionStorage.removeItem('original_face_b64');
+                        console.log('[Face][Mismatch] Sending original_face_photo_b64 to backend, length:', origFace.length);
+                    } else {
+                        console.warn('[Face][Mismatch] No original_face_b64 in sessionStorage to send');
+                    }
+                    // Include the new (current) face photo for the report
+                    payload.new_face_photo_b64 = b64;
                 }
                 if (pendingPan) {
                     payload.pan_number = pendingPan;
@@ -2350,7 +2485,26 @@ const AiInterviewSession = () => {
         setRegInstruction('Position your face inside the oval');
         blinkCapturedRef.current = false;
         eyeHistoryRef.current = [];
-        startRegDetection();
+        eyeHistoryRef.current._totalFrames = 0; // Reset warmup counter
+
+        // Re-enable camera tracks (may have been disabled by privacy hammer during alert)
+        if (streamRef.current) {
+            streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
+        }
+
+        // Re-attach and restart camera for the registration video element
+        const restoreCamera = async () => {
+            if (!streamRef.current || streamRef.current.getVideoTracks().every(t => t.readyState === 'ended')) {
+                // Stream is dead — get a new one
+                await startCamera();
+            }
+            if (regVideoRef.current && streamRef.current) {
+                regVideoRef.current.srcObject = streamRef.current;
+                await regVideoRef.current.play().catch(e => console.warn("regVideo play error:", e));
+            }
+            setTimeout(() => startRegDetection(), 500);
+        };
+        restoreCamera();
     };
 
     const handleEnvironmentSetup = async () => {
@@ -2481,13 +2635,15 @@ const AiInterviewSession = () => {
 
             addMessage('ai', welcome);
             await speak(welcome);
-            // FIX: Add delay before starting mic to prevent speech feedback loop
+            // FIX: Give candidate extra time after the first question before starting mic.
+            // The welcome message is long and candidates need time to process before speaking.
+            // 3 seconds gives them breathing room (vs 800ms for subsequent questions).
             if (userInputMode === 'audio') {
                 setTimeout(() => {
                     if (!isCompletedRef.current && !isProcessingRef.current) {
                         startListening();
                     }
-                }, 800);
+                }, 3000);
             }
         }
     };
@@ -2831,7 +2987,7 @@ const AiInterviewSession = () => {
 
             {/* Welcome Screen - shown before camera */}
             {
-                !isPermissionsGranted && !isFaceRegistered && !isCompleted && (
+                !isPermissionsGranted && !isCompleted && (
                     <div style={{
                         position: 'fixed',
                         inset: 0,
@@ -2867,23 +3023,24 @@ const AiInterviewSession = () => {
                             </div>
                             <button
                                 onClick={handleStartInterview}
+                                disabled={!candidateData}
                                 className="start-session-btn"
                                 style={{
-                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                    background: !candidateData ? '#9ca3af' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                                     color: 'white',
                                     border: 'none',
                                     padding: '1rem 3rem',
                                     borderRadius: '50px',
                                     fontSize: '1.2rem',
                                     fontWeight: '700',
-                                    cursor: 'pointer',
+                                    cursor: !candidateData ? 'not-allowed' : 'pointer',
                                     transition: 'transform 0.2s',
                                     boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
                                 }}
                                 onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                                 onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                             >
-                                Start Interview
+                                {candidateData ? 'Start Interview' : 'Loading…'}
                             </button>
                         </div>
                     </div>

@@ -2178,12 +2178,20 @@ class CandidateRegistrationUpdateView(APIView):
 
     def post(self, request, public_token):
         logger.info(f"POST request to registration for token: {public_token}")
+        logger.info(f"[IdentityPhoto] Registration POST received. data_keys={list(request.data.keys())}")
         try:
             candidate = Candidate.objects.get(public_token=public_token)
 
             phone = request.data.get('phone')
             if phone:
-                candidate.phone = phone
+                phone_clean = re.sub(r'\D', '', str(phone))
+                if not re.match(r'^[6-9]\d{9}$', phone_clean):
+                    logger.warning(f"Registration failed: Invalid phone '{phone}' for candidate {public_token}")
+                    return Response(
+                        {'error': 'Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                candidate.phone = phone_clean
 
             pan_number = request.data.get('pan_number')
             if pan_number:
@@ -2195,11 +2203,15 @@ class CandidateRegistrationUpdateView(APIView):
 
                 # SECURITY CHECK 1: Prevent PAN changes after interview starts
                 if candidate.pan_locked:
-                    logger.warning(f"Registration failed: PAN locked for candidate {candidate.email}")
-                    return Response({
-                        'error': 'PAN number cannot be changed once the interview has started.',
-                        'pan_locked': True
-                    }, status=status.HTTP_400_BAD_REQUEST)
+                    if candidate.pan_number and candidate.pan_number != pan_number:
+                        logger.warning(f"Registration failed: PAN locked for candidate {candidate.email}")
+                        return Response({
+                            'error': 'PAN number cannot be changed once the interview has started.',
+                            'pan_locked': True
+                        }, status=status.HTTP_400_BAD_REQUEST)
+                    else:
+                        # Same PAN re-sent (e.g. face-hash payload includes it) — allow through
+                        pass
 
                 # SECURITY CHECK 2: Prevent one person from using multiple PANs
                 if candidate.pan_number and candidate.pan_number != pan_number:
@@ -2275,41 +2287,103 @@ class CandidateRegistrationUpdateView(APIView):
             face_embedding_hash = request.data.get('face_embedding_hash')
             face_verified = request.data.get('face_verified', False)
             identity_mismatch_override = request.data.get('identity_mismatch_override', False)
+
+            # ── PHOTO PERSISTENCE STRATEGY (AI Interview Identity Workflow) ─────────
+            # • original_identity_photo  → the LATEST verified registered face (always
+            #   updated when no mismatch). This is what the report shows.
+            # • pending_identity_photo   → the NEW face captured when a mismatch was
+            #   detected. Never auto-promoted; an admin must approve via the
+            #   results page to push this into DeepFace.
+            # ────────────────────────────────────────────────────────────────────────
+            if face_embedding_hash:
+                snapshot_b64_payload = (
+                    request.data.get('snapshot_b64')
+                    or request.data.get('new_face_photo_b64')
+                    or request.data.get('original_face_photo_b64')
+                )
+                logger.info(
+                    f"[IdentityPhoto] candidate={candidate.email} token={public_token} "
+                    f"snapshot_present={bool(snapshot_b64_payload)} "
+                    f"identity_mismatch_override={identity_mismatch_override}"
+                )
+
+                if snapshot_b64_payload:
+                    try:
+                        clean_b64 = snapshot_b64_payload
+                        if ',' in clean_b64 and clean_b64.startswith('data:'):
+                            clean_b64 = clean_b64.split(',', 1)[1]
+
+                        # Always store this session's captured face.
+                        candidate.registered_face_b64 = clean_b64
+
+                        if identity_mismatch_override:
+                            # Mismatch: also store as pending for admin review.
+                            candidate.pending_face_b64 = clean_b64
+                            candidate.photo_update_approved = False
+                            logger.info(f"[IdentityPhoto] Stored pending face b64 awaiting admin approval")
+                        else:
+                            logger.info(f"[IdentityPhoto] Updated registered_face_b64")
+
+                        # Populate master_face_b64: the PAN's trusted master photo.
+                        # On first-ever registration (CASE C), the master IS this photo.
+                        # On returning verified (CASE B verified), fetch the existing
+                        # master from DeepFace so the report can show it for comparison.
+                        if not candidate.master_face_b64:
+                            # First time for this candidate row — try to fetch from DeepFace.
+                            try:
+                                import requests as _requests
+                                pan_id = str(candidate.pan_number or candidate.public_token).strip().lower()
+                                df_photo_url = f"http://127.0.0.1:8500/api/v1/registration/registered/{pan_id}/photo"
+                                photo_resp = _requests.get(df_photo_url, timeout=10)
+                                if photo_resp.status_code == 200 and photo_resp.content:
+                                    import base64 as b64_mod
+                                    candidate.master_face_b64 = b64_mod.b64encode(photo_resp.content).decode('ascii')
+                                    logger.info(f"[IdentityPhoto] Fetched master face from DeepFace ({len(photo_resp.content)} bytes)")
+                                else:
+                                    # DeepFace doesn't have one yet (brand new PAN) — use this photo as master.
+                                    candidate.master_face_b64 = clean_b64
+                                    logger.info(f"[IdentityPhoto] No existing master in DeepFace; using current photo as master")
+                            except Exception as fetch_err:
+                                # Fallback: use current photo as master.
+                                candidate.master_face_b64 = clean_b64
+                                logger.warning(f"[IdentityPhoto] Could not fetch master from DeepFace: {fetch_err}; using current")
+
+                        # Register session-scoped anchor in DeepFace for live proctoring.
+                        try:
+                            from .utils import _register_face_with_deepface
+                            pan_id = str(candidate.pan_number or candidate.public_token).strip().lower()
+                            token_id = str(candidate.public_token).strip().lower()
+                            session_person_id = f"{pan_id}/sessions/{token_id}"
+                            logger.info(f"[IdentityPhoto] Registering DeepFace session anchor: {session_person_id}")
+                            df_result = _register_face_with_deepface(session_person_id, clean_b64)
+                            if df_result and df_result.get('success'):
+                                logger.info(f"[IdentityPhoto] Session anchor OK: {session_person_id}")
+                            else:
+                                logger.error(f"[IdentityPhoto] Session anchor FAILED: {df_result}")
+                        except Exception as df_err:
+                            logger.exception(f"[IdentityPhoto] DeepFace session anchor error: {df_err}")
+                    except Exception as e:
+                        logger.error(f"[IdentityPhoto] Failed to persist identity photo: {e}")
+
             if face_embedding_hash:
                 # If frontend detected a returning-candidate face mismatch but allowed them to continue
                 if identity_mismatch_override:
                     logger.warning(f"Identity mismatch override for candidate {candidate.email} (token: {public_token}). "
-                                   f"Face did not match previously registered photo but candidate was allowed to proceed.")
+                                   f"Face did not match previously registered photo. New photo stored as pending; "
+                                   f"awaiting admin approval before DeepFace is updated.")
                     candidate.identity_mismatch_detected = True
                     candidate.identity_mismatch_details = {
                         'mismatch_at': timezone.now().isoformat(),
                         'mismatch_type': 'returning_candidate_face_mismatch',
                         'original_person_id': str(candidate.pan_number or public_token),
-                        'note': 'Candidate face did not match their own previously registered photo. Allowed to continue with flag.'
+                        'note': 'Candidate face did not match their previously registered photo. New photo stored as pending; admin must approve before DeepFace is updated.'
                     }
-                    # Capture the original registered photo for evidence
-                    try:
-                        from pathlib import Path
-                        from django.core.files import File
-                        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                        person_id_key = str(candidate.pan_number or public_token).strip().lower()
-                        person_face_dir = deepface_data_dir / person_id_key
-                        target_file = None
-                        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-                            if (person_face_dir / name).exists():
-                                target_file = person_face_dir / name
-                                break
-                        if target_file:
-                            with open(target_file, 'rb') as f:
-                                candidate.original_identity_photo.save(
-                                    f'mismatch_{candidate.public_token}.jpg',
-                                    File(f),
-                                    save=False
-                                )
-                            logger.info(f"Captured original identity photo for mismatch evidence: {target_file}")
-                    except Exception as e:
-                        logger.error(f"Failed to capture original identity photo for returning candidate mismatch: {e}")
-
+                    # Persist the new face hash on THIS candidate (per-interview).
+                    # The DeepFace master anchor stays untouched (still the previously
+                    # registered face) — admin must approve to swap it. But on this
+                    # candidate row, the hash represents the face they actually
+                    # registered with for this interview, so a refresh skips the
+                    # wizard and resumes the session cleanly.
                     candidate.face_embedding_hash = face_embedding_hash
 
                 # If face was verified by DeepFace against original holder, accept the verification
@@ -2332,26 +2406,27 @@ class CandidateRegistrationUpdateView(APIView):
                                     'mismatch_type': 'face_mismatch_override'
                                 }
                                 
-                                # Capture the original photo
-                                try:
-                                    from pathlib import Path
-                                    from django.core.files import File
-                                    deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                                    person_face_dir = deepface_data_dir / str(existing_pan_holder.public_token)
-                                    target_file = None
-                                    for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-                                        if (person_face_dir / name).exists():
-                                            target_file = person_face_dir / name
-                                            break
-                                    if target_file:
-                                        with open(target_file, 'rb') as f:
-                                            candidate.original_identity_photo.save(
-                                                f'mismatch_{candidate.public_token}.jpg',
-                                                File(f),
-                                                save=False
-                                            )
-                                except Exception as e:
-                                    logger.error(f"Failed to capture original identity photo for override: {e}")
+                                # Capture the original photo (only if we don't already have one)
+                                if not (getattr(candidate, 'original_identity_photo', None) and candidate.original_identity_photo.name):
+                                    try:
+                                        from pathlib import Path
+                                        from django.core.files import File
+                                        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                                        person_face_dir = deepface_data_dir / str(existing_pan_holder.public_token)
+                                        target_file = None
+                                        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
+                                            if (person_face_dir / name).exists():
+                                                target_file = person_face_dir / name
+                                                break
+                                        if target_file:
+                                            with open(target_file, 'rb') as f:
+                                                candidate.original_identity_photo.save(
+                                                    f'mismatch_{candidate.public_token}.jpg',
+                                                    File(f),
+                                                    save=False
+                                                )
+                                    except Exception as e:
+                                        logger.error(f"Failed to capture original identity photo for override: {e}")
                                 
                                 # Update master registration
                                 try:
@@ -2804,7 +2879,6 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     )
                     # Refresh to get updated values
                     candidate.refresh_from_db()
-
                     # Store per-question summary for "Details" button
                     if not isinstance(candidate.interview_summary, list):
                         candidate.interview_summary = []
@@ -2830,8 +2904,9 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                             'weak_areas': []
                         }
                     
-                    # Extract facts based on turn category
-                    target_category_upper = target_category.upper() if target_category else ""
+                    # Extract facts based on turn category. target_category may be undefined
+                    # in some code paths, so guard with locals().
+                    target_category_upper = (locals().get('target_category') or "").upper()
                     
                     if target_category_upper == "INTRO" and answer:
                         # Extract key facts from intro (experience, company, role)
@@ -2868,7 +2943,16 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                     candidate.conversation_memory = memory
 
                     candidate.save(update_fields=['interview_summary', 'conversation_memory'])
-                 except: pass
+                    logger.info(
+                        f"[InterviewSummary] Saved turn {current_turn_number} for candidate {candidate.id}: "
+                        f"q='{current_question[:60]}...' score={q_score} "
+                        f"summary_len={len(candidate.interview_summary)}"
+                    )
+                 except Exception as save_err:
+                    logger.exception(
+                        f"[InterviewSummary] FAILED to save turn for candidate "
+                        f"{getattr(candidate, 'id', '?')}: {save_err}"
+                    )
 
             return Response(data, status=status.HTTP_200_OK)
 
@@ -3050,25 +3134,38 @@ class CandidateReportDownloadView(APIView):
             elements.append(Paragraph("Candidate Information", styles['Heading3']))
             
             # Identity Verification (Face Registration)
-            # First try deepface directory using public token (which is what the frontend uses for registration)
+            # Main candidate header photo: prefer the DB-stored registered_face_b64
+            # (always the latest verified face), then fall back to DeepFace, then to a
+            # webcam screenshot from integrity logs.
             person_img_path = None
-            deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
-            person_id = str(candidate.public_token).lower() if candidate.public_token else None
-            path_options = []
-            
-            if person_id:
-                path_options = [
-                    os.path.join(deepface_data_dir, person_id, "face_0.jpg"),
-                ]
-            
-            for p in path_options:
-                if os.path.exists(p):
-                    person_img_path = p
-                    break
+            fallback_img_data = None
+
+            # 1. DB-stored face (most reliable).
+            if getattr(candidate, 'registered_face_b64', None):
+                try:
+                    import base64 as b64_mod
+                    fallback_img_data = b64_mod.b64decode(candidate.registered_face_b64)
+                except Exception:
+                    pass
+
+            # 2. DeepFace on-disk face_0.jpg (PAN first, then token).
+            if not fallback_img_data:
+                deepface_data_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+                path_options = []
+                if candidate.pan_number:
+                    pan_id = str(candidate.pan_number).strip().lower()
+                    path_options.append(os.path.join(deepface_data_dir, pan_id, "face_0.jpg"))
+                if candidate.public_token:
+                    token_id = str(candidate.public_token).lower()
+                    path_options.append(os.path.join(deepface_data_dir, token_id, "face_0.jpg"))
+
+                for p in path_options:
+                    if os.path.exists(p):
+                        person_img_path = p
+                        break
 
             # Fallback: Use first webcam screenshot from integrity logs
-            fallback_img_data = None
-            if not person_img_path:
+            if not person_img_path and not fallback_img_data:
                 first_log = candidate.integrity_logs.filter(webcam_screenshot_base64__isnull=False).order_by('timestamp').first()
                 if first_log and first_log.webcam_screenshot_base64:
                     try:
@@ -3150,19 +3247,42 @@ class CandidateReportDownloadView(APIView):
                 elements.append(Spacer(1, 10))
                 
                 # Side-by-side comparison
-                # New Photo (the one from step above)
-                new_photo_elem = img_elem # Calculated in the photo section
-                
-                # Original Photo
-                old_photo_elem = None
-                if candidate.original_identity_photo:
+                # NEW FACE = the pending photo awaiting admin approval.
+                new_photo_elem = None
+                if getattr(candidate, 'pending_face_b64', None):
                     try:
-                        old_photo_path = candidate.original_identity_photo.path
-                        if os.path.exists(old_photo_path):
-                            old_photo_elem = RLImage(old_photo_path, width=2.0*inch, height=1.5*inch)
-                    except:
+                        new_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.pending_face_b64)), width=2.0*inch, height=1.5*inch)
+                    except Exception:
                         pass
-                
+
+                if not new_photo_elem:
+                    try:
+                        deepface_data_dir_report = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+                        new_face_candidates = []
+                        if candidate.pan_number:
+                            new_face_candidates.append(
+                                os.path.join(deepface_data_dir_report, str(candidate.pan_number).strip().lower(), "face_0.jpg")
+                            )
+                        if candidate.public_token:
+                            new_face_candidates.append(
+                                os.path.join(deepface_data_dir_report, str(candidate.public_token).lower(), "face_0.jpg")
+                            )
+                        new_face_path = next((p for p in new_face_candidates if os.path.exists(p)), None)
+                        if new_face_path:
+                            new_photo_elem = RLImage(new_face_path, width=2.0*inch, height=1.5*inch)
+                    except Exception:
+                        pass
+                if not new_photo_elem:
+                    new_photo_elem = Paragraph("<i>Current photo not available.</i>", styles['Normal'])
+
+                # ORIGINAL REGISTERED FACE = the PAN master (trusted face)
+                old_photo_elem = None
+                if getattr(candidate, 'master_face_b64', None):
+                    try:
+                        old_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.master_face_b64)), width=2.0*inch, height=1.5*inch)
+                    except Exception:
+                        pass
+
                 if not old_photo_elem:
                     old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
                 
@@ -3404,3 +3524,81 @@ class HealthCheckView(APIView):
             return Response(health, status=status.HTTP_200_OK)
         else:
             return Response(health, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
+class ApprovePendingIdentityPhotoView(APIView):
+    """
+    Admin-only: approve a candidate's pending identity photo.
+
+    When an AI-interview candidate joins with a face that doesn't match the
+    previously registered face, the new photo is stored as `pending_face_b64`
+    in the DB. An admin reviewing the result can approve the new photo here, which:
+      1. Pushes the pending photo to DeepFace as the new master face for this PAN.
+      2. Promotes pending_face_b64 → registered_face_b64 (the report photo).
+      3. Clears the mismatch flag so subsequent interviews verify against the new face.
+
+    POST /api/ai-candidates/<pk>/approve-photo/
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Authorization: must belong to the same company as the requesting user.
+        user_profile = getattr(request.user, 'profile', None)
+        if user_profile and user_profile.company and candidate.company_id != user_profile.company_id:
+            return Response({'error': 'Forbidden'}, status=status.HTTP_403_FORBIDDEN)
+
+        if not candidate.pending_face_b64:
+            return Response(
+                {'error': 'No pending photo to approve for this candidate.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # 1. Push the pending photo to DeepFace as the new master face for this PAN.
+        try:
+            person_id = (candidate.pan_number or str(candidate.public_token)).strip().lower()
+            from .utils import _register_face_with_deepface
+            df_result = _register_face_with_deepface(person_id, candidate.pending_face_b64)
+            logger.info(f"[ApprovePhoto] DeepFace re-register for {person_id}: {df_result}")
+        except Exception as e:
+            logger.exception(f"[ApprovePhoto] Failed to push approved photo to DeepFace: {e}")
+            return Response(
+                {'error': f'Could not update DeepFace: {e}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        # 2. Promote pending → registered (report photo) and update master.
+        candidate.registered_face_b64 = candidate.pending_face_b64
+        candidate.master_face_b64 = candidate.pending_face_b64  # New master for this PAN
+        candidate.pending_face_b64 = None
+        candidate.photo_update_approved = True
+        candidate.identity_mismatch_detected = False
+        details = candidate.identity_mismatch_details or {}
+        details['photo_approved_at'] = timezone.now().isoformat()
+        details['photo_approved_by'] = request.user.email if hasattr(request.user, 'email') else str(request.user)
+        candidate.identity_mismatch_details = details
+        candidate.save(update_fields=[
+            'registered_face_b64',
+            'master_face_b64',
+            'pending_face_b64',
+            'photo_update_approved',
+            'identity_mismatch_detected',
+            'identity_mismatch_details',
+        ])
+
+        logger.info(
+            f"[ApprovePhoto] Admin {request.user} approved new photo for candidate {candidate.id} "
+            f"(token: {candidate.public_token})"
+        )
+        return Response(
+            {
+                'success': True,
+                'message': 'Photo approved and updated successfully.',
+                'candidate_id': candidate.id,
+            },
+            status=status.HTTP_200_OK,
+        )

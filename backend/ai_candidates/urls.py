@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('validate-pan/', EnhancedPanValidationView.as_view(), name='validate-pan'),
     path('public/<str:public_token>/register/', CandidateRegistrationUpdateView.as_view(), name='candidate-registration-update'),
     path('public/<str:public_token>/log/', LogCandidateActivityView.as_view(), name='candidate-public-log'),
+    path('<int:pk>/approve-photo/', ApprovePendingIdentityPhotoView.as_view(), name='candidate-approve-photo'),
     path('health/', HealthCheckView.as_view(), name='health-check'),
 ]
 

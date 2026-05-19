@@ -2004,7 +2004,7 @@ def results_overview_view(request):
             scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids
         ))
         results.extend(get_ai_candidate_results(
-            scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids
+            scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids, request=request
         ))
 
         # Also include non-submitted invitations (Standard Assessments)

@@ -137,7 +137,11 @@ def _get_candidate_photo_url_for_candidate(request, candidate):
     Falls back to first non-empty webcam integrity screenshot if registration missing.
     """
     email = candidate.email.lower().strip() if candidate.email else None
-    
+
+    # Priority 0: DB-stored registered face (always the most recent verified photo).
+    if getattr(candidate, 'registered_face_b64', None):
+        return f"data:image/jpeg;base64,{candidate.registered_face_b64}"
+
     # Priority 1: Check unified IdentityLink
     if email:
         try:
@@ -310,7 +314,24 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'identity_mismatch_detected': s.identity_mismatch_detected,
                 'identity_mismatch_details': s.identity_mismatch_details,
                 'candidate_photo_url': _get_candidate_photo_url_for_candidate(request, s),
-                'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
+                'original_identity_photo_url': (
+                    f"data:image/jpeg;base64,{s.registered_face_b64}"
+                    if getattr(s, 'registered_face_b64', None)
+                    else None
+                ),
+                'master_photo_url': (
+                    f"data:image/jpeg;base64,{s.master_face_b64}"
+                    if getattr(s, 'master_face_b64', None)
+                    else None
+                ),
+                'pending_identity_photo_url': (
+                    f"data:image/jpeg;base64,{s.pending_face_b64}"
+                    if getattr(s, 'pending_face_b64', None)
+                    else None
+                ),
+                'photo_update_pending': bool(getattr(s, 'pending_face_b64', None)),
+                'photo_update_approved': getattr(s, 'photo_update_approved', False),
+                'ai_candidate_pk': s.id,
                 'intruder_photo_url': _get_candidate_intruder_photo_url(s),
             }
         )

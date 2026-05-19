@@ -146,14 +146,23 @@ def register_face(
             }
 
         # Wipe existing face embeddings ONLY if overwrite is explicitly requested.
+        # We delete top-level files (face_0.jpg/.pkl) and the model-specific
+        # subfolders (arcface/, sface/, etc.). The `sessions/` subfolder is
+        # preserved so per-interview snapshots survive re-registration and
+        # admin-approved master swaps.
         person_dir = _get_person_dir(person_id)
         if overwrite and person_dir.exists():
-            for item in person_dir.glob("**/*"):
-                if item.is_file():
-                    try:
+            for item in person_dir.iterdir():
+                if item.name == 'sessions':
+                    continue  # preserve the audit archive
+                try:
+                    if item.is_file():
                         item.unlink()
-                    except Exception as clean_err:
-                        logger.warning(f"Could not unlink {item}: {clean_err}")
+                    elif item.is_dir():
+                        import shutil
+                        shutil.rmtree(item)
+                except Exception as clean_err:
+                    logger.warning(f"Could not clean {item}: {clean_err}")
 
         # Re-create directory and start fresh
         person_dir = _get_person_dir(person_id)

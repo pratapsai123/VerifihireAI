@@ -43,6 +43,17 @@ export default function InviteRedirect({ type }) {
         return;
       }
 
+      // ── DEV BYPASS ────────────────────────────────────────────────
+      // When REACT_APP_SKIP_PRECHECK=true, jump straight to the target
+      // route. To re-enable the precheck flow, set the env var to false
+      // (or remove this block entirely).
+      if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
+        const builder = TARGET_ROUTE_MAP[type] || TARGET_ROUTE_MAP.assessment;
+        console.warn('[InviteRedirect] Skipping precheck (TEMP BYPASS)');
+        navigate(appendParams(builder(token)), { replace: true });
+        return;
+      }
+
       let redirectUrl = `/precheck/${token}?type=${encodeURIComponent(type)}`;
       if (name) redirectUrl += `&name=${encodeURIComponent(name)}`;
       if (email) redirectUrl += `&email=${encodeURIComponent(email)}`;

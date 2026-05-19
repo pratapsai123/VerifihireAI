@@ -104,7 +104,17 @@ const InterviewStart = () => {
                 const response = await axios.get(`${API_BASE_URL}/ai-candidates/public/${token}/`);
                 const candidateData = response.data;
                 setCandidate(candidateData);
-                
+
+                // Short-circuit if the interview is already in a terminal state.
+                // This shows the "Already Completed" page immediately instead of
+                // dragging the candidate through the tech check + form first.
+                const terminalStatuses = ['Completed', 'Hired', 'Rejected', 'Interview Passed', 'Interview Failed'];
+                if (candidateData.completed_at || terminalStatuses.includes(candidateData.status)) {
+                    setError('You have already completed this interview session and cannot retake it.');
+                    setLoading(false);
+                    return;
+                }
+
                 // Check if candidate has already completed registration
                 if (candidateData.phone && candidateData.pan_number && candidateData.resume) {
                     setIsAlreadyRegistered(true);
@@ -286,6 +296,10 @@ const InterviewStart = () => {
             setFormError('Phone number is required');
             return;
         }
+        if (!/^[6-9]\d{9}$/.test(phone.trim())) {
+            setFormError('Enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.');
+            return;
+        }
         if (!panNumber.trim()) {
             setFormError('PAN card number is required');
             return;
@@ -370,6 +384,58 @@ const InterviewStart = () => {
             setIsStarting(false);
         }
     };
+
+    // Show the expired/completed page IMMEDIATELY when we know the link is dead.
+    // We do this BEFORE the tech check so a candidate doesn't waste time on
+    // network/mic/camera tests for a link that won't let them in anyway.
+    if (linkExpired) return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f4f6f8' }}>
+            <div style={{ textAlign: 'center', maxWidth: '420px', padding: '3rem 2.5rem', background: 'white', borderRadius: '24px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}>
+                <div style={{ width: '80px', height: '80px', background: '#FFF5F5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                    <i className="fa-solid fa-hourglass-end" style={{ fontSize: '2rem', color: '#E53E3E' }} />
+                </div>
+                <h2 style={{ color: '#2D3748', margin: '0 0 0.75rem', fontSize: '1.6rem', fontWeight: '800' }}>Interview Link Expired</h2>
+                <p style={{ color: '#718096', lineHeight: '1.7', margin: '0 0 1.5rem' }}>
+                    This interview link is no longer active. It may have expired or already been completed.
+                </p>
+                <p style={{ color: '#A0AEC0', fontSize: '0.85rem' }}>Please contact HR to receive a new interview link.</p>
+            </div>
+        </div>
+    );
+
+    if (error && !candidate) {
+        const isExpired = error.toLowerCase().includes('expired');
+        const isCompleted = error.toLowerCase().includes('completed');
+
+        // Friendly error UI is shared with the original `error && !candidate` block below;
+        // we keep it here so it short-circuits before the tech-check wizard.
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f4f6f8' }}>
+                <div style={{ textAlign: 'center', maxWidth: '420px', padding: '3rem 2.5rem', background: 'white', borderRadius: '24px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}>
+                    <div style={{ width: '80px', height: '80px', background: '#FFF5F5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                        <i className={`fa-solid ${isCompleted ? 'fa-circle-check' : 'fa-triangle-exclamation'}`} style={{ fontSize: '2rem', color: isCompleted ? '#22c55e' : '#E53E3E' }} />
+                    </div>
+                    <h2 style={{ color: '#2D3748', margin: '0 0 0.75rem', fontSize: '1.6rem', fontWeight: '800' }}>
+                        {isCompleted ? 'Interview Already Completed' : isExpired ? 'Interview Link Expired' : 'Cannot Open Interview'}
+                    </h2>
+                    <p style={{ color: '#718096', lineHeight: '1.7', margin: '0 0 1.5rem' }}>{error}</p>
+                    <p style={{ color: '#A0AEC0', fontSize: '0.85rem' }}>Please contact HR if you believe this is a mistake.</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Wait for the candidate fetch to resolve before deciding what to render.
+    // This lets us short-circuit to "Expired" / "Already Completed" without
+    // dragging the candidate through the tech-check wizard first.
+    if (loading) return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
+            <div style={{ textAlign: 'center' }}>
+                <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#667eea', marginBottom: '1rem' }}></i>
+                <p style={{ color: '#4A5568' }}>Loading your interview...</p>
+            </div>
+        </div>
+    );
 
     if (!techCheckPassed) {
         return <TechCheckWizard onComplete={() => setTechCheckPassed(true)} />;
@@ -596,21 +662,38 @@ const InterviewStart = () => {
                     </label>
                     <input
                         type="tel"
+                        inputMode="numeric"
                         value={phone}
                         onChange={(e) => {
-                            const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                            // Strip non-digits and enforce Indian mobile format:
+                            // first digit must be 6, 7, 8, or 9; total 10 digits.
+                            let value = e.target.value.replace(/\D/g, '');
+                            if (value.length > 0 && !/^[6-9]/.test(value)) {
+                                // Drop any leading digit that isn't 6-9
+                                value = value.replace(/^[^6-9]+/, '');
+                            }
                             if (value.length <= 10) setPhone(value);
                         }}
-                        placeholder="Enter your phone number"
+                        placeholder="10-digit mobile (starts with 6/7/8/9)"
                         maxLength={10}
+                        pattern="[6-9][0-9]{9}"
                         style={{
-                            width: '100%', padding: '0.75rem 1rem', border: '1.5px solid #e2e8f0', borderRadius: '12px',
+                            width: '100%', padding: '0.75rem 1rem',
+                            border: `1.5px solid ${phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#e2e8f0'}`,
+                            borderRadius: '12px',
                             fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
                             boxSizing: 'border-box'
                         }}
                         onFocus={(e) => e.target.style.borderColor = '#667eea'}
-                        onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                        onBlur={(e) => e.target.style.borderColor = phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#e2e8f0'}
                     />
+                    <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: phone && (phone.length !== 10 || !/^[6-9]/.test(phone)) ? '#ef4444' : '#a0aec0' }}>
+                        {phone && phone.length > 0 && !/^[6-9]/.test(phone)
+                            ? 'Phone number must start with 6, 7, 8, or 9.'
+                            : phone && phone.length > 0 && phone.length < 10
+                                ? `Enter ${10 - phone.length} more digit${10 - phone.length === 1 ? '' : 's'}.`
+                                : '10-digit Indian mobile starting with 6, 7, 8, or 9.'}
+                    </p>
                 </div>
 
                 {/* PAN Card Number */}
