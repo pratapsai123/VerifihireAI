@@ -1,5 +1,41 @@
 from .._imports import *
 import datetime
+from django.db.models import Q
+
+def is_interviewer_busy(email, start_time, end_time, exclude_invitation_ids=None):
+    if not start_time or not end_time or not email:
+        return False
+        
+    email = email.lower()
+    
+    # 1. Primary interviewer check
+    invitations_qs = InterviewInvitation.objects.filter(
+        interviewer_email__iexact=email,
+        is_deleted=False,
+        status__in=['draft', 'sent', 'accepted']
+    ).exclude(start_time__isnull=True).exclude(end_time__isnull=True)
+    
+    if exclude_invitation_ids:
+        invitations_qs = invitations_qs.exclude(id__in=exclude_invitation_ids)
+        
+    if invitations_qs.filter(start_time__lt=end_time, end_time__gt=start_time).exists():
+        return True
+        
+    # 2. Additional panelist check
+    participants_qs = InterviewParticipant.objects.filter(
+        email__iexact=email,
+        session__is_deleted=False,
+        session__status__in=['draft', 'sent', 'accepted']
+    ).exclude(session__start_time__isnull=True).exclude(session__end_time__isnull=True)
+    
+    if exclude_invitation_ids:
+        participants_qs = participants_qs.exclude(session_id__in=exclude_invitation_ids)
+        
+    if participants_qs.filter(session__start_time__lt=end_time, session__end_time__gt=start_time).exists():
+        return True
+        
+    return False
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -46,6 +82,22 @@ def create_interview_invitations_and_send_email_view(request):
         fail_count = 0
 
         drafts = InterviewInvitation.objects.filter(id__in=draft_ids, status='draft')
+
+        # Overlap check before proceeding
+        pending_bookings = []
+        for invitation in drafts:
+            final_start = parse_datetime(global_start_time_raw) if global_start_time_raw else invitation.start_time
+            final_end = parse_datetime(global_end_time_raw) if global_end_time_raw else invitation.end_time
+            i_email = invitation.interviewer_email
+            
+            if i_email and final_start and final_end:
+                overlap_in_batch = any(
+                    e == i_email.lower() and s < final_end and e_time > final_start
+                    for (e, s, e_time) in pending_bookings
+                )
+                if overlap_in_batch or is_interviewer_busy(i_email, final_start, final_end, exclude_invitation_ids=draft_ids):
+                    return Response({'error': f'Interviewer {i_email} is already assigned to another interview during this time.'}, status=status.HTTP_400_BAD_REQUEST)
+                pending_bookings.append((i_email.lower(), final_start, final_end))
 
         for invitation in drafts:
             # Associate the draft with this new interview
@@ -375,8 +427,15 @@ def interview_invitations_overview_view(request):
                     'interviewer_average_rating': f.interviewer_average_rating,
                     'candidate_feedback': f.candidate_feedback,
                     'candidate_rating': f.candidate_rating,
-                    'updated_at': f.updated_at.isoformat() if f.updated_at else None,
                 })
+                
+            participants_qs = inv.participants.all()
+            participants_list = [{
+                'email': p.email,
+                'name': p.name,
+                'role': p.role,
+                'token': str(p.token)
+            } for p in participants_qs]
                 
             results.append(
                 {
@@ -401,6 +460,7 @@ def interview_invitations_overview_view(request):
                         'description': inv.interview.description if inv.interview else None,
                     } if inv.interview_id else None,
                     'feedbacks': feedbacks_list,
+                    'participants': participants_list,
                     # Keep legacy 'feedback' field for backward compatibility (pick first one)
                     'feedback': feedbacks_list[0] if feedbacks_list else None
                 }
@@ -964,6 +1024,24 @@ def add_interview_participant_view(request):
             print(f"DEBUG: Session {session_id} not found")
             return Response({'error': 'Interview session not found.'}, status=status.HTTP_404_NOT_FOUND)
             
+        if role == 'interviewer':
+            if email.lower().endswith('@gmail.com'):
+                return Response({'error': 'Gmail addresses are not allowed for panel members.'}, status=status.HTTP_400_BAD_REQUEST)
+                
+            creator_email = None
+            if invitation.interview and invitation.interview.created_by and invitation.interview.created_by.email:
+                creator_email = invitation.interview.created_by.email
+            
+            if creator_email:
+                creator_domain = creator_email.split('@')[-1].lower()
+                panelist_domain = email.lower().split('@')[-1]
+                if panelist_domain != creator_domain:
+                    return Response({'error': f'Panel member email must end with @{creator_domain}.'}, status=status.HTTP_400_BAD_REQUEST)
+                    
+            if invitation.start_time and invitation.end_time:
+                if is_interviewer_busy(email, invitation.start_time, invitation.end_time):
+                    return Response({'error': f'Interviewer {email} is already assigned to another interview during this time.'}, status=status.HTTP_400_BAD_REQUEST)
+
         # Enforce maximum limit of 4 members in total (1 candidate + 1 primary interviewer + 2 additional panelists)
         if InterviewParticipant.objects.filter(session=invitation).count() >= 2:
             return Response({'error': 'Maximum limit of 4 members (1 candidate and 3 interviewers) reached for this interview.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -1156,12 +1234,25 @@ def draft_interview_invitations_view(request, draft_id=None):
             # Allow bulk insert or single insert
             candidates = data.get('candidates', [data]) if 'candidates' in data else [data]
             
+            pending_bookings = []
             created_drafts = []
             for payload in candidates:
                 name = (payload.get('name') or '').strip()
                 email = (payload.get('email') or '').strip().lower()
                 interviewer_name = (payload.get('interviewer_name') or '').strip()
                 interviewer_email = (payload.get('interviewer_email') or '').strip().lower()
+                
+                if interviewer_email:
+                    if interviewer_email.endswith('@gmail.com'):
+                        return Response({'error': 'Gmail addresses are not allowed for panel members.'}, status=status.HTTP_400_BAD_REQUEST)
+                    
+                    creator_email = user_profile.email if user_profile else None
+                    if creator_email:
+                        creator_domain = creator_email.split('@')[-1].lower()
+                        interviewer_domain = interviewer_email.split('@')[-1]
+                        if interviewer_domain != creator_domain:
+                            return Response({'error': f'Interviewer email must end with @{creator_domain}.'}, status=status.HTTP_400_BAD_REQUEST)
+
                 pan_number = (payload.get('pan_number') or payload.get('pan') or '').strip().upper() or None
                 phone = (payload.get('phone') or '').strip() or None
                 
@@ -1176,6 +1267,15 @@ def draft_interview_invitations_view(request, draft_id=None):
 
                 start_time = parse_datetime(start_time_raw) if start_time_raw else None
                 end_time = parse_datetime(end_time_raw) if end_time_raw else None
+
+                if interviewer_email and start_time and end_time:
+                    overlap_in_batch = any(
+                        e == interviewer_email and s < end_time and e_time > start_time 
+                        for (e, s, e_time) in pending_bookings
+                    )
+                    if overlap_in_batch or is_interviewer_busy(interviewer_email, start_time, end_time):
+                        return Response({'error': f'Interviewer {interviewer_email} is already assigned to another interview during this time.'}, status=status.HTTP_400_BAD_REQUEST)
+                    pending_bookings.append((interviewer_email, start_time, end_time))
 
                 if not name or not email:
                     continue  # Skip invalid

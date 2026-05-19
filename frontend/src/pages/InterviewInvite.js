@@ -199,6 +199,9 @@ export default function InterviewInvite() {
     const intN = interviewerName.trim(), intE = interviewerEmail.trim().toLowerCase();
     const p = pan.trim().toUpperCase(), ph = phone.trim();
     if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p) || (ph && !isValidPhone(ph))) return;
+    if (intE.endsWith('@gmail.com')) {
+      alert('Gmail addresses are not allowed for panel members.'); return;
+    }
     if (userDomain && !intE.endsWith(`@${userDomain}`)) {
       alert(`Interviewer email must belong to your company domain (@${userDomain}).`); return;
     }
@@ -616,6 +619,14 @@ export default function InterviewInvite() {
                 onClick={() => {
                   if (!panelistEmail || !isValidEmail(panelistEmail)) {
                     alert('Valid email is required to add a panelist.');
+                    return;
+                  }
+                  if (panelistEmail.toLowerCase().endsWith('@gmail.com')) {
+                    alert('Gmail addresses are not allowed for panel members.');
+                    return;
+                  }
+                  if (userDomain && !panelistEmail.toLowerCase().endsWith(`@${userDomain.toLowerCase()}`)) {
+                    alert(`Panelist email must belong to your company domain (@${userDomain}).`);
                     return;
                   }
                   if (currentPanelMembers.length >= 2) {
