@@ -2416,42 +2416,21 @@ class CandidateRegistrationUpdateView(APIView):
                                     'original_holder_name': existing_pan_holder.full_name,
                                     'mismatch_type': 'face_mismatch_override'
                                 }
-                                
-                                # Capture the original photo (only if we don't already have one)
-                                if not (getattr(candidate, 'original_identity_photo', None) and candidate.original_identity_photo.name):
-                                    try:
-                                        from pathlib import Path
-                                        from django.core.files import File
-                                        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                                        person_face_dir = deepface_data_dir / str(existing_pan_holder.public_token)
-                                        target_file = None
-                                        for name in ['face_0.jpg', 'registration_snapshot.jpg']:
-                                            if (person_face_dir / name).exists():
-                                                target_file = person_face_dir / name
-                                                break
-                                        if target_file:
-                                            with open(target_file, 'rb') as f:
-                                                candidate.original_identity_photo.save(
-                                                    f'mismatch_{candidate.public_token}.jpg',
-                                                    File(f),
-                                                    save=False
-                                                )
-                                    except Exception as e:
-                                        logger.error(f"Failed to capture original identity photo for override: {e}")
-                                
-                                # Update master registration
-                                try:
-                                    master_person_id = str(existing_pan_holder.public_token)
-                                    snapshot_b64 = request.data.get('snapshot')
-                                    if snapshot_b64:
-                                        from .utils import _register_face_with_deepface
-                                        _register_face_with_deepface(master_person_id, snapshot_b64)
-                                        existing_pan_holder.face_embedding_hash = face_embedding_hash
-                                        existing_pan_holder.save(update_fields=['face_embedding_hash'])
-                                except Exception as e:
-                                    logger.error(f"Failed to update master face registration during override: {e}")
 
-                                pass 
+                                # Store this session's photo as pending (for admin approval UI)
+                                if snapshot_b64_payload:
+                                    _clean = snapshot_b64_payload
+                                    if ',' in _clean and _clean.startswith('data:'):
+                                        _clean = _clean.split(',', 1)[1]
+                                    candidate.pending_face_b64 = _clean
+                                    candidate.photo_update_approved = False
+                                    logger.info(f"[IdentityPhoto] PAN-collision mismatch: stored pending_face_b64")
+
+                                # Copy the original holder's registered face as our master
+                                # so the report can show the comparison.
+                                if not candidate.master_face_b64 and getattr(existing_pan_holder, 'registered_face_b64', None):
+                                    candidate.master_face_b64 = existing_pan_holder.registered_face_b64
+
                             else:
                                 candidate.pan_verified = True
                                 candidate.identity_mismatch_detected = False

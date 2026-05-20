@@ -1021,7 +1021,7 @@ def generate_candidate_report(submission_id):
 
     answers = submission.answers or {}
 
-    objective_keys = [k for k in answers.keys() if not k.startswith('acq_')]
+    objective_keys = [k for k in answers.keys() if not k.startswith('acq_') and not k.startswith('_')]
 
     coding_keys = [k for k in answers.keys() if k.startswith('acq_')]
 
@@ -1832,17 +1832,11 @@ def generate_candidate_report(submission_id):
     
 
     # User Request: If score is 100%, show Qualified status regardless of malpractice hold
-
     if pct >= 100.0:
-
         status_style = styles['QualifiedBadge']
-
         status_text = 'Qualified'
-
     else:
-
         status_style = styles['QualifiedBadge'] if submission.is_qualified else styles['NotQualifiedBadge']
-
         status_text = 'Qualified' if submission.is_qualified else 'Not Qualified'
 
     
@@ -1933,6 +1927,9 @@ def generate_candidate_report(submission_id):
     if submission.result == 'terminated':
         final_result_text = 'TERMINATED'
         result_style = styles['NotQualifiedBadge']
+    elif submission.result and submission.result.lower() == 'hold':
+        final_result_text = 'HOLD'
+        result_style = styles['WarningBadge']
     elif pct >= 100.0:
         final_result_text = 'SELECTED'
         result_style = styles['QualifiedBadge']
@@ -1941,7 +1938,7 @@ def generate_candidate_report(submission_id):
         result_style = styles['NotQualifiedBadge']
     elif integrity_score < 70:
         final_result_text = 'HOLD'
-        result_style = styles['NotQualifiedBadge']
+        result_style = styles['WarningBadge']
 
 
 
