@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Download, Trash2, TableProperties, UserCheck, UserX, Loader2 } from 'lucide-react';
+import { Download, Trash2, TableProperties, UserCheck, UserX, Loader2, FileText } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -95,6 +95,7 @@ export default function Result() {
     const [reviewPopup, setReviewPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '' });
     const [downloadingIds, setDownloadingIds] = useState(new Set());
     const [qualReasonPopup, setQualReasonPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false });
+    const [selected, setSelected] = useState(new Set());
 
     // Derive user role from localStorage
     const currentUser = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
@@ -303,6 +304,55 @@ export default function Result() {
         setCurrentPage(1);
     }, [search, statusFilter, fromDate, toDate, segment, rowsPerPage]);
 
+    // Reset selection whenever search/filter conditions change
+    useEffect(() => {
+        setSelected(new Set());
+    }, [search, statusFilter, fromDate, toDate, segment]);
+
+    const allKeys = useMemo(() => {
+        return sortedResults.map(r => r.submission_id || `inv_${r.invitation_id}`);
+    }, [sortedResults]);
+
+    const allSelected = useMemo(() => {
+        return allKeys.length > 0 && allKeys.every(k => selected.has(k));
+    }, [allKeys, selected]);
+
+    const someSelected = useMemo(() => {
+        return allKeys.some(k => selected.has(k));
+    }, [allKeys, selected]);
+
+    const selectedCount = useMemo(() => {
+        return allKeys.filter(k => selected.has(k)).length;
+    }, [allKeys, selected]);
+
+    const toggleSelectAll = () => {
+        if (allSelected) {
+            setSelected(prev => {
+                const s = new Set(prev);
+                allKeys.forEach(k => s.delete(k));
+                return s;
+            });
+        } else {
+            setSelected(prev => {
+                const s = new Set(prev);
+                allKeys.forEach(k => s.add(k));
+                return s;
+            });
+        }
+    };
+
+    const toggleSelect = (key) => {
+        setSelected(prev => {
+            const s = new Set(prev);
+            if (s.has(key)) {
+                s.delete(key);
+            } else {
+                s.add(key);
+            }
+            return s;
+        });
+    };
+
     useEffect(() => {
         if (currentPage > totalPages) {
             setCurrentPage(totalPages);
@@ -390,18 +440,28 @@ export default function Result() {
     }, [isOverview, token, fromDate, toDate]);
 
     const downloadCSV = () => {
-        const data = filtered;
+        if (!someSelected) {
+            alert("Please select at least one candidate first.");
+            return;
+        }
+
+        const data = filtered.filter(r => selected.has(r.submission_id || `inv_${r.invitation_id}`));
+
         if (data.length === 0) {
             alert("No data to download.");
             return;
         }
 
-        const headers = ["name", "email", "pan_number", "phone"];
+        const headers = ["name", "email", "pan_number", "phone", "assessment", "final_score", "status", "submitted_at"];
         const rows = data.map(r => [
             r.candidate?.name || "",
             r.candidate?.email || "",
             r.candidate?.pan_number || "",
-            r.candidate?.phone || ""
+            r.candidate?.phone || "",
+            r.assessment?.display_name || r.assessment?.name || "",
+            r.percentage ? `${r.percentage}%` : "0%",
+            r.status || "",
+            r.submitted_at || r.created_at || ""
         ]);
 
         const csvContent = [
@@ -413,7 +473,7 @@ export default function Result() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.setAttribute("href", url);
-        link.setAttribute("download", "candidate_results.csv");
+        link.setAttribute("download", selected.size > 0 ? "selected_candidate_results.csv" : "candidate_results.csv");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -612,8 +672,31 @@ export default function Result() {
                             onChange={(e) => setToDate(e.target.value)}
                         />
                     </div>
-                    <button className="search" type="button" onClick={downloadCSV} title="Download CSV" style={{ display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap', flexShrink: 0, cursor: 'pointer', fontWeight: '700', color: '#64748b' }}>
-                        <Download size={14} /> .csv
+                    <button 
+                        className="search" 
+                        type="button" 
+                        onClick={downloadCSV} 
+                        disabled={!someSelected}
+                        title={someSelected ? "Export selected candidates as CSV" : "Select candidates using checkboxes to export as CSV"} 
+                        style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: '6px', 
+                            whiteSpace: 'nowrap', 
+                            flexShrink: 0, 
+                            cursor: someSelected ? 'pointer' : 'not-allowed', 
+                            fontWeight: '700', 
+                            color: someSelected ? '#059669' : '#9ca3af',
+                            background: someSelected ? '#ECFDF5' : '#f3f4f6',
+                            borderColor: someSelected ? '#059669' : '#e5e7eb',
+                            borderRadius: '6px',
+                            padding: '6px 12px',
+                            opacity: someSelected ? 1 : 0.65,
+                            transition: 'all 0.2s'
+                        }}
+                    >
+                        <Download size={14} color={someSelected ? '#059669' : '#9ca3af'} />
+                        {someSelected ? `Export Selected (${selectedCount})` : "Export CSV (0)"}
                     </button>
                 </div>
 
@@ -665,6 +748,9 @@ export default function Result() {
                             <table className="table">
                                 <thead>
                                     <tr>
+                                        <th style={{ width: '40px', textAlign: 'center' }}>
+                                            <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} style={{ cursor: 'pointer' }} />
+                                        </th>
                                         <th onClick={() => handleSort('candidate')} className="sortable-th">Candidate {sortMarker('candidate')}</th>
                                         <th onClick={() => handleSort('assessment')} className="sortable-th">Assessment {sortMarker('assessment')}</th>
                                         <th onClick={() => handleSort('sent')} className="sortable-th">Sent {sortMarker('sent')}</th>
@@ -680,8 +766,13 @@ export default function Result() {
                                 <tbody>
                                     {paginatedResults.map((r) => {
                                         const statusMeta = getStatusMeta(r.status, r);
+                                        const rowKey = r.submission_id || `inv_${r.invitation_id}`;
+                                        const isSelected = selected.has(rowKey);
                                         return (
-                                            <tr key={r.submission_id || `inv_${r.invitation_id}`}>
+                                            <tr key={rowKey} className={isSelected ? 'selected' : ''} style={isSelected ? { background: '#f0fdf4', transition: 'background-color 0.2s' } : { transition: 'background-color 0.2s' }}>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(rowKey)} style={{ cursor: 'pointer' }} />
+                                                </td>
                                                 <td>
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                                                         <div>
@@ -776,15 +867,15 @@ export default function Result() {
                                                         {r.submission_id ? (
                                                             <button
                                                                 className="btn-report-dl"
-                                                                title={r.status === 'pending' ? "Report unavailable while pending" : "Download Report"}
-                                                                disabled={r.status === 'pending' || downloadingIds.has(r.submission_id)}
+                                                                title={r.status === 'pending' ? "Report unavailable while pending" : "View Report"}
+                                                                disabled={r.status === 'pending'}
                                                                 style={{ 
-                                                                    opacity: (r.status === 'pending' || downloadingIds.has(r.submission_id)) ? 0.5 : 1,
-                                                                    cursor: (r.status === 'pending' || downloadingIds.has(r.submission_id)) ? 'not-allowed' : 'pointer',
+                                                                    opacity: r.status === 'pending' ? 0.5 : 1,
+                                                                    cursor: r.status === 'pending' ? 'not-allowed' : 'pointer',
                                                                     transition: 'transform 0.1s ease',
                                                                 }}
                                                                 onMouseDown={(e) => {
-                                                                    if (r.status !== 'pending' && !downloadingIds.has(r.submission_id)) {
+                                                                    if (r.status !== 'pending') {
                                                                         e.currentTarget.style.transform = 'scale(0.9)';
                                                                     }
                                                                 }}
@@ -795,15 +886,11 @@ export default function Result() {
                                                                     e.currentTarget.style.transform = 'scale(1)';
                                                                 }}
                                                                 onClick={() => {
-                                                                    if (r.status === 'pending' || downloadingIds.has(r.submission_id)) return;
-                                                                    handleDownloadReport(r.submission_id, r.candidate?.name);
+                                                                    if (r.status === 'pending') return;
+                                                                    navigate(`/results/${r.submission_id}/report-view`);
                                                                 }}
                                                             >
-                                                                {downloadingIds.has(r.submission_id) ? (
-                                                                    <Loader2 size={18} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
-                                                                ) : (
-                                                                    <Download size={18} />
-                                                                )}
+                                                                <FileText size={18} />
                                                             </button>
                                                         ) : (
                                                             <div style={{ width: '31px' }}></div>

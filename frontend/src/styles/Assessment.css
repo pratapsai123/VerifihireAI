@@ -43,7 +43,7 @@
   margin-bottom: 14px;
 }
 
-.search-input {
+.assessments-page .search-input {
   width: 100%;
   max-width: 520px;
   border: 1px solid #e2e8f0;
@@ -54,7 +54,7 @@
   font-size: 14px;
 }
 
-.search-input:focus {
+.assessments-page .search-input:focus {
   border-color: #93c5fd;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }

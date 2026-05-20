@@ -72,10 +72,11 @@ const ResultsAI = () => {
         }
         setPhotoApprovalSubmitting(true);
         try {
-            const isAssessment = photoApprovalCandidate.is_assessment || !photoApprovalCandidate.email_token;
-            const url = isAssessment
-                ? `${API_BASE_URL}/ai/submission/${pk}/approve-photo/`
-                : `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`;
+            // Determine correct endpoint based on candidate type
+            const isAiCandidate = !!photoApprovalCandidate.is_ai_candidate;
+            const url = isAiCandidate
+                ? `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`
+                : `${API_BASE_URL}/ai/submission/${pk}/approve-photo/`;
 
             const resp = await axios.post(
                 url,

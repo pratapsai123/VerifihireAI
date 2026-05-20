@@ -119,7 +119,9 @@ def register_face(
         # Assess face quality
         quality_score = _assess_face_quality(img)
 
-        if quality_score < 15.0:
+        # Skip quality gate for session-scoped anchors (already validated at PAN-root level)
+        is_session_anchor = '/sessions/' in person_id
+        if quality_score < 10.0 and not is_session_anchor:
             return {
                 "success": False,
                 "person_id": person_id,

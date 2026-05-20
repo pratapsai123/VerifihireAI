@@ -40,6 +40,7 @@ import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
 import Settings from './pages/Settings';
+import ReportPage from './pages/ReportPage';
 import BookInterview from './pages/BookInterview';
 import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -308,6 +309,7 @@ function AppContent() {
     location.pathname.startsWith('/ai-interview-session/') ||
     location.pathname.startsWith('/book-interview/') ||
     location.pathname.startsWith('/result/') ||
+    location.pathname.includes('/report-view') ||
     location.pathname.endsWith('/attempt');
 
   // Proactive Session Validation (Heartbeat)
@@ -407,6 +409,7 @@ function AppContent() {
             <Route path="/feedback-page" element={<FeedbackPage />} />
             <Route path="/feedback-details" element={<FeedbackDetails />} />
             <Route path="/results" element={<Result />} />
+            <Route path="/results/:submissionId/report-view" element={<ReportPage />} />
             <Route path="/setting" element={<Settings />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/manage-availability" element={<AvailabilityManagement />} />
