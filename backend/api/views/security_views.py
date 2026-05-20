@@ -325,8 +325,33 @@ def security_signatures_view(request):
 @permission_classes([AllowAny])
 @csrf_exempt
 def check_violation_status_view(request, token):
+    from api.views.candidate_assessment_views import (
+        TERMINAL_CLOSE_LIMIT,
+        _invitation_terminal_close_chances_left,
+    )
+
     is_violated = SecuritySession.token_has_permanent_revocation(token)
-    return Response({'is_violated': is_violated})
+    terminal_close_count = 0
+    chances_left = TERMINAL_CLOSE_LIMIT
+
+    try:
+        invitation = CandidateInvitation.objects.get(token=token, is_deleted=False)
+        terminal_close_count = int(invitation.terminal_close_count or 0)
+        chances_left = _invitation_terminal_close_chances_left(invitation)
+        submission = getattr(invitation, 'submission', None)
+        if submission and getattr(submission, 'result', None) == 'terminated':
+            is_violated = True
+        elif terminal_close_count >= TERMINAL_CLOSE_LIMIT:
+            is_violated = True
+    except CandidateInvitation.DoesNotExist:
+        pass
+
+    return Response({
+        'is_violated': is_violated,
+        'terminal_close_count': terminal_close_count,
+        'terminal_close_limit': TERMINAL_CLOSE_LIMIT,
+        'chances_left': chances_left,
+    })
 
 
 @api_view(['POST'])
@@ -355,5 +380,15 @@ def terminate_terminal_close_view(request):
         session.save(update_fields=['status', 'action', 'reason', 'is_active', 'updated_at'])
         _consume_agent_instance(session.agent_instance_id, session=session)
         print(f"[SECURITY_TERMINAL] Session {session.session_id} stopped after 3 terminal closes.")
+
+    if token:
+        try:
+            from api.views.candidate_assessment_views import TERMINAL_CLOSE_LIMIT
+
+            CandidateInvitation.objects.filter(token=token, is_deleted=False).update(
+                terminal_close_count=TERMINAL_CLOSE_LIMIT,
+            )
+        except Exception:
+            pass
 
     return Response({'terminated': True}, status=status.HTTP_200_OK)

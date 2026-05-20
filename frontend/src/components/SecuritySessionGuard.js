@@ -1,19 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor, triggerMonitorScan, terminateTerminalViolation } from '../security/securityApi';
+import { fetchAgentStatus, fetchSecuritySessionStatus, runLocalScan, startLocalMonitor, stopLocalMonitor, triggerMonitorScan, terminateTerminalViolation, recordTerminalCloseStrike } from '../security/securityApi';
 import { isValidPackagedAgent } from '../security/agentValidation';
-import { readPrecheckRecord, readSessionRecord, clearPrecheckRecord, markExamStarted, isExamStarted } from '../security/sessionStorage';
 import {
-  TERMINAL_CLOSE_LIMIT,
-  incrementTerminalCloseCount,
+  readPrecheckRecord,
+  readSessionRecord,
+  clearPrecheckRecord,
+  markExamStarted,
+  isExamStarted,
+  writeRemoteBlockRecord,
+} from '../security/sessionStorage';
+import {
   setTerminalCloseWarning,
-  clearTerminalCloseCount,
+  clearTerminalCloseWarning,
 } from '../security/terminalCloseStrikes';
 import { logCandidateActivity } from '../utils/activityLogger';
 import {
   finalizeTerminatedExam,
   logSessionTerminated,
-  logTerminalCloseStrike,
   TERMINATION_REASONS,
 } from '../utils/examTermination';
 import ConnectionLostOverlay from './ConnectionLostOverlay';
@@ -28,6 +32,14 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const navigate = useNavigate();
 
   // Helper to build precheck URL with preserved query params (name, email)
+  const sendBackToPrecheckForRemoteApps = (apps, processesByApp = {}) => {
+    const list = [...new Set((apps || []).filter(Boolean))];
+    writeRemoteBlockRecord(token, { apps: list, processesByApp });
+    clearPrecheckRecord(token);
+    setWarning(false);
+    navigate(buildPrecheckUrl(token, sessionType), { replace: true });
+  };
+
   const buildPrecheckUrl = (token, sessionType) => {
     const name = searchParams.get('name');
     const email = searchParams.get('email');
@@ -48,8 +60,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     warningRef.current = warning;
   }, [warning]);
 
-  // FIX 1: Track whether the candidate has completed the details form.
-  // We only start aggressive polling AFTER the exam begins, not during the form.
+  // Formal exam start (questions running). Remote-access polling runs from precheck onward.
   const [examStarted, setExamStarted] = useState(() => isExamStarted(token));
   const examStartedRef = useRef(examStarted);
   useEffect(() => {
@@ -58,13 +69,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
 
   // Nudge the local agent to scan frequently while the warning overlay is shown
   useEffect(() => {
-    if (!warning || !examStarted) return;
+    if (!warning) return;
     triggerMonitorScan().catch(() => {});
     const id = setInterval(() => {
       triggerMonitorScan().catch(() => {});
     }, 2500);
     return () => clearInterval(id);
-  }, [warning, examStarted]);
+  }, [warning]);
 
   // Sync isOnline with a ref for use in setInterval
   const isOnlineRef = useRef(isOnline);
@@ -132,12 +143,22 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     if (handlingTerminalCloseRef.current) return;
     handlingTerminalCloseRef.current = true;
 
-    const closeCount = incrementTerminalCloseCount(token);
-    const chancesLeft = Math.max(0, TERMINAL_CLOSE_LIMIT - closeCount);
+    let closeCount = 0;
+    let chancesLeft = 0;
+    let shouldTerminate = false;
 
-    await logTerminalCloseStrike(token, closeCount, chancesLeft);
+    try {
+      const strike = await recordTerminalCloseStrike(token);
+      closeCount = strike?.close_count ?? 0;
+      chancesLeft = strike?.chances_left ?? 0;
+      shouldTerminate = Boolean(strike?.should_terminate);
+    } catch (err) {
+      console.error('[SecuritySessionGuard] Failed to record terminal close strike:', err?.message);
+      handlingTerminalCloseRef.current = false;
+      return;
+    }
 
-    if (closeCount >= TERMINAL_CLOSE_LIMIT) {
+    if (shouldTerminate) {
       const terminalDetail = 'Secure Agent terminal was closed 3 times during the exam.';
       try {
         await terminateTerminalViolation({
@@ -162,7 +183,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }).catch(() => {});
       }
       clearPrecheckRecord(token);
-      clearTerminalCloseCount(token);
+      clearTerminalCloseWarning(token);
       window.onbeforeunload = null;
       window.location.href = '/session-terminated?reason=terminal';
       return;
@@ -226,14 +247,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       return;
     }
 
-    // FIX 1: Only run the entry-gate scan and start polling AFTER exam has started.
-    // While the candidate is filling in CandidateDetails, we do NOT poll,
-    // so a temporary network hiccup won't send them back to precheck.
-    if (!examStarted) return;
-
     let active = true;
 
-    // ── Entry gate scan (runs once when exam starts) ──────────────────────────
     const runEntryGateScan = async () => {
       try {
         const agentStatus = await fetchAgentStatus();
@@ -245,32 +260,24 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
         terminalAbsentRef.current = false;
 
-        // OPTIMIZATION: Check if we have a very recent precheck (e.g. within last 5 minutes)
-        // If the candidate just passed precheck, we don't need to run a full scan again
-        // immediately upon clicking 'Start'.
-        const lastPrecheck = readPrecheckRecord(token);
-        const PRECHECK_FRESHNESS_MS = 5 * 60 * 1000; // 5 minutes
-        const isFresh = lastPrecheck?.timestamp && (Date.now() - lastPrecheck.timestamp) < PRECHECK_FRESHNESS_MS;
-
-        if (isFresh && lastPrecheck?.passed) {
-          console.log('[SecuritySessionGuard] Recent precheck found, skipping redundant entry-gate scan.');
-        } else {
-          console.log('[SecuritySessionGuard] Running definitive entry-gate scan...');
-          const scanResult = await runLocalScan();
-          if (!active) return;
-          if (!scanResult?.safe) {
-            const allApps = scanResult?.blocked?.length > 0
-              ? [...new Set(scanResult.blocked)]
-              : (scanResult?.detections || []).map(d => d.app).filter(Boolean);
-            const remoteDetail = `Remote app detected after precheck. Apps: ${allApps.join(', ') || 'Unknown'}`;
-            await logSessionTerminated(token, TERMINATION_REASONS.REMOTE_APP_AFTER_PRECHECK, remoteDetail);
-            clearPrecheckRecord(token);
-            navigate(`/precheck/${token}?type=${encodeURIComponent(sessionType)}`, { replace: true });
+        triggerMonitorScan().catch(() => {});
+        const scanResult = await runLocalScan();
+        if (!active) return;
+        if (!scanResult?.safe) {
+          const allApps = scanResult?.blocked?.length > 0
+            ? [...new Set(scanResult.blocked)]
+            : [...new Set((scanResult?.detections || []).map((d) => d.app).filter(Boolean))];
+          if (!examStartedRef.current) {
+            sendBackToPrecheckForRemoteApps(allApps);
             return;
           }
+          const appLabel = allApps.join(', ') || 'Remote access tool';
+          const remoteDetail = `Remote app detected after precheck. Apps: ${appLabel}`;
+          await logSessionTerminated(token, TERMINATION_REASONS.REMOTE_APP_AFTER_PRECHECK, remoteDetail);
+          sendBackToPrecheckForRemoteApps(allApps);
+          return;
         }
 
-        // Restart monitor in case candidate navigated directly to URL
         try {
           await startLocalMonitor({
             session_id: sessionRecord.session_id,
@@ -279,7 +286,6 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           });
         } catch (_monitorErr) { /* non-fatal */ }
       } catch (_err) {
-        // If offline during entry-gate, don't redirect — just log and let overlay show
         if (!navigator.onLine) {
           console.warn('[SecuritySessionGuard] Entry-gate scan failed (offline). Will retry when online.');
           return;
@@ -346,6 +352,17 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
 
         if (status?.action === 'WARN') {
+          // 3-minute grace timer is mid-exam only — before exam, hard-block on precheck page
+          if (!examStartedRef.current) {
+            const apps = String(status.blocked_app || '')
+              .split(',')
+              .map((s) => s.trim())
+              .filter(Boolean);
+            sendBackToPrecheckForRemoteApps(
+              apps.length ? apps : ['Remote access tool']
+            );
+            return;
+          }
           setWarning(true);
           const start = new Date(status.violation_start_time).getTime();
           const now = Date.now();
@@ -431,7 +448,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, token, sessionType, examStarted, gateState]);
+  }, [navigate, token, sessionType, gateState]);
 
   if (gateState === 'pending' || gateState === 'redirecting') {
     return (
@@ -495,7 +512,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           <div style={{ maxWidth: 500 }}>
             <h2 style={{ color: '#fff', fontSize: '2rem', marginBottom: 12 }}>Security Warning</h2>
             <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.6 }}>
-              A forbidden remote access application (<span style={{ color: '#f87171', fontWeight: 600 }}>{blockedApp}</span>) has been detected on your system.
+              Unauthorized remote access software has been detected on your system. Close it immediately to continue your exam.
             </p>
           </div>
 

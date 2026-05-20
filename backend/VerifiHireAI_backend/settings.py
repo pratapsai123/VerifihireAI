@@ -324,9 +324,9 @@ SIMPLE_JWT = {
 SECURITY_SIGNATURE_RULES = [
     {
         "label": "AnyDesk",
-        "signatures": ["anydesk"],
-        "pathSignatures": ["anydesk.exe", "/anydesk", "com.philandro.anydesk"],
-        "serviceProcesses": ["ad_svc.exe", "anydesk service"],
+        "signatures": ["anydesk", "ad_svc", "ad.tray"],
+        "pathSignatures": ["anydesk.exe", "/anydesk", "com.philandro.anydesk", "philandro"],
+        "serviceProcesses": ["anydesk service"],
         "activeIndicators": {
             "listenPorts": [7070],
             "activeConnectionKeywords": ["anydesk"],
@@ -335,9 +335,9 @@ SECURITY_SIGNATURE_RULES = [
     },
     {
         "label": "TeamViewer",
-        "signatures": ["teamviewer"],
-        "pathSignatures": ["teamviewer.exe", "/teamviewer", "com.teamviewer"],
-        "serviceProcesses": ["teamviewer_service.exe", "tv_x64.exe"],
+        "signatures": ["teamviewer", "teamviewer_desktop", "teamviewer_host", "tv_w32"],
+        "pathSignatures": ["teamviewer.exe", "/teamviewer", "com.teamviewer", "teamviewerhost"],
+        "serviceProcesses": ["teamviewer_service.exe"],
         "activeIndicators": {
             "listenPorts": [5938],
             "activeConnectionKeywords": ["teamviewer"],
@@ -346,7 +346,7 @@ SECURITY_SIGNATURE_RULES = [
     },
     {
         "label": "UltraViewer",
-        "signatures": ["ultraviewer"],
+        "signatures": ["ultraviewer", "ultraviewer_desktop", "ultraviewer_service"],
         "pathSignatures": ["ultraviewer.exe", "/ultraviewer"],
         "serviceProcesses": [],
         "activeIndicators": {
@@ -364,6 +364,15 @@ SECURITY_SIGNATURE_RULES = [
             "listenPorts": [],
             "activeConnectionKeywords": ["remoting_host", "chromoting"],
             "windowTitles": ["chrome remote desktop"],
+        },
+    },
+    {
+        "label": "RustDesk",
+        "signatures": ["rustdesk"],
+        "pathSignatures": ["rustdesk.exe", "/rustdesk"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["rustdesk"],
         },
     },
 ]

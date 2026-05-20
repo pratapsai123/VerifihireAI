@@ -95,6 +95,10 @@ if ${delaySeconds} GTR 0 (
   timeout /t 2 /nobreak > nul
 )
 
+echo Stopping any other VerifiHire Secure Agent copies...
+taskkill /F /IM VerifiHireSecureAgent.exe /T >nul 2>&1
+timeout /t 2 /nobreak > nul
+
 :retry
 echo Attempting to remove Secure Agent...
 del /f /q "${exePath}"

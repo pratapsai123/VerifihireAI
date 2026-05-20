@@ -2,15 +2,17 @@
   {
     "label": "AnyDesk",
     "signatures": [
-      "anydesk"
+      "anydesk",
+      "ad_svc",
+      "ad.tray"
     ],
     "pathSignatures": [
       "anydesk.exe",
       "/anydesk",
-      "com.philandro.anydesk"
+      "com.philandro.anydesk",
+      "philandro"
     ],
     "serviceProcesses": [
-      "ad_svc.exe",
       "anydesk service"
     ],
     "activeIndicators": {
@@ -26,16 +28,19 @@
   {
     "label": "TeamViewer",
     "signatures": [
-      "teamviewer"
+      "teamviewer",
+      "teamviewer_desktop",
+      "teamviewer_host",
+      "tv_w32"
     ],
     "pathSignatures": [
       "teamviewer.exe",
       "/teamviewer",
-      "com.teamviewer"
+      "com.teamviewer",
+      "teamviewerhost"
     ],
     "serviceProcesses": [
-      "teamviewer_service.exe",
-      "tv_x64.exe"
+      "teamviewer_service.exe"
     ],
     "activeIndicators": {
       "listenPorts": [],
@@ -50,7 +55,9 @@
   {
     "label": "UltraViewer",
     "signatures": [
-      "ultraviewer"
+      "ultraviewer",
+      "ultraviewer_desktop",
+      "ultraviewer_service"
     ],
     "pathSignatures": [
       "ultraviewer.exe",
@@ -87,6 +94,22 @@
       ],
       "windowTitles": [
         "chrome remote desktop"
+      ]
+    }
+  },
+  {
+    "label": "RustDesk",
+    "signatures": [
+      "rustdesk"
+    ],
+    "pathSignatures": [
+      "rustdesk.exe",
+      "/rustdesk"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "rustdesk"
       ]
     }
   }

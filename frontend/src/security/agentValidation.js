@@ -1,5 +1,5 @@
 /** Minimum Secure Agent version candidates must run (packaged .exe). */
-export const MINIMUM_AGENT_VERSION = '2.1.2';
+export const MINIMUM_AGENT_VERSION = '2.1.3';
 
 export function compareVersions(a, b) {
   const pa = (a || '0.0.0').split('.').map(Number);

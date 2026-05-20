@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { detectBlocked, loadBundledRules } = require('./detector');
+const { detectBlocked, loadBundledRules, setRules } = require('./detector');
+const { getSecuritySignatures } = require('./apiClient');
 const { startMonitor, stopMonitor, getMonitorState, triggerScanNow } = require('./monitor');
 const { scanHardwareDevices, initBaseline, compareToBaseline } = require('./hardwareScanner');
 const { registerProtocol } = require('./protocolRegister');
@@ -60,12 +61,28 @@ app.get('/status', (_req, res) => {
   });
 });
 
-app.post('/scan', async (_req, res) => {
+app.post('/scan', async (req, res) => {
   try {
+    const apiBase = (req.body && req.body.backend_api_base) || process.env.SECURE_AGENT_API_BASE || '';
+    if (apiBase) {
+      try {
+        const data = await getSecuritySignatures(apiBase);
+        if (Array.isArray(data?.rules) && data.rules.length > 0) {
+          setRules(data.rules);
+        } else {
+          loadBundledRules();
+        }
+      } catch {
+        loadBundledRules();
+      }
+    } else {
+      loadBundledRules();
+    }
+
     const { scanProcesses, getWindowTitles } = require('./processScanner');
     const processes = await scanProcesses();
     const windowTitles = await getWindowTitles();
-    const result = await detectBlocked(processes, windowTitles);
+    const result = await detectBlocked(processes, windowTitles, { strict: true });
     return res.json(result);
   } catch (e) {
     return res.status(500).json({
@@ -184,10 +201,22 @@ process.on('uncaughtException', (err) => {
   process.stdin.on('data', () => process.exit(1));
 });
 
-const shutdown = () => {
+let shuttingDown = false;
+
+/** When the candidate closes the terminal window, still schedule .exe cleanup. */
+const shutdown = (scheduleDestruct = false) => {
+  if (shuttingDown) return;
+  shuttingDown = true;
   stopMonitor();
-  server.close(() => process.exit(0));
+  server.close(() => {
+    if (scheduleDestruct && process.pkg) {
+      console.log('[server] Terminal closing — scheduling Secure Agent removal...');
+      selfDestruct(5);
+      return;
+    }
+    process.exit(0);
+  });
 };
 
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
+process.on('SIGINT', () => shutdown(true));
+process.on('SIGTERM', () => shutdown(true));
