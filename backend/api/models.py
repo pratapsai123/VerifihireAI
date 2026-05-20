@@ -894,6 +894,10 @@ class CandidateInvitation(models.Model):
     last_error = models.TextField(blank=True, null=True)
 
     activity_logs = models.JSONField(default=list, blank=True, help_text="List of candidate activities (opened link, precheck passed, etc.)")
+    terminal_close_count = models.PositiveSmallIntegerField(
+        default=0,
+        help_text="Secure Agent terminal close strikes during this invitation (max 3 before termination).",
+    )
 
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

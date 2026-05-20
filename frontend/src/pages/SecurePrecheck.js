@@ -8,12 +8,21 @@ import {
   startLocalMonitor,
   checkViolationStatus,
   shutdownSecureAgent,
+  forceCleanupSecureAgent,
 } from '../security/securityApi';
-import { markPrecheckPassed, writeSessionRecord } from '../security/sessionStorage';
+import {
+  markPrecheckPassed,
+  writeSessionRecord,
+  clearPrecheckRecord,
+  readRemoteBlockRecord,
+  clearRemoteBlockRecord,
+} from '../security/sessionStorage';
 import {
   readTerminalCloseWarning,
   getTerminalCloseWarningMessage,
   TERMINAL_CLOSE_LIMIT,
+  setTerminalCloseWarning as cacheTerminalCloseWarning,
+  warningFromViolationStatus,
 } from '../security/terminalCloseStrikes';
 import {
   isValidPackagedAgent,
@@ -22,6 +31,24 @@ import {
 } from '../security/agentValidation';
 import { logCandidateActivity } from '../utils/activityLogger';
 import { checkInvitationPublicAccess, isInvitationAlreadySubmitted } from '../utils/invitationAccess';
+import '../styles/SecurePrecheck.css';
+
+const COPY = {
+  scanningRemote: 'Checking for unauthorized remote access software…',
+  scanningHardware: 'Checking connected devices…',
+  scanningAgent: 'Verifying Secure Agent…',
+  startingSession: 'Preparing your secure session…',
+  blockedTitle: 'Action required before you continue',
+  blockedBody: (n) =>
+    n > 1
+      ? `We detected ${n} prohibited programs that are not allowed during the exam. Close them completely, then scan again.`
+      : 'We detected a prohibited program that is not allowed during the exam. Close it completely, then scan again.',
+  blockedSteps: 'End any related background tasks in Task Manager if needed, then click Retry.',
+  blockedStatus: (n) =>
+    n > 1
+      ? `${n} unauthorized applications are still running.`
+      : 'An unauthorized application is still running.',
+};
 
 const TARGET_ROUTE_MAP = {
   assessment: (token) => `/take-assessment/${token}`,
@@ -31,6 +58,30 @@ const TARGET_ROUTE_MAP = {
 };
 
 const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
+
+/** Collect every blocked app label from a scan result (all tools, not just one). */
+function collectBlockedApps(scanResult) {
+  const labels = new Set();
+  for (const app of scanResult?.blocked || []) {
+    if (app) labels.add(app);
+  }
+  for (const d of scanResult?.detections || []) {
+    if (d?.app) labels.add(d.app);
+  }
+  return [...labels];
+}
+
+/** Group running process names under each blocked app label for display. */
+function groupProcessesByApp(scanResult) {
+  const map = {};
+  for (const d of scanResult?.detections || []) {
+    if (!d?.app) continue;
+    if (!map[d.app]) map[d.app] = new Set();
+    const proc = (d.processName || '').trim();
+    if (proc) map[d.app].add(proc);
+  }
+  return map;
+}
 
 /**
  * Tell the old agent to shut itself down so the new one can use port 5001.
@@ -51,6 +102,7 @@ export default function SecurePrecheck() {
   const [phase, setPhase] = useState('checking');
   const [statusMessage, setStatusMessage] = useState('Checking system...');
   const [detectedApps, setDetectedApps] = useState([]);
+  const [detectedProcessesByApp, setDetectedProcessesByApp] = useState({});
   const [detectedHardware, setDetectedHardware] = useState([]);
   const [error, setError] = useState('');
   const [agentVersion, setAgentVersion] = useState('');
@@ -60,9 +112,24 @@ export default function SecurePrecheck() {
   );
 
   useEffect(() => {
-    if (token) {
-      setTerminalCloseWarning(readTerminalCloseWarning(token));
+    if (!token) return;
+
+    const cached = readTerminalCloseWarning(token);
+    if (cached?.chancesLeft > 0) {
+      setTerminalCloseWarning(cached);
     }
+
+    checkViolationStatus(token)
+      .then((status) => {
+        const fromServer = warningFromViolationStatus(status);
+        if (fromServer) {
+          setTerminalCloseWarning(fromServer);
+          cacheTerminalCloseWarning(token, fromServer);
+        } else if (!cached) {
+          setTerminalCloseWarning(null);
+        }
+      })
+      .catch(() => {});
   }, [token]);
 
   const targetRoute = useMemo(() => {
@@ -79,12 +146,17 @@ export default function SecurePrecheck() {
     try {
       setPhase('checking');
       setStatusMessage('Verifying exam policy status...');
-      const { is_violated } = await checkViolationStatus(token);
-      if (is_violated) {
+      const violationStatus = await checkViolationStatus(token);
+      if (violationStatus?.is_violated) {
         setPhase('permanently_blocked');
         setStatusMessage('Access Denied');
         setError('You have violated our exam policy. Access to this exam has been permanently revoked.');
         return;
+      }
+      const serverWarning = warningFromViolationStatus(violationStatus);
+      if (serverWarning) {
+        setTerminalCloseWarning(serverWarning);
+        cacheTerminalCloseWarning(token, serverWarning);
       }
     } catch (err) {
       console.warn('Failed to check violation status:', err);
@@ -93,8 +165,10 @@ export default function SecurePrecheck() {
     let status = null;
     try {
       setError('');
+      setDetectedApps([]);
+      setDetectedProcessesByApp({});
       setPhase('checking');
-      setStatusMessage('Checking VerifiHire Secure Agent...');
+      setStatusMessage(COPY.scanningAgent);
       status = await fetchAgentStatus();
     } catch (_err) {
       setPhase('not_installed');
@@ -127,19 +201,25 @@ export default function SecurePrecheck() {
     }
 
     try {
-      setStatusMessage('Running security scan...');
-      const scanResult = await runLocalScan();
+      setStatusMessage(COPY.scanningRemote);
+      let scanResult = await runLocalScan();
+      if (scanResult?.safe) {
+        await new Promise((r) => setTimeout(r, 600));
+        scanResult = await runLocalScan();
+      }
       if (!scanResult?.safe) {
-        const allApps = scanResult?.blocked?.length > 0
-          ? scanResult.blocked
-          : (scanResult?.detections || []).map(d => d.app).filter(Boolean);
-        const uniqueApps = [...new Set(allApps)];
+        const uniqueApps = collectBlockedApps(scanResult);
         setPhase('blocked');
         setDetectedApps(uniqueApps);
-        setStatusMessage('Please close remote access applications to continue');
+        setDetectedProcessesByApp(groupProcessesByApp(scanResult));
+        setStatusMessage(COPY.blockedStatus(uniqueApps.length));
+        setError(COPY.blockedSteps);
         logCandidateActivity(token, 'Precheck Blocked', `Remote apps detected: ${uniqueApps.join(', ')}`);
+        clearRemoteBlockRecord(token);
         return;
       }
+      clearRemoteBlockRecord(token);
+      setDetectedProcessesByApp({});
     } catch (scanErr) {
       setPhase('error');
       setError(scanErr?.message || 'Failed to run security scan');
@@ -148,7 +228,7 @@ export default function SecurePrecheck() {
 
     // ── Step 2: Hardware scan (USB storage, extra monitors, cameras) ─────────
     try {
-      setStatusMessage('Scanning for external devices...');
+      setStatusMessage(COPY.scanningHardware);
       const hwResult = await runLocalHardwareScan();
       if (!hwResult?.safe) {
         const hwNames = hwResult?.blocked || [];
@@ -163,7 +243,7 @@ export default function SecurePrecheck() {
     }
 
     try {
-      setStatusMessage('Starting secure session...');
+      setStatusMessage(COPY.startingSession);
       const userId = token;
       const session = await startBackendSecuritySession({ 
         token, 
@@ -180,18 +260,21 @@ export default function SecurePrecheck() {
         started_at: new Date().toISOString(),
       });
       markPrecheckPassed(token, type);
+      clearRemoteBlockRecord(token);
       logCandidateActivity(token, 'Precheck Passed', 'Secure Agent verified and session started.');
 
       navigate(targetRoute, { replace: true });
     } catch (startErr) {
       if (startErr?.response?.data?.agent_expired) {
+        clearPrecheckRecord(token);
+        await forceCleanupSecureAgent();
         setPhase('agent_expired');
         setStatusMessage('Action Required: Download a Fresh Security Agent');
         setError(
-          startErr.response.data.error ||
-            'This security agent was already used. Download a new copy, run it, then click Retry.'
+          'This Secure Agent was already used for a previous attempt (for example after the exam was terminated). '
+          + 'Any old agent window must be closed and removed before a new download will work. '
+          + 'Use Task Manager to end every VerifiHireSecureAgent.exe, then download a new copy, run it once, and click Retry.'
         );
-        // Do not auto-close the agent — let the candidate read the message first
       } else if (startErr?.response?.data?.is_violated) {
         setPhase('permanently_blocked');
         setError(startErr.response.data.error || 'Access permanently revoked due to policy violation.');
@@ -210,11 +293,22 @@ export default function SecurePrecheck() {
     const run = async () => {
       setPhase('checking');
       setStatusMessage('Checking assessment status...');
+
       const access = await checkInvitationPublicAccess(token);
       if (cancelled) return;
 
       if (isInvitationAlreadySubmitted(access)) {
         navigate(targetRoute, { replace: true });
+        return;
+      }
+
+      const remoteBlock = readRemoteBlockRecord(token);
+      if (remoteBlock?.apps?.length) {
+        setPhase('blocked');
+        setDetectedApps([...new Set(remoteBlock.apps)]);
+        setDetectedProcessesByApp(remoteBlock.processesByApp || {});
+        setStatusMessage(COPY.blockedStatus(remoteBlock.apps.length));
+        setError(COPY.blockedSteps);
         return;
       }
 
@@ -243,17 +337,40 @@ export default function SecurePrecheck() {
               {phase === 'agent_expired' ? 'Security Agent Expired' : '⚠️ Update Required'}
             </p>
             <p style={{ color: phase === 'agent_expired' ? '#991b1b' : '#92400e', margin: 0, fontSize: '0.9rem' }}>
-              {phase === 'agent_expired' 
-                ? 'For security purposes, the Secure Agent is strictly single-use. Please download the latest version to proceed with your assessment.'
+              {phase === 'agent_expired'
+                ? 'Each exam attempt needs a brand-new Secure Agent. An old copy may still be running in the background and blocking the new one.'
                 : `Your current version is v${agentVersion}, but v${MINIMUM_AGENT_VERSION} or later is required.`}
             </p>
           </div>
+          {phase === 'agent_expired' ? (
+            <ol style={{ color: '#475569', fontSize: '0.88rem', lineHeight: 1.8, margin: '0 0 14px', paddingLeft: 20 }}>
+              <li>Open <strong>Task Manager</strong> and end every <strong>VerifiHireSecureAgent.exe</strong></li>
+              <li>Click <strong>Stop old Secure Agent</strong> below if an old window is still open</li>
+              <li>Download a <strong>new</strong> copy and run it once (do not reuse an old .exe)</li>
+              <li>Click <strong>Retry</strong></li>
+            </ol>
+          ) : null}
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            {phase === 'agent_expired' ? (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={async () => {
+                  await forceCleanupSecureAgent();
+                  setStatusMessage('Stopping old Secure Agent. Wait a few seconds, then download a fresh copy.');
+                }}
+              >
+                Stop old Secure Agent
+              </button>
+            ) : null}
             <button
               type="button"
               className="btn btn-secondary"
               onClick={async () => {
                 await shutdownOldAgent(0);
+                if (phase === 'agent_expired') {
+                  await forceCleanupSecureAgent();
+                }
                 window.open(WINDOWS_DOWNLOAD_URL, '_blank', 'noreferrer');
               }}
             >
@@ -262,7 +379,7 @@ export default function SecurePrecheck() {
           </div>
           <p style={{ color: '#64748b', fontSize: '0.85rem', marginTop: 10 }}>
             {phase === 'agent_expired'
-              ? 'Close any old agent windows, download a fresh copy, run it, then click Retry.'
+              ? 'Only one Secure Agent may run at a time. If you see already running, end all copies in Task Manager first.'
               : 'After downloading, close the old agent, run the new file, and click Retry.'}
           </p>
 
@@ -368,8 +485,8 @@ export default function SecurePrecheck() {
                   border: '1px solid #6ee7b7', borderRadius: 6,
                 }}>
                   <p style={{ color: '#065f46', margin: 0, fontSize: '0.85rem' }}>
-                    ✅ <strong>This is safe.</strong> The Secure Agent only scans for unauthorized remote desktop tools
-                    (like AnyDesk, TeamViewer) and external monitors during your exam. It does not access your files or personal data.
+                    ✅ <strong>This is safe.</strong> The Secure Agent only checks for unauthorized remote access software
+                    and unapproved external devices during your exam. It does not access your files or personal data.
                   </p>
                 </div>
               </div>
@@ -391,10 +508,17 @@ export default function SecurePrecheck() {
     return null;
   };
 
+  const remoteBlockCount = detectedApps.length;
+  const isScanning = phase === 'checking';
+  const showBlockedRemote = phase === 'blocked' && remoteBlockCount > 0;
+
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#f8fafc', padding: 16 }}>
-      <div style={{ width: '100%', maxWidth: 680, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: 24 }}>
-        <h2 style={{ marginTop: 0, color: '#0f172a' }}>Secure Precheck</h2>
+    <div className="secure-precheck-page">
+      <div className="secure-precheck-card">
+        <h2>Secure Precheck</h2>
+        <p className="secure-precheck-subtitle">
+          We verify your device meets exam security requirements before you begin.
+        </p>
         {terminalCloseWarning?.chancesLeft > 0 ? (
           <div
             style={{
@@ -426,29 +550,57 @@ export default function SecurePrecheck() {
             </p>
           </div>
         ) : null}
-        <p style={{ color: '#334155' }}>{statusMessage}</p>
-        {detectedApps.length > 0 ? (
-          <div style={{ marginTop: 8, marginBottom: 4 }}>
-            <p style={{ color: '#dc2626', fontWeight: 600, margin: '0 0 6px' }}>Detected remote apps — please close all:</p>
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              {detectedApps.map((app, i) => (
-                <li key={i} style={{ color: '#dc2626', fontWeight: 700, fontSize: '1rem' }}>{app}</li>
-              ))}
-            </ul>
+        {isScanning && statusMessage ? (
+          <div className="secure-precheck-status secure-precheck-status--scanning">
+            <div className="secure-precheck-status-icon">
+              <div className="secure-precheck-spinner" aria-hidden />
+            </div>
+            <p className="secure-precheck-status-text">{statusMessage}</p>
           </div>
         ) : null}
+
+        {showBlockedRemote ? (
+          <div className="secure-precheck-alert secure-precheck-alert--blocked">
+            <p className="secure-precheck-alert-title">{COPY.blockedTitle}</p>
+            <p className="secure-precheck-alert-body">{COPY.blockedBody(remoteBlockCount)}</p>
+            <div className="secure-precheck-count-badge" role="status">
+              <span aria-hidden>⚠</span>
+              {remoteBlockCount} prohibited {remoteBlockCount === 1 ? 'program' : 'programs'} detected
+            </div>
+            <ol className="secure-precheck-steps">
+              <li>Close the application completely (not minimized).</li>
+              <li>If it still appears in Task Manager, end the task there.</li>
+              <li>Click <strong>Retry</strong> to scan again.</li>
+            </ol>
+          </div>
+        ) : null}
+
+        {!isScanning && !showBlockedRemote && statusMessage ? (
+          <div className="secure-precheck-status">
+            <div className="secure-precheck-status-icon">ℹ️</div>
+            <p className="secure-precheck-status-text">{statusMessage}</p>
+          </div>
+        ) : null}
+
         {detectedHardware.length > 0 ? (
-          <div style={{ marginTop: 8, marginBottom: 4 }}>
-            <p style={{ color: '#b45309', fontWeight: 600, margin: '0 0 6px' }}>External devices detected — please disconnect:</p>
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              {detectedHardware.map((dev, i) => (
-                <li key={i} style={{ color: '#b45309', fontWeight: 700, fontSize: '1rem' }}>{dev}</li>
-              ))}
-            </ul>
+          <div className="secure-precheck-alert secure-precheck-alert--hardware">
+            <p className="secure-precheck-alert-title">External device detected</p>
+            <p className="secure-precheck-alert-body">
+              Please disconnect unapproved external devices before continuing.
+            </p>
+            <div className="secure-precheck-count-badge" style={{ borderColor: '#fde68a', color: '#b45309' }}>
+              {detectedHardware.length} device{detectedHardware.length === 1 ? '' : 's'} need attention
+            </div>
           </div>
         ) : null}
-        {error ? <p style={{ color: '#dc2626' }}>{error}</p> : null}
-        {renderAction()}
+
+        {error && !showBlockedRemote ? <p className="secure-precheck-error">{error}</p> : null}
+        {error && showBlockedRemote ? (
+          <p className="secure-precheck-error" style={{ background: 'transparent', padding: 0, marginTop: 0 }}>
+            {error}
+          </p>
+        ) : null}
+        <div className="secure-precheck-actions">{renderAction()}</div>
       </div>
     </div>
   );

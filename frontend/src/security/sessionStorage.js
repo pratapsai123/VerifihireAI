@@ -51,3 +51,26 @@ export const markExamStarted = (token) => {
 export const isExamStarted = (token) => {
   return sessionStorage.getItem(`vh_exam_active_${token}`) === 'true';
 };
+
+const remoteBlockKey = (token) => `vh_remote_block_${token}`;
+
+/** Stash detected remote apps when sending candidate back to precheck (no exam timer). */
+export const writeRemoteBlockRecord = (token, { apps = [], processesByApp = {} }) => {
+  sessionStorage.setItem(
+    remoteBlockKey(token),
+    JSON.stringify({ apps, processesByApp, at: Date.now() })
+  );
+};
+
+export const readRemoteBlockRecord = (token) => {
+  try {
+    const raw = sessionStorage.getItem(remoteBlockKey(token));
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+};
+
+export const clearRemoteBlockRecord = (token) => {
+  sessionStorage.removeItem(remoteBlockKey(token));
+};

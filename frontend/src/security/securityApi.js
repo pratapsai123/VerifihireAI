@@ -9,7 +9,11 @@ export const fetchAgentStatus = async () => {
 };
 
 export const runLocalScan = async () => {
-  const res = await axios.post(`${LOCAL_AGENT_BASE_URL}/scan`, {}, { timeout: 45000 });
+  const res = await axios.post(
+    `${LOCAL_AGENT_BASE_URL}/scan`,
+    { backend_api_base: API_BASE_URL },
+    { timeout: 45000 }
+  );
   return res.data;
 };
 
@@ -42,6 +46,26 @@ export const shutdownSecureAgent = async (delaySeconds = 0) => {
     { delay: delaySeconds },
     { timeout: 5000 }
   );
+};
+
+/**
+ * Stop the local agent and schedule .exe removal (used when an install is consumed/expired).
+ */
+export const forceCleanupSecureAgent = async () => {
+  try {
+    await axios.post(
+      `${LOCAL_AGENT_BASE_URL}/monitor/stop`,
+      { destruct_delay: 5 },
+      { timeout: 5000 }
+    );
+  } catch (_err) {
+    /* agent may already be stopped */
+  }
+  try {
+    await shutdownSecureAgent(5);
+  } catch (_err) {
+    /* nothing listening on 5001 */
+  }
 };
 
 /** Ask the local agent to run a process scan immediately (e.g. after closing a remote app). */
@@ -86,7 +110,7 @@ export const stopLocalMonitor = async ({
       {
         session_id,
         user_id,
-        destruct_delay: !shouldDestruct ? -1 : (immediate_shutdown ? 0 : destruct_delay),
+        destruct_delay: !shouldDestruct ? -1 : (immediate_shutdown ? 5 : destruct_delay),
       },
       { timeout: 5000 }
     );
@@ -110,6 +134,16 @@ export const fetchSecuritySessionStatus = async (sessionId) => {
 
 export const checkViolationStatus = async (token) => {
   const res = await axios.get(`${API_BASE_URL}/security-session/${token}/violation-status`, { timeout: 20000 });
+  return res.data;
+};
+
+/** Server-authoritative terminal close strike (CandidateInvitation only). */
+export const recordTerminalCloseStrike = async (token) => {
+  const res = await axios.post(
+    `${API_BASE_URL}/invitations/public/${token}/terminal-close-strike/`,
+    {},
+    { timeout: 15000 }
+  );
   return res.data;
 };
 

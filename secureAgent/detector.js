@@ -4,16 +4,10 @@ const path = require('path');
 const bundledPath = path.join(__dirname, 'blacklist.json');
 let runtimeRules = [];
 
-// For exam proctoring: ANY remote desktop tool found running in the user's
-// session (Session >= 1) is a policy violation — regardless of whether a
-// remote session is currently active. Candidates must close these apps before
-// starting an exam.
-
 function loadBundledRules() {
   try {
     const raw = fs.readFileSync(bundledPath, 'utf8');
     const parsed = JSON.parse(raw);
-    // Support both { rules: [...] } and plain array formats
     runtimeRules = Array.isArray(parsed) ? parsed : (parsed.rules || []);
   } catch {
     runtimeRules = [];
@@ -37,32 +31,40 @@ function containsAny(hay, signatures) {
   return (signatures || []).some((sig) => h.includes(norm(sig)));
 }
 
-/**
- * Check if a process is a known background service for a remote desktop app.
- * Service processes (like ad_svc.exe for AnyDesk) are always running even
- * when no remote session is active — they should NOT be flagged.
- */
 function isServiceProcess(processName, rule) {
   const nameLower = norm(processName);
   const serviceProcs = rule.serviceProcesses || [];
   return serviceProcs.some((sp) => nameLower.includes(norm(sp)));
 }
 
+function pushDetection(detections, checkedPids, rule, pid, fields) {
+  const key = `${rule.label}:${pid}`;
+  if (checkedPids.has(key)) return;
+  checkedPids.add(key);
+  detections.push({
+    app: rule.label,
+    processName: fields.processName || '',
+    processPath: fields.processPath || '',
+    commandLine: fields.commandLine || '',
+  });
+}
+
 /**
- * Detect blocked remote desktop applications.
- *
- * Policy (Exam Proctoring):
- *   - ANY remote access tool found running in the USER session (Session >= 1)
- *     is a POLICY VIOLATION — even if no active remote session is in progress.
- *     Candidates must close these apps before starting an exam.
- *   - Known background SERVICES (e.g. UltraViewer_Service.exe) in Session 0
- *     are ignored — they are system daemons, not active cheating tools.
- *   - Detection is resilient to renaming via process metadata (Description/Company)
- *     and window title matching.
+ * @param {object[]} processes
+ * @param {Map<number, {title: string}>} windowTitles
+ * @param {{ strict?: boolean }} options - strict=true for precheck: catch background/tray/session-0 UI processes
  */
-async function detectBlocked(processes, windowTitles = new Map()) {
+async function detectBlocked(processes, windowTitles = new Map(), options = {}) {
+  const strict = options.strict === true;
   const detections = [];
   const checkedPids = new Set();
+  const matchedLabels = new Set();
+
+  const titleSignaturesForRule = (rule) => [
+    rule.label,
+    ...(rule.signatures || []),
+    ...((rule.activeIndicators && rule.activeIndicators.windowTitles) || []),
+  ];
 
   for (const p of processes || []) {
     const name = p.processName || '';
@@ -74,53 +76,60 @@ async function detectBlocked(processes, windowTitles = new Map()) {
     const sessionId = p.sessionId;
 
     for (const rule of runtimeRules) {
-      // ── Step 1: Identify the process by any available signal ────────────────
       const hitName = containsAny(name, rule.signatures);
       const hitPath = containsAny(fullPath, rule.pathSignatures);
-      const hitCmd  = containsAny(cmd, [...(rule.signatures || []), ...(rule.pathSignatures || [])]);
-      // Metadata survives binary renaming (e.g. anydesk.exe → 123456.exe)
+      const hitCmd = containsAny(cmd, [
+        ...(rule.signatures || []),
+        ...(rule.pathSignatures || []),
+      ]);
       const hitDesc = containsAny(desc, [rule.label, ...(rule.signatures || [])]);
       const hitComp = containsAny(comp, [rule.label, ...(rule.signatures || [])]);
-      // Window titles are reliable even when the exe is renamed
       const windowInfo = windowTitles.get(pid);
       const hitWindow = windowInfo
-        ? containsAny(windowInfo.title, [rule.label, ...(rule.signatures || [])])
+        ? containsAny(windowInfo.title, titleSignaturesForRule(rule))
         : false;
 
       if (!(hitName || hitPath || hitCmd || hitDesc || hitComp || hitWindow)) {
-        continue; // process doesn't match this rule at all
-      }
-
-      // ── Step 2: Skip known background service processes ──────────────────────
-      // e.g. UltraViewer_Service.exe, teamviewer_service.exe — these are OS-level
-      // daemons that run even when the app is not being used.
-      if (isServiceProcess(name, rule)) {
         continue;
       }
 
-      // ── Step 3: Skip Session 0 system processes (no UI/window) ──────────────
-      // Session 0 is the Windows service session — processes there without a
-      // window are OS services, not user-facing applications.
-      if (sessionId === 0 && !hitWindow) {
+      // Precheck (strict): flag background/tray helpers — only skip OS daemons like teamviewer_service
+      if (!strict && isServiceProcess(name, rule)) {
+        continue;
+      }
+      if (strict && isServiceProcess(name, rule)) {
         continue;
       }
 
-      // ── Step 4: BLOCK — tool is running in user session ─────────────────────
-      // At this point the process is:
-      //   • Identified as a remote access tool (by name/path/metadata/window)
-      //   • NOT a whitelisted background service
-      //   • Running in the user session (Session >= 1) or has a visible window
-      // Policy: presence alone is a violation. Close the app or the exam stops.
-      const key = `${rule.label}:${pid}`;
-      if (checkedPids.has(key)) continue;
-      checkedPids.add(key);
+      if (!strict && sessionId === 0 && !hitWindow) {
+        continue;
+      }
+      if (strict && sessionId === 0 && !hitWindow && !hitName && !hitPath && !hitCmd) {
+        continue;
+      }
 
-      detections.push({
-        app: rule.label,
+      pushDetection(detections, checkedPids, rule, pid, {
         processName: name,
         processPath: fullPath,
         commandLine: cmd,
       });
+      matchedLabels.add(rule.label);
+    }
+  }
+
+  // Window title pass — catches Chrome TeamViewer extension and tray-only UIs
+  for (const [pid, windowInfo] of windowTitles) {
+    for (const rule of runtimeRules) {
+      if (matchedLabels.has(rule.label)) continue;
+      if (!containsAny(windowInfo.title, titleSignaturesForRule(rule))) continue;
+      const procName = windowInfo.processName || '';
+      if (isServiceProcess(procName, rule)) continue;
+      pushDetection(detections, checkedPids, rule, pid, {
+        processName: procName,
+        processPath: '',
+        commandLine: '',
+      });
+      matchedLabels.add(rule.label);
     }
   }
 

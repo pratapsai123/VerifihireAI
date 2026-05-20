@@ -1,6 +1,6 @@
 {
   "name": "verifihire-secure-agent",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "private": true,
   "main": "server.js",
   "bin": "server.js",

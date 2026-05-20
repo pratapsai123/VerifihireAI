@@ -2831,6 +2831,14 @@ def verify_pan_backend_view(request):
             'error': f'Failed to verify PAN: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+TERMINAL_CLOSE_LIMIT = 3
+
+
+def _invitation_terminal_close_chances_left(invitation):
+    count = int(getattr(invitation, 'terminal_close_count', 0) or 0)
+    return max(0, TERMINAL_CLOSE_LIMIT - count)
+
+
 def _append_invitation_activity_log(invitation, action, details='', **extra_fields):
     """Append a structured activity log entry with optional metadata."""
     log_entry = {
@@ -2859,6 +2867,66 @@ def invitation_activity_logs_view(request, invitation_id):
         return Response({'activity_logs': logs})
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def record_terminal_close_strike_view(request, token):
+    """
+    Atomically increment terminal-close strikes for this invitation (server authority).
+    """
+    try:
+        with transaction.atomic():
+            invitation = CandidateInvitation.objects.select_for_update().get(
+                token=token,
+                is_deleted=False,
+            )
+            previous = int(invitation.terminal_close_count or 0)
+            if previous < TERMINAL_CLOSE_LIMIT:
+                invitation.terminal_close_count = previous + 1
+                close_count = invitation.terminal_close_count
+            else:
+                close_count = previous
+
+            chances_left = _invitation_terminal_close_chances_left(invitation)
+            if close_count > previous:
+                if chances_left > 0:
+                    detail = (
+                        f'Secure Agent terminal closed ({close_count}/{TERMINAL_CLOSE_LIMIT}). '
+                        f'{chances_left} chance(s) remaining before permanent termination.'
+                    )
+                else:
+                    detail = (
+                        f'Secure Agent terminal closed ({close_count}/{TERMINAL_CLOSE_LIMIT}). '
+                        'Exam terminated.'
+                    )
+                log_entry = {
+                    'timestamp': timezone.now().isoformat(),
+                    'action': 'Terminal Closed',
+                    'details': detail,
+                    'category': 'security',
+                    'termination_reason': 'terminal_close',
+                }
+                logs = list(invitation.activity_logs) if isinstance(invitation.activity_logs, list) else []
+                logs.append(log_entry)
+                invitation.activity_logs = logs
+                invitation.save(update_fields=['terminal_close_count', 'activity_logs', 'updated_at'])
+                print(f"[CANDIDATE_ACTIVITY] {invitation.email} | Terminal Closed: {detail}")
+            else:
+                invitation.save(update_fields=['updated_at'])
+
+        should_terminate = close_count >= TERMINAL_CLOSE_LIMIT
+        return Response({
+            'close_count': close_count,
+            'chances_left': chances_left,
+            'limit': TERMINAL_CLOSE_LIMIT,
+            'should_terminate': should_terminate,
+        })
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @csrf_exempt

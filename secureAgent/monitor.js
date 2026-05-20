@@ -108,7 +108,7 @@ async function _doScan() {
     const { scanProcesses, getWindowTitles } = require('./processScanner');
     const processes = await scanProcesses();
     const windowTitles = await getWindowTitles();
-    const verdict = await detectBlocked(processes, windowTitles);
+    const verdict = await detectBlocked(processes, windowTitles, { strict: true });
     
     // Safety check: monitor might have been stopped while we were scanning
     if (!current) return;

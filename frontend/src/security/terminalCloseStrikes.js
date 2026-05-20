@@ -1,25 +1,8 @@
 export const TERMINAL_CLOSE_LIMIT = 3;
 
-const getTerminalCloseKey = (token) => `vh_terminal_close_${token}`;
 const getTerminalCloseWarningKey = (token) => `vh_terminal_close_warning_${token}`;
 
-export const incrementTerminalCloseCount = (token) => {
-  const key = getTerminalCloseKey(token);
-  const prev = parseInt(sessionStorage.getItem(key) || '0', 10);
-  const next = Math.min(prev + 1, TERMINAL_CLOSE_LIMIT);
-  sessionStorage.setItem(key, String(next));
-  return next;
-};
-
-export const getTerminalCloseCount = (token) => {
-  return parseInt(sessionStorage.getItem(getTerminalCloseKey(token)) || '0', 10);
-};
-
-export const clearTerminalCloseCount = (token) => {
-  sessionStorage.removeItem(getTerminalCloseKey(token));
-  sessionStorage.removeItem(getTerminalCloseWarningKey(token));
-};
-
+/** Cache warning for UX between precheck ↔ exam in the same tab (server is source of truth). */
 export const setTerminalCloseWarning = (token, { closeCount, chancesLeft }) => {
   sessionStorage.setItem(
     getTerminalCloseWarningKey(token),
@@ -48,4 +31,18 @@ export const getTerminalCloseWarningMessage = (chancesLeft) => {
     return 'You closed the Secure Agent terminal. You have 2 chances remaining before your exam is permanently terminated. Keep the terminal window open during the exam.';
   }
   return '';
+};
+
+/** Build warning state from violation-status API response. */
+export const warningFromViolationStatus = (status) => {
+  const closeCount = Number(status?.terminal_close_count) || 0;
+  const limit = Number(status?.terminal_close_limit) || TERMINAL_CLOSE_LIMIT;
+  const chancesLeft =
+    status?.chances_left != null
+      ? Number(status.chances_left)
+      : Math.max(0, limit - closeCount);
+  if (closeCount <= 0 || chancesLeft <= 0) {
+    return null;
+  }
+  return { closeCount, chancesLeft };
 };

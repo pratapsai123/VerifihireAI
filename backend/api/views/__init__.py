@@ -65,6 +65,7 @@ from .candidate_assessment_views import (
     update_standard_integrity_view,
     verify_pan_backend_view,
     log_candidate_activity_view,
+    record_terminal_close_strike_view,
     invitation_activity_logs_view,
     terminate_invitation_exam_view,
     update_submission_result_view,

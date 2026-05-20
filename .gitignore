@@ -51,16 +51,18 @@ copilot-messages.log
 .DS_Store
 .project/attachments/files/**
 
-# --- VerifiHireAI (repo-wide) ---
-
-# JavaScript dependencies (frontend, secureAgent, etc.)
+# Node.js
 node_modules/
+npm-debug.log*
 
-# Python bytecode / caches
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
 
 # Virtual environments
 venv/
@@ -71,31 +73,9 @@ ENV/
 
 # Environment & secrets (never commit)
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
 
-# IDE / editor (personal settings)
+# IDE files
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-
-# OS junk
-Thumbs.db
-
-# Local debug & secure-agent runtime
-backend/ocr_debug.txt
-secureAgent/.verifihire-instance
-
-# Screen recordings & large local media
-*.mp4
-*.mov
-*.webm
-*.mkv
-
-# Assistant / tooling artifacts (not app source)
-.kiro/
-files/ice_edits.json
-files/silver_path_memories.json
-files/smart_edits.json
