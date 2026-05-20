@@ -146,6 +146,7 @@ const AiAssessments = () => {
         setApplicantsLoading(true);
         setSelectedPoolName(assessment.batch_name || assessment.required_skills);
         setShowApplicantsModal(true);
+        setSelectedAssessment(assessment); // Needed for resending invite
         try {
             const response = await axios.get(`${API_BASE_URL}/ai/${assessment.id}/invited-candidates/`);
             setApplicantsData(response.data.invited_candidates || []);
@@ -153,6 +154,22 @@ const AiAssessments = () => {
             console.error('Error fetching invited candidates:', err);
         } finally {
             setApplicantsLoading(false);
+        }
+    };
+
+    const handleResendInvite = async (email) => {
+        if (!selectedAssessment) return;
+        
+        try {
+            const response = await axios.post(`${API_BASE_URL}/ai/invite/resend/`, {
+                assessment_id: selectedAssessment.id,
+                email: email
+            });
+            alert(`✅ ${response.data.message}`);
+        } catch (err) {
+            console.error('Resend Invite Error:', err);
+            const errMsg = err.response?.data?.error || 'Failed to resend invite.';
+            alert(`❌ ${errMsg}`);
         }
     };
 
@@ -461,7 +478,10 @@ const AiAssessments = () => {
                                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.4rem' }}>Candidate Name</label>
                                         <input
                                             type="text" required placeholder="Enter full name"
-                                            value={inviteData.name} onChange={(e) => setInviteData({ ...inviteData, name: e.target.value })}
+                                            value={inviteData.name} onChange={(e) => {
+                                                const val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                                                setInviteData({ ...inviteData, name: val });
+                                            }}
                                             style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.9rem', outline: 'none' }}
                                         />
                                     </div>
@@ -548,6 +568,7 @@ const AiAssessments = () => {
                                             <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Name</th>
                                             <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Email</th>
                                             <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase' }}>Status</th>
+                                            <th style={{ padding: '0.8rem', fontSize: '0.75rem', color: '#A3AED0', textTransform: 'uppercase', textAlign: 'center' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -563,6 +584,21 @@ const AiAssessments = () => {
                                                     }}>
                                                         {cand.status.charAt(0).toUpperCase() + cand.status.slice(1)}
                                                     </span>
+                                                </td>
+                                                <td style={{ padding: '0.8rem', textAlign: 'center' }}>
+                                                    {cand.status !== 'completed' && (
+                                                        <button 
+                                                            onClick={() => handleResendInvite(cand.email)}
+                                                            style={{
+                                                                background: '#F4F7FE', color: '#4318FF', border: 'none', padding: '0.4rem 0.8rem',
+                                                                borderRadius: '6px', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',
+                                                                display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
+                                                            }}
+                                                            title="Resend Invitation Email"
+                                                        >
+                                                            <i className="fa-solid fa-paper-plane"></i> Resend
+                                                        </button>
+                                                    )}
                                                 </td>
                                             </tr>
                                         ))}

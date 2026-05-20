@@ -608,7 +608,24 @@ const ResumeMatcher = () => {
                             }}>
                                 <div className="setting-item">
                                     <label>MCQ Questions</label>
-                                    <input type="number" value={mcqCount} onChange={(e) => setMcqCount(e.target.value === '' ? '' : parseInt(e.target.value))} className="modern-input" min="0" max="30" />
+                                    <input 
+                                        type="number" 
+                                        value={mcqCount} 
+                                        onChange={(e) => {
+                                            const val = e.target.value;
+                                            if (val === '') {
+                                                setMcqCount('');
+                                                return;
+                                            }
+                                            const num = parseInt(val, 10);
+                                            if (!isNaN(num)) {
+                                                setMcqCount(Math.min(num, 999));
+                                            }
+                                        }} 
+                                        className="modern-input" 
+                                        min="0" 
+                                        max="999" 
+                                    />
                                 </div>
                                 <div className="setting-item">
                                     <label>Coding Tasks</label>
@@ -766,8 +783,8 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -776,8 +793,8 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                 </div>
@@ -790,8 +807,8 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -800,8 +817,8 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                 </div>

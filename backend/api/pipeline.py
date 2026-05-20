@@ -115,7 +115,9 @@ def process_batch_assessment(batch_id):
                 mcq_weight=int(settings_data.get('mcq_weight', 40)),
                 max_candidates_allowed=num_passed,
                 invited_count=num_passed,
-                creation_type='automatic'
+                creation_type='automatic',
+                mcq_duration_minutes=int(settings_data.get('mcq_duration') or mcq_count),
+                coding_duration_minutes=int(settings_data.get('coding_duration') or max(30, duration - mcq_count))
             )
             logger.info(f"Pipeline[{batch_id}]: Assessment record created (id={assessment.id}). Calling AI...")
 
@@ -552,7 +554,9 @@ def process_resume_passed(candidate_id):
             mcq_hard=mcq_hard_per_candidate, 
             total_points=100,
             mcq_weight=int(settings_data.get('mcq_weight', 40)),
-            creation_type='automatic'
+            creation_type='automatic',
+            mcq_duration_minutes=int(settings_data.get('mcq_duration') or mcq_count),
+            coding_duration_minutes=int(settings_data.get('coding_duration') or max(30, settings_data.get('duration', 60) - mcq_count))
         )
 
         # --- FULL MANUAL-GRADE GENERATION PIPELINE ---

@@ -6,7 +6,8 @@ from .views import (
     ProxyCodeExecuteView, AIAssessmentSubmissionDetailView, AIAssessmentSubmissionListView,
     SaveAssessmentProgressView, AIAssessmentAssignmentView, AIAssessmentAvailableInterviewersView,
     CancelGenerationView, AIAssessmentReportDownloadView, AIAssessmentResultsView,
-    ServeDeepFaceFaceView, OverrideSubmissionStatusView, ApproveAssessmentIdentityPhotoView
+    ServeDeepFaceFaceView, OverrideSubmissionStatusView, ApproveAssessmentIdentityPhotoView,
+    ResendAssessmentInviteView
 )
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     path('<int:assessment_id>/invited-candidates/', GetInvitedCandidatesView.as_view(), name='get-invited-candidates'),
     path('public/<str:token>/', PublicAssessmentView.as_view(), name='public-assessment'),
     path('invite/', InviteAssessmentCandidatesView.as_view(), name='invite-candidates'),
+    path('invite/resend/', ResendAssessmentInviteView.as_view(), name='resend-invite'),
     path('submit/', SubmitAssessmentView.as_view(), name='submit-assessment'),
     path('submit/create/', CreateSubmissionView.as_view(), name='create-submission'),
     path('submission/<int:pk>/integrity/', UpdateAssessmentIntegrityView.as_view(), name='update-integrity'),

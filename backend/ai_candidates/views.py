@@ -805,9 +805,9 @@ class ResumeMatchView(APIView):
                 'duration': int(request.data.get('duration', 60)),
 
                 'mcq_count': int(request.data.get('mcq_count', 10)),
-
                 'coding_count': int(request.data.get('coding_count', 1)),
-
+                'mcq_duration': request.data.get('mcq_duration'),
+                'coding_duration': request.data.get('coding_duration'),
                 'pass_threshold': int(request.data.get('pass_threshold', 60)),
 
                 'interview_pass_threshold': int(request.data.get('interview_pass_threshold', 50)),

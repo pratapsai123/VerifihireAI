@@ -3083,7 +3083,10 @@ const AiTakeAssessment = () => {
 
                                 onChange={(e) => {
 
-                                    const value = e.target.value.replace(/\D/g, '');
+                                    let value = e.target.value.replace(/\D/g, '');
+                                    
+                                    // Prevent starting with 0-5
+                                    value = value.replace(/^[0-5]+/, '');
 
                                     if (value.length <= 10) setPhone(value);
 
