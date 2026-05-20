@@ -29,6 +29,7 @@ import LiveInterviewInterviewer from './pages/LiveInterviewInterviewer';
 import LiveInterviewList from './pages/LiveInterviewList';
 import InterviewInvite from './pages/InterviewInvite';
 import AiInterview from './pages/AiInterview';
+import AiInterviewsOverview from './pages/AiInterviewsOverview';
 import AiAssessments from './pages/AiAssessments';
 import CreateAssessment from './pages/CreateAssessment';
 import ResumeMatcher from './pages/ResumeMatcher';
@@ -399,6 +400,7 @@ function AppContent() {
             {/* Interviewer View */}
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
             <Route path="/ai-interview" element={<AiInterview />} />
+            <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />
             <Route path="/resume-matcher" element={<ResumeMatcher />} />

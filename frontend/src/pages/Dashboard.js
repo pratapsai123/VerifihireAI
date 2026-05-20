@@ -536,6 +536,7 @@ const Dashboard = () => {
                   <div className="card-actions">
                     <button className="btn-premium btn-fill" onClick={() => navigate('/ai-interview')}>Start Session</button>
                     <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=interview')}>Results</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/ai-interviews-overview')}>Interviews</button>
                   </div>
                 </div>
               </div>

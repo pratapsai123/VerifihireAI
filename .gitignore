@@ -79,3 +79,6 @@ ENV/
 # IDE files
 .vscode/
 .idea/
+
+# DeepFace registered faces data (auto-generated, contains embeddings + session photos)
+deepface/data/registered_faces/
