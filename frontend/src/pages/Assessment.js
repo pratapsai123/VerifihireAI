@@ -139,6 +139,7 @@ export default function Assessment() {
               type="date"
               className="search-input"
               style={{ width: 'auto', height: '40px' }}
+              max="9999-12-31"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
             />
@@ -149,6 +150,7 @@ export default function Assessment() {
               type="date"
               className="search-input"
               style={{ width: 'auto', height: '40px' }}
+              max="9999-12-31"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
             />

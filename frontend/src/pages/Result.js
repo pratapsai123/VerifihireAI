@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Download, Trash2, TableProperties, UserCheck, UserX, Loader2, FileText } from 'lucide-react';
+import { Download, Trash2, TableProperties, UserCheck, UserX, Loader2, FileText, User, Mail, Search } from 'lucide-react';
 import Header from '../components/Header';
 import '../styles/Result.css';
 import { API_BASE_URL } from '../apiConfig';
@@ -96,6 +96,106 @@ export default function Result() {
     const [downloadingIds, setDownloadingIds] = useState(new Set());
     const [qualReasonPopup, setQualReasonPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false });
     const [selected, setSelected] = useState(new Set());
+
+    // Autocomplete states
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
+    const searchInputRef = useRef(null);
+
+    // Autocomplete suggestions mapping
+    const suggestions = useMemo(() => {
+        if (!overview || overview.length === 0) return [];
+
+        const names = new Set();
+        const emails = new Set();
+        const assessments = new Set();
+
+        overview.forEach(r => {
+            if (r.candidate?.name) names.add(r.candidate.name.trim());
+            if (r.candidate?.email) emails.add(r.candidate.email.trim());
+            const assessName = r.assessment?.display_name || r.assessment?.name;
+            if (assessName) assessments.add(assessName.trim());
+        });
+
+        const nameList = Array.from(names).map(val => ({ type: 'name', value: val }));
+        const emailList = Array.from(emails).map(val => ({ type: 'email', value: val }));
+        const assessmentList = Array.from(assessments).map(val => ({ type: 'assessment', value: val }));
+
+        return [...nameList, ...emailList, ...assessmentList];
+    }, [overview]);
+
+    const filteredSuggestions = useMemo(() => {
+        const query = search.trim().toLowerCase();
+        if (!query) return []; // previews only while typing!
+        
+        const filtered = suggestions.filter(item => 
+            item.value.toLowerCase().includes(query)
+        );
+
+        // Prioritize exact/starts-with match for better UX
+        filtered.sort((a, b) => {
+            const aVal = a.value.toLowerCase();
+            const bVal = b.value.toLowerCase();
+            const aStarts = aVal.startsWith(query);
+            const bStarts = bVal.startsWith(query);
+            if (aStarts && !bStarts) return -1;
+            if (!aStarts && bStarts) return 1;
+            return aVal.localeCompare(bVal);
+        });
+
+        // Limit results to make it clean and fast
+        return filtered.slice(0, 8);
+    }, [suggestions, search]);
+
+    const highlightMatch = (text, query) => {
+        if (!query.trim()) return <span>{text}</span>;
+        const q = query.trim().toLowerCase();
+        const index = text.toLowerCase().indexOf(q);
+        if (index === -1) return <span>{text}</span>;
+
+        const before = text.substring(0, index);
+        const match = text.substring(index, index + q.length);
+        const after = text.substring(index + q.length);
+
+        return (
+            <span>
+                {before}
+                <strong className="autocomplete-highlight">{match}</strong>
+                {after}
+            </span>
+        );
+    };
+
+    const handleKeyDown = (e) => {
+        if (!isSearchFocused || filteredSuggestions.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setHighlightedIndex(prev => (prev + 1) % filteredSuggestions.length);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setHighlightedIndex(prev => (prev - 1 + filteredSuggestions.length) % filteredSuggestions.length);
+        } else if (e.key === 'Enter') {
+            if (highlightedIndex >= 0 && highlightedIndex < filteredSuggestions.length) {
+                e.preventDefault();
+                selectSuggestion(filteredSuggestions[highlightedIndex]);
+            }
+        } else if (e.key === 'Escape') {
+            setIsSearchFocused(false);
+            e.target.blur();
+        }
+    };
+
+    const selectSuggestion = (suggestion) => {
+        setSearch(suggestion.value);
+        setIsSearchFocused(false);
+        setHighlightedIndex(-1);
+    };
+
+    const handleSuggestionMouseDown = (e, item) => {
+        e.preventDefault(); // Prevents input from blurring
+        selectSuggestion(item);
+    };
 
     // Derive user role from localStorage
     const currentUser = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
@@ -636,12 +736,102 @@ export default function Result() {
                 </div>
 
                 <div className="toolbar">
-                    <input
-                        className="search search-input"
-                        placeholder="Search by name / email / assessment"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
+                    <div 
+                        className="search-wrapper" 
+                        style={{ position: 'relative', width: '100%' }}
+                        onKeyDown={handleKeyDown}
+                    >
+                        <div className="search-input-container" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                            <Search size={16} className="search-icon" style={{ position: 'absolute', left: '10px', color: '#94a3b8', pointerEvents: 'none' }} />
+                            <input
+                                ref={searchInputRef}
+                                className="search search-input"
+                                placeholder="Search by name / email / assessment"
+                                value={search}
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                    setHighlightedIndex(-1);
+                                    setIsSearchFocused(true);
+                                }}
+                                onFocus={(e) => {
+                                    setIsSearchFocused(true);
+                                    const target = e.target;
+                                    setTimeout(() => {
+                                        if (target) {
+                                            target.select();
+                                        }
+                                    }, 0);
+                                }}
+                                onClick={() => {
+                                    setIsSearchFocused(true);
+                                }}
+                                onBlur={() => {
+                                    // Let clicks register
+                                    setTimeout(() => setIsSearchFocused(false), 200);
+                                }}
+                                style={{ paddingLeft: '32px', paddingRight: '32px', width: '100%', outline: 'none' }}
+                            />
+                            {search && (
+                                <button 
+                                    type="button" 
+                                    className="search-clear-btn"
+                                    onClick={() => {
+                                        setSearch('');
+                                        setHighlightedIndex(-1);
+                                        if (searchInputRef.current) {
+                                            searchInputRef.current.focus();
+                                        }
+                                    }}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        border: 'none',
+                                        background: 'none',
+                                        cursor: 'pointer',
+                                        color: '#94a3b8',
+                                        fontSize: '14px',
+                                        fontWeight: 'bold',
+                                        padding: '4px'
+                                    }}
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Autocomplete Dropdown */}
+                        {isSearchFocused && search.trim().length >= 1 && filteredSuggestions.length > 0 && (
+                            <div className="search-autocomplete-dropdown">
+                                <div className="autocomplete-list">
+                                    {filteredSuggestions.map((item, idx) => {
+                                        const isHighlighted = idx === highlightedIndex;
+                                        return (
+                                            <div
+                                                key={`${item.type}-${item.value}-${idx}`}
+                                                className={`autocomplete-item ${isHighlighted ? 'highlighted' : ''}`}
+                                                onMouseDown={(e) => handleSuggestionMouseDown(e, item)}
+                                                onMouseEnter={() => setHighlightedIndex(idx)}
+                                            >
+                                                <span className={`autocomplete-item-icon ${item.type}`}>
+                                                    {item.type === 'name' && <User size={12} />}
+                                                    {item.type === 'email' && <Mail size={12} />}
+                                                    {item.type === 'assessment' && <FileText size={12} />}
+                                                </span>
+                                                <span className="autocomplete-item-text">
+                                                    {highlightMatch(item.value, search)}
+                                                </span>
+                                                <span className={`autocomplete-item-badge ${item.type}`}>
+                                                    {item.type}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <select
                         className="search search-select"
                         value={statusFilter}
@@ -659,6 +849,7 @@ export default function Result() {
                         <input
                             type="date"
                             className="search search-date"
+                            max="9999-12-31"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
                         />
@@ -668,6 +859,7 @@ export default function Result() {
                         <input
                             type="date"
                             className="search search-date"
+                            max="9999-12-31"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
                         />
