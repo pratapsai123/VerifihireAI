@@ -62,6 +62,13 @@ __pycache__/
 *$py.class
 *.pyc
 
+# Virtual environments
+venv/
+.venv/
+venv_*/
+env/
+ENV/
+
 # Environment & secrets (never commit)
 .env
 .env.*

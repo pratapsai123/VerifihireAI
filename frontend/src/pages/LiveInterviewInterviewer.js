@@ -549,6 +549,10 @@ function LiveInterviewInterviewer() {
   const handleInviteInterviewer = async (e) => {
     e.preventDefault();
     if (!inviteEmail) return;
+    if (inviteEmail.toLowerCase().endsWith('@gmail.com')) {
+      showNotification('Gmail addresses are not allowed for panel members.', 'error');
+      return;
+    }
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/add-participant/`, {
         session_id: sessionId,

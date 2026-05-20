@@ -660,6 +660,11 @@
     color: #dc2626;
 }
 
+.status-hold {
+    background: #fef3c7;
+    color: #d97706;
+}
+
 /* Skills Tags */
 .skills-tags {
     display: flex;

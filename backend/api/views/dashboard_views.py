@@ -1,5 +1,5 @@
 from .._imports import *
-from django.db.models import Count, Avg, Q, Sum
+from django.db.models import Count, Avg, Q, Sum, Case, When, F
 from django.db.models.functions import TruncMonth, TruncDay, Coalesce
 from django.utils import timezone
 from datetime import timedelta
@@ -21,6 +21,7 @@ def dashboard_summary_view(request):
         
         # Base Querysets with RBAC
         results_qs = CandidateSubmission.objects.filter(is_deleted=False)
+        invitations_qs = CandidateInvitation.objects.filter(is_deleted=False)
         interviews_qs = InterviewInvitation.objects.all()
         # Exclude ONGOING for AI assessments as per results_overview_view
         ai_assessments_qs = AIAssessmentSubmission.objects.filter(is_deleted=False).exclude(status='ONGOING')
@@ -31,6 +32,9 @@ def dashboard_summary_view(request):
             # Fixed RBAC: inclusion by either recruiter or assessment owner
             results_qs = results_qs.filter(
                 Q(invitation__user_profile_id__in=scoped_ids) | Q(invitation__assessment__user_profile_id__in=scoped_ids)
+            )
+            invitations_qs = invitations_qs.filter(
+                Q(user_profile_id__in=scoped_ids) | Q(assessment__user_profile_id__in=scoped_ids)
             )
             interviews_qs = interviews_qs.filter(interview__created_by_id__in=scoped_ids)
             custom_assessments_qs = custom_assessments_qs.filter(user_profile_id__in=scoped_ids)
@@ -51,9 +55,14 @@ def dashboard_summary_view(request):
         hired_count = hired_count_std + hired_count_ai
         
         # Pipeline statuses
-        pipeline_count_std = results_qs.filter(invitation__status__in=['sent', 'ongoing']).count()
+        pipeline_count_std = results_qs.annotate(
+            score_val=Case(
+                When(final_percentage__isnull=False, then=F('final_percentage')),
+                default=F('percentage')
+            )
+        ).filter(result='hold', score_val__gt=0).count()
         # AI Candidates in screening/interview stages
-        pipeline_count_ai = ai_candidates_qs.filter(status__in=['Interview', 'Review', 'Resume Passed']).count()
+        pipeline_count_ai = ai_candidates_qs.filter(status='On-Hold').count()
         pipeline_count = pipeline_count_std + pipeline_count_ai
 
         # Average Scores
@@ -174,7 +183,7 @@ def dashboard_summary_view(request):
         for r in recent_std:
             combined_recent.append({
                 'candidate': {'name': r.invitation.name, 'email': r.invitation.email},
-                'status': r.result if r.result == 'selected' else (r.invitation.status if r.invitation.status in ['Qualified', 'COMPLETED'] else 'In Pipeline'),
+                'status': r.result if r.result in ['selected', 'rejected', 'hold'] else r.invitation.status,
                 'submitted_at': r.submitted_at
             })
         for r in recent_ai:

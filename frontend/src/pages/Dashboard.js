@@ -636,8 +636,8 @@ const Dashboard = () => {
                             <div className="cand-email">{cand.candidate?.email}</div>
                           </div>
                         </div>
-                        <span className={`status-badge ${cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'status-hired' : 'status-in-pipeline'}`}>
-                          {cand.status === 'selected' || cand.status === 'Qualified' || cand.status === 'COMPLETED' ? 'Qualified' : cand.status === 'sent' ? 'Sent' : 'In Pipeline'}
+                        <span className={`status-badge ${['selected', 'Qualified', 'COMPLETED'].includes(cand.status) ? 'status-hired' : ['rejected', 'failed'].includes(cand.status?.toLowerCase()) ? 'status-rejected' : 'status-in-pipeline'}`}>
+                          {['selected', 'Qualified', 'COMPLETED'].includes(cand.status) ? 'Qualified' : ['rejected', 'failed'].includes(cand.status?.toLowerCase()) ? 'Rejected' : cand.status === 'sent' ? 'Sent' : cand.status === 'ongoing' ? 'Ongoing' : 'In Pipeline'}
                         </span>
                       </div>
                     )) : (

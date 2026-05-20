@@ -96,6 +96,45 @@ def send_otp_view(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
         
+        # --- Global OTP Brute Force Check ---
+        otp_max_attempts = getattr(settings, 'OTP_MAX_ATTEMPTS', 5)
+        otp_lockout_minutes = getattr(settings, 'OTP_LOCKOUT_MINUTES', 15)
+        
+        recent_failures = list(OtpAttemptLog.objects.filter(
+            email=email, succeeded=False
+        ).order_by('-attempted_at')[:otp_max_attempts])
+
+        if len(recent_failures) == otp_max_attempts:
+            latest_failure = recent_failures[0]
+            nth_failure = recent_failures[-1]
+            if (latest_failure.attempted_at - nth_failure.attempted_at) <= timedelta(minutes=otp_lockout_minutes):
+                lock_expires_at = latest_failure.attempted_at + timedelta(minutes=otp_lockout_minutes)
+                if timezone.now() < lock_expires_at:
+                    remaining_time = lock_expires_at - timezone.now()
+                    remaining_seconds = max(1, int(remaining_time.total_seconds()))
+                    return Response(
+                        {'error': f'Too many failed OTP attempts. Please wait {remaining_seconds} seconds.'},
+                        status=status.HTTP_429_TOO_MANY_REQUESTS
+                    )
+
+        # --- OTP Cooldown Check ---
+        otp_cooldown_seconds = getattr(settings, 'OTP_RESEND_COOLDOWN_SECONDS', 120)
+        cooldown_threshold = timezone.now() - timedelta(seconds=otp_cooldown_seconds)
+        
+        recent_otp = EmailOTP.objects.filter(
+            email=email,
+            created_at__gte=cooldown_threshold
+        ).order_by('-created_at').first()
+        
+        if recent_otp:
+            cooldown_expires_at = recent_otp.created_at + timedelta(seconds=otp_cooldown_seconds)
+            remaining_time = cooldown_expires_at - timezone.now()
+            remaining_seconds = max(1, int(remaining_time.total_seconds()))
+            return Response(
+                {'error': f'Please wait {remaining_seconds} seconds before requesting a new OTP.'},
+                status=status.HTTP_429_TOO_MANY_REQUESTS
+            )
+
         # Generate OTP
         otp = EmailOTP.generate_otp()
         expires_in = _otp_expiry_seconds()
@@ -203,31 +242,42 @@ def verify_otp_view(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Check for brute-force attempts (Max 5)
-            if hasattr(email_otp, 'attempts') and email_otp.attempts >= 5:
-                # Mark as invalid/verified so it can no longer be used
-                email_otp.is_verified = True
-                email_otp.save()
-                return Response(
-                    {'error': 'Too many failed attempts. This OTP is now locked. Please request a new one.'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+            # Global OTP Brute Force Check
+            otp_max_attempts = getattr(settings, 'OTP_MAX_ATTEMPTS', 5)
+            otp_lockout_minutes = getattr(settings, 'OTP_LOCKOUT_MINUTES', 15)
+            
+            recent_failures = list(OtpAttemptLog.objects.filter(
+                email=email, succeeded=False
+            ).order_by('-attempted_at')[:otp_max_attempts])
+
+            if len(recent_failures) == otp_max_attempts:
+                latest_failure = recent_failures[0]
+                nth_failure = recent_failures[-1]
+                if (latest_failure.attempted_at - nth_failure.attempted_at) <= timedelta(minutes=otp_lockout_minutes):
+                    lock_expires_at = latest_failure.attempted_at + timedelta(minutes=otp_lockout_minutes)
+                    if timezone.now() < lock_expires_at:
+                        remaining_time = lock_expires_at - timezone.now()
+                        remaining_seconds = max(1, int(remaining_time.total_seconds()))
+                        return Response(
+                            {'error': f'Too many failed OTP attempts. Please wait {remaining_seconds} seconds.'},
+                            status=status.HTTP_429_TOO_MANY_REQUESTS
+                        )
             
             if email_otp.otp != otp:
-                # Increment attempts counter
-                if hasattr(email_otp, 'attempts'):
-                    email_otp.attempts += 1
-                    email_otp.save()
+                OtpAttemptLog.objects.create(email=email, succeeded=False)
+                failures = list(OtpAttemptLog.objects.filter(email=email, succeeded=False).order_by('-attempted_at')[:otp_max_attempts])
+                f_count = sum(1 for f in failures if (failures[0].attempted_at - f.attempted_at) <= timedelta(minutes=otp_lockout_minutes))
+                remaining = max(0, otp_max_attempts - f_count)
                 
-                remaining = 5 - email_otp.attempts if hasattr(email_otp, 'attempts') else 'few'
                 return Response(
-                    {'error': f'Invalid OTP. {remaining} attempts remaining.'},
+                    {'error': f'Invalid OTP. {remaining} attempt(s) remaining.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Mark OTP as verified
+            # Mark OTP as verified and clear global failures
             email_otp.is_verified = True
             email_otp.save()
+            OtpAttemptLog.objects.filter(email=email, succeeded=False).delete()
             
             return Response(
                 {
@@ -707,17 +757,48 @@ def login_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+        # --- Brute Force Check ---
+        login_max_attempts = getattr(settings, 'LOGIN_MAX_ATTEMPTS', 5)
+        login_lockout_minutes = getattr(settings, 'LOGIN_LOCKOUT_MINUTES', 15)
+        
+        recent_failures = list(LoginAttemptLog.objects.filter(
+            email=email, succeeded=False
+        ).order_by('-attempted_at')[:login_max_attempts])
+
+        if len(recent_failures) == login_max_attempts:
+            latest_failure = recent_failures[0]
+            nth_failure = recent_failures[-1]
+            
+            # If the cluster of 5 failures happened within the lockout window
+            if (latest_failure.attempted_at - nth_failure.attempted_at) <= timedelta(minutes=login_lockout_minutes):
+                lock_expires_at = latest_failure.attempted_at + timedelta(minutes=login_lockout_minutes)
+                if timezone.now() < lock_expires_at:
+                    remaining_time = lock_expires_at - timezone.now()
+                    remaining_seconds = max(1, int(remaining_time.total_seconds()))
+                    return Response(
+                        {'error': f'Too many failed login attempts. Please wait {remaining_seconds} seconds.'},
+                        status=status.HTTP_429_TOO_MANY_REQUESTS
+                    )
+
         user_profile = UserProfile.objects.filter(email=email).select_related('company').first()
 
         # Company users (UserProfile)
         if user_profile:
             if user_profile.user:
                 if not user_profile.user.check_password(password):
-                    return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+                    LoginAttemptLog.objects.create(email=email, succeeded=False)
+                    failures = list(LoginAttemptLog.objects.filter(email=email, succeeded=False).order_by('-attempted_at')[:login_max_attempts])
+                    f_count = sum(1 for f in failures if (failures[0].attempted_at - f.attempted_at) <= timedelta(minutes=login_lockout_minutes))
+                    remaining = max(0, login_max_attempts - f_count)
+                    return Response({'error': f'Invalid email or password. {remaining} attempt(s) left.'}, status=status.HTTP_401_UNAUTHORIZED)
             else:
                 # Backward compatibility: plaintext profile password (legacy)
                 if user_profile.password != password:
-                    return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+                    LoginAttemptLog.objects.create(email=email, succeeded=False)
+                    failures = list(LoginAttemptLog.objects.filter(email=email, succeeded=False).order_by('-attempted_at')[:login_max_attempts])
+                    f_count = sum(1 for f in failures if (failures[0].attempted_at - f.attempted_at) <= timedelta(minutes=login_lockout_minutes))
+                    remaining = max(0, login_max_attempts - f_count)
+                    return Response({'error': f'Invalid email or password. {remaining} attempt(s) left.'}, status=status.HTTP_401_UNAUTHORIZED)
                 # Best-effort migrate to hashed auth user on successful legacy login
                 try:
                     user = User.objects.create_user(
@@ -761,8 +842,12 @@ def login_view(request):
                     status=status.HTTP_404_NOT_FOUND
                 )
             if not auth_user.check_password(password):
+                LoginAttemptLog.objects.create(email=email, succeeded=False)
+                failures = list(LoginAttemptLog.objects.filter(email=email, succeeded=False).order_by('-attempted_at')[:login_max_attempts])
+                f_count = sum(1 for f in failures if (failures[0].attempted_at - f.attempted_at) <= timedelta(minutes=login_lockout_minutes))
+                remaining = max(0, login_max_attempts - f_count)
                 return Response(
-                    {'error': 'Incorrect password. Please try again.'},
+                    {'error': f'Incorrect password. {remaining} attempt(s) left.'},
                     status=status.HTTP_401_UNAUTHORIZED
                 )
             if not ApplicationAdmin.objects.filter(user=auth_user).exists():
@@ -770,6 +855,49 @@ def login_view(request):
                     {'error': 'Your account is not registered with us.'},
                     status=status.HTTP_404_NOT_FOUND
                 )
+                
+        # Clear old failures on successful login
+        LoginAttemptLog.objects.filter(email=email, succeeded=False).delete()
+        
+        # --- Global OTP Brute Force Check ---
+        otp_max_attempts = getattr(settings, 'OTP_MAX_ATTEMPTS', 5)
+        otp_lockout_minutes = getattr(settings, 'OTP_LOCKOUT_MINUTES', 15)
+        
+        recent_failures = list(OtpAttemptLog.objects.filter(
+            email=email, succeeded=False
+        ).order_by('-attempted_at')[:otp_max_attempts])
+
+        if len(recent_failures) == otp_max_attempts:
+            latest_failure = recent_failures[0]
+            nth_failure = recent_failures[-1]
+            if (latest_failure.attempted_at - nth_failure.attempted_at) <= timedelta(minutes=otp_lockout_minutes):
+                lock_expires_at = latest_failure.attempted_at + timedelta(minutes=otp_lockout_minutes)
+                if timezone.now() < lock_expires_at:
+                    remaining_time = lock_expires_at - timezone.now()
+                    remaining_seconds = max(1, int(remaining_time.total_seconds()))
+                    return Response(
+                        {'error': f'Too many failed OTP attempts. Please wait {remaining_seconds} seconds.'},
+                        status=status.HTTP_429_TOO_MANY_REQUESTS
+                    )
+
+        # --- OTP Cooldown Check ---
+        otp_cooldown_seconds = getattr(settings, 'OTP_RESEND_COOLDOWN_SECONDS', 120)
+        cooldown_threshold = timezone.now() - timedelta(seconds=otp_cooldown_seconds)
+        
+        recent_otp = EmailOTP.objects.filter(
+            email=email,
+            created_at__gte=cooldown_threshold
+        ).order_by('-created_at').first()
+        
+        if recent_otp:
+            cooldown_expires_at = recent_otp.created_at + timedelta(seconds=otp_cooldown_seconds)
+            remaining_time = cooldown_expires_at - timezone.now()
+            remaining_seconds = max(1, int(remaining_time.total_seconds()))
+            return Response(
+                {'error': f'Please wait {remaining_seconds} seconds before requesting a new OTP.'},
+                status=status.HTTP_429_TOO_MANY_REQUESTS
+            )
+
         # Generate and send OTP for 2-step verification
         otp = EmailOTP.generate_otp()
         expires_in = _otp_expiry_seconds()
@@ -873,31 +1001,42 @@ def verify_login_otp_view(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            # Check for brute-force attempts (Max 5)
-            if hasattr(email_otp, 'attempts') and email_otp.attempts >= 5:
-                # Mark as invalid/verified so it can no longer be used
-                email_otp.is_verified = True
-                email_otp.save()
-                return Response(
-                    {'error': 'Too many failed attempts. This login session is locked. Please login again to request a new OTP.'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+            # Global OTP Brute Force Check
+            otp_max_attempts = getattr(settings, 'OTP_MAX_ATTEMPTS', 5)
+            otp_lockout_minutes = getattr(settings, 'OTP_LOCKOUT_MINUTES', 15)
+            
+            recent_failures = list(OtpAttemptLog.objects.filter(
+                email=email, succeeded=False
+            ).order_by('-attempted_at')[:otp_max_attempts])
+
+            if len(recent_failures) == otp_max_attempts:
+                latest_failure = recent_failures[0]
+                nth_failure = recent_failures[-1]
+                if (latest_failure.attempted_at - nth_failure.attempted_at) <= timedelta(minutes=otp_lockout_minutes):
+                    lock_expires_at = latest_failure.attempted_at + timedelta(minutes=otp_lockout_minutes)
+                    if timezone.now() < lock_expires_at:
+                        remaining_time = lock_expires_at - timezone.now()
+                        remaining_seconds = max(1, int(remaining_time.total_seconds()))
+                        return Response(
+                            {'error': f'Too many failed OTP attempts. Please wait {remaining_seconds} seconds.'},
+                            status=status.HTTP_429_TOO_MANY_REQUESTS
+                        )
             
             if email_otp.otp != otp:
-                # Increment attempts counter
-                if hasattr(email_otp, 'attempts'):
-                    email_otp.attempts += 1
-                    email_otp.save()
+                OtpAttemptLog.objects.create(email=email, succeeded=False)
+                failures = list(OtpAttemptLog.objects.filter(email=email, succeeded=False).order_by('-attempted_at')[:otp_max_attempts])
+                f_count = sum(1 for f in failures if (failures[0].attempted_at - f.attempted_at) <= timedelta(minutes=otp_lockout_minutes))
+                remaining = max(0, otp_max_attempts - f_count)
                 
-                remaining = 5 - email_otp.attempts if hasattr(email_otp, 'attempts') else 'few'
                 return Response(
-                    {'error': f'Invalid OTP. {remaining} attempts remaining.'},
+                    {'error': f'Invalid OTP. {remaining} attempt(s) remaining.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Mark OTP as verified
+            # Mark OTP as verified and clear global failures
             email_otp.is_verified = True
             email_otp.save()
+            OtpAttemptLog.objects.filter(email=email, succeeded=False).delete()
             
             # Prefer user profile; fallback to application admin
             user_profile = UserProfile.objects.filter(email=email).first()
@@ -933,7 +1072,6 @@ def verify_login_otp_view(request):
 
 
             if user_profile:
-                from django.utils import timezone
                 user_profile.last_login_at = timezone.now()
                 user_profile.save(update_fields=['last_login_at'])
             
@@ -955,7 +1093,6 @@ def verify_login_otp_view(request):
                 status=status.HTTP_200_OK
             )
             
-            from datetime import timedelta
             response.set_cookie(
                 key='refresh_token',
                 value=str(refresh),

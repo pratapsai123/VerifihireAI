@@ -50,7 +50,7 @@ function getStatusMeta(status, r = {}) {
 
 function getSortValue(row, key) {
     if (key === 'candidate') return (row.candidate?.name || '').toLowerCase();
-    if (key === 'details') return (row.assessment?.display_name || row.assessment?.name || '').toLowerCase();
+    if (key === 'assessment') return (row.assessment?.display_name || row.assessment?.name || '').toLowerCase();
     if (key === 'sent') return row.created_at ? new Date(row.created_at).getTime() : 0;
     if (key === 'submitted') return row.submitted_at ? new Date(row.submitted_at).getTime() : 0;
     if (key === 'objective') return Number(row.objective_percentage) || 0;
@@ -666,7 +666,7 @@ export default function Result() {
                                 <thead>
                                     <tr>
                                         <th onClick={() => handleSort('candidate')} className="sortable-th">Candidate {sortMarker('candidate')}</th>
-                                        <th onClick={() => handleSort('details')} className="sortable-th">Details {sortMarker('details')}</th>
+                                        <th onClick={() => handleSort('assessment')} className="sortable-th">Assessment {sortMarker('assessment')}</th>
                                         <th onClick={() => handleSort('sent')} className="sortable-th">Sent {sortMarker('sent')}</th>
                                         <th onClick={() => handleSort('submitted')} className="sortable-th">Submitted {sortMarker('submitted')}</th>
                                         <th onClick={() => handleSort('objective')} className="sortable-th">Objective {sortMarker('objective')}</th>

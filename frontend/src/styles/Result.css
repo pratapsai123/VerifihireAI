@@ -823,6 +823,33 @@
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
+.rating-actions {
+  margin-top: 1rem;
+}
+
+.rating-actions .btn-secondary {
+  background: #1e293b !important;
+  border: 1px solid #1e293b !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.rating-actions .btn-secondary:hover:not(:disabled) {
+  background: #334155 !important;
+  border-color: #334155 !important;
+  color: #ffffff !important;
+}
+
+.rating-actions .btn-secondary:disabled {
+  background: #cbd5e1 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+}
+
 /* --- Timeout Popup --- */
 .timeout-popup-overlay {
   position: fixed;
