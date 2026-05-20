@@ -151,7 +151,17 @@ const CreateAssessment = () => {
         }
 
         if (id === 'num_mcqs') {
-            const numVal = value === '' ? '' : (parseInt(value) || 0);
+            if (value === '' || value === null || value === undefined) {
+                setFormData(prev => ({
+                    ...prev,
+                    num_mcqs: ''
+                }));
+                return;
+            }
+            const count = parseInt(value, 10);
+            if (isNaN(count)) return;
+            const numVal = Math.min(Math.max(count, 0), 999);
+
             setFormData(prev => {
                 // Auto-adjust weight: if MCQs is 0, Coding gets 100%
                 let newWeight = prev.mcq_weight;
@@ -214,6 +224,10 @@ const CreateAssessment = () => {
         }
         if (!formData.skills.trim()) {
             alert('Please enter Target Skills before generating.');
+            return;
+        }
+        if (!formData.experience_level) {
+            alert('Please select an Experience Level before generating.');
             return;
         }
         if (!formData.num_mcqs && formData.num_mcqs !== 0) {
@@ -475,15 +489,7 @@ const CreateAssessment = () => {
                                 <input
                                     type="number" min="0" max="999"
                                     value={formData.num_mcqs}
-                                    onChange={(e) => {
-                                        const val = e.target.value;
-                                        if (val === '') {
-                                            handleChange('num_mcqs', '');
-                                        } else {
-                                            const num = Math.min(parseInt(val) || 0, 999);
-                                            handleChange('num_mcqs', num);
-                                        }
-                                    }}
+                                    onChange={(e) => handleChange('num_mcqs', e.target.value)}
                                     onBlur={() => { if (formData.num_mcqs === '') handleChange('num_mcqs', 10); }}
                                 />
                                 <span className="marker">{formData.num_mcqs}</span>
@@ -710,11 +716,13 @@ const CreateAssessment = () => {
                                         min={new Date().toISOString().split('T')[0]}
                                         value={formData.start_date}
                                         onChange={(e) => handleChange('start_date', e.target.value)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     <input
                                         type="time"
                                         value={formData.start_time}
                                         onChange={(e) => handleChange('start_time', e.target.value)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                 </div>
                             </div>
@@ -726,11 +734,13 @@ const CreateAssessment = () => {
                                         min={new Date().toISOString().split('T')[0]}
                                         value={formData.end_date}
                                         onChange={(e) => handleChange('end_date', e.target.value)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     <input
                                         type="time"
                                         value={formData.end_time}
                                         onChange={(e) => handleChange('end_time', e.target.value)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                 </div>
                             </div>

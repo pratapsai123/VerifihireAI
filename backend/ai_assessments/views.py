@@ -2117,13 +2117,16 @@ class InviteAssessmentCandidatesView(APIView):
             try:
                 subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                 
-                # Format availability dates in UTC for consistency
+                # Format availability dates in local time for consistency
+                from django.utils import timezone
                 if assessment.available_from:
-                    start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p UTC')
+                    local_start = timezone.localtime(assessment.available_from)
+                    start_time = local_start.strftime('%B %d, %Y at %I:%M %p')
                 else:
                     start_time = "Immediately"
                 if assessment.available_until:
-                    end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p UTC')
+                    local_end = timezone.localtime(assessment.available_until)
+                    end_time = local_end.strftime('%B %d, %Y at %I:%M %p')
                 else:
                     end_time = "No fixed deadline"
                 
@@ -2225,12 +2228,15 @@ class InviteAssessmentCandidatesView(APIView):
                     try:
                         subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                         
+                        from django.utils import timezone
                         if assessment.available_from:
-                            start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p UTC')
+                            local_start = timezone.localtime(assessment.available_from)
+                            start_time = local_start.strftime('%B %d, %Y at %I:%M %p')
                         else:
                             start_time = "Immediately"
                         if assessment.available_until:
-                            end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p UTC')
+                            local_end = timezone.localtime(assessment.available_until)
+                            end_time = local_end.strftime('%B %d, %Y at %I:%M %p')
                         else:
                             end_time = "No fixed deadline"
 
@@ -2286,6 +2292,95 @@ class InviteAssessmentCandidatesView(APIView):
             "max_allowed": assessment.max_candidates_allowed,
             "remaining_spots": remaining_spots
         }, status=status.HTTP_200_OK)
+
+class ResendAssessmentInviteView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        assessment_id = request.data.get('assessment_id')
+        email = request.data.get('email')
+        
+        try:
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.get(pk=assessment_id, company=company)
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if not email:
+            return Response({"error": "Email is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        from .models import InvitedCandidate
+        candidate = InvitedCandidate.objects.filter(assessment=assessment, email=email).first()
+        
+        if not candidate:
+            return Response({"error": "Candidate not found in invited list"}, status=status.HTTP_404_NOT_FOUND)
+
+        import urllib.parse
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
+        
+        encoded_name = urllib.parse.quote(candidate.name)
+        encoded_email = urllib.parse.quote(candidate.email)
+        link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+
+        try:
+            subject = f"Reminder: Invite to AI Technical Assessment - {assessment.required_skills}"
+            
+            from django.utils import timezone
+            if assessment.available_from:
+                local_start = timezone.localtime(assessment.available_from)
+                start_time = local_start.strftime('%B %d, %Y at %I:%M %p')
+            else:
+                start_time = "Immediately"
+            if assessment.available_until:
+                local_end = timezone.localtime(assessment.available_until)
+                end_time = local_end.strftime('%B %d, %Y at %I:%M %p')
+            else:
+                end_time = "No fixed deadline"
+            
+            message = f"Dear {candidate.name},\n\nThis is a reminder that you have been invited to attempt an AI technical assessment for the role of {assessment.required_skills}.\n\nTiming Details:\n- Available From: {start_time}\n- Available Until: {end_time}\n- Duration: {assessment.duration_minutes} minutes\n\nPlease click the link below to start your assessment during the availability window:\n{link}\n\nBest of luck!"
+            
+            html_message = f"""
+            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+                <div style="background-color: #4318FF; padding: 24px; text-align: center;">
+                    <h1 style="color: white; margin: 0; font-size: 24px;">Assessment Invitation Reminder</h1>
+                </div>
+                <div style="padding: 32px; background-color: white;">
+                    <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{candidate.name}</strong>,</p>
+                    <p style="line-height: 1.6; margin-bottom: 24px;">This is a reminder that you have been invited to attempt an AI technical assessment for the role: <br/><strong>{assessment.required_skills}</strong></p>
+                    
+                    <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                        <h3 style="margin-top: 0; color: #4318FF; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Timing Details</h3>
+                        <p style="margin: 8px 0; font-size: 14px;"><strong>📅 Available From:</strong> {start_time}</p>
+                        <p style="margin: 8px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {end_time}</p>
+                        <p style="margin: 8px 0; font-size: 14px;"><strong>⏱️ Duration:</strong> {assessment.duration_minutes} minutes</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 32px 0;">
+                        <a href="{link}" style="background-color: #4318FF; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(67, 24, 255, 0.2);">Start Assessment</a>
+                    </div>
+                    
+                    <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; pt: 16px;">If the button above doesn't work, copy and paste this link into your browser:<br/>
+                    <a href="{link}" style="color: #4318FF;">{link}</a></p>
+                </div>
+                <div style="background-color: #f1f5f9; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8;">
+                    &copy; 2026 VerifiHireAI. All rights reserved.
+                </div>
+            </div>
+            """
+            
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [candidate.email], fail_silently=False, html_message=html_message)
+            logger.info(f"Resent individual invite to {candidate.email}")
+            
+            return Response({"message": f"Successfully resent invitation to {candidate.email}"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            import traceback
+            logger.error(f"Email error for {candidate.email}: {str(e)}")
+            logger.error(traceback.format_exc())
+            return Response({"error": f"Failed to send email: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetInvitedCandidatesView(APIView):
     from rest_framework.permissions import IsAuthenticated

@@ -72,12 +72,12 @@ const ResultsAI = () => {
         }
         setPhotoApprovalSubmitting(true);
         try {
-            // Determine correct endpoint based on candidate type
+
+            // Determine correct endpoint based on candidate type_
             const isAiCandidate = !!photoApprovalCandidate.is_ai_candidate;
             const url = isAiCandidate
                 ? `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`
                 : `${API_BASE_URL}/ai/submission/${pk}/approve-photo/`;
-
             const resp = await axios.post(
                 url,
                 {},
@@ -553,7 +553,18 @@ const ResultsAI = () => {
                         pending_identity_photo_url: item.pending_identity_photo_url || null,
                         original_identity_photo_url: item.original_identity_photo_url || null,
                         master_photo_url: item.master_photo_url || null,
+                        candidate_photo_url: item.candidate_photo_url || null,
                     };
+                } else {
+                    // Merge photo fields from later items if current entry has nulls
+                    const c = candidateMap[email];
+                    if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
+                    if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
+                    if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
+                    if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
+                    if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
+                    if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
+                    if (item.photo_update_pending) c.photo_update_pending = true;
                 }
                 if (!candidateMap[email][type]) {
                     candidateMap[email][type] = item;
@@ -1655,6 +1666,7 @@ const ResultsAI = () => {
                                                         pending_identity_photo_url: viewedSubmission.intruder_photo_url,
                                                         full_name: viewedSubmission.candidate_name,
                                                         email: viewedSubmission.candidate_email,
+                                                        candidate_photo_url: viewedSubmission.candidate_photo_url,
                                                     })}
                                                     style={{
                                                         marginTop: '1rem',
@@ -2669,8 +2681,8 @@ const ResultsAI = () => {
                             <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginBottom: '20px', flexWrap: 'wrap' }}>
                                 <div style={{ textAlign: 'center' }}>
                                     <div style={{ width: '180px', height: '180px', borderRadius: '14px', overflow: 'hidden', border: '2px solid #d1d5db', background: '#f3f4f6' }}>
-                                        {(photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url) ? (
-                                            <img src={photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url} alt="Currently registered" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        {(photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url || photoApprovalCandidate.candidate_photo_url) ? (
+                                            <img src={photoApprovalCandidate.master_photo_url || photoApprovalCandidate.original_identity_photo_url || photoApprovalCandidate.candidate_photo_url} alt="Currently registered" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         ) : (
                                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#9ca3af' }}>
                                                 <i className="fa-solid fa-user" style={{ fontSize: '3rem' }} />
