@@ -72,14 +72,28 @@ const ResultsAI = () => {
         }
         setPhotoApprovalSubmitting(true);
         try {
+            const isAssessment = photoApprovalCandidate.is_assessment || !photoApprovalCandidate.email_token;
+            const url = isAssessment
+                ? `${API_BASE_URL}/ai/submission/${pk}/approve-photo/`
+                : `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`;
+
             const resp = await axios.post(
-                `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`,
+                url,
                 {},
                 { headers: { Authorization: `Bearer ${getToken()}` } }
             );
             showToast('success', resp.data?.message || 'Photo approved and updated.');
             setPhotoApprovalCandidate(null);
             fetchData();
+            if (viewedSubmission && viewedSubmission.id === pk) {
+                setViewedSubmission(prev => ({
+                    ...prev,
+                    identity_mismatch_detected: false,
+                    photo_update_approved: true,
+                    photo_update_pending: false,
+                    candidate_photo_url: prev.intruder_photo_url || prev.pending_identity_photo_url || prev.candidate_photo_url,
+                }));
+            }
         } catch (err) {
             showToast('error', err.response?.data?.error || 'Failed to approve photo.');
         } finally {
@@ -656,11 +670,11 @@ const ResultsAI = () => {
             ? allRows
             : allRows.filter(r => {
                 if (statusFilter === 'on-hold') {
-                    return r.status === 'On-Hold';
+                    return r.status === 'On-Hold' || r.status === 'hold';
                 }
                 const pass = isPass(r, activeTab);
-                if (statusFilter === 'pass') return pass && r.status !== 'On-Hold';
-                return !pass && r.status !== 'On-Hold';
+                if (statusFilter === 'pass') return pass && r.status !== 'On-Hold' && r.status !== 'hold';
+                return !pass && r.status !== 'On-Hold' && r.status !== 'hold';
             });
 
         // Apply sorting (works for all tabs)
@@ -1563,80 +1577,111 @@ const ResultsAI = () => {
                                         </div>
                                     </div>
                                 )}
+
+                                {/* ── IDENTITY EVIDENCE — Two-face comparison ── */}
+                                {viewedSubmission.identity_mismatch_detected && (
+                                    <div style={{ marginTop: '4rem' }}>
+                                        <h4 style={{ color: '#991B1B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626' }}></i> Identity Evidence — Face Comparison
+                                        </h4>
+                                        <div style={{ background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '30px', padding: '2rem', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap', boxShadow: '0 10px 30px rgba(220, 38, 38, 0.05)' }}>
+                                            {/* BOX 1: First registered face (from deepface face_0.jpg) */}
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E0E5F2', position: 'relative', marginBottom: '0.5rem' }}>
+                                                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                        ✓ REGISTERED FACE
+                                                    </div>
+                                                    <img
+                                                        src={viewedSubmission.candidate_photo_url}
+                                                        alt="Registered Face"
+                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                    />
+                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                        <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
+                                                    </div>
+                                                </div>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#065f46' }}>Original Candidate</div>
+                                            </div>
+
+                                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', color: '#DC2626', fontWeight: 'bold', paddingTop: '60px' }}>≠</div>
+
+                                            {/* BOX 2: Person who joined mid-exam (intruder_photo) */}
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '2px dashed #DC2626', position: 'relative', marginBottom: '0.5rem' }}>
+                                                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#DC2626', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
+                                                        ⚠ DIFFERENT PERSON DETECTED
+                                                    </div>
+                                                    <img
+                                                        src={viewedSubmission.intruder_photo_url || (() => {
+                                                            const snaps = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
+                                                            const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
+                                                            if (mismatchSnap) {
+                                                                return mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
+                                                            }
+                                                            if (snaps.length > 0) {
+                                                                const lastSnap = snaps[snaps.length - 1];
+                                                                return lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
+                                                            }
+                                                            return null;
+                                                        })()}
+                                                        alt="Intruder Face"
+                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                    />
+                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                        <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
+                                                    </div>
+                                                </div>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#991B1B' }}>Person During Assessment</div>
+                                            </div>
+
+                                            <div style={{ flex: 1, minWidth: '200px', paddingTop: '30px' }}>
+                                                <p style={{ color: '#7F1D1D', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                                                    <strong>HR Action Required:</strong> The AI proctoring system detected that the person completing the assessment does not match the registered candidate. Please verify identity before making a hiring decision.
+                                                </p>
+                                                {viewedSubmission.identity_mismatch_details?.mismatch_at && (
+                                                    <p style={{ color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                                                        Detected at: {new Date(viewedSubmission.identity_mismatch_details.mismatch_at).toLocaleString()}
+                                                    </p>
+                                                )}
+                                                <button
+                                                    onClick={() => setPhotoApprovalCandidate({
+                                                        ...viewedSubmission,
+                                                        ai_candidate_pk: viewedSubmission.id,
+                                                        is_assessment: true,
+                                                        master_photo_url: viewedSubmission.original_identity_photo_url,
+                                                        pending_identity_photo_url: viewedSubmission.intruder_photo_url,
+                                                        full_name: viewedSubmission.candidate_name,
+                                                        email: viewedSubmission.candidate_email,
+                                                    })}
+                                                    style={{
+                                                        marginTop: '1rem',
+                                                        padding: '10px 20px',
+                                                        background: '#EE5D50',
+                                                        color: '#fff',
+                                                        border: 'none',
+                                                        borderRadius: '10px',
+                                                        cursor: 'pointer',
+                                                        fontWeight: '800',
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px',
+                                                        boxShadow: '0 4px 12px rgba(238, 93, 80, 0.2)',
+                                                        transition: 'all 0.2s ease',
+                                                    }}
+                                                    onMouseEnter={(e) => e.target.style.background = '#E04E41'}
+                                                    onMouseLeave={(e) => e.target.style.background = '#EE5D50'}
+                                                >
+                                                    <i className="fa-solid fa-user-check"></i>
+                                                    Approve & Update Registered Face
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
-
-                        {/* ── IDENTITY EVIDENCE — Two-face comparison at bottom of modal ── */}
-                        {viewedSubmission.identity_mismatch_detected && (
-                            <div style={{ padding: '0 2.5rem 2rem' }}>
-                                <h4 style={{ color: '#991B1B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626' }}></i> Identity Evidence — Face Comparison
-                                </h4>
-                                <div style={{ background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '16px', padding: '1.5rem', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                                    {/* BOX 1: First registered face (from deepface face_0.jpg) */}
-                                    <div style={{ textAlign: 'center' }}>
-                                        <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E0E5F2', position: 'relative', marginBottom: '0.5rem' }}>
-                                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
-                                                ✓ REGISTERED FACE
-                                            </div>
-                                            <img
-                                                src={viewedSubmission.candidate_photo_url}
-                                                alt="Registered Face"
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                            />
-                                            <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
-                                            </div>
-                                        </div>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#065f46' }}>Original Candidate</div>
-                                    </div>
-
-                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', color: '#DC2626', fontWeight: 'bold', paddingTop: '60px' }}>≠</div>
-
-                                    {/* BOX 2: Person who joined mid-exam (intruder_photo) */}
-                                    <div style={{ textAlign: 'center' }}>
-                                        <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '2px dashed #DC2626', position: 'relative', marginBottom: '0.5rem' }}>
-                                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#DC2626', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
-                                                ⚠ DIFFERENT PERSON DETECTED
-                                            </div>
-                                            <img
-                                                src={viewedSubmission.intruder_photo_url || (() => {
-                                                    const snaps = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
-                                                    const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
-                                                    if (mismatchSnap) {
-                                                        return mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
-                                                    }
-                                                    if (snaps.length > 0) {
-                                                        const lastSnap = snaps[snaps.length - 1];
-                                                        return lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
-                                                    }
-                                                    return null;
-                                                })()}
-                                                alt="Intruder Face"
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                            />
-                                            <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
-                                            </div>
-                                        </div>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#991B1B' }}>Person During Assessment</div>
-                                    </div>
-
-                                    <div style={{ flex: 1, minWidth: '200px', paddingTop: '30px' }}>
-                                        <p style={{ color: '#7F1D1D', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
-                                            <strong>HR Action Required:</strong> The AI proctoring system detected that the person completing the assessment does not match the registered candidate. Please verify identity before making a hiring decision.
-                                        </p>
-                                        {viewedSubmission.identity_mismatch_details?.mismatch_at && (
-                                            <p style={{ color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.5rem' }}>
-                                                Detected at: {new Date(viewedSubmission.identity_mismatch_details.mismatch_at).toLocaleString()}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
 
                         {/* Modal Footer */}
                         <div style={{
@@ -1973,7 +2018,7 @@ const ResultsAI = () => {
                                     <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                             <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9CA3AF', textTransform: 'uppercase' }}>Type:</span>
-                                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }, ...(activeTab === 'interview' ? [{ key: 'on-hold', label: '⚠️ On-Hold' }] : [])].map(f => (
+                                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass' }, { key: 'fail', label: 'Fail' }, ...((activeTab === 'interview' || activeTab === 'assessment') ? [{ key: 'on-hold', label: '⚠️ On-Hold' }] : [])].map(f => (
                                                 <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
                                                     padding: '0.25rem 0.75rem', borderRadius: '15px', border: '1px solid',
                                                     fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer',

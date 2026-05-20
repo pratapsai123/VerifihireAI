@@ -226,6 +226,12 @@ def _get_unified_identity_mismatch_fields(request, submission):
         "original_identity_photo_url": orig_url,
         "intruder_photo_url": intruder_url,
         "identity_mismatch_details": details,
+        "photo_update_pending": bool(detected and intruder_url),
+        "photo_update_approved": bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False,
+        "pending_identity_photo_url": intruder_url,
+        "master_photo_url": orig_url,
+        "is_assessment": True,
+        "ai_candidate_pk": submission.id,
     }
 
 logger = logging.getLogger(__name__)
@@ -2816,8 +2822,26 @@ class AIAssessmentReportDownloadView(APIView):
                 
                 target_file = None
 
-                # Step 1: Prioritize PAN folder
-                if getattr(submission, 'pan_number', None):
+                # Step 1: Prioritize original_identity_photo if there's a mismatch
+                if getattr(submission, 'identity_mismatch_detected', False) and submission.original_identity_photo:
+                    if _os.path.exists(submission.original_identity_photo.path):
+                        target_file = Path(submission.original_identity_photo.path)
+
+                # Step 2: Check unified IdentityLink next
+                if not target_file and submission.candidate_email:
+                    try:
+                        from api.models import IdentityLink
+                        identities = IdentityLink.objects.filter(email__iexact=submission.candidate_email.lower().strip()).order_by('-id')
+                        for identity in identities:
+                            if identity.snapshot_image and identity.snapshot_image.name:
+                                if _os.path.exists(identity.snapshot_image.path):
+                                    target_file = Path(identity.snapshot_image.path)
+                                    break
+                    except Exception as e:
+                        logger.warning(f"PDF IdentityLink check error: {e}")
+
+                # Step 3: Prioritize PAN folder
+                if not target_file and getattr(submission, 'pan_number', None):
                     pan_id = submission.pan_number.lower().strip()
                     pan_face_dir = deepface_data_dir / pan_id
                     if pan_face_dir.exists():
@@ -2830,7 +2854,7 @@ class AIAssessmentReportDownloadView(APIView):
                             if jpgs:
                                 target_file = jpgs[0]
 
-                # Step 2: Fall back to exact email_token folder for this assessment only
+                # Step 4: Fall back to exact email_token folder for this assessment only
                 if not target_file:
                     person_id = f"{submission.candidate_email.lower().strip()}_{assessment.share_token}" if assessment.share_token else submission.candidate_email.lower().strip()
                     person_face_dir = deepface_data_dir / person_id
@@ -2843,7 +2867,7 @@ class AIAssessmentReportDownloadView(APIView):
                         if jpgs:
                             target_file = jpgs[0]
 
-                # Step 2: First non-empty webcam integrity screenshot (> 10KB)
+                # Step 5: First non-empty webcam integrity screenshot (> 10KB)
                 if not target_file:
                     snaps = AIAssessmentIntegrityScreenshot.objects.filter(
                         submission=submission,
@@ -2860,7 +2884,7 @@ class AIAssessmentReportDownloadView(APIView):
                     candidate_img = RLImage(str(target_file), width=1.4*inch, height=1.4*inch)
 
             except Exception as e:
-                logger.error(f"PDF Photo error for {person_id}: {e}")
+                logger.error(f"PDF Photo error for candidate {submission.candidate_email}: {e}")
 
             # Get PAN Card image
             pan_img = None
@@ -3168,6 +3192,83 @@ class AIAssessmentReportDownloadView(APIView):
             else:
                 elements.append(Paragraph("No violations recorded. Candidate maintained full integrity.", styles['Italic']))
 
+            # Identity Mismatch Section in PDF (placed below integrity screenshots)
+            if getattr(submission, 'identity_mismatch_detected', False):
+                elements.append(Spacer(1, 15))
+                # Red alert box title
+                mismatch_title_style = ParagraphStyle(
+                    'MismatchTitle',
+                    parent=styles['Heading3'],
+                    fontSize=11,
+                    textColor=colors.HexColor("#EE5D50"),
+                    fontName='Helvetica-Bold',
+                    spaceAfter=6
+                )
+                elements.append(Paragraph("⚠ IDENTITY EVIDENCE — FACE COMPARISON MISMATCH", mismatch_title_style))
+                
+                desc_style = ParagraphStyle(
+                    'MismatchDesc',
+                    parent=styles['Normal'],
+                    fontSize=9,
+                    textColor=colors.HexColor("#EE5D50"),
+                    leading=13
+                )
+                elements.append(Paragraph(
+                    "The candidate failed the automated facial verification check when starting the assessment. "
+                    "They chose to 'Override & Continue', meaning the assessment was completed using a <b>different face</b> "
+                    "than what was initially registered. Please compare the original face with the overriding face below.",
+                    desc_style
+                ))
+                elements.append(Spacer(1, 10))
+                
+                # Side-by-side comparison table
+                comparison_photos = []
+                comparison_row = []
+                
+                import os as _os_local
+                orig_path = getattr(submission.original_identity_photo, 'path', None) if submission.original_identity_photo else None
+                intr_path = getattr(submission.intruder_photo, 'path', None) if submission.intruder_photo else None
+                
+                # Fall back to target_file if original_identity_photo not set on submission
+                if not orig_path and target_file:
+                    orig_path = str(target_file)
+                
+                try:
+                    if orig_path and _os_local.path.exists(orig_path):
+                        comparison_row.append(RLImage(orig_path, width=1.6*inch, height=1.6*inch))
+                    else:
+                        comparison_row.append(Paragraph("No Registered Photo", styles['Normal']))
+                except Exception as e:
+                    comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                    
+                try:
+                    if intr_path and _os_local.path.exists(intr_path):
+                        comparison_row.append(RLImage(intr_path, width=1.6*inch, height=1.6*inch))
+                    else:
+                        comparison_row.append(Paragraph("No Overriding Photo", styles['Normal']))
+                except Exception as e:
+                    comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                    
+                comparison_photos.append(comparison_row)
+                
+                # Labels row
+                comparison_labels = [
+                    Paragraph("<b>1. Registered Face</b>", ParagraphStyle('CompLabel1', parent=styles['Normal'], fontSize=9, alignment=1)),
+                    Paragraph("<b>2. Assessment Overriding Face</b>", ParagraphStyle('CompLabel2', parent=styles['Normal'], fontSize=9, alignment=1))
+                ]
+                comparison_photos.append(comparison_labels)
+                
+                comp_table = Table(comparison_photos, colWidths=[page_width/2] * 2)
+                comp_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('TOPPADDING', (0,0), (-1,-1), 5),
+                    ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                    ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#EE5D50")),
+                    ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FFF5F5")),
+                ]))
+                elements.append(comp_table)
+
             # Build PDF
             doc.build(elements)
             buffer.seek(0)
@@ -3379,7 +3480,13 @@ class AIAssessmentResultsView(APIView):
                 'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
                 'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
                 'intruder_photo_url': request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None,
-                'identity_mismatch_details': getattr(s, 'identity_mismatch_details', {})
+                'identity_mismatch_details': getattr(s, 'identity_mismatch_details', {}),
+                'photo_update_pending': bool(s.identity_mismatch_detected and s.intruder_photo),
+                'photo_update_approved': bool(s.identity_mismatch_details.get('photo_update_approved', False)) if isinstance(s.identity_mismatch_details, dict) else False,
+                'pending_identity_photo_url': request.build_absolute_uri(s.intruder_photo.url) if s.intruder_photo else None,
+                'master_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if s.original_identity_photo else None,
+                'is_assessment': True,
+                'ai_candidate_pk': s.id,
             })
         
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
@@ -3453,3 +3560,95 @@ class OverrideSubmissionStatusView(APIView):
                 'status': 'rejected',
                 'submission_id': pk
             }, status=status.HTTP_200_OK)
+
+
+class ApproveAssessmentIdentityPhotoView(APIView):
+    """
+    POST /api/ai/submission/<pk>/approve-photo/
+    Approves the overriding face mismatch photo for an AI Assessment submission:
+      1. Pushes the intruder/mismatch photo to DeepFace as the new master face for this PAN / token.
+      2. Promotes the intruder_photo to the original_identity_photo (updating the baseline).
+      3. Clears the identity_mismatch_detected flag.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        try:
+            submission = AIAssessmentSubmission.objects.get(pk=pk)
+        except AIAssessmentSubmission.DoesNotExist:
+            return Response({'error': 'Submission not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Authorization: must belong to the same company
+        user_profile = getattr(request.user, 'profile', None)
+        if user_profile and user_profile.company and submission.assessment.company_id != user_profile.company_id:
+            return Response({'error': 'Forbidden'}, status=status.HTTP_403_FORBIDDEN)
+
+        if not submission.intruder_photo:
+            return Response(
+                {'error': 'No mismatch/intruder photo to approve for this submission.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # 1. Read intruder_photo and base64 encode it for DeepFace registration.
+        try:
+            import base64
+            with submission.intruder_photo.open('rb') as f:
+                img_data = f.read()
+                b64_data = base64.b64encode(img_data).decode('utf-8')
+            
+            # DeepFace registration: person_id is PAN Card if available, otherwise email_token
+            pan = getattr(submission, 'pan_number', None)
+            if pan and pan.strip():
+                person_id = pan.lower().strip()
+            else:
+                email = submission.candidate_email.strip().lower()
+                token = submission.assessment.share_token
+                person_id = f"{email}_{token}"
+            
+            # Register with deepface
+            _register_face_with_deepface(person_id, b64_data)
+            logger.info(f"[ApproveAssessmentPhoto] DeepFace re-registered {person_id}")
+        except Exception as e:
+            logger.exception(f"[ApproveAssessmentPhoto] Failed to push to DeepFace: {e}")
+            return Response(
+                {'error': f'Could not update DeepFace: {e}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        # 2. Promote intruder_photo to original_identity_photo.
+        try:
+            submission.original_identity_photo = submission.intruder_photo
+            submission.identity_mismatch_detected = False
+            
+            details = submission.identity_mismatch_details or {}
+            details['photo_approved_at'] = timezone.now().isoformat()
+            details['photo_approved_by'] = request.user.email if hasattr(request.user, 'email') else str(request.user)
+            details['photo_update_approved'] = True
+            submission.identity_mismatch_details = details
+            submission.save()
+            
+            # 3. Also update the unified IdentityLink so it cascades everywhere
+            from api.models import IdentityLink
+            email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+            if email:
+                try:
+                    identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
+                    if identity:
+                        identity.snapshot_image = submission.intruder_photo
+                        identity.save(update_fields=['snapshot_image', 'updated_at'])
+                        logger.info(f"[ApproveAssessmentPhoto] Updated IdentityLink for {email}")
+                except Exception as e:
+                    logger.error(f"[ApproveAssessmentPhoto] Failed to update IdentityLink: {e}")
+
+        except Exception as e:
+            logger.exception(f"[ApproveAssessmentPhoto] Save error: {e}")
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(
+            {
+                'success': True,
+                'message': 'Assessment identity photo approved and updated successfully.',
+                'submission_id': submission.id,
+            },
+            status=status.HTTP_200_OK,
+        )
