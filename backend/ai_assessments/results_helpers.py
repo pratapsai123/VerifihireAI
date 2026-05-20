@@ -122,6 +122,12 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
                 'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
                 'intruder_photo_url': request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None,
+                'photo_update_pending': bool(s.identity_mismatch_detected and s.intruder_photo),
+                'photo_update_approved': bool(s.identity_mismatch_details.get('photo_update_approved', False)) if isinstance(s.identity_mismatch_details, dict) else False,
+                'pending_identity_photo_url': request.build_absolute_uri(s.intruder_photo.url) if s.intruder_photo else None,
+                'master_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if s.original_identity_photo else None,
+                'is_assessment': True,
+                'ai_candidate_pk': s.id,
             }
         )
 

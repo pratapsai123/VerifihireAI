@@ -1296,6 +1296,10 @@ const AiTakeAssessment = () => {
             setFormError('Phone number is required');
             return;
         }
+        if (!/^[6-9]\d{9}$/.test(phone.trim())) {
+            setFormError('Invalid phone number. It must start with 6, 7, 8, or 9 and be exactly 10 digits long.');
+            return;
+        }
         if (!panNumber.trim()) {
             setFormError('PAN card number is required');
             return;

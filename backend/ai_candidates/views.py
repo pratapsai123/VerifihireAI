@@ -3655,6 +3655,26 @@ class ApprovePendingIdentityPhotoView(APIView):
         # 2. Promote pending → registered (report photo) and update master.
         candidate.registered_face_b64 = candidate.pending_face_b64
         candidate.master_face_b64 = candidate.pending_face_b64  # New master for this PAN
+        
+        # 3. Also update the unified IdentityLink
+        email = candidate.email.lower().strip() if candidate.email else None
+        if email:
+            from api.models import IdentityLink
+            try:
+                identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
+                if identity and candidate.registered_face_b64:
+                    import base64
+                    from django.core.files.base import ContentFile
+                    b64_str = candidate.registered_face_b64
+                    if ',' in b64_str:
+                        b64_str = b64_str.split(',', 1)[1]
+                    img_data = base64.b64decode(b64_str)
+                    filename = f"approved_ai_{candidate.id}.jpg"
+                    identity.snapshot_image.save(filename, ContentFile(img_data), save=True)
+                    logger.info(f"[ApprovePhoto] Updated IdentityLink for {email}")
+            except Exception as e:
+                logger.error(f"[ApprovePhoto] Failed to update IdentityLink: {e}")
+
         candidate.pending_face_b64 = None
         candidate.photo_update_approved = True
         candidate.identity_mismatch_detected = False
