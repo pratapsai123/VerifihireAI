@@ -72,8 +72,7 @@ const ResultsAI = () => {
         }
         setPhotoApprovalSubmitting(true);
         try {
-
-            // Determine correct endpoint based on candidate type_
+            // Determine correct endpoint based on candidate type
             const isAiCandidate = !!photoApprovalCandidate.is_ai_candidate;
             const url = isAiCandidate
                 ? `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`
@@ -1806,6 +1805,15 @@ const ResultsAI = () => {
                                                 if (activeTab === 'interview') return data.interview.length > 0 && !data.is_fully_automatic;
                                                 if (activeTab === 'fully_automatic') return data.is_fully_automatic;
                                                 return true;
+                                            })
+                                            .sort(([, a], [, b]) => {
+                                                // Sort by most recent submission/creation date (newest first)
+                                                const getLatest = (d) => {
+                                                    const all = [...(d.resume || []), ...(d.assessment || []), ...(d.interview || [])];
+                                                    const dates = all.map(r => r.submitted_at || r.created_at).filter(Boolean);
+                                                    return dates.length > 0 ? new Date(Math.max(...dates.map(d => new Date(d)))) : new Date(0);
+                                                };
+                                                return getLatest(b) - getLatest(a);
                                             })
                                             .map(([roleName, data]) => (
                                                 <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{

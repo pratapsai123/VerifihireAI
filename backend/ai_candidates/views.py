@@ -1171,15 +1171,18 @@ class RetryFailedExtractionsView(APIView):
                         num_percentage = 0
 
                     
-
-                    candidate.resume_score = num_percentage
-                    candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
-
-                    is_eligible = (num_percentage >= threshold)
-
-                    candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
-
+                    # For AI interviews (non-fully-automatic), resume is only for
+                    # question generation — don't score or set pass/fail status.
+                    is_auto = getattr(candidate, 'automation_settings', None)
+                    is_fully_auto = isinstance(is_auto, dict) and is_auto.get('is_fully_automatic', False)
                     
+                    if is_fully_auto:
+                        candidate.resume_score = num_percentage
+                        candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
+                        is_eligible = (num_percentage >= threshold)
+                        candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
+                    else:
+                        candidate.resume_summary = match_result.get('summary', '')
 
                     if match_result.get('interview_questions'):
 
@@ -1483,8 +1486,12 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
                 candidate.link_opened_at = now
 
-                # candidate.pan_locked = True
-                candidate.save(update_fields=['link_opened_at'])
+                # Update status to Interviewing if still in a pre-interview state
+                if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
+                    candidate.status = 'Interviewing'
+                    candidate.save(update_fields=['link_opened_at', 'status'])
+                else:
+                    candidate.save(update_fields=['link_opened_at'])
 
             else:
 
@@ -1564,8 +1571,12 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
             candidate.link_opened_at = now
 
-            # candidate.pan_locked = True
-            candidate.save(update_fields=['link_opened_at'])
+            # Update status to Interviewing if still in a pre-interview state
+            if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
+                candidate.status = 'Interviewing'
+                candidate.save(update_fields=['link_opened_at', 'status'])
+            else:
+                candidate.save(update_fields=['link_opened_at'])
 
             
 
@@ -3682,3 +3693,159 @@ class ApprovePendingIdentityPhotoView(APIView):
             },
             status=status.HTTP_200_OK,
         )
+
+
+class InterviewsOverviewView(APIView):
+    """
+    Returns all AI interview batches with per-batch stats and candidate lists.
+    GET /api/ai-candidates/interviews-overview/
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user_profile = getattr(request.user, 'profile', None)
+        company = user_profile.company if user_profile else None
+
+        if company:
+            candidates = Candidate.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+        else:
+            candidates = Candidate.objects.filter(is_deleted=False).order_by('-created_at')
+
+        # Group by batch
+        from collections import defaultdict
+        batch_map = defaultdict(list)
+        for c in candidates:
+            key = c.batch_id or f"single_{c.id}"
+            batch_map[key].append(c)
+
+        completed_statuses = {'Completed', 'Hired', 'Rejected', 'Interview Passed', 'Interview Failed'}
+        in_progress_statuses = {'Interviewing', 'Resume Passed', 'On-Hold', 'Resume Failed', 'New'}
+
+        total_all = 0
+        completed_all = 0
+        in_progress_all = 0
+        pending_all = 0
+        scores = []
+
+        batches = []
+        for batch_id, cands in batch_map.items():
+            batch_name = cands[0].batch_name or cands[0].job_title or 'Unnamed Batch'
+            created_at = cands[0].created_at
+
+            batch_completed = 0
+            batch_in_progress = 0
+            batch_pending = 0
+            candidate_list = []
+
+            for c in cands:
+                total_all += 1
+                total_possible = 13 * 10
+                score_pct = round((c.score / total_possible) * 100) if c.score is not None and total_possible > 0 and (c.completed_at or c.status in completed_statuses) else None
+
+                if c.status in completed_statuses or c.completed_at:
+                    batch_completed += 1
+                    completed_all += 1
+                    if score_pct is not None:
+                        scores.append(score_pct)
+                elif c.status in in_progress_statuses or (c.link_opened_at and not c.completed_at):
+                    batch_in_progress += 1
+                    in_progress_all += 1
+                else:
+                    batch_pending += 1
+                    pending_all += 1
+
+                status_group = 'completed' if (c.status in completed_statuses or c.completed_at) else \
+                               'in_progress' if (c.status in in_progress_statuses or c.link_opened_at) else 'pending'
+
+                candidate_list.append({
+                    'id': c.id,
+                    'public_token': str(c.public_token),
+                    'name': c.full_name or 'Unknown',
+                    'email': c.email or '',
+                    'status': c.status or 'Invited',
+                    'status_group': status_group,
+                    'score_pct': score_pct,
+                })
+
+            batches.append({
+                'batch_id': batch_id,
+                'batch_name': batch_name,
+                'created_at': timezone.localtime(created_at).strftime('%B %d, %Y %I:%M %p') if created_at else '',
+                'created_at_iso': timezone.localtime(created_at).isoformat() if created_at else '',
+                'total': len(cands),
+                'completed': batch_completed,
+                'in_progress': batch_in_progress,
+                'pending': batch_pending,
+                'candidates': candidate_list,
+            })
+
+        # Sort batches by most recent first (use ISO timestamp for accurate ordering)
+        batches.sort(key=lambda b: b.get('created_at_iso', ''), reverse=True)
+
+        avg_score = round(sum(scores) / len(scores)) if scores else 0
+
+        return Response({
+            'summary': {
+                'total': total_all,
+                'completed': completed_all,
+                'in_progress': in_progress_all,
+                'pending': pending_all,
+                'avg_score': avg_score,
+            },
+            'batches': batches,
+        })
+
+
+class ResendInviteView(APIView):
+    """
+    Resend the interview invite email to a candidate.
+    POST /api/ai-candidates/<pk>/resend-invite/
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if candidate.completed_at or candidate.status in ['Completed', 'Hired', 'Rejected']:
+            return Response({'error': 'Cannot resend invite for a completed interview.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            from django.core.mail import send_mail
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            link = f"{frontend_base}/interview-start/{candidate.public_token}"
+            name = candidate.full_name or 'Candidate'
+            email = candidate.email
+
+            if not email:
+                return Response({'error': 'Candidate has no email address.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            subject = f"Reminder: AI Interview Session - {candidate.job_title or 'Interview'}"
+            message = f"Dear {name},\n\nThis is a reminder to complete your AI interview.\n\nLink: {link}\n\nBest regards,\nVerifiHireAI"
+            html_message = f"""
+            <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #6366F1, #8B5CF6); padding: 24px; text-align: center;">
+                    <h1 style="color: white; margin: 0; font-size: 22px;">VerifiHireAI</h1>
+                    <p style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: 13px;">AI Interview Reminder</p>
+                </div>
+                <div style="padding: 32px; background-color: white;">
+                    <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{name}</strong>,</p>
+                    <p style="line-height: 1.6; margin-bottom: 24px;">This is a reminder to complete your AI-powered video interview session. Please click the button below to start or resume.</p>
+                    <div style="text-align: center; margin: 32px 0;">
+                        <a href="{link}" style="background-color: #6366F1; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block;">Start Interview</a>
+                    </div>
+                    <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; padding-top: 16px;">
+                        If the button doesn't work, copy this link:<br/>
+                        <a href="{link}" style="color: #6366F1;">{link}</a>
+                    </p>
+                </div>
+            </div>
+            """
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
+            logger.info(f"[ResendInvite] Email resent to {email} for candidate {candidate.id}")
+            return Response({'success': True, 'message': f'Invite resent to {email}'})
+        except Exception as e:
+            logger.error(f"[ResendInvite] Failed to resend invite: {e}")
+            return Response({'error': f'Failed to send email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

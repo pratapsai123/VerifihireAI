@@ -252,10 +252,18 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 
                 if is_placeholder_email and ext_email and ext_email != "Extraction Failed":
                     candidate.email = ext_email
-                candidate.resume_score = percentage
-                candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
-                is_eligible = (percentage >= threshold)
-                candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
+                
+                # For AI interviews (non-fully-automatic), the resume is only used
+                # for question generation — never score it or set pass/fail status.
+                if is_fully_automatic:
+                    candidate.resume_score = percentage
+                    candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
+                    is_eligible = (percentage >= threshold)
+                    candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
+                else:
+                    # AI Interview: just store questions, keep status as Invited
+                    candidate.resume_summary = match_result.get('summary', '')
+                
                 candidate.interview_questions = match_result.get('interview_questions', [])
                 
                 if automation_settings:

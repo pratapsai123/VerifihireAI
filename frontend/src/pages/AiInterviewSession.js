@@ -893,6 +893,54 @@ const AiInterviewSession = () => {
         synthRef.current.speak(silentU);
     }, []);
 
+    // speakWithBlob: plays a pre-fetched TTS audio blob (skips the network fetch)
+    const speakWithBlob = useCallback((blob) => {
+        if (currentAudioRef.current) {
+            try { currentAudioRef.current.pause(); currentAudioRef.current.currentTime = 0; } catch (e) {}
+            currentAudioRef.current = null;
+        }
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+        if (!isFullscreenRef.current && isPermissionsGranted) return Promise.resolve();
+
+        setIsSpeaking(true);
+        isSpeakingRef.current = true;
+        setAiStatus("Speaking...");
+
+        return new Promise((resolve) => {
+            if (!blob) { setIsSpeaking(false); isSpeakingRef.current = false; return resolve(); }
+            if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = false; });
+
+            const audioBlob = new Blob([blob], { type: 'audio/mpeg' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            currentAudioRef.current = audio;
+
+            audio.onended = () => {
+                currentAudioRef.current = null;
+                URL.revokeObjectURL(audioUrl);
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
+                resolve();
+            };
+            audio.onerror = () => {
+                currentAudioRef.current = null;
+                URL.revokeObjectURL(audioUrl);
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
+                resolve();
+            };
+            audio.play().catch(() => {
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
+                resolve();
+            });
+        });
+    }, [isPermissionsGranted]);
+
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
 
@@ -1734,6 +1782,11 @@ const AiInterviewSession = () => {
 
                 addMessage('ai', followUpText);
 
+                // Pre-fetch TTS audio immediately (starts generating while UI updates)
+                const ttsPromise = axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text: followUpText }, {
+                    responseType: 'blob', timeout: 30000
+                }).catch(() => null);
+
                 // Determine mode BEFORE speaking
                 let effectiveMode = userInputMode;
                 if (data.requires_code_input) {
@@ -1749,7 +1802,13 @@ const AiInterviewSession = () => {
                     setAiStatus("Indu is Online");
                 }
 
-                await speak(followUpText);
+                // Use pre-fetched audio if available, otherwise speak fetches fresh
+                const prefetched = await ttsPromise;
+                if (prefetched && prefetched.data) {
+                    await speakWithBlob(prefetched.data);
+                } else {
+                    await speak(followUpText);
+                }
                 // NEW: Wait for speech to fully complete before starting mic
                 await waitForSpeechToFinish();
                 setIsProcessing(false);
@@ -3288,12 +3347,12 @@ const AiInterviewSession = () => {
 
                                     <button
                                         onClick={wizardStep === 3 ? handleRetryCapture : handleRegisterFace}
-                                        disabled={wizardStep === 1 || wizardStep === 2}
+                                        disabled={wizardStep === 1 || wizardStep === 2 || (wizardStep === 0 && !faceInOval)}
                                         style={{
-                                            background: wizardStep === 2 ? '#22c55e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                            background: wizardStep === 2 ? '#22c55e' : (wizardStep === 0 && !faceInOval) ? '#9ca3af' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                                             color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
-                                            fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2) ? 'not-allowed' : 'pointer',
-                                            opacity: (wizardStep === 1) ? 0.7 : 1, transition: 'all 0.2s',
+                                            fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2 || (wizardStep === 0 && !faceInOval)) ? 'not-allowed' : 'pointer',
+                                            opacity: (wizardStep === 1 || (wizardStep === 0 && !faceInOval)) ? 0.7 : 1, transition: 'all 0.2s',
                                             boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
                                         }}
                                     >
