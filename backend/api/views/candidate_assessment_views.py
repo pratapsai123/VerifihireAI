@@ -2028,9 +2028,10 @@ def results_overview_view(request):
             now = timezone.now()
             for inv in inv_qs[:300]:
                 a = inv.assessment
-                # Logic: if current time > end_time -> not_attempted, else sent
-                inv_status = 'sent'
-                if inv.end_time and now > inv.end_time:
+                # Use the actual stored status (e.g., 'failed', 'draft', 'sent')
+                # Override to 'not_attempted' only if the assessment window has expired
+                inv_status = inv.status or 'sent'
+                if inv.end_time and now > inv.end_time and inv_status not in ('failed',):
                     inv_status = 'not_attempted'
                 
                 results.append({
@@ -3148,7 +3149,14 @@ def update_submission_result_view(request, submission_id):
             return Response({'message': f'Result is already {new_result}.'}, status=status.HTTP_200_OK)
 
         submission.result = new_result
-        submission.save(update_fields=['result'])
+        # Keep is_qualified in sync so the auto-schedule Celery task
+        # (which gates on submission.is_qualified) works correctly when
+        # an admin manually promotes a Hold candidate to Selected.
+        if new_result == 'selected':
+            submission.is_qualified = True
+        elif new_result in ('rejected', 'hold'):
+            submission.is_qualified = False
+        submission.save(update_fields=['result', 'is_qualified'])
 
         inv = submission.invitation
         from api.tasks import send_custom_assessment_result_task, send_regret_email_task

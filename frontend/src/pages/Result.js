@@ -39,6 +39,9 @@ function getStatusMeta(status, r = {}) {
     if (status === 'sent') {
         return { label: 'Sent', className: 'info' };
     }
+    if (status === 'failed') {
+        return { label: 'Failed', className: 'bad' };
+    }
     if (status === 'not_attempted') {
         return { label: 'Not Attempted', className: 'neutral' };
     }
