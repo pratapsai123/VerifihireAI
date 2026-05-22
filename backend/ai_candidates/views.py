@@ -1171,18 +1171,24 @@ class RetryFailedExtractionsView(APIView):
                         num_percentage = 0
 
                     
-                    # For AI interviews (non-fully-automatic), resume is only for
-                    # question generation — don't score or set pass/fail status.
+                    # For AI interviews (non-fully-automatic with interview_duration_minutes),
+                    # resume is only for question generation — don't score.
+                    # Resume screening and fully-automatic always get scored.
                     is_auto = getattr(candidate, 'automation_settings', None)
                     is_fully_auto = isinstance(is_auto, dict) and is_auto.get('is_fully_automatic', False)
-                    
-                    if is_fully_auto:
+                    is_ai_interview_only = (
+                        not is_fully_auto
+                        and isinstance(is_auto, dict)
+                        and 'interview_duration_minutes' in is_auto
+                    )
+
+                    if is_ai_interview_only:
+                        candidate.resume_summary = match_result.get('summary', '')
+                    else:
                         candidate.resume_score = num_percentage
                         candidate.resume_summary = match_result.get('summary', 'No summary provided by AI.')
                         is_eligible = (num_percentage >= threshold)
                         candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
-                    else:
-                        candidate.resume_summary = match_result.get('summary', '')
 
                     if match_result.get('interview_questions'):
 
@@ -2243,34 +2249,10 @@ class CandidateRegistrationUpdateView(APIView):
                         'existing_pan': candidate.pan_number
                     }, status=status.HTTP_400_BAD_REQUEST)
 
-                # SECURITY CHECK 3: Prevent multiple people from using same PAN
-                existing_pan_holder = Candidate.objects.filter(
-                    pan_number=pan_number
-                ).exclude(public_token=public_token).exclude(email=candidate.email).first()
-
-                if existing_pan_holder:
-                    # PAN already belongs to another candidate
-                    if existing_pan_holder.face_embedding_hash:
-                        # Original holder has a registered face - require face verification
-                        # Save the PAN temporarily so backend knows what to verify against
-                        candidate.pan_number = pan_number
-                        candidate.pan_verified = False  # Not verified yet
-                        candidate.save()
-                        return Response({
-                            'error': 'This PAN is already registered. Please verify your identity by capturing your face in the next step.',
-                            'duplicate': True,
-                            'requires_face_verification': True,
-                            'verify_against_person_id': existing_pan_holder.public_token,
-                            'verify_against_person_pan': existing_pan_holder.pan_number,
-                            'registered_to': existing_pan_holder.full_name
-                        }, status=status.HTTP_400_BAD_REQUEST)
-                    else:
-                        # Original holder hasn't registered face yet - block to prevent race condition
-                        return Response({
-                            'error': 'This PAN number is already registered to another candidate. Each PAN can only be used by one person.',
-                            'duplicate': True,
-                            'registered_to': existing_pan_holder.full_name
-                        }, status=status.HTTP_400_BAD_REQUEST)
+                # For AI interviews, we allow any PAN to be used at the form stage.
+                # Identity verification happens during face registration (DeepFace
+                # compares the captured face against the PAN root photo). If it
+                # doesn't match, a mismatch flag is raised for admin review.
 
                 # Track PAN history for audit
                 if not candidate.pan_number:

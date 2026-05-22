@@ -94,11 +94,11 @@ class EnhancedPanValidationView(APIView):
             
             clean_extracted = re.sub(r'[^A-Z0-9]', '', (extracted_text or "").upper())
             
-            # 3. Identity Fraud Detection (if email provided)
-            if candidate_email:
-                fraud_check = self._check_identity_fraud(candidate_email, entered_pan, pan_photo)
-                if fraud_check:
-                    return fraud_check
+            # 3. Identity Fraud Detection (Disabled as per request)
+            # if candidate_email:
+            #     fraud_check = self._check_identity_fraud(candidate_email, entered_pan, pan_photo)
+            #     if fraud_check:
+            #         return fraud_check
 
             # 4. Find ALL potential PANs on the document
             loose_pattern = re.compile(r'[A-Z0-9]{5}[0-9A-Z]{4}[A-Z0-9]{1}')

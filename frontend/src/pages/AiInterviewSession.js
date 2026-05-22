@@ -247,17 +247,8 @@ const AiInterviewSession = () => {
     };
 
     const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null, durationSec = null) => {
-        const now = Date.now();
-        const lastReported = violationCooldownsRef.current[eventType] || 0;
-
-        // Check if this violation type is still in cooldown
-        if (now - lastReported < VIOLATION_COOLDOWN_MS) {
-            // Same violation type reported recently - skip this duplicate
-            return;
-        }
-
-        // Update cooldown tracker
-        violationCooldownsRef.current[eventType] = now;
+        // Cooldowns removed to ensure all violations are captured.
+        // Throttling is now handled purely by the 1-second gate in showAiEvent.
 
         try {
             const payload = {
@@ -301,28 +292,11 @@ const AiInterviewSession = () => {
         }
 
         if (eventType) {
-            // CONSECUTIVE-OCCURRENCE GATE: Only capture a screenshot and report
-            // to the backend if this violation type has occurred 2+ times in a row.
-            // This prevents flooding the results with one-off false positives
-            // (e.g., momentary angle change triggering a single face_mismatch).
-            if (lastViolationTypeRef.current === eventType) {
-                consecutiveViolationCountRef.current[eventType] = (consecutiveViolationCountRef.current[eventType] || 1) + 1;
-            } else {
-                // Different event type — reset counter for the new type
-                consecutiveViolationCountRef.current[eventType] = 1;
-                lastViolationTypeRef.current = eventType;
-            }
-
-            // Only proceed with screenshot capture on 2nd+ consecutive occurrence
-            if (consecutiveViolationCountRef.current[eventType] < 2) {
-                setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
-                return;
-            }
-
-            // Throttling: 2-second cooldown per event type to prevent same-cycle duplicates
+            // Throttling: 1-second cooldown per event type to prevent 5-FPS browser crashes,
+            // but short enough to capture almost every continuous violation.
             const now = Date.now();
             const lastTime = lastCaptureTimeRef.current[eventType] || 0;
-            if (now - lastTime < 2000) {
+            if (now - lastTime < 1000) {
                 setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
                 return;
             }
@@ -334,34 +308,61 @@ const AiInterviewSession = () => {
             // Capture Screen (if screen or environmental event)
             if (['tab_switch', 'window_blur', 'screen_stop', 'face_mismatch', 'looking_away', 'multi_person', 'no_face', 'no_face_detection', 'multiface_detection'].includes(eventType) && screenStreamRef.current) {
                 try {
-                    const video = document.createElement('video');
-                    video.srcObject = screenStreamRef.current;
-                    await video.play().catch(() => { });
+                    const videoTrack = screenStreamRef.current.getVideoTracks()[0];
+                    let captured = false;
 
-                    // Simple wait
-                    if (video.readyState < 2) {
-                        await new Promise(r => setTimeout(r, 400));
+                    // 1. Native ImageCapture API (Works in Chrome/Edge even if tab is hidden/backgrounded)
+                    if (window.ImageCapture && videoTrack) {
+                        try {
+                            const imageCapture = new window.ImageCapture(videoTrack);
+                            const bitmap = await imageCapture.grabFrame();
+                            const canvas = document.createElement('canvas');
+                            canvas.width = bitmap.width;
+                            canvas.height = bitmap.height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(bitmap, 0, 0);
+                            screenshot = canvas.toDataURL('image/jpeg', 0.6);
+                            captured = true;
+                        } catch (err) {
+                            console.warn("ImageCapture failed, falling back to video element:", err);
+                        }
                     }
 
-                    const canvas = document.createElement('canvas');
-                    canvas.width = video.videoWidth || 1280;
-                    canvas.height = video.videoHeight || 720;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0);
-                    screenshot = canvas.toDataURL('image/jpeg', 0.6);
-                    video.pause();
-                    video.srcObject = null;
+                    // 2. Fallback to video element (Works in Firefox, or if ImageCapture is unavailable)
+                    if (!captured) {
+                        const video = document.createElement('video');
+                        video.muted = true;
+                        video.autoplay = true;
+                        video.playsInline = true;
+                        video.srcObject = screenStreamRef.current;
+                        await video.play().catch(() => { });
+
+                        if (video.readyState < 2) {
+                            await new Promise(r => setTimeout(r, 400));
+                        }
+
+                        if (video.videoWidth > 0 && video.videoHeight > 0) {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            screenshot = canvas.toDataURL('image/jpeg', 0.6);
+                        }
+                        video.pause();
+                        video.srcObject = null;
+                    }
                 } catch (e) { console.warn("Screen capture failed:", e); }
             }
 
             // Always capture Webcam for context
-            if (videoRef.current && videoRef.current.readyState >= 2) {
+            if (videoRef.current && videoRef.current.readyState >= 2 && videoRef.current.videoWidth > 0) {
                 try {
                     const canvas = document.createElement('canvas');
                     canvas.width = videoRef.current.videoWidth;
                     canvas.height = videoRef.current.videoHeight;
                     const ctx = canvas.getContext('2d');
-                    ctx.drawImage(videoRef.current, 0, 0);
+                    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
                     webcamScreenshot = canvas.toDataURL('image/jpeg', 0.7);
                 } catch (e) { console.warn("Webcam capture failed:", e); }
             }
@@ -383,12 +384,13 @@ const AiInterviewSession = () => {
         const handleVisibilityChange = () => {
             if (document.hidden || document.visibilityState === 'hidden') {
                 setIsPaused(true);
-                pauseHardware();
                 setAiStatus("Interview Paused (Desktop Switched)");
-                showAiEvent("TAB SWITCHED", true, 'tab_switch');
                 // Track when the tab switch started
                 violationStartTimeRef.current['tab_switch'] = Date.now();
-                reportViolation('tab_switch');
+                (async () => {
+                    await showAiEvent("TAB SWITCHED", true, 'tab_switch');
+                    pauseHardware();
+                })();
             } else {
                 // Tab became visible again — calculate duration and report
                 const startTime = violationStartTimeRef.current['tab_switch'];
@@ -408,10 +410,11 @@ const AiInterviewSession = () => {
         const handleBlur = () => {
             if (!isPermissionsGranted || isCompletedRef.current) return;
             setIsPaused(true);
-            pauseHardware();
             setAiStatus("Interview Paused (Window Switched)");
-            showAiEvent("WINDOW BLURRED", true, 'window_blur');
-            reportViolation('window_blur');
+            (async () => {
+                await showAiEvent("WINDOW BLURRED", true, 'window_blur');
+                pauseHardware();
+            })();
         };
 
         const handleFocus = () => {
@@ -460,10 +463,12 @@ const AiInterviewSession = () => {
             }
 
             if (!isFS && isPermissionsGranted) {
-                showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
                 setIsPaused(true); // Pause timer and interview progression
-                pauseHardware();
                 setAiStatus("Interview Paused (Not in Full Screen)");
+                (async () => {
+                    await showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
+                    pauseHardware();
+                })();
             }
         };
 
@@ -896,7 +901,7 @@ const AiInterviewSession = () => {
     // speakWithBlob: plays a pre-fetched TTS audio blob (skips the network fetch)
     const speakWithBlob = useCallback((blob) => {
         if (currentAudioRef.current) {
-            try { currentAudioRef.current.pause(); currentAudioRef.current.currentTime = 0; } catch (e) {}
+            try { currentAudioRef.current.pause(); currentAudioRef.current.currentTime = 0; } catch (e) { }
             currentAudioRef.current = null;
         }
         if (window.speechSynthesis) window.speechSynthesis.cancel();
@@ -1735,10 +1740,8 @@ const AiInterviewSession = () => {
             const nextIdx = currentQuestionIndex + 1;
             const totalAnswered = nextIdx; // questions answered so far
 
-            // FIX: Better check - ensure we've answered enough questions AND haven't exceeded list
-            // --- HARD STOP: end after maxQuestions ---
-            // FIX (Magic Numbers): use MAX_INTERVIEW_QUESTIONS constant
-            if (totalAnswered >= maxQuestions || nextIdx >= questions.length || totalAnswered >= MAX_INTERVIEW_QUESTIONS) {
+            // --- HARD STOP: end after MAX_INTERVIEW_QUESTIONS ---
+            if (totalAnswered >= MAX_INTERVIEW_QUESTIONS) {
                 let finalWords = "That concludes our interview questions today. Thank you for your time, we will be in touch soon. Goodbye!";
                 if (fullFeedback.trim()) {
                     finalWords = fullFeedback.trim() + ". " + finalWords;
@@ -1833,7 +1836,7 @@ const AiInterviewSession = () => {
                 setCurrentQuestionIndex(nextIdx);
                 // FIX (Progress Bar Jump): Progress = questions COMPLETED (nextIdx = how many done).
                 // Using nextIdx/total means at question 1 we show 1/13 = 7.7%, not jumping to 15%.
-                const totalQuestions = Math.max(1, Math.min(maxQuestions, questions.length || MAX_INTERVIEW_QUESTIONS));
+                const totalQuestions = MAX_INTERVIEW_QUESTIONS;
                 setProgress((nextIdx / totalQuestions) * 100);
 
                 setQuestions(prev => {
@@ -2734,8 +2737,8 @@ const AiInterviewSession = () => {
                 finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
             }
             setQuestions(finalQs);
-            setMaxQuestions(Math.min(finalQs.length, TOTAL_QUESTIONS_LIMIT));
-            console.log(`[Questions] Using ${finalQs.length} backend questions directly.`);
+            setMaxQuestions(TOTAL_QUESTIONS_LIMIT);
+            console.log(`[Questions] Pre-loaded ${finalQs.length} questions. Interview will dynamically expand to ${TOTAL_QUESTIONS_LIMIT} max.`);
 
             addMessage('ai', welcome);
             await speak(welcome);

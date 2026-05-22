@@ -1434,6 +1434,26 @@ class CreateSubmissionView(APIView):
                         person_id = f"{email}_{token}"
                     _register_face_with_deepface(person_id, snapshot)
                     
+                    # Save the registration snapshot to submission.original_identity_photo
+                    # so Box 2 on the report always shows the face captured at exam start
+                    if not submission.original_identity_photo:
+                        try:
+                            import base64 as _b64
+                            from django.core.files.base import ContentFile as _CF
+                            _imgstr = snapshot
+                            _ext = 'jpg'
+                            if ';' in snapshot and 'base64,' in snapshot:
+                                _header, _imgstr = snapshot.split(';base64,')
+                                _ext = _header.split('/')[-1]
+                            _img_data = _b64.b64decode(_imgstr)
+                            submission.original_identity_photo.save(
+                                f"original_{submission.id}_{int(timezone.now().timestamp())}.{_ext}",
+                                _CF(_img_data),
+                                save=True
+                            )
+                        except Exception as e:
+                            logger.error(f"Failed to save original_identity_photo at registration: {e}")
+
                     # Store Identity Link for the report
                     try:
                         from api.models import IdentityLink
@@ -2082,7 +2102,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -2319,7 +2339,7 @@ class ResendAssessmentInviteView(APIView):
             return Response({"error": "Candidate not found in invited list"}, status=status.HTTP_404_NOT_FOUND)
 
         import urllib.parse
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
         
         encoded_name = urllib.parse.quote(candidate.name)

@@ -19,7 +19,7 @@ const AiAssessments = () => {
     const [inviteData, setInviteData] = useState({ name: '', email: '' });
     const [inviteFile, setInviteFile] = useState(null);
     const [inviting, setInviting] = useState(false);
-    
+
     // Applicants Modal States
     const [showApplicantsModal, setShowApplicantsModal] = useState(false);
     const [applicantsLoading, setApplicantsLoading] = useState(false);
@@ -58,17 +58,17 @@ const AiAssessments = () => {
         if (assessment.status === 'GENERATING') {
             return { type: 'SCHEDULED', label: 'AI Generating...', isGenerating: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin' };
         }
-        
-        // 1. Time-based Expiry (Absolute deadline)
-        if (until && now > until) {
-            return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
-        }
 
-        // 2. Completion-based
+        // 1. Completion-based (If fully completed, it stays Completed forever)
         if (completed > 0) {
             if (!isBulk || completed >= invited) {
-                return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-calendar-xmark' };
+                return { type: 'COMPLETED', label: 'Completed', isExpired: true, color: '#05CD99', bg: '#E6FBF5', icon: 'fa-check-circle' };
             }
+        }
+
+        // 2. Time-based Expiry (Absolute deadline - only triggers if NOT fully completed)
+        if (until && now > until) {
+            return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
         }
 
         // 3. Activity-based (Someone has started)
@@ -79,7 +79,8 @@ const AiAssessments = () => {
 
         // 4. Capacity-based (Max candidates reached)
         if (invited >= (assessment.max_candidates_allowed || 1)) {
-            return { type: 'COMPLETED', label: 'Full', isExpired: true, color: '#05CD99', bg: '#E6FBF5', icon: 'fa-user-check' };
+            // It is Full, but not completed yet. It should stay in SCHEDULED tab
+            return { type: 'SCHEDULED', label: 'Full', isExpired: true, color: '#10b981', bg: '#E6FBF5', icon: 'fa-user-check' };
         }
 
         // 5. Default State (Fresh link)
@@ -159,7 +160,7 @@ const AiAssessments = () => {
 
     const handleResendInvite = async (email) => {
         if (!selectedAssessment) return;
-        
+
         try {
             const response = await axios.post(`${API_BASE_URL}/ai/invite/resend/`, {
                 assessment_id: selectedAssessment.id,
@@ -186,7 +187,7 @@ const AiAssessments = () => {
         link.click();
         document.body.removeChild(link);
     };
-    
+
 
 
 
@@ -321,7 +322,7 @@ const AiAssessments = () => {
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', color: '#1B254B', fontSize: '0.9rem' }}>
-                                                <div 
+                                                <div
                                                     style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
                                                     onClick={() => fetchInvitedCandidates(assessment)}
                                                 >
@@ -373,7 +374,7 @@ const AiAssessments = () => {
                                                                 </div>
                                                             );
                                                         }
-                                                        
+
                                                         // Otherwise, show the Share button
                                                         return (
                                                             <button
@@ -505,7 +506,7 @@ const AiAssessments = () => {
                                     </p>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', marginTop: '0.4rem' }}>
                                         <p style={{ color: '#A3AED0', fontSize: '0.75rem', margin: 0 }}>Must contain 'name' and 'email' columns</p>
-                                        <button 
+                                        <button
                                             type="button"
                                             onClick={(e) => { e.stopPropagation(); downloadSampleCSV(); }}
                                             style={{ background: 'none', border: 'none', color: '#4318FF', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
@@ -577,7 +578,7 @@ const AiAssessments = () => {
                                                 <td style={{ padding: '0.8rem', fontSize: '0.9rem', color: '#1B254B', fontWeight: '600' }}>{cand.name}</td>
                                                 <td style={{ padding: '0.8rem', fontSize: '0.85rem', color: '#707EAE' }}>{cand.email}</td>
                                                 <td style={{ padding: '0.8rem' }}>
-                                                    <span style={{ 
+                                                    <span style={{
                                                         padding: '0.3rem 0.6rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '700',
                                                         background: cand.status === 'completed' ? '#E6FBF5' : '#F4F7FE',
                                                         color: cand.status === 'completed' ? '#05CD99' : '#A3AED0'
@@ -587,7 +588,7 @@ const AiAssessments = () => {
                                                 </td>
                                                 <td style={{ padding: '0.8rem', textAlign: 'center' }}>
                                                     {cand.status !== 'completed' && (
-                                                        <button 
+                                                        <button
                                                             onClick={() => handleResendInvite(cand.email)}
                                                             style={{
                                                                 background: '#F4F7FE', color: '#4318FF', border: 'none', padding: '0.4rem 0.8rem',

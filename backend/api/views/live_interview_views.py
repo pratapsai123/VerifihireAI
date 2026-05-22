@@ -75,7 +75,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -1096,7 +1096,7 @@ def add_interview_participant_view(request):
         )
         print(f"DEBUG: Participant created: {participant.id} with token {participant.token}")
         
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
         
         # Link changes based on role
         if role == 'interviewer':

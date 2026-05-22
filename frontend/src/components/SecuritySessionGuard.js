@@ -70,9 +70,9 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   // Nudge the local agent to scan frequently while the warning overlay is shown
   useEffect(() => {
     if (!warning) return;
-    triggerMonitorScan().catch(() => {});
+    triggerMonitorScan().catch(() => { });
     const id = setInterval(() => {
-      triggerMonitorScan().catch(() => {});
+      triggerMonitorScan().catch(() => { });
     }, 2500);
     return () => clearInterval(id);
   }, [warning]);
@@ -120,7 +120,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             token,
             agent_instance_id: sessionRecord.agent_instance_id,
             immediate_shutdown: true,
-          }).catch(() => {});
+          }).catch(() => { });
         }
         clearPrecheckRecord(token);
         window.onbeforeunload = null;
@@ -180,7 +180,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           token,
           agent_instance_id: sessionRecord.agent_instance_id,
           immediate_shutdown: true,
-        }).catch(() => {});
+        }).catch(() => { });
       }
       clearPrecheckRecord(token);
       clearTerminalCloseWarning(token);
@@ -223,7 +223,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       // When REACT_APP_SKIP_PRECHECK=true, treat the entry gate as passed
       // and skip the live security polling below. Re-enable by flipping
       // the env var off.
-      if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
+      if (false /* TEMP BYPASS — change to false to re-enable precheck */) {
         console.warn('[SecuritySessionGuard] Skipping precheck gate (TEMP BYPASS)');
         setGateState('ready');
         return;
@@ -284,7 +284,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
         terminalAbsentRef.current = false;
 
-        triggerMonitorScan().catch(() => {});
+        triggerMonitorScan().catch(() => { });
         const scanResult = await runLocalScan();
         if (!active) return;
         if (!scanResult?.safe) {
@@ -459,7 +459,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           agent_instance_id: sessRecord.agent_instance_id,
           destruct_delay: 90,
           consume: true,
-        }).catch(() => {});
+        }).catch(() => { });
       } else if (sessRecord) {
         stopLocalMonitor({
           session_id: sessRecord.session_id,
@@ -468,7 +468,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           agent_instance_id: sessRecord.agent_instance_id,
           consume: false,
           destruct_delay: -1,
-        }).catch(() => {});
+        }).catch(() => { });
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

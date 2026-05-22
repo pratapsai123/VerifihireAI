@@ -24,3 +24,10 @@ djangorestframework-simplejwt
 pygments
 pymupdf
 edge-tts
+
+# DeepFace Identity Verification
+deepface==0.0.100
+tensorflow==2.15.0
+keras==2.15.0
+tf-keras==2.15.1
+opencv-python-headless==4.10.0.84

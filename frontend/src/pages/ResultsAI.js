@@ -583,7 +583,10 @@ const ResultsAI = () => {
     const isPass = (r, type) => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
-        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 130) >= 0.5);
+        if (type === 'interview') {
+            const possible = (r.total_questions || r.interview_summary?.length || 13) * 10;
+            return r.status === 'Completed' || (r.score != null && (r.score / possible) >= 0.5);
+        }
         return false;
     };
 
@@ -820,9 +823,9 @@ const ResultsAI = () => {
 
     const renderTranscriptReport = (data) => {
         if (!data) return null;
-        // Total possible marks based on 13 planned questions
-        const totalPlannedQuestions = 13;
-        const totalPossible = totalPlannedQuestions * 10;
+        // Total possible marks based on actual questions answered (or 13 if unknown)
+        const totalPlannedQuestions = data.total_questions || data.interview_summary?.length || 13;
+        const totalPossible = Math.max(10, totalPlannedQuestions * 10);
         const baseScore = data.score || 0;
         const basePercentage = Math.round((baseScore / totalPossible) * 100);
 
@@ -1571,7 +1574,13 @@ const ResultsAI = () => {
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
                                                         <img
-                                                            src={snap.screenshot_url || snap.webcam_screenshot_url || snap.screenshot_base64 || snap.webcam_screenshot_base64}
+                                                            src={(() => {
+                                                                const srcVal = snap.screenshot_base64 || snap.webcam_screenshot_base64 || snap.screenshot_url || snap.webcam_screenshot_url;
+                                                                if (srcVal && !srcVal.startsWith('http') && !srcVal.startsWith('data:') && !srcVal.startsWith('/')) {
+                                                                    return `data:image/jpeg;base64,${srcVal}`;
+                                                                }
+                                                                return srcVal;
+                                                            })()}
                                                             alt={snap.event_type}
                                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                             onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
@@ -1624,17 +1633,20 @@ const ResultsAI = () => {
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
                                                     <img
-                                                        src={viewedSubmission.intruder_photo_url || (() => {
+                                                        src={viewedSubmission.original_identity_photo_url || viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || (() => {
                                                             const snaps = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
                                                             const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
+                                                            let srcVal = null;
                                                             if (mismatchSnap) {
-                                                                return mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
-                                                            }
-                                                            if (snaps.length > 0) {
+                                                                srcVal = mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
+                                                            } else if (snaps.length > 0) {
                                                                 const lastSnap = snaps[snaps.length - 1];
-                                                                return lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
+                                                                srcVal = lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
                                                             }
-                                                            return null;
+                                                            if (srcVal && !srcVal.startsWith('http') && !srcVal.startsWith('data:') && !srcVal.startsWith('/')) {
+                                                                return `data:image/jpeg;base64,${srcVal}`;
+                                                            }
+                                                            return srcVal;
                                                         })()}
                                                         alt="Intruder Face"
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
