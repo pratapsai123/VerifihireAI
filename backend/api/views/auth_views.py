@@ -881,11 +881,16 @@ def login_view(request):
                     )
 
         # --- OTP Cooldown Check ---
+        # Only consider UNVERIFIED OTPs for the cooldown.
+        # A verified OTP means the previous session completed successfully —
+        # the user should NOT be blocked from logging in again within 2 minutes
+        # (e.g. just signed up and approved, or logged out and back in quickly).
         otp_cooldown_seconds = getattr(settings, 'OTP_RESEND_COOLDOWN_SECONDS', 120)
         cooldown_threshold = timezone.now() - timedelta(seconds=otp_cooldown_seconds)
         
         recent_otp = EmailOTP.objects.filter(
             email=email,
+            is_verified=False,
             created_at__gte=cooldown_threshold
         ).order_by('-created_at').first()
         
