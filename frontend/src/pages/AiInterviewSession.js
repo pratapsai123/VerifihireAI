@@ -2113,8 +2113,7 @@ const AiInterviewSession = () => {
                 regVideoRef.current.srcObject = streamRef.current;
                 regVideoRef.current.play().catch(e => console.warn("regVideo auto-play prevented:", e));
             }
-            // Start face position + blink detection loop
-            startRegDetection();
+            // Manual capture mode — no blink detection needed
         }, 500);
     };
 
@@ -2587,12 +2586,6 @@ const AiInterviewSession = () => {
     const handleRetryCapture = () => {
         setWizardStep(0);
         setCapturedImage(null);
-        setBlinkDetected(false);
-        setFaceInOval(false);
-        setRegInstruction('Position your face inside the oval');
-        blinkCapturedRef.current = false;
-        eyeHistoryRef.current = [];
-        eyeHistoryRef.current._totalFrames = 0; // Reset warmup counter
 
         // Re-enable camera tracks (may have been disabled by privacy hammer during alert)
         if (streamRef.current) {
@@ -2602,14 +2595,12 @@ const AiInterviewSession = () => {
         // Re-attach and restart camera for the registration video element
         const restoreCamera = async () => {
             if (!streamRef.current || streamRef.current.getVideoTracks().every(t => t.readyState === 'ended')) {
-                // Stream is dead — get a new one
                 await startCamera();
             }
             if (regVideoRef.current && streamRef.current) {
                 regVideoRef.current.srcObject = streamRef.current;
                 await regVideoRef.current.play().catch(e => console.warn("regVideo play error:", e));
             }
-            setTimeout(() => startRegDetection(), 500);
         };
         restoreCamera();
     };
@@ -3294,7 +3285,7 @@ const AiInterviewSession = () => {
                                 <>
                                     <h2 style={{ fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' }}>AI Face Registration</h2>
                                     <p style={{ color: '#4a5568', fontSize: '1rem', marginBottom: '2rem' }}>
-                                        Please look directly at the camera. We need to register your face for our AI proctoring system.
+                                        Position your face in the oval and click <b>Capture</b> when ready.
                                     </p>
 
                                     <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto 2rem', aspectRatio: '4/3', borderRadius: '20px', overflow: 'hidden', background: '#000', position: 'relative' }}>
@@ -3304,14 +3295,25 @@ const AiInterviewSession = () => {
                                             <video ref={regVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                                         )}
 
-                                        {/* Overlay guides */}
-                                        <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: `3px dashed ${faceInOval ? 'rgba(34,197,94,0.9)' : 'rgba(255,255,255,0.7)'}`, borderRadius: '50%', transition: 'border-color 0.3s ease' }}></div>
+                                        {/* Oval guide */}
+                                        {!capturedImage && (
+                                            <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '3px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                                        )}
 
-                                        {/* Instruction Overlay */}
+                                        {/* Instruction */}
                                         {!capturedImage && wizardStep === 0 && (
                                             <div style={{ position: 'absolute', bottom: '5%', left: '0', right: '0', textAlign: 'center' }}>
-                                                <span style={{ background: 'rgba(0,0,0,0.6)', color: faceInOval ? '#4ade80' : 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600', transition: 'color 0.3s ease' }}>
-                                                    {regInstruction}
+                                                <span style={{ background: 'rgba(0,0,0,0.6)', color: 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    Look directly at the camera with eyes open
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        {/* Preview overlay */}
+                                        {capturedImage && wizardStep === 0 && (
+                                            <div style={{ position: 'absolute', bottom: '5%', left: '0', right: '0', textAlign: 'center' }}>
+                                                <span style={{ background: 'rgba(0,0,0,0.6)', color: '#4ade80', padding: '6px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    ✓ Photo captured — review below
                                                 </span>
                                             </div>
                                         )}
@@ -3321,24 +3323,8 @@ const AiInterviewSession = () => {
                                                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
                                                     Analyzing face...
                                                 </div>
-                                                {/* CSS AI Scanning Animation Line */}
-                                                <div style={{
-                                                    position: 'absolute',
-                                                    top: 0,
-                                                    left: 0,
-                                                    right: 0,
-                                                    height: '4px',
-                                                    background: '#6366f1',
-                                                    boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)',
-                                                    animation: 'ai-scan 1.5s ease-in-out infinite'
-                                                }}></div>
-                                                <style>{`
-                                                    @keyframes ai-scan {
-                                                        0% { top: 0%; }
-                                                        50% { top: 100%; }
-                                                        100% { top: 0%; }
-                                                    }
-                                                `}</style>
+                                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: '#6366f1', boxShadow: '0 0 15px 4px rgba(99, 102, 241, 0.6)', animation: 'ai-scan 1.5s ease-in-out infinite' }}></div>
+                                                <style>{`@keyframes ai-scan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }`}</style>
                                             </>
                                         )}
                                         {wizardStep === 2 && (
@@ -3348,19 +3334,88 @@ const AiInterviewSession = () => {
                                         )}
                                     </div>
 
-                                    <button
-                                        onClick={wizardStep === 3 ? handleRetryCapture : handleRegisterFace}
-                                        disabled={wizardStep === 1 || wizardStep === 2 || (wizardStep === 0 && !faceInOval)}
-                                        style={{
-                                            background: wizardStep === 2 ? '#22c55e' : (wizardStep === 0 && !faceInOval) ? '#9ca3af' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                            color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
-                                            fontSize: '1.1rem', fontWeight: '700', cursor: (wizardStep === 1 || wizardStep === 2 || (wizardStep === 0 && !faceInOval)) ? 'not-allowed' : 'pointer',
-                                            opacity: (wizardStep === 1 || (wizardStep === 0 && !faceInOval)) ? 0.7 : 1, transition: 'all 0.2s',
-                                            boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
-                                        }}
-                                    >
-                                        {wizardStep === 1 ? 'Please Wait...' : wizardStep === 2 ? 'Registration Complete!' : wizardStep === 3 ? 'Retry Capture' : 'Capture & Register'}
-                                    </button>
+                                    {/* Buttons based on state */}
+                                    {wizardStep === 0 && !capturedImage && (
+                                        <button
+                                            onClick={() => {
+                                                // Manual capture: take a snapshot from the video
+                                                const videoElement = regVideoRef.current;
+                                                if (!videoElement || videoElement.readyState < 2) return;
+                                                const canvas = document.createElement('canvas');
+                                                canvas.width = 640;
+                                                canvas.height = 480;
+                                                const ctx = canvas.getContext('2d');
+                                                ctx.drawImage(videoElement, 0, 0, 640, 480);
+                                                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                                                setCapturedImage(dataUrl);
+                                            }}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                                fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer',
+                                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-camera" style={{ marginRight: '8px' }} />
+                                            Capture Photo
+                                        </button>
+                                    )}
+
+                                    {/* Preview state: show Proceed and Recapture buttons */}
+                                    {wizardStep === 0 && capturedImage && (
+                                        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                                            <button
+                                                onClick={() => {
+                                                    // Recapture: clear the photo and show live video again
+                                                    setCapturedImage(null);
+                                                }}
+                                                style={{
+                                                    background: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1',
+                                                    padding: '0.9rem 2rem', borderRadius: '50px',
+                                                    fontSize: '1rem', fontWeight: '700', cursor: 'pointer'
+                                                }}
+                                            >
+                                                <i className="fa-solid fa-rotate-right" style={{ marginRight: '8px' }} />
+                                                Recapture
+                                            </button>
+                                            <button
+                                                onClick={handleRegisterFace}
+                                                style={{
+                                                    background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                                                    color: 'white', border: 'none', padding: '0.9rem 2rem', borderRadius: '50px',
+                                                    fontSize: '1rem', fontWeight: '700', cursor: 'pointer',
+                                                    boxShadow: '0 10px 20px rgba(34, 197, 94, 0.3)'
+                                                }}
+                                            >
+                                                <i className="fa-solid fa-check" style={{ marginRight: '8px' }} />
+                                                Proceed
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    {wizardStep === 1 && (
+                                        <button disabled style={{ background: '#cbd5e1', color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px', fontSize: '1.1rem', fontWeight: '700', cursor: 'not-allowed', opacity: 0.7 }}>
+                                            Please Wait...
+                                        </button>
+                                    )}
+                                    {wizardStep === 2 && (
+                                        <button disabled style={{ background: '#22c55e', color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px', fontSize: '1.1rem', fontWeight: '700', cursor: 'not-allowed' }}>
+                                            Registration Complete!
+                                        </button>
+                                    )}
+                                    {wizardStep === 3 && (
+                                        <button
+                                            onClick={handleRetryCapture}
+                                            style={{
+                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                                fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer',
+                                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
+                                            }}
+                                        >
+                                            Retry Capture
+                                        </button>
+                                    )}
                                 </>
                             )}
                         </div>
