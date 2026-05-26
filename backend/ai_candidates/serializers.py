@@ -25,3 +25,7 @@ class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate
         fields = '__all__'
+        # Don't expose pre-generated questions to frontend (security + adaptive questioning)
+        extra_kwargs = {
+            'interview_questions': {'write_only': True},
+        }

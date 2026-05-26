@@ -178,23 +178,30 @@ def extract_json(text):
 
 
 class AssemblyAITokenView(APIView):
-
+    """
+    Returns a short-lived session identifier for AssemblyAI WebSocket connection.
+    Requires a valid candidate token to prevent abuse.
+    """
     permission_classes = [AllowAny]
-
     authentication_classes = []
 
     def get(self, request):
+        # Require a candidate token to prevent unauthenticated abuse
+        candidate_token = request.query_params.get('token') or request.query_params.get('candidate_token')
+        if not candidate_token:
+            return Response({'error': 'candidate token required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate the token belongs to an active candidate
+        try:
+            _resolve_public_candidate(candidate_token)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Invalid candidate token'}, status=status.HTTP_403_FORBIDDEN)
 
         api_key = getattr(settings, 'ASSEMBLYAI_API_KEY', None)
-
         if not api_key:
-
             return Response({'error': 'ASSEMBLYAI_API_KEY is missing from configuration.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        
-        # AssemblyAI v3 WebSocket accepts the API key directly as the token parameter.
-        # The v2 /realtime/token endpoint has been deprecated (returns 404).
-        # Frontend connects via: wss://streaming.assemblyai.com/v3/ws?token=<key>
+        # Return the key (AssemblyAI v3 WebSocket accepts it directly as token param)
         return Response({'token': api_key})
 
 
@@ -1741,6 +1748,17 @@ class CandidatePublicStatusUpdateView(APIView):
 
                 return Response({'error': 'Only completion status is allowed for public links.'}, status=status.HTTP_403_FORBIDDEN)
 
+            # Security: Only allow completion if the interview was actually started
+            if not candidate.link_opened_at:
+                return Response({'error': 'Interview was never started.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Security: Only allow completion if candidate has answered at least 1 question
+            if candidate.total_questions < 1:
+                return Response({'error': 'Cannot complete interview with no answers submitted.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Refresh from DB to get the latest score (in case last ProcessAnswer is still saving)
+            candidate.refresh_from_db()
+
 
 
             # Calculate final score percentage
@@ -2559,6 +2577,9 @@ class ProcessAnswerView(APIView):
         if not request.user.is_authenticated and not candidate_token:
             return Response({'error': 'candidate_token is required for public requests.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # SERVER-SIDE TIMER ENFORCEMENT: Reject answers after 65 minutes (60 min + 5 min grace)
+        INTERVIEW_MAX_SECONDS = 65 * 60
+
         # 1. Synchronize Turn Number with Frontend
         current_turn_number = request.data.get('turn_number')
         
@@ -2591,6 +2612,17 @@ class ProcessAnswerView(APIView):
             experience_level = getattr(candidate, 'experience_level', None)
             if candidate.resume_text:
                 resume_context = candidate.resume_text
+
+            # SERVER-SIDE TIMER CHECK: Reject if interview time exceeded
+            if candidate.link_opened_at:
+                elapsed = (timezone.now() - candidate.link_opened_at).total_seconds()
+                if elapsed > INTERVIEW_MAX_SECONDS:
+                    return Response({
+                        'error': 'Interview time has expired.',
+                        'is_exit': True,
+                        'feedback': 'Time has expired for this interview.',
+                        'refined_next_question': None
+                    }, status=status.HTTP_403_FORBIDDEN)
 
         try:
             # --- TOKEN-EFFICIENT CONTEXT BUILDING ---
@@ -2961,8 +2993,9 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 
 class TTSView(APIView):
     """
-    Text-to-Speech endpoint using Coqui TTS.
-    POST {"text": "Hello!"} → returns audio/wav binary response.
+    Text-to-Speech endpoint using Edge TTS.
+    POST {"text": "Hello!", "candidate_token": "uuid"} → returns audio/mpeg binary response.
+    Requires a valid candidate token to prevent abuse.
     """
     permission_classes = [AllowAny]
     authentication_classes = []
@@ -2971,6 +3004,17 @@ class TTSView(APIView):
         text = request.data.get('text', '').strip()
         if not text:
             return Response({"error": "Missing 'text' field"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Require candidate token OR authenticated user to prevent abuse
+        candidate_token = request.data.get('candidate_token') or request.data.get('token')
+        if not request.user.is_authenticated and not candidate_token:
+            return Response({"error": "Authentication required"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        if candidate_token:
+            try:
+                _resolve_public_candidate(candidate_token)
+            except Candidate.DoesNotExist:
+                return Response({"error": "Invalid candidate token"}, status=status.HTTP_403_FORBIDDEN)
 
         # Safety: limit text length to prevent extremely long synthesis
         if len(text) > 1500:

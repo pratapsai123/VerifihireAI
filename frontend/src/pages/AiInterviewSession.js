@@ -999,7 +999,7 @@ const AiInterviewSession = () => {
 
             try {
                 // --- COQUI TTS: POST text to backend and play the returned WAV ---
-                const res = await axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text }, {
+                const res = await axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text, candidate_token: token }, {
                     responseType: 'blob',
                     timeout: 30000 // 30s timeout for synthesis
                 });
@@ -1304,7 +1304,7 @@ const AiInterviewSession = () => {
                 // FIX (Security): Fetch short-lived token from backend instead of exposing API key
                 let assemblyToken = "";
                 try {
-                    const tokenRes = await axios.get(`${API_BASE_URL}/ai-candidates/assemblyai-token/`);
+                    const tokenRes = await axios.get(`${API_BASE_URL}/ai-candidates/assemblyai-token/?token=${token}`);
                     assemblyToken = tokenRes.data.token;
                 } catch (tErr) {
                     console.error("Failed to fetch AssemblyAI token:", tErr);
@@ -1786,7 +1786,7 @@ const AiInterviewSession = () => {
                 addMessage('ai', followUpText);
 
                 // Pre-fetch TTS audio immediately (starts generating while UI updates)
-                const ttsPromise = axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text: followUpText }, {
+                const ttsPromise = axios.post(`${API_BASE_URL}/ai-candidates/tts/`, { text: followUpText, candidate_token: token }, {
                     responseType: 'blob', timeout: 30000
                 }).catch(() => null);
 
@@ -2683,9 +2683,10 @@ const AiInterviewSession = () => {
         // Signal SecuritySessionGuard to begin monitoring now that interview is starting
         window.dispatchEvent(new Event('vh_exam_started'));
 
-        // Load questions NOW (after face registration is confirmed)
-        const qList = candidate.interview_questions || [];
-        setQuestions(qList);
+        // No pre-loaded questions needed — adaptive questioning generates them dynamically.
+        // Frontend only tracks progress by turn count (MAX_INTERVIEW_QUESTIONS = 13).
+        setQuestions([]);
+        setMaxQuestions(MAX_INTERVIEW_QUESTIONS);
 
         // Start DeepFace proctoring session (uses candidate.id as person_id)
         // Only start if not already running to prevent session leak
@@ -2709,33 +2710,22 @@ const AiInterviewSession = () => {
             const nextIdx = summary.length;
             setCurrentQuestionIndex(nextIdx);
 
-            const resumeQ = qList[nextIdx] || "Let's continue. Please share more about your experience.";
+            const resumeQ = "Let's continue. Please share more about your experience.";
             addMessage('ai', resumeQ);
             await speak(resumeQ);
-            if (userInputMode === 'audio') startListening();
+            if (userInputMode === 'audio') {
+                setTimeout(() => {
+                    if (!isCompletedRef.current && !isProcessingRef.current) {
+                        startListening();
+                    }
+                }, 2000);
+            }
         } else {
             const firstName = candidate.full_name.split(' ')[0];
             const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today. To get started, please introduce yourself and your professional background.`;
 
-            // Use backend questions directly — the backend's category_map turn 1 handles
-            // the intro question via AI, so we don't add a separate frontend intro.
-            // This prevents the "double intro" bug where candidates get asked to introduce
-            // themselves twice (once from frontend, once from AI's turn-1 response).
-            let finalQs = [...qList];
-            const TOTAL_QUESTIONS_LIMIT = MAX_INTERVIEW_QUESTIONS;
-
-            if (finalQs.length > TOTAL_QUESTIONS_LIMIT) {
-                finalQs = finalQs.slice(0, TOTAL_QUESTIONS_LIMIT);
-            }
-            setQuestions(finalQs);
-            setMaxQuestions(TOTAL_QUESTIONS_LIMIT);
-            console.log(`[Questions] Pre-loaded ${finalQs.length} questions. Interview will dynamically expand to ${TOTAL_QUESTIONS_LIMIT} max.`);
-
             addMessage('ai', welcome);
             await speak(welcome);
-            // FIX: Give candidate extra time after the first question before starting mic.
-            // The welcome message is long and candidates need time to process before speaking.
-            // 3 seconds gives them breathing room (vs 800ms for subsequent questions).
             if (userInputMode === 'audio') {
                 setTimeout(() => {
                     if (!isCompletedRef.current && !isProcessingRef.current) {
