@@ -130,8 +130,8 @@ export default function Result() {
     const filteredSuggestions = useMemo(() => {
         const query = search.trim().toLowerCase();
         if (!query) return []; // previews only while typing!
-        
-        const filtered = suggestions.filter(item => 
+
+        const filtered = suggestions.filter(item =>
             item.value.toLowerCase().includes(query)
         );
 
@@ -277,7 +277,7 @@ export default function Result() {
 
     const handleDownloadReport = async (submissionId, candidateName) => {
         if (downloadingIds.has(submissionId)) return;
-        
+
         setDownloadingIds(prev => new Set(prev).add(submissionId));
         const url = `${API_BASE_URL}/results/${submissionId}/report/`;
         try {
@@ -600,8 +600,8 @@ export default function Result() {
     // Sync quickViewRow with the latest data from overview when it refreshes
     useEffect(() => {
         if (!quickViewRow) return;
-        const updatedRow = overview.find(r => 
-            (r.invitation_id && r.invitation_id === quickViewRow.invitation_id) || 
+        const updatedRow = overview.find(r =>
+            (r.invitation_id && r.invitation_id === quickViewRow.invitation_id) ||
             (r.id && r.id === quickViewRow.id)
         );
         if (updatedRow && JSON.stringify(updatedRow.activity_logs) !== JSON.stringify(quickViewRow.activity_logs)) {
@@ -739,8 +739,8 @@ export default function Result() {
                 </div>
 
                 <div className="toolbar">
-                    <div 
-                        className="search-wrapper" 
+                    <div
+                        className="search-wrapper"
                         style={{ position: 'relative', width: '100%' }}
                         onKeyDown={handleKeyDown}
                     >
@@ -775,8 +775,8 @@ export default function Result() {
                                 style={{ paddingLeft: '32px', paddingRight: '32px', width: '100%', outline: 'none' }}
                             />
                             {search && (
-                                <button 
-                                    type="button" 
+                                <button
+                                    type="button"
                                     className="search-clear-btn"
                                     onClick={() => {
                                         setSearch('');
@@ -867,20 +867,20 @@ export default function Result() {
                             onChange={(e) => setToDate(e.target.value)}
                         />
                     </div>
-                    <button 
-                        className="search" 
-                        type="button" 
-                        onClick={downloadCSV} 
+                    <button
+                        className="search"
+                        type="button"
+                        onClick={downloadCSV}
                         disabled={!someSelected}
-                        title={someSelected ? "Export selected candidates as CSV" : "Select candidates using checkboxes to export as CSV"} 
-                        style={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            gap: '6px', 
-                            whiteSpace: 'nowrap', 
-                            flexShrink: 0, 
-                            cursor: someSelected ? 'pointer' : 'not-allowed', 
-                            fontWeight: '700', 
+                        title={someSelected ? "Export selected candidates as CSV" : "Select candidates using checkboxes to export as CSV"}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            whiteSpace: 'nowrap',
+                            flexShrink: 0,
+                            cursor: someSelected ? 'pointer' : 'not-allowed',
+                            fontWeight: '700',
                             color: someSelected ? '#059669' : '#9ca3af',
                             background: someSelected ? '#ECFDF5' : '#f3f4f6',
                             borderColor: someSelected ? '#059669' : '#e5e7eb',
@@ -1032,14 +1032,14 @@ export default function Result() {
                                                         )}
                                                         {!r.qual_pending && (r.status === 'hold' || r.status === 'HOLD') && r.submission_id && (
                                                             <div className="status-actions" style={{ display: 'flex', gap: '4px' }}>
-                                                                <button 
+                                                                <button
                                                                     onClick={() => handleUpdateResult(r, 'selected')}
                                                                     title="Mark as Qualified"
                                                                     style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#10b981', padding: 0 }}
                                                                 >
                                                                     <UserCheck size={18} />
                                                                 </button>
-                                                                <button 
+                                                                <button
                                                                     onClick={() => handleUpdateResult(r, 'rejected')}
                                                                     title="Mark as Not Qualified"
                                                                     style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#ef4444', padding: 0 }}
@@ -1064,7 +1064,7 @@ export default function Result() {
                                                                 className="btn-report-dl"
                                                                 title={r.status === 'pending' ? "Report unavailable while pending" : "View Report"}
                                                                 disabled={r.status === 'pending'}
-                                                                style={{ 
+                                                                style={{
                                                                     opacity: r.status === 'pending' ? 0.5 : 1,
                                                                     cursor: r.status === 'pending' ? 'not-allowed' : 'pointer',
                                                                     transition: 'transform 0.1s ease',
@@ -1097,7 +1097,7 @@ export default function Result() {
                                                                 className="btn-action-delete"
                                                                 title={r.status === 'pending' ? "Cannot delete pending assessment" : (JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete')}
                                                                 disabled={r.status === 'pending'}
-                                                                style={{ 
+                                                                style={{
                                                                     opacity: r.status === 'pending' ? 0.5 : 1,
                                                                     cursor: r.status === 'pending' ? 'not-allowed' : 'pointer'
                                                                 }}
@@ -1214,7 +1214,7 @@ export default function Result() {
                             <strong>{quickViewRow.candidate?.name || quickViewRow.full_name || 'Candidate'}</strong>
                             <span>{quickViewRow.candidate?.email || quickViewRow.email || 'No email'}</span>
                         </div>
-                        
+
                         {isShowingLogs ? (
                             <div className="quickview-logs" style={{ padding: '0 24px', flex: 1, overflowY: 'auto' }}>
                                 {quickViewRow.status === 'terminated' && (quickViewRow.termination_detail || quickViewRow.termination_reason) ? (
@@ -1234,7 +1234,7 @@ export default function Result() {
                                             const isTerminalClose = log.action?.toLowerCase().includes('terminal closed');
                                             const isUsb = log.action?.toLowerCase().includes('usb');
                                             const isStarted = log.action?.toLowerCase().includes('started') && !isTerminated;
-                                            
+
                                             let icon = '🔵';
                                             let bgColor = '#f8fafc';
                                             let textColor = '#1e293b';
@@ -1265,8 +1265,8 @@ export default function Result() {
                                             }
 
                                             return (
-                                                <li key={i} style={{ 
-                                                    padding: '14px', 
+                                                <li key={i} style={{
+                                                    padding: '14px',
                                                     marginBottom: '12px',
                                                     borderRadius: '8px',
                                                     background: bgColor,
@@ -1284,9 +1284,9 @@ export default function Result() {
                                                         <div style={{ fontSize: '12px', color: '#b91c1c', fontWeight: 600, marginTop: 4 }}>Reason: {log.termination_label}</div>
                                                     ) : null}
                                                     {log.details && (
-                                                        <div style={{ 
-                                                            fontSize: '13px', 
-                                                            color: isTerminated || isBlocked || isViolation ? '#b91c1c' : '#475569', 
+                                                        <div style={{
+                                                            fontSize: '13px',
+                                                            color: isTerminated || isBlocked || isViolation ? '#b91c1c' : '#475569',
                                                             marginTop: '6px',
                                                             paddingTop: '6px',
                                                             borderTop: `1px dashed ${borderColor}`
@@ -1337,27 +1337,27 @@ export default function Result() {
                             </div>
                         )}
                         <div className="quickview-footer" style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 24px', borderTop: '1px solid #e2e8f0' }}>
-                            <button 
-                                type="button" 
-                                className="quickview-close-btn" 
-                                style={{ 
-                                    background: '#eff6ff', 
-                                    color: '#1d4ed8', 
+                            <button
+                                type="button"
+                                className="quickview-close-btn"
+                                style={{
+                                    background: '#eff6ff',
+                                    color: '#1d4ed8',
                                     border: '1px solid #bfdbfe',
                                     fontWeight: '600',
                                     padding: '8px 16px',
                                     borderRadius: '6px'
-                                }} 
+                                }}
                                 onClick={handleToggleActivityLogs}
                             >
                                 {isShowingLogs ? '📊 View Data Details' : '📋 View Activity Logs'}
                             </button>
-                            <button 
-                                type="button" 
-                                className="quickview-close-btn" 
-                                style={{ 
-                                    background: '#fee2e2', 
-                                    color: '#b91c1c', 
+                            <button
+                                type="button"
+                                className="quickview-close-btn"
+                                style={{
+                                    background: '#fee2e2',
+                                    color: '#b91c1c',
                                     border: '2px solid #ef4444',
                                     fontWeight: '700',
                                     padding: '8px 24px',
@@ -1381,13 +1381,13 @@ export default function Result() {
                 }}>
                     <div style={{
                         backgroundColor: '#fff', padding: '32px', borderRadius: '16px',
-                        maxWidth: '450px', width: '90%', textAlign: 'center', 
+                        maxWidth: '450px', width: '90%', textAlign: 'center',
                         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
                         border: '1px solid #e5e7eb'
                     }}>
-                        <div style={{ 
-                            width: '56px', height: '56px', backgroundColor: '#fef3c7', 
-                            borderRadius: '50%', display: 'flex', alignItems: 'center', 
+                        <div style={{
+                            width: '56px', height: '56px', backgroundColor: '#fef3c7',
+                            borderRadius: '50%', display: 'flex', alignItems: 'center',
                             justifyContent: 'center', margin: '0 auto 20px', color: '#d97706'
                         }}>
                             <TableProperties size={28} />
@@ -1396,15 +1396,15 @@ export default function Result() {
                         <p style={{ marginBottom: '24px', color: '#4b5563', lineHeight: '1.6', fontSize: '0.95rem' }}>
                             Please review the candidate report before marking <strong>{reviewPopup.candidateName}</strong> as <strong>{reviewPopup.status === 'selected' ? 'Qualified' : 'Not Qualified'}</strong>.
                         </p>
-                        
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             <button
                                 onClick={() => handleDownloadReport(reviewPopup.submissionId, reviewPopup.candidateName)}
                                 disabled={downloadingIds.has(reviewPopup.submissionId)}
                                 style={{
-                                    backgroundColor: downloadingIds.has(reviewPopup.submissionId) ? '#9ca3af' : '#4f46e5', 
+                                    backgroundColor: downloadingIds.has(reviewPopup.submissionId) ? '#9ca3af' : '#4f46e5',
                                     color: '#fff', border: 'none',
-                                    padding: '14px', borderRadius: '10px', 
+                                    padding: '14px', borderRadius: '10px',
                                     cursor: downloadingIds.has(reviewPopup.submissionId) ? 'not-allowed' : 'pointer',
                                     fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
                                     boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)',
@@ -1424,7 +1424,7 @@ export default function Result() {
                             >
                                 {downloadingIds.has(reviewPopup.submissionId) ? (
                                     <>
-                                        <Loader2 size={20} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} /> 
+                                        <Loader2 size={20} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
                                         Downloading...
                                     </>
                                 ) : (
@@ -1433,7 +1433,7 @@ export default function Result() {
                                     </>
                                 )}
                             </button>
-                            
+
                             <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
                                 <button
                                     onClick={() => setReviewPopup({ ...reviewPopup, show: false })}

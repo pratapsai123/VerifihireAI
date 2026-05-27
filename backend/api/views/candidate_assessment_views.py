@@ -1801,6 +1801,32 @@ def get_invitation_result_view(request, token):
             return Response({'error': 'No submission found for this invitation.'}, status=status.HTTP_404_NOT_FOUND)
 
         a = inv.assessment
+
+        # Get details
+        latest_details = CandidateDetails.objects.filter(invitation=inv).order_by('id').last()
+        original_identity_photo_url = None
+        first_details = None
+        if latest_details and latest_details.email:
+            first_details = CandidateDetails.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+        if not first_details and inv.email:
+            first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+        
+        if first_details and first_details.snapshot:
+            original_identity_photo_url = first_details.snapshot
+        else:
+            link = None
+            if latest_details and latest_details.email:
+                link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+            if not link and inv.email:
+                link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+            if not link and latest_details and latest_details.pan_number:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+                if norm_pan:
+                    link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
+
+            if link and link.snapshot_image:
+                original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+
         return Response(
             {
                 'invitation': {
@@ -1838,11 +1864,22 @@ def get_invitation_result_view(request, token):
                     'submitted_at': submission.submitted_at.isoformat() if submission.submitted_at else None,
                     'rating': getattr(submission, 'rating', None),
                     'feedback': getattr(submission, 'feedback', None),
+
+                    # Mismatch fields inside result
+                    'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                    'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
+                    'original_identity_photo_url': original_identity_photo_url,
+                    'candidate_photo_url': latest_details.snapshot if latest_details else None,
                 },
                 'integrity': {
                     'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                     'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
-                }
+                },
+                # Mismatch fields at top-level
+                'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
+                'original_identity_photo_url': original_identity_photo_url,
+                'candidate_photo_url': latest_details.snapshot if latest_details else None,
             },
             status=status.HTTP_200_OK
         )
@@ -1930,11 +1967,50 @@ def results_overview_view(request):
         inv_ids = [s.invitation_id for s in results_slice]
         
         details_map = {}
+        identity_links_by_email = {}
+        identity_links_by_pan = {}
+        first_details_by_email = {}
         if inv_ids:
             # Fetch most recent details for each invitation in one query
             details_qs = CandidateDetails.objects.filter(invitation_id__in=inv_ids).order_by('id')
+            emails_to_fetch = set()
+            pans_to_fetch = []
             for d in details_qs:
                 details_map[d.invitation_id] = d
+                if d.email:
+                    emails_to_fetch.add(d.email.lower().strip())
+                if d.pan_number:
+                    norm_pan = re.sub(r'[^A-Z0-9]', '', d.pan_number.strip().upper())
+                    if norm_pan:
+                        pans_to_fetch.append(norm_pan)
+            
+            for s in results_slice:
+                if s.invitation and s.invitation.email:
+                    emails_to_fetch.add(s.invitation.email.lower().strip())
+            
+            emails_to_fetch = list(emails_to_fetch)
+            
+            # Fetch the first CandidateDetails (oldest snapshot) for each email in one query
+            if emails_to_fetch:
+                f_details = CandidateDetails.objects.filter(email__in=emails_to_fetch).order_by('id')
+                for fd in f_details:
+                    email_key = fd.email.lower().strip()
+                    if email_key not in first_details_by_email:
+                        first_details_by_email[email_key] = fd
+            
+            # Fetch by email first, ordering by id ascending to get the first one created
+            if emails_to_fetch:
+                links_email = IdentityLink.objects.filter(email__in=emails_to_fetch).order_by('id')
+                for link in links_email:
+                    if link.email.lower().strip() not in identity_links_by_email:
+                        identity_links_by_email[link.email.lower().strip()] = link
+            
+            # Fetch by PAN as fallback, ordering by id ascending
+            if pans_to_fetch:
+                links_pan = IdentityLink.objects.filter(pan_number__in=pans_to_fetch).order_by('id')
+                for link in links_pan:
+                    if link.pan_number not in identity_links_by_pan:
+                        identity_links_by_pan[link.pan_number] = link
 
         results = []
         for s in results_slice:
@@ -1950,6 +2026,30 @@ def results_overview_view(request):
             # Ensure empty strings instead of null for CSV compatibility
             pan = pan or ""
             phone = phone or ""
+
+            # Check CandidateDetails for original image first, then fallback to identity link
+            original_identity_photo_url = None
+            first_details = None
+            if latest_details and latest_details.email:
+                first_details = first_details_by_email.get(latest_details.email.lower().strip())
+            if not first_details and inv.email:
+                first_details = first_details_by_email.get(inv.email.lower().strip())
+
+            if first_details and first_details.snapshot:
+                original_identity_photo_url = first_details.snapshot
+            else:
+                link = None
+                if latest_details and latest_details.email:
+                    link = identity_links_by_email.get(latest_details.email.lower().strip())
+                if not link and inv.email:
+                    link = identity_links_by_email.get(inv.email.lower().strip())
+                if not link and latest_details and latest_details.pan_number:
+                    norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+                    if norm_pan:
+                        link = identity_links_by_pan.get(norm_pan)
+
+                if link and link.snapshot_image:
+                    original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
 
             results.append(
                 {
@@ -1997,8 +2097,15 @@ def results_overview_view(request):
                     'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
                     'regret_email_sent': s.regret_email_sent,
                     'created_at': inv.created_at.isoformat() if inv.created_at else None,
+
+                    # Identity mismatch fields
+                    'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                    'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
+                    'original_identity_photo_url': original_identity_photo_url,
+                    'candidate_photo_url': latest_details.snapshot if latest_details else None,
                 }
             )
+
 
         results.extend(get_ai_assessment_results(
             scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids
@@ -2545,17 +2652,20 @@ def save_all_candidate_details_view(request):
         # To prevent malpractice, we ensure that an email address cannot be used with a 
         # different PAN if it has already been registered in the system.
         existing_email_link = IdentityLink.objects.filter(email=norm_email).first()
+        email_pan_mismatch = False
+        mismatch_reasons = []
+
         if existing_email_link and existing_email_link.pan_number != norm_pan:
             _save_identity_violation_screenshot(invitation, snapshot, "Email-PAN Mismatch")
-            return Response({
-                'error': 'Identity Violation: This email address is already linked to a different candidate identity. To ensure assessment integrity, you must use your original registered credentials.'
-            }, status=status.HTTP_403_FORBIDDEN)
+            email_pan_mismatch = True
+            mismatch_reasons.append(f"Email-PAN Mismatch: Email {norm_email} is already linked to a different candidate identity in the system (PAN: {existing_email_link.pan_number}).")
 
         # 3. Biometric Verification (Lookup by PAN)
         identity_link = IdentityLink.objects.filter(pan_number=norm_pan).first()
         
         verify_status = False
         match_score = 0.0
+        face_mismatch_detected = False
         
         if identity_link:
             # Verification: Compare current snapshot with the registered identity face
@@ -2599,9 +2709,8 @@ def save_all_candidate_details_view(request):
             if verify_status == False:
                 # Capture Violation Screenshot
                 _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
-                return Response({
-                    'error': 'Identity Mismatch Detected: The captured face does not match the registered candidate. Assessment has been stopped.'
-                }, status=status.HTTP_403_FORBIDDEN)
+                face_mismatch_detected = True
+                mismatch_reasons.append("Identity Face Mismatch: The captured face does not match the registered candidate's face.")
         else:
             # Linkage: Register the candidate's face for the first time
             reg_result = register_face_with_deepface(person_id, snapshot)
@@ -2629,9 +2738,15 @@ def save_all_candidate_details_view(request):
                 match_score = 1.0
             else:
                 error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
-                return Response({
-                    'error': f"Identity Verification System Error: {error_msg}"
-                }, status=status.HTTP_400_BAD_REQUEST)
+                # Fallback to saving details even if DeepFace service registration failed to ensure manual review
+                verify_status = False
+                match_score = 0.0
+                face_mismatch_detected = True
+                mismatch_reasons.append(f"Identity Verification System Error: {error_msg}")
+
+        # Combine all mismatch reasons
+        mismatch_reason = " | ".join(mismatch_reasons) if mismatch_reasons else None
+        has_any_mismatch = email_pan_mismatch or face_mismatch_detected or (not verify_status if identity_link else False)
 
         # Create or update candidate details
         candidate_details, created = CandidateDetails.objects.update_or_create(
@@ -2646,10 +2761,11 @@ def save_all_candidate_details_view(request):
                 'snapshot': snapshot,
                 'pan_file': pan_file,
                 'entered_with_consent': entered_with_consent,
-                'identity_mismatch_detected': not verify_status if identity_link else False,
+                'identity_mismatch_detected': has_any_mismatch,
                 'face_match_score': match_score,
-                'identity_mismatch': not verify_status if identity_link else False,
+                'identity_mismatch': has_any_mismatch,
                 'mismatch_score': match_score,
+                'identity_mismatch_reason': mismatch_reason,
             }
         )
 
@@ -2662,10 +2778,14 @@ def save_all_candidate_details_view(request):
         }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
     except Exception as e:
+        import traceback
+        print(f"Error in save_all_candidate_details_view: {str(e)}")
+        print(traceback.format_exc())
         return Response(
             {'error': f'Failed to save candidate details: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
 
 
 @csrf_exempt
