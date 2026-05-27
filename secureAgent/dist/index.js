@@ -41,12 +41,28 @@ module.exports = { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logA
 const fs = __nccwpck_require__(9896);
 const path = __nccwpck_require__(6928);
 
-const bundledPath = __nccwpck_require__.ab + "blacklist.json";
 let runtimeRules = [];
 
+function resolveBundledRulesPath() {
+  const candidates = [
+    __nccwpck_require__.ab + "blacklist.json",
+    path.join(__dirname, '..', 'blacklist.json'),
+  ];
+  if (process.pkg) {
+    candidates.push(path.join(path.dirname(process.execPath), 'blacklist.json'));
+  }
+  for (const p of candidates) {
+    try {
+      if (fs.existsSync(p)) return p;
+    } catch { /* ignore */ }
+  }
+  return candidates[0];
+}
+
 function loadBundledRules() {
+  const bundledPath = resolveBundledRulesPath();
   try {
-    const raw = fs.readFileSync(__nccwpck_require__.ab + "blacklist.json", 'utf8');
+    const raw = fs.readFileSync(bundledPath, 'utf8');
     const parsed = JSON.parse(raw);
     runtimeRules = Array.isArray(parsed) ? parsed : (parsed.rules || []);
   } catch {
@@ -100,11 +116,23 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
   const checkedPids = new Set();
   const matchedLabels = new Set();
 
-  const titleSignaturesForRule = (rule) => [
-    rule.label,
-    ...(rule.signatures || []),
-    ...((rule.activeIndicators && rule.activeIndicators.windowTitles) || []),
-  ];
+  const titleSignaturesForRule = (rule) => {
+    const titles = [
+      rule.label,
+      ...(rule.signatures || []),
+      ...((rule.activeIndicators && rule.activeIndicators.windowTitles) || []),
+    ];
+    return titles;
+  };
+
+  const matchesChromeRemoteSharingBanner = (title) => {
+    const t = norm(title);
+    if (!t) return false;
+    if (t.includes('desktop is currently shared')) return true;
+    if (t.includes('currently shared with')) return true;
+    if (t.includes('your desktop is currently shared')) return true;
+    return false;
+  };
 
   for (const p of processes || []) {
     const name = p.processName || '';
@@ -125,18 +153,21 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
       const hitDesc = containsAny(desc, [rule.label, ...(rule.signatures || [])]);
       const hitComp = containsAny(comp, [rule.label, ...(rule.signatures || [])]);
       const windowInfo = windowTitles.get(pid);
-      const hitWindow = windowInfo
+      let hitWindow = windowInfo
         ? containsAny(windowInfo.title, titleSignaturesForRule(rule))
         : false;
+      if (!hitWindow && rule.label === 'Chrome Remote Desktop' && windowInfo) {
+        hitWindow = matchesChromeRemoteSharingBanner(windowInfo.title);
+      }
 
       if (!(hitName || hitPath || hitCmd || hitDesc || hitComp || hitWindow)) {
         continue;
       }
 
-      // Mid-exam check: require active window title for tray-capable remote desktop apps
-      // to prevent false positives when they are running idle in the background tray.
+      // Mid-exam only: require a visible window for tray-capable remote desktop apps
+      // so idle tray processes do not false-positive. Precheck (strict) must catch them.
       const isTrayApp = ['AnyDesk', 'TeamViewer', 'UltraViewer', 'RustDesk', 'Supremo'].includes(rule.label);
-      if (isTrayApp && !hitWindow) {
+      if (!strict && isTrayApp && !hitWindow) {
         continue;
       }
 
@@ -168,7 +199,10 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
   for (const [pid, windowInfo] of windowTitles) {
     for (const rule of runtimeRules) {
       if (matchedLabels.has(rule.label)) continue;
-      if (!containsAny(windowInfo.title, titleSignaturesForRule(rule))) continue;
+      const titleHit =
+        containsAny(windowInfo.title, titleSignaturesForRule(rule)) ||
+        (rule.label === 'Chrome Remote Desktop' && matchesChromeRemoteSharingBanner(windowInfo.title));
+      if (!titleHit) continue;
       const procName = windowInfo.processName || '';
       if (isServiceProcess(procName, rule)) continue;
       pushDetection(detections, checkedPids, rule, pid, {
@@ -28092,6 +28126,24 @@ function vary (res, field) {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const { exec } = __nccwpck_require__(5317);
+const fs = __nccwpck_require__(9896);
+const path = __nccwpck_require__(6928);
+
+function resolveEnumWindowsScript() {
+  const candidates = [
+    __nccwpck_require__.ab + "enum-visible-windows.ps1",
+    path.join(__dirname, '..', 'scripts', 'enum-visible-windows.ps1'),
+  ];
+  if (process.pkg) {
+    candidates.push(path.join(path.dirname(process.execPath), 'scripts', 'enum-visible-windows.ps1'));
+  }
+  for (const p of candidates) {
+    try {
+      if (fs.existsSync(p)) return p;
+    } catch { /* ignore */ }
+  }
+  return null;
+}
 
 function run(cmd) {
   return new Promise((resolve, reject) => {
@@ -28162,15 +28214,14 @@ async function scanWindows() {
     for (const line of out.split(/\r?\n/).filter(Boolean)) {
       const cols = line.replace(/^"|"$/g, '').split('","');
       const pid = parseInt(cols[1], 10) || 0;
-      const meta = metaByPid.get(pid) || {};
       allProcs.push({
         pid,
-        processName: String(cols[0] || meta.processName || '').trim(),
-        processPath: meta.processPath || '',
+        processName: String(cols[0] || '').trim(),
+        processPath: '',
         commandLine: '',
-        description: meta.description || '',
-        company: meta.company || '',
-        sessionId: meta.sessionId !== undefined ? meta.sessionId : -1,
+        description: '',
+        company: '',
+        sessionId: -1,
       });
     }
   } catch { /* ignore */ }
@@ -28218,6 +28269,25 @@ async function getConnectionsByPidWindows() {
  * Get window titles for processes on Windows.
  * Returns Map<pid, { processName, title }>
  */
+function mergeWindowTitle(map, pid, processName, title) {
+  const t = String(title || '').trim();
+  if (!pid || !t) return;
+  const key = Number(pid);
+  const proc = String(processName || '').toLowerCase();
+  const existing = map.get(key);
+  if (!existing) {
+    map.set(key, { processName: proc, title: t });
+    return;
+  }
+  const combined = `${existing.title} | ${t}`;
+  if (!existing.title.toLowerCase().includes(t.toLowerCase())) {
+    existing.title = combined;
+  }
+  if (!existing.processName && proc) {
+    existing.processName = proc;
+  }
+}
+
 async function getWindowTitlesWindows() {
   const map = new Map();
   try {
@@ -28227,13 +28297,28 @@ async function getWindowTitlesWindows() {
     const arr = Array.isArray(parsed) ? parsed : [parsed];
     for (const p of arr) {
       if (p.Id && p.MainWindowTitle) {
-        map.set(p.Id, {
-          processName: String(p.ProcessName || '').toLowerCase(),
-          title: String(p.MainWindowTitle || ''),
-        });
+        mergeWindowTitle(map, p.Id, p.ProcessName, p.MainWindowTitle);
       }
     }
   } catch { /* non-fatal */ }
+
+  // All HWND titles (visible + hidden) — catches CRD sharing UI even when minimized/hidden
+  try {
+    const scriptPath = resolveEnumWindowsScript();
+    if (scriptPath) {
+      const out = await run(
+        `powershell -NoProfile -ExecutionPolicy Bypass -File "${scriptPath.replace(/"/g, '\\"')}"`
+      );
+      const parsed = safeParseJson(out);
+      const arr = Array.isArray(parsed) ? parsed : parsed ? [parsed] : [];
+      for (const w of arr) {
+        if (w && w.Id && w.Title) {
+          mergeWindowTitle(map, w.Id, '', w.Title);
+        }
+      }
+    }
+  } catch { /* non-fatal */ }
+
   return map;
 }
 

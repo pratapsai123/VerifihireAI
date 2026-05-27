@@ -78,19 +78,25 @@
     "label": "Chrome Remote Desktop",
     "signatures": [
       "remoting_host",
-      "chromoting"
+      "chromoting",
+      "remote_assistance_host",
+      "remoting_native_messaging_host"
     ],
     "pathSignatures": [
       "remoting_host.exe",
       "/chrome-remote-desktop",
-      "chromoting"
+      "chromoting",
+      "remote_assistance_host.exe",
+      "remoting_native_messaging_host.exe"
     ],
     "serviceProcesses": [],
     "activeIndicators": {
       "listenPorts": [],
       "activeConnectionKeywords": [
         "remoting_host",
-        "chromoting"
+        "chromoting",
+        "remote_assistance_host",
+        "remoting_native_messaging_host"
       ],
       "windowTitles": [
         "chrome remote desktop"

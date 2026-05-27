@@ -78,22 +78,42 @@
     "label": "Chrome Remote Desktop",
     "signatures": [
       "remoting_host",
-      "chromoting"
+      "chromoting",
+      "remote_assistance_host",
+      "remoting_native_messaging_host",
+      "chrome remote desktop",
+      "chrome-remote-desktop",
+      "googlechromeremotedesktop",
+      "chromotinghost",
+      "remoting_desktop"
     ],
     "pathSignatures": [
       "remoting_host.exe",
       "/chrome-remote-desktop",
-      "chromoting"
+      "chromoting",
+      "remote_assistance_host.exe",
+      "remoting_native_messaging_host.exe",
+      "google\\chrome remote desktop",
+      "program files\\google\\chrome remote desktop"
     ],
-    "serviceProcesses": [],
+    "serviceProcesses": [
+      "chromoting",
+      "chrome remote desktop service"
+    ],
     "activeIndicators": {
       "listenPorts": [],
       "activeConnectionKeywords": [
         "remoting_host",
-        "chromoting"
+        "chromoting",
+        "remote_assistance_host",
+        "remoting_native_messaging_host"
       ],
       "windowTitles": [
-        "chrome remote desktop"
+        "chrome remote desktop",
+        "desktop is currently shared",
+        "currently shared with",
+        "your desktop is currently shared",
+        "stop sharing"
       ]
     }
   },

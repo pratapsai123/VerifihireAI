@@ -333,6 +333,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       }
 
       // ── LOCAL AGENT CHECK: Ensure the terminal is still open ──────────
+      let localViolationActive = false;
       try {
         const agentStatus = await fetchAgentStatus();
         if (!isValidPackagedAgent(agentStatus)) {
@@ -345,8 +346,10 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
         terminalAbsentRef.current = false;
 
+        localViolationActive = !!agentStatus.monitorState?.lastScanWasViolation;
+
         // ── INSTANT LOCAL VIOLATION DETECTION ────────────────────────────
-        if (agentStatus.monitorState?.lastScanWasViolation) {
+        if (localViolationActive) {
           const pending = agentStatus.monitorState.pendingViolation;
           const appLabel = pending?.app || 'Remote access tool';
           
@@ -361,10 +364,6 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             const remaining = Math.max(0, 180 - elapsed);
             setTimeLeft(remaining);
           }
-        } else if (warningRef.current) {
-          // INSTANT LOCAL RESOLUTION: Prohibited application was closed!
-          setWarning(false);
-          setTimeLeft(180);
         }
       } catch (err) {
         // If we can't reach the local agent while online, it means the terminal was closed.
@@ -426,10 +425,12 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         }
 
         // CONTINUE / SAFE — clear any active warning
-        if (warningRef.current) {
-          setTimeLeft(180);
+        if (!localViolationActive) {
+          if (warningRef.current) {
+            setTimeLeft(180);
+          }
+          setWarning(false);
         }
-        setWarning(false);
 
         if (status?.action === 'PAUSE') {
           const deviceName = status.blocked_hardware || 'External device';
@@ -485,7 +486,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           user_id: sessRecord.user_id,
           token,
           agent_instance_id: sessRecord.agent_instance_id,
-          destruct_delay: 90,
+          destruct_delay: 5,
           consume: true,
         }).catch(() => { });
       } else if (sessRecord) {
