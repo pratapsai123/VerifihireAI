@@ -18,46 +18,25 @@ function safeParseJson(raw) {
 }
 
 async function scanWindows() {
-  const metaByPid = new Map();
   const allProcs = [];
 
-  // Enrich with Description / Company / Path from Get-Process (all processes, not only those with Path)
   try {
-    const psCmd = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Select-Object Id,Name,Path,Description,Company,SessionId | ConvertTo-Json -Compress"';
-    const out = await run(psCmd);
-    const parsed = safeParseJson(out);
-    const arr = Array.isArray(parsed) ? parsed : [parsed];
-    for (const p of arr) {
-      if (!p || !p.Id) continue;
-      metaByPid.set(p.Id, {
-        processName: String(p.Name || '').trim(),
-        processPath: String(p.Path || '').trim(),
-        description: String(p.Description || '').trim(),
-        company: String(p.Company || '').trim(),
-        sessionId: p.SessionId !== undefined ? p.SessionId : -1,
-      });
-    }
-  } catch { /* non-fatal */ }
-
-  // Primary pass: Win32_Process sees 32-bit and 64-bit processes + command lines (Chrome extensions, etc.)
-  try {
-    const psCmd = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-CimInstance Win32_Process | Select-Object ProcessId,Name,ExecutablePath,SessionId,CommandLine | ConvertTo-Json -Compress"';
-    const out = await run(psCmd);
+    const combinedScript = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$cim = Get-CimInstance Win32_Process | Select-Object ProcessId,Name,ExecutablePath,SessionId,CommandLine; $gps = Get-Process | Group-Object -Property Id -AsHashTable; $results = foreach ($c in $cim) { $id = $c.ProcessId; $p = $gps[$id][0]; [PSCustomObject]@{ Id = $id; Name = $c.Name; Path = if ($c.ExecutablePath) { $c.ExecutablePath } else { if ($p) { $p.Path } else { \'\' } }; CommandLine = $c.CommandLine; Description = if ($p) { $p.Description } else { \'\' }; Company = if ($p) { $p.Company } else { \'\' }; SessionId = if ($c.SessionId -ne $null) { $c.SessionId } else { if ($p) { $p.SessionId } else { -1 } }; } }; $results | ConvertTo-Json -Compress"';
+    const out = await run(combinedScript);
     const parsed = safeParseJson(out);
     const arr = Array.isArray(parsed) ? parsed : [parsed];
     const seenPids = new Set();
     for (const p of arr) {
-      if (!p || !p.ProcessId) continue;
-      seenPids.add(p.ProcessId);
-      const meta = metaByPid.get(p.ProcessId) || {};
+      if (!p || !p.Id) continue;
+      seenPids.add(p.Id);
       allProcs.push({
-        pid: p.ProcessId || 0,
-        processName: String(p.Name || meta.processName || '').trim(),
-        processPath: String(p.ExecutablePath || meta.processPath || '').trim(),
+        pid: p.Id,
+        processName: String(p.Name || '').trim(),
+        processPath: String(p.Path || '').trim(),
         commandLine: String(p.CommandLine || '').trim(),
-        description: meta.description || '',
-        company: meta.company || '',
-        sessionId: p.SessionId !== undefined ? p.SessionId : (meta.sessionId !== undefined ? meta.sessionId : -1),
+        description: String(p.Description || '').trim(),
+        company: String(p.Company || '').trim(),
+        sessionId: p.SessionId !== undefined ? p.SessionId : -1,
       });
     }
 
@@ -69,15 +48,14 @@ async function scanWindows() {
         const pid = parseInt(cols[1], 10) || 0;
         if (seenPids.has(pid)) continue;
         seenPids.add(pid);
-        const meta = metaByPid.get(pid) || {};
         allProcs.push({
           pid,
-          processName: String(cols[0] || meta.processName || '').trim(),
-          processPath: meta.processPath || '',
+          processName: String(cols[0] || '').trim(),
+          processPath: '',
           commandLine: '',
-          description: meta.description || '',
-          company: meta.company || '',
-          sessionId: meta.sessionId !== undefined ? meta.sessionId : -1,
+          description: '',
+          company: '',
+          sessionId: -1,
         });
       }
     } catch { /* ignore */ }

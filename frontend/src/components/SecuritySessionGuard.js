@@ -223,7 +223,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       // When REACT_APP_SKIP_PRECHECK=true, treat the entry gate as passed
       // and skip the live security polling below. Re-enable by flipping
       // the env var off.
-      if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
+      if (false /* TEMP BYPASS — change to false to re-enable precheck */) {
         console.warn('[SecuritySessionGuard] Skipping precheck gate (TEMP BYPASS)');
         setGateState('ready');
         return;
@@ -235,6 +235,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         return;
       }
 
+      markExamStarted(token);
+      setExamStarted(true);
       setGateState('ready');
     };
 
@@ -266,8 +268,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     // When REACT_APP_SKIP_PRECHECK=true, do not run the post-start
     // security polling either; otherwise it will redirect the user
     // back to /precheck the moment the agent isn't found.
-    if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
-      console.warn('[SecuritySessionGuard] Skipping security polling (TEMP BYPASS)');
+    if (process.env.REACT_APP_SKIP_SECURITY_POLLING === 'true') {
+      console.warn('[SecuritySessionGuard] Skipping security polling (ENV BYPASS)');
       return;
     }
 
@@ -342,6 +344,28 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           return;
         }
         terminalAbsentRef.current = false;
+
+        // ── INSTANT LOCAL VIOLATION DETECTION ────────────────────────────
+        if (agentStatus.monitorState?.lastScanWasViolation) {
+          const pending = agentStatus.monitorState.pendingViolation;
+          const appLabel = pending?.app || 'Remote access tool';
+          
+          if (!warningRef.current) {
+            setWarning(true);
+            setBlockedApp(appLabel);
+            
+            // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
+            const now = Date.now();
+            const start = pending?.violation_start_time ? new Date(pending.violation_start_time).getTime() : now;
+            const elapsed = Math.floor((now - start) / 1000);
+            const remaining = Math.max(0, 180 - elapsed);
+            setTimeLeft(remaining);
+          }
+        } else if (warningRef.current) {
+          // INSTANT LOCAL RESOLUTION: Prohibited application was closed!
+          setWarning(false);
+          setTimeLeft(180);
+        }
       } catch (err) {
         // If we can't reach the local agent while online, it means the terminal was closed.
         console.error('[SecuritySessionGuard] Cannot reach Secure Agent (ECONNREFUSED).');
@@ -387,13 +411,17 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             );
             return;
           }
-          setWarning(true);
-          const start = new Date(status.violation_start_time).getTime();
-          const now = Date.now();
-          const elapsed = Math.floor((now - start) / 1000);
-          const remaining = Math.max(0, 180 - elapsed);
-          setTimeLeft(remaining);
-          setBlockedApp(status.blocked_app || 'Remote access tool');
+          if (!warningRef.current) {
+            setWarning(true);
+            setBlockedApp(status.blocked_app || 'Remote access tool');
+            
+            // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
+            const start = new Date(status.violation_start_time).getTime();
+            const now = Date.now();
+            const elapsed = Math.floor((now - start) / 1000);
+            const remaining = Math.max(0, 180 - elapsed);
+            setTimeLeft(remaining);
+          }
           return;
         }
 

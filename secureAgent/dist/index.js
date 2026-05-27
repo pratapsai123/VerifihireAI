@@ -133,6 +133,13 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
         continue;
       }
 
+      // Mid-exam check: require active window title for tray-capable remote desktop apps
+      // to prevent false positives when they are running idle in the background tray.
+      const isTrayApp = ['AnyDesk', 'TeamViewer', 'UltraViewer', 'RustDesk', 'Supremo'].includes(rule.label);
+      if (isTrayApp && !hitWindow) {
+        continue;
+      }
+
       // Precheck (strict): flag background/tray helpers — only skip OS daemons like teamviewer_service
       if (!strict && isServiceProcess(name, rule)) {
         continue;
@@ -827,7 +834,12 @@ function stopMonitor() {
 }
 
 function getMonitorState() {
-  return { running: Boolean(scanTimer && heartbeatTimer), current };
+  return {
+    running: Boolean(scanTimer && heartbeatTimer),
+    current,
+    lastScanWasViolation,
+    pendingViolation,
+  };
 }
 
 module.exports = { startMonitor, stopMonitor, getMonitorState, triggerScanNow };
@@ -28099,46 +28111,25 @@ function safeParseJson(raw) {
 }
 
 async function scanWindows() {
-  const metaByPid = new Map();
   const allProcs = [];
 
-  // Enrich with Description / Company / Path from Get-Process (all processes, not only those with Path)
   try {
-    const psCmd = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Select-Object Id,Name,Path,Description,Company,SessionId | ConvertTo-Json -Compress"';
-    const out = await run(psCmd);
-    const parsed = safeParseJson(out);
-    const arr = Array.isArray(parsed) ? parsed : [parsed];
-    for (const p of arr) {
-      if (!p || !p.Id) continue;
-      metaByPid.set(p.Id, {
-        processName: String(p.Name || '').trim(),
-        processPath: String(p.Path || '').trim(),
-        description: String(p.Description || '').trim(),
-        company: String(p.Company || '').trim(),
-        sessionId: p.SessionId !== undefined ? p.SessionId : -1,
-      });
-    }
-  } catch { /* non-fatal */ }
-
-  // Primary pass: Win32_Process sees 32-bit and 64-bit processes + command lines (Chrome extensions, etc.)
-  try {
-    const psCmd = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-CimInstance Win32_Process | Select-Object ProcessId,Name,ExecutablePath,SessionId,CommandLine | ConvertTo-Json -Compress"';
-    const out = await run(psCmd);
+    const combinedScript = 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$cim = Get-CimInstance Win32_Process | Select-Object ProcessId,Name,ExecutablePath,SessionId,CommandLine; $gps = Get-Process | Group-Object -Property Id -AsHashTable; $results = foreach ($c in $cim) { $id = $c.ProcessId; $p = $gps[$id][0]; [PSCustomObject]@{ Id = $id; Name = $c.Name; Path = if ($c.ExecutablePath) { $c.ExecutablePath } else { if ($p) { $p.Path } else { \'\' } }; CommandLine = $c.CommandLine; Description = if ($p) { $p.Description } else { \'\' }; Company = if ($p) { $p.Company } else { \'\' }; SessionId = if ($c.SessionId -ne $null) { $c.SessionId } else { if ($p) { $p.SessionId } else { -1 } }; } }; $results | ConvertTo-Json -Compress"';
+    const out = await run(combinedScript);
     const parsed = safeParseJson(out);
     const arr = Array.isArray(parsed) ? parsed : [parsed];
     const seenPids = new Set();
     for (const p of arr) {
-      if (!p || !p.ProcessId) continue;
-      seenPids.add(p.ProcessId);
-      const meta = metaByPid.get(p.ProcessId) || {};
+      if (!p || !p.Id) continue;
+      seenPids.add(p.Id);
       allProcs.push({
-        pid: p.ProcessId || 0,
-        processName: String(p.Name || meta.processName || '').trim(),
-        processPath: String(p.ExecutablePath || meta.processPath || '').trim(),
+        pid: p.Id,
+        processName: String(p.Name || '').trim(),
+        processPath: String(p.Path || '').trim(),
         commandLine: String(p.CommandLine || '').trim(),
-        description: meta.description || '',
-        company: meta.company || '',
-        sessionId: p.SessionId !== undefined ? p.SessionId : (meta.sessionId !== undefined ? meta.sessionId : -1),
+        description: String(p.Description || '').trim(),
+        company: String(p.Company || '').trim(),
+        sessionId: p.SessionId !== undefined ? p.SessionId : -1,
       });
     }
 
@@ -28150,15 +28141,14 @@ async function scanWindows() {
         const pid = parseInt(cols[1], 10) || 0;
         if (seenPids.has(pid)) continue;
         seenPids.add(pid);
-        const meta = metaByPid.get(pid) || {};
         allProcs.push({
           pid,
-          processName: String(cols[0] || meta.processName || '').trim(),
-          processPath: meta.processPath || '',
+          processName: String(cols[0] || '').trim(),
+          processPath: '',
           commandLine: '',
-          description: meta.description || '',
-          company: meta.company || '',
-          sessionId: meta.sessionId !== undefined ? meta.sessionId : -1,
+          description: '',
+          company: '',
+          sessionId: -1,
         });
       }
     } catch { /* ignore */ }
@@ -34168,9 +34158,22 @@ initBaseline().catch(err => console.error('[server] hardware baseline init error
 
 console.log(`[server] VerifiHire Secure Agent v${AGENT_VERSION} starting...`);
 
-app.get('/status', (_req, res) => {
+function checkIsAdmin() {
+  return new Promise((resolve) => {
+    if (process.platform !== 'win32') {
+      resolve(false);
+      return;
+    }
+    exec('net session', { windowsHide: true }, (err) => {
+      resolve(!err);
+    });
+  });
+}
+
+app.get('/status', async (_req, res) => {
   const monitorState = getMonitorState();
   const packaged = Boolean(process.pkg);
+  const admin = await checkIsAdmin();
   res.json({
     installed: packaged,
     running: true,
@@ -34181,6 +34184,7 @@ app.get('/status', (_req, res) => {
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
+    isAdmin: admin,
   });
 });
 

@@ -112,5 +112,113 @@
         "rustdesk"
       ]
     }
+  },
+  {
+    "label": "Zoom",
+    "signatures": [
+      "zoom",
+      "zoom meetings"
+    ],
+    "pathSignatures": [
+      "zoom.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "zoom meeting",
+        "zoom cloud meetings"
+      ]
+    }
+  },
+  {
+    "label": "Discord",
+    "signatures": [
+      "discord"
+    ],
+    "pathSignatures": [
+      "discord.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "discord"
+      ]
+    }
+  },
+  {
+    "label": "Microsoft Teams",
+    "signatures": [
+      "teams",
+      "msteams"
+    ],
+    "pathSignatures": [
+      "teams.exe",
+      "msteams.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "microsoft teams",
+        "teams meeting"
+      ]
+    }
+  },
+  {
+    "label": "Skype",
+    "signatures": [
+      "skype"
+    ],
+    "pathSignatures": [
+      "skype.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "skype"
+      ]
+    }
+  },
+  {
+    "label": "Supremo",
+    "signatures": [
+      "supremo"
+    ],
+    "pathSignatures": [
+      "supremo.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "supremo"
+      ]
+    }
+  },
+  {
+    "label": "Google Meet",
+    "signatures": [],
+    "pathSignatures": [],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "google meet",
+        "meet.google.com"
+      ]
+    }
+  },
+  {
+    "label": "Webex",
+    "signatures": [
+      "webex"
+    ],
+    "pathSignatures": [
+      "webex.exe"
+    ],
+    "serviceProcesses": [],
+    "activeIndicators": {
+      "windowTitles": [
+        "webex",
+        "cisco webex"
+      ]
+    }
   }
 ]

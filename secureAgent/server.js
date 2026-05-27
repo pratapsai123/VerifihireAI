@@ -45,9 +45,22 @@ initBaseline().catch(err => console.error('[server] hardware baseline init error
 
 console.log(`[server] VerifiHire Secure Agent v${AGENT_VERSION} starting...`);
 
-app.get('/status', (_req, res) => {
+function checkIsAdmin() {
+  return new Promise((resolve) => {
+    if (process.platform !== 'win32') {
+      resolve(false);
+      return;
+    }
+    exec('net session', { windowsHide: true }, (err) => {
+      resolve(!err);
+    });
+  });
+}
+
+app.get('/status', async (_req, res) => {
   const monitorState = getMonitorState();
   const packaged = Boolean(process.pkg);
+  const admin = await checkIsAdmin();
   res.json({
     installed: packaged,
     running: true,
@@ -58,6 +71,7 @@ app.get('/status', (_req, res) => {
     monitor: monitorState.running,
     monitorState: monitorState.current,
     platform: process.platform,
+    isAdmin: admin,
   });
 });
 

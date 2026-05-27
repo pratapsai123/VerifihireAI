@@ -372,7 +372,7 @@ class BulkInviteView(APIView):
 
                 )
 
-                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
 
                 link = f"{frontend_base}/interview-start/{candidate.public_token}"
 
@@ -618,6 +618,27 @@ class ResumeMatchView(APIView):
             if resume_files:
 
                 candidate.resume = resume_files[0]
+
+            # skip_scoring mode: Just extract resume text for adaptive questioning context
+            skip_scoring = request.data.get('skip_scoring', 'false').lower() == 'true'
+
+            if skip_scoring:
+                # Only extract text from resume — no AI scoring, no pass/fail
+                candidate.status = 'Interview'
+                candidate.save()
+                
+                if candidate.resume and not candidate.resume_text:
+                    from .tasks import extract_resume_text_task
+                    # Run synchronously for immediate availability
+                    try:
+                        extract_resume_text_task(candidate.id)
+                    except Exception as e:
+                        logger.warning(f"Resume extraction failed (non-blocking): {e}")
+                
+                return Response({
+                    "status": "ready",
+                    "message": "Resume processed. Interview ready to start."
+                }, status=status.HTTP_200_OK)
 
             elif not candidate.resume:
 
@@ -1751,10 +1772,6 @@ class CandidatePublicStatusUpdateView(APIView):
             # Security: Only allow completion if the interview was actually started
             if not candidate.link_opened_at:
                 return Response({'error': 'Interview was never started.'}, status=status.HTTP_403_FORBIDDEN)
-
-            # Security: Only allow completion if candidate has answered at least 1 question
-            if candidate.total_questions < 1:
-                return Response({'error': 'Cannot complete interview with no answers submitted.'}, status=status.HTTP_403_FORBIDDEN)
 
             # Refresh from DB to get the latest score (in case last ProcessAnswer is still saving)
             candidate.refresh_from_db()
@@ -3840,7 +3857,7 @@ class ResendInviteView(APIView):
 
         try:
             from django.core.mail import send_mail
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
             link = f"{frontend_base}/interview-start/{candidate.public_token}"
             name = candidate.full_name or 'Candidate'
             email = candidate.email
