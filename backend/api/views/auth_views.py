@@ -156,20 +156,12 @@ def send_otp_view(request):
                 fail_silently=False,
             )
         except Exception as e:
-            # If email sending fails, log the error but still save the OTP
+            # Issue 2 fix: NEVER return the OTP in the response body.
+            # Fail closed — if email delivery fails, the user must retry.
             print(f"Email sending failed: {str(e)}")
-            # Return OTP in response for development/testing purposes
-            # In production, you may want to handle this differently
             return Response(
-                {
-                    'message': 'OTP generated. Email sending failed, but OTP is available below for testing.',
-                    'otp': otp,  # For development/testing - remove in production
-                    'email': email,
-                    'expires_in': expires_in,
-                    'email_sent': False,
-                    'error': f'Email sending failed: {str(e)}'
-                },
-                status=status.HTTP_200_OK
+                {'error': 'Email delivery failed. Please try again or contact support.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
         
         return Response(
@@ -390,36 +382,23 @@ def reset_password_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])  # Issue 3 fix: was AllowAny (credential stuffing oracle)
 def verify_current_password_view(request):
     """
-    Verify current password for an authenticated user.
-    Expected request body:
-    {
-        "email": "user@company.com",
-        "password": "currentpassword123"
-    }
+    Verify current password for the authenticated user.
+    Email is taken from the JWT token (request.user), NOT the request body.
     """
     try:
-        email = request.data.get('email', '').strip().lower()
+        # Issue 3 fix: use authenticated user's email from token, not from request body
+        email = request.user.email or request.user.username
         password = request.data.get('password', '')
 
-        if not email:
-            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
         if not password:
             return Response({'error': 'Password is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Find user
         user_profile = UserProfile.objects.filter(email=email).first()
-        auth_user = None
-
-        if user_profile and user_profile.user:
-            auth_user = user_profile.user
-        else:
-            auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
-
-        if not auth_user:
-            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+        auth_user = request.user
 
         # Verify password
         if not auth_user.check_password(password):
@@ -437,7 +416,7 @@ def verify_current_password_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])  # Issue 3 fix: was AllowAny
 def change_password_view(request):
     """
     Change password for an authenticated user.
@@ -450,13 +429,11 @@ def change_password_view(request):
     }
     """
     try:
-        email = request.data.get('email', '').strip().lower()
+        # Issue 3 fix: get email from the authenticated JWT token, not the request body
+        email = request.user.email or request.user.username
         current_password = request.data.get('current_password', '')
         new_password = request.data.get('new_password', '')
         confirm_password = request.data.get('confirm_password', '')
-
-        if not email:
-            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
         if not current_password:
             return Response({'error': 'Current password is required.'}, status=status.HTTP_400_BAD_REQUEST)
         if not new_password:
@@ -925,17 +902,11 @@ def login_view(request):
             )
         except Exception as e:
             print(f"Email sending failed: {str(e)}")
-            # Return OTP in response for development/testing
+            # Issue 2 fix: NEVER return the OTP in the response body on email failure.
+            # Fail closed — the user must retry; they do not get the OTP as a bypass.
             return Response(
-                {
-                    'message': 'Credentials verified. OTP generated. Check your email.',
-                    'otp_required': True,
-                    'otp': otp,  # Remove this in production
-                    'email': email,
-                    'expires_in': expires_in,
-                    'email_sent': False
-                },
-                status=status.HTTP_200_OK
+                {'error': 'Email delivery failed. Please try again or contact support.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
 
         # Return response indicating OTP is required
@@ -1104,7 +1075,8 @@ def verify_login_otp_view(request):
                 httponly=True,
                 secure=settings.SESSION_COOKIE_SECURE,
                 samesite='Lax',
-                max_age=int(timedelta(hours=12).total_seconds())
+                # Issue 7 fix: sync max_age with SIMPLE_JWT setting (was hardcoded timedelta(hours=12))
+                max_age=int(settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds())
             )
             return response
             

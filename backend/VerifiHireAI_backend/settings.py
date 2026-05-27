@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ai_assessments',
     'ai_candidates',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  # Required for BLACKLIST_AFTER_ROTATION
     'deepface_proctoring',
 ]
 
@@ -200,24 +201,17 @@ REST_FRAMEWORK = {
         'api.authentication.DBContextJWTAuthentication',
 
     ],
+    # Issue 8 fix: Default to IsAuthenticated so any new endpoint added
+    # is secure by default. Public endpoints must explicitly set @permission_classes([AllowAny]).
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
 }
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'AUTH_HEADER_TYPES': ('Bearer',),
-}
+# Issue 1 fix: Removed first (stale) SIMPLE_JWT block — only one block below is active.
 
 default_cors_origins = [
     "http://localhost:3000",
@@ -305,14 +299,17 @@ GROQ_API_KEY = GROQ_API_KEYS[0] if GROQ_API_KEYS else None
 
 ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
 
-from datetime import timedelta
+# Issue 1 & 6 fix: Single canonical SIMPLE_JWT config.
+# Access token is 30 min (short-lived). In-memory storage + auto-refresh via cookie
+# means there is no UX cost to a short access token lifetime.
+# REFRESH_TOKEN_LIFETIME matches the cookie max_age set in verify_login_otp_view.
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),   # Issue 6: was 12 hours
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),    # Issue 7: used as cookie max_age source of truth
     'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
+    'BLACKLIST_AFTER_ROTATION': True,                 # Now functional — token_blacklist is in INSTALLED_APPS
     'UPDATE_LAST_LOGIN': True,
-    
+
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
