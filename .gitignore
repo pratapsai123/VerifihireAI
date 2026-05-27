@@ -50,35 +50,3 @@ copilot-messages.log
 # System files
 .DS_Store
 .project/attachments/files/**
-
-# Node.js
-node_modules/
-npm-debug.log*
-
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.egg-info/
-dist/
-build/
-*.egg
-
-# Virtual environments
-venv/
-.venv/
-venv_*/
-env/
-ENV/
-
-# Environment & secrets (never commit)
-.env
-.env.local
-.env.*.local
-
-# IDE files
-.vscode/
-.idea/
-# DeepFace runtime biometric data
-deepface/data/registered_faces/
-.kiro/settings/mcp.json
