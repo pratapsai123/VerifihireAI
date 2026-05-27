@@ -339,7 +339,12 @@ function stopMonitor() {
 }
 
 function getMonitorState() {
-  return { running: Boolean(scanTimer && heartbeatTimer), current };
+  return {
+    running: Boolean(scanTimer && heartbeatTimer),
+    current,
+    lastScanWasViolation,
+    pendingViolation,
+  };
 }
 
 module.exports = { startMonitor, stopMonitor, getMonitorState, triggerScanNow };

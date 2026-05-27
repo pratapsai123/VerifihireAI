@@ -57,7 +57,7 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
+const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
 
 /** Collect every blocked app label from a scan result (all tools, not just one). */
 function collectBlockedApps(scanResult) {
@@ -106,6 +106,7 @@ export default function SecurePrecheck() {
   const [detectedHardware, setDetectedHardware] = useState([]);
   const [error, setError] = useState('');
   const [agentVersion, setAgentVersion] = useState('');
+  const [isAgentAdmin, setIsAgentAdmin] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
   const [terminalCloseWarning, setTerminalCloseWarning] = useState(() =>
     token ? readTerminalCloseWarning(token) : null
@@ -178,6 +179,7 @@ export default function SecurePrecheck() {
     }
 
     setAgentVersion(status?.version || '');
+    setIsAgentAdmin(status?.isAdmin !== false);
 
     if (!isValidPackagedAgent(status)) {
       const reason = getAgentInvalidReason(status);
@@ -550,6 +552,34 @@ export default function SecurePrecheck() {
             </p>
           </div>
         ) : null}
+        {!isAgentAdmin && phase !== 'not_installed' && phase !== 'outdated' && phase !== 'agent_expired' && phase !== 'permanently_blocked' ? (
+          <div
+            style={{
+              marginBottom: 16,
+              padding: '14px 16px',
+              borderRadius: 10,
+              background: '#fffbeb',
+              border: '1px solid #fde68a',
+            }}
+          >
+            <p style={{
+              margin: '0 0 6px',
+              fontWeight: 700,
+              color: '#b45309',
+              fontSize: '0.95rem',
+            }}>
+              ⚠️ Administrator rights recommended
+            </p>
+            <p style={{
+              margin: 0,
+              color: '#92400e',
+              lineHeight: 1.5,
+              fontSize: '0.92rem',
+            }}>
+              The Secure Agent is running normally, but <strong>not as Administrator</strong>. For maximum security and correct remote app detection, please close the agent terminal, then <strong>right-click the VerifiHireSecureAgent.exe file and select "Run as administrator"</strong>.
+            </p>
+          </div>
+        ) : null}
         {isScanning && statusMessage ? (
           <div className="secure-precheck-status secure-precheck-status--scanning">
             <div className="secure-precheck-status-icon">
@@ -566,6 +596,7 @@ export default function SecurePrecheck() {
             <div className="secure-precheck-count-badge" role="status">
               <span aria-hidden>⚠</span>
               {remoteBlockCount} prohibited {remoteBlockCount === 1 ? 'program' : 'programs'} detected
+              {detectedApps.length > 0 && ` (${detectedApps.join(', ')})`}
             </div>
             <ol className="secure-precheck-steps">
               <li>Close the application completely (not minimized).</li>

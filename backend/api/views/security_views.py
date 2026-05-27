@@ -260,13 +260,12 @@ def security_check_view(request):
 
     session.status = 'SAFE'
     session.action = 'CONTINUE'
-    session.violation_count = 0
     session.violation_start_time = None
     session.blocked_app = None
     session.blocked_process_name = None
     session.blocked_app_path = None
     session.save(update_fields=[
-        'status', 'action', 'violation_count', 'violation_start_time',
+        'status', 'action', 'violation_start_time',
         'blocked_app', 'blocked_process_name', 'blocked_app_path', 'updated_at',
     ])
     return Response({'action': 'CONTINUE'})

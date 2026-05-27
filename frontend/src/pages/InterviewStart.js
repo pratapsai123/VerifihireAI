@@ -123,7 +123,7 @@ const InterviewStart = () => {
                     setPanNumber(candidateData.pan_number || '');
                     setPanVerified(true);
                 }
-                
+
                 setLoading(false);
 
                 // Keep candidate on this page even when questions already exist.
@@ -356,19 +356,14 @@ const InterviewStart = () => {
         const formData = new FormData();
         if (resumeFile) formData.append('resume', resumeFile);
         formData.append('candidate_id', candidate.id);
+        formData.append('skip_scoring', 'true'); // Only extract resume text, no scoring
 
         try {
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            if (!response.data.interview_questions) throw new Error('No questions generated');
-            const sessionData = {
-                candidateId: candidate.id,
-                candidateName: candidate.full_name,
-                questions: response.data.interview_questions,
-                status: 'interview_started'
-            };
-            sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
+            // With adaptive questioning, we don't need pre-generated questions.
+            // Just proceed to the interview — the LLM will generate questions dynamically.
             import('../utils/activityLogger').then(({ logCandidateActivity }) => {
                 logCandidateActivity(token, 'Live Interview Started', 'Candidate started the live/AI interview session.');
             });
@@ -554,7 +549,7 @@ const InterviewStart = () => {
                     >
                         Go to Homepage
                     </button>
-                    
+
                     <p style={{ marginTop: '1.5rem', color: '#94A3B8', fontSize: '0.875rem' }}>
                         Need help? Please contact your hiring manager.
                     </p>
@@ -655,275 +650,275 @@ const InterviewStart = () => {
                 {/* Registration Form - only show if not already registered */}
                 {!isAlreadyRegistered && (
                     <>
-                {/* Phone Number */}
-                <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                        <i className="fa-solid fa-phone" style={{ marginRight: '8px', color: '#667eea' }}></i>Phone Number *
-                    </label>
-                    <input
-                        type="tel"
-                        inputMode="numeric"
-                        value={phone}
-                        onChange={(e) => {
-                            let value = e.target.value.replace(/\D/g, '');
-                            // Silently enforce: first digit must be 6-9
-                            if (value.length > 0 && !/^[6-9]/.test(value)) {
-                                value = value.replace(/^[^6-9]+/, '');
-                            }
-                            if (value.length <= 10) setPhone(value);
-                        }}
-                        placeholder="10-digit mobile number"
-                        maxLength={10}
-                        pattern="[6-9][0-9]{9}"
-                        style={{
-                            width: '100%', padding: '0.75rem 1rem',
-                            border: `1.5px solid ${phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}`,
-                            borderRadius: '12px',
-                            fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
-                            boxSizing: 'border-box'
-                        }}
-                        onFocus={(e) => e.target.style.borderColor = '#667eea'}
-                        onBlur={(e) => e.target.style.borderColor = phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}
-                    />
-                </div>
-
-                {/* PAN Card Number */}
-                <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                        <i className="fa-solid fa-id-card" style={{ marginRight: '8px', color: '#667eea' }}></i>PAN Card Number *
-                    </label>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <input
-                            type="text"
-                            value={panNumber}
-                            onChange={(e) => {
-                                const value = e.target.value.toUpperCase();
-                                const position = value.length - 1;
-                                const lastChar = value[position];
-
-                                // Validate based on position
-                                if (position >= 0 && position < 5) {
-                                    // First 5 chars: only letters
-                                    if (!/^[A-Z]$/.test(lastChar)) return;
-                                } else if (position >= 5 && position < 9) {
-                                    // Next 4 chars: only numbers
-                                    if (!/^[0-9]$/.test(lastChar)) return;
-                                } else if (position === 9) {
-                                    // Last char: only letter
-                                    if (!/^[A-Z]$/.test(lastChar)) return;
-                                }
-
-                                setPanNumber(value);
-                                setPanVerified(false);
-                                setPanError('');
-                            }}
-                            placeholder="e.g. ABCDE1234F"
-                            maxLength={10}
-                            style={{
-                                flex: 1, padding: '0.75rem 1rem', border: '1.5px solid #e2e8f0', borderRadius: '12px',
-                                fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
-                                textTransform: 'uppercase', letterSpacing: '0.05em',
-                                borderColor: panVerified ? '#22c55e' : panError ? '#ef4444' : '#e2e8f0'
-                            }}
-                            onFocus={(e) => { if (!panVerified && !panError) e.target.style.borderColor = '#667eea'; }}
-                            onBlur={(e) => { if (!panVerified && !panError) e.target.style.borderColor = '#e2e8f0'; }}
-                        />
-                        {panVerified && (
-                            <span style={{ display: 'flex', alignItems: 'center', color: '#22c55e', fontWeight: '700', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
-                                <i className="fa-solid fa-circle-check" style={{ marginRight: '4px' }}></i>Verified
-                            </span>
-                        )}
-                    </div>
-                    <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#a0aec0' }}>e.g. ABCDE1234F</p>
-                </div>
-
-                {/* PAN Card Photo Upload */}
-                <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                        <i className="fa-solid fa-camera" style={{ marginRight: '8px', color: '#667eea' }}></i>PAN Card Photo *
-                    </label>
-                    <div
-                        onClick={() => document.getElementById('panPhotoInput').click()}
-                        style={{
-                            border: '2px dashed #cbd5e0', borderRadius: '12px', padding: '1rem', cursor: 'pointer',
-                            transition: 'all 0.2s', background: panPhotoPreview ? '#f0fdf4' : 'transparent',
-                            borderColor: panVerified ? '#22c55e' : panPhotoPreview ? '#38b2ac' : '#cbd5e0',
-                            display: 'flex', alignItems: 'center', gap: '1rem'
-                        }}
-                    >
-                        <input type="file" id="panPhotoInput" accept="image/*" hidden onChange={handlePanPhotoChange} />
-                        {panPhotoPreview ? (
-                            <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
-                        ) : (
-                            <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#667eea' }}></i>
-                        )}
-                        <div>
-                            <p style={{ margin: '0 0 0.25rem', fontWeight: '600', color: '#4a5568', fontSize: '0.9rem' }}>
-                                {panPhoto ? panPhoto.name : 'Upload PAN Card Photo'}
-                            </p>
-                            <p style={{ margin: 0, fontSize: '0.75rem', color: '#a0aec0' }}>Click to browse</p>
+                        {/* Phone Number */}
+                        <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+                            <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-phone" style={{ marginRight: '8px', color: '#667eea' }}></i>Phone Number *
+                            </label>
+                            <input
+                                type="tel"
+                                inputMode="numeric"
+                                value={phone}
+                                onChange={(e) => {
+                                    let value = e.target.value.replace(/\D/g, '');
+                                    // Silently enforce: first digit must be 6-9
+                                    if (value.length > 0 && !/^[6-9]/.test(value)) {
+                                        value = value.replace(/^[^6-9]+/, '');
+                                    }
+                                    if (value.length <= 10) setPhone(value);
+                                }}
+                                placeholder="10-digit mobile number"
+                                maxLength={10}
+                                pattern="[6-9][0-9]{9}"
+                                style={{
+                                    width: '100%', padding: '0.75rem 1rem',
+                                    border: `1.5px solid ${phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}`,
+                                    borderRadius: '12px',
+                                    fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
+                                    boxSizing: 'border-box'
+                                }}
+                                onFocus={(e) => e.target.style.borderColor = '#667eea'}
+                                onBlur={(e) => e.target.style.borderColor = phone && phone.length === 10 ? '#22c55e' : '#e2e8f0'}
+                            />
                         </div>
-                    </div>
-                </div>
 
-                {/* Verify PAN Button */}
-                {panNumber && panPhoto && !panVerified && (
-                    <button
-                        onClick={handleValidatePan}
-                        disabled={panValidating || !validatePanFormat(panNumber)}
-                        style={{
-                            width: '100%', padding: '0.75rem', marginBottom: '1.5rem',
-                            background: panValidating || !validatePanFormat(panNumber) ? '#cbd5e0' : 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                            color: 'white', border: 'none', borderRadius: '12px',
-                            fontSize: '0.95rem', fontWeight: '600', cursor: panValidating || !validatePanFormat(panNumber) ? 'not-allowed' : 'pointer',
-                            opacity: panValidating || !validatePanFormat(panNumber) ? 0.7 : 1
-                        }}
-                    >
-                        {panValidating ? <><i className="fa-solid fa-spinner fa-spin"></i> Verifying PAN...</> : 'Verify PAN Card'}
-                    </button>
-                )}
+                        {/* PAN Card Number */}
+                        <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+                            <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-id-card" style={{ marginRight: '8px', color: '#667eea' }}></i>PAN Card Number *
+                            </label>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <input
+                                    type="text"
+                                    value={panNumber}
+                                    onChange={(e) => {
+                                        const value = e.target.value.toUpperCase();
+                                        const position = value.length - 1;
+                                        const lastChar = value[position];
 
-                {/* PAN Error */}
-                {panError && (
-                    <div style={{
-                        background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '12px',
-                        padding: '0.75rem 1rem', marginBottom: '1.5rem', color: '#991B1B',
-                        fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem'
-                    }}>
-                        <i className="fa-solid fa-circle-exclamation"></i>
-                        <span>{panError}</span>
-                    </div>
-                )}
+                                        // Validate based on position
+                                        if (position >= 0 && position < 5) {
+                                            // First 5 chars: only letters
+                                            if (!/^[A-Z]$/.test(lastChar)) return;
+                                        } else if (position >= 5 && position < 9) {
+                                            // Next 4 chars: only numbers
+                                            if (!/^[0-9]$/.test(lastChar)) return;
+                                        } else if (position === 9) {
+                                            // Last char: only letter
+                                            if (!/^[A-Z]$/.test(lastChar)) return;
+                                        }
 
-                {/* Form Error */}
-                {formError && (
-                    <div style={{
-                        background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '14px',
-                        padding: '0.8rem 1.2rem', marginBottom: '1.5rem', color: '#991B1B',
-                        fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.75rem',
-                        boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
-                    }}>
-                        <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
-                        <span style={{ fontWeight: '500' }}>{formError}</span>
-                    </div>
-                )}
-
-                {/* Availability Status Banner */}
-                {candidate?.interview_time && !timeAllowed && (
-                    <div style={{
-                        background: pastWindow ? '#FFF5F5' : '#FFFBEB',
-                        border: pastWindow ? '1px solid #FECACA' : '1px solid #FDE68A',
-                        borderRadius: '20px',
-                        padding: '1.5rem',
-                        marginBottom: '2rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.25rem',
-                        textAlign: 'left',
-                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
-                    }}>
-                        <div style={{
-                            background: 'white',
-                            width: '48px',
-                            height: '48px',
-                            borderRadius: '12px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexShrink: 0,
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
-                        }}>
-                            {pastWindow ? (
-                                <i className="fa-solid fa-calendar-xmark" style={{ color: '#EF4444', fontSize: '1.5rem' }}></i>
-                            ) : (
-                                <i className="fa-solid fa-clock-rotate-left" style={{ color: '#D97706', fontSize: '1.5rem' }}></i>
-                            )}
-                        </div>
-                        <div>
-                            <p style={{ 
-                                margin: 0, 
-                                fontWeight: '800', 
-                                color: pastWindow ? '#991B1B' : '#92400E', 
-                                fontSize: '1.1rem' 
-                            }}>
-                                {pastWindow ? 'Interview Window Closed' : 'Interview Not Yet Available'}
-                            </p>
-                            <p style={{ 
-                                margin: '0.25rem 0 0', 
-                                color: pastWindow ? '#B91C1C' : '#B45309', 
-                                fontSize: '0.95rem', 
-                                lineHeight: '1.4' 
-                            }}>
-                                {pastWindow ? (
-                                    'The availability window for this interview has passed. Please contact your hiring manager for assistance.'
-                                ) : (
-                                    <>
-                                        This session is scheduled for <strong style={{ color: '#78350F' }}>{candidate.available_from ? new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : candidate.interview_time}</strong>.
-                                        <div style={{ marginTop: '0.5rem', fontSize: '1.25rem', fontWeight: '800', letterSpacing: '0.05em' }}>
-                                            {formatCountdown(countdown)}
-                                        </div>
-                                    </>
+                                        setPanNumber(value);
+                                        setPanVerified(false);
+                                        setPanError('');
+                                    }}
+                                    placeholder="e.g. ABCDE1234F"
+                                    maxLength={10}
+                                    style={{
+                                        flex: 1, padding: '0.75rem 1rem', border: '1.5px solid #e2e8f0', borderRadius: '12px',
+                                        fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s',
+                                        textTransform: 'uppercase', letterSpacing: '0.05em',
+                                        borderColor: panVerified ? '#22c55e' : panError ? '#ef4444' : '#e2e8f0'
+                                    }}
+                                    onFocus={(e) => { if (!panVerified && !panError) e.target.style.borderColor = '#667eea'; }}
+                                    onBlur={(e) => { if (!panVerified && !panError) e.target.style.borderColor = '#e2e8f0'; }}
+                                />
+                                {panVerified && (
+                                    <span style={{ display: 'flex', alignItems: 'center', color: '#22c55e', fontWeight: '700', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                                        <i className="fa-solid fa-circle-check" style={{ marginRight: '4px' }}></i>Verified
+                                    </span>
                                 )}
+                            </div>
+                            <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#a0aec0' }}>e.g. ABCDE1234F</p>
+                        </div>
+
+                        {/* PAN Card Photo Upload */}
+                        <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+                            <label style={{ display: 'block', fontWeight: '600', color: '#2d3748', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                                <i className="fa-solid fa-camera" style={{ marginRight: '8px', color: '#667eea' }}></i>PAN Card Photo *
+                            </label>
+                            <div
+                                onClick={() => document.getElementById('panPhotoInput').click()}
+                                style={{
+                                    border: '2px dashed #cbd5e0', borderRadius: '12px', padding: '1rem', cursor: 'pointer',
+                                    transition: 'all 0.2s', background: panPhotoPreview ? '#f0fdf4' : 'transparent',
+                                    borderColor: panVerified ? '#22c55e' : panPhotoPreview ? '#38b2ac' : '#cbd5e0',
+                                    display: 'flex', alignItems: 'center', gap: '1rem'
+                                }}
+                            >
+                                <input type="file" id="panPhotoInput" accept="image/*" hidden onChange={handlePanPhotoChange} />
+                                {panPhotoPreview ? (
+                                    <img src={panPhotoPreview} alt="PAN card" style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
+                                ) : (
+                                    <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '1.5rem', color: '#667eea' }}></i>
+                                )}
+                                <div>
+                                    <p style={{ margin: '0 0 0.25rem', fontWeight: '600', color: '#4a5568', fontSize: '0.9rem' }}>
+                                        {panPhoto ? panPhoto.name : 'Upload PAN Card Photo'}
+                                    </p>
+                                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#a0aec0' }}>Click to browse</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Verify PAN Button */}
+                        {panNumber && panPhoto && !panVerified && (
+                            <button
+                                onClick={handleValidatePan}
+                                disabled={panValidating || !validatePanFormat(panNumber)}
+                                style={{
+                                    width: '100%', padding: '0.75rem', marginBottom: '1.5rem',
+                                    background: panValidating || !validatePanFormat(panNumber) ? '#cbd5e0' : 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                                    color: 'white', border: 'none', borderRadius: '12px',
+                                    fontSize: '0.95rem', fontWeight: '600', cursor: panValidating || !validatePanFormat(panNumber) ? 'not-allowed' : 'pointer',
+                                    opacity: panValidating || !validatePanFormat(panNumber) ? 0.7 : 1
+                                }}
+                            >
+                                {panValidating ? <><i className="fa-solid fa-spinner fa-spin"></i> Verifying PAN...</> : 'Verify PAN Card'}
+                            </button>
+                        )}
+
+                        {/* PAN Error */}
+                        {panError && (
+                            <div style={{
+                                background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '12px',
+                                padding: '0.75rem 1rem', marginBottom: '1.5rem', color: '#991B1B',
+                                fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem'
+                            }}>
+                                <i className="fa-solid fa-circle-exclamation"></i>
+                                <span>{panError}</span>
+                            </div>
+                        )}
+
+                        {/* Form Error */}
+                        {formError && (
+                            <div style={{
+                                background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '14px',
+                                padding: '0.8rem 1.2rem', marginBottom: '1.5rem', color: '#991B1B',
+                                fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.75rem',
+                                boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
+                            }}>
+                                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
+                                <span style={{ fontWeight: '500' }}>{formError}</span>
+                            </div>
+                        )}
+
+                        {/* Availability Status Banner */}
+                        {candidate?.interview_time && !timeAllowed && (
+                            <div style={{
+                                background: pastWindow ? '#FFF5F5' : '#FFFBEB',
+                                border: pastWindow ? '1px solid #FECACA' : '1px solid #FDE68A',
+                                borderRadius: '20px',
+                                padding: '1.5rem',
+                                marginBottom: '2rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1.25rem',
+                                textAlign: 'left',
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+                            }}>
+                                <div style={{
+                                    background: 'white',
+                                    width: '48px',
+                                    height: '48px',
+                                    borderRadius: '12px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                                }}>
+                                    {pastWindow ? (
+                                        <i className="fa-solid fa-calendar-xmark" style={{ color: '#EF4444', fontSize: '1.5rem' }}></i>
+                                    ) : (
+                                        <i className="fa-solid fa-clock-rotate-left" style={{ color: '#D97706', fontSize: '1.5rem' }}></i>
+                                    )}
+                                </div>
+                                <div>
+                                    <p style={{
+                                        margin: 0,
+                                        fontWeight: '800',
+                                        color: pastWindow ? '#991B1B' : '#92400E',
+                                        fontSize: '1.1rem'
+                                    }}>
+                                        {pastWindow ? 'Interview Window Closed' : 'Interview Not Yet Available'}
+                                    </p>
+                                    <p style={{
+                                        margin: '0.25rem 0 0',
+                                        color: pastWindow ? '#B91C1C' : '#B45309',
+                                        fontSize: '0.95rem',
+                                        lineHeight: '1.4'
+                                    }}>
+                                        {pastWindow ? (
+                                            'The availability window for this interview has passed. Please contact your hiring manager for assistance.'
+                                        ) : (
+                                            <>
+                                                This session is scheduled for <strong style={{ color: '#78350F' }}>{candidate.available_from ? new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : candidate.interview_time}</strong>.
+                                                <div style={{ marginTop: '0.5rem', fontSize: '1.25rem', fontWeight: '800', letterSpacing: '0.05em' }}>
+                                                    {formatCountdown(countdown)}
+                                                </div>
+                                            </>
+                                        )}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Error Banner */}
+                        {error && (
+                            <div style={{
+                                background: '#FEF2F2',
+                                border: '1px solid #FCA5A5',
+                                borderRadius: '14px',
+                                padding: '0.8rem 1.2rem',
+                                marginBottom: '1.5rem',
+                                color: '#991B1B',
+                                fontSize: '0.9rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
+                            }}>
+                                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
+                                <span style={{ fontWeight: '500' }}>{error}</span>
+                            </div>
+                        )}
+
+                        <div
+                            onClick={() => document.getElementById('resumeInput').click()}
+                            style={{
+                                border: '2px dashed #cbd5e0', borderRadius: '16px', padding: '2rem', cursor: 'pointer',
+                                transition: 'all 0.2s', marginBottom: '2rem', background: resumeFile ? '#e6fffa' : 'transparent',
+                                borderColor: resumeFile ? '#38b2ac' : '#cbd5e0'
+                            }}
+                        >
+                            <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" hidden onChange={handleFileChange} />
+                            <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '2.2rem', color: resumeFile ? '#38b2ac' : '#667eea', marginBottom: '1rem' }}></i>
+                            <p style={{ margin: '0 0 0.5rem 0', fontWeight: '600', color: '#4a5568' }}>
+                                {resumeFile ? 'Resume Selected' : 'Upload Resume'}
+                            </p>
+                            <p style={{ margin: '0', fontSize: '0.85rem', color: '#a0aec0' }}>
+                                {resumeFile ? resumeFile.name : 'Drag & drop or click to browse'}
                             </p>
                         </div>
-                    </div>
-                )}
 
-                {/* Error Banner */}
-                {error && (
-                    <div style={{
-                        background: '#FEF2F2',
-                        border: '1px solid #FCA5A5',
-                        borderRadius: '14px',
-                        padding: '0.8rem 1.2rem',
-                        marginBottom: '1.5rem',
-                        color: '#991B1B',
-                        fontSize: '0.9rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem',
-                        boxShadow: '0 2px 4px rgba(153, 27, 27, 0.05)'
-                    }}>
-                        <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '1.1rem' }}></i>
-                        <span style={{ fontWeight: '500' }}>{error}</span>
-                    </div>
-                )}
-
-                <div
-                    onClick={() => document.getElementById('resumeInput').click()}
-                    style={{
-                        border: '2px dashed #cbd5e0', borderRadius: '16px', padding: '2rem', cursor: 'pointer',
-                        transition: 'all 0.2s', marginBottom: '2rem', background: resumeFile ? '#e6fffa' : 'transparent',
-                        borderColor: resumeFile ? '#38b2ac' : '#cbd5e0'
-                    }}
-                >
-                    <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" hidden onChange={handleFileChange} />
-                    <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '2.2rem', color: resumeFile ? '#38b2ac' : '#667eea', marginBottom: '1rem' }}></i>
-                    <p style={{ margin: '0 0 0.5rem 0', fontWeight: '600', color: '#4a5568' }}>
-                        {resumeFile ? 'Resume Selected' : 'Upload Resume'}
-                    </p>
-                    <p style={{ margin: '0', fontSize: '0.85rem', color: '#a0aec0' }}>
-                        {resumeFile ? resumeFile.name : 'Drag & drop or click to browse'}
-                    </p>
-                </div>
-
-                <button
-                    className="start-btn"
-                    onClick={handleStartInterview}
-                    disabled={isStarting || !timeAllowed || !panVerified}
-                    style={{
-                        background: !timeAllowed || !panVerified ? '#cbd5e0' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        color: 'white', border: 'none',
-                        padding: '1.2rem 2rem', borderRadius: '12px', fontSize: '1.1rem', fontWeight: '600',
-                        cursor: (isStarting || !timeAllowed || !panVerified) ? 'not-allowed' : 'pointer', width: '100%', transition: 'transform 0.2s',
-                        opacity: (isStarting || !timeAllowed || !panVerified) ? 0.7 : 1
-                    }}
-                >
-                    {isStarting ? <><i className="fa-solid fa-spinner fa-spin"></i> Processing...</> :
-                        !panVerified ? 'Complete PAN verification first' :
-                        !timeAllowed ? (pastWindow ? '⛔ Window Closed' : `⏳ Opens at ${candidate.available_from ? new Date(candidate.available_from).toLocaleTimeString([], { timeStyle: 'short' }) : candidate.interview_time}`) :
-                            'Start Interview Now'}
-                </button>
+                        <button
+                            className="start-btn"
+                            onClick={handleStartInterview}
+                            disabled={isStarting || !timeAllowed || !panVerified}
+                            style={{
+                                background: !timeAllowed || !panVerified ? '#cbd5e0' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                color: 'white', border: 'none',
+                                padding: '1.2rem 2rem', borderRadius: '12px', fontSize: '1.1rem', fontWeight: '600',
+                                cursor: (isStarting || !timeAllowed || !panVerified) ? 'not-allowed' : 'pointer', width: '100%', transition: 'transform 0.2s',
+                                opacity: (isStarting || !timeAllowed || !panVerified) ? 0.7 : 1
+                            }}
+                        >
+                            {isStarting ? <><i className="fa-solid fa-spinner fa-spin"></i> Processing...</> :
+                                !panVerified ? 'Complete PAN verification first' :
+                                    !timeAllowed ? (pastWindow ? '⛔ Window Closed' : `⏳ Opens at ${candidate.available_from ? new Date(candidate.available_from).toLocaleTimeString([], { timeStyle: 'short' }) : candidate.interview_time}`) :
+                                        'Start Interview Now'}
+                        </button>
                     </>
                 )}
             </div>

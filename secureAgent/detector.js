@@ -93,6 +93,13 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
         continue;
       }
 
+      // Mid-exam check: require active window title for tray-capable remote desktop apps
+      // to prevent false positives when they are running idle in the background tray.
+      const isTrayApp = ['AnyDesk', 'TeamViewer', 'UltraViewer', 'RustDesk', 'Supremo'].includes(rule.label);
+      if (isTrayApp && !hitWindow) {
+        continue;
+      }
+
       // Precheck (strict): flag background/tray helpers — only skip OS daemons like teamviewer_service
       if (!strict && isServiceProcess(name, rule)) {
         continue;
