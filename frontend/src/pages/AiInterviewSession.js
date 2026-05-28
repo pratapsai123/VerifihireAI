@@ -1259,8 +1259,32 @@ const AiInterviewSession = () => {
 
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
-        await speak(finishMessage);
-        axios.patch(`${API_BASE_URL}/ai-candidates/public/${token}/status/`, { status: 'Completed' }).catch(console.error);
+        const speakPromise = speak(finishMessage).catch(e => console.error(e));
+
+        // CRITICAL: Mark interview as completed on the server with retry logic
+        // This MUST succeed, otherwise the candidate stays stuck in 'Interview' status forever
+        const statusUrl = `${API_BASE_URL}/ai-candidates/public/${token}/status/`;
+        let statusUpdated = false;
+        for (let attempt = 0; attempt < 3 && !statusUpdated; attempt++) {
+            try {
+                await axios.patch(statusUrl, { status: 'Completed' });
+                statusUpdated = true;
+                console.log('✅ Interview status updated to Completed on server');
+            } catch (err) {
+                console.error(`Status update attempt ${attempt + 1} failed:`, err.message);
+                if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+            }
+        }
+        // Last resort: use sendBeacon which survives page unloads
+        if (!statusUpdated && navigator.sendBeacon) {
+            try {
+                const blob = new Blob([JSON.stringify({ status: 'Completed' })], { type: 'application/json' });
+                navigator.sendBeacon(statusUrl, blob);
+                console.log('📡 Sent completion status via sendBeacon fallback');
+            } catch (e) {
+                console.error('sendBeacon also failed:', e);
+            }
+        }
 
         // Mark as completed locally to prevent re-opening link
         localStorage.setItem(`interview_completed_${token}`, 'true');
@@ -1271,6 +1295,8 @@ const AiInterviewSession = () => {
 
         setIsProcessing(true);
         setAiStatus("Session Finished");
+        
+        await speakPromise;
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(async () => {

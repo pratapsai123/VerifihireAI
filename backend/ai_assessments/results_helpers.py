@@ -22,6 +22,29 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     from ai_assessments.views import _get_candidate_photo_url
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
+        
+    def clean_b64(b64_str):
+        if not b64_str:
+            return None
+        b64_str = b64_str.strip()
+        if b64_str.startswith('identity_overrides/'):
+            try:
+                from django.conf import settings
+                from pathlib import Path
+                import base64
+                file_path = Path(settings.MEDIA_ROOT) / b64_str
+                if file_path.exists():
+                    with open(file_path, 'rb') as f:
+                        b64 = base64.b64encode(f.read()).decode('utf-8')
+                        ext = b64_str.split('.')[-1].lower()
+                        mime = "image/png" if ext == "png" else "image/jpeg"
+                        return f"data:{mime};base64,{b64}"
+            except Exception:
+                pass
+            return None
+        if not b64_str.startswith('data:image'):
+            return f"data:image/jpeg;base64,{b64_str}"
+        return b64_str
     """
     Query and format AIAssessmentSubmission results for the results overview.
     Returns a list of dicts matching the unified results schema.
@@ -76,9 +99,25 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                 "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                 "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
-                "screenshot_base64": _encode_image_field_to_b64(snap.screenshot),
-                "webcam_screenshot_base64": _encode_image_field_to_b64(snap.webcam_screenshot),
+                "screenshot_base64": None, # Omitted from overview for performance; full logs in timeline API
+                "webcam_screenshot_base64": None,
             })
+        # Try to load registration_snapshot.jpg from assessments folder on disk
+        pending_photo_b64 = None
+        try:
+            from pathlib import Path
+            from django.conf import settings
+            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+            p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
+            target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
+            if target_snap_file.exists():
+                with open(target_snap_file, 'rb') as f:
+                    pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+        except Exception:
+            pass
+
+        if not pending_photo_b64:
+            pending_photo_b64 = clean_b64(s.intruder_photo)
 
         results.append(
             {
@@ -135,15 +174,15 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'pan_number': getattr(s, 'pan_number', None),
                 'pan_photo': _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None),
                 'pan_verified': getattr(s, 'pan_verified', False),
-                'candidate_photo_url': _encode_image_field_to_b64(s.original_identity_photo) or _get_candidate_photo_url(request, s),
+                'candidate_photo_url': clean_b64(s.original_identity_photo) or _get_candidate_photo_url(request, s),
                 # Identity mismatch fields
                 'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
-                'original_identity_photo_url': _encode_image_field_to_b64(s.original_identity_photo) or (request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None),
-                'intruder_photo_url': _encode_image_field_to_b64(s.intruder_photo) or (request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None),
+                'original_identity_photo_url': clean_b64(s.original_identity_photo),
+                'intruder_photo_url': pending_photo_b64,
                 'photo_update_pending': bool(s.identity_mismatch_detected and s.intruder_photo),
                 'photo_update_approved': bool(s.identity_mismatch_details.get('photo_update_approved', False)) if isinstance(s.identity_mismatch_details, dict) else False,
-                'pending_identity_photo_url': _encode_image_field_to_b64(s.intruder_photo) or (request.build_absolute_uri(s.intruder_photo.url) if s.intruder_photo else None),
-                'master_photo_url': _encode_image_field_to_b64(s.original_identity_photo) or (request.build_absolute_uri(s.original_identity_photo.url) if s.original_identity_photo else None),
+                'pending_identity_photo_url': pending_photo_b64,
+                'master_photo_url': clean_b64(s.original_identity_photo),
                 'is_assessment': True,
                 'ai_candidate_pk': s.id,
             }
@@ -268,17 +307,17 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
             ai_cand_qs = Candidate.objects.filter(
                 company_id=company_id,
                 is_deleted=False,
-            ).order_by('-submission_date')
+            ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
         else:
             ai_cand_qs = Candidate.objects.filter(
                 is_deleted=False,
                 status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
-            ).order_by('-submission_date')
+            ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
     elif scoped_ids:
         ai_cand_qs = Candidate.objects.filter(
             user_profile_id__in=scoped_ids,
             is_deleted=False,
-        ).order_by('-submission_date')
+        ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
     else:
         ai_cand_qs = Candidate.objects.none()
 
@@ -330,8 +369,11 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'integrity_logs': [
                     {
                         'event_type': log.event_type,
-                        'screenshot_base64': log.screenshot_base64,
-                        'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                        'screenshot_base64': None,
+                        'webcam_screenshot_base64': None,
+                        'has_screenshot': bool(log.screenshot_base64),
+                        'has_webcam_screenshot': bool(log.webcam_screenshot_base64),
+                        'screenshot_id': log.id,
                         'timestamp': log.timestamp.isoformat() if log.timestamp else None
                     } for log in s.integrity_logs.all()
                 ],

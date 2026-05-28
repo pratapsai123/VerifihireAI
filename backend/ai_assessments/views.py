@@ -196,9 +196,50 @@ def _get_unified_identity_mismatch_fields(request, submission):
     If the submission itself doesn't have a mismatch, but the associated voice
     interview Candidate does, it bubbles up the Candidate's mismatch info.
     """
+    def clean_b64(b64_str):
+        if not b64_str:
+            return None
+        b64_str = b64_str.strip()
+        if b64_str.startswith('identity_overrides/'):
+            try:
+                from django.conf import settings
+                from pathlib import Path
+                import base64
+                file_path = Path(settings.MEDIA_ROOT) / b64_str
+                if file_path.exists():
+                    with open(file_path, 'rb') as f:
+                        b64 = base64.b64encode(f.read()).decode('utf-8')
+                        ext = b64_str.split('.')[-1].lower()
+                        mime = "image/png" if ext == "png" else "image/jpeg"
+                        return f"data:{mime};base64,{b64}"
+            except Exception:
+                pass
+            return None
+        if not b64_str.startswith('data:image'):
+            return f"data:image/jpeg;base64,{b64_str}"
+        return b64_str
+
     detected = getattr(submission, 'identity_mismatch_detected', False)
-    orig_url = request.build_absolute_uri(submission.original_identity_photo.url) if getattr(submission, 'original_identity_photo', None) else None
-    intruder_url = request.build_absolute_uri(submission.intruder_photo.url) if getattr(submission, 'intruder_photo', None) else None
+    orig_url = clean_b64(submission.original_identity_photo)
+    
+    # Try to load registration_snapshot.jpg from assessments folder on disk
+    intruder_url = None
+    try:
+        from pathlib import Path
+        from django.conf import settings
+        import base64
+        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+        p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
+        target_snap_file = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token) / 'registration_snapshot.jpg'
+        if target_snap_file.exists():
+            with open(target_snap_file, 'rb') as f:
+                intruder_url = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+    except Exception:
+        pass
+
+    if not intruder_url:
+        intruder_url = clean_b64(submission.intruder_photo)
+        
     details = getattr(submission, 'identity_mismatch_details', {})
 
     if not detected and submission.candidate_email:
@@ -250,6 +291,8 @@ from api.views.job_role_views import ensure_role_exists
         
 
 class SubmitAssessmentView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request):
         data = request.data
         token = data.get('token')
@@ -1171,17 +1214,19 @@ class GenerateAssessmentView(APIView):
 
             return Response({"error": error_msg, "message": user_msg}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-def _register_face_with_deepface(person_id, snapshot_b64):
+def _register_face_with_deepface(person_id, snapshot_b64, overwrite=False):
     """
     Calls the DeepFace microservice to register/update the candidate's face.
     Ensures biometric data is persisted so that the proctoring session can start.
+    Set overwrite=True when HR approves a new identity photo to replace the old one.
     """
     try:
         url = f"{DEEPFACE_BASE_URL}/registration/register"
         payload = {
             "person_id": person_id,
             "image_base64": snapshot_b64,
-            "label": "registration_snapshot"
+            "label": "registration_snapshot",
+            "overwrite": overwrite
         }
         resp = requests.post(url, json=payload, timeout=15)
         if resp.status_code == 200:
@@ -1217,6 +1262,8 @@ def _verify_face_with_deepface_microservice(person_id, snapshot_b64):
         return False
 
 class CreateSubmissionView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request):
         token = request.data.get('share_token')
         name = request.data.get('candidate_name')
@@ -1326,10 +1373,13 @@ class CreateSubmissionView(APIView):
                     is_actually_registered = False
 
                 if is_actually_registered:
+                    logger.info(f"CreateSubmission: {person_id} is already registered in DeepFace. Verifying...")
                     # ALREADY REGISTERED -> Must Verify (Hard Block) or Override
                     is_verified = _verify_face_with_deepface_microservice(person_id, snapshot)
+                    logger.info(f"CreateSubmission: Verification result for {person_id}: {is_verified}, Override: {identity_mismatch_override}")
                     
                     if not is_verified or identity_mismatch_override:
+                        logger.warning(f"CreateSubmission: Mismatch detected or overridden for {person_id}")
                         import base64
                         from django.core.files.base import ContentFile
 
@@ -1359,8 +1409,7 @@ class CreateSubmissionView(APIView):
                         # 2. Save intruder's face to the dedicated intruder_photo field
                         #    (used by the result page as "ASSESSMENT FACE")
                         try:
-                            intruder_fname = f"intruder_{submission.id}_{int(timezone.now().timestamp())}.{ext}"
-                            submission.intruder_photo.save(intruder_fname, ContentFile(img_data), save=False)
+                            submission.intruder_photo = snapshot
                         except Exception as e:
                             logger.error(f"Failed to save intruder photo: {e}")
 
@@ -1395,11 +1444,9 @@ class CreateSubmissionView(APIView):
                                 
                                 if target_file:
                                     with open(target_file, 'rb') as f:
-                                        submission.original_identity_photo.save(
-                                            f"original_{submission.id}_{int(timezone.now().timestamp())}.jpg",
-                                            File(f),
-                                            save=False
-                                        )
+                                        import base64
+                                        b64 = base64.b64encode(f.read()).decode('utf-8')
+                                        submission.original_identity_photo = f"data:image/jpeg;base64,{b64}"
                             except Exception as e:
                                 logger.error(f"Failed to capture original identity photo for override: {e}")
 
@@ -1425,60 +1472,51 @@ class CreateSubmissionView(APIView):
                         submission.save()
                         logger.warning(f"Identity mismatch override flagged for AI Assessment submission {submission.id} ({email}) without deepface conflict")
 
-                    # NEW SUBMISSION -> Register anchor face for THIS ASSESSMENT
-                    if pan_number and pan_number.strip():
-                        person_id = pan_number.lower().strip()
-                    elif getattr(submission, 'pan_number', None):
-                        person_id = submission.pan_number.lower().strip()
-                    else:
-                        person_id = f"{email}_{token}"
-                    _register_face_with_deepface(person_id, snapshot)
+                # --- ALWAYS REGISTER THE SESSION-SCOPED DEEPFACE ANCHOR ---
+                # This guarantees that the live proctoring websocket has an anchor face to verify against
+                # for the duration of this specific assessment session.
+                try:
+                    _register_face_with_deepface(f"{person_id}/assessments/{token}", snapshot)
+                    logger.info(f"CreateSubmission: Session anchor registered for {person_id}/assessments/{token}")
+                except Exception as e:
+                    logger.error(f"Failed to register session deepface anchor: {e}")
                     
-                    # Save the registration snapshot to submission.original_identity_photo
-                    # so Box 2 on the report always shows the face captured at exam start
-                    if not submission.original_identity_photo:
-                        try:
-                            import base64 as _b64
-                            from django.core.files.base import ContentFile as _CF
-                            _imgstr = snapshot
-                            _ext = 'jpg'
-                            if ';' in snapshot and 'base64,' in snapshot:
-                                _header, _imgstr = snapshot.split(';base64,')
-                                _ext = _header.split('/')[-1]
-                            _img_data = _b64.b64decode(_imgstr)
-                            submission.original_identity_photo.save(
-                                f"original_{submission.id}_{int(timezone.now().timestamp())}.{_ext}",
-                                _CF(_img_data),
-                                save=True
-                            )
-                        except Exception as e:
-                            logger.error(f"Failed to save original_identity_photo at registration: {e}")
-
-                    # Store Identity Link for the report
+                # --- ALWAYS SAVE THE NEW SNAPSHOT ---
+                # Save the registration snapshot to submission.original_identity_photo
+                # so Box 2 on the report always shows the face captured at THIS exam start,
+                # even if they are a returning candidate who passed verification.
+                if not submission.original_identity_photo:
                     try:
-                        from api.models import IdentityLink
-                        import base64
-                        from django.core.files.base import ContentFile
-                        
-                        identity, created = IdentityLink.objects.get_or_create(
-                            email=email,
-                            pan_number=pan_number or 'UNKNOWN'
-                        )
-                        
-                        imgstr = snapshot
-                        ext = 'jpg'
-                        if ';' in snapshot and 'base64,' in snapshot:
-                            header, imgstr = snapshot.split(';base64,')
-                            ext = header.split('/')[-1]
-                            
-                        img_data = base64.b64decode(imgstr)
-                        cname = f"ai_reg_{email.replace('@','_')}_{int(timezone.now().timestamp())}.{ext}"
-                        identity.snapshot_image.save(cname, ContentFile(img_data), save=True)
-                        if pan_photo:
-                            identity.pan_image = pan_photo
-                            identity.save()
+                        submission.original_identity_photo = snapshot
+                        submission.save()
                     except Exception as e:
-                        logger.error(f"Failed to save IdentityLink in AI assessment: {e}")
+                        logger.error(f"Failed to save original_identity_photo at registration: {e}")
+
+                # Store Identity Link for the report (always update to the freshest photo)
+                try:
+                    from api.models import IdentityLink
+                    import base64
+                    from django.core.files.base import ContentFile
+                    
+                    identity, created = IdentityLink.objects.get_or_create(
+                        email=email,
+                        pan_number=pan_number or 'UNKNOWN'
+                    )
+                    
+                    imgstr = snapshot
+                    ext = 'jpg'
+                    if ';' in snapshot and 'base64,' in snapshot:
+                        header, imgstr = snapshot.split(';base64,')
+                        ext = header.split('/')[-1]
+                        
+                    img_data = base64.b64decode(imgstr)
+                    cname = f"ai_reg_{email.replace('@','_')}_{int(timezone.now().timestamp())}.{ext}"
+                    identity.snapshot_image.save(cname, ContentFile(img_data), save=True)
+                    if pan_photo:
+                        identity.pan_image = pan_photo
+                        identity.save()
+                except Exception as e:
+                    logger.error(f"Failed to save IdentityLink in AI assessment: {e}")
 
             # Only pick and lock questions if they haven't been locked yet
             if not submission.candidate_questions:
@@ -1550,6 +1588,8 @@ class CreateSubmissionView(APIView):
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class UpdateAssessmentIntegrityView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request, pk):
         try:
             submission = AIAssessmentSubmission.objects.get(pk=pk)
@@ -1687,6 +1727,8 @@ class UpdateAssessmentIntegrityView(APIView):
             return Response({"error": "Submission not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class SaveAssessmentProgressView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request, pk):
         try:
             submission = AIAssessmentSubmission.objects.get(pk=pk)
@@ -1832,6 +1874,29 @@ class AssessmentDetailView(APIView):
                 
             submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
             
+            def clean_b64(b64_str):
+                if not b64_str:
+                    return None
+                b64_str = b64_str.strip()
+                if b64_str.startswith('identity_overrides/'):
+                    try:
+                        from django.conf import settings
+                        from pathlib import Path
+                        import base64
+                        file_path = Path(settings.MEDIA_ROOT) / b64_str
+                        if file_path.exists():
+                            with open(file_path, 'rb') as f:
+                                b64 = base64.b64encode(f.read()).decode('utf-8')
+                                ext = b64_str.split('.')[-1].lower()
+                                mime = "image/png" if ext == "png" else "image/jpeg"
+                                return f"data:{mime};base64,{b64}"
+                    except Exception:
+                        pass
+                    return None
+                if not b64_str.startswith('data:image'):
+                    return f"data:image/jpeg;base64,{b64_str}"
+                return b64_str
+
             submission_data = []
             for sub in submissions:
                 integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=sub).order_by('timestamp')
@@ -1845,6 +1910,24 @@ class AssessmentDetailView(APIView):
                     })
 
                 photo_url = _get_candidate_photo_url(request, sub)
+
+                # Try to load registration_snapshot.jpg from assessments folder on disk
+                pending_photo_b64 = None
+                try:
+                    from pathlib import Path
+                    from django.conf import settings
+                    import base64
+                    deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                    p_id = sub.pan_number.lower().strip() if getattr(sub, 'pan_number', None) else f"{sub.candidate_email.lower().strip()}_{assessment.share_token}"
+                    target_snap_file = deepface_data_dir / p_id / 'assessments' / str(assessment.share_token) / 'registration_snapshot.jpg'
+                    if target_snap_file.exists():
+                        with open(target_snap_file, 'rb') as f:
+                            pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                except Exception:
+                    pass
+
+                if not pending_photo_b64:
+                    pending_photo_b64 = clean_b64(sub.intruder_photo)
 
                 submission_data.append({
                     "id": sub.id,
@@ -1871,8 +1954,8 @@ class AssessmentDetailView(APIView):
                     "pan_photo": request.build_absolute_uri(sub.pan_photo.url) if sub.pan_photo else None,
                     # Identity mismatch fields
                     "identity_mismatch_detected": getattr(sub, 'identity_mismatch_detected', False),
-                    "original_identity_photo_url": request.build_absolute_uri(sub.original_identity_photo.url) if getattr(sub, 'original_identity_photo', None) else None,
-                    "intruder_photo_url": request.build_absolute_uri(sub.intruder_photo.url) if getattr(sub, 'intruder_photo', None) else None,
+                    "original_identity_photo_url": clean_b64(sub.original_identity_photo),
+                    "intruder_photo_url": pending_photo_b64,
                     "identity_mismatch_details": getattr(sub, 'identity_mismatch_details', {}),
                 })
 
@@ -1959,6 +2042,8 @@ class AssessmentDetailView(APIView):
         return pick_random_subset(assessment, pool)
 
 class PublicAssessmentView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def get(self, request, token):
         try:
             with open('api_debug.txt', 'a') as f:
@@ -3593,13 +3678,13 @@ class AIAssessmentResultsView(APIView):
                 'pan_verified': getattr(s, 'pan_verified', False),
                 # Identity Override Fields
                 'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
-                'original_identity_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if getattr(s, 'original_identity_photo', None) else None,
-                'intruder_photo_url': request.build_absolute_uri(s.intruder_photo.url) if getattr(s, 'intruder_photo', None) else None,
+                'original_identity_photo_url': getattr(s, 'original_identity_photo', None),
+                'intruder_photo_url': getattr(s, 'intruder_photo', None),
                 'identity_mismatch_details': getattr(s, 'identity_mismatch_details', {}),
                 'photo_update_pending': bool(s.identity_mismatch_detected and s.intruder_photo),
                 'photo_update_approved': bool(s.identity_mismatch_details.get('photo_update_approved', False)) if isinstance(s.identity_mismatch_details, dict) else False,
-                'pending_identity_photo_url': request.build_absolute_uri(s.intruder_photo.url) if s.intruder_photo else None,
-                'master_photo_url': request.build_absolute_uri(s.original_identity_photo.url) if s.original_identity_photo else None,
+                'pending_identity_photo_url': s.intruder_photo if s.intruder_photo else None,
+                'master_photo_url': s.original_identity_photo if s.original_identity_photo else None,
                 'is_assessment': True,
                 'ai_candidate_pk': s.id,
             })
@@ -3707,9 +3792,21 @@ class ApproveAssessmentIdentityPhotoView(APIView):
         # 1. Read intruder_photo and base64 encode it for DeepFace registration.
         try:
             import base64
-            with submission.intruder_photo.open('rb') as f:
-                img_data = f.read()
-                b64_data = base64.b64encode(img_data).decode('utf-8')
+            b64_str = submission.intruder_photo.strip()
+            if b64_str.startswith('identity_overrides/'):
+                from django.conf import settings
+                from pathlib import Path
+                file_path = Path(settings.MEDIA_ROOT) / b64_str
+                if file_path.exists():
+                    with open(file_path, 'rb') as f:
+                        b64_data = base64.b64encode(f.read()).decode('utf-8')
+                else:
+                    raise FileNotFoundError(f"Legacy path {file_path} not found")
+            else:
+                if ',' in b64_str and b64_str.startswith('data:'):
+                    b64_data = b64_str.split(',', 1)[1]
+                else:
+                    b64_data = b64_str
             
             # DeepFace registration: person_id is PAN Card if available, otherwise email_token
             pan = getattr(submission, 'pan_number', None)
@@ -3720,8 +3817,8 @@ class ApproveAssessmentIdentityPhotoView(APIView):
                 token = submission.assessment.share_token
                 person_id = f"{email}_{token}"
             
-            # Register with deepface
-            _register_face_with_deepface(person_id, b64_data)
+            # Register with deepface — overwrite=True to replace the old face
+            _register_face_with_deepface(person_id, b64_data, overwrite=True)
             logger.info(f"[ApproveAssessmentPhoto] DeepFace re-registered {person_id}")
         except Exception as e:
             logger.exception(f"[ApproveAssessmentPhoto] Failed to push to DeepFace: {e}")

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('<int:pk>/approve-photo/', ApprovePendingIdentityPhotoView.as_view(), name='candidate-approve-photo'),
     path('interviews-overview/', InterviewsOverviewView.as_view(), name='interviews-overview'),
     path('<int:pk>/resend-invite/', ResendInviteView.as_view(), name='resend-invite'),
+    path('integrity-screenshot/<int:log_id>/', IntegrityScreenshotView.as_view(), name='integrity-screenshot'),
     path('health/', HealthCheckView.as_view(), name='health-check'),
 ]
 

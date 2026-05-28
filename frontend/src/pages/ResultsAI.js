@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+﻿import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
@@ -6,6 +6,92 @@ import { getToken } from '../utils/authStorage';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import '../styles/Dashboard.css';
 import '../styles/ResultsAI.css';
+
+/**
+ * Lazy-loading integrity screenshot component.
+ * Fetches the image only when it scrolls into view using IntersectionObserver.
+ */
+const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, alt, style }) => {
+    const [src, setSrc] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const imgRef = useRef(null);
+    const fetchedRef = useRef(false);
+
+    useEffect(() => {
+        // If we already have a URL (from assessment screenshots), use it directly
+        if (fallbackUrl) {
+            setSrc(fallbackUrl);
+            setLoading(false);
+            return;
+        }
+        // If we have inline base64 already, use it
+        if (fallbackBase64) {
+            const imgSrc = fallbackBase64.startsWith('data:') || fallbackBase64.startsWith('http') || fallbackBase64.startsWith('/')
+                ? fallbackBase64
+                : `data:image/jpeg;base64,${fallbackBase64}`;
+            setSrc(imgSrc);
+            setLoading(false);
+            return;
+        }
+        // No screenshot_id means no image to fetch
+        if (!screenshotId) {
+            setLoading(false);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !fetchedRef.current) {
+                    fetchedRef.current = true;
+                    observer.disconnect();
+                    // Fetch the image lazily
+                    const token = getToken();
+                    axios.get(`${API_BASE_URL}/ai-candidates/integrity-screenshot/${screenshotId}/?type=${type || 'webcam'}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }).then(resp => {
+                        if (resp.data?.image) {
+                            setSrc(resp.data.image);
+                        }
+                    }).catch(() => {
+                        // silent fail - will show placeholder
+                    }).finally(() => {
+                        setLoading(false);
+                    });
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (imgRef.current) {
+            observer.observe(imgRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [screenshotId, type, fallbackBase64, fallbackUrl]);
+
+    return (
+        <div ref={imgRef} style={{ ...style, position: 'relative' }}>
+            {loading ? (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F4F7FE' }}>
+                    <div style={{ width: '20px', height: '20px', border: '2px solid #7C3AED', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                </div>
+            ) : src ? (
+                <img
+                    src={src}
+                    alt={alt}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
+                />
+            ) : (
+                <img
+                    src="https://placehold.co/100x100?text=No+Data"
+                    alt={alt}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+            )}
+        </div>
+    );
+};
 
 const ResultsAI = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -404,6 +490,31 @@ const ResultsAI = () => {
     }, [searchParams, aiAssessments]);
 
 
+
+    // Automatically fetch timeline for the side drawer when viewedSubmission changes
+    useEffect(() => {
+        if (viewedSubmission) {
+            const realId = viewedSubmission.ai_candidate_pk || String(viewedSubmission.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
+            const currentTimelineId = timelineCandidate?.ai_candidate_pk || String(timelineCandidate?.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
+
+            if (realId !== currentTimelineId) {
+                fetchTimeline(viewedSubmission);
+            }
+        }
+    }, [viewedSubmission]);
+
+    // Also fetch timeline when viewing interview transcript report
+    useEffect(() => {
+        if (showTranscriptDetail && viewMode === 'transcript') {
+            const realId = showTranscriptDetail.ai_candidate_pk || String(showTranscriptDetail.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
+            const currentTimelineId = timelineCandidate?.ai_candidate_pk || String(timelineCandidate?.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
+
+            if (realId !== currentTimelineId) {
+                fetchTimeline(showTranscriptDetail);
+            }
+        }
+    }, [showTranscriptDetail, viewMode]);
+
     const fetchTimeline = async (candidate) => {
         if (!candidate) return;
         setTimelineCandidate(candidate);
@@ -535,44 +646,55 @@ const ResultsAI = () => {
 
     const unifyAutomaticResults = (roleData) => {
         const candidateMap = {};
-        const processGroup = (items, type) => {
-            items.forEach(item => {
-                const sid = String(item.submission_id || '');
-                const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
-                if (!candidateMap[email]) {
-                    candidateMap[email] = {
-                        email,
-                        full_name: item.full_name || item.candidate?.name || 'Candidate',
-                        resume: null, assessment: null, interview: null,
-                        batch_id: item.batch_id,
-                        batch_name: item.batch_name,
-                        identity_mismatch_detected: !!item.identity_mismatch_detected,
-                        photo_update_pending: !!item.photo_update_pending,
-                        ai_candidate_pk: item.ai_candidate_pk || null,
-                        pending_identity_photo_url: item.pending_identity_photo_url || null,
-                        original_identity_photo_url: item.original_identity_photo_url || null,
-                        master_photo_url: item.master_photo_url || null,
-                        candidate_photo_url: item.candidate_photo_url || null,
-                    };
-                } else {
-                    // Merge photo fields from later items if current entry has nulls
-                    const c = candidateMap[email];
-                    if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
-                    if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
-                    if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
-                    if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
-                    if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
-                    if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
-                    if (item.photo_update_pending) c.photo_update_pending = true;
-                }
-                if (!candidateMap[email][type]) {
-                    candidateMap[email][type] = item;
-                }
-            });
-        };
-        processGroup(roleData.resume, 'resume');
-        processGroup(roleData.assessment, 'assessment');
-        processGroup(roleData.interview, 'interview');
+        
+        // Gather all stage items
+        const allItems = [];
+        if (roleData.resume) roleData.resume.forEach(item => allItems.push({ ...item, _stageType: 'resume' }));
+        if (roleData.assessment) roleData.assessment.forEach(item => allItems.push({ ...item, _stageType: 'assessment' }));
+        if (roleData.interview) roleData.interview.forEach(item => allItems.push({ ...item, _stageType: 'interview' }));
+        
+        // Sort by date descending so the newest item sets the mapping fields first
+        allItems.sort((a, b) => {
+            const dateA = new Date(a.created_at || a.submitted_at || a.completed_at || 0).getTime();
+            const dateB = new Date(b.created_at || b.submitted_at || b.completed_at || 0).getTime();
+            return dateB - dateA;
+        });
+
+        allItems.forEach(item => {
+            const sid = String(item.submission_id || '');
+            const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
+            const type = item._stageType;
+            if (!candidateMap[email]) {
+                candidateMap[email] = {
+                    email,
+                    full_name: item.full_name || item.candidate?.name || 'Candidate',
+                    resume: null, assessment: null, interview: null,
+                    batch_id: item.batch_id,
+                    batch_name: item.batch_name,
+                    identity_mismatch_detected: !!item.identity_mismatch_detected,
+                    photo_update_pending: !!item.photo_update_pending,
+                    ai_candidate_pk: item.ai_candidate_pk || null,
+                    pending_identity_photo_url: item.pending_identity_photo_url || null,
+                    original_identity_photo_url: item.original_identity_photo_url || null,
+                    master_photo_url: item.master_photo_url || null,
+                    candidate_photo_url: item.candidate_photo_url || null,
+                };
+            } else {
+                // Merge photo fields from later items if current entry has nulls
+                const c = candidateMap[email];
+                if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
+                if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
+                if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
+                if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
+                if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
+                if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
+                if (item.photo_update_pending) c.photo_update_pending = true;
+            }
+            if (!candidateMap[email][type]) {
+                candidateMap[email][type] = item;
+            }
+        });
+
         return Object.values(candidateMap).map(c => ({
             ...c,
             _type: 'fully_automatic_candidate',
@@ -584,7 +706,7 @@ const ResultsAI = () => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
         if (type === 'interview') {
-            const possible = (r.total_questions || r.interview_summary?.length || 13) * 10;
+            const possible = 140; // Always 14 questions * 10 points max
             return r.status === 'Completed' || (r.score != null && (r.score / possible) >= 0.5);
         }
         return false;
@@ -596,14 +718,14 @@ const ResultsAI = () => {
         if (activeTab === 'assessment' || activeTab === 'standard') return r.percentage ?? 0;
         if (activeTab === 'interview') {
             if (r.interview_summary?.length > 0) {
-                return Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview_summary.length * 10)) * 100);
+                return Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / 140) * 100);
             }
             return 0;
         }
         if (activeTab === 'fully_automatic') {
             // Use best available stage score
             if (r.interview?.interview_summary?.length > 0) {
-                return Math.round((r.interview.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview.interview_summary.length * 10)) * 100);
+                return Math.round((r.interview.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / 140) * 100);
             }
             if (r.assessment) return r.assessment.percentage ?? 0;
             if (r.resume) return r.resume.resume_score ?? 0;
@@ -823,9 +945,8 @@ const ResultsAI = () => {
 
     const renderTranscriptReport = (data) => {
         if (!data) return null;
-        // Total possible marks based on actual questions answered (or 13 if unknown)
-        const totalPlannedQuestions = data.total_questions || data.interview_summary?.length || 13;
-        const totalPossible = Math.max(10, totalPlannedQuestions * 10);
+        // Total possible marks is always strictly 140 (14 questions * 10 points max)
+        const totalPossible = 140;
         const baseScore = data.score || 0;
         const basePercentage = Math.round((baseScore / totalPossible) * 100);
 
@@ -921,30 +1042,37 @@ const ResultsAI = () => {
                         </div>
 
                         {/* Integrity Evidence Gallery */}
-                        {(data.integrity_screenshots?.length > 0 || data.integrity_logs?.length > 0) && (
+                        {(timelineLogs?.length > 0 || data.integrity_screenshots?.length > 0 || data.integrity_logs?.length > 0) && (
                             <div className="sidebar-card">
                                 <span className="sidebar-label">Integrity Evidence</span>
                                 <div className="integrity-gallery-scroll">
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                                        {(data.integrity_screenshots || data.integrity_logs || []).map((log, lIdx) => {
-                                            const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(log.event_type);
-                                            const displayImg = isScreenEvent
-                                                ? (log.screenshot_url || log.webcam_screenshot_url || log.screenshot_base64 || log.webcam_screenshot_base64)
-                                                : (log.webcam_screenshot_url || log.screenshot_url || log.webcam_screenshot_base64 || log.screenshot_base64);
+                                        {(timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (data.integrity_screenshots || data.integrity_logs || [])).map((log, lIdx) => {
+                                            const eventLower = (log.event_type || '').toLowerCase();
+                                            const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(eventLower);
+
+                                            // Determine which image type to show and what source to use
+                                            const imgType = isScreenEvent ? 'screen' : 'webcam';
+                                            const fallbackUrl = isScreenEvent
+                                                ? (log.screenshot_url || log.webcam_screenshot_url)
+                                                : (log.webcam_screenshot_url || log.screenshot_url);
+                                            const fallbackBase64 = isScreenEvent
+                                                ? (log.screenshot_base64 || log.webcam_screenshot_base64)
+                                                : (log.webcam_screenshot_base64 || log.screenshot_base64);
 
                                             return (
                                                 <div key={lIdx} style={{
                                                     position: 'relative', borderRadius: '12px', overflow: 'hidden',
                                                     border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-                                                    cursor: 'pointer'
-                                                }} onClick={() => {
-                                                    if (displayImg) window.open(displayImg, '_blank');
+                                                    cursor: 'pointer', aspectRatio: '1/1'
                                                 }}>
-                                                    <img
-                                                        src={displayImg || 'https://placehold.co/100x100?text=No+Data'}
+                                                    <LazyIntegrityImage
+                                                        screenshotId={log.screenshot_id}
+                                                        type={imgType}
+                                                        fallbackBase64={fallbackBase64}
+                                                        fallbackUrl={fallbackUrl}
                                                         alt={log.event_type}
-                                                        style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block' }}
-                                                        onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
+                                                        style={{ width: '100%', height: '100%' }}
                                                     />
                                                     <div style={{
                                                         position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -952,7 +1080,7 @@ const ResultsAI = () => {
                                                         fontSize: '9px', padding: '4px 2px', textAlign: 'center',
                                                         fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px'
                                                     }}>
-                                                        {log.event_type.replace(/_/g, ' ')}
+                                                        {(log.event_type || '').replace(/_/g, ' ')}
                                                     </div>
                                                 </div>
                                             );
@@ -1268,12 +1396,14 @@ const ResultsAI = () => {
                                             )}
 
                                             {(() => {
-                                                // Get candidate photo - use backend-provided URL first
-                                                // Then fall back to first valid integrity screenshot
-                                                let candidatePhoto = viewedSubmission.candidate_photo_url || null;
+                                                // Get candidate photo - use intruder/assessment photo when mismatch detected (same as Box 2),
+                                                // otherwise use backend-provided URL, then fall back to integrity screenshot via lazy load
+                                                let candidatePhoto = viewedSubmission.identity_mismatch_detected
+                                                    ? (viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.candidate_photo_url || null)
+                                                    : (viewedSubmission.candidate_photo_url || null);
 
                                                 if (!candidatePhoto) {
-                                                    const logs = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
+                                                    const logs = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_webcam_screenshot || l.webcam_screenshot_base64 || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
                                                     const sortedLogs = [...logs].sort((a, b) => {
                                                         const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
                                                         const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
@@ -1281,10 +1411,32 @@ const ResultsAI = () => {
                                                     });
                                                     const firstWebcam = sortedLogs.find(log => {
                                                         if (log.event_type && log.event_type.toLowerCase().includes('face_not_detected')) return false;
-                                                        return log.webcam_screenshot_url || log.webcam_screenshot_base64;
+                                                        return log.webcam_screenshot_url || log.webcam_screenshot_base64 || log.has_webcam_screenshot;
                                                     });
-                                                    if (firstWebcam) candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64;
+                                                    if (firstWebcam) {
+                                                        candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64 || null;
+                                                    }
                                                 }
+                                                // Add data URI prefix for raw base64 strings
+                                                if (candidatePhoto && !candidatePhoto.startsWith('http') && !candidatePhoto.startsWith('data:') && !candidatePhoto.startsWith('/')) {
+                                                    candidatePhoto = `data:image/jpeg;base64,${candidatePhoto}`;
+                                                }
+
+                                                // Find the screenshot_id for lazy loading if no direct image available
+                                                const candidatePhotoScreenshotId = !candidatePhoto ? (() => {
+                                                    const logs = timelineLogs?.length > 0 ? timelineLogs.filter(l => (l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_')) && l.has_webcam_screenshot) : [];
+                                                    const sorted = [...logs].sort((a, b) => {
+                                                        const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+                                                        const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+                                                        return timeA - timeB;
+                                                    });
+                                                    const first = sorted.find(log => {
+                                                        if (log.event_type && log.event_type.toLowerCase().includes('face_not_detected')) return false;
+                                                        return log.has_webcam_screenshot;
+                                                    });
+                                                    return first?.screenshot_id || null;
+                                                })() : null;
+
                                                 return (
                                                     <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
                                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexShrink: 0 }}>
@@ -1298,8 +1450,15 @@ const ResultsAI = () => {
                                                             }}>
                                                                 {candidatePhoto ? (
                                                                     <img src={candidatePhoto} alt="Candidate" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                                                ) : candidatePhotoScreenshotId ? (
+                                                                    <LazyIntegrityImage
+                                                                        screenshotId={candidatePhotoScreenshotId}
+                                                                        type="webcam"
+                                                                        alt="Candidate"
+                                                                        style={{ width: '100%', height: '100%' }}
+                                                                    />
                                                                 ) : null}
-                                                                <div style={{ display: candidatePhoto ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                <div style={{ display: (candidatePhoto || candidatePhotoScreenshotId) ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                                                                     <i className="fa-solid fa-user" style={{ fontSize: '4rem', color: '#A3AED0' }}></i>
                                                                 </div>
                                                             </div>
@@ -1559,37 +1718,33 @@ const ResultsAI = () => {
                                 )}
 
                                 {/* Integrity Violations */}
-                                {(viewedSubmission.integrity_screenshots?.length > 0 || viewedSubmission.integrity_logs?.length > 0) && (
+                                {(timelineLogs?.length > 0 || viewedSubmission.integrity_screenshots?.length > 0 || viewedSubmission.integrity_logs?.length > 0) && (
                                     <div style={{ marginTop: '4rem' }}>
                                         <h4 style={{ color: '#1B254B', marginBottom: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
                                         </h4>
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-                                            {(viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []).map((snap, sIdx) => (
+                                            {(timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [])).map((snap, sIdx) => (
                                                 <div key={sIdx} style={{ background: 'white', borderRadius: '20px', padding: '12px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
                                                     <div style={{
                                                         width: '100%', height: '160px', background: '#F4F7FE',
                                                         borderRadius: '15px', overflow: 'hidden', marginBottom: '10px',
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
-                                                        <img
-                                                            src={(() => {
-                                                                const srcVal = snap.screenshot_base64 || snap.webcam_screenshot_base64 || snap.screenshot_url || snap.webcam_screenshot_url;
-                                                                if (srcVal && !srcVal.startsWith('http') && !srcVal.startsWith('data:') && !srcVal.startsWith('/')) {
-                                                                    return `data:image/jpeg;base64,${srcVal}`;
-                                                                }
-                                                                return srcVal;
-                                                            })()}
+                                                        <LazyIntegrityImage
+                                                            screenshotId={snap.screenshot_id}
+                                                            type="webcam"
+                                                            fallbackBase64={snap.screenshot_base64 || snap.webcam_screenshot_base64}
+                                                            fallbackUrl={snap.screenshot_url || snap.webcam_screenshot_url}
                                                             alt={snap.event_type}
-                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                            onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=No+Image'; }}
+                                                            style={{ width: '100%', height: '100%' }}
                                                         />
                                                         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.8)', color: 'white', fontSize: '0.65rem', padding: '6px', fontWeight: '700' }}>
-                                                            {snap.event_type.replace(/_/g, ' ').toUpperCase()}
+                                                            {(snap.event_type || '').replace(/_/g, ' ').toUpperCase()}
                                                         </div>
                                                     </div>
                                                     <div style={{ color: '#A3AED0', fontSize: '0.75rem', fontWeight: '700' }}>
-                                                        {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                        {snap.timestamp ? new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : ''}
                                                     </div>
                                                 </div>
                                             ))}
@@ -1632,9 +1787,9 @@ const ResultsAI = () => {
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
                                                     <img
-                                                        src={viewedSubmission.original_identity_photo_url || viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || (() => {
-                                                            const snaps = viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || [];
-                                                            const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes(s.event_type));
+                                                        src={viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
+                                                            const snaps = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
+                                                            const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes((s.event_type || '').toLowerCase()));
                                                             let srcVal = null;
                                                             if (mismatchSnap) {
                                                                 srcVal = mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
@@ -2244,7 +2399,7 @@ const ResultsAI = () => {
                                                                                         ? (!!stage.data && !['New', 'Invited', 'Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(stage.data.status))
                                                                                         : !!(stage.data && (stage.data.id || stage.data.submission_id || stage.data.status));
                                                                                     const score = stage.isInt
-                                                                                        ? (stage.data?.interview_summary?.length > 0 ? Math.round((stage.data.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (stage.data.interview_summary.length * 10)) * 100) : 0)
+                                                                                        ? (stage.data?.interview_summary?.length > 0 ? Math.round((stage.data.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / 140) * 100) : 0)
                                                                                         : (stage.data?.[stage.scoreKey] || 0);
                                                                                     const date = stage.data?.created_at || stage.data?.submitted_at || stage.data?.completed_at;
                                                                                     return (
@@ -2272,7 +2427,7 @@ const ResultsAI = () => {
                                                                             <td style={{ fontSize: '0.9rem', fontWeight: '600' }}>
                                                                                 {activeTab === 'resume' ? `${r.resume_score || 0}%` :
                                                                                     activeTab === 'assessment' || activeTab === 'standard' ? `${r.percentage ?? 0}%` :
-                                                                                        `${r.interview_summary?.length > 0 ? Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / (r.interview_summary.length * 10)) * 100) : 0}%`}
+                                                                                        `${r.interview_summary?.length > 0 ? Math.round((r.interview_summary.reduce((s, q) => s + (parseInt(q.score || q.marks) || 0), 0) / 140) * 100) : 0}%`}
                                                                             </td>
                                                                             <td style={{ fontSize: '0.85rem', minWidth: '100px' }}>
                                                                                 <div style={{ fontWeight: '700', color: '#1B254B' }}>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</div>
