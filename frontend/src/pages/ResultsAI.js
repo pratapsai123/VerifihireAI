@@ -646,44 +646,55 @@ const ResultsAI = () => {
 
     const unifyAutomaticResults = (roleData) => {
         const candidateMap = {};
-        const processGroup = (items, type) => {
-            items.forEach(item => {
-                const sid = String(item.submission_id || '');
-                const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
-                if (!candidateMap[email]) {
-                    candidateMap[email] = {
-                        email,
-                        full_name: item.full_name || item.candidate?.name || 'Candidate',
-                        resume: null, assessment: null, interview: null,
-                        batch_id: item.batch_id,
-                        batch_name: item.batch_name,
-                        identity_mismatch_detected: !!item.identity_mismatch_detected,
-                        photo_update_pending: !!item.photo_update_pending,
-                        ai_candidate_pk: item.ai_candidate_pk || null,
-                        pending_identity_photo_url: item.pending_identity_photo_url || null,
-                        original_identity_photo_url: item.original_identity_photo_url || null,
-                        master_photo_url: item.master_photo_url || null,
-                        candidate_photo_url: item.candidate_photo_url || null,
-                    };
-                } else {
-                    // Merge photo fields from later items if current entry has nulls
-                    const c = candidateMap[email];
-                    if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
-                    if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
-                    if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
-                    if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
-                    if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
-                    if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
-                    if (item.photo_update_pending) c.photo_update_pending = true;
-                }
-                if (!candidateMap[email][type]) {
-                    candidateMap[email][type] = item;
-                }
-            });
-        };
-        processGroup(roleData.resume, 'resume');
-        processGroup(roleData.assessment, 'assessment');
-        processGroup(roleData.interview, 'interview');
+        
+        // Gather all stage items
+        const allItems = [];
+        if (roleData.resume) roleData.resume.forEach(item => allItems.push({ ...item, _stageType: 'resume' }));
+        if (roleData.assessment) roleData.assessment.forEach(item => allItems.push({ ...item, _stageType: 'assessment' }));
+        if (roleData.interview) roleData.interview.forEach(item => allItems.push({ ...item, _stageType: 'interview' }));
+        
+        // Sort by date descending so the newest item sets the mapping fields first
+        allItems.sort((a, b) => {
+            const dateA = new Date(a.created_at || a.submitted_at || a.completed_at || 0).getTime();
+            const dateB = new Date(b.created_at || b.submitted_at || b.completed_at || 0).getTime();
+            return dateB - dateA;
+        });
+
+        allItems.forEach(item => {
+            const sid = String(item.submission_id || '');
+            const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
+            const type = item._stageType;
+            if (!candidateMap[email]) {
+                candidateMap[email] = {
+                    email,
+                    full_name: item.full_name || item.candidate?.name || 'Candidate',
+                    resume: null, assessment: null, interview: null,
+                    batch_id: item.batch_id,
+                    batch_name: item.batch_name,
+                    identity_mismatch_detected: !!item.identity_mismatch_detected,
+                    photo_update_pending: !!item.photo_update_pending,
+                    ai_candidate_pk: item.ai_candidate_pk || null,
+                    pending_identity_photo_url: item.pending_identity_photo_url || null,
+                    original_identity_photo_url: item.original_identity_photo_url || null,
+                    master_photo_url: item.master_photo_url || null,
+                    candidate_photo_url: item.candidate_photo_url || null,
+                };
+            } else {
+                // Merge photo fields from later items if current entry has nulls
+                const c = candidateMap[email];
+                if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
+                if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
+                if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
+                if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
+                if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
+                if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
+                if (item.photo_update_pending) c.photo_update_pending = true;
+            }
+            if (!candidateMap[email][type]) {
+                candidateMap[email][type] = item;
+            }
+        });
+
         return Object.values(candidateMap).map(c => ({
             ...c,
             _type: 'fully_automatic_candidate',
@@ -1385,9 +1396,11 @@ const ResultsAI = () => {
                                             )}
 
                                             {(() => {
-                                                // Get candidate photo - use backend-provided URL first
-                                                // Then fall back to first valid integrity screenshot via lazy load
-                                                let candidatePhoto = viewedSubmission.candidate_photo_url || null;
+                                                // Get candidate photo - use intruder/assessment photo when mismatch detected (same as Box 2),
+                                                // otherwise use backend-provided URL, then fall back to integrity screenshot via lazy load
+                                                let candidatePhoto = viewedSubmission.identity_mismatch_detected
+                                                    ? (viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.candidate_photo_url || null)
+                                                    : (viewedSubmission.candidate_photo_url || null);
 
                                                 if (!candidatePhoto) {
                                                     const logs = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_webcam_screenshot || l.webcam_screenshot_base64 || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
@@ -1774,7 +1787,7 @@ const ResultsAI = () => {
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
                                                     <img
-                                                        src={viewedSubmission.original_identity_photo_url || viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || (() => {
+                                                        src={viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
                                                             const snaps = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
                                                             const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes((s.event_type || '').toLowerCase()));
                                                             let srcVal = null;

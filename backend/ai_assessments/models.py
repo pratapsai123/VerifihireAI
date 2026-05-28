@@ -133,8 +133,8 @@ class AIAssessmentSubmission(models.Model):
     
     # Identity Mismatch Tracking (Override Logic)
     identity_mismatch_detected = models.BooleanField(default=False, help_text="True if face mismatch was detected but candidate was allowed to override")
-    original_identity_photo = models.ImageField(upload_to='identity_overrides/assessments/', blank=True, null=True, help_text="Snapshot of the previously registered face for comparison")
-    intruder_photo = models.ImageField(upload_to='identity_overrides/assessments/intruders/', blank=True, null=True, help_text="Snapshot of the new/intruding face captured at the moment of mismatch")
+    original_identity_photo = models.TextField(blank=True, null=True, help_text="Base64 snapshot of the registered face for comparison")
+    intruder_photo = models.TextField(blank=True, null=True, help_text="Base64 snapshot of the new/intruding face captured at the moment of mismatch")
     identity_mismatch_details = models.JSONField(default=dict, blank=True, help_text="Details about the mismatch (timestamp, old public_token, etc.)")
 
     def __str__(self):

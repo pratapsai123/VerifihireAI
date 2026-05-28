@@ -1287,7 +1287,7 @@ const AiTakeAssessment = () => {
 
 
 
-    const startAssessment = async (bypassReg = false, isOverride = false) => {
+    const startAssessment = async (bypassReg = false, isOverride = false, currentSnapshot = null) => {
 
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
 
@@ -1356,8 +1356,9 @@ const AiTakeAssessment = () => {
             if (panPhoto) {
                 formPayload.append('pan_photo', panPhoto);
             }
-            if (registrationSnapshot) {
-                formPayload.append('snapshot', registrationSnapshot);
+            const snapshotToUse = currentSnapshot || registrationSnapshot;
+            if (snapshotToUse) {
+                formPayload.append('snapshot', snapshotToUse);
             }
             if (isOverride || identityMismatchOverride) {
                 formPayload.append('identity_mismatch_override', 'true');
@@ -1849,9 +1850,12 @@ const AiTakeAssessment = () => {
 
         const initMonitoring = async () => {
 
-            const personId = getDeepfacePersonId();
+            let personId = getDeepfacePersonId();
 
             if (!personId) return;
+            
+            // Scope the DeepFace anchor to this specific assessment session
+            personId = `${personId}/assessments/${token}`;
 
 
 
@@ -2112,6 +2116,47 @@ const AiTakeAssessment = () => {
             handlePhaseSwitch('coding');
         }
     }, [isStarted, mcqTimeLeft, phase]);
+
+    // ── Anti-Cheat Restrictions ─────────────────────────────────────────────
+    useEffect(() => {
+        if (!isStarted) return;
+
+        const handleContextMenu = (e) => {
+            e.preventDefault();
+            showAiEvent('Right-click is disabled during the assessment', false);
+        };
+
+        const handleCopyPaste = (e) => {
+            e.preventDefault();
+            showAiEvent('Copy, paste, and cut are disabled during the assessment', false);
+        };
+
+        const handleKeyDown = (e) => {
+            // Disable PrintScreen, F12, Ctrl+Shift+I, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+P
+            const isCopyPaste = (e.ctrlKey || e.metaKey) && ['c', 'C', 'v', 'V', 'x', 'X', 'p', 'P'].includes(e.key);
+            const isDevTools = e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key));
+            const isPrtScn = e.key === 'PrintScreen';
+            
+            if (isCopyPaste || isDevTools || isPrtScn) {
+                e.preventDefault();
+                showAiEvent('This shortcut is disabled during the assessment', false);
+            }
+        };
+
+        document.addEventListener('contextmenu', handleContextMenu);
+        document.addEventListener('copy', handleCopyPaste);
+        document.addEventListener('cut', handleCopyPaste);
+        document.addEventListener('paste', handleCopyPaste);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('contextmenu', handleContextMenu);
+            document.removeEventListener('copy', handleCopyPaste);
+            document.removeEventListener('cut', handleCopyPaste);
+            document.removeEventListener('paste', handleCopyPaste);
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isStarted, showAiEvent]);
 
     // ── Time Warning Toasts ──────────────────────────────────────────────────
     // Fires once at 25% remaining and once at 60 seconds remaining per section.
@@ -2663,8 +2708,8 @@ const AiTakeAssessment = () => {
 
                 setTimeout(() => {
                     setIsRegistered(true);
-                    // Pass mismatchSnapshot as second arg if mismatch was detected silently
-                    const isMismatch = !!mismatchSnapshot && mismatchSnapshot !== finalImage;
+                    // Pass isMismatch=true if mismatchSnapshot was set during silent failure
+                    const isMismatch = !!mismatchSnapshot;
                     onComplete(finalImage.split(',')[1], isMismatch);
                 }, 1500);
 
@@ -2925,7 +2970,7 @@ const AiTakeAssessment = () => {
 
             setIsRegistered(true);
 
-            startAssessment(true, isOverride);
+            startAssessment(true, isOverride, img);
 
         }} onCancel={() => setIsRegistering(false)} />;
 
