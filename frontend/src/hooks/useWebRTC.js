@@ -93,12 +93,32 @@ export const useWebRTC = (sendMessage, myUserId) => {
     delete remoteIceQueuesRef.current[userId];
   }, []);
 
-  const initLocalStream = useCallback(async (videoConstraints = true, audioConstraints = true) => {
+  const initLocalStream = useCallback(async (videoConstraints = true, audioConstraints = true, videoDeviceId = null, audioDeviceId = null) => {
     try {
       console.log('🎙️ Initializing local stream...');
+      const videoOptions = videoConstraints
+        ? {
+            width: { ideal: 1280, max: 1920 },
+            height: { ideal: 720, max: 1080 },
+            frameRate: { ideal: 30, max: 60 },
+            facingMode: 'user',
+            ...(videoDeviceId ? { deviceId: { exact: videoDeviceId } } : {})
+          }
+        : false;
+
+      const audioOptions = audioConstraints
+        ? {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+            sampleRate: 44100,
+            ...(audioDeviceId ? { deviceId: { exact: audioDeviceId } } : {})
+          }
+        : false;
+
       const localStream = await navigator.mediaDevices.getUserMedia({
-        video: videoConstraints ? { width: { ideal: 1280, max: 1920 }, height: { ideal: 720, max: 1080 }, frameRate: { ideal: 30, max: 60 }, facingMode: 'user' } : false,
-        audio: audioConstraints ? { echoCancellation: true, noiseSuppression: true, autoGainControl: true, sampleRate: 44100 } : false
+        video: videoOptions,
+        audio: audioOptions
       });
       localStreamRef.current = localStream;
       return localStream;

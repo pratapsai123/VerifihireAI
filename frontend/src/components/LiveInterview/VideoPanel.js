@@ -15,7 +15,8 @@ export const VideoPanel = ({
   isCameraOn,
   isLocalScreenSharing,
   localName,
-  localRole
+  localRole,
+  speakerDeviceId
 }) => {
   // Sync local stream whenever state or streams change
   useEffect(() => {
@@ -116,8 +117,14 @@ export const VideoPanel = ({
         ) : (
           <video
             ref={el => {
-              if (el && p.stream && el.srcObject !== p.stream) {
+              if (el) {
+                if (p.stream && el.srcObject !== p.stream) {
                   el.srcObject = p.stream;
+                }
+                if (!isSelf && speakerDeviceId && typeof el.setSinkId === 'function') {
+                  el.setSinkId(speakerDeviceId)
+                    .catch(err => console.error('Error setting remote speaker sink ID:', err));
+                }
               }
               if (isSelf) localVideoRef.current = el;
             }}

@@ -13,6 +13,7 @@ import ChatPanel from '../components/LiveInterview/ChatPanel';
 import ControlBar from '../components/LiveInterview/ControlBar';
 import ConnectionOverlay from '../components/LiveInterview/ConnectionOverlay';
 import ErrorBoundary from '../components/LiveInterview/ErrorBoundary';
+import LiveInterviewLobby from '../components/LiveInterview/LiveInterviewLobby';
 
 function LiveInterview() {
   const navigate = useNavigate();
@@ -26,6 +27,20 @@ function LiveInterview() {
 
   const [candidateName, setCandidateName] = useState('Candidate');
   const [interviewerName, setInterviewerName] = useState('Interviewer');
+
+  const [showLobby, setShowLobby] = useState(true);
+  const [lobbyConfig, setLobbyConfig] = useState({
+    cameraOn: true,
+    micOn: true,
+    videoDeviceId: null,
+    audioDeviceId: null,
+    speakerDeviceId: null
+  });
+
+  const handleLobbyJoin = (config) => {
+    setLobbyConfig(config);
+    setShowLobby(false);
+  };
 
   // Load interview details
   useEffect(() => {
@@ -415,40 +430,58 @@ function LiveInterview() {
   const initializeMedia = useCallback(() => {
     setMediaLoading(true);
     setMediaError(false);
-    initLocalStream(true, true).then(stream => {
+
+    const initialCameraOn = lobbyConfig.cameraOn;
+    const initialMicOn = lobbyConfig.micOn;
+
+    setIsCameraOn(initialCameraOn);
+    setIsMuted(!initialMicOn);
+
+    initLocalStream(true, true, lobbyConfig.videoDeviceId, lobbyConfig.audioDeviceId).then(stream => {
       setCameraReady(true);
       setMediaLoading(false);
 
       window.dispatchEvent(new Event('vh_exam_started'));
 
+      // If camera was disabled in the lobby, disable the video tracks initially
+      if (!initialCameraOn) {
+        stream.getVideoTracks().forEach(track => track.enabled = false);
+      }
+      // If microphone was muted in the lobby, disable the audio tracks initially
+      if (!initialMicOn) {
+        stream.getAudioTracks().forEach(track => track.enabled = false);
+      }
+
       if (thumbnailVideoRef.current) {
         thumbnailVideoRef.current.srcObject = stream;
       }
 
-      // 🔥 FIX: Only broadcast ready_for_webrtc. Do NOT proactively send offers here.
-      // Existing participants will receive ready_for_webrtc and respond with an offer.
-      // This ensures exactly ONE offer per pair (no glare / double-offer).
+      // If camera starts on, start detection
+      if (initialCameraOn) {
+        startDetection(showSessionPopup, () => {
+          setShowThankYou(true);
+          stopWebRTC();
+        });
+      } else {
+        stopDetection();
+      }
+
       console.log('🗣️ Broadcasting ready_for_webrtc');
       sendMessage({ type: 'ready_for_webrtc', user: candidateName, role: MY_ROLE });
-
-      startDetection(showSessionPopup, () => {
-        setShowThankYou(true);
-        stopWebRTC();
-      });
 
     }).catch(err => {
       setMediaLoading(false);
       setMediaError(true);
       showSessionPopup('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC, candidateName]);
+  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC, candidateName, lobbyConfig]);
 
   // Initialize WebRTC
   useEffect(() => {
-    if (connectionStatus === 'Connected' && !localStreamRef.current && !sessionExpired && mediaLoading) {
+    if (!showLobby && connectionStatus === 'Connected' && !localStreamRef.current && !sessionExpired && mediaLoading) {
       initializeMedia();
     }
-  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia]);
+  }, [connectionStatus, sessionExpired, mediaLoading, initializeMedia, showLobby]);
 
   // Handle chat sending
   const handleChatSend = useCallback((msgText) => {
@@ -555,6 +588,16 @@ function LiveInterview() {
           <button className="btn-close-window" onClick={closeCandidateTab}>Close</button>
         </div>
       </div>
+    );
+  }
+
+  if (showLobby) {
+    return (
+      <LiveInterviewLobby
+        token={sessionId === 'default-session' ? (searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId')) : sessionId}
+        participantToken={participantToken}
+        onJoin={handleLobbyJoin}
+      />
     );
   }
 
@@ -675,6 +718,7 @@ function LiveInterview() {
               isLocalScreenSharing={isScreenSharing}
               localName={candidateName}
               localRole={MY_ROLE}
+              speakerDeviceId={lobbyConfig.speakerDeviceId}
             />
           </div>
 
