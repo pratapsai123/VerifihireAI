@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
-import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
+import induAvatar from '../assets/indu_avatar.png';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 import { API_BASE_URL, DEEPFACE_BASE_URL, DEEPFACE_WS_URL } from '../apiConfig';
@@ -13,7 +13,7 @@ import useNetworkStatus from '../hooks/useNetworkStatus';
 // FIX (Magic Numbers): All interview constants live here.
 // Change once → applies everywhere.
 // ─────────────────────────────────────────────────────────────
-const MAX_INTERVIEW_QUESTIONS = 13;         // Total questions per session
+const MAX_INTERVIEW_QUESTIONS = 14;         // Total questions per session (1 intro + 13 real)
 const DEEPFACE_FRAME_INTERVAL_MS = 200;    // 5 FPS
 const DEEPFACE_JPEG_QUALITY = 0.65;   // JPEG compression for frames
 const SILENCE_GRACE_PERIOD_MS = 8000;   // Grace before ending on silence
@@ -131,6 +131,7 @@ const AiInterviewSession = () => {
     const globalSilenceTimerRef = useRef(null);
     const nudgeCountRef = useRef(0);
     const transcriptRef = useRef("");
+    const lastAiQuestionRef = useRef("Introduction and Background"); // Tracks the actual question spoken by AI
     const interimTranscriptRef = useRef("");
     const submitHandlerRef = useRef(null);
     const assemblyAIRef = useRef(null);
@@ -1371,10 +1372,17 @@ const AiInterviewSession = () => {
                     if (!data.turn_is_formatted) {
                         interimTranscriptRef.current = text;
                     } else {
-                        transcriptRef.current += text + " ";
+                        // AssemblyAI v3 Turn events with turn_is_formatted=true contain
+                        // the COMPLETE text for THAT turn (not a delta within the turn).
+                        // However, multiple turns can occur in a single recording session
+                        // (e.g., candidate pauses mid-sentence). We must APPEND each
+                        // finalized turn to preserve all spoken words.
+                        // Guard: if AssemblyAI re-sends the same formatted turn (same text
+                        // as the tail of our transcript), skip to avoid duplication.
+                        if (!transcriptRef.current.trimEnd().endsWith(text.trim())) {
+                            transcriptRef.current = (transcriptRef.current + " " + text).trim();
+                        }
                         interimTranscriptRef.current = "";
-                        // Notice: We don't trigger submit timers here anymore. 
-                        // The strict interval above perfectly handles it the moment the text stops accumulating!
                     }
 
                     const currentTotal = (transcriptRef.current + interimTranscriptRef.current).trim();
@@ -1687,7 +1695,7 @@ const AiInterviewSession = () => {
         console.log("Submitting answer turn...");
 
         try {
-            const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
+            const currentQ = lastAiQuestionRef.current || "Introduction and Background";
             const payload = {
                 candidate_token: token,
                 question: typeof currentQ === 'object' ? currentQ.question : currentQ,
@@ -1778,6 +1786,7 @@ const AiInterviewSession = () => {
             if (fullFeedback.trim()) fullTurnText += fullFeedback.trim() + " ";
 
             if (followUpQ) {
+                lastAiQuestionRef.current = followUpQ; // Track for next submission
                 // De-duplicate if feedback and follow-up are identical
                 const followUpText = (fullFeedback.trim() === followUpQ.trim())
                     ? followUpQ
@@ -1832,7 +1841,8 @@ const AiInterviewSession = () => {
                 if (fullTurnText) await speak(fullTurnText);
                 completeInterview();
             } else {
-                const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
+                const nextQ = refinedNextQ || "Could you tell me more about your experience?";
+                lastAiQuestionRef.current = nextQ; // Track for next submission
                 setCurrentQuestionIndex(nextIdx);
                 // FIX (Progress Bar Jump): Progress = questions COMPLETED (nextIdx = how many done).
                 // Using nextIdx/total means at question 1 we show 1/13 = 7.7%, not jumping to 15%.
@@ -2321,22 +2331,30 @@ const AiInterviewSession = () => {
     const handleRegisterFace = async () => {
         stopRegDetection();
         blinkCapturedRef.current = true; // Mark as captured so detection loop stops
-        const videoElement = regVideoRef.current || videoRef.current;
-        if (!videoElement || videoElement.readyState < 2) return;
         setWizardStep(1); // 'verifying'
 
         try {
-            const canvas = document.createElement('canvas');
-            canvas.width = 640;
-            canvas.height = 480;
-            const ctx = canvas.getContext('2d');
-            ctx.filter = 'brightness(1.15) contrast(1.2)';
-            ctx.drawImage(videoElement, 0, 0, 640, 480);
-            ctx.filter = 'none';
+            // Use the already-captured image from the preview (what the candidate approved)
+            // NOT a fresh snapshot from the live video
+            let dataUrl = capturedImage;
+            let b64;
 
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-            const b64 = dataUrl.split(',')[1];
-            setCapturedImage(dataUrl);
+            if (dataUrl) {
+                // Use the preview image the candidate already approved
+                b64 = dataUrl.split(',')[1];
+            } else {
+                // Fallback: take a fresh snapshot (shouldn't happen with manual capture flow)
+                const videoElement = regVideoRef.current || videoRef.current;
+                if (!videoElement || videoElement.readyState < 2) return;
+                const canvas = document.createElement('canvas');
+                canvas.width = 640;
+                canvas.height = 480;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(videoElement, 0, 0, 640, 480);
+                dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                b64 = dataUrl.split(',')[1];
+                setCapturedImage(dataUrl);
+            }
 
             const personId = getDeepfacePersonId();
             if (!personId) {
@@ -2723,6 +2741,7 @@ const AiInterviewSession = () => {
         } else {
             const firstName = candidate.full_name.split(' ')[0];
             const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today. To get started, please introduce yourself and your professional background.`;
+            lastAiQuestionRef.current = "Please introduce yourself and your professional background.";
 
             addMessage('ai', welcome);
             await speak(welcome);
@@ -3460,27 +3479,41 @@ const AiInterviewSession = () => {
                             </div>
                         )}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
-                        <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
-
-                        {/* Local Mic Visualizer */}
-                        <div style={{ width: '150px', height: '30px', background: '#f8fafc', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-5px' }}>
-                            <canvas ref={canvasRef} width="150" height="30" style={{ width: '100%', height: '100%' }}></canvas>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1.2rem' }}>
+                        {/* AI Avatar with Pulsing Ring */}
+                        <div className={`ai-avatar-wrapper ${isSpeaking ? 'speaking' : ''}`}>
+                            <div className="ai-avatar-pulse-ring"></div>
+                            <img src={induAvatar} alt="Indu - AI Interviewer" className="ai-avatar-image" />
                         </div>
 
-                        {/* Status Message moved to bottom as requested */}
-                        <div className="ai-status-badge" style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                        {/* Indu Name & Status */}
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: '#f1f5f9' }}>Indu</h2>
+                            <p style={{ margin: '4px 0 0', fontSize: '0.75rem', color: isSpeaking ? '#a78bfa' : '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontWeight: 500 }}>
+                                <span className="speaking-indicator"></span>
+                                {isSpeaking ? 'Speaking...' : isProcessing ? 'Thinking...' : 'Online'}
+                            </p>
+                        </div>
+
+                        {/* Local Mic Visualizer */}
+                        <div style={{ width: '200px', height: '40px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <canvas ref={canvasRef} width="200" height="40" style={{ width: '100%', height: '100%' }}></canvas>
+                        </div>
+
+                        {/* Status Badge at bottom */}
+                        <div className="ai-status-badge">
                             <span className="speaking-indicator"></span>{aiStatus}
                         </div>
                     </div>
                 </div>
 
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
-                    <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+                    {/* Top Bar */}
+                    <div style={{ background: 'rgba(15, 20, 40, 0.95)', padding: '12px 24px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, backdropFilter: 'blur(8px)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
-                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                                <i className="fa-solid fa-user-tie" style={{ color: '#a78bfa', fontSize: '0.9rem' }}></i>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#f1f5f9' }}>{candidateName}</span>
                             </div>
 
                             {timeLeft !== null && (
@@ -3488,13 +3521,13 @@ const AiInterviewSession = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    background: timeLeft < 300 ? '#fff5f5' : '#f0f4ff',
-                                    padding: '4px 10px',
+                                    background: timeLeft < 300 ? 'rgba(239,68,68,0.15)' : 'rgba(70,72,212,0.1)',
+                                    padding: '6px 12px',
                                     borderRadius: '8px',
-                                    color: timeLeft < 300 ? '#e53e3e' : '#667eea',
+                                    color: timeLeft < 300 ? '#fc8181' : '#a78bfa',
                                     fontWeight: 'bold',
                                     fontSize: '0.8rem',
-                                    border: `1px solid ${timeLeft < 300 ? '#feb2b2' : '#c3dafe'}`
+                                    border: `1px solid ${timeLeft < 300 ? 'rgba(239,68,68,0.3)' : 'rgba(70,72,212,0.3)'}`
                                 }}>
                                     <i className="fa-solid fa-clock"></i>
                                     <span>{formatTime(timeLeft)}</span>
@@ -3505,26 +3538,26 @@ const AiInterviewSession = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '6px',
-                                background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#ebf8ff' : '#fffbec') : '#f0fff4') : '#fff5f5',
+                                background: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'rgba(49,130,206,0.15)' : 'rgba(183,121,31,0.15)') : 'rgba(56,161,105,0.15)') : 'rgba(229,62,62,0.15)',
                                 padding: '4px 10px',
                                 borderRadius: '8px',
-                                color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#3182ce' : '#b7791f') : '#38a169') : '#e53e3e',
+                                color: sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#63b3ed' : '#f6e05e') : '#68d391') : '#fc8181',
                                 fontWeight: 'bold',
                                 fontSize: '0.8rem',
-                                border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? '#bee3f8' : '#f6e05e') : '#c6f6d5') : '#feb2b2'}`
+                                border: `1px solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'rgba(99,179,237,0.3)' : 'rgba(246,224,94,0.3)') : 'rgba(104,211,145,0.3)') : 'rgba(252,129,129,0.3)'}`
                             }}>
                                 <i className={`fa-solid ${sttReady ? (silenceCountdown ? (silenceCountdown === 'Listening...' ? 'fa-microphone-lines' : 'fa-hourglass-half') : 'fa-check-circle') : 'fa-microphone-slash'}`}></i>
                                 <span>{sttReady ? (silenceCountdown ? `Indu Waiting (${silenceCountdown})` : 'AssemblyAI Live') : 'Mic Offline'}</span>
                             </div>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
-                        <button onClick={() => completeInterview("You have chosen to end the interview early. Thank you for your time today.")} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
+                        <button onClick={() => completeInterview("You have chosen to end the interview early. Thank you for your time today.")} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem', transition: 'color 0.2s' }}><i className="fa-solid fa-xmark"></i> Exit</button>
                     </div>
 
                     <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
                         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#667eea', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
-                            <div style={{ fontSize: '1rem', fontWeight: 600, color: '#1a202c', flex: 1 }}>
+                            <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#a78bfa', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
+                            <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', flex: 1 }}>
                                 {questions[currentQuestionIndex] ? (
                                     typeof questions[currentQuestionIndex] === 'object'
                                         ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
@@ -3535,7 +3568,7 @@ const AiInterviewSession = () => {
                     </div>
 
                     <div ref={chatContainerRef} className="chat-container">
-                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
+                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
                         {chatMessages.map((msg, i) => (
                             <div key={i} className={`message ${msg.sender}`} title={msg.timestamp}>
                                 {msg.text}
@@ -3556,11 +3589,11 @@ const AiInterviewSession = () => {
                     {failedSubmission && !isProcessing && !isCompleted && (
                         <div style={{
                             display: 'flex', alignItems: 'center', gap: '10px',
-                            background: '#fffbeb', border: '1px solid #f59e0b',
+                            background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)',
                             borderRadius: '10px', padding: '8px 14px', margin: '0 0 4px 0'
                         }}>
-                            <i className="fa-solid fa-triangle-exclamation" style={{ color: '#d97706' }}></i>
-                            <span style={{ flex: 1, fontSize: '0.8rem', color: '#92400e', fontWeight: 500 }}>
+                            <i className="fa-solid fa-triangle-exclamation" style={{ color: '#f59e0b' }}></i>
+                            <span style={{ flex: 1, fontSize: '0.8rem', color: '#fbbf24', fontWeight: 500 }}>
                                 Last answer failed to submit.
                             </span>
                             <button
@@ -3582,14 +3615,14 @@ const AiInterviewSession = () => {
                                 onClick={() => setFailedSubmission(null)}
                                 style={{
                                     background: 'none', border: 'none',
-                                    color: '#9ca3af', cursor: 'pointer', fontSize: '1rem'
+                                    color: '#64748b', cursor: 'pointer', fontSize: '1rem'
                                 }}
                                 title="Dismiss"
                             >×</button>
                         </div>
                     )}
 
-                    <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ background: 'rgba(15,20,40,0.95)', padding: '0.6rem 1rem', borderRadius: '12px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         {userInputMode === 'audio' ? (
                             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                 <button
@@ -3601,15 +3634,15 @@ const AiInterviewSession = () => {
                                 >
                                     <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
                                 </button>
-                                <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{!isFullscreen ? 'Fullscreen required' : isRecording ? "Listening..." : "Click to Speak"}</span>
+                                <span style={{ color: '#94a3b8', fontWeight: 600, fontSize: '0.8rem' }}>{!isFullscreen ? 'Fullscreen required' : isRecording ? "Listening..." : "Click to Speak"}</span>
                             </div>
                         ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: '#f8fafc', padding: '8px', borderRadius: '8px' }}>
+                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'flex-end', background: 'rgba(255,255,255,0.04)', padding: '8px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
                                 <textarea
                                     className="response-textarea"
                                     style={{
                                         flex: 1,
-                                        border: '1px solid #cbd5e0',
+                                        border: '1px solid rgba(255,255,255,0.1)',
                                         borderRadius: '8px',
                                         padding: '8px 12px',
                                         fontSize: '0.85rem',
@@ -3617,7 +3650,9 @@ const AiInterviewSession = () => {
                                         minHeight: '40px',
                                         maxHeight: '150px',
                                         resize: 'vertical',
-                                        fontFamily: 'monospace'
+                                        fontFamily: 'monospace',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        color: '#f1f5f9'
                                     }}
                                     value={responseInput}
                                     onChange={(e) => setResponseInput(e.target.value)}
@@ -3647,7 +3682,7 @@ const AiInterviewSession = () => {
                         )}
                         <button
                             onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
-                            style={{ background: '#edf2f7', border: 'none', color: '#4a5568', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+                            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
                         >
                             <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>
                             {userInputMode === 'audio' ? "Keys" : "Voice"}

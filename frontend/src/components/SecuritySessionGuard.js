@@ -352,11 +352,11 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         if (localViolationActive) {
           const pending = agentStatus.monitorState.pendingViolation;
           const appLabel = pending?.app || 'Remote access tool';
-          
+
           if (!warningRef.current) {
             setWarning(true);
             setBlockedApp(appLabel);
-            
+
             // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
             const now = Date.now();
             const start = pending?.violation_start_time ? new Date(pending.violation_start_time).getTime() : now;
@@ -413,7 +413,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
           if (!warningRef.current) {
             setWarning(true);
             setBlockedApp(status.blocked_app || 'Remote access tool');
-            
+
             // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
             const start = new Date(status.violation_start_time).getTime();
             const now = Date.now();

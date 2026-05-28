@@ -52,7 +52,7 @@ import pandas as pd
 # Setup Logger
 logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
-TOTAL_INTERVIEW_QUESTIONS = 13
+TOTAL_INTERVIEW_QUESTIONS = 14
 from api.views.job_role_views import ensure_role_exists
 
 from api.models import UserProfile
@@ -1778,30 +1778,28 @@ class CandidatePublicStatusUpdateView(APIView):
 
 
 
-            # Calculate final score percentage
-
-            total_possible = candidate.total_questions * 10 if candidate.total_questions > 0 else 100
-
+            # Calculate final score percentage — always against full 14 questions (140 points max)
+            # Unanswered questions count as 0, preventing gaming by exiting early
+            total_possible = TOTAL_INTERVIEW_QUESTIONS * 10  # Always 140
             score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
 
-            # Get integrity penalty
+            # Get integrity score
             integrity_obj = getattr(candidate, 'integrity', None)
             integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
-            integrity_penalty = max(0, 100.0 - integrity_score)
-            final_score = max(0, score_percentage - integrity_penalty)
 
             # Determine pass/fail based on threshold
-
+            # New logic: No penalty on raw score. On-Hold if passed but integrity < 75%
             threshold = candidate.interview_pass_threshold or 50
+            INTEGRITY_THRESHOLD = 75.0
 
-            if final_score >= threshold:
-                # Passed even after integrity penalty
+            if score_percentage >= threshold and integrity_score >= INTEGRITY_THRESHOLD:
+                # Passed interview AND good integrity
                 candidate.status = 'Hired'
-            elif score_percentage >= threshold and final_score < threshold:
-                # Raw score passed but integrity penalty dragged it below threshold
+            elif score_percentage >= threshold and integrity_score < INTEGRITY_THRESHOLD:
+                # Passed interview BUT suspicious behavior — needs manual review
                 candidate.status = 'On-Hold'
             else:
-                # Raw score itself is below threshold
+                # Failed on answers alone
                 candidate.status = 'Rejected'
 
 
@@ -1826,7 +1824,7 @@ class CandidatePublicStatusUpdateView(APIView):
 
                 'SUCCESS' if candidate.status == 'Hired' else 'WARNING', 
 
-                f"AI Interview completed. Final Status: {candidate.status}. Raw Score: {score_percentage:.1f}%, Integrity Penalty: -{integrity_penalty:.1f}%, Final Score: {final_score:.1f}%",
+                f"AI Interview completed. Final Status: {candidate.status}. Score: {score_percentage:.1f}%, Integrity: {integrity_score:.1f}% (threshold: {INTEGRITY_THRESHOLD}%)",
 
                 phase='INTERVIEW'
 
@@ -2707,18 +2705,18 @@ class ProcessAnswerView(APIView):
             # Determine phase based on turn number (loose guidance, not rigid)
             if current_turn_number == 1:
                 phase_guidance = "INTRO PHASE: Ask the candidate to introduce themselves and their background. Keep it warm and conversational."
-            elif current_turn_number <= 5:
+            elif current_turn_number <= 6:
                 phase_guidance = "CORE SKILLS PHASE: Focus on Job Description requirements. Ask about specific technologies, concepts, or methodologies mentioned in the JD."
-            elif current_turn_number <= 9:
+            elif current_turn_number <= 10:
                 phase_guidance = "DEEP DIVE PHASE: Probe deeper based on what the candidate has revealed. If they mentioned a project, ask architecture details. If they claimed a skill, test it with a scenario. Focus on WEAK AREAS if any were identified."
-            elif current_turn_number <= 11:
+            elif current_turn_number <= 12:
                 phase_guidance = "SCENARIO & PROBLEM-SOLVING PHASE: Present hypothetical workplace scenarios or system design problems relevant to the role."
             else:
-                phase_guidance = "CODING PHASE: Ask a coding/syntax question. The candidate can type their answer. Set requires_code_input to true."
+                phase_guidance = "MANDATORY CODING PHASE: You MUST ask a coding/programming question. The candidate will type their answer. You MUST set requires_code_input to true. Do NOT ask a conversational or theoretical question — it MUST be a 'write a function' or 'write code to solve' type question."
 
             # Adaptive intelligence prompt section
             adaptive_section = f"""===== ADAPTIVE QUESTIONING INTELLIGENCE =====
-Turn: {current_turn_number}/13
+Turn: {current_turn_number}/14
 Phase: {phase_guidance}
 
 TOPICS ALREADY COVERED ({len(covered_topics)} questions asked so far):
@@ -2736,8 +2734,8 @@ ADAPTIVE RULES:
 3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
 4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
 5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
-6. For turns 1-11: ORAL ONLY — never ask them to write code or type anything.
-7. For turns 12-13: CODING — ask them to write a function or analyze code. Set "requires_code_input": true.
+6. For turns 1-12: ORAL ONLY — never ask them to write code or type anything.
+7. For turns 13-14: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns 13-14.
 """
 
             # --- OPTIMIZED PROMPT (reliable JSON output) ---
@@ -2784,8 +2782,8 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 ===== SPECIAL TRIGGERS =====
 - If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
 - If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
-- FOR TURNS 1-11 (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
-- For turns 12-13 (CODING) → Set "requires_code_input": true.
+- FOR TURNS 1-12 (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
+- For turns 13-14 (CODING) → Set "requires_code_input": true.
 - YOUR NEXT QUESTION MUST BE DIFFERENT from all previously covered topics listed above.
 
 ===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
@@ -2886,14 +2884,14 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             # -----------------------------------------------
 
             # --- HARD-CODED CATEGORY TRIGGERS ---
-            # Force code input UI for turns 12-13 to ensure the editor appears
-            if current_turn_number in [12, 13]:
+            # Force code input UI for turns 13-14 to ensure the editor appears
+            if current_turn_number in [13, 14]:
                 data['requires_code_input'] = True
                 # Ensure the AI didn't accidentally set is_exit=True too early
                 data['is_exit'] = False
             
-            # If turn >= 14, force exit
-            if current_turn_number >= 14:
+            # If turn >= 15, force exit
+            if current_turn_number >= 15:
                 data['is_exit'] = True
                 data['refined_next_question'] = "Thank you for your time. The interview is now complete."
             # ------------------------------------
@@ -3307,9 +3305,9 @@ class CandidateReportDownloadView(APIView):
             
             integrity_obj = getattr(candidate, 'integrity', None)
             integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
-            integrity_penalty = max(0, 100.0 - integrity_score)
             
-            final_performance_pct = max(0, round(base_score_pct - integrity_penalty, 1))
+            # No penalty applied to raw score — integrity only affects status (On-Hold if < 75%)
+            final_performance_pct = round(base_score_pct, 1)
 
             # Right side: Summary Table
             info_data = [
@@ -3320,7 +3318,7 @@ class CandidateReportDownloadView(APIView):
                 ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
                 ["Job Title", candidate.job_title or "N/A"],
                 ["Interview Score", f"{candidate.score} / {total_possible_marks}"],
-                ["Integrity Penalty", f"-{integrity_penalty:.1f}%"],
+                ["Integrity Score", f"{integrity_score:.1f}%"],
                 ["Final Performance", f"{final_performance_pct}%"],
                 ["Status", candidate.status],
                 ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
