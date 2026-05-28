@@ -26,7 +26,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*", cast=Csv())
 
-FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="https://verifihireai.com")
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
 
 
 # Application definition
@@ -220,13 +220,13 @@ SIMPLE_JWT = {
 }
 
 default_cors_origins = [
-    "https://verifihireai.com",
-    "https://verifihireai.com",
-    "https://verifihireai.com",
-    "https://verifihireai.com",
-    "https://verifihireai.com",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
     "http://20.205.31.46",
-    "https://verifihireai.com",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

@@ -34,6 +34,31 @@ def is_interviewer_busy(email, start_time, end_time, exclude_invitation_ids=None
     if participants_qs.filter(session__start_time__lt=end_time, session__end_time__gt=start_time).exists():
         return True
         
+    # 3. InterviewSlot check (self-booked/reserved by candidates)
+    try:
+        from api.models import InterviewSlot
+        from django.utils import timezone
+        
+        # Localize start_time/end_time to verify slot_date boundary
+        local_start = timezone.localtime(start_time)
+        local_end = timezone.localtime(end_time)
+        
+        slots = InterviewSlot.objects.filter(
+            interviewer__email__iexact=email,
+            status__in=[InterviewSlot.STATUS_BOOKED, InterviewSlot.STATUS_RESERVED],
+            slot_date__gte=local_start.date(),
+            slot_date__lte=local_end.date()
+        )
+        for slot in slots:
+            slot_start_aware = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time))
+            slot_end_aware = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time))
+            if slot_start_aware < end_time and slot_end_aware > start_time:
+                if slot.status == InterviewSlot.STATUS_RESERVED and slot.is_reserve_expired():
+                    continue
+                return True
+    except Exception as e:
+        print(f"Error checking InterviewSlot in is_interviewer_busy: {e}")
+
     return False
 
 
@@ -75,7 +100,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []
         sent_count = 0
@@ -1096,7 +1121,7 @@ def add_interview_participant_view(request):
         )
         print(f"DEBUG: Participant created: {participant.id} with token {participant.token}")
         
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
         
         # Link changes based on role
         if role == 'interviewer':
@@ -1562,6 +1587,22 @@ def get_available_slots_view(request, token):
                     reserved_by_token=str(token)
                 ).exists()
 
+                # Also skip if this interviewer has an overlapping direct interview invitation
+                if not is_busy:
+                    slot_start_dt = timezone.make_aware(datetime.datetime.combine(slot_date, slot_start))
+                    slot_end_dt = timezone.make_aware(datetime.datetime.combine(slot_date, slot_end))
+                    
+                    has_overlapping_invite = InterviewInvitation.objects.filter(
+                        interviewer_email__iexact=win.interviewer.email,
+                        is_deleted=False,
+                        status__in=['sent', 'accepted', 'completed'],
+                        start_time__lt=slot_end_dt,
+                        end_time__gt=slot_start_dt
+                    ).exists()
+                    
+                    if has_overlapping_invite:
+                        is_busy = True
+
                 if not is_busy:
                     key = (slot_date.isoformat(), slot_start.strftime('%H:%M'))
                     if key not in slots_map:
@@ -1694,7 +1735,25 @@ def reserve_interview_slot_view(request, token):
                     reserved_by_token=str(token)
                 ).values_list('interviewer_id', flat=True)
 
-                available_ids = [idx for idx in has_window if idx not in busy]
+                # Subtract those who are busy with active direct interview invitations
+                target_start_dt = timezone.make_aware(datetime.datetime.combine(target_date, target_time))
+                target_end_dt = timezone.make_aware(datetime.datetime.combine(target_date, target_end))
+                
+                from django.db.models.functions import Lower
+                busy_invite_emails = [e.lower() for e in InterviewInvitation.objects.filter(
+                    is_deleted=False,
+                    status__in=['sent', 'accepted', 'completed'],
+                    start_time__lt=target_end_dt,
+                    end_time__gt=target_start_dt
+                ).values_list('interviewer_email', flat=True) if e]
+
+                busy_invite_interviewer_ids = UserProfile.objects.annotate(
+                    email_lower=Lower('email')
+                ).filter(
+                    email_lower__in=busy_invite_emails
+                ).values_list('id', flat=True)
+
+                available_ids = [idx for idx in has_window if idx not in busy and idx not in busy_invite_interviewer_ids]
 
                 if not available_ids:
                     return Response({'error': 'No interviewer available at this time anymore.'}, status=409)
@@ -1761,6 +1820,21 @@ def reserve_interview_slot_view(request, token):
             # Check availability
             if slot.status == InterviewSlot.STATUS_BOOKED:
                 return Response({'error': 'Slot already booked'}, status=409)
+
+            # Check overlapping active direct interview invitation
+            slot_start_dt = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time))
+            slot_end_dt = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time))
+            
+            has_overlapping_invite = InterviewInvitation.objects.filter(
+                interviewer_email__iexact=slot.interviewer.email,
+                is_deleted=False,
+                status__in=['sent', 'accepted', 'completed'],
+                start_time__lt=slot_end_dt,
+                end_time__gt=slot_start_dt
+            ).exists()
+            
+            if has_overlapping_invite:
+                return Response({'error': 'Interviewer is busy during this slot'}, status=409)
                 
             if slot.status == InterviewSlot.STATUS_RESERVED:
                 if slot.reserved_by_token != str(token) and slot.reservation_expiry_time > now:
@@ -1830,6 +1904,21 @@ def confirm_interview_booking_view(request, token):
             else:
                 return Response({'error': 'Slot unavailable'}, status=409)
                 
+            # Final overlapping active direct invitation check
+            slot_start_dt = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time))
+            slot_end_dt = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time))
+            
+            has_overlapping_invite = InterviewInvitation.objects.filter(
+                interviewer_email__iexact=slot.interviewer.email,
+                is_deleted=False,
+                status__in=['sent', 'accepted', 'completed'],
+                start_time__lt=slot_end_dt,
+                end_time__gt=slot_start_dt
+            ).exists()
+            
+            if has_overlapping_invite:
+                return Response({'error': 'Interviewer is busy during this slot'}, status=409)
+
             # Finalize
             slot.status = InterviewSlot.STATUS_BOOKED
             
@@ -1918,27 +2007,94 @@ def get_interviewer_availability_view(request):
             date__gte=timezone.now().date()
         )
         
-        # Pre-fetch booked slots for this interviewer to avoid N+1 queries
+        # Pre-fetch booked slots for this interviewer
         booked_slots = InterviewSlot.objects.filter(
             interviewer=profile,
             status=InterviewSlot.STATUS_BOOKED,
             slot_date__gte=timezone.now().date()
         )
         
-        # Map booked slots for easy lookup
-        # Key format: "YYYY-MM-DD_HH:MM"
-        booked_map = {
-            f"{s.slot_date.isoformat()}_{s.start_time.strftime('%H:%M')}": True
-            for s in booked_slots
-        }
+        # Fetch active/sent direct invitations for this interviewer
+        active_invitations = InterviewInvitation.objects.filter(
+            interviewer_email__iexact=profile.email,
+            is_deleted=False,
+            status__in=['sent', 'accepted', 'completed'],
+            start_time__date__gte=timezone.now().date()
+        ).exclude(start_time__isnull=True).exclude(end_time__isnull=True)
+        
+        # Map booked slots and invitations into a unified set of booked times
+        booked_slots_info = []
+        
+        for s in booked_slots:
+            booked_slots_info.append({
+                'date': s.slot_date,
+                'start_time': s.start_time,
+                'end_time': s.end_time,
+            })
+            
+        for inv in active_invitations:
+            local_start = timezone.localtime(inv.start_time)
+            local_end = timezone.localtime(inv.end_time)
+            
+            # Find all overlapping daily grid hours (06:00 to 23:00)
+            curr_date = local_start.date()
+            while curr_date <= local_end.date():
+                for h in range(6, 24):
+                    slot_start_time = datetime.time(h, 0)
+                    slot_end_time = datetime.time(h, 50)
+                    
+                    slot_start_dt = timezone.make_aware(datetime.datetime.combine(curr_date, slot_start_time))
+                    slot_end_dt = timezone.make_aware(datetime.datetime.combine(curr_date, slot_end_time))
+                    
+                    if inv.start_time < slot_end_dt and inv.end_time > slot_start_dt:
+                        booked_slots_info.append({
+                            'date': curr_date,
+                            'start_time': slot_start_time,
+                            'end_time': slot_end_time,
+                        })
+                curr_date += datetime.timedelta(days=1)
+            
+        booked_map = {}
+        for info in booked_slots_info:
+            key = f"{info['date'].isoformat()}_{info['start_time'].strftime('%H:%M')}"
+            booked_map[key] = info
 
-        data = [{
-            'id': w.id,
-            'date': w.date.isoformat(),
-            'start_time': w.start_time.strftime('%H:%M'),
-            'end_time': w.end_time.strftime('%H:%M'),
-            'is_booked': booked_map.get(f"{w.date.isoformat()}_{w.start_time.strftime('%H:%M')}", False)
-        } for w in windows]
+        seen_keys = set()
+        data = []
+        for w in windows:
+            key = f"{w.date.isoformat()}_{w.start_time.strftime('%H:%M')}"
+            seen_keys.add(key)
+            
+            # A window is booked if its key is in booked_map OR if it overlaps with any active invitation
+            w_start_dt = timezone.make_aware(datetime.datetime.combine(w.date, w.start_time))
+            w_end_dt = timezone.make_aware(datetime.datetime.combine(w.date, w.end_time))
+            is_booked_by_invite = active_invitations.filter(
+                start_time__lt=w_end_dt,
+                end_time__gt=w_start_dt
+            ).exists()
+            
+            data.append({
+                'id': w.id,
+                'date': w.date.isoformat(),
+                'start_time': w.start_time.strftime('%H:%M'),
+                'end_time': w.end_time.strftime('%H:%M'),
+                'is_booked': (key in booked_map) or is_booked_by_invite
+            })
+            
+        # Dynamically append synthetic booked slots that weren't declared in the interviewer's availability windows
+        for key, info in booked_map.items():
+            if key not in seen_keys:
+                data.append({
+                    'id': f"synthetic_{key}",
+                    'date': info['date'].isoformat(),
+                    'start_time': info['start_time'].strftime('%H:%M'),
+                    'end_time': info['end_time'].strftime('%H:%M'),
+                    'is_booked': True
+                })
+                
+        # Sort the results by date and start_time for a nice UI presentation
+        data.sort(key=lambda x: (x['date'], x['start_time']))
+        
         return Response({'success': True, 'windows': data})
     except Exception as e:
         return Response({'error': str(e)}, status=500)

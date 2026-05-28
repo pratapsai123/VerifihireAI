@@ -829,10 +829,9 @@ const ResultsAI = () => {
         const baseScore = data.score || 0;
         const basePercentage = Math.round((baseScore / totalPossible) * 100);
 
-        // Integrity Penalty Calculation
+        // Integrity Score (no penalty on raw score — only affects status)
         const integrityScore = data.integrity?.integrity_score ?? 100;
-        const integrityPenalty = Math.max(0, 100 - integrityScore);
-        const finalPercentage = Math.max(0, basePercentage - Math.round(integrityPenalty));
+        const finalPercentage = basePercentage;
 
         return (
             <div className="report-container">
@@ -905,10 +904,10 @@ const ResultsAI = () => {
                             <div style={{ width: '100%', height: '6px', background: '#f1f5f9', borderRadius: '3px', marginTop: '0.6rem', overflow: 'hidden' }}>
                                 <div style={{ width: `${finalPercentage}%`, height: '100%', background: 'linear-gradient(90deg, #4f46e5, #9333ea)', borderRadius: '3px' }}></div>
                             </div>
-                            {integrityPenalty > 0 && (
+                            {integrityScore < 75 && (
                                 <p style={{ fontSize: '0.7rem', color: '#EE5D50', marginTop: '0.5rem', fontWeight: '700' }}>
                                     <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: '4px' }}></i>
-                                    Includes -{Math.round(integrityPenalty)}% integrity penalty
+                                    Integrity Score: {Math.round(integrityScore)}% (below 75% threshold)
                                 </p>
                             )}
                         </div>
