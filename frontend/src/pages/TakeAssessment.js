@@ -8,6 +8,8 @@ import '../styles/TakeAssessment.css';
 import { API_BASE_URL } from '../apiConfig';
 import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
 import { logCandidateActivity } from '../utils/activityLogger';
+import { useTabHeartbeat } from '../hooks/useTabHeartbeat';
+import { getTabSessionId } from '../utils/tabSession';
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -257,20 +259,19 @@ export default function TakeAssessment() {
   const { token } = useParams();
   const ALLOW_COPY_PASTE = true; // Set to true to allow copy-paste temporarily for testing
 
-  // Create or load Session ID and configure Axios interceptor
+  // Per-tab session ID (stored in sessionStorage so each tab gets a unique ID.
+  // When a tab is closed, sessionStorage is cleared, which stops heartbeats and
+  // lets the lock expire on the backend after 30 s.)
+  const tabSessionId = getTabSessionId();
+
+  // Attach X-Session-ID header to every relevant API call
   useEffect(() => {
     if (!token) return;
-    let localSessionId = localStorage.getItem(`assessment_session_id_${token}`);
-    if (!localSessionId) {
-      localSessionId = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now();
-      localStorage.setItem(`assessment_session_id_${token}`, localSessionId);
-    }
 
-    // Add request interceptor to attach session ID to all relevant requests
     const reqInterceptor = axios.interceptors.request.use((config) => {
       if (config.url && (config.url.includes('/invitations/public/') || config.url.includes('/candidate-details/'))) {
         if (!config.headers) config.headers = {};
-        config.headers['X-Session-ID'] = localSessionId;
+        config.headers['X-Session-ID'] = tabSessionId;
       }
       return config;
     });
@@ -278,7 +279,8 @@ export default function TakeAssessment() {
     return () => {
       axios.interceptors.request.eject(reqInterceptor);
     };
-  }, [token]);
+  }, [token, tabSessionId]);
+
 
   const [candidateDetailsCompleted, setCandidateDetailsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -304,6 +306,14 @@ export default function TakeAssessment() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  // Tab heartbeat — keeps the session lock alive while this tab is open.
+  // If another tab opens the same exam URL and this tab's heartbeat stops
+  // (tab closed / navigated away), the backend lock expires after 30 s and
+  // the candidate can resume in the new tab.
+  const { isLockedOut } = useTabHeartbeat(token, {
+    enabled: !precheckLoading && !alreadySubmitted && !submitted,
+  });
   const [remainingSeconds, setRemainingSeconds] = useState(null);
   const [codingState, setCodingState] = useState(() => {
     const initialState = {
@@ -909,35 +919,53 @@ export default function TakeAssessment() {
   // doesn't waste time filling in details when the window is expired/not open.
   useEffect(() => {
     if (!token) return;
-    setPrecheckLoading(true);
-    axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
-      .then(() => {
-        // Window is open — clear any prior error
-        setWindowError('');
-        setWindowSchedule(null);
-        setPrecheckLoading(false);
-      })
-      .catch((err) => {
-        const status = err?.response?.status;
-        setWindowStatus(status);
-        // 403 = not started yet, 410 = expired / window closed, 404 = invalid link
-        if (status === 403 || status === 410 || status === 404) {
-          setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
-          setWindowSchedule(err?.response?.data?.schedule || null);
-        }
-        // 409 = already submitted or session locked
-        if (status === 409) {
-          const errMsg = err?.response?.data?.error;
-          if (errMsg && errMsg.includes('already in use')) {
-            setWindowError(errMsg);
-          } else {
-            setAlreadySubmitted(true);
+    let timeoutId;
+
+    const runPrecheck = (isRetry = false) => {
+      if (!isRetry) setPrecheckLoading(true);
+      
+      axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
+        .then(() => {
+          // Window is open and lock acquired — clear any prior error
+          setWindowError('');
+          setWindowSchedule(null);
+          setPrecheckLoading(false);
+        })
+        .catch((err) => {
+          const status = err?.response?.status;
+          setWindowStatus(status);
+          
+          if (status === 403 || status === 410 || status === 404) {
+            setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
+            setWindowSchedule(err?.response?.data?.schedule || null);
+            setPrecheckLoading(false);
           }
-        }
-        setPrecheckLoading(false);
-      });
+          
+          // 409 = already submitted or session locked
+          if (status === 409) {
+            const errMsg = err?.response?.data?.error;
+            if (errMsg && errMsg.includes('already in use')) {
+              setWindowError(errMsg);
+              // Set precheckLoading to false so the UI can render the lockout screen.
+              setPrecheckLoading(false);
+              // Poll again in 5 seconds to automatically unlock when the other session times out (30s).
+              // Pass isRetry = true so we don't flash the loading screen
+              timeoutId = setTimeout(() => runPrecheck(true), 5000);
+            } else {
+              setAlreadySubmitted(true);
+              setPrecheckLoading(false);
+            }
+          }
+        });
+    };
+
+    runPrecheck();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [token, tabSessionId]);
 
   useEffect(() => {
     const load = async () => {
@@ -1697,6 +1725,25 @@ export default function TakeAssessment() {
       <div className="take-page">
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '18px', color: '#64748b' }}>
           Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Show duplicate-tab lockout screen
+  const isSessionLocked = isLockedOut || (windowError && windowError.toLowerCase().includes('already in use'));
+  if (isSessionLocked) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f5f9', zIndex: 9999 }}>
+        <div style={{ background: '#fff', padding: '40px', borderRadius: '16px', textAlign: 'center', maxWidth: '420px', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔒</div>
+          <h2 style={{ margin: '0 0 12px', color: '#1e293b', fontSize: '20px' }}>Exam Open in Another Tab</h2>
+          <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.6', fontSize: '15px' }}>
+            This assessment is already running in another tab or window. Please close the other tab to continue here.
+          </p>
+          <p style={{ color: '#94a3b8', fontSize: '13px', margin: 0 }}>
+            This page will automatically unlock once the other tab is closed (within 30 seconds).
+          </p>
         </div>
       </div>
     );

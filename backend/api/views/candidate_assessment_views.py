@@ -409,27 +409,63 @@ def get_invitation_public_view(request, token):
         session_id = request.headers.get('X-Session-ID') or request.GET.get('session_id')
         check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
 
+        # ── Session lock with heartbeat-based timeout ──────────────────────
+        # A session lock is considered STALE if the owning tab hasn't sent a
+        # heartbeat in the last SESSION_LOCK_TIMEOUT_SECONDS seconds.
+        # A stale lock is automatically released so the candidate can resume
+        # on a new browser / laptop without contacting support.
+        SESSION_LOCK_TIMEOUT_SECONDS = 30
+
+        def _is_session_lock_stale(inv_obj):
+            """Return True if the existing lock has no recent heartbeat."""
+            if not inv_obj.claimed_session_id:
+                return True
+            last_seen = getattr(inv_obj, 'claimed_session_last_seen', None)
+            if not last_seen:
+                # Legacy lock with no heartbeat record — treat as stale
+                return True
+            elapsed = (timezone.now() - last_seen).total_seconds()
+            return elapsed > SESSION_LOCK_TIMEOUT_SECONDS
+
         if not check_only and session_id:
             with transaction.atomic():
                 try:
                     inv = CandidateInvitation.objects.select_for_update().select_related('assessment').get(token=token)
                 except CandidateInvitation.DoesNotExist:
                     return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
-                
+
                 if inv.claimed_session_id and inv.claimed_session_id != session_id:
-                    return Response({'error': 'This assessment is already in use. If this is not you, please contact our support team.'}, status=status.HTTP_409_CONFLICT)
-                
-                if not inv.claimed_session_id:
+                    if not _is_session_lock_stale(inv):
+                        # Lock is fresh — another tab is actively running
+                        return Response(
+                            {'error': 'This assessment is already in use. If this is not you, please contact our support team.'},
+                            status=status.HTTP_409_CONFLICT
+                        )
+                    # Lock is stale — old tab closed without cleanup; hand it to new tab
                     inv.claimed_session_id = session_id
-                    inv.save(update_fields=['claimed_session_id'])
+                    inv.claimed_session_last_seen = timezone.now()
+                    inv.save(update_fields=['claimed_session_id', 'claimed_session_last_seen'])
+                elif not inv.claimed_session_id:
+                    inv.claimed_session_id = session_id
+                    inv.claimed_session_last_seen = timezone.now()
+                    inv.save(update_fields=['claimed_session_id', 'claimed_session_last_seen'])
+                else:
+                    # Same session — update heartbeat
+                    inv.claimed_session_last_seen = timezone.now()
+                    inv.save(update_fields=['claimed_session_last_seen'])
         else:
             try:
                 inv = CandidateInvitation.objects.select_related('assessment').get(token=token)
             except CandidateInvitation.DoesNotExist:
                 return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
-                
+
+            # check_only: only block if another session is actively using the exam right now
             if inv.claimed_session_id and session_id and inv.claimed_session_id != session_id:
-                return Response({'error': 'This assessment is already in use. If this is not you, please contact our support team.'}, status=status.HTTP_409_CONFLICT)
+                if not _is_session_lock_stale(inv):
+                    return Response(
+                        {'error': 'This assessment is already in use. If this is not you, please contact our support team.'},
+                        status=status.HTTP_409_CONFLICT
+                    )
 
         assessment = inv.assessment
 
@@ -3044,6 +3080,76 @@ def record_terminal_close_strike_view(request, token):
             'limit': TERMINAL_CLOSE_LIMIT,
             'should_terminate': should_terminate,
         })
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def exam_tab_heartbeat_view(request, token):
+    """
+    Called every ~15 seconds by the active exam tab to keep the session lock alive.
+
+    Body (optional):
+        { "session_id": "<uuid>" }
+
+    - If the session_id matches the current claimed_session_id, update the
+      heartbeat timestamp so the lock is not considered stale.
+    - If no session is currently locked (claimed_session_id is None), claim it.
+    - If a *different* session_id is already locked AND still fresh, return 409.
+    - If the existing lock is stale (> 30 s), hand it to the caller.
+    """
+    SESSION_LOCK_TIMEOUT_SECONDS = 30
+
+    session_id = (
+        request.data.get('session_id')
+        or request.headers.get('X-Session-ID')
+        or ''
+    ).strip()
+
+    try:
+        with transaction.atomic():
+            invitation = CandidateInvitation.objects.select_for_update().get(
+                token=token,
+                is_deleted=False,
+            )
+
+            now = timezone.now()
+
+            # Helper: is the existing lock stale?
+            def _stale():
+                last_seen = getattr(invitation, 'claimed_session_last_seen', None)
+                if not last_seen:
+                    return True
+                return (now - last_seen).total_seconds() > SESSION_LOCK_TIMEOUT_SECONDS
+
+            if not session_id:
+                # Heartbeat without a session_id — just acknowledge
+                return Response({'ok': True, 'locked': False})
+
+            if invitation.claimed_session_id and invitation.claimed_session_id != session_id:
+                if not _stale():
+                    # Another fresh tab owns the lock
+                    return Response(
+                        {'error': 'This assessment is already in use in another tab.'},
+                        status=status.HTTP_409_CONFLICT,
+                    )
+                # Stale lock — take it over
+                invitation.claimed_session_id = session_id
+
+            elif not invitation.claimed_session_id:
+                invitation.claimed_session_id = session_id
+
+            # Update heartbeat timestamp
+            invitation.claimed_session_last_seen = now
+            invitation.save(update_fields=['claimed_session_id', 'claimed_session_last_seen'])
+
+        return Response({'ok': True, 'locked': True})
+
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:

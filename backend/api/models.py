@@ -883,6 +883,11 @@ class CandidateInvitation(models.Model):
         db_index=True,
         help_text="Session lock ID to prevent multiple openers for the same token."
     )
+    claimed_session_last_seen = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Last heartbeat timestamp from the active exam tab (used to detect stale locks).",
+    )
     # Timestamp recorded *exactly* when the "Book Interview Slot" email is sent
     # (i.e. after the 5-minute Celery delay fires).
     # Used as the anchor for the dynamic 3-day prep buffer + 7-available-days window.

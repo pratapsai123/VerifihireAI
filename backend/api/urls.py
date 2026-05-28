@@ -76,6 +76,7 @@ urlpatterns = [
     path('invitations/public/<uuid:token>/verify-identity/', views.verify_identity_view, name='verify_identity'),
     path('invitations/public/<uuid:token>/log/', views.log_candidate_activity_view, name='log_candidate_activity'),
     path('invitations/public/<uuid:token>/terminal-close-strike/', views.record_terminal_close_strike_view, name='record_terminal_close_strike'),
+    path('invitations/public/<uuid:token>/tab-heartbeat/', views.exam_tab_heartbeat_view, name='exam_tab_heartbeat'),
     path('invitations/<int:invitation_id>/activity-logs/', views.invitation_activity_logs_view, name='invitation_activity_logs'),
     path('invitations/public/<uuid:token>/terminate/', views.terminate_invitation_exam_view, name='terminate_invitation_exam'),
     path('candidate-details/', views.save_all_candidate_details_view, name='save_candidate_details'),
