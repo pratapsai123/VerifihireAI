@@ -77,7 +77,7 @@ from .models import (
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
 
     CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog,
-    CodingSubmission, SecuritySession
+    CodingSubmission, SecuritySession, IdentityLink
 )
 
 from .ocr_utils import pdf_page_to_png_bytes
@@ -350,9 +350,18 @@ def _convert_image_to_png_bytesio(source):
 
     pil_img = None
 
+    if source is None:
+        return None
 
-
-    if _is_file_path(source):
+    if hasattr(source, 'read'):
+        try:
+            source.seek(0)  # Reset pointer
+            pil_img = PILImage.open(source)
+            print(f"[report] Opened file-like image object: {source}")
+        except Exception as e:
+            print(f"[report] Cannot open file-like object: {e}")
+            return None
+    elif _is_file_path(source):
 
         # File path
 
@@ -748,7 +757,13 @@ def generate_candidate_report(submission_id):
 
           f"candidate_detail={'found (id=' + str(candidate_detail.id) + ')' if candidate_detail else 'NOT FOUND'}")
 
-
+    # Pre-calculate mismatch and integrity status early
+    integrity = CandidateIntegrity.objects.filter(invitation=inv).first()
+    is_mismatch = False
+    if candidate_detail:
+        is_mismatch = getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)
+    if integrity and not getattr(integrity, 'identity_verified', True):
+        is_mismatch = True
 
     # ── Build PDF ──
 
@@ -815,14 +830,14 @@ def generate_candidate_report(submission_id):
     if snap_img:
 
         # Simple single-row layout: [title + subtitle | photo]
-
+        mismatch_sub = '<br/><font size="11" color="#dc2626"><b>MANUAL REVIEW REQUIRED</b></font>' if is_mismatch else ''
         left_content = Paragraph(
 
             'Candidate Report<br/><font size="11">' +
 
             _safe(assessment.display_name or assessment.name or 'Assessment') +
 
-            '</font>',
+            '</font>' + mismatch_sub,
 
             styles['ReportTitle'],
 
@@ -870,6 +885,19 @@ def generate_candidate_report(submission_id):
 
         story.append(subtitle_para)
 
+        if is_mismatch:
+            manual_review_style = ParagraphStyle(
+                'ManualReviewHeaderStyle',
+                parent=styles['Normal'],
+                alignment=1, # Center
+                fontSize=11,
+                textColor=colors.HexColor('#dc2626'),
+                fontName='Helvetica-Bold',
+                spaceBefore=4
+            )
+            manual_review_para = Paragraph('MANUAL REVIEW REQUIRED', manual_review_style)
+            story.append(manual_review_para)
+
         print("[report] Header WITHOUT snapshot added to story")
 
 
@@ -893,21 +921,11 @@ def generate_candidate_report(submission_id):
     match_score_str = "100%"
     status_color = "#16a34a" # Green
 
-    # Fetch Integrity Score earlier for identity check
-    integrity = CandidateIntegrity.objects.filter(invitation=inv).first()
+    if is_mismatch:
+        identity_status = "IDENTITY MISMATCH DETECTED"
+        status_color = "#dc2626" # Red
 
     if candidate_detail:
-        # Initial check from CandidateDetails (baseline check)
-        is_mismatch = getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)
-        
-        # Continuous check from Integrity record
-        if integrity and not getattr(integrity, 'identity_verified', True):
-            is_mismatch = True
-
-        if is_mismatch:
-            identity_status = "IDENTITY MISMATCH DETECTED"
-            status_color = "#dc2626" # Red
-        
         # Format match score as percentage
         score_val = candidate_detail.face_match_score or 0.0
         # DeepFace match score is usually 1 - distance. We show it as percentage.
@@ -927,6 +945,15 @@ def generate_candidate_report(submission_id):
             Paragraph(f'<b><font color="{status_color}">{identity_status}</font></b>', styles['InfoValue']),
         ],
         _info_row('Face Matching Score', match_score_str, styles),
+    ]
+
+    if is_mismatch and candidate_detail and getattr(candidate_detail, 'identity_mismatch_reason', None):
+        info_data.append([
+            Paragraph('Mismatch Reason', styles['InfoLabel']),
+            Paragraph(f'<b><font color="#dc2626">{candidate_detail.identity_mismatch_reason}</font></b>', styles['InfoValue']),
+        ])
+
+    info_data.extend([
         _info_row('Assessment', assessment.display_name or assessment.name, styles),
 
         _info_row(
@@ -938,12 +965,76 @@ def generate_candidate_report(submission_id):
             styles,
 
         ),
-
-    ]
+    ])
 
     story.append(_kv_table(info_data, styles))
 
     story.append(Spacer(1, 12))
+
+    # Add Side-by-side Identity Comparison Table if mismatch is detected
+    if is_mismatch and candidate_detail:
+        # Get the first registered details snapshot (oldest in CandidateDetails) for this candidate
+        original_snapshot = None
+        if candidate_detail and candidate_detail.email:
+            first_details = CandidateDetails.objects.filter(email__iexact=candidate_detail.email.strip()).order_by('id').first()
+            if first_details and first_details.snapshot:
+                original_snapshot = first_details.snapshot
+        if not original_snapshot and inv.email:
+            first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+            if first_details and first_details.snapshot:
+                original_snapshot = first_details.snapshot
+
+        # Fallback to IdentityLink oldest snapshot
+        original_link_file = None
+        if not original_snapshot:
+            link = None
+            if candidate_detail and candidate_detail.email:
+                link = IdentityLink.objects.filter(email__iexact=candidate_detail.email.strip()).order_by('id').first()
+            if not link and inv.email:
+                link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+            if not link and candidate_detail and candidate_detail.pan_number:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_detail.pan_number.strip().upper())
+                if norm_pan:
+                    link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
+            if link and link.snapshot_image:
+                original_link_file = link.snapshot_image
+
+        # Create images using _make_rl_image helper
+        img_original = None
+        if original_snapshot:
+            img_original = _make_rl_image(original_snapshot, 2.2 * inch, 2.75 * inch)
+        elif original_link_file:
+            img_original = _make_rl_image(original_link_file, 2.2 * inch, 2.75 * inch)
+            
+        img_captured = None
+        if candidate_detail.snapshot:
+            img_captured = _make_rl_image(candidate_detail.snapshot, 2.2 * inch, 2.75 * inch)
+            
+        if img_original or img_captured:
+            orig_title = Paragraph('<b>Original Registered Face</b>', styles['Normal'])
+            capt_title = Paragraph('<b>Current Captured Face</b>', styles['Normal'])
+            
+            comparison_data = [
+                [orig_title, capt_title],
+                [
+                    img_original or Paragraph('No registered face image available', styles['Normal']),
+                    img_captured or Paragraph('No captured face image available', styles['Normal'])
+                ]
+            ]
+            comparison_table = Table(comparison_data, colWidths=[doc.width/2.0, doc.width/2.0])
+            comparison_table.setStyle(TableStyle([
+                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#dc2626')),
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#fee2e2')),
+                ('TOPPADDING', (0, 0), (-1, -1), 8),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ]))
+            
+            story.append(Paragraph('Identity Comparison (Manual Review Required)', styles['SectionHeader']))
+            story.append(comparison_table)
+            story.append(Spacer(1, 12))
+
 
 
 

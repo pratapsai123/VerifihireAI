@@ -1476,6 +1476,11 @@ class CandidateDetails(models.Model):
         blank=True,
         help_text="Detailed mismatch score if applicable"
     )
+    identity_mismatch_reason = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Reason for candidate identity verification hold/mismatch"
+    )
 
     
     # Metadata
