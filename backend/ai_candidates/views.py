@@ -372,7 +372,7 @@ class BulkInviteView(APIView):
 
                 )
 
-                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
 
                 link = f"{frontend_base}/interview-start/{candidate.public_token}"
 
@@ -1491,7 +1491,6 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
         try:
 
             candidate = self.get_object()
-
             now = timezone.now()
 
 
@@ -1520,9 +1519,9 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
                 candidate.link_opened_at = now
 
-                # Update status to Interviewing if still in a pre-interview state
+                # Update status to Interview if still in a pre-interview state
                 if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
-                    candidate.status = 'Interviewing'
+                    candidate.status = 'Interview'
                     candidate.save(update_fields=['link_opened_at', 'status'])
                 else:
                     candidate.save(update_fields=['link_opened_at'])
@@ -1601,38 +1600,9 @@ class CandidatePublicDetailView(generics.RetrieveAPIView):
 
 
 
-        if not candidate.link_opened_at:
 
-            candidate.link_opened_at = now
 
-            # Update status to Interviewing if still in a pre-interview state
-            if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
-                candidate.status = 'Interviewing'
-                candidate.save(update_fields=['link_opened_at', 'status'])
-            else:
-                candidate.save(update_fields=['link_opened_at'])
-
-            
-
-            # Log interview start
-
-            from .utils import log_automation_event
-
-            log_automation_event(
-
-                candidate, 
-
-                'STATUS_CHANGE', 
-
-                'SUCCESS', 
-
-                f"AI Interview session started. Candidate accessed the link.",
-
-                phase='INTERVIEW'
-
-            )
-
-        else:
+        if candidate.link_opened_at:
 
             elapsed = now - candidate.link_opened_at
 
@@ -1752,6 +1722,9 @@ class CandidatePublicStatusUpdateView(APIView):
     authentication_classes = []
 
 
+    # Support POST as well (for navigator.sendBeacon fallback which only supports POST)
+    def post(self, request, public_token):
+        return self.patch(request, public_token)
 
     def patch(self, request, public_token):
 
@@ -2486,7 +2459,27 @@ class CandidateRegistrationUpdateView(APIView):
                 
                 # Lock PAN now that registration is complete
                 candidate.pan_locked = True
-                candidate.save(update_fields=['pan_locked'])
+                
+                # Start the interview timer and update status
+                now = timezone.now()
+                if not candidate.link_opened_at:
+                    candidate.link_opened_at = now
+                    if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
+                        candidate.status = 'Interview'
+                        candidate.save(update_fields=['pan_locked', 'link_opened_at', 'status'])
+                    else:
+                        candidate.save(update_fields=['pan_locked', 'link_opened_at'])
+                    
+                    from .utils import log_automation_event
+                    log_automation_event(
+                        candidate,
+                        'STATUS_CHANGE',
+                        'SUCCESS',
+                        f"AI Interview session started. Candidate completed registration.",
+                        phase='INTERVIEW'
+                    )
+                else:
+                    candidate.save(update_fields=['pan_locked'])
                     
             except IntegrityError as e:
                 error_msg = str(e)
@@ -3069,7 +3062,7 @@ class CandidateTimelineView(APIView):
             candidate = Candidate.objects.get(pk=pk)
             # Permission check: ensure user belongs to same company
             user_profile = getattr(request.user, 'profile', None)
-            if not user_profile or (user_profile.company != candidate.company and not self.request.user.is_superuser):
+            if not self.request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
                 return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
 
             logs = []
@@ -3115,9 +3108,14 @@ class CandidateTimelineView(APIView):
                 integrity_qs = integrity_qs.filter(timestamp__gte=session_start)
             if session_end:
                 integrity_qs = integrity_qs.filter(timestamp__lte=session_end)
+            
+            # Send first 8 with full base64 for immediate display, rest with just metadata for lazy loading
+            INLINE_LIMIT = 8
+            integrity_count = 0
             for ilog in integrity_qs:
+                integrity_count += 1
                 local_ts = tz.localtime(ilog.timestamp) if ilog.timestamp else None
-                logs.append({
+                log_entry = {
                     'id': f'integrity_{ilog.id}',
                     'event_type': ilog.event_type.upper(),
                     'status': 'WARNING',
@@ -3127,7 +3125,18 @@ class CandidateTimelineView(APIView):
                     'details': {},
                     'timestamp': ilog.timestamp.isoformat() if ilog.timestamp else None,
                     'timestamp_formatted': local_ts.strftime('%B %d, %Y at %I:%M %p') if local_ts else '',
-                })
+                    'has_screenshot': bool(ilog.screenshot_base64),
+                    'has_webcam_screenshot': bool(ilog.webcam_screenshot_base64),
+                    'screenshot_id': ilog.id,
+                }
+                # Include inline base64 for first few so page renders immediately
+                if integrity_count <= INLINE_LIMIT:
+                    log_entry['screenshot_base64'] = ilog.screenshot_base64
+                    log_entry['webcam_screenshot_base64'] = ilog.webcam_screenshot_base64
+                else:
+                    log_entry['screenshot_base64'] = None
+                    log_entry['webcam_screenshot_base64'] = None
+                logs.append(log_entry)
 
             # 3. PipelineLog entries — only from this session window
             pipeline_qs = candidate.pipeline_logs.all().order_by('timestamp')
@@ -3144,6 +3153,42 @@ class CandidateTimelineView(APIView):
             return Response(logs, status=status.HTTP_200_OK)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class IntegrityScreenshotView(APIView):
+    """
+    Serves a single integrity screenshot image by log ID.
+    Returns the base64 image data for lazy loading on the frontend.
+    Query param: ?type=webcam (default) or ?type=screen
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, log_id):
+        try:
+            ilog = InterviewIntegrityLog.objects.select_related('candidate').get(pk=log_id)
+            # Permission check
+            user_profile = getattr(request.user, 'profile', None)
+            if not request.user.is_superuser and (not user_profile or user_profile.company != ilog.candidate.company):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+            img_type = request.query_params.get('type', 'webcam')
+            if img_type == 'screen':
+                data = ilog.screenshot_base64
+            else:
+                data = ilog.webcam_screenshot_base64
+
+            if not data:
+                return Response({'image': None}, status=status.HTTP_200_OK)
+
+            # Return as proper data URI if not already prefixed
+            if not data.startswith('data:'):
+                data = f'data:image/jpeg;base64,{data}'
+
+            return Response({'image': data}, status=status.HTTP_200_OK)
+        except InterviewIntegrityLog.DoesNotExist:
+            return Response({'error': 'Screenshot not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class LatestActiveBatchView(APIView):
     """
@@ -3188,7 +3233,7 @@ class CandidateReportDownloadView(APIView):
             
             # RBAC: Ensure user belongs to the same company or is a superuser
             user_profile = getattr(request.user, 'profile', None)
-            if not user_profile or (user_profile.company != candidate.company and not request.user.is_superuser):
+            if not request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
                 return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
 
             # Generate PDF in memory
@@ -3747,10 +3792,16 @@ class InterviewsOverviewView(APIView):
         user_profile = getattr(request.user, 'profile', None)
         company = user_profile.company if user_profile else None
 
+        fields_to_fetch = [
+            'id', 'batch_id', 'batch_name', 'job_title', 'created_at',
+            'score', 'completed_at', 'status', 'link_opened_at',
+            'public_token', 'full_name', 'email'
+        ]
+        
         if company:
-            candidates = Candidate.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+            candidates = Candidate.objects.filter(company=company, is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
         else:
-            candidates = Candidate.objects.filter(is_deleted=False).order_by('-created_at')
+            candidates = Candidate.objects.filter(is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
 
         # Group by batch
         from collections import defaultdict
@@ -3760,7 +3811,7 @@ class InterviewsOverviewView(APIView):
             batch_map[key].append(c)
 
         completed_statuses = {'Completed', 'Hired', 'Rejected', 'Interview Passed', 'Interview Failed'}
-        in_progress_statuses = {'Interviewing', 'Resume Passed', 'On-Hold', 'Resume Failed', 'New'}
+        in_progress_statuses = {'Interview', 'Resume Passed', 'On-Hold', 'Resume Failed', 'New'}
 
         total_all = 0
         completed_all = 0
@@ -3855,7 +3906,7 @@ class ResendInviteView(APIView):
 
         try:
             from django.core.mail import send_mail
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
             link = f"{frontend_base}/interview-start/{candidate.public_token}"
             name = candidate.full_name or 'Candidate'
             email = candidate.email

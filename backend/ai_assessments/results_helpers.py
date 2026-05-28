@@ -76,8 +76,8 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                 "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                 "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
-                "screenshot_base64": _encode_image_field_to_b64(snap.screenshot),
-                "webcam_screenshot_base64": _encode_image_field_to_b64(snap.webcam_screenshot),
+                "screenshot_base64": None, # Omitted from overview for performance; full logs in timeline API
+                "webcam_screenshot_base64": None,
             })
 
         results.append(
@@ -268,17 +268,17 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
             ai_cand_qs = Candidate.objects.filter(
                 company_id=company_id,
                 is_deleted=False,
-            ).order_by('-submission_date')
+            ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
         else:
             ai_cand_qs = Candidate.objects.filter(
                 is_deleted=False,
                 status__in=['Completed', 'Hired', 'Rejected', 'Resume Passed', 'Resume Failed', 'Extraction Failed']
-            ).order_by('-submission_date')
+            ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
     elif scoped_ids:
         ai_cand_qs = Candidate.objects.filter(
             user_profile_id__in=scoped_ids,
             is_deleted=False,
-        ).order_by('-submission_date')
+        ).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs').order_by('-submission_date')
     else:
         ai_cand_qs = Candidate.objects.none()
 
@@ -330,8 +330,11 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'integrity_logs': [
                     {
                         'event_type': log.event_type,
-                        'screenshot_base64': log.screenshot_base64,
-                        'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                        'screenshot_base64': None,
+                        'webcam_screenshot_base64': None,
+                        'has_screenshot': bool(log.screenshot_base64),
+                        'has_webcam_screenshot': bool(log.webcam_screenshot_base64),
+                        'screenshot_id': log.id,
                         'timestamp': log.timestamp.isoformat() if log.timestamp else None
                     } for log in s.integrity_logs.all()
                 ],

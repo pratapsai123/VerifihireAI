@@ -484,7 +484,7 @@ You must respond with a JSON object containing:
     "is_exit": true/false,
     "refined_next_question": "Next question if not clarification/exit",
     "feedback": "Feedback on current answer",
-    "score": 0-100,
+    "score": "0-10 (where 0 is completely wrong/irrelevant and 10 is a perfect expert answer)",
     "score_reason": "1-sentence justification for the score"
 }}"""
 
