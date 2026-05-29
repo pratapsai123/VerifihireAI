@@ -4,6 +4,15 @@ const { getSecuritySignatures, sendSecurityCheck, sendHeartbeat, logActivity } =
 const { selfDestruct } = require('./instanceManager');
 const { scanHardwareDevices, compareToBaseline, getStartupBaseline, initBaseline } = require('./hardwareScanner');
 
+/** Returns current local time as HH:MM:SS for terminal log clarity. */
+function ts() {
+  const d = new Date();
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  const ss = String(d.getSeconds()).padStart(2, '0');
+  return `[${hh}:${mm}:${ss}]`;
+}
+
 let scanTimer = null;
 let heartbeatTimer = null;
 let signatureTimer = null;
@@ -41,7 +50,7 @@ async function flushPendingViolation() {
   if (!pendingViolation || !current) return;
   
   try {
-    console.log('[monitor] Attempting to flush pending offline violation...');
+    console.log(ts(), '[monitor] Attempting to flush pending offline violation...');
     const response = await sendSecurityCheck(current.backendApiBase, {
       ...pendingViolation,
       session_id: current.sessionId,
@@ -49,7 +58,7 @@ async function flushPendingViolation() {
     });
     
     if (response) {
-      console.log('[monitor] Pending violation flushed successfully.');
+      console.log(ts(), '[monitor] Pending violation flushed successfully.');
       pendingViolation = null;
       
       if (response.action === 'STOP') {
@@ -58,7 +67,7 @@ async function flushPendingViolation() {
       }
     }
   } catch (err) {
-    console.warn('[monitor] Could not flush violation yet (still offline):', err.message);
+    console.warn(ts(), '[monitor] Could not flush violation yet (still offline):', err.message);
   }
 }
 
@@ -115,7 +124,7 @@ async function _doScan() {
 
     if (!verdict.safe) {
       lastScanWasViolation = true;
-      console.log('[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
+      console.log(ts(), '[monitor] POLICY VIOLATION DETECTED:', verdict.blocked.join(', '));
       const allApps = [...new Set(verdict.blocked)];
       const violationData = {
         status: 'VIOLATION',
@@ -133,11 +142,11 @@ async function _doScan() {
         pendingViolation = null; // Success, clear buffer
         if (response?.action === 'STOP') {
           stopMonitor();
-          console.log('[monitor] STOP action received — agent will self-destruct');
+          console.log(ts(), '[monitor] STOP action received — agent will self-destruct');
           setTimeout(() => selfDestruct(0), 2000);
         }
       } catch (err) {
-        console.warn('[monitor] Network down — buffering process violation for later reporting');
+        console.warn(ts(), '[monitor] Network down — buffering process violation for later reporting');
         pendingViolation = violationData;
       }
       return;
@@ -164,7 +173,7 @@ async function _doScan() {
     });
   } catch (err) {
     if (current) {
-        console.error('[monitor] Process scan error:', err.message);
+        console.error(ts(), '[monitor] Process scan error:', err.message);
     }
   }
 
@@ -188,7 +197,7 @@ async function _doScan() {
         });
         pendingViolation = null;
       } catch (err) {
-        console.warn('[monitor] Network down — buffering hardware violation');
+        console.warn(ts(), '[monitor] Network down — buffering hardware violation');
         pendingViolation = hwViolation;
       }
     } else {
@@ -280,12 +289,12 @@ async function sendAliveHeartbeat() {
       status: 'ALIVE',
     });
     if (failedHeartbeats > 0) {
-      console.log(`[monitor] Heartbeat recovered after ${failedHeartbeats} failed attempts`);
+      console.log(ts(), `[monitor] Heartbeat recovered after ${failedHeartbeats} failed attempts`);
     }
     failedHeartbeats = 0;
     if (response?.action === 'STOP') {
       stopMonitor();
-      console.log('[monitor] STOP action from heartbeat — agent will self-destruct');
+      console.log(ts(), '[monitor] STOP action from heartbeat — agent will self-destruct');
       setTimeout(() => selfDestruct(0), 2000);
     }
   } catch {
@@ -293,7 +302,7 @@ async function sendAliveHeartbeat() {
     // When heartbeats fail (network down), retry faster (every 3s instead of 10s)
     // so we refresh the backend timeout clock ASAP when connectivity returns.
     if (failedHeartbeats === 1) {
-      console.warn('[monitor] Heartbeat failed — network may be down. Retrying faster...');
+      console.warn(ts(), '[monitor] Heartbeat failed — network may be down. Retrying faster...');
     }
     if (failedHeartbeats <= 3) {
       // Schedule an extra retry in 3 seconds (in addition to the normal 10s interval)

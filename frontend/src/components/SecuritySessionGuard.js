@@ -54,7 +54,6 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
   const [pauseDevice, setPauseDevice] = useState('');
   const [warning, setWarning] = useState(false);
   const [blockedApp, setBlockedApp] = useState('');
-  const [timeLeft, setTimeLeft] = useState(180);
   const warningRef = useRef(false);
   useEffect(() => {
     warningRef.current = warning;
@@ -102,42 +101,8 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
     return () => window.removeEventListener('vh_exam_started', handler);
   }, [token]);
 
-  // FIX 2: Separate effect to handle termination - not inside setInterval
-  useEffect(() => {
-    if (!warning) return;
-    if (timeLeft <= 0) {
-      const sessionRecord = readSessionRecord(token);
-      const graceDetail = `Remote access application not closed within grace period. App: ${blockedApp}`;
-      (async () => {
-        await finalizeTerminatedExam(token, {
-          reason: TERMINATION_REASONS.GRACE_EXPIRED,
-          detail: graceDetail,
-        });
-        if (sessionRecord) {
-          stopLocalMonitor({
-            session_id: sessionRecord.session_id,
-            user_id: sessionRecord.user_id,
-            token,
-            agent_instance_id: sessionRecord.agent_instance_id,
-            immediate_shutdown: true,
-          }).catch(() => { });
-        }
-        clearPrecheckRecord(token);
-        window.onbeforeunload = null;
-        window.location.href = '/session-terminated?reason=remote_access';
-      })();
-    }
-  }, [timeLeft, warning, token, blockedApp]);
-
-  // Countdown timer for warning — only ticks when warning is active
-  useEffect(() => {
-    if (!warning) return;
-    if (timeLeft <= 0) return;
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [warning, timeLeft]);
+  // No grace-period timer — the warning overlay simply blocks the exam until
+  // the candidate closes the remote app. Polling will clear it automatically.
 
   const handleAgentTerminalClosed = async (sessionRecord) => {
     if (handlingTerminalCloseRef.current) return;
@@ -352,18 +317,13 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
         if (localViolationActive) {
           const pending = agentStatus.monitorState.pendingViolation;
           const appLabel = pending?.app || 'Remote access tool';
-
+          // Always update the displayed app list — even while warning is already showing.
+          // This ensures a second app (e.g. AnyDesk opened after Chrome Remote Desktop)
+          // appears immediately without needing a page refresh.
           if (!warningRef.current) {
             setWarning(true);
-            setBlockedApp(appLabel);
-
-            // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
-            const now = Date.now();
-            const start = pending?.violation_start_time ? new Date(pending.violation_start_time).getTime() : now;
-            const elapsed = Math.floor((now - start) / 1000);
-            const remaining = Math.max(0, 180 - elapsed);
-            setTimeLeft(remaining);
           }
+          setBlockedApp(appLabel);
         }
       } catch (err) {
         // If we can't reach the local agent while online, it means the terminal was closed.
@@ -410,25 +370,17 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
             );
             return;
           }
+          // Always update the displayed app list while WARN is active so the
+          // overlay reflects the latest set of blocked apps without a refresh.
           if (!warningRef.current) {
             setWarning(true);
-            setBlockedApp(status.blocked_app || 'Remote access tool');
-
-            // Set countdown only ONCE when warning starts to prevent constant re-renders and blinking
-            const start = new Date(status.violation_start_time).getTime();
-            const now = Date.now();
-            const elapsed = Math.floor((now - start) / 1000);
-            const remaining = Math.max(0, 180 - elapsed);
-            setTimeLeft(remaining);
           }
+          setBlockedApp(status.blocked_app || 'Remote access tool');
           return;
         }
 
         // CONTINUE / SAFE — clear any active warning
         if (!localViolationActive) {
-          if (warningRef.current) {
-            setTimeLeft(180);
-          }
           setWarning(false);
         }
 
@@ -546,48 +498,60 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       {warning && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 99999,
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'rgba(15, 23, 42, 0.97)',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
-          gap: 20, padding: 32, textAlign: 'center',
+          gap: 24, padding: 32, textAlign: 'center',
           backdropFilter: 'blur(8px)',
         }}>
           <div style={{
             width: 100, height: 100, borderRadius: '50%',
-            background: 'rgba(239, 68, 68, 0.1)',
+            background: 'rgba(239, 68, 68, 0.12)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             border: '2px solid #ef4444',
-            animation: 'pulse 2s infinite'
+            animation: 'pulse 2s infinite',
           }}>
             <div style={{ fontSize: 48 }}>⚠️</div>
           </div>
 
-          <div style={{ maxWidth: 500 }}>
-            <h2 style={{ color: '#fff', fontSize: '2rem', marginBottom: 12 }}>Security Warning</h2>
-            <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.6 }}>
-              Unauthorized remote access software has been detected on your system. Close it immediately to continue your exam.
+          <div style={{ maxWidth: 520 }}>
+            <h2 style={{ color: '#fff', fontSize: '2rem', marginBottom: 12, margin: '0 0 12px' }}>Exam Access Blocked</h2>
+            <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.6, margin: 0 }}>
+              Unauthorized remote access software is running on your system.
+              Your exam is <strong style={{ color: '#f87171' }}>paused</strong> until you close it.
             </p>
           </div>
 
           <div style={{
-            background: 'rgba(239, 68, 68, 0.15)',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
-            borderRadius: 16, padding: '24px 48px',
-            margin: '10px 0'
+            background: 'rgba(239, 68, 68, 0.12)',
+            border: '1px solid rgba(239, 68, 68, 0.4)',
+            borderRadius: 14, padding: '18px 36px',
           }}>
-            <p style={{ color: '#f87171', fontSize: '0.9rem', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>
-              Access Revocation in
+            <p style={{ color: '#f87171', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: 6, fontWeight: 700, letterSpacing: '0.08em' }}>
+              Detected application
             </p>
-            <div style={{
-              color: '#fff', fontSize: '4rem', fontWeight: 800, fontFamily: 'monospace',
-              fontVariantNumeric: 'tabular-nums'
-            }}>
-              {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+            <div style={{ color: '#fff', fontSize: '1.4rem', fontWeight: 700 }}>
+              {blockedApp || 'Remote Access Tool'}
             </div>
           </div>
 
-          <p style={{ color: '#fcd34d', fontSize: '1.1rem', fontWeight: 500 }}>
-            Please close the application immediately to avoid permanent disqualification.
+          <div style={{
+            background: 'rgba(250, 204, 21, 0.08)',
+            border: '1px solid rgba(250, 204, 21, 0.3)',
+            borderRadius: 12, padding: '16px 28px', maxWidth: 480,
+          }}>
+            <p style={{ color: '#fbbf24', fontSize: '1rem', fontWeight: 600, margin: '0 0 8px' }}>
+              ✅ How to resume your exam
+            </p>
+            <ol style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.8, margin: 0, paddingLeft: 20, textAlign: 'left' }}>
+              <li>Close <strong style={{ color: '#fff' }}>{blockedApp || 'the remote access application'}</strong> completely.</li>
+              <li>Open <strong style={{ color: '#fff' }}>Task Manager</strong> and end any related background processes.</li>
+              <li>Your exam will <strong style={{ color: '#fff' }}>resume automatically</strong> once the app is gone.</li>
+            </ol>
+          </div>
+
+          <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
+            This session is being monitored. Repeated violations may result in permanent disqualification.
           </p>
 
           <style>{`

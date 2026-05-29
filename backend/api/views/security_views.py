@@ -193,53 +193,26 @@ def security_check_view(request):
         return Response({'action': 'STOP'})
 
     if status_value == 'VIOLATION':
-        if session.violation_count == 0:
-            session.violation_count = 1
+        # Always warn — never auto-terminate based on time or repeated detections.
+        # The exam remains blocked (WARN) until the candidate closes the app.
+        if not session.violation_start_time:
             session.violation_start_time = timezone.now()
-            session.status = 'VIOLATION'
-            session.action = 'WARN'
-            session.blocked_app = app
-            session.blocked_process_name = process_name
-            session.blocked_app_path = app_path
-            session.reason = (
-                f'Warning: Remote access tool detected ({app}). '
-                'Close it within 3 minutes or access will be revoked.'
-            )
-            session.save()
-            return Response({
-                'action': 'WARN',
-                'violation_start_time': session.violation_start_time.isoformat(),
-                'blocked_app': app,
-            })
-
-        if session.action == 'WARN':
-            grace_seconds = (timezone.now() - session.violation_start_time).total_seconds()
-            if grace_seconds <= 180:
-                return Response({
-                    'action': 'WARN',
-                    'violation_start_time': session.violation_start_time.isoformat(),
-                    'blocked_app': app,
-                })
-            session.reason = (
-                f'Policy violation: Remote access tool ({app}) not closed within grace period.'
-            )
-        else:
-            session.violation_count += 1
-            session.reason = (
-                f'Policy violation: Second detection of remote access tool ({app}). '
-                'Access revoked immediately.'
-            )
-
+        session.violation_count = (session.violation_count or 0) + 1 if session.action != 'WARN' else (session.violation_count or 1)
         session.status = 'VIOLATION'
-        session.action = 'STOP'
+        session.action = 'WARN'
         session.blocked_app = app
         session.blocked_process_name = process_name
         session.blocked_app_path = app_path
-        session.is_active = False
+        session.reason = (
+            f'Remote access tool detected ({app}). '
+            'Exam access is blocked until the application is closed.'
+        )
         session.save()
-        _consume_agent_instance(session.agent_instance_id, session=session)
-        print(f"[SECURITY_CHECK] STOP triggered for {session_id} - App: {app}")
-        return Response({'action': 'STOP'})
+        print(f"[SECURITY_CHECK] WARN for {session_id} - App: {app}")
+        return Response({
+            'action': 'WARN',
+            'blocked_app': app,
+        })
 
     if status_value == 'HARDWARE_VIOLATION':
         session.status = 'HARDWARE_VIOLATION'
