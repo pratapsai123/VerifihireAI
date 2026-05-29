@@ -10,6 +10,12 @@ const cleanObjName = (repr) => {
     return name;
 };
 
+const getImageUrl = (url) => {
+    if (!url) return '';
+    if (url.startsWith('data:') || url.startsWith('http')) return url;
+    return `${API_BASE_URL.replace('/api', '')}${url}`;
+};
+
 const cleanName = (name) => {
     return name ? name.replace(/\bNone\b/gi, '').replace(/\s+/g, ' ').trim() : '';
 };
@@ -76,6 +82,16 @@ const Settings = () => {
     const [qualRejectMode, setQualRejectMode] = useState(false);
     const [downloadingQualId, setDownloadingQualId] = useState(null);
 
+    // Face Approvals state
+    const [faceRequests, setFaceRequests] = useState([]);
+    const [faceLoading, setFaceLoading] = useState(false);
+    const [faceReviewPopup, setFaceReviewPopup] = useState(null); // { req }
+    const [faceAdminNote, setFaceAdminNote] = useState('');
+    const [faceRejectMode, setFaceRejectMode] = useState(false);
+    const [faceRejectReason, setFaceRejectReason] = useState('');
+    const [faceApprovedChoice, setFaceApprovedChoice] = useState(true);
+    const [integrityApprovedChoice, setIntegrityApprovedChoice] = useState(true);
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -99,6 +115,7 @@ const Settings = () => {
         loadSettings();
         loadRequests();
         loadQualRequests();
+        loadFaceRequests();
     }, []);
 
     const loadSettings = async () => {
@@ -131,6 +148,38 @@ const Settings = () => {
             console.error('Failed to load qualification requests.');
         } finally {
             setQualLoading(false);
+        }
+    };
+
+    const loadFaceRequests = async () => {
+        setFaceLoading(true);
+        try {
+            const res = await axios.get(`${API_BASE_URL}/workflow/face-requests/`);
+            setFaceRequests(res.data);
+        } catch (err) {
+            console.error('Failed to load face update requests.');
+        } finally {
+            setFaceLoading(false);
+        }
+    };
+
+    const handleFaceAction = async (reqId, faceApproved, integrityApproved, adminNote = '') => {
+        try {
+            await axios.post(`${API_BASE_URL}/workflow/face-requests/${reqId}/action/`, {
+                face_approved: faceApproved,
+                integrity_approved: integrityApproved,
+                admin_note: adminNote
+            });
+            setMessage(`Review request submitted successfully.`);
+            setFaceReviewPopup(null);
+            setFaceRejectMode(false);
+            setFaceRejectReason('');
+            setFaceAdminNote('');
+            loadFaceRequests();
+            setTimeout(() => setMessage(''), 3000);
+        } catch (err) {
+            setError(err.response?.data?.error || `Failed to submit review request.`);
+            setTimeout(() => setError(''), 4000);
         }
     };
 
@@ -232,6 +281,26 @@ const Settings = () => {
         return matchesStatus && matchesSearch && matchesDate;
     });
 
+    const filteredFaceRequests = faceRequests.filter(req => {
+        const matchesStatus = filterStatus === 'all' || req.status === filterStatus;
+        const searchLower = searchTerm.toLowerCase();
+        
+        const candidateName = req.candidate_name || '';
+        const hrName = req.hr_name || '';
+        
+        const matchesSearch = 
+            candidateName.toLowerCase().includes(searchLower) ||
+            hrName.toLowerCase().includes(searchLower);
+
+        let matchesDate = true;
+        if (filterDate) {
+            const reqDate = new Date(req.requested_at).toISOString().split('T')[0];
+            matchesDate = reqDate === filterDate;
+        }
+
+        return matchesStatus && matchesSearch && matchesDate;
+    });
+
     return (
         <div className="dashboard-container">
             <Header />
@@ -264,6 +333,21 @@ const Settings = () => {
                         {qualRequests.filter(r => r.status === 'pending').length > 0 && (
                             <span style={{ marginLeft: '6px', background: '#dc2626', color: '#fff', borderRadius: '999px', padding: '1px 7px', fontSize: '0.72rem', fontWeight: '800' }}>
                                 {qualRequests.filter(r => r.status === 'pending').length}
+                            </span>
+                        )}
+                    </button>
+                    <button
+                        onClick={() => { setTab('face_approvals'); loadFaceRequests(); }}
+                        style={{
+                            padding: '10px 20px', border: 'none', background: 'none',
+                            borderBottom: tab === 'face_approvals' ? '3px solid #3b82f6' : 'none',
+                            color: tab === 'face_approvals' ? '#3b82f6' : '#6b7280', fontWeight: 'bold', cursor: 'pointer'
+                        }}
+                    >
+                        👤 Face Approvals
+                        {faceRequests.filter(r => r.status === 'pending').length > 0 && (
+                            <span style={{ marginLeft: '6px', background: '#dc2626', color: '#fff', borderRadius: '999px', padding: '1px 7px', fontSize: '0.72rem', fontWeight: '800' }}>
+                                {faceRequests.filter(r => r.status === 'pending').length}
                             </span>
                         )}
                     </button>
@@ -501,6 +585,373 @@ const Settings = () => {
                                     ))}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                )}
+
+                {/* ── Face Mismatch Approvals Tab ── */}
+                {tab === 'face_approvals' && (
+                    <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+                        <div style={{ padding: '1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                            <h3 style={{ margin: 0, color: '#3b82f6', fontWeight: '800' }}>👤 Face Mismatch Approvals</h3>
+                            <button onClick={loadFaceRequests} style={{ padding: '6px 14px', border: '1px solid #d1d5db', borderRadius: '8px', background: '#f9fafb', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>🔄 Refresh</button>
+                        </div>
+                        <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                <span style={{ fontWeight: '600', color: '#374151' }}>Filter:</span>
+                                <select
+                                    value={filterStatus}
+                                    onChange={e => setFilterStatus(e.target.value)}
+                                    style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: '#f9fafb', fontSize: '0.9rem' }}
+                                >
+                                    <option value="all">All Requests</option>
+                                    <option value="pending">⏳ Pending</option>
+                                    <option value="approved">✅ Approved</option>
+                                    <option value="rejected">❌ Rejected</option>
+                                </select>
+                            </div>
+                            <div style={{ flex: '1', minWidth: '200px', maxWidth: '400px' }}>
+                                <input 
+                                    type="text" 
+                                    placeholder="Search by name or HR recruiter..." 
+                                    value={searchTerm}
+                                    onChange={e => setSearchTerm(e.target.value)}
+                                    style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }}
+                                />
+                            </div>
+                            <div style={{ flex: '1', minWidth: '150px', maxWidth: '200px' }}>
+                                <input 
+                                    type="date" 
+                                    value={filterDate}
+                                    onChange={e => setFilterDate(e.target.value)}
+                                    style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }}
+                                />
+                            </div>
+                        </div>
+                        
+                        <div style={{ overflowX: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left' }}>
+                                <thead style={{ background: '#f3f4f6', color: '#4b5563', textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.05em' }}>
+                                    <tr>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Candidate</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Requested By</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>HR Reason</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Requested At</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Status</th>
+                                        <th style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb' }}>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {faceLoading ? (
+                                        <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>Loading...</td></tr>
+                                    ) : filteredFaceRequests.length === 0 ? (
+                                        <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>No face update requests found.</td></tr>
+                                    ) : filteredFaceRequests.map(req => (
+                                        <tr key={req.id} style={{ borderBottom: '1px solid #e5e7eb', background: req.status === 'pending' ? '#f0f9ff' : '#fff' }}>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <div style={{ fontWeight: '700', color: '#111827' }}>{req.candidate_name || '—'}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{req.candidate_email}</div>
+                                                <div style={{ fontSize: '0.7rem', color: '#9ca3af', marginTop: '2px' }}>PAN: {req.candidate_pan}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <div style={{ fontWeight: '600' }}>{req.hr_name}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{req.hr_role}</div>
+                                                <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>{req.hr_email}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top', maxWidth: '250px' }}>
+                                                <div style={{ fontSize: '0.82rem', color: '#374151', background: '#f9fafb', padding: '6px 10px', borderRadius: '6px', border: '1px solid #e5e7eb', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                                                    {req.hr_reason}
+                                                </div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <div>{new Date(req.requested_at).toLocaleDateString()}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{new Date(req.requested_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '700', background: req.status === 'pending' ? '#fef3c7' : req.status === 'approved' ? '#d1fae5' : '#fee2e2', color: req.status === 'pending' ? '#92400e' : req.status === 'approved' ? '#065f46' : '#991b1b' }}>
+                                                    {req.status === 'pending' ? '⏳ Pending' : req.status === 'approved' ? '✅ Approved' : '❌ Rejected'}
+                                                </span>
+                                                {req.status === 'rejected' && req.admin_note && (
+                                                    <div style={{ fontSize: '0.7rem', color: '#991b1b', marginTop: '4px', background: '#fef2f2', padding: '4px 8px', borderRadius: '4px' }}>Note: {req.admin_note}</div>
+                                                )}
+                                                {req.status === 'approved' && req.admin_name && (
+                                                    <div style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '4px' }}>By: {req.admin_name}</div>
+                                                )}
+                                                {req.status === 'approved' && req.admin_note && (
+                                                    <div style={{ fontSize: '0.7rem', color: '#4b5563', marginTop: '4px', background: '#f0fdf4', padding: '4px 8px', borderRadius: '4px' }}>Note: {req.admin_note}</div>
+                                                )}
+                                            </td>
+                                            <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
+                                                {req.status === 'pending' && isCompanyAdmin ? (
+                                                    <button
+                                                        onClick={() => { 
+                                                            setFaceReviewPopup({ req }); 
+                                                            setFaceRejectMode(false); 
+                                                            setFaceRejectReason(''); 
+                                                            setFaceAdminNote('');
+                                                            setFaceApprovedChoice(true);
+                                                            setIntegrityApprovedChoice(true);
+                                                        }}
+                                                        style={{ padding: '6px 14px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '0.8rem' }}
+                                                    >
+                                                        🔍 Review & Decide
+                                                    </button>
+                                                ) : req.status === 'pending' ? (
+                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting admin</span>
+                                                ) : (
+                                                    <span style={{ color: '#9ca3af' }}>—</span>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
+
+                {/* ── Face Mismatch & Combined Integrity Review Popup ── */}
+                {faceReviewPopup && (
+                    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1300, backdropFilter: 'blur(4px)' }}>
+                        <div style={{ background: '#fff', borderRadius: '20px', padding: '36px', width: '100%', maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 30px 80px rgba(0,0,0,0.25)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827' }}>
+                                    🔍 {faceReviewPopup.req.integrity_flagged ? "Review Identity Mismatch & Proctoring Integrity" : "Review Face Mismatch Request"}
+                                </h3>
+                                <button onClick={() => { setFaceReviewPopup(null); setFaceRejectMode(false); setFaceRejectReason(''); setFaceAdminNote(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                            </div>
+
+                            <div style={{ background: '#f9fafb', borderRadius: '12px', padding: '16px', marginBottom: '20px', border: '1px solid #e5e7eb' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.85rem' }}>
+                                    <div>
+                                        <span style={{ color: '#6b7280', fontWeight: '600' }}>Candidate Details:</span><br/>
+                                        <strong>{faceReviewPopup.req.candidate_name}</strong><br/>
+                                        <span style={{ color: '#6b7280', fontSize: '0.78rem' }}>{faceReviewPopup.req.candidate_email}</span><br/>
+                                        <span style={{ color: '#6b7280', fontSize: '0.78rem' }}>PAN: {faceReviewPopup.req.candidate_pan}</span>
+                                    </div>
+                                    <div>
+                                        <span style={{ color: '#6b7280', fontWeight: '600' }}>Requested By:</span><br/>
+                                        <strong>{faceReviewPopup.req.hr_name}</strong><br/>
+                                        <span style={{ color: '#6b7280', fontSize: '0.78rem' }}>{faceReviewPopup.req.hr_role}</span><br/>
+                                        <span style={{ color: '#6b7280', fontSize: '0.78rem' }}>{faceReviewPopup.req.hr_email}</span>
+                                    </div>
+                                    <div style={{ gridColumn: '1/-1' }}>
+                                        <span style={{ color: '#6b7280', fontWeight: '600' }}>HR Reason for Approval Request:</span><br/>
+                                        <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', marginTop: '4px', fontSize: '0.85rem', color: '#374151', fontStyle: 'italic' }}>
+                                            "{faceReviewPopup.req.hr_reason}"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Side by side photo comparison */}
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '24px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4b5563', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>Original Registered Face</span>
+                                    <div style={{ width: '100%', aspectRatio: '4/3', borderRadius: '12px', overflow: 'hidden', border: '2px solid #e5e7eb', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        {faceReviewPopup.req.original_face_url ? (
+                                            <img src={getImageUrl(faceReviewPopup.req.original_face_url)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Original Registered" />
+                                        ) : (
+                                            <span style={{ color: '#9ca3af', fontSize: '0.8rem' }}>No image available</span>
+                                        )}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>Captured Mismatch Face</span>
+                                    <div style={{ width: '100%', aspectRatio: '4/3', borderRadius: '12px', overflow: 'hidden', border: '2px solid #fee2e2', background: '#fdf2f2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        {faceReviewPopup.req.captured_face_url ? (
+                                            <img src={getImageUrl(faceReviewPopup.req.captured_face_url)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Captured Mismatch" />
+                                        ) : (
+                                            <span style={{ color: '#ef4444', fontSize: '0.8rem' }}>No image available</span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Proctoring Integrity Violations Log (if flagged) */}
+                            {faceReviewPopup.req.integrity_flagged && faceReviewPopup.req.integrity_details && (
+                                <div style={{ marginTop: '10px', marginBottom: '24px', padding: '20px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '12px', borderLeft: '5px solid #f59e0b', color: '#78350f' }}>
+                                    <h4 style={{ margin: '0 0 12px 0', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        ⚠️ Proctoring Integrity Violations Log
+                                    </h4>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', fontSize: '0.8rem', marginBottom: '16px' }}>
+                                        <div style={{ background: '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fde68a' }}>
+                                            <span style={{ color: '#92400e', fontWeight: '600' }}>Integrity Score:</span><br/>
+                                            <strong style={{ fontSize: '1rem', color: '#b45309' }}>{faceReviewPopup.req.integrity_details.integrity_score}%</strong>
+                                        </div>
+                                        <div style={{ background: '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fde68a' }}>
+                                            <span style={{ color: '#92400e', fontWeight: '600' }}>Tab Switches:</span><br/>
+                                            <strong>{faceReviewPopup.req.integrity_details.tab_switches}</strong>
+                                        </div>
+                                        <div style={{ background: '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fde68a' }}>
+                                            <span style={{ color: '#92400e', fontWeight: '600' }}>Phone Detections:</span><br/>
+                                            <strong>{faceReviewPopup.req.integrity_details.phone_detections}</strong>
+                                        </div>
+                                        <div style={{ background: '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fde68a' }}>
+                                            <span style={{ color: '#92400e', fontWeight: '600' }}>Multi-face:</span><br/>
+                                            <strong>{faceReviewPopup.req.integrity_details.multiface_detections}</strong>
+                                        </div>
+                                        <div style={{ background: '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fde68a' }}>
+                                            <span style={{ color: '#92400e', fontWeight: '600' }}>No face:</span><br/>
+                                            <strong>{faceReviewPopup.req.integrity_details.no_face_detections}</strong>
+                                        </div>
+                                    </div>
+                                    
+                                    {faceReviewPopup.req.integrity_details.suspicion_reasons && faceReviewPopup.req.integrity_details.suspicion_reasons.length > 0 && (
+                                        <div style={{ marginBottom: '16px', fontSize: '0.82rem' }}>
+                                            <span style={{ fontWeight: '700', color: '#92400e' }}>Suspicion Reasons:</span>
+                                            <ul style={{ margin: '4px 0 0 0', paddingLeft: '20px', lineHeight: '1.4' }}>
+                                                {faceReviewPopup.req.integrity_details.suspicion_reasons.map((r, idx) => <li key={idx}>{r}</li>)}
+                                            </ul>
+                                        </div>
+                                    )}
+
+                                    {/* Proctoring Screenshots Grid */}
+                                    {faceReviewPopup.req.integrity_screenshots && faceReviewPopup.req.integrity_screenshots.length > 0 && (
+                                        <div>
+                                            <span style={{ fontWeight: '700', color: '#92400e', fontSize: '0.82rem', display: 'block', marginBottom: '8px' }}>Captured Violation Screenshots:</span>
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '15px' }}>
+                                                {faceReviewPopup.req.integrity_screenshots.map((snap, idx) => (
+                                                    <div key={idx} style={{ background: '#fff', borderRadius: '8px', padding: '8px', border: '1px solid #fde68a', display: 'flex', flexDirection: 'column' }}>
+                                                        <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '6px', border: '1px solid #e5e7eb', background: '#f3f4f6', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                                                            {snap.screenshot_url || snap.webcam_screenshot_url ? (
+                                                                <img 
+                                                                    src={getImageUrl(snap.screenshot_url || snap.webcam_screenshot_url)} 
+                                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                                                    alt={snap.event_type} 
+                                                                />
+                                                            ) : (
+                                                                <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>No image</span>
+                                                            )}
+                                                        </div>
+                                                        <span style={{ fontSize: '0.72rem', fontWeight: '700', color: '#111827', marginTop: '6px', textTransform: 'capitalize' }}>
+                                                            {snap.event_type.replace(/_/g, ' ')}
+                                                        </span>
+                                                        <span style={{ fontSize: '0.65rem', color: '#6b7280', marginTop: '2px' }}>
+                                                            {new Date(snap.timestamp).toLocaleString()}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Decisions & Note Section */}
+                            <div style={{ background: '#f9fafb', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                                <h4 style={{ margin: '0 0 16px 0', fontSize: '0.92rem', fontWeight: '800', color: '#111827', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                    ⚙️ {faceReviewPopup.req.integrity_flagged ? "Combined Verification Decisions" : "Verification Decisions"}
+                                </h4>
+                                
+                                {/* Face Decision Block */}
+                                <div style={{ marginBottom: '20px' }}>
+                                    <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', display: 'block', marginBottom: '8px' }}>
+                                        1. Face Identity Mismatch Approval:
+                                    </span>
+                                    <div style={{ display: 'flex', gap: '20px' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                            <input 
+                                                type="radio" 
+                                                name="face_decision_opt" 
+                                                checked={faceApprovedChoice === true} 
+                                                onChange={() => setFaceApprovedChoice(true)} 
+                                            />
+                                            <span style={{ color: '#047857', fontWeight: '700' }}>Approve (Face matches candidate)</span>
+                                        </label>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                            <input 
+                                                type="radio" 
+                                                name="face_decision_opt" 
+                                                checked={faceApprovedChoice === false} 
+                                                onChange={() => setFaceApprovedChoice(false)} 
+                                            />
+                                            <span style={{ color: '#b91c1c', fontWeight: '700' }}>Reject (Face does not match)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {/* Integrity Decision Block (only if flagged) */}
+                                {faceReviewPopup.req.integrity_flagged && (
+                                    <div style={{ marginBottom: '20px', paddingTop: '12px', borderTop: '1px solid #e5e7eb' }}>
+                                        <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', display: 'block', marginBottom: '8px' }}>
+                                            2. Proctoring Integrity Approval:
+                                        </span>
+                                        <div style={{ display: 'flex', gap: '20px' }}>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                                <input 
+                                                    type="radio" 
+                                                    name="integrity_decision_opt" 
+                                                    checked={integrityApprovedChoice === true} 
+                                                    onChange={() => setIntegrityApprovedChoice(true)} 
+                                                />
+                                                <span style={{ color: '#047857', fontWeight: '700' }}>Approve (Override/accept flags)</span>
+                                            </label>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                                <input 
+                                                    type="radio" 
+                                                    name="integrity_decision_opt" 
+                                                    checked={integrityApprovedChoice === false} 
+                                                    onChange={() => setIntegrityApprovedChoice(false)} 
+                                                />
+                                                <span style={{ color: '#b91c1c', fontWeight: '700' }}>Reject (Disqualify candidate)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Expected Status Preview */}
+                                <div style={{
+                                    background: (faceApprovedChoice && (!faceReviewPopup.req.integrity_flagged || integrityApprovedChoice)) ? '#ecfdf5' : '#fef2f2',
+                                    border: '1px solid',
+                                    borderColor: (faceApprovedChoice && (!faceReviewPopup.req.integrity_flagged || integrityApprovedChoice)) ? '#a7f3d0' : '#fecaca',
+                                    borderRadius: '8px',
+                                    padding: '12px 16px',
+                                    marginBottom: '20px',
+                                    fontSize: '0.85rem',
+                                    fontWeight: '800',
+                                    color: (faceApprovedChoice && (!faceReviewPopup.req.integrity_flagged || integrityApprovedChoice)) ? '#047857' : '#b91c1c',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px'
+                                }}>
+                                    {(faceApprovedChoice && (!faceReviewPopup.req.integrity_flagged || integrityApprovedChoice)) ? (
+                                        <>✅ Candidate status will change to: Qualified (Selected)</>
+                                    ) : (
+                                        <>❌ Candidate status will change to: Not Qualified (Rejected)</>
+                                    )}
+                                </div>
+
+                                {/* Admin Note */}
+                                <div style={{ marginBottom: '20px' }}>
+                                    <label style={{ display: 'block', fontWeight: '700', fontSize: '0.85rem', color: '#374151', marginBottom: '6px' }}>
+                                        Admin Notes / Audit Justification (Optional)
+                                    </label>
+                                    <textarea
+                                        value={faceAdminNote}
+                                        onChange={e => setFaceAdminNote(e.target.value)}
+                                        placeholder="Add notes explaining your decision (e.g., ID verified manually, proctoring snapshots inspected)..."
+                                        rows={3}
+                                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                                    />
+                                </div>
+
+                                {/* Actions */}
+                                <div style={{ display: 'flex', gap: '12px' }}>
+                                    <button 
+                                        onClick={() => { setFaceReviewPopup(null); setFaceAdminNote(''); }} 
+                                        style={{ flex: 1, padding: '12px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600' }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button 
+                                        onClick={() => handleFaceAction(faceReviewPopup.req.id, faceApprovedChoice, faceReviewPopup.req.integrity_flagged ? integrityApprovedChoice : null, faceAdminNote)} 
+                                        style={{ flex: 2, padding: '12px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: '700' }}
+                                    >
+                                        Submit Decisions
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}

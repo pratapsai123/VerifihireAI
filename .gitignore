@@ -54,12 +54,15 @@ copilot-messages.log
 # Python cache
 __pycache__/
 *.pyc
-
+ 
 # Virtual environments
 venv/
-
+ 
 # Node modules
 node_modules/
-
+ 
 # DeepFace registered faces
 deepface/data/registered_faces/
+
+#secureAgent
+secureAgent/dist/

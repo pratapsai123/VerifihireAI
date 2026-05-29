@@ -125,10 +125,15 @@ function ProfileDropdown() {
 
     const fetchPendingCount = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
-        setPendingCount(res.data.count || 0);
+        const [delRes, qualRes, faceRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`),
+          axios.get(`${API_BASE_URL}/workflow/qualification-requests/count/`),
+          axios.get(`${API_BASE_URL}/workflow/face-requests/count/`)
+        ]);
+        const total = (delRes.data.count || 0) + (qualRes.data.count || 0) + (faceRes.data.count || 0);
+        setPendingCount(total);
       } catch (err) {
-        console.error("Failed to fetch pending count");
+        console.error("Failed to fetch pending count", err);
       }
     };
     fetchPendingCount();

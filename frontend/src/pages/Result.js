@@ -99,6 +99,10 @@ export default function Result() {
     const [downloadingIds, setDownloadingIds] = useState(new Set());
     const [qualReasonPopup, setQualReasonPopup] = useState({ show: false, submissionId: null, status: '', candidateName: '', reason: '', submitting: false });
     const [selected, setSelected] = useState(new Set());
+    const [photoApprovalRow, setPhotoApprovalRow] = useState(null);
+    const [confirmPhotoModalOpen, setConfirmPhotoModalOpen] = useState(false);
+    const [photoSubmitting, setPhotoSubmitting] = useState(false);
+    const [photoApprovalReason, setPhotoApprovalReason] = useState('');
 
     // Autocomplete states
     const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -272,6 +276,51 @@ export default function Result() {
         } catch (err) {
             alert(err.response?.data?.error || 'Failed to submit request.');
             setQualReasonPopup(prev => ({ ...prev, submitting: false }));
+        }
+    };
+
+    const handleApprovePhoto = async () => {
+        if (!photoApprovalRow) return;
+        if (!photoApprovalReason.trim()) {
+            alert("Please provide an approval reason for this manual verification.");
+            return;
+        }
+        setPhotoSubmitting(true);
+        try {
+            const tokenVal = localStorage.getItem('token');
+            const config = tokenVal ? { headers: { Authorization: `Bearer ${tokenVal}` } } : {};
+            const resp = await axios.post(
+                `${API_BASE_URL}/results/${photoApprovalRow.submission_id}/approve-photo/`,
+                { reason: photoApprovalReason.trim() },
+                config
+            );
+            
+            alert(resp.data.message || "Manual review approval complete. Baseline registered face updated.");
+            
+            const updatedRow = {
+                ...photoApprovalRow,
+                photo_update_approved: true,
+                photo_update_approved_by: resp.data.photo_update_approved_by,
+                photo_update_approved_at: resp.data.photo_update_approved_at,
+                photo_update_reason: resp.data.photo_update_reason,
+                previous_registered_face_url: photoApprovalRow.original_identity_photo_url
+            };
+            
+            // Update quickViewRow if currently active
+            if (quickViewRow && quickViewRow.submission_id === photoApprovalRow.submission_id) {
+                setQuickViewRow(updatedRow);
+            }
+            
+            // Update in overview list
+            setOverview(prev => prev.map(r => r.submission_id === photoApprovalRow.submission_id ? updatedRow : r));
+            
+            setConfirmPhotoModalOpen(false);
+            setPhotoApprovalRow(null);
+            setPhotoApprovalReason('');
+        } catch (err) {
+            alert(err.response?.data?.error || err.message || "Failed to approve photo.");
+        } finally {
+            setPhotoSubmitting(false);
         }
     };
 
@@ -1032,20 +1081,41 @@ export default function Result() {
                                                         )}
                                                         {!r.qual_pending && (r.status === 'hold' || r.status === 'HOLD') && r.submission_id && (
                                                             <div className="status-actions" style={{ display: 'flex', gap: '4px' }}>
-                                                                <button
-                                                                    onClick={() => handleUpdateResult(r, 'selected')}
-                                                                    title="Mark as Qualified"
-                                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#10b981', padding: 0 }}
-                                                                >
-                                                                    <UserCheck size={18} />
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => handleUpdateResult(r, 'rejected')}
-                                                                    title="Mark as Not Qualified"
-                                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#ef4444', padding: 0 }}
-                                                                >
-                                                                    <UserX size={18} />
-                                                                </button>
+                                                                {(r.identity_mismatch_detected && r.photo_update_status !== 'approved' && !r.photo_update_approved) ? (
+                                                                    <>
+                                                                        <button
+                                                                            disabled
+                                                                            title="Requires Admin Review in Settings & Workflows"
+                                                                            style={{ border: 'none', background: 'none', cursor: 'not-allowed', color: '#9ca3af', padding: 0, opacity: 0.5 }}
+                                                                        >
+                                                                            <UserCheck size={18} />
+                                                                        </button>
+                                                                        <button
+                                                                            disabled
+                                                                            title="Requires Admin Review in Settings & Workflows"
+                                                                            style={{ border: 'none', background: 'none', cursor: 'not-allowed', color: '#fca5a5', padding: 0, opacity: 0.5 }}
+                                                                        >
+                                                                            <UserX size={18} />
+                                                                        </button>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <button
+                                                                            onClick={() => handleUpdateResult(r, 'selected')}
+                                                                            title="Mark as Qualified"
+                                                                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#10b981', padding: 0 }}
+                                                                        >
+                                                                            <UserCheck size={18} />
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() => handleUpdateResult(r, 'rejected')}
+                                                                            title="Mark as Not Qualified"
+                                                                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#ef4444', padding: 0 }}
+                                                                        >
+                                                                            <UserX size={18} />
+                                                                        </button>
+                                                                    </>
+                                                                )}
                                                             </div>
                                                         )}
                                                     </div>
@@ -1306,34 +1376,38 @@ export default function Result() {
                                 )}
                             </div>
                         ) : (
-                            <div className="quickview-grid">
-                                {[
-                                    { label: 'ID: Submission ID', value: quickViewRow.submission_id },
-                                    { label: 'ID: Invitation ID', value: quickViewRow.invitation_id },
-                                    { label: 'ID: Candidate ID', value: quickViewRow.candidate?.id || quickViewRow.candidate_id },
-                                    { label: 'Workflow: Raw Status', value: quickViewRow.status },
-                                    { label: 'Workflow: Delete Requested', value: quickViewRow.delete_requested ? 'Yes' : 'No' },
-                                    { label: 'Workflow: Report Available', value: quickViewRow.submission_id ? 'Yes' : 'No' },
-                                    { label: 'Scoring: Objective Weightage', value: hasValue(quickViewRow.assessment?.weightage_objective) ? `${quickViewRow.assessment.weightage_objective}%` : null },
-                                    { label: 'Scoring: Coding Weightage', value: hasValue(quickViewRow.assessment?.weightage_coding) ? `${quickViewRow.assessment.weightage_coding}%` : null },
-                                    { label: 'Scoring: Objective Marks Missing', value: hasValue(quickViewRow.objective_total) && hasValue(quickViewRow.objective_score) ? `${Math.max(0, Number(quickViewRow.objective_total) - Number(quickViewRow.objective_score))}` : null },
-                                    { label: 'Scoring: Coding Marks Missing', value: hasValue(quickViewRow.coding_total) && hasValue(quickViewRow.coding_score) ? `${Math.max(0, Number(quickViewRow.coding_total) - Number(quickViewRow.coding_score))}` : null },
-                                    { label: 'Integrity: Warnings Count', value: quickViewRow.integrity?.warning_logs?.length ? `${quickViewRow.integrity.warning_logs.length}` : '0' },
-                                    {
-                                        label: 'Integrity: Warning Types', value: Array.isArray(quickViewRow.integrity?.warning_logs) && quickViewRow.integrity.warning_logs.length > 0
-                                            ? [...new Set(quickViewRow.integrity.warning_logs.map((w) => w?.event_type || w?.type).filter(Boolean))].join(', ')
-                                            : null
-                                    },
-                                    { label: 'Meta: Created At', value: quickViewRow.created_at ? new Date(quickViewRow.created_at).toLocaleString() : null },
-                                    { label: 'Meta: Updated At', value: quickViewRow.updated_at ? new Date(quickViewRow.updated_at).toLocaleString() : null },
-                                ]
-                                    .filter((item) => hasValue(item.value))
-                                    .map((item) => (
-                                        <div key={item.label}>
-                                            <span>{item.label}</span>
-                                            <strong>{item.value}</strong>
-                                        </div>
-                                    ))}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '0 24px', flex: 1, overflowY: 'auto' }}>
+
+
+                                <div className="quickview-grid">
+                                    {[
+                                        { label: 'ID: Submission ID', value: quickViewRow.submission_id },
+                                        { label: 'ID: Invitation ID', value: quickViewRow.invitation_id },
+                                        { label: 'ID: Candidate ID', value: quickViewRow.candidate?.id || quickViewRow.candidate_id },
+                                        { label: 'Workflow: Raw Status', value: quickViewRow.status },
+                                        { label: 'Workflow: Delete Requested', value: quickViewRow.delete_requested ? 'Yes' : 'No' },
+                                        { label: 'Workflow: Report Available', value: quickViewRow.submission_id ? 'Yes' : 'No' },
+                                        { label: 'Scoring: Objective Weightage', value: hasValue(quickViewRow.assessment?.weightage_objective) ? `${quickViewRow.assessment.weightage_objective}%` : null },
+                                        { label: 'Scoring: Coding Weightage', value: hasValue(quickViewRow.assessment?.weightage_coding) ? `${quickViewRow.assessment.weightage_coding}%` : null },
+                                        { label: 'Scoring: Objective Marks Missing', value: hasValue(quickViewRow.objective_total) && hasValue(quickViewRow.objective_score) ? `${Math.max(0, Number(quickViewRow.objective_total) - Number(quickViewRow.objective_score))}` : null },
+                                        { label: 'Scoring: Coding Marks Missing', value: hasValue(quickViewRow.coding_total) && hasValue(quickViewRow.coding_score) ? `${Math.max(0, Number(quickViewRow.coding_total) - Number(quickViewRow.coding_score))}` : null },
+                                        { label: 'Integrity: Warnings Count', value: quickViewRow.integrity?.warning_logs?.length ? `${quickViewRow.integrity.warning_logs.length}` : '0' },
+                                        {
+                                            label: 'Integrity: Warning Types', value: Array.isArray(quickViewRow.integrity?.warning_logs) && quickViewRow.integrity.warning_logs.length > 0
+                                                ? [...new Set(quickViewRow.integrity.warning_logs.map((w) => w?.event_type || w?.type).filter(Boolean))].join(', ')
+                                                : null
+                                        },
+                                        { label: 'Meta: Created At', value: quickViewRow.created_at ? new Date(quickViewRow.created_at).toLocaleString() : null },
+                                        { label: 'Meta: Updated At', value: quickViewRow.updated_at ? new Date(quickViewRow.updated_at).toLocaleString() : null },
+                                    ]
+                                        .filter((item) => hasValue(item.value))
+                                        .map((item) => (
+                                            <div key={item.label}>
+                                                <span>{item.label}</span>
+                                                <strong>{item.value}</strong>
+                                            </div>
+                                        ))}
+                                </div>
                             </div>
                         )}
                         <div className="quickview-footer" style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 24px', borderTop: '1px solid #e2e8f0' }}>
@@ -1523,6 +1597,117 @@ export default function Result() {
                                 }}
                             >
                                 {qualReasonPopup.submitting ? '⏳ Submitting...' : '📨 Submit for Approval'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* ── Approve & Update Face Confirmation Modal ─────────────── */}
+            {confirmPhotoModalOpen && photoApprovalRow && (
+                <div style={{
+                    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999,
+                    backdropFilter: 'blur(4px)'
+                }}>
+                    <div style={{
+                        background: '#fff', borderRadius: '16px', padding: '28px',
+                        width: '90%', maxWidth: '520px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                        border: '1px solid #e5e7eb', display: 'flex', flexDirection: 'column', gap: '16px'
+                    }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #f1f5f9', paddingBottom: '12px' }}>
+                            <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: '800', color: '#1e293b' }}>
+                                Approve & Update Registration
+                            </h3>
+                            <button
+                                onClick={() => { setConfirmPhotoModalOpen(false); setPhotoApprovalRow(null); setPhotoApprovalReason(''); }}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#94a3b8' }}
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <div style={{
+                                padding: '12px',
+                                backgroundColor: '#fee2e2',
+                                border: '1px solid #fca5a5',
+                                borderRadius: '8px',
+                                color: '#991b1b',
+                                fontSize: '12.5px',
+                                lineHeight: 1.45,
+                                fontWeight: '500'
+                            }}>
+                                ⚠️ <strong>CRITICAL WARNING:</strong> This action will update the registered baseline face with the candidate's current captured face, but will <strong>NOT</strong> remove mismatch history, flags, or audit proof records. All comparison evidence will remain permanently visible in reports and logs.
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', margin: '8px 0' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                                <span style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>Original Registered</span>
+                                <div style={{
+                                    width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #cbd5e1',
+                                    backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                }}>
+                                    {photoApprovalRow.original_identity_photo_url ? (
+                                        <img src={photoApprovalRow.original_identity_photo_url} alt="Original" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    ) : (
+                                        <span style={{ fontSize: '11px', color: '#94a3b8' }}>No Image</span>
+                                    )}
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                                <span style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>Current Captured</span>
+                                <div style={{
+                                    width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #cbd5e1',
+                                    backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                }}>
+                                    {photoApprovalRow.candidate_photo_url ? (
+                                        <img src={photoApprovalRow.candidate_photo_url} alt="Captured" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    ) : (
+                                        <span style={{ fontSize: '11px', color: '#94a3b8' }}>No Image</span>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: '700', color: '#475569' }}>
+                                APPROVAL REASON (AUDIT TRAIL) <span style={{ color: '#ef4444' }}>*</span>
+                            </label>
+                            <textarea
+                                value={photoApprovalReason}
+                                onChange={(e) => setPhotoApprovalReason(e.target.value)}
+                                placeholder="Explain why this identity mismatch is being approved (e.g. facial verification confirmed manually after PAN card check)..."
+                                rows={3}
+                                style={{
+                                    width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1',
+                                    fontSize: '13px', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box'
+                                }}
+                            />
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
+                            <button
+                                onClick={() => { setConfirmPhotoModalOpen(false); setPhotoApprovalRow(null); setPhotoApprovalReason(''); }}
+                                style={{
+                                    flex: 1, backgroundColor: '#fff', color: '#475569', border: '1px solid #cbd5e1',
+                                    padding: '12px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', fontSize: '13px'
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleApprovePhoto}
+                                disabled={photoSubmitting || !photoApprovalReason.trim()}
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: photoSubmitting || !photoApprovalReason.trim() ? '#94a3b8' : '#10b981',
+                                    color: '#fff', border: 'none', padding: '12px', borderRadius: '8px',
+                                    cursor: photoSubmitting || !photoApprovalReason.trim() ? 'not-allowed' : 'pointer',
+                                    fontWeight: '700', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                                }}
+                            >
+                                {photoSubmitting ? 'Approving...' : 'Confirm Approval'}
                             </button>
                         </div>
                     </div>

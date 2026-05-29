@@ -2,7 +2,7 @@ from .._imports import *
 from .._imports import _is_application_admin_email
 from ai_assessments.results_helpers import get_ai_assessment_results, get_ai_candidate_results
 from api.utils.batch_utils import generate_batch_id, generate_batch_name
-from ..models import CandidateSubmission, QualificationRequest
+from ..models import CandidateSubmission, QualificationRequest, FaceUpdateRequest
 from .assessment_views import _is_valid_pan
 from django.core.files.base import ContentFile
 import base64
@@ -1296,6 +1296,23 @@ def _update_submission_scoring_logic(submission, finalize=False):
             MIN_CODING_THRESHOLD = 50.0
             min_pass = 60.0
 
+        # Check FaceUpdateRequest overrides
+        from api.models import FaceUpdateRequest
+        latest_req = FaceUpdateRequest.objects.filter(submission=submission).order_by('-requested_at').first()
+        
+        integrity_approved_override = False
+        face_approved_override = False
+        request_rejected_disqualification = False
+        
+        if latest_req:
+            if latest_req.status == 'approved':
+                if latest_req.integrity_flagged and latest_req.integrity_approved:
+                    integrity_approved_override = True
+                if latest_req.face_approved or latest_req.face_approved is None:
+                    face_approved_override = True
+            elif latest_req.status == 'rejected':
+                request_rejected_disqualification = True
+
         MIN_INTEGRITY_THRESHOLD = 70.0
         
         # 7. Get Integrity Score
@@ -1316,24 +1333,28 @@ def _update_submission_scoring_logic(submission, finalize=False):
         except Exception:
             pass
 
+        # Apply overrides
+        passed_integrity = (integrity_score >= MIN_INTEGRITY_THRESHOLD) or integrity_approved_override
+        if face_approved_override:
+            is_identity_mismatch = False
+
         # 8. Check Section Pass/Fail
         # Candidate must pass BOTH the overall threshold AND section-specific minimums
         
         # 9. Determine Result (Status)
-        is_malpractice = (integrity_score < 70)
+        is_malpractice = (integrity_score < 70) and not integrity_approved_override
         
         # 10. Check Qualification
         passed_overall = final_percentage_rounded >= min_pass
         passed_mcq = submission.objective_percentage >= MIN_MCQ_THRESHOLD
         passed_coding = submission.coding_percentage >= MIN_CODING_THRESHOLD
-        passed_integrity = (integrity_score >= MIN_INTEGRITY_THRESHOLD)
 
         has_mcq = (submission.objective_total > 0)
         has_coding = (submission.coding_total > 0)
         
         is_zero_score = (final_percentage_rounded <= 0) or (submission.score == 0 and (has_mcq or has_coding))
 
-        if is_zero_score:
+        if is_zero_score or request_rejected_disqualification:
             submission.is_qualified = False
             submission.result = 'rejected'
         elif not passed_overall:
@@ -1902,20 +1923,34 @@ def get_invitation_result_view(request, token):
                     'feedback': getattr(submission, 'feedback', None),
 
                     # Mismatch fields inside result
-                    'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                    'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
                     'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                     'original_identity_photo_url': original_identity_photo_url,
                     'candidate_photo_url': latest_details.snapshot if latest_details else None,
+                    'photo_update_approved': latest_details.photo_update_approved if latest_details else False,
+                    'photo_update_approved_by': latest_details.photo_update_approved_by if latest_details else None,
+                    'photo_update_approved_at': latest_details.photo_update_approved_at.isoformat() if (latest_details and latest_details.photo_update_approved_at) else None,
+                    'photo_update_reason': latest_details.photo_update_reason if latest_details else None,
+                    'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
+                    'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
+                    'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
                 },
                 'integrity': {
                     'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                     'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                 },
                 # Mismatch fields at top-level
-                'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
                 'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                 'original_identity_photo_url': original_identity_photo_url,
                 'candidate_photo_url': latest_details.snapshot if latest_details else None,
+                'photo_update_approved': latest_details.photo_update_approved if latest_details else False,
+                'photo_update_approved_by': latest_details.photo_update_approved_by if latest_details else None,
+                'photo_update_approved_at': latest_details.photo_update_approved_at.isoformat() if (latest_details and latest_details.photo_update_approved_at) else None,
+                'photo_update_reason': latest_details.photo_update_reason if latest_details else None,
+                'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
+                'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
+                'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
             },
             status=status.HTTP_200_OK
         )
@@ -2135,10 +2170,17 @@ def results_overview_view(request):
                     'created_at': inv.created_at.isoformat() if inv.created_at else None,
 
                     # Identity mismatch fields
-                    'identity_mismatch_detected': latest_details.identity_mismatch_detected if latest_details else False,
+                    'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
                     'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                     'original_identity_photo_url': original_identity_photo_url,
                     'candidate_photo_url': latest_details.snapshot if latest_details else None,
+                    'photo_update_approved': latest_details.photo_update_approved if latest_details else False,
+                    'photo_update_approved_by': latest_details.photo_update_approved_by if latest_details else None,
+                    'photo_update_approved_at': latest_details.photo_update_approved_at.isoformat() if (latest_details and latest_details.photo_update_approved_at) else None,
+                    'photo_update_reason': latest_details.photo_update_reason if latest_details else None,
+                    'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
+                    'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
+                    'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
                 }
             )
 
@@ -2805,6 +2847,17 @@ def save_all_candidate_details_view(request):
             }
         )
 
+        if has_any_mismatch:
+            # Check if we already logged a mismatch for this invitation to avoid duplicates
+            already_logged = any(log.get('action') == 'Identity Mismatch Detected' for log in (invitation.activity_logs or []))
+            if not already_logged:
+                _append_invitation_activity_log(
+                    invitation,
+                    action='Identity Mismatch Detected',
+                    details=f"Candidate identity mismatch detected: {mismatch_reason or 'Face/Email/PAN mismatch'}.",
+                    category='security'
+                )
+
         return Response({
             'success': True,
             'message': 'Candidate details saved successfully',
@@ -3323,6 +3376,12 @@ def update_submission_result_view(request, submission_id):
         except CandidateSubmission.DoesNotExist:
             return Response({'error': 'Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        # Block manual status override if there is an unresolved identity mismatch
+        details = CandidateDetails.objects.filter(invitation=submission.invitation).order_by('id').last()
+        if details and (getattr(details, 'identity_mismatch_detected', False) or getattr(details, 'identity_mismatch', False)):
+            if not getattr(details, 'photo_update_approved', False) and details.photo_update_status != 'approved':
+                return Response({'error': 'This candidate has an unresolved identity mismatch. Please action the request in the Settings & Workflows page.'}, status=status.HTTP_400_BAD_REQUEST)
+
         is_admin = (
             user_profile
             and (
@@ -3399,4 +3458,688 @@ def update_submission_result_view(request, submission_id):
 
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def _render_decision_page(req, error=None, success=None, decision_result=None):
+    from django.utils import timezone
+    
+    # Format dates
+    requested_at_str = timezone.localtime(req.requested_at).strftime('%d %b %Y, %I:%M %p') if req.requested_at else '-'
+    decided_at_str = timezone.localtime(req.decided_at).strftime('%d %b %Y, %I:%M %p') if req.decided_at else '-'
+    
+    details = req.candidate_details
+    candidate_name = f"{details.first_name} {details.last_name}" if details else "-"
+    candidate_email = details.email if details else "-"
+    candidate_pan = details.pan_number if details else "-"
+    
+    hr_profile = req.hr_user
+    hr_name = f"{hr_profile.first_name} {hr_profile.last_name or ''}" if hr_profile else "HR Recruiter"
+    hr_email = hr_profile.email if hr_profile else "-"
+    
+    original_url = ""
+    is_backup_valid = False
+    if req.original_face_backup:
+        try:
+            if req.original_face_backup.storage.exists(req.original_face_backup.name) and req.original_face_backup.size > 1000:
+                original_url = req.original_face_backup.url
+                is_backup_valid = True
+        except Exception:
+            pass
+
+    if not is_backup_valid and details:
+        first_details = CandidateDetails.objects.filter(email=details.email).order_by('id').first()
+        if first_details and first_details.snapshot:
+            original_url = first_details.snapshot
+
+    captured_url = ""
+    is_captured_valid = False
+    if req.captured_face_backup:
+        try:
+            if req.captured_face_backup.storage.exists(req.captured_face_backup.name) and req.captured_face_backup.size > 1000:
+                captured_url = req.captured_face_backup.url
+                is_captured_valid = True
+        except Exception:
+            pass
+
+    if not is_captured_valid and details:
+        captured_url = details.snapshot
+
+    # Build the card HTML based on status
+    status_card = ""
+    form_html = ""
+    
+    if req.status == 'approved' or decision_result == 'approved':
+        status_card = f"""
+        <div class="glass-card rounded-2xl p-8 max-w-lg w-full text-center shadow-2xl border border-emerald-500/20">
+            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h1 class="text-2xl font-extrabold text-white mb-2">Request Approved</h1>
+            <p class="text-slate-400 text-sm mb-6">The baseline registered face for this candidate has been successfully updated in the database and DeepFace index.</p>
+            
+            <div class="bg-slate-900/40 rounded-xl p-4 text-left border border-slate-800 text-xs mb-6 space-y-2">
+                <div><span class="text-slate-500 font-semibold">Candidate:</span> <span class="text-slate-300">{candidate_name}</span></div>
+                <div><span class="text-slate-500 font-semibold">PAN Number:</span> <span class="text-slate-300">{candidate_pan}</span></div>
+                <div><span class="text-slate-500 font-semibold">HR Recruiter:</span> <span class="text-slate-300">{hr_name}</span></div>
+                <div><span class="text-slate-500 font-semibold">Decision Date:</span> <span class="text-slate-300">{decided_at_str}</span></div>
+                {f'<div><span class="text-slate-500 font-semibold">Admin Note:</span> <span class="text-slate-300 italic">"{req.admin_note}"</span></div>' if req.admin_note else ''}
+            </div>
+            
+            <div class="text-xs text-slate-500">You may close this window. The recruiter's dashboard has been updated.</div>
+        </div>
+        """
+    elif req.status == 'rejected' or decision_result == 'rejected':
+        status_card = f"""
+        <div class="glass-card rounded-2xl p-8 max-w-lg w-full text-center shadow-2xl border border-rose-500/20">
+            <div class="w-16 h-16 bg-rose-500/10 text-rose-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </div>
+            <h1 class="text-2xl font-extrabold text-white mb-2">Request Rejected</h1>
+            <p class="text-slate-400 text-sm mb-6">The identity mismatch approval request was rejected. The candidate's registered face baseline remains unchanged.</p>
+            
+            <div class="bg-slate-900/40 rounded-xl p-4 text-left border border-slate-800 text-xs mb-6 space-y-2">
+                <div><span class="text-slate-500 font-semibold">Candidate:</span> <span class="text-slate-300">{candidate_name}</span></div>
+                <div><span class="text-slate-500 font-semibold">HR Recruiter:</span> <span class="text-slate-300">{hr_name}</span></div>
+                <div><span class="text-slate-500 font-semibold">Decision Date:</span> <span class="text-slate-300">{decided_at_str}</span></div>
+                {f'<div><span class="text-slate-500 font-semibold">Rejection Note:</span> <span class="text-slate-300 italic">"{req.admin_note}"</span></div>' if req.admin_note else ''}
+            </div>
+            
+            <div class="text-xs text-slate-500">You may close this window. The recruiter's dashboard has been updated.</div>
+        </div>
+        """
+    else:
+        form_html = f"""
+        <form method="POST" class="mt-6 space-y-6">
+            <div>
+                <label for="admin_note" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Admin Review Notes / Audit Notes (Optional)</label>
+                <textarea id="admin_note" name="admin_note" rows="3" placeholder="Add any details, verification checks or justification for this decision..." class="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition resize-none"></textarea>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                <button type="submit" name="action" value="approve" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20 flex items-center justify-center gap-2 text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Approve & Update Face
+                </button>
+                <button type="submit" name="action" value="reject" class="flex-1 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-rose-500/10 hover:shadow-rose-500/20 flex items-center justify-center gap-2 text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Reject Request
+                </button>
+            </div>
+        </form>
+        """
+        
+        status_card = f"""
+        <div class="glass-card rounded-2xl p-6 md:p-8 max-w-4xl w-full shadow-2xl border border-slate-800">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 mb-6 gap-4">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
+                        <span class="w-2.5 h-2.5 bg-yellow-500 rounded-full animate-pulse"></span>
+                        Identity Mismatch Review
+                    </h1>
+                    <p class="text-slate-400 text-xs mt-1">Manual verification and baseline registration update request.</p>
+                </div>
+                <div class="bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-md">
+                    Pending Admin Approval
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/40 rounded-xl p-5 border border-slate-900/60 mb-8">
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-1.5">Candidate Details</h3>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">Name:</span> <span class="text-slate-200 font-semibold">{candidate_name}</span></div>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">Email:</span> <span class="text-slate-200 font-semibold">{candidate_email}</span></div>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">PAN Number:</span> <span class="text-slate-200 font-semibold">{candidate_pan}</span></div>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-1.5">HR Request Metadata</h3>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">Requested By:</span> <span class="text-slate-200 font-semibold">{hr_name} ({hr_email})</span></div>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">Requested At:</span> <span class="text-slate-200 font-semibold">{requested_at_str}</span></div>
+                    <div class="text-sm"><span class="text-slate-400 font-medium">HR Recruiter Reason:</span> <span class="text-slate-200 font-semibold italic">"{req.hr_reason}"</span></div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Original Registered Face</span>
+                    <div class="w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-slate-800 bg-slate-950 flex items-center justify-center shadow-inner">
+                        {f'<img src="{original_url}" class="w-full h-full object-cover" alt="Original Registered Face"/>' if original_url else '<span class="text-slate-600 text-xs font-semibold">No Image Available</span>'}
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Captured Mismatch Face</span>
+                    <div class="w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-rose-500/30 bg-slate-950 flex items-center justify-center shadow-inner">
+                        {f'<img src="{captured_url}" class="w-full h-full object-cover" alt="Captured Mismatch Face"/>' if captured_url else '<span class="text-slate-600 text-xs font-semibold">No Image Available</span>'}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl p-4 text-xs leading-relaxed font-medium mb-6">
+                <strong>CRITICAL SECURITY ACTION:</strong> Approving this request will overwrite the baseline registration image for this candidate (under PAN <strong>{candidate_pan}</strong>) with the current mismatch capture image. Mismatch warning flags and history will remain fully intact for compliance logs.
+            </div>
+            
+            {form_html}
+        </div>
+        """
+
+    # Assemble full page
+    html = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VerifiHire - Candidate Identity Review</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <style>
+            body {{
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                background: radial-gradient(circle at top left, #0f172a, #020617);
+            }}
+            .glass-card {{
+                background: rgba(15, 23, 42, 0.45);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }}
+        </style>
+    </head>
+    <body class="min-h-screen text-slate-100 flex items-center justify-center p-4 sm:p-6 md:p-8">
+        {status_card}
+    </body>
+    </html>
+    """
+    return html
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def request_photo_update_view(request, submission_id):
+    """
+    Recruiter requests photo update / manual review.
+    Creates a pending FaceUpdateRequest and emails the company admins.
+    """
+    try:
+        import uuid
+        from PIL import Image
+        import io
+        from django.core.mail import send_mail
+        from django.conf import settings
+
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+        
+        # 1. Fetch submission
+        try:
+            if not company_id:
+                submission = CandidateSubmission.objects.select_related('invitation').get(id=submission_id)
+            else:
+                submission = CandidateSubmission.objects.select_related('invitation').get(
+                    id=submission_id,
+                    invitation__assessment__user_profile__company_id=company_id
+                )
+        except CandidateSubmission.DoesNotExist:
+            return Response({'error': 'Submission not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        inv = submission.invitation
+        
+        # 2. Get latest details
+        details = CandidateDetails.objects.filter(invitation=inv).order_by('id').last()
+        if not details:
+            return Response({'error': 'Candidate details not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # 3. Check status
+        if details.photo_update_status == 'pending':
+            return Response({'error': 'An approval request is already pending with the admin.'}, status=status.HTTP_400_BAD_REQUEST)
+        if details.photo_update_status == 'approved':
+            return Response({'error': 'This identity mismatch has already been approved.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 4. Validate snapshot exists
+        snapshot = details.snapshot
+        if not snapshot:
+            return Response({'error': 'No captured snapshot found to approve.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        reason = (request.data.get('reason') or '').strip()
+        if not reason:
+            return Response({'error': 'Reason is required for manual review approval request.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Retrieve proctoring integrity details
+        integrity_flagged = False
+        integrity_score = 100.0
+        integrity_details_str = ""
+        integrity_details_html = ""
+        tab_switches = 0
+        phone_detections = 0
+        multiface_detections = 0
+        no_face_detections = 0
+        suspicion_score = 0
+        suspicion_reasons = []
+
+        try:
+            if hasattr(inv, 'integrity') and inv.integrity:
+                integrity_score = float(inv.integrity.integrity_score)
+                tab_switches = inv.integrity.tab_switches
+                phone_detections = inv.integrity.phone_detections
+                multiface_detections = inv.integrity.multiface_detections
+                no_face_detections = inv.integrity.no_face_detections
+                suspicion_score = inv.integrity.suspicion_score
+                suspicion_reasons = inv.integrity.suspicion_reasons or []
+                
+                if integrity_score < 70.0:
+                    integrity_flagged = True
+        except Exception as e:
+            print(f"[Integrity] Error reading integrity during request creation: {e}")
+
+        if integrity_flagged:
+            reasons_text = ", ".join(suspicion_reasons) if suspicion_reasons else "None"
+            integrity_details_str = (
+                f"\n--- PROCTORING INTEGRITY DETAILS ---\n"
+                f"Integrity Score: {integrity_score}%\n"
+                f"Tab Switches: {tab_switches}\n"
+                f"Phone Detections: {phone_detections}\n"
+                f"Multi-face Detections: {multiface_detections}\n"
+                f"No-face Detections: {no_face_detections}\n"
+                f"Suspicion Score: {suspicion_score}\n"
+                f"Suspicion Reasons: {reasons_text}\n"
+            )
+            
+            reasons_html_list = "".join([f"<li style='margin-bottom: 4px;'>{r}</li>" for r in suspicion_reasons]) if suspicion_reasons else "<li>None</li>"
+            
+            integrity_details_html = f"""
+            <div style="margin-top: 24px; padding: 20px; background-color: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+              <h3 style="color: #b45309; margin-top: 0; margin-bottom: 12px; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                ⚠️ Proctoring Integrity Flags Detected
+              </h3>
+              <p style="font-size: 13px; color: #78350f; margin-bottom: 12px; line-height: 1.4;">
+                This candidate also has a low integrity score (<strong>{integrity_score}%</strong>) indicating potential proctoring violations during the assessment.
+              </p>
+              <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: #78350f;">
+                <tr>
+                  <td style="padding: 6px 0; font-weight: 700; width: 45%;">Integrity Score:</td>
+                  <td style="padding: 6px 0; font-weight: 700;">{integrity_score}%</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0;">Tab Switches:</td>
+                  <td style="padding: 6px 0;">{tab_switches}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0;">Phone Detections:</td>
+                  <td style="padding: 6px 0;">{phone_detections}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0;">Multi-face Detections:</td>
+                  <td style="padding: 6px 0;">{multiface_detections}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0;">No-face Detections:</td>
+                  <td style="padding: 6px 0;">{no_face_detections}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0;">Suspicion Score:</td>
+                  <td style="padding: 6px 0;">{suspicion_score}</td>
+                </tr>
+                <tr style="vertical-align: top;">
+                  <td style="padding: 6px 0;">Suspicion Reasons:</td>
+                  <td style="padding: 6px 0;">
+                    <ul style="margin: 0; padding-left: 20px;">
+                      {reasons_html_list}
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            """
+
+        # 5. Extract snapshot data
+        try:
+            if ',' in snapshot:
+                header, snapshot_b64 = snapshot.split(',', 1)
+            else:
+                snapshot_b64 = snapshot
+            snapshot_data = base64.b64decode(snapshot_b64)
+            
+            img = Image.open(io.BytesIO(snapshot_data))
+            img.verify()
+        except Exception as e:
+            return Response({'error': f'Captured snapshot is not a valid or usable image: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 6. Setup backups for request
+        norm_email = details.email.lower().strip()
+        norm_pan = re.sub(r'[^A-Z0-9]', '', details.pan_number.strip().upper())
+        person_id = norm_pan
+
+        # Retrieve current baseline identity link
+        link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+        if not link:
+            link = IdentityLink.objects.filter(email=norm_email).first()
+
+        original_face_data = None
+        if link and link.snapshot_image:
+            try:
+                link.snapshot_image.seek(0)
+                original_face_data = link.snapshot_image.read()
+            except Exception as e:
+                print(f"[Backup] Failed to read IdentityLink face image: {e}")
+
+        if not original_face_data:
+            # Fallback: Backup from first CandidateDetails snapshot (which would have been the first registered face)
+            first_details = CandidateDetails.objects.filter(email=norm_email).order_by('id').first()
+            if first_details and first_details.snapshot and first_details.id != details.id:
+                try:
+                    f_b64 = first_details.snapshot.split(',', 1)[1] if ',' in first_details.snapshot else first_details.snapshot
+                    original_face_data = base64.b64decode(f_b64)
+                except Exception as e:
+                    print(f"[Backup] Failed to read first details snapshot: {e}")
+
+        # 7. Create FaceUpdateRequest inside a transaction block
+        with transaction.atomic():
+            req = FaceUpdateRequest.objects.create(
+                submission=submission,
+                candidate_details=details,
+                company=user_profile.company,
+                hr_user=user_profile,
+                hr_reason=reason,
+                status='pending',
+                integrity_flagged=integrity_flagged
+            )
+
+            # Save copies to request backup fields
+            if snapshot_data:
+                req.captured_face_backup.save(
+                    name=f"req_captured_{submission_id}_{uuid.uuid4().hex[:8]}.jpg",
+                    content=ContentFile(snapshot_data),
+                    save=False
+                )
+            if original_face_data:
+                req.original_face_backup.save(
+                    name=f"req_original_{submission_id}_{uuid.uuid4().hex[:8]}.jpg",
+                    content=ContentFile(original_face_data),
+                    save=False
+                )
+            req.save()
+
+            # Update status on details
+            details.photo_update_status = 'pending'
+            details.save(update_fields=['photo_update_status'])
+
+            # Log HR manual review approval request submission
+            _append_invitation_activity_log(
+                inv,
+                action='Identity Mismatch Approval Requested by HR',
+                details=f"HR Recruiter {user_profile.first_name} {user_profile.last_name or ''} ({user_profile.email}) submitted a review approval request. Reason: {reason}",
+                category='security'
+            )
+
+        # 8. Send Email notification to Admins
+        admins = UserProfile.objects.filter(company=user_profile.company, role=UserProfile.ROLE_COMPANY_ADMIN)
+        admin_emails = [a.email for a in admins if a.email]
+        
+        if not admin_emails:
+            if user_profile.manager and user_profile.manager.email:
+                admin_emails = [user_profile.manager.email]
+            else:
+                fallback_admin = UserProfile.objects.filter(company=user_profile.company).exclude(email=None).first()
+                if fallback_admin:
+                    admin_emails = [fallback_admin.email]
+                else:
+                    admin_emails = [settings.DEFAULT_FROM_EMAIL]
+
+        if integrity_flagged:
+            subject = f"VerifiHire - Identity Mismatch & Proctoring Integrity Review Request for {details.first_name} {details.last_name}"
+        else:
+            subject = f"VerifiHire - Identity Mismatch Approval Request for {details.first_name} {details.last_name}"
+        
+        message = (
+            f"Hello Admin,\n\n"
+            f"An approval request has been submitted for manual review:\n\n"
+            f"Candidate: {details.first_name} {details.last_name}\n"
+            f"Email: {details.email}\n"
+            f"PAN Number: {details.pan_number}\n"
+            f"Recruiter: {user_profile.first_name} {user_profile.last_name or ''} ({user_profile.email})\n"
+            f"Reason: {reason}\n"
+            f"{integrity_details_str}\n"
+            f"Please log in to your VerifiHire dashboard and navigate to the 'Settings & Workflows' page to review and action this request.\n\n"
+            f"Thank you,\n"
+            f"VerifiHire Support"
+        )
+
+        html_message = f"""
+        <html>
+        <body style="font-family: 'Inter', Arial, sans-serif; background-color: #f8fafc; padding: 20px; color: #0f172a; margin: 0;">
+          <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <h2 style="color: #0f172a; border-bottom: 2px solid #3b82f6; padding-bottom: 12px; margin-top: 0; font-size: 20px; font-weight: 700;">
+              {"Identity Mismatch & Proctoring Integrity Review Request" if integrity_flagged else "Identity Mismatch Approval Request"}
+            </h2>
+            <p style="font-size: 15px; line-height: 1.5; color: #334155;">
+              Recruiter <strong>{user_profile.first_name} {user_profile.last_name or ''}</strong> has requested manual review approval for a candidate.
+            </p>
+            <table style="width: 100%; margin: 24px 0; border-collapse: collapse; font-size: 14px;">
+              <tr>
+                <td style="padding: 10px 0; font-weight: 700; color: #64748b; width: 35%;">Candidate Name:</td>
+                <td style="padding: 10px 0; color: #0f172a;">{details.first_name} {details.last_name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 700; color: #64748b;">Candidate Email:</td>
+                <td style="padding: 10px 0; color: #0f172a;">{details.email}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 700; color: #64748b;">PAN Number:</td>
+                <td style="padding: 10px 0; color: #0f172a;">{details.pan_number}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 700; color: #64748b; vertical-align: top;">HR Reason:</td>
+                <td style="padding: 10px 0; color: #0f172a; font-style: italic; background-color: #f8fafc; padding: 12px; border-radius: 6px; border-left: 3px solid #cbd5e1;">"{reason}"</td>
+              </tr>
+            </table>
+            {integrity_details_html}
+            <p style="font-size: 14px; line-height: 1.5; color: #334155; margin-top: 24px;">
+              Please log in to your VerifiHire portal and navigate to the <strong>Settings & Workflows</strong> page to review the comparison and decide on the request.
+            </p>
+            <p style="font-size: 11px; color: #94a3b8; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 16px; text-align: center;">
+              This is an automated security notification from VerifiHire. Please do not reply directly to this email.
+            </p>
+          </div>
+        </body>
+        </html>
+        """
+
+        try:
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=admin_emails,
+                fail_silently=False,
+                html_message=html_message
+            )
+            email_sent = True
+        except Exception as mail_err:
+            print(f"[Email] Failed to send admin photo update request email: {mail_err}")
+            email_sent = False
+
+        return Response({
+            'message': 'Identity manual review request submitted to Admin successfully.',
+            'email_sent': email_sent,
+            'photo_update_status': 'pending'
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in request_photo_update_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
+def decide_photo_update_view(request, token):
+    """
+    Renders the decision page for the admin to approve or reject a face update request.
+    Handles the action when submitted.
+    """
+    try:
+        from PIL import Image
+        import io
+        import re
+        import uuid
+        from django.core.files.base import ContentFile
+        from django.http import HttpResponse
+
+        try:
+            req = FaceUpdateRequest.objects.select_related('submission', 'candidate_details', 'hr_user', 'company').get(token=token)
+        except FaceUpdateRequest.DoesNotExist:
+            return HttpResponse("<h1>404 Not Found</h1><p>Invalid or expired request token.</p>", status=404)
+
+        if request.method == 'GET':
+            html_content = _render_decision_page(req)
+            return HttpResponse(html_content, content_type='text/html')
+
+        elif request.method == 'POST':
+            if req.status != 'pending':
+                html_content = _render_decision_page(req)
+                return HttpResponse(html_content, content_type='text/html')
+
+            action = request.POST.get('action')
+            admin_note = (request.POST.get('admin_note') or '').strip()
+
+            if action not in ['approve', 'reject']:
+                html_content = _render_decision_page(req, error="Invalid action specified.")
+                return HttpResponse(html_content, content_type='text/html')
+
+            details = req.candidate_details
+            if not details:
+                return HttpResponse("<h1>Error</h1><p>Candidate details not found.</p>", status=400)
+
+            if action == 'approve':
+                with transaction.atomic():
+                    # Refresh details under transaction lock
+                    details = CandidateDetails.objects.select_for_update().get(id=details.id)
+                    if details.photo_update_approved:
+                        req.status = 'approved'
+                        req.save()
+                        html_content = _render_decision_page(req)
+                        return HttpResponse(html_content, content_type='text/html')
+
+                    norm_email = details.email.lower().strip()
+                    norm_pan = re.sub(r'[^A-Z0-9]', '', details.pan_number.strip().upper())
+                    person_id = norm_pan
+
+                    # Retrieve baseline identity link
+                    link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                    if not link:
+                        link = IdentityLink.objects.filter(email=norm_email).first()
+
+                    # Backup old registered face from IdentityLink
+                    old_face_file = None
+                    if link and link.snapshot_image:
+                        old_face_file = link.snapshot_image
+
+                    if old_face_file:
+                        try:
+                            old_face_file.seek(0)
+                            old_file_data = old_face_file.read()
+                            details.previous_registered_face_backup.save(
+                                name=f"backup_{person_id}_{os.path.basename(old_face_file.name)}",
+                                content=ContentFile(old_file_data),
+                                save=False
+                            )
+                        except Exception as e:
+                            print(f"[Backup] Failed to backup old registered face: {e}")
+                    else:
+                        if req.original_face_backup:
+                            try:
+                                req.original_face_backup.seek(0)
+                                orig_data = req.original_face_backup.read()
+                                details.previous_registered_face_backup.save(
+                                    name=f"backup_first_details_{person_id}.jpg",
+                                    content=ContentFile(orig_data),
+                                    save=False
+                                )
+                            except Exception as e:
+                                print(f"[Backup] Failed to copy backup from request: {e}")
+
+                    # Overwrite/Create IdentityLink
+                    if not link:
+                        link = IdentityLink(email=norm_email, pan_number=norm_pan)
+
+                    if req.captured_face_backup:
+                        try:
+                            req.captured_face_backup.seek(0)
+                            cap_data = req.captured_face_backup.read()
+                            snapshot_file = ContentFile(cap_data, name=f"snapshot_{person_id}.jpg")
+                            link.snapshot_image = snapshot_file
+                        except Exception as e:
+                            print(f"[IdentityLink] Error copying captured snapshot to link: {e}")
+                    link.save()
+
+                    # Overwrite DeepFace canonical image file
+                    reg_result = register_face_with_deepface(person_id, details.snapshot)
+                    if not reg_result.get('success'):
+                        print(f"[DeepFace] Registration failed: {reg_result.get('message')}")
+
+                    # Save approval metadata
+                    details.photo_update_approved = True
+                    details.photo_update_approved_by = "Company Admin"
+                    details.photo_update_approved_at = timezone.now()
+                    details.photo_update_reason = req.hr_reason
+                    details.photo_update_status = 'approved'
+                    details.save()
+
+                    # Save FaceUpdateRequest
+                    req.status = 'approved'
+                    req.admin_note = admin_note
+                    req.decided_at = timezone.now()
+                    req.save()
+
+                    # Create activity log entry
+                    log_entry = {
+                        'timestamp': timezone.now().isoformat(),
+                        'action': 'Identity Mismatch Approved by Admin',
+                        'details': f"Admin approved identity mismatch. HR Reason: {req.hr_reason}. Admin Note: {admin_note}",
+                        'category': 'security'
+                    }
+                    inv_obj = CandidateInvitation.objects.get(id=details.invitation_id)
+                    logs = list(inv_obj.activity_logs) if isinstance(inv_obj.activity_logs, list) else []
+                    logs.append(log_entry)
+                    inv_obj.activity_logs = logs
+                    inv_obj.save(update_fields=['activity_logs', 'updated_at'])
+
+            elif action == 'reject':
+                with transaction.atomic():
+                    details = CandidateDetails.objects.select_for_update().get(id=details.id)
+                    details.photo_update_status = 'rejected'
+                    details.photo_update_approved = False
+                    details.photo_update_admin_note = admin_note
+                    details.save(update_fields=['photo_update_status', 'photo_update_approved', 'photo_update_admin_note'])
+
+                    # Save FaceUpdateRequest
+                    req.status = 'rejected'
+                    req.admin_note = admin_note
+                    req.decided_at = timezone.now()
+                    req.save()
+
+                    # Create activity log entry
+                    log_entry = {
+                        'timestamp': timezone.now().isoformat(),
+                        'action': 'Identity Mismatch Rejected by Admin',
+                        'details': f"Admin rejected identity mismatch request. Admin Note: {admin_note}",
+                        'category': 'security'
+                    }
+                    inv_obj = CandidateInvitation.objects.get(id=details.invitation_id)
+                    logs = list(inv_obj.activity_logs) if isinstance(inv_obj.activity_logs, list) else []
+                    logs.append(log_entry)
+                    inv_obj.activity_logs = logs
+                    inv_obj.save(update_fields=['activity_logs', 'updated_at'])
+
+            html_content = _render_decision_page(req, decision_result=action)
+            return HttpResponse(html_content, content_type='text/html')
+
+    except Exception as e:
+        import traceback
+        print(f"Error in decide_photo_update_view: {str(e)}")
+        print(traceback.format_exc())
+        from django.http import HttpResponseServerError
+        return HttpResponseServerError(f"An internal error occurred: {str(e)}")
 

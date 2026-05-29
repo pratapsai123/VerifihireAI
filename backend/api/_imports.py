@@ -53,6 +53,7 @@ from .models import (
     IntegrityScreenshot,
     DeletionRequest,
     QualificationRequest,
+    FaceUpdateRequest,
     InterviewSlot,
     InterviewerAvailability,
     RestrictedDomain,

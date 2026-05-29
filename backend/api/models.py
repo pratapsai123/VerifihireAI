@@ -1486,6 +1486,48 @@ class CandidateDetails(models.Model):
         null=True,
         help_text="Reason for candidate identity verification hold/mismatch"
     )
+    photo_update_approved = models.BooleanField(
+        default=False,
+        help_text="True if recruiter manually approved this identity mismatch"
+    )
+    photo_update_approved_by = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text="Recruiter username or email who approved the mismatch"
+    )
+    photo_update_approved_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Timestamp of the approval"
+    )
+    photo_update_reason = models.TextField(
+        null=True,
+        blank=True,
+        help_text="Reason provided by the recruiter for approval"
+    )
+    previous_registered_face_backup = models.ImageField(
+        upload_to='identity/backups/',
+        null=True,
+        blank=True,
+        help_text="Backup of original registered face before overwrite"
+    )
+    photo_update_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('none', 'None'),
+            ('pending', 'Pending Admin Approval'),
+            ('approved', 'Approved'),
+            ('rejected', 'Rejected')
+        ],
+        default='none',
+        help_text="Status of the HR photo update / manual review request"
+    )
+    photo_update_admin_note = models.TextField(
+        null=True,
+        blank=True,
+        help_text="Rejection reason or notes provided by the admin"
+    )
 
     
     # Metadata
@@ -1974,4 +2016,38 @@ class SecureAgentInstance(models.Model):
     def __str__(self):
         state = 'consumed' if self.consumed else 'active'
         return f"SecureAgentInstance({self.instance_id}, {state})"
+
+
+class FaceUpdateRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending Admin Approval'),
+        ('approved', 'Approved by Admin'),
+        ('rejected', 'Rejected by Admin')
+    ]
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    submission = models.ForeignKey('CandidateSubmission', on_delete=models.CASCADE, related_name='face_update_requests')
+    candidate_details = models.ForeignKey('CandidateDetails', on_delete=models.CASCADE, related_name='face_update_requests', null=True)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='face_update_requests')
+    hr_user = models.ForeignKey('UserProfile', null=True, on_delete=models.SET_NULL, related_name='submitted_face_requests')
+    hr_reason = models.TextField()
+    requested_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', db_index=True)
+    admin_user = models.ForeignKey('UserProfile', null=True, blank=True, on_delete=models.SET_NULL, related_name='actioned_face_requests')
+    admin_note = models.TextField(blank=True, null=True)
+    decided_at = models.DateTimeField(blank=True, null=True)
+    original_face_backup = models.ImageField(upload_to='identity/backups/', null=True, blank=True)
+    captured_face_backup = models.ImageField(upload_to='identity/backups/', null=True, blank=True)
+    integrity_flagged = models.BooleanField(default=False, db_index=True)
+    face_approved = models.BooleanField(null=True, blank=True)
+    integrity_approved = models.BooleanField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-requested_at']
+        verbose_name = "Face Update Request"
+        verbose_name_plural = "Face Update Requests"
+        indexes = [
+            models.Index(fields=['status', 'company'], name='api_faceupd_status_company_idx'),
+            models.Index(fields=['submission'], name='api_faceupd_submission_idx'),
+        ]
+
 

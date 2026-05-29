@@ -70,6 +70,8 @@ from .candidate_assessment_views import (
     invitation_activity_logs_view,
     terminate_invitation_exam_view,
     update_submission_result_view,
+    request_photo_update_view,
+    decide_photo_update_view,
 )
 
 from .live_interview_views import (
@@ -116,6 +118,9 @@ from .workflow_views import (
     action_qualification_request_view,
     pending_qualification_requests_count_view,
     create_ai_qualification_request_view,
+    list_face_requests_view,
+    pending_face_requests_count_view,
+    action_face_request_view,
 )
 
 from .dashboard_views import (
