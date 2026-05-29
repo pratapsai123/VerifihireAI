@@ -69,4 +69,4 @@ secureAgent/dist/
 
 # admin-build
 admin-build/assets/
-certbot/
+certbot/conf

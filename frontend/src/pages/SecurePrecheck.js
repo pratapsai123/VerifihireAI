@@ -57,7 +57,7 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
+const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
 
 /** Collect every blocked app label from a scan result (all tools, not just one). */
 function collectBlockedApps(scanResult) {
