@@ -921,9 +921,17 @@ def generate_candidate_report(submission_id):
     match_score_str = "100%"
     status_color = "#16a34a" # Green
 
+    photo_approved = False
+    if candidate_detail:
+        photo_approved = getattr(candidate_detail, 'photo_update_approved', False)
+
     if is_mismatch:
-        identity_status = "IDENTITY MISMATCH DETECTED"
-        status_color = "#dc2626" # Red
+        if photo_approved:
+            identity_status = "IDENTITY MISMATCH DETECTED (APPROVED & UPDATED)"
+            status_color = "#16a34a" # Green
+        else:
+            identity_status = "IDENTITY MISMATCH DETECTED"
+            status_color = "#dc2626" # Red
 
     if candidate_detail:
         # Format match score as percentage
@@ -1001,39 +1009,92 @@ def generate_candidate_report(submission_id):
 
         # Create images using _make_rl_image helper
         img_original = None
-        if original_snapshot:
-            img_original = _make_rl_image(original_snapshot, 2.2 * inch, 2.75 * inch)
-        elif original_link_file:
-            img_original = _make_rl_image(original_link_file, 2.2 * inch, 2.75 * inch)
+        if photo_approved and candidate_detail.previous_registered_face_backup:
+            img_original = _make_rl_image(candidate_detail.previous_registered_face_backup, 1.8 * inch, 2.25 * inch)
+        
+        if not img_original:
+            if original_snapshot:
+                img_original = _make_rl_image(original_snapshot, 1.8 * inch, 2.25 * inch)
+            elif original_link_file:
+                img_original = _make_rl_image(original_link_file, 1.8 * inch, 2.25 * inch)
             
         img_captured = None
         if candidate_detail.snapshot:
-            img_captured = _make_rl_image(candidate_detail.snapshot, 2.2 * inch, 2.75 * inch)
+            img_captured = _make_rl_image(candidate_detail.snapshot, 1.8 * inch, 2.25 * inch)
             
         if img_original or img_captured:
             orig_title = Paragraph('<b>Original Registered Face</b>', styles['Normal'])
-            capt_title = Paragraph('<b>Current Captured Face</b>', styles['Normal'])
+            capt_title = Paragraph('<b>Mismatch Captured Face</b>', styles['Normal'])
             
-            comparison_data = [
-                [orig_title, capt_title],
-                [
-                    img_original or Paragraph('No registered face image available', styles['Normal']),
-                    img_captured or Paragraph('No captured face image available', styles['Normal'])
+            if photo_approved:
+                appr_title = Paragraph('<b>Updated Approved Face</b>', styles['Normal'])
+                img_approved = None
+                norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_detail.pan_number.strip().upper())
+                link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                if not link and candidate_detail.email:
+                    link = IdentityLink.objects.filter(email__iexact=candidate_detail.email.strip()).first()
+                if link and link.snapshot_image:
+                    img_approved = _make_rl_image(link.snapshot_image, 1.8 * inch, 2.25 * inch)
+                else:
+                    img_approved = _make_rl_image(candidate_detail.snapshot, 1.8 * inch, 2.25 * inch)
+
+                comparison_data = [
+                    [orig_title, capt_title, appr_title],
+                    [
+                        img_original or Paragraph('No registered face image available', styles['Normal']),
+                        img_captured or Paragraph('No captured face image available', styles['Normal']),
+                        img_approved or Paragraph('No approved face image available', styles['Normal'])
+                    ]
                 ]
-            ]
-            comparison_table = Table(comparison_data, colWidths=[doc.width/2.0, doc.width/2.0])
+                comparison_table = Table(comparison_data, colWidths=[doc.width/3.0, doc.width/3.0, doc.width/3.0])
+                box_color = colors.HexColor('#16a34a')
+                bg_color = colors.HexColor('#dcfce7')
+                section_title = 'Identity Comparison (Approved & Updated)'
+            else:
+                comparison_data = [
+                    [orig_title, capt_title],
+                    [
+                        img_original or Paragraph('No registered face image available', styles['Normal']),
+                        img_captured or Paragraph('No captured face image available', styles['Normal'])
+                    ]
+                ]
+                comparison_table = Table(comparison_data, colWidths=[doc.width/2.0, doc.width/2.0])
+                box_color = colors.HexColor('#dc2626')
+                bg_color = colors.HexColor('#fee2e2')
+                section_title = 'Identity Comparison (Manual Review Required)'
+
             comparison_table.setStyle(TableStyle([
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#dc2626')),
-                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#fee2e2')),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                ('BOX', (0, 0), (-1, -1), 1, box_color),
+                ('BACKGROUND', (0, 0), (-1, 0), bg_color),
                 ('TOPPADDING', (0, 0), (-1, -1), 8),
                 ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
             ]))
             
-            story.append(Paragraph('Identity Comparison (Manual Review Required)', styles['SectionHeader']))
+            story.append(Paragraph(section_title, styles['SectionHeader']))
             story.append(comparison_table)
-            story.append(Spacer(1, 12))
+            
+            if photo_approved:
+                audit_style = ParagraphStyle(
+                    'AuditNoteStyle',
+                    parent=styles['Normal'],
+                    fontSize=9,
+                    textColor=colors.HexColor('#15803d'),
+                    spaceBefore=6,
+                    spaceAfter=12
+                )
+                approved_at_str = timezone.localtime(candidate_detail.photo_update_approved_at).strftime('%d %b %Y, %I:%M %p') if candidate_detail.photo_update_approved_at else '-'
+                audit_note = (
+                    f"<b>✓ Approved & Updated:</b> HR manually reviewed and approved this identity mismatch. "
+                    f"Original mismatch evidence retained for proof and compliance.<br/>"
+                    f"<b>Approved By:</b> {candidate_detail.photo_update_approved_by or '-'}<br/>"
+                    f"<b>Approved At:</b> {approved_at_str}<br/>"
+                    f"<b>Reason:</b> {candidate_detail.photo_update_reason or '-'}"
+                )
+                story.append(Paragraph(audit_note, audit_style))
+            else:
+                story.append(Spacer(1, 12))
 
 
 
@@ -3312,8 +3373,6 @@ def generate_candidate_report(submission_id):
                         
 
                         ts_str = timezone.localtime(snap.timestamp).strftime('%I:%M:%S %p')
-
-                        from reportlab.lib.styles import ParagraphStyle
 
                         center_style = ParagraphStyle('CenterStyle', parent=styles['Normal'], alignment=1, fontSize=8, textColor=colors.HexColor('#64748b'))
 

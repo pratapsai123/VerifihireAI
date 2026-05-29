@@ -88,6 +88,8 @@ urlpatterns = [
     path('submissions/<int:pk>/', views.CandidateSubmissionDeleteView.as_view(), name='delete_submission'),
     path('results/<int:submission_id>/report/', views.download_candidate_report_view, name='download_candidate_report'),
     path('results/<int:submission_id>/update-result/', views.update_submission_result_view, name='update_submission_result'),
+    path('results/<int:submission_id>/request-photo-update/', views.request_photo_update_view, name='request_photo_update'),
+    path('results/face-request/<uuid:token>/decide/', views.decide_photo_update_view, name='decide_photo_update'),
     path('assessments/backfill-questions/', views.backfill_assessment_questions_view, name='backfill_assessment_questions'),
 
     # Coding Platform (isolated)
@@ -128,6 +130,11 @@ urlpatterns = [
     path('workflow/qualification-requests/count/', views.pending_qualification_requests_count_view, name='pending_qualification_requests_count'),
     path('workflow/qualification-requests/<int:request_id>/action/', views.action_qualification_request_view, name='action_qualification_request'),
     path('workflow/qualification-requests/ai/', views.create_ai_qualification_request_view, name='create_ai_qualification_request'),
+
+    # Face Mismatch Approval Workflow
+    path('workflow/face-requests/', views.list_face_requests_view, name='list_face_requests'),
+    path('workflow/face-requests/count/', views.pending_face_requests_count_view, name='pending_face_requests_count'),
+    path('workflow/face-requests/<int:request_id>/action/', views.action_face_request_view, name='action_face_request'),
 
     path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
     path('contact/', views.contact_us_view, name='contact_us'),

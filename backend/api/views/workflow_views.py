@@ -591,3 +591,346 @@ def create_ai_qualification_request_view(request):
         'request_id': qual_req.id,
         'pending': True,
     }, status=status.HTTP_201_CREATED)
+
+
+# ---------------------------------------------------------------------------
+# Face Approval Workflow
+# ---------------------------------------------------------------------------
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_face_requests_view(request):
+    """
+    Lists face update / manual review requests for the current user's company.
+    - Company Admin / App Admin: all requests in their company.
+    - HR Manager / HR: only their own requests.
+    """
+    user_profile = getattr(request.user, 'profile', None)
+    if not user_profile or not user_profile.company:
+        return Response({'error': 'Company profile not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+    company = user_profile.company
+    role = user_profile.role
+    is_admin = (
+        role == UserProfile.ROLE_COMPANY_ADMIN
+        or _is_application_admin_email(user_profile.email)
+    )
+    
+    if is_admin:
+        qs = FaceUpdateRequest.objects.filter(company=company)
+    else:
+        qs = FaceUpdateRequest.objects.filter(hr_user=user_profile)
+        
+    status_filter = request.query_params.get('status')
+    if status_filter:
+        qs = qs.filter(status=status_filter)
+        
+    data = []
+    for r in qs.select_related('candidate_details', 'hr_user', 'admin_user').order_by('-requested_at'):
+        candidate_name = f"{r.candidate_details.first_name} {r.candidate_details.last_name}" if r.candidate_details else "N/A"
+        candidate_email = r.candidate_details.email if r.candidate_details else "N/A"
+        candidate_pan = r.candidate_details.pan_number if r.candidate_details else "N/A"
+        
+        hr_name = f"{r.hr_user.first_name} {r.hr_user.last_name}" if r.hr_user else "N/A"
+        hr_email = r.hr_user.email if r.hr_user else "N/A"
+        hr_role = r.hr_user.role.replace('_', ' ').title() if r.hr_user else "N/A"
+        
+        admin_name = f"{r.admin_user.first_name} {r.admin_user.last_name}" if r.admin_user else "N/A"
+        admin_email = r.admin_user.email if r.admin_user else "N/A"
+        
+        original_face_url = None
+        is_backup_valid = False
+        if r.original_face_backup:
+            try:
+                # Ensure the backup file exists and is not a tiny dummy/placeholder image
+                if r.original_face_backup.storage.exists(r.original_face_backup.name) and r.original_face_backup.size > 1000:
+                    original_face_url = r.original_face_backup.url
+                    is_backup_valid = True
+            except Exception as e:
+                print(f"[List] Error validating original_face_backup: {e}")
+
+        if not is_backup_valid and r.candidate_details:
+            # Fallback: get first details snapshot (which was the registration image)
+            first_details = CandidateDetails.objects.filter(email=r.candidate_details.email).order_by('id').first()
+            if first_details and first_details.snapshot:
+                original_face_url = first_details.snapshot
+                
+        captured_face_url = None
+        is_captured_valid = False
+        if r.captured_face_backup:
+            try:
+                if r.captured_face_backup.storage.exists(r.captured_face_backup.name) and r.captured_face_backup.size > 1000:
+                    captured_face_url = r.captured_face_backup.url
+                    is_captured_valid = True
+            except Exception as e:
+                print(f"[List] Error validating captured_face_backup: {e}")
+
+        if not is_captured_valid and r.candidate_details:
+            captured_face_url = r.candidate_details.snapshot
+        
+        integrity_details = None
+        integrity_screenshots = []
+        
+        if r.integrity_flagged:
+            try:
+                inv_obj = r.submission.invitation
+                if hasattr(inv_obj, 'integrity') and inv_obj.integrity:
+                    integrity_details = {
+                        'integrity_score': inv_obj.integrity.integrity_score,
+                        'tab_switches': inv_obj.integrity.tab_switches,
+                        'phone_detections': inv_obj.integrity.phone_detections,
+                        'multiface_detections': inv_obj.integrity.multiface_detections,
+                        'no_face_detections': inv_obj.integrity.no_face_detections,
+                        'suspicion_score': inv_obj.integrity.suspicion_score,
+                        'suspicion_reasons': inv_obj.integrity.suspicion_reasons or [],
+                    }
+                
+                # Fetch proctoring screenshots
+                snaps = inv_obj.integrity_screenshots.all().order_by('-timestamp')
+                for snap in snaps:
+                    integrity_screenshots.append({
+                        'event_type': snap.event_type,
+                        'timestamp': snap.timestamp.isoformat(),
+                        'screenshot_url': snap.screenshot.url if snap.screenshot else None,
+                        'webcam_screenshot_url': snap.webcam_screenshot.url if snap.webcam_screenshot else None,
+                    })
+            except Exception as e:
+                print(f"[List] Error loading integrity info for request {r.id}: {e}")
+
+        data.append({
+            'id': r.id,
+            'token': str(r.token),
+            'candidate_name': candidate_name,
+            'candidate_email': candidate_email,
+            'candidate_pan': candidate_pan,
+            'hr_name': hr_name,
+            'hr_email': hr_email,
+            'hr_role': hr_role,
+            'hr_reason': r.hr_reason,
+            'requested_at': r.requested_at.isoformat(),
+            'status': r.status,
+            'admin_name': admin_name,
+            'admin_email': admin_email,
+            'admin_note': r.admin_note,
+            'decided_at': r.decided_at.isoformat() if r.decided_at else None,
+            'original_face_url': original_face_url,
+            'captured_face_url': captured_face_url,
+            'integrity_flagged': r.integrity_flagged,
+            'face_approved': r.face_approved,
+            'integrity_approved': r.integrity_approved,
+            'integrity_details': integrity_details,
+            'integrity_screenshots': integrity_screenshots,
+        })
+        
+    return Response(data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def pending_face_requests_count_view(request):
+    """
+    Returns the count of face update requests pending approval.
+    """
+    user_profile = getattr(request.user, 'profile', None)
+    if not user_profile or not user_profile.company:
+        return Response({'count': 0})
+        
+    role = user_profile.role
+    company = user_profile.company
+    
+    is_admin = (
+        role == UserProfile.ROLE_COMPANY_ADMIN
+        or _is_application_admin_email(user_profile.email)
+    )
+    
+    if is_admin:
+        count = FaceUpdateRequest.objects.filter(company=company, status='pending').count()
+    else:
+        count = FaceUpdateRequest.objects.filter(hr_user=user_profile, status='pending').count()
+        
+    return Response({'count': count})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def action_face_request_view(request, request_id):
+    """
+    Approve or Reject a face update request and proctoring integrity flags.
+    Only Company Admin / App Admin can take action.
+    """
+    import os
+    import re
+    from django.core.files.base import ContentFile
+    
+    user_profile = getattr(request.user, 'profile', None)
+    if not user_profile:
+        return Response({'error': 'Unauthorized.'}, status=status.HTTP_403_FORBIDDEN)
+        
+    is_admin = (
+        user_profile.role == UserProfile.ROLE_COMPANY_ADMIN
+        or _is_application_admin_email(user_profile.email)
+    )
+    if not is_admin:
+        return Response({'error': 'Only Company Admins can approve or reject face update requests.'}, status=status.HTTP_403_FORBIDDEN)
+        
+    try:
+        req = FaceUpdateRequest.objects.select_related('submission', 'candidate_details', 'hr_user', 'company').get(id=request_id)
+    except FaceUpdateRequest.DoesNotExist:
+        return Response({'error': 'Request not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+    if req.company != user_profile.company and not _is_application_admin_email(user_profile.email):
+        return Response({'error': 'Not authorized to action this request.'}, status=status.HTTP_403_FORBIDDEN)
+        
+    if req.status != 'pending':
+        return Response({'error': 'This request has already been actioned.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+    action = request.data.get('action')
+    admin_note = (request.data.get('admin_note') or '').strip()
+    
+    # Combined inputs
+    face_approved = request.data.get('face_approved')
+    integrity_approved = request.data.get('integrity_approved')
+    
+    # Handle fallback/legacy action
+    if face_approved is None and integrity_approved is None:
+        if action == 'approve':
+            face_approved = True
+            integrity_approved = True if req.integrity_flagged else None
+        elif action == 'reject':
+            face_approved = False
+            integrity_approved = False if req.integrity_flagged else None
+        else:
+            return Response({'error': 'Invalid action or approval parameters.'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        # Convert to boolean/None
+        face_approved = bool(face_approved)
+        if req.integrity_flagged:
+            integrity_approved = bool(integrity_approved)
+        else:
+            integrity_approved = None
+
+    details = req.candidate_details
+    if not details:
+        return Response({'error': 'Candidate details not found.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Determine overall request approval status
+    # If integrity was flagged, both must be approved. Otherwise, just face mismatch.
+    is_overall_approved = face_approved and (integrity_approved if req.integrity_flagged else True)
+
+    with transaction.atomic():
+        # Refresh details under transaction lock
+        details = CandidateDetails.objects.select_for_update().get(id=details.id)
+        
+        if face_approved:
+            norm_email = details.email.lower().strip()
+            norm_pan = re.sub(r'[^A-Z0-9]', '', details.pan_number.strip().upper())
+            person_id = norm_pan
+            
+            # Retrieve baseline identity link
+            link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+            if not link:
+                link = IdentityLink.objects.filter(email=norm_email).first()
+                
+            # Backup old registered face from IdentityLink
+            old_face_file = None
+            if link and link.snapshot_image:
+                old_face_file = link.snapshot_image
+                
+            if old_face_file:
+                try:
+                    old_face_file.seek(0)
+                    old_file_data = old_face_file.read()
+                    details.previous_registered_face_backup.save(
+                        name=f"backup_{person_id}_{os.path.basename(old_face_file.name)}",
+                        content=ContentFile(old_file_data),
+                        save=False
+                    )
+                except Exception as e:
+                    print(f"[Backup] Failed to backup old registered face: {e}")
+            else:
+                if req.original_face_backup:
+                    try:
+                        req.original_face_backup.seek(0)
+                        orig_data = req.original_face_backup.read()
+                        details.previous_registered_face_backup.save(
+                            name=f"backup_first_details_{person_id}.jpg",
+                            content=ContentFile(orig_data),
+                            save=False
+                        )
+                    except Exception as e:
+                        print(f"[Backup] Failed to copy backup from request: {e}")
+                        
+            # Overwrite/Create IdentityLink
+            if not link:
+                link = IdentityLink(email=norm_email, pan_number=norm_pan)
+                
+            if req.captured_face_backup:
+                try:
+                    req.captured_face_backup.seek(0)
+                    cap_data = req.captured_face_backup.read()
+                    snapshot_file = ContentFile(cap_data, name=f"snapshot_{person_id}.jpg")
+                    link.snapshot_image = snapshot_file
+                except Exception as e:
+                    print(f"[IdentityLink] Error copying captured snapshot to link: {e}")
+            link.save()
+            
+            # Overwrite DeepFace canonical image file
+            from api.ocr_utils import register_face_with_deepface
+            reg_result = register_face_with_deepface(person_id, details.snapshot)
+            if not reg_result.get('success'):
+                print(f"[DeepFace] Registration failed: {reg_result.get('message')}")
+                
+            # Save approval metadata on details
+            details.photo_update_approved = True
+            details.photo_update_approved_by = "Company Admin"
+            details.photo_update_approved_at = timezone.now()
+            details.photo_update_reason = req.hr_reason
+            details.photo_update_status = 'approved'
+            details.save()
+        else:
+            details.photo_update_status = 'rejected'
+            details.photo_update_approved = False
+            details.photo_update_admin_note = admin_note
+            details.save(update_fields=['photo_update_status', 'photo_update_approved', 'photo_update_admin_note'])
+
+        # Save FaceUpdateRequest
+        req.status = 'approved' if is_overall_approved else 'rejected'
+        req.face_approved = face_approved
+        req.integrity_approved = integrity_approved
+        req.admin_note = admin_note
+        req.decided_at = timezone.now()
+        req.admin_user = user_profile
+        req.save()
+        
+        # Create activity log entries
+        inv_obj = CandidateInvitation.objects.get(id=details.invitation_id)
+        logs = list(inv_obj.activity_logs) if isinstance(inv_obj.activity_logs, list) else []
+        
+        face_decision_str = "Approved" if face_approved else "Rejected"
+        log_entry_face = {
+            'timestamp': timezone.now().isoformat(),
+            'action': f"Identity Mismatch {face_decision_str} by Admin",
+            'details': f"Admin {face_decision_str.lower()} identity mismatch request. HR Reason: {req.hr_reason}. Admin Note: {admin_note}",
+            'category': 'security'
+        }
+        logs.append(log_entry_face)
+        
+        if req.integrity_flagged:
+            integrity_decision_str = "Approved" if integrity_approved else "Rejected"
+            log_entry_integrity = {
+                'timestamp': timezone.now().isoformat(),
+                'action': f"Proctoring Integrity {integrity_decision_str} by Admin",
+                'details': f"Admin {integrity_decision_str.lower()} proctoring integrity violations request. Admin Note: {admin_note}",
+                'category': 'security'
+            }
+            logs.append(log_entry_integrity)
+            
+        inv_obj.activity_logs = logs
+        inv_obj.save(update_fields=['activity_logs', 'updated_at'])
+        
+        # Recalculate submission scoring and result status immediately!
+        from api.views.candidate_assessment_views import _update_submission_scoring_logic
+        _update_submission_scoring_logic(req.submission, finalize=True)
+        req.submission.save()
+        
+    return Response({'message': f'Request actioned successfully. Status is {"approved" if is_overall_approved else "rejected"}.'})
